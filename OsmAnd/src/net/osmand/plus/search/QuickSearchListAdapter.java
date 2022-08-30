@@ -497,12 +497,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			pbProgress.setVisibility(View.VISIBLE);
 			tvDesc.setVisibility(View.GONE);
 
-			float progress = -1;
+			int progress = -1;
 			if (thread.getCurrentDownloadingItem() == indexItem) {
-				progress = thread.getCurrentDownloadProgress();
+				progress = (int) thread.getCurrentDownloadProgress();
 			}
 			pbProgress.setIndeterminate(progress < 0);
-			pbProgress.setProgress((int) progress);
+			pbProgress.setProgress(progress);
 			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_remove_dark, defaultIconColorId);
 		}
 		ivButton.setImageDrawable(buttonDrawable);

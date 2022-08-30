@@ -9,7 +9,7 @@ public class ProgressHelper {
 
 	private static final int INDETERMINATE = -1;
 
-	private final OnUpdateProgress progressUiAdapter;
+	private final UpdateProgressListener updateProgressListener;
 
 	private int totalWork = INDETERMINATE;
 	private int progress;
@@ -17,10 +17,10 @@ public class ProgressHelper {
 	private int lastAddedDeltaProgress;
 	private int sizeInterval = UPDATE_SIZE_INTERVAL_KB;
 	private long lastUpdateTime;
-	private boolean notifyOnUpdate = false;
+	private boolean notifyOnUpdate;
 
-	public ProgressHelper(@NonNull OnUpdateProgress progressUiAdapter) {
-		this.progressUiAdapter = progressUiAdapter;
+	public ProgressHelper(@NonNull UpdateProgressListener updateProgressListener) {
+		this.updateProgressListener = updateProgressListener;
 	}
 
 	public void setMinimumSizeInterval(int proposedValue) {
@@ -58,15 +58,14 @@ public class ProgressHelper {
 			if (notifyOnUpdate && isTimeToUpdate()) {
 				notifyOnUpdate = false;
 				lastUpdateTime = System.currentTimeMillis();
-				progressUiAdapter.onProgressUpdated();
+				updateProgressListener.onProgressUpdated();
 				lastAddedDeltaProgress = 0;
 			}
 		}
 	}
 
 	public boolean isTimeToUpdate() {
-		long now = System.currentTimeMillis();
-		return (now - lastUpdateTime) > UPDATE_TIME_INTERVAL_MS;
+		return System.currentTimeMillis() - lastUpdateTime > UPDATE_TIME_INTERVAL_MS;
 	}
 
 	public void onFinishTask() {
@@ -99,7 +98,7 @@ public class ProgressHelper {
 	}
 
 	public static int normalizeProgressPercent(int progress) {
-		return (int) Math.floor(normalizeProgress(progress));
+		return (int) normalizeProgress(progress);
 	}
 
 	public static float normalizeProgress(float progress) {
@@ -112,8 +111,7 @@ public class ProgressHelper {
 		}
 	}
 
-	public interface OnUpdateProgress {
+	public interface UpdateProgressListener {
 		void onProgressUpdated();
 	}
-
 }

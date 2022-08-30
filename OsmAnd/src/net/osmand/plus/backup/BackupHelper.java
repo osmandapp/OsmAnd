@@ -475,27 +475,27 @@ public class BackupHelper {
 		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
-					private ProgressHelper progress;
+					private ProgressHelper progressHelper;
 
 					@Override
 					public void startWork(int work) {
-						progress = new ProgressHelper(() -> {
+						progressHelper = new ProgressHelper(() -> {
 							if (listener != null) {
-								int p = progress.getLastKnownProgress();
-								int dp = progress.getLastAddedDeltaProgress();
-								listener.onFileUploadProgress(type, fileName, p, dp);
+								int progress = progressHelper.getLastKnownProgress();
+								int addedDeltaProgress = progressHelper.getLastAddedDeltaProgress();
+								listener.onFileUploadProgress(type, fileName, progress, addedDeltaProgress);
 							}
 						});
 						if (listener != null) {
-							progress.onStartWork(work);
-							listener.onFileUploadStarted(type, fileName, progress.getTotalWork());
+							progressHelper.onStartWork(work);
+							listener.onFileUploadStarted(type, fileName, progressHelper.getTotalWork());
 						}
 					}
 
 					@Override
 					public void progress(int deltaWork) {
 						if (listener != null) {
-							progress.onProgress(deltaWork);
+							progressHelper.onProgress(deltaWork);
 						}
 					}
 
@@ -653,29 +653,29 @@ public class BackupHelper {
 				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
-			IProgress progress = new AbstractProgress() {
+			IProgress iProgress = new AbstractProgress() {
 
-				private ProgressHelper progress;
+				private ProgressHelper progressHelper;
 
 				@Override
 				public void startWork(int work) {
-					progress = new ProgressHelper(() -> {
+					progressHelper = new ProgressHelper(() -> {
 						if (listener != null) {
-							int p = progress.getLastKnownProgress();
-							int dp = progress.getLastAddedDeltaProgress();
-							listener.onFileDownloadProgress(type, fileName, p, dp);
+							int progress = progressHelper.getLastKnownProgress();
+							int deltaProgress = progressHelper.getLastAddedDeltaProgress();
+							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
 						}
 					});
 					if (listener != null) {
-						progress.onStartWork(work);
-						listener.onFileDownloadStarted(type, fileName, progress.getTotalWork());
+						progressHelper.onStartWork(work);
+						listener.onFileDownloadStarted(type, fileName, progressHelper.getTotalWork());
 					}
 				}
 
 				@Override
 				public void progress(int deltaWork) {
 					if (listener != null) {
-						progress.onProgress(deltaWork);
+						progressHelper.onProgress(deltaWork);
 					}
 				}
 
@@ -687,8 +687,8 @@ public class BackupHelper {
 					return super.isInterrupted();
 				}
 			};
-			progress.startWork(remoteFile.getFilesize() / 1024);
-			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, progress);
+			iProgress.startWork(remoteFile.getFilesize() / 1024);
+			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, iProgress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}

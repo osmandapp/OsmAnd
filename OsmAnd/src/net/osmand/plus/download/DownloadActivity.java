@@ -529,20 +529,19 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				}
 				freeVersionBanner.updateFreeVersionBanner();
 			} else {
-				boolean indeterminate = progressTask.isIndeterminate();
-				String message = progressTask.getDescription();
-				int percent = (int) Math.floor(progressTask.getDownloadProgress());
 				freeVersionBanner.setMinimizedFreeVersionBanner(true);
 				freeVersionBanner.updateAvailableDownloads();
 				downloadProgressLayout.setVisibility(View.VISIBLE);
-				downloadProgressLayout.setOnClickListener(v -> {
-					new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-				});
+				downloadProgressLayout.setOnClickListener(v -> new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog"));
+
+				String message = progressTask.getDescription();
+				boolean indeterminate = progressTask.isIndeterminate();
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {
 					leftTextView.setText(message);
 					rightTextView.setText(null);
 				} else {
+					int percent = (int) progressTask.getDownloadProgress();
 					progressBar.setProgress(percent);
 					leftTextView.setText(message);
 					rightTextView.setText(percent + "%");

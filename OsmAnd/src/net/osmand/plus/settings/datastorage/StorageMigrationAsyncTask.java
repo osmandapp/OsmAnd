@@ -194,26 +194,26 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	private CopyFilesListener getCopyFilesListener(long size) {
 		return new CopyFilesListener() {
 
-			private ProgressHelper progress;
+			private ProgressHelper progressHelper;
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
-				progress = new ProgressHelper(() -> {
-					generalProgress += progress.getLastAddedDeltaProgress();
+				progressHelper = new ProgressHelper(() -> {
+					generalProgress += progressHelper.getLastAddedDeltaProgress();
 					publishProgress(generalProgress);
 				});
-				progress.onStartWork((int) size);
+				progressHelper.onStartWork((int) size);
 				publishProgress(fileName);
 			}
 
 			@Override
 			public void onFileCopyProgress(@NonNull String fileName, int p, int deltaWork) {
-				progress.onProgress(deltaWork);
+				progressHelper.onProgress(deltaWork);
 			}
 
 			@Override
 			public void onFileCopyFinished(@NonNull String fileName, int deltaWork) {
-				progress.onProgress(deltaWork);
+				progressHelper.onProgress(deltaWork);
 			}
 		};
 	}

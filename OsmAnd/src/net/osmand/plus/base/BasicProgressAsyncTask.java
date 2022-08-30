@@ -17,11 +17,11 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	protected boolean interrupted;
 	protected Tag tag;
 	private Handler uiHandler;
-	private ProgressHelper progress;
+	private final ProgressHelper progressHelper;
 
 	public BasicProgressAsyncTask(OsmandApplication app) {
 		this.ctx = app;
-		progress = new ProgressHelper(() -> updProgress(true));
+		progressHelper = new ProgressHelper(() -> updateProgress(true));
 	}
 
 	public String getDescription() {
@@ -43,53 +43,51 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		message = taskName;
 		this.taskName = taskName;
 		startWork(work);
-		updProgress(false);
+		updateProgress(false);
 	}
 
 	protected abstract void updateProgress(boolean updateOnlyProgress, Tag tag);
 
 	@Override
 	public void startWork(int work) {
-		progress.onStartWork(work);
+		progressHelper.onStartWork(work);
 	}
 
 	@Override
 	public void progress(int deltaWork) {
-		progress.onProgress(deltaWork);
+		progressHelper.onProgress(deltaWork);
 	}
-	
-	private void updProgress(boolean updateOnlyProgress) {
-		if(uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
+
+	private void updateProgress(boolean updateOnlyProgress) {
+		if (uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
 			Message msg = Message.obtain(uiHandler, () -> updateProgress(updateOnlyProgress, tag));
 			msg.what = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 			uiHandler.sendMessage(msg);
 		}
 	}
 
-	
-
 	@Override
 	public void remaining(int remainingWork) {
-		int newProgress = progress.getTotalWork() - remainingWork;
-		progress(newProgress - progress.getLastKnownProgress());
+		int newProgress = progressHelper.getTotalWork() - remainingWork;
+		progress(newProgress - progressHelper.getLastKnownProgress());
 	}
 
 	@Override
 	public void finishTask() {
-		progress.onFinishTask();
+		progressHelper.onFinishTask();
 		if (taskName != null) {
 			message = ctx.getResources().getString(R.string.finished_task) + ": " + taskName; //$NON-NLS-1$
-			updProgress(false);
+			updateProgress(false);
 		}
 	}
 
 	@Override
 	public boolean isIndeterminate() {
-		return progress.isIndeterminate();
+		return progressHelper.isIndeterminate();
 	}
 
 	public float getDownloadProgress() {
-		return progress.getDownloadProgress();
+		return progressHelper.getDownloadProgress();
 	}
 
 	public void setInterrupted(boolean interrupted) {
@@ -110,6 +108,6 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	}
 
 	@Override
-	public void setGeneralProgress(String genProgress) {}
-
+	public void setGeneralProgress(String genProgress) {
+	}
 }

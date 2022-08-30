@@ -215,29 +215,29 @@ public class NetworkWriter extends AbstractWriter {
 	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
 		return new OnUploadFileListener() {
 
-			private ProgressHelper progress;
+			private ProgressHelper progressHelper;
 			private boolean uploadStarted;
 
 			@Override
 			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
-				progress = new ProgressHelper(() -> {
+				progressHelper = new ProgressHelper(() -> {
 					if (listener != null) {
-						int p = progress.getLastKnownProgress();
-						int dp = progress.getLastAddedDeltaProgress();
-						listener.onItemUploadProgress(item, itemFileName, p, dp);
+						int progress = progressHelper.getLastKnownProgress();
+						int deltaProgress = progressHelper.getLastAddedDeltaProgress();
+						listener.onItemUploadProgress(item, itemFileName, progress, deltaProgress);
 					}
 				});
 				if (!uploadStarted && listener != null) {
 					uploadStarted = true;
-					progress.onStartWork(itemWork);
-					listener.onItemUploadStarted(item, itemFileName, progress.getTotalWork());
+					progressHelper.onStartWork(itemWork);
+					listener.onItemUploadStarted(item, itemFileName, progressHelper.getTotalWork());
 				}
 			}
 
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
 				if (listener != null) {
-					this.progress.onProgress(deltaWork);
+					progressHelper.onProgress(deltaWork);
 				}
 			}
 

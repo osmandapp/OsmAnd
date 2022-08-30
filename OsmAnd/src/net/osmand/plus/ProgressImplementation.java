@@ -1,8 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.IProgress;
-import net.osmand.plus.base.ProgressHelper;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,14 +10,17 @@ import android.os.Message;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.IProgress;
+import net.osmand.plus.base.ProgressHelper;
+
 public class ProgressImplementation implements IProgress {
-	
+
 	private static final int HANDLER_START_TASK = OsmAndConstants.UI_HANDLER_PROGRESS + 1;
 	private static final int HADLER_UPDATE_PROGRESS = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 	private String taskName;
-	private ProgressHelper progress;
-	private String message = ""; //$NON-NLS-1$
-	
+	private ProgressHelper progressHelper;
+	private String message = "";
+
 	private final Handler mViewUpdateHandler;
 	private Thread run;
 	private final Context context;
@@ -29,16 +29,14 @@ public class ProgressImplementation implements IProgress {
 	private Runnable finishRunnable;
 	private final boolean cancelable;
 	private TextView tv;
-	
+
 
 	public ProgressImplementation(Context ctx, ProgressDialog dlg, boolean cancelable) {
 		this.cancelable = cancelable;
 		context = ctx;
 		setDialog(dlg);
 
-		progress = new ProgressHelper(() -> {
-			updateProgressMessage(progress.getLastKnownProgress());
-		});
+		progressHelper = new ProgressHelper(() -> updateProgressMessage(progressHelper.getLastKnownProgress()));
 
 		mViewUpdateHandler = new Handler() {
 			@Override
@@ -54,7 +52,7 @@ public class ProgressImplementation implements IProgress {
 							dialog.setIndeterminate(true);
 						} else {
 							dialog.setIndeterminate(false);
-							dialog.setMax(progress.getTotalWork());
+							dialog.setMax(progressHelper.getTotalWork());
 						}
 						dialog.show();
 					}
@@ -67,7 +65,7 @@ public class ProgressImplementation implements IProgress {
 							progressBar.setIndeterminate(true);
 						} else {
 							progressBar.setIndeterminate(false);
-							progressBar.setMax(progress.getTotalWork());
+							progressBar.setMax(progressHelper.getTotalWork());
 						}
 					}
 					break;
@@ -82,7 +80,7 @@ public class ProgressImplementation implements IProgress {
 			}
 		};
 	}
-		
+
 	public ProgressImplementation(ProgressDialog dlg, boolean cancelable){
 		this(dlg.getContext(), dlg, cancelable);
 	}
@@ -91,7 +89,7 @@ public class ProgressImplementation implements IProgress {
 	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style) {
 		return createProgressDialog(ctx, title, message, style, null);
 	}
-	
+
 	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, DialogInterface.OnCancelListener listener) {
 		ProgressDialog dlg = new ProgressDialog(ctx) {
 			@Override
@@ -123,7 +121,7 @@ public class ProgressImplementation implements IProgress {
 		dlg.setProgressStyle(style);
 		return new ProgressImplementation(dlg, true);
 	}
-	
+
 	public void setProgressBar(TextView tv, ProgressBar progressBar, Runnable finish) {
 		this.tv = tv;
 		this.progressBar = progressBar;
@@ -139,18 +137,18 @@ public class ProgressImplementation implements IProgress {
 						if(run != null){
 							run.stop();
 						}
-						
+
 					}
 				});
 			}
 			this.dialog = dlg;
 		}
 	}
-	
+
 	public void setRunnable(String threadName, Runnable run){
 		this.run = new Thread(run, threadName);
 	}
-	
+
 	public void run(){
 		if(run == null){
 			throw new IllegalStateException();
@@ -165,7 +163,7 @@ public class ProgressImplementation implements IProgress {
 	@Override
 	public void progress(int deltaWork) {
 		if (dialog != null) {
-			progress.onProgress(deltaWork);
+			progressHelper.onProgress(deltaWork);
 		}
 	}
 
@@ -175,16 +173,16 @@ public class ProgressImplementation implements IProgress {
 		msg.what = HADLER_UPDATE_PROGRESS;
 		mViewUpdateHandler.sendMessage(msg);
 	}
-	
+
 	@Override
 	public void remaining(int remainingWork) {
-		int newProgress = progress.getTotalWork() - remainingWork;
-		progress(newProgress - progress.getLastKnownProgress());
+		int newProgress = progressHelper.getTotalWork() - remainingWork;
+		progress(newProgress - progressHelper.getLastKnownProgress());
 	}
-	
+
 	@Override
 	public boolean isIndeterminate() {
-		return progress.isIndeterminate();
+		return progressHelper.isIndeterminate();
 	}
 
 	@Override
@@ -200,7 +198,7 @@ public class ProgressImplementation implements IProgress {
 
 	@Override
 	public void finishTask() {
-		progress.onFinishTask();
+		progressHelper.onFinishTask();
 		if (taskName != null) {
 			Resources resources = context.getResources();
 			message = resources.getString(R.string.ltr_or_rtl_combine_via_colon, resources.getString(R.string.finished_task), taskName);
@@ -211,18 +209,18 @@ public class ProgressImplementation implements IProgress {
 	public boolean isInterrupted() {
 		return false;
 	}
-	
+
 	public ProgressDialog getDialog() {
 		return dialog;
 	}
-	
+
 	public Runnable getFinishRunnable() {
 		return finishRunnable;
 	}
-	
+
 	@Override
 	public void startWork(int work) {
-		progress.onStartWork(work);
+		progressHelper.onStartWork(work);
 	}
 
 }
