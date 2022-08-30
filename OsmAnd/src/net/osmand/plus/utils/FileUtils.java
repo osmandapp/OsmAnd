@@ -153,8 +153,8 @@ public class FileUtils {
 		return dest;
 	}
 
-	public static boolean isValidFileName(@NonNull String name) {
-		return !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
+	public static boolean isValidFileName(@Nullable String name) {
+		return name != null && !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
 	}
 
 	public static boolean isValidDirName(@NonNull String name) {

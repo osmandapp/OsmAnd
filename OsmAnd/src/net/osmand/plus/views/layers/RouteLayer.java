@@ -412,7 +412,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
-				renderState.updateRouteState(startLocationIndex, actualColoringType, routeLineColor,
+				renderState.updateRouteState(lastProjection, startLocationIndex, actualColoringType, routeLineColor,
 						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
 				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated;
 				if (draw) {
@@ -748,6 +748,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private static class RenderState {
+		private Location lastProjection = null;
 		private int startLocationIndex = -1;
 		private int publicTransportRoute = -1;
 		private ColoringType coloringType = ColoringType.DEFAULT;
@@ -762,22 +763,25 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		boolean shouldUpdateRoute;
 		boolean shouldUpdateActionPoints;
 
-		public void updateRouteState(int startLocationIndex, ColoringType coloringType, int routeColor, float routeWidth,
+		public void updateRouteState(@Nullable Location lastProjection, int startLocationIndex, ColoringType coloringType, int routeColor, float routeWidth,
 		                             int currentRoute, int zoom, boolean shouldShowTurnArrows) {
 			this.shouldRebuildRoute = this.coloringType != coloringType
 					|| this.routeColor != routeColor
 					|| this.routeWidth != routeWidth;
 
-			this.shouldUpdateRoute = this.startLocationIndex != startLocationIndex
+			this.shouldUpdateRoute = (!MapUtils.areLatLonEqual(this.lastProjection, lastProjection)
+							|| this.startLocationIndex != startLocationIndex)
 					&& this.coloringType == coloringType
 					&& this.routeColor == routeColor
 					&& this.routeWidth == routeWidth;
 
 			this.shouldUpdateActionPoints = this.shouldRebuildRoute
+					|| this.shouldUpdateRoute
 					|| this.shouldShowTurnArrows != shouldShowTurnArrows
 					|| this.currentRoute != currentRoute
 					|| this.zoom != zoom;
 
+			this.lastProjection = lastProjection;
 			this.startLocationIndex = startLocationIndex;
 			this.coloringType = coloringType;
 			this.routeColor = routeColor;
