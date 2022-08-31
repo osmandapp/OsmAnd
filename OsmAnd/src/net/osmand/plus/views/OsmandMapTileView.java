@@ -57,6 +57,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.DoubleTapScaleDetector.DoubleTapZoomListener;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -80,6 +81,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 
+	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
@@ -259,20 +261,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		currentViewport = new RotatedTileBoxBuilder()
 				.setLocation(ll.getLatitude(), ll.getLongitude())
 				.setZoom(settings.getLastKnownMapZoom())
-				.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get())
+				.setRotate(settings.getLastKnownMapRotation())
 				.setPixelDimensions(w, h)
 				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
-		elevationAngle = settings.LAST_KNOWN_MAP_ELEVATION.get();
-	}
-
-	@Nullable
-	public Context getUiContext() {
-		if (mapActivity != null) {
-			return mapActivity;
-		}
-		return view != null ? view.getContext() : null;
+		elevationAngle = settings.getLastKnownMapElevation();
 	}
 
 	@Nullable
@@ -282,22 +276,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		if (mapActivity != null) {
-			setupTouchDetectors(mapActivity);
-		} else {
-			clearTouchDetectors();
-		}
 	}
 
 	public void setupTouchDetectors(@NonNull Context ctx) {
 		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
-		doubleTapScaleDetector = new DoubleTapScaleDetector(this, new MapTileViewMultiTouchZoomListener());
+		doubleTapScaleDetector = new DoubleTapScaleDetector(this, ctx, new MapTileViewMultiTouchZoomListener());
 		twoFingersTapDetector = new TwoFingerTapDetector() {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
-				if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+				if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
 					return;
 				}
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
@@ -540,6 +529,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setShowMapPosition(boolean showMapPosition) {
 		this.showMapPosition = showMapPosition;
+	}
+
+	public void showAndHideMapPosition() {
+		setShowMapPosition(true);
+		getApplication().runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
+			if (isShowMapPosition()) {
+				setShowMapPosition(false);
+				refreshMap();
+			}
+		}, 2500);
 	}
 
 	public float getRotate() {
@@ -1235,20 +1234,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void zoomToAnimate(@NonNull RotatedTileBox initialViewport, float dz, int centerX, int centerY) {
+	private void zoomToAnimate(@NonNull RotatedTileBox initialViewport, float deltaZoom, int centerX, int centerY) {
 		int baseZoom = initialViewport.getZoom();
-		while (initialViewport.getZoomFloatPart() + dz > 1 && isZoomingAllowed(baseZoom, dz)) {
-			dz--;
+		while (initialViewport.getZoomFloatPart() + deltaZoom > 1 && isZoomingAllowed(baseZoom, deltaZoom)) {
+			deltaZoom--;
 			baseZoom++;
 		}
-		while (initialViewport.getZoomFloatPart() + dz < 0 && isZoomingAllowed(baseZoom, dz)) {
-			dz++;
+		while (initialViewport.getZoomFloatPart() + deltaZoom < 0 && isZoomingAllowed(baseZoom, deltaZoom)) {
+			deltaZoom++;
 			baseZoom--;
 		}
-		if (!isZoomingAllowed(baseZoom, dz)) {
-			dz = Math.signum(dz);
+		if (!isZoomingAllowed(baseZoom, deltaZoom)) {
+			deltaZoom = Math.signum(deltaZoom);
 		}
-		zoomToAnimate(baseZoom, dz, centerX, centerY, !(doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode()));
+		zoomToAnimate(baseZoom, deltaZoom, centerX, centerY, !(doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode()));
 	}
 
 	public void moveTo(float dx, float dy, boolean notify) {
@@ -1491,8 +1490,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler.post(() -> Toast.makeText(application, msg, Toast.LENGTH_SHORT).show());
 	}
 
-	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener,
-			DoubleTapScaleDetector.DoubleTapZoomListener {
+	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
+
+		private static final float ANGLE_THRESHOLD = 30;
+		private static final float MAX_DELTA_ZOOM = 4;
+
 		private PointF initialMultiTouchCenterPoint;
 		private RotatedTileBox initialViewport;
 		private float x1;
@@ -1501,15 +1503,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private boolean startRotating;
-		private static final float ANGLE_THRESHOLD = 30;
 		private float initialElevation;
 		private float prevAngle;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
-			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
-			setIntZoom(Math.round(dz) + initialViewport.getZoom());
+			float deltaZoom = (float) calculateDeltaZoom(relativeToStart);
+			setIntZoom(Math.round(deltaZoom) + initialViewport.getZoom());
 			if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)
 					|| Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart
 					|| Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart) {
@@ -1608,10 +1609,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
-			double dz = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
-			if (Math.abs(dz) <= 0.1) {
-				// keep only rotating
-				dz = 0;
+			double deltaZoom = calculateDeltaZoom(relativeToStart);
+			if (Math.abs(deltaZoom) <= 0.1) {
+				deltaZoom = 0; // keep only rotating
 			}
 
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
@@ -1624,8 +1624,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				relAngle = 0;
 			}
 
-			if (dz != 0 || relAngle != 0) {
-				changeZoomPosition((float) dz, relAngle);
+			if (deltaZoom != 0 || relAngle != 0) {
+				changeZoomPosition((float) deltaZoom, relAngle);
 			}
 		}
 
@@ -1652,7 +1652,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 
-		private void changeZoomPosition(float dz, float angle) {
+		private double calculateDeltaZoom(double relativeToStart) {
+			double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
+			if (deltaZoom > 0.0 && deltaZoom > MAX_DELTA_ZOOM) {
+				return MAX_DELTA_ZOOM;
+			} else if (deltaZoom < 0.0 && deltaZoom < -MAX_DELTA_ZOOM) {
+				return -MAX_DELTA_ZOOM;
+			}
+			return deltaZoom;
+		}
+
+		private void changeZoomPosition(float deltaZoom, float angle) {
 			RotatedTileBox calc = initialViewport.copy();
 			QuadPoint cp = initialViewport.getCenterPixelPoint();
 			int multiTouchCenterX;
@@ -1668,18 +1678,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
-			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
+			calc.setZoomAndAnimation(initialViewport.getZoom(), deltaZoom, initialViewport.getZoomFloatPart());
 			if (multiTouch) {
 				wasZoomInMultiTouch = true;
 			}
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
-				zoomToAnimate(initialViewport, dz, multiTouchCenterX, multiTouchCenterY);
+				zoomToAnimate(initialViewport, deltaZoom, multiTouchCenterX, multiTouchCenterY);
 				rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 			} else {
 				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchCenterX, cp.y + cp.y - multiTouchCenterY);
 				setLatLon(r.getLatitude(), r.getLongitude());
-				zoomToAnimate(initialViewport, dz, multiTouchCenterX, multiTouchCenterY);
+				zoomToAnimate(initialViewport, deltaZoom, multiTouchCenterX, multiTouchCenterY);
 				rotateToAnimate(calcRotate);
 			}
 			prevAngle = angle;
@@ -1797,5 +1807,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isLayoutRtl() {
 		return AndroidUtils.isLayoutRtl(application);
+	}
+
+	@NonNull
+	public LatLon getLatLonFromPixel(float x, float y) {
+		RotatedTileBox tileBox = getCurrentRotatedTileBox();
+		return NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, new PointI((int) x, (int) y));
 	}
 }

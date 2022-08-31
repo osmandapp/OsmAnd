@@ -109,7 +109,7 @@
     <string name="gps_points_in_buffer">envoyé (%1$d dans le tampon)</string>
     <string name="monitoring_is_enabled">Enregistrement activé</string>
     <string name="shared_string_enabled">Activé</string>
-    <string name="shared_string_status">Statut</string>
+    <string name="shared_string_status">État</string>
     <string name="shared_string_disable">Désactiver</string>
     <string name="shared_string_save">Enregistrer</string>
     <string name="shared_string_name">Nom</string>

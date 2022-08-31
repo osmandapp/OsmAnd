@@ -356,8 +356,7 @@ public class GpxDisplayHelper {
 		String trackName;
 		if (Algorithms.isBlank(track.name)) {
 			int trackIdx = gpxFile.tracks.indexOf(track);
-			int visibleTrackIdx = gpxFile.hasGeneralTrack() ? trackIdx : trackIdx + 1;
-			trackName = String.valueOf(visibleTrackIdx);
+			trackName = String.valueOf(trackIdx + 1);
 		} else {
 			trackName = track.name;
 		}

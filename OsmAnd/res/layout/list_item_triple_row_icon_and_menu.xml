@@ -23,9 +23,10 @@
 
 	<LinearLayout
 		android:layout_width="0dp"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginLeft="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_half"
 		android:layout_weight="1"
 		android:orientation="horizontal">
 
@@ -41,7 +42,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
-				android:lines="1"
+				android:maxLines="2"
 				android:textAppearance="@style/TextAppearance.ListItemTitle"
 				tools:text="Title" />
 

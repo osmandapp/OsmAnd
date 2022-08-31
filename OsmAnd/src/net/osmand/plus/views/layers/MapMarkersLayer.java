@@ -140,6 +140,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private int displayedWidgets;
 	private List<GPXUtilities.WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
+	private Location savedLoc;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -649,7 +650,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		amenities.clear();
 		OsmandApplication app = getApplication();
-		int r = getDefaultRadiusPoi(tileBox);
+		int r = tileBox.getDefaultRadiusPoi();
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
 		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
@@ -971,9 +972,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		}
 		if (myLoc == null) {
+			clearVectorLinesCollections();
 			return;
 		}
 
+		if (savedLoc != null && !MapUtils.areLatLonEqual(myLoc, savedLoc)) {
+			clearVectorLinesCollections();
+		}
+		savedLoc = myLoc;
 		OsmandSettings settings = app.getSettings();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();

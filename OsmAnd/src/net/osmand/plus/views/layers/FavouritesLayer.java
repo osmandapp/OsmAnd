@@ -281,7 +281,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
-		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
+		int r = getScaledTouchRadius(view.getApplication(), tb.getDefaultRadiusPoi());
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		List<FavouritePoint> favouritePoints = new ArrayList<>(favouritesHelper.getFavouritePoints());

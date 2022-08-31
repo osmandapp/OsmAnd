@@ -4775,4 +4775,7 @@
     <string name="rendering_attr_depthContourColorScheme_description">Kolor-skemo de maraj profundec-kurboj</string>
     <string name="rendering_attr_depthContourWidth_description">Larĝoj de linioj de maraj profundec-kurboj</string>
     <string name="rendering_attr_depthContourWidth_name">Larĝoj de maraj profundec-kurboj</string>
+    <string name="available_as_part_of_subscription_plan">Disponebla kiel parto de la abono %1$s.</string>
+    <string name="included_in_your_current_plan">Inkluzivita en via nuna plano %1$s</string>
+    <string name="favorite_confirm_delete_group">Ĉu vi certe volas forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)\?</string>
 </resources>

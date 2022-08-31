@@ -226,7 +226,7 @@
     <string name="mapillary_widget_descr">Memungkinkan berkontribusi cepat ke Mapillary.</string>
     <string name="mapillary_descr">Foto tingkat jalanan daring untuk semuanya. Jelajahi tempat, kolaborasi, tangkap dunia.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Foto tingkat jalanan untuk semuanya. Jelajahi tempat, kolaborasi, tangkap dunia.</string>
+    <string name="plugin_mapillary_descr">Menyediakan tampilan tingkat jalanan. Di mana citra belum ada, Anda dapat menambahkannya secara sendiri supaya orang lain dapat menggunakannya. Untuk mengaktifkan lapisan Mapillary aktifkan \"Citra tingkat jalanan\" di menu Konfigurasi peta.</string>
     <string name="private_access_routing_req">Tujuan Anda terletak di area dengan akses pribadi. Izinkan menggunakan jalan pribadi untuk perjalanan ini\?</string>
     <string name="restart_search">Ulangi pencarian</string>
     <string name="increase_search_radius">Tingkatkan radius pencarian</string>
@@ -2455,7 +2455,9 @@
 \nWeb / Wikimedia - foto POI sesuai data OpenStreetMap.</string>
     <string name="use_dev_url_descr">Ubah untuk menggunakan dev.openstreetmap.org daripada openstreetmap.org untuk menguji coba mengunggah Catatan / POI / GPX OSM.</string>
     <string name="clear_osm_token">Hapus token OAuth OpenStreetMap</string>
-    <string name="osm_editing_plugin_description">Buat kontribusi OSM seperti membuat atau mengubah objek POI OSM, membuka atau mengomentari catatan OSM, dan berkontribusi file GPX dalam OsmAnd dengan menyediakan nama pengguna dan sandi Anda. OpenStreetMap.org adalah proyek pemetaan domain publik global berbasis komunitas.</string>
+    <string name="osm_editing_plugin_description">Memungkinkan Anda untuk membuat kontribusi ke OpenStreetMap, sebuah komunitas global yang membuat peta dunia dan menyediakan data sumber terbuka terbaru kepada pengguna siapa pun.
+\n
+\nAnda dapat menemukan petunjuk cara menyunting peta di situs web kami https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="choose_audio_stream">Output panduan suara</string>
     <string name="choose_audio_stream_descr">Pilih speaker untuk panduan suara.</string>
     <string name="voice_stream_voice_call">Audio panggilan ponsel (untuk menginterupsi stereo Bluetooth mobil)</string>
@@ -2818,7 +2820,7 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia dan Wikivoyage luring</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dapatkan pembaruan peta lebih sering. Pembaruan setiap jam, hari, atau minggu. Pembaruan diunduh secara bertahap, hanya untuk area yang diubah.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Dapatkan unduhan tidak terbatas untuk semua peta benua dan wilayah luring.</string>
-    <string name="purchases_feature_desc_wikipedia">Jelajahi Wikipedia secara luring. Artikel dibagi berdasarkan negara dan wilayah dan tersedia dalam semua bahasa.</string>
+    <string name="purchases_feature_desc_wikipedia">Memiliki Wikipedia secara luring di perjalanan Anda membantu Anda mengetahui lebih lanjut tentang tempat-tempat yang Anda kunjungi. Tersedia secara luring dan menampilkan artikel Wikipedia dalam relasi titik menarik pada peta. Jangan lupa untuk mengunduh peta Wikipedia untuk wilayah yang dipilih.</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Peta medan: garis kontur, bayangan bukit, lereng</string>
     <string name="purchases_feature_desc_terrain">Garis kontur medan, peta bayangan bukit penuh dengan nuansa gelap dan peta lereng dengan warna untuk menunjukkan puncak dan dataran rendah.</string>
     <string name="backup_version_history_delete_descr">Hapus catatan perubahan untuk tipe data usang dari OsmAnd Cloud\?</string>
@@ -2833,9 +2835,9 @@
     <string name="renew_subscription">Perbarui langganan</string>
     <string name="three_months_subscription">Langganan tiga bulan</string>
     <string name="map_widget_distance_by_tap">Jarak dengan ketukan</string>
-    <string name="open_place_reviews_plugin_description">Kirim foto, ulasan, dan tautan tentang tempat publik seperti restoran, hotel, museum, dan titik jalan sebagai data terbuka https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Memungkinkan Anda untuk membuat kontribusi ke proyek OpenPlaceReviews. Seperti foto, ulasan, tautan tentang tempat-tempat publik seperti restoran, hotel, museum dan titik jalan.
 \n
-\nBaca lebih lanjut di https://openplacereviews.org</string>
+\nAnda dapat menemukan petunjuk cara berkontribusi di situs web kami - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="activity_type_riding_name">Berkendara</string>
     <string name="activity_type_winter_name">Musim dingin</string>
     <string name="routing_engine_vehicle_type_hgv">HGV</string>
@@ -4175,4 +4177,95 @@
     <string name="accessibility_2d_view_on">Tampilan 2.5D aktif</string>
     <string name="download_complete">Unduhan selesai</string>
     <string name="clear_markers_history_q">Hapus semua riwayat penanda peta\?</string>
+    <string name="osn_close_dialog_error">Tidak dapat menutup catatan.</string>
+    <string name="copied_to_clipboard">Disalin ke papan klip</string>
+    <string name="av_audio_bitrate_descr">Pilih bitrate audio.</string>
+    <string name="please_specify_poi_type_only_from_list">Mohon tetapkan tipe POI yang benar atau lewati.</string>
+    <string name="whats_new">Apa yang baru dalam</string>
+    <string name="show_on_start">Tampilkan pada pemulaian</string>
+    <string name="osb_author_dialog_password">Kata sandi OSM (opsional)</string>
+    <string name="default_speed_system_descr">Tentukan unit kecepatan.</string>
+    <string name="looking_up_address">Mencari alamat</string>
+    <string name="osm_edit_created_poi">Dibuat POI OSM</string>
+    <string name="av_locations_descr">File GPX dengan lokasi.</string>
+    <string name="simulate_your_location_stop_descr">Berhenti mensimulasikan posisi Anda.</string>
+    <string name="simulate_your_location_descr">Simulasikan posisi Anda menggunakan rute yang sudah dihitung atau trek GPX yang sudah direkam.</string>
+    <string name="osm_changes_added_to_local_edits">Perubahan OSM ditambahkan ke perubahan set lokal</string>
+    <string name="mark_to_delete">Tandai untuk dihapus</string>
+    <string name="plugin_touringview_name">Tampilan peta tur</string>
+    <string name="context_menu_item_delete_waypoint">Hapus titik jalan GPX\?</string>
+    <string name="context_menu_item_edit_waypoint">Edit titik jalan GPX</string>
+    <string name="osmand_running_in_background">Jalan pada latar belakang</string>
+    <string name="gps_wake_up_timer">Interval pembangunan GPS</string>
+    <string name="simulate_your_location">Simulasikan posisi Anda</string>
+    <string name="shared_string_currently_recording_track">Saat ini merekam trek</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd untuk garis kontur luring</string>
+    <string name="srtm_paid_version_title">Plugin garis kontur</string>
+    <string name="osm_edit_reopened_note">Dibuka Ulang Catatan OSM</string>
+    <string name="simulate_initial_startup_descr">Menetapkan bendera mengindikasikan pemulaian aplikasi pertama, membuat semua pengaturan lainnya tidak terubah.</string>
+    <string name="osm_edit_created_note">Dibuat Catatan OSM</string>
+    <string name="osb_comment_dialog_error">Tidak dapat menambahkan komentar.</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="application_dir_change_warning3">Pindah file data OsmAnd ke tujuan baru\?</string>
+    <string name="attach_to_roads_banner_desc">Pasang trek Anda pada jalan, untuk mendapatkan petunjuk navigasi yang rinci.</string>
+    <string name="map_downloaded_descr">Peta %1$s siap untuk digunakan.</string>
+    <string name="simulate_initial_startup">Simulasikan pemulaian aplikasi pertama</string>
+    <string name="hillshade_layer_disabled">Lapisan bayangan bukit dinonaktifkan</string>
+    <string name="srtm_plugin_disabled">Garis kontur dinonaktifkan</string>
+    <string name="specified_directiory_not_writeable">Peta tidak dapat dibuat dalam direktori yang ditetapkan</string>
+    <string name="application_dir">Folder penyimpanan data</string>
+    <string name="filter_poi_hint">Saring berdasarkan nama</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Asisten pemetaan OSM</string>
+    <string name="restart_is_required">Pemulaian ulang dibutuhkan untuk menetapkan perubahan.</string>
+    <string name="osmand_rastermaps_plugin_description">Akses ke berbagai tipe peta (ubin atau raster) daring, dari ubin OSM yang sudah ditentukan (seperti Mapnik) sampai citra satelit, dan lapisan penggunaan khusu seperti peta cuaca, peta iklim, peta geologi, lapisan bayangan bukit, dll.
+\n
+\n Semua peta ini dapat digunakan sebagai peta utama (dasar) untuk ditampilkan, atau sebagai hamparan atau dasaran untuk peta dasar lainnya (seperti peta standar OsmAnd luring). Elemen peta vektor OsmAnd dapat disembunyikan via menu \'Konfigurasi peta\' untuk membuat peta dasaran apa pun lebih kelihatan.
+\n
+\n Unduh peta ubin daring secara langsung, atau disiapkan untuk penggunaan luring (disalin ke folder data OsmAnd dengan manual) sebagai basis data SQLite yang dapat dibuat oleh berbagai alat-alat penyiapan peta pihak ketiga.</string>
+    <string name="osm_edit_modified_poi">POI OSM termodifikasi</string>
+    <string name="copying_osmand_file_failed">Pemindahan file gagal</string>
+    <string name="context_menu_item_open_note">Buka Catatan OSM</string>
+    <string name="osn_add_dialog_error">Tidak dapat membuat catatan.</string>
+    <string name="no_updates_available">Tidak ada pembaruan yang tersedia</string>
+    <string name="welcome_text">OsmAnd menyediakan penelusuran peta global luring dan navigasi luring.</string>
+    <string name="show_on_start_description">\'Nonaktif\' meluncurkan peta secara langsung.</string>
+    <string name="rendering_value_translucent_lightblue_name">Biru muda translucent</string>
+    <string name="available_as_part_of_subscription_plan">Tersedia sebagai bagian dari langganan %1$s.</string>
+    <string name="included_in_your_current_plan">Termasuk dalam langganan \"%1$s\" Anda saat ini</string>
+    <string name="osm_edit_deleted_poi">POI OSM terhapus</string>
+    <string name="osm_edit_commented_note">Berkomentar pada Catatan OSM</string>
+    <string name="share_osm_edits_subject">Suntingan OSM dibagikan via OsmAnd</string>
+    <string name="what_is_new">Apa yang baru</string>
+    <string name="favorite_category_dublicate_message">Mohon gunakan sebuah nama kategori yang belum ada.</string>
+    <string name="default_speed_system">Unit kecepatan</string>
+    <string name="simulate_your_location_gpx_descr">Simulasikan posisi Anda menggunakan trek GPX yang sudah direkam.</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Bawaan (cyan translucent)</string>
+    <string name="lang_es_us">Spanyol (Amerika)</string>
+    <string name="lang_hsb">Sorbian (Upper)</string>
+    <string name="archive_wikipedia_data">Anda memiliki data Wikipedia yang tidak kompatibel. Arsipkan\?</string>
+    <string name="disable_recording_once_app_killed">Cegah pencatatan sendiri</string>
+    <string name="shared_string_import2osmand">Impor ke OsmAnd</string>
+    <string name="read_full_article">Baca artikel penuh (daring)</string>
+    <string name="welcome_select_region">Untuk merefleksikan tanda lalu lintas dan regulasi secara benar, mohon pilih wilayah mengemudi Anda:</string>
+    <string name="parking_place_limited">Waktu parkir dibatasi sampai</string>
+    <string name="short_location_on_map">Lat %1$s
+\nLon%2$s</string>
+    <string name="tips_and_tricks_descr">Pertanyaan yang sering ditanyakan, perubahan terkini, dan lainnya.</string>
+    <string name="record_plugin_description">Memungkinkan Anda untuk merekam, simpan dan analisa data latihan atau gerakan, seperti kecepatan, kenaikan, keturunan atau relief rute, yang dapat digunakan kembali, diperbaiki, ditambahkan atau dibagikan dengan teman-teman.
+\n
+\nCara penggunaan - https://osmand.net/docs/user/plugins/trip-recording</string>
+    <string name="rendering_value_translucent_lightgreen_name">Hijau muda translucent</string>
+    <string name="access_from_map_description">Tombol menu meluncurkan dasbor daripada menu</string>
+    <string name="osm_edit_context_menu_delete">Hapus suntingan OSM</string>
+    <string name="search_poi_category_hint">Ketik untuk mencari semua</string>
+    <string name="world_map_download_descr">Peta dasar dunia (menutupi semua dunia pada tingkat perbesaran yang rendah) tidak ada atau usang. Mohon pertimbangkan untuk diperbarui untuk ikhtisar global.</string>
+    <string name="rendering_value_translucent_pink_name">Merah muda translucent</string>
+    <string name="rendering_value_darkyellow_name">Kuning gelap</string>
+    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bayangan bukit dan tanjakan, membantu Anda untuk menyelidiki bentuk permukaan tanah, menentukan lengkungan, tanjakan, atau titik ketinggian yang sama, dan lainnya secara visual. Informasi topografi pada peta dapat ditampilkan dengan bayangan lereng untuk kenaikan dan keturunan, dan warna deviasi sudut lereng dari datar. Data dari SRTM dan ASTER.
+\n
+\nCara penggunaan - http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="download_wikipedia_files">Unduh data Wikipedia tambahan (%1$s MB)\?</string>
+    <string name="storage_directory_internal_app">Memori aplikasi internal</string>
+    <string name="confirm_usage_speed_cameras">Dalam banyak negara (Jerman, Prancis, Italia, dan lainnya) penggunaan peringatan kamera kecepatan ilegal. OsmAnd tidak mengasumsikan tanggung jawab apa pun jika Anda melanggar hukum. Mohon hanya ketuk \'Iya\' jika Anda memenuhi syarat untuk menggunakan fitur ini.</string>
+    <string name="delay_to_start_navigation_descr">Tetapkan waktu tunggu untuk berada di layar perencanaan rute.</string>
 </resources>

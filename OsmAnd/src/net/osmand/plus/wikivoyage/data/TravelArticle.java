@@ -39,6 +39,7 @@ public class TravelArticle {
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
 
+
 	File file;
 	String title;
 	String content;
@@ -56,6 +57,7 @@ public class TravelArticle {
 	String lang;
 	String contentsJson;
 	String aggregatedPartOf;
+	String description;
 
 	long lastModified;
 	boolean gpxFileReading;
@@ -89,6 +91,10 @@ public class TravelArticle {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public String getContent() {

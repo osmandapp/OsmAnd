@@ -448,8 +448,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			if (article == null || fm == null || selectedLang == null) {
 				return;
 			}
-			WikivoyageArticleNavigationFragment.showInstance(fm,
-					WikivoyageArticleDialogFragment.this, articleId, selectedLang);
+			contentWebView.post(() -> WikivoyageArticleNavigationFragment.showInstance(fm,
+					WikivoyageArticleDialogFragment.this, articleId, selectedLang));
 		}
 	}
 

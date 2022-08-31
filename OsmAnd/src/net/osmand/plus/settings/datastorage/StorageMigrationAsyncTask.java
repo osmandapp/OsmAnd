@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -193,31 +194,26 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 	private CopyFilesListener getCopyFilesListener(long size) {
 		return new CopyFilesListener() {
 
-			private int deltaProgress;
+			private ProgressHelper progressHelper;
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
+				progressHelper = new ProgressHelper(() -> {
+					generalProgress += progressHelper.getLastAddedDeltaProgress();
+					publishProgress(generalProgress);
+				});
+				progressHelper.onStartWork((int) size);
 				publishProgress(fileName);
 			}
 
 			@Override
-			public void onFileCopyProgress(@NonNull String fileName, int progress, int deltaWork) {
-				deltaProgress += deltaWork;
-				if ((deltaProgress > (size / 100)) || (progress + deltaProgress >= size)) {
-					generalProgress += deltaProgress;
-					publishProgress(generalProgress);
-					deltaProgress = 0;
-				}
+			public void onFileCopyProgress(@NonNull String fileName, int p, int deltaWork) {
+				progressHelper.onProgress(deltaWork);
 			}
 
 			@Override
 			public void onFileCopyFinished(@NonNull String fileName, int deltaWork) {
-				deltaProgress += deltaWork;
-				if ((deltaProgress > (size / 100)) || deltaProgress >= size) {
-					generalProgress += deltaProgress;
-					publishProgress(generalProgress);
-					deltaProgress = 0;
-				}
+				progressHelper.onProgress(deltaWork);
 			}
 		};
 	}

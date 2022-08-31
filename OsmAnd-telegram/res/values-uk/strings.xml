@@ -123,7 +123,7 @@
     <string name="shared_string_distance">Відстань</string>
     <string name="share_location">Поділитися позицією</string>
     <string name="sharing_location">Трансляція позиції</string>
-    <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безкоштовну або платну версію OsmAnd</string>
+    <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безплатну або платну версію OsmAnd</string>
     <string name="install_osmand">Встановити OsmAnd</string>
     <string name="show_users_on_map">Показувати користувачів на мапі</string>
     <string name="active_chats">Активні чати</string>
@@ -162,7 +162,7 @@
     <string name="expire_at">Діє до</string>
     <string name="last_update_from_telegram">Нещодавнє оновлення з Telegram</string>
     <string name="shared_string_ok">Так</string>
-    <string name="timeline_available_for_free_now">Хронологія тепер доступна безкоштовно.</string>
+    <string name="timeline_available_for_free_now">Хронологія тепер доступна безплатно.</string>
     <string name="disable_monitoring">Вимкнути моніторинг</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_accept">Прийняти</string>

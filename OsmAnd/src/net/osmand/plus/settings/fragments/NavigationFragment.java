@@ -185,9 +185,6 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		} else {
 			routeService = RouteService.OSMAND;
 		}
-		if (Algorithms.isEmpty(derivedProfile)) {
-			derivedProfile = "default";
-		}
 		appMode.setRouteService(routeService);
 		appMode.setRoutingProfile(profileKey);
 		appMode.setDerivedProfile(derivedProfile);
