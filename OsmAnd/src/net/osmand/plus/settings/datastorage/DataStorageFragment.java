@@ -52,7 +52,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
-import net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.FilesCollectListener;
+import net.osmand.plus.settings.datastorage.FilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
@@ -71,7 +71,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter, FilesCollectListener {
+public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter, FilesCollectListener, StorageMigrationRestartListener {
 
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public static final int UI_REFRESH_TIME_MS = 500;
@@ -96,7 +96,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private boolean storageMigration;
 	private boolean firstUsage;
 
-	private DocumentFilesCollectTask collectTask;
+	private FilesCollectTask collectTask;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
@@ -184,9 +184,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					}
 					if (moveMaps) {
 						File fromDirectory = new File(currentDataStorage.getDirectory());
-						Log.e("Uri","Uri.fromFile: " + Uri.fromFile(fromDirectory));
-						updateSelectedFolderFiles(Uri.fromFile(fromDirectory));
-
+						updateSelectedFolderFiles(fromDirectory);
 					} else {
 						confirm(app, activity, newDataStorage, false);
 					}
@@ -422,9 +420,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
-	private void updateSelectedFolderFiles(@NonNull Uri uri) {
+	private void updateSelectedFolderFiles(@NonNull File file) {
 		stopCollectFilesTask();
-		collectTask = new DocumentFilesCollectTask(app, uri, this);
+		collectTask = new FilesCollectTask(app, file, this);
 		collectTask.executeOnExecutor(singleThreadExecutor);
 	}
 
@@ -434,8 +432,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	@Override
 	public void onFilesCollectingFinished(@Nullable String error,
-	                                      @NonNull DocumentFile folder,
-	                                      @NonNull List<DocumentFile> files,
+	                                      @NonNull File folder,
+	                                      @NonNull List<File> files,
 	                                      @NonNull Pair<Long, Long> size) {
 		collectTask = null;
 		if (Algorithms.isEmpty(error)) {
@@ -482,72 +480,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private void moveData(StorageItem currentStorage,
 	                      StorageItem newStorage,
-	                      @NonNull List<DocumentFile> documentFiles,
+	                      @NonNull List<File> files,
 	                      @NonNull Pair<Long, Long> filesSize) {
 		@SuppressLint("StaticFieldLeak")
-		MoveFilesTask task = new MoveFilesTask(activity, currentStorage, newStorage, documentFiles, filesSize) {
-
-
-			@NonNull
-			private String getFormattedSize(long sizeBytes) {
-				return AndroidUtils.formatSize(activity.get(), sizeBytes);
-			}
-
-			private void showResultsDialog() {
-				StringBuilder sb = new StringBuilder();
-				Context ctx = activity.get();
-				if (ctx == null) {
-					return;
-				}
-				int moved = getMovedCount();
-				int copied = getCopiedCount();
-				int failed = getFailedCount();
-				sb.append(ctx.getString(R.string.files_moved, moved, getFormattedSize(getMovedSize()))).append("\n");
-				if (copied > 0) {
-					sb.append(ctx.getString(R.string.files_copied, copied, getFormattedSize(getCopiedSize()))).append("\n");
-				}
-				if (failed > 0) {
-					sb.append(ctx.getString(R.string.files_failed, failed, getFormattedSize(getFailedSize()))).append("\n");
-				}
-				if (copied > 0 || failed > 0) {
-					int count = copied + failed;
-					sb.append(ctx.getString(R.string.files_present, count, getFormattedSize(getCopiedSize() + getFailedSize()), newStorage.getDirectory()));
-				}
-				AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
-				bld.setMessage(sb.toString());
-				bld.setPositiveButton(R.string.shared_string_restart, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						confirm(app, activity.get(), newStorage, true);
-					}
-				});
-				bld.show();
-			}
-
-			@Override
-			protected void onPostExecute(Boolean result) {
-				super.onPostExecute(result);
-				OsmandActionBarActivity a = this.activity.get();
-				if (a == null) {
-					return;
-				}
-				OsmandApplication app = a.getMyApplication();
-				if (result) {
-					app.getResourceManager().resetStoreDirectory();
-					// immediately proceed with change (to not loose where maps are currently located)
-					if (getCopiedCount() > 0 || getFailedCount() > 0) {
-						showResultsDialog();
-					} else {
-						confirm(app, a, newStorage, false);
-					}
-				} else {
-					showResultsDialog();
-					Toast.makeText(a, R.string.copying_osmand_file_failed,
-							Toast.LENGTH_SHORT).show();
-				}
-
-			}
-		};
+		MoveFilesTask task = new MoveFilesTask(activity, currentStorage, newStorage, files, filesSize, this);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -603,9 +539,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
+	@Override
+	public void onRestart() {
+		confirm(app, activity, newDataStorage, true);
+	}
+
 	public interface StorageSelectionListener {
-
 		void onStorageSelected(@NonNull StorageItem storageItem);
-
 	}
 }

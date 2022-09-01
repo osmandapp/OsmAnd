@@ -38,6 +38,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 
 	private final OsmandApplication app;
 	private final StorageItem selectedStorage;
+	private final StorageItem sharedStorage;
 	private final Pair<Long, Long> filesSize;
 	private final List<DocumentFile> documentFiles;
 	private final List<File> existingFiles = new ArrayList<>();
@@ -59,6 +60,9 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		this.filesSize = filesSize;
 		this.documentFiles = documentFiles;
 		this.selectedStorage = selectedStorage;
+
+		DataStorageHelper storageHelper = new DataStorageHelper(app);
+		sharedStorage = storageHelper.getStorage(DataStorageHelper.SHARED_STORAGE);
 	}
 
 	@Override
@@ -66,8 +70,8 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, filesSize,
-					generalProgress, documentFiles.size(), usedOnMap);
+			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, sharedStorage, filesSize,
+					generalProgress, documentFiles.size(), usedOnMap, null);
 		}
 	}
 
