@@ -28,7 +28,7 @@ import net.osmand.util.MapUtils;
 
 public class NetworkRouteContext {
 	
-	private static final int ZOOM_TO_LOAD_TILES = 15;
+	public static final int ZOOM_TO_LOAD_TILES = 15;
 	
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;

@@ -461,7 +461,7 @@ public class NetworkRouteSelector {
 				it.setEnd(new NetworkRouteSegment(lastIt, lastIt.start, minLastInd));
 			}
 		}
-		
+
 		it.addChain(toAdd);
 		add(endChains, NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY()), it);
 	}
@@ -541,8 +541,10 @@ public class NetworkRouteSelector {
 			if (!visitedTiles.add(tile)) {
 				continue;
 			}
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(NetworkRouteContext.getXFromLong(tile), NetworkRouteContext.getYFromLong(tile), rkey, 
-					new HashMap<RouteKey, List<NetworkRouteSegment>>());
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
+					NetworkRouteContext.getX31FromTileId(tile, 0) >> (31 - NetworkRouteContext.ZOOM_TO_LOAD_TILES),
+					NetworkRouteContext.getY31FromTileId(tile, 0) >> (31 - NetworkRouteContext.ZOOM_TO_LOAD_TILES),
+					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
