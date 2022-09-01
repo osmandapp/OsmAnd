@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -282,7 +281,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (requestCode == FOLDER_ACCESS_REQUEST) {
 			if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-				Log.e(TAG,"onActivityResult - data.getData(): " + data.getData());
 				updateSelectedFolderFiles(data.getData());
 			} else {
 				app.showShortToastMessage(R.string.folder_access_denied);
