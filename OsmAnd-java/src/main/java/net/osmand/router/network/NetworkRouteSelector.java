@@ -116,22 +116,23 @@ public class NetworkRouteSelector {
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
 		int x31L = MapUtils.get31TileNumberX(bBox.left);
 		int x31R = MapUtils.get31TileNumberX(bBox.right);
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
-		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
-		for (RouteKey key : res.keySet()) {
-			if (selected != null && !selected.equals(key)) {
+		Map<RouteKey, List<NetworkRouteSegment>> routeSegmentTile = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+		Map<RouteKey, GPXFile> gpxFileMap = new LinkedHashMap<>();
+		for (RouteKey routeKey : routeSegmentTile.keySet()) {
+			if (selected != null && !selected.equals(routeKey)) {
 				continue;
 			}
-			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0) {
+			List<NetworkRouteSegment> routeSegments = routeSegmentTile.get(routeKey);
+			if (routeSegments.size() > 0) {
 				if (!loadRoutes) {
-					r.put(key, null);
+					gpxFileMap.put(routeKey, null);
 				} else {
-					connectAlgorithm(list.get(0), r);
+					NetworkRouteSegment firstSegment = routeSegments.get(0);
+					connectAlgorithm(firstSegment, gpxFileMap);
 				}
 			}
 		}
-		return r;
+		return gpxFileMap;
 	}
 	
 	

@@ -71,7 +71,8 @@ public class NetworkRouteContext {
 		return (int) (l - ((l >> 32) << 32));
 	}
 
-	public Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
+	public Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x31L, int y31T, int x31R, int y31B,
+	                                                                     RouteKey routeKey)
 			throws IOException {
 		Map<RouteKey, List<NetworkRouteSegment>> map = new LinkedHashMap<>();
 		int left = x31L >> (31 - ZOOM_TO_LOAD_TILES);
@@ -83,10 +84,8 @@ public class NetworkRouteContext {
 				NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << (31 - ZOOM_TO_LOAD_TILES),
 						y << (31 - ZOOM_TO_LOAD_TILES));
 				for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
-					Iterator<NetworkRouteSegment> segments = pnt.objects.iterator();
-					while (segments.hasNext()) {
-						NetworkRouteSegment segment = segments.next();
-						if (rKey != null && !segment.routeKey.equals(rKey)) {
+					for (NetworkRouteSegment segment : pnt.objects) {
+						if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
 							continue;
 						}
 						List<NetworkRouteSegment> lst = map.get(segment.routeKey);
@@ -94,17 +93,20 @@ public class NetworkRouteContext {
 							lst = new ArrayList<>();
 							map.put(segment.routeKey, lst);
 						}
-						if (segment.start != 0) {
-							continue;
+						if (segment.start == 0 || !loadOnlyRouteWithKey(routeKey)) {
+							lst.add(segment);
 						}
-						lst.add(segment);
 					}
 				}
 			}
 		}
 		return map;
 	}
-	
+
+	boolean loadOnlyRouteWithKey(RouteKey rKey) {
+		return rKey != null;
+	}
+
 	public List<NetworkRouteSegment> loadNearRouteSegment(int x31, int y31, double radius) throws IOException {
 		List<NetworkRoutePoint> nearPoints = new ArrayList<>();
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x31, y31);
