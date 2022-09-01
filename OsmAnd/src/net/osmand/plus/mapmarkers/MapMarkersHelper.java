@@ -24,6 +24,7 @@ import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -269,7 +270,7 @@ public class MapMarkersHelper {
 	                         boolean visited,
 	                         @MapMarkersSortByDef int sortByMode,
 	                         @Nullable LatLon location) {
-		Collections.sort(markers, new Comparator<MapMarker>() {
+		AndroidUtils.sortCopyOnWriteList(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
 				if (sortByMode == BY_DATE_ADDED_DESC || sortByMode == BY_DATE_ADDED_ASC) {
@@ -478,7 +479,7 @@ public class MapMarkersHelper {
 
 	private void sortGroups() {
 		if (mapMarkersGroups.size() > 0) {
-			Collections.sort(mapMarkersGroups, (group1, group2) -> {
+			AndroidUtils.sortCopyOnWriteList(mapMarkersGroups, (group1, group2) -> {
 				long t1 = group1.getCreationDate();
 				long t2 = group2.getCreationDate();
 				return (t1 > t2) ? -1 : ((t1 == t2) ? 0 : 1);
@@ -771,7 +772,7 @@ public class MapMarkersHelper {
 
 	public void reverseActiveMarkersOrder() {
 		cancelAddressRequests();
-		Collections.reverse(mapMarkers);
+		AndroidUtils.reverseCopyOnWriteList(mapMarkers);
 		saveGroups(false);
 	}
 

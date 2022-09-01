@@ -18,6 +18,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -432,7 +433,7 @@ public class PoiFiltersHelper {
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			addTopPoiFilter(filter);
-			Collections.sort(cacheTopStandardFilters);
+			AndroidUtils.sortCopyOnWriteList(cacheTopStandardFilters);
 		}
 		helper.close();
 		return res;

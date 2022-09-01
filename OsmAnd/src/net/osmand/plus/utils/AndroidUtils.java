@@ -1178,6 +1178,32 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static <T> void reverseCopyOnWriteList(List<T> list) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			Collections.reverse(list);
+		} else {
+			List<T> copy = new ArrayList<>(list);
+			Collections.reverse(copy);
+			list.clear();
+			list.addAll(copy);
+		}
+	}
+
+	public static <T> void sortCopyOnWriteList(List<T> list) {
+		sortCopyOnWriteList(list, null);
+	}
+
+	public static <T> void sortCopyOnWriteList(List<T> list, Comparator<T> comparator) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			Collections.sort(list, comparator);
+		} else {
+			List<T> copy = new ArrayList<>(list);
+			Collections.sort(copy, comparator);
+			list.clear();
+			list.addAll(copy);
+		}
+	}
+
 	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {
 		openUrl(context, context.getString(urlStringId), nightMode);
 	}

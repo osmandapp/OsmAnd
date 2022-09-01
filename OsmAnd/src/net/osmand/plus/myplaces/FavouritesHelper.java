@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -602,7 +603,7 @@ public class FavouritesHelper {
 		for (FavoriteGroup g : favoriteGroups) {
 			Collections.sort(g.getPoints(), favoritesComparator);
 		}
-		Collections.sort(cachedFavoritePoints, favoritesComparator);
+		AndroidUtils.sortCopyOnWriteList(cachedFavoritePoints, favoritesComparator);
 	}
 
 	public static Comparator<FavouritePoint> getComparator() {
