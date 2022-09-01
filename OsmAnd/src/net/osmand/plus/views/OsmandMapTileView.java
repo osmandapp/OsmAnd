@@ -1213,8 +1213,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public float getMinAllowedElevationAngle() {
 		if (true) {
-		   // Test high elevation angle
-		   return 80;
+		   return 10;
 		}
 		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
 		if (verticalTilesCount < 8) {
