@@ -1,6 +1,8 @@
 package net.osmand.binary;
 
 
+import static net.osmand.router.network.NetworkRouteContext.ZOOM_TO_LOAD_TILES;
+
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -1565,6 +1567,12 @@ public class BinaryMapIndexReader {
 		request.poiTypeFilter = poiTypeFilter;
 		request.resultMatcher = matcher;
 		return request;
+	}
+
+	public static SearchRequest<RouteDataObject> buildSearchRouteRequest(int x15, int y15) {
+		int zmShift = 31 - ZOOM_TO_LOAD_TILES;
+		return buildSearchRouteRequest(x15 << zmShift, (x15 + 1) << zmShift,
+				y15 << zmShift, (y15 + 1) << zmShift, null);
 	}
 
 	public static SearchRequest<RouteDataObject> buildSearchRouteRequest(int sleft, int sright, int stop, int sbottom,
