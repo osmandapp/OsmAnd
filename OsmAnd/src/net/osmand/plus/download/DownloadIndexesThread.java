@@ -57,7 +57,7 @@ public class DownloadIndexesThread {
 
 	private DownloadEvents uiActivity;
 	private IndexItem currentDownloadingItem;
-	private int currentDownloadingItemProgress;
+	private float currentDownloadProgress;
 	private DownloadResources indexes;
 	private static final int THREAD_ID = 10103;
 
@@ -282,8 +282,8 @@ public class DownloadIndexesThread {
 		return currentDownloadingItem;
 	}
 
-	public int getCurrentDownloadingItemProgress() {
-		return currentDownloadingItemProgress;
+	public float getCurrentDownloadProgress() {
+		return currentDownloadProgress;
 	}
 
 	public BasicProgressAsyncTask<?, ?, ?, ?> getCurrentRunningTask() {
@@ -479,7 +479,7 @@ public class DownloadIndexesThread {
 					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
 						currentDownloadingItem = item;
-						currentDownloadingItemProgress = 0;
+						currentDownloadProgress = 0;
 						if (item == null || currentDownloads.contains(item)) {
 							continue;
 						}
@@ -516,7 +516,7 @@ public class DownloadIndexesThread {
 					}
 				} finally {
 					currentDownloadingItem = null;
-					currentDownloadingItemProgress = 0;
+					currentDownloadProgress = 0;
 				}
 				if (warnings.toString().trim().length() == 0) {
 					return null;
@@ -623,7 +623,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected void updateProgress(boolean updateOnlyProgress, IndexItem tag) {
-			currentDownloadingItemProgress = getProgressPercentage();
+			currentDownloadProgress = getDownloadProgress();
 			downloadInProgress();
 		}
 	}

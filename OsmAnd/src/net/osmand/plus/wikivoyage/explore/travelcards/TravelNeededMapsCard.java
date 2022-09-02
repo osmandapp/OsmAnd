@@ -154,7 +154,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 			ProgressBar progressBar = view.findViewById(R.id.progress_bar);
 			progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
 			if (currentDownloading) {
-				int progress = downloadThread.getCurrentDownloadingItemProgress();
+				int progress = (int) downloadThread.getCurrentDownloadProgress();
 				progressBar.setProgress(progress < 0 ? 0 : progress);
 			} else {
 				progressBar.setProgress(0);

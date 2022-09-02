@@ -115,7 +115,7 @@ public class WikipediaPoiMenu {
 		} else {
 			try {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
+				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
 				List<IndexItem> wikiIndexes = DownloadResources.findIndexItemsAt(
 						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
 						false, -1, true);

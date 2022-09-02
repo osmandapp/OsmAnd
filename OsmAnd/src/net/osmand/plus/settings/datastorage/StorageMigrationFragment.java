@@ -23,7 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -191,7 +191,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		progressBar.setProgress(progress);
 
 		int maxProgress = progressBar.getMax();
-		int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
+		int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 		progressTitle.setText(getString(R.string.progress_complete, percentage + "%"));
 	}
 

@@ -334,7 +334,6 @@ public class MapUtils {
 		return Zu * 180 / Math.PI;
 	}
 
-
 	public static double getTileDistanceWidth(float zoom) {
 		LatLon ll = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 0));
 		LatLon ll2 = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 1));

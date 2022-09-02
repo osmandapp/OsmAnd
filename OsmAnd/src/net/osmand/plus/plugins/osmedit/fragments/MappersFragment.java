@@ -150,7 +150,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				String userName = plugin.OSM_USER_DISPLAY_NAME.get();
-				String url = CONTRIBUTIONS_URL + userName + "/history";
+				String url = CONTRIBUTIONS_URL + Uri.encode(userName) + "/history";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(url));
 				AndroidUtils.startActivityIfSafe(activity, intent);

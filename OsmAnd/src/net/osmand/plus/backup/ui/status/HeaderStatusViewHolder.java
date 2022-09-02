@@ -13,13 +13,13 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
-import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.util.Algorithms;
@@ -50,7 +50,7 @@ public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 
 			int progress = exportTask.getGeneralProgress();
 			int maxProgress = (int) exportTask.getMaxProgress();
-			int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
+			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 
 			String uploading = app.getString(R.string.local_openstreetmap_uploading);
 			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, percentage + "%"));

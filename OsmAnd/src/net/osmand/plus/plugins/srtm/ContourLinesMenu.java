@@ -299,7 +299,7 @@ public class ContourLinesMenu {
 
 		if (srtmDownloadItem.isCurrentlyDownloading(downloadThread)) {
 			item.setLoading(true)
-					.setProgress(downloadThread.getCurrentDownloadingItemProgress())
+					.setProgress((int) downloadThread.getCurrentDownloadProgress())
 					.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 		} else {
 			item.setSecondaryIcon(R.drawable.ic_action_import);

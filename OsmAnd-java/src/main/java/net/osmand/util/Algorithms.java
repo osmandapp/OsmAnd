@@ -771,6 +771,13 @@ public class Algorithms {
 		return readFromInputStream(i, true);
 	}
 	
+	public static byte[] readBytesFromInputStream(InputStream i) throws IOException {
+		ByteArrayOutputStream bous = new ByteArrayOutputStream();
+		streamCopy(i, bous);
+		i.close();
+		return bous.toByteArray();
+	}
+	
 	public static StringBuilder readFromInputStream(InputStream i, boolean autoclose) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
