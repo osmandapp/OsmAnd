@@ -276,7 +276,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 				Matrix matrix = getMatrix();
 				matrix.reset();
-				float sy = useSpecialArrow ? newWidth / bitmap.getHeight() : 1;
+				float sy = useSpecialArrow ? 1 : newWidth / bitmap.getHeight();
 				matrix.postScale(newWidth / bitmap.getWidth(), sy);
 				matrix.postRotate((float) angle, paintW2, paintH2);
 				matrix.postTranslate(x - paintW2, y - paintH2);
