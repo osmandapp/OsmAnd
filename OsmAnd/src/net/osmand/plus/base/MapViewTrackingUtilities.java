@@ -295,7 +295,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public static boolean isSmallSpeedForAnimation(Location location) {
-		return !location.hasSpeed() || Float.isNaN(location.getSpeed()) || location.getSpeed() < 1.5;
+		return false;//!location.hasSpeed() || Float.isNaN(location.getSpeed()) || location.getSpeed() < 1.5;
 	}
 
 	public boolean isShowViewAngle() {
