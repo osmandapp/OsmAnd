@@ -23,8 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -635,7 +633,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		LatLon ll = menu.getLatLon();
 		if (hasMapRenderer()) {
-			view.setLatLon(ll.getLatitude(), ll.getLongitude(), false);
+			view.setLatLon(ll.getLatitude(), ll.getLongitude());
 		} else {
 			RotatedTileBox rb = new RotatedTileBox(tileBox);
 			rb.setCenterLocation(0.5f, 0.5f);

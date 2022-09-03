@@ -390,11 +390,12 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				public void method(IMapRenderer renderer) {
 					MapRendererView mapRenderer = getMapRenderer();
 					if (mapRenderer != null && useMapCenter()) {
-						RotatedTileBox tb = view.getRotatedTileBox().copy();
 						Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-						PointI target31 = NativeUtilities.normalizeTarget31(mapRenderer, tb);
+						PointI target31 = mapRenderer.getState().getTarget31();
 						Float heading = locationProvider.getHeading();
 						updateMarkerData(lastKnownLocation, target31, heading);
+						lastKnownLocationCached = lastKnownLocation;
+						lastHeadingCached = heading;
 					}
 				}
 			};
@@ -428,7 +429,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					stateUpdated = true;
 				}
 			}
-			if (!useMapCenter()) {
+			if (!useMapCenter() || markersRecreated || stateUpdated) {
 				Float heading = locationProvider.getHeading();
 				boolean dataChanged = !MapUtils.areLatLonEqual(lastKnownLocationCached, lastKnownLocation)
 						|| !Algorithms.objectEquals(lastHeadingCached, heading);

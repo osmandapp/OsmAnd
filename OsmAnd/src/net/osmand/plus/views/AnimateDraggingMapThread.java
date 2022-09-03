@@ -222,18 +222,18 @@ public class AnimateDraggingMapThread {
 				if (azimuthAnimation != null)
 				{
 					animator.cancelAnimation(azimuthAnimation);
-					animator.animateAzimuthTo(rotation, azimuthAnimation.getDuration()
+					animator.animateAzimuthTo(-rotation, azimuthAnimation.getDuration()
 							- azimuthAnimation.getTimePassed(), TimingFunction.Linear, locationServicesAnimationKey);
 				}
 				else
 				{
-					animator.animateAzimuthTo(rotation, ROTATION_ANIMATION_TIME / 1000f, TimingFunction.Linear,
+					animator.animateAzimuthTo(-rotation, ROTATION_ANIMATION_TIME / 1000f, TimingFunction.Linear,
 							locationServicesAnimationKey);
 				}
 			}
 
 			PointI start31 = mapRenderer.getState().getTarget31();
-			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, rb, finalLat, finalLon, false);
+			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			if (finish31.getX() != start31.getX() || finish31.getY() != start31.getY()) {
 				float duration = animationDuration / 1000f;
 				if (targetAnimation != null)
@@ -346,7 +346,7 @@ public class AnimateDraggingMapThread {
 			if (!stopped) {
 				if (mapRenderer != null) {
 					PointI start31 = mapRenderer.getState().getTarget31();
-					PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, rb, finalLat, finalLon, false);
+					PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 					animatingMoveInThread(start31.getX(), start31.getY(), finish31.getX(), finish31.getY(),
 							animationTime, notifyListener, finishAnimationCallback);
 				} else {
