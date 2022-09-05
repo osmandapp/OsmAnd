@@ -388,15 +388,19 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			onTargetChanged = new IMapRenderer.ITargetChanged() {
 				@Override
 				public void method(IMapRenderer renderer) {
-					MapRendererView mapRenderer = getMapRenderer();
-					if (mapRenderer != null && useMapCenter()) {
-						Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-						PointI target31 = mapRenderer.getState().getTarget31();
-						Float heading = locationProvider.getHeading();
-						updateMarkerData(lastKnownLocation, target31, heading);
-						lastKnownLocationCached = lastKnownLocation;
-						lastHeadingCached = heading;
-					}
+					getApplication().runInUIThread(() -> {
+						MapRendererView mapRenderer = getMapRenderer();
+						if (mapRenderer != null && useMapCenter()) {
+							Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
+							Location lastRouteProjection = getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
+							PointI target31 = mapRenderer.getState().getTarget31();
+							Float heading = locationProvider.getHeading();
+							updateMarkerData(lastRouteProjection != null
+									? lastRouteProjection : lastKnownLocation, target31, heading);
+							lastKnownLocationCached = lastKnownLocation;
+							lastHeadingCached = heading;
+						}
+					});
 				}
 			};
 			onTargetChanged.attachTo(targetChangedObservable, 1);
@@ -412,7 +416,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		if (view == null || tileBox.getZoom() < MIN_ZOOM || lastKnownLocation == null) {
 			return;
 		}
-		if (hasMapRenderer()) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
 			boolean markersRecreated = false;
 			if (markersInvalidated || mapMarkersCollection == null) {
 				markersRecreated = recreateMarkerCollection();
@@ -429,15 +434,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					stateUpdated = true;
 				}
 			}
-			if (!useMapCenter() || markersRecreated || stateUpdated) {
-				Float heading = locationProvider.getHeading();
-				boolean dataChanged = !MapUtils.areLatLonEqual(lastKnownLocationCached, lastKnownLocation)
-						|| !Algorithms.objectEquals(lastHeadingCached, heading);
-				if (markersRecreated || stateUpdated || dataChanged) {
-					updateMarkerData(lastKnownLocation, null, heading);
-					lastKnownLocationCached = lastKnownLocation;
-					lastHeadingCached = heading;
-				}
+			Float heading = locationProvider.getHeading();
+			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(lastKnownLocationCached, lastKnownLocation)
+					|| !Algorithms.objectEquals(lastHeadingCached, heading);
+			if (markersRecreated || stateUpdated || dataChanged) {
+				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getState().getTarget31() :null, heading);
+				lastKnownLocationCached = lastKnownLocation;
+				lastHeadingCached = heading;
 			}
 		} else {
 			drawMarkers(canvas, tileBox, lastKnownLocation);
