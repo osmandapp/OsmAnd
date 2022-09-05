@@ -30,6 +30,7 @@ import net.osmand.plus.backup.commands.DeleteFilesCommand;
 import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
 import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -474,27 +475,27 @@ public class BackupHelper {
 		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
 				new AbstractProgress() {
 
-					private int work;
-					private int progress;
-					private int deltaProgress;
+					private ProgressHelper progressHelper;
 
 					@Override
 					public void startWork(int work) {
+						progressHelper = new ProgressHelper(() -> {
+							if (listener != null) {
+								int progress = progressHelper.getLastKnownProgress();
+								int addedDeltaProgress = progressHelper.getLastAddedDeltaProgress();
+								listener.onFileUploadProgress(type, fileName, progress, addedDeltaProgress);
+							}
+						});
 						if (listener != null) {
-							this.work = work > 0 ? work : 1;
-							listener.onFileUploadStarted(type, fileName, work);
+							progressHelper.onStartWork(work);
+							listener.onFileUploadStarted(type, fileName, progressHelper.getTotalWork());
 						}
 					}
 
 					@Override
 					public void progress(int deltaWork) {
 						if (listener != null) {
-							deltaProgress += deltaWork;
-							if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-								progress += deltaProgress;
-								listener.onFileUploadProgress(type, fileName, progress, deltaProgress);
-								deltaProgress = 0;
-							}
+							progressHelper.onProgress(deltaWork);
 						}
 					}
 
@@ -652,29 +653,29 @@ public class BackupHelper {
 				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
-			IProgress progress = new AbstractProgress() {
+			IProgress iProgress = new AbstractProgress() {
 
-				private int work;
-				private int progress;
-				private int deltaProgress;
+				private ProgressHelper progressHelper;
 
 				@Override
 				public void startWork(int work) {
+					progressHelper = new ProgressHelper(() -> {
+						if (listener != null) {
+							int progress = progressHelper.getLastKnownProgress();
+							int deltaProgress = progressHelper.getLastAddedDeltaProgress();
+							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
+						}
+					});
 					if (listener != null) {
-						this.work = work > 0 ? work : 1;
-						listener.onFileDownloadStarted(type, fileName, work);
+						progressHelper.onStartWork(work);
+						listener.onFileDownloadStarted(type, fileName, progressHelper.getTotalWork());
 					}
 				}
 
 				@Override
 				public void progress(int deltaWork) {
 					if (listener != null) {
-						deltaProgress += deltaWork;
-						if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-							progress += deltaProgress;
-							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
-							deltaProgress = 0;
-						}
+						progressHelper.onProgress(deltaWork);
 					}
 				}
 
@@ -686,8 +687,8 @@ public class BackupHelper {
 					return super.isInterrupted();
 				}
 			};
-			progress.startWork(remoteFile.getFilesize() / 1024);
-			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, progress);
+			iProgress.startWork(remoteFile.getFilesize() / 1024);
+			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, iProgress);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}

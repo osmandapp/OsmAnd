@@ -1255,7 +1255,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				TextView progressTitle = view.findViewById(R.id.progressTitle);
 				progressTitle.setText(titleProgressController.caption);
 				progressBar.setIndeterminate(titleProgressController.indeterminate);
-				progressBar.setProgress(titleProgressController.progress);
+				progressBar.setProgress((int) titleProgressController.progress);
 				progressBar.setVisibility(titleProgressController.progressVisible ? View.VISIBLE : View.GONE);
 
 				ImageView progressButton = view.findViewById(R.id.progressButton);

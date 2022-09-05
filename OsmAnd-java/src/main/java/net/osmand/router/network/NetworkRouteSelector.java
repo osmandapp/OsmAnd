@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -116,7 +117,7 @@ public class NetworkRouteSelector {
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
 		int x31L = MapUtils.get31TileNumberX(bBox.left);
 		int x31R = MapUtils.get31TileNumberX(bBox.right);
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
+		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentsBbox(x31L, y31T, x31R, y31B, null);
 		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
 		for (RouteKey key : res.keySet()) {
 			if (selected != null && !selected.equals(key)) {
@@ -460,7 +461,7 @@ public class NetworkRouteSelector {
 				it.setEnd(new NetworkRouteSegment(lastIt, lastIt.start, minLastInd));
 			}
 		}
-		
+
 		it.addChain(toAdd);
 		add(endChains, NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY()), it);
 	}
@@ -540,11 +541,10 @@ public class NetworkRouteSelector {
 			if (!visitedTiles.add(tile)) {
 				continue;
 			}
-			int left = NetworkRouteContext.getX31FromTileId(tile, 0);
-			int top = NetworkRouteContext.getY31FromTileId(tile, 0);
-			int right = NetworkRouteContext.getX31FromTileId(tile, 1);
-			int bottom = NetworkRouteContext.getY31FromTileId(tile, 1);
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(left, top, right - 1, bottom - 1, rkey);
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
+					NetworkRouteContext.getX31FromTileId(tile, 0) >> (31 - NetworkRouteContext.ZOOM_TO_LOAD_TILES),
+					NetworkRouteContext.getY31FromTileId(tile, 0) >> (31 - NetworkRouteContext.ZOOM_TO_LOAD_TILES),
+					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
@@ -556,6 +556,10 @@ public class NetworkRouteSelector {
 					lst.add(s);
 				}
 			}
+			int left = NetworkRouteContext.getX31FromTileId(tile, 0);
+			int top = NetworkRouteContext.getY31FromTileId(tile, 0);
+			int right = NetworkRouteContext.getX31FromTileId(tile, 1);
+			int bottom = NetworkRouteContext.getY31FromTileId(tile, 1);
 			queue.add(NetworkRouteContext.getTileId(right, bottom));
 			queue.add(NetworkRouteContext.getTileId(right, top));
 			queue.add(NetworkRouteContext.getTileId(right, top - 1));

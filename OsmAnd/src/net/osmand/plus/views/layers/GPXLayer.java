@@ -1483,7 +1483,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
 				name = gpxFile.getArticleTitle();
 			} else {
-				name = formatName(Algorithms.getFileWithoutDirs(gpxFile.path));
+				name = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.path));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		} else if (o instanceof Pair) {
@@ -1498,14 +1498,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return null;
-	}
-
-	private String formatName(String name) {
-		int ext = name.lastIndexOf('.');
-		if (ext != -1) {
-			name = name.substring(0, ext);
-		}
-		return name.replace('_', ' ');
 	}
 
 	private void removeCachedUnselectedTracks(List<SelectedGpxFile> selectedGpxFiles) {
@@ -1665,7 +1657,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							wptPt.lat = latLon.getLatitude();
 							wptPt.lon = latLon.getLongitude();
 							String name = getObjectName(object).getName();
-							String fileName = name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT;
+							String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
 							File file = new File(FileUtils.getTempDir(app), fileName);
 							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeSegment);
 						}

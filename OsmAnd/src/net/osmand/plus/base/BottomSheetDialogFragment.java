@@ -113,6 +113,6 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	}
 
 	protected int getWindowAnimations(@NonNull Activity context) {
-		return R.style.Animations_PopUpMenu_Bottom;
+		return R.style.Animation_MaterialComponents_BottomSheetDialog;
 	}
 }

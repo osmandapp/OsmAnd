@@ -28,7 +28,7 @@ import net.osmand.util.MapUtils;
 
 public class NetworkRouteContext {
 	
-	private static final int ZOOM_TO_LOAD_TILES = 15;
+	public static final int ZOOM_TO_LOAD_TILES = 15;
 	
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
@@ -71,7 +71,7 @@ public class NetworkRouteContext {
 		return (int) (l - ((l >> 32) << 32));
 	}
 
-	public Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
+	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentsBbox(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
 			throws IOException {
 		Map<RouteKey, List<NetworkRouteSegment>> map = new LinkedHashMap<>();
 		int left = x31L >> (31 - ZOOM_TO_LOAD_TILES);
@@ -80,26 +80,32 @@ public class NetworkRouteContext {
 		int bottom = y31B >> (31 - ZOOM_TO_LOAD_TILES);
 		for (int x = left; x <= right; x++) {
 			for (int y = top; y <= bottom; y++) {
-				NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << (31 - ZOOM_TO_LOAD_TILES),
-						y << (31 - ZOOM_TO_LOAD_TILES));
-				for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
-					Iterator<NetworkRouteSegment> segments = pnt.objects.iterator();
-					while (segments.hasNext()) {
-						NetworkRouteSegment segment = segments.next();
-						if (rKey != null && !segment.routeKey.equals(rKey)) {
-							continue;
-						}
-						List<NetworkRouteSegment> lst = map.get(segment.routeKey);
-						if (lst == null) {
-							lst = new ArrayList<>();
-							map.put(segment.routeKey, lst);
-						}
-						if (segment.start != 0) {
-							continue;
-						}
-						lst.add(segment);
-					}
+				loadRouteSegmentTile(x, y, rKey, map);
+			}
+		}
+		return map;
+	}
+
+	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey rKey, Map<RouteKey, List<NetworkRouteSegment>> map)
+			throws IOException {
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << (31 - ZOOM_TO_LOAD_TILES),
+				y << (31 - ZOOM_TO_LOAD_TILES));
+		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
+			Iterator<NetworkRouteSegment> segments = pnt.objects.iterator();
+			while (segments.hasNext()) {
+				NetworkRouteSegment segment = segments.next();
+				if (rKey != null && !segment.routeKey.equals(rKey)) {
+					continue;
 				}
+				List<NetworkRouteSegment> lst = map.get(segment.routeKey);
+				if (lst == null) {
+					lst = new ArrayList<>();
+					map.put(segment.routeKey, lst);
+				}
+				if (segment.start != 0) {
+					continue;
+				}
+				lst.add(segment);
 			}
 		}
 		return map;

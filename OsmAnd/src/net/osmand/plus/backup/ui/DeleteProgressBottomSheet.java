@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
@@ -18,7 +19,6 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.commands.BaseDeleteFilesCommand;
-import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -118,7 +118,7 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 	private void updateProgress() {
 		if (isAdded() && progressBar != null && percentage != null) {
 			progressBar.setProgress(progress);
-			percentage.setText(BasicProgressAsyncTask.normalizeProgress(maxProgress != 0 ? progress * 100 / maxProgress : 0) + "%");
+			percentage.setText(ProgressHelper.normalizeProgressPercent(maxProgress != 0 ? progress * 100 / maxProgress : 0) + "%");
 		}
 	}
 

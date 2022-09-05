@@ -673,7 +673,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				titleProgressController.setMapDownloadMode();
 				if (downloadThread.getCurrentDownloadingItem() == indexItem) {
 					titleProgressController.indeterminate = false;
-					titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+					titleProgressController.progress = downloadThread.getCurrentDownloadProgress();
 				} else {
 					titleProgressController.indeterminate = true;
 					titleProgressController.progress = 0;
@@ -773,7 +773,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract static class TitleProgressController {
 		public String caption = "";
-		public int progress;
+		public float progress;
 		public boolean indeterminate;
 		public boolean visible;
 		public boolean progressVisible;
