@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -221,7 +220,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 						}
 						String changedTags = query.getString(6);
 						if (changedTags != null) {
-							entity.setChangedTags(new CopyOnWriteArraySet<>(Arrays.asList(changedTags.split("\\$\\$\\$"))));
+							entity.setChangedTags(new HashSet<>(Arrays.asList(changedTags.split("\\$\\$\\$"))));
 						}
 						p.setEntity(entity);
 						p.setAction(query.getString(3));

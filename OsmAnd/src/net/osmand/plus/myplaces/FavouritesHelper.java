@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -34,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class FavouritesHelper {
@@ -46,7 +46,7 @@ public class FavouritesHelper {
 
 	private final List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private final Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-	private final List<FavouritePoint> cachedFavoritePoints = new CopyOnWriteArrayList<>();
+	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
 
 	private final Set<FavoritesListener> listeners = new HashSet<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
@@ -79,7 +79,7 @@ public class FavouritesHelper {
 
 	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
-		return cachedFavoritePoints;
+		return new ArrayList<>(cachedFavoritePoints);
 	}
 
 	@Nullable
@@ -574,15 +574,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints.add(point);
+		cachedFavoritePoints = Algorithms.addToList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints.remove(point);
+		cachedFavoritePoints = Algorithms.removeFromList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		cachedFavoritePoints.removeAll(points);
+		cachedFavoritePoints = Algorithms.removeAllFromList(cachedFavoritePoints, points);
 	}
 
 	public void recalculateCachedFavPoints() {
@@ -590,8 +590,7 @@ public class FavouritesHelper {
 		for (FavoriteGroup f : favoriteGroups) {
 			allPoints.addAll(f.getPoints());
 		}
-		cachedFavoritePoints.clear();
-		cachedFavoritePoints.addAll(allPoints);
+		cachedFavoritePoints = new ArrayList<>(allPoints);
 	}
 
 	public void sortAll() {

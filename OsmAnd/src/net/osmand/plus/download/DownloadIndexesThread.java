@@ -35,13 +35,13 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
@@ -52,7 +52,7 @@ public class DownloadIndexesThread {
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
-	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
+	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
 	private DownloadEvents uiActivity;
