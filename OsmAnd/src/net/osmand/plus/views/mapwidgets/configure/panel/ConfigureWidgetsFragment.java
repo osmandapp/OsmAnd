@@ -34,7 +34,10 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -47,7 +50,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.BaseWidgetPurchaseFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment.AddWidgetListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
@@ -60,8 +62,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class ConfigureWidgetsFragment extends BaseWidgetPurchaseFragment implements WidgetsConfigurationChangeListener,
-		OnOffsetChangedListener, AddWidgetListener {
+public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
+		OnOffsetChangedListener, InAppPurchaseListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -357,9 +359,21 @@ public class ConfigureWidgetsFragment extends BaseWidgetPurchaseFragment impleme
 	}
 
 	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {}
+
+	@Override
+	public void onGetItems() {}
+
+	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		onWidgetsConfigurationChanged();
 	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();

@@ -12,13 +12,15 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.configure.BaseWidgetPurchaseFragment;
 
-public abstract class BaseWidgetFragment extends BaseWidgetPurchaseFragment {
+public abstract class BaseWidgetFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
 	protected OsmandApplication app;
 	protected ApplicationMode appMode;
@@ -60,6 +62,18 @@ public abstract class BaseWidgetFragment extends BaseWidgetPurchaseFragment {
 		Activity activity = getActivity();
 		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {}
+
+	@Override
+	public void onGetItems() {}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {}
 
 	protected abstract String getFragmentTag();
 
