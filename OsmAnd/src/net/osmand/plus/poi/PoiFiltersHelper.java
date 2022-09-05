@@ -258,10 +258,8 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				filters.add(f);
 			}
+			OsmandPlugin.registerCustomPoiFilters(filters);
 			cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
-			List<PoiUIFilter> customPoiFilters = new ArrayList<>();
-			OsmandPlugin.registerCustomPoiFilters(customPoiFilters);
-			cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, customPoiFilters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
 		for (PoiUIFilter filter : cacheTopStandardFilters) {
