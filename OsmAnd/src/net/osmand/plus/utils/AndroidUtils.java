@@ -23,8 +23,6 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
@@ -1176,32 +1174,6 @@ public class AndroidUtils {
 			return ctx.getString(in);
 		}
 		return null;
-	}
-
-	public static <T> void reverseCopyOnWriteList(List<T> list) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Collections.reverse(list);
-		} else {
-			List<T> copy = new ArrayList<>(list);
-			Collections.reverse(copy);
-			list.clear();
-			list.addAll(copy);
-		}
-	}
-
-	public static <T> void sortCopyOnWriteList(List<T> list) {
-		sortCopyOnWriteList(list, null);
-	}
-
-	public static <T> void sortCopyOnWriteList(List<T> list, Comparator<T> comparator) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			Collections.sort(list, comparator);
-		} else {
-			List<T> copy = new ArrayList<>(list);
-			Collections.sort(copy, comparator);
-			list.clear();
-			list.addAll(copy);
-		}
 	}
 
 	public static void openUrl(@NonNull Context context, int urlStringId, boolean nightMode) {

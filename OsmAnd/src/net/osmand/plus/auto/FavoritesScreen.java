@@ -108,7 +108,7 @@ public final class FavoritesScreen extends Screen {
 
 	@NonNull
 	private List<FavouritePoint> getFavorites() {
-		List<FavouritePoint> favouritePoints = new ArrayList<>(getApp().getFavoritesHelper().getFavouritePoints());
+		List<FavouritePoint> favouritePoints = getApp().getFavoritesHelper().getFavouritePoints();
 		Collections.sort(favouritePoints, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
 		return favouritePoints;
 	}

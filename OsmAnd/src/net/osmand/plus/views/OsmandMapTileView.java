@@ -67,6 +67,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.MapGestureType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -75,7 +76,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -153,7 +153,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
+	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -609,11 +609,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.add(listener);
+		locationListeners = Algorithms.addToList(locationListeners, listener);
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.remove(listener);
+		locationListeners = Algorithms.removeFromList(locationListeners, listener);
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {

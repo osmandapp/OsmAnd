@@ -1274,4 +1274,29 @@ public class Algorithms {
 		}
 		return copy;
 	}
+
+	public static <T> List<T> addToList(Collection<T> original, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.add(element);
+		return copy;
+	}
+
+	public static <T> List<T> addAllToList(Collection<T> original, Collection<T> elements) {
+		List<T> copy = new ArrayList<>(original);
+		copy.addAll(elements);
+		return copy;
+	}
+
+	public static <T> List<T> removeFromList(Collection<T> original, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.remove(element);
+		return copy;
+	}
+
+	public static <T> List<T> removeAllFromList(Collection<T> original, Collection<T> elements) {
+		List<T> copy = new ArrayList<>(original);
+		copy.removeAll(elements);
+		return copy;
+	}
+
 }
