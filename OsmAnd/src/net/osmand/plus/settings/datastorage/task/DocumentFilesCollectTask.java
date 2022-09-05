@@ -1,34 +1,35 @@
-package net.osmand.plus.settings.datastorage;
+package net.osmand.plus.settings.datastorage.task;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-class FilesCollectTask extends AsyncTask<Void, Void, String> {
-
-	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+public class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 
 	private final OsmandApplication app;
-	private final File folderFile;
-	private final List<File> documentFiles = new ArrayList<>();
-	private final FilesCollectListener listener;
+	private final DocumentFile folderFile;
+	private final List<DocumentFile> documentFiles = new ArrayList<>();
+	private final DocumentFilesCollectListener listener;
 	private final long[] filesSize = new long[1];
 	private final long[] estimatedSize = new long[1];
 
-	public FilesCollectTask(@NonNull OsmandApplication app, @NonNull File file, @Nullable FilesCollectListener listener) {
+	public DocumentFilesCollectTask(@NonNull OsmandApplication app, @NonNull Uri folderUri, @Nullable DocumentFilesCollectListener listener) {
 		this.app = app;
 		this.listener = listener;
-		folderFile = file;
+		folderFile = DocumentFile.fromTreeUri(app, folderUri);
 	}
 
 	@Override
@@ -40,8 +41,10 @@ class FilesCollectTask extends AsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		collectFiles(folderFile, documentFiles, filesSize, estimatedSize);
-
+		String folderName = IndexConstants.APP_DIR.replace("/", "");
+		if (folderName.equalsIgnoreCase(folderFile.getName())) {
+			collectFiles(folderFile, documentFiles, filesSize, estimatedSize);
+		}
 		if (Algorithms.isEmpty(documentFiles)) {
 			return app.getString(R.string.storage_migration_wrong_folder_warning);
 		}
@@ -56,16 +59,16 @@ class FilesCollectTask extends AsyncTask<Void, Void, String> {
 		}
 	}
 
-	private void collectFiles(@NonNull File documentFile,
-	                          @NonNull List<File> documentFiles,
+	private void collectFiles(@NonNull DocumentFile documentFile,
+	                          @NonNull List<DocumentFile> documentFiles,
 	                          long[] size,
 	                          long[] estimatedSize) {
 		if (isCancelled()) {
 			return;
 		}
 		if (documentFile.isDirectory()) {
-			File[] files = documentFile.listFiles();
-			for (File file : files) {
+			DocumentFile[] files = documentFile.listFiles();
+			for (DocumentFile file : files) {
 				if (isCancelled()) {
 					break;
 				}
@@ -74,15 +77,15 @@ class FilesCollectTask extends AsyncTask<Void, Void, String> {
 		} else {
 			long length = documentFile.length();
 			size[0] += length;
-			estimatedSize[0] += length + APPROXIMATE_FILE_SIZE_BYTES;
+			estimatedSize[0] += length + FileUtils.APPROXIMATE_FILE_SIZE_BYTES;
 			documentFiles.add(documentFile);
 		}
 	}
 
-	public interface FilesCollectListener {
+	public interface DocumentFilesCollectListener {
 
 		void onFilesCollectingStarted();
 
-		void onFilesCollectingFinished(@Nullable String error, @NonNull File folder, @NonNull List<File> files, @NonNull Pair<Long, Long> filesSize);
+		void onFilesCollectingFinished(@Nullable String error, @NonNull DocumentFile folder, @NonNull List<DocumentFile> files, @NonNull Pair<Long, Long> filesSize);
 	}
 }

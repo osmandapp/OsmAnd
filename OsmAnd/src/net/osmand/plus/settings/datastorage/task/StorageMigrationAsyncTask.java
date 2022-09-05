@@ -1,6 +1,4 @@
-package net.osmand.plus.settings.datastorage;
-
-import static net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.APPROXIMATE_FILE_SIZE_BYTES;
+package net.osmand.plus.settings.datastorage.task;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,8 +15,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
+import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
+import net.osmand.plus.settings.datastorage.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -33,13 +35,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair<String, Long>>> {
+public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair<String, Long>>> {
 
 	public static final Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
 
 	private final OsmandApplication app;
 	private final StorageItem selectedStorage;
-	private final StorageItem sharedStorage;
 	private final Pair<Long, Long> filesSize;
 	private final List<DocumentFile> documentFiles;
 	private final List<File> existingFiles = new ArrayList<>();
@@ -62,14 +63,16 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 		this.documentFiles = documentFiles;
 		this.selectedStorage = selectedStorage;
 
-		DataStorageHelper storageHelper = new DataStorageHelper(app);
-		sharedStorage = storageHelper.getStorage(DataStorageHelper.SHARED_STORAGE);
 	}
 
 	@Override
 	protected void onPreExecute() {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			StorageItem sharedStorage;
+			DataStorageHelper storageHelper = new DataStorageHelper(app);
+			sharedStorage = storageHelper.getCurrentStorage();
+
 			FragmentManager manager = activity.getSupportFragmentManager();
 			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, sharedStorage, filesSize,
 					generalProgress, documentFiles.size(), usedOnMap, null);
@@ -100,10 +103,10 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Pair
 					} else {
 						errors.put(fileName, new Pair<>(error, fileLength));
 					}
-					copyFilesListener.onFileCopyFinished(fileName, APPROXIMATE_FILE_SIZE_BYTES / 1024);
+					copyFilesListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				} else {
 					existingFiles.add(destFile);
-					int progress = (int) ((fileLength + APPROXIMATE_FILE_SIZE_BYTES) / 1024);
+					int progress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
 					copyFilesListener.onFileCopyFinished(fileName, progress);
 				}
 			}

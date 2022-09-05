@@ -1,6 +1,4 @@
-package net.osmand.plus.settings.datastorage;
-
-import static net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.APPROXIMATE_FILE_SIZE_BYTES;
+package net.osmand.plus.settings.datastorage.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,10 +14,16 @@ import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
-import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.CopyFilesListener;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
+import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
+import net.osmand.plus.settings.datastorage.StorageMigrationListener;
+import net.osmand.plus.settings.datastorage.StorageMigrationRestartListener;
+import net.osmand.plus.settings.datastorage.task.StorageMigrationAsyncTask.CopyFilesListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -45,8 +49,8 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	private StorageMigrationRestartListener restartListener;
 
 	private int copyProgress;
-	private Pair<Long, Long> filesSize;
-	private List<File> files;
+	private final Pair<Long, Long> filesSize;
+	private final List<File> files;
 	private final List<File> existingFiles = new ArrayList<>();
 
 	public MoveFilesTask(@NonNull OsmandActionBarActivity activity,
@@ -111,10 +115,10 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				if (error != null) {
 					errors.put(fileName, new Pair<>(error, fileLength));
 				}
-				copyFilesListener.onFileCopyFinished(fileName, APPROXIMATE_FILE_SIZE_BYTES / 1024);
+				copyFilesListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 			} else {
 				existingFiles.add(destFile);
-				int progress = (int) ((fileLength + APPROXIMATE_FILE_SIZE_BYTES) / 1024);
+				int progress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
 				copyFilesListener.onFileCopyFinished(fileName, progress);
 			}
 			file.delete();
@@ -181,31 +185,26 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	private CopyFilesListener getCopyFilesListener(long size) {
 		return new CopyFilesListener() {
 
-			private int deltaProgress;
+			private ProgressHelper progressHelper;
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
+				progressHelper = new ProgressHelper(() -> {
+					copyProgress += progressHelper.getLastAddedDeltaProgress();
+					publishProgress(copyProgress);
+				});
+				progressHelper.onStartWork((int) size);
 				publishProgress(fileName);
 			}
 
 			@Override
-			public void onFileCopyProgress(@NonNull String fileName, int progress, int deltaWork) {
-				deltaProgress += deltaWork;
-				if ((deltaProgress > (size / 100)) || (progress + deltaProgress >= size)) {
-					copyProgress += deltaProgress;
-					publishProgress(copyProgress);
-					deltaProgress = 0;
-				}
+			public void onFileCopyProgress(@NonNull String fileName, int p, int deltaWork) {
+				progressHelper.onProgress(deltaWork);
 			}
 
 			@Override
 			public void onFileCopyFinished(@NonNull String fileName, int deltaWork) {
-				deltaProgress += deltaWork;
-				if ((deltaProgress > (size / 100)) || deltaProgress >= size) {
-					copyProgress += deltaProgress;
-					publishProgress(copyProgress);
-					deltaProgress = 0;
-				}
+				progressHelper.onProgress(deltaWork);
 			}
 		};
 	}

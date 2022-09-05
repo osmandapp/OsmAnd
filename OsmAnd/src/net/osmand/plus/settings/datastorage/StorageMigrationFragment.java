@@ -62,7 +62,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
 
-	StorageMigrationRestartListener restartListener;
+	private StorageMigrationRestartListener restartListener;
 
 	private View mainView;
 	private View remainingFiles;
@@ -165,7 +165,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		actionButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (restartListener != null) {
-				restartListener.onRestart();
+				restartListener.onRestartSelected();
 			} else {
 				if (activity != null) {
 					RestartActivity.doRestartSilent(activity);
@@ -346,18 +346,3 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 }
 
-interface StorageMigrationListener {
-
-	void onFileCopyStarted(@NonNull String path);
-
-	void onFilesCopyProgress(int progress);
-
-	void onFilesCopyFinished(@NonNull Map<String, Pair<String, Long>> errors, @NonNull List<File> existingFiles);
-
-	void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair);
-
-}
-
-interface StorageMigrationRestartListener {
-	void onRestart();
-}
