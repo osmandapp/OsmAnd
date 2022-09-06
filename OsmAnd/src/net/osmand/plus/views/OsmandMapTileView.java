@@ -67,6 +67,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.MapGestureType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -75,7 +76,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -153,7 +153,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean showMapPosition = true;
 
-	private final List<IMapLocationListener> locationListeners = new CopyOnWriteArrayList<>();
+	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -546,22 +546,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setLatLon(double latitude, double longitude) {
-		setLatLon(latitude, longitude, true, false);
-	}
-
-	public void setLatLon(double latitude, double longitude, boolean useShiftedCenter) {
-		setLatLon(latitude, longitude, useShiftedCenter, false);
+		setLatLon(latitude, longitude, false);
 	}
 
 	public void setTarget31(int x31, int y31) {
 		setTarget31(x31, y31, false);
 	}
 
-	public void setLatLon(double latitude, double longitude, boolean useShiftedCenter, boolean notify) {
+	public void setLatLon(double latitude, double longitude, boolean notify) {
 		if (!animatedDraggingThread.isAnimatingMapTilt()) {
 			animatedDraggingThread.stopAnimating();
 		}
-		setLatLonImpl(latitude, longitude, useShiftedCenter);
+		setLatLonImpl(latitude, longitude);
 		refreshMap();
 		if (notify) {
 			notifyLocationListeners(getLatitude(), getLongitude());
@@ -609,11 +605,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.add(listener);
+		locationListeners = Algorithms.addToList(locationListeners, listener);
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners.remove(listener);
+		locationListeners = Algorithms.removeFromList(locationListeners, listener);
 	}
 
 	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
@@ -801,6 +797,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
+		}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			float xScale = ratiox * 2f;
+			float yScale = ratioy * 2f;
+			float currXScale = mapRenderer.getViewportXScale();
+			float currYScale = mapRenderer.getViewportYScale();
+			if (currXScale != xScale || currYScale != yScale) {
+				mapRenderer.setViewportXYScale(xScale, yScale);
+			}
 		}
 		if (view instanceof SurfaceView) {
 			SurfaceHolder holder = ((SurfaceView) view).getHolder();
@@ -1099,14 +1105,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	// for internal usage
 	private void setLatLonImpl(double latitude, double longitude) {
-		setLatLonImpl(latitude, longitude, true);
-	}
-
-	private void setLatLonImpl(double latitude, double longitude, boolean useShiftedCenter) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			RotatedTileBox tb = currentViewport.copy();
-			NativeUtilities.calculateTarget31(mapRenderer, tb, latitude, longitude, useShiftedCenter, true);
+			NativeUtilities.calculateTarget31(mapRenderer, latitude, longitude, true);
 		}
 		currentViewport.setLatLonCenter(latitude, longitude);
 	}
@@ -1208,10 +1209,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
-		return elevationAngle > 90 ? 90f : Math.max(getMinAllowedElevationAngle(), elevationAngle);
+		return Math.max(getMinAllowedElevationAngle(), elevationAngle);
 	}
 
 	public float getMinAllowedElevationAngle() {
+		if (true) {
+		   return 10;
+		}
 		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
 		if (verticalTilesCount < 8) {
 			return 33;

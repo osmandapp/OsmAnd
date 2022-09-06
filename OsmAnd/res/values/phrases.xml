@@ -178,6 +178,7 @@
 	<string name="poi_laundry_service_filter">Laundry service</string>
 	<string name="poi_dry_cleaning_filter">Dry cleaning</string>
 	<string name="poi_dog">Dogs</string>
+	<string name="poi_playground_type">Playground type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4878,5 +4879,39 @@
 	<string name="poi_dog_leashed">Dogs: leashed only</string>
 	<string name="poi_dog_unleashed">Dogs: don\'t need to be leashed</string>
 	<string name="poi_dog_designated">Designated for dogs</string>
+
+	<string name="poi_playground_structure">Structure</string>
+	<string name="poi_playground_slide">Slide</string>
+	<string name="poi_playground_climbingframe">Climbing frame</string>
+	<string name="poi_playground_climbingwall">Climbing wall</string>
+	<string name="poi_playground_balancebeam">Balance beam</string>
+	<string name="poi_playground_playhouse">Playhouse</string>
+	<string name="poi_playground_sandpit">Sandpit</string>
+	<string name="poi_playground_hopscotch">Hopscotch court</string>
+	<string name="poi_playground_teenshelter">Teenshelter</string>
+	<string name="poi_playground_sledding">Sledding</string>
+	<string name="poi_playground_youth_bench">Youth bench</string>
+	<string name="poi_playground_map">Map</string>
+	<string name="poi_playground_bridge">Bridge</string>
+	<string name="poi_playground_funnel_ball">Funnel ball</string>
+	<string name="poi_playground_tunnel_tube">Tunnel tube</string>
+	<string name="poi_playground_speaking_tube">Speaking tube</string>
+	<string name="poi_playground_ball_pool">Ball pool</string>
+	<string name="poi_playground_swing">Swing</string>
+	<string name="poi_playground_spinning_circle">Spinning circle</string>
+	<string name="poi_playground_basketswing">Basketswing</string>
+	<string name="poi_playground_basketrotator">Basket rotator</string>
+	<string name="poi_playground_aerialrotator">Aerial rotator</string>
+	<string name="poi_playground_seesaw">Seesaw</string>
+	<string name="poi_playground_springy">Springy</string>
+	<string name="poi_playground_trampoline">Trampoline</string>
+	<string name="poi_playground_roundabout">Roundabout</string>
+	<string name="poi_playground_cushion">Bouncy cushion</string>
+	<string name="poi_playground_zipwire">Zipwire</string>
+	<string name="poi_playground_water">Water</string>
+	<string name="poi_playground_splash_pad">Splash pad</string>
+	<string name="poi_playground_horizontal_bar">Horizontal bar</string>
+	<string name="poi_playground_activitypanel">Activity panel</string>
+	<string name="poi_playground_exercise">Outdoor gym</string>
 
 </resources>

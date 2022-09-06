@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
@@ -34,7 +33,7 @@ public class EditPoiData {
 	private PoiCategory category;
 	private PoiType currentPoiType;
 
-	private final Set<String> changedTags = new CopyOnWriteArraySet<>();
+	private final Set<String> changedTags = Collections.synchronizedSet(new HashSet<>());
 	
 	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);

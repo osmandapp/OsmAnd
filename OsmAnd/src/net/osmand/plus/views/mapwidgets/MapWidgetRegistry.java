@@ -59,7 +59,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapWidgetRegistry {
 
@@ -79,7 +78,7 @@ public class MapWidgetRegistry {
 
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
-	private final List<WidgetsRegistryListener> listeners = new CopyOnWriteArrayList<>();
+	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
@@ -176,11 +175,11 @@ public class MapWidgetRegistry {
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners.add(listener);
+		listeners = Algorithms.addToList(listeners, listener);
 	}
 
 	public void removeWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {

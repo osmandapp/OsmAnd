@@ -392,7 +392,7 @@ public class RoutingHelper {
 	}
 
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
-										RouteCalculationResult previousRoute, boolean targetPointsChanged) {
+	                                    RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
 		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
 				(targetPointsChanged || transportRoutingHelper.getStartLocation() == null)) {
@@ -495,64 +495,7 @@ public class RoutingHelper {
 		List<Location> routeNodes = route.getImmutableAllLocations();
 		int currentRoute = route.currentRoute;
 		// 1. Try to proceed to next point using orthogonal distance (finding minimum orthogonal dist)
-		while (currentRoute + 1 < routeNodes.size()) {
-			double dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
-			if (currentRoute > 0) {
-				dist = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1),
-						routeNodes.get(currentRoute));
-			}
-			boolean processed = false;
-			// if we are still too far try to proceed many points
-			// if not then look ahead only 3 in order to catch sharp turns
-			boolean longDistance = dist >= 250;
-			int newCurrentRoute = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(currentLocation, routeNodes, currentRoute, longDistance ? 15 : 8);
-			double newDist = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(newCurrentRoute),
-					routeNodes.get(newCurrentRoute + 1));
-			if (longDistance) {
-				if (newDist < dist) {
-					if (log.isDebugEnabled()) {
-						log.debug("Processed by distance : (new) " + newDist + " (old) " + dist); //$NON-NLS-1$//$NON-NLS-2$
-					}
-					processed = true;
-				}
-			} else if (newDist < dist || newDist < posTolerance / 8) {
-				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 till next turn)
-				if (dist > posTolerance) {
-					processed = true;
-					if (log.isDebugEnabled()) {
-						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
-					}
-				} else {
-					if (currentLocation.hasBearing() && !deviceHasBearing) {
-						deviceHasBearing = true; 
-					}
-					// lastFixedLocation.bearingTo -  gives artefacts during u-turn, so we avoid for devices with bearing
-					if (currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null)) {
-						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
-						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
-								.bearingTo(currentLocation);
-						double diff = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingToRoute));
-						double diffToNext = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingRouteNext));
-						if (diff > diffToNext) {
-							if (log.isDebugEnabled()) {
-								log.debug("Processed point bearing deltas : " + diff + " " + diffToNext);
-							}
-							processed = true;
-						}
-					}
-				}
-			}
-			if (processed) {
-				// that node already passed
-				route.updateCurrentRoute(newCurrentRoute + 1);
-				currentRoute = newCurrentRoute + 1;
-				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
-				fireRoutingDataUpdateEvent();
-			} else {
-				break;
-			}
-		}
+		currentRoute = calculateCurrentRoute(currentLocation, posTolerance, routeNodes, currentRoute, true);
 
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
@@ -663,7 +606,73 @@ public class RoutingHelper {
 		return false;
 	}
 
-	private static float getPosTolerance(float accuracy) {
+	public int calculateCurrentRoute(@NonNull Location currentLocation, double posTolerance,
+	                                 @NonNull List<Location> routeNodes, int currentRoute,
+	                                 boolean updateAndNotify) {
+		while (currentRoute + 1 < routeNodes.size()) {
+			double dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
+			if (currentRoute > 0) {
+				dist = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1),
+						routeNodes.get(currentRoute));
+			}
+			boolean processed = false;
+			// if we are still too far try to proceed many points
+			// if not then look ahead only 3 in order to catch sharp turns
+			boolean longDistance = dist >= 250;
+			int newCurrentRoute = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(currentLocation, routeNodes, currentRoute, longDistance ? 15 : 8);
+			double newDist = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(newCurrentRoute),
+					routeNodes.get(newCurrentRoute + 1));
+			if (longDistance) {
+				if (newDist < dist) {
+					if (log.isDebugEnabled()) {
+						log.debug("Processed by distance : (new) " + newDist + " (old) " + dist); //$NON-NLS-1$//$NON-NLS-2$
+					}
+					processed = true;
+				}
+			} else if (newDist < dist || newDist < posTolerance / 8) {
+				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 till next turn)
+				if (dist > posTolerance) {
+					processed = true;
+					if (log.isDebugEnabled()) {
+						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
+					}
+				} else {
+					if (currentLocation.hasBearing() && !deviceHasBearing) {
+						deviceHasBearing = true;
+					}
+					// lastFixedLocation.bearingTo -  gives artefacts during u-turn, so we avoid for devices with bearing
+					if (currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null)) {
+						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
+						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
+								.bearingTo(currentLocation);
+						double diff = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingToRoute));
+						double diffToNext = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingRouteNext));
+						if (diff > diffToNext) {
+							if (log.isDebugEnabled()) {
+								log.debug("Processed point bearing deltas : " + diff + " " + diffToNext);
+							}
+							processed = true;
+						}
+					}
+				}
+			}
+			if (processed) {
+				// that node already passed
+				currentRoute = newCurrentRoute + 1;
+				if (updateAndNotify) {
+					route.updateCurrentRoute(newCurrentRoute + 1);
+					app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
+					fireRoutingDataUpdateEvent();
+				}
+			} else {
+				break;
+			}
+		}
+		return currentRoute;
+	}
+
+	public static float getPosTolerance(float accuracy) {
 		if (accuracy > 0) {
 			return POS_TOLERANCE / 2 + accuracy;
 		}

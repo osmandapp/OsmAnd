@@ -145,6 +145,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		this.styleMap = styleMap == null ? Collections.emptyMap() : styleMap;
 		this.mapDensity = tb.getMapDensity();
 		this.zooms = new TreeMap<>();
+		//TODO: Clear cache
 	}
 
 	public void clearWay() {
@@ -204,6 +205,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			previousVisible = addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 					style, previousVisible, lastProjection, startLocationIndex);
 		}
+
+		//TODO: Use cached pathData if any
+
 		Location nextVisiblePoint = getNextVisiblePoint();
 		if (nextVisiblePoint != null) {
 			previousVisible = addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
@@ -518,6 +522,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				if (hasMapRenderer) {
 					List<DrawPathData31> pathsData = new ArrayList<>();
 					calculatePath(tx31, ty31, styles, pathsData);
+					//TODO: put pathData to cache
 					if (!Algorithms.isEmpty(pathsData)) {
 						drawPathLine(tb, pathsData);
 					}

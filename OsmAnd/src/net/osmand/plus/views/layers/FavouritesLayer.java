@@ -284,8 +284,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		int r = getScaledTouchRadius(view.getApplication(), tb.getDefaultRadiusPoi());
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		List<FavouritePoint> favouritePoints = new ArrayList<>(favouritesHelper.getFavouritePoints());
-		for (FavouritePoint n : favouritePoints) {
+		for (FavouritePoint n : favouritesHelper.getFavouritePoints()) {
 			getFavFromPoint(tb, res, r, ex, ey, n);
 		}
 	}

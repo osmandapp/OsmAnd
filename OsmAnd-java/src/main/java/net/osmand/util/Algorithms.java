@@ -771,6 +771,13 @@ public class Algorithms {
 		return readFromInputStream(i, true);
 	}
 	
+	public static byte[] readBytesFromInputStream(InputStream i) throws IOException {
+		ByteArrayOutputStream bous = new ByteArrayOutputStream();
+		streamCopy(i, bous);
+		i.close();
+		return bous.toByteArray();
+	}
+	
 	public static StringBuilder readFromInputStream(InputStream i, boolean autoclose) throws IOException {
 		StringBuilder responseBody = new StringBuilder();
 		responseBody.setLength(0);
@@ -1274,4 +1281,29 @@ public class Algorithms {
 		}
 		return copy;
 	}
+
+	public static <T> List<T> addToList(Collection<T> original, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.add(element);
+		return copy;
+	}
+
+	public static <T> List<T> addAllToList(Collection<T> original, Collection<T> elements) {
+		List<T> copy = new ArrayList<>(original);
+		copy.addAll(elements);
+		return copy;
+	}
+
+	public static <T> List<T> removeFromList(Collection<T> original, T element) {
+		List<T> copy = new ArrayList<>(original);
+		copy.remove(element);
+		return copy;
+	}
+
+	public static <T> List<T> removeAllFromList(Collection<T> original, Collection<T> elements) {
+		List<T> copy = new ArrayList<>(original);
+		copy.removeAll(elements);
+		return copy;
+	}
+
 }

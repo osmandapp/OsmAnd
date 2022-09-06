@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -591,11 +592,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private LatLon getCenterLatLon(@NonNull RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			PointI center31 = NativeUtilities.normalizeTarget31(getMapRenderer(), tb);
-			if (center31 == null) {
-				center31 = getMapRenderer().getState().getTarget31();
-			}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			PointI center31 = mapRenderer.getState().getTarget31();
 			return center31 != null ? point31ToLatLon(center31) : tb.getCenterLatLon();
 		} else {
 			return tb.getCenterLatLon();

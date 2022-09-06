@@ -2178,7 +2178,7 @@
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="shared_string_gpx_track">Verfolgen</string>
+    <string name="shared_string_gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">%1$d Punkt(e) löschen\?</string>
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>

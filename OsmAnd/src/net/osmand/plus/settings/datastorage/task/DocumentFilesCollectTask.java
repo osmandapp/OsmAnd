@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.datastorage;
+package net.osmand.plus.settings.datastorage.task;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,23 +11,22 @@ import androidx.documentfile.provider.DocumentFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
-
-	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+public class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 
 	private final OsmandApplication app;
 	private final DocumentFile folderFile;
 	private final List<DocumentFile> documentFiles = new ArrayList<>();
-	private final FilesCollectListener listener;
+	private final DocumentFilesCollectListener listener;
 	private final long[] filesSize = new long[1];
 	private final long[] estimatedSize = new long[1];
 
-	public DocumentFilesCollectTask(@NonNull OsmandApplication app, @NonNull Uri folderUri, @Nullable FilesCollectListener listener) {
+	public DocumentFilesCollectTask(@NonNull OsmandApplication app, @NonNull Uri folderUri, @Nullable DocumentFilesCollectListener listener) {
 		this.app = app;
 		this.listener = listener;
 		folderFile = DocumentFile.fromTreeUri(app, folderUri);
@@ -78,12 +77,12 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 		} else {
 			long length = documentFile.length();
 			size[0] += length;
-			estimatedSize[0] += length + APPROXIMATE_FILE_SIZE_BYTES;
+			estimatedSize[0] += length + FileUtils.APPROXIMATE_FILE_SIZE_BYTES;
 			documentFiles.add(documentFile);
 		}
 	}
 
-	public interface FilesCollectListener {
+	public interface DocumentFilesCollectListener {
 
 		void onFilesCollectingStarted();
 
