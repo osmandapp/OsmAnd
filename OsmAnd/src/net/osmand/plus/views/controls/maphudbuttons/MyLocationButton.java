@@ -34,7 +34,7 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(mapView.getMinAllowedElevationAngle());
+			animateDraggingMapThread.animateElevationAngleChange(45);
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
