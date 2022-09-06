@@ -539,13 +539,12 @@ public class NetworkRouteSelector {
 			if (!visitedTiles.add(tileID)) {
 				continue;
 			}
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile15(
-					NetworkRouteContext.getX15FromTileId(tileID),
-					NetworkRouteContext.getY15FromTileId(tileID),
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
+					NetworkRouteContext.getXFromTileId(tileID), NetworkRouteContext.getYFromTileId(tileID),
 					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
-//			System.out.println(String.format("Load tileID %d: %d segments", tileID, sz));
-			// stop exploring if no route key even intersects tileID (dont check loaded.size() == 0 special case)
+//			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
+			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
 			if (loaded == null) {
 				continue;
 			}
@@ -559,12 +558,12 @@ public class NetworkRouteSelector {
 	}
 
 	private void addEnclosedTiles(TLongArrayList queue, long tile) {
-		int x15 = NetworkRouteContext.getX15FromTileId(tile);
-		int y15 = NetworkRouteContext.getY15FromTileId(tile);
+		int x = NetworkRouteContext.getXFromTileId(tile);
+		int y = NetworkRouteContext.getYFromTileId(tile);
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dy = -1; dy <= 1; dy++) {
 				if (!(dy == 0 && dx == 0)) {
-					queue.add(NetworkRouteContext.getTileId15(x15 + dx, y15 + dy));
+					queue.add(NetworkRouteContext.getTileId(x + dx, y + dy, 0));
 				}
 			}
 		}

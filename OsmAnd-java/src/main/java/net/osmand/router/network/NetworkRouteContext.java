@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
@@ -73,22 +71,21 @@ public class NetworkRouteContext {
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentsBbox(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
 			throws IOException {
 		Map<RouteKey, List<NetworkRouteSegment>> map = new LinkedHashMap<>();
-		int x15L = x31L >> (31 - ZOOM_TO_LOAD_TILES);
-		int x15R = x31R >> (31 - ZOOM_TO_LOAD_TILES);
-		int y15T = y31T >> (31 - ZOOM_TO_LOAD_TILES);
-		int y15B = y31B >> (31 - ZOOM_TO_LOAD_TILES);
-		for (int x = x15L; x <= x15R; x++) {
-			for (int y = y15T; y <= y15B; y++) {
-				loadRouteSegmentTile15(x, y, rKey, map);
+		int left = x31L >> (31 - ZOOM_TO_LOAD_TILES);
+		int right = x31R >> (31 - ZOOM_TO_LOAD_TILES);
+		int top = y31T >> (31 - ZOOM_TO_LOAD_TILES);
+		int bottom = y31B >> (31 - ZOOM_TO_LOAD_TILES);
+		for (int x = left; x <= right; x++) {
+			for (int y = top; y <= bottom; y++) {
+				loadRouteSegmentTile(x, y, rKey, map);
 			}
 		}
 		return map;
 	}
 
-	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile15(int x15, int y15, RouteKey routeKey,
-	                                                                Map<RouteKey, List<NetworkRouteSegment>> map)
-			throws IOException {
-		NetworkRoutesTile osmcRoutesTile = getMapRouteTile15(x15, y15);
+	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey routeKey,
+	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES + 1, y << ZOOM_TO_LOAD_TILES + 1);
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
 				if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
@@ -149,15 +146,11 @@ public class NetworkRouteContext {
 	}
 
 	private NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
-		int zm = (31 - ZOOM_TO_LOAD_TILES);
-		return getMapRouteTile15(x31 >> zm, y31 >> zm);
-	}
-
-	private NetworkRoutesTile getMapRouteTile15(int x15, int y15) throws IOException {
-		long tileId = getTileId15(x15, y15);
+		long tileId = getTileId(x31, y31);
 		NetworkRoutesTile tile = indexedTiles.get(tileId);
 		if (tile == null) {
-			tile = loadTile(x15, y15, tileId);
+			int zm = (31 - ZOOM_TO_LOAD_TILES);
+			tile = loadTile(x31 >> zm, y31 >> zm, tileId);
 			indexedTiles.put(tileId, tile);
 		}
 		return tile;
@@ -167,20 +160,18 @@ public class NetworkRouteContext {
 		return routing;
 	}
 
-	private NetworkRoutesTile loadTile(int x15, int y15, long tileId) throws IOException {
+	private NetworkRoutesTile loadTile(int x, int y, long tileId) throws IOException {
 		stats.loadedTiles++;
+		int zm = ZOOM_TO_LOAD_TILES + 1;
 		if (routing) {
-			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(x15, y15);
+			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(
+					x << zm, (x + 1) << zm, y << zm, (y + 1) << zm, null);
 			req.log = false;
 			return loadRoutingDataTile(req, tileId);
 		} else {
-			int zm = (ZOOM_TO_LOAD_TILES + 1);
-			int tileLeft = x15 << zm;
-			int tileTop = y15 << zm;
-			int tileRight = (x15 + 1) << zm;
-			int tileBottom = (y15 + 1) << zm;
-			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(tileLeft, tileRight,
-					tileTop, tileBottom, ZOOM_TO_LOAD_TILES, new BinaryMapIndexReader.SearchFilter() {
+			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
+					x << zm, (x + 1) << zm, y << zm, (y + 1) << zm, ZOOM_TO_LOAD_TILES,
+					new BinaryMapIndexReader.SearchFilter() {
 						@Override
 						public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
 							return true;
@@ -241,22 +232,22 @@ public class NetworkRouteContext {
 		return osmcRoutesTile;
 	}
 
-	public static int getX15FromTileId(long tileId) {
+	public static int getXFromTileId(long tileId) {
 		return (int) (tileId >> (31 - ZOOM_TO_LOAD_TILES));
 	}
 
-	public static int getY15FromTileId(long tileId) {
+	public static int getYFromTileId(long tileId) {
 		long xShift = tileId >> (ZOOM_TO_LOAD_TILES + 1);
 		return (int) (tileId - (xShift << (ZOOM_TO_LOAD_TILES + 1)));
 	}
 
 	public static long getTileId(int x31, int y31) {
 		int zmShift = (31 - ZOOM_TO_LOAD_TILES);
-		return (((long) x31 >> zmShift) << (ZOOM_TO_LOAD_TILES + 1)) + (long) (y31 >> zmShift);
+		return getTileId(x31, y31, zmShift);
 	}
 
-	public static long getTileId15(int x15, int y15) {
-		return ((long) x15 << (ZOOM_TO_LOAD_TILES + 1)) + (long) y15;
+	public static long getTileId(int x, int y, int zmShift) {
+		return (((long) x >> zmShift) << (ZOOM_TO_LOAD_TILES + 1)) + (long) (y >> zmShift);
 	}
 
 	public NetworkRouteContextStats getStats() {
