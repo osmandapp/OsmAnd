@@ -18,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,7 +31,6 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.datastorage.StorageMigrationAsyncTask.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -61,6 +62,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	private OsmandApplication app;
 	private StorageItem selectedStorage;
+	private StorageItem currentStorage;
+
+	private StorageMigrationRestartListener restartListener;
 
 	private View mainView;
 	private View remainingFiles;
@@ -149,15 +153,13 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupToolbar() {
+		CollapsingToolbarLayout toolbarLayout = mainView.findViewById(R.id.toolbar_layout);
+		toolbarLayout.setTitle(copyFinished ? getString(R.string.copying_completed) : getString(R.string.copying_osmand_files));
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		toolbar.setTitle(copyFinished ? R.string.copying_completed : R.string.copying_osmand_files);
 		toolbar.setNavigationIcon(copyFinished ? null : getIcon(AndroidUtils.getNavigationIconResId(app)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
+			dismiss();
 		});
 	}
 
@@ -165,8 +167,12 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		View actionButton = mainView.findViewById(R.id.dismiss_button);
 		actionButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				RestartActivity.doRestartSilent(activity);
+			if (restartListener != null) {
+				restartListener.onRestartSelected();
+			} else {
+				if (activity != null) {
+					RestartActivity.doRestartSilent(activity);
+				}
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.PRIMARY, R.string.shared_string_restart);
@@ -212,7 +218,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 				for (Pair<String, Long> pair : errors.values()) {
 					size += pair.second;
 				}
-				spannable.append("\n").append(getString(R.string.files_failed, errors.size(), size));
+				spannable.append("\n").append(getString(R.string.files_failed, errors.size(), AndroidUtils.formatSize(app, size)));
 			}
 			if (!Algorithms.isEmpty(existingFiles)) {
 				long size = 0;
@@ -230,12 +236,12 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupFilesDescr() {
-		String sharedStorage = "\"" + getString(R.string.shared_storage) + "\"";
-		String currentStorage = "\"" + selectedStorage.getTitle() + "\"";
-		String description = getString(R.string.from_to_with_params, sharedStorage, currentStorage);
+		String currentStorageName = "\"" + currentStorage.getTitle() + "\"";
+		String selectedStorageName = "\"" + selectedStorage.getTitle() + "\"";
+		String description = getString(R.string.from_to_with_params, currentStorageName, selectedStorageName);
 
 		TextView summary = copyFilesDescr.findViewById(android.R.id.summary);
-		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), description, sharedStorage, currentStorage));
+		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), description, currentStorageName, selectedStorageName));
 	}
 
 	private void setupRestartDescr() {
@@ -313,7 +319,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		this.existingFiles = existingFiles;
 		generalProgress = (int) (filesSize.second / 1024);
 		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
-
 		if (isAdded()) {
 			updateContent();
 		}
@@ -321,10 +326,12 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	public static StorageMigrationListener showInstance(@NonNull FragmentManager fragmentManager,
 	                                                    @NonNull StorageItem selectedStorage,
+	                                                    @NonNull StorageItem currentStorage,
 	                                                    @NonNull Pair<Long, Long> filesSize,
 	                                                    int generalProgress,
 	                                                    int filesCount,
-	                                                    boolean usedOnMap) {
+	                                                    boolean usedOnMap,
+	                                                    @Nullable StorageMigrationRestartListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			StorageMigrationFragment fragment = new StorageMigrationFragment();
 			fragment.usedOnMap = usedOnMap;
@@ -332,10 +339,13 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			fragment.filesCount = filesCount;
 			fragment.selectedStorage = selectedStorage;
 			fragment.generalProgress = generalProgress;
+			fragment.currentStorage = currentStorage;
 			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
+			fragment.restartListener = listener;
 			return fragment;
 		}
 		return null;
 	}
 }
+
