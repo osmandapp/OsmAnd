@@ -44,7 +44,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private void acquireOriginObject() {
 		originObject = collectUpdatedPointInfo(fav.getExtensions(), fav.getAmenityOriginName(),
-				fav.getTransportStopOriginName(), fav.getLatitude(), fav.getLongitude());
+				fav.getLatitude(), fav.getLongitude());
 	}
 
 	public Object getOriginObject() {
@@ -79,10 +79,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			Map<String, String> additionalInfo = null;
 			if (originObject instanceof Map) {
 				additionalInfo = (Map<String, String>)originObject;
-			} else if (originObject instanceof TransportStop) {
-				Amenity amenity = ((TransportStop) originObject).getAmenity();
-				additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
-						GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
 			}
 			AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
 			helper.setLight(light);

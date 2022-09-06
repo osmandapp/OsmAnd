@@ -14,7 +14,6 @@ import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -48,7 +47,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private void acquireOriginObject() {
 		originObject = collectUpdatedPointInfo(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(),
-				wpt.getTransportStopOriginName(), wpt.getLatitude(), wpt.getLongitude());
+				wpt.getLatitude(), wpt.getLongitude());
 	}
 
 	public Object getOriginObject() {
@@ -128,11 +127,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		Map<String, String> additionalInfo = null;
 		if (originObject instanceof Map) {
-			additionalInfo = (Map<String, String>)originObject;
-		} else if (originObject instanceof TransportStop) {
-			Amenity amenity = ((TransportStop) originObject).getAmenity();
-			additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX,
-					GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
+			additionalInfo = (Map<String, String>) originObject;
 		}
 		AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
 		helper.setLight(light);

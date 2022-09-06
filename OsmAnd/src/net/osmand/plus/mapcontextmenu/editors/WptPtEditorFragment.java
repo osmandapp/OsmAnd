@@ -212,7 +212,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-
 	private void doAddWpt(String name, String category, String description, Map<String, String> extensions) {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
@@ -234,12 +233,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				if (gpx.showCurrentTrack) {
 					this.wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(),
 							System.currentTimeMillis(), description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
-					this.wpt.getExtensionsToWrite().putAll(wpt.getExtensionsToRead());
+					this.wpt.getExtensionsToWrite().putAll(extensions);
 					if (!editor.isGpxSelected()) {
 						gpxSelectionHelper.setGpxFileToDisplay(gpx);
 					}
 				} else {
-					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), wpt.getExtensionsToRead());
+					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), extensions);
 					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
@@ -253,7 +252,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (wpt != null) {
 			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(),
 					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType,
-					wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), extensions);
+					wpt.getAmenityOriginName(), extensions);
 			gpx.addPoint(wpt);
 		}
 	}

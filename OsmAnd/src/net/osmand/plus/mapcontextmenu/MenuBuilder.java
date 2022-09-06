@@ -56,7 +56,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -353,7 +352,7 @@ public class MenuBuilder {
 		return true;
 	}
 
-	protected void buildPluginRows(@NonNull View view,@Nullable Object object) {
+	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
 			plugin.buildContextMenuRows(this, view, object);
 		}
@@ -1490,15 +1489,11 @@ public class MenuBuilder {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 
-	protected Object collectUpdatedPointInfo(Map<String, String> gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
-		if (Algorithms.isEmpty(transportStopOriginName)) {
-			return findUpdatedAmenityExtensions(gpxExtensions, amenityOriginName, lat, lon);
-		} else {
-			return findUpdatedTransportStop(gpxExtensions, amenityOriginName, transportStopOriginName, lat, lon);
-		}
+	protected Object collectUpdatedPointInfo(Map<String, String> gpxExtensions, String amenityOriginName, double lat, double lon) {
+		return findUpdatedAmenityExtensions(gpxExtensions, amenityOriginName, lat, lon);
 	}
 
-	private Map<String, String> findUpdatedAmenityExtensions(Map<String, String>  gpxExtensions, String amenityOriginName, double lat, double lon) {
+	private Map<String, String> findUpdatedAmenityExtensions(Map<String, String> gpxExtensions, String amenityOriginName, double lat, double lon) {
 		Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
 		Map<String, String> mapExtensions = null;
 		if (mapAmenity != null) {
@@ -1538,32 +1533,6 @@ public class MenuBuilder {
 			}
 		}
 		return null;
-	}
-
-	public TransportStop findUpdatedTransportStop(Map<String, String>  gpxExtensions, String amenityOriginName, String transportStopOriginName, double lat, double lon) {
-		TransportStop stop = null;
-		if (!Algorithms.isEmpty(transportStopOriginName)) {
-			Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
-			if (mapAmenity != null) {
-				stop = TransportStopController.findBestTransportStopForAmenity(mapActivity.getMyApplication(), mapAmenity);
-
-				// Join data from gpx file and from map object. Priority to map object
-				if (stop != null && !Algorithms.isEmpty(gpxExtensions) ) {
-					Amenity updatingAmenity = stop.getAmenity();
-					for (Map.Entry e : gpxExtensions.entrySet()) {
-						String key = e.getKey().toString();
-						if (AmenityUIHelper.HIDDEN_EXTENSIONS.contains(key)) {
-							continue;
-						}
-						key = key.replace(GPXUtilities.OSM_PREFIX, "");
-						if (!updatingAmenity.getAdditionalInfoKeys().contains(key)) {
-							updatingAmenity.setAdditionalInfo(key, (String) e.getValue());
-						}
-					}
-				}
-			}
-		}
-		return stop;
 	}
 
 	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {

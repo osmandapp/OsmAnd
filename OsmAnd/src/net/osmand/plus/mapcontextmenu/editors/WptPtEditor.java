@@ -122,11 +122,11 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
-		add(gpxFile, latLon, title, null, null, null, null);
+		add(gpxFile, latLon, title, null, null, null);
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable String preselectedIconName,
-					@Nullable String amenityOriginName, @Nullable String transportStopOriginName, Amenity amenity) {
+					@Nullable String amenityOriginName, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -147,9 +147,6 @@ public class WptPtEditor extends PointEditor {
 		}
 		if (!Algorithms.isEmpty(amenityOriginName)) {
 			wpt.setAmenityOriginName(amenityOriginName);
-		}
-		if (!Algorithms.isEmpty(transportStopOriginName)) {
-			wpt.setTransportStopOriginName(transportStopOriginName);
 		}
 		if (amenity != null){
 			wpt.setAmenity(amenity, mapActivity.getMyApplication().getPoiTypes());

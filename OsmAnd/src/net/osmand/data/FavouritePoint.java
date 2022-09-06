@@ -42,7 +42,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	protected String address = "";
 	protected int iconId;
 	private String amenityOriginName = null;
-	private String transportStopOriginName = null;
 	private String comment = "";
 	private double latitude;
 	private double longitude;
@@ -91,7 +90,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = point.description;
 		this.visible = point.visible;
 		this.amenityOriginName = point.amenityOriginName;
-		this.transportStopOriginName = point.transportStopOriginName;
 		this.address = point.address;
 		this.iconId = point.iconId;
 		this.backgroundType = point.backgroundType;
@@ -223,14 +221,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setAmenityOriginName(String amenityOriginName) {
 		this.amenityOriginName = amenityOriginName;
-	}
-
-	public String getTransportStopOriginName() {
-		return transportStopOriginName;
-	}
-
-	public void setTransportStopOriginName(String transportStopOriginName) {
-		this.transportStopOriginName = transportStopOriginName;
 	}
 
 	public int getOverlayIconId(Context ctx) {
@@ -397,12 +387,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		} else if (!amenityOriginName.equals(fp.amenityOriginName))
 			return false;
 
-		if (transportStopOriginName == null) {
-			if (fp.transportStopOriginName != null)
-				return false;
-		} else if (!transportStopOriginName.equals(fp.transportStopOriginName))
-			return false;
-
 		return (this.latitude == fp.latitude)
 				&& (this.longitude == fp.longitude)
 				&& (this.altitude == fp.altitude)
@@ -425,7 +409,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
-		result = prime * result + ((transportStopOriginName == null) ? 0 : transportStopOriginName.hashCode());
 		return result;
 	}
 
@@ -446,9 +429,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.setComment(wptPt.comment);
 		if (wptPt.getAmenityOriginName() != null) {
 			point.setAmenityOriginName(wptPt.getAmenityOriginName());
-		}
-		if (wptPt.getTransportStopOriginName() != null) {
-			point.setTransportStopOriginName(wptPt.getTransportStopOriginName());
 		}
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
@@ -518,9 +498,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			point.category = getCategory();
 		if (!Algorithms.isEmpty(getAmenityOriginName())) {
 			point.setAmenityOriginName(getAmenityOriginName());
-		}
-		if (!Algorithms.isEmpty(getTransportStopOriginName())) {
-			point.setTransportStopOriginName(getTransportStopOriginName());
 		}
 		return point;
 	}

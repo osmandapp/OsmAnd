@@ -1016,7 +1016,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					}
 
 					String amenityOriginName = null;
-					String transportStopOriginName = null;
 					int preselectedIconId = 0;
 					double altitude = Double.NaN;
 					long timestamp = System.currentTimeMillis();
@@ -1034,7 +1033,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 							TransportStop stop = ((TransportStop) object);
 							amenity = stop.getAmenity();
 							amenityOriginName = amenity.toStringEn();
-							transportStopOriginName = stop.toStringEn();
 						}
 						if (object instanceof WptPt) {
 							altitude = ((WptPt) object).ele;
@@ -1043,7 +1041,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
 						favoritePointEditor.add(getLatLon(), title, getStreetStr(), amenityOriginName,
-								transportStopOriginName, preselectedIconId, altitude, timestamp, amenity);
+								 preselectedIconId, altitude, timestamp, amenity);
 					}
 				}
 			});
@@ -1166,7 +1164,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 			String preselectedIconName = null;
 			String amenityOriginName = null;
-			String transportStopOriginName = null;
 			Object object = getObject();
 			Amenity amenity = null;
 			if (object instanceof Amenity && pointDescription.isPoi()) {
@@ -1174,11 +1171,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				int preselectedIconId = getPreselectedIconId(((Amenity) object));
 				preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
 				amenityOriginName = amenity.toStringEn();
-			}  else if (object instanceof TransportStop) {
-				TransportStop stop = ((TransportStop) object);
-				amenity = stop.getAmenity();
-				amenityOriginName = amenity.toStringEn();
-				transportStopOriginName = stop.toStringEn();
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
@@ -1189,10 +1181,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenityOriginName, transportStopOriginName, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenityOriginName, amenity);
 				}
 			} else {
-				addNewWptToGPXFile(title, preselectedIconName, amenityOriginName, transportStopOriginName, amenity);
+				addNewWptToGPXFile(title, preselectedIconName, amenityOriginName, amenity);
 			}
 		}
 	}
@@ -1264,7 +1256,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(String title, String preselectedIconName, String amenityOoriginName, String transportStopOriginName, Amenity amenity) {
+	public void addNewWptToGPXFile(String title, String preselectedIconName, String amenityOoriginName, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1280,7 +1272,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						}
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenityOoriginName, transportStopOriginName, amenity);
+							wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenityOoriginName, amenity);
 						}
 					}
 					return true;

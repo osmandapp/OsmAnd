@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 
 import java.io.File;
@@ -79,7 +80,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 				app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(fileName);
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 				if (selectedGpxFile != null) {
-					callbackWithObject.processResult(new GPXUtilities.GPXFile[]{selectedGpxFile.getGpxFile()});
+					callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
 				} else {
 					File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 					Activity activity = getActivity();

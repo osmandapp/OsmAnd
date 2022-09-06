@@ -10,7 +10,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,21 +25,18 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 	private MapMarker mapMarker;
 	private AudioVideoNoteMenuController audioVideoNoteController;
-	private TransportStopController transportStopController;
 
 	public WptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull MapActivity mapActivity,
 	                           @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
@@ -106,11 +102,6 @@ public class WptPtMenuController extends MenuController {
 				}
 			}
 		}
-
-		TransportStop transportStop = builder.findUpdatedTransportStop(wpt.getExtensionsToRead(), wpt.getAmenityOriginName(), wpt.getTransportStopOriginName(), wpt.lat, wpt.lon);
-		if (transportStop != null) {
-			transportStopController = new TransportStopController(mapActivity, pointDescription, transportStop);
-		}
 	}
 
 	@Override
@@ -135,22 +126,6 @@ public class WptPtMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return wpt;
-	}
-
-	@Override
-	public List<TransportStopRoute> getTransportStopRoutes() {
-		if (transportStopController != null) {
-			return transportStopController.getTransportStopRoutes();
-		}
-		return null;
-	}
-
-	@Override
-	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
-		if (transportStopController != null) {
-			return transportStopController.getSubTransportStopRoutes(nearby);
-		}
-		return null;
 	}
 
 	@Override

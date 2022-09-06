@@ -29,9 +29,9 @@ import java.util.Map;
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
+
 	private final Amenity amenity;
 	private AmenityUIHelper helper;
-
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);

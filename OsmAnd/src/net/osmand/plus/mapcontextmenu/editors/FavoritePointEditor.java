@@ -45,7 +45,7 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String address, String amenityOriginName, String transportStopOriginName,
+	public void add(LatLon latLon, String title, String address, String amenityOriginName,
 					int preselectedIconId, double altitude, long timestamp, Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
@@ -63,13 +63,12 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
 		favorite.setAmenityOriginName(amenityOriginName);
-		favorite.setTransportStopOriginName(transportStopOriginName);
 		favorite.setIconId(preselectedIconId);
 
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 
-	public void add(LatLon latLon, String title, String amenityOriginName, String transportStopOriginName,
+	public void add(LatLon latLon, String title, String amenityOriginName,
 					String categoryName, int categoryColor, boolean autoFill) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
@@ -90,7 +89,6 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setAddress("");
 		favorite.setAmenityOriginName(amenityOriginName);
-		favorite.setTransportStopOriginName(transportStopOriginName);
 		FavoritePointEditorFragment.showAutoFillInstance(mapActivity, autoFill);
 	}
 

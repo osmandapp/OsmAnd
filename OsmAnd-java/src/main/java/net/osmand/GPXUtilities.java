@@ -51,7 +51,7 @@ import java.util.TimeZone;
 
 public class GPXUtilities {
 
-	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
+	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
 
 	public static final String ICON_NAME_EXTENSION = "icon";
 	public static final String BACKGROUND_TYPE_EXTENSION = "background";
@@ -59,11 +59,10 @@ public class GPXUtilities {
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
 	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
-	public static final String TRANSPORT_STOP_ORIGIN_EXTENSION = "transport_stop_origin";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
 	public static final List<String> EXTENSIONS_WITH_OSMAND_PREFIX = Arrays.asList(COLOR_NAME_EXTENSION,
-			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,  PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
-			AMENITY_ORIGIN_EXTENSION, TRANSPORT_STOP_ORIGIN_EXTENSION);
+			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
+			AMENITY_ORIGIN_EXTENSION);
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
@@ -79,9 +78,9 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
-	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
@@ -358,18 +357,6 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(AMENITY_ORIGIN_EXTENSION, originName);
 		}
 
-		public String getTransportStopOriginName() {
-			Map<String, String> extensionsToRead = getExtensionsToRead();
-			if (!extensionsToRead.isEmpty()) {
-				return extensionsToRead.get(TRANSPORT_STOP_ORIGIN_EXTENSION);
-			}
-			return null;
-		}
-
-		public void setTransportStopOriginName(String originName) {
-			getExtensionsToWrite().put(TRANSPORT_STOP_ORIGIN_EXTENSION, originName);
-		}
-
 		public int getColor(ColorizationType type) {
 			if (type == ColorizationType.SPEED) {
 				return speedColor;
@@ -480,12 +467,12 @@ public class GPXUtilities {
 		}
 
 		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
-										String name, String category, int color,
-										String iconName, String backgroundType,
-										String originObject, String transportStopObjectName, Map<String, String> extensions) {
+		                                        String name, String category, int color,
+		                                        String iconName, String backgroundType,
+		                                        String originObject, Map<String, String> extensions) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
 			point.name = name;
 			point.category = category;
 			point.desc = description;
@@ -504,9 +491,6 @@ public class GPXUtilities {
 			}
 			if (originObject != null) {
 				point.setAmenityOriginName(originObject);
-			}
-			if (transportStopObjectName != null) {
-				point.setTransportStopOriginName(transportStopObjectName);
 			}
 			return point;
 		}
@@ -2431,9 +2415,9 @@ public class GPXUtilities {
 				for (Entry<String, String> s : extensions.entrySet()) {
 					String key = s.getKey();
 					if (EXTENSIONS_WITH_OSMAND_PREFIX.contains(key) ||
-						key.startsWith(PRIVATE_PREFIX) ||
-						key.startsWith(OSM_PREFIX)) {
-						key= "osmand:" + key;
+							key.startsWith(PRIVATE_PREFIX) ||
+							key.startsWith(OSM_PREFIX)) {
+						key = "osmand:" + key;
 					}
 					writeNotNullText(serializer, key, s.getValue());
 				}
@@ -2462,6 +2446,7 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
+
 		if (!Algorithms.isEmpty(p.comment)) {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}

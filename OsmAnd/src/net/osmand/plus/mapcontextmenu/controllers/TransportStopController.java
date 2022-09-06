@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -16,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
+import net.osmand.plus.mapcontextmenu.builders.TransportStopMenuBuilder;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.util.Algorithms;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
@@ -44,10 +42,7 @@ public class TransportStopController extends MenuController {
 	public TransportStopController(@NonNull MapActivity mapActivity,
 								   @NonNull PointDescription pointDescription,
 								   @NonNull TransportStop transportStop) {
-		super(new AmenityUIHelper(mapActivity, "en", transportStop.getAmenity()
-				.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX,
-						mapActivity.getMyApplication().getPoiTypes())), pointDescription, mapActivity);
-		((AmenityUIHelper)builder).setPreferredLang(getPreferredMapAppLang());
+		super(new TransportStopMenuBuilder(mapActivity, transportStop), pointDescription, mapActivity);
 		this.transportStop = transportStop;
 		processRoutes();
 	}
