@@ -18,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -151,8 +153,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupToolbar() {
+		CollapsingToolbarLayout toolbarLayout = mainView.findViewById(R.id.toolbar_layout);
+		toolbarLayout.setTitle(copyFinished ? getString(R.string.copying_completed) : getString(R.string.copying_osmand_files));
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		toolbar.setTitle(copyFinished ? R.string.copying_completed : R.string.copying_osmand_files);
 		toolbar.setNavigationIcon(copyFinished ? null : getIcon(AndroidUtils.getNavigationIconResId(app)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
