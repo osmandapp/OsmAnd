@@ -68,9 +68,10 @@ public class NativeCoreContext {
 					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
 				}
 
+                app.getRendererRegistry().clearLoadedRenderers();
                 mapRendererContext = new MapRendererContext(app, dm.density);
-				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);
                 app.getRendererRegistry().addRendererLoadedEventListener(mapRendererContext);
+				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);
 				init = true;
 			}
 		}

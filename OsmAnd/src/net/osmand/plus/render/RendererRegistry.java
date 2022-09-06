@@ -367,6 +367,10 @@ public class RendererRegistry {
 		this.currentSelectedRender = currentSelectedRender;
 	}
 
+	public void clearLoadedRenderers() {
+		loadedRenderers.clear();
+	}
+
 	public void addRendererLoadedEventListener(IRendererLoadedEventListener listener) {
 		rendererLoadedListeners.add(listener);
 	}
