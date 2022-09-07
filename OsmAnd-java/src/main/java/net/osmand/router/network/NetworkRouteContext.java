@@ -27,8 +27,8 @@ import net.osmand.util.MapUtils;
 public class NetworkRouteContext {
 	
 	public static final int ZOOM_TO_LOAD_TILES = 15;
-	public static final int SHIFT_L = ZOOM_TO_LOAD_TILES + 1;
-	public static final int SHIFT_R = 31 - ZOOM_TO_LOAD_TILES;
+	public static final int ZOOM_TO_LOAD_TILES_SHIFT_L = ZOOM_TO_LOAD_TILES + 1;
+	public static final int ZOOM_TO_LOAD_TILES_SHIFT_R = 31 - ZOOM_TO_LOAD_TILES;
 
 	private final TLongObjectHashMap<NetworkRoutesTile> indexedTiles = new TLongObjectHashMap<>();
 	private final NetworkRouteSelectorFilter filter;
@@ -73,10 +73,10 @@ public class NetworkRouteContext {
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentsBbox(int x31L, int y31T, int x31R, int y31B, RouteKey rKey)
 			throws IOException {
 		Map<RouteKey, List<NetworkRouteSegment>> map = new LinkedHashMap<>();
-		int left = x31L >> SHIFT_R;
-		int right = x31R >> SHIFT_R;
-		int top = y31T >> SHIFT_R;
-		int bottom = y31B >> SHIFT_R;
+		int left = x31L >> ZOOM_TO_LOAD_TILES_SHIFT_R;
+		int right = x31R >> ZOOM_TO_LOAD_TILES_SHIFT_R;
+		int top = y31T >> ZOOM_TO_LOAD_TILES_SHIFT_R;
+		int bottom = y31B >> ZOOM_TO_LOAD_TILES_SHIFT_R;
 		for (int x = left; x <= right; x++) {
 			for (int y = top; y <= bottom; y++) {
 				loadRouteSegmentTile(x, y, rKey, map);
@@ -87,7 +87,7 @@ public class NetworkRouteContext {
 
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey routeKey,
 	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
-		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << SHIFT_L, y << SHIFT_L);
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
 				if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
@@ -151,7 +151,7 @@ public class NetworkRouteContext {
 		long tileId = getTileId(x31, y31);
 		NetworkRoutesTile tile = indexedTiles.get(tileId);
 		if (tile == null) {
-			tile = loadTile(x31 >> SHIFT_R, y31 >> SHIFT_R, tileId);
+			tile = loadTile(x31 >> ZOOM_TO_LOAD_TILES_SHIFT_R, y31 >> ZOOM_TO_LOAD_TILES_SHIFT_R, tileId);
 			indexedTiles.put(tileId, tile);
 		}
 		return tile;
@@ -165,12 +165,14 @@ public class NetworkRouteContext {
 		stats.loadedTiles++;
 		if (routing) {
 			SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(
-					x << SHIFT_L, (x + 1) << SHIFT_L, y << SHIFT_L, (y + 1) << SHIFT_L, null);
+					x << ZOOM_TO_LOAD_TILES_SHIFT_L, (x + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L,
+					y << ZOOM_TO_LOAD_TILES_SHIFT_L, (y + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L, null);
 			req.log = false;
 			return loadRoutingDataTile(req, tileId);
 		} else {
 			SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
-					x << SHIFT_L, (x + 1) << SHIFT_L, y << SHIFT_L, (y + 1) << SHIFT_L, ZOOM_TO_LOAD_TILES,
+					x << ZOOM_TO_LOAD_TILES_SHIFT_L, (x + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L,
+					y << ZOOM_TO_LOAD_TILES_SHIFT_L, (y + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L, ZOOM_TO_LOAD_TILES,
 					new BinaryMapIndexReader.SearchFilter() {
 						@Override
 						public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
@@ -233,20 +235,20 @@ public class NetworkRouteContext {
 	}
 
 	public static int getXFromTileId(long tileId) {
-		return (int) (tileId >> SHIFT_R);
+		return (int) (tileId >> ZOOM_TO_LOAD_TILES_SHIFT_R);
 	}
 
 	public static int getYFromTileId(long tileId) {
-		long xShifted = tileId >> SHIFT_R;
-		return (int) (tileId - (xShifted << SHIFT_L));
+		long xShifted = tileId >> ZOOM_TO_LOAD_TILES_SHIFT_R;
+		return (int) (tileId - (xShifted << ZOOM_TO_LOAD_TILES_SHIFT_L));
 	}
 
 	public static long getTileId(int x31, int y31) {
-		return getTileId(x31, y31, SHIFT_R);
+		return getTileId(x31, y31, ZOOM_TO_LOAD_TILES_SHIFT_R);
 	}
 
 	public static long getTileId(int x, int y, int shiftR) {
-		return (((long) x >> shiftR) << SHIFT_L) + (long) (y >> shiftR);
+		return (((long) x >> shiftR) << ZOOM_TO_LOAD_TILES_SHIFT_L) + (long) (y >> shiftR);
 	}
 
 	public NetworkRouteContextStats getStats() {
