@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
+    <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
+    <string name="tap_on_widget">Tap on widget</string>
+    <string name="go_to_marker_location">Go to marker location</string>
+    <string name="shared_string_switch_mode">Switch mode</string>
+    <string name="click_on_widget">Click on widget</string>
+    <string name="shared_string_shows">Shows</string>
     <string name="shared_string_large">Large</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">How to use:</string>
@@ -173,7 +180,6 @@
     <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Widget provides quick access to start/stop taking a recording (audio, video or photo).</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
-    <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
     <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="navigation_points">Navigation points</string>
     <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>

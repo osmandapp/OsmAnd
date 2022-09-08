@@ -4645,7 +4645,6 @@
     <string name="lanes_widgets_desc">Bane-modulet viser det aktuelle vejbanelayout og fremhæver de baner, der skal køres i med aktiv navigation.</string>
     <string name="street_name_widget_desc">Gadenavn-modulet viser det aktuelle gadenavn med en lige placeringspil eller det næste gadenavn med den manøvre, der skal udføres.</string>
     <string name="shared_string_widget">Modul</string>
-    <string name="map_markers_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, at der vises 1 eller 2 topmarkører i modulet.</string>
     <string name="bearing_desc">Pejlingsmodulet viser den absolutte eller relative pejling til et mål i vinkelenheder (grader 180, grader 360, milliradianer).</string>
     <string name="navigation_points_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="get_altitude_information">Få højdeoplysninger</string>

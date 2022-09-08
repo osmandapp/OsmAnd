@@ -4650,7 +4650,6 @@
     <string name="map_widget_trip_recording_distance">Distância</string>
     <string name="time_to_go_desc">Tempo em minutos ou horas necessárias para chegar ao seu destino.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="map_markers_desc">No widget da barra superior, você pode ver a distância e a direção do marcador do local atual. É possível configurar ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="route_maneuvers">Manobras de rota</string>
     <string name="calculating_altitude">Calculando a altitude</string>
     <string name="calculate_online_altitude_descr">Calcule a altitude online nos servidores do OsmAnd com base em imagens de satélite e modelos digitais de elevação. Pode variar de acordo com a altitude registrada pelo dispositivo e pode ser usado como correção de altitude.</string>

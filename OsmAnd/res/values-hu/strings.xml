@@ -4634,7 +4634,6 @@
     <string name="lanes_widgets_desc">A sáv-widget megjeleníti az aktuális közlekedési sávok elrendezését, és kiemeli azokat, amelyeken az aktív navigáció szerint haladni kell.</string>
     <string name="map_markers_bar_widget_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
     <string name="bearing_desc">Az irányszög-widget a cél abszolút vagy relatív irányát mutatja szögegységben (180° fok, 360° fok vagy milliradián).</string>
-    <string name="map_markers_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
     <string name="navigation_points_desc">A navigációs widgetek a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, az aktuális utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
     <string name="track_attach_to_the_roads_descr">A nyomvonal offline térképekkel lesz csatolva az úthoz, ezért a nyomvonal geometriája módosulni fog.</string>
     <string name="street_name_widget_desc">Az utcanév widget az aktuális utcanevet mutatja egyenes helyzetjelző nyíllal vagy a következő utcanevet az elvégzendő manőverrel.</string>
