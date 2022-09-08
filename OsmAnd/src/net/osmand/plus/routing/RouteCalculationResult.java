@@ -949,14 +949,14 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateDirectionsTime(List<RouteDirectionInfo> directions, int[] listDistance) {
-		int sum = 0;
+		int sumExpectedTime = 0;
 		for (int i = directions.size() - 1; i >= 0; i--) {
-			directions.get(i).afterLeftTime = sum;
 			directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
 			if (i < directions.size() - 1) {
 				directions.get(i).distance -= listDistance[directions.get(i + 1).routePointOffset];
 			}
-			sum += directions.get(i).getExpectedTime();
+			sumExpectedTime += directions.get(i).getExpectedTime();
+			directions.get(i).afterLeftTime = sumExpectedTime;
 		}
 	}
 
@@ -1387,9 +1387,7 @@ public class RouteCalculationResult {
 		if (currentDirectionInfo < directions.size()) {
 			RouteDirectionInfo current = directions.get(currentDirectionInfo);
 			int distanceToNextTurn = getListDistance(currentRoute);
-			if (currentDirectionInfo + 1 < directions.size()) {
-				distanceToNextTurn -= getListDistance(directions.get(currentDirectionInfo + 1).routePointOffset);
-			}
+			distanceToNextTurn -= getListDistance(current.routePointOffset);
 			Location l = locations.get(currentRoute);
 			if (fromLoc != null) {
 				distanceToNextTurn += fromLoc.distanceTo(l);
