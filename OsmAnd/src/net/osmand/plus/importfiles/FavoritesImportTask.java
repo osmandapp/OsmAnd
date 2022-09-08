@@ -1,6 +1,5 @@
 package net.osmand.plus.importfiles;
 
-import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 
@@ -10,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
@@ -18,32 +18,34 @@ import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private final GPXFile gpxFile;
 	private final String fileName;
-	private final boolean forceImportFavourites;
+	private final boolean forceImport;
 
 	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile,
-	                           @NonNull String fileName, boolean forceImportFavourites) {
+	                           @NonNull String fileName, boolean forceImport) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
-		this.forceImportFavourites = forceImportFavourites;
+		this.forceImport = forceImport;
 	}
 
 	@Override
 	protected GPXFile doInBackground(Void... nothing) {
-		mergeFavorites(app, gpxFile, fileName, forceImportFavourites);
+		mergeFavorites();
 		return null;
 	}
 
-	public static void mergeFavorites(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                  @NonNull String fileName, boolean forceImportFavourites) {
-		List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, forceImportFavourites);
+	private void mergeFavorites() {
+		String defCategory = forceImport ? fileName : "";
+		List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPoints(), defCategory);
 		checkDuplicateNames(favourites);
 
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
@@ -61,22 +63,24 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 		favoritesHelper.saveCurrentPointsIntoFile();
 	}
 
-	public static void checkDuplicateNames(List<FavouritePoint> favourites) {
-		for (FavouritePoint fp : favourites) {
+	private void checkDuplicateNames(@NonNull List<FavouritePoint> favourites) {
+		for (FavouritePoint point : favourites) {
 			int number = 1;
 			String index;
-			String name = fp.getName();
+			String name = point.getName();
 			boolean duplicatesFound = false;
-			for (FavouritePoint fp2 : favourites) {
-				if (name.equals(fp2.getName()) && fp.getCategory().equals(fp2.getCategory()) && !fp.equals(fp2)) {
+			for (FavouritePoint favouritePoint : favourites) {
+				if (name.equals(favouritePoint.getName())
+						&& point.getCategory().equals(favouritePoint.getCategory())
+						&& !point.equals(favouritePoint)) {
 					if (!duplicatesFound) {
 						index = " (" + number + ")";
-						fp.setName(name + index);
+						point.setName(name + index);
 					}
 					duplicatesFound = true;
 					number++;
 					index = " (" + number + ")";
-					fp2.setName(fp2.getName() + index);
+					favouritePoint.setName(favouritePoint.getName() + index);
 				}
 			}
 		}
@@ -93,5 +97,19 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 			newIntent.putExtra(TAB_ID, FAV_TAB);
 			activity.startActivity(newIntent);
 		}
+	}
+
+	public static List<FavouritePoint> wptAsFavourites(@NonNull OsmandApplication app,
+	                                                   @NonNull List<WptPt> points,
+	                                                   @NonNull String defaultCategory) {
+		List<FavouritePoint> favourites = new ArrayList<>();
+		for (WptPt point : points) {
+			if (Algorithms.isEmpty(point.name)) {
+				point.name = app.getString(R.string.shared_string_waypoint);
+			}
+			String category = point.category != null ? point.category : defaultCategory;
+			favourites.add(FavouritePoint.fromWpt(point, category));
+		}
+		return favourites;
 	}
 }

@@ -50,7 +50,7 @@ import java.util.TimeZone;
 
 public class GPXUtilities {
 
-	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
+	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
 
 	private static final String ICON_NAME_EXTENSION = "icon";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
@@ -70,9 +70,9 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
-	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
@@ -459,7 +459,7 @@ public class GPXUtilities {
 		                                        String iconName, String backgroundType, Amenity amenity) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			final WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
 			point.name = name;
 			point.category = category;
 			point.desc = description;
@@ -2424,9 +2424,8 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
-		if (p.comment != null) {
-			writeNotNullText(serializer, "cmt", p.comment);
-		}
+		writeNotNullText(serializer, "cmt", p.comment);
+
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}

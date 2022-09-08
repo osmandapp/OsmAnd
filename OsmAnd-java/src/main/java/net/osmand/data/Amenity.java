@@ -92,7 +92,6 @@ public class Amenity extends MapObject {
 	}
 
 	public String getOpeningHours() {
-//		 getAdditionalInfo("opening_hours");
 		return openingHours;
 	}
 
