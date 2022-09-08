@@ -93,13 +93,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (wpt.time > 0) {
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-			Date date = new Date(wpt.time);
-			buildRow(view, R.drawable.ic_action_data,
-					null, dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, null, false, 0, false, null, false);
-		}
+		buildDateRow(view, wpt.time);
 		if (wpt.speed > 0) {
 			buildRow(view, R.drawable.ic_action_speed,
 					null, OsmAndFormatter.getFormattedSpeed((float) wpt.speed, app), 0, false, null, false, 0, false, null, false);
@@ -117,13 +111,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (!Algorithms.isEmpty(wpt.desc)) {
 			prepareDescription(wpt, view);
 		}
-
-		if (!Algorithms.isEmpty(wpt.comment)) {
-			View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
-					false, null, true, 10, false, null, false);
-			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
-					app, wpt.comment, rowc.getResources().getString(R.string.poi_dialog_comment)));
-		}
+		buildCommentRow(view, wpt.comment);
 
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);

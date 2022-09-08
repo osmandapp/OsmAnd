@@ -351,7 +351,7 @@ public class MenuBuilder {
 		return true;
 	}
 
-	protected void buildPluginRows(@NonNull View view,@Nullable Object object) {
+	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
 			plugin.buildContextMenuRows(this, view, object);
 		}
@@ -1006,12 +1006,23 @@ public class MenuBuilder {
 		container.addView(button);
 	}
 
-	protected void buildDateRow(View view, long timestamp) {
-		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-		DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-		Date date = new Date(timestamp);
-		buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
-				0, false, null, false, 0, false, null, false);
+	protected void buildDateRow(@NonNull View view, long timestamp) {
+		if (timestamp > 0) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+			Date date = new Date(timestamp);
+			buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
+					0, false, null, false, 0, false, null, false);
+		}
+	}
+
+	protected void buildCommentRow(@NonNull View view, @Nullable String comment) {
+		if (!Algorithms.isEmpty(comment)) {
+			View row = buildRow(view, R.drawable.ic_action_note_dark, null, comment, 0,
+					false, null, true, 10, false, null, false);
+			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(row.getContext(),
+					app, comment, row.getResources().getString(R.string.poi_dialog_comment)));
+		}
 	}
 
 	public boolean hasCustomAddressLine() {
