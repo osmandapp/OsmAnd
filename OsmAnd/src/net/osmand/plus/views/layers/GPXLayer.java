@@ -1648,7 +1648,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					return true;
 				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 					QuadRect rect = (QuadRect) pair.second;
-					RouteKey routeSegment = (RouteKey) pair.first;
+					RouteKey routeKey = (RouteKey) pair.first;
 					LatLon latLon = getObjectLocation(object);
 					CallbackWithObject<GPXFile> callback = gpxFile -> {
 						networkRouteSelectionTask = null;
@@ -1659,7 +1659,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							String name = getObjectName(object).getName();
 							String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
 							File file = new File(FileUtils.getTempDir(app), fileName);
-							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeSegment);
+							GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, null, routeKey);
 						}
 						return true;
 					};
@@ -1667,7 +1667,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						networkRouteSelectionTask.cancel(false);
 					}
 					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
-							mapActivity, routeSegment, rect, callback);
+							mapActivity, routeKey, rect, callback);
 					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					networkRouteSelectionTask = selectionTask;
 					return true;

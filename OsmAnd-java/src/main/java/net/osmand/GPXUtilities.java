@@ -2446,10 +2446,8 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		writeNotNullTextWithAttribute(serializer, "link", "href", p.link);
 		writeNotNullText(serializer, "type", p.category);
+		writeNotNullText(serializer, "cmt", p.comment);
 
-		if (!Algorithms.isEmpty(p.comment)) {
-			writeNotNullText(serializer, "cmt", p.comment);
-		}
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}

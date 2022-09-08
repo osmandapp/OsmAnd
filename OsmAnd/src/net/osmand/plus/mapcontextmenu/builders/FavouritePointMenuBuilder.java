@@ -25,19 +25,21 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 import java.util.Map;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
+	private static final Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
 
-	private final FavouritePoint fav;
+	private final FavouritePoint point;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint point) {
 		super(mapActivity);
-		this.fav = fav;
+		this.point = point;
 		setShowNearestWiki(true);
 		acquireOriginObject();
 	}
@@ -66,15 +68,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (fav != null && fav.getTimestamp() != 0) {
-			buildDateRow(view, fav.getTimestamp());
-		}
-		if (!Algorithms.isEmpty(fav.getComment())) {
-			View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, fav.getComment(), 0,
-					false, null, true, 10, false, null, false);
-			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
-					app, fav.getComment(), rowc.getResources().getString(R.string.poi_dialog_comment)));
-		}
+		buildDateRow(view, point.getTimestamp());
+		buildCommentRow(view, point.getComment());
+
 		if (originObject != null) {
 			Map<String, String> additionalInfo = null;
 			if (originObject instanceof Map) {
@@ -89,7 +85,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildDescription(View view) {
-		String desc = fav.getDescription();
+		String desc = point.getDescription();
 		if (!Algorithms.isEmpty(desc)) {
 			buildDescriptionRow(view, desc);
 		}
@@ -100,15 +96,15 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
-	private void buildGroupFavouritesView(View view) {
-		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
+	private void buildGroupFavouritesView(@NonNull View view) {
+		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(point);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
-					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
+					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, point),
 					false, 0, false, null, false);
 		}
 	}
