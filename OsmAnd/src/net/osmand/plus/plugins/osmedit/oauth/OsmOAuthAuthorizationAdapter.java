@@ -154,8 +154,10 @@ public class OsmOAuthAuthorizationAdapter {
         protected Void doInBackground(String... oauthVerifier) {
             if (client.getRequestToken() != null) {
                 client.authorize(oauthVerifier[0]);
-                saveToken();
-                updateUserName();
+                if (isValidToken()) {
+                    saveToken();
+                    updateUserName();
+                }
             }
             return null;
         }
