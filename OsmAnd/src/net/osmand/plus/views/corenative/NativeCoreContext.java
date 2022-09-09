@@ -70,7 +70,6 @@ public class NativeCoreContext {
 
                 mapRendererContext = new MapRendererContext(app, dm.density);
 				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);
-                app.getRendererRegistry().addRendererLoadedEventListener(mapRendererContext);
 				init = true;
 			}
 		}
