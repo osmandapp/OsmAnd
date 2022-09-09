@@ -844,7 +844,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 		} else {
 			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
-			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
 		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
