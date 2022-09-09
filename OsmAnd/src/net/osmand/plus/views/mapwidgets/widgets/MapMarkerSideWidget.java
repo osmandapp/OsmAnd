@@ -59,17 +59,9 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		setOnClickListener(v -> {
 			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
 				changeWidgetState();
-			} else {
+			} else if(markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
 				showMarkerOnMap();
 			}
-		});
-		view.setOnLongClickListener(v -> {
-			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
-				showMarkerOnMap();
-			} else {
-				changeWidgetState();
-			}
-			return true;
 		});
 	}
 
