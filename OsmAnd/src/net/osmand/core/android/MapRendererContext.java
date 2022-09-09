@@ -177,8 +177,8 @@ public class MapRendererContext {
 		if (mapStylesCollection.getStyleByName(rendName) == null && renderer != null) {
 			try {
 				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-				if (renderer.getDepends() != null) {
-					loadRenderer(renderer.getDepends().getName());
+				if (renderer.getDependsName() != null) {
+					loadRenderer(renderer.getDependsName());
 				}
 			} catch (IOException e) {
 				Log.e(TAG, "Failed to load '" + rendName + "'", e);

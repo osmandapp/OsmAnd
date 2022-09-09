@@ -56,15 +56,15 @@ public class RenderingRulesStorage {
 	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
 	protected String renderingName;
+	protected String dependsName;
 	protected String internalRenderingName;
 
 	protected int internalVersion = 1;
 
-	public RenderingRulesStorage getDepends() {
-		return depends;
-	}
 
-	private RenderingRulesStorage depends;
+	public String getDependsName() {
+		return dependsName;
+	}
 
 	public interface RenderingRulesStorageResolver {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException;
@@ -131,8 +131,9 @@ public class RenderingRulesStorage {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		RenderingRulesHandler handler = new RenderingRulesHandler(parser, resolver);
 		handler.parse(is);
-		depends = handler.getDependsStorage();
+		RenderingRulesStorage depends = handler.getDependsStorage();
 		if (depends != null) {
+			dependsName = depends.getName();
 			// merge results
 			// dictionary and props are already merged
 			Iterator<Entry<String, RenderingRule>> it = depends.renderingAttributes.entrySet().iterator();
