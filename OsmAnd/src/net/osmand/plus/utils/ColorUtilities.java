@@ -271,4 +271,8 @@ public class ColorUtilities {
 	public static int getStatusBarColorId(boolean nightMode) {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
+
+	public static String getColorHex(@ColorInt int color){
+		return String.format("#%06X", (0xFFFFFF & color));
+	}
 }
