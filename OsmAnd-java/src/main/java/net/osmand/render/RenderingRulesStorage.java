@@ -60,6 +60,12 @@ public class RenderingRulesStorage {
 
 	protected int internalVersion = 1;
 
+	public RenderingRulesStorage getDepends() {
+		return depends;
+	}
+
+	private RenderingRulesStorage depends;
+
 	public interface RenderingRulesStorageResolver {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException;
 	}
@@ -125,7 +131,7 @@ public class RenderingRulesStorage {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		RenderingRulesHandler handler = new RenderingRulesHandler(parser, resolver);
 		handler.parse(is);
-		RenderingRulesStorage depends = handler.getDependsStorage();
+		depends = handler.getDependsStorage();
 		if (depends != null) {
 			// merge results
 			// dictionary and props are already merged
