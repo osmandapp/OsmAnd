@@ -38,7 +38,9 @@ public class DownloadResourceGroup {
 		OTHER_MAPS_HEADER(R.string.download_select_map_types),
 		WIKIVOYAGE_HEADER(R.string.shared_string_wikivoyage),
 		
-		NAUTICAL_MAPS_HEADER(R.string.nautical_maps),
+		NAUTICAL_WORLDWIDE_HEADER(R.string.worldwide_maps),
+		NAUTICAL_DEPTH_HEADER(R.string.depth_contours),
+		NAUTICAL_POINTS_HEADER(R.string.nautical_depth_points),
 		// headers with voice items
 		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
 		VOICE_HEADER_REC(R.string.index_name_voice),
@@ -92,7 +94,10 @@ public class DownloadResourceGroup {
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
 					|| this == FONTS_HEADER 
-					|| this == NAUTICAL_MAPS_HEADER || this == NAUTICAL_MAPS_GROUP
+					|| this == NAUTICAL_WORLDWIDE_HEADER
+					|| this == NAUTICAL_DEPTH_HEADER
+					|| this == NAUTICAL_POINTS_HEADER
+					|| this == NAUTICAL_MAPS_GROUP
 					|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP
 					|| this == EXTRA_MAPS;
 		}

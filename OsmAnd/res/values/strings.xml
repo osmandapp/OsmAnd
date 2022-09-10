@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="nautical_depth_points">Nautical depth points</string>
+    <string name="depth_contours">Depth contours</string>
+    <string name="worldwide_maps">Worldwide maps</string>
     <string name="shared_string_large">Large</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">How to use:</string>

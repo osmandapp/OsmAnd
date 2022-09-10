@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -47,7 +46,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
-import net.osmand.plus.download.SelectIndexesHelper.ItemsToDownloadSelectedListener;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -78,6 +76,7 @@ public class ItemViewHolder {
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;
+	boolean useShortNameForNautical;
 	boolean showParentRegionName;
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
@@ -142,6 +141,10 @@ public class ItemViewHolder {
 		this.showTypeInName = showTypeInName;
 	}
 
+	public void setUseShortNameForNautical(boolean shortNameForNautical) {
+		this.useShortNameForNautical = shortNameForNautical;
+	}
+
 	private void initAppStatusVariables() {
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
@@ -168,6 +171,10 @@ public class ItemViewHolder {
 			name = downloadItem.getType().getString(context);
 		} else {
 			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
+		}
+		if (useShortNameForNautical) {
+			String[] wordsToRemove = new String[] {"Nautical", "nautical", "depth", "contours", "points"};
+			name = Algorithms.replaceAll(name, "", wordsToRemove).trim();
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
@@ -408,20 +415,17 @@ public class ItemViewHolder {
 			};
 		} else {
 			boolean isDownloading = item.isDownloading(context.getDownloadThread());
-			return new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (isDownloading) {
-						if (silentCancelDownload) {
-							context.getDownloadThread().cancelDownload(item);
-						} else {
-							context.makeSureUserCancelDownload(item);
-						}
-					} else if (!item.hasActualDataToDownload()) {
-						showContextMenu(v, item, item.getRelatedGroup());
+			return v -> {
+				if (isDownloading) {
+					if (silentCancelDownload) {
+						context.getDownloadThread().cancelDownload(item);
 					} else {
-						download(item, item.getRelatedGroup());
+						context.makeSureUserCancelDownload(item);
 					}
+				} else if (!item.hasActualDataToDownload()) {
+					showContextMenu(v, item, item.getRelatedGroup());
+				} else {
+					download(item, item.getRelatedGroup());
 				}
 			};
 		}
@@ -438,22 +442,16 @@ public class ItemViewHolder {
 		if (!Algorithms.isEmpty(downloadedFiles)) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_remove)
 					.setIcon(getContentIcon(context, R.drawable.ic_action_remove_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					confirmRemove(downloadItem, downloadedFiles);
-					return true;
-				}
+			item.setOnMenuItemClickListener(_item -> {
+				confirmRemove(downloadItem, downloadedFiles);
+				return true;
 			});
 		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_download)
 				.setIcon(context.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_import));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				download(downloadItem, parentOptional);
-				return true;
-			}
+		item.setOnMenuItemClickListener(_item -> {
+			download(downloadItem, parentOptional);
+			return true;
 		});
 
 		optionsMenu.show();
@@ -487,12 +485,9 @@ public class ItemViewHolder {
 		builder.setTitle(R.string.are_you_sure);
 		builder.setMessage(R.string.confirm_download_roadmaps);
 		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-				R.string.shared_string_download, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (item != null) {
-							startDownload(item);
-						}
+				R.string.shared_string_download, (dialog, which) -> {
+					if (item != null) {
+						startDownload(item);
 					}
 				});
 		builder.show();
@@ -509,12 +504,9 @@ public class ItemViewHolder {
 
 	private void selectIndexesToDownload(DownloadItem item) {
 		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate,
-				new ItemsToDownloadSelectedListener() {
-					@Override
-					public void onItemsToDownloadSelected(List<IndexItem> indexes) {
-						IndexItem[] indexesArray = new IndexItem[indexes.size()];
-						context.startDownload(indexes.toArray(indexesArray));
-					}
+				indexes -> {
+					IndexItem[] indexesArray = new IndexItem[indexes.size()];
+					context.startDownload(indexes.toArray(indexesArray));
 				}
 		);
 	}
@@ -535,12 +527,9 @@ public class ItemViewHolder {
 		}
 		confirm.setMessage(message);
 
-		confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				LocalIndexType type = getLocalIndexType(downloadItem);
-				remove(type, downloadedFiles);
-			}
+		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			LocalIndexType type = getLocalIndexType(downloadItem);
+			remove(type, downloadedFiles);
 		});
 		confirm.setNegativeButton(R.string.shared_string_no, null);
 
