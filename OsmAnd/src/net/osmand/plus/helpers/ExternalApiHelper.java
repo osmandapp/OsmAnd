@@ -808,7 +808,7 @@ public class ExternalApiHelper {
 			settings.FOLLOW_THE_ROUTE.set(true);
 			routingHelper.setFollowingMode(true);
 			routingHelper.setRoutePlanningMode(false);
-			mapViewTrackingUtilities.switchToRoutePlanningMode();
+			mapViewTrackingUtilities.switchRoutePlanningMode();
 			routingHelper.notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
@@ -832,7 +832,7 @@ public class ExternalApiHelper {
 				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 				TargetPointsHelper targets = app.getTargetPointsHelper();
 				targets.setStartPoint(from, false, fromDesc);
-				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
 				mapActivity.refreshMap();
 			}
 			mapActivity.showQuickSearch(ShowQuickSearchMode.DESTINATION_SELECTION_AND_START, true, searchQuery, searchLocation);

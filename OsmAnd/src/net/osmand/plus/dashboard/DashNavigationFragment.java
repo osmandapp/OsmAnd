@@ -128,7 +128,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 					routingHelper.setPauseNavigation(true);
 				}
 				updatePlayButton(routingHelper, map, play);
-				map.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				map.getMapViewTrackingUtilities().switchRoutePlanningMode();
 				map.refreshMap();
 			}
 		});

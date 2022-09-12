@@ -333,7 +333,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					gpsInfo.fixed = fixed;
 					gpsInfo.foundSatellites = satCount;
 					gpsInfo.usedSatellites = u;
-					updateLocation(location);
+					//updateLocation(location);
 				}
 			};
 			service.registerGnssStatusCallback((GnssStatus.Callback) gpsStatusListener, null);
@@ -344,7 +344,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				public void onGpsStatusChanged(int event) {
 					gpsStatus = service.getGpsStatus(gpsStatus);
 					updateGPSInfo(gpsStatus);
-					updateLocation(location);
+					//updateLocation(location);
 				}
 			};
 			service.addGpsStatusListener((Listener) gpsStatusListener);
