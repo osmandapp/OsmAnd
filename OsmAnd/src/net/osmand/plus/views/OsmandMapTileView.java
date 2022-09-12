@@ -1344,8 +1344,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tb.setZoom(tb.getZoom() - 1);
 		}
 		if (dy != 0 || dx != 0) {
-			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
-			clon = tb.getLonFromPixel(tb.getPixWidth() / 2 + dx, tb.getPixHeight() / 2);
+			clat = tb.getLatFromPixel(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f + dy);
+			clon = tb.getLonFromPixel(tb.getPixWidth() / 2f + dx, tb.getPixHeight() / 2f);
 		}
 		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
 	}
