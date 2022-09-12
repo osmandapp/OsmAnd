@@ -1,6 +1,8 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
 import android.content.Context;
 
@@ -11,6 +13,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -352,7 +355,7 @@ public class DownloadActivityType {
 		return "";
 	}
 
-	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includeParent) {
+	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includeParent, boolean useShortName) {
 		if (this == VOICE_FILE) {
 			if (isVoiceTTS(downloadItem) || isVoiceRec(downloadItem)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
@@ -373,6 +376,24 @@ public class DownloadActivityType {
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
 		String lc = basename.toLowerCase();
+		DownloadResourceGroup relatedGroup = downloadItem.getRelatedGroup();
+		if (relatedGroup != null) {
+			DownloadResourceGroupType type = relatedGroup.getType();
+			if (type == NAUTICAL_POINTS_HEADER || type == NAUTICAL_DEPTH_HEADER) {
+				String depthPrefix = "Depth_";
+				String depthPointsPrefix = "Depth_points_";
+				int startInd = basename.startsWith(depthPointsPrefix) ? depthPointsPrefix.length() : depthPrefix.length();
+				int extInd = basename.indexOf("osmand_ext");
+				int endInd = extInd != -1 ? extInd : basename.length();
+				String downloadName = basename.substring(startInd, endInd).replace('_', ' ');
+				String name = Algorithms.capitalizeFirstLetter(downloadName);
+				if (useShortName) {
+					return name;
+				} else if (type == NAUTICAL_DEPTH_HEADER) {
+					return ctx.getString(R.string.download_depth_countours) + " " + name;
+				}
+			}
+		}
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
@@ -382,11 +403,6 @@ public class DownloadActivityType {
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includeParent) +
 					" " + ctx.getString(R.string.index_item_nation_addresses);
-		} else if (basename.startsWith("Depth_")) {
-			int extInd = basename.indexOf("osmand_ext");
-			String downloadName = extInd == -1 ? basename.substring(6).replace('_', ' ')
-					: basename.substring(6, extInd).replace('_', ' ');
-			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);
 		}
 
 		return osmandRegions.getLocaleName(basename, includeParent);

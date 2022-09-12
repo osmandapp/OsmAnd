@@ -76,7 +76,7 @@ public class ItemViewHolder {
 
 	boolean showTypeInDesc;
 	boolean showTypeInName;
-	boolean useShortNameForNautical;
+	boolean useShortName;
 	boolean showParentRegionName;
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
@@ -141,8 +141,8 @@ public class ItemViewHolder {
 		this.showTypeInName = showTypeInName;
 	}
 
-	public void setUseShortNameForNautical(boolean shortNameForNautical) {
-		this.useShortNameForNautical = shortNameForNautical;
+	public void setUseShortName(boolean useShortName) {
+		this.useShortName = useShortName;
 	}
 
 	private void initAppStatusVariables() {
@@ -170,11 +170,7 @@ public class ItemViewHolder {
 		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
 		} else {
-			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
-		}
-		if (useShortNameForNautical) {
-			String[] wordsToRemove = new String[] {"Nautical", "nautical", "depth", "contours", "points"};
-			name = Algorithms.replaceAll(name, "", wordsToRemove).trim();
+			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName, useShortName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);

@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_WORLDWIDE_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
 import android.content.res.Resources;
 import android.util.TypedValue;
@@ -16,6 +17,7 @@ import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,11 +72,12 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 				convertView.setTag(viewHolder);
 			}
 			if (mainGroup.getType() == DownloadResourceGroupType.NAUTICAL_MAPS) {
-				// Use short names for nautical depth contours and depth points maps on
-				// Nautical maps screen
+				// Use short names for nautical depth contours
+				// and depth points maps on Nautical maps screen
 				DownloadResourceGroup relatedGroup = item.getRelatedGroup();
-				boolean useShortName = relatedGroup.getType() != NAUTICAL_WORLDWIDE_HEADER;
-				viewHolder.setUseShortNameForNautical(useShortName);
+				DownloadResourceGroupType type = relatedGroup.getType();
+				boolean useShortName = type == NAUTICAL_DEPTH_HEADER || type == NAUTICAL_POINTS_HEADER;
+				viewHolder.setUseShortName(useShortName);
 			}
 			if (mainGroup.getType() == DownloadResourceGroup.DownloadResourceGroupType.REGION &&
 					group != null && group.getType() == DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS
