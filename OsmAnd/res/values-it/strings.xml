@@ -4769,4 +4769,6 @@
     <string name="time_to_destination_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso dalla localizzazione attuale.</string>
     <string name="included_in_your_current_plan">Incluso nel tuo piano attuale \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Disponibile come parte della sottoscrizione di %1$s.</string>
+    <string name="shared_string_large">Grande</string>
+    <string name="shared_string_normal">Normale</string>
 </resources>
