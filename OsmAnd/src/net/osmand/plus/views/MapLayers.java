@@ -166,7 +166,7 @@ public class MapLayers {
 		// 5.95 all text labels
 		// 6. point location layer 
 		locationLayer = new PointLocationLayer(app);
-		mapView.addLayer(locationLayer, 6);
+		mapView.addLayer(locationLayer, 8);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app);
 		mapView.addLayer(navigationLayer, 7);
