@@ -1266,15 +1266,6 @@ public class Algorithms {
 		return stringPalette.toString();
 	}
 
-	public static String replaceAll(String text, String replacement, String ... partsToReplace) {
-		if (partsToReplace != null) {
-			for (String part : partsToReplace) {
-				text = text.replaceAll(part, replacement);
-			}
-		}
-		return text;
-	}
-
 	public static <T> List<WeakReference<T>> updateWeakReferencesList(List<WeakReference<T>> list, T item, boolean isNew) {
 		List<WeakReference<T>> copy = new ArrayList<>(list);
 		Iterator<WeakReference<T>> it = copy.iterator();
