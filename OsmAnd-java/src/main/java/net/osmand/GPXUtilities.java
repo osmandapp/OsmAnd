@@ -66,8 +66,8 @@ public class GPXUtilities {
 			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
 			AMENITY_ORIGIN_EXTENSION);
 
-	private static final String GAP_PROFILE_TYPE = "gap";
-	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final String GAP_PROFILE_TYPE = "gap";
+	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
@@ -136,7 +136,7 @@ public class GPXUtilities {
 	}
 
 	public static class GPXExtensions {
-		Map<String, String> extensions = null;
+		public Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
 
 		public Map<String, String> getExtensionsToRead() {
