@@ -3052,4 +3052,5 @@
     <string name="poi_seamark_light_float">Boa luminosa, segnalamento marittimo</string>
     <string name="poi_seamark_light_major">Faro, segnalamento marittimo</string>
     <string name="poi_seamark_light_minor">Fanale, segnalamento marittimo</string>
+    <string name="poi_medical_supply_filter">Tipo di forniture mediche</string>
 </resources>
