@@ -1353,12 +1353,12 @@
     <string name="poi_drive_in_yes">sì</string>
     <string name="poi_drive_in_no">Drive-in: no</string>
     <string name="poi_drive_through_yes">sì</string>
-    <string name="poi_microbrewery_yes">sì</string>
+    <string name="poi_microbrewery_yes">Si,Microbirrificio</string>
     <string name="poi_takeaway_filter_yes">sì</string>
     <string name="poi_takeaway_yes">A portar via</string>
     <string name="poi_takeaway_no">No a portar via</string>
     <string name="poi_takeaway_only">Solo a portar via</string>
-    <string name="poi_delivery_filter_yes">sì</string>
+    <string name="poi_delivery_filter_yes">Si,Consegna</string>
     <string name="poi_outdoor_seating_filter_yes">Sì;Posti a sedere all\'aperto</string>
     <string name="poi_outdoor_seating_yes">Posti a sedere all\'aperto: sì</string>
     <string name="poi_outdoor_seating_no">Nessun posto a sedere all\'aperto</string>
@@ -1366,7 +1366,7 @@
     <string name="poi_outdoor_seating_sidewalk">Posti a sedere all\'aperto: marciapiede</string>
     <string name="poi_outdoor_seating_pedestrian_zone">Posti a sedere all\'aperto: zona pedonale</string>
     <string name="poi_outdoor_seating_garden">Posti a sedere all\'aperto: giardino</string>
-    <string name="poi_cocktails_yes">sì</string>
+    <string name="poi_cocktails_yes">Si,Cocktail</string>
     <string name="poi_service_parts">Parti</string>
     <string name="poi_service_dealer">Rivenditore</string>
     <string name="poi_service_repair">Riparazione</string>
@@ -3040,4 +3040,12 @@
     <string name="poi_faculty_filter">Facoltà</string>
     <string name="poi_denomination_uniting">Unionista</string>
     <string name="poi_dog">Cani</string>
+    <string name="poi_permanent_camping">Campeggio permanente</string>
+    <string name="poi_post_office_type">Tipo</string>
+    <string name="poi_membership_filter">Iscrizione obbligatoria</string>
+    <string name="poi_picnic_table_yes">Tavolo da picnic: sì</string>
+    <string name="poi_picnic_table_no">Tavolo da picnic: no</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_authentication_contactless_no">Autenticazione senza contatto: no</string>
 </resources>
