@@ -163,11 +163,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.showCurrentTrack) {
-				savingTrackHelper.insertPointData(lat, lon, System.currentTimeMillis(), description, name, category, color);
+				savingTrackHelper.insertPointData(lat, lon, description, name, category, color);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				WptPt point = WptPt.createAdjustedPoint(lat, lon, System.currentTimeMillis(),
-						description, name, category, color, null, null, null);
+				WptPt point = WptPt.createAdjustedPoint(lat, lon, description, name, category, color, null, null, null, null);
 				gpx.addPoint(point);
 			}
 		}

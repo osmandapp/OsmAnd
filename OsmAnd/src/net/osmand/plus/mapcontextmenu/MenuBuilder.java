@@ -39,13 +39,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -87,7 +84,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -1497,71 +1493,5 @@ public class MenuBuilder {
 	@SuppressWarnings("unchecked")
 	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-	}
-
-	protected Object findAmenityObject(String originObjectName, double lat, double lon) {
-		if (originObjectName != null && originObjectName.length() > 0) {
-			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
-				return findAmenity(originObjectName, lat, lon);
-			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
-				return findTransportStop(originObjectName, lat, lon);
-			}
-		}
-		return null;
-	}
-
-	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		for (Amenity amenity : amenities) {
-			String stringEn = amenity.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = null;
-		try {
-			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
-
-						@Override
-						public boolean publish(TransportStop object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (res != null) {
-			for (TransportStop stop : res) {
-				String stringEn = stop.toStringEn();
-				if (stringEn.equals(nameStringEn)) {
-					return stop;
-				}
-			}
-		}
-		return null;
 	}
 }

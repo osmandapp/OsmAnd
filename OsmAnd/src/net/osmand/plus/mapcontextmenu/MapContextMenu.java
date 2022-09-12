@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -22,7 +21,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,7 +44,6 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -325,15 +322,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public boolean init(@NonNull LatLon latLon,
-						@Nullable PointDescription pointDescription,
-						@Nullable Object object) {
+	                    @Nullable PointDescription pointDescription,
+	                    @Nullable Object object) {
 		return init(latLon, pointDescription, object, false, false);
 	}
 
 	public boolean init(@NonNull LatLon latLon,
-						@Nullable PointDescription pointDescription,
-						@Nullable Object object,
-						boolean update, boolean restorePrevious) {
+	                    @Nullable PointDescription pointDescription,
+	                    @Nullable Object object,
+	                    boolean update, boolean restorePrevious) {
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -430,8 +427,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void show(@NonNull LatLon latLon,
-					 @Nullable PointDescription pointDescription,
-					 @Nullable Object object) {
+	                 @Nullable PointDescription pointDescription,
+	                 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && init(latLon, pointDescription, object)) {
 			mapActivity.getMyApplication().logEvent("open_context_menu");
@@ -1014,32 +1011,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					if (pointDescription.isFavorite() || !hasValidTitle()) {
 						title = "";
 					}
-
-					String originObjectName = "";
-					int preselectedIconId = 0;
-					double altitude = Double.NaN;
-					long timestamp = System.currentTimeMillis();
-					Object object = getObject();
-
-					Amenity amenity = null;
-					if (object != null) {
-						if (object instanceof Amenity) {
-							amenity = ((Amenity) object);
-							originObjectName = amenity.toStringEn();
-							if (pointDescription.isPoi()) {
-								preselectedIconId = getPreselectedIconId(amenity);
- 							}
-						} else if (object instanceof TransportStop) {
-							originObjectName = ((TransportStop) object).toStringEn();
-						}
-						if (object instanceof WptPt) {
-							altitude = ((WptPt) object).ele;
-						}
-					}
 					FavoritePointEditor favoritePointEditor = getFavoritePointEditor();
 					if (favoritePointEditor != null) {
-						favoritePointEditor.add(getLatLon(), title, getStreetStr(), originObjectName,
-								preselectedIconId, altitude, timestamp, amenity);
+						favoritePointEditor.add(getLatLon(), title, getStreetStr(), getObject());
 					}
 				}
 			});
@@ -1160,13 +1134,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				title = "";
 			}
 
-			String preselectedIconName = null;
-			Object object = getObject();
 			Amenity amenity = null;
+			Object object = getObject();
 			if (object instanceof Amenity && pointDescription.isPoi()) {
 				amenity = (Amenity) object;
-				int preselectedIconId = getPreselectedIconId(((Amenity) object));
-				preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
@@ -1177,22 +1148,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
-					wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenity);
+					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
 				}
 			} else {
-				addNewWptToGPXFile(title, preselectedIconName, amenity);
+				addNewWptToGPXFile(title, amenity);
 			}
 		}
-	}
-
-	private int getPreselectedIconId(@NonNull Amenity amenity) {
-		String gpxIconId = amenity.getGpxIcon();
-		String preselectedIconName = Algorithms.isEmpty(gpxIconId)
-				? RenderingIcons.getIconNameForAmenity(amenity)
-				: gpxIconId;
-		return Algorithms.isEmpty(preselectedIconName)
-				? 0
-				: RenderingIcons.getBigIconResourceId(preselectedIconName);
 	}
 
 	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
@@ -1252,7 +1213,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addNewWptToGPXFile(String title, String preselectedIconName, Amenity amenity) {
+	public void addNewWptToGPXFile(@Nullable String title, @Nullable Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
@@ -1268,7 +1229,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						}
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 						if (wptPtPointEditor != null) {
-							wptPtPointEditor.add(gpxFile, getLatLon(), title, preselectedIconName, amenity);
+							wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
 						}
 					}
 					return true;

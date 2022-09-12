@@ -519,13 +519,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
 
-	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
-								 int color) {
-		return insertPointData(lat, lon, time, description, name, category, color, null, null);
+	public WptPt insertPointData(double lat, double lon, String description, String name, String category, int color) {
+		return insertPointData(lat, lon, description, name, category, color, null, null);
 	}
 
-	public WptPt insertPointData(double lat, double lon, long time, String description, String name, String category,
-								 int color, String iconName, String backgroundName) {
+	public WptPt insertPointData(double lat, double lon, String description, String name,
+	                             String category, int color, String iconName, String backgroundName) {
+		long time = System.currentTimeMillis();
 		WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = name;
 		pt.category = category;

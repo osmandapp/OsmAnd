@@ -17,6 +17,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -52,8 +53,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private long pickupDate;
 	private boolean calendarEvent;
 
-	private Amenity amenity;
-	private String originObjectName = "";
+	private String amenityOriginName;
+	private Map<String, String> amenityExtensions = new HashMap<String, String>();
 
 	private boolean visible = true;
 
@@ -84,7 +85,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.color = point.color;
 		this.description = point.description;
 		this.visible = point.visible;
-		this.originObjectName = point.originObjectName;
+		this.amenityOriginName = point.amenityOriginName;
 		this.address = point.address;
 		this.iconId = point.iconId;
 		this.backgroundType = point.backgroundType;
@@ -181,14 +182,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = visible;
 	}
 
-	public String getOriginObjectName() {
-		return originObjectName;
-	}
-
-	public void setOriginObjectName(String originObjectName) {
-		this.originObjectName = originObjectName;
-	}
-
 	public int getOverlayIconId(@NonNull Context ctx) {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
@@ -256,20 +249,30 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
-	public Amenity getAmenity() {
-		return amenity;
-	}
-
-	public void setAmenity(Amenity amenity) {
-		this.amenity = amenity;
-	}
-
 	public String getComment() {
 		return comment;
 	}
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Nullable
+	public String getAmenityOriginName() {
+		return amenityOriginName;
+	}
+
+	public void setAmenityOriginName(@Nullable String amenityOriginName) {
+		this.amenityOriginName = amenityOriginName;
+	}
+
+	@NonNull
+	public Map<String, String> getAmenityExtensions() {
+		return amenityExtensions;
+	}
+
+	public void setAmenityExtensions(@NonNull Map<String, String> extensions) {
+		amenityExtensions = extensions;
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
@@ -347,10 +350,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		} else if (!description.equals(point.description))
 			return false;
 
-		if (originObjectName == null) {
-			if (point.originObjectName != null)
+		if (amenityOriginName == null) {
+			if (point.amenityOriginName != null)
 				return false;
-		} else if (!originObjectName.equals(point.originObjectName))
+		} else if (!amenityOriginName.equals(point.amenityOriginName))
 			return false;
 
 		return (this.latitude == point.latitude)
@@ -374,7 +377,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
+		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
 		return result;
 	}
 
@@ -390,7 +393,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, category, wptPt.ele, wptPt.time);
 		point.setDescription(wptPt.desc);
 		point.setComment(wptPt.comment);
-		point.setOriginObjectName(wptPt.comment);
+		point.setAmenityOriginName(wptPt.getAmenityOriginName());
+		point.setAmenityExtensions(wptPt.getExtensionsToRead());
 
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
@@ -417,7 +421,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(wptPt.getBackgroundType(), null);
 		point.setBackgroundType(backgroundType);
-		point.amenity = wptPt.getAmenity();
 		return point;
 	}
 
@@ -435,6 +438,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			point.category = getCategory();
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
+		extensions.putAll(getAmenityExtensions());
 		if (!isVisible()) {
 			extensions.put(HIDDEN, "true");
 		}
@@ -459,7 +463,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (getColor() != 0) {
 			point.setColor(getColor());
 		}
-		point.setAmenity(getAmenity());
+		if (!Algorithms.isEmpty(amenityOriginName)) {
+			point.setAmenityOriginName(amenityOriginName);
+		}
 		return point;
 	}
 }
