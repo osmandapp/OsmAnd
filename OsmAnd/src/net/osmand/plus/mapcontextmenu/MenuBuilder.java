@@ -38,15 +38,11 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -88,7 +84,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -293,12 +288,12 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
-		buildInternal(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
+		buildInternal(view);
 		buildPluginRows(view, object);
 
 		if (needBuildCoordinatesRow()) {
@@ -1498,82 +1493,5 @@ public class MenuBuilder {
 	@SuppressWarnings("unchecked")
 	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-	}
-
-	protected Object collectUpdatedPointInfo(Map<String, String> gpxExtensions, String amenityOriginName, double lat, double lon) {
-		return findUpdatedAmenityExtensions(gpxExtensions, amenityOriginName, lat, lon);
-	}
-
-	private Map<String, String> findUpdatedAmenityExtensions(Map<String, String> gpxExtensions, String amenityOriginName, double lat, double lon) {
-		Amenity mapAmenity = findAmenity(amenityOriginName, lat, lon);
-		Map<String, String> mapExtensions = null;
-		if (mapAmenity != null) {
-			mapExtensions = mapAmenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
-		}
-
-		if (!Algorithms.isEmpty(gpxExtensions) && !Algorithms.isEmpty(mapExtensions)) {
-			// Join data from gpx file and from map object. Priority to map object
-			gpxExtensions.putAll(mapExtensions);
-			return gpxExtensions;
-		} else if (gpxExtensions != null) {
-			return gpxExtensions;
-		} else {
-			return mapExtensions;
-		}
-	}
-
-	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		for (Amenity amenity : amenities) {
-			String stringEn = amenity.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = null;
-		try {
-			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
-
-						@Override
-						public boolean publish(TransportStop object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (res != null) {
-			for (TransportStop stop : res) {
-				String stringEn = stop.toStringEn();
-				if (stringEn.equals(nameStringEn)) {
-					return stop;
-				}
-			}
-		}
-		return null;
 	}
 }

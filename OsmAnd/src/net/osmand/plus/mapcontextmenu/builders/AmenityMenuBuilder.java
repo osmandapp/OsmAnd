@@ -12,10 +12,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.util.Algorithms;
-import net.osmand.GPXUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -31,7 +31,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 
 	private final Amenity amenity;
-	private AmenityUIHelper helper;
+	private AmenityUIHelper rowsBuilder;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -51,11 +51,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		Map<String, String> additionalInfo = amenity.toTagValue(GPXUtilities.PRIVATE_PREFIX, GPXUtilities.OSM_PREFIX, GPXUtilities.COLLAPSABLE_PREFIX, app.getPoiTypes());
-		helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
-		helper.setLight(light);
-		helper.setLatLon(getLatLon());
-		helper.buildInternal(view);
+		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
+		Map<String, String> additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
+
+		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
+		rowsBuilder.setLight(light);
+		rowsBuilder.setLatLon(getLatLon());
+		rowsBuilder.buildInternal(view);
 
 		buildNearestRows((ViewGroup) view);
 	}
@@ -80,7 +82,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
 
 				Context context = viewGroup.getContext();
-				AmenityUIHelper.AmenityInfoRow wikiInfo = new AmenityUIHelper.AmenityInfoRow(
+				AmenityInfoRow wikiInfo = new AmenityInfoRow(
 						NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null, text,
 						null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
 						0, false, false, false, 1000, null, false, false, false, 0);
@@ -90,7 +92,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				int insertIndex = position == 0 ? 0 : position + 1;
 
 				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-				helper.buildAmenityRow(amenitiesRow, wikiInfo);
+				rowsBuilder.buildAmenityRow(amenitiesRow, wikiInfo);
 				viewGroup.addView(amenitiesRow, insertIndex);
 
 				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
@@ -114,7 +116,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
 
 				Context context = viewGroup.getContext();
-				AmenityUIHelper.AmenityInfoRow poiInfo = new AmenityUIHelper.AmenityInfoRow(
+				AmenityInfoRow poiInfo = new AmenityInfoRow(
 						NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null, text,
 						null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
 						0, false, false, false, 1000, null, false, false, false, 0);
@@ -126,7 +128,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
 				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-				helper.buildAmenityRow(amenitiesRow, poiInfo);
+				rowsBuilder.buildAmenityRow(amenitiesRow, poiInfo);
 				viewGroup.addView(amenitiesRow, insertIndex);
 
 				buildNearestRowDividerIfMissing(viewGroup, insertIndex);

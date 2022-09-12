@@ -1,5 +1,12 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.GPXUtilities.ADDRESS_EXTENSION;
+import static net.osmand.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 
@@ -19,6 +26,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
@@ -45,7 +53,6 @@ import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
-import net.osmand.GPXUtilities;
 
 import org.apache.commons.logging.Log;
 
@@ -53,9 +60,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.math.RoundingMode;
-import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -78,26 +83,30 @@ import java.util.zip.GZIPInputStream;
 public class AmenityUIHelper extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
-	private static final DecimalFormat DF = new DecimalFormat("#.##");
+
+	public static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
+
 	private static final String WIKI_LINK = ".wikipedia.org/w";
+	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 
-	private MetricsConstants metricSystem;
-	private Map<String, String> additionalInfo;
+	private final MetricsConstants metricSystem;
+	private final Map<String, String> additionalInfo;
+
 	private String preferredLang;
-	private Amenity wikiAmenity = null;
-	public static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(GPXUtilities.COLOR_NAME_EXTENSION,
-			GPXUtilities.ICON_NAME_EXTENSION, GPXUtilities.BACKGROUND_TYPE_EXTENSION,
-			GPXUtilities.PROFILE_TYPE_EXTENSION, GPXUtilities.ADDRESS_EXTENSION,
-			GPXUtilities.AMENITY_ORIGIN_EXTENSION,
-			GPXUtilities.PRIVATE_PREFIX + Amenity.NAME, GPXUtilities.PRIVATE_PREFIX + Amenity.TYPE,
-			GPXUtilities.PRIVATE_PREFIX + Amenity.SUBTYPE);
+	private Amenity wikiAmenity;
 
-    public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfo) {
-        super(mapActivity);
+	public static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(COLOR_NAME_EXTENSION,
+			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
+			AMENITY_ORIGIN_EXTENSION, AMENITY_PREFIX + Amenity.NAME, AMENITY_PREFIX + Amenity.TYPE,
+			AMENITY_PREFIX + Amenity.SUBTYPE);
+
+	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfo) {
+		super(mapActivity);
 		this.preferredLang = preferredLang;
 		this.additionalInfo = additionalInfo;
 		this.metricSystem = mapActivity.getMyApplication().getSettings().METRIC_SYSTEM.get();
-    }
+	}
 
 	public void setPreferredLang(String lang) {
 		this.preferredLang = lang;
@@ -106,7 +115,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		PoiCategory type = null;
-		String typeTag = getAdditionalInfo(GPXUtilities.PRIVATE_PREFIX + Amenity.TYPE);
+		String typeTag = getAdditionalInfo(AMENITY_PREFIX + Amenity.TYPE);
 		if (!Algorithms.isEmpty(typeTag)) {
 			type = MapPoiTypes.getDefault().getPoiCategoryByName(typeTag);
 		}
@@ -114,7 +123,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			type = MapPoiTypes.getDefault().getOtherPoiCategory();
 		}
 
-		String subtype = getAdditionalInfo(GPXUtilities.PRIVATE_PREFIX + Amenity.SUBTYPE);
+		String subtype = getAdditionalInfo(AMENITY_PREFIX + Amenity.SUBTYPE);
 
 		boolean hasWiki = false;
 		MapPoiTypes poiTypes = app.getPoiTypes();
@@ -130,10 +139,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		Map<String, String> additionalInfoFiltered = new HashMap<>();
 		for (String origKey : getAdditionalInfoKeys()) {
 			String key = origKey;
-			if (origKey.equals(GPXUtilities.PRIVATE_PREFIX + Amenity.OPENING_HOURS)) {
-				key = origKey.replace(GPXUtilities.PRIVATE_PREFIX, "");
-			}
-			else if (origKey.startsWith(GPXUtilities.PRIVATE_PREFIX)) {
+			if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
+				key = origKey.replace(AMENITY_PREFIX, "");
+			} else if (origKey.startsWith(AMENITY_PREFIX)) {
 				continue;
 			} else {
 				key = origKey.replace(GPXUtilities.OSM_PREFIX, "");
@@ -145,11 +153,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 
-		for (Map.Entry<String, String> e  : additionalInfoFiltered.entrySet()) {
+		for (Map.Entry<String, String> e : additionalInfoFiltered.entrySet()) {
 			String key = e.getKey();
 			String vl = e.getValue();
 
-			if (key.startsWith(GPXUtilities.COLLAPSABLE_PREFIX)) {
+			if (key.startsWith(COLLAPSABLE_PREFIX)) {
 				continue;
 			}
 			if (key.equals("image")
@@ -393,8 +401,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 		if (cuisineRow != null) {
-			boolean hasCuisineOrDish = getAdditionalInfoKeys().contains(GPXUtilities.COLLAPSABLE_PREFIX + "cuisine") ||
-					getAdditionalInfoKeys().contains(GPXUtilities.COLLAPSABLE_PREFIX + "dish");
+			boolean hasCuisineOrDish = getAdditionalInfoKeys().contains(COLLAPSABLE_PREFIX + "cuisine") ||
+					getAdditionalInfoKeys().contains(COLLAPSABLE_PREFIX + "dish");
 			if (!hasCuisineOrDish) {
 				infoRows.add(cuisineRow);
 			}
@@ -402,7 +410,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 
 		for (Map.Entry<String, String> e : additionalInfoFiltered.entrySet()) {
-			if (e.getKey().startsWith(GPXUtilities.COLLAPSABLE_PREFIX)) {
+			if (e.getKey().startsWith(COLLAPSABLE_PREFIX)) {
 				List<PoiType> categoryTypes = new ArrayList<>();
 
 				if (!Algorithms.isEmpty(e.getValue())) {
@@ -497,409 +505,409 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
 		}
-    }
+	}
 
-    private String getSocialMediaUrl(String key, String value) {
-        // Remove leading and closing slashes
-        StringBuilder sb = new StringBuilder(value.trim());
-        if (sb.charAt(0) == '/') {
-            sb.deleteCharAt(0);
-        }
-        int lastIdx = sb.length() - 1;
-        if (sb.charAt(lastIdx) == '/') {
-            sb.deleteCharAt(lastIdx);
-        }
+	private String getSocialMediaUrl(String key, String value) {
+		// Remove leading and closing slashes
+		StringBuilder sb = new StringBuilder(value.trim());
+		if (sb.charAt(0) == '/') {
+			sb.deleteCharAt(0);
+		}
+		int lastIdx = sb.length() - 1;
+		if (sb.charAt(lastIdx) == '/') {
+			sb.deleteCharAt(lastIdx);
+		}
 
-        // It cannot be username
-        if (sb.indexOf("/") != -1) {
-            return "https://" + value;
-        }
+		// It cannot be username
+		if (sb.indexOf("/") != -1) {
+			return "https://" + value;
+		}
 
-        Map<String, String> urls = new HashMap<>(7);
-        urls.put("facebook", "https://facebook.com/%s");
-        urls.put("vk", "https://vk.com/%s");
-        urls.put("instagram", "https://instagram.com/%s");
-        urls.put("twitter", "https://twitter.com/%s");
-        urls.put("ok", "https://ok.ru/%s");
-        urls.put("telegram", "https://t.me/%s");
-        urls.put("flickr", "https://flickr.com/%s");
+		Map<String, String> urls = new HashMap<>(7);
+		urls.put("facebook", "https://facebook.com/%s");
+		urls.put("vk", "https://vk.com/%s");
+		urls.put("instagram", "https://instagram.com/%s");
+		urls.put("twitter", "https://twitter.com/%s");
+		urls.put("ok", "https://ok.ru/%s");
+		urls.put("telegram", "https://t.me/%s");
+		urls.put("flickr", "https://flickr.com/%s");
 
-        if (urls.containsKey(key)) {
-            return String.format(urls.get(key), value);
-        } else {
-            return null;
-        }
-    }
+		if (urls.containsKey(key)) {
+			return String.format(urls.get(key), value);
+		} else {
+			return null;
+		}
+	}
 
-    private String getFormattedInt(String value) {
-        try {
-            int number = Integer.parseInt(value);
-            DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
-            DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-            symbols.setGroupingSeparator(' ');
-            formatter.setDecimalFormatSymbols(symbols);
-            return formatter.format(number);
-        } catch (NumberFormatException e) {
-            return value;
-        }
-    }
+	private String getFormattedInt(String value) {
+		try {
+			int number = Integer.parseInt(value);
+			DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
+			DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+			symbols.setGroupingSeparator(' ');
+			formatter.setDecimalFormatSymbols(symbols);
+			return formatter.format(number);
+		} catch (NumberFormatException e) {
+			return value;
+		}
+	}
 
-    private String[] getFormattedPrefixAndText(String key, String prefix, String value, String subtype) {
-        DF.setRoundingMode(RoundingMode.CEILING);
-        String formattedValue = value;
-        String formattedPrefix = prefix;
-        switch (key) {
-            case "width":
-            case "height":
-                if (key.equals("width")) {
-                    formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_width);
-                } else {
-                    formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_height);
-                }
-            case "depth":
-            case "seamark_height":
-                if (Algorithms.isFloat(value)) {
-                    double valueAsDouble = Double.valueOf(value);
-                    if (metricSystem == MetricsConstants.MILES_AND_FEET) {
-                        formattedValue = DF.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
-                                + " " + mapActivity.getResources().getString(R.string.foot);
-                    } else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {
-                        formattedValue = DF.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER)
-                                + " " + mapActivity.getResources().getString(R.string.yard);
-                    } else {
-                        formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
-                    }
-                }
-                break;
-            case "distance":
-                if (Algorithms.isFloat(value)) {
-                    float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
-                    if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
-                        formattedValue =
-                                value + " " + mapActivity.getResources().getString(R.string.km);
-                    } else {
-                        formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters,
-                                mapActivity.getMyApplication());
-                    }
-                    formattedPrefix = formatPrefix(prefix,
-                            mapActivity.getResources().getString(R.string.distance));
-                    break;
-                }
-            case "capacity":
-                if (subtype.equals("water_tower") || subtype.equals("storage_tank")) {
-                    if (Algorithms.isFloat(value)) {
-                        formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
-                    }
-                }
-                break;
-            case "maxweight":
-                if (Algorithms.isInt(value)) {
-                    formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
-                }
-                break;
-            case "students":
-            case "spots":
-            case "seats":
-                if (Algorithms.isInt(value)) {
-                    formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
-                }
-                break;
-            case "wikipedia":
-                formattedPrefix = app.getString(R.string.shared_string_wikipedia);
-        }
-        return new String[] {formattedPrefix, formattedValue};
-    }
+	private String[] getFormattedPrefixAndText(String key, String prefix, String value, String subtype) {
+		DISTANCE_FORMAT.setRoundingMode(RoundingMode.CEILING);
+		String formattedValue = value;
+		String formattedPrefix = prefix;
+		switch (key) {
+			case "width":
+			case "height":
+				if (key.equals("width")) {
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_width);
+				} else {
+					formattedPrefix = mapActivity.getResources().getString(R.string.shared_string_height);
+				}
+			case "depth":
+			case "seamark_height":
+				if (Algorithms.isFloat(value)) {
+					double valueAsDouble = Double.valueOf(value);
+					if (metricSystem == MetricsConstants.MILES_AND_FEET) {
+						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
+								+ " " + mapActivity.getResources().getString(R.string.foot);
+					} else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {
+						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.YARDS_IN_ONE_METER)
+								+ " " + mapActivity.getResources().getString(R.string.yard);
+					} else {
+						formattedValue = value + " " + mapActivity.getResources().getString(R.string.m);
+					}
+				}
+				break;
+			case "distance":
+				if (Algorithms.isFloat(value)) {
+					float valueAsFloatInMeters = Float.parseFloat(value) * 1000;
+					if (metricSystem == MetricsConstants.KILOMETERS_AND_METERS) {
+						formattedValue =
+								value + " " + mapActivity.getResources().getString(R.string.km);
+					} else {
+						formattedValue = OsmAndFormatter.getFormattedDistance(valueAsFloatInMeters,
+								mapActivity.getMyApplication());
+					}
+					formattedPrefix = formatPrefix(prefix,
+							mapActivity.getResources().getString(R.string.distance));
+					break;
+				}
+			case "capacity":
+				if (subtype.equals("water_tower") || subtype.equals("storage_tank")) {
+					if (Algorithms.isFloat(value)) {
+						formattedValue = value + " " + mapActivity.getResources().getString(R.string.cubic_m);
+					}
+				}
+				break;
+			case "maxweight":
+				if (Algorithms.isInt(value)) {
+					formattedValue = value + " " + mapActivity.getResources().getString(R.string.metric_ton);
+				}
+				break;
+			case "students":
+			case "spots":
+			case "seats":
+				if (Algorithms.isInt(value)) {
+					formattedPrefix = formatPrefix(prefix, mapActivity.getResources().getString(R.string.shared_string_capacity));
+				}
+				break;
+			case "wikipedia":
+				formattedPrefix = app.getString(R.string.shared_string_wikipedia);
+		}
+		return new String[] {formattedPrefix, formattedValue};
+	}
 
-    private String formatPrefix(String prefix, String units) {
-        return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
-    }
+	private String formatPrefix(String prefix, String units) {
+		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
+	}
 
-    private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
-                          boolean collapsable, CollapsableView collapsableView,
-                          int textColor, boolean isWiki, boolean isText, boolean needLinks,
-                          boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-        buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, socialMediaUrl,
-                collapsable, collapsableView, textColor,
-                isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
-    }
+	private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
+	                      boolean collapsable, CollapsableView collapsableView,
+	                      int textColor, boolean isWiki, boolean isText, boolean needLinks,
+	                      boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
+		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, socialMediaUrl,
+				collapsable, collapsableView, textColor,
+				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
+	}
 
-    protected void buildRow(View view, Drawable icon, String text, String textPrefix,
-                            String socialMediaUrl, boolean collapsable,
-                            CollapsableView collapsableView, int textColor, boolean isWiki,
-                            boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
-                            boolean matchWidthDivider, int textLinesLimit) {
+	protected void buildRow(View view, Drawable icon, String text, String textPrefix,
+	                        String socialMediaUrl, boolean collapsable,
+	                        CollapsableView collapsableView, int textColor, boolean isWiki,
+	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
+	                        boolean matchWidthDivider, int textLinesLimit) {
 
-        if (!isFirstRow()) {
-            buildRowDivider(view);
-        }
+		if (!isFirstRow()) {
+			buildRowDivider(view);
+		}
 
-        LinearLayout baseView = new LinearLayout(view.getContext());
-        baseView.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        baseView.setLayoutParams(llBaseViewParams);
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
 
-        LinearLayout ll = new LinearLayout(view.getContext());
-        ll.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        ll.setLayoutParams(llParams);
-        ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-        ll.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                String textToCopy;
-                if (text.contains(WIKI_LINK)) {
-                    textToCopy = text;
-                } else {
-                    textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
-                }
-                copyToClipboard(textToCopy, view.getContext());
-                return true;
-            }
-        });
+		LinearLayout ll = new LinearLayout(view.getContext());
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				String textToCopy;
+				if (text.contains(WIKI_LINK)) {
+					textToCopy = text;
+				} else {
+					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
+				}
+				copyToClipboard(textToCopy, view.getContext());
+				return true;
+			}
+		});
 
-        baseView.addView(ll);
+		baseView.addView(ll);
 
-        // Icon
-        if (icon != null) {
-            LinearLayout llIcon = new LinearLayout(view.getContext());
-            llIcon.setOrientation(LinearLayout.HORIZONTAL);
-            llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(64f), dpToPx(48f)));
-            llIcon.setGravity(Gravity.CENTER_VERTICAL);
-            ll.addView(llIcon);
+		// Icon
+		if (icon != null) {
+			LinearLayout llIcon = new LinearLayout(view.getContext());
+			llIcon.setOrientation(LinearLayout.HORIZONTAL);
+			llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(64f), dpToPx(48f)));
+			llIcon.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIcon);
 
-            ImageView iconView = new ImageView(view.getContext());
-            LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-            AndroidUtils.setMargins(llIconParams, dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
-            llIconParams.gravity = Gravity.CENTER_VERTICAL;
-            iconView.setLayoutParams(llIconParams);
-            iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            iconView.setImageDrawable(icon);
-            llIcon.addView(iconView);
-        }
+			ImageView iconView = new ImageView(view.getContext());
+			LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			AndroidUtils.setMargins(llIconParams, dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconParams.gravity = Gravity.CENTER_VERTICAL;
+			iconView.setLayoutParams(llIconParams);
+			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconView.setImageDrawable(icon);
+			llIcon.addView(iconView);
+		}
 
-        // Text
-        LinearLayout llText = new LinearLayout(view.getContext());
-        llText.setOrientation(LinearLayout.VERTICAL);
-        ll.addView(llText);
+		// Text
+		LinearLayout llText = new LinearLayout(view.getContext());
+		llText.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(llText);
 
-        TextView textPrefixView = null;
-        if (!Algorithms.isEmpty(textPrefix)) {
-            textPrefixView = new TextView(view.getContext());
-            LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
-            textPrefixView.setLayoutParams(llTextParams);
-            textPrefixView.setTextSize(12);
-            textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
-            textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
-            textPrefixView.setMinLines(1);
-            textPrefixView.setMaxLines(1);
-            textPrefixView.setText(textPrefix);
-        }
+		TextView textPrefixView = null;
+		if (!Algorithms.isEmpty(textPrefix)) {
+			textPrefixView = new TextView(view.getContext());
+			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
+			textPrefixView.setLayoutParams(llTextParams);
+			textPrefixView.setTextSize(12);
+			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
+			textPrefixView.setMinLines(1);
+			textPrefixView.setMaxLines(1);
+			textPrefixView.setText(textPrefix);
+		}
 
-        TextView textView = new TextView(view.getContext());
-        LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0,
-                textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
-        textView.setLayoutParams(llTextParams);
-        textView.setTextSize(16);
-        textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
+		TextView textView = new TextView(view.getContext());
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0,
+				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
+		textView.setLayoutParams(llTextParams);
+		textView.setTextSize(16);
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
-        int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
-        if (isPhoneNumber || isUrl) {
-            textView.setTextColor(linkTextColor);
-            needLinks = false;
-        }
-        textView.setText(text);
-        if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
-            textView.setMovementMethod(null);
-            textView.setLinkTextColor(linkTextColor);
-            textView.setOnTouchListener(new ClickableSpanTouchListener());
-            AndroidUtils.removeLinkUnderline(textView);
-        }
-        textView.setEllipsize(TextUtils.TruncateAt.END);
-        if (textLinesLimit > 0) {
-            textView.setMinLines(1);
-            textView.setMaxLines(textLinesLimit);
-        } else if (isWiki) {
-            textView.setMinLines(1);
-            textView.setMaxLines(15);
-        } else if (isText) {
-            textView.setMinLines(1);
-            textView.setMaxLines(10);
-        }
-        if (textColor > 0) {
-            textView.setTextColor(getColor(textColor));
-        }
+		if (isPhoneNumber || isUrl) {
+			textView.setTextColor(linkTextColor);
+			needLinks = false;
+		}
+		textView.setText(text);
+		if (needLinks && customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
+			textView.setMovementMethod(null);
+			textView.setLinkTextColor(linkTextColor);
+			textView.setOnTouchListener(new ClickableSpanTouchListener());
+			AndroidUtils.removeLinkUnderline(textView);
+		}
+		textView.setEllipsize(TextUtils.TruncateAt.END);
+		if (textLinesLimit > 0) {
+			textView.setMinLines(1);
+			textView.setMaxLines(textLinesLimit);
+		} else if (isWiki) {
+			textView.setMinLines(1);
+			textView.setMaxLines(15);
+		} else if (isText) {
+			textView.setMinLines(1);
+			textView.setMaxLines(10);
+		}
+		if (textColor > 0) {
+			textView.setTextColor(getColor(textColor));
+		}
 
-        LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llTextViewParams.weight = 1f;
-        AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
-        llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
-        llText.setLayoutParams(llTextViewParams);
-        if (textPrefixView != null) {
-            llText.addView(textPrefixView);
-        }
-        llText.addView(textView);
+		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextViewParams.weight = 1f;
+		AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llText.setLayoutParams(llTextViewParams);
+		if (textPrefixView != null) {
+			llText.addView(textPrefixView);
+		}
+		llText.addView(textView);
 
-        ImageView iconViewCollapse = new ImageView(view.getContext());
-        if (collapsable && collapsableView != null) {
-            // Icon
-            LinearLayout llIconCollapse = new LinearLayout(view.getContext());
-            llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), ViewGroup.LayoutParams.MATCH_PARENT));
-            llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
-            llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
-            ll.addView(llIconCollapse);
+		ImageView iconViewCollapse = new ImageView(view.getContext());
+		if (collapsable && collapsableView != null) {
+			// Icon
+			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
+			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), ViewGroup.LayoutParams.MATCH_PARENT));
+			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
+			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIconCollapse);
 
-            LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
-            AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
-            llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
-            iconViewCollapse.setLayoutParams(llIconCollapseParams);
-            iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
-            llIconCollapse.addView(iconViewCollapse);
-            ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
-                        collapsableView.getContentView().setVisibility(View.GONE);
-                        iconViewCollapse.setImageDrawable(getCollapseIcon(true));
-                        collapsableView.setCollapsed(true);
-                    } else {
-                        collapsableView.getContentView().setVisibility(View.VISIBLE);
-                        iconViewCollapse.setImageDrawable(getCollapseIcon(false));
-                        collapsableView.setCollapsed(false);
-                    }
-                }
-            });
-            if (collapsableView.isCollapsed()) {
-                collapsableView.getContentView().setVisibility(View.GONE);
-                iconViewCollapse.setImageDrawable(getCollapseIcon(true));
-            }
-            baseView.addView(collapsableView.getContentView());
-        }
+			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
+			iconViewCollapse.setLayoutParams(llIconCollapseParams);
+			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
+			llIconCollapse.addView(iconViewCollapse);
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
+						collapsableView.getContentView().setVisibility(View.GONE);
+						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+						collapsableView.setCollapsed(true);
+					} else {
+						collapsableView.getContentView().setVisibility(View.VISIBLE);
+						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+						collapsableView.setCollapsed(false);
+					}
+				}
+			});
+			if (collapsableView.isCollapsed()) {
+				collapsableView.getContentView().setVisibility(View.GONE);
+				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+			}
+			baseView.addView(collapsableView.getContentView());
+		}
 
-        if (isWiki) {
-            buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
-                }
-            });
-        }
+		if (isWiki) {
+			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
+				}
+			});
+		}
 
-        ((LinearLayout) view).addView(baseView);
+		((LinearLayout) view).addView(baseView);
 
-        if (isPhoneNumber) {
-            ll.setOnClickListener(v -> {
-                if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
-                    showDialog(text, Intent.ACTION_DIAL, "tel:", v);
-                }
-            });
-        } else if (isUrl) {
-            ll.setOnClickListener(v -> {
-                if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-                    if (text.contains(WIKI_LINK)) {
-                        if (Version.isPaidVersion(app)) {
-                            WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
-                            wikiArticleHelper.showWikiArticle(wikiAmenity.getLocation(), text);
-                        } else {
-                            WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
-                        }
-                    } else {
-                        String uri = socialMediaUrl == null ? text : socialMediaUrl;
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(uri));
-                        AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-                    }
-                }
-            });
-        } else if (isWiki) {
-            ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity));
-        } else if (isText && text.length() > 200) {
-            ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
-        }
+		if (isPhoneNumber) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
+					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
+				}
+			});
+		} else if (isUrl) {
+			ll.setOnClickListener(v -> {
+				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					if (text.contains(WIKI_LINK)) {
+						if (Version.isPaidVersion(app)) {
+							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
+							wikiArticleHelper.showWikiArticle(wikiAmenity.getLocation(), text);
+						} else {
+							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
+						}
+					} else {
+						String uri = socialMediaUrl == null ? text : socialMediaUrl;
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(uri));
+						AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+					}
+				}
+			});
+		} else if (isWiki) {
+			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity));
+		} else if (isText && text.length() > 200) {
+			ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
+		}
 
-        rowBuilt();
+		rowBuilt();
 
-        setDividerWidth(matchWidthDivider);
-    }
+		setDividerWidth(matchWidthDivider);
+	}
 
-    public void buildAmenityRow(View view, AmenityInfoRow info) {
-        if (info.icon != null) {
-            buildRow(view, info.icon, info.text, info.textPrefix, info.socialMediaUrl,
-                    info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
-                    info.needLinks, info.isPhoneNumber,
-                    info.isUrl, info.matchWidthDivider, info.textLinesLimit);
-        } else {
-            buildRow(view, info.iconId, info.text, info.textPrefix, info.socialMediaUrl,
-                    info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
-                    info.needLinks, info.isPhoneNumber,
-                    info.isUrl, info.matchWidthDivider, info.textLinesLimit);
-        }
-    }
+	public void buildAmenityRow(View view, AmenityInfoRow info) {
+		if (info.icon != null) {
+			buildRow(view, info.icon, info.text, info.textPrefix, info.socialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
+					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
+		} else {
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.socialMediaUrl,
+					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
+					info.needLinks, info.isPhoneNumber,
+					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
+		}
+	}
 
-    private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
-                                                      @NonNull List<PoiType> categoryTypes,
-                                                      boolean poiAdditional, AmenityInfoRow textRow, PoiCategory type) {
+	private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
+	                                                  @NonNull List<PoiType> categoryTypes,
+	                                                  boolean poiAdditional, AmenityInfoRow textRow, PoiCategory type) {
 
-        List<TextViewEx> buttons = new ArrayList<>();
+		List<TextViewEx> buttons = new ArrayList<>();
 
-        LinearLayout view = buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
-        for (PoiType pt : categoryTypes) {
-            TextViewEx button = buildButtonInCollapsableView(context, false, false);
-            String name = pt.getTranslation();
-            button.setText(name);
+		for (PoiType pt : categoryTypes) {
+			TextViewEx button = buildButtonInCollapsableView(context, false, false);
+			String name = pt.getTranslation();
+			button.setText(name);
 
-            button.setOnClickListener(v -> {
-                if (type != null) {
-                    PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + type.getKeyName());
-                    if (filter != null) {
-                        filter.clearFilter();
-                        if (poiAdditional) {
-                            filter.setTypeToAccept(type, true);
-                            filter.updateTypesToAccept(pt);
-                            filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
-                        } else {
-                            LinkedHashSet<String> accept = new LinkedHashSet<>();
-                            accept.add(pt.getKeyName());
-                            filter.selectSubTypesToAccept(type, accept);
-                        }
-                        getMapActivity().showQuickSearch(filter);
-                    }
-                }
-            });
-            buttons.add(button);
-            if (buttons.size() > 3 && categoryTypes.size() > 4) {
-                button.setVisibility(View.GONE);
-            }
-            view.addView(button);
-        }
+			button.setOnClickListener(v -> {
+				if (type != null) {
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + type.getKeyName());
+					if (filter != null) {
+						filter.clearFilter();
+						if (poiAdditional) {
+							filter.setTypeToAccept(type, true);
+							filter.updateTypesToAccept(pt);
+							filter.setFilterByName(pt.getKeyName().replace('_', ':').toLowerCase());
+						} else {
+							LinkedHashSet<String> accept = new LinkedHashSet<>();
+							accept.add(pt.getKeyName());
+							filter.selectSubTypesToAccept(type, accept);
+						}
+						getMapActivity().showQuickSearch(filter);
+					}
+				}
+			});
+			buttons.add(button);
+			if (buttons.size() > 3 && categoryTypes.size() > 4) {
+				button.setVisibility(View.GONE);
+			}
+			view.addView(button);
+		}
 
-        if (textRow != null) {
-            TextViewEx button = buildButtonInCollapsableView(context, true, false, false);
-            String name = textRow.textPrefix + ": " + textRow.text.toLowerCase();
-            button.setText(name);
-            view.addView(button);
-        }
+		if (textRow != null) {
+			TextViewEx button = buildButtonInCollapsableView(context, true, false, false);
+			String name = textRow.textPrefix + ": " + textRow.text.toLowerCase();
+			button.setText(name);
+			view.addView(button);
+		}
 
-        if (categoryTypes.size() > 4) {
-            TextViewEx button = buildButtonInCollapsableView(context, false, true);
-            button.setText(context.getString(R.string.shared_string_show_all));
-            button.setOnClickListener(v -> {
-                for (TextViewEx b : buttons) {
-                    if (b.getVisibility() != View.VISIBLE) {
-                        b.setVisibility(View.VISIBLE);
-                    }
-                }
-                button.setVisibility(View.GONE);
-            });
-            view.addView(button);
-        }
+		if (categoryTypes.size() > 4) {
+			TextViewEx button = buildButtonInCollapsableView(context, false, true);
+			button.setText(context.getString(R.string.shared_string_show_all));
+			button.setOnClickListener(v -> {
+				for (TextViewEx b : buttons) {
+					if (b.getVisibility() != View.VISIBLE) {
+						b.setVisibility(View.VISIBLE);
+					}
+				}
+				button.setVisibility(View.GONE);
+			});
+			view.addView(button);
+		}
 
-        return new CollapsableView(view, this, collapsed);
-    }
+		return new CollapsableView(view, this, collapsed);
+	}
 
 	public Collection<String> getAdditionalInfoKeys() {
 		if (additionalInfo == null) {
@@ -936,7 +944,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				br.close();
 				str = bld.toString();
 				// ugly fix of temporary problem of map generation
-				if(isContentZipped(str)) {
+				if (isContentZipped(str)) {
 					str = unzipContent(str);
 				}
 			} catch (IOException e) {
@@ -949,77 +957,4 @@ public class AmenityUIHelper extends MenuBuilder {
 	boolean isContentZipped(String str) {
 		return str != null && str.startsWith(" gz ");
 	}
-
-
-    public static class AmenityInfoRow {
-
-        public final String key;
-		public Drawable icon;
-		public int iconId;
-		public final String textPrefix;
-		public final String text;
-		public final String socialMediaUrl;
-		public final CollapsableView collapsableView;
-		public final boolean collapsable;
-		public final int textColor;
-		public final boolean isWiki;
-		public final boolean isText;
-		public final boolean needLinks;
-		public final boolean isPhoneNumber;
-		public final boolean isUrl;
-		public final int order;
-		public final String name;
-		public final boolean matchWidthDivider;
-		public final int textLinesLimit;
-
-        public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-                              String socialMediaUrl, boolean collapsable,
-                              CollapsableView collapsableView, int textColor, boolean isWiki,
-                              boolean isText, boolean needLinks, int order, String name,
-                              boolean isPhoneNumber, boolean isUrl,
-                              boolean matchWidthDivider, int textLinesLimit) {
-            this.key = key;
-            this.icon = icon;
-            this.textPrefix = textPrefix;
-            this.text = text;
-            this.socialMediaUrl = socialMediaUrl;
-            this.collapsable = collapsable;
-            this.collapsableView = collapsableView;
-            this.textColor = textColor;
-            this.isWiki = isWiki;
-            this.isText = isText;
-            this.needLinks = needLinks;
-            this.order = order;
-            this.name = name;
-            this.isPhoneNumber = isPhoneNumber;
-            this.isUrl = isUrl;
-            this.matchWidthDivider = matchWidthDivider;
-            this.textLinesLimit = textLinesLimit;
-        }
-
-        public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-                              String socialMediaUrl, boolean collapsable,
-                              CollapsableView collapsableView, int textColor, boolean isWiki,
-                              boolean isText, boolean needLinks, int order, String name,
-                              boolean isPhoneNumber, boolean isUrl,
-                              boolean matchWidthDivider, int textLinesLimit) {
-            this.key = key;
-            this.iconId = iconId;
-            this.textPrefix = textPrefix;
-            this.text = text;
-            this.socialMediaUrl = socialMediaUrl;
-            this.collapsable = collapsable;
-            this.collapsableView = collapsableView;
-            this.textColor = textColor;
-            this.isWiki = isWiki;
-            this.isText = isText;
-            this.needLinks = needLinks;
-            this.order = order;
-            this.name = name;
-            this.isPhoneNumber = isPhoneNumber;
-            this.isUrl = isUrl;
-            this.matchWidthDivider = matchWidthDivider;
-            this.textLinesLimit = textLinesLimit;
-        }
-    }
 }

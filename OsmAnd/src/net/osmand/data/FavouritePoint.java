@@ -53,8 +53,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private long pickupDate;
 	private boolean calendarEvent;
 
-	private String amenityOriginName = null;
-	private Map<String, String> extensions = new HashMap<String, String>();
+	private String amenityOriginName;
+	private Map<String, String> amenityExtensions = new HashMap<String, String>();
 
 	private boolean visible = true;
 
@@ -182,14 +182,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = visible;
 	}
 
-	public String getAmenityOriginName() {
-		return amenityOriginName;
-	}
-
-	public void setAmenityOriginName(String amenityOriginName) {
-		this.amenityOriginName = amenityOriginName;
-	}
-
 	public int getOverlayIconId(@NonNull Context ctx) {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
@@ -265,12 +257,22 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.comment = comment;
 	}
 
-	public Map<String, String> getExtensions() {
-		return this.extensions;
+	@Nullable
+	public String getAmenityOriginName() {
+		return amenityOriginName;
 	}
 
-	public void setExtensions(Map<String, String> extensions) {
-		this.extensions = extensions;
+	public void setAmenityOriginName(@Nullable String amenityOriginName) {
+		this.amenityOriginName = amenityOriginName;
+	}
+
+	@NonNull
+	public Map<String, String> getAmenityExtensions() {
+		return amenityExtensions;
+	}
+
+	public void setAmenityExtensions(@NonNull Map<String, String> extensions) {
+		amenityExtensions = extensions;
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
@@ -389,12 +391,11 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			category = wptPt.category != null ? wptPt.category : "";
 		}
 		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, category, wptPt.ele, wptPt.time);
-		point.extensions = wptPt.getExtensionsToRead();
 		point.setDescription(wptPt.desc);
 		point.setComment(wptPt.comment);
-		if (wptPt.getAmenityOriginName() != null) {
-			point.setAmenityOriginName(wptPt.getAmenityOriginName());
-		}
+		point.setAmenityOriginName(wptPt.getAmenityOriginName());
+		point.setAmenityExtensions(wptPt.getExtensionsToRead());
+
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
 			String time = extensions.get(VISITED_DATE);
@@ -437,7 +438,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			point.category = getCategory();
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
-		extensions.putAll(this.extensions);
+		extensions.putAll(getAmenityExtensions());
 		if (!isVisible()) {
 			extensions.put(HIDDEN, "true");
 		}
@@ -462,8 +463,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (getColor() != 0) {
 			point.setColor(getColor());
 		}
-		if (!Algorithms.isEmpty(getAmenityOriginName())) {
-			point.setAmenityOriginName(getAmenityOriginName());
+		if (!Algorithms.isEmpty(amenityOriginName)) {
+			point.setAmenityOriginName(amenityOriginName);
 		}
 		return point;
 	}

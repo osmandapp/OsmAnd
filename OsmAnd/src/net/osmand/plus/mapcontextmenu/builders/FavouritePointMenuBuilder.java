@@ -5,28 +5,28 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,27 +35,35 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private static final Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
 
 	private final FavouritePoint point;
-	private Object originObject;
+	private final Map<String, String> amenityExtensions = new HashMap<>();
+	private Amenity amenity;
 
 	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint point) {
 		super(mapActivity);
 		this.point = point;
 		setShowNearestWiki(true);
-		acquireOriginObject();
+		acquireAmenityExtensions();
 	}
 
-	private void acquireOriginObject() {
-		originObject = collectUpdatedPointInfo(point.getExtensions(), point.getAmenityOriginName(),
-				point.getLatitude(), point.getLongitude());
+	private void acquireAmenityExtensions() {
+		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
+
+		String amenityOriginName = point.getAmenityOriginName();
+		if (amenityOriginName != null) {
+			amenity = helper.findAmenity(amenityOriginName, point.getLatitude(), point.getLongitude());
+		}
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(),
+				point.getAmenityOriginName(), point.getLatitude(), point.getLongitude()));
 	}
 
-	public Object getOriginObject() {
-		return originObject;
+	@Nullable
+	public Amenity getAmenity() {
+		return amenity;
 	}
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (originObject == null || !(originObject instanceof Amenity)) {
+		if (amenity == null || !(amenity instanceof Amenity)) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -71,12 +79,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		buildDateRow(view, point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
-		if (originObject != null) {
-			Map<String, String> additionalInfo = null;
-			if (originObject instanceof Map) {
-				additionalInfo = (Map<String, String>)originObject;
-			}
-			AmenityUIHelper helper = new AmenityUIHelper(this.mapActivity, getPreferredMapAppLang(), additionalInfo);
+		if (!Algorithms.isEmpty(amenityExtensions)) {
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());
 			helper.buildInternal(view);

@@ -1,12 +1,9 @@
 package net.osmand.data;
 
 import net.osmand.Location;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
-import net.osmand.GPXUtilities;
 
 import org.json.JSONObject;
 
@@ -70,9 +67,6 @@ public class Amenity extends MapObject {
 	private TIntArrayList y;
 	private TIntArrayList x;
 
-	public Amenity() {
-	}
-
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
@@ -109,7 +103,6 @@ public class Amenity extends MapObject {
 		return str;
 	}
 
-
 	// this method should be used carefully
 	public Map<String, String> getInternalAdditionalInfoMap() {
 		if (additionalInfo == null) {
@@ -117,23 +110,23 @@ public class Amenity extends MapObject {
 		}
 		return additionalInfo;
 	}
-	
+
 	public Collection<String> getAdditionalInfoValues(boolean excludeZipped) {
 		if (additionalInfo == null) {
 			return Collections.emptyList();
 		}
 		boolean zipped = false;
-		for(String v : additionalInfo.values()) {
-			if(isContentZipped(v)) {
+		for (String v : additionalInfo.values()) {
+			if (isContentZipped(v)) {
 				zipped = true;
 				break;
 			}
 		}
-		if(zipped) {
+		if (zipped) {
 			List<String> r = new ArrayList<>(additionalInfo.size());
-			for(String str : additionalInfo.values()) {
-				if(excludeZipped && isContentZipped(str)) {
-					
+			for (String str : additionalInfo.values()) {
+				if (excludeZipped && isContentZipped(str)) {
+
 				} else {
 					r.add(unzipContent(str));
 				}
@@ -143,7 +136,7 @@ public class Amenity extends MapObject {
 			return additionalInfo.values();
 		}
 	}
-	
+
 	public Collection<String> getAdditionalInfoKeys() {
 		if (additionalInfo == null) {
 			return Collections.emptyList();
@@ -299,11 +292,11 @@ public class Amenity extends MapObject {
 		return null;
 	}
 
-	public String getRef(){
+	public String getRef() {
 		return getAdditionalInfo(REF);
 	}
 
-	public String getRouteId(){
+	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
 	}
 
@@ -347,13 +340,13 @@ public class Amenity extends MapObject {
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
 				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo);
 	}
-	
+
 	@Override
 	public int compareTo(MapObject o) {
 		int cmp = super.compareTo(o);
-		if(cmp == 0 && o instanceof Amenity) {
+		if (cmp == 0 && o instanceof Amenity) {
 			int kn = ((Amenity) o).getType().getKeyName().compareTo(getType().getKeyName());
-			if(kn == 0) {
+			if (kn == 0) {
 				kn = ((Amenity) o).getSubType().compareTo(getSubType());
 			}
 			return kn;
@@ -372,12 +365,12 @@ public class Amenity extends MapObject {
 	}
 
 	public TIntArrayList getY() {
-		if(y == null) {
+		if (y == null) {
 			y = new TIntArrayList();
 		}
 		return y;
 	}
-	
+
 	public TIntArrayList getX() {
 		if (x == null) {
 			x = new TIntArrayList();
@@ -432,80 +425,5 @@ public class Amenity extends MapObject {
 			}
 		}
 		return a;
-	}
-
-	public Map<String, String> toTagValue(String privatePrefix, String osmPrefix, String collapsablePrefix, MapPoiTypes poiTypes) {
-		Map<String, String> result = new HashMap<String, String>();
-		Map<String, List<PoiType>> collectedPoiAdditionalCategories = new HashMap<>();
-
-		if (getName() != null) {
-			result.put(privatePrefix + NAME, getName());
-		}
-		if (subType != null) {
-			result.put(privatePrefix + SUBTYPE, subType);
-		}
-		if (type != null) {
-			result.put(privatePrefix + TYPE, type.getKeyName());
-		}
-		if (openingHours != null) {
-			result.put(privatePrefix + OPENING_HOURS, openingHours);
-		}
-		if (additionalInfo != null && additionalInfo.size() > 0) {
-			for (Entry<String, String> e : additionalInfo.entrySet()) {
-				String key = e.getKey();
-				String vl = e.getValue();
-
-				//collect tags with categories and skip
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
-					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
-				}
-				PoiType pType = null;
-				if (pt != null) {
-					pType = (PoiType) pt;
-					if (pType.isFilterOnly()) {
-						continue;
-					}
-				}
-				if (pType != null && !pType.isText()) {
-					String categoryName = pType.getPoiAdditionalCategory();
-					if (!Algorithms.isEmpty(categoryName)) {
-						List<PoiType> poiAdditionalCategoryTypes = collectedPoiAdditionalCategories.get(categoryName);
-						if (poiAdditionalCategoryTypes == null) {
-							poiAdditionalCategoryTypes = new ArrayList<>();
-							collectedPoiAdditionalCategories.put(categoryName, poiAdditionalCategoryTypes);
-						}
-						poiAdditionalCategoryTypes.add(pType);
-						continue;
-					}
-				}
-
-				//save all other values to separate lines
-				if (key.endsWith(OPENING_HOURS)) {
-					continue;
-				}
-				if (!GPXUtilities.HIDING_EXTENSIONS_AMENITY_TAGS.contains(key)) {
-					key = osmPrefix + key;
-				}
-				result.put(key, e.getValue());
-			}
-
-			//join collected tags by category into one string
-			for (Map.Entry<String, List<PoiType>> e : collectedPoiAdditionalCategories.entrySet()) {
-				String categoryName = collapsablePrefix + e.getKey();
-				List<PoiType> categoryTypes = e.getValue();
-				if (categoryTypes.size() > 0) {
-					StringBuilder sb = new StringBuilder();
-					for (PoiType pt : categoryTypes) {
-						if (sb.length() > 0) {
-							sb.append(SEPARATOR);
-						}
-						sb.append(pt.getKeyName());
-					}
-					result.put(categoryName, sb.toString());
-				}
-			}
-		}
-		return result;
 	}
 }
