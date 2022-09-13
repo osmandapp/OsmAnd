@@ -196,7 +196,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	private void loadWebViewData() {
 		String content = mContent;
 		if (content != null) {
-			content = isNightMode(true) ? getColoredContent(content) : content;
+			content = setupContentStyle(content, isNightMode(true));
 			String encoded = Base64.encodeToString(content.getBytes(), Base64.NO_PADDING);
 			mWebView.loadData(encoded, "text/html", "base64");
 		}
@@ -211,8 +211,21 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 
 	public void setupWebViewClient(@NonNull View view) { }
 
-	private String getColoredContent(@NonNull String content) {
-		return "<body style=\"color:white;\">\n" + content + "</body>\n";
+	private String setupContentStyle(@NonNull String content, boolean isNight) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<html><head>");
+		sb.append("<style type=\"text/css\">a{color:" + Algorithms.colorToString(ColorUtilities.getActiveColor(app, isNight)) + ";}");
+		sb.append("</style></head>");
+		if (isNight) {
+			sb.append("<body style=\"color:white;\">\n");
+			sb.append(content);
+			sb.append("</body></html>");
+		} else {
+			sb.append(content);
+			sb.append("</html>");
+		}
+
+		return sb.toString();
 	}
 
 	public void setupDependentViews(@NonNull View view) {
