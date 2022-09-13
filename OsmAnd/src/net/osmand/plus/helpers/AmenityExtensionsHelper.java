@@ -155,6 +155,9 @@ public class AmenityExtensionsHelper {
 				}
 			}
 		}
+		for (Map.Entry<String, String> entry : result.entrySet()) {
+			result.put(entry.getKey(), entry.getValue().replace(":", "_-_"));
+		}
 		return result;
 	}
 }
