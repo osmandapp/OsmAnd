@@ -212,10 +212,9 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	public void setupWebViewClient(@NonNull View view) { }
 
 	private String setupContentStyle(@NonNull String content, boolean isNight) {
-		String hexColor = ColorUtilities.getColorHex(ColorUtilities.getActiveColor(app, isNight));
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html><head>");
-		sb.append("<style type=\"text/css\">a{color:" + hexColor + ";}");
+		sb.append("<style type=\"text/css\">a{color:" + Algorithms.colorToString(ColorUtilities.getActiveColor(app, isNight)) + ";}");
 		sb.append("</style></head>");
 		if (isNight) {
 			sb.append("<body style=\"color:white;\">\n");
