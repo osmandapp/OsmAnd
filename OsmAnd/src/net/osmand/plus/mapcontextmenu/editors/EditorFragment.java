@@ -241,7 +241,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	private OnGlobalLayoutListener getOnGlobalLayoutListener() {
 		return () -> {
-			int layoutHeight = AndroidUtils.adjustViewResizeForIME(requireMapActivity(), view, layoutHeightPrevious);
+			int layoutHeight = AndroidUtils.resizeViewForKeyboard(requireMapActivity(), view, layoutHeightPrevious);
 			if (layoutHeight != layoutHeightPrevious) {
 				layoutHeightPrevious = layoutHeight;
 			}

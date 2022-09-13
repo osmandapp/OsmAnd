@@ -756,7 +756,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				public void onGlobalLayout() {
 					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-					int layoutHeight = AndroidUtils.adjustViewResizeForIME(mapActivity, view, layoutHeightPrevious);
+					int layoutHeight = AndroidUtils.resizeViewForKeyboard(mapActivity, view, layoutHeightPrevious);
 					if (layoutHeight < layoutHeightPrevious) {
 						isKeyboardShown = true;
 						layoutHeightMin = layoutHeight;
