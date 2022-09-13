@@ -96,8 +96,10 @@ public class OverviewCard extends MapBaseCard {
 			initAppearanceButton(iconColorDef, iconColorPres);
 			if (fileAvailable) {
 				initEditButton(iconColorDef, iconColorPres);
-				initDirectionsButton(iconColorDef, iconColorPres);
 			}
+		}
+		if (fileAvailable) {
+			initDirectionsButton(iconColorDef, iconColorPres);
 		}
 		GPXTrackAnalysis analysis = selectedGpxFile.getFilteredSelectedGpxFile() != null
 				? selectedGpxFile.getFilteredSelectedGpxFile().getTrackAnalysis(app)
@@ -160,6 +162,7 @@ public class OverviewCard extends MapBaseCard {
 
 	private void initButton(View item, int buttonIndex, @DrawableRes Integer iconResId,
 	                        @ColorRes int iconColorDef, @ColorRes int iconColorPres) {
+		item.setVisibility(View.VISIBLE);
 		AppCompatImageView icon = item.findViewById(R.id.image);
 		AppCompatImageView filled = item.findViewById(R.id.filled);
 		filled.setImageResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_topbar_shield_exit_ref);

@@ -81,6 +81,9 @@ public class OptionsCard extends MapBaseCard {
 				items.add(createDirectionsItem());
 			}
 			items.add(createDividerItem());
+		} else if (fileAvailable) {
+			items.add(createDirectionsItem());
+			items.add(createDividerItem());
 		}
 		if (gpxFile.getGeneralTrack() != null) {
 			items.add(createJoinGapsItem());
