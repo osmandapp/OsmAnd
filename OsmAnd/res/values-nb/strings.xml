@@ -4649,7 +4649,6 @@
     <string name="distance_circles">Distansesirkler</string>
     <string name="circle_settings">Sirkelinnstillinger</string>
     <string name="bearing_desc">Retningsminiprogram som viser absolutt og relativ peiling til et mål i vinkelenheter (grader 180, grader 360, milliradianer).</string>
-    <string name="map_markers_desc">På toppstolpe-miniprogrammet kan du se avstand og retningen til markøren fra nåværende posisjon. Det er mulig å sette opp visning av 1 eller 2 toppmarkører i miniprogrammet.</string>
     <string name="navigation_points_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
     <string name="routing_attr_avoid_highway_description">Unngå motorveier</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Ingen begrensninger)</string>

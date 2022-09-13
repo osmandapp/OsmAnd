@@ -4647,7 +4647,6 @@
     <string name="elevation_profile_widget_desc">O widget mostra o perfil da elevação e o declive da rota atual.</string>
     <string name="av_notes_choose_action_widget_desc">Escolha a ação.</string>
     <string name="gps_info_widget_desc">Mostra o número de satélites que o seu dispositivo detetou e está a usar nesse momento.</string>
-    <string name="map_markers_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="map_markers_bar_widget_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
     <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
     <string name="shared_string_speed">Velocidade</string>

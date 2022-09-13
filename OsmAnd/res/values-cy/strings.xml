@@ -2575,7 +2575,6 @@
     <string name="coordinates_widget_desc">Mae\'n dangos cyfesurynnau daearyddol y geo-leoliad presennol.</string>
     <string name="av_def_action_choose">Ar gais</string>
     <string name="audio_video_notes_desc">Mae ategion yn rhoi mynediad cyflym at ddechrau/stopio recordio (llun, fideo neu sain).</string>
-    <string name="map_markers_desc">Ar yr ategyn bar uchaf gallwch weld pellter a chyfeiriad y nodwr o\'r lleoliad presennol. Mae\'n bosib ei ffurfweddu i weld un neu ddau farcwr yn yr ategyn.</string>
     <string name="calculate_altitude">Cyfrifo\'r uchder</string>
     <string name="no_altitude_data">Dim data uchder</string>
     <string name="map_widget_current_speed">Cyflymder cyfredol</string>

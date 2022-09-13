@@ -4670,7 +4670,6 @@
     <string name="map_markers_bar_widget_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="track_attach_to_the_roads_descr">La traza se adjuntará al camino usando mapas sin conexión. Esto cambiará la geometría de la traza.</string>
     <string name="route_maneuvers">Maniobras de la ruta</string>
-    <string name="map_markers_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
     <string name="map_widget_trip_recording_uphill">Ascenso</string>

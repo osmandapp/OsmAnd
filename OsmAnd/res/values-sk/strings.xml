@@ -4665,7 +4665,6 @@
     <string name="lanes_widgets_desc">Nástroj jazdných pruhov zobrazuje rozloženie jazdných pruhov cesty a zvýrazňuje, ktoré pruhy použiť pri zapnutej navigácii.</string>
     <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
-    <string name="map_markers_desc">Nástroj na hornom paneli môže zobrazovať vzdialenosť a smer k značke od aktuálnej polohy. Je možné nastaviť zobrazenie 1 alebo 2 značiek na nástroji.</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
     <string name="fps_widget_desc">Zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
     <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>

@@ -3726,7 +3726,6 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Lebih suka jalan yang tidak beraspal daripada jalan beraspal untuk perutean.</string>
     <string name="coordinates_widget_desc">Ini menunjukkan koordinat geografis lokasi geografis saat ini.</string>
     <string name="bearing_desc">Widget bantalan menunjukkan bantalan absolut atau relatif ke target dalam satuan sudut (Derajat 180, Derajat 360, Miliradian).</string>
-    <string name="map_markers_desc">Di widget bilah atas Anda bisa melihat jarak dan arah ke penanda dari lokasi saat ini. Dimungkinkan untuk mengonfigurasi untuk melihat 1 atau 2 penanda teratas di widget.</string>
     <string name="app_mode_mountain_bicycle">Sepeda gunung</string>
     <string name="recalc_angle_dialog_descr">Segmen ekstra lurus antara lokasi saya dan rute yang dihitung akan ditampilkan hingga rute dihitung ulang</string>
     <string name="quick_action_hillshade_descr">Tombol untuk menampilkan atau menyembunyikan bayangan bukit di peta.</string>

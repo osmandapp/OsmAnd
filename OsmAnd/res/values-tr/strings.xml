@@ -4630,7 +4630,6 @@
     <string name="no_altitude_data">Rakım verisi yok</string>
     <string name="shared_string_speed">Hız</string>
     <string name="get_altitude_information">Rakım bilgisini al</string>
-    <string name="map_markers_desc">Üst çubuk widget\'ında, geçerli konumdan işaretçiye olan mesafeyi ve yönü görebilirsiniz. Widget\'ta 1 veya 2 üst işaretçiyi görecek şekilde yapılandırmak mümkündür.</string>
     <string name="bearing_secondary_desc">Görüntülenen verilerin biçimini şu şekilde değiştirebilirsiniz: %1$s – %2$s – %3$s.</string>
     <string name="gps_info_widget_desc">Aygıtınızın o anda algıladığı ve kullandığı uydu sayısını gösterir.</string>
     <string name="coordinates_widget_desc">Geçerli coğrafi konumun coğrafi koordinatlarını gösterir.</string>
