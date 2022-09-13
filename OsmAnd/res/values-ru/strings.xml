@@ -4653,7 +4653,6 @@
     <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
     <string name="map_markers_bar_widget_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
-    <string name="map_markers_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегать дорог, подходящих только для полноприводных автомобилей</string>
     <string name="routing_attr_avoid_4wd_only_name">Без дорог 4WD</string>
     <string name="compass_on_circles">Компас на окружности</string>
@@ -4787,4 +4786,6 @@
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
     <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
     <string name="favorite_delete_group">Удалить группу</string>
+    <string name="download_heightmap_maps">Карта высот</string>
+    <string name="display_position">Отображать позицию</string>
 </resources>

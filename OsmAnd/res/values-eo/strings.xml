@@ -1154,7 +1154,7 @@
     <string name="asap">Senprokraste</string>
     <string name="share_route_as_gpx">Kunhavigi kurson kiel GPX-dosieron</string>
     <string name="share_route_subject">Kurso kunhavigita per OsmAnd</string>
-    <string name="route_roundabout">Ĉe trafikcirklo elektu %1$d-an elveturejon</string>
+    <string name="route_roundabout">Ĉe la trafikcirklo elektu la %1$d-an elveturejon</string>
     <string name="route_kl">Veturu je maldekstra koridoro</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
     <string name="map_widget_battery">Nivelo de baterio</string>
@@ -2054,7 +2054,7 @@
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de kurso</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
-    <string name="route_roundabout_short">Elektu %1$d-an elveturejon</string>
+    <string name="route_roundabout_short">Elektu la %1$d-an elveturejon</string>
     <string name="search_map_hint">Urbo aŭ regiono</string>
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="routing_attr_allow_motorway_name">Uzi aŭtovojojn</string>
@@ -4632,7 +4632,6 @@
     <string name="shared_string_widget">Fenestraĵo</string>
     <string name="av_def_action_choose">Demandi</string>
     <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton al la mapo.</string>
-    <string name="map_markers_desc">Fenestraĵo montranta distancon kaj direkton al la aktiva map-marko el via nuna pozicio. Eblas alĝustigi la fenestraĵon por vidigi 1 aŭ 2 map-markojn.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
     <string name="rendering_attr_weatherPressureContours_name">Egal-prem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
@@ -4726,8 +4725,8 @@
     <string name="download_complete">Elŝuto finita</string>
     <string name="live_update_frequency_hour_variant">Mapoj estos kontrolitaj pri ĝisdatigoj je ĉiu horo.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Montbiciklaj kursoj IMBA</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri montbiciklajn kursojn laŭ skalo de IMBA</string>
-    <string name="attach_roads_warning">Vi povas alproksimigi al vojoj nur registritan spuron</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Montri dediĉitajn montbiciklajn kursojn laŭ la skalo de IMBA.</string>
+    <string name="attach_roads_warning">Nur registrita spuro povas esti alproksimigita al vojoj.</string>
     <string name="without_profiles_changing">Sen ŝanĝi profilon</string>
     <string name="shared_string_only_missing">Nur mankajn</string>
     <string name="download_tiles">Elŝuti kahelojn</string>
@@ -4735,11 +4734,11 @@
     <string name="auto_25_chars_route_tr_kl">Turniĝu dekstren kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_25_chars_route_tr_kr">Turniĝu dekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kr">Turniĝu malantaŭen kaj veturu ĉe dekstra flanko</string>
-    <string name="auto_25_chars_route_roundabout_kl">Elektu %1$d-an elveturejon kaj veturu ĉe maldekstra flanko</string>
-    <string name="auto_25_chars_route_roundabout_kr">Elektu %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kl">Elektu la %1$d-an elveturejon kaj veturu ĉe maldekstra flanko</string>
+    <string name="auto_25_chars_route_roundabout_kr">Elektu la %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
     <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
     <string name="connect_with_straight_line">Konekti per rekta linio</string>
-    <string name="attach_roads_descr">Elektu por alproksimigi vian spuron al vojoj estantaj sur malkonektaj mapoj. Tiamaniere altitudo estos korektita kaj informoj pri ŝoseoj kaj turniĝoj povos esti uzataj poste por navigi.</string>
+    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj uzante malkonektan mapon. Tiel altitudo estos korektita kaj informoj pri ŝoseoj kaj turniĝoj povos esti uzataj poste por navigi.</string>
     <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
@@ -4778,4 +4777,8 @@
     <string name="available_as_part_of_subscription_plan">Disponebla kiel parto de la abono %1$s.</string>
     <string name="included_in_your_current_plan">Inkluzivita en via nuna plano %1$s</string>
     <string name="favorite_confirm_delete_group">Ĉu vi certe volas forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)\?</string>
+    <string name="download_heightmap_maps">Altmapo</string>
+    <string name="display_position">Montri pozicion</string>
+    <string name="attach_to_roads_banner_desc">Alproksimigi vian spuron al vojoj por akiri detalajn navigajn instrukciojn.</string>
+    <string name="favorite_delete_group">Forigi grupon</string>
 </resources>

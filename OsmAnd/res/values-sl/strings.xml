@@ -4142,7 +4142,6 @@
     <string name="street_name_widget_desc">Gradnik za imena ulic prikazuje trenutno ime ulice z neposredno lokacijsko puščico ali ime naslednje ulice z manevrom, ki ga je treba dokončati.</string>
     <string name="shared_string_widget">Gradnik</string>
     <string name="bearing_desc">Gradnik za smer prikazuje absolutno ali relativno smer do cilja v kotnih enotah (stopinje 180, stopinje 360, miliradiani).</string>
-    <string name="map_markers_desc">V gradniku zgornje vrstice lahko vidiš razdaljo in smer do označbe od trenutne lokacije. Mogoče je nastaviti, da se v gradniku prikažeta 1 ali 2 zgornji označbi.</string>
     <string name="navigation_points_desc">Navigacijski gradniki so omogočeni med navigacijo in prikazujejo informacije, kot so razdalja, čas prihoda ali odhoda, naslednji zavoji, smer, ime trenutne ulice, informacije o voznih pasovih, omejitve hitrosti, opozorila o približevanju, POI, točke poti.</string>
     <string name="calculate_altitude">Izračunaj nadmorsko višino</string>
     <string name="osm_edits_view_descr">Oglej si vse svoje še nenaložene popravke ali napake OSM v %1$s. Že naložene spremembe ne bodo več prikazane.</string>
@@ -4772,4 +4771,5 @@
     <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)</string>
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
+    <string name="display_position">Položaj zaslona</string>
 </resources>

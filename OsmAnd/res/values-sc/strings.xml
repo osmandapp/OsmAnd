@@ -4688,7 +4688,6 @@
     <string name="lanes_widgets_desc">Su widget de sas corsias ammustrat sa dispositzione de sas corsias de su caminu atuale e evidèntziat sas corsias de impreare pro sa navigatzione ativa.</string>
     <string name="route_maneuvers_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
     <string name="bearing_desc">Su widget de s\'àngulu ammustrat sa diretzione assoluta o relativa cunfronta a un\'obietivu in unidades angulares (180 grados, 360 grados, millirradiantes).</string>
-    <string name="map_markers_desc">In su wiget de sa barra superiore dias pòdere bìdere sa distàntzia e sa diretzione finas a su marcadore dae sa positzione atuale. Si podet cunfigurare pro bìdere 1 o 2 marcadores superiores in su widget.</string>
     <string name="app_mode_mountain_bicycle">Bitzicleta de monte</string>
     <string name="map_widget_true_bearing">Àngulu reale</string>
     <string name="parking_widget_desc">Widget chi ammustrat sa distàntzia dae su tzentru de s\'ischermu tuo finas a su logu de parchègiu.</string>

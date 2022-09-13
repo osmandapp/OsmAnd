@@ -4466,7 +4466,6 @@
     <string name="bearing_desc">方位小部件以角度单位（180 度、360 度、毫弧度）显示与目标的绝对或相对方位。</string>
     <string name="coordinates_widget_desc">它显示当前地理位置的地理坐标。</string>
     <string name="street_name_widget_desc">街道名称微件使用直线位置箭头显示当前街道名称，或显示下一个街道名称以及必须完成的操作。</string>
-    <string name="map_markers_desc">在顶栏小组件上，你可以看到从当前位置到标记物的距离和方向。可以配置为在小组件中看到1或2个顶部标记。</string>
     <string name="map_widget_true_bearing">真方位</string>
     <string name="fps_widget_desc">显示地图和地图元素的显示和刷新速度。</string>
     <string name="radius_rules_widget_desc">半径尺工具有助于确定地图上选定点周围的半径，在地图上显示距离圆环。</string>

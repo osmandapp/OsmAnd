@@ -14,7 +14,6 @@ import net.osmand.core.jni.MapAnimator.AnimatedValue;
 import net.osmand.core.jni.MapAnimator.IAnimation;
 import net.osmand.core.jni.MapAnimator.TimingFunction;
 import net.osmand.core.jni.MapRendererState;
-import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
@@ -48,6 +47,7 @@ public class AnimateDraggingMapThread {
 
 	private static final float TARGET_MOVE_VELOCITY_LIMIT = 3000f;
 	private static final float TARGET_MOVE_DECELERATION = 10000f;
+	private static final int SYMBOLS_UPDATE_INTERVAL = 2000;
 
 	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
 	private static final float MAX_OX_OY_SUM_DELTA_TO_ANIMATE = 2400f;
@@ -76,11 +76,6 @@ public class AnimateDraggingMapThread {
 	public AnimateDraggingMapThread(@NonNull OsmandMapTileView tileView) {
 		this.app = tileView.getApplication();
 		this.tileView = tileView;
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
-			userInteractionAnimationKey = SwigUtilities.getOnSurfaceIconKey(1);
-			locationServicesAnimationKey = SwigUtilities.getOnSurfaceIconKey(2);
-		}
 	}
 
 	@Nullable
@@ -91,7 +86,16 @@ public class AnimateDraggingMapThread {
 	@Nullable
 	private MapAnimator getAnimator() {
 		MapRendererView mapRenderer = getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getAnimator() : null;
+		MapAnimator animator = mapRenderer != null ? mapRenderer.getAnimator() : null;
+		if (mapRenderer != null) {
+			if (userInteractionAnimationKey == null) {
+				userInteractionAnimationKey = SwigUtilities.getOnSurfaceIconKey(1);
+			}
+			if (locationServicesAnimationKey == null) {
+				locationServicesAnimationKey = SwigUtilities.getOnSurfaceIconKey(2);
+			}
+		}
+		return animator;
 	}
 
 	private void pendingRotateAnimation() {
@@ -151,11 +155,11 @@ public class AnimateDraggingMapThread {
 		stopped = false;
 		Thread t = new Thread(() -> {
 			try {
-				suspendUpdate();
+				suspendSymbolsUpdate();
 				runnable.run();
 			} finally {
 				currentThread = null;
-				resumeUpdate();
+				resumeSymbolsUpdate();
 			}
 		}, "Animating Thread");
 		currentThread = t;
@@ -295,7 +299,7 @@ public class AnimateDraggingMapThread {
 		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
 
-		if (finishAnimationCallback != null) {
+		if (startAnimationCallback != null) {
 			app.runInUIThread(startAnimationCallback);
 		}
 
@@ -444,7 +448,8 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void animatingMapAnimator(@NonNull MapRendererView mapRenderer, @NonNull MapAnimator animator) {
-		long currTime = SystemClock.uptimeMillis();
+		long startTime = SystemClock.uptimeMillis();
+		long currTime = startTime;
 		long prevTime = currTime;
 
 		int targetIntZoom = this.targetIntZoom;
@@ -460,6 +465,7 @@ public class AnimateDraggingMapThread {
 		boolean animateZoom = false;
 		boolean animateAzimuth = false;
 
+		mapRenderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 		if (!stopped) {
 			animator.resume();
 		}
@@ -787,17 +793,17 @@ public class AnimateDraggingMapThread {
 		targetIntZoom = 0;
 	}
 
-	private void suspendUpdate() {
+	private void suspendSymbolsUpdate() {
 		MapRendererView mapRenderer = tileView.getMapRenderer();
 		if (mapRenderer != null) {
 			mapRenderer.suspendSymbolsUpdate();
 		}
 	}
 
-	private void resumeUpdate() {
+	private void resumeSymbolsUpdate() {
 		MapRendererView mapRenderer = tileView.getMapRenderer();
 		if (mapRenderer != null) {
-			while (!mapRenderer.resumeSymbolsUpdate());
+			mapRenderer.resumeSymbolsUpdate();
 		}
 	}
 

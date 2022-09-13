@@ -4704,16 +4704,15 @@
     <string name="calculating_altitude">Berechne die Höhe</string>
     <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Sie kann von der vom Gerät aufgezeichneten Höhe abweichen und kann als Höhenkorrektur verwendet werden.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
-    <string name="map_markers_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
     <string name="map_markers_bar_widget_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
-    <string name="live_update_frequency_day_variant">Kartenaktualisierungen werden täglich überprüft.</string>
-    <string name="next_live_update_time">Nächste Aktualisierung: in %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Kartenaktualisierungen werden stündlich überprüft.</string>
-    <string name="live_update_frequency_week_variant">Kartenaktualisierungen werden wöchentlich überprüft.</string>
+    <string name="live_update_frequency_day_variant">Es wird täglich nach Kartenaktualisierungen gesucht.</string>
+    <string name="next_live_update_time">Nächste Aktualisierung um %1$s Uhr.</string>
+    <string name="live_update_frequency_hour_variant">Es wird stündlich nach Kartenaktualisierungen gesucht.</string>
+    <string name="live_update_frequency_week_variant">Es wird wöchentlich nach Kartenaktualisierungen gesucht.</string>
     <string name="altitude_correction">Höhenkorrektur</string>
     <string name="updated_map_time">Aktualisiert: %1$s.</string>
     <string name="includes_osm_changes_until">OSM Änderungen bis %1$s berücksichtigt.</string>
-    <string name="next_live_update_date_and_time">Nächste Aktualisierung %1$s in %2$s.</string>
+    <string name="next_live_update_date_and_time">Nächste Aktualisierung am %1$s um %2$s Uhr.</string>
     <string name="switch_widget_mode_desc">Tippen des Widgets wechselt den Modus.</string>
     <string name="side_marker_eta">Geschätzte Ankunftszeit</string>
     <string name="reset_all_settings_desc">Alle Einstellungen auf Standard zurücksetzen\?</string>
@@ -4785,4 +4784,8 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
+    <string name="display_position">Positionsanzeige</string>
+    <string name="how_to_use">Anleitung:</string>
+    <string name="shared_string_normal">Normal</string>
+    <string name="shared_string_large">Groß</string>
 </resources>

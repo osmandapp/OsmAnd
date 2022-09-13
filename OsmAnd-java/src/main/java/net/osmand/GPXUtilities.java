@@ -5,7 +5,6 @@ package net.osmand;
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
-import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
@@ -52,15 +51,24 @@ public class GPXUtilities {
 
 	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
 
-	private static final String ICON_NAME_EXTENSION = "icon";
-	private static final String BACKGROUND_TYPE_EXTENSION = "background";
-	private static final String PROFILE_TYPE_EXTENSION = "profile";
-	private static final String ADDRESS_EXTENSION = "address";
-	private static final String GAP_PROFILE_TYPE = "gap";
-	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
-	public static final String DEFAULT_ICON_NAME = "special_star";
-	public static final String PRIVATE_PREFIX = "amenity_";
+	public static final String ICON_NAME_EXTENSION = "icon";
+	public static final String BACKGROUND_TYPE_EXTENSION = "background";
+	public static final String COLOR_NAME_EXTENSION = "color";
+	public static final String PROFILE_TYPE_EXTENSION = "profile";
+	public static final String ADDRESS_EXTENSION = "address";
+
+	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
 	public static final String OSM_PREFIX = "osm_tag_";
+	public static final String AMENITY_PREFIX = "amenity_";
+	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
+
+	public static final List<String> EXTENSIONS_WITH_OSMAND_PREFIX = Arrays.asList(COLOR_NAME_EXTENSION,
+			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
+			AMENITY_ORIGIN_EXTENSION);
+
+	public static final String GAP_PROFILE_TYPE = "gap";
+	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final String DEFAULT_ICON_NAME = "special_star";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -128,7 +136,7 @@ public class GPXUtilities {
 	}
 
 	public static class GPXExtensions {
-		Map<String, String> extensions = null;
+		public Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
 
 		public Map<String, String> getExtensionsToRead() {
@@ -328,21 +336,16 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
 		}
 
-		public Amenity getAmenity() {
+		public String getAmenityOriginName() {
 			Map<String, String> extensionsToRead = getExtensionsToRead();
 			if (!extensionsToRead.isEmpty()) {
-				return Amenity.fromTagValue(extensionsToRead, PRIVATE_PREFIX, OSM_PREFIX);
+				return extensionsToRead.get(AMENITY_ORIGIN_EXTENSION);
 			}
 			return null;
 		}
 
-		public void setAmenity(Amenity amenity) {
-			if (amenity != null) {
-				Map<String, String> extensions = amenity.toTagValue(PRIVATE_PREFIX, OSM_PREFIX);
-				if (!extensions.isEmpty()) {
-					getExtensionsToWrite().putAll(extensions);
-				}
-			}
+		public void setAmenityOriginName(String originName) {
+			getExtensionsToWrite().put(AMENITY_ORIGIN_EXTENSION, originName);
 		}
 
 		public int getColor(ColorizationType type) {
@@ -454,12 +457,13 @@ public class GPXUtilities {
 			return (lat != 0 && lon != 0);
 		}
 
-		public static WptPt createAdjustedPoint(double lat, double lon, long time, String description,
+		public static WptPt createAdjustedPoint(double lat, double lon, String description,
 		                                        String name, String category, int color,
-		                                        String iconName, String backgroundType, Amenity amenity) {
+		                                        String iconName, String backgroundType,
+		                                        String amenityOriginName, Map<String, String> amenityExtensions) {
 			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
 			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
-			WptPt point = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			WptPt point = new WptPt(latAdjusted, lonAdjusted, System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 			point.name = name;
 			point.category = category;
 			point.desc = description;
@@ -473,8 +477,11 @@ public class GPXUtilities {
 			if (backgroundType != null) {
 				point.setBackgroundType(backgroundType);
 			}
-			if (amenity != null) {
-				point.setAmenity(amenity);
+			if (amenityOriginName != null) {
+				point.setAmenityOriginName(amenityOriginName);
+			}
+			if (amenityExtensions != null) {
+				point.getExtensionsToWrite().putAll(amenityExtensions);
 			}
 			return point;
 		}
@@ -2396,8 +2403,13 @@ public class GPXUtilities {
 		if (!extensions.isEmpty() || extensionsWriter != null) {
 			serializer.startTag(null, "extensions");
 			if (!extensions.isEmpty()) {
-				for (Entry<String, String> s : extensions.entrySet()) {
-					writeNotNullText(serializer, "osmand:" + s.getKey(), s.getValue());
+				for (Entry<String, String> entry : extensions.entrySet()) {
+					String key = entry.getKey();
+					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX) && (EXTENSIONS_WITH_OSMAND_PREFIX.contains(key) ||
+							key.startsWith(AMENITY_PREFIX) || key.startsWith(OSM_PREFIX))) {
+						key = OSMAND_EXTENSIONS_PREFIX + key;
+					}
+					writeNotNullText(serializer, key, entry.getValue());
 				}
 			}
 			if (extensionsWriter != null) {

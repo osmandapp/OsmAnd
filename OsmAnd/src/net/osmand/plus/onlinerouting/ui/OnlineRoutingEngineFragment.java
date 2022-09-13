@@ -3,7 +3,6 @@ package net.osmand.plus.onlinerouting.ui;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -758,29 +756,19 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 				public void onGlobalLayout() {
 					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-					Rect visibleDisplayFrame = new Rect();
-					view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-					int layoutHeight = visibleDisplayFrame.bottom;
-
+					int layoutHeight = AndroidUtils.resizeViewForKeyboard(mapActivity, view, layoutHeightPrevious);
 					if (layoutHeight < layoutHeightPrevious) {
 						isKeyboardShown = true;
 						layoutHeightMin = layoutHeight;
 					} else {
 						isKeyboardShown = layoutHeight == layoutHeightMin;
 					}
-
 					if (layoutHeight != layoutHeightPrevious) {
-						FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
-						rootViewLayout.height = layoutHeight;
-						view.requestLayout();
 						layoutHeightPrevious = layoutHeight;
 					}
 
-					view.post(new Runnable() {
-						@Override
-						public void run() {
-							view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
-						}
+					view.post(() -> {
+						view.getViewTreeObserver().addOnGlobalLayoutListener(getShowButtonsOnGlobalListener());
 					});
 				}
 			};

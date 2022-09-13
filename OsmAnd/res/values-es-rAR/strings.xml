@@ -4650,7 +4650,6 @@
     <string name="coordinates_widget_desc">Muestra las coordenadas geográficas de la ubicación actual.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="bearing_desc">Este widget muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados, milirradianes).</string>
-    <string name="map_markers_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, video o foto).</string>
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="get_altitude_information">Obtener información de altitud</string>
@@ -4800,4 +4799,5 @@
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
+    <string name="display_position">Posición de la pantalla</string>
 </resources>

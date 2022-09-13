@@ -17,6 +17,7 @@ import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 	private final MapMarkersHelper mapMarkersHelper;
 	private final MapMarkerSideWidgetState widgetState;
 	private final OsmandPreference<SideMarkerMode> markerModePref;
+	private final OsmandPreference<MarkerClickBehaviour> markerClickBehaviourPref;
 
 	private SideMarkerMode cachedMode;
 	private int cachedMeters;
@@ -49,18 +51,27 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		this.widgetState = widgetState;
 		this.mapMarkersHelper = app.getMapMarkersHelper();
 		this.markerModePref = widgetState.getMapMarkerModePref();
+		this.markerClickBehaviourPref = widgetState.getMarkerClickBehaviourPref();
 
 		cachedNightMode = isNightMode();
 
 		setText(null, null);
 		setOnClickListener(v -> {
-			widgetState.changeToNextState();
-			updateInfo(null);
+			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
+				changeWidgetState();
+			} else if(markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
+				showMarkerOnMap();
+			}
 		});
-		view.setOnLongClickListener(v -> {
-			MarkersWidgetsHelper.showMarkerOnMap(mapActivity, widgetState.isFirstMarker() ? 0 : 1);
-			return true;
-		});
+	}
+
+	private void changeWidgetState() {
+		widgetState.changeToNextState();
+		updateInfo(null);
+	}
+
+	private void showMarkerOnMap() {
+		MarkersWidgetsHelper.showMarkerOnMap(mapActivity, widgetState.isFirstMarker() ? 0 : 1);
 	}
 
 	@NonNull

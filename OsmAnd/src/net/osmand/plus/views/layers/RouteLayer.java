@@ -493,7 +493,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows) {
 				if (routeGeometry.hasMapRenderer()) {
-					if (renderState.shouldUpdateActionPoints || mapActivityInvalidated) {
+					if (routeUpdated || renderState.shouldUpdateActionPoints || mapActivityInvalidated) {
 						List<Location> actionPoints = calculateActionPoints(helper.getLastProjection(),
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);

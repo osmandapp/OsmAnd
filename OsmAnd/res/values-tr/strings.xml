@@ -2225,7 +2225,7 @@
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
     <string name="mapillary_descr">Herkes için çevrim içi sokak düzeyinde fotoğraflar. Yeni yerler keşfedin, işbirliği yapın, dünyayı yakalayın.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Herkes için sokak düzeyinde fotoğraflar. Yeni yerler keşfedin, işbirliği yapın, dünyayı yakalayın.</string>
+    <string name="plugin_mapillary_descr">Sokak düzeyinde görüntüler sunar. Görüntülerin eksik olduğu yerlerde, başkalarının kullanabilmesi için kendiniz görüntü ekleyebilirsiniz. Mapillary katmanını etkinleştirmek için Haritayı yapılandır menüsünden \"Sokak düzeyinde görüntüleri\" açın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
     <string name="routing_attr_allow_motorway_description">Otoyollara izin verir.</string>
@@ -3971,9 +3971,9 @@
     <string name="uploaded_count">%1$d / %2$d karşıya yüklendi</string>
     <string name="toast_select_edits_for_upload">Karşıya yüklenecek düzenlemeleri seçin</string>
     <string name="hillshade_slope_contour_lines">tepe gölgesi / yamaç / eş yükselti eğrileri</string>
-    <string name="open_place_reviews_plugin_description">Restoranlar, oteller, müzeler ve ara noktalar gibi halka açık yerler hakkında fotoğrafları, incelemeleri ve bağlantıları açık veri olarak gönderin https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">OpenPlaceReviews projesine katkıda bulunmanızı sağlar. Fotoğraflar, yorumlar, restoranlar, oteller, müzeler ve yol noktaları gibi halka açık yerler hakkında bağlantılar gibi.
 \n
-\nhttps://openplacereviews.org adresinde daha fazlasını okuyun</string>
+\nNasıl katkıda bulunacağınıza ilişkin talimatları web sitemizde bulabilirsiniz - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
     <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
@@ -4177,7 +4177,7 @@
     <string name="purchases_feature_desc_nautical">Deniz derinliği bilgilerine erişin</string>
     <string name="purchases_feature_desc_terrain">Arazi eş yükselti eğrileri, koyu gölgeli tam tepe gölgesi haritası ve tepelerle ovaları göstermek için renkli yamaç haritaları.</string>
     <string name="purchases_feature_desc_wikivoyage">Wikivoyage\'ı çevrim dışı keşfedin. Makaleler ülkelere ve bölgelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
-    <string name="purchases_feature_desc_wikipedia">Wikipedia\'yı çevrim dışı keşfedin. Makaleler ülkelere ve bölgelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
+    <string name="purchases_feature_desc_wikipedia">Seyahatinizde çevrim dışı Vikipedi\'ye sahip olmak, ziyaret ettiğiniz yerler hakkında daha fazla bilgi edinmenize yardımcı olur. Çevrim dışı olarak kullanılabilir ve Vikipedi makalelerini doğrudan harita üzerinde ilgi çekici noktalarla (POI) ilişkili olarak gösterir. Seçtiğiniz bölge için Vikipedi haritalarını indirmeyi unutmayın.</string>
     <string name="purchases_feature_desc_combined_wiki">İnternet bağlantısı olmadan hareket halindeyken Wikipedia makalelerini keşfedin. Çevrim dışı veriler ülkelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Tüm kıtalar ve bölgelerin çevrim dışı haritaları için sınırsız indirme elde edin.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Çevrim dışı haritalar için düzenli aylık güncellemelere erişin.</string>
@@ -4481,14 +4481,14 @@
     <string name="waypoint_template">Ara nokta şablonu</string>
     <string name="shared_string_used">Kullanılmış</string>
     <string name="files_with_route_restrictions">Rota kısıtlaması olan dosyalar</string>
-    <string name="predefined_waypoint_appearance_description">Bu eyleme dokunmak, ara noktayı önceden tanımlanmış parametrelerle otomatik olarak kaydedecektir.</string>
-    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz \"Ara nokta ekle\" ekranını açacaktır.</string>
+    <string name="predefined_waypoint_appearance_description">Bu eyleme dokunmak, ara noktayı önceden tanımlanmış parametrelerle otomatik olarak kaydeder.</string>
+    <string name="always_ask_waypoint_appearance_description">Bu eyleme dokunmak, adı ve görünümü değiştirebileceğiniz \"Ara nokta ekle\" ekranını açar.</string>
     <string name="waypoint_appearance">Ara nokta görünümü</string>
     <string name="track_file">Yol dosyası</string>
     <string name="navigate_point_format_swiss_grid">İsviçre Izgarası (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">İsviçre Izgarası (CH1903+)</string>
     <string name="shared_string_not_used">Kullanılmamış</string>
-    <string name="track_file_description">Bu eyleme dokunmak, kullanılabilir yolları seçebileceğiniz bir iletişim kutusu gösterecektir.</string>
+    <string name="track_file_description">Bu eyleme dokunmak, kullanılabilir yolları gösterecektir.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Beni-düzelt etiketlerini göster</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Not etiketleri</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Not etiketlerini göster</string>
@@ -4630,7 +4630,6 @@
     <string name="no_altitude_data">Rakım verisi yok</string>
     <string name="shared_string_speed">Hız</string>
     <string name="get_altitude_information">Rakım bilgisini al</string>
-    <string name="map_markers_desc">Üst çubuk widget\'ında, geçerli konumdan işaretçiye olan mesafeyi ve yönü görebilirsiniz. Widget\'ta 1 veya 2 üst işaretçiyi görecek şekilde yapılandırmak mümkündür.</string>
     <string name="bearing_secondary_desc">Görüntülenen verilerin biçimini şu şekilde değiştirebilirsiniz: %1$s – %2$s – %3$s.</string>
     <string name="gps_info_widget_desc">Aygıtınızın o anda algıladığı ve kullandığı uydu sayısını gösterir.</string>
     <string name="coordinates_widget_desc">Geçerli coğrafi konumun coğrafi koordinatlarını gösterir.</string>
@@ -4715,23 +4714,23 @@
     <string name="no_altitude_data_desc">%1$s verilerini almak için izinizi yollara ekleyebilir veya çevrim içi olarak hesaplayabilirsiniz.</string>
     <string name="map_marker_average_speed_desc">Tahmini varış zamanını hesaplamak için ortalama hızın ölçüleceği zaman aralığını belirtin.</string>
     <string name="reset_all_settings_desc">Tüm ayarları varsayılan değerlerine sıfırlamak istediğinizden emin misiniz\?</string>
-    <string name="goods_delivery_desc_4">Araç ağırlığınız 3,5 tondan fazlaysa Kamyon profilini kullanmanız gerekir.</string>
+    <string name="goods_delivery_desc_4">Ağırlığı 3,5 tondan fazla araçlarda Kamyon profilini kullanın.</string>
     <string name="marker_2nd">İkinci işaretleyici</string>
     <string name="marker_1st">İlk işaretleyici</string>
-    <string name="switch_widget_mode_desc">Widget\'a dokunarak modu değiştirebilirsiniz.</string>
+    <string name="switch_widget_mode_desc">Widget\'a dokunmak modu değiştirir.</string>
     <string name="side_marker_eta">Tahmini varış zamanı</string>
-    <string name="goods_delivery_desc">Yük taşıyan araçların bazı yollara erişimi kısıtlanabilir.</string>
+    <string name="goods_delivery_desc">Yük taşıyan araçların bazı yollara erişimi kısıtlı olabilir.</string>
     <string name="goods_delivery_desc_2">Yük teslimatı için kapalı olan yollardan kaçınılacaktır.</string>
-    <string name="goods_delivery_desc_3">Yalnızca en az dört tekerleği olan ve ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
+    <string name="goods_delivery_desc_3">Yalnızca ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
     <string name="routing_attr_goods_restrictions_name">Yük teslimatı</string>
     <string name="accessibility_2d_view_off">2.5B görünüm kapalı</string>
     <string name="accessibility_2d_view_on">2.5B görünüm açık</string>
     <string name="download_complete">İndirme tamamlandı</string>
-    <string name="trip_recording_duration_widget_desc">Mevcut kayıtlı seyahatin yol kayıt zamanını, dakika/saat olarak süreyi gösterir.</string>
+    <string name="trip_recording_duration_widget_desc">Mevcut kayıtlı seyahatin süresini gösterir.</string>
     <string name="auto_25_chars_route_tr_kr">Sağa dönün ve sağdan devam edin</string>
     <string name="trip_recording_uphill_widget_desc">Mevcut kayıtlı seyahatin toplam tüm çıkışlarını gösterir.</string>
-    <string name="connect_with_straight_line">Düz çizgi ile bağlayın</string>
-    <string name="attach_roads_warning">Yollara yalnızca bir kayıtlı izlenen yol ekleyebilirsiniz</string>
+    <string name="connect_with_straight_line">Bir düz çizgi ile bağlayın</string>
+    <string name="attach_roads_warning">Yollara yalnızca bir kayıtlı izlenen yol eklenebilir.</string>
     <string name="without_profiles_changing">Profilleri değiştirmeden</string>
     <string name="shared_string_only_missing">Sadece eksik olanlar</string>
     <string name="trip_recording_downhill_widget_desc">Mevcut kayıtlı seyahatin toplam tüm inişlerini gösterir.</string>
@@ -4744,14 +4743,14 @@
     <string name="auto_25_chars_route_tu_kr">U dönüşü yapın ve sağdan devam edin</string>
     <string name="auto_25_chars_route_roundabout_kl">%1$d çıkıştan çıkın ve soldan devam edin</string>
     <string name="auto_25_chars_route_roundabout_kr">%1$d çıkıştan çıkın ve sağdan devam edin</string>
-    <string name="auto_backup_preference_desc">Varsayılan olarak Android yeni cihaz veya yeniden kurulumda geri kurtarabilmek için favoriler, harita belirteçleri ve OsmAnd ayarları yedeklerini kaydeder. Bu yedekleme 25 MB ile sınırlıdır.
-\nEğer OsmAnd Cloud kullanıyorsanız bu, yeniden kurulumdan sonra yanlış anlaşılmalara sebep olabilir.</string>
-    <string name="duplacate_widget_added_snackbar">Bir widget kopyası listede yanına eklendi.</string>
+    <string name="auto_backup_preference_desc">Varsayılan olarak Android, yeni cihaz veya yeniden kurulumda geri kurtarabilmek için favoriler, harita belirteçleri ve OsmAnd ayarları yedeklerini kaydeder. Bu yedekleme 25 MB ile sınırlıdır.
+\nOsmAnd Cloud kullandığınızda bu, yeniden kurulumdan sonra yanlış anlaşılmalara sebep olabilir.</string>
+    <string name="duplacate_widget_added_snackbar">Listeye bir kopyalanan widget ekleniyor.</string>
     <string name="auto_backup_title">Otomatik yedekleme</string>
     <string name="shared_string_duplicate">Çoğalt</string>
-    <string name="av_notes_audio_widget_desc">Widget\'a dokunmak bir sesli not almayı sağlar.</string>
-    <string name="av_notes_photo_widget_desc">Widget\'a dokunmak bir fotoğraf çekmeyi sağlar.</string>
-    <string name="av_notes_video_widget_desc">Widget\'a dokunmak bir video kaydı başlatmayı sağlar.</string>
+    <string name="av_notes_audio_widget_desc">Widget\'a dokunmak bir sesli not almanızı sağlar.</string>
+    <string name="av_notes_photo_widget_desc">Widget\'a dokunmak bir fotoğraf çekmenizi sağlar.</string>
+    <string name="av_notes_video_widget_desc">Widget\'a dokunmak bir video kaydı başlatmanızı sağlar.</string>
     <string name="trip_recording_distance_widget_desc">Mevcut kayıtlı seyahatin mesafesini gösterir.</string>
     <string name="relative_bearing_widget_desc">İlerlediğiniz hareket yönü ile hedef nokta arasındaki açıyı gösterir.</string>
     <string name="true_bearing_wdiget_desc">Gerçek kuzey ile bulunduğunuz yerden gözlemlenen hedef noktası arasındaki açı.</string>
@@ -4773,8 +4772,15 @@
     <string name="rendering_attr_depthContourColorScheme_description">Derinlik eş yükselti çizgisi renk düzeni</string>
     <string name="rendering_attr_depthContourWidth_description">Derinlik eş yükselti çizgisi genişliği</string>
     <string name="rendering_attr_depthContourWidth_name">Derinlik eş yükselti çizgisi genişliği</string>
-    <string name="attach_roads_descr">Çevrim dışı haritalara eklenmiş geçerli bir rota ile izinizi yaklaşık olarak belirlemek istiyor musunuz\? Bu durumda, daha sonra navigasyonda kullanabileceğiniz düzeltilmiş yol yüksekliğine, yol bilgilerine ve dönüşlere sahip olacaksınız.</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Dağ bisikleti için özel olarak tasarlanmış parkurları göster</string>
+    <string name="attach_roads_descr">Çevrim dışı haritayı kullanarak izinizi bir rota ile yaklaşık olarak belirleyin. Bu, navigasyon sırasında kullanılan düzeltilmiş yükseklik değerlerini, yol ayrıntılarını ve dönüşleri sağlayacaktır.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Özel dağ bisikleti parkurlarını göster.</string>
     <string name="download_tiles">Döşemeleri indir</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA parkurlarını göster</string>
+    <string name="download_heightmap_maps">Yükseklik haritası</string>
+    <string name="favorite_confirm_delete_group">\"%1$s\" grubunu ve dahil olan tüm noktaları silmek istediğinizden emin misiniz (%2$d)</string>
+    <string name="favorite_delete_group">Grubu Sil</string>
+    <string name="display_position">Ekran konumu</string>
+    <string name="attach_to_roads_banner_desc">Ayrıntılı navigasyon yönergeleri almak için izlenen yolunuzu yollara ekleyin.</string>
+    <string name="available_as_part_of_subscription_plan">%1$s aboneliğinin bir parçası olarak mevcuttur.</string>
+    <string name="included_in_your_current_plan">Mevcut \"%1$s\" planınıza dahildir</string>
 </resources>

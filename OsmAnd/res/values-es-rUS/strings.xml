@@ -4662,7 +4662,6 @@
     <string name="shared_string_widget">Widget</string>
     <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, video o foto).</string>
     <string name="bearing_desc">Este widget muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados, milirradianes).</string>
-    <string name="map_markers_desc">En el widget de la barra superior se puede ver la distancia y la dirección del marcador desde la ubicación actual. Es posible configurarlo para ver 1 o 2 marcadores superiores en el widget.</string>
     <string name="navigation_points_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Estos widgets se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="calculate_altitude">Calcular altitud</string>
