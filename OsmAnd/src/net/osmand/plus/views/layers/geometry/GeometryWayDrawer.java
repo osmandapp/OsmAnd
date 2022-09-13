@@ -51,12 +51,15 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	public static class DrawPathData31 {
+		List<Integer> indexes;
 		List<Integer> tx;
 		List<Integer> ty;
 		GeometryWayStyle<?> style;
 
-		public DrawPathData31(@NonNull List<Integer> tx, @NonNull List<Integer> ty,
+		public DrawPathData31(@NonNull List<Integer> indexes,
+		                      @NonNull List<Integer> tx, @NonNull List<Integer> ty,
 		                      @Nullable GeometryWayStyle<?> style) {
+			this.indexes = indexes;
 			this.tx = tx;
 			this.ty = ty;
 			this.style = style;

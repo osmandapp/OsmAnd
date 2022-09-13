@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BackupExporter extends Exporter {
@@ -37,7 +36,7 @@ public class BackupExporter extends Exporter {
 	private final List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
-	private final List<RemoteFile> oldFilesToDelete = new CopyOnWriteArrayList<>();
+	private List<RemoteFile> oldFilesToDelete = new ArrayList<>();
 
 	public interface NetworkExportProgressListener {
 		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
@@ -271,7 +270,7 @@ public class BackupExporter extends Exporter {
 		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
 			if (remoteFile != null) {
-				oldFilesToDelete.add(remoteFile);
+				oldFilesToDelete = Algorithms.addToList(oldFilesToDelete, remoteFile);
 			}
 		}
 	}

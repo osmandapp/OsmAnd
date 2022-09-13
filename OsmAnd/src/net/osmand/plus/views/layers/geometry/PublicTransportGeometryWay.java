@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
@@ -167,12 +168,12 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 	}
 
 	@Override
-	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas,
+	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Integer> indexes,
 	                             List<Float> tx, List<Float> ty,
 	                             List<Integer> tx31, List<Integer> ty31,
 								 List<Double> angles, List<Double> distances, double distToFinish,
 								 List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
 
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {

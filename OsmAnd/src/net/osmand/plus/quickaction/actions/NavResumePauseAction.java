@@ -43,7 +43,7 @@ public class NavResumePauseAction extends QuickAction {
 			routingHelper.setFollowingMode(false);
 			routingHelper.setPauseNavigation(true);
 		}
-		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		mapActivity.refreshMap();
 	}
 

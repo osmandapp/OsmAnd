@@ -24,6 +24,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -155,9 +156,10 @@ public class ItemViewHolder {
 	public void bindDownloadItem(DownloadItem downloadItem, String cityName) {
 		initAppStatusVariables();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
-		int progress = -1;
-		if (context.getDownloadThread().getCurrentDownloadingItem() == downloadItem) {
-			progress = context.getDownloadThread().getCurrentDownloadingItemProgress();
+		float progress = -1;
+		DownloadIndexesThread downloadThread = context.getDownloadThread();
+		if (downloadThread.getCurrentDownloadingItem() == downloadItem) {
+			progress = downloadThread.getCurrentDownloadProgress();
 		}
 		boolean disabled = checkDisabledAndClickAction(downloadItem);
 		/// name and left item
@@ -270,8 +272,8 @@ public class ItemViewHolder {
 
 		} else {
 			progressBar.setVisibility(View.VISIBLE);
-			progressBar.setIndeterminate(progress == -1);
-			progressBar.setProgress(progress);
+			progressBar.setIndeterminate(progress < 0);
+			progressBar.setProgress((int) progress);
 
 			if (showProgressInDesc) {
 				double mb = downloadItem.getArchiveSizeMB();
@@ -291,7 +293,6 @@ public class ItemViewHolder {
 			} else {
 				descrTextView.setVisibility(View.GONE);
 			}
-
 		}
 	}
 

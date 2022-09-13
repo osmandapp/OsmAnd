@@ -1203,7 +1203,7 @@
     <string name="poi_craft_optician">验光配镜师</string>
     <string name="poi_craft_key_cutter">钥匙装配</string>
     <string name="poi_aeroway_gate">登机口</string>
-    <string name="poi_halt">铁路站;火车站</string>
+    <string name="poi_halt">火车站;火车站;火车站;火车站;火车站;车站</string>
     <string name="poi_fuel_1_25">1:25 燃料</string>
     <string name="poi_fuel_octane_91">辛烷值 91</string>
     <string name="poi_fuel_octane_80">辛烷值 80</string>

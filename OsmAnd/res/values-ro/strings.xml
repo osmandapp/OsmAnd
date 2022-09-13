@@ -4661,7 +4661,6 @@
     <string name="routing_attr_avoid_fords_name">Evitați vadurile</string>
     <string name="routing_attr_avoid_fords_description">Evitați vadurile</string>
     <string name="colour_of_circles">Culoarea cercurilor</string>
-    <string name="map_markers_desc">În bara de sus a widget-ului puteți vedea distanța și direcția până la marker din locația curentă. Este posibil să configurați pentru a vedea 1 sau 2 markeri de sus în widget.</string>
     <string name="av_def_action_choose">La cerere</string>
     <string name="route_maneuvers">Manevre de traseu</string>
     <string name="track_attach_to_the_roads_descr">Pista va fi atașată la drum cu ajutorul hărților offline, iar geometria pistei va fi modificată.</string>

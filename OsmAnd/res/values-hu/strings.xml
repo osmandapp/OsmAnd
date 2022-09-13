@@ -4634,7 +4634,6 @@
     <string name="lanes_widgets_desc">A sáv-widget megjeleníti az aktuális közlekedési sávok elrendezését, és kiemeli azokat, amelyeken az aktív navigáció szerint haladni kell.</string>
     <string name="map_markers_bar_widget_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
     <string name="bearing_desc">Az irányszög-widget a cél abszolút vagy relatív irányát mutatja szögegységben (180° fok, 360° fok vagy milliradián).</string>
-    <string name="map_markers_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
     <string name="navigation_points_desc">A navigációs widgetek a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, az aktuális utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
     <string name="track_attach_to_the_roads_descr">A nyomvonal offline térképekkel lesz csatolva az úthoz, ezért a nyomvonal geometriája módosulni fog.</string>
     <string name="street_name_widget_desc">Az utcanév widget az aktuális utcanevet mutatja egyenes helyzetjelző nyíllal vagy a következő utcanevet az elvégzendő manőverrel.</string>
@@ -4714,9 +4713,9 @@
     <string name="goods_delivery_desc_3">Csak legfeljebb 3,5 tonna tömegű áruszállító járművekre vonatkozik.</string>
     <string name="map_marker_average_speed_desc">Adja meg azt az időintervallumot, amilyen időközönként az alkalmazás mérni fogja az átlagsebességet a becsült érkezési idő kiszámításához.</string>
     <string name="routing_attr_goods_restrictions_name">Áruszállítás</string>
-    <string name="accessibility_2d_view_on">2.5D nézet Be</string>
+    <string name="accessibility_2d_view_on">2,5D nézet Be</string>
     <string name="download_complete">A letöltés kész</string>
-    <string name="accessibility_2d_view_off">2.5D nézet Ki</string>
+    <string name="accessibility_2d_view_off">2,5D nézet Ki</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
     <string name="trip_recording_downhill_widget_desc">Megjeleníti az aktuálisan rögzített utazás összes ereszkedésének összegét.</string>
@@ -4773,4 +4772,12 @@
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) \"%1$s\" csoportot és minden benne foglalt pontot (%2$d)</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
+    <string name="display_position">Pozíció megjelenítése</string>
+    <string name="shared_string_2_5_d_view">2,5D nézet</string>
+    <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
+    <string name="shared_string_large">Nagy</string>
+    <string name="how_to_use">Hogyan használható:</string>
+    <string name="shared_string_normal">Normál</string>
+    <string name="distance_by_tap_use_description">Érintse meg a térképet az aktuális tartózkodási helye és a megérintett pont közötti távolság megtekintéséhez.
+\nÉrintse meg 2 ujjával a térképet a kattintott pontok közötti távolság megtekintéséhez</string>
 </resources>

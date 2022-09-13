@@ -69,7 +69,6 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1681,8 +1680,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								|| app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get())
 						&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 					String name = f.getName();
-					SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null, 0);
+					app.getSavingTrackHelper().insertPointData(rec.lat, rec.lon, null, name, null, 0);
 				}
 			}
 

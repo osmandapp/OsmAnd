@@ -35,8 +35,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -62,7 +63,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
-		OnOffsetChangedListener, AddWidgetListener {
+		OnOffsetChangedListener, InAppPurchaseListener, AddWidgetListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
@@ -356,6 +357,23 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		}
 		return (MapActivity) activity;
 	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {}
+
+	@Override
+	public void onGetItems() {}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		onWidgetsConfigurationChanged();
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();

@@ -191,8 +191,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 					AlertDialog.Builder b = new AlertDialog.Builder(themedContext);
 					b.setTitle(R.string.favorite_delete_group);
-					b.setMessage(getString(R.string.favorite_confirm_delete_group, group.getName(), group.getPoints().size()));
-					b.setNegativeButton(R.string.shared_string_cancel, null);
+					String groupName = Algorithms.isEmpty(group.getName()) ? getString(R.string.shared_string_favorites) : group.getName();
+					b.setMessage(getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size()));
+					b.setNeutralButton(R.string.shared_string_cancel, null);
 					b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 						helper.deleteGroup(group);
 						updateParentFragment();

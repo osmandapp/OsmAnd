@@ -650,7 +650,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		amenities.clear();
 		OsmandApplication app = getApplication();
-		int r = getDefaultRadiusPoi(tileBox);
+		int r = tileBox.getDefaultRadiusPoi();
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
 		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {

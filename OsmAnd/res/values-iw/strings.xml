@@ -4637,7 +4637,6 @@
     <string name="map_markers_bar_widget_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק ואת הכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר כדי לראות סמן או שניים מובילים בווידג׳ט.</string>
     <string name="bearing_desc">וידג׳ט התכווין מציג את התכווין המוחלט או היחסי ליעד ביחידות זווית (מעלות 180, מעלות 360, מילירדיאנים).</string>
     <string name="navigation_points">נקודות ניווט</string>
-    <string name="map_markers_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק והכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר הצגה של סמן אחד או שניים בווידג׳ט.</string>
     <string name="routing_attr_avoid_4wd_only_description">הימנעות מדרכים שמתאימים לרכבי ארבע על ארבע בלבד</string>
     <string name="routing_attr_avoid_4wd_only_name">הימנעות מדרכים לארבע על ארבע</string>
     <string name="route_maneuvers">מעקפים</string>
@@ -4735,4 +4734,5 @@
     <string name="included_in_your_current_plan">כלול בתוכנית הנוכחית שלך „%1$s”</string>
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
     <string name="download_heightmap_maps">מפת גבהים</string>
+    <string name="favorite_delete_group">מחיקת קבוצה</string>
 </resources>

@@ -4120,7 +4120,7 @@
     <string name="new_device_account">جهاز جديد / حساب جديد</string>
     <string name="contact_support_description">إذا كان لديك أي أسئلة ، يرجى الاتصال بنا على %1$s.</string>
     <string name="empty_purchases_description">إذا لم تظهر مشترياتك هنا ، فانقر على \"%1$s\" ، أو اتصل بفريق الدعم الخاص بنا.</string>
-    <string name="contact_support">الاتصال بالدعم</string>
+    <string name="contact_support">اتصل بالدعم</string>
     <string name="troubleshooting">استكشاف الاخطاء</string>
     <string name="troubleshooting_description">يرجى اتباع هذا الرابط إذا كان لديك أي مشاكل مع المشتريات.</string>
     <string name="annual_subscription">اشتراك سنوي</string>
@@ -4712,7 +4712,6 @@
     <string name="magnetic_bearing_widget_desc">الزاوية بين الشمال المغناطيسي ونقطة الهدف التي تم ملاحظتها من موقعك.</string>
     <string name="lanes_widgets_desc">ويدجت عرض أداة ممرات الطريق الحالي وكشف الممرات عند القيادة باستخدام الملاحة النشطة.</string>
     <string name="street_name_widget_desc">ويدجت عرض اسم الشارع الحالي مع سهم الموقع المستقيم أو اسم الشارع التالي مع الاتجاهات التي يجب إكمالها.</string>
-    <string name="map_markers_desc">في ويدجت الشريط العلوي ، يمكنك رؤية المسافة والاتجاه المباشر من الموقع الحالي. كما يمكنك رؤية أكثراتجاه أو اثنين أعلى الأداة.</string>
     <string name="navigation_points_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
     <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
     <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
@@ -4791,7 +4790,7 @@
     <string name="lang_ckb">الكردية الوسطى</string>
     <string name="routing_attr_goods_restrictions_name">تسليم البضائع</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">عرض مسارات الدراجات الجبلية</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">عرض مسارات مصممة خصيصا لركوب الدراجات الجبلية</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">عرض مسارات مخصصة لركوب الدراجات الجبلية.</string>
     <string name="auto_25_chars_route_tl_kl">انعطف يسارا واستمر في اليسار</string>
     <string name="auto_25_chars_route_tl_kr">انعطف يسارا وحافظ على يمينك</string>
     <string name="auto_25_chars_route_tr_kl">انعطف يمينا واستمر في اليسار</string>
@@ -4840,7 +4839,7 @@
     <string name="attach_roads_descr">تقريب مسارك بمسار باستخدام الخريطة غير المتصلة بالإنترنت. سيوفر هذا قيم الارتفاع المصححة وتفاصيل الطريق والمنعطفات المستخدمة أثناء التنقل.</string>
     <string name="without_profiles_changing">دون تغيير البروفايلات</string>
     <string name="shared_string_only_missing">المفقود فقط</string>
-    <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط</string>
+    <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط.</string>
     <string name="download_tiles">تنزيل الطبقات</string>
     <string name="average_speed_skip_stops_desc">سيتم حساب السرعة الأقل من %1$s وتؤثر على متوسط السرعة.</string>
     <string name="attach_to_roads_banner_desc">قم بإرفاق مسارك بالطرق ، للحصول على تعليمات ملاحة مفصلة.</string>
@@ -4849,4 +4848,5 @@
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
+    <string name="display_position">عرض الموقف</string>
 </resources>

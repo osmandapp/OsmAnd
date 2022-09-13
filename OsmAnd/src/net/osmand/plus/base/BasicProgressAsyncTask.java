@@ -10,19 +10,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
+
 	protected String taskName;
-	protected int progress;
-	protected int deltaProgress;
-	protected int work;
 	protected String message = ""; //$NON-NLS-1$
 	protected OsmandApplication ctx;
 	protected boolean interrupted;
 	protected Tag tag;
 	private Handler uiHandler;
+	private final ProgressHelper progressHelper;
 
 	public BasicProgressAsyncTask(OsmandApplication app) {
 		this.ctx = app;
-		this.work = -1;
+		progressHelper = new ProgressHelper(() -> updateProgress(true));
 	}
 
 	public String getDescription() {
@@ -44,75 +43,51 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		message = taskName;
 		this.taskName = taskName;
 		startWork(work);
-		updProgress(false);
+		updateProgress(false);
 	}
 
 	protected abstract void updateProgress(boolean updateOnlyProgress, Tag tag);
 
 	@Override
 	public void startWork(int work) {
-		this.work = work;
-		if (this.work == 0) {
-			this.work = 1;
-		}
-		progress = 0;
-		deltaProgress = 0;
+		progressHelper.onStartWork(work);
 	}
 
 	@Override
 	public void progress(int deltaWork) {
-		if (!isIndeterminate()) {
-			this.deltaProgress += deltaWork;
-			// update only each percent
-			if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-				this.progress += deltaProgress;
-				this.deltaProgress = 0;
-				updProgress(true);
-			}
-		}
+		progressHelper.onProgress(deltaWork);
 	}
-	
-	private void updProgress(boolean updateOnlyProgress) {
-		if(uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
-			Message msg = Message.obtain(uiHandler, new Runnable() {
-				@Override
-				public void run() {
-					updateProgress(updateOnlyProgress, tag);
-				}
-			});
+
+	private void updateProgress(boolean updateOnlyProgress) {
+		if (uiHandler != null && (!uiHandler.hasMessages(1) || !updateOnlyProgress)) {
+			Message msg = Message.obtain(uiHandler, () -> updateProgress(updateOnlyProgress, tag));
 			msg.what = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 			uiHandler.sendMessage(msg);
 		}
 	}
 
-	
-
 	@Override
 	public void remaining(int remainingWork) {
-		int newprogress = work - remainingWork;
-		progress(newprogress - this.progress);
+		int newProgress = progressHelper.getTotalWork() - remainingWork;
+		progress(newProgress - progressHelper.getLastKnownProgress());
 	}
 
 	@Override
 	public void finishTask() {
-		work = -1;
-		progress = 0;
+		progressHelper.onFinishTask();
 		if (taskName != null) {
 			message = ctx.getResources().getString(R.string.finished_task) + ": " + taskName; //$NON-NLS-1$
-			updProgress(false);
+			updateProgress(false);
 		}
 	}
 
 	@Override
 	public boolean isIndeterminate() {
-		return work == -1;
+		return progressHelper.isIndeterminate();
 	}
 
-	public int getProgressPercentage() {
-		if (work > 0) {
-			return normalizeProgress((progress * 100) / work);
-		}
-		return normalizeProgress(progress);
+	public float getDownloadProgress() {
+		return progressHelper.getDownloadProgress();
 	}
 
 	public void setInterrupted(boolean interrupted) {
@@ -134,15 +109,5 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	@Override
 	public void setGeneralProgress(String genProgress) {
-	}
-
-	public static int normalizeProgress(int progress) {
-		if (progress < 0) {
-			return 0;
-		} else if (progress <= 100) {
-			return progress;
-		} else {
-			return 99;
-		}
 	}
 }

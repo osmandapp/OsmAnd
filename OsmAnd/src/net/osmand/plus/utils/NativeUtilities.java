@@ -2,6 +2,7 @@ package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -149,52 +150,13 @@ public class NativeUtilities {
 	}
 
 	@NonNull
-	public static PointI calculateTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
-	                                        double latitude, double longitude, boolean applyNewTarget) {
-		return calculateTarget31(mapRenderer, tileBox, latitude, longitude, true, applyNewTarget);
-	}
-
-	@NonNull
-	public static PointI calculateTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
-	                                        double latitude, double longitude, boolean useShiftedCenter, boolean applyNewTarget) {
+	public static PointI calculateTarget31(@NonNull MapRendererView mapRenderer,
+	                                       double latitude, double longitude, boolean applyNewTarget) {
 		PointI target31 = new PointI(MapUtils.get31TileNumberX(longitude), MapUtils.get31TileNumberY(latitude));
-		PointI newTarget31 = target31;
-		if (useShiftedCenter && tileBox.isCenterShifted()) {
-			PointI origTarget31 = mapRenderer.getState().getTarget31();
-			mapRenderer.setTarget(target31, false, true);
-			PointI windowSize = mapRenderer.getState().getWindowSize();
-			int cx = windowSize.getX() / 2;
-			int cy = windowSize.getY() / 2;
-			PointI shiftedTarget31 = get31FromPixel(mapRenderer, tileBox, cx, cy, true);
-			if (shiftedTarget31 != null) {
-				newTarget31 = new PointI(
-						target31.getX() + (target31.getX() - shiftedTarget31.getX()),
-						target31.getY() + (target31.getY() - shiftedTarget31.getY()));
-				if (applyNewTarget) {
-					mapRenderer.setTarget(newTarget31);
-				}
-			}
-			if (!applyNewTarget) {
-				mapRenderer.setTarget(origTarget31, false, true);
-			}
-		} else {
-			if (applyNewTarget) {
-				mapRenderer.setTarget(newTarget31);
-			}
+		if (applyNewTarget) {
+			mapRenderer.setTarget(target31);
 		}
-		return newTarget31;
-	}
-
-	@Nullable
-	public static PointI normalizeTarget31(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox) {
-		if (tileBox.isCenterShifted()) {
-			PointI windowSize = mapRenderer.getState().getWindowSize();
-			int sx = windowSize.getX() / 2;
-			int sy = windowSize.getY() / 2;
-			return NativeUtilities.get31FromPixel(mapRenderer, tileBox, sx, sy, true);
-		} else {
-			return mapRenderer.getState().getTarget31();
-		}
+		return target31;
 	}
 
 	public static boolean containsLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,

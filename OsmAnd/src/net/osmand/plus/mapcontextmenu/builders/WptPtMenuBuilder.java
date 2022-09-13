@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities;
@@ -17,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
@@ -29,34 +29,38 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
-	private Object originObject;
+	private final Map<String, String> amenityExtensions = new HashMap<>();
+	private Amenity amenity;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
 		setShowNearestWiki(true);
-
-		originObject = wpt.getAmenity();
-		if (originObject == null) {
-			String originObjectName = wpt.comment;
-			originObject = findAmenityObject(originObjectName, wpt.lat, wpt.lon);
-		}
+		acquireAmenityExtensions();
 	}
 
-	public Object getOriginObject() {
-		return originObject;
+	private void acquireAmenityExtensions() {
+		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
+
+		String amenityOriginName = wpt.getAmenityOriginName();
+		if (amenityOriginName != null) {
+			amenity = helper.findAmenity(amenityOriginName, wpt.getLatitude(), wpt.getLongitude());
+		}
+
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(wpt.getExtensionsToRead(),
+				wpt.getAmenityOriginName(), wpt.getLatitude(), wpt.getLongitude()));
 	}
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (originObject == null || !(originObject instanceof Amenity)) {
+		if (amenity == null || !(amenity instanceof Amenity)) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -93,13 +97,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (wpt.time > 0) {
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-			Date date = new Date(wpt.time);
-			buildRow(view, R.drawable.ic_action_data,
-					null, dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, null, false, 0, false, null, false);
-		}
+		buildDateRow(view, wpt.time);
 		if (wpt.speed > 0) {
 			buildRow(view, R.drawable.ic_action_speed,
 					null, OsmAndFormatter.getFormattedSpeed((float) wpt.speed, app), 0, false, null, false, 0, false, null, false);
@@ -117,19 +115,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		if (!Algorithms.isEmpty(wpt.desc)) {
 			prepareDescription(wpt, view);
 		}
+		buildCommentRow(view, wpt.comment);
 
-		if (!Algorithms.isEmpty(wpt.comment)) {
-			View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
-					false, null, true, 10, false, null, false);
-			rowc.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(rowc.getContext(),
-					app, wpt.comment, rowc.getResources().getString(R.string.poi_dialog_comment)));
-		}
-
-		if (originObject != null && originObject instanceof Amenity) {
-			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
+		if (!Algorithms.isEmpty(amenityExtensions)) {
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
+			helper.setLight(light);
+			helper.setLatLon(getLatLon());
+			helper.buildInternal(view);
 		}
 
 		buildPlainMenuItems(view);

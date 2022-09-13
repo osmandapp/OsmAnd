@@ -16,6 +16,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -37,7 +38,7 @@ public class RenderingIcons {
 
 	private static Bitmap cacheBmp;
 
-	public static boolean containsSmallIcon(String s){
+	public static boolean containsSmallIcon(String s) {
 		return smallIcons.containsKey(s);
 	}
 	
@@ -79,7 +80,7 @@ public class RenderingIcons {
 	public static byte[] getIconRawData(Context ctx, String s) {
 		Integer resId = shaderIcons.get(s);
 		if (resId == null) {
-			 resId = smallIcons.get(s);
+			resId = smallIcons.get(s);
 		}
 		if (resId == null) {
 			return null;
@@ -87,9 +88,9 @@ public class RenderingIcons {
 		try {
 			InputStream inputStream = ctx.getResources().openRawResource(resId);
 			ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
-            byte[] ioBuffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
+			byte[] ioBuffer = new byte[1024];
+			int bytesRead;
+			while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
 				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
 			inputStream.close();
@@ -97,7 +98,7 @@ public class RenderingIcons {
 			if (isVectorData(bitmapData)) {
 				return getPngFromVectorDrawable(ctx, resId);
 			}
-            return bitmapData;
+			return bitmapData;
 		} catch (Throwable e) {
 			log.error("Failed to get byte stream from icon", e);
 			return null;
@@ -217,7 +218,7 @@ public class RenderingIcons {
 			try {
 				if (f.getName().startsWith("h_")) {
 					shaderIcons.put(f.getName().substring(2), f.getInt(null));
-				} else if( f.getName().startsWith("mm_")) {
+				} else if (f.getName().startsWith("mm_")) {
 					smallIcons.put(f.getName().substring(3), f.getInt(null));
 				} else if (f.getName().startsWith("mx_")) {
 					bigIcons.put(f.getName().substring(3), f.getInt(null));
@@ -226,5 +227,11 @@ public class RenderingIcons {
 				log.error(e);
 			}
 		}
+	}
+
+	public static int getPreselectedIconId(@NonNull Amenity amenity) {
+		String gpxIconId = amenity.getGpxIcon();
+		String preselectedIconName = Algorithms.isEmpty(gpxIconId) ? getIconNameForAmenity(amenity) : gpxIconId;
+		return Algorithms.isEmpty(preselectedIconName) ? 0 : getBigIconResourceId(preselectedIconName);
 	}
 }

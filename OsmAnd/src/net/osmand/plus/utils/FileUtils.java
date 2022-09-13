@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
+	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
@@ -153,8 +154,8 @@ public class FileUtils {
 		return dest;
 	}
 
-	public static boolean isValidFileName(@NonNull String name) {
-		return !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
+	public static boolean isValidFileName(@Nullable String name) {
+		return name != null && !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
 	}
 
 	public static boolean isValidDirName(@NonNull String name) {

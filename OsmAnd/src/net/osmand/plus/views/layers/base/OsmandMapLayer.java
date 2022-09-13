@@ -27,7 +27,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -299,21 +298,6 @@ public abstract class OsmandMapLayer {
 		double bottom = top + height;
 		rf = new QuadRect(left, top, right, bottom);
 		return rf;
-	}
-
-	public static int getDefaultRadiusPoi(@NonNull RotatedTileBox tileBox) {
-		int radius;
-		double zoom = tileBox.getZoom();
-		if (zoom <= 15) {
-			radius = 10;
-		} else if (zoom <= 16) {
-			radius = 14;
-		} else if (zoom <= 17) {
-			radius = 16;
-		} else {
-			radius = 18;
-		}
-		return (int) (radius * tileBox.getDensity());
 	}
 
 	protected float getIconSize(OsmandApplication app) {

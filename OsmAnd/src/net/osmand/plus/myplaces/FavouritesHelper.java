@@ -9,7 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -34,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class FavouritesHelper {
@@ -46,7 +48,7 @@ public class FavouritesHelper {
 
 	private final List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private final Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-	private final List<FavouritePoint> cachedFavoritePoints = new CopyOnWriteArrayList<>();
+	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
 
 	private final Set<FavoritesListener> listeners = new HashSet<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
@@ -79,7 +81,7 @@ public class FavouritesHelper {
 
 	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
-		return cachedFavoritePoints;
+		return new ArrayList<>(cachedFavoritePoints);
 	}
 
 	@Nullable
@@ -344,30 +346,30 @@ public class FavouritesHelper {
 		return addFavourite(p, saveImmediately, true);
 	}
 
-	public boolean addFavourite(FavouritePoint p, boolean saveImmediately, boolean lookupAddress) {
-		if (Double.isNaN(p.getAltitude()) || p.getAltitude() == 0) {
-			p.initAltitude(app);
+	public boolean addFavourite(FavouritePoint point, boolean saveImmediately, boolean lookupAddress) {
+		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
+			initAltitude(point);
 		}
-		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
+		if (point.getName().isEmpty() && flatGroups.containsKey(point.getCategory())) {
 			return true;
 		}
-		if (lookupAddress && !p.isAddressSpecified()) {
-			lookupAddress(p);
+		if (lookupAddress && !point.isAddressSpecified()) {
+			lookupAddress(point);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
-		FavoriteGroup group = getOrCreateGroup(p);
+		FavoriteGroup group = getOrCreateGroup(point);
 
-		if (!p.getName().isEmpty()) {
-			p.setVisible(group.isVisible());
-			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
-				p.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
+		if (!point.getName().isEmpty()) {
+			point.setVisible(group.isVisible());
+			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
+				point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
 			} else {
-				if (p.getColor() == 0) {
-					p.setColor(group.getColor());
+				if (point.getColor() == 0) {
+					point.setColor(group.getColor());
 				}
 			}
-			group.getPoints().add(p);
-			addFavouritePoint(p);
+			group.getPoints().add(point);
+			addFavouritePoint(point);
 		}
 		if (saveImmediately) {
 			sortAll();
@@ -375,7 +377,7 @@ public class FavouritesHelper {
 		}
 
 		runSyncWithMarkers(group);
-		if (p.isHomeOrWork()) {
+		if (point.isHomeOrWork()) {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		}
 
@@ -462,16 +464,16 @@ public class FavouritesHelper {
 		return true;
 	}
 
-	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
-		cancelAddressRequest(p);
-		p.setLatitude(lat);
-		p.setLongitude(lon);
-		p.initAltitude(app);
+	private boolean editFavourite(@NonNull FavouritePoint point, double lat, double lon, @Nullable String description) {
+		cancelAddressRequest(point);
+		point.setLatitude(lat);
+		point.setLongitude(lon);
+		initAltitude(point);
 		if (description != null) {
-			p.setDescription(description);
+			point.setDescription(description);
 		}
 		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p));
+		runSyncWithMarkers(getOrCreateGroup(point));
 		return true;
 	}
 
@@ -511,6 +513,35 @@ public class FavouritesHelper {
 		flatGroups.put(group.getName(), group);
 
 		return group;
+	}
+
+	public void initAltitude(@NonNull FavouritePoint point) {
+		initAltitude(point, null);
+	}
+
+	public void initAltitude(@NonNull FavouritePoint point, @Nullable Runnable callback) {
+		Location location = new Location("", point.getLatitude(), point.getLongitude());
+		app.getLocationProvider().getRouteSegment(location, null, false,
+				new ResultMatcher<RouteDataObject>() {
+
+					@Override
+					public boolean publish(RouteDataObject routeDataObject) {
+						if (routeDataObject != null) {
+							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+							routeDataObject.calculateHeightArray(latLon);
+							point.setAltitude(routeDataObject.heightByCurrentLocation);
+						}
+						if (callback != null) {
+							callback.run();
+						}
+						return true;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
 	}
 
 	@NonNull
@@ -574,15 +605,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints.add(point);
+		cachedFavoritePoints = Algorithms.addToList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints.remove(point);
+		cachedFavoritePoints = Algorithms.removeFromList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		cachedFavoritePoints.removeAll(points);
+		cachedFavoritePoints = Algorithms.removeAllFromList(cachedFavoritePoints, points);
 	}
 
 	public void recalculateCachedFavPoints() {
@@ -590,8 +621,7 @@ public class FavouritesHelper {
 		for (FavoriteGroup f : favoriteGroups) {
 			allPoints.addAll(f.getPoints());
 		}
-		cachedFavoritePoints.clear();
-		cachedFavoritePoints.addAll(allPoints);
+		cachedFavoritePoints = new ArrayList<>(allPoints);
 	}
 
 	public void sortAll() {

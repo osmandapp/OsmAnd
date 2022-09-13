@@ -40,9 +40,8 @@ import java.util.Map;
 /**
  * Context container and utility class for MapRendererView and derivatives. 
  * @author Alexey Pelykh
- *
  */
-public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
+public class MapRendererContext {
     private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
@@ -145,15 +144,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
                 Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
 
                 // Ensure parents are loaded (this may also trigger load)
-                app.getRendererRegistry().getRenderer(rendName);
-
-                if (mapStylesCollection.getStyleByName(rendName) == null) {
-                    try {
-                        loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-                    } catch (IOException e) {
-                        Log.e(TAG, "Failed to load '" + rendName + "'", e);
-                    }
-                }
+				loadRenderer(rendName);
             }
             ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
             if (mapStyle != null) {
@@ -178,6 +169,20 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 
 		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && isVectorLayerEnabled()) {
 			recreateRasterAndSymbolsProvider();
+		}
+	}
+
+	private void loadRenderer(String rendName) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
+		if (mapStylesCollection.getStyleByName(rendName) == null && renderer != null) {
+			try {
+				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+				if (renderer.getDependsName() != null) {
+					loadRenderer(renderer.getDependsName());
+				}
+			} catch (IOException e) {
+				Log.e(TAG, "Failed to load '" + rendName + "'", e);
+			}
 		}
 	}
 
@@ -341,10 +346,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			} else return mapStyle.equals(other.mapStyle);
 		}
 	}
-
-    public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
-        loadStyleFromStream(name, source);
-    }
 
     private void loadStyleFromStream(String name, InputStream source) {
     	if (source == null) {

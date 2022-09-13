@@ -22,10 +22,10 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OsmandMap implements NavigationSessionListener {
 
@@ -37,7 +37,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private final List<OsmandMapListener> listeners = new CopyOnWriteArrayList<>();
+	private List<OsmandMapListener> listeners = new ArrayList<>();
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
@@ -49,12 +49,12 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public void addListener(@NonNull OsmandMapListener listener) {
 		if (!listeners.contains(listener)) {
-			listeners.add(listener);
+			listeners = Algorithms.addToList(listeners, listener);
 		}
 	}
 
 	public void removeListener(@NonNull OsmandMapListener listener) {
-		listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {

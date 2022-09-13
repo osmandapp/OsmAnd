@@ -334,7 +334,6 @@ public class MapUtils {
 		return Zu * 180 / Math.PI;
 	}
 
-
 	public static double getTileDistanceWidth(float zoom) {
 		LatLon ll = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 0));
 		LatLon ll2 = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 1));
@@ -726,10 +725,21 @@ public class MapUtils {
 				|| (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));
 	}
 
+	public static boolean areLatLonEqualPrecise(Location l1, Location l2) {
+		return l1 == null && l2 == null
+				|| (l2 != null && areLatLonEqualPrecise(l1, l2.getLatitude(), l2.getLongitude()));
+	}
+
 	public static boolean areLatLonEqual(Location l, double lat, double lon) {
 		return l != null
 				&& Math.abs(l.getLatitude() - lat) < 0.00001
 				&& Math.abs(l.getLongitude() - lon) < 0.00001;
+	}
+
+	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {
+		return l != null
+				&& Math.abs(l.getLatitude() - lat) < 0.0000001
+				&& Math.abs(l.getLongitude() - lon) < 0.0000001;
 	}
 	
 	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing){

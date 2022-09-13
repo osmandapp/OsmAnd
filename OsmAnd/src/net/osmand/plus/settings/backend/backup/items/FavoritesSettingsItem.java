@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
+import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
 
 import android.content.Context;
 
@@ -189,7 +189,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
 					Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-					List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, false);
+					List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPoints(), "");
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {

@@ -407,7 +407,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void switchToRouteFollowingLayout() {
 		touchEvent = 0;
 		app.getRoutingHelper().setRoutePlanningMode(false);
-		app.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		mapView.refreshMap();
 	}
 
@@ -415,7 +415,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (!routingHelper.isRoutePlanningMode() && routingHelper.isFollowingMode()) {
 			routingHelper.setRoutePlanningMode(true);
-			app.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 			mapView.refreshMap();
 			return true;
 		}
@@ -559,7 +559,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
-				app.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 				routingHelper.notifyIfRouteIsCalculated();
 				if (!settings.simulateNavigation) {
 					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);

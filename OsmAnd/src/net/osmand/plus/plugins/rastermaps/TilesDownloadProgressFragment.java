@@ -26,7 +26,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.utils.AndroidUtils;
@@ -286,7 +286,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Override
 	public void onTileDownloaded(long tileNumber, long cumulativeTilesSize) {
 		downloadedTilesNumber = tileNumber + 1;
-		progress = BasicProgressAsyncTask.normalizeProgress((int) ((float) downloadedTilesNumber / totalTilesNumber * 100));
+		progress = ProgressHelper.normalizeProgressPercent((int) ((float) downloadedTilesNumber / totalTilesNumber * 100));
 		downloadedSizeMb = (float) cumulativeTilesSize / BYTES_TO_MB;
 
 		updateProgress();
