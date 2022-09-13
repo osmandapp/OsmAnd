@@ -1,6 +1,10 @@
 package net.osmand.plus.utils;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -14,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
@@ -89,10 +94,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -369,8 +370,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createEnabledColorStateList(Context ctx, boolean night,
-															 @ColorRes int lightNormal, @ColorRes int lightPressed,
-															 @ColorRes int darkNormal, @ColorRes int darkPressed) {
+	                                                         @ColorRes int lightNormal, @ColorRes int lightPressed,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkPressed) {
 		return createColorStateList(ctx, night, android.R.attr.state_enabled,
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
@@ -380,15 +381,15 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createPressedColorStateList(Context ctx, boolean night,
-															 @ColorRes int lightNormal, @ColorRes int lightPressed,
-															 @ColorRes int darkNormal, @ColorRes int darkPressed) {
+	                                                         @ColorRes int lightNormal, @ColorRes int lightPressed,
+	                                                         @ColorRes int darkNormal, @ColorRes int darkPressed) {
 		return createColorStateList(ctx, night, android.R.attr.state_pressed,
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
 
 	private static ColorStateList createColorStateList(Context ctx, boolean night, int state,
-													   @ColorRes int lightNormal, @ColorRes int lightState,
-													   @ColorRes int darkNormal, @ColorRes int darkState) {
+	                                                   @ColorRes int lightNormal, @ColorRes int lightState,
+	                                                   @ColorRes int darkNormal, @ColorRes int darkState) {
 		return new ColorStateList(
 				new int[][] {
 						new int[] {state},
@@ -420,8 +421,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createCheckedColorIntStateList(boolean night,
-																@ColorInt int lightNormal, @ColorInt int lightChecked,
-																@ColorInt int darkNormal, @ColorInt int darkChecked) {
+	                                                            @ColorInt int lightNormal, @ColorInt int lightChecked,
+	                                                            @ColorInt int darkNormal, @ColorInt int darkChecked) {
 		return createColorIntStateList(night, android.R.attr.state_checked,
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
@@ -431,15 +432,15 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createEnabledColorIntStateList(boolean night,
-																@ColorInt int lightNormal, @ColorInt int lightPressed,
-																@ColorInt int darkNormal, @ColorInt int darkPressed) {
+	                                                            @ColorInt int lightNormal, @ColorInt int lightPressed,
+	                                                            @ColorInt int darkNormal, @ColorInt int darkPressed) {
 		return createColorIntStateList(night, android.R.attr.state_enabled,
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
 
 	private static ColorStateList createColorIntStateList(boolean night, int state,
-														  @ColorInt int lightNormal, @ColorInt int lightState,
-														  @ColorInt int darkNormal, @ColorInt int darkState) {
+	                                                      @ColorInt int lightNormal, @ColorInt int lightState,
+	                                                      @ColorInt int darkNormal, @ColorInt int darkState) {
 		return new ColorStateList(
 				new int[][] {
 						new int[] {state},
@@ -626,15 +627,28 @@ public class AndroidUtils {
 
 	public static void addStatusBarPadding21v(Context ctx, View view) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		if (Build.VERSION.SDK_INT >= 21
-				&& (!OsmandPlugin.isDevelopment()
-				|| app.getSettings().TRANSPARENT_STATUS_BAR.get())) {
+		if (!OsmandPlugin.isDevelopment() || app.getSettings().TRANSPARENT_STATUS_BAR.get()) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();
 			int paddingBottom = view.getPaddingBottom();
 			view.setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom);
 		}
+	}
+
+	public static int resizeViewForKeyboard(Activity activity, View view, int layoutHeightPrevious) {
+		Rect visibleDisplayFrame = new Rect();
+		view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+		int layoutHeight = visibleDisplayFrame.bottom;
+		if (!isInFullScreenMode(activity)) {
+			layoutHeight -= getStatusBarHeight(activity);
+		}
+		if (layoutHeight != layoutHeightPrevious) {
+			FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
+			rootViewLayout.height = layoutHeight;
+			view.requestLayout();
+		}
+		return layoutHeight;
 	}
 
 	public static int getNavBarHeight(Context ctx) {
@@ -732,18 +746,19 @@ public class AndroidUtils {
 	}
 
 	public static void enterToFullScreen(Activity activity, View view) {
-		if (Build.VERSION.SDK_INT >= 21) {
-			requestLayout(view);
-			activity.getWindow().getDecorView()
-					.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-		}
+		requestLayout(view);
+		activity.getWindow().getDecorView().setSystemUiVisibility(
+				View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 	}
 
 	public static void exitFromFullScreen(Activity activity, View view) {
-		if (Build.VERSION.SDK_INT >= 21) {
-			requestLayout(view);
-			activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-		}
+		requestLayout(view);
+		activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+	}
+
+	public static boolean isInFullScreenMode(Activity activity) {
+		int systemUiVisibility = activity.getWindow().getDecorView().getSystemUiVisibility();
+		return (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN) != 0;
 	}
 
 	private static void requestLayout(View view) {

@@ -7,7 +7,6 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -243,13 +241,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	private OnGlobalLayoutListener getOnGlobalLayoutListener() {
 		return () -> {
-			Rect visibleDisplayFrame = new Rect();
-			view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-			int layoutHeight = visibleDisplayFrame.bottom;
+			int layoutHeight = AndroidUtils.resizeViewForKeyboard(requireMapActivity(), view, layoutHeightPrevious);
 			if (layoutHeight != layoutHeightPrevious) {
-				FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
-				rootViewLayout.height = layoutHeight;
-				view.requestLayout();
 				layoutHeightPrevious = layoutHeight;
 			}
 		};
