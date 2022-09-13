@@ -241,9 +241,11 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		super.attachView(container, order, followingWidgets);
 
 		boolean showBottomShadow = true;
-		boolean coordinatedVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
+		boolean coordinatedVisible = visibilityHelper.shouldShowTopCoordinatesWidget()
+				|| visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
 		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesWidget && coordinatedVisible) {
+			if ((widget instanceof CoordinatesCurrentLocationWidget || widget instanceof CoordinatesMapCenterWidget) && coordinatedVisible) {
 				showBottomShadow = false;
 				break;
 			}

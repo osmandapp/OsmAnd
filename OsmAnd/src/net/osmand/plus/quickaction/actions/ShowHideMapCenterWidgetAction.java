@@ -13,26 +13,26 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
-public class ShowHideCoordinatesWidgetAction extends QuickAction {
-	public static final QuickActionType TYPE = new QuickActionType(35,
-			"coordinates.showhide", ShowHideCoordinatesWidgetAction.class)
+public class ShowHideMapCenterWidgetAction extends QuickAction {
+	public static final QuickActionType TYPE = new QuickActionType(38,
+			"coordinates.map_center.showhide", ShowHideMapCenterWidgetAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
-			.nameRes(R.string.coordinates_widget)
+			.nameRes(R.string.map_center_widget)
 			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()
 			.category(QuickActionType.CONFIGURE_SCREEN);
 
-	public ShowHideCoordinatesWidgetAction() {
+	public ShowHideMapCenterWidgetAction() {
 		super(TYPE);
 	}
 
-	public ShowHideCoordinatesWidgetAction(QuickAction quickAction) {
+	public ShowHideMapCenterWidgetAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		mapActivity.getMyApplication().getSettings().SHOW_COORDINATES_WIDGET.set(
-				!mapActivity.getMyApplication().getSettings().SHOW_COORDINATES_WIDGET.get());
+		mapActivity.getMyApplication().getSettings().SHOW_MAP_CENTER_COORDINATES_WIDGET.set(
+				!mapActivity.getMyApplication().getSettings().SHOW_MAP_CENTER_COORDINATES_WIDGET.get());
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
@@ -41,7 +41,7 @@ public class ShowHideCoordinatesWidgetAction extends QuickAction {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(
-				R.string.quick_action_coordinates_widget_descr);
+				R.string.quick_action_map_center_widget_descr);
 		parent.addView(view);
 	}
 
@@ -54,6 +54,6 @@ public class ShowHideCoordinatesWidgetAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		return application.getSettings().SHOW_COORDINATES_WIDGET.get();
+		return application.getSettings().SHOW_MAP_CENTER_COORDINATES_WIDGET.get();
 	}
 }

@@ -367,7 +367,7 @@ public class StreetNameWidget extends MapWidget {
 
 			boolean coordinatesVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof CoordinatesWidget && coordinatesVisible) {
+				if ((widget instanceof CoordinatesCurrentLocationWidget || widget instanceof CoordinatesMapCenterWidget) && coordinatesVisible) {
 					specialPosition = false;
 					break;
 				}

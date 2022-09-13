@@ -34,9 +34,10 @@ import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.RouteAction;
-import net.osmand.plus.quickaction.actions.ShowHideCoordinatesWidgetAction;
+import net.osmand.plus.quickaction.actions.ShowHideCurrentLocationWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
+import net.osmand.plus.quickaction.actions.ShowHideMapCenterWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
@@ -158,7 +159,8 @@ public class QuickActionRegistry {
 	}
 
 	private void saveActions() {
-		Type type = new TypeToken<List<QuickAction>>(){}.getType();
+		Type type = new TypeToken<List<QuickAction>>() {
+		}.getType();
 		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
 	}
 
@@ -259,7 +261,8 @@ public class QuickActionRegistry {
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
-		allTypes.add(ShowHideCoordinatesWidgetAction.TYPE);
+		allTypes.add(ShowHideCurrentLocationWidgetAction.TYPE);
+		allTypes.add(ShowHideMapCenterWidgetAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);

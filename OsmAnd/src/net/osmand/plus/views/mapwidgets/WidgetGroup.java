@@ -19,6 +19,7 @@ public enum WidgetGroup {
 
 	ROUTE_MANEUVERS(R.string.route_maneuvers, R.string.route_maneuvers_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers),
 	NAVIGATION_POINTS(R.string.navigation_points, R.string.navigation_points_desc, R.drawable.widget_navigation_day, R.drawable.widget_navigation_night, R.string.docs_widget_navigation_points),
+	COORDINATES_WIDGET(R.string.coordinates_widget, R.string.coordinates_widget_desc, R.drawable.widget_coordinates_longitude_west_day, R.drawable.widget_coordinates_longitude_west_night, R.string.docs_widget_coordinates),
 	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
 	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
@@ -97,13 +98,19 @@ public enum WidgetGroup {
 			return getPartOfPluginDesc(context, OsmandMonitoringPlugin.class);
 		} else if (this == AUDIO_VIDEO_NOTES) {
 			return getPartOfPluginDesc(context, AudioVideoNotesPlugin.class);
+		} else if (this == COORDINATES_WIDGET) {
+			String configureProfile = context.getString(R.string.configure_profile);
+			String generalSettings = context.getString(R.string.general_settings_2);
+			String coordinatesFormat = context.getString(R.string.coordinates_format);
+			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
+					generalSettings, coordinatesFormat);
 		}
 		return null;
 	}
 
 	@DrawableRes
 	public int getSecondaryIconId() {
-		if (this == BEARING) {
+		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
 		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES) {
 			return R.drawable.ic_extension_dark;

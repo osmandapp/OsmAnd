@@ -57,8 +57,22 @@ public class WidgetsVisibilityHelper {
 				&& !isSelectingTilesZone();
 	}
 
+	public boolean shouldShowTopMapCenterCoordinatesWidget() {
+		return (settings.SHOW_MAP_CENTER_COORDINATES_WIDGET.get())
+				&& !mapActivity.shouldHideTopControls()
+				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
+				&& !mapActivity.isTopToolbarActive()
+				&& !isInTrackAppearanceMode()
+				&& !isInRouteLineAppearanceMode()
+				&& !isInChoosingRoutesMode()
+				&& !isInWaypointsChoosingMode()
+				&& !isInFollowTrackMode()
+				&& !isInGpsFilteringMode()
+				&& !isSelectingTilesZone();
+	}
+
 	public boolean shouldShowTopCoordinatesWidget() {
-		return settings.SHOW_COORDINATES_WIDGET.get()
+		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get()
 				&& !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
