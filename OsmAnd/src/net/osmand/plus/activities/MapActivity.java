@@ -1201,6 +1201,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
+		getMapView().getAnimatedDraggingThread().stopAnimatingSync();
+
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
