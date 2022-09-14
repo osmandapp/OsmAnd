@@ -721,7 +721,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						return;
 					}
 					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
-					if(tunnel != null) {
+					if (tunnel != null) {
 						simulatePosition = new SimulationProvider();
 						simulatePosition.startSimulation(tunnel, location);
 						simulatePositionImpl();
@@ -736,12 +736,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	private void simulatePositionImpl() {
-		if(simulatePosition != null){
+		if (simulatePosition != null) {
 			net.osmand.Location loc = simulatePosition.getSimulatedLocation();
-			if(loc != null){
+			if (loc != null) {
 				setLocation(loc);
 				simulatePosition();
-			}  else {
+			} else {
 				simulatePosition = null;
 			}
 		}
@@ -935,7 +935,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return cachedLocation;
 	}
 
-
 	public void showNavigationInfo(TargetPoint pointToNavigate, Context uiActivity) {
 		getNavigationInfo().show(pointToNavigate, getHeading(), uiActivity);
 		
@@ -944,25 +943,22 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public OsmAndLocationSimulation getLocationSimulation() {
 		return locationSimulation;
 	}
-	
-	
+
 	public static class GPSInfo {
 		public int foundSatellites;
 		public int usedSatellites;
 		public boolean fixed;
 	}
 
-	public static boolean isNotSimulatedLocation(net.osmand.Location l) {
-		if (l != null) {
-			return !SIMULATED_PROVIDER.equals(l.getProvider());
+	public static boolean isNotSimulatedLocation(@Nullable net.osmand.Location location) {
+		if (location != null) {
+			return !SIMULATED_PROVIDER.equals(location.getProvider());
 		}
 		return true;
 	}
 
-
-	
 	public boolean checkGPSEnabled(Context context) {
-		LocationManager lm = (LocationManager)app.getSystemService(Context.LOCATION_SERVICE);
+		LocationManager lm = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		boolean gpsenabled = false;
 		boolean networkenabled = false;
 
@@ -972,21 +968,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 
 		try {
-		    networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+			networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 		} catch (Exception ignored) {
 		}
 
 		if (!gpsenabled && !networkenabled) {
-		    // notify user
-		    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-		    dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-		    dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), (paramDialogInterface, paramInt) -> {
+			// notify user
+			AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+			dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+			dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), (paramDialogInterface, paramInt) -> {
 				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 				AndroidUtils.startActivityIfSafe(context, intent);
 			});
-		    dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
-		    dialog.show();
-		    return false;
+			dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
+			dialog.show();
+			return false;
 		}
 		return true;
 	}
@@ -999,7 +995,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
 		if (!isLocationPermissionAvailable(activity)) {
 			ActivityCompat.requestPermissions(activity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_PERMISSION);
 		}
 	}
