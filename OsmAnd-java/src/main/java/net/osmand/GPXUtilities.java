@@ -15,17 +15,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -135,7 +125,7 @@ public class GPXUtilities {
 		boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException;
 	}
 
-	public static class GPXExtensions {
+	public static class GPXExtensions implements Serializable {
 		public Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
 
@@ -228,7 +218,7 @@ public class GPXUtilities {
 		public boolean lastPoint = false;
 	}
 
-	public static class WptPt extends GPXExtensions {
+	public static class WptPt extends GPXExtensions implements Serializable{
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
 		public double lat;
@@ -506,7 +496,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class TrkSegment extends GPXExtensions {
+	public static class TrkSegment extends GPXExtensions implements Serializable{
 
 		public String name = null;
 		public boolean generalSegment = false;
@@ -536,7 +526,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class Track extends GPXExtensions {
+	public static class Track extends GPXExtensions implements Serializable{
 		public String name = null;
 		public String desc = null;
 		public List<TrkSegment> segments = new ArrayList<>();
@@ -544,14 +534,14 @@ public class GPXUtilities {
 
 	}
 
-	public static class Route extends GPXExtensions {
+	public static class Route extends GPXExtensions implements Serializable{
 		public String name = null;
 		public String desc = null;
 		public List<WptPt> points = new ArrayList<>();
 
 	}
 
-	public static class Metadata extends GPXExtensions {
+	public static class Metadata extends GPXExtensions implements Serializable{
 
 		public String name;
 		public String desc;
@@ -600,7 +590,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class Author extends GPXExtensions {
+	public static class Author extends GPXExtensions implements Serializable{
 		public String name;
 		public String email;
 		public String link;
@@ -616,7 +606,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class Copyright extends GPXExtensions {
+	public static class Copyright extends GPXExtensions implements Serializable{
 		public String author;
 		public String year;
 		public String license;
@@ -632,7 +622,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class Bounds extends GPXExtensions {
+	public static class Bounds extends GPXExtensions implements Serializable{
 		public double minlat;
 		public double minlon;
 		public double maxlat;
@@ -650,7 +640,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class RouteSegment {
+	public static class RouteSegment implements Serializable{
 		public String id;
 		public String length;
 		public String segmentTime;
@@ -693,7 +683,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class RouteType {
+	public static class RouteType implements Serializable{
 		public String tag;
 		public String value;
 
@@ -712,7 +702,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class PointsGroup {
+	public static class PointsGroup implements Serializable{
 
 		public final String name;
 		public String iconName;
@@ -786,7 +776,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class GPXTrackAnalysis {
+	public static class GPXTrackAnalysis implements Serializable{
 
 		public String name;
 
