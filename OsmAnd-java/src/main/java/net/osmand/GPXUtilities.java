@@ -2404,7 +2404,7 @@ public class GPXUtilities {
 			serializer.startTag(null, "extensions");
 			if (!extensions.isEmpty()) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
-					String key = entry.getKey();
+					String key = entry.getKey().replace(":", "_-_");
 					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX) && (EXTENSIONS_WITH_OSMAND_PREFIX.contains(key) ||
 							key.startsWith(AMENITY_PREFIX) || key.startsWith(OSM_PREFIX))) {
 						key = OSMAND_EXTENSIONS_PREFIX + key;
