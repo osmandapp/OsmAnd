@@ -393,7 +393,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 						if (mapRenderer != null && useMapCenter()) {
 							Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 							Location lastRouteProjection = getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
-							PointI target31 = mapRenderer.getState().getTarget31();
+							PointI target31 = mapRenderer.getTarget();
 							Float heading = locationProvider.getHeading();
 							updateMarkerData(lastRouteProjection != null
 									? lastRouteProjection : lastKnownLocation, target31, heading);
@@ -438,7 +438,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(lastKnownLocationCached, lastKnownLocation)
 					|| !Algorithms.objectEquals(lastHeadingCached, heading);
 			if (markersRecreated || stateUpdated || dataChanged) {
-				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getState().getTarget31() :null, heading);
+				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getTarget() :null, heading);
 				lastKnownLocationCached = lastKnownLocation;
 				lastHeadingCached = heading;
 			}

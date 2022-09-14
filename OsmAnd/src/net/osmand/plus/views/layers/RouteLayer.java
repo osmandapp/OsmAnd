@@ -450,7 +450,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null) {
-					PointI target31 = mapRenderer.getState().getTarget31();
+					PointI target31 = mapRenderer.getTarget();
 					currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
 					currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
 				} else {

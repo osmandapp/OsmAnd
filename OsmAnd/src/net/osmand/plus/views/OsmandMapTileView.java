@@ -1135,8 +1135,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				centerX31 = center31.getX();
 				centerY31 = center31.getY();
 			}
-			PointI target31 = mapRenderer.getState().getTarget31();
-			float azimuth = mapRenderer.getState().getAzimuth();
+			PointI target31 = mapRenderer.getTarget();
+			float azimuth = mapRenderer.getAzimuth();
 			int targetX = target31.getX() - centerX31;
 			int targetY = target31.getY() - centerY31;
 			double angleR = Math.toRadians(-azimuth - rotate);
@@ -1188,7 +1188,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
 				int centerX31After = center31.getX();
 				int centerY31After = center31.getY();
-				PointI target31 = mapRenderer.getState().getTarget31();
+				PointI target31 = mapRenderer.getTarget();
 				int targetX = target31.getX() - (centerX31After - centerX31Before);
 				int targetY = target31.getY() - (centerY31After - centerY31Before);
 				// Shift map
@@ -1282,7 +1282,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI from31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (fromX), (int) (fromY));
 			PointI to31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (toX), (int) (toY));
 			if (from31 != null && to31 != null) {
-				PointI target31 = mapRenderer.getState().getTarget31();
+				PointI target31 = mapRenderer.getTarget();
 				setTarget31Impl(target31.getX() - (to31.getX() - from31.getX()),
 						target31.getY() - (to31.getY() - from31.getY()));
 			}

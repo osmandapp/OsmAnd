@@ -238,7 +238,7 @@ public class AnimateDraggingMapThread {
 						locationServicesAnimationKey);
 			}
 
-			PointI start31 = mapRenderer.getState().getTarget31();
+			PointI start31 = mapRenderer.getTarget();
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			if (finish31.getX() != start31.getX() || finish31.getY() != start31.getY()) {
 				float duration = animationDuration / 1000f;
@@ -349,7 +349,7 @@ public class AnimateDraggingMapThread {
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
 			}
 
-			PointI start31 = mapRenderer.getState().getTarget31();
+			PointI start31 = mapRenderer.getTarget();
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			if (finish31.getX() != start31.getX() || finish31.getY() != start31.getY()) {
 				float duration = animationTime / 1000f;
@@ -395,7 +395,7 @@ public class AnimateDraggingMapThread {
 
 				if (!stopped) {
 					if (mapRenderer != null) {
-						PointI start31 = mapRenderer.getState().getTarget31();
+						PointI start31 = mapRenderer.getTarget();
 						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 						animatingMoveInThread(start31.getX(), start31.getY(), finish31.getX(), finish31.getY(),
 								animationTime, notifyListener, finishAnimationCallback);
