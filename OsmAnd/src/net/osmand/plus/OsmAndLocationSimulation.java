@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 
+import static net.osmand.plus.OsmAndLocationProvider.SIMULATED_PROVIDER;
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
@@ -140,7 +142,7 @@ public class OsmAndLocationSimulation {
 				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
 				if (current != null) {
-					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
+					current.setProvider(SIMULATED_PROVIDER);
 				}
 				int stopDelayCount = 0;
 
@@ -254,7 +256,7 @@ public class OsmAndLocationSimulation {
 		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2);
 	}
 
-	private float getMetersLimitForPoint(SimulatedLocation point, float intervalTime,float coeff) {
+	private float getMetersLimitForPoint(SimulatedLocation point, float intervalTime, float coeff) {
 		float maxSpeed = (float) (getMaxSpeedForRoadType(point.getHighwayType()) / 3.6);
 		float speedLimit = point.getSpeedLimit();
 		if (speedLimit > 0 && maxSpeed > speedLimit) {
@@ -311,23 +313,21 @@ public class OsmAndLocationSimulation {
 	}
 
 	public static class SimulatedLocation extends Location {
+
 		private boolean trafficLight;
 		private String highwayType;
 		private float speedLimit;
 
-		public SimulatedLocation(SimulatedLocation l) {
-			super(l);
-			trafficLight = l.isTrafficLight();
-			highwayType = l.getHighwayType();
-			speedLimit = l.getSpeedLimit();
-		}
-
-		public SimulatedLocation(String s) {
-			super(s);
+		public SimulatedLocation(SimulatedLocation location) {
+			super(location);
+			trafficLight = location.isTrafficLight();
+			highwayType = location.getHighwayType();
+			speedLimit = location.getSpeedLimit();
 		}
 
 		public SimulatedLocation(Location l) {
 			super(l);
+			setProvider(SIMULATED_PROVIDER);
 		}
 
 		public boolean isTrafficLight() {
