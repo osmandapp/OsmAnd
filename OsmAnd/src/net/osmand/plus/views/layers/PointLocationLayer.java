@@ -93,6 +93,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private CoreMapMarker locationMarkerWithHeading;
 	private CoreMapMarker navigationMarker;
 	private CoreMapMarker navigationMarkerWithHeading;
+
+	private static final int TARGET_CHANGED_OBSERVABLE_TAG = 1;
+	private MapRendererTargetChangedObservable targetChangedObservable;
 	private IMapRenderer.ITargetChanged onTargetChanged;
 
 	private boolean markersInvalidated = true;
@@ -177,6 +180,11 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
+		if (targetChangedObservable != null) {
+			targetChangedObservable.detach(TARGET_CHANGED_OBSERVABLE_TAG);
+			targetChangedObservable = null;
+			onTargetChanged = null;
+		}
 		if (mapActivity != null) {
 			initCoreRenderer();
 		} else {
@@ -383,8 +391,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && onTargetChanged == null) {
-			MapRendererTargetChangedObservable targetChangedObservable = mapRenderer.getTargetChangedObservable();
+		if (mapRenderer != null && targetChangedObservable == null && onTargetChanged == null) {
+			targetChangedObservable = mapRenderer.getTargetChangedObservable();
 			onTargetChanged = new IMapRenderer.ITargetChanged() {
 				@Override
 				public void method(IMapRenderer renderer) {
@@ -403,7 +411,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					});
 				}
 			};
-			onTargetChanged.attachTo(targetChangedObservable, 1);
+			onTargetChanged.attachTo(targetChangedObservable, TARGET_CHANGED_OBSERVABLE_TAG);
 		}
 
 		boolean nightMode = settings != null && settings.isNightMode();
