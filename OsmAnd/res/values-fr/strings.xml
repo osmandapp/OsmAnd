@@ -4699,7 +4699,7 @@
     <string name="calculate_online_altitude_descr">Calculez l\'altitude en ligne grâce aux serveurs d\'OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Si cette altitude est différente de l\'altitude fournie par l\'appareil, l\'altitude pourra être corrigée.</string>
     <string name="live_update_frequency_hour_variant">Les mises à jour de la carte sont vérifiées chaque heure.</string>
     <string name="altitude_correction">Correction de l\'altitude</string>
-    <string name="no_altitude_data_desc">Vous pouvez déplacer votre trace sur les routes pour obtenir les données %1$s ou alors les calculer en ligne.</string>
+    <string name="no_altitude_data_desc">Pour obtenir les données %1$s, déplacez votre trace sur les routes ou calculez l\'itinéraire en ligne.</string>
     <string name="updated_map_time">Mise à jour : %1$s.</string>
     <string name="includes_osm_changes_until">Inclut les modifications OSM jusqu’au %1$s.</string>
     <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s à %2$s.</string>
@@ -4783,4 +4783,11 @@
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Ajoutez un point en tapant sur la carte pour afficher la distance entre ce point et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance entre les points.</string>
+    <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
+    <string name="tap_on_widget">Tapez sur le widget</string>
+    <string name="go_to_marker_location">Aller au marqueur</string>
+    <string name="shared_string_switch_mode">Basculer de mode</string>
+    <string name="click_on_widget">Cliquez sur le widget</string>
+    <string name="shared_string_shows">Afficher</string>
+    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
 </resources>

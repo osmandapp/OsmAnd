@@ -3836,7 +3836,7 @@
     <string name="subscription_on_hold_title">OsmAnd Live Abonnement liegt auf Eis</string>
     <string name="login_open_street_map">Bei OpenStreetMap anmelden</string>
     <string name="login_open_street_map_org">Bei OpenStreetMap.org anmelden</string>
-    <string name="sign_in_with_open_street_map">Anmelden mit OpenStreetMap</string>
+    <string name="sign_in_with_open_street_map">Mit OpenStreetMap anmelden</string>
     <string name="open_street_map_login_mode">Anmelden, um Änderungen hochzuladen.
 \n
 \nVerwenden Sie die OAuth Methode oder Ihren OSM Benutzernamen und Ihr Passwort.</string>
@@ -4290,10 +4290,10 @@
     <string name="online_maps_searching_descr">Online-Suche läuft…</string>
     <string name="reset_to_original">Auf Original zurücksetzen</string>
     <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
-    <string name="map_updates_for_mappers">Kartenaktualisierungen für Mapper</string>
-    <string name="benefits_for_contributors">Vorteile für aktive OSM-Beitragende</string>
-    <string name="benefits_for_contributors_primary_descr">Wer aktiv zu OpenStreetMap.org beiträgt, kann von unbegrenzten stündlichen Kartenaktualisierungen profitieren.</string>
-    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden, um zu prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
+    <string name="map_updates_for_mappers">Kartenaktualisierungen für Kartographen</string>
+    <string name="benefits_for_contributors">Vorteile für aktive OSM-Mitwirkende</string>
+    <string name="benefits_for_contributors_primary_descr">Aktive Mitwirkende an OpenStreetMap.org können Anspruch auf unbegrenzte stündliche Kartenaktualisierungen haben.</string>
+    <string name="benefits_for_contributors_secondary_descr">Melden Sie sich bei OpenStreetMap an, um zu prüfen, ob Sie Anspruch auf unbegrenzte monatliche und stündliche Kartenaktualisierungen haben.</string>
     <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
@@ -4625,10 +4625,10 @@
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Stopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Rechtweisende Peilung</string>
-    <string name="average_speed_time_interval_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit gemessen werden soll.</string>
+    <string name="average_speed_time_interval_desc">Geben Sie das Zeitintervall für die Mittelwertbildung der Geschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Fahrt an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Wechseln Sie den Modus, indem Sie auf das Widget tippen.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
     <string name="routing_attr_avoid_fords_description">Furten vermeiden</string>
     <string name="distance_circles">Entfernungskreise</string>
@@ -4645,8 +4645,8 @@
     <string name="map_widget_trip_recording_duration">Dauer</string>
     <string name="av_def_action_choose">Auf Anfrage</string>
     <string name="use_latin_name_if_missing">Falls nicht vorhanden, lateinischen Namen verwenden</string>
-    <string name="transport_hazmat_no_desc">Auf einigen Straßen und Tunneln ist der Transport gefährlicher Materialien verboten.</string>
-    <string name="transport_hazmat_yes_desc">Sie müssen eine richtige Kategorie wählen.</string>
+    <string name="transport_hazmat_no_desc">Straßen und Tunnel können den Transport gefährlicher Güter einschränken.</string>
+    <string name="transport_hazmat_yes_desc">Wählen Sie die zutreffende Kategorie aus.</string>
     <string name="import_as_one_track">Als einen Track importieren</string>
     <string name="transport_hazmat_title">Transport von Gefahrgut</string>
     <string name="map_widget_trip_recording_downhill">Bergab</string>
@@ -4663,8 +4663,8 @@
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="co2_mission">CO2-Ausstoß</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Fahrzeugsmotors, um den CO2-Ausstoß zu berechnen.</string>
-    <string name="routing_attr_motor_type_name">Kraftstoffart des Motors</string>
+    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
+    <string name="routing_attr_motor_type_name">Fahrzeugmotor</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
     <string name="bearing_secondary_desc">Das Format der angezeigten Daten kann in %1$s - %2$s - %3$s geändert werden.</string>
@@ -4702,7 +4702,7 @@
     <string name="get_altitude_data">Höhendaten abrufen</string>
     <string name="calculate_altitude">Höhe berechnen</string>
     <string name="calculating_altitude">Berechne die Höhe</string>
-    <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Sie kann von der vom Gerät aufgezeichneten Höhe abweichen und kann als Höhenkorrektur verwendet werden.</string>
+    <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
     <string name="map_markers_bar_widget_desc">Auf dem Widget in der Kopfzeile können Sie die Entfernung und die Richtung zur Markierung vom aktuellen Standort aus sehen. Es ist möglich, das Widget so zu konfigurieren, dass 1 oder 2 Markierungen angezeigt werden.</string>
     <string name="live_update_frequency_day_variant">Es wird täglich nach Kartenaktualisierungen gesucht.</string>
@@ -4719,11 +4719,11 @@
     <string name="goods_delivery_desc_3">Gilt nur für Lieferfahrzeuge bis 3,5 Tonnen.</string>
     <string name="goods_delivery_desc_2">Für die Warenanlieferung gesperrte Straßen werden gemieden.</string>
     <string name="goods_delivery_desc">Für Lieferfahrzeuge kann es auf einigen Straßen Einschränkungen geben.</string>
-    <string name="no_altitude_data_desc">Sie können Ihren Track mit den Straßen verbinden, um %1$s Daten zu erhalten oder sie online zu berechnen.</string>
-    <string name="map_marker_average_speed_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit gemessen wird, um die geschätzte Ankunftszeit zu berechnen.</string>
+    <string name="no_altitude_data_desc">Um %1$s Daten zu erhalten, verbinden Sie Ihren Track mit den Straßen oder berechnen sie ihn online.</string>
+    <string name="map_marker_average_speed_desc">Geben Sie das Zeitintervall für die Durchschnittsgeschwindigkeit an (wird für die Schätzung der Ankunftszeit verwendet).</string>
     <string name="marker_1st">Erste Markierung</string>
     <string name="marker_2nd">Zweite Markierung</string>
-    <string name="goods_delivery_desc_4">Verwenden Sie für ein Fahrzeuggewicht von mehr als 3,5 Tonnen das LKW-Profil.</string>
+    <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
     <string name="routing_attr_goods_restrictions_name">Warenlieferung</string>
     <string name="accessibility_2d_view_off">2.5D-Ansicht aus</string>
     <string name="accessibility_2d_view_on">2.5D-Ansicht an</string>
@@ -4788,4 +4788,13 @@
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
+    <string name="tap_on_widget">Tippen Sie auf das Widget</string>
+    <string name="go_to_marker_location">Zum Standort der Markierung gehen</string>
+    <string name="shared_string_switch_mode">Modus wechseln</string>
+    <string name="shared_string_2_5_d_view">2,5 D Ansicht</string>
+    <string name="map_markers_desc">Das Widget zeigt die Entfernung oder die geschätzte Ankunftszeit (ETA) der ersten beiden Markierungen in der Liste der Kartenmarkierungen an.</string>
+    <string name="map_marker_interval_dialog_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit zur Berechnung der geschätzten Ankunftszeit gemessen wird.</string>
+    <string name="click_on_widget">Klicken Sie auf das Widget</string>
+    <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
+\nTippen Sie mit 2 Fingern auf die Karte, um die Entfernung zwischen den angeklickten Punkten anzuzeigen</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="offline_edition_descr">Usa sempre la modifica offline.</string>
     <string name="update_poi_does_not_change_indexes">Le modifiche dei PDI all\'interno dell\'app non si riflettono nelle mappe scaricate, le modifiche sono salvate in un file locale.</string>
     <string name="local_openstreetmap_uploading">Caricamento…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/Note sono stati caricati</string>
+    <string name="local_openstreetmap_were_uploaded">{0} PDI/note sono stati caricati</string>
     <string name="local_openstreetmap_uploadall">Carica tutti</string>
     <string name="local_openstreetmap_upload">Carica la modifica in OSM</string>
     <string name="local_openstreetmap_delete">Elimina la modifica</string>
@@ -889,7 +889,7 @@
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
-    <string name="stop_routing_confirm">Sei sicuro di voler interrompere la navigazione?</string>
+    <string name="stop_routing_confirm">Interrompere la navigazione\?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e le destinazioni intermedie)?</string>
     <string name="precise_routing_mode_descr">Calcola percorsi precisi senza intoppi. È ancora lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
@@ -995,9 +995,9 @@
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asia, America Latina e similari</string>
-    <string name="driving_region_uk">UK, India, Australia e simili</string>
+    <string name="driving_region_uk">UK, India e simili</string>
     <string name="map_widget_fps_info">Informazioni FPS</string>
-    <string name="local_index_tile_data_zooms">Zoom scaricati: %1$s</string>
+    <string name="local_index_tile_data_zooms">Livelli zoom scaricati: %1$s</string>
     <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
     <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
@@ -1023,7 +1023,7 @@
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
     <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
-    <string name="local_osm_changes_delete_all_confirm">Confermi l\'eliminazione di %1$d modifiche OSM\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Eliminare %1$d modifiche OSM\?</string>
     <string name="app_mode_hiking">Escursionismo</string>
     <string name="app_mode_motorcycle">Motocicletta</string>
     <string name="app_mode_boat">Barca</string>
@@ -1712,7 +1712,7 @@
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Domande frequenti.</string>
     <string name="map_viewing_item">Mappa visualizzata</string>
-    <string name="search_on_the_map_item">Ricerca mappa</string>
+    <string name="search_on_the_map_item">Ricerca sulla mappa</string>
     <string name="planning_trip_item">Pianifica un viaggio</string>
     <string name="instalation_troubleshooting_item">Installazione e risoluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
@@ -1897,7 +1897,7 @@
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
-    <string name="open_street_map_login_and_pass">Nome utente e password di OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">Nome utente e password di OSM</string>
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
     <string name="no_map_markers_found">Aggiungi i marcatori sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
@@ -1973,7 +1973,7 @@
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
     <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
-    <string name="replace_favorite_confirmation">Sei sicuro di voler sostituire il preferito %1$s?</string>
+    <string name="replace_favorite_confirmation">Sostituire il preferito %1$s\?</string>
     <string name="shared_string_change">Cambia</string>
     <string name="get_started">Inizia</string>
     <string name="skip_map_downloading">Salta download delle mappe</string>
@@ -2084,7 +2084,7 @@
     <string name="quick_action_add_favorite">Aggiungi preferito</string>
     <string name="dialog_add_action_title">Aggiungi azione</string>
     <string name="quick_actions_delete">Cancella azione</string>
-    <string name="quick_actions_delete_text">Sicuro di volere eliminare l\'azione \"%s\"?</string>
+    <string name="quick_actions_delete_text">Eliminare l\'azione \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostra la finestra dei preferiti</string>
     <string name="quick_favorites_name_preset">Nome preimpostato</string>
     <string name="quick_action_fav_name_descr">Lascia il campo vuoto per utilizzare l’indirizzo o il nome del luogo.</string>
@@ -2167,7 +2167,7 @@
     <string name="average_speed">Velocità media</string>
     <string name="shared_string_time_moving">In movimento</string>
     <string name="points_delete_multiple_succesful">Punti cancellati.</string>
-    <string name="points_delete_multiple">Confermi la cancellazione di %1$d punto(i)\?</string>
+    <string name="points_delete_multiple">Eliminare %1$d punto(i)\?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
     <string name="track_points_category_name">Punti di passaggio, punti di interesse, caratteristiche con un nome</string>
     <string name="shared_string_gpx_track">Traccia</string>
@@ -3093,7 +3093,7 @@
     <string name="get_discount_title">Ottieni %1$d %2$s al %3$s di sconto.</string>
     <string name="get_discount_first_part">%1$s per il primo %2$s</string>
     <string name="get_discount_first_few_part">%1$s per il primo %2$s</string>
-    <string name="get_discount_second_part">poi %1$s</string>
+    <string name="get_discount_second_part">Poi %1$s</string>
     <string name="cancel_subscription">Cancella la sottoscrizione</string>
     <string name="price_and_discount">%1$s • Risparmi %2$s</string>
     <string name="routing_attr_allow_classic_only_name">Permetti solo i percorsi classici</string>
@@ -3184,7 +3184,7 @@
     <string name="routing_attr_width_description">Specifica il limite della larghezza del veicolo permessa nei percorsi.</string>
     <string name="avoid_in_routing_descr_">Evita certi percorsi e tipi di strade</string>
     <string name="app_mode_utv">Lato per lato</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name"></string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name"/>
     <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
     <string name="shared_string_calculate">Calcola</string>
     <string name="shared_string_osmand_usage">Utilizzo di OsmAnd</string>
@@ -3959,7 +3959,7 @@
     <string name="announcement_time_descr">Il tempo dell\'annuncio per i diversi avvisi dipende dal tipo di avviso, dalla velocità corrente e la velocità di navigazione preimpostata.</string>
     <string name="announcement_time_title">Tempo dell\'annuncio</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bici elettrica</string>
-    <string name="routing_engine_vehicle_type_cycling_mountain">Mountainbike ciclismo</string>
+    <string name="routing_engine_vehicle_type_cycling_mountain">Mountain biking</string>
     <string name="routing_engine_vehicle_type_cycling_road">Bici da corsa</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Ciclismo di regolarità</string>
     <string name="routing_engine_vehicle_type_small_truck">Piccolo furgone</string>
@@ -4254,7 +4254,7 @@
     <string name="backup_version_history">Cronologia della versione</string>
     <string name="backup_storage_taken">Memoria occupata</string>
     <string name="backup_version_history_delete_descr">Cancella il registro dei cambiamenti dei tipi di dati deprecati da OsmAnd Cloud\?</string>
-    <string name="send_logcat_log">Invia il registro logcat</string>
+    <string name="send_logcat_log">Invia registro di log</string>
     <string name="approximate_route_description">Collega il percorso alle strade della mappa per avere tutte le indicazioni di svolta e i dati aggiuntivi come levigatezza, tipo di strade, ecc.</string>
     <string name="grey_color_slope">Il colore grigio è utilizzato quando la pendenza non è definita.</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
@@ -4313,7 +4313,7 @@
     <string name="routing_attr_prefer_tactile_paving_description">Preferisci la pavimentazione tattile</string>
     <string name="routing_attr_allow_gate_name">Permetti l\'utilizzo dei cancelli</string>
     <string name="routing_attr_allow_gate_description">Permetti l\'utilizzo dei cancelli</string>
-    <string name="routing_attr_prefer_tactile_paving_name">Preferisci la pavimentazione tattile</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Preferisci pavimentazione tattile</string>
     <string name="shared_storage_warning_title">Cambiamenti delle regole di acceso alla memorizzazione</string>
     <string name="purchases_feature_desc_android_auto">Mappe OsmAnd offline e navigazione nello schermo del tuo veicolo. Integrato opportunamente con i comandi del tuo veicolo.</string>
     <string name="icon_group_nautical">Nautico</string>
@@ -4428,7 +4428,7 @@
     <string name="app_profile_type">Tipo profilo app</string>
     <string name="map_marker_options">Opzioni marcatori mappa</string>
     <string name="add_to_group">Aggiungi al gruppo</string>
-    <string name="app_modes_options">Scegli le modalità dell\'app</string>
+    <string name="app_modes_options">Scegli modalità app</string>
     <string name="shared_string_memory">Memoria</string>
     <string name="memory_allocated_for_routing_ds">Valori di memoria alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
 \nNon influenza la velocità dei percorsi brevi.</string>
@@ -4443,7 +4443,7 @@
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
     <string name="shared_string_uphill">Salita</string>
     <string name="shared_string_downhill">Discesa</string>
-    <string name="elevation_profile">Profilo dell\'altitudine</string>
+    <string name="elevation_profile">Profilo elevazione</string>
     <string name="shared_string_precision">Precisione</string>
     <string name="shared_string_statistics">Statistiche</string>
     <string name="gps_filter_hdop_desc">Imposta il valore massimo accettato di HDOP.
@@ -4465,7 +4465,7 @@
     <string name="use_routing_fallback_description">Utilizza la navigazione offline quando quella online non è disponibile.</string>
     <string name="turn_arrows">Frecce di direzione</string>
     <string name="turn_arrows_descr">Controlla la visibilità delle frecce di direzione nella linea del percorso.</string>
-    <string name="use_routing_fallback">Utilizza il calcolo del percorso di riserva</string>
+    <string name="use_routing_fallback">Calcolo percorso offline di riserva</string>
     <string name="track_file">File traccia</string>
     <string name="shared_string_used">In uso</string>
     <string name="files_with_route_restrictions">File con limitazioni del percorso</string>
@@ -4484,7 +4484,7 @@
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tutto</string>
     <string name="waypoint_appearance">Aspetto del punto intermedio</string>
-    <string name="select_suggested_points">Seleziona i punti suggeriti</string>
+    <string name="select_suggested_points">Seleziona punti suggeriti</string>
     <string name="shared_string_mini">mini</string>
     <string name="selected_waypoints_descr">I punti di passaggio selezionati saranno aggiunti alla \"%1$s\" traccia</string>
     <string name="shared_string_reading_file">Lettura del file…</string>
@@ -4502,7 +4502,7 @@
     <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando e la salva automaticamente al termine.</string>
     <string name="rendering_attr_seabedDetail_name">Dettagli fondale marino</string>
     <string name="rendering_attr_seabedDetail_description">Informazioni testuali aggiuntive sulla superficie del fondale marino, tipi di superfici combinate, categorie e tassonomie delle alghe marine</string>
-    <string name="waypoint_template">Modello dei punti di passaggio</string>
+    <string name="waypoint_template">Template waypoint</string>
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
     <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
     <string name="shared_string_grade">Grado</string>
@@ -4531,7 +4531,7 @@
     <string name="rendering_attr_showShareTaxiRoutes_name">Percorsi del bus-navetta</string>
     <string name="simulation_constant_mode_desc">La simulazione verrà effettuata alla velocità costante selezionata.</string>
     <string name="simulation_constant_mode_title">Velocità costante</string>
-    <string name="simulation_preview_mode_title">Modalità anteprima veloce</string>
+    <string name="simulation_preview_mode_title">Modalità anteprima rapida</string>
     <string name="stop_download_desc">Download non completo. Se interrompi il download adesso, solo parte dei riquadri sarà disponibile per la visualizzazione.</string>
     <string name="stop_download">Ferma il download</string>
     <string name="stop_and_exit">Ferma ed esci</string>
@@ -4565,7 +4565,7 @@
     <string name="rendering_attr_showLightRailRoutes_name">Percorsi ferroviari urbani leggeri</string>
     <string name="estimated_download_size">Stima quantità da scaricare</string>
     <string name="apply_to_existing_favorites_descr">Applicare le modifiche ai preferiti esistenti o solo ai nuovi\?</string>
-    <string name="navigate_point_format_swiss_grid">Griglia Svizzera(CH1903)</string>
+    <string name="navigate_point_format_swiss_grid">Griglia Svizzera (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Griglia Svizzera (CH1903+)</string>
     <string name="map_widget_altitude">Altitudine della localizzazione attuale</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Percorsi filobus</string>
@@ -4625,7 +4625,7 @@
     <string name="get_altitude_information">Ottieni l\'informazione sull\'altitudine</string>
     <string name="calculating_altitude">Calcolo altitudine in corso</string>
     <string name="calculate_online">Calcola online</string>
-    <string name="get_altitude_data">Ottieni i dati dell\'altitudine</string>
+    <string name="get_altitude_data">Ottieni dati altitudine</string>
     <string name="calculate_altitude">Calcola altitudine</string>
     <string name="magnetic_bearing_widget_desc">Angolo tra il nord magnetico e la destinazione osservato dalla tua localizzazione.</string>
     <string name="routing_attr_avoid_4wd_only_name">Evita le strade 4WD</string>
@@ -4744,7 +4744,7 @@
     <string name="routing_attr_goods_restrictions_name">Trasporto merci</string>
     <string name="without_profiles_changing">Senza modifiche ai profili</string>
     <string name="av_notes_video_widget_desc">Toccare il widget permette di iniziare una registrazione video.</string>
-    <string name="first_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato dell\'arrivo al primo marcatore della mappa.</string>
+    <string name="first_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato d\'arrivo al primo marcatore della mappa.</string>
     <string name="attach_roads_warning">Soltanto una traccia registrata può essere allegata alle strade.</string>
     <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla svolta successiva alla prossima che è abilitata se la svolta è a una distanza inferiore a quella di approccio.</string>
     <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
@@ -4766,7 +4766,7 @@
     <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
     <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
-    <string name="time_to_destination_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso dalla localizzazione attuale.</string>
+    <string name="time_to_destination_widget_desc">Il widget mostra \"Orario di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso alla posizione attuale.</string>
     <string name="included_in_your_current_plan">Incluso nel tuo piano attuale \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Disponibile come parte della sottoscrizione %1$s.</string>
     <string name="shared_string_large">Grande</string>
@@ -4780,4 +4780,10 @@
 \nTocca con due dita sulla mappa per mostrare la distanza tra i punti toccati</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="rotate_map_none_rotated_opt">Fisso (ruotato manualmente)</string>
+    <string name="tap_on_widget">Tocca il widget</string>
+    <string name="go_to_marker_location">Vai alla posizione del marcatore</string>
+    <string name="shared_string_switch_mode">Cambia modalità</string>
+    <string name="click_on_widget">Clicca sul widget</string>
+    <string name="shared_string_shows">Mostra</string>
+    <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
 </resources>
