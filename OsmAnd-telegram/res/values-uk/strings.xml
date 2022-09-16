@@ -123,8 +123,8 @@
     <string name="shared_string_distance">Відстань</string>
     <string name="share_location">Поділитися позицією</string>
     <string name="sharing_location">Трансляція позиції</string>
-    <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безкоштовну або платну версію OsmAnd</string>
-    <string name="install_osmand">Установити OsmAnd</string>
+    <string name="install_osmand_dialog_message">Спочатку Вам необхідно встановити безплатну або платну версію OsmAnd</string>
+    <string name="install_osmand">Встановити OsmAnd</string>
     <string name="show_users_on_map">Показувати користувачів на мапі</string>
     <string name="active_chats">Активні чати</string>
     <string name="shared_string_authorization">Авторизація</string>
@@ -158,11 +158,11 @@
     <string name="shared_string_second_short">сек</string>
     <string name="welcome_descr"><b>OsmAnd Tracker</b> дозволяє Вам транслювати свою позицію та бачити позицію інших в OsmAnd.<br/><br/>Застосунок використовує Telegram API та потребує облікового запису Telegram.</string>
     <string name="my_location">Моя позиція</string>
-    <string name="send_my_location_desc">Установіть мінімальний інтервал між надсиланням позиції.</string>
+    <string name="send_my_location_desc">Встановіть мінімальний інтервал між надсиланням позиції.</string>
     <string name="expire_at">Діє до</string>
     <string name="last_update_from_telegram">Нещодавнє оновлення з Telegram</string>
     <string name="shared_string_ok">Так</string>
-    <string name="timeline_available_for_free_now">Хронологія тепер доступна безкоштовно.</string>
+    <string name="timeline_available_for_free_now">Хронологія тепер доступна безплатно.</string>
     <string name="disable_monitoring">Вимкнути моніторинг</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_accept">Прийняти</string>
@@ -232,9 +232,9 @@
     <string name="set_time_timeline_descr">Виберіть час для відображення</string>
     <string name="stale_location_desc">Востаннє контакт переміщувався.</string>
     <string name="stale_location">Не рухається</string>
-    <string name="set_visible_time_for_all">Установити видимий час для всіх</string>
+    <string name="set_visible_time_for_all">Встановити час показу для всіх</string>
     <string name="visible_time_for_all">Показувати всім впродовж</string>
-    <string name="set_time_description">Установіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
+    <string name="set_time_description">Встановіть час, коли вибрані контакти та групи бачитимуть ваше місцеперебування в режимі реального часу.</string>
     <string name="location_service_no_gps_available">Виберіть одного з локальних постачальників, щоб поділитися своїм місцем положення.</string>
     <string name="search_contacts">Пошук контактів</string>
     <string name="search_contacts_descr">Пошук у всіх своїх групах та контактах.</string>

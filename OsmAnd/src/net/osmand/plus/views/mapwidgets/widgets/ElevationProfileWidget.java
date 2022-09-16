@@ -455,7 +455,7 @@ public class ElevationProfileWidget extends MapWidget {
 				maxValue = v;
 			}
 		}
-		return (int) maxValue;
+		return (int) (maxValue + 0.5);
 	}
 
 	private void setupZoom(LineChart chart) {

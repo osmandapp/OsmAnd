@@ -16,6 +16,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -105,7 +106,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	public boolean shouldApproximateRoute() {
-		String value = get(EngineParameter.APPROXIMATE_ROUTE);
+		String value = get(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
 		return !Algorithms.isEmpty(value) || shouldNetworkApproximateRoute();
 	}
 
@@ -118,28 +119,25 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@Nullable
-	public String getApproximateRouteProfile() {
-		String routingProfile = get(EngineParameter.APPROXIMATE_ROUTE);
-		if (!Algorithms.isEmpty(routingProfile)) {
-			return routingProfile;
-		}
-		return null;
+	public String getApproximationRoutingProfile() {
+		String routingProfile = get(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
+		return !Algorithms.isEmpty(routingProfile) ? routingProfile : null;
+	}
+
+	@Nullable
+	public String getApproximationDerivedProfile() {
+		String derivedProfile = get(EngineParameter.APPROXIMATION_DERIVED_PROFILE);
+		return !Algorithms.isEmpty(derivedProfile) ? derivedProfile : null;
 	}
 
 	public boolean useExternalTimestamps() {
 		String value = get(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
-		if (!Algorithms.isEmpty(value)) {
-			return Boolean.parseBoolean(value);
-		}
-		return false;
+		return !Algorithms.isEmpty(value) && Boolean.parseBoolean(value);
 	}
 
 	public boolean useRoutingFallback() {
 		String value = get(EngineParameter.USE_ROUTING_FALLBACK);
-		if (!Algorithms.isEmpty(value)) {
-			return Boolean.parseBoolean(value);
-		}
-		return false;
+		return !Algorithms.isEmpty(value) && Boolean.parseBoolean(value);
 	}
 
 	@NonNull
@@ -180,7 +178,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	@Nullable
 	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation, boolean initialCalculation) throws JSONException;
+	                                                    boolean leftSideNavigation, boolean initialCalculation,
+	                                                    @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -214,27 +215,29 @@ public class NetworkWriter extends AbstractWriter {
 	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
 		return new OnUploadFileListener() {
 
-			private int itemProgress;
-			private int deltaProgress;
+			private ProgressHelper progressHelper;
 			private boolean uploadStarted;
 
 			@Override
 			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				progressHelper = new ProgressHelper(() -> {
+					if (listener != null) {
+						int progress = progressHelper.getLastKnownProgress();
+						int deltaProgress = progressHelper.getLastAddedDeltaProgress();
+						listener.onItemUploadProgress(item, itemFileName, progress, deltaProgress);
+					}
+				});
 				if (!uploadStarted && listener != null) {
 					uploadStarted = true;
-					listener.onItemUploadStarted(item, itemFileName, itemWork);
+					progressHelper.onStartWork(itemWork);
+					listener.onItemUploadStarted(item, itemFileName, progressHelper.getTotalWork());
 				}
 			}
 
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
 				if (listener != null) {
-					deltaProgress += deltaWork;
-					if ((deltaProgress > (itemWork / 100)) || ((itemProgress + deltaProgress) >= itemWork)) {
-						itemProgress += deltaProgress;
-						listener.onItemUploadProgress(item, itemFileName, itemProgress, deltaProgress);
-						deltaProgress = 0;
-					}
+					progressHelper.onProgress(deltaWork);
 				}
 			}
 

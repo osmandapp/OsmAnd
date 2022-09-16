@@ -1,41 +1,5 @@
 package net.osmand.plus;
 
-import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import net.osmand.data.SpecialPointType;
-import net.osmand.data.LatLon;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.BooleanPreference;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
-import net.osmand.plus.views.mapwidgets.WidgetGroup;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
-import net.osmand.util.Algorithms;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
@@ -60,6 +24,44 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.SpecialPointType;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
+import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
+import net.osmand.util.Algorithms;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class AppVersionUpgradeOnInit {
 
@@ -315,11 +317,11 @@ class AppVersionUpgradeOnInit {
 		String json = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "custom_app_profiles", "");
 		if (!Algorithms.isEmpty(json)) {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			Type t = new TypeToken<ArrayList<ApplicationMode.ApplicationModeBean>>() {
+			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
 			}.getType();
-			List<ApplicationMode.ApplicationModeBean> customProfiles = gson.fromJson(json, t);
+			List<ApplicationModeBean> customProfiles = gson.fromJson(json, t);
 			if (!Algorithms.isEmpty(customProfiles)) {
-				for (ApplicationMode.ApplicationModeBean modeBean : customProfiles) {
+				for (ApplicationModeBean modeBean : customProfiles) {
 					ApplicationMode.ApplicationModeBuilder builder = ApplicationMode.fromModeBean(app, modeBean);
 					ApplicationMode.saveProfile(builder, app);
 				}
@@ -507,7 +509,7 @@ class AppVersionUpgradeOnInit {
 			boolean visibilityDefined = widgetsVisibility.contains(widgetId)
 					|| widgetsVisibility.contains(COLLAPSED_PREFIX + widgetId)
 					|| widgetsVisibility.contains(HIDE_PREFIX + widgetId);
-			if (!visibilityDefined && appMode.isWidgetVisibleByDefault(widgetId)) {
+			if (!visibilityDefined && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetId, appMode)) {
 				widgetsVisibility.add(HIDE_PREFIX + widgetId);
 			}
 		}

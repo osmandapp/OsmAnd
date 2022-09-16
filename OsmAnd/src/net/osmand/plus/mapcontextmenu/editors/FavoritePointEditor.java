@@ -3,9 +3,12 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -40,8 +43,7 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title, String address, String originObjectName,
-	                int preselectedIconId, double altitude, long timestamp) {
+	public void add(LatLon latLon, String title, String address, Object object) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -52,16 +54,27 @@ public class FavoritePointEditor extends PointEditor {
 		if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
 			lastCategory = "";
 		}
-		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, timestamp);
+		double altitude = Double.NaN;
+		if (object instanceof WptPt) {
+			altitude = ((WptPt) object).ele;
+		}
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, 0);
 		favorite.setDescription("");
 		favorite.setAddress(address.isEmpty() ? title : address);
-		favorite.setOriginObjectName(originObjectName);
-		favorite.setIconId(preselectedIconId);
+
+		if (object instanceof Amenity) {
+			Amenity amenity = ((Amenity) object);
+			AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
+
+			favorite.setAmenityOriginName(amenity.toStringEn());
+			favorite.setIconId(RenderingIcons.getPreselectedIconId(amenity));
+			favorite.setAmenityExtensions(extensionsHelper.getAmenityExtensions(amenity));
+		}
 
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 
-	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
+	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -80,7 +93,6 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
-		favorite.setOriginObjectName(originObjectName);
 		FavoritePointEditorFragment.showAutoFillInstance(mapActivity, autoFill);
 	}
 

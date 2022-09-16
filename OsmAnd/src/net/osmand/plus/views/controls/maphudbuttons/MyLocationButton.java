@@ -34,7 +34,7 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(mapView.getMinAllowedElevationAngle());
+			animateDraggingMapThread.animateElevationAngleChange(45);
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
@@ -81,7 +81,7 @@ public class MyLocationButton extends MapButton {
 		if (!hasLocation) {
 			setNoLocationState();
 		} else if (linkedToLocation) {
-			if (!MultiTouchSupport.isTiltSupported(app)) {
+			if (!MultiTouchSupport.isTiltSupportEnabled(app)) {
 				setMapLinkedToLocationState();
 			} else if (elevationAngle == OsmandMapTileView.DEFAULT_ELEVATION_ANGLE) {
 				setTiltMapState();

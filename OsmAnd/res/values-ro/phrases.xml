@@ -745,7 +745,7 @@
     <string name="poi_railway_buffer_stop">Oprire tampon de cale ferată</string>
     <string name="poi_subway_station">Da;Stație de metrou</string>
     <string name="poi_subway_entrance">Intrarea la metrou</string>
-    <string name="poi_halt">Oprire cale ferată;Oprire tren</string>
+    <string name="poi_halt">Stație de cale ferată;Stație de tren;Stație de cale ferată;Stație de cale ferată;Stație de tren;Gara</string>
     <string name="poi_railway_platform">Platformă de cale ferată;Platformă de tren</string>
     <string name="poi_railway_station">Stație auto;Stație de cale ferată;Stație de tren</string>
     <string name="poi_bus_station">Stația de autobuz</string>
@@ -4339,4 +4339,9 @@
     <string name="poi_club_aviation">Club aeronautic</string>
     <string name="poi_club_bicycle">Club de bicicliști</string>
     <string name="poi_club_doityourself">Club bricolaj</string>
+    <string name="poi_dog">Câini</string>
+    <string name="poi_dog_leashed">Câini: numai în lesă</string>
+    <string name="poi_dog_unleashed">Câini: nu este nevoie să fie ținuți în lesă</string>
+    <string name="poi_dog_designated">Desemnat pentru câini</string>
+    <string name="poi_first_aid_kit">Trusa de prim ajutor</string>
 </resources>

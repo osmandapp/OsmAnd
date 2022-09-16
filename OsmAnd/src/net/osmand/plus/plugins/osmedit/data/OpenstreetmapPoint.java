@@ -5,6 +5,7 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class OpenstreetmapPoint extends OsmPoint {
@@ -96,7 +97,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 		if (entity == null) {
 			return;
 		}
-		Set<String> changedTags = entity.getChangedTags();
+		Set<String> changedTags = new HashSet<>(entity.getChangedTags());
 		if (!Algorithms.isEmpty(changedTags)) {
 			for (String changedTag : changedTags) {
 				if (changedTag == null || changedTag.trim().equals(changedTag)) {
@@ -110,6 +111,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 				entity.putTag(trimmedTag, Algorithms.trimIfNotNull(tagValue));
 				entity.removeTag(changedTag);
 			}
+			entity.setChangedTags(changedTags);
 		}
 	}
 

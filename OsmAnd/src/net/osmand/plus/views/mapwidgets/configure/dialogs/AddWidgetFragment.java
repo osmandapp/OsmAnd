@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,10 +19,8 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -35,6 +32,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
+import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
@@ -49,23 +48,19 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_PROVIDER_PACKAGE;
+import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_EXTERNAL_WIDGET_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_GROUP_NAME;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGETS_PANEL_ID;
 import static net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetDataHolder.KEY_WIDGET_TYPE;
 
-public class AddWidgetFragment extends BaseOsmAndFragment {
+public class AddWidgetFragment extends BaseWidgetFragment {
 
 	public static final String TAG = AddWidgetFragment.class.getSimpleName();
 
 	private static final String KEY_APP_MODE = "app_mode";
 	private static final String KEY_SELECTED_WIDGETS_IDS = "selected_widgets_ids";
 	private static final String KEY_ALREADY_SELECTED_WIDGETS_IDS = "already_selected_widgets_ids";
-
-	private OsmandApplication app;
-	private ApplicationMode appMode;
-	private boolean nightMode;
 
 	private WidgetDataHolder widgetsDataHolder;
 	private Map<Integer, String> selectedWidgetsIds = new TreeMap<>();
@@ -74,19 +69,30 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	private View view;
 	private View applyButton;
 
+	@Nullable
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
-
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			initFromBundle(savedInstanceState);
 		} else if (args != null) {
 			initFromBundle(args);
-			selectSingleWidgetByDefault();
+			selectWidgetByDefault();
 		}
+
+		Context context = requireContext();
+		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
+		AndroidUtils.addStatusBarPadding21v(app, view);
+
+		ViewGroup mainContent = view.findViewById(R.id.main_content);
+		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
+
+		setupToolbar();
+		setupContent();
+		setupApplyButton();
+
+		return view;
 	}
 
 	private void initFromBundle(@NonNull Bundle bundle) {
@@ -102,24 +108,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		if (bundle.containsKey(KEY_SELECTED_WIDGETS_IDS)) {
 			selectedWidgetsIds = (Map<Integer, String>) bundle.getSerializable(KEY_SELECTED_WIDGETS_IDS);
 		}
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
-		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, view);
-
-		ViewGroup mainContent = view.findViewById(R.id.main_content);
-		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);
-
-		setupToolbar();
-		setupContent();
-		setupApplyButton();
-
-		return view;
 	}
 
 	private void setupToolbar() {
@@ -171,7 +159,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 			descriptionText.setText(description);
 		}
 
-
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
@@ -193,16 +180,23 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		ViewGroup container = view.findViewById(R.id.widgets_container);
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		WidgetGroup group = widgetsDataHolder.getWidgetGroup();
+		MapActivity activity = requireMapActivity();
 
 		for (WidgetType widget : widgets) {
-			int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
-			View view = inflater.inflate(layoutId, container, false);
-			String title = getString(widget.titleId);
-			int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
-			String desc = descId == 0 ? null : getString(descId);
-			Drawable icon = getIcon(widget.getIconId(nightMode));
-			setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
-			container.addView(view);
+			if (widget.isPurchased(app)) {
+				int layoutId = widget.descId != 0 ? R.layout.selectable_widget_item : R.layout.selectable_widget_item_no_description;
+				View view = inflater.inflate(layoutId, container, false);
+				String title = getString(widget.titleId);
+				int descId = group != null ? widget.getGroupDescriptionId() : widget.descId;
+				String desc = descId == 0 ? null : getString(descId);
+				Drawable icon = getIcon(widget.getIconId(nightMode));
+				setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
+				container.addView(view);
+			} else {
+				WidgetData widgetData = new WidgetData(widget.titleId, widget.dayIconId, widget.nightIconId);
+				WidgetPromoBanner banner = new WidgetPromoBanner(activity, widgetData, false);
+				container.addView(banner.build(activity));
+			}
 		}
 	}
 
@@ -282,14 +276,11 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		return OsmandAidlApi.WIDGET_ID_PREFIX + aidlWidgetData.getId();
 	}
 
-	private void selectSingleWidgetByDefault() {
-		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
+	private void selectWidgetByDefault() {
+		WidgetType widget = widgetsDataHolder.getMainWidget();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
-		if (!Algorithms.isEmpty(widgets)) {
-			WidgetType widget = widgetsDataHolder.getWidgetsList().get(0);
-			if (widgets.size() == 1 || widget.isMainWidgetOfGroup()) {
-				updateWidgetSelection(widget.getDefaultOrder(), widget.id, true);
-			}
+		if (widget != null) {
+			updateWidgetSelection(widget.getDefaultOrder(), widget.id, widget.isPurchased(app));
 		} else if (aidlWidgetData != null) {
 			updateWidgetSelection(0, getAidlWidgetId(aidlWidgetData), true);
 		}
@@ -322,13 +313,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 		applyButton.setEnabled(!selectedWidgetsIds.isEmpty());
 	}
 
-	private void dismiss() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			activity.onBackPressed();
-		}
-	}
-
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -339,18 +323,13 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+	public void onItemPurchased(String sku, boolean active) {
+		recreateFragment();
 	}
 
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
 	}
 
 	/**
@@ -427,7 +406,6 @@ public class AddWidgetFragment extends BaseOsmAndFragment {
 	}
 
 	public interface AddWidgetListener {
-
 		void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel widgetsPanel);
 	}
 }

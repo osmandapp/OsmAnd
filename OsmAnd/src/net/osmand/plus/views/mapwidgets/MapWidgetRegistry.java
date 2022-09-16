@@ -1,39 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.view.ViewGroup;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
@@ -60,6 +26,40 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
 
+import android.view.ViewGroup;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 public class MapWidgetRegistry {
 
 	public static final String COLLAPSED_PREFIX = "+";
@@ -78,7 +78,7 @@ public class MapWidgetRegistry {
 
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
-	private Set<WidgetsRegistryListener> listeners = new HashSet<>();
+	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
@@ -175,15 +175,11 @@ public class MapWidgetRegistry {
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		Set<WidgetsRegistryListener> listeners = new HashSet<>(this.listeners);
-		listeners.add(listener);
-		this.listeners = listeners;
+		listeners = Algorithms.addToList(listeners, listener);
 	}
 
 	public void removeWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		Set<WidgetsRegistryListener> listeners = new HashSet<>(this.listeners);
-		listeners.remove(listener);
-		this.listeners = listeners;
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
@@ -311,7 +307,7 @@ public class MapWidgetRegistry {
 
 				boolean passDisabled = !disabledMode || !widget.isEnabledForAppMode(appMode);
 				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode);
-				boolean passAvailable = !availableMode || appMode.isWidgetAvailable(widget.key);
+				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 
 				if (passDisabled && passEnabled && passAvailable && defaultAvailable) {

@@ -86,7 +86,8 @@ public class MissingMapsHelper {
 		OnlineRoutingEngine engine = onlineRoutingHelper.startOsrmEngine(params.mode);
 		if (engine != null) {
 			OnlineRoutingResponse response = onlineRoutingHelper.calculateRouteOnline(
-					engine, points, params.start.hasBearing() ? params.start.getBearing() : null, params.leftSide, false);
+					engine, points, params.start.hasBearing() ? params.start.getBearing() : null,
+					params.leftSide, false, params.calculationProgress);
 			if (response != null) {
 				routeLocation.addAll(response.getRoute());
 			}

@@ -4340,4 +4340,8 @@
     <string name="poi_club_bicycle">Велоклуб;Велосипедный клуб</string>
     <string name="poi_club_aviation">Авиаклуб;Авиационный клуб</string>
     <string name="poi_first_aid_kit">Аптечка первой помощи</string>
+    <string name="poi_dog">Собаки</string>
+    <string name="poi_dog_designated">Предназначено для выгула собак</string>
+    <string name="poi_dog_leashed">Собаки: только на поводке</string>
+    <string name="poi_dog_unleashed">Собаки: без поводка</string>
 </resources>

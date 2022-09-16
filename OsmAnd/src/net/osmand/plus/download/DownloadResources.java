@@ -1,5 +1,8 @@
 package net.osmand.plus.download;
 
+import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -30,9 +33,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
 
 public class DownloadResources extends DownloadResourceGroup {
 	private static final String TAG = DownloadResources.class.getSimpleName();
@@ -158,6 +158,9 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR),
+				IndexConstants.HEIGHTMAP_SQLITE_EXT, indexFileNames);
+
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
@@ -370,6 +373,11 @@ public class DownloadResources extends DownloadResourceGroup {
 					wikivoyageMaps.addItem(ii);
 				}
 				continue;
+			}
+			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE) {
+				if (!app.getSettings().SHOW_HEIGHTMAPS.get()) {
+					continue;
+				}
 			}
 			String basename = ii.getBasename().toLowerCase();
 			WorldRegion wg = regs.getRegionDataByDownloadName(basename);

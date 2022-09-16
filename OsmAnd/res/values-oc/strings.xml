@@ -529,7 +529,7 @@
     <string name="map_widget_appearance_rem">Elements restants</string>
     <string name="map_widget_plain_time">Ora actuala</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_mode_boat">Barca</string>
+    <string name="app_mode_boat">Nautic</string>
     <string name="intermediate_items_sort_by_distance">Ordena pòrta a pòrta</string>
     <string name="access_arrival_time">Orari d\'arribada</string>
     <string name="add_as_first_destination_point">Ajustar per premier pas de destinacion intermediària</string>
@@ -820,7 +820,7 @@
     <string name="welcome_text">OsmAnd vos permet de consultar en locau la mapa globala e de navigar sensa connexion.</string>
     <string name="shared_string_my_places">Mei luòcs preferits</string>
     <string name="android_auto_map_placeholder_title">La mapa se visualiza sus l\'ecran dau veïcul.</string>
-    <string name="horseback_riding">A cavau</string>
+    <string name="horseback_riding">Equèstre</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferéncia per lei percors cavalins</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferéncia per lei percors cavalins</string>
     <string name="shared_string_mini">mini</string>
@@ -1544,7 +1544,7 @@
     <string name="choose_what_to_restore">Chausissètz çò que volètz restaurar.</string>
     <string name="backup_restore_data">Restaurar lei donadas</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Sauvagardar e Restaurar</string>
+    <string name="backup_and_restore">Sauvagardar &amp; Restaurar</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipèdia e Wikiviatge fòra de linha</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenètz l\'accès a una actualizacion mesadiera regulara dei mapas fòra de linha.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenètz lo teledescargament illimitat per totei lei continents e totei lei mapas fòra de linha.</string>
@@ -1988,4 +1988,16 @@
     <string name="plugin_wikipedia_description">Obtenètz d\'informacions sus lei ponchs d\'interès de Wikipèdia, guida fòra de linha que presenta d\'articles sus lei luòcs e lei destinacions.</string>
     <string name="please_provide_point_name_error">Nomatz lo ponch</string>
     <string name="app_mode_motor_scooter">Motocicleta</string>
+    <string name="save_heading">Consèrva l’orientacion</string>
+    <string name="shared_string_undefined">Indefinida</string>
+    <string name="altitude_descent">Descenda</string>
+    <string name="shared_string_time_moving">Temps en movement</string>
+    <string name="altitude_ascent">Montada</string>
+    <string name="simulation_constant_mode_desc">La simulacion se farà a la velocitat constanta seleccionada.</string>
+    <string name="simulation_preview_mode_title">Modalitat de previsualizacion rapida</string>
+    <string name="shared_string_delete_all">Elimina tot</string>
+    <string name="simulation_real_mode_title">Simulacion realista</string>
+    <string name="simulation_constant_mode_title">Velocitat fixa</string>
+    <string name="speed_mode">Modalitat rapida</string>
+    <string name="copied_to_clipboard">Copiat dins lo sauvamemòria</string>
 </resources>

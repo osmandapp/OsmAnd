@@ -296,7 +296,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= 3) {
 			TargetPointsHelper tg = getApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();
-			int r = getDefaultRadiusPoi(tileBox);
+			int r = tileBox.getDefaultRadiusPoi();
 			for (int i = 0; i < intermediatePoints.size(); i++) {
 				TargetPoint tp = intermediatePoints.get(i);
 				LatLon latLon = tp.point;

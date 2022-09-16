@@ -276,7 +276,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			iconsHelper.updateWidgetIcon(imageView, widgetInfo);
 
 			View settingsButton = view.findViewById(R.id.settings_button);
-			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment() : null;
+			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app) : null;
 			if (fragment != null) {
 				settingsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();

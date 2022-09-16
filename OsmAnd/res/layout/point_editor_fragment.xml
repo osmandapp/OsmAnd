@@ -86,7 +86,7 @@
 								android:drawableRight="@drawable/btn_circle_transparent_full"
 								android:drawablePadding="@dimen/favorites_list_item_height"
 								android:imeOptions="actionDone"
-								android:inputType="textMultiLine"
+								android:inputType="textMultiLine|textCapSentences"
 								android:maxLines="4"
 								android:minHeight="@dimen/favorites_list_item_height"
 								android:paddingStart="@dimen/content_padding_small"
@@ -600,6 +600,8 @@
 			android:id="@+id/buttons_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:clickable="true"
+			android:focusable="true"
 			android:orientation="vertical">
 
 			<View

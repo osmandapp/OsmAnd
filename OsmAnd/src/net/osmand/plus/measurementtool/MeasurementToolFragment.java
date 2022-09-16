@@ -906,7 +906,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			toolBarController.setTitle(getString(R.string.route_between_points));
 			mapActivity.refreshMap();
 
-			if (editingCtx.isApproximationNeeded()) {
+			if (editingCtx.shouldCheckApproximation() && editingCtx.isApproximationNeeded() && editingCtx.hasTimestamps()) {
 				enterApproximationMode(mapActivity);
 			} else {
 				RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
@@ -1055,7 +1055,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 							Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
 						}
 					} else {
-						if (editingCtx.isApproximationNeeded()) {
+						if (editingCtx.shouldCheckApproximation() && editingCtx.isApproximationNeeded() && editingCtx.hasTimestamps()) {
 							setMode(DIRECTION_MODE, true);
 							enterApproximationMode(mapActivity);
 						} else {
@@ -1156,14 +1156,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void attachToRoadsClick() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			if (editingCtx.isApproximationNeeded()) {
-				enterApproximationMode(mapActivity);
-			} else {
-				app.showToastMessage(R.string.attach_roads_warning);
-			}
-		}
+		attachToRoadsSelected(-1);
 	}
 
 	@Override
@@ -1204,7 +1197,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void attachToRoadsSelected(int segmentIndex) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && editingCtx.isApproximationNeeded()) {
 			enterApproximationMode(mapActivity);
 		}
 	}
@@ -1575,7 +1568,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	public boolean isTrackReadyToCalculate() {
-		return !editingCtx.isApproximationNeeded() || editingCtx.isNewData();
+		return !editingCtx.shouldCheckApproximation() || !editingCtx.isApproximationNeeded() || editingCtx.isNewData();
 	}
 
 	private void hideSnapToRoadIcon() {
@@ -2162,6 +2155,21 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} catch (Exception e) {
 			// ignore
 		}
+	}
+
+	public static boolean showSnapToRoadsDialog(@NonNull MapActivity activity, boolean showSnapWarning) {
+		OsmandApplication app = activity.getMyApplication();
+		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
+		if (gpxFile != null) {
+			GpxData gpxData = new GpxData(gpxFile);
+			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
+			editingContext.setGpxData(gpxData);
+			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
+			editingContext.setSelectedSegment(app.getSettings().GPX_SEGMENT_INDEX.get());
+			MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), editingContext, FOLLOW_TRACK_MODE, showSnapWarning);
+			return true;
+		}
+		return false;
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {

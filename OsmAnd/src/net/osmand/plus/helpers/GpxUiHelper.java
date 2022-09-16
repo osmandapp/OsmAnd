@@ -1,5 +1,19 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -81,9 +95,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.ChartLabel;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxMarkerView;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -110,7 +124,6 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -129,20 +142,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.track.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 public class GpxUiHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
@@ -152,6 +151,8 @@ public class GpxUiHelper {
 
 	public static final long SECOND_IN_MILLIS = 1000L;
 	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
+
+	public static final int CHART_LABEL_COUNT = 3;
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
 		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
@@ -185,7 +186,7 @@ public class GpxUiHelper {
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
 		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr,
-				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
+						OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
 				getColorValue(distanceClr, analysis.points + "", html)));
 		if (analysis.totalTracks > 1) {
 			description.append(nl).append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks + "", html)));
@@ -199,8 +200,8 @@ public class GpxUiHelper {
 		}
 
 		// 2. Time span
-		if (analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
+		if (analysis.timeSpan > 0 && analysis.timeSpan != analysis.timeMoving) {
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
@@ -208,11 +209,11 @@ public class GpxUiHelper {
 		// 3. Time moving, if any
 		if (analysis.isTimeMoving()) {
 				//Next few lines for Issue 3222 heuristic testing only
-				//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000), app.accessibilityEnabled());
+				//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000.0f + 0.5), app.accessibilityEnabled());
 				//description.append(nl).append(app.getString(R.string.gpx_timemoving,
 				//		getColorValue(timeSpanClr, formatDuration0, html)));
 				//description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving0, app), html) + ")");
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
+			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));
 			description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), html) + ")");
@@ -330,14 +331,7 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static String getGpxTitle(@Nullable String name) {
-		if (Algorithms.isEmpty(name)) {
-			return "";
-		}
-		String gpxTitle = name;
-		if (gpxTitle.toLowerCase().endsWith(GPX_FILE_EXT)) {
-			gpxTitle = gpxTitle.substring(0, gpxTitle.length() - GPX_FILE_EXT.length());
-		}
-		return gpxTitle.replace('_', ' ');
+		return name != null ? Algorithms.getFileNameWithoutExtension(name) : "";
 	}
 
 	@NonNull
@@ -345,8 +339,7 @@ public class GpxUiHelper {
 		if (Algorithms.isEmpty(name)) {
 			return "";
 		}
-		String groupName = name.replaceAll("_", " ").replace(IndexConstants.GPX_FILE_EXT, "");
-		return capitalizeFirstLetter(groupName);
+		return Algorithms.capitalizeFirstLetter(Algorithms.getFileNameWithoutExtension(name));
 	}
 
 	private static class DialogGpxDataItemCallback implements GpxDataItemCallback {
@@ -791,7 +784,7 @@ public class GpxUiHelper {
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled()) + "");
 			} else {
 				time.setText("");
 			}
@@ -1142,7 +1135,7 @@ public class GpxUiHelper {
 		leftYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		leftYAxis.setXOffset(16f);
 		leftYAxis.setYOffset(-6f);
-		leftYAxis.setLabelCount(3, true);
+		leftYAxis.setLabelCount(CHART_LABEL_COUNT, true);
 
 		YAxis rightYAxis = mChart.getAxisRight();
 		rightYAxis.setDrawAxisLine(false);
@@ -1150,7 +1143,7 @@ public class GpxUiHelper {
 		rightYAxis.setPosition(YAxisLabelPosition.INSIDE_CHART);
 		rightYAxis.setXOffset(16f);
 		rightYAxis.setYOffset(-6f);
-		rightYAxis.setLabelCount(3, true);
+		rightYAxis.setLabelCount(CHART_LABEL_COUNT, true);
 		rightYAxis.setEnabled(false);
 
 		Legend legend = mChart.getLegend();
@@ -1221,7 +1214,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatX)) {
 				return MessageFormat.format(formatX + mainUnitX, value);
 			} else {
-				return OsmAndFormatter.formatInteger((int) value, mainUnitX, ctx);
+				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitX, ctx);
 			}
 		});
 
@@ -1231,7 +1224,7 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		boolean useHours = timeSpan / HOUR_IN_MILLIS > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) value, useHours));
+		xAxis.setValueFormatter((value, axis) -> formatXAxisTime((int) (value + 0.5), useHours));
 		return 1f;
 	}
 
@@ -1436,7 +1429,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
@@ -1511,9 +1504,9 @@ public class GpxUiHelper {
 		} else if (sps == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
 		} else if (sps == SpeedConstants.MINUTES_PER_KILOMETER) {
-			divSpeed = METERS_IN_KILOMETER / 60;
+			divSpeed = METERS_IN_KILOMETER / 60.0f;
 		} else if (sps == SpeedConstants.MINUTES_PER_MILE) {
-			divSpeed = METERS_IN_ONE_MILE / 60;
+			divSpeed = METERS_IN_ONE_MILE / 60.0f;
 		} else {
 			mulSpeed = 1f;
 		}
@@ -1551,7 +1544,7 @@ public class GpxUiHelper {
 
 			if (x > 0) {
 				if (axisType == GPXDataSetAxisType.TIME && x > 60 ||
-					axisType == GPXDataSetAxisType.TIMEOFDAY && x > 60) {
+						axisType == GPXDataSetAxisType.TIMEOFDAY && x > 60) {
 					values.add(new Entry(nextX + 1, 0));
 					values.add(new Entry(nextX + x - 1, 0));
 				}
@@ -1588,7 +1581,7 @@ public class GpxUiHelper {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
 			} else {
-				return OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx);
+				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx);
 			}
 		});
 
@@ -1678,7 +1671,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) value, mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
 
 		List<Entry> values;
 		if (eleValues == null) {
@@ -1912,6 +1905,7 @@ public class GpxUiHelper {
 		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
 		                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 			super(yVals, label);
+			setHighlightLineWidth(1);
 			this.dataSetType = dataSetType;
 			this.dataSetAxisType = dataSetAxisType;
 			this.leftAxis = leftAxis;
@@ -2179,7 +2173,7 @@ public class GpxUiHelper {
 	                                  @NonNull GPXFile gpxFile,
 	                                  @NonNull WptPt selectedPoint,
 	                                  @Nullable GPXTrackAnalysis analyses,
-	                                  @Nullable NetworkRouteSegment routeSegment) {
+	                                  @Nullable RouteKey routeKey) {
 		new SaveGpxAsyncTask(file, gpxFile, new SaveGpxListener() {
 			@Override
 			public void gpxSavingStarted() {
@@ -2199,7 +2193,7 @@ public class GpxUiHelper {
 					Bundle bundle = new Bundle();
 					bundle.putBoolean(TrackMenuFragment.ADJUST_MAP_POSITION, false);
 					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-							trackAnalysis, routeSegment, bundle);
+							trackAnalysis, routeKey, bundle);
 				} else {
 					LOG.error(errorMessage);
 				}

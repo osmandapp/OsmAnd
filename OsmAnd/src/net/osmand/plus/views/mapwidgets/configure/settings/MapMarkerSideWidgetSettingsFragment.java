@@ -1,39 +1,63 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.slider.Slider;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String MARKER_MODE_KEY = "marker_mode";
+	private static final String MARKER_CLICK_BEHAVIOUR_KEY = "marker_click_behaviour";
 	private static final String AVERAGE_SPEED_INTERVAL_KEY = "average_speed_interval";
 
 	private boolean firstMarker = true;
 	private OsmandPreference<SideMarkerMode> markerModePref;
 	private OsmandPreference<Long> averageSpeedIntervalPref;
+	private OsmandPreference<MarkerClickBehaviour> markerClickBehaviourPref;
 
+	private MarkerClickBehaviour selectedMarkerClickBehaviour;
 	private SideMarkerMode selectedMarkerMode;
-	private long initialIntervalMillis;
+	private long selectedIntervalMillis;
+	private long localSeekBarIntervalMillis;
 
-	private AverageSpeedIntervalCard averageSpeedIntervalCard;
+	private LayoutInflater themedInflater;
+	private LinearLayout buttonsCard;
+	private ApplicationMode selectedAppMode;
+	private Map<Long, String> availableIntervals;
 
 	@NonNull
 	@Override
@@ -52,12 +76,13 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 			firstMarker = widgetState.isFirstMarker();
 			markerModePref = widgetState.getMapMarkerModePref();
 			averageSpeedIntervalPref = widgetState.getAverageSpeedIntervalPref();
+			markerClickBehaviourPref = widgetState.getMarkerClickBehaviourPref();
 
 			SideMarkerMode defaultMode = markerModePref.getModeValue(appMode);
-			long defaultAverageSpeedInterval = averageSpeedIntervalPref.getModeValue(appMode);
+			MarkerClickBehaviour defaultClickBehaviour = markerClickBehaviourPref.getModeValue(appMode);
 
 			selectedMarkerMode = SideMarkerMode.valueOf(bundle.getString(MARKER_MODE_KEY, defaultMode.name()));
-			initialIntervalMillis = bundle.getLong(AVERAGE_SPEED_INTERVAL_KEY, defaultAverageSpeedInterval);
+			selectedMarkerClickBehaviour = MarkerClickBehaviour.valueOf(bundle.getString(MARKER_CLICK_BEHAVIOUR_KEY, defaultClickBehaviour.name()));
 		} else {
 			dismiss();
 		}
@@ -65,37 +90,222 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 
 	@Override
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+		this.themedInflater = themedInflater;
 		themedInflater.inflate(R.layout.map_marker_side_widget_settings_fragment, container);
+		buttonsCard = view.findViewById(R.id.items_container);
+		selectedAppMode = settings.getApplicationMode();
+		availableIntervals = getAvailableIntervals();
+		selectedIntervalMillis = averageSpeedIntervalPref.getModeValue(appMode);
+
 		updateToolbarIcon();
-		setupMapMarkerModeSetting();
-		setupAverageSpeedIntervalSetting();
+		setupConfigButtons();
 	}
 
-	private void setupMapMarkerModeSetting() {
-		View distanceModeContainer = view.findViewById(R.id.distance_mode_container);
-		View estimatedTimeOfArrivalModeContainer = view.findViewById(R.id.eta_mode);
-		CompoundButton distanceButton = distanceModeContainer.findViewById(R.id.compound_button);
-		CompoundButton estimatedTimeOfArrivalButton = estimatedTimeOfArrivalModeContainer.findViewById(R.id.compound_button);
+	private void setupConfigButtons() {
+		buttonsCard.removeAllViews();
 
-		MarkerModeSelectionCallback callback = mode -> {
-			selectedMarkerMode = mode;
-			if (selectedMarkerMode == SideMarkerMode.DISTANCE) {
-				estimatedTimeOfArrivalButton.setChecked(false);
-			} else if (selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME) {
-				distanceButton.setChecked(false);
-			} else {
-				throw new IllegalStateException("Unsupported side map marker mode");
+		buttonsCard.addView(createButtonWithDescription(selectedMarkerMode.getIconId(nightMode),
+				getString(R.string.shared_string_shows),
+				selectedMarkerMode.getTitle(app),
+				false,
+				selectedMarkerMode == SideMarkerMode.DISTANCE,
+				new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showMarkerModeDialog();
+					}
+				}));
+
+		if (selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME) {
+			buttonsCard.addView(createButtonWithDescription(R.drawable.ic_action_time_span_25,
+					getString(R.string.shared_string_interval),
+					availableIntervals.get(selectedIntervalMillis),
+					true,
+					true,
+					new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							showSeekbarSettingsDialog();
+						}
+					}));
+		}
+		buttonsCard.addView(createButtonWithDescription(R.drawable.ic_action_touch,
+				getString(R.string.click_on_widget),
+				selectedMarkerClickBehaviour.getTitle(app),
+				true,
+				false,
+				new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showClickBehaviorDialog();
+					}
+				}));
+	}
+
+	private int getInitialIntervalIndex() {
+		List<Long> intervals = new ArrayList<>(availableIntervals.keySet());
+		for (int i = 0; i < intervals.size(); i++) {
+			long interval = intervals.get(i);
+			if (selectedIntervalMillis == interval) {
+				return i;
 			}
+		}
 
-			updateToolbarIcon();
+		return 0;
+	}
 
-			View averageSpeedContainer = view.findViewById(R.id.average_speed_container);
-			boolean showAverageSpeedSetting = mode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME;
-			AndroidUiHelper.updateVisibility(averageSpeedContainer, showAverageSpeedSetting);
-		};
+	@NonNull
+	private Map<Long, String> getAvailableIntervals() {
+		Map<Long, String> intervals = new LinkedHashMap<>();
+		for (long interval : AverageSpeedComputer.MEASURED_INTERVALS) {
+			boolean seconds = interval < 60 * 1000;
+			String timeInterval = seconds
+					? String.valueOf(interval / 1000)
+					: String.valueOf(interval / 1000 / 60);
+			String timeUnit = interval < 60 * 1000
+					? app.getString(R.string.shared_string_sec)
+					: app.getString(R.string.shared_string_minute_lowercase);
+			String formattedInterval = app.getString(R.string.ltr_or_rtl_combine_via_space, timeInterval, timeUnit);
+			intervals.put(interval, formattedInterval);
+		}
+		return intervals;
+	}
 
-		setupMapMarkerModeItem(SideMarkerMode.DISTANCE, distanceModeContainer, callback);
-		setupMapMarkerModeItem(SideMarkerMode.ESTIMATED_ARRIVAL_TIME, estimatedTimeOfArrivalModeContainer, callback);
+	private View createButtonWithDescription(int iconId,
+	                                         @NonNull String title,
+	                                         @NonNull String desc,
+	                                         boolean showTintedIcon,
+	                                         boolean showShortDivider,
+	                                         OnClickListener listener) {
+		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+
+		Drawable icon = showTintedIcon
+				? getPaintedContentIcon(iconId, selectedAppMode.getProfileColor(nightMode))
+				: getIcon(iconId);
+
+		ImageView ivIcon = view.findViewById(R.id.icon);
+		ivIcon.setImageDrawable(icon);
+
+		TextView tvTitle = view.findViewById(R.id.title);
+		tvTitle.setText(title);
+
+		TextView tvDesc = view.findViewById(R.id.description);
+		tvDesc.setText(desc);
+		AndroidUiHelper.updateVisibility(tvDesc, true);
+
+		if (showShortDivider) {
+			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
+		}
+
+		setupClickListener(view, listener);
+		setupListItemBackground(view);
+		return view;
+	}
+
+	private void showSeekbarSettingsDialog() {
+		boolean nightMode = !app.getSettings().isLightContentForMode(appMode);
+		localSeekBarIntervalMillis = selectedIntervalMillis;
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+		View seekbarView = themedInflater.inflate(R.layout.map_marker_interval_dialog, null, false);
+		builder.setView(seekbarView);
+		builder.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
+			selectedIntervalMillis = localSeekBarIntervalMillis;
+			setupConfigButtons();
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+
+		List<String> intervals = new ArrayList<>(availableIntervals.values());
+		String minIntervalValue = intervals.get(0);
+		String maxIntervalValue = intervals.get(intervals.size() - 1);
+
+		TextView minInterval = seekbarView.findViewById(R.id.min_interval);
+		TextView maxInterval = seekbarView.findViewById(R.id.max_interval);
+		minInterval.setText(minIntervalValue);
+		maxInterval.setText(maxIntervalValue);
+
+		TextView interval = seekbarView.findViewById(R.id.interval);
+
+		String intervalStr = app.getString(R.string.shared_string_interval);
+		List<Entry<Long, String>> intervalsList = new ArrayList<>(availableIntervals.entrySet());
+		int initialIntervalIndex = getInitialIntervalIndex();
+
+		Slider slider = seekbarView.findViewById(R.id.interval_slider);
+		slider.setValueFrom(0);
+		slider.setValueTo(availableIntervals.size() - 1);
+		slider.setValue(initialIntervalIndex);
+		slider.clearOnChangeListeners();
+		slider.addOnChangeListener((slider1, intervalIndex, fromUser) -> {
+			Entry<Long, String> newInterval = intervalsList.get((int) intervalIndex);
+			localSeekBarIntervalMillis = newInterval.getKey();
+			interval.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, intervalStr, newInterval.getValue()));
+		});
+
+		interval.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, intervalStr, intervalsList.get(initialIntervalIndex).getValue()));
+
+		int selectedModeColor = appMode.getProfileColor(nightMode);
+		UiUtilities.setupSlider(slider, nightMode, selectedModeColor);
+
+		builder.show();
+	}
+
+	private void showClickBehaviorDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
+		builder.setTitle(R.string.tap_on_widget);
+
+		String[] items = new String[MarkerClickBehaviour.values().length];
+		for (int i = 0; i < items.length; i++) {
+			items[i] = MarkerClickBehaviour.values()[i].getTitle(app);
+		}
+		int selected = selectedMarkerClickBehaviour.ordinal();
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
+					int which = (int) v.getTag();
+					selectedMarkerClickBehaviour = MarkerClickBehaviour.values()[which];
+					setupConfigButtons();
+				}
+		);
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
+	}
+
+	private void showMarkerModeDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
+		builder.setTitle(R.string.shared_string_mode);
+
+		String[] items = new String[SideMarkerMode.values().length];
+		for (int i = 0; i < items.length; i++) {
+			items[i] = SideMarkerMode.values()[i].getTitle(app);
+		}
+		int selected = selectedMarkerMode.ordinal();
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
+					int which = (int) v.getTag();
+					selectedMarkerMode = SideMarkerMode.values()[which];
+					setupConfigButtons();
+					updateToolbarIcon();
+				}
+		);
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
+	}
+
+	private void setupListItemBackground(@NonNull View view) {
+		View button = view.findViewById(R.id.button_container);
+		int color = selectedAppMode.getProfileColor(nightMode);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+		AndroidUtils.setBackground(button, background);
+	}
+
+	private void setupClickListener(@NonNull View view, @Nullable OnClickListener listener) {
+		View button = view.findViewById(R.id.button_container);
+		button.setOnClickListener(listener);
 	}
 
 	private void updateToolbarIcon() {
@@ -104,60 +314,20 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 		icon.setImageDrawable(getIcon(iconId));
 	}
 
-	private void setupMapMarkerModeItem(@NonNull SideMarkerMode mode,
-	                                    @NonNull View container,
-	                                    @NonNull MarkerModeSelectionCallback callback) {
-		ImageView icon = container.findViewById(R.id.icon);
-		TextView title = container.findViewById(R.id.title);
-		CompoundButton compoundButton = container.findViewById(R.id.compound_button);
-
-		icon.setImageDrawable(getIcon(mode.getIconId(nightMode)));
-		title.setText(mode.titleId);
-
-		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
-		compoundButton.setChecked(selectedMarkerMode == mode);
-		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			if (isChecked) {
-				callback.onModeSelected(mode);
-			}
-		});
-
-		boolean lastMode = mode.ordinal() + 1 == SideMarkerMode.values().length;
-		if (!lastMode) {
-			View bottomDivider = view.findViewById(R.id.bottom_divider);
-			AndroidUiHelper.updateVisibility(bottomDivider, true);
-		}
-
-		container.setOnClickListener(v -> compoundButton.setChecked(true));
-		container.setBackground(getPressedStateDrawable());
-	}
-
-	private void setupAverageSpeedIntervalSetting() {
-		averageSpeedIntervalCard = new AverageSpeedIntervalCard(requireMyActivity(), initialIntervalMillis);
-		ViewGroup cardContainer = view.findViewById(R.id.average_speed_interval_card_container);
-		cardContainer.addView(averageSpeedIntervalCard.build(cardContainer.getContext()));
-
-		View settingContainer = view.findViewById(R.id.average_speed_container);
-		AndroidUiHelper.updateVisibility(settingContainer, selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME);
-	}
-
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(MARKER_MODE_KEY, selectedMarkerMode.name());
-		outState.putLong(AVERAGE_SPEED_INTERVAL_KEY, averageSpeedIntervalCard.getSelectedIntervalMillis());
+		outState.putLong(AVERAGE_SPEED_INTERVAL_KEY, selectedIntervalMillis);
+		outState.putString(MARKER_CLICK_BEHAVIOUR_KEY, selectedMarkerClickBehaviour.name());
 	}
 
 	@Override
 	protected void applySettings() {
 		markerModePref.setModeValue(appMode, selectedMarkerMode);
 		if (selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME) {
-			averageSpeedIntervalPref.setModeValue(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
+			averageSpeedIntervalPref.setModeValue(appMode, selectedIntervalMillis);
 		}
-	}
-
-	private interface MarkerModeSelectionCallback {
-
-		void onModeSelected(@NonNull SideMarkerMode mode);
+		markerClickBehaviourPref.setModeValue(appMode, selectedMarkerClickBehaviour);
 	}
 }

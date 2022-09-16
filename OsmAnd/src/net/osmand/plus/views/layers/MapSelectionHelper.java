@@ -2,6 +2,9 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
+import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
+import static net.osmand.router.network.NetworkRouteSelector.*;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -11,6 +14,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -73,15 +77,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class MapSelectionHelper {
+public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(ContextMenuLayer.class);
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int TILE_SIZE = 256;
+	public static final int SHIFT_MULTIPOLYGON_IDS = 43;
+	public static final int SHIFT_NON_SPLIT_EXISTING_IDS = 41;
+	public static final long RELATION_BIT = 1L << SHIFT_MULTIPOLYGON_IDS - 1; //According IndexPoiCreator SHIFT_MULTIPOLYGON_IDS
+	public static final long SPLIT_BIT = 1L << SHIFT_NON_SPLIT_EXISTING_IDS - 1; //According IndexVectorMapCreator
+	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
@@ -287,7 +297,7 @@ class MapSelectionHelper {
 				if (jniAmenity != null) {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
-					long id = jniAmenity.getId().getId().longValue() >> 7;
+					long id = jniAmenity.getId().getId().longValue();
 					amenity = findAmenity(app, result.objectLatLon, names, id, AMENITY_SEARCH_RADIUS);
 				} else {
 					MapObject mapObject;
@@ -354,6 +364,9 @@ class MapSelectionHelper {
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Caption) {
 				renderedObject.setName(rasterMapSymbol.getContent());
 			}
+			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
+				renderedObject.setIconRes(rasterMapSymbol.getContent());
+			}
 			result.selectedObjects.put(renderedObject, null);
 		}
 	}
@@ -365,7 +378,7 @@ class MapSelectionHelper {
 		if (!caption.isEmpty()) {
 			names.add(caption);
 		}
-		long id = obfMapObject.getId().getId().longValue() >> 7;
+		long id = obfMapObject.getId().getId().longValue();
 		amenity = findAmenity(app, latLon, names, id, AMENITY_SEARCH_RADIUS);
 		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
@@ -408,7 +421,7 @@ class MapSelectionHelper {
 	}
 
 	private void addRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point) {
-		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, OsmandMapLayer.getDefaultRadiusPoi(tileBox)) * 1.5f);
+		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * 1.5f);
 		LatLon minLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
 				point.x - searchRadius, point.y - searchRadius);
 		LatLon maxLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox,
@@ -426,24 +439,24 @@ class MapSelectionHelper {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-		List<NetworkRouteSegment> segmentList = new ArrayList<>();
+		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();
 		try {
-			segmentList.addAll(routeSelector.getFirstSegments(rect, null, searchDistance));
+			routes = routeSelector.getRoutes(rect, false, null);
 		} catch (IOException e) {
 			log.error(e);
 		}
-		for (NetworkRouteSegment routeSegment : segmentList) {
-			if (isUniqueRoute(selectedObjects.keySet(), routeSegment)) {
-				selectedObjects.put(new Pair<>(routeSegment, rect), gpxMenuProvider);
+		for (RouteKey routeKey : routes.keySet()) {
+			if (isUniqueRoute(selectedObjects.keySet(), routeKey)) {
+				selectedObjects.put(new Pair<>(routeKey, rect), gpxMenuProvider);
 			}
 		}
 	}
 
-	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull NetworkRouteSegment routeSegment) {
+	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
 		for (Object selectedObject : set) {
-			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof NetworkRouteSegment) {
-				NetworkRouteSegment rs = (NetworkRouteSegment) ((Pair<?, ?>) selectedObject).first;
-				if (rs.routeKey.equals(routeSegment.routeKey)) {
+			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof RouteKey) {
+				RouteKey routeKey = (RouteKey) ((Pair<?, ?>) selectedObject).first;
+				if (routeKey.equals(tmpRouteKey)) {
 					return false;
 				}
 			}
@@ -452,7 +465,7 @@ class MapSelectionHelper {
 	}
 
 	private boolean addAmenity(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @NonNull LatLon searchLatLon) {
-		Amenity amenity = findAmenity(app, searchLatLon, object.getOriginalNames(), object.getId() >> 7, AMENITY_SEARCH_RADIUS);
+		Amenity amenity = findAmenity(app, searchLatLon, object.getOriginalNames(), object.getId(), AMENITY_SEARCH_RADIUS);
 		if (amenity != null) {
 			if (object.getX() != null && object.getX().size() > 1 && object.getY() != null && object.getY().size() > 1) {
 				amenity.getX().addAll(object.getX());
@@ -552,6 +565,7 @@ class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id, int radius) {
+		id = getOsmId(id >> 1);
 		SearchPoiTypeFilter filter = new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
@@ -570,7 +584,12 @@ class MapSelectionHelper {
 		for (Amenity amenity : amenities) {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
-				long amenityId = initAmenityId >> 1;
+				long amenityId;
+				if (isShiftedID(initAmenityId)) {
+					amenityId = getOsmId(initAmenityId);
+				} else {
+					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
+				}
 				if (amenityId == id && !amenity.isClosed()) {
 					res = amenity;
 					break;
@@ -591,6 +610,25 @@ class MapSelectionHelper {
 			}
 		}
 		return res;
+	}
+
+	public static boolean isIdFromRelation(long id) {
+		return id > 0 && (id & RELATION_BIT) == RELATION_BIT;
+	}
+
+	public static boolean isIdFromSplit(long id) {
+		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
+	}
+
+	public static long getOsmId(long id) {
+		//According methods assignIdForMultipolygon and genId in IndexPoiCreator
+		long clearBits = RELATION_BIT | SPLIT_BIT;
+		id = isShiftedID(id) ? (id & ~clearBits) >> DUPLICATE_SPLIT : id;
+		return id >> SHIFT_ID;
+	}
+
+	public static boolean isShiftedID(long id) {
+		return isIdFromRelation(id) || isIdFromSplit(id);
 	}
 
 	static class MapSelectionResult {

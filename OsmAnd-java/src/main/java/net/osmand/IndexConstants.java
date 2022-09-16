@@ -5,10 +5,10 @@ public class IndexConstants {
 	
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
-	public final static int POI_TABLE_VERSION = 1;
-	public final static int BINARY_MAP_VERSION = 2; // starts with 1
-	public final static int VOICE_VERSION = 0; //supported download versions
-	public final static int TTSVOICE_VERSION = 1; //supported download versions
+	public static final int POI_TABLE_VERSION = 1;
+	public static final int BINARY_MAP_VERSION = 2; // starts with 1
+	public static final int VOICE_VERSION = 0; //supported download versions
+	public static final int TTSVOICE_VERSION = 1; //supported download versions
 
 	public static final String SQLITE_EXT = ".sqlitedb";
 	public static final String TEMP_SOURCE_TO_LOAD = "temp";
@@ -58,7 +58,7 @@ public class IndexConstants {
 
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
 
-	public final static String POI_TABLE = "poi";
+	public static final String POI_TABLE = "poi";
 
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
 	public static final String APP_DIR = "osmand/";

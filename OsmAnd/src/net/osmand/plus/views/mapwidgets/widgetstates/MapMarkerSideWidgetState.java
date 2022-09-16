@@ -18,6 +18,7 @@ import androidx.annotation.StringRes;
 public class MapMarkerSideWidgetState extends WidgetState {
 
 	private final OsmandPreference<SideMarkerMode> mapMarkerModePref;
+	private final OsmandPreference<MarkerClickBehaviour> markerClickBehaviourPref;
 	private final OsmandPreference<Long> averageSpeedIntervalPref;
 	private final boolean firstMarker;
 
@@ -26,6 +27,7 @@ public class MapMarkerSideWidgetState extends WidgetState {
 		this.firstMarker = firstMarker;
 		this.mapMarkerModePref = registerModePref(customId);
 		this.averageSpeedIntervalPref = registerAverageSpeedIntervalPref(customId);
+		this.markerClickBehaviourPref = registerMarkerClickBehaviourPref(customId);
 	}
 
 	@NonNull
@@ -48,6 +50,15 @@ public class MapMarkerSideWidgetState extends WidgetState {
 	}
 
 	@NonNull
+	private OsmandPreference<MarkerClickBehaviour> registerMarkerClickBehaviourPref(@Nullable String customId) {
+		String prefId = firstMarker ? "first_map_marker_click_behaviour" : "second_map_marker_click_behaviour";
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += customId;
+		}
+		return settings.registerEnumIntPreference(prefId, MarkerClickBehaviour.SWITCH_MODE, MarkerClickBehaviour.values(), MarkerClickBehaviour.class).makeProfile();
+	}
+
+	@NonNull
 	public OsmandPreference<SideMarkerMode> getMapMarkerModePref() {
 		return mapMarkerModePref;
 	}
@@ -55,6 +66,11 @@ public class MapMarkerSideWidgetState extends WidgetState {
 	@NonNull
 	public OsmandPreference<Long> getAverageSpeedIntervalPref() {
 		return averageSpeedIntervalPref;
+	}
+
+	@NonNull
+	public OsmandPreference<MarkerClickBehaviour> getMarkerClickBehaviourPref() {
+		return markerClickBehaviourPref;
 	}
 
 	@NonNull
@@ -124,6 +140,23 @@ public class MapMarkerSideWidgetState extends WidgetState {
 		public SideMarkerMode next() {
 			int nextItemIndex = (ordinal() + 1) % values().length;
 			return values()[nextItemIndex];
+		}
+	}
+
+	public enum MarkerClickBehaviour {
+		SWITCH_MODE(R.string.shared_string_switch_mode),
+		GO_TO_MARKER_LOCATION(R.string.go_to_marker_location);
+
+		@StringRes
+		public final int titleId;
+
+		MarkerClickBehaviour(@StringRes int titleId) {
+			this.titleId = titleId;
+		}
+
+		@NonNull
+		public String getTitle(@NonNull Context context) {
+			return context.getString(titleId);
 		}
 	}
 }

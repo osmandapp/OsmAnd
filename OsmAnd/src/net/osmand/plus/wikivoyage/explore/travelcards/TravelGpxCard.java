@@ -47,7 +47,11 @@ public class TravelGpxCard extends BaseTravelCard {
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof TravelGpxVH) {
 			TravelGpxVH holder = (TravelGpxVH) viewHolder;
-			holder.title.setText(article.getTitle());
+			if (!Algorithms.isEmpty(article.getDescription())) {
+				holder.title.setText(article.getDescription());
+			} else {
+				holder.title.setText(article.getTitle());
+			}
 			holder.userIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_user_account_16));
 			holder.user.setText(article.user);
 			String activityTypeKey = article.activityType;

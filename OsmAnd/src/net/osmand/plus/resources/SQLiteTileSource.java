@@ -86,15 +86,23 @@ public class SQLiteTileSource implements ITileSource {
 			i = name.lastIndexOf('.');
 			if (i > 0) {
 				String sourceName = name.substring(i + 1);
-				for (TileSourceTemplate is : toFindUrl) {
-					if (is.getName().equalsIgnoreCase(sourceName)) {
-						base = is;
-						urlTemplate = is.getUrlTemplate();
-						expirationTimeMillis = is.getExpirationTimeMillis();
-						inversiveZoom = is.getInversiveZoom();
-						break;
-					}
-				}
+				setTileSourceTemplate(sourceName,  toFindUrl);
+			} else {
+				setTileSourceTemplate(name, toFindUrl);
+			}
+		}
+	}
+
+	private void setTileSourceTemplate(String sourceName, List<TileSourceTemplate> toFindUrl) {
+		for (TileSourceTemplate is : toFindUrl) {
+			if (is.getName().equalsIgnoreCase(sourceName)) {
+				base = is;
+				urlTemplate = is.getUrlTemplate();
+				expirationTimeMillis = is.getExpirationTimeMillis();
+				minZoom = is.getMinimumZoomSupported();
+				maxZoom = is.getMaximumZoomSupported();
+				inversiveZoom = is.getInversiveZoom();
+				break;
 			}
 		}
 	}
@@ -467,29 +475,27 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null) {
 			return null;
 		}
+		byte[] blob = null;
 		long ts = System.currentTimeMillis();
 		try {
 			if (zoom <= maxZoom) {
 				// return the normal tile if exists
 				String[] params = getTileDbParams(x, y, zoom);
 				boolean queryTime = timeHolder != null && timeHolder.length > 0 && timeSupported;
-				SQLiteCursor cursor = db.rawQuery("SELECT image "
-								+ (queryTime ? ", time" : "")
-								+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
-				byte[] blob = null;
+				SQLiteCursor cursor = db.rawQuery("SELECT image " + (queryTime ? ", time" : "")
+						+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
 				if (cursor.moveToFirst()) {
 					blob = cursor.getBlob(0);
-					if(queryTime) {
+					if (queryTime) {
 						timeHolder[0] = cursor.getLong(1);
 					}
 				}
 				cursor.close();
-				return blob;
 			}
-			return null;
+			return blob;
 		} finally {
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms ");
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms " + " loaded " + (blob != null));
 			}
 		}
 	}
@@ -497,6 +503,17 @@ public class SQLiteTileSource implements ITileSource {
 	@Override
 	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
 		return getBytes(x, y, zoom, dirWithTiles, null);
+	}
+
+	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
+		byte[] blob;
+		try {
+			blob = getBytes(x, y, zoom, null, timeHolder);
+		} catch (IOException e) {
+			return null;
+		}
+		String[] params = getTileDbParams(x, y, zoom);
+		return blob != null ? getImage(blob, params) : null;
 	}
 
 	@Nullable
@@ -627,6 +644,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
 		  if (exists(x, y, zoom)) {
+
 			return;
 		}*/
 		
@@ -747,5 +765,9 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public void resetUrlParameters() {
+	}
+
+	public boolean isFileExist() {
+		return file == null ? false : file.exists();
 	}
 }

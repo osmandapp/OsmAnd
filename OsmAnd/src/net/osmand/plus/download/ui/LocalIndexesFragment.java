@@ -35,6 +35,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -326,7 +327,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 					}
 				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
+					if (i.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+						parent = getMyApplication().getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+					} else {
+						parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
+					}
 				} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
@@ -373,6 +378,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							if (tWal.exists()) {
 								Algorithms.removeAllFiles(tWal);
 							}
+							clearMapillaryTiles(info);
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -389,6 +395,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						ITileSource src = (ITileSource) info.getAttachedObject();
 						if (src != null) {
 							src.deleteTiles(info.getPathToData());
+							clearMapillaryTiles(info);
 						}
 					}
 					total++;
@@ -443,6 +450,42 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				a.reloadLocalIndexes();
 			} else {
 				a.onUpdatedIndexesList();
+			}
+		}
+
+		// Clear tiles for both Mapillary sources together
+		private void clearMapillaryTiles(LocalIndexInfo info) {
+			ITileSource src = (ITileSource) info.getAttachedObject();
+			ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
+			ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
+			if (src != null && (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName()))) {
+				File current = new File(info.getPathToData());
+				File parent = current.getParentFile();
+				if (parent == null) {
+					return;
+				}
+				File[] list = parent.listFiles();
+				if (list == null) {
+					return;
+				}
+				for (File f : list) {
+					String withoutExt = Algorithms.getFileNameWithoutExtension(f);
+					String sqliteExt = IndexConstants.SQLITE_EXT.replace(".", "");
+					ITileSource cache = null;
+					if (withoutExt.equals(mapilaryCache.getName())) {
+						cache = mapilaryCache;
+					} else if (withoutExt.equals(mapilaryVector.getName())) {
+						cache = mapilaryVector;
+					}
+					if (cache != null) {
+						if (f.isDirectory()) {
+							cache.deleteTiles(f.getPath());
+						} else if (Algorithms.getFileExtension(f).equals(sqliteExt)) {
+							SQLiteTileSource sqlTileSource = new SQLiteTileSource(getMyApplication(), f, TileSourceManager.getKnownSourceTemplates());
+							sqlTileSource.deleteTiles(f.getPath());
+						}
+					}
+				}
 			}
 		}
 	}
@@ -978,7 +1021,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		private String getMapDescription(LocalIndexInfo child) {
 			if (child.getType() == LocalIndexType.TILES_DATA) {
-				return ctx.getString(R.string.online_map);
+				if (child.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					return ctx.getString(R.string.download_heightmap_maps);
+				} else {
+					return ctx.getString(R.string.online_map);
+				}
 			} else if (child.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
@@ -1103,7 +1150,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			});
 		}
 		if (info.getType() == LocalIndexType.TILES_DATA
-				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
+				&& ((info.getAttachedObject() instanceof TileSourceTemplate)
 				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
 				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)

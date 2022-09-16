@@ -1,5 +1,11 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,6 +33,14 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
@@ -104,20 +118,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
@@ -1567,15 +1567,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public class DeleteGpxTask extends AsyncTask<GpxInfo, GpxInfo, String> {
 
+		private boolean folderDeleted;
+
 		@Override
 		protected String doInBackground(GpxInfo... params) {
 			int count = 0;
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
+					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					if (successful) {
+						File parentFile = info.file.getParentFile();
+						if (parentFile != null && Algorithms.isEmpty(parentFile.listFiles())) {
+							folderDeleted = Algorithms.removeAllFiles(parentFile);
+						}
 						count++;
 						publishProgress(info);
 					}
@@ -1601,6 +1607,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		protected void onPostExecute(String result) {
 			hideProgressBar();
 			app.showToastMessage(result);
+
+			if (folderDeleted) {
+				reloadTracks();
+			}
 		}
 	}
 
@@ -1702,17 +1712,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		public String getName() {
 			if (name == null) {
-				name = formatName(file.getName());
+				name = GpxUiHelper.getGpxTitle(file.getName());
 			}
 			return name;
-		}
-
-		private String formatName(String name) {
-			int ext = name.lastIndexOf('.');
-			if (ext != -1) {
-				name = name.substring(0, ext);
-			}
-			return name.replace('_', ' ');
 		}
 
 		public boolean isCorrupted() {

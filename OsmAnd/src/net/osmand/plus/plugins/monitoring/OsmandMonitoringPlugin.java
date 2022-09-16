@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.T
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingTimeWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
@@ -99,7 +100,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private void registerWidgetsVisibility() {
 		for (WidgetType widget : WidgetGroup.TRIP_RECORDING.getWidgets()) {
 			ApplicationMode[] appModes = widget == TRIP_RECORDING_DISTANCE ? null : new ApplicationMode[] {};
-			ApplicationMode.regWidgetVisibility(widget, appModes);
+			WidgetsAvailabilityHelper.regWidgetVisibility(widget, appModes);
 		}
 	}
 
@@ -188,16 +189,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(distanceWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(distanceWidget, appMode));
 
 		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(timeWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(timeWidget, appMode));
 
 		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(uphillWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(uphillWidget, appMode));
 
 		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(downhillWidget));
+		widgetsInfos.add(widgetRegistry.createWidgetInfo(downhillWidget, appMode));
 	}
 
 	@Override

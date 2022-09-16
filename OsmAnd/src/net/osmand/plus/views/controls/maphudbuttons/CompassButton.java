@@ -1,27 +1,36 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
+
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
-
 public class CompassButton extends MapButton {
 
+	private static final int HIDE_DELAY_MS = 5000;
+
+	private ViewPropertyAnimatorCompat hideAnimator;
+
+	private boolean forceHideCompass;
 	private boolean specialPosition;
 	private float mapRotation;
 
@@ -33,14 +42,14 @@ public class CompassButton extends MapButton {
 	}
 
 	@Nullable
-	public ImageView moveToSpecialPosition(@NonNull ViewGroup specialContainer,
-	                                       @NonNull ViewGroup.LayoutParams layoutParams) {
+	public ImageView moveToSpecialPosition(@NonNull ViewGroup container, @NonNull LayoutParams params) {
 		ViewGroup parent = (ViewGroup) view.getParent();
 		if (parent != null) {
+			cancelHideAnimation();
 			specialPosition = true;
 			parent.removeView(view);
-			view.setLayoutParams(layoutParams);
-			specialContainer.addView(view);
+			view.setLayoutParams(params);
+			container.addView(view);
 			return view;
 		}
 		return null;
@@ -72,7 +81,11 @@ public class CompassButton extends MapButton {
 
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			setIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white);
-			setContentDesc(R.string.rotate_map_none_opt);
+			if (mapRotation == 0.0f) {
+				setContentDesc(R.string.rotate_map_none_opt);
+			} else {
+				setContentDesc(R.string.rotate_map_none_rotated_opt);
+			}
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			setIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white);
 			setContentDesc(R.string.rotate_map_bearing_opt);
@@ -84,7 +97,8 @@ public class CompassButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		if (isRouteDialogOpened() || widgetsVisibilityHelper.shouldHideCompass()) {
+		forceHideCompass = isRouteDialogOpened() || widgetsVisibilityHelper.shouldHideCompass();
+		if (forceHideCompass) {
 			return false;
 		} else if (!specialPosition) {
 			ApplicationMode appMode = settings.getApplicationMode();
@@ -101,11 +115,69 @@ public class CompassButton extends MapButton {
 		if (visible) {
 			visible = app.getAppCustomization().isFeatureEnabled(id);
 		}
-		if (!specialPosition && AndroidUiHelper.updateVisibility(view, visible)) {
+		if (!specialPosition && visible != (view.getVisibility() == View.VISIBLE)) {
+			if (visible) {
+				if (hideAnimator != null) {
+					hideAnimator.cancel();
+				}
+				view.setVisibility(View.VISIBLE);
+				view.invalidate();
+			} else if (hideAnimator == null) {
+				if (!forceHideCompass) {
+					hideDelayed(HIDE_DELAY_MS);
+				} else {
+					forceHideCompass = false;
+					view.setVisibility(View.GONE);
+					view.invalidate();
+				}
+			}
+			return true;
+		} else if (visible && hideAnimator != null) {
+			hideAnimator.cancel();
+			view.setVisibility(View.VISIBLE);
 			view.invalidate();
 			return true;
 		}
 		return false;
+	}
+
+	public void hideDelayed(long msec) {
+		if (!specialPosition && view.getVisibility() == View.VISIBLE) {
+			if (hideAnimator != null) {
+				hideAnimator.cancel();
+			}
+			hideAnimator = ViewCompat.animate(view)
+					.alpha(0f)
+					.setDuration(250)
+					.setStartDelay(msec)
+					.setListener(new ViewPropertyAnimatorListener() {
+						@Override
+						public void onAnimationStart(View view) {
+						}
+
+						@Override
+						public void onAnimationEnd(View view) {
+							view.setVisibility(View.GONE);
+							view.setAlpha(1f);
+							hideAnimator = null;
+						}
+
+						@Override
+						public void onAnimationCancel(View view) {
+							view.setVisibility(View.GONE);
+							view.setAlpha(1f);
+							hideAnimator = null;
+						}
+					});
+			hideAnimator.start();
+		}
+	}
+
+
+	public void cancelHideAnimation() {
+		if (hideAnimator != null) {
+			hideAnimator.cancel();
+		}
 	}
 
 	@Override

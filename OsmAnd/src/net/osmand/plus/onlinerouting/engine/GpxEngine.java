@@ -1,5 +1,7 @@
 package net.osmand.plus.onlinerouting.engine;
 
+import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,6 +20,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteResultPreparation;
@@ -32,8 +35,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 
 public class GpxEngine extends OnlineRoutingEngine {
 
@@ -99,7 +100,8 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.CUSTOM_NAME);
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
-		params.add(EngineParameter.APPROXIMATE_ROUTE);
+		params.add(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
+		params.add(EngineParameter.APPROXIMATION_DERIVED_PROFILE);
 		params.add(EngineParameter.NETWORK_APPROXIMATE_ROUTE);
 		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 		params.add(EngineParameter.USE_ROUTING_FALLBACK);
@@ -121,16 +123,17 @@ public class GpxEngine extends OnlineRoutingEngine {
 	@Override
 	@Nullable
 	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation, boolean initialCalculation) {
+	                                           boolean leftSideNavigation, boolean initialCalculation,
+	                                           @Nullable RouteCalculationProgress calculationProgress) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation) : null;
+		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress) : null;
 	}
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                              boolean initialCalculation) {
+	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		boolean calculatedTimeSpeed = useExternalTimestamps();
 		if (shouldApproximateRoute() && !initialCalculation) {
-			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile, calculationProgress);
 			if (ctx != null) {
 				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 				if (approximated != null) {
@@ -144,14 +147,17 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Nullable
 	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GPXFile gpxFile) {
+	                                                              @NonNull GPXFile gpxFile,
+	                                                              @Nullable RouteCalculationProgress calculationProgress) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		ApplicationMode appMode = routingHelper.getAppMode();
+		String oldRoutingProfile = appMode.getRoutingProfile();
+		String oldDerivedProfile = appMode.getDerivedProfile();
 		try {
-			RoutingHelper routingHelper = app.getRoutingHelper();
-			ApplicationMode appMode = routingHelper.getAppMode();
-			String routingProfile = getApproximateRouteProfile();
-			String oldRoutingProfile = appMode.getRoutingProfile();
+			String routingProfile = getApproximationRoutingProfile();
 			if (routingProfile != null) {
 				appMode.setRoutingProfile(routingProfile);
+				appMode.setDerivedProfile(getApproximationDerivedProfile());
 			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
@@ -160,6 +166,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				LatLon end = holder.getLatLon(holder.getSize() - 1);
 				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
+				gctx.ctx.calculationProgress = calculationProgress;
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
 				GpxRouteApproximation gpxApproximation;
 				if (shouldNetworkApproximateRoute()) {
@@ -185,11 +192,13 @@ public class GpxEngine extends OnlineRoutingEngine {
 				}
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
-				appMode.setRoutingProfile(oldRoutingProfile);
 				return ctx;
 			}
 		} catch (IOException | InterruptedException e) {
 			LOG.error(e.getMessage(), e);
+		} finally {
+			appMode.setRoutingProfile(oldRoutingProfile);
+			appMode.setDerivedProfile(oldDerivedProfile);
 		}
 		return null;
 	}

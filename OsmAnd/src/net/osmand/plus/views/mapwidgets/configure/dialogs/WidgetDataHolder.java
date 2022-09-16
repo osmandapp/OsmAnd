@@ -129,6 +129,20 @@ public class WidgetDataHolder {
 	}
 
 	@Nullable
+	public WidgetType getMainWidget() {
+		if (widgetGroup != null) {
+			for (WidgetType widget : widgetGroup.getWidgets()) {
+				if (widget.isMainWidgetOfGroup()) {
+					return widget;
+				}
+			}
+		} else if (widgetType != null) {
+			return widgetType;
+		}
+		return null;
+	}
+
+	@Nullable
 	public AidlMapWidgetWrapper getAidlWidgetData() {
 		return aidlWidgetData;
 	}

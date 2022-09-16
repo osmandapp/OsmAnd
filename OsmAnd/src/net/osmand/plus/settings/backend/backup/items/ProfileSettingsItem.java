@@ -10,7 +10,7 @@ import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -122,7 +122,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		super.readFromJson(json);
 		String appModeJson = json.getString("appMode");
-		modeBean = ApplicationMode.fromJson(appModeJson);
+		modeBean = ApplicationMode.fromJson(app, appModeJson);
 		builder = ApplicationMode.fromModeBean(app, modeBean);
 		ApplicationMode appMode = builder.getApplicationMode();
 		if (!appMode.isCustomProfile()) {

@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +27,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
@@ -113,13 +117,13 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		TextView descriptionView = mainView.findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());
 
-		int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
-		int linkTextColor = ContextCompat.getColor(context, linkTextColorId);
-
-		descriptionView.setLinkTextColor(linkTextColor);
-		descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
-		AndroidUtils.removeLinkUnderline(descriptionView);
-
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(descriptionView, Linkify.ALL)) {
+			int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
+			descriptionView.setLinkTextColor(ContextCompat.getColor(context, linkTextColorId));
+			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+			AndroidUtils.removeLinkUnderline(descriptionView);
+		}
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -257,7 +261,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
-									   @NonNull OsmandPlugin plugin) {
+	                                   @NonNull OsmandPlugin plugin) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());

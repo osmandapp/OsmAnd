@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
-
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,28 +19,32 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
@@ -51,7 +53,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected OsmandSettings settings;
 
 	protected final List<Object> items = new ArrayList<>();
-	protected final List<Object> selectedItems = new ArrayList<>();
+	protected final Set<Object> selectedItems = new HashSet<>();
 	protected final Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
 	protected View appbar;
@@ -180,12 +182,16 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		});
 		selectAllButton = view.findViewById(R.id.dismiss_button);
 		selectAllButton.setOnClickListener(v -> {
-			for (List<?> items : itemsGroups.values()) {
-				selectedItems.addAll(items);
+			if (isAllItemsSelected()) {
+				selectedItems.clear();
+			} else {
+				selectedItems.addAll(getAllItems());
 			}
+			updateSelectAllButton();
 			updateButtonsState();
 			adapter.notifyDataSetChanged();
 		});
+		updateSelectAllButton();
 
 		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY, R.string.shared_string_select_all);
 		UiUtilities.setupDialogButton(nightMode, deleteButton, DialogButtonType.PRIMARY, R.string.shared_string_delete);
@@ -212,6 +218,26 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		deleteButton.setEnabled(checked && !selectedItems.isEmpty());
 	}
 
+	private void updateSelectAllButton() {
+		TextView tvTitle = selectAllButton.findViewById(R.id.button_text);
+		tvTitle.setText(isAllItemsSelected() ?
+				R.string.shared_string_deselect_all :
+				R.string.shared_string_select_all);
+	}
+
+	private boolean isAllItemsSelected() {
+		return selectedItems.size() == getAllItems().size();
+	}
+
+	@NonNull
+	public List<Object> getAllItems() {
+		List<Object> allItems = new ArrayList<>();
+		for (List<?> items : itemsGroups.values()) {
+			allItems.addAll(items);
+		}
+		return allItems;
+	}
+
 	@Override
 	public void onItemSelected(Object item, boolean selected) {
 		if (selected) {
@@ -220,6 +246,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			selectedItems.remove(item);
 		}
 		updateToolbarSwitch(appbar);
+		updateSelectAllButton();
 		updateButtonsState();
 	}
 
@@ -231,6 +258,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			selectedItems.removeAll(items);
 		}
 		updateToolbarSwitch(appbar);
+		updateSelectAllButton();
 		updateButtonsState();
 	}
 

@@ -13,9 +13,6 @@ import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.PICKUP_DATE;
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
@@ -43,12 +40,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -81,7 +76,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -619,50 +613,6 @@ public class ImportHelper {
 						this, gpxFile, fileName, fileSize, save, useImportDir);
 			}
 		}
-	}
-
-	public static List<FavouritePoint> asFavourites(OsmandApplication app, List<WptPt> wptPts, String fileName, boolean forceImportFavourites) {
-		List<FavouritePoint> favourites = new ArrayList<>();
-		for (WptPt p : wptPts) {
-			if (Algorithms.isEmpty(p.name)) {
-				p.name = app.getString(R.string.shared_string_waypoint);
-			}
-			if (!Algorithms.isEmpty(p.name)) {
-				String fpCat;
-				if (p.category == null) {
-					if (forceImportFavourites) {
-						fpCat = fileName;
-					} else {
-						fpCat = "";
-					}
-				} else {
-					fpCat = p.category;
-				}
-				FavouritePoint point = new FavouritePoint(p.lat, p.lon, p.name, fpCat, p.ele, p.time);
-				if (p.desc != null) {
-					point.setDescription(p.desc);
-				}
-				Map<String, String> extensions = p.getExtensionsToRead();
-				point.setAddress(extensions.get("address"));
-				point.setColor(p.getColor(0));
-				point.setVisible(!Boolean.parseBoolean(extensions.get("hidden")));
-				String iconName = p.getIconName();
-				if (iconName != null) {
-					point.setIconIdFromName(iconName);
-				}
-				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-
-				String time = extensions.get(PICKUP_DATE);
-				if (time == null) {
-					time = extensions.get(CREATION_DATE);
-				}
-				if (!Algorithms.isEmpty(time)) {
-					point.setPickupDate(GPXUtilities.parseTime(time));
-				}
-				favourites.add(point);
-			}
-		}
-		return favourites;
 	}
 
 	@SuppressWarnings("unchecked")

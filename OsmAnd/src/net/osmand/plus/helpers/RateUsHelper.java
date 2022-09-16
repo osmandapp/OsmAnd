@@ -1,6 +1,12 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
+
 import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
@@ -18,10 +24,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 public class RateUsHelper {
 
@@ -58,7 +60,8 @@ public class RateUsHelper {
 	public static boolean shouldShowRateDialog(OsmandApplication app) {
 		long firstInstalledDays = app.getAppInitializer().getFirstInstalledDays();
 		//Do not show dialog if not google play version or more than 350 days left from the first start
-		if (!Version.isGooglePlayEnabled() || firstInstalledDays > 350) {
+		if (!Version.isGooglePlayEnabled() || firstInstalledDays > 350
+				|| !app.getAppCustomization().isFeatureEnabled(FRAGMENT_RATE_US_ID)) {
 			return false;
 		}
 		OsmandSettings settings = app.getSettings();
@@ -84,7 +87,7 @@ public class RateUsHelper {
 		return false;
 	}
 
-	public static void showRateDialog(MapActivity mapActivity) {
+	public static void showRateDialog(@NonNull MapActivity mapActivity) {
 		boolean inAppReviewSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 		if (inAppReviewSupported && Version.isGooglePlayInstalled(mapActivity.getMyApplication())) {
 			showInAppRateDialog(mapActivity);

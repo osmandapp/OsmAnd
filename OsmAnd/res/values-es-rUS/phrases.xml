@@ -168,7 +168,7 @@
     <string name="poi_fuel_gtl_diesel">Diésel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiésel</string>
-    <string name="poi_fuel_lpg">GPL</string>
+    <string name="poi_fuel_lpg">Gas licuado de petróleo (GLP)</string>
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
@@ -203,9 +203,9 @@
     <string name="poi_tram_stop">Parada de tranvía</string>
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de autobús;Terminal de ómnibus;Estación de colectivos</string>
-    <string name="poi_railway_station">Estación de ferrocarril;Estación ferroviaria;Estación de tren</string>
+    <string name="poi_railway_station">Estación ferroviaria;Estación de ferrocarril;Estación de tren</string>
     <string name="poi_railway_platform">Andén ferroviario;Andén de ferrocarril;Andén de tren;Plataforma ferroviaria</string>
-    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren</string>
+    <string name="poi_halt">Parada ferroviaria;Parada de ferrocarril;Parada de tren;Estación ferroviaria (pequeña);Estación de tren (pequeña)</string>
     <string name="poi_subway_entrance">Entrada de metro;Entrada de subte</string>
     <string name="poi_subway_station">Sí; Estación de subte</string>
     <string name="poi_railway_buffer_stop">Fin de vía</string>
@@ -4330,7 +4330,7 @@
     <string name="poi_laundry_service_yes">Sí</string>
     <string name="poi_flow_rate">Caudal</string>
     <string name="poi_golf_pin">Pin de golf</string>
-    <string name="poi_payment_mir_no">No se aceptan tarjetas Mir</string>
+    <string name="poi_payment_mir_no">No se acepta tarjetas Mir</string>
     <string name="poi_payment_mir_yes">Mir</string>
     <string name="poi_club_youth_movement">Movimiento juvenil</string>
     <string name="poi_club_amateur_radio">Club de radioaficionados</string>
@@ -4341,4 +4341,5 @@
     <string name="poi_club_aviation">Club de aviación</string>
     <string name="poi_club_bicycle">Club de ciclistas</string>
     <string name="poi_club_doityourself">Club de bricolaje</string>
+    <string name="poi_first_aid_kit">Botiquín de primeros auxilios</string>
 </resources>

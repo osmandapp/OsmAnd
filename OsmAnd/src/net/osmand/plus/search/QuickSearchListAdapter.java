@@ -499,9 +499,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 			int progress = -1;
 			if (thread.getCurrentDownloadingItem() == indexItem) {
-				progress = thread.getCurrentDownloadingItemProgress();
+				progress = (int) thread.getCurrentDownloadProgress();
 			}
-			pbProgress.setIndeterminate(progress == -1);
+			pbProgress.setIndeterminate(progress < 0);
 			pbProgress.setProgress(progress);
 			buttonDrawable = iconsCache.getIcon(R.drawable.ic_action_remove_dark, defaultIconColorId);
 		}

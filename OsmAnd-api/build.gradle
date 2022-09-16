@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
-apply plugin: 'com.github.dcendents.android-maven'
 
 
 android {

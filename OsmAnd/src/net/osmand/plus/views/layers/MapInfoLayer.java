@@ -30,9 +30,10 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -143,7 +144,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
-		rulerWidgets = new CopyOnWriteArrayList<>();
+		rulerWidgets = new ArrayList<>();
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -191,7 +192,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
-			rulerWidgets.add(rulerWidget);
+			rulerWidgets = Algorithms.addToList(rulerWidgets, rulerWidget);
 
 			return rulerWidget;
 		} else {
@@ -200,7 +201,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
-		rulerWidgets.removeAll(rulers);
+		rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {

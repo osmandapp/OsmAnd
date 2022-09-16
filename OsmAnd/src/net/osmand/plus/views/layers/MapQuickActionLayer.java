@@ -349,7 +349,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         MapRendererView mapRenderer = view.getMapRenderer();
         if (mapRenderer != null) {
             if (!isFollowPoint) {
-                view.setLatLon(ll.getLatitude(), ll.getLongitude(), false);
+                view.setLatLon(ll.getLatitude(), ll.getLongitude());
             }
         } else {
             double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -385,7 +385,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             LatLon ll = tileBox.getCenterLatLon();
             MapRendererView mapRenderer = view.getMapRenderer();
             if (mapRenderer != null) {
-                NativeUtilities.calculateTarget31(mapRenderer, rb, ll.getLatitude(), ll.getLongitude(), true);
+                NativeUtilities.calculateTarget31(mapRenderer, ll.getLatitude(), ll.getLongitude(), true);
             } else {
                 rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
                 double lat = tileBox.getLatFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());

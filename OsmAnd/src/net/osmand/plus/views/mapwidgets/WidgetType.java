@@ -2,7 +2,14 @@ package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -10,16 +17,16 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.util.Algorithms;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
@@ -162,6 +169,14 @@ public enum WidgetType {
 		return 0;
 	}
 
+	public boolean isPurchased(@NonNull Context ctx) {
+		if (getProWidgets().contains(this)) {
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			return InAppPurchaseHelper.isOsmAndProAvailable(app);
+		}
+		return true;
+	}
+
 	public int getDefaultOrder() {
 		return defaultPanel.getOriginalWidgetOrder(id);
 	}
@@ -189,9 +204,9 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public WidgetSettingsBaseFragment getSettingsFragment() {
+	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx) {
 		if (this == ELEVATION_PROFILE) {
-			return new ElevationProfileWidgetSettingsFragment();
+			return isPurchased(ctx) ? new ElevationProfileWidgetSettingsFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
@@ -219,6 +234,11 @@ public enum WidgetType {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static List<WidgetType> getProWidgets() {
+		return Collections.singletonList(ELEVATION_PROFILE);
 	}
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {

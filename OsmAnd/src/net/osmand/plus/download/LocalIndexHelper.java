@@ -3,13 +3,18 @@ package net.osmand.plus.download;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -24,11 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 
 public class LocalIndexHelper {
@@ -212,6 +212,7 @@ public class LocalIndexHelper {
 					break;
 				case TILES_DATA:
 					loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, needDescription, loadTask);
+					loadTilesData(app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR), result, false, needDescription, loadTask);
 					break;
 				case TRAVEL_DATA:
 					loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, readFiles,
@@ -305,8 +306,11 @@ public class LocalIndexHelper {
 							   boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
-				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
-					loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
+				if (tileFile.isFile()) {
+					String fileName = tileFile.getName();
+					if (fileName.endsWith(SQLiteTileSource.EXT) || fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
+					}
 				} else if (tileFile.isDirectory()) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
 

@@ -34,6 +34,7 @@ import net.osmand.plus.settings.fragments.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -240,7 +241,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		boolean subscribedToMaps = InAppPurchaseHelper.isSubscribedToMaps(app, false);
 		boolean fullVersionPurchased = InAppPurchaseHelper.isFullVersionPurchased(app, false);
 
-		boolean mapsPlusPurchased = fullVersion || subscribedToMaps || fullVersionPurchased;
+		boolean isFullVersion = fullVersion || fullVersionPurchased;
+		boolean mapsPlusPurchased = subscribedToMaps || isFullVersion;
 		boolean available = !mapsPlusPurchased && selectedFeature.isAvailableInMapsPlus() && Version.isInAppPurchaseSupported();
 
 		iconId = available ? R.drawable.ic_action_osmand_maps_plus : R.drawable.ic_action_osmand_maps_plus_desaturated;
@@ -265,7 +267,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		}, available);
 
 		if (mapsPlusPurchased) {
-			updatePurchasedButton(mapsPlusView);
+			updatePurchasedButton(mapsPlusView, isFullVersion);
 		}
 	}
 
@@ -294,11 +296,13 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		view.setEnabled(available);
 	}
 
-	private void updatePurchasedButton(@NonNull View view) {
+	private void updatePurchasedButton(@NonNull View view, boolean isFullVersion) {
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
 
-		tvTitle.setText(R.string.shared_string_purchased);
+		String version = getString(isFullVersion ? R.string.osmand_plus : R.string.maps_plus);
+		String title = getString(R.string.included_in_your_current_plan, version);
+		tvTitle.setText(title);
 
 		String description = null;
 		InAppPurchase purchase = purchaseHelper.getFullVersion();
@@ -307,6 +311,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 			description = DATE_FORMAT.format(purchaseTime);
 		}
 		tvDescription.setText(description);
+		AndroidUiHelper.updateVisibility(tvDescription, !Algorithms.isEmpty(description));
 		view.setEnabled(true);
 	}
 

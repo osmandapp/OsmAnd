@@ -490,7 +490,6 @@
     <string name="lanes_widgets_desc">Vidžetot Lanes go prikažuva momentalniot raspored na kolovoznite lenti i gi istaknuva lentite za vozenje so aktivna navigacija.</string>
     <string name="street_name_widget_desc">Vidžetot za ime na ulica go prikažuva tekovnoto ime na ulica so prava strelka za lokacija ili ime na slednata ulica so manevar što treba da se završi.</string>
     <string name="coordinates_widget_desc">Gi prikažuva geografskite koordinati na tekovnata geo-lokacija.</string>
-    <string name="map_markers_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="route_maneuvers_desc">Navigaciskite vidžeti se ovozmoženi za vreme na navigacijata za prikažuvanje informacii kako rastojanie, vreme na pristignuvanje ili levo, slednite krivini, ležište, tekovno ime na ulica, informacii za lenti, maksimalna brzina, predupreduvanja za približuvanje, POI, točki na dviženje.</string>
     <string name="calculating_altitude">Presmetuvanje na nadmorskata visočina</string>
     <string name="calculate_online">Presmetajte na onlajn</string>

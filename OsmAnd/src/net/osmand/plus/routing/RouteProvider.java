@@ -1122,7 +1122,7 @@ public class RouteProvider {
 		OnlineRoutingResponse response =
 				helper.calculateRouteOnline(engineKey, getPathFromParams(params),
 						params.start.hasBearing() ? params.start.getBearing() : null,
-						params.leftSide, params.initialCalculation);
+						params.leftSide, params.initialCalculation, params.calculationProgress);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {

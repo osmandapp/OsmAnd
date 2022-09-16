@@ -1,15 +1,12 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_CRASH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RATE_US_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +20,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -35,7 +31,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -53,7 +48,6 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
-import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -64,7 +58,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -73,7 +66,6 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.FailSafeFunctions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -93,13 +85,13 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
 import net.osmand.plus.helpers.RateUsHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -128,7 +120,6 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -148,9 +139,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.OsmAndMapLayersView;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMap.OsmandMapListener;
+import net.osmand.plus.views.MapViewWithLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -176,12 +165,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDrawMapListener,
 		OsmAndAppCustomizationListener, LockUIAdapter, OnPreferenceStartFragmentCallback,
-		OnScrollEventListener, OsmandMapListener {
+		OnScrollEventListener {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
 
-	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int ZOOM_LABEL_DISPLAY = 16;
 	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
@@ -200,8 +188,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private BroadcastReceiver screenOffReceiver;
 
-	private AtlasMapRendererView atlasMapRendererView;
-
 	private MapActivityActions mapActions;
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 
@@ -215,6 +201,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private ImportHelper importHelper;
 	private IntentHelper intentHelper;
 	private ScrollHelper mapScrollHelper;
+	private RestoreNavigationHelper restoreNavigationHelper;
 
 	private boolean landscapeLayout;
 
@@ -222,6 +209,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private final DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
+	private MapViewWithLayers mapViewWithLayers;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
@@ -260,6 +248,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings = app.getSettings();
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new ScrollHelper(app);
+		restoreNavigationHelper = new RestoreNavigationHelper(this);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -297,7 +286,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandMapTileView mapView = getMapView();
 
 		mapView.setTrackBallDelegate(e -> {
-			showAndHideMapPosition();
+			mapView.showAndHideMapPosition();
 			return onTrackballEvent(e);
 		});
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
@@ -333,12 +322,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
-		app.getOsmandMap().addListener(this);
+
+		drawerLayout = findViewById(R.id.drawer_layout);
+		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
 
 		checkAppInitialization();
 
 		mapActions.updateDrawerMenu();
-		drawerLayout = findViewById(R.id.drawer_layout);
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
@@ -430,7 +420,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						refreshMap();
 					}
 					if (event == InitEvents.ROUTING_CONFIG_INITIALIZED) {
-						checkRestoreRoutingMode();
+						restoreNavigationHelper.checkRestoreRoutingMode();
 					}
 				}
 
@@ -450,60 +440,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMyApplication().checkApplicationIsBeingInitialized(initListener);
 		} else {
 			app.getOsmandMap().setupOpenGLView(true);
-			checkRestoreRoutingMode();
-		}
-	}
-
-	private void checkRestoreRoutingMode() {
-		// This situation could be when navigation suddenly crashed and after restarting
-		// it tries to continue the last route
-		if (settings.FOLLOW_THE_ROUTE.get()
-				&& !app.getRoutingHelper().isRouteCalculated()
-				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFunctions.restoreRoutingMode(this);
-		}
-	}
-
-	private void setupOpenGLView(boolean init) {
-		OsmandMapTileView mapView = getMapView();
-		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
-		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
-				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
-		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
-			ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
-			if (atlasMapRendererView == null) {
-				atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
-				atlasMapRendererView.setAzimuth(0);
-				float elevationAngle = mapView.normalizeElevationAngle(app.getSettings().LAST_KNOWN_MAP_ELEVATION.get());
-				atlasMapRendererView.setElevationAngle(elevationAngle);
-				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
-			}
-			mapView.setMapRenderer(atlasMapRendererView);
-			OsmAndMapLayersView ml = findViewById(R.id.MapLayersView);
-			if (useAndroidAuto) {
-				ml.setVisibility(View.GONE);
-				ml.setMapView(null);
-				androidAutoPlaceholder.setVisibility(View.VISIBLE);
-			} else {
-				ml.setVisibility(View.VISIBLE);
-				ml.setMapView(mapView);
-				androidAutoPlaceholder.setVisibility(View.GONE);
-			}
-			getMapViewTrackingUtilities().setMapView(mapView);
-			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
-			surf.setVisibility(View.GONE);
-		} else {
-			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
-			if (useAndroidAuto) {
-				surf.setVisibility(View.GONE);
-				surf.setMapView(null);
-				androidAutoPlaceholder.setVisibility(View.VISIBLE);
-			} else {
-				surf.setVisibility(View.VISIBLE);
-				surf.setMapView(mapView);
-				androidAutoPlaceholder.setVisibility(View.GONE);
-			}
+			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
 	}
 
@@ -738,17 +675,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!dashboardOnMap.isVisible()) {
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
-				} else {
-					OsmAndAppCustomization customization = app.getAppCustomization();
-					if (customization.isFeatureEnabled(FRAGMENT_CRASH_ID)
-							&& CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
-						SecondSplashScreenFragment.SHOW = false;
-						CrashBottomSheetDialogFragment.showInstance(fragmentManager);
-					} else if (customization.isFeatureEnabled(FRAGMENT_RATE_US_ID)
-							&& RateUsHelper.shouldShowRateDialog(app)) {
-						SecondSplashScreenFragment.SHOW = false;
-						RateUsHelper.showRateDialog(this);
-					}
+				} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
+					SecondSplashScreenFragment.SHOW = false;
+					CrashBottomSheetDialogFragment.showInstance(fragmentManager);
+				} else if (RateUsHelper.shouldShowRateDialog(app)) {
+					SecondSplashScreenFragment.SHOW = false;
+					RateUsHelper.showRateDialog(this);
 				}
 			} else {
 				dashboardOnMap.updateDashboard();
@@ -781,8 +713,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
-				settings.LAST_KNOWN_MAP_ROTATION.setModeValue(prevAppMode, getMapRotate());
-				settings.LAST_KNOWN_MAP_ELEVATION.setModeValue(prevAppMode, getMapElevationAngle());
+				settings.setLastKnownMapRotation(prevAppMode, getMapRotate());
+				settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
 				updateApplicationModeSettings();
 			}
 		});
@@ -806,12 +738,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setIntZoom(settings.getLastKnownMapZoom());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-				mapView.setRotate(settings.LAST_KNOWN_MAP_ROTATION.get(), true);
+				mapView.setRotate(settings.getLastKnownMapRotation(), true);
 			}
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
-		showAndHideMapPosition();
+		mapView.showAndHideMapPosition();
 
 		readLocationToShow();
 
@@ -820,10 +752,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		intentHelper.parseContentIntent();
 		mapView.refreshMap(true);
-		if (atlasMapRendererView != null) {
-			atlasMapRendererView.handleOnResume();
-		}
 
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.onResume();
+		}
 		app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		app.getDownloadThread().setUiActivity(this);
 
@@ -932,9 +864,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setKeepScreenOn(boolean keepScreenOn) {
-		View mainView = findViewById(R.id.MapViewWithLayers);
-		if (mainView != null) {
-			mainView.setKeepScreenOn(keepScreenOn);
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.setKeepScreenOn(keepScreenOn);
 		}
 	}
 
@@ -1213,7 +1144,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		app.getOsmandMap().removeListener(this);
 		getMapLayers().setMapActivity(null);
 		getMapView().setMapActivity(null);
 		mapContextMenu.setMapActivity(null);
@@ -1221,15 +1151,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(null);
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
-		FailSafeFunctions.quitRouteRestoreDialog();
+		restoreNavigationHelper.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
-		if (atlasMapRendererView != null) {
-			atlasMapRendererView.handleOnDestroy();
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.onDestroy();
 		}
 		lockHelper.setLockUIAdapter(null);
 		extendedMapActivity.onDestroy(this);
@@ -1271,6 +1201,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
+		getMapView().getAnimatedDraggingThread().stopAnimatingSync();
+
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
@@ -1286,8 +1218,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getMapMarkersHelper().removeListener(this);
 		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
-		if (atlasMapRendererView != null) {
-			atlasMapRendererView.handleOnPause();
+
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.onPause();
 		}
 		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
@@ -1301,8 +1234,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
-		settings.LAST_KNOWN_MAP_ROTATION.set(mapView.getRotate());
-		settings.LAST_KNOWN_MAP_ELEVATION.set(mapView.getElevationAngle());
+		settings.setLastKnownMapRotation(mapView.getRotate());
+		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);
@@ -1392,17 +1325,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
 				cp.x + dx, cp.y + dy);
 		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
-	}
-
-	public void showAndHideMapPosition() {
-		getMapView().setShowMapPosition(true);
-		app.runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, () -> {
-			OsmandMapTileView mapView = getMapView();
-			if (mapView.isShowMapPosition()) {
-				mapView.setShowMapPosition(false);
-				mapView.refreshMap();
-			}
-		}, 2500);
 	}
 
 	public void showMapControls() {
@@ -1811,23 +1733,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		int dx = (left ? -scrollingUnit : 0) + (right ? scrollingUnit : 0);
 		int dy = (up ? -scrollingUnit : 0) + (down ? scrollingUnit : 0);
 		scrollMap(dx, dy);
-	}
-
-	@Override
-	public void onChangeZoom(int stp) {
-		showAndHideMapPosition();
-	}
-
-	@Override
-	public void onSetMapElevation(float angle) {
-		if (atlasMapRendererView != null) {
-			atlasMapRendererView.setElevationAngle(angle);
-		}
-	}
-
-	@Override
-	public void onSetupOpenGLView(boolean init) {
-		setupOpenGLView(init);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

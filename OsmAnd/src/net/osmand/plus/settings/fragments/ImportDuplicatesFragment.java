@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.utils.ColorUtilities;
@@ -28,7 +29,6 @@ import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.view.ComplexButton;
@@ -178,7 +178,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 
 	protected List<Object> prepareDuplicates(List<? super Object> duplicatesList) {
 		List<? super Object> duplicates = new ArrayList<>();
-		List<ApplicationMode.ApplicationModeBean> profiles = new ArrayList<>();
+		List<ApplicationModeBean> profiles = new ArrayList<>();
 		List<QuickAction> actions = new ArrayList<>();
 		List<PoiUIFilter> filters = new ArrayList<>();
 		List<ITileSource> tileSources = new ArrayList<>();
@@ -200,8 +200,8 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
 		for (Object object : duplicatesList) {
-			if (object instanceof ApplicationMode.ApplicationModeBean) {
-				profiles.add((ApplicationMode.ApplicationModeBean) object);
+			if (object instanceof ApplicationModeBean) {
+				profiles.add((ApplicationModeBean) object);
 			} else if (object instanceof QuickAction) {
 				actions.add((QuickAction) object);
 			} else if (object instanceof PoiUIFilter) {

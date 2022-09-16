@@ -244,6 +244,8 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new OptionsDividerItem(getContext()));
 
+		boolean approximationNeeded = editingCtx.shouldCheckApproximation() && editingCtx.isApproximationNeeded();
+
 		BaseBottomSheetItem changeRouteTypeBefore = new BottomSheetItemWithDescription.Builder()
 				.setIcon(getRouteTypeIcon(true))
 				.setTitle(getString(R.string.plan_route_change_route_type_before))
@@ -258,7 +260,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isFirstPointSelected(false) || editingCtx.isApproximationNeeded())
+				.setDisabled(editingCtx.isFirstPointSelected(false) || approximationNeeded)
 				.create();
 		items.add(changeRouteTypeBefore);
 
@@ -276,7 +278,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 						dismiss();
 					}
 				})
-				.setDisabled(editingCtx.isLastPointSelected(false) || editingCtx.isApproximationNeeded())
+				.setDisabled(editingCtx.isLastPointSelected(false) || approximationNeeded)
 				.create();
 		items.add(changeRouteTypeAfter);
 

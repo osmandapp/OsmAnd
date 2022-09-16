@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -20,13 +19,22 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapillaryTilesProvider;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -39,6 +47,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +69,16 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	private Paint paintPoint;
 	private Paint paintLine;
 	private Bitmap point;
+	private boolean carView;
+	private float textScale = 1f;
 	private Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
+
+	//OpenGL
+	private MapillaryTilesProvider mapillaryTilesProvider;
+	private MapMarkersCollection mapMarkersCollection;
+	Bitmap selectedImageBitmap;
+	Bitmap headingImageBitmap;
+	private long filterKey = 0;
 
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
@@ -79,19 +97,133 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		paintLine.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 4f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 
-		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
-		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
-		point = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_photo_dot);
+		updateBitmaps(true);
+	}
+	private void updateBitmaps(boolean forceUpdate) {
+		OsmandApplication app = getApplication();
+		float textScale = getTextScale();
+		boolean carView = app.getOsmandMap().getMapView().isCarView();
+		if (this.textScale != textScale || this.carView != carView || forceUpdate) {
+			this.textScale = textScale;
+			this.carView = carView;
+			recreateBitmaps();
+		}
+	}
+
+	private void recreateBitmaps() {
+		selectedImage = getScaledBitmap(R.drawable.map_mapillary_location);
+		headingImage = getScaledBitmap(R.drawable.map_mapillary_location_view_angle);
+		point = getScaledBitmap(R.drawable.map_mapillary_photo_dot);
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		updateBitmaps(false);
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			int layerIndex = view.getLayerIndex(this);
+			if (map == null) {
+				if (mapillaryTilesProvider != null) {
+					mapRenderer.resetMapLayerProvider(layerIndex);
+					clearMapMarkersCollections();
+					mapillaryTilesProvider = null;
+				}
+				return;
+			}
+			if (filterKey != getFilterKey()) {
+				if (mapillaryTilesProvider != null) {
+					mapillaryTilesProvider.clearCache();
+					mapRenderer.resetMapLayerProvider(layerIndex);
+					clearMapMarkersCollections();
+					mapillaryTilesProvider = null;
+				}
+				filterKey = getFilterKey();
+			}
+			if (mapillaryTilesProvider == null) {
+				mapillaryTilesProvider = new MapillaryTilesProvider(getApplication(), map, view.getDensity());
+				mapRenderer.setMapLayerProvider(layerIndex, mapillaryTilesProvider.instantiateProxy(true));
+				mapillaryTilesProvider.swigReleaseOwnership();
+			} else {
+				mapillaryTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
+			}
+		} else {
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		}
 	}
 
 	@Override
 	public void setSelectedImageLocation(LatLon selectedImageLocation) {
 		this.selectedImageLocation = selectedImageLocation;
+		showMarkerIfNeeded();
 	}
 
 	@Override
 	public void setSelectedImageCameraAngle(Float selectedImageCameraAngle) {
 		this.selectedImageCameraAngle = selectedImageCameraAngle;
+		showMarkerIfNeeded();
+	}
+
+	/**OpenGL*/
+	private void showMarkerIfNeeded() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			initMarkersCollectionIfNeeded();
+			if (mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
+				MapMarker marker = mapMarkersCollection.getMarkers().get(0);
+				if (selectedImageLocation != null) {
+					int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
+					int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
+					PointI pointI = new PointI(x, y);
+					marker.setPosition(pointI);
+					marker.setIsHidden(false);
+				} else {
+					marker.setIsHidden(true);
+				}
+				if (selectedImageCameraAngle != null) {
+					marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
+				}
+			}
+		}
+	}
+
+	/**OpenGL*/
+	private void initMarkersCollectionIfNeeded() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null || mapMarkersCollection != null) {
+			return;
+		}
+		updateBitmaps(false);
+
+		selectedImageBitmap = Bitmap.createBitmap(selectedImage.getWidth(), selectedImage.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas selectedImageCanvas = new Canvas(selectedImageBitmap);
+		selectedImageCanvas.drawBitmap(selectedImage, 0, 0, paintPoint);
+
+		headingImageBitmap = Bitmap.createBitmap(headingImage.getWidth(), headingImage.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas headingImageCanvas = new Canvas(headingImageBitmap);
+		headingImageCanvas.drawBitmap(headingImage, 0, 0, paintPoint);
+
+		mapMarkersCollection = new MapMarkersCollection();
+		MapMarkerBuilder imageAndCourseMarkerBuilder = new MapMarkerBuilder();
+		imageAndCourseMarkerBuilder
+				.setIsHidden(true)
+				.setIsAccuracyCircleSupported(false)
+				.setBaseOrder(getBaseOrder())
+				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(selectedImageBitmap))
+				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(2), NativeUtilities.createSkImageFromBitmap(headingImageBitmap))
+				.buildAndAddToCollection(mapMarkersCollection);
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	@Override
+	protected void clearMapMarkersCollections() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && mapMarkersCollection != null) {
+			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
+			mapMarkersCollection = null;
+		}
 	}
 
 	@Override
@@ -402,6 +534,61 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && mapillaryTilesProvider != null) {
+			getImagesFromPointOpenGL(tb, point, images);
+		} else {
+			getImagesFromPointCanvas(tb, point, images);
+		}
+	}
+
+	/**OpenGL*/
+	private void getImagesFromPointOpenGL(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+
+		PointI point31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
+		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(point31);
+		if (quadTree == null) {
+			return;
+		}
+
+		final int radius = getRadius(tb) / 2;
+		LatLon topLeft = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x - radius, point.y - radius);
+		LatLon bottomRight = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x + radius, point.y + radius);
+		LatLon center = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x, point.y);
+		double left = topLeft.getLongitude();
+		double top = topLeft.getLatitude();
+		double right = bottomRight.getLongitude();
+		double bottom = bottomRight.getLatitude();
+		QuadRect rect = new QuadRect(left, top, right, bottom);
+		List<MapillaryImage> res = new ArrayList<>();
+		quadTree.queryInBox(rect, res);
+		if (res.isEmpty()) {
+			return;
+		}
+
+		double dist = MapUtils.getDistance(topLeft, bottomRight);
+		MapillaryImage img = null;
+		for (MapillaryImage image : res) {
+			if (image == null)
+				continue;
+
+			double d = MapUtils.getDistance(center, image.getLatitude(), image.getLongitude());
+			if (d < dist) {
+				img = image;
+				dist = d;
+			}
+		}
+		if (img == null) {
+			img = res.get(0);
+		}
+		images.add(img);
+	}
+
+	private void getImagesFromPointCanvas(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
@@ -455,5 +642,17 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			r = 18;
 		}
 		return (int) (r * view.getScaleCoefficient());
+	}
+
+	private long getFilterKey() {
+		int hasFilter = plugin.USE_MAPILLARY_FILTER.get() ? 1 : 0;
+		long from = 0;
+		long to = 0;
+		if (hasFilter == 1) {
+			from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
+			to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+		}
+		int pano = plugin.MAPILLARY_FILTER_PANO.get() ? 1 : 0;
+		return (hasFilter << 1) + from + to + pano;
 	}
 }

@@ -30,7 +30,7 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 	}
 
 	@Override
-	public void setupWebViewClient(View view) {
+	public void setupWebViewClient(@NonNull View view) {
 		controller.setupWebViewController(mWebView, view, this);
 	}
 

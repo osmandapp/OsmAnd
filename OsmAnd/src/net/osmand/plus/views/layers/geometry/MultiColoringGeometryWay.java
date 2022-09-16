@@ -185,12 +185,12 @@ public abstract class MultiColoringGeometryWay
 
 	@Override
 	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
-	                           GeometryWayStyle<?> style,
+	                           GeometryWayStyle<?> style, List<Integer> indexes,
 	                           List<Float> tx, List<Float> ty,
 	                           List<Integer> tx31, List<Integer> ty31,
 	                           List<Double> angles, List<Double> distances,
 	                           List<GeometryWayStyle<?>> styles) {
-		super.addLocation(tb, locationIdx, dist, style, tx, ty, tx31, ty31, angles, distances, styles);
+		super.addLocation(tb, locationIdx, dist, style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
 		if (style instanceof GeometryGradientWayStyle<?> && styles.size() > 1) {
 			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) styles.get(styles.size() - 2);
 			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;

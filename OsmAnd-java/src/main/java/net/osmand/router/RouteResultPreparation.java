@@ -288,8 +288,9 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED = 2;
 	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
-		//for Naismith
+		//for Naismith/Scarf
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
+		double scarfSeconds = 7.92f / ctx.getRouter().getDefaultSpeed();
 
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
@@ -307,8 +308,8 @@ public class RouteResultPreparation {
 			int next;
 			double distance = 0;
 
-			//for Naismith
-			float prevHeight = -99999.0f;
+			//for Naismith/Scarf
+			float prevHeight = 99999.0f;
 			float[] heightDistanceArray = null;
 			if (usePedestrianHeight) {
 				road.calculateHeightArray();
@@ -326,17 +327,18 @@ public class RouteResultPreparation {
 				}
 				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
-				//for Naismith
+				//for Naismith/Scarf
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
 					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
 						float height = heightDistanceArray[heightIndex];
-						if (prevHeight != -99999.0f) {
-							float heightDiff = height - prevHeight;
-							if (heightDiff > 0) { // ascent only
-								distOnRoadToPass += heightDiff * 6.0f; // Naismith's rule: add 1 hour per every 600m of
-																		// ascent
-							}
+						float heightDiff = height - prevHeight;
+						if (heightDiff > 0) { // ascent only
+							// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
+							// - Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph
+							// - Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h
+							//distOnRoadToPass += heightDiff * 6.0f;
+							distOnRoadToPass += heightDiff * scarfSeconds;
 						}
 						prevHeight = height;
 					}
@@ -345,9 +347,13 @@ public class RouteResultPreparation {
 
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
-			rr.setSegmentTime((float) distOnRoadToPass);
-			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
+			rr.setSegmentTime((float) distOnRoadToPass);
+			if (distOnRoadToPass != 0) {
+				rr.setSegmentSpeed((float) (distance / distOnRoadToPass));  //effective segment speed incl. obstacle and height effects
+			} else {
+				rr.setSegmentSpeed((float) speed);
+			}
 		}
 	}
 

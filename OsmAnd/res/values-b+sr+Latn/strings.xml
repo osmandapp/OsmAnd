@@ -4695,7 +4695,6 @@
     <string name="map_markers_bar_widget_desc">Na vidžetu pri gornjoj traci možete da vidite rastojanje i pravac do markera od trenutne lokacije. Moguće je konfigurisati da vidite 1 ili 2 gornja markera u vidžetu.</string>
     <string name="audio_video_notes_desc">Vidžet omogućava brz pristup za početak/zaustavljanje snimanja (audio, video ili foto).</string>
     <string name="bearing_desc">Vidžet smera pokazuje apsolutni ili relativni smer ka cilju u ugaonim jedinicama (stepeni 180, stepeni 360, miliradijani).</string>
-    <string name="map_markers_desc">Na vidžetu gornje trake možete da vidite rastojanje i pravac do markera od trenutne lokacije. Moguće je konfigurisati da vidite 1 ili 2 gornja markera u vidžetu.</string>
     <string name="navigation_points_desc">Navigacioni vidgeti su omogućeni tokom navigacije za prikaz informacija kao što su rastojanje, vreme dolaska ili preostalo vreme, sledeća skretanja, smer, trenutni naziv ulice, informacije o trakama, maksimalna brzina, upozorenja o približavanju, POI, tačke puta.</string>
     <string name="map_widget_current_speed">Trenutna brzina</string>
     <string name="apply_to_existing">Primeniti na postojeće</string>

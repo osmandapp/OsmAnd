@@ -18,6 +18,13 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/use_opengl_render" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_heightmaps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/download_heightmap_maps" />
+
 	<PreferenceCategory
 		android:key="safe"
 		android:layout="@layout/preference_category_with_descr"
@@ -106,7 +113,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/memory_allocated_for_routing"
-		tools:summary="256 MB"/>
+		tools:summary="256 MB" />
 
 	<Preference
 		android:key="global_app_allocated_memory"

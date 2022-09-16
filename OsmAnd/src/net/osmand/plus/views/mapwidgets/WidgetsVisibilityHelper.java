@@ -162,7 +162,7 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowElevationProfileWidget() {
 		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get() && isRouteCalculated()
-				&& InAppPurchaseHelper.isOsmAndProAvailable(app)
+				&& WidgetType.ELEVATION_PROFILE.isPurchased(app)
 				&& !isInChangeMarkerPositionMode()
 				&& !isInMeasurementToolMode()
 				&& !isInChoosingRoutesMode()

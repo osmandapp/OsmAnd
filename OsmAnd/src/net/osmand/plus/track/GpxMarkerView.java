@@ -104,7 +104,7 @@ public class GpxMarkerView extends MarkerView {
 	}
 
 	private void updateMarkerWithOneDataSet(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
-		int value = (int) entry.getY();
+		int value = (int) (entry.getY() + 0.5);
 		String units = dataSet.getUnits();
 		GPXDataSetType dataSetType = dataSet.getDataSetType();
 		if (dataSetType == GPXDataSetType.ALTITUDE) {
@@ -177,7 +177,7 @@ public class GpxMarkerView extends MarkerView {
 	}
 
 	private void updateXAxisValueWithTime(@NonNull Entry entry) {
-		int seconds = (int) entry.getX();
+		int seconds = (int) (entry.getX() + 0.5);
 		String formattedTime = GpxUiHelper.formatXAxisTime(seconds, useHours);
 		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTime);
 	}
@@ -229,7 +229,7 @@ public class GpxMarkerView extends MarkerView {
 	private void updateAltitudeText(@Nullable OrderedLineDataSet altitudeDataSet, @NonNull Entry entry) {
 		if (altitudeDataSet != null) {
 			float y = getInterpolatedY(altitudeDataSet, entry);
-			String formattedAltitude = formatValue((int) y);
+			String formattedAltitude = formatValue((int) (y + 0.5));
 			((TextView) altitudeContainer.findViewById(R.id.text_alt_value)).setText(formattedAltitude);
 			((TextView) altitudeContainer.findViewById(R.id.text_alt_units)).setText(altitudeDataSet.getUnits());
 		}
@@ -239,7 +239,7 @@ public class GpxMarkerView extends MarkerView {
 	private void updateSpeedText(@Nullable OrderedLineDataSet speedDataSet, @NonNull Entry entry) {
 		if (speedDataSet != null) {
 			float y = getInterpolatedY(speedDataSet, entry);
-			String formattedSpeed = formatValue(((int) y));
+			String formattedSpeed = formatValue((int) (y + 0.5));
 			((TextView) speedContainer.findViewById(R.id.text_spd_value)).setTextColor(speedDataSet.getColor());
 			((TextView) speedContainer.findViewById(R.id.text_spd_value)).setText(formattedSpeed);
 			((TextView) speedContainer.findViewById(R.id.text_spd_units)).setText(speedDataSet.getUnits());
@@ -250,7 +250,7 @@ public class GpxMarkerView extends MarkerView {
 	private void updateSlopeText(@Nullable OrderedLineDataSet slopeDataSet, @NonNull Entry entry) {
 		if (slopeDataSet != null) {
 			float y = getInterpolatedY(slopeDataSet, entry);
-			String formattedSlope = formatValue(((int) y));
+			String formattedSlope = formatValue((int) (y + 0.5));
 			((TextView) slopeContainer.findViewById(R.id.text_slp_value)).setText(formattedSlope);
 		}
 		AndroidUiHelper.updateVisibility(slopeContainer, slopeDataSet != null);

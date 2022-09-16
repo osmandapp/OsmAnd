@@ -31,8 +31,8 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
@@ -152,7 +152,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			if (editor.isProcessingTemplate()) {
 				doAddWaypointTemplate(name, address, category, description);
 			} else if (editor.isNew()) {
-				doAddWpt(name, category, description);
+				doAddWpt(name, category, description, wpt.getExtensionsToRead());
 				wpt = getWpt();
 			} else {
 				doUpdateWpt(name, category, description);
@@ -212,7 +212,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void doAddWpt(String name, String category, String description) {
+	private void doAddWpt(String name, String category, String description, Map<String, String> extensions) {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null) {
@@ -226,17 +226,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			}
 			wpt.setBackgroundType(getBackgroundType().getTypeName());
 			wpt.setIconName(getIconName());
+			wpt.getExtensionsToWrite().putAll(extensions);
 
 			GPXFile gpx = editor.getGpxFile();
 			if (gpx != null) {
 				if (gpx.showCurrentTrack) {
 					this.wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(),
-							System.currentTimeMillis(), description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
+							description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
+					this.wpt.getExtensionsToWrite().putAll(extensions);
 					if (!editor.isGpxSelected()) {
 						gpxSelectionHelper.setGpxFileToDisplay(gpx);
 					}
 				} else {
-					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName());
+					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), extensions);
 					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
@@ -245,11 +247,11 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, String iconName,
-	                      String backgroundType) {
+	                      String backgroundType, Map<String, String> extensions) {
 		WptPt wpt = getWpt();
 		if (wpt != null) {
-			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(),
-					System.currentTimeMillis(), description, name, category, color, iconName, backgroundType);
+			this.wpt = WptPt.createAdjustedPoint(wpt.getLatitude(), wpt.getLongitude(), description,
+					name, category, color, iconName, backgroundType, wpt.getAmenityOriginName(), extensions);
 			gpx.addPoint(wpt);
 		}
 	}

@@ -52,7 +52,10 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
-
+	public static final String TYPE = "type";
+	public static final String SUBTYPE = "subtype";
+	public static final String NAME = "name";
+	public static final String SEPARATOR = ";";
 
 	private String subType;
 	private PoiCategory type;
@@ -63,9 +66,6 @@ public class Amenity extends MapObject {
 	// context menu geometry;
 	private TIntArrayList y;
 	private TIntArrayList x;
-
-	public Amenity() {
-	}
 
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
@@ -91,7 +91,6 @@ public class Amenity extends MapObject {
 	}
 
 	public String getOpeningHours() {
-//		 getAdditionalInfo("opening_hours");
 		return openingHours;
 	}
 
@@ -104,7 +103,6 @@ public class Amenity extends MapObject {
 		return str;
 	}
 
-
 	// this method should be used carefully
 	public Map<String, String> getInternalAdditionalInfoMap() {
 		if (additionalInfo == null) {
@@ -112,23 +110,23 @@ public class Amenity extends MapObject {
 		}
 		return additionalInfo;
 	}
-	
+
 	public Collection<String> getAdditionalInfoValues(boolean excludeZipped) {
 		if (additionalInfo == null) {
 			return Collections.emptyList();
 		}
 		boolean zipped = false;
-		for(String v : additionalInfo.values()) {
-			if(isContentZipped(v)) {
+		for (String v : additionalInfo.values()) {
+			if (isContentZipped(v)) {
 				zipped = true;
 				break;
 			}
 		}
-		if(zipped) {
+		if (zipped) {
 			List<String> r = new ArrayList<>(additionalInfo.size());
-			for(String str : additionalInfo.values()) {
-				if(excludeZipped && isContentZipped(str)) {
-					
+			for (String str : additionalInfo.values()) {
+				if (excludeZipped && isContentZipped(str)) {
+
 				} else {
 					r.add(unzipContent(str));
 				}
@@ -138,7 +136,7 @@ public class Amenity extends MapObject {
 			return additionalInfo.values();
 		}
 	}
-	
+
 	public Collection<String> getAdditionalInfoKeys() {
 		if (additionalInfo == null) {
 			return Collections.emptyList();
@@ -294,11 +292,11 @@ public class Amenity extends MapObject {
 		return null;
 	}
 
-	public String getRef(){
+	public String getRef() {
 		return getAdditionalInfo(REF);
 	}
 
-	public String getRouteId(){
+	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
 	}
 
@@ -342,13 +340,13 @@ public class Amenity extends MapObject {
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
 				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo);
 	}
-	
+
 	@Override
 	public int compareTo(MapObject o) {
 		int cmp = super.compareTo(o);
-		if(cmp == 0 && o instanceof Amenity) {
+		if (cmp == 0 && o instanceof Amenity) {
 			int kn = ((Amenity) o).getType().getKeyName().compareTo(getType().getKeyName());
-			if(kn == 0) {
+			if (kn == 0) {
 				kn = ((Amenity) o).getSubType().compareTo(getSubType());
 			}
 			return kn;
@@ -367,12 +365,12 @@ public class Amenity extends MapObject {
 	}
 
 	public TIntArrayList getY() {
-		if(y == null) {
+		if (y == null) {
 			y = new TIntArrayList();
 		}
 		return y;
 	}
-	
+
 	public TIntArrayList getX() {
 		if (x == null) {
 			x = new TIntArrayList();

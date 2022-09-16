@@ -43,6 +43,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		safeCategory.setIconSpaceReserved(false);
 
 		setupSafeModePref();
+		setupShowHeightmapspref();
 		setupApproximationSafeModePref();
 
 		Preference routingCategory = findPreference("routing");
@@ -95,6 +96,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
 		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
 		safeMode.setIconSpaceReserved(false);
+	}
+
+	private void setupShowHeightmapspref() {
+		SwitchPreferenceEx showHeightmaps = findPreference(settings.SHOW_HEIGHTMAPS.getId());
+		showHeightmaps.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateYourLocationPref() {

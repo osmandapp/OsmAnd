@@ -105,10 +105,11 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
@@ -389,7 +390,7 @@ public class OsmandAidlApi {
 						AidlMapWidgetWrapper widgetData = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						if (widgetData != null && layer != null) {
-							ApplicationMode.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
+							WidgetsAvailabilityHelper.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
 							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
 							connectedApp.getWidgetControls().put(widgetId, widget);
 

@@ -8,17 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoriteGroup;
@@ -27,43 +23,47 @@ import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
-import java.io.IOException;
+import org.apache.commons.logging.Log;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
+	private static final Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
 
-	private final FavouritePoint fav;
-	private Object originObject;
+	private final FavouritePoint point;
+	private final Map<String, String> amenityExtensions = new HashMap<>();
+	private Amenity amenity;
 
-	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, @NonNull FavouritePoint point) {
 		super(mapActivity);
-		this.fav = fav;
+		this.point = point;
 		setShowNearestWiki(true);
-		acquireOriginObject();
+		acquireAmenityExtensions();
 	}
 
-	private void acquireOriginObject() {
-		String originObjectName = fav.getOriginObjectName();
-		if (originObjectName.length() > 0) {
-			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
-				originObject = findAmenity(originObjectName, fav.getLatitude(), fav.getLongitude());
-			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
-				originObject = findTransportStop(originObjectName, fav.getLatitude(), fav.getLongitude());
-			}
+	private void acquireAmenityExtensions() {
+		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
+
+		String amenityOriginName = point.getAmenityOriginName();
+		if (amenityOriginName != null) {
+			amenity = helper.findAmenity(amenityOriginName, point.getLatitude(), point.getLongitude());
 		}
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(),
+				point.getAmenityOriginName(), point.getLatitude(), point.getLongitude()));
 	}
 
-	public Object getOriginObject() {
-		return originObject;
+	@Nullable
+	public Amenity getAmenity() {
+		return amenity;
 	}
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (originObject == null || !(originObject instanceof Amenity)) {
+		if (amenity == null || !(amenity instanceof Amenity)) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -76,20 +76,20 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		if (fav != null && fav.getTimestamp() != 0) {
-			buildDateRow(view, fav.getTimestamp());
-		}
-		if (originObject != null && originObject instanceof Amenity) {
-			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-			builder.setLatLon(getLatLon());
-			builder.setLight(light);
-			builder.buildInternal(view);
+		buildDateRow(view, point.getTimestamp());
+		buildCommentRow(view, point.getComment());
+
+		if (!Algorithms.isEmpty(amenityExtensions)) {
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
+			helper.setLight(light);
+			helper.setLatLon(getLatLon());
+			helper.buildInternal(view);
 		}
 	}
 
 	@Override
 	protected void buildDescription(View view) {
-		String desc = fav.getDescription();
+		String desc = point.getDescription();
 		if (!Algorithms.isEmpty(desc)) {
 			buildDescriptionRow(view, desc);
 		}
@@ -100,72 +100,17 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
-	private void buildGroupFavouritesView(View view) {
-		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(fav);
+	private void buildGroupFavouritesView(@NonNull View view) {
+		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(point);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
-					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
+					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, point),
 					false, 0, false, null, false);
 		}
-	}
-
-	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		for (Amenity amenity : amenities) {
-			String stringEn = amenity.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = null;
-		try {
-			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
-
-						@Override
-						public boolean publish(TransportStop object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (res != null) {
-			for (TransportStop stop : res) {
-				String stringEn = stop.toStringEn();
-				if (stringEn.equals(nameStringEn)) {
-					return stop;
-				}
-			}
-		}
-		return null;
 	}
 
 	private CollapsableView getCollapsableFavouritesView(Context context, boolean collapsed, @NonNull FavoriteGroup group, FavouritePoint selectedPoint) {

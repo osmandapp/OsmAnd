@@ -3356,8 +3356,8 @@
     <string name="poi_climbing_summit_log_yes">Pint-taglibro: jes</string>
     <string name="poi_climbing_summit_log_no">Pint-taglibro: ne</string>
     <string name="poi_climbing_routes">Grimpad-kursoj</string>
-    <string name="poi_circumference">Ĉirkaŭo</string>
-    <string name="poi_diameter_crown">Ĉirkaŭo de arbokrono</string>
+    <string name="poi_circumference">Perimetro</string>
+    <string name="poi_diameter_crown">Diametro de arbokrono</string>
     <string name="poi_meadow_agricultural">Speco: falĉata</string>
     <string name="poi_meadow_perpetual">Speco: konservata de naturo</string>
     <string name="poi_meadow_transitional">Speco: nekonservata (arbustiĝas)</string>

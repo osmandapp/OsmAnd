@@ -282,25 +282,32 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isApproximationNeeded() {
-		boolean hasTimestamps = false;
 		boolean hasDefaultPointsOnly = false;
 		boolean newData = isNewData();
-		if (!newData && checkApproximation) {
+		if (!newData) {
 			List<WptPt> points = getPoints();
 			hasDefaultPointsOnly = true;
 			for (WptPt point : points) {
 				if (point.hasProfile()) {
 					hasDefaultPointsOnly = false;
 				}
-				if (point.time != 0) {
-					hasTimestamps = true;
-				}
-				if (!hasDefaultPointsOnly && hasTimestamps) {
+				if (!hasDefaultPointsOnly) {
 					break;
 				}
 			}
 		}
-		return !newData && getPoints().size() > 2 && hasDefaultPointsOnly && hasTimestamps;
+		return !newData && getPoints().size() > 2 && hasDefaultPointsOnly;
+	}
+
+	public boolean hasTimestamps() {
+		if (!isNewData()) {
+			for (WptPt point : getPoints()) {
+				if (point.time != 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean isAddNewSegmentAllowed() {

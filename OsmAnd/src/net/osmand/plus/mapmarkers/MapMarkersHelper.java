@@ -24,6 +24,7 @@ import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
@@ -36,13 +37,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -70,9 +69,9 @@ public class MapMarkersHelper {
 
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	private List<MapMarker> mapMarkers = new CopyOnWriteArrayList<>();
-	private final List<MapMarker> mapMarkersHistory = new CopyOnWriteArrayList<>();
-	private List<MapMarkersGroup> mapMarkersGroups = new CopyOnWriteArrayList<>();
+	private List<MapMarker> mapMarkers = new ArrayList<>();
+	private List<MapMarker> mapMarkersHistory = new ArrayList<>();
+	private List<MapMarkersGroup> mapMarkersGroups = new ArrayList<>();
 
 	private final List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private final Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
@@ -141,8 +140,8 @@ public class MapMarkersHelper {
 
 	public void syncAllGroups() {
 		Pair<Map<String, MapMarkersGroup>, Map<String, MapMarker>> pair = dataHelper.loadGroupsAndOrder();
-		mapMarkers = new CopyOnWriteArrayList<>(pair.second.values());
-		mapMarkersGroups = new CopyOnWriteArrayList<>(pair.first.values());
+		mapMarkers = new ArrayList<>(pair.second.values());
+		mapMarkersGroups = new ArrayList<>(pair.first.values());
 
 		boolean hasFavoriteGroup = false;
 		boolean hasTrackGroup = false;
@@ -269,34 +268,31 @@ public class MapMarkersHelper {
 	                         boolean visited,
 	                         @MapMarkersSortByDef int sortByMode,
 	                         @Nullable LatLon location) {
-		Collections.sort(markers, new Comparator<MapMarker>() {
-			@Override
-			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				if (sortByMode == BY_DATE_ADDED_DESC || sortByMode == BY_DATE_ADDED_ASC) {
-					long t1 = visited ? mapMarker1.visitedDate : mapMarker1.creationDate;
-					long t2 = visited ? mapMarker2.visitedDate : mapMarker2.creationDate;
-					if (t1 > t2) {
-						return sortByMode == BY_DATE_ADDED_DESC ? -1 : 1;
-					} else if (t1 == t2) {
-						return 0;
-					} else {
-						return sortByMode == BY_DATE_ADDED_DESC ? 1 : -1;
-					}
-				} else if (location != null && (sortByMode == BY_DISTANCE_DESC || sortByMode == BY_DISTANCE_ASC)) {
-					int d1 = (int) MapUtils.getDistance(location, mapMarker1.getLatitude(), mapMarker1.getLongitude());
-					int d2 = (int) MapUtils.getDistance(location, mapMarker2.getLatitude(), mapMarker2.getLongitude());
-					if (d1 > d2) {
-						return sortByMode == BY_DISTANCE_DESC ? -1 : 1;
-					} else if (d1 == d2) {
-						return 0;
-					} else {
-						return sortByMode == BY_DISTANCE_DESC ? 1 : -1;
-					}
+		Collections.sort(markers, (mapMarker1, mapMarker2) -> {
+			if (sortByMode == BY_DATE_ADDED_DESC || sortByMode == BY_DATE_ADDED_ASC) {
+				long t1 = visited ? mapMarker1.visitedDate : mapMarker1.creationDate;
+				long t2 = visited ? mapMarker2.visitedDate : mapMarker2.creationDate;
+				if (t1 > t2) {
+					return sortByMode == BY_DATE_ADDED_DESC ? -1 : 1;
+				} else if (t1 == t2) {
+					return 0;
 				} else {
-					String n1 = mapMarker1.getName(ctx);
-					String n2 = mapMarker2.getName(ctx);
-					return n1.compareToIgnoreCase(n2);
+					return sortByMode == BY_DATE_ADDED_DESC ? 1 : -1;
 				}
+			} else if (location != null && (sortByMode == BY_DISTANCE_DESC || sortByMode == BY_DISTANCE_ASC)) {
+				int d1 = (int) MapUtils.getDistance(location, mapMarker1.getLatitude(), mapMarker1.getLongitude());
+				int d2 = (int) MapUtils.getDistance(location, mapMarker2.getLatitude(), mapMarker2.getLongitude());
+				if (d1 > d2) {
+					return sortByMode == BY_DISTANCE_DESC ? -1 : 1;
+				} else if (d1 == d2) {
+					return 0;
+				} else {
+					return sortByMode == BY_DISTANCE_DESC ? 1 : -1;
+				}
+			} else {
+				String n1 = mapMarker1.getName(ctx);
+				String n2 = mapMarker2.getName(ctx);
+				return n1.compareToIgnoreCase(n2);
 			}
 		});
 	}
@@ -784,7 +780,7 @@ public class MapMarkersHelper {
 			marker.history = true;
 		}
 		addToMapMarkersHistoryList(mapMarkers);
-		mapMarkers = new CopyOnWriteArrayList<>();
+		mapMarkers = new ArrayList<>();
 		sortMarkers(mapMarkersHistory, true, BY_DATE_ADDED_DESC);
 		updateGroups();
 		syncPassedPoints();
@@ -972,52 +968,56 @@ public class MapMarkersHelper {
 		addToMapMarkersList(mapMarkers.size(), marker);
 	}
 
-	private void addToMapMarkersList(int position, MapMarker marker) {
-		mapMarkers.add(position, marker);
-	}
-
 	private void addToMapMarkersList(List<MapMarker> markers) {
 		addToMapMarkersList(mapMarkers.size(), markers);
 	}
 
+	private void addToMapMarkersList(int position, MapMarker marker) {
+		List<MapMarker> copy = new ArrayList<>(mapMarkers);
+		copy.add(position, marker);
+		mapMarkers = copy;
+	}
+
 	private void addToMapMarkersList(int position, List<MapMarker> markers) {
-		mapMarkers.addAll(position, markers);
+		List<MapMarker> copy = new ArrayList<>(mapMarkers);
+		copy.addAll(position, markers);
+		mapMarkers = copy;
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		mapMarkers.remove(marker);
+		mapMarkers = Algorithms.removeFromList(mapMarkers, marker);
 	}
 
 	private void removeFromMapMarkersList(List<MapMarker> markers) {
-		mapMarkers.removeAll(markers);
+		mapMarkers = Algorithms.removeAllFromList(mapMarkers, markers);
 	}
 
 	// accessors to history markers:
 
 	private void addToMapMarkersHistoryList(MapMarker marker) {
-		mapMarkersHistory.add(marker);
+		mapMarkersHistory = Algorithms.addToList(mapMarkersHistory, marker);
 	}
 
 	private void addToMapMarkersHistoryList(List<MapMarker> markers) {
-		mapMarkersHistory.addAll(markers);
+		mapMarkersHistory = Algorithms.addAllToList(mapMarkersHistory, markers);
 	}
 
 	private void removeFromMapMarkersHistoryList(MapMarker marker) {
-		mapMarkersHistory.remove(marker);
+		mapMarkersHistory = Algorithms.removeFromList(mapMarkersHistory, marker);
 	}
 
 	private void removeFromMapMarkersHistoryList(List<MapMarker> markers) {
-		mapMarkersHistory.removeAll(markers);
+		mapMarkersHistory = Algorithms.removeAllFromList(mapMarkersHistory, markers);
 	}
 
 	// accessors to markers groups:
 
 	private void addToGroupsList(MapMarkersGroup group) {
-		mapMarkersGroups.add(group);
+		mapMarkersGroups = Algorithms.addToList(mapMarkersGroups, group);
 	}
 
 	private void removeFromGroupsList(MapMarkersGroup group) {
-		mapMarkersGroups.remove(group);
+		mapMarkersGroups = Algorithms.removeFromList(mapMarkersGroups, group);
 	}
 
 	// ---------------------------------------------------------------------------------------------

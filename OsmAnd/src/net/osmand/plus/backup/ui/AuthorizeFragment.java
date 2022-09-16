@@ -459,15 +459,20 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				public void onGlobalLayout() {
 					Rect r = new Rect();
 					mainView.getWindowVisibleDisplayFrame(r);
+					Activity activity = requireMyActivity();
 					int screenHeight = mainView.getHeight();
 					int keypadHeight = screenHeight - r.bottom;
+					int keypadSpace = keypadHeight;
+					if (!AndroidUtils.isInFullScreenMode(activity)) {
+						keypadSpace += AndroidUtils.getStatusBarHeight(activity);
+					}
 					boolean softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE;
 
 					if (previousKeyboardHeight != keypadHeight) {
 						previousKeyboardHeight = keypadHeight;
 						if (softKeyboardVisible) {
 							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight() / 2));
-							keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, keypadHeight));
+							keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, keypadSpace));
 						} else {
 							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
 						}

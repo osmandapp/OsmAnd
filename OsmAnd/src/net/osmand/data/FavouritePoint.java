@@ -11,56 +11,58 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 
 public class FavouritePoint implements Serializable, LocationPoint {
+
 	private static final long serialVersionUID = 729654300829771466L;
 
 	private static final String DELIMITER = "__";
 	private static final String HIDDEN = "hidden";
 	private static final String CALENDAR_EXTENSION = "calendar_event";
-	public static final String PICKUP_DATE = "pickup_date";
+	private static final String PICKUP_DATE = "pickup_date";
 
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
 
-	protected String name = "";
-	protected String description;
-	protected String category = "";
-	protected String address = "";
-	protected int iconId;
-	private String originObjectName = "";
+	private String name = "";
+	private String category = "";
+	private String description;
+	private String address;
+	private String comment;
+
 	private double latitude;
 	private double longitude;
-	private int color;
-	private boolean visible = true;
-	private SpecialPointType specialPointType;
-	private BackgroundType backgroundType;
 	private double altitude = Double.NaN;
+
+	private int color;
+	private int iconId;
+	private BackgroundType backgroundType;
+	private SpecialPointType specialPointType;
+
 	private long timestamp;
 	private long visitedDate;
 	private long pickupDate;
 	private boolean calendarEvent;
 
+	private String amenityOriginName;
+	private Map<String, String> amenityExtensions = new HashMap<String, String>();
+
+	private boolean visible = true;
+
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.category = category;
-		if (name == null) {
-			name = "";
-		}
-		this.name = name;
+		this.name = name != null ? name : "";
 		timestamp = System.currentTimeMillis();
 		initPersonalType();
 	}
@@ -69,10 +71,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.category = category;
-		if (name == null) {
-			name = "";
-		}
-		this.name = name;
+		this.name = name != null ? name : "";
 		this.altitude = altitude;
 		this.timestamp = timestamp != 0 ? timestamp : System.currentTimeMillis();
 		initPersonalType();
@@ -86,7 +85,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.color = point.color;
 		this.description = point.description;
 		this.visible = point.visible;
-		this.originObjectName = point.originObjectName;
+		this.amenityOriginName = point.amenityOriginName;
 		this.address = point.address;
 		this.iconId = point.iconId;
 		this.backgroundType = point.backgroundType;
@@ -105,35 +104,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				}
 			}
 		}
-	}
-
-	public void initAltitude(OsmandApplication app) {
-		initAltitude(app, null);
-	}
-
-	public void initAltitude(OsmandApplication app, Runnable callback) {
-		Location location = new Location("", latitude, longitude);
-		app.getLocationProvider().getRouteSegment(location, null, false,
-				new ResultMatcher<RouteDataObject>() {
-
-					@Override
-					public boolean publish(RouteDataObject routeDataObject) {
-						if (routeDataObject != null) {
-							LatLon latLon = new LatLon(latitude, longitude);
-							routeDataObject.calculateHeightArray(latLon);
-							altitude = routeDataObject.heightByCurrentLocation;
-						}
-						if (callback != null) {
-							callback.run();
-						}
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
 	}
 
 	public SpecialPointType getSpecialPointType() {
@@ -169,7 +139,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
-	public String getIconEntryName(Context ctx) {
+	public String getIconEntryName(@NonNull Context ctx) {
 		return ctx.getResources().getResourceEntryName(getOverlayIconId(ctx));
 	}
 
@@ -212,15 +182,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = visible;
 	}
 
-	public String getOriginObjectName() {
-		return originObjectName;
-	}
-
-	public void setOriginObjectName(String originObjectName) {
-		this.originObjectName = originObjectName;
-	}
-
-	public int getOverlayIconId(Context ctx) {
+	public int getOverlayIconId(@NonNull Context ctx) {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
@@ -287,6 +249,32 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	@Nullable
+	public String getAmenityOriginName() {
+		return amenityOriginName;
+	}
+
+	public void setAmenityOriginName(@Nullable String amenityOriginName) {
+		this.amenityOriginName = amenityOriginName;
+	}
+
+	@NonNull
+	public Map<String, String> getAmenityExtensions() {
+		return amenityExtensions;
+	}
+
+	public void setAmenityExtensions(@NonNull Map<String, String> extensions) {
+		amenityExtensions = extensions;
+	}
+
 	public String getCategoryDisplayName(@NonNull Context ctx) {
 		return FavoriteGroup.getDisplayName(ctx, category);
 	}
@@ -331,7 +319,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	@NonNull
 	@Override
 	public String toString() {
-		return "Favourite " + getName(); //$NON-NLS-1$
+		return "Favourite " + getName();
 	}
 
 	@Override
@@ -342,38 +330,38 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 		if (getClass() != o.getClass()) return false;
 
-		FavouritePoint fp = (FavouritePoint) o;
+		FavouritePoint point = (FavouritePoint) o;
 
 		if (name == null) {
-			if (fp.name != null)
+			if (point.name != null)
 				return false;
-		} else if (!name.equals(fp.name))
+		} else if (!name.equals(point.name))
 			return false;
 
 		if (category == null) {
-			if (fp.category != null)
+			if (point.category != null)
 				return false;
-		} else if (!category.equals(fp.category))
+		} else if (!category.equals(point.category))
 			return false;
 
 		if (description == null) {
-			if (fp.description != null)
+			if (point.description != null)
 				return false;
-		} else if (!description.equals(fp.description))
+		} else if (!description.equals(point.description))
 			return false;
 
-		if (originObjectName == null) {
-			if (fp.originObjectName != null)
+		if (amenityOriginName == null) {
+			if (point.amenityOriginName != null)
 				return false;
-		} else if (!originObjectName.equals(fp.originObjectName))
+		} else if (!amenityOriginName.equals(point.amenityOriginName))
 			return false;
 
-		return (this.latitude == fp.latitude)
-				&& (this.longitude == fp.longitude)
-				&& (this.altitude == fp.altitude)
-				&& (this.timestamp == fp.timestamp)
-				&& (this.visitedDate == fp.visitedDate)
-				&& (this.pickupDate == fp.pickupDate);
+		return (this.latitude == point.latitude)
+				&& (this.longitude == point.longitude)
+				&& (this.altitude == point.altitude)
+				&& (this.timestamp == point.timestamp)
+				&& (this.visitedDate == point.visitedDate)
+				&& (this.pickupDate == point.pickupDate);
 	}
 
 	@Override
@@ -389,7 +377,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
+		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
 		return result;
 	}
 
@@ -397,18 +385,17 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return fromWpt(pt, null);
 	}
 
-	public static FavouritePoint fromWpt(@NonNull WptPt wptPt, String category) {
-		String name = wptPt.name;
-		String categoryName = category != null ? category :
-				(wptPt.category != null ? wptPt.category : "");
-		if (name == null) {
-			name = "";
+	public static FavouritePoint fromWpt(@NonNull WptPt wptPt, @Nullable String category) {
+		String name = wptPt.name != null ? wptPt.name : "";
+		if (category == null) {
+			category = wptPt.category != null ? wptPt.category : "";
 		}
-		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, categoryName, wptPt.ele, wptPt.time);
+		FavouritePoint point = new FavouritePoint(wptPt.lat, wptPt.lon, name, category, wptPt.ele, wptPt.time);
 		point.setDescription(wptPt.desc);
-		if (wptPt.comment != null) {
-			point.setOriginObjectName(wptPt.comment);
-		}
+		point.setComment(wptPt.comment);
+		point.setAmenityOriginName(wptPt.getAmenityOriginName());
+		point.setAmenityExtensions(wptPt.getExtensionsToRead());
+
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
 			String time = extensions.get(VISITED_DATE);
@@ -443,8 +430,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.lon = getLongitude();
 		point.ele = getAltitude();
 		point.time = getTimestamp();
+		point.name = getName();
+		point.desc = getDescription();
+		point.comment = getComment();
 
+		if (!Algorithms.isEmpty(getCategory())) {
+			point.category = getCategory();
+		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
+		extensions.putAll(getAmenityExtensions());
 		if (!isVisible()) {
 			extensions.put(HIDDEN, "true");
 		}
@@ -469,12 +463,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (getColor() != 0) {
 			point.setColor(getColor());
 		}
-		point.name = getName();
-		point.desc = getDescription();
-		if (getCategory().length() > 0)
-			point.category = getCategory();
-		if (getOriginObjectName().length() > 0) {
-			point.comment = getOriginObjectName();
+		if (!Algorithms.isEmpty(amenityOriginName)) {
+			point.setAmenityOriginName(amenityOriginName);
 		}
 		return point;
 	}
