@@ -4709,7 +4709,7 @@
     <string name="updated_map_time">Оновлено: %1$s.</string>
     <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>
     <string name="no_altitude_data_desc">Для отримання даних %1$s прикріпіть свій трек до доріг або обчисліть його онлайн.</string>
-    <string name="calculate_online_altitude_descr">Обчислюйте висоту онлайн на серверах OsmAnd на основі супутникових знімків та цифрових моделей висот. Результат може відрізнятися від записаної пристроєм висоти та може бути використаним як корекція висоти.</string>
+    <string name="calculate_online_altitude_descr">Обчислюйте висоту онлайн на серверах OsmAnd на основі супутникових знімків та цифрових моделей висот. Розбіжність із записаною пристроєм висотою може бути використана корекцією висоти.</string>
     <string name="marker_2nd">Друга позначка</string>
     <string name="switch_widget_mode_desc">Торкання віджета перемикає режими.</string>
     <string name="goods_delivery_desc_2">Уникатимуться дороги, якими заборонено доставляти вантажі.</string>
@@ -4735,7 +4735,7 @@
     <string name="true_bearing_wdiget_desc">Кут між справжньою північчю та цільовою точкою, яку спостерігають з вашого місця перебування.</string>
     <string name="relative_bearing_widget_desc">Показує кут між напрямком руху вперед і цільовою точкою.</string>
     <string name="trip_recording_duration_widget_desc">Показує поточний записаний час треку.</string>
-    <string name="trip_recording_distance_widget_desc">Показує поточну записану пройдену відстань треку.</string>
+    <string name="trip_recording_distance_widget_desc">Показує поточну записану відстань поїздки.</string>
     <string name="second_marker_widget_desc">Ви можете налаштувати віджет, щоб відображати відстань або орієнтовний час прибуття до другої позначки на мапі.</string>
     <string name="time_to_destination_widget_desc">Віджет показує «Час прибуття» або «Скільки рухатися» до останнього пункту призначення. Час постійно оновлюється під час навігації та дорівнює часу маршруту від поточного місцеперебування.</string>
     <string name="distance_to_intermediate_widget_desc">Віджет показує відстань, що залишилася до першої проміжної точки. Після проходження проміжних точок відстань буде оновлено до наступної проміжної точки.</string>
@@ -4787,8 +4787,11 @@
     <string name="tap_on_widget">Торкнутися віджета</string>
     <string name="go_to_marker_location">Перейти до локації позначки</string>
     <string name="click_on_widget">Натиснути віджет</string>
-    <string name="shared_string_shows"></string>
+    <string name="shared_string_shows">Показує</string>
     <string name="map_markers_desc">Віджет показує відстань або приблизний час прибуття (ETA) для перших двох позначок у списку позначок на мапі.</string>
     <string name="map_marker_interval_dialog_desc">Вказати інтервал часу, за який буде вимірюватися середня швидкість для обчислення приблизного часу прибуття.</string>
     <string name="rotate_map_none_rotated_opt">Фіксовано (обертається вручну)</string>
+    <string name="shared_string_switch_mode">Перемкнути режим</string>
+    <string name="shared_string_large">Великий</string>
+    <string name="shared_string_normal">Звичайний</string>
 </resources>
