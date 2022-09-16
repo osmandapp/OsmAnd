@@ -76,7 +76,8 @@ public class GPXUtilities {
 	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
+	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -84,7 +85,7 @@ public class GPXUtilities {
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
-
+	
 	public enum GPXColor {
 		BLACK(0xFF000000),
 		DARKGRAY(0xFF444444),
@@ -2567,7 +2568,7 @@ public class GPXUtilities {
 	}
 
 	public static long parseTime(String text) {
-		return parseTime(text, getTimeFormatter(), getTimeFormatterMills());
+		return parseTime(text, getTimeFormatterTZ(), getTimeFormatterMills());
 	}
 
 	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
@@ -2588,6 +2589,12 @@ public class GPXUtilities {
 
 	private static SimpleDateFormat getTimeFormatter() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
+	}
+	
+	private static SimpleDateFormat getTimeFormatterTZ() {
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN_TZ, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
