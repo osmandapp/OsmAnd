@@ -4780,4 +4780,11 @@
     <string name="rotate_map_none_rotated_opt">固定（手動旋轉）</string>
     <string name="shared_string_large">大</string>
     <string name="display_position">顯示位置</string>
+    <string name="map_marker_interval_dialog_desc">指定將測量平均速度以計算預計到達時間的時間間隔。</string>
+    <string name="tap_on_widget">輕點小工具</string>
+    <string name="go_to_marker_location">到標記的位置</string>
+    <string name="shared_string_switch_mode">切換模式</string>
+    <string name="click_on_widget">點擊小工具</string>
+    <string name="map_markers_desc">小工具顯示地圖標記列表中前兩個標記的距離或預計到達時間 (ETA)。</string>
+    <string name="shared_string_shows">顯示</string>
 </resources>
