@@ -107,6 +107,7 @@ public class MapLayers {
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
+	private StateChangedListener<Integer> overlayTransparencyListener;
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -200,6 +201,13 @@ public class MapLayers {
 			mapView.refreshMap();
 		});
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
+
+		overlayTransparencyListener = change -> app.runInUIThread(() -> {
+			mapTileLayer.setAlpha(255 - change);
+			mapVectorLayer.setAlpha(255 - change);
+			mapView.refreshMap();
+		});
+		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
 
 		createAdditionalLayers(null);
 	}
