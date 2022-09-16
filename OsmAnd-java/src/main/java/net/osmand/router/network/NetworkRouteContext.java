@@ -141,6 +141,20 @@ public class NetworkRouteContext {
 		return point.objects;
 	}
 
+	public NetworkRoutePoint getClosestNetworkRoutePoint(int sx31, int sy31) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(sx31, sy31);
+		double minDistance = Double.MAX_VALUE;
+		NetworkRoutePoint nearPoint = null;
+		for (NetworkRoutePoint pt : osmcRoutesTile.routes.valueCollection()) {
+			double distance = MapUtils.squareRootDist31(sx31, sy31, pt.x31, pt.y31);
+			if (distance < minDistance) {
+				nearPoint = pt;
+				minDistance = distance;
+			}
+		}
+		return nearPoint;
+	}
+
 	private NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
 		NetworkRoutesTile tile = indexedTiles.get(tileId);

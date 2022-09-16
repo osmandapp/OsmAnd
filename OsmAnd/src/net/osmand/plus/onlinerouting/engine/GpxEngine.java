@@ -23,7 +23,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
-import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.network.NetworkRouteGpxApproximator;
 
 import java.io.ByteArrayInputStream;
@@ -177,16 +176,8 @@ public class GpxEngine extends OnlineRoutingEngine {
 					} catch (IOException e) {
 						LOG.error(e.getMessage(), e);
 					}
-					GpxPoint first = gpxPoints.get(0);
-					first.routeToTarget = gpxApproximator.result;
-					GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
-					last.ind = 1;
-					last.routeToTarget = new ArrayList<>();
-					gctx.finalPoints.addAll(Arrays.asList(first, last));
-					gctx.result = gpxApproximator.result;
-					gpxPoints.addAll(gctx.finalPoints);
+					gpxApproximation = prepareApproximationResult(gctx, gpxPoints, gpxApproximator);
 					points = Arrays.asList(points.get(0), points.get(points.size() - 1));
-					gpxApproximation = gctx;
 				} else {
 					gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				}
@@ -201,6 +192,19 @@ public class GpxEngine extends OnlineRoutingEngine {
 			appMode.setDerivedProfile(oldDerivedProfile);
 		}
 		return null;
+	}
+
+	private GpxRouteApproximation prepareApproximationResult(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
+	                                                         NetworkRouteGpxApproximator gpxApproximator) {
+		GpxPoint first = gpxPoints.get(0);
+		first.routeToTarget = gpxApproximator.result;
+		GpxPoint last = gpxPoints.get(gpxPoints.size() - 1);
+		last.ind = 1;
+		last.routeToTarget = new ArrayList<>();
+		gctx.finalPoints.addAll(Arrays.asList(first, last));
+		gpxPoints.addAll(gctx.finalPoints);
+		gctx.result = gpxApproximator.result;
+		return gctx;
 	}
 
 	@Override

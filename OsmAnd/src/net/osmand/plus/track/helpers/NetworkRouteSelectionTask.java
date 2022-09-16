@@ -9,7 +9,6 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
@@ -35,7 +34,6 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	                                 @NonNull QuadRect quadRect,
 	                                 @Nullable CallbackWithObject<GPXFile> callback) {
 		super(activity);
-		this.app = (OsmandApplication) activity.getApplication();
 		this.routeKey = routeKey;
 		this.quadRect = quadRect;
 		this.callback = callback;
