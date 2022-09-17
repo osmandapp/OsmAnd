@@ -851,7 +851,6 @@
     <string name="plan_route_add_new_segment">Add a new segment</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_split_before">Split before</string>
-    <string name="plan_route_join_segments">Join segments</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
@@ -1569,7 +1568,6 @@
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan (RV)</string>
     <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>
