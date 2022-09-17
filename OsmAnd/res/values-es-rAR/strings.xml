@@ -4696,7 +4696,7 @@
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del viaje actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="transport_hazmat_no_desc">Los caminos y los túneles pueden restringir el transporte de materiales peligrosos.</string>
+    <string name="transport_hazmat_no_desc">Los caminos y túneles pueden restringir el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
     <string name="transport_hazmat_yes_desc">Marca la categoría correspondiente.</string>
     <string name="import_as_one_track">Importar como una traza</string>
