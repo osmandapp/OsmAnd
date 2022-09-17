@@ -7,13 +7,16 @@ import android.view.animation.BaseInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.MapAnimator.AnimatedValue;
 import net.osmand.core.jni.MapAnimator.IAnimation;
 import net.osmand.core.jni.MapAnimator.TimingFunction;
-import net.osmand.core.jni.MapRendererState;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
@@ -23,10 +26,6 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 /**
  * Thread for animated dragging.
@@ -455,11 +454,10 @@ public class AnimateDraggingMapThread {
 		int targetIntZoom = this.targetIntZoom;
 		double targetFloatZoom = this.targetFloatZoom;
 
-		MapRendererState state = mapRenderer.getState();
-		PointI initTarget31 = state.getTarget31();
+		PointI initTarget31 = mapRenderer.getTarget();
 		float initZoom = mapRenderer.getZoom();
 		int zoomThreshold = ((int) (targetFloatZoom * 2));
-		float initAzimuth = state.getAzimuth();
+		float initAzimuth = mapRenderer.getAzimuth();
 
 		boolean animateTarget = false;
 		boolean animateZoom = false;
@@ -475,9 +473,8 @@ public class AnimateDraggingMapThread {
 			boolean animationFinished = animator.update((currTime - prevTime) / 1000f);
 			prevTime = currTime;
 
-			state = mapRenderer.getState();
-			PointI target31 = state.getTarget31();
-			float azimuth = state.getAzimuth();
+			PointI target31 = mapRenderer.getTarget();
+			float azimuth = mapRenderer.getAzimuth();
 			float zoom = mapRenderer.getZoom();
 
 			if (!animateTarget) {

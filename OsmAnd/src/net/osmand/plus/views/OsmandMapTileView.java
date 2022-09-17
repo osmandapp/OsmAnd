@@ -791,22 +791,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int cy = (int) (ratioy * view.getHeight());
 		int cx = (int) (ratiox * view.getWidth());
 		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
-				currentViewport.getCenterPixelY() != cy ||
-				currentViewport.getCenterPixelX() != cx) {
+				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				mapRenderer.setMapTarget(new PointI(cx, cy), mapRenderer.getTarget());
+			}
 			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
-		}
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
-			float xScale = ratiox * 2f;
-			float yScale = ratioy * 2f;
-			float currXScale = mapRenderer.getViewportXScale();
-			float currYScale = mapRenderer.getViewportYScale();
-			if (currXScale != xScale || currYScale != yScale) {
-				mapRenderer.setViewportXYScale(xScale, yScale);
-			}
 		}
 		if (view instanceof SurfaceView) {
 			SurfaceHolder holder = ((SurfaceView) view).getHolder();
