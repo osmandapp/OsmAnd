@@ -790,10 +790,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		int cy = (int) (ratioy * view.getHeight());
 		int cx = (int) (ratiox * view.getWidth());
-		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
+		boolean updateMapRenderer = false;
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			PointI fixedPixel = mapRenderer.getState().getFixedPixel();
+			updateMapRenderer = fixedPixel.getX() <= 0 || fixedPixel.getY() <= 0;
+		}
+		if (updateMapRenderer || currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
 				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
-			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer != null) {
 				mapRenderer.setMapTarget(new PointI(cx, cy), mapRenderer.getTarget());
 			}
