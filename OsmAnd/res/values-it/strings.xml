@@ -3499,7 +3499,7 @@
     <string name="tracker_item">OsmAnd tracciatore</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Azione rapida</string>
-    <string name="radius_ruler_item">Righello radiale</string>
+    <string name="radius_ruler_item">Goniometro</string>
     <string name="measure_distance_item">Misura distanza</string>
     <string name="travel_item">Viaggio (Wikivoyage e Wikipedia)</string>
     <string name="map_markers_item">Marcatori mappa</string>
