@@ -346,7 +346,7 @@
     <string name="route_head">Avanti</string>
     <string name="first_time_continue">Dopo</string>
     <string name="first_time_download">Scarica le regioni</string>
-    <string name="first_time_msg">Grazie per utilizzare OsmAnd. Scarica i dati delle regioni per l\'uso offline da \'Impostazioni\'→\'Gestisci i file mappe\' per visualizzare le mappe, localizzare indirizzi, cercare PDI, trovare trasporti pubblici e altro.</string>
+    <string name="first_time_msg">Grazie per utilizzare OsmAnd. Scarica i dati delle regioni per l\'uso offline da \'Menu\' → \'Scarica mappe\' per visualizzare le mappe, localizzare indirizzi, cercare PDI, trovare trasporti pubblici e altro.</string>
     <string name="search_poi_location">Attendo segnale GPS…</string>
     <string name="search_near_map">Ricerca vicino all\'attuale centro della mappa</string>
     <string name="search_nearby">Ricerca vicino</string>
@@ -404,7 +404,7 @@
     <string name="address">Indirizzo</string>
     <string name="downloading_list_indexes">Ricezione elenco regioni disponibili…</string>
     <string name="list_index_files_was_not_loaded">Impossibile accedere alla lista delle regioni su https://osmand.net.</string>
-    <string name="select_index_file_to_download">Non è stato trovato niente. Se non trovate la vostra zona potete generarla da voi (vedi http://osmand.net).</string>
+    <string name="select_index_file_to_download">Non è stato trovato niente, ma puoi farcela da solo (visita http://osmand.net).</string>
     <string name="fav_points_edited">Preferito modificato</string>
     <string name="fav_points_not_exist">Non esiste alcun preferito</string>
     <string name="update_existing">Sostituisci</string>
@@ -548,7 +548,7 @@
     <string name="map_online_data">Mappe online e a tasselli</string>
     <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda di memoria).</string>
     <string name="shared_string_online_maps">Mappe online</string>
-    <string name="online_map_settings_descr">Scegli la sorgente online o in cache delle mattonelle delle mappe.</string>
+    <string name="online_map_settings_descr">Scegli la sorgente online o in cache dei tile delle mappe.</string>
     <string name="osmand_rastermaps_plugin_description">Con questo plugin puoi accedere a molti tipi di mappe online (chiamate a tasselli o raster), a partire dai tasselli predefiniti di OpenStreetMap (come Mapnik) alle immagini satellitari e strati per scopi speciali come le mappe meteorologiche, climatiche, geologiche, di ombreggiamento dei rilievi ecc. 
 \n 
 \nTutte queste mappe possono essere usate sia come mappa principale (di base) da visualizzare nella mappa di OsmAnd sia come uno strato di sovrapposizione o di fondo su un\'altra mappa di base (come le mappe offline OsmAnd standard). Per permettere una maggiore visibilità delle mappe di sfondo, certi elementi delle mappe vettoriali possono essere facilmente nascosti come desiderato attraverso il menu \'Configura mappa\'. 
@@ -767,26 +767,26 @@
 \n
 \n OsmAnd è continuamente in sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su https://osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
-\n OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a mattonelle) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. 
+\n OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tile) possono essere memorizzate nella scheda di memoria del telefono per l\'utilizzo offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. 
 \n 
-\n OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. 
-\n 
-\n Alcune delle caratteristiche principali: 
-\n - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a mattonelle in una cartella selezionabile) 
+\n OsmAnd+ è la versione a pagamento dell\'app, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.
+\n
+\n Alcune delle caratteristiche principali:
+\n - Funzionalità completa anche se disconnessi dalla rete (conserva le mappe vettoriali o a tile nella memoria del dispositivo) 
 \n - Mappe vettoriali offline compatte per tutto il mondo a disposizione 
-\n - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti 
-\n - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici 
-\n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, Preferiti, linee isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile 
+\n - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti
+\n - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per visite turistiche 
+\n - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, linee isoipse, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
 \n 
 \n - Ricerca offline per indirizzi e luoghi (PDI) 
 \n - Calcolo del percorso per medie distanze 
 \n - Modalità automobile, bicicletta e pedonale con opzionali: 
 \n - Cambio automatico della visione giorno/notturna 
-\n - Zoom automatico in base alla velocità 
-\n - Allineamento della mappa in base alla direzione o alla bussola 
-\n - Indicazioni di corsia, indicazione del limite di velocità, voci registrate e dal testo-alla-voce
+\n - Zoom automatico della mappa in base alla velocità 
+\n - Allineamento della mappa in base alla bussola o alla direzione di movimento 
+\n - Indicazioni di corsia, indicazione limiti di velocità, voci registrate e text-to-speech sintetizzate
 \n</string>
     <string name="snap_to_road">Blocca sulle strade</string>
     <string name="avoid_motorway">No autostrade</string>
@@ -824,7 +824,7 @@
     <string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'app ZXing Barcode Scanner non è installata. Cercarla in Google Play\?</string>
     <string name="close_changeset">Chiudi le modifiche</string>
-    <string name="safe_mode_description">Avvia l\'app in modalità sicura (usando il più lento codice Android invece del nativo).</string>
+    <string name="safe_mode_description">Avvia l\'app in modalità sicura (più lenta).</string>
     <string name="safe_mode">Modalità sicura</string>
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (chiudila nelle \'Impostazioni\').</string>
     <string name="background_service_is_enabled_question">Il servizio OsmAnd è ancora in esecuzione in background. Si desidera arrestare anche questo?</string>
@@ -844,11 +844,11 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii. aiuta a valutare la forma della superficie del terreno, considerando le curvature, estremità, pendenze, punti alla medesima altitudine e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, linee alla stessa altitudine per le salite e le discese, e il colorazione della devizione della pendenza rispetto al terreno pianeggiante. Dati forniti da SRTM e ASTER.
-\n
-\nHow to - http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii aiutano a valutare visualmente la forma della superficie del terreno, considerando le curvature, estremità, pendenze, punti alla medesima altitudine e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, isoipse alla stessa altitudine per le salite e le discese, e il colore di deviazione angolare della pendenza rispetto al terreno pianeggiante. Dati forniti da SRTM e ASTER. 
+\n 
+\nTutorial - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="index_srtm_ele">Linee isoipse</string>
-    <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando il pulsante nella mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
+    <string name="audionotes_plugin_description">Crea note audio/video/foto durante il viaggio, usando il pulsante nella mappa, oppure direttamente dal menù contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd per le curve di livello offline</string>
@@ -880,17 +880,17 @@
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
     <string name="map_widget_av_notes">Note audio/video</string>
-    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto del plugin per le \'Linee isoipse\' per sostenerne lo sviluppo futuro.</string>
+    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto del plugin per le \'Curve isoipse\' per sostenerne lo sviluppo futuro.</string>
     <string name="srtm_paid_version_title">Plugin linee isoipse</string>
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
-    <string name="dropbox_plugin_description">Il plugin Dropbox ti permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
+    <string name="dropbox_plugin_description">Sincronizza tracce e note video/audio con il tuo account Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     <string name="recording_context_menu_show">Visualizza</string>
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="stop_routing_confirm">Interrompere la navigazione\?</string>
-    <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e le destinazioni intermedie)?</string>
+    <string name="clear_dest_confirm">Rimuovere la tua destinazione (e le destinazioni intermedie)\?</string>
     <string name="precise_routing_mode_descr">Calcola percorsi precisi senza intoppi. È ancora lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
     <string name="local_indexes_cat_av">Dati audio/video</string>
@@ -942,7 +942,7 @@
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato in {0}</string>
     <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, che può essere usato in seguito per la navigazione.</string>
-    <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
+    <string name="osmand_distance_planning_plugin_name">Strumento calcolo distanza e pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto. 
 \n* Premere e tenere premuto sulla mappa per eliminare il punto precedente. 
 \n* Premere e tenere premuto sul punto per vedere e allegare una descrizione. 
@@ -994,7 +994,7 @@
     <string name="driving_region_japan">Giappone</string>
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europa, Asia, America Latina e similari</string>
+    <string name="driving_region_europe_asia">Europa, Asia, America Latina e simili</string>
     <string name="driving_region_uk">UK, India e simili</string>
     <string name="map_widget_fps_info">Informazioni FPS</string>
     <string name="local_index_tile_data_zooms">Livelli zoom scaricati: %1$s</string>
@@ -1003,7 +1003,7 @@
     <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom minimo: %1$s</string>
     <string name="local_index_tile_data_name">Dati tasselli: %1$s</string>
-    <string name="edit_tilesource_successfully">Sorgente mattonelle %1$s salvata</string>
+    <string name="edit_tilesource_successfully">Sorgente tile %1$s salvato</string>
     <string name="edit_tilesource_maxzoom">Zoom massimo</string>
     <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
     <string name="edit_tilesource_minzoom">Zoom minimo</string>
@@ -1524,7 +1524,7 @@
     <string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso, utile per i viaggi lunghi.</string>
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colora per rete di appartenenza</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Rete di appartenenza</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella la modifica di OSM</string>
     <string name="archive_wikipedia_data">Sono presenti vecchi dati di Wikipedia incompatibili. Vuoi archiviarli\?</string>
@@ -3183,7 +3183,7 @@
     <string name="routing_attr_width_description">Specifica il limite della larghezza del veicolo permessa nei percorsi.</string>
     <string name="avoid_in_routing_descr_">Evita certi percorsi e tipi di strade</string>
     <string name="app_mode_utv">Lato per lato</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name"/>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Impianto a fune</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
     <string name="shared_string_calculate">Calcola</string>
     <string name="shared_string_osmand_usage">Utilizzo di OsmAnd</string>
@@ -3498,7 +3498,7 @@
     <string name="tracker_item">OsmAnd tracciatore</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Azione rapida</string>
-    <string name="radius_ruler_item">Righello radiale</string>
+    <string name="radius_ruler_item">Goniometro</string>
     <string name="measure_distance_item">Misura distanza</string>
     <string name="travel_item">Viaggio (Wikivoyage e Wikipedia)</string>
     <string name="map_markers_item">Marcatori mappa</string>
@@ -4710,9 +4710,9 @@
     <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso registrato attuale.</string>
     <string name="connect_with_straight_line">Collega con una linea retta</string>
     <string name="shared_string_only_missing">Solo mancanti</string>
-    <string name="download_tiles">Scarica mattonelle</string>
+    <string name="download_tiles">Scarica tile</string>
     <string name="trip_recording_downhill_widget_desc">Mostra il totale di tutte le discese del percorso attualmente registrato.</string>
-    <string name="relative_bearing_widget_desc">Mostra l\'angolo fra la propria direzione del movimento e quella di destinazione.</string>
+    <string name="relative_bearing_widget_desc">Mostra l\'angolo fra la propria direzione di movimento e il punto di destinazione.</string>
     <string name="distance_to_destination_widget_desc">Il widget mostra la distanza all\'ultimo punto di destinazione.</string>
     <string name="widget_with_dot">Widget.</string>
     <string name="compass_visible_if_map_rotated_desc">Nascondi quando il Nord è in alto</string>
@@ -4784,4 +4784,5 @@
     <string name="click_on_widget">Clicca sul widget</string>
     <string name="shared_string_shows">Mostra</string>
     <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
+    <string name="map_marker_interval_dialog_desc">Specifica l\'intervallo di tempo per cui verrà misurata la velocità media per calcolare la stima dell\'orario d\'arrivo.</string>
 </resources>

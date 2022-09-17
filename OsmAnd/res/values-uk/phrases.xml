@@ -4348,7 +4348,7 @@
     <string name="poi_dog_designated">Призначено для вигулювання собак</string>
     <string name="poi_playground_playhouse">Ігровий будиночок</string>
     <string name="poi_playground_sandpit">Пісочниця</string>
-    <string name="poi_playground_climbingframe"/>
+    <string name="poi_playground_climbingframe">Скеледром</string>
     <string name="poi_playground_exercise">Вуличні тренажери</string>
     <string name="poi_playground_structure">Структура</string>
     <string name="poi_playground_type">Тип майданчика</string>
@@ -4359,4 +4359,25 @@
     <string name="poi_playground_bridge">Міст</string>
     <string name="poi_playground_horizontal_bar">Горизонтальна панель</string>
     <string name="poi_playground_activitypanel">Панель активності</string>
+    <string name="poi_playground_climbingwall">Стіна для скелелазіння</string>
+    <string name="poi_playground_balancebeam">Гімнастична колода</string>
+    <string name="poi_playground_hopscotch">Класики</string>
+    <string name="poi_playground_teenshelter">Дитячий майданчик</string>
+    <string name="poi_playground_sledding">Катання на санках</string>
+    <string name="poi_playground_funnel_ball">Лійка для куль</string>
+    <string name="poi_playground_speaking_tube">Розмовна трубка</string>
+    <string name="poi_playground_ball_pool">Басейн з кульок</string>
+    <string name="poi_playground_swing">Гойдалка</string>
+    <string name="poi_playground_spinning_circle">Обертальні кола</string>
+    <string name="poi_playground_basketswing">Гойдалка-кошик</string>
+    <string name="poi_playground_basketrotator">Обертальний кошик</string>
+    <string name="poi_playground_aerialrotator">Повітряний обертач</string>
+    <string name="poi_playground_youth_bench">Дитячий тренажер</string>
+    <string name="poi_playground_seesaw">Гойдалка-балансир</string>
+    <string name="poi_playground_springy">Пружина</string>
+    <string name="poi_playground_trampoline">Батут</string>
+    <string name="poi_playground_roundabout">Карусель</string>
+    <string name="poi_playground_cushion">Надувний батут</string>
+    <string name="poi_playground_zipwire">Зіплайн</string>
+    <string name="poi_playground_splash_pad">Рамкові розбризкувачі</string>
 </resources>

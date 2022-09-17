@@ -4795,4 +4795,5 @@
     <string name="click_on_widget">Klicken Sie auf das Widget</string>
     <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
 \nTippen Sie mit 2 Fingern auf die Karte, um die Entfernung zwischen den angeklickten Punkten anzuzeigen</string>
+    <string name="shared_string_shows">Zeigt</string>
 </resources>
