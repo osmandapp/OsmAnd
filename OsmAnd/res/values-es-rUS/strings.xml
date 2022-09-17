@@ -3081,7 +3081,6 @@
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
-    <string name="gpx_join_gaps">Unir espacios</string>
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
@@ -3886,7 +3885,6 @@
 \n</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir después</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemán (casual)</string>

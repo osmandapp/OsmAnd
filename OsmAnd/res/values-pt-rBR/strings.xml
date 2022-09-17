@@ -3075,7 +3075,6 @@
     <string name="rendering_attr_tracktype_grade3_name">Principalmente sólido</string>
     <string name="rendering_attr_tracktype_grade4_name">Principalmente macio</string>
     <string name="rendering_attr_tracktype_grade5_name">Suave</string>
-    <string name="gpx_join_gaps">Unir espaços</string>
     <string name="app_mode_camper">Casa móvel (campista)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
@@ -3881,7 +3880,6 @@
 \n  • Suporta cores personalizadas para favoritos e rastreia pontos de referência
 \n
 \n"</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir depois</string>
     <string name="plan_route_add_new_segment">Adicionar novo segmento</string>

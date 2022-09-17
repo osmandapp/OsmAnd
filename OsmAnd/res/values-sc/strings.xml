@@ -3083,7 +3083,6 @@
     <string name="rendering_attr_showLez_name">Ammustra sas zonas a emissione bassa</string>
     <string name="temporary_conditional_routing">Mentene in cunsìderu sas limitatziones temporàneas</string>
     <string name="shared_string_default">Predefinidu</string>
-    <string name="gpx_join_gaps">Liga sas separatziones</string>
     <string name="app_mode_campervan">Camper (RV)</string>
     <string name="new_route_calculated_dist_dbg">Àndala: distàntzia %1$s, tempus %2$s \nCàrculu: %3$.1f seg, %4$d caminos, %5$d tasseddos)</string>
     <string name="lang_oc">Otzitanu</string>
@@ -3874,7 +3873,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tedescu (informale)</string>
     <string name="app_mode_light_aircraft">Aèreu lèbiu</string>
-    <string name="plan_route_join_segments">Auni sos segmentos</string>
     <string name="plan_route_split_before">Iscroba in antis de</string>
     <string name="plan_route_split_after">Iscroba a pustis de</string>
     <string name="plan_route_add_new_segment">Annanghe unu segmentu nou</string>

@@ -3073,7 +3073,6 @@
     <string name="shared_string_file_is_saved">%s 已儲存</string>
     <string name="shared_string_open_track">打開軌道</string>
     <string name="shared_string_track_is_saved">軌道 %s 已儲存</string>
-    <string name="gpx_join_gaps">加入 gaps</string>
     <string name="app_mode_camper">露營車</string>
     <string name="app_mode_campervan">露營車 (RV)</string>
     <string name="rendering_attr_showLez_description">在地圖上顯示低排放區域。不會影響路徑。</string>
@@ -3869,7 +3868,6 @@
     <string name="lang_de_casual">德語（非正式）</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">輕型飛機</string>
-    <string name="plan_route_join_segments">加入線段</string>
     <string name="plan_route_split_before">分離前</string>
     <string name="plan_route_split_after">分離後</string>
     <string name="plan_route_add_new_segment">加入新線段</string>

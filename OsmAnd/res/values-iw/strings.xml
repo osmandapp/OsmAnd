@@ -3009,7 +3009,6 @@
     <string name="shared_string_color_magenta">מג׳נטה</string>
     <string name="shared_string_icon">סמל</string>
     <string name="collected_data">נתונים שנאספו</string>
-    <string name="gpx_join_gaps">צירוף מרווחים</string>
     <string name="app_mode_camper">מחנאות</string>
     <string name="app_mode_campervan">רכב מחנאות (קרוואן)</string>
     <string name="rendering_attr_showLez_description">הצגת אזורים עם פליטה נמוכה במפה. לא משפיע על הניווט.</string>
@@ -3881,7 +3880,6 @@
     <string name="lang_de_casual">גרמנית (עממית)</string>
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
     <string name="app_mode_light_aircraft">כלי טיס קל</string>
-    <string name="plan_route_join_segments">צירוף מקטעים</string>
     <string name="plan_route_split_before">לפצל לפני</string>
     <string name="plan_route_split_after">לפצל אחרי</string>
     <string name="plan_route_add_new_segment">הוספת מקטע חדש</string>

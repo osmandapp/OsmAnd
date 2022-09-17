@@ -3093,7 +3093,6 @@
     <string name="rendering_attr_showLez_description">Umweltzonen auf der Karte anzeigen. Beeinflusst die Routenführung nicht.</string>
     <string name="rendering_attr_showLez_name">Umweltzonen anzeigen</string>
     <string name="temporary_conditional_routing">Vorübergehende Einschränkungen berücksichtigen</string>
-    <string name="gpx_join_gaps">Lücken schließen</string>
     <string name="app_mode_campervan">Wohnmobil</string>
     <string name="shared_string_default">Standard</string>
     <string name="app_mode_camper">Wohnwagen</string>
@@ -3893,7 +3892,6 @@
 \n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
 \n
 \n</string>
-    <string name="plan_route_join_segments">Segmente verbinden</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
     <string name="profile_type_user_string">Benutzerprofil</string>

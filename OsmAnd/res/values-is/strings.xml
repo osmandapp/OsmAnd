@@ -3087,7 +3087,6 @@
     <string name="shared_string_track_is_saved">Ferill %s er vistaður</string>
     <string name="app_mode_personal_transporter">Rafskutla (Segway)</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="gpx_join_gaps">Tengja bil</string>
     <string name="app_mode_camper">Svefnbíll</string>
     <string name="app_mode_campervan">Húsbíll (RV)</string>
     <string name="rendering_attr_showLez_description">Birta svæði með takmörkunum á útblæstri á kortinu. Hefur ekki áhrif á leiðaval.</string>
@@ -3893,7 +3892,6 @@
 \n • Stuðningur við sérsniðna liti í eftirlætum og ferilpunktum
 \n
 \n</string>
-    <string name="plan_route_join_segments">Sameina búta</string>
     <string name="plan_route_split_after">Skipta upp á eftir</string>
     <string name="plan_route_add_new_segment">Bæta við nýjum bút</string>
     <string name="plan_route_split_before">Skipta upp á undan</string>

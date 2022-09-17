@@ -2984,7 +2984,6 @@
     <string name="shared_string_file_is_saved">Το %s είναι αποθηκευμένο</string>
     <string name="shared_string_open_track">Άνοιγμα ίχνος</string>
     <string name="shared_string_track_is_saved">Το %s του ίχνους είναι αποθηκευμένο</string>
-    <string name="gpx_join_gaps">Ένωση κενών</string>
     <string name="app_mode_camper">Τροχόσπιτο</string>
     <string name="app_mode_campervan">Αυτοκινούμενο τροχόσπιτο (RV)</string>
     <string name="rendering_attr_showLez_description">Εμφάνιση στον χάρτη ζωνών για χαμηλή εκπομπή καυσαερίων. Δεν επηρεάζει τη δρομολόγηση.</string>

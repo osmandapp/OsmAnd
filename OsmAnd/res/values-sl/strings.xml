@@ -3019,7 +3019,6 @@
     <string name="rendering_attr_tracktype_grade5_name">Mehka</string>
     <string name="routeInfo_tracktype_name">Trdnost površine</string>
     <string name="shared_string_file_is_saved">Datoteka %s je shranjena</string>
-    <string name="gpx_join_gaps">Združi prekinjene sledi</string>
     <string name="app_mode_camper">Potovanje s prikolico</string>
     <string name="app_mode_campervan">Potovanje z avtodomom (RV)</string>
     <string name="rendering_attr_showLez_description">Na zemljevidu prikaži področja z omejitvijo izpustov. Ne vpliva na usmerjanje.</string>
@@ -3296,7 +3295,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="plan_route_add_new_segment">Dodaj nov del poti</string>
     <string name="app_mode_light_aircraft">Lahko letalo</string>
-    <string name="plan_route_join_segments">Združi dele poti</string>
     <string name="plan_route_split_before">Razdeli pred</string>
     <string name="plan_route_split_after">Razdeli po</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>

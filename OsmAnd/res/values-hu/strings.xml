@@ -3140,7 +3140,6 @@
     <string name="rendering_attr_highway_class_track_grade3_name">3. osztály (kemény földút)</string>
     <string name="rendering_attr_highway_class_track_grade4_name">4. osztály (laza földút)</string>
     <string name="rendering_attr_highway_class_track_grade5_name">5. osztály (növényzettel benőtt)</string>
-    <string name="gpx_join_gaps">Rések összekötése</string>
     <string name="shared_string_default">Alapértelmezett</string>
     <string name="lang_oc">okcitán</string>
     <string name="app_mode_pickup_truck">Kisteherautó</string>
@@ -3873,7 +3872,6 @@
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
     <string name="plan_route_split_before">Elvágás ez előtt:</string>
     <string name="plan_route_split_after">Elvágás ez után:</string>
-    <string name="plan_route_join_segments">Szakaszok összekapcsolása</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
     <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a saját helyeket is
 \n

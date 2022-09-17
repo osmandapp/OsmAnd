@@ -3080,7 +3080,6 @@
     <string name="shared_string_file_is_saved">%s збережено</string>
     <string name="shared_string_open_track">Відкрити трек</string>
     <string name="shared_string_track_is_saved">Трек %s збережено</string>
-    <string name="gpx_join_gaps">Об\'єднати проміжки</string>
     <string name="app_mode_camper">Кемпер</string>
     <string name="app_mode_campervan">Дім на колесах</string>
     <string name="rendering_attr_showLez_description">Показати на мапі зони де лімітується обсяг викидів. Не впливає на маршрутизацію.</string>
@@ -3876,7 +3875,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Німецька (звичайна)</string>
     <string name="app_mode_light_aircraft">Легкий літак</string>
-    <string name="plan_route_join_segments">Об\'єднати відрізки</string>
     <string name="plan_route_split_before">Розділити перед</string>
     <string name="plan_route_split_after">Розділити після</string>
     <string name="plan_route_add_new_segment">Додати новий сегмент</string>

@@ -977,7 +977,6 @@
     <string name="plan_route_add_new_segment">Ajustar una estirada</string>
     <string name="plan_route_split_after">Separar après</string>
     <string name="plan_route_split_before">Separar avans</string>
-    <string name="plan_route_join_segments">Jónher leis estiradas</string>
     <string name="marker_save_as_track">Sauvagardar per fichier de traça</string>
     <string name="plan_route_trim_after">Retalhar après</string>
     <string name="plan_route_trim_before">Retalhar avans</string>

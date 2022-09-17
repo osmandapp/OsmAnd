@@ -3112,7 +3112,6 @@
     <string name="price_and_discount">%1$s - Poupe %2$s</string>
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para o primeiro %2$s</string>
-    <string name="gpx_join_gaps">Unir espaços</string>
     <string name="configure_profile_info">Configurações do perfil:</string>
     <string name="utm_format_descr">OsmAnd usa o UTM Standard que é semelhante, mas não idêntico ao formato UTM NATO.</string>
     <string name="shared_string_example">Exemplo</string>
@@ -3878,7 +3877,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemão (casual)</string>
     <string name="app_mode_light_aircraft">Aeronave ligeira</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir após</string>
     <string name="plan_route_add_new_segment">Adicionar um novo segmento</string>

@@ -3086,7 +3086,6 @@
     <string name="third_party_routing_type">Wyznaczanie trasy przez usługi zewnętrzne</string>
     <string name="app_mode_monowheel">Monocykl</string>
     <string name="shared_string_default">Domyślnie</string>
-    <string name="gpx_join_gaps">Połącz luki</string>
     <string name="lang_oc">Prowansalski</string>
     <string name="app_mode_wagon">Wóz</string>
     <string name="app_mode_pickup_truck">Pickup</string>
@@ -3875,7 +3874,6 @@
     <string name="lang_de_casual">Niemiecki (styl potoczny)</string>
     <string name="gpx_upload_public_visibility_descr">\"Publiczny\" oznacza, że ślad jest pokazywany publicznie w śladach GPS i na publicznych listach śladów GPS oraz na publicznej liście śladów z surowymi znacznikami czasowymi. Dane obsługiwane przez API nie odnoszą się do strony śladów. Znaczniki czasu punktów śladowych nie są dostępne za pośrednictwem publicznego API GPS, a punkty śladowe nie są uporządkowane chronologicznie.</string>
     <string name="app_mode_light_aircraft">Lekki samolot</string>
-    <string name="plan_route_join_segments">Połącz segmenty</string>
     <string name="plan_route_split_before">Podziel przed</string>
     <string name="plan_route_split_after">Podziel po</string>
     <string name="plan_route_add_new_segment">Dodaj nowy segment</string>

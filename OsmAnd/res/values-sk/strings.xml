@@ -3079,7 +3079,6 @@
     <string name="shared_string_file_is_saved">%s je uložený</string>
     <string name="shared_string_open_track">Otvoriť stopu</string>
     <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
-    <string name="gpx_join_gaps">Spojiť medzery</string>
     <string name="app_mode_camper">Obytný príves</string>
     <string name="app_mode_campervan">Obytné vozidlo</string>
     <string name="rendering_attr_showLez_description">Zobraziť Zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
@@ -3874,7 +3873,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"Identifikovateľná\" znamená, že trasa sa zobrazí verejne vo vašich GPS stopách a vo verejných zoznamoch GPS stôp, tzn. iní používatelia budú môcť stiahnuť nespracovanú trasu a prepojiť su s vašim používateľkým menom. Verejné body trasy s časovými pečiatkami poskytované cez GPS rozhranie (API) budú odkazovať na vašu pôvodnú stránku s trasou.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sledovateľná\" znamená, že trasa sa nezobrazí vo verejných zoznamoch, ale spracované body trasy s časovými pečiatkami (ktoré nie je možné spojiť s vami), budú dostupné na stiahnutie cez verejné GPS rozhranie (API).</string>
     <string name="app_mode_light_aircraft">Ľahké lietadlo</string>
-    <string name="plan_route_join_segments">Spojiť úseky</string>
     <string name="plan_route_split_before">Rozdeliť predtým</string>
     <string name="plan_route_split_after">Rozdeliť po</string>
     <string name="plan_route_add_new_segment">Pridať nový segment</string>

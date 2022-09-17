@@ -3219,7 +3219,6 @@
     <string name="routeInfo_tracktype_name">Overflatefasthet</string>
     <string name="shared_string_open_track">Åpne spor</string>
     <string name="shared_string_track_is_saved">Sporet %s ble lagret</string>
-    <string name="gpx_join_gaps">Fjern mellomrom</string>
     <string name="app_mode_camper">Campingvogn</string>
     <string name="app_mode_campervan">Bobil</string>
     <string name="rendering_attr_showLez_description">Vis lavutslippssoner på kartet. Har ikke innvirkning på ruting.</string>
@@ -3808,7 +3807,6 @@
     <string name="app_mode_light_aircraft">Småfly</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Tysk (uformell)</string>
-    <string name="plan_route_join_segments">Slå sammen segmenter</string>
     <string name="plan_route_split_before">Del før</string>
     <string name="plan_route_split_after">Del etter</string>
     <string name="plan_route_add_new_segment">Legg til et nytt segment</string>

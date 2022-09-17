@@ -3072,7 +3072,6 @@
     <string name="shared_string_open_track">Apri traccia</string>
     <string name="shared_string_track_is_saved">Traccia %s salvata</string>
     <string name="turn_on_profile_desc">Per favore attiva almeno un profilo dell\'app da utilizzare con questa impostazione.</string>
-    <string name="gpx_join_gaps">Unisci le lacune</string>
     <string name="app_mode_campervan">Camper (RV)</string>
     <string name="rendering_attr_showLez_description">Mostra sulla mappa le zone a Basse Emissioni. Non influisce sul calcolo del percorso.</string>
     <string name="rendering_attr_showLez_name">Mostra le zone a Basse Emissioni</string>
@@ -3882,7 +3881,6 @@
 \n • Supporto alla personalizzazione dei colori per i preferiti e i punti intermedi delle tracce
 \n
 \n</string>
-    <string name="plan_route_join_segments">Unisci segmenti</string>
     <string name="plan_route_split_before">Spezza</string>
     <string name="announcement_time_arrive">Arrivo a destinazione</string>
     <string name="shared_string_turn">Svolta</string>

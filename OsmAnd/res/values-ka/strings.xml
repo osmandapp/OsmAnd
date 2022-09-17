@@ -1513,7 +1513,6 @@
     <string name="use_dev_url">dev.openstreetmap.org-ის გამოყენება</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">მსუბუქი თვითმფრინავი</string>
-    <string name="plan_route_join_segments">ნაწილების შეერთება</string>
     <string name="plan_route_split_before">გაყოფა მანამდე</string>
     <string name="plan_route_split_after">გაყოფა შემდეგ</string>
     <string name="shared_string_last_used">ბოლოს გამოყენებული</string>
@@ -2739,7 +2738,6 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">უჯრედული ქსელები</string>
     <string name="layer_osm_edits">OSM ჩასწორებები</string>
     <string name="shared_string_osmand_usage">OsmAnd-ის გამოყენება</string>
-    <string name="gpx_join_gaps">ღრეჩოების შეერთება</string>
     <string name="quick_action_add_create_items">შექმნა</string>
     <string name="custom_search">მორგებული ძებნა</string>
     <string name="shared_string_empty">ცარიელი</string>

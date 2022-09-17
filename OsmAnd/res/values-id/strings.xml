@@ -968,7 +968,6 @@
     <string name="add_to_opr">Tambahkan ke OpenPlaceReviews</string>
     <string name="use_dev_url">Gunakan dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Pesawat terbang ringan</string>
-    <string name="plan_route_join_segments">Hubungkan segmen-segmen</string>
     <string name="plan_route_add_new_segment">Tambahkan segmen baru</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil pengguna</string>
@@ -3821,7 +3820,6 @@
     <string name="store_tracks_in_daily_directories">Rekam trek dalam folder harian</string>
     <string name="store_tracks_in_daily_directories_descrp">Rekam trek dalam sub-folder per hari perekaman (seperti 2018-01-01).</string>
     <string name="update_all_maps_q">Perbarui semua peta (%1$d)\?</string>
-    <string name="gpx_join_gaps">Gabungkan celah</string>
     <string name="app_mode_campervan">Mobil kemah (RV)</string>
     <string name="rendering_attr_showLez_name">Tampilkan Zona Emisi Rendah</string>
     <string name="temporary_conditional_routing">Pertimbangkan batasan sementara</string>
