@@ -4355,7 +4355,7 @@
     <string name="poi_playground_sandpit">Arenero</string>
     <string name="poi_playground_hopscotch">Rayuela</string>
     <string name="poi_playground_teenshelter">Refugio para adolescentes</string>
-    <string name="poi_playground_sledding">Trineo</string>
+    <string name="poi_playground_sledding">Culipatín;Trineo</string>
     <string name="poi_playground_youth_bench">Banco para jóvenes</string>
     <string name="poi_playground_map">Mapa</string>
     <string name="poi_playground_bridge">Puente</string>
@@ -4377,4 +4377,5 @@
     <string name="poi_playground_ball_pool">Piscina de bolas</string>
     <string name="poi_playground_swing">Hamaca;Columpio</string>
     <string name="poi_playground_roundabout">Calesita</string>
+    <string name="poi_playground_springy">Muelle balancín</string>
 </resources>
