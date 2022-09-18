@@ -4375,4 +4375,9 @@
     <string name="poi_playground_bridge">Híd</string>
     <string name="poi_playground_swing">Hinta</string>
     <string name="poi_playground_roundabout">Körforgó</string>
+    <string name="poi_playground_balancebeam">Egyensúlyozó gerenda</string>
+    <string name="poi_playground_teenshelter">Gyerekház</string>
+    <string name="poi_playground_spinning_circle">Pörgő karika</string>
+    <string name="poi_playground_splash_pad">Mini szökőkút</string>
+    <string name="poi_playground_basketrotator">Kosár forgó</string>
 </resources>
