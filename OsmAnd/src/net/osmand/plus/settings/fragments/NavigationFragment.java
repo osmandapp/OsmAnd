@@ -1,5 +1,12 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -25,15 +32,7 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class NavigationFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
 
@@ -85,7 +84,6 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
@@ -93,8 +91,6 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
 		showHideCustomizeRouteLinePref();
-
-		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
 
 	private void setupNavigationTypePref() {
