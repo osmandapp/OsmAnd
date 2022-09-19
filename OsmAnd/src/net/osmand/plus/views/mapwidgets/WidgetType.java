@@ -66,7 +66,11 @@ public enum WidgetType {
 	CURRENT_TIME("plain_time", R.string.map_widget_plain_time, R.string.current_time_widget_desc, R.drawable.widget_time_day, R.drawable.widget_time_night, R.string.docs_widget_current_time, null, RIGHT),
 	BATTERY("battery", R.string.map_widget_battery, R.string.battery_widget_desc, R.drawable.widget_battery_day, R.drawable.widget_battery_night, R.string.docs_widget_battery, null, RIGHT),
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, R.string.docs_widget_radius_ruler, null, RIGHT),
-	FPS("fps", R.string.map_widget_fps_info, R.string.fps_widget_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, null, RIGHT),
+	DEV_FPS("fps", R.string.map_widget_fps_info, R.string.fps_widget_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_CAMERA_TILT("dev_camera_tilt", R.string.map_widget_camera_tilt, R.string.map_widget_camera_tilt_desc, R.drawable.widget_developer_camera_tilt_day, R.drawable.widget_developer_camera_tilt_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_CAMERA_DISTANCE("dev_camera_distance", R.string.map_widget_camera_distance, R.string.map_widget_camera_distance_desc, R.drawable.widget_developer_camera_distance_day, R.drawable.widget_developer_camera_distance_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_ZOOM_LEVEL("dev_zoom_level", R.string.map_widget_zoom_level, R.string.map_widget_zoom_level_desc, R.drawable.widget_developer_map_zoom_day, R.drawable.widget_developer_map_zoom_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_TARGET_DISTANCE("dev_target_distance", R.string.map_widget_target_distance, R.string.map_widget_target_distance_desc, R.drawable.widget_developer_target_distance_day, R.drawable.widget_developer_target_distance_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	AV_NOTES_ON_REQUEST("av_notes_on_request", R.string.av_def_action_choose, R.string.av_notes_choose_action_widget_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, 0, WidgetGroup.AUDIO_VIDEO_NOTES, RIGHT),
 	AV_NOTES_RECORD_AUDIO("av_notes_record_audio", R.string.av_def_action_audio, R.string.av_notes_audio_widget_desc, R.drawable.widget_av_audio_day, R.drawable.widget_av_audio_night, 0, WidgetGroup.AUDIO_VIDEO_NOTES, RIGHT),
 	AV_NOTES_RECORD_VIDEO("av_notes_record_video", R.string.av_def_action_video, R.string.av_notes_video_widget_desc, R.drawable.widget_av_video_day, R.drawable.widget_av_video_night, 0, WidgetGroup.AUDIO_VIDEO_NOTES, RIGHT),
@@ -144,7 +148,7 @@ public enum WidgetType {
 			String coordinatesFormat = context.getString(R.string.coordinates_format);
 			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
 					generalSettings, coordinatesFormat);
-		} else if (this == FPS) {
+		} else if (this == DEV_FPS) {
 			return WidgetGroup.getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == MAPILLARY) {
 			return WidgetGroup.getPartOfPluginDesc(context, MapillaryPlugin.class);
@@ -160,7 +164,7 @@ public enum WidgetType {
 	public int getSecondaryIconId() {
 		if (this == COORDINATES_CURRENT_LOCATION || this == COORDINATES_MAP_CENTER) {
 			return R.drawable.ic_action_help;
-		} else if (this == FPS || this == MAPILLARY || this == PARKING) {
+		} else if (this == DEV_FPS || this == MAPILLARY || this == PARKING) {
 			return R.drawable.ic_extension_dark;
 		} else if (group != null) {
 			return group.getSecondaryIconId();

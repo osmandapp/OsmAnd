@@ -10,6 +10,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ public enum WidgetGroup {
 	MAP_MARKERS(R.string.map_markers, R.string.map_markers_desc, R.drawable.widget_marker_day, R.drawable.widget_marker_night, R.string.docs_widget_markers),
 	BEARING(R.string.shared_string_bearing, R.string.bearing_desc, R.drawable.widget_relative_bearing_day, R.drawable.widget_relative_bearing_night, R.string.docs_widget_bearing),
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
-	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes);
+	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes),
+	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0);
 
 	@StringRes
 	public final int titleId;
@@ -104,6 +106,8 @@ public enum WidgetGroup {
 			String coordinatesFormat = context.getString(R.string.coordinates_format);
 			return context.getString(R.string.coordinates_widget_secondary_desc, configureProfile,
 					generalSettings, coordinatesFormat);
+		} else if (this == DEVELOPER_OPTIONS) {
+			return getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		}
 		return null;
 	}
@@ -112,7 +116,7 @@ public enum WidgetGroup {
 	public int getSecondaryIconId() {
 		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
-		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES) {
+		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

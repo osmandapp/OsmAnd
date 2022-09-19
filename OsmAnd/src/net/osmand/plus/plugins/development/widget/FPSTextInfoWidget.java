@@ -1,8 +1,8 @@
-package net.osmand.plus.plugins.development;
+package net.osmand.plus.plugins.development.widget;
 
 import android.os.SystemClock;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,10 +23,10 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 	private int middleFrameId;
 
 	public FPSTextInfoWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, FPS);
+		super(mapActivity, DEV_FPS);
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
-		setIcons(FPS);
+		setIcons(DEV_FPS);
 	}
 
 	@Override
