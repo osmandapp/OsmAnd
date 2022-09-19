@@ -178,7 +178,7 @@
 	<string name="poi_laundry_service_filter">Laundry service</string>
 	<string name="poi_dry_cleaning_filter">Dry cleaning</string>
 	<string name="poi_dog">Dogs</string>
-	<string name="poi_playground_type">Playground type</string>
+	<string name="poi_parking_fee_filter">Parking fee</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3692,8 +3692,8 @@
 	<string name="poi_scooter_no">Scooter: no</string>
 	<string name="poi_truck_no">Truck: no</string>
 
-	<string name="poi_parking_fee_yes">Parking fee: yes</string>
-	<string name="poi_parking_fee_no">Parking fee: no</string>
+	<string name="poi_parking_fee_yes">Yes</string>
+	<string name="poi_parking_fee_no">No</string>
 	<string name="poi_parking_fee">Parking fee</string>
 
 	<string name="poi_amperage">Amperage</string>
@@ -4913,5 +4913,7 @@
 	<string name="poi_playground_horizontal_bar">Horizontal bar</string>
 	<string name="poi_playground_activitypanel">Activity panel</string>
 	<string name="poi_playground_exercise">Outdoor gym</string>
+
+	<string name="poi_access_yes">Access is allowed</string>
 
 </resources>
