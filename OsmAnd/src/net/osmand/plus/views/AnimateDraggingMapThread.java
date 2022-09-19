@@ -639,21 +639,38 @@ public class AnimateDraggingMapThread {
 	public void startZooming(int zoomEnd, double zoomPart, boolean notifyListener) {
 		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
 		float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
+		double targetLat = tileView.getLatitude();
+		double targetLon = tileView.getLongitude();
 
 		MapRendererView mapRenderer = getMapRenderer();
 		MapAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
 			animator.pause();
-			animator.cancelAllAnimations();
+			
+			float duration = animationTime / 1000f;
+			IAnimation targetAnimation = animator.getCurrentAnimation(locationServicesAnimationKey, AnimatedValue.Target);
+			if (targetAnimation != null)
+			{
+				targetLat = targetLatitude;
+				targetLon = targetLongitude;
+				duration = Math.min(duration, targetAnimation.getDuration() - targetAnimation.getTimePassed());
+			}
+			IAnimation zoomAnimation = animator.getCurrentAnimation(locationServicesAnimationKey, AnimatedValue.Zoom);
+			if (zoomAnimation != null) {
+				animator.cancelAnimation(zoomAnimation);
+				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
+			}
 
 			animator.animateZoomTo(zoomEnd + (float) zoomPart,
-					animationTime / 1000f,
+					duration,
 					TimingFunction.Linear,
 					userInteractionAnimationKey);
 		}
 
+		double finalLat = targetLat;
+		double finalLon = targetLon;
 		startThreadAnimating(() -> {
-			setTargetValues(zoomEnd, zoomPart, tileView.getLatitude(), tileView.getLongitude());
+			setTargetValues(zoomEnd, zoomPart, finalLat, finalLon);
 			if (mapRenderer != null && animator != null) {
 				isAnimatingZoom = true;
 				animatingMapAnimator(mapRenderer, animator);
