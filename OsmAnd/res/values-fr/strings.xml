@@ -2491,7 +2491,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Planifier un itinéraire</string>
+    <string name="plan_route">Créer une trace</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -2591,7 +2591,7 @@
     <string name="shared_string_marker">Marque</string>
     <string name="shared_string_without_name">Sans nom</string>
     <string name="lang_lo">Laotien</string>
-    <string name="rendering_attr_hidePOILabels_name">Libellés des PI</string>
+    <string name="rendering_attr_hidePOILabels_name">Libellés des points d\'intérêt</string>
     <string name="day_off_label">fermé</string>
     <string name="winter_and_ski_renderer">Hiver et ski</string>
     <string name="touring_view_renderer">Vue grand tourisme</string>
@@ -3683,7 +3683,7 @@
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
     <string name="set_working_days_to_continue">Définissez les jours travaillés pour continuer</string>
     <string name="route_between_points">Itinéraire entre points</string>
-    <string name="plan_a_route">Planifier un itinéraire</string>
+    <string name="plan_a_route">Créer une trace</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
@@ -4670,8 +4670,8 @@
     <string name="map_widget_trip_recording_downhill">Descente</string>
     <string name="routing_attr_hazmat_category_name">Catégorie des matières dangereuses</string>
     <string name="map_widget_true_bearing">Relèvement vrai</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Zones militaires</string>
     <string name="explore_plans">Explorer les plans</string>
     <string name="map_widget_time_to_destination">Temps restant jusqu\'à destination</string>
     <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>

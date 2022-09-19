@@ -1266,7 +1266,7 @@
     <string name="lang_zh_tw">kínai (hagyományos)</string>
     <string name="rendering_attr_alpineHiking_name">Alpesi túra nehézségi szint (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC nehézségi skála szerint.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Turistautak</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
     <string name="arrival_distance_factor_late">Későn</string>
@@ -1425,7 +1425,7 @@
     <string name="plugin_touringview_name">Turistatérkép-nézet</string>
     <string name="track_segments">Nyomvonalszakaszok</string>
     <string name="track_points">Nyomvonal pontok</string>
-    <string name="shared_string_selected">Kijelölve</string>
+    <string name="shared_string_selected">Kiválasztva</string>
     <string name="rename_failed">Az átnevezés nem sikerült.</string>
     <string name="shared_string_currently_recording_track">Jelenleg felvett nyomvonal</string>
     <string name="back_to_map">Vissza a térképhez</string>
@@ -4249,7 +4249,7 @@
     <string name="benefits_for_contributors_primary_descr">Az aktív OpenStreetMap.org szerkesztők korlátlan óránkénti térképfrissítésre lehetnek jogosultak.</string>
     <string name="benefits_for_contributors_secondary_descr">Jelentkezzen be az OpenStreetMapre, hogy ellenőrizze, jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
     <string name="enough_contributions_descr">Gratulálunk, elegendő OpenStreetMap-szerkesztést végzett, így mostantól korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
-    <string name="shared_string_contributions">Szerkesztések</string>
+    <string name="shared_string_contributions">Hozzájárulások</string>
     <string name="contributions_may_calculate_with_delay">A szerkesztések kiszámítása több órát is igénybe vehet.</string>
     <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>
     <string name="connect_track_points_as">Útvonalpontok összekapcsolása</string>
@@ -4693,12 +4693,12 @@
     <string name="live_update_frequency_day_variant">A térképfrissítések ellenőrzése naponta történik.</string>
     <string name="live_update_frequency_hour_variant">A térképfrissítések ellenőrzése óránként történik.</string>
     <string name="live_update_frequency_week_variant">A térképfrissítések ellenőrzése hetente történik.</string>
-    <string name="next_live_update_time">Következő frissítés: %1$s múlva.</string>
+    <string name="next_live_update_time">Következő frissítés: %1$s után.</string>
     <string name="altitude_correction">Magasságkorrekció</string>
     <string name="no_altitude_data_desc">%1$s adatokat lekéréséhez vagy online kiszámításához kapcsolja a nyomvonalát az utakhoz.</string>
     <string name="updated_map_time">Frissítve: %1$s.</string>
     <string name="calculate_online_altitude_descr">A magasság online legyen kiszámítva az OsmAnd szerverein műholdképek és digitális magassági modellek alapján. A készülék által rögzített magasságtól való eltérés felhasználható magasságkorrekcióként.</string>
-    <string name="next_live_update_date_and_time">Következő frissítés: %1$s (%2$s múlva).</string>
+    <string name="next_live_update_date_and_time">Következő frissítés: %1$s (%2$s után).</string>
     <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
     <string name="marker_2nd">2. jelölő</string>
     <string name="reset_all_settings_desc">Összes beállítás alaphelyzetbe állítása\?</string>
