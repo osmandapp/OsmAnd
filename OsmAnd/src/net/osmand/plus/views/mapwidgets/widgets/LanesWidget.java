@@ -180,9 +180,8 @@ public class LanesWidget extends MapWidget {
 
 		boolean specialPosition = true;
 		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesCurrentLocationWidget
-					|| widget instanceof StreetNameWidget
-					|| widget instanceof CoordinatesMapCenterWidget) {
+			if (widget instanceof CoordinatesBaseWidget
+					|| widget instanceof StreetNameWidget) {
 				specialPosition = false;
 				break;
 			}

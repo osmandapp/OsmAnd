@@ -365,9 +365,10 @@ public class StreetNameWidget extends MapWidget {
 		if (specialPosition) {
 			specialContainer.removeAllViews();
 
-			boolean coordinatesVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+			boolean currentLocationVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
+			boolean mapCenterVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopMapCenterCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
-				if ((widget instanceof CoordinatesCurrentLocationWidget || widget instanceof CoordinatesMapCenterWidget) && coordinatesVisible) {
+				if (widget instanceof CoordinatesBaseWidget && (currentLocationVisible || mapCenterVisible)) {
 					specialPosition = false;
 					break;
 				}

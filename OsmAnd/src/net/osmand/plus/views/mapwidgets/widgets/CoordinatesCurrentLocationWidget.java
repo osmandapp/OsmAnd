@@ -27,7 +27,7 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
 		updateVisibility(visible);
 		if (visible) {
 			Location lastKnownLocation = locationProvider.getLastKnownLocation();

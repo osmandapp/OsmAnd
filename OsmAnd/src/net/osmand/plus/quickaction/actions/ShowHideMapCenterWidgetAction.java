@@ -15,7 +15,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class ShowHideMapCenterWidgetAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(38,
-			"coordinates.map_center.showhide", ShowHideMapCenterWidgetAction.class)
+			"coordinates.showhide", ShowHideMapCenterWidgetAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.map_center_widget)
 			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()

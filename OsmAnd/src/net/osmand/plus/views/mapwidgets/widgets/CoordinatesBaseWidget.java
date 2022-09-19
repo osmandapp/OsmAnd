@@ -32,7 +32,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import org.apache.commons.logging.Log;
 
-abstract class CoordinatesBaseWidget extends MapWidget {
+public abstract class CoordinatesBaseWidget extends MapWidget {
 	private static final Log log = PlatformUtil.getLog(CoordinatesMapCenterWidget.class);
 
 	protected LatLon lastLocation;

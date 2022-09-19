@@ -242,10 +242,10 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 		boolean showBottomShadow = true;
 		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		boolean coordinatedVisible = visibilityHelper.shouldShowTopCoordinatesWidget()
-				|| visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
+		boolean mapCenterVisible = visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
+		boolean currentCoordinatesVisible = visibilityHelper.shouldShowTopCurrentLocationCoordinatesWidget();
 		for (MapWidget widget : followingWidgets) {
-			if ((widget instanceof CoordinatesCurrentLocationWidget || widget instanceof CoordinatesMapCenterWidget) && coordinatedVisible) {
+			if (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible)) {
 				showBottomShadow = false;
 				break;
 			}

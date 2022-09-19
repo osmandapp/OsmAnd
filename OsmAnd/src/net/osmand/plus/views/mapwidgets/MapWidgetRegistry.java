@@ -44,8 +44,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesCurrentLocationWidget;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesMapCenterWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
@@ -339,7 +338,7 @@ public class MapWidgetRegistry {
 				continue;
 			}
 
-			if (widget instanceof CoordinatesCurrentLocationWidget || widget instanceof CoordinatesMapCenterWidget) {
+			if (widget instanceof CoordinatesBaseWidget) {
 				return R.color.status_bar_main_dark;
 			} else if (widget instanceof StreetNameWidget) {
 				return night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
