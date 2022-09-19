@@ -4087,7 +4087,7 @@
     <string name="backup_and_restore">Copia de seguridad y restauración</string>
     <string name="last_backup">Última copia de seguridad</string>
     <string name="duration_ago">hace %1$s</string>
-    <string name="osmand_cloud">Nube de OsmAnd</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Haz una copia de seguridad y restaura toda la información fácilmente.</string>
     <string name="local_backup">Copia de seguridad local</string>
     <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
@@ -4099,7 +4099,7 @@
     <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
-    <string name="cloud_email_not_registered">Este correo electrónico no está registrado en la nube de OsmAnd</string>
+    <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Este correo electrónico ya se encuentra registrado.</string>
     <string name="resend_verification_code">Reenviar</string>
     <string name="verification_code_missing">No he recibido el código de verificación</string>
@@ -4127,14 +4127,14 @@
     <string name="download_server_version">Descargar versión del servidor</string>
     <string name="shared_string_logout">Cerrar sesión</string>
     <string name="backup_delete_all_data">Borrar todos mis datos</string>
-    <string name="backup_delete_all_data_descr">Serán borrados todos los datos de la nube de OsmAnd. Las versiones locales quedarán intactas.</string>
-    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a la nube de OsmAnd, incluyendo el historial de versiones.
+    <string name="backup_delete_all_data_descr">Serán borrados todos los datos de OsmAnd Cloud. Las versiones locales quedarán intactas.</string>
+    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a OsmAnd Cloud, incluyendo el historial de versiones.
 \n
 \nNo se podrán recuperar los datos borrados.</string>
     <string name="backup_danger_zone">Zona peligrosa</string>
     <string name="delete_all_confirmation">Sí, borrar todo</string>
     <string name="backup_delete_old_data">Quitar versiones antiguas</string>
-    <string name="backup_delete_old_data_descr">Las versiones actuales de los datos serán conservados en la nube de OsmAnd</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de los datos serán conservados en OsmAnd Cloud</string>
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
 \n
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
@@ -4142,14 +4142,14 @@
     <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
     <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
     <string name="backup_restore_data">Restaurar datos</string>
-    <string name="restore_from_osmand_cloud">Restaurar desde la nube de OsmAnd</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Elige qué restaurar.</string>
     <string name="restore_selected_data">Restaurar datos marcados</string>
     <string name="receiving_data_from_server">Recibiendo datos del servidor…</string>
     <string name="restore_complete">Restaurado</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de OsmAnd de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
@@ -4164,7 +4164,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtén la nube de OsmAnd para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
@@ -4187,14 +4187,14 @@
     <string name="complete_purchase">Completar compra</string>
     <string name="regular_price">Precio normal</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">¿Borrar de la nube de OsmAnd todos los tipos de datos obsoletos\?</string>
+    <string name="backup_delete_types_descr">¿Borrar de OsmAnd Cloud todos los tipos de datos obsoletos\?</string>
     <string name="backup_delete_types">Borrar los tipos de datos desactivados</string>
     <string name="shared_string_discussion">Debate</string>
     <string name="shared_string_view_all">Ver todo</string>
     <string name="backup_error_user_is_already_registered">Esta dirección de correo electrónico se usa en otra cuenta</string>
     <string name="backup_error_subscription_was_expired">Suscripción vencida</string>
     <string name="backup_error_subscription_was_used">Suscripción o promoción usada en otra cuenta %1$s</string>
-    <string name="backup_error_size_is_exceeded">Tamaño máximo excedido (%1$s) en la nube de OsmAnd</string>
+    <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido (%1$s)</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
     <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
@@ -4225,7 +4225,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">hace instantes</string>
-    <string name="logout_from_osmand_cloud">Salir de la nube de OsmAnd</string>
+    <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
@@ -4233,14 +4233,14 @@
     <string name="backup_deleting_all_data">Borrando todos los datos…</string>
     <string name="backup_deleted_all_data">Se borraron todos los datos.</string>
     <string name="backup_deleting_all_data_descr">Espera hasta que OsmAnd borre tus datos de la nube. Todos los datos del dispositivo permanecen intactos.</string>
-    <string name="backup_deleted_all_data_descr">Todos tus datos han sido borrados con éxito de la nube de OsmAnd.</string>
+    <string name="backup_deleted_all_data_descr">Todos tus datos han sido borrados con éxito de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
     <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
     <string name="backup_dont_have_any_descr">Programa copias de seguridad automáticas y no pierdas nunca los datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
-    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en la nube de OsmAnd.</string>
+    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
     <string name="backup_restore_now">Restaurar ahora</string>
     <string name="attribute">Atributo</string>
@@ -4761,7 +4761,7 @@
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
-\nAl usar la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+\nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>

@@ -3264,7 +3264,7 @@
     <string name="join_segments">Unisci segmenti</string>
     <string name="add_new_profile_q">Aggiungere il nuovo profilo \'%1$s\'\?</string>
     <string name="save_heading">Salva orientamento</string>
-    <string name="save_heading_descr">Durante la registrazione salva l\'orientamento per ogni punto della traccia.</string>
+    <string name="save_heading_descr">Salva l\'orientamento per ogni punto della traccia durante la registrazione.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Personale</string>
@@ -3281,7 +3281,7 @@
     <string name="select_color">Seleziona il colore</string>
     <string name="edit_profiles_descr">Non puoi cancellare i profili preimpostati di OsmAnd, ma puoi disabilitarli (nello schermo precedente) o spostarli in basso.</string>
     <string name="edit_profiles">Modifica i profili</string>
-    <string name="profile_appearance">Aspetto del profilo</string>
+    <string name="profile_appearance">Aspetto profilo</string>
     <string name="choose_icon_color_name">Icona, colore e nome</string>
     <string name="reorder_profiles">Modifica la lista dei profili</string>
     <string name="selected_profile">Profilo selezionato</string>

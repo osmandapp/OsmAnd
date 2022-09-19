@@ -3289,8 +3289,8 @@
     <string name="poi_scooter_no">Roller: nein</string>
     <string name="poi_truck_yes">Lkw: ja</string>
     <string name="poi_truck_no">Lkw: nein</string>
-    <string name="poi_parking_fee_yes">Parkgebühr: ja</string>
-    <string name="poi_parking_fee_no">Parkgebühr: nein</string>
+    <string name="poi_parking_fee_yes">Ja</string>
+    <string name="poi_parking_fee_no">Nein</string>
     <string name="poi_parking_fee">Parkgebühr</string>
     <string name="poi_amperage">Stromstärke</string>
     <string name="poi_location_overhead">Lage: oben</string>
@@ -4380,4 +4380,6 @@
     <string name="poi_playground_horizontal_bar">Reckstange</string>
     <string name="poi_playground_activitypanel">Aktivitätsaufsteller</string>
     <string name="poi_playground_exercise">Fitnessgerät</string>
+    <string name="poi_access_yes">Zugang ist erlaubt</string>
+    <string name="poi_parking_fee_filter">Parkgebühr</string>
 </resources>

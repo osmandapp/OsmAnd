@@ -3315,8 +3315,8 @@
     <string name="poi_scooter_no">Lambreta: não</string>
     <string name="poi_truck_yes">Camião: sim</string>
     <string name="poi_truck_no">Camião: não</string>
-    <string name="poi_parking_fee_yes">Estacionamento pago: sim</string>
-    <string name="poi_parking_fee_no">Estacionamento pago: não</string>
+    <string name="poi_parking_fee_yes">Sim</string>
+    <string name="poi_parking_fee_no">Não</string>
     <string name="poi_parking_fee">Estacionamento pago</string>
     <string name="poi_amperage">Amperagem</string>
     <string name="poi_charging_station_output">Saída do posto elétrico</string>
@@ -4380,4 +4380,6 @@
     <string name="poi_playground_aerialrotator">Gira-gira aéreo</string>
     <string name="poi_playground_springy">Saltitão</string>
     <string name="poi_playground_splash_pad">Fonte de chapinhar</string>
+    <string name="poi_access_yes">Acesso permitido</string>
+    <string name="poi_parking_fee_filter">Estacionamento pago</string>
 </resources>
