@@ -100,12 +100,12 @@
     <string name="goods_delivery_desc_3">Applies only to delivery trucks of no more than 3.5 tons.</string>
     <string name="goods_delivery_desc_2">Roads closed for goods delivery will be avoided.</string>
     <string name="goods_delivery_desc">Delivery vehicles may be restricted on some roads.</string>
-    <string name="updated_map_time">Updated: %1$s.</string>
+    <string name="updated_map_time">Updated at %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
-    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
-    <string name="next_live_update_time">Next update: in %1$s.</string>
+    <string name="next_live_update_date_and_time">Next update on %1$s at %2$s.</string>
+    <string name="next_live_update_time">Next update at %1$s.</string>
     <string name="live_update_frequency_hour_variant">Map updates are checked hourly.</string>
-    <string name="live_update_frequency_day_variant">Map updates are checked dayly.</string>
+    <string name="live_update_frequency_day_variant">Map updates are checked daily.</string>
     <string name="live_update_frequency_week_variant">Map updates are checked weekly.</string>
     <string name="altitude_correction">Altitude correction</string>
     <string name="no_altitude_data_desc">To receive %1$s data, attach your track to the roads or calculate it online.</string>
