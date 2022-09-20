@@ -187,7 +187,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			// join
 			BaseBottomSheetItem joinSegments = new BottomSheetItemWithDescription.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_join_segments))
-					.setTitle(getString(R.string.plan_route_join_segments))
+					.setTitle(getString(R.string.join_segments))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
 					.setOnClickListener(new View.OnClickListener() {
 						@Override

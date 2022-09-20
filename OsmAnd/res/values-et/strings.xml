@@ -829,7 +829,6 @@
     <string name="shared_string_file_is_saved">%s on salvestatud</string>
     <string name="shared_string_open_track">Ava rada</string>
     <string name="shared_string_track_is_saved">Rada %s on salvestatud</string>
-    <string name="gpx_join_gaps">Ühenda lüngad</string>
     <string name="app_mode_camper">Laagriauto</string>
     <string name="app_mode_campervan">Laagribuss (RV)</string>
     <string name="rendering_attr_showLez_description">Kuva kaardil madalate heitmetega alad. Ei mõjuta teekonda.</string>
@@ -3804,7 +3803,6 @@
     <string name="plan_route_add_new_segment">Lisa uus lõik</string>
     <string name="plan_route_split_after">Tükelda pärast</string>
     <string name="plan_route_split_before">Tükelda enne</string>
-    <string name="plan_route_join_segments">Liida lõigud</string>
     <string name="profile_type_user_string">Kasutajaprofiil</string>
     <string name="profile_type_osmand_string">OsmAnd profiil</string>
     <string name="use_system_screen_timeout_promo">Vaikimisi keelatud: kui esiplaanil töötab OsmAnd, ei aegu ekraan läbi.

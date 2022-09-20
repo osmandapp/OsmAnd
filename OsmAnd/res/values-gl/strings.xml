@@ -3090,7 +3090,6 @@ Lon %2$s</string>
     <string name="shared_string_file_is_saved">%s está gardado</string>
     <string name="shared_string_open_track">Abrir pista</string>
     <string name="shared_string_track_is_saved">A pista %s está gardada</string>
-    <string name="gpx_join_gaps">Xuntar espazos</string>
     <string name="app_mode_camper">Casa móbil (camper)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Amosar zonas de baixas emisións no mapa. Non afecta á navegación.</string>
@@ -3888,7 +3887,6 @@ Lon %2$s</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Alemán casual</string>
     <string name="app_mode_light_aircraft">Avión lixeiro</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir despois</string>
     <string name="plan_route_add_new_segment">Engadir novo segmento</string>

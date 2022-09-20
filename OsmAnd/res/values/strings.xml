@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="ant_read_data">Read data</string>
     <string name="ant_write_to_gpx">Write data to track</string>
     <string name="ant_heart_rate_write_gpx_desc">Write Heart Rate to track</string>
@@ -25,6 +26,23 @@
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
     <string name="antplus_plugin_name">ANT+</string>
     <string name="antplus_plugin_description">ANT+ description</string>
+    <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the location.</string>
+    <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
+    <string name="map_widget_camera_distance_desc">Widget shows distance to earth plane.</string>
+    <string name="map_widget_camera_tilt_desc">Widget shows camera tilt angle in perspective mode. Default no tilt is 90°.</string>
+    <string name="map_widget_target_distance">Target Distance</string>
+    <string name="map_widget_zoom_level">Zoom level</string>
+    <string name="map_widget_camera_distance">Camera Distance</string>
+    <string name="map_widget_camera_tilt">Camera Tilt</string>
+    <string name="developer_widgets">Developer widgets</string>
+    <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
+    <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
+    <string name="map_center_widget">Map center</string>
+    <string name="current_location_widget">Current location</string>
+    <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
+    <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
+    <string name="coordinates_widget_map_center">Coordinates: map center</string>
+    <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
     <string name="tap_on_widget">Tap on widget</string>
@@ -866,7 +884,6 @@
     <string name="plan_route_add_new_segment">Add a new segment</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_split_before">Split before</string>
-    <string name="plan_route_join_segments">Join segments</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
@@ -1584,7 +1601,6 @@
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan (RV)</string>
     <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>

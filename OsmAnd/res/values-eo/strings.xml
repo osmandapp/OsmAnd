@@ -3079,7 +3079,6 @@
     <string name="shared_string_file_is_saved">%s estas konservita</string>
     <string name="shared_string_open_track">Malfermi kurson</string>
     <string name="shared_string_track_is_saved">Kurso %s estas konservita</string>
-    <string name="gpx_join_gaps">Kombini interspacojn</string>
     <string name="app_mode_camper">Kampad‑postveturilo</string>
     <string name="app_mode_campervan">Kampad‑veturilo</string>
     <string name="rendering_attr_showLez_description">Montri zonojn nur por malalte aer‑malpurigantaj veturiloj. Ne influas al difinado de kurso.</string>
@@ -3879,7 +3878,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Germana (ordinara)</string>
     <string name="app_mode_light_aircraft">Malpeza aviadilo</string>
-    <string name="plan_route_join_segments">Kunigi segmentojn</string>
     <string name="plan_route_split_before">Dividi antaŭ</string>
     <string name="plan_route_split_after">Dividi post</string>
     <string name="plan_route_add_new_segment">Aldoni novan segmenton</string>

@@ -2894,7 +2894,6 @@
     <string name="shared_string_file_is_saved">%s är sparat</string>
     <string name="shared_string_open_track">Öppna spår</string>
     <string name="shared_string_track_is_saved">Spår %s är sparat</string>
-    <string name="gpx_join_gaps">Ta bort mellanrum</string>
     <string name="temporary_conditional_routing">Ta tillfälliga begränsningar i beaktande</string>
     <string name="get_discount_title">Få %1$d %2$s på %3$s av.</string>
     <string name="get_discount_first_part">%1$s för de första %2$s</string>
@@ -3015,7 +3014,6 @@
 \nOpenPlaceReviews - Foton av sevärdheter;
 \nMapillary - Bilder på gatunivå;
 \nWeb/Wikimedia - Foton av sevärdheter enligt OpenStreetMap-data.</string>
-    <string name="plan_route_join_segments">Sammanslå segment</string>
     <string name="plan_route_split_before">Dela innan</string>
     <string name="plan_route_split_after">Dela efter</string>
     <string name="plan_route_add_new_segment">Lägg till ett nytt segment</string>

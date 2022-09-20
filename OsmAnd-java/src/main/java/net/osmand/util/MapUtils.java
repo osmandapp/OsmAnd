@@ -37,17 +37,17 @@ public class MapUtils {
 	private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
 
 	/**
-     * This array is a lookup table that translates 6-bit positive integer
-     * index values into their "Base64 Alphabet" equivalents as specified
-     * in Table 1 of RFC 2045.
-     */
-    private static final char[] intToBase64 = {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
-    };
+	 * This array is a lookup table that translates 6-bit positive integer
+	 * index values into their "Base64 Alphabet" equivalents as specified
+	 * in Table 1 of RFC 2045.
+	 */
+	private static final char[] intToBase64 = {
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
+	};
 
 	public static int calculateFromBaseZoomPrecisionXY(int baseZoom, int finalZoom, int xFinal, int yFinal) {
 		int px = xFinal;
@@ -768,7 +768,7 @@ public class MapUtils {
 	}
 
 	public static double getSqrtDistance(int startX, int startY, int endX, int endY) {
-		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
+		return Math.sqrt((double) (endX - startX) * (endX - startX) + (double) (endY - startY) * (endY - startY));
 	}
 
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {

@@ -2917,7 +2917,6 @@
     <string name="show_passed">Keçilmişi göstər</string>
     <string name="keep_passed_markers_descr">Keçilmiş olaraq qeyd edilən, Favoritlər qrupu və ya GPX yol nöqtələri kimi əlavə edilən İşarələr xəritədə qalacaq. Qrup aktiv deyilsə, işarələr xəritədən yox olacaq.</string>
     <string name="third_party_application">Üçüncü tərəf proqramı</string>
-    <string name="plan_route_join_segments">Seqmentləri birləşdir</string>
     <string name="plan_route_open_existing_track">Mövcud izi aç</string>
     <string name="plan_route_exit_dialog_descr">Planlaşdırılmış marşrutdakı bütün dəyişikliklər ləğv edilsin\?</string>
     <string name="plan_route_select_track_file_for_open">Açmaq üçün iz faylı seçin.</string>

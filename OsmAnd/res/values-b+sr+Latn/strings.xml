@@ -3525,7 +3525,6 @@
     <string name="rendering_attr_showLez_description">Prikaži zone niske emisije zagađenja. Ne utiče na rutiranje.</string>
     <string name="app_mode_campervan">Kamp prikolica (RV)</string>
     <string name="app_mode_camper">Kamper</string>
-    <string name="gpx_join_gaps">Spoj razmake</string>
     <string name="shared_string_default">Podrazumevano</string>
     <string name="app_mode_pickup_truck">Kamion dostave</string>
     <string name="app_mode_wagon">Vagon</string>
@@ -3884,7 +3883,6 @@
 \nVeb / Vikimedija - fotografije tačaka od interesa navedene u OpenStreetMap podacima.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Laka letelica</string>
-    <string name="plan_route_join_segments">Spoji segmente</string>
     <string name="plan_route_split_before">Podeli pre</string>
     <string name="plan_route_split_after">Posle podeli</string>
     <string name="plan_route_add_new_segment">Dodajte novi segment</string>

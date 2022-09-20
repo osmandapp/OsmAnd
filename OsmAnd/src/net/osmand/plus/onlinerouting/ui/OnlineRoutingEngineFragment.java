@@ -1,5 +1,9 @@
 package net.osmand.plus.onlinerouting.ui;
 
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+import static net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet.NETWORK_KEY;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.*;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -271,8 +276,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		setApproximateCardTitle();
 		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
 			if (getActivity() != null) {
+				boolean networkApproximateRoute = engine.shouldNetworkApproximateRoute();
 				SelectOnlineApproxProfileBottomSheet.showInstance(getActivity(), this,
-						appMode, approxRouteProfile, approxDerivedProfile, false);
+						appMode, approxRouteProfile, approxDerivedProfile, networkApproximateRoute, false);
 			}
 			return false;
 		});
@@ -288,9 +294,10 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			appModeName = approxDerivedProfile != null ? approxDerivedProfile : approxRouteProfile;
 			appModeName = " (" + appModeName + ")";
 		}
+		appModeName = engine.shouldNetworkApproximateRoute() ? " (" + getString(R.string.network_provider) + ")" : appModeName;
 		String title = getString(R.string.attach_to_the_roads) + appModeName;
 		approximateCard.setHeaderTitle(title);
-		approximateCard.setCheckBox(approxRouteProfile != null);
+		approximateCard.setCheckBox(approxRouteProfile != null || engine.shouldNetworkApproximateRoute());
 	}
 
 	private void setupExternalTimestampsCard() {
@@ -800,6 +807,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onProfileSelected(Bundle args) {
+		boolean isNetwork = args.getBoolean(NETWORK_KEY);
+		engine.put(EngineParameter.NETWORK_APPROXIMATE_ROUTE, String.valueOf(isNetwork));
 		engine.put(EngineParameter.APPROXIMATION_ROUTING_PROFILE, args.getString(PROFILE_KEY_ARG));
 		engine.put(EngineParameter.APPROXIMATION_DERIVED_PROFILE, args.getString(DERIVED_PROFILE_ARG));
 		setApproximateCardTitle();

@@ -59,8 +59,8 @@
     <string name="url_wikipedia_mgrs_format" translatable="false">https://en.wikipedia.org/wiki/Military_Grid_Reference_System</string>
 
     <string name="osmand_poll" translatable="false">https://osmand.net/android-poll.html</string>
-    <string name="osmand_features" translatable="false">https://osmand.net/features</string>
-    <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/features/contour-lines-plugin</string>
+    <string name="osmand_features" translatable="false">https://osmand.net/docs/user/plugins</string>
+    <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="osmand_privacy_policy" translatable="false">https://osmand.net/help-online/privacy-policy</string>
 
 </resources>

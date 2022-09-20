@@ -80,12 +80,12 @@ import java.util.Map;
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
+	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
-	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -790,23 +790,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		int cy = (int) (ratioy * view.getHeight());
 		int cx = (int) (ratiox * view.getWidth());
-		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
-				currentViewport.getCenterPixelY() != cy ||
-				currentViewport.getCenterPixelX() != cx) {
+		boolean updateMapRenderer = false;
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			PointI fixedPixel = mapRenderer.getState().getFixedPixel();
+			updateMapRenderer = fixedPixel.getX() <= 0 || fixedPixel.getY() <= 0;
+		}
+		if (updateMapRenderer || currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
+				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			if (mapRenderer != null) {
+				mapRenderer.setMapTarget(new PointI(cx, cy), mapRenderer.getTarget());
+			}
 			setElevationAngle(elevationAngle);
 			setMapDensityImpl(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
-		}
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
-			float xScale = ratiox * 2f;
-			float yScale = ratioy * 2f;
-			float currXScale = mapRenderer.getViewportXScale();
-			float currYScale = mapRenderer.getViewportYScale();
-			if (currXScale != xScale || currYScale != yScale) {
-				mapRenderer.setViewportXYScale(xScale, yScale);
-			}
 		}
 		if (view instanceof SurfaceView) {
 			SurfaceHolder holder = ((SurfaceView) view).getHolder();
@@ -1135,8 +1133,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				centerX31 = center31.getX();
 				centerY31 = center31.getY();
 			}
-			PointI target31 = mapRenderer.getState().getTarget31();
-			float azimuth = mapRenderer.getState().getAzimuth();
+			PointI target31 = mapRenderer.getTarget();
+			float azimuth = mapRenderer.getAzimuth();
 			int targetX = target31.getX() - centerX31;
 			int targetY = target31.getY() - centerY31;
 			double angleR = Math.toRadians(-azimuth - rotate);
@@ -1188,7 +1186,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapRenderer.getLocationFromScreenPoint(new PointI(centerX, centerY), center31)) {
 				int centerX31After = center31.getX();
 				int centerY31After = center31.getY();
-				PointI target31 = mapRenderer.getState().getTarget31();
+				PointI target31 = mapRenderer.getTarget();
 				int targetX = target31.getX() - (centerX31After - centerX31Before);
 				int targetY = target31.getY() - (centerY31After - centerY31Before);
 				// Shift map
@@ -1282,7 +1280,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI from31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (fromX), (int) (fromY));
 			PointI to31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) (toX), (int) (toY));
 			if (from31 != null && to31 != null) {
-				PointI target31 = mapRenderer.getState().getTarget31();
+				PointI target31 = mapRenderer.getTarget();
 				setTarget31Impl(target31.getX() - (to31.getX() - from31.getX()),
 						target31.getY() - (to31.getY() - from31.getY()));
 			}
