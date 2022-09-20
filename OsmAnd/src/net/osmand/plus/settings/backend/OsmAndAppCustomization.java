@@ -60,7 +60,6 @@ import java.util.Set;
 
 public class OsmAndAppCustomization {
 
-	private static final int INVALID_VALUE = -1;
 	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmAndAppCustomization.class);
@@ -89,8 +88,8 @@ public class OsmAndAppCustomization {
 	private int marginRight;
 	private int marginBottom;
 
-	private int minZoom = INVALID_VALUE;
-	private int maxZoom = INVALID_VALUE;
+	private int minZoom;
+	private int maxZoom;
 
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
@@ -162,8 +161,8 @@ public class OsmAndAppCustomization {
 		marginTop = 0;
 		marginRight = 0;
 		marginBottom = 0;
-		maxZoom = INVALID_VALUE;
-		minZoom = INVALID_VALUE;
+		maxZoom = 0;
+		minZoom = 0;
 		restoreOsmandSettings();
 
 		featuresEnabledIds.clear();

@@ -9,10 +9,9 @@ public class ZoomLimitsParams extends AidlParams {
 
 	public static final String MIN_ZOOM_KEY = "minZoom";
 	public static final String MAX_ZOOM_KEY = "maxZoom";
-	public static final int INVALID_VALUE = -1;
 
-	private int minZoom = INVALID_VALUE;
-	private int maxZoom = INVALID_VALUE;
+	private int minZoom;
+	private int maxZoom;
 
 	public ZoomLimitsParams(int minZoom, int maxZoom) {
 		this.minZoom = minZoom;
@@ -51,7 +50,7 @@ public class ZoomLimitsParams extends AidlParams {
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
-		minZoom = bundle.getInt(MIN_ZOOM_KEY, INVALID_VALUE);
-		maxZoom = bundle.getInt(MAX_ZOOM_KEY, INVALID_VALUE);
+		minZoom = bundle.getInt(MIN_ZOOM_KEY);
+		maxZoom = bundle.getInt(MAX_ZOOM_KEY);
 	}
 }
