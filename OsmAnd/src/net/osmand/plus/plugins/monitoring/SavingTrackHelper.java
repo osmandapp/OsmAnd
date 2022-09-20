@@ -1,4 +1,4 @@
-package net.osmand.plus.track.helpers;
+package net.osmand.plus.plugins.monitoring;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,10 +21,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
@@ -45,54 +45,56 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private static final Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
-	public static final String DATABASE_NAME = "tracks";
-	public static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 8;
+	private static final String DATABASE_NAME = "tracks";
 
-	public static final String TRACK_NAME = "track";
-	public static final String TRACK_COL_DATE = "date";
-	public static final String TRACK_COL_LAT = "lat";
-	public static final String TRACK_COL_LON = "lon";
-	public static final String TRACK_COL_ALTITUDE = "altitude";
-	public static final String TRACK_COL_SPEED = "speed";
-	public static final String TRACK_COL_HDOP = "hdop";
-	public static final String TRACK_COL_HEADING = "heading";
+	private static final String TRACK_NAME = "track";
+	private static final String TRACK_COL_DATE = "date";
+	private static final String TRACK_COL_LAT = "lat";
+	private static final String TRACK_COL_LON = "lon";
+	private static final String TRACK_COL_ALTITUDE = "altitude";
+	private static final String TRACK_COL_SPEED = "speed";
+	private static final String TRACK_COL_HDOP = "hdop";
+	private static final String TRACK_COL_HEADING = "heading";
 
-	public static final String POINT_NAME = "point";
-	public static final String POINT_COL_DATE = "date";
-	public static final String POINT_COL_LAT = "lat";
-	public static final String POINT_COL_LON = "lon";
-	public static final String POINT_COL_NAME = "pname";
-	public static final String POINT_COL_CATEGORY = "category";
-	public static final String POINT_COL_DESCRIPTION = "description";
-	public static final String POINT_COL_COLOR = "color";
-	public static final String POINT_COL_ICON = "icon";
-	public static final String POINT_COL_BACKGROUND = "background";
+	private static final String POINT_NAME = "point";
+	private static final String POINT_COL_DATE = "date";
+	private static final String POINT_COL_LAT = "lat";
+	private static final String POINT_COL_LON = "lon";
+	private static final String POINT_COL_NAME = "pname";
+	private static final String POINT_COL_CATEGORY = "category";
+	private static final String POINT_COL_DESCRIPTION = "description";
+	private static final String POINT_COL_COLOR = "color";
+	private static final String POINT_COL_ICON = "icon";
+	private static final String POINT_COL_BACKGROUND = "background";
 
-	public static final float NO_HEADING = -1.0f;
+	private static final float NO_HEADING = -1.0f;
 
-	private long lastTimeUpdated;
-	private final OsmandApplication ctx;
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
+
+	private final SelectedGpxFile currentTrack;
 
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
-	private final SelectedGpxFile currentTrack;
 	private int points;
 	private int trkPoints;
+
+	private long lastTimeUpdated;
 	private long lastTimeFileSaved;
 
 	private ApplicationMode lastRoutingApplicationMode;
 
-	public SavingTrackHelper(OsmandApplication ctx) {
-		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
-		this.ctx = ctx;
-		this.settings = ctx.getSettings();
+	public SavingTrackHelper(@NonNull OsmandApplication app) {
+		super(app, DATABASE_NAME, null, DATABASE_VERSION);
+		this.app = app;
+		this.settings = app.getSettings();
 		this.currentTrack = new SelectedGpxFile();
 		this.currentTrack.setShowCurrentTrack(true);
-		GPXFile gx = new GPXFile(Version.getFullVersion(ctx));
-		gx.showCurrentTrack = true;
-		this.currentTrack.setGpxFile(gx, ctx);
+		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		gpxFile.showCurrentTrack = true;
+		currentTrack.setGpxFile(gpxFile, app);
 		prepareCurrentTrackForRecording();
 	}
 
@@ -217,7 +219,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				if (!gpx.isEmpty()) {
 					WptPt pt = gpx.findPointToShow();
 					String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
-					Integer trackStorageDirectory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
+					Integer trackStorageDirectory = app.getSettings().TRACK_STORAGE_DIRECTORY.get();
 					if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
 						SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
 //							if (trackStorageDirectory == OsmandSettings.DAILY_DIRECTORY) {
@@ -246,7 +248,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
 				GpxDataItem item = new GpxDataItem(fout, analysis);
-				ctx.getGpxDbHelper().add(item);
+				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
 			}
 			clearRecordedData(warnings.isEmpty());
@@ -274,7 +276,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		points = 0;
 		duration = 0;
 		trkPoints = 0;
-		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
 		currentTrack.getModifiableGpxFile().modifiedTime = currentTimeMillis;
@@ -327,10 +329,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				if (dataTracks.containsKey(date)) {
 					gpx = dataTracks.get(date);
 				} else {
-					gpx = new GPXFile(Version.getFullVersion(ctx));
+					gpx = new GPXFile(Version.getFullVersion(app));
 					dataTracks.put(date, gpx);
 				}
-				ctx.getSelectedGpxHelper().addPoint(pt, gpx);
+				app.getSelectedGpxHelper().addPoint(pt, gpx);
 
 			} while (query.moveToNext());
 		}
@@ -384,7 +386,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						GPXFile gpx = dataTracks.get(date);
 						gpx.tracks.add(track);
 					} else {
-						GPXFile file = new GPXFile(Version.getFullVersion(ctx));
+						GPXFile file = new GPXFile(Version.getFullVersion(app));
 						file.tracks.add(track);
 						dataTracks.put(date, file);
 					}
@@ -436,7 +438,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		} else {
 			heading = NO_HEADING;
 		}
-		if (ctx.getRoutingHelper().isFollowingMode()) {
+		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
 			lastRoutingApplicationMode = null;
@@ -467,7 +469,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (record) {
 			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
 					location.getAccuracy(), locationTime, heading);
-			ctx.getNotificationHelper().refreshNotification(NotificationType.GPX);
+			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
 		}
 	}
 
@@ -513,7 +515,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lt.points.add(pt);
 		}
 		if (segmentAdded) {
-			currentTrack.processPoints(ctx);
+			currentTrack.processPoints(app);
 		}
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
@@ -534,7 +536,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		pt.setIconName(iconName);
 		pt.setBackgroundType(backgroundName);
-		ctx.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		currentTrack.getModifiableGpxFile().pointsModifiedTime = time;
 		points++;
@@ -633,7 +635,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void deletePointData(WptPt pt) {
-		ctx.getSelectedGpxHelper().removePoint(pt, currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().removePoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
 		currentTrack.getModifiableGpxFile().pointsModifiedTime = System.currentTimeMillis();
 		points--;
@@ -703,10 +705,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		Map<String, GPXFile> files = collectRecordedData();
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		for (Map.Entry<String, GPXFile> entry : files.entrySet()) {
-			ctx.getSelectedGpxHelper().addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
+			app.getSelectedGpxHelper().addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
 			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
 		}
-		currentTrack.processPoints(ctx);
+		currentTrack.processPoints(app);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
 		distance = analysis.totalDistance;
@@ -731,7 +733,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	private boolean isRecordingAutomatically() {
-		return settings.SAVE_TRACK_TO_GPX.get() && (ctx.getRoutingHelper().isFollowingMode()
+		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
 				|| lastRoutingApplicationMode == settings.getApplicationMode()
 				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get());
 	}
@@ -771,26 +773,5 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	@NonNull
 	public SelectedGpxFile getCurrentTrack() {
 		return currentTrack;
-	}
-
-	public static class SaveGpxResult {
-
-		private final List<String> warnings;
-		private final Map<String, GPXFile> gpxFilesByName;
-
-		public SaveGpxResult(@NonNull List<String> warnings, @NonNull Map<String, GPXFile> gpxFilesByName) {
-			this.warnings = warnings;
-			this.gpxFilesByName = gpxFilesByName;
-		}
-
-		@NonNull
-		public List<String> getWarnings() {
-			return warnings;
-		}
-
-		@NonNull
-		public Map<String, GPXFile> getGpxFilesByName() {
-			return gpxFilesByName;
-		}
 	}
 }
