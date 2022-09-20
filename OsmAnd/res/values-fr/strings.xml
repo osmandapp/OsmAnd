@@ -4788,4 +4788,12 @@
     <string name="click_on_widget">Cliquez sur le widget</string>
     <string name="shared_string_shows">Afficher</string>
     <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
+    <string name="quick_action_current_location_widget_descr">Bouton pour afficher ou masquer le gadget Position actuelle.</string>
+    <string name="current_location_widget">Position actuelle</string>
+    <string name="map_center_widget">Centre de la carte</string>
+    <string name="coordinates_widget_current_location_desc">Gadget affichant les coordonnées de la position actuelle</string>
+    <string name="coordinates_widget_map_center">Coordonnées : centre de la carte</string>
+    <string name="coordinates_widget_current_location">Coordonnées : position actuelle</string>
+    <string name="coordinates_widget_map_center_desc">Gadget affichant les coordonnées du centre de la carte</string>
+    <string name="quick_action_map_center_widget_descr">Bouton pour afficher ou masquer le gadget Centre de la carte.</string>
 </resources>
