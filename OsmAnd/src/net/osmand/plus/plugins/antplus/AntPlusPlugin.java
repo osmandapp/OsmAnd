@@ -76,14 +76,14 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 		super.mapActivityCreate(activity);
 		this.mapActivity = activity;
-		devices.setMapActivity(activity);
+		devices.setActivity(activity);
 		devices.connectAntDevices(activity);
 	}
 
 	@Override
 	public void mapActivityDestroy(@NonNull MapActivity activity) {
 		devices.disconnectAntDevices();
-		devices.setMapActivity(null);
+		devices.setActivity(null);
 		this.mapActivity = null;
 		super.mapActivityDestroy(activity);
 	}
@@ -117,11 +117,11 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public CommonPreference<Boolean> registerBooleanPref(@NonNull String prefId, boolean defValue) {
-		return super.registerBooleanPreference(prefId, defValue).makeGlobal();
+		return registerBooleanPreference(prefId, defValue).makeGlobal().makeShared();
 	}
 
 	@Override
 	public CommonPreference<Integer> registerIntPref(@NonNull String prefId, int defValue) {
-		return super.registerIntPreference(prefId, defValue).makeGlobal();
+		return registerIntPreference(prefId, defValue).makeGlobal().makeShared();
 	}
 }

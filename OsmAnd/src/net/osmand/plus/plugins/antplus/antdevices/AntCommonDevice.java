@@ -21,8 +21,8 @@ import java.util.List;
 
 public abstract class AntCommonDevice<T extends AntPluginPcc> {
 
-	protected T pcc = null;
-	protected PccReleaseHandle<T> releaseHandle = null;
+	protected T pcc;
+	protected PccReleaseHandle<T> releaseHandle;
 
 	protected int antDeviceNumber = -1;
 	protected AntDeviceConnectionState state = AntDeviceConnectionState.DISCONNECTED;
@@ -45,7 +45,7 @@ public abstract class AntCommonDevice<T extends AntPluginPcc> {
 				if (newDeviceState == DeviceState.DEAD || newDeviceState == DeviceState.CLOSED) {
 					state = AntDeviceConnectionState.DISCONNECTED;
 					for (AntDeviceListener listener : listeners) {
-						listener.onAntDeviceDisconnect(AntCommonDevice.this);
+						listener.onAntDeviceDisconnect(this);
 					}
 				}
 			};

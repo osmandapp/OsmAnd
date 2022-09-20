@@ -13,13 +13,18 @@ import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.antplus.devices.CommonDevice;
-import net.osmand.plus.plugins.antplus.devices.CommonDevice.DeviceListener;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.plugins.antplus.antdevices.AntCommonDevice;
 import net.osmand.plus.plugins.antplus.antdevices.AntCommonDevice.AntDeviceListener;
 import net.osmand.plus.plugins.antplus.antdevices.AntDeviceConnectionResult;
+import net.osmand.plus.plugins.antplus.devices.BikeCadenceDevice;
+import net.osmand.plus.plugins.antplus.devices.BikePowerDevice;
+import net.osmand.plus.plugins.antplus.devices.BikeSpeedAndDistanceDevice;
+import net.osmand.plus.plugins.antplus.devices.CommonDevice;
+import net.osmand.plus.plugins.antplus.devices.CommonDevice.DeviceListener;
 import net.osmand.plus.plugins.antplus.devices.HeartRateDevice;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -32,23 +37,26 @@ public class Devices implements AntDeviceListener, DeviceListener {
 	private static final Log LOG = PlatformUtil.getLog(Devices.class);
 
 	private final OsmandApplication app;
-	private MapActivity mapActivity;
-	private boolean installPluginAsked = false;
-
 	private final List<CommonDevice<?>> devices = new ArrayList<>();
 
-	Devices(@NonNull OsmandApplication app, @NonNull AntPlusPlugin antPlugin) {
+	private Activity activity;
+	private boolean installPluginAsked;
+
+	Devices(@NonNull OsmandApplication app, @NonNull AntPlusPlugin plugin) {
 		this.app = app;
 
-		devices.add(new HeartRateDevice(antPlugin));
+		devices.add(new HeartRateDevice(plugin));
+		devices.add(new BikePowerDevice(plugin));
+		devices.add(new BikeCadenceDevice(plugin));
+		devices.add(new BikeSpeedAndDistanceDevice(plugin));
 
 		for (CommonDevice<?> device : devices) {
 			device.addListener(this);
 		}
 	}
 
-	void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	void setActivity(@Nullable Activity activity) {
+		this.activity = activity;
 	}
 
 	void connectAntDevices(@Nullable Activity activity) {
@@ -133,25 +141,21 @@ public class Devices implements AntDeviceListener, DeviceListener {
 	}
 
 	void askPluginInstall() {
-		if (mapActivity == null || installPluginAsked) {
+		if (activity == null || installPluginAsked) {
 			return;
 		}
-		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mapActivity);
-		dialogBuilder.setTitle("Missing Dependency");
-		dialogBuilder.setMessage("The required service\n\"" + AntPlusHeartRatePcc.getMissingDependencyName() + "\"\n was not found. " +
-				"You need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. " +
-				"Do you want to launch the Play Store to get it?");
-		dialogBuilder.setCancelable(true);
-		dialogBuilder.setPositiveButton("Go to Store", (dialog, which) -> {
-			Intent startStore = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="
-					+ AntPluginPcc.getMissingDependencyPackageName()));
-			startStore.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			mapActivity.startActivity(startStore);
-		});
-		dialogBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
 
-		final AlertDialog waitDialog = dialogBuilder.create();
-		waitDialog.show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(R.string.ant_missing_dependency);
+		builder.setMessage(app.getString(R.string.ant_missing_dependency_descr, AntPlusHeartRatePcc.getMissingDependencyName()));
+		builder.setCancelable(true);
+		builder.setPositiveButton(R.string.ant_go_to_store, (dialog, which) -> {
+			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, AntPluginPcc.getMissingDependencyPackageName()));
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			AndroidUtils.startActivityIfSafe(activity, intent);
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, (dialog, which) -> dialog.dismiss());
+		builder.create().show();
 		installPluginAsked = true;
 	}
 
@@ -166,7 +170,7 @@ public class Devices implements AntDeviceListener, DeviceListener {
 				LOG.debug("ANT+ " + antDevice.getDeviceName() + " device connected. Device number = " + antDeviceNumber);
 				saveAntDeviceNumber(antDevice, antDeviceNumber);
 				if (device != null && !device.isEnabled()) {
-					updateAntDevices(mapActivity);
+					updateAntDevices(activity);
 				}
 				break;
 			case DEPENDENCY_NOT_INSTALLED:
@@ -175,10 +179,10 @@ public class Devices implements AntDeviceListener, DeviceListener {
 				break;
 			case SEARCH_TIMEOUT:
 				if (device != null && !device.isEnabled()) {
-					updateAntDevices(mapActivity);
+					updateAntDevices(activity);
 				} else {
 					LOG.debug("ANT+ Reconnect " + antDevice.getDeviceName() + " after timeout");
-					connectAntDevice(antDevice, mapActivity);
+					connectAntDevice(antDevice, activity);
 				}
 				break;
 			default:
@@ -193,11 +197,11 @@ public class Devices implements AntDeviceListener, DeviceListener {
 
 	@Override
 	public void onDeviceConnected(@NonNull CommonDevice<?> device) {
-		app.runInUIThread(() -> updateAntDevices(mapActivity));
+		app.runInUIThread(() -> updateAntDevices(activity));
 	}
 
 	@Override
 	public void onDeviceDisconnected(@NonNull CommonDevice<?> device) {
-		app.runInUIThread(() -> updateAntDevices(mapActivity));
+		app.runInUIThread(() -> updateAntDevices(activity));
 	}
 }

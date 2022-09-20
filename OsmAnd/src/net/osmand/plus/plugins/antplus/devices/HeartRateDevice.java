@@ -8,7 +8,7 @@ public class HeartRateDevice extends CommonDevice<AntHeartRateDevice> {
 
 	private static final String HEART_RATE_ENABLED_PREFERENCE_ID = "ant_heart_rate_enabled";
 	private static final String HEART_RATE_ANT_NUMBER_PREFERENCE_ID = "ant_heart_rate_device_number";
-	private static final String HEART_RATE_WRITE_GPX_PREFERENCE_ID = "ant_heart_rate_write_px";
+	private static final String HEART_RATE_WRITE_GPX_PREFERENCE_ID = "ant_heart_rate_write_gpx";
 
 	public HeartRateDevice(@NonNull IPreferenceFactory preferenceFactory) {
 		super(preferenceFactory);
