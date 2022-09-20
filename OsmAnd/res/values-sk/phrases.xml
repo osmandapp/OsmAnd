@@ -2851,8 +2851,8 @@
     <string name="poi_scooter_no">Skúter: nie</string>
     <string name="poi_truck_yes">Nákladné auto: áno</string>
     <string name="poi_truck_no">Nákladné auto: nie</string>
-    <string name="poi_parking_fee_yes">Poplatok za parkovanie: áno</string>
-    <string name="poi_parking_fee_no">Poplatok za parkovanie: nie</string>
+    <string name="poi_parking_fee_yes">Áno</string>
+    <string name="poi_parking_fee_no">Nie</string>
     <string name="poi_parking_fee">Poplatok za parkovanie</string>
     <string name="poi_amperage">Maximálny prúd [A]</string>
     <string name="poi_charging_station_output">Maximálny výkon nabíjacej stanice [kW]</string>
@@ -3159,7 +3159,7 @@
     <string name="poi_hazard_slippery_road">Klzká cesta</string>
     <string name="poi_hazard_flood">Nebezpečenstvo záplav</string>
     <string name="poi_hazard_minefield">Mínové pole</string>
-    <string name="poi_bulk_purchase">Množstevný predaj</string>
+    <string name="poi_bulk_purchase">Množstevný predaj bez obalov</string>
     <string name="poi_substation_type">Typ</string>
     <string name="poi_climbing_orientation_n">Smerovanie steny: S</string>
     <string name="poi_climbing_orientation_ne">Smerovanie steny: SV</string>
@@ -3183,8 +3183,8 @@
     <string name="poi_ruins">Ruiny</string>
     <string name="poi_hill">Pahorok</string>
     <string name="poi_shoe_repair">Oprava obuvi</string>
-    <string name="poi_bulk_purchase_yes">Áno;Nákup podľa váhy</string>
-    <string name="poi_bulk_purchase_only">Výhradne;Výhradne bez obalov</string>
+    <string name="poi_bulk_purchase_yes">Áno;Množstevný predaj bez obalov</string>
+    <string name="poi_bulk_purchase_only">Výhradne;Výhradne množstevný predaj bez obalov</string>
     <string name="poi_books_type">Knihy</string>
     <string name="poi_craft_confectionery">Výroba sladkostí</string>
     <string name="poi_shop_wholesale">Veľkoobchod</string>
