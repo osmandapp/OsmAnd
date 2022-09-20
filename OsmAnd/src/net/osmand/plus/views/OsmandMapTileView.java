@@ -1,7 +1,6 @@
 package net.osmand.plus.views;
 
 
-import static net.osmand.plus.settings.backend.OsmAndAppCustomization.INVALID_VALUE;
 import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
 import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
 
@@ -680,18 +679,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getMaxZoom() {
 		int customizedZoom = application.getAppCustomization().getMaxZoom();
-		if (customizedZoom != INVALID_VALUE) {
-			return customizedZoom;
+		int maxSupportedZoom = mainLayer != null ? mainLayer.getMaximumShownMapZoom() : DEFAULT_MAX_ZOOM;
+		if (customizedZoom > 0) {
+			return Math.min(customizedZoom, maxSupportedZoom);
 		}
-		return mainLayer != null ? mainLayer.getMaximumShownMapZoom() : DEFAULT_MAX_ZOOM;
+		return maxSupportedZoom;
 	}
 
 	public int getMinZoom() {
 		int customizedZoom = application.getAppCustomization().getMinZoom();
-		if (customizedZoom != INVALID_VALUE) {
-			return customizedZoom;
+		int minSupportedZoom = mainLayer != null ? mainLayer.getMinimumShownMapZoom() + 1 : DEFAULT_MIN_ZOOM;
+		if (customizedZoom > 0) {
+			return Math.max(customizedZoom, customizedZoom);
 		}
-		return mainLayer != null ? mainLayer.getMinimumShownMapZoom() + 1 : DEFAULT_MIN_ZOOM;
+		return customizedZoom;
 	}
 
 	public boolean isCarView() {

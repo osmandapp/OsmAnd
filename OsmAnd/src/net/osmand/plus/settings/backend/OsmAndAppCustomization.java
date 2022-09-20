@@ -60,7 +60,7 @@ import java.util.Set;
 
 public class OsmAndAppCustomization {
 
-	public static final int INVALID_VALUE = -1;
+	private static final int INVALID_VALUE = -1;
 	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmAndAppCustomization.class);
