@@ -3231,9 +3231,9 @@
     <string name="poi_socket_cee_red_32a">插座：CEE 紅色 32A</string>
     <string name="poi_socket_cee_red_32a_current">插座：CEE 紅色 32A：電流</string>
     <string name="poi_socket_cee_red_32a_output">插座：CEE 紅色 32A：輸出</string>
-    <string name="poi_socket_cee_red_64a">插座：CEE 紅色 64A</string>
-    <string name="poi_socket_cee_red_64a_current">插座：CEE 紅色 64A：電流</string>
-    <string name="poi_socket_cee_red_64a_output">插座：CEE 紅色 64A：輸出</string>
+    <string name="poi_socket_cee_red_63a">插座：CEE 紅色 63A</string>
+    <string name="poi_socket_cee_red_63a_current">插座：CEE 紅色 63A：電流</string>
+    <string name="poi_socket_cee_red_63a_output">插座：CEE 紅色 63A：輸出</string>
     <string name="poi_socket_cee_red_125a">插座：CEE 紅色 125A</string>
     <string name="poi_socket_cee_red_125a_current">插座：CEE 紅色 125A：電流</string>
     <string name="poi_socket_cee_red_125a_output">插座：CEE 紅色 125A：輸出</string>
@@ -3371,7 +3371,7 @@
     <string name="poi_socket_cee_blue_yes">CEE 藍色</string>
     <string name="poi_socket_cee_red_16a_yes">CEE 紅色 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE 紅色 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE 紅色 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE 紅色 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE 紅色 125A</string>
     <string name="poi_socket_type1_yes">種類 1</string>
     <string name="poi_socket_type1_combo_yes">種類 1 二合一</string>

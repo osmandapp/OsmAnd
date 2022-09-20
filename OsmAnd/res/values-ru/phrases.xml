@@ -3175,9 +3175,9 @@
     <string name="poi_socket_cee_red_32a">Разъём: CEE красный 32A</string>
     <string name="poi_socket_cee_red_32a_current">Разъём: CEE красный 32A: ток</string>
     <string name="poi_socket_cee_red_32a_output">Разъём: CEE красный 32A: мощность</string>
-    <string name="poi_socket_cee_red_64a">Разъём: CEE красный 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Разъём: CEE красный 64A: ток</string>
-    <string name="poi_socket_cee_red_64a_output">Разъём: CEE красный 64A: мощность</string>
+    <string name="poi_socket_cee_red_63a">Разъём: CEE красный 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Разъём: CEE красный 63A: ток</string>
+    <string name="poi_socket_cee_red_63a_output">Разъём: CEE красный 63A: мощность</string>
     <string name="poi_socket_cee_red_125a">Разъём: CEE красный 125A</string>
     <string name="poi_socket_cee_red_125a_current">Разъём: CEE красный 125A: ток</string>
     <string name="poi_socket_cee_red_125a_output">Разъём: CEE красный 125A: мощность</string>
@@ -3728,7 +3728,7 @@
     <string name="poi_covered_booth">Стенд</string>
     <string name="poi_url">URL</string>
     <string name="poi_socket_cee_red_125a_yes">CEE красный 125A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE красный 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE красный 63A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE красный 32A</string>
     <string name="poi_socket_cee_red_16a_yes">CEE красный 16A</string>
     <string name="poi_socket_cee_blue_yes">CEE синий</string>

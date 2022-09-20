@@ -3271,9 +3271,9 @@
     <string name="poi_socket_cee_red_32a">Tomada: CEE vermelha 32A</string>
     <string name="poi_socket_cee_red_32a_current">Tomada: CEE vermelha 32A: corrente</string>
     <string name="poi_socket_cee_red_32a_output">Tomada: CEE vermelha 32A: saída</string>
-    <string name="poi_socket_cee_red_64a">Tomada: CEE vermelha 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Tomada: CEE vermelha 64A: corrente</string>
-    <string name="poi_socket_cee_red_64a_output">Tomada: CEE vermelha 64A: saída</string>
+    <string name="poi_socket_cee_red_63a">Tomada: CEE vermelha 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Tomada: CEE vermelha 63A: corrente</string>
+    <string name="poi_socket_cee_red_63a_output">Tomada: CEE vermelha 63A: saída</string>
     <string name="poi_socket_cee_red_125a">Tomada: CEE vermelha 125A</string>
     <string name="poi_socket_cee_red_125a_current">Tomada: CEE vermelha 125A: corrente</string>
     <string name="poi_socket_cee_red_125a_output">Tomada: CEE vermelha 125A: saída</string>
@@ -3407,7 +3407,7 @@
     <string name="poi_climbing_multipitch_no">Rotas multi-pitch: não</string>
     <string name="poi_socket_cee_red_16a_yes">CEE vermelha 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE vermelha 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE vermelha 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE vermelha 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE vermelha 125A</string>
     <string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
     <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
