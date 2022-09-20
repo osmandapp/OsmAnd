@@ -11,14 +11,14 @@
 	Thx - Hardy
 -->
 
-    <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the location.</string>
+    <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the target location.</string>
     <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
-    <string name="map_widget_camera_distance_desc">Widget shows distance to earth plane.</string>
-    <string name="map_widget_camera_tilt_desc">Widget shows camera tilt angle in perspective mode. Default no tilt is 90°.</string>
-    <string name="map_widget_target_distance">Target Distance</string>
+    <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>
+    <string name="map_widget_camera_tilt_desc">Widget shows the camera tilt angle in perspective mode. Default is 90° (no tilt).</string>
+    <string name="map_widget_target_distance">Target distance</string>
     <string name="map_widget_zoom_level">Zoom level</string>
-    <string name="map_widget_camera_distance">Camera Distance</string>
-    <string name="map_widget_camera_tilt">Camera Tilt</string>
+    <string name="map_widget_camera_distance">Camera elevation</string>
+    <string name="map_widget_camera_tilt">Camera tilt</string>
     <string name="developer_widgets">Developer widgets</string>
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
