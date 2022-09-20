@@ -496,7 +496,7 @@
     <string name="local_openstreetmap_settings_descr">Mostrar e gerir POIs/notas do OSM guardados localmente.</string>
     <string name="live_monitoring_interval_descr">Especifique o intervalo de rastreamento online.</string>
     <string name="live_monitoring_interval">Intervalo de rastreamento online</string>
-    <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}.</string>
+    <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Endereço web de rastreamento online</string>
     <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \"Gravar viagem\" nas configurações.</string>
     <string name="show_current_gpx_title">Mostrar rota atual</string>
@@ -1629,7 +1629,7 @@
     <string name="no_map_markers_found">Adicione os marcadores no mapa</string>
     <string name="no_waypoints_found">Não há pontos de rota</string>
     <string name="report">Relatório</string>
-    <string name="map_widget_bearing">Rumo relativo</string>
+    <string name="map_widget_bearing">Direção relativa</string>
     <string name="access_disable_offroute_recalc">Não recalcular a rota quando estiver fora do percurso</string>
     <string name="access_disable_offroute_recalc_descr">Não tornar a calcular a rota depois de se desviar do trajeto desta.</string>
     <string name="access_disable_wrong_direction_recalc">Não recalcular a rota quando estiver na direção oposta</string>
@@ -1704,7 +1704,7 @@
     <string name="use_osm_live_routing_description">Ativar a navegação para alterações do OsmAnd Live.</string>
     <string name="use_osm_live_routing">Navegação OsmAnd Live</string>
     <string name="access_no_destination">Complemento de acessibilidade: destino não definido</string>
-    <string name="map_widget_magnetic_bearing">Rumo magnético</string>
+    <string name="map_widget_magnetic_bearing">Direção magnética</string>
     <string name="access_autoannounce_period">Período do aviso por voz automático</string>
     <string name="access_tree_list">Lista ramificada</string>
     <string name="free_downloads_used_description">Mostra a quantidade de descarregamentos gratuitos restantes.</string>
@@ -3680,7 +3680,7 @@
     <string name="routing_attr_length_name">Limite de comprimento</string>
     <string name="speed_camera_pois">Radares de velocidade</string>
     <string name="shared_string_resume">Retomar</string>
-    <string name="shared_string_bearing">Rumo</string>
+    <string name="shared_string_bearing">Direção</string>
     <string name="set_working_days_to_continue">Defina dias úteis para continuar</string>
     <string name="route_between_points">Rota entre pontos</string>
     <string name="plan_a_route">Planear uma rota</string>
@@ -4617,19 +4617,19 @@
     <string name="altitude_widget_desc">Mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
     <string name="max_speed_widget_desc">Mostra a velocidade máxima permitida na estrada em que se encontra.</string>
     <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
-    <string name="route_maneuvers_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
+    <string name="route_maneuvers_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, direção, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
     <string name="routing_attr_avoid_4wd_only_description">Evitar estradas adequadas apenas para viaturas todo-o-terreno com tração às 4 rodas</string>
     <string name="bearing_secondary_desc">Pode mudar o formato ou os dados mostrados em: %1$s – %2$s – %3$s.</string>
-    <string name="widget_secondary_desc_part_of">Parte do complemento %1$s.</string>
+    <string name="widget_secondary_desc_part_of">Disponibilizado pelo complemento \"%1$s\".</string>
     <string name="parking_widget_desc">Widget que mostra a distância do centro do seu ecrã ao local de estacionamento.</string>
     <string name="mapillary_widget_desc">Widget que fornece um acesso rápido à aplicação do Mapillary para tirar fotografias ao nível da rua.</string>
     <string name="current_speed_widget_desc">Mostra a velocidade atual que o seu dispositivo se desloca detetada pelo sensor de GPS.</string>
     <string name="magnetic_bearing_widget_desc">Ângulo entre o Norte magnético e o ponto alvo observado na sua localização.</string>
     <string name="time_to_go_desc">Tempo em minutos ou horas necessárias para chegar ao seu destino.</string>
     <string name="coordinates_widget_desc">Mostra as coordenadas geográficas da geolocalização atual.</string>
-    <string name="street_name_widget_desc">O widget do nome da rua mostra o nome da rua atual com uma seta de direção em frente ou então o nome da rua seguinte com a manobra que tem de ser feita para essa rua.</string>
+    <string name="street_name_widget_desc">Mostra o nome da rua atual com uma seta de direção em frente ou então o nome da rua seguinte com a manobra que tem de ser feita para essa rua.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">Widget que permite um acesso rápido para iniciar/parar uma gravação (áudio, vídeo ou fotografia).</string>
+    <string name="audio_video_notes_desc">Permite um acesso rápido para iniciar/parar uma gravação (áudio, vídeo ou fotografia).</string>
     <string name="navigation_points">Pontos de navegação</string>
     <string name="route_maneuvers">Manobras de rota</string>
     <string name="get_altitude_information">Obter informação sobre a altitude</string>
@@ -4639,17 +4639,17 @@
     <string name="get_altitude_data">Obter dados de altitude</string>
     <string name="calculate_altitude">Calcular a altitude</string>
     <string name="no_altitude_data">Sem dados de altitude</string>
-    <string name="bearing_desc">O widget de rumo mostra a direção absoluta ou relativa em relação a um alvo em unidades angulares (180 graus, 360 graus, milliradianos).</string>
+    <string name="bearing_desc">Mostra a direção absoluta ou relativa em relação a um alvo em unidades angulares (180 graus, 360 graus, milliradianos).</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar estradas para todo-o-terreno 4x4</string>
     <string name="coordinates_widget_secondary_desc">O formato de coordenadas pode ser alterado em %1$s – %2$s – %3$s.</string>
     <string name="elevation_profile_widget_desc">O widget mostra o perfil da elevação e o declive da rota atual.</string>
     <string name="av_notes_choose_action_widget_desc">Escolha a ação.</string>
     <string name="gps_info_widget_desc">Mostra o número de satélites que o seu dispositivo detetou e está a usar nesse momento.</string>
-    <string name="map_markers_bar_widget_desc">No widget da barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores no widget.</string>
-    <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, rumo, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
+    <string name="map_markers_bar_widget_desc">Na barra superior, pode ver a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores.</string>
+    <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para mostrar informação como distância, hora de chegada ou tempo que falta para chegar ao destino, viragens seguintes, direção, nome da rua atual, informação das vias de trânsito, velocidade máxima, alertas de aproximação, POIs, pontos de passagem.</string>
     <string name="shared_string_speed">Velocidade</string>
     <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
-    <string name="lanes_widgets_desc">O widget das vias de trânsito mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota ativa.</string>
+    <string name="lanes_widgets_desc">Mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota ativa.</string>
     <string name="compass_on_circles">Bússola em círculos</string>
     <string name="distance_circles">Círculos-distância</string>
     <string name="circle_settings">Configurações dos círculos</string>
@@ -4670,7 +4670,7 @@
     <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sem restrições)</string>
     <string name="routing_attr_avoid_fords_description">Evitar vaus (passagens em riachos baixos)</string>
-    <string name="map_widget_true_bearing">Rumo verdadeiro</string>
+    <string name="map_widget_true_bearing">Direção verdadeira</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
     <string name="explore_plans">Explorar planos</string>
@@ -4723,20 +4723,20 @@
     <string name="lang_ckb">Curdo central</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa serão feitas diariamente.</string>
     <string name="routing_attr_motor_type_name">Motor do veículo</string>
-    <string name="accessibility_2d_view_off">Vista 2.5D desligada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5D ligada</string>
-    <string name="download_complete">Descarregar concluído</string>
+    <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
+    <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
+    <string name="download_complete">Descarregamento concluído</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite começar a gravar um vídeo.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
     <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas da viagem atual gravada.</string>
     <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atual gravada.</string>
     <string name="trip_recording_duration_widget_desc">Mostra o tempo de duração da viagem atualmente gravada.</string>
     <string name="trip_recording_distance_widget_desc">Mostra a distância da viagem atualmente gravada.</string>
-    <string name="time_to_destination_widget_desc">O widget mostra \"hora de chegada\" ou \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
-    <string name="time_to_intermediate_widget_desc">O widget mostra o \"tempo de chegada\" ou \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
-    <string name="distance_to_destination_widget_desc">O widget mostra a distância que resta até ao último ponto de destino.</string>
-    <string name="second_next_turn_widget_desc">O widget mostra informação sobre a sua segunda curva seguinte que é ativada se a curva estiver a aproximar-se da distância.</string>
-    <string name="next_turn_widget_desc">O widget mostra informação sobre a próxima curva com uma imagem da manobra e distância até ela.</string>
+    <string name="time_to_destination_widget_desc">Mostra a \"hora de chegada\" ou o \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
+    <string name="time_to_intermediate_widget_desc">Mostra o \"tempo de chegada\" ou o \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
+    <string name="distance_to_destination_widget_desc">Mostra a distância restante até ao último ponto de destino.</string>
+    <string name="second_next_turn_widget_desc">Mostra informação sobre a segunda curva a fazer que é ativada se a curva estiver dentro da distância de aproximação.</string>
+    <string name="next_turn_widget_desc">Mostra informação sobre a próxima curva a fazer com uma imagem da manobra e distância até ela.</string>
     <string name="compass_desc">Mostra a direção para norte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de cores das curvas de nível de profundidade</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das curvas de nível de profundidade</string>
@@ -4748,7 +4748,7 @@
     <string name="auto_backup_preference_desc">Por predefinição, o Android guarda cópias de segurança dos favoritos, tokens de mapas e configurações do OsmAnd para os restaurar noutros dispositivos ou após reinstalação. Esta cópia de segurança é limitada a 25 MB.
 \nAo utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
     <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma fotografia.</string>
-    <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até ao primeiro ponto intermédio. Uma vez passados os pontos intermédios, a distância será atualizada para o próximo ponto intermédio.</string>
+    <string name="distance_to_intermediate_widget_desc">Mostra a distância restante até ao primeiro ponto intermédio. Uma vez passados os pontos intermédios, a distância será atualizada para o próximo ponto intermédio.</string>
     <string name="widget_with_dot">Widget.</string>
     <string name="relative_bearing_widget_desc">Mostra o ângulo entre a direção do seu movimento para a frente e o ponto alvo.</string>
     <string name="second_marker_widget_desc">Pode configurar o widget para mostrar a distância ou hora estimada de chegada deixada para o segundo marcador de mapa.</string>
@@ -4761,7 +4761,7 @@
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
-    <string name="duplacate_widget_added_snackbar">Um widget em duplicado está a ser acrescentado à lista.</string>
+    <string name="duplacate_widget_added_snackbar">Está a ser acrescentado à lista um widget duplicado.</string>
     <string name="auto_25_chars_route_tl_kr">Vire à esquerda e mantenha-se na direita</string>
     <string name="auto_25_chars_route_tr_kl">Vire à direita e mantenha-se na esquerda</string>
     <string name="auto_25_chars_route_tr_kr">Vire à direita e mantenha-se na direita</string>
@@ -4796,4 +4796,12 @@
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
     <string name="map_markers_desc">Mostra a distância ou hora prevista de chegada (ETA) para os dois primeiros marcadores na lista de marcadores do mapa.</string>
+    <string name="quick_action_current_location_widget_descr">Um alternador para mostrar ou esconder o widget de localização atual no mapa.</string>
+    <string name="map_center_widget">Centro do mapa</string>
+    <string name="coordinates_widget_map_center_desc">Mostra as coordenadas geográficas do centro do mapa atual</string>
+    <string name="coordinates_widget_current_location_desc">Mostra as coordenadas geográficas da geolocalização atual</string>
+    <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
+    <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
+    <string name="current_location_widget">Localização atual</string>
+    <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
 </resources>
