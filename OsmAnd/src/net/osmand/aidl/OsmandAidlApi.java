@@ -421,6 +421,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean setZoomLimits(int minZoom, int maxZoom) {
+		app.getAppCustomization().setZoomLimits(minZoom, maxZoom);
+		return true;
+	}
+
 	private void registerAddContextMenuButtonsReceiver(@NonNull MapActivity mapActivity) {
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {

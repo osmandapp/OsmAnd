@@ -1,6 +1,10 @@
 package net.osmand.plus.views;
 
 
+import static net.osmand.plus.settings.backend.OsmAndAppCustomization.INVALID_VALUE;
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -675,17 +679,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public int getMaxZoom() {
-		if (mainLayer != null) {
-			return mainLayer.getMaximumShownMapZoom();
+		int customizedZoom = application.getAppCustomization().getMaxZoom();
+		if (customizedZoom != INVALID_VALUE) {
+			return customizedZoom;
 		}
-		return BaseMapLayer.DEFAULT_MAX_ZOOM;
+		return mainLayer != null ? mainLayer.getMaximumShownMapZoom() : DEFAULT_MAX_ZOOM;
 	}
 
 	public int getMinZoom() {
-		if (mainLayer != null) {
-			return mainLayer.getMinimumShownMapZoom() + 1;
+		int customizedZoom = application.getAppCustomization().getMinZoom();
+		if (customizedZoom != INVALID_VALUE) {
+			return customizedZoom;
 		}
-		return BaseMapLayer.DEFAULT_MIN_ZOOM;
+		return mainLayer != null ? mainLayer.getMinimumShownMapZoom() + 1 : DEFAULT_MIN_ZOOM;
 	}
 
 	public boolean isCarView() {
@@ -1212,7 +1218,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public float getMinAllowedElevationAngle() {
 		if (true) {
-		   return 10;
+			return 10;
 		}
 		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
 		if (verticalTilesCount < 8) {
