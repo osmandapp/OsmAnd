@@ -4784,4 +4784,12 @@
 \nZ dvema prstoma tapni na zemljevid, za ogled razdalje med kliknjenima točkama</string>
     <string name="map_marker_interval_dialog_desc">Določi časovni interval, v katerem se bo merila povprečna hitrost za izračun predvidenega časa prihoda.</string>
     <string name="map_markers_desc">Gradnik prikazuje razdaljo ali predvideni čas prihoda (ETA) za prvi dve oznaki na seznamu oznak na zemljevidu.</string>
+    <string name="quick_action_map_center_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Središče zemljevida na zemljevidu.</string>
+    <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Trenutna lokacija na zemljevidu.</string>
+    <string name="map_center_widget">Središče zemljevida</string>
+    <string name="current_location_widget">Trenutna lokacija</string>
+    <string name="coordinates_widget_map_center_desc">Gradnik prikazuje geografske koordinate trenutnega središča zemljevida</string>
+    <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
+    <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
+    <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
 </resources>
