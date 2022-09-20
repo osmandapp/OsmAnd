@@ -43,6 +43,8 @@ public class AnimateDraggingMapThread {
 	private static final int DEFAULT_SLEEP_TO_REDRAW = 15;
 	private static final float ROTATION_ANIMATION_TIME = 250f;
 	private static final float ROTATION_MOVE_ANIMATION_TIME = 500f;
+	private static final float SKIP_ANIMATION_TIMEOUT = 10000f;
+	public static final float SKIP_ANIMATION_DP_THRESHOLD = 20f;
 
 	private static final float TARGET_MOVE_VELOCITY_LIMIT = 3000f;
 	private static final float TARGET_MOVE_DECELERATION = 10000f;
@@ -199,7 +201,8 @@ public class AnimateDraggingMapThread {
 		float mMoveX = startPoint.x - finalPoint.x;
 		float mMoveY = startPoint.y - finalPoint.y;
 
-		boolean skipAnimation = movingTime == 0 || !NativeUtilities.containsLatLon(mapRenderer, rb, finalLat, finalLon);
+		boolean skipAnimation = movingTime == 0 || movingTime > SKIP_ANIMATION_TIMEOUT
+				|| !NativeUtilities.containsLatLon(mapRenderer, rb, finalLat, finalLon);
 		if (skipAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(zoom, zoomFP, notifyListener);

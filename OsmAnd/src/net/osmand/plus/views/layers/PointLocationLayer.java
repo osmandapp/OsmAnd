@@ -400,7 +400,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 						MapRendererView mapRenderer = getMapRenderer();
 						if (mapRenderer != null && useMapCenter()) {
 							Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-							Location lastRouteProjection = getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
+							Boolean snapToRoad = getApplication().getSettings().SNAP_TO_ROAD.get();
+							Location lastRouteProjection = snapToRoad
+									? getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection()
+									: null;
 							PointI target31 = mapRenderer.getTarget();
 							Float heading = locationProvider.getHeading();
 							updateMarkerData(lastRouteProjection != null

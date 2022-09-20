@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.WindowManager;
@@ -32,6 +34,7 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -207,7 +210,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
-		long movingTime = myLocation != null && location != null ? location.getTime() - myLocation.getTime() : 0;
+		Location prevLocation = myLocation;
+		long movingTime = prevLocation != null && location != null ? location.getTime() - prevLocation.getTime() : 0;
 		myLocation = location;
 		boolean showViewAngle = false;
 		if (location != null) {
@@ -242,6 +246,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						// special case when bearing equals to zero (we don't change anything)
 						if (location.getBearing() != 0f) {
 							rotation = -location.getBearing();
+						}
+					}
+					if (rotation == null && prevLocation != null && tb != null) {
+						double distDp = (tb.getPixDensity() * MapUtils.getDistance(prevLocation, location)) / tb.getDensity();
+						if (distDp > SKIP_ANIMATION_DP_THRESHOLD) {
+							movingTime = 0;
 						}
 					}
 				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
