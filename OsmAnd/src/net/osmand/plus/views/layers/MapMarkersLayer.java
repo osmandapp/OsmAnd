@@ -140,7 +140,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Location savedLoc;
 	private PointI cachedTarget31;
 	private int cachedZoom = 0;
-	private HashMap<Integer, Path> cachedPaths = new HashMap<>();
+	private final HashMap<Integer, Path> cachedPaths = new HashMap<>();
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -1049,7 +1049,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 
 			if (mapRenderer != null) {
-				PointI target31 = mapRenderer.getState().getTarget31();
+				PointI target31 = mapRenderer.getTarget();
 				if (cachedTarget31 != null && cachedTarget31.getX() == target31.getX() && cachedTarget31.getY() == target31.getY()) {
 					cachedPaths.clear();
 				}
