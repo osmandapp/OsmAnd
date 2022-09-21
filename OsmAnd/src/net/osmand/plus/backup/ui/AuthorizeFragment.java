@@ -459,7 +459,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				public void onGlobalLayout() {
 					Rect r = new Rect();
 					mainView.getWindowVisibleDisplayFrame(r);
-					Activity activity = requireMyActivity();
+					Activity activity = getMyActivity();
+					if (activity == null) {
+						return;
+					}
 					int screenHeight = mainView.getHeight();
 					int keypadHeight = screenHeight - r.bottom;
 					int keypadSpace = keypadHeight;
