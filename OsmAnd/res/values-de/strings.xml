@@ -4796,4 +4796,12 @@
     <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
 \nTippen Sie mit 2 Fingern auf die Karte, um die Entfernung zwischen den angeklickten Punkten anzuzeigen</string>
     <string name="shared_string_shows">Zeigt</string>
+    <string name="map_center_widget">Kartenmitte</string>
+    <string name="coordinates_widget_map_center_desc">Widget zeigt die geografischen Koordinaten der aktuellen Kartenmitte</string>
+    <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
+    <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
+    <string name="current_location_widget">Aktueller Standort</string>
+    <string name="coordinates_widget_current_location_desc">Widget zeigt die geografischen Koordinaten des aktuellen Standorts</string>
+    <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
+    <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
 </resources>

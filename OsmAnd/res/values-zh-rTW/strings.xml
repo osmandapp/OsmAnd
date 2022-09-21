@@ -4785,4 +4785,12 @@
     <string name="click_on_widget">點擊小工具</string>
     <string name="map_markers_desc">小工具顯示地圖標記列表中前兩個標記的距離或預計到達時間 (ETA)。</string>
     <string name="shared_string_shows">顯示</string>
+    <string name="quick_action_map_center_widget_descr">切換是否要在地圖上顯示或隱藏地圖中心。</string>
+    <string name="quick_action_current_location_widget_descr">切換是否要在地圖上顯示或隱藏目前的位置。</string>
+    <string name="coordinates_widget_map_center">座標：地圖中心</string>
+    <string name="current_location_widget">目前位置</string>
+    <string name="coordinates_widget_map_center_desc">用來顯示目前地圖中心的地理座標</string>
+    <string name="map_center_widget">地圖中心</string>
+    <string name="coordinates_widget_current_location_desc">用來顯示目前地理位置的地理座標</string>
+    <string name="coordinates_widget_current_location">座標：目前位置</string>
 </resources>
