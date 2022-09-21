@@ -116,6 +116,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		boolean nightMode = settings != null && settings.isNightMode();
 		boolean nightModeChanged = this.nightMode != nightMode;
 		this.nightMode = nightMode;

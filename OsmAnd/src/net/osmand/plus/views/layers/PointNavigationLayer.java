@@ -132,6 +132,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			//OpenGL

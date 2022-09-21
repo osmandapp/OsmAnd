@@ -58,6 +58,7 @@ public class TerrainLayer extends MapTileLayer {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		int zoom = tileBox.getZoom();
 		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
 			setAlpha(srtmPlugin.getTerrainTransparency());

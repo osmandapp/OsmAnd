@@ -267,7 +267,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
@@ -291,7 +292,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (route != null && route.points.size() > 0) {
-			planRouteAttrs.updatePaints(app, nightMode, tileBox);
+			planRouteAttrs.updatePaints(app, drawSettings, tileBox);
 			if (mapRenderer != null) {
 				boolean shouldDraw = shouldDrawPoints();
 				if (shouldDraw || mapActivityInvalidated) {
@@ -321,7 +322,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {
-			drawLineAndText(canvas, tileBox, nightMode);
+			drawLineAndText(canvas, tileBox, drawSettings);
 		}
 	}
 

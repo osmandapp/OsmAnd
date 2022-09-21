@@ -118,6 +118,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		updateBitmaps(false);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {

@@ -137,9 +137,9 @@ public class AnimateDraggingMapThread {
 	 */
 	public void stopAnimatingSync() {
 		// wait until current thread != null
-		MapAnimator animator = getAnimator();
-		if (animator != null) {
-			animator.pause();
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null) {
+			renderer.pauseAnimation();
 		}
 		stopped = true;
 		Thread tt;
@@ -271,7 +271,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					isAnimatingZoom = true;
 				}
-				animatingMapAnimator(mapRenderer, animator);
+				animatingMapAnimator(mapRenderer);
 				if (animateZoom) {
 					isAnimatingZoom = false;
 				}
@@ -379,7 +379,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					isAnimatingZoom = true;
 				}
-				animatingMapAnimator(mapRenderer, animator);
+				animatingMapAnimator(mapRenderer);
 				if (animateZoom) {
 					isAnimatingZoom = false;
 				}
@@ -449,11 +449,7 @@ public class AnimateDraggingMapThread {
 		return skipAnimation ? 0 : rb.getZoom();
 	}
 
-	private void animatingMapAnimator(@NonNull MapRendererView mapRenderer, @NonNull MapAnimator animator) {
-		long startTime = SystemClock.uptimeMillis();
-		long currTime = startTime;
-		long prevTime = currTime;
-
+	private void animatingMapAnimator(@NonNull MapRendererView mapRenderer) {
 		int targetIntZoom = this.targetIntZoom;
 		double targetFloatZoom = this.targetFloatZoom;
 
@@ -468,13 +464,12 @@ public class AnimateDraggingMapThread {
 
 		mapRenderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 		if (!stopped) {
-			animator.resume();
+			mapRenderer.resumeAnimation();
 		}
 		RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
 		while (!stopped) {
-			currTime = SystemClock.uptimeMillis();
-			boolean animationFinished = animator.update((currTime - prevTime) / 1000f);
-			prevTime = currTime;
+			mapRenderer.requestRender();
+			sleepToRedraw(true);
 
 			PointI target31 = mapRenderer.getTarget();
 			float azimuth = mapRenderer.getAzimuth();
@@ -502,11 +497,9 @@ public class AnimateDraggingMapThread {
 				tb.setRotate(-azimuth);
 			}
 
-			if (animationFinished) {
+			if (mapRenderer.isAnimationFinished()) {
 				break;
 			}
-			mapRenderer.requestRender();
-			sleepToRedraw(true);
 		}
 		if (animateZoom) {
 			mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);
@@ -676,7 +669,7 @@ public class AnimateDraggingMapThread {
 			setTargetValues(zoomEnd, zoomPart, finalLat, finalLon);
 			if (mapRenderer != null && animator != null) {
 				isAnimatingZoom = true;
-				animatingMapAnimator(mapRenderer, animator);
+				animatingMapAnimator(mapRenderer);
 				isAnimatingZoom = false;
 			} else {
 				RotatedTileBox tb = tileView.getCurrentRotatedTileBox().copy();
@@ -842,7 +835,7 @@ public class AnimateDraggingMapThread {
 			animator.animateAzimuthTo(-rotate, ROTATION_ANIMATION_TIME / 1000f, TimingFunction.Linear,
 					locationServicesAnimationKey);
 
-			startThreadAnimating(() -> animatingMapAnimator(mapRenderer, animator));
+			startThreadAnimating(() -> animatingMapAnimator(mapRenderer));
 		} else {
 			if (!isAnimating()) {
 				clearTargetValues();

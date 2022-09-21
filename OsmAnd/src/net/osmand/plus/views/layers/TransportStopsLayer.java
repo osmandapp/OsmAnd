@@ -193,6 +193,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tb, settings);
 		if (!mapsInitialized) {
 			return;
 		}
