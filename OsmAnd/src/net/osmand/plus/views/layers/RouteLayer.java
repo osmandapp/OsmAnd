@@ -20,10 +20,8 @@ import androidx.core.content.ContextCompat;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.MapRendererTargetChangedObservable;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -33,7 +31,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
@@ -99,10 +96,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
-	private static final int TARGET_CHANGED_OBSERVABLE_TAG = 2;
-	private MapRendererTargetChangedObservable targetChangedObservable;
-	private IMapRenderer.ITargetChanged onTargetChanged;
-
 	public RouteLayer(@NonNull Context context) {
 		super(context);
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -114,16 +107,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public RoutingHelper getHelper() {
 		return helper;
-	}
-
-	@Override
-	public void setMapActivity(@Nullable MapActivity mapActivity) {
-		super.setMapActivity(mapActivity);
-		if (targetChangedObservable != null) {
-			targetChangedObservable.detach(TARGET_CHANGED_OBSERVABLE_TAG);
-			targetChangedObservable = null;
-			onTargetChanged = null;
-		}
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
@@ -167,25 +150,23 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
+	public boolean areMapRendererViewEventsAllowed() {
+		return true;
+	}
+
+	@Override
+	public void onUpdateFrame(MapRendererView mapRenderer) {
+		super.onUpdateFrame(mapRenderer);
+		if (hasMapRenderer() && useMapCenter() && !helper.isPublicTransportMode()
+				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
+			drawLocations(null, view.getRotatedTileBox());
+		}
+	}
+
+	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
-
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && targetChangedObservable == null && onTargetChanged == null) {
-			targetChangedObservable = mapRenderer.getTargetChangedObservable();
-			onTargetChanged = new IMapRenderer.ITargetChanged() {
-				@Override
-				public void method(IMapRenderer renderer) {
-					getApplication().runInUIThread(() -> {
-						if (hasMapRenderer() && useMapCenter() && !helper.isPublicTransportMode()) {
-							drawLocations(null, view.getRotatedTileBox());
-						}
-					});
-				}
-			};
-			onTargetChanged.attachTo(targetChangedObservable, TARGET_CHANGED_OBSERVABLE_TAG);
-		}
-
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
 

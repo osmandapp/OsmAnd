@@ -1171,7 +1171,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void setZoomAndAnimationImpl(int zoom, double zoomAnimation, double zoomFloatPart, int centerX, int centerY) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			RotatedTileBox tb = currentViewport.copy();
 			int centerX31Before = 0;
 			int centerY31Before = 0;
 
