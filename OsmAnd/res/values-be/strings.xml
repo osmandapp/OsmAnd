@@ -4727,9 +4727,9 @@
     <string name="routing_attr_motor_type_electric_name">Электрычны</string>
     <string name="lang_ckb">Курдская (цэнтральная)</string>
     <string name="co2_mission">Выкіды CO2</string>
-    <string name="accessibility_2d_view_off">Выгляд 2.5D Выкл.</string>
-    <string name="accessibility_2d_view_on">Выгляд 2.5D Укл.</string>
-    <string name="download_complete">Спампоўка завершана</string>
+    <string name="accessibility_2d_view_off">Выгляд 2.5D адключаны</string>
+    <string name="accessibility_2d_view_on">Выгляд 2.5D уключаны</string>
+    <string name="download_complete">Спампоўванне завершана</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Паказваць адмысловыя маршруты для горных ровараў.</string>
     <string name="av_notes_audio_widget_desc">Націсканнем на віджэт можна ствараць аўдыянататкі.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Паказваць маршруты MTB IMBA</string>
@@ -4750,8 +4750,8 @@
     <string name="auto_backup_preference_desc">Прадвызначана Android захоўвае рэзервовыя копіі улюбёнага, адзнак на мапе і налад OsmAnd, каб аднавіць іх на новых прыладах або пасля пераўсталявання. Памер гэтай рэзервовай копіі абмежаваны 25 МБ.
 \nКалі вы выкарыстоўваеце OsmAnd Cloud, пасля пераўсталявання могуць узнікнуць праблемы.</string>
     <string name="first_marker_widget_desc">Вы можаце наладзіць віджэт на адлюстраванне адлегласці або прыблізнага часу прыбыцця да першай адзнакі на мапе.</string>
-    <string name="time_to_intermediate_widget_desc">Віджэт паказвае «Час прыбыцця» або «Час да прыбыцця» да першай прамежкавай кропкі. Час пастаянна абнаўляецца падчас навігацыі. Калі прамежкавая кропка пройдзена, час будзе абноўлены да наступнай прамежкавай кропкі.</string>
-    <string name="distance_to_intermediate_widget_desc">Віджэт паказвае адлегласць да першай прамежкавай кропкі. Пасля праходжання прамежкавай кропкі, адлегласць будзе абноўлена да наступнай прамежкавай кропкі.</string>
+    <string name="time_to_intermediate_widget_desc">Віджэт паказвае \"Час прыбыцця\" або \"Час да прыбыцця\" да першага прамежкавага пункта. Час стала абнаўляецца падчас навігацыі. Калі прамежкавы пункт мінуты, час будзе абноўлены да наступнага прамежкавага пункта.</string>
+    <string name="distance_to_intermediate_widget_desc">Віджэт паказвае адлегласць да першага прамежкавага пункта. Пасля таго, як прамежкавы пункт будзе мінуты, адлегласць абновіцца да наступнага прамежкавага пункта.</string>
     <string name="distance_to_destination_widget_desc">Віджэт паказвае адлегласць да апошняга пункта прызначэння.</string>
     <string name="trip_recording_downhill_widget_desc">Паказвае колькасць усіх з\'ездаў бягучай запісанай паездкі.</string>
     <string name="trip_recording_uphill_widget_desc">Паказвае суму ўсіх пад\'ёмаў у бягучай запісанай паездцы.</string>
@@ -4762,14 +4762,14 @@
     <string name="second_marker_widget_desc">Вы можаце наладзіць віджэт на адлюстраванне адлегласці або прыблізнага часу прыбыцця да другой адзнакі на мапе.</string>
     <string name="second_next_turn_widget_desc">Віджэт паказвае інфармацыю аб вашым другім наступным павароце, які ўключаецца, калі паварот знаходзіцца на адлегласці набліжэння.</string>
     <string name="widget_with_dot">Віджэт.</string>
-    <string name="next_turn_widget_desc">Віджэт паказвае інфармацыю аб вашым наступным павароце з малюнкам манеўру і адлегласцю да яго.</string>
+    <string name="next_turn_widget_desc">Віджэт паказвае інфармацыю пра ваш наступны паварот з выявай манеўру і адлегласцю да павароту.</string>
     <string name="compass_visible_if_map_rotated_desc">Схаваны, калі зверху поўнач</string>
-    <string name="compass_visible_if_map_rotated">Бачны, калі мапа павернута</string>
+    <string name="compass_visible_if_map_rotated">Бачны, калі мапа павернутая</string>
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
     <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
     <string name="rendering_attr_depthContourWidth_name">Шырыня контурных ліній глыбіні</string>
-    <string name="compass_desc">Паказвае напрамак на поўнач.</string>
+    <string name="compass_desc">Паказвае кірунак на поўнач.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
