@@ -4797,4 +4797,9 @@
     <string name="map_widget_camera_distance">Kameramagasság</string>
     <string name="map_widget_camera_tilt">Kamera dőlés</string>
     <string name="map_widget_target_distance">A cél távolsága</string>
+    <string name="map_widget_zoom_level_desc">A widget a térkép aktuális nagyítási szintjét mutatja.</string>
+    <string name="map_widget_camera_distance_desc">A widget a kamera felszín feletti magasságát mutatja.</string>
+    <string name="map_widget_camera_tilt_desc">A widget a kamera dőlésszögét mutatja perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
+    <string name="developer_widgets">Fejlesztői widgetek</string>
+    <string name="map_widget_target_distance_desc">A widget a kamerától a célig tartó távolságot mutatja.</string>
 </resources>
