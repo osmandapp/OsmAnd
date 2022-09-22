@@ -84,6 +84,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		if (tileBox.getZoom() >= START_ZOOM) {
 			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer != null) {

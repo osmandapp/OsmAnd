@@ -3085,7 +3085,6 @@
     <string name="shared_string_file_is_saved">%s er gemt</string>
     <string name="shared_string_open_track">Åbn spor</string>
     <string name="shared_string_track_is_saved">Spor %s er gemt</string>
-    <string name="gpx_join_gaps">Sammenføj mellemrum</string>
     <string name="app_mode_camper">Campingvogn</string>
     <string name="app_mode_campervan">Autocamper (RV)</string>
     <string name="rendering_attr_showLez_description">Vis miljøzoner på kortet. Påvirker ikke ruteberegning.</string>
@@ -3745,7 +3744,6 @@
     <string name="snowmobile_render_descr">Til kørsel med snescooter med dedikerede veje og spor.</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd bruger MGRS, som svarer til UTM NATO-formatet.</string>
-    <string name="plan_route_join_segments">Forbind segmenter</string>
     <string name="plan_route_split_before">Opdel før</string>
     <string name="plan_route_split_after">Opdel efter</string>
     <string name="plan_route_add_new_segment">Tilføj et nyt segment</string>
@@ -4793,4 +4791,19 @@
     <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_none_rotated_opt">Fast (manuelt roteret)</string>
+    <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
+    <string name="tap_on_widget">Tryk på modul</string>
+    <string name="go_to_marker_location">Gå til markørplacering</string>
+    <string name="shared_string_shows">Viser</string>
+    <string name="shared_string_switch_mode">Skift tilstand</string>
+    <string name="map_markers_desc">Modulet viser afstand eller forventet ankomsttid (ETA) for de to første markører på listen over kortmarkører.</string>
+    <string name="click_on_widget">Klik på modul</string>
+    <string name="quick_action_current_location_widget_descr">En omskifter til at vise eller skjule Aktuel placering-modulet på kortet.</string>
+    <string name="map_center_widget">Kortcentrum</string>
+    <string name="current_location_widget">Nuværende placering</string>
+    <string name="coordinates_widget_map_center">Koordinater: kortcentrum</string>
+    <string name="coordinates_widget_current_location">Koordinater: nuværende placering</string>
+    <string name="quick_action_map_center_widget_descr">En omskifter til at vise eller skjule Kortcentrum-modulet på kortet.</string>
+    <string name="coordinates_widget_map_center_desc">Modul viser de geografiske koordinater for det aktuelle kortcentrum</string>
+    <string name="coordinates_widget_current_location_desc">Modul viser de geografiske koordinater for den aktuelle geografiske placering</string>
 </resources>

@@ -3099,7 +3099,6 @@
     <string name="routing_attr_freeride_policy_name">Вне трассы</string>
     <string name="routing_attr_freeride_policy_description">Фрирайд и внетрассовые маршруты — это неофициальные трассы и проезды. Как правило, они не подготовлены, не обслуживаются и не проверяются вечером. Вход на свой страх и риск.</string>
     <string name="shared_string_open_track">Открыть трек</string>
-    <string name="gpx_join_gaps">Соединить разрывы (исключить пробелы)</string>
     <string name="app_mode_camper">Кемпер</string>
     <string name="app_mode_campervan">Альковен (RV)</string>
     <string name="rendering_attr_showLez_description">Показывать на карте зоны с низким уровнем выбросов. Не влияет на навигацию.</string>
@@ -3882,7 +3881,6 @@
     <string name="lang_de_casual">Немецкий (повседневный)</string>
     <string name="app_mode_light_aircraft">Лёгкий самолёт</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
-    <string name="plan_route_join_segments">Объединить сегменты</string>
     <string name="plan_route_split_before">Разделить перед</string>
     <string name="plan_route_split_after">Разделить после</string>
     <string name="profile_type_user_string">Профиль пользователя</string>

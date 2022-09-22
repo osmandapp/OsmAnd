@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -23,11 +22,11 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.DialogListItemAdapter;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -64,6 +63,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
+		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
 		setupTrackballForMovementsPref();
 	}
@@ -321,6 +321,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		SwitchPreferenceEx mapEmptyStateAllowedPref = findPreference(settings.MAP_EMPTY_STATE_ALLOWED.getId());
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
+	}
+
+	private void setupAnimatePositionPref() {
+		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
+		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
 
 	private void setupExternalInputDevicePref() {

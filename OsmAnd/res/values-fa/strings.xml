@@ -3080,7 +3080,6 @@
     <string name="base_profile_descr_aircraft">هواپیما، گلایدینگ</string>
     <string name="routing_attr_max_num_changes_description">حداکثر چند بار شیوهٔ حمل‌ونقل تغییر کند؟</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
-    <string name="gpx_join_gaps">حذف وقفه‌ها</string>
     <string name="rendering_attr_showLez_description">محدوده‌های کاهش آلودگی هوای شهر را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
     <string name="rendering_attr_showLez_name">محدوده‌های کاهش</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
@@ -3872,7 +3871,6 @@
 \nاز مپیلاری برای تصویر سطح خیابان؛
 \nاز وب و ویکی‌پدیا برای عکس‌های نقاط توجه متناسب با داده‌های اوپن‌استریت‌مپ.</string>
     <string name="app_mode_light_aircraft">هواپیمای سبک</string>
-    <string name="plan_route_join_segments">اتصال پاره‌ها</string>
     <string name="plan_route_split_before">تقطیع از اینجا به قبل</string>
     <string name="plan_route_split_after">تقطیع از این جا به بعد</string>
     <string name="plan_route_add_new_segment">افزودن یک پارهٔ جدید</string>

@@ -720,7 +720,6 @@
     <string name="shared_string_vehicle">Vozilo</string>
     <string name="shared_string_subtype">Podtip</string>
     <string name="routing_attr_prefer_hiking_routes_description">Pretpočitaj planinski ruti</string>
-    <string name="plan_route_join_segments">Prikluči se na segmentite</string>
     <string name="app_mode_light_aircraft">Mali avioni</string>
     <string name="select_groups_for_import">Izberete grupi što ḱe se uvezat.</string>
     <string name="export_not_enough_space">Nema dovolen prostor</string>
@@ -1563,7 +1562,6 @@
     <string name="price_free">Besplatno</string>
     <string name="get_discount_first_part">%1$s za prvite %2$s</string>
     <string name="price_and_discount">%1$s • Začuvaj %2$s</string>
-    <string name="gpx_join_gaps">Priklučete gi prazninite</string>
     <string name="app_mode_camper">Kamper</string>
     <string name="app_mode_campervan">Kamperso kombi (RV)</string>
     <string name="app_mode_wagon">Vagon</string>

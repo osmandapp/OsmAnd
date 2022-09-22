@@ -57,9 +57,18 @@ public class WidgetsVisibilityHelper {
 				&& !isSelectingTilesZone();
 	}
 
-	public boolean shouldShowTopCoordinatesWidget() {
-		return settings.SHOW_COORDINATES_WIDGET.get()
-				&& !mapActivity.shouldHideTopControls()
+	public boolean shouldShowTopMapCenterCoordinatesWidget() {
+		return (settings.SHOW_MAP_CENTER_COORDINATES_WIDGET.get())
+				&& shouldShowTopCoordinatesWidget();
+	}
+
+	public boolean shouldShowTopCurrentLocationCoordinatesWidget() {
+		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get()
+				&& shouldShowTopCoordinatesWidget();
+	}
+
+	private boolean shouldShowTopCoordinatesWidget() {
+		return !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
 				&& !isInTrackAppearanceMode()
@@ -70,7 +79,6 @@ public class WidgetsVisibilityHelper {
 				&& !isInGpsFilteringMode()
 				&& !isSelectingTilesZone();
 	}
-
 	public boolean shouldHideMapMarkersWidget() {
 		View streetName = mapActivity.findViewById(R.id.street_name_widget);
 		return !settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()

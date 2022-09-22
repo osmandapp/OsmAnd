@@ -73,7 +73,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		updateCapacity();
 	}
 
-	void collectTypes(RouteDataResources resources) {
+	public void collectTypes(RouteDataResources resources) {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		if (object.types != null) {
 			collectRules(rules, object.types);
@@ -90,7 +90,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 	}
 
-	void collectNames(RouteDataResources resources) {
+	public void collectNames(RouteDataResources resources) {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		RouteRegion region = object.region;
 		if (region.getNameTypeRule() != -1) {

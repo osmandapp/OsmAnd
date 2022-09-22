@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Source d\'énergie du moteur</string>
+    <string name="routing_attr_motor_type_name">Moteur du véhicule</string>
     <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -313,7 +313,7 @@
     <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
-    <string name="rotate_map_none_opt">Aucune rotation (nord toujours en haut)</string>
+    <string name="rotate_map_none_opt">Fixe (nord en haut)</string>
     <string name="rotate_map_to_bearing_descr">Orientation de la carte :</string>
     <string name="rotate_map_to_bearing">Orientation de la carte</string>
     <string name="show_route">Itinéraire détaillé</string>
@@ -2491,7 +2491,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Planifier un itinéraire</string>
+    <string name="plan_route">Créer une trace</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -2591,7 +2591,7 @@
     <string name="shared_string_marker">Marque</string>
     <string name="shared_string_without_name">Sans nom</string>
     <string name="lang_lo">Laotien</string>
-    <string name="rendering_attr_hidePOILabels_name">Libellés des PI</string>
+    <string name="rendering_attr_hidePOILabels_name">Libellés des points d\'intérêt</string>
     <string name="day_off_label">fermé</string>
     <string name="winter_and_ski_renderer">Hiver et ski</string>
     <string name="touring_view_renderer">Vue grand tourisme</string>
@@ -3083,7 +3083,6 @@
     <string name="select_base_profile_dialog_message">Basez votre profil personnel sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
-    <string name="gpx_join_gaps">Fusionner pour éviter les interruptions</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur le calcul d\'itinéraire).</string>
@@ -3684,7 +3683,7 @@
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
     <string name="set_working_days_to_continue">Définissez les jours travaillés pour continuer</string>
     <string name="route_between_points">Itinéraire entre points</string>
-    <string name="plan_a_route">Planifier un itinéraire</string>
+    <string name="plan_a_route">Créer une trace</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
@@ -3886,7 +3885,6 @@
 \n • Support des couleurs personnalisées pour les favoris et les points de passage
 \n
 \n</string>
-    <string name="plan_route_join_segments">Joindre les segments</string>
     <string name="plan_route_split_before">Couper avant</string>
     <string name="plan_route_split_after">Couper après</string>
     <string name="plan_route_add_new_segment">Ajouter un nouveau segment</string>
@@ -4672,23 +4670,23 @@
     <string name="map_widget_trip_recording_downhill">Descente</string>
     <string name="routing_attr_hazmat_category_name">Catégorie des matières dangereuses</string>
     <string name="map_widget_true_bearing">Relèvement vrai</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Masquer les zones militaires</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Masquer les zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Zones militaires</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Zones militaires</string>
     <string name="explore_plans">Explorer les plans</string>
     <string name="map_widget_time_to_destination">Temps restant jusqu\'à destination</string>
     <string name="map_widget_time_to_intermediate">Temps restant jusqu\'au point intermédiaire</string>
     <string name="map_widget_distance_to_intermediate">Distance du point intermédiaire</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Basculer de mode en tapant sur le widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tapez sur le widget pour basculer entre les modes.</string>
     <string name="radius_ruler_mode_desc">Vous pouvez basculer le mode de l’outil Rayon en tapant sur le widget.</string>
     <string name="shared_string_mode">Mode</string>
     <string name="lang_sat">Santali</string>
     <string name="average_speed_skip_stops">Prendre en compte les arrêts</string>
     <string name="map_widget_average_speed">Vitesse moyenne</string>
-    <string name="average_speed_widget_desc">Indique la vitesse moyenne du trajet en cours.</string>
+    <string name="average_speed_widget_desc">Affiche la vitesse moyenne du trajet en cours.</string>
     <string name="average_speed_time_interval_desc">Préciser la durée sur laquelle la vitesse moyenne sera calculée.</string>
-    <string name="transport_hazmat_yes_desc">Vous devez sélectionner une catégorie.</string>
+    <string name="transport_hazmat_yes_desc">Sélectionner la catégorie applicable.</string>
     <string name="transport_hazmat_title">Transport de matières dangereuses</string>
-    <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels interdisent le transport de matières dangereuses.</string>
+    <string name="transport_hazmat_no_desc">Certaines routes et certains tunnels peuvent interdire le transport de matières dangereuses.</string>
     <string name="import_as_one_track">Importer comme une seule trace</string>
     <string name="use_latin_name_if_missing">Utiliser le nom latin si manquant</string>
     <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
@@ -4696,17 +4694,17 @@
     <string name="co2_mission">Émissions de CO₂</string>
     <string name="live_update_frequency_day_variant">Les mises à jour de la carte sont vérifiées chaque jour.</string>
     <string name="live_update_frequency_week_variant">Les mises à jour de la carte sont vérifiées chaque semaine.</string>
-    <string name="calculate_online_altitude_descr">Calculez l\'altitude en ligne grâce aux serveurs d\'OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Cette altitude peut être différente de l\'altitude fournie par l\'appareil et peut être utilisée pour corriger l\'altitude.</string>
+    <string name="calculate_online_altitude_descr">Calculez l\'altitude en ligne grâce aux serveurs d\'OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Si cette altitude est différente de l\'altitude fournie par l\'appareil, l\'altitude pourra être corrigée.</string>
     <string name="live_update_frequency_hour_variant">Les mises à jour de la carte sont vérifiées chaque heure.</string>
     <string name="altitude_correction">Correction de l\'altitude</string>
-    <string name="no_altitude_data_desc">Vous pouvez déplacer votre trace sur les routes pour obtenir les données %1$s ou alors les calculer en ligne.</string>
+    <string name="no_altitude_data_desc">Pour obtenir les données %1$s, déplacez votre trace sur les routes ou calculez l\'itinéraire en ligne.</string>
     <string name="updated_map_time">Mise à jour : %1$s.</string>
     <string name="includes_osm_changes_until">Inclut les modifications OSM jusqu’au %1$s.</string>
-    <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s dans %2$s.</string>
-    <string name="next_live_update_time">Prochaine mise à jour : dans %1$s.</string>
+    <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s à %2$s.</string>
+    <string name="next_live_update_time">Prochaine mise à jour à : %1$s.</string>
     <string name="lang_ckb">Sorani</string>
     <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint à certaines routes.</string>
-    <string name="map_marker_average_speed_desc">Indiquez la durée pendant laquelle la vitesse moyenne sera mesurée pour calculer l\'heure d\'arrivée estimée.</string>
+    <string name="map_marker_average_speed_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
     <string name="switch_widget_mode_desc">Un appui sur le gadget bascule entre les modes.</string>
     <string name="marker_1st">Première marque</string>
     <string name="side_marker_eta">Heure d’arrivée estimée</string>
@@ -4781,4 +4779,21 @@
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
     <string name="rotate_map_none_rotated_opt">Fixe (rotation manuelle)</string>
     <string name="shared_string_large">Grand</string>
+    <string name="distance_by_tap_use_description">Ajoutez un point en tapant sur la carte pour afficher la distance entre ce point et votre position actuelle.
+\nTapez avec 2 doigts sur la carte pour afficher la distance entre les points.</string>
+    <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
+    <string name="tap_on_widget">Tapez sur le widget</string>
+    <string name="go_to_marker_location">Aller au marqueur</string>
+    <string name="shared_string_switch_mode">Basculer de mode</string>
+    <string name="click_on_widget">Cliquez sur le widget</string>
+    <string name="shared_string_shows">Afficher</string>
+    <string name="map_marker_interval_dialog_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
+    <string name="quick_action_current_location_widget_descr">Bouton pour afficher ou masquer le gadget Position actuelle.</string>
+    <string name="current_location_widget">Position actuelle</string>
+    <string name="map_center_widget">Centre de la carte</string>
+    <string name="coordinates_widget_current_location_desc">Gadget affichant les coordonnées de la position actuelle</string>
+    <string name="coordinates_widget_map_center">Coordonnées : centre de la carte</string>
+    <string name="coordinates_widget_current_location">Coordonnées : position actuelle</string>
+    <string name="coordinates_widget_map_center_desc">Gadget affichant les coordonnées du centre de la carte</string>
+    <string name="quick_action_map_center_widget_descr">Bouton pour afficher ou masquer le gadget Centre de la carte.</string>
 </resources>

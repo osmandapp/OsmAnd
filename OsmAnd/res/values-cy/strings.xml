@@ -1479,7 +1479,6 @@
     <string name="shared_string_folders">Ffolderi</string>
     <string name="edit_track">Golygu trac</string>
     <string name="upload_to_openstreetmap">Uchwlwytho i OpenStreetMap</string>
-    <string name="plan_route_join_segments">Cysylltu segmentau</string>
     <string name="transport_nearby_routes">O fewn</string>
     <string name="shared_string_upload">Uwchlwytho</string>
     <string name="osmand_parking_time_left">yn weddill</string>
@@ -3332,7 +3331,6 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Lliw y llwybrau yn ôl eu lliw lleol unigol (os yw\'n bresennol ar OpenStreetMap) a symbol tarian heicio.</string>
     <string name="activity_type_offroad_name">Oddi ar y ffordd</string>
     <string name="delete_online_routing_engine">Tynnu\'r injan llwybro ar-lein hwn\?</string>
-    <string name="gpx_join_gaps">Uno\'r bylchau</string>
     <string name="rendering_attr_showLez_description">Dangos Parthau Allyriadau Isel ar y map. Nid yw\'n effeithio ar y llwybro.</string>
     <string name="rendering_attr_winter_road_name">Ffordd y gaeaf</string>
     <string name="settings_derived_routing_mode_string">Modd defnyddiwr, yn deillio o: %s</string>

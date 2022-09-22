@@ -127,7 +127,9 @@
 			android:layout_marginLeft="@dimen/list_item_button_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
 			android:layout_marginRight="@dimen/list_item_button_padding"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
 		<include
 			android:id="@+id/appearance_button"
@@ -138,7 +140,9 @@
 			android:layout_marginLeft="@dimen/list_item_button_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
 			android:layout_marginRight="@dimen/list_item_button_padding"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
 		<include
 			android:id="@+id/edit_button"
@@ -149,7 +153,9 @@
 			android:layout_marginLeft="@dimen/list_item_button_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
 			android:layout_marginRight="@dimen/list_item_button_padding"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
 		<include
 			android:id="@+id/directions_button"
@@ -160,7 +166,9 @@
 			android:layout_marginLeft="@dimen/list_item_button_padding"
 			android:layout_marginEnd="@dimen/list_item_button_padding"
 			android:layout_marginRight="@dimen/list_item_button_padding"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:visibility="gone"
+			tools:visibility="visible" />
 
 	</LinearLayout>
 

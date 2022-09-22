@@ -14,6 +14,23 @@
     <string name="nautical_depth_points">Nautical depth points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>
+    <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the target location.</string>
+    <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
+    <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>
+    <string name="map_widget_camera_tilt_desc">Widget shows the camera tilt angle in perspective mode. Default is 90° (no tilt).</string>
+    <string name="map_widget_target_distance">Target distance</string>
+    <string name="map_widget_zoom_level">Zoom level</string>
+    <string name="map_widget_camera_distance">Camera elevation</string>
+    <string name="map_widget_camera_tilt">Camera tilt</string>
+    <string name="developer_widgets">Developer widgets</string>
+    <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
+    <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
+    <string name="map_center_widget">Map center</string>
+    <string name="current_location_widget">Current location</string>
+    <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
+    <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
+    <string name="coordinates_widget_map_center">Coordinates: map center</string>
+    <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
     <string name="tap_on_widget">Tap on widget</string>
@@ -58,8 +75,8 @@
     <string name="av_notes_audio_widget_desc">Tapping the widget lets you take an audio note.</string>
     <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the currently recorded trip.</string>
     <string name="trip_recording_uphill_widget_desc">Shows the sum of all the climbs of the currently recorded trip.</string>
-    <string name="trip_recording_duration_widget_desc">Shows the currently recorded trio time.</string>
-    <string name="trip_recording_distance_widget_desc">Shows the currently recorded trio distance.</string>
+    <string name="trip_recording_duration_widget_desc">Shows the currently recorded trip time.</string>
+    <string name="trip_recording_distance_widget_desc">Shows the currently recorded trip distance.</string>
     <string name="true_bearing_wdiget_desc">Angle between true north and the target point observed from your location.</string>
     <string name="relative_bearing_widget_desc">Shows the angle between your forward movement direction and the target point.</string>
     <string name="second_marker_widget_desc">You can configure the widget to show the distance or Estimated time of arrival left to the second map marker.</string>
@@ -855,7 +872,6 @@
     <string name="plan_route_add_new_segment">Add a new segment</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_split_before">Split before</string>
-    <string name="plan_route_join_segments">Join segments</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
@@ -1573,7 +1589,6 @@
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan (RV)</string>
     <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>
@@ -2984,8 +2999,8 @@
     <string name="track_points">Track points</string>
     <string name="shared_string_online_maps">Online maps</string>
     <string name="osmand_rastermaps_plugin_description">Access many types of online (so called tile or raster) maps, from predefined OSM tiles (like Mapnik) to satellite images, and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.\n\n
-    Any of these maps can either be used as the main (base) map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
-    Download tile maps directly online, or prepared them for offline use (manually copied to OsmAnd\'s data folder) as an SQLite database which can be produced by a variety of 3rd party map preparation tools.
+    Any of these maps can be used as the main (base) map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s offline vector maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
+    Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.
 	</string>
     <string name="record_plugin_name">Trip recording</string>
     <string name="record_plugin_description">Allows you to record, save and analyze your training or movement data, such as speed, ascents, descents or route relief, which can then be reused, improved, supplemented or shared with friends. \n\nHow to - https://osmand.net/docs/user/plugins/trip-recording</string>

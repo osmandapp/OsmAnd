@@ -3243,9 +3243,9 @@
     <string name="poi_socket_cee_red_32a">Počet zásuvek typu CEE 5-kolík 32A velký</string>
     <string name="poi_socket_cee_red_32a_current">Maximální proud zásuvky CEE 5-kolík 32A velký [A]</string>
     <string name="poi_socket_cee_red_32a_output">Maximální výkon zásuvky CEE 5-kolík 32A velký [kW]</string>
-    <string name="poi_socket_cee_red_64a">Počet zásuvek typu CEE 5-kolík 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Maximální proud zásuvky CEE 5-kolík 64A [A]</string>
-    <string name="poi_socket_cee_red_64a_output">Maximální výkon zásuvky CEE 5-kolík 64A [kW]</string>
+    <string name="poi_socket_cee_red_63a">Počet zásuvek typu CEE 5-kolík 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Maximální proud zásuvky CEE 5-kolík 63A [A]</string>
+    <string name="poi_socket_cee_red_63a_output">Maximální výkon zásuvky CEE 5-kolík 63A [kW]</string>
     <string name="poi_socket_cee_red_125a">Počet zásuvek typu CEE 5-kolík 125A</string>
     <string name="poi_socket_cee_red_125a_current">Maximální proud zásuvky CEE 5-kolík 125A [A]</string>
     <string name="poi_socket_cee_red_125a_output">Maximální výkon zásuvky CEE 5-kolík 125A [kW]</string>
@@ -3465,7 +3465,7 @@
     <string name="poi_socket_cee_blue_yes">CEE modrá</string>
     <string name="poi_socket_cee_red_16a_yes">CEE červená 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE červená 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE červená 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE červená 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE červená 125A</string>
     <string name="poi_socket_type1_yes">Typ 1</string>
     <string name="poi_socket_type1_combo_yes">Typ 1 kombo</string>

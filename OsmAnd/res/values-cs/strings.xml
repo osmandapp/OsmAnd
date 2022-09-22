@@ -3055,7 +3055,6 @@
     <string name="app_mode_ufo">UFO</string>
     <string name="shared_string_open_track">Otevřít trasu</string>
     <string name="shared_string_track_is_saved">Trasa %s je uložena</string>
-    <string name="gpx_join_gaps">Spojit mezery</string>
     <string name="app_mode_camper">Obytný přívěs</string>
     <string name="app_mode_campervan">Obytné vozidlo</string>
     <string name="rendering_attr_showLez_description">Zobrazit zóny s nízkými emisemi na mapě. Nemá vliv na navigaci.</string>
@@ -3879,7 +3878,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Němčina (hovorová)</string>
     <string name="app_mode_light_aircraft">Lehké letadlo</string>
-    <string name="plan_route_join_segments">Spojit úseky</string>
     <string name="plan_route_split_before">Rozdělit před</string>
     <string name="plan_route_split_after">Rozdělit po</string>
     <string name="plan_route_add_new_segment">Přidat nový úsek</string>

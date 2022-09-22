@@ -317,6 +317,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
 		boolean showTravel = app.getSettings().SHOW_TRAVEL.get();
 		boolean routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();

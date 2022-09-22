@@ -3077,7 +3077,6 @@
     <string name="shared_string_file_is_saved">S\'ha desat %s</string>
     <string name="shared_string_open_track">Obre la traça</string>
     <string name="shared_string_track_is_saved">La traça %s s\'ha desat</string>
-    <string name="gpx_join_gaps">Uneix separacions</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostra les zones de baixes emissions al mapa. No afecta el càlcul de ruta.</string>
@@ -3775,7 +3774,6 @@
     <string name="app_mode_light_aircraft">Avioneta</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vol dir que la traça es mostrarà públicament a les vostres traces GPS i als llistats públics de traces GPS, és a dir, els altres usuaris la podran baixar en brut i associada al vostre usuari. Les dades cronològiques de pas per les fites de l’API GPS que es publiquen mitjançant l’API de fites faran referència a la pàgina de la vostra traça original.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privada\" vol dir que la traça no es mostra a cap llistat públic, però les fites que conté estan disponibles a través de l\'API pública GPS, desordenades i sense enregistraments temporals.</string>
-    <string name="plan_route_join_segments">Uneix segments</string>
     <string name="plan_route_split_before">Separa abans</string>
     <string name="plan_route_split_after">Separa després</string>
     <string name="plan_route_add_new_segment">Afegeix un segment nou</string>

@@ -2653,7 +2653,6 @@
     <string name="shared_string_file_is_saved">%s kaydedildi</string>
     <string name="shared_string_open_track">İzlenen yolu aç</string>
     <string name="shared_string_track_is_saved">İzlenen yol %s kaydedildi</string>
-    <string name="gpx_join_gaps">Boşlukları birleştir</string>
     <string name="app_mode_camper">Kampçı</string>
     <string name="app_mode_campervan">Kamp aracı (RV)</string>
     <string name="rendering_attr_showLez_description">Haritada Düşük Emisyon Bölgelerini göster. Yönlendirmeyi etkilemez.</string>
@@ -3880,7 +3879,6 @@
     <string name="select_picture">Resim seç</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Hafif uçak</string>
-    <string name="plan_route_join_segments">Bölümleri birleştir</string>
     <string name="plan_route_split_before">Önce böl</string>
     <string name="plan_route_split_after">Sonra böl</string>
     <string name="plan_route_add_new_segment">Yeni bir bölüm ekle</string>

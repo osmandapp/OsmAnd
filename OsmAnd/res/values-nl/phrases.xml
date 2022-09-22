@@ -3369,7 +3369,7 @@
     <string name="poi_socket_type1_combo_yes">Type 1 combo</string>
     <string name="poi_socket_type1_yes">Type 1</string>
     <string name="poi_socket_cee_red_125a_yes">CEE-rood 125A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE-rood 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE-rood 63A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE-rood 32A</string>
     <string name="poi_socket_cee_red_16a_yes">CEE-rood 16A</string>
     <string name="poi_socket_cee_blue_yes">CEE-blauw</string>
@@ -3495,9 +3495,9 @@
     <string name="poi_socket_cee_red_125a_output">Stopcontact: CEE-rood 125A: vermogen</string>
     <string name="poi_socket_cee_red_125a_current">Stopcontact: CEE-rood 125A: stroom</string>
     <string name="poi_socket_cee_red_125a">Stopcontact: CEE-rood 125A</string>
-    <string name="poi_socket_cee_red_64a_output">Stopcontact: CEE-rood 64A: vermogen</string>
-    <string name="poi_socket_cee_red_64a_current">Stopcontact: CEE-rood 64A: stroom</string>
-    <string name="poi_socket_cee_red_64a">Stopcontact: CEE-rood 64A</string>
+    <string name="poi_socket_cee_red_63a_output">Stopcontact: CEE-rood 63A: vermogen</string>
+    <string name="poi_socket_cee_red_63a_current">Stopcontact: CEE-rood 63A: stroom</string>
+    <string name="poi_socket_cee_red_63a">Stopcontact: CEE-rood 63A</string>
     <string name="poi_socket_cee_red_32a_output">Stopcontact: CEE-rood 32A: vermogen</string>
     <string name="poi_socket_cee_red_32a_current">Stopcontact: CEE-rood 32A: stroom</string>
     <string name="poi_socket_cee_red_32a">Stopcontact: CEE-rood 32A</string>

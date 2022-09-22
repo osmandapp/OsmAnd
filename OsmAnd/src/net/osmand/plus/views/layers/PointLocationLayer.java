@@ -25,11 +25,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.MapRendererTargetChangedObservable;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
@@ -93,7 +91,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private CoreMapMarker locationMarkerWithHeading;
 	private CoreMapMarker navigationMarker;
 	private CoreMapMarker navigationMarkerWithHeading;
-	private IMapRenderer.ITargetChanged onTargetChanged;
 
 	private boolean markersInvalidated = true;
 	private boolean showHeadingCached = false;
@@ -194,6 +191,29 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			initLegacyRenderer();
 		}
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
+	}
+
+	@Override
+	public boolean areMapRendererViewEventsAllowed() {
+		return true;
+	}
+
+	@Override
+	public void onUpdateFrame(MapRendererView mapRenderer) {
+		super.onUpdateFrame(mapRenderer);
+		if (useMapCenter()) {
+			Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
+			Boolean snapToRoad = getApplication().getSettings().SNAP_TO_ROAD.get();
+			Location lastRouteProjection = snapToRoad
+					? getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection()
+					: null;
+			PointI target31 = mapRenderer.getTarget();
+			Float heading = locationProvider.getHeading();
+			updateMarkerData(lastRouteProjection != null
+					? lastRouteProjection : lastKnownLocation, target31, heading);
+			lastKnownLocationCached = lastKnownLocation;
+			lastHeadingCached = heading;
+		}
 	}
 
 	private boolean setMarkerState(MarkerState markerState, boolean showHeading, boolean forceUpdate) {
@@ -377,33 +397,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		if (view == null || tileBox.getZoom() < MIN_ZOOM || locationProvider.getLastStaleKnownLocation() == null) {
 			clearMapMarkersCollections();
 			return;
-		}
-
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && onTargetChanged == null) {
-			MapRendererTargetChangedObservable targetChangedObservable = mapRenderer.getTargetChangedObservable();
-			onTargetChanged = new IMapRenderer.ITargetChanged() {
-				@Override
-				public void method(IMapRenderer renderer) {
-					getApplication().runInUIThread(() -> {
-						MapRendererView mapRenderer = getMapRenderer();
-						if (mapRenderer != null && useMapCenter()) {
-							Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-							Location lastRouteProjection = getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
-							PointI target31 = mapRenderer.getState().getTarget31();
-							Float heading = locationProvider.getHeading();
-							updateMarkerData(lastRouteProjection != null
-									? lastRouteProjection : lastKnownLocation, target31, heading);
-							lastKnownLocationCached = lastKnownLocation;
-							lastHeadingCached = heading;
-						}
-					});
-				}
-			};
-			onTargetChanged.attachTo(targetChangedObservable, 1);
 		}
 
 		boolean nightMode = settings != null && settings.isNightMode();
@@ -438,7 +435,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(lastKnownLocationCached, lastKnownLocation)
 					|| !Algorithms.objectEquals(lastHeadingCached, heading);
 			if (markersRecreated || stateUpdated || dataChanged) {
-				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getState().getTarget31() :null, heading);
+				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getTarget() :null, heading);
 				lastKnownLocationCached = lastKnownLocation;
 				lastHeadingCached = heading;
 			}
@@ -450,7 +447,6 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		onTargetChanged = null;
 		clearMapMarkersCollections();
 	}
 

@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -10,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -18,57 +15,43 @@ import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.ZonedUTMPoint;
 
-import net.osmand.Location;
 import net.osmand.LocationConvert;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import org.apache.commons.logging.Log;
 
-public class CoordinatesWidget extends MapWidget {
+public abstract class CoordinatesBaseWidget extends MapWidget {
+	private static final Log log = PlatformUtil.getLog(CoordinatesMapCenterWidget.class);
 
-	private static final Log log = PlatformUtil.getLog(CoordinatesWidget.class);
+	protected LatLon lastLocation;
 
-	private final OsmAndLocationProvider locationProvider;
-	private Location lastKnownLocation;
+	protected final View divider;
+	protected final View secondContainer;
 
-	private final View divider;
-	private final View secondContainer;
+	protected final TextView firstCoordinate;
+	protected final TextView secondCoordinate;
 
-	private final TextView firstCoordinate;
-	private final TextView secondCoordinate;
+	protected final ImageView firstIcon;
+	protected final ImageView secondIcon;
 
-	private final ImageView firstIcon;
-	private final ImageView secondIcon;
-
-	@Override
 	protected int getLayoutId() {
 		return R.layout.coordinates_widget;
 	}
 
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_COORDINATES_WIDGET;
-	}
-
-	public CoordinatesWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, COORDINATES);
-
-		locationProvider = app.getLocationProvider();
+	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, WidgetType widgetType) {
+		super(mapActivity, widgetType);
 
 		divider = view.findViewById(R.id.divider);
 		secondContainer = view.findViewById(R.id.second_container);
@@ -83,8 +66,8 @@ public class CoordinatesWidget extends MapWidget {
 		updateVisibility(false);
 	}
 
-	private void copyCoordinates() {
-		if (lastKnownLocation != null) {
+	protected void copyCoordinates() {
+		if (lastLocation != null) {
 			String coordinates = firstCoordinate.getText().toString();
 			if (secondContainer.getVisibility() == View.VISIBLE) {
 				coordinates += ", " + secondCoordinate.getText().toString();
@@ -112,33 +95,9 @@ public class CoordinatesWidget extends MapWidget {
 		snackbar.show();
 	}
 
-	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
-		updateVisibility(visible);
-		if (visible) {
-			lastKnownLocation = locationProvider.getLastKnownLocation();
-			if (lastKnownLocation == null) {
-				showSearchingGpsMessage();
-			} else {
-				showFormattedCoordinates(lastKnownLocation);
-			}
-		}
-	}
-
-	private void showSearchingGpsMessage() {
-		AndroidUiHelper.updateVisibility(firstIcon, false);
-		AndroidUiHelper.updateVisibility(divider, false);
-		AndroidUiHelper.updateVisibility(secondContainer, false);
-		GPSInfo gpsInfo = locationProvider.getGPSInfo();
-		String message = getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;
-		firstCoordinate.setText(message);
-	}
-
-	private void showFormattedCoordinates(@NonNull Location location) {
+	protected void showFormattedCoordinates(double lat, double lon) {
 		int format = app.getSettings().COORDINATES_FORMAT.get();
-		double lat = location.getLatitude();
-		double lon = location.getLongitude();
+		lastLocation = new LatLon(lat, lon);
 
 		if (format == PointDescription.UTM_FORMAT) {
 			showUtmCoordinates(lat, lon);

@@ -2366,9 +2366,9 @@
     <string name="poi_socket_cee_red_32a">Entxufea: CEE gorria 32A</string>
     <string name="poi_socket_cee_red_32a_current">Entxufea: CEE gorria 32A: korrontea</string>
     <string name="poi_socket_cee_red_32a_output">Entxufea: CEE gorria 32A: irteera</string>
-    <string name="poi_socket_cee_red_64a">Entxufea: CEE gorria 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Entxufea: CEE gorria 64A: korrontea</string>
-    <string name="poi_socket_cee_red_64a_output">Entxufea: CEE gorria 64A: irteera</string>
+    <string name="poi_socket_cee_red_63a">Entxufea: CEE gorria 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Entxufea: CEE gorria 63A: korrontea</string>
+    <string name="poi_socket_cee_red_63a_output">Entxufea: CEE gorria 63A: irteera</string>
     <string name="poi_socket_cee_red_125a">Entxufea: CEE gorria 125A</string>
     <string name="poi_socket_cee_red_125a_current">Entxufea: CEE gorria 125A: korrontea</string>
     <string name="poi_socket_cee_red_125a_output">Entxufea: CEE gorria 125A: irteera</string>
@@ -3101,7 +3101,7 @@
     <string name="poi_socket_cee_blue_yes">CEE urdina</string>
     <string name="poi_socket_cee_red_16a_yes">CEE gorria 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE gorria 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE gorria 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE gorria 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE gorria 125A</string>
     <string name="poi_socket_type1_yes">1 mota</string>
     <string name="poi_socket_type1_combo_yes">1 mota konbinatua</string>

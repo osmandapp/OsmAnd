@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
@@ -1349,7 +1349,7 @@
     <string name="routing_settings_2">Ρυθμίσεις πλοήγησης</string>
     <string name="general_settings_2">Γενικές ρυθμίσεις</string>
     <string name="shared_string_deselect_all">Αποεπιλογή όλων</string>
-    <string name="shared_string_collapse">Κατάρρευση</string>
+    <string name="shared_string_collapse">Σύμπτυξη</string>
     <string name="route_points">Σημεία δρομολογίου</string>
     <string name="agps_info">Πληροφορίες A-GPS</string>
     <string name="agps_data_last_downloaded">Ληφθέντα δεδομένα A-GPS: %1$s</string>
@@ -2984,7 +2984,6 @@
     <string name="shared_string_file_is_saved">Το %s είναι αποθηκευμένο</string>
     <string name="shared_string_open_track">Άνοιγμα ίχνος</string>
     <string name="shared_string_track_is_saved">Το %s του ίχνους είναι αποθηκευμένο</string>
-    <string name="gpx_join_gaps">Ένωση κενών</string>
     <string name="app_mode_camper">Τροχόσπιτο</string>
     <string name="app_mode_campervan">Αυτοκινούμενο τροχόσπιτο (RV)</string>
     <string name="rendering_attr_showLez_description">Εμφάνιση στον χάρτη ζωνών για χαμηλή εκπομπή καυσαερίων. Δεν επηρεάζει τη δρομολόγηση.</string>
@@ -3306,7 +3305,7 @@
     <string name="reset_all_profile_settings_descr">Επαναφορά όλων των ρυθμίσεων κατατομών (προφίλ) στις προεπιλογές εγκατάστασης.</string>
     <string name="reset_all_profile_settings">Να επαναφερθούν όλες οι ρυθμίσεις κατατομών (προφίλ);</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
-    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s — %2$s</string>
     <string name="file_does_not_contain_routing_rules">Χωρίς κανόνες διαδρομής στο \'%1$s\'. Παρακαλούμε, επιλέξτε ένα άλλο αρχείο.</string>
     <string name="not_support_file_type_with_ext">Αντ΄αυτού επιλέξτε υποστηριζόμενο αρχείο επέκτασης %1$s.</string>
     <string name="import_from_file">Εισαγωγή από αρχείο</string>
@@ -3343,7 +3342,7 @@
     <string name="multimedia_use_system_camera">Χρήση εφαρμογής συστήματος</string>
     <string name="multimedia_photo_play_sound">Ήχος κλείστρου κάμερας</string>
     <string name="osm_authorization_success">Η εξουσιοδότηση είναι επιτυχής</string>
-    <string name="logcat_buffer_descr">Σημειώστε και μοιραστείτε λεπτομερείς καταγραφές της εφαρμογής</string>
+    <string name="logcat_buffer_descr">Ελέγξτε και μοιραστείτε λεπτομερή αρχεία καταγραφής της εφαρμογής</string>
     <string name="permission_is_required">Απαιτείται άδεια για να χρησιμοποιηθεί αυτή η επιλογή.</string>
     <string name="monitoring_min_speed_descr">Αυτό είναι ένα χαμηλής ταχύτητας φίλτρο αποκοπής για να μην καταγράφονται σημεία κάτω από συγκεκριμένη ταχύτητα. Αυτό μπορεί να κάνει τα καταγραμμένα ίχνη να μοιάζουν πιο ομαλά όταν προβάλλονται στον χάρτη.</string>
     <string name="monitoring_min_speed_descr_side_effect">Παράπλευρο φαινόμενο: Θα λείπουν από τη διαδρομή σας όλες οι ενότητες όπου δεν καλύπτονται από το κριτήριο της ελάχιστης ταχύτητας (π.χ. όταν σπρώχνετε το μηχανάκι σας σε απότομο λόφο). Επίσης, δεν θα υπάρχουν πληροφορίες για περιόδους ακινησίας, όπως φρένα. Αυτό έχει συνέπειες στην ανάλυση ή την μετεπεξεργασία, όπως όταν προσπαθείτε να καθορίσετε το συνολικό μήκος του ταξιδιού σας, τον χρόνο κίνησης, ή την μέση ταχύτητά σας.</string>
@@ -3723,4 +3722,6 @@
     <string name="wiki_menu_download_descr">Απαιτούνται πρόσθετοι χάρτες για να προβάλετε τα ΣΕ της Wikipedia στον χάρτη.</string>
     <string name="select_wikipedia_article_langs">Επιλέξτε τις γλώσσες για τα άρθρα Wikipedia στον χάρτη. Αλλάξτε σε οποιαδήποτε διαθέσιμη γλώσσα κατά την ανάγνωση του άρθρου.</string>
     <string name="radius_ruler_item">Χάρακας ακτίνας</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="map_markers_desc">Το γραφικό στοιχείο δείχνει την απόσταση ή την εκτιμώμενη ώρα άφιξης (ETA) για τους δύο πρώτους δείκτες στη λίστα δεικτών χάρτη.</string>
 </resources>

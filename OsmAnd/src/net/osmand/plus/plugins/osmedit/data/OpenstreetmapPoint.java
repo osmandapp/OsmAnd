@@ -94,7 +94,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 
 	public void trimChangedTagNamesValues() {
 		Entity entity = getEntity();
-		if (entity == null) {
+		if (entity == null || entity.getChangedTags() == null) {
 			return;
 		}
 		Set<String> changedTags = new HashSet<>(entity.getChangedTags());

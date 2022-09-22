@@ -2813,7 +2813,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="rendering_attr_highway_class_track_grade5_name">5. klase</string>
     <string name="routeInfo_road_types_name">Ceļu tipi</string>
     <string name="turn_on_profile_desc">Šī iestatījuma lietošanai jāizvēlas vismaz viens lietotnes profils.</string>
-    <string name="gpx_join_gaps">Savienot pārrāvumus</string>
     <string name="app_mode_camper">Treileris</string>
     <string name="app_mode_campervan">Autofurgons</string>
     <string name="temporary_conditional_routing">Ņemt vērā īslaicīgos ierobežojumus</string>
@@ -3332,7 +3331,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="plan_route_trim_after">Griezt pēc</string>
     <string name="plan_route_change_route_type_before">Mainīt maršruta veidu pirms</string>
     <string name="plan_route_change_route_type_after">Mainīt maršruta veidu pēc</string>
-    <string name="plan_route_join_segments">Pievienot segmentus</string>
     <string name="plan_route_split_before">Sadalīt pirms</string>
     <string name="plan_route_split_after">Sadalīt pēc</string>
     <string name="plan_route_add_new_segment">Pievienot jaunu segmentu</string>

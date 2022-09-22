@@ -106,11 +106,13 @@ public class MapVectorLayer extends BaseMapLayer {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
 			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
+			mapRenderer.setSymbolsOpacity(((float) alpha) / 255.0f);
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		if (view == null) {
 			return;
 		}

@@ -2535,7 +2535,6 @@
     <string name="routing_attr_difficulty_preference_expert_name">Експерти</string>
     <string name="no_widgets_here_yet">Липсват приспособления</string>
     <string name="available_widgets">Налични приспособления</string>
-    <string name="plan_route_join_segments">Обединяване на сегменти</string>
     <string name="access_hint_enter_category">Въведете категория</string>
     <string name="access_hint_enter_description">Въведете описание.</string>
     <string name="access_map_linked_to_location">Картата е свързана с местоположението</string>

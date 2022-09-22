@@ -389,9 +389,7 @@
 \n
 \nVéase - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
-    <string name="srtm_plugin_description">Funcionalidad muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
-\n
-\nLa información del terreno, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la forma de la superficie del terreno, considerando la curvatura, los extremos, la inclinación, los puntos de igual altura, etc. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel para ascensos y descensos, y el color de la desviación del ángulo de la pendiente con respecto al plano. Datos de SRTM y ASTER.
+    <string name="srtm_plugin_description">La información del terreno, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la forma de la superficie del terreno, considerando la curvatura, los extremos, la inclinación, los puntos de igual altura, etc. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel para ascensos y descensos, y el color de la desviación del ángulo de la pendiente con respecto al plano. Datos de SRTM y ASTER.
 \n
 \nVéase - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
@@ -405,9 +403,7 @@
 \nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
 \n
 \nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
-    <string name="plugin_nautical_descr">Enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos.
-\n
-\nAl activarlo, enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, zonas de peligro, zonas donde está permitido o prohibido navegar o atracar, etc. Para usarlo, descarga los mapas náuticos y activa «Mapa náutico» en «Configurar mapa».
+    <string name="plugin_nautical_descr">Activarlo para enriquecer el mapa con información sobre rutas náuticas, marcas de navegación náutica, zonas de peligro, zonas donde está permitido o prohibido navegar o atracar, etc. Para usarlo, descarga los mapas náuticos y activa «Mapa náutico» en «Configurar mapa».
 \n
 \nVéase - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_ski_descr">Diseñado para navegar en lugares de deportes de invierno. Observa las pistas de esquí, los marcadores de los remontes y las líneas de color que indican la complejidad de cada pista. Para usarlo luego de activarlo, ve a «Configurar mapa» y elige el tipo de mapa «Invierno y esquí».</string>
@@ -1264,7 +1260,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Sin rotación (norte siempre arriba)</string>
+    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
     <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -3082,7 +3078,6 @@
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
-    <string name="gpx_join_gaps">Unir espacios</string>
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
@@ -3880,7 +3875,6 @@
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Aeronave ligera</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir después</string>
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>
@@ -4093,11 +4087,11 @@
     <string name="backup_and_restore">Copia de seguridad y restauración</string>
     <string name="last_backup">Última copia de seguridad</string>
     <string name="duration_ago">hace %1$s</string>
-    <string name="osmand_cloud">Nube de OsmAnd</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Haz una copia de seguridad y restaura toda la información fácilmente.</string>
     <string name="local_backup">Copia de seguridad local</string>
     <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
-    <string name="backup_into_file">Copia de seguridad como archivo</string>
+    <string name="backup_into_file">Crear copia de seguridad local</string>
     <string name="restore_from_file">Restaurar desde archivo</string>
     <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
@@ -4105,7 +4099,7 @@
     <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
-    <string name="cloud_email_not_registered">Este correo electrónico no está registrado en la nube de OsmAnd</string>
+    <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Este correo electrónico ya se encuentra registrado.</string>
     <string name="resend_verification_code">Reenviar</string>
     <string name="verification_code_missing">No he recibido el código de verificación</string>
@@ -4133,14 +4127,14 @@
     <string name="download_server_version">Descargar versión del servidor</string>
     <string name="shared_string_logout">Cerrar sesión</string>
     <string name="backup_delete_all_data">Borrar todos mis datos</string>
-    <string name="backup_delete_all_data_descr">Serán borrados todos los datos de la nube de OsmAnd. Las versiones locales quedarán intactas.</string>
-    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a la nube de OsmAnd, incluyendo el historial de versiones.
+    <string name="backup_delete_all_data_descr">Serán borrados todos los datos de OsmAnd Cloud. Las versiones locales quedarán intactas.</string>
+    <string name="backup_delete_all_data_warning">Se borrarán todos los datos cargados previamente a OsmAnd Cloud, incluyendo el historial de versiones.
 \n
 \nNo se podrán recuperar los datos borrados.</string>
     <string name="backup_danger_zone">Zona peligrosa</string>
     <string name="delete_all_confirmation">Sí, borrar todo</string>
     <string name="backup_delete_old_data">Quitar versiones antiguas</string>
-    <string name="backup_delete_old_data_descr">Las versiones actuales de los datos serán conservados en la nube de OsmAnd</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de los datos serán conservados en OsmAnd Cloud</string>
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
 \n
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
@@ -4148,14 +4142,14 @@
     <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
     <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
     <string name="backup_restore_data">Restaurar datos</string>
-    <string name="restore_from_osmand_cloud">Restaurar desde la nube de OsmAnd</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Elige qué restaurar.</string>
     <string name="restore_selected_data">Restaurar datos marcados</string>
     <string name="receiving_data_from_server">Recibiendo datos del servidor…</string>
     <string name="restore_complete">Restaurado</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en la nube de OsmAnd de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
@@ -4170,7 +4164,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtén la nube de OsmAnd para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
@@ -4193,14 +4187,14 @@
     <string name="complete_purchase">Completar compra</string>
     <string name="regular_price">Precio normal</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">¿Borrar de la nube de OsmAnd todos los tipos de datos obsoletos\?</string>
+    <string name="backup_delete_types_descr">¿Borrar de OsmAnd Cloud todos los tipos de datos obsoletos\?</string>
     <string name="backup_delete_types">Borrar los tipos de datos desactivados</string>
     <string name="shared_string_discussion">Debate</string>
     <string name="shared_string_view_all">Ver todo</string>
     <string name="backup_error_user_is_already_registered">Esta dirección de correo electrónico se usa en otra cuenta</string>
     <string name="backup_error_subscription_was_expired">Suscripción vencida</string>
     <string name="backup_error_subscription_was_used">Suscripción o promoción usada en otra cuenta %1$s</string>
-    <string name="backup_error_size_is_exceeded">Tamaño máximo excedido (%1$s) en la nube de OsmAnd</string>
+    <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido (%1$s)</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
     <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
@@ -4231,7 +4225,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">hace instantes</string>
-    <string name="logout_from_osmand_cloud">Salir de la nube de OsmAnd</string>
+    <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
@@ -4239,14 +4233,14 @@
     <string name="backup_deleting_all_data">Borrando todos los datos…</string>
     <string name="backup_deleted_all_data">Se borraron todos los datos.</string>
     <string name="backup_deleting_all_data_descr">Espera hasta que OsmAnd borre tus datos de la nube. Todos los datos del dispositivo permanecen intactos.</string>
-    <string name="backup_deleted_all_data_descr">Todos tus datos han sido borrados con éxito de la nube de OsmAnd.</string>
+    <string name="backup_deleted_all_data_descr">Todos tus datos han sido borrados con éxito de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
     <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
     <string name="backup_dont_have_any_descr">Programa copias de seguridad automáticas y no pierdas nunca los datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
-    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en la nube de OsmAnd.</string>
+    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
     <string name="backup_restore_now">Restaurar ahora</string>
     <string name="attribute">Atributo</string>
@@ -4691,7 +4685,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Cambia de modo pulsando en el widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
@@ -4699,12 +4693,12 @@
     <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
     <string name="lang_sat">Santalí</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
-    <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para el que se medirá la velocidad media.</string>
-    <string name="average_speed_widget_desc">Muestra la velocidad media del recorrido actual.</string>
+    <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
+    <string name="average_speed_widget_desc">Muestra la velocidad media del viaje actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
+    <string name="transport_hazmat_no_desc">Los caminos y túneles pueden restringir el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
-    <string name="transport_hazmat_yes_desc">Debes elegir la categoría adecuada.</string>
+    <string name="transport_hazmat_yes_desc">Marca la categoría correspondiente.</string>
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
@@ -4712,9 +4706,9 @@
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
-    <string name="routing_attr_motor_type_description">Elige el tipo de combustible usado por el motor del vehículo, para calcular la emisión de CO₂.</string>
+    <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
-    <string name="routing_attr_motor_type_name">Combustible usado por el motor</string>
+    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
@@ -4725,26 +4719,26 @@
     <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
     <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
     <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
-    <string name="live_update_frequency_day_variant">Las actualizaciones del mapa serán comprobadas cada día.</string>
-    <string name="live_update_frequency_week_variant">Las actualizaciones del mapa serán comprobadas cada semana.</string>
+    <string name="live_update_frequency_day_variant">Las actualizaciones de mapas se comprueban cada día.</string>
+    <string name="live_update_frequency_week_variant">Las actualizaciones de mapas se comprueban cada semana.</string>
     <string name="marker_2nd">Segundo marcador</string>
-    <string name="map_marker_average_speed_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="map_marker_average_speed_desc">Indica el intervalo de tiempo en el promedio de velocidad (usado para estimar el tiempo de llegada).</string>
     <string name="marker_1st">Primer marcador</string>
     <string name="reset_all_settings_desc">¿Restablecer todos los ajustes a los predefinidos\?</string>
-    <string name="goods_delivery_desc_4">Para vehículos superiores a 3,5 toneladas, debes usar el perfil «Camión».</string>
+    <string name="goods_delivery_desc_4">Usar el perfil «Camión» para vehículos superiores a 3,5 toneladas.</string>
     <string name="updated_map_time">Actualizado: %1$s.</string>
-    <string name="no_altitude_data_desc">Puedes adjuntar la traza a los caminos para obtener datos de «%1$s» o calcularlo en línea.</string>
+    <string name="no_altitude_data_desc">Para obtener datos de «%1$s», adjuntar la traza a los caminos o calcularlo en línea.</string>
     <string name="altitude_correction">Corrección de altitud</string>
     <string name="goods_delivery_desc">Los vehículos de reparto pueden estar restringidos en algunos caminos.</string>
-    <string name="calculate_online_altitude_descr">Calcula la altitud en línea en los servidores de OsmAnd basándose en las imágenes de satélite y en los modelos digitales de elevación. Podría variar de la altitud registrada por el dispositivo y podría usarse como corrección de altitud.</string>
+    <string name="calculate_online_altitude_descr">Calcula la altitud en línea en los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de altitud.</string>
     <string name="lang_ckb">Kurdo central</string>
-    <string name="live_update_frequency_hour_variant">Las actualizaciones del mapa serán comprobadas cada hora.</string>
+    <string name="live_update_frequency_hour_variant">Las actualizaciones de mapas se comprueban cada hora.</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercancías</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="download_complete">Descarga completa</string>
     <string name="auto_backup_title">Copia de seguridad automática</string>
-    <string name="duplacate_widget_added_snackbar">Se va a añadir un widget duplicado a la lista.</string>
+    <string name="duplacate_widget_added_snackbar">Se ha añadido a la lista un widget duplicado.</string>
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="av_notes_photo_widget_desc">Pulsa el widget para tomar una foto.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
@@ -4767,7 +4761,7 @@
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
-\nAl usar la nube de OsmAnd, esto puede dar lugar a malentendidos después de la reinstalación.</string>
+\nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
@@ -4800,4 +4794,26 @@
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="display_position">Posición de la pantalla</string>
+    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
+    <string name="tap_on_widget">Pulsar el widget</string>
+    <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
+    <string name="shared_string_switch_mode">Cambiar modo</string>
+    <string name="click_on_widget">Haz clic en el widget</string>
+    <string name="shared_string_shows">Mostrar</string>
+    <string name="shared_string_normal">Normal</string>
+    <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
+    <string name="shared_string_large">Largo</string>
+    <string name="how_to_use">Cómo usar:</string>
+    <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
+\nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
+    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="map_markers_desc">El widget muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
+    <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
+    <string name="map_center_widget">Centro del mapa</string>
+    <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
+    <string name="current_location_widget">Ubicación actual</string>
+    <string name="coordinates_widget_map_center_desc">Muestra las coordenadas geográficas del centro del mapa actual</string>
+    <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
+    <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
+    <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
 </resources>

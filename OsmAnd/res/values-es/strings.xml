@@ -3088,7 +3088,6 @@
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
-    <string name="gpx_join_gaps">Unir espacios</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="new_route_calculated_dist_dbg">Ruta: distancia %1$s, tiempo de navegación %2$s
@@ -3891,7 +3890,6 @@
     <string name="use_dev_url_descr">Cambia a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Aeronave ligera</string>
-    <string name="plan_route_join_segments">Unir segmentos</string>
     <string name="plan_route_split_before">Dividir antes</string>
     <string name="plan_route_split_after">Dividir después</string>
     <string name="plan_route_add_new_segment">Añadir nuevo segmento</string>

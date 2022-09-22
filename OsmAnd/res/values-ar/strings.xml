@@ -3076,7 +3076,6 @@
     <string name="shared_string_file_is_saved">%s تم الحفظ</string>
     <string name="shared_string_open_track">فتح المسار</string>
     <string name="shared_string_track_is_saved">المسار %s تم حفظ</string>
-    <string name="gpx_join_gaps">ربط الأجزاء</string>
     <string name="app_mode_camper">العربه</string>
     <string name="app_mode_campervan">عربة التخييم</string>
     <string name="rendering_attr_showLez_description">إظهار مناطق الانبعاثات المنخفضة علي الخريطة. لا يؤثر علي التوجيه.</string>
@@ -3945,7 +3944,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">الألمانية (العادية)</string>
     <string name="app_mode_light_aircraft">طائرة</string>
-    <string name="plan_route_join_segments">ربط الأجزاء</string>
     <string name="plan_route_split_before">تقسيم قبل</string>
     <string name="plan_route_split_after">تقسيم بعد</string>
     <string name="plan_route_add_new_segment">إضافة شريحة جديدة</string>

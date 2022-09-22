@@ -286,6 +286,7 @@ public class MapTileLayer extends BaseMapLayer {
 	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		if (view == null) {
 			return;
 		}

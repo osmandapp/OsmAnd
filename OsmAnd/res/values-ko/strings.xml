@@ -1834,7 +1834,6 @@
     <string name="plan_route_split_before">분할 전</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">노드 네트워크 유형(국제, 지역, 로컬)에 따른 색상 경로다.</string>
     <string name="wikivoyage_travel_guide_descr">\'탐색\' → \'옵션\'에서 항상 사용 가능.</string>
-    <string name="plan_route_join_segments">세그먼트 결합</string>
     <string name="route_between_points_next_segment_button_desc">선택한 프로필을 사용하여 다음 세그먼트만 다시 계산된다.</string>
     <string name="profile_type_osmand_string">OsmAnd 프로필</string>
     <string name="plan_route_add_new_segment">새 세그먼트 추가</string>

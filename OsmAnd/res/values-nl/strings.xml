@@ -3166,7 +3166,6 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="routeInfo_roadClass_name">Wegtype</string>
     <string name="shared_string_open_track">Track openen</string>
-    <string name="gpx_join_gaps">Verbind onderbrekingen</string>
     <string name="new_route_calculated_dist_dbg">Route: afstand %1$s, reistijd %2$s \nBerekening: %3$.1f sec, %4$d wegen, %5$d tegels)</string>
     <string name="lang_oc">Occitaans</string>
     <string name="app_mode_wagon">Stationwagon</string>
@@ -3841,7 +3840,6 @@
     <string name="register_opr_have_account">Ik heb al een account</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Licht vliegtuig</string>
-    <string name="plan_route_join_segments">Segmenten samenvoegen</string>
     <string name="plan_route_split_before">Hiervoor splitsen</string>
     <string name="plan_route_split_after">Hierna splitsen</string>
     <string name="plan_route_add_new_segment">Nieuw segment toevoegen</string>

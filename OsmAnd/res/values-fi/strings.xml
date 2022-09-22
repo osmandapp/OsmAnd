@@ -2544,7 +2544,6 @@
     <string name="only_selected_segment_recalc">Vain valittu segmentti lasketaan uudelleen käyttämällä valittua profiilia.</string>
     <string name="all_next_segments_will_be_recalc">Kaikki seuraavat segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
     <string name="all_previous_segments_will_be_recalc">Kaikki edelliset segmentit lasketaan uudelleen käyttämällä valittua profiilia.</string>
-    <string name="plan_route_join_segments">Yhdistä segmentit</string>
     <string name="plan_route_add_new_segment">Lisää uusi segmentti</string>
     <string name="shared_string_octagon">Kahdeksankulmio</string>
     <string name="shared_string_square">Neliö</string>
@@ -3344,7 +3343,6 @@
     <string name="rendering_attr_ice_road_name">Jäätie</string>
     <string name="rendering_attr_winter_road_name">Talvitie</string>
     <string name="app_mode_campervan">Matkailuauto</string>
-    <string name="gpx_join_gaps">Yhdistä aukot</string>
     <string name="app_mode_pickup_truck">Lava-auto</string>
     <string name="app_mode_wagon">Vaunu</string>
     <string name="price_and_discount">%1$s • Säästä %2$s</string>

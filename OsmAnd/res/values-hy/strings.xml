@@ -2774,7 +2774,6 @@
     <string name="app_mode_monowheel">Մոնոանիվ</string>
     <string name="app_mode_scooter">Սկուտեր</string>
     <string name="routing_attr_max_num_changes_name">Փոփոխությունների թիվը</string>
-    <string name="gpx_join_gaps">Միացնել բացերը</string>
     <string name="app_mode_camper">Կցասայլակ</string>
     <string name="app_mode_wagon">Սայլակ</string>
     <string name="days_2_4">Օրեր</string>

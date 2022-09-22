@@ -64,6 +64,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	protected View view;
 	protected EditText nameEdit;
 	protected TextInputLayout nameCaption;
+	private OnGlobalLayoutListener onGlobalLayoutListener;
 
 	private int color;
 	private String iconName = DEFAULT_ICON_NAME;
@@ -157,7 +158,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		createShapeSelector();
 		updateContent();
 
-		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		return view;
 	}
 
@@ -165,12 +165,14 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	public void onResume() {
 		super.onResume();
 		requireMapActivity().disableDrawer();
+		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		requireMapActivity().enableDrawer();
+		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
 	private void setupToolbar() {
@@ -240,12 +242,18 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	private OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return () -> {
-			int layoutHeight = AndroidUtils.resizeViewForKeyboard(requireMapActivity(), view, layoutHeightPrevious);
-			if (layoutHeight != layoutHeightPrevious) {
-				layoutHeightPrevious = layoutHeight;
-			}
-		};
+		if (onGlobalLayoutListener == null) {
+			onGlobalLayoutListener = () -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					int layoutHeight = AndroidUtils.resizeViewForKeyboard(activity, view, layoutHeightPrevious);
+					if (layoutHeight != layoutHeightPrevious) {
+						layoutHeightPrevious = layoutHeight;
+					}
+				}
+			};
+		}
+		return onGlobalLayoutListener;
 	}
 
 	private void createIconSelector() {

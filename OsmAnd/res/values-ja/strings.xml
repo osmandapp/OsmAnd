@@ -3241,7 +3241,6 @@ POIの更新は利用できません</string>
     <string name="screen_alerts">画面アラート</string>
     <string name="route_parameters_descr">ルートパラメーターの構成</string>
     <string name="route_parameters">ルートパラメーター</string>
-    <string name="gpx_join_gaps">ギャップを埋める</string>
     <string name="app_mode_wagon">ワゴン車</string>
     <string name="app_mode_pickup_truck">ピックアップトラック</string>
     <string name="years_5">年</string>
@@ -3982,7 +3981,6 @@ POIの更新は利用できません</string>
     <string name="plan_route_split_after">この後で分割</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">軽飛行機</string>
-    <string name="plan_route_join_segments">セグメントの結合</string>
     <string name="plan_route_add_new_segment">新規セグメントの追加</string>
     <string name="profile_type_osmand_string">OsmAndプロファイル</string>
     <string name="profile_type_user_string">ユーザープロファイル</string>
