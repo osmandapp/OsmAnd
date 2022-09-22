@@ -4786,4 +4786,35 @@
     <string name="favorite_delete_group">Выдаліць групу</string>
     <string name="download_heightmap_maps">Мапа вышынь</string>
     <string name="display_position">Паказваць пазіцыю</string>
+    <string name="rotate_map_none_rotated_opt">Фіксавана (паварочваецца ўручную)</string>
+    <string name="map_marker_interval_dialog_desc">Каб разлічыць прыблізны час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
+    <string name="tap_on_widget">Націсніце на віджэт</string>
+    <string name="go_to_marker_location">Перайсці да месцазнаходжання пазнакі</string>
+    <string name="shared_string_switch_mode">Пераключыць рэжым</string>
+    <string name="click_on_widget">Націсніце на віджэт</string>
+    <string name="shared_string_shows">Паказвае</string>
+    <string name="shared_string_large">Вялікі</string>
+    <string name="shared_string_normal">Звычайны</string>
+    <string name="how_to_use">Як выкарыстоўваць:</string>
+    <string name="distance_by_tap_use_description">Дакраніцеся да мапы, каб праглядзець адлегласць паміж вашым бягучым месцазнаходжаннем і пунктам, на які вы націснеце.
+\nДакраніцеся двума пальцамі да мапы, каб убачыць адлегласць паміж націснутымі кропкамі</string>
+    <string name="shared_string_2_5_d_view">Выгляд 2.5 D</string>
+    <string name="quick_action_map_center_widget_descr">Пераключальнік для паказу або схаваныя віджэта «Цэнтр мапы» на мапе.</string>
+    <string name="map_center_widget">Цэнтр мапы</string>
+    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
+    <string name="quick_action_current_location_widget_descr">Пераключальнік для паказу або схавання віджэта «Бягучае месцазнаходжанне» на мапе.</string>
+    <string name="coordinates_widget_map_center_desc">Віджэт паказвае геаграфічныя каардынаты бягучага цэнтра мапы</string>
+    <string name="coordinates_widget_current_location">Каардынаты: бягучае месцазнаходжанне</string>
+    <string name="coordinates_widget_current_location_desc">Віджэт паказвае геаграфічныя каардынаты бягучага месцазнаходжання</string>
+    <string name="coordinates_widget_map_center">Каардынаты: цэнтр мапы</string>
+    <string name="map_widget_zoom_level_desc">Віджэт паказвае бягучы ўзровень маштабавання карты.</string>
+    <string name="map_widget_camera_distance_desc">Віджэт паказвае вышыню камеры над узроўнем паверхні.</string>
+    <string name="map_widget_camera_tilt_desc">Віджэт паказвае вугал нахілу камеры ў рэжыме перспектывы. Па змаўчанні 90° (без нахілу).</string>
+    <string name="map_widget_target_distance">Мэтавая адлегласць</string>
+    <string name="map_widget_zoom_level">Узровень маштабавання</string>
+    <string name="map_widget_camera_distance">Вышыня камеры</string>
+    <string name="map_widget_camera_tilt">Нахіл камеры</string>
+    <string name="developer_widgets">Віджэты распрацоўшчыка</string>
+    <string name="map_widget_target_distance_desc">Віджэт паказвае адлегласць ад камеры да мэтавага месца.</string>
+    <string name="map_markers_desc">Віджэт паказвае адлегласць або прыблізны час прыбыцця (ПЧП) для першых двух маркераў у спісе адзнак мапы.</string>
 </resources>
