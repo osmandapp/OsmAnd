@@ -4708,8 +4708,8 @@
     <string name="updated_map_time">Opdateret: %1$s.</string>
     <string name="includes_osm_changes_until">Inkluderer OSM-ændringer foretaget frem til %1$s.</string>
     <string name="live_update_frequency_day_variant">Der tjekkes for kortopdateringer dagligt.</string>
-    <string name="next_live_update_date_and_time">Næste opdatering: %1$s om %2$s.</string>
-    <string name="next_live_update_time">Næste opdatering: om %1$s.</string>
+    <string name="next_live_update_date_and_time">Næste opdatering den %1$s kl. %2$s.</string>
+    <string name="next_live_update_time">Næste opdatering kl. %1$s.</string>
     <string name="live_update_frequency_week_variant">Der tjekkes for kortopdateringer hver uge.</string>
     <string name="altitude_correction">Højdekorrektion</string>
     <string name="no_altitude_data_desc">For at modtage %1$s-data skal du vedhæfte dit spor til vejene eller beregne det online.</string>
