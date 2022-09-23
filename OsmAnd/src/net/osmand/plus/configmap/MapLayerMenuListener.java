@@ -69,8 +69,9 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		if (itemId == R.string.layer_poi) {
 			showPoiFilterDialog(uiAdapter, item);
 			return false;
-		} else if (itemId == R.string.layer_gpx_layer && item.getSelected()) {
-			showGpxSelectionDialog(uiAdapter, item);
+		} else if (itemId == R.string.layer_gpx_layer) {
+			//showGpxSelectionDialog(uiAdapter, item);
+			TracksFragment.showInstance(mapActivity);
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);

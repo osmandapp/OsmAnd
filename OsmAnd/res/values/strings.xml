@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="switch_folder">Switch folder</string>
+    <string name="shared_string_on_map">On map</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
     <string name="tap_on_widget">Tap on widget</string>
