@@ -86,7 +86,6 @@ public class TracksFragment extends BaseOsmAndFragment {
 		}
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
-		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 		viewPager = view.findViewById(R.id.view_pager);
 
 		setupToolbar();
