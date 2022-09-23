@@ -489,11 +489,11 @@
     <string name="map_online_data_descr">Uporabi spletne zemljevide (prejete datoteke so shranjene na pomnilniški kartici).</string>
     <string name="shared_string_online_maps">Spletni zemljevidi</string>
     <string name="online_map_settings_descr">Izberi vir spletnih ali shranjenih ploščic zemljevida.</string>
-    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), od privzetih OpenStreetMap (kot Mapnik), do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki, senčenje terena, itd.
+    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), od privzetih OpenStreetMap (kot npr. Mapnik), do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki, senčenje terena, itd.
 \n
-\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd standardni zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
+\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podlaga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd vektorski zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
 \n
-\nPrenesi zemljevide ploščic neposredno na spletu ali jih pripravi za uporabo brez povezave (ročno kopirane v podatkovno mapo OsmAnd) kot bazo podatkov SQLite, ki jo lahko izdelajo različna orodja za pripravo zemljevidov tretjih oseb.</string>
+\nPrenesi zemljevide ploščic neposredno ali jih kopiraj v podatkovno mapo OsmAnd, kot datoteke podatkovne zbirke SQLite, z enim od številnih orodij tretjih oseb, za pripravo zemljevidov.</string>
     <string name="osm_editing_plugin_description">Omogoča ti, da prispevaš v OpenStreetMap, globalno skupnost, katere cilj je ustvariti celovit zemljevid sveta, in vsakemu uporabniku zagotoviti najnovejše odprtokodne podatke.
 \n
 \nNavodila za urejanje zemljevida najdeš na spletni strani https://osmand.net/docs/user/plugins/osm-editing</string>
@@ -4792,4 +4792,13 @@
     <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
     <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
     <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
+    <string name="map_widget_camera_tilt_desc">Gradnik prikazuje kot nagiba kamere v perspektivnem načinu. Privzeta vrednost je 90° (brez nagiba).</string>
+    <string name="map_widget_target_distance">Razdalja do cilja</string>
+    <string name="map_widget_zoom_level">Stopnja povečave</string>
+    <string name="map_widget_camera_distance">Nadmorska višina kamere</string>
+    <string name="developer_widgets">Gradniki za razvijalce</string>
+    <string name="map_widget_camera_tilt">Nagib kamere</string>
+    <string name="map_widget_target_distance_desc">Gradnik prikazuje razdaljo od kamere do ciljne lokacije.</string>
+    <string name="map_widget_camera_distance_desc">Gradnik prikazuje višino kamere nad nivojem površine.</string>
+    <string name="map_widget_zoom_level_desc">Gradnik prikazuje trenutno stopnjo povečave zemljevida.</string>
 </resources>

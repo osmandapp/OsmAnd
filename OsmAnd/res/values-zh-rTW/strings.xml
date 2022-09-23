@@ -200,11 +200,11 @@
     <string name="map_online_data_descr">使用線上地圖(下載和快取圖磚到記憶卡)。</string>
     <string name="shared_string_online_maps">線上地圖</string>
     <string name="online_map_settings_descr">設定線上或快取的地圖圖磚來源。</string>
-    <string name="osmand_rastermaps_plugin_description">存取您想要檢視的多種線上（稱為圖磚或網格）地圖，從預設的 OSM 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、地形陰影層等。 
-\n 
-\n這些地圖可以被用來作為預設地圖，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。OsmAnd 向量地圖可以透過「組態地圖」選單來隱藏某些元素來讓任何底層的地圖更容易被看見。 
-\n 
-\n 可以直接線上下載圖磚，或是可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖製作工具產生。</string>
+    <string name="osmand_rastermaps_plugin_description">存取您想要檢視的多種線上（稱為圖磚或網格）地圖，從預設的 OSM 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、地形陰影層等。
+\n
+\n這些地圖可以被用來作為預設地圖，或作為上層又或另外基本地圖的底層（如 OsmAnd 的離線向量地圖）。OsmAnd 向量地圖可以透過「組態地圖」選單來隱藏某些元素來讓任何底層的地圖更容易被看見。
+\n
+\n 可以直接下載地圖圖磚，或是使用許多第三方地圖準備工具將它們以 SQLite 資料庫檔案的形式複製到 OsmAnd 資料的資料夾中。</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景（螢幕關閉）顯示設定，以開啟追蹤與導航。</string>
     <string name="osmand_accessibility_description">讓裝置的無障礙功能在 OsmAnd 可以直接使用，例如調整文字轉語音的語音速率、設定 D-pad 導航、使用軌跡球來控制縮放，或文字轉語音的回應，例如自動告知您的位置。</string>
     <string name="osmand_development_plugin_description">允許設定 OsmAnd 進行測試：模擬導航路線，檢查螢幕繪製效能等。正常應用程式使用不需要此外掛程式。</string>
@@ -4793,4 +4793,13 @@
     <string name="map_center_widget">地圖中心</string>
     <string name="coordinates_widget_current_location_desc">用來顯示目前地理位置的地理座標</string>
     <string name="coordinates_widget_current_location">座標：目前位置</string>
+    <string name="developer_widgets">開發者小工具</string>
+    <string name="map_widget_camera_tilt_desc">用來在透視模式下顯示相機傾斜角度的小工具。預設為 90°（無傾斜）。</string>
+    <string name="map_widget_zoom_level">縮放層級</string>
+    <string name="map_widget_camera_tilt">相機傾斜</string>
+    <string name="map_widget_target_distance_desc">顯示從相機到目標位置距離的小工具。</string>
+    <string name="map_widget_zoom_level_desc">顯示目前地圖縮放層級的小工具。</string>
+    <string name="map_widget_camera_distance_desc">顯示相機在地面以上標高的小工具。</string>
+    <string name="map_widget_target_distance">目標距離</string>
+    <string name="map_widget_camera_distance">相機標高</string>
 </resources>

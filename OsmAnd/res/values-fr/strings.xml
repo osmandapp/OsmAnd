@@ -4743,7 +4743,7 @@
     <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
     <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis gardez la gauche</string>
     <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis gardez la droite</string>
-    <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet enregistré.</string>
+    <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
     <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes du trajet enregistré.</string>
     <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
     <string name="relative_bearing_widget_desc">Affiche l\'angle entre la direction de votre déplacement et la destination.</string>
@@ -4757,7 +4757,7 @@
     <string name="distance_to_destination_widget_desc">Le gadget affiche la distance restante jusqu\'à destination.</string>
     <string name="time_to_destination_widget_desc">Le gadget affiche \"L\'heure d\'arrivée\" ou \"La durée restante\" jusqu\'à destination. Ces informations sont actualisées pendant le guidage et calculées à partir de votre position actuelle.</string>
     <string name="distance_to_intermediate_widget_desc">Le gadget affiche la distance restante jusqu\'au premier point intermédiaire. Une fois ce point intermédiaire atteint, la distance sera calculée jusqu\'au point intermédiaire suivant.</string>
-    <string name="trip_recording_duration_widget_desc">Affiche la durée du trajet enregistré.</string>
+    <string name="trip_recording_duration_widget_desc">Affiche la durée du trajet en cours d\'enregistrement.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Afficher les chemins tracés pour les VTT.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Afficher la difficulté des chemins VTT IMBA</string>
     <string name="average_speed_skip_stops_desc">Une vitesse inférieure à %1$s sera comptabilisée et affectera le calcul de la vitesse moyenne.</string>
@@ -4796,4 +4796,13 @@
     <string name="coordinates_widget_current_location">Coordonnées : position actuelle</string>
     <string name="coordinates_widget_map_center_desc">Gadget affichant les coordonnées du centre de la carte</string>
     <string name="quick_action_map_center_widget_descr">Bouton pour afficher ou masquer le gadget Centre de la carte.</string>
+    <string name="map_widget_zoom_level_desc">Ce gadget indique le niveau de zoom actuel.</string>
+    <string name="map_widget_camera_distance_desc">Ce gadget indique l\'altitude de l\'appareil photo au-dessus de la surface.</string>
+    <string name="map_widget_camera_tilt_desc">Ce gadget indique l\'angle de l\'appareil photo en mode perspective. La valeur par défaut est 90° (aucune inclinaison).</string>
+    <string name="developer_widgets">Gadgets pour les développeurs</string>
+    <string name="map_widget_camera_tilt">Angle de l\'appareil photo</string>
+    <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
+    <string name="map_widget_target_distance">Distance de la destination</string>
+    <string name="map_widget_zoom_level">Niveau de zoom</string>
+    <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
 </resources>
