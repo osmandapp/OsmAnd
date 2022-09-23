@@ -4692,7 +4692,7 @@
     <string name="routing_attr_goods_restrictions_description">Prendre en compte les autorisations d\'accès pour les véhicules légers de transport de marchandises</string>
     <string name="kg">kg</string>
     <string name="co2_mission">Émissions de CO₂</string>
-    <string name="live_update_frequency_day_variant">Les mises à jour de la carte sont vérifiées chaque jour.</string>
+    <string name="live_update_frequency_day_variant">Les mises à jour de carte sont vérifiées chaque jour.</string>
     <string name="live_update_frequency_week_variant">Les mises à jour de la carte sont vérifiées chaque semaine.</string>
     <string name="calculate_online_altitude_descr">Calculez l\'altitude en ligne grâce aux serveurs d\'OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Si cette altitude est différente de l\'altitude fournie par l\'appareil, l\'altitude pourra être corrigée.</string>
     <string name="live_update_frequency_hour_variant">Les mises à jour de la carte sont vérifiées chaque heure.</string>
@@ -4700,8 +4700,8 @@
     <string name="no_altitude_data_desc">Pour obtenir les données %1$s, déplacez votre trace sur les routes ou calculez l\'itinéraire en ligne.</string>
     <string name="updated_map_time">Mise à jour : %1$s.</string>
     <string name="includes_osm_changes_until">Inclut les modifications OSM jusqu’au %1$s.</string>
-    <string name="next_live_update_date_and_time">Prochaine mise à jour : %1$s à %2$s.</string>
-    <string name="next_live_update_time">Prochaine mise à jour à : %1$s.</string>
+    <string name="next_live_update_date_and_time">Prochaine mise à jour le %1$s à %2$s.</string>
+    <string name="next_live_update_time">Prochaine mise à jour à %1$s.</string>
     <string name="lang_ckb">Sorani</string>
     <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint à certaines routes.</string>
     <string name="map_marker_average_speed_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
