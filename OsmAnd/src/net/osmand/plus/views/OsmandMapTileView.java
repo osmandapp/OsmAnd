@@ -552,6 +552,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		setLatLon(latitude, longitude, false);
 	}
 
+	public void setLatLon(double latitude, double longitude, float ratiox, float ratioy) {
+		setLatLon(latitude, longitude, ratiox, ratioy, false);
+	}
+
 	public void setTarget31(int x31, int y31) {
 		setTarget31(x31, y31, false);
 	}
@@ -561,6 +565,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimating();
 		}
 		setLatLonImpl(latitude, longitude);
+		refreshMap();
+		if (notify) {
+			notifyLocationListeners(getLatitude(), getLongitude());
+		}
+	}
+
+	public void setLatLon(double latitude, double longitude, float ratiox, float ratioy, boolean notify) {
+		if (!animatedDraggingThread.isAnimatingMapTilt()) {
+			animatedDraggingThread.stopAnimating();
+		}
+		setLatLonImpl(latitude, longitude, ratiox, ratioy);
 		refreshMap();
 		if (notify) {
 			notifyLocationListeners(getLatitude(), getLongitude());
@@ -657,16 +672,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void restoreMapRatio() {
 		RotatedTileBox box = currentViewport.copy();
-		float rx = (float) box.getCenterPixelX() / box.getPixWidth();
-		float ry = (float) box.getCenterPixelY() / box.getPixHeight();
-		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
-			ry -= 0.35;
-		}
-		box.setCenterLocation(rx, ry);
-		LatLon screenCenter = box.getLatLonFromPixel(box.getPixWidth() / 2f, box.getPixHeight() / 2f);
+		LatLon screenCenter = NativeUtilities.getLatLonFromPixel(mapRenderer, box,
+				box.getPixWidth() / 2f, box.getPixHeight() / 2f);
 		mapRatioX = 0;
 		mapRatioY = 0;
-		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude());
+		PointF ratio = calculateRatio(mapRatioX, mapRatioY);
+		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude(), ratio.x, ratio.y);
 	}
 
 	public boolean hasCustomMapRatio() {
@@ -771,10 +782,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		additional.calculateFPS(start, end);
 	}
 
-	private void refreshMapInternal(DrawSettings drawSettings) {
-		if (view == null) {
-			return;
-		}
+	private PointF calculateRatio(float mapRatioX, float mapRatioY) {
 		float ratioy;
 		if (mapRatioY != 0) {
 			ratioy = mapRatioY;
@@ -795,8 +803,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else {
 			ratiox = mapPositionX == 0 ? 0.5f : (isLayoutRtl() ? 0.25f : 0.75f);
 		}
-		int cy = (int) (ratioy * view.getHeight());
-		int cx = (int) (ratiox * view.getWidth());
+		return new PointF(ratiox, ratioy);
+	}
+
+	private void refreshMapInternal(DrawSettings drawSettings) {
+		if (view == null) {
+			return;
+		}
+		PointF ratio = calculateRatio(mapRatioX, mapRatioY);
+		int cy = (int) (ratio.y * view.getHeight());
+		int cx = (int) (ratio.x * view.getWidth());
 		boolean updateMapRenderer = false;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
@@ -805,7 +821,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		if (updateMapRenderer || currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
 				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
-			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratio.x, ratio.y);
 			if (mapRenderer != null) {
 				mapRenderer.setMapTarget(new PointI(cx, cy), mapRenderer.getTarget());
 			}
@@ -1115,6 +1131,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			NativeUtilities.calculateTarget31(mapRenderer, latitude, longitude, true);
 		}
 		currentViewport.setLatLonCenter(latitude, longitude);
+	}
+
+	private void setLatLonImpl(double latitude, double longitude, float ratiox, float ratioy) {
+		int cx = (int) (ratiox * view.getWidth());
+		int cy = (int) (ratioy * view.getHeight());
+		if (currentViewport.getCenterPixelY() == cy && currentViewport.getCenterPixelX() == cx) {
+			setLatLonImpl(latitude, longitude);
+		} else {
+			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			if (mapRenderer != null) {
+				PointI target31 = NativeUtilities.calculateTarget31(mapRenderer, latitude, longitude, false);
+				mapRenderer.setMapTarget(new PointI(cx, cy), target31);
+			}
+			currentViewport.setLatLonCenter(latitude, longitude);
+		}
 	}
 
 	private void setTarget31Impl(int x31, int y31) {
