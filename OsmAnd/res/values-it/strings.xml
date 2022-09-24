@@ -4705,7 +4705,7 @@
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
     <string name="auto_25_chars_route_tr_kl">Svolta a destra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tr_kr">Svolta a destra e mantieni la destra</string>
-    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso registrato attuale.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso in corso di registrazione.</string>
     <string name="true_bearing_wdiget_desc">Angolo fra il nord reale e il punto di destinazione osservato dalla tua posizione.</string>
     <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso registrato attuale.</string>
     <string name="connect_with_straight_line">Collega con una linea retta</string>
@@ -4735,7 +4735,7 @@
     <string name="auto_25_chars_route_tu_kr">Fai inversione a U e tieni la destra</string>
     <string name="auto_25_chars_route_roundabout_kl">Prendi la %1$d uscita e tieni la sinistra</string>
     <string name="auto_25_chars_route_roundabout_kr">Prendi la %1$d uscita e tieni la destra</string>
-    <string name="trip_recording_duration_widget_desc">Mostra il tempo della registrazione della traccia, la durata in minuti/ore della traccia in corso di registrazione.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra la durata della traccia in corso di registrazione.</string>
     <string name="no_altitude_data_desc">Puoi ancorare la tua traccia alle strade per ottenere il dato %1$s o calcolarlo online.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostra percorsi MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra percorsi dedicati al mountainbiking.</string>
@@ -4744,7 +4744,7 @@
     <string name="av_notes_video_widget_desc">Toccare il widget permette di iniziare una registrazione video.</string>
     <string name="first_marker_widget_desc">Puoi configurare il widget per visualizzare la distanza o il tempo stimato d\'arrivo al primo marcatore della mappa.</string>
     <string name="attach_roads_warning">Soltanto una traccia registrata può essere allegata alle strade.</string>
-    <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla svolta successiva alla prossima che è abilitata se la svolta è a una distanza inferiore a quella di approccio.</string>
+    <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla seconda prossima svolta, che sono abilitate se la seconda svolta è immediatamente dopo la prima.</string>
     <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
     <string name="attach_to_roads_banner_desc">Collega la traccia sulle strade per avere indicazioni di navigazione dettagliate.</string>
     <string name="attach_roads_descr">Approssima la tua traccia usando un percorso della mappa offline. Ciò restituirà valori di elevazione corretti, dettagli stradali e svolte usate durante la navigazione.</string>
@@ -4785,4 +4785,21 @@
     <string name="shared_string_shows">Mostra</string>
     <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
     <string name="map_marker_interval_dialog_desc">Specifica l\'intervallo di tempo per cui verrà misurata la velocità media per calcolare la stima dell\'orario d\'arrivo.</string>
+    <string name="current_location_widget">Posizione attuale</string>
+    <string name="coordinates_widget_map_center_desc">Il widget mostra le coordinate geografiche del centro attuale della mappa</string>
+    <string name="quick_action_current_location_widget_descr">Un interruttore per mostrare o nascondere il widget «Posizione attuale» sulla mappa.</string>
+    <string name="coordinates_widget_map_center">Coordinate: centro della mappa</string>
+    <string name="map_center_widget">Centro della mappa</string>
+    <string name="quick_action_map_center_widget_descr">Un interruttore per mostrare o nascondere il widget «Centro della mappa» sulla mappa.</string>
+    <string name="map_widget_camera_distance_desc">Il widget mostra l\'elevazione della fotocamera dalla superficie.</string>
+    <string name="map_widget_camera_tilt_desc">Il widget mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
+    <string name="map_widget_zoom_level_desc">Il widget mostra il livello d\'ingrandimento attuale della mappa.</string>
+    <string name="map_widget_target_distance_desc">Il widget mostra la distanza tra la fotocamera e la posizione di destinazione.</string>
+    <string name="map_widget_target_distance">Distanza dalla destinazione</string>
+    <string name="map_widget_zoom_level">Livello d\'ingrandimento</string>
+    <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
+    <string name="developer_widgets">Widget per sviluppatori</string>
+    <string name="map_widget_camera_distance">Elevazione della fotocamera</string>
+    <string name="coordinates_widget_current_location_desc">Il widget mostra le coordinate geografiche della posizione attuale</string>
+    <string name="coordinates_widget_current_location">Coordinate: posizione attuale</string>
 </resources>
