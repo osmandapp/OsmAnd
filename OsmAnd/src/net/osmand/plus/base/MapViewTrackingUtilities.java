@@ -265,13 +265,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						settings.TURN_SCREEN_ON_TIME_INT.get() == 0) {
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom,
-							pendingRotation, rotation, movingTime, false, false);
+							pendingRotation, rotation, movingTime, false,
+							() -> movingToMyLocation = false);
 				} else {
 					if (mapView.hasMapRenderer()) {
 						mapView.getAnimatedDraggingThread().startMoving(
 								location.getLatitude(), location.getLongitude(), zoom,
 								pendingRotation, rotation, mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()
-										? 0 : MOVE_ANIMATION_TIME, movingToMyLocation, false);
+										? 0 : MOVE_ANIMATION_TIME, false,
+								() -> movingToMyLocation = false);
 					} else {
 						if (zoom != null && zoom.first != null && zoom.second != null) {
 							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
@@ -460,7 +462,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		};
 		thread.startMoving(location.getLatitude(), location.getLongitude(),
-				fZoom, false, true, startAnimationCallback, () -> movingToMyLocation = false);
+				fZoom, false, true, startAnimationCallback,
+				() -> movingToMyLocation = false);
 	}
 
 	private void backToLocationWithDelay(int delay) {

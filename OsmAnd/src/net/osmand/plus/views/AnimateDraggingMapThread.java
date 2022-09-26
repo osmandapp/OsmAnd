@@ -170,7 +170,7 @@ public class AnimateDraggingMapThread {
 
 	public void startMoving(double finalLat, double finalLon, Pair<Integer, Double> finalZoom,
 	                        boolean pendingRotation, Float finalRotation, long movingTime,
-	                        boolean joinAnimations, boolean notifyListener) {
+	                        boolean notifyListener, @Nullable Runnable finishAnimationCallback) {
 		stopAnimatingSync();
 
 		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -208,6 +208,9 @@ public class AnimateDraggingMapThread {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 			tileView.rotateToAnimate(rotation);
+			if (finishAnimationCallback != null) {
+				finishAnimationCallback.run();
+			}
 			return;
 		}
 
@@ -248,9 +251,6 @@ public class AnimateDraggingMapThread {
 				if (targetAnimation != null)
 				{
 					animator.cancelAnimation(targetAnimation);
-					if (joinAnimations) {
-						duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
-					}
 				}
 				animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
 			}
@@ -275,6 +275,9 @@ public class AnimateDraggingMapThread {
 				animatingMapAnimator(mapRenderer);
 				if (animateZoom) {
 					animatingZoom = false;
+				}
+				if (!stopped && finishAnimationCallback != null) {
+					finishAnimationCallback.run();
 				}
 			} else {
 				if (animateZoom) {
@@ -321,7 +324,7 @@ public class AnimateDraggingMapThread {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			if (finishAnimationCallback != null) {
-				app.runInUIThread(finishAnimationCallback);
+				finishAnimationCallback.run();
 			}
 			return;
 		}
@@ -384,8 +387,8 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingZoom = false;
 				}
-				if (finishAnimationCallback != null) {
-					app.runInUIThread(finishAnimationCallback);
+				if (!stopped && finishAnimationCallback != null) {
+					finishAnimationCallback.run();
 				}
 				if (!stopped) {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
@@ -398,8 +401,9 @@ public class AnimateDraggingMapThread {
 
 				if (!stopped) {
 					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
-				} else if (finishAnimationCallback != null) {
-					app.runInUIThread(finishAnimationCallback);
+					if (finishAnimationCallback != null) {
+						finishAnimationCallback.run();
+					}
 				}
 				if (!stopped) {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
