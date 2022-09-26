@@ -82,6 +82,7 @@ import net.osmand.aidlapi.customization.CustomPluginParams;
 import net.osmand.aidlapi.customization.SelectProfileParams;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.PreferenceParams;
+import net.osmand.aidlapi.customization.ZoomLimitsParams;
 
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
@@ -935,4 +936,6 @@ interface IOsmAndAidlInterface {
      * @param callback (IOsmAndAidlCallback) - callback to notify user on new OsmAnd logs
      */
     long registerForLogcatMessages(in ALogcatListenerParams params, IOsmAndAidlCallback callback);
+
+    boolean setZoomLimits(in ZoomLimitsParams params);
 }

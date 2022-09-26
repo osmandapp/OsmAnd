@@ -35,9 +35,9 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 		if (mv != null) {
 			int frameId = mv.getFrameId();
 			long now = SystemClock.elapsedRealtime();
-			String fps = "- FPS";
+			String fps = "-";
 			if (frameId > startFrameId && now > startMs && startMs != 0) {
-				fps = String.format("%.1f FPS",
+				fps = String.format("%.1f",
 						1000.0 / (now - startMs) * (frameId - startFrameId));
 			}
 			if (startFrameId == 0 || (middleFrameId - startFrameId) > HALF_FRAME_BUFFER_LENGTH) {
@@ -50,12 +50,12 @@ public class FPSTextInfoWidget extends TextInfoWidget {
 			}
 
 
-			setText("", fps);
+			setText(fps, "FPS");
 		} else {
 			if (!mapView.isMeasureFPS()) {
 				mapView.setMeasureFPS(true);
 			}
-			setText("", (int) mapView.getFPS() + "/" + (int) mapView.getSecondaryFPS() + " FPS");
+			setText((int) mapView.getFPS() + "",   (int) mapView.getSecondaryFPS() + " FPS");
 		}
 	}
 }

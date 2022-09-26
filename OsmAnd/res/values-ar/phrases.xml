@@ -3131,7 +3131,7 @@
     <string name="poi_socket_type1_combo_yes">النوع 1 كومبو</string>
     <string name="poi_socket_type1_yes">النوع 1</string>
     <string name="poi_socket_cee_red_125a_yes">CEE الأحمر 125A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE الأحمر 64 أ</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE الأحمر 64 أ</string>
     <string name="poi_socket_cee_red_32a_yes">CEE الأحمر 32A</string>
     <string name="poi_socket_cee_red_16a_yes">CEE الأحمر 16A</string>
     <string name="poi_socket_cee_blue_yes">CEE الأزرق</string>
@@ -3196,12 +3196,12 @@
     <string name="poi_map_type_topo">نوع الخريطة: طبوغرافية</string>
     <string name="poi_charging_station_output">مخرج محطة الشحن</string>
     <string name="poi_amperage">التيار/أمبير</string>
-    <string name="poi_parking_fee_no">رسوم وقوف السيارات: لا</string>
-    <string name="poi_parking_fee_yes">رسوم وقوف السيارات: نعم</string>
+    <string name="poi_parking_fee_no">لا</string>
+    <string name="poi_parking_fee_yes">نعم</string>
     <string name="poi_truck_no">شاحنة: لا</string>
     <string name="poi_truck_yes">شاحنة: نعم</string>
     <string name="poi_socket_cee_red_32a_current">المقبس: CEE الأحمر 32A: التيار</string>
-    <string name="poi_socket_cee_red_64a_current">المقبس: CEE الأحمر 64A: التيار</string>
+    <string name="poi_socket_cee_red_63a_current">المقبس: CEE الأحمر 63A: التيار</string>
     <string name="poi_socket_cee_red_125a_current">‍المقبس: CEE الأحمر 125A: التيار</string>
     <string name="poi_socket_type1_current">مأخذ التوصيل: النوع 1: التيار</string>
     <string name="poi_socket_type1_combo_current">مأخذ التوصيل: نوع 1 التحرير والسرد: التيار</string>
@@ -3261,8 +3261,8 @@
     <string name="poi_socket_type1">المقبس: النوع 1</string>
     <string name="poi_socket_cee_red_125a_output">المقبس: CEE الأحمر 125A: الإخراج</string>
     <string name="poi_socket_cee_red_125a">المقبس: CEE الأحمر 125A</string>
-    <string name="poi_socket_cee_red_64a_output">المقبس: CEE الأحمر 64A: الإخراج</string>
-    <string name="poi_socket_cee_red_64a">المقبس: CEE الأحمر 64A</string>
+    <string name="poi_socket_cee_red_63a_output">المقبس: CEE الأحمر 63A: الإخراج</string>
+    <string name="poi_socket_cee_red_63a">المقبس: CEE الأحمر 63A</string>
     <string name="poi_socket_cee_red_32a_output">المقبس: CEE الأحمر 32A: الإخراج</string>
     <string name="poi_socket_cee_red_32a">المقبس: CEE الأحمر 16A</string>
     <string name="poi_socket_cee_red_16a_output">المقبس: CEE الأحمر 16A: الإخراج</string>
@@ -4342,4 +4342,12 @@
     <string name="poi_club_bicycle">نادي الدراجات الهوائية</string>
     <string name="poi_board_title">عنوان اللافتة</string>
     <string name="poi_first_aid_kit">حقيبة الإسعافات الأولية</string>
+    <string name="poi_playground_structure">الهيكل</string>
+    <string name="poi_playground_slide">منزلق</string>
+    <string name="poi_playground_climbingframe">إطار التسلق</string>
+    <string name="poi_parking_fee_filter">رسوم موقف السيارات</string>
+    <string name="poi_dog">كلاب</string>
+    <string name="poi_dog_leashed">الكلاب: المقيد فقط</string>
+    <string name="poi_dog_unleashed">كلاب: التي لا تحتاج إلى تقييد</string>
+    <string name="poi_dog_designated">مخصص للكلاب</string>
 </resources>

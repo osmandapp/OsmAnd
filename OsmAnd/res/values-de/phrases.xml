@@ -3227,9 +3227,9 @@
     <string name="poi_socket_cee_red_32a">Sockel: CEE rot 32A</string>
     <string name="poi_socket_cee_red_32a_current">Sockel: CEE rot 32A: Strom</string>
     <string name="poi_socket_cee_red_32a_output">Sockel: CEE rot 32A: Leistung</string>
-    <string name="poi_socket_cee_red_64a">Sockel: CEE rot 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Sockel: CEE rot 64A: Strom</string>
-    <string name="poi_socket_cee_red_64a_output">Sockel: CEE rot 64A: Leistung</string>
+    <string name="poi_socket_cee_red_63a">Sockel: CEE rot 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Sockel: CEE rot 63A: Strom</string>
+    <string name="poi_socket_cee_red_63a_output">Sockel: CEE rot 63A: Leistung</string>
     <string name="poi_socket_cee_red_125a">Sockel: CEE rot 125A</string>
     <string name="poi_socket_cee_red_125a_current">Sockel: CEE rot 125A: Strom</string>
     <string name="poi_socket_cee_red_125a_output">Sockel: CEE rot 125A: Leistung</string>
@@ -3374,7 +3374,7 @@
     <string name="poi_socket_cee_blue_yes">CEE blau</string>
     <string name="poi_socket_cee_red_16a_yes">CEE rot 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE rot 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE rot 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE rot 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE rot 125A</string>
     <string name="poi_socket_type1_yes">Typ 1</string>
     <string name="poi_socket_type1_combo_yes">Combo Typ 1</string>

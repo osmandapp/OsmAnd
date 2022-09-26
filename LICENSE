@@ -38,19 +38,16 @@
 
     * UI Design and UX work, such as layout and icons, are covered by [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
+	
     Restriction to UI/UX CC-BY-NC-ND:
     * Publishing applications using the OsmAnd UI/UX code to Google Play, Amazon Market, or Apple Store must be done with written permission.*
 
-
-    * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
+    * Map icons are taken from sjjb and some are drawn and distributed under Public Domain
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
 	- some icons are from http://osm-icons.org/wiki/Icons (CC-0 by Markus59, CC BY-SA 2.0)
 
     * Integration with Qt library in (https://github.com/osmandapp/OsmAnd-core) - dynamic linking
         - LGPL (https://www.qt.io/terms-conditions/)
-
-    * Map icons and their derived primitives are covered by a proprietary license:
-        - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
     * Generated voice files from TTS files are covered by a proprietary license:
         - Voice files (https://github.com/osmandapp/OsmAnd-resources/tree/master/voice)

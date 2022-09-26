@@ -4697,7 +4697,7 @@
     <string name="includes_osm_changes_until">Obsahuje zmeny OSM vykonané do %1$s.</string>
     <string name="next_live_update_date_and_time">Nasledujúca aktualizácia: %1$s o %2$s.</string>
     <string name="marker_2nd">Druhá značka</string>
-    <string name="switch_widget_mode_desc">Režim môžete prepnúť stlačením nástroja.</string>
+    <string name="switch_widget_mode_desc">Stlačenie nástroja prepne režim.</string>
     <string name="side_marker_eta">Odhadovaný čas príjazdu</string>
     <string name="reset_all_settings_desc">Naozaj chcete obnoviť všetky nastavenia na predvolené hodnoty\?</string>
     <string name="goods_delivery_desc_2">Cesty zakázané pre dodávkové vozidlá budú obídené.</string>
@@ -4709,7 +4709,7 @@
     <string name="routing_attr_goods_restrictions_name">Dodávkové vozidlá</string>
     <string name="live_update_frequency_hour_variant">Aktualizácie máp budú kontrolované každú hodinu.</string>
     <string name="marker_1st">Prvá značka</string>
-    <string name="map_marker_average_speed_desc">Zadajte časový interval, v ktorom bude meraná priemerná rýchlosť pre výpočet odhadovaného času príjazdu.</string>
+    <string name="map_marker_average_speed_desc">Zadajte časový interval pre priemerovanie rýchlosti (pre odhad času príjazdu).</string>
     <string name="goods_delivery_desc_4">Ak má vaše vozidlo viac ako 3,5 ton, mali by ste použiť režim Nákladné auto.</string>
     <string name="goods_delivery_desc_3">Platí len pre vozidlá dodávajúce tovar so štyrmi kolesami a menej ako 3,5 tonami.</string>
     <string name="live_update_frequency_day_variant">Aktualizácie máp budú kontrolované každý deň.</string>
@@ -4720,11 +4720,11 @@
     <string name="download_complete">Sťahovanie dokončené</string>
     <string name="accessibility_2d_view_off">2.5D zobrazenie Vypnuté</string>
     <string name="auto_backup_title">Automatické zálohovanie</string>
-    <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridaný ako ďalší v zozname.</string>
+    <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridávaný ako ďalší v zozname.</string>
     <string name="shared_string_duplicate">Duplikát</string>
-    <string name="av_notes_photo_widget_desc">Stlačenie nástroja umožňuje snímať fotografiu.</string>
-    <string name="av_notes_audio_widget_desc">Stlačenie nástroja umožňuje uložiť audio-poznámku.</string>
-    <string name="trip_recording_duration_widget_desc">Zobrazuje čas zaznamenávania stopy, dĺžku práve zaznamenávaného výletu v minútach/hodinách.</string>
+    <string name="av_notes_photo_widget_desc">Stlačenie nástroja vám umožní snímať fotografiu.</string>
+    <string name="av_notes_audio_widget_desc">Stlačenie nástroja vám umožní nahrať audio-poznámku.</string>
+    <string name="trip_recording_duration_widget_desc">Zobrazuje časovú dĺžku práve zaznamenávaného výletu.</string>
     <string name="trip_recording_distance_widget_desc">Zobrazuje vzdialenosť práve zaznamenávaného výletu.</string>
     <string name="second_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k druhej mapovej značke.</string>
     <string name="first_marker_widget_desc">Môžete nastaviť nástroj na zobrazovanie vzdialenosti alebo odhadovaného času príjazdu k prvej mapovej značke.</string>
@@ -4738,9 +4738,9 @@
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_name">Hrúbka čiary hĺbkových vrstevníc</string>
-    <string name="auto_backup_preference_desc">Prevolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
-\nAk používate OsmAnd Cloud, toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
-    <string name="av_notes_video_widget_desc">Stlačenie nástroja umožňuje začať video-nahrávku.</string>
+    <string name="auto_backup_preference_desc">Predvolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
+\nPri použití OsmAnd Cloud toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
+    <string name="av_notes_video_widget_desc">Stlačenie nástroja vám umožní nahrať video.</string>
     <string name="trip_recording_uphill_widget_desc">Zobrazuje súčet všetkých výstupov v práve zaznamenávanom výlete.</string>
     <string name="trip_recording_downhill_widget_desc">Zobrazuje súčet všetkých zostupov v práve zaznamenávanom výlete.</string>
     <string name="true_bearing_wdiget_desc">Uhol medzi skutočným severom a cieľovým bodom pozorovaný z aktuálnej pozície.</string>
@@ -4753,7 +4753,7 @@
     <string name="next_turn_widget_desc">Nástroj zobrazuje informácie o nasledujúcom zabočení s obrázkom manévra a vzdialenosti k nemu.</string>
     <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobraziť trasy pre horské bicykle</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle.</string>
     <string name="auto_25_chars_route_tl_kl">Zahnite doľava a držte sa vľavo</string>
     <string name="auto_25_chars_route_tl_kr">Zahnite doľava a držte sa vpravo</string>
     <string name="auto_25_chars_route_tr_kl">Zahnite doprava a držte sa vľavo</string>
@@ -4763,7 +4763,7 @@
     <string name="auto_25_chars_route_roundabout_kl">Choďte cez %1$d výjazd a držte sa vľavo</string>
     <string name="auto_25_chars_route_roundabout_kr">Choďte cez %1$d výjazd a držte sa vpravo</string>
     <string name="average_speed_skip_stops_desc">Rýchlosť nižšia ako %1$s bude započítaná a ovplyvní priemernú rýchlosť.</string>
-    <string name="attach_roads_warning">K cestám môžete prichytiť len zaznamenanú stopu</string>
+    <string name="attach_roads_warning">K cestám môžete prichytiť len zaznamenanú stopu.</string>
     <string name="without_profiles_changing">Bez zmeny profilov</string>
     <string name="shared_string_only_missing">Len chýbajúce</string>
     <string name="download_tiles">Stiahnuť dlaždice</string>

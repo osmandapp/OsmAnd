@@ -333,6 +333,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		List<SelectedGpxFile> visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 
 		boolean tmpVisibleTrackChanged = false;

@@ -119,6 +119,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		OsmandApplication app = getApplication();
 		startZoom = plugin.SHOW_OSM_BUGS_MIN_ZOOM.get();
 		MapRendererView mapRenderer = getMapRenderer();

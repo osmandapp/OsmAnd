@@ -3230,9 +3230,9 @@
     <string name="poi_socket_cee_red_32a">Conector: CEE rojo 32A</string>
     <string name="poi_socket_cee_red_32a_current">Conector: CEE rojo 32A: corriente</string>
     <string name="poi_socket_cee_red_32a_output">Conector: CEE rojo 32A: salida</string>
-    <string name="poi_socket_cee_red_64a">Conector: CEE rojo 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Conector: CEE rojo 64A: corriente</string>
-    <string name="poi_socket_cee_red_64a_output">Conector: CEE rojo 64A: salida</string>
+    <string name="poi_socket_cee_red_63a">Conector: CEE rojo 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Conector: CEE rojo 63A: corriente</string>
+    <string name="poi_socket_cee_red_63a_output">Conector: CEE rojo 63A: salida</string>
     <string name="poi_socket_cee_red_125a">Conector: CEE rojo 125A</string>
     <string name="poi_socket_cee_red_125a_current">Conector: CEE rojo 125A: corriente</string>
     <string name="poi_socket_cee_red_125a_output">Conector: CEE rojo 125A: salida</string>
@@ -3377,7 +3377,7 @@
     <string name="poi_socket_cee_blue_yes">CEE azul</string>
     <string name="poi_socket_cee_red_16a_yes">CEE rojo 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE rojo 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE rojo 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE rojo 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE rojo 125A</string>
     <string name="poi_socket_type1_yes">Tipo 1</string>
     <string name="poi_socket_type1_combo_yes">Tipo 1 combinado</string>

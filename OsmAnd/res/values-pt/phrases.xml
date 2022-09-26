@@ -3253,9 +3253,9 @@
     <string name="poi_socket_cee_red_32a">Tomadas: CEE vermelha 32A</string>
     <string name="poi_socket_cee_red_32a_current">Tomadas: CEE vermelha 32A: amperes</string>
     <string name="poi_socket_cee_red_32a_output">Tomadas: CEE vermelha 32A: watts</string>
-    <string name="poi_socket_cee_red_64a">Tomadas: CEE vermelha 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Tomadas: CEE vermelha 64A: amperes</string>
-    <string name="poi_socket_cee_red_64a_output">Tomadas: CEE vermelha 64A: watts</string>
+    <string name="poi_socket_cee_red_63a">Tomadas: CEE vermelha 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Tomadas: CEE vermelha 63A: amperes</string>
+    <string name="poi_socket_cee_red_63a_output">Tomadas: CEE vermelha 63A: watts</string>
     <string name="poi_socket_cee_red_125a">Tomadas: CEE vermelha 125A</string>
     <string name="poi_socket_cee_red_125a_current">Tomadas: CEE vermelha 125A: amperes</string>
     <string name="poi_socket_cee_red_125a_output">Tomadas: CEE vermelha 125A: watts</string>
@@ -3390,7 +3390,7 @@
     <string name="poi_socket_cee_blue_yes">CEE azul</string>
     <string name="poi_socket_cee_red_16a_yes">CEE vermelha 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE vermelha 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE vermelha 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE vermelha 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE vermelha 125A</string>
     <string name="poi_socket_type1_yes">Tipo 1</string>
     <string name="poi_socket_type1_combo_yes">Tipo 1 combo</string>

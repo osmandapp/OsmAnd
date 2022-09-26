@@ -3258,9 +3258,9 @@
     <string name="poi_socket_cee_red_32a">Presa: CEE ruja 32A</string>
     <string name="poi_socket_cee_red_32a_current">Presa: CEE ruja 32A: currente</string>
     <string name="poi_socket_cee_red_32a_output">Presa: CEE ruja 32A: essida</string>
-    <string name="poi_socket_cee_red_64a">Presa: CEE ruja 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Presa: CEE ruja 64A: currente</string>
-    <string name="poi_socket_cee_red_64a_output">Presa: CEE ruja 64A: essida</string>
+    <string name="poi_socket_cee_red_63a">Presa: CEE ruja 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Presa: CEE ruja 63A: currente</string>
+    <string name="poi_socket_cee_red_63a_output">Presa: CEE ruja 63A: essida</string>
     <string name="poi_socket_cee_red_125a">Presa: CEE ruja 125A</string>
     <string name="poi_socket_cee_red_125a_current">Presa: CEE ruja 125A: currente</string>
     <string name="poi_socket_cee_red_125a_output">Presa: CEE ruja 125A: essida</string>
@@ -3400,7 +3400,7 @@
     <string name="poi_socket_cee_blue_yes">CEE biaita</string>
     <string name="poi_socket_cee_red_16a_yes">CEE ruja 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE ruja 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE ruja 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE ruja 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE ruja 125A</string>
     <string name="poi_socket_chademo_output_high">Arta</string>
     <string name="poi_socket_chademo_output_medium">Mèdia</string>

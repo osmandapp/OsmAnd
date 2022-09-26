@@ -2774,9 +2774,9 @@
     <string name="poi_socket_cee_red_32a">Rafmagnsinnstunga: CEE rautt 32A</string>
     <string name="poi_socket_cee_red_32a_current">Rafmagnsinnstunga: CEE rautt 32A: straumur</string>
     <string name="poi_socket_cee_red_32a_output">Rafmagnsinnstunga: CEE rautt 32A: úttak</string>
-    <string name="poi_socket_cee_red_64a">Rafmagnsinnstunga: CEE rautt 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Rafmagnsinnstunga: CEE rautt 64A: straumur</string>
-    <string name="poi_socket_cee_red_64a_output">Rafmagnsinnstunga: CEE rautt 64A: úttak</string>
+    <string name="poi_socket_cee_red_63a">Rafmagnsinnstunga: CEE rautt 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Rafmagnsinnstunga: CEE rautt 63A: straumur</string>
+    <string name="poi_socket_cee_red_63a_output">Rafmagnsinnstunga: CEE rautt 63A: úttak</string>
     <string name="poi_socket_cee_red_125a">Rafmagnsinnstunga: CEE rautt 125A</string>
     <string name="poi_socket_cee_red_125a_current">Rafmagnsinnstunga: CEE rautt 125A: straumur</string>
     <string name="poi_socket_cee_red_125a_output">Rafmagnsinnstunga: CEE rautt 125A: úttak</string>
@@ -3261,7 +3261,7 @@
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Heilsutengt sérsvið: fæðingarlækningar (keisaraskurður): nei</string>
     <string name="poi_socket_cee_red_16a_yes">CEE rautt 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE rautt 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE rautt 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE rautt 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE rautt 125A</string>
     <string name="poi_socket_type1_yes">Type 1</string>
     <string name="poi_socket_type1_combo_yes">Type 1 combo</string>

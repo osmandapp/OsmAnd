@@ -62,7 +62,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
 
 	private static final int VISIBLE_MONTHS_COUNT = 6;
-	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
+	private static final int CHANGES_FOR_MAPPER_PROMO = 30;
 	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
 	private OsmandApplication app;

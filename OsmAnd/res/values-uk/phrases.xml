@@ -3231,9 +3231,9 @@
     <string name="poi_socket_cee_red_32a">Роз\'єм: CEE red 32A</string>
     <string name="poi_socket_cee_red_32a_current">Роз\'єм: CEE red 32A: струм</string>
     <string name="poi_socket_cee_red_32a_output">Роз\'єм: CEE red 32A: потужність</string>
-    <string name="poi_socket_cee_red_64a">Роз\'єм: CEE red 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Роз\'єм: CEE red 64A: струм</string>
-    <string name="poi_socket_cee_red_64a_output">Роз\'єм: CEE red 64A: потужність</string>
+    <string name="poi_socket_cee_red_63a">Роз\'єм: CEE red 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Роз\'єм: CEE red 63A: струм</string>
+    <string name="poi_socket_cee_red_63a_output">Роз\'єм: CEE red 63A: потужність</string>
     <string name="poi_socket_cee_red_125a">Роз\'єм: CEE red 125A</string>
     <string name="poi_socket_cee_red_125a_current">Роз\'єм: CEE red 125A: струм</string>
     <string name="poi_socket_cee_red_125a_output">Роз\'єм: CEE red 125A: потужність</string>
@@ -3371,7 +3371,7 @@
     <string name="poi_socket_cee_blue_yes">CEE блакитний</string>
     <string name="poi_socket_cee_red_16a_yes">CEE червоний 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE червоний 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE червоний 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE червоний 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE червоний 125A</string>
     <string name="poi_socket_type1_yes">Вид 1</string>
     <string name="poi_socket_type1_combo_yes">Вид 1 комбінований</string>

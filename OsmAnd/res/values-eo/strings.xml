@@ -4779,4 +4779,12 @@
     <string name="display_position">Montri pozicion</string>
     <string name="attach_to_roads_banner_desc">Alproksimigi vian spuron al vojoj por akiri detalajn navigajn instrukciojn.</string>
     <string name="favorite_delete_group">Forigi grupon</string>
+    <string name="quick_action_current_location_widget_descr">Butono por montri/kaŝi koordinatojn de via nuna pozicio.</string>
+    <string name="current_location_widget">Nuna pozicio</string>
+    <string name="coordinates_widget_map_center">Koordinatoj: map-centro</string>
+    <string name="coordinates_widget_current_location">Koordinatoj: nuna pozicio</string>
+    <string name="quick_action_map_center_widget_descr">Butono por montri/kaŝi koordinatojn de la map-centro.</string>
+    <string name="map_center_widget">Map-centro</string>
+    <string name="coordinates_widget_map_center_desc">Fenestraĵo montranta geografiajn koordinatojn de la montrata centro de la mapo.</string>
+    <string name="coordinates_widget_current_location_desc">Fenestraĵo montranta geografiajn koordinatojn de via nuna pozicio.</string>
 </resources>

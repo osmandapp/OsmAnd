@@ -217,6 +217,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		int zoom = tileBox.getZoom();
 		if (zoom < ZOOM_TO_SHOW_SELECTION_ST || !indexRegionBoundaries) {
 			return;

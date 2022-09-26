@@ -3238,9 +3238,9 @@
     <string name="poi_socket_cee_red_32a">Konnektor: vörös CEE 32A</string>
     <string name="poi_socket_cee_red_32a_current">Konnektor: vörös CEE 32A – áramerősség (A)</string>
     <string name="poi_socket_cee_red_32a_output">Konnektor: vörös CEE 32A – teljesítmény (W)</string>
-    <string name="poi_socket_cee_red_64a">Konnektor: vörös CEE 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Konnektor: vörös CEE 64A – áramerősség (A)</string>
-    <string name="poi_socket_cee_red_64a_output">Konnektor: vörös CEE 64A – teljesítmény (W)</string>
+    <string name="poi_socket_cee_red_63a">Konnektor: vörös CEE 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Konnektor: vörös CEE 63A – áramerősség (A)</string>
+    <string name="poi_socket_cee_red_63a_output">Konnektor: vörös CEE 63A – teljesítmény (W)</string>
     <string name="poi_socket_cee_red_125a">Konnektor: vörös CEE 125A</string>
     <string name="poi_socket_cee_red_125a_current">Konnektor: vörös CEE 125A – áramerősség (A)</string>
     <string name="poi_socket_cee_red_125a_output">Konnektor: vörös CEE 125A – teljesítmény (W)</string>
@@ -3371,7 +3371,7 @@
     <string name="poi_socket_cee_blue_yes">kék CEE</string>
     <string name="poi_socket_cee_red_16a_yes">vörös CEE 16A</string>
     <string name="poi_socket_cee_red_32a_yes">vörös CEE 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">vörös CEE 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">vörös CEE 63A</string>
     <string name="poi_socket_cee_red_125a_yes">vörös CEE 125A</string>
     <string name="poi_socket_type1_yes">1. típusú</string>
     <string name="poi_socket_type1_combo_yes">1. típusú kombinált</string>
