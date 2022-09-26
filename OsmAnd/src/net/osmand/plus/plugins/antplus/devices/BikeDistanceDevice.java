@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.antplus.devices;
 
+import static net.osmand.GPXUtilities.DECIMAL_FORMAT;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeDistanceDevice;
@@ -57,7 +59,7 @@ public class BikeDistanceDevice extends CommonDevice<AntBikeDistanceDevice> {
 		BikeDistanceData data = device.getLastBikeDistanceData();
 		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
 		if (accumulatedDistance > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
-			json.put("ant_bicycle_distance", accumulatedDistance);
+			json.put("ant_bicycle_distance", DECIMAL_FORMAT.format(accumulatedDistance));
 		}
 	}
 }

@@ -76,7 +76,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final GpxSelectionHelper gpxSelectionHelper;
 
 	private final SelectedGpxFile currentTrack;
 
@@ -95,7 +94,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		super(app, DATABASE_NAME, null, DATABASE_VERSION);
 		this.app = app;
 		this.settings = app.getSettings();
-		this.gpxSelectionHelper = app.getSelectedGpxHelper();
 		this.currentTrack = new SelectedGpxFile();
 		this.currentTrack.setShowCurrentTrack(true);
 		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
@@ -283,7 +281,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		points = 0;
 		duration = 0;
 		trkPoints = 0;
-		gpxSelectionHelper.clearPoints(currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
 		currentTrack.getModifiableGpxFile().modifiedTime = currentTimeMillis;
@@ -339,7 +337,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					gpx = new GPXFile(Version.getFullVersion(app));
 					dataTracks.put(date, gpx);
 				}
-				gpxSelectionHelper.addPoint(pt, gpx);
+				app.getSelectedGpxHelper().addPoint(pt, gpx);
 			} while (query.moveToNext());
 		}
 		query.close();
@@ -550,7 +548,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		pt.setIconName(iconName);
 		pt.setBackgroundType(backgroundName);
-		gpxSelectionHelper.addPoint(pt, currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		currentTrack.getModifiableGpxFile().pointsModifiedTime = time;
 		points++;
@@ -649,7 +647,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void deletePointData(WptPt pt) {
-		gpxSelectionHelper.removePoint(pt, currentTrack.getModifiableGpxFile());
+		app.getSelectedGpxHelper().removePoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
 		currentTrack.getModifiableGpxFile().pointsModifiedTime = System.currentTimeMillis();
 		points--;
@@ -720,7 +718,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		Map<String, GPXFile> files = collectRecordedData();
 		List<Track> tracks = new ArrayList<>();
 		for (Map.Entry<String, GPXFile> entry : files.entrySet()) {
-			gpxSelectionHelper.addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
+			app.getSelectedGpxHelper().addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
 			tracks.addAll(entry.getValue().tracks);
 		}
 		currentTrack.getModifiableGpxFile().tracks = tracks;

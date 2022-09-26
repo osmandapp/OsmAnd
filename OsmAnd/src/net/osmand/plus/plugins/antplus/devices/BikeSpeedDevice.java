@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.antplus.devices;
 
+import static net.osmand.GPXUtilities.DECIMAL_FORMAT;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeSpeedDevice;
@@ -57,7 +59,7 @@ public class BikeSpeedDevice extends CommonDevice<AntBikeSpeedDevice> {
 		BikeSpeedData data = device.getLastBikeSpeedData();
 		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
 		if (calculatedSpeed > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
-			json.put("ant_bicycle_speed", calculatedSpeed);
+			json.put("ant_bicycle_speed", DECIMAL_FORMAT.format(calculatedSpeed));
 		}
 	}
 }
