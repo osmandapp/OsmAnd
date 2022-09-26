@@ -4692,11 +4692,11 @@
     <string name="lang_ckb">中庫德語</string>
     <string name="updated_map_time">已更新：%1$s。</string>
     <string name="includes_osm_changes_until">包含在 %1$s 之前所作的 OSM 變更。</string>
-    <string name="next_live_update_time">下次更新：於 %1$s。</string>
+    <string name="next_live_update_time">下次更新於 %1$s。</string>
     <string name="live_update_frequency_week_variant">每週檢查一次地圖更新。</string>
     <string name="no_altitude_data_desc">要接收 %1$s 資料，請將您的軌跡貼齊至道路上，或是線上計算。</string>
     <string name="calculate_online_altitude_descr">根據衛星影像與數位高程模型，在 OsmAnd 伺服器上線上計算海拔高度。與裝置記錄高度的差異可用作高度校正。</string>
-    <string name="next_live_update_date_and_time">下次更新：%1$s 於 %2$s。</string>
+    <string name="next_live_update_date_and_time">下次更新在 %1$s 於 %2$s。</string>
     <string name="live_update_frequency_hour_variant">每小時檢查一次地圖更新。</string>
     <string name="live_update_frequency_day_variant">每天檢查一次地圖更新。</string>
     <string name="altitude_correction">高度校正</string>
