@@ -2497,7 +2497,7 @@
     <string name="add_location_as_first_point_descr">Tilføj position som udgangspunkt til planlægning af den perfekte rute.</string>
     <string name="my_location">Min position</string>
     <string name="shared_string_finish">Afslut</string>
-    <string name="plan_route">Planlæg rute</string>
+    <string name="plan_route">Planlæg en rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
