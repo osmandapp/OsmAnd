@@ -36,6 +36,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -1598,6 +1599,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y2 = y2;
 			if (x1 != x2 || y1 != y2) {
 				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					MapAnimator animator = mapRenderer.getAnimator();
+					if (animator != null) {
+						animator.pause();
+						animator.cancelAllAnimations();
+					}
+				}
 				firstTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x1, y1);
 				secondTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x2, y2);
 				multiTouch = true;
@@ -1763,6 +1771,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
+			MapRendererView mapRenderer = getMapRenderer();
+			MapAnimator animator = mapRenderer != null ? mapRenderer.getAnimator() : null;
+			if (animator != null) {
+				animator.pause();
+				animator.cancelAllAnimations();
+			}
 			// Facilitates better map re-linking for two finger tap zoom out
 			wasMapLinkedBeforeGesture = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			return false;

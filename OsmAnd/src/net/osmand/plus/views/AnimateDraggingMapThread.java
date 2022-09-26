@@ -17,6 +17,7 @@ import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.MapAnimator.AnimatedValue;
 import net.osmand.core.jni.MapAnimator.IAnimation;
 import net.osmand.core.jni.MapAnimator.TimingFunction;
+import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.SwigUtilities;
@@ -46,8 +47,8 @@ public class AnimateDraggingMapThread {
 	private static final float SKIP_ANIMATION_TIMEOUT = 10000f;
 	public static final float SKIP_ANIMATION_DP_THRESHOLD = 20f;
 
-	private static final float TARGET_MOVE_VELOCITY_LIMIT = 3000f;
-	private static final float TARGET_MOVE_DECELERATION = 10000f;
+	private static final float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
+	private static final float TARGET_MOVE_DECELERATION = 8000f;
 	private static final int SYMBOLS_UPDATE_INTERVAL = 2000;
 
 	private static final float MIN_INTERPOLATION_TO_JOIN_ANIMATION = 0.8f;
@@ -396,14 +397,7 @@ public class AnimateDraggingMapThread {
 				}
 
 				if (!stopped) {
-					if (mapRenderer != null) {
-						PointI start31 = mapRenderer.getTarget();
-						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
-						animatingMoveInThread(start31.getX(), start31.getY(), finish31.getX(), finish31.getY(),
-								animationTime, notifyListener, finishAnimationCallback);
-					} else {
-						animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
-					}
+					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
 				} else if (finishAnimationCallback != null) {
 					app.runInUIThread(finishAnimationCallback);
 				}
@@ -690,36 +684,35 @@ public class AnimateDraggingMapThread {
 		});
 	}
 
-
 	public void startDragging(float velocityX, float velocityY,
 	                          float startX, float startY, float endX, float endY,
 	                          boolean notifyListener) {
 		clearTargetValues();
 
-		/*
 		MapRendererView mapRenderer = getMapRenderer();
 		MapAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
-			velocityX = velocityX > 0
-					? Math.min(velocityX, TARGET_MOVE_VELOCITY_LIMIT)
-					: Math.max(velocityX, -TARGET_MOVE_VELOCITY_LIMIT);
-			velocityY = velocityY > 0
-					? Math.min(velocityY, TARGET_MOVE_VELOCITY_LIMIT)
-					: Math.max(velocityY, -TARGET_MOVE_VELOCITY_LIMIT);
+			float newVelocityX = velocityX > 0
+					? Math.min(velocityX * 3, TARGET_MOVE_VELOCITY_LIMIT)
+					: Math.max(velocityX * 3, -TARGET_MOVE_VELOCITY_LIMIT);
+			float newVelocityY = velocityY > 0
+					? Math.min(velocityY * 3, TARGET_MOVE_VELOCITY_LIMIT)
+					: Math.max(velocityY * 3, -TARGET_MOVE_VELOCITY_LIMIT);
 
-			MapRendererState state = mapRenderer.getState();
+			float azimuth = mapRenderer.getAzimuth();
+			int zoom = mapRenderer.getZoomLevel().ordinal();
 
 			// Taking into account current zoom, get how many 31-coordinates there are in 1 point
-            long tileSize31 = (1L << (31 - state.getZoomLevel().ordinal()));
-            double scale31 = tileSize31 / mapRenderer.tileSizeOnScreenInPixels;
+            long tileSize31 = (1L << (31 - zoom));
+            double scale31 = tileSize31 / mapRenderer.getTileSizeOnScreenInPixels();
 
 			// Take into account current azimuth and reproject to map space (points)
-			double angle = Math.toRadians(state.getAzimuth());
+			double angle = Math.toRadians(azimuth);
             double cosAngle = Math.cos(angle);
             double sinAngle = Math.sin(angle);
 
-			double velocityInMapSpaceX = velocityX * cosAngle - velocityY * sinAngle;
-			double velocityInMapSpaceY = velocityX * sinAngle + velocityY * cosAngle;
+			double velocityInMapSpaceX = newVelocityX * cosAngle - newVelocityY * sinAngle;
+			double velocityInMapSpaceY = newVelocityX * sinAngle + newVelocityY * cosAngle;
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
@@ -727,35 +720,38 @@ public class AnimateDraggingMapThread {
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
 		}
-		*/
 
 		startThreadAnimating(() -> {
-			float curX = endX;
-			float curY = endY;
-			DecelerateInterpolator interpolator = new DecelerateInterpolator(1);
+			if (mapRenderer != null) {
+				animatingMapAnimator(mapRenderer);
+			} else {
+				float curX = endX;
+				float curY = endY;
+				DecelerateInterpolator interpolator = new DecelerateInterpolator(1);
 
-			long timeMillis = SystemClock.uptimeMillis();
-			float normalizedTime;
-			float prevNormalizedTime = 0f;
-			while (!stopped) {
-				normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / DRAGGING_ANIMATION_TIME;
-				if (normalizedTime >= 1f) {
-					break;
+				long timeMillis = SystemClock.uptimeMillis();
+				float normalizedTime;
+				float prevNormalizedTime = 0f;
+				while (!stopped) {
+					normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / DRAGGING_ANIMATION_TIME;
+					if (normalizedTime >= 1f) {
+						break;
+					}
+					interpolation = interpolator.getInterpolation(normalizedTime);
+
+					float newX = velocityX * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curX;
+					float newY = velocityY * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curY;
+
+					tileView.dragToAnimate(curX, curY, newX, newY, notifyListener);
+					curX = newX;
+					curY = newY;
+					prevNormalizedTime = normalizedTime;
+					sleepToRedraw(true);
 				}
-				interpolation = interpolator.getInterpolation(normalizedTime);
 
-				float newX = velocityX * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curX;
-				float newY = velocityY * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curY;
-
-				tileView.dragToAnimate(curX, curY, newX, newY, notifyListener);
-				curX = newX;
-				curY = newY;
-				prevNormalizedTime = normalizedTime;
-				sleepToRedraw(true);
+				resetInterpolation();
+				pendingRotateAnimation();
 			}
-
-			resetInterpolation();
-			pendingRotateAnimation();
 		});
 	}
 
