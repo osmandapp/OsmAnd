@@ -146,7 +146,7 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
 		devicesHelper.disconnectAntDevices();
 	}

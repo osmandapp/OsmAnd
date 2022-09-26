@@ -282,7 +282,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		for (ApplicationMode appMode : getAddedAppModes()) {
 			ApplicationMode.changeProfileAvailability(appMode, false, app);
 		}

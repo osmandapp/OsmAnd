@@ -718,11 +718,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public void loadGpxFromDatabase() {
 		Map<String, GPXFile> files = collectRecordedData();
-		currentTrack.getModifiableGpxFile().tracks.clear();
+		List<Track> tracks = new ArrayList<>();
 		for (Map.Entry<String, GPXFile> entry : files.entrySet()) {
 			gpxSelectionHelper.addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
-			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
+			tracks.addAll(entry.getValue().tracks);
 		}
+		currentTrack.getModifiableGpxFile().tracks = tracks;
 		currentTrack.processPoints(app);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());

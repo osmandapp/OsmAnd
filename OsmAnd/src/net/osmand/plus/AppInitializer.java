@@ -709,7 +709,6 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
 			long timeUpdated = app.savingTrackHelper.getLastTrackPointTime();
