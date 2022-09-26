@@ -54,9 +54,9 @@ public class BikeSpeedDevice extends CommonDevice<AntBikeSpeedDevice> {
 	@Override
 	public void writeDataToJson(@NonNull JSONObject json) throws JSONException {
 		AntBikeSpeedDevice device = getAntDevice();
-		BikeSpeedData speedData = device.getLastBikeSpeedData();
-		double calculatedSpeed = speedData != null ? speedData.getCalculatedSpeed() : 0;
-		if (calculatedSpeed > 0) {
+		BikeSpeedData data = device.getLastBikeSpeedData();
+		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
+		if (calculatedSpeed > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
 			json.put("ant_bicycle_speed", calculatedSpeed);
 		}
 	}

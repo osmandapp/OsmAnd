@@ -56,7 +56,7 @@ public class BikePowerDevice extends CommonDevice<AntBikePowerDevice> {
 		AntBikePowerDevice device = getAntDevice();
 		BikePowerData data = device.getLastBikePowerData();
 		double calculatedPower = data != null ? data.getCalculatedPower() : null;
-		if (calculatedPower > 0) {
+		if (calculatedPower > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
 			json.put("ant_bicycle_power", calculatedPower);
 		}
 	}

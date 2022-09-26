@@ -54,9 +54,9 @@ public class BikeDistanceDevice extends CommonDevice<AntBikeDistanceDevice> {
 	@Override
 	public void writeDataToJson(@NonNull JSONObject json) throws JSONException {
 		AntBikeDistanceDevice device = getAntDevice();
-		BikeDistanceData distanceData = device.getLastBikeDistanceData();
-		double accumulatedDistance = distanceData != null ? distanceData.getAccumulatedDistance() : 0;
-		if (accumulatedDistance > 0) {
+		BikeDistanceData data = device.getLastBikeDistanceData();
+		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
+		if (accumulatedDistance > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
 			json.put("ant_bicycle_distance", accumulatedDistance);
 		}
 	}
