@@ -1,13 +1,11 @@
 package net.osmand.plus.plugins;
 
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
@@ -84,6 +82,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -236,6 +235,16 @@ public abstract class OsmandPlugin {
 
 	protected List<PoiUIFilter> getCustomPoiFilters() {
 		return Collections.emptyList();
+	}
+
+	@Nullable
+	protected JSONObject getAdditionalTrackData() {
+		return null;
+	}
+
+	@Nullable
+	protected Map<String, String> getExtensionsFromInfo(@Nullable JSONObject json) {
+		return null;
 	}
 
 	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
@@ -804,6 +813,44 @@ public abstract class OsmandPlugin {
 		for (WorldRegion subregion : region.getSubregions()) {
 			collectIndexItemsFromSubregion(subregion, items);
 		}
+	}
+
+	@Nullable
+	public static JSONObject getAdditionalTrackInfo() {
+		JSONObject json = new JSONObject();
+		try {
+			for (OsmandPlugin plugin : getEnabledPlugins()) {
+				JSONObject data = plugin.getAdditionalTrackData();
+				if (data != null && data.length() > 0) {
+					json.put(plugin.getId(), data);
+				}
+			}
+		} catch (JSONException e) {
+			LOG.error(e);
+		}
+		return json;
+	}
+
+	@NonNull
+	public static Map<String, String> getExtensionsFromPluginsInfo(@Nullable String pluginsInfo) {
+		if (Algorithms.isEmpty(pluginsInfo)) {
+			return Collections.emptyMap();
+		}
+		Map<String, String> extensions = new HashMap<>();
+		try {
+			JSONObject json = new JSONObject(pluginsInfo);
+			for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
+				String pluginId = iterator.next();
+				OsmandPlugin plugin = getPlugin(pluginId);
+				Map<String, String> pluginExtensions = plugin != null ? plugin.getExtensionsFromInfo(json.optJSONObject(pluginId)) : null;
+				if (!Algorithms.isEmpty(pluginExtensions)) {
+					extensions.putAll(pluginExtensions);
+				}
+			}
+		} catch (JSONException e) {
+			LOG.error(e);
+		}
+		return extensions;
 	}
 
 	public static List<String> getDisabledRendererNames() {
