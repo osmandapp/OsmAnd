@@ -4701,8 +4701,8 @@
     <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевіряється щогодини.</string>
     <string name="live_update_frequency_day_variant">Наявність оновлень мап перевіряється щодня.</string>
     <string name="live_update_frequency_week_variant">Наявність оновлень мап перевіряється щотижня.</string>
-    <string name="next_live_update_date_and_time">Наступне оновлення: %1$s о %2$s.</string>
-    <string name="next_live_update_time">Наступне оновлення: о %1$s.</string>
+    <string name="next_live_update_date_and_time">Наступне оновлення %1$s о %2$s.</string>
+    <string name="next_live_update_time">Наступне оновлення о %1$s.</string>
     <string name="altitude_correction">Корекція висоти</string>
     <string name="updated_map_time">Оновлено: %1$s.</string>
     <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>

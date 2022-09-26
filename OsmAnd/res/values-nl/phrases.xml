@@ -3932,4 +3932,5 @@
     <string name="poi_computer_sales">Computer verkoop</string>
     <string name="poi_laundry_service_filter">Wasserij</string>
     <string name="poi_dry_cleaning_filter">Droog schoonmaken</string>
+    <string name="poi_dog">Honden</string>
 </resources>

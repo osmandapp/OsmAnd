@@ -4794,4 +4794,15 @@
     <string name="shared_string_2_5_d_view">Visualização 2.5 D</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
+    <string name="shared_string_shows">Mostrar</string>
+    <string name="shared_string_large">Larga</string>
+    <string name="map_widget_zoom_level">Nível de zoom</string>
+    <string name="map_widget_target_distance">Distância alvo</string>
+    <string name="map_widget_target_distance_desc">Widget mostra a distância da câmera para o local de destino.</string>
+    <string name="map_widget_zoom_level_desc">Widget mostra o nível de zoom do mapa atual.</string>
+    <string name="map_widget_camera_distance_desc">Widget mostra a elevação da câmera acima do nível da superfície.</string>
+    <string name="map_widget_camera_distance">Elevação da câmera</string>
+    <string name="map_widget_camera_tilt">Inclinação da câmera</string>
+    <string name="map_widget_camera_tilt_desc">Widget mostra o ângulo de inclinação da câmera no modo de perspectiva. O padrão é 90° (sem inclinação).</string>
+    <string name="developer_widgets">Widgets de desenvolvimento</string>
 </resources>

@@ -4693,12 +4693,12 @@
     <string name="live_update_frequency_day_variant">A térképfrissítések ellenőrzése naponta történik.</string>
     <string name="live_update_frequency_hour_variant">A térképfrissítések ellenőrzése óránként történik.</string>
     <string name="live_update_frequency_week_variant">A térképfrissítések ellenőrzése hetente történik.</string>
-    <string name="next_live_update_time">Következő frissítés: %1$s után.</string>
+    <string name="next_live_update_time">Következő frissítés: %1$s-kor.</string>
     <string name="altitude_correction">Magasságkorrekció</string>
     <string name="no_altitude_data_desc">%1$s adatokat lekéréséhez vagy online kiszámításához kapcsolja a nyomvonalát az utakhoz.</string>
     <string name="updated_map_time">Frissítve: %1$s.</string>
     <string name="calculate_online_altitude_descr">A magasság online legyen kiszámítva az OsmAnd szerverein műholdképek és digitális magassági modellek alapján. A készülék által rögzített magasságtól való eltérés felhasználható magasságkorrekcióként.</string>
-    <string name="next_live_update_date_and_time">Következő frissítés: %1$s (%2$s után).</string>
+    <string name="next_live_update_date_and_time">Következő frissítés: %1$s %2$s-kor.</string>
     <string name="includes_osm_changes_until">Tartalmazza az OSM-en %1$s-ig végrehajtott módosításokat.</string>
     <string name="marker_2nd">2. jelölő</string>
     <string name="reset_all_settings_desc">Összes beállítás alaphelyzetbe állítása\?</string>

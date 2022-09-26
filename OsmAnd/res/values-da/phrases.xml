@@ -2363,7 +2363,7 @@
     <string name="poi_inscription_e">Inskription: Ø</string>
     <string name="poi_inscription_ne">Inskription: NØ</string>
     <string name="poi_construction_yes">Under opførelse</string>
-    <string name="poi_atm_no">Hæveautomat: nej</string>
+    <string name="poi_atm_no">Pengeautomat: nej</string>
     <string name="poi_firepit">Bålplads</string>
     <string name="poi_street_cabinet">Gadeskab</string>
     <string name="poi_fair_trade_yes">Fairtrade: ja</string>
@@ -3701,7 +3701,7 @@
     <string name="poi_craft_cabinet_maker">Møbelsnedker</string>
     <string name="poi_charge">Gebyr</string>
     <string name="poi_pet_grooming">Kæledyrspleje</string>
-    <string name="poi_atm_yes">Hæveautomat: ja</string>
+    <string name="poi_atm_yes">Pengeautomat: ja</string>
     <string name="poi_cash_withdrawal_bank_card">Hævning af kontanter</string>
     <string name="poi_cash_withdrawal_yes">Hævning af kontanter: ja</string>
     <string name="poi_cash_withdrawal">Hævning af kontanter</string>
