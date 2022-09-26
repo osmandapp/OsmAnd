@@ -50,6 +50,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	public static final String WORLD_CONTOURS_SUFFIX = "world_contours";
 	public static final String NAUTICAL_DEPTH_POINTS_SUFFIX = "points";
 	public static final String WIKIVOYAGE_FILE_FILTER = "wikivoyage";
 	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
@@ -203,6 +204,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else if (item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
@@ -359,11 +361,11 @@ public class DownloadResources extends DownloadResourceGroup {
 				fonts.addItem(ii);
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (nauticalWorldwideMaps.size() == 0) {
+			if (ii.getType() == DownloadActivityType.DEPTH_MAP_FILE) {
+				String fileName = ii.getFileName().toLowerCase();
+				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
 					nauticalWorldwideMaps.addItem(ii);
 				} else if (InAppPurchaseHelper.isDepthContoursPurchased(app)) {
-					String fileName = ii.getFileName().toLowerCase();
 					if (fileName.contains(NAUTICAL_DEPTH_POINTS_SUFFIX)) {
 						nauticalDepthPointsMaps.addItem(ii);
 					} else {

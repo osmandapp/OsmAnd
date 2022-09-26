@@ -96,6 +96,8 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.FONT_DATA) {
 			info.setDescription(getInstalledDate(f));
+		} else if (info.getType() == LocalIndexType.DEPTH_DATA) {
+			info.setDescription(getInstalledDate(f));
 		}
 	}
 
@@ -126,6 +128,10 @@ public class LocalIndexHelper {
 			fileDir = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
+		} else if (type == LocalIndexType.DEPTH_DATA) {
+			fileDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
+			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+					+ IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
 		}
 
 		if (backuped) {
@@ -162,6 +168,10 @@ public class LocalIndexHelper {
 		if (info != null) {
 			list.add(info);
 		}
+		info = getLocalIndexInfo(LocalIndexType.DEPTH_DATA, downloadName, false, false);
+		if (info != null) {
+			list.add(info);
+		}
 		info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, true);
 		if (info != null) {
 			list.add(info);
@@ -175,6 +185,10 @@ public class LocalIndexHelper {
 			list.add(info);
 		}
 		info = getLocalIndexInfo(LocalIndexType.WIKI_DATA, downloadName, false, true);
+		if (info != null) {
+			list.add(info);
+		}
+		info = getLocalIndexInfo(LocalIndexType.DEPTH_DATA, downloadName, false, true);
 		if (info != null) {
 			list.add(info);
 		}
@@ -233,6 +247,10 @@ public class LocalIndexHelper {
 				case DEACTIVATED:
 					loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, readFiles,
 							needDescription, indexFileNames, indexFiles, loadTask);
+					break;
+				case DEPTH_DATA:
+					loadDepthData(app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFiles, loadTask);
 					break;
 			}
 		}
@@ -357,6 +375,13 @@ public class LocalIndexHelper {
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
+	private void loadDepthData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
+		loadDataImpl(dataPath, LocalIndexType.DEPTH_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+				backup, readFiles, needDescription, result, indexFiles, loadTask);
+	}
+
 	private void loadObfData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
 							 boolean readFiles, boolean needDescription, @NonNull Map<String, String> indexFileNames,
 							 @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
@@ -385,6 +410,8 @@ public class LocalIndexHelper {
 			lt = LocalIndexType.SRTM_DATA;
 		} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			lt = LocalIndexType.WIKI_DATA;
+		} else if (fileName.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
+			lt = LocalIndexType.DEPTH_DATA;
 		}
 		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup, app);
 		if (indexFileNames.containsKey(fileName) && !backup) {
@@ -435,6 +462,7 @@ public class LocalIndexHelper {
 		MAP_DATA(R.string.local_indexes_cat_map, R.drawable.ic_map, 10),
 		TILES_DATA(R.string.local_indexes_cat_tile, R.drawable.ic_map, 60),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm, 40),
+		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 50),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),

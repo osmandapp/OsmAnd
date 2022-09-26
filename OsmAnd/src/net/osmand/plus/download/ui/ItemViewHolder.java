@@ -213,7 +213,8 @@ public class ItemViewHolder {
 			descrTextView.setVisibility(View.VISIBLE);
 			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
 				descrTextView.setText(((CustomIndexItem) downloadItem).getSubName(context));
-			} else if (downloadItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+			} else if ((downloadItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+					|| downloadItem.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				descrTextView.setText(context.getString(R.string.depth_contour_descr));
 			} else if ((downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 					|| downloadItem.getType() == DownloadActivityType.HILLSHADE_FILE
@@ -365,7 +366,8 @@ public class ItemViewHolder {
 				|| item.getType() == DownloadActivityType.TRAVEL_FILE)
 				&& !Version.isPaidVersion(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-		} else if (item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+		} else if ((item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+				|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
 			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;
