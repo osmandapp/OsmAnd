@@ -2117,7 +2117,6 @@
     <string name="quick_action_add_category">Aggiungi una categoria</string>
     <string name="quick_action_add_create_items">Crea oggetti</string>
     <string name="quick_action_add_configure_map">Configura la mappa</string>
-    <string name="quick_action_add_navigation">Navigazione</string>
     <string name="quick_action_bug_descr">Questo messaggio è aggiunto nel campo commento.</string>
     <string name="quick_action_bug_message">Messaggio</string>
     <string name="quick_action_category_descr">Categoria in cui salvare il preferito:</string>

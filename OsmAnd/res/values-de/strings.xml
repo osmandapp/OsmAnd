@@ -2107,7 +2107,6 @@
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
     <string name="quick_action_add_category">Kategorie hinzufügen</string>
     <string name="quick_action_add_configure_map">Karte konfigurieren</string>
-    <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_fav_name_descr">Lassen Sie das Feld leer, um die Adresse oder den Ortsnamen zu verwenden.</string>
     <string name="quick_action_bug_message">Nachricht</string>
     <string name="quick_action_poi_list">POI-Liste</string>

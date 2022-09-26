@@ -2213,7 +2213,6 @@
     <string name="quick_action_add_category">Додај категорију</string>
     <string name="quick_action_add_create_items">Направи ставке</string>
     <string name="quick_action_add_configure_map">Подесите карту</string>
-    <string name="quick_action_add_navigation">Навођење</string>
     <string name="quick_action_bug_message">Порука</string>
     <string name="quick_action_category_descr">Категорија у коју да се чувају Омиљене:</string>
     <string name="quick_action_gpx_category_descr">Изаберите опциону категорију.</string>

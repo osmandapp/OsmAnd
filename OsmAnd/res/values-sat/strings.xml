@@ -627,7 +627,6 @@
     <string name="search_poi_filter">ᱪᱷᱟᱹᱱᱤ ᱢᱮ</string>
     <string name="hide_poi_filter">ᱪᱷᱟᱹᱱᱤ ᱩᱠᱩᱭ ᱢᱮ</string>
     <string name="app_description">ᱯᱟᱱᱛᱮᱭᱟᱜᱽ ᱮᱯᱯ</string>
-    <string name="quick_action_add_navigation">ᱯᱟᱱᱛᱮᱭᱟᱜᱽ</string>
     <string name="quick_action_add_configure_map">ᱱᱚᱠᱥᱟ ᱛᱮᱭᱟᱨ ᱢᱮ</string>
     <string name="quick_action_poi_hide">%1$s ᱩᱠᱩᱭ ᱢᱮ</string>
     <string name="routeInfo_roadClass_name">ᱪᱮᱞᱮᱠᱟᱱ ᱰᱟᱦᱟᱨ</string>

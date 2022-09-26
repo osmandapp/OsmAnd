@@ -2119,7 +2119,6 @@
     <string name="quick_action_add_category">Tilføj en kategori</string>
     <string name="quick_action_add_create_items">Opret elementer</string>
     <string name="quick_action_add_configure_map">Konfigurer kort</string>
-    <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_fav_name_descr">Lad være tomt for at bruge adressen eller stedets navn.</string>
     <string name="quick_action_bug_descr">Meddelelsen inkluderes i kommentarfeltet.</string>
     <string name="quick_action_bug_message">Meddelelse</string>

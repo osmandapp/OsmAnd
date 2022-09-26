@@ -2085,7 +2085,6 @@
     <string name="quick_action_add_category">增加一項類別</string>
     <string name="quick_action_add_create_items">建立事項</string>
     <string name="quick_action_add_configure_map">組態地圖</string>
-    <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
     <string name="quick_action_category_descr">要儲存最愛的分類：</string>
     <string name="quick_action_gpx_category_descr">選擇可選類別。</string>

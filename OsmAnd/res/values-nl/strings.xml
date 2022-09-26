@@ -2114,7 +2114,6 @@
     <string name="quick_action_add_category">Categorie toevoegen</string>
     <string name="quick_action_add_create_items">Items aanmaken</string>
     <string name="quick_action_add_configure_map">Kaartinstellingen</string>
-    <string name="quick_action_add_navigation">Navigatie</string>
     <string name="quick_action_fav_name_descr">Leeg laten om adres of plaatsnaam te gebruiken.</string>
     <string name="quick_action_bug_descr">Dit bericht wordt automatisch ingevuld in het commentaarveld.</string>
     <string name="quick_action_bug_message">Bericht</string>

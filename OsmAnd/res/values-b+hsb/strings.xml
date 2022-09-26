@@ -1018,7 +1018,6 @@
     <string name="quick_action_poi_show">%1$s pokazać</string>
     <string name="quick_action_poi_hide">%1$s schować</string>
     <string name="quick_action_add_category">Kategoriju dodać</string>
-    <string name="quick_action_add_navigation">Nawigacija</string>
     <string name="quick_action_bug_message">Powěsć</string>
     <string name="quick_action_gpx_category_descr">Opcionalnu kategoriju wubrać.</string>
     <string name="quick_action_poi_list">"Lisćina  POI"</string>

@@ -2116,7 +2116,6 @@
     <string name="quick_action_add_category">إضافة فئة</string>
     <string name="quick_action_add_create_items">إنشاء عناصر</string>
     <string name="quick_action_add_configure_map">ضبط الخريطة</string>
-    <string name="quick_action_add_navigation">الملاحة</string>
     <string name="quick_action_bug_message">رسالة</string>
     <string name="quick_action_category_descr">حدد الفئة لحفظ المفضلة فيها:</string>
     <string name="quick_action_gpx_category_descr">حدد فئة اختيارية.</string>

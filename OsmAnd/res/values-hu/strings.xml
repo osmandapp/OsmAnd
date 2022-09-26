@@ -2105,7 +2105,6 @@
     <string name="quick_action_add_category">Kategória hozzáadása</string>
     <string name="quick_action_add_create_items">Elemek létrehozása</string>
     <string name="quick_action_add_configure_map">Térkép beállítása</string>
-    <string name="quick_action_add_navigation">Navigáció</string>
     <string name="quick_action_fav_name_descr">A cím vagy a hely nevének használatához hagyja üresen.</string>
     <string name="quick_action_bug_descr">Ez az üzenet bekerül a megjegyzés mezőbe.</string>
     <string name="quick_action_bug_message">Üzenet</string>
