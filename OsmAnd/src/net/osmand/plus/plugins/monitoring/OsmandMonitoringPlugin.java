@@ -293,7 +293,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				updateWidgets();
 
 				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
-				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+				if (result != null && AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
 					GPXFile gpxFile = null;
 					File file = null;
