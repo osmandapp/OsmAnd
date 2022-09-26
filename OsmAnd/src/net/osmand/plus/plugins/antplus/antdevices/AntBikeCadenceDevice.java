@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeCadencePcc;
 import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +25,9 @@ public class AntBikeCadenceDevice extends AntCommonDevice<AntPlusBikeCadencePcc>
 		private final long timestamp;
 
 		// The cadence calculated from the raw values in the sensor broadcast. Units: rpm.
-		private final BigDecimal calculatedCadence;
+		private final int calculatedCadence;
 
-		BikeCadenceData(long timestamp, BigDecimal calculatedCadence) {
+		BikeCadenceData(long timestamp, int calculatedCadence) {
 			this.timestamp = timestamp;
 			this.calculatedCadence = calculatedCadence;
 		}
@@ -37,7 +36,7 @@ public class AntBikeCadenceDevice extends AntCommonDevice<AntPlusBikeCadencePcc>
 			return timestamp;
 		}
 
-		public BigDecimal getCalculatedCadence() {
+		public int getCalculatedCadence() {
 			return calculatedCadence;
 		}
 
@@ -63,7 +62,7 @@ public class AntBikeCadenceDevice extends AntCommonDevice<AntPlusBikeCadencePcc>
 	}
 
 	@Nullable
-	public BikeCadenceData getLastHeartRateData() {
+	public BikeCadenceData getLastBikeCadenceData() {
 		return lastBikeCadenceData;
 	}
 
@@ -90,7 +89,7 @@ public class AntBikeCadenceDevice extends AntCommonDevice<AntPlusBikeCadencePcc>
 
 	protected void subscribeToEvents() {
 		pcc.subscribeCalculatedCadenceEvent((estTimestamp, eventFlags, calculatedCadence) -> {
-			lastBikeCadenceData = new BikeCadenceData(estTimestamp, calculatedCadence);
+			lastBikeCadenceData = new BikeCadenceData(estTimestamp, calculatedCadence.intValue());
 
 			for (AntBikeCadenceDataListener listener : dataListeners) {
 				listener.onAntBikePowerData(lastBikeCadenceData);

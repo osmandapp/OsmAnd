@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc;
 import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +24,13 @@ public class AntBikePowerDevice extends AntCommonDevice<AntPlusBikePowerPcc> {
 		private final long timestamp;
 
 		// The average power calculated from sensor data. Units: W.
-		private final BigDecimal calculatedPower;
+		private final double calculatedPower;
 
 		private final boolean powerOnlyData;
 		private final boolean initialPowerOnlyData;
 
 		BikePowerData(long timestamp,
-		              BigDecimal calculatedPower,
+		              double calculatedPower,
 		              boolean powerOnlyData,
 		              boolean initialPowerOnlyData) {
 			this.timestamp = timestamp;
@@ -44,7 +43,7 @@ public class AntBikePowerDevice extends AntCommonDevice<AntPlusBikePowerPcc> {
 			return timestamp;
 		}
 
-		public BigDecimal getCalculatedPower() {
+		public double getCalculatedPower() {
 			return calculatedPower;
 		}
 
@@ -80,7 +79,7 @@ public class AntBikePowerDevice extends AntCommonDevice<AntPlusBikePowerPcc> {
 	}
 
 	@Nullable
-	public BikePowerData getLastHeartRateData() {
+	public BikePowerData getLastBikePowerData() {
 		return lastBikePowerData;
 	}
 
@@ -110,7 +109,8 @@ public class AntBikePowerDevice extends AntCommonDevice<AntPlusBikePowerPcc> {
 			boolean powerOnlyData = AntPlusBikePowerPcc.DataSource.POWER_ONLY_DATA.equals(dataSource);
 			boolean initialPowerOnlyData = AntPlusBikePowerPcc.DataSource.INITIAL_VALUE_POWER_ONLY_DATA.equals(dataSource);
 
-			lastBikePowerData = new BikePowerData(estTimestamp, calculatedPower, powerOnlyData, initialPowerOnlyData);
+			lastBikePowerData = new BikePowerData(estTimestamp, calculatedPower.doubleValue(),
+					powerOnlyData, initialPowerOnlyData);
 
 			for (AntBikePowerDataListener listener : dataListeners) {
 				listener.onAntBikePowerData(lastBikePowerData);

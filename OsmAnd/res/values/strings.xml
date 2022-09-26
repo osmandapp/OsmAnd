@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="ant_widgets">ANT+ widgets</string>
     <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
     <string name="ant_go_to_store">Go to Store</string>

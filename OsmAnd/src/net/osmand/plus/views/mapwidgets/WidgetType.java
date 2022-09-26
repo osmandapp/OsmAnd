@@ -1,5 +1,12 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
@@ -25,12 +32,6 @@ import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFra
 
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
 public enum WidgetType {
 
@@ -91,11 +92,11 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	ANT_HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
-	ANT_BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
-	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
-	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
-	ANT_BICYCLE_DIST("ant_bicycle_dist", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
+	ANT_HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);

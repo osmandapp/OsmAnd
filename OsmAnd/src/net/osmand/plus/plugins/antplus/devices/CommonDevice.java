@@ -5,6 +5,10 @@ import androidx.annotation.NonNull;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.plugins.antplus.antdevices.AntCommonDevice;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +110,15 @@ public abstract class CommonDevice<T extends AntCommonDevice<?>> {
 	protected abstract String getWriteGpxPrefId();
 
 	@NonNull
+	public abstract WidgetType getDeviceWidgetType();
+
+	@NonNull
+	public abstract void writeDataToJson(@NonNull JSONObject json) throws JSONException;
+
+	@NonNull
 	public CommonPreference<Boolean> getDeviceEnabledPref() {
 		if (deviceEnabledPref == null) {
-			deviceEnabledPref = registerBooleanPref(getDeviceEnabledPrefId(), false);
+			deviceEnabledPref = registerBooleanPref(getDeviceEnabledPrefId(), true);
 		}
 		return deviceEnabledPref;
 	}

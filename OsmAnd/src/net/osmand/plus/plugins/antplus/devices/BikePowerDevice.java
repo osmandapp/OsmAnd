@@ -3,6 +3,11 @@ package net.osmand.plus.plugins.antplus.devices;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.antplus.antdevices.AntBikePowerDevice;
+import net.osmand.plus.plugins.antplus.antdevices.AntBikePowerDevice.BikePowerData;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class BikePowerDevice extends CommonDevice<AntBikePowerDevice> {
 
@@ -37,6 +42,23 @@ public class BikePowerDevice extends CommonDevice<AntBikePowerDevice> {
 	@Override
 	protected String getWriteGpxPrefId() {
 		return BIKE_POWER_WRITE_GPX_PREFERENCE_ID;
+	}
+
+	@NonNull
+	@Override
+	public WidgetType getDeviceWidgetType() {
+		return WidgetType.ANT_BICYCLE_POWER;
+	}
+
+	@NonNull
+	@Override
+	public void writeDataToJson(@NonNull JSONObject json) throws JSONException {
+		AntBikePowerDevice device = getAntDevice();
+		BikePowerData data = device.getLastBikePowerData();
+		double calculatedPower = data != null ? data.getCalculatedPower() : null;
+		if (calculatedPower > 0) {
+			json.put("ant_bicycle_power", calculatedPower);
+		}
 	}
 }
 

@@ -3,6 +3,11 @@ package net.osmand.plus.plugins.antplus.devices;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice;
+import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice.BikeCadenceData;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class BikeCadenceDevice extends CommonDevice<AntBikeCadenceDevice> {
 
@@ -37,5 +42,22 @@ public class BikeCadenceDevice extends CommonDevice<AntBikeCadenceDevice> {
 	@Override
 	protected String getWriteGpxPrefId() {
 		return BIKE_CADENCE_WRITE_GPX_PREFERENCE_ID;
+	}
+
+	@NonNull
+	@Override
+	public WidgetType getDeviceWidgetType() {
+		return WidgetType.ANT_BICYCLE_CADENCE;
+	}
+
+	@NonNull
+	@Override
+	public void writeDataToJson(@NonNull JSONObject json) throws JSONException {
+		AntBikeCadenceDevice device = getAntDevice();
+		BikeCadenceData data = device.getLastBikeCadenceData();
+		int calculatedCadence = data != null ? data.getCalculatedCadence() : 0;
+		if (calculatedCadence > 0) {
+			json.put("ant_bicycle_cadence", calculatedCadence);
+		}
 	}
 }

@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:title="@string/debugging_and_development">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/antplus_plugin_name">
 
-    <Preference
-        android:key="antplus_info"
-        android:layout="@layout/preference_with_descr"
-        android:persistent="false"
-        android:selectable="false"
-        android:title="@string/plugin_global_prefs_info"
-        tools:icon="@drawable/ic_action_info_dark" />
-
-    <PreferenceCategory
-        android:key="heart_rate"
-        android:layout="@layout/preference_category_with_descr"
-        android:title="@string/map_widget_ant_heart_rate" />
-
-    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
-        android:key="ant_heart_rate_enabled"
-        android:layout="@layout/preference_with_descr_dialog_and_switch"
-        android:summaryOff="@string/shared_string_disabled"
-        android:summaryOn="@string/shared_string_enabled"
-        android:title="@string/ant_read_data" />
-
-    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
-        android:key="ant_heart_rate_write_px"
-        android:layout="@layout/preference_with_descr_dialog_and_switch"
-        android:summaryOff="@string/shared_string_disabled"
-        android:summaryOn="@string/shared_string_enabled"
-        android:title="@string/ant_write_to_gpx" />
-
-
+	<Preference
+		android:key="antplus_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/plugin_global_prefs_info"
+		tools:icon="@drawable/ic_action_info_dark" />
 
 </PreferenceScreen>

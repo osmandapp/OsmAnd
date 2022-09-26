@@ -3,6 +3,11 @@ package net.osmand.plus.plugins.antplus.devices;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.plugins.antplus.antdevices.AntHeartRateDevice;
+import net.osmand.plus.plugins.antplus.antdevices.AntHeartRateDevice.HeartRateData;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HeartRateDevice extends CommonDevice<AntHeartRateDevice> {
 
@@ -37,5 +42,22 @@ public class HeartRateDevice extends CommonDevice<AntHeartRateDevice> {
 	@Override
 	protected String getWriteGpxPrefId() {
 		return HEART_RATE_WRITE_GPX_PREFERENCE_ID;
+	}
+
+	@NonNull
+	@Override
+	public WidgetType getDeviceWidgetType() {
+		return WidgetType.ANT_HEART_RATE;
+	}
+
+	@NonNull
+	@Override
+	public void writeDataToJson(@NonNull JSONObject json) throws JSONException {
+		AntHeartRateDevice device = getAntDevice();
+		HeartRateData data = device.getLastHeartRateData();
+		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
+		if (computedHeartRate > 0) {
+			json.put("ant_heart_rate", computedHeartRate);
+		}
 	}
 }

@@ -20,7 +20,8 @@ import net.osmand.plus.plugins.antplus.antdevices.AntCommonDevice.AntDeviceListe
 import net.osmand.plus.plugins.antplus.antdevices.AntDeviceConnectionResult;
 import net.osmand.plus.plugins.antplus.devices.BikeCadenceDevice;
 import net.osmand.plus.plugins.antplus.devices.BikePowerDevice;
-import net.osmand.plus.plugins.antplus.devices.BikeSpeedAndDistanceDevice;
+import net.osmand.plus.plugins.antplus.devices.BikeDistanceDevice;
+import net.osmand.plus.plugins.antplus.devices.BikeSpeedDevice;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice.DeviceListener;
 import net.osmand.plus.plugins.antplus.devices.HeartRateDevice;
@@ -32,9 +33,9 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Devices implements AntDeviceListener, DeviceListener {
+public class DevicesHelper implements AntDeviceListener, DeviceListener {
 
-	private static final Log LOG = PlatformUtil.getLog(Devices.class);
+	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
 
 	private final OsmandApplication app;
 	private final List<CommonDevice<?>> devices = new ArrayList<>();
@@ -42,13 +43,14 @@ public class Devices implements AntDeviceListener, DeviceListener {
 	private Activity activity;
 	private boolean installPluginAsked;
 
-	Devices(@NonNull OsmandApplication app, @NonNull AntPlusPlugin plugin) {
+	DevicesHelper(@NonNull OsmandApplication app, @NonNull AntPlusPlugin plugin) {
 		this.app = app;
 
 		devices.add(new HeartRateDevice(plugin));
 		devices.add(new BikePowerDevice(plugin));
 		devices.add(new BikeCadenceDevice(plugin));
-		devices.add(new BikeSpeedAndDistanceDevice(plugin));
+		devices.add(new BikeSpeedDevice(plugin));
+		devices.add(new BikeDistanceDevice(plugin));
 
 		for (CommonDevice<?> device : devices) {
 			device.addListener(this);
@@ -88,6 +90,11 @@ public class Devices implements AntDeviceListener, DeviceListener {
 				antDevice.removeListener(this);
 			}
 		}
+	}
+
+	@NonNull
+	List<CommonDevice<?>> getDevices() {
+		return new ArrayList<>(devices);
 	}
 
 	@Nullable
