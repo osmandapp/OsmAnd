@@ -29,6 +29,7 @@ import java.util.Random;
 public class OsmAndLocationSimulation {
 
 	public static final float PRECISION_1_M = 0.00001f;
+	public static final float LOCATION_TIMEOUT = 1.5f;
 	public static final int DEVIATION_M = 6;
 	private final float MOTORWAY_MAX_SPEED = 120.0f;
 	private final float TRUNK_MAX_SPEED = 90.0f;
@@ -129,7 +130,7 @@ public class OsmAndLocationSimulation {
 
 	private void startAnimationThread(OsmandApplication app, List<SimulatedLocation> directions,
 	                                  boolean locTime, float coeff) {
-		final float time = 1.5f;
+		final float time = LOCATION_TIMEOUT;
 		float simSpeed = app.getSettings().simulateNavigationSpeed;
 		SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
 		boolean realistic = simulationMode == SimulationMode.REALISTIC;

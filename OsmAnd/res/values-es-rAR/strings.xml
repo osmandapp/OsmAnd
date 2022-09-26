@@ -382,9 +382,9 @@
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n
-\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
+\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas vectoriales sin conexión de OsmAnd). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
 \n
-\nDescarga las teselas de los mapas directamente en línea, o prepáralo para su uso sin conexión (copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
+\nDescarga las teselas de los mapas directamente, o copialos en la carpeta de datos de OsmAnd como archivos de base de datos SQLite, usando una variedad de herramientas de preparación de mapas de terceros.</string>
     <string name="record_plugin_description">Permite registrar, guardar y analizar tus datos de entrenamiento o movimiento, como la velocidad, los ascensos, los descensos o el relieve del camino, que luego puedes reutilizar, mejorar, complementar o compartir con tus amigos.
 \n
 \nVéase - https://osmand.net/docs/user/plugins/trip-recording</string>
@@ -4816,4 +4816,13 @@
     <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
+    <string name="map_widget_camera_tilt_desc">El widget muestra el ángulo de inclinación de la cámara en modo perspectiva. El valor predefinido es 90° (sin inclinación).</string>
+    <string name="map_widget_target_distance">Distancia del objetivo</string>
+    <string name="map_widget_zoom_level">Nivel de zum</string>
+    <string name="map_widget_camera_distance">Elevación de la cámara</string>
+    <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
+    <string name="developer_widgets">Widgets para desarrolladores</string>
+    <string name="map_widget_target_distance_desc">El widget muestra la distancia desde la cámara hasta la ubicación del objetivo.</string>
+    <string name="map_widget_zoom_level_desc">El widget muestra el nivel de zum actual del mapa.</string>
+    <string name="map_widget_camera_distance_desc">El widget muestra la elevación de la cámara sobre el nivel de la superficie.</string>
 </resources>
