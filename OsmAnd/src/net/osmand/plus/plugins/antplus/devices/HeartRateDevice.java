@@ -57,7 +57,7 @@ public class HeartRateDevice extends CommonDevice<AntHeartRateDevice> {
 		HeartRateData data = device.getLastHeartRateData();
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
-			json.put("hr", computedHeartRate);
+			json.put("ant_heart_rate", computedHeartRate);
 		}
 	}
 }
