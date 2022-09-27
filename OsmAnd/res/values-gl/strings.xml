@@ -2083,7 +2083,6 @@ Lon %2$s</string>
     <string name="quick_action_add_category">Engadir unha categoría</string>
     <string name="quick_action_add_create_items">Crear elementos</string>
     <string name="quick_action_add_configure_map">Configurar o mapa</string>
-    <string name="quick_action_add_navigation">Navegación</string>
     <string name="quick_action_fav_name_descr">Deixar baleiro o campo para empregar o enderezo ou o nome do lugar.</string>
     <string name="quick_action_bug_descr">Esta mensaxe inclúese no campo do comentario.</string>
     <string name="quick_action_bug_message">Mensaxe</string>

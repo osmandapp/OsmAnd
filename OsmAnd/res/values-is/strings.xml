@@ -1801,7 +1801,6 @@
     <string name="quick_action_add_category">Bæta við flokki</string>
     <string name="quick_action_add_create_items">Búa til atriði</string>
     <string name="quick_action_add_configure_map">Stilla kort</string>
-    <string name="quick_action_add_navigation">Rötun</string>
     <string name="quick_action_bug_message">Skilaboð</string>
     <string name="quick_action_gpx_category_descr">Þú getur valið flokk.</string>
     <string name="quick_action_poi_list">Listi yfir merkisstaði</string>

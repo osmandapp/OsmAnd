@@ -2085,7 +2085,6 @@
     <string name="quick_action_poi_hide">Приховати %1$s</string>
     <string name="quick_action_add_category">Додати категорію</string>
     <string name="quick_action_add_configure_map">Налаштування мапи</string>
-    <string name="quick_action_add_navigation">Навігація</string>
     <string name="quick_action_fav_name_descr">Залиште порожнім, щоб використати адресу або назву місця.</string>
     <string name="quick_action_bug_descr">Це повідомлення включено у поле коментаря.</string>
     <string name="quick_action_bug_message">Повідомлення</string>
@@ -4701,8 +4700,8 @@
     <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевіряється щогодини.</string>
     <string name="live_update_frequency_day_variant">Наявність оновлень мап перевіряється щодня.</string>
     <string name="live_update_frequency_week_variant">Наявність оновлень мап перевіряється щотижня.</string>
-    <string name="next_live_update_date_and_time">Наступне оновлення: %1$s о %2$s.</string>
-    <string name="next_live_update_time">Наступне оновлення: о %1$s.</string>
+    <string name="next_live_update_date_and_time">Наступне оновлення %1$s о %2$s.</string>
+    <string name="next_live_update_time">Наступне оновлення о %1$s.</string>
     <string name="altitude_correction">Корекція висоти</string>
     <string name="updated_map_time">Оновлено: %1$s.</string>
     <string name="includes_osm_changes_until">Включає зміни OSM, внесені до %1$s.</string>

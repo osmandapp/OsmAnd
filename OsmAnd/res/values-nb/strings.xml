@@ -1957,7 +1957,6 @@
     <string name="quick_action_poi_list">Interessepunktliste</string>
     <string name="quick_action_sh_poi_descr">Legg til én eller flere interessepunktkategorier som skal vises på kartet.</string>
     <string name="quick_action_category_descr">Kategori å lagre favoritten i:</string>
-    <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
     <string name="quick_action_add_category">Legg til en kategori</string>
     <string name="quick_action_poi_show">Vis %1$s</string>

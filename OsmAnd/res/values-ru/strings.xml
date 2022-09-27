@@ -2253,7 +2253,6 @@
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
     <string name="quick_action_add_configure_map">Настройки карты</string>
-    <string name="quick_action_add_navigation">Навигация</string>
     <string name="quick_action_bug_message">Сообщение</string>
     <string name="quick_action_map_style_action">Добавить стиль карты</string>
     <string name="quick_action_map_styles">Стили карты</string>

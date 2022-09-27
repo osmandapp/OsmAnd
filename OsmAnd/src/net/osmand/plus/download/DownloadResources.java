@@ -50,6 +50,8 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	public static final String WORLD_CONTOURS_SUFFIX = "world_contours";
+	public static final String NAUTICAL_DEPTH_POINTS_SUFFIX = "points";
 	public static final String WIKIVOYAGE_FILE_FILTER = "wikivoyage";
 	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
 
@@ -202,6 +204,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else if (item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
@@ -335,7 +338,9 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
 		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
-		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+		DownloadResourceGroup nauticalWorldwideMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_WORLDWIDE_HEADER);
+		DownloadResourceGroup nauticalDepthContoursMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER);
+		DownloadResourceGroup nauticalDepthPointsMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_POINTS_HEADER);
 
 		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
 		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
@@ -356,9 +361,16 @@ public class DownloadResources extends DownloadResourceGroup {
 				fonts.addItem(ii);
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (InAppPurchaseHelper.isDepthContoursPurchased(app) || nauticalMaps.size() == 0) {
-					nauticalMaps.addItem(ii);
+			if (ii.getType() == DownloadActivityType.DEPTH_MAP_FILE) {
+				String fileName = ii.getFileName().toLowerCase();
+				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
+					nauticalWorldwideMaps.addItem(ii);
+				} else if (InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+					if (fileName.contains(NAUTICAL_DEPTH_POINTS_SUFFIX)) {
+						nauticalDepthPointsMaps.addItem(ii);
+					} else {
+						nauticalDepthContoursMaps.addItem(ii);
+					}
 				}
 				continue;
 			}
@@ -383,14 +395,14 @@ public class DownloadResources extends DownloadResourceGroup {
 			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
 			if (wg != null) {
 				if (!groupByRegion.containsKey(wg)) {
-					groupByRegion.put(wg, new ArrayList<IndexItem>());
+					groupByRegion.put(wg, new ArrayList<>());
 				}
 				groupByRegion.get(wg).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
 					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) ||
 							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
-						nauticalMaps.addItem(ii);
+						nauticalWorldwideMaps.addItem(ii);
 					} else {
 						worldMaps.addItem(ii);
 					}
@@ -449,7 +461,9 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
 
-		nauticalMapsScreen.addGroup(nauticalMaps);
+		nauticalMapsScreen.addGroup(nauticalWorldwideMaps);
+		nauticalMapsScreen.addGroup(nauticalDepthContoursMaps);
+		nauticalMapsScreen.addGroup(nauticalDepthPointsMaps);
 		nauticalMapsGroup.addGroup(nauticalMapsScreen);
 		addGroup(nauticalMapsGroup);
 

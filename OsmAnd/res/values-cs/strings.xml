@@ -2113,7 +2113,6 @@
     <string name="quick_action_add_category">Přidat kategorii</string>
     <string name="quick_action_add_create_items">Vytvořit položky</string>
     <string name="quick_action_add_configure_map">Konfigurace mapy</string>
-    <string name="quick_action_add_navigation">Navigace</string>
     <string name="quick_action_fav_name_descr">Ponecháte-li prázdné, bude použita adresa nebo název místa.</string>
     <string name="quick_action_bug_descr">Tato zpráva je zahrnuta v poli komentáře.</string>
     <string name="quick_action_bug_message">Zpráva</string>

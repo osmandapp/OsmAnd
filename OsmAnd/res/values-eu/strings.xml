@@ -2121,7 +2121,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_add_category">Gehitu kategoria bat</string>
     <string name="quick_action_add_create_items">Sortu elementuak</string>
     <string name="quick_action_add_configure_map">Konfiguratu mapa</string>
-    <string name="quick_action_add_navigation">Nabigazioa</string>
     <string name="quick_action_bug_descr">Mezu hau iruzkinen eremuan txertatuko da.</string>
     <string name="quick_action_bug_message">Mezua</string>
     <string name="quick_action_category_descr">Gogokoa gordetzeko kategoria:</string>

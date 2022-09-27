@@ -361,6 +361,7 @@ public abstract class SettingsHelper {
 			dataTypes.add(LocalIndexType.TILES_DATA);
 			dataTypes.add(LocalIndexType.SRTM_DATA);
 			dataTypes.add(LocalIndexType.WIKI_DATA);
+			dataTypes.add(LocalIndexType.DEPTH_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.TTS_VOICE)) {
 			dataTypes.add(LocalIndexType.TTS_VOICE_DATA);
@@ -372,7 +373,7 @@ public abstract class SettingsHelper {
 				? getLocalIndexData(dataTypes.toArray(new LocalIndexType[0]))
 				: Collections.emptyList();
 		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
-				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
+				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.DEPTH_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			sortLocalFiles(files);
 			resourcesItems.put(ExportSettingsType.OFFLINE_MAPS, files);

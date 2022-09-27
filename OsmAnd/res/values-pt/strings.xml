@@ -2716,7 +2716,6 @@
     <string name="quick_action_add_category">Adicionar uma categoria</string>
     <string name="quick_action_add_create_items">Criar itens</string>
     <string name="quick_action_add_configure_map">Configurar mapa</string>
-    <string name="quick_action_add_navigation">Navegação</string>
     <string name="quick_action_fav_name_descr">Deixe em branco para usar automaticamente o endereço ou nome do lugar.</string>
     <string name="quick_action_bug_descr">Esta mensagem está incluída no campo de comentário.</string>
     <string name="quick_action_bug_message">Mensagem</string>

@@ -2120,7 +2120,6 @@
     <string name="quick_action_add_category">Pridať kategóriu</string>
     <string name="quick_action_add_create_items">Vytvoriť položky</string>
     <string name="quick_action_add_configure_map">Nastaviť mapu</string>
-    <string name="quick_action_add_navigation">Navigácia</string>
     <string name="quick_action_fav_name_descr">Ponechajte prázdne pre použitie adresy alebo názvu miesta.</string>
     <string name="quick_action_bug_descr">Táto správa je zahrnutá do poľa komentára.</string>
     <string name="quick_action_bug_message">Správa</string>

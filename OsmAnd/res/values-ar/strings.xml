@@ -2116,7 +2116,6 @@
     <string name="quick_action_add_category">إضافة فئة</string>
     <string name="quick_action_add_create_items">إنشاء عناصر</string>
     <string name="quick_action_add_configure_map">ضبط الخريطة</string>
-    <string name="quick_action_add_navigation">الملاحة</string>
     <string name="quick_action_bug_message">رسالة</string>
     <string name="quick_action_category_descr">حدد الفئة لحفظ المفضلة فيها:</string>
     <string name="quick_action_gpx_category_descr">حدد فئة اختيارية.</string>
@@ -4847,4 +4846,26 @@
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
     <string name="display_position">عرض الموقف</string>
+    <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
+    <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائها على الخريطة.</string>
+    <string name="map_center_widget">مركز الخريطة</string>
+    <string name="current_location_widget">الموقع الحالي</string>
+    <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
+    <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
+    <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
+    <string name="map_widget_target_distance">المسافة المستهدفة</string>
+    <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
+    <string name="go_to_marker_location">الانتقال إلى موقع العلامة</string>
+    <string name="shared_string_switch_mode">وضع التبديل</string>
+    <string name="shared_string_shows">يظهر</string>
+    <string name="shared_string_large">كبير</string>
+    <string name="shared_string_normal">عادي</string>
+    <string name="map_widget_camera_tilt">إمالة الكاميرا</string>
+    <string name="map_widget_zoom_level_desc">تعرض الأداة مستوى تكبير/تصغير الخريطة الحالي.</string>
+    <string name="map_widget_zoom_level">مستوى التكبير/التصغير</string>
+    <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى السطح.</string>
+    <string name="developer_widgets">أدوات المطور</string>
+    <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
+\nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
+    <string name="how_to_use">طريقة الاستخدام:</string>
 </resources>

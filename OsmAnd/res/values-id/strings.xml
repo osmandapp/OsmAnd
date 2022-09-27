@@ -1544,7 +1544,6 @@
     <string name="quick_action_poi_list">Daftar POI</string>
     <string name="quick_action_bug_message">Pesan</string>
     <string name="quick_action_fav_name_descr">Biarkan kosong untuk menggunakan alamat atau nama tempat.</string>
-    <string name="quick_action_add_navigation">Navigasi</string>
     <string name="quick_action_add_configure_map">Konfigurasi peta</string>
     <string name="quick_action_add_category">Tambahkan ke kategori</string>
     <string name="quick_action_poi_hide">Sembunyikan %1$s</string>
