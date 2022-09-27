@@ -164,18 +164,22 @@ public class FavouritesFileHelper {
 	public void backup(@NonNull File backupFile, @NonNull File externalFile) {
 		String name = backupFile.getName();
 		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_FILE_EXT));
-		ZipEntry entry = new ZipEntry(nameNoExt);
+		FileInputStream fis = null;
+		ZipOutputStream zos = null;
 		try {
-			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
-			FileInputStream fis = new FileInputStream(externalFile);
-			out.putNextEntry(entry);
-			Algorithms.streamCopy(fis, out);
-			out.closeEntry();
-			fis.close();
-			out.close();
+			File file = new File(backupFile.getParentFile(), backupFile.getName());
+			zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+			fis = new FileInputStream(externalFile);
+			zos.putNextEntry(new ZipEntry(nameNoExt));
+			Algorithms.streamCopy(fis, zos);
+			zos.closeEntry();
+			zos.flush();
+			zos.finish();
 		} catch (Exception e) {
 			log.warn("Backup failed", e);
+		} finally {
+			Algorithms.closeStream(zos);
+			Algorithms.closeStream(fis);
 		}
 		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
 	}
@@ -219,7 +223,7 @@ public class FavouritesFileHelper {
 			Collections.sort(files, (f1, f2) -> {
 				return Long.compare(f2.lastModified(), f1.lastModified());
 			});
-			for (int i = files.size(); i > maxCount ; --i) {
+			for (int i = files.size(); i > maxCount; --i) {
 				File oldest = files.get(i - 1);
 				oldest.delete();
 			}
