@@ -2483,7 +2483,7 @@
     <string name="add_location_as_first_point_descr">將您的位置新增為出發地來計劃完美路線。</string>
     <string name="my_location">我的位置</string>
     <string name="shared_string_finish">完成</string>
-    <string name="plan_route">計畫路線</string>
+    <string name="plan_route">規劃路線</string>
     <string name="shared_string_sort">分類</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
