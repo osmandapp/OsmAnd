@@ -3196,8 +3196,8 @@
     <string name="poi_map_type_topo">نوع الخريطة: طبوغرافية</string>
     <string name="poi_charging_station_output">مخرج محطة الشحن</string>
     <string name="poi_amperage">التيار/أمبير</string>
-    <string name="poi_parking_fee_no">رسوم وقوف السيارات: لا</string>
-    <string name="poi_parking_fee_yes">رسوم وقوف السيارات: نعم</string>
+    <string name="poi_parking_fee_no">لا</string>
+    <string name="poi_parking_fee_yes">نعم</string>
     <string name="poi_truck_no">شاحنة: لا</string>
     <string name="poi_truck_yes">شاحنة: نعم</string>
     <string name="poi_socket_cee_red_32a_current">المقبس: CEE الأحمر 32A: التيار</string>
@@ -4342,4 +4342,12 @@
     <string name="poi_club_bicycle">نادي الدراجات الهوائية</string>
     <string name="poi_board_title">عنوان اللافتة</string>
     <string name="poi_first_aid_kit">حقيبة الإسعافات الأولية</string>
+    <string name="poi_playground_structure">الهيكل</string>
+    <string name="poi_playground_slide">منزلق</string>
+    <string name="poi_playground_climbingframe">إطار التسلق</string>
+    <string name="poi_parking_fee_filter">رسوم موقف السيارات</string>
+    <string name="poi_dog">كلاب</string>
+    <string name="poi_dog_leashed">الكلاب: المقيد فقط</string>
+    <string name="poi_dog_unleashed">كلاب: التي لا تحتاج إلى تقييد</string>
+    <string name="poi_dog_designated">مخصص للكلاب</string>
 </resources>

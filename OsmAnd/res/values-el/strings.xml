@@ -2627,7 +2627,6 @@
     <string name="quick_action_add_category">Προσθήκη κατηγορίας</string>
     <string name="quick_action_add_create_items">Δημιουργία στοιχείων</string>
     <string name="quick_action_add_configure_map">Διαμόρφωση χάρτη</string>
-    <string name="quick_action_add_navigation">Πλοήγηση</string>
     <string name="quick_action_fav_name_descr">Αφήστε κενό για χρήση της διεύθυνσης ή του ονόματος μέρους.</string>
     <string name="quick_action_bug_descr">Αυτό το μήνυμα περιλαμβάνεται στο πεδίο σχολίων.</string>
     <string name="quick_action_bug_message">Μήνυμα</string>

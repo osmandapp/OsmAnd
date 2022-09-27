@@ -28,7 +28,6 @@ public class DoubleTapScaleDetector {
 	protected final OsmandMapTileView view;
 
 	private final int displayHeightPx;
-	private final PointF centerScreen;
 	private PointF zoomCenter;
 
 	private boolean mIsInZoomMode;
@@ -46,7 +45,7 @@ public class DoubleTapScaleDetector {
 		this.listener = listener;
 
 		RotatedTileBox tileBox = view.getCurrentRotatedTileBox();
-		centerScreen = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		PointF centerScreen = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		displayHeightPx = tileBox.getPixHeight();
 		zoomCenter = new PointF(centerScreen.x, centerScreen.y);
 
@@ -97,6 +96,8 @@ public class DoubleTapScaleDetector {
 					float x = event.getX();
 					float y = event.getY();
 					listener.onGestureInit(x, y, x, y);
+					RotatedTileBox tileBox = view.getCurrentRotatedTileBox();
+					PointF centerScreen = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 					zoomCenter = isXLargeDevice(view.getContext()) ? new PointF(x, y) : centerScreen;
 					listener.onZoomStarted(zoomCenter);
 					return true;

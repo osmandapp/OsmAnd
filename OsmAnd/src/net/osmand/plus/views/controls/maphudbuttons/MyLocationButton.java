@@ -34,11 +34,11 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(45);
+			animateDraggingMapThread.startTilting(45);
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
+			animateDraggingMapThread.startTilting(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 			mapView.refreshMap();
 		};
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);

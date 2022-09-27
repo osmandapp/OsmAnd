@@ -11,6 +11,28 @@
 	Thx - Hardy
 -->
 
+    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
+    <string name="ant_missing_dependency">Missing Dependency</string>
+    <string name="ant_go_to_store">Go to Store</string>
+    <string name="ant_read_data">Read data</string>
+    <string name="ant_write_to_gpx">Write data to track</string>
+    <string name="ant_heart_rate_write_gpx_desc">Write Heart Rate to track</string>
+    <string name="map_widget_ant_heart_rate">Heart Rate</string>
+    <string name="map_widget_ant_heart_rate_desc">Shows user\'s heart rate during a given activity in real-time</string>
+    <string name="map_widget_ant_bicycle_power">Bicycle Power</string>
+    <string name="map_widget_ant_bicycle_power_desc">Shows cyclist\'s power output, which is used to move the bike forward</string>
+    <string name="map_widget_ant_bicycle_cadence">Bicycle Cadence</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Shows speed at which the user is pedalling</string>
+    <string name="map_widget_ant_bicycle_speed">Bicycle Speed</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
+    <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ description</string>
+    <string name="nautical_depth_points">Nautical depth points</string>
+    <string name="depth_contours">Depth contours</string>
+    <string name="worldwide_maps">Worldwide maps</string>
     <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the target location.</string>
     <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
     <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>
@@ -112,10 +134,10 @@
     <string name="goods_delivery_desc">Delivery vehicles may be restricted on some roads.</string>
     <string name="updated_map_time">Updated: %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
-    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
-    <string name="next_live_update_time">Next update: in %1$s.</string>
+    <string name="next_live_update_date_and_time">Next update on %1$s at %2$s.</string>
+    <string name="next_live_update_time">Next update at %1$s.</string>
     <string name="live_update_frequency_hour_variant">Map updates are checked hourly.</string>
-    <string name="live_update_frequency_day_variant">Map updates are checked dayly.</string>
+    <string name="live_update_frequency_day_variant">Map updates are checked daily.</string>
     <string name="live_update_frequency_week_variant">Map updates are checked weekly.</string>
     <string name="altitude_correction">Altitude correction</string>
     <string name="no_altitude_data_desc">To receive %1$s data, attach your track to the roads or calculate it online.</string>
@@ -2140,7 +2162,7 @@
     <string name="add_location_as_first_point_descr">Add your position as point of departure to plan the perfect route.</string>
     <string name="my_location">My position</string>
     <string name="shared_string_finish">Finish</string>
-    <string name="plan_route">Plan route</string>
+    <string name="plan_route">Plan a route</string>
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
     <string name="marker_save_as_track_descr">Export your markers to the following GPX file:</string>
@@ -4703,7 +4725,6 @@
     <string name="quick_action_add_category">Add a category</string>
     <string name="quick_action_add_create_items">Create items</string>
     <string name="quick_action_add_configure_map">Configure map</string>
-    <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_fav_name_descr">Leave blank to use the address or place name.</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_bug_message">Message</string>

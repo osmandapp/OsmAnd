@@ -520,6 +520,10 @@ public class OsmAndFormatter {
 		return new FormattedValue(formattedValue, unit);
 	}
 
+	public static boolean isSameDay(long firstTime, long secondTime) {
+		return isSameDay(new Date(firstTime), new Date(secondTime));
+	}
+
 	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {
 		Calendar firstCal = Calendar.getInstance();
 		firstCal.setTime(firstDate);

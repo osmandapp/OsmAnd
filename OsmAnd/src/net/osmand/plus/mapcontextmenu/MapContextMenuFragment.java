@@ -982,7 +982,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
-		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+		map.setLatLon(latLon.getLatitude(), latLon.getLongitude(), ratioX, ratioY);
 	}
 
 	public void doZoomIn() {

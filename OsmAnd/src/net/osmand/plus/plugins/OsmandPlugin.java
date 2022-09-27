@@ -1,13 +1,11 @@
 package net.osmand.plus.plugins;
 
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
@@ -44,6 +42,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -83,6 +82,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -237,6 +237,16 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
+	@Nullable
+	protected JSONObject getAdditionalTrackData() {
+		return null;
+	}
+
+	@Nullable
+	protected Map<String, String> getExtensionsFromInfo(@Nullable JSONObject json) {
+		return null;
+	}
+
 	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
 	                                            @NonNull Map<String, String> params,
 	                                            @Nullable Map<String, String> additionalParams,
@@ -272,7 +282,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		for (ApplicationMode appMode : getAddedAppModes()) {
 			ApplicationMode.changeProfileAvailability(appMode, false, app);
 		}
@@ -317,6 +327,7 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
+		allPlugins.add(new AntPlusPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
@@ -558,25 +569,24 @@ public abstract class OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 	}
 
-	public void mapActivityCreate(MapActivity activity) {
+	public void mapActivityCreate(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityDestroy(MapActivity activity) {
+	public void mapActivityDestroy(@NonNull MapActivity activity) {
 	}
 
-	public void mapActivityScreenOff(MapActivity activity) {
+	public void mapActivityScreenOff(@NonNull MapActivity activity) {
 	}
 
-	@TargetApi(Build.VERSION_CODES.M)
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
 	                                           int[] grantResults) {
 	}
@@ -805,6 +815,44 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	@Nullable
+	public static JSONObject getAdditionalTrackInfo() {
+		JSONObject json = new JSONObject();
+		try {
+			for (OsmandPlugin plugin : getEnabledPlugins()) {
+				JSONObject data = plugin.getAdditionalTrackData();
+				if (data != null && data.length() > 0) {
+					json.put(plugin.getId(), data);
+				}
+			}
+		} catch (JSONException e) {
+			LOG.error(e);
+		}
+		return json;
+	}
+
+	@NonNull
+	public static Map<String, String> getExtensionsFromPluginsInfo(@Nullable String pluginsInfo) {
+		if (Algorithms.isEmpty(pluginsInfo)) {
+			return Collections.emptyMap();
+		}
+		Map<String, String> extensions = new HashMap<>();
+		try {
+			JSONObject json = new JSONObject(pluginsInfo);
+			for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
+				String pluginId = iterator.next();
+				OsmandPlugin plugin = getPlugin(pluginId);
+				Map<String, String> pluginExtensions = plugin != null ? plugin.getExtensionsFromInfo(json.optJSONObject(pluginId)) : null;
+				if (!Algorithms.isEmpty(pluginExtensions)) {
+					extensions.putAll(pluginExtensions);
+				}
+			}
+		} catch (JSONException e) {
+			LOG.error(e);
+		}
+		return extensions;
+	}
+
 	public static List<String> getDisabledRendererNames() {
 		List<String> l = new ArrayList<String>();
 		for (OsmandPlugin plugin : getNotActivePlugins()) {
@@ -832,31 +880,31 @@ public abstract class OsmandPlugin {
 		return l;
 	}
 
-	public static void onMapActivityCreate(MapActivity activity) {
+	public static void onMapActivityCreate(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityCreate(activity);
 		}
 	}
 
-	public static void onMapActivityResume(MapActivity activity) {
+	public static void onMapActivityResume(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResume(activity);
 		}
 	}
 
-	public static void onMapActivityResumeOnTop(MapActivity activity) {
+	public static void onMapActivityResumeOnTop(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityResumeOnTop(activity);
 		}
 	}
 
-	public static void onMapActivityPause(MapActivity activity) {
+	public static void onMapActivityPause(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityPause(activity);
 		}
 	}
 
-	public static void onMapActivityDestroy(MapActivity activity) {
+	public static void onMapActivityDestroy(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityDestroy(activity);
 		}
@@ -868,7 +916,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void onMapActivityScreenOff(MapActivity activity) {
+	public static void onMapActivityScreenOff(@NonNull MapActivity activity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.mapActivityScreenOff(activity);
 		}

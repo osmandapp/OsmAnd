@@ -3316,8 +3316,8 @@
     <string name="poi_bicycle_no">Bitzicleta: nono</string>
     <string name="poi_scooter_no">Motorinu: nono</string>
     <string name="poi_truck_no">Càmion: nono</string>
-    <string name="poi_parking_fee_yes">Tarifa de parchègiu: eja</string>
-    <string name="poi_parking_fee_no">Tarifa de parchègiu: nono</string>
+    <string name="poi_parking_fee_yes">Eja</string>
+    <string name="poi_parking_fee_no">Nono</string>
     <string name="poi_parking_fee">Tarifa de parchègiu</string>
     <string name="poi_amperage">Amperàgiu</string>
     <string name="poi_charging_station_output">Essida de s\'istatzione de càrriga</string>
@@ -4375,4 +4375,6 @@
     <string name="poi_playground_tunnel_tube">Galleria</string>
     <string name="poi_playground_trampoline">Trampolinu</string>
     <string name="poi_playground_horizontal_bar">Istanga orizontale</string>
+    <string name="poi_access_yes">Atzessu permìtidu</string>
+    <string name="poi_parking_fee_filter">Tarifa de parchègiu</string>
 </resources>

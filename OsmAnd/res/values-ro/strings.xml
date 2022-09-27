@@ -4194,7 +4194,6 @@
     <string name="quick_action_bug_message">Mesaj</string>
     <string name="quick_action_bug_descr">Acest mesaj este inclus în câmpul de comentarii.</string>
     <string name="quick_action_fav_name_descr">Lăsați spațiul gol pentru a utiliza adresa sau denumirea localității.</string>
-    <string name="quick_action_add_navigation">Navigație</string>
     <string name="quick_action_add_configure_map">Configurați harta</string>
     <string name="quick_action_add_create_items">Creați elemente</string>
     <string name="quick_action_add_category">Adăugați o categorie</string>

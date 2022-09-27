@@ -344,6 +344,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.FONT_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.FONT_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
 			}
@@ -757,7 +759,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA));
+					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA, LocalIndexType.DEPTH_DATA));
 		} else if (itemId == R.string.local_index_mi_restore) {
 			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {

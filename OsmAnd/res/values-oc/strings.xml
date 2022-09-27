@@ -859,7 +859,6 @@
     <string name="one_tap_active_descr">Quichatz sus un marcador de la mapa per lo plaçar endavant dei marcadors actius sensa dobrir lo menut contextuau.</string>
     <string name="go_to_map">Mostrar la mapa</string>
     <string name="shared_string_online_maps">Mapas en linha</string>
-    <string name="quick_action_add_navigation">Navigacion</string>
     <string name="shortcut_start_recording">Començar l\'enregistrament</string>
     <string name="shared_string_relation">Relacion</string>
     <string name="monitoring_prefs_descr">Navigacion, precision d\'enregistrament</string>
