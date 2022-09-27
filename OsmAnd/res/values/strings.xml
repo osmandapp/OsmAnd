@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="purchases_feature_desc_cross_buy">Use all subscription features for different device classes at no additional charge. Available at Android/iOS/Web.</string>
+    <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="ant_widgets">ANT+ widgets</string>
     <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
