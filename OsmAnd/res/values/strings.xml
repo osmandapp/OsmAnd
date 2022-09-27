@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="nautical_depth_points">Nautical depth points</string>
+    <string name="depth_contours">Depth contours</string>
+    <string name="worldwide_maps">Worldwide maps</string>
     <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the target location.</string>
     <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
     <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>

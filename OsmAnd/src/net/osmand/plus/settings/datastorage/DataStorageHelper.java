@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
 import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
@@ -181,6 +182,7 @@ public class DataStorageHelper {
 						createDirectory(MAPS_PATH, false, EXTENSIONS, true),
 						createDirectory(ROADS_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(WIKI_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(NAUTICAL_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(BACKUP_INDEX_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(mapsMemory);
