@@ -38,8 +38,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -167,7 +165,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
@@ -176,7 +174,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.distanceWidget = null;
 		this.timeWidget = null;
 		this.uphillWidget = null;
@@ -295,7 +293,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				updateWidgets();
 
 				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
-				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
+				if (result != null && AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
 					GPXFile gpxFile = null;
 					File file = null;

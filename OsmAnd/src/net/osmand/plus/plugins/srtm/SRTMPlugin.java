@@ -527,10 +527,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		dialogAdapter.setDialog(b.show());
 	}
 
-	@Override
-	public void disable(OsmandApplication app) {
-	}
-
 	private static boolean isNightMode(Activity activity, OsmandApplication app) {
 		if (activity == null || app == null) {
 			return false;
