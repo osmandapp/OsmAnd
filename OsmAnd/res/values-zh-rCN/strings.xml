@@ -2379,7 +2379,6 @@
     <string name="quick_action_add_category">添加类别</string>
     <string name="quick_action_add_create_items">创建项目</string>
     <string name="quick_action_add_configure_map">配置地图</string>
-    <string name="quick_action_add_navigation">导航</string>
     <string name="quick_action_fav_name_descr">留空以使用地址或地名。</string>
     <string name="quick_action_bug_descr">此消息将会自动填写注释字段。</string>
     <string name="quick_action_bug_message">消息</string>

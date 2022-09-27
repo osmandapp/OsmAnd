@@ -1109,7 +1109,6 @@
     <string name="quick_action_switch_night_mode">Mou nocherniegu</string>
     <string name="quick_action_showhide_favorites_descr">Un alternador p\'amosar/anubrir los puntos favoritos nel mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un alternador p\'amosar/anubrir los PdI nel mapa.</string>
-    <string name="quick_action_add_navigation">Navegación</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="mappilary_no_internet_desc">Les semeyes de Mapillary namás tán disponibles en llinia.</string>

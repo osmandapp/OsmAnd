@@ -48,6 +48,7 @@ public class MapRendererContext {
     private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
+	public static final int OBF_SYMBOL_SECTION = 1;
 	private final OsmandApplication app;
 	
 	// input parameters
@@ -290,7 +291,7 @@ public class MapRendererContext {
 				getReferenceTileSize());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
-			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
 		}
 	}
 	
@@ -315,7 +316,7 @@ public class MapRendererContext {
 			}
 			// Symbols
 			if (obfMapSymbolsProvider != null) {
-				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+				mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
 			}
 			// Heightmap
 			recreateHeightmapProvider();

@@ -1497,7 +1497,6 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">ბორცვიანი</string>
     <string name="lang_ber">ბერბერული</string>
     <string name="quick_action_bug_message">შეტყობინება</string>
-    <string name="quick_action_add_navigation">ნავიგაცია</string>
     <string name="favorite_empty_place_name">ადგილი</string>
     <string name="rendering_value_low_name">დაბალი</string>
     <string name="rendering_value_medium_w_name">საშუალო</string>

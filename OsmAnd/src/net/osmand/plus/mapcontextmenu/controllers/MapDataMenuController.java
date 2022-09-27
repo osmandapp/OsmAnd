@@ -526,6 +526,8 @@ public class MapDataMenuController extends MenuController {
 				return DownloadActivityType.VOICE_FILE;
 			} else if (localIndexInfo.getOriginalType() == LocalIndexType.FONT_DATA) {
 				return DownloadActivityType.FONT_FILE;
+			} else if (localIndexInfo.getOriginalType() == LocalIndexType.DEPTH_DATA) {
+				return DownloadActivityType.DEPTH_MAP_FILE;
 			} else {
 				return null;
 			}
@@ -651,6 +653,8 @@ public class MapDataMenuController extends MenuController {
 					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
 					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
+					parent = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
 			}

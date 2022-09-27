@@ -1643,7 +1643,6 @@
     <string name="quick_action_add_category">הוספת קטגוריה</string>
     <string name="quick_action_add_create_items">יצירת פריטים</string>
     <string name="quick_action_add_configure_map">הגדרת מפה</string>
-    <string name="quick_action_add_navigation">ניווט</string>
     <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום.</string>
     <string name="quick_action_bug_descr">הודעה זו מתווספת לשדה ההערה.</string>
     <string name="quick_action_bug_message">הודעה</string>

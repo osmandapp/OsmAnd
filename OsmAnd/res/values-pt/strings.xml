@@ -403,9 +403,9 @@
     <string name="online_map_settings_descr">Configurar origens de mosaicos ou de mapas online.</string>
     <string name="osmand_rastermaps_plugin_description">Aceda a muitos tipos de mapas online de imagens (raster/mosaicos) do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
 \n
-\nQuaisquer desses mapas podem ser usados como mapa principal para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa offline normal de OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \"Configurar mapa\".
+\nQuaisquer desses mapas podem ser usados como mapa principal para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa offline vetorial do OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \"Configurar mapa\".
 \n
-\nOs mosaicos dos mapas podem ser obtidos diretamente através de origens online ou podem ser preparados para uso offline (e copiados manualmente para o diretório de dados do OsmAnd) como uma base de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
+\nOs mosaicos dos mapas podem ser descarregados diretamente online ou copiados os ficheiros da base de dados SQLite para a pasta do OsmAnd utilizando uma das muitas ferramentas de terceiros para preparação de mapas.</string>
     <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o aparelho GPS (com o ecrã desligado).</string>
     <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do aparelho disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS (texto-para-fala), configurando a navegação no ecrã com o teclado direcional, usando uma trackball para controlo da ampliação, ou feedback texto-para-fala, por exemplo, para avisar automaticamente por voz a sua posição.</string>
     <string name="osmand_development_plugin_description">Permite configurar o OsmAnd para testes: simular rotas de navegação, verificar o desempenho da renderização do ecrã, etc. Este complemento não é necessário para uma utilização normal da aplicação.</string>
@@ -2716,7 +2716,6 @@
     <string name="quick_action_add_category">Adicionar uma categoria</string>
     <string name="quick_action_add_create_items">Criar itens</string>
     <string name="quick_action_add_configure_map">Configurar mapa</string>
-    <string name="quick_action_add_navigation">Navegação</string>
     <string name="quick_action_fav_name_descr">Deixe em branco para usar automaticamente o endereço ou nome do lugar.</string>
     <string name="quick_action_bug_descr">Esta mensagem está incluída no campo de comentário.</string>
     <string name="quick_action_bug_message">Mensagem</string>
@@ -4730,8 +4729,8 @@
     <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
     <string name="trip_recording_downhill_widget_desc">Mostra a soma de todas as descidas da viagem atual gravada.</string>
     <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atual gravada.</string>
-    <string name="trip_recording_duration_widget_desc">Mostra o tempo de duração da viagem atualmente gravada.</string>
-    <string name="trip_recording_distance_widget_desc">Mostra a distância da viagem atualmente gravada.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra o tempo decorrido da viagem atual a ser gravada.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
     <string name="time_to_destination_widget_desc">Mostra a \"hora de chegada\" ou o \"tempo a percorrer\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo de rota da localização atual.</string>
     <string name="time_to_intermediate_widget_desc">Mostra o \"tempo de chegada\" ou o \"tempo a percorrer\" até ao primeiro ponto intermédio. O tempo é constantemente atualizado durante a navegação, uma vez passados os pontos intermédios, o tempo será atualizado para o próximo ponto intermédio.</string>
     <string name="distance_to_destination_widget_desc">Mostra a distância restante até ao último ponto de destino.</string>
@@ -4804,4 +4803,12 @@
     <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
     <string name="current_location_widget">Localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
+    <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
+    <string name="map_widget_target_distance">Distância do alvo</string>
+    <string name="map_widget_zoom_level">Nível de zoom</string>
+    <string name="map_widget_camera_distance">Elevação da câmara</string>
+    <string name="developer_widgets">Widgets de desenvolvimento</string>
+    <string name="map_widget_target_distance_desc">Mostra a distância da câmara ao local de destino.</string>
+    <string name="map_widget_zoom_level_desc">Mostra o nível atual de zoom do mapa.</string>
+    <string name="map_widget_camera_tilt">Inclinação da câmara</string>
 </resources>

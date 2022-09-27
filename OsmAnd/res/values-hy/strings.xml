@@ -2477,7 +2477,6 @@
     <string name="quick_action_add_category">Ավելացնել կատեգորիա</string>
     <string name="quick_action_add_create_items">Ստեղծել գործողություններ</string>
     <string name="quick_action_add_configure_map">Կարգավորել քարտեզը</string>
-    <string name="quick_action_add_navigation">Նավիգացիա</string>
     <string name="quick_action_fav_name_descr">Թողնել դատարկ, որ օգտագործել հասցե կամ վայրի անվանումը.</string>
     <string name="quick_action_bug_descr">Այս հաղորդագրությունը ներառված է մեկնաբանության դաշտում:</string>
     <string name="quick_action_bug_message">Հաղորդագրություն</string>
