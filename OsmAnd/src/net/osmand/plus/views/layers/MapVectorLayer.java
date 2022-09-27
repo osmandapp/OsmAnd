@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
@@ -106,7 +107,13 @@ public class MapVectorLayer extends BaseMapLayer {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
 			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
-			mapRenderer.setSymbolsOpacity(((float) alpha) / 255.0f);
+			boolean keepLabels = false;
+			if (view != null) 
+				keepLabels = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
+			SymbolSubsectionConfiguration symbolSubsectionConfiguration = new SymbolSubsectionConfiguration();
+			symbolSubsectionConfiguration.setOpacityFactor(keepLabels ? 1.0f : ((float) alpha) / 255.0f);
+			mapRenderer.setSymbolSubsectionConfiguration(MapRendererContext.OBF_SYMBOL_SECTION,
+				symbolSubsectionConfiguration);
 		}
 	}
 
