@@ -462,7 +462,7 @@ public class LocalIndexHelper {
 		MAP_DATA(R.string.local_indexes_cat_map, R.drawable.ic_map, 10),
 		TILES_DATA(R.string.local_indexes_cat_tile, R.drawable.ic_map, 60),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm, 40),
-		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 50),
+		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 45),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
