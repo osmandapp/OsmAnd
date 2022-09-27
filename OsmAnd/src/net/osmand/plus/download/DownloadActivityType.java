@@ -48,7 +48,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType DEPTH_CONTOUR_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "depth", 45);
 	public static final DownloadActivityType DEPTH_MAP_FILE =
-			new DownloadActivityType(R.string.nautical_depth, "depthmap", 45);
+			new DownloadActivityType(R.string.nautical_depth, "depthmap", 46);
 	public static final DownloadActivityType HILLSHADE_FILE =
 			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType SLOPE_FILE =
