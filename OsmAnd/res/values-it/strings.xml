@@ -996,7 +996,6 @@
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asia, America Latina e simili</string>
     <string name="driving_region_uk">UK, India e simili</string>
-    <string name="map_widget_fps_info">Informazioni FPS</string>
     <string name="local_index_tile_data_zooms">Livelli zoom scaricati: %1$s</string>
     <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
     <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
@@ -4794,7 +4793,6 @@
     <string name="map_widget_camera_tilt_desc">Il widget mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
     <string name="map_widget_zoom_level_desc">Il widget mostra il livello d\'ingrandimento attuale della mappa.</string>
     <string name="map_widget_target_distance_desc">Il widget mostra la distanza tra la fotocamera e la posizione di destinazione.</string>
-    <string name="map_widget_target_distance">Distanza dalla destinazione</string>
     <string name="map_widget_zoom_level">Livello d\'ingrandimento</string>
     <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
     <string name="developer_widgets">Widget per sviluppatori</string>

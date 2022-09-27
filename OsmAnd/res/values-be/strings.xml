@@ -23,7 +23,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Абярыце існы…</string>
     <string name="maps_define_edit">Вызначыць/змянiць…</string>
-    <string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
     <string name="driving_region_descr">Абярыце рэгіён кіравання: ЗША, Еўропа, Вялікабрытанія, Азія і іншыя.</string>
     <string name="driving_region">Рэгіён кіравання</string>
     <string name="driving_region_japan">Японія</string>
@@ -4809,7 +4808,6 @@
     <string name="map_widget_zoom_level_desc">Віджэт паказвае бягучы ўзровень маштабавання карты.</string>
     <string name="map_widget_camera_distance_desc">Віджэт паказвае вышыню камеры над узроўнем паверхні.</string>
     <string name="map_widget_camera_tilt_desc">Віджэт паказвае вугал нахілу камеры ў рэжыме перспектывы. Па змаўчанні 90° (без нахілу).</string>
-    <string name="map_widget_target_distance">Мэтавая адлегласць</string>
     <string name="map_widget_zoom_level">Узровень маштабавання</string>
     <string name="map_widget_camera_distance">Вышыня камеры</string>
     <string name="map_widget_camera_tilt">Нахіл камеры</string>

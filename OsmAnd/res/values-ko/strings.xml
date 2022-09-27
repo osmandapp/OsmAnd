@@ -672,7 +672,6 @@
     <string name="edit_tilesource_successfully">타일 소스 %1$s 는 성공적으로 저장됨</string>
     <string name="edit_tilesource_maxzoom">최대 줌</string>
     <string name="edit_tilesource_minzoom">최소 줌</string>
-    <string name="map_widget_fps_info">FPS 디버그 정보</string>
     <string name="driving_region_descr">운전 지역 선택 : 미국, 유럽, 영국, 아시아 및 기타</string>
     <string name="driving_region">운전 지역</string>
     <string name="driving_region_japan">일본</string>

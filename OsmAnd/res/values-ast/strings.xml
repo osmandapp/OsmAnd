@@ -1143,7 +1143,6 @@
     <string name="print_route">Print route</string>
     <string name="app_mode_aircraft">Aeronave</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
-    <string name="map_widget_fps_info">FPS debug info</string>
     <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
     <string name="map_widget_gps_info">Información del GPS</string>
     <string name="layer_recordings">Recording layer</string>

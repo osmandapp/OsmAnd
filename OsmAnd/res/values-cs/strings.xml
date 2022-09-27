@@ -1048,7 +1048,6 @@
     <string name="driving_region_descr">Vyberte dopravní oblast: USA, Evropa, Británie, Asie a další.</string>
     <string name="driving_region">Dopravní oblast</string>
     <string name="local_index_tile_data_expire">Doba platnosti (v minutách): %1$s</string>
-    <string name="map_widget_fps_info">Snímků za sekundu (ladění)</string>
     <string name="edit_tilesource_elliptic_tile">Elipsoidní Mercatorovo zobrazení</string>
     <string name="base_world_map">Základní mapa světa</string>
     <string name="map_magnifier">Lupa mapy</string>

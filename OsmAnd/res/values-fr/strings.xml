@@ -1040,7 +1040,6 @@
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
     <string name="context_menu_item_directions_from">Itinéraire depuis</string>
     <string name="route_descr_map_location">Carte : </string>
-    <string name="map_widget_fps_info">Informations de débogage du rendu</string>
     <string name="route_to">À :</string>
     <string name="route_via">Par :</string>
     <string name="route_from">De :</string>
@@ -4801,7 +4800,6 @@
     <string name="developer_widgets">Gadgets pour les développeurs</string>
     <string name="map_widget_camera_tilt">Angle de l\'appareil photo</string>
     <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
-    <string name="map_widget_target_distance">Distance de la destination</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
 </resources>

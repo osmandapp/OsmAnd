@@ -317,7 +317,6 @@
     <string name="context_menu_item_first_intermediate_point">إضافة كوجهة وسيطة أولى</string>
     <string name="edit_tilesource_expiration_time">انتهاء الوقت (دقيقة)</string>
     <string name="edit_tilesource_choose_existing">اختر القائمة …</string>
-    <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
     <string name="settings_preset_descr">اختيار وضع افتراضي لعرض الخريطة: استعراض، سيارة، مشي .</string>
     <string name="intermediate_items_sort_return">أُعيد ترتيب نقاط الوجهات الوسطى لتحسين ترتيبها من الموقع الحالي حتى الوجهة.</string>
     <string name="local_osm_changes_backup_successful">أنشئ ملف تعديل OSM بنجاح %1$s</string>
@@ -4853,7 +4852,6 @@
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
     <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
-    <string name="map_widget_target_distance">المسافة المستهدفة</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
     <string name="go_to_marker_location">الانتقال إلى موقع العلامة</string>
     <string name="shared_string_switch_mode">وضع التبديل</string>

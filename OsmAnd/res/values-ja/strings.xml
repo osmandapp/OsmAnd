@@ -496,7 +496,6 @@ POIの更新は利用できません</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">保存済みデータから選択…</string>
     <string name="maps_define_edit">マップの定義と編集…</string>
-    <string name="map_widget_fps_info">FPS デバッグ情報</string>
     <string name="driving_region_descr">運転する地域を選択します:アメリカ、ヨーロッパ、イギリス、アジア、その他</string>
     <string name="driving_region">運転地域</string>
     <string name="driving_region_japan">日本</string>

@@ -983,7 +983,6 @@
     <string name="please_select_address">Pirmiausia nustatykite miestą arba gatvę</string>
     <string name="destination_point">Kelionės tikslas %1$s</string>
     <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
-    <string name="map_widget_fps_info">Kadrai/s info</string>
     <string name="driving_region_descr">Pasirinkite vairavimo regioną: JAV, Europa, Didžioji Britanija, Azija ir kitas.</string>
     <string name="driving_region">Vairavimo regionas</string>
     <string name="driving_region_japan">Japonija</string>

@@ -3154,7 +3154,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izberete postoečki…</string>
     <string name="maps_define_edit">Definirajte/Uredete…</string>
-    <string name="map_widget_fps_info">Informacii za otstranuvanje greški na FPS</string>
     <string name="driving_region">Vozen region</string>
     <string name="driving_region_japan">Japonija</string>
     <string name="speak_street_names">Iminja na ulici (TTS)</string>

@@ -882,7 +882,6 @@
     <string name="edit_tilesource_url_to_load">URL ஐ</string>
     <string name="edit_tilesource_choose_existing">ஏற்கனவே உள்ளதைத் தேர்வு செய்க …</string>
     <string name="maps_define_edit">வரையறு/திருத்து…</string>
-    <string name="map_widget_fps_info">FPS பிழைத்திருத்த தகவல்</string>
     <string name="driving_region_descr">உந்துதலையை தேர்ந்தெடுக்கவும்: அமெரிக்கா, ஐரோப்பா, இங்கிலாந்து, ஆசியா மற்றும் பலர்.</string>
     <string name="driving_region">வாகனம் ஓட்டும் இடம்</string>
     <string name="driving_region_japan">ஜப்பான்</string>
