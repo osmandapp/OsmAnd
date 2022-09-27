@@ -59,7 +59,7 @@ public class BikeSpeedDevice extends CommonDevice<AntBikeSpeedDevice> {
 		BikeSpeedData data = device.getLastBikeSpeedData();
 		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
 		if (calculatedSpeed > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
-			json.put("ant_bicycle_speed", DECIMAL_FORMAT.format(calculatedSpeed));
+			json.put("ant_speed", DECIMAL_FORMAT.format(calculatedSpeed));
 		}
 	}
 }
