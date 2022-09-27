@@ -1507,7 +1507,6 @@
     <string name="yard">llth</string>
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="quick_action_add_navigation">Llywio</string>
     <string name="selected_waypoints_descr">Caiff y cyfeirbwyntiau dan sylw eu hychwanegu i\'r trac \"%1$s\"</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>

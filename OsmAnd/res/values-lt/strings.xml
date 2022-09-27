@@ -2131,7 +2131,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="favorite_autofill_toast_text">" įrašytas į "</string>
     <string name="quick_action_poi_show">Rodyti %1$s</string>
     <string name="quick_action_poi_hide">Slėpti %1$s</string>
-    <string name="quick_action_add_navigation">Navigacija</string>
     <string name="quick_action_poi_list">LV sąrašas</string>
     <string name="quick_action_map_style_action">Pridėti žemėlapio stilių</string>
     <string name="quick_action_empty_param_error">Parametrai negali būti tušti</string>

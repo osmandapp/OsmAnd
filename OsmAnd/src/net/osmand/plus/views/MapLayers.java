@@ -254,7 +254,12 @@ public class MapLayers {
 		OsmandSettings settings = app.getSettings();
 
 		// update transparency
-		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 : settings.MAP_TRANSPARENCY.get();
+		int mapTransparency = 255;
+		if (settings.MAP_UNDERLAY.get() != null) {
+			mapTransparency = settings.MAP_TRANSPARENCY.get();
+		} else if (settings.MAP_OVERLAY.get() != null) {
+			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+		}
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 

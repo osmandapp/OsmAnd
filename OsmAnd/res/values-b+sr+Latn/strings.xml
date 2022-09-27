@@ -342,7 +342,6 @@
     <string name="rendering_attr_hideWaterPolygons_description">Vode</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sakrij vodu</string>
     <string name="routing_attr_allow_motorway_name">Koristi autoputeve</string>
-    <string name="quick_action_add_navigation">Navođenje</string>
     <string name="quick_action_add_configure_map">Podesite kartu</string>
     <string name="quick_action_poi_show">Prikaži %1$s</string>
     <string name="quick_action_poi_hide">Sakrij %1$s</string>

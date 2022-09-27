@@ -2097,7 +2097,6 @@
     <string name="quick_action_add_configure_map">Skonfiguruj mapę</string>
     <string name="quick_action_poi_show">Wyświetl %1$s</string>
     <string name="quick_action_poi_hide">Ukryj %1$s</string>
-    <string name="quick_action_add_navigation">Nawigacja</string>
     <string name="quick_action_fav_name_descr">Proszę pozostawić pole puste, aby użyć adresu lub nazwy miejsca.</string>
     <string name="quick_action_poi_list">Lista użytecznych miejsc</string>
     <string name="quick_action_map_styles">Style map</string>
