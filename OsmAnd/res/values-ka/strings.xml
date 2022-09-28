@@ -916,7 +916,6 @@
     <string name="edit_tilesource_url_to_load">ბმული</string>
     <string name="edit_tilesource_choose_existing">აირჩიეთ არსებული…</string>
     <string name="maps_define_edit">აღწერა/ჩასწორება…</string>
-    <string name="map_widget_fps_info">FPS გარჩევის ინფორმაცია</string>
     <string name="driving_region_descr">აირჩიეთ გზის რეგიონი: აშშ, ევროპა, UK, აზია და სხვა.</string>
     <string name="driving_region">გზის რეგიონი</string>
     <string name="driving_region_japan">იაპონია</string>

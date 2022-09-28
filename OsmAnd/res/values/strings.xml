@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+
+    <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
+    <string name="shared_string_cross_buy">Cross-buy</string>
+    <string name="map_widget_fps_info">Map rendering FPS (frames per second)</string>
+    <string name="map_widget_target_distance">Distance from camera to target</string>
     <string name="ant_widgets">ANT+ widgets</string>
     <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
@@ -37,7 +42,6 @@
     <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
     <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>
     <string name="map_widget_camera_tilt_desc">Widget shows the camera tilt angle in perspective mode. Default is 90° (no tilt).</string>
-    <string name="map_widget_target_distance">Target distance</string>
     <string name="map_widget_zoom_level">Zoom level</string>
     <string name="map_widget_camera_distance">Camera elevation</string>
     <string name="map_widget_camera_tilt">Camera tilt</string>
@@ -3426,7 +3430,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Select existing…</string>
     <string name="maps_define_edit">Define/Edit…</string>
-    <string name="map_widget_fps_info">FPS debug info</string>
     <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
     <string name="driving_region">Driving region</string>
     <string name="driving_region_japan">Japan</string>

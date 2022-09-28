@@ -272,7 +272,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escoller existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
-    <string name="map_widget_fps_info">Información de depuración de FPS</string>
     <string name="driving_region_descr">Escoller a rexión de condución: Estados Unidos, Europa, Reino Unido, Asia e outras.</string>
     <string name="driving_region">Rexión na que conducir</string>
     <string name="driving_region_japan">Xapón</string>

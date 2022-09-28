@@ -643,7 +643,6 @@
     <string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
     <string name="internet_connection_required_for_online_route">Çevrim içi navigasyon çevrim dışı çalışmamaktadır.</string>
     <string name="layer_hillshade">Tepe gölgesi katmanı</string>
-    <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
     <string name="driving_region_descr">Sürüş bölgesini seçin: ABD, Avrupa, İngiltere, Asya ve diğerleri.</string>
     <string name="driving_region">Sürüş bölgesi</string>
     <string name="driving_region_japan">Japonya</string>

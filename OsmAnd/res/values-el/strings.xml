@@ -2332,7 +2332,6 @@
     <string name="route_is_too_long_v2">Για μεγάλες αποστάσεις: Παρακαλούμε, προσθέστε ενδιάμεσους προορισμούς, εάν δεν βρεθεί διαδρομή μέσα σε 10 λεπτά.</string>
     <string name="auto_zoom_close">Για κοντινά</string>
     <string name="auto_zoom_farthest">Για μεγάλη ακτίνα</string>
-    <string name="map_widget_fps_info">Πληροφορίες αποσφαλμάτωσης εικόνων ανά δευτερόλεπτο</string>
     <string name="driving_region_australia">Αυστραλία</string>
     <string name="use_distance_measurement_help">* Πατήστε για να σημειώσετε ένα σημείο.
 \n * Παρατεταμένο πάτημα στον χάρτη για να διαγράψετε προηγούμενο σημείο.

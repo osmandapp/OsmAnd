@@ -844,7 +844,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izvēlēties esošo…</string>
     <string name="maps_define_edit">Definēt/labot…</string>
-    <string name="map_widget_fps_info">FPS atkļūdošana</string>
     <string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija un citi</string>
     <string name="driving_region">Apgabals</string>
     <string name="driving_region_japan">Japāna</string>
