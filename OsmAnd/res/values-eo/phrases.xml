@@ -3293,8 +3293,8 @@
     <string name="poi_scooter_no">Skotero: ne</string>
     <string name="poi_truck_yes">Kamiono: jes</string>
     <string name="poi_truck_no">Kamiono: ne</string>
-    <string name="poi_parking_fee_yes">Parkumeja pago: jes</string>
-    <string name="poi_parking_fee_no">Parkumeja pago: ne</string>
+    <string name="poi_parking_fee_yes">jes</string>
+    <string name="poi_parking_fee_no">ne</string>
     <string name="poi_parking_fee">Parkumeja pago</string>
     <string name="poi_amperage">Elektroforto</string>
     <string name="poi_charging_station_output">Povo de ŝargostacio</string>
@@ -4342,4 +4342,12 @@
     <string name="poi_club_bicycle">Bicikla klubejo</string>
     <string name="poi_club_doityourself">Memfarula klubejo</string>
     <string name="poi_first_aid_kit">Manapoteko</string>
+    <string name="poi_dog_leashed">Hundoj: nur en hundrimenoj</string>
+    <string name="poi_playground_structure">Infan-ludeja instalaĵo</string>
+    <string name="poi_playground_slide">Deglitejo</string>
+    <string name="poi_playground_climbingframe">Grimp-krado</string>
+    <string name="poi_parking_fee_filter">Parkumeja pago</string>
+    <string name="poi_dog">Hundoj</string>
+    <string name="poi_dog_designated">Destinita por hundoj</string>
+    <string name="poi_dog_unleashed">Hundoj: ne devas esti en hundrimenoj</string>
 </resources>

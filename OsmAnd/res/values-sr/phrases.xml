@@ -2386,7 +2386,7 @@
     <string name="poi_cuisine_salad">Салате</string>
     <string name="poi_cuisine_fried_food">Пржена храна</string>
     <string name="poi_cuisine_bistro">Бистро</string>
-    <string name="poi_cuisine_bakery">Пекара</string>
+    <string name="poi_cuisine_bakery">Пециво</string>
     <string name="poi_cuisine_couscous">Кускус</string>
     <string name="poi_cuisine_fried_chicken">Пржена пилетина</string>
     <string name="poi_cuisine_dessert">Дезерти</string>
@@ -3667,7 +3667,7 @@
     <string name="poi_pet_grooming">Шишање љубимаца</string>
     <string name="poi_charge">Пуњење</string>
     <string name="poi_craft_cabinet_maker">Столар ормана</string>
-    <string name="poi_craft_bakery">Пекара</string>
+    <string name="poi_craft_bakery">Домаћи хлеб</string>
     <string name="poi_craft_floorer">Паркетар</string>
     <string name="poi_craft_joiner">Столар</string>
     <string name="poi_craft_distillery">Дестилерија</string>

@@ -4691,12 +4691,12 @@
     <string name="lang_ckb">Curdo centrale</string>
     <string name="updated_map_time">Aggiornato: %1$s.</string>
     <string name="includes_osm_changes_until">Include le modifiche di OSM apportate fino a %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Gli aggiornamenti delle mappe verranno controllati ogni ora.</string>
+    <string name="live_update_frequency_hour_variant">Gli aggiornamenti delle mappe sono controllati ogni ora.</string>
     <string name="live_update_frequency_day_variant">Gli aggiornamenti delle mappe vengono controllati ogni giorno.</string>
     <string name="live_update_frequency_week_variant">Gli aggiornamenti delle mappe vengono controllati ogni settimana.</string>
     <string name="calculate_online_altitude_descr">Calcola l\'altitudine online sui server OsmAnd in base alle immagini satellitari e ai modelli di elevazione digitale. Potrebbe variare dall\'altitudine registrata dal dispositivo e potrebbe essere usata come correzione dell\'altitudine.</string>
-    <string name="next_live_update_date_and_time">Prossimo aggiornamento: %1$s in %2$s.</string>
-    <string name="next_live_update_time">Prossimo aggiornamento: in %1$s.</string>
+    <string name="next_live_update_date_and_time">Prossimo aggiornamento il %1$s alle %2$s.</string>
+    <string name="next_live_update_time">Prossimo aggiornamento alle %1$s.</string>
     <string name="altitude_correction">Correzione dell\'altitudine</string>
     <string name="compass_click_desc">Tocca la bussola per cambiare l\'orientamento della mappa.</string>
     <string name="marker_2nd">Secondo marcatore</string>
@@ -4718,7 +4718,7 @@
     <string name="compass_visible_if_map_rotated">Visibile se la mappa è ruotata</string>
     <string name="compass_always_hidden">Sempre nascosto</string>
     <string name="marker_1st">Primo marcatore</string>
-    <string name="map_marker_average_speed_desc">Specifica l\'intervallo di tempo a cui verrà valutata la velocità media per calcolare il tempo di arrivo.</string>
+    <string name="map_marker_average_speed_desc">Specifica l\'intervallo di tempo per il calcolo della velocità media (utilizzata per la stima dell\'orario d\'arrivo).</string>
     <string name="auto_backup_title">Backup Automatico</string>
     <string name="shared_string_duplicate">Duplicato</string>
     <string name="compass_always_visible">Sempre visibile</string>
@@ -4752,7 +4752,7 @@
     <string name="distance_to_intermediate_widget_desc">Il widget mostra la distanza al primo punto intermedio. Quando il punto intermedio viene raggiunto, la distanza verrà aggiornata al successivo punto intermedio.</string>
     <string name="switch_widget_mode_desc">Puoi cambiare la modalità toccando il widget.</string>
     <string name="side_marker_eta">Tempo di arrivo stimato</string>
-    <string name="reset_all_settings_desc">Sei sicuro di volere reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
+    <string name="reset_all_settings_desc">Reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
     <string name="goods_delivery_desc_4">Se il peso del tuo veicolo è superiore alle 3.5 tonnellate devi utilizzare il profilo Camion.</string>
     <string name="duplacate_widget_added_snackbar">Un widget duplicato sta per essere aggiunto alla lista.</string>
     <string name="av_notes_photo_widget_desc">Toccare il widget permette di scattare una foto.</string>
