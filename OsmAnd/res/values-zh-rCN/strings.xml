@@ -361,7 +361,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">选择现有的……</string>
     <string name="maps_define_edit">定义/编辑…</string>
-    <string name="map_widget_fps_info">FPS 调试信息</string>
     <string name="driving_region_descr">选择驾驶地区：美国、欧洲、英国、亚洲等。</string>
     <string name="driving_region">驾驶地区</string>
     <string name="driving_region_japan">日本</string>

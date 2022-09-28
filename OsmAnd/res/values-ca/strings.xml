@@ -1063,7 +1063,6 @@
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="edit_tilesource_successfully">Proveïdor de tessel·les %1$s desat</string>
     <string name="edit_tilesource_choose_existing">Selecciona existent…</string>
-    <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">Ordre optimitzat de les fites de la ruta fins a la destinació.</string>
     <string name="osmand_distance_planning_plugin_description">Creació d\'itineraris prement el mapa o utilitzant o modificant fitxers GPX existents, per planificar un trajecte i mesurar la distància entre punts. El resultat es pot desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
     <string name="android_19_location_disabled">Des de la versió 4.4 d\'Android (KitKat) no podeu baixar i actualitzar els mapes en l\'antiga carpeta (%s). Voleu copiar tots els fitxers de l\'OsmAnd a la nova destinació\?

@@ -2079,7 +2079,6 @@
     <string name="auto_zoom_far">Miðjusvið</string>
     <string name="auto_zoom_farthest">Stórt svið</string>
     <string name="local_index_tile_data_zooms">Sótt aðdráttarstig: %1$s</string>
-    <string name="map_widget_fps_info">FPS-aflúsunarupplýsingar</string>
     <string name="local_osm_changes_backup_failed">Öryggisafritun OSM-breytinga mistókst.</string>
     <string name="local_osm_changes_backup">Taka öryggisafrit sem OSM-breytingu</string>
     <string name="wait_current_task_finished">Dokaðu við þar til núverandi aðgerð er lokið</string>

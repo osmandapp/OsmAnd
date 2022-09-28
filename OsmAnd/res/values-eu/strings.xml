@@ -14,7 +14,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Aukeratu badagoena…</string>
     <string name="maps_define_edit">Definitu/Editatu…</string>
-    <string name="map_widget_fps_info">FPS debugeatzeko info</string>
     <string name="driving_region_descr">Aukeratu gidatze eremua: EEBB, Europa, EB, Asia, edo bestelakoak.</string>
     <string name="driving_region">Gidatze eremua</string>
     <string name="driving_region_japan">Japonia</string>

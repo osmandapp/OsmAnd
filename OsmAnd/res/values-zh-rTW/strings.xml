@@ -1007,7 +1007,6 @@
     <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲與類似地區</string>
     <string name="driving_region_uk">英國、印度與類似地區</string>
     <string name="driving_region">駕駛區域</string>
-    <string name="map_widget_fps_info">FPS 除錯資訊</string>
     <string name="local_index_tile_data_zooms">縮放等級已下載：%1$s</string>
     <string name="local_index_tile_data_expire">有效時間（分鐘）：%1$s</string>
     <string name="local_index_tile_data_downloadable">可下載：%1$s</string>
@@ -2482,7 +2481,7 @@
     <string name="add_location_as_first_point_descr">將您的位置新增為出發地來計劃完美路線。</string>
     <string name="my_location">我的位置</string>
     <string name="shared_string_finish">完成</string>
-    <string name="plan_route">計畫路線</string>
+    <string name="plan_route">規劃路線</string>
     <string name="shared_string_sort">分類</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
@@ -4799,6 +4798,5 @@
     <string name="map_widget_target_distance_desc">顯示從相機到目標位置距離的小工具。</string>
     <string name="map_widget_zoom_level_desc">顯示目前地圖縮放層級的小工具。</string>
     <string name="map_widget_camera_distance_desc">顯示相機在地面以上標高的小工具。</string>
-    <string name="map_widget_target_distance">目標距離</string>
     <string name="map_widget_camera_distance">相機標高</string>
 </resources>

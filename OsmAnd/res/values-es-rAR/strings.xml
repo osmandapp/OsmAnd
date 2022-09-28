@@ -531,7 +531,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir o editar…</string>
-    <string name="map_widget_fps_info">Información de FPS</string>
     <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="driving_region_japan">Japón</string>
@@ -4716,8 +4715,8 @@
     <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
-    <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
-    <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
+    <string name="next_live_update_date_and_time">Próxima actualización el %1$s a las %2$s.</string>
+    <string name="next_live_update_time">Próxima actualización a las %1$s.</string>
     <string name="live_update_frequency_day_variant">Las actualizaciones de mapas se comprueban cada día.</string>
     <string name="live_update_frequency_week_variant">Las actualizaciones de mapas se comprueban cada semana.</string>
     <string name="marker_2nd">Segundo marcador</string>
@@ -4816,7 +4815,6 @@
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
     <string name="map_widget_camera_tilt_desc">El widget muestra el ángulo de inclinación de la cámara en modo perspectiva. El valor predefinido es 90° (sin inclinación).</string>
-    <string name="map_widget_target_distance">Distancia del objetivo</string>
     <string name="map_widget_zoom_level">Nivel de zum</string>
     <string name="map_widget_camera_distance">Elevación de la cámara</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>

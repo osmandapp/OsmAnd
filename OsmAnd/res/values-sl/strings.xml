@@ -1028,7 +1028,6 @@
     <string name="speak_title">Najavi …</string>
     <string name="speak_descr">Nastavitve za obveščanje imen ulic, prometnih opozoril (ležeče ovire in podobno), opozoril merilnikov hitrosti in omejitve hitrosti.</string>
     <string name="speak_street_names">Imena ulic (TTS)</string>
-    <string name="map_widget_fps_info">Podatki razhroščevanja FPS</string>
     <string name="driving_region_descr">Izberi določila vožnje: ZDA, Evropa, Velika Britanija, Azija in druga.</string>
     <string name="driving_region">Režim vožnje</string>
     <string name="driving_region_japan">Japonska</string>
@@ -2483,7 +2482,7 @@
     <string name="add_location_as_first_point_descr">Dodaj svoj položaj kot štartno točko, za načrtovanje popolne poti.</string>
     <string name="my_location">Moja trenutna točka</string>
     <string name="shared_string_finish">Cilj</string>
-    <string name="plan_route">Načrtovanje poti</string>
+    <string name="plan_route">Načrtuj pot</string>
     <string name="shared_string_sort">Razvrsti</string>
     <string name="coordinate_input">Vpis koordinat</string>
     <string name="move_to_history">Premakni v zgodovino</string>
@@ -4692,12 +4691,12 @@
     <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se bodo preverjale dnevno.</string>
     <string name="calculate_online_altitude_descr">Izračunaj nadmorsko višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo za popravek nadmorske višine.</string>
     <string name="lang_ckb">Soranska kurdščina</string>
-    <string name="next_live_update_time">Naslednja posodobitev: v %1$s.</string>
+    <string name="next_live_update_time">Naslednja posodobitev ob %1$s.</string>
     <string name="altitude_correction">Popravek nadmorske višine</string>
     <string name="no_altitude_data_desc">Svojo sled lahko pritrdiš na ceste in tako dobiš podatke %1$s, ali jih izračunaš prek spleta.</string>
     <string name="includes_osm_changes_until">Vključuje spremembe OSM, narejene do %1$s.</string>
     <string name="updated_map_time">Posodobljeno: %1$s.</string>
-    <string name="next_live_update_date_and_time">Naslednja posodobitev: %1$s v %2$s.</string>
+    <string name="next_live_update_date_and_time">Naslednja posodobitev bo %1$s ob %2$s.</string>
     <string name="map_marker_average_speed_desc">Določi časovni interval za povprečenje hitrosti (ki se uporablja za izračun predvidenega časa prihoda).</string>
     <string name="switch_widget_mode_desc">S tapanjem pripomočka preklopiš med načini.</string>
     <string name="side_marker_eta">Predvideni čas prihoda</string>
@@ -4792,7 +4791,6 @@
     <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
     <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
     <string name="map_widget_camera_tilt_desc">Gradnik prikazuje kot nagiba kamere v perspektivnem načinu. Privzeta vrednost je 90° (brez nagiba).</string>
-    <string name="map_widget_target_distance">Razdalja do cilja</string>
     <string name="map_widget_zoom_level">Stopnja povečave</string>
     <string name="map_widget_camera_distance">Nadmorska višina kamere</string>
     <string name="developer_widgets">Gradniki za razvijalce</string>

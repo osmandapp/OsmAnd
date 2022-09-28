@@ -133,7 +133,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Ischerta intre sos esistentes…</string>
     <string name="maps_define_edit">Imposta/Muda…</string>
-    <string name="map_widget_fps_info">Informatziones FPS</string>
     <string name="driving_region">Regione de ghia</string>
     <string name="driving_region_us">Istados Unidos</string>
     <string name="driving_region_canada">Cànada</string>
@@ -2495,7 +2494,7 @@
     <string name="add_location_as_first_point_descr">Annanghe sa positzione tua comente puntu de tzucada pro pranificare s\'àndala perfeta.</string>
     <string name="my_location">Positzione mea</string>
     <string name="shared_string_finish">Acabba·la</string>
-    <string name="plan_route">Pranìfica àndala</string>
+    <string name="plan_route">Pranìfica un\'àndala</string>
     <string name="shared_string_sort">Òrdina</string>
     <string name="coordinate_input">Insertada de sas coordinadas</string>
     <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in custu documentu GPX:</string>
@@ -4800,7 +4799,6 @@
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
     <string name="tap_on_widget">Toca su widget</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
-    <string name="map_widget_target_distance">Distàntzia de s\'obietivu</string>
     <string name="map_widget_zoom_level_desc">Su widget ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
     <string name="map_widget_camera_distance_desc">Su widget ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
     <string name="map_widget_target_distance_desc">Su widget ammustrat sa distàntzia intre sa fotocàmera e sa destinatzione.</string>

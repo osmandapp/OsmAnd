@@ -1317,7 +1317,6 @@
     <string name="edit_tilesource_successfully">Kuvakelähde %1$s talletettu onnistuneesti</string>
     <string name="edit_tilesource_expiration_time">Vanhenemisaika (minuuteissa)</string>
     <string name="maps_define_edit">Määritä/muokkaa…</string>
-    <string name="map_widget_fps_info">FPS testausinfo</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Ilmoita…</string>
     <string name="speak_street_names">Kadunnimet (TTS)</string>

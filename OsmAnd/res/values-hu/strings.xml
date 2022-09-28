@@ -1033,7 +1033,6 @@
     <string name="speak_descr">Utcanevek, forgalmi figyelmeztetések (közúti ellenőrzés, fekvőrendőr), traffipaxriasztás és sebességkorlátozás bemondásának beállítása.</string>
     <string name="speak_street_names">Utcanevek (TTS)</string>
     <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
-    <string name="map_widget_fps_info">FPS debug infó</string>
     <string name="about_version">Verzió:</string>
     <string name="shared_string_about">Névjegy</string>
     <string name="about_settings_descr">Verzióinformáció, licencek, csapattagok</string>
@@ -2325,7 +2324,7 @@
     <string name="add_location_as_first_point_descr">A tökéletes útvonal megtervezéséhez adja meg kiindulási pontként saját pozícióját.</string>
     <string name="my_location">Saját helyzetem</string>
     <string name="shared_string_finish">Befejezés</string>
-    <string name="plan_route">Egy útvonal tervezése</string>
+    <string name="plan_route">Útvonal tervezése</string>
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
@@ -4795,7 +4794,6 @@
     <string name="map_widget_zoom_level">Nagyítási szint</string>
     <string name="map_widget_camera_distance">Kameramagasság</string>
     <string name="map_widget_camera_tilt">Kamera dőlés</string>
-    <string name="map_widget_target_distance">A cél távolsága</string>
     <string name="map_widget_zoom_level_desc">A widget a térkép aktuális nagyítási szintjét mutatja.</string>
     <string name="map_widget_camera_distance_desc">A widget a kamera felszín feletti magasságát mutatja.</string>
     <string name="map_widget_camera_tilt_desc">A widget a kamera dőlésszögét mutatja perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>

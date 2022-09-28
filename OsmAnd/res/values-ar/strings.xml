@@ -317,7 +317,6 @@
     <string name="context_menu_item_first_intermediate_point">إضافة كوجهة وسيطة أولى</string>
     <string name="edit_tilesource_expiration_time">انتهاء الوقت (دقيقة)</string>
     <string name="edit_tilesource_choose_existing">اختر القائمة …</string>
-    <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
     <string name="settings_preset_descr">اختيار وضع افتراضي لعرض الخريطة: استعراض، سيارة، مشي .</string>
     <string name="intermediate_items_sort_return">أُعيد ترتيب نقاط الوجهات الوسطى لتحسين ترتيبها من الموقع الحالي حتى الوجهة.</string>
     <string name="local_osm_changes_backup_successful">أنشئ ملف تعديل OSM بنجاح %1$s</string>
@@ -578,11 +577,11 @@
 \n - لا توجد إمكانية الوصول دون اتصال إلى النقاط المهمة في ويكيبيديا
 \n
 \n يجري تطوير أوسماند بنشاط ويعتمد مشروعنا والتقدم المستمر على المساهمات المالية لتطوير واختبار وظائف جديدة. يرجى النظر في شراء أوسماند+ ، أو تمويل ميزات جديدة محددة أو تقديم تبرع عام على https://osmand.net.</string>
-    <string name="osmand_rastermaps_plugin_description">هذا الملحق يمكنك من الوصول إلى أنواع عديدة من خرائط النت (تدعى بالقطع أو النقطية)، من قطع OSM مسبقة ( مثل Mapnik) إلى صور أقمار وطبقات مخصصة كخرائط الطقس، الخرائط الجيولوجية، طبقات التضاريس...إلخ. 
-\n 
-\nكل من هذه الخرائط يمكن أن تستخدم إما كخرائط رئيسية (قاعدية) تظهر على واجهة التطبيق، أو كطبقة فوقية أو تحتية لخريطة قاعدية آخرى( كخرائط التطبيق المحلية). لجعل أي طبقة تحتية خريطة أكثر وضوحا، بعض عناصر خرائط التطبيق التوجيهيه يمكن إخفاءها في قائمة \'ضبط الخريطة\' حسب الرغبة. 
-\n 
-\nأجزاء الخرائط يمكن الحصول عليها من مصادر إنترنت، أو تحضيرها للإستخدام دون إنترنت ( ونسخها يدويا إلى مجلد بيانات التطبيق) كقاعدة بيانات SQLite والتي يمكن إنتاجها عن طريق مجموعة متنوعة من أدوات تحضير الخرائط المستقلة.</string>
+    <string name="osmand_rastermaps_plugin_description">قم بالوصول إلى العديد من أنواع الخرائط عبر الإنترنت (ما يسمى بالطبقات أو النقطية) ، من مربعات OSM المحددة مسبقًا (مثل Mapnik) من صور الأقمار الصناعية ، والطبقات الأخرى الخاصة مثل خرائط الطقس ، وخرائط المناخ ، والخرائط الجيولوجية ، وطبقات المرتفعات والانحدار، إلخ.
+\n
+\n يمكن استخدام أي من هذه الخرائط كخريطة رئيسية (أساسية) ليتم عرضها ، أو علوية أو سفلية أو طبقة أساسية لخريطة أساسية أخرى (مثل خرائط أوسماند غير المتصلة بالإنترنت). يمكن إخفاء عناصر معينة من خرائط أوسماند من خلال قائمة \"تكوين الخريطة\" لجعل أي خريطة أساسية أكثر وضوحًا.
+\n
+\n قم بتنزيل خرائط الطبقات المباشرةً ، أو انسخها كملفات قاعدة بيانات SQLite إلى مجلد بيانات أوسماند باستخدام إحدى أدوات إعداد الخرائط العديدة.</string>
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
     <string name="osmand_plus_long_description_1000_chars">أوسماند+ (OSM اتجاهات التنقل التلقائية)
@@ -978,7 +977,7 @@
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_none_opt">لا يوجد دوران (الشمال دائمًا للأعلى)</string>
+    <string name="rotate_map_none_opt">ثابت (الشمال لأعلى)</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -4745,7 +4744,7 @@
     <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="lang_sat">السنتالية</string>
     <string name="average_speed_skip_stops">مراعاة التوقف</string>
-    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة.</string>
+    <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لحساب متوسط السرعة.</string>
     <string name="average_speed_widget_desc">يعرض متوسط سرعة الرحلة الحالية.</string>
     <string name="map_widget_average_speed">متوسط السرعة</string>
     <string name="import_as_one_track">استيراد كمسار واحد</string>
@@ -4754,7 +4753,7 @@
     <string name="use_latin_name_if_missing">استخدم الاسم اللاتيني إذا كان الاسم مفقودا</string>
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
-    <string name="routing_attr_motor_type_name">الوقود المستخدم من قبل المحرك</string>
+    <string name="routing_attr_motor_type_name">محرك السيارة</string>
     <string name="routing_attr_motor_type_petrol_name">بنزين</string>
     <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
     <string name="routing_attr_motor_type_electric_name">كهربائي</string>
@@ -4773,7 +4772,7 @@
     <string name="includes_osm_changes_until">يتضمن تغييرات الشارع المفتوح التي تم إجراؤها حتى %1$s.</string>
     <string name="live_update_frequency_day_variant">سيتم التحقق من تحديثات الخرائط كل يوم.</string>
     <string name="altitude_correction">تصحيح الارتفاع</string>
-    <string name="map_marker_average_speed_desc">حدد الفاصل الزمني الذي سيتم من خلاله قياس متوسط السرعة لحساب الوقت المقدر للوصول.</string>
+    <string name="map_marker_average_speed_desc">حدد الفاصل الزمني لحساب متوسط السرعة (المستخدم لتقدير وقت الوصول).</string>
     <string name="marker_2nd">التوجيه المباشر الثاني</string>
     <string name="next_live_update_date_and_time">التحديث التالي: %1$s في %2$s.</string>
     <string name="goods_delivery_desc_3">ينطبق فقط على المركبات التي تحمل البضائع التي تحتوي على أربع عجلات على الأقل ولا يزيد وزنها عن 3.5 طن.</string>
@@ -4797,7 +4796,7 @@
     <string name="auto_25_chars_route_roundabout_kl">خذ مخرج %1$d واحتفظ باليسار</string>
     <string name="auto_backup_preference_desc">بشكل افتراضي ، يحفظ النظام نسخا احتياطية من المفضلة ورموز الخريطة وإعدادات أوسماند لاستعادتها على الجهاز أو أجهزة جديدة . تقتصر هذه النسخة الاحتياطية على 25 ميغابايت.
 \nإذا كنت تستخدم أوسماند كلاود ، فقد يؤدي ذلك إلى خطأ بعد إعادة التثبيت.</string>
-    <string name="trip_recording_duration_widget_desc">يظهر الوقت المسجل حاليا.</string>
+    <string name="trip_recording_duration_widget_desc">يعرض وقت الرحلة المسجل حاليا.</string>
     <string name="second_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الثانية.</string>
     <string name="time_to_intermediate_widget_desc">يعرض الويدجت وقت الوصول أو وقت الذهاب إلى النقطة الوسيطة الأولى. يتم تحديث الوقت باستمرار أثناء التنقل ، بمجرد تمرير النقاط الوسيطة ، سيتم تحديث الوقت إلى النقطة الوسيطة التالية.</string>
     <string name="first_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الأولى.</string>
@@ -4843,7 +4842,7 @@
     <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
     <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
-    <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)</string>
+    <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
     <string name="display_position">عرض الموقف</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
@@ -4853,7 +4852,6 @@
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
     <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
-    <string name="map_widget_target_distance">المسافة المستهدفة</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
     <string name="go_to_marker_location">الانتقال إلى موقع العلامة</string>
     <string name="shared_string_switch_mode">وضع التبديل</string>
@@ -4868,4 +4866,13 @@
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
+    <string name="shared_string_2_5_d_view">2.5 D عرض</string>
+    <string name="tap_on_widget">اضغط على الويدجت</string>
+    <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
+    <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
+    <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
+    <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
+    <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
+    <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
+    <string name="click_on_widget">انقر على الويدجت</string>
 </resources>

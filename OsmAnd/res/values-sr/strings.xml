@@ -23,7 +23,6 @@
     <string name="edit_tilesource_minzoom">Минимално увеличање</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Изаберите постојећи…</string>
-    <string name="map_widget_fps_info">Подаци о грешкама брзине приказа сличица</string>
     <string name="driving_region_japan">Јапан</string>
     <string name="driving_region_us">Сједињене Америчке Државе</string>
     <string name="driving_region_canada">Канада</string>
@@ -143,7 +142,7 @@
     <string name="error_reading_gpx">GPX подаци не могу да се прочитају.</string>
     <string name="poi_context_menu_modify">Измена POI</string>
     <string name="poi_context_menu_delete">Брисање POI</string>
-    <string name="rotate_map_none_opt">Без ротације (север је увек горе)</string>
+    <string name="rotate_map_none_opt">Фискно (север је увек горе)</string>
     <string name="rotate_map_to_bearing">Оријентација карте</string>
     <string name="map_widget_show_ruler">Лењир</string>
     <string name="shared_string_import">Увези</string>
@@ -273,7 +272,7 @@
 \n- да праве групе; 
 \n- да синхронизују групе и уређаје са сервером; 
 \n- да управљају групама и уређајима на својој командној табли на сајту.</string>
-    <string name="anonymous_user">Безимени корисник</string>
+    <string name="anonymous_user">Анониман корисник</string>
     <string name="logged_as">Пријављен као %1$s</string>
     <string name="speed_limit_exceed">Допуштено прекорачење брзине</string>
     <string name="speed_limit_exceed_message">Одаберите границу допуштеног прекорачења брзине, преко које ћете добити гласовно упозорење.</string>
@@ -1197,7 +1196,7 @@
 \n Део вредности се враћа заједници ОСМ-а и исплаћује сваком доприносиоцу ОСМ-а.
 \n Ако волите OsmAnd и ОСМ и желите да их подржите и да они подрже Вас, ово је савршен начин за то.</string>
     <string name="select_map_marker">Изаберите ознаку карте</string>
-    <string name="upload_anonymously">Отпреми безимено</string>
+    <string name="upload_anonymously">Отпреми анонимно</string>
     <string name="show_transparency_seekbar">Приказуј прозирну траку претраге</string>
     <string name="download_files_error_not_enough_space">Нема довољно простора!
 \n {3} MB је привремено потребно, а {1} MB трајно.
@@ -1280,7 +1279,7 @@
     <string name="fonts_header">Фонтови на карти</string>
     <string name="driving_region_automatic">Аутоматско</string>
     <string name="right_side_navigation">Вожња десном траком</string>
-    <string name="do_not_send_anonymous_app_usage">Не шаљи безимене податке о коришћеном програму</string>
+    <string name="do_not_send_anonymous_app_usage">Не шаљи анонимне податке о коришћеном програму</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd прикупља податке о томе које делове програма отварате. Ваш положај се не шаље, нити ишта што унесете у програм нити појединости о областима које видите, тражите или преузмете.</string>
     <string name="do_not_show_startup_messages">Не приказуј поруке при покретању</string>
     <string name="do_not_show_startup_messages_desc">Не приказуј понуде попуста из програма и специјалне поруке о локалним догађајима.</string>
@@ -4622,7 +4621,7 @@
     <string name="arrival_time_widget_desc">Време доласка на одредишну тачку.</string>
     <string name="lanes_widgets_desc">Виџет за траке приказује тренутни распоред трака пута и истиче траке за вожњу уз активну навигацију.</string>
     <string name="map_markers_bar_widget_desc">На виџету при горњој траци можете да видите растојање и правац до маркера од тренутне локације. Могуће је конфигурисати да видите 1 или 2 горња маркера у виџету.</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Пребаците режим додиром на виџет.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Додирните справицу да промените режим.</string>
     <string name="map_widget_time_to_destination">Време до одредишта</string>
     <string name="map_widget_time_to_intermediate">Време до посредне</string>
     <string name="map_widget_distance_to_intermediate">Удаљеност до посредне</string>
@@ -4675,13 +4674,13 @@
     <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
     <string name="average_speed_skip_stops">Узми у обзир заустављања</string>
     <string name="average_speed_time_interval_desc">Наведите временски интервал за који ће се мерити просечна брзина.</string>
-    <string name="average_speed_widget_desc">Приказује просечну брзину тренутне вожње.</string>
+    <string name="average_speed_widget_desc">Приказује просечну брзину тренутног пута.</string>
     <string name="map_widget_average_speed">Просечна брзина</string>
     <string name="routing_attr_goods_restrictions_description">Размотрите приступне дозволе за лака камионе са робом (роба)</string>
     <string name="use_latin_name_if_missing">Користи латинично име ако недостаје</string>
     <string name="import_as_one_track">Увези као једну путању</string>
     <string name="routing_attr_motor_type_electric_name">Електрична</string>
-    <string name="routing_attr_motor_type_name">Тип мотора</string>
+    <string name="routing_attr_motor_type_name">Мотор возила</string>
     <string name="routing_attr_motor_type_lpg_name">Ауто гас</string>
     <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
     <string name="transport_hazmat_no_desc">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
@@ -4691,6 +4690,67 @@
     <string name="routing_attr_motor_type_hybrid_name">Хибрид</string>
     <string name="routing_attr_motor_type_diesel_name">Дизел</string>
     <string name="routing_attr_motor_type_petrol_name">Безоловни</string>
-    <string name="transport_hazmat_yes_desc">Морате одабрати исправну категорију.</string>
+    <string name="transport_hazmat_yes_desc">Одаберите применљиву категорију.</string>
     <string name="transport_hazmat_title">Превожење опасних материја</string>
+    <string name="download_heightmap_maps">Висинска карта</string>
+    <string name="av_notes_photo_widget_desc">Кликтање на справицу ће сликати фотку.</string>
+    <string name="compass_always_visible">Увек видљиво</string>
+    <string name="compass_click_desc">Кликните на компас да промените режим оријентације карте.</string>
+    <string name="compass_desc">Приказује правац ка северу.</string>
+    <string name="tap_on_widget">Тапни на справицу</string>
+    <string name="go_to_marker_location">Иди на позицију маркера</string>
+    <string name="altitude_correction">Исправка надморске висине</string>
+    <string name="display_position">Прикажи позицију</string>
+    <string name="favorite_delete_group">Избриши групу</string>
+    <string name="trip_recording_duration_widget_desc">Приказује укупно време пута који се снима.</string>
+    <string name="widget_with_dot">Справица.</string>
+    <string name="compass_visible_if_map_rotated">Видљиво када се карта заротира</string>
+    <string name="switch_widget_mode_desc">Кликтање на справицу мења режим.</string>
+    <string name="auto_25_chars_route_tr_kr">Скрените десно и држите десно</string>
+    <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
+    <string name="av_notes_video_widget_desc">Кликтање на справицу ће снимити видео.</string>
+    <string name="accessibility_2d_view_off">2.5D поглед искљ.</string>
+    <string name="rotate_map_none_rotated_opt">Фискно (ручно окретање)</string>
+    <string name="coordinates_widget_map_center">Координате: центар карте</string>
+    <string name="distance_by_tap_use_description">Тапните на карту да видите удаљеност између Ваше тренутне позиције и кликнуте тачке.
+\nТапније на карту са 2 прста да видите удаљеност између кликнутих тачака.</string>
+    <string name="coordinates_widget_current_location">Координате: тренутна позиција</string>
+    <string name="click_on_widget">Кликни на справицу</string>
+    <string name="shared_string_normal">Нормално</string>
+    <string name="how_to_use">Како да користите:</string>
+    <string name="auto_25_chars_route_tu_kr">Направите полукружно и држите десно</string>
+    <string name="auto_25_chars_route_roundabout_kr">Изађите на излазу %1$d и држите десно</string>
+    <string name="shared_string_duplicate">Дуплирај</string>
+    <string name="compass_always_hidden">Увек сакривено</string>
+    <string name="download_tiles">Преузми сличице</string>
+    <string name="connect_with_straight_line">Повежи са правом линијом</string>
+    <string name="attach_roads_warning">Само снимљена путања може да се слепи уз путеве.</string>
+    <string name="without_profiles_changing">Без промене профила</string>
+    <string name="shared_string_only_missing">Само које недостају</string>
+    <string name="auto_25_chars_route_tl_kl">Скрените лево и држите лево</string>
+    <string name="auto_25_chars_route_tl_kr">Скрените лево и држите десно</string>
+    <string name="auto_25_chars_route_tr_kl">Скрените десно и држите лево</string>
+    <string name="compass_visible_if_map_rotated_desc">Сакривено када је Север горе</string>
+    <string name="developer_widgets">Справице за програмере</string>
+    <string name="shared_string_shows">Приказује</string>
+    <string name="current_location_widget">Тренутна позиција</string>
+    <string name="map_widget_target_distance">Циљана удаљеност</string>
+    <string name="map_widget_zoom_level">Ниво зума</string>
+    <string name="map_widget_camera_distance">Висина камере</string>
+    <string name="map_widget_camera_tilt">Нагнутост камере</string>
+    <string name="shared_string_large">Увећано</string>
+    <string name="map_center_widget">Центар карте</string>
+    <string name="shared_string_2_5_d_view">2.5D поглед</string>
+    <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
+    <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>
+    <string name="av_notes_audio_widget_desc">Кликтање на справицу ће снимити звучну белешку.</string>
+    <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
+    <string name="accessibility_2d_view_on">2.5D поглед укљ.</string>
+    <string name="download_complete">Преузимање готово</string>
+    <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
+    <string name="side_marker_eta">Процењено време доласка</string>
+    <string name="true_bearing_wdiget_desc">Угао између правог севера и циљане тачке гледано са Ваше позиције.</string>
+    <string name="relative_bearing_widget_desc">Приказује угао између правца Вашег кретања и циљане тачке.</string>
+    <string name="trip_recording_distance_widget_desc">Приказује укупну удаљеност тренутног пута.</string>
+    <string name="lang_ckb">Централнокурдски</string>
 </resources>
