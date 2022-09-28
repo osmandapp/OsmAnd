@@ -4808,4 +4808,28 @@
     <string name="map_widget_target_distance_desc">Віджет показує відстань від камери до цільового розташування.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Віджет показує поточний масштаб мапи.</string>
+    <string name="ant_widgets">Віджети ANT+</string>
+    <string name="ant_missing_dependency_descr">Необхідна служба «%1$s» не знайдена.
+\nВам необхідно встановити службу плагінів ANT+ або оновити наявну версію, якщо вона у вас вже є.
+\nБажаєте запустити Play Маркет, щоб отримати її\?</string>
+    <string name="ant_missing_dependency">Відсутня залежність</string>
+    <string name="ant_go_to_store">Перейти до маркету</string>
+    <string name="ant_read_data">Прочитати дані</string>
+    <string name="ant_write_to_gpx">Записати дані до треку</string>
+    <string name="ant_heart_rate_write_gpx_desc">Записати пульс до треку</string>
+    <string name="map_widget_ant_heart_rate">Пульс</string>
+    <string name="map_widget_ant_heart_rate_desc">Показує пульс користувача під час певної активності в режимі реального часу</string>
+    <string name="map_widget_ant_bicycle_speed">Швидкість велосипеда</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Показує швидкість пересування</string>
+    <string name="map_widget_ant_bicycle_dist">Відстань на велосипеді</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Показує пройдену відстань</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Опис ANT+</string>
+    <string name="worldwide_maps">Мапи світу</string>
+    <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
+    <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>
+    <string name="map_widget_ant_bicycle_cadence">Швидкість обертання велопедалей</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Показує швидкість, з якою користувач крутить педалі</string>
+    <string name="nautical_depth_points">Точки морських глибин</string>
+    <string name="depth_contours">Ізолінії глибин</string>
 </resources>
