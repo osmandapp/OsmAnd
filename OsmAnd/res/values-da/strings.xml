@@ -4814,4 +4814,28 @@
     <string name="map_widget_camera_distance">Kamerahøjde</string>
     <string name="map_widget_camera_tilt">Kamerahældning</string>
     <string name="developer_widgets">Moduler til udviklere</string>
+    <string name="ant_read_data">Læs data</string>
+    <string name="map_widget_ant_heart_rate">Puls</string>
+    <string name="map_widget_ant_bicycle_power">Cykelkraft</string>
+    <string name="map_widget_ant_bicycle_cadence">Cykelkadence</string>
+    <string name="map_widget_ant_bicycle_speed">Cykelhastighed</string>
+    <string name="ant_missing_dependency">Manglende afhængighed</string>
+    <string name="ant_write_to_gpx">Skriv data til sporet</string>
+    <string name="map_widget_ant_bicycle_power_desc">Viser cyklistens effekt, som bruges til at bevæge cyklen fremad</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Viser den hastighed, som brugeren træder i pedalerne med</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Viser den tilbagelagte afstand</string>
+    <string name="ant_go_to_store">Gå til butik</string>
+    <string name="ant_heart_rate_write_gpx_desc">Skriv puls til sporet</string>
+    <string name="map_widget_ant_heart_rate_desc">Viser brugerens puls under en given aktivitet i realtid</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Viser kørehastighed</string>
+    <string name="map_widget_ant_bicycle_dist">Cykelafstand</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ beskrivelse</string>
+    <string name="depth_contours">Dybdekonturer</string>
+    <string name="nautical_depth_points">Nautiske dybdepunkter</string>
+    <string name="worldwide_maps">Globale kort</string>
+    <string name="ant_widgets">ANT+ moduler</string>
+    <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
+\nDu skal installere ANT+ Plugins-tjenesten, eller du skal muligvis opdatere din eksisterende version, hvis du allerede har den.
+\nVil du starte Play Store for at hente den\?</string>
 </resources>
