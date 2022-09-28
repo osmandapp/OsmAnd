@@ -2471,8 +2471,7 @@
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>
     <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו.</string>
     <string name="base_world_map">מפת בסיס עולמית</string>
-    <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
-    <string name="osmand_plus_extended_description_part5">תכונות בטיחות 
+    <string name="osmand_plus_extended_description_part5">תכונות בטיחות
 \n • החלפה אוטומטית בין מצבי יום/לילה לבחירתך 
 \n • הצגת מגבלת מהירות כרשות, עם תזכורת במקרה של חריגה 
 \n • תקריב תלוי מהירות 

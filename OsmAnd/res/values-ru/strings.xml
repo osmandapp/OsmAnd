@@ -1309,7 +1309,6 @@
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="map_widget_fps_info">Отладочная информация FPS</string>
     <string name="shared_string_about">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     <string name="local_index_tile_data_zooms">Загруженные уровни масштабирования: %1$s</string>

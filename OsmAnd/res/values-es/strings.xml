@@ -1054,7 +1054,6 @@
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="local_index_tile_data_zooms">Niveles de zum descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Proyección elíptica de Mercator</string>
-    <string name="map_widget_fps_info">Información de FPS</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="map_magnifier">Lupa del mapa</string>
     <string name="auto_zoom_none">Sin zum automático</string>

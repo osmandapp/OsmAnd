@@ -2400,7 +2400,6 @@
     <string name="commit_poi">Send inn interessepunkt</string>
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Kun nedlasting over Wi-Fi</string>
-    <string name="map_widget_fps_info">Feilrettingsinfo for bildefrekvens</string>
     <string name="rendering_attr_hidePOILabels_name">Interessepunktetiketter</string>
     <string name="will_open_tomorrow_at">Åpner i morgen</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>

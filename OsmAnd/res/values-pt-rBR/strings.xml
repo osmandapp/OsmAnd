@@ -544,7 +544,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Selecionar existente…</string>
     <string name="maps_define_edit">Definir/editar…</string>
-    <string name="map_widget_fps_info">Informações de depuração FPS</string>
     <string name="driving_region_descr">Selecionar a região de condução: EUA, Europa, Reino Unido, Ásia e outros.</string>
     <string name="driving_region">Região de direção</string>
     <string name="driving_region_japan">Japão</string>
@@ -4796,7 +4795,6 @@
     <string name="shared_string_shows">Mostrar</string>
     <string name="shared_string_large">Larga</string>
     <string name="map_widget_zoom_level">Nível de zoom</string>
-    <string name="map_widget_target_distance">Distância alvo</string>
     <string name="map_widget_target_distance_desc">Widget mostra a distância da câmera para o local de destino.</string>
     <string name="map_widget_zoom_level_desc">Widget mostra o nível de zoom do mapa atual.</string>
     <string name="map_widget_camera_distance_desc">Widget mostra a elevação da câmera acima do nível da superfície.</string>

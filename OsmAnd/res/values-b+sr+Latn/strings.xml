@@ -22,7 +22,6 @@
     <string name="edit_tilesource_minzoom">Minimalno uveličanje</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izaberite postojeći…</string>
-    <string name="map_widget_fps_info">Podaci o greškama brzine prikaza sličica</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">Sjedinjene Američke Države</string>
     <string name="driving_region_canada">Kanada</string>

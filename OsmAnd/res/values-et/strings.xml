@@ -1505,7 +1505,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vali olemasolev…</string>
     <string name="maps_define_edit">Määratle/Muuda…</string>
-    <string name="map_widget_fps_info">FPS silumisteave</string>
     <string name="driving_region">Sõidupiirkond</string>
     <string name="driving_region_japan">Jaapan</string>
     <string name="driving_region_us">Ameerika Ühendriigid</string>

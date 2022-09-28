@@ -1318,7 +1318,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Ընտրեք առկա…</string>
     <string name="maps_define_edit">Սահմանել/Խմբագրել …</string>
-    <string name="map_widget_fps_info">Կարգավորման տեղեկություններ</string>
     <string name="driving_region_descr">Ընտրեք վարելու տարածաշրջանը՝ ԱՄՆ, Եվրոպա, Մեծ Բրիտանիա, Ասիա և այլն։</string>
     <string name="driving_region">Վարելու տարածաշրջանը</string>
     <string name="driving_region_japan">Ճապոնիա</string>

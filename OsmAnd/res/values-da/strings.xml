@@ -1005,7 +1005,6 @@
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
     <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre.</string>
-    <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
@@ -4806,7 +4805,6 @@
     <string name="coordinates_widget_map_center_desc">Modul viser de geografiske koordinater for det aktuelle kortcentrum</string>
     <string name="coordinates_widget_current_location_desc">Modul viser de geografiske koordinater for den aktuelle geografiske placering</string>
     <string name="map_widget_camera_distance_desc">Modul viser kameraets højde over overfladeniveauet.</string>
-    <string name="map_widget_target_distance">Målafstand</string>
     <string name="map_widget_zoom_level">Zoomniveau</string>
     <string name="map_widget_target_distance_desc">Modul viser afstanden fra kameraet til målstedet.</string>
     <string name="map_widget_zoom_level_desc">Modul viser kortets aktuelle zoomniveau.</string>

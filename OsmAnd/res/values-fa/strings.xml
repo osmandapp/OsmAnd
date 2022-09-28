@@ -1041,7 +1041,6 @@
     <string name="speak_title">اعلام‌کردن…</string>
     <string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، اخطارهای دوربین سرعت و محدودیت‌های سرعت را انجام دهید.</string>
     <string name="speak_street_names">نام خیابان‌ها (موتور صوتی)</string>
-    <string name="map_widget_fps_info">اطلاعات عیب‌یابی FPS</string>
     <string name="driving_region_descr">منطقهٔ رانندگی را انتخاب کنید: آمریکا، اروپا، انگلستان، آسیا و سایر مناطق.</string>
     <string name="driving_region_japan">ژاپن</string>
     <string name="driving_region_us">ایالات متحدهٔ آمریکا</string>

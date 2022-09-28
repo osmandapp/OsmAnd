@@ -971,7 +971,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Selectează una existentă…</string>
     <string name="maps_define_edit">Definește/Editează…</string>
-    <string name="map_widget_fps_info">Informații depanare FPS</string>
     <string name="driving_region_descr">Selectați regiune de condus: USA, Europa, UK, Asia, și altele.</string>
     <string name="driving_region">regiunea de conducere</string>
     <string name="driving_region_japan">Japonia</string>

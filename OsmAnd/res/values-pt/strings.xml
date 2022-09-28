@@ -1034,7 +1034,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="maps_define_edit">Definir/editar…</string>
-    <string name="map_widget_fps_info">Fotogramas p/segundo</string>
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
@@ -4804,7 +4803,6 @@
     <string name="current_location_widget">Localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
     <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
-    <string name="map_widget_target_distance">Distância do alvo</string>
     <string name="map_widget_zoom_level">Nível de zoom</string>
     <string name="map_widget_camera_distance">Elevação da câmara</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>

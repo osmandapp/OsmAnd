@@ -961,7 +961,6 @@
     <string name="speak_title">Läs upp …</string>
     <string name="speak_descr">Ställ in uppläsning av gatunamn, trafikvarningar (t.ex. tvingande stopp, fartbulor), varningar för fartkameror och hastighetsbegränsningar.</string>
     <string name="speak_street_names">Gatunamn (TTS)</string>
-    <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
     <string name="driving_region_descr">Välj körområde: USA, Europa, UK, Asien och andra.</string>
     <string name="driving_region">Område</string>
     <string name="driving_region_japan">Japan</string>

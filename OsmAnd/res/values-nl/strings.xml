@@ -993,7 +993,6 @@
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Azië, Latijns-Amerika en dergelijke</string>
     <string name="driving_region_uk">Verenigd Koninkrijk, India en dergelijke</string>
-    <string name="map_widget_fps_info">FPS-debuginformatie</string>
     <string name="local_index_tile_data_zooms">Gedownloade zoomniveau\'s: %1$s</string>
     <string name="local_index_tile_data_expire">Vervaltijd (minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
