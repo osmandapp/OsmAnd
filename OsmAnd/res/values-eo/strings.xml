@@ -482,11 +482,11 @@
     <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
     <string name="map_widget_show_ruler">Mezurilo</string>
-    <string name="osmand_rastermaps_plugin_description">Aliro al pluraj enretaj (kahelaj aŭ rastrumaj) mapoj: antaŭgeneritaj OSM‑kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj, tavoloj de nivelombrumo, ktp. 
-\n 
-\nĈiujn de tiuj mapoj oni povas uzi kiel ĉefan (bazan) mapon aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma eksterreta mapo de OsmAnd). Eblas kaŝi kelkajn elementojn de vektoraj OSM‑mapoj per la menuo “agordi mapon”, por igi la subtavolan mapon pli videbla.
-\n 
-\nKahelaj mapoj estas uzeblaj per interreta konekto aŭ eblas prepari (kaj kopii al datum‑dosierujo de OsmAnd) ilin kiel SQLite‑datumbazon por eksterreta uzo per diversaj eksteraj iloj.</string>
+    <string name="osmand_rastermaps_plugin_description">Aliro al pluraj enretaj (kahelaj aŭ rastrumaj) mapoj: antaŭgeneritaj OSM‑kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj, tavoloj de nivelombrumo, ktp.
+\n
+\n Ĉiujn de tiuj mapoj oni povas uzi kiel ĉefan (bazan) mapon aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por malkonekta vektora mapo de OsmAnd). Eblas kaŝi kelkajn elementojn de vektoraj OSM‑mapoj per la menuo “Agordi mapon”, por igi la subtavolan mapon pli videbla.
+\n
+\n Vi povas elŝuti kahelajn mapojn senpere en la aplikaĵo aŭ prepari dosierojn de SQLite-datumbazo per eksteraj iloj kaj kopii ilin al la datum-dosierujo de OsmAnd.</string>
     <string name="shared_string_accessibility">Alirebleco</string>
     <string name="device_memory">Aparata memoro</string>
     <string name="edit_group">Redakti grupon</string>
@@ -529,9 +529,9 @@
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Ne povas elŝuti, bonvolu kontroli vian retkonekton.</string>
     <string name="record_plugin_name">Spur-registrilo</string>
-    <string name="record_plugin_description">Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn spurojn per permane elekti GPX‑registradan fenestraĵon sur la map‑ekrano kaj ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX‑dosiero. 
-\n 
-\nRegistritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ uzataj por kontribui al OSM. Atletoj povas uzi registritajn spurojn por kontroli siajn ekzercojn. Kelkajn bazajn ecojn oni povas analizi senpere per OsmAnd: tempojn de ĉirkaŭoj, mezumajn rapidojn, ktp; kaj kursojn oni povas poste analizi per specialaj eksteraj programoj.</string>
+    <string name="record_plugin_description">Ebligas registri, konservi kaj analizi viajn datumojn pri movado – rapidon, supreniroj, malsupreniroj, altitudon – kiuj vi povas sekve reuzi, korekti, kompletigi aŭ kunhavigi kun amikoj.
+\n
+\nPliaj informoj: https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da baterio aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
@@ -643,9 +643,9 @@
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
-    <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivelombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu eblo estas dezirata de atletoj, migrantoj, turistoj kaj ĉiuj scivolaj en reliefa strukturo de tero. (Rimarku, ke datumoj pri nivelkurboj kaj nivelombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
+    <string name="srtm_plugin_description">Informoj pri tereno – kiel nivelkurboj, nivelombrumo kaj dekliveco – helpas al vi perokule taksi formon de la tereno konsiderante altaĵojn, ekstremojn, krutecon, punktojn kun egala altitudo kaj pli. Topografiaj informoj povas esti reprezentataj sur la mapo per vidigi nivelkurbojn (nivelliniojn), ombrumi malebenaĵojn (reliefo) aŭ per vidigi angulon de dekliveco uzante kolorojn. Datumoj devenas de la projektoj ASTER kaj SRTM.
 \n
-\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM («Shuttle Radar Topography Mission») kaj de la ASTER («Advanced Spaceborne Thermal Emission and Reflection Radiometer»), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
+\nPliaj informoj: http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
@@ -1493,24 +1493,21 @@
     <string name="access_direction_haptic_feedback_descr">Montri direkton al celo per vibrado.</string>
     <string name="lang_ast">Asturia</string>
     <string name="plugin_nautical_name">Mara map-vido</string>
-    <string name="plugin_nautical_descr">Tiu ĉi kromprogramo ebligas uzi marajn mapojn por boatado, velado kaj aliaj akvosportoj.
+    <string name="plugin_nautical_descr">Ebligas pliriĉigi la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi tiun ĉi kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada”.
 \n
-\nSpeciala map-aldonaĵo al OsmAnd aldonas navigadajn punktojn kaj markojn por enlanda kaj apudborda navigado. Priskribo de ĉiu navigadpunkto liveras detalojn bezonatajn por identigi ilin: kategorion, formon, koloron, vicsekvon, referencon, ktp.
-\n
-\nPor reveni al unu de normaj map-aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝu la agordon “Map-aspekto” per la menuo “Agordi mapon”.</string>
+\nPliaj informoj: https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
-    <string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Skiadaj kursoj kaj vojoj estas kolorigitaj laŭ facileco.
-\n
-\nAktivigo de tiu ĉi map-vido ŝanĝas la map-aspekton al “Vintro kaj skiado”, kiu montras ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi la elekteblon “Map-aspekto” en la menuo “Agordi mapon”.</string>
+    <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj kolorajn liniojn, kiuj reprezentas malfacilecojn de skivojoj. Por uzi tiun ĉi kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado”.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
-    <string name="osmand_parking_plugin_description">Ebligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas.
-\n Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
+    <string name="osmand_parking_plugin_description">Ebligas aldoni al la mapo markon en la loko kie vi parkumis vian veturilon kaj enmetas sciigon al via kalendaro je starto de parkumado. Helpas al vi spuri pozicion kaj tempon de parkumado de via aŭtomobilo aŭa lia veturilo. Pro aldoni markon al la mapo, frapetadu la mapon kaj elektu “Marki kiel pozicion de parkumado” el la submenuo “Agoj”.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
     <string name="osm_editing_plugin_name">OSM-redaktilo</string>
-    <string name="osm_editing_plugin_description">Kontribuu al OSM per krei aŭ modifi punktojn (ekz. vendejojn, vidindaĵojn, hidrantojn), malfermi aŭ komenti rimarkojn kaj alŝuti registritajn GPX‑spurojn per OsmAnd. OpenStreetMap (OSM) estas komunuma, tutmonda kaj publika map‑projekto. Necesas krei konton ĉe OpenStreetMap.org por kontribui.</string>
+    <string name="osm_editing_plugin_description">Ebligas kontribui al OpenStreetMap – tutmonda komunumo, kies celo estas krei detalan mapon de la mondo kaj liveri aktualajn malfermajn datumojn por ĉiu uzanto.
+\n
+\nPliaj informoj pri kiel redakti la mapon OSM: https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
-    <string name="osmand_development_plugin_description">Agordoj pri evoluigo kaj senerarigado de OsmAnd: simuladi kurson, efikeco de ekran‑bildigado, voĉaj anoncoj. Destinitaj por programistoj, ne bezonataj por kutimaj uzantoj.</string>
+    <string name="osmand_development_plugin_description">Ebligas agordi OsmAnd por testi, simuli navigajn kursojn, kontroli rendimenton de map-bildigado, kaj pli. Tiu ĉi kromprogramo ne estas necesa por kutima uzado de la aplikaĵo.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
     <string name="level_to_switch_vector_raster_descr">Uzi kahelajn mapojn de tiu ĉi pligrandigo.</string>
     <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
@@ -1605,7 +1602,7 @@
     <string name="error_reading_gpx">Ne povas legi GPX‑datumojn.</string>
     <string name="rotate_map_compass_opt">Direkto de kompaso</string>
     <string name="rotate_map_bearing_opt">Direkto de movado</string>
-    <string name="rotate_map_none_opt">Sen turniĝo (nordo ĉiam supre)</string>
+    <string name="rotate_map_none_opt">Fiksita (nordo supre)</string>
     <string name="rotate_map_to_bearing_descr">Ekran‑turniĝo:</string>
     <string name="rotate_map_to_bearing">Map-orientiĝo</string>
     <string name="show_route">Detaloj pri kurso</string>
@@ -4808,4 +4805,5 @@
     <string name="map_widget_camera_tilt_desc">Fenestraĵo montranta fotilan klinecon en 2,5-dimensia vido. Implicite estas 90° (neniu klineco).</string>
     <string name="distance_by_tap_use_description">Frapetu la ekranon per unu fingro por vidigi distancon inter via nuna pozicio kaj la elektita punkto.
 \nFrapetu la ekranon per du fingroj por vidigi distancon inter la elektitaj punktoj.</string>
+    <string name="rotate_map_none_rotated_opt">Fiksita (permane turnita)</string>
 </resources>

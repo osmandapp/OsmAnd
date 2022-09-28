@@ -4772,4 +4772,7 @@
     <string name="distance_to_destination_widget_desc">El control muestra la distancia restante hasta el último punto de destino.</string>
     <string name="next_turn_widget_desc">El control muestra información sobre el siguiente giro con un dibujo de maniobra y la distancia al giro.</string>
     <string name="download_complete">Descarga completada</string>
+    <string name="map_widget_camera_distance">Elevación de la cámara</string>
+    <string name="map_widget_zoom_level">Nivel del zoom</string>
+    <string name="map_widget_target_distance">Distancia al destino</string>
 </resources>

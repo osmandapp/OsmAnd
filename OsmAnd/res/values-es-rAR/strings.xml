@@ -4716,8 +4716,8 @@
     <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="includes_osm_changes_until">Incluye cambios de OSM realizados hasta %1$s.</string>
-    <string name="next_live_update_date_and_time">Próxima actualización: %1$s en %2$s.</string>
-    <string name="next_live_update_time">Próxima actualización: en %1$s.</string>
+    <string name="next_live_update_date_and_time">Próxima actualización el %1$s a las %2$s.</string>
+    <string name="next_live_update_time">Próxima actualización a las %1$s.</string>
     <string name="live_update_frequency_day_variant">Las actualizaciones de mapas se comprueban cada día.</string>
     <string name="live_update_frequency_week_variant">Las actualizaciones de mapas se comprueban cada semana.</string>
     <string name="marker_2nd">Segundo marcador</string>
