@@ -4569,4 +4569,14 @@ POIの更新は利用できません</string>
     <string name="map_marker_average_speed_desc">到着予定時刻を計算するために平均速度を測定する時間間隔を指定します。</string>
     <string name="reset_all_settings_desc">リセットしてすべての設定を初期値に戻してもよろしいですか？</string>
     <string name="lang_ckb">中央クルド語</string>
+    <string name="bottom_widgets_panel">下パネル</string>
+    <string name="page_number">ページ %1$s</string>
+    <string name="compass_always_hidden">常に非表示</string>
+    <string name="top_widgets_panel">上パネル</string>
+    <string name="map_widget_average_speed">平均速度</string>
+    <string name="available_widgets">利用可能なウィジェット</string>
+    <string name="compass_always_visible">常に表示</string>
+    <string name="map_widget_current_speed">現行速度</string>
+    <string name="shared_string_buttons">ボタン</string>
+    <string name="auto_backup_title">自動バックアップ</string>
 </resources>
