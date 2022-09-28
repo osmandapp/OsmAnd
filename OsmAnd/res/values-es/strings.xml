@@ -4784,7 +4784,7 @@
     <string name="tap_on_widget">Pulsar el widget</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos exclusivos para el ciclismo de montaña.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados a ciclismo de montaña.</string>
     <string name="display_position">Posición de la pantalla</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
