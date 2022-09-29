@@ -4800,4 +4800,28 @@
     <string name="map_widget_target_distance_desc">Gradnik prikazuje razdaljo od kamere do ciljne lokacije.</string>
     <string name="map_widget_camera_distance_desc">Gradnik prikazuje višino kamere nad nivojem površine.</string>
     <string name="map_widget_zoom_level_desc">Gradnik prikazuje trenutno stopnjo povečave zemljevida.</string>
+    <string name="ant_missing_dependency_descr">Zahtevana storitev »%1$s« ni bila najdena.
+\nNamestiti moraš storitev ANT+ gradniki ali pa posodobiti obstoječo različico, če jo že imaš.
+\nŽeliš zagnati Trgovino Play, da jo namestiš/posodobiš\?</string>
+    <string name="ant_missing_dependency">Manjkajoča odvisnost</string>
+    <string name="ant_go_to_store">Pojdi v Trgovino</string>
+    <string name="ant_read_data">Preberi podatke</string>
+    <string name="ant_write_to_gpx">Napiši podatke v sled</string>
+    <string name="ant_heart_rate_write_gpx_desc">Napiši srčni utrip v sled</string>
+    <string name="map_widget_ant_heart_rate">Srčni utrip</string>
+    <string name="map_widget_ant_heart_rate_desc">V realnem času prikazuje uporabnikov srčni utrip med določeno dejavnostjo</string>
+    <string name="map_widget_ant_bicycle_power">Moč kolesarja</string>
+    <string name="map_widget_ant_bicycle_power_desc">Prikazuje kolesarjevo moč, ki se uporablja za premikanje kolesa naprej</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Prikazuje hitrost, s katero uporabnik vrti pedale</string>
+    <string name="map_widget_ant_bicycle_speed">Hitrost kolesa</string>
+    <string name="map_widget_ant_bicycle_cadence">Kadenca kolesa</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
+    <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Opis ANT+</string>
+    <string name="nautical_depth_points">Navtične globinske točke</string>
+    <string name="depth_contours">Izobate</string>
+    <string name="worldwide_maps">Zemljevidi sveta</string>
+    <string name="ant_widgets">ANT+ gradniki</string>
 </resources>
