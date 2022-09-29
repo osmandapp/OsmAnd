@@ -4877,4 +4877,28 @@
     <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
+    <string name="ant_missing_dependency_descr">لم يتم العثور على الخدمة المطلوبة \"%1$s\".
+\nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
+\nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
+    <string name="ant_missing_dependency">التابع مفقود</string>
+    <string name="ant_go_to_store">انتقل إلى المتجر</string>
+    <string name="map_widget_ant_bicycle_power">طاقة الدراجة</string>
+    <string name="map_widget_ant_bicycle_power_desc">يعرض طاقة الدراج ، أثناء تحريك الدراجة للأمام</string>
+    <string name="map_widget_ant_bicycle_cadence">دراجة نارية</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">إظهار السرعة التي يقوم بها المستخدم عند التدريج</string>
+    <string name="map_widget_ant_bicycle_speed">سرعة الدراجة</string>
+    <string name="map_widget_ant_bicycle_speed_desc">يظهر سرعة الرحلة</string>
+    <string name="map_widget_ant_bicycle_dist">مسافة الدراجة</string>
+    <string name="map_widget_ant_bicycle_dist_desc">يعرض المسافة المقطوعة</string>
+    <string name="antplus_plugin_name">مستشعر ANT+</string>
+    <string name="antplus_plugin_description">مواصفات ANT+</string>
+    <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
+    <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
+    <string name="ant_read_data">قراءة البيانات</string>
+    <string name="ant_widgets">ويدجت مستشعر ANT+</string>
+    <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
+    <string name="ant_heart_rate_write_gpx_desc">كتابة معدل نبضات القلب للمسار</string>
+    <string name="nautical_depth_points">نقاط العمق البحري</string>
+    <string name="worldwide_maps">خرائط عالمية</string>
+    <string name="depth_contours">ملامح العمق</string>
 </resources>
