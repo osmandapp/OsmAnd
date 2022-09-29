@@ -27,6 +27,7 @@ public enum ExportSettingsType {
 	POI_TYPES(R.string.poi_dialog_poi_type, R.drawable.ic_action_info_dark, SettingsItemType.POI_UI_FILTERS.name()),
 	AVOID_ROADS(R.string.avoid_road, R.drawable.ic_action_alert, SettingsItemType.AVOID_ROADS.name()),
 	FAVORITES(R.string.shared_string_favorites, R.drawable.ic_action_favorite, SettingsItemType.FAVOURITES.name()),
+	FAVORITES_BACKUP(R.string.favorites_backup, R.drawable.ic_action_folder_favorites, SettingsItemType.FILE.name()),
 	TRACKS(R.string.shared_string_tracks, R.drawable.ic_action_polygom_dark, SettingsItemType.GPX.name()),
 	OSM_NOTES(R.string.osm_notes, R.drawable.ic_action_openstreetmap_logo, SettingsItemType.OSM_NOTES.name()),
 	OSM_EDITS(R.string.osm_edits, R.drawable.ic_action_openstreetmap_logo, SettingsItemType.OSM_EDITS.name()),
@@ -82,7 +83,8 @@ public enum ExportSettingsType {
 
 	public boolean isResourcesCategory() {
 		return this == CUSTOM_RENDER_STYLE || this == CUSTOM_ROUTING || this == MAP_SOURCES
-				|| this == OFFLINE_MAPS || this == VOICE || this == TTS_VOICE || this == ONLINE_ROUTING_ENGINES;
+				|| this == OFFLINE_MAPS || this == VOICE || this == TTS_VOICE
+				|| this == ONLINE_ROUTING_ENGINES || this == FAVORITES_BACKUP;
 	}
 
 	@Nullable
@@ -136,6 +138,8 @@ public enum ExportSettingsType {
 			return TTS_VOICE;
 		} else if (subtype == FileSubtype.VOICE) {
 			return VOICE;
+		} else if (subtype == FileSubtype.FAVORITES_BACKUP) {
+			return FAVORITES_BACKUP;
 		}
 		return null;
 	}

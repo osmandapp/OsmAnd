@@ -12,6 +12,7 @@
 -->
 
 
+    <string name="favorites_backup">Favorites backup</string>
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="map_widget_fps_info">Map rendering FPS (frames per second)</string>
