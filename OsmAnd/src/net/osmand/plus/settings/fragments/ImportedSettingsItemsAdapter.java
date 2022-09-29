@@ -160,6 +160,10 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_flag, activeColorRes));
 				holder.title.setText(R.string.shared_string_itinerary);
 				break;
+			case FAVORITES_BACKUP:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_folder_favorites, activeColorRes));
+				holder.title.setText(R.string.favorites_backup);
+				break;
 		}
 	}
 
