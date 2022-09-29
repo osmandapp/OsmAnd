@@ -393,7 +393,7 @@ public class BinaryRoutePlanner {
 		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
-			if (te > 0) {
+			if (te > 0 && te < result) {
 				return te;
 			}
 		}
