@@ -4822,4 +4822,5 @@
     <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
+    <string name="worldwide_maps">Világtérképek</string>
 </resources>
