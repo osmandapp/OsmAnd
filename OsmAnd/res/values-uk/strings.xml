@@ -4009,7 +4009,7 @@
     <string name="update_frequency">Частота оновлень</string>
     <string name="delete_updates">Вилучити оновлення</string>
     <string name="live_update_delete_updates_msg">Вилучити всі live-оновлення для %s\?</string>
-    <string name="purchases">Покупки</string>
+    <string name="purchases">Придбання</string>
     <string name="select_category_descr">Виберіть категорію або додайте нову</string>
     <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
     <string name="copy_poi_name">Копіювати назву точки інтересу</string>
