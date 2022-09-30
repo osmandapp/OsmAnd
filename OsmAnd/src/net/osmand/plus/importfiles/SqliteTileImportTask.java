@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -35,8 +35,8 @@ class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		hideProgress();
 		if (error == null) {
 			FragmentActivity activity = activityRef.get();
-			OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-			OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
+			OsmandRasterMapsPlugin plugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
+			PluginsHelper.enablePluginIfNeeded(activity, app, plugin, true);
 			if (activity instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) activity;
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, true, null);

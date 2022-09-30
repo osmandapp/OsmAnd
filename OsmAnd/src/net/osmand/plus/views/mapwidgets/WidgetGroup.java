@@ -9,6 +9,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -132,7 +133,7 @@ public enum WidgetGroup {
 
 	@Nullable
 	public static <T extends OsmandPlugin> String getPartOfPluginDesc(@NonNull Context context, @NonNull Class<T> clz) {
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(clz);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(clz);
 		return plugin != null
 				? context.getString(R.string.widget_secondary_desc_part_of, plugin.getName())
 				: null;

@@ -72,7 +72,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper;
@@ -139,7 +138,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 		OSM_USER_NAME_OR_EMAIL = registerStringPreference("user_name", "").makeGlobal().makeShared();
 		OSM_USER_DISPLAY_NAME = registerStringPreference("user_display_name", "").makeGlobal().makeShared();
-		OSM_UPLOAD_VISIBILITY = registerEnumIntPreference("upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values(), UploadVisibility.class).makeGlobal().makeShared();
+		OSM_UPLOAD_VISIBILITY = registerEnumStringPreference("upload_visibility", UploadVisibility.PUBLIC, UploadVisibility.values(), UploadVisibility.class).makeGlobal().makeShared();
 
 		USER_OSM_BUG_NAME = registerStringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal().makeShared();
 		OSM_USER_PASSWORD = registerStringPreference("user_password", "").makeGlobal().makeShared();

@@ -10,7 +10,7 @@ public class MediaRemoteControlReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		// DO NOTHING 	https://github.com/osmandapp/Osmand/issues/1262
 //		if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
-//			AudioVideoNotesPlugin plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+//			AudioVideoNotesPlugin plugin = PluginsHelper.getEnabledPlugin(AudioVideoNotesPlugin.class);
 //			if(plugin != null && intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT) != null && 
 //					plugin.getActivity() != null) {
 //

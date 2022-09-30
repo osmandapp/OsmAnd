@@ -26,7 +26,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -830,7 +830,7 @@ public class MapRenderRepositories {
 			// keep cache
 			// this.prevBmp = null;
 			this.prevBmpLocation = null;
-			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
+			if (prefs.DEBUG_RENDERING_INFO.get() && PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;

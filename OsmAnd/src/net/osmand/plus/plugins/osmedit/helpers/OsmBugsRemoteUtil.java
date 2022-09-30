@@ -11,7 +11,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
@@ -50,7 +50,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	public OsmBugsRemoteUtil(@NonNull OsmandApplication app) {
 		this.app = app;
-		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 	}
 
 	@NonNull

@@ -1,5 +1,12 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -63,13 +70,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
 
 public class WikipediaPlugin extends OsmandPlugin {
 

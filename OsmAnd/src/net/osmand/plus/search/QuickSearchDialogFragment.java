@@ -80,7 +80,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -2016,7 +2016,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void onSearchFinished(SearchPhrase phrase) {
-		if (!OsmandPlugin.onSearchFinished(this, phrase, isResultEmpty())) {
+		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(searchUICore.isSearchMoreAvailable(phrase));
 		}
 	}
@@ -2330,7 +2330,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!searching) {
 			hideProgressBar();
 		}
-		OsmandPlugin.onNewDownloadIndexes(this);
+		PluginsHelper.onNewDownloadIndexes(this);
 		updateContent(heading);
 	}
 

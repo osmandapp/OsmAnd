@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsUtil.OsmBugResult;
@@ -24,7 +24,7 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 
 	@Override
 	protected OsmBugResult doInBackground(Void... params) {
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		assert plugin != null;
 		OsmBugsRemoteUtil remoteUtil = plugin.getOsmNotesRemoteUtil();
 		return remoteUtil.validateLoginDetails();
@@ -32,7 +32,7 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 
 	@Override
 	protected void onPostExecute(OsmBugResult osmBugResult) {
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			if (osmBugResult.warning != null) {
 				plugin.OSM_USER_NAME_OR_EMAIL.resetToDefault();

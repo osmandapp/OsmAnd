@@ -26,7 +26,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
@@ -190,7 +190,7 @@ public class FavoritesActivity extends TabActivity {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
-		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
+		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
 	}
 

@@ -28,7 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -371,7 +371,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
 			updateAllSettings();
@@ -380,7 +380,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);

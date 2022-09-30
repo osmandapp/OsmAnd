@@ -17,17 +17,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,14 +94,14 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 
 	private void initPlugins() {
-		List<OsmandPlugin> notFunctionalPlugins = OsmandPlugin.getNotActivePlugins();
-		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
-		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
+		List<OsmandPlugin> notFunctionalPlugins = PluginsHelper.getNotActivePlugins();
+		notFunctionalPlugins.remove(PluginsHelper.getPlugin(SkiMapsPlugin.class));
+		notFunctionalPlugins.remove(PluginsHelper.getPlugin(NauticalMapsPlugin.class));
 		Collections.shuffle(notFunctionalPlugins);
 
-		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getActivePlugins();
-		enabledPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
-		enabledPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
+		List<OsmandPlugin> enabledPlugins = PluginsHelper.getActivePlugins();
+		enabledPlugins.remove(PluginsHelper.getPlugin(SkiMapsPlugin.class));
+		enabledPlugins.remove(PluginsHelper.getPlugin(NauticalMapsPlugin.class));
 
 		plugins = new ArrayList<>();
 		Iterator<OsmandPlugin> nit = notFunctionalPlugins.iterator();
@@ -181,7 +182,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private void setListener(OsmandPlugin plugin, CompoundButton enableDisableButton, View pluginView) {
 		enableDisableButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			if (OsmandPlugin.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
+			if (PluginsHelper.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
 				updatePluginState(pluginView, plugin);
 			}
 		});

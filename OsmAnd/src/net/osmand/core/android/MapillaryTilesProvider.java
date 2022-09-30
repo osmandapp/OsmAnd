@@ -42,7 +42,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryVectorLayer;
@@ -94,7 +94,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		this.rm = app.getResourceManager();
 		this.settings = app.getSettings();
 		this.geometryTilesCache = rm.getMapillaryVectorTilesCache();
-		this.plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		this.plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		this.mapillaryBitmapTileCache = new MapillaryBitmapTileCache();
 		this.paintPoint = new Paint();
 		this.density = density;
@@ -177,8 +177,8 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		}
 
 		GeometryTile tile = null;
-		boolean useInternet = (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)
-				|| OsmandPlugin.isActive(MapillaryPlugin.class))
+		boolean useInternet = (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
+				|| PluginsHelper.isActive(MapillaryPlugin.class))
 				&& settings.isInternetConnectionAvailable() && tileSource.couldBeDownloadedFromInternet();
 		String tileId = rm.calculateTileId(tileSource, tileX, tileY, tileZoom);
 		boolean imgExist = geometryTilesCache.isTileDownloaded(tileId, tileSource, tileX, tileY, tileZoom);

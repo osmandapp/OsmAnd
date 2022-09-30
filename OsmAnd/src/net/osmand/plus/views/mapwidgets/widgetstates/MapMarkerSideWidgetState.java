@@ -36,7 +36,7 @@ public class MapMarkerSideWidgetState extends WidgetState {
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerEnumIntPreference(prefId, SideMarkerMode.DISTANCE, SideMarkerMode.values(), SideMarkerMode.class)
+		return settings.registerEnumStringPreference(prefId, SideMarkerMode.DISTANCE, SideMarkerMode.values(), SideMarkerMode.class)
 				.makeProfile();
 	}
 
@@ -55,7 +55,7 @@ public class MapMarkerSideWidgetState extends WidgetState {
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerEnumIntPreference(prefId, MarkerClickBehaviour.SWITCH_MODE, MarkerClickBehaviour.values(), MarkerClickBehaviour.class).makeProfile();
+		return settings.registerEnumStringPreference(prefId, MarkerClickBehaviour.SWITCH_MODE, MarkerClickBehaviour.values(), MarkerClickBehaviour.class).makeProfile();
 	}
 
 	@NonNull

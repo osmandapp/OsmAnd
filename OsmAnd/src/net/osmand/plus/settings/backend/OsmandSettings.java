@@ -702,13 +702,13 @@ public class OsmandSettings {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends Enum> CommonPreference<T> registerEnumIntPreference(String id, Enum defaultValue, Enum[] values, Class<T> clz) {
+	public <T extends Enum> CommonPreference<T> registerEnumStringPreference(String id, Enum defaultValue, Enum[] values, Class<T> clz) {
 		if (registeredPreferences.containsKey(id)) {
 			return (CommonPreference<T>) registeredPreferences.get(id);
 		}
-		EnumStringPreference p = new EnumStringPreference(this, id, defaultValue, values);
-		registeredPreferences.put(id, p);
-		return p;
+		EnumStringPreference preference = new EnumStringPreference(this, id, defaultValue, values);
+		registeredPreferences.put(id, preference);
+		return preference;
 	}
 
 	///////////////////// PREFERENCES ////////////////

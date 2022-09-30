@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -278,7 +278,7 @@ public class QuickActionRegistry {
 		allTypes.add(DisplayPositionAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
-		OsmandPlugin.registerQuickActionTypesPlugins(allTypes, enabledTypes);
+		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();

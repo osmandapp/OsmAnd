@@ -1,7 +1,10 @@
 package net.osmand.plus.settings.fragments;
 
+import androidx.annotation.NonNull;
+
 public interface OnPreferenceChanged {
 
-	void onPreferenceChanged(String prefId);
+	default void onPreferenceChanged(@NonNull String prefId) {
 
+	}
 }

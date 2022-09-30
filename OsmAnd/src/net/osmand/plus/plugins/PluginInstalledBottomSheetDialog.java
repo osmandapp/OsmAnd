@@ -13,12 +13,9 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
@@ -28,23 +25,28 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-import static net.osmand.plus.plugins.OsmandPlugin.PLUGIN_ID_KEY;
 
-public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragment implements DownloadIndexesThread.DownloadEvents {
+public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragment implements DownloadEvents {
 
-	public static final String TAG = PluginInstalledBottomSheetDialog.class.getName();
+	public static final String PLUGIN_ID_KEY = "plugin_id";
+
+	private static final String TAG = PluginInstalledBottomSheetDialog.class.getName();
 
 	private static final Log LOG = PlatformUtil.getLog(PluginInstalledBottomSheetDialog.class);
 
@@ -73,7 +75,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			}
 		}
 
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
 		if (plugin == null) {
 			return;
 		}
@@ -180,10 +182,10 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	@Override
 	protected void onDismissButtonClickAction() {
 		OsmandApplication app = getMyApplication();
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
 		if (app != null && plugin != null) {
 			Activity activity = getActivity();
-			OsmandPlugin.enablePlugin(activity, app, plugin, false);
+			PluginsHelper.enablePlugin(activity, app, plugin, false);
 
 			if (activity instanceof PluginStateListener) {
 				((PluginStateListener) activity).onPluginStateChanged(plugin);

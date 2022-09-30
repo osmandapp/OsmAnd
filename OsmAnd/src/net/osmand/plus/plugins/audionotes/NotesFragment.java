@@ -43,7 +43,7 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
@@ -92,7 +92,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 			((ItemMenuBottomSheetDialogFragment) itemMenu).setListener(createItemMenuFragmentListener());
 		}
 
-		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+		plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
 		OsmandApplication app = getMyApplication();

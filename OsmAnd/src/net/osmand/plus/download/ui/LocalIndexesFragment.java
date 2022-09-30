@@ -51,7 +51,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -242,7 +242,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
-			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
+			boolean isDevPluginEnabled = PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
 				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
 					listAdapter.addLocalIndexInfo(v);

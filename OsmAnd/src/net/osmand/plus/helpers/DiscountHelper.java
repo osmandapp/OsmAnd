@@ -36,6 +36,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -663,7 +664,7 @@ public class DiscountHelper {
 
 		@Override
 		boolean matches(@NonNull String value) {
-			OsmandPlugin plugin = OsmandPlugin.getPlugin(value);
+			OsmandPlugin plugin = PluginsHelper.getPlugin(value);
 			return plugin == null || plugin.needsInstallation();
 		}
 	}
@@ -681,7 +682,7 @@ public class DiscountHelper {
 
 		@Override
 		boolean matches(@NonNull String value) {
-			OsmandPlugin plugin = OsmandPlugin.getPlugin(value);
+			OsmandPlugin plugin = PluginsHelper.getPlugin(value);
 			return plugin != null && !plugin.needsInstallation();
 		}
 	}
