@@ -4804,4 +4804,23 @@
     <string name="map_widget_camera_tilt">Inclinação da câmera</string>
     <string name="map_widget_camera_tilt_desc">Widget mostra o ângulo de inclinação da câmera no modo de perspectiva. O padrão é 90° (sem inclinação).</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>
+    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadência de bicicleta</string>
+    <string name="ant_go_to_store">Ir para a Loja</string>
+    <string name="ant_write_to_gpx">Gravar dados para trilha</string>
+    <string name="ant_missing_dependency_descr">O serviço necessário \"%1$s\" não foi encontrado.
+\nVocê precisa instalar o serviço ANT+ Plugins ou pode precisar atualizar sua versão existente, se já a tiver.
+\nDeseja lançar a Play Store para obtê-lo\?</string>
+    <string name="ant_read_data">Ler dados</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra a frequência cardíaca do usuário durante uma determinada atividade em tempo real</string>
+    <string name="ant_missing_dependency">Dependência ausente</string>
+    <string name="map_widget_ant_heart_rate">Frequência cardíaca</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mostra a potência do ciclista, que é usada para mover a bicicleta para frente</string>
+    <string name="map_widget_ant_bicycle_power">Potência de bicicleta</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mostra a velocidade em que o usuário está pedalando</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mostra a velocidade de viagem</string>
+    <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
+    <string name="map_widget_ant_bicycle_dist">Distância da bicicleta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
 </resources>
