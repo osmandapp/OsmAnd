@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -21,7 +21,7 @@ public class OsmBugMenuController extends MenuController {
 
 	public OsmBugMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OpenStreetNote bug) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
 
 		leftTitleButtonController = new TitleButtonController() {

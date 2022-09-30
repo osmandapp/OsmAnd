@@ -130,7 +130,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	public void onResume() {
 		super.onResume();
 		Activity activity = getActivity();
-		OsmandPlugin.checkInstalledMarketPlugins(app, activity);
+		PluginsHelper.checkInstalledMarketPlugins(app, activity);
 		adapter.notifyDataSetChanged();
 		if (activity instanceof MapActivity) {
 			MapActivity mapActivity = ((MapActivity) activity);
@@ -150,7 +150,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin) {
-		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, !plugin.isEnabled())) {
+		if (PluginsHelper.enablePlugin(getActivity(), app, plugin, !plugin.isEnabled())) {
 			adapter.notifyDataSetChanged();
 			notifyPluginStateListener(plugin);
 		}
@@ -158,9 +158,9 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	private void switchEnabled(@NonNull ConnectedApp connectedApp) {
 		app.getAidlApi().switchEnabled(connectedApp);
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(connectedApp.getPack());
+		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
 		if (plugin != null) {
-			OsmandPlugin.enablePlugin(getActivity(), app, plugin, connectedApp.isEnabled());
+			PluginsHelper.enablePlugin(getActivity(), app, plugin, connectedApp.isEnabled());
 			notifyPluginStateListener(plugin);
 		}
 		adapter.notifyDataSetChanged();
@@ -188,7 +188,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		private List<Object> getFilteredPluginsAndApps() {
 			List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
-			List<OsmandPlugin> visiblePlugins = OsmandPlugin.getAvailablePlugins();
+			List<OsmandPlugin> visiblePlugins = PluginsHelper.getAvailablePlugins();
 
 			for (Iterator<OsmandPlugin> iterator = visiblePlugins.iterator(); iterator.hasNext(); ) {
 				OsmandPlugin plugin = iterator.next();
@@ -339,7 +339,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					OsmandPlugin.removeCustomPlugin(app, plugin);
+					PluginsHelper.removeCustomPlugin(app, plugin);
 					adapter.remove(plugin);
 				}
 			});

@@ -53,7 +53,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.EditPoiViewPager;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
@@ -134,7 +134,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
 		if (plugin.OFFLINE_EDITION.get() || !getSettings().isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
@@ -516,7 +516,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 		commitEntity(action, entity, mOpenstreetmapUtil.getEntityInfo(entity.getId()), comment, false,
 				result -> {
-					OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+					OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 					if (result != null) {
 						if (offlineEdit) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
@@ -712,7 +712,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static void showEditInstance(MapObject mapObject,
 	                                    AppCompatActivity activity) {
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin == null) {
 			return;
 		}
@@ -794,7 +794,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		DeletePoiHelper(AppCompatActivity activity) {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
-			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 			if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 				openstreetmapUtil = plugin.getPoiModificationLocalUtil();
 			} else {
@@ -864,7 +864,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			commitEntity(Action.DELETE, entity, openstreetmapUtil.getEntityInfo(entity.getId()), c, closeChangeSet,
 					result -> {
 						if (result != null) {
-							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+							OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 							if (plugin != null && isLocalEdit) {
 								List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
 								if (activity instanceof MapActivity && points.size() > 0) {

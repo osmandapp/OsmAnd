@@ -21,7 +21,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -365,7 +365,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.heading = heading == NO_HEADING ? Float.NaN : heading;
 
 				String pluginsInfo = query.getString(7);
-				pt.getExtensionsToWrite().putAll(OsmandPlugin.getExtensionsFromPluginsInfo(pluginsInfo));
+				pt.getExtensionsToWrite().putAll(PluginsHelper.getExtensionsFromPluginsInfo(pluginsInfo));
 
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 				long currentInterval = Math.abs(pt.time - previousTime);
@@ -455,7 +455,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
-				&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
@@ -477,7 +477,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 		if (record) {
-			JSONObject json = OsmandPlugin.getAdditionalTrackInfo();
+			JSONObject json = PluginsHelper.getAdditionalTrackInfo();
 			String additionalInfo = json != null && json.length() > 0 ? json.toString() : null;
 			heading = heading == NO_HEADING ? Float.NaN : heading;
 			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
@@ -742,7 +742,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public boolean getIsRecording() {
-		return OsmandPlugin.isActive(OsmandMonitoringPlugin.class)
+		return PluginsHelper.isActive(OsmandMonitoringPlugin.class)
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || isRecordingAutomatically();
 	}
 

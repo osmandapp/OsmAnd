@@ -43,7 +43,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -266,7 +266,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setOrder(SEARCH_NEAR_ITEM_ORDER));
 
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
+		PluginsHelper.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 
 		ItemClickListener listener = (callback, view, item, isChecked) -> {
 			int resId = item.getTitleId();
@@ -295,7 +295,7 @@ public class MapActivityActions extends MapActions {
 				&& gpxHelper.getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(editGpxItem);
 		} else if (!gpxHelper.getSelectedGPXFiles().isEmpty()
-				|| (OsmandPlugin.isActive(OsmandMonitoringPlugin.class))) {
+				|| (PluginsHelper.isActive(OsmandMonitoringPlugin.class))) {
 			adapter.addItem(addGpxItem);
 		}
 
@@ -505,11 +505,11 @@ public class MapActivityActions extends MapActions {
 				R.drawable.ic_action_folder_favorites, DRAWER_FAVORITES_ID);
 		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks,
 				R.drawable.ic_action_folder_tracks, DRAWER_TRACKS_ID);
-		if (OsmandPlugin.isActive(AudioVideoNotesPlugin.class)) {
+		if (PluginsHelper.isActive(AudioVideoNotesPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes,
 					R.drawable.ic_action_folder_av_notes, DRAWER_AV_NOTES_ID);
 		}
-		if (OsmandPlugin.isActive(OsmEditingPlugin.class)) {
+		if (PluginsHelper.isActive(OsmEditingPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits,
 					R.drawable.ic_action_folder_osm_notes, DRAWER_OSM_EDITS_ID);
 		}
@@ -536,7 +536,7 @@ public class MapActivityActions extends MapActions {
 					return true;
 				}));
 
-		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_TRIP_RECORDING_ID)
 					.setTitleId(R.string.map_widget_monitoring, mapActivity)
@@ -671,7 +671,7 @@ public class MapActivityActions extends MapActions {
 				}));
 
 		//////////// Others
-		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		PluginsHelper.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
 		optionsMenuHelper.addItem(createOsmAndVersionDrawerItem());
 

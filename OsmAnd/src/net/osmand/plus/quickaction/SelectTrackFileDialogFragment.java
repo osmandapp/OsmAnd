@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.utils.AndroidUtils;
@@ -60,7 +60,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 		File gpxRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxRootDir, null, false);
-		boolean showCurrentGpx = OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
+		boolean showCurrentGpx = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		if (showCurrentGpx) {
 			gpxInfoList.add(0, new GPXInfo(getString(R.string.current_track), 0, 0));
 		}

@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.backup.RemoteFile;
@@ -146,12 +146,12 @@ public enum ExportSettingsType {
 
 	public static List<ExportSettingsType> getEnabledTypes() {
 		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(values()));
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin == null) {
 			result.remove(OSM_EDITS);
 			result.remove(OSM_NOTES);
 		}
-		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin avNotesPlugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (avNotesPlugin == null) {
 			result.remove(MULTIMEDIA_NOTES);
 		}

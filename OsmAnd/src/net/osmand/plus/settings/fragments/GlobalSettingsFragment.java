@@ -39,7 +39,7 @@ import java.util.TreeMap;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged, OnSelectProfileCallback {
+		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 

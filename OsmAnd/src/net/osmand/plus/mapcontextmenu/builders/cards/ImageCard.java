@@ -24,7 +24,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -441,7 +441,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
 				}
-				OsmandPlugin.populateContextMenuImageCards(holder, pms, params, listener);
+				PluginsHelper.populateContextMenuImageCards(holder, pms, params, listener);
 
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);
@@ -454,7 +454,7 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									if (!OsmandPlugin.createImageCardForJson(holder, imageObject)) {
+									if (!PluginsHelper.createImageCardForJson(holder, imageObject)) {
 										ImageCard imageCard = createCard(mapActivity, imageObject);
 										if (imageCard != null) {
 											holder.add(ImageCardType.OTHER, imageCard);

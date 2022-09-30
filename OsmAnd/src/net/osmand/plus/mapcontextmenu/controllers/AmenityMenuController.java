@@ -15,7 +15,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -184,7 +184,7 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		String preferredLang = OsmandPlugin.onGetMapObjectPreferredLang(amenity,
+		String preferredLang = PluginsHelper.onGetMapObjectPreferredLang(amenity,
 				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		String ref = amenity.getAdditionalInfo("ref");

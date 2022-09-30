@@ -47,7 +47,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
@@ -418,7 +418,7 @@ public class ExternalApiHelper {
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)
 					|| API_CMD_STOP_AV_REC.equals(cmd)) {
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -539,7 +539,7 @@ public class ExternalApiHelper {
 				showOnMap(lat, lon, null, null);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -552,7 +552,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_STOP_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -565,7 +565,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_SAVE_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -577,7 +577,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_CLEAR_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -711,7 +711,7 @@ public class ExternalApiHelper {
 	@NonNull
 	public static Bundle getPluginAndProfileVersions() {
 		Bundle bundle = new Bundle();
-		List<CustomOsmandPlugin> plugins = OsmandPlugin.getCustomPlugins();
+		List<CustomOsmandPlugin> plugins = PluginsHelper.getCustomPlugins();
 		if (!Algorithms.isEmpty(plugins)) {
 			HashMap<String, Integer> map = new HashMap<>();
 			for (CustomOsmandPlugin plugin : plugins) {

@@ -21,6 +21,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
 import net.osmand.plus.plugins.development.widget.CameraTiltWidget;
 import net.osmand.plus.plugins.development.widget.FPSTextInfoWidget;
@@ -168,12 +169,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		OsmEditingPlugin osmPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
-		OpenPlaceReviewsPlugin oprPlugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		OpenPlaceReviewsPlugin oprPlugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
 			oprPlugin.OPR_USE_DEV_URL.set(false);
 			app.getOprAuthHelper().resetAuthorization();

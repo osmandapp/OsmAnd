@@ -15,7 +15,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -413,7 +413,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		this.groupByRegion = groupByRegion;
 
-		List<WorldRegion> customRegions = OsmandPlugin.getCustomDownloadRegions();
+		List<WorldRegion> customRegions = PluginsHelper.getCustomDownloadRegions();
 		if (!Algorithms.isEmpty(customRegions)) {
 			addGroup(extraMapsGroup);
 			for (WorldRegion region : customRegions) {

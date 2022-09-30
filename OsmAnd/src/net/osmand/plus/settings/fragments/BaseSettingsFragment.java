@@ -92,7 +92,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
-		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
+		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
 

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -77,7 +77,7 @@ public class DashParkingFragment extends DashLocationFragment {
 
 	@Override
 	public void onOpenDash() {
-		plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
+		plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
 		updateParkingPosition();
 	}
 

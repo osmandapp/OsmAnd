@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
@@ -49,7 +49,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 		checkDuplicateNames(favourites);
 
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);

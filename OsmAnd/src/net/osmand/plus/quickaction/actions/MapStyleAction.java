@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -118,7 +118,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public List<String> getFilteredStyles() {
 
 		List<String> filtered = new ArrayList<>();
-		boolean enabled = OsmandPlugin.isActive(NauticalMapsPlugin.class);
+		boolean enabled = PluginsHelper.isActive(NauticalMapsPlugin.class);
 
 		if (enabled) return loadListFromParams();
 		else {
@@ -167,7 +167,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 				bld.setTitle(R.string.renderers);
 
 				Map<String, String> renderers = app.getRendererRegistry().getRenderers();
-				List<String> disabledRendererNames = OsmandPlugin.getDisabledRendererNames();
+				List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
 
 				if (!Algorithms.isEmpty(disabledRendererNames)) {
 					Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();

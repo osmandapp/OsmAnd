@@ -29,7 +29,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -213,7 +213,7 @@ public class MapLayers {
 	}
 
 	public void createAdditionalLayers(@Nullable MapActivity mapActivity) {
-		OsmandPlugin.createLayers(app, mapActivity);
+		PluginsHelper.createLayers(app, mapActivity);
 		app.getAppCustomization().createLayers(app, mapActivity);
 		app.getAidlApi().registerMapLayers(app);
 	}
@@ -247,7 +247,7 @@ public class MapLayers {
 		OsmandSettings settings = app.getSettings();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-		OsmandPlugin.refreshLayers(app, mapActivity);
+		PluginsHelper.refreshLayers(app, mapActivity);
 	}
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
@@ -471,7 +471,7 @@ public class MapLayers {
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           boolean includeOfflineMaps,
 	                           @Nullable CallbackWithObject<String> callback) {
-		if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return;
 		}

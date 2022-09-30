@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -70,7 +70,7 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = getMyApplication();
-		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (app == null || plugin == null) return;
 
 		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);

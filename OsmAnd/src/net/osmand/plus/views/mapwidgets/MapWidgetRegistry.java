@@ -38,7 +38,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -376,7 +376,7 @@ public class MapWidgetRegistry {
 		createLeftWidgets(widgetsFactory, widgetInfos, appMode);
 		createRightWidgets(widgetsFactory, widgetInfos, appMode);
 
-		OsmandPlugin.createMapWidgets(mapActivity, widgetInfos, appMode);
+		PluginsHelper.createMapWidgets(mapActivity, widgetInfos, appMode);
 		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos, appMode);
 		createCustomWidgets(widgetsFactory, appMode, widgetInfos);
 

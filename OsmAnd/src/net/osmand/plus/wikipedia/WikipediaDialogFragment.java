@@ -32,7 +32,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -175,7 +175,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
-		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
@@ -298,7 +298,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
-			WikipediaPlugin wikipediaPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+			WikipediaPlugin wikipediaPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 			lang = lang != null ? lang : wikipediaPlugin.getMapObjectsLocale(amenity,
 					app.getSettings().MAP_PREFERRED_LOCALE.get());
 			wikipediaDialogFragment.setLanguage(lang);

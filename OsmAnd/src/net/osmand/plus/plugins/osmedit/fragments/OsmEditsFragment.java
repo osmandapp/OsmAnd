@@ -46,7 +46,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
@@ -155,7 +155,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		}
 
 		setHasOptionsMenu(true);
-		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
@@ -752,7 +752,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
-			OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+			OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 			@SuppressWarnings("unchecked") ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

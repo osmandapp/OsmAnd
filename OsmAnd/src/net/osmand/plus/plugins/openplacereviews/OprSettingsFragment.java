@@ -9,13 +9,13 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class OprSettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, OprAuthorizationListener {
+public class OprSettingsFragment extends BaseSettingsFragment implements OprAuthorizationListener {
 
 	private static final String OPR_LOGOUT = "opr_logout";
 	public static final String OPR_LOGIN_DATA = "opr_login_data";
@@ -28,7 +28,7 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 		super.onCreate(savedInstanceState);
 
 		authHelper = app.getOprAuthHelper();
-		plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		plugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -67,7 +67,7 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OnPrefe
 
 	private void setupUseDevUrlPref() {
 		SwitchPreferenceEx useDevUrlPref = findPreference(plugin.OPR_USE_DEV_URL.getId());
-		useDevUrlPref.setVisible(OsmandPlugin.isDevelopment());
+		useDevUrlPref.setVisible(PluginsHelper.isDevelopment());
 		useDevUrlPref.setIcon(getPersistentPrefIcon(R.drawable.ic_plugin_developer));
 	}
 

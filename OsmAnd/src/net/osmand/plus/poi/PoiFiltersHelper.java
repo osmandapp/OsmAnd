@@ -11,7 +11,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -258,7 +258,7 @@ public class PoiFiltersHelper {
 				PoiUIFilter f = new PoiUIFilter(t, application, "");
 				filters.add(f);
 			}
-			OsmandPlugin.registerCustomPoiFilters(filters);
+			PluginsHelper.registerCustomPoiFilters(filters);
 			cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
@@ -479,7 +479,7 @@ public class PoiFiltersHelper {
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		selectedPoiFilters.add(filter);
-		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
+		PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
@@ -580,7 +580,7 @@ public class PoiFiltersHelper {
 				selectedPoiFilters.add(filter);
 			}
 		}
-		OsmandPlugin.onPrepareExtraTopPoiFilters(selectedPoiFilters);
+		PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
 	}
 

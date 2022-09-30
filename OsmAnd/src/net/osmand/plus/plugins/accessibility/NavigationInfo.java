@@ -14,7 +14,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -282,7 +282,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			if (targetDirectionFlag && ((inclination == null) || (inclination != 0))) {
 				targetDirectionFlag = false;
 				if (settings.DIRECTION_AUDIO_FEEDBACK.get()) {
-					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
+					AccessibilityPlugin accessibilityPlugin = PluginsHelper.getActivePlugin(AccessibilityPlugin.class);
 					if (accessibilityPlugin != null) {
 						if (inclination == null) {
 							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.DIRECTION_NOTIFICATION);

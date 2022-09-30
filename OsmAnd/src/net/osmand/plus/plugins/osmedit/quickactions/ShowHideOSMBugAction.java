@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -33,7 +33,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_OSM_BUGS.set(!plugin.SHOW_OSM_BUGS.get());
 			plugin.updateLayers(mapActivity, mapActivity);
@@ -59,7 +59,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		return plugin != null && plugin.SHOW_OSM_BUGS.get();
 	}
 }

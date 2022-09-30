@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -130,6 +130,6 @@ public class TripRecordingDistanceWidget extends TextInfoWidget {
 
 	@Nullable
 	private OsmandMonitoringPlugin getPlugin() {
-		return OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		return PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 	}
 }
