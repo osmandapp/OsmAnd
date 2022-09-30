@@ -2234,7 +2234,7 @@
     <string name="subscribe_email_error">Помилка</string>
     <string name="mapillary">Mapillary</string>
     <string name="depth_contour_descr">Ізолінії морських глибин та навігаційні знаки.</string>
-    <string name="sea_depth_thanks">Дякуємо Вам за покупку Ізоліній морських глибин</string>
+    <string name="sea_depth_thanks">Дякуємо Вам за придбання Ізоліній морських глибин</string>
     <string name="index_item_depth_contours_osmand_ext">Ізолінії морських глибин</string>
     <string name="index_item_depth_points_southern_hemisphere">Відмітки морських глибин південної півкулі</string>
     <string name="index_item_depth_points_northern_hemisphere">Відмітки морських глибин північної півкулі</string>
@@ -2242,7 +2242,7 @@
     <string name="nautical_maps">Морські мапи</string>
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Видимі</string>
-    <string name="restore_purchases">Відновлення покупок</string>
+    <string name="restore_purchases">Відновлення придбань</string>
     <string name="driving_region_automatic">Автоматично</string>
     <string name="do_not_send_anonymous_app_usage">Не надсилати анонімну статистику про користування застосунком</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає відомості про те, які Ви використовуєте частини застосунку. Ваше місце розташування ніколи не надсилається, як і все, що Ви вводите, які місця переглядаєте, що шукаєте чи завантажуєте.</string>
@@ -2693,7 +2693,7 @@
     <string name="daily_map_updates">Щогодинне оновлення мап</string>
     <string name="in_app_purchase">Купівля в застосунку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
-    <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
+    <string name="in_app_purchase_desc_ex">Після придбання він буде завжди доступний для вас.</string>
     <string name="purchase_unlim_title">Купити — %1$s</string>
     <string name="wikivoyage_offline">Вікімандри в офлайн режимі</string>
     <string name="unlimited_downloads">Необмежені завантаження</string>
@@ -3544,7 +3544,7 @@
     <string name="map_markers_item">Позначки</string>
     <string name="favorites_item">Закладки</string>
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
-    <string name="osmand_purchases_item">OsmAnd покупки</string>
+    <string name="osmand_purchases_item">OsmAnd придбання</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
     <string name="osm_live_payment_subscription_management">Оплата стягується з вашого облікового запису Google Play під час підтвердження купівлі.
 \n
@@ -3782,7 +3782,7 @@
     <string name="contour_lines_thanks">Дякуємо за придбання «Ізоліній»</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
-    <string name="osm_live_payment_subscription_management_hw">Оплата стягується з вашого облікового запису AppGallery під час підтвердження покупки.
+    <string name="osm_live_payment_subscription_management_hw">Оплата стягується з вашого облікового запису AppGallery під час підтвердження придбання.
 \n
 \nПлатіж поновлюється, якщо його не скасовано до вибраного періоду поновлення.
 \n
@@ -4041,10 +4041,10 @@
 \n• Оновлено діалог «Запису треку»
 \n
 \n</string>
-    <string name="no_purchases">У вас немає покупок</string>
+    <string name="no_purchases">У вас немає придбань</string>
     <string name="new_device_account">Новий пристрій / новий обліковий запис</string>
     <string name="contact_support_description">Якщо маєте будь-які питання, зв\'яжіться з нами за адресою %1$s.</string>
-    <string name="empty_purchases_description">Якщо ваші покупки не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
+    <string name="empty_purchases_description">Якщо ваші придбання не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
     <string name="contact_support">Звернутися до служби підтримки</string>
     <string name="troubleshooting">Розв\'язання проблем</string>
     <string name="troubleshooting_description">Перейдіть за цим посиланням, якщо у вас виникли проблеми з придбанням.</string>
@@ -4215,7 +4215,7 @@
 \n
 \n• План маршруту: Тепер ви можете змінювати параметри навігації, доступ до налаштувань мапи та пошуку, не виходячи з планування маршруту
 \n
-\n• Нове меню «Покупка» з подробицями про покупку
+\n• Нове меню «Придбання» з подробицями про придбання
 \n
 \n• Додана можливість зміни зовнішнього вигляду лінії маршруту
 \n
@@ -4285,10 +4285,10 @@
     <string name="map_updates_for_mappers">Оновлення мап для маперів</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Можливості Pro</string>
-    <string name="purchases_restored">Покупки відновлено</string>
+    <string name="purchases_restored">Придбання відновлено</string>
     <string name="grey_color_undefined">Частки без даних – сірі.</string>
     <string name="no_activity_for_intent">Встановіть відповідний застосунок, що може виконувати цю дію.</string>
-    <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження покупки.
+    <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження придбання.
 \n
 \nПідписка поновлюється, якщо не скасовано до вибраного проміжку поновлення.
 \n
