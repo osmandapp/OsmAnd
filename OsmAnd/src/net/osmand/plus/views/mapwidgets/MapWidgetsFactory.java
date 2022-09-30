@@ -5,13 +5,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesMapCenterWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesCurrentLocationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToDestinationWidget;
@@ -54,8 +55,10 @@ public class MapWidgetsFactory {
 				return new NextTurnWidget(mapActivity, true);
 			case SECOND_NEXT_TURN:
 				return new SecondNextTurnWidget(mapActivity);
-			case COORDINATES:
-				return new CoordinatesWidget(mapActivity);
+			case COORDINATES_CURRENT_LOCATION:
+				return new CoordinatesCurrentLocationWidget(mapActivity);
+			case COORDINATES_MAP_CENTER:
+				return new CoordinatesMapCenterWidget(mapActivity);
 			case STREET_NAME:
 				return new StreetNameWidget(mapActivity);
 			case MARKERS_TOP_BAR:
@@ -103,7 +106,7 @@ public class MapWidgetsFactory {
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:
-				return OsmandPlugin.createMapWidget(mapActivity, widgetType);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}
 	}
 }

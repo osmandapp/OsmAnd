@@ -221,6 +221,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case OSM_EDITS:
 			case FAVORITES:
 			case MULTIMEDIA_NOTES:
+			case FAVORITES_BACKUP:
 				int tabId = getFavoritesTabId(type);
 				openFavouritesActivity(activity, tabId);
 				break;
@@ -259,6 +260,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case TRACKS:
 				return FavoritesActivity.GPX_TAB;
 			case FAVORITES:
+			case FAVORITES_BACKUP:
 			default:
 				return FavoritesActivity.FAV_TAB;
 		}

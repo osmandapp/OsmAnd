@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,13 +13,10 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.aidl.ConnectedApp;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,19 +51,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener {
+public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsConfigurationChangeListener {
 
 	public static final String TAG = WidgetInfoFragment.class.getSimpleName();
 
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String WIDGET_ID_KEY = "widget_id";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetIconsHelper iconsHelper;
-	private ApplicationMode appMode;
-	private boolean nightMode;
 
 	private MapWidgetInfo widgetInfo;
 	private WidgetType widgetType;
@@ -79,10 +71,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Nullable
@@ -208,7 +197,7 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		bannerContainer.removeAllViews();
 
 		WidgetData widgetData = new WidgetData(widgetType.titleId, widgetType.dayIconId, widgetType.nightIconId);
-		WidgetPromoBanner banner = new WidgetPromoBanner(getMapActivity(), widgetData, false);
+		WidgetPromoBanner banner = new WidgetPromoBanner(requireMapActivity(), widgetData, false);
 		bannerContainer.addView(banner.build(activity));
 	}
 
@@ -380,13 +369,6 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 		outState.putString(WIDGET_ID_KEY, widgetInfo.key);
 	}
 
-	private void dismiss() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			activity.onBackPressed();
-		}
-	}
-
 	@Override
 	public void onWidgetsConfigurationChanged() {
 		setupWidgetItem();
@@ -401,15 +383,13 @@ public class WidgetInfoFragment extends BaseOsmAndFragment implements WidgetsCon
 	}
 
 	@Override
-	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+	public void onItemPurchased(String sku, boolean active) {
+		recreateFragment();
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,

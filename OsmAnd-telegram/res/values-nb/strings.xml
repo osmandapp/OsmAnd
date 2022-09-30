@@ -271,4 +271,6 @@
     <string name="shared_string_export">Eksporter</string>
     <string name="logcat_buffer_descr">Sjekk og del detaljert loggføring fra programmet</string>
     <string name="send_report">Send rapport</string>
+    <string name="shared_string_error">Feil</string>
+    <string name="send_live_location_error">Kunne ikke sende sanntidsposisjon: %1$s</string>
 </resources>

@@ -29,6 +29,7 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
@@ -64,8 +65,8 @@ public class OsmAndAppCustomization {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmAndAppCustomization.class);
 
-	protected OsmandApplication app;
-	protected OsmandSettings osmandSettings;
+	private OsmandApplication app;
+	private OsmandSettings osmandSettings;
 
 	private final Map<String, Bitmap> navDrawerLogos = new HashMap<>();
 
@@ -80,12 +81,16 @@ public class OsmAndAppCustomization {
 	private final Set<ApplicationMode> marginAppModeUsage = new HashSet<>();
 	private final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
-	private CustomOsmandSettings customOsmandSettings;
+
+	private CustomOsmandSettings customSettings;
 
 	private int marginLeft;
 	private int marginTop;
 	private int marginRight;
 	private int marginBottom;
+
+	private int minZoom;
+	private int maxZoom;
 
 	private boolean featuresCustomized;
 	private boolean widgetsCustomized;
@@ -123,12 +128,12 @@ public class OsmAndAppCustomization {
 	}
 
 	public OsmandSettings getOsmandSettings() {
-		return customOsmandSettings != null ? customOsmandSettings.getSettings() : osmandSettings;
+		return customSettings != null ? customSettings.getSettings() : osmandSettings;
 	}
 
 	public void customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
-		customOsmandSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
-		OsmandSettings newSettings = customOsmandSettings.getSettings();
+		customSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
+		OsmandSettings newSettings = customSettings.getSettings();
 		if (Build.VERSION.SDK_INT < 19) {
 			if (osmandSettings.isExternalStorageDirectorySpecifiedPre19()) {
 				File externalStorageDirectory = osmandSettings.getExternalStorageDirectoryPre19();
@@ -152,11 +157,13 @@ public class OsmAndAppCustomization {
 	public boolean restoreOsmand() {
 		featuresCustomized = false;
 		widgetsCustomized = false;
-		customOsmandSettings = null;
+		customSettings = null;
 		marginLeft = 0;
 		marginTop = 0;
 		marginRight = 0;
 		marginBottom = 0;
+		maxZoom = 0;
+		minZoom = 0;
 		restoreOsmandSettings();
 
 		featuresEnabledIds.clear();
@@ -401,18 +408,18 @@ public class OsmAndAppCustomization {
 
 	public boolean changePluginStatus(String pluginId, int newState) {
 		if (newState == 0) {
-			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+			for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 				if (plugin.getId().equals(pluginId)) {
-					OsmandPlugin.enablePlugin(null, app, plugin, false);
+					PluginsHelper.enablePlugin(null, app, plugin, false);
 				}
 			}
 			return true;
 		}
 
 		if (newState == 1) {
-			for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
+			for (OsmandPlugin plugin : PluginsHelper.getAvailablePlugins()) {
 				if (plugin.getId().equals(pluginId)) {
-					OsmandPlugin.enablePlugin(null, app, plugin, true);
+					PluginsHelper.enablePlugin(null, app, plugin, true);
 				}
 			}
 			return true;
@@ -553,6 +560,19 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
+	public int getMaxZoom() {
+		return maxZoom;
+	}
+
+	public int getMinZoom() {
+		return minZoom;
+	}
+
+	public void setZoomLimits(int minZoom, int maxZoom) {
+		this.minZoom = minZoom;
+		this.maxZoom = maxZoom;
+	}
+
 	public boolean isFeatureEnabled(@NonNull String id) {
 		if (!featuresCustomized) {
 			return true;
@@ -582,11 +602,11 @@ public class OsmAndAppCustomization {
 	}
 
 	public boolean areSettingsCustomized() {
-		return customOsmandSettings != null;
+		return customSettings != null;
 	}
 
 	public boolean areSettingsCustomizedForPreference(String sharedPreferencesName) {
-		if (customOsmandSettings != null && customOsmandSettings.sharedPreferencesName.equals(sharedPreferencesName)) {
+		if (customSettings != null && customSettings.sharedPreferencesName.equals(sharedPreferencesName)) {
 			return true;
 		}
 		return OsmandSettings.areSettingsCustomizedForPreference(sharedPreferencesName, app);

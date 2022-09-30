@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -64,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
@@ -81,6 +80,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
@@ -163,7 +163,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public void build(ViewGroup rootView) {
-		for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			if (plugin.isMenuControllerSupported(this.getClass())) {
 				builder.addMenuPlugin(plugin);
 			}
@@ -228,7 +228,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (pair.second instanceof SelectedGpxPoint) {
 					menuController = new SelectedGpxMenuController(mapActivity, pointDescription,
 							(SelectedGpxPoint) ((Pair<?, ?>) object).second);
-				} else if (pair.first instanceof NetworkRouteSegment && pair.second instanceof QuadRect) {
+				} else if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 					menuController = new NetworkRouteMenuController(mapActivity, pointDescription, pair);
 				}
 			}
@@ -674,7 +674,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				titleProgressController.setMapDownloadMode();
 				if (downloadThread.getCurrentDownloadingItem() == indexItem) {
 					titleProgressController.indeterminate = false;
-					titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+					titleProgressController.progress = downloadThread.getCurrentDownloadProgress();
 				} else {
 					titleProgressController.indeterminate = true;
 					titleProgressController.progress = 0;
@@ -774,7 +774,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public abstract static class TitleProgressController {
 		public String caption = "";
-		public int progress;
+		public float progress;
 		public boolean indeterminate;
 		public boolean visible;
 		public boolean progressVisible;

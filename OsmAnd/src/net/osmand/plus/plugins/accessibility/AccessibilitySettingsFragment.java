@@ -20,7 +20,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -268,7 +268,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
 			updateAllSettings();
@@ -277,7 +277,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);
@@ -288,7 +288,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private void updateAccessibilityOptions() {
 		boolean accessibilityEnabled = app.accessibilityEnabledForMode(getSelectedAppMode());
 		PreferenceScreen screen = getPreferenceScreen();
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		if (screen != null && plugin != null) {
 			for (int i = 0; i < screen.getPreferenceCount(); i++) {
 				Preference preference = screen.getPreference(i);

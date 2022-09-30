@@ -3,7 +3,7 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
@@ -30,7 +30,7 @@ public class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploade
 				R.string.uploading,
 				R.string.local_openstreetmap_uploading,
 				ProgressDialog.STYLE_HORIZONTAL);
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(mapActivity,
 				mapActivity.getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override

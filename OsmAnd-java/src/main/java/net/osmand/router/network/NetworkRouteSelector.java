@@ -8,25 +8,14 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
@@ -53,7 +42,7 @@ public class NetworkRouteSelector {
 
 	// TODO - FIX & implement work with routing tags
 	// TEST:
-	// TODO https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
+	// --- https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
 	// +++  https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
 	// +++  https://www.openstreetmap.org/relation/138401#map=19/51.06795/7.37955 [6] -> 1
 	// +++  https://www.openstreetmap.org/relation/145490#map=16/51.0607/7.3596 [2] -> 2
@@ -94,7 +83,7 @@ public class NetworkRouteSelector {
 	}
 	
 	public Map<RouteKey, GPXFile> getRoutes(int x, int y, boolean loadRoutes) throws IOException {
-		Map<RouteKey, GPXFile> res = new LinkedHashMap<RouteKey, GPXUtilities.GPXFile>();
+		Map<RouteKey, GPXFile> res = new LinkedHashMap<>();
 		for (NetworkRouteSegment segment : rCtx.loadRouteSegment(x, y)) {
 			if (res.containsKey(segment.routeKey)) {
 				continue;
@@ -112,78 +101,38 @@ public class NetworkRouteSelector {
 		return res;
 	}
 
-	public List<NetworkRouteSegment> getFirstSegments(QuadRect bBox, RouteKey selected, double searchDistance) throws IOException {
-		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
-		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
-		int x31L = MapUtils.get31TileNumberX(bBox.left);
-		int x31R = MapUtils.get31TileNumberX(bBox.right);
-
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
-
-		LatLon latLon = new LatLon(bBox.centerY(), bBox.centerX());
-		List<NetworkRouteSegment> networkRouteSegmentList = new ArrayList<>();
-		for (RouteKey key : res.keySet()) {
-			if (selected != null && !selected.equals(key)) {
-				continue;
-			}
-			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0 && isSegmentsNearPoint(list, latLon, searchDistance)) {
-				networkRouteSegmentList.add(list.get(0));
-			}
-		}
-		return networkRouteSegmentList;
-	}
-
-	private boolean isSegmentsNearPoint(List<NetworkRouteSegment> list, LatLon latLon, double searchDistance) {
-		for (NetworkRouteSegment segment : list) {
-			RouteDataObject dataObject = segment.robj;
-			if (dataObject != null) {
-				for (int i = 0; i < dataObject.getPointsLength(); i++) {
-					double lon = MapUtils.get31LongitudeX(dataObject.getPoint31XTile(i));
-					double lat = MapUtils.get31LatitudeY(dataObject.getPoint31YTile(i));
-
-					double distance = MapUtils.getDistance(latLon, lat, lon);
-					if (distance <= searchDistance) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	public Map<RouteKey, GPXFile> getRoutes(QuadRect bBox, boolean loadRoutes, RouteKey selected) throws IOException {
 		int y31T = MapUtils.get31TileNumberY(Math.max(bBox.bottom, bBox.top));
 		int y31B = MapUtils.get31TileNumberY(Math.min(bBox.bottom, bBox.top));
 		int x31L = MapUtils.get31TileNumberX(bBox.left);
 		int x31R = MapUtils.get31TileNumberX(bBox.right);
-		Map<RouteKey, List<NetworkRouteSegment>> res = rCtx.loadRouteSegmentTile(x31L, y31T, x31R, y31B, null);
-		Map<RouteKey, GPXFile> r = new LinkedHashMap<>();
-		for (RouteKey key : res.keySet()) {
-			if (selected != null && !selected.equals(key)) {
+		Map<RouteKey, List<NetworkRouteSegment>> routeSegmentTile = rCtx.loadRouteSegmentsBbox(x31L, y31T, x31R, y31B, null);
+		Map<RouteKey, GPXFile> gpxFileMap = new LinkedHashMap<>();
+		for (RouteKey routeKey : routeSegmentTile.keySet()) {
+			if (selected != null && !selected.equals(routeKey)) {
 				continue;
 			}
-			List<NetworkRouteSegment> list = res.get(key);
-			if (list.size() > 0) {
+			List<NetworkRouteSegment> routeSegments = routeSegmentTile.get(routeKey);
+			if (routeSegments.size() > 0) {
 				if (!loadRoutes) {
-					r.put(key, null);
+					gpxFileMap.put(routeKey, null);
 				} else {
-					connectAlgorithm(list.get(0), r);
+					NetworkRouteSegment firstSegment = routeSegments.get(0);
+					connectAlgorithm(firstSegment, gpxFileMap);
 				}
 			}
 		}
-		return r;
+		return gpxFileMap;
 	}
-	
-	
-	private static class NetworkRouteSegmentChain {
+
+	public static class NetworkRouteSegmentChain {
 		NetworkRouteSegment start;
 		List<NetworkRouteSegment> connected;
-		
+
 		public int getSize() {
 			return 1 + (connected == null ? 0 : connected.size());
 		}
-		
+
 		public NetworkRouteSegment getLast() {
 			if (connected != null && connected.size() > 0) {
 				return connected.get(connected.size() - 1);
@@ -263,12 +212,18 @@ public class NetworkRouteSelector {
 		}
 		return list;
 	}
-	
+
 	private void connectAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		RouteKey rkey = segment.routeKey;
 		List<NetworkRouteSegment> loaded = new ArrayList<>();
 		debug("START ", null, segment);
 		loadData(segment, rkey, loaded);
+		List<NetworkRouteSegmentChain> lst = getNetworkRouteSegmentChains(segment.routeKey, res, loaded);
+		debug("FINISH " + lst.size(), null, segment);
+	}
+
+
+	List<NetworkRouteSegmentChain> getNetworkRouteSegmentChains(RouteKey routeKey, Map<RouteKey, GPXFile> res, List<NetworkRouteSegment> loaded) {
 		System.out.println("About to merge: " + loaded.size());
 		Map<Long, List<NetworkRouteSegmentChain>> chains = createChainStructure(loaded);
 		Map<Long, List<NetworkRouteSegmentChain>> endChains = prepareEndChain(chains);
@@ -280,13 +235,11 @@ public class NetworkRouteSelector {
 		connectToLongestChain(chains, endChains, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
-		
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
-		GPXFile fl = createGpxFile(lst);
-		res.put(segment.routeKey, fl);
-		debug("FINISH " + lst.size(), null, segment);
+		GPXFile gpxFile = createGpxFile(lst);
+		res.put(routeKey, gpxFile);
+		return lst;
 	}
-
 
 	private int connectToLongestChain(Map<Long, List<NetworkRouteSegmentChain>> chains,
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad) {
@@ -437,8 +390,6 @@ public class NetworkRouteSelector {
 		}
 		return merged;
 	}
-	
-	
 
 	private NetworkRouteSegmentChain chainReverse(Map<Long, List<NetworkRouteSegmentChain>> chains,
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, NetworkRouteSegmentChain it) {
@@ -501,7 +452,7 @@ public class NetworkRouteSelector {
 				it.setEnd(new NetworkRouteSegment(lastIt, lastIt.start, minLastInd));
 			}
 		}
-		
+
 		it.addChain(toAdd);
 		add(endChains, NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY()), it);
 	}
@@ -554,7 +505,6 @@ public class NetworkRouteSelector {
 		return endChains;
 	}
 
-	
 	private Map<Long, List<NetworkRouteSegmentChain>> createChainStructure(List<NetworkRouteSegment> lst) {
 		Map<Long, List<NetworkRouteSegmentChain>> chains = new LinkedHashMap<>();
 		for (NetworkRouteSegment s : lst) {
@@ -576,16 +526,14 @@ public class NetworkRouteSelector {
 		queue.add(start);
 		queue.add(end);
 		while (!queue.isEmpty() && !isCancelled()) {
-			long tile = queue.get(queue.size() - 1);
+			long tileID = queue.get(queue.size() - 1);
 			queue.remove(queue.size() - 1, 1);
-			if (!visitedTiles.add(tile)) {
+			if (!visitedTiles.add(tileID)) {
 				continue;
 			}
-			int left = NetworkRouteContext.getX31FromTileId(tile, 0);
-			int top = NetworkRouteContext.getY31FromTileId(tile, 0);
-			int right = NetworkRouteContext.getX31FromTileId(tile, 1);
-			int bottom = NetworkRouteContext.getY31FromTileId(tile, 1);
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(left, top, right - 1, bottom - 1, rkey);
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
+					NetworkRouteContext.getXFromTileId(tileID), NetworkRouteContext.getYFromTileId(tileID),
+					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
@@ -597,19 +545,22 @@ public class NetworkRouteSelector {
 					lst.add(s);
 				}
 			}
-			queue.add(NetworkRouteContext.getTileId(right, bottom));
-			queue.add(NetworkRouteContext.getTileId(right, top));
-			queue.add(NetworkRouteContext.getTileId(right, top - 1));
-			queue.add(NetworkRouteContext.getTileId(left - 1, bottom));
-			queue.add(NetworkRouteContext.getTileId(left - 1, top));
-			queue.add(NetworkRouteContext.getTileId(left - 1, top - 1));
-			queue.add(NetworkRouteContext.getTileId(left, bottom));
-			// queue.add(NetworkRouteContext.getTileId(left, top)); // same
-			queue.add(NetworkRouteContext.getTileId(left, top - 1));
+			addEnclosedTiles(queue, tileID);
 		}
 	}
-	
-	
+
+	private void addEnclosedTiles(TLongArrayList queue, long tile) {
+		int x = NetworkRouteContext.getXFromTileId(tile);
+		int y = NetworkRouteContext.getYFromTileId(tile);
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dy = -1; dy <= 1; dy++) {
+				if (!(dy == 0 && dx == 0)) {
+					queue.add(NetworkRouteContext.getTileId(x + dx, y + dy, 0));
+				}
+			}
+		}
+	}
+
 	private void growAlgorithm(NetworkRouteSegment segment, Map<RouteKey, GPXFile> res) throws IOException {
 		List<NetworkRouteSegment> lst = new ArrayList<>();
 		TLongHashSet visitedIds = new TLongHashSet();
@@ -778,6 +729,14 @@ public class NetworkRouteSelector {
 				}
 			}
 			return "";
+		}
+
+		public String getRouteName() {
+			String name = getValue("name");
+			if (name.isEmpty()) {
+				name = getValue("ref");
+			}
+			return name;
 		}
 
 		@Override

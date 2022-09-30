@@ -402,7 +402,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void downloadInProgress() {
 		IndexItem indexItem = downloadThread.getCurrentDownloadingItem();
 		if (indexItem != null && !indexItem.isDownloaded()) {
-			int progress = downloadThread.getCurrentDownloadingItemProgress();
+			int progress = (int) downloadThread.getCurrentDownloadProgress();
 			double mb = indexItem.getArchiveSizeMB();
 			String v;
 			if (progress != -1) {

@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -19,7 +25,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SelectIndexesHelper;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -40,20 +46,14 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.List;
 
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
-
 public class ContourLinesMenu {
 
 	private static final Log LOG = PlatformUtil.getLog(ContourLinesMenu.class);
 	private static final String TAG = "ContourLinesMenu";
 
 	public static ContextMenuAdapter createListAdapter(MapActivity mapActivity) {
-		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		createLayersItems(adapter, mapActivity);
 		return adapter;
@@ -63,8 +63,8 @@ public class ContourLinesMenu {
 	                                      MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		boolean srtmEnabled = OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app);
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		boolean srtmEnabled = PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app);
 
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		RenderingRuleProperty colorSchemeProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_SCHEME_ATTR);
@@ -299,7 +299,7 @@ public class ContourLinesMenu {
 
 		if (srtmDownloadItem.isCurrentlyDownloading(downloadThread)) {
 			item.setLoading(true)
-					.setProgress(downloadThread.getCurrentDownloadingItemProgress())
+					.setProgress((int) downloadThread.getCurrentDownloadProgress())
 					.setSecondaryIcon(R.drawable.ic_action_remove_dark);
 		} else {
 			item.setSecondaryIcon(R.drawable.ic_action_import);

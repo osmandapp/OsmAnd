@@ -132,6 +132,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			//OpenGL
@@ -296,7 +297,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= 3) {
 			TargetPointsHelper tg = getApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();
-			int r = getDefaultRadiusPoi(tileBox);
+			int r = tileBox.getDefaultRadiusPoi();
 			for (int i = 0; i < intermediatePoints.size(); i++) {
 				TargetPoint tp = intermediatePoints.get(i);
 				LatLon latLon = tp.point;

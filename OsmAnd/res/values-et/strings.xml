@@ -829,7 +829,6 @@
     <string name="shared_string_file_is_saved">%s on salvestatud</string>
     <string name="shared_string_open_track">Ava rada</string>
     <string name="shared_string_track_is_saved">Rada %s on salvestatud</string>
-    <string name="gpx_join_gaps">Ühenda lüngad</string>
     <string name="app_mode_camper">Laagriauto</string>
     <string name="app_mode_campervan">Laagribuss (RV)</string>
     <string name="rendering_attr_showLez_description">Kuva kaardil madalate heitmetega alad. Ei mõjuta teekonda.</string>
@@ -1506,7 +1505,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vali olemasolev…</string>
     <string name="maps_define_edit">Määratle/Muuda…</string>
-    <string name="map_widget_fps_info">FPS silumisteave</string>
     <string name="driving_region">Sõidupiirkond</string>
     <string name="driving_region_japan">Jaapan</string>
     <string name="driving_region_us">Ameerika Ühendriigid</string>
@@ -3107,7 +3105,6 @@
     <string name="quick_action_add_category">Lisa kategooria</string>
     <string name="quick_action_add_create_items">Loo kirjeid</string>
     <string name="quick_action_add_configure_map">Seadista kaart</string>
-    <string name="quick_action_add_navigation">Navigeerimine</string>
     <string name="quick_action_bug_message">Teade</string>
     <string name="quick_action_poi_list">HP nimekiri</string>
     <string name="quick_action_map_style_action">Lisa kaardi stiil</string>
@@ -3804,7 +3801,6 @@
     <string name="plan_route_add_new_segment">Lisa uus lõik</string>
     <string name="plan_route_split_after">Tükelda pärast</string>
     <string name="plan_route_split_before">Tükelda enne</string>
-    <string name="plan_route_join_segments">Liida lõigud</string>
     <string name="profile_type_user_string">Kasutajaprofiil</string>
     <string name="profile_type_osmand_string">OsmAnd profiil</string>
     <string name="use_system_screen_timeout_promo">Vaikimisi keelatud: kui esiplaanil töötab OsmAnd, ei aegu ekraan läbi.

@@ -3,7 +3,8 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
@@ -37,13 +38,13 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
@@ -59,7 +60,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapWidgetRegistry {
 
@@ -79,7 +79,7 @@ public class MapWidgetRegistry {
 
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
-	private final List<WidgetsRegistryListener> listeners = new CopyOnWriteArrayList<>();
+	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
@@ -176,11 +176,11 @@ public class MapWidgetRegistry {
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners.add(listener);
+		listeners = Algorithms.addToList(listeners, listener);
 	}
 
 	public void removeWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
@@ -338,7 +338,7 @@ public class MapWidgetRegistry {
 				continue;
 			}
 
-			if (widget instanceof CoordinatesWidget) {
+			if (widget instanceof CoordinatesBaseWidget) {
 				return R.color.status_bar_main_dark;
 			} else if (widget instanceof StreetNameWidget) {
 				return night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
@@ -376,7 +376,7 @@ public class MapWidgetRegistry {
 		createLeftWidgets(widgetsFactory, widgetInfos, appMode);
 		createRightWidgets(widgetsFactory, widgetInfos, appMode);
 
-		OsmandPlugin.createMapWidgets(mapActivity, widgetInfos, appMode);
+		PluginsHelper.createMapWidgets(mapActivity, widgetInfos, appMode);
 		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos, appMode);
 		createCustomWidgets(widgetsFactory, appMode, widgetInfos);
 
@@ -384,7 +384,8 @@ public class MapWidgetRegistry {
 	}
 
 	private void createTopWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, COORDINATES, appMode));
+		infos.add(createWidgetInfo(factory, COORDINATES_CURRENT_LOCATION, appMode));
+		infos.add(createWidgetInfo(factory, COORDINATES_MAP_CENTER, appMode));
 		infos.add(createWidgetInfo(factory, STREET_NAME, appMode));
 		infos.add(createWidgetInfo(factory, LANES, appMode));
 		infos.add(createWidgetInfo(factory, MARKERS_TOP_BAR, appMode));

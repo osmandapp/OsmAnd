@@ -299,9 +299,10 @@ public class ApplicationMode {
 	}
 
 	public void setDerivedProfile(String derivedProfile) {
-		if (!Algorithms.isEmpty(derivedProfile)) {
-			app.getSettings().DERIVED_PROFILE.setModeValue(this, derivedProfile);
+		if (Algorithms.isEmpty(derivedProfile)) {
+			derivedProfile = "default";
 		}
+		app.getSettings().DERIVED_PROFILE.setModeValue(this, derivedProfile);
 	}
 
 	public String getDerivedProfile() {

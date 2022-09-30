@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> {
 	public MapillaryAutoCompleteAdapter(@NonNull Context context, @LayoutRes int resource) {
 		super(context, resource);
 		this.app = (OsmandApplication) context.getApplicationContext();
-		this.plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		this.plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 
 		wrongUserName = app.getString(R.string.wrong_user_name);
 		noInternetConnection = app.getString(R.string.no_inet_connection);

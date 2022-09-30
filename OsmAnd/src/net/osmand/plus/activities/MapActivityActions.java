@@ -1,17 +1,12 @@
 package net.osmand.plus.activities;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,7 +20,6 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -34,11 +28,9 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -51,7 +43,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -63,17 +55,13 @@ import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.profiles.data.RoutingProfilesHolder;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
@@ -90,12 +78,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -281,7 +266,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_search_dark)
 				.setOrder(SEARCH_NEAR_ITEM_ORDER));
 
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
+		PluginsHelper.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 
 		ItemClickListener listener = (callback, view, item, isChecked) -> {
 			int resId = item.getTitleId();
@@ -310,7 +295,7 @@ public class MapActivityActions extends MapActions {
 				&& gpxHelper.getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(editGpxItem);
 		} else if (!gpxHelper.getSelectedGPXFiles().isEmpty()
-				|| (OsmandPlugin.isActive(OsmandMonitoringPlugin.class))) {
+				|| (PluginsHelper.isActive(OsmandMonitoringPlugin.class))) {
 			adapter.addItem(addGpxItem);
 		}
 
@@ -520,11 +505,11 @@ public class MapActivityActions extends MapActions {
 				R.drawable.ic_action_folder_favorites, DRAWER_FAVORITES_ID);
 		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks,
 				R.drawable.ic_action_folder_tracks, DRAWER_TRACKS_ID);
-		if (OsmandPlugin.isActive(AudioVideoNotesPlugin.class)) {
+		if (PluginsHelper.isActive(AudioVideoNotesPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes,
 					R.drawable.ic_action_folder_av_notes, DRAWER_AV_NOTES_ID);
 		}
-		if (OsmandPlugin.isActive(OsmEditingPlugin.class)) {
+		if (PluginsHelper.isActive(OsmEditingPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits,
 					R.drawable.ic_action_folder_osm_notes, DRAWER_OSM_EDITS_ID);
 		}
@@ -551,7 +536,7 @@ public class MapActivityActions extends MapActions {
 					return true;
 				}));
 
-		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_TRIP_RECORDING_ID)
 					.setTitleId(R.string.map_widget_monitoring, mapActivity)
@@ -686,7 +671,7 @@ public class MapActivityActions extends MapActions {
 				}));
 
 		//////////// Others
-		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		PluginsHelper.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
 		optionsMenuHelper.addItem(createOsmAndVersionDrawerItem());
 

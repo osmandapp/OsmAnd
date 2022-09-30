@@ -1623,4 +1623,8 @@
     <string name="poi_attraction_big_wheel">Apžvalgos ratas</string>
     <string name="poi_alpine_hut">Alpių namelis</string>
     <string name="poi_hunting_lodge">Medžioklės namelis</string>
+    <string name="poi_coworking_space">Bendradarbiavimo erdvė</string>
+    <string name="poi_departures_board">Išvykimų lenta</string>
+    <string name="poi_access_hgv">Prieiga sunkvežimiui</string>
+    <string name="poi_railway_yard">Krovinių stotis</string>
 </resources>

@@ -29,6 +29,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -293,24 +294,24 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.mapActivity = null;
 	}
 
 	public static boolean openMapillary(FragmentActivity activity, String imageKey) {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
+		if (PluginsHelper.isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
 			Uri uri = imageKey != null
 					? Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey))
 					: Uri.parse("mapillary://mapillary/capture");

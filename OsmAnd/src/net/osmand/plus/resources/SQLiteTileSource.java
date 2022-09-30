@@ -475,29 +475,27 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null) {
 			return null;
 		}
+		byte[] blob = null;
 		long ts = System.currentTimeMillis();
 		try {
 			if (zoom <= maxZoom) {
 				// return the normal tile if exists
 				String[] params = getTileDbParams(x, y, zoom);
 				boolean queryTime = timeHolder != null && timeHolder.length > 0 && timeSupported;
-				SQLiteCursor cursor = db.rawQuery("SELECT image "
-								+ (queryTime ? ", time" : "")
-								+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
-				byte[] blob = null;
+				SQLiteCursor cursor = db.rawQuery("SELECT image " + (queryTime ? ", time" : "")
+						+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
 				if (cursor.moveToFirst()) {
 					blob = cursor.getBlob(0);
-					if(queryTime) {
+					if (queryTime) {
 						timeHolder[0] = cursor.getLong(1);
 					}
 				}
 				cursor.close();
-				return blob;
 			}
-			return null;
+			return blob;
 		} finally {
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms ");
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts) + " ms " + " loaded " + (blob != null));
 			}
 		}
 	}

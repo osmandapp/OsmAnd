@@ -721,7 +721,6 @@
     <string name="app_mode_truck">Lori</string>
     <string name="auto_zoom_none">Dim chwyddo awtomatig</string>
     <string name="map_magnifier">Chwyddwr y map</string>
-    <string name="map_widget_fps_info">Gwybodaeth dadfygio FPS</string>
     <string name="driving_region_descr">Dewisa gyfandir gyrru: DU, Ewrop, UDA, Asia, ac eraill.</string>
     <string name="driving_region">Rhanbarth gyrru</string>
     <string name="driving_region_europe_asia">Ewrop, Asia, De America, a thebyg</string>
@@ -1479,7 +1478,6 @@
     <string name="shared_string_folders">Ffolderi</string>
     <string name="edit_track">Golygu trac</string>
     <string name="upload_to_openstreetmap">Uchwlwytho i OpenStreetMap</string>
-    <string name="plan_route_join_segments">Cysylltu segmentau</string>
     <string name="transport_nearby_routes">O fewn</string>
     <string name="shared_string_upload">Uwchlwytho</string>
     <string name="osmand_parking_time_left">yn weddill</string>
@@ -1508,7 +1506,6 @@
     <string name="yard">llth</string>
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="quick_action_add_navigation">Llywio</string>
     <string name="selected_waypoints_descr">Caiff y cyfeirbwyntiau dan sylw eu hychwanegu i\'r trac \"%1$s\"</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>
@@ -2575,7 +2572,6 @@
     <string name="coordinates_widget_desc">Mae\'n dangos cyfesurynnau daearyddol y geo-leoliad presennol.</string>
     <string name="av_def_action_choose">Ar gais</string>
     <string name="audio_video_notes_desc">Mae ategion yn rhoi mynediad cyflym at ddechrau/stopio recordio (llun, fideo neu sain).</string>
-    <string name="map_markers_desc">Ar yr ategyn bar uchaf gallwch weld pellter a chyfeiriad y nodwr o\'r lleoliad presennol. Mae\'n bosib ei ffurfweddu i weld un neu ddau farcwr yn yr ategyn.</string>
     <string name="calculate_altitude">Cyfrifo\'r uchder</string>
     <string name="no_altitude_data">Dim data uchder</string>
     <string name="map_widget_current_speed">Cyflymder cyfredol</string>
@@ -3333,7 +3329,6 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Lliw y llwybrau yn ôl eu lliw lleol unigol (os yw\'n bresennol ar OpenStreetMap) a symbol tarian heicio.</string>
     <string name="activity_type_offroad_name">Oddi ar y ffordd</string>
     <string name="delete_online_routing_engine">Tynnu\'r injan llwybro ar-lein hwn\?</string>
-    <string name="gpx_join_gaps">Uno\'r bylchau</string>
     <string name="rendering_attr_showLez_description">Dangos Parthau Allyriadau Isel ar y map. Nid yw\'n effeithio ar y llwybro.</string>
     <string name="rendering_attr_winter_road_name">Ffordd y gaeaf</string>
     <string name="settings_derived_routing_mode_string">Modd defnyddiwr, yn deillio o: %s</string>

@@ -34,11 +34,11 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(mapView.getMinAllowedElevationAngle());
+			animateDraggingMapThread.startTilting(45);
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
-			animateDraggingMapThread.animateElevationAngleChange(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
+			animateDraggingMapThread.startTilting(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 			mapView.refreshMap();
 		};
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
@@ -81,7 +81,7 @@ public class MyLocationButton extends MapButton {
 		if (!hasLocation) {
 			setNoLocationState();
 		} else if (linkedToLocation) {
-			if (!MultiTouchSupport.isTiltSupported(app)) {
+			if (!MultiTouchSupport.isTiltSupportEnabled(app)) {
 				setMapLinkedToLocationState();
 			} else if (elevationAngle == OsmandMapTileView.DEFAULT_ELEVATION_ANGLE) {
 				setTiltMapState();

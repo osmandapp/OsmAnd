@@ -490,7 +490,6 @@
     <string name="lanes_widgets_desc">Vidžetot Lanes go prikažuva momentalniot raspored na kolovoznite lenti i gi istaknuva lentite za vozenje so aktivna navigacija.</string>
     <string name="street_name_widget_desc">Vidžetot za ime na ulica go prikažuva tekovnoto ime na ulica so prava strelka za lokacija ili ime na slednata ulica so manevar što treba da se završi.</string>
     <string name="coordinates_widget_desc">Gi prikažuva geografskite koordinati na tekovnata geo-lokacija.</string>
-    <string name="map_markers_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="route_maneuvers_desc">Navigaciskite vidžeti se ovozmoženi za vreme na navigacijata za prikažuvanje informacii kako rastojanie, vreme na pristignuvanje ili levo, slednite krivini, ležište, tekovno ime na ulica, informacii za lenti, maksimalna brzina, predupreduvanja za približuvanje, POI, točki na dviženje.</string>
     <string name="calculating_altitude">Presmetuvanje na nadmorskata visočina</string>
     <string name="calculate_online">Presmetajte na onlajn</string>
@@ -721,7 +720,6 @@
     <string name="shared_string_vehicle">Vozilo</string>
     <string name="shared_string_subtype">Podtip</string>
     <string name="routing_attr_prefer_hiking_routes_description">Pretpočitaj planinski ruti</string>
-    <string name="plan_route_join_segments">Prikluči se na segmentite</string>
     <string name="app_mode_light_aircraft">Mali avioni</string>
     <string name="select_groups_for_import">Izberete grupi što ḱe se uvezat.</string>
     <string name="export_not_enough_space">Nema dovolen prostor</string>
@@ -1564,7 +1562,6 @@
     <string name="price_free">Besplatno</string>
     <string name="get_discount_first_part">%1$s za prvite %2$s</string>
     <string name="price_and_discount">%1$s • Začuvaj %2$s</string>
-    <string name="gpx_join_gaps">Priklučete gi prazninite</string>
     <string name="app_mode_camper">Kamper</string>
     <string name="app_mode_campervan">Kamperso kombi (RV)</string>
     <string name="app_mode_wagon">Vagon</string>
@@ -3157,7 +3154,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izberete postoečki…</string>
     <string name="maps_define_edit">Definirajte/Uredete…</string>
-    <string name="map_widget_fps_info">Informacii za otstranuvanje greški na FPS</string>
     <string name="driving_region">Vozen region</string>
     <string name="driving_region_japan">Japonija</string>
     <string name="speak_street_names">Iminja na ulici (TTS)</string>
@@ -4651,7 +4647,6 @@
     <string name="quick_action_bug_message">Poraka</string>
     <string name="quick_action_category_descr">Kategorija za začuvuvanje na Omileni vo:</string>
     <string name="quick_action_add_configure_map">Konfigurirajte ja mapata</string>
-    <string name="quick_action_add_navigation">Navigacija</string>
     <string name="quick_action_fav_name_descr">Ostavete prazno za da ja koristite adresata ili imeto na mestoto.</string>
     <string name="quick_action_bug_descr">Ovaa poraka e vklučena vo poleto za komentari.</string>
     <string name="quick_action_gpx_category_descr">Izberete izborna kategorija.</string>

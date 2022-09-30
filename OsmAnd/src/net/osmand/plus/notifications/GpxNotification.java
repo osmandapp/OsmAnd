@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat.Builder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -41,7 +41,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
 				}
@@ -52,7 +52,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
 					plugin.updateWidgets();
@@ -64,7 +64,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
 					plugin.updateWidgets();
@@ -93,7 +93,7 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public boolean isEnabled() {
-		return OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
+		return PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 	}
 
 	@Override

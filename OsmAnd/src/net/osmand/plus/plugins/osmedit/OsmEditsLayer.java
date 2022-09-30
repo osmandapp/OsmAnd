@@ -105,6 +105,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		MapRendererView mapRenderer = getMapView().getMapRenderer();
 		if (mapRenderer != null) {
 			if (!poiTypesInitialized) {

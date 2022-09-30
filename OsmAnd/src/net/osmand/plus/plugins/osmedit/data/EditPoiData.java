@@ -33,7 +33,7 @@ public class EditPoiData {
 	private PoiCategory category;
 	private PoiType currentPoiType;
 
-	private final Set<String> changedTags = new HashSet<>();
+	private final Set<String> changedTags = Collections.synchronizedSet(new HashSet<>());
 	
 	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);

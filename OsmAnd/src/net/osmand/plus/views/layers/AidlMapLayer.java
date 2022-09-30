@@ -177,6 +177,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
 		boolean carViewChanged = this.carView != carView;
 		this.carView = carView;

@@ -11,7 +11,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -40,7 +40,7 @@ public class SortByMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void selectSortByMode(NotesSortByMode mode) {
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null && plugin.NOTES_SORT_BY_MODE.get() != mode) {
 			plugin.NOTES_SORT_BY_MODE.set(mode);
 

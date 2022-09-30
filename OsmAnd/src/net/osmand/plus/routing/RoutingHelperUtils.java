@@ -69,7 +69,7 @@ public class RoutingHelperUtils {
 		return rect.left == 0 && rect.right == 0 ? null : rect;
 	}
 
-	static Location getProject(Location loc, Location from, Location to) {
+	public static Location getProject(Location loc, Location from, Location to) {
 		LatLon project = MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());

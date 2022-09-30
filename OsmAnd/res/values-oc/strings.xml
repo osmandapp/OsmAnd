@@ -859,7 +859,6 @@
     <string name="one_tap_active_descr">Quichatz sus un marcador de la mapa per lo plaçar endavant dei marcadors actius sensa dobrir lo menut contextuau.</string>
     <string name="go_to_map">Mostrar la mapa</string>
     <string name="shared_string_online_maps">Mapas en linha</string>
-    <string name="quick_action_add_navigation">Navigacion</string>
     <string name="shortcut_start_recording">Començar l\'enregistrament</string>
     <string name="shared_string_relation">Relacion</string>
     <string name="monitoring_prefs_descr">Navigacion, precision d\'enregistrament</string>
@@ -977,7 +976,6 @@
     <string name="plan_route_add_new_segment">Ajustar una estirada</string>
     <string name="plan_route_split_after">Separar après</string>
     <string name="plan_route_split_before">Separar avans</string>
-    <string name="plan_route_join_segments">Jónher leis estiradas</string>
     <string name="marker_save_as_track">Sauvagardar per fichier de traça</string>
     <string name="plan_route_trim_after">Retalhar après</string>
     <string name="plan_route_trim_before">Retalhar avans</string>

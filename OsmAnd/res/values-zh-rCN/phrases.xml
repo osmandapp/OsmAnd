@@ -1203,7 +1203,7 @@
     <string name="poi_craft_optician">验光配镜师</string>
     <string name="poi_craft_key_cutter">钥匙装配</string>
     <string name="poi_aeroway_gate">登机口</string>
-    <string name="poi_halt">铁路站;火车站</string>
+    <string name="poi_halt">火车站;火车站;火车站;火车站;火车站;车站</string>
     <string name="poi_fuel_1_25">1:25 燃料</string>
     <string name="poi_fuel_octane_91">辛烷值 91</string>
     <string name="poi_fuel_octane_80">辛烷值 80</string>
@@ -1463,7 +1463,7 @@
     <string name="poi_map_type_street">地图类型：街道</string>
     <string name="poi_amperage">安培数</string>
     <string name="poi_parking_fee">停车费</string>
-    <string name="poi_parking_fee_no">停车费：没有</string>
+    <string name="poi_parking_fee_no">不要</string>
     <string name="poi_training_art">培训：艺术</string>
     <string name="poi_training_dance">培训：舞蹈</string>
     <string name="poi_memorial_obelisk">方尖碑</string>
@@ -1750,7 +1750,7 @@
     <string name="poi_access_permit">需要许可</string>
     <string name="poi_location_indoor">位置： 室内</string>
     <string name="poi_depot">仓库</string>
-    <string name="poi_parking_fee_yes">停车费：有</string>
+    <string name="poi_parking_fee_yes">需要</string>
     <string name="poi_hazard_additional_minefield">危害：雷区</string>
     <string name="poi_speech_therapist">语言治疗师</string>
     <string name="poi_healthcare_rehabilitation">康复</string>

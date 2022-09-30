@@ -163,7 +163,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			BottomSheetItemWithDescription mapItem = (BottomSheetItemWithDescription) item;
 			ProgressBar progressBar = mapItem.getView().findViewById(R.id.ProgressBar);
 			if (downloadIndexItem.equals(indexItem)) {
-				progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+				progressBar.setProgress((int) downloadThread.getCurrentDownloadProgress());
 				progressBar.setIndeterminate(false);
 			} else if (indexItem.isDownloaded()) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
@@ -347,7 +347,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 		if (!isTTS) {
 			if (indexItem == downloadThread.getCurrentDownloadingItem()) {
-				progressBar.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+				progressBar.setProgress((int) downloadThread.getCurrentDownloadProgress());
 				progressBar.setIndeterminate(false);
 				secondaryIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_remove_dark));
 			} else {

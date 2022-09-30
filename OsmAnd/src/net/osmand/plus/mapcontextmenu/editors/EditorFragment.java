@@ -7,7 +7,6 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -66,6 +64,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	protected View view;
 	protected EditText nameEdit;
 	protected TextInputLayout nameCaption;
+	private OnGlobalLayoutListener onGlobalLayoutListener;
 
 	private int color;
 	private String iconName = DEFAULT_ICON_NAME;
@@ -159,7 +158,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		createShapeSelector();
 		updateContent();
 
-		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		return view;
 	}
 
@@ -167,12 +165,14 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	public void onResume() {
 		super.onResume();
 		requireMapActivity().disableDrawer();
+		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		requireMapActivity().enableDrawer();
+		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
 	private void setupToolbar() {
@@ -242,17 +242,18 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	private OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return () -> {
-			Rect visibleDisplayFrame = new Rect();
-			view.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-			int layoutHeight = visibleDisplayFrame.bottom;
-			if (layoutHeight != layoutHeightPrevious) {
-				FrameLayout.LayoutParams rootViewLayout = (FrameLayout.LayoutParams) view.getLayoutParams();
-				rootViewLayout.height = layoutHeight;
-				view.requestLayout();
-				layoutHeightPrevious = layoutHeight;
-			}
-		};
+		if (onGlobalLayoutListener == null) {
+			onGlobalLayoutListener = () -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					int layoutHeight = AndroidUtils.resizeViewForKeyboard(activity, view, layoutHeightPrevious);
+					if (layoutHeight != layoutHeightPrevious) {
+						layoutHeightPrevious = layoutHeight;
+					}
+				}
+			};
+		}
+		return onGlobalLayoutListener;
 	}
 
 	private void createIconSelector() {

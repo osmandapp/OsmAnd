@@ -961,7 +961,6 @@
     <string name="speak_title">Läs upp …</string>
     <string name="speak_descr">Ställ in uppläsning av gatunamn, trafikvarningar (t.ex. tvingande stopp, fartbulor), varningar för fartkameror och hastighetsbegränsningar.</string>
     <string name="speak_street_names">Gatunamn (TTS)</string>
-    <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
     <string name="driving_region_descr">Välj körområde: USA, Europa, UK, Asien och andra.</string>
     <string name="driving_region">Område</string>
     <string name="driving_region_japan">Japan</string>
@@ -2046,7 +2045,6 @@
     <string name="quick_action_add_category">Lägg till en kategori</string>
     <string name="quick_action_add_create_items">Skapa poster</string>
     <string name="quick_action_add_configure_map">Konfigurera kartan</string>
-    <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_bug_message">Meddelande</string>
     <string name="quick_action_btn_tutorial_title">Ändra knapplacering</string>
     <string name="quick_action_map_source_switch">Kartkällan ändrad till \"%s\".</string>
@@ -2894,7 +2892,6 @@
     <string name="shared_string_file_is_saved">%s är sparat</string>
     <string name="shared_string_open_track">Öppna spår</string>
     <string name="shared_string_track_is_saved">Spår %s är sparat</string>
-    <string name="gpx_join_gaps">Ta bort mellanrum</string>
     <string name="temporary_conditional_routing">Ta tillfälliga begränsningar i beaktande</string>
     <string name="get_discount_title">Få %1$d %2$s på %3$s av.</string>
     <string name="get_discount_first_part">%1$s för de första %2$s</string>
@@ -3015,7 +3012,6 @@
 \nOpenPlaceReviews - Foton av sevärdheter;
 \nMapillary - Bilder på gatunivå;
 \nWeb/Wikimedia - Foton av sevärdheter enligt OpenStreetMap-data.</string>
-    <string name="plan_route_join_segments">Sammanslå segment</string>
     <string name="plan_route_split_before">Dela innan</string>
     <string name="plan_route_split_after">Dela efter</string>
     <string name="plan_route_add_new_segment">Lägg till ett nytt segment</string>

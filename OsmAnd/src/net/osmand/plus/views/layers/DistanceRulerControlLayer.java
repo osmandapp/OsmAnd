@@ -17,12 +17,14 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.DistanceByTapTextSize;
+import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
@@ -34,8 +36,8 @@ import java.util.List;
 public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private static final int VERTICAL_OFFSET = 15;
-	private static final long DRAW_TIME = 2000;
-	private static final long DELAY_BEFORE_DRAW = 500;
+	private static final long DRAW_TIME = 4000;
+	private static final long DELAY_BEFORE_DRAW = 200;
 	private static final int DISTANCE_TEXT_SIZE = 16;
 
 	private OsmandApplication app;
@@ -66,6 +68,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private Handler handler;
 
+	private StateChangedListener<DistanceByTapTextSize> textSizeListener;
+
 	public DistanceRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
@@ -87,12 +91,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		bitmapPaint.setFilterBitmap(true);
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
-
-		float lineTextSize = DISTANCE_TEXT_SIZE * app.getResources().getDisplayMetrics().density;
-
 		lineFontAttrs = new RenderingLineAttributes("rulerLineFont");
-		lineFontAttrs.paint.setTextSize(lineTextSize);
-		lineFontAttrs.paint2.setTextSize(lineTextSize);
 
 		handler = new Handler() {
 			@Override
@@ -100,7 +99,8 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				view.refreshMap();
 			}
 		};
-
+		addTextSizeListener();
+		updateTextSize();
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawTwoFingersDistance(Canvas canvas, RotatedTileBox tb, LatLon firstTouch,
-										LatLon secondTouch, boolean nightMode) {
+	                                    LatLon secondTouch, boolean nightMode) {
 		PointF firstScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, firstTouch.getLatitude(), firstTouch.getLongitude());
 		PointF secondScreenPoint = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, secondTouch.getLatitude(), secondTouch.getLongitude());
 		float x1 = firstScreenPoint.x;
@@ -271,5 +271,18 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	private void addTextSizeListener() {
+		textSizeListener = change -> updateTextSize();
+		app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.addListener(textSizeListener);
+	}
+
+	private void updateTextSize() {
+		DistanceByTapTextSize textSize = app.getSettings().DISTANCE_BY_TAP_TEXT_SIZE.get();
+		float lineTextSize = app.getResources().getDimension(textSize.getTextSizeId());
+
+		lineFontAttrs.paint.setTextSize(lineTextSize);
+		lineFontAttrs.paint2.setTextSize(lineTextSize);
 	}
 }

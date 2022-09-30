@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +28,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -43,10 +48,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -336,8 +337,8 @@ public class SRTMPlugin extends OsmandPlugin {
 								CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
-								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+								SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+								PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 
 								item.setDescription(app.getString(R.string.display_zoom_level,
 										getPrefDescription(app, contourLinesProp, pref)));
@@ -353,9 +354,9 @@ public class SRTMPlugin extends OsmandPlugin {
 						@Override
 						public void run() {
 							boolean selected = TERRAIN.get();
-							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+							SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 							if (selected) {
-								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+								PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 							}
 							item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							item.setSelected(selected);
@@ -525,10 +526,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		b.setAdapter(dialogAdapter, null);
 		dialogAdapter.setDialog(b.show());
-	}
-
-	@Override
-	public void disable(OsmandApplication app) {
 	}
 
 	private static boolean isNightMode(Activity activity, OsmandApplication app) {

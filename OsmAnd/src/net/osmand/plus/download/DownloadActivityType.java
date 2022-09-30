@@ -1,16 +1,21 @@
 package net.osmand.plus.download;
 
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -25,8 +30,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
 public class DownloadActivityType {
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
@@ -44,6 +47,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_srtm_maps, R.drawable.ic_plugin_srtm, "srtm_map", 40);
 	public static final DownloadActivityType DEPTH_CONTOUR_FILE =
 			new DownloadActivityType(R.string.download_regular_maps, "depth", 45);
+	public static final DownloadActivityType DEPTH_MAP_FILE =
+			new DownloadActivityType(R.string.nautical_depth, "depthmap", 46);
 	public static final DownloadActivityType HILLSHADE_FILE =
 			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType SLOPE_FILE =
@@ -60,6 +65,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
 	public static final DownloadActivityType SQLITE_FILE =
 			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
+	public static final DownloadActivityType HEIGHTMAP_FILE =
+			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
 
 	private final int stringResource;
 	private final int iconResource;
@@ -150,12 +157,16 @@ public class DownloadActivityType {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (SLOPE_FILE == this) {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
+		} else if (HEIGHTMAP_FILE == this) {
+			return fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT);
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (GPX_FILE == this) {
 			return fileName.endsWith(IndexConstants.GPX_FILE_EXT);
 		} else if (SQLITE_FILE == this) {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
+		} else if (DEPTH_MAP_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		}
 		return false;
 	}
@@ -184,18 +195,23 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (SLOPE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		} else if (HEIGHTMAP_FILE == this) {
+			return ctx.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
 		} else if (DEPTH_CONTOUR_FILE == this) {
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (GPX_FILE == this) {
 			return ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		} else if (SQLITE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		} else if (DEPTH_MAP_FILE == this) {
+			return ctx.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 		}
 		throw new UnsupportedOperationException();
 	}
 
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return HILLSHADE_FILE != this && SLOPE_FILE != this && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
+		return HILLSHADE_FILE != this && SLOPE_FILE != this && HEIGHTMAP_FILE != this
+				&& SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -241,10 +257,14 @@ public class DownloadActivityType {
 			return IndexConstants.SQLITE_EXT;
 		} else if (SQLITE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
+		} else if (HEIGHTMAP_FILE == this) {
+			return IndexConstants.HEIGHTMAP_SQLITE_EXT;
 		} else if (DEPTH_CONTOUR_FILE == this) {
-			return BINARY_MAP_INDEX_EXT;
+			return IndexConstants.BINARY_MAP_INDEX_EXT;
 		} else if (GPX_FILE == this) {
 			return IndexConstants.GPX_FILE_EXT;
+		} else if (DEPTH_MAP_FILE == this) {
+			return IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -272,6 +292,10 @@ public class DownloadActivityType {
 			return "&inapp=depth";
 		} else if (this == GPX_FILE) {
 			return "&gpx=yes";
+		} else if (this == HEIGHTMAP_FILE) {
+			return "&heightmap=yes";
+		} else if (this == DEPTH_MAP_FILE) {
+			return "&depth=yes";
 		}
 		return "";
 	}
@@ -337,11 +361,13 @@ public class DownloadActivityType {
 			return ctx.getString(R.string.fonts_header);
 		} else if (this == GPX_FILE) {
 			return ctx.getString(R.string.shared_string_gpx_tracks);
+		} else if (this == DEPTH_MAP_FILE) {
+			return ctx.getString(R.string.download_depth_countours);
 		}
 		return "";
 	}
 
-	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includeParent) {
+	public String getVisibleName(DownloadItem downloadItem, Context ctx, OsmandRegions osmandRegions, boolean includeParent, boolean useShortName) {
 		if (this == VOICE_FILE) {
 			if (isVoiceTTS(downloadItem) || isVoiceRec(downloadItem)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(downloadItem));
@@ -362,6 +388,23 @@ public class DownloadActivityType {
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
 		String lc = basename.toLowerCase();
+		DownloadResourceGroup relatedGroup = downloadItem.getRelatedGroup();
+		if (relatedGroup != null) {
+			DownloadResourceGroupType type = relatedGroup.getType();
+			if (type == NAUTICAL_POINTS_HEADER || type == NAUTICAL_DEPTH_HEADER) {
+				String contoursPrefix = "_contours";
+				String pointsPrefix = "_points";
+				String prefix = basename.contains(pointsPrefix) ? pointsPrefix : contoursPrefix;
+				int endInd = basename.indexOf(prefix);
+				String downloadName = basename.substring(0, endInd).replace('_', ' ');
+				String name = Algorithms.capitalizeFirstLetter(downloadName);
+				if (useShortName) {
+					return name;
+				} else if (type == NAUTICAL_DEPTH_HEADER) {
+					return ctx.getString(R.string.download_depth_countours) + " " + name;
+				}
+			}
+		}
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
@@ -371,11 +414,6 @@ public class DownloadActivityType {
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includeParent) +
 					" " + ctx.getString(R.string.index_item_nation_addresses);
-		} else if (basename.startsWith("Depth_")) {
-			int extInd = basename.indexOf("osmand_ext");
-			String downloadName = extInd == -1 ? basename.substring(6).replace('_', ' ')
-					: basename.substring(6, extInd).replace('_', ' ');
-			return ctx.getString(R.string.download_depth_countours) + " " + Algorithms.capitalizeFirstLetter(downloadName);
 		}
 
 		return osmandRegions.getLocaleName(basename, includeParent);
@@ -404,6 +442,8 @@ public class DownloadActivityType {
 			return fileName.replace('_', ' ');
 		} else if (this == SLOPE_FILE) {
 			return fileName.replace('_', ' ');
+		} else if (this == HEIGHTMAP_FILE) {
+			return fileName.replace('_', ' ').replace(".heightmap", "");
 		} else if (this == SQLITE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
@@ -434,6 +474,9 @@ public class DownloadActivityType {
 			if (this == ROADS_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}
+			if (this == DEPTH_MAP_FILE) {
+				return baseNameWithoutVersion + IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
+			}
 			baseNameWithoutVersion += IndexConstants.BINARY_MAP_INDEX_EXT;
 			return baseNameWithoutVersion;
 		} else if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
@@ -460,6 +503,11 @@ public class DownloadActivityType {
 		if (this == SLOPE_FILE) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
 					.replace(FileNameTranslationHelper.SLOPE + "_", "");
+		}
+		if (this == HEIGHTMAP_FILE) {
+			String heightmapSuffix = ".heightmap" + IndexConstants.HEIGHTMAP_SQLITE_EXT;
+			return fileName.substring(0, fileName.length() - heightmapSuffix.length())
+					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());

@@ -165,34 +165,26 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				Rect visibleDisplayFrame = new Rect();
-				buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
-				shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-				scrollView = getView().findViewById(R.id.scroll_view);
-				scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-				int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-				if (contentHeightPrevious != contentHeight) {
-					boolean showTopShadow;
-					if (scrollView.getHeight() + shadowHeight > contentHeight) {
-						scrollView.getLayoutParams().height = contentHeight;
-						showTopShadow = false;
-					} else {
-						scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-						showTopShadow = true;
-					}
-					scrollView.requestLayout();
-					int delay = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 300 : 1000;
-					scrollView.postDelayed(new Runnable() {
-						public void run() {
-							scrollView.scrollTo(0, scrollView.getHeight());
-						}
-					}, delay);
-					contentHeightPrevious = contentHeight;
-					drawTopShadow(showTopShadow);
+		return () -> {
+			Rect visibleDisplayFrame = new Rect();
+			buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+			shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
+			scrollView = requireView().findViewById(R.id.scroll_view);
+			scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
+			int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
+			if (contentHeightPrevious != contentHeight) {
+				boolean showTopShadow;
+				if (scrollView.getHeight() + shadowHeight > contentHeight) {
+					scrollView.getLayoutParams().height = contentHeight;
+					showTopShadow = false;
+				} else {
+					scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+					showTopShadow = true;
 				}
+				scrollView.requestLayout();
+				scrollView.postDelayed(() -> scrollView.scrollTo(0, scrollView.getHeight()), 300);
+				contentHeightPrevious = contentHeight;
+				drawTopShadow(showTopShadow);
 			}
 		};
 	}

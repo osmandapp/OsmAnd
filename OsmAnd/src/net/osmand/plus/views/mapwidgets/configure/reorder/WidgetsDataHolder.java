@@ -10,11 +10,11 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,12 +67,14 @@ public class WidgetsDataHolder {
 		}
 	}
 
-	public void copyAppModePrefs(@NonNull OsmandApplication app, @NonNull ApplicationMode modeTo, @NonNull ApplicationMode modeFrom) {
+	public void copyAppModePrefs(@NonNull MapActivity activity, @NonNull ApplicationMode modeTo, @NonNull ApplicationMode modeFrom) {
 		pages.clear();
 		orders.clear();
 
-		OsmandSettings settings = app.getSettings();
-		List<List<String>> widgetsOrder = selectedPanel.getWidgetsOrder(modeFrom, settings);
+		int filter = ENABLED_MODE | AVAILABLE_MODE;
+		OsmandApplication app = activity.getMyApplication();
+		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(activity, modeFrom);
+		List<List<String>> widgetsOrder = helper.getWidgetsPagedOrder(modeFrom, selectedPanel, filter);
 		for (int page = 0; page < widgetsOrder.size(); page++) {
 			List<String> pageOrder = widgetsOrder.get(page);
 			for (int order = 0; order < pageOrder.size(); order++) {

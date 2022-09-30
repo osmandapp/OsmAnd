@@ -253,7 +253,7 @@ public class DownloadOsmandIndexesHelper {
 			String recordedZipName = indexInfo.getFileName() + "_0" + IndexConstants.VOICE_INDEX_EXT_ZIP;
 			String ttsFileName = indexInfo.getFileName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS;
 			File ttsFile = new File(voiceDirPath, indexInfo.getFileName() + "/" + ttsFileName);
-				long installDate = ttsFile.lastModified();
+			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
 					"", 0, 0, DownloadActivityType.VOICE_FILE);
 			localRecordedVoiceIndex.setDownloaded(true);

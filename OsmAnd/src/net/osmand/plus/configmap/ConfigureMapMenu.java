@@ -55,7 +55,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -131,7 +131,7 @@ public class ConfigureMapMenu {
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
-		OsmandPlugin.registerConfigureMapCategory(adapter, mapActivity, customRules);
+		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
@@ -225,7 +225,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
 				.setListener(listener));
 
-		OsmandPlugin.registerLayerContextMenu(adapter, activity, customRules);
+		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -265,7 +265,7 @@ public class ConfigureMapMenu {
 			customRules.remove(property);
 		}
 		ResourceManager manager = app.getResourceManager();
-		if (OsmandPlugin.isDevelopment() &&
+		if (PluginsHelper.isDevelopment() &&
 				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}

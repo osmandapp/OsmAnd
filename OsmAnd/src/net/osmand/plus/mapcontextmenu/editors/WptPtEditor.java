@@ -10,12 +10,13 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WptPtEditor extends PointEditor {
@@ -122,11 +123,7 @@ public class WptPtEditor extends PointEditor {
 		return TAG;
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title) {
-		add(gpxFile, latLon, title, null, null);
-	}
-
-	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable String preselectedIconName, Amenity amenity) {
+	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -135,17 +132,23 @@ public class WptPtEditor extends PointEditor {
 		categoryColor = 0;
 
 		this.gpxFile = gpxFile;
-		SelectedGpxFile selectedGpxFile =
-				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.name = title;
-		if (!Algorithms.isEmpty(preselectedIconName)) {
-			wpt.setIconName(preselectedIconName);
+
+		if (amenity != null) {
+			int preselectedIconId = RenderingIcons.getPreselectedIconId(amenity);
+			String preselectedIconName = RenderingIcons.getBigIconName(preselectedIconId);
+			if (!Algorithms.isEmpty(preselectedIconName)) {
+				wpt.setIconName(preselectedIconName);
+			}
+			wpt.setAmenityOriginName(amenity.toStringEn());
+			AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
+			wpt.getExtensionsToWrite().putAll(extensionsHelper.getAmenityExtensions(amenity));
 		}
-		wpt.setAmenity(amenity);
 
 		showEditorFragment();
 	}

@@ -3278,9 +3278,9 @@
     <string name="poi_socket_cee_red_125a_output">Uttag: CEE röd 125A: utgående</string>
     <string name="poi_socket_cee_red_125a_current">Uttag: CEE röd 125A: ström</string>
     <string name="poi_socket_cee_red_125a">Uttag: CEE röd 125A</string>
-    <string name="poi_socket_cee_red_64a_output">Uttag: CEE röd 64A: utgående</string>
-    <string name="poi_socket_cee_red_64a_current">Uttag: CEE röd 64A: ström</string>
-    <string name="poi_socket_cee_red_64a">Uttag: CEE röd 64A</string>
+    <string name="poi_socket_cee_red_63a_output">Uttag: CEE röd 63A: utgående</string>
+    <string name="poi_socket_cee_red_63a_current">Uttag: CEE röd 63A: ström</string>
+    <string name="poi_socket_cee_red_63a">Uttag: CEE röd 63A</string>
     <string name="poi_socket_cee_red_32a_output">Uttag: CEE röd 32A: utgående</string>
     <string name="poi_socket_cee_red_32a_current">Uttag: CEE röd 32A: ström</string>
     <string name="poi_socket_cee_red_32a">Uttag: CEE röd 32A</string>
@@ -3849,7 +3849,7 @@
     <string name="poi_socket_type1_combo_yes">Typ 1 kombo</string>
     <string name="poi_socket_type1_yes">Typ 1</string>
     <string name="poi_socket_cee_red_125a_yes">CEE röd 125A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE röd 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE röd 63A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE röd 32A</string>
     <string name="poi_socket_cee_red_16a_yes">CEE röd 16A</string>
     <string name="poi_socket_cee_blue_yes">CEE blå</string>

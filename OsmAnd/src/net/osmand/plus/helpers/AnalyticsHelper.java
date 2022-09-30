@@ -145,6 +145,8 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 			try {
 				String types = formatAllowedTypes(allowedTypes);
 				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?" + " AND " + COL_TYPE + " IN " + types, new Object[] {finishDate});
+			} catch (RuntimeException e) {
+				// ignore
 			} finally {
 				db.close();
 			}

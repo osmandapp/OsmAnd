@@ -97,7 +97,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			return;
 		}
 
-		List<FavouritePoint> favouritePoints = new ArrayList<>(app.getFavoritesHelper().getFavouritePoints());
+		List<FavouritePoint> favouritePoints = app.getFavoritesHelper().getFavouritePoints();
 		if (Algorithms.isEmpty(favouritePoints)) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;

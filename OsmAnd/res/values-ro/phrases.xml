@@ -2970,9 +2970,9 @@
     <string name="poi_socket_cee_red_125a_output">Socket: CEE roșu 125A: ieșire</string>
     <string name="poi_socket_cee_red_125a_current">Socket: CEE roșu 125A: curent</string>
     <string name="poi_socket_cee_red_125a">Socket: CEE roșu 125A</string>
-    <string name="poi_socket_cee_red_64a_output">Socket: CEE roșu 64A: ieșire</string>
-    <string name="poi_socket_cee_red_64a_current">Socket: CEE roșu 64A: curent</string>
-    <string name="poi_socket_cee_red_64a">Socket: CEE roșu 64A</string>
+    <string name="poi_socket_cee_red_63a_output">Socket: CEE roșu 63A: ieșire</string>
+    <string name="poi_socket_cee_red_63a_current">Socket: CEE roșu 63A: curent</string>
+    <string name="poi_socket_cee_red_63a">Socket: CEE roșu 63A</string>
     <string name="poi_socket_cee_red_32a_output">Socket: CEE roșu 32A: ieșire</string>
     <string name="poi_socket_cee_red_32a_current">Socket: CEE roșu 32A: curent</string>
     <string name="poi_socket_cee_red_32a">Socket: CEE roșu 32A</string>
@@ -3623,7 +3623,7 @@
     <string name="poi_socket_type1_combo_yes">Combinație de tip 1</string>
     <string name="poi_socket_type1_yes">Tipul 1</string>
     <string name="poi_socket_cee_red_125a_yes">CEE roșu 125A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE roșu 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE roșu 63A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE roșu 32A</string>
     <string name="poi_socket_cee_red_16a_yes">CEE roșu 16A</string>
     <string name="poi_socket_cee_blue_yes">CEE albastru</string>

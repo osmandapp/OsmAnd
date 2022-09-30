@@ -1643,7 +1643,6 @@
     <string name="quick_action_add_category">הוספת קטגוריה</string>
     <string name="quick_action_add_create_items">יצירת פריטים</string>
     <string name="quick_action_add_configure_map">הגדרת מפה</string>
-    <string name="quick_action_add_navigation">ניווט</string>
     <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום.</string>
     <string name="quick_action_bug_descr">הודעה זו מתווספת לשדה ההערה.</string>
     <string name="quick_action_bug_message">הודעה</string>
@@ -2472,8 +2471,7 @@
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>
     <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו.</string>
     <string name="base_world_map">מפת בסיס עולמית</string>
-    <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
-    <string name="osmand_plus_extended_description_part5">תכונות בטיחות 
+    <string name="osmand_plus_extended_description_part5">תכונות בטיחות
 \n • החלפה אוטומטית בין מצבי יום/לילה לבחירתך 
 \n • הצגת מגבלת מהירות כרשות, עם תזכורת במקרה של חריגה 
 \n • תקריב תלוי מהירות 
@@ -3009,7 +3007,6 @@
     <string name="shared_string_color_magenta">מג׳נטה</string>
     <string name="shared_string_icon">סמל</string>
     <string name="collected_data">נתונים שנאספו</string>
-    <string name="gpx_join_gaps">צירוף מרווחים</string>
     <string name="app_mode_camper">מחנאות</string>
     <string name="app_mode_campervan">רכב מחנאות (קרוואן)</string>
     <string name="rendering_attr_showLez_description">הצגת אזורים עם פליטה נמוכה במפה. לא משפיע על הניווט.</string>
@@ -3881,7 +3878,6 @@
     <string name="lang_de_casual">גרמנית (עממית)</string>
     <string name="ltr_or_rtl_combine_via_star">‏%1$s‏ * %2$s</string>
     <string name="app_mode_light_aircraft">כלי טיס קל</string>
-    <string name="plan_route_join_segments">צירוף מקטעים</string>
     <string name="plan_route_split_before">לפצל לפני</string>
     <string name="plan_route_split_after">לפצל אחרי</string>
     <string name="plan_route_add_new_segment">הוספת מקטע חדש</string>
@@ -4637,7 +4633,6 @@
     <string name="map_markers_bar_widget_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק ואת הכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר כדי לראות סמן או שניים מובילים בווידג׳ט.</string>
     <string name="bearing_desc">וידג׳ט התכווין מציג את התכווין המוחלט או היחסי ליעד ביחידות זווית (מעלות 180, מעלות 360, מילירדיאנים).</string>
     <string name="navigation_points">נקודות ניווט</string>
-    <string name="map_markers_desc">בווידג׳ט הסרגל העליון אפשר לראות את המרחק והכיוון לסמן מהמיקום הנוכחי. אפשר להגדיר הצגה של סמן אחד או שניים בווידג׳ט.</string>
     <string name="routing_attr_avoid_4wd_only_description">הימנעות מדרכים שמתאימים לרכבי ארבע על ארבע בלבד</string>
     <string name="routing_attr_avoid_4wd_only_name">הימנעות מדרכים לארבע על ארבע</string>
     <string name="route_maneuvers">מעקפים</string>
@@ -4734,4 +4729,6 @@
     <string name="connect_with_straight_line">חיבור בקו ישר</string>
     <string name="included_in_your_current_plan">כלול בתוכנית הנוכחית שלך „%1$s”</string>
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
+    <string name="download_heightmap_maps">מפת גבהים</string>
+    <string name="favorite_delete_group">מחיקת קבוצה</string>
 </resources>

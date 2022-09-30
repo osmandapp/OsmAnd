@@ -26,7 +26,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
-import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -60,7 +59,7 @@ import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -518,9 +517,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 
 		public void updateBannerInProgress() {
-			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
-			boolean isFinished = basicProgressAsyncTask == null
-					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
+			BasicProgressAsyncTask<?, ?, ?, ?> progressTask = ctx.getDownloadThread().getCurrentRunningTask();
+			boolean isFinished = progressTask == null || progressTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
 				downloadProgressLayout.setOnClickListener(null);
 				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
@@ -531,23 +529,19 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				}
 				freeVersionBanner.updateFreeVersionBanner();
 			} else {
-				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
-				String message = basicProgressAsyncTask.getDescription();
-				int percent = basicProgressAsyncTask.getProgressPercentage();
 				freeVersionBanner.setMinimizedFreeVersionBanner(true);
 				freeVersionBanner.updateAvailableDownloads();
 				downloadProgressLayout.setVisibility(View.VISIBLE);
-				downloadProgressLayout.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-					}
-				});
+				downloadProgressLayout.setOnClickListener(v -> new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog"));
+
+				String message = progressTask.getDescription();
+				boolean indeterminate = progressTask.isIndeterminate();
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {
 					leftTextView.setText(message);
 					rightTextView.setText(null);
 				} else {
+					int percent = (int) progressTask.getDownloadProgress();
 					progressBar.setProgress(percent);
 					leftTextView.setText(message);
 					rightTextView.setText(percent + "%");
@@ -675,11 +669,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public void initAppStatusVariables() {
 		OsmandApplication app = getMyApplication();
-		srtmDisabled = !OsmandPlugin.isActive(SRTMPlugin.class)
+		srtmDisabled = !PluginsHelper.isActive(SRTMPlugin.class)
 				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
-		nauticalPluginDisabled = !OsmandPlugin.isActive(NauticalMapsPlugin.class);
+		nauticalPluginDisabled = !PluginsHelper.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);
-		SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 	}
 

@@ -18,11 +18,10 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -255,7 +254,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 			@Override
 			public void gpxSavingFinished(Exception errorMessage) {
 				MapActivity mapActivity = getMapActivity();
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					stopUpdatingTimeTrackSaved();
 					plugin.saveCurrentTrack(null, mapActivity, false, true);

@@ -982,7 +982,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
-		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+		map.setLatLon(latLon.getLatitude(), latLon.getLongitude(), ratioX, ratioY);
 	}
 
 	public void doZoomIn() {
@@ -1255,7 +1255,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				TextView progressTitle = view.findViewById(R.id.progressTitle);
 				progressTitle.setText(titleProgressController.caption);
 				progressBar.setIndeterminate(titleProgressController.indeterminate);
-				progressBar.setProgress(titleProgressController.progress);
+				progressBar.setProgress((int) titleProgressController.progress);
 				progressBar.setVisibility(titleProgressController.progressVisible ? View.VISIBLE : View.GONE);
 
 				ImageView progressButton = view.findViewById(R.id.progressButton);

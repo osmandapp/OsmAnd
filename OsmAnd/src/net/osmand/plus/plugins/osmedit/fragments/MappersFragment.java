@@ -27,7 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
@@ -62,7 +62,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
 
 	private static final int VISIBLE_MONTHS_COUNT = 6;
-	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
+	private static final int CHANGES_FOR_MAPPER_PROMO = 30;
 	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
 	private OsmandApplication app;
@@ -93,7 +93,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		nightMode = !app.getSettings().isLightContent();
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -150,7 +150,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				String userName = plugin.OSM_USER_DISPLAY_NAME.get();
-				String url = CONTRIBUTIONS_URL + userName + "/history";
+				String url = CONTRIBUTIONS_URL + Uri.encode(userName) + "/history";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(url));
 				AndroidUtils.startActivityIfSafe(activity, intent);

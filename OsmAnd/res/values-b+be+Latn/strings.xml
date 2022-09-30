@@ -339,7 +339,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Abiarycie іsnujučuju…</string>
     <string name="maps_define_edit">Vyznačyć/źmianić…</string>
-    <string name="map_widget_fps_info">Adładačnaja іnfarmacyja FPS</string>
     <string name="driving_region_descr">Abiarycie rehijon kiravańnia: ZŠA, Eŭropa, Vialikabrytanija, Azija i inšyja.</string>
     <string name="driving_region">Rehіjon kіravańnia</string>
     <string name="driving_region_japan">Japonіja</string>
@@ -2148,7 +2147,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_poi_hide">Schavać %1$s</string>
     <string name="quick_action_add_category">Dadać katehoryu</string>
     <string name="quick_action_add_configure_map">Nalady mapy</string>
-    <string name="quick_action_add_navigation">Navihacyja</string>
     <string name="quick_action_bug_message">Paviedamleńnie</string>
     <string name="quick_action_map_style_action">Dadać styl mapy</string>
     <string name="quick_action_empty_param_error">Zapoŭnicie ŭsie paramietry</string>

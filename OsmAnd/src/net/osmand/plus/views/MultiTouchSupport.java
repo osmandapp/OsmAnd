@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
@@ -163,7 +162,7 @@ public class MultiTouchSupport {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
 					listener.onChangingViewAngle(viewAngle);
-				} else if (isTiltSupported(app)) {
+				} else if (isTiltSupportEnabled(app)) {
 					float dx1 = Math.abs(firstFingerStart.x - x1);
 					float dx2 = Math.abs(secondFingerStart.x - x2);
 					float dy1 = Math.abs(firstFingerStart.y - y1);
@@ -195,6 +194,10 @@ public class MultiTouchSupport {
 
 	public PointF getCenterPoint() {
 		return centerPoint;
+	}
+
+	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
+		return isTiltSupported(app) && app.getSettings().ENABLE_3D_VIEW.get();
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {

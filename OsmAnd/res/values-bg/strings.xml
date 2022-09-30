@@ -1019,7 +1019,6 @@
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
     <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери, ограничения на скоростта</string>
     <string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
-    <string name="map_widget_fps_info">Информация за кадри/сек</string>
     <string name="driving_region_descr">Район на шофиране: САЩ, Европа, Великобритания, Азия или друг.</string>
     <string name="driving_region">Район на шофиране</string>
     <string name="driving_region_japan">Япония</string>
@@ -2535,7 +2534,6 @@
     <string name="routing_attr_difficulty_preference_expert_name">Експерти</string>
     <string name="no_widgets_here_yet">Липсват приспособления</string>
     <string name="available_widgets">Налични приспособления</string>
-    <string name="plan_route_join_segments">Обединяване на сегменти</string>
     <string name="access_hint_enter_category">Въведете категория</string>
     <string name="access_hint_enter_description">Въведете описание.</string>
     <string name="access_map_linked_to_location">Картата е свързана с местоположението</string>

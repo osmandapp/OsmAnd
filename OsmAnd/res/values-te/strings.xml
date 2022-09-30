@@ -33,7 +33,6 @@
     <string name="rendering_attr_tracktype_grade5_name">మ్రుదువైన</string>
     <string name="routeInfo_tracktype_name">ధ్రుడవైన ఉపరితలం</string>
     <string name="shared_string_open_track">తెరుచుకున్న మార్గం</string>
-    <string name="gpx_join_gaps">ఖాలీలు నింపుము</string>
     <string name="app_mode_camper">మకాం వేసే వ్యక్తి</string>
     <string name="shared_string_default">సమయంలోగా చెల్లించకపోవుట</string>
     <string name="app_mode_campervan">తాత్కాలిక హడ్డులు ఎంచుకో</string>

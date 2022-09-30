@@ -12,7 +12,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
@@ -38,7 +38,7 @@ public class WikipediaPoiMenu {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
-		this.wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+		this.wikiPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 		this.nightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
@@ -115,7 +115,7 @@ public class WikipediaPoiMenu {
 		} else {
 			try {
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-				int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
+				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
 				List<IndexItem> wikiIndexes = DownloadResources.findIndexItemsAt(
 						app, mapActivity.getMapLocation(), DownloadActivityType.WIKIPEDIA_FILE,
 						false, -1, true);

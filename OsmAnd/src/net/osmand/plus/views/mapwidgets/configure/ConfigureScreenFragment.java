@@ -6,6 +6,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -86,6 +88,8 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
+	private StateChangedListener<Boolean> distanceByTapListener;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -134,6 +138,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onResume() {
 		super.onResume();
 		setupWidgetsCard();
+		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
 	}
 
 	@Override
@@ -270,15 +281,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				}
 		));
 
-		buttonsCard.addView(createButtonWithSwitch(
+		buttonsCard.addView(createButtonWithState(
 				R.drawable.ic_action_ruler_line,
 				getString(R.string.map_widget_distance_by_tap),
 				settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode),
 				true,
 				v -> {
-					boolean enabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
-					settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !enabled);
-					mapActivity.updateApplicationModeSettings();
+					DistanceByTapFragment.showInstance(requireActivity());
 				}
 		));
 
@@ -458,6 +467,28 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		return view;
 	}
 
+	private View createButtonWithState(int iconId,
+	                                   @NonNull String title,
+	                                   boolean enabled,
+	                                   boolean showShortDivider,
+	                                   OnClickListener listener) {
+		View view = createButtonWithDesc(iconId, title, null, enabled, listener);
+
+		if (showShortDivider) {
+			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
+		}
+
+		TextView stateContainer = view.findViewById(R.id.items_count_descr);
+		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+		stateContainer.setText(enabled ? R.string.shared_string_on: R.string.shared_string_off);
+
+		AndroidUiHelper.updateVisibility(stateContainer, true);
+
+		setupClickListener(view, listener);
+		setupListItemBackground(view);
+		return view;
+	}
+
 	private View createButtonWithDesc(int iconId,
 	                                  @NonNull String title,
 	                                  @Nullable String desc,
@@ -540,5 +571,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@NonNull
+	private StateChangedListener<Boolean> getDistanceByTapListener() {
+		if (distanceByTapListener == null) {
+			distanceByTapListener = change -> app.runInUIThread(() -> setupButtonsCard());
+		}
+		return distanceByTapListener;
 	}
 }

@@ -17,22 +17,13 @@ import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -47,15 +38,19 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -65,6 +60,11 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -260,7 +260,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportSettingsType type,
-									@NonNull BaseSettingsListFragment target, boolean exportMode) {
+	                                @NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ExportItemsBottomSheet fragment = new ExportItemsBottomSheet();
@@ -431,6 +431,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			item.setIcon(uiUtilities.getIcon(iconId, getItemIconColor(item.getTag())));
 			item.setDescription(AndroidUtils.formatSize(app, file.length()));
+		} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, getItemIconColor(item.getTag())));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {

@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
+import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
 
 import android.content.Context;
 
@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -120,7 +120,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				if (!isPersonal) {
 					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 				} else {
-					ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+					ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 					for (FavouritePoint point : duplicate.getPoints()) {
 						if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
 							plugin.clearParkingPosition();
@@ -189,7 +189,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
 					Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-					List<FavouritePoint> favourites = asFavourites(app, gpxFile.getPoints(), fileName, false);
+					List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPoints(), "");
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {

@@ -78,6 +78,7 @@ import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -771,6 +772,8 @@ public class OsmandSettings {
 			return isSetForMode(mode) || customizationValue == null ? super.getModeValue(mode) : customizationValue;
 		}
 	}.makeProfile().cache();
+
+	public final CommonPreference<DistanceByTapTextSize> DISTANCE_BY_TAP_TEXT_SIZE = new EnumStringPreference<>(this, "distance_by_tap_text_size", DistanceByTapTextSize.NORMAL, DistanceByTapTextSize.values()).makeProfile();
 
 	public final OsmandPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
@@ -1667,7 +1670,18 @@ public class OsmandSettings {
 	public static final int MIDDLE_BOTTOM_CONSTANT = 2;
 	public static final int MIDDLE_TOP_CONSTANT = 3;
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
-	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false).makeProfile();
+
+	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false) {
+
+		@Override
+		public Boolean getProfileDefaultValue(ApplicationMode mode) {
+			// By default display position shifts to the bottom part of the screen
+			// only if the "Map orientation" was set to "Movement direction".
+			return ROTATE_MAP.getModeValue(mode) != OsmandSettings.ROTATE_MAP_BEARING;
+		}
+	}.makeProfile();
+
+	public final CommonPreference<Boolean> ENABLE_3D_VIEW = new BooleanPreference(this, "enable_3d_view", true).makeProfile();
 
 	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
 	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
@@ -1738,6 +1752,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_MAP_LAYER_PARAMETER = new BooleanPreference(this, "show_map_layer_parameter", false).makeProfile().cache();
 
+	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -1775,7 +1791,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_CURRENT_LOCATION_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 
@@ -2186,8 +2203,44 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
-	public final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
+
+	public float getLastKnownMapRotation() {
+		return getLastKnownMapRotation(getApplicationMode());
+	}
+
+	public float getLastKnownMapRotation(@NonNull ApplicationMode appMode) {
+		return LAST_KNOWN_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setLastKnownMapRotation(float rotation) {
+		setLastKnownMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
+	}
+
+	public float getLastKnownMapElevation() {
+		return getLastKnownMapElevation(getApplicationMode());
+	}
+
+	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
+		return ENABLE_3D_VIEW.getModeValue(appMode) ?
+				LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode) :
+				LAST_KNOWN_MAP_ELEVATION.getProfileDefaultValue(appMode);
+	}
+
+	public void setLastKnownMapElevation(float elevation) {
+		setLastKnownMapElevation(getApplicationMode(), elevation);
+	}
+
+	public void setLastKnownMapElevation(@NonNull ApplicationMode appMode, float elevation) {
+		if (ENABLE_3D_VIEW.get()) {
+			LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
+		}
+	}
 
 	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public static final String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
@@ -2818,11 +2871,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
-			false /*Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH*/
-	).makeGlobal().makeShared().cache();
-
+	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> OPENGL_RENDER_FAILED = new BooleanPreference(this, "opengl_render_failed", false).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> SHOW_HEIGHTMAPS = new BooleanPreference(this, "show_heightmaps", false).makeGlobal().makeShared().cache();
 
 
 	// this value string is synchronized with settings_pref.xml preference name

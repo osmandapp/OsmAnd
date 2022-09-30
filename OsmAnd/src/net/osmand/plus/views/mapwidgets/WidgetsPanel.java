@@ -155,24 +155,6 @@ public enum WidgetsPanel {
 		return orderPreference.setModeValue(appMode, stringBuilder.toString());
 	}
 
-	@NonNull
-	public List<List<String>> getWidgetsOrder(@NonNull ApplicationMode appMode, @NonNull OsmandSettings settings) {
-		List<List<String>> widgetsOrder = new ArrayList<>();
-		ListStringPreference preference = getOrderPreference(settings);
-		List<String> pages = preference.getStringsListForProfile(appMode);
-
-		if (!Algorithms.isEmpty(pages)) {
-			for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
-				String page = pages.get(pageIndex);
-				List<String> orders = Arrays.asList(page.split(WIDGET_SEPARATOR));
-				if (!Algorithms.isEmpty(orders)) {
-					widgetsOrder.add(orders);
-				}
-			}
-		}
-		return widgetsOrder;
-	}
-
 	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings) {
 		return contains(widgetId, settings, settings.getApplicationMode());
 	}

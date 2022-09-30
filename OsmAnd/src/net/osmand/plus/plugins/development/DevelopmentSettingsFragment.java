@@ -12,7 +12,7 @@ import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -43,6 +43,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		safeCategory.setIconSpaceReserved(false);
 
 		setupSafeModePref();
+		setupShowHeightmapspref();
 		setupApproximationSafeModePref();
 
 		Preference routingCategory = findPreference("routing");
@@ -95,6 +96,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
 		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
 		safeMode.setIconSpaceReserved(false);
+	}
+
+	private void setupShowHeightmapspref() {
+		SwitchPreferenceEx showHeightmaps = findPreference(settings.SHOW_HEIGHTMAPS.getId());
+		showHeightmaps.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -220,7 +226,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			settings.WEBGL_SUPPORTED.resetToDefault();
 			settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.resetToDefault();
 
-			MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			MapillaryPlugin mapillaryPlugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (mapillaryPlugin != null) {
 				mapillaryPlugin.MAPILLARY_FIRST_DIALOG_SHOWN.resetToDefault();
 			}

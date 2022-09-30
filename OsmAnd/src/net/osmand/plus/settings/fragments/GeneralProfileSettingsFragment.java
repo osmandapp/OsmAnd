@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -22,17 +21,20 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.DialogListItemAdapter;
+import net.osmand.plus.R;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.MultiTouchSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +48,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
+		setup3DViewPref();
 		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -60,6 +63,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
+		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
 		setupTrackballForMovementsPref();
 	}
@@ -148,13 +152,55 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupCenterPositionOnMapPref() {
-		Drawable disabled = getContentIcon(R.drawable.ic_action_display_position_bottom);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_display_position_center);
+	private void setup3DViewPref() {
+		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
+		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceCompat centerPositionOnMap = findPreference(settings.CENTER_POSITION_ON_MAP.getId());
-		centerPositionOnMap.setIcon(icon);
+		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
+		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
+		enabled3DView.setIcon(icon);
+	}
+
+	private void setupCenterPositionOnMapPref() {
+		CommonPreference<Boolean> preference = settings.CENTER_POSITION_ON_MAP;
+		boolean isCenterSelected = preference.getModeValue(getSelectedAppMode());
+		Drawable icon = getActiveIcon(isCenterSelected ?
+				R.drawable.ic_action_display_position_center :
+				R.drawable.ic_action_display_position_bottom);
+		String summary = getString(isCenterSelected ?
+				R.string.position_on_map_center :
+				R.string.position_on_map_bottom);
+		Preference displayPosition = findPreference(preference.getId());
+		displayPosition.setIcon(icon);
+		displayPosition.setSummary(summary);
+	}
+
+	private void showDisplayPositionDialog(Preference preference) {
+		boolean nightMode = isNightMode();
+		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
+		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(preference.getTitle());
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+
+		String[] entries = new String[] {
+				getString(R.string.position_on_map_center),
+				getString(R.string.position_on_map_bottom),
+		};
+		Boolean[] entryValues = new Boolean[] {true, false};
+		int selected = settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? 0 : 1;
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				entries, nightMode, selected, app, profileColor, themeRes, v -> {
+					int selectedEntryIndex = (int) v.getTag();
+					applyPreferenceWithSnackBar(preference.getKey(), entryValues[selectedEntryIndex]);
+				}
+		);
+
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -277,6 +323,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
 
+	private void setupAnimatePositionPref() {
+		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
+		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
+	}
+
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		externalInputDevice.setSummary(R.string.sett_no_ext_input);
@@ -356,11 +407,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 					}
 				};
 
-		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
-			}
+		b.setAdapter(singleChoiceAdapter, (dialog, which) -> {
+			onConfirmPreferenceChange(settings.DRIVING_REGION.getId(), drs.get(which), ApplyQueryType.BOTTOM_SHEET);
 		});
 
 		b.setNegativeButton(R.string.shared_string_cancel, null);
@@ -397,6 +445,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
+			return true;
+		} else if (preference.getKey().equals(settings.CENTER_POSITION_ON_MAP.getId())) {
+			showDisplayPositionDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);

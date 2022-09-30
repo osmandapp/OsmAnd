@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -57,7 +57,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		appMode = app.getSettings().getApplicationMode();
-		wikiPlugin = OsmandPlugin.getPlugin(WikipediaPlugin.class);
+		wikiPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
 		initLanguagesData();
 	}
 

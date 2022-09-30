@@ -45,7 +45,8 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -539,7 +540,7 @@ public class ResourceManager {
 			warnings.addAll(indexingMaps(progress));
 			warnings.addAll(indexVoiceFiles(progress));
 			warnings.addAll(indexFontFiles(progress));
-			warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
+			warnings.addAll(PluginsHelper.onIndexingFiles(progress));
 			warnings.addAll(indexAdditionalMaps(progress));
 
 			return warnings;
@@ -876,8 +877,11 @@ public class ResourceManager {
 		} else {
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
-		if (OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
+		if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		}
+		if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseHelper.isDepthContoursPurchased(context)) {
+			collectFiles(context.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR), IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT, files);
 		}
 
 		changesManager.collectChangesFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);

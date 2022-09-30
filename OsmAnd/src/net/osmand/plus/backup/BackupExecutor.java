@@ -6,11 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -20,8 +21,8 @@ public class BackupExecutor extends ThreadPoolExecutor {
 
 	private final OsmandApplication app;
 	private final AtomicInteger aState = new AtomicInteger(State.IDLE.ordinal());
-	private final List<BackupCommand> activeCommands = new CopyOnWriteArrayList<>();
-	private final List<BackupExecutorListener> listeners = new CopyOnWriteArrayList<>();
+	private List<BackupCommand> activeCommands = new ArrayList<>();
+	private List<BackupExecutorListener> listeners = new ArrayList<>();
 
 	public enum State {
 		IDLE,
@@ -52,17 +53,17 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	public void addListener(@NonNull BackupExecutorListener listener) {
-		listeners.add(listener);
+		listeners = Algorithms.addToList(listeners, listener);
 	}
 
 	public void removeListener(@NonNull BackupExecutorListener listener) {
-		listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	public void runCommand(@NonNull BackupCommand command) {
 		updateActiveCommands();
 		if (command.getStatus() == AsyncTask.Status.PENDING) {
-			activeCommands.add(command);
+			activeCommands = Algorithms.addToList(activeCommands, command);
 			command.executeOnExecutor(this);
 		}
 	}
@@ -120,6 +121,6 @@ public class BackupExecutor extends ThreadPoolExecutor {
 				commandsToRemove.add(command);
 			}
 		}
-		activeCommands.removeAll(commandsToRemove);
+		activeCommands = Algorithms.removeAllFromList(activeCommands, commandsToRemove);
 	}
 }

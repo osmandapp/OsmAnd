@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
@@ -24,19 +25,27 @@ import java.util.List;
 
 public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomSheet {
 
+	public static final String SELECTED_DERIVED_PROFILE_KEY = "selected_derived_profile";
+	public static final String NETWORK_KEY = "network_key";
+
 	private RoutingDataUtils dataUtils;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
+	private String selectedDerivedProfile;
+	private boolean networkApproximateRoute;
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment target,
 	                                @Nullable ApplicationMode appMode,
 	                                @Nullable String selectedItemKey,
-	                                boolean usedOnMap) {
+	                                @Nullable String selectedDerivedProfile,
+	                                boolean networkApproximateRoute, boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectOnlineApproxProfileBottomSheet fragment = new SelectOnlineApproxProfileBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(SELECTED_KEY, selectedItemKey);
+			args.putString(SELECTED_DERIVED_PROFILE_KEY, selectedDerivedProfile);
+			args.putBoolean(NETWORK_KEY, networkApproximateRoute);
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
@@ -46,15 +55,36 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 	}
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			networkApproximateRoute = args.getBoolean(NETWORK_KEY);
+			selectedDerivedProfile = args.getString(SELECTED_DERIVED_PROFILE_KEY, null);
+		}
+	}
+
+	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
 		items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_title)));
-		addCheckableItem(R.string.shared_string_none, Algorithms.isEmpty(selectedItemKey), v -> {
+		addCheckableItem(R.string.shared_string_none, Algorithms.isEmpty(selectedItemKey) && !networkApproximateRoute, v -> {
 			Bundle args = new Bundle();
+			args.putBoolean(NETWORK_KEY, false);
 			args.putString(PROFILE_KEY_ARG, "");
 			Fragment target = getTargetFragment();
 			if (target instanceof OnSelectProfileCallback) {
 				((OnSelectProfileCallback) target).onProfileSelected(args);
+			}
+			dismiss();
+		});
+		addCheckableItem(R.string.network_provider, networkApproximateRoute, v -> {
+			Bundle args = new Bundle();
+			args.putBoolean(NETWORK_KEY, true);
+			args.putString(PROFILE_KEY_ARG, "");
+			Fragment target = getTargetFragment();
+			if (target instanceof OnlineRoutingEngineFragment) {
+				((OnlineRoutingEngineFragment) target).onProfileSelected(args);
 			}
 			dismiss();
 		});
@@ -72,6 +102,21 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 				addDivider();
 			}
 		}
+	}
+
+	@Override
+	protected boolean isSelected(ProfileDataObject profile) {
+		boolean isSelected = super.isSelected(profile) && !networkApproximateRoute;
+		if (isSelected && profile instanceof RoutingDataObject) {
+			RoutingDataObject data = (RoutingDataObject) profile;
+			boolean checkForDerived = !Algorithms.objectEquals(selectedDerivedProfile, "default");
+			if (checkForDerived) {
+				isSelected = Algorithms.objectEquals(selectedDerivedProfile, data.getDerivedProfile());
+			} else {
+				isSelected = data.getDerivedProfile() == null;
+			}
+		}
+		return isSelected;
 	}
 
 	@Override

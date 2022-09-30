@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
 
 import androidx.annotation.NonNull;
@@ -12,27 +13,40 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 import org.apache.commons.logging.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class FavouritesFileHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
-	public static final int BACKUP_MAX_COUNT = 20;
-	public static final String BACKUP_FOLDER = "backup";
-	public static final String BACKUP_FILE_PREFIX = "favourites_bak_";
+	private static final String TIME_PATTERN = "yyyy_MM_dd_hh_mm_ss";
+	private static final String GPX_FILE_EXT = ".gpx";
+	private static final String ZIP_FILE_EXT = ".zip";
+
+	private static final int BACKUP_MAX_COUNT = 10;
+	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
+
 	public static final String FILE_TO_SAVE = "favourites.gpx";
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx";
 
@@ -149,41 +163,82 @@ public class FavouritesFileHelper {
 	}
 
 	public void backup(@NonNull File backupFile, @NonNull File externalFile) {
+		String name = backupFile.getName();
+		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_FILE_EXT));
+		FileInputStream fis = null;
+		ZipOutputStream zos = null;
 		try {
-			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
-			FileInputStream fis = new FileInputStream(externalFile);
-			Algorithms.streamCopy(fis, out);
-			fis.close();
-			out.close();
+			File file = new File(backupFile.getParentFile(), backupFile.getName());
+			zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+			fis = new FileInputStream(externalFile);
+			zos.putNextEntry(new ZipEntry(nameNoExt));
+			Algorithms.streamCopy(fis, zos);
+			zos.closeEntry();
+			zos.flush();
+			zos.finish();
 		} catch (Exception e) {
 			log.warn("Backup failed", e);
+		} finally {
+			Algorithms.closeStream(zos);
+			Algorithms.closeStream(fis);
 		}
+		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
+	}
+
+	private File getBackupsFolder() {
+		File folder = new File(app.getAppPath(null), BACKUP_INDEX_DIR);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		return folder;
 	}
 
 	private File getBackupFile() {
-		File fld = new File(app.getAppPath(null), BACKUP_FOLDER);
-		if (!fld.exists()) {
-			fld.mkdirs();
-		}
-		int back = 1;
-		String backPrefix;
-		File firstModified = null;
-		long firstModifiedMin = System.currentTimeMillis();
-		while (back <= BACKUP_MAX_COUNT) {
-			backPrefix = "" + back;
-			if (back < 10) {
-				backPrefix = "0" + backPrefix;
+		clearOldBackups(getBackupFilesForToday(), BACKUP_MAX_PER_DAY);
+		String baseName = formatTime(System.currentTimeMillis());
+		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_FILE_EXT);
+	}
+
+	@NonNull
+	private List<File> getBackupFilesForToday() {
+		List<File> result = new ArrayList<>();
+		List<File> files = getBackupFiles();
+		long now = System.currentTimeMillis();
+		for (File file : files) {
+			if (OsmAndFormatter.isSameDay(now, file.lastModified())) {
+				result.add(file);
 			}
-			File bak = new File(fld, BACKUP_FILE_PREFIX + backPrefix + ".gpx.bz2");
-			if (!bak.exists()) {
-				return bak;
-			} else if (bak.lastModified() < firstModifiedMin) {
-				firstModified = bak;
-				firstModifiedMin = bak.lastModified();
-			}
-			back++;
 		}
-		return firstModified;
+		return result;
+	}
+
+	public List<File> getBackupFiles() {
+		File folder = getBackupsFolder();
+		File[] files = folder.listFiles();
+		return files != null ? Arrays.asList(files) : Collections.emptyList();
+	}
+
+	private void clearOldBackups(List<File> files, int maxCount) {
+		if (files.size() >= maxCount) {
+			// sort in order from oldest to newest
+			Collections.sort(files, (f1, f2) -> {
+				return Long.compare(f2.lastModified(), f1.lastModified());
+			});
+			for (int i = files.size(); i > maxCount; --i) {
+				File oldest = files.get(i - 1);
+				oldest.delete();
+			}
+		}
+	}
+
+	private static String formatTime(long time) {
+		SimpleDateFormat format = getTimeFormatter();
+		return format.format(new Date(time));
+	}
+
+	private static SimpleDateFormat getTimeFormatter() {
+		SimpleDateFormat format = new SimpleDateFormat(TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
 	}
 }

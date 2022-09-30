@@ -15,7 +15,7 @@ import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openplacereviews.UploadPhotosAsyncTask.UploadPhotosListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -55,7 +55,7 @@ public class UploadPhotosHelper {
 
 	public void chooseAndUploadPhoto(@NonNull String[] placeId) {
 		MapActivity mapActivity = getMapActivity();
-		OpenPlaceReviewsPlugin plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		OpenPlaceReviewsPlugin plugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 		if (plugin == null || mapActivity == null) {
 			return;
 		}
@@ -109,7 +109,7 @@ public class UploadPhotosHelper {
 					if (getMapActivity() != null) {
 						try {
 							ImageCardsHolder holder = new ImageCardsHolder();
-							if (OsmandPlugin.createImageCardForJson(holder, new JSONObject(response))) {
+							if (PluginsHelper.createImageCardForJson(holder, new JSONObject(response))) {
 								ImageCard imageCard = holder.getFirstItem();
 								if (imageCard != null && this.listener != null) {
 									this.listener.imageCardCreated(imageCard);

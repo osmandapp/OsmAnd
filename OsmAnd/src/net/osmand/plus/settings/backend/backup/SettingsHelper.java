@@ -28,9 +28,10 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -133,7 +134,7 @@ public abstract class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes,
-													   boolean export, boolean addEmptyItems) {
+	                                                   boolean export, boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
 		typesMap.putAll(getSettingsItems(settingsTypes, addEmptyItems));
 		typesMap.putAll(getMyPlacesItems(settingsTypes, addEmptyItems));
@@ -142,9 +143,9 @@ public abstract class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(@NonNull Map<ExportSettingsType, List<?>> allSettingsMap,
-													   @NonNull List<ExportSettingsType> settingsTypes,
-													   @NonNull List<SettingsItem> settingsItems,
-													   boolean export) {
+	                                                   @NonNull List<ExportSettingsType> settingsTypes,
+	                                                   @NonNull List<SettingsItem> settingsItems,
+	                                                   boolean export) {
 		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
 		for (ExportSettingsType settingsType : settingsTypes) {
 			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
@@ -176,7 +177,7 @@ public abstract class SettingsHelper {
 	}
 
 	private Map<ExportSettingsType, List<?>> getSettingsItems(@Nullable List<ExportSettingsType> settingsTypes,
-															  boolean addEmptyItems) {
+	                                                          boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> settingsItems = new LinkedHashMap<>();
 
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.PROFILE)) {
@@ -215,7 +216,7 @@ public abstract class SettingsHelper {
 	}
 
 	private Map<ExportSettingsType, List<?>> getMyPlacesItems(@Nullable List<ExportSettingsType> settingsTypes,
-															  boolean addEmptyItems) {
+	                                                          boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> myPlacesItems = new LinkedHashMap<>();
 
 		List<FavoriteGroup> favoriteGroups = settingsTypes == null || settingsTypes.contains(ExportSettingsType.FAVORITES)
@@ -239,7 +240,7 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.TRACKS, files);
 			}
 		}
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			List<OsmNotesPoint> notesPointList = settingsTypes == null || settingsTypes.contains(ExportSettingsType.OSM_NOTES)
 					? osmEditingPlugin.getDBBug().getOsmBugsPoints()
@@ -254,7 +255,7 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.OSM_EDITS, editsPointList);
 			}
 		}
-		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin avNotesPlugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (avNotesPlugin != null) {
 			List<File> files = new ArrayList<>();
 			if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.MULTIMEDIA_NOTES)) {
@@ -305,7 +306,7 @@ public abstract class SettingsHelper {
 	}
 
 	private Map<ExportSettingsType, List<?>> getResourcesItems(@Nullable List<ExportSettingsType> settingsTypes,
-															   boolean addEmptyItems) {
+	                                                           boolean addEmptyItems) {
 		Map<ExportSettingsType, List<?>> resourcesItems = new LinkedHashMap<>();
 
 		Map<String, File> externalRenderers = settingsTypes == null || settingsTypes.contains(ExportSettingsType.CUSTOM_RENDER_STYLE)
@@ -361,6 +362,7 @@ public abstract class SettingsHelper {
 			dataTypes.add(LocalIndexType.TILES_DATA);
 			dataTypes.add(LocalIndexType.SRTM_DATA);
 			dataTypes.add(LocalIndexType.WIKI_DATA);
+			dataTypes.add(LocalIndexType.DEPTH_DATA);
 		}
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.TTS_VOICE)) {
 			dataTypes.add(LocalIndexType.TTS_VOICE_DATA);
@@ -372,7 +374,7 @@ public abstract class SettingsHelper {
 				? getLocalIndexData(dataTypes.toArray(new LocalIndexType[0]))
 				: Collections.emptyList();
 		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
-				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA);
+				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.DEPTH_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			sortLocalFiles(files);
 			resourcesItems.put(ExportSettingsType.OFFLINE_MAPS, files);
@@ -384,6 +386,12 @@ public abstract class SettingsHelper {
 		files = getFilesByType(localIndexInfoList, LocalIndexType.VOICE_DATA);
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.VOICE, files);
+		}
+		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class)) {
+			files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
+			if (!files.isEmpty() || addEmptyItems) {
+				resourcesItems.put(ExportSettingsType.FAVORITES_BACKUP, files);
+			}
 		}
 		return resourcesItems;
 	}
@@ -627,6 +635,7 @@ public abstract class SettingsHelper {
 		List<File> voiceFilesList = new ArrayList<>();
 		List<FileSettingsItem> mapFilesList = new ArrayList<>();
 		List<FileSettingsItem> tracksFilesList = new ArrayList<>();
+		List<FileSettingsItem> favouritesBackupFilesList = new ArrayList<>();
 		List<FileSettingsItem> multimediaFilesList = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
 		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
@@ -653,6 +662,8 @@ public abstract class SettingsHelper {
 						multimediaFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
 						tracksFilesList.add(fileItem);
+					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_BACKUP) {
+						favouritesBackupFilesList.add(fileItem);
 					} else if (fileItem.getSubtype().isMap()) {
 						mapFilesList.add(fileItem);
 					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
@@ -767,6 +778,10 @@ public abstract class SettingsHelper {
 					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
 						if (!tracksFilesList.isEmpty() || addEmptyItems) {
 							settingsToOperate.put(ExportSettingsType.TRACKS, tracksFilesList);
+						}
+					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_BACKUP) {
+						if (!favouritesBackupFilesList.isEmpty() || addEmptyItems) {
+							settingsToOperate.put(ExportSettingsType.FAVORITES_BACKUP, favouritesBackupFilesList);
 						}
 					} else if (fileItem.getSubtype().isMap()) {
 						if (!mapFilesList.isEmpty() || addEmptyItems) {

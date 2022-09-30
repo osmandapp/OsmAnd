@@ -122,10 +122,12 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="?attr/list_background_color"
+				android:clickable="true"
+				android:focusable="true"
 				android:paddingHorizontal="@dimen/content_padding"
 				android:paddingVertical="@dimen/content_padding_small">
 
-				<include
+			<include
 					android:id="@+id/apply_button"
 					layout="@layout/bottom_sheet_dialog_button" />
 

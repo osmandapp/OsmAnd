@@ -153,7 +153,6 @@
     <string name="shared_string_file_is_saved">%s सहेजा गया है</string>
     <string name="shared_string_open_track">खुला ट्रैक</string>
     <string name="shared_string_track_is_saved">ट्रैक %s सहेजा गया है</string>
-    <string name="gpx_join_gaps">अंतराल में शामिल हों</string>
     <string name="app_mode_camper">पर्यटक</string>
     <string name="app_mode_campervan">शिविर वैन</string>
     <string name="rendering_attr_showLez_description">मानचित्र पर कम उत्सर्जन क्षेत्र दिखाएं। रूटिंग को प्रभावित नहीं करता है।</string>

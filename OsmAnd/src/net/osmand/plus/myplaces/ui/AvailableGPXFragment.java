@@ -1,5 +1,11 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,6 +34,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -52,7 +66,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
@@ -71,7 +85,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -104,20 +118,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
@@ -258,7 +258,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void updateCurrentTrack() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (currentGpxView == null || plugin == null) {
 			return;
 		}
@@ -355,7 +355,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		View v = inflater.inflate(R.layout.available_gpx, container, false);
 		listView = v.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
-		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
 			createCurrentTrackView();
 			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(v1 -> {
@@ -522,7 +522,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener));
-		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
+		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
@@ -1529,7 +1529,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.create()
 		);
 
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_export)
@@ -1567,15 +1567,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public class DeleteGpxTask extends AsyncTask<GpxInfo, GpxInfo, String> {
 
+		private boolean folderDeleted;
+
 		@Override
 		protected String doInBackground(GpxInfo... params) {
 			int count = 0;
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					total++;
+					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					if (successful) {
+						File parentFile = info.file.getParentFile();
+						if (parentFile != null && Algorithms.isEmpty(parentFile.listFiles())) {
+							folderDeleted = Algorithms.removeAllFiles(parentFile);
+						}
 						count++;
 						publishProgress(info);
 					}
@@ -1601,6 +1607,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		protected void onPostExecute(String result) {
 			hideProgressBar();
 			app.showToastMessage(result);
+
+			if (folderDeleted) {
+				reloadTracks();
+			}
 		}
 	}
 
@@ -1702,17 +1712,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 		public String getName() {
 			if (name == null) {
-				name = formatName(file.getName());
+				name = GpxUiHelper.getGpxTitle(file.getName());
 			}
 			return name;
-		}
-
-		private String formatName(String name) {
-			int ext = name.lastIndexOf('.');
-			if (ext != -1) {
-				name = name.substring(0, ext);
-			}
-			return name.replace('_', ' ');
 		}
 
 		public boolean isCorrupted() {

@@ -317,6 +317,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tb, settings);
 		boolean hasMapRenderer = hasMapRenderer();
 		if (isDrawingEnabled()) {
 			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;

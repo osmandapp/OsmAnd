@@ -471,7 +471,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		dataHolder.copyAppModePrefs(app, selectedAppMode, appMode);
+		MapActivity mapActivity = requireMapActivity();
+		dataHolder.copyAppModePrefs(mapActivity, selectedAppMode, appMode);
 		List<ListItem> enabledItems = createEnabledWidgetsList(appMode);
 		List<ListItem> availableItems = createAvailableWidgetsList(appMode);
 		updateItems(availableItems, enabledItems);

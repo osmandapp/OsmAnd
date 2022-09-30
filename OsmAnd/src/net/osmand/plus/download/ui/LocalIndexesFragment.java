@@ -35,6 +35,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -50,7 +51,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -241,7 +242,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
-			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
+			boolean isDevPluginEnabled = PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
 				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
 					listAdapter.addLocalIndexInfo(v);
@@ -326,7 +327,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 					}
 				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
+					if (i.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+						parent = getMyApplication().getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+					} else {
+						parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
+					}
 				} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
@@ -339,6 +344,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.FONT_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.FONT_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
 			}
@@ -453,7 +460,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			ITileSource src = (ITileSource) info.getAttachedObject();
 			ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
 			ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
-			if (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName())) {
+			if (src != null && (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName()))) {
 				File current = new File(info.getPathToData());
 				File parent = current.getParentFile();
 				if (parent == null) {
@@ -752,7 +759,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA));
+					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA, LocalIndexType.DEPTH_DATA));
 		} else if (itemId == R.string.local_index_mi_restore) {
 			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {
@@ -1016,7 +1023,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		private String getMapDescription(LocalIndexInfo child) {
 			if (child.getType() == LocalIndexType.TILES_DATA) {
-				return ctx.getString(R.string.online_map);
+				if (child.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					return ctx.getString(R.string.download_heightmap_maps);
+				} else {
+					return ctx.getString(R.string.online_map);
+				}
 			} else if (child.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
 			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
@@ -1141,7 +1152,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			});
 		}
 		if (info.getType() == LocalIndexType.TILES_DATA
-				&& ((info.getAttachedObject() instanceof TileSourceManager.TileSourceTemplate)
+				&& ((info.getAttachedObject() instanceof TileSourceTemplate)
 				|| ((info.getAttachedObject() instanceof SQLiteTileSource)
 				&& ((SQLiteTileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()))) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_edit)

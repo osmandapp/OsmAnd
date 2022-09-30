@@ -3,8 +3,9 @@ package net.osmand.plus.settings.backend.preferences;
 import android.util.Log;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -229,7 +230,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		Object prefs = getPreferences();
 		boolean changed = !Algorithms.objectEquals(obj, getValue(prefs, obj));
 		if (setValue(prefs, obj)) {
-			if (changed && isShared() && isGlobal() && OsmandPlugin.isDevelopment()) {
+			if (changed && isShared() && isGlobal() && PluginsHelper.isDevelopment()) {
 				Log.d("CommonPreference", "SET GLOBAL id=" + getId() + " value=" + obj + " cached=" + cachedValue);
 			}
 			cachedValue = obj;
@@ -279,7 +280,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	public OsmandPlugin getRelatedPlugin() {
-		return pluginId != null ? OsmandPlugin.getPlugin(pluginId) : null;
+		return pluginId != null ? PluginsHelper.getPlugin(pluginId) : null;
 	}
 
 	protected String getLastModifiedTimeId() {

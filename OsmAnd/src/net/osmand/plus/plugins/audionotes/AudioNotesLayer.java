@@ -84,6 +84,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			DataTileManager<Recording> recs = plugin.getRecordings();

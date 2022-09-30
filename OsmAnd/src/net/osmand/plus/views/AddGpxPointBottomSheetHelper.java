@@ -61,7 +61,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 				if (editor != null) {
 					editor.setOnDismissListener(this);
 					editor.setNewGpxPointProcessing();
-					editor.add(gpx, latLon, titleText);
+					editor.add(gpx, latLon, titleText, null);
 				}
 			}
 		});

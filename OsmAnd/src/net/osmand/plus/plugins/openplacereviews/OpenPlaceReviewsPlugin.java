@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.openplacereviews;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
@@ -29,8 +31,6 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
 
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
@@ -88,22 +88,22 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityCreate(MapActivity activity) {
+	public void mapActivityCreate(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.mapActivity = null;
 	}
 

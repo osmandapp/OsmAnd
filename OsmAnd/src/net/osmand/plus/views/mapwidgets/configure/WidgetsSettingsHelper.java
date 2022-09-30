@@ -121,6 +121,24 @@ public class WidgetsSettingsHelper {
 		panel.setWidgetsOrder(appMode, newPagedOrder, settings);
 	}
 
+	public List<List<String>> getWidgetsPagedOrder(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel, int filter) {
+		int previousPage = -1;
+		List<WidgetsPanel> panels = Collections.singletonList(panel);
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, filter, panels);
+		List<List<String>> pagedOrder = new ArrayList<>();
+		for (MapWidgetInfo widgetInfo : widgetInfos) {
+			String widgetId = widgetInfo.key;
+			if (!Algorithms.isEmpty(widgetId) && WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetId, appMode)) {
+				if (previousPage != widgetInfo.pageIndex || pagedOrder.size() == 0) {
+					previousPage = widgetInfo.pageIndex;
+					pagedOrder.add(new ArrayList<>());
+				}
+				pagedOrder.get(pagedOrder.size() - 1).add(widgetId);
+			}
+		}
+		return pagedOrder;
+	}
+
 	@NonNull
 	private List<MapWidgetInfo> getDefaultWidgetInfos(@NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, 0, panel.getMergedPanels());

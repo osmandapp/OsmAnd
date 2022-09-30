@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -39,7 +39,7 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		int verticalBig = getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 		int verticalNormal = getResources().getDimensionPixelSize(R.dimen.content_padding);

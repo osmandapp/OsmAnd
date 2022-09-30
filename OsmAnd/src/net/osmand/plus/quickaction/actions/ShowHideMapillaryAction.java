@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -34,7 +34,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (plugin != null) {
 			plugin.SHOW_MAPILLARY.set(!plugin.SHOW_MAPILLARY.get());
 			plugin.updateLayers(mapActivity, mapActivity);
@@ -59,7 +59,7 @@ public class ShowHideMapillaryAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		return plugin != null && plugin.SHOW_MAPILLARY.get();
 	}
 }

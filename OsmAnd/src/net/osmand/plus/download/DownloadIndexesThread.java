@@ -35,13 +35,13 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
@@ -52,12 +52,12 @@ public class DownloadIndexesThread {
 
 	private final DatabaseHelper dbHelper;
 	private final DownloadFileHelper downloadFileHelper;
-	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = new CopyOnWriteArrayList<>();
+	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
 	private DownloadEvents uiActivity;
 	private IndexItem currentDownloadingItem;
-	private int currentDownloadingItemProgress;
+	private float currentDownloadProgress;
 	private DownloadResources indexes;
 	private static final int THREAD_ID = 10103;
 
@@ -282,8 +282,8 @@ public class DownloadIndexesThread {
 		return currentDownloadingItem;
 	}
 
-	public int getCurrentDownloadingItemProgress() {
-		return currentDownloadingItemProgress;
+	public float getCurrentDownloadProgress() {
+		return currentDownloadProgress;
 	}
 
 	public BasicProgressAsyncTask<?, ?, ?, ?> getCurrentRunningTask() {
@@ -479,7 +479,7 @@ public class DownloadIndexesThread {
 					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
 						currentDownloadingItem = item;
-						currentDownloadingItemProgress = 0;
+						currentDownloadProgress = 0;
 						if (item == null || currentDownloads.contains(item)) {
 							continue;
 						}
@@ -516,7 +516,7 @@ public class DownloadIndexesThread {
 					}
 				} finally {
 					currentDownloadingItem = null;
-					currentDownloadingItemProgress = 0;
+					currentDownloadProgress = 0;
 				}
 				if (warnings.toString().trim().length() == 0) {
 					return null;
@@ -623,7 +623,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected void updateProgress(boolean updateOnlyProgress, IndexItem tag) {
-			currentDownloadingItemProgress = getProgressPercentage();
+			currentDownloadProgress = getDownloadProgress();
 			downloadInProgress();
 		}
 	}

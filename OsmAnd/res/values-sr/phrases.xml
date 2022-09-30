@@ -2386,7 +2386,7 @@
     <string name="poi_cuisine_salad">Салате</string>
     <string name="poi_cuisine_fried_food">Пржена храна</string>
     <string name="poi_cuisine_bistro">Бистро</string>
-    <string name="poi_cuisine_bakery">Пекара</string>
+    <string name="poi_cuisine_bakery">Пециво</string>
     <string name="poi_cuisine_couscous">Кускус</string>
     <string name="poi_cuisine_fried_chicken">Пржена пилетина</string>
     <string name="poi_cuisine_dessert">Дезерти</string>
@@ -3399,7 +3399,7 @@
     <string name="poi_socket_type1_combo_yes">Тип 1 комбо</string>
     <string name="poi_socket_type1_yes">Тип 1</string>
     <string name="poi_socket_cee_red_125a_yes">ЦЕЕ црвена 125А</string>
-    <string name="poi_socket_cee_red_64a_yes">ЦЕЕ црвена 64А</string>
+    <string name="poi_socket_cee_red_63a_yes">ЦЕЕ црвена 64А</string>
     <string name="poi_socket_cee_red_32a_yes">ЦЕЕ црвена 32А</string>
     <string name="poi_socket_cee_red_16a_yes">ЦЕЕ црвена 16А</string>
     <string name="poi_socket_cee_blue_yes">ЦЕЕ плава</string>
@@ -3532,9 +3532,9 @@
     <string name="poi_socket_cee_red_125a_output">Утичница: ЦЕЕ црвена 125А: излаз</string>
     <string name="poi_socket_cee_red_125a_current">Утичница: ЦЕЕ црвена 125А: струја</string>
     <string name="poi_socket_cee_red_125a">Утичница: ЦЕЕ црвена 125А</string>
-    <string name="poi_socket_cee_red_64a_output">Утичница: ЦЕЕ црвена 64А: излаз</string>
-    <string name="poi_socket_cee_red_64a_current">Утичница: ЦЕЕ црвена 64А: струја</string>
-    <string name="poi_socket_cee_red_64a">Утичница: ЦЕЕ црвена 64А</string>
+    <string name="poi_socket_cee_red_63a_output">Утичница: ЦЕЕ црвена 64А: излаз</string>
+    <string name="poi_socket_cee_red_63a_current">Утичница: ЦЕЕ црвена 64А: струја</string>
+    <string name="poi_socket_cee_red_63a">Утичница: ЦЕЕ црвена 64А</string>
     <string name="poi_socket_cee_red_32a_output">Утичница: ЦЕЕ црвена 32А: излаз</string>
     <string name="poi_socket_cee_red_32a_current">Утичница: ЦЕЕ црвена 32А: струја</string>
     <string name="poi_socket_cee_red_32a">Утичница: ЦЕЕ црвена 32А</string>
@@ -3667,7 +3667,7 @@
     <string name="poi_pet_grooming">Шишање љубимаца</string>
     <string name="poi_charge">Пуњење</string>
     <string name="poi_craft_cabinet_maker">Столар ормана</string>
-    <string name="poi_craft_bakery">Пекара</string>
+    <string name="poi_craft_bakery">Домаћи хлеб</string>
     <string name="poi_craft_floorer">Паркетар</string>
     <string name="poi_craft_joiner">Столар</string>
     <string name="poi_craft_distillery">Дестилерија</string>

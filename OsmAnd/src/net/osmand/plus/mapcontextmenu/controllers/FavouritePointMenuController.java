@@ -13,19 +13,19 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -66,9 +66,9 @@ public class FavouritePointMenuController extends MenuController {
 			transportStopController.processRoutes();
 		}
 
-		Object originObject = getBuilder().getOriginObject();
-		if (originObject instanceof Amenity) {
-			openingHoursInfo = OpeningHoursParser.getInfo(((Amenity) originObject).getOpeningHours());
+		Amenity amenity = getBuilder().getAmenity();
+		if (amenity != null) {
+			openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 		}
 	}
 
@@ -224,11 +224,9 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		Object originObject = getBuilder().getOriginObject();
-		if (originObject != null) {
-			if (originObject instanceof Amenity) {
-				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
-			}
+		Amenity amenity = getBuilder().getAmenity();
+		if (amenity != null) {
+			AmenityMenuController.addTypeMenuItem(amenity, builder);
 		}
 	}
 }

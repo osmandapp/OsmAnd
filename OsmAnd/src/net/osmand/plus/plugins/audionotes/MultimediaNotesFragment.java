@@ -38,7 +38,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -99,7 +99,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	protected void setupPreferences() {
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			setupCameraPhotoPrefs(plugin);
 
@@ -510,7 +510,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
 			updateAllSettings();
@@ -519,7 +519,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 			app.showToastMessage(R.string.plugin_prefs_reset_successful);

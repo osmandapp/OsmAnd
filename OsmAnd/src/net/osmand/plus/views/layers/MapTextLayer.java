@@ -88,6 +88,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
 		QuadTree<QuadRect> intersections = initBoundIntersections(tileBox);
 		for (Map.Entry<OsmandMapLayer, Collection<?>> entry : textObjects.entrySet()) {
 			OsmandMapLayer l = entry.getKey();

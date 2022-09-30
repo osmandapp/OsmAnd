@@ -39,13 +39,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -64,6 +61,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openplacereviews.UploadPhotosHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -87,7 +85,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -351,7 +348,7 @@ public class MenuBuilder {
 		return true;
 	}
 
-	protected void buildPluginRows(@NonNull View view,@Nullable Object object) {
+	protected void buildPluginRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
 			plugin.buildContextMenuRows(this, view, object);
 		}
@@ -1006,12 +1003,23 @@ public class MenuBuilder {
 		container.addView(button);
 	}
 
-	protected void buildDateRow(View view, long timestamp) {
-		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-		DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-		Date date = new Date(timestamp);
-		buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
-				0, false, null, false, 0, false, null, false);
+	protected void buildDateRow(@NonNull View view, long timestamp) {
+		if (timestamp > 0) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+			Date date = new Date(timestamp);
+			buildRow(view, R.drawable.ic_action_data, null, dateFormat.format(date) + " — " + timeFormat.format(date),
+					0, false, null, false, 0, false, null, false);
+		}
+	}
+
+	protected void buildCommentRow(@NonNull View view, @Nullable String comment) {
+		if (!Algorithms.isEmpty(comment)) {
+			View row = buildRow(view, R.drawable.ic_action_note_dark, null, comment, 0,
+					false, null, true, 10, false, null, false);
+			row.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(row.getContext(),
+					app, comment, row.getResources().getString(R.string.poi_dialog_comment)));
+		}
 	}
 
 	public boolean hasCustomAddressLine() {
@@ -1362,7 +1370,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
-		WikipediaPlugin plugin = WikipediaPlugin.getEnabledPlugin(WikipediaPlugin.class);
+		WikipediaPlugin plugin = PluginsHelper.getEnabledPlugin(WikipediaPlugin.class);
 		if (plugin != null) {
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
@@ -1486,71 +1494,5 @@ public class MenuBuilder {
 	@SuppressWarnings("unchecked")
 	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-	}
-
-	protected Object findAmenityObject(String originObjectName, double lat, double lon) {
-		if (originObjectName != null && originObjectName.length() > 0) {
-			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
-				return findAmenity(originObjectName, lat, lon);
-			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
-				return findTransportStop(originObjectName, lat, lon);
-			}
-		}
-		return null;
-	}
-
-	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-
-		for (Amenity amenity : amenities) {
-			String stringEn = amenity.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return amenity;
-			}
-		}
-		return null;
-	}
-
-	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = null;
-		try {
-			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
-
-						@Override
-						public boolean publish(TransportStop object) {
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (res != null) {
-			for (TransportStop stop : res) {
-				String stringEn = stop.toStringEn();
-				if (stringEn.equals(nameStringEn)) {
-					return stop;
-				}
-			}
-		}
-		return null;
 	}
 }

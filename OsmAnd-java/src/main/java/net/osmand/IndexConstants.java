@@ -5,10 +5,10 @@ public class IndexConstants {
 	
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
-	public final static int POI_TABLE_VERSION = 1;
-	public final static int BINARY_MAP_VERSION = 2; // starts with 1
-	public final static int VOICE_VERSION = 0; //supported download versions
-	public final static int TTSVOICE_VERSION = 1; //supported download versions
+	public static final int POI_TABLE_VERSION = 1;
+	public static final int BINARY_MAP_VERSION = 2; // starts with 1
+	public static final int VOICE_VERSION = 0; //supported download versions
+	public static final int TTSVOICE_VERSION = 1; //supported download versions
 
 	public static final String SQLITE_EXT = ".sqlitedb";
 	public static final String TEMP_SOURCE_TO_LOAD = "temp";
@@ -30,6 +30,8 @@ public class IndexConstants {
 	public static final String BINARY_SRTM_FEET_MAP_INDEX_EXT = ".srtmf.obf";
 	public static final String BINARY_SRTM_MAP_INDEX_EXT_ZIP = ".srtm.obf.zip";
 	public static final String BINARY_SRTM_FEET_MAP_INDEX_EXT_ZIP = ".srtmf.obf.zip";
+	public static final String BINARY_DEPTH_MAP_INDEX_EXT = ".depth.obf";
+	public static final String BINARY_DEPTH_MAP_INDEX_EXT_ZIP = ".depth.obf.zip";
 	public static final String EXTRA_EXT = ".extra";
 	public static final String EXTRA_ZIP_EXT = ".extra.zip";
 	public static final String OSM_GZ_EXT = ".osm.gz";
@@ -58,7 +60,7 @@ public class IndexConstants {
 
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
 
-	public final static String POI_TABLE = "poi";
+	public static final String POI_TABLE = "poi";
 
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
 	public static final String APP_DIR = "osmand/";
@@ -72,6 +74,7 @@ public class IndexConstants {
 	public static final String LIVE_INDEX_DIR = "live/";
 	public static final String TOURS_INDEX_DIR = "tours/";
 	public static final String SRTM_INDEX_DIR = "srtm/";
+	public static final String NAUTICAL_INDEX_DIR = "nautical/";
 	public static final String ROADS_INDEX_DIR = "roads/";
 	public static final String WIKI_INDEX_DIR = "wiki/";
 	public static final String WIKIVOYAGE_INDEX_DIR = "travel/";

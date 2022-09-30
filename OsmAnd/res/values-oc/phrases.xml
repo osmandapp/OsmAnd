@@ -288,7 +288,7 @@
     <string name="poi_piste_grooming">Preparacion de la pista</string>
     <string name="poi_outdoor_seating">Terrassa</string>
     <string name="poi_delivery">Liurason</string>
-    <string name="poi_drive_in">Drive in</string>
+    <string name="poi_drive_in">Service a bòrd de l’automobila</string>
     <string name="poi_drive_through">Via de servici per veïcules</string>
     <string name="poi_recycling_accepted_waste">Sobras acceptadas</string>
     <string name="poi_animal_shelter_purpose">Finalitat</string>
@@ -1070,4 +1070,27 @@
     <string name="poi_departures_board">Tablèu dei partenças</string>
     <string name="poi_consulate_filter">Consolat</string>
     <string name="poi_fire_hydrant_pressure_filter">Pression</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Servicis ai ciutadans</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visats per lei non-immigrants</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Visats per immigrants</string>
+    <string name="poi_charging_station">Estacion de carga</string>
+    <string name="poi_access_general">Accès generau</string>
+    <string name="poi_bay_filter">Mena de baia</string>
+    <string name="poi_access_bicycle">Accès per lei bicicletas</string>
+    <string name="poi_authentication_key">Autentificacion amb clau</string>
+    <string name="poi_access_scooter">Accès per lei motocicletas</string>
+    <string name="poi_authentication_contactless">Autentificacion sensa contacte</string>
+    <string name="poi_authentication_chip_card">Autentificacion amb carta de niera</string>
+    <string name="poi_cash_withdrawal_bank_card">Retirada de moneda</string>
+    <string name="poi_shelter_filter">Sosta</string>
+    <string name="poi_permanent_camping">Campament permanent</string>
+    <string name="poi_coffee_filter">Cafè</string>
+    <string name="poi_liaison_filter">Ligason</string>
+    <string name="poi_access_motorcar">Accès per leis automobilas</string>
+    <string name="poi_authentication_app">Autentificacion per una aplicacion</string>
+    <string name="poi_authentication_phone_call">Autentificacion per telefonada</string>
+    <string name="poi_authentication_short_message">Autentificacion per messatge</string>
+    <string name="poi_authentication_none">Autentificacion non necessària</string>
+    <string name="poi_tobacco_filter">Tabac</string>
+    <string name="poi_ice_cream_filter">Glacet</string>
 </resources>

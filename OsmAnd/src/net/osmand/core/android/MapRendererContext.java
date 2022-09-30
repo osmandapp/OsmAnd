@@ -1,13 +1,13 @@
 package net.osmand.core.android;
 
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
 import android.util.Log;
 
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.ITileSqliteDatabasesCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -26,7 +26,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -41,12 +43,12 @@ import java.util.Map;
 /**
  * Context container and utility class for MapRendererView and derivatives. 
  * @author Alexey Pelykh
- *
  */
-public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
+public class MapRendererContext {
     private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
+	public static final int OBF_SYMBOL_SECTION = 1;
 	private final OsmandApplication app;
 	
 	// input parameters
@@ -55,7 +57,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	
 	private boolean nightMode;
 	private final float density;
-	
+
 	// сached objects
 	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
 	private CachedMapPresentation presentationObjectParams;
@@ -146,15 +148,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
                 Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
 
                 // Ensure parents are loaded (this may also trigger load)
-                app.getRendererRegistry().getRenderer(rendName);
-
-                if (mapStylesCollection.getStyleByName(rendName) == null) {
-                    try {
-                        loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
-                    } catch (IOException e) {
-                        Log.e(TAG, "Failed to load '" + rendName + "'", e);
-                    }
-                }
+				loadRenderer(rendName);
             }
             ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
             if (mapStyle != null) {
@@ -179,6 +173,34 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 
 		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && isVectorLayerEnabled()) {
 			recreateRasterAndSymbolsProvider();
+			setMapBackgroundColor();
+		}
+	}
+
+	private void setMapBackgroundColor() {
+		RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
+		int color = MAP_DEFAULT_COLOR;
+		if (rrs != null) {
+			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+			if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+				color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
+			}
+		}
+		mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
+	}
+
+	private void loadRenderer(String rendName) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
+		if (mapStylesCollection.getStyleByName(rendName) == null && renderer != null) {
+			try {
+				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+				if (renderer.getDependsName() != null) {
+					loadRenderer(renderer.getDependsName());
+				}
+			} catch (IOException e) {
+				Log.e(TAG, "Failed to load '" + rendName + "'", e);
+			}
 		}
 	}
 
@@ -235,6 +257,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 
 	public void recreateHeightmapProvider() {
 		if (mapRendererView != null) {
+			if (!app.getSettings().SHOW_HEIGHTMAPS.get()) {
+				mapRendererView.resetElevationDataProvider();
+				return;
+			}
 			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
 			if (!heightMapDir.exists()) {
 				heightMapDir.mkdir();
@@ -265,7 +291,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 				getReferenceTileSize());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
-			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
 		}
 	}
 	
@@ -290,7 +316,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			}
 			// Symbols
 			if (obfMapSymbolsProvider != null) {
-				mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
+				mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
 			}
 			// Heightmap
 			recreateHeightmapProvider();
@@ -338,10 +364,6 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			} else return mapStyle.equals(other.mapStyle);
 		}
 	}
-
-    public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
-        loadStyleFromStream(name, source);
-    }
 
     private void loadStyleFromStream(String name, InputStream source) {
     	if (source == null) {

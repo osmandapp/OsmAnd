@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -34,9 +34,10 @@ import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.RouteAction;
-import net.osmand.plus.quickaction.actions.ShowHideCoordinatesWidgetAction;
+import net.osmand.plus.quickaction.actions.ShowHideCurrentLocationWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
+import net.osmand.plus.quickaction.actions.ShowHideMapCenterWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
@@ -70,7 +71,7 @@ public class QuickActionRegistry {
 	public static final QuickActionType TYPE_CONFIGURE_MAP = new QuickActionType(0, "").
 			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP);
 	public static final QuickActionType TYPE_NAVIGATION = new QuickActionType(0, "").
-			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
+			nameRes(R.string.shared_string_navigation).category(QuickActionType.NAVIGATION);
 	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
@@ -158,7 +159,8 @@ public class QuickActionRegistry {
 	}
 
 	private void saveActions() {
-		Type type = new TypeToken<List<QuickAction>>(){}.getType();
+		Type type = new TypeToken<List<QuickAction>>() {
+		}.getType();
 		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
 	}
 
@@ -259,7 +261,8 @@ public class QuickActionRegistry {
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
-		allTypes.add(ShowHideCoordinatesWidgetAction.TYPE);
+		allTypes.add(ShowHideCurrentLocationWidgetAction.TYPE);
+		allTypes.add(ShowHideMapCenterWidgetAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);
@@ -275,7 +278,7 @@ public class QuickActionRegistry {
 		allTypes.add(DisplayPositionAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
-		OsmandPlugin.registerQuickActionTypesPlugins(allTypes, enabledTypes);
+		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();

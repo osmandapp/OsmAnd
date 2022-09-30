@@ -368,6 +368,7 @@ dependencies {
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
 	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
 // size restrictions

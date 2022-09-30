@@ -101,7 +101,7 @@ public class MapActions {
 		// then update start and destination point
 		targets.updateRouteAndRefresh(true);
 
-		app.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		app.getOsmandMap().refreshMap(true);
 
 		if (targets.hasTooLongDistanceToNavigate()) {
@@ -132,7 +132,7 @@ public class MapActions {
 		// then update start and destination point
 		targets.updateRouteAndRefresh(true);
 
-		app.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		app.getOsmandMap().refreshMap(true);
 
 		if (targets.hasTooLongDistanceToNavigate()) {

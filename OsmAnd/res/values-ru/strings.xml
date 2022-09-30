@@ -347,7 +347,7 @@
     <string name="oclock">ч.</string>
     <string name="unknown_from_location">Точка отправления ещё не определена.</string>
     <string name="unknown_location">Местоположение ещё не определено.</string>
-    <string name="modify_transparency">Установить прозрачность (0 – прозрачный, 255 – непрозрачный)</string>
+    <string name="modify_transparency">Задать прозрачность (0 – прозрачный, 255 – непрозрачный)</string>
     <string name="confirm_interrupt_download">Прервать загрузку\?</string>
     <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Управление файлами карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
     <string name="basemap_was_selected_to_download">Карта мира, необходимая для обеспечения базовой функциональности, находится в очереди загрузки.</string>
@@ -1309,7 +1309,6 @@
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="map_widget_fps_info">Отладочная информация FPS</string>
     <string name="shared_string_about">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     <string name="local_index_tile_data_zooms">Загруженные уровни масштабирования: %1$s</string>
@@ -1520,13 +1519,13 @@
     <string name="rendering_attr_subwayMode_name">Линии метро</string>
     <string name="continue_navigation">Продолжить навигацию</string>
     <string name="pause_navigation">Приостановить навигацию</string>
-    <string name="rendering_attr_alpineHiking_description">Отрисовка дорог согласно шкале SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Раскраска троп и дорог согласно шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Отрисовка дорог в соответствии с трассировкой OSMC.</string>
     <string name="arrival_distance_factor_early">Раннее</string>
     <string name="arrival_distance_factor_normally">По умолчанию</string>
     <string name="arrival_distance_factor_late">Позднее</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
-    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Пешеходные маршруты</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршрутных такси</string>
@@ -1856,22 +1855,22 @@
     <string name="dark_theme">Тёмная</string>
     <string name="lang_bn">Бенгальский</string>
     <string name="rendering_value_default13_name">По умолчанию (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">По умолчанию (полупрозрачный голубой)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">По умолчанию (голубой прозрачный)</string>
     <string name="rendering_value_red_name">Красный</string>
-    <string name="rendering_value_translucent_red_name">Полупрозрачный красный</string>
-    <string name="rendering_value_translucent_orange_name">Полупрозрачный оранжевый</string>
+    <string name="rendering_value_translucent_red_name">Красный прозрачный</string>
+    <string name="rendering_value_translucent_orange_name">Оранжевый прозрачный</string>
     <string name="rendering_value_yellow_name">Жёлтый</string>
-    <string name="rendering_value_translucent_yellow_name">Полупрозрачный жёлтый</string>
+    <string name="rendering_value_translucent_yellow_name">Жёлтый прозрачный</string>
     <string name="rendering_value_lightgreen_name">Светло-зелёный</string>
-    <string name="rendering_value_translucent_lightgreen_name">Полупрозрачный светло-зелёный</string>
+    <string name="rendering_value_translucent_lightgreen_name">Светло-зелёный прозрачный</string>
     <string name="rendering_value_green_name">Зелёный</string>
-    <string name="rendering_value_translucent_green_name">Полупрозрачный зелёный</string>
+    <string name="rendering_value_translucent_green_name">Зелёный прозрачный</string>
     <string name="rendering_value_lightblue_name">Голубой</string>
-    <string name="rendering_value_translucent_lightblue_name">Полупрозрачный голубой</string>
+    <string name="rendering_value_translucent_lightblue_name">Голубой прозрачный</string>
     <string name="rendering_value_blue_name">Синий</string>
-    <string name="rendering_value_translucent_blue_name">Полупрозрачный синий</string>
+    <string name="rendering_value_translucent_blue_name">Синий прозрачный</string>
     <string name="rendering_value_purple_name">Фиолетовый</string>
-    <string name="rendering_value_translucent_purple_name">Полупрозрачный фиолетовый</string>
+    <string name="rendering_value_translucent_purple_name">Фиолетовый прозрачный</string>
     <string name="restart_is_required">Для применения изменения требуется перезапуск.</string>
     <string name="do_you_like_osmand">Нравится ли вам приложение?</string>
     <string name="rate_this_app">Оценить приложение</string>
@@ -2253,7 +2252,6 @@
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
     <string name="quick_action_add_configure_map">Настройки карты</string>
-    <string name="quick_action_add_navigation">Навигация</string>
     <string name="quick_action_bug_message">Сообщение</string>
     <string name="quick_action_map_style_action">Добавить стиль карты</string>
     <string name="quick_action_map_styles">Стили карты</string>
@@ -2318,7 +2316,7 @@
     <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие в Mapillary</string>
     <string name="hide_from_zoom_level">Скрыть, начиная с уровня масштабирования</string>
-    <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
+    <string name="rendering_value_translucent_pink_name">Розовый прозрачный</string>
     <string name="lang_ber">Берберский</string>
     <string name="move_all_to_history">Переместить все в историю</string>
     <string name="sort_by">Сортировка</string>
@@ -2994,7 +2992,7 @@
     <string name="profile_alert_delete_title">Удалить профиль</string>
     <string name="profile_alert_delete_msg">Удалить профиль «%s»\?</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
-    <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
+    <string name="select_base_profile_dialog_message">За основу пользовательского профиля возьмите один из профилей по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию, единицы измерения скорости и расстояния. Ниже перечислены основные профили и примеры пользовательских профилей, до которых они могут быть расширены:</string>
     <string name="select_nav_profile_dialog_title">Режим навигации</string>
     <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
     <string name="base_profile_descr_bicycle">Горный велосипед, мопед, лошадь</string>
@@ -3099,7 +3097,6 @@
     <string name="routing_attr_freeride_policy_name">Вне трассы</string>
     <string name="routing_attr_freeride_policy_description">Фрирайд и внетрассовые маршруты — это неофициальные трассы и проезды. Как правило, они не подготовлены, не обслуживаются и не проверяются вечером. Вход на свой страх и риск.</string>
     <string name="shared_string_open_track">Открыть трек</string>
-    <string name="gpx_join_gaps">Соединить разрывы (исключить пробелы)</string>
     <string name="app_mode_camper">Кемпер</string>
     <string name="app_mode_campervan">Альковен (RV)</string>
     <string name="rendering_attr_showLez_description">Показывать на карте зоны с низким уровнем выбросов. Не влияет на навигацию.</string>
@@ -3882,7 +3879,6 @@
     <string name="lang_de_casual">Немецкий (повседневный)</string>
     <string name="app_mode_light_aircraft">Лёгкий самолёт</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
-    <string name="plan_route_join_segments">Объединить сегменты</string>
     <string name="plan_route_split_before">Разделить перед</string>
     <string name="plan_route_split_after">Разделить после</string>
     <string name="profile_type_user_string">Профиль пользователя</string>
@@ -4591,8 +4587,8 @@
     <string name="map_widget_current_speed">Текущая скорость</string>
     <string name="shared_string_symbol">Символ</string>
     <string name="on_with_params">%1$s на %2$s</string>
-    <string name="no_widgets_descr">Добавьте один или несколько виджетов из списка доступных.</string>
-    <string name="no_widgets_here_yet">Здесь пока нет виджетов</string>
+    <string name="no_widgets_descr">Добавьте виджеты из списка доступных.</string>
+    <string name="no_widgets_here_yet">Виджеты не добавлены</string>
     <string name="available_widgets">Доступные виджеты</string>
     <string name="snackbar_page_removed">Страница %1$s была удалена.</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Только при необходимости</string>
@@ -4653,7 +4649,6 @@
     <string name="arrival_time_widget_desc">Время прибытия в пункт назначения.</string>
     <string name="map_markers_bar_widget_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="coordinates_widget_desc">Виджет показывает географические координаты текущего местоположения.</string>
-    <string name="map_markers_desc">Виджет показывает направление и расстояние до маркера от текущего местоположения. Возможно настроить отображение одного или двух верхних маркеров.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегать дорог, подходящих только для полноприводных автомобилей</string>
     <string name="routing_attr_avoid_4wd_only_name">Без дорог 4WD</string>
     <string name="compass_on_circles">Компас на окружности</string>
@@ -4783,4 +4778,10 @@
     <string name="connect_with_straight_line">Соединить прямой линией</string>
     <string name="attach_roads_descr">Хотите ли вы аппроксимировать свой путь с помощью действующего маршрута, прикрепленного к офлайн-картам\? В этом случае у вас будет скорректированная высота над уровнем моря, информация о дорогах и поворотах, которую в дальнейшем можно будет использовать в навигации.</string>
     <string name="attach_to_roads_banner_desc">Прикрепите свой трек к дорогам, чтобы получить подробные инструкции по навигации.</string>
+    <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
+    <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
+    <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
+    <string name="favorite_delete_group">Удалить группу</string>
+    <string name="download_heightmap_maps">Карта высот</string>
+    <string name="display_position">Отображать позицию</string>
 </resources>
