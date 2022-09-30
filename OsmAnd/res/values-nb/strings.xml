@@ -4738,4 +4738,42 @@
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
     <string name="favorite_confirm_delete_group">Vil du slette «%1$s»-gruppen og alle dens punkter (%2$d)</string>
     <string name="favorite_delete_group">Slett gruppe</string>
+    <string name="tap_on_widget">Trykk på miniprogrammet</string>
+    <string name="display_position">Vis posisjon</string>
+    <string name="download_heightmap_maps">Høydekart</string>
+    <string name="shared_string_large">Stor</string>
+    <string name="shared_string_normal">Normal</string>
+    <string name="how_to_use">Instruks:</string>
+    <string name="map_widget_zoom_level">Forstørrelsesnivå</string>
+    <string name="ant_missing_dependency">Manglende avhengighet</string>
+    <string name="ant_go_to_store">Gå til butikken</string>
+    <string name="ant_read_data">Les data</string>
+    <string name="ant_write_to_gpx">Skriv data til spor</string>
+    <string name="ant_heart_rate_write_gpx_desc">Skriv puls til spor</string>
+    <string name="map_widget_ant_heart_rate">Puls</string>
+    <string name="map_widget_ant_bicycle_power">Sykkeleffekt</string>
+    <string name="map_widget_ant_bicycle_speed">Sykkelhastighet</string>
+    <string name="map_widget_ant_heart_rate_desc">Viser brukerens puls i løpet av en aktivitet i sanntid</string>
+    <string name="map_widget_ant_bicycle_power_desc">Viser syklistens målte tråkk, som brukes til å bevege sykkelen fremover.</string>
+    <string name="map_widget_ant_bicycle_cadence">Krankomdreininger</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Viser hvor for rundt brukeren snurrer pedalarmene</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Viser kjørehastighet</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+-beskrivelse</string>
+    <string name="worldwide_maps">Verdenskart</string>
+    <string name="developer_widgets">Utviklerminiprogrammer</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt avstand</string>
+    <string name="nautical_depth_points">Sjødybder</string>
+    <string name="depth_contours">Dybdekonturer</string>
+    <string name="map_widget_zoom_level_desc">Miniprogrammet viser nåværende kartforstørrelsesnivå.</string>
+    <string name="ant_widgets">ANT+-miniprogrammer</string>
+    <string name="map_widget_ant_bicycle_dist">Sykkelavstand</string>
+    <string name="map_widget_target_distance_desc">Miniprogrammet viser avstanden fra kameraet til målstedet.</string>
+    <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».
+\nDu må installere ANT+-programtilleggstjenesten, eller så må du oppgradere eksisterende versjon hvis du allerede har den.
+\nVil du åpne Play-butikken for å hente den\?</string>
+    <string name="shared_string_shows">Viser</string>
+    <string name="coordinates_widget_current_location">Koordinater: nåværende posisjon</string>
+    <string name="shared_string_switch_mode">Bytt modus</string>
+    <string name="click_on_widget">Klikk på miniprogrammet</string>
 </resources>

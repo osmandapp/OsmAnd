@@ -4799,4 +4799,27 @@
     <string name="map_widget_camera_tilt_desc">A widget a kamera dőlésszögét mutatja perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
     <string name="developer_widgets">Fejlesztői widgetek</string>
     <string name="map_widget_target_distance_desc">A widget a kamerától a célig tartó távolságot mutatja.</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mutatja a kerékpárosnak a kerékpár meghajtása során leadott teljesítményét</string>
+    <string name="map_widget_ant_bicycle_speed">Kerékpáros sebesség</string>
+    <string name="map_widget_ant_bicycle_cadence">Pedálfordulatszám</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mutatja a felhasználó pedálozási sebességét</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mutatja a haladás sebességét</string>
+    <string name="map_widget_ant_bicycle_dist">Kerékpáros távolság</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mutatja a megtett távolságot</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ leírás</string>
+    <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
+    <string name="nautical_depth_points">Tengeri mélységpontok</string>
+    <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található.
+\nTelepítenie kell az ANT+ beépülő szolgáltatást vagy frissítenie kell a meglévő verzióját, ha már rendelkezik vele.
+\nSzeretne belépni a Google Play Áruházba, hogy elvégezze\?</string>
+    <string name="ant_read_data">Adat olvasása</string>
+    <string name="map_widget_ant_bicycle_power">Kerékpáros teljesítmény</string>
+    <string name="map_widget_ant_heart_rate">Pulzusszám</string>
+    <string name="ant_widgets">ANT+ widgetek</string>
+    <string name="ant_go_to_store">Ugrás az áruházhoz</string>
+    <string name="ant_missing_dependency">Hiányzó függőség</string>
+    <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
+    <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
+    <string name="depth_contours">Mélységi szintvonalak</string>
 </resources>

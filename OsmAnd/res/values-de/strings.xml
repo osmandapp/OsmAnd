@@ -4810,4 +4810,5 @@
     <string name="map_widget_camera_tilt">Kameraneigung</string>
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Das Widget zeigt die Entfernung von der Kamera zum Zielort an.</string>
+    <string name="ant_widgets">ANT+ Widgets</string>
 </resources>

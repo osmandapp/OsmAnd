@@ -4802,4 +4802,27 @@
     <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
+    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="ant_missing_dependency">Dépendance manquante</string>
+    <string name="ant_go_to_store">Accéder à la boutique</string>
+    <string name="ant_read_data">Lire les données</string>
+    <string name="map_widget_ant_heart_rate">Fréquence cardiaque</string>
+    <string name="ant_write_to_gpx">Ajouter des données à la trace</string>
+    <string name="ant_heart_rate_write_gpx_desc">Ajouter la fréquence cardiaque à la trace</string>
+    <string name="ant_missing_dependency_descr">Le service « %1$s » est introuvable.
+\nInstallez le service ANT+ ou mettez à jour votre version s\'il est déjà installé.
+\nVoulez-vous lancer Google Play Store pour l\'installer \?</string>
+    <string name="map_widget_ant_heart_rate_desc">Affiche, en temps réel, la fréquence cardiaque de l\'utilisateur pendant une activité</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Affiche la vitesse à laquelle l\'utilisateur pédale</string>
+    <string name="map_widget_ant_bicycle_speed">Vitesse du vélo</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Affiche la vitesse de déplacement</string>
+    <string name="map_widget_ant_bicycle_dist">Distance à vélo</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Affiche la distance parcourue</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Description de l\'ANT+</string>
+    <string name="worldwide_maps">Cartes mondiales</string>
+    <string name="depth_contours">Lignes de profondeur</string>
+    <string name="map_widget_ant_bicycle_power_desc">Indique la puissance produite par le cycliste et utilisée pour faire avancer le vélo</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadence de pédalage</string>
+    <string name="nautical_depth_points">Points de sonde marine</string>
 </resources>

@@ -4799,4 +4799,28 @@
     <string name="map_widget_zoom_level_desc">顯示目前地圖縮放層級的小工具。</string>
     <string name="map_widget_camera_distance_desc">顯示相機在地面以上標高的小工具。</string>
     <string name="map_widget_camera_distance">相機標高</string>
+    <string name="ant_missing_dependency">缺少依賴關係</string>
+    <string name="ant_go_to_store">到商店</string>
+    <string name="ant_read_data">讀取資料</string>
+    <string name="ant_write_to_gpx">將資料寫入至軌跡</string>
+    <string name="ant_widgets">ANT+ 小工具</string>
+    <string name="map_widget_ant_bicycle_power">自行車功率</string>
+    <string name="ant_missing_dependency_descr">找不到必要的服務「%1$s」。 
+\n您必須安裝 ANT+ 外掛程式服務，或若您已安裝此程式的話，請更新既有的版本。 
+\n您想要開啟 Play 商店並安裝它嗎？</string>
+    <string name="ant_heart_rate_write_gpx_desc">將心率寫入至軌跡</string>
+    <string name="map_widget_ant_bicycle_speed">自行車速度</string>
+    <string name="depth_contours">等深線</string>
+    <string name="map_widget_ant_heart_rate">心率</string>
+    <string name="map_widget_ant_heart_rate_desc">即時顯示使用者在指定時間內的心率</string>
+    <string name="map_widget_ant_bicycle_power_desc">顯示騎士用於推動自行車前進的功率輸出</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">顯示使用者踩踏板的速度</string>
+    <string name="map_widget_ant_bicycle_dist">自行車距離</string>
+    <string name="antplus_plugin_description">ANT+ 描述</string>
+    <string name="nautical_depth_points">航海深度點</string>
+    <string name="map_widget_ant_bicycle_cadence">自行車節奏</string>
+    <string name="map_widget_ant_bicycle_speed_desc">顯示行駛速度</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="worldwide_maps">世界地圖</string>
+    <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
 </resources>

@@ -2233,7 +2233,7 @@
     <string name="subscribe_email_error">Помилка</string>
     <string name="mapillary">Mapillary</string>
     <string name="depth_contour_descr">Ізолінії морських глибин та навігаційні знаки.</string>
-    <string name="sea_depth_thanks">Дякуємо Вам за покупку Ізоліній морських глибин</string>
+    <string name="sea_depth_thanks">Дякуємо Вам за придбання Ізоліній морських глибин</string>
     <string name="index_item_depth_contours_osmand_ext">Ізолінії морських глибин</string>
     <string name="index_item_depth_points_southern_hemisphere">Відмітки морських глибин південної півкулі</string>
     <string name="index_item_depth_points_northern_hemisphere">Відмітки морських глибин північної півкулі</string>
@@ -2241,7 +2241,7 @@
     <string name="nautical_maps">Морські мапи</string>
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Видимі</string>
-    <string name="restore_purchases">Відновлення покупок</string>
+    <string name="restore_purchases">Відновлення придбань</string>
     <string name="driving_region_automatic">Автоматично</string>
     <string name="do_not_send_anonymous_app_usage">Не надсилати анонімну статистику про користування застосунком</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає відомості про те, які Ви використовуєте частини застосунку. Ваше місце розташування ніколи не надсилається, як і все, що Ви вводите, які місця переглядаєте, що шукаєте чи завантажуєте.</string>
@@ -2692,7 +2692,7 @@
     <string name="daily_map_updates">Щогодинне оновлення мап</string>
     <string name="in_app_purchase">Купівля в застосунку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
-    <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
+    <string name="in_app_purchase_desc_ex">Після придбання він буде завжди доступний для вас.</string>
     <string name="purchase_unlim_title">Купити — %1$s</string>
     <string name="wikivoyage_offline">Вікімандри в офлайн режимі</string>
     <string name="unlimited_downloads">Необмежені завантаження</string>
@@ -3543,7 +3543,7 @@
     <string name="map_markers_item">Позначки</string>
     <string name="favorites_item">Закладки</string>
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
-    <string name="osmand_purchases_item">OsmAnd покупки</string>
+    <string name="osmand_purchases_item">OsmAnd придбання</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
     <string name="osm_live_payment_subscription_management">Оплата стягується з вашого облікового запису Google Play під час підтвердження купівлі.
 \n
@@ -3781,7 +3781,7 @@
     <string name="contour_lines_thanks">Дякуємо за придбання «Ізоліній»</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
-    <string name="osm_live_payment_subscription_management_hw">Оплата стягується з вашого облікового запису AppGallery під час підтвердження покупки.
+    <string name="osm_live_payment_subscription_management_hw">Оплата стягується з вашого облікового запису AppGallery під час підтвердження придбання.
 \n
 \nПлатіж поновлюється, якщо його не скасовано до вибраного періоду поновлення.
 \n
@@ -4008,7 +4008,7 @@
     <string name="update_frequency">Частота оновлень</string>
     <string name="delete_updates">Вилучити оновлення</string>
     <string name="live_update_delete_updates_msg">Вилучити всі live-оновлення для %s\?</string>
-    <string name="purchases">Покупки</string>
+    <string name="purchases">Придбання</string>
     <string name="select_category_descr">Виберіть категорію або додайте нову</string>
     <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
     <string name="copy_poi_name">Копіювати назву точки інтересу</string>
@@ -4040,10 +4040,10 @@
 \n• Оновлено діалог «Запису треку»
 \n
 \n</string>
-    <string name="no_purchases">У вас немає покупок</string>
+    <string name="no_purchases">У вас немає придбань</string>
     <string name="new_device_account">Новий пристрій / новий обліковий запис</string>
     <string name="contact_support_description">Якщо маєте будь-які питання, зв\'яжіться з нами за адресою %1$s.</string>
-    <string name="empty_purchases_description">Якщо ваші покупки не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
+    <string name="empty_purchases_description">Якщо ваші придбання не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
     <string name="contact_support">Звернутися до служби підтримки</string>
     <string name="troubleshooting">Розв\'язання проблем</string>
     <string name="troubleshooting_description">Перейдіть за цим посиланням, якщо у вас виникли проблеми з придбанням.</string>
@@ -4214,7 +4214,7 @@
 \n
 \n• План маршруту: Тепер ви можете змінювати параметри навігації, доступ до налаштувань мапи та пошуку, не виходячи з планування маршруту
 \n
-\n• Нове меню «Покупка» з подробицями про покупку
+\n• Нове меню «Придбання» з подробицями про придбання
 \n
 \n• Додана можливість зміни зовнішнього вигляду лінії маршруту
 \n
@@ -4284,10 +4284,10 @@
     <string name="map_updates_for_mappers">Оновлення мап для маперів</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Можливості Pro</string>
-    <string name="purchases_restored">Покупки відновлено</string>
+    <string name="purchases_restored">Придбання відновлено</string>
     <string name="grey_color_undefined">Частки без даних – сірі.</string>
     <string name="no_activity_for_intent">Встановіть відповідний застосунок, що може виконувати цю дію.</string>
-    <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження покупки.
+    <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження придбання.
 \n
 \nПідписка поновлюється, якщо не скасовано до вибраного проміжку поновлення.
 \n
@@ -4806,4 +4806,28 @@
     <string name="map_widget_target_distance_desc">Віджет показує відстань від камери до цільового розташування.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Віджет показує поточний масштаб мапи.</string>
+    <string name="ant_widgets">Віджети ANT+</string>
+    <string name="ant_missing_dependency_descr">Необхідна служба «%1$s» не знайдена.
+\nВам необхідно встановити службу плагінів ANT+ або оновити наявну версію, якщо вона у вас вже є.
+\nБажаєте запустити Play Маркет, щоб отримати її\?</string>
+    <string name="ant_missing_dependency">Відсутня залежність</string>
+    <string name="ant_go_to_store">Перейти до маркету</string>
+    <string name="ant_read_data">Прочитати дані</string>
+    <string name="ant_write_to_gpx">Записати дані до треку</string>
+    <string name="ant_heart_rate_write_gpx_desc">Записати пульс до треку</string>
+    <string name="map_widget_ant_heart_rate">Пульс</string>
+    <string name="map_widget_ant_heart_rate_desc">Показує пульс користувача під час певної активності в режимі реального часу</string>
+    <string name="map_widget_ant_bicycle_speed">Швидкість велосипеда</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Показує швидкість пересування</string>
+    <string name="map_widget_ant_bicycle_dist">Відстань на велосипеді</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Показує пройдену відстань</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Опис ANT+</string>
+    <string name="worldwide_maps">Мапи світу</string>
+    <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
+    <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>
+    <string name="map_widget_ant_bicycle_cadence">Швидкість обертання велопедалей</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Показує швидкість, з якою користувач крутить педалі</string>
+    <string name="nautical_depth_points">Точки морських глибин</string>
+    <string name="depth_contours">Ізолінії глибин</string>
 </resources>
