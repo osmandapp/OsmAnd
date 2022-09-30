@@ -4822,5 +4822,10 @@
     <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
-    <string name="worldwide_maps">Világtérképek</string>
+    <string name="worldwide_maps">Térképek világszerte</string>
+    <string name="map_widget_fps_info">Térkép renderelési sebessége (képkocka/mp)</string>
+    <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
+    <string name="favorites_backup">Kedvencek biztonsági mentése</string>
+    <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
+    <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/Web) további költségek nélkül.</string>
 </resources>
