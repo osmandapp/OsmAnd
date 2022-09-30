@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +35,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
@@ -115,15 +118,13 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		TextView descriptionView = mainView.findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());
 
-		if (Linkify.addLinks(descriptionView, Linkify.ALL)) {
+		OsmAndAppCustomization customization = app.getAppCustomization();
+		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(descriptionView, Linkify.ALL)) {
 			int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
-			int linkTextColor = ContextCompat.getColor(context, linkTextColorId);
-
-			descriptionView.setLinkTextColor(linkTextColor);
+			descriptionView.setLinkTextColor(ContextCompat.getColor(context, linkTextColorId));
 			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
 			AndroidUtils.removeLinkUnderline(descriptionView);
 		}
-
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
 		settingsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -145,7 +146,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (plugin.isEnabled() != isChecked) {
-					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
+					if (PluginsHelper.enablePlugin(getActivity(), app, plugin, isChecked)) {
 						updateState();
 
 						Fragment target = getTargetFragment();
@@ -194,7 +195,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			log.error("Extra '" + EXTRA_PLUGIN_ID + "' is null");
 			return null;
 		}
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
 		if (plugin == null) {
 			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
 			return null;
@@ -206,7 +207,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	public void onResume() {
 		super.onResume();
 		if (plugin != null) {
-			OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+			PluginsHelper.checkInstalledMarketPlugins(app, getActivity());
 			updateState();
 		} else {
 			dismiss();

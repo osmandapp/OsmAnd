@@ -21,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -55,7 +55,7 @@ public class WeatherContoursFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
-		weatherPlugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	}
 
 	@Nullable

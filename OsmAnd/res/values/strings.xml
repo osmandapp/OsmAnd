@@ -11,8 +11,16 @@
 	Thx - Hardy
 -->
 
-    <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
-    <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
+    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_offline_forecast">Offline forecast</string>
+    <string name="weather_online_cache">Online cache</string>
+    <string name="map_settings_weather_temp">Temperature</string>
+    <string name="map_settings_weather_pressure">Pressure</string>
+    <string name="map_settings_weather_wind">Wind</string>
+    <string name="map_settings_weather_cloud">Cloud</string>
+    <string name="map_settings_weather_precip">Precipitation</string>
+    <string name="measurement_units">Measurement units</string>
+    <string name="shared_string_weather">Weather</string>
     <string name="explore_weather_forecast">Explore Weather forecast.</string>
     <string name="shared_string_contours">Contours</string>
     <string name="shared_string_layers">Layers</string>
@@ -51,22 +59,73 @@
     <string name="weather_prefs_descr">24h hourly forecast &amp; 7 days forecast each 3 hours</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
-    <string name="weather_offline_forecast">Offline forecast</string>
-    <string name="weather_online_cache">Online cache</string>
-    <string name="map_settings_weather_temp">Temperature</string>
-    <string name="map_settings_weather_pressure">Pressure</string>
-    <string name="map_settings_weather_wind">Wind</string>
-    <string name="map_settings_weather_cloud">Cloud</string>
-    <string name="map_settings_weather_precip">Precipitation</string>
-    <string name="measurement_units">Measurement units</string>
-    <string name="shared_string_weather">Weather</string>
-    <string name="attach_to_roads_banner_desc">Attach your track to the roads, to get detailed navigation instructions.</string>
+    <string name="favorites_backup">Favorites backup</string>
+    <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
+    <string name="shared_string_cross_buy">Cross-buy</string>
+    <string name="map_widget_fps_info">Map rendering FPS (frames per second)</string>
+    <string name="map_widget_target_distance">Distance from camera to target</string>
+    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
+    <string name="ant_missing_dependency">Missing Dependency</string>
+    <string name="ant_go_to_store">Go to Store</string>
+    <string name="ant_read_data">Read data</string>
+    <string name="ant_write_to_gpx">Write data to track</string>
+    <string name="ant_heart_rate_write_gpx_desc">Write Heart Rate to track</string>
+    <string name="map_widget_ant_heart_rate">Heart Rate</string>
+    <string name="map_widget_ant_heart_rate_desc">Shows user\'s heart rate during a given activity in real-time</string>
+    <string name="map_widget_ant_bicycle_power">Bicycle Power</string>
+    <string name="map_widget_ant_bicycle_power_desc">Shows cyclist\'s power output, which is used to move the bike forward</string>
+    <string name="map_widget_ant_bicycle_cadence">Bicycle Cadence</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Shows speed at which the user is pedalling</string>
+    <string name="map_widget_ant_bicycle_speed">Bicycle Speed</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
+    <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ description</string>
+    <string name="nautical_depth_points">Nautical depth points</string>
+    <string name="depth_contours">Depth contours</string>
+    <string name="worldwide_maps">Worldwide maps</string>
+    <string name="map_widget_target_distance_desc">Widget shows the distance from the camera to the target location.</string>
+    <string name="map_widget_zoom_level_desc">Widget shows the current map zoom level.</string>
+    <string name="map_widget_camera_distance_desc">Widget shows the elevation of the camera above the surface level.</string>
+    <string name="map_widget_camera_tilt_desc">Widget shows the camera tilt angle in perspective mode. Default is 90° (no tilt).</string>
+    <string name="map_widget_zoom_level">Zoom level</string>
+    <string name="map_widget_camera_distance">Camera elevation</string>
+    <string name="map_widget_camera_tilt">Camera tilt</string>
+    <string name="developer_widgets">Developer widgets</string>
+    <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
+    <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
+    <string name="map_center_widget">Map center</string>
+    <string name="current_location_widget">Current location</string>
+    <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
+    <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
+    <string name="coordinates_widget_map_center">Coordinates: map center</string>
+    <string name="coordinates_widget_current_location">Coordinates: current location</string>
+    <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
+    <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
+    <string name="tap_on_widget">Tap on widget</string>
+    <string name="go_to_marker_location">Go to marker location</string>
+    <string name="shared_string_switch_mode">Switch mode</string>
+    <string name="click_on_widget">Click on widget</string>
+    <string name="shared_string_shows">Shows</string>
+    <string name="shared_string_large">Large</string>
+    <string name="shared_string_normal">Normal</string>
+    <string name="how_to_use">How to use:</string>
+    <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
+    <string name="shared_string_2_5_d_view">2.5 D view</string>
+    <string name="display_position">Display position</string>
+    <string name="download_heightmap_maps">Heightmap</string>
+    <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
+    <string name="favorite_delete_group">Delete Group</string>
+    <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
+    <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
+    <string name="attach_to_roads_banner_desc">Attach your track to the roads to receive detailed navigation instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Show specifically designed trails for mountainbiking</string>
-    <string name="connect_with_straight_line">Connect with straight line</string>
-    <string name="attach_roads_descr">Do you want to approximate your track with a valid route attached to offline maps. In that case you will have corrected road altitude, road information and turns that could be used later in navigation.</string>
-    <string name="attach_roads_warning">You can attach to the roads only a recorded track</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
+    <string name="connect_with_straight_line">Connect with a straight line</string>
+    <string name="attach_roads_descr">Approximate your track with a route using the offline map. This will provide corrected elevation values, road details, and turns used during the navigation.</string>
+    <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
     <string name="download_tiles">Download tiles</string>
@@ -76,20 +135,20 @@
     <string name="auto_25_chars_route_tr_kr">Turn right and keep right</string>
     <string name="auto_25_chars_route_tu_kl">Make U-turn and keep left</string>
     <string name="auto_25_chars_route_tu_kr">Make U-turn and keep right</string>
-    <string name="auto_25_chars_route_roundabout_kl">Take %1$d exit and keep left</string>
-    <string name="auto_25_chars_route_roundabout_kr">Take %1$d exit and keep right</string>
-    <string name="auto_backup_preference_desc">By default Android saves backups of favourites, map tokens and OsmAnd settings to restore them on new devices or after reinstallation. This backup is limited to 25 MB.\nIf you are using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
+    <string name="auto_25_chars_route_roundabout_kl">Take the %1$d exit and keep left</string>
+    <string name="auto_25_chars_route_roundabout_kr">Take the %1$d exit and keep right</string>
+    <string name="auto_backup_preference_desc">By default, Android saves backups of favorites, map tokens, and OsmAnd settings to restore them on new devices or after reinstallation. This backup is limited to 25 MB.\nWhen using OsmAnd Cloud, this can lead to misunderstandings after reinstallation.</string>
     <string name="auto_backup_title">Auto-backup</string>
-    <string name="duplacate_widget_added_snackbar">A duplicate widget is added next in the list.</string>
+    <string name="duplacate_widget_added_snackbar">A duplicate widget is being added to the list.</string>
     <string name="shared_string_duplicate">Duplicate</string>
-    <string name="av_notes_photo_widget_desc">Taping on the widget allows for taking a photo.</string>
-    <string name="av_notes_video_widget_desc">Taping on the widget allows for starting a video recording.</string>
-    <string name="av_notes_audio_widget_desc">Taping on the widget allows for taking audio notes.</string>
-    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the current recorded trip.</string>
+    <string name="av_notes_photo_widget_desc">Tapping the widget lets you take a photo.</string>
+    <string name="av_notes_video_widget_desc">Tapping the widget lets you record a video.</string>
+    <string name="av_notes_audio_widget_desc">Tapping the widget lets you take an audio note.</string>
+    <string name="trip_recording_downhill_widget_desc">Shows the sum of all descents of the currently recorded trip.</string>
     <string name="trip_recording_uphill_widget_desc">Shows the sum of all the climbs of the currently recorded trip.</string>
-    <string name="trip_recording_duration_widget_desc">Shows time of track recording, the duration in minutes/hours of the currently recorded trip.</string>
-    <string name="trip_recording_distance_widget_desc">Shows the distance of the currently recorded trip.</string>
-    <string name="true_bearing_wdiget_desc">Angle between the true north and the target point observed from your location.</string>
+    <string name="trip_recording_duration_widget_desc">Shows the currently recorded trip time.</string>
+    <string name="trip_recording_distance_widget_desc">Shows the currently recorded trip distance.</string>
+    <string name="true_bearing_wdiget_desc">Angle between true north and the target point observed from your location.</string>
     <string name="relative_bearing_widget_desc">Shows the angle between your forward movement direction and the target point.</string>
     <string name="second_marker_widget_desc">You can configure the widget to show the distance or Estimated time of arrival left to the second map marker.</string>
     <string name="first_marker_widget_desc">You can configure the widget to show the distance or Estimated time of arrival left to the first map marker.</string>
@@ -105,7 +164,7 @@
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
     <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
-    <string name="compass_desc">Shows direction to the north.</string>
+    <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
@@ -117,28 +176,28 @@
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>
-    <string name="map_marker_average_speed_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
-    <string name="switch_widget_mode_desc">You can switch mode by taping on widget.</string>
-    <string name="side_marker_eta">Estimated time of arrival</string>
-    <string name="reset_all_settings_desc">Are you sure you want to reset all settings to default?</string>
-    <string name="goods_delivery_desc_4">If your vehicle weight is more than 3.5 tonnes you need to use Truck profile.</string>
-    <string name="goods_delivery_desc_3">Applies only for vehicles carrying goods that have at least four wheels and weigh no more than 3.5 tonnes.</string>
-    <string name="goods_delivery_desc_2">Roads that closed for goods delivery will be avoided. </string>
-    <string name="goods_delivery_desc">Vehicle transporting goods can be restricted to access some roads. </string>
+    <string name="map_marker_average_speed_desc">Specify the time interval for speed averaging (used for the arrival time estimate).</string>
+    <string name="switch_widget_mode_desc">Tapping on the widget switches modes.</string>
+    <string name="side_marker_eta">Estimated arrival time</string>
+    <string name="reset_all_settings_desc">Reset all settings to default?</string>
+    <string name="goods_delivery_desc_4">Use the Truck profile for vehicle weights of more than 3.5 tons.</string>
+    <string name="goods_delivery_desc_3">Applies only to delivery trucks of no more than 3.5 tons.</string>
+    <string name="goods_delivery_desc_2">Roads closed for goods delivery will be avoided.</string>
+    <string name="goods_delivery_desc">Delivery vehicles may be restricted on some roads.</string>
     <string name="updated_map_time">Updated: %1$s.</string>
     <string name="includes_osm_changes_until">Includes OSM changes made until %1$s.</string>
-    <string name="next_live_update_date_and_time">Next update: %1$s in %2$s.</string>
-    <string name="next_live_update_time">Next update: in %1$s.</string>
-    <string name="live_update_frequency_hour_variant">Map updates will be checked every hour.</string>
-    <string name="live_update_frequency_day_variant">Map updates will be checked every day.</string>
-    <string name="live_update_frequency_week_variant">Map updates will be checked every week.</string>
+    <string name="next_live_update_date_and_time">Next update on %1$s at %2$s.</string>
+    <string name="next_live_update_time">Next update at %1$s.</string>
+    <string name="live_update_frequency_hour_variant">Map updates are checked hourly.</string>
+    <string name="live_update_frequency_day_variant">Map updates are checked daily.</string>
+    <string name="live_update_frequency_week_variant">Map updates are checked weekly.</string>
     <string name="altitude_correction">Altitude correction</string>
-    <string name="no_altitude_data_desc">You can attach your track to the roads to get %1$s data or calculate it online.</string>
-    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers based on Satellite Imagery and digital elevation models. It could vary from device recorded altitude and could be used as altitude correction.</string>
+    <string name="no_altitude_data_desc">To receive %1$s data, attach your track to the roads or calculate it online.</string>
+    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers, based on satellite imagery and digital elevation models. Differences vs. device recorded altitude may be used as altitude correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
-    <string name="routing_attr_motor_type_description">Select fuel type used by your vehicle motor, to calculate CO2 emission.</string>
+    <string name="routing_attr_motor_type_name">Vehicle engine</string>
+    <string name="routing_attr_motor_type_description">Select your engine\'s fuel type, this is needed to estimate CO2 emission.</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Petrol</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
@@ -147,16 +206,16 @@
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
-    <string name="transport_hazmat_yes_desc">You need to choose proper category. </string>
-    <string name="transport_hazmat_no_desc">On some roads and tunnels transporting of hazardous materials is forbidden. </string>
+    <string name="transport_hazmat_yes_desc">Select the applicable category.</string>
+    <string name="transport_hazmat_no_desc">Roads and tunnels may restrict transporting hazardous materials.</string>
     <string name="transport_hazmat_title">Transporting of hazardous materials</string>
     <string name="average_speed_skip_stops_desc">Speed less than %1$s will be counted and affect the average speed.</string>
     <string name="average_speed_skip_stops">Take stops into account</string>
-    <string name="average_speed_time_interval_desc">Specify the time interval for which the average speed will be measured.</string>
-    <string name="average_speed_widget_desc">Shows the average speed of the current ride.</string>
+    <string name="average_speed_time_interval_desc">Specify the time interval for speed averaging.</string>
+    <string name="average_speed_widget_desc">Shows the current trip\'s average speed.</string>
     <string name="map_widget_average_speed">Average speed</string>
     <string name="shared_string_mode">Mode</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Switch mode by tapping the widget.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tap the widget to switch modes.</string>
     <string name="map_widget_time_to_destination">Time to destination</string>
     <string name="map_widget_time_to_intermediate">Time to intermediate</string>
     <string name="map_widget_distance_to_intermediate">Distance to intermediate</string>
@@ -213,7 +272,6 @@
     <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Widget provides quick access to start/stop taking a recording (audio, video or photo).</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (Degrees 180, Degrees 360, Milliradians).</string>
-    <string name="map_markers_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
     <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="navigation_points">Navigation points</string>
     <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
@@ -344,10 +402,10 @@
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>
     <string name="waypoint_template">Waypoint template</string>
-    <string name="predefined_waypoint_appearance_description">Tapping this action will auto-save the waypoint with predefined parameters.</string>
-    <string name="always_ask_waypoint_appearance_description">Tapping this action will open the \"Add waypoint\" screen, where you can change name and appearance.</string>
+    <string name="predefined_waypoint_appearance_description">Tapping this action auto-saves the waypoint with predefined parameters.</string>
+    <string name="always_ask_waypoint_appearance_description">Tapping this action opens the \"Add waypoint\" screen where you can change name and appearance.</string>
     <string name="waypoint_appearance">Waypoint appearance</string>
-    <string name="track_file_description">Tapping this action will show a selection dialogue of available tracks.</string>
+    <string name="track_file_description">Tapping this action shows the available tracks.</string>
     <string name="track_file">Track file</string>
     <string name="turn_arrows">Turn Arrows</string>
     <string name="turn_arrows_descr">Select whether turn arrows are indicated on the route line.</string>
@@ -611,7 +669,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
-    <string name="purchases_feature_desc_wikipedia">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
+    <string name="purchases_feature_desc_wikipedia">Having offline Wikipedia on your trip helps you learn more about the places you visit. It is available offline and shows Wikipedia articles in relation to the points of interest right on the map. Don\'t forget to download Wikipedia maps for chosen region.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
@@ -795,7 +853,7 @@
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Send photos, reviews, and links about public places such as restaurants, hotels, museums, and waypoints as open data https://openplacereviews.org/data/.\n\nRead more at https://openplacereviews.org</string>
+    <string name="open_place_reviews_plugin_description">Allows you to make contributions to OpenPlaceReviews project. Such as photos, reviews, links about public places such as restaurants, hotels, museums and waypoints. \n\nYou can find instruction on how to contribute on out website - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
@@ -885,7 +943,6 @@
     <string name="plan_route_add_new_segment">Add a new segment</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_split_before">Split before</string>
-    <string name="plan_route_join_segments">Join segments</string>
     <string name="app_mode_light_aircraft">Light aircraft</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:\nOpenPlaceReviews - POI photos;\nMapillary - street-level imagery;\nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
@@ -1603,7 +1660,6 @@
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan (RV)</string>
     <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>
@@ -2158,7 +2214,7 @@
     <string name="add_location_as_first_point_descr">Add your position as point of departure to plan the perfect route.</string>
     <string name="my_location">My position</string>
     <string name="shared_string_finish">Finish</string>
-    <string name="plan_route">Plan route</string>
+    <string name="plan_route">Plan a route</string>
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
     <string name="marker_save_as_track_descr">Export your markers to the following GPX file:</string>
@@ -2249,7 +2305,7 @@
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
+    <string name="plugin_mapillary_descr">Brings street-level views. Where imagery is missing, you can just add it yourself so that others can make use of it. To enable the Mapillary layer turn on the \"Street-level imagery\" in Configure map menu.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
@@ -3014,19 +3070,15 @@
     <string name="track_points">Track points</string>
     <string name="shared_string_online_maps">Online maps</string>
     <string name="osmand_rastermaps_plugin_description">Access many types of online (so called tile or raster) maps, from predefined OSM tiles (like Mapnik) to satellite images, and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.\n\n
-    Any of these maps can either be used as the main (base) map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
-    Download tile maps directly online, or prepared them for offline use (manually copied to OsmAnd\'s data folder) as an SQLite database which can be produced by a variety of 3rd party map preparation tools.
+    Any of these maps can be used as the main (base) map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s offline vector maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
+    Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.
 	</string>
     <string name="record_plugin_name">Trip recording</string>
-    <string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map, or also to automatically log all of your navigation routes to a GPX file.\n\n
-    Recorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
-	</string>
+    <string name="record_plugin_description">Allows you to record, save and analyze your training or movement data, such as speed, ascents, descents or route relief, which can then be reused, improved, supplemented or shared with friends. \n\nHow to - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape. (Please note that contour line and/or relief data are separate, additional downloads available after activating the plugin.)
-		\n\nThe global data (between 70 ° north and 70 ° south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
-	</string>
+    <string name="srtm_plugin_description">Terrain information, such as contour lines, hillshades and slopes, helps you visually assess the shape of the land surface, considering curvature, extremes, steepness, points of equal height, and more. Topographic information on a map can be represented by slope shading, contour lines for the uphill and downhill, and the colour of the slope angle deviation from flat. Data from SRTM and ASTER. \n\nHow to - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3036,26 +3088,20 @@
 		\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_nautical_name">Nautical map view</string>
-    <string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports.
-		\n\nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.).
-		\n\nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.
-	</string>
+    <string name="plugin_nautical_descr">Turn on to enrich your map with information about sailing routes, navigation lights, danger zones, zones where it is allowed or prohibited to sail or dock, etc. To use download Nautical maps and enable \"Nautical map\" type in Configure map. \n\nHow to - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_ski_name">Ski map view</string>
-    <string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
-		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
-	</string>
+    <string name="plugin_ski_descr">Designed to navigate at winter sports locations. Watch ski pistes, ski lift markers and colored lines indicating the complexity of each track. To use after enabling go to Configure map and choose \"Winter and ski\" map type.</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="audionotes_plugin_description">Make audio/photo/video notes during a trip, using either a map button or location context menu.</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
-    <string name="osmand_parking_plugin_description">Lets you record where your car is parked, including how much parking time remains.\n
-    Both location and time are visible on the dashboard as well as in a map widget. An alarm reminder can be added to the Android calendar.</string>
+    <string name="osmand_parking_plugin_description">Enable to set a point on the map where your car is left on the street and notify your calendar when parking time starts. Plugin helps to track the parking time and location of your car. To place a marker choose a place on the map, then go to Actions and press \"Add parking\".</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
-    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OpenStreetMap.org is a community driven, global public domain mapping project.</string>
-    <string name="osmand_development_plugin_description">Settings for development and debugging features, like navigation simulation, rendering performance, or voice prompting. Intended for developers, not needed for normal app use.</string>
+    <string name="osm_editing_plugin_description">Allows you to make contributions to OpenStreetMap, a global community aimed at creating a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instruction on how to edit the map on out website https://osmand.net/docs/user/plugins/osm-editing</string>
+    <string name="osmand_development_plugin_description">Allows to configure OsmAnd for testing: simulate navigation routes, check the screen rendering performance, etc. Plugin is not required for normal application use.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
     <string name="days_behind">days behind</string>
@@ -3432,7 +3478,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Select existing…</string>
     <string name="maps_define_edit">Define/Edit…</string>
-    <string name="map_widget_fps_info">FPS debug info</string>
     <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
     <string name="driving_region">Driving region</string>
     <string name="driving_region_japan">Japan</string>
@@ -4322,7 +4367,8 @@
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">No rotation (north always upwards)</string>
+    <string name="rotate_map_none_opt">Fixed (north is up)</string>
+    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
     <string name="rotate_map_to_bearing_descr">Map alignment:</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>
@@ -4730,7 +4776,6 @@
     <string name="quick_action_add_category">Add a category</string>
     <string name="quick_action_add_create_items">Create items</string>
     <string name="quick_action_add_configure_map">Configure map</string>
-    <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_fav_name_descr">Leave blank to use the address or place name.</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_bug_message">Message</string>
@@ -4822,6 +4867,4 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-
-
 </resources>

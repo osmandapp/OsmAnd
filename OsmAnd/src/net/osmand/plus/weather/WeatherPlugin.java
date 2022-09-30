@@ -169,8 +169,17 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
-		if (Algorithms.equalsToAny(widgetType, getWidgetTypes())) {
-			return new WeatherWidget(mapActivity, widgetType);
+		switch (widgetType) {
+			case WX_TEMPERATURE_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType);
+			case WX_PRECIPITATION_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType);
+			case WX_WIND_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType);
+			case WX_CLOUDS_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType);
+			case WX_AIR_PRESSURE_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType);
 		}
 		return null;
 	}
@@ -391,5 +400,4 @@ public class WeatherPlugin extends OsmandPlugin {
 				WX_AIR_PRESSURE_WIDGET
 		};
 	}
-
 }

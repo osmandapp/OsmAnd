@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -56,7 +57,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
-		weatherPlugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		configureLayer = weatherPlugin.getCurrentConfiguredLayer();
 	}
 
@@ -146,7 +147,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	private void updateMeasurementUnitsCard() {
 		TextView tvUnitsDesc = view.findViewById(R.id.units_description);
-		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (plugin != null) {
 			Enum<?> unit = plugin.getSelectedLayerUnit(appMode, configureLayer);
 			tvUnitsDesc.setText(configureLayer.getUnitName(app, unit));

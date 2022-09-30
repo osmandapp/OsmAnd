@@ -1,5 +1,11 @@
 package net.osmand.plus.weather;
 
+import static net.osmand.plus.weather.WeatherInfoType.CLOUDS;
+import static net.osmand.plus.weather.WeatherInfoType.PRECIPITATION;
+import static net.osmand.plus.weather.WeatherInfoType.PRESSURE;
+import static net.osmand.plus.weather.WeatherInfoType.TEMPERATURE;
+import static net.osmand.plus.weather.WeatherInfoType.WIND;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +19,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -21,17 +27,11 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.weather.WeatherInfoType.CLOUDS;
-import static net.osmand.plus.weather.WeatherInfoType.PRECIPITATION;
-import static net.osmand.plus.weather.WeatherInfoType.PRESSURE;
-import static net.osmand.plus.weather.WeatherInfoType.TEMPERATURE;
-import static net.osmand.plus.weather.WeatherInfoType.WIND;
-
 public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		setupUnitsPref(TEMPERATURE, plugin.WX_UNIT_TEMPERATURE.getId());
 		setupUnitsPref(PRESSURE, plugin.WX_UNIT_PRESSURE.getId());
 		setupUnitsPref(WIND, plugin.WX_UNIT_WIND.getId());
@@ -91,7 +91,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onDisplayPreferenceDialog(@NonNull Preference preference) {
-		WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (Algorithms.equalsToAny(preference.getKey(), plugin.getUnitsPreferencesIds())) {
 			showChooseUnitDialog((ListPreferenceEx) preference);
 		} else {

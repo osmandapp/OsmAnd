@@ -1,5 +1,24 @@
 package net.osmand.plus.dashboard;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.LIST_MENU;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ROUTE_PREFERENCES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER_LAYER;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -62,6 +81,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
@@ -81,8 +101,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.weather.WeatherContoursFragment;
-import net.osmand.plus.weather.WeatherLayerFragment;
 import net.osmand.plus.weather.WeatherInfoType;
+import net.osmand.plus.weather.WeatherLayerFragment;
 import net.osmand.plus.weather.WeatherMainFragment;
 import net.osmand.plus.weather.WeatherPlugin;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -100,8 +120,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
 
 
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
@@ -338,7 +356,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(WEAHTER)) {
 			tv.setText(R.string.shared_string_weather);
 		} else if (isCurrentType(WEAHTER_LAYER)) {
-			WeatherPlugin plugin = OsmandPlugin.getPlugin(WeatherPlugin.class);
+			WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 			WeatherInfoType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
 			if (layer != null) {
 				tv.setText(layer.getTitleId());
