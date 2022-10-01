@@ -4776,4 +4776,6 @@
     <string name="coordinates_widget_current_location">Koordinater: nåværende posisjon</string>
     <string name="shared_string_switch_mode">Bytt modus</string>
     <string name="click_on_widget">Klikk på miniprogrammet</string>
+    <string name="map_widget_target_distance">Avstand fra kamera til mål</string>
+    <string name="map_widget_camera_distance">Kamerahøyde</string>
 </resources>
