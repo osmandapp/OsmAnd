@@ -4363,4 +4363,22 @@
     <string name="poi_playground_trampoline">Trampolín</string>
     <string name="poi_playground_cushion">Ærslabelgur</string>
     <string name="poi_playground_exercise">Líkamsrækt utandyra</string>
+    <string name="poi_playground_structure">Mannvirki</string>
+    <string name="poi_playground_playhouse">Leikjahús</string>
+    <string name="poi_playground_hopscotch">Hoppuleikjaplan</string>
+    <string name="poi_playground_teenshelter">Hópskýli</string>
+    <string name="poi_playground_sledding">Sleðabraut</string>
+    <string name="poi_playground_youth_bench">Leikbekkur</string>
+    <string name="poi_playground_funnel_ball">Boltatrekt</string>
+    <string name="poi_playground_speaking_tube">Talrör</string>
+    <string name="poi_playground_ball_pool">Boltakar</string>
+    <string name="poi_playground_spinning_circle">Snúningshringur</string>
+    <string name="poi_playground_zipwire">Zip-lína</string>
+    <string name="poi_playground_splash_pad">Skvettupollur</string>
+    <string name="poi_playground_activitypanel">Leikjaspjöld</string>
+    <string name="poi_playground_basketrotator">Snúningskarfa</string>
+    <string name="poi_playground_aerialrotator">Snúningshengiróla</string>
+    <string name="poi_playground_seesaw">Vegasölt</string>
+    <string name="poi_playground_springy">Gormsæti</string>
+    <string name="poi_playground_roundabout">Hringekja</string>
 </resources>
