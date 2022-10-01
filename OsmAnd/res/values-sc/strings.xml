@@ -4828,4 +4828,9 @@
     <string name="map_widget_ant_bicycle_power_desc">Ammustrat sa potèntzia de su tziclista, impreada pro mòvere sa bitzicleta cara a in antis</string>
     <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
     <string name="depth_contours">Lìnias nàuticas de profundidade</string>
+    <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/Web) chene costos additzionales.</string>
+    <string name="shared_string_cross_buy">Còmpora rugrada</string>
+    <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
+    <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
+    <string name="map_widget_fps_info">Frecuèntzia de renderizatzione FPS de sa mapa (fotogrammas pro segundu)</string>
 </resources>
