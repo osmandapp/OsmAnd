@@ -4719,7 +4719,7 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_description">Selecione o tipo de combustível do seu motor, isto é necessário para estimar a emissão de CO2.</string>
     <string name="lang_ckb">Curdo central</string>
-    <string name="live_update_frequency_day_variant">As atualizações do mapa serão feitas diariamente.</string>
+    <string name="live_update_frequency_day_variant">As atualizações do mapa são feitas diariamente.</string>
     <string name="routing_attr_motor_type_name">Motor do veículo</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
@@ -4809,4 +4809,34 @@
     <string name="map_widget_target_distance_desc">Mostra a distância da câmara ao local de destino.</string>
     <string name="map_widget_zoom_level_desc">Mostra o nível atual de zoom do mapa.</string>
     <string name="map_widget_camera_tilt">Inclinação da câmara</string>
+    <string name="ant_missing_dependency_descr">O serviço necessário \"%1$s\" não foi encontrado.
+\nÉ necessário instalar o serviço ANT+ Complementos ou poderá ter de atualizar a sua versão existente, caso já a tenha.
+\nQuer abrir a Play Store para o obter\?</string>
+    <string name="favorites_backup">Cópia de segurança dos favoritos</string>
+    <string name="purchases_feature_desc_cross_buy">Utilize as suas funcionalidades de subscrição em diferentes plataformas (Android/iOS/Web) sem custos adicionais.</string>
+    <string name="ant_missing_dependency">Dependência em falta</string>
+    <string name="depth_contours">Contornos de profundidade</string>
+    <string name="shared_string_cross_buy">Compra cruzada</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ descrição</string>
+    <string name="nautical_depth_points">Pontos de profundidade náutica</string>
+    <string name="map_widget_fps_info">FPS da renderização de mapas (fotogramas por segundo)</string>
+    <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
+    <string name="map_widget_camera_distance_desc">O widget mostra a elevação da câmara acima do nível da superfície.</string>
+    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadência da bicicleta</string>
+    <string name="ant_go_to_store">Ir à Store</string>
+    <string name="ant_read_data">Ler dados</string>
+    <string name="ant_write_to_gpx">Gravar dados no trilho</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mostra a velocidade de viagem</string>
+    <string name="ant_heart_rate_write_gpx_desc">Gravar a frequência cardíaca no trilho</string>
+    <string name="map_widget_ant_heart_rate">Frequência cardíaca</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra a frequência cardíaca do utilizador durante uma dada atividade em tempo real</string>
+    <string name="map_widget_ant_bicycle_power">Potência da bicicleta</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mostra a potência de saída do ciclista, que é utilizada para mover a bicicleta para a frente</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mostra a velocidade a que o utilizador está a pedalar</string>
+    <string name="map_widget_ant_bicycle_dist">Distância de bicicleta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
+    <string name="worldwide_maps">Mapas mundiais</string>
 </resources>
