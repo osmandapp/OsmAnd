@@ -4811,4 +4811,31 @@
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Das Widget zeigt die Entfernung von der Kamera zum Zielort an.</string>
     <string name="ant_widgets">ANT+ Widgets</string>
+    <string name="map_widget_fps_info">Kartenwiedergabe FPS (Bilder pro Sekunde)</string>
+    <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
+    <string name="favorites_backup">Gesicherte Favoriten</string>
+    <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
+    <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Zeigt die Geschwindigkeit an, mit der der Benutzer in die Pedale tritt</string>
+    <string name="antplus_plugin_description">ANT+ Beschreibung</string>
+    <string name="depth_contours">Tiefenkonturen</string>
+    <string name="worldwide_maps">Weltweite Karten</string>
+    <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
+    <string name="ant_missing_dependency_descr">Der erforderliche Dienst \"%1$s\" wurde nicht gefunden.
+\nSie müssen den ANT+ Plugins-Dienst installieren oder Ihre bestehende Version aktualisieren, wenn Sie ihn bereits haben.
+\nMöchten Sie den Play Store starten, um ihn zu erhalten\?</string>
+    <string name="ant_missing_dependency">Fehlende Abhängigkeit</string>
+    <string name="ant_go_to_store">Zum Laden gehen</string>
+    <string name="ant_read_data">Daten lesen</string>
+    <string name="ant_write_to_gpx">Daten in den Track schreiben</string>
+    <string name="ant_heart_rate_write_gpx_desc">Herzfrequenz in den Track schreiben</string>
+    <string name="map_widget_ant_heart_rate">Herzfrequenz</string>
+    <string name="map_widget_ant_heart_rate_desc">Zeigt die Herzfrequenz des Benutzers während einer bestimmten Aktivität in Echtzeit an</string>
+    <string name="map_widget_ant_bicycle_power">Fahrradleistung</string>
+    <string name="map_widget_ant_bicycle_cadence">Fahrrad-Trittfrequenz</string>
+    <string name="map_widget_ant_bicycle_speed">Fahrradgeschwindigkeit</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Zeigt die Fahrgeschwindigkeit an</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Zeigt die zurückgelegte Entfernung an</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="nautical_depth_points">Nautische Tiefenpunkte</string>
 </resources>
