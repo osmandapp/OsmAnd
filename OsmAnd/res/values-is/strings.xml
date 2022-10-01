@@ -4827,4 +4827,9 @@
     <string name="map_widget_ant_bicycle_speed">Hraði hjólandi</string>
     <string name="map_widget_ant_bicycle_speed_desc">Sýnir ferðahraðann</string>
     <string name="map_markers_desc">Viðmótshlutinn sýnir vegalengd eða áætlaðan komutíma (ETA) fyrir fyrstu tvö kortamerkin í kortamerkjalistanum.</string>
+    <string name="favorite_confirm_delete_group">Ertu viss um að þú viljir eyða ”%1$s” hópnum og öllum inniföldum punktum (%2$d)\?</string>
+    <string name="ant_missing_dependency_descr">Nauðsynlega þjónustan \"%1$s\" fannst ekki.
+\nÞú þarft að setja upp ANT+ Plugins þjónustuna eða þú gætir þurft að uppfæra fyrirliggjandi útgáfu þína af henni ef hún er þegar til staðar.
+\nViltu ræsa Play Store hugbúnaðarsafnið til að ná í þetta\?</string>
+    <string name="ant_go_to_store">Fara í hugbúnaðarsafnið</string>
 </resources>
