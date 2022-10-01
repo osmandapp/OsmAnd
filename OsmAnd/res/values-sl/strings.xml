@@ -4822,4 +4822,9 @@
     <string name="depth_contours">Izobate</string>
     <string name="worldwide_maps">Zemljevidi sveta</string>
     <string name="ant_widgets">ANT+ gradniki</string>
+    <string name="shared_string_cross_buy">Navzkrižni nakup</string>
+    <string name="map_widget_fps_info">FPS (število slik na sekundo) pri upodabljanju zemljevida</string>
+    <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
+    <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
+    <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>
 </resources>

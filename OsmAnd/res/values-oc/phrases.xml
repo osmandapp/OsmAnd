@@ -357,10 +357,10 @@
     <string name="poi_railway_platform">Quai</string>
     <string name="poi_halt">Estacion de tren</string>
     <string name="poi_subway_entrance">Intrada de mètro</string>
-    <string name="poi_subway_station">Òc</string>
+    <string name="poi_subway_station">Òc;Estacion de Mètro</string>
     <string name="poi_railway_buffer_stop">Arrestador de seguretat</string>
     <string name="poi_taxi">Estacion de taxis</string>
-    <string name="poi_aerodrome">Aeropòrt</string>
+    <string name="poi_aerodrome">Aeropòrt;Aerodròm</string>
     <string name="poi_helipad">Elipòrt</string>
     <string name="poi_runway">Pista d’aterratge</string>
     <string name="poi_aeroway_terminal">Terminau d’aeropòrt</string>
@@ -522,7 +522,7 @@
     <string name="poi_customs">Dogana</string>
     <string name="poi_country">País</string>
     <string name="poi_city">Vila</string>
-    <string name="poi_capital">Òc</string>
+    <string name="poi_capital">Òc;Capitala</string>
     <string name="poi_town">Vila</string>
     <string name="poi_village">Vilatge</string>
     <string name="poi_hamlet">Hamèu</string>
@@ -617,7 +617,7 @@
     <string name="poi_fuel_100ll">Combustible 100LL</string>
     <string name="poi_fuel_autogas">Autogàs</string>
     <string name="poi_fuel_jeta1">Carburant Jet A-1</string>
-    <string name="poi_fuel_adblue">Carburant AdBlue</string>
+    <string name="poi_fuel_adblue">Carburant Diesel</string>
     <string name="poi_fuel_wood">Combustible: lenha</string>
     <string name="poi_fuel_charcoal">Combustible: organic carbonitzat</string>
     <string name="poi_fuel_coal">Combustible: carbon</string>
@@ -1093,4 +1093,21 @@
     <string name="poi_authentication_none">Autentificacion non necessària</string>
     <string name="poi_tobacco_filter">Tabac</string>
     <string name="poi_ice_cream_filter">Glacet</string>
+    <string name="poi_recycling_small_electrical_appliances">Aparelhs electrodomestic pichons</string>
+    <string name="poi_parking_fee_filter">Còst d’aparcament</string>
+    <string name="poi_mattress_filter">Matalàs</string>
+    <string name="poi_furniture_filter">Mòbles</string>
+    <string name="poi_fridge_filter">Refrigerador</string>
+    <string name="poi_computer_sales">Venda d\'ordinadors</string>
+    <string name="poi_computer_repair">Reparacion d’ordinadors</string>
+    <string name="poi_post_office_type">Tipe</string>
+    <string name="poi_recycling_diapers">Pedaç</string>
+    <string name="poi_museum_type">Tema dau Musèu</string>
+    <string name="poi_agrarian_type">Intrants agricòlas</string>
+    <string name="poi_membership_filter">Inscripcion obligatòria</string>
+    <string name="poi_dog">Cans</string>
+    <string name="poi_laundry_service_filter">Bugadariá</string>
+    <string name="poi_faculty_filter">Facultat</string>
+    <string name="poi_heating_filter">Caufatge</string>
+    <string name="poi_computer_parts">Peças d’ordinadors</string>
 </resources>

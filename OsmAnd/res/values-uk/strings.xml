@@ -4830,4 +4830,9 @@
     <string name="map_widget_ant_bicycle_cadence_desc">Показує швидкість, з якою користувач крутить педалі</string>
     <string name="nautical_depth_points">Точки морських глибин</string>
     <string name="depth_contours">Ізолінії глибин</string>
+    <string name="map_widget_target_distance">Відстань від камери до цілі</string>
+    <string name="favorites_backup">Резервне копіювання вибраного</string>
+    <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/Web) без додаткових витрат.</string>
+    <string name="map_widget_fps_info">FPS завантаження мапи (кадрів на секунду)</string>
+    <string name="shared_string_cross_buy">Перехресна купівля</string>
 </resources>
