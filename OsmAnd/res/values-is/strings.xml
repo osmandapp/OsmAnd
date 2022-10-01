@@ -228,7 +228,7 @@
     <string name="shared_string_more_actions">Fleiri aðgerðir</string>
     <string name="shared_string_do_not_show_again">Ekki sýna aftur</string>
     <string name="shared_string_remember_my_choice">Muna valið</string>
-    <string name="shared_string_refresh">Endurlesa</string>
+    <string name="shared_string_refresh">Endurnýja</string>
     <string name="shared_string_download">Sækja</string>
     <string name="shared_string_downloading">Sæki…</string>
     <string name="shared_string_action_template">Aðgerð {0}</string>
@@ -2323,7 +2323,7 @@
     <string name="quick_action_add_parking_descr">Hnappur til að bæta staðsetningu bílastæðis á miðju skjásins.</string>
     <string name="quick_action_duplicates">Nafni á flýtiaðgerð var breytt í %1$s til að koma í veg fyrir tvítekningu.</string>
     <string name="quick_action_showhide_favorites_descr">Víxlhnappur til að birta eða fela eftirlætisstaði á kortinu.</string>
-    <string name="quick_action_showhide_poi_descr">Víxlnappur til að birta eða fela merkisstaði á kortinu.</string>
+    <string name="quick_action_showhide_poi_descr">Víxlhnappur til að birta eða fela merkisstaði á kortinu.</string>
     <string name="quick_action_bug_descr">Þessi skilaboð eru innifalin í athugasemdareitnum.</string>
     <string name="quick_action_btn_tutorial_descr">Ýttu lengi og dragðu hnappinn til á skjánum til að breyta staðsetningu hans.</string>
     <string name="new_filter_desc">Settu inn heiti fyrir nýju síuna, þessu verður bætt við á Flokkar-flipann þinn.</string>
@@ -2402,7 +2402,9 @@
     <string name="delay_to_start_navigation_descr">Tilgreindu biðtímann sem leiðavalsskjárinn á að haldast opinn.</string>
     <string name="osmand_distance_planning_plugin_description">Útbúðu ferla með því að ýta á kortið, eða með því að nota eða breyta fyrirliggjandi GPX-skrám, í þeim tilgangi að skipuleggja ferðir og mæla vegalengdir milli punkta. Niðurstöðurnar má vista sem GPX-skrá sem hægt er að nota síðar við leiðsögn.</string>
     <string name="osmand_accessibility_description">Gerir aðgengiseiginleika tækisins nothæfa beint í OsmAnd. Það auðveldar t.d. aðlögun á talhraða TTS-talgervils, uppsetningu á stefnuvirkri skjáleiðsögn, notkun á músarkúlu fyrir stýringu á aðdrætti, eða svörun með texta-í-tal eins og þegar tilkynnt er upphátt um staðsetningar.</string>
-    <string name="osm_editing_plugin_description">Bættu inn í OSM-kortagrunninn, eins og til dæmis með því að búa til eða breyta merkisstöðum í OSM (POI objects), opna eða gera athugasemdir í OSM Notes, og að setja inn skráðar GPX-skrár. OSM er samfélagsdrifinn allsherjar kortagerðargrunnur.</string>
+    <string name="osm_editing_plugin_description">Gerir þér kleift að bæta inn í OpenStreetMap, samfélagsdrifnu verkefni sem miðar að því að útbúa nytsamlegt landakort af heiminum og að útgáfu uppfærðra opinna gagna til hvaða notenda sem er.
+\n
+\nÞú finnur leiðbeiningar um hvernig bera sig á að við breytingar á vefsvæðinu okkar https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="osmand_development_plugin_description">Stillingar fyrir þróun og aflúsun, eins og fyrir prófanir eða leiðahermingu, upplýsingar um myndgerðarafköst, eða raddskilaboð. Ætlaðar fyrir forritara en eru ekki nauðsynlegar fyrir almenna notendur.</string>
     <string name="use_distance_measurement_help">* Ýttu til að merkja punkt. 
 \n * Ýta og halda á kortið til að eyða fyrri punkti. 
@@ -3989,14 +3991,14 @@
     <string name="activity_type_car_name">Akandi</string>
     <string name="routing_attr_height_obstacles_description">Leiðagerð gæti forðast miklar brekkur upp í mót.</string>
     <string name="select_category_descr">Veldu flokk eða bættu við nýjum</string>
-    <string name="open_place_reviews_plugin_description">Sendu ljósmyndir, umsagnir og tengla í aðrar veitur um opinbera staði á borð við veitingastaði, hótel, söfn og leiðarpunkta innasem opin gögn á https://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Gerir þér kleift að leggja þitt af mörkum til OpenPlaceReviews vekefnisins. Sendu ljósmyndir, umsagnir og tengla í aðrar veitur um opinbera staði á borð við veitingastaði, hótel, söfn og leiðarpunkta.
 \n
-\nÞú getur lesið meira um verkefnið hér: https://openplacereviews.org</string>
+\nÞú getur lesið meira um verkefnið á vefsvæðinu: https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="map_widget_distance_by_tap">Vegalengd með því að ýta</string>
     <string name="select_segments_description">%1$s inniheldur fleiri en einn bút, þú þarft að velja þann sem er nauðsynlegur fyrir leiðsögnina.</string>
     <string name="routing_attr_driving_style_description">Veldu tilgang aksturs til að fá styttri, hraðari eða öruggari leið</string>
     <string name="snap_to_road_descr">Táknið fyrir núverandi staðsetningu mun grípa í leiðina sem leiðsögn fylgir</string>
-    <string name="quick_action_coordinates_widget_descr">Víxlnappur til að birta eða fela hnitaglugga á kortinu.</string>
+    <string name="quick_action_coordinates_widget_descr">Víxlhnappur til að birta eða fela hnitaglugga á kortinu.</string>
     <string name="select_segments">Veldu búta</string>
     <string name="segments_count">Bútur %1$d</string>
     <string name="temporary_conditional_routing_descr">Nota vegtakmarkanir sem núna eru virkar á kortinu</string>
@@ -4140,7 +4142,7 @@
     <string name="restore_selected_data">Endurheimta valin gögn</string>
     <string name="receiving_data_from_server">Tek á móti gögnum frá netþjóninum…</string>
     <string name="restore_complete">Endurheimt</string>
-    <string name="backup_version_history">Útgáfuferill</string>
+    <string name="backup_version_history">Útgáfuferli</string>
     <string name="backup_storage_taken">Geymslurými upptekið</string>
     <string name="delete_version_history">Eyða útgáfuferli</string>
     <string name="routing_attr_avoid_tunnels_description">Forðast veggöng</string>
@@ -4165,7 +4167,7 @@
     <string name="shared_string_learn_more">Kanna nánar</string>
     <string name="cancel_anytime_in_huawei_appgallery">Hættu hvenær sem er í Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Hættu hvenær sem er í Google Play.</string>
-    <string name="shared_string_not_included">Ekki innifalið</string>
+    <string name="shared_string_not_included">Ekki taka með</string>
     <string name="shared_string_includes">inniheldur</string>
     <string name="complete_purchase">Ljúka kaupum</string>
     <string name="regular_price">Venjulegt verð</string>
@@ -4497,7 +4499,7 @@
     <string name="predefined_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp verður ferilpunktur vistaður sjálfvirkt með forákvörðuðum viðföngum.</string>
     <string name="always_ask_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp opnast \"Bæta við ferilpunkti\" skjárinn, þar sem þú getur breytt heiti og útliti ferilpunktsins.</string>
     <string name="waypoint_appearance">Útlit ferilpunkts</string>
-    <string name="track_file_description">Ef ýtt er á þennan aðgerðahnapp mun það birta valglugga tiltækra ferla.</string>
+    <string name="track_file_description">Ef ýtt er á þennan aðgerðahnapp mun það birta tiltæka ferla.</string>
     <string name="navigate_point_format_swiss_grid">Svissneska hnitanetið (CH1903)</string>
     <string name="rendering_attr_seabedDetail_name">Smáatriði sjávarbotns</string>
     <string name="rendering_value_all_name">Allt</string>
@@ -4804,4 +4806,25 @@
     <string name="click_on_widget">Smellt á viðmótshluta</string>
     <string name="shared_string_shows">Sýnir</string>
     <string name="shared_string_large">Stórt</string>
+    <string name="map_widget_target_distance">Fjarlægð milli myndavélar og myndefnis</string>
+    <string name="map_widget_ant_bicycle_dist">Vegalengd hjólandi</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Sýnir vegalengdina sem farin hefur verið</string>
+    <string name="map_widget_target_distance_desc">"Viðmótshlutinn sýnir vegalengdina frá myndavélinni að  áfangastaðnum."</string>
+    <string name="map_widget_zoom_level_desc">Viðmótshluti sýnir núverandi aðdráttarstig kortsins.</string>
+    <string name="map_widget_camera_distance_desc">Viðmótshluti sem sýnir hæð myndavélar fyrir ofan yfirborðið.</string>
+    <string name="map_widget_camera_tilt_desc">Viðmótshluti sem sýnir halla myndavélar í fjarvíddarham. Sjálfgefið er 90° (enginn halli).</string>
+    <string name="quick_action_map_center_widget_descr">Víxlhnappur til að birta eða fela merki fyrir miðju korts á kortinu.</string>
+    <string name="quick_action_current_location_widget_descr">Víxlhnappur til að birta eða fela glugga fyrir hnit núverandi staðsetningar á kortinu.</string>
+    <string name="coordinates_widget_map_center_desc">Viðmótshlutinn sýnir landfræðileg hnit núverandi miðju landakortsins</string>
+    <string name="coordinates_widget_current_location_desc">Viðmótshlutinn sýnir landfræðileg hnit fyrirliggjandi staðsetningar</string>
+    <string name="map_marker_interval_dialog_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalhraða sem notaður er til að áætla komutíma.</string>
+    <string name="map_widget_fps_info">Rammatíðni korts (rammar á sekúndu)</string>
+    <string name="map_widget_ant_heart_rate_desc">Birtir hjartsláttartíðni notanda í rauntíma á meðan tiltekinni athöfn stendur</string>
+    <string name="map_widget_ant_bicycle_power">Afköst hjólandi</string>
+    <string name="map_widget_ant_bicycle_power_desc">Sýnir aflframlag hjólreiðamanns, sem nýtist við að koma hjólinu áfram</string>
+    <string name="map_widget_ant_bicycle_cadence">Taktur hjólandi</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Sýnir hraða taktsins sem notandinn stígur á fótstigin</string>
+    <string name="map_widget_ant_bicycle_speed">Hraði hjólandi</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Sýnir ferðahraðann</string>
+    <string name="map_markers_desc">Viðmótshlutinn sýnir vegalengd eða áætlaðan komutíma (ETA) fyrir fyrstu tvö kortamerkin í kortamerkjalistanum.</string>
 </resources>
