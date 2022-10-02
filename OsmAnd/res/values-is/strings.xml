@@ -2116,7 +2116,7 @@
     <string name="mapillary_action_descr">Deildu þínum eigin götumyndum í gegnum Mapillary.</string>
     <string name="mapillary_widget_descr">Gerir kleift að bæta kerfið á einfaldan hátt með Mapillary.</string>
     <string name="mapillary_descr">Götumyndir af netinu fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
-    <string name="plugin_mapillary_descr">Götumyndir fyrir alla. Uppgötvaðu staði, útvíkkaðu heiminn og vertu með í samstarfinu.</string>
+    <string name="plugin_mapillary_descr">Götumyndir fyrir alla. Þar sem myndefni vantar, geturðu einfaldlega bætt því við sjálf/ur svo aðrir geti nýtt sér það. Til að virkja Mapillary-götumyndalagið skaltu virkja \"myndefni í götuhæð\" í stillingum landakortsins.</string>
     <string name="hillshade_menu_download_descr">Sæktu hæðaskyggingakortið af þessu svæði til að sjá lóðréttar hæðaskyggingar.</string>
     <string name="hillshade_purchase_header">Settu upp hæðarlínuviðbótina til að sjá lóðrétta hæðafleti.</string>
     <string name="srtm_menu_download_descr">Sæktu hæðarlínukortið af þessu svæði.</string>
@@ -4255,7 +4255,7 @@
     <string name="empty_category_name">Autt heiti flokks</string>
     <string name="no_activity_for_intent">Settu upp forrit sem getur meðhöndlað þessa aðgerð.</string>
     <string name="purchases_feature_desc_wikivoyage">Skoðaðu Wikiferðir ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
-    <string name="purchases_feature_desc_wikipedia">Skoðaðu Wikipediu ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
+    <string name="purchases_feature_desc_wikipedia">Það að hafa Wikipediu með á ferðalögum hjálpar þér að vita meira um staðina sem þú heimsækir. Hægt er að nota hana án nettengingar og birta greinar um áhugaverða staði beint á landakortinu. Ekki gleyma að sækja Wikipedia-kort fyrir svæðin sem þú hefur áhuga á.</string>
     <string name="purchases_feature_desc_combined_wiki">Skoðaðu Wikipedia-greinar á ferðum þínum án nettengingar. Ónettengdum gögnum er skipt eftir löndum og héruðum og eru þau tiltæk á öllum tungumálum.</string>
     <string name="logout_from_osmand_cloud_decsr">Skrá út\?
 \nÞú þarft að skrá þig aftur inn til að taka öryggisafrit eða endurheimta gögn.</string>
@@ -4832,4 +4832,6 @@
 \nÞú þarft að setja upp ANT+ Plugins þjónustuna eða þú gætir þurft að uppfæra fyrirliggjandi útgáfu þína af henni ef hún er þegar til staðar.
 \nViltu ræsa Play Store hugbúnaðarsafnið til að ná í þetta\?</string>
     <string name="ant_go_to_store">Fara í hugbúnaðarsafnið</string>
+    <string name="street_name_widget_desc">Götuheitaviðmótshlutinn sýnir fyrirliggjandi götuheiti með beinni staðsetningarör eða heiti næstu götu ásamt þeirri aðgerð sem þarf að framkvæma.</string>
+    <string name="calculate_online_altitude_descr">Reiknaðu hæð á OsmAnd-netþjónum, út frá gervitunglamyndum og stafrænum hæðarlíkönum. Mismunur miðað við hæð tækis getur nýst sem leiðrétting á hæð.</string>
 </resources>
