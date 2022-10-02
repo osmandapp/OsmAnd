@@ -228,7 +228,7 @@
     <string name="shared_string_more_actions">Fleiri aðgerðir</string>
     <string name="shared_string_do_not_show_again">Ekki sýna aftur</string>
     <string name="shared_string_remember_my_choice">Muna valið</string>
-    <string name="shared_string_refresh">Endurnýja</string>
+    <string name="shared_string_refresh">Endurlesa</string>
     <string name="shared_string_download">Sækja</string>
     <string name="shared_string_downloading">Sæki…</string>
     <string name="shared_string_action_template">Aðgerð {0}</string>
@@ -4142,7 +4142,7 @@
     <string name="restore_selected_data">Endurheimta valin gögn</string>
     <string name="receiving_data_from_server">Tek á móti gögnum frá netþjóninum…</string>
     <string name="restore_complete">Endurheimt</string>
-    <string name="backup_version_history">Útgáfuferli</string>
+    <string name="backup_version_history">Útgáfuferill</string>
     <string name="backup_storage_taken">Geymslurými upptekið</string>
     <string name="delete_version_history">Eyða útgáfuferli</string>
     <string name="routing_attr_avoid_tunnels_description">Forðast veggöng</string>
@@ -4167,7 +4167,7 @@
     <string name="shared_string_learn_more">Kanna nánar</string>
     <string name="cancel_anytime_in_huawei_appgallery">Hættu hvenær sem er í Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Hættu hvenær sem er í Google Play.</string>
-    <string name="shared_string_not_included">Ekki taka með</string>
+    <string name="shared_string_not_included">Ekki innifalið</string>
     <string name="shared_string_includes">inniheldur</string>
     <string name="complete_purchase">Ljúka kaupum</string>
     <string name="regular_price">Venjulegt verð</string>
@@ -4809,7 +4809,7 @@
     <string name="map_widget_target_distance">Fjarlægð milli myndavélar og myndefnis</string>
     <string name="map_widget_ant_bicycle_dist">Vegalengd hjólandi</string>
     <string name="map_widget_ant_bicycle_dist_desc">Sýnir vegalengdina sem farin hefur verið</string>
-    <string name="map_widget_target_distance_desc">"Viðmótshlutinn sýnir vegalengdina frá myndavélinni að  áfangastaðnum."</string>
+    <string name="map_widget_target_distance_desc">Viðmótshlutinn sýnir vegalengdina frá myndavélinni að áfangastaðnum.</string>
     <string name="map_widget_zoom_level_desc">Viðmótshluti sýnir núverandi aðdráttarstig kortsins.</string>
     <string name="map_widget_camera_distance_desc">Viðmótshluti sem sýnir hæð myndavélar fyrir ofan yfirborðið.</string>
     <string name="map_widget_camera_tilt_desc">Viðmótshluti sem sýnir halla myndavélar í fjarvíddarham. Sjálfgefið er 90° (enginn halli).</string>
@@ -4834,4 +4834,7 @@
     <string name="ant_go_to_store">Fara í hugbúnaðarsafnið</string>
     <string name="street_name_widget_desc">Götuheitaviðmótshlutinn sýnir fyrirliggjandi götuheiti með beinni staðsetningarör eða heiti næstu götu ásamt þeirri aðgerð sem þarf að framkvæma.</string>
     <string name="calculate_online_altitude_descr">Reiknaðu hæð á OsmAnd-netþjónum, út frá gervitunglamyndum og stafrænum hæðarlíkönum. Mismunur miðað við hæð tækis getur nýst sem leiðrétting á hæð.</string>
+    <string name="attach_to_roads_banner_desc">Hengdu ferilinn þinn við vegina til að fá nákvæmar ferðaleiðbeiningar.</string>
+    <string name="purchases_feature_desc_cross_buy">Notaðu eiginleika áskriftarinnar þinnar á mismunandi kerfum (Android/iOS/vefnum) án nokkurs aukakostnaðar.</string>
+    <string name="shared_string_cross_buy">Kaupa á milli kerfa</string>
 </resources>
