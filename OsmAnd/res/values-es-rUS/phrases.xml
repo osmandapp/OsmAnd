@@ -612,8 +612,8 @@
     <string name="poi_craft_plasterer">Yesería;Yesero</string>
     <string name="poi_craft_plumber">Plomería (oficio);Plomero;Fontanería (oficio);Fontanero</string>
     <string name="poi_craft_pottery">Alfarería</string>
-    <string name="poi_craft_rigger">Aparejador/a (náutica);Aparejadora</string>
-    <string name="poi_craft_roofer">Reparación de techos;Techador/a</string>
+    <string name="poi_craft_rigger">Aparejador/a (náutica);Aparejadora;Montador</string>
+    <string name="poi_craft_roofer">Reparación de techos;Techador;Techadora</string>
     <string name="poi_craft_saddler">Guarnicionería;Guasquería;Talabartería</string>
     <string name="poi_craft_sailmaker">Astillero artesanal</string>
     <string name="poi_craft_sawmill">Aserradero</string>
@@ -2051,7 +2051,7 @@
     <string name="poi_historic_civilization_celtic">Civilización: celta</string>
     <string name="poi_historic_civilization_western_roman">Civilización: romanos occidentales (285 dC – 476 dC)</string>
     <string name="poi_historic_civilization_mycenaean">Civilización: micénica</string>
-    <string name="poi_historic_civilization_dacian">Civilización: tracianos</string>
+    <string name="poi_historic_civilization_dacian">Civilización: dacios</string>
     <string name="poi_historic_civilization_hernici">Civilización: hérnicos</string>
     <string name="poi_historic_civilization_greek_egyptian">Civilización: griegos egipcios (332 aC – 30 aC)</string>
     <string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilización: romanos y bizantinos egipcios</string>
@@ -2842,7 +2842,7 @@
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburguesas</string>
     <string name="poi_cuisine_coffee">Café</string>
-    <string name="poi_cuisine_sandwich">Sándwich</string>
+    <string name="poi_cuisine_sandwich">Sándwich;Emparedados</string>
     <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_ice_cream">Helado</string>
@@ -2876,7 +2876,7 @@
     <string name="poi_cuisine_tea_shop">Tienda de té</string>
     <string name="poi_cuisine_soup">Sopa</string>
     <string name="poi_cuisine_pie">Tartas</string>
-    <string name="poi_cuisine_hotdog">Panchos;Perros calientes</string>
+    <string name="poi_cuisine_hotdog">Perros calientes;Panchos</string>
     <string name="poi_cuisine_deli">Fiambres;Delicatessen</string>
     <string name="poi_cuisine_salad">Ensaladas</string>
     <string name="poi_cuisine_frozen_yogurt">Yogur congelado</string>
@@ -2993,7 +2993,7 @@
     <string name="poi_cuisine_tibetan">Tibetana</string>
     <string name="poi_payment_transport_type">Forma de pago (transporte)</string>
     <string name="poi_outdoor_seating_filter_yes">Sí;Asientos exteriores;Asientos al aire libre</string>
-    <string name="poi_delivery_filter_yes">Sí;Envío a domicilio</string>
+    <string name="poi_delivery_filter_yes">Sí;Envío a domicilio;Entrega</string>
     <string name="poi_cuisine_buschenschank">Buschenschank</string>
     <string name="poi_cuisine_souvlaki">Souvlaki;Brocheta griega de carne</string>
     <string name="poi_cuisine_gyros">Gyros;Carne asada en horno vertical</string>
@@ -3696,7 +3696,7 @@
     <string name="poi_craft_builder">Albañilería;Constructor</string>
     <string name="poi_craft_distillery">Destilería</string>
     <string name="poi_craft_joiner">Carpintería (ensamblado);Carpintero;Carpintera;Ensamblador</string>
-    <string name="poi_craft_floorer">Constructor de pisos</string>
+    <string name="poi_craft_floorer">Constructor de pisos;Solador</string>
     <string name="poi_craft_bakery">Taller de panadería</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
     <string name="poi_charge">Cargo</string>
@@ -4086,7 +4086,7 @@
     <string name="poi_lgbtq_primary">LGBTQ: primario</string>
     <string name="poi_lgbtq_yes">LGBTQ permitido</string>
     <string name="poi_lgbtq_only">Sólo LGBTQ</string>
-    <string name="poi_lgbtq_no">Prohibido personas del grupo LGBTQ+</string>
+    <string name="poi_lgbtq_no">Prohibido a personas del grupo LGBTQ+</string>
     <string name="poi_beauty_salon_tanning">Bronceado</string>
     <string name="poi_beauty_salon_cosmetics">Cosméticos</string>
     <string name="poi_beauty_salon_spa">Spa</string>
@@ -4231,7 +4231,7 @@
     <string name="poi_toilets_handwashing_yes">Lavado de manos: sí</string>
     <string name="poi_museum_maritime">Marítimo;Naval</string>
     <string name="poi_museum_science">Ciencias</string>
-    <string name="poi_museum_apis_mellifera">Abejas</string>
+    <string name="poi_museum_apis_mellifera">Apícola;Abejas</string>
     <string name="poi_museum_nature">Naturaleza</string>
     <string name="poi_museum_technology">Tecnología</string>
     <string name="poi_museum_agriculture">Agricultura;Agrícola</string>
@@ -4255,16 +4255,16 @@
     <string name="poi_toilets_position_seated">Posición de los sanitarios: sentado</string>
     <string name="poi_toilets_position_urinal">Posición de los sanitarios: urinario</string>
     <string name="poi_toilets_position_squat">Posición de los sanitarios: cuclillas</string>
-    <string name="poi_gender_segregated_yes">Segregación de género: sí</string>
-    <string name="poi_gender_segregated_no">Segregación de género: no</string>
+    <string name="poi_gender_segregated_yes">Segregado por género: sí</string>
+    <string name="poi_gender_segregated_no">Segregado por género: no</string>
     <string name="poi_toilets_paper_supplied_yes">Provee de papel: sí</string>
     <string name="poi_toilets_paper_supplied_no">Provee de papel: no</string>
     <string name="poi_toilets_hands_drying_yes">Secado de manos: sí</string>
     <string name="poi_toilets_hands_drying_no">Secado de manos: no</string>
     <string name="poi_handwashing_hand_disinfection_yes">Desinfección de manos: sí</string>
     <string name="poi_handwashing_hand_disinfection_no">Desinfección de manos: no</string>
-    <string name="poi_handwashing_hand_cleaning_paste_yes">Pasta para limpieza de manos: sí</string>
-    <string name="poi_handwashing_hand_cleaning_paste_no">Pasta para limpieza de manos: no</string>
+    <string name="poi_handwashing_hand_cleaning_paste_yes">Pasta limpiadora de manos: sí</string>
+    <string name="poi_handwashing_hand_cleaning_paste_no">Pasta limpiadora de manos: no</string>
     <string name="poi_handwashing_creme_yes">Crema: sí</string>
     <string name="poi_handwashing_creme_no">Crema: no</string>
     <string name="poi_hot_water_yes">Agua caliente: sí</string>
@@ -4272,11 +4272,11 @@
     <string name="poi_post_office_bureau">Oficina</string>
     <string name="poi_post_office_post_annex">Anexo postal</string>
     <string name="poi_post_office_post_partner">Puesto asociado</string>
-    <string name="poi_post_office_service_provider">Proveedor de servicios de la oficina postal</string>
+    <string name="poi_post_office_service_provider">Proveedor de servicios postales</string>
     <string name="poi_post_office_service_brand">Marca de la oficina postal</string>
     <string name="poi_post_office_collection_times">Horarios de recolección en la oficina de correos</string>
     <string name="poi_post_office_opening_hours">Horarios de apertura de la oficina de correos</string>
-    <string name="poi_museum_type">Tema del museo</string>
+    <string name="poi_museum_type">Temática del museo</string>
     <string name="poi_post_office_type">Tipo de oficina postal</string>
     <string name="poi_blowhole">Espiráculo</string>
     <string name="poi_books_adults">Adultos</string>
@@ -4376,7 +4376,7 @@
     <string name="poi_playground_cushion">Inflable</string>
     <string name="poi_dog">Perros</string>
     <string name="poi_dog_leashed">Perros: sólo con correa</string>
-    <string name="poi_dog_unleashed">Perros: sin correa</string>
+    <string name="poi_dog_unleashed">Perros: correa opcional</string>
     <string name="poi_dog_designated">Designado para perros</string>
     <string name="poi_playground_basketrotator">Cesta giratoria</string>
     <string name="poi_playground_aerialrotator">Rotador aéreo</string>
