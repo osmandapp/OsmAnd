@@ -1352,7 +1352,7 @@
     <string name="poi_diet_gluten_free_no">Dieta senza glutine: no</string>
     <string name="poi_drive_in_yes">Sì;Drive-in</string>
     <string name="poi_drive_in_no">Drive-in: no</string>
-    <string name="poi_drive_through_yes">Sì;</string>
+    <string name="poi_drive_through_yes">Sì</string>
     <string name="poi_microbrewery_yes">Si,Microbirrificio</string>
     <string name="poi_takeaway_filter_yes">Sì;Asporto</string>
     <string name="poi_takeaway_yes">A portar via</string>
@@ -1373,7 +1373,7 @@
     <string name="poi_service_repair_no">Nessuna riparazione</string>
     <string name="poi_service_electrical">Riparazione di veicoli elettrici</string>
     <string name="poi_motorcycle_repair">Riparazione Motocicli</string>
-    <string name="poi_self_service_yes">Sì;</string>
+    <string name="poi_self_service_yes">Sì</string>
     <string name="poi_self_service_no">No</string>
     <string name="poi_automated_yes">Sì;Automatizzato</string>
     <string name="poi_automated_no">Non automatizzato</string>
@@ -1632,7 +1632,7 @@
     <string name="poi_caravans_no">Caravan: no</string>
     <string name="poi_sanitary_dump_station_yes">Stazione di discarica sanitaria: sì</string>
     <string name="poi_sanitary_dump_station_no">Stazione di sanitari discarica: no</string>
-    <string name="poi_power_supply_yes">Sì;</string>
+    <string name="poi_power_supply_yes">Sì</string>
     <string name="poi_power_supply_no">Alimentazione elettrica: no</string>
     <string name="poi_power_supply_cee_17_blue">Tensione di alimentazione (presa): CEE 17 blu</string>
     <string name="poi_power_supply_cee_7_4">Tensione di alimentazione (presa): CEE 7/4</string>
@@ -1796,7 +1796,7 @@
     <string name="poi_crossing_light_yes">Luce di passaggio</string>
     <string name="poi_crossing_on_demand_yes">Attraversamento su richiesta</string>
     <string name="poi_crossing_on_demand_no">Attraversamento su richiesta: no</string>
-    <string name="poi_dispensing_yes">Sì;</string>
+    <string name="poi_dispensing_yes">Sì</string>
     <string name="poi_dispensing_no">non accettate</string>
     <string name="poi_aerodrome_type_international">Internazionale</string>
     <string name="poi_aerodrome_type_regional">Regionale</string>
@@ -3333,4 +3333,5 @@
     <string name="poi_location_underwater">Posizione: sott\'acqua</string>
     <string name="poi_location_underground">Posizione: sottoterra</string>
     <string name="poi_location_indoor">Posizione: al chiuso</string>
+    <string name="poi_parking_fee_filter">Costo del parcheggio</string>
 </resources>
