@@ -4539,7 +4539,7 @@
     <string name="routing_attr_carriage_restrictions_description">Zohľadniť obmedzenia vjazdu pre vozidlá ťahané koňmi</string>
     <string name="rendering_attr_showTramRoutes_name">Trasy električiek</string>
     <string name="rendering_attr_showTrainRoutes_name">Trasy vlakov</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Trasy ďiaľkových električiek</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy diaľkových električiek</string>
     <string name="rendering_attr_showBusRoutes_name">Trasy autobusov</string>
     <string name="map_markers_bar">Panel mapových značiek</string>
     <string name="shared_string_visible_widgets">Viditeľné nástroje</string>
