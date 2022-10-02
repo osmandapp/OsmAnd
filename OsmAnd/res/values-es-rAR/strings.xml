@@ -4835,7 +4835,7 @@
     <string name="ant_go_to_store">Ir a la tienda</string>
     <string name="ant_read_data">Leer datos</string>
     <string name="ant_heart_rate_write_gpx_desc">Registra la frecuencia cardíaca en la grabación</string>
-    <string name="ant_write_to_gpx">Registrar datos en la traza</string>
+    <string name="ant_write_to_gpx">Escribir datos en la traza</string>
     <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
     <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
