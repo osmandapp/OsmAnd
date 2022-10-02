@@ -4376,7 +4376,7 @@
     <string name="poi_playground_type">Tipo de juego</string>
     <string name="poi_playground_ball_pool">Piscina de bolas</string>
     <string name="poi_playground_swing">Hamaca;Columpio</string>
-    <string name="poi_playground_roundabout">Calesita;Carrusel</string>
+    <string name="poi_playground_roundabout">Calesita;Carrusel manual</string>
     <string name="poi_playground_springy">Muelle balancín;Caballito mecedor</string>
     <string name="poi_playground_aerialrotator">Rotador aéreo</string>
     <string name="poi_playground_basketrotator">Cesta giratoria</string>
