@@ -4360,4 +4360,16 @@
     <string name="poi_avalanche_transceiver_checkpoint">Ponto de controlo de transcetor para avalanchas</string>
     <string name="poi_playground_cushion">Almofada inflável</string>
     <string name="poi_playground_water">Água</string>
+    <string name="poi_board_type_sight">Mirante</string>
+    <string name="poi_payment_maestro_contactless_no">Maestro Contactless não aceito</string>
+    <string name="poi_playground_balancebeam">Trave de equilíbrio</string>
+    <string name="poi_playground_playhouse">Casa de brinquedo</string>
+    <string name="poi_playground_teenshelter">Abrigo infantil</string>
+    <string name="poi_playground_youth_bench">Banco infantil</string>
+    <string name="poi_payment_girocard_contactless_no">Girocard Contactless não aceite</string>
+    <string name="poi_payment_mastercard_contactless_no">MasterCard Contactless não aceito</string>
+    <string name="poi_payment_visa_contactless_no">Visa Contactless não aceito</string>
+    <string name="poi_changing_table_filter">Mesa de fraldário</string>
+    <string name="poi_payment_american_express_contactless_no">American Express Contactless (AMEX) não aceite</string>
+    <string name="poi_playground_aerialrotator">Gira-gira aéreo</string>
 </resources>
