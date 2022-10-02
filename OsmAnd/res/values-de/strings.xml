@@ -4838,4 +4838,5 @@
     <string name="map_widget_ant_bicycle_dist_desc">Zeigt die zurückgelegte Entfernung an</string>
     <string name="antplus_plugin_name">ANT+</string>
     <string name="nautical_depth_points">Nautische Tiefenpunkte</string>
+    <string name="shared_string_cross_buy">Cross-Buy</string>
 </resources>
