@@ -226,7 +226,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="shared_string_all">Todos</string>
+    <string name="shared_string_all">Todo</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
@@ -4814,7 +4814,7 @@
     <string name="map_widget_zoom_level_desc">El widget muestra el nivel de zum actual del mapa.</string>
     <string name="map_widget_camera_distance_desc">El widget muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt_desc">El widget muestra el ángulo de inclinación de la cámara en modo perspectiva. El valor predefinido es 90° (sin inclinación).</string>
-    <string name="map_widget_target_distance">Distancia del objetivo</string>
+    <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="map_widget_zoom_level">Nivel de zum</string>
     <string name="map_widget_camera_distance">Elevación de la cámara</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
@@ -4822,4 +4822,32 @@
     <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
+    <string name="map_widget_fps_info">Representación de mapas en FPS (fotogramas por segundo)</string>
+    <string name="favorites_backup">Copia de seguridad de favoritos</string>
+    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/Web) sin coste adicional.</string>
+    <string name="ant_widgets">Widgets de ANT+</string>
+    <string name="ant_missing_dependency">Falta la dependencia</string>
+    <string name="ant_go_to_store">Ir a la tienda</string>
+    <string name="ant_read_data">Leer datos</string>
+    <string name="ant_write_to_gpx">Escribir datos en la traza</string>
+    <string name="ant_heart_rate_write_gpx_desc">Registra la frecuencia cardíaca en la grabación</string>
+    <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
+    <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
+    <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
+    <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadencia de la bicicleta</string>
+    <string name="worldwide_maps">Mapas del mundo</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Muestra la velocidad a la que el usuario pedalea</string>
+    <string name="map_widget_ant_bicycle_speed">Velocidad de la bicicleta</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
+    <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Descripción de ANT+</string>
+    <string name="nautical_depth_points">Puntos de profundidad náutica</string>
+    <string name="depth_contours">Curvas de profundidad</string>
+    <string name="shared_string_cross_buy">Compra cruzada</string>
+    <string name="ant_missing_dependency_descr">El servicio necesario «%1$s», no se ha encontrado.
+\nDebes instalar el complemento del servicio ANT+ o actualiza la versión existente, si ya lo tienes.
+\n¿Quieres ejecutar Play Store para conseguirlo\?</string>
 </resources>
