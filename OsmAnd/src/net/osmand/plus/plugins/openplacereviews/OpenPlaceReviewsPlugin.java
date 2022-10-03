@@ -182,10 +182,13 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	private static String[] getIdFromResponse(String response) {
 		try {
 			JSONArray obj = new JSONObject(response).getJSONArray("objects");
+			if (obj.length() == 0) {
+				return new String[0];
+			}
 			JSONArray images = (JSONArray) ((JSONObject) obj.get(0)).get("id");
 			return toStringArray(images);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 		return new String[0];
 	}
