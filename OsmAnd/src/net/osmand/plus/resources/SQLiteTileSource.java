@@ -450,10 +450,6 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	public boolean isLocked() {
-		return getDatabase() != null;
-	}
-
 	@Override
 	public long getTileModifyTime(int x, int y, int zoom, String dirWithTiles) {
 		long time = System.currentTimeMillis();

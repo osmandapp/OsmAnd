@@ -82,9 +82,6 @@ public abstract class TilesCache<T> {
 		if (!tilesOnFS.containsKey(tileId)) {
 			boolean exist;
 			if (map instanceof SQLiteTileSource) {
-				if (((SQLiteTileSource) map).isLocked()){
-					return false;
-				}
 				exist = ((SQLiteTileSource) map).exists(x, y, zoom);
 			} else {
 				exist = new File(dirWithTiles, tileId).exists();
@@ -150,8 +147,7 @@ public abstract class TilesCache<T> {
 		}
 
 		if (map != null) {
-			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if (!loadFromInternetIfNeeded && !locked && !isTileDownloaded(tileId, map, x, y, zoom)) {
+			if (!loadFromInternetIfNeeded && !isTileDownloaded(tileId, map, x, y, zoom)) {
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
