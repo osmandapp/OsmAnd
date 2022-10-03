@@ -1103,7 +1103,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
-		System.out.println("OK");
 		PointI target31 = mapRenderer.getTarget();
 		if (cachedTarget31 != null && cachedTarget31.getX() == target31.getX() && cachedTarget31.getY() == target31.getY()) {
 			cachedPaths.clear();
