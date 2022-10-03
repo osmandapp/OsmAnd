@@ -413,7 +413,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cy;
 					if (mapRenderer != null) {
 						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-						PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 						if (center31 == null) {
 							continue;
 						}
@@ -830,8 +830,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 		VectorDouble outlinePattern = new VectorDouble();
-		outlinePattern.add(75 / getMapDensity());
-		outlinePattern.add(55 / getMapDensity());
+		outlinePattern.add(75.0d / (double) getMapDensity());
+		outlinePattern.add(55.0d / (double) getMapDensity());
 		FColorARGB outlineColor = new FColorARGB(1.0f, 1.0f, 1.0f, 1.0f);
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;
@@ -919,8 +919,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				return null;
 			}
 		}
-		PointF l = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, firstPoint);
-		PointF m = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, secondPoint);
+		PointF l = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, firstPoint);
+		PointF m = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, secondPoint);
 		return new PointF[] {l, m};
 	}
 

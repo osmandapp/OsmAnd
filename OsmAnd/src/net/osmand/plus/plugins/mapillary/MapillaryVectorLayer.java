@@ -550,7 +550,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		}
 
-		PointI point31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
+		PointI point31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tb, (int) point.x, (int) point.y);
 		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(point31);
 		if (quadTree == null) {
 			return;
