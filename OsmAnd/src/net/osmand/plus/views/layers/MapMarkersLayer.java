@@ -76,7 +76,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
+		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider, MapRendererView.MapRendererViewListener {
 
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
@@ -1099,5 +1099,20 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
+	}
+
+	@Override
+	public void onUpdateFrame(MapRendererView mapRenderer) {
+		System.out.println("OK");
+		PointI target31 = mapRenderer.getTarget();
+		if (cachedTarget31 != null && cachedTarget31.getX() == target31.getX() && cachedTarget31.getY() == target31.getY()) {
+			cachedPaths.clear();
+		}
+		cachedTarget31 = target31;
+	}
+
+	@Override
+	public boolean areMapRendererViewEventsAllowed() {
+		return true;
 	}
 }
