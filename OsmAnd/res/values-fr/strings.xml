@@ -4488,8 +4488,8 @@
     <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvre l’écran \"Ajouter un point de passage\" dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnels sur voie navigable</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes de note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>

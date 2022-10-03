@@ -3398,7 +3398,7 @@
     <string name="reading_files">Branje datotek …</string>
     <string name="stop_download_desc">Prenos ni dokončan. Če zdaj prekinete prenos, bo za ogled na voljo le del ploščic.</string>
     <string name="stop_download">Ustavi prenos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Podvodni tuneli</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Podvodni tuneli</string>
     <string name="gps_filter_precision">Natančnost GPS-a</string>
     <string name="copying_file">Kopiranje datoteke %1$s …</string>
     <string name="shared_string_travelbooks">Potovalne knjige</string>
@@ -3485,7 +3485,7 @@
     <string name="shared_string_used">Uporabljeno</string>
     <string name="rendering_attr_seabedDetail_name">Podrobnosti o morskem dnu</string>
     <string name="gpx_no_routes_descr">Z orodjem »%1$s« lahko pot shraniš v datoteko.</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
     <string name="rendering_attr_seabedDetail_description">Dodatne tekstovne informacije o kvalifikaciji površine morskega dna, kombiniranih tipih površin, skupini in taksonu plevela ali morske trave</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za opombe</string>
     <string name="files_with_route_restrictions">Datoteke z omejitvami poti</string>

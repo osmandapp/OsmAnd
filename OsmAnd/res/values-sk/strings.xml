@@ -4486,8 +4486,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazenie ikon pri nízkom priblížení</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Značky chýb</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony pri nízkom priblížení</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodných ciest</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunely vodných ciest</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_all_name">Všetky</string>
     <string name="rendering_value_omit_name">Vynechať</string>

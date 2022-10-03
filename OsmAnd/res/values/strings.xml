@@ -349,8 +349,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Waterway tunnels</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>

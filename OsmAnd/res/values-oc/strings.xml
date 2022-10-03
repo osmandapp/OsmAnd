@@ -1671,8 +1671,8 @@
     <string name="profile_type_osmand_string">Perfiu OsmAnd</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notar lei balisas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icònas de zoom feble</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Galariás fluvialas</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Pas amagar lei galariá fluvialas</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Galariás fluvialas</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Pas amagar lei galariá fluvialas</string>
     <string name="shared_string_used">D\'emplegar</string>
     <string name="track_file_description">Clicatz per mostrar la boita de dialòg e seleccionar lei traças disponiblas.</string>
     <string name="upload_photo">A telecargar</string>

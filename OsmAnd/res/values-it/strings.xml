@@ -4473,8 +4473,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schema della visualizzazione delle icone a bassi zoom</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnel per canali</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnel per canali</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
     <string name="rendering_value_omit_name">Ometti</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Categoria</string>

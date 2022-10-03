@@ -4489,13 +4489,13 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunneler til vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunneler til vandveje</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Alle</string>

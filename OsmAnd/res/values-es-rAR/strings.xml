@@ -4487,8 +4487,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>

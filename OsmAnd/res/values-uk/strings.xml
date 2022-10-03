@@ -4487,8 +4487,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на мапі малого масштабу</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на мапі малого масштабу</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунелі на водних шляхах</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Тунелі на водних шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Додаткові текстові відомості про поверхню (surface_qualification) морського дна, комбіновані типи поверхні, категорію та тип рослинності</string>

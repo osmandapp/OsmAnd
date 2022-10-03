@@ -4470,8 +4470,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>

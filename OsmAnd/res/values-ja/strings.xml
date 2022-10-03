@@ -4440,7 +4440,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_all_name">すべて</string>
     <string name="rendering_value_omit_name">省略</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低ズーム時のアイコン簡略表示に関するものです</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路トンネル</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">水路トンネル</string>
     <string name="shared_string_used">使用済</string>
     <string name="shared_string_not_used">未使用</string>
     <string name="waypoint_template">経由地点テンプレート</string>
@@ -4499,7 +4499,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Note(メモ)タグ</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note(メモ)タグの表示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低ズーム用アイコン</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">水路トンネルを隠さない</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">水路トンネルを隠さない</string>
     <string name="files_with_route_restrictions">ルート制限のあるファイル</string>
     <string name="track_file_description">これをタップすると、利用可能な経路の選択ダイアログが表示されます。</string>
     <string name="track_file">経路ファイル</string>

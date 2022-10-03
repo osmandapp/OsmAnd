@@ -4468,8 +4468,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vízi alagutak</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
     <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
     <string name="shared_string_not_used">Használaton kívül</string>
     <string name="shared_string_used">Használatban</string>

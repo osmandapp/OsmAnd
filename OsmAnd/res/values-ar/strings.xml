@@ -4554,11 +4554,11 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">علامات أصلحني</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">إظهار علامات أصلحني</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">علامات ملاحظة</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">أنفاق الممر المائي</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">أنفاق الممر المائي</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">إظهار علامات الملاحظة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">الأيقونات عند التكبيرات المنخفضة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">عرض تخطيطي للأيقونات عند التكبيرات المنخفضة</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
     <string name="shared_string_open_street_map">خريطة الشارع المفتوح</string>
     <string name="rendering_value_all_name">الكل</string>
     <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>

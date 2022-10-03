@@ -4494,8 +4494,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis de cursos de água</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omissão</string>

@@ -4480,8 +4480,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路隧道</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">不要隱藏水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">類別</string>

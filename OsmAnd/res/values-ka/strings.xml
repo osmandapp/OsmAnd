@@ -2842,7 +2842,7 @@
     <string name="shared_string_feet">ფუტი</string>
     <string name="shared_string_relation">ურთიერთობა</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">შენიშვნების ჭდეების ჩვენება</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">წყლის გვირაბები</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">წყლის გვირაბები</string>
     <string name="activity_type_cycling_name">ველოსიპედით</string>
     <string name="activity_type_racing_name">მანქანით</string>
     <string name="activity_type_hiking_name">ლაშქრობა</string>
@@ -2876,7 +2876,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">შენიშვნების ჭდეები</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">ხატულები დაბალი გადიდებისას</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">დაბალი გადიდებისას ხატულების სქემატური ჩვენება</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">წყლის გვირაბების ჩვენება</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">წყლის გვირაბების ჩვენება</string>
     <string name="shared_string_grade">დონე</string>
     <string name="shared_string_uphill">აღმართი</string>
     <string name="shared_string_interval">დაყოვნება</string>

@@ -4495,8 +4495,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematische Darstellung von Symbolen bei niedrigen Zoomstufen</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Wasserstraßentunnel</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Wasserstraßentunnel</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
     <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinfo zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>

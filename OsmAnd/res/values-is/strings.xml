@@ -4493,8 +4493,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Birta merki minnispunkta</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Táknmyndir við lítinn aðdrátt</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematísk birting táknmynda við lítinn aðdrátt</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Siglingagöng</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ekki fela göng sem siglt er í gegnum</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Siglingagöng</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ekki fela göng sem siglt er í gegnum</string>
     <string name="waypoint_template">Sniðmát ferilpunkts</string>
     <string name="predefined_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp verður ferilpunktur vistaður sjálfvirkt með forákvörðuðum viðföngum.</string>
     <string name="always_ask_waypoint_appearance_description">Ef ýtt er á þennan aðgerðahnapp opnast \"Bæta við ferilpunkti\" skjárinn, þar sem þú getur breytt heiti og útliti ferilpunktsins.</string>

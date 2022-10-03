@@ -4419,8 +4419,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Ammustra sas etichetas de sas faddinas</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichetas de sas notas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Dispositzione ischemàtica de sas iconas a ismanniamentu bassu</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
     <string name="shared_string_not_used">No impreadu</string>
     <string name="files_with_route_restrictions">Archìvios cun restritziones de àndala</string>
     <string name="waypoint_template">Modellu de puntu de coladòrgiu</string>

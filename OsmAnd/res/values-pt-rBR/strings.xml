@@ -4488,8 +4488,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em zooms baixos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis hidroviários</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
     <string name="gpx_no_routes_descr">Você pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
