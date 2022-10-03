@@ -232,7 +232,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		clearFavorites();
 		float textScale = getTextScale();
-		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getBaseOrder(), isTextVisible(),
+		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {

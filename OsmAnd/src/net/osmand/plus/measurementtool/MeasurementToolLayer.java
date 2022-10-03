@@ -139,7 +139,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(getContext(),
 				view.getApplication().getUIUtilities(), view.getDensity());
 		multiProfileGeometry = new MultiProfileGeometryWay(multiProfileGeometryWayContext);
-		multiProfileGeometry.baseOrder = getBaseOrder() - 10;
+		multiProfileGeometry.baseOrder = getLinesOrder() - 10;
 		wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 
 		bitmapPaint = new Paint();
@@ -498,7 +498,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			List<RenderableSegment> cached = new ArrayList<>();
 			if (draw) {
 				clearCachedSegmentsRenderables();
-				int baseOrder = getBaseOrder() - 10;
+				int baseOrder = getLinesOrder() - 10;
 				QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
 				for (TrkSegment segment : segments) {
 					RenderableSegment renderer = null;
@@ -544,14 +544,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				List<RenderableSegment> cached = new ArrayList<>();
 				if (draw) {
 					clearCachedApproximationRenderables();
-					int baseOrder = getBaseOrder() - 10;
+					int linesOrder = getLinesOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
 					for (List<WptPt> points : originalPointsList) {
 						RenderableSegment renderer = null;
 						if (!points.isEmpty()) {
 							renderer = new StandardTrack(new ArrayList<>(points), 17.2);
 							GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
-							geometryWay.baseOrder = baseOrder--;
+							geometryWay.baseOrder = linesOrder--;
 							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null);
 							renderer.setDrawArrows(false);
 							renderer.setGeometryWay(geometryWay);
@@ -644,7 +644,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							new WptCollectionPoint(point, pointIcon));
 				}
 				pointsProvider = new TilePointsProvider<>(getContext(), tilePoints,
-						getBaseOrder() - 500, false, null, getTextScale(), view.getDensity(),
+						getPointsOrder(), false, null, getTextScale(), view.getDensity(),
 						START_ZOOM, 31);
 				pointsProvider.drawSymbols(mapRenderer);
 			}
@@ -771,7 +771,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						geometryWay = renderer.getGeometryWay();
 					} else {
 						geometryWay = new GpxGeometryWay(wayContext);
-						geometryWay.baseOrder = getBaseOrder() - 100;
+						geometryWay.baseOrder = getLinesOrder() - 100;
 					}
 					renderer = new StandardTrack(new ArrayList<>(beforeAfterWpt), 17.2);
 					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
@@ -808,7 +808,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			activePointsCollection = new MapMarkersCollection();
 			// Center marker
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(nightMode ? centerIconNight : centerIconDay));
@@ -816,21 +816,21 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			mapRenderer.addSymbolsProvider(activePointsCollection);
 			// Before marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(pointIcon));
 			beforePointMarker = builder.buildAndAddToCollection(activePointsCollection);
 			// After marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(pointIcon));
 			afterPointMarker = builder.buildAndAddToCollection(activePointsCollection);
 			// Selected marker
 			builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(applyingPointIcon));
@@ -961,7 +961,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(lineAttrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder(), xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -988,7 +988,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(highlightedPointImage));

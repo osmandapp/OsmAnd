@@ -299,7 +299,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean shouldDraw = shouldDrawPoints();
 				if (shouldDraw || mapActivityInvalidated) {
 					resetCachedRenderer();
-					int baseOrder = getBaseOrder() - 10;
+					int baseOrder = getPointsOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
 					route.renderer = renderer;
@@ -794,7 +794,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean isMoveable = isInMotion(marker);
 
 				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-						.setBaseOrder(getBaseOrder())
+						.setBaseOrder(getPointsOrder())
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
 						.setPosition(pointI)
@@ -836,7 +836,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;
 		int lineId = isLast ? 21 : 11;
-		outlineBuilder.setBaseOrder(getBaseOrder() + lineId + 1)
+		outlineBuilder.setBaseOrder(getLinesOrder() + lineId + 1)
 				.setIsHidden(false)
 				.setLineId(outlineId)
 				.setLineWidth(strokeWidth * 1.5)
@@ -850,7 +850,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		inlinePattern.add(-strokeWidth / 2 / getMapDensity());
 		inlinePattern.add((75 - strokeWidth) / getMapDensity());
 		inlinePattern.add((55 + strokeWidth) / getMapDensity());
-		inlineBuilder.setBaseOrder(getBaseOrder() + lineId)
+		inlineBuilder.setBaseOrder(getLinesOrder() + lineId)
 				.setIsHidden(false)
 				.setLineId(lineId)
 				.setLineWidth(strokeWidth)

@@ -231,7 +231,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
 								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
 								.setApproximationEnabled(false)
-								.setBaseOrder(getBaseOrder());
+								.setBaseOrder(getLinesOrder());
 						builder.buildAndAddToCollection(outlineCollection);
 						this.outlineCollection = outlineCollection;
 						mapRenderer.addSymbolsProvider(outlineCollection);
@@ -347,7 +347,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 100);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));

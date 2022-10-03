@@ -268,7 +268,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			mapMarkerBuilder
 					.setPosition(pointI)
 					.setIsHidden(isMoveable)
-					.setBaseOrder(getBaseOrder())
+					.setBaseOrder(getPointsOrder())
 					.setIsAccuracyCircleSupported(false)
 					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)

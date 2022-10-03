@@ -95,7 +95,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				clearAudioVideoNotes();
 			}
 			if (audioNotesTileProvider == null) {
-				audioNotesTileProvider = new AudioNotesTileProvider(ctx, getBaseOrder(), view.getDensity());
+				audioNotesTileProvider = new AudioNotesTileProvider(ctx, getPointsOrder(), view.getDensity());
 			}
 			if (objectsCount > 0 && audioNotesTileProvider.getPointsCount() == 0) {
 				float textScale = getTextScale();
