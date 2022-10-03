@@ -231,7 +231,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
 								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
 								.setApproximationEnabled(false)
-								.setBaseOrder(getLinesOrder());
+								.setBaseOrder(getBaseOrder());
 						builder.buildAndAddToCollection(outlineCollection);
 						this.outlineCollection = outlineCollection;
 						mapRenderer.addSymbolsProvider(outlineCollection);

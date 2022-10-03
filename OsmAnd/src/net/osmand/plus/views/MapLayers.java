@@ -149,7 +149,6 @@ public class MapLayers {
 
 		// route layer, 4-th in the order
 		routeLayer = new RouteLayer(app);
-		routeLayer.setPointsOrder(-1.995f);
 		mapView.addLayer(routeLayer, -2.0f);
 
 		// 1.5 preview route line layer
@@ -165,7 +164,6 @@ public class MapLayers {
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 4.6 measurement tool layer
 		measurementToolLayer = new MeasurementToolLayer(app);
-		measurementToolLayer.setPointsOrder(4.605f);
 		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer(app);

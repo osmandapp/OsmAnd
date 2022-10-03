@@ -410,7 +410,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							.setLineWidth(attrs.defaultWidth * 1.5d)
 							.setFillColor(NativeUtilities.createFColorARGB(color))
 							.setApproximationEnabled(false)
-							.setBaseOrder(getLinesOrder());
+							.setBaseOrder(getBaseOrder());
 					builder.buildAndAddToCollection(vectorLinesCollection);
 				}
 			}

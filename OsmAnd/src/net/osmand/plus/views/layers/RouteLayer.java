@@ -141,12 +141,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		routeWayContext = new RouteGeometryWayContext(getContext(), density);
 		routeWayContext.updatePaints(nightMode, attrs);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
-		routeGeometry.baseOrder = getLinesOrder();
+		routeGeometry.baseOrder = getBaseOrder();
 
 		publicTransportWayContext = new PublicTransportGeometryWayContext(getContext(), density);
 		publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
-		publicTransportRouteGeometry.baseOrder = getLinesOrder();
+		publicTransportRouteGeometry.baseOrder = getBaseOrder();
 	}
 
 	@Override
@@ -257,7 +257,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(attrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder(), xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -298,7 +298,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 100);
+			builder.setBaseOrder(getPointsOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(

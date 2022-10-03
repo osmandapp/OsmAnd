@@ -1061,7 +1061,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
-		int linesOrder = getLinesOrder();
+		int baseOrder = getBaseOrder();
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 			if (!cachedTrackWidth.containsKey(width)) {
@@ -1070,7 +1070,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				currentTrack = selectedGpxFile;
 			} else {
-				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, linesOrder--);
+				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder--);
 			}
 			String gpxPath = selectedGpxFile.getGpxFile().path;
 			if (!renderedSegmentsCache.containsKey(gpxPath)) {
@@ -1078,13 +1078,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		if (currentTrack != null) {
-			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, linesOrder);
+			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
 	}
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 	                                      Canvas canvas, RotatedTileBox tileBox, DrawSettings settings,
-	                                      int linesOrder) {
+	                                      int baseOrder) {
 		boolean hasMapRenderer = hasMapRenderer();
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		String gpxFilePath = selectedGpxFile.getGpxFile().path;
@@ -1136,7 +1136,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderer.setBorderPaint(borderPaint);
 				ts.renderer = renderer;
 				GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
-				geometryWay.baseOrder = linesOrder--;
+				geometryWay.baseOrder = baseOrder--;
 				renderer.setGeometryWay(geometryWay);
 				newTsRenderer = true;
 			}
