@@ -743,9 +743,7 @@ public abstract class InAppPurchaseHelper {
 		parameters.put("lang", ctx.getLanguage() + "");
 		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");
 		parameters.put("ns", ctx.getAppInitializer().getNumberOfStarts() + "");
-		if (ctx.isUserAndroidIdAllowed()) {
-			parameters.put("aid", ctx.getUserAndroidId());
-		}
+		parameters.put("aid", ctx.getUserAndroidId());
 	}
 
 	protected void onPurchaseDone(PurchaseInfo info) {
