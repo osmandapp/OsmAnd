@@ -48,7 +48,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -146,7 +146,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		colorProfile = settings.getApplicationMode().getProfileColor(nightMode);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
@@ -504,7 +504,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	public void downloadHasFinished() {
 		updateDownloadSection();
 		MapActivity mapActivity = getMapActivity();
-		SRTMPlugin plugin = OsmandPlugin.getActivePlugin(SRTMPlugin.class);
+		SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {
 			plugin.registerLayers(mapActivity, mapActivity);
 		}

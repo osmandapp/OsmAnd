@@ -8,7 +8,7 @@ import android.media.MediaScannerConnection;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
@@ -26,7 +26,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull Recording recording) {
 		super(new AudioVideoNoteMenuBuilder(mapActivity, recording), pointDescription, mapActivity);
 		this.mRecording = recording;
-		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		mPlugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		mIsFileAvailable = mRecording.getFile().exists();
 		builder.setShowTitleIfTruncated(false);
 

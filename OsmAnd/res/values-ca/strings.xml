@@ -3924,7 +3924,7 @@
     <string name="estimated_download_size">Tamany de baixada estimat</string>
     <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualització esquemàtica de les icones en els zooms baixos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túnels fluvials</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túnels fluvials</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tot</string>
     <string name="waypoint_template">Plantilla de punts de ruta</string>

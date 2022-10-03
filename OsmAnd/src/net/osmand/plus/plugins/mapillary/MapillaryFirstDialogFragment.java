@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 
 public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
@@ -42,7 +42,7 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 
 	private void showWidget(boolean show) {
 		FragmentActivity activity = getActivity();
-		MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (plugin != null && activity instanceof MapActivity) {
 			plugin.setWidgetVisible((MapActivity) activity, show);
 		}

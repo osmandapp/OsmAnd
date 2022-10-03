@@ -3398,7 +3398,7 @@
     <string name="reading_files">Branje datotek …</string>
     <string name="stop_download_desc">Prenos ni dokončan. Če zdaj prekinete prenos, bo za ogled na voljo le del ploščic.</string>
     <string name="stop_download">Ustavi prenos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Podvodni tuneli</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Podvodni tuneli</string>
     <string name="gps_filter_precision">Natančnost GPS-a</string>
     <string name="copying_file">Kopiranje datoteke %1$s …</string>
     <string name="shared_string_travelbooks">Potovalne knjige</string>
@@ -3485,7 +3485,7 @@
     <string name="shared_string_used">Uporabljeno</string>
     <string name="rendering_attr_seabedDetail_name">Podrobnosti o morskem dnu</string>
     <string name="gpx_no_routes_descr">Z orodjem »%1$s« lahko pot shraniš v datoteko.</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
     <string name="rendering_attr_seabedDetail_description">Dodatne tekstovne informacije o kvalifikaciji površine morskega dna, kombiniranih tipih površin, skupini in taksonu plevela ali morske trave</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za opombe</string>
     <string name="files_with_route_restrictions">Datoteke z omejitvami poti</string>
@@ -4798,4 +4798,33 @@
     <string name="map_widget_target_distance_desc">Gradnik prikazuje razdaljo od kamere do ciljne lokacije.</string>
     <string name="map_widget_camera_distance_desc">Gradnik prikazuje višino kamere nad nivojem površine.</string>
     <string name="map_widget_zoom_level_desc">Gradnik prikazuje trenutno stopnjo povečave zemljevida.</string>
+    <string name="ant_missing_dependency_descr">Zahtevana storitev »%1$s« ni bila najdena.
+\nNamestiti moraš storitev ANT+ gradniki ali pa posodobiti obstoječo različico, če jo že imaš.
+\nŽeliš zagnati Trgovino Play, da jo namestiš/posodobiš\?</string>
+    <string name="ant_missing_dependency">Manjkajoča odvisnost</string>
+    <string name="ant_go_to_store">Pojdi v Trgovino</string>
+    <string name="ant_read_data">Preberi podatke</string>
+    <string name="ant_write_to_gpx">Napiši podatke v sled</string>
+    <string name="ant_heart_rate_write_gpx_desc">Napiši srčni utrip v sled</string>
+    <string name="map_widget_ant_heart_rate">Srčni utrip</string>
+    <string name="map_widget_ant_heart_rate_desc">V realnem času prikazuje uporabnikov srčni utrip med določeno dejavnostjo</string>
+    <string name="map_widget_ant_bicycle_power">Moč kolesarja</string>
+    <string name="map_widget_ant_bicycle_power_desc">Prikazuje kolesarjevo moč, ki se uporablja za premikanje kolesa naprej</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Prikazuje hitrost, s katero uporabnik vrti pedale</string>
+    <string name="map_widget_ant_bicycle_speed">Hitrost kolesa</string>
+    <string name="map_widget_ant_bicycle_cadence">Kadenca kolesa</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
+    <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Opis ANT+</string>
+    <string name="nautical_depth_points">Navtične globinske točke</string>
+    <string name="depth_contours">Izobate</string>
+    <string name="worldwide_maps">Zemljevidi sveta</string>
+    <string name="ant_widgets">ANT+ gradniki</string>
+    <string name="shared_string_cross_buy">Navzkrižni nakup</string>
+    <string name="map_widget_fps_info">FPS (število slik na sekundo) pri upodabljanju zemljevida</string>
+    <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
+    <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
+    <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>
 </resources>

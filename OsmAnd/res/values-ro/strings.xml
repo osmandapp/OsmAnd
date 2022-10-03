@@ -4491,8 +4491,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afișează etichetele note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Pictograme la mărimi reduse</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Afișarea schematică a pictogramelor la măriri mici</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneluri navigabile</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nu ascundeți tunelurile căilor navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tuneluri navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Nu ascundeți tunelurile căilor navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete pentru note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichetele Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>

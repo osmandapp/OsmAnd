@@ -4419,8 +4419,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Ammustra sas etichetas de sas faddinas</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichetas de sas notas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Dispositzione ischemàtica de sas iconas a ismanniamentu bassu</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
     <string name="shared_string_not_used">No impreadu</string>
     <string name="files_with_route_restrictions">Archìvios cun restritziones de àndala</string>
     <string name="waypoint_template">Modellu de puntu de coladòrgiu</string>
@@ -4804,4 +4804,33 @@
     <string name="map_widget_target_distance_desc">Su widget ammustrat sa distàntzia intre sa fotocàmera e sa destinatzione.</string>
     <string name="coordinates_widget_current_location">Coordinadas: positzione atuale</string>
     <string name="coordinates_widget_map_center">Coordinadas: tzentru de sa mapa</string>
+    <string name="ant_missing_dependency_descr">Su servìtziu netzessàriu \"%1$s\" no est istadu agatadu.
+\nDepes installare su servìtziu de estensiones ANT+ o dias pòdere dèpere agiornare sa versione atuale tua si giai la tenes.
+\nBoles abèrrere su Play Store pro l\'otènnere\?</string>
+    <string name="ant_missing_dependency">Dipendèntzia chi mancat</string>
+    <string name="ant_go_to_store">Bae a sa butega</string>
+    <string name="ant_read_data">Leghe sos datos</string>
+    <string name="ant_write_to_gpx">Iscrie datos in sa rasta</string>
+    <string name="ant_heart_rate_write_gpx_desc">Annanghe sa frecuèntzia cardìaca a sa rasta</string>
+    <string name="map_widget_ant_heart_rate">Frecuèntzia cardìaca</string>
+    <string name="map_widget_ant_bicycle_power">Potèntzia de su tziclista</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadèntzia de pedalada</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Ammustrat sa lestresa de pedalada de s\'impreadore</string>
+    <string name="map_widget_ant_bicycle_speed">Lestresa de sa bitzicleta</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Ammustrat sa lestresa de biàgiu</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Ammustrat sa distàntzia cursada</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Descritzione de s\'ANT+</string>
+    <string name="nautical_depth_points">Puntos de profundidade nàutica</string>
+    <string name="worldwide_maps">Mapas mundiales</string>
+    <string name="map_widget_ant_heart_rate_desc">Ammustrat sa frecuèntzia cardìaca de s\'impreadore in tempus reale durante un\'atividade ispetzificada</string>
+    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="map_widget_ant_bicycle_power_desc">Ammustrat sa potèntzia de su tziclista, impreada pro mòvere sa bitzicleta cara a in antis</string>
+    <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
+    <string name="depth_contours">Lìnias nàuticas de profundidade</string>
+    <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/Web) chene costos additzionales.</string>
+    <string name="shared_string_cross_buy">Còmpora rugrada</string>
+    <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
+    <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
+    <string name="map_widget_fps_info">Frecuèntzia de renderizatzione FPS de sa mapa (fotogrammas pro segundu)</string>
 </resources>

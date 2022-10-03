@@ -3712,11 +3712,11 @@
     <string name="poi_cash_withdrawal_type_self_checkout">Вид зняття готівки: самообслуговування</string>
     <string name="poi_cash_withdrawal_limit">Ліміт зняття готівки</string>
     <string name="poi_cash_withdrawal_currency">Валюта зняття готівки</string>
-    <string name="poi_cash_withdrawal_purchase_required_yes">Зняття готівки: необхідна покупка</string>
-    <string name="poi_cash_withdrawal_purchase_required_no">Зняття готівки: покупка не потрібна</string>
+    <string name="poi_cash_withdrawal_purchase_required_yes">Зняття готівки: необхідна купівля</string>
+    <string name="poi_cash_withdrawal_purchase_required_no">Зняття готівки: купівля не потрібна</string>
     <string name="poi_cash_withdrawal_fee_yes">Комісія за зняття готівки: так</string>
     <string name="poi_cash_withdrawal_fee_no">Комісія за зняття готівки: ні</string>
-    <string name="poi_cash_withdrawal_purchase_minimum">Зняття готівки: мінімальна покупка</string>
+    <string name="poi_cash_withdrawal_purchase_minimum">Зняття готівки: мінімальна купівля</string>
     <string name="poi_cash_withdrawal_foreign_cards">Зняття готівки: іноземні картки</string>
     <string name="poi_cash_withdrawal_postfinance_card">Картка Postfinance</string>
     <string name="poi_cash_withdrawal_migros_bank">Банк Migros</string>

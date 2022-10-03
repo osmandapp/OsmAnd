@@ -4481,8 +4481,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Montri etikedojn «note»</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malaltaj skal-niveloj</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneloj de akvovojoj</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne kaŝi akvovojojn en tuneloj</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tuneloj de akvovojoj</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne kaŝi akvovojojn en tuneloj</string>
     <string name="shared_string_not_used">Neuzata</string>
     <string name="shared_string_used">Uzata</string>
     <string name="files_with_route_restrictions">Dosieroj kun vojaj limigoj</string>

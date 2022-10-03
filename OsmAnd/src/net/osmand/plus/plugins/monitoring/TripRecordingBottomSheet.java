@@ -45,7 +45,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -132,7 +132,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		app = requiredMyApplication();
 		settings = app.getSettings();
 		helper = app.getSavingTrackHelper();
-		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
 		selectedGpxFile = helper.getCurrentTrack();
 		handler = new TripRecordingUpdatesHandler(app, this::updateStatus, () -> {
 			graphsAdapter.updateGraph(graphTabPosition);

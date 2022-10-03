@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -52,7 +52,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	private void addParkingPosition(boolean limited) {
-		ParkingPositionPlugin plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
+		ParkingPositionPlugin plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			Bundle args = getArguments();

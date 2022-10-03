@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.openplacereviews;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
@@ -29,8 +31,6 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
 
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 

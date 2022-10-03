@@ -4488,8 +4488,8 @@
     <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvre l’écran \"Ajouter un point de passage\" dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnels sur voie navigable</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes de note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>
@@ -4802,4 +4802,32 @@
     <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
+    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="ant_missing_dependency">Dépendance manquante</string>
+    <string name="ant_go_to_store">Accéder à la boutique</string>
+    <string name="ant_read_data">Lire les données</string>
+    <string name="map_widget_ant_heart_rate">Fréquence cardiaque</string>
+    <string name="ant_write_to_gpx">Ajouter des données à la trace</string>
+    <string name="ant_heart_rate_write_gpx_desc">Ajouter la fréquence cardiaque à la trace</string>
+    <string name="ant_missing_dependency_descr">Le service « %1$s » est introuvable.
+\nInstallez le service ANT+ ou mettez à jour votre version s\'il est déjà installé.
+\nVoulez-vous lancer Google Play Store pour l\'installer \?</string>
+    <string name="map_widget_ant_heart_rate_desc">Affiche, en temps réel, la fréquence cardiaque de l\'utilisateur pendant une activité</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Affiche la vitesse à laquelle l\'utilisateur pédale</string>
+    <string name="map_widget_ant_bicycle_speed">Vitesse du vélo</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Affiche la vitesse de déplacement</string>
+    <string name="map_widget_ant_bicycle_dist">Distance à vélo</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Affiche la distance parcourue</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Description de l\'ANT+</string>
+    <string name="worldwide_maps">Cartes mondiales</string>
+    <string name="depth_contours">Lignes de profondeur</string>
+    <string name="map_widget_ant_bicycle_power_desc">Indique la puissance produite par le cycliste et utilisée pour faire avancer le vélo</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadence de pédalage</string>
+    <string name="nautical_depth_points">Points de sonde marine</string>
+    <string name="map_widget_target_distance">Distance entre l’appareil photo et la cible</string>
+    <string name="purchases_feature_desc_cross_buy">Utilisez votre abonnement sur toutes les plateformes (Android, iOS, Web) sans frais supplémentaire.</string>
+    <string name="map_widget_fps_info">Rendu FPS des cartes (images par seconde)</string>
+    <string name="shared_string_cross_buy">Achat multi-plateformes</string>
+    <string name="favorites_backup">Sauvegarde des favoris</string>
 </resources>

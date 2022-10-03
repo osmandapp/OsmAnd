@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -54,6 +54,6 @@ public class AudioVideoNotesWidget extends TextInfoWidget {
 
 	@Nullable
 	private AudioVideoNotesPlugin getPlugin() {
-		return OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		return PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 	}
 }

@@ -4492,8 +4492,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Не скрывать водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
     <string name="shared_string_used">Используется</string>
     <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>

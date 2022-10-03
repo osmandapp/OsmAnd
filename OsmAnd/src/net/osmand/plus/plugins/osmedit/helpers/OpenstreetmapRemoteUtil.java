@@ -27,7 +27,7 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
@@ -76,7 +76,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	public OpenstreetmapRemoteUtil(OsmandApplication app) {
 		this.ctx = app;
-		this.plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		this.plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 	}
 
 	@Override

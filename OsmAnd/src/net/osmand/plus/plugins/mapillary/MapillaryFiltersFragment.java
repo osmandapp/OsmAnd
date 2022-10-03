@@ -28,7 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -50,7 +50,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         MapActivity mapActivity = (MapActivity) requireActivity();
         OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
-        MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+        MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 
         boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);

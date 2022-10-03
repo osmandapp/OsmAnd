@@ -4476,8 +4476,8 @@
     <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се екран „Додај пролазну тачку“, где можете променити име и изглед.</string>
     <string name="shared_string_open_street_map">ОпенСтритМап</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Ознаке поправке</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунели пловних путева</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скривај тунеле за водене путеве</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Тунели пловних путева</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Не скривај тунеле за водене путеве</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Прикажи ознаке поправке</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Ознаке за белешке</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Прикажи ознаке за белешке</string>

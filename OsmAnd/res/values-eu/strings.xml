@@ -4142,7 +4142,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="gpx_no_routes_descr">\"%1$s\" tresna erabil dezakezu ibilbidea fitxategi gisa gordetzeko.</string>
     <string name="safe_settings">Gorde</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Zoom txikitako ikonoen ikuspegi eskematikoa</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelak</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Zoom txikitako ikonoak</string>
     <string name="icon_group_education">Hezkuntza</string>
     <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko.
@@ -4177,7 +4177,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Konpontzeko eskaera-etiketak (fixme) erakusten ditu</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Ohar etiketak</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Erakutsi ohar etiketak</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ez ezkutatu ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ez ezkutatu ubideetako tunelak</string>
     <string name="files_with_route_restrictions">Ibilbideen murrizketak dituzten fitxategiak</string>
     <string name="waypoint_template">Bide-puntuen txantiloia</string>
     <string name="always_ask_waypoint_appearance_description">Ekintza hau sakatzean \"Gehitu bide-puntua\" pantaila irekiko da, non haren izena eta itxura alda ditzakezun.</string>
@@ -4597,4 +4597,10 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="updated_map_time">Eguneratua: %1$s.</string>
     <string name="live_update_frequency_day_variant">Mapen eguneraketak egunero egiaztatuko dira.</string>
     <string name="next_live_update_time">Hurrengo eguneratzea: %1$s barru.</string>
+    <string name="map_widget_fps_info">Mapa errendatzea FPS (fotograma segundoko)</string>
+    <string name="favorites_backup">Gogokoen babeskopiak</string>
+    <string name="shared_string_cross_buy">Erosketa gurutzatua</string>
+    <string name="ant_widgets">ANT+ widget-ak</string>
+    <string name="purchases_feature_desc_cross_buy">Erabili zure harpidetza-abantailak plataforma ezberdinetan (Android/iOS/Web) kostu gehigarririk gabe.</string>
+    <string name="map_widget_target_distance">Kameratik xederako distantzia</string>
 </resources>

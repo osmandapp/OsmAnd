@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
 
 import androidx.annotation.NonNull;
@@ -39,13 +40,13 @@ public class FavouritesFileHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
-	private static final String TIME_PATTERN = "yyyy_MM_dd__HH_mm_ss";
+	private static final String TIME_PATTERN = "yyyy_MM_dd_hh_mm_ss";
 	private static final String GPX_FILE_EXT = ".gpx";
 	private static final String ZIP_FILE_EXT = ".zip";
 
-	public static final int BACKUP_MAX_COUNT = 10;
-	public static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
-	public static final String BACKUP_FOLDER = "backup";
+	private static final int BACKUP_MAX_COUNT = 10;
+	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
+
 	public static final String FILE_TO_SAVE = "favourites.gpx";
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx";
 
@@ -185,7 +186,7 @@ public class FavouritesFileHelper {
 	}
 
 	private File getBackupsFolder() {
-		File folder = new File(app.getAppPath(null), BACKUP_FOLDER);
+		File folder = new File(app.getAppPath(null), BACKUP_INDEX_DIR);
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}
@@ -211,7 +212,7 @@ public class FavouritesFileHelper {
 		return result;
 	}
 
-	private List<File> getBackupFiles() {
+	public List<File> getBackupFiles() {
 		File folder = getBackupsFolder();
 		File[] files = folder.listFiles();
 		return files != null ? Arrays.asList(files) : Collections.emptyList();

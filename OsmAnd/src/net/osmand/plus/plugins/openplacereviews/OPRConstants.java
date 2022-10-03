@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 
 public class OPRConstants {
 	public static final String OPR_OAUTH_PREFIX = "opr-oauth";
@@ -13,7 +13,7 @@ public class OPRConstants {
 	private static final String CALLBACK_URL = OPR_OAUTH_PREFIX + "://osmand_opr_auth";
 
 	public static String getBaseUrl(@NonNull OsmandApplication app) {
-		OpenPlaceReviewsPlugin plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		OpenPlaceReviewsPlugin plugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 		boolean useDevUrl = plugin != null && plugin.OPR_USE_DEV_URL.get();
 		return app.getString(useDevUrl ? R.string.dev_opr_base_url : R.string.opr_base_url);
 	}

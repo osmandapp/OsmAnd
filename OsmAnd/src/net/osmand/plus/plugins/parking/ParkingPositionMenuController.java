@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.PointImageDrawable;
@@ -26,7 +26,7 @@ public class ParkingPositionMenuController extends MenuController {
 	                                     FavouritePoint fav) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.fav = fav;
-		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+		plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			buildParkingDescription(mapActivity);
 		}

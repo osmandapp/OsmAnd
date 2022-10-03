@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
@@ -134,7 +134,7 @@ public class RoutingDataUtils {
 				DIRECT_TO_MODE.getIconRes(),
 				false, null, null));
 
-		List<String> disabledRouterNames = OsmandPlugin.getDisabledRouterNames();
+		List<String> disabledRouterNames = PluginsHelper.getDisabledRouterNames();
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			for (Map.Entry<String, GeneralRouter> entry : builder.getAllRouters().entrySet()) {
 				String routerKey = entry.getKey();

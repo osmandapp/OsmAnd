@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -94,7 +94,7 @@ public class OpenDBAPI {
 						responseStr, new TypeToken<HashMap<String, String>>() {
 						}.getType()
 				);
-				OpenPlaceReviewsPlugin plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+				OpenPlaceReviewsPlugin plugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 				if (plugin != null && !Algorithms.isEmpty(map) && map.containsKey("blockchain-name")) {
 					String blockchainName = map.get("blockchain-name");
 					plugin.OPR_BLOCKCHAIN_NAME.set(blockchainName);

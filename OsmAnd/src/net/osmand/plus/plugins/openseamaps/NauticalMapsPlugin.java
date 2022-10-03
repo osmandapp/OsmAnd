@@ -1,11 +1,12 @@
 package net.osmand.plus.plugins.openseamaps;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
+
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,13 +15,12 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
 
 
 public class NauticalMapsPlugin extends OsmandPlugin {

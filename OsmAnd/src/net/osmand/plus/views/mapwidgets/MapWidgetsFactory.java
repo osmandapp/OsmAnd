@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
@@ -106,7 +106,7 @@ public class MapWidgetsFactory {
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:
-				return OsmandPlugin.createMapWidget(mapActivity, widgetType);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}
 	}
 }

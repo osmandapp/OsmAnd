@@ -37,7 +37,7 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -131,7 +131,7 @@ public class AddPOIAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin == null) return;
 
 		LatLon latLon = getMapLocation(mapActivity);
@@ -183,7 +183,7 @@ public class AddPOIAction extends QuickAction {
 			EditPoiDialogFragment.commitEntity(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,
 					result -> {
 						if (result != null) {
-							OsmEditingPlugin plugin1 = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+							OsmEditingPlugin plugin1 = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 							if (plugin1 != null && offlineEdit) {
 								List<OpenstreetmapPoint> points = plugin1.getDBPOI().getOpenstreetmapPoints();
 								if (points.size() > 0) {

@@ -41,7 +41,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -774,7 +774,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		app.getAverageSpeedComputer().updateLocation(location);
-		OsmandPlugin.updateLocationPlugins(location);
+		PluginsHelper.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
@@ -817,7 +817,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location, heading);
 			app.getAverageSpeedComputer().updateLocation(location);
-			OsmandPlugin.updateLocationPlugins(location);
+			PluginsHelper.updateLocationPlugins(location);
 		}
 
 		// 2. routing

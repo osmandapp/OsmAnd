@@ -26,6 +26,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.BaseLogcatActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -306,10 +307,10 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 
 	private void createPluginsItems(ContextMenuAdapter contextMenuAdapter) {
 		contextMenuAdapter.addItem(createCategory(R.string.plugins_menu_group));
-		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
-			String helpFileName = osmandPlugin.getHelpFileName();
+		for (OsmandPlugin plugin : PluginsHelper.getAvailablePlugins()) {
+			String helpFileName = plugin.getHelpFileName();
 			if (helpFileName != null) {
-				contextMenuAdapter.addItem(createPluginItem(osmandPlugin.getName(), osmandPlugin.getLogoResourceId(),
+				contextMenuAdapter.addItem(createPluginItem(plugin.getName(), plugin.getLogoResourceId(),
 						helpFileName));
 			}
 		}

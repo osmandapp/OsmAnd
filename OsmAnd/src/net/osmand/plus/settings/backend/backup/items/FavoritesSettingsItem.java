@@ -16,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -120,7 +120,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				if (!isPersonal) {
 					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 				} else {
-					ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+					ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 					for (FavouritePoint point : duplicate.getPoints()) {
 						if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
 							plugin.clearParkingPosition();

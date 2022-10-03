@@ -72,10 +72,12 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
@@ -100,7 +102,6 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -254,14 +255,14 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		timeToStart = System.currentTimeMillis();
-		OsmandPlugin.initPlugins(this);
-		OsmandPlugin.createLayers(this, null);
+		PluginsHelper.initPlugins(this);
+		PluginsHelper.createLayers(this, null);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		osmandMap.getMapLayers().updateLayers(null);
 
-		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
-		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
+		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
+		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
 	}
 
 	public boolean isPlusVersionInApp() {
@@ -382,7 +383,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setOsmandSettings(OsmandSettings osmandSettings) {
 		this.osmandSettings = osmandSettings;
-		OsmandPlugin.initPlugins(this);
+		PluginsHelper.initPlugins(this);
 	}
 
 	public SavingTrackHelper getSavingTrackHelper() {
@@ -954,7 +955,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
 		AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
-		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
+		if (!PluginsHelper.isActive(AccessibilityPlugin.class)) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {
