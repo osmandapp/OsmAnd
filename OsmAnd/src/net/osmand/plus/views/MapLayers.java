@@ -132,20 +132,24 @@ public class MapLayers {
 		mapView.addLayer(mapTileLayer, 0.05f);
 		mapView.setMainLayer(mapTileLayer);
 
-		// 0.5 layer
+		// 1-st in the order
+		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
+		mapView.addLayer(downloadedRegionsLayer, -11.0f);
+
+		// icons are 2-d in the order (icons +1 000 000 or -10.f by zOrder in core)
+		// text and shields are 5-th in the order
 		mapVectorLayer = new MapVectorLayer(app);
 		mapView.addLayer(mapVectorLayer, 0.0f);
 
-		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
-		mapView.addLayer(downloadedRegionsLayer, 0.5f);
-
-		// 0.9 gpx layer
+		// gpx layer lines 3-d in the order
+		// gpx layer points 6-th in the order
 		gpxLayer = new GPXLayer(app);
-		mapView.addLayer(gpxLayer, 0.9f);
+		gpxLayer.setPointsOrder(0.9f);
+		mapView.addLayer(gpxLayer, -5.0f);
 
-		// 1. route layer
+		// route layer, 4-th in the order
 		routeLayer = new RouteLayer(app);
-		mapView.addLayer(routeLayer, 1);
+		mapView.addLayer(routeLayer, -2.0f);
 
 		// 1.5 preview route line layer
 		previewRouteLineLayer = new PreviewRouteLineLayer(app);

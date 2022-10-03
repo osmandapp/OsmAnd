@@ -421,7 +421,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
 		String transportRouteType = stopRoute.route.getType();
 		if (transportStops.size() > 0) {
-			int baseOrder = getBaseOrder() - 1;
+			int pointsOrder = getPointsOrder() - 1;
 			mapMarkersCollection = new MapMarkersCollection();
 			for (TransportStop ts : transportStops) {
 				StopsCollectionPoint collectionPoint =
@@ -430,7 +430,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				mapMarkerBuilder
 						.setPosition(collectionPoint.getPoint31())
 						.setIsHidden(false)
-						.setBaseOrder(baseOrder)
+						.setBaseOrder(pointsOrder)
 						.setPinIcon(collectionPoint.getImageBitmap(true))
 						.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
@@ -460,7 +460,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 		if (transportStopsTileProvider == null) {
-			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getBaseOrder(), getTextScale());
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getPointsOrder(), getTextScale());
 			transportStopsTileProvider.drawSymbols(mapRenderer);
 		}
 	}

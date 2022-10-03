@@ -79,6 +79,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	//OpenGL
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
+	protected int pointsOrder = 0;
 
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,
@@ -94,6 +95,14 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public int getBaseOrder() {
 		return (int)((view != null ? view.getZorder(this) : 10f) * -100000f);
+	}
+
+	public int getPointsOrder() {
+		return pointsOrder != 0 ? pointsOrder : getBaseOrder();
+	}
+
+	public void setPointsOrder(float pointsZorder) {
+		this.pointsOrder = (int)(pointsZorder * -100000f);
 	}
 
 	@NonNull
