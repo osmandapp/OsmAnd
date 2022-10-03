@@ -109,7 +109,9 @@ public class DiscountHelper {
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
 		pms.put("lang", app.getLanguage() + "");
 		try {
-			pms.put("aid", app.getUserAndroidId());
+			if (app.isUserAndroidIdAllowed()) {
+				pms.put("aid", app.getUserAndroidId());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

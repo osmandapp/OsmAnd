@@ -379,7 +379,7 @@ public class BackupHelper {
 			params.put("orderid", orderId);
 		}
 		String androidId = getAndroidId();
-		if (!Algorithms.isEmpty(androidId)) {
+		if (!Algorithms.isEmpty(androidId) && app.isUserAndroidIdAllowed()) {
 			params.put("deviceid", androidId);
 		}
 		OperationLog operationLog = new OperationLog("updateOrderId", DEBUG);

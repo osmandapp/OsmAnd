@@ -261,7 +261,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					Map<String, String> pms = new LinkedHashMap<>();
 					pms.put("version", Version.getFullVersion(app));
 					try {
-						pms.put("aid", app.getUserAndroidId());
+						if (app.isUserAndroidIdAllowed()) {
+							pms.put("aid", app.getUserAndroidId());
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
