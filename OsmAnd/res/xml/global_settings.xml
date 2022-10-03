@@ -44,6 +44,15 @@
 		android:title="@string/analytics_pref_title" />
 
 	<Preference
+		android:icon="@drawable/ic_action_world_globe"
+		android:key="send_unique_user_identifier"
+		android:layout="@layout/preference_with_end_description"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		app:fragment="net.osmand.plus.settings.fragments.SendUniqueIdentifiersFragment"
+		android:title="@string/shared_string_identifiers" />
+
+	<Preference
 		android:key="history"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"

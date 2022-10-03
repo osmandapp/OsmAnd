@@ -3,8 +3,15 @@ package net.osmand.plus.firstusage;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +52,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
@@ -54,6 +62,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -233,6 +243,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				break;
 		}
 
+		updateTermsOfServiceView();
 		updateStorageView();
 
 		return view;
@@ -628,6 +639,48 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				showSearchLocationFragment(activity, false);
 			}
 		}
+	}
+
+	public void updateTermsOfServiceView() {
+		TextView textView = view.findViewById(R.id.terms_of_service_description);
+		if (textView != null) {
+			String termsOfUse = getString(R.string.shared_string_terms_of_use);
+			String privacyPolicy = getString(R.string.shared_string_privacy_policy);
+			String text = getString(R.string.terms_of_service_desc, termsOfUse, privacyPolicy);
+			SpannableString spannable = new SpannableString(text);
+			setupClickableToSText(spannable, termsOfUse, R.string.docs_legal_terms_of_use);
+			setupClickableToSText(spannable, privacyPolicy, R.string.docs_legal_privacy_policy);
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			textView.setText(spannable);
+		}
+	}
+
+	private void setupClickableToSText(SpannableString text, String part, int urlId) {
+		int startInd = text.toString().indexOf(part);
+		int endInd = startInd + part.length();
+		int color = ColorUtilities.getColor(app, R.color.active_color_primary_light);
+		ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
+		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		CustomTypefaceSpan typefaceSpan = new CustomTypefaceSpan(typeface);
+		ClickableSpan clickableSpan = new ClickableSpan() {
+
+			@Override
+			public void onClick(@NonNull View widget) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					AndroidUtils.openUrl(activity, urlId, false);
+				}
+			}
+
+			@Override
+			public void updateDrawState(@NonNull TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setUnderlineText(false);
+			}
+		};
+		text.setSpan(colorSpan, startInd, endInd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+		text.setSpan(typefaceSpan, startInd, endInd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+		text.setSpan(clickableSpan, startInd, endInd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 	}
 
 	public void updateStorageView() {
