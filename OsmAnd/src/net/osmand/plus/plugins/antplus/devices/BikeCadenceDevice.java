@@ -56,7 +56,7 @@ public class BikeCadenceDevice extends CommonDevice<AntBikeCadenceDevice> {
 		AntBikeCadenceDevice device = getAntDevice();
 		BikeCadenceData data = device.getLastBikeCadenceData();
 		int calculatedCadence = data != null ? data.getCalculatedCadence() : 0;
-		if (calculatedCadence > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
+		if (calculatedCadence > 0) {
 			json.put("ant_bicycle_cadence", calculatedCadence);
 		}
 	}
