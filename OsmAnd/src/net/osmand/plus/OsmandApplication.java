@@ -73,7 +73,6 @@ import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
@@ -122,6 +121,7 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1048,12 +1048,23 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public String getUserAndroidId() {
 		String userAndroidId = osmandSettings.USER_ANDROID_ID.get();
-		if (!Algorithms.isEmpty(userAndroidId)) {
-			return userAndroidId;
+		if (Algorithms.isEmpty(userAndroidId) || isUserAndroidIdExpired()) {
+			userAndroidId = UUID.randomUUID().toString();
+			osmandSettings.USER_ANDROID_ID.set(userAndroidId);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, 3);
+			osmandSettings.USER_ANDROID_ID_EXPIRED_TIME.set(calendar.getTimeInMillis());
 		}
-		userAndroidId = UUID.randomUUID().toString();
-		osmandSettings.USER_ANDROID_ID.set(userAndroidId);
 		return userAndroidId;
+	}
+
+	public boolean isUserAndroidIdExpired() {
+		long expiredTime = osmandSettings.USER_ANDROID_ID_EXPIRED_TIME.get();
+		return expiredTime <= 0 || expiredTime <= System.currentTimeMillis();
+	}
+
+	public boolean isUserAndroidIdAllowed() {
+		return osmandSettings.SEND_UNIQUE_USER_IDENTIFIER.get();
 	}
 
 	public void logEvent(@NonNull String event) {

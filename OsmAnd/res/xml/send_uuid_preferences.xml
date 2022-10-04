@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:key="identifiers"
+	android:title="@string/shared_string_identifiers">
+
+	<SwitchPreferenceCompat
+		android:key="send_unique_user_identifier"
+		android:layout="@layout/preference_switch"
+		tools:iconSpaceReserved="false"
+		android:title="@string/send_uuid_preference" />
+
+	<Preference
+		android:key="send_uuid_info"
+		android:layout="@layout/preference_send_uuid_info"
+		android:persistent="false"
+		android:selectable="false" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="terms_of_use"
+		android:layout="@layout/preference_button_with_end_icon"
+		android:persistent="false"
+		android:title="@string/shared_string_terms_of_use"
+		android:icon="@drawable/ic_action_external_link" />
+
+	<Preference
+		android:key="privacy_policy"
+		android:layout="@layout/preference_button_with_end_icon"
+		android:persistent="false"
+		android:title="@string/shared_string_privacy_policy"
+		android:icon="@drawable/ic_action_external_link" />
+
+</PreferenceScreen>

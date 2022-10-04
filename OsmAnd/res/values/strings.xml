@@ -11,7 +11,11 @@
 	Thx - Hardy
 -->
 
-
+    <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
+    <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
+    <string name="shared_string_identifiers">Identifiers</string>
+    <string name="terms_of_service_desc">By Downloading maps you agree to the %1$s and %2$s.</string>
+    <string name="shared_string_terms_of_use">Terms Of Use</string>
     <string name="favorites_backup">Favorites backup</string>
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>

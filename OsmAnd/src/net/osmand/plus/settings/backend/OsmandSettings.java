@@ -1215,6 +1215,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
 
+	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
+
 	public final CommonPreference<LocationSource> LOCATION_SOURCE = new EnumStringPreference<>(this, "location_source",
 			Version.isGooglePlayEnabled() ? GOOGLE_PLAY_SERVICES : ANDROID_API, LocationSource.values()).makeGlobal().makeShared();
 
@@ -1366,6 +1368,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> PROXY_HOST = new StringPreference(this, "proxy_host", "127.0.0.1").makeGlobal().makeShared();
 	public final CommonPreference<Integer> PROXY_PORT = new IntPreference(this, "proxy_port", 8118).makeGlobal().makeShared();
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference(this, "user_android_id", "").makeGlobal();
+	public final CommonPreference<Long> USER_ANDROID_ID_EXPIRED_TIME = new LongPreference(this, "user_android_id_expired_time", 0).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$

@@ -8,6 +8,7 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -46,6 +47,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private static final String HISTORY_PREF_ID = "history";
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
+	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
 
 	@Override
 	protected void setupPreferences() {
@@ -54,6 +56,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
+		setupSendUniqueIdentifiersPreference();
 		setupDialogsAndNotificationsPref();
 		setupHistoryPref();
 		setupEnableProxyPref();
@@ -86,6 +89,20 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			if (imageView != null) {
 				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
 				imageView.setEnabled(enabled);
+			}
+		} else if (SEND_UNIQUE_USER_IDENTIFIER_PREF_ID.equals(prefId)) {
+			boolean enabled = settings.SEND_UNIQUE_USER_IDENTIFIER.get();
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				imageView.setEnabled(enabled);
+			}
+			TextView tvNumbers = (TextView) holder.findViewById(R.id.secondary_description);
+			if (tvNumbers != null) {
+				int totalCount = 1;
+				int enabledCount = enabled ? 1 : 0;
+				String pattern = getString(R.string.ltr_or_rtl_combine_via_slash,
+						String.valueOf(enabledCount), String.valueOf(totalCount));
+				tvNumbers.setText(pattern);
 			}
 		} else if (HISTORY_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
@@ -240,6 +257,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		SwitchPreferenceCompat sendAnonymousData = findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
 		sendAnonymousData.setChecked(enabled);
 		sendAnonymousData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_privacy_and_security));
+	}
+
+	private void setupSendUniqueIdentifiersPreference() {
+		Preference sendUuid = findPreference(SEND_UNIQUE_USER_IDENTIFIER_PREF_ID);
+		sendUuid.setIcon(getPersistentPrefIcon(R.drawable.ic_action_world_globe));
 	}
 
 	private void setupDialogsAndNotificationsPref() {
