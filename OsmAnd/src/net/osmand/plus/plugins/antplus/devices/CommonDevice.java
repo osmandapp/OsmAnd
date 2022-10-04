@@ -15,8 +15,6 @@ import java.util.List;
 
 public abstract class CommonDevice<T extends AntCommonDevice<?>> {
 
-	protected static final int TRACK_DATA_EXPIRATION_TIME_MIN = 3 * 60 * 1000; // 3 minutes
-
 	private final T antDevice;
 	private final IPreferenceFactory preferenceFactory;
 	private CommonPreference<Boolean> deviceEnabledPref;
