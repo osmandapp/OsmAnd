@@ -4780,7 +4780,6 @@
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
 \nТоркніться мапи 2 пальцями, щоб переглянути відстань між натиснутими точками</string>
     <string name="how_to_use">Як користуватися:</string>
-    <string name="tap_on_widget">Торкнутися віджета</string>
     <string name="go_to_marker_location">Перейти до локації позначки</string>
     <string name="click_on_widget">Натиснути віджет</string>
     <string name="shared_string_shows">Показує</string>

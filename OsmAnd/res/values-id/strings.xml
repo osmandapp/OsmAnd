@@ -4441,7 +4441,6 @@
     <string name="poi_query_by_name_matches_categories">Ditemukan beberapa kategori POI yang terkait.</string>
     <string name="avoid_roads_msg">Picu rute alternative dengan memilih jalan yang dihindari</string>
     <string name="map_marker_interval_dialog_desc">Tetapkan interval waktu di mana kecepatan rata-rata akan diukur untuk menghitung perkiraan waktu tiba.</string>
-    <string name="tap_on_widget">Ketuk pada widget</string>
     <string name="go_to_marker_location">Pergi ke lokasi penanda</string>
     <string name="click_on_widget">Klik pada widget</string>
     <string name="how_to_use">Cara menggunakan:</string>

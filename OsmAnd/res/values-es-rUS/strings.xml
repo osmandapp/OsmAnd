@@ -4791,7 +4791,6 @@
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">El widget muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
-    <string name="tap_on_widget">Pulsar el widget</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>

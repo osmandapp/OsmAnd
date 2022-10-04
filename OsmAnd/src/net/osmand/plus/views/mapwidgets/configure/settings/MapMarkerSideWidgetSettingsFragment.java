@@ -251,7 +251,7 @@ public class MapMarkerSideWidgetSettingsFragment extends WidgetSettingsBaseFragm
 
 	private void showClickBehaviorDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(R.string.tap_on_widget);
+		builder.setTitle(R.string.click_on_widget);
 
 		String[] items = new String[MarkerClickBehaviour.values().length];
 		for (int i = 0; i < items.length; i++) {

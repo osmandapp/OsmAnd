@@ -4797,7 +4797,6 @@
     <string name="current_location_widget">Positzione atuale</string>
     <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
-    <string name="tap_on_widget">Toca su widget</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
     <string name="map_widget_zoom_level_desc">Su widget ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
     <string name="map_widget_camera_distance_desc">Su widget ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
