@@ -260,12 +260,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				if (searchLocationByIp) {
 					Map<String, String> pms = new LinkedHashMap<>();
 					pms.put("version", Version.getFullVersion(app));
-					try {
-						if (app.isUserAndroidIdAllowed()) {
-							pms.put("aid", app.getUserAndroidId());
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
+					if (app.isUserAndroidIdAllowed()) {
+						pms.put("aid", app.getUserAndroidId());
 					}
 					new AsyncTask<Void, Void, String>() {
 
