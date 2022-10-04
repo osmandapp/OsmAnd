@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
     <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
     <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
     <string name="shared_string_identifiers">Identifiers</string>
