@@ -234,7 +234,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			mapMarkersCollection = new MapMarkersCollection();
 		}
 		return CoreMapMarker.createAndAddToCollection(getContext(), mapMarkersCollection, id,
-				getBaseOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);
+				getPointsOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);
 	}
 
 	private void setMarkerProvider() {

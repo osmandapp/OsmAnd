@@ -4419,8 +4419,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Ammustra sas etichetas de sas faddinas</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichetas de sas notas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Dispositzione ischemàtica de sas iconas a ismanniamentu bassu</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Gallerias in rios navigàbiles</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Non cues sas gallerias in rios navigàbiles</string>
     <string name="shared_string_not_used">No impreadu</string>
     <string name="files_with_route_restrictions">Archìvios cun restritziones de àndala</string>
     <string name="waypoint_template">Modellu de puntu de coladòrgiu</string>
@@ -4797,7 +4797,6 @@
     <string name="current_location_widget">Positzione atuale</string>
     <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
-    <string name="tap_on_widget">Toca su widget</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
     <string name="map_widget_zoom_level_desc">Su widget ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
     <string name="map_widget_camera_distance_desc">Su widget ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
@@ -4828,4 +4827,9 @@
     <string name="map_widget_ant_bicycle_power_desc">Ammustrat sa potèntzia de su tziclista, impreada pro mòvere sa bitzicleta cara a in antis</string>
     <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
     <string name="depth_contours">Lìnias nàuticas de profundidade</string>
+    <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/Web) chene costos additzionales.</string>
+    <string name="shared_string_cross_buy">Còmpora rugrada</string>
+    <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
+    <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
+    <string name="map_widget_fps_info">Frecuèntzia de renderizatzione FPS de sa mapa (fotogrammas pro segundu)</string>
 </resources>

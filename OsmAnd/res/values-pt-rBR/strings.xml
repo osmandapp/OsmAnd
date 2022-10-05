@@ -1951,7 +1951,7 @@
     <string name="add_location_as_first_point_descr">Adicione a sua posição como ponto de partida para planejar uma rota perfeita.</string>
     <string name="my_location">Minha posição</string>
     <string name="shared_string_finish">Terminar</string>
-    <string name="plan_route">Planejar rota</string>
+    <string name="plan_route">Planejar uma rota</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
     <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
@@ -4117,7 +4117,7 @@
     <string name="backup_view_conflicts">Ver conflitos</string>
     <string name="backup_no_internet_descr">Verifique sua conexão com a Internet e baixe novamente.</string>
     <string name="backup_pause_all">Pausar tudo</string>
-    <string name="upload_local_version">Carregue a versão local</string>
+    <string name="upload_local_version">Enviar versão local</string>
     <string name="download_server_version">Baixar versão do servidor</string>
     <string name="backup_delete_all_data_warning">Você está prestes a excluir todos os dados enviados anteriormente para o OsmAnd Cloud, incluindo o histórico de versão.
 \n
@@ -4488,8 +4488,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em zooms baixos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis hidroviários</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
     <string name="gpx_no_routes_descr">Você pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
@@ -4691,7 +4691,7 @@
     <string name="no_altitude_data_desc">Para receber dados de %1$s, anexe seu trajeto às estradas ou calcule-o online.</string>
     <string name="marker_1st">Primeiro marcador</string>
     <string name="next_live_update_date_and_time">Próxima atualização: %1$s em %2$s.</string>
-    <string name="next_live_update_time">Próxima atualização: em %1$s.</string>
+    <string name="next_live_update_time">Próxima atualização em %1$s.</string>
     <string name="marker_2nd">Segundo marcador</string>
     <string name="goods_delivery_desc_3">Aplica-se apenas a caminhões de entrega de até 3,5 toneladas.</string>
     <string name="goods_delivery_desc">Os veículos de entrega podem ser restringidos em algumas estradas.</string>
@@ -4719,10 +4719,10 @@
     <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma foto.</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite gravar um vídeo.</string>
     <string name="trip_recording_downhill_widget_desc">Mostra a soma de todos os descendentes da viagem atualmente gravada.</string>
-    <string name="trip_recording_duration_widget_desc">Mostra o tempo do trio atualmente gravado.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra o tempo decorrido da viagem atual a ser gravada.</string>
     <string name="time_to_destination_widget_desc">O widget mostra \"Hora de chegada\" ou \"Hora de ir\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo da rota a partir do local atual.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite que você faça uma nota de áudio.</string>
-    <string name="trip_recording_distance_widget_desc">Mostra a distância do trio atualmente gravada.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das linhas de contorno de profundidade</string>
     <string name="connect_with_straight_line">Conecte-se com uma linha reta</string>
     <string name="attach_roads_descr">Aproxime sua trilha com uma rota usando o mapa offline. Isso fornecerá valores de elevação corrigidos, detalhes da estrada e curvas usadas durante a navegação.</string>
@@ -4771,7 +4771,6 @@
     <string name="download_complete">Download completo</string>
     <string name="favorite_delete_group">Excluir grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
-    <string name="tap_on_widget">Toque no widget</string>
     <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
     <string name="shared_string_normal">Normal</string>
     <string name="display_position">Posição na tela</string>
@@ -4821,4 +4820,14 @@
     <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
     <string name="map_widget_ant_bicycle_dist">Distância da bicicleta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
+    <string name="purchases_feature_desc_cross_buy">Use as suas funcionalidades de assinaturas em diferentes plataformas (Android/iOS/Web) sem custos adicionais.</string>
+    <string name="shared_string_cross_buy">Compra cruzada</string>
+    <string name="favorites_backup">Backup favoritos</string>
+    <string name="map_widget_fps_info">FPS da renderização de mapas (frames por segundo)</string>
+    <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
+    <string name="ant_heart_rate_write_gpx_desc">Gravar a frequência cardíaca no trilho</string>
+    <string name="antplus_plugin_description">ANT+ descrição</string>
+    <string name="nautical_depth_points">Pontos de profundidade náutica</string>
+    <string name="depth_contours">Contornos de profundidade</string>
+    <string name="worldwide_maps">Mapas mundiais</string>
 </resources>

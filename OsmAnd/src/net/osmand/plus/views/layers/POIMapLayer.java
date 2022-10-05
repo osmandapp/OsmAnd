@@ -374,7 +374,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						float density = view.getDensity();
 						TextRasterizer.Style textStyle = MapTextLayer.getTextStyle(getContext(),
 								nightMode, textScale, density);
-						poiTileProvider = new POITileProvider(getContext(), data, getBaseOrder(), textVisible,
+						poiTileProvider = new POITileProvider(getContext(), data, getPointsOrder(), textVisible,
 								textStyle, textScale, density);
 						poiTileProvider.drawSymbols(mapRenderer);
 					}

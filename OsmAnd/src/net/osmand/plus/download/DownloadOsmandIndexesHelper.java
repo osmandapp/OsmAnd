@@ -275,7 +275,9 @@ public class DownloadOsmandIndexesHelper {
 				}
 				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
 				try {
-					strUrl += "&aid=" + ctx.getUserAndroidId();
+					if (ctx.isUserAndroidIdAllowed()) {
+						strUrl += "&aid=" + ctx.getUserAndroidId();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

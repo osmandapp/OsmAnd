@@ -4488,8 +4488,8 @@
     <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvre l’écran \"Ajouter un point de passage\" dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnels sur voie navigable</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes de note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes de note</string>
@@ -4780,7 +4780,6 @@
     <string name="distance_by_tap_use_description">Ajoutez un point en tapant sur la carte pour afficher la distance entre ce point et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance entre les points.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
-    <string name="tap_on_widget">Tapez sur le widget</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
     <string name="click_on_widget">Cliquez sur le widget</string>
@@ -4825,4 +4824,9 @@
     <string name="map_widget_ant_bicycle_power_desc">Indique la puissance produite par le cycliste et utilisée pour faire avancer le vélo</string>
     <string name="map_widget_ant_bicycle_cadence">Cadence de pédalage</string>
     <string name="nautical_depth_points">Points de sonde marine</string>
+    <string name="map_widget_target_distance">Distance entre l’appareil photo et la cible</string>
+    <string name="purchases_feature_desc_cross_buy">Utilisez votre abonnement sur toutes les plateformes (Android, iOS, Web) sans frais supplémentaire.</string>
+    <string name="map_widget_fps_info">Rendu FPS des cartes (images par seconde)</string>
+    <string name="shared_string_cross_buy">Achat multi-plateformes</string>
+    <string name="favorites_backup">Sauvegarde des favoris</string>
 </resources>

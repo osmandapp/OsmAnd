@@ -208,7 +208,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		imageAndCourseMarkerBuilder
 				.setIsHidden(true)
 				.setIsAccuracyCircleSupported(false)
-				.setBaseOrder(getBaseOrder())
+				.setBaseOrder(getPointsOrder())
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(selectedImageBitmap))

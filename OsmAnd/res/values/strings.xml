@@ -59,6 +59,12 @@
     <string name="weather_prefs_descr">24h hourly forecast &amp; 7 days forecast each 3 hours</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
+    <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
+    <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
+    <string name="shared_string_identifiers">Identifiers</string>
+    <string name="terms_of_service_desc">By Downloading maps you agree to the %1$s and %2$s.</string>
+    <string name="shared_string_terms_of_use">Terms Of Use</string>
     <string name="favorites_backup">Favorites backup</string>
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
@@ -104,7 +110,6 @@
     <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
-    <string name="tap_on_widget">Tap on widget</string>
     <string name="go_to_marker_location">Go to marker location</string>
     <string name="shared_string_switch_mode">Switch mode</string>
     <string name="click_on_widget">Click on widget</string>
@@ -396,8 +401,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Waterway tunnels</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>

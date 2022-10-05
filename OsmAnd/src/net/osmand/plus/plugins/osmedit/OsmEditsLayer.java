@@ -409,7 +409,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		mapMarkerBuilder
 				.setPosition(position)
 				.setIsHidden(false)
-				.setBaseOrder(getBaseOrder())
+				.setBaseOrder(getPointsOrder())
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 

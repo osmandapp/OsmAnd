@@ -207,7 +207,9 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 					additionalData.put(PARAM_LANG, app.getLanguage() + "");
 					additionalData.put(PARAM_FIRST_INSTALL_DAYS, String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
 					additionalData.put(PARAM_NUMBER_OF_STARTS, String.valueOf(app.getAppInitializer().getNumberOfStarts()));
-					additionalData.put(PARAM_USER_ID, app.getUserAndroidId());
+					if (app.isUserAndroidIdAllowed()) {
+						additionalData.put(PARAM_USER_ID, app.getUserAndroidId());
+					}
 
 					JSONObject json = new JSONObject();
 					for (Map.Entry<String, String> entry : additionalData.entrySet()) {

@@ -4491,8 +4491,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Düşük yakınlaştırmalarda simgeler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Düşük yakınlaştırmalarda simgelerin şematik gösterimi</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Beni-düzelt etiketleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Su yolu tünelleri</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Tümü</string>

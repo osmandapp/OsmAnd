@@ -3,6 +3,8 @@ package net.osmand.plus.views;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -12,37 +14,35 @@ import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Method;
 
-import androidx.annotation.NonNull;
-
 
 public class MultiTouchSupport {
 
 	private static final Log log = PlatformUtil.getLog(MultiTouchSupport.class);
-	
+
 	public static final int ACTION_MASK = 255;
 	public static final int ACTION_POINTER_ID_SHIFT = 8;
-	public static final int ACTION_POINTER_DOWN     = 5;
-	public static final int ACTION_POINTER_UP     = 6;
+	public static final int ACTION_POINTER_DOWN = 5;
+	public static final int ACTION_POINTER_UP = 6;
 	private float angleStarted;
 	private float angleRelative;
 
 	public interface MultiTouchZoomListener {
 
-    		void onZoomStarted(PointF centerPoint);
+		void onZoomStarted(PointF centerPoint);
 
-    		void onZoomingOrRotating(double relativeToStart, float angle);
+		void onZoomingOrRotating(double relativeToStart, float angle);
 
-    		void onZoomOrRotationEnded(double relativeToStart, float angleRelative);
+		void onZoomOrRotationEnded(double relativeToStart, float angleRelative);
 
-    		void onGestureInit(float x1, float y1, float x2, float y2);
+		void onGestureInit(float x1, float y1, float x2, float y2);
 
-			void onActionPointerUp();
+		void onActionPointerUp();
 
-			void onActionCancel();
+		void onActionCancel();
 
-			void onChangingViewAngle(float angle);
+		void onChangingViewAngle(float angle);
 
-			void onChangeViewAngleStarted();
+		void onChangeViewAngleStarted();
 	}
 
 	private final OsmandApplication app;
@@ -60,11 +60,11 @@ public class MultiTouchSupport {
 		initMethods();
 	}
 
-	public boolean isMultiTouchSupported(){
+	public boolean isMultiTouchSupported() {
 		return multiTouchAPISupported;
 	}
 
-	public boolean isInZoomMode(){
+	public boolean isInZoomMode() {
 		return inZoomMode;
 	}
 
@@ -72,7 +72,7 @@ public class MultiTouchSupport {
 		return inTiltMode;
 	}
 
-	private void initMethods(){
+	private void initMethods() {
 		try {
 			getPointerCount = MotionEvent.class.getMethod("getPointerCount");
 			getX = MotionEvent.class.getMethod("getX", Integer.TYPE);
@@ -95,8 +95,8 @@ public class MultiTouchSupport {
 	private static final int TILT_Y_THRESHOLD_PX = 40;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
 
-	public boolean onTouchEvent(MotionEvent event){
-		if(!isMultiTouchSupported()){
+	public boolean onTouchEvent(MotionEvent event) {
+		if (!isMultiTouchSupported()) {
 			return false;
 		}
 		int actionCode = event.getAction() & ACTION_MASK;
@@ -105,7 +105,7 @@ public class MultiTouchSupport {
 				listener.onActionCancel();
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
-			if(pointCount < 2){
+			if (pointCount < 2) {
 				if (inZoomMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
@@ -123,9 +123,9 @@ public class MultiTouchSupport {
 			float distance = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 			float angle = 0;
 			boolean angleDefined = false;
-			if(x1 != x2 || y1 != y2) {
+			if (x1 != x2 || y1 != y2) {
 				angleDefined = true;
-				angle = (float) (Math.atan2(y2 - y1, x2 -x1) * 180 / Math.PI);
+				angle = (float) (Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI);
 			}
 			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_POINTER_UP) {
 				listener.onActionPointerUp();
@@ -139,7 +139,7 @@ public class MultiTouchSupport {
 				zoomStartedDistance = distance;
 				angleStarted = angle;
 				return true;
-			} else if(actionCode == ACTION_POINTER_UP){
+			} else if (actionCode == ACTION_POINTER_UP) {
 				if (inZoomMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
@@ -187,7 +187,7 @@ public class MultiTouchSupport {
 				return true;
 			}
 		} catch (Exception e) {
-			log.debug("Multi touch exception" , e);
+			log.debug("Multi touch exception", e);
 		}
 		return false;
 	}

@@ -4482,10 +4482,10 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">הצגת תגיות לתיקון</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">סמלים ברמות תקריב נמוכות</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">הצגת תגיות הערה</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">תעלות דרכי מים</string>
     <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
     <string name="track_file">קובץ מסלולים</string>
     <string name="rendering_value_category_name">קטגוריה</string>

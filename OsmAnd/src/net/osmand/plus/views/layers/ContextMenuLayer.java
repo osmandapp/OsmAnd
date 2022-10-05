@@ -347,7 +347,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 			contextMarkerCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 100);
+			builder.setBaseOrder(getPointsOrder() - 100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(contextMarkerImage));

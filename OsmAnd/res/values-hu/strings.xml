@@ -4468,8 +4468,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vízi alagutak</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
     <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
     <string name="shared_string_not_used">Használaton kívül</string>
     <string name="shared_string_used">Használatban</string>
@@ -4777,7 +4777,6 @@
     <string name="distance_by_tap_use_description">Érintse meg a térképet az aktuális tartózkodási helye és a megérintett pont közötti távolság megtekintéséhez.
 \nÉrintse meg 2 ujjával a térképet a kattintott pontok közötti távolság megtekintéséhez</string>
     <string name="map_marker_interval_dialog_desc">Adja meg azt az időintervallumot, amelyre a rendszer mérje az átlagos sebességet a becsült érkezési idő kiszámításához.</string>
-    <string name="tap_on_widget">Koppintson a widgetre</string>
     <string name="go_to_marker_location">Menjen a jelölő által megjelölt helyre</string>
     <string name="shared_string_switch_mode">Módváltás</string>
     <string name="click_on_widget">Kattintson a widgetre</string>
@@ -4822,5 +4821,10 @@
     <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
-    <string name="worldwide_maps">Világtérképek</string>
+    <string name="worldwide_maps">Térképek világszerte</string>
+    <string name="map_widget_fps_info">Térkép renderelési sebessége (képkocka/mp)</string>
+    <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
+    <string name="favorites_backup">Kedvencek biztonsági mentése</string>
+    <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
+    <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/Web) további költségek nélkül.</string>
 </resources>

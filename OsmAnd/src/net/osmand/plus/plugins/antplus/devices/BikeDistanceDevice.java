@@ -58,7 +58,7 @@ public class BikeDistanceDevice extends CommonDevice<AntBikeDistanceDevice> {
 		AntBikeDistanceDevice device = getAntDevice();
 		BikeDistanceData data = device.getLastBikeDistanceData();
 		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
-		if (accumulatedDistance > 0 && (System.currentTimeMillis() - data.getTimestamp()) <= TRACK_DATA_EXPIRATION_TIME_MIN) {
+		if (accumulatedDistance > 0) {
 			json.put("ant_bicycle_distance", DECIMAL_FORMAT.format(accumulatedDistance));
 		}
 	}

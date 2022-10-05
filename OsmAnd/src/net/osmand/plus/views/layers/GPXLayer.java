@@ -601,7 +601,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 			}
 			if (!startFinishPoints.isEmpty() || !splitLabels.isEmpty()) {
-				additionalIconsProvider = new GpxAdditionalIconsProvider(getBaseOrder() - selectedGPXFiles.size() - 101, tileBox.getDensity(),
+				additionalIconsProvider = new GpxAdditionalIconsProvider(getPointsOrder() - selectedGPXFiles.size() - 101, tileBox.getDensity(),
 						startFinishPoints, splitLabels,
 						NativeUtilities.createSkImageFromBitmap(startPointImage),
 						NativeUtilities.createSkImageFromBitmap(finishPointImage),
@@ -886,7 +886,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			changeMarkerPositionModeCached = changeMarkerPositionMode;
 			clearPoints();
 
-			pointsTileProvider = new WptPtTileProvider(getContext(), getBaseOrder() - 300,
+			pointsTileProvider = new WptPtTileProvider(getContext(), getPointsOrder() - 300,
 					textVisible, getTextStyle(), view.getDensity());
 
 			float textScale = getTextScale();
@@ -996,7 +996,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					pointColor = getTrackColor(trackChartPoints.getGpx(), cachedColor);
 				}
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(pointColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -1019,7 +1019,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(highlightedPointImage));
