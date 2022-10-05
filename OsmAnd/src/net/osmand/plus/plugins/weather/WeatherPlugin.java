@@ -22,6 +22,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.units.CloudConstants;
 import net.osmand.plus.plugins.weather.units.PrecipConstants;
@@ -130,7 +131,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isLocked() {
-		return !Version.isPaidVersion(app);
+		return !InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
 	@Override
