@@ -4738,7 +4738,6 @@
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
     <string name="favorite_confirm_delete_group">Vil du slette «%1$s»-gruppen og alle dens punkter (%2$d)</string>
     <string name="favorite_delete_group">Slett gruppe</string>
-    <string name="tap_on_widget">Trykk på miniprogrammet</string>
     <string name="display_position">Vis posisjon</string>
     <string name="download_heightmap_maps">Høydekart</string>
     <string name="shared_string_large">Stor</string>

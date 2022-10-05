@@ -61,7 +61,6 @@
     <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
-    <string name="tap_on_widget">Tap on widget</string>
     <string name="go_to_marker_location">Go to marker location</string>
     <string name="shared_string_switch_mode">Switch mode</string>
     <string name="click_on_widget">Click on widget</string>

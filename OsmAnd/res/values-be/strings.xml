@@ -4786,7 +4786,6 @@
     <string name="display_position">Паказваць пазіцыю</string>
     <string name="rotate_map_none_rotated_opt">Фіксавана (паварочваецца ўручную)</string>
     <string name="map_marker_interval_dialog_desc">Каб разлічыць прыблізны час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
-    <string name="tap_on_widget">Націсніце на віджэт</string>
     <string name="go_to_marker_location">Перайсці да месцазнаходжання пазнакі</string>
     <string name="shared_string_switch_mode">Пераключыць рэжым</string>
     <string name="click_on_widget">Націсніце на віджэт</string>

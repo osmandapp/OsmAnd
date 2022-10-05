@@ -4771,7 +4771,6 @@
     <string name="download_complete">Download completo</string>
     <string name="favorite_delete_group">Excluir grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
-    <string name="tap_on_widget">Toque no widget</string>
     <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular o tempo estimado de chegada.</string>
     <string name="shared_string_normal">Normal</string>
     <string name="display_position">Posição na tela</string>

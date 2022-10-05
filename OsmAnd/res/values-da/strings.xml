@@ -4790,7 +4790,6 @@
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_none_rotated_opt">Fast (manuelt roteret)</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
-    <string name="tap_on_widget">Tryk på modul</string>
     <string name="go_to_marker_location">Gå til markørplacering</string>
     <string name="shared_string_shows">Viser</string>
     <string name="shared_string_switch_mode">Skift tilstand</string>
