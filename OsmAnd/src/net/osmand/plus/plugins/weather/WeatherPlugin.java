@@ -92,11 +92,11 @@ public class WeatherPlugin extends OsmandPlugin {
 		WX_CONTOURS_TRANSPARENCY = registerIntPreference("map_setting_wx_contours_transparency", DEFAULT_TRANSPARENCY).makeProfile();
 		WX_CONTOURS_TYPE = (EnumStringPreference) registerEnumStringPreference("map_setting_wx_contours_type", TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
 
-		WX_UNIT_TEMPERATURE = (EnumStringPreference) registerEnumStringPreference("map_settings_wx_unit_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		WX_UNIT_PRESSURE = (EnumStringPreference) registerEnumStringPreference("map_settings_wx_unit_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
-		WX_UNIT_WIND = (EnumStringPreference) registerEnumStringPreference("map_settings_wx_unit_wind", WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
-		WX_UNIT_CLOUDS = (EnumStringPreference) registerEnumStringPreference("map_settings_wx_unit_cloud", CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
-		WX_UNIT_PRECIPITATION = (EnumStringPreference) registerEnumStringPreference("map_settings_wx_unit_precip", PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
+		WX_UNIT_TEMPERATURE = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
+		WX_UNIT_PRESSURE = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
+		WX_UNIT_WIND = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_wind", WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
+		WX_UNIT_CLOUDS = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_cloud", CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
+		WX_UNIT_PRECIPITATION = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_precip", PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
 	}
 
 	@Override

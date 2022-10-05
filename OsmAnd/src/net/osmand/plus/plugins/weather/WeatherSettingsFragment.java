@@ -58,13 +58,13 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupOfflineForecastPref() {
-		Preference nameAndPasswordPref = findPreference("weather_online_cache");
-		nameAndPasswordPref.setSummary(AndroidUtils.formatSize(app, AndroidUtils.getAvailableSpace(app)));
+		Preference preference = findPreference("weather_online_cache");
+		preference.setSummary(AndroidUtils.formatSize(app, AndroidUtils.getAvailableSpace(app)));
 	}
 
 	private void setupOnlineCachePref() {
-		Preference nameAndPasswordPref = findPreference("weather_offline_forecast");
-		nameAndPasswordPref.setSummary(AndroidUtils.formatSize(app, AndroidUtils.getTotalSpace(app)));
+		Preference preference = findPreference("weather_offline_forecast");
+		preference.setSummary(AndroidUtils.formatSize(app, AndroidUtils.getTotalSpace(app)));
 	}
 
 	@Override
