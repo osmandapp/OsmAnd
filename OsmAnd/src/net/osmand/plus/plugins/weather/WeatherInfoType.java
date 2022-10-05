@@ -1,4 +1,4 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.plugins.weather;
 
 import android.content.Context;
 
@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.weather.units.CloudConstants;
-import net.osmand.plus.weather.units.PrecipConstants;
-import net.osmand.plus.weather.units.PressureConstants;
-import net.osmand.plus.weather.units.TemperatureConstants;
-import net.osmand.plus.weather.units.WindConstants;
+import net.osmand.plus.plugins.weather.units.CloudConstants;
+import net.osmand.plus.plugins.weather.units.PrecipConstants;
+import net.osmand.plus.plugins.weather.units.PressureConstants;
+import net.osmand.plus.plugins.weather.units.TemperatureConstants;
+import net.osmand.plus.plugins.weather.units.WindConstants;
 
 public enum WeatherInfoType {
 
@@ -20,7 +20,7 @@ public enum WeatherInfoType {
 	PRECIPITATION(R.string.map_settings_weather_precip, R.drawable.ic_action_precipitation),
 	WIND(R.string.map_settings_weather_wind, R.drawable.ic_action_wind),
 	CLOUDS(R.string.map_settings_weather_cloud, R.drawable.ic_action_clouds),
-	PRESSURE(R.string.map_settings_weather_pressure, R.drawable.ic_action_air_pressure);
+	PRESSURE(R.string.map_settings_weather_air_pressure, R.drawable.ic_action_air_pressure);
 
 	WeatherInfoType(int titleId, int iconId) {
 		this.titleId = titleId;

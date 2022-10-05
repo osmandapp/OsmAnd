@@ -1,11 +1,6 @@
-package net.osmand.plus.weather.units;
-
-import android.content.Context;
+package net.osmand.plus.plugins.weather.units;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-
-import net.osmand.plus.R;
 
 public enum CloudConstants {
 

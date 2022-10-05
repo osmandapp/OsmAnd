@@ -1,4 +1,4 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.plugins.weather;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -24,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;

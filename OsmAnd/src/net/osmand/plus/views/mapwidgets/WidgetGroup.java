@@ -14,7 +14,7 @@ import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +125,8 @@ public enum WidgetGroup {
 	public int getSecondaryIconId() {
 		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
-		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS || this == WEATHER || this == ANT_PLUS) {
+		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS
+				|| this == WEATHER || this == ANT_PLUS) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

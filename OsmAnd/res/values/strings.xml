@@ -15,7 +15,7 @@
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
-    <string name="map_settings_weather_pressure">Pressure</string>
+    <string name="map_settings_weather_air_pressure">Air pressure</string>
     <string name="map_settings_weather_wind">Wind</string>
     <string name="map_settings_weather_cloud">Cloud</string>
     <string name="map_settings_weather_precip">Precipitation</string>

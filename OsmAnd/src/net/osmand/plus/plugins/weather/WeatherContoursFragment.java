@@ -1,4 +1,4 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.plugins.weather;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

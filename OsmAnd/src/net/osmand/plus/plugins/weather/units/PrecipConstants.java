@@ -1,4 +1,4 @@
-package net.osmand.plus.weather.units;
+package net.osmand.plus.plugins.weather.units;
 
 import android.content.Context;
 
@@ -7,18 +7,19 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum TemperatureConstants {
+public enum PrecipConstants {
 
-	CELSIUS(R.string.weather_temperature_celsius, "°C"),
-	FAHRENHEIT(R.string.weather_temperature_fahrenheit, "°F");
+	MILIMETERS(R.string.weather_precip_milimeters, R.string.weather_precip_mm),
+	INCHES(R.string.weather_precip_inches, R.string.weather_precip_in);
 
 	@StringRes
 	private final int titleId;
-	private final String unit;
+	@StringRes
+	private final int unitId;
 
-	TemperatureConstants(@StringRes int titleId, @NonNull String unit) {
+	PrecipConstants(@StringRes int titleId, @StringRes int unitId) {
 		this.titleId = titleId;
-		this.unit = unit;
+		this.unitId = unitId;
 	}
 
 	@StringRes
@@ -26,14 +27,15 @@ public enum TemperatureConstants {
 		return titleId;
 	}
 
-	@NonNull
-	public String getUnit() {
-		return unit;
+	@StringRes
+	public int getUnitId() {
+		return unitId;
 	}
 
 	@NonNull
 	public String toHumanString(@NonNull Context ctx) {
 		String title = ctx.getString(titleId);
+		String unit = ctx.getString(unitId);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
 	}
 

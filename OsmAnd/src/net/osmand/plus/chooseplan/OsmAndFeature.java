@@ -79,7 +79,8 @@ public enum OsmAndFeature {
 			WIKIPEDIA,
 			WIKIVOYAGE,
 			TERRAIN,
-			NAUTICAL
+			NAUTICAL,
+			WEATHER
 	);
 
 	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
@@ -91,7 +92,8 @@ public enum OsmAndFeature {
 			ANDROID_AUTO,
 			COMBINED_WIKI,
 			TERRAIN,
-			NAUTICAL
+			NAUTICAL,
+			WEATHER
 	);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(

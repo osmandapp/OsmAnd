@@ -1,6 +1,14 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.plugins.weather;
 
-import android.graphics.drawable.Drawable;
+import static com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc.MeasurementDataType.TEMPERATURE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
+
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -15,6 +23,11 @@ import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.weather.units.CloudConstants;
+import net.osmand.plus.plugins.weather.units.PrecipConstants;
+import net.osmand.plus.plugins.weather.units.PressureConstants;
+import net.osmand.plus.plugins.weather.units.TemperatureConstants;
+import net.osmand.plus.plugins.weather.units.WindConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -27,11 +40,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.weather.units.CloudConstants;
-import net.osmand.plus.weather.units.PrecipConstants;
-import net.osmand.plus.weather.units.PressureConstants;
-import net.osmand.plus.weather.units.TemperatureConstants;
-import net.osmand.plus.weather.units.WindConstants;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -44,15 +52,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_AIR_PRESSURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_CLOUDS_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_PRECIPITATION_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_TEMPERATURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WX_WIND_WIDGET;
-import static net.osmand.plus.weather.WeatherInfoType.TEMPERATURE;
 
 public class WeatherPlugin extends OsmandPlugin {
 
@@ -78,11 +77,11 @@ public class WeatherPlugin extends OsmandPlugin {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
-		WidgetsAvailabilityHelper.regWidgetVisibility(WX_TEMPERATURE_WIDGET, noAppMode);
-		WidgetsAvailabilityHelper.regWidgetVisibility(WX_PRECIPITATION_WIDGET, noAppMode);
-		WidgetsAvailabilityHelper.regWidgetVisibility(WX_WIND_WIDGET, noAppMode);
-		WidgetsAvailabilityHelper.regWidgetVisibility(WX_CLOUDS_WIDGET, noAppMode);
-		WidgetsAvailabilityHelper.regWidgetVisibility(WX_AIR_PRESSURE_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_TEMPERATURE_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_PRECIPITATION_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_WIND_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_CLOUDS_WIDGET, noAppMode);
+		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_AIR_PRESSURE_WIDGET, noAppMode);
 
 		WX_ENABLED = registerBooleanPreference("map_setting_wx_enabled", true).makeProfile();
 		WX_ENABLED_LAYERS = (ListStringPreference) registerListStringPreference("map_setting_wx_enabled_layers", null, ",").makeProfile();
@@ -124,13 +123,6 @@ public class WeatherPlugin extends OsmandPlugin {
 		return R.drawable.ic_action_umbrella;
 	}
 
-	@Nullable
-	@Override
-	public Drawable getAssetResourceImage() {
-		// todo replace with appropriate resource
-		return super.getAssetResourceImage();
-	}
-
 	@Override
 	public boolean isPaid() {
 		return true;
@@ -143,46 +135,48 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.WEATHER;
+		return SettingsScreenType.WEATHER_SETTINGS;
 	}
+
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
-		MapWidget temperatureWidget = createMapWidgetForParams(mapActivity, WX_TEMPERATURE_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(temperatureWidget));
+		MapWidget temperatureWidget = createMapWidgetForParams(mapActivity, WEATHER_TEMPERATURE_WIDGET);
+		widgetInfos.add(widgetRegistry.createWidgetInfo(temperatureWidget, appMode));
 
-		MapWidget precipitationWidget = createMapWidgetForParams(mapActivity, WX_PRECIPITATION_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(precipitationWidget));
+		MapWidget precipitationWidget = createMapWidgetForParams(mapActivity, WEATHER_PRECIPITATION_WIDGET);
+		widgetInfos.add(widgetRegistry.createWidgetInfo(precipitationWidget, appMode));
 
-		MapWidget windWidget = createMapWidgetForParams(mapActivity, WX_WIND_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(windWidget));
+		MapWidget windWidget = createMapWidgetForParams(mapActivity, WEATHER_WIND_WIDGET);
+		widgetInfos.add(widgetRegistry.createWidgetInfo(windWidget, appMode));
 
-		MapWidget cloudsWidget = createMapWidgetForParams(mapActivity, WX_CLOUDS_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(cloudsWidget));
+		MapWidget cloudsWidget = createMapWidgetForParams(mapActivity, WEATHER_CLOUDS_WIDGET);
+		widgetInfos.add(widgetRegistry.createWidgetInfo(cloudsWidget, appMode));
 
-		MapWidget airPressureWidget = createMapWidgetForParams(mapActivity, WX_AIR_PRESSURE_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(airPressureWidget));
+		MapWidget airPressureWidget = createMapWidgetForParams(mapActivity, WEATHER_AIR_PRESSURE_WIDGET);
+		widgetInfos.add(widgetRegistry.createWidgetInfo(airPressureWidget, appMode));
 	}
 
 	@Nullable
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
-			case WX_TEMPERATURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType);
-			case WX_PRECIPITATION_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType);
-			case WX_WIND_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType);
-			case WX_CLOUDS_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType);
-			case WX_AIR_PRESSURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType);
+			case WEATHER_TEMPERATURE_WIDGET:
+				return new TemperatureWidget(mapActivity);
+			case WEATHER_PRECIPITATION_WIDGET:
+				return new PrecipitationWidget(mapActivity);
+			case WEATHER_WIND_WIDGET:
+				return new WindWidget(mapActivity);
+			case WEATHER_CLOUDS_WIDGET:
+				return new CloudsWidget(mapActivity);
+			case WEATHER_AIR_PRESSURE_WIDGET:
+				return new AirPreassureWidget(mapActivity);
 		}
 		return null;
 	}
+
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
@@ -381,23 +375,12 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@NonNull
 	public String[] getUnitsPreferencesIds() {
-		return new String[]{
+		return new String[] {
 				WX_UNIT_TEMPERATURE.getId(),
 				WX_UNIT_PRECIPITATION.getId(),
 				WX_UNIT_WIND.getId(),
 				WX_UNIT_CLOUDS.getId(),
 				WX_UNIT_PRESSURE.getId()
-		};
-	}
-
-	@NonNull
-	private static WidgetType[] getWidgetTypes() {
-		return new WidgetType[]{
-				WX_TEMPERATURE_WIDGET,
-				WX_PRECIPITATION_WIDGET,
-				WX_WIND_WIDGET,
-				WX_CLOUDS_WIDGET,
-				WX_AIR_PRESSURE_WIDGET
 		};
 	}
 }

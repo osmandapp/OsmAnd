@@ -84,7 +84,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.weather.WeatherSettingsFragment;
+import net.osmand.plus.plugins.weather.WeatherSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -148,7 +148,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		BACKUP_AUTHORIZATION(BackupAuthorizationFragment.class.getName(), false, null, R.xml.backup_authorization, R.layout.profile_preference_toolbar),
 		SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
 		ANT_PLUS_SETTINGS(AntPlusSettingsFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
-		WEATHER(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather, R.layout.profile_preference_toolbar);
+		WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;

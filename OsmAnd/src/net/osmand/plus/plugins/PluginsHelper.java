@@ -51,7 +51,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;

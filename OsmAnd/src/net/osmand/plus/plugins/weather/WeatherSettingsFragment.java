@@ -1,10 +1,10 @@
-package net.osmand.plus.weather;
+package net.osmand.plus.plugins.weather;
 
-import static net.osmand.plus.weather.WeatherInfoType.CLOUDS;
-import static net.osmand.plus.weather.WeatherInfoType.PRECIPITATION;
-import static net.osmand.plus.weather.WeatherInfoType.PRESSURE;
-import static net.osmand.plus.weather.WeatherInfoType.TEMPERATURE;
-import static net.osmand.plus.weather.WeatherInfoType.WIND;
+import static net.osmand.plus.plugins.weather.WeatherInfoType.CLOUDS;
+import static net.osmand.plus.plugins.weather.WeatherInfoType.PRECIPITATION;
+import static net.osmand.plus.plugins.weather.WeatherInfoType.PRESSURE;
+import static net.osmand.plus.plugins.weather.WeatherInfoType.TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherInfoType.WIND;
 
 import android.content.Context;
 import android.view.LayoutInflater;

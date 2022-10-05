@@ -41,7 +41,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenTyp
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 

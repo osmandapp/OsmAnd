@@ -18,7 +18,7 @@
 		android:icon="@drawable/ic_action_air_pressure"
 		android:key="map_settings_weather_pressure"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/map_settings_weather_pressure" />
+		android:title="@string/map_settings_weather_air_pressure" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_wind"
