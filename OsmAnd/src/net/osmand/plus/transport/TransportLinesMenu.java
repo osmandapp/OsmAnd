@@ -32,6 +32,10 @@ public final class TransportLinesMenu {
 	}
 
 	public void toggleTransportLines(@NonNull MapActivity mapActivity, boolean enable) {
+		if (!isTransportLinesSupported()) {
+			app.showShortToastMessage(R.string.action_not_supported_with_map_style);
+			return;
+		}
 		if (enable) {
 			List<String> enabledIds = settings.DISPLAYED_TRANSPORT_SETTINGS.getStringsList();
 			if (enabledIds != null) {
@@ -134,6 +138,10 @@ public final class TransportLinesMenu {
 
 	private CommonPreference<Boolean> getTransportPreference(@NonNull String attrName) {
 		return settings.getCustomRenderBooleanProperty(attrName);
+	}
+
+	public boolean isTransportLinesSupported() {
+		return !Algorithms.isEmpty(getTransportRules(app));
 	}
 
 	public static void showTransportsDialog(@NonNull MapActivity mapActivity) {
