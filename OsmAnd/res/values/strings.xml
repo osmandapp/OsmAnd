@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="map_widget_rendering_fps">Map rendering FPS</string>
+    <string name="map_widget_rendering_fps_desc">Shows how fast map and map elements are shown and refreshed (expressed in frames per second or FPS).</string>
+    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
     <string name="simulate_location_by_gpx">Simulate location by GPX</string>
     <string name="location_simulation_cutoff">Location simulation cutoff</string>
     <string name="location_simulation_speedup">Location simulation speedup</string>
@@ -22,7 +25,6 @@
     <string name="favorites_backup">Favorites backup</string>
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
-    <string name="map_widget_fps_info">Map rendering FPS (frames per second)</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
     <string name="ant_widgets">ANT+ widgets</string>
     <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
@@ -64,7 +66,6 @@
     <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="map_marker_interval_dialog_desc">Specify the time interval for which the average speed will be measured to calculate estimated time of arrival.</string>
-    <string name="tap_on_widget">Tap on widget</string>
     <string name="go_to_marker_location">Go to marker location</string>
     <string name="shared_string_switch_mode">Switch mode</string>
     <string name="click_on_widget">Click on widget</string>
@@ -213,7 +214,6 @@
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
     <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
-    <string name="fps_widget_desc">Shows how fast map and map elements are shown and refreshed.</string>
     <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
     <string name="current_time_widget_desc">Shows current time from your device.</string>
     <string name="battery_widget_desc">Shows battery level of your device.</string>

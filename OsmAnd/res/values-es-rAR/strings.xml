@@ -4625,7 +4625,6 @@
     <string name="parking_widget_desc">Este widget muestra la distancia desde el centro de la pantalla hasta el lugar del estacionamiento.</string>
     <string name="av_notes_choose_action_widget_desc">Elegir acción.</string>
     <string name="mapillary_widget_desc">Este widget proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
-    <string name="fps_widget_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos.</string>
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» ayuda a definir el radio alrededor del punto marcado en el mapa, mostrando círculos de distancia en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
@@ -4793,7 +4792,6 @@
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="display_position">Posición de la pantalla</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
-    <string name="tap_on_widget">Pulsar el widget</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="click_on_widget">Haz clic en el widget</string>
@@ -4822,7 +4820,6 @@
     <string name="map_widget_target_distance_desc">El widget muestra la distancia desde la cámara hasta la ubicación del objetivo.</string>
     <string name="map_widget_zoom_level_desc">El widget muestra el nivel de zum actual del mapa.</string>
     <string name="map_widget_camera_distance_desc">El widget muestra la elevación de la cámara sobre el nivel de la superficie.</string>
-    <string name="map_widget_fps_info">Representación de mapas en FPS (fotogramas por segundo)</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/Web) sin coste adicional.</string>

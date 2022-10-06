@@ -4633,7 +4633,6 @@
     <string name="routing_attr_avoid_4wd_only_name">Eviti vojojn por terenaj aŭtomobiloj</string>
     <string name="routing_attr_avoid_4wd_only_description">Eviti vojojn travetureblajn nur per ajnagrundaj aŭtomobiloj</string>
     <string name="elevation_profile_widget_desc">Fenestraĵo montranta profilon de altitudo kaj dekliveco por la nuna kurso.</string>
-    <string name="fps_widget_desc">Fenestraĵo montranta kiel rapide la mapo kaj ĝiaj elementoj estas bildigataj.</string>
     <string name="radius_rules_widget_desc">Cirkelo, kiu ebligas al vi determini distancojn ĉirkaŭ la elektita punkto sur la mapo per vidigi cirklojn kun distancoj sur la mapo.</string>
     <string name="battery_widget_desc">Fenestraĵo montranta nivelon de baterio de via aparato.</string>
     <string name="magnetic_bearing_widget_desc">Angulo inter la magneta nordo, via nuna pozicio kaj la alcela loko.</string>
@@ -4783,7 +4782,6 @@
     <string name="coordinates_widget_map_center_desc">Fenestraĵo montranta geografiajn koordinatojn de la montrata centro de la mapo.</string>
     <string name="coordinates_widget_current_location_desc">Fenestraĵo montranta geografiajn koordinatojn de via nuna pozicio.</string>
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
-    <string name="tap_on_widget">Je frapeti fenestraĵon</string>
     <string name="map_marker_interval_dialog_desc">Enigu la intertempon por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="go_to_marker_location">Iri al la map-marko</string>
     <string name="shared_string_switch_mode">Baskuli reĝimon</string>

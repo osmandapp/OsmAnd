@@ -657,6 +657,7 @@ public class GPXUtilities {
 		public String segmentTime;
 		public String speed;
 		public String turnType;
+		public String turnLanes;
 		public String turnAngle;
 		public String skipTurn;
 		public String types;
@@ -670,6 +671,7 @@ public class GPXUtilities {
 			s.segmentTime = bundle.getString("segmentTime", null);
 			s.speed = bundle.getString("speed", null);
 			s.turnType = bundle.getString("turnType", null);
+			s.turnLanes = bundle.getString("turnLanes", null);
 			s.turnAngle = bundle.getString("turnAngle", null);
 			s.skipTurn = bundle.getString("skipTurn", null);
 			s.types = bundle.getString("types", null);
@@ -685,6 +687,7 @@ public class GPXUtilities {
 			bundle.putString("segmentTime", segmentTime);
 			bundle.putString("speed", speed);
 			bundle.putString("turnType", turnType);
+			bundle.putString("turnLanes", turnLanes);
 			bundle.putString("turnAngle", turnAngle);
 			bundle.putString("skipTurn", skipTurn);
 			bundle.putString("types", types);
@@ -3058,6 +3061,7 @@ public class GPXUtilities {
 		segment.segmentTime = parser.getAttributeValue("", "segmentTime");
 		segment.speed = parser.getAttributeValue("", "speed");
 		segment.turnType = parser.getAttributeValue("", "turnType");
+		segment.turnLanes = parser.getAttributeValue("", "turnLanes");
 		segment.turnAngle = parser.getAttributeValue("", "turnAngle");
 		segment.skipTurn = parser.getAttributeValue("", "skipTurn");
 		segment.types = parser.getAttributeValue("", "types");

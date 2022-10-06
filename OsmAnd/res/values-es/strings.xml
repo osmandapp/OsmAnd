@@ -4679,7 +4679,6 @@
     <string name="audio_video_notes_desc">Este widget proporciona un acceso rápido para iniciar o parar una grabación (audio, vídeo o foto).</string>
     <string name="routing_attr_avoid_4wd_only_name">Evitar caminos para 4x4</string>
     <string name="routing_attr_avoid_4wd_only_description">Evita los caminos adecuados solo para vehículos todo terreno 4x4</string>
-    <string name="fps_widget_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos.</string>
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» ayuda a definir el radio alrededor del punto marcado en el mapa, mostrando círculos de distancia en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
@@ -4780,7 +4779,6 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
-    <string name="tap_on_widget">Pulsar el widget</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>

@@ -4645,7 +4645,6 @@
     <string name="navigation_points">Puntos de navegación</string>
     <string name="colour_of_circles">Color de los círculos</string>
     <string name="mapillary_widget_desc">Este widget proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
-    <string name="fps_widget_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos.</string>
     <string name="magnetic_bearing_widget_desc">Ángulo entre el norte magnético y el punto objetivo observado desde la ubicación.</string>
     <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar al destino.</string>
     <string name="arrival_time_widget_desc">Hora de llegada al punto de destino.</string>
@@ -4791,7 +4790,6 @@
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">El widget muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
-    <string name="tap_on_widget">Pulsar el widget</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
@@ -4822,7 +4820,6 @@
     <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
-    <string name="map_widget_fps_info">Representación de mapas en FPS (fotogramas por segundo)</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/Web) sin coste adicional.</string>
     <string name="ant_widgets">Widgets de ANT+</string>

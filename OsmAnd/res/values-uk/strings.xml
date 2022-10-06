@@ -4618,7 +4618,6 @@
     <string name="shared_string_widget">Віджет</string>
     <string name="bearing_secondary_desc">Ви можете змінити формат показуваних даних на: %1$s – %2$s – %3$s.</string>
     <string name="radius_rules_widget_desc">Інструмент «Лінійка радіуса» допомагає визначити радіус навколо вибраної точки на мапі показуючи кола відстаней на мапі.</string>
-    <string name="fps_widget_desc">Показує, як швидко показується та оновлюється мапа та елементи на ній.</string>
     <string name="time_to_go_desc">Час у хвилинах або годинах, необхідний для досягнення пункту призначення.</string>
     <string name="current_time_widget_desc">Показує поточний час пристрою.</string>
     <string name="current_speed_widget_desc">Показує вашу поточну швидкість, визначену GPS-датником.</string>
@@ -4780,7 +4779,6 @@
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
 \nТоркніться мапи 2 пальцями, щоб переглянути відстань між натиснутими точками</string>
     <string name="how_to_use">Як користуватися:</string>
-    <string name="tap_on_widget">Торкнутися віджета</string>
     <string name="go_to_marker_location">Перейти до локації позначки</string>
     <string name="click_on_widget">Натиснути віджет</string>
     <string name="shared_string_shows">Показує</string>
@@ -4833,6 +4831,5 @@
     <string name="map_widget_target_distance">Відстань від камери до цілі</string>
     <string name="favorites_backup">Резервне копіювання вибраного</string>
     <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/Web) без додаткових витрат.</string>
-    <string name="map_widget_fps_info">FPS завантаження мапи (кадрів на секунду)</string>
     <string name="shared_string_cross_buy">Перехресна купівля</string>
 </resources>

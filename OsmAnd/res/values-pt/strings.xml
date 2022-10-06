@@ -4611,7 +4611,6 @@
     <string name="current_time_widget_desc">Mostra a hora atual configurada no seu dispositivo.</string>
     <string name="battery_widget_desc">Mostra o nível da bateria do seu dispositivo.</string>
     <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor de um ponto selecionado no mapa mostrando círculos de distância no mapa.</string>
-    <string name="fps_widget_desc">Mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
     <string name="altitude_widget_desc">Mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
     <string name="max_speed_widget_desc">Mostra a velocidade máxima permitida na estrada em que se encontra.</string>
     <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
@@ -4789,7 +4788,6 @@
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
     <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular a hora prevista de chegada.</string>
-    <string name="tap_on_widget">Toque no widget</string>
     <string name="go_to_marker_location">Ir para a localização do marcador</string>
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
@@ -4820,7 +4818,6 @@
     <string name="antplus_plugin_name">ANT+</string>
     <string name="antplus_plugin_description">ANT+ descrição</string>
     <string name="nautical_depth_points">Pontos de profundidade náutica</string>
-    <string name="map_widget_fps_info">FPS da renderização de mapas (fotogramas por segundo)</string>
     <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
     <string name="map_widget_camera_distance_desc">O widget mostra a elevação da câmara acima do nível da superfície.</string>
     <string name="ant_widgets">ANT+ widgets</string>

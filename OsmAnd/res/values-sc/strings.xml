@@ -4700,7 +4700,6 @@
     <string name="coordinates_widget_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale.</string>
     <string name="navigation_points_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
     <string name="get_altitude_information">Otene sas informatziones subra de s\'artària</string>
-    <string name="fps_widget_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados.</string>
     <string name="average_speed_time_interval_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia.</string>
     <string name="average_speed_widget_desc">Ammustrat sa lestresa mèdia de su biàgiu atuale.</string>
     <string name="map_widget_average_speed">Lestresa mèdia</string>
@@ -4797,7 +4796,6 @@
     <string name="current_location_widget">Positzione atuale</string>
     <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
-    <string name="tap_on_widget">Toca su widget</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
     <string name="map_widget_zoom_level_desc">Su widget ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
     <string name="map_widget_camera_distance_desc">Su widget ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
@@ -4832,5 +4830,4 @@
     <string name="shared_string_cross_buy">Còmpora rugrada</string>
     <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
     <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
-    <string name="map_widget_fps_info">Frecuèntzia de renderizatzione FPS de sa mapa (fotogrammas pro segundu)</string>
 </resources>

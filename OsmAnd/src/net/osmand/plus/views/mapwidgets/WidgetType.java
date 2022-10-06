@@ -75,7 +75,7 @@ public enum WidgetType {
 
 	RADIUS_RULER("ruler", R.string.map_widget_ruler_control, R.string.radius_rules_widget_desc, R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night, R.string.docs_widget_radius_ruler, null, RIGHT),
 
-	DEV_FPS("fps", R.string.map_widget_fps_info, R.string.fps_widget_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
+	DEV_FPS("fps", R.string.map_widget_rendering_fps, R.string.map_widget_rendering_fps_desc, R.drawable.widget_fps_day, R.drawable.widget_fps_night, R.string.docs_widget_fps, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_TILT("dev_camera_tilt", R.string.map_widget_camera_tilt, R.string.map_widget_camera_tilt_desc, R.drawable.widget_developer_camera_tilt_day, R.drawable.widget_developer_camera_tilt_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_CAMERA_DISTANCE("dev_camera_distance", R.string.map_widget_camera_distance, R.string.map_widget_camera_distance_desc, R.drawable.widget_developer_camera_distance_day, R.drawable.widget_developer_camera_distance_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
 	DEV_ZOOM_LEVEL("dev_zoom_level", R.string.map_widget_zoom_level, R.string.map_widget_zoom_level_desc, R.drawable.widget_developer_map_zoom_day, R.drawable.widget_developer_map_zoom_night, 0, WidgetGroup.DEVELOPER_OPTIONS, RIGHT),
@@ -92,11 +92,11 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	ANT_HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
-	ANT_BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0, ANT_PLUS, RIGHT),
+	ANT_HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_POWER("ant_bicycle_power", R.string.map_widget_ant_bicycle_power, R.string.map_widget_ant_bicycle_power_desc, R.drawable.widget_sensor_bicycle_power_day, R.drawable.widget_sensor_bicycle_power_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_sensor_cadence_day, R.drawable.widget_sensor_cadence_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_sensort_distance_day, R.drawable.widget_sensort_distance_night, 0, ANT_PLUS, RIGHT),
+	ANT_BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, ANT_PLUS, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);

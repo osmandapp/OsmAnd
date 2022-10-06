@@ -3963,7 +3963,6 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sense restriccions)</string>
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="routing_attr_avoid_fords_description">Evita els guals</string>
-    <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
     <string name="connect_with_straight_line">Connecta amb una línia recta</string>
     <string name="attach_roads_descr">Ajusta la vostra traça a una ruta que segueixi el mapa local. Això us donarà valors d\'elevació corregits, detalls de la via i els girs realitzats durant la navegació.</string>
     <string name="without_profiles_changing">Sense canvis als perfils</string>

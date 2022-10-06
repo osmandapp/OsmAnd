@@ -4674,7 +4674,6 @@
     <string name="no_altitude_data">Keine Höhendaten</string>
     <string name="lang_sat">Santali</string>
     <string name="navigation_points_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
-    <string name="fps_widget_desc">Zeigt an, wie schnell die Karte und die Kartenelemente angezeigt und aktualisiert werden.</string>
     <string name="gps_info_widget_desc">Zeigt die Anzahl der Satelliten an, die das Gerät in diesem Moment erkennt und verwendet.</string>
     <string name="coordinates_widget_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an.</string>
     <string name="audio_video_notes_desc">Das Widget bietet schnellen Zugriff auf Start/Stopp einer Aufnahme (Audio, Video oder Foto).</string>
@@ -4784,7 +4783,6 @@
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
-    <string name="tap_on_widget">Tippen Sie auf das Widget</string>
     <string name="go_to_marker_location">Zum Standort der Markierung gehen</string>
     <string name="shared_string_switch_mode">Modus wechseln</string>
     <string name="shared_string_2_5_d_view">2,5 D Ansicht</string>
@@ -4811,7 +4809,6 @@
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Das Widget zeigt die Entfernung von der Kamera zum Zielort an.</string>
     <string name="ant_widgets">ANT+ Widgets</string>
-    <string name="map_widget_fps_info">Kartenwiedergabe FPS (Bilder pro Sekunde)</string>
     <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>

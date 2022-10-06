@@ -4674,7 +4674,6 @@
     <string name="coordinates_widget_secondary_desc">يمكن تغيير تنسيق الإحداثيات في %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">جزء من المكون الإضافي %1$s.</string>
     <string name="mapillary_widget_desc">ويدجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
-    <string name="fps_widget_desc">ويدجت عرض عنصر واجهة المستخدم ومدى سرعة وعرض عناصر الخريطة والخريطة وتحديثها.</string>
     <string name="current_time_widget_desc">ويدجت عرض الوقت الحالي من جهازك.</string>
     <string name="battery_widget_desc">ويدجت عرض مستوى بطارية جهازك.</string>
     <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية التي يكتشفها الجهاز ويستخدمها في تلك اللحظة.</string>
@@ -4867,7 +4866,6 @@
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
     <string name="shared_string_2_5_d_view">2.5 D عرض</string>
-    <string name="tap_on_widget">اضغط على الويدجت</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>

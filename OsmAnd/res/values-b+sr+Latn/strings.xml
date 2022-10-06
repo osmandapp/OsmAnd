@@ -4260,7 +4260,6 @@
     <string name="shared_string_grade">Kvalitet</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
     <string name="routing_attr_avoid_4wd_only_description">Izbegavanje puteva koji su pogodni samo za vozila sa pogonom na sva četiri točka</string>
-    <string name="fps_widget_desc">Vidžet pokazuje koliko brzo se mape i elementi mape prikazuju i osvežavaju.</string>
     <string name="lanes_widgets_desc">Vidžet za trake prikazuje trenutni raspored traka puta i ističe trake za vožnju uz aktivnu navigaciju.</string>
     <string name="route_maneuvers">Manevri rute</string>
     <string name="map_widget_altitude">Nadmorska visina trenutne lokacije</string>

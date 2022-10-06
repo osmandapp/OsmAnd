@@ -28,7 +28,7 @@ public enum WidgetGroup {
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
 	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes),
 	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0),
-	ANT_PLUS(R.string.ant_widgets, 0, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0);
+	ANT_PLUS(R.string.ant_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0);
 
 	@StringRes
 	public final int titleId;

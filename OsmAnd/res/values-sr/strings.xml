@@ -4602,7 +4602,6 @@
     <string name="routing_attr_hazmat_category_description">Категорија опасних материја / Размотрите дозволе за хазмат приступ</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегавање путева који су погодни само за возила са погоном на сва четири точка</string>
     <string name="av_notes_choose_action_widget_desc">Изаберите акцију.</string>
-    <string name="fps_widget_desc">Виџет показује колико брзо се мапе и елементи мапе приказују и освежавају.</string>
     <string name="radius_rules_widget_desc">Алатка за лењир радијуса помаже да се одреди радијус око изабране тачке на мапи тако што приказује кругове удаљености на мапи.</string>
     <string name="bearing_secondary_desc">Формат приказаних података можете променити у: %1$s – %2$s – %3$s.</string>
     <string name="coordinates_widget_secondary_desc">Формат координата се може променити у %1$s – %2$s – %3$s.</string>
@@ -4697,7 +4696,6 @@
     <string name="compass_always_visible">Увек видљиво</string>
     <string name="compass_click_desc">Кликните на компас да промените режим оријентације карте.</string>
     <string name="compass_desc">Приказује правац ка северу.</string>
-    <string name="tap_on_widget">Тапни на справицу</string>
     <string name="go_to_marker_location">Иди на позицију маркера</string>
     <string name="altitude_correction">Исправка надморске висине</string>
     <string name="display_position">Прикажи позицију</string>

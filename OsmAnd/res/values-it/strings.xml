@@ -4629,7 +4629,6 @@
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="fps_widget_desc">Il widget mostra con che velocità la mappa e i suoi elementi sono mostrati e aggiornati.</string>
     <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione attuale.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
     <string name="routing_attr_allow_private_for_truck_description">Permetti agli autotreni l\'accesso alle aree private.</string>
@@ -4776,7 +4775,6 @@
 \nTocca con due dita sulla mappa per mostrare la distanza tra i punti toccati</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="rotate_map_none_rotated_opt">Fisso (ruotato manualmente)</string>
-    <string name="tap_on_widget">Tocca il widget</string>
     <string name="go_to_marker_location">Vai alla posizione del marcatore</string>
     <string name="shared_string_switch_mode">Cambia modalità</string>
     <string name="click_on_widget">Clicca sul widget</string>
