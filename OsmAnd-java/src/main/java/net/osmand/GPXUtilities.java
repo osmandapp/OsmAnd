@@ -62,10 +62,6 @@ public class GPXUtilities {
 	public static final String AMENITY_PREFIX = "amenity_";
 	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
 
-	public static final List<String> EXTENSIONS_WITH_OSMAND_PREFIX = Arrays.asList(COLOR_NAME_EXTENSION,
-			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
-			AMENITY_ORIGIN_EXTENSION);
-
 	public static final String GAP_PROFILE_TYPE = "gap";
 	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
@@ -2409,8 +2405,7 @@ public class GPXUtilities {
 			if (!extensions.isEmpty()) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
 					String key = entry.getKey().replace(":", "_-_");
-					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX) && (EXTENSIONS_WITH_OSMAND_PREFIX.contains(key) ||
-							key.startsWith(AMENITY_PREFIX) || key.startsWith(OSM_PREFIX))) {
+					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
 						key = OSMAND_EXTENSIONS_PREFIX + key;
 					}
 					writeNotNullText(serializer, key, entry.getValue());
