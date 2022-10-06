@@ -10,7 +10,8 @@ import static net.osmand.plus.settings.backend.ApplicationMode.PEDESTRIAN;
 import static net.osmand.plus.settings.backend.ApplicationMode.PUBLIC_TRANSPORT;
 import static net.osmand.plus.settings.backend.ApplicationMode.SKI;
 import static net.osmand.plus.settings.backend.ApplicationMode.TRUCK;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
@@ -90,7 +91,8 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
 				TRUCK, MOTORCYCLE, HORSE);
 		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
-		regWidgetVisibility(ALTITUDE, PEDESTRIAN, BICYCLE);
+		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
+		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
 		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
@@ -98,7 +100,8 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(CURRENT_SPEED, all);
 		regWidgetAvailability(MAX_SPEED, all);
 		regWidgetAvailability(AVERAGE_SPEED, all);
-		regWidgetAvailability(ALTITUDE, all);
+		regWidgetAvailability(ALTITUDE_MY_LOCATION, all);
+		regWidgetAvailability(ALTITUDE_MAP_CENTER, all);
 
 		// all = null everything
 		regWidgetAvailability(SIDE_MARKER_1, all);
