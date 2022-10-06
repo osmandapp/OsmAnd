@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,10 +43,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
@@ -100,8 +98,7 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Nullable
 	@Override
-	protected JSONObject getAdditionalTrackData() {
-		JSONObject json = new JSONObject();
+	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		for (CommonDevice<?> device : devicesHelper.getDevices()) {
 			if (device.isEnabled() && device.shouldWriteGpx() && device.getAntDevice().isConnected()) {
 				try {
@@ -111,21 +108,6 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 				}
 			}
 		}
-		return json;
-	}
-
-	@Nullable
-	@Override
-	protected Map<String, String> getExtensionsFromInfo(@Nullable JSONObject json) {
-		if (json != null) {
-			Map<String, String> extensions = new HashMap<>();
-			for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
-				String key = iterator.next();
-				extensions.put(key, json.optString(key));
-			}
-			return extensions;
-		}
-		return null;
 	}
 
 	@Override
