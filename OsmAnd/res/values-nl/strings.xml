@@ -4472,7 +4472,6 @@
     <string name="map_widget_trip_recording_downhill">Bergafwaarts</string>
     <string name="parking_widget_desc">Widget dat de afstand toont van het midden van je scherm tot aan de parkeerplaats.</string>
     <string name="av_notes_choose_action_widget_desc">Kies actie.</string>
-    <string name="fps_widget_desc">Widget toont hoe snel de kaart en kaartelementen getoond en gerefresht worden.</string>
     <string name="av_def_action_choose">Op aanvraag</string>
     <string name="widget_secondary_desc_part_of">Deel van de %1$s plugin.</string>
     <string name="lang_sat">Santali</string>

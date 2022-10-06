@@ -4614,7 +4614,6 @@
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="max_speed_widget_desc">Indique la limitation de vitesse de la route actuelle.</string>
-    <string name="fps_widget_desc">Indique la vitesse d\'affichage et de rafraîchissement de la carte et des éléments de la carte.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon permet de déterminer la distance autour du point sélectionné en affichant des cercles de distance sur la carte.</string>
     <string name="altitude_widget_desc">Indique l’altitude, par rapport au niveau de la mer, de la position actuelle.</string>
     <string name="audio_video_notes_desc">Ce widget permet un accès rapide pour démarrer / arrêter un enregistrement (audio, vidéo ou photo).</string>
@@ -4826,7 +4825,6 @@
     <string name="nautical_depth_points">Points de sonde marine</string>
     <string name="map_widget_target_distance">Distance entre l’appareil photo et la cible</string>
     <string name="purchases_feature_desc_cross_buy">Utilisez votre abonnement sur toutes les plateformes (Android, iOS, Web) sans frais supplémentaire.</string>
-    <string name="map_widget_fps_info">Rendu FPS des cartes (images par seconde)</string>
     <string name="shared_string_cross_buy">Achat multi-plateformes</string>
     <string name="favorites_backup">Sauvegarde des favoris</string>
 </resources>

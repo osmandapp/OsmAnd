@@ -2528,7 +2528,6 @@
     <string name="routing_attr_hazmat_category_name">Categori Hazmat</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Dim cyfyngiadau)</string>
     <string name="circle_settings">Gosodiadau cylchoedd</string>
-    <string name="fps_widget_desc">Mae\'n dangos pa mor gyflym y mae mapiau ac elfennau mapiau yn ymddangos ac ail-lwytho.</string>
     <string name="get_altitude_data">Cael data uchder</string>
     <string name="edit_profiles_descr">Ni ellir dileu proffiliau OsmAnd, ond gellir eu hanalluogi (ar y sgrin flaenorol), neu eu trefnu ar y gwaelod.</string>
     <string name="change_default_settings">Newid gosodiad</string>

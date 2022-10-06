@@ -485,7 +485,6 @@
     <string name="parking_widget_desc">Aplikacijata Vi go pokazuva rastojanieto od centarot na ekranot do parking prostorot.</string>
     <string name="map_markers_bar_widget_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="av_notes_choose_action_widget_desc">Odberete akcija.</string>
-    <string name="fps_widget_desc">Pokažuva kolku brzo se prikažuvaat kartata i elementite na kratata kako i nejzinoto osvezuvane.</string>
     <string name="radius_rules_widget_desc">Alatkata radius-ruler pomaga da se odredi radiusot okolu izbranata točka na kartata što prikažuva krugovi na rastojanie na kartata.</string>
     <string name="lanes_widgets_desc">Vidžetot Lanes go prikažuva momentalniot raspored na kolovoznite lenti i gi istaknuva lentite za vozenje so aktivna navigacija.</string>
     <string name="street_name_widget_desc">Vidžetot za ime na ulica go prikažuva tekovnoto ime na ulica so prava strelka za lokacija ili ime na slednata ulica so manevar što treba da se završi.</string>

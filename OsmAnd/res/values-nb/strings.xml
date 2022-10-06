@@ -4600,7 +4600,6 @@
     <string name="widget_secondary_desc_part_of">En del av %1$s-programtillegget.</string>
     <string name="parking_widget_desc">Miniprogram som viser avstanden fra skjermsenter til parkeringsplassen.</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Middels</string>
-    <string name="fps_widget_desc">Viser hvor raskt kart og kartelementer vises og gjenoppfriskes.</string>
     <string name="current_time_widget_desc">Viser gjeldende tid fra enheten din.</string>
     <string name="radius_rules_widget_desc">Radiuslinjalverktøyet lar deg finne radius rundt valgt punkt på kartet via visning av avstandssirkler på kartet.</string>
     <string name="max_speed_widget_desc">Viser en fartsgrense for veien du kjører på.</string>

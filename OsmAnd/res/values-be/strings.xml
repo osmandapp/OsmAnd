@@ -4082,7 +4082,6 @@
     <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора бягучай геалакацыі.</string>
     <string name="max_speed_widget_desc">Паказвае абмежаванне хуткасці для бягучай дарогі.</string>
     <string name="map_markers_bar_widget_desc">На віджэце верхняй панэлі вы можаце ўбачыць адлегласць і кірунак да маркера ад бягучага месцазнаходжання. Можна наладзіць прагляд 1 або 2 верхніх маркераў у віджэце.</string>
-    <string name="fps_widget_desc">Паказвае, як хутка адлюстроўваюцца і абнаўляюцца элементы мапы.</string>
     <string name="radius_rules_widget_desc">Інструмент «Радыусная лінейка» дапамагае вызначыць радыус вакол абранай кропкі на мапе, паказваючы кругі адлегласці на мапе.</string>
     <string name="colour_of_circles">Колер акружнасцей</string>
     <string name="coordinates_widget_desc">Паказвае геаграфічныя каардынаты бягучага месцазнаходжання.</string>

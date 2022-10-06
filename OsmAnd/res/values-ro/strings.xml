@@ -4639,7 +4639,6 @@
     <string name="routing_attr_avoid_4wd_only_description">Evitați drumurile potrivite doar pentru vehicule cu tracțiune integrală</string>
     <string name="widget_secondary_desc_part_of">Parte a pluginului %1$s.</string>
     <string name="av_notes_choose_action_widget_desc">Alegeți acțiunea.</string>
-    <string name="fps_widget_desc">Arată cât de repede sunt afișate și reîmprospătate harta și elementele hărții.</string>
     <string name="current_speed_widget_desc">Afișează viteza actuală detectată de senzorul GPS.</string>
     <string name="magnetic_bearing_widget_desc">Unghiul dintre nordul magnetic și punctul țintă observat din poziția dumneavoastră.</string>
     <string name="arrival_time_widget_desc">Ora de sosire la punctul de destinație.</string>

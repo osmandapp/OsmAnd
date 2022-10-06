@@ -4603,7 +4603,6 @@
     <string name="parking_widget_desc">顯示從畫面中央到停車位置距離的小工具。</string>
     <string name="mapillary_widget_desc">提供快速存取 Mapillary 應用程式以新增街道級影像的小工具。</string>
     <string name="av_notes_choose_action_widget_desc">選擇動作。</string>
-    <string name="fps_widget_desc">顯示地圖與地圖元素得的顯示與更新速率。</string>
     <string name="radius_rules_widget_desc">半徑尺規工具會在地圖上顯示距離同心圓來協助確定在地圖上選定的點周圍的半徑。</string>
     <string name="current_time_widget_desc">顯示來自您裝置的目前時間。</string>
     <string name="gps_info_widget_desc">顯示裝置當下偵測到與使用的衛星數量。</string>

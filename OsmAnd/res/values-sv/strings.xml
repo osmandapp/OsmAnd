@@ -4065,7 +4065,6 @@
     <string name="elevation_profile_widget_desc">Widgeten visar höjd- och lutningsprofil för den nuvarande rutten.</string>
     <string name="max_speed_widget_desc">Visar hastighetsbegränsningen för nuvarande körda väg.</string>
     <string name="mapillary_widget_desc">Widget som ger snabb tillgång till Mapillary-appen för att lägga till gatunivåbilder.</string>
-    <string name="fps_widget_desc">Visar hur snabbt karta och kartelement visas och uppdateras.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellan den magnetiska nordpolen och målpunkten sett från din plats.</string>
     <string name="routing_attr_avoid_fords_name">Undvik vadställen</string>
     <string name="routing_attr_avoid_fords_description">Undvik vadställen</string>

@@ -4597,7 +4597,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="updated_map_time">Eguneratua: %1$s.</string>
     <string name="live_update_frequency_day_variant">Mapen eguneraketak egunero egiaztatuko dira.</string>
     <string name="next_live_update_time">Hurrengo eguneratzea: %1$s barru.</string>
-    <string name="map_widget_fps_info">Mapa errendatzea FPS (fotograma segundoko)</string>
     <string name="favorites_backup">Gogokoen babeskopiak</string>
     <string name="shared_string_cross_buy">Erosketa gurutzatua</string>
     <string name="ant_widgets">ANT+ widget-ak</string>
