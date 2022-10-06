@@ -494,7 +494,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 			if (location.hasBearing()) {
 				try {
-					json.put(TRACK_COL_BEARING, location.getBearing());
+					json.put(TRACK_COL_BEARING, String.format("%.1f", location.getBearing()));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}
