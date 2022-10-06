@@ -4596,7 +4596,6 @@
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
     <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
-    <string name="fps_widget_desc">Megjeleníti, hogy milyen gyorsan jelennek meg és frissülnek a térkép és a térképelemek.</string>
     <string name="current_time_widget_desc">Megjeleníti a készülék aktuális idejét.</string>
     <string name="battery_widget_desc">Megjeleníti a készülék akkumulátorának töltöttségi szintjét.</string>
     <string name="current_speed_widget_desc">Megjeleníti a GPS-érzékelő által érzékelt aktuális sebességet.</string>
@@ -4822,7 +4821,6 @@
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
-    <string name="map_widget_fps_info">Térkép renderelési sebessége (képkocka/mp)</string>
     <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>

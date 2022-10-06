@@ -4597,7 +4597,6 @@
     <string name="elevation_profile_widget_desc">Widget pokazuje wysokość i profil nachylenia bieżącej trasy.</string>
     <string name="av_notes_choose_action_widget_desc">Wybierz akcję.</string>
     <string name="shared_string_widget">Widżet</string>
-    <string name="fps_widget_desc">Pokazuje, jak szybko mapa i elementy mapy są wyświetlane i odświeżane.</string>
     <string name="current_time_widget_desc">Pokazuje aktualny czas z urządzenia.</string>
     <string name="battery_widget_desc">Pokazuje poziom naładowania baterii.</string>
     <string name="time_to_go_desc">Czas w minutach lub godzinach potrzebny do osiągnięcia celu podróży.</string>

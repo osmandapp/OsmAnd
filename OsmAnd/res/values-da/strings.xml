@@ -4630,7 +4630,6 @@
     <string name="time_to_go_desc">Den tid i minutter eller timer, der er nødvendig for at nå din destination.</string>
     <string name="bearing_secondary_desc">Du kan ændre formatet for de viste data i: %1$s – %2$s – %3$s.</string>
     <string name="mapillary_widget_desc">Modul der giver hurtig adgang til Mapillary-appen for at tilføje billeder på gadeniveau.</string>
-    <string name="fps_widget_desc">Viser hvor hurtigt kort og kortelementer vises og opdateres.</string>
     <string name="av_notes_choose_action_widget_desc">Vælg handling.</string>
     <string name="radius_rules_widget_desc">Radiusmålerværktøjet hjælper med at bestemme radius omkring et valgt punkt på kortet ved visning af afstandscirkler på kortet.</string>
     <string name="current_time_widget_desc">Viser den aktuelle tid fra din enhed.</string>
@@ -4835,7 +4834,6 @@
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten, eller du skal muligvis opdatere din eksisterende version, hvis du allerede har den.
 \nVil du starte Play Store for at hente den\?</string>
-    <string name="map_widget_fps_info">FPS (billeder pr. sekund) for kortgengivelse</string>
     <string name="map_widget_target_distance">Afstand fra kamera til mål</string>
     <string name="favorites_backup">Sikkerhedskopiering af favoritter</string>
     <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/Web) uden ekstra omkostninger.</string>
