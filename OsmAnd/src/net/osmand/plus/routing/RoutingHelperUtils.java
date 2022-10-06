@@ -77,8 +77,9 @@ public class RoutingHelperUtils {
 		locationProjection.setLatitude(project.getLatitude());
 		locationProjection.setLongitude(project.getLongitude());
 		// we need to update bearing too
-		float bearingTo = locationProjection.bearingTo(to);
-		locationProjection.setBearing(bearingTo);
+		// TODO: looks like wrong bearing sometimes
+		//float bearingTo = locationProjection.bearingTo(to);
+		//locationProjection.setBearing(bearingTo);
 		return locationProjection;
 	}
 
