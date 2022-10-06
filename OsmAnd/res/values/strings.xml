@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="simulate_location_by_gpx">Simulate location by GPX</string>
+    <string name="location_simulation_cutoff">Location simulation cutoff</string>
+    <string name="location_simulation_speedup">Location simulation speedup</string>
     <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
     <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
     <string name="shared_string_identifiers">Identifiers</string>

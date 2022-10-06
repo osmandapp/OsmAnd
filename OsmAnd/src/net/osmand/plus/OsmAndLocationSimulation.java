@@ -91,7 +91,8 @@ public class OsmAndLocationSimulation {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
 						GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-						startAnimationThread(app, gpxParamsBuilder.getSimulatedLocations(app), true, speedup.getValue() + 1);
+						startAnimationThread(app, gpxParamsBuilder.getSimulatedLocations(app, 0),
+								true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
 						}
@@ -128,7 +129,7 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	private void startAnimationThread(OsmandApplication app, List<SimulatedLocation> directions,
+	public void startAnimationThread(OsmandApplication app, List<SimulatedLocation> directions,
 	                                  boolean locTime, float coeff) {
 		final float time = LOCATION_TIMEOUT;
 		float simSpeed = app.getSettings().simulateNavigationSpeed;

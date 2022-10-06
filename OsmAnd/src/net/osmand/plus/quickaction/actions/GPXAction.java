@@ -38,6 +38,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
+import net.osmand.plus.quickaction.CreateEditActionDialog.FileSelected;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
@@ -57,7 +58,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class GPXAction extends QuickAction {
+public class GPXAction extends QuickAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(6, "gpx.add", GPXAction.class)
 			.nameRes(R.string.quick_action_add_gpx)

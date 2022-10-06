@@ -29,6 +29,8 @@ import net.osmand.plus.plugins.development.widget.TargetDistanceWidget;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.LocationSimulationAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -40,6 +42,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
@@ -168,7 +171,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		OsmEditingPlugin osmPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
@@ -180,5 +183,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
+		quickActionTypes.add(LocationSimulationAction.TYPE);
+		return quickActionTypes;
 	}
 }
