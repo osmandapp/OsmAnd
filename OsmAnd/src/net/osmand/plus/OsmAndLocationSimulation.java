@@ -15,12 +15,16 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +95,7 @@ public class OsmAndLocationSimulation {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
 						GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-						startAnimationThread(app, gpxParamsBuilder.getSimulatedLocations(app, 0),
+						startAnimationThread(app, getSimulatedLocations(app, 0, gpxParamsBuilder),
 								true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
@@ -102,7 +106,7 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				List<SimulatedLocation> currentRoute = app.getRoutingHelper().getRoute().getImmutableSimulatedLocations();
+				List<SimulatedLocation> currentRoute = getImmutableSimulatedLocations(app.getRoutingHelper().getRoute());
 				if (currentRoute.isEmpty()) {
 					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
 							Toast.LENGTH_LONG).show();
@@ -172,13 +176,17 @@ public class OsmAndLocationSimulation {
 						}
 						float speed = meters / intervalTime * coeff;
 						if (intervalTime != 0) {
-							current.setSpeed(speed);
+							if (!current.hasSpeed()) {
+								current.setSpeed(speed);
+							}
 						}
 						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (realistic && speed < 10)) {
 							current.setAccuracy(5);
 						}
 						if (prev != null && prev.distanceTo(current) > 3 || (realistic && speed >= 3)) {
-							current.setBearing(prev.bearingTo(current));
+							if (current.hasBearing()) {
+								current.setBearing(prev.bearingTo(current));
+							}
 						}
 					}
 					current.setTime(System.currentTimeMillis());
@@ -314,7 +322,56 @@ public class OsmAndLocationSimulation {
 		return degree * Math.PI / 180;
 	}
 
-	public static class SimulatedLocation extends Location {
+	public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app, int firstLocationOffset, GPXRouteParamsBuilder gpxParamsBuilder) {
+		double distanceFromStart = 0;
+		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
+		List<Location> locations = gpxParamsBuilder.getPoints(app);
+		Location prevLocation = locations.get(0);
+		for (int i = 0; i < locations.size(); i++) {
+			Location location = locations.get(i);
+			distanceFromStart += MapUtils.getDistance(prevLocation, location);
+			if (distanceFromStart >= firstLocationOffset) {
+				simulatedLocations.add(new SimulatedLocation(location));
+			}
+			prevLocation = location;
+		}
+		return simulatedLocations;
+	}
+
+
+
+	public List<SimulatedLocation> getImmutableSimulatedLocations(RouteCalculationResult route) {
+		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
+		for (Location l : route.getImmutableAllLocations()) {
+			simulatedLocations.add(new SimulatedLocation(l));
+		}
+		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
+		for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
+			RouteSegmentResult s = segments.get(routeInd);
+			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+			int i = s.getStartPointIndex();
+			while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
+				LatLon point = s.getPoint(i);
+				for (SimulatedLocation sd : simulatedLocations) {
+					LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
+					if (latLon.equals(point)) {
+						sd.setHighwayType(s.getObject().getHighway());
+						sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
+						if (s.getObject().hasTrafficLightAt(i)) {
+							sd.setTrafficLight(true);
+						}
+					}
+				}
+				if (i == s.getEndPointIndex()) {
+					break;
+				}
+				i += plus ? 1 : -1;
+			}
+		}
+		return simulatedLocations;
+	}
+
+	private static class SimulatedLocation extends Location {
 
 		private boolean trafficLight;
 		private String highwayType;

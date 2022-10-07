@@ -1,6 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
 import androidx.annotation.NonNull;
@@ -241,22 +240,6 @@ public class GPXRouteParams {
 		public List<Location> getPoints(OsmandApplication app) {
 			GPXRouteParams copy = build(app);
 			return copy.getPoints();
-		}
-
-		public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app, int firstLocationOffset) {
-			double distanceFromStart = 0;
-			List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-			List<Location> locations = getPoints(app);
-			Location prevLocation = locations.get(0);
-			for (int i = 0; i < locations.size(); i++) {
-				Location location = locations.get(i);
-				distanceFromStart += MapUtils.getDistance(prevLocation, location);
-				if (distanceFromStart >= firstLocationOffset) {
-					simulatedLocations.add(new SimulatedLocation(location));
-				}
-				prevLocation = location;
-			}
-			return simulatedLocations;
 		}
 
 		@NonNull
