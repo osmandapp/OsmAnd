@@ -62,7 +62,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	private static final int MAX_SPEEDUP = 8;
 	private static final int MIN_CUTOFF_DISTANCE = 0;
 	private static final int MAX_CUTOFF_DISTANCE = 10;
-	public static final int CUTOF_STEP_SIZE = 10;
+	public static final int CUTOFF_STEP_SIZE = 10;
 	public static final float SPEEDUP_STEP_SIZE = 0.5f;
 
 	private transient String selectedGpxFilePath;
@@ -250,7 +250,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			AndroidUiHelper.updateVisibility(timeIcon, false);
 		}
 
-		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOF_STEP_SIZE) * CUTOF_STEP_SIZE);
+		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
 	}
 
 	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity) {
@@ -286,17 +286,17 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	@NonNull
 	private String getSpeedUpTitle(@NonNull OsmandApplication app, float value) {
-		return getTitle(app, R.string.location_simulation_speedup, value);
+		return getTitle(app, R.string.location_simulation_speedup, String.valueOf(value));
 	}
 
 	@NonNull
 	private String getCutOffTitle(@NonNull OsmandApplication app, float value) {
-		return getTitle(app, R.string.location_simulation_cutoff, value);
+		return getTitle(app, R.string.location_simulation_cutoff, OsmAndFormatter.getFormattedDistance(value, app));
 	}
 
 	@NonNull
-	private String getTitle(@NonNull OsmandApplication app, @StringRes int titleId, float value) {
-		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(titleId), String.valueOf(value));
+	private String getTitle(@NonNull OsmandApplication app, @StringRes int titleId, String value) {
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(titleId), value);
 	}
 
 	private void setupCutOffSlider(@NonNull View container, @NonNull OsmandApplication app, int max) {
@@ -309,11 +309,11 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		TextView minValue = container.findViewById(R.id.min_cut);
 		TextView maxValue = container.findViewById(R.id.max_cut);
 
-		minValue.setText(String.valueOf(min));
-		maxValue.setText(String.valueOf(max));
+		minValue.setText(OsmAndFormatter.getFormattedDistance(min, app));
+		maxValue.setText(OsmAndFormatter.getFormattedDistance(max, app));
 
 		title.setText(getCutOffTitle(app, cutOffValue));
-		slider.setStepSize(CUTOF_STEP_SIZE);
+		slider.setStepSize(CUTOFF_STEP_SIZE);
 		slider.setValueFrom(min);
 		slider.setValueTo(max);
 		slider.setValue(cutOffValue);
