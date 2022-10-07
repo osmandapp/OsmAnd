@@ -107,6 +107,11 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		}
 	}
 
+	@Override
+	public int getActionNameRes() {
+		return super.getActionNameRes();
+	}
+
 	private void startStopSimulation(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
@@ -301,6 +306,15 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	@NonNull
 	private String getCutOffTitle(@NonNull OsmandApplication app, float value) {
 		return getTitle(app, R.string.location_simulation_cutoff, OsmAndFormatter.getFormattedDistance(value, app));
+	}
+
+	@Override
+	public String getName(OsmandApplication application) {
+		OsmAndLocationSimulation sim = application.getLocationProvider().getLocationSimulation();
+		if (sim.isRouteAnimating()) {
+			return application.getString(R.string.stop_navigation_service);
+		}
+		return application.getString(R.string.simulate_location_by_gpx);
 	}
 
 	@NonNull
