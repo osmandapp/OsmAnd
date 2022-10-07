@@ -76,10 +76,11 @@ public class RoutingHelperUtils {
 		Location locationProjection = new Location(loc);
 		locationProjection.setLatitude(project.getLatitude());
 		locationProjection.setLongitude(project.getLongitude());
-		// we need to update bearing too
-		// TODO: looks like wrong bearing sometimes
-		//float bearingTo = locationProjection.bearingTo(to);
-		//locationProjection.setBearing(bearingTo);
+		// This code is not valid:
+		// 1. if you are out of the route. So you keep moving in different direction, but bearing project is opposite
+		// 2. If projection too close to "to" point, bearing is NaN and location icon changes in a wrong way
+		// float bearingTo = locationProjection.bearingTo(to);
+		// locationProjection.setBearing(bearingTo);
 		return locationProjection;
 	}
 
