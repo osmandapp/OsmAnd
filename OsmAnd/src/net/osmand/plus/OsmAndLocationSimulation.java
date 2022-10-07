@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 
 import static net.osmand.plus.OsmAndLocationProvider.SIMULATED_PROVIDER;
+import static net.osmand.plus.OsmAndLocationProvider.SIMULATED_PROVIDER_GPX;
 
 import android.app.Activity;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -24,6 +26,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -94,8 +97,7 @@ public class OsmAndLocationSimulation {
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
-						GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-						startAnimationThread(app, getSimulatedLocations(app, 0, gpxParamsBuilder),
+						startAnimationThread(app, getSimulatedLocations(app, 0, result[0]),
 								true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
@@ -322,23 +324,44 @@ public class OsmAndLocationSimulation {
 		return degree * Math.PI / 180;
 	}
 
-	public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app, int firstLocationOffset, GPXRouteParamsBuilder gpxParamsBuilder) {
+	public static List<SimulatedLocation> getSimulatedLocations(OsmandApplication app, int firstLocationOffset,
+																GPXUtilities.GPXFile f) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-		List<Location> locations = gpxParamsBuilder.getPoints(app);
-		Location prevLocation = locations.get(0);
-		for (int i = 0; i < locations.size(); i++) {
-			Location location = locations.get(i);
-			distanceFromStart += MapUtils.getDistance(prevLocation, location);
+		List<GPXUtilities.WptPt> points = f.getAllSegmentsPoints();
+		GPXUtilities.WptPt prevLocation = null;
+		for (int i = 0; i < points.size(); i++) {
+			GPXUtilities.WptPt location = points.get(i);
+			if (prevLocation != null) {
+				distanceFromStart += MapUtils.getDistance(prevLocation.getLatitude(),
+						prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
+			}
 			if (distanceFromStart >= firstLocationOffset) {
-				simulatedLocations.add(new SimulatedLocation(location));
+				Location l = new Location(SIMULATED_PROVIDER_GPX, location.lat, location.lon);
+				if (location.time > 0) {
+					l.setTime(location.time);
+				}
+				if (location.speed > 0) {
+					l.setSpeed((float) location.speed);
+				} else {
+					String sp = location.getExtensionsToRead().get("speed");
+					if (!Algorithms.isEmpty(sp)) {
+						l.setSpeed((float) Double.parseDouble(sp));
+					}
+				}
+				String br = location.getExtensionsToRead().get("bearing");
+				if (!Algorithms.isEmpty(br)) {
+					l.setBearing((float) Double.parseDouble(br));
+				}
+				if (!Double.isNaN(location.ele)) {
+					l.setAltitude(location.ele);
+				}
+				simulatedLocations.add(new SimulatedLocation(l));
 			}
 			prevLocation = location;
 		}
 		return simulatedLocations;
 	}
-
-
 
 	public List<SimulatedLocation> getImmutableSimulatedLocations(RouteCalculationResult route) {
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();

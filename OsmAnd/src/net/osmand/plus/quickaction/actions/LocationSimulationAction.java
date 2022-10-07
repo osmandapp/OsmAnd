@@ -114,8 +114,8 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null) {
-			GPXRouteParams.GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParams.GPXRouteParamsBuilder(gpxFile, app.getSettings());
-			sim.startAnimationThread(app, gpxParamsBuilder.getSimulatedLocations(app, (int) cutOffValue), true, speedUpValue);
+			sim.startAnimationThread(app, OsmAndLocationSimulation.getSimulatedLocations(app, (int) cutOffValue,
+					gpxFile), true, speedUpValue);
 		}
 	}
 
