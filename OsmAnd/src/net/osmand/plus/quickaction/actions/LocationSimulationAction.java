@@ -87,9 +87,19 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
 
 		if (!shouldUseSelectedGpxFile()) {
-			//todo target fragment from mapActivity in the SelectTrackFileDialogFragment
-			// CallbackWithObject<Object> listener = target instanceof CallbackWithObject<?>
-			showSelectTrackFileDialog(mapActivity);
+			OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
+			if (sim.isRouteAnimating()) {
+				sim.startStopGpxAnimation(mapActivity);
+			} else {
+				CallbackWithObject<String> onFileSelect = gpxFilePath -> {
+					getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
+						startStopSimulation(gpxFile, mapActivity);
+						return true;
+					});
+					return true;
+				};
+				showSelectTrackFileDialog(mapActivity, onFileSelect);
+			}
 		} else {
 			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
 				startStopSimulation(gpxFile, mapActivity);
@@ -153,7 +163,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 				if (shouldUseSelectedGpxFile()) {
 					updateTrackBottomInfo(container, false);
 				} else {
-					showSelectTrackFileDialog(mapActivity);
+					showSelectTrackFileDialog(mapActivity, null);
 					return false;
 				}
 			}
@@ -175,7 +185,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		AndroidUtils.setBackground(container.getContext(), selectAnotherTrackButton, night,
 				R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
 
-		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity));
+		selectAnotherTrackButtonContainer.setOnClickListener(v -> showSelectTrackFileDialog(mapActivity, null));
 	}
 
 	private void setupGpxTrackInfo(@NonNull View container, @NonNull OsmandApplication app) {
@@ -253,8 +263,8 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
 	}
 
-	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity) {
-		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity));
+	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity, CallbackWithObject<String> onFileSelect) {
+		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity), onFileSelect);
 	}
 
 	private void setupSpeedUpSlider(@NonNull View container, @NonNull OsmandApplication app) {
