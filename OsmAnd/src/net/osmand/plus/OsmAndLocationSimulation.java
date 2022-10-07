@@ -355,7 +355,7 @@ public class OsmAndLocationSimulation {
 				if (!Double.isNaN(location.ele)) {
 					l.setAltitude(location.ele);
 				}
-				simulatedLocations.add(new SimulatedLocation(l));
+				simulatedLocations.add(new SimulatedLocation(l, SIMULATED_PROVIDER_GPX));
 			}
 			prevLocation = location;
 		}
@@ -365,7 +365,8 @@ public class OsmAndLocationSimulation {
 	public List<SimulatedLocation> getSimulatedLocationsForRoute(RouteCalculationResult route) {
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
 		for (Location l : route.getImmutableAllLocations()) {
-			simulatedLocations.add(new SimulatedLocation(l));
+			SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
+			simulatedLocations.add(sm);
 		}
 		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
 		for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
@@ -406,8 +407,9 @@ public class OsmAndLocationSimulation {
 			speedLimit = location.getSpeedLimit();
 		}
 
-		public SimulatedLocation(Location l) {
+		public SimulatedLocation(Location l, String provider) {
 			super(l);
+			setProvider(provider);
 		}
 
 		public boolean isTrafficLight() {
