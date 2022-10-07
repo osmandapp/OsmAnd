@@ -63,6 +63,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
+	public static final String SIMULATED_PROVIDER_GPX = "GPX";
 
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
