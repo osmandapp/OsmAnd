@@ -20,7 +20,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
@@ -97,7 +96,7 @@ public class OsmAndLocationSimulation {
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
-						startAnimationThread(app, getSimulatedLocations(app, 0, result[0]),
+						startAnimationThread(app, getSimulatedLocationsForGpx(app, 0, result[0]),
 								true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
@@ -108,7 +107,7 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				List<SimulatedLocation> currentRoute = getImmutableSimulatedLocations(app.getRoutingHelper().getRoute());
+				List<SimulatedLocation> currentRoute = getSimulatedLocationsForRoute(app.getRoutingHelper().getRoute());
 				if (currentRoute.isEmpty()) {
 					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
 							Toast.LENGTH_LONG).show();
@@ -324,8 +323,8 @@ public class OsmAndLocationSimulation {
 		return degree * Math.PI / 180;
 	}
 
-	public static List<SimulatedLocation> getSimulatedLocations(OsmandApplication app, int firstLocationOffset,
-																GPXUtilities.GPXFile f) {
+	public static List<SimulatedLocation> getSimulatedLocationsForGpx(OsmandApplication app, int firstLocationOffset,
+																	  GPXUtilities.GPXFile f) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
 		List<GPXUtilities.WptPt> points = f.getAllSegmentsPoints();
@@ -363,7 +362,7 @@ public class OsmAndLocationSimulation {
 		return simulatedLocations;
 	}
 
-	public List<SimulatedLocation> getImmutableSimulatedLocations(RouteCalculationResult route) {
+	public List<SimulatedLocation> getSimulatedLocationsForRoute(RouteCalculationResult route) {
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
 		for (Location l : route.getImmutableAllLocations()) {
 			simulatedLocations.add(new SimulatedLocation(l));
@@ -409,7 +408,6 @@ public class OsmAndLocationSimulation {
 
 		public SimulatedLocation(Location l) {
 			super(l);
-			setProvider(SIMULATED_PROVIDER);
 		}
 
 		public boolean isTrafficLight() {

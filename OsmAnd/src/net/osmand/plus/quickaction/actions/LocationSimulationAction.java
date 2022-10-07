@@ -30,7 +30,6 @@ import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
-import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -114,7 +113,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null) {
-			sim.startAnimationThread(app, OsmAndLocationSimulation.getSimulatedLocations(app, (int) cutOffValue,
+			sim.startAnimationThread(app, OsmAndLocationSimulation.getSimulatedLocationsForGpx(app, (int) cutOffValue,
 					gpxFile), true, speedUpValue);
 		}
 	}
