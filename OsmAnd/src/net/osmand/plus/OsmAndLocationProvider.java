@@ -697,7 +697,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void scheduleCheckIfGpsLost(net.osmand.Location location) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
-				&& simulatePosition == null) {
+				&& simulatePosition == null ) {
 			long fixTime = location.getTime();
 			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
@@ -721,7 +721,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						// false positive case, still strange how we got here with removeMessages
 						return;
 					}
-					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
+					// Speed 120kmh, 2 seconds -> 60 m
+					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(250);
 					if (tunnel != null) {
 						simulatePosition = new SimulationProvider();
 						simulatePosition.startSimulation(tunnel, location);
