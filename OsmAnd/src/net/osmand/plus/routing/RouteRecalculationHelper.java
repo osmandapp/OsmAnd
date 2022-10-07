@@ -333,7 +333,7 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	private static class RouteRecalculationTask implements Runnable {
+	private class RouteRecalculationTask implements Runnable {
 
 		private final RouteRecalculationHelper routingThreadHelper;
 		private final RoutingHelper routingHelper;
@@ -394,6 +394,9 @@ class RouteRecalculationHelper {
 
 		@Override
 		public void run() {
+			if (!updateProgress) {
+				updateProgress(params);
+			}
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);

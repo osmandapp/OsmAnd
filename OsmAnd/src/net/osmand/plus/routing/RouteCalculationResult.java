@@ -16,7 +16,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -45,7 +44,6 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
-	private final List<SimulatedLocation> simulatedLocations;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
@@ -92,7 +90,6 @@ public class RouteCalculationResult {
 		this.listDistance = new int[0];
 		this.directions = new ArrayList<>();
 		this.alarmInfo = new ArrayList<>();
-		this.simulatedLocations = new ArrayList<>();
 		this.routeService = null;
 		this.appMode = null;
 		this.routeRecalcDistance = 0;
@@ -129,7 +126,6 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.alarmInfo = new ArrayList<>();
-		this.simulatedLocations = new ArrayList<>();
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
@@ -178,7 +174,6 @@ public class RouteCalculationResult {
 		}
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
-		this.simulatedLocations = new ArrayList<>();
 		this.listDistance = new int[locations.size()];
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
@@ -966,41 +961,13 @@ public class RouteCalculationResult {
 		return locations;
 	}
 
-	public List<SimulatedLocation> getImmutableSimulatedLocations() {
-		if (Algorithms.isEmpty(simulatedLocations)) {
-			for (Location l : locations) {
-				simulatedLocations.add(new SimulatedLocation(l));
-			}
-			for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
-				RouteSegmentResult s = segments.get(routeInd);
-				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-				int i = s.getStartPointIndex();
-				while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-					LatLon point = s.getPoint(i);
-					for (SimulatedLocation sd : simulatedLocations) {
-						LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-						if (latLon.equals(point)) {
-							sd.setHighwayType(s.getObject().getHighway());
-							sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
-							if (s.getObject().hasTrafficLightAt(i)) {
-								sd.setTrafficLight(true);
-							}
-						}
-					}
-					if (i == s.getEndPointIndex()) {
-						break;
-					}
-					i += plus ? 1 : -1;
-				}
-			}
-		}
-		return simulatedLocations;
-	}
-
 	public List<RouteDirectionInfo> getImmutableAllDirections() {
 		return directions;
 	}
 
+	public List<RouteSegmentResult> getImmutableAllSegments() {
+		return segments;
+	}
 
 	public List<Location> getRouteLocations() {
 		if (currentRoute < locations.size()) {
