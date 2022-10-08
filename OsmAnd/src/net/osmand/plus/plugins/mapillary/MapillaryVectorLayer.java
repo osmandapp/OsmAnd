@@ -36,7 +36,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
@@ -82,7 +82,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	MapillaryVectorLayer(@NonNull Context context) {
 		super(context, false);
-		plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+		plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		imageAndCourseMarkerBuilder
 				.setIsHidden(true)
 				.setIsAccuracyCircleSupported(false)
-				.setBaseOrder(getBaseOrder())
+				.setBaseOrder(getPointsOrder())
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(selectedImageBitmap))
@@ -269,8 +269,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		int zoomDiff = currentZoom - tileZoom;
 		int div = (int) Math.pow(2.0, zoomDiff);
 
-		boolean useInternet = (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)
-				|| OsmandPlugin.isActive(MapillaryPlugin.class))
+		boolean useInternet = (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)
+				|| PluginsHelper.isActive(MapillaryPlugin.class))
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
 		Map<String, GeometryTile> tiles = new HashMap<>();

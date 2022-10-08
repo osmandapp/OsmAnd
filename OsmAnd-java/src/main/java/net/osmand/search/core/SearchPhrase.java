@@ -575,7 +575,7 @@ public class SearchPhrase {
 	}
 
 	public NameStringMatcher getFullNameStringMatcher() {
-		return getNameStringMatcher(fullTextSearchPhrase, false);
+		return getNameStringMatcher(fullTextSearchPhrase.trim(), false);
 	}
 
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {

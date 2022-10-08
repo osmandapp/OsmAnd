@@ -35,7 +35,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -607,7 +607,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		long lastZoomTime = mapView.isZooming()
 				? System.currentTimeMillis()
 				: app.getMapViewTrackingUtilities().getLastManualZoomTime();
-		if ((System.currentTimeMillis() - lastZoomTime > 1000) || !OsmandPlugin.isDevelopment()) {
+		if ((System.currentTimeMillis() - lastZoomTime > 1000) || !PluginsHelper.isDevelopment()) {
 			zoomText.setVisibility(View.GONE);
 		} else {
 			int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
@@ -701,7 +701,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 				if (showParameterSlider) {
 					hideTransparencyBar();
@@ -718,7 +718,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateTransparencySliderValue() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 				transparencySlider.setValue(settings.MAP_OVERLAY_TRANSPARENCY.get());
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {

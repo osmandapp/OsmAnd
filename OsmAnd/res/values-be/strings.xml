@@ -4082,7 +4082,6 @@
     <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора бягучай геалакацыі.</string>
     <string name="max_speed_widget_desc">Паказвае абмежаванне хуткасці для бягучай дарогі.</string>
     <string name="map_markers_bar_widget_desc">На віджэце верхняй панэлі вы можаце ўбачыць адлегласць і кірунак да маркера ад бягучага месцазнаходжання. Можна наладзіць прагляд 1 або 2 верхніх маркераў у віджэце.</string>
-    <string name="fps_widget_desc">Паказвае, як хутка адлюстроўваюцца і абнаўляюцца элементы мапы.</string>
     <string name="radius_rules_widget_desc">Інструмент «Радыусная лінейка» дапамагае вызначыць радыус вакол абранай кропкі на мапе, паказваючы кругі адлегласці на мапе.</string>
     <string name="colour_of_circles">Колер акружнасцей</string>
     <string name="coordinates_widget_desc">Паказвае геаграфічныя каардынаты бягучага месцазнаходжання.</string>
@@ -4488,7 +4487,7 @@
     <string name="files_remaining">Засталося файлаў: %1$s %2$s</string>
     <string name="shortcut_navigate_to_home">Маршрут да \"Дом\"</string>
     <string name="contact_support">Сувязь з падтрымкай</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не хаваць тунэлі на водных шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Не хаваць тунэлі на водных шляхах</string>
     <string name="delete_all_confirmation">Так, выдаліць усе</string>
     <string name="update_frequency">Чашчыня абнаўлення</string>
     <string name="enter_verification_code">Увядзіце аднаразовы пароль</string>
@@ -4617,7 +4616,7 @@
     <string name="transport_hazmat_title">Перавозка небяспечных матэрыялаў</string>
     <string name="shared_string_visible_widgets">Бачныя віджэты</string>
     <string name="stop_download">Спыніць спампоўку</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Тунэлі на водных шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Тунэлі на водных шляхах</string>
     <string name="location_access_request_action">Даць доступ</string>
     <string name="shared_string_not_used">Не выкарыстоўваецца</string>
     <string name="track_file">Файл следу</string>
@@ -4786,7 +4785,6 @@
     <string name="display_position">Паказваць пазіцыю</string>
     <string name="rotate_map_none_rotated_opt">Фіксавана (паварочваецца ўручную)</string>
     <string name="map_marker_interval_dialog_desc">Каб разлічыць прыблізны час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
-    <string name="tap_on_widget">Націсніце на віджэт</string>
     <string name="go_to_marker_location">Перайсці да месцазнаходжання пазнакі</string>
     <string name="shared_string_switch_mode">Пераключыць рэжым</string>
     <string name="click_on_widget">Націсніце на віджэт</string>

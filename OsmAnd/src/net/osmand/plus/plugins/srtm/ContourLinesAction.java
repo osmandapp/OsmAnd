@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -38,7 +38,7 @@ public class ContourLinesAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
 			plugin.toggleContourLines(mapActivity, !enabled, new Runnable() {
@@ -49,7 +49,7 @@ public class ContourLinesAction extends QuickAction {
 					if (contourLinesProp != null) {
 						CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 						if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
-							OsmandPlugin.enablePluginIfNeeded(mapActivity, app, plugin, true);
+							PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
 						}
 						mapActivity.refreshMapComplete();
 					}

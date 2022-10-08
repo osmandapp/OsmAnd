@@ -512,7 +512,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		aidlMapLayerProvider = new AidlTileProvider(this, density, yOffset);
 		mapMarkersCollection = new MapMarkersCollection();
 
-		int baseOrder = getBaseOrder();
+		int pointsOrder = getPointsOrder();
 		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
 			LatLon l = point.getLocation();
 			if (l != null) {
@@ -534,7 +534,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					aidlMapLayerProvider.addToData(point, image, isStale(point), getText(point));
 				} else {
 					Bitmap bitmap = getSelectedBitmap(point, image);
-					int markerBaseOrder = selected ? baseOrder - 1 : baseOrder;
+					int markerBaseOrder = selected ? pointsOrder - 1 : pointsOrder;
 					MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 					int x = MapUtils.get31TileNumberX(l.getLongitude());
 					int y = MapUtils.get31TileNumberY(l.getLatitude());

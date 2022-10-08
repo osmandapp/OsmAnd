@@ -7,7 +7,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
@@ -83,7 +84,7 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Override
 	public boolean exists() {
-		return OsmandPlugin.getPlugin(getPluginId()) != null;
+		return PluginsHelper.getPlugin(getPluginId()) != null;
 	}
 
 	@Override
@@ -105,7 +106,7 @@ public class PluginSettingsItem extends SettingsItem {
 					plugin.updateDownloadItems(((DownloadsItem) item).getItems());
 				}
 			}
-			app.runInUIThread(() -> OsmandPlugin.addCustomPlugin(app, plugin));
+			app.runInUIThread(() -> PluginsHelper.addCustomPlugin(app, plugin));
 		}
 	}
 

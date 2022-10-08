@@ -32,7 +32,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -65,7 +65,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class RouteParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -235,7 +235,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 			setupDevelopmentCategoryPreferences(screen, am);
 		}
 	}

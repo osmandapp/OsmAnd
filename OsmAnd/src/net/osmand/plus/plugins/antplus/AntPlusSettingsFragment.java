@@ -6,7 +6,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -19,7 +19,7 @@ public class AntPlusSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		AntPlusPlugin plugin = OsmandPlugin.getPlugin(AntPlusPlugin.class);
+		AntPlusPlugin plugin = PluginsHelper.getPlugin(AntPlusPlugin.class);
 		Preference developmentInfo = findPreference("antplus_info");
 		developmentInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 

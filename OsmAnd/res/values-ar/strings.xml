@@ -4554,11 +4554,11 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">علامات أصلحني</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">إظهار علامات أصلحني</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">علامات ملاحظة</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">أنفاق الممر المائي</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">أنفاق الممر المائي</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">إظهار علامات الملاحظة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">الأيقونات عند التكبيرات المنخفضة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">عرض تخطيطي للأيقونات عند التكبيرات المنخفضة</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
     <string name="shared_string_open_street_map">خريطة الشارع المفتوح</string>
     <string name="rendering_value_all_name">الكل</string>
     <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>
@@ -4674,7 +4674,6 @@
     <string name="coordinates_widget_secondary_desc">يمكن تغيير تنسيق الإحداثيات في %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">جزء من المكون الإضافي %1$s.</string>
     <string name="mapillary_widget_desc">ويدجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
-    <string name="fps_widget_desc">ويدجت عرض عنصر واجهة المستخدم ومدى سرعة وعرض عناصر الخريطة والخريطة وتحديثها.</string>
     <string name="current_time_widget_desc">ويدجت عرض الوقت الحالي من جهازك.</string>
     <string name="battery_widget_desc">ويدجت عرض مستوى بطارية جهازك.</string>
     <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية التي يكتشفها الجهاز ويستخدمها في تلك اللحظة.</string>
@@ -4867,7 +4866,6 @@
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
     <string name="shared_string_2_5_d_view">2.5 D عرض</string>
-    <string name="tap_on_widget">اضغط على الويدجت</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
@@ -4875,4 +4873,28 @@
     <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
+    <string name="ant_missing_dependency_descr">لم يتم العثور على الخدمة المطلوبة \"%1$s\".
+\nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
+\nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
+    <string name="ant_missing_dependency">التابع مفقود</string>
+    <string name="ant_go_to_store">انتقل إلى المتجر</string>
+    <string name="map_widget_ant_bicycle_power">طاقة الدراجة</string>
+    <string name="map_widget_ant_bicycle_power_desc">يعرض طاقة الدراج ، أثناء تحريك الدراجة للأمام</string>
+    <string name="map_widget_ant_bicycle_cadence">دراجة نارية</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">إظهار السرعة التي يقوم بها المستخدم عند التدريج</string>
+    <string name="map_widget_ant_bicycle_speed">سرعة الدراجة</string>
+    <string name="map_widget_ant_bicycle_speed_desc">يظهر سرعة الرحلة</string>
+    <string name="map_widget_ant_bicycle_dist">مسافة الدراجة</string>
+    <string name="map_widget_ant_bicycle_dist_desc">يعرض المسافة المقطوعة</string>
+    <string name="antplus_plugin_name">مستشعر ANT+</string>
+    <string name="antplus_plugin_description">مواصفات ANT+</string>
+    <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
+    <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
+    <string name="ant_read_data">قراءة البيانات</string>
+    <string name="ant_widgets">ويدجت مستشعر ANT+</string>
+    <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
+    <string name="ant_heart_rate_write_gpx_desc">كتابة معدل نبضات القلب للمسار</string>
+    <string name="nautical_depth_points">نقاط العمق البحري</string>
+    <string name="worldwide_maps">خرائط عالمية</string>
+    <string name="depth_contours">ملامح العمق</string>
 </resources>

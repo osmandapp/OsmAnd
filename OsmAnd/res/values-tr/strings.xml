@@ -4491,8 +4491,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Düşük yakınlaştırmalarda simgeler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Düşük yakınlaştırmalarda simgelerin şematik gösterimi</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Beni-düzelt etiketleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Su yolu tünelleri</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Tümü</string>
@@ -4612,7 +4612,6 @@
     <string name="parking_widget_desc">Ekran merkezinizden park yerine olan mesafeyi gösteren widget.</string>
     <string name="mapillary_widget_desc">Sokak düzeyinde görüntü eklemek için Mapillary uygulamasına hızlı erişim sağlayan widget.</string>
     <string name="av_notes_choose_action_widget_desc">Eylem seçin.</string>
-    <string name="fps_widget_desc">Harita ve harita ögelerinin ne kadar hızlı gösterildiğini ve yenilendiğini gösterir.</string>
     <string name="radius_rules_widget_desc">Yarıçap cetveli aracı, harita üzerinde mesafe daireleri görüntüleyerek harita üzerinde seçilen nokta etrafındaki yarıçapın belirlenmesine yardımcı olur.</string>
     <string name="current_time_widget_desc">Aygıtınızın geçerli saatini gösterir.</string>
     <string name="battery_widget_desc">Aygıtınızın pil seviyesini gösterir.</string>

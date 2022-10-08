@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.openplacereviews;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
@@ -29,8 +31,6 @@ import org.json.JSONObject;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OPEN_PLACE_REVIEWS;
 
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 
@@ -182,10 +182,13 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	private static String[] getIdFromResponse(String response) {
 		try {
 			JSONArray obj = new JSONObject(response).getJSONArray("objects");
+			if (obj.length() == 0) {
+				return new String[0];
+			}
 			JSONArray images = (JSONArray) ((JSONObject) obj.get(0)).get("id");
 			return toStringArray(images);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(), e);
 		}
 		return new String[0];
 	}

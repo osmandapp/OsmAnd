@@ -192,6 +192,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		List<File> ttsVoiceFilesList = new ArrayList<>();
 		List<File> voiceFilesList = new ArrayList<>();
+		List<File> favoritesBackupFilesList = new ArrayList<>();
 		List<File> mapFilesList = new ArrayList<>();
 		List<MapMarker> mapMarkers = new ArrayList<>();
 		List<MapMarker> mapMarkersHistory = new ArrayList<>();
@@ -225,6 +226,8 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 					ttsVoiceFilesList.add(file);
 				} else if (fileSubtype == FileSubtype.VOICE) {
 					voiceFilesList.add(file);
+				} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
+					favoritesBackupFilesList.add(file);
 				}
 			} else if (object instanceof AvoidRoadInfo) {
 				avoidRoads.add((AvoidRoadInfo) object);
@@ -328,6 +331,10 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		if (!itineraryGroups.isEmpty()) {
 			duplicates.add(getString(R.string.shared_string_itinerary));
 			duplicates.addAll(itineraryGroups);
+		}
+		if (!favoritesBackupFilesList.isEmpty()) {
+			duplicates.add(getString(R.string.favorites_backup));
+			duplicates.addAll(favoritesBackupFilesList);
 		}
 		return duplicates;
 	}

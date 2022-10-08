@@ -9,6 +9,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -27,7 +28,7 @@ public enum WidgetGroup {
 	TRIP_RECORDING(R.string.map_widget_monitoring, 0, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, R.string.docs_widget_trip_recording),
 	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes),
 	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0),
-	ANT_PLUS(R.string.ant_widgets, 0, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, 0);
+	ANT_PLUS(R.string.ant_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0);
 
 	@StringRes
 	public final int titleId;
@@ -132,7 +133,7 @@ public enum WidgetGroup {
 
 	@Nullable
 	public static <T extends OsmandPlugin> String getPartOfPluginDesc(@NonNull Context context, @NonNull Class<T> clz) {
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(clz);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(clz);
 		return plugin != null
 				? context.getString(R.string.widget_secondary_desc_part_of, plugin.getName())
 				: null;

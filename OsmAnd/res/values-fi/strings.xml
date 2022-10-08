@@ -3876,8 +3876,8 @@
     <string name="start_editing_card_image_text">Ilmainen maailmanlaajuinen matkaopas, jota kuka tahansa voi muokata.</string>
     <string name="gpx_no_routes_title">Ei reittejä</string>
     <string name="gpx_no_routes_descr">Voit lisätä reitin tiedostoon \"%1$s\" -työkalulla.</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Vesiväylien tunnelit</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Älä piilota vesiväylien tunneleita</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Vesiväylien tunnelit</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Älä piilota vesiväylien tunneleita</string>
     <string name="turn_arrows">Kääntymisnuolet</string>
     <string name="distance_between_points">Pisteiden välinen välimatka</string>
     <string name="gps_filter_smoothing">Pehmennys</string>

@@ -12,7 +12,7 @@ import android.view.KeyEvent;
 
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -131,7 +131,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
 			// currently doesn't process specific commands
-		} else if (OsmandPlugin.onMapActivityKeyUp(mapActivity, keyCode)) {
+		} else if (PluginsHelper.onMapActivityKeyUp(mapActivity, keyCode)) {
 			return true;
 		}
 		return app.getAidlApi().onKeyEvent(event);

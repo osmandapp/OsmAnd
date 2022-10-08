@@ -62,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
@@ -162,7 +163,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public void build(ViewGroup rootView) {
-		for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			if (plugin.isMenuControllerSupported(this.getClass())) {
 				builder.addMenuPlugin(plugin);
 			}

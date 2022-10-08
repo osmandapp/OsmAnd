@@ -4494,8 +4494,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túneis de cursos de água</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omissão</string>
@@ -4611,7 +4611,6 @@
     <string name="current_time_widget_desc">Mostra a hora atual configurada no seu dispositivo.</string>
     <string name="battery_widget_desc">Mostra o nível da bateria do seu dispositivo.</string>
     <string name="radius_rules_widget_desc">A ferramenta régua de raio ajuda a determinar o raio ao redor de um ponto selecionado no mapa mostrando círculos de distância no mapa.</string>
-    <string name="fps_widget_desc">Mostra a que velocidade o mapa e os seus elementos são mostrados e atualizados.</string>
     <string name="altitude_widget_desc">Mostra a altitude atual do seu dispositivo acima do nível do mar.</string>
     <string name="max_speed_widget_desc">Mostra a velocidade máxima permitida na estrada em que se encontra.</string>
     <string name="arrival_time_widget_desc">Hora de chegada ao ponto de destino.</string>
@@ -4719,7 +4718,7 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_description">Selecione o tipo de combustível do seu motor, isto é necessário para estimar a emissão de CO2.</string>
     <string name="lang_ckb">Curdo central</string>
-    <string name="live_update_frequency_day_variant">As atualizações do mapa serão feitas diariamente.</string>
+    <string name="live_update_frequency_day_variant">As atualizações do mapa são feitas diariamente.</string>
     <string name="routing_attr_motor_type_name">Motor do veículo</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
@@ -4789,7 +4788,6 @@
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
     <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular a hora prevista de chegada.</string>
-    <string name="tap_on_widget">Toque no widget</string>
     <string name="go_to_marker_location">Ir para a localização do marcador</string>
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
@@ -4809,4 +4807,33 @@
     <string name="map_widget_target_distance_desc">Mostra a distância da câmara ao local de destino.</string>
     <string name="map_widget_zoom_level_desc">Mostra o nível atual de zoom do mapa.</string>
     <string name="map_widget_camera_tilt">Inclinação da câmara</string>
+    <string name="ant_missing_dependency_descr">O serviço necessário \"%1$s\" não foi encontrado.
+\nÉ necessário instalar o serviço ANT+ Complementos ou poderá ter de atualizar a sua versão existente, caso já a tenha.
+\nQuer abrir a Play Store para o obter\?</string>
+    <string name="favorites_backup">Cópia de segurança dos favoritos</string>
+    <string name="purchases_feature_desc_cross_buy">Utilize as suas funcionalidades de subscrição em diferentes plataformas (Android/iOS/Web) sem custos adicionais.</string>
+    <string name="ant_missing_dependency">Dependência em falta</string>
+    <string name="depth_contours">Contornos de profundidade</string>
+    <string name="shared_string_cross_buy">Compra cruzada</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">ANT+ descrição</string>
+    <string name="nautical_depth_points">Pontos de profundidade náutica</string>
+    <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
+    <string name="map_widget_camera_distance_desc">O widget mostra a elevação da câmara acima do nível da superfície.</string>
+    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadência da bicicleta</string>
+    <string name="ant_go_to_store">Ir à Store</string>
+    <string name="ant_read_data">Ler dados</string>
+    <string name="ant_write_to_gpx">Gravar dados no trilho</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mostra a velocidade de viagem</string>
+    <string name="ant_heart_rate_write_gpx_desc">Gravar a frequência cardíaca no trilho</string>
+    <string name="map_widget_ant_heart_rate">Frequência cardíaca</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra a frequência cardíaca do utilizador durante uma dada atividade em tempo real</string>
+    <string name="map_widget_ant_bicycle_power">Potência da bicicleta</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mostra a potência de saída do ciclista, que é utilizada para mover a bicicleta para a frente</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mostra a velocidade a que o utilizador está a pedalar</string>
+    <string name="map_widget_ant_bicycle_dist">Distância de bicicleta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
+    <string name="worldwide_maps">Mapas mundiais</string>
 </resources>

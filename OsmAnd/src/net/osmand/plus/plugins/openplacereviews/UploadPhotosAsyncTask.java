@@ -17,7 +17,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.UploadPhotoProgressBottomSheet;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openplacereviews.OpenDBAPI.UploadImageResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -66,7 +66,7 @@ public class UploadPhotosAsyncTask extends AsyncTask<Void, Integer, Void> {
 	public UploadPhotosAsyncTask(@NonNull FragmentActivity activity, @NonNull List<Uri> data,
 	                             @NonNull String[] placeId, @Nullable UploadPhotosListener listener) {
 		app = (OsmandApplication) activity.getApplicationContext();
-		plugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		plugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 		activityRef = new WeakReference<>(activity);
 		this.data = data;
 		this.placeId = placeId;

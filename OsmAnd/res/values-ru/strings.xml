@@ -4492,8 +4492,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Не скрывать водные туннели</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Не скрывать водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Водные туннели</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
     <string name="shared_string_used">Используется</string>
     <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
@@ -4640,7 +4640,6 @@
     <string name="app_mode_mountain_bicycle">Горный велосипед</string>
     <string name="coordinates_widget_secondary_desc">Формат координат может быть изменён через меню: %1$s - %2$s - %3$s.</string>
     <string name="parking_widget_desc">Виджет показывает расстояние от центра экрана до места парковки.</string>
-    <string name="fps_widget_desc">Виджет показывает, как быстро отображаются и обновляются элементы карты.</string>
     <string name="battery_widget_desc">Виджет показывает уровень заряда батареи вашего устройства.</string>
     <string name="radius_rules_widget_desc">Инструмент «Радиус-линейка» помогает определить радиус вокруг выбранной точки на карте с помощью окружностей-расстояний.</string>
     <string name="max_speed_widget_desc">Виджет показывает ограничение скорости для текущей дороги.</string>

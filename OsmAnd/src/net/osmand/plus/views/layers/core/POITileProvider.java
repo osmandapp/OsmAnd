@@ -31,7 +31,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
@@ -117,7 +117,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				if (Algorithms.isEmpty(locale)) {
 					locale = app.getLanguage();
 				}
-				locale = OsmandPlugin.onGetMapObjectsLocale(amenity, locale);
+				locale = PluginsHelper.onGetMapObjectsLocale(amenity, locale);
 			}
 			return amenity.getName(locale, app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		}

@@ -4486,8 +4486,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazenie ikon pri nízkom priblížení</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Značky chýb</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony pri nízkom priblížení</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunely vodných ciest</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunely vodných ciest</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_all_name">Všetky</string>
     <string name="rendering_value_omit_name">Vynechať</string>
@@ -4539,7 +4539,7 @@
     <string name="routing_attr_carriage_restrictions_description">Zohľadniť obmedzenia vjazdu pre vozidlá ťahané koňmi</string>
     <string name="rendering_attr_showTramRoutes_name">Trasy električiek</string>
     <string name="rendering_attr_showTrainRoutes_name">Trasy vlakov</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Trasy ďiaľkových električiek</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy diaľkových električiek</string>
     <string name="rendering_attr_showBusRoutes_name">Trasy autobusov</string>
     <string name="map_markers_bar">Panel mapových značiek</string>
     <string name="shared_string_visible_widgets">Viditeľné nástroje</string>
@@ -4662,7 +4662,6 @@
     <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
-    <string name="fps_widget_desc">Zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
     <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
     <string name="route_maneuvers">Manévre trasy</string>
     <string name="shared_string_mode">Režim</string>

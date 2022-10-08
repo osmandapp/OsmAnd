@@ -29,6 +29,7 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
@@ -407,18 +408,18 @@ public class OsmAndAppCustomization {
 
 	public boolean changePluginStatus(String pluginId, int newState) {
 		if (newState == 0) {
-			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+			for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 				if (plugin.getId().equals(pluginId)) {
-					OsmandPlugin.enablePlugin(null, app, plugin, false);
+					PluginsHelper.enablePlugin(null, app, plugin, false);
 				}
 			}
 			return true;
 		}
 
 		if (newState == 1) {
-			for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
+			for (OsmandPlugin plugin : PluginsHelper.getAvailablePlugins()) {
 				if (plugin.getId().equals(pluginId)) {
-					OsmandPlugin.enablePlugin(null, app, plugin, true);
+					PluginsHelper.enablePlugin(null, app, plugin, true);
 				}
 			}
 			return true;

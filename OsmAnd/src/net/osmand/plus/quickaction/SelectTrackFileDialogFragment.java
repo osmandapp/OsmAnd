@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.utils.AndroidUtils;
@@ -35,6 +35,12 @@ import java.util.List;
 public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = SelectTrackFileDialogFragment.class.getSimpleName();
+
+	CallbackWithObject<String> onFileSelectListener;
+
+	void setListener(CallbackWithObject<String> onFileSelectListener) {
+		this.onFileSelectListener = onFileSelectListener;
+	}
 
 	@Nullable
 	@Override
@@ -60,26 +66,20 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 		File gpxRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxRootDir, null, false);
-		boolean showCurrentGpx = OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
+		boolean showCurrentGpx = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		if (showCurrentGpx) {
 			gpxInfoList.add(0, new GPXInfo(getString(R.string.current_track), 0, 0));
 		}
 		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(position -> {
 			Fragment target = getTargetFragment();
-			CallbackWithObject<Object> listener = target instanceof CallbackWithObject<?>
-					? ((CallbackWithObject<Object>) target)
+			CallbackWithObject<String> listener = target instanceof CallbackWithObject<?>
+					? ((CallbackWithObject<String>) target)
 					: null;
 			if (listener != null) {
-				boolean currentTrack = position == 0 && showCurrentGpx;
-				if (currentTrack) {
-					listener.processResult("");
-				} else {
-					GPXInfo selectedGpxInfo = gpxInfoList.get(position);
-					String fileName = selectedGpxInfo.getFileName();
-					String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
-					listener.processResult(gpxFilePath);
-				}
+				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, listener);
+			} else if (onFileSelectListener != null) {
+				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, onFileSelectListener);
 			}
 			dismiss();
 		});
@@ -89,14 +89,33 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		recyclerView.setAdapter(adapter);
 	}
 
+	private void processResult(File gpxRootDir, List<GPXInfo> gpxInfoList, boolean showCurrentGpx, int position, CallbackWithObject<String> listener) {
+		boolean currentTrack = position == 0 && showCurrentGpx;
+		if (currentTrack) {
+			listener.processResult("");
+		} else {
+			GPXInfo selectedGpxInfo = gpxInfoList.get(position);
+			String fileName = selectedGpxInfo.getFileName();
+			String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
+			listener.processResult(gpxFilePath);
+		}
+	}
+
 	private boolean isNightMode() {
 		return isNightMode(true);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment target) {
+		showInstance(fragmentManager, target, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment target,
+	                                @Nullable CallbackWithObject<String> onFileSelectListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectTrackFileDialogFragment fragment = new SelectTrackFileDialogFragment();
+			fragment.setListener(onFileSelectListener);
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

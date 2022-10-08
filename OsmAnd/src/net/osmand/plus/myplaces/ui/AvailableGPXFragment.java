@@ -66,7 +66,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
@@ -258,7 +258,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void updateCurrentTrack() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (currentGpxView == null || plugin == null) {
 			return;
 		}
@@ -355,7 +355,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		View v = inflater.inflate(R.layout.available_gpx, container, false);
 		listView = v.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
-		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
 			createCurrentTrackView();
 			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(v1 -> {
@@ -522,7 +522,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener));
-		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
+		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
@@ -1529,7 +1529,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.create()
 		);
 
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_export)

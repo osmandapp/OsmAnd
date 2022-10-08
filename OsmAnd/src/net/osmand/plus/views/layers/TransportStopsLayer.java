@@ -36,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
@@ -67,6 +68,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private TransportStopRoute stopRoute;
 
 	private final CommonPreference<Boolean> showTransportStops;
+	private final TransportLinesMenu transportLinesMenu;
 
 	private Path path;
 
@@ -81,7 +83,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	public TransportStopsLayer(@NonNull Context context) {
 		super(context);
-		OsmandSettings settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
+		transportLinesMenu = new TransportLinesMenu(app);
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
 	}
 
@@ -207,11 +211,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
 			if (this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated
 					|| tb.getZoom() < startZoomRoute || this.stopRouteDist != stopRouteDist
-					|| this.stopRouteType != stopRouteType || !showTransportStops.get()) {
+					|| this.stopRouteType != stopRouteType || !isShowTransportStops()) {
 				clearTransportRouteCollections();
 				clearTransportStopsTileProvider();
 			}
-			if (tb.getZoom() >= startZoomRoute && showTransportStops.get()) {
+			if (tb.getZoom() >= startZoomRoute && isShowTransportStops()) {
 				if (stopRoute != null) {
 					initTransportRouteCollections();
 				} else {
@@ -256,7 +260,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 		}
 
-		if (showTransportStops.get() && tb.getZoom() >= startZoom && objects == null) {
+		if (isShowTransportStops() && tb.getZoom() >= startZoom && objects == null) {
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}
@@ -377,6 +381,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		return null;
 	}
 
+	public boolean isShowTransportStops() {
+		return transportLinesMenu.isTransportLinesSupported() && showTransportStops.get();
+	}
+
 	/**OpenGL*/
 	private void initTransportRouteCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
@@ -421,7 +429,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
 		String transportRouteType = stopRoute.route.getType();
 		if (transportStops.size() > 0) {
-			int baseOrder = getBaseOrder() - 1;
+			int pointsOrder = getPointsOrder() - 1;
 			mapMarkersCollection = new MapMarkersCollection();
 			for (TransportStop ts : transportStops) {
 				StopsCollectionPoint collectionPoint =
@@ -430,7 +438,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				mapMarkerBuilder
 						.setPosition(collectionPoint.getPoint31())
 						.setIsHidden(false)
-						.setBaseOrder(baseOrder)
+						.setBaseOrder(pointsOrder)
 						.setPinIcon(collectionPoint.getImageBitmap(true))
 						.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
@@ -460,7 +468,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 		if (transportStopsTileProvider == null) {
-			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getBaseOrder(), getTextScale());
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getPointsOrder(), getTextScale());
 			transportStopsTileProvider.drawSymbols(mapRenderer);
 		}
 	}

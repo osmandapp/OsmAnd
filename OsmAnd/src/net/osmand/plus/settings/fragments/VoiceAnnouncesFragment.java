@@ -29,7 +29,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
-public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 

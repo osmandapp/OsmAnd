@@ -4465,7 +4465,6 @@
     <string name="coordinates_widget_desc">它显示当前地理位置的地理坐标。</string>
     <string name="street_name_widget_desc">街道名称微件使用直线位置箭头显示当前街道名称，或显示下一个街道名称以及必须完成的操作。</string>
     <string name="map_widget_true_bearing">真方位</string>
-    <string name="fps_widget_desc">显示地图和地图元素的显示和刷新速度。</string>
     <string name="radius_rules_widget_desc">半径尺工具有助于确定地图上选定点周围的半径，在地图上显示距离圆环。</string>
     <string name="compass_visible_if_map_rotated_desc">北朝上时隐藏</string>
     <string name="compass_visible_if_map_rotated">如果地图旋转，则可见</string>

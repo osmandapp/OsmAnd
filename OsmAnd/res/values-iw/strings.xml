@@ -4482,10 +4482,10 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">הצגת תגיות לתיקון</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">סמלים ברמות תקריב נמוכות</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">הצגת תגיות הערה</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">לא להסתיר תעלות דרכי מים</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">תגיות הערה</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">תצוגה סכמתית של סלים ברמות תקריב נמוכות</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">תעלות דרכי מים</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">תעלות דרכי מים</string>
     <string name="rendering_attr_seabedDetail_name">פרט קרקעית הים</string>
     <string name="track_file">קובץ מסלולים</string>
     <string name="rendering_value_category_name">קטגוריה</string>
@@ -4623,7 +4623,6 @@
     <string name="coordinates_widget_desc">הוא מציג את נקודות הציון הגאוגרפיות של המיקום הגאוגרפי הנוכחי.</string>
     <string name="parking_widget_desc">וידג׳ט שמציג את המרחק ממרכז המסך שלך למקום החנייה.</string>
     <string name="bearing_secondary_desc">אפשר לשנות את תבנית הנתונים שמוצגים דרך: %1$s – %2$s – %3$s.</string>
-    <string name="fps_widget_desc">מציג באיזו מהירות המפה ורכיביה מופיעים ומתרעננים.</string>
     <string name="max_speed_widget_desc">מציג את מגבלת המהירות בכביש הנוכחי.</string>
     <string name="time_to_go_desc">הזמן בדקות או שעות שנדרש להגעה ליעד שלך.</string>
     <string name="street_name_widget_desc">וידג׳ט שם הרחוב מציג את שם הרחוב הנוכחי עם חץ מיקום ישר או ליד שם הרחוב עם המעקף שיש להשלים.</string>

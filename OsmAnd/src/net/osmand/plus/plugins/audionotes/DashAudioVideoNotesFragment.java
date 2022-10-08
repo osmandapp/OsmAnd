@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -49,7 +49,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+		plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
@@ -62,7 +62,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+			plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 		}
 		setupNotes();
 	}

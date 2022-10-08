@@ -851,8 +851,8 @@
     <string name="rendering_attr_seabedDetail_description">Gwybodaeth destun ychwanegol ar surface_qualification gwely\'r môr, cyfuniad o fathau o arwyneb, categorïau a thacson chwyn a morwellt</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Dangos tagiau Fixme</string>
     <string name="rendering_value_all_name">Y cwbl</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Twnelau dyfrffyrdd</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Peidio â chuddio twnelau dyfrffyrdd</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Twnelau dyfrffyrdd</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Peidio â chuddio twnelau dyfrffyrdd</string>
     <string name="save_as_copy">Cadw fel copi</string>
     <string name="storage_migration_wrong_folder_warning">Ni chanfuwyd data OSM yn y ffolder honno. Rho gynnig arall arni.</string>
     <string name="app_profile_type">Math o broffil ap</string>
@@ -2528,7 +2528,6 @@
     <string name="routing_attr_hazmat_category_name">Categori Hazmat</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Dim cyfyngiadau)</string>
     <string name="circle_settings">Gosodiadau cylchoedd</string>
-    <string name="fps_widget_desc">Mae\'n dangos pa mor gyflym y mae mapiau ac elfennau mapiau yn ymddangos ac ail-lwytho.</string>
     <string name="get_altitude_data">Cael data uchder</string>
     <string name="edit_profiles_descr">Ni ellir dileu proffiliau OsmAnd, ond gellir eu hanalluogi (ar y sgrin flaenorol), neu eu trefnu ar y gwaelod.</string>
     <string name="change_default_settings">Newid gosodiad</string>

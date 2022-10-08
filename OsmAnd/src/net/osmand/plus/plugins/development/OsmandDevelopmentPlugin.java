@@ -21,6 +21,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
 import net.osmand.plus.plugins.development.widget.CameraTiltWidget;
 import net.osmand.plus.plugins.development.widget.FPSTextInfoWidget;
@@ -28,6 +29,8 @@ import net.osmand.plus.plugins.development.widget.TargetDistanceWidget;
 import net.osmand.plus.plugins.development.widget.ZoomLevelWidget;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.LocationSimulationAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
@@ -39,6 +42,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
@@ -167,17 +171,24 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
-		OsmEditingPlugin osmPlugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+	public void disable(@NonNull OsmandApplication app) {
+		OsmEditingPlugin osmPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
-		OpenPlaceReviewsPlugin oprPlugin = OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		OpenPlaceReviewsPlugin oprPlugin = PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 		if (oprPlugin != null && oprPlugin.OPR_USE_DEV_URL.get()) {
 			oprPlugin.OPR_USE_DEV_URL.set(false);
 			app.getOprAuthHelper().resetAuthorization();
 		}
 		super.disable(app);
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
+		quickActionTypes.add(LocationSimulationAction.TYPE);
+		return quickActionTypes;
 	}
 }

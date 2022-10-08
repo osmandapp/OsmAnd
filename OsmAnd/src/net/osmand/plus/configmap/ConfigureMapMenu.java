@@ -55,7 +55,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -117,6 +117,7 @@ public class ConfigureMapMenu {
 		void onClick();
 	}
 
+	@NonNull
 	public ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -130,7 +131,7 @@ public class ConfigureMapMenu {
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
-		OsmandPlugin.registerConfigureMapCategory(adapter, mapActivity, customRules);
+		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
@@ -189,14 +190,16 @@ public class ConfigureMapMenu {
 				.setListener(listener));
 
 		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
-		selected = transportLinesMenu.isShowAnyTransport();
-		adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
-				.setTitleId(R.string.rendering_category_transport, activity)
-				.setIcon(R.drawable.ic_action_transport_bus)
-				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setSelected(selected)
-				.setColor(selected ? selectedProfileColor : null)
-				.setListener(listener));
+		if (transportLinesMenu.isTransportLinesSupported()) {
+			selected = transportLinesMenu.isShowAnyTransport();
+			adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
+					.setTitleId(R.string.rendering_category_transport, activity)
+					.setIcon(R.drawable.ic_action_transport_bus)
+					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setSelected(selected)
+					.setColor(selected ? selectedProfileColor : null)
+					.setListener(listener));
+		}
 
 		selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
 		adapter.addItem(new ContextMenuItem(GPX_FILES_ID)
@@ -224,7 +227,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
 				.setListener(listener));
 
-		OsmandPlugin.registerLayerContextMenu(adapter, activity, customRules);
+		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -264,7 +267,7 @@ public class ConfigureMapMenu {
 			customRules.remove(property);
 		}
 		ResourceManager manager = app.getResourceManager();
-		if (OsmandPlugin.isDevelopment() &&
+		if (PluginsHelper.isDevelopment() &&
 				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}

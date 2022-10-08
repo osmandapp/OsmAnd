@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
@@ -94,7 +94,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 
 	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
 		FragmentActivity activity = fragment.getActivity();
-		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
@@ -126,7 +126,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			builder.setNeutralButton(getResources().getString(R.string.delete_change),
 					new DialogInterface.OnClickListener() {
 						public void onClick(@Nullable DialogInterface dialog, int id) {
-							OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+							OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 							assert point != null;
 							assert plugin != null;
 							if (point.getGroup() == OsmPoint.Group.BUG) {

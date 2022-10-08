@@ -303,11 +303,14 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
+					OsmandApplication app = getMyApplication();
 					Map<String, String> parameters = new HashMap<>();
-					parameters.put("aid", getMyApplication().getUserAndroidId());
+					if (app.isUserAndroidIdAllowed()) {
+						parameters.put("aid", app.getUserAndroidId());
+					}
 					parameters.put("email", email);
 
-					return AndroidNetworkUtils.sendRequest(getMyApplication(),
+					return AndroidNetworkUtils.sendRequest(app,
 							"https://osmand.net/subscription/register_email",
 							parameters, "Subscribing email...", true, true);
 

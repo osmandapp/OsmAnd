@@ -4260,7 +4260,6 @@
     <string name="shared_string_grade">Kvalitet</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
     <string name="routing_attr_avoid_4wd_only_description">Izbegavanje puteva koji su pogodni samo za vozila sa pogonom na sva četiri točka</string>
-    <string name="fps_widget_desc">Vidžet pokazuje koliko brzo se mape i elementi mape prikazuju i osvežavaju.</string>
     <string name="lanes_widgets_desc">Vidžet za trake prikazuje trenutni raspored traka puta i ističe trake za vožnju uz aktivnu navigaciju.</string>
     <string name="route_maneuvers">Manevri rute</string>
     <string name="map_widget_altitude">Nadmorska visina trenutne lokacije</string>
@@ -4287,7 +4286,7 @@
     <string name="shared_string_widget">Vidžet</string>
     <string name="calculating_altitude">Izračunavanje nadmorske visine</string>
     <string name="all_groups">Sve grupe</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj tunele za vodene puteve</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj tunele za vodene puteve</string>
     <string name="turn_arrows">Strelice skretanja</string>
     <string name="turn_arrows_descr">Izaberite da li su strelice za skretanje prikazane na liniji rute.</string>
     <string name="included_categories">Uključene kategorije</string>
@@ -4481,7 +4480,7 @@
     <string name="rendering_value_omit_name">Izostaviti</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Oznake za beleške</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za beleške</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneli plovnih puteva</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tuneli plovnih puteva</string>
     <string name="files_with_route_restrictions">Datoteke sa ograničenjima rute</string>
     <string name="waypoint_template">Šablon putne tačke</string>
     <string name="use_routing_fallback">Zamena za vanmrežno rutiranje</string>

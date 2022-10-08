@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -70,6 +70,6 @@ public class OprAuthHelper {
 	}
 
 	private OpenPlaceReviewsPlugin getPlugin() {
-		return OsmandPlugin.getPlugin(OpenPlaceReviewsPlugin.class);
+		return PluginsHelper.getPlugin(OpenPlaceReviewsPlugin.class);
 	}
 }

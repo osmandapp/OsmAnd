@@ -16,9 +16,7 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
@@ -27,8 +25,11 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.inapp.InAppPurchasesImpl.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.util.BillingManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -246,7 +247,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin == null || plugin.getInstallURL() == null) {
 			Toast.makeText(activity.getApplicationContext(),
 					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();

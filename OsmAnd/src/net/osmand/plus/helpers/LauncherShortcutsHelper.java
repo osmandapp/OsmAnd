@@ -20,7 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -202,7 +202,7 @@ public class LauncherShortcutsHelper {
 		public boolean shouldPublish(@NonNull OsmandApplication app) {
 			boolean missing = !isPublished(app);
 			if (this == START_RECORDING) {
-				return missing && OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
+				return missing && PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 			} else if (this == NAVIGATE_TO_HOME) {
 				boolean hasHome = app.getFavoritesHelper().getSpecialPoint(SpecialPointType.HOME) != null;
 				return missing && hasHome;
@@ -216,7 +216,7 @@ public class LauncherShortcutsHelper {
 		public boolean shouldRemove(@NonNull OsmandApplication app) {
 			if (!isPublished(app)) {
 				return false;
-			} else if (this == START_RECORDING && !OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+			} else if (this == START_RECORDING && !PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 				return true;
 			} else if (this == NAVIGATE_TO_HOME || this == NAVIGATE_TO_WORK) {
 				SpecialPointType pointType = this == NAVIGATE_TO_HOME ? SpecialPointType.HOME : SpecialPointType.WORK;

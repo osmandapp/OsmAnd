@@ -4489,13 +4489,13 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunneler til vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunneler til vandveje</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Alle</string>
@@ -4630,7 +4630,6 @@
     <string name="time_to_go_desc">Den tid i minutter eller timer, der er nødvendig for at nå din destination.</string>
     <string name="bearing_secondary_desc">Du kan ændre formatet for de viste data i: %1$s – %2$s – %3$s.</string>
     <string name="mapillary_widget_desc">Modul der giver hurtig adgang til Mapillary-appen for at tilføje billeder på gadeniveau.</string>
-    <string name="fps_widget_desc">Viser hvor hurtigt kort og kortelementer vises og opdateres.</string>
     <string name="av_notes_choose_action_widget_desc">Vælg handling.</string>
     <string name="radius_rules_widget_desc">Radiusmålerværktøjet hjælper med at bestemme radius omkring et valgt punkt på kortet ved visning af afstandscirkler på kortet.</string>
     <string name="current_time_widget_desc">Viser den aktuelle tid fra din enhed.</string>
@@ -4790,7 +4789,6 @@
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_none_rotated_opt">Fast (manuelt roteret)</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
-    <string name="tap_on_widget">Tryk på modul</string>
     <string name="go_to_marker_location">Gå til markørplacering</string>
     <string name="shared_string_shows">Viser</string>
     <string name="shared_string_switch_mode">Skift tilstand</string>
@@ -4836,4 +4834,8 @@
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten, eller du skal muligvis opdatere din eksisterende version, hvis du allerede har den.
 \nVil du starte Play Store for at hente den\?</string>
+    <string name="map_widget_target_distance">Afstand fra kamera til mål</string>
+    <string name="favorites_backup">Sikkerhedskopiering af favoritter</string>
+    <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/Web) uden ekstra omkostninger.</string>
+    <string name="shared_string_cross_buy">Krydskøb</string>
 </resources>

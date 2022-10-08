@@ -42,7 +42,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.render.TravelRendererHelper;
@@ -374,7 +374,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						float density = view.getDensity();
 						TextRasterizer.Style textStyle = MapTextLayer.getTextStyle(getContext(),
 								nightMode, textScale, density);
-						poiTileProvider = new POITileProvider(getContext(), data, getBaseOrder(), textVisible,
+						poiTileProvider = new POITileProvider(getContext(), data, getPointsOrder(), textVisible,
 								textStyle, textScale, density);
 						poiTileProvider.drawSymbols(mapRenderer);
 					}
@@ -637,7 +637,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (Algorithms.isEmpty(locale)) {
 				locale = app.getLanguage();
 			}
-			locale = OsmandPlugin.onGetMapObjectsLocale(amenity, locale);
+			locale = PluginsHelper.onGetMapObjectsLocale(amenity, locale);
 		}
 
 		return amenity.getName(locale, app.getSettings().MAP_TRANSLITERATE_NAMES.get());

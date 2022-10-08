@@ -40,6 +40,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -285,7 +286,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		if (PLUGIN_SETTINGS.equals(preference.getKey())) {
 			View noPluginsPart = holder.findViewById(R.id.no_plugins_part);
-			boolean hasPlugins = OsmandPlugin.getEnabledSettingsScreenPlugins().size() > 0;
+			boolean hasPlugins = PluginsHelper.getEnabledSettingsScreenPlugins().size() > 0;
 			AndroidUiHelper.updateVisibility(noPluginsPart, !hasPlugins);
 
 			View openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
@@ -371,7 +372,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (mode.isCustomProfile() && !getBackupFileForCustomMode(app, mode.getStringKey()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
-			OsmandDevelopmentPlugin plugin = OsmandPlugin.getActivePlugin(OsmandDevelopmentPlugin.class);
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
 			if (plugin != null && mode.getParent() != null) {
 				String baseProfile = "(" + mode.getParent().toHumanString() + ")";
 				String title = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.reset_to_default), baseProfile);
@@ -399,7 +400,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		List<OsmandPlugin> plugins = OsmandPlugin.getEnabledSettingsScreenPlugins();
+		List<OsmandPlugin> plugins = PluginsHelper.getEnabledSettingsScreenPlugins();
 		if (plugins.size() != 0) {
 			for (OsmandPlugin plugin : plugins) {
 				Preference preference = new Preference(ctx);

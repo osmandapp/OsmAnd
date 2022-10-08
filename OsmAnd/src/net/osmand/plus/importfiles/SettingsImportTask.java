@@ -16,7 +16,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -155,7 +155,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					app.getPoiFilters().loadSelectedPoiFilters();
 					AppInitializer.loadRoutingFiles(app, null);
 					FragmentActivity activity = activityRef.get();
-					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+					AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 					if (plugin != null) {
 						plugin.indexingFiles(true, true);
 					}
@@ -208,7 +208,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
-				AudioVideoNotesPlugin pluginAudioVideo = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin pluginAudioVideo = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 				if (pluginAudioVideo != null) {
 					pluginAudioVideo.indexingFiles(true, true);
 				}

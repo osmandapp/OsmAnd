@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -32,7 +32,7 @@ public class TakeVideoNoteAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		LatLon latLon = getMapLocation(mapActivity);
-		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null)
 			plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false);
 	}

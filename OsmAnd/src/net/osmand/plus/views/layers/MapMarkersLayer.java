@@ -299,7 +299,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean shouldDraw = shouldDrawPoints();
 				if (shouldDraw || mapActivityInvalidated) {
 					resetCachedRenderer();
-					int baseOrder = getBaseOrder() - 10;
+					int baseOrder = getPointsOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
 					route.renderer = renderer;
@@ -794,7 +794,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean isMoveable = isInMotion(marker);
 
 				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-						.setBaseOrder(getBaseOrder())
+						.setBaseOrder(getPointsOrder())
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
 						.setPosition(pointI)

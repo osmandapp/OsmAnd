@@ -4476,8 +4476,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małym zbliżeniu</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunele dróg wodnych</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunele dróg wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
     <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe o powierzchni dna morskiego, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
@@ -4597,7 +4597,6 @@
     <string name="elevation_profile_widget_desc">Widget pokazuje wysokość i profil nachylenia bieżącej trasy.</string>
     <string name="av_notes_choose_action_widget_desc">Wybierz akcję.</string>
     <string name="shared_string_widget">Widżet</string>
-    <string name="fps_widget_desc">Pokazuje, jak szybko mapa i elementy mapy są wyświetlane i odświeżane.</string>
     <string name="current_time_widget_desc">Pokazuje aktualny czas z urządzenia.</string>
     <string name="battery_widget_desc">Pokazuje poziom naładowania baterii.</string>
     <string name="time_to_go_desc">Czas w minutach lub godzinach potrzebny do osiągnięcia celu podróży.</string>
