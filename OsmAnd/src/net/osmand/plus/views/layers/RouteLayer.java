@@ -68,8 +68,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	// keep array lists created
-	private final List<Location> actionPoints = new ArrayList<>();
 	private int currentAnimatedRoute;
 	private Location lastRouteProjection;
 
@@ -157,7 +155,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (hasMapRenderer() && useMapCenter() && !helper.isPublicTransportMode()
+		if (hasMapRenderer() && !helper.isPublicTransportMode()
 				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
 			drawLocations(null, view.getRotatedTileBox());
 		}
@@ -214,9 +212,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private boolean useMapCenter() {
 		OsmandSettings settings = getApplication().getSettings();
 		MapViewTrackingUtilities mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
-		return settings.ANIMATE_MY_LOCATION.get()
-				&& !mapViewTrackingUtilities.isMovingToMyLocation()
-				&& mapViewTrackingUtilities.isMapLinkedToLocation();
+		return settings.ANIMATE_MY_LOCATION.get() && mapViewTrackingUtilities.isMapLinkedToLocation();
 	}
 
 	private void drawXAxisPoints(@Nullable TrackChartPoints chartPoints, @NonNull Canvas canvas,
@@ -440,15 +436,27 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (directTo) {
 				lastProjection = null;
 				startLocationIndex = 0;
-			} else if (useMapCenter() && route.getCurrentStraightAngleRoute() > 0) {
+			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
+				OsmandApplication app = getApplication();
 				if (mapRenderer != null) {
-					PointI target31 = mapRenderer.getTarget();
-					currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
-					currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
-				} else {
+					if (useMapCenter()) {
+						PointI target31 = mapRenderer.getTarget();
+						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
+						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
+					} else {
+						LatLon lastMarkerLocation = app.getOsmandMap().getMapLayers().getLocationLayer().getLastMarkerLocation();
+						if (lastMarkerLocation != null) {
+							currentLocation.setLatitude(lastMarkerLocation.getLatitude());
+							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
+						} else {
+							currentLocation.setLatitude(tb.getLatitude());
+							currentLocation.setLongitude(tb.getLongitude());
+						}
+					}
+				} else if (useMapCenter()) {
 					currentLocation.setLatitude(tb.getLatitude());
 					currentLocation.setLongitude(tb.getLongitude());
 				}
@@ -461,6 +469,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
 						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
 				startLocationIndex = currentAnimatedRoute;
+				if (app.getMapViewTrackingUtilities().isMovingToMyLocation() && lastRouteProjection != null) {
+					Location nextLocation = locations.get(currentAnimatedRoute);
+					if (nextLocation.distanceTo(lastProjection) > nextLocation.distanceTo(lastRouteProjection)) {
+						lastProjection = lastRouteProjection;
+					}
+				}
 			} else if (straight) {
 				lastProjection = helper.getLastFixedLocation();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
@@ -575,8 +589,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 		double actionDist = 0;
 		Location previousAction = null; 
-		List<Location> actionPoints = this.actionPoints;
-		actionPoints.clear();
+		List<Location> actionPoints = new ArrayList<>();
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);

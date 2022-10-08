@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
+import static net.osmand.plus.views.AnimateMapMarkersThread.ROTATE_ANIMATION_TIME;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -35,6 +36,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -44,6 +48,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.AnimateMapMarkersThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -54,7 +59,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocationListener,
+		OsmAndCompassListener, IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
@@ -82,6 +88,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private final OsmandSettings settings;
 	private boolean nm;
 	private boolean locationOutdated;
+	private Location prevLocation;
 
 	private static final int MARKER_ID_MY_LOCATION = 1;
 	private static final int MARKER_ID_NAVIGATION = 2;
@@ -94,9 +101,10 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	private boolean markersInvalidated = true;
 	private boolean showHeadingCached = false;
-	private Location lastKnownLocationCached;
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = MarkerState.Stay;
+	private LatLon lastMarkerLocation;
+	private boolean movingToMyLocationCached;
 
 	private enum MarkerState {
 		Stay,
@@ -184,13 +192,19 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-
-		if (hasMapRenderer()) {
+		boolean hasMapRenderer = hasMapRenderer();
+		if (hasMapRenderer) {
 			initCoreRenderer();
 		} else {
 			initLegacyRenderer();
 		}
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
+		locationProvider.addLocationListener(this);
+		locationProvider.addCompassListener(this);
+	}
+
+	public LatLon getLastMarkerLocation() {
+		return lastMarkerLocation;
 	}
 
 	@Override
@@ -201,19 +215,29 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (useMapCenter()) {
+		boolean useMapCenter = useMapCenter();
+		if (useMapCenter) {
+			OsmandApplication app = getApplication();
 			Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-			Boolean snapToRoad = getApplication().getSettings().SNAP_TO_ROAD.get();
-			Location lastRouteProjection = snapToRoad
-					? getApplication().getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection()
+			Boolean snapToRoad = app.getSettings().SNAP_TO_ROAD.get();
+			boolean followingMode = app.getRoutingHelper().isFollowingMode();
+			Location lastRouteProjection = followingMode && snapToRoad
+					? app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection()
 					: null;
 			PointI target31 = mapRenderer.getTarget();
 			Float heading = locationProvider.getHeading();
-			updateMarkerData(lastRouteProjection != null
-					? lastRouteProjection : lastKnownLocation, target31, heading);
-			lastKnownLocationCached = lastKnownLocation;
+			boolean movingToMyLocation = mapViewTrackingUtilities.isMovingToMyLocation();
+			boolean useLocation = movingToMyLocation || !movingToMyLocationCached;
+			updateMarkerData(lastRouteProjection != null ? lastRouteProjection : lastKnownLocation,
+					useLocation ? null : target31, heading, 0);
 			lastHeadingCached = heading;
+			if (movingToMyLocation) {
+				movingToMyLocationCached = true;
+			}
+		} else {
+			movingToMyLocationCached = false;
 		}
+		lastMarkerLocation = getCurrentMarkerLocation();
 	}
 
 	private boolean setMarkerState(MarkerState markerState, boolean showHeading, boolean forceUpdate) {
@@ -284,7 +308,8 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		}
 	}
 
-	private void updateMarkerData(@Nullable Location location, @Nullable PointI target31, @Nullable Float heading) {
+	private void updateMarkerData(@Nullable Location location, @Nullable PointI target31, @Nullable Float heading,
+	                              long animationDuration) {
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
@@ -299,21 +324,68 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 				return;
 		}
 		if (locMarker != null && locMarker.marker != null) {
-			if (location != null) {  // location
-				if (target31 == null) {
-					target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
-							MapUtils.get31TileNumberY(location.getLatitude()));
-				}
-				locMarker.marker.setPosition(target31);
-				if (locMarker.onSurfaceIconKey != null) {  // bearing
-					locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceIconKey, location.getBearing() - 90.0f);
-				}
-				locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
+			if (location != null && target31 == null) {
+				target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
+						MapUtils.get31TileNumberY(location.getLatitude()));
 			}
-			if (locMarker.onSurfaceHeadingIconKey != null && heading != null) {  // heading
-				locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceHeadingIconKey, heading);
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null && view != null) {
+				AnimateMapMarkersThread animationThread = view.getAnimatedMapMarkersThread();
+				if (location != null) {
+					animationThread.cancelAnimations(locMarker.marker);
+				}
+				if (animationDuration > 0) {
+					if (location != null) {
+						if (locMarker.onSurfaceIconKey != null) {  // location & bearing
+							animationThread.animatePositionAndDirectionTo(locMarker.marker, target31, animationDuration,
+									locMarker.onSurfaceIconKey, location.getBearing() - 90.0f,
+									ROTATE_ANIMATION_TIME);
+						} else { // location
+							animationThread.animatePositionTo(locMarker.marker, target31, animationDuration);
+						}
+					}
+				} else {
+					if (location != null) {  // location
+						locMarker.marker.setPosition(target31);
+						if (locMarker.onSurfaceIconKey != null) {  // bearing
+							locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceIconKey, location.getBearing() - 90.0f);
+						}
+					}
+				}
+				if (location != null) {
+					locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
+				}
+				if (locMarker.onSurfaceHeadingIconKey != null && heading != null) {  // heading
+					locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceHeadingIconKey, heading);
+				}
 			}
 		}
+	}
+
+	@Nullable
+	private PointI getCurrentMarkerPosition() {
+		CoreMapMarker locMarker;
+		boolean showHeading = showHeadingCached;
+		switch (currentMarkerState) {
+			case Move:
+				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
+				break;
+			case Stay:
+				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
+				break;
+			case None:
+			default:
+				return null;
+		}
+		return locMarker != null && locMarker.marker != null ? locMarker.marker.getPosition() : null;
+	}
+
+	@Nullable
+	private LatLon getCurrentMarkerLocation() {
+		PointI pos31 = getCurrentMarkerPosition();
+		return pos31 != null
+				? new LatLon(MapUtils.get31LatitudeY(pos31.getY()), MapUtils.get31LongitudeX(pos31.getX()))
+				: null;
 	}
 
 	private boolean shouldShowHeading() {
@@ -398,19 +470,9 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
-		if (view == null || tileBox.getZoom() < MIN_ZOOM || locationProvider.getLastStaleKnownLocation() == null) {
-			clearMapMarkersCollections();
-			return;
-		}
-
-		boolean nightMode = settings != null && settings.isNightMode();
-		updateParams(view.getSettings().getApplicationMode(), nightMode, locationProvider.getLastKnownLocation() == null);
-	}
-
-	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		if (view == null || tileBox.getZoom() < MIN_ZOOM || lastKnownLocation == null) {
+			clearMapMarkersCollections();
 			return;
 		}
 		MapRendererView mapRenderer = getMapRenderer();
@@ -431,15 +493,21 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 					stateUpdated = true;
 				}
 			}
-			Float heading = locationProvider.getHeading();
-			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(lastKnownLocationCached, lastKnownLocation)
-					|| !Algorithms.objectEquals(lastHeadingCached, heading);
-			if (markersRecreated || stateUpdated || dataChanged) {
-				updateMarkerData(lastKnownLocation, useMapCenter() ? mapRenderer.getTarget() :null, heading);
-				lastKnownLocationCached = lastKnownLocation;
-				lastHeadingCached = heading;
+			if (markersRecreated || stateUpdated) {
+				updateMarkerData(lastKnownLocation, null, locationProvider.getHeading(), 0);
 			}
-		} else {
+		}
+		boolean nightMode = settings != null && settings.isNightMode();
+		updateParams(view.getSettings().getApplicationMode(), nightMode, locationProvider.getLastKnownLocation() == null);
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
+		if (view == null || tileBox.getZoom() < MIN_ZOOM || lastKnownLocation == null) {
+			return;
+		}
+		if (!hasMapRenderer()) {
 			drawMarkers(canvas, tileBox, lastKnownLocation);
 		}
 	}
@@ -447,13 +515,46 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
+		locationProvider.removeLocationListener(this);
+		locationProvider.removeCompassListener(this);
 		clearMapMarkersCollections();
 	}
 
+	@Override
+	public void updateLocation(Location location) {
+		if (view == null || view.getZoom() < MIN_ZOOM || location == null) {
+			return;
+		}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && !useMapCenter()) {
+			Float heading = locationProvider.getHeading();
+			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(prevLocation, location);
+			if (dataChanged) {
+				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
+				updateMarkerData(location, null, heading,
+						settings.ANIMATE_MY_LOCATION.get() ? movingTime : 0);
+
+				prevLocation = location;
+				lastHeadingCached = heading;
+			}
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && showHeadingCached) {
+			Float heading = locationProvider.getHeading();
+			boolean dataChanged = !Algorithms.objectEquals(lastHeadingCached, heading);
+			if (dataChanged) {
+				updateMarkerData(null, null, heading, 0);
+				lastHeadingCached = heading;
+			}
+		}
+	}
+
 	private boolean useMapCenter() {
-		return this.settings.ANIMATE_MY_LOCATION.get()
-				&& !mapViewTrackingUtilities.isMovingToMyLocation()
-				&& mapViewTrackingUtilities.isMapLinkedToLocation();
+		return settings.ANIMATE_MY_LOCATION.get() && mapViewTrackingUtilities.isMapLinkedToLocation();
 	}
 
 	private void updateParams(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
