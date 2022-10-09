@@ -177,17 +177,13 @@ public class OsmAndLocationSimulation {
 						}
 						float speed = meters / intervalTime * coeff;
 						if (intervalTime != 0) {
-							if (!current.hasSpeed()) {
-								current.setSpeed(speed);
-							}
+							current.setSpeed(speed);
 						}
 						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (realistic && speed < 10)) {
 							current.setAccuracy(5);
 						}
 						if (prev != null && prev.distanceTo(current) > 3 || (realistic && speed >= 3)) {
-							if (current.hasBearing()) {
-								current.setBearing(prev.bearingTo(current));
-							}
+							current.setBearing(prev.bearingTo(current));
 						}
 					}
 					current.setTime(System.currentTimeMillis());
