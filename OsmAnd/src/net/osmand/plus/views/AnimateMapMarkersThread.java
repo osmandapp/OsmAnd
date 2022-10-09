@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AnimatedValue;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkersAnimator;
 import net.osmand.core.jni.PointI;
@@ -13,7 +14,6 @@ import net.osmand.core.jni.SWIGTYPE_p_void;
 import net.osmand.core.jni.TimingFunction;
 import net.osmand.core.jni.Utilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -94,6 +94,13 @@ public class AnimateMapMarkersThread {
 		MapMarkersAnimator animator = getAnimator();
 		if (animator != null) {
 			animator.cancelAnimations(mapMarker);
+		}
+	}
+
+	public void cancelCurrentAnimation(@NonNull MapMarker mapMarker, @NonNull AnimatedValue animatedValue) {
+		MapMarkersAnimator animator = getAnimator();
+		if (animator != null) {
+			animator.cancelCurrentAnimation(mapMarker, animatedValue);
 		}
 	}
 
