@@ -152,6 +152,22 @@ public class OsmAndLocationSimulation {
 					current.setProvider(SIMULATED_PROVIDER);
 				}
 				int stopDelayCount = 0;
+				boolean bearingSimulation = true;
+				boolean accuracySimulation = true;
+				boolean speedSimulation = true;
+				if (useLocationTime) {
+					for (SimulatedLocation l : directions) {
+						if (l.hasBearing()) {
+							bearingSimulation = false;
+						}
+						if (l.hasAccuracy()) {
+							accuracySimulation = false;
+						}
+						if (l.hasSpeed()) {
+							speedSimulation = false;
+						}
+					}
+				}
 
 				while (!directions.isEmpty() && routeAnimation != null) {
 					long timeout = (long) (time * 1000);
@@ -176,13 +192,15 @@ public class OsmAndLocationSimulation {
 							meters = (float) result.get(1);
 						}
 						float speed = meters / intervalTime * coeff;
-						if (intervalTime != 0) {
+						if (intervalTime != 0 && speedSimulation) {
 							current.setSpeed(speed);
 						}
-						if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) || (realistic && speed < 10)) {
+						if ((!current.hasAccuracy() || Double.isNaN(current.getAccuracy()) ||
+								(realistic && speed < 10)) && accuracySimulation) {
 							current.setAccuracy(5);
 						}
-						if (prev != null && prev.distanceTo(current) > 3 || (realistic && speed >= 3)) {
+						if (prev != null && bearingSimulation && prev.distanceTo(current) > 3
+								&& (!realistic || speed >= 1)) {
 							current.setBearing(prev.bearingTo(current));
 						}
 					}
@@ -343,6 +361,9 @@ public class OsmAndLocationSimulation {
 					if (!Algorithms.isEmpty(sp)) {
 						l.setSpeed((float) Double.parseDouble(sp));
 					}
+				}
+				if (!Double.isNaN(location.hdop)) {
+					l.setAccuracy((float) location.hdop);
 				}
 				String br = location.getExtensionsToRead().get("bearing");
 				if (!Algorithms.isEmpty(br)) {
