@@ -410,7 +410,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingZoom = false;
 				}
-				if (!stopped && finishAnimationCallback != null) {
+				if (finishAnimationCallback != null) {
 					finishAnimationCallback.run();
 				}
 				if (!stopped) {

@@ -70,6 +70,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final TransportRoutingHelper transportHelper;
 	private int currentAnimatedRoute;
 	private Location lastRouteProjection;
+	private Location lastFixedLocation;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -212,7 +213,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private boolean useMapCenter() {
 		OsmandSettings settings = getApplication().getSettings();
 		MapViewTrackingUtilities mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
-		return settings.ANIMATE_MY_LOCATION.get() && mapViewTrackingUtilities.isMapLinkedToLocation();
+		return settings.ANIMATE_MY_LOCATION.get()
+				&& !mapViewTrackingUtilities.isMovingToMyLocation()
+				&& mapViewTrackingUtilities.isMapLinkedToLocation();
 	}
 
 	private void drawXAxisPoints(@Nullable TrackChartPoints chartPoints, @NonNull Canvas canvas,
@@ -438,11 +441,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				startLocationIndex = 0;
 			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
+				boolean lastFixedLocationChanged = !MapUtils.areLatLonEqual(this.lastFixedLocation, lastFixedLocation);
+				this.lastFixedLocation = lastFixedLocation;
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
 				OsmandApplication app = getApplication();
+				boolean useMapCenter = useMapCenter();
 				if (mapRenderer != null) {
-					if (useMapCenter()) {
+					if (useMapCenter) {
 						PointI target31 = mapRenderer.getTarget();
 						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
 						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
@@ -451,29 +457,23 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (lastMarkerLocation != null) {
 							currentLocation.setLatitude(lastMarkerLocation.getLatitude());
 							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
-						} else {
-							currentLocation.setLatitude(tb.getLatitude());
-							currentLocation.setLongitude(tb.getLongitude());
 						}
 					}
-				} else if (useMapCenter()) {
+				} else if (useMapCenter) {
 					currentLocation.setLatitude(tb.getLatitude());
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
 				float posTolerance = RoutingHelper.getPosTolerance(currentLocation.hasAccuracy()
 						? currentLocation.getAccuracy() : 0);
-				currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
-						locations, currentAnimatedRoute, false);
+				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
+						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
 				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
 						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
 				startLocationIndex = currentAnimatedRoute;
-				if (app.getMapViewTrackingUtilities().isMovingToMyLocation() && lastRouteProjection != null) {
-					Location nextLocation = locations.get(currentAnimatedRoute);
-					if (nextLocation.distanceTo(lastProjection) > nextLocation.distanceTo(lastRouteProjection)) {
-						lastProjection = lastRouteProjection;
-					}
+				if (lastFixedLocationChanged) {
+					this.currentAnimatedRoute = currentAnimatedRoute;
 				}
 			} else if (straight) {
 				lastProjection = helper.getLastFixedLocation();

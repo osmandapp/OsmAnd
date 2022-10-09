@@ -227,7 +227,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			PointI target31 = mapRenderer.getTarget();
 			Float heading = locationProvider.getHeading();
 			boolean movingToMyLocation = mapViewTrackingUtilities.isMovingToMyLocation();
-			boolean useLocation = movingToMyLocation || !movingToMyLocationCached;
+			boolean useLocation = false;//movingToMyLocation || !movingToMyLocationCached;
 			updateMarkerData(lastRouteProjection != null ? lastRouteProjection : lastKnownLocation,
 					useLocation ? null : target31, heading, 0);
 			lastHeadingCached = heading;
