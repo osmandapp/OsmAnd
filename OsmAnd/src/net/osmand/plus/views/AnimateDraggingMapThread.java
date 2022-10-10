@@ -244,7 +244,8 @@ public class AnimateDraggingMapThread {
 				animator.cancelAnimation(azimuthAnimation);
 			}
 
-			boolean animateRotation = Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation)) > 1;
+			float rotationDiff = Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation));
+			boolean animateRotation = rotationDiff > 0.1;
 			if (animateRotation)
 			{
 				animator.animateAzimuthTo(-rotation, ROTATION_MOVE_ANIMATION_TIME / 1000f, TimingFunction.Linear,
@@ -299,7 +300,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingZoom = false;
 				}
-				if (!stopped && finishAnimationCallback != null) {
+				if (finishAnimationCallback != null) {
 					finishAnimationCallback.run();
 				}
 			} else {
@@ -688,10 +689,14 @@ public class AnimateDraggingMapThread {
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
 			}
 
-			animator.animateZoomTo(zoomEnd + (float) zoomPart,
-					duration,
-					TimingFunction.Linear,
-					userInteractionAnimationKey);
+			if (duration > 0) {
+				animator.animateZoomTo(zoomEnd + (float) zoomPart,
+						duration,
+						TimingFunction.Linear,
+						userInteractionAnimationKey);
+			} else {
+				tileView.setFractionalZoom(zoomEnd, zoomPart, notifyListener);
+			}
 		}
 
 		double finalLat = targetLat;

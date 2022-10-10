@@ -292,7 +292,8 @@ public class DownloadOsmandIndexesHelper {
 					if (next == XmlPullParser.START_TAG) {
 						String attrValue = parser.getAttributeValue(null, "type");
 						DownloadActivityType tp = DownloadActivityType.getIndexType(attrValue);
-						if (tp != null) {
+						// ignore old DEPTH_CONTOUR_FILE
+						if (tp != null && tp != DownloadActivityType.DEPTH_CONTOUR_FILE) {
 							IndexItem it = tp.parseIndexItem(ctx, parser);
 							if (it != null) {
 								result.add(it);

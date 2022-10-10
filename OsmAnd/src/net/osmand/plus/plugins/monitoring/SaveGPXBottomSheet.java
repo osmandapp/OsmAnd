@@ -186,14 +186,18 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private boolean processFileName() {
+		File dest = null;
 		if (Algorithms.isBlank(newGpxName)) {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return false;
 		}
 		if (!initialGpxName.equalsIgnoreCase(newGpxName)) {
-			savedGpxFile = FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+			dest = FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+			if (dest != null) {
+				savedGpxFile = dest;
+			}
 		}
-		return savedGpxFile != null;
+		return dest != null;
 	}
 
 	@Override
