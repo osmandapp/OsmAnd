@@ -300,7 +300,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingZoom = false;
 				}
-				if (finishAnimationCallback != null) {
+				if (!stopped && finishAnimationCallback != null) {
 					finishAnimationCallback.run();
 				}
 			} else {
@@ -330,7 +330,7 @@ public class AnimateDraggingMapThread {
 		stopAnimatingSync();
 
 		if (startAnimationCallback != null) {
-			app.runInUIThread(startAnimationCallback);
+			startAnimationCallback.run();
 		}
 
 		RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -411,7 +411,7 @@ public class AnimateDraggingMapThread {
 				if (animateZoom) {
 					animatingZoom = false;
 				}
-				if (finishAnimationCallback != null) {
+				if (!stopped && finishAnimationCallback != null) {
 					finishAnimationCallback.run();
 				}
 				if (!stopped) {

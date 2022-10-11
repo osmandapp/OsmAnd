@@ -60,9 +60,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private TrackDetailsMenu detailsMenu;
 	private StateChangedListener<Boolean> enable3DViewListener;
 
+	private boolean isMapLinkedToLocation = true;
+	private boolean movingToMyLocation;
+
 	private long lastTimeAutoZooming;
 	private long lastTimeManualZooming;
-	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
 	private boolean showViewAngle;
@@ -71,7 +73,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private Location myLocation;
 	private Float heading;
 	private boolean drivingRegionUpdated;
-	private boolean movingToMyLocation;
 	private long compassRequest;
 
 	public MapViewTrackingUtilities(OsmandApplication app) {
@@ -181,10 +182,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		this.detailsMenu = detailsMenu;
 	}
 
-	public boolean isMovingToMyLocation() {
-		return movingToMyLocation;
-	}
-
 	public void detectDrivingRegion(@NonNull LatLon latLon) {
 		detectCurrentRegion(latLon, detectedRegion -> {
 			if (detectedRegion != null) {
@@ -269,10 +266,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 							() -> movingToMyLocation = false);
 				} else {
 					if (mapView.hasMapRenderer()) {
+						movingTime = movingToMyLocation
+								? (long) Math.min(movingTime * 0.7, MOVE_ANIMATION_TIME) : MOVE_ANIMATION_TIME;
+						if (mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+							movingTime = 0;
+						}
 						mapView.getAnimatedDraggingThread().startMoving(
 								location.getLatitude(), location.getLongitude(), zoom,
-								pendingRotation, rotation, mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()
-										? 0 : MOVE_ANIMATION_TIME, false,
+								pendingRotation, rotation, movingTime, false,
 								() -> movingToMyLocation = false);
 					} else {
 						if (zoom != null && zoom.first != null && zoom.second != null) {
@@ -434,9 +435,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
 			Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
 			if (!isMapLinkedToLocation()) {
-				setMapLinkedToLocation(true);
 				if (location != null) {
 					animateBackToLocation(location, zoom, forceZoom);
+				} else {
+					setMapLinkedToLocation(true);
 				}
 				mapView.refreshMap();
 			}
@@ -455,15 +457,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
 		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom	: mapView.getZoom();
-		movingToMyLocation = true;
 		Runnable startAnimationCallback = () -> {
+			movingToMyLocation = true;
 			if (!isMapLinkedToLocation) {
 				setMapLinkedToLocation(true);
 			}
 		};
-		thread.startMoving(location.getLatitude(), location.getLongitude(),
-				fZoom, false, true, startAnimationCallback,
-				() -> movingToMyLocation = false);
+		Runnable finishAnimationCallback = () -> movingToMyLocation = false;
+		thread.startMoving(location.getLatitude(), location.getLongitude(), fZoom, false,
+				true, startAnimationCallback, finishAnimationCallback);
 	}
 
 	private void backToLocationWithDelay(int delay) {
@@ -492,6 +494,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		if (!isMapLinkedToLocation) {
+			movingToMyLocation = false;
+		}
 		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
@@ -501,6 +506,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		} else {
 			updateSettings();
 		}
+	}
+
+	public boolean isMovingToMyLocation() {
+		return movingToMyLocation;
 	}
 
 	@Override
