@@ -62,7 +62,8 @@ public enum WidgetType {
 	CURRENT_SPEED("speed", R.string.map_widget_current_speed, R.string.current_speed_widget_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, R.string.docs_widget_current_speed, null, RIGHT),
 	AVERAGE_SPEED("average_speed", R.string.map_widget_average_speed, R.string.average_speed_widget_desc, R.drawable.widget_average_speed_day, R.drawable.widget_average_speed_night, 0, null, RIGHT),
 	MAX_SPEED("max_speed", R.string.map_widget_max_speed, R.string.max_speed_widget_desc, R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night, R.string.docs_widget_max_speed, null, RIGHT),
-	ALTITUDE("altitude", R.string.map_widget_altitude, R.string.altitude_widget_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, R.string.docs_widget_altitude, null, RIGHT),
+	ALTITUDE_MY_LOCATION("altitude", R.string.map_widget_altitude_current_location, R.string.altitude_widget_desc, R.drawable.widget_altitude_location_day, R.drawable.widget_altitude_location_night, R.string.docs_widget_altitude, WidgetGroup.ALTITUDE, RIGHT),
+	ALTITUDE_MAP_CENTER("altitude_map_center", R.string.map_widget_altitude_map_center, R.string.map_widget_altitude_map_center_desc, R.drawable.widget_altitude_map_center_day, R.drawable.widget_altitude_map_center_night, 0, WidgetGroup.ALTITUDE, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
 
 	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_trip_recording_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),

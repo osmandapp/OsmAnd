@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
@@ -410,7 +411,8 @@ public class MapWidgetRegistry {
 		infos.add(createWidgetInfo(factory, CURRENT_SPEED, appMode));
 		infos.add(createWidgetInfo(factory, AVERAGE_SPEED, appMode));
 		infos.add(createWidgetInfo(factory, MAX_SPEED, appMode));
-		infos.add(createWidgetInfo(factory, ALTITUDE, appMode));
+		infos.add(createWidgetInfo(factory, ALTITUDE_MY_LOCATION, appMode));
+		infos.add(createWidgetInfo(factory, ALTITUDE_MAP_CENTER, appMode));
 		infos.add(createWidgetInfo(factory, GPS_INFO, appMode));
 		infos.add(createWidgetInfo(factory, CURRENT_TIME, appMode));
 		infos.add(createWidgetInfo(factory, BATTERY, appMode));

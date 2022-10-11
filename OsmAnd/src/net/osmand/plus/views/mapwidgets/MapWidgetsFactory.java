@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -93,8 +96,10 @@ public class MapWidgetsFactory {
 				return new AverageSpeedWidget(mapActivity, customId);
 			case MAX_SPEED:
 				return new MaxSpeedWidget(mapActivity);
-			case ALTITUDE:
-				return new AltitudeWidget(mapActivity);
+			case ALTITUDE_MY_LOCATION:
+				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION);
+			case ALTITUDE_MAP_CENTER:
+				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER);
 			case GPS_INFO:
 				return new GpsInfoWidget(mapActivity);
 			case CURRENT_TIME:
