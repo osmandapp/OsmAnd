@@ -15,6 +15,7 @@ import com.android.billingclient.api.BillingClient.FeatureType;
 import com.android.billingclient.api.BillingClient.SkuType;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingFlowParams.SubscriptionUpdateParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
@@ -136,14 +137,14 @@ public class BillingManager implements PurchasesUpdatedListener {
 	/**
 	 * Start a purchase flow
 	 */
-	public void initiatePurchaseFlow(final Activity activity, final SkuDetails skuDetails) {
+	public void initiatePurchaseFlow(Activity activity, SkuDetails skuDetails) {
 		initiatePurchaseFlow(activity, skuDetails, null, null);
 	}
 
 	/**
 	 * Start a purchase or subscription replace flow
 	 */
-	public void initiatePurchaseFlow(final Activity activity, final SkuDetails skuDetails, final String oldSku, final String purchaseToken) {
+	public void initiatePurchaseFlow(Activity activity, SkuDetails skuDetails, String oldSku, String purchaseToken) {
 		Runnable purchaseFlowRequest = new Runnable() {
 			@Override
 			public void run() {
@@ -157,7 +158,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 					paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
 				}
 				if (oldSku != null && purchaseToken != null) {
-					paramsBuilder.setOldSku(oldSku, purchaseToken);
+					SubscriptionUpdateParams.Builder updateParamsBuilder = SubscriptionUpdateParams.newBuilder();
+					updateParamsBuilder.setOldSkuPurchaseToken(purchaseToken);
+
+					paramsBuilder.setSubscriptionUpdateParams(updateParamsBuilder.build());
 				}
 				BillingFlowParams purchaseParams = paramsBuilder.build();
 				mBillingClient.launchBillingFlow(activity, purchaseParams);

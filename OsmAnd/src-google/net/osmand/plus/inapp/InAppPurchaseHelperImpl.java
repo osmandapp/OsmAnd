@@ -110,8 +110,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 
 			@Override
-			public void onPurchasesUpdated(final List<Purchase> purchases) {
-
+			public void onPurchasesUpdated(List<Purchase> purchases) {
 				BillingManager billingManager = getBillingManager();
 				// Have we been disposed of in the meantime? If so, quit.
 				if (billingManager == null) {
@@ -125,11 +124,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						skuInApps.add(purchase.getSku());
 					}
 					for (Purchase p : purchases) {
-						skuInApps.add(p.getSku());
+						skuInApps.addAll(p.getSkus());
 					}
 					billingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuInApps, new SkuDetailsResponseListener() {
 						@Override
-						public void onSkuDetailsResponse(@NonNull BillingResult billingResult, final List<SkuDetails> skuDetailsListInApps) {
+						public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsListInApps) {
 							// Is it a failure?
 							if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
 								logError("Failed to query inapps sku details: " + billingResult.getResponseCode());
@@ -143,7 +142,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 								skuSubscriptions.add(subscription.getSku());
 							}
 							for (Purchase p : purchases) {
-								skuSubscriptions.add(p.getSku());
+								skuSubscriptions.addAll(p.getSkus());
 							}
 							skuSubscriptions.addAll(subscriptionStateMap.keySet());
 
@@ -176,7 +175,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					});
 				}
 				for (Purchase purchase : purchases) {
-					InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(purchase.getSku());
+					InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(purchase.getSkus().get(0));
 					if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
 						onPurchaseFinished(purchase);
 					}
@@ -291,7 +290,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			List<Purchase> purchases = billingManager.getPurchases();
 			if (purchases != null) {
 				for (Purchase p : purchases) {
-					if (p.getSku().equals(sku)) {
+					if (p.getSkus().contains(sku)) {
 						return p;
 					}
 				}
@@ -310,8 +309,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				BillingManager billingManager = getBillingManager();
 				if (billingManager != null) {
 					for (Purchase p : billingManager.getPurchases()) {
-						if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
-							result.add(p.getSku());
+						if (getInAppPurchases().getInAppSubscriptionBySku(p.getSkus().get(0)) != null) {
+							result.add(p.getSkus().get(0));
 						}
 					}
 				}
@@ -472,7 +471,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (needRestoreUserInfo()) {
 							restoreUserInfo(purchase);
 						}
-						if (!tokensSent.contains(purchase.getSku())) {
+						if (!tokensSent.contains(purchase.getSkus().get(0))) {
 							tokensToSend.add(purchase);
 						}
 					}
@@ -524,7 +523,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(Purchase purchase) {
-		return new PurchaseInfo(purchase.getSku(), purchase.getOrderId(), purchase.getPurchaseToken(),
+		return new PurchaseInfo(purchase.getSkus(), purchase.getOrderId(), purchase.getPurchaseToken(),
 				purchase.getPurchaseTime(), purchase.getPurchaseState(), purchase.isAcknowledged(), purchase.isAutoRenewing());
 	}
 
