@@ -12,6 +12,7 @@ import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClient.BillingResponseCode;
 import com.android.billingclient.api.BillingClient.FeatureType;
+import com.android.billingclient.api.BillingClient.ProductType;
 import com.android.billingclient.api.BillingClient.SkuType;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
@@ -20,8 +21,9 @@ import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.Purchase.PurchasesResult;
+import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.QueryPurchasesParams;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
@@ -58,7 +60,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 	private final Context mContext;
 
 	// Public key for verifying signature, in base64 encoding
-	private String mSignatureBase64;
+	private final String mSignatureBase64;
 
 	private String mObfuscatedAccountId;
 	private String mObfuscatedProfileId;
@@ -86,14 +88,21 @@ public class BillingManager implements PurchasesUpdatedListener {
 	}
 
 	/**
+	 * Listener for query purshases
+	 */
+	public interface QueryPurchasesListener {
+		void onQueryPurchasesFinished();
+	}
+
+	/**
 	 * Listener for the Billing client state to become connected
 	 */
 	public interface ServiceConnectedListener {
 		void onServiceConnected(BillingResult billingResult);
 	}
 
-	public BillingManager(@NonNull final Context context, @NonNull final String base64PublicKey,
-						  @NonNull final BillingUpdatesListener updatesListener) {
+	public BillingManager(@NonNull Context context, @NonNull String base64PublicKey,
+	                      @NonNull BillingUpdatesListener updatesListener) {
 		LOG.debug("Creating Billing client.");
 		mContext = context;
 		mSignatureBase64 = base64PublicKey;
@@ -187,8 +196,8 @@ public class BillingManager implements PurchasesUpdatedListener {
 		}
 	}
 
-	public void querySkuDetailsAsync(@SkuType final String itemType, final List<String> skuList,
-									 final SkuDetailsResponseListener listener) {
+	public void querySkuDetailsAsync(@SkuType String itemType, List<String> skuList,
+	                                 SkuDetailsResponseListener listener) {
 		// Creating a runnable from the request to use it inside our connection retry policy below
 		Runnable queryRequest = new Runnable() {
 			@Override
@@ -211,11 +220,11 @@ public class BillingManager implements PurchasesUpdatedListener {
 		executeServiceRequest(queryRequest);
 	}
 
-	public void consumeAsync(final ConsumeParams consumeParams) {
+	public void consumeAsync(ConsumeParams consumeParams) {
 		// If we've already scheduled to consume this token - no action is needed (this could happen
 		// if you received the token when querying purchases inside onReceive() and later from
 		// onActivityResult()
-		final String purchaseToken = consumeParams.getPurchaseToken();
+		String purchaseToken = consumeParams.getPurchaseToken();
 		if (mTokensToBeConsumed == null) {
 			mTokensToBeConsumed = new HashSet<>();
 		} else if (mTokensToBeConsumed.contains(purchaseToken)) {
@@ -225,7 +234,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 		mTokensToBeConsumed.add(purchaseToken);
 
 		// Generating Consume Response listener
-		final ConsumeResponseListener onConsumeListener = new ConsumeResponseListener() {
+		ConsumeResponseListener onConsumeListener = new ConsumeResponseListener() {
 			@Override
 			public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
 				// If billing service was disconnected, we try to reconnect 1 time
@@ -275,7 +284,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 *
 	 * @param purchase Purchase to be handled
 	 */
-	private void handlePurchase(final Purchase purchase) {
+	private void handlePurchase(Purchase purchase) {
 		if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
 			LOG.info("Got a purchase: " + purchase + ", but signature is bad. Skipping...");
 			return;
@@ -312,10 +321,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 	/**
 	 * Handle a result from querying of purchases and report an updated list to the listener
 	 */
-	private void onQueryPurchasesFinished(PurchasesResult result) {
+	private void onQueryPurchasesFinished(BillingResult billingResult, @Nullable List<Purchase> purchases) {
 		// Have we been disposed of in the meantime? If so, or bad result code, then quit
-		if (mBillingClient == null || result.getResponseCode() != BillingResponseCode.OK) {
-			LOG.warn("Billing client was null or result code (" + result.getResponseCode()
+		if (mBillingClient == null || billingResult.getResponseCode() != BillingResponseCode.OK) {
+			LOG.warn("Billing client was null or result code (" + billingResult.getResponseCode()
 					+ ") was bad - quitting");
 			return;
 		}
@@ -324,7 +333,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 
 		// Update the UI and purchases inventory with new list of purchases
 		mPurchases.clear();
-		onPurchasesUpdated(result.getBillingResult(), result.getPurchasesList());
+		onPurchasesUpdated(billingResult, purchases);
 	}
 
 	/**
@@ -346,43 +355,57 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 * Query purchases across various use cases and deliver the result in a formalized way through
 	 * a listener
 	 */
-	public void queryPurchases() {
+	public void queryPurchases(QueryPurchasesListener queryPurchasesListener) {
 		Runnable queryToExecute = new Runnable() {
 			@Override
 			public void run() {
 				long time = System.currentTimeMillis();
-				PurchasesResult purchasesResult = mBillingClient.queryPurchases(SkuType.INAPP);
-				LOG.info("Querying purchases elapsed time: " + (System.currentTimeMillis() - time)
-						+ "ms");
-				// If there are subscriptions supported, we add subscription rows as well
-				if (areSubscriptionsSupported()) {
-					PurchasesResult subscriptionResult = mBillingClient.queryPurchases(SkuType.SUBS);
-					LOG.info("Querying purchases and subscriptions elapsed time: "
-							+ (System.currentTimeMillis() - time) + "ms");
-					LOG.info("Querying subscriptions result code: "
-							+ subscriptionResult.getResponseCode()
-							+ " res: " + subscriptionResult.getPurchasesList().size());
+				QueryPurchasesParams purchasesParams = QueryPurchasesParams.newBuilder().setProductType(ProductType.INAPP).build();
+				mBillingClient.queryPurchasesAsync(purchasesParams, new PurchasesResponseListener() {
+					@Override
+					public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> purchaseList) {
+						LOG.info("Querying purchases elapsed time: " + (System.currentTimeMillis() - time) + "ms");
 
-					if (subscriptionResult.getResponseCode() == BillingResponseCode.OK) {
-						purchasesResult.getPurchasesList().addAll(
-								subscriptionResult.getPurchasesList());
-					} else {
-						LOG.error("Got an error response trying to query subscription purchases");
+						// If there are subscriptions supported, we add subscription rows as well
+						if (areSubscriptionsSupported()) {
+							querySubscriptionPurchases(billingResult, purchaseList, time, queryPurchasesListener);
+						} else {
+							if (billingResult.getResponseCode() == BillingResponseCode.OK) {
+								LOG.info("Skipped subscription purchases query since they are not supported");
+							}
+							onQueryPurchasesFinished(billingResult, purchaseList);
+							queryPurchasesListener.onQueryPurchasesFinished();
+						}
 					}
-				} else if (purchasesResult.getResponseCode() == BillingResponseCode.OK) {
-					LOG.info("Skipped subscription purchases query since they are not supported");
-				} else {
-					LOG.warn("queryPurchases() got an error response code: "
-							+ purchasesResult.getResponseCode());
-				}
-				onQueryPurchasesFinished(purchasesResult);
+				});
 			}
 		};
-
 		executeServiceRequest(queryToExecute);
 	}
 
-	public void startServiceConnection(final Runnable executeOnSuccess) {
+	public void querySubscriptionPurchases(BillingResult billingResult, List<Purchase> purchaseList,
+	                                       long time, QueryPurchasesListener queryPurchasesListener) {
+		QueryPurchasesParams purchasesParams = QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build();
+		mBillingClient.queryPurchasesAsync(purchasesParams, new PurchasesResponseListener() {
+			@Override
+			public void onQueryPurchasesResponse(@NonNull BillingResult result, @NonNull List<Purchase> purchases) {
+				LOG.info("Querying purchases and subscriptions elapsed time: "
+						+ (System.currentTimeMillis() - time) + "ms");
+				LOG.info("Querying subscriptions result code: "
+						+ result.getResponseCode() + " res: " + purchases.size());
+
+				if (result.getResponseCode() == BillingResponseCode.OK) {
+					purchaseList.addAll(purchases);
+				} else {
+					LOG.error("Got an error response trying to query subscription purchases");
+				}
+				onQueryPurchasesFinished(billingResult, purchaseList);
+				queryPurchasesListener.onQueryPurchasesFinished();
+			}
+		});
+	}
+
+	public void startServiceConnection(Runnable executeOnSuccess) {
 		mBillingClient.startConnection(new BillingClientStateListener() {
 			@Override
 			public void onBillingSetupFinished(BillingResult billingResult) {
@@ -431,5 +454,3 @@ public class BillingManager implements PurchasesUpdatedListener {
 		return Security.verifyPurchase(mSignatureBase64, signedData, signature);
 	}
 }
-
-

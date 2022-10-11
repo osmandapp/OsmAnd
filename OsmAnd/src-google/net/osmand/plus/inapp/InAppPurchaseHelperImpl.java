@@ -625,11 +625,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				try {
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						billingManager.queryPurchases();
+						billingManager.queryPurchases(() -> commandDone());
 					} else {
+						commandDone();
 						throw new IllegalStateException("BillingManager disposed");
 					}
-					commandDone();
 				} catch (Exception e) {
 					logError("queryInventoryAsync Error", e);
 					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
