@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.ProductDetails;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,20 +21,20 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	private static final int OSMAND_PRO_ID = 6;
 	private static final int MAPS_ID = 7;
 
-	private static final int[] LIVE_UPDATES_SCOPE = new int[]{
+	private static final int[] LIVE_UPDATES_SCOPE = {
 			FULL_VERSION_ID,
 			DEPTH_CONTOURS_ID,
 			CONTOUR_LINES_ID,
 	};
 
-	private static final int[] OSMAND_PRO_SCOPE = new int[]{
+	private static final int[] OSMAND_PRO_SCOPE = {
 			FULL_VERSION_ID,
 			DEPTH_CONTOURS_ID,
 			CONTOUR_LINES_ID,
 			LIVE_UPDATES_ID,
 	};
 
-	private static final int[] MAPS_SCOPE = new int[]{
+	private static final int[] MAPS_SCOPE = {
 			FULL_VERSION_ID,
 	};
 
@@ -44,7 +44,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	private static final InAppPurchase CONTOUR_LINES_FULL = new InAppPurchaseContourLinesFull();
 	private static final InAppPurchase CONTOUR_LINES_FREE = new InAppPurchaseContourLinesFree();
 
-	private static final InAppSubscription[] SUBSCRIPTIONS_FULL = new InAppSubscription[]{
+	private static final InAppSubscription[] SUBSCRIPTIONS_FULL = {
 			new InAppPurchaseLiveUpdatesOldMonthlyFull(),
 			new InAppPurchaseLiveUpdatesMonthlyFull(),
 			new InAppPurchaseLiveUpdates3MonthsFull(),
@@ -54,7 +54,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			new InAppPurchaseOsmAndProAnnualFull()
 	};
 
-	private static final InAppSubscription[] SUBSCRIPTIONS_FREE = new InAppSubscription[]{
+	private static final InAppSubscription[] SUBSCRIPTIONS_FREE = {
 			new InAppPurchaseLiveUpdatesOldMonthlyFree(),
 			new InAppPurchaseLiveUpdatesMonthlyFree(),
 			new InAppPurchaseLiveUpdates3MonthsFree(),
@@ -93,7 +93,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			contourLines = CONTOUR_LINES_FULL;
 		}
 
-		inAppPurchases = new InAppPurchase[] { fullVersion, depthContours, contourLines };
+		inAppPurchases = new InAppPurchase[] {fullVersion, depthContours, contourLines};
 	}
 
 	@Override
@@ -443,10 +443,10 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	public static class InAppPurchaseLiveUpdatesOldSubscription extends InAppSubscription {
 
-		private final SkuDetails details;
+		private final ProductDetails details;
 
-		InAppPurchaseLiveUpdatesOldSubscription(@NonNull SkuDetails details) {
-			super(LIVE_UPDATES_ID, details.getSku());
+		InAppPurchaseLiveUpdatesOldSubscription(@NonNull ProductDetails details) {
+			super(LIVE_UPDATES_ID, details.getProductId());
 			this.details = details;
 		}
 
