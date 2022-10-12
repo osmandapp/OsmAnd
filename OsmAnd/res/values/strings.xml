@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_select_recent">Select Recent</string>
+    <string name="show_all_tracks">Show all tracks</string>
+    <string name="on_map_empty_state_description">Select tracks you want to make visible on the map</string>
+    <string name="no_tracks_on_map">No tracks on map</string>
     <string name="switch_folder">Switch folder</string>
     <string name="shared_string_on_map">On map</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>

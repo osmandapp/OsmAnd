@@ -19,10 +19,12 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -33,7 +35,8 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.configmap.TrackGroup.BottomSheetGroupListener;
+import net.osmand.plus.configmap.TrackTab.BottomSheetGroupListener;
+import net.osmand.plus.configmap.TracksFragment.BottomSheetRecycleViewAdapter.BottomSheetViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -48,22 +51,20 @@ import java.util.ArrayList;
 
 public class TracksFragment extends BaseOsmAndFragment {
 	public static final String TAG = TracksFragment.class.getSimpleName();
-
 	private OsmandApplication app;
 	private OsmandSettings settings;
-
 	private ApplicationMode selectedAppMode;
+	private boolean nightMode;
 
 	private Toolbar toolbar;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
 	private LoadGpxTask asyncLoader;
-	private ArrayList<TrackGroup> groups = new ArrayList<>();
-	private GroupListAdapter tracksGroupsAdapter;
-
+	private ArrayList<TrackTab> tabs = new ArrayList<>();
+	private ArrayList<TrackFolder> folders = new ArrayList<>();
+	private BottomSheetRecycleViewAdapter tracksGroupsAdapter;
 	private TracksTabAdapter tracksTabAdapter;
-
-	private boolean nightMode;
+	private SelectTracksListener selectTracksListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,9 +94,19 @@ public class TracksFragment extends BaseOsmAndFragment {
 		asyncLoader = new LoadGpxTask();
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 
+		selectTracksListener = new SelectTracksListener() {
+			@Override
+			public void onSelectTracks() {
+				for (int i = 0; i < tracksTabAdapter.getItemCount(); i++) {
+					if (i != viewPager.getCurrentItem()) {
+						tracksTabAdapter.notifyItemChanged(i);
+					}
+				}
+			}
+		};
+
 		return view;
 	}
-
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		FragmentManager manager = activity.getSupportFragmentManager();
@@ -108,22 +119,23 @@ public class TracksFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void updateGroups(ArrayList<TrackGroup> gpxInfos) {
-		groups.clear();
+	private void updateTabs(ArrayList<TrackFolder> folders) {
+		this.folders = folders;
+		tabs.clear();
 
-		TrackGroup onMapGroup = new TrackGroup(null, getString(R.string.shared_string_on_map), TrackGroupType.ON_MAP);
-		groups.add(onMapGroup);
+		TrackTab onMapGroup = new TrackTab(getString(R.string.shared_string_on_map), TrackTabType.ON_MAP);
+		tabs.add(onMapGroup);
 
-		TrackGroup allGroup = new TrackGroup(null, getString(R.string.shared_string_all), TrackGroupType.ALL);
-		for (TrackGroup gpxGroup : gpxInfos) {
-			allGroup.gpxInfos.addAll(gpxGroup.gpxInfos);
+		TrackTab allGroup = new TrackTab(getString(R.string.shared_string_all), TrackTabType.ALL);
+		allGroup.hasBottomSheetDivider = true;
+		tabs.add(allGroup);
+
+		for (TrackFolder folder : folders) {
+			TrackTab folderTab = new TrackTab(folder.folderName, TrackTabType.FOLDER);
+			folderTab.trackFolder = folder;
+			tabs.add(folderTab);
 		}
-		allGroup.hasDivider = true;
-		groups.add(allGroup);
-
-		groups.addAll(gpxInfos);
 	}
-
 
 	private void setupToolbar() {
 		ImageButton backButton = toolbar.findViewById(R.id.back_button);
@@ -146,7 +158,7 @@ public class TracksFragment extends BaseOsmAndFragment {
 		RecyclerView recyclerView = sheetDialogView.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 
-		tracksGroupsAdapter = new GroupListAdapter(new BottomSheetGroupListener() {
+		tracksGroupsAdapter = new BottomSheetRecycleViewAdapter(new BottomSheetGroupListener() {
 			@Override
 			public void onBottomSheetItemClick(int position) {
 				viewPager.setCurrentItem(position);
@@ -171,7 +183,7 @@ public class TracksFragment extends BaseOsmAndFragment {
 		if (menu instanceof MenuBuilder) {
 			((MenuBuilder) menu).setOptionalIconsVisible(true);
 		}
-		for(int index = 0; index < menu.size(); index++){
+		for (int index = 0; index < menu.size(); index++) {
 			menu.getItem(index).getIcon().setTint(ColorUtilities.getDefaultIconColor(app, nightMode));
 		}
 
@@ -197,11 +209,11 @@ public class TracksFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTabLayout() {
-		tracksTabAdapter = new TracksTabAdapter(this, groups);
+		tracksTabAdapter = new TracksTabAdapter(this, tabs);
 		viewPager.setAdapter(tracksTabAdapter);
 
 		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-			tab.setText(groups.get(position).groupName);
+			tab.setText(tabs.get(position).tabName);
 		});
 		mediator.attach();
 
@@ -210,101 +222,92 @@ public class TracksFragment extends BaseOsmAndFragment {
 		tabLayout.setTabTextColors(ColorUtilities.getPrimaryTextColor(app, nightMode), selectedAppMode.getProfileColor(nightMode));
 	}
 
-	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, ArrayList<TrackGroup>> {
+	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, ArrayList<TrackFolder>> {
 
 		@Override
-		protected ArrayList<TrackGroup> doInBackground(Activity... params) {
+		protected ArrayList<TrackFolder> doInBackground(Activity... params) {
 			return loadGpxGroups(app.getAppPath(IndexConstants.GPX_INDEX_DIR));
 		}
-		@Override
-		protected void onPreExecute() {
-			//showProgressBar();
-		}
 
 		@Override
-		protected void onProgressUpdate(GpxInfo... values) {
-
-		}
-
-		@Override
-		protected void onPostExecute(ArrayList<TrackGroup> result) {
-			updateGroups(result);
+		protected void onPostExecute(ArrayList<TrackFolder> result) {
+			updateTabs(result);
 			setupTabLayout();
 		}
 
-		private ArrayList<TrackGroup> loadGpxGroups(File mapPath) {
+		private ArrayList<TrackFolder> loadGpxGroups(File mapPath) {
 			if (mapPath.canRead()) {
-				ArrayList<TrackGroup> groups = new ArrayList<>();
+				ArrayList<TrackFolder> groups = new ArrayList<>();
 				File[] listFiles = mapPath.listFiles();
 
 				if (listFiles != null && listFiles.length != 0) {
-					TrackGroup trackGroup = new TrackGroup(mapPath, mapPath.getName(), TrackGroupType.FOLDER);
-					groups.add(trackGroup);
+					TrackFolder trackFolder = new TrackFolder(mapPath.getName());
+					groups.add(trackFolder);
 					for (File file : listFiles) {
 						if (file.isDirectory()) {
-							TrackGroup folderGroup = loadGPXFolder(file);
+							TrackFolder folderGroup = loadGPXFolder(file);
 							if (folderGroup != null)
 								groups.add(folderGroup);
 						} else if (file.isFile() && file.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
 							GpxInfo info = new GpxInfo();
-							info.subfolder = file.getName();
+							info.subfolder = file.getParent();
 							info.file = file;
-							trackGroup.gpxInfos.add(info);
+							trackFolder.gpxInfos.add(info);
 						}
 					}
-					if (trackGroup.gpxInfos.isEmpty()) {
-						groups.remove(trackGroup);
+					if (trackFolder.gpxInfos.isEmpty()) {
+						groups.remove(trackFolder);
 					}
 				}
 				return groups;
 			}
 			return null;
 		}
-	}
 
-	private TrackGroup loadGPXFolder(File mapPath) {
-		if (mapPath.canRead()) {
-			File[] listFiles = mapPath.listFiles();
-			if (listFiles != null && listFiles.length != 0) {
-				TrackGroup trackGroup = new TrackGroup(mapPath, mapPath.getName(), TrackGroupType.FOLDER);
-				for (File file : listFiles) {
-					if (file.isDirectory()) {
-						TrackGroup folderGroup = loadGPXFolder(file);
-						if (folderGroup != null)
-							trackGroup.subGroups.add(folderGroup);
-					} else if (file.isFile() && file.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
-						GpxInfo info = new GpxInfo();
-						info.subfolder = file.getName();
-						info.file = file;
-						trackGroup.gpxInfos.add(info);
+		private TrackFolder loadGPXFolder(File mapPath) {
+			if (mapPath.canRead()) {
+				File[] listFiles = mapPath.listFiles();
+				if (listFiles != null && listFiles.length != 0) {
+					TrackFolder trackFolder = new TrackFolder(mapPath.getName());
+					for (File file : listFiles) {
+						if (file.isDirectory()) {
+							TrackFolder folder = loadGPXFolder(file);
+							if (folder != null)
+								trackFolder.subFolders.add(folder);
+						} else if (file.isFile() && file.getName().toLowerCase().endsWith(IndexConstants.GPX_FILE_EXT)) {
+							GpxInfo info = new GpxInfo();
+							info.subfolder = file.getParent();
+							info.file = file;
+							trackFolder.gpxInfos.add(info);
+						}
 					}
+					return trackFolder;
 				}
-				return trackGroup;
 			}
+			return null;
 		}
-		return null;
 	}
 
-	public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.ViewHolder> {
+	public class BottomSheetRecycleViewAdapter extends RecyclerView.Adapter<BottomSheetViewHolder> {
 		private final BottomSheetGroupListener listener;
 
-		GroupListAdapter(BottomSheetGroupListener listener) {
+		BottomSheetRecycleViewAdapter(BottomSheetGroupListener listener) {
 			this.listener = listener;
 		}
 
 		@NonNull
 		@Override
-		public GroupListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public BottomSheetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 			View view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
 					.inflate(R.layout.list_item_two_icons, null);
-			return new GroupListAdapter.ViewHolder(view);
+			return new BottomSheetViewHolder(view);
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull GroupListAdapter.ViewHolder holder, int position) {
-			holder.viewEx.setText(groups.get(position).groupName);
-			Drawable groupTypeIcon = getPaintedContentIcon(groups.get(position).groupType.iconId,
+		public void onBindViewHolder(@NonNull BottomSheetViewHolder holder, int position) {
+			holder.viewEx.setText(tabs.get(position).tabName);
+			Drawable groupTypeIcon = getPaintedContentIcon(tabs.get(position).tabType.iconId,
 					position == viewPager.getCurrentItem()
 							? selectedAppMode.getProfileColor(nightMode)
 							: ColorUtilities.getDefaultIconColor(app, nightMode));
@@ -321,23 +324,22 @@ public class TracksFragment extends BaseOsmAndFragment {
 				listener.onBottomSheetItemClick(position);
 			});
 
-			holder.divider.setVisibility(groups.get(position).hasDivider ? View.VISIBLE : View.INVISIBLE);
+			holder.divider.setVisibility(tabs.get(position).hasBottomSheetDivider ? View.VISIBLE : View.INVISIBLE);
 		}
 
 		@Override
 		public int getItemCount() {
-			return groups.size();
+			return tabs.size();
 		}
 
-		public class ViewHolder extends RecyclerView.ViewHolder {
-
+		class BottomSheetViewHolder extends RecyclerView.ViewHolder {
 			final View button;
 			final TextViewEx viewEx;
 			final AppCompatImageView groupTypeIcon;
 			final AppCompatImageView selectedIcon;
 			final View divider;
 
-			public ViewHolder(@NonNull View itemView) {
+			public BottomSheetViewHolder(@NonNull View itemView) {
 				super(itemView);
 				button = itemView.findViewById(R.id.button_container);
 				viewEx = itemView.findViewById(R.id.title);
@@ -348,6 +350,48 @@ public class TracksFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	public class TracksTabAdapter extends FragmentStateAdapter {
+		ArrayList<TrackTab> trackTabs;
+
+		public TracksTabAdapter(@NonNull Fragment fragment, ArrayList<TrackTab> trackTabs) {
+			super(fragment);
+			this.trackTabs = trackTabs;
+		}
+
+		@NonNull
+		@Override
+		public Fragment createFragment(int position) {
+			TrackTab trackTab = trackTabs.get(position);
+			TrackTabType folderType = trackTab.tabType;
+			TracksTreeFragment fragment;
+			switch (folderType) {
+				case ON_MAP:
+					fragment = TracksTreeFragment.createOnMapTracksFragment(app, folders, selectTracksListener, view -> {
+						for (int index = 0; index < trackTabs.size(); index++) {
+							if (trackTabs.get(index).tabType == TrackTabType.ALL) {
+								viewPager.setCurrentItem(index);
+							}
+						}
+					});
+					return fragment;
+				case ALL:
+					fragment = TracksTreeFragment.createAllTracksFragment(app, folders, selectTracksListener);
+					return fragment;
+				case FOLDER:
+					fragment = TracksTreeFragment.createFolderTracksFragment(app, trackTab.trackFolder, selectTracksListener);
+					return fragment;
+				case FILTER:
+					break;
+			}
+			return new Fragment();
+		}
+
+		@Override
+		public int getItemCount() {
+			return trackTabs.size();
+		}
+	}
+
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -355,22 +399,35 @@ public class TracksFragment extends BaseOsmAndFragment {
 	}
 }
 
-class TrackGroup {
-	public String groupName;
-	public ArrayList<GpxInfo> gpxInfos = new ArrayList<>();
-	public ArrayList<TrackGroup> subGroups = new ArrayList<>();
+class TrackTab {
+	public String tabName;
 	@Nullable
-	private File gpxFile;
-	public final TrackGroupType groupType;
-	public boolean hasDivider = false;
+	public TrackFolder trackFolder;
+	public final TrackTabType tabType;
+	public boolean hasBottomSheetDivider = false;
 
-	public TrackGroup(@Nullable File file, String name, TrackGroupType type) {
-		this.gpxFile = file;
-		this.groupName = name;
-		this.groupType = type;
+	public TrackTab(String name, TrackTabType type) {
+		this.tabName = name;
+		this.tabType = type;
 	}
 
-	interface BottomSheetGroupListener{
+	interface BottomSheetGroupListener {
 		void onBottomSheetItemClick(int position);
 	}
 }
+
+class TrackFolder {
+	public String folderName;
+	public ArrayList<GpxInfo> gpxInfos = new ArrayList<>();
+	public ArrayList<TrackFolder> subFolders = new ArrayList<>();
+
+	TrackFolder(String name) {
+		this.folderName = name;
+	}
+}
+
+interface SelectTracksListener {
+	void onSelectTracks();
+}
+
+

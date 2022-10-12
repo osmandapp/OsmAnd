@@ -443,5 +443,8 @@
 	<dimen name="radius_double_large">18dp</dimen>
 
 	<dimen name="bottom_space_height">160dp</dimen>
+	<!--Tracks-->
+	<dimen name="tracks_control_buttons_height">52dp</dimen>
+
 
 </resources>

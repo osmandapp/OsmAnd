@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/button_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:orientation="horizontal">
+
+		<FrameLayout
+			android:id="@+id/action_button"
+			android:layout_width="@dimen/acceptable_touch_radius"
+			android:layout_height="@dimen/acceptable_touch_radius"
+			android:layout_marginLeft="@dimen/dashCardMargin"
+			android:layout_marginRight="@dimen/dashCardMargin"
+			android:layout_gravity="center"
+			android:padding="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/dashCardMargin"
+			android:layout_marginStart="@dimen/dashCardMargin">
+
+			<androidx.appcompat.widget.AppCompatCheckBox
+				android:id="@+id/checkbox"
+				android:background="@android:color/transparent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				app:buttonTint="?attr/default_icon_color"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"/>
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:orientation="horizontal">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/folder_icon"
+					android:layout_width="@dimen/standard_icon_size"
+					android:layout_height="@dimen/standard_icon_size"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/content_padding_half"
+					android:layout_marginRight="@dimen/content_padding_half"
+					android:tint="?attr/default_icon_color"
+					osmand:srcCompat="@drawable/ic_action_folder" />
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:layout_marginVertical="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding_half"
+					android:layout_weight="1"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/title"
+						style="@style/TitleStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorPrimary"
+						tools:text="Title" />
+
+				</LinearLayout>
+
+				<FrameLayout
+					android:id="@+id/collapse_button"
+					android:layout_width="@dimen/acceptable_touch_radius"
+					android:layout_height="@dimen/acceptable_touch_radius"
+					android:layout_gravity="center">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/collapse_image_view"
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginVertical="@dimen/content_padding_small"
+						android:src="@drawable/ic_action_arrow_up"
+						android:tint="?attr/default_icon_color" />
+
+				</FrameLayout>
+
+			</LinearLayout>
+
+			<View
+				android:id="@+id/item_divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/dashboard_divider"
+				android:visibility="invisible"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
