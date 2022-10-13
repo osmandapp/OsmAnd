@@ -63,12 +63,12 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.antplus_plugin_name);
+		return app.getString(R.string.external_sensors_plugin_name);
 	}
 
 	@Override
 	public CharSequence getDescription() {
-		return app.getString(R.string.antplus_plugin_description);
+		return app.getString(R.string.external_sensors_plugin_description);
 	}
 
 	@Override
