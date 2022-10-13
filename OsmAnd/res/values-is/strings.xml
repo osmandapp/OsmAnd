@@ -4777,8 +4777,6 @@
     <string name="go_to_marker_location">Fara á staðsetningu merkis</string>
     <string name="display_position">Staðsetning á skjá</string>
     <string name="favorite_delete_group">Eyða hópi</string>
-    <string name="map_center_widget">Miðja korts</string>
-    <string name="current_location_widget">Núverandi staðsetning</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>
@@ -4791,8 +4789,6 @@
     <string name="ant_read_data">Lesin gögn</string>
     <string name="ant_write_to_gpx">Skrifa gögn í feril</string>
     <string name="ant_heart_rate_write_gpx_desc">Skrifa hjartsláttargögn í feril</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ Llýsing</string>
     <string name="nautical_depth_points">Sjódýptarpunktar</string>
     <string name="depth_contours">Dýptarlínur sjávar</string>
     <string name="worldwide_maps">Heimskort</string>

@@ -4789,13 +4789,11 @@
     <string name="shared_string_large">Великий</string>
     <string name="shared_string_normal">Звичайний</string>
     <string name="quick_action_current_location_widget_descr">Перемикач для показу або приховування віджета «Поточне місце перебування» на мапі.</string>
-    <string name="current_location_widget">Поточне місце перебування</string>
     <string name="coordinates_widget_current_location">Координати: поточне місце перебування</string>
     <string name="coordinates_widget_current_location_desc">Віджет показує географічні координати поточної геолокації</string>
     <string name="coordinates_widget_map_center_desc">Віджет показує географічні координати поточного центру мапи</string>
     <string name="quick_action_map_center_widget_descr">Перемикач для показу або приховування віджета «Центр мапи» на мапі.</string>
     <string name="coordinates_widget_map_center">Координати: центр мапи</string>
-    <string name="map_center_widget">Центр мапи</string>
     <string name="map_widget_camera_distance_desc">Віджет показує висоту камери над рівнем поверхні.</string>
     <string name="map_widget_camera_tilt_desc">Віджет показує кут нахилу камери в режимі перспективи. Усталено 90° (без нахилу).</string>
     <string name="map_widget_zoom_level">Масштаб</string>
@@ -4819,8 +4817,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Показує швидкість пересування</string>
     <string name="map_widget_ant_bicycle_dist">Відстань на велосипеді</string>
     <string name="map_widget_ant_bicycle_dist_desc">Показує пройдену відстань</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Опис ANT+</string>
     <string name="worldwide_maps">Мапи світу</string>
     <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
     <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>

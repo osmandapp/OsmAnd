@@ -36,7 +36,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
@@ -68,7 +67,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private TransportStopRoute stopRoute;
 
 	private final CommonPreference<Boolean> showTransportStops;
-	private final TransportLinesMenu transportLinesMenu;
 
 	private Path path;
 
@@ -85,7 +83,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		super(context);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
-		transportLinesMenu = new TransportLinesMenu(app);
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
 	}
 
@@ -382,7 +379,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	public boolean isShowTransportStops() {
-		return transportLinesMenu.isTransportLinesSupported() && showTransportStops.get();
+		return showTransportStops.get();
 	}
 
 	/**OpenGL*/

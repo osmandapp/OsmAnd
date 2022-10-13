@@ -17,7 +17,10 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public final class TransportLinesMenu {
 
@@ -32,10 +35,6 @@ public final class TransportLinesMenu {
 	}
 
 	public void toggleTransportLines(@NonNull MapActivity mapActivity, boolean enable) {
-		if (!isTransportLinesSupported()) {
-			app.showShortToastMessage(R.string.action_not_supported_with_map_style);
-			return;
-		}
 		if (enable) {
 			List<String> enabledIds = settings.DISPLAYED_TRANSPORT_SETTINGS.getStringsList();
 			if (enabledIds != null) {
@@ -53,7 +52,7 @@ public final class TransportLinesMenu {
 		CommonPreference<Boolean> preference = getTransportPreference(attrName);
 		preference.setModeValue(appMode, enable);
 		List<String> idsToSave = new ArrayList<>();
-		for (CommonPreference<Boolean> p : getTransportPreferences()) {
+		for (CommonPreference<Boolean> p : getAllPreferences()) {
 			if (p.getModeValue(appMode)) {
 				idsToSave.add(p.getId());
 			}
@@ -73,7 +72,7 @@ public final class TransportLinesMenu {
 	}
 
 	public boolean isShowAnyTransport(@NonNull ApplicationMode appMode) {
-		List<CommonPreference<Boolean>> preferences = getTransportPreferences();
+		List<CommonPreference<Boolean>> preferences = getSupportedPreferences();
 		for (CommonPreference<Boolean> preference : preferences) {
 			if (preference.getModeValue(appMode)) {
 				return true;
@@ -101,8 +100,7 @@ public final class TransportLinesMenu {
 
 	private void showEnabledTransport(@NonNull MapActivity mapActivity, @NonNull List<String> enabledIds) {
 		ApplicationMode appMode = getAppMode();
-		for (RenderingRuleProperty p : getTransportRules(app)) {
-			CommonPreference<Boolean> preference = getTransportPreference(p.getAttrName());
+		for (CommonPreference<Boolean> preference : getAllPreferences()) {
 			String id = preference.getId();
 			boolean selected = enabledIds.contains(id);
 			preference.setModeValue(appMode, selected);
@@ -112,8 +110,7 @@ public final class TransportLinesMenu {
 
 	private void hideAllTransport(@NonNull MapActivity mapActivity) {
 		ApplicationMode appMode = getAppMode();
-		for (RenderingRuleProperty p : getTransportRules(app)) {
-			CommonPreference<Boolean> preference = getTransportPreference(p.getAttrName());
+		for (CommonPreference<Boolean> preference : getAllPreferences()) {
 			preference.setModeValue(appMode, false);
 		}
 		refreshMap(mapActivity);
@@ -127,10 +124,18 @@ public final class TransportLinesMenu {
 		return settings.getApplicationMode();
 	}
 
-	private List<CommonPreference<Boolean>> getTransportPreferences() {
+	private List<CommonPreference<Boolean>> getAllPreferences() {
+		return getPreferences(getAllAttributes());
+	}
+
+	private List<CommonPreference<Boolean>> getSupportedPreferences() {
+		return getPreferences(getSupportedAttributes());
+	}
+
+	private List<CommonPreference<Boolean>> getPreferences(Collection<String> attrNames) {
 		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
-		for (RenderingRuleProperty property : getTransportRules(app)) {
-			CommonPreference<Boolean> preference = getTransportPreference(property.getAttrName());
+		for (String attrName : attrNames) {
+			CommonPreference<Boolean> preference = getTransportPreference(attrName);
 			preferences.add(preference);
 		}
 		return preferences;
@@ -140,8 +145,33 @@ public final class TransportLinesMenu {
 		return settings.getCustomRenderBooleanProperty(attrName);
 	}
 
-	public boolean isTransportLinesSupported() {
-		return !Algorithms.isEmpty(getTransportRules(app));
+	private List<String> getAllAttributes() {
+		Set<String> attrNames = new TreeSet<>();
+		attrNames.addAll(getKnownAttributes());
+		attrNames.addAll(getSupportedAttributes());
+		return new ArrayList<>(attrNames);
+	}
+
+	private List<String> getKnownAttributes() {
+		List<String> attrNames = new ArrayList<>();
+		for (TransportType knownType : TransportType.values()) {
+			attrNames.add(knownType.getAttrName());
+		}
+		return attrNames;
+	}
+
+	private List<String> getSupportedAttributes() {
+		// List of attribute names supported with selected map style
+		List<String> attrNames = new ArrayList<>();
+		for (RenderingRuleProperty property : getTransportRules(app)) {
+			attrNames.add(property.getAttrName());
+		}
+		// Transport stops is supported with all map styles
+		String transportStopsId = TransportType.TRANSPORT_STOPS.getAttrName();
+		if (!attrNames.contains(transportStopsId)) {
+			attrNames.add(transportStopsId);
+		}
+		return attrNames;
 	}
 
 	public static void showTransportsDialog(@NonNull MapActivity mapActivity) {

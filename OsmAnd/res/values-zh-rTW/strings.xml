@@ -4784,9 +4784,7 @@
     <string name="quick_action_map_center_widget_descr">切換是否要在地圖上顯示或隱藏地圖中心。</string>
     <string name="quick_action_current_location_widget_descr">切換是否要在地圖上顯示或隱藏目前的位置。</string>
     <string name="coordinates_widget_map_center">座標：地圖中心</string>
-    <string name="current_location_widget">目前位置</string>
     <string name="coordinates_widget_map_center_desc">用來顯示目前地圖中心的地理座標</string>
-    <string name="map_center_widget">地圖中心</string>
     <string name="coordinates_widget_current_location_desc">用來顯示目前地理位置的地理座標</string>
     <string name="coordinates_widget_current_location">座標：目前位置</string>
     <string name="developer_widgets">開發者小工具</string>
@@ -4814,11 +4812,9 @@
     <string name="map_widget_ant_bicycle_power_desc">顯示騎士用於推動自行車前進的功率輸出</string>
     <string name="map_widget_ant_bicycle_cadence_desc">顯示使用者踩踏板的速度</string>
     <string name="map_widget_ant_bicycle_dist">自行車距離</string>
-    <string name="antplus_plugin_description">ANT+ 描述</string>
     <string name="nautical_depth_points">航海深度點</string>
     <string name="map_widget_ant_bicycle_cadence">自行車節奏</string>
     <string name="map_widget_ant_bicycle_speed_desc">顯示行駛速度</string>
-    <string name="antplus_plugin_name">ANT+</string>
     <string name="worldwide_maps">世界地圖</string>
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
 </resources>

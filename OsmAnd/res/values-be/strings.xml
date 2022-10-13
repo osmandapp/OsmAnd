@@ -4796,8 +4796,6 @@
 \nДакраніцеся двума пальцамі да мапы, каб убачыць адлегласць паміж націснутымі кропкамі</string>
     <string name="shared_string_2_5_d_view">Выгляд 2.5 D</string>
     <string name="quick_action_map_center_widget_descr">Пераключальнік для паказу або схаваныя віджэта «Цэнтр мапы» на мапе.</string>
-    <string name="map_center_widget">Цэнтр мапы</string>
-    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
     <string name="quick_action_current_location_widget_descr">Пераключальнік для паказу або схавання віджэта «Бягучае месцазнаходжанне» на мапе.</string>
     <string name="coordinates_widget_map_center_desc">Віджэт паказвае геаграфічныя каардынаты бягучага цэнтра мапы</string>
     <string name="coordinates_widget_current_location">Каардынаты: бягучае месцазнаходжанне</string>

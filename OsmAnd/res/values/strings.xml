@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="map_center_widget">Coordinates: Map center</string>
+    <string name="current_location_widget">Coordinates: Current location</string>
+    <string name="external_sensors_plugin_name">External Sensors</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power and cadence. Requires connection of device with sensors of these parameters with support of ANT + (Wireless Personal Network protocol).</string>
     <string name="map_widget_altitude_map_center">Altitude: map center</string>
     <string name="map_widget_altitude_map_center_desc">Shows the height above sea level of current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
@@ -18,7 +22,6 @@
     <string name="map_widget_altitude_desc">Widgets show the height above sea level of current geolocation or for current map center</string>
     <string name="map_widget_rendering_fps">Map rendering FPS</string>
     <string name="map_widget_rendering_fps_desc">Shows how fast map and map elements are shown and refreshed (expressed in frames per second or FPS).</string>
-    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
     <string name="simulate_location_by_gpx">Simulate location by GPX</string>
     <string name="location_simulation_cutoff">Simulation skip first meters </string>
     <string name="location_simulation_speedup">Simulation speedup</string>
@@ -48,8 +51,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
     <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ description</string>
     <string name="nautical_depth_points">Nautical depth points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>
@@ -63,8 +64,6 @@
     <string name="developer_widgets">Developer widgets</string>
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
-    <string name="map_center_widget">Map center</string>
-    <string name="current_location_widget">Current location</string>
     <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
     <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>

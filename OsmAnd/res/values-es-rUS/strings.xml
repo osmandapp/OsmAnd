@@ -4805,8 +4805,6 @@
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
-    <string name="map_center_widget">Centro del mapa</string>
-    <string name="current_location_widget">Ubicación actual</string>
     <string name="coordinates_widget_map_center_desc">Muestra las coordenadas geográficas del centro del mapa actual</string>
     <string name="map_widget_target_distance_desc">El widget muestra la distancia desde la cámara hasta la ubicación del objetivo.</string>
     <string name="map_widget_zoom_level_desc">El widget muestra el nivel de zum actual del mapa.</string>
@@ -4839,8 +4837,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
     <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Descripción de ANT+</string>
     <string name="nautical_depth_points">Puntos de profundidad náutica</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
