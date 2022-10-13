@@ -47,8 +47,8 @@
     <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
     <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ description</string>
+    <string name="antplus_plugin_name">External Sensors</string>
+    <string name="antplus_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power and cadence. Requires connection of device with sensors of these parameters with support of ANT + (Wireless Personal Network protocol).</string>
     <string name="nautical_depth_points">Nautical depth points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>
