@@ -4817,8 +4817,6 @@
     <string name="map_widget_ant_bicycle_speed">Lestresa de sa bitzicleta</string>
     <string name="map_widget_ant_bicycle_speed_desc">Ammustrat sa lestresa de biàgiu</string>
     <string name="map_widget_ant_bicycle_dist_desc">Ammustrat sa distàntzia cursada</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Descritzione de s\'ANT+</string>
     <string name="nautical_depth_points">Puntos de profundidade nàutica</string>
     <string name="worldwide_maps">Mapas mundiales</string>
     <string name="map_widget_ant_heart_rate_desc">Ammustrat sa frecuèntzia cardìaca de s\'impreadore in tempus reale durante un\'atividade ispetzificada</string>

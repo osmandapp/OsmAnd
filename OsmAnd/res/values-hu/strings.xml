@@ -4804,8 +4804,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Mutatja a haladás sebességét</string>
     <string name="map_widget_ant_bicycle_dist">Kerékpáros távolság</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mutatja a megtett távolságot</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ leírás</string>
     <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
     <string name="nautical_depth_points">Tengeri mélységpontok</string>
     <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található.

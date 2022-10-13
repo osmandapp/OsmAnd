@@ -4816,8 +4816,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Affiche la vitesse de déplacement</string>
     <string name="map_widget_ant_bicycle_dist">Distance à vélo</string>
     <string name="map_widget_ant_bicycle_dist_desc">Affiche la distance parcourue</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Description de l\'ANT+</string>
     <string name="worldwide_maps">Cartes mondiales</string>
     <string name="depth_contours">Lignes de profondeur</string>
     <string name="map_widget_ant_bicycle_power_desc">Indique la puissance produite par le cycliste et utilisée pour faire avancer le vélo</string>
