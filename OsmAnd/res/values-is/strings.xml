@@ -4789,8 +4789,6 @@
     <string name="ant_read_data">Lesin gögn</string>
     <string name="ant_write_to_gpx">Skrifa gögn í feril</string>
     <string name="ant_heart_rate_write_gpx_desc">Skrifa hjartsláttargögn í feril</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ Llýsing</string>
     <string name="nautical_depth_points">Sjódýptarpunktar</string>
     <string name="depth_contours">Dýptarlínur sjávar</string>
     <string name="worldwide_maps">Heimskort</string>

@@ -4813,8 +4813,6 @@
     <string name="ant_missing_dependency">Dependência em falta</string>
     <string name="depth_contours">Contornos de profundidade</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ descrição</string>
     <string name="nautical_depth_points">Pontos de profundidade náutica</string>
     <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
     <string name="map_widget_camera_distance_desc">O widget mostra a elevação da câmara acima do nível da superfície.</string>

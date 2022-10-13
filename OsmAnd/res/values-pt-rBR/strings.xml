@@ -4811,7 +4811,6 @@
     <string name="map_widget_ant_heart_rate">Frequência cardíaca</string>
     <string name="map_widget_ant_bicycle_power_desc">Mostra a potência do ciclista, que é usada para mover a bicicleta para frente</string>
     <string name="map_widget_ant_bicycle_power">Potência de bicicleta</string>
-    <string name="antplus_plugin_name">ANT+</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Mostra a velocidade em que o usuário está pedalando</string>
     <string name="map_widget_ant_bicycle_speed_desc">Mostra a velocidade de viagem</string>
     <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
@@ -4822,7 +4821,6 @@
     <string name="favorites_backup">Backup favoritos</string>
     <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
     <string name="ant_heart_rate_write_gpx_desc">Gravar a frequência cardíaca no trilho</string>
-    <string name="antplus_plugin_description">ANT+ descrição</string>
     <string name="nautical_depth_points">Pontos de profundidade náutica</string>
     <string name="depth_contours">Contornos de profundidade</string>
     <string name="worldwide_maps">Mapas mundiais</string>

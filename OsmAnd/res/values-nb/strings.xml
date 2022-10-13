@@ -4756,8 +4756,6 @@
     <string name="map_widget_ant_bicycle_cadence">Krankomdreininger</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Viser hvor for rundt brukeren snurrer pedalarmene</string>
     <string name="map_widget_ant_bicycle_speed_desc">Viser kjørehastighet</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+-beskrivelse</string>
     <string name="worldwide_maps">Verdenskart</string>
     <string name="developer_widgets">Utviklerminiprogrammer</string>
     <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt avstand</string>

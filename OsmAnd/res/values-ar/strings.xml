@@ -4884,8 +4884,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">يظهر سرعة الرحلة</string>
     <string name="map_widget_ant_bicycle_dist">مسافة الدراجة</string>
     <string name="map_widget_ant_bicycle_dist_desc">يعرض المسافة المقطوعة</string>
-    <string name="antplus_plugin_name">مستشعر ANT+</string>
-    <string name="antplus_plugin_description">مواصفات ANT+</string>
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
     <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>

@@ -4812,11 +4812,9 @@
     <string name="map_widget_ant_bicycle_power_desc">顯示騎士用於推動自行車前進的功率輸出</string>
     <string name="map_widget_ant_bicycle_cadence_desc">顯示使用者踩踏板的速度</string>
     <string name="map_widget_ant_bicycle_dist">自行車距離</string>
-    <string name="antplus_plugin_description">ANT+ 描述</string>
     <string name="nautical_depth_points">航海深度點</string>
     <string name="map_widget_ant_bicycle_cadence">自行車節奏</string>
     <string name="map_widget_ant_bicycle_speed_desc">顯示行駛速度</string>
-    <string name="antplus_plugin_name">ANT+</string>
     <string name="worldwide_maps">世界地圖</string>
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
 </resources>

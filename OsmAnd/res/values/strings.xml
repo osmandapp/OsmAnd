@@ -10,8 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
+    <string name="external_sensors_plugin_name">External Sensors</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power and cadence. Requires connection of device with sensors of these parameters with support of ANT + (Wireless Personal Network protocol).</string>
     <string name="map_widget_altitude_map_center">Altitude: map center</string>
     <string name="map_widget_altitude_map_center_desc">Shows the height above sea level of current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
@@ -48,8 +51,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
     <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ description</string>
     <string name="nautical_depth_points">Nautical depth points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>

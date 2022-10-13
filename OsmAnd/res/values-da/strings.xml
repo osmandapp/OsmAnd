@@ -4823,8 +4823,6 @@
     <string name="map_widget_ant_heart_rate_desc">Viser brugerens puls under en given aktivitet i realtid</string>
     <string name="map_widget_ant_bicycle_speed_desc">Viser kørehastighed</string>
     <string name="map_widget_ant_bicycle_dist">Cykelafstand</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ beskrivelse</string>
     <string name="depth_contours">Dybdekonturer</string>
     <string name="nautical_depth_points">Nautiske dybdepunkter</string>
     <string name="worldwide_maps">Globale kort</string>

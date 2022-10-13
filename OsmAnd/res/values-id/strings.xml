@@ -4371,8 +4371,6 @@
     <string name="map_widget_camera_distance">Ketinggian kamera</string>
     <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)\?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Deskripsi ANT+</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
     <string name="map_widget_camera_distance_desc">Widget menampilkan ketinggian kamera di atas tingkat permukaan.</string>
     <string name="map_widget_zoom_level">Tingkat perbesaran</string>
