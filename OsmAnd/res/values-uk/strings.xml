@@ -4819,8 +4819,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Показує швидкість пересування</string>
     <string name="map_widget_ant_bicycle_dist">Відстань на велосипеді</string>
     <string name="map_widget_ant_bicycle_dist_desc">Показує пройдену відстань</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Опис ANT+</string>
     <string name="worldwide_maps">Мапи світу</string>
     <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
     <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>

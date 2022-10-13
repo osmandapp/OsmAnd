@@ -4814,8 +4814,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
     <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
     <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Opis ANT+</string>
     <string name="nautical_depth_points">Navtične globinske točke</string>
     <string name="depth_contours">Izobate</string>
     <string name="worldwide_maps">Zemljevidi sveta</string>
