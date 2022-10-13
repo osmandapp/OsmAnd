@@ -18,7 +18,6 @@
     <string name="map_widget_altitude_desc">Widgets show the height above sea level of current geolocation or for current map center</string>
     <string name="map_widget_rendering_fps">Map rendering FPS</string>
     <string name="map_widget_rendering_fps_desc">Shows how fast map and map elements are shown and refreshed (expressed in frames per second or FPS).</string>
-    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
     <string name="simulate_location_by_gpx">Simulate location by GPX</string>
     <string name="location_simulation_cutoff">Simulation skip first meters </string>
     <string name="location_simulation_speedup">Simulation speedup</string>
