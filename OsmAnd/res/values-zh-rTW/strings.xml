@@ -4784,9 +4784,7 @@
     <string name="quick_action_map_center_widget_descr">切換是否要在地圖上顯示或隱藏地圖中心。</string>
     <string name="quick_action_current_location_widget_descr">切換是否要在地圖上顯示或隱藏目前的位置。</string>
     <string name="coordinates_widget_map_center">座標：地圖中心</string>
-    <string name="current_location_widget">目前位置</string>
     <string name="coordinates_widget_map_center_desc">用來顯示目前地圖中心的地理座標</string>
-    <string name="map_center_widget">地圖中心</string>
     <string name="coordinates_widget_current_location_desc">用來顯示目前地理位置的地理座標</string>
     <string name="coordinates_widget_current_location">座標：目前位置</string>
     <string name="developer_widgets">開發者小工具</string>

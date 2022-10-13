@@ -4781,11 +4781,9 @@
     <string name="shared_string_shows">Mostra</string>
     <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
     <string name="map_marker_interval_dialog_desc">Specifica l\'intervallo di tempo per cui verrà misurata la velocità media per calcolare la stima dell\'orario d\'arrivo.</string>
-    <string name="current_location_widget">Posizione attuale</string>
     <string name="coordinates_widget_map_center_desc">Il widget mostra le coordinate geografiche del centro attuale della mappa</string>
     <string name="quick_action_current_location_widget_descr">Un interruttore per mostrare o nascondere il widget «Posizione attuale» sulla mappa.</string>
     <string name="coordinates_widget_map_center">Coordinate: centro della mappa</string>
-    <string name="map_center_widget">Centro della mappa</string>
     <string name="quick_action_map_center_widget_descr">Un interruttore per mostrare o nascondere il widget «Centro della mappa» sulla mappa.</string>
     <string name="map_widget_camera_distance_desc">Il widget mostra l\'elevazione della fotocamera dalla superficie.</string>
     <string name="map_widget_camera_tilt_desc">Il widget mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>

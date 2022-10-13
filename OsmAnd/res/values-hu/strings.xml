@@ -4781,12 +4781,10 @@
     <string name="click_on_widget">Kattintson a widgetre</string>
     <string name="shared_string_shows">Mutatja</string>
     <string name="map_markers_desc">A widget a távolságot vagy a becsült érkezési időt (ETA) mutatja a térképjelölők listájában szereplő első két jelölőhöz.</string>
-    <string name="current_location_widget">Aktuális hely</string>
     <string name="quick_action_current_location_widget_descr">Egy kapcsoló az aktuális helyet mutató widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
     <string name="coordinates_widget_current_location_desc">A widget az aktuális földrajzi hely földrajzi koordinátáit mutatja</string>
     <string name="coordinates_widget_current_location">Koordináták: aktuális hely</string>
-    <string name="map_center_widget">Térképközéppont</string>
     <string name="coordinates_widget_map_center_desc">A widget az aktuális térképközéppont földrajzi koordinátáit mutatja</string>
     <string name="quick_action_map_center_widget_descr">Egy kapcsoló a térképközéppont widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="map_widget_zoom_level">Nagyítási szint</string>

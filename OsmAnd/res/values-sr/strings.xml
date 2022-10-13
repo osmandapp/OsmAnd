@@ -4731,13 +4731,11 @@
     <string name="compass_visible_if_map_rotated_desc">Сакривено када је Север горе</string>
     <string name="developer_widgets">Справице за програмере</string>
     <string name="shared_string_shows">Приказује</string>
-    <string name="current_location_widget">Тренутна позиција</string>
     <string name="map_widget_target_distance">Циљана удаљеност</string>
     <string name="map_widget_zoom_level">Ниво зума</string>
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
-    <string name="map_center_widget">Центар карте</string>
     <string name="shared_string_2_5_d_view">2.5D поглед</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>

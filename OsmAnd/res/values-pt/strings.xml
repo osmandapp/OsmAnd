@@ -4793,12 +4793,10 @@
     <string name="click_on_widget">Clique no widget</string>
     <string name="map_markers_desc">Mostra a distância ou hora prevista de chegada (ETA) para os dois primeiros marcadores na lista de marcadores do mapa.</string>
     <string name="quick_action_current_location_widget_descr">Um alternador para mostrar ou esconder o widget de localização atual no mapa.</string>
-    <string name="map_center_widget">Centro do mapa</string>
     <string name="coordinates_widget_map_center_desc">Mostra as coordenadas geográficas do centro do mapa atual</string>
     <string name="coordinates_widget_current_location_desc">Mostra as coordenadas geográficas da geolocalização atual</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
-    <string name="current_location_widget">Localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
     <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
     <string name="map_widget_zoom_level">Nível de zoom</string>
