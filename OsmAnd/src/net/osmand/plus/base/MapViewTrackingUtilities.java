@@ -34,7 +34,6 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -50,6 +49,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 	private static final long MOVE_ANIMATION_TIME = 500;
+	public static final int AUTO_ZOOM_DEFAULT_CHANGE_ZOOM = 4500;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -68,7 +68,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean followingMode;
 	private boolean routePlanningMode;
 	private boolean showViewAngle;
-	private boolean isUserZoomed;
 	private String locationProvider;
 	private Location myLocation;
 	private Float heading;
@@ -405,10 +404,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zdelta += 1;
 				}
 				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
-				long lastZoomTime = Math.max(lastTimeAutoZooming, lastTimeManualZooming);
+				boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if (now - lastZoomTime > 4500 && (now - lastZoomTime > threshold || !isUserZoomed)) {
-					isUserZoomed = false;
+				if ((now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM && !isUserZoomed)
+						|| (now - lastTimeManualZooming > Math.max(threshold, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM) && isUserZoomed)) {
 					lastTimeAutoZooming = now;
 //					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
 //					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
@@ -580,7 +579,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setZoomTime(long time) {
 		lastTimeManualZooming = time;
-		isUserZoomed = true;
 	}
 
 	public long getLastManualZoomTime() {
