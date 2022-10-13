@@ -4777,8 +4777,6 @@
     <string name="go_to_marker_location">Fara á staðsetningu merkis</string>
     <string name="display_position">Staðsetning á skjá</string>
     <string name="favorite_delete_group">Eyða hópi</string>
-    <string name="map_center_widget">Miðja korts</string>
-    <string name="current_location_widget">Núverandi staðsetning</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>

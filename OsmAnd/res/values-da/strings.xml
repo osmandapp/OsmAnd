@@ -4795,8 +4795,6 @@
     <string name="map_markers_desc">Modulet viser afstand eller forventet ankomsttid (ETA) for de to første markører på listen over kortmarkører.</string>
     <string name="click_on_widget">Klik på modul</string>
     <string name="quick_action_current_location_widget_descr">En omskifter til at vise eller skjule Aktuel placering-modulet på kortet.</string>
-    <string name="map_center_widget">Kortcentrum</string>
-    <string name="current_location_widget">Nuværende placering</string>
     <string name="coordinates_widget_map_center">Koordinater: kortcentrum</string>
     <string name="coordinates_widget_current_location">Koordinater: nuværende placering</string>
     <string name="quick_action_map_center_widget_descr">En omskifter til at vise eller skjule Kortcentrum-modulet på kortet.</string>

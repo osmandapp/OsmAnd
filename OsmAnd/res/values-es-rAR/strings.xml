@@ -4805,9 +4805,7 @@
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">El widget muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
-    <string name="map_center_widget">Centro del mapa</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
-    <string name="current_location_widget">Ubicación actual</string>
     <string name="coordinates_widget_map_center_desc">Muestra las coordenadas geográficas del centro del mapa actual</string>
     <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>

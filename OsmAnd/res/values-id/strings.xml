@@ -4389,7 +4389,6 @@
     <string name="map_widget_ant_bicycle_cadence">Irama Sepeda</string>
     <string name="map_widget_camera_tilt_desc">Widget menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
     <string name="developer_widgets">Widget pengembang</string>
-    <string name="map_center_widget">Tengah peta</string>
     <string name="rendering_value_highContrastRoads_name">Jalan kontras tinggi</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas jalan Amerika</string>
     <string name="coordinates_widget_map_center_desc">Widget menampilkan koordinat geografis tengah peta saat ini</string>
@@ -4483,7 +4482,6 @@
     <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
     <string name="map_widget_target_distance_desc">Widget menampilkan jarak dari kamera ke lokasi sasaran.</string>
     <string name="map_widget_zoom_level_desc">Widget menampilkan tingkat perbesaran peta saat ini.</string>
-    <string name="current_location_widget">Lokasi saat ini</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
     <string name="pref_vector_rendering">Opsi perenderan vektor spesifik</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpine dan turunan</string>
