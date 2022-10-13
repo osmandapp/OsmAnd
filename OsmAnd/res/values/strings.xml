@@ -62,8 +62,8 @@
     <string name="developer_widgets">Developer widgets</string>
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
-    <string name="map_center_widget">Map center</string>
-    <string name="current_location_widget">Current location</string>
+    <string name="map_center_widget">Coordinates: Map center</string>
+    <string name="current_location_widget">Coordinates: Current location</string>
     <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
     <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>

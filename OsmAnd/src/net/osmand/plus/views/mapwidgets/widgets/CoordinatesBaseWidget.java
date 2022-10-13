@@ -140,10 +140,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		AndroidUiHelper.updateVisibility(divider, false);
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 
-		int utmIconId = isNightMode()
-				? R.drawable.widget_coordinates_utm_night
-				: R.drawable.widget_coordinates_utm_day;
-		firstIcon.setImageDrawable(iconsCache.getIcon(utmIconId));
+		firstIcon.setImageDrawable(getUtmIcon());
 	}
 
 	private void showStandardCoordinates(double lat, double lon, int format) {
@@ -168,7 +165,15 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	@NonNull
-	private Drawable getLatitudeIcon(double lat) {
+	protected Drawable getUtmIcon(){
+		int utmIconId = isNightMode()
+				? R.drawable.widget_coordinates_utm_night
+				: R.drawable.widget_coordinates_utm_day;
+		return iconsCache.getIcon(utmIconId);
+	}
+
+	@NonNull
+	protected Drawable getLatitudeIcon(double lat) {
 		int latDayIconId = lat >= 0
 				? R.drawable.widget_coordinates_latitude_north_day
 				: R.drawable.widget_coordinates_latitude_south_day;
@@ -180,7 +185,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	@NonNull
-	private Drawable getLongitudeIcon(double lon) {
+	protected Drawable getLongitudeIcon(double lon) {
 		int lonDayIconId = lon >= 0
 				? R.drawable.widget_coordinates_longitude_east_day
 				: R.drawable.widget_coordinates_longitude_west_day;
