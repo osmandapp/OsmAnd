@@ -51,7 +51,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 

@@ -51,7 +51,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
@@ -242,7 +242,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
-			boolean isDevPluginEnabled = OsmandPlugin.isEnabled(OsmandDevelopmentPlugin.class);
+			boolean isDevPluginEnabled = PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class);
 			for (LocalIndexInfo v : values) {
 				if (v.getOriginalType() != LocalIndexType.TTS_VOICE_DATA || isDevPluginEnabled) {
 					listAdapter.addLocalIndexInfo(v);
@@ -344,6 +344,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.FONT_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.FONT_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
 			}
@@ -757,7 +759,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA));
+					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA, LocalIndexType.DEPTH_DATA));
 		} else if (itemId == R.string.local_index_mi_restore) {
 			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {

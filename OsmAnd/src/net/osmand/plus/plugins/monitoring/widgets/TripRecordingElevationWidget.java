@@ -14,7 +14,7 @@ import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;

@@ -6,7 +6,7 @@ import androidx.core.app.NotificationCompat;
 
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -63,7 +63,7 @@ public class ErrorNotification extends OsmandNotification {
 		boolean planning = routingHelper.isRoutePlanningMode();
 		boolean pause = routingHelper.isPauseNavigation();
 
-		boolean gpxEnabled = OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
+		boolean gpxEnabled = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		String usedBy = service != null ? "" + service.getUsedBy() : "X";
 
 		notificationText = "Info: " + (following ? "1" : "") + (planning ? "2" : "") + (pause ? "3" : "") + (gpxEnabled ? "4" : "") + "-" + usedBy + ". "

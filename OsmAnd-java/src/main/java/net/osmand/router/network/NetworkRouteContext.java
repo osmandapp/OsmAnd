@@ -2,13 +2,7 @@ package net.osmand.router.network;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
@@ -147,6 +141,20 @@ public class NetworkRouteContext {
 		return point.objects;
 	}
 
+	public NetworkRoutePoint getClosestNetworkRoutePoint(int sx31, int sy31) throws IOException {
+		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(sx31, sy31);
+		double minDistance = Double.MAX_VALUE;
+		NetworkRoutePoint nearPoint = null;
+		for (NetworkRoutePoint pt : osmcRoutesTile.routes.valueCollection()) {
+			double distance = MapUtils.squareRootDist31(sx31, sy31, pt.x31, pt.y31);
+			if (distance < minDistance) {
+				nearPoint = pt;
+				minDistance = distance;
+			}
+		}
+		return nearPoint;
+	}
+
 	private NetworkRoutesTile getMapRouteTile(int x31, int y31) throws IOException {
 		long tileId = getTileId(x31, y31);
 		NetworkRoutesTile tile = indexedTiles.get(tileId);
@@ -260,18 +268,18 @@ public class NetworkRouteContext {
 		loadedSubregions.clear();
 		stats = new NetworkRouteContextStats();
 	}
-	
+
 	public void clearStats() {
 		stats = new NetworkRouteContextStats();
 	}
-	
+
 	public static class NetworkRoutePoint {
 		public final int x31;
 		public final int y31;
 		public final long id;
 		public final List<NetworkRouteSegment> objects = new ArrayList<>();
 		public double localVar;
-		
+
 		public NetworkRoutePoint(int x31, int y31, long id) {
 			this.x31 = x31;
 			this.y31 = y31;
@@ -406,10 +414,10 @@ public class NetworkRouteContext {
 	private static class NetworkRoutesTile {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
 		private final long tileId;
-		
+
 		public NetworkRoutesTile(long tileId) {
 			this.tileId = tileId;
-			
+
 		}
 
 		public void add(BinaryMapDataObject obj, RouteKey rk) {
@@ -465,7 +473,7 @@ public class NetworkRouteContext {
 		public NetworkRoutePoint getRouteSegment(int x31, int y31) {
 			if (getTileId(x31, y31) != tileId) {
 				System.err.println(String.format("Wrong tile id !!! %d != %d", getTileId(x31, y31), tileId));
-			}			
+			}
 			return routes.get(convertPointToLong(x31, y31));
 		}
 

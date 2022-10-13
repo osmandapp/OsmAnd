@@ -3,6 +3,7 @@ package net.osmand.map;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -66,6 +67,7 @@ public class TileSourceManager {
 
 	private static final String PARAM_BING_QUAD_KEY = "{q}";
 	private static final String PARAM_RND = "{rnd}";
+	private static final String PARAM_BOUNDING_BOX = "{bbox}";
 	public static final String PARAMETER_NAME = "{PARAM}";
 
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
@@ -418,6 +420,14 @@ public class TileSourceManager {
 			return new String(tn);
 		}
 
+		private static String calcBoundingBoxForTile(int zoom, int x, int y) {
+			double xmin = MapUtils.getLongitudeFromTile(zoom, x);
+			double xmax = MapUtils.getLongitudeFromTile(zoom, x+1);
+			double ymin = MapUtils.getLatitudeFromTile(zoom, y+1);
+			double ymax = MapUtils.getLatitudeFromTile(zoom, y);
+			return String.format("%.8f,%.8f,%.8f,%.8f", xmin, ymin, xmax, ymax);
+		}
+
 		public static String buildUrlToLoad(String urlTemplate, String[] randomsArray, int x, int y, int zoom, Map<String, String> params) {
 			try {
 				if (randomsArray != null && randomsArray.length > 0) {
@@ -436,6 +446,11 @@ public class TileSourceManager {
 				int bingQuadKeyParamIndex = urlTemplate.indexOf(PARAM_BING_QUAD_KEY);
 				if (bingQuadKeyParamIndex != -1) {
 					return urlTemplate.replace(PARAM_BING_QUAD_KEY, eqtBingQuadKey(zoom, x, y));
+				}
+
+				int bbKeyParamIndex = urlTemplate.indexOf(PARAM_BOUNDING_BOX);
+				if (bbKeyParamIndex != -1) {
+					return urlTemplate.replace(PARAM_BOUNDING_BOX, calcBoundingBoxForTile(zoom, x, y));
 				}
 
 				if (!Algorithms.isEmpty(params)) {

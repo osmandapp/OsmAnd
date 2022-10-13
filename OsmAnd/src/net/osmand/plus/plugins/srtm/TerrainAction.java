@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -32,11 +32,11 @@ public class TerrainAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			plugin.toggleTerrain(mapActivity, !plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
-					OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 				}
 				plugin.updateLayers(mapActivity, mapActivity);
 				mapActivity.refreshMapComplete();
@@ -67,7 +67,7 @@ public class TerrainAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
-		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		return plugin != null && plugin.TERRAIN.get();
 	}
 }

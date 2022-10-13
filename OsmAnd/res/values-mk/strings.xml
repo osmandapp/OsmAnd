@@ -485,7 +485,6 @@
     <string name="parking_widget_desc">Aplikacijata Vi go pokazuva rastojanieto od centarot na ekranot do parking prostorot.</string>
     <string name="map_markers_bar_widget_desc">Na grafičkata kontrola na gornata lenta može da go vidite rastojanieto i nasokata do markerot od momentalnata lokacija. Možno e da se konfigurira za da se vidat 1 ili 2 gorni markeri vo vidžetot.</string>
     <string name="av_notes_choose_action_widget_desc">Odberete akcija.</string>
-    <string name="fps_widget_desc">Pokažuva kolku brzo se prikažuvaat kartata i elementite na kratata kako i nejzinoto osvezuvane.</string>
     <string name="radius_rules_widget_desc">Alatkata radius-ruler pomaga da se odredi radiusot okolu izbranata točka na kartata što prikažuva krugovi na rastojanie na kartata.</string>
     <string name="lanes_widgets_desc">Vidžetot Lanes go prikažuva momentalniot raspored na kolovoznite lenti i gi istaknuva lentite za vozenje so aktivna navigacija.</string>
     <string name="street_name_widget_desc">Vidžetot za ime na ulica go prikažuva tekovnoto ime na ulica so prava strelka za lokacija ili ime na slednata ulica so manevar što treba da se završi.</string>
@@ -528,14 +527,14 @@
     <string name="list_of_groups">Spisok na grupi</string>
     <string name="points_selection_descr">Da se zatvori i da se izgubat site promeni\?</string>
     <string name="import_tracks_descr">%1$s, sodrži %2$s posebni zapisi. Izberete zapisi za vnes.</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Podvodni tuneli</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Podvodni tuneli</string>
     <string name="gpx_no_routes_descr">Možete da ja koristite alatkata „%1$s“ za da dodadete ruta vo datotekata.</string>
     <string name="rendering_attr_seabedDetail_description">Dopolnitelni tekstualni informacii za površina_kvalifikacija na morskoto dno, kombinirani tipovi površini, kategorija i takson na treva ili morska treva</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznaki za beleški</string>
     <string name="predefined_waypoint_appearance_description">So dopiranje na ovaa akcija avtomatski ce se začuva patnata točka so prethodno definirani parametri.</string>
     <string name="shared_string_statistics">Statistika</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Šematski prikaz na ikoni pri mal zum</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne gi krijte podvodnite tuneli</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne gi krijte podvodnite tuneli</string>
     <string name="shared_string_not_used">Ne se koristi</string>
     <string name="waypoint_appearance">Izgled na patna točka</string>
     <string name="track_file_description">So dopiranje na ovaa akcija ḱe se prikaže dijalog za izbor na dostapni pesni.</string>
@@ -720,7 +719,6 @@
     <string name="shared_string_vehicle">Vozilo</string>
     <string name="shared_string_subtype">Podtip</string>
     <string name="routing_attr_prefer_hiking_routes_description">Pretpočitaj planinski ruti</string>
-    <string name="plan_route_join_segments">Prikluči se na segmentite</string>
     <string name="app_mode_light_aircraft">Mali avioni</string>
     <string name="select_groups_for_import">Izberete grupi što ḱe se uvezat.</string>
     <string name="export_not_enough_space">Nema dovolen prostor</string>
@@ -1563,7 +1561,6 @@
     <string name="price_free">Besplatno</string>
     <string name="get_discount_first_part">%1$s za prvite %2$s</string>
     <string name="price_and_discount">%1$s • Začuvaj %2$s</string>
-    <string name="gpx_join_gaps">Priklučete gi prazninite</string>
     <string name="app_mode_camper">Kamper</string>
     <string name="app_mode_campervan">Kamperso kombi (RV)</string>
     <string name="app_mode_wagon">Vagon</string>
@@ -3156,7 +3153,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izberete postoečki…</string>
     <string name="maps_define_edit">Definirajte/Uredete…</string>
-    <string name="map_widget_fps_info">Informacii za otstranuvanje greški na FPS</string>
     <string name="driving_region">Vozen region</string>
     <string name="driving_region_japan">Japonija</string>
     <string name="speak_street_names">Iminja na ulici (TTS)</string>
@@ -4650,7 +4646,6 @@
     <string name="quick_action_bug_message">Poraka</string>
     <string name="quick_action_category_descr">Kategorija za začuvuvanje na Omileni vo:</string>
     <string name="quick_action_add_configure_map">Konfigurirajte ja mapata</string>
-    <string name="quick_action_add_navigation">Navigacija</string>
     <string name="quick_action_fav_name_descr">Ostavete prazno za da ja koristite adresata ili imeto na mestoto.</string>
     <string name="quick_action_bug_descr">Ovaa poraka e vklučena vo poleto za komentari.</string>
     <string name="quick_action_gpx_category_descr">Izberete izborna kategorija.</string>

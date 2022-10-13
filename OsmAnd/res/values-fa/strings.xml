@@ -1041,7 +1041,6 @@
     <string name="speak_title">اعلام‌کردن…</string>
     <string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، اخطارهای دوربین سرعت و محدودیت‌های سرعت را انجام دهید.</string>
     <string name="speak_street_names">نام خیابان‌ها (موتور صوتی)</string>
-    <string name="map_widget_fps_info">اطلاعات عیب‌یابی FPS</string>
     <string name="driving_region_descr">منطقهٔ رانندگی را انتخاب کنید: آمریکا، اروپا، انگلستان، آسیا و سایر مناطق.</string>
     <string name="driving_region_japan">ژاپن</string>
     <string name="driving_region_us">ایالات متحدهٔ آمریکا</string>
@@ -2169,7 +2168,6 @@
     <string name="quick_action_poi_hide">پنهان‌کردن %1$s</string>
     <string name="quick_action_add_category">افزودن دسته</string>
     <string name="quick_action_add_configure_map">پیکربندی نقشه</string>
-    <string name="quick_action_add_navigation">ناوبری</string>
     <string name="quick_action_fav_name_descr">خالی بگذارید تا از نشانی یا نام محل استفاده شود.</string>
     <string name="quick_action_bug_descr">این نوشته در قسمت پیام درج می‌شود.</string>
     <string name="quick_action_bug_message">پیام</string>
@@ -3080,7 +3078,6 @@
     <string name="base_profile_descr_aircraft">هواپیما، گلایدینگ</string>
     <string name="routing_attr_max_num_changes_description">حداکثر چند بار شیوهٔ حمل‌ونقل تغییر کند؟</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
-    <string name="gpx_join_gaps">حذف وقفه‌ها</string>
     <string name="rendering_attr_showLez_description">محدوده‌های کاهش آلودگی هوای شهر را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
     <string name="rendering_attr_showLez_name">محدوده‌های کاهش</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
@@ -3872,7 +3869,6 @@
 \nاز مپیلاری برای تصویر سطح خیابان؛
 \nاز وب و ویکی‌پدیا برای عکس‌های نقاط توجه متناسب با داده‌های اوپن‌استریت‌مپ.</string>
     <string name="app_mode_light_aircraft">هواپیمای سبک</string>
-    <string name="plan_route_join_segments">اتصال پاره‌ها</string>
     <string name="plan_route_split_before">تقطیع از اینجا به قبل</string>
     <string name="plan_route_split_after">تقطیع از این جا به بعد</string>
     <string name="plan_route_add_new_segment">افزودن یک پارهٔ جدید</string>

@@ -721,7 +721,6 @@
     <string name="app_mode_truck">Lori</string>
     <string name="auto_zoom_none">Dim chwyddo awtomatig</string>
     <string name="map_magnifier">Chwyddwr y map</string>
-    <string name="map_widget_fps_info">Gwybodaeth dadfygio FPS</string>
     <string name="driving_region_descr">Dewisa gyfandir gyrru: DU, Ewrop, UDA, Asia, ac eraill.</string>
     <string name="driving_region">Rhanbarth gyrru</string>
     <string name="driving_region_europe_asia">Ewrop, Asia, De America, a thebyg</string>
@@ -852,8 +851,8 @@
     <string name="rendering_attr_seabedDetail_description">Gwybodaeth destun ychwanegol ar surface_qualification gwely\'r môr, cyfuniad o fathau o arwyneb, categorïau a thacson chwyn a morwellt</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Dangos tagiau Fixme</string>
     <string name="rendering_value_all_name">Y cwbl</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Twnelau dyfrffyrdd</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Peidio â chuddio twnelau dyfrffyrdd</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Twnelau dyfrffyrdd</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Peidio â chuddio twnelau dyfrffyrdd</string>
     <string name="save_as_copy">Cadw fel copi</string>
     <string name="storage_migration_wrong_folder_warning">Ni chanfuwyd data OSM yn y ffolder honno. Rho gynnig arall arni.</string>
     <string name="app_profile_type">Math o broffil ap</string>
@@ -1479,7 +1478,6 @@
     <string name="shared_string_folders">Ffolderi</string>
     <string name="edit_track">Golygu trac</string>
     <string name="upload_to_openstreetmap">Uchwlwytho i OpenStreetMap</string>
-    <string name="plan_route_join_segments">Cysylltu segmentau</string>
     <string name="transport_nearby_routes">O fewn</string>
     <string name="shared_string_upload">Uwchlwytho</string>
     <string name="osmand_parking_time_left">yn weddill</string>
@@ -1508,7 +1506,6 @@
     <string name="yard">llth</string>
     <string name="poi">MODd</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="quick_action_add_navigation">Llywio</string>
     <string name="selected_waypoints_descr">Caiff y cyfeirbwyntiau dan sylw eu hychwanegu i\'r trac \"%1$s\"</string>
     <string name="shared_string_reading_file">Yn darllen ffeil…</string>
     <string name="all_groups">Pob grŵp</string>
@@ -2531,7 +2528,6 @@
     <string name="routing_attr_hazmat_category_name">Categori Hazmat</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Dim cyfyngiadau)</string>
     <string name="circle_settings">Gosodiadau cylchoedd</string>
-    <string name="fps_widget_desc">Mae\'n dangos pa mor gyflym y mae mapiau ac elfennau mapiau yn ymddangos ac ail-lwytho.</string>
     <string name="get_altitude_data">Cael data uchder</string>
     <string name="edit_profiles_descr">Ni ellir dileu proffiliau OsmAnd, ond gellir eu hanalluogi (ar y sgrin flaenorol), neu eu trefnu ar y gwaelod.</string>
     <string name="change_default_settings">Newid gosodiad</string>
@@ -3332,7 +3328,6 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Lliw y llwybrau yn ôl eu lliw lleol unigol (os yw\'n bresennol ar OpenStreetMap) a symbol tarian heicio.</string>
     <string name="activity_type_offroad_name">Oddi ar y ffordd</string>
     <string name="delete_online_routing_engine">Tynnu\'r injan llwybro ar-lein hwn\?</string>
-    <string name="gpx_join_gaps">Uno\'r bylchau</string>
     <string name="rendering_attr_showLez_description">Dangos Parthau Allyriadau Isel ar y map. Nid yw\'n effeithio ar y llwybro.</string>
     <string name="rendering_attr_winter_road_name">Ffordd y gaeaf</string>
     <string name="settings_derived_routing_mode_string">Modd defnyddiwr, yn deillio o: %s</string>

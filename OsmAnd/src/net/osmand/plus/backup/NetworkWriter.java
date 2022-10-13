@@ -140,7 +140,7 @@ public class NetworkWriter extends AbstractWriter {
 			FileSettingsItem settingsItem = (FileSettingsItem) item;
 			FileSubtype subtype = settingsItem.getSubtype();
 			if (subtype == FileSubtype.OBF_MAP || subtype == FileSubtype.ROAD_MAP || subtype == FileSubtype.WIKI_MAP
-					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP) {
+					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP || subtype == FileSubtype.NAUTICAL_DEPTH) {
 				return backupHelper.isObfMapExistsOnServer(fileName);
 			}
 		}

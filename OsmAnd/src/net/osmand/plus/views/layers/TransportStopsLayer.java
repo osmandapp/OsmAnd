@@ -81,7 +81,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	public TransportStopsLayer(@NonNull Context context) {
 		super(context);
-		OsmandSettings settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
 	}
 
@@ -193,6 +194,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tb, settings);
 		if (!mapsInitialized) {
 			return;
 		}
@@ -206,11 +208,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
 			if (this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated
 					|| tb.getZoom() < startZoomRoute || this.stopRouteDist != stopRouteDist
-					|| this.stopRouteType != stopRouteType || !showTransportStops.get()) {
+					|| this.stopRouteType != stopRouteType || !isShowTransportStops()) {
 				clearTransportRouteCollections();
 				clearTransportStopsTileProvider();
 			}
-			if (tb.getZoom() >= startZoomRoute && showTransportStops.get()) {
+			if (tb.getZoom() >= startZoomRoute && isShowTransportStops()) {
 				if (stopRoute != null) {
 					initTransportRouteCollections();
 				} else {
@@ -255,7 +257,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 		}
 
-		if (showTransportStops.get() && tb.getZoom() >= startZoom && objects == null) {
+		if (isShowTransportStops() && tb.getZoom() >= startZoom && objects == null) {
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}
@@ -376,6 +378,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		return null;
 	}
 
+	public boolean isShowTransportStops() {
+		return showTransportStops.get();
+	}
+
 	/**OpenGL*/
 	private void initTransportRouteCollections() {
 		MapRendererView mapRenderer = getMapRenderer();
@@ -420,7 +426,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		List<TransportStop> transportStops = stopRoute.route.getForwardStops();
 		String transportRouteType = stopRoute.route.getType();
 		if (transportStops.size() > 0) {
-			int baseOrder = getBaseOrder() - 1;
+			int pointsOrder = getPointsOrder() - 1;
 			mapMarkersCollection = new MapMarkersCollection();
 			for (TransportStop ts : transportStops) {
 				StopsCollectionPoint collectionPoint =
@@ -429,7 +435,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				mapMarkerBuilder
 						.setPosition(collectionPoint.getPoint31())
 						.setIsHidden(false)
-						.setBaseOrder(baseOrder)
+						.setBaseOrder(pointsOrder)
 						.setPinIcon(collectionPoint.getImageBitmap(true))
 						.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
 						.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
@@ -459,7 +465,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 		if (transportStopsTileProvider == null) {
-			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getBaseOrder(), getTextScale());
+			transportStopsTileProvider = new TransportStopsTileProvider(getContext(), data, getPointsOrder(), getTextScale());
 			transportStopsTileProvider.drawSymbols(mapRenderer);
 		}
 	}

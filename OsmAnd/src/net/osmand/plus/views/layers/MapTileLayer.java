@@ -25,7 +25,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
@@ -286,6 +286,7 @@ public class MapTileLayer extends BaseMapLayer {
 	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		if (view == null) {
 			return;
 		}
@@ -345,7 +346,7 @@ public class MapTileLayer extends BaseMapLayer {
 		int tiles = (width + ADDITIONAL_TILE_CACHE) * (height + ADDITIONAL_TILE_CACHE);
 		mgr.setMapTileLayerSizes(this, tiles);
 
-		boolean useInternet = (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class) || OsmandPlugin.isActive(MapillaryPlugin.class))
+		boolean useInternet = (PluginsHelper.isActive(OsmandRasterMapsPlugin.class) || PluginsHelper.isActive(MapillaryPlugin.class))
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();

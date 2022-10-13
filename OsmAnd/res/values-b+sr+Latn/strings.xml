@@ -22,7 +22,6 @@
     <string name="edit_tilesource_minzoom">Minimalno uveličanje</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izaberite postojeći…</string>
-    <string name="map_widget_fps_info">Podaci o greškama brzine prikaza sličica</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">Sjedinjene Američke Države</string>
     <string name="driving_region_canada">Kanada</string>
@@ -342,7 +341,6 @@
     <string name="rendering_attr_hideWaterPolygons_description">Vode</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sakrij vodu</string>
     <string name="routing_attr_allow_motorway_name">Koristi autoputeve</string>
-    <string name="quick_action_add_navigation">Navođenje</string>
     <string name="quick_action_add_configure_map">Podesite kartu</string>
     <string name="quick_action_poi_show">Prikaži %1$s</string>
     <string name="quick_action_poi_hide">Sakrij %1$s</string>
@@ -3525,7 +3523,6 @@
     <string name="rendering_attr_showLez_description">Prikaži zone niske emisije zagađenja. Ne utiče na rutiranje.</string>
     <string name="app_mode_campervan">Kamp prikolica (RV)</string>
     <string name="app_mode_camper">Kamper</string>
-    <string name="gpx_join_gaps">Spoj razmake</string>
     <string name="shared_string_default">Podrazumevano</string>
     <string name="app_mode_pickup_truck">Kamion dostave</string>
     <string name="app_mode_wagon">Vagon</string>
@@ -3884,7 +3881,6 @@
 \nVeb / Vikimedija - fotografije tačaka od interesa navedene u OpenStreetMap podacima.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Laka letelica</string>
-    <string name="plan_route_join_segments">Spoji segmente</string>
     <string name="plan_route_split_before">Podeli pre</string>
     <string name="plan_route_split_after">Posle podeli</string>
     <string name="plan_route_add_new_segment">Dodajte novi segment</string>
@@ -4264,7 +4260,6 @@
     <string name="shared_string_grade">Kvalitet</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
     <string name="routing_attr_avoid_4wd_only_description">Izbegavanje puteva koji su pogodni samo za vozila sa pogonom na sva četiri točka</string>
-    <string name="fps_widget_desc">Vidžet pokazuje koliko brzo se mape i elementi mape prikazuju i osvežavaju.</string>
     <string name="lanes_widgets_desc">Vidžet za trake prikazuje trenutni raspored traka puta i ističe trake za vožnju uz aktivnu navigaciju.</string>
     <string name="route_maneuvers">Manevri rute</string>
     <string name="map_widget_altitude">Nadmorska visina trenutne lokacije</string>
@@ -4291,7 +4286,7 @@
     <string name="shared_string_widget">Vidžet</string>
     <string name="calculating_altitude">Izračunavanje nadmorske visine</string>
     <string name="all_groups">Sve grupe</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj tunele za vodene puteve</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj tunele za vodene puteve</string>
     <string name="turn_arrows">Strelice skretanja</string>
     <string name="turn_arrows_descr">Izaberite da li su strelice za skretanje prikazane na liniji rute.</string>
     <string name="included_categories">Uključene kategorije</string>
@@ -4485,7 +4480,7 @@
     <string name="rendering_value_omit_name">Izostaviti</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Oznake za beleške</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za beleške</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneli plovnih puteva</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tuneli plovnih puteva</string>
     <string name="files_with_route_restrictions">Datoteke sa ograničenjima rute</string>
     <string name="waypoint_template">Šablon putne tačke</string>
     <string name="use_routing_fallback">Zamena za vanmrežno rutiranje</string>

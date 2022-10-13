@@ -496,7 +496,6 @@ POIの更新は利用できません</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">保存済みデータから選択…</string>
     <string name="maps_define_edit">マップの定義と編集…</string>
-    <string name="map_widget_fps_info">FPS デバッグ情報</string>
     <string name="driving_region_descr">運転する地域を選択します:アメリカ、ヨーロッパ、イギリス、アジア、その他</string>
     <string name="driving_region">運転地域</string>
     <string name="driving_region_japan">日本</string>
@@ -2143,7 +2142,6 @@ POIの更新は利用できません</string>
     <string name="quick_action_add_category">カテゴリーを追加</string>
     <string name="quick_action_add_create_items">アイテムを作成</string>
     <string name="quick_action_add_configure_map">マップ設定</string>
-    <string name="quick_action_add_navigation">ナビゲーション</string>
     <string name="quick_action_fav_name_descr">住所または場所の名前を利用する場合は空白のままにします</string>
     <string name="quick_action_bug_descr">このメッセージはコメント欄に自動入力されます。</string>
     <string name="quick_action_bug_message">メッセージ</string>
@@ -3241,7 +3239,6 @@ POIの更新は利用できません</string>
     <string name="screen_alerts">画面アラート</string>
     <string name="route_parameters_descr">ルートパラメーターの構成</string>
     <string name="route_parameters">ルートパラメーター</string>
-    <string name="gpx_join_gaps">ギャップを埋める</string>
     <string name="app_mode_wagon">ワゴン車</string>
     <string name="app_mode_pickup_truck">ピックアップトラック</string>
     <string name="years_5">年</string>
@@ -3982,7 +3979,6 @@ POIの更新は利用できません</string>
     <string name="plan_route_split_after">この後で分割</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">軽飛行機</string>
-    <string name="plan_route_join_segments">セグメントの結合</string>
     <string name="plan_route_add_new_segment">新規セグメントの追加</string>
     <string name="profile_type_osmand_string">OsmAndプロファイル</string>
     <string name="profile_type_user_string">ユーザープロファイル</string>
@@ -4444,7 +4440,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_all_name">すべて</string>
     <string name="rendering_value_omit_name">省略</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低ズーム時のアイコン簡略表示に関するものです</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">水路トンネル</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">水路トンネル</string>
     <string name="shared_string_used">使用済</string>
     <string name="shared_string_not_used">未使用</string>
     <string name="waypoint_template">経由地点テンプレート</string>
@@ -4503,7 +4499,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Note(メモ)タグ</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note(メモ)タグの表示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低ズーム用アイコン</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">水路トンネルを隠さない</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">水路トンネルを隠さない</string>
     <string name="files_with_route_restrictions">ルート制限のあるファイル</string>
     <string name="track_file_description">これをタップすると、利用可能な経路の選択ダイアログが表示されます。</string>
     <string name="track_file">経路ファイル</string>
@@ -4571,4 +4567,14 @@ POIの更新は利用できません</string>
     <string name="map_marker_average_speed_desc">到着予定時刻を計算するために平均速度を測定する時間間隔を指定します。</string>
     <string name="reset_all_settings_desc">リセットしてすべての設定を初期値に戻してもよろしいですか？</string>
     <string name="lang_ckb">中央クルド語</string>
+    <string name="bottom_widgets_panel">下パネル</string>
+    <string name="page_number">ページ %1$s</string>
+    <string name="compass_always_hidden">常に非表示</string>
+    <string name="top_widgets_panel">上パネル</string>
+    <string name="map_widget_average_speed">平均速度</string>
+    <string name="available_widgets">利用可能なウィジェット</string>
+    <string name="compass_always_visible">常に表示</string>
+    <string name="map_widget_current_speed">現行速度</string>
+    <string name="shared_string_buttons">ボタン</string>
+    <string name="auto_backup_title">自動バックアップ</string>
 </resources>

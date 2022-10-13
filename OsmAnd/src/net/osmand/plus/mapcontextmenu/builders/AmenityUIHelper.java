@@ -38,7 +38,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -134,7 +134,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		AmenityInfoRow cuisineRow = null;
 		List<PoiType> collectedPoiTypes = new ArrayList<>();
 
-		boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
+		boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 
 		Map<String, String> additionalInfoFiltered = new HashMap<>();
 		for (String origKey : getAdditionalInfoKeys()) {
@@ -234,7 +234,7 @@ public class AmenityUIHelper extends MenuBuilder {
 						wikiAmenity.setName(name);
 					}
 
-					String articleLang = OsmandPlugin.onGetMapObjectsLocale(wikiAmenity, preferredLang);
+					String articleLang = PluginsHelper.onGetMapObjectsLocale(wikiAmenity, preferredLang);
 					String lng = wikiAmenity.getContentLanguage("content", articleLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";

@@ -971,7 +971,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Selectează una existentă…</string>
     <string name="maps_define_edit">Definește/Editează…</string>
-    <string name="map_widget_fps_info">Informații depanare FPS</string>
     <string name="driving_region_descr">Selectați regiune de condus: USA, Europa, UK, Asia, și altele.</string>
     <string name="driving_region">regiunea de conducere</string>
     <string name="driving_region_japan">Japonia</string>
@@ -2614,7 +2613,6 @@
     <string name="shared_string_file_is_saved">%s este salvat</string>
     <string name="shared_string_open_track">Deschide pista</string>
     <string name="shared_string_track_is_saved">Traseul %s este salvat</string>
-    <string name="gpx_join_gaps">Alăturați lacunele</string>
     <string name="app_mode_camper">Camping</string>
     <string name="app_mode_campervan">Rulota</string>
     <string name="rendering_attr_showLez_description">Afișează zonele cu emisii reduse pe hartă. Nu afectează rutarea.</string>
@@ -3358,7 +3356,6 @@
 \nWeb / Wikimedia - fotografii POI conform datelor OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Aeronave ușoare</string>
-    <string name="plan_route_join_segments">Uniți segmentele</string>
     <string name="plan_route_split_before">Împărțiti înainte de</string>
     <string name="plan_route_split_after">Divizați după</string>
     <string name="plan_route_add_new_segment">Adăugați un nou segment</string>
@@ -4196,7 +4193,6 @@
     <string name="quick_action_bug_message">Mesaj</string>
     <string name="quick_action_bug_descr">Acest mesaj este inclus în câmpul de comentarii.</string>
     <string name="quick_action_fav_name_descr">Lăsați spațiul gol pentru a utiliza adresa sau denumirea localității.</string>
-    <string name="quick_action_add_navigation">Navigație</string>
     <string name="quick_action_add_configure_map">Configurați harta</string>
     <string name="quick_action_add_create_items">Creați elemente</string>
     <string name="quick_action_add_category">Adăugați o categorie</string>
@@ -4495,8 +4491,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afișează etichetele note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Pictograme la mărimi reduse</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Afișarea schematică a pictogramelor la măriri mici</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tuneluri navigabile</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nu ascundeți tunelurile căilor navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tuneluri navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Nu ascundeți tunelurile căilor navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete pentru note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichetele Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4643,7 +4639,6 @@
     <string name="routing_attr_avoid_4wd_only_description">Evitați drumurile potrivite doar pentru vehicule cu tracțiune integrală</string>
     <string name="widget_secondary_desc_part_of">Parte a pluginului %1$s.</string>
     <string name="av_notes_choose_action_widget_desc">Alegeți acțiunea.</string>
-    <string name="fps_widget_desc">Arată cât de repede sunt afișate și reîmprospătate harta și elementele hărții.</string>
     <string name="current_speed_widget_desc">Afișează viteza actuală detectată de senzorul GPS.</string>
     <string name="magnetic_bearing_widget_desc">Unghiul dintre nordul magnetic și punctul țintă observat din poziția dumneavoastră.</string>
     <string name="arrival_time_widget_desc">Ora de sosire la punctul de destinație.</string>

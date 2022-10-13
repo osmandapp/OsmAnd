@@ -1109,7 +1109,6 @@
     <string name="quick_action_switch_night_mode">Mou nocherniegu</string>
     <string name="quick_action_showhide_favorites_descr">Un alternador p\'amosar/anubrir los puntos favoritos nel mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un alternador p\'amosar/anubrir los PdI nel mapa.</string>
-    <string name="quick_action_add_navigation">Navegación</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="mappilary_no_internet_desc">Les semeyes de Mapillary namás tán disponibles en llinia.</string>
@@ -1144,7 +1143,6 @@
     <string name="print_route">Print route</string>
     <string name="app_mode_aircraft">Aeronave</string>
     <string name="animate_routing_route">Simulate using calculated route</string>
-    <string name="map_widget_fps_info">FPS debug info</string>
     <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
     <string name="map_widget_gps_info">Información del GPS</string>
     <string name="layer_recordings">Recording layer</string>
@@ -3598,7 +3596,6 @@
     <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>
     <string name="app_mode_campervan">Campervan (RV)</string>
     <string name="app_mode_camper">Camper</string>
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="shared_string_default">Default</string>
     <string name="app_mode_pickup_truck">Camioneta</string>
     <string name="app_mode_wagon">Wagon</string>
@@ -4047,7 +4044,6 @@
 \nWeb / Wikimedia - POI photos as per OpenStreetMap data.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Aeronave llixera</string>
-    <string name="plan_route_join_segments">Join segments</string>
     <string name="plan_route_split_before">Split before</string>
     <string name="plan_route_split_after">Split after</string>
     <string name="plan_route_add_new_segment">Amestar un segmentu nuevu</string>

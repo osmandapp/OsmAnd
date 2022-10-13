@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 
 import java.io.File;
 

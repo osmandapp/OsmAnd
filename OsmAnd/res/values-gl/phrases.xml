@@ -2753,7 +2753,7 @@
     <string name="poi_socket_cee_blue_yes">CEE azul</string>
     <string name="poi_socket_cee_red_16a_yes">CEE vermella 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE vermella 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE vermella 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE vermella 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE vermella 125A</string>
     <string name="poi_socket_chademo_yes">CHAdeMO</string>
     <string name="poi_socket_tesla_standard_yes">Tesla estándar</string>
@@ -3247,9 +3247,9 @@
     <string name="poi_socket_cee_red_32a">Enchufe: CEE vermello 32A</string>
     <string name="poi_socket_cee_red_32a_current">Enchufe: CEE vermello 32A: corrente</string>
     <string name="poi_socket_cee_red_32a_output">Enchufe: CEE vermello 32A: saída</string>
-    <string name="poi_socket_cee_red_64a">Enchufe: CEE vermello 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Enchufe: CEE vermello 64A: corrente</string>
-    <string name="poi_socket_cee_red_64a_output">Enchufe: CEE vermello 64A: saída</string>
+    <string name="poi_socket_cee_red_63a">Enchufe: CEE vermello 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Enchufe: CEE vermello 63A: corrente</string>
+    <string name="poi_socket_cee_red_63a_output">Enchufe: CEE vermello 63A: saída</string>
     <string name="poi_socket_cee_red_125a">Enchufe: CEE vermello 125A</string>
     <string name="poi_socket_cee_red_125a_current">Enchufe: CEE vermello 125A: corrente</string>
     <string name="poi_socket_cee_red_125a_output">Enchufe: CEE vermello 125A: saída</string>

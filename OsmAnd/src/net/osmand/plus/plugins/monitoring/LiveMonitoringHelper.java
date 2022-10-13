@@ -6,7 +6,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
@@ -50,7 +50,7 @@ public class LiveMonitoringHelper {
 		long locationTime = System.currentTimeMillis();
 		if (location != null && isLiveMonitoringEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
-				&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			OsmandSettings settings = app.getSettings();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
 				record = true;

@@ -62,7 +62,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -598,7 +598,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				}
 			}
 
-			MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
 				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
 				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
@@ -946,7 +946,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		TransactionBuilder builder =
 				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
 		builder.addFragmentsData(fragmentsData)
-				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
+				.addFragmentsData(PluginsHelper.getPluginsCardsList())
 				.getFragmentTransaction().commitAllowingStateLoss();
 	}
 

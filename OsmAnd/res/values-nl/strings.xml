@@ -993,7 +993,6 @@
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Azië, Latijns-Amerika en dergelijke</string>
     <string name="driving_region_uk">Verenigd Koninkrijk, India en dergelijke</string>
-    <string name="map_widget_fps_info">FPS-debuginformatie</string>
     <string name="local_index_tile_data_zooms">Gedownloade zoomniveau\'s: %1$s</string>
     <string name="local_index_tile_data_expire">Vervaltijd (minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
@@ -1429,7 +1428,7 @@
     <string name="shared_string_more_actions">Meer acties</string>
     <string name="shared_string_do_not_show_again">Toon niet meer</string>
     <string name="shared_string_remember_my_choice">Onthoud mijn keuze</string>
-    <string name="shared_string_refresh">Vernieuwen</string>
+    <string name="shared_string_refresh">Herladen</string>
     <string name="shared_string_download">Download</string>
     <string name="shared_string_downloading">Aan het downloaden…</string>
     <string name="shared_string_download_successful">Download succesvol</string>
@@ -2114,7 +2113,6 @@
     <string name="quick_action_add_category">Categorie toevoegen</string>
     <string name="quick_action_add_create_items">Items aanmaken</string>
     <string name="quick_action_add_configure_map">Kaartinstellingen</string>
-    <string name="quick_action_add_navigation">Navigatie</string>
     <string name="quick_action_fav_name_descr">Leeg laten om adres of plaatsnaam te gebruiken.</string>
     <string name="quick_action_bug_descr">Dit bericht wordt automatisch ingevuld in het commentaarveld.</string>
     <string name="quick_action_bug_message">Bericht</string>
@@ -3166,7 +3164,6 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="routeInfo_roadClass_name">Wegtype</string>
     <string name="shared_string_open_track">Track openen</string>
-    <string name="gpx_join_gaps">Verbind onderbrekingen</string>
     <string name="new_route_calculated_dist_dbg">Route: afstand %1$s, reistijd %2$s \nBerekening: %3$.1f sec, %4$d wegen, %5$d tegels)</string>
     <string name="lang_oc">Occitaans</string>
     <string name="app_mode_wagon">Stationwagon</string>
@@ -3841,7 +3838,6 @@
     <string name="register_opr_have_account">Ik heb al een account</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Licht vliegtuig</string>
-    <string name="plan_route_join_segments">Segmenten samenvoegen</string>
     <string name="plan_route_split_before">Hiervoor splitsen</string>
     <string name="plan_route_split_after">Hierna splitsen</string>
     <string name="plan_route_add_new_segment">Nieuw segment toevoegen</string>
@@ -4476,7 +4472,6 @@
     <string name="map_widget_trip_recording_downhill">Bergafwaarts</string>
     <string name="parking_widget_desc">Widget dat de afstand toont van het midden van je scherm tot aan de parkeerplaats.</string>
     <string name="av_notes_choose_action_widget_desc">Kies actie.</string>
-    <string name="fps_widget_desc">Widget toont hoe snel de kaart en kaartelementen getoond en gerefresht worden.</string>
     <string name="av_def_action_choose">Op aanvraag</string>
     <string name="widget_secondary_desc_part_of">Deel van de %1$s plugin.</string>
     <string name="lang_sat">Santali</string>
@@ -4501,4 +4496,37 @@
     <string name="map_widget_average_speed">Gemiddelde snelheid</string>
     <string name="map_widget_time_to_intermediate">Tijd tot tussenstop</string>
     <string name="map_widget_distance_to_intermediate">Afstand tot tussenstop</string>
+    <string name="shared_string_symbol">Symbool</string>
+    <string name="shared_string_not_used">Niet gebruikt</string>
+    <string name="shared_string_used">Gebruikt</string>
+    <string name="download_complete">Download compleet</string>
+    <string name="compass_always_visible">Altijd zichtbaar</string>
+    <string name="rendering_attr_showTrainRoutes_name">Treinroutes</string>
+    <string name="rendering_attr_showTramRoutes_name">Tramroutes</string>
+    <string name="routing_attr_motor_type_electric_name">Elektrisch</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybride</string>
+    <string name="rendering_attr_showBusRoutes_name">Busroutes</string>
+    <string name="rendering_value_category_name">Categorie</string>
+    <string name="rendering_value_all_name">Alle</string>
+    <string name="shared_string_visible_widgets">Zichtbare widgets</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
+    <string name="created_on">Aangemaakt op</string>
+    <string name="available_widgets">Beschikbare widgets</string>
+    <string name="map_widget_zoom_level">Zoomniveau</string>
+    <string name="shared_string_large">Groot</string>
+    <string name="shared_string_normal">Normaal</string>
+    <string name="shared_string_speed">Snelheid</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Geen voorkeur</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Beginner</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Gevorderde</string>
+    <string name="kg">kg</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="files_with_route_restrictions">Bestanden met route-beperkingen</string>
+    <string name="rendering_attr_horse_scale_critical_name">Kritiek</string>
+    <string name="on_with_params">%1$s op %2$s</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trolleybus-routes</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Shuttlebus-routes</string>
+    <string name="widget_with_dot">Widget.</string>
+    <string name="shared_string_size">Grootte</string>
+    <string name="compass_always_hidden">Altijd verborgen</string>
 </resources>

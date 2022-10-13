@@ -19,7 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -80,6 +80,9 @@ public class OptionsCard extends MapBaseCard {
 			if (fileAvailable) {
 				items.add(createDirectionsItem());
 			}
+			items.add(createDividerItem());
+		} else if (fileAvailable) {
+			items.add(createDirectionsItem());
 			items.add(createDividerItem());
 		}
 		if (gpxFile.getGeneralTrack() != null) {
@@ -179,7 +182,7 @@ public class OptionsCard extends MapBaseCard {
 		joinGapsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(joinSegments)
 				.setIcon(joinSegments ? joinGapsEnabledIcon : joinGapsDisabledIcon)
-				.setTitle(app.getString(R.string.gpx_join_gaps))
+				.setTitle(app.getString(R.string.join_segments))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_pad_32)
 				.setOnClickListener(v -> {
 					boolean checked = !joinGapsItem[0].isChecked();
@@ -221,7 +224,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createUploadOsmItem() {
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
 					.setIcon(getActiveIcon(R.drawable.ic_action_upload_to_openstreetmap))

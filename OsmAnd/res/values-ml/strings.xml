@@ -1074,7 +1074,6 @@
     <string name="gpx_info_diff_altitude">" ഉയര വ്യത്യാസം: %1$s"</string>
     <string name="gpx_info_asc_altitude">ഇറക്കം/കയറ്റം:%1$s</string>
     <string name="map_widget_map_rendering">വരച്ച് കാണിക്കുന്ന രീതി</string>
-    <string name="map_widget_fps_info">"എഫ്പിഎസ്  ഡീബഗ് വിവരങ്ങള്‍"</string>
     <string name="clear_intermediate_points">"ഇടലക്ഷ്യസ്ഥാനങ്ങള്‍ കളയുക "</string>
     <string name="context_menu_item_directions_from">ദിശ ഇവിടെ നിന്നും</string>
     <string name="contribution_activity">" ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്ന പതിപ്പ്"</string>
@@ -1762,7 +1761,6 @@
     <string name="average">ശരാശരി</string>
     <string name="quick_action_add_favorite">"താല്‍പര്യമുള്ളവയില്‍ കൂട്ടുക "</string>
     <string name="quick_action_add_configure_map">ഭൂപടം സജ്ജീകരിക്കുക</string>
-    <string name="quick_action_add_navigation">ഗതിനിയന്ത്രണം</string>
     <string name="quick_action_bug_message">സന്ദേശം</string>
     <string name="add_route_points">പാതബിന്ദുക്കള്‍ ചേര്‍ക്കു</string>
     <string name="shared_string_restore">പുനഃസ്ഥാപിക്കുക</string>

@@ -41,7 +41,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -63,6 +63,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
+	public static final String SIMULATED_PROVIDER_GPX = "GPX";
 
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
@@ -696,7 +697,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void scheduleCheckIfGpsLost(net.osmand.Location location) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
-				&& simulatePosition == null) {
+				&& simulatePosition == null ) {
 			long fixTime = location.getTime();
 			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
 				net.osmand.Location lastKnown = getLastKnownLocation();
@@ -720,8 +721,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						// false positive case, still strange how we got here with removeMessages
 						return;
 					}
-					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
-					if(tunnel != null) {
+					// Speed 120kmh, 2 seconds -> 60 m
+					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(250);
+					if (tunnel != null) {
 						simulatePosition = new SimulationProvider();
 						simulatePosition.startSimulation(tunnel, location);
 						simulatePositionImpl();
@@ -736,12 +738,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	private void simulatePositionImpl() {
-		if(simulatePosition != null){
+		if (simulatePosition != null) {
 			net.osmand.Location loc = simulatePosition.getSimulatedLocation();
-			if(loc != null){
+			if (loc != null) {
 				setLocation(loc);
 				simulatePosition();
-			}  else {
+			} else {
 				simulatePosition = null;
 			}
 		}
@@ -774,7 +776,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		app.getAverageSpeedComputer().updateLocation(location);
-		OsmandPlugin.updateLocationPlugins(location);
+		PluginsHelper.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
@@ -817,7 +819,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location, heading);
 			app.getAverageSpeedComputer().updateLocation(location);
-			OsmandPlugin.updateLocationPlugins(location);
+			PluginsHelper.updateLocationPlugins(location);
 		}
 
 		// 2. routing
@@ -935,7 +937,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return cachedLocation;
 	}
 
-
 	public void showNavigationInfo(TargetPoint pointToNavigate, Context uiActivity) {
 		getNavigationInfo().show(pointToNavigate, getHeading(), uiActivity);
 		
@@ -944,25 +945,22 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public OsmAndLocationSimulation getLocationSimulation() {
 		return locationSimulation;
 	}
-	
-	
+
 	public static class GPSInfo {
 		public int foundSatellites;
 		public int usedSatellites;
 		public boolean fixed;
 	}
 
-	public static boolean isNotSimulatedLocation(net.osmand.Location l) {
-		if (l != null) {
-			return !SIMULATED_PROVIDER.equals(l.getProvider());
+	public static boolean isNotSimulatedLocation(@Nullable net.osmand.Location location) {
+		if (location != null) {
+			return !SIMULATED_PROVIDER.equals(location.getProvider());
 		}
 		return true;
 	}
 
-
-	
 	public boolean checkGPSEnabled(Context context) {
-		LocationManager lm = (LocationManager)app.getSystemService(Context.LOCATION_SERVICE);
+		LocationManager lm = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		boolean gpsenabled = false;
 		boolean networkenabled = false;
 
@@ -972,21 +970,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 
 		try {
-		    networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+			networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 		} catch (Exception ignored) {
 		}
 
 		if (!gpsenabled && !networkenabled) {
-		    // notify user
-		    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-		    dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-		    dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), (paramDialogInterface, paramInt) -> {
+			// notify user
+			AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+			dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+			dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), (paramDialogInterface, paramInt) -> {
 				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 				AndroidUtils.startActivityIfSafe(context, intent);
 			});
-		    dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
-		    dialog.show();
-		    return false;
+			dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
+			dialog.show();
+			return false;
 		}
 		return true;
 	}
@@ -999,7 +997,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
 		if (!isLocationPermissionAvailable(activity)) {
 			ActivityCompat.requestPermissions(activity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_PERMISSION);
 		}
 	}

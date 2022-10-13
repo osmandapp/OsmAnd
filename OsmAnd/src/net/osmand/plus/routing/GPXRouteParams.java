@@ -1,6 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -240,14 +240,6 @@ public class GPXRouteParams {
 		public List<Location> getPoints(OsmandApplication app) {
 			GPXRouteParams copy = build(app);
 			return copy.getPoints();
-		}
-
-		public List<SimulatedLocation> getSimulatedLocations(OsmandApplication app) {
-			List<SimulatedLocation> locationList = new ArrayList<>();
-			for (Location l : getPoints(app)) {
-				locationList.add(new SimulatedLocation(l));
-			}
-			return locationList;
 		}
 
 		@NonNull

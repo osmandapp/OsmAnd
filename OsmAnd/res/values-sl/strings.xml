@@ -476,7 +476,7 @@
     <string name="installing_new_resources">Poteka odpakiranje novih podatkov …</string>
     <string name="rotate_map_compass_opt">– obračanje zemljevida po kompasu</string>
     <string name="rotate_map_bearing_opt">– obračanje zemljevida glede na smer premikanja</string>
-    <string name="rotate_map_none_opt">– brez obračanja zemljevida (sever je vedno zgoraj)</string>
+    <string name="rotate_map_none_opt">Fiksno (sever je zgoraj)</string>
     <string name="search_villages_and_postcodes">Poišči več vasi/poštnih številk</string>
     <string name="rendering_attr_showRoadMaps_description">Izberi kdaj naj bodo prikazani zemljevidi le s cestami:</string>
     <string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
@@ -489,11 +489,11 @@
     <string name="map_online_data_descr">Uporabi spletne zemljevide (prejete datoteke so shranjene na pomnilniški kartici).</string>
     <string name="shared_string_online_maps">Spletni zemljevidi</string>
     <string name="online_map_settings_descr">Izberi vir spletnih ali shranjenih ploščic zemljevida.</string>
-    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), od privzetih OpenStreetMap (kot Mapnik), do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki, senčenje terena, itd.
+    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), od privzetih OpenStreetMap (kot npr. Mapnik), do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki, senčenje terena, itd.
 \n
-\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd standardni zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
+\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podlaga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd vektorski zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
 \n
-\nPrenesi zemljevide ploščic neposredno na spletu ali jih pripravi za uporabo brez povezave (ročno kopirane v podatkovno mapo OsmAnd) kot bazo podatkov SQLite, ki jo lahko izdelajo različna orodja za pripravo zemljevidov tretjih oseb.</string>
+\nPrenesi zemljevide ploščic neposredno ali jih kopiraj v podatkovno mapo OsmAnd, kot datoteke podatkovne zbirke SQLite, z enim od številnih orodij tretjih oseb, za pripravo zemljevidov.</string>
     <string name="osm_editing_plugin_description">Omogoča ti, da prispevaš v OpenStreetMap, globalno skupnost, katere cilj je ustvariti celovit zemljevid sveta, in vsakemu uporabniku zagotoviti najnovejše odprtokodne podatke.
 \n
 \nNavodila za urejanje zemljevida najdeš na spletni strani https://osmand.net/docs/user/plugins/osm-editing</string>
@@ -1028,7 +1028,6 @@
     <string name="speak_title">Najavi …</string>
     <string name="speak_descr">Nastavitve za obveščanje imen ulic, prometnih opozoril (ležeče ovire in podobno), opozoril merilnikov hitrosti in omejitve hitrosti.</string>
     <string name="speak_street_names">Imena ulic (TTS)</string>
-    <string name="map_widget_fps_info">Podatki razhroščevanja FPS</string>
     <string name="driving_region_descr">Izberi določila vožnje: ZDA, Evropa, Velika Britanija, Azija in druga.</string>
     <string name="driving_region">Režim vožnje</string>
     <string name="driving_region_japan">Japonska</string>
@@ -2089,7 +2088,6 @@
     <string name="quick_action_add_category">Dodaj kategorijo</string>
     <string name="quick_action_add_create_items">Ustvari predmete</string>
     <string name="quick_action_add_configure_map">Nastavi zemljevid</string>
-    <string name="quick_action_add_navigation">Krmarjenje</string>
     <string name="quick_action_bug_message">Sporočilo</string>
     <string name="quick_action_poi_list">Seznam točk POI</string>
     <string name="quick_action_map_style_action">Dodaj slog zemljevida</string>
@@ -2484,7 +2482,7 @@
     <string name="add_location_as_first_point_descr">Dodaj svoj položaj kot štartno točko, za načrtovanje popolne poti.</string>
     <string name="my_location">Moja trenutna točka</string>
     <string name="shared_string_finish">Cilj</string>
-    <string name="plan_route">Načrtovanje poti</string>
+    <string name="plan_route">Načrtuj pot</string>
     <string name="shared_string_sort">Razvrsti</string>
     <string name="coordinate_input">Vpis koordinat</string>
     <string name="move_to_history">Premakni v zgodovino</string>
@@ -3019,7 +3017,6 @@
     <string name="rendering_attr_tracktype_grade5_name">Mehka</string>
     <string name="routeInfo_tracktype_name">Trdnost površine</string>
     <string name="shared_string_file_is_saved">Datoteka %s je shranjena</string>
-    <string name="gpx_join_gaps">Združi prekinjene sledi</string>
     <string name="app_mode_camper">Potovanje s prikolico</string>
     <string name="app_mode_campervan">Potovanje z avtodomom (RV)</string>
     <string name="rendering_attr_showLez_description">Na zemljevidu prikaži področja z omejitvijo izpustov. Ne vpliva na usmerjanje.</string>
@@ -3296,7 +3293,6 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="plan_route_add_new_segment">Dodaj nov del poti</string>
     <string name="app_mode_light_aircraft">Lahko letalo</string>
-    <string name="plan_route_join_segments">Združi dele poti</string>
     <string name="plan_route_split_before">Razdeli pred</string>
     <string name="plan_route_split_after">Razdeli po</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
@@ -3402,7 +3398,7 @@
     <string name="reading_files">Branje datotek …</string>
     <string name="stop_download_desc">Prenos ni dokončan. Če zdaj prekinete prenos, bo za ogled na voljo le del ploščic.</string>
     <string name="stop_download">Ustavi prenos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Podvodni tuneli</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Podvodni tuneli</string>
     <string name="gps_filter_precision">Natančnost GPS-a</string>
     <string name="copying_file">Kopiranje datoteke %1$s …</string>
     <string name="shared_string_travelbooks">Potovalne knjige</string>
@@ -3489,7 +3485,7 @@
     <string name="shared_string_used">Uporabljeno</string>
     <string name="rendering_attr_seabedDetail_name">Podrobnosti o morskem dnu</string>
     <string name="gpx_no_routes_descr">Z orodjem »%1$s« lahko pot shraniš v datoteko.</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj podvodnih tunelov</string>
     <string name="rendering_attr_seabedDetail_description">Dodatne tekstovne informacije o kvalifikaciji površine morskega dna, kombiniranih tipih površin, skupini in taksonu plevela ali morske trave</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikaži oznake za opombe</string>
     <string name="files_with_route_restrictions">Datoteke z omejitvami poti</string>
@@ -4084,7 +4080,6 @@
     <string name="parking_widget_desc">Pripomoček, ki prikazuje razdaljo od središča zaslona do parkirišča.</string>
     <string name="mapillary_widget_desc">Pripomoček, ki omogoča hiter dostop do aplikacije Mapillary za dodajanje slik na ravni ulice.</string>
     <string name="av_notes_choose_action_widget_desc">Izberite dejanje.</string>
-    <string name="fps_widget_desc">Prikazuje, kako hitro so prikazani in osveženi zemljevid in elementi zemljevida.</string>
     <string name="radius_rules_widget_desc">Orodje ravnilo polmera pomaga določiti polmer okoli izbrane točke na zemljevidu s prikazovanjem krogov-razdalje na zemljevidu.</string>
     <string name="current_time_widget_desc">Prikazuje trenutni čas iz tvoje naprave.</string>
     <string name="battery_widget_desc">Prikazuje nivo baterije v napravi.</string>
@@ -4663,7 +4658,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Skrij vojaška območja</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Skrij vojaška območja</string>
     <string name="explore_plans">Razišči načrte</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Preklopi način tako, da tapneš na gradnik.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tapni gradnik, za preklop načina.</string>
     <string name="map_widget_time_to_destination">Čas do cilja</string>
     <string name="map_widget_time_to_intermediate">Čas do vmesne točke</string>
     <string name="map_widget_distance_to_intermediate">Razdalja do vmesne točke</string>
@@ -4671,40 +4666,40 @@
     <string name="shared_string_mode">Način</string>
     <string name="lang_sat">Santalščina</string>
     <string name="average_speed_skip_stops">Upoštevaj postanke</string>
-    <string name="average_speed_time_interval_desc">Določi časovni interval, v katerem se meri povprečna hitrost.</string>
+    <string name="average_speed_time_interval_desc">Določi časovni interval za povprečenje hitrosti.</string>
     <string name="average_speed_widget_desc">Prikazuje povprečno hitrost trenutne vožnje.</string>
     <string name="map_widget_average_speed">Povprečna hitrost</string>
     <string name="routing_attr_goods_restrictions_description">Upoštevaj dovoljenja za dostop za lahka tovorna vozila (blago)</string>
-    <string name="transport_hazmat_no_desc">Na nekaterih cestah in predorih je prevoz nevarnih snovi prepovedan.</string>
+    <string name="transport_hazmat_no_desc">Ceste in predori lahko imajo omejitve za prevoz nevarnih snovi.</string>
     <string name="transport_hazmat_title">Prevoz nevarnih snovi</string>
     <string name="import_as_one_track">Uvozi kot eno sled</string>
     <string name="use_latin_name_if_missing">Uporabi latinsko ime, če manjka</string>
-    <string name="transport_hazmat_yes_desc">Izbrati moraš ustrezno kategorijo.</string>
+    <string name="transport_hazmat_yes_desc">Izberi ustrezno kategorijo.</string>
     <string name="co2_mission">Emisije CO2</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Dizel</string>
     <string name="routing_attr_motor_type_electric_name">Električni</string>
     <string name="routing_attr_motor_type_gas_name">Stisnjen zemeljski plin CNG</string>
-    <string name="routing_attr_motor_type_name">Gorivo, ki ga uporablja motor</string>
-    <string name="routing_attr_motor_type_description">Za izračun emisij CO2 izberi vrsto goriva, ki ga uporablja motor tvojega vozila.</string>
+    <string name="routing_attr_motor_type_name">Motor vozila</string>
+    <string name="routing_attr_motor_type_description">Izberi vrsto goriva tvojega motorja, to je potrebno za oceno emisij CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Bencin</string>
     <string name="routing_attr_motor_type_lpg_name">Avtoplin LPG</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibridni</string>
-    <string name="live_update_frequency_hour_variant">Posodobitve zemljevidov se preverjajo vsako uro.</string>
-    <string name="live_update_frequency_week_variant">Posodobitve zemljevidov se bodo preverjale vsak teden.</string>
-    <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se bodo preverjale vsak dan.</string>
-    <string name="calculate_online_altitude_descr">Izračunaj nadmorsko višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Lahko se razlikuje od nadmorske višine, zabeležene z napravo, in se lahko uporablja kot popravek nadmorske višine.</string>
+    <string name="live_update_frequency_hour_variant">Posodobitve zemljevidov se bodo preverjale vsako uro.</string>
+    <string name="live_update_frequency_week_variant">Posodobitve zemljevidov se bodo preverjale tedensko.</string>
+    <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se bodo preverjale dnevno.</string>
+    <string name="calculate_online_altitude_descr">Izračunaj nadmorsko višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo za popravek nadmorske višine.</string>
     <string name="lang_ckb">Soranska kurdščina</string>
-    <string name="next_live_update_time">Naslednja posodobitev: v %1$s.</string>
+    <string name="next_live_update_time">Naslednja posodobitev ob %1$s.</string>
     <string name="altitude_correction">Popravek nadmorske višine</string>
-    <string name="no_altitude_data_desc">Svojo progo lahko pritrdiš na ceste in tako dobiš podatke %1$s, ali jih izračunaš prek spleta.</string>
+    <string name="no_altitude_data_desc">Svojo sled lahko pritrdiš na ceste in tako dobiš podatke %1$s, ali jih izračunaš prek spleta.</string>
     <string name="includes_osm_changes_until">Vključuje spremembe OSM, narejene do %1$s.</string>
     <string name="updated_map_time">Posodobljeno: %1$s.</string>
-    <string name="next_live_update_date_and_time">Naslednja posodobitev: %1$s v %2$s.</string>
-    <string name="map_marker_average_speed_desc">Določi časovni interval, v katerem se bo merila povprečna hitrost za izračun predvidenega časa prihoda.</string>
+    <string name="next_live_update_date_and_time">Naslednja posodobitev bo %1$s ob %2$s.</string>
+    <string name="map_marker_average_speed_desc">Določi časovni interval za povprečenje hitrosti (ki se uporablja za izračun predvidenega časa prihoda).</string>
     <string name="switch_widget_mode_desc">S tapanjem pripomočka preklopiš med načini.</string>
     <string name="side_marker_eta">Predvideni čas prihoda</string>
-    <string name="goods_delivery_desc_4">Za vozila z maso nad 3,5 ton, uporabit profil tovornjaka.</string>
+    <string name="goods_delivery_desc_4">Za vozila z maso nad 3,5 ton, uporabljaj profil tovornjaka.</string>
     <string name="goods_delivery_desc_2">Izogibali se bomo cestam, ki so zaprte za dostavo blaga.</string>
     <string name="goods_delivery_desc">Na nekaterih cestah so lahko omejitve za dostavna vozila.</string>
     <string name="marker_2nd">Druga oznaka</string>
@@ -4768,8 +4763,65 @@
     <string name="attach_to_roads_banner_desc">Za pridobitev podrobnih navodil za navigacijo, pripni svojo sled na ceste.</string>
     <string name="included_in_your_current_plan">Vključeno v tvoji trenutni naročnini na »%1$s«</string>
     <string name="available_as_part_of_subscription_plan">Na voljo kot del naročnine na %1$s.</string>
-    <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)</string>
+    <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
     <string name="display_position">Položaj zaslona</string>
+    <string name="rotate_map_none_rotated_opt">Fiksno (ročno vrtenje)</string>
+    <string name="go_to_marker_location">Pojdi na mesto oznake</string>
+    <string name="click_on_widget">Klikni na gradnik</string>
+    <string name="shared_string_switch_mode">Preklopi način</string>
+    <string name="shared_string_shows">Prikazuj</string>
+    <string name="shared_string_large">Veliko</string>
+    <string name="shared_string_normal">Običajno</string>
+    <string name="how_to_use">Kako uporabljati:</string>
+    <string name="shared_string_2_5_d_view">Pogled 2.5 D</string>
+    <string name="distance_by_tap_use_description">Tapni na zemljevid, za ogled razdalje med trenutno lokacijo in tapkano točko.
+\nZ dvema prstoma tapni na zemljevid, za ogled razdalje med kliknjenima točkama</string>
+    <string name="map_marker_interval_dialog_desc">Določi časovni interval, v katerem se bo merila povprečna hitrost za izračun predvidenega časa prihoda.</string>
+    <string name="map_markers_desc">Gradnik prikazuje razdaljo ali predvideni čas prihoda (ETA) za prvi dve oznaki na seznamu oznak na zemljevidu.</string>
+    <string name="quick_action_map_center_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Središče zemljevida na zemljevidu.</string>
+    <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Trenutna lokacija na zemljevidu.</string>
+    <string name="map_center_widget">Središče zemljevida</string>
+    <string name="current_location_widget">Trenutna lokacija</string>
+    <string name="coordinates_widget_map_center_desc">Gradnik prikazuje geografske koordinate trenutnega središča zemljevida</string>
+    <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
+    <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
+    <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
+    <string name="map_widget_camera_tilt_desc">Gradnik prikazuje kot nagiba kamere v perspektivnem načinu. Privzeta vrednost je 90° (brez nagiba).</string>
+    <string name="map_widget_zoom_level">Stopnja povečave</string>
+    <string name="map_widget_camera_distance">Nadmorska višina kamere</string>
+    <string name="developer_widgets">Gradniki za razvijalce</string>
+    <string name="map_widget_camera_tilt">Nagib kamere</string>
+    <string name="map_widget_target_distance_desc">Gradnik prikazuje razdaljo od kamere do ciljne lokacije.</string>
+    <string name="map_widget_camera_distance_desc">Gradnik prikazuje višino kamere nad nivojem površine.</string>
+    <string name="map_widget_zoom_level_desc">Gradnik prikazuje trenutno stopnjo povečave zemljevida.</string>
+    <string name="ant_missing_dependency_descr">Zahtevana storitev »%1$s« ni bila najdena.
+\nNamestiti moraš storitev ANT+ gradniki ali pa posodobiti obstoječo različico, če jo že imaš.
+\nŽeliš zagnati Trgovino Play, da jo namestiš/posodobiš\?</string>
+    <string name="ant_missing_dependency">Manjkajoča odvisnost</string>
+    <string name="ant_go_to_store">Pojdi v Trgovino</string>
+    <string name="ant_read_data">Preberi podatke</string>
+    <string name="ant_write_to_gpx">Napiši podatke v sled</string>
+    <string name="ant_heart_rate_write_gpx_desc">Napiši srčni utrip v sled</string>
+    <string name="map_widget_ant_heart_rate">Srčni utrip</string>
+    <string name="map_widget_ant_heart_rate_desc">V realnem času prikazuje uporabnikov srčni utrip med določeno dejavnostjo</string>
+    <string name="map_widget_ant_bicycle_power">Moč kolesarja</string>
+    <string name="map_widget_ant_bicycle_power_desc">Prikazuje kolesarjevo moč, ki se uporablja za premikanje kolesa naprej</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Prikazuje hitrost, s katero uporabnik vrti pedale</string>
+    <string name="map_widget_ant_bicycle_speed">Hitrost kolesa</string>
+    <string name="map_widget_ant_bicycle_cadence">Kadenca kolesa</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
+    <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
+    <string name="antplus_plugin_name">ANT+</string>
+    <string name="antplus_plugin_description">Opis ANT+</string>
+    <string name="nautical_depth_points">Navtične globinske točke</string>
+    <string name="depth_contours">Izobate</string>
+    <string name="worldwide_maps">Zemljevidi sveta</string>
+    <string name="ant_widgets">ANT+ gradniki</string>
+    <string name="shared_string_cross_buy">Navzkrižni nakup</string>
+    <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
+    <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
+    <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>
 </resources>

@@ -32,7 +32,7 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
@@ -166,7 +166,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			});
 			filters.addAll(res);
 			filters.add(poiFilters.getSearchByNamePOIFilter());
-			if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+			if (PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				filters.add(poiFilters.getNominatimPOIFilter());
 				filters.add(poiFilters.getNominatimAddressFilter());
 			}

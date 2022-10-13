@@ -30,6 +30,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.MapRendererView.MapRendererViewListener;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListMapMarker;
@@ -60,7 +61,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class OsmandMapLayer {
+public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
@@ -78,6 +79,7 @@ public abstract class OsmandMapLayer {
 	//OpenGL
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
+	protected int pointsOrder = 0;
 
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,
@@ -95,6 +97,14 @@ public abstract class OsmandMapLayer {
 		return (int)((view != null ? view.getZorder(this) : 10f) * -100000f);
 	}
 
+	public int getPointsOrder() {
+		return pointsOrder != 0 ? pointsOrder : getBaseOrder();
+	}
+
+	public void setPointsOrder(float pointsZorder) {
+		this.pointsOrder = (int)(pointsZorder * -100000f);
+	}
+
 	@NonNull
 	public Context getContext() {
 		return ctx;
@@ -109,6 +119,7 @@ public abstract class OsmandMapLayer {
 		return getMapRenderer() != null;
 	}
 
+	@Nullable
 	public MapRendererView getMapRenderer() {
 		return view != null ? view.getMapRenderer() : null;
 	}
@@ -120,8 +131,16 @@ public abstract class OsmandMapLayer {
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		MapRendererView mapRenderer = getMapRenderer();
 		if (mapActivity != null) {
+			if (mapRenderer != null) {
+				mapRenderer.addListener(this);
+			}
 			mapActivityInvalidated = true;
+		} else {
+			if (mapRenderer != null) {
+				mapRenderer.removeListener(this);
+			}
 		}
 	}
 
@@ -160,6 +179,10 @@ public abstract class OsmandMapLayer {
 		return true;
 	}
 
+	public boolean areMapRendererViewEventsAllowed() {
+		return false;
+	}
+
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 	}
@@ -167,10 +190,22 @@ public abstract class OsmandMapLayer {
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
+			mapRenderer.addListener(this);
+		}
+	}
+
+	@Override
+	public void onUpdateFrame(MapRendererView mapRenderer) {
 	}
 
 	public void destroyLayer() {
 		clearMapMarkersCollections();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
+			mapRenderer.removeListener(this);
+		}
 	}
 
 	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {

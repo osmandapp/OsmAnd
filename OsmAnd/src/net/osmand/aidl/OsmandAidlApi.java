@@ -91,6 +91,7 @@ import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.LogcatAsyncTask;
 import net.osmand.plus.plugins.development.LogcatMessageListener;
@@ -421,6 +422,14 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean setZoomLimits(int minZoom, int maxZoom) {
+		if (minZoom > 0 && maxZoom > 0 && minZoom < maxZoom) {
+			app.getAppCustomization().setZoomLimits(minZoom, maxZoom);
+			return true;
+		}
+		return false;
+	}
+
 	private void registerAddContextMenuButtonsReceiver(@NonNull MapActivity mapActivity) {
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addContextMenuButtonsParamsReceiver = new BroadcastReceiver() {
@@ -541,7 +550,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -558,7 +567,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -575,7 +584,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -592,7 +601,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					plugin.stopRecording(mapActivity, false);
 				}
@@ -864,7 +873,7 @@ public class OsmandAidlApi {
 					settings.MAP_OVERLAY_PREVIOUS.set(fileName);
 					MapActivity mapActivity = mapActivityRef.get();
 					if (mapActivity != null) {
-						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
+						OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 						if (plugin != null) {
 							plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
 						}
@@ -887,7 +896,7 @@ public class OsmandAidlApi {
 					settings.MAP_OVERLAY_PREVIOUS.set(null);
 					MapActivity mapActivity = mapActivityRef.get();
 					if (mapActivity != null) {
-						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
+						OsmandRasterMapsPlugin plugin = PluginsHelper.getActivePlugin(OsmandRasterMapsPlugin.class);
 						if (plugin != null) {
 							plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
 						}
@@ -1704,7 +1713,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean startGpxRecording() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
 			plugin.updateWidgets();
@@ -1714,7 +1723,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean stopGpxRecording() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
 			plugin.updateWidgets();
@@ -2460,7 +2469,7 @@ public class OsmandAidlApi {
 	}
 
 	public int getPluginVersion(String pluginName) {
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginName);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginName);
 		if (plugin instanceof CustomOsmandPlugin) {
 			CustomOsmandPlugin customPlugin = (CustomOsmandPlugin) plugin;
 			return customPlugin.getVersion();

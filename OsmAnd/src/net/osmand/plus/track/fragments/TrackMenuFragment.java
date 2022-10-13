@@ -97,7 +97,7 @@ import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.myplaces.ui.SplitSegmentDialogFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -1121,7 +1121,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
-				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
 					GpxInfo gpxInfo = new GpxInfo();
 					gpxInfo.gpx = gpxFile;

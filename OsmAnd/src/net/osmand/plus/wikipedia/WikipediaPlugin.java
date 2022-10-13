@@ -1,5 +1,12 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -64,13 +71,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WIKIPEDIA;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-
 public class WikipediaPlugin extends OsmandPlugin {
 
 	public final CommonPreference<Boolean> GLOBAL_WIKIPEDIA_POI_ENABLED;
@@ -128,22 +128,22 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityCreate(MapActivity activity) {
+	public void mapActivityCreate(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		this.mapActivity = null;
 	}
 

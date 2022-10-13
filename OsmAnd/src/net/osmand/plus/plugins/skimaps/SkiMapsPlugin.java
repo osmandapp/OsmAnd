@@ -5,8 +5,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SKI_MAPS;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 

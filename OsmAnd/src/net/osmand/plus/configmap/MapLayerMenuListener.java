@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -123,7 +123,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.map_markers) {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
-			if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			} else {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);

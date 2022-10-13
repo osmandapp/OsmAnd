@@ -21,7 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
@@ -56,7 +56,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		for (DashFragmentData fragmentData : mapActivity.getDashboard().getFragmentsData()) {
 			if (fragmentData.canBeDisabled()) mFragmentsData.add(fragmentData);
 		}
-		mFragmentsData.addAll(OsmandPlugin.getPluginsCardsList());
+		mFragmentsData.addAll(PluginsHelper.getPluginsCardsList());
 		Collections.sort(mFragmentsData);
 	}
 

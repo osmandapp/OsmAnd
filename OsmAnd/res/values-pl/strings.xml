@@ -1036,7 +1036,6 @@
     <string name="driving_region_descr">Wybierz region jazdy: USA, Europa, Wielka Brytania, Azja i inne.</string>
     <string name="driving_region">Region ruchu</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="map_widget_fps_info">Diagnozowanie błędów FPS</string>
     <string name="local_index_tile_data_zooms">Pobrane stopnie przybliżenia: %1$s</string>
     <string name="local_index_tile_data_expire">Czas wygaśnięcia (minuty): %1$s</string>
     <string name="local_index_tile_data_downloadable">Do pobrania: %1$s</string>
@@ -2097,7 +2096,6 @@
     <string name="quick_action_add_configure_map">Skonfiguruj mapę</string>
     <string name="quick_action_poi_show">Wyświetl %1$s</string>
     <string name="quick_action_poi_hide">Ukryj %1$s</string>
-    <string name="quick_action_add_navigation">Nawigacja</string>
     <string name="quick_action_fav_name_descr">Proszę pozostawić pole puste, aby użyć adresu lub nazwy miejsca.</string>
     <string name="quick_action_poi_list">Lista użytecznych miejsc</string>
     <string name="quick_action_map_styles">Style map</string>
@@ -3086,7 +3084,6 @@
     <string name="third_party_routing_type">Wyznaczanie trasy przez usługi zewnętrzne</string>
     <string name="app_mode_monowheel">Monocykl</string>
     <string name="shared_string_default">Domyślnie</string>
-    <string name="gpx_join_gaps">Połącz luki</string>
     <string name="lang_oc">Prowansalski</string>
     <string name="app_mode_wagon">Wóz</string>
     <string name="app_mode_pickup_truck">Pickup</string>
@@ -3875,7 +3872,6 @@
     <string name="lang_de_casual">Niemiecki (styl potoczny)</string>
     <string name="gpx_upload_public_visibility_descr">\"Publiczny\" oznacza, że ślad jest pokazywany publicznie w śladach GPS i na publicznych listach śladów GPS oraz na publicznej liście śladów z surowymi znacznikami czasowymi. Dane obsługiwane przez API nie odnoszą się do strony śladów. Znaczniki czasu punktów śladowych nie są dostępne za pośrednictwem publicznego API GPS, a punkty śladowe nie są uporządkowane chronologicznie.</string>
     <string name="app_mode_light_aircraft">Lekki samolot</string>
-    <string name="plan_route_join_segments">Połącz segmenty</string>
     <string name="plan_route_split_before">Podziel przed</string>
     <string name="plan_route_split_after">Podziel po</string>
     <string name="plan_route_add_new_segment">Dodaj nowy segment</string>
@@ -4480,8 +4476,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małym zbliżeniu</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Tunele dróg wodnych</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunele dróg wodnych</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
     <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
     <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe o powierzchni dna morskiego, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
@@ -4601,7 +4597,6 @@
     <string name="elevation_profile_widget_desc">Widget pokazuje wysokość i profil nachylenia bieżącej trasy.</string>
     <string name="av_notes_choose_action_widget_desc">Wybierz akcję.</string>
     <string name="shared_string_widget">Widżet</string>
-    <string name="fps_widget_desc">Pokazuje, jak szybko mapa i elementy mapy są wyświetlane i odświeżane.</string>
     <string name="current_time_widget_desc">Pokazuje aktualny czas z urządzenia.</string>
     <string name="battery_widget_desc">Pokazuje poziom naładowania baterii.</string>
     <string name="time_to_go_desc">Czas w minutach lub godzinach potrzebny do osiągnięcia celu podróży.</string>

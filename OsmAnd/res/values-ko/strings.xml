@@ -672,7 +672,6 @@
     <string name="edit_tilesource_successfully">타일 소스 %1$s 는 성공적으로 저장됨</string>
     <string name="edit_tilesource_maxzoom">최대 줌</string>
     <string name="edit_tilesource_minzoom">최소 줌</string>
-    <string name="map_widget_fps_info">FPS 디버그 정보</string>
     <string name="driving_region_descr">운전 지역 선택 : 미국, 유럽, 영국, 아시아 및 기타</string>
     <string name="driving_region">운전 지역</string>
     <string name="driving_region_japan">일본</string>
@@ -1834,7 +1833,6 @@
     <string name="plan_route_split_before">분할 전</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">노드 네트워크 유형(국제, 지역, 로컬)에 따른 색상 경로다.</string>
     <string name="wikivoyage_travel_guide_descr">\'탐색\' → \'옵션\'에서 항상 사용 가능.</string>
-    <string name="plan_route_join_segments">세그먼트 결합</string>
     <string name="route_between_points_next_segment_button_desc">선택한 프로필을 사용하여 다음 세그먼트만 다시 계산된다.</string>
     <string name="profile_type_osmand_string">OsmAnd 프로필</string>
     <string name="plan_route_add_new_segment">새 세그먼트 추가</string>
@@ -2401,7 +2399,7 @@
     <string name="osmand_cloud_authorize_descr">‎데이터를 ‎‎잃지‎‎ 마십시오. 모든 정보를 쉽게 백업하고 복원하십시오.‎</string>
     <string name="restore_purchases">‎구매 ‎‎항목 복원‎</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">메모 태그</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">수로 터널을 숨기지 않기</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">수로 터널을 숨기지 않기</string>
     <string name="delete_online_routing_engine">이 온라인 라우팅 엔진을 제거하시겠습니까\?</string>
     <string name="online_routing_engine">온라인 라우팅 엔진</string>
     <string name="online_photos">온라인 사진</string>
@@ -2457,7 +2455,7 @@
     <string name="online_map_url_helper_text">온라인 소스의 URL을 입력하거나 붙여넣습니다.</string>
     <string name="add_online_routing_engine">온라인 라우팅 엔진 추가</string>
     <string name="online_webpage_warning">페이지는 온라인에서만 사용할 수 있습니다. 웹 브라우저에서 열었습니까\?</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">수로 터널</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">수로 터널</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">픽스미 태그 표시</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">메모 태그 표시</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">낮은 줌의 아이콘</string>

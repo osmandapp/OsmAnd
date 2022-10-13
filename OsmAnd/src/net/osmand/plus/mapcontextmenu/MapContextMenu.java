@@ -42,7 +42,7 @@ import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -1141,7 +1141,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			}
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
-			boolean forceAddToCurrentTrack = OsmandPlugin.isActive(OsmandMonitoringPlugin.class)
+			boolean forceAddToCurrentTrack = PluginsHelper.isActive(OsmandMonitoringPlugin.class)
 					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack));
 
 			if (forceAddToCurrentTrack) {

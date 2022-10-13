@@ -18,7 +18,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteCalculationParams.RouteCalculationResultListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -309,7 +309,7 @@ public class TransportRoutingHelper {
 						l.newRouteIsCalculated(true, showToast);
 					}
 				}
-				if (showToast.value && OsmandPlugin.isDevelopment()) {
+				if (showToast.value && PluginsHelper.isDevelopment()) {
 					String msg = "Public transport routes calculated: " + res.size();
 					app.showToastMessage(msg);
 				}

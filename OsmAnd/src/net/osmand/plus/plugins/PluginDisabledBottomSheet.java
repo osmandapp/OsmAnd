@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins;
 
-import static net.osmand.plus.plugins.OsmandPlugin.PLUGIN_ID_KEY;
+import static net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PLUGIN_ID_KEY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -24,13 +22,15 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
 public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = PluginDisabledBottomSheet.class.getName();
+	private static final String TAG = PluginDisabledBottomSheet.class.getName();
 
 	private static final Log LOG = PlatformUtil.getLog(PluginDisabledBottomSheet.class);
 
@@ -53,7 +53,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		}
 
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
 		if (plugin == null) {
 			return;
 		}
@@ -114,13 +114,13 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 		Intent intent = null;
 
 		OsmandApplication app = getMyApplication();
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
 		if (plugin != null && app != null) {
 			String installedPackage = null;
-			if (OsmandPlugin.isPackageInstalled(plugin.getComponentId1(), app)) {
+			if (PluginsHelper.isPackageInstalled(plugin.getComponentId1(), app)) {
 				installedPackage = plugin.getComponentId1();
 			}
-			if (OsmandPlugin.isPackageInstalled(plugin.getComponentId2(), app)) {
+			if (PluginsHelper.isPackageInstalled(plugin.getComponentId2(), app)) {
 				installedPackage = plugin.getComponentId2();
 			}
 			if (installedPackage != null) {

@@ -3231,9 +3231,9 @@
     <string name="poi_socket_cee_red_32a">Ŝtopilo: CEE ruĝa 32A</string>
     <string name="poi_socket_cee_red_32a_current">Ŝtopilo: CEE ruĝa 32A, elektroforto</string>
     <string name="poi_socket_cee_red_32a_output">Ŝtopilo: CEE ruĝa 32A, povo</string>
-    <string name="poi_socket_cee_red_64a">Ŝtopilo: CEE ruĝa 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Ŝtopilo: CEE ruĝa 64A, elektroforto</string>
-    <string name="poi_socket_cee_red_64a_output">Ŝtopilo: CEE ruĝa 64A, povo</string>
+    <string name="poi_socket_cee_red_63a">Ŝtopilo: CEE ruĝa 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Ŝtopilo: CEE ruĝa 63A, elektroforto</string>
+    <string name="poi_socket_cee_red_63a_output">Ŝtopilo: CEE ruĝa 63A, povo</string>
     <string name="poi_socket_cee_red_125a">Ŝtopilo: CEE ruĝa 125A</string>
     <string name="poi_socket_cee_red_125a_current">Ŝtopilo: CEE ruĝa 125A, elektroforto</string>
     <string name="poi_socket_cee_red_125a_output">Ŝtopilo: CEE ruĝa 125A, povo</string>
@@ -3293,8 +3293,8 @@
     <string name="poi_scooter_no">Skotero: ne</string>
     <string name="poi_truck_yes">Kamiono: jes</string>
     <string name="poi_truck_no">Kamiono: ne</string>
-    <string name="poi_parking_fee_yes">Parkumeja pago: jes</string>
-    <string name="poi_parking_fee_no">Parkumeja pago: ne</string>
+    <string name="poi_parking_fee_yes">jes</string>
+    <string name="poi_parking_fee_no">ne</string>
     <string name="poi_parking_fee">Parkumeja pago</string>
     <string name="poi_amperage">Elektroforto</string>
     <string name="poi_charging_station_output">Povo de ŝargostacio</string>
@@ -3371,7 +3371,7 @@
     <string name="poi_socket_cee_blue_yes">CEE blua</string>
     <string name="poi_socket_cee_red_16a_yes">CEE ruĝa 16A</string>
     <string name="poi_socket_cee_red_32a_yes">CEE ruĝa 32A</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE ruĝa 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE ruĝa 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE ruĝa 125A</string>
     <string name="poi_socket_type1_yes">tipo 1</string>
     <string name="poi_socket_type1_combo_yes">tipo 1 CCS</string>
@@ -4342,4 +4342,13 @@
     <string name="poi_club_bicycle">Bicikla klubejo</string>
     <string name="poi_club_doityourself">Memfarula klubejo</string>
     <string name="poi_first_aid_kit">Manapoteko</string>
+    <string name="poi_dog_leashed">Hundoj: nur en hundrimenoj</string>
+    <string name="poi_playground_structure">Infan-ludeja instalaĵo</string>
+    <string name="poi_playground_slide">Deglitejo</string>
+    <string name="poi_playground_climbingframe">Grimp-krado</string>
+    <string name="poi_parking_fee_filter">Parkumeja pago</string>
+    <string name="poi_dog">Hundoj</string>
+    <string name="poi_dog_designated">Destinita por hundoj</string>
+    <string name="poi_dog_unleashed">Hundoj: ne devas esti en hundrimenoj</string>
+    <string name="poi_playground_climbingwall">Grimp-muro</string>
 </resources>

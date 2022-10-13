@@ -1318,7 +1318,6 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Ընտրեք առկա…</string>
     <string name="maps_define_edit">Սահմանել/Խմբագրել …</string>
-    <string name="map_widget_fps_info">Կարգավորման տեղեկություններ</string>
     <string name="driving_region_descr">Ընտրեք վարելու տարածաշրջանը՝ ԱՄՆ, Եվրոպա, Մեծ Բրիտանիա, Ասիա և այլն։</string>
     <string name="driving_region">Վարելու տարածաշրջանը</string>
     <string name="driving_region_japan">Ճապոնիա</string>
@@ -2477,7 +2476,6 @@
     <string name="quick_action_add_category">Ավելացնել կատեգորիա</string>
     <string name="quick_action_add_create_items">Ստեղծել գործողություններ</string>
     <string name="quick_action_add_configure_map">Կարգավորել քարտեզը</string>
-    <string name="quick_action_add_navigation">Նավիգացիա</string>
     <string name="quick_action_fav_name_descr">Թողնել դատարկ, որ օգտագործել հասցե կամ վայրի անվանումը.</string>
     <string name="quick_action_bug_descr">Այս հաղորդագրությունը ներառված է մեկնաբանության դաշտում:</string>
     <string name="quick_action_bug_message">Հաղորդագրություն</string>
@@ -2774,7 +2772,6 @@
     <string name="app_mode_monowheel">Մոնոանիվ</string>
     <string name="app_mode_scooter">Սկուտեր</string>
     <string name="routing_attr_max_num_changes_name">Փոփոխությունների թիվը</string>
-    <string name="gpx_join_gaps">Միացնել բացերը</string>
     <string name="app_mode_camper">Կցասայլակ</string>
     <string name="app_mode_wagon">Սայլակ</string>
     <string name="days_2_4">Օրեր</string>

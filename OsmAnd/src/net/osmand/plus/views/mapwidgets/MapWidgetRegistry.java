@@ -1,9 +1,11 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
@@ -37,13 +39,13 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.CoordinatesWidget;
+import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
@@ -337,7 +339,7 @@ public class MapWidgetRegistry {
 				continue;
 			}
 
-			if (widget instanceof CoordinatesWidget) {
+			if (widget instanceof CoordinatesBaseWidget) {
 				return R.color.status_bar_main_dark;
 			} else if (widget instanceof StreetNameWidget) {
 				return night ? R.color.status_bar_route_dark : R.color.status_bar_route_light;
@@ -375,7 +377,7 @@ public class MapWidgetRegistry {
 		createLeftWidgets(widgetsFactory, widgetInfos, appMode);
 		createRightWidgets(widgetsFactory, widgetInfos, appMode);
 
-		OsmandPlugin.createMapWidgets(mapActivity, widgetInfos, appMode);
+		PluginsHelper.createMapWidgets(mapActivity, widgetInfos, appMode);
 		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos, appMode);
 		createCustomWidgets(widgetsFactory, appMode, widgetInfos);
 
@@ -383,7 +385,8 @@ public class MapWidgetRegistry {
 	}
 
 	private void createTopWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, COORDINATES, appMode));
+		infos.add(createWidgetInfo(factory, COORDINATES_CURRENT_LOCATION, appMode));
+		infos.add(createWidgetInfo(factory, COORDINATES_MAP_CENTER, appMode));
 		infos.add(createWidgetInfo(factory, STREET_NAME, appMode));
 		infos.add(createWidgetInfo(factory, LANES, appMode));
 		infos.add(createWidgetInfo(factory, MARKERS_TOP_BAR, appMode));
@@ -408,7 +411,8 @@ public class MapWidgetRegistry {
 		infos.add(createWidgetInfo(factory, CURRENT_SPEED, appMode));
 		infos.add(createWidgetInfo(factory, AVERAGE_SPEED, appMode));
 		infos.add(createWidgetInfo(factory, MAX_SPEED, appMode));
-		infos.add(createWidgetInfo(factory, ALTITUDE, appMode));
+		infos.add(createWidgetInfo(factory, ALTITUDE_MY_LOCATION, appMode));
+		infos.add(createWidgetInfo(factory, ALTITUDE_MAP_CENTER, appMode));
 		infos.add(createWidgetInfo(factory, GPS_INFO, appMode));
 		infos.add(createWidgetInfo(factory, CURRENT_TIME, appMode));
 		infos.add(createWidgetInfo(factory, BATTERY, appMode));

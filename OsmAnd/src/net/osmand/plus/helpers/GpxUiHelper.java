@@ -87,7 +87,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -293,7 +293,7 @@ public class GpxUiHelper {
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
-		if (!OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (!PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			showCurrentGpx = false;
 		}
 		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
@@ -612,7 +612,7 @@ public class GpxUiHelper {
 				item.setSelected(!item.getSelected());
 				alertDialogAdapter.notifyDataSetInvalidated();
 				if (position == 0 && showCurrentGpx && item.getSelected()) {
-					OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+					OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 					if (monitoringPlugin == null) {
 						AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 						confirm.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {

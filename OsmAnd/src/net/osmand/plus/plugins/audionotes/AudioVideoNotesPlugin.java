@@ -62,6 +62,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -574,7 +575,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_RS_CLIP_LENGTH = registerIntPreference("av_rs_clip_length", CLIP_LENGTH_DEFAULT);
 		AV_RS_STORAGE_SIZE = registerIntPreference("av_rs_storage_size", STORAGE_SIZE_DEFAULT);
 
-		NOTES_SORT_BY_MODE = registerEnumIntPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
+		NOTES_SORT_BY_MODE = registerEnumStringPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
 	}
 
 	@Override
@@ -839,12 +840,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityScreenOff(MapActivity activity) {
+	public void mapActivityScreenOff(@NonNull MapActivity activity) {
 		stopRecording(activity, false);
 	}
 
 	@Override
-	public void mapActivityResume(MapActivity activity) {
+	public void mapActivityResume(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		if (Build.VERSION.SDK_INT < 29) {
 			runAction(activity);
@@ -852,7 +853,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityResumeOnTop(MapActivity activity) {
+	public void mapActivityResumeOnTop(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
 		runAction(activity);
 	}
@@ -865,7 +866,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityPause(@NonNull MapActivity activity) {
 		if (isRecording()) {
 			if (currentRecording.getType() == AVActionType.REC_PHOTO) {
 				finishPhotoRecording(false);
@@ -1678,7 +1679,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (rec != null &&
 						(app.getSettings().SAVE_TRACK_TO_GPX.get()
 								|| app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get())
-						&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+						&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 					String name = f.getName();
 					app.getSavingTrackHelper().insertPointData(rec.lat, rec.lon, null, name, null, 0);
 				}

@@ -24,7 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
@@ -37,7 +37,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
-public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
+public class OsmEditingFragment extends BaseSettingsFragment implements ValidateOsmLoginListener,
 		OsmAuthorizationListener {
 
 	private static final String OSM_LOGOUT = "osm_logout";
@@ -53,7 +53,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		authHelper = app.getOsmOAuthHelper();
-		plugin = OsmEditingPlugin.getPlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
 		FragmentActivity activity = requireMyActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -148,7 +148,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	private void setupUseDevUrlPref() {
 		SwitchPreferenceEx useDevUrlPref = findPreference(plugin.OSM_USE_DEV_URL.getId());
-		if (OsmandPlugin.isDevelopment()) {
+		if (PluginsHelper.isDevelopment()) {
 			Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_laptop);
 			useDevUrlPref.setDescription(getString(R.string.use_dev_url_descr));
 			useDevUrlPref.setIcon(icon);

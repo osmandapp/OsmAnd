@@ -20,10 +20,8 @@ import androidx.core.content.ContextCompat;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.MapRendererTargetChangedObservable;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -70,10 +68,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	// keep array lists created
-	private final List<Location> actionPoints = new ArrayList<>();
 	private int currentAnimatedRoute;
 	private Location lastRouteProjection;
+	private Location lastFixedLocation;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -97,7 +94,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
-	private IMapRenderer.ITargetChanged onTargetChanged;
 
 	public RouteLayer(@NonNull Context context) {
 		super(context);
@@ -153,25 +149,23 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
+	public boolean areMapRendererViewEventsAllowed() {
+		return true;
+	}
+
+	@Override
+	public void onUpdateFrame(MapRendererView mapRenderer) {
+		super.onUpdateFrame(mapRenderer);
+		if (hasMapRenderer() && !helper.isPublicTransportMode()
+				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
+			drawLocations(null, view.getRotatedTileBox());
+		}
+	}
+
+	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
-
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && onTargetChanged == null) {
-			MapRendererTargetChangedObservable targetChangedObservable = mapRenderer.getTargetChangedObservable();
-			onTargetChanged = new IMapRenderer.ITargetChanged() {
-				@Override
-				public void method(IMapRenderer renderer) {
-					getApplication().runInUIThread(() -> {
-						if (hasMapRenderer() && useMapCenter() && !helper.isPublicTransportMode()) {
-							drawLocations(null, view.getRotatedTileBox());
-						}
-					});
-				}
-			};
-			onTargetChanged.attachTo(targetChangedObservable, 2);
-		}
-
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
 
@@ -262,7 +256,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(attrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(getBaseOrder() - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder() - 500, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -303,7 +297,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getBaseOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 600);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
@@ -445,27 +439,42 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (directTo) {
 				lastProjection = null;
 				startLocationIndex = 0;
-			} else if (useMapCenter() && route.getCurrentStraightAngleRoute() > 0) {
+			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
+				boolean lastFixedLocationChanged = !MapUtils.areLatLonEqual(this.lastFixedLocation, lastFixedLocation);
+				this.lastFixedLocation = lastFixedLocation;
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
+				OsmandApplication app = getApplication();
+				boolean useMapCenter = useMapCenter();
 				if (mapRenderer != null) {
-					PointI target31 = mapRenderer.getState().getTarget31();
-					currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
-					currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
-				} else {
+					if (useMapCenter) {
+						PointI target31 = mapRenderer.getTarget();
+						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
+						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
+					} else {
+						LatLon lastMarkerLocation = app.getOsmandMap().getMapLayers().getLocationLayer().getLastMarkerLocation();
+						if (lastMarkerLocation != null) {
+							currentLocation.setLatitude(lastMarkerLocation.getLatitude());
+							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
+						}
+					}
+				} else if (useMapCenter) {
 					currentLocation.setLatitude(tb.getLatitude());
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
 				float posTolerance = RoutingHelper.getPosTolerance(currentLocation.hasAccuracy()
 						? currentLocation.getAccuracy() : 0);
-				currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
-						locations, currentAnimatedRoute, false);
+				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
+						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
 				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
 						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
 				startLocationIndex = currentAnimatedRoute;
+				if (lastFixedLocationChanged) {
+					this.currentAnimatedRoute = currentAnimatedRoute;
+				}
 			} else if (straight) {
 				lastProjection = helper.getLastFixedLocation();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
@@ -580,8 +589,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 		double actionDist = 0;
 		Location previousAction = null; 
-		List<Location> actionPoints = this.actionPoints;
-		actionPoints.clear();
+		List<Location> actionPoints = new ArrayList<>();
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);

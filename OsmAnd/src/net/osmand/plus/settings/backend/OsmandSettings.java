@@ -702,13 +702,13 @@ public class OsmandSettings {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends Enum> CommonPreference<T> registerEnumIntPreference(String id, Enum defaultValue, Enum[] values, Class<T> clz) {
+	public <T extends Enum> CommonPreference<T> registerEnumStringPreference(String id, Enum defaultValue, Enum[] values, Class<T> clz) {
 		if (registeredPreferences.containsKey(id)) {
 			return (CommonPreference<T>) registeredPreferences.get(id);
 		}
-		EnumStringPreference p = new EnumStringPreference(this, id, defaultValue, values);
-		registeredPreferences.put(id, p);
-		return p;
+		EnumStringPreference preference = new EnumStringPreference(this, id, defaultValue, values);
+		registeredPreferences.put(id, preference);
+		return preference;
 	}
 
 	///////////////////// PREFERENCES ////////////////
@@ -1215,6 +1215,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
 
+	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
+
 	public final CommonPreference<LocationSource> LOCATION_SOURCE = new EnumStringPreference<>(this, "location_source",
 			Version.isGooglePlayEnabled() ? GOOGLE_PLAY_SERVICES : ANDROID_API, LocationSource.values()).makeGlobal().makeShared();
 
@@ -1366,6 +1368,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> PROXY_HOST = new StringPreference(this, "proxy_host", "127.0.0.1").makeGlobal().makeShared();
 	public final CommonPreference<Integer> PROXY_PORT = new IntPreference(this, "proxy_port", 8118).makeGlobal().makeShared();
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference(this, "user_android_id", "").makeGlobal();
+	public final CommonPreference<Long> USER_ANDROID_ID_EXPIRED_TIME = new LongPreference(this, "user_android_id_expired_time", 0).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
@@ -1752,6 +1755,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_MAP_LAYER_PARAMETER = new BooleanPreference(this, "show_map_layer_parameter", false).makeProfile().cache();
 
+	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -1789,7 +1794,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_CURRENT_LOCATION_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 

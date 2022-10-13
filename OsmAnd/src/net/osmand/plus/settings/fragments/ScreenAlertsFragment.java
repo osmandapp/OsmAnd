@@ -24,7 +24,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
-public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = ScreenAlertsFragment.class.getSimpleName();
 

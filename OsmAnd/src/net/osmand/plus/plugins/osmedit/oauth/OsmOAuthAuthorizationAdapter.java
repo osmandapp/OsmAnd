@@ -20,7 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,7 +43,7 @@ public class OsmOAuthAuthorizationAdapter {
     public OsmOAuthAuthorizationAdapter(@NonNull OsmandApplication app) {
         TrafficStats.setThreadStatsTag(THREAD_ID);
         this.app = app;
-        this.plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+        this.plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
         DefaultApi10a api10a;
         String key;

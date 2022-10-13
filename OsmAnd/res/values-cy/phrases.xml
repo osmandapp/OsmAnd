@@ -1981,7 +1981,7 @@
     <string name="poi_socket_cee_red_32a">Soced: CEE coch 32A</string>
     <string name="poi_socket_cee_red_32a_current">Soced: CEE coch 32A: cerrynt</string>
     <string name="poi_socket_cee_red_32a_output">Soced: CEE coch 32A: allbwn</string>
-    <string name="poi_socket_cee_red_64a_output">Soced: CEE coch 64A: allbwn</string>
+    <string name="poi_socket_cee_red_63a_output">Soced: CEE coch 63A: allbwn</string>
     <string name="poi_socket_cee_red_125a">Soced: CEE coch 125A</string>
     <string name="poi_socket_cee_red_125a_current">Soced: CEE coch 125A: cerrynt</string>
     <string name="poi_socket_cee_red_125a_output">Soced: CEE coch 125A: allbwn</string>
@@ -2051,7 +2051,7 @@
     <string name="poi_diameter_crown">Diamedr y goron</string>
     <string name="poi_meadow_perpetual">Math: gwastadol</string>
     <string name="poi_shop_boat">Siop cychod</string>
-    <string name="poi_socket_cee_red_64a_yes">CEE coch 64A</string>
+    <string name="poi_socket_cee_red_63a_yes">CEE coch 63A</string>
     <string name="poi_socket_cee_red_125a_yes">CEE coch 125A</string>
     <string name="poi_socket_type1_combo_yes">Math 1 cyfun</string>
     <string name="poi_socket_type2_combo_yes">Math 2 cyfun</string>
@@ -2643,8 +2643,8 @@
     <string name="poi_telescope_usage_espionage">Defnydd: ysbïo</string>
     <string name="poi_telescope_usage_research">Defnydd: ymchwil</string>
     <string name="poi_surface_clay">Clai</string>
-    <string name="poi_socket_cee_red_64a">Soced: CEE coch 64A</string>
-    <string name="poi_socket_cee_red_64a_current">Soced: CEE coch 64A: cerrynt</string>
+    <string name="poi_socket_cee_red_63a">Soced: CEE coch 63A</string>
+    <string name="poi_socket_cee_red_63a_current">Soced: CEE coch 63A: cerrynt</string>
     <string name="poi_socket_type2_output">Soced: Math 2: allbwn</string>
     <string name="poi_climbing_multipitch_no">Llwybrau aml fan aros: na</string>
     <string name="poi_climbing_length_max">Uchafswm hyd dringo</string>

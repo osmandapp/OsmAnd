@@ -13,7 +13,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;

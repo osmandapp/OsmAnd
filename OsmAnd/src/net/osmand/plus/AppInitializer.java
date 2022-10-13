@@ -54,7 +54,7 @@ import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
@@ -78,7 +78,7 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -709,7 +709,6 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
 			long timeUpdated = app.savingTrackHelper.getLastTrackPointTime();
@@ -724,7 +723,7 @@ public class AppInitializer implements IProgress {
 				app.savingTrackHelper.loadGpxFromDatabase();
 			}
 		}
-		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
 	}

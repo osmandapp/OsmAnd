@@ -17,7 +17,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -274,7 +274,7 @@ public class RoutingHelper {
 					l.newRouteIsCalculated(newRoute, showToast);
 				}
 			}
-			if (showToast.value && newRoute && OsmandPlugin.isDevelopment()) {
+			if (showToast.value && newRoute && PluginsHelper.isDevelopment()) {
 				String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 						OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
 						((int) res.getRoutingTime()) + " sec",

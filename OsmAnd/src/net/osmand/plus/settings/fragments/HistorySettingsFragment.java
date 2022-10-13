@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HistorySettingsFragment extends BaseSettingsFragment implements OnConfirmDeletionListener, OnPreferenceChanged {
+public class HistorySettingsFragment extends BaseSettingsFragment implements OnConfirmDeletionListener {
 
 	public static final String TAG = HistorySettingsFragment.class.getSimpleName();
 

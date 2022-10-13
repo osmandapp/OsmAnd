@@ -29,7 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButt
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -191,7 +191,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			}
 		});
 		Map<String, String> renderers = getMyApplication().getRendererRegistry().getRenderers();
-		List<String> disabledRendererNames = OsmandPlugin.getDisabledRendererNames();
+		List<String> disabledRendererNames = PluginsHelper.getDisabledRendererNames();
 
 		if (!Algorithms.isEmpty(disabledRendererNames)) {
 			Iterator<Map.Entry<String, String>> iterator = renderers.entrySet().iterator();

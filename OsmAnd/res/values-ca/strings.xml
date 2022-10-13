@@ -1063,7 +1063,6 @@
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="edit_tilesource_successfully">Proveïdor de tessel·les %1$s desat</string>
     <string name="edit_tilesource_choose_existing">Selecciona existent…</string>
-    <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">Ordre optimitzat de les fites de la ruta fins a la destinació.</string>
     <string name="osmand_distance_planning_plugin_description">Creació d\'itineraris prement el mapa o utilitzant o modificant fitxers GPX existents, per planificar un trajecte i mesurar la distància entre punts. El resultat es pot desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
     <string name="android_19_location_disabled">Des de la versió 4.4 d\'Android (KitKat) no podeu baixar i actualitzar els mapes en l\'antiga carpeta (%s). Voleu copiar tots els fitxers de l\'OsmAnd a la nova destinació\?
@@ -2109,7 +2108,6 @@
     <string name="quick_action_add_category">Afegeix una categoria</string>
     <string name="quick_action_add_create_items">Crea elements</string>
     <string name="quick_action_add_configure_map">Configura el mapa</string>
-    <string name="quick_action_add_navigation">Navegació</string>
     <string name="quick_action_fav_name_descr">Deixeu-lo buit per utilitzar l\'adreça o el nom d\'un lloc.</string>
     <string name="quick_action_bug_descr">Aquest missatge s\'inclou en el camp de comentaris.</string>
     <string name="quick_action_bug_message">Missatge</string>
@@ -3077,7 +3075,6 @@
     <string name="shared_string_file_is_saved">S\'ha desat %s</string>
     <string name="shared_string_open_track">Obre la traça</string>
     <string name="shared_string_track_is_saved">La traça %s s\'ha desat</string>
-    <string name="gpx_join_gaps">Uneix separacions</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostra les zones de baixes emissions al mapa. No afecta el càlcul de ruta.</string>
@@ -3775,7 +3772,6 @@
     <string name="app_mode_light_aircraft">Avioneta</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificable\" vol dir que la traça es mostrarà públicament a les vostres traces GPS i als llistats públics de traces GPS, és a dir, els altres usuaris la podran baixar en brut i associada al vostre usuari. Les dades cronològiques de pas per les fites de l’API GPS que es publiquen mitjançant l’API de fites faran referència a la pàgina de la vostra traça original.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privada\" vol dir que la traça no es mostra a cap llistat públic, però les fites que conté estan disponibles a través de l\'API pública GPS, desordenades i sense enregistraments temporals.</string>
-    <string name="plan_route_join_segments">Uneix segments</string>
     <string name="plan_route_split_before">Separa abans</string>
     <string name="plan_route_split_after">Separa després</string>
     <string name="plan_route_add_new_segment">Afegeix un segment nou</string>
@@ -3928,7 +3924,7 @@
     <string name="estimated_download_size">Tamany de baixada estimat</string>
     <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualització esquemàtica de les icones en els zooms baixos</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Túnels fluvials</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Túnels fluvials</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tot</string>
     <string name="waypoint_template">Plantilla de punts de ruta</string>
@@ -3967,7 +3963,6 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sense restriccions)</string>
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="routing_attr_avoid_fords_description">Evita els guals</string>
-    <string name="fps_widget_desc">El giny mostra la velocitat de càrrega i actualització del mapa i dels elements auxiliars.</string>
     <string name="connect_with_straight_line">Connecta amb una línia recta</string>
     <string name="attach_roads_descr">Ajusta la vostra traça a una ruta que segueixi el mapa local. Això us donarà valors d\'elevació corregits, detalls de la via i els girs realitzats durant la navegació.</string>
     <string name="without_profiles_changing">Sense canvis als perfils</string>

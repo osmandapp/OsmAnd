@@ -248,8 +248,8 @@
     <string name="simulation_constant_mode_title">ᱴᱷᱟᱣᱠᱟ ᱛᱚᱲ</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">ᱠᱷᱟᱴᱚ ᱚᱞ ᱜᱚᱛᱟᱭ</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">ᱫᱟᱜᱦᱚᱨ ᱴᱟᱱᱮᱞ ᱠᱚ</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">ᱫᱟᱜᱦᱚᱨ ᱴᱟᱱᱮᱞ ᱠᱚ ᱟᱞᱚᱢ ᱩᱠᱩᱭᱼᱟ</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">ᱫᱟᱜᱦᱚᱨ ᱴᱟᱱᱮᱞ ᱠᱚ</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">ᱫᱟᱜᱦᱚᱨ ᱴᱟᱱᱮᱞ ᱠᱚ ᱟᱞᱚᱢ ᱩᱠᱩᱭᱼᱟ</string>
     <string name="turn_arrows">ᱟᱹᱪᱩᱨ ᱥᱟᱨ ᱠᱚ</string>
     <string name="created_on">ᱨᱮ ᱛᱮᱭᱟᱨ ᱟᱠᱟᱱᱟ</string>
     <string name="shared_string_precision">ᱵᱮᱥ ᱩᱛᱟᱹᱨᱟᱜᱽ</string>
@@ -627,7 +627,6 @@
     <string name="search_poi_filter">ᱪᱷᱟᱹᱱᱤ ᱢᱮ</string>
     <string name="hide_poi_filter">ᱪᱷᱟᱹᱱᱤ ᱩᱠᱩᱭ ᱢᱮ</string>
     <string name="app_description">ᱯᱟᱱᱛᱮᱭᱟᱜᱽ ᱮᱯᱯ</string>
-    <string name="quick_action_add_navigation">ᱯᱟᱱᱛᱮᱭᱟᱜᱽ</string>
     <string name="quick_action_add_configure_map">ᱱᱚᱠᱥᱟ ᱛᱮᱭᱟᱨ ᱢᱮ</string>
     <string name="quick_action_poi_hide">%1$s ᱩᱠᱩᱭ ᱢᱮ</string>
     <string name="routeInfo_roadClass_name">ᱪᱮᱞᱮᱠᱟᱱ ᱰᱟᱦᱟᱨ</string>

@@ -23,7 +23,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadOpenstreetmapPointAsyncTask;
@@ -65,7 +65,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+		plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = view.findViewById(R.id.fav_text);
@@ -83,7 +83,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
+			plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		}
 		setupEditings();
 	}

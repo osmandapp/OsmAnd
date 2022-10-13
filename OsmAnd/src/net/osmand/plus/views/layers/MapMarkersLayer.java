@@ -72,6 +72,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
@@ -113,10 +114,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textSize;
 	private float verticalOffset;
 
-	private final List<Float> tx = new ArrayList<>();
-	private final List<Float> ty = new ArrayList<>();
-	private final Path linePath = new Path();
-
 	private LatLon fingerLocation;
 	private boolean hasMoved;
 	private boolean moving;
@@ -141,6 +138,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private List<GPXUtilities.WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
 	private Location savedLoc;
+	private PointI cachedTarget31;
+	private int cachedZoom = 0;
+	private final HashMap<Integer, Path> cachedPaths = new HashMap<>();
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -267,7 +267,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
@@ -284,6 +285,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
 				clearMapMarkersCollections();
 				clearVectorLinesCollections();
+				cachedPaths.clear();
+				cachedTarget31 = null;
 			}
 			initMarkersCollection();
 			markersCount = activeMapMarkers.size();
@@ -291,12 +294,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (route != null && route.points.size() > 0) {
-			planRouteAttrs.updatePaints(app, nightMode, tileBox);
+			planRouteAttrs.updatePaints(app, drawSettings, tileBox);
 			if (mapRenderer != null) {
 				boolean shouldDraw = shouldDrawPoints();
 				if (shouldDraw || mapActivityInvalidated) {
 					resetCachedRenderer();
-					int baseOrder = getBaseOrder() - 10;
+					int baseOrder = getPointsOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
 					route.renderer = renderer;
@@ -321,7 +324,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer == null) {
-			drawLineAndText(canvas, tileBox, nightMode);
+			drawLineAndText(canvas, tileBox, drawSettings);
 		}
 	}
 
@@ -791,7 +794,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean isMoveable = isInMotion(marker);
 
 				mapMarkerBuilder.setIsAccuracyCircleSupported(false)
-						.setBaseOrder(getBaseOrder())
+						.setBaseOrder(getPointsOrder())
 						.setIsHidden(isMoveable)
 						.setPinIcon(NativeUtilities.createSkImageFromBitmap(bmp))
 						.setPosition(pointI)
@@ -1017,6 +1020,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		int[] colors = MapMarker.getColors(getContext());
 		for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
+			List<Float> tx = new ArrayList<>();
+			List<Float> ty = new ArrayList<>();
+			Path linePath = new Path();
 			MapMarker marker = activeMapMarkers.get(i);
 			float markerX;
 			float markerY;
@@ -1042,16 +1048,29 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				markerY = tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
 			}
 
-			linePath.reset();
-			tx.clear();
-			ty.clear();
+			if (mapRenderer != null) {
+				PointI target31 = mapRenderer.getTarget();
+				if (cachedTarget31 != null && cachedTarget31.getX() == target31.getX() && cachedTarget31.getY() == target31.getY()) {
+					cachedPaths.clear();
+				}
+				cachedTarget31 = target31;
+				if (view.getZoom() != cachedZoom) {
+					cachedPaths.clear();
+					cachedZoom = view.getZoom();
+				}
+			}
 
-			tx.add(locX);
-			ty.add(locY);
-			tx.add(markerX);
-			ty.add(markerY);
+			if (mapRenderer == null || !cachedPaths.containsKey(i)) {
+				tx.add(locX);
+				ty.add(locY);
+				tx.add(markerX);
+				ty.add(markerY);
+				GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+				cachedPaths.put(i, linePath);
+			} else {
+				linePath = cachedPaths.get(i);
+			}
 
-			GeometryWay.calculatePath(tileBox, tx, ty, linePath);
 			PathMeasure pm = new PathMeasure(linePath, false);
 			float[] pos = new float[2];
 			pm.getPosTan(pm.getLength() / 2, pos, null);

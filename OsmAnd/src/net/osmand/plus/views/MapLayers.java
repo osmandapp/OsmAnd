@@ -29,7 +29,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -107,6 +107,7 @@ public class MapLayers {
 	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
+	private StateChangedListener<Integer> overlayTransparencyListener;
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -119,6 +120,7 @@ public class MapLayers {
 	}
 
 	public void createLayers(@NonNull OsmandMapTileView mapView) {
+		boolean useOpenGLRender = app.getSettings().USE_OPENGL_RENDER.get();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer(app);
 		// 5.95 all labels
@@ -131,20 +133,24 @@ public class MapLayers {
 		mapView.addLayer(mapTileLayer, 0.05f);
 		mapView.setMainLayer(mapTileLayer);
 
-		// 0.5 layer
+		// 1-st in the order
+		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
+		mapView.addLayer(downloadedRegionsLayer, -11.0f);
+
+		// icons are 2-d in the order (icons +1 000 000 or -10.f by zOrder in core)
+		// text and shields are 5-th in the order
 		mapVectorLayer = new MapVectorLayer(app);
 		mapView.addLayer(mapVectorLayer, 0.0f);
 
-		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
-		mapView.addLayer(downloadedRegionsLayer, 0.5f);
-
-		// 0.9 gpx layer
+		// gpx layer lines 3-d in the order
+		// gpx layer points 6-th in the order
 		gpxLayer = new GPXLayer(app);
-		mapView.addLayer(gpxLayer, 0.9f);
+		gpxLayer.setPointsOrder(0.9f);
+		mapView.addLayer(gpxLayer, useOpenGLRender ? -5.0f : 0.9f);
 
-		// 1. route layer
+		// route layer, 4-th in the order
 		routeLayer = new RouteLayer(app);
-		mapView.addLayer(routeLayer, 1);
+		mapView.addLayer(routeLayer, useOpenGLRender ? -2.0f : 1.0f);
 
 		// 1.5 preview route line layer
 		previewRouteLineLayer = new PreviewRouteLineLayer(app);
@@ -201,11 +207,18 @@ public class MapLayers {
 		});
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
+		overlayTransparencyListener = change -> app.runInUIThread(() -> {
+			mapTileLayer.setAlpha(255 - change);
+			mapVectorLayer.setAlpha(255 - change);
+			mapView.refreshMap();
+		});
+		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
+
 		createAdditionalLayers(null);
 	}
 
 	public void createAdditionalLayers(@Nullable MapActivity mapActivity) {
-		OsmandPlugin.createLayers(app, mapActivity);
+		PluginsHelper.createLayers(app, mapActivity);
 		app.getAppCustomization().createLayers(app, mapActivity);
 		app.getAidlApi().registerMapLayers(app);
 	}
@@ -239,14 +252,19 @@ public class MapLayers {
 		OsmandSettings settings = app.getSettings();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-		OsmandPlugin.refreshLayers(app, mapActivity);
+		PluginsHelper.refreshLayers(app, mapActivity);
 	}
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
 
 		// update transparency
-		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 : settings.MAP_TRANSPARENCY.get();
+		int mapTransparency = 255;
+		if (settings.MAP_UNDERLAY.get() != null) {
+			mapTransparency = settings.MAP_TRANSPARENCY.get();
+		} else if (settings.MAP_OVERLAY.get() != null) {
+			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+		}
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 
@@ -458,7 +476,7 @@ public class MapLayers {
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           boolean includeOfflineMaps,
 	                           @Nullable CallbackWithObject<String> callback) {
-		if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
+		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			return;
 		}

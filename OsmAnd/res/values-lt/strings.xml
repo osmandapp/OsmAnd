@@ -983,7 +983,6 @@
     <string name="please_select_address">Pirmiausia nustatykite miestą arba gatvę</string>
     <string name="destination_point">Kelionės tikslas %1$s</string>
     <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
-    <string name="map_widget_fps_info">Kadrai/s info</string>
     <string name="driving_region_descr">Pasirinkite vairavimo regioną: JAV, Europa, Didžioji Britanija, Azija ir kitas.</string>
     <string name="driving_region">Vairavimo regionas</string>
     <string name="driving_region_japan">Japonija</string>
@@ -1641,7 +1640,7 @@
     <string name="shared_string_navigation">Navigacija</string>
     <string name="osmand_running_in_background">Veikia fone</string>
     <string name="roads">Keliai</string>
-    <string name="downloading_number_of_files">Siunčiamas - %1$d failas</string>
+    <string name="downloading_number_of_files">Siunčiamas %1$d failas…</string>
     <string name="buy">Pirkti</string>
     <string name="later">Vėliau</string>
     <string name="favorite_category_dublicate_message">Prašome sugalvoti dar neegzistuojantį kategorijos pavadinimą.</string>
@@ -2131,7 +2130,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="favorite_autofill_toast_text">" įrašytas į "</string>
     <string name="quick_action_poi_show">Rodyti %1$s</string>
     <string name="quick_action_poi_hide">Slėpti %1$s</string>
-    <string name="quick_action_add_navigation">Navigacija</string>
     <string name="quick_action_poi_list">LV sąrašas</string>
     <string name="quick_action_map_style_action">Pridėti žemėlapio stilių</string>
     <string name="quick_action_empty_param_error">Parametrai negali būti tušti</string>
@@ -2885,7 +2883,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="activity_type_running_name">Bėgimas</string>
     <string name="activity_type_walking_name">Ėjimas</string>
     <string name="activity_type_offroad_name">Bekelė</string>
-    <string name="service_is_not_available_please_try_later">Paslauga nepasiekiama, bandykite vėliau</string>
+    <string name="service_is_not_available_please_try_later">Paslauga nepasiekiama. Bandykite vėliau.</string>
     <string name="shared_string_logout">Atsijungti</string>
     <string name="search_title">Paieška: %1$s</string>
     <string name="clear_all_history">Išvalyti visą istoriją</string>
@@ -2903,4 +2901,19 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="transparent_status_bar_descr">Rodyti žemėlapį būsenos juostoje</string>
     <string name="transparent_status_bar">Skaidri būsenos juosta</string>
     <string name="download_heightmap_maps">Aukščio žemėlapis</string>
+    <string name="copying_completed">Nukopijuota</string>
+    <string name="shared_string_files">Failai</string>
+    <string name="hide_compass_ruler">Slėpti kompaso liniuotę</string>
+    <string name="settings_privacy_and_security_desc">Pasirinkite, kokius duomenis bendrinate</string>
+    <string name="shared_string_size">Dydis</string>
+    <string name="settings_item_write_error">Negalima įrašyti į %1$s.</string>
+    <string name="settings_item_import_error">Negalima importuoti iš %1$s.</string>
+    <string name="shared_string_color_magenta">Purpurinė</string>
+    <string name="nav_type_hint">Navigacijos tipas</string>
+    <string name="osmand_routing_promo">Pridėkite savo pakeistą failo routing.xml versiją į ..osmand/routing</string>
+    <string name="profile_name_hint">Profilio vardas</string>
+    <string name="show_compass_ruler">Rodyti kompaso liniuotę</string>
+    <string name="select_icon_profile_dialog_title">Pasirinkite piktogramą</string>
+    <string name="settings_privacy_and_security">Privatumas ir saugumas</string>
+    <string name="shared_string_no_thank_you">Ne, ačiū</string>
 </resources>

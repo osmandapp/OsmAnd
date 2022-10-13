@@ -643,7 +643,6 @@
     <string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
     <string name="internet_connection_required_for_online_route">Çevrim içi navigasyon çevrim dışı çalışmamaktadır.</string>
     <string name="layer_hillshade">Tepe gölgesi katmanı</string>
-    <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
     <string name="driving_region_descr">Sürüş bölgesini seçin: ABD, Avrupa, İngiltere, Asya ve diğerleri.</string>
     <string name="driving_region">Sürüş bölgesi</string>
     <string name="driving_region_japan">Japonya</string>
@@ -2653,7 +2652,6 @@
     <string name="shared_string_file_is_saved">%s kaydedildi</string>
     <string name="shared_string_open_track">İzlenen yolu aç</string>
     <string name="shared_string_track_is_saved">İzlenen yol %s kaydedildi</string>
-    <string name="gpx_join_gaps">Boşlukları birleştir</string>
     <string name="app_mode_camper">Kampçı</string>
     <string name="app_mode_campervan">Kamp aracı (RV)</string>
     <string name="rendering_attr_showLez_description">Haritada Düşük Emisyon Bölgelerini göster. Yönlendirmeyi etkilemez.</string>
@@ -2951,7 +2949,6 @@
     <string name="quick_action_poi_hide">%1$s gizle</string>
     <string name="quick_action_add_category">Kategori ekle</string>
     <string name="quick_action_add_configure_map">Haritayı yapılandır</string>
-    <string name="quick_action_add_navigation">Navigasyon</string>
     <string name="quick_action_bug_message">Mesaj</string>
     <string name="quick_action_poi_list">POI listesi</string>
     <string name="quick_action_map_style_action">Harita tarzı ekle</string>
@@ -3880,7 +3877,6 @@
     <string name="select_picture">Resim seç</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Hafif uçak</string>
-    <string name="plan_route_join_segments">Bölümleri birleştir</string>
     <string name="plan_route_split_before">Önce böl</string>
     <string name="plan_route_split_after">Sonra böl</string>
     <string name="plan_route_add_new_segment">Yeni bir bölüm ekle</string>
@@ -4495,8 +4491,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Düşük yakınlaştırmalarda simgeler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Düşük yakınlaştırmalarda simgelerin şematik gösterimi</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Beni-düzelt etiketleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_name">Su yolu tünelleri</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Su yolu tünelleri</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Su yolu tünellerini gizleme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Tümü</string>
@@ -4616,7 +4612,6 @@
     <string name="parking_widget_desc">Ekran merkezinizden park yerine olan mesafeyi gösteren widget.</string>
     <string name="mapillary_widget_desc">Sokak düzeyinde görüntü eklemek için Mapillary uygulamasına hızlı erişim sağlayan widget.</string>
     <string name="av_notes_choose_action_widget_desc">Eylem seçin.</string>
-    <string name="fps_widget_desc">Harita ve harita ögelerinin ne kadar hızlı gösterildiğini ve yenilendiğini gösterir.</string>
     <string name="radius_rules_widget_desc">Yarıçap cetveli aracı, harita üzerinde mesafe daireleri görüntüleyerek harita üzerinde seçilen nokta etrafındaki yarıçapın belirlenmesine yardımcı olur.</string>
     <string name="current_time_widget_desc">Aygıtınızın geçerli saatini gösterir.</string>
     <string name="battery_widget_desc">Aygıtınızın pil seviyesini gösterir.</string>

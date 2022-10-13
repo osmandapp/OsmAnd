@@ -48,7 +48,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
 		VOICE("voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
 		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
-		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark);
+		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark),
+		NAUTICAL_DEPTH("nautical_depth", IndexConstants.NAUTICAL_INDEX_DIR, R.drawable.ic_action_nautical_depth),
+		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites);
 
 		private final String subtypeName;
 		private final String subtypeFolder;
@@ -61,7 +63,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 
 		public boolean isMap() {
-			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP || this == ROAD_MAP;
+			return this == OBF_MAP || this == WIKI_MAP || this == SRTM_MAP || this == TILES_MAP || this == ROAD_MAP || this == NAUTICAL_DEPTH;
 		}
 
 		public String getSubtypeName() {
@@ -126,6 +128,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 									return subtype;
 								}
 							}
+						}
+						break;
+					case NAUTICAL_DEPTH:
+						if (name.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
+							return subtype;
 						}
 						break;
 					default:

@@ -28,13 +28,12 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SavingTrackHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 
@@ -134,7 +133,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			}
 		}
 
-		if (list.size() == 0 && !OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (list.size() == 0 && !PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
@@ -147,7 +146,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		tracks.removeAllViews();
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
+		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 			createCurrentTrackView(view);
@@ -188,7 +187,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	}
 
 	public static void updateCurrentTrack(View v, Activity ctx, OsmandApplication app) {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (v == null || ctx == null || app == null || plugin == null) {
 			return;
 		}

@@ -1,5 +1,7 @@
 package net.osmand.plus.transport;
 
+import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,10 +27,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
 
 public class TransportLinesFragment extends BaseOsmAndFragment {
 
@@ -38,7 +39,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
-	private TransportLinesMenu transportMenu;
+	private TransportLinesMenu menu;
 
 	private View view;
 	private LayoutInflater themedInflater;
@@ -51,14 +52,14 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
-		transportMenu = new TransportLinesMenu(app);
+		menu = new TransportLinesMenu(app);
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		appMode = settings.getApplicationMode();
-		isShowAnyTransport = transportMenu.isShowAnyTransport();
+		isShowAnyTransport = menu.isShowAnyTransport();
 
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
@@ -81,7 +82,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				false,
 				v -> {
 					isShowAnyTransport = !isShowAnyTransport;
-					transportMenu.toggleTransportLines(mapActivity, isShowAnyTransport);
+					menu.toggleTransportLines(mapActivity, isShowAnyTransport);
 					updateScreenMode(isShowAnyTransport);
 				});
 	}
@@ -91,19 +92,24 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		setupButton(
 				view.findViewById(R.id.transport_stops_toggle),
 				type.getIconId(),
-				transportMenu.getTransportName(type.getAttrName()),
-				transportMenu.isTransportEnabled(type.getAttrName()),
+				menu.getTransportName(type.getAttrName()),
+				menu.isTransportEnabled(type.getAttrName()),
 				false,
 				v -> {
-					boolean enabled = !transportMenu.isTransportEnabled(type.getAttrName());
-					transportMenu.toggleTransportType(mapActivity, type.getAttrName(), enabled);
+					boolean enabled = !menu.isTransportEnabled(type.getAttrName());
+					menu.toggleTransportType(mapActivity, type.getAttrName(), enabled);
 				}
 		);
 	}
 
 	private void setupRoutesToggles() {
-		ViewGroup list = view.findViewById(R.id.transport_toggles_list);
+		View container = view.findViewById(R.id.routes_container);
 		List<RenderingRuleProperty> rules = getTransportRules(app);
+		if (Algorithms.isEmpty(rules)) {
+			container.setVisibility(View.GONE);
+			return;
+		}
+		ViewGroup list = view.findViewById(R.id.transport_toggles_list);
 		for (int i = 0; i < rules.size(); i++) {
 			RenderingRuleProperty property = rules.get(i);
 			String attrName = property.getAttrName();
@@ -112,13 +118,13 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
 						view,
-						transportMenu.getTransportIcon(attrName),
-						transportMenu.getTransportName(attrName, property.getName()),
-						transportMenu.isTransportEnabled(attrName),
+						menu.getTransportIcon(attrName),
+						menu.getTransportName(attrName, property.getName()),
+						menu.isTransportEnabled(attrName),
 						showDivider,
 						v -> {
-							boolean enabled = !transportMenu.isTransportEnabled(attrName);
-							transportMenu.toggleTransportType(mapActivity, attrName, enabled);
+							boolean enabled = !menu.isTransportEnabled(attrName);
+							menu.toggleTransportType(mapActivity, attrName, enabled);
 						}
 				);
 				list.addView(view);
