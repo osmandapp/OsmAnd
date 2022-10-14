@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder.viewholder;
 
-import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -9,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
@@ -44,14 +44,14 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 	}
 
 	@NonNull
-	public static Spannable getGroupTitle(@NonNull WidgetGroup group, @NonNull Context context, boolean nightMode) {
-		String groupName = context.getString(group.titleId);
+	public static Spannable getGroupTitle(@NonNull WidgetGroup group, @NonNull OsmandApplication app, boolean nightMode) {
+		String groupName = app.getString(group.titleId);
 		int widgetsCount = group.getWidgets().size();
-		String title = context.getString(R.string.ltr_or_rtl_combine_via_dash, groupName, String.valueOf(widgetsCount));
+		String title = app.getString(R.string.ltr_or_rtl_combine_via_dash, groupName, String.valueOf(widgetsCount));
 		SpannableString spannableTitle = new SpannableString(title);
 		int spanFlag = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
-		int primaryTextColor = ColorUtilities.getPrimaryTextColor(context, nightMode);
-		int secondaryTextColor = ColorUtilities.getSecondaryTextColor(context, nightMode);
+		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int secondaryTextColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
 		int nameStartIndex = title.indexOf(groupName);
 		if (nameStartIndex != -1) {

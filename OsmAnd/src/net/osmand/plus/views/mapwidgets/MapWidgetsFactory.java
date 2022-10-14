@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
@@ -51,6 +52,13 @@ public class MapWidgetsFactory {
 	}
 
 	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
+		if (isWidgetCreationAllowed(widgetType)) {
+			return createMapWidgetImpl(customId, widgetType);
+		}
+		return null;
+	}
+
+	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -113,5 +121,13 @@ public class MapWidgetsFactory {
 			default:
 				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}
+	}
+
+	private boolean isWidgetCreationAllowed(@NonNull WidgetType widgetType) {
+		if (widgetType == ALTITUDE_MAP_CENTER) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			return plugin != null && plugin.isHeightmapEnabled();
+		}
+		return true;
 	}
 }

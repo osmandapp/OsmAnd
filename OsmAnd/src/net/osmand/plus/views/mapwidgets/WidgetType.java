@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
@@ -17,6 +18,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -124,7 +126,7 @@ public enum WidgetType {
 	@StringRes
 	public final int docsUrlId;
 	@Nullable
-	public WidgetGroup group;
+	private WidgetGroup group;
 	@NonNull
 	public final WidgetsPanel defaultPanel;
 
@@ -149,6 +151,16 @@ public enum WidgetType {
 	@DrawableRes
 	public int getIconId(boolean night) {
 		return night ? nightIconId : dayIconId;
+	}
+
+	public WidgetGroup getGroup() {
+		if (group == ALTITUDE) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (plugin == null || !plugin.isHeightmapEnabled()) {
+				return null;
+			}
+		}
+		return group;
 	}
 
 	@StringRes
