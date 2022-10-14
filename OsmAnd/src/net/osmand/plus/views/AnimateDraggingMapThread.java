@@ -38,7 +38,7 @@ public class AnimateDraggingMapThread {
 
 	private static final float DRAGGING_ANIMATION_TIME = 1200f;
 	private static final float ZOOM_ANIMATION_TIME = 250f;
-	private static final float ZOOM_MOVE_ANIMATION_TIME = 350f;
+	private static final float ZOOM_MOVE_ANIMATION_TIME = 900f;
 	private static final float MOVE_MOVE_ANIMATION_TIME = 900f;
 	private static final float NAV_ANIMATION_TIME = 1000f;
 	private static final int DEFAULT_SLEEP_TO_REDRAW = 15;
@@ -388,13 +388,14 @@ public class AnimateDraggingMapThread {
 					animator.cancelAnimation(targetAnimation);
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
-				animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
+				TimingFunction timingFunction = animateZoom ? TimingFunction.EaseOutExponential : TimingFunction.Linear;
+				animator.animateTargetTo(finish31, duration, timingFunction, locationServicesAnimationKey);
 			}
 
 			if (animateZoom)
 			{
 				animator.animateZoomTo((float) endZoom, ZOOM_MOVE_ANIMATION_TIME / 1000f,
-						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
+						TimingFunction.EaseInExponential, locationServicesAnimationKey);
 			}
 		}
 
