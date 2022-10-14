@@ -17,6 +17,8 @@ public class AltitudeWidget extends TextInfoWidget {
 
 	private static final String NO_VALUE = "—";
 
+	private static final int MIN_VALUE = -10_000;
+
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
 
@@ -63,7 +65,10 @@ public class AltitudeWidget extends TextInfoWidget {
 					PointI screenPoint = new PointI(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 					PointI center31 = new PointI();
 					if (mapRenderer.getLocationFromElevatedPoint(screenPoint, center31)) {
-						return (double) mapRenderer.getLocationHeightInMeters(center31);
+						double altitude = mapRenderer.getLocationHeightInMeters(center31);
+						if (altitude > MIN_VALUE) {
+							return altitude;
+						}
 					}
 				}
 			}
