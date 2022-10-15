@@ -515,6 +515,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void setMapDensity(double mapDensity) {
+		if (mainLayer != null) {
+			setMapDensityImpl(mapDensity);
+		}
+	}
+
 	public void resetManualRotation() {
 		setRotate(0, true);
 	}
@@ -922,12 +928,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return additional.fps;
 	}
 
-	public boolean isAnimatingZoom() {
-		return animatedDraggingThread.isAnimatingZoom();
+	public boolean isAnimatingMapZoom() {
+		return animatedDraggingThread.isAnimatingMapZoom();
 	}
 
 	public boolean isAnimatingMapMove() {
 		return animatedDraggingThread.isAnimatingMapMove();
+	}
+
+	public boolean isAnimatingMapRotation() {
+		return animatedDraggingThread.isAnimatingMapRotation();
 	}
 
 	@SuppressLint("WrongCall")
@@ -966,7 +976,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// skip it
 			}
 		}
-		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
+		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom()) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);

@@ -99,7 +99,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addEnable3DViewListener() {
-		enable3DViewListener = change -> updateMapTilt();
+		enable3DViewListener = change -> updateMapTiltAndRotation();
 		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
@@ -351,10 +351,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-		updateMapTilt();
+		updateMapTiltAndRotation();
 	}
 
-	public void updateMapTilt() {
+	public void updateMapTiltAndRotation() {
 		if (mapView != null) {
 			mapView.setElevationAngle(settings.getLastKnownMapElevation());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
