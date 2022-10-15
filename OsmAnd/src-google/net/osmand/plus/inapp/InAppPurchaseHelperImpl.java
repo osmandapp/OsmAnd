@@ -175,9 +175,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					});
 				}
 				for (Purchase purchase : purchases) {
-					InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(purchase.getSkus().get(0));
-					if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
-						onPurchaseFinished(purchase);
+					List<String> skus = purchase.getSkus();
+					if (!Algorithms.isEmpty(skus)) {
+						InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(skus.get(0));
+						if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
+							onPurchaseFinished(purchase);
+						}
 					}
 				}
 			}
@@ -309,8 +312,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				BillingManager billingManager = getBillingManager();
 				if (billingManager != null) {
 					for (Purchase p : billingManager.getPurchases()) {
-						if (getInAppPurchases().getInAppSubscriptionBySku(p.getSkus().get(0)) != null) {
-							result.add(p.getSkus().get(0));
+						List<String> skus = p.getSkus();
+						if (!Algorithms.isEmpty(skus) && getInAppPurchases().getInAppSubscriptionBySku(skus.get(0)) != null) {
+							result.add(skus.get(0));
 						}
 					}
 				}
@@ -471,7 +475,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (needRestoreUserInfo()) {
 							restoreUserInfo(purchase);
 						}
-						if (!tokensSent.contains(purchase.getSkus().get(0))) {
+						List<String> skus = purchase.getSkus();
+						if (!Algorithms.isEmpty(skus) && !tokensSent.contains(skus.get(0))) {
 							tokensToSend.add(purchase);
 						}
 					}

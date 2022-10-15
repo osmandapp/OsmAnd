@@ -355,7 +355,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 * Query purchases across various use cases and deliver the result in a formalized way through
 	 * a listener
 	 */
-	public void queryPurchases(QueryPurchasesListener queryPurchasesListener) {
+	public void queryPurchases(@Nullable QueryPurchasesListener queryPurchasesListener) {
 		Runnable queryToExecute = new Runnable() {
 			@Override
 			public void run() {
@@ -374,7 +374,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 								LOG.info("Skipped subscription purchases query since they are not supported");
 							}
 							onQueryPurchasesFinished(billingResult, purchaseList);
-							queryPurchasesListener.onQueryPurchasesFinished();
+							if (queryPurchasesListener != null) {
+								queryPurchasesListener.onQueryPurchasesFinished();
+							}
 						}
 					}
 				});
@@ -384,7 +386,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 	}
 
 	public void querySubscriptionPurchases(BillingResult billingResult, List<Purchase> purchaseList,
-	                                       long time, QueryPurchasesListener queryPurchasesListener) {
+	                                       long time, @Nullable QueryPurchasesListener queryPurchasesListener) {
 		QueryPurchasesParams purchasesParams = QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build();
 		mBillingClient.queryPurchasesAsync(purchasesParams, new PurchasesResponseListener() {
 			@Override
@@ -400,7 +402,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 					LOG.error("Got an error response trying to query subscription purchases");
 				}
 				onQueryPurchasesFinished(billingResult, purchaseList);
-				queryPurchasesListener.onQueryPurchasesFinished();
+				if (queryPurchasesListener != null) {
+					queryPurchasesListener.onQueryPurchasesFinished();
+				}
 			}
 		});
 	}
