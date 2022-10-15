@@ -749,7 +749,7 @@ public abstract class InAppPurchaseHelper {
 	protected void onPurchaseDone(PurchaseInfo info) {
 		logDebug("Purchase successful.");
 
-		InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(info.getSku());
+		InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(info.getSku().get(0));
 		InAppPurchase fullVersion = getFullVersion();
 		InAppPurchase depthContours = getDepthContours();
 		InAppPurchase contourLines = getContourLines();
@@ -888,7 +888,7 @@ public abstract class InAppPurchaseHelper {
 			for (PurchaseInfo info : purchaseInfoList) {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("userid", userId);
-				parameters.put("sku", info.getSku());
+				parameters.put("sku", info.getSku().get(0));
 				parameters.put("orderId", info.getOrderId());
 				parameters.put("purchaseToken", info.getPurchaseToken());
 				parameters.put("email", email);
@@ -938,7 +938,7 @@ public abstract class InAppPurchaseHelper {
 				private void updateSentTokens(@NonNull PurchaseInfo info) {
 					String tokensSentStr = ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get();
 					Set<String> tokensSent = new HashSet<>(Arrays.asList(tokensSentStr.split(";")));
-					tokensSent.add(info.getSku());
+					tokensSent.add(info.getSku().get(0));
 					ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set(TextUtils.join(";", tokensSent));
 				}
 
