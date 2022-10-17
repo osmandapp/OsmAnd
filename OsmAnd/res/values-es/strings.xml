@@ -4822,12 +4822,12 @@
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
     <string name="lang_sat">Santalí</string>
     <string name="ant_widgets">Widgets de ANT+</string>
-    <string name="ant_missing_dependency_descr">El servicio necesario «%1$s», no se ha encontrado.
-\nDebes instalar el complemento del servicio ANT+ o actualiza la versión existente, si ya lo tienes.
-\n¿Quieres ejecutar Play Store para conseguirlo\?</string>
+    <string name="ant_missing_dependency_descr">El servicio necesario «%1$s», no se ha encontrado. 
+\nDebes instalar el complemento del servicio ANT+ o actualiza la versión existente, si ya lo tienes. 
+\n¿Quieres ejecutar la Play Store para conseguirlo\?</string>
     <string name="ant_missing_dependency">Falta la dependencia</string>
-    <string name="favorites_backup">Copia de seguridad de favoritos</string>
-    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/Web) sin coste adicional.</string>
+    <string name="favorites_backup">Respaldo de favoritos</string>
+    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/Web) sin costo adicional.</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="map_widget_fps_info">Representación de mapas en FPS (fotogramas por segundo)</string>
     <string name="ant_go_to_store">Ir a la tienda</string>
@@ -4847,4 +4847,21 @@
     <string name="nautical_depth_points">Puntos de profundidad náutica</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
+    <string name="transport_hazmat_no_desc">Las carreteras y los túneles pueden restringir el transporte de materiales peligrosos.</string>
+    <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se muestra y actualiza el mapa y sus elementos (expresada en fotogramas por segundo o FPS).</string>
+    <string name="location_simulation_cutoff">La simulación se salta los primeros metros</string>
+    <string name="send_uuid_preference_desc">El UUID aleatorio se utiliza para descargar mapas fuera de línea de los servidores de OsmAnd para supervisar el uso justo de los recursos del servidor, predecir el uso del tráfico y generar informes anónimos de mapas mensuales.</string>
+    <string name="current_location_widget">Coordenadas: Ubicación actual</string>
+    <string name="external_sensors_plugin_name">Sensores externos</string>
+    <string name="external_sensors_plugin_description">Monitorización de la frecuencia cardíaca, la velocidad de la bicicleta, la potencia y la cadencia. Requiere la conexión de un dispositivo con sensores de estos parámetros con soporte de ANT+ (protocolo de red personal inalámbrica).</string>
+    <string name="map_widget_altitude_map_center">Altitud: centro del mapa</string>
+    <string name="map_widget_altitude_current_location_desc">Ver la altura sobre el nivel del mar de la geolocalización actual.</string>
+    <string name="map_widget_rendering_fps">Renderizando FPS del mapa</string>
+    <string name="simulate_location_by_gpx">Simular la localización mediante GPX</string>
+    <string name="terms_of_service_desc">Para descargar mapas debes aceptar el %1$s y %2$s.</string>
+    <string name="shared_string_terms_of_use">Términos de Uso</string>
+    <string name="location_simulation_speedup">Simulación de aceleración</string>
+    <string name="send_uuid_preference">Enviar Identificador Único de Usuario (UUID)</string>
+    <string name="shared_string_identifiers">Identificadores</string>
+    <string name="map_center_widget">LEEME: - La mejor forma de ayudar con las traducciones es a través de https://hosted.weblate.org/engage/osmand/ - Si edita el archivo strings.xml directamente, por favor, asegúrese de: 1. No producir cadenas duplicadas (compruebe por nombre si una cadena ya existe) 2. Cada apóstrofe (comilla) va precedido de una barra invertida. 3. Si modifica el archivo de cadenas en inglés, por favor añada las nuevas cadenas al principio del archivo, esto facilita las revisiones periódicas antes de los lanzamientos. - Para la redacción y la coherencia, por favor, tenga en cuenta https://docs.osmand.net/docs/technical/contributions/translating-osmand Thx - Hardy</string>
 </resources>
