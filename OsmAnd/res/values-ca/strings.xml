@@ -4015,4 +4015,17 @@
     <string name="coordinates_widget_current_location">Coordenades: ubicació actual</string>
     <string name="how_to_use">Com usar:</string>
     <string name="worldwide_maps">Mapes mundials</string>
+    <string name="ant_go_to_store">Anar a la tenda</string>
+    <string name="purchases_feature_desc_cross_buy">Utilitza les funcions de la subscripció en diferents plataformes (Android/iOS/Web) sense cost addicional.</string>
+    <string name="favorites_backup">Còpia de seguretat de preferits</string>
+    <string name="shared_string_cross_buy">Compra encreuada</string>
+    <string name="map_widget_target_distance">Distància de la càmera a l\'objectiu</string>
+    <string name="ant_missing_dependency">Falta la dependència</string>
+    <string name="ant_read_data">Llegir dades</string>
+    <string name="ant_write_to_gpx">Escriure dades en la traça</string>
+    <string name="ant_widgets">Ginys d\'ANT+</string>
+    <string name="map_widget_ant_heart_rate">Ritme cardíac</string>
+    <string name="ant_missing_dependency_descr">El servei necessari \"%1$s\" no s\'ha trobat.
+\nHas d\'instal·lar el complement del servei ANT+ o actualitza la versió existent si ja el tens.
+\nVols executar Play Store per a aconseguir-lo\?</string>
 </resources>
