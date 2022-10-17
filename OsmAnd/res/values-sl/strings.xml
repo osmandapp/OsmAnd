@@ -4782,8 +4782,6 @@
     <string name="map_markers_desc">Gradnik prikazuje razdaljo ali predvideni čas prihoda (ETA) za prvi dve oznaki na seznamu oznak na zemljevidu.</string>
     <string name="quick_action_map_center_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Središče zemljevida na zemljevidu.</string>
     <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Trenutna lokacija na zemljevidu.</string>
-    <string name="map_center_widget">Središče zemljevida</string>
-    <string name="current_location_widget">Trenutna lokacija</string>
     <string name="coordinates_widget_map_center_desc">Gradnik prikazuje geografske koordinate trenutnega središča zemljevida</string>
     <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
     <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
@@ -4814,8 +4812,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
     <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
     <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Opis ANT+</string>
     <string name="nautical_depth_points">Navtične globinske točke</string>
     <string name="depth_contours">Izobate</string>
     <string name="worldwide_maps">Zemljevidi sveta</string>

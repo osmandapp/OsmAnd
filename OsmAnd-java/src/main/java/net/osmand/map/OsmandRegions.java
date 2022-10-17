@@ -686,7 +686,7 @@ public class OsmandRegions {
 		Locale tw = Locale.CHINA;
 		or.setLocale(tw.getLanguage(), null);
 //		or.setLocale(tw.getLanguage(), tw.getCountry());
-		or.prepareFile("/Users/victorshcherb/osmand/repos/resources/countries-info/regions.ocbf");
+//		or.prepareFile("/repos/resources/countries-info/regions.ocbf");
 		LinkedList<WorldRegion> lst = new LinkedList<WorldRegion>();
 		lst.add(or.getWorldRegion());
 //		int i =0;

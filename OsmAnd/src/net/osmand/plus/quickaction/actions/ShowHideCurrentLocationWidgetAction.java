@@ -18,7 +18,7 @@ public class ShowHideCurrentLocationWidgetAction extends QuickAction {
 			"coordinates.current_location.showhide", ShowHideCurrentLocationWidgetAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.current_location_widget)
-			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()
+			.iconRes(R.drawable.ic_action_coordinates_location).nonEditable()
 			.category(QuickActionType.CONFIGURE_SCREEN);
 
 	public ShowHideCurrentLocationWidgetAction() {

@@ -1214,7 +1214,8 @@ public abstract class InAppPurchases {
 	}
 
 	public static class PurchaseInfo {
-		private String sku;
+
+		private List<String> sku = new ArrayList<>();
 		private String orderId;
 		private String purchaseToken;
 		private long purchaseTime;
@@ -1222,9 +1223,9 @@ public abstract class InAppPurchases {
 		private boolean acknowledged;
 		private boolean autoRenewing;
 
-		PurchaseInfo(String sku, String orderId, String purchaseToken, long purchaseTime,
-							int purchaseState, boolean acknowledged, boolean autoRenewing) {
-			this.sku = sku;
+		PurchaseInfo(List<String> sku, String orderId, String purchaseToken, long purchaseTime,
+		             int purchaseState, boolean acknowledged, boolean autoRenewing) {
+			this.sku.addAll(sku);
 			this.orderId = orderId;
 			this.purchaseToken = purchaseToken;
 			this.purchaseTime = purchaseTime;
@@ -1237,7 +1238,7 @@ public abstract class InAppPurchases {
 			parseJson(json);
 		}
 
-		public String getSku() {
+		public List<String> getSku() {
 			return sku;
 		}
 
@@ -1271,7 +1272,7 @@ public abstract class InAppPurchases {
 
 		public String toJson() {
 			Map<String, Object> jsonMap = new HashMap<>();
-			jsonMap.put("sku", sku);
+			jsonMap.put("sku", sku.get(0));
 			jsonMap.put("orderId", orderId);
 			jsonMap.put("purchaseToken", purchaseToken);
 			jsonMap.put("purchaseTime", purchaseTime);
@@ -1284,7 +1285,7 @@ public abstract class InAppPurchases {
 		public void parseJson(@NonNull String json) throws JSONException {
 			JSONObject jsonObj = new JSONObject(json);
 			if (jsonObj.has("sku")) {
-				this.sku = jsonObj.getString("sku");
+				this.sku.add(jsonObj.getString("sku"));
 			}
 			if (jsonObj.has("orderId")) {
 				this.orderId = jsonObj.getString("orderId");

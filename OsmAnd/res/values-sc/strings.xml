@@ -4792,8 +4792,6 @@
     <string name="map_widget_camera_tilt">Inclinatzione de sa fotocàmera</string>
     <string name="developer_widgets">Widgets pro sos isvilupadores</string>
     <string name="quick_action_current_location_widget_descr">Unu butone pro ammustrare o cuare su widget de sa positzione atuale in sa mapa.</string>
-    <string name="map_center_widget">Tzentru de sa mapa</string>
-    <string name="current_location_widget">Positzione atuale</string>
     <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
@@ -4817,8 +4815,6 @@
     <string name="map_widget_ant_bicycle_speed">Lestresa de sa bitzicleta</string>
     <string name="map_widget_ant_bicycle_speed_desc">Ammustrat sa lestresa de biàgiu</string>
     <string name="map_widget_ant_bicycle_dist_desc">Ammustrat sa distàntzia cursada</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Descritzione de s\'ANT+</string>
     <string name="nautical_depth_points">Puntos de profundidade nàutica</string>
     <string name="worldwide_maps">Mapas mundiales</string>
     <string name="map_widget_ant_heart_rate_desc">Ammustrat sa frecuèntzia cardìaca de s\'impreadore in tempus reale durante un\'atividade ispetzificada</string>

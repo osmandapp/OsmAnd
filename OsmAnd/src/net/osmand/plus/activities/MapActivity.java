@@ -4,6 +4,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
 import android.app.Activity;
@@ -713,7 +714,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
 			if (settings.APPLICATION_MODE.get() != prevAppMode) {
-				settings.setLastKnownMapRotation(prevAppMode, getMapRotate());
+				settings.setLastKnownMapRotation(prevAppMode, getMapRotateTarget());
 				settings.setLastKnownMapElevation(prevAppMode, getMapElevationAngle());
 				updateApplicationModeSettings();
 			}
@@ -1175,6 +1176,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getMapView().getRotate();
 	}
 
+	public float getMapRotateTarget() {
+		OsmandMapTileView mapView = getMapView();
+		if (mapView.isAnimatingMapRotation()) {
+			float targetRotate = mapView.getAnimatedDraggingThread().getTargetRotate();
+			if (targetRotate != TARGET_NO_ROTATION) {
+				return targetRotate;
+			}
+		}
+		return mapView.getRotate();
+	}
+
 	public float getMapElevationAngle() {
 		return getMapView().getElevationAngle();
 	}
@@ -1263,7 +1275,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapLayers.updateLayers(this);
 		mapActions.updateDrawerMenu();
 		updateNavigationBarColor();
-		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
+		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
+		mapView.setMapDensity(mapView.getSettingsMapDensity());
 		app.getDaynightHelper().startSensorIfNeeded(change -> app.runInUIThread(() -> getMapView().refreshMap(true)));
 		getMapView().refreshMap(true);
 		applyScreenOrientation();

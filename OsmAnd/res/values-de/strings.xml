@@ -4792,11 +4792,9 @@
     <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
 \nTippen Sie mit 2 Fingern auf die Karte, um die Entfernung zwischen den angeklickten Punkten anzuzeigen</string>
     <string name="shared_string_shows">Zeigt</string>
-    <string name="map_center_widget">Kartenmitte</string>
     <string name="coordinates_widget_map_center_desc">Widget zeigt die geografischen Koordinaten der aktuellen Kartenmitte</string>
     <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
     <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
-    <string name="current_location_widget">Aktueller Standort</string>
     <string name="coordinates_widget_current_location_desc">Widget zeigt die geografischen Koordinaten des aktuellen Standorts</string>
     <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
     <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
@@ -4814,7 +4812,6 @@
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
     <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Zeigt die Geschwindigkeit an, mit der der Benutzer in die Pedale tritt</string>
-    <string name="antplus_plugin_description">ANT+ Beschreibung</string>
     <string name="depth_contours">Tiefenkonturen</string>
     <string name="worldwide_maps">Weltweite Karten</string>
     <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
@@ -4833,7 +4830,6 @@
     <string name="map_widget_ant_bicycle_speed">Fahrradgeschwindigkeit</string>
     <string name="map_widget_ant_bicycle_speed_desc">Zeigt die Fahrgeschwindigkeit an</string>
     <string name="map_widget_ant_bicycle_dist_desc">Zeigt die zurückgelegte Entfernung an</string>
-    <string name="antplus_plugin_name">ANT+</string>
     <string name="nautical_depth_points">Nautische Tiefenpunkte</string>
     <string name="shared_string_cross_buy">Cross-Buy</string>
 </resources>

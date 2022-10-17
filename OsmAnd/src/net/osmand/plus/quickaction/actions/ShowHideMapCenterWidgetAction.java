@@ -18,7 +18,7 @@ public class ShowHideMapCenterWidgetAction extends QuickAction {
 			"coordinates.showhide", ShowHideMapCenterWidgetAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.map_center_widget)
-			.iconRes(R.drawable.ic_action_coordinates_widget).nonEditable()
+			.iconRes(R.drawable.ic_action_coordinates_map_center).nonEditable()
 			.category(QuickActionType.CONFIGURE_SCREEN);
 
 	public ShowHideMapCenterWidgetAction() {
