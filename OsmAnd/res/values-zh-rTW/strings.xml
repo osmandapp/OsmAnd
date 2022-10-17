@@ -4817,4 +4817,9 @@
     <string name="map_widget_ant_bicycle_speed_desc">顯示行駛速度</string>
     <string name="worldwide_maps">世界地圖</string>
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
+    <string name="shared_string_cross_buy">跨平台購買</string>
+    <string name="map_widget_fps_info">地圖繪製 FPS（每秒畫面）</string>
+    <string name="map_widget_target_distance">攝影機到目標的距離</string>
+    <string name="favorites_backup">收藏備份</string>
+    <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
 </resources>
