@@ -285,9 +285,9 @@
     <string name="layer_underlay">Мапа підкладки…</string>
     <string name="map_underlay">Мапа підкладки</string>
     <string name="map_underlay_descr">Виберіть фонову мапу</string>
-    <string name="layer_overlay">Верхній шар…</string>
+    <string name="layer_overlay">Мапа накладки…</string>
     <string name="shared_string_none">Нема</string>
-    <string name="map_overlay">Верхній шар</string>
+    <string name="map_overlay">Мапа накладки</string>
     <string name="map_overlay_descr">Виберіть накладку для основної мапи</string>
     <string name="tile_source_already_installed">Мапа вже встановлена, \'Налаштування\' будуть оновлені.</string>
     <string name="select_tile_source_to_install">Виберіть (тайлові) мапи для встановлення або оновлення.</string>
@@ -2135,8 +2135,8 @@
     <string name="quick_action_map_overlay_title">Накладки мапи</string>
     <string name="quick_action_map_overlay_action">Додати накладку мапи</string>
     <string name="quick_action_map_overlay_switch">Накладку мапи змінено на „%s“.</string>
-    <string name="quick_action_map_underlay_switch">Підкладка мапи змінена на „%s“.</string>
-    <string name="quick_action_map_underlay">Змінити підкладку мапи</string>
+    <string name="quick_action_map_underlay_switch">Мапа підкладки змінена на „%s“.</string>
+    <string name="quick_action_map_underlay">Змінити мапу підкладки</string>
     <string name="quick_action_map_underlay_title">Підкладки мапи</string>
     <string name="quick_action_map_underlay_action">Додати підкладку</string>
     <string name="quick_action_map_source">Змінити джерело мапи</string>
@@ -4828,4 +4828,23 @@
     <string name="favorites_backup">Резервне копіювання вибраного</string>
     <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/Web) без додаткових витрат.</string>
     <string name="shared_string_cross_buy">Перехресна купівля</string>
+    <string name="map_widget_altitude_current_location_desc">Показує висоту над рівнем моря поточного місцеперебування.</string>
+    <string name="simulate_location_by_gpx">Симулювати місцеперебування за допомогою GPX</string>
+    <string name="location_simulation_cutoff">Симуляція пропускає перші метри</string>
+    <string name="location_simulation_speedup">Прискорення симуляції</string>
+    <string name="send_uuid_preference_desc">Випадковий UUID використовується для завантаження офлайнових мап з серверів OsmAnd з метою відстеження добросовісного використання ресурсів серверів, прогнозування використання трафіку та створення анонімних щомісячних звітів по мапах.</string>
+    <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
+    <string name="shared_string_terms_of_use">Умови використання</string>
+    <string name="external_sensors_plugin_name">Зовнішні датчики</string>
+    <string name="external_sensors_plugin_description">Відстеження частоти серцевих скорочень, швидкості велосипеда, потужності велосипеда та каденсу. Необхідне з\'єднання пристрою з датчиками цих параметрів з підтримкою протоколу ANT+ (Wireless Personal Network protocol).</string>
+    <string name="map_widget_altitude_map_center">Висота: центр мапи</string>
+    <string name="current_location_widget">Координати: Поточне місцеперебування</string>
+    <string name="map_widget_altitude_current_location">Висота: поточне місцеперебування</string>
+    <string name="map_widget_altitude_map_center_desc">Показує висоту над рівнем моря поточного центру мапи.</string>
+    <string name="shared_string_identifiers">Ідентифікатори</string>
+    <string name="map_center_widget">Координати: Центр мапи</string>
+    <string name="map_widget_altitude_desc">Віджети показують висоту над рівнем моря для поточного місцеперебування або для поточного центру мапи</string>
+    <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
+    <string name="map_widget_rendering_fps_desc">Показує швидкість відображення та оновлення мапи та її елементів (виражається у кадрах в секунду - FPS).</string>
+    <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
 </resources>
