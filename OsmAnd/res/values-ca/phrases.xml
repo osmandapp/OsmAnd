@@ -117,7 +117,7 @@
     <string name="poi_public_transport_platform">Parada de transport públic</string>
     <string name="poi_bus_station">Estació d\'autobusos</string>
     <string name="poi_railway_station">Estació ferroviària;Estació de ferrocarril;Estació de tren</string>
-    <string name="poi_railway_platform">Andana de tren</string>
+    <string name="poi_railway_platform">Andana de tren;Andana de ferrocarril;Andana ferroviària;Plataforma de tren</string>
     <string name="poi_halt">Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
     <string name="poi_subway_station">Sí</string>
@@ -2074,11 +2074,11 @@
     <string name="poi_hygrometer_yes">Higròmetre</string>
     <string name="poi_hygrometer_no">Higròmetre: no</string>
     <string name="poi_fuel_type">Tipus de combustible</string>
-    <string name="poi_fuel_avia_type">Tipus de combustible (avia)</string>
+    <string name="poi_fuel_avia_type">Tipus de combustible (avions)</string>
     <string name="poi_payment_type">Tipus de pagament</string>
-    <string name="poi_payment_fuel_type">Targetes per carburants</string>
+    <string name="poi_payment_fuel_type">Targetes de combustible</string>
     <string name="poi_additional_type">Addicional</string>
-    <string name="poi_internet_access_type">Tipus d\'accés d\'Internet</string>
+    <string name="poi_internet_access_type">Tipus d\'accés a Internet</string>
     <string name="poi_bicycle_service">Servei de bicicletes</string>
     <string name="poi_clothes_type">Tipus</string>
     <string name="poi_shoes_type">Tipus</string>
