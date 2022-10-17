@@ -4832,4 +4832,23 @@
     <string name="map_widget_ant_bicycle_dist_desc">Zeigt die zurückgelegte Entfernung an</string>
     <string name="nautical_depth_points">Nautische Tiefenpunkte</string>
     <string name="shared_string_cross_buy">Cross-Buy</string>
+    <string name="location_simulation_speedup">Simulationsbeschleunigung</string>
+    <string name="shared_string_terms_of_use">Nutzungsbedingungen</string>
+    <string name="map_center_widget">Koordinaten: Kartenmitte</string>
+    <string name="current_location_widget">Koordinaten: Aktueller Standort</string>
+    <string name="external_sensors_plugin_name">Externe Sensoren</string>
+    <string name="external_sensors_plugin_description">Überwachung von Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung und Trittfrequenz. Erfordert den Anschluss eines Geräts mit Sensoren für diese Parameter mit Unterstützung von ANT + (Wireless Personal Network-Protokoll).</string>
+    <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
+    <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden (ausgedrückt in Bildern pro Sekunde oder FPS).</string>
+    <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
+    <string name="location_simulation_cutoff">Simulation überspringt die ersten Meter</string>
+    <string name="send_uuid_preference_desc">Zufällige UUID wird verwendet, um Offline-Karten von OsmAnd-Servern herunterzuladen, um die faire Nutzung von Serverressourcen zu überwachen, die Verkehrsnutzung vorherzusagen und anonyme monatliche Kartenberichte zu erstellen.</string>
+    <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
+    <string name="shared_string_identifiers">Identifikatoren</string>
+    <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
+    <string name="map_widget_altitude_map_center">Höhenlage: Kartenmitte</string>
+    <string name="map_widget_altitude_map_center_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Kartenmitte an.</string>
+    <string name="map_widget_altitude_current_location">Höhenlage: aktueller Standort</string>
+    <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
+    <string name="map_widget_altitude_desc">Widgets zeigen die Höhe über dem Meeresspiegel des aktuellen Standorts oder der aktuellen Kartenmitte an</string>
 </resources>
