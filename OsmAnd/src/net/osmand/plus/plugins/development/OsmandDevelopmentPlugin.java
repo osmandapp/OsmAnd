@@ -63,7 +63,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
-		SHOW_HEIGHTMAPS = registerBooleanPreference("show_heightmaps", false);
+		SHOW_HEIGHTMAPS = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
 
 		showHeightmapsListener = change -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
