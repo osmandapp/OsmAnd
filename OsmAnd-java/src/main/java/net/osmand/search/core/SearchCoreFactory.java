@@ -516,6 +516,9 @@ public class SearchCoreFactory {
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
+				if (wordToSearch.length() <= 3) {
+					wordToSearch = phrase.getFullSearchPhrase();
+				}
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;

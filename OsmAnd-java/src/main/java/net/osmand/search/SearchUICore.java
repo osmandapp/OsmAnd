@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -919,6 +920,7 @@ public class SearchUICore {
 	
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
+		FULL_PHRASE_MATCH,
 		FOUND_WORD_COUNT, // more is better (top)
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		COMPARE_AMENITY_TYPE_ADDITIONAL,
@@ -939,6 +941,43 @@ public class SearchUICore {
 				if (topVisible1 != topVisible2) {
 					// -1 - means 1st is less than 2nd
 					return topVisible1 ? -1 : 1;
+				}
+				break;
+			case FULL_PHRASE_MATCH:
+				//	show on top result with full name matching:
+				//	cities - all
+				//	poi - only nearest
+				double nearestPoiMetersLimit = 5000;
+				boolean isPointCloseEnough1 = true;
+				boolean isPointCloseEnough2 = true;
+				if (o1.location != null && o2.location != null && c.loc != null) {
+					if (!(o1.object instanceof City) && MapUtils.getDistance(o1.location, c.loc) > nearestPoiMetersLimit) {
+						isPointCloseEnough1 = false;
+					}
+					if (!(o2.object instanceof City) && MapUtils.getDistance(o2.location, c.loc) > nearestPoiMetersLimit) {
+						isPointCloseEnough2 = false;
+					}
+				} else {
+					break;
+				}
+
+				//	ignore full matching with default poi type names: "Parking", "Gas station", etc.
+				String phrase = c.fullSearchPhrase.toLowerCase().trim();
+				boolean isDefaultPoiTypeName1 = (o1.object instanceof Amenity) &&
+						Algorithms.stringsEqual(phrase, ((Amenity)o1.object).getSubType().toLowerCase());
+				boolean isDefaultPoiTypeName2 = (o2.object instanceof Amenity) &&
+						Algorithms.stringsEqual(phrase, ((Amenity)o2.object).getSubType().toLowerCase());
+
+				boolean canBeShownOnTop = (!isDefaultPoiTypeName1 || !isDefaultPoiTypeName2) &&
+						(isPointCloseEnough1 || isPointCloseEnough2);
+				if (canBeShownOnTop) {
+					boolean fullMath1 = checkFullNameMatched(phrase, o1);
+					boolean fullMath2 = checkFullNameMatched(phrase, o2);
+					boolean showOnTop1 = fullMath1 && !isDefaultPoiTypeName1 && isPointCloseEnough1;
+					boolean showOnTop2 = fullMath2 && !isDefaultPoiTypeName2 && isPointCloseEnough2;
+					if (showOnTop1 != showOnTop2) {
+						return showOnTop1 ? -1 : 1;
+					}
 				}
 				break;
 			case FOUND_WORD_COUNT: 
@@ -1053,6 +1092,26 @@ public class SearchUICore {
 			}
 			return 0;
 		}
+
+		private boolean checkFullNameMatched(String fullSearchPhrase, SearchResult searchResult) {
+			String searchPhrase = simplifyPhrase(fullSearchPhrase);
+			if (Algorithms.stringsEqual(searchPhrase, simplifyPhrase(searchResult.localeName))) {
+				return true;
+			} else if (!Algorithms.isEmpty(searchResult.otherNames)) {
+				for (String otherName : searchResult.otherNames) {
+					if (Algorithms.stringsEqual(searchPhrase, simplifyPhrase(otherName))) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		private String simplifyPhrase(String phrase) {
+			return phrase.toLowerCase()
+					.replace(" ", "")
+					.replace("-", "");
+		}
 	}
 	
 	private static String stripBraces(String localeName) {
@@ -1072,12 +1131,14 @@ public class SearchUICore {
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
+		public String fullSearchPhrase;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();
+			fullSearchPhrase = sp.getFullSearchPhrase();
 		}
 		
 
