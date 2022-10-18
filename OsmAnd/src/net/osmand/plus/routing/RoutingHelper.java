@@ -440,7 +440,7 @@ public class RoutingHelper {
 				}
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
-				Location prev = route.getPrevRouteLocation(1);
+				Location prev = route.getRouteLocationByDistance(-15);//-15 meters
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
 				boolean wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(currentLocation, prev, next);
