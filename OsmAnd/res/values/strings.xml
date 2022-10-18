@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="change_appearance">Change appearance</string>
     <string name="shared_string_select_recent">Select Recent</string>
     <string name="show_all_tracks">Show all tracks</string>
     <string name="on_map_empty_state_description">Select tracks you want to make visible on the map</string>

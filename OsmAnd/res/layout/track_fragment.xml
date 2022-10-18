@@ -55,13 +55,13 @@
 				</LinearLayout>
 
 				<androidx.appcompat.widget.AppCompatImageButton
-					android:id="@+id/switch_folder"
+					android:id="@+id/switch_group"
 					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:tint="?attr/default_icon_color"
-					osmand:srcCompat="@drawable/ic_action_group_list" />
+					osmand:srcCompat="@drawable/ic_action_list_folders" />
 
 				<androidx.appcompat.widget.AppCompatImageButton
 					android:id="@+id/actions_button"
@@ -81,8 +81,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/list_background_color"
-			osmand:tabMode="scrollable"
-			osmand:tabTextAppearance="@style/TabItemStyle">
+			osmand:tabMode="scrollable">
 
 		</com.google.android.material.tabs.TabLayout>
 

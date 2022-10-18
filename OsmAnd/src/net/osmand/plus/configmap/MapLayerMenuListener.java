@@ -5,15 +5,13 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -70,8 +68,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			showPoiFilterDialog(uiAdapter, item);
 			return false;
 		} else if (itemId == R.string.layer_gpx_layer) {
-			//showGpxSelectionDialog(uiAdapter, item);
-			TracksFragment.showInstance(mapActivity);
+			TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);
@@ -115,7 +112,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
 			} else {
-				showGpxSelectionDialog(uiAdapter, item);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = transportLinesMenu.isShowAnyTransport();
@@ -134,19 +131,6 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		mapActivity.updateLayers();
 		mapActivity.refreshMap();
 		return false;
-	}
-
-	private void showGpxSelectionDialog(OnDataChangeUiAdapter uiAdapter, ContextMenuItem item) {
-		MapLayers layers = mapActivity.getMapLayers();
-		AlertDialog dialog = layers.showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
-		dialog.setOnDismissListener(dlg -> {
-			OsmandApplication app = mapActivity.getMyApplication();
-			boolean selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
-			item.setSelected(selected);
-			item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			uiAdapter.onDataSetChanged();
-		});
 	}
 
 	protected void showPoiFilterDialog(OnDataChangeUiAdapter uiAdapter,

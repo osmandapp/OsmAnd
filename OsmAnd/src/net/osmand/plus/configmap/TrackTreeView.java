@@ -3,7 +3,7 @@ package net.osmand.plus.configmap;
 public abstract class TrackTreeView {
 	final public TrackTreeViewType viewType;
 
-	TrackTreeView(TrackTreeViewType viewType){
+	TrackTreeView(TrackTreeViewType viewType) {
 		this.viewType = viewType;
 	}
 }
@@ -15,14 +15,14 @@ class SortView extends TrackTreeView {
 	}
 }
 
-class EmptyOnMapTrackView extends TrackTreeView{
+class EmptyOnMapTrackView extends TrackTreeView {
 
 	EmptyOnMapTrackView() {
 		super(TrackTreeViewType.EmptyOnMapTrackView);
 	}
 }
 
-class TrackView extends TrackTreeView{
+class TrackView extends TrackTreeView {
 	Track track;
 
 	TrackView(Track track) {
@@ -31,8 +31,9 @@ class TrackView extends TrackTreeView{
 	}
 }
 
-class TrackGroupView extends TrackTreeView{
+class TrackGroupView extends TrackTreeView {
 	TrackGroup group;
+
 	TrackGroupView(TrackGroup group) {
 		super(TrackTreeViewType.TrackGroupView);
 		this.group = group;

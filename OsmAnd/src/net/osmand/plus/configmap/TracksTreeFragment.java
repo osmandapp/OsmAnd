@@ -20,7 +20,6 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -35,6 +34,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TracksTreeFragment extends Fragment {
 
@@ -44,14 +44,14 @@ public class TracksTreeFragment extends Fragment {
 	private GpxSelectionHelper selectedGpxHelper;
 	private TrackTabType tabType;
 	private TracksAdapter adapter;
-	private View.OnClickListener onEmptyStateViewClickListener = null;
+	private View.OnClickListener onEmptyStateViewClickListener;
 	private SelectTracksListener selectTracksListener;
 	private TextViewEx applyButton;
 	private TextViewEx secondaryButton;
-	private final ArrayList<Track> originalSelectedTracks = new ArrayList<>();
-	private final ArrayList<Track> newSelectedTracks = new ArrayList<>();
-	private ArrayList<TrackGroup> trackGroups = new ArrayList<>();
-	private ArrayList<TrackTreeView> listViews = new ArrayList<>();
+	private final List<Track> originalSelectedTracks = new ArrayList<>();
+	private final List<Track> newSelectedTracks = new ArrayList<>();
+	private final List<TrackGroup> trackGroups = new ArrayList<>();
+	private final List<TrackTreeView> listViews = new ArrayList<>();
 
 	TracksTreeFragment(OsmandApplication app) {
 		this.app = app;
@@ -68,7 +68,7 @@ public class TracksTreeFragment extends Fragment {
 		return fragment;
 	}
 
-	public static TracksTreeFragment createAllTracksFragment(OsmandApplication app, ArrayList<TrackFolder> trackFolders, SelectTracksListener selectTracksListener) {
+	public static TracksTreeFragment createAllTracksFragment(OsmandApplication app, List<TrackFolder> trackFolders, SelectTracksListener selectTracksListener) {
 		TracksTreeFragment fragment = new TracksTreeFragment(app);
 		fragment.tabType = TrackTabType.ALL;
 		fragment.selectTracksListener = selectTracksListener;
@@ -81,7 +81,7 @@ public class TracksTreeFragment extends Fragment {
 		return fragment;
 	}
 
-	public static TracksTreeFragment createOnMapTracksFragment(OsmandApplication app, ArrayList<TrackFolder> trackFolders, SelectTracksListener selectTracksListener, OnClickListener onEmptyStateViewClickListener) {
+	public static TracksTreeFragment createOnMapTracksFragment(OsmandApplication app, List<TrackFolder> trackFolders, SelectTracksListener selectTracksListener, OnClickListener onEmptyStateViewClickListener) {
 		TracksTreeFragment fragment = new TracksTreeFragment(app);
 		fragment.tabType = TrackTabType.ON_MAP;
 		fragment.selectTracksListener = selectTracksListener;
@@ -100,7 +100,7 @@ public class TracksTreeFragment extends Fragment {
 			if (emptySelectedGroup) {
 				listViews.add(new EmptyOnMapTrackView());
 			} else {
-				listViews.add(new SortView());
+//				listViews.add(new SortView());
 			}
 			for (TrackGroup group : trackGroups) {
 				if (!group.tracks.isEmpty()) {
@@ -113,7 +113,7 @@ public class TracksTreeFragment extends Fragment {
 				}
 			}
 		} else {
-			listViews.add(new SortView());
+//			listViews.add(new SortView());
 			for (TrackGroup group : trackGroups) {
 				if (!group.tracks.isEmpty()) {
 					if (group.showGroupHeader) {
@@ -237,7 +237,7 @@ public class TracksTreeFragment extends Fragment {
 	}
 
 
-	public void setupTrackGroup(ArrayList<GpxInfo> gpxInfos, TrackGroup trackGroup) {
+	public void setupTrackGroup(List<GpxInfo> gpxInfos, TrackGroup trackGroup) {
 		for (GpxInfo gpxInfo : gpxInfos) {
 			SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 			GPXTrackAnalysis analysis = null;
@@ -251,7 +251,9 @@ public class TracksTreeFragment extends Fragment {
 					analysis = dataItem.getAnalysis();
 				}
 			}
-
+			if (analysis == null) {
+				continue;
+			}
 			String distance = OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app);
 			String time = analysis.isTimeSpecified() ? Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled()) : "";
 			int points = (analysis.wptPoints);
@@ -277,8 +279,8 @@ public class TracksTreeFragment extends Fragment {
 				selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
 	}
 
-	public ArrayList<GpxInfo> getSelectedGpxInfos(ArrayList<TrackFolder> folders) {
-		ArrayList<GpxInfo> originalSelectedItems = new ArrayList<>();
+	public List<GpxInfo> getSelectedGpxInfos(List<TrackFolder> folders) {
+		List<GpxInfo> originalSelectedItems = new ArrayList<>();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 
 		for (TrackFolder folder : folders) {
@@ -519,8 +521,8 @@ class TrackGroup {
 	public ArrayList<Track> tracks = new ArrayList<>();
 	public boolean showIcon;
 	public boolean showGroupHeader;
-	public boolean selected = false;
-	public boolean collapsed = false;
+	public boolean selected;
+	public boolean collapsed;
 
 	TrackGroup(@Nullable String groupName, boolean showIcon, boolean showGroupHeader) {
 		this.groupName = groupName;

@@ -1,33 +1,23 @@
 package net.osmand.plus.configmap;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -35,8 +25,6 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.configmap.TrackTab.BottomSheetGroupListener;
-import net.osmand.plus.configmap.TracksFragment.BottomSheetRecycleViewAdapter.BottomSheetViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -44,72 +32,59 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TracksFragment extends BaseOsmAndFragment {
-	public static final String TAG = TracksFragment.class.getSimpleName();
+
+	private static final String TAG = TracksFragment.class.getSimpleName();
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private ApplicationMode selectedAppMode;
-	private boolean nightMode;
+	private UiUtilities iconsCache;
 
-	private Toolbar toolbar;
+	private final List<TrackTab> trackTabs = new ArrayList<>();
+
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
-	private LoadGpxTask asyncLoader;
-	private ArrayList<TrackTab> tabs = new ArrayList<>();
-	private ArrayList<TrackFolder> folders = new ArrayList<>();
-	private BottomSheetRecycleViewAdapter tracksGroupsAdapter;
-	private TracksTabAdapter tracksTabAdapter;
-	private SelectTracksListener selectTracksListener;
+	private TracksTabAdapter tabAdapter;
+
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
-		selectedAppMode = settings.getApplicationMode();
+		iconsCache = app.getUIUtilities();
+		nightMode = isNightMode(false);
 	}
 
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-
-		View view = inflater.inflate(R.layout.track_fragment, container, false);
-		if (Build.VERSION.SDK_INT < 30) {
-			AndroidUtils.addStatusBarPadding21v(app, view);
-		}
-		toolbar = view.findViewById(R.id.toolbar);
-		tabLayout = view.findViewById(R.id.tab_layout);
-		viewPager = view.findViewById(R.id.view_pager);
-
-		setupToolbar();
-
-		asyncLoader = new LoadGpxTask();
-		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-
-		selectTracksListener = new SelectTracksListener() {
-			@Override
-			public void onSelectTracks() {
-				for (int i = 0; i < tracksTabAdapter.getItemCount(); i++) {
-					if (i != viewPager.getCurrentItem()) {
-						tracksTabAdapter.notifyItemChanged(i);
-					}
-				}
-			}
-		};
-
-		return view;
+	@ColorRes
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		FragmentManager manager = activity.getSupportFragmentManager();
+	@NonNull
+	public List<TrackTab> getTrackTabs() {
+		return trackTabs;
+	}
+
+	@NonNull
+	public TrackTab getSelectedTab() {
+		return trackTabs.get(viewPager.getCurrentItem());
+	}
+
+	public void setSelectedTab(int position) {
+		viewPager.setCurrentItem(position);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksFragment fragment = new TracksFragment();
 			manager.beginTransaction()
@@ -119,125 +94,133 @@ public class TracksFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void updateTabs(ArrayList<TrackFolder> folders) {
-		this.folders = folders;
-		tabs.clear();
-
-		TrackTab onMapGroup = new TrackTab(getString(R.string.shared_string_on_map), TrackTabType.ON_MAP);
-		tabs.add(onMapGroup);
-
-		TrackTab allGroup = new TrackTab(getString(R.string.shared_string_all), TrackTabType.ALL);
-		allGroup.hasBottomSheetDivider = true;
-		tabs.add(allGroup);
-
-		for (TrackFolder folder : folders) {
-			TrackTab folderTab = new TrackTab(folder.folderName, TrackTabType.FOLDER);
-			folderTab.trackFolder = folder;
-			tabs.add(folderTab);
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.track_fragment, container, false);
+		if (Build.VERSION.SDK_INT < 30) {
+			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
+
+		tabLayout = view.findViewById(R.id.tab_layout);
+		viewPager = view.findViewById(R.id.view_pager);
+
+		setupToolbar(view);
+
+		asyncLoader = new LoadGpxTask();
+		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+		listener = new SelectTracksListener() {
+			@Override
+			public void onSelectTracks() {
+				for (int i = 0; i < tabAdapter.getItemCount(); i++) {
+					if (i != viewPager.getCurrentItem()) {
+						tabAdapter.notifyItemChanged(i);
+					}
+				}
+			}
+		};
+
+		return view;
 	}
 
-	private void setupToolbar() {
-		ImageButton backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setOnClickListener(view -> {
+	private void setupTabLayout() {
+		tabAdapter = new TracksTabAdapter(this, trackTabs);
+		viewPager.setAdapter(tabAdapter);
+
+		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+			tab.setText(trackTabs.get(position).tabName);
+		});
+		mediator.attach();
+
+		ApplicationMode mode = settings.getApplicationMode();
+		int profileColor = mode.getProfileColor(nightMode);
+		tabLayout.setSelectedTabIndicatorColor(profileColor);
+		tabLayout.setTabTextColors(ColorUtilities.getPrimaryTextColor(app, nightMode), profileColor);
+	}
+
+	private void setupToolbar(@NonNull View view) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				activity.getOnBackPressedDispatcher().onBackPressed();
+				activity.onBackPressed();
 			}
 		});
-
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		View sheetDialogView = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
-				.inflate(R.layout.bottom_sheet_track_group_list, null);
-		sheetDialogView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
-		BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
-		dialog.setContentView(sheetDialogView);
-
-		TextViewEx textViewEx = sheetDialogView.findViewById(R.id.title);
-		textViewEx.setText(getString(R.string.switch_folder));
-		RecyclerView recyclerView = sheetDialogView.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(app));
-
-		tracksGroupsAdapter = new BottomSheetRecycleViewAdapter(new BottomSheetGroupListener() {
-			@Override
-			public void onBottomSheetItemClick(int position) {
-				viewPager.setCurrentItem(position);
-				dialog.dismiss();
-			}
-		});
-		recyclerView.setAdapter(tracksGroupsAdapter);
-
-		View switchFolderButton = toolbar.findViewById(R.id.switch_folder);
-		switchFolderButton.setOnClickListener(v -> {
+		toolbar.findViewById(R.id.switch_group).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				tracksGroupsAdapter.notifyDataSetChanged();
-				dialog.show();
+				TrackGroupsBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
 			}
 		});
 
 		View actionsButton = toolbar.findViewById(R.id.actions_button);
-		PopupMenu popupMenu = new PopupMenu(app, actionsButton);
-		popupMenu.inflate(R.menu.track_action_menu);
-		Menu menu = popupMenu.getMenu();
-		if (menu instanceof MenuBuilder) {
-			((MenuBuilder) menu).setOptionalIconsVisible(true);
-		}
-		for (int index = 0; index < menu.size(); index++) {
-			menu.getItem(index).getIcon().setTint(ColorUtilities.getDefaultIconColor(app, nightMode));
-		}
-
-		popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				int i = item.getItemId();
-
-				if (i == R.id.action_change_appearance) {
-					// TODO: change appearance
-					return true;
-				} else if (i == R.id.action_import) {
-					// TODO: import
-					return true;
-				}
-				return false;
-			}
-		});
-
 		actionsButton.setOnClickListener(v -> {
-			popupMenu.show();
+			List<PopUpMenuItem> items = new ArrayList<>();
+			items.add(new PopUpMenuItem.Builder(view.getContext())
+					.setTitleId(R.string.change_appearance)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_appearance))
+					.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+
+						}
+					})
+					.create()
+			);
+			items.add(new PopUpMenuItem.Builder(view.getContext())
+					.setTitleId(R.string.shared_string_import)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import_to))
+					.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+
+						}
+					})
+					.create()
+			);
+			new PopUpMenuHelper.Builder(actionsButton, items, nightMode).show();
 		});
 	}
 
-	private void setupTabLayout() {
-		tracksTabAdapter = new TracksTabAdapter(this, tabs);
-		viewPager.setAdapter(tracksTabAdapter);
+	private LoadGpxTask asyncLoader;
+	private final List<TrackTab> tabs = new ArrayList<>();
+	private TrackTab SelectedTab;
+	private List<TrackFolder> folders = new ArrayList<>();
+	private SelectTracksListener listener;
 
-		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-			tab.setText(tabs.get(position).tabName);
-		});
-		mediator.attach();
+	private void updateTabs(List<TrackFolder> folders) {
+		this.folders = folders;
+		trackTabs.clear();
 
-		int profileColor = selectedAppMode.getProfileColor(nightMode);
-		tabLayout.setSelectedTabIndicatorColor(profileColor);
-		tabLayout.setTabTextColors(ColorUtilities.getPrimaryTextColor(app, nightMode), selectedAppMode.getProfileColor(nightMode));
+		trackTabs.add(new TrackTab(getString(R.string.shared_string_on_map), TrackTabType.ON_MAP));
+		trackTabs.add(new TrackTab(getString(R.string.shared_string_all), TrackTabType.ALL));
+
+		for (TrackFolder folder : folders) {
+			TrackTab folderTab = new TrackTab(folder.folderName, TrackTabType.FOLDER);
+			folderTab.trackFolder = folder;
+			trackTabs.add(folderTab);
+		}
 	}
 
-	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, ArrayList<TrackFolder>> {
+	public class LoadGpxTask extends AsyncTask<Void, GpxInfo, List<TrackFolder>> {
 
 		@Override
-		protected ArrayList<TrackFolder> doInBackground(Activity... params) {
+		protected List<TrackFolder> doInBackground(Void... params) {
 			return loadGpxGroups(app.getAppPath(IndexConstants.GPX_INDEX_DIR));
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<TrackFolder> result) {
+		protected void onPostExecute(List<TrackFolder> result) {
 			updateTabs(result);
 			setupTabLayout();
 		}
 
-		private ArrayList<TrackFolder> loadGpxGroups(File mapPath) {
+		private List<TrackFolder> loadGpxGroups(File mapPath) {
 			if (mapPath.canRead()) {
-				ArrayList<TrackFolder> groups = new ArrayList<>();
+				List<TrackFolder> groups = new ArrayList<>();
 				File[] listFiles = mapPath.listFiles();
 
 				if (listFiles != null && listFiles.length != 0) {
@@ -288,72 +271,10 @@ public class TracksFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public class BottomSheetRecycleViewAdapter extends RecyclerView.Adapter<BottomSheetViewHolder> {
-		private final BottomSheetGroupListener listener;
-
-		BottomSheetRecycleViewAdapter(BottomSheetGroupListener listener) {
-			this.listener = listener;
-		}
-
-		@NonNull
-		@Override
-		public BottomSheetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-			View view = LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
-					.inflate(R.layout.list_item_two_icons, null);
-			return new BottomSheetViewHolder(view);
-		}
-
-		@Override
-		public void onBindViewHolder(@NonNull BottomSheetViewHolder holder, int position) {
-			holder.viewEx.setText(tabs.get(position).tabName);
-			Drawable groupTypeIcon = getPaintedContentIcon(tabs.get(position).tabType.iconId,
-					position == viewPager.getCurrentItem()
-							? selectedAppMode.getProfileColor(nightMode)
-							: ColorUtilities.getDefaultIconColor(app, nightMode));
-			holder.groupTypeIcon.setImageDrawable(groupTypeIcon);
-
-			if (position == viewPager.getCurrentItem()) {
-				holder.selectedIcon.setVisibility(View.VISIBLE);
-				holder.selectedIcon.getDrawable().setTint(selectedAppMode.getProfileColor(nightMode));
-			} else {
-				holder.selectedIcon.setVisibility(View.INVISIBLE);
-			}
-
-			holder.button.setOnClickListener(view -> {
-				listener.onBottomSheetItemClick(position);
-			});
-
-			holder.divider.setVisibility(tabs.get(position).hasBottomSheetDivider ? View.VISIBLE : View.INVISIBLE);
-		}
-
-		@Override
-		public int getItemCount() {
-			return tabs.size();
-		}
-
-		class BottomSheetViewHolder extends RecyclerView.ViewHolder {
-			final View button;
-			final TextViewEx viewEx;
-			final AppCompatImageView groupTypeIcon;
-			final AppCompatImageView selectedIcon;
-			final View divider;
-
-			public BottomSheetViewHolder(@NonNull View itemView) {
-				super(itemView);
-				button = itemView.findViewById(R.id.button_container);
-				viewEx = itemView.findViewById(R.id.title);
-				groupTypeIcon = itemView.findViewById(R.id.icon);
-				selectedIcon = itemView.findViewById(R.id.secondary_icon);
-				divider = itemView.findViewById(R.id.divider);
-			}
-		}
-	}
-
 	public class TracksTabAdapter extends FragmentStateAdapter {
-		ArrayList<TrackTab> trackTabs;
+		List<TrackTab> trackTabs;
 
-		public TracksTabAdapter(@NonNull Fragment fragment, ArrayList<TrackTab> trackTabs) {
+		public TracksTabAdapter(@NonNull Fragment fragment, List<TrackTab> trackTabs) {
 			super(fragment);
 			this.trackTabs = trackTabs;
 		}
@@ -366,7 +287,7 @@ public class TracksFragment extends BaseOsmAndFragment {
 			TracksTreeFragment fragment;
 			switch (folderType) {
 				case ON_MAP:
-					fragment = TracksTreeFragment.createOnMapTracksFragment(app, folders, selectTracksListener, view -> {
+					fragment = TracksTreeFragment.createOnMapTracksFragment(app, folders, listener, view -> {
 						for (int index = 0; index < trackTabs.size(); index++) {
 							if (trackTabs.get(index).tabType == TrackTabType.ALL) {
 								viewPager.setCurrentItem(index);
@@ -375,10 +296,10 @@ public class TracksFragment extends BaseOsmAndFragment {
 					});
 					return fragment;
 				case ALL:
-					fragment = TracksTreeFragment.createAllTracksFragment(app, folders, selectTracksListener);
+					fragment = TracksTreeFragment.createAllTracksFragment(app, folders, listener);
 					return fragment;
 				case FOLDER:
-					fragment = TracksTreeFragment.createFolderTracksFragment(app, trackTab.trackFolder, selectTracksListener);
+					fragment = TracksTreeFragment.createFolderTracksFragment(app, trackTab.trackFolder, listener);
 					return fragment;
 				case FILTER:
 					break;
@@ -391,28 +312,19 @@ public class TracksFragment extends BaseOsmAndFragment {
 			return trackTabs.size();
 		}
 	}
-
-	@Override
-	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
-	}
 }
 
 class TrackTab {
-	public String tabName;
+
+	public final String tabName;
+	public final TrackTabType tabType;
+
 	@Nullable
 	public TrackFolder trackFolder;
-	public final TrackTabType tabType;
-	public boolean hasBottomSheetDivider = false;
 
 	public TrackTab(String name, TrackTabType type) {
 		this.tabName = name;
 		this.tabType = type;
-	}
-
-	interface BottomSheetGroupListener {
-		void onBottomSheetItemClick(int position);
 	}
 }
 
@@ -429,5 +341,3 @@ class TrackFolder {
 interface SelectTracksListener {
 	void onSelectTracks();
 }
-
-
