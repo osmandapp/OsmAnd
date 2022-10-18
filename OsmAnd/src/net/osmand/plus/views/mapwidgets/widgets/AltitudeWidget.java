@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.OsmandMapTileView.MIN_ALTITUDE_VALUE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,8 +18,6 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 public class AltitudeWidget extends TextInfoWidget {
 
 	private static final String NO_VALUE = "—";
-
-	private static final int MIN_VALUE = -10_000;
 
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
@@ -66,7 +66,7 @@ public class AltitudeWidget extends TextInfoWidget {
 					PointI center31 = new PointI();
 					if (mapRenderer.getLocationFromElevatedPoint(screenPoint, center31)) {
 						double altitude = mapRenderer.getLocationHeightInMeters(center31);
-						if (altitude > MIN_VALUE) {
+						if (altitude > MIN_ALTITUDE_VALUE) {
 							return altitude;
 						}
 					}

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.views.OsmandMapTileView.MIN_ALTITUDE_VALUE;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -21,6 +23,8 @@ import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -65,6 +69,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -81,6 +86,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
@@ -471,6 +477,31 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public boolean displayDistanceDirection() {
 		return false;
+	}
+
+	public String getFormattedAltitude() {
+		MapActivity activity = getMapActivity();
+		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (activity != null && devPlugin != null && devPlugin.isHeightmapEnabled()) {
+			LatLon point = getLatLon();
+			OsmandMapTileView mapView = activity.getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (point != null && mapRenderer != null) {
+				int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+				int y31 = MapUtils.get31TileNumberY(point.getLatitude());
+				PointI screenPoint = new PointI();
+				if (mapRenderer.getScreenPointFromLocation(new PointI(x31, y31), screenPoint, true)) {
+					PointI elevatedPoint = new PointI();
+					if (mapRenderer.getLocationFromElevatedPoint(screenPoint, elevatedPoint)) {
+						double altitude = mapRenderer.getLocationHeightInMeters(elevatedPoint);
+						if (altitude > MIN_ALTITUDE_VALUE) {
+							return OsmAndFormatter.getFormattedAlt(altitude, activity.getMyApplication());
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	public int getRightIconId() {
