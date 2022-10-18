@@ -41,7 +41,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -184,19 +184,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(distanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(distanceWidget));
 
 		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(timeWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(timeWidget));
 
 		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(uphillWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(uphillWidget));
 
 		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(downhillWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(downhillWidget));
 	}
 
 	@Override

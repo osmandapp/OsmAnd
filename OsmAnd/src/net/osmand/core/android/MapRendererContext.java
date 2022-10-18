@@ -23,6 +23,8 @@ import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileSqliteDatabasesCollection;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -257,7 +259,8 @@ public class MapRendererContext {
 
 	public void recreateHeightmapProvider() {
 		if (mapRendererView != null) {
-			if (!app.getSettings().SHOW_HEIGHTMAPS.get()) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (plugin == null || !plugin.isHeightmapEnabled()) {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
