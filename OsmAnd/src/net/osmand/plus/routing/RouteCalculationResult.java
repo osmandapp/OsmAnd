@@ -1240,7 +1240,7 @@ public class RouteCalculationResult {
 	@Nullable
 	public Location getRouteLocationByDistance(int meters) {
 		int increase = meters > 0 ? 1 : -1;
-		for (int i = 0; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
+		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
 			Location loc = locations.get(currentRoute + i);
 			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
 			if (Math.abs(meters) >= dist) {
