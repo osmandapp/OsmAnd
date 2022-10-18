@@ -80,7 +80,7 @@ public class SettingsItemsFactory {
 						pluginItems.put(pluginId, items);
 					}
 				}
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalArgumentException | JSONException e) {
 				SettingsHelper.LOG.error("Error creating item from json: " + itemJson, e);
 			}
 		}
