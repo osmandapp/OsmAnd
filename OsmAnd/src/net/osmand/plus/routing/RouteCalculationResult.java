@@ -1237,6 +1237,13 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	public Location getPrevRouteLocation(int before) {
+		if (currentRoute - before >= 0 && currentRoute - before < locations.size()) {
+			return locations.get(currentRoute - before);
+		}
+		return null;
+	}
+
 	public boolean directionsAvailable() {
 		return currentDirectionInfo < directions.size();
 	}

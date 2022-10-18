@@ -182,7 +182,7 @@ class RouteRecalculationHelper {
 				int newCurrentRoute = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(start, routeNodes, res.currentRoute, 15);
 				if (newCurrentRoute + 1 < routeNodes.size()) {
 					// This check is valid for Online/GPX services (offline routing is aware of route direction)
-					wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
+					wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute - 1), routeNodes.get(newCurrentRoute + 1));
 					// set/reset evalWaitInterval only if new route is in forward direction
 					if (wrongMovementDirection) {
 						evalWaitInterval = 3000;

@@ -440,9 +440,10 @@ public class RoutingHelper {
 				}
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
+				Location prev = route.getPrevRouteLocation(1);
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
-				boolean wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(currentLocation, next);
+				boolean wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(currentLocation, prev, next);
 				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
 						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
