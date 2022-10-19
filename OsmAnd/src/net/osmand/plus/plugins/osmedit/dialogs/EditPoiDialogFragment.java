@@ -469,6 +469,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void save() {
 		Entity original = editPoiData.getEntity();
+		Set<String> newChangedTags = Collections.synchronizedSet(new HashSet<>());
+		if(editPoiData.getEntity().getChangedTags() != null){
+			newChangedTags.addAll(editPoiData.getEntity().getChangedTags());
+		}
+
+		if(editPoiData.getChangedTags() != null){
+			newChangedTags.addAll(editPoiData.getChangedTags());
+		}
 
 		boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Entity entity;
@@ -542,7 +550,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					}
 
 					return false;
-				}, getActivity(), mOpenstreetmapUtil, action == Action.MODIFY ? editPoiData.getChangedTags() : null);
+				}, getActivity(), mOpenstreetmapUtil, action == Action.MODIFY ? newChangedTags : null);
 	}
 
 	private void dismissCheckForChanges() {
