@@ -120,6 +120,9 @@ public class RouteImporter {
 			RouteDataObject object = new RouteDataObject(region);
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object);
 			segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
+			if (segmentResult.getObject().pointsX == null) {
+				break;
+			}
 			route.add(segmentResult);
 		}
 		return route;

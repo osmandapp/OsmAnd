@@ -371,6 +371,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				} else {
 					object.heightDistanceArray = new float[0];
 				}
+			} else {
+				object.pointsX = null;
+				object.pointsY = null;
+				object.heightDistanceArray = null;
+				return;
 			}
 			if (plus) {
 				index++;
