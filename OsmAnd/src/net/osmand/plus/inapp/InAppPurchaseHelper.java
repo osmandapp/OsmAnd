@@ -137,12 +137,16 @@ public abstract class InAppPurchaseHelper {
 		return activeTask;
 	}
 
-	public static boolean isSubscribedToAny(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| isSubscribedToMaps(ctx)
-				|| isOsmAndProAvailable(ctx)
-				|| isSubscribedToMapperUpdates(ctx)
-				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
+	public static boolean isSubscribedToAny(@NonNull OsmandApplication app) {
+		return isSubscribedToAny(app, true);
+	}
+
+	public static boolean isSubscribedToAny(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app)
+				|| isSubscribedToMaps(app, checkDevBuild)
+				|| isOsmAndProAvailable(app, checkDevBuild)
+				|| isSubscribedToMapperUpdates(app)
+				|| app.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
 	public static boolean isSubscribedToMaps(@NonNull OsmandApplication app) {
@@ -174,10 +178,14 @@ public abstract class InAppPurchaseHelper {
 		return ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 	}
 
-	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| isSubscribedToPromo(ctx)
-				|| isSubscribedToOsmAndPro(ctx);
+	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app, true);
+	}
+
+	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication app, boolean checkDevBuild) {
+		return checkDevBuild && Version.isDeveloperBuild(app)
+				|| isSubscribedToPromo(app)
+				|| isSubscribedToOsmAndPro(app);
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication app) {
@@ -965,33 +973,43 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void notifyError(InAppPurchaseTaskType taskType, String message) {
-		if (uiActivity != null) {
-			uiActivity.onError(taskType, message);
-		}
+		ctx.runInUIThread(() -> {
+			if (uiActivity != null) {
+				uiActivity.onError(taskType, message);
+			}
+		});
 	}
 
 	protected void notifyGetItems() {
-		if (uiActivity != null) {
-			uiActivity.onGetItems();
-		}
+		ctx.runInUIThread(() -> {
+			if (uiActivity != null) {
+				uiActivity.onGetItems();
+			}
+		});
 	}
 
 	protected void notifyItemPurchased(String sku, boolean active) {
-		if (uiActivity != null) {
-			uiActivity.onItemPurchased(sku, active);
-		}
+		ctx.runInUIThread(() -> {
+			if (uiActivity != null) {
+				uiActivity.onItemPurchased(sku, active);
+			}
+		});
 	}
 
 	protected void notifyShowProgress(InAppPurchaseTaskType taskType) {
-		if (uiActivity != null) {
-			uiActivity.showProgress(taskType);
-		}
+		ctx.runInUIThread(() -> {
+			if (uiActivity != null) {
+				uiActivity.showProgress(taskType);
+			}
+		});
 	}
 
 	protected void notifyDismissProgress(InAppPurchaseTaskType taskType) {
-		if (uiActivity != null) {
-			uiActivity.dismissProgress(taskType);
-		}
+		ctx.runInUIThread(() -> {
+			if (uiActivity != null) {
+				uiActivity.dismissProgress(taskType);
+			}
+		});
 	}
 
 	/// UI notifications methods

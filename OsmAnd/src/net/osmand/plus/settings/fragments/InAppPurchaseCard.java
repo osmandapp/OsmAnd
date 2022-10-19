@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
@@ -165,15 +166,19 @@ public class InAppPurchaseCard extends BaseCard {
 				AndroidUiHelper.updateVisibility(nextBillingDate, true);
 			}
 		} else if (state != SubscriptionState.ACTIVE && state != SubscriptionState.CANCELLED) {
+			boolean visible = true;
+			if (purchases.isMapsSubscription(subscription)) {
+				boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseHelper.isFullVersionPurchased(app, false);
+				visible = !isFullVersion && !InAppPurchaseHelper.isSubscribedToAny(app, false);
+			} else if (purchases.isOsmAndProSubscription(subscription)) {
+				visible = !InAppPurchaseHelper.isOsmAndProAvailable(app, false);
+			}
 			View renewContainer = view.findViewById(R.id.renewContainer);
-			AndroidUiHelper.updateVisibility(renewContainer, true);
-			AndroidUtils.setBackground(activity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			String sku = subscription.getSku();
-			renewContainer.setOnClickListener(v -> InAppPurchaseHelper.subscribe(activity, purchaseHelper, sku));
+			renewContainer.setOnClickListener(v -> InAppPurchaseHelper.subscribe(activity, purchaseHelper, subscription.getSku()));
 
-			View renew = view.findViewById(R.id.renew);
-			AndroidUtils.setBackground(activity, renew, nightMode,
-					R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
+			AndroidUiHelper.updateVisibility(renewContainer, visible && Version.isInAppPurchaseSupported());
+			AndroidUtils.setBackground(activity, renewContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+			AndroidUtils.setBackground(activity, view.findViewById(R.id.renew), nightMode, R.drawable.btn_solid_border_light, R.drawable.btn_solid_border_dark);
 		}
 		setupStatus(view, state, expiredTime, expiredTime);
 	}
