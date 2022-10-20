@@ -119,11 +119,13 @@ public class RouteImporter {
 		for (RouteSegment routeSegment : segment.routeSegments) {
 			RouteDataObject object = new RouteDataObject(region);
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object);
-			segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
-			if (segmentResult.getObject().pointsX == null) {
+			try {
+				segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
+				route.add(segmentResult);
+			} catch (IllegalStateException e) {
+				log.error(e.getMessage());
 				break;
 			}
-			route.add(segmentResult);
 		}
 		return route;
 	}
