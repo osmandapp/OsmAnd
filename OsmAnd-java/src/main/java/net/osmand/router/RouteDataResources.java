@@ -40,11 +40,10 @@ public class RouteDataResources {
 
 	public Location getLocation(int index) {
 		index += currentLocation;
-		try {
-			return locations.get(index);
-		} catch (IndexOutOfBoundsException e) {
+		if (index >= locations.size()) {
 			throw new IllegalStateException("Locations index: " + index + " out of bounds");
 		}
+		return locations.get(index);
 	}
 
 	public void incrementCurrentLocation(int index) {
