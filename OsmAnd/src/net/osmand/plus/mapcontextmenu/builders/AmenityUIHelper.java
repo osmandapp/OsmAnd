@@ -807,7 +807,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		} else if (isUrl) {
 			ll.setOnClickListener(v -> {
 				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					if (text.contains(WIKI_LINK)) {
+					if (text.contains(WIKI_LINK) && wikiAmenity != null) {
 						if (Version.isPaidVersion(app)) {
 							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
 							wikiArticleHelper.showWikiArticle(wikiAmenity.getLocation(), text);
