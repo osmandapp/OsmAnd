@@ -208,9 +208,11 @@ public class MapLayers {
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
 		overlayTransparencyListener = change -> app.runInUIThread(() -> {
-			mapTileLayer.setAlpha(255 - change);
-			mapVectorLayer.setAlpha(255 - change);
-			mapView.refreshMap();
+			if (useOpenGLRender) {
+				mapTileLayer.setAlpha(255 - change);
+				mapVectorLayer.setAlpha(255 - change);
+				mapView.refreshMap();
+			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
 
@@ -257,12 +259,13 @@ public class MapLayers {
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
+		boolean useOpenGLRender = settings.USE_OPENGL_RENDER.get();
 
 		// update transparency
 		int mapTransparency = 255;
 		if (settings.MAP_UNDERLAY.get() != null) {
 			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (settings.MAP_OVERLAY.get() != null) {
+		} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
 			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
 		}
 		mapTileLayer.setAlpha(mapTransparency);
