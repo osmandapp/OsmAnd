@@ -208,10 +208,11 @@ public class MapLayers {
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
 		overlayTransparencyListener = change -> app.runInUIThread(() -> {
-			if (useOpenGLRender) {
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
 				mapTileLayer.setAlpha(255 - change);
 				mapVectorLayer.setAlpha(255 - change);
-				mapView.refreshMap();
+				mapRenderer.requestRender();
 			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
