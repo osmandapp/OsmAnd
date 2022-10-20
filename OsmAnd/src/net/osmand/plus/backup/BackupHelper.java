@@ -1,5 +1,9 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.IndexConstants.BINARY_MAP_VERSION;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -31,12 +35,14 @@ import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
 import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
 import net.osmand.plus.base.ProgressHelper;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
@@ -320,8 +326,15 @@ public class BackupHelper {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
 		if (!isLimitedFilesCollectionItem(item)
-				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
+				&& info != null && (!Algorithms.isEmpty(info.filesToUpload) || !Algorithms.isEmpty(info.filesToMerge))) {
 			for (LocalFile localFile : info.filesToUpload) {
+				File file = localFile.file;
+				if (item.equals(localFile.item) && file != null) {
+					filesToUpload.add(file);
+				}
+			}
+			for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+				LocalFile localFile = pair.first;
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
 					filesToUpload.add(file);
