@@ -12,6 +12,8 @@ import com.github.mikephil.charting.data.LineData;
 
 public class LineChartEx extends LineChart {
 
+	private static final boolean SHOW_LABELS_ON_START = true;
+
 	private YAxisLabelView yAxisLabelView;
 
 	public LineChartEx(Context context) {
@@ -42,10 +44,11 @@ public class LineChartEx extends LineChart {
 				yAxisLabelView.measure(MeasureSpec.makeMeasureSpec(0, 0), MeasureSpec.makeMeasureSpec(0, 0));
 				yAxisLabelView.layout(0, 0, yAxisLabelView.getMeasuredWidth(), yAxisLabelView.getMeasuredHeight());
 
+				float x = SHOW_LABELS_ON_START ? 0 : mViewPortHandler.contentRight() - (float) yAxisLabelView.getWidth();
 				boolean bottomLabel = mAxisLeft.mAxisMinimum == mAxisLeft.mEntries[i];
 				float yOffset = bottomLabel ? (float) yAxisLabelView.getHeight() : (float) yAxisLabelView.getHeight() / 2.0F;
 				float y = positions[i * 2 + 1] - yOffset;
-				this.yAxisLabelView.draw(canvas, 0, y);
+				this.yAxisLabelView.draw(canvas, x, y);
 			}
 		}
 	}
