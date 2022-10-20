@@ -4821,4 +4821,23 @@
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/Web) további költségek nélkül.</string>
+    <string name="external_sensors_plugin_name">Külső érzékelők</string>
+    <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
+    <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
+    <string name="map_widget_altitude_desc">A widgetek megjelenítik a jelenlegi helyzet vagy a térképközéppont tengerszint feletti magasságát</string>
+    <string name="map_widget_rendering_fps">Térképmegjelenítés (képkocka/másodperc)</string>
+    <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelennek meg és frissülnek a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
+    <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
+    <string name="location_simulation_cutoff">A szimuláció hagyja ki az első métereket</string>
+    <string name="send_uuid_preference">Egyedi felhasználóazonosító (UUID) elküldése</string>
+    <string name="map_widget_altitude_map_center_desc">Megjeleníti a jelenlegi térképközéppont tengerszint feletti magasságát.</string>
+    <string name="map_widget_altitude_current_location_desc">Megjeleníti a jelenlegi földrajzi hely tengerszint feletti magasságát.</string>
+    <string name="shared_string_identifiers">Azonosítók</string>
+    <string name="shared_string_terms_of_use">Felhasználási feltételek</string>
+    <string name="location_simulation_speedup">Szimulációs felgyorsítása</string>
+    <string name="current_location_widget">Koordináták: jelenlegi hely</string>
+    <string name="map_center_widget">Koordináták: térképközéppont</string>
+    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosítót (UUID) a következőkre használható: offline térképek letöltése használják az OsmAnd szerverekről, a szerver erőforrásainak méltányos használatának nyomon követése, a forgalom felhasználásának előrejelzése és névtelen havi térképjelentések készítésére.</string>
+    <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
+    <string name="external_sensors_plugin_description">Pulzusszám, kerékpársebesség, kerékpár-teljesítmény és lépéstempó figyelemmel kísérése. ANT+ (vezeték nélküli személyes hálózati protokoll) támogatásával rendelkező, és e paraméterek érzékelőivel rendelkező készülék szükséges.</string>
 </resources>

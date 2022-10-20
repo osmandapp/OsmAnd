@@ -14,6 +14,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -157,9 +158,10 @@ public class WidgetsSettingsHelper {
 		String duplicateWidgetId = WidgetType.getDuplicateWidgetId(widgetType);
 		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType);
 		if (duplicateWidget != null) {
+			WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
-			MapWidgetInfo duplicateWidgetInfo = widgetRegistry.createCustomWidget(duplicateWidgetId,
-					duplicateWidget, widgetType, panel, appMode);
+			MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
+					duplicateWidgetId, duplicateWidget, widgetType, panel);
 			widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
 			return duplicateWidgetInfo;
 		}

@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
@@ -33,10 +34,11 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.LocationSimulationAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -49,6 +51,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	private final StateChangedListener<Boolean> showHeightmapsListener;
 
+	public final OsmandPreference<Boolean> SHOW_HEIGHTMAPS;
+
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		super(app);
 
@@ -59,13 +63,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
+		SHOW_HEIGHTMAPS = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
+
 		showHeightmapsListener = change -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null && mapContext.isVectorLayerEnabled()) {
 				mapContext.recreateHeightmapProvider();
 			}
 		};
-		app.getSettings().SHOW_HEIGHTMAPS.addListener(showHeightmapsListener);
+		SHOW_HEIGHTMAPS.addListener(showHeightmapsListener);
 	}
 
 	@Override
@@ -115,22 +121,22 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(fpsWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(fpsWidget));
 
 		MapWidget cameraTiltWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_TILT);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(cameraTiltWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(cameraTiltWidget));
 
 		MapWidget cameraDistanceWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(cameraDistanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(cameraDistanceWidget));
 
 		MapWidget zoomLevelWidget = createMapWidgetForParams(mapActivity, DEV_ZOOM_LEVEL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(zoomLevelWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(zoomLevelWidget));
 
 		MapWidget targetDistanceWidget = createMapWidgetForParams(mapActivity, DEV_TARGET_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(targetDistanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(targetDistanceWidget));
 	}
 
 	@Override
@@ -191,4 +197,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		quickActionTypes.add(LocationSimulationAction.TYPE);
 		return quickActionTypes;
 	}
+
+	public boolean isHeightmapEnabled() {
+		return isHeightmapAllowed() && SHOW_HEIGHTMAPS.get();
+	}
+
+	public boolean isHeightmapAllowed() {
+		return InAppPurchaseHelper.isOsmAndProAvailable(app);
+	}
+
 }

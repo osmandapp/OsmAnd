@@ -58,7 +58,7 @@ public enum WidgetGroup {
 	public List<WidgetType> getWidgets() {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.group) {
+			if (this == widget.getGroup()) {
 				widgets.add(widget);
 			}
 		}

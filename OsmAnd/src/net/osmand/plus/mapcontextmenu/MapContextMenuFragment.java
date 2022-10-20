@@ -212,7 +212,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
 
-		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
+		view = inflater.inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
 		nightMode = menu.isNightMode();
@@ -1835,6 +1835,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				line3.setCompoundDrawablePadding(dpToPx(5f));
 			}
 
+			View additionalInfoLayout = view.findViewById(R.id.additional_info_layout);
 			ImageView additionalInfoImageView = view.findViewById(R.id.additional_info_image_view);
 			TextView additionalInfoTextView = view.findViewById(R.id.additional_info_text_view);
 			CharSequence additionalInfoStr = menu.getAdditionalInfo();
@@ -1853,15 +1854,34 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				}
 				additionalInfoTextView.setText(additionalInfoStr);
 				additionalInfoTextView.setVisibility(View.VISIBLE);
+				additionalInfoLayout.setVisibility(View.VISIBLE);
 			} else {
 				additionalInfoTextView.setVisibility(View.GONE);
+				additionalInfoLayout.setVisibility(View.GONE);
 			}
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 
-			boolean showSeparator = showAdditionalInfo && menu.displayDistanceDirection();
-			view.findViewById(R.id.info_compass_separator)
-					.setVisibility(showSeparator ? View.VISIBLE : View.GONE);
+			boolean showCompass = menu.displayDistanceDirection();
+			boolean showCompassSeparator = showAdditionalInfo && showCompass;
+			View compassSeparator = view.findViewById(R.id.info_compass_separator);
+			compassSeparator.setVisibility(showCompassSeparator ? View.VISIBLE : View.GONE);
+
+			View altitudeLayout = view.findViewById(R.id.altitude_layout);
+			CharSequence formattedAltitude = menu.getFormattedAltitude();
+			boolean showAltitude = !TextUtils.isEmpty(formattedAltitude);
+			if (showAltitude) {
+				TextView tvAltitude = view.findViewById(R.id.altitude);
+				tvAltitude.setText(formattedAltitude);
+				altitudeLayout.setVisibility(View.VISIBLE);
+			} else {
+				altitudeLayout.setVisibility(View.GONE);
+			}
+
+			boolean showAltitudeSeparator = showAltitude && (showAdditionalInfo || showCompass);
+			View altitudeSeparator = view.findViewById(R.id.info_altitude_separator);
+			altitudeSeparator.setVisibility(showAltitudeSeparator ? View.VISIBLE : View.GONE);
 		}
+
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
 	}
@@ -1884,6 +1904,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		View additionalInfoImageView = view.findViewById(R.id.additional_info_image_view);
 		View additionalInfoTextView = view.findViewById(R.id.additional_info_text_view);
 		View compassView = view.findViewById(R.id.compass_layout);
+		View altitudeView = view.findViewById(R.id.altitude_layout);
 		View titleButtonContainer = view.findViewById(R.id.title_button_container);
 		View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 		View titleBottomButtonContainer = view.findViewById(R.id.title_bottom_button_container);
@@ -1893,6 +1914,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				&& additionalInfoImageView.getVisibility() == View.GONE
 				&& additionalInfoTextView.getVisibility() == View.GONE
 				&& compassView.getVisibility() == View.INVISIBLE
+				&& altitudeView.getVisibility() == View.GONE
 				&& titleButtonContainer.getVisibility() == View.GONE
 				&& downloadButtonsContainer.getVisibility() == View.GONE
 				&& titleBottomButtonContainer.getVisibility() == View.GONE) {

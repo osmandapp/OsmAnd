@@ -4783,4 +4783,8 @@
     <string name="favorite_delete_group">Удалить группу</string>
     <string name="download_heightmap_maps">Карта высот</string>
     <string name="display_position">Отображать позицию</string>
+    <string name="current_location_widget">Координаты: текущее местоположение</string>
+    <string name="external_sensors_plugin_name">Внешние датчики</string>
+    <string name="map_center_widget">Координаты: центр карты</string>
+    <string name="map_widget_altitude_map_center">Высота: центр карты</string>
 </resources>

@@ -129,6 +129,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -401,10 +402,11 @@ public class OsmandAidlApi {
 							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
-							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
-							widgetRegistry.registerWidget(widgetInfo);
+							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+							MapWidgetInfo widgetInfo = creator.createExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							registry.registerWidget(widgetInfo);
 
 							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();

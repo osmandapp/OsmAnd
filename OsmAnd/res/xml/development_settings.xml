@@ -25,6 +25,14 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/download_heightmap_maps" />
 
+	<Preference
+		android:key="show_heightmaps_promo"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/download_heightmap_maps"
+		android:summary="@string/shared_string_disabled"
+		tools:isPreferenceVisible="false"/>
+
 	<PreferenceCategory
 		android:key="safe"
 		android:layout="@layout/preference_category_with_descr"

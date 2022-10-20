@@ -58,7 +58,7 @@ public class ReorderWidgetsAdapterHelper {
 
 	private void updateAvailableWidget(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
 		WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
-		WidgetGroup widgetGroup = widgetType != null ? widgetType.group : null;
+		WidgetGroup widgetGroup = widgetType != null ? widgetType.getGroup() : null;
 		if (widgetGroup != null) {
 			boolean addGroupItem = areAllGroupWidgetsAdded(widgetGroup);
 			if (addGroupItem) {
@@ -355,8 +355,8 @@ public class ReorderWidgetsAdapterHelper {
 
 	private void removeAddedItemFromAvailable(@NonNull String widgetId) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
-		if (widgetType != null && widgetType.group != null) {
-			WidgetGroup group = widgetType.group;
+		WidgetGroup group = widgetType != null ? widgetType.getGroup() : null;
+		if (group != null) {
 			if (areAllGroupWidgetsAdded(group)) {
 				int indexToRemove = getIndexOfAvailableGroup(group);
 				if (indexToRemove != -1) {
@@ -389,7 +389,7 @@ public class ReorderWidgetsAdapterHelper {
 			if (listItem.value instanceof AddedWidgetUiInfo) {
 				AddedWidgetUiInfo addedWidgetUiInfo = (AddedWidgetUiInfo) listItem.value;
 				WidgetType widgetType = WidgetType.getById(addedWidgetUiInfo.key);
-				if (widgetType != null && group == widgetType.group) {
+				if (widgetType != null && group == widgetType.getGroup()) {
 					addedGroupWidgetsCount++;
 				}
 			}

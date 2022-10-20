@@ -227,6 +227,11 @@
 		<attr name="rightSide" format="boolean" />
 	</declare-styleable>
 
+	<declare-styleable name="FlowLayout">
+		<attr name="horizontalItemsSpacing" format="dimension"/>
+		<attr name="verticalItemsSpacing" format="dimension"/>
+	</declare-styleable>
+
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
     <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
 </resources>

@@ -1457,6 +1457,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
+	public CharSequence getFormattedAltitude() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return menuController.getFormattedAltitude();
+		}
+		return "";
+	}
+
 	public CharSequence getSubtypeStr() {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {

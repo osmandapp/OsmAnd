@@ -46,7 +46,7 @@
     <string name="closing">S\'està tancant</string>
     <string name="app_name_short">Rastrejador OsmAnd</string>
     <string name="privacy_policy_telegram_client">El rastrejador d\'OsmAnd és un dels clients que usen la plataforma oberta de Telegram. Els vostres contactes poden usar qualsevol altra client de Telegram.</string>
-    <string name="privacy_policy_agree">En prémer \"Continua\", accepteu les condicions en política de privadesa, tant de Telegram com d\'OsmAnd.</string>
+    <string name="privacy_policy_agree">En fer un toc a \"Continua\", accepteu les condicions en política de privadesa, tant de Telegram com d\'OsmAnd.</string>
     <string name="shared_string_accept">D\'acord</string>
     <string name="telegram_privacy_policy">Política de Privadesa de Telegram</string>
     <string name="osmand_privacy_policy">Política de Privadesa d\'OsmAnd</string>

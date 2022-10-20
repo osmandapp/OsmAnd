@@ -47,6 +47,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -284,7 +285,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
-				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel, selectedAppMode);
+				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
+				return creator.createCustomWidgetInfo(id, widget, widgetType, panel);
 			}
 		}
 		return null;
