@@ -22,7 +22,7 @@ import net.osmand.util.MapUtils;
 // Immutable object !
 public class SearchPhrase {
 	public static final String DELIMITER = " ";
-	private static final String ALLDELIMITERS = "\\s|,|-";
+	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
