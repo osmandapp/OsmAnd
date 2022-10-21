@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
@@ -38,7 +37,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -142,22 +141,28 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget temperatureWidget = createMapWidgetForParams(mapActivity, WEATHER_TEMPERATURE_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(temperatureWidget, appMode));
-
+		if (temperatureWidget != null) {
+			widgetInfos.add(creator.createWidgetInfo(temperatureWidget));
+		}
 		MapWidget precipitationWidget = createMapWidgetForParams(mapActivity, WEATHER_PRECIPITATION_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(precipitationWidget, appMode));
-
+		if (precipitationWidget != null) {
+			widgetInfos.add(creator.createWidgetInfo(precipitationWidget));
+		}
 		MapWidget windWidget = createMapWidgetForParams(mapActivity, WEATHER_WIND_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(windWidget, appMode));
-
+		if (windWidget != null) {
+			widgetInfos.add(creator.createWidgetInfo(windWidget));
+		}
 		MapWidget cloudsWidget = createMapWidgetForParams(mapActivity, WEATHER_CLOUDS_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(cloudsWidget, appMode));
-
+		if (cloudsWidget != null) {
+			widgetInfos.add(creator.createWidgetInfo(cloudsWidget));
+		}
 		MapWidget airPressureWidget = createMapWidgetForParams(mapActivity, WEATHER_AIR_PRESSURE_WIDGET);
-		widgetInfos.add(widgetRegistry.createWidgetInfo(airPressureWidget, appMode));
+		if (airPressureWidget != null) {
+			widgetInfos.add(creator.createWidgetInfo(airPressureWidget));
+		}
 	}
 
 	@Nullable
