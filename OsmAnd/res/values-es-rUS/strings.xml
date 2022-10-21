@@ -768,9 +768,9 @@
 \n
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
 \n
-\n Algunas de las funciones fundamentales:
+\n Algunas de las funciones principales:
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas mundiales vectoriales compactos disponibles
+\n - Mapas vectoriales compactos sin conexión, disponibles en todo el mundo
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
 \n
@@ -1732,7 +1732,7 @@
     <string name="lang_nds">Bajo Alemán</string>
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
-    <string name="lang_als">Albano (Tosk)</string>
+    <string name="lang_als">Albanés (Tosk)</string>
     <string name="save_poi_without_poi_type_message">¿Guardar el PDI sin especificar el tipo\?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Editar cambio de OSM</string>
@@ -2161,7 +2161,7 @@
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Trazas</string>
     <string name="shared_string_time_moving">Tiempo en movimiento</string>
-    <string name="shared_string_time_span">Duración</string>
+    <string name="shared_string_time_span">Espacio de tiempo</string>
     <string name="shared_string_max">Máx</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
@@ -2558,7 +2558,7 @@
     <string name="marker_activated">Marcador «%s» activado.</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
     <string name="one_tap_active">Activar «Una pulsación»</string>
-    <string name="empty_state_av_notes">¡Hacer notas multimedia!</string>
+    <string name="empty_state_av_notes">¡Crea notas multimedia!</string>
     <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto a cualquier punto del mapa, usando el widget o el menú contextual.</string>
     <string name="notes_by_date">Notas multimedia por fecha</string>
     <string name="by_date">Por fecha</string>
@@ -2883,7 +2883,7 @@
     <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
     <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
-    <string name="shared_string_milliradians">Mil angular</string>
+    <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
@@ -4393,7 +4393,7 @@
     <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
     <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en «Menú → Complementos».</string>
     <string name="display_route_tracks">Mostrar trazas</string>
-    <string name="shared_string_travelbooks">Libro de viajes</string>
+    <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
@@ -4539,7 +4539,7 @@
     <string name="rendering_attr_showTramRoutes_name">Rutas de tranvía</string>
     <string name="rendering_attr_showTrainRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_showLightRailRoutes_name">Rutas de tren ligero</string>
-    <string name="rendering_attr_showMonorailRoutes_name">Rutas de monorraíl</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Rutas de monorriel</string>
     <string name="rendering_attr_showFunicularRoutes_name">Rutas funiculares</string>
     <string name="rendering_attr_showBusRoutes_name">Rutas de autobús</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Rutas de trolebús</string>
@@ -4568,11 +4568,11 @@
     <string name="map_widget_distance_to_destination">Distancia al destino</string>
     <string name="map_widget_current_speed">Velocidad actual</string>
     <string name="apply_to_existing_points_descr">¿Aplicar cambios a los puntos existentes del grupo o sólo a los nuevos\?</string>
-    <string name="apply_to_existing_favorites_descr">¿Aplicar cambios a los puntos favoritos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="apply_to_existing_favorites_descr">¿Aplicar cambios a los puntos favoritos existentes del grupo o solo a los nuevos\?</string>
     <string name="snackbar_page_removed">Se ha quitado «Página %1$s».</string>
-    <string name="map_widget_altitude">Altitud</string>
+    <string name="map_widget_altitude">Altitud de la ubicación actual</string>
     <string name="apply_to_existing">Aplicar a existentes</string>
-    <string name="apply_only_to_new_favorites">Aplicar sólo a favoritos nuevos</string>
+    <string name="apply_only_to_new_favorites">Aplicar solo a favoritos nuevos</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Sólo si es necesario</string>
     <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
@@ -4589,7 +4589,7 @@
     <string name="add_page">Añadir página</string>
     <string name="page_number">Página %1$s</string>
     <string name="change_default_appearance">Cambiar el aspecto predefinido</string>
-    <string name="apply_only_to_new_points">Aplicar sólo a puntos nuevos</string>
+    <string name="apply_only_to_new_points">Aplicar solo a puntos nuevos</string>
     <string name="release_4_2">• Rediseño de los widgets: nuevo aspecto, agrupación por páginas, reordenar y combinar como quieras.
 \n
 \n• Rutas de senderismo/ciclismo/viaje: pulsa el símbolo de la ruta y obtén información completa sobre ella.
@@ -4733,7 +4733,7 @@
     <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos para recibir instrucciones de navegación detalladas.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos exclusivos para el ciclismo de montaña.</string>
-    <string name="connect_with_straight_line">Conectar con línea recta</string>
+    <string name="connect_with_straight_line">Conectar con una línea recta</string>
     <string name="attach_roads_descr">Aproxima la traza con una ruta usando los mapas sin conexión. Esto proveerá valores de elevación corregidos, detalles del camino y giros usados durante la navegación.</string>
     <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
@@ -4849,7 +4849,7 @@
     <string name="simulate_location_by_gpx">Simular ubicación via GPX</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="map_widget_altitude_desc">Muestran la altura sobre el nivel del mar en la ubicación geográfica actual o en el centro del mapa actual</string>
-    <string name="map_widget_rendering_fps">Visualización de FPS en el mapa</string>
+    <string name="map_widget_rendering_fps">Renderizando FPS del mapa</string>
     <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos (expresada en fotogramas por segundo o FPS).</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir el uso del tráfico y generar informes anónimos de mapas mensuales.</string>
@@ -4860,6 +4860,6 @@
     <string name="map_center_widget">Coordenadas: centro del mapa</string>
     <string name="current_location_widget">Coordenadas: ubicación actual</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Monitorea el ritmo cardíaco junto con la velocidad, potencia y cadencia de la bicicleta. Debes conectar el dispositivo con sensores que admitan ANT + (protocolo de red personal inalámbrica).</string>
+    <string name="external_sensors_plugin_description">Monitorea el ritmo cardíaco junto con la velocidad, potencia y cadencia de la bicicleta. Debes conectar el dispositivo con sensores que admitan ANT+ (protocolo de red personal inalámbrica).</string>
     <string name="map_widget_altitude_map_center">Altitud: centro del mapa</string>
 </resources>
