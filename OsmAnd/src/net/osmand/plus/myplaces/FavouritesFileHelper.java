@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -213,9 +212,16 @@ public class FavouritesFileHelper {
 	}
 
 	public List<File> getBackupFiles() {
-		File folder = getBackupsFolder();
-		File[] files = folder.listFiles();
-		return files != null ? Arrays.asList(files) : Collections.emptyList();
+		List<File> backupFiles = new ArrayList<>();
+		File[] files = getBackupsFolder().listFiles();
+		if (!Algorithms.isEmpty(files)) {
+			for (File file : files) {
+				if (file.getName().endsWith(GPX_FILE_EXT + ZIP_FILE_EXT)) {
+					backupFiles.add(file);
+				}
+			}
+		}
+		return backupFiles;
 	}
 
 	private void clearOldBackups(List<File> files, int maxCount) {

@@ -1490,4 +1490,6 @@
     <string name="shared_string_hide">Sakrij</string>
     <string name="logcat_buffer">Međumemorija dnevnika</string>
     <string name="m_s">m/s</string>
+    <string name="external_sensors_plugin_name">Vanjski senzor</string>
+    <string name="current_location_widget">Trenutni položaj</string>
 </resources>
