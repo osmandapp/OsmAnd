@@ -29,17 +29,20 @@ import net.osmand.util.MapUtils;
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 	private static final int IMAGE_LOAD_TIMEOUT = 30000;
+	private static final int UNNECESSARY_IMAGE_LOAD_TIMEOUT = 2000;
 
 	private final String dirWithTiles;
 	private final ResourceManager rm;
 	private final BitmapTilesCache tilesCache;
 	private final ITileSource tileSource;
+	private final MapRendererView mapRenderer;
 	
 	public TileSourceProxyProvider(OsmandApplication app, ITileSource tileSource) {
 		this.dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
 		this.rm = app.getResourceManager();
 		this.tilesCache = rm.getBitmapTilesCache();
 		this.tileSource = tileSource;
+		mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
 	}
 
 	@Override
@@ -193,17 +196,20 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 				TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 				try {
+					int loadTimeout = IMAGE_LOAD_TIMEOUT;
 					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,
-							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < IMAGE_LOAD_TIMEOUT) {
+							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < loadTimeout) {
 						synchronized (tileReadyCallback.getSync()) {
 							if (tileReadyCallback.isReady()) {
 								break;
 							}
 							try {
-								tileReadyCallback.getSync().wait(50);
+								tileReadyCallback.getSync().wait(100);
 							} catch (InterruptedException ignored) {
 							}
 						}
+						if (mapRenderer != null && !mapRenderer.isTileVisible(tileX, tileY, zoom))
+							loadTimeout = UNNECESSARY_IMAGE_LOAD_TIMEOUT;
 					}
 				} finally {
 					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);
