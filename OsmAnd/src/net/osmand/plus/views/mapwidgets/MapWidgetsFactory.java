@@ -1,11 +1,15 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
@@ -48,6 +52,13 @@ public class MapWidgetsFactory {
 	}
 
 	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
+		if (isWidgetCreationAllowed(widgetType)) {
+			return createMapWidgetImpl(customId, widgetType);
+		}
+		return null;
+	}
+
+	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -93,8 +104,10 @@ public class MapWidgetsFactory {
 				return new AverageSpeedWidget(mapActivity, customId);
 			case MAX_SPEED:
 				return new MaxSpeedWidget(mapActivity);
-			case ALTITUDE:
-				return new AltitudeWidget(mapActivity);
+			case ALTITUDE_MY_LOCATION:
+				return new AltitudeWidget(mapActivity, ALTITUDE_MY_LOCATION);
+			case ALTITUDE_MAP_CENTER:
+				return new AltitudeWidget(mapActivity, ALTITUDE_MAP_CENTER);
 			case GPS_INFO:
 				return new GpsInfoWidget(mapActivity);
 			case CURRENT_TIME:
@@ -108,5 +121,13 @@ public class MapWidgetsFactory {
 			default:
 				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}
+	}
+
+	private boolean isWidgetCreationAllowed(@NonNull WidgetType widgetType) {
+		if (widgetType == ALTITUDE_MAP_CENTER) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			return plugin != null && plugin.isHeightmapEnabled();
+		}
+		return true;
 	}
 }

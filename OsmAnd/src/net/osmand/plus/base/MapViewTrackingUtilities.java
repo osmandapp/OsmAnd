@@ -34,7 +34,6 @@ import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -50,6 +49,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 	private static final long MOVE_ANIMATION_TIME = 500;
+	public static final int AUTO_ZOOM_DEFAULT_CHANGE_ZOOM = 4500;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -60,18 +60,18 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private TrackDetailsMenu detailsMenu;
 	private StateChangedListener<Boolean> enable3DViewListener;
 
+	private boolean isMapLinkedToLocation = true;
+	private boolean movingToMyLocation;
+
 	private long lastTimeAutoZooming;
 	private long lastTimeManualZooming;
-	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
 	private boolean showViewAngle;
-	private boolean isUserZoomed;
 	private String locationProvider;
 	private Location myLocation;
 	private Float heading;
 	private boolean drivingRegionUpdated;
-	private boolean movingToMyLocation;
 	private long compassRequest;
 
 	public MapViewTrackingUtilities(OsmandApplication app) {
@@ -99,7 +99,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addEnable3DViewListener() {
-		enable3DViewListener = change -> updateMapTilt();
+		enable3DViewListener = change -> updateMapTiltAndRotation();
 		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
@@ -179,10 +179,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setDetailsMenu(TrackDetailsMenu detailsMenu) {
 		this.detailsMenu = detailsMenu;
-	}
-
-	public boolean isMovingToMyLocation() {
-		return movingToMyLocation;
 	}
 
 	public void detectDrivingRegion(@NonNull LatLon latLon) {
@@ -269,10 +265,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 							() -> movingToMyLocation = false);
 				} else {
 					if (mapView.hasMapRenderer()) {
+						movingTime = movingToMyLocation
+								? (long) Math.min(movingTime * 0.7, MOVE_ANIMATION_TIME) : MOVE_ANIMATION_TIME;
+						if (mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+							movingTime = 0;
+						}
 						mapView.getAnimatedDraggingThread().startMoving(
 								location.getLatitude(), location.getLongitude(), zoom,
-								pendingRotation, rotation, mapView.getSettings().DO_NOT_USE_ANIMATIONS.get()
-										? 0 : MOVE_ANIMATION_TIME, false,
+								pendingRotation, rotation, movingTime, false,
 								() -> movingToMyLocation = false);
 					} else {
 						if (zoom != null && zoom.first != null && zoom.second != null) {
@@ -351,10 +351,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-		updateMapTilt();
+		updateMapTiltAndRotation();
 	}
 
-	public void updateMapTilt() {
+	public void updateMapTiltAndRotation() {
 		if (mapView != null) {
 			mapView.setElevationAngle(settings.getLastKnownMapElevation());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
@@ -404,10 +404,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zdelta += 1;
 				}
 				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
-				long lastZoomTime = Math.max(lastTimeAutoZooming, lastTimeManualZooming);
+				boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
-				if (now - lastZoomTime > 4500 && (now - lastZoomTime > threshold || !isUserZoomed)) {
-					isUserZoomed = false;
+				if ((now - lastTimeAutoZooming > AUTO_ZOOM_DEFAULT_CHANGE_ZOOM && !isUserZoomed)
+						|| (now - lastTimeManualZooming > Math.max(threshold, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM) && isUserZoomed)) {
 					lastTimeAutoZooming = now;
 //					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
 //					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
@@ -434,9 +434,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
 			Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
 			if (!isMapLinkedToLocation()) {
-				setMapLinkedToLocation(true);
 				if (location != null) {
 					animateBackToLocation(location, zoom, forceZoom);
+				} else {
+					setMapLinkedToLocation(true);
 				}
 				mapView.refreshMap();
 			}
@@ -455,15 +456,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
 		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom	: mapView.getZoom();
-		movingToMyLocation = true;
 		Runnable startAnimationCallback = () -> {
+			movingToMyLocation = true;
 			if (!isMapLinkedToLocation) {
 				setMapLinkedToLocation(true);
 			}
 		};
-		thread.startMoving(location.getLatitude(), location.getLongitude(),
-				fZoom, false, true, startAnimationCallback,
-				() -> movingToMyLocation = false);
+		Runnable finishAnimationCallback = () -> movingToMyLocation = false;
+		thread.startMoving(location.getLatitude(), location.getLongitude(), fZoom, false,
+				true, startAnimationCallback, finishAnimationCallback);
 	}
 
 	private void backToLocationWithDelay(int delay) {
@@ -492,6 +493,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		if (!isMapLinkedToLocation) {
+			movingToMyLocation = false;
+		}
 		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
@@ -501,6 +505,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		} else {
 			updateSettings();
 		}
+	}
+
+	public boolean isMovingToMyLocation() {
+		return movingToMyLocation;
 	}
 
 	@Override
@@ -571,7 +579,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setZoomTime(long time) {
 		lastTimeManualZooming = time;
-		isUserZoomed = true;
 	}
 
 	public long getLastManualZoomTime() {

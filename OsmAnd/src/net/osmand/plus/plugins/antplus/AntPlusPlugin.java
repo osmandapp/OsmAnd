@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -34,7 +35,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 
@@ -42,10 +43,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
@@ -65,12 +63,12 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.antplus_plugin_name);
+		return app.getString(R.string.external_sensors_plugin_name);
 	}
 
 	@Override
 	public CharSequence getDescription() {
-		return app.getString(R.string.antplus_plugin_description);
+		return app.getString(R.string.external_sensors_plugin_description);
 	}
 
 	@Override
@@ -100,8 +98,7 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Nullable
 	@Override
-	protected JSONObject getAdditionalTrackData() {
-		JSONObject json = new JSONObject();
+	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		for (CommonDevice<?> device : devicesHelper.getDevices()) {
 			if (device.isEnabled() && device.shouldWriteGpx() && device.getAntDevice().isConnected()) {
 				try {
@@ -111,21 +108,6 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 				}
 			}
 		}
-		return json;
-	}
-
-	@Nullable
-	@Override
-	protected Map<String, String> getExtensionsFromInfo(@Nullable JSONObject json) {
-		if (json != null) {
-			Map<String, String> extensions = new HashMap<>();
-			for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
-				String key = iterator.next();
-				extensions.put(key, json.optString(key));
-			}
-			return extensions;
-		}
-		return null;
 	}
 
 	@Override
@@ -153,22 +135,22 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget heartRateWidget = createMapWidgetForParams(mapActivity, ANT_HEART_RATE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(heartRateWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));
 
 		MapWidget bikePowerWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_POWER);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikePowerWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikePowerWidget));
 
 		MapWidget bikeCadenceWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_CADENCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeCadenceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeCadenceWidget));
 
 		MapWidget bikeSpeedWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_SPEED);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeSpeedWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeSpeedWidget));
 
 		MapWidget bikeDistanceWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeDistanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
 	}
 
 	@Override

@@ -4700,7 +4700,6 @@
     <string name="coordinates_widget_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale.</string>
     <string name="navigation_points_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
     <string name="get_altitude_information">Otene sas informatziones subra de s\'artària</string>
-    <string name="fps_widget_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados.</string>
     <string name="average_speed_time_interval_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia.</string>
     <string name="average_speed_widget_desc">Ammustrat sa lestresa mèdia de su biàgiu atuale.</string>
     <string name="map_widget_average_speed">Lestresa mèdia</string>
@@ -4793,8 +4792,6 @@
     <string name="map_widget_camera_tilt">Inclinatzione de sa fotocàmera</string>
     <string name="developer_widgets">Widgets pro sos isvilupadores</string>
     <string name="quick_action_current_location_widget_descr">Unu butone pro ammustrare o cuare su widget de sa positzione atuale in sa mapa.</string>
-    <string name="map_center_widget">Tzentru de sa mapa</string>
-    <string name="current_location_widget">Positzione atuale</string>
     <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
@@ -4818,8 +4815,6 @@
     <string name="map_widget_ant_bicycle_speed">Lestresa de sa bitzicleta</string>
     <string name="map_widget_ant_bicycle_speed_desc">Ammustrat sa lestresa de biàgiu</string>
     <string name="map_widget_ant_bicycle_dist_desc">Ammustrat sa distàntzia cursada</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Descritzione de s\'ANT+</string>
     <string name="nautical_depth_points">Puntos de profundidade nàutica</string>
     <string name="worldwide_maps">Mapas mundiales</string>
     <string name="map_widget_ant_heart_rate_desc">Ammustrat sa frecuèntzia cardìaca de s\'impreadore in tempus reale durante un\'atividade ispetzificada</string>
@@ -4831,5 +4826,23 @@
     <string name="shared_string_cross_buy">Còmpora rugrada</string>
     <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
     <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
-    <string name="map_widget_fps_info">Frecuèntzia de renderizatzione FPS de sa mapa (fotogrammas pro segundu)</string>
+    <string name="map_widget_altitude_map_center_desc">Ammustrat s\'artària subra de su livellu de su mare de su tzentru atuale de sa mapa.</string>
+    <string name="map_center_widget">Coordinadas: tzentru de sa mapa</string>
+    <string name="external_sensors_plugin_name">Sensores esternos</string>
+    <string name="map_widget_altitude_map_center">Artària: tzentru de sa mapa</string>
+    <string name="external_sensors_plugin_description">Monitoràgiu de su ritmu cardìacu, de sa velotzidade, de sa potèntzia e de sa cadèntzia de sa bitzicleta. Tenet bisòngiu de una connessione a unu dispositivu chi suportet a su ANT+ (protocollu de retza personale chene filos).</string>
+    <string name="current_location_widget">Coordinadas: positzione atuale</string>
+    <string name="map_widget_altitude_current_location">Artària: positzione atuale</string>
+    <string name="map_widget_altitude_current_location_desc">Ammustrat s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale.</string>
+    <string name="map_widget_altitude_desc">Sos widgets ammustrant s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale o de su tzentru atuale de sa mapa</string>
+    <string name="map_widget_rendering_fps">FPS de sa renderizatzione de sa mapa</string>
+    <string name="map_widget_rendering_fps_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados (esprìmidu in fotogrammas pro su segundu o FPS).</string>
+    <string name="simulate_location_by_gpx">Sìmula sa positzione cun su GPX</string>
+    <string name="location_simulation_cutoff">Sa simulatzione brincat sos primos metros</string>
+    <string name="location_simulation_speedup">Atzellerada de sa simulatzione</string>
+    <string name="send_uuid_preference_desc">Unu UUID casuale s\'impreat pro iscarrigare mapas non in lìnia dae sos serbidores de OsmAnd pro monitorare s\'impreu curretu de sas resursas de su serbidore, adivinare s\'impreu de tràficu de tràficu e ingendrare informes anònimos de sas mapas pro cada mese.</string>
+    <string name="send_uuid_preference">Imbia un\'identificadore anònimu de impreadore (UUID)</string>
+    <string name="shared_string_identifiers">Identificadores</string>
+    <string name="terms_of_service_desc">Iscarrighende mapas atzetas sas %1$s e %2$s.</string>
+    <string name="shared_string_terms_of_use">Cunditziones de impreu</string>
 </resources>

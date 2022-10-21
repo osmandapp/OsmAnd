@@ -271,4 +271,5 @@
     <string name="my_location">Moja lokacija</string>
     <string name="live_now">Sada uživo</string>
     <string name="enter_code">Upiši kȏd</string>
+    <string name="shared_string_error">Greška</string>
 </resources>

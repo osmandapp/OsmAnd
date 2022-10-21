@@ -2774,7 +2774,6 @@
     <string name="shared_string_widget">Приспособление</string>
     <string name="routing_attr_carriage_restrictions_description">Отчита правата за достъп на транспортни средства с животинска тяга</string>
     <string name="routing_attr_avoid_4wd_only_name">Без офроуд пътища</string>
-    <string name="fps_widget_desc">Показва колко бързо се показват и опресняват картата и нейните елементи.</string>
     <string name="quick_action_switch_profile_descr">Бутонът за действия превлкючва между избраните профили.</string>
     <string name="selected_profile">Избран профил</string>
     <string name="arrival_time_widget_desc">Време на пристигане в крайната точка.</string>

@@ -190,16 +190,14 @@ public class ConfigureMapMenu {
 				.setListener(listener));
 
 		TransportLinesMenu transportLinesMenu = new TransportLinesMenu(app);
-		if (transportLinesMenu.isTransportLinesSupported()) {
-			selected = transportLinesMenu.isShowAnyTransport();
-			adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
-					.setTitleId(R.string.rendering_category_transport, activity)
-					.setIcon(R.drawable.ic_action_transport_bus)
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setSelected(selected)
-					.setColor(selected ? selectedProfileColor : null)
-					.setListener(listener));
-		}
+		selected = transportLinesMenu.isShowAnyTransport();
+		adapter.addItem(new ContextMenuItem(TRANSPORT_ID)
+				.setTitleId(R.string.rendering_category_transport, activity)
+				.setIcon(R.drawable.ic_action_transport_bus)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setSelected(selected)
+				.setColor(selected ? selectedProfileColor : null)
+				.setListener(listener));
 
 		selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
 		adapter.addItem(new ContextMenuItem(GPX_FILES_ID)

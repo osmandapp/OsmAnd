@@ -68,10 +68,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	// keep array lists created
-	private final List<Location> actionPoints = new ArrayList<>();
 	private int currentAnimatedRoute;
 	private Location lastRouteProjection;
+	private Location lastFixedLocation;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -157,7 +156,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (hasMapRenderer() && useMapCenter() && !helper.isPublicTransportMode()
+		if (hasMapRenderer() && !helper.isPublicTransportMode()
 				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
 			drawLocations(null, view.getRotatedTileBox());
 		}
@@ -440,27 +439,42 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (directTo) {
 				lastProjection = null;
 				startLocationIndex = 0;
-			} else if (useMapCenter() && route.getCurrentStraightAngleRoute() > 0) {
+			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
+				boolean lastFixedLocationChanged = !MapUtils.areLatLonEqual(this.lastFixedLocation, lastFixedLocation);
+				this.lastFixedLocation = lastFixedLocation;
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
+				OsmandApplication app = getApplication();
+				boolean useMapCenter = useMapCenter();
 				if (mapRenderer != null) {
-					PointI target31 = mapRenderer.getTarget();
-					currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
-					currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
-				} else {
+					if (useMapCenter) {
+						PointI target31 = mapRenderer.getTarget();
+						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
+						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
+					} else {
+						LatLon lastMarkerLocation = app.getOsmandMap().getMapLayers().getLocationLayer().getLastMarkerLocation();
+						if (lastMarkerLocation != null) {
+							currentLocation.setLatitude(lastMarkerLocation.getLatitude());
+							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
+						}
+					}
+				} else if (useMapCenter) {
 					currentLocation.setLatitude(tb.getLatitude());
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
 				float posTolerance = RoutingHelper.getPosTolerance(currentLocation.hasAccuracy()
 						? currentLocation.getAccuracy() : 0);
-				currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
-						locations, currentAnimatedRoute, false);
+				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
+						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
 				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
 						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
 				startLocationIndex = currentAnimatedRoute;
+				if (lastFixedLocationChanged) {
+					this.currentAnimatedRoute = currentAnimatedRoute;
+				}
 			} else if (straight) {
 				lastProjection = helper.getLastFixedLocation();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
@@ -575,8 +589,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 		double actionDist = 0;
 		Location previousAction = null; 
-		List<Location> actionPoints = this.actionPoints;
-		actionPoints.clear();
+		List<Location> actionPoints = new ArrayList<>();
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);

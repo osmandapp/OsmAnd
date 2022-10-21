@@ -4674,7 +4674,6 @@
     <string name="no_altitude_data">Keine Höhendaten</string>
     <string name="lang_sat">Santali</string>
     <string name="navigation_points_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
-    <string name="fps_widget_desc">Zeigt an, wie schnell die Karte und die Kartenelemente angezeigt und aktualisiert werden.</string>
     <string name="gps_info_widget_desc">Zeigt die Anzahl der Satelliten an, die das Gerät in diesem Moment erkennt und verwendet.</string>
     <string name="coordinates_widget_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an.</string>
     <string name="audio_video_notes_desc">Das Widget bietet schnellen Zugriff auf Start/Stopp einer Aufnahme (Audio, Video oder Foto).</string>
@@ -4793,11 +4792,9 @@
     <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
 \nTippen Sie mit 2 Fingern auf die Karte, um die Entfernung zwischen den angeklickten Punkten anzuzeigen</string>
     <string name="shared_string_shows">Zeigt</string>
-    <string name="map_center_widget">Kartenmitte</string>
     <string name="coordinates_widget_map_center_desc">Widget zeigt die geografischen Koordinaten der aktuellen Kartenmitte</string>
     <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
     <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
-    <string name="current_location_widget">Aktueller Standort</string>
     <string name="coordinates_widget_current_location_desc">Widget zeigt die geografischen Koordinaten des aktuellen Standorts</string>
     <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
     <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
@@ -4810,13 +4807,11 @@
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Das Widget zeigt die Entfernung von der Kamera zum Zielort an.</string>
     <string name="ant_widgets">ANT+ Widgets</string>
-    <string name="map_widget_fps_info">Kartenwiedergabe FPS (Bilder pro Sekunde)</string>
     <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
     <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Zeigt die Geschwindigkeit an, mit der der Benutzer in die Pedale tritt</string>
-    <string name="antplus_plugin_description">ANT+ Beschreibung</string>
     <string name="depth_contours">Tiefenkonturen</string>
     <string name="worldwide_maps">Weltweite Karten</string>
     <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
@@ -4835,7 +4830,25 @@
     <string name="map_widget_ant_bicycle_speed">Fahrradgeschwindigkeit</string>
     <string name="map_widget_ant_bicycle_speed_desc">Zeigt die Fahrgeschwindigkeit an</string>
     <string name="map_widget_ant_bicycle_dist_desc">Zeigt die zurückgelegte Entfernung an</string>
-    <string name="antplus_plugin_name">ANT+</string>
     <string name="nautical_depth_points">Nautische Tiefenpunkte</string>
     <string name="shared_string_cross_buy">Cross-Buy</string>
+    <string name="location_simulation_speedup">Simulationsbeschleunigung</string>
+    <string name="shared_string_terms_of_use">Nutzungsbedingungen</string>
+    <string name="map_center_widget">Koordinaten: Kartenmitte</string>
+    <string name="current_location_widget">Koordinaten: Aktueller Standort</string>
+    <string name="external_sensors_plugin_name">Externe Sensoren</string>
+    <string name="external_sensors_plugin_description">Überwachung von Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung und Trittfrequenz. Erfordert den Anschluss eines Geräts mit Sensoren für diese Parameter mit Unterstützung von ANT + (Wireless Personal Network-Protokoll).</string>
+    <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
+    <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden (ausgedrückt in Bildern pro Sekunde oder FPS).</string>
+    <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
+    <string name="location_simulation_cutoff">Simulation überspringt die ersten Meter</string>
+    <string name="send_uuid_preference_desc">Zufällige UUID wird verwendet, um Offline-Karten von OsmAnd-Servern herunterzuladen, um die faire Nutzung von Serverressourcen zu überwachen, die Verkehrsnutzung vorherzusagen und anonyme monatliche Kartenberichte zu erstellen.</string>
+    <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
+    <string name="shared_string_identifiers">Identifikatoren</string>
+    <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
+    <string name="map_widget_altitude_map_center">Höhenlage: Kartenmitte</string>
+    <string name="map_widget_altitude_map_center_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Kartenmitte an.</string>
+    <string name="map_widget_altitude_current_location">Höhenlage: aktueller Standort</string>
+    <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
+    <string name="map_widget_altitude_desc">Widgets zeigen die Höhe über dem Meeresspiegel des aktuellen Standorts oder der aktuellen Kartenmitte an</string>
 </resources>

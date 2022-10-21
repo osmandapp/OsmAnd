@@ -211,9 +211,9 @@ public class IconsCard extends MapBaseCard {
 		iconsSelector.removeAllViews();
 		iconsSelector.setHorizontalAutoSpacing(true);
 
+		int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		for (String iconName : getIconNameListToShow()) {
-			int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 			LayoutParams layoutParams = new LayoutParams(width, 0);
 			iconsSelector.addView(createIconItemView(inflater, iconName), layoutParams);
 		}

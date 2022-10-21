@@ -4596,7 +4596,6 @@
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
     <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
-    <string name="fps_widget_desc">Megjeleníti, hogy milyen gyorsan jelennek meg és frissülnek a térkép és a térképelemek.</string>
     <string name="current_time_widget_desc">Megjeleníti a készülék aktuális idejét.</string>
     <string name="battery_widget_desc">Megjeleníti a készülék akkumulátorának töltöttségi szintjét.</string>
     <string name="current_speed_widget_desc">Megjeleníti a GPS-érzékelő által érzékelt aktuális sebességet.</string>
@@ -4782,12 +4781,10 @@
     <string name="click_on_widget">Kattintson a widgetre</string>
     <string name="shared_string_shows">Mutatja</string>
     <string name="map_markers_desc">A widget a távolságot vagy a becsült érkezési időt (ETA) mutatja a térképjelölők listájában szereplő első két jelölőhöz.</string>
-    <string name="current_location_widget">Aktuális hely</string>
     <string name="quick_action_current_location_widget_descr">Egy kapcsoló az aktuális helyet mutató widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
     <string name="coordinates_widget_current_location_desc">A widget az aktuális földrajzi hely földrajzi koordinátáit mutatja</string>
     <string name="coordinates_widget_current_location">Koordináták: aktuális hely</string>
-    <string name="map_center_widget">Térképközéppont</string>
     <string name="coordinates_widget_map_center_desc">A widget az aktuális térképközéppont földrajzi koordinátáit mutatja</string>
     <string name="quick_action_map_center_widget_descr">Egy kapcsoló a térképközéppont widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="map_widget_zoom_level">Nagyítási szint</string>
@@ -4805,8 +4802,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Mutatja a haladás sebességét</string>
     <string name="map_widget_ant_bicycle_dist">Kerékpáros távolság</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mutatja a megtett távolságot</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ leírás</string>
     <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
     <string name="nautical_depth_points">Tengeri mélységpontok</string>
     <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található.
@@ -4822,9 +4817,27 @@
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
-    <string name="map_widget_fps_info">Térkép renderelési sebessége (képkocka/mp)</string>
     <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/Web) további költségek nélkül.</string>
+    <string name="external_sensors_plugin_name">Külső érzékelők</string>
+    <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
+    <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
+    <string name="map_widget_altitude_desc">A widgetek megjelenítik a jelenlegi helyzet vagy a térképközéppont tengerszint feletti magasságát</string>
+    <string name="map_widget_rendering_fps">Térképmegjelenítés (képkocka/másodperc)</string>
+    <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelennek meg és frissülnek a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
+    <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
+    <string name="location_simulation_cutoff">A szimuláció hagyja ki az első métereket</string>
+    <string name="send_uuid_preference">Egyedi felhasználóazonosító (UUID) elküldése</string>
+    <string name="map_widget_altitude_map_center_desc">Megjeleníti a jelenlegi térképközéppont tengerszint feletti magasságát.</string>
+    <string name="map_widget_altitude_current_location_desc">Megjeleníti a jelenlegi földrajzi hely tengerszint feletti magasságát.</string>
+    <string name="shared_string_identifiers">Azonosítók</string>
+    <string name="shared_string_terms_of_use">Felhasználási feltételek</string>
+    <string name="location_simulation_speedup">Szimulációs felgyorsítása</string>
+    <string name="current_location_widget">Koordináták: jelenlegi hely</string>
+    <string name="map_center_widget">Koordináták: térképközéppont</string>
+    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosítót (UUID) a következőkre használható: offline térképek letöltése használják az OsmAnd szerverekről, a szerver erőforrásainak méltányos használatának nyomon követése, a forgalom felhasználásának előrejelzése és névtelen havi térképjelentések készítésére.</string>
+    <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
+    <string name="external_sensors_plugin_description">Pulzusszám, kerékpársebesség, kerékpár-teljesítmény és lépéstempó figyelemmel kísérése. ANT+ (vezeték nélküli személyes hálózati protokoll) támogatásával rendelkező, és e paraméterek érzékelőivel rendelkező készülék szükséges.</string>
 </resources>

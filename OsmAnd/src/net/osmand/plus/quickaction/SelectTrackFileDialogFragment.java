@@ -36,6 +36,12 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = SelectTrackFileDialogFragment.class.getSimpleName();
 
+	CallbackWithObject<String> onFileSelectListener;
+
+	void setListener(CallbackWithObject<String> onFileSelectListener) {
+		this.onFileSelectListener = onFileSelectListener;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,19 +73,13 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(position -> {
 			Fragment target = getTargetFragment();
-			CallbackWithObject<Object> listener = target instanceof CallbackWithObject<?>
-					? ((CallbackWithObject<Object>) target)
+			CallbackWithObject<String> listener = target instanceof CallbackWithObject<?>
+					? ((CallbackWithObject<String>) target)
 					: null;
 			if (listener != null) {
-				boolean currentTrack = position == 0 && showCurrentGpx;
-				if (currentTrack) {
-					listener.processResult("");
-				} else {
-					GPXInfo selectedGpxInfo = gpxInfoList.get(position);
-					String fileName = selectedGpxInfo.getFileName();
-					String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
-					listener.processResult(gpxFilePath);
-				}
+				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, listener);
+			} else if (onFileSelectListener != null) {
+				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, onFileSelectListener);
 			}
 			dismiss();
 		});
@@ -89,14 +89,33 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		recyclerView.setAdapter(adapter);
 	}
 
+	private void processResult(File gpxRootDir, List<GPXInfo> gpxInfoList, boolean showCurrentGpx, int position, CallbackWithObject<String> listener) {
+		boolean currentTrack = position == 0 && showCurrentGpx;
+		if (currentTrack) {
+			listener.processResult("");
+		} else {
+			GPXInfo selectedGpxInfo = gpxInfoList.get(position);
+			String fileName = selectedGpxInfo.getFileName();
+			String gpxFilePath = gpxRootDir.getAbsolutePath() + "/" + fileName;
+			listener.processResult(gpxFilePath);
+		}
+	}
+
 	private boolean isNightMode() {
 		return isNightMode(true);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment target) {
+		showInstance(fragmentManager, target, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment target,
+	                                @Nullable CallbackWithObject<String> onFileSelectListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectTrackFileDialogFragment fragment = new SelectTrackFileDialogFragment();
+			fragment.setListener(onFileSelectListener);
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

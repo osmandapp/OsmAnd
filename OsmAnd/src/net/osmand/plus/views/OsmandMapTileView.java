@@ -85,6 +85,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int MIN_ALTITUDE_VALUE = -10_000;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
@@ -181,6 +182,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Handler baseHandler;
 
 	private AnimateDraggingMapThread animatedDraggingThread;
+	private AnimateMapMarkersThread animatedMapMarkersThread;
 
 	Paint paintGrayFill;
 	Paint paintBlackFill;
@@ -257,6 +259,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		handler = new Handler();
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
+		animatedMapMarkersThread = new AnimateMapMarkersThread(this);
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -510,6 +513,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			setMapDensityImpl(mapDensity);
 			setRotateImpl(rotate);
 			refreshMap();
+		}
+	}
+
+	public void setMapDensity(double mapDensity) {
+		if (mainLayer != null) {
+			setMapDensityImpl(mapDensity);
 		}
 	}
 
@@ -920,12 +929,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return additional.fps;
 	}
 
-	public boolean isAnimatingZoom() {
-		return animatedDraggingThread.isAnimatingZoom();
+	public boolean isAnimatingMapZoom() {
+		return animatedDraggingThread.isAnimatingMapZoom();
 	}
 
 	public boolean isAnimatingMapMove() {
 		return animatedDraggingThread.isAnimatingMapMove();
+	}
+
+	public boolean isAnimatingMapRotation() {
+		return animatedDraggingThread.isAnimatingMapRotation();
 	}
 
 	@SuppressLint("WrongCall")
@@ -964,7 +977,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// skip it
 			}
 		}
-		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
+		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom()) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
@@ -1526,6 +1539,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return animatedDraggingThread;
 	}
 
+	public AnimateMapMarkersThread getAnimatedMapMarkersThread() {
+		return animatedMapMarkersThread;
+	}
+
 	public void showMessage(String msg) {
 		handler.post(() -> Toast.makeText(application, msg, Toast.LENGTH_SHORT).show());
 	}
@@ -1600,7 +1617,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (x1 != x2 || y1 != y2) {
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null) {
-					MapAnimator animator = mapRenderer.getAnimator();
+					MapAnimator animator = mapRenderer.getMapAnimator();
 					if (animator != null) {
 						animator.pause();
 						animator.cancelAllAnimations();
@@ -1772,7 +1789,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onDown(MotionEvent e) {
 			MapRendererView mapRenderer = getMapRenderer();
-			MapAnimator animator = mapRenderer != null ? mapRenderer.getAnimator() : null;
+			MapAnimator animator = mapRenderer != null ? mapRenderer.getMapAnimator() : null;
 			if (animator != null) {
 				animator.pause();
 				animator.cancelAllAnimations();

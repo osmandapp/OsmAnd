@@ -32,7 +32,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
-import net.osmand.plus.quickaction.actions.GPXAction;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -310,11 +309,11 @@ public class CreateEditActionDialog extends DialogFragment
     public boolean processResult(Object result) {
         if (action instanceof SwitchableAction) {
             ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
-        } else if (action instanceof GPXAction) {
+        } else if (action instanceof FileSelected) {
             View container = getView() != null ? getView().findViewById(R.id.container) : null;
             MapActivity mapActivity = getMapActivity();
             if (container != null && mapActivity != null && result instanceof String) {
-                ((GPXAction) action).onGpxFileSelected(container, mapActivity, (String) result);
+                ((FileSelected) action).onGpxFileSelected(container, mapActivity, (String) result);
             }
         }
         return false;
@@ -343,5 +342,9 @@ public class CreateEditActionDialog extends DialogFragment
     @Nullable
     private MapActivity getMapActivity() {
         return getActivity() == null ? null : ((MapActivity) getActivity());
+    }
+
+    public interface FileSelected{
+        void onGpxFileSelected(@NonNull View container, @NonNull MapActivity mapActivity, @NonNull String gpxFilePath);
     }
 }

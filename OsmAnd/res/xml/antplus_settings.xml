@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:title="@string/antplus_plugin_name">
+	android:title="@string/external_sensors_plugin_name">
 
 	<Preference
 		android:key="antplus_info"

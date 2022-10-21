@@ -4082,7 +4082,6 @@
     <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора бягучай геалакацыі.</string>
     <string name="max_speed_widget_desc">Паказвае абмежаванне хуткасці для бягучай дарогі.</string>
     <string name="map_markers_bar_widget_desc">На віджэце верхняй панэлі вы можаце ўбачыць адлегласць і кірунак да маркера ад бягучага месцазнаходжання. Можна наладзіць прагляд 1 або 2 верхніх маркераў у віджэце.</string>
-    <string name="fps_widget_desc">Паказвае, як хутка адлюстроўваюцца і абнаўляюцца элементы мапы.</string>
     <string name="radius_rules_widget_desc">Інструмент «Радыусная лінейка» дапамагае вызначыць радыус вакол абранай кропкі на мапе, паказваючы кругі адлегласці на мапе.</string>
     <string name="colour_of_circles">Колер акружнасцей</string>
     <string name="coordinates_widget_desc">Паказвае геаграфічныя каардынаты бягучага месцазнаходжання.</string>
@@ -4797,8 +4796,6 @@
 \nДакраніцеся двума пальцамі да мапы, каб убачыць адлегласць паміж націснутымі кропкамі</string>
     <string name="shared_string_2_5_d_view">Выгляд 2.5 D</string>
     <string name="quick_action_map_center_widget_descr">Пераключальнік для паказу або схаваныя віджэта «Цэнтр мапы» на мапе.</string>
-    <string name="map_center_widget">Цэнтр мапы</string>
-    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
     <string name="quick_action_current_location_widget_descr">Пераключальнік для паказу або схавання віджэта «Бягучае месцазнаходжанне» на мапе.</string>
     <string name="coordinates_widget_map_center_desc">Віджэт паказвае геаграфічныя каардынаты бягучага цэнтра мапы</string>
     <string name="coordinates_widget_current_location">Каардынаты: бягучае месцазнаходжанне</string>
@@ -4813,4 +4810,8 @@
     <string name="developer_widgets">Віджэты распрацоўшчыка</string>
     <string name="map_widget_target_distance_desc">Віджэт паказвае адлегласць ад камеры да мэтавага месца.</string>
     <string name="map_markers_desc">Віджэт паказвае адлегласць або прыблізны час прыбыцця (ПЧП) для першых двух маркераў у спісе адзнак мапы.</string>
+    <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
+    <string name="map_center_widget">Цэнтр мапы</string>
+    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
+    <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
 </resources>

@@ -182,7 +182,8 @@ class RouteRecalculationHelper {
 				int newCurrentRoute = RoutingHelperUtils.lookAheadFindMinOrthogonalDistance(start, routeNodes, res.currentRoute, 15);
 				if (newCurrentRoute + 1 < routeNodes.size()) {
 					// This check is valid for Online/GPX services (offline routing is aware of route direction)
-					wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
+					Location prev = res.getRouteLocationByDistance(-15);
+					wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(start, prev, routeNodes.get(newCurrentRoute + 1));
 					// set/reset evalWaitInterval only if new route is in forward direction
 					if (wrongMovementDirection) {
 						evalWaitInterval = 3000;
@@ -333,7 +334,7 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	private static class RouteRecalculationTask implements Runnable {
+	private class RouteRecalculationTask implements Runnable {
 
 		private final RouteRecalculationHelper routingThreadHelper;
 		private final RoutingHelper routingHelper;
@@ -394,6 +395,9 @@ class RouteRecalculationHelper {
 
 		@Override
 		public void run() {
+			if (!updateProgress) {
+				updateProgress(params);
+			}
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
 			RouteCalculationResult res = provider.calculateRouteImpl(params);

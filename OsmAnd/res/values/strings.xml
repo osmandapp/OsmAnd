@@ -60,6 +60,20 @@
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
+    <string name="map_center_widget">Coordinates: Map center</string>
+    <string name="current_location_widget">Coordinates: Current location</string>
+    <string name="external_sensors_plugin_name">External Sensors</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power and cadence. Requires connection of device with sensors of these parameters with support of ANT + (Wireless Personal Network protocol).</string>
+    <string name="map_widget_altitude_map_center">Altitude: map center</string>
+    <string name="map_widget_altitude_map_center_desc">Shows the height above sea level of current map center.</string>
+    <string name="map_widget_altitude_current_location">Altitude: current location</string>
+    <string name="map_widget_altitude_current_location_desc">Shows the height above sea level of current geolocation.</string>
+    <string name="map_widget_altitude_desc">Widgets show the height above sea level of current geolocation or for current map center</string>
+    <string name="map_widget_rendering_fps">Map rendering FPS</string>
+    <string name="map_widget_rendering_fps_desc">Shows how fast map and map elements are shown and refreshed (expressed in frames per second or FPS).</string>
+    <string name="simulate_location_by_gpx">Simulate location by GPX</string>
+    <string name="location_simulation_cutoff">Simulation skip first meters </string>
+    <string name="location_simulation_speedup">Simulation speedup</string>
     <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
     <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
     <string name="shared_string_identifiers">Identifiers</string>
@@ -68,7 +82,6 @@
     <string name="favorites_backup">Favorites backup</string>
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
-    <string name="map_widget_fps_info">Map rendering FPS (frames per second)</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
     <string name="ant_widgets">ANT+ widgets</string>
     <string name="ant_missing_dependency_descr">The required service \"%1$s\" was not found. \nYou need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. \nDo you want to launch the Play Store to get it?"</string>
@@ -87,8 +100,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
     <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ description</string>
     <string name="nautical_depth_points">Nautical depth points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>
@@ -102,8 +113,6 @@
     <string name="developer_widgets">Developer widgets</string>
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
-    <string name="map_center_widget">Map center</string>
-    <string name="current_location_widget">Current location</string>
     <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
     <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>
@@ -258,7 +267,6 @@
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
     <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
-    <string name="fps_widget_desc">Shows how fast map and map elements are shown and refreshed.</string>
     <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
     <string name="current_time_widget_desc">Shows current time from your device.</string>
     <string name="battery_widget_desc">Shows battery level of your device.</string>
@@ -858,7 +866,7 @@
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Allows you to make contributions to OpenPlaceReviews project. Such as photos, reviews, links about public places such as restaurants, hotels, museums and waypoints. \n\nYou can find instruction on how to contribute on out website - https://osmand.net/docs/user/plugins/openplacereviews</string>
+    <string name="open_place_reviews_plugin_description">Allows you to make contributions to OpenPlaceReviews project. Such as photos, reviews, links about public places such as restaurants, hotels, museums and waypoints. \n\nYou can find instruction on how to contribute on our website - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>

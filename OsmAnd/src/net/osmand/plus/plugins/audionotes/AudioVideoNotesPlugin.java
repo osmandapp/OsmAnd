@@ -74,7 +74,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -719,19 +719,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(onRequestWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(onRequestWidget));
 
 		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(audioWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(audioWidget));
 
 		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(videoWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(videoWidget));
 
 		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(photoWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(photoWidget));
 	}
 
 	@Override

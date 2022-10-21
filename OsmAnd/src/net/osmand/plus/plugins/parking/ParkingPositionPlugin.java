@@ -39,7 +39,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -423,9 +423,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		MapWidget widget = createMapWidgetForParams(mapActivity, PARKING);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 
 	@Override

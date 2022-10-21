@@ -4727,7 +4727,6 @@
     <string name="routing_attr_motor_type_description">Veldu gerð eldsneytis sem vélin þín notar, til að reikna losun á CO2.</string>
     <string name="average_speed_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalhraða.</string>
     <string name="explore_plans">Skoða áskriftarleiðir</string>
-    <string name="fps_widget_desc">Sýnir hve hratt landakort og kortaeiningar séu birtar og endurlesnar.</string>
     <string name="battery_widget_desc">Sýnir styrk rafhlöðu á tækinu þínu.</string>
     <string name="magnetic_bearing_widget_desc">Horn milli segulnorðurs og markpunkts miðað við staðsetningu þína.</string>
     <string name="route_maneuvers_desc">Leiðsagnarviðmótshlutar eru virkjaðir á meðan leiðsögn stendur til birtingar á upplýsingum á borð við vegalengd, komu- eða brottfarartíma, næstu beygjur, stefnu, fyrirliggjandi götuheiti, upplýsingar um akreinar, hámarkshraða, nálgunaraðvaranir, merkisstaði, leiðarpunkta.</string>
@@ -4778,8 +4777,6 @@
     <string name="go_to_marker_location">Fara á staðsetningu merkis</string>
     <string name="display_position">Staðsetning á skjá</string>
     <string name="favorite_delete_group">Eyða hópi</string>
-    <string name="map_center_widget">Miðja korts</string>
-    <string name="current_location_widget">Núverandi staðsetning</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>
@@ -4792,8 +4789,6 @@
     <string name="ant_read_data">Lesin gögn</string>
     <string name="ant_write_to_gpx">Skrifa gögn í feril</string>
     <string name="ant_heart_rate_write_gpx_desc">Skrifa hjartsláttargögn í feril</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">ANT+ Llýsing</string>
     <string name="nautical_depth_points">Sjódýptarpunktar</string>
     <string name="depth_contours">Dýptarlínur sjávar</string>
     <string name="worldwide_maps">Heimskort</string>
@@ -4817,7 +4812,6 @@
     <string name="coordinates_widget_map_center_desc">Viðmótshlutinn sýnir landfræðileg hnit núverandi miðju landakortsins</string>
     <string name="coordinates_widget_current_location_desc">Viðmótshlutinn sýnir landfræðileg hnit fyrirliggjandi staðsetningar</string>
     <string name="map_marker_interval_dialog_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalhraða sem notaður er til að áætla komutíma.</string>
-    <string name="map_widget_fps_info">Rammatíðni korts (rammar á sekúndu)</string>
     <string name="map_widget_ant_heart_rate_desc">Birtir hjartsláttartíðni notanda í rauntíma á meðan tiltekinni athöfn stendur</string>
     <string name="map_widget_ant_bicycle_power">Afköst hjólandi</string>
     <string name="map_widget_ant_bicycle_power_desc">Sýnir aflframlag hjólreiðamanns, sem nýtist við að koma hjólinu áfram</string>

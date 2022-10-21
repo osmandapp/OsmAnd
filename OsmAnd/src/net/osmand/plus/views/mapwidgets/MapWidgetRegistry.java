@@ -1,44 +1,14 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_CURRENT_LOCATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.COORDINATES_MAP_CENTER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
-
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -296,7 +266,7 @@ public class MapWidgetRegistry {
 		if (settings.getApplicationMode() == appMode) {
 			widgetInfos.addAll(getAllWidgets());
 		} else {
-			widgetInfos.addAll(createAllControls(mapActivity, appMode));
+			widgetInfos.addAll(WidgetsInitializer.createAllControls(mapActivity, appMode));
 		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : widgetInfos) {
@@ -358,184 +328,13 @@ public class MapWidgetRegistry {
 	}
 
 	public void registerAllControls(@NonNull MapActivity mapActivity) {
-		List<MapWidgetInfo> widgetInfos = createAllControls(mapActivity, settings.getApplicationMode());
-		reorderWidgets(widgetInfos);
+		ApplicationMode appMode = settings.getApplicationMode();
+		List<MapWidgetInfo> infos = WidgetsInitializer.createAllControls(mapActivity, appMode);
+		reorderWidgets(infos);
 
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
+		for (MapWidgetInfo widgetInfo : infos) {
 			notifyWidgetRegistered(widgetInfo);
 		}
-	}
-
-	@NonNull
-	public List<MapWidgetInfo> createAllControls(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
-		List<MapWidgetInfo> widgetInfos = new ArrayList<>();
-		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
-
-		createTopWidgets(widgetsFactory, widgetInfos, appMode);
-		createBottomWidgets(widgetsFactory, widgetInfos, appMode);
-		createLeftWidgets(widgetsFactory, widgetInfos, appMode);
-		createRightWidgets(widgetsFactory, widgetInfos, appMode);
-
-		PluginsHelper.createMapWidgets(mapActivity, widgetInfos, appMode);
-		app.getAidlApi().createWidgetControls(mapActivity, widgetInfos, appMode);
-		createCustomWidgets(widgetsFactory, appMode, widgetInfos);
-
-		return widgetInfos;
-	}
-
-	private void createTopWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, COORDINATES_CURRENT_LOCATION, appMode));
-		infos.add(createWidgetInfo(factory, COORDINATES_MAP_CENTER, appMode));
-		infos.add(createWidgetInfo(factory, STREET_NAME, appMode));
-		infos.add(createWidgetInfo(factory, LANES, appMode));
-		infos.add(createWidgetInfo(factory, MARKERS_TOP_BAR, appMode));
-	}
-
-	private void createBottomWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, ELEVATION_PROFILE, appMode));
-	}
-
-	private void createLeftWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, NEXT_TURN, appMode));
-		infos.add(createWidgetInfo(factory, SMALL_NEXT_TURN, appMode));
-		infos.add(createWidgetInfo(factory, SECOND_NEXT_TURN, appMode));
-	}
-
-	private void createRightWidgets(@NonNull MapWidgetsFactory factory, @NonNull List<MapWidgetInfo> infos, @NonNull ApplicationMode appMode) {
-		infos.add(createWidgetInfo(factory, INTERMEDIATE_DESTINATION, appMode));
-		infos.add(createWidgetInfo(factory, DISTANCE_TO_DESTINATION, appMode));
-		infos.add(createWidgetInfo(factory, RELATIVE_BEARING, appMode));
-		infos.add(createWidgetInfo(factory, MAGNETIC_BEARING, appMode));
-		infos.add(createWidgetInfo(factory, TRUE_BEARING, appMode));
-		infos.add(createWidgetInfo(factory, CURRENT_SPEED, appMode));
-		infos.add(createWidgetInfo(factory, AVERAGE_SPEED, appMode));
-		infos.add(createWidgetInfo(factory, MAX_SPEED, appMode));
-		infos.add(createWidgetInfo(factory, ALTITUDE, appMode));
-		infos.add(createWidgetInfo(factory, GPS_INFO, appMode));
-		infos.add(createWidgetInfo(factory, CURRENT_TIME, appMode));
-		infos.add(createWidgetInfo(factory, BATTERY, appMode));
-		infos.add(createWidgetInfo(factory, RADIUS_RULER, appMode));
-		infos.add(createWidgetInfo(factory, TIME_TO_INTERMEDIATE, appMode));
-		infos.add(createWidgetInfo(factory, TIME_TO_DESTINATION, appMode));
-		infos.add(createWidgetInfo(factory, SIDE_MARKER_1, appMode));
-		infos.add(createWidgetInfo(factory, SIDE_MARKER_2, appMode));
-	}
-
-	@Nullable
-	private MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory widgetsFactory, @NonNull WidgetType widgetType, @NonNull ApplicationMode appMode) {
-		MapWidget mapWidget = widgetsFactory.createMapWidget(widgetType);
-		if (mapWidget != null) {
-			return createWidgetInfo(mapWidget, appMode);
-		}
-		return null;
-	}
-
-	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidget widget) {
-		return createWidgetInfo(widget, settings.getApplicationMode());
-	}
-
-	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidget widget, @NonNull ApplicationMode appMode) {
-		WidgetType widgetType = widget.getWidgetType();
-		if (widgetType != null) {
-			String widgetId = widgetType.id;
-			WidgetsPanel panel = widgetType.getPanel(widgetId, appMode, settings);
-			int page = panel.getWidgetPage(appMode, widgetId, settings);
-			int order = panel.getWidgetOrder(appMode, widgetId, settings);
-			return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,
-					widgetType.titleId, null, page, order, panel);
-		}
-		return null;
-	}
-
-	@NonNull
-	public MapWidgetInfo createWidgetInfo(@NonNull String key,
-	                                      @NonNull MapWidget widget,
-	                                      @DrawableRes int daySettingsIconId,
-	                                      @DrawableRes int nightSettingIconId,
-	                                      @StringRes int messageId,
-	                                      @Nullable String message,
-	                                      int page,
-	                                      int order,
-	                                      @NonNull WidgetsPanel widgetPanel) {
-		if (widget instanceof TextInfoWidget) {
-			TextInfoWidget textInfoWidget = ((TextInfoWidget) widget);
-			return new SideWidgetInfo(key, textInfoWidget, daySettingsIconId, nightSettingIconId,
-					messageId, message, page, order, widgetPanel);
-		} else {
-			return new CenterWidgetInfo(key, widget, daySettingsIconId, nightSettingIconId,
-					messageId, message, page, order, widgetPanel);
-		}
-	}
-
-	@NonNull
-	public MapWidgetInfo createExternalWidget(@NonNull String widgetId,
-	                                          @NonNull MapWidget widget,
-	                                          @DrawableRes int settingsIconId,
-	                                          @Nullable String message,
-	                                          @NonNull WidgetsPanel defaultPanel,
-	                                          int order,
-	                                          @NonNull ApplicationMode appMode) {
-		WidgetsPanel panel = getExternalWidgetPanel(widgetId, defaultPanel, appMode);
-		int page = panel.getWidgetPage(appMode, widgetId, settings);
-		int savedOrder = panel.getWidgetOrder(appMode, widgetId, settings);
-		if (savedOrder != WidgetsPanel.DEFAULT_ORDER) {
-			order = savedOrder;
-		}
-		return createWidgetInfo(widgetId, widget, settingsIconId,
-				settingsIconId, MapWidgetInfo.INVALID_ID, message, page, order, panel);
-	}
-
-	private void createCustomWidgets(@NonNull MapWidgetsFactory factory, @NonNull ApplicationMode appMode, @NonNull List<MapWidgetInfo> widgetInfos) {
-		List<String> widgetKeys = settings.CUSTOM_WIDGETS_KEYS.getStringsListForProfile(appMode);
-		if (!Algorithms.isEmpty(widgetKeys)) {
-			for (String key : widgetKeys) {
-				WidgetType widgetType = WidgetType.getById(key);
-				if (widgetType != null) {
-					MapWidgetInfo widgetInfo = createCustomWidget(factory, key, widgetType, appMode);
-					if (widgetInfo != null) {
-						widgetInfos.add(widgetInfo);
-					}
-				}
-			}
-		}
-	}
-
-	private MapWidgetInfo createCustomWidget(@NonNull MapWidgetsFactory factory, @NonNull String key,
-	                                         @NonNull WidgetType widgetType, @NonNull ApplicationMode appMode) {
-		MapWidget widget = factory.createMapWidget(key, widgetType);
-		if (widget != null) {
-			WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
-			return createCustomWidget(key, widget, widgetType, panel, appMode);
-		}
-		return null;
-	}
-
-	@NonNull
-	public MapWidgetInfo createCustomWidget(@NonNull String widgetId,
-	                                        @NonNull MapWidget widget,
-	                                        @NonNull WidgetType widgetType,
-	                                        @NonNull WidgetsPanel panel,
-	                                        @NonNull ApplicationMode appMode) {
-		int page = panel.getWidgetPage(appMode, widgetId, settings);
-		int order = panel.getWidgetOrder(appMode, widgetId, settings);
-
-		return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId, widgetType.titleId, null, page, order, panel);
-	}
-
-	@NonNull
-	private WidgetsPanel getExternalWidgetPanel(@NonNull String widgetId,
-	                                            @NonNull WidgetsPanel defaultPanel,
-	                                            @NonNull ApplicationMode appMode) {
-		boolean storedInLeftPanel = WidgetsPanel.LEFT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
-		boolean storedInRightPanel = WidgetsPanel.RIGHT.getWidgetOrder(appMode, widgetId, settings) != WidgetsPanel.DEFAULT_ORDER;
-		if (storedInLeftPanel) {
-			return WidgetsPanel.LEFT;
-		} else if (storedInRightPanel) {
-			return WidgetsPanel.RIGHT;
-		}
-		return defaultPanel;
 	}
 
 	public interface WidgetsRegistryListener {

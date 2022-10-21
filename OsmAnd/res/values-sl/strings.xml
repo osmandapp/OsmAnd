@@ -4080,7 +4080,6 @@
     <string name="parking_widget_desc">Pripomoček, ki prikazuje razdaljo od središča zaslona do parkirišča.</string>
     <string name="mapillary_widget_desc">Pripomoček, ki omogoča hiter dostop do aplikacije Mapillary za dodajanje slik na ravni ulice.</string>
     <string name="av_notes_choose_action_widget_desc">Izberite dejanje.</string>
-    <string name="fps_widget_desc">Prikazuje, kako hitro so prikazani in osveženi zemljevid in elementi zemljevida.</string>
     <string name="radius_rules_widget_desc">Orodje ravnilo polmera pomaga določiti polmer okoli izbrane točke na zemljevidu s prikazovanjem krogov-razdalje na zemljevidu.</string>
     <string name="current_time_widget_desc">Prikazuje trenutni čas iz tvoje naprave.</string>
     <string name="battery_widget_desc">Prikazuje nivo baterije v napravi.</string>
@@ -4783,8 +4782,6 @@
     <string name="map_markers_desc">Gradnik prikazuje razdaljo ali predvideni čas prihoda (ETA) za prvi dve oznaki na seznamu oznak na zemljevidu.</string>
     <string name="quick_action_map_center_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Središče zemljevida na zemljevidu.</string>
     <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Trenutna lokacija na zemljevidu.</string>
-    <string name="map_center_widget">Središče zemljevida</string>
-    <string name="current_location_widget">Trenutna lokacija</string>
     <string name="coordinates_widget_map_center_desc">Gradnik prikazuje geografske koordinate trenutnega središča zemljevida</string>
     <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
     <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
@@ -4815,14 +4812,11 @@
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje hitrost potovanja</string>
     <string name="map_widget_ant_bicycle_dist">Kolesarska razdalja</string>
     <string name="map_widget_ant_bicycle_dist_desc">Prikazuje prevoženo razdaljo</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Opis ANT+</string>
     <string name="nautical_depth_points">Navtične globinske točke</string>
     <string name="depth_contours">Izobate</string>
     <string name="worldwide_maps">Zemljevidi sveta</string>
     <string name="ant_widgets">ANT+ gradniki</string>
     <string name="shared_string_cross_buy">Navzkrižni nakup</string>
-    <string name="map_widget_fps_info">FPS (število slik na sekundo) pri upodabljanju zemljevida</string>
     <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
     <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
     <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>

@@ -4602,7 +4602,6 @@
     <string name="routing_attr_hazmat_category_description">Категорија опасних материја / Размотрите дозволе за хазмат приступ</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегавање путева који су погодни само за возила са погоном на сва четири точка</string>
     <string name="av_notes_choose_action_widget_desc">Изаберите акцију.</string>
-    <string name="fps_widget_desc">Виџет показује колико брзо се мапе и елементи мапе приказују и освежавају.</string>
     <string name="radius_rules_widget_desc">Алатка за лењир радијуса помаже да се одреди радијус око изабране тачке на мапи тако што приказује кругове удаљености на мапи.</string>
     <string name="bearing_secondary_desc">Формат приказаних података можете променити у: %1$s – %2$s – %3$s.</string>
     <string name="coordinates_widget_secondary_desc">Формат координата се може променити у %1$s – %2$s – %3$s.</string>
@@ -4732,13 +4731,11 @@
     <string name="compass_visible_if_map_rotated_desc">Сакривено када је Север горе</string>
     <string name="developer_widgets">Справице за програмере</string>
     <string name="shared_string_shows">Приказује</string>
-    <string name="current_location_widget">Тренутна позиција</string>
     <string name="map_widget_target_distance">Циљана удаљеност</string>
     <string name="map_widget_zoom_level">Ниво зума</string>
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
-    <string name="map_center_widget">Центар карте</string>
     <string name="shared_string_2_5_d_view">2.5D поглед</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>

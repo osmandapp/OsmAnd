@@ -50,6 +50,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -201,14 +202,9 @@ public abstract class OsmandPlugin {
 	}
 
 	@Nullable
-	protected JSONObject getAdditionalTrackData() {
-		return null;
+	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
 	}
 
-	@Nullable
-	protected Map<String, String> getExtensionsFromInfo(@Nullable JSONObject json) {
-		return null;
-	}
 
 	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
 	                                            @NonNull Map<String, String> params,

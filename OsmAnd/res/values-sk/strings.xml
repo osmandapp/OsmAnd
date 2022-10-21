@@ -79,7 +79,9 @@
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie.</string>
     <string name="prefs_plugins">Zásuvné moduly</string>
-    <string name="osm_editing_plugin_description">Prispievajte do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM poznámok a prispievaním zaznamenanými GPX súbormi. Pre odoslanie údajov na servery zadáte v OsmAnd svoje registračné údaje v OSM. OpenStreetMap.org je celosvetový voľne prístupný komunitný projekt mapovania sveta.</string>
+    <string name="osm_editing_plugin_description">Umožní vám prispievať do OpenStreetMap, globálnej komunity s cieľom vytvoriť podrobnú mapu sveta a poskytovať aktuálne slobodné údaje pre všetkých používateľov.
+\n
+\nInformácie o úpravách mapy môžete nájsť na webstránke https://osmand.net/docs/user/plugins/osm-editing</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Zvoľte hlas a otestujte ho prehraním oznámení:</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -880,9 +882,9 @@
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené ponad štandardné mapy. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu. (Samotné vrstevnice sú samostatnými dátami, ktoré je potrebné stiahnuť po aktivovaní modulu.) 
-\n 
-\nGlobálne údaje (medzi 70° severne a 70° južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Informácie o teréne, ako vrstevnice, tieňované reliéfy a svahy, vám pomôžu opticky zhodnotiť tvar povrchu krajiny, zohľadniť zakrivenie, vrcholy, strmosť, body rovnakej výšky a ďalšie. Topografické informácie môžu byť na mape reprezentované tieňovaním reliéfu, vrstevnicami a farbami vyjadrujúcimi odchýlku od roviny. Údaje pochádzajú od SRTM a ASTER.
+\n
+\nAko na to - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
@@ -1238,9 +1240,9 @@
     <string name="speak_poi">Blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla záznamu GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.
-\n 
-\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy.</string>
+    <string name="record_plugin_description">Umožňuje nahrať, uložiť a analyzovať údaje o vašom pohybe ako rýchlosť, stúpanie, klesanie alebo reliéf trasy, ktoré môžu byť následne znovu použité, vylepšené, doplnené alebo zdieľané s priateľmi.
+\n
+\nAko na to - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
@@ -1361,11 +1363,9 @@
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
     <string name="roads_only">Iba cesty</string>
-    <string name="plugin_nautical_descr">Tento modul obohatí OsmAnd o možnosť zobrazenia námorných máp pre lode, plachetnice a iné vodné športy. 
+    <string name="plugin_nautical_descr">Obohatí mapu o informácie o lodných trasách, navigačných svetlách, nebezpečných zónach, povolených alebo zakázaných zónach pre pohyb lodí, atď. Pre použitie stiahnite Námorné mapy a zapnite štýl \"Námorná mapa\" v \"Nastaviť mapu\".
 \n
-\nPoskytuje navigačné značky a mapové symboly pre vnútrozemskú aj pobrežnú navigáciu. Popis každej navigačnej značky poskytne podrobnosti potrebné na jej identifikáciu a význam (kategóriu, tvar, farbu, poradie, číslo, atď.). 
-\n
-\nTento pohľad môže byť vypnutý deaktivovaním modulu tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
+\nAko na to - https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="plugin_ski_descr">Tento modul vám sprístupní celosvetové zjazdovky, bežecké trate, alpinistické trasy, lanovky a lyžiarske vleky. Trasy a zjazdovky sú farebne rozlíšené podľa obtiažnosti a zobrazené v špeciálnom \"zimnom\" štýle, ktorý pripomína zasneženú krajinu. 
 \n
 \nAktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý zobrazuje krajinné útvary v zimných podmienkach. Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
@@ -4662,7 +4662,6 @@
     <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
     <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
-    <string name="fps_widget_desc">Zobrazuje ako rýchlo sú mapové prvky zobrazované a aktualizované.</string>
     <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
     <string name="route_maneuvers">Manévre trasy</string>
     <string name="shared_string_mode">Režim</string>
@@ -4693,25 +4692,25 @@
     <string name="routing_attr_motor_type_gas_name">CNG (Stlačený zemný plyn)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybridný</string>
     <string name="includes_osm_changes_until">Obsahuje zmeny OSM vykonané do %1$s.</string>
-    <string name="next_live_update_date_and_time">Nasledujúca aktualizácia: %1$s o %2$s.</string>
+    <string name="next_live_update_date_and_time">Nasledujúca aktualizácia dňa %1$s o %2$s.</string>
     <string name="marker_2nd">Druhá značka</string>
     <string name="switch_widget_mode_desc">Stlačenie nástroja prepne režim.</string>
     <string name="side_marker_eta">Odhadovaný čas príjazdu</string>
-    <string name="reset_all_settings_desc">Naozaj chcete obnoviť všetky nastavenia na predvolené hodnoty\?</string>
+    <string name="reset_all_settings_desc">Obnoviť všetky nastavenia na predvolené hodnoty\?</string>
     <string name="goods_delivery_desc_2">Cesty zakázané pre dodávkové vozidlá budú obídené.</string>
-    <string name="goods_delivery_desc">Vozidlá prevážajúce tovar môžu mať obmedzený vstup na niektoré cesty.</string>
+    <string name="goods_delivery_desc">Vozidlá dodávajúce tovar môžu mať obmedzený vstup na niektoré cesty.</string>
     <string name="updated_map_time">Aktualizované: %1$s.</string>
-    <string name="next_live_update_time">Nasledujúca aktualizácia: o %1$s.</string>
+    <string name="next_live_update_time">Nasledujúca aktualizácia o %1$s.</string>
     <string name="altitude_correction">Oprava nadmorskej výšky</string>
-    <string name="no_altitude_data_desc">Vašu stopu môžete pripojiť k cestám pre získanie údajov %1$s alebo ich vypočítajte online.</string>
+    <string name="no_altitude_data_desc">Pre získanie údajov %1$s, pripojte stopu k cestám alebo ich vypočítajte online.</string>
     <string name="routing_attr_goods_restrictions_name">Dodávkové vozidlá</string>
-    <string name="live_update_frequency_hour_variant">Aktualizácie máp budú kontrolované každú hodinu.</string>
+    <string name="live_update_frequency_hour_variant">Aktualizácie máp sú kontrolované každú hodinu.</string>
     <string name="marker_1st">Prvá značka</string>
     <string name="map_marker_average_speed_desc">Zadajte časový interval pre priemerovanie rýchlosti (pre odhad času príjazdu).</string>
-    <string name="goods_delivery_desc_4">Ak má vaše vozidlo viac ako 3,5 ton, mali by ste použiť režim Nákladné auto.</string>
-    <string name="goods_delivery_desc_3">Platí len pre vozidlá dodávajúce tovar so štyrmi kolesami a menej ako 3,5 tonami.</string>
-    <string name="live_update_frequency_day_variant">Aktualizácie máp budú kontrolované každý deň.</string>
-    <string name="live_update_frequency_week_variant">Aktualizácie máp budú kontrolované každý týždeň.</string>
+    <string name="goods_delivery_desc_4">Použite režim Nákladné auto pre vozidlo ťažšie ako 3,5 ton.</string>
+    <string name="goods_delivery_desc_3">Platí len pre vozidlá dodávajúce tovar s menej ako 3,5 tonami.</string>
+    <string name="live_update_frequency_day_variant">Aktualizácie máp sú kontrolované každý deň.</string>
+    <string name="live_update_frequency_week_variant">Aktualizácie máp sú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd na základe satelitných snímkov a výškových modelov. Môže sa líšiť od nadmorskej výšky zaznamenanej zariadením a môže byť použitá ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
     <string name="accessibility_2d_view_on">2.5D zobrazenie Zapnuté</string>

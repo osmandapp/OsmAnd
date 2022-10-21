@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -76,9 +77,11 @@ public class RoutingHelperUtils {
 		Location locationProjection = new Location(loc);
 		locationProjection.setLatitude(project.getLatitude());
 		locationProjection.setLongitude(project.getLongitude());
-		// we need to update bearing too
-		float bearingTo = locationProjection.bearingTo(to);
-		locationProjection.setBearing(bearingTo);
+		// This code is not valid:
+		// 1. if you are out of the route. So you keep moving in different direction, but bearing project is opposite
+		// 2. If projection too close to "to" point, bearing is NaN and location icon changes in a wrong way
+		// float bearingTo = locationProjection.bearingTo(to);
+		// locationProjection.setBearing(bearingTo);
 		return locationProjection;
 	}
 
@@ -107,15 +110,15 @@ public class RoutingHelperUtils {
 	/**
 	 * Wrong movement direction is considered when between
 	 * current location bearing (determines by 2 last fixed position or provided)
-	 * and bearing from currentLocation to next (current) point
+	 * and bearing from prevLocation to next (current) point
 	 * the difference is more than 60 degrees
 	 */
-	public static boolean checkWrongMovementDirection(Location currentLocation, Location nextRouteLocation) {
+	public static boolean checkWrongMovementDirection(Location currentLocation, Location prevRouteLocation, Location nextRouteLocation) {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
-		if (currentLocation.hasBearing() && nextRouteLocation != null) {
+		if (currentLocation.hasBearing() && nextRouteLocation != null && prevRouteLocation != null) {
 			float bearingMotion = currentLocation.getBearing();
-			float bearingToRoute = currentLocation.bearingTo(nextRouteLocation);
+			float bearingToRoute = prevRouteLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			if (Math.abs(diff) > 60f) {
 				// require delay interval since first detection, to avoid false positive

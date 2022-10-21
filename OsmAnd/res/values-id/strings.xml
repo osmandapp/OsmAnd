@@ -3604,7 +3604,6 @@
     <string name="routing_attr_avoid_4wd_only_name">Hindari jalan 4WD</string>
     <string name="widget_secondary_desc_part_of">Bagian dari plugin %1$s.</string>
     <string name="parking_widget_desc">Widget yang menunjukkan jarak dari pusat layar Anda ke tempat parkir.</string>
-    <string name="fps_widget_desc">Menunjukkan seberapa cepat peta dan elemen peta ditampilkan dan disegarkan.</string>
     <string name="elevation_profile_widget_desc">Widget menunjukkan profil ketinggian dan kemiringan dari rute saat ini.</string>
     <string name="button_upgrade_osmandplus">Tingkatkan OsmAnd+</string>
     <string name="map_widget_map_rendering">Perenderan peta</string>
@@ -4372,8 +4371,6 @@
     <string name="map_widget_camera_distance">Ketinggian kamera</string>
     <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)\?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Deskripsi ANT+</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
     <string name="map_widget_camera_distance_desc">Widget menampilkan ketinggian kamera di atas tingkat permukaan.</string>
     <string name="map_widget_zoom_level">Tingkat perbesaran</string>
@@ -4390,7 +4387,6 @@
     <string name="map_widget_ant_bicycle_cadence">Irama Sepeda</string>
     <string name="map_widget_camera_tilt_desc">Widget menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
     <string name="developer_widgets">Widget pengembang</string>
-    <string name="map_center_widget">Tengah peta</string>
     <string name="rendering_value_highContrastRoads_name">Jalan kontras tinggi</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas jalan Amerika</string>
     <string name="coordinates_widget_map_center_desc">Widget menampilkan koordinat geografis tengah peta saat ini</string>
@@ -4473,7 +4469,6 @@
     <string name="proxy_pref_descr">Atur server proksi.</string>
     <string name="index_name_other">Peta dunia dan topik</string>
     <string name="index_name_tts_voice">Perintah suara (teks-ke-suara, disarankan)</string>
-    <string name="map_widget_fps_info">FPS (bingkai per detik) perenderan peta</string>
     <string name="poi_search_desc">Pencarian POI (Titik</string>
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
     <string name="quick_action_map_center_widget_descr">Sebuah alihan untuk menampilkan atau menyembunyikan widget Tengah peta pada peta.</string>
@@ -4485,7 +4480,6 @@
     <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
     <string name="map_widget_target_distance_desc">Widget menampilkan jarak dari kamera ke lokasi sasaran.</string>
     <string name="map_widget_zoom_level_desc">Widget menampilkan tingkat perbesaran peta saat ini.</string>
-    <string name="current_location_widget">Lokasi saat ini</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
     <string name="pref_vector_rendering">Opsi perenderan vektor spesifik</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpine dan turunan</string>

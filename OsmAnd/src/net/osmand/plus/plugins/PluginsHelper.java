@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IProgress;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
@@ -483,42 +484,15 @@ public class PluginsHelper {
 		}
 	}
 
-	@Nullable
-	public static JSONObject getAdditionalTrackInfo() {
-		JSONObject json = new JSONObject();
+	@NonNull
+	public static void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		try {
 			for (OsmandPlugin plugin : getEnabledPlugins()) {
-				JSONObject data = plugin.getAdditionalTrackData();
-				if (data != null && data.length() > 0) {
-					json.put(plugin.getId(), data);
-				}
+				plugin.attachAdditionalInfoToRecordedTrack(location, json);
 			}
 		} catch (JSONException e) {
 			log.error(e);
 		}
-		return json;
-	}
-
-	@NonNull
-	public static Map<String, String> getExtensionsFromPluginsInfo(@Nullable String pluginsInfo) {
-		if (Algorithms.isEmpty(pluginsInfo)) {
-			return Collections.emptyMap();
-		}
-		Map<String, String> extensions = new HashMap<>();
-		try {
-			JSONObject json = new JSONObject(pluginsInfo);
-			for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
-				String pluginId = iterator.next();
-				OsmandPlugin plugin = getPlugin(pluginId);
-				Map<String, String> pluginExtensions = plugin != null ? plugin.getExtensionsFromInfo(json.optJSONObject(pluginId)) : null;
-				if (!Algorithms.isEmpty(pluginExtensions)) {
-					extensions.putAll(pluginExtensions);
-				}
-			}
-		} catch (JSONException e) {
-			log.error(e);
-		}
-		return extensions;
 	}
 
 	public static List<String> getDisabledRendererNames() {
