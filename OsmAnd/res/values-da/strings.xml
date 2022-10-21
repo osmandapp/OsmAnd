@@ -4029,7 +4029,7 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Giver dig mulighed for at bidrage til OpenPlaceReviews-projektet med f.eks. fotos, anmeldelser, links om offentlige steder som restauranter, hoteller, museer og waypoints.
+    <string name="open_place_reviews_plugin_description">Giver dig mulighed for at bidrage til OpenPlaceReviews-projektet med f.eks. fotos, anmeldelser, links om offentlige steder som restauranter, hoteller, museer og rutepunkter.
 \n
 \nDu kan finde vejledning om, hvordan du bidrager, på vores websted - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="routing_attr_height_obstacles_description">Ruteberegning kan undgå kraftige stigninger.</string>

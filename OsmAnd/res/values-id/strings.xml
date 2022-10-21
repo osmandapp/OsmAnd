@@ -4498,4 +4498,23 @@
     <string name="unknown_location">Posisi belum diketahui.</string>
     <string name="keep_informing_never">Hanya secara manual (ketuk panah)</string>
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
+    <string name="external_sensors_plugin_name">Sensor Eksternal</string>
+    <string name="send_uuid_preference_desc">UUID acak digunakan untuk mengunduh peta luring dari server OsmAnda untuk memantau penggunaan sumber daya server yang adil, memprediksi lalu lintas penggunaan, dan membuat laporan peta anonim sebulan.</string>
+    <string name="map_widget_altitude_desc">Widget menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau tengah peta saat ini</string>
+    <string name="location_simulation_cutoff">Simulasi lewati meter pertama</string>
+    <string name="map_center_widget">Koordinat: Tengah peta</string>
+    <string name="location_simulation_speedup">Percepatan simulasi</string>
+    <string name="map_widget_altitude_map_center">Ketinggian: tengah peta</string>
+    <string name="map_widget_altitude_map_center_desc">Menampilkan ketinggian di atas permukaan laut dari tengah peta saat ini.</string>
+    <string name="map_widget_altitude_current_location">Ketinggian: lokasi saat ini</string>
+    <string name="map_widget_altitude_current_location_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini.</string>
+    <string name="shared_string_terms_of_use">Ketentuan Penggunaan</string>
+    <string name="map_widget_rendering_fps">FPS perenderan peta</string>
+    <string name="simulate_location_by_gpx">Simulasikan lokasi dengan GPX</string>
+    <string name="external_sensors_plugin_description">Pemantauan detak jantung, kecepatan sepeda, daya dan irama sepeda. Membutuhkan koneksi perangkat dengan sensor dengan parameter ini dengan dukungan ANT + (protokol Jaringan Pribadi Nirkabel).</string>
+    <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang (diekspresikan dalam bingkai per detik atau FPS).</string>
+    <string name="shared_string_identifiers">Pengenal</string>
+    <string name="send_uuid_preference">Kirim Pengenal Pengguna Unik (UUID)</string>
+    <string name="terms_of_service_desc">Dengan mengunduh peta Anda setuju dengan %1$s dan %2$s.</string>
+    <string name="current_location_widget">Koordinat: Lokasi saat ini</string>
 </resources>
