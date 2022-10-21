@@ -823,7 +823,7 @@ public class BackupHelper {
 						it.remove();
 					}
 				}
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true);
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, false);
 			}
 
 			@Override
