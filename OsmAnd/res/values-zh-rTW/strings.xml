@@ -3961,7 +3961,7 @@
     <string name="segments_count">線段 %1$d</string>
     <string name="open_place_reviews_plugin_description">允許您為 OpenPlaceReviews 專案做出貢獻。例如關於餐廳、飯店、博物館與航點等公共場所的照片、評論、連結。
 \n
-\n您可以在網站上找到關於如何貢獻的說明 - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\n您可以在我們的網站上找到關於如何貢獻的說明 - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
     <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
