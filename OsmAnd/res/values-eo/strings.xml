@@ -4809,4 +4809,5 @@
     <string name="map_widget_altitude_desc">Fenestraĵoj montrantaj supermaran altecon de via nuna pozicio aŭ de la map-centro.</string>
     <string name="current_location_widget">Koordinatoj: nuna pozicio</string>
     <string name="external_sensors_plugin_description">Ebligas legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas konekton al sentiloj raportantaj la menciitajn parametrojn kaj subtenantaj la protokolon ANT+.</string>
+    <string name="map_widget_rendering_fps">Rapido de map-bildigado</string>
 </resources>
