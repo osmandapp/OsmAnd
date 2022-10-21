@@ -4822,4 +4822,23 @@
     <string name="map_widget_target_distance">攝影機到目標的距離</string>
     <string name="favorites_backup">收藏備份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
+    <string name="location_simulation_cutoff">模擬跳過第一公尺</string>
+    <string name="map_widget_altitude_desc">用來顯示目前地理位置或目前地圖中心海拔高度的小工具</string>
+    <string name="send_uuid_preference_desc">隨機 UUID 用於從 OsmAnd 伺服器下載離線地圖，以監控伺服器資源的公平使用情況、預測流量使用狀況並產生匿名的每月地圖報告。</string>
+    <string name="send_uuid_preference">傳送唯一使用者識別碼 (UUID)</string>
+    <string name="shared_string_identifiers">識別碼</string>
+    <string name="terms_of_service_desc">下載地圖即表示您同意 %1$s 與 %2$s。</string>
+    <string name="shared_string_terms_of_use">使用條款</string>
+    <string name="external_sensors_plugin_name">外部感測器</string>
+    <string name="external_sensors_plugin_description">監測心率、自行車速度、自行車功率和踩踏頻率。需要將裝置與有這些參數且支援 ANT +（無線個人網絡協定）的感測器連結。</string>
+    <string name="map_widget_altitude_map_center">海拔：地圖中心</string>
+    <string name="map_widget_altitude_map_center_desc">顯示目前地圖中心的海拔高度。</string>
+    <string name="map_widget_altitude_current_location">海拔：目前位置</string>
+    <string name="map_widget_altitude_current_location_desc">顯示目前地理位置海拔高度。</string>
+    <string name="map_widget_rendering_fps">地圖繪製 FPS</string>
+    <string name="map_widget_rendering_fps_desc">顯示地圖與地圖元素的顯示與更新速度（以每秒畫面數或 FPS 表示）。</string>
+    <string name="simulate_location_by_gpx">透過 GPX 模擬位置</string>
+    <string name="location_simulation_speedup">模擬加速</string>
+    <string name="current_location_widget">座標：目前位置</string>
+    <string name="map_center_widget">座標：地圖中心</string>
 </resources>

@@ -4,7 +4,7 @@ import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.router.network.NetworkRouteSelector.*;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -336,16 +336,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		List<SelectedGpxFile> visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 
-		boolean tmpVisibleTrackChanged = false;
-		SelectedGpxFile tmpVisibleTrack = getTmpVisibleTrack(visibleGPXFiles);
-		if (tmpVisibleTrack != null) {
-			visibleGPXFiles.add(tmpVisibleTrack);
-			tmpVisibleTrackChanged = this.tmpVisibleTrack != tmpVisibleTrack;
-			this.tmpVisibleTrack = tmpVisibleTrack;
-		}
+		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
 
 		pointsCache.clear();
 		removeCachedUnselectedTracks(visibleGPXFiles);
+
 		Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 		boolean pointsModified = false;
 		for (SelectedGpxFile selectedGpxFile : visibleGPXFiles) {
@@ -387,6 +382,25 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		mapActivityInvalidated = false;
+	}
+
+	private boolean updateTmpVisibleTrack(@NonNull List<SelectedGpxFile> visibleGPXFiles) {
+		boolean tmpVisibleTrackChanged = false;
+		SelectedGpxFile selectedGpxFile = getTmpVisibleTrack(visibleGPXFiles);
+		if (selectedGpxFile != null) {
+			visibleGPXFiles.add(selectedGpxFile);
+			tmpVisibleTrackChanged = tmpVisibleTrack != selectedGpxFile;
+			tmpVisibleTrack = selectedGpxFile;
+
+			if (tmpVisibleTrackChanged) {
+				CachedTrack cachedTrack = segmentsCache.remove(selectedGpxFile.getGpxFile().path);
+				if (hasMapRenderer() && cachedTrack != null) {
+					resetSymbolProviders(selectedGpxFile.getPointsToDisplay());
+					resetSymbolProviders(cachedTrack.getAllCachedTrackSegments());
+				}
+			}
+		}
+		return tmpVisibleTrackChanged;
 	}
 
 	@Nullable
@@ -1195,6 +1209,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 
+		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+			return ColoringType.TRACK_SOLID.getName(null);
+		}
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
 		}

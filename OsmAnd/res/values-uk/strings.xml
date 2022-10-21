@@ -4845,6 +4845,6 @@
     <string name="map_center_widget">Координати: Центр мапи</string>
     <string name="map_widget_altitude_desc">Віджети показують висоту над рівнем моря для поточного місцеперебування або для поточного центру мапи</string>
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
-    <string name="map_widget_rendering_fps_desc">Показує швидкість відображення та оновлення мапи та її елементів (виражається у кадрах в секунду - FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Показує швидкість показу й оновлення мапи та її елементів (виражається у кадрах за секунду, або FPS).</string>
     <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
 </resources>

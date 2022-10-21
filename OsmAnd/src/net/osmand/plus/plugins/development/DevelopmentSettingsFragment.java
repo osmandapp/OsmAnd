@@ -14,6 +14,8 @@ import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -30,6 +32,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
+	private static final String SHOW_HEIGHTMAP_PROMO = "show_heightmaps_promo";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -120,7 +123,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupShowHeightmapsPref() {
 		SwitchPreferenceEx showHeightmaps = findPreference(plugin.SHOW_HEIGHTMAPS.getId());
 		showHeightmaps.setIconSpaceReserved(false);
-		showHeightmaps.setEnabled(plugin.isHeightmapAllowed());
+		showHeightmaps.setVisible(plugin.isHeightmapAllowed());
+		Preference showHeightmapsPromo = findPreference(SHOW_HEIGHTMAP_PROMO);
+		showHeightmapsPromo.setIconSpaceReserved(false);
+		showHeightmapsPromo.setVisible(!plugin.isHeightmapAllowed());
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -260,6 +266,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			if (fragmentManager != null) {
 				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
 			}
+		} else if (SHOW_HEIGHTMAP_PROMO.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
+			}
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}

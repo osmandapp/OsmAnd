@@ -4559,7 +4559,7 @@
     <string name="bottom_widgets_panel">Nederste panel</string>
     <string name="shared_string_item">Emne</string>
     <string name="shared_string_buttons">Knapper</string>
-    <string name="configure_screen_widgets_descr">Vælg skærmside for at tilføje eller omarrangere moduler.</string>
+    <string name="configure_screen_widgets_descr">Vælg skærmsektion for at tilføje eller omarrangere moduler.</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
     <string name="simulation_preview_mode_title">Hurtig forhåndsvisningstilstand</string>
     <string name="speed_mode">Hastighedstilstand</string>

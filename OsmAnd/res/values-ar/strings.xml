@@ -4893,4 +4893,27 @@
     <string name="nautical_depth_points">نقاط العمق البحري</string>
     <string name="worldwide_maps">خرائط عالمية</string>
     <string name="depth_contours">ملامح العمق</string>
+    <string name="current_location_widget">الإحداثيات: الموقع الحالي</string>
+    <string name="external_sensors_plugin_name">مجسات خارجية</string>
+    <string name="external_sensors_plugin_description">مراقبة معدل ضربات القلب وسرعة الدراجة وقوة الدراجة والإيقاع. يتطلب توصيل الجهاز بمستشعرات هذه المعلمات بدعم من مسنشعر ANT + (بروتوكول الشبكة الشخصية اللاسلكية).</string>
+    <string name="map_widget_altitude_map_center">الارتفاع: مركز الخريطة</string>
+    <string name="map_widget_altitude_map_center_desc">يظهر الارتفاع فوق مستوى سطح البحر لمركز الخريطة الحالي.</string>
+    <string name="terms_of_service_desc">من خلال تنزيل الخرائط ، فإنك توافق على %1$s و %2$s.</string>
+    <string name="map_widget_target_distance">المسافة من الكاميرا إلى الهدف</string>
+    <string name="simulate_location_by_gpx">محاكاة الموقع بواسطة GPX</string>
+    <string name="location_simulation_cutoff">محاكاة تخطي الأمتار الأولى</string>
+    <string name="map_widget_rendering_fps_desc">يوضح مدى سرعة إظهار الخريطة وعناصر الخريطة وتحديثها (معبرًا عنها في الإطارات في الثانية أو FPS).</string>
+    <string name="favorites_backup">النسخ الاحتياطي للمفضلة</string>
+    <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
+    <string name="map_center_widget">الإحداثيات: مركز الخرائط</string>
+    <string name="map_widget_altitude_current_location">الارتفاع: الموقع الحالي</string>
+    <string name="map_widget_altitude_current_location_desc">يظهر الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
+    <string name="map_widget_altitude_desc">ويدجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي أو لمركز الخريطة الحالي</string>
+    <string name="map_widget_rendering_fps">معدل إطارأداء الخريطة</string>
+    <string name="location_simulation_speedup">تسريع المحاكاة</string>
+    <string name="send_uuid_preference_desc">يستخدم UUID العشوائي لتنزيل الخرائط غير المتصلة بالإنترنت من خوادم أوسماند لمراقبة الاستخدام العادل لموارد الخادم والتنبؤ باستخدام حركة المرور وإنشاء تقارير خرائط شهرية مجهولة المصدر.</string>
+    <string name="send_uuid_preference">إرسال معرف مستخدم وحيد(UUID)</string>
+    <string name="shared_string_identifiers">معرفات</string>
+    <string name="shared_string_terms_of_use">شروط الاستخدام</string>
+    <string name="shared_string_cross_buy">شراء عبر</string>
 </resources>
