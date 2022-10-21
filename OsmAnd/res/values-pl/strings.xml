@@ -4748,4 +4748,27 @@
     <string name="compass_desc">Pokazuje kierunek na północ.</string>
     <string name="favorite_confirm_delete_group">Czy na pewno chcesz usunąć grupę \"%1$s\" i wszystkie zawarte w niej punkty (%2$d)</string>
     <string name="external_sensors_plugin_name">Czujniki zewnętrzne</string>
+    <string name="simulate_location_by_gpx">Symuluj lokalizację za pomocą GPX</string>
+    <string name="shared_string_terms_of_use">Warunki użytkowania</string>
+    <string name="terms_of_service_desc">Pobierając mapy zgadzasz się na %1$s i %2$s.</string>
+    <string name="shared_string_identifiers">Identyfikatory</string>
+    <string name="favorites_backup">Kopia zapasowa ulubionych</string>
+    <string name="map_widget_target_distance">Odległość od kamery do celu</string>
+    <string name="ant_widgets">Widżety ANT+</string>
+    <string name="ant_missing_dependency">Brakująca zależność</string>
+    <string name="map_widget_ant_heart_rate">Tętno</string>
+    <string name="ant_write_to_gpx">Zapisywanie danych do ścieżki</string>
+    <string name="ant_heart_rate_write_gpx_desc">Zapisz tętno do ścieżki</string>
+    <string name="map_widget_ant_heart_rate_desc">Pokazuje tętno użytkownika podczas danej aktywności w czasie rzeczywistym</string>
+    <string name="map_widget_ant_bicycle_cadence">Kadencja roweru</string>
+    <string name="map_widget_ant_bicycle_speed">Prędkość roweru</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Pokazuje przebytą odległość</string>
+    <string name="depth_contours">Kontury głębokości</string>
+    <string name="worldwide_maps">Mapy świata</string>
+    <string name="map_widget_zoom_level_desc">Widżet pokazuje aktualny poziom powiększenia mapy.</string>
+    <string name="developer_widgets">Widżety dla deweloperów</string>
+    <string name="ant_go_to_store">Przejdź do sklepu</string>
+    <string name="lang_sat">Santalski</string>
+    <string name="map_widget_target_distance_desc">Widżet pokazuje odległość od kamery do miejsca docelowego.</string>
+    <string name="map_widget_zoom_level">Poziom powiększenia</string>
 </resources>
