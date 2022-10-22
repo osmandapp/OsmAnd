@@ -4830,4 +4830,5 @@
     <string name="ant_widgets">ANT+</string>
     <string name="ant_missing_dependency">Dependeco mankas</string>
     <string name="ant_go_to_store">Malfermi vendejon</string>
+    <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>
 </resources>
