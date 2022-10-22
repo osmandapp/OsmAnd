@@ -3915,7 +3915,7 @@
     <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
     <string name="open_place_reviews_plugin_description">Permite-lhe fazer contribuições para o projeto OpenPlaceReviews. Tais como fotografias, críticas, hiperligações sobre locais públicos tais como restaurantes, hotéis, museus e pontos de passagem.
 \n
-\nPode encontrar instruções sobre como contribuir em https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nPode encontrar instruções sobre como contribuir no nosso sítio web https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sessão no OpenPlaceReviews</string>
@@ -4699,7 +4699,7 @@
     <string name="goods_delivery_desc">Os veículos de transporte de mercadorias podem ter o acesso restrito em algumas estradas.</string>
     <string name="updated_map_time">Atualizado: %1$s.</string>
     <string name="includes_osm_changes_until">Inclui alterações no OSM feitas até %1$s.</string>
-    <string name="next_live_update_date_and_time">Próxima atualização: %1$s em %2$s.</string>
+    <string name="next_live_update_date_and_time">Próxima atualização em %1$s às %2$s.</string>
     <string name="live_update_frequency_week_variant">As atualizações do mapa serão feitas semanalmente.</string>
     <string name="altitude_correction">Correção de altitude</string>
     <string name="no_altitude_data_desc">Para receber os dados de %1$s, anexe o seu trilho às estradas ou calcule-a online.</string>
@@ -4710,7 +4710,7 @@
     <string name="routing_attr_motor_type_gas_name">GNV</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="goods_delivery_desc_3">Aplica-se apenas a camiões de mercadorias até 3,5 toneladas.</string>
-    <string name="next_live_update_time">Próxima atualização: em %1$s.</string>
+    <string name="next_live_update_time">Próxima atualização às %1$s.</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercadorias</string>
     <string name="calculate_online_altitude_descr">Calcular a altitude online nos servidores do OsmAnd com base em imagens de satélite e modelos digitais de elevação. As diferenças com a altitude registada pelo seu dispositivo podem ser utilizadas para correção da altitude.</string>
@@ -4851,4 +4851,5 @@
     <string name="send_uuid_preference">Enviar identificador único de utilizador (UUID)</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de utilização</string>
+    <string name="shared_string_shows">Mostrar</string>
 </resources>
