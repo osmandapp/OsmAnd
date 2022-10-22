@@ -4747,4 +4747,5 @@
 \nW przypadku korzystania z OsmAnd Cloud może to prowadzić do nieporozumień po reinstalacji.</string>
     <string name="compass_desc">Pokazuje kierunek na północ.</string>
     <string name="favorite_confirm_delete_group">Czy na pewno chcesz usunąć grupę \"%1$s\" i wszystkie zawarte w niej punkty (%2$d)</string>
+    <string name="external_sensors_plugin_name">Czujniki zewnętrzne</string>
 </resources>
