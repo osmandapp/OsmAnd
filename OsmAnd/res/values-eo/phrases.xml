@@ -655,7 +655,7 @@
     <string name="poi_attraction_carousel">Karuselo</string>
     <string name="poi_attraction_roller_coaster">Onda fervojo</string>
     <string name="poi_attraction_slide">Deglitejo</string>
-    <string name="poi_attraction_summer_toboggan">Somera tobogano</string>
+    <string name="poi_attraction_summer_toboggan">Somera sledejo</string>
     <string name="poi_attraction_swing_carousel">Karuselo ĉenseĝa</string>
     <string name="poi_attraction_train">Vagonareto (allogaĵo)</string>
     <string name="poi_attraction_water_slide">Akvodeglitejo</string>
@@ -4351,4 +4351,16 @@
     <string name="poi_dog_designated">Destinita por hundoj</string>
     <string name="poi_dog_unleashed">Hundoj: ne devas esti en hundrimenoj</string>
     <string name="poi_playground_climbingwall">Grimp-muro</string>
+    <string name="poi_playground_balancebeam">Ŝtipo ekvilibra (infana)</string>
+    <string name="poi_playground_playhouse">Dometo (infanludejo)</string>
+    <string name="poi_playground_hopscotch">Hopludejo</string>
+    <string name="poi_playground_teenshelter">Ŝirmejo en infanludejo</string>
+    <string name="poi_playground_sledding">Sledejo infana</string>
+    <string name="poi_playground_youth_bench">Sidejo en infanludejo</string>
+    <string name="poi_playground_funnel_ball">Funel-pilkejo</string>
+    <string name="poi_playground_tunnel_tube">Tunelo (infanludejo)</string>
+    <string name="poi_playground_speaking_tube">Tub-telefono (infana)</string>
+    <string name="poi_playground_bridge">Ponto (infanludejo)</string>
+    <string name="poi_playground_map">Mapo (infanludejo)</string>
+    <string name="poi_playground_sandpit">Sabloludejo</string>
 </resources>
