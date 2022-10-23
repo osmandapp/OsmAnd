@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc.MeasurementDataType.TEMPERATURE;
+import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
@@ -9,11 +10,19 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
+import net.osmand.core.jni.GeoBandSettings;
+import net.osmand.core.jni.WeatherBand;
+import net.osmand.core.jni.WeatherTileResourcesManager;
+import net.osmand.core.jni.ZoomLevelDoubleListHash;
+import net.osmand.core.jni.ZoomLevelStringListHash;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +32,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.weather.WeatherRasterLayer.WeatherLayer;
 import net.osmand.plus.plugins.weather.units.CloudConstants;
 import net.osmand.plus.plugins.weather.units.PrecipConstants;
 import net.osmand.plus.plugins.weather.units.PressureConstants;
@@ -36,6 +46,8 @@ import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -46,6 +58,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -72,6 +85,11 @@ public class WeatherPlugin extends OsmandPlugin {
 	public static int DEFAULT_TRANSPARENCY = 50;
 
 	private WeatherInfoType currentConfigureLayer = null;
+
+	private WeatherRasterLayer weatherLayerLow;
+	private WeatherRasterLayer weatherLayerHigh;
+	private static final float ZORDER_RASTER_LOW = 0.8f;
+	private static final float ZORDER_RASTER_HIGH = 0.81f;
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -228,6 +246,75 @@ public class WeatherPlugin extends OsmandPlugin {
 			return TextUtils.join(", ", titles);
 		}
 		return null;
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+
+		// Weather layers available for opengl only
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		WeatherTileResourcesManager weatherResourcesManager = mapContext != null ? mapContext.getWeatherTileResourcesManager() : null;
+		if (weatherResourcesManager == null) {
+			return;
+		}
+
+		// TODO: acquire all weather bands settings from app's settings
+		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
+
+		String cloudColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "cloud_color.txt").getAbsolutePath();
+		GeoBandSettings cloudBandSettings = new GeoBandSettings("%", "%d",
+				"%d", "%", 0.5f, cloudColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Cloud.swigValue(), cloudBandSettings);
+
+		String tempColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "temperature_color.txt").getAbsolutePath();
+		GeoBandSettings tempBandSettings = new GeoBandSettings("°C", "%d",
+				"%d", "°C", 0.5f, tempColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Temperature.swigValue(), tempBandSettings);
+
+		String pressureColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "pressure_color.txt").getAbsolutePath();
+		GeoBandSettings pressureBandSettings = new GeoBandSettings("Pa", "%d",
+				"%d", "Pa", 0.5f, pressureColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Pressure.swigValue(), pressureBandSettings);
+
+		String windColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "wind_color.txt").getAbsolutePath();
+		GeoBandSettings windBandSettings = new GeoBandSettings("m/s", "%d",
+				"%d", "m/s", 0.7f, windColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.WindSpeed.swigValue(), windBandSettings);
+
+		String precipColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "precip_color.txt").getAbsolutePath();
+		GeoBandSettings precipBandSettings = new GeoBandSettings("kg/(m^2 s)", "%d",
+				"%d", "kg/(m^2 s)", 0.5f, precipColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Precipitation.swigValue(), precipBandSettings);
+
+		weatherResourcesManager.setBandSettings(bandSettings);
+
+		if (isActive()) {
+			if (weatherLayerLow == null || weatherLayerHigh == null) {
+				createLayers();
+			}
+			if (!mapView.isLayerExists(weatherLayerLow)) {
+				mapView.addLayer(weatherLayerLow, ZORDER_RASTER_LOW);
+			}
+			if (!mapView.isLayerExists(weatherLayerHigh)) {
+				mapView.addLayer(weatherLayerHigh, ZORDER_RASTER_HIGH);
+			}
+			mapView.refreshMap();
+		} else {
+			mapView.removeLayer(weatherLayerLow);
+			mapView.removeLayer(weatherLayerHigh);
+		}
+	}
+
+	private void createLayers() {
+		weatherLayerLow = new WeatherRasterLayer(app, WeatherLayer.LOW);
+		weatherLayerHigh = new WeatherRasterLayer(app, WeatherLayer.HIGH);
 	}
 
 	public void setWeatherEnabled(@NonNull ApplicationMode appMode, boolean enable) {

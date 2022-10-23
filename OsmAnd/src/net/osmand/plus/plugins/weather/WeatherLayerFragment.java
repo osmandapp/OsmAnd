@@ -88,6 +88,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 					boolean newState = !weatherPlugin.isLayerEnabled(appMode, configureLayer);
 					weatherPlugin.toggleLayerEnable(appMode, configureLayer, newState);
 					updateScreenMode(newState);
+					mapActivity.refreshMap();
 				});
 	}
 

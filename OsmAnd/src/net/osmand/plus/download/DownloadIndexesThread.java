@@ -566,6 +566,7 @@ public class DownloadIndexesThread {
 			List<String> warnings = new ArrayList<>();
 			manager.indexVoiceFiles(this);
 			manager.indexFontFiles(this);
+			manager.indexWeatherFiles(this);
 			if (vectorMapsToReindex) {
 				warnings = manager.indexingMaps(this, filesToReindex);
 			}

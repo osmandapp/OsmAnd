@@ -89,6 +89,8 @@ public class IndexConstants {
 	public static final String ROUTING_PROFILES_DIR = "routing/";
 	public static final String PLUGINS_DIR = "plugins/";
 	public static final String HEIGHTMAP_INDEX_DIR = "heightmap/";
+	public static final String WEATHER_INDEX_DIR = "weather/";
+	public static final String WEATHER_FORECAST_DIR = "weather_forecast/";
 
 	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
 }
