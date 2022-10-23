@@ -574,7 +574,8 @@ public class PoiFiltersHelper {
 			return;
 		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
-		for (String f : application.getSettings().getSelectedPoiFilters()) {
+		Set<String> selectedFiltersIds = application.getSettings().getSelectedPoiFilters();
+		for (String f : selectedFiltersIds) {
 			PoiUIFilter filter = getFilterById(f);
 			if (filter != null) {
 				selectedPoiFilters.add(filter);
