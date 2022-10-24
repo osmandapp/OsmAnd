@@ -56,7 +56,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	public EntityInfo getEntityInfo(long id) {
 		return null;
 	}
-	
+
 	@Override
 	public Entity commitEntityImpl(Action action, Entity entity, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
@@ -133,8 +133,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 				entity.putTagNoLC(poiType.getEditOsmTag2(), poiType.getEditOsmValue2());
 			}
 		}
-		if (!Algorithms.isEmpty(mapObject.getName())) {
-			entity.putTagNoLC(OSMTagKey.NAME.getValue(), mapObject.getName());
+		String name = mapObject.getName();
+		if (!Algorithms.isEmpty(name) && (amenity == null || !Algorithms.stringsEqual(amenity.getRef(), name))) {
+			entity.putTagNoLC(OSMTagKey.NAME.getValue(), name);
 		}
 		if (amenity != null) {
 			if (!Algorithms.isEmpty(amenity.getOpeningHours())) {
