@@ -2696,25 +2696,13 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT = new StringPreference(this, "last_selected_gpx_track_for_new_point", null).makeGlobal().cache();
 
-	private final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP__OUTDATED = new StringPreference(this, "selected_poi_filter_for_map", null).makeProfile().cache();
-
 	// Avoid using this property, probably you need to use PoiFiltersHelper.getSelectedPoiFilters()
 	private final ListStringPreference SELECTED_POI_FILTER_FOR_MAP = (ListStringPreference)
 			new ListStringPreference(this, "selected_poi_filter_for_map_list", null, ",,").makeProfile().cache();
 
 	public Set<String> getSelectedPoiFilters() {
 		List<String> result = SELECTED_POI_FILTER_FOR_MAP.getStringsList();
-		return result != null ? new HashSet<>(result) : getSelectedPoiFiltersOld();
-	}
-
-	// Get value from the old version of the preference
-	private Set<String> getSelectedPoiFiltersOld() {
-		Set<String> result = new LinkedHashSet<>();
-		String filtersId = SELECTED_POI_FILTER_FOR_MAP__OUTDATED.get();
-		if (filtersId != null && !filtersId.trim().isEmpty()) {
-			Collections.addAll(result, filtersId.split(","));
-		}
-		return result;
+		return result != null ? new HashSet<>(result) : Collections.emptySet();
 	}
 
 	public void setSelectedPoiFilters(Set<String> poiFilters) {
@@ -2724,7 +2712,6 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
 		List<String> asList = poiFilters != null ? new ArrayList<>(poiFilters) : null;
 		SELECTED_POI_FILTER_FOR_MAP.setStringsListForProfile(appMode, asList);
-		SELECTED_POI_FILTER_FOR_MAP__OUTDATED.resetToDefault();
 	}
 
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
