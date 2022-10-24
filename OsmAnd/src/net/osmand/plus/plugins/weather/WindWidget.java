@@ -5,18 +5,24 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.jni.WeatherBand;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
-public class WindWidget extends TextInfoWidget {
+public class WindWidget extends WeatherWidget {
 
-	public WindWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, WEATHER_WIND_WIDGET);
+	public WindWidget(@NonNull MapActivity mapActivity, @NonNull WeatherPlugin weatherPlugin) {
+		super(mapActivity, weatherPlugin, WEATHER_WIND_WIDGET, (short) WeatherBand.WindSpeed.swigValue());
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
-
+	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
+		getMyApplication().runInUIThread(() -> {
+			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
+				setText(formattedValue, "m/s");
+			} else {
+				setText(null, null);
+			}
+		});
 	}
 }

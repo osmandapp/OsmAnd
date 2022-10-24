@@ -28,9 +28,9 @@ public enum WeatherInfoType {
 	}
 
 	@StringRes
-	private int titleId;
+	private final int titleId;
 	@DrawableRes
-	private int iconId;
+	private final int iconId;
 
 	@StringRes
 	public int getTitleId() {

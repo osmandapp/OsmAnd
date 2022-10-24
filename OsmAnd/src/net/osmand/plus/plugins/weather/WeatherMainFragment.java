@@ -79,6 +79,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 					boolean newState = !weatherPlugin.isAnyDataVisible(appMode);
 					weatherPlugin.setWeatherEnabled(appMode, newState);
 					updateScreenMode(newState);
+					mapActivity.refreshMap();
 				});
 	}
 

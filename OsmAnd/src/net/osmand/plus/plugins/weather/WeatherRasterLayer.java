@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.BandIndexList;
 import net.osmand.core.jni.MapLayerConfiguration;
@@ -15,9 +13,9 @@ import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 
@@ -31,7 +29,9 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	private WeatherRasterLayerProvider provider;
 
 	private final WeatherLayer weatherLayer;
+	private boolean weatherEnabledCached;
 	private List<WeatherInfoType> enabledLayersCached;
+	private int bandsSettingsVersionCached;
 	private long dateTime;
 	private long cachedDateTime;
 
@@ -54,12 +54,6 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	public void setDateTime(long dateTime) {
 		this.dateTime = dateTime;
-	}
-
-	@Nullable
-	private WeatherTileResourcesManager getResourcesManager() {
-		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-		return mapContext != null ? mapContext.getWeatherTileResourcesManager() : null;
 	}
 
 	@Override
@@ -139,7 +133,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = getResourcesManager();
+		WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null) {
 			return;
 		}
@@ -147,13 +141,20 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		List<WeatherInfoType> enabledLayers = weatherPlugin.getEnabledLayers(settings.getApplicationMode());
+		ApplicationMode appMode = settings.getApplicationMode();
+		boolean weatherEnabled = weatherPlugin.isWeatherEnabled(appMode);
+		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
+		weatherEnabledCached = weatherEnabled;
+		List<WeatherInfoType> enabledLayers = weatherPlugin.getEnabledLayers(appMode);
 		boolean layersChanged = !Algorithms.objectEquals(enabledLayers, enabledLayersCached);
 		enabledLayersCached = enabledLayers;
+		int bandsSettingsVersion = weatherPlugin.getBandsSettingsVersion();
+		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
+		bandsSettingsVersionCached = bandsSettingsVersion;
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
-		if (layersChanged || dateTimeChanged || mapActivityInvalidated) {
-			if (!enabledLayers.isEmpty()) {
+		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged || mapActivityInvalidated) {
+			if (weatherEnabled && !enabledLayers.isEmpty()) {
 				recreateLayerProvider(mapRenderer, resourcesManager);
 			} else {
 				resetLayerProvider();

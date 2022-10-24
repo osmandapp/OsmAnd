@@ -64,7 +64,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WeatherPlugin extends OsmandPlugin {
 
@@ -74,13 +76,13 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public final OsmandPreference<Boolean> WX_CONTOURS_ENABLED;
 	public final OsmandPreference<Integer> WX_CONTOURS_TRANSPARENCY;
-	public final EnumStringPreference WX_CONTOURS_TYPE;
+	public final EnumStringPreference<WeatherInfoType> WX_CONTOURS_TYPE;
 
-	public final EnumStringPreference WX_UNIT_TEMPERATURE;
-	public final EnumStringPreference WX_UNIT_PRECIPITATION;
-	public final EnumStringPreference WX_UNIT_WIND;
-	public final EnumStringPreference WX_UNIT_CLOUDS;
-	public final EnumStringPreference WX_UNIT_PRESSURE;
+	public final EnumStringPreference<TemperatureConstants> WX_UNIT_TEMPERATURE;
+	public final EnumStringPreference<PrecipConstants> WX_UNIT_PRECIPITATION;
+	public final EnumStringPreference<WindConstants> WX_UNIT_WIND;
+	public final EnumStringPreference<CloudConstants> WX_UNIT_CLOUDS;
+	public final EnumStringPreference<PressureConstants> WX_UNIT_PRESSURE;
 
 	public static int DEFAULT_TRANSPARENCY = 50;
 
@@ -90,6 +92,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerHigh;
 	private static final float ZORDER_RASTER_LOW = 0.8f;
 	private static final float ZORDER_RASTER_HIGH = 0.81f;
+	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -107,13 +110,19 @@ public class WeatherPlugin extends OsmandPlugin {
 
 		WX_CONTOURS_ENABLED = registerBooleanPreference("map_setting_wx_contours_enabled", true).makeProfile();
 		WX_CONTOURS_TRANSPARENCY = registerIntPreference("map_setting_wx_contours_transparency", DEFAULT_TRANSPARENCY).makeProfile();
-		WX_CONTOURS_TYPE = (EnumStringPreference) registerEnumStringPreference("map_setting_wx_contours_type", TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
+		WX_CONTOURS_TYPE = (EnumStringPreference<WeatherInfoType>) registerEnumStringPreference(
+				"map_setting_wx_contours_type", TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
 
-		WX_UNIT_TEMPERATURE = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		WX_UNIT_PRESSURE = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
-		WX_UNIT_WIND = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_wind", WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
-		WX_UNIT_CLOUDS = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_cloud", CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
-		WX_UNIT_PRECIPITATION = (EnumStringPreference) registerEnumStringPreference("map_settings_weather_precip", PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
+		WX_UNIT_TEMPERATURE = (EnumStringPreference<TemperatureConstants>) registerEnumStringPreference(
+				"map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
+		WX_UNIT_PRESSURE = (EnumStringPreference<PressureConstants>) registerEnumStringPreference(
+				"map_settings_weather_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
+		WX_UNIT_WIND = (EnumStringPreference<WindConstants>) registerEnumStringPreference(
+				"map_settings_weather_wind", WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
+		WX_UNIT_CLOUDS = (EnumStringPreference<CloudConstants>) registerEnumStringPreference(
+				"map_settings_weather_cloud", CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
+		WX_UNIT_PRECIPITATION = (EnumStringPreference<PrecipConstants>) registerEnumStringPreference(
+				"map_settings_weather_precip", PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
 	}
 
 	@Override
@@ -156,7 +165,6 @@ public class WeatherPlugin extends OsmandPlugin {
 		return SettingsScreenType.WEATHER_SETTINGS;
 	}
 
-
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
@@ -188,19 +196,18 @@ public class WeatherPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
-				return new TemperatureWidget(mapActivity);
+				return new TemperatureWidget(mapActivity, this);
 			case WEATHER_PRECIPITATION_WIDGET:
-				return new PrecipitationWidget(mapActivity);
+				return new PrecipitationWidget(mapActivity, this);
 			case WEATHER_WIND_WIDGET:
-				return new WindWidget(mapActivity);
+				return new WindWidget(mapActivity, this);
 			case WEATHER_CLOUDS_WIDGET:
-				return new CloudsWidget(mapActivity);
+				return new CloudsWidget(mapActivity, this);
 			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new AirPreassureWidget(mapActivity);
+				return new AirPressureWidget(mapActivity, this);
 		}
 		return null;
 	}
-
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
@@ -234,7 +241,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		}
 	}
 
-	@NonNull
+	@Nullable
 	public String getWeatherTypesSummary(@NonNull List<WeatherInfoType> types) {
 		if (!Algorithms.isEmpty(types)) {
 			List<String> titles = new ArrayList<>();
@@ -254,46 +261,9 @@ public class WeatherPlugin extends OsmandPlugin {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 
 		// Weather layers available for opengl only
-		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-		WeatherTileResourcesManager weatherResourcesManager = mapContext != null ? mapContext.getWeatherTileResourcesManager() : null;
-		if (weatherResourcesManager == null) {
+		if (!updateBandsSettings()) {
 			return;
 		}
-
-		// TODO: acquire all weather bands settings from app's settings
-		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
-
-		String cloudColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "cloud_color.txt").getAbsolutePath();
-		GeoBandSettings cloudBandSettings = new GeoBandSettings("%", "%d",
-				"%d", "%", 0.5f, cloudColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Cloud.swigValue(), cloudBandSettings);
-
-		String tempColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "temperature_color.txt").getAbsolutePath();
-		GeoBandSettings tempBandSettings = new GeoBandSettings("°C", "%d",
-				"%d", "°C", 0.5f, tempColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Temperature.swigValue(), tempBandSettings);
-
-		String pressureColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "pressure_color.txt").getAbsolutePath();
-		GeoBandSettings pressureBandSettings = new GeoBandSettings("Pa", "%d",
-				"%d", "Pa", 0.5f, pressureColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Pressure.swigValue(), pressureBandSettings);
-
-		String windColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "wind_color.txt").getAbsolutePath();
-		GeoBandSettings windBandSettings = new GeoBandSettings("m/s", "%d",
-				"%d", "m/s", 0.7f, windColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.WindSpeed.swigValue(), windBandSettings);
-
-		String precipColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "precip_color.txt").getAbsolutePath();
-		GeoBandSettings precipBandSettings = new GeoBandSettings("kg/(m^2 s)", "%d",
-				"%d", "kg/(m^2 s)", 0.5f, precipColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Precipitation.swigValue(), precipBandSettings);
-
-		weatherResourcesManager.setBandSettings(bandSettings);
 
 		if (isActive()) {
 			if (weatherLayerLow == null || weatherLayerHigh == null) {
@@ -310,6 +280,88 @@ public class WeatherPlugin extends OsmandPlugin {
 			mapView.removeLayer(weatherLayerLow);
 			mapView.removeLayer(weatherLayerHigh);
 		}
+	}
+
+	@Nullable
+	public WeatherTileResourcesManager getWeatherResourcesManager() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		return mapContext != null ? mapContext.getWeatherTileResourcesManager() : null;
+	}
+
+	public boolean updateBandsSettings() {
+		WeatherTileResourcesManager weatherResourcesManager = getWeatherResourcesManager();
+		if (weatherResourcesManager == null) {
+			return false;
+		}
+
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		Map<WeatherInfoType, Integer> transparencies = getLayersTransparencies(appMode);
+
+		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
+
+		// TODO: read unit, unitFormatGeneral and unitFormatPrecise from OsmAnd settings
+		String cloudUnit = "%";
+		String cloudUnitFormatGeneral = "%d"; // For countour lines
+		String cloudUnitFormatPrecise = "%d"; // For widgets
+		Integer cloudTransparencyObj = transparencies.get(WeatherInfoType.CLOUDS);
+		float cloudTransparency = cloudTransparencyObj != null ? cloudTransparencyObj / 100f : 0.5f;
+		String cloudColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "cloud_color.txt").getAbsolutePath();
+		GeoBandSettings cloudBandSettings = new GeoBandSettings(cloudUnit, cloudUnitFormatGeneral,
+				cloudUnitFormatPrecise, "%", cloudTransparency, cloudColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Cloud.swigValue(), cloudBandSettings);
+
+		String tempUnit = "°C";
+		String tempUnitFormatGeneral = "%d";
+		String tempUnitFormatPrecise = "%d";
+		Integer tempTransparencyObj = transparencies.get(WeatherInfoType.TEMPERATURE);
+		float tempTransparency = tempTransparencyObj != null ? tempTransparencyObj / 100f : 0.5f;
+		String tempColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "temperature_color.txt").getAbsolutePath();
+		GeoBandSettings tempBandSettings = new GeoBandSettings(tempUnit, tempUnitFormatGeneral,
+				tempUnitFormatPrecise, "°C", tempTransparency, tempColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Temperature.swigValue(), tempBandSettings);
+
+		String pressureUnit = "hPa";
+		String pressureUnitFormatGeneral = "%d";
+		String pressureUnitFormatPrecise = "%d";
+		Integer pressureTransparencyObj = transparencies.get(WeatherInfoType.PRESSURE);
+		float pressureTransparency = pressureTransparencyObj != null ? pressureTransparencyObj / 100f : 0.5f;
+		String pressureColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "pressure_color.txt").getAbsolutePath();
+		GeoBandSettings pressureBandSettings = new GeoBandSettings(pressureUnit, pressureUnitFormatGeneral,
+				pressureUnitFormatPrecise, "Pa", pressureTransparency, pressureColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Pressure.swigValue(), pressureBandSettings);
+
+		String windUnit = "m/s";
+		String windUnitFormatGeneral = "%d";
+		String windUnitFormatPrecise = "%d";
+		Integer windTransparencyObj = transparencies.get(WeatherInfoType.WIND);
+		float windTransparency = windTransparencyObj != null ? windTransparencyObj / 100f : 0.5f;
+		String windColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "wind_color.txt").getAbsolutePath();
+		GeoBandSettings windBandSettings = new GeoBandSettings(windUnit, windUnitFormatGeneral,
+				windUnitFormatPrecise, "m/s", windTransparency, windColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.WindSpeed.swigValue(), windBandSettings);
+
+		String precipUnit = "mm";
+		String precipUnitFormatGeneral = "%d";
+		String precipUnitFormatPrecise = "%d";
+		Integer precipTransparencyObj = transparencies.get(WeatherInfoType.PRECIPITATION);
+		float precipTransparency = precipTransparencyObj != null ? precipTransparencyObj / 100f : 0.5f;
+		String precipColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "precip_color.txt").getAbsolutePath();
+		GeoBandSettings precipBandSettings = new GeoBandSettings(precipUnit, precipUnitFormatGeneral,
+				precipUnitFormatPrecise, "kg/(m^2 s)", precipTransparency, precipColorProfilePath,
+				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+		bandSettings.set((short) WeatherBand.Precipitation.swigValue(), precipBandSettings);
+
+		weatherResourcesManager.setBandSettings(bandSettings);
+		bandsSettingsVersion.incrementAndGet();
+		return true;
+	}
+
+	public int getBandsSettingsVersion() {
+		return bandsSettingsVersion.get();
 	}
 
 	private void createLayers() {
@@ -350,7 +402,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@NonNull
 	public WeatherInfoType getSelectedContoursType(@NonNull ApplicationMode appMode) {
-		return (WeatherInfoType) WX_CONTOURS_TYPE.getModeValue(appMode);
+		return WX_CONTOURS_TYPE.getModeValue(appMode);
 	}
 
 	public void setSelectedContoursType(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType contoursType) {
@@ -405,17 +457,13 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer, @NonNull Integer transparency) {
 		Map<WeatherInfoType, Integer> transparencies = getLayersTransparencies(appMode);
-		if (transparency != null) {
-			transparencies.put(layer, transparency);
-		} else {
-			transparencies.remove(layer);
-		}
+		transparencies.put(layer, transparency);
 		List<String> valuesToSave = new ArrayList<>();
-		for (WeatherInfoType key : transparencies.keySet()) {
-			int value = transparencies.get(key);
-			valuesToSave.add(key.name() + ":" + value);
+		for (Entry<WeatherInfoType, Integer> layerTransp : transparencies.entrySet()) {
+			valuesToSave.add(layerTransp.getKey().name() + ":" + layerTransp.getValue());
 		}
 		WX_LAYERS_TRANSPARENCY.setModeValues(appMode, valuesToSave);
+		updateBandsSettings();
 	}
 
 	@NonNull

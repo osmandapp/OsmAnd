@@ -35,8 +35,8 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherLayerFragment.class.getSimpleName();
 
-	private static int TRANSPARENCY_MIN = 0;
-	private static int TRANSPARENCY_MAX = 100;
+	private static final int TRANSPARENCY_MIN = 0;
+	private static final int TRANSPARENCY_MAX = 100;
 
 	private OsmandApplication app;
 	private MapActivity mapActivity;
@@ -110,6 +110,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			if (fromUser) {
 				weatherPlugin.setLayerTransparency(appMode, configureLayer, (int) newValue);
 				tvCurrentValue.setText(formatPercent((int) newValue));
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -124,9 +125,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			View card = container.findViewById(R.id.measurement_units_card);
 			View button = card.findViewById(R.id.measurement_units_button);
 			setupSelectableBackground(button);
-			button.setOnClickListener(v -> {
-				showChooseUnitDialog(configureLayer);
-			});
+			button.setOnClickListener(v -> showChooseUnitDialog(configureLayer));
 			updateMeasurementUnitsCard();
 		} else {
 			container.setVisibility(View.GONE);
@@ -229,6 +228,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				entries, nightMode, selectedUnitIndex, app, profileColor, themeRes, v -> {
 					weatherPlugin.setSelectedLayerUnit(appMode, layer, values[(int) v.getTag()]);
 					updateMeasurementUnitsCard();
+					mapActivity.refreshMap();
 				}
 		);
 
