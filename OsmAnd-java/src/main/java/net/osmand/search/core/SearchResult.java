@@ -19,7 +19,7 @@ import static net.osmand.search.SearchUICore.SEARCH_PRIORITY_COEF;
 
 public class SearchResult {
 	private static final double MAX_TYPE_WEIGHT = 10;
-	public static final String DELIMITER = " ";
+	private static final String HYPHEN = "-";
 	private static final int NEAREST_METERS_LIMIT = 30000;
 	private static final int COMPLETE_MATCH_COEF = 100;
 
@@ -141,8 +141,14 @@ public class SearchResult {
 	}
 
 	private SearchMatchResult allWordsMatched(String name, boolean completeMatch) {
-		List<String> localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>());
 		List<String> searchPhraseNames = getSearchPhraseNames();
+		List<String> localResultNames;
+		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
+			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN);
+		} else {
+			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS);
+		}
+		
 		String matchedPhraseName = null;
 		String matchedResultName = null;
 		boolean wordMatched;
