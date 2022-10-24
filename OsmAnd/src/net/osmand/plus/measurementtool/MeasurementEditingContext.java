@@ -190,8 +190,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isReversedRoute() {
-		MeasurementModeCommand command = commandManager.getLastCommand();
-		return command != null && command.getType() == REVERSE_POINTS;
+		for (MeasurementModeCommand command : commandManager.getAppliedCommands()) {
+			if (command.getType() == REVERSE_POINTS) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<List<WptPt>> getOriginalSegmentPointsList() {
