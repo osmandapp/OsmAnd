@@ -1,7 +1,6 @@
 package net.osmand.search.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +20,8 @@ import static net.osmand.search.SearchUICore.SEARCH_PRIORITY_COEF;
 public class SearchResult {
 	private static final double MAX_TYPE_WEIGHT = 10;
 	public static final String DELIMITER = " ";
+	private static final int NEAREST_METERS_LIMIT = 30000;
+	private static final int COMPLETE_MATCH_COEF = 100;
 
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
@@ -72,12 +73,25 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		boolean allWordsMatched = allWordsMatched(localeName) || checkOtherNames();
-		if (objectType == ObjectType.POI_TYPE) {
-			allWordsMatched = false;
+		boolean completeMatch = false;
+		SearchMatchResult searchMatchResult = allWordsMatched(localeName, completeMatch);
+		if (!searchMatchResult.allWordsMatched) {
+			searchMatchResult = checkOtherNames(completeMatch);
 		}
-
-		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF : ObjectType.getTypeWeight(objectType);
+		
+		if (objectType == ObjectType.POI_TYPE) {
+			searchMatchResult.allWordsMatched = false;
+		}
+		
+		double res;
+		if (searchMatchResult.allWordsMatched) {
+			res = useCompleteMatch(searchMatchResult)
+					? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF + COMPLETE_MATCH_COEF
+					: ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF;
+		} else {
+			res = ObjectType.getTypeWeight(objectType);
+		}
+		
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 			res = ObjectType.getTypeWeight(objectType);
@@ -88,15 +102,27 @@ public class SearchResult {
 		return res;
 	}
 	
-	private boolean checkOtherNames() {
-		if (otherNames != null) {
-			for (String otherName : otherNames) {
-				if (allWordsMatched(otherName)) {
-					return true;
-				}
+	private boolean useCompleteMatch(SearchMatchResult searchMatchResult) {
+		if (searchMatchResult.completeMatch) {
+			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE) {
+				return true;
+			} else {
+				return MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(), this.location) <= NEAREST_METERS_LIMIT;
 			}
 		}
 		return false;
+	}
+	
+	private SearchMatchResult checkOtherNames(boolean completeMatch) {
+		if (otherNames != null) {
+			for (String otherName : otherNames) {
+				SearchMatchResult res = allWordsMatched(otherName, completeMatch);
+				if (res.allWordsMatched) {
+					return res;
+				}
+			}
+		}
+		return new SearchMatchResult(false, false);
 	}
 
 	public int getDepth() {
@@ -114,30 +140,46 @@ public class SearchResult {
 		return inc;
 	}
 
-	private boolean allWordsMatched(String name) {
+	private SearchMatchResult allWordsMatched(String name, boolean completeMatch) {
 		List<String> localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>());
 		List<String> searchPhraseNames = getSearchPhraseNames();
-		
+		String matchedPhraseName = null;
+		String matchedResultName = null;
+		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
-			return false;
+			return new SearchMatchResult(false, false);
 		}
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
-			boolean wordMatched = false;
+			wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
 				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
 				if (r == 0) {
 					wordMatched = true;
+					matchedPhraseName = localResultNames.get(i);
+					matchedResultName = searchPhraseName;
 					idxMatchedWord = i;
 					break;
 				}
 			}
 			if (!wordMatched) {
-				return false;
+				return new SearchMatchResult(false, false);
 			}
 		}
+		if (matchedPhraseName != null && matchedResultName != null && searchPhraseNames.size() == localResultNames.size()) {
+			completeMatch = true;
+		}
 		
-		return true;
+		return new SearchMatchResult(true, completeMatch);
+	}
+	
+	static class SearchMatchResult {
+		boolean allWordsMatched;
+		boolean completeMatch;
+		SearchMatchResult(boolean allWordsMatched, boolean completeMatch) {
+			this.allWordsMatched = allWordsMatched;
+			this.completeMatch = completeMatch;
+		}
 	}
 
 	private List<String> getSearchPhraseNames() {
