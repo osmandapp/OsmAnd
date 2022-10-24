@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.plus.views.OsmandMapTileView.MIN_ALTITUDE_VALUE;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -24,7 +22,6 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -81,12 +78,12 @@ import net.osmand.plus.resources.SearchOsmandRegionTask;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
@@ -480,28 +477,17 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public String getFormattedAltitude() {
+		Double altitude = null;
+		OsmandApplication app = null;
 		MapActivity activity = getMapActivity();
 		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (activity != null && devPlugin != null && devPlugin.isHeightmapEnabled()) {
-			LatLon point = getLatLon();
+			app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
-			if (point != null && mapRenderer != null) {
-				int x31 = MapUtils.get31TileNumberX(point.getLongitude());
-				int y31 = MapUtils.get31TileNumberY(point.getLatitude());
-				PointI screenPoint = new PointI();
-				if (mapRenderer.getScreenPointFromLocation(new PointI(x31, y31), screenPoint, true)) {
-					PointI elevatedPoint = new PointI();
-					if (mapRenderer.getLocationFromElevatedPoint(screenPoint, elevatedPoint)) {
-						double altitude = mapRenderer.getLocationHeightInMeters(elevatedPoint);
-						if (altitude > MIN_ALTITUDE_VALUE) {
-							return OsmAndFormatter.getFormattedAlt(altitude, activity.getMyApplication());
-						}
-					}
-				}
-			}
+			altitude = NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon());
 		}
-		return null;
+		return altitude != null ? OsmAndFormatter.getFormattedAlt(altitude, app) : null;
 	}
 
 	public int getRightIconId() {
