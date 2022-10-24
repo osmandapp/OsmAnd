@@ -73,19 +73,16 @@ public class SearchResult {
 
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
-		boolean completeMatch = false;
-		SearchMatchResult searchMatchResult = allWordsMatched(localeName, completeMatch);
-		if (!searchMatchResult.allWordsMatched) {
-			searchMatchResult = checkOtherNames(completeMatch);
-		}
+		CompleteMatchResult completeMatchRes = new CompleteMatchResult();
+		boolean allWordsMatched = allWordsMatched(localeName, completeMatchRes) || checkOtherNames(completeMatchRes);
 		
 		if (objectType == ObjectType.POI_TYPE) {
-			searchMatchResult.allWordsMatched = false;
+			allWordsMatched = false;
 		}
 		
 		double res;
-		if (searchMatchResult.allWordsMatched) {
-			res = useCompleteMatch(searchMatchResult)
+		if (allWordsMatched) {
+			res = useCompleteMatch(completeMatchRes)
 					? ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF + COMPLETE_MATCH_COEF
 					: ObjectType.getTypeWeight(objectType) * SEARCH_PRIORITY_COEF;
 		} else {
@@ -102,8 +99,8 @@ public class SearchResult {
 		return res;
 	}
 	
-	private boolean useCompleteMatch(SearchMatchResult searchMatchResult) {
-		if (searchMatchResult.completeMatch) {
+	private boolean useCompleteMatch(CompleteMatchResult completeMatchRes) {
+		if (completeMatchRes.completeMatch) {
 			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE) {
 				return true;
 			} else {
@@ -113,16 +110,15 @@ public class SearchResult {
 		return false;
 	}
 	
-	private SearchMatchResult checkOtherNames(boolean completeMatch) {
+	private boolean checkOtherNames(CompleteMatchResult completeMatchRes) {
 		if (otherNames != null) {
 			for (String otherName : otherNames) {
-				SearchMatchResult res = allWordsMatched(otherName, completeMatch);
-				if (res.allWordsMatched) {
-					return res;
+				if (allWordsMatched(otherName, completeMatchRes)) {
+					return true;
 				}
 			}
 		}
-		return new SearchMatchResult(false, false);
+		return false;
 	}
 
 	public int getDepth() {
@@ -140,7 +136,7 @@ public class SearchResult {
 		return inc;
 	}
 
-	private SearchMatchResult allWordsMatched(String name, boolean completeMatch) {
+	private boolean allWordsMatched(String name, CompleteMatchResult completeMatchRes) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
@@ -153,7 +149,7 @@ public class SearchResult {
 		String matchedResultName = null;
 		boolean wordMatched;
 		if (searchPhraseNames.isEmpty()) {
-			return new SearchMatchResult(false, false);
+			return false;
 		}
 		int idxMatchedWord = -1;
 		for (String searchPhraseName : searchPhraseNames) {
@@ -169,23 +165,20 @@ public class SearchResult {
 				}
 			}
 			if (!wordMatched) {
-				return new SearchMatchResult(false, false);
+				return false;
 			}
 		}
 		if (matchedPhraseName != null && matchedResultName != null && searchPhraseNames.size() == localResultNames.size()) {
-			completeMatch = true;
+			completeMatchRes.completeMatch = true;
 		}
 		
-		return new SearchMatchResult(true, completeMatch);
+		return true;
 	}
 	
-	static class SearchMatchResult {
-		boolean allWordsMatched;
+	static class CompleteMatchResult {
 		boolean completeMatch;
-		SearchMatchResult(boolean allWordsMatched, boolean completeMatch) {
-			this.allWordsMatched = allWordsMatched;
-			this.completeMatch = completeMatch;
-		}
+		
+		CompleteMatchResult(){}
 	}
 
 	private List<String> getSearchPhraseNames() {
