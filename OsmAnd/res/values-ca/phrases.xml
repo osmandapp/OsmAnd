@@ -201,7 +201,7 @@
     <string name="poi_village">Poble</string>
     <string name="poi_hamlet">Llogaret</string>
     <string name="poi_isolated_dwelling">Assentament aïllat</string>
-    <string name="poi_suburb">Suburbi</string>
+    <string name="poi_suburb">Suburbi/Districte</string>
     <string name="poi_place_allotments">Horts familiars</string>
     <string name="poi_place_farm">Granja</string>
     <string name="poi_pharmacy">Farmàcia</string>
@@ -877,7 +877,7 @@
     <string name="poi_access_delivery">Accés per a lliuraments</string>
     <string name="poi_access_agricultural">Accés per a activitats agrícoles</string>
     <string name="poi_monitoring_station">Centre de control</string>
-    <string name="poi_capital">Sí</string>
+    <string name="poi_capital">Sí;Capital</string>
     <string name="poi_fee_no">No</string>
     <string name="poi_email">Correu electrònic</string>
     <string name="poi_fax">Fax</string>

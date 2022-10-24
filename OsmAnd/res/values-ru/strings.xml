@@ -4787,4 +4787,7 @@
     <string name="external_sensors_plugin_name">Внешние датчики</string>
     <string name="map_center_widget">Координаты: центр карты</string>
     <string name="map_widget_altitude_map_center">Высота: центр карты</string>
+    <string name="map_widget_altitude_desc">Виджеты показывают высоту над уровнем моря для текущей геолокации или для текущего центра карты</string>
+    <string name="map_widget_altitude_current_location">Высота: текущее местоположение</string>
+    <string name="map_widget_rendering_fps_desc">Показывает, насколько быстро отображаются и обновляются карта и ее элементы (выражается в кадрах в секунду или FPS).</string>
 </resources>
