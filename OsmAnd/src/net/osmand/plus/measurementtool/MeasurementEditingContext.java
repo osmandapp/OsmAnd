@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
+import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.REVERSE_POINTS;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 import android.util.Pair;
@@ -188,9 +189,18 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		this.checkApproximation = checkApproximation;
 	}
 
+	public boolean isReversedRoute() {
+		for (MeasurementModeCommand command : commandManager.getAppliedCommands()) {
+			if (command.getType() == REVERSE_POINTS) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public List<List<WptPt>> getOriginalSegmentPointsList() {
 		MeasurementModeCommand command = commandManager.getLastCommand();
-		if (command.getType() == APPROXIMATE_POINTS) {
+		if (command != null && command.getType() == APPROXIMATE_POINTS) {
 			return ((ApplyGpxApproximationCommand) command).getOriginalSegmentPointsList();
 		}
 		return null;
