@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -42,8 +43,15 @@ public class TargetDistanceWidget extends TextInfoWidget {
 	private float getTargetDistanceInMeters() {
 		MapRendererView mapRenderer = mapView.getMapRenderer();
 		if (mapRenderer != null) {
-			PointI location = mapRenderer.getTarget();
-			return mapRenderer.getMapTargetDistance(location, true) * 1000;
+			PointI screenPoint = mapRenderer.getTargetScreenPosition();
+			if (screenPoint.getX() < 0 || screenPoint.getY() < 0) {
+				RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+				screenPoint = new PointI(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());				
+			}
+			PointI location = new PointI();
+			if (mapRenderer.getLocationFromElevatedPoint(screenPoint, location)) {
+				return mapRenderer.getMapTargetDistance(location, true) * 1000;
+			}			
 		}
 		return 0;
 	}

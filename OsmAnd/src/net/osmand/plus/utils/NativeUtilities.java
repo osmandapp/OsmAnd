@@ -20,7 +20,7 @@ import net.osmand.util.MapUtils;
 
 public class NativeUtilities {
 
-	public static final int MIN_ALTITUDE_VALUE = -10_000;
+	public static final int MIN_ALTITUDE_VALUE = -20_000;
 
 	public static SWIGTYPE_p_sk_spT_SkImage_const_t createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
 		return SwigUtilities.createSkImageARGB888With(
