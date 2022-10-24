@@ -50,7 +50,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 	
-	public static final int SEARCH_PRIORITY_COEF = 10;
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
@@ -952,7 +951,7 @@ public class SearchUICore {
 				SearchPhrase ph = o1.requiredSearchPhrase;
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
-				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SEARCH_PRIORITY_COEF > 1) {
+				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
 					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
