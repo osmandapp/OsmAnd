@@ -85,7 +85,8 @@ public class MeasurementCommandManager {
 		}
 	}
 
+	@Nullable
 	public MeasurementModeCommand getLastCommand() {
-		return undoCommands.getFirst();
+		return undoCommands.peekFirst();
 	}
 }
