@@ -572,7 +572,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return new WptPt();
 		}
 		WptPt pt = before.points.get(position);
-		if (position > 0 && pt.isGap()) {
+		if (updateSnapToRoad && position > 0 && pt.isGap()) {
 			WptPt prevPt = before.points.get(position - 1);
 			if (!prevPt.isGap()) {
 				prevPt.setGap();
