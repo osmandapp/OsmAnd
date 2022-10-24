@@ -14,11 +14,19 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,16 +115,55 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			case IMPORT:
 			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
+					boolean forceRead = importType == ImportType.IMPORT_FORCE_READ;
 					BackupHelper backupHelper = app.getBackupHelper();
 					PrepareBackupResult backup = backupHelper.getBackup();
+					JSONObject json = new JSONObject();
+					JSONArray itemsJson = new JSONArray();
+					try {
+						json.put("items", itemsJson);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					List<SettingsItem> filteredItems = new ArrayList<>(items);
 					for (SettingsItem item : items) {
-						item.apply();
 						String fileName = item.getFileName();
+						if (forceRead)
+						{
+							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName + BackupHelper.INFO_EXT);
+							if (remoteFile != null) {
+								try {
+									fetchRemoteFileInfo(remoteFile, itemsJson);
+									filteredItems.remove(item);
+								} catch (IOException | JSONException | UserNotRegisteredException e) {
+									NetworkSettingsHelper.LOG.error("Failed to generate item info for force read", e);
+								}
+							}
+						}
+						else {
+                        	item.apply();
+						}
+
 						if (fileName != null) {
 							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
 							if (remoteFile != null) {
 								backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 							}
+						}
+						if (forceRead)
+						{
+							try {
+								SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+								List<SettingsItem> itms = new ArrayList<>(itemsFactory.getItems());
+								for (SettingsItem it : itms) {
+									it.setShouldReplace(true);
+								}
+								itms.addAll(filteredItems);
+								items = itms;
+							} catch (JSONException e) {
+								NetworkSettingsHelper.LOG.error("Failed to read item info from json", e);
+							}
+
 						}
 					}
 				}
@@ -183,6 +230,20 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	@Nullable
 	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
 		return itemsProgress.get(type + fileName);
+	}
+
+	private void fetchRemoteFileInfo(RemoteFile remoteFile, JSONArray itemsJson) throws IOException, UserNotRegisteredException, JSONException {
+		File tempDir = FileUtils.getTempDir(app);
+		File tempFile = new File(tempDir, remoteFile.getName());
+		String error = app.getBackupHelper().downloadFile(tempFile, remoteFile, null);
+		if (Algorithms.isEmpty(error)) {
+			String jsonStr = Algorithms.getFileAsString(tempFile);
+			if (!Algorithms.isEmpty(jsonStr)) {
+				itemsJson.put(new JSONObject(jsonStr));
+			} else {
+				throw new IOException("Error reading item info: " + tempFile.getName());
+			}
+		}
 	}
 
 	public List<SettingsItem> getItems() {
