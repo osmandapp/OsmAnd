@@ -141,7 +141,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 							}
 						}
 						else {
-                        	item.apply();
+							item.apply();
 						}
 
 						if (fileName != null) {
