@@ -1061,7 +1061,7 @@
     <string name="lang_lv">Латышская</string>
     <string name="lang_lt">Летувіская</string>
     <string name="lang_mr">Маратхі</string>
-    <string name="lang_no">Нарвежская (Bokmål)</string>
+    <string name="lang_no">Нарвежская (Букмал)</string>
     <string name="lang_pl">Польская</string>
     <string name="lang_pt">Партугальская</string>
     <string name="lang_ro">Румынская</string>
@@ -4810,4 +4810,10 @@
     <string name="developer_widgets">Віджэты распрацоўшчыка</string>
     <string name="map_widget_target_distance_desc">Віджэт паказвае адлегласць ад камеры да мэтавага месца.</string>
     <string name="map_markers_desc">Віджэт паказвае адлегласць або прыблізны час прыбыцця (ПЧП) для першых двух маркераў у спісе адзнак мапы.</string>
+    <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
+    <string name="map_center_widget">Цэнтр мапы</string>
+    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
+    <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
+    <string name="ant_read_data">Чытаць даныя</string>
+    <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
 </resources>

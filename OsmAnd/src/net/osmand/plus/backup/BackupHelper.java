@@ -320,8 +320,15 @@ public class BackupHelper {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
 		if (!isLimitedFilesCollectionItem(item)
-				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
+				&& info != null && (!Algorithms.isEmpty(info.filesToUpload) || !Algorithms.isEmpty(info.filesToMerge))) {
 			for (LocalFile localFile : info.filesToUpload) {
+				File file = localFile.file;
+				if (item.equals(localFile.item) && file != null) {
+					filesToUpload.add(file);
+				}
+			}
+			for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
+				LocalFile localFile = pair.first;
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
 					filesToUpload.add(file);
@@ -823,7 +830,7 @@ public class BackupHelper {
 						it.remove();
 					}
 				}
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true);
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, false);
 			}
 
 			@Override

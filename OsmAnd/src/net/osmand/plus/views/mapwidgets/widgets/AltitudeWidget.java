@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -8,6 +9,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -16,8 +18,6 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 public class AltitudeWidget extends TextInfoWidget {
 
 	private static final String NO_VALUE = "—";
-
-	private static final int MIN_VALUE = -10_000;
 
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
@@ -63,13 +63,7 @@ public class AltitudeWidget extends TextInfoWidget {
 				if (mapRenderer != null) {
 					RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
 					PointI screenPoint = new PointI(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-					PointI center31 = new PointI();
-					if (mapRenderer.getLocationFromElevatedPoint(screenPoint, center31)) {
-						double altitude = mapRenderer.getLocationHeightInMeters(center31);
-						if (altitude > MIN_VALUE) {
-							return altitude;
-						}
-					}
+					return NativeUtilities.getAltitudeForPixelPoint(mapRenderer, screenPoint);
 				}
 			}
 		}

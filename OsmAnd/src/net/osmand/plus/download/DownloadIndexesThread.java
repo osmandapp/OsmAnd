@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -379,7 +381,7 @@ public class DownloadIndexesThread {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.map_version_changed_info);
 			builder.setPositiveButton(R.string.button_upgrade_osmandplus, (dialog, which) -> {
-				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus"));
+				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME));
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				AndroidUtils.startActivityIfSafe(ctx, intent);
 			});

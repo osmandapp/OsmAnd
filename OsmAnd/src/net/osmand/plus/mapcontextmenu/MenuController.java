@@ -21,6 +21,7 @@ import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -65,6 +66,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -76,6 +78,7 @@ import net.osmand.plus.resources.SearchOsmandRegionTask;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
@@ -471,6 +474,20 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public boolean displayDistanceDirection() {
 		return false;
+	}
+
+	public String getFormattedAltitude() {
+		Double altitude = null;
+		OsmandApplication app = null;
+		MapActivity activity = getMapActivity();
+		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (activity != null && devPlugin != null && devPlugin.isHeightmapEnabled()) {
+			app = activity.getMyApplication();
+			OsmandMapTileView mapView = activity.getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			altitude = NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon());
+		}
+		return altitude != null ? OsmAndFormatter.getFormattedAlt(altitude, app) : null;
 	}
 
 	public int getRightIconId() {

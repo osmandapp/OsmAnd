@@ -134,11 +134,11 @@ public abstract class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes,
-	                                                   boolean export, boolean addEmptyItems) {
+	                                                   boolean export, boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
 		typesMap.putAll(getSettingsItems(settingsTypes, addEmptyItems));
 		typesMap.putAll(getMyPlacesItems(settingsTypes, addEmptyItems));
-		typesMap.putAll(getResourcesItems(settingsTypes, addEmptyItems));
+		typesMap.putAll(getResourcesItems(settingsTypes, addEmptyItems, offlineBackup));
 		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
@@ -156,12 +156,12 @@ public abstract class SettingsHelper {
 		return filteredSettingsItems;
 	}
 
-	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems) {
+	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 		Map<ExportSettingsType, List<?>> settingsItems = getSettingsItems(null, addEmptyItems);
 		Map<ExportSettingsType, List<?>> myPlacesItems = getMyPlacesItems(null, addEmptyItems);
-		Map<ExportSettingsType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems);
+		Map<ExportSettingsType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems, offlineBackup);
 
 		if (!settingsItems.isEmpty() || addEmptyItems) {
 			dataList.put(ExportSettingsCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
@@ -306,7 +306,7 @@ public abstract class SettingsHelper {
 	}
 
 	private Map<ExportSettingsType, List<?>> getResourcesItems(@Nullable List<ExportSettingsType> settingsTypes,
-	                                                           boolean addEmptyItems) {
+	                                                           boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsType, List<?>> resourcesItems = new LinkedHashMap<>();
 
 		Map<String, File> externalRenderers = settingsTypes == null || settingsTypes.contains(ExportSettingsType.CUSTOM_RENDER_STYLE)
@@ -387,7 +387,7 @@ public abstract class SettingsHelper {
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.VOICE, files);
 		}
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class)) {
+		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class) && offlineBackup) {
 			files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
 			if (!files.isEmpty() || addEmptyItems) {
 				resourcesItems.put(ExportSettingsType.FAVORITES_BACKUP, files);

@@ -2939,7 +2939,7 @@
     <string name="profile_alert_need_save_title">Salva le modifiche</string>
     <string name="profile_alert_need_save_msg">Salva le modifiche al profilo prima</string>
     <string name="profile_alert_delete_title">Elimina il profilo</string>
-    <string name="profile_alert_delete_msg">Eliminare il profilo \"%s\" \?</string>
+    <string name="profile_alert_delete_msg">Eliminare il profilo \"%s\"</string>
     <string name="select_nav_profile_dialog_title">Selezioni il tipo di navigazione</string>
     <string name="base_profile_descr_car">Auto, camion, moto</string>
     <string name="base_profile_descr_bicycle">Mountain bike, ciclomotore, cavallo</string>

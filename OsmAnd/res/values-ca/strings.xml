@@ -370,7 +370,7 @@
 \nOsmAnd es desenvolupa activament i el nostre projecte i el seu progrés continu depenen de donacions pel desenvolupament i proves de noves funcions. Si us plau, considereu la compra d\'OsmAnd+ o patrocinar una nova característica concreta, o fer una donació genèrica a la pàgina https\\\\osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\n L\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals de OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona que la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent-hi guiatge per veu.
+\n L\'OsmAnd+ és un programari de navegació de codi obert amb accés a una gran varietat de dades globals d\'OSM. Totes les dades de mapes (mapes de tessel·les o vectorials) poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús sense connexió. També proporciona que la funcionalitat de càlcul de rutes sigui amb connexió o sense, incloent-hi guiatge per veu.
 \n
 \n L\'OsmAnd+ és la versió de pagament; comprant-la esteu donant suport al projecte, financeu el desenvolupament de noves funcions i rebreu les darreres actualitzacions.
 \n
@@ -379,10 +379,10 @@
 \n - Mapes vectorials compactes de tot el món disponibles
 \n - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
 \n - Disponibilitat sense connexió dels PDI baixats prèviament de Viquipèdia, ideal per fer turisme
-\n - Possibilitat de superposar diverses capes de mapes simultànies, com traces GPX o de navegació, Punts d\'interès, Favorits, corbes de nivell, parades de transport públic, mapes addicionals amb nivell de transparència ajustable
+\n - Possibilitat de superposar diverses capes de mapes simultànies, com traces GPX o de navegació, punts d\'interès, preferits, corbes de nivell, parades de transport públic, mapes addicionals amb nivell de transparència ajustable
 \n
 \n - Cerca fora de línia d\'adreces i llocs d\'interès (PDI)
-\n - Càlcul de rutes fora de línia per distàncies d\'abast mitjà
+\n - Càlcul de rutes fora de línia per a distàncies d\'abast mitjà
 \n - Modalitats opcionals de cotxe, ciclista i vianant
 \n - Ajust automàtic de representació diürna/nocturna
 \n - Escala automàtica del mapa segons la velocitat
@@ -1216,7 +1216,7 @@
     <string name="gpx_selection_route_points">%1$s \nPunts de ruta %2$s</string>
     <string name="gpx_selection_points">%1$s \nPunts</string>
     <string name="gpx_selection_track">%1$s \nTraça %2$s</string>
-    <string name="save_as_favorites_points">Guarda com un grup de Preferits</string>
+    <string name="save_as_favorites_points">Desa com un grup de Preferits</string>
     <string name="select_destination_and_intermediate_points">Establiu destinacions</string>
     <string name="layer_amenity_label">Etiquetes superposades de PDIs</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom durant la navegació.</string>
@@ -1288,9 +1288,9 @@
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Tot</string>
-    <string name="record_plugin_description">Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre el mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.
+    <string name="record_plugin_description">Us permet d\'enregistrar, desar i analitzar les dades d\'entrenaments i trajectes, com ara la velocitat, ascensions, descensos o relleu de la ruta, que podeu reutilitzar, millorar, complementar o compartir amb amics.
 \n
-\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc., i, per descomptat, es poden analitzar amb eines especialitzades de tercers.</string>
+\nCom es fa - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -2262,7 +2262,7 @@
     <string name="subscribe_email_desc">Subscriviu-vos a la nostra llista de correu sobre descomptes a la aplicació i aconseguiu 3 baixades de mapa addicionals!</string>
     <string name="no_overlay">Sense superposició</string>
     <string name="no_underlay">Sense sots-posició</string>
-    <string name="sea_depth_thanks">Us agraïm la compra d\' \'Isòbates\'</string>
+    <string name="sea_depth_thanks">Us agraïm la compra d\'«Isòbates»</string>
     <string name="index_item_depth_contours_osmand_ext">Isòbates</string>
     <string name="index_item_depth_points_southern_hemisphere">Fondària marina puntual a l\'hemisferi sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Fondària marina puntual a l\'hemisferi nord</string>
@@ -3811,7 +3811,7 @@
     <string name="verification_code_missing_description">El retard pel codi pot ser de 10 minuts, verifiqueu també la vostra carpeta de correu brossa. Si això no us ajuda, utilitzeu el botó de sota.</string>
     <string name="use_login_and_password">Utilitzeu nom d\'usuari i contrasenya</string>
     <string name="available_until">Disponible fins al %1$s</string>
-    <string name="enough_contributions_descr">Enhorabona, heu fet prou contribucions a OpenStreetMap per disposar il·limitadament d\'actualitzacions de mapes.</string>
+    <string name="enough_contributions_descr">Enhorabona, heu fet prou contribucions a OpenStreetMap per a gaudir d\'actualitzacions de mapes il·limitades!</string>
     <string name="shared_string_contributions">Aportacions</string>
     <string name="contributions_may_calculate_with_delay">Les aportacions podrien trigar unes hores en incloure\'s.</string>
     <string name="map_updates_are_unavailable_yet">Encara no hi han actualitzacions del mapa :-(</string>
@@ -3893,9 +3893,9 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra les etiquetes de notes</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icones si zooms baixos</string>
     <string name="quick_action_add_route_descr">Un botó per a començar una ruta des del mig de la pantalla.</string>
-    <string name="gpx_no_routes_descr">Podeu utilitzar l\'eina \"%1$s\" per guardar la ruta com a fitxer.</string>
+    <string name="gpx_no_routes_descr">Podeu usar l\'eina \"%1$s\" per a afegir la ruta al fitxer.</string>
     <string name="gpx_no_routes_title">No hi han rutes</string>
-    <string name="save_track_to_gpx_descrp">Comença a gravar la ruta automàticament quan la navegació està en procés. Quan acabe, la ruta serà guardada automàticament.</string>
+    <string name="save_track_to_gpx_descrp">Comença a gravar la ruta automàticament en iniciar la navegació i desa-la automàticament després.</string>
     <string name="rendering_attr_seabedDetail_name">Detall del fons marí</string>
     <string name="exit_import_descr">Voleu sortir sense desar cap canvi\?</string>
     <string name="exit_import">Voleu sortir\?</string>
@@ -3928,7 +3928,7 @@
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Tot</string>
     <string name="waypoint_template">Plantilla de punts de ruta</string>
-    <string name="predefined_waypoint_appearance_description">Al prémer aquesta acció s’autoguardarà el punt de ruta amb paràmetres predefinits.</string>
+    <string name="predefined_waypoint_appearance_description">En prémer, aquesta acció desarà automàticament el punt de ruta amb els paràmetres predefinits.</string>
     <string name="waypoint_appearance">Aspecte del punt de ruta</string>
     <string name="rendering_value_omit_name">Ometre</string>
     <string name="select_suggested_points">Selecciona punts suggerits</string>
@@ -4028,4 +4028,56 @@
     <string name="ant_missing_dependency_descr">El servei necessari \"%1$s\" no s\'ha trobat.
 \nHas d\'instal·lar el complement del servei ANT+ o actualitza la versió existent si ja el tens.
 \nVols executar Play Store per a aconseguir-lo\?</string>
+    <string name="shortcut_start_recording">Comença l\'enregistrament</string>
+    <string name="display_route_tracks">Mostra les traces</string>
+    <string name="display_route_tracks_as_poi">Mostra les traces com a PDI</string>
+    <string name="transparent_status_bar">Barra d\'estat transparent</string>
+    <string name="routing_attr_prefer_horse_routes_name">Prefereix les rutes eqüestres</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Línies de troleibús</string>
+    <string name="transparent_status_bar_descr">Mostra el mapa sota la barra d\'estat</string>
+    <string name="routing_attr_only_permitted_ways_name">Vies expressament autoritzades</string>
+    <string name="map_widget_altitude_current_location">Altitud: ubicació actual</string>
+    <string name="send_uuid_preference">Envia un identificador únic d\'usuari (UUID)</string>
+    <string name="map_widget_altitude_current_location_desc">Mostra l\'altura sobre el nivell del mar de la ubicació actual.</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mostra la velocitat a què l\'usuari pedala</string>
+    <string name="terms_of_service_desc">Per a baixar mapes cal que accepteu %1$s i %2$s.</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra la distància recorreguda</string>
+    <string name="map_widget_ant_bicycle_dist">Distància en bicicleta</string>
+    <string name="map_center_widget">Coordenades: centre del mapa</string>
+    <string name="shortcut_navigate_to_work">Navega cap a la «Feina»</string>
+    <string name="android_auto_map_placeholder_descr">Desconnecteu l\'aparell de l\'Android Auto per a veure el mapa en l\'aplicació.</string>
+    <string name="continue_on_phone">Continua en l\'aparell mòbil</string>
+    <string name="location_access_request_title">L\'OsmAnd necessita permisos de geolocalització per a navegar.</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Impossible</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Perillosa</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Línies de monoraïl</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Línies de funicular</string>
+    <string name="rendering_attr_showBusRoutes_name">Línies d\'autobús</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Línies de tren lleuger</string>
+    <string name="location_access_request_result">Aprovat: %1$s Rebutjat: %2$s</string>
+    <string name="rendering_attr_horse_scale_common_name">Comú</string>
+    <string name="rendering_attr_showTramRoutes_name">Línies de tramvia</string>
+    <string name="shortcut_navigate_to">Navega a…</string>
+    <string name="routing_attr_prefer_horse_routes_description">Prefereix les rutes eqüestres</string>
+    <string name="android_auto_map_placeholder_title">El mapa es mostra en la pantalla del vehicle.</string>
+    <string name="shortcut_navigate_to_home">Navega cap a «Casa»</string>
+    <string name="simulation_real_mode_title">Simulació realista</string>
+    <string name="map_markers_history">Historial dels marcadors del mapa</string>
+    <string name="map_widget_altitude_map_center">Altitud: centre del mapa</string>
+    <string name="map_widget_altitude_map_center_desc">Mostra l\'altura sobre el nivell del mar del centre del mapa.</string>
+    <string name="location_simulation_cutoff">La simulació omet els primers metres</string>
+    <string name="ant_heart_rate_write_gpx_desc">Escriu la freqüència cardíaca en la traça</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra la freqüència cardíaca de l\'usuari durant una determinada activitat en temps real</string>
+    <string name="map_widget_ant_bicycle_power">Potència de la bicicleta</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mostra la potència de sortida del ciclista, que s\'usa per a moure la bicicleta endavant</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadència de la bicicleta</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mostra la velocitat de desplaçament</string>
+    <string name="rendering_attr_showTrainRoutes_name">Línies de tren</string>
+    <string name="routeInfo_horse_scale_name">Dificultat de les rutes eqüestres</string>
+    <string name="rendering_attr_horse_scale_critical_name">Crítica</string>
+    <string name="history_actions_descr">Podeu exportar l\'historial a un fitxer.</string>
+    <string name="navigation_history">Historial de navegació</string>
+    <string name="history_preferences_descr">Podeu desactivar el registre de l\'historial individualment per a cada tipus d\'historial.</string>
+    <string name="depth_contours">Isòbates</string>
 </resources>

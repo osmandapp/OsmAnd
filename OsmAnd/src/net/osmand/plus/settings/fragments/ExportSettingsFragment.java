@@ -19,8 +19,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -30,6 +28,8 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -78,7 +78,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true, true);
 
 		if (savedInstanceState == null) {
 			if (!globalExport) {

@@ -1435,7 +1435,7 @@
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
     <string name="lang_kn">Kanara</string>
-    <string name="system_locale">Sistema</string>
+    <string name="system_locale">Laŭ operaciumo</string>
     <string name="amenity_type_administrative">Administrejo</string>
     <string name="amenity_type_barrier">Barilo</string>
     <string name="amenity_type_education">Edukado</string>
@@ -1985,7 +1985,7 @@
     <string name="skip_map_downloading_desc">Vi havas neniun malkonektan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti mapojn poste per “menuo - %1$s”.</string>
     <string name="search_another_country">Elekti alian regionon</string>
     <string name="search_map">Serĉado de mapoj…</string>
-    <string name="first_usage_wizard_desc">Bonvolu permesi al OsmAnd trovi vian pozicion por sugesti elŝuti mapojn de tiu regiono.</string>
+    <string name="first_usage_wizard_desc">Permesu al OsmAnd trovi vian pozicion por sugesti elŝuti mapojn de tiu regiono.</string>
     <string name="location_not_found">Pozicio ne trovita</string>
     <string name="no_inet_connection">Interret-konekto mankas</string>
     <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
@@ -2915,9 +2915,9 @@
     <string name="rate_dialog_descr">Bonvolu kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
     <string name="shared_string_privacy_policy">privatecan politikon</string>
     <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona</string>
-    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado. Neniuj datumoj pri via pozicio kaj pri foliumataj lokoj estas kolektataj.
+    <string name="make_osmand_better_descr">Permesu al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado. Neniuj datumoj pri via pozicio kaj pri foliumataj lokoj estos kolektataj.
 \n
-\nŜanĝebla en “agordoj” → “privateco kaj sekureco“.</string>
+\nŜanĝebla en “Agordoj” → “Privateco kaj sekureco“.</string>
     <string name="choose_data_to_share">Elektu datumojn por kunhavigi:</string>
     <string name="downloaded_maps">Elŝutitaj mapoj</string>
     <string name="visited_screens">Vidigitaj ekranoj</string>
@@ -3772,7 +3772,7 @@
     <string name="disable_recording_once_app_killed_descrp">Paŭzigi registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (La fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
     <string name="gpx_monitoring_stop">Paŭzigi registri spuron</string>
     <string name="gpx_monitoring_start">Daŭrigi registri spuron</string>
-    <string name="system_default_theme">Sistema</string>
+    <string name="system_default_theme">Laŭ operaciumo</string>
     <string name="all_next_segments">Ĉiuj sekvaj segmentoj</string>
     <string name="previous_segment">Antaŭa segmento</string>
     <string name="all_previous_segments">Ĉiuj antaŭaj segmentoj</string>
@@ -3963,7 +3963,7 @@
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
     <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
-    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – fotoj, opinioj, ligilojn pri publikajn ejojn, kiel restoraciojn, hotelojn, muzeojn.
+    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
 \nInstrukcioj pri kiel kontribui troviĝas ĉe la retpaĝo https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4800,4 +4800,49 @@
     <string name="distance_by_tap_use_description">Frapetu la ekranon per unu fingro por vidigi distancon inter via nuna pozicio kaj la elektita punkto.
 \nFrapetu la ekranon per du fingroj por vidigi distancon inter la elektitaj punktoj.</string>
     <string name="rotate_map_none_rotated_opt">Fiksita (permane turnita)</string>
+    <string name="map_center_widget">Koordinatoj: map-centro</string>
+    <string name="map_widget_altitude_map_center">Altitudo: map-centro</string>
+    <string name="map_widget_altitude_current_location_desc">Vidigas altecon super la marnivelo por la nuna pozicio.</string>
+    <string name="external_sensors_plugin_name">Eksteraj sentiloj</string>
+    <string name="map_widget_altitude_current_location">Altitudo: nuna pozicio</string>
+    <string name="map_widget_altitude_map_center_desc">Vidigas altecon super la marnivelo por la montrata centro de la mapo.</string>
+    <string name="map_widget_altitude_desc">Fenestraĵoj montrantaj supermaran altecon de via nuna pozicio aŭ de la map-centro.</string>
+    <string name="current_location_widget">Koordinatoj: nuna pozicio</string>
+    <string name="external_sensors_plugin_description">Ebligas legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas konekton al sentiloj raportantaj la menciitajn parametrojn kaj subtenantaj la protokolon ANT+.</string>
+    <string name="map_widget_rendering_fps">Rapido de map-bildigado</string>
+    <string name="map_widget_rendering_fps_desc">Montras kiel rapide la mapo kaj ĝiaj elementoj estas bildigataj sur la ekrano (en kadroj en sekundo [FPS]).</string>
+    <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”.
+\nVi devas instali aŭ ĝisdatigi ĝin.
+\nĈu malfermi la vendejon Google Play por instali la servon\?</string>
+    <string name="ant_read_data">Legi datumojn</string>
+    <string name="map_widget_target_distance">Distanco inter fotilo kaj celo</string>
+    <string name="simulate_location_by_gpx">Simuli pozicion per GPX</string>
+    <string name="location_simulation_cutoff">Preterlasi unuajn metrojn</string>
+    <string name="location_simulation_speedup">Plirapidigi simuladon</string>
+    <string name="send_uuid_preference_desc">Hazarda identigilo UUID estas uzata por elŝuti malkonektajn mapojn el la OsmAnd-serviloj por gardi laŭregulan uzadon de niaj serviloj, antaŭscii uzadon de datumtrafiko kaj generi anonimajn monatajn raportojn pri mapoj.</string>
+    <string name="send_uuid_preference">Sendi unikan uzant-identigilon (UUID)</string>
+    <string name="shared_string_identifiers">Identigiloj</string>
+    <string name="terms_of_service_desc">Elŝutante mapojn vi konsentas kun nia %1$s kaj %2$s.</string>
+    <string name="shared_string_terms_of_use">Kondiĉoj pri uzado</string>
+    <string name="favorites_backup">Sekurkopio de ŝatataj</string>
+    <string name="purchases_feature_desc_cross_buy">Havigu viajn aĉetitajn trajtojn ĉe pluraj platformoj: Android/iOS/ret-aplikaĵo sen kroma pago.</string>
+    <string name="shared_string_cross_buy">Plurplatforma aĉeto</string>
+    <string name="ant_widgets">ANT+</string>
+    <string name="ant_missing_dependency">Dependeco mankas</string>
+    <string name="ant_go_to_store">Malfermi vendejon</string>
+    <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>
+    <string name="map_widget_ant_heart_rate">Kora pulso</string>
+    <string name="map_widget_ant_bicycle_power_desc">Montras povumon generatan de biciklisto por movi la biciklon</string>
+    <string name="ant_heart_rate_write_gpx_desc">Konservi koran pulson al spuro</string>
+    <string name="map_widget_ant_bicycle_cadence">Rapido de pedalado</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Montras rapidon de movado</string>
+    <string name="nautical_depth_points">Punktoj de marfundoj</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Montras trabiciklitan distancon</string>
+    <string name="map_widget_ant_bicycle_dist">Distanco de biciklado</string>
+    <string name="map_widget_ant_heart_rate_desc">Montras la aktualan koran pulson de la uzanto</string>
+    <string name="map_widget_ant_bicycle_power">Bicikla povumo</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Montras rapidon de pedalado de la uzanto</string>
+    <string name="map_widget_ant_bicycle_speed">Rapido de biciklo</string>
+    <string name="depth_contours">Profundec-kurboj</string>
+    <string name="worldwide_maps">Tutteraj mapoj</string>
 </resources>
