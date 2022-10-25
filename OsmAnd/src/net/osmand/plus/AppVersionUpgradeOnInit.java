@@ -50,6 +50,7 @@ import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -59,17 +60,20 @@ import net.osmand.util.Algorithms;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 class AppVersionUpgradeOnInit {
 
-	public static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
-	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
-	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
-	public static final String UPDATE_TIME_MS = "UPDATE_TIME_MS"; //$NON-NLS-1$
+	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN";
+	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER";
+	private static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS";
+	private static final String FIRST_INSTALLED = "FIRST_INSTALLED";
+	private static final String UPDATE_TIME_MS = "UPDATE_TIME_MS";
 
 	// 22 - 2.2
 	public static final int VERSION_2_2 = 22;
@@ -103,12 +107,15 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_0_05 = 4005;
 	// 4006 - 4.0-06 (Merge widgets: Intermediate time to go and Intermediate arrival time, Time to go and Arrival time)
 	public static final int VERSION_4_0_06 = 4006;
+	// 4007 - 4.0-07 (Update type of "Selected POI" preference)
+	public static final int VERSION_4_3_01 = 4301;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_06;
+	public static final int LAST_APP_VERSION = VERSION_4_3_01;
 
-	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
+	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
 	private final OsmandApplication app;
+
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;
@@ -221,6 +228,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_0_06) {
 					mergeTimeToNavigationPointWidgets();
+				}
+				if (prevAppVersion < VERSION_4_3_01) {
+					updateSelectedPoiPreference();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -609,5 +619,19 @@ class AppVersionUpgradeOnInit {
 		}
 
 		preference.setModeValue(appMode, newValue.toString());
+	}
+
+	private void updateSelectedPoiPreference() {
+		OsmandSettings settings = app.getSettings();
+		OsmandPreference<String> oldPreference = new StringPreference(settings,
+				"selected_poi_filter_for_map", null).makeProfile();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			String filterId = oldPreference.getModeValue(appMode);
+			if (!Algorithms.isBlank(filterId)) {
+				Set<String> selectedIds = new LinkedHashSet<>();
+				Collections.addAll(selectedIds, filterId.split(","));
+				settings.setSelectedPoiFilters(appMode, selectedIds);
+			}
+		}
 	}
 }
