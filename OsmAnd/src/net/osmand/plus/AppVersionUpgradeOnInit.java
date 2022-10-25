@@ -69,11 +69,11 @@ import java.util.Set;
 
 class AppVersionUpgradeOnInit {
 
-	public static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	public static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER"; //$NON-NLS-1$
-	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
-	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
-	public static final String UPDATE_TIME_MS = "UPDATE_TIME_MS"; //$NON-NLS-1$
+	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN";
+	private static final String VERSION_INSTALLED_NUMBER = "VERSION_INSTALLED_NUMBER";
+	private static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS";
+	private static final String FIRST_INSTALLED = "FIRST_INSTALLED";
+	private static final String UPDATE_TIME_MS = "UPDATE_TIME_MS";
 
 	// 22 - 2.2
 	public static final int VERSION_2_2 = 22;
@@ -108,13 +108,14 @@ class AppVersionUpgradeOnInit {
 	// 4006 - 4.0-06 (Merge widgets: Intermediate time to go and Intermediate arrival time, Time to go and Arrival time)
 	public static final int VERSION_4_0_06 = 4006;
 	// 4007 - 4.0-07 (Update type of "Selected POI" preference)
-	public static final int VERSION_4_0_07 = 4007;
+	public static final int VERSION_4_3_01 = 4301;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_07;
+	public static final int LAST_APP_VERSION = VERSION_4_3_01;
 
-	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
+	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
 	private final OsmandApplication app;
+
 	private int prevAppVersion;
 	private boolean appVersionChanged;
 	private boolean firstTime;
@@ -228,7 +229,7 @@ class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_0_06) {
 					mergeTimeToNavigationPointWidgets();
 				}
-				if (prevAppVersion < VERSION_4_0_07) {
+				if (prevAppVersion < VERSION_4_3_01) {
 					updateSelectedPoiPreference();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
@@ -622,11 +623,11 @@ class AppVersionUpgradeOnInit {
 
 	private void updateSelectedPoiPreference() {
 		OsmandSettings settings = app.getSettings();
-		OsmandPreference<String> oldPreference = new StringPreference(
-				settings, "selected_poi_filter_for_map", null).makeProfile().cache();
+		OsmandPreference<String> oldPreference = new StringPreference(settings,
+				"selected_poi_filter_for_map", null).makeProfile();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			String filterId = oldPreference.getModeValue(appMode);
-			if (filterId != null && !filterId.trim().isEmpty()) {
+			if (!Algorithms.isBlank(filterId)) {
 				Set<String> selectedIds = new LinkedHashSet<>();
 				Collections.addAll(selectedIds, filterId.split(","));
 				settings.setSelectedPoiFilters(appMode, selectedIds);
