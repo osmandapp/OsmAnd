@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -34,6 +36,19 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -84,21 +99,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -129,7 +130,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
 
-	public static final int AMENITY_TEXT_LENGTH= 255;
+	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	@Override
 	public void onAttach(@NonNull Context activity) {
@@ -148,7 +149,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
 		boolean isLightTheme = getSettings().isLightContent();
 
@@ -214,7 +215,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 					@Override
 					public void onLayoutChange(View v, int left, int top, int right, int bottom,
-											   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
 						tabLayout.setupWithViewPager(viewPager);
 						tabLayout.removeOnLayoutChangeListener(this);
 					}
@@ -430,7 +431,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 		} else if (editPoiData.getPoiTypeDefined() == null) {
 			poiTypeEditText.setError(
-				getResources().getString(R.string.please_specify_poi_type_only_from_list));
+					getResources().getString(R.string.please_specify_poi_type_only_from_list));
 		} else {
 			save();
 		}
@@ -446,22 +447,22 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private boolean testTooManyCapitalLetters(String name) {
-		if(name == null) {
+		if (name == null) {
 			return false;
 		}
 		int capital = 0;
 		int lower = 0;
 		int nonalpha = 0;
-		for(int i = 0; i < name.length(); i++) {
+		for (int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
-			if(Character.isLetter(c) || Character.getType(c) == Character.LETTER_NUMBER) {
-				if(Character.isUpperCase(c)) {
-					capital ++;
+			if (Character.isLetter(c) || Character.getType(c) == Character.LETTER_NUMBER) {
+				if (Character.isUpperCase(c)) {
+					capital++;
 				} else {
-					lower ++;
+					lower++;
 				}
 			} else {
-				nonalpha ++;
+				nonalpha++;
 			}
 		}
 		return capital > nonalpha && capital > lower;
@@ -469,15 +470,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void save() {
 		Entity original = editPoiData.getEntity();
-		Set<String> newChangedTags = Collections.synchronizedSet(new HashSet<>());
-		if(editPoiData.getEntity().getChangedTags() != null){
-			newChangedTags.addAll(editPoiData.getEntity().getChangedTags());
-		}
-
-		if(editPoiData.getChangedTags() != null){
-			newChangedTags.addAll(editPoiData.getChangedTags());
-		}
-
 		boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Entity entity;
 		if (original instanceof Node) {
@@ -550,7 +542,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					}
 
 					return false;
-				}, getActivity(), mOpenstreetmapUtil, action == Action.MODIFY ? newChangedTags : null);
+				}, getActivity(), mOpenstreetmapUtil, action == Action.MODIFY ? editPoiData.getChangedTags() : null);
 	}
 
 	private void dismissCheckForChanges() {
@@ -630,17 +622,17 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			for (PoiType s : ct.getPoiTypes()) {
 				if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
 					addMapEntryAdapter(subCategories, s.getTranslation(), s);
-					if(!s.getKeyName().contains("osmand")) {
+					if (!s.getKeyName().contains("osmand")) {
 						addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
 					}
-					if(!Algorithms.isEmpty(s.getEditOsmValue())) {
+					if (!Algorithms.isEmpty(s.getEditOsmValue())) {
 						addMapEntryAdapter(subCategories, s.getEditOsmValue().replace('_', ' '), s);
 					}
 				}
 			}
 		}
 		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
-			if(!s.getKey().contains("osmand")) {
+			if (!s.getKey().contains("osmand")) {
 				addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 			}
 		}
@@ -694,7 +686,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
-															 OsmandApplication application) {
+	                                                         OsmandApplication application) {
 		Node node = new Node(latitude, longitude, -1);
 		return createInstance(node, true);
 	}
@@ -771,7 +763,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		PoiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
 			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-			titles = new String[]{basicTitle, extendedTitle};
+			titles = new String[] {basicTitle, extendedTitle};
 		}
 
 		@Override
