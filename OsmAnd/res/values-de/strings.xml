@@ -2822,7 +2822,7 @@
     <string name="add_home">Zuhause hinzufügen</string>
     <string name="add_work">Arbeitsadresse hinzufügen</string>
     <string name="work_button">Arbeit</string>
-    <string name="add_destination_query">Bitte legen Sie zuerst das Ziel fest</string>
+    <string name="add_destination_query">Bitte zuerst ein Ziel festlegen</string>
     <string name="previous_route">Vorherige Route</string>
     <string name="shared_string_swap">Tauschen</string>
     <string name="show_more">Mehr anzeigen</string>

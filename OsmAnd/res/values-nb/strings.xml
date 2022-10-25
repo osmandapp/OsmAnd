@@ -861,9 +861,9 @@
     <string name="shared_string_downloading">Laster ned…</string>
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
-    <string name="srtm_plugin_description">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.)
+    <string name="srtm_plugin_description">Terrenginformasjon, som koter, relieffskygger og bakkehelninger, hjelper deg å visuelt vurdere formen på landoverflaten, med tanke på krumning, ekstremer, bratthet, punkter med samme høyde og mer. Topografisk informasjon på et kart kan representeres av helningsskyggelegging, koter for opp- og nedoverbakke og fargen på helningsvinkelavviket fra flatt. Data fra SRTM og ASTER.
 \n
-\nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument om bord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
+\nVeiledning - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="first_time_msg">Takk for at du bruker OsmAnd. Last ned regionale data for nettfrakoblet bruk via \'Meny\' → \'Kartnedlasting\' for å se kart, finne adresser, lete etter interessepunkter, finne offentlig transport og mere.</string>
     <string name="error_avoid_specific_road">Ingen omkjøring funnet</string>
     <string name="home_button">Hjem</string>
@@ -2548,11 +2548,11 @@
     <string name="show_images">Vis bilder</string>
     <string name="online_webpage_warning">Siden er kun tilgjengelig på nett. Åpne i nettleser\?</string>
     <string name="index_item_world_wikivoyage">Verdensomspennende Wikivoyage-artikler</string>
-    <string name="osmand_rastermaps_plugin_description">Programtillegget gir tilgang til mange typer av nettbaserte kart (såkalte flis- eller rasterkart), fra forhåndsdefinerte OpenStreetMap-kartfliser (som Mapnik) til satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc. 
-\n 
-\nAlle disse kartene kan enten brukes som hovedkart (basiskart) som skal vises på OsmAnd-kartet, eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede standardkartene til OsmAnd). For å gjøre underlagskartet mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'. 
-\n 
-\nFliskart kan hentes direkte fra nettbaserte kilder, eller fremstilles for nettfrakoblet bruk (og manuelt kopieres til OsmAnd-datamappen) som en SQLite-database som kan lages av en rekke tredjeparts kartbearbeidingsprogrammer.</string>
+    <string name="osmand_rastermaps_plugin_description">Få tilgang til mange typer nettbaserte kart (såkalte flis- eller rasterkart), fra forhåndsdefinerte OpenStreetMap-kartfliser (som Mapnik) til satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc.
+\n
+\nAlle disse kartene kan brukes som hovedkart (basiskart), eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede vektorkartene til OsmAnd). For å gjøre underlagskart mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'.
+\n
+\nLast ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
     <string name="record_plugin_description">Dette programtillegget aktiverer funksjoner for å ta opp og lagre sporene dine ved å manuelt trykke på miniprogrammet for GPX-logging på kartet, eller også for å automatisk logge alle dine navigeringsruter til en GPX-fil. 
 \n 
 \nSpor som er tatt opp kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutøvere kan bruke innspilte spor til å følge treningen sin. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet etc., og spor kan selvfølgelig også analyseres senere i spesielle tredjeparts analyseprogrammer.</string>
@@ -3422,7 +3422,7 @@
     <string name="shared_string_add_profile">Legg til profil</string>
     <string name="quick_action_transport_descr">Knapp for vising eller skjuling av offentlig transport på kartet.</string>
     <string name="routing_profile_direct_to">Direkte-til-punkt</string>
-    <string name="clear_recorded_data">Tøm lagret data</string>
+    <string name="clear_recorded_data">Tøm data som er tatt opp</string>
     <string name="shared_string_include_data">Inkluder ytterligere data</string>
     <string name="live_monitoring_tracking_interval">Sporingsintervall</string>
     <string name="live_monitoring_time_buffer">Tidsmellomlager</string>
@@ -3460,7 +3460,7 @@
     <string name="add_edit_favorite">Legg til eller rediger favoritt</string>
     <string name="import_complete_description">All data fra %1$s er importert, du kan bruke knappene nedenfor for å åpne den delen du trenger for å håndtere den.</string>
     <string name="restore_all_profile_settings_descr">Alle profilinnstillinger blir gjenopprettet til deres opprinnelige tilstand etter opprettelse/import av denne profilen.</string>
-    <string name="clear_recorded_data_warning">Tøm lagret data\?</string>
+    <string name="clear_recorded_data_warning">Tømme data som er tatt opp\?</string>
     <string name="recalculate_route_in_deviation">Beregn rute på nytt ved avvik</string>
     <string name="download_slope_maps">Bakkehelninger</string>
     <string name="ui_customization_short_descr">Skuffeelementer, lokalmeny</string>
@@ -4199,9 +4199,9 @@
     <string name="gpx_upload_public_visibility_descr">«Offentlig» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer, og i den offentlige spor-listen med tidsstempler i rå form. Data servert via API-et viser ikke til sporsiden din. Tidsstempler fra sporingspunkter er ikke tilgjengelig gjennom det offentlige GPS-API-et, og sporingspunkter sorteres ikke kronologisk.</string>
     <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd Sky.</string>
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
-    <string name="open_place_reviews_plugin_description">Send bilder, vurderinger og lenker om offentlige steder, som restauranter, hoteller, museer og rutepunkter som åpen data på https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Lar deg gi bidrag til prosjektet OpenPlaceReviews. Som bilder, omtaler og lenker om offentlige steder som restauranter, hoteller, museer og rutepunkter.
 \n
-\nLes mer på https://openplacereviews.org</string>
+\nDu finner instruksjoner om hvordan du kan bidra på nettsiden vår - https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="login_open_place_reviews">Logg inn på OpenPlaceReviews</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
@@ -4678,7 +4678,7 @@
     <string name="map_widget_average_speed">Gjennomsnittsfart</string>
     <string name="import_as_one_track">Importer som ett spor</string>
     <string name="altitude_correction">Høydekorreksjon</string>
-    <string name="calculate_online_altitude_descr">Beregn høyde på nett på OsmAnd-tjenere basert på satellittbilder og digitale høydemodeller. Det kan variere fra enhetens registrerte høyde og kan brukes som høydekorreksjon.</string>
+    <string name="calculate_online_altitude_descr">Beregn høyde på nett på OsmAnd-tjenere basert på satellittbilder og digitale høydemodeller. Forskjellen fra enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
     <string name="no_altitude_data_desc">Du kan feste sporet ditt til veiene for å få %1$s-data eller beregne det på nettet.</string>
     <string name="marker_2nd">Sekundær markør</string>
     <string name="marker_1st">Primær markør</string>
@@ -4727,7 +4727,7 @@
     <string name="compass_always_hidden">Alltid skjult</string>
     <string name="compass_always_visible">Alltid synlig</string>
     <string name="compass_click_desc">Trykk på kompasset for å bytte kartretningsmodus.</string>
-    <string name="compass_desc">Viser nord.</string>
+    <string name="compass_desc">Viser retning mot nord.</string>
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
     <string name="auto_25_chars_route_tr_kl">Sving til høyre og hold til venstre</string>
@@ -4735,9 +4735,9 @@
     <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
     <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
-    <string name="favorite_confirm_delete_group">Vil du slette «%1$s»-gruppen og alle dens punkter (%2$d)</string>
+    <string name="favorite_confirm_delete_group">Vil du slette gruppen \"%1$s\" og alle dens punkter (%2$d)\?</string>
     <string name="favorite_delete_group">Slett gruppe</string>
-    <string name="display_position">Vis posisjon</string>
+    <string name="display_position">Visningsposisjon</string>
     <string name="download_heightmap_maps">Høydekart</string>
     <string name="shared_string_large">Stor</string>
     <string name="shared_string_normal">Normal</string>
@@ -4749,21 +4749,21 @@
     <string name="ant_write_to_gpx">Skriv data til spor</string>
     <string name="ant_heart_rate_write_gpx_desc">Skriv puls til spor</string>
     <string name="map_widget_ant_heart_rate">Puls</string>
-    <string name="map_widget_ant_bicycle_power">Sykkeleffekt</string>
+    <string name="map_widget_ant_bicycle_power">Sykkelkraft</string>
     <string name="map_widget_ant_bicycle_speed">Sykkelhastighet</string>
     <string name="map_widget_ant_heart_rate_desc">Viser brukerens puls i løpet av en aktivitet i sanntid</string>
-    <string name="map_widget_ant_bicycle_power_desc">Viser syklistens målte tråkk, som brukes til å bevege sykkelen fremover.</string>
-    <string name="map_widget_ant_bicycle_cadence">Krankomdreininger</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">Viser hvor for rundt brukeren snurrer pedalarmene</string>
+    <string name="map_widget_ant_bicycle_power_desc">Viser syklistens kraft, som brukes til å bevege sykkelen fremover</string>
+    <string name="map_widget_ant_bicycle_cadence">Tråkkfrekvens</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Viser hastigheten brukeren tråkker med</string>
     <string name="map_widget_ant_bicycle_speed_desc">Viser kjørehastighet</string>
     <string name="worldwide_maps">Verdenskart</string>
     <string name="developer_widgets">Utviklerminiprogrammer</string>
-    <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt avstand</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt distanse</string>
     <string name="nautical_depth_points">Sjødybder</string>
     <string name="depth_contours">Dybdekonturer</string>
     <string name="map_widget_zoom_level_desc">Miniprogrammet viser nåværende kartforstørrelsesnivå.</string>
     <string name="ant_widgets">ANT+-miniprogrammer</string>
-    <string name="map_widget_ant_bicycle_dist">Sykkelavstand</string>
+    <string name="map_widget_ant_bicycle_dist">Sykkeldistanse</string>
     <string name="map_widget_target_distance_desc">Miniprogrammet viser avstanden fra kameraet til målstedet.</string>
     <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».
 \nDu må installere ANT+-programtilleggstjenesten, eller så må du oppgradere eksisterende versjon hvis du allerede har den.
@@ -4774,4 +4774,7 @@
     <string name="click_on_widget">Klikk på miniprogrammet</string>
     <string name="map_widget_target_distance">Avstand fra kamera til mål</string>
     <string name="map_widget_camera_distance">Kamerahøyde</string>
+    <string name="auto_25_chars_route_roundabout_kl">Ta %1$d avkjøringen og hold til venstre</string>
+    <string name="auto_25_chars_route_roundabout_kr">Ta %1$d avkjøringen og hold til høyre</string>
+    <string name="shared_string_2_5_d_view">2.5 D-visning</string>
 </resources>

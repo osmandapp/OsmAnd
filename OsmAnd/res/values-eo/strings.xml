@@ -1435,7 +1435,7 @@
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
     <string name="lang_kn">Kanara</string>
-    <string name="system_locale">Sistema</string>
+    <string name="system_locale">Laŭ operaciumo</string>
     <string name="amenity_type_administrative">Administrejo</string>
     <string name="amenity_type_barrier">Barilo</string>
     <string name="amenity_type_education">Edukado</string>
@@ -3772,7 +3772,7 @@
     <string name="disable_recording_once_app_killed_descrp">Paŭzigi registri spuron je halto de la aplikaĵo (per la menuo de lastaj aplikaĵoj). (La fona emblemo de OsmAnd malaperos de la androida sciiga zono.)</string>
     <string name="gpx_monitoring_stop">Paŭzigi registri spuron</string>
     <string name="gpx_monitoring_start">Daŭrigi registri spuron</string>
-    <string name="system_default_theme">Sistema</string>
+    <string name="system_default_theme">Laŭ operaciumo</string>
     <string name="all_next_segments">Ĉiuj sekvaj segmentoj</string>
     <string name="previous_segment">Antaŭa segmento</string>
     <string name="all_previous_segments">Ĉiuj antaŭaj segmentoj</string>
@@ -3963,7 +3963,7 @@
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
     <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
-    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – fotoj, opinioj, ligilojn pri publikajn ejojn, kiel restoraciojn, hotelojn, muzeojn.
+    <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
 \nInstrukcioj pri kiel kontribui troviĝas ĉe la retpaĝo https://osmand.net/docs/user/plugins/openplacereviews</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4831,4 +4831,18 @@
     <string name="ant_missing_dependency">Dependeco mankas</string>
     <string name="ant_go_to_store">Malfermi vendejon</string>
     <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>
+    <string name="map_widget_ant_heart_rate">Kora pulso</string>
+    <string name="map_widget_ant_bicycle_power_desc">Montras povumon generatan de biciklisto por movi la biciklon</string>
+    <string name="ant_heart_rate_write_gpx_desc">Konservi koran pulson al spuro</string>
+    <string name="map_widget_ant_bicycle_cadence">Rapido de pedalado</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Montras rapidon de movado</string>
+    <string name="nautical_depth_points">Punktoj de marfundoj</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Montras trabiciklitan distancon</string>
+    <string name="map_widget_ant_bicycle_dist">Distanco de biciklado</string>
+    <string name="map_widget_ant_heart_rate_desc">Montras la aktualan koran pulson de la uzanto</string>
+    <string name="map_widget_ant_bicycle_power">Bicikla povumo</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Montras rapidon de pedalado de la uzanto</string>
+    <string name="map_widget_ant_bicycle_speed">Rapido de biciklo</string>
+    <string name="depth_contours">Profundec-kurboj</string>
+    <string name="worldwide_maps">Tutteraj mapoj</string>
 </resources>
