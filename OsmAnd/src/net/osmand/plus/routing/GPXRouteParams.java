@@ -138,6 +138,7 @@ public class GPXRouteParams {
 		private boolean useIntermediateRtePoints;
 		private int selectedSegment = -1;
 		private int selectedRoute = -1;
+		private LatLon targetPoint;
 
 		public GPXRouteParamsBuilder(@NonNull GPXFile file, @NonNull OsmandSettings settings) {
 			this.file = file;
@@ -218,15 +219,52 @@ public class GPXRouteParams {
 			return passWholeRoute;
 		}
 
+		public void setTargetPoint(LatLon targetPoint) {
+			this.targetPoint = targetPoint;
+		}
+
 		public GPXRouteParams build(OsmandApplication app) {
-			GPXRouteParams res = new GPXRouteParams();
+			GPXRouteParams gpxRouteParams = new GPXRouteParams();
 			try {
-				res.prepareGPXFile(this);
+				gpxRouteParams.prepareGPXFile(this);
+				if (targetPoint != null && !targetPoint.equals(gpxRouteParams.getLastPoint())) {
+					cutGpxTail(gpxRouteParams);
+				}
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 				app.showShortToastMessage(app.getString(R.string.gpx_parse_error) + " " + e.getMessage());
 			}
-			return res;
+			return gpxRouteParams;
+		}
+
+		private void cutGpxTail(GPXRouteParams gpxRouteParams) {
+			int lastIdx = 0;
+			double minDist = Float.MAX_VALUE;
+			List<Location> locations = gpxRouteParams.points;
+			for (int i = 0; i < locations.size(); i++) {
+				Location point = locations.get(i);
+				double distance = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
+						targetPoint.getLatitude(), targetPoint.getLongitude());
+				if (distance < minDist) {
+					minDist = distance;
+					lastIdx = i;
+				}
+			}
+			if (gpxRouteParams.segmentEndpoints != null) {
+				List<Location> removedLocations = gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size());
+				List<Location> endpoints = gpxRouteParams.segmentEndpoints;
+				int firstRemovedIdx = 0;
+				for (; firstRemovedIdx < endpoints.size(); firstRemovedIdx++) {
+					Location point = endpoints.get(firstRemovedIdx);
+					if (removedLocations.contains(point)) {
+						break;
+					}
+				}
+				if (firstRemovedIdx != endpoints.size()) {
+					endpoints.subList(firstRemovedIdx, endpoints.size()).clear();
+				}
+			}
+			gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size()).clear();
 		}
 
 		public void setReverse(boolean reverse) {
