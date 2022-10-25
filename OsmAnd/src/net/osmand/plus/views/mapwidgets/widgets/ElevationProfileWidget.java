@@ -245,13 +245,18 @@ public class ElevationProfileWidget extends MapWidget {
 
 			@Override
 			public void onChartSingleTapped(MotionEvent me) {
-				Highlight h = chart.getHighlightByTouchPoint(me.getX(), me.getY());
 				Highlight locationHighlight = ElevationProfileWidget.this.locationHighlight;
-				h = createHighlight(h.getX(), false);
-				if (locationHighlight != null) {
-					chart.highlightValues(new Highlight[] {locationHighlight, h});
-				} else {
-					chart.highlightValue(h, true);
+				Highlight touchHighlight = chart.getHighlightByTouchPoint(me.getX(), me.getY());
+				if (touchHighlight != null) {
+					touchHighlight = createHighlight(touchHighlight.getX(), false);
+				}
+
+				if (locationHighlight != null && touchHighlight != null) {
+					chart.highlightValues(new Highlight[] {locationHighlight, touchHighlight});
+				} else if (locationHighlight != null) {
+					chart.highlightValue(locationHighlight, true);
+				} else if (touchHighlight != null) {
+					chart.highlightValue(touchHighlight, true);
 				}
 			}
 

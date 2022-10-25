@@ -878,7 +878,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolások, lejtők segítenek vizuálisan értékelni a földfelszín alakját, figyelembe véve a görbületet, a szélsőségeket, a meredekséget, az azonos magasságú pontokat és egyebeket. A térképen a topográfiai információk lejtőárnyékolással, kontúrvonalakkal a felfelé ill. lefelé vezető útvonalakhoz, valamint a különböző színű lejtési szögekkel ábrázolhatók. Adatok az SRTM-től és az ASTER-től.
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolások, lejtők segítenek vizuálisan értékelni a földfelszín alakját, figyelembe véve a görbületet, a szélsőségeket, a meredekséget, az azonos magasságú pontokat és egyebeket. A térképen a topográfiai információk lejtőárnyékolással, szintvonalakkal a felfelé ill. lefelé vezető útvonalakhoz, valamint a különböző színű lejtési szögekkel ábrázolhatók. Adatok az SRTM-től és az ASTER-től.
 \n
 \nÚtmutató - http://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. Leállításhoz koppintson az A/V widgetre.</string>

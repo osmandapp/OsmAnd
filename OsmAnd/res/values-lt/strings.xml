@@ -2916,4 +2916,10 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="select_icon_profile_dialog_title">Pasirinkite piktogramą</string>
     <string name="settings_privacy_and_security">Privatumas ir saugumas</string>
     <string name="shared_string_no_thank_you">Ne, ačiū</string>
+    <string name="quick_action_day_night_switch_mode">Dienos/nakties režimo perjungimas</string>
+    <string name="quick_action_switch_day_night_descr">Perjungiklis, skirtas perjungti OsmAnd dienos ir nakties režimus.</string>
+    <string name="quick_action_switch_night_mode">Nakties rėžimas</string>
+    <string name="quick_action_switch_day_mode">Dienos režimas</string>
+    <string name="quick_action_add_gpx_descr">Mygtukas, skirtas pridėti GPX kelio tašką ekrano viduryje.</string>
+    <string name="quick_action_navigation_voice_descr">Perjungiklis, skirtas išjungti arba įjungti balso nurodymus navigacijos metu.</string>
 </resources>

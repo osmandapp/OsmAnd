@@ -4737,8 +4737,8 @@
     <string name="second_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или примерное время прибытия до второго маркера карты.</string>
     <string name="distance_to_destination_widget_desc">Виджет показывает расстояние, оставшееся до пункта назначения.</string>
     <string name="auto_backup_preference_desc">По умолчанию Android сохраняет резервные копии избранных точек, токенов карт и настроек OsmAnd, чтобы восстановить их на новых устройствах или после переустановки. Размер этой резервной копии ограничен 25 МБ.
-\nЕсли вы используете OsmAnd Cloud, это может привести к недоразумениям после переустановки.</string>
-    <string name="duplacate_widget_added_snackbar">Дубликат виджета добавляется следующим в списке.</string>
+\nПри использовании OsmAnd Cloud, это может привести к недоразумениям после переустановки.</string>
+    <string name="duplacate_widget_added_snackbar">В список добавляется дубликат виджета.</string>
     <string name="shared_string_duplicate">Дублировать</string>
     <string name="widget_with_dot">Виджет.</string>
     <string name="auto_25_chars_route_tl_kr">Поверните налево и держитесь правее</string>
@@ -4768,11 +4768,11 @@
     <string name="auto_25_chars_route_tl_kl">Поверните налево и держитесь левее</string>
     <string name="auto_25_chars_route_tu_kl">Выполните разворот и держитесь левее</string>
     <string name="auto_25_chars_route_tu_kr">Выполните разворот и держитесь правее</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Показать специально разработанные трассы для горных велосипедов</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Показать выделенные трассы для горных велосипедов.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Маршруты MTB IMBA</string>
     <string name="download_tiles">Скачать тайлы</string>
     <string name="shared_string_only_missing">Только отсутствующие</string>
-    <string name="attach_roads_warning">К дорогам можно привязать только записанный трек</string>
+    <string name="attach_roads_warning">К дорогам можно привязать только записанный трек.</string>
     <string name="without_profiles_changing">Без смены профиля</string>
     <string name="connect_with_straight_line">Соединить прямой линией</string>
     <string name="attach_roads_descr">Хотите ли вы аппроксимировать свой путь с помощью действующего маршрута, прикрепленного к офлайн-картам\? В этом случае у вас будет скорректированная высота над уровнем моря, информация о дорогах и поворотах, которую в дальнейшем можно будет использовать в навигации.</string>
@@ -4787,4 +4787,7 @@
     <string name="external_sensors_plugin_name">Внешние датчики</string>
     <string name="map_center_widget">Координаты: центр карты</string>
     <string name="map_widget_altitude_map_center">Высота: центр карты</string>
+    <string name="map_widget_altitude_desc">Виджеты показывают высоту над уровнем моря для текущей геолокации или для текущего центра карты</string>
+    <string name="map_widget_altitude_current_location">Высота: текущее местоположение</string>
+    <string name="map_widget_rendering_fps_desc">Показывает, насколько быстро отображаются и обновляются карта и ее элементы (выражается в кадрах в секунду или FPS).</string>
 </resources>
