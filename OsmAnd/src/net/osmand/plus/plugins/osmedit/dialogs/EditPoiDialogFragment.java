@@ -473,7 +473,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void save() {
 		Entity original = editPoiData.getEntity();
-
 		boolean offlineEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Entity entity;
 		if (original instanceof Node) {
