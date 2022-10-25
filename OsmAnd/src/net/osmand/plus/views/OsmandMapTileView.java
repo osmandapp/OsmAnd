@@ -85,7 +85,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
-	public static final int MIN_ALTITUDE_VALUE = -10_000;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;

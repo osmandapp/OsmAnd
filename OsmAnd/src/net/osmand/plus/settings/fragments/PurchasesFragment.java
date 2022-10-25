@@ -85,6 +85,10 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		cardsContainer.removeAllViews();
 
 		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
+		InAppPurchase fullVersion = purchaseHelper.getFullVersion();
+		if (Version.isFullVersion(app) && !Version.isDeveloperBuild(app) && !mainPurchases.contains(fullVersion)) {
+			mainPurchases.add(fullVersion);
+		}
 		for (int i = 0; i < mainPurchases.size(); i++) {
 			InAppPurchase purchase = mainPurchases.get(i);
 			cardsContainer.addView(new InAppPurchaseCard(activity, purchaseHelper, purchase).build(activity));

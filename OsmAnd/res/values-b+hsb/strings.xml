@@ -401,7 +401,7 @@
     <string name="native_library_not_running">App běži w zawěsćenym modusu (hodźi so w nastajenjach wupinyć).</string>
     <string name="close_changeset">Začinić sadźbu změnow</string>
     <string name="zxing_barcode_scanner_not_found">App \'ZXing Barcode Scanner\' njeje instalowana. Pola Google Play pytać\?</string>
-    <string name="rendering_attr_roadColors_description">Wubjerće barbowu šemu za dróhi:</string>
+    <string name="rendering_attr_roadColors_description">Wubjer barbowu šemu za dróhi:</string>
     <string name="rendering_attr_roadColors_name">Barbowa šema dróhow</string>
     <string name="map_widget_show_destination_arrow">Pokazaj směr do cila</string>
     <string name="enable_plugin_monitoring_services">Zapińće nahrawanski modul, zo byšće móhł(a) wužiwać nahrawanske słužby (GPX-nahrawanje, online-tracking)</string>
@@ -1628,4 +1628,26 @@
     <string name="shared_string_import_complete">Import dokónčeny</string>
     <string name="add_description">Wopisanje dodać</string>
     <string name="shared_string_transparency">Transparenca</string>
+    <string name="icon_group_emergency">Nuzowy pad</string>
+    <string name="shared_string_circle">kruh</string>
+    <string name="icon_group_sport">Sport</string>
+    <string name="osm_edit_logout_success">Wotzjewjene</string>
+    <string name="shared_string_octagon">wosomróžk</string>
+    <string name="replace_point_descr">Zarunaj druhi dypk z tutym.</string>
+    <string name="icon_group_special">Specialne</string>
+    <string name="login_open_street_map">Přizjew so pola OpenStreetMap</string>
+    <string name="rendering_value_black_name">čorne</string>
+    <string name="shared_string_local_maps">Lokalne karty</string>
+    <string name="icon_group_travel">Pućowanje</string>
+    <string name="icon_group_service">Posłužby</string>
+    <string name="login_open_street_map_org">Přizjew so pola OpenStreetMap.org</string>
+    <string name="select_shape">Wubjer formu</string>
+    <string name="colour_of_circles">Barba kruhow</string>
+    <string name="icon_group_transport">Transport</string>
+    <string name="icon_group_amenity">Zarjadnišća</string>
+    <string name="select_color">Wubjer barbu</string>
+    <string name="icon_group_symbols">Symbole</string>
+    <string name="shared_string_square">kwadrat</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Přidaj znajmjeńša dwaj dypkaj</string>
+    <string name="select_group">Wubjer skupinu</string>
 </resources>

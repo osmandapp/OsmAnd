@@ -4851,5 +4851,5 @@
     <string name="send_uuid_preference">Enviar identificador único de utilizador (UUID)</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de utilização</string>
-    <string name="shared_string_shows">Mostrar</string>
+    <string name="shared_string_shows">Mostra</string>
 </resources>
