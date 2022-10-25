@@ -68,9 +68,13 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	@Override
 	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
 		long requestTimestamp = System.currentTimeMillis();
-		int zoom = request.getZoom().swigValue();
-		int tileX = request.getTileId().getX();
-		int tileY = request.getTileId().getY();
+		int originalZoom = request.getZoom().swigValue();
+		int originalTileX = request.getTileId().getX();
+		int originalTileY = request.getTileId().getY();
+		int zoomShift = request.getZoomShift();
+		int tileX = originalTileX >> zoomShift;
+		int tileY = originalTileY >> zoomShift;
+		int zoom = originalZoom - zoomShift;
 		float tileSize = tileSource.getTileSize();
 		double offsetY = 0;
 		if (tileSource.isEllipticYTile()) {
@@ -91,6 +95,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		if (firstTileBitmap == null) {
 			return SwigUtilities.nullSkImage();
 		}
+		Bitmap originalTileBitmap;
 		if (shiftedTile) {
 			Bitmap resultTileBitmap = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
 			Paint paint = new Paint();
@@ -106,11 +111,24 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 				canvas.translate(0, tileSize);
 				canvas.drawBitmap(secondTileBitmap, 0, 0, paint);
 			}
-			return NativeUtilities.createSkImageFromBitmap(resultTileBitmap);
+			originalTileBitmap = resultTileBitmap;
 		} else {
-			return NativeUtilities.createSkImageFromBitmap(firstTileBitmap);
+			originalTileBitmap = firstTileBitmap;
 		}
-
+		if (zoomShift > 0) {
+			float tileShiftX = ((tileX << zoomShift) - originalTileX) * tileSize;
+			float tileShiftY = ((tileY << zoomShift) - originalTileY) * tileSize;
+			float scaleFactor = 1 << zoomShift;
+			Bitmap scaledTileBitmap = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
+			Paint scaledPaint = new Paint();
+			Canvas scaledCanvas = new Canvas(scaledTileBitmap);
+			scaledCanvas.translate(tileShiftX, tileShiftY);
+			scaledCanvas.scale(scaleFactor, scaleFactor);
+			scaledCanvas.drawBitmap(originalTileBitmap, 0, 0, scaledPaint);
+			return NativeUtilities.createSkImageFromBitmap(scaledTileBitmap);
+		} else {
+			return NativeUtilities.createSkImageFromBitmap(originalTileBitmap);
+		}
 	}
 
 	@Override
