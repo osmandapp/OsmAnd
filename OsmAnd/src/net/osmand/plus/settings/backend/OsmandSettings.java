@@ -2697,23 +2697,22 @@ public class OsmandSettings {
 	public final OsmandPreference<String> LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT = new StringPreference(this, "last_selected_gpx_track_for_new_point", null).makeGlobal().cache();
 
 	// Avoid using this property, probably you need to use PoiFiltersHelper.getSelectedPoiFilters()
-	public final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP = new StringPreference(this, "selected_poi_filter_for_map", null).makeProfile().cache();
+	private final ListStringPreference SELECTED_POI_FILTER_FOR_MAP = (ListStringPreference)
+			new ListStringPreference(this, "selected_poi_filters_for_map", null, ",,").makeProfile().cache();
 
+	@NonNull
 	public Set<String> getSelectedPoiFilters() {
-		Set<String> result = new LinkedHashSet<>();
-		String filtersId = SELECTED_POI_FILTER_FOR_MAP.get();
-		if (filtersId != null && !filtersId.trim().isEmpty()) {
-			Collections.addAll(result, filtersId.split(","));
-		}
-		return result;
+		List<String> result = SELECTED_POI_FILTER_FOR_MAP.getStringsList();
+		return result != null ? new LinkedHashSet<>(result) : Collections.emptySet();
 	}
 
-	public void setSelectedPoiFilters(Set<String> poiFilters) {
+	public void setSelectedPoiFilters(@Nullable Set<String> poiFilters) {
 		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
 	}
 
-	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
-		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, @Nullable Set<String> poiFilters) {
+		List<String> filters = poiFilters != null ? new ArrayList<>(poiFilters) : null;
+		SELECTED_POI_FILTER_FOR_MAP.setStringsListForProfile(appMode, filters);
 	}
 
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
