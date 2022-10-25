@@ -103,6 +103,10 @@ public class EditPoiData {
 		for (String s : entity.getTagKeySet()) {
 			tryAddTag(s, entity.getTag(s));
 		}
+		Set<String> changedTags = entity.getChangedTags();
+		if (!Algorithms.isEmpty(changedTags)) {
+			this.changedTags.addAll(changedTags);
+		}
 		retrieveType();
 	}
 
