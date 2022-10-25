@@ -123,7 +123,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					try {
 						json.put("items", itemsJson);
 					} catch (JSONException e) {
-						e.printStackTrace();
+						NetworkSettingsHelper.LOG.error("Failed to populate items json", e);
 					}
 					List<SettingsItem> filteredItems = new ArrayList<>(items);
 					for (SettingsItem item : items) {
