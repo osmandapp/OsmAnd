@@ -2549,4 +2549,39 @@
     <string name="main_actions">주요 업무</string>
     <string name="export_import_quick_actions_with_profiles_promo">앱 프로필로 빠른 작업을 내보내거나 가져옵니다.</string>
     <string name="additional_actions">추가 작업</string>
+    <string name="keep_both">둘 다 유지</string>
+    <string name="replace_all">모두 바꾸기</string>
+    <string name="replace_all_desc">현재 항목은 파일의 항목으로 바꾸기</string>
+    <string name="purchases_feature_desc_cross_buy">추가 비용 없이 다양한 플랫폼(Android/iOS/Web)에서 구독 기능을 사용할 수 있습니다.</string>
+    <string name="shared_string_cross_buy">교차-구매</string>
+    <string name="ant_write_to_gpx">추적할 데이터 쓰기</string>
+    <string name="ant_heart_rate_write_gpx_desc">Heart Rate를 트랙에 쓰기</string>
+    <string name="import_duplicates_title">일부 항목이 이미 존재함</string>
+    <string name="quick_action_map_source_title">지도 소스</string>
+    <string name="shared_string_nothing_selected">선택한 항목 없음</string>
+    <string name="shared_string_profiles">프로필</string>
+    <string name="shared_string_quick_actions">빠른 작업</string>
+    <string name="shared_string_routing">라우팅</string>
+    <string name="import_duplicates_description">OsmAnd에는 이미 가져온 요소와 동일한 이름의 요소가 있습니다.
+\n
+\n작업을 선택합니다.</string>
+    <string name="shared_string_poi_types">POI 유형</string>
+    <string name="shared_string_terms_of_use">이용 약관</string>
+    <string name="favorites_backup">즐겨찾기 백업</string>
+    <string name="map_widget_target_distance">카메라에서 대상까지의 거리</string>
+    <string name="ant_widgets">ANT+ 위젯</string>
+    <string name="ant_missing_dependency">종속성 누락</string>
+    <string name="ant_read_data">데이터 읽기</string>
+    <string name="ant_go_to_store">스토어로 이동</string>
+    <string name="keep_both_desc">가져온 항목은 접두사로 추가</string>
+    <string name="map_widget_ant_bicycle_dist">자전거 거리</string>
+    <string name="map_widget_ant_heart_rate">심박수</string>
+    <string name="map_widget_ant_heart_rate_desc">주어진 활동 중 사용자의 심박수를 실시간으로 표시</string>
+    <string name="map_widget_ant_bicycle_power">자전거 동력</string>
+    <string name="map_widget_ant_bicycle_power_desc">자전거를 앞으로 움직이는 데 사용되는 사이클리스트의 전력 출력을 보여주기</string>
+    <string name="map_widget_ant_bicycle_cadence">자전거 케이던스</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">사용자가 페달을 밟는 속도를 표시</string>
+    <string name="map_widget_ant_bicycle_speed">자전거 속도</string>
+    <string name="map_widget_ant_bicycle_speed_desc">여행 속도 표시</string>
+    <string name="map_center_widget">좌표: 지도 중심</string>
 </resources>
