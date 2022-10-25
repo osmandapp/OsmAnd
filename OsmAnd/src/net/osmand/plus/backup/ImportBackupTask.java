@@ -54,9 +54,9 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final ImportType importType;
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @Nullable BackupCollectListener collectListener,
-					 boolean readData) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @Nullable BackupCollectListener collectListener,
+	                 boolean readData) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -66,10 +66,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @NonNull List<SettingsItem> items,
-					 @Nullable ImportListener importListener,
-					 boolean forceReadData) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @NonNull List<SettingsItem> items,
+	                 @Nullable ImportListener importListener,
+	                 boolean forceReadData) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -80,10 +80,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @NonNull List<SettingsItem> items,
-					 @NonNull List<SettingsItem> selectedItems,
-					 @Nullable CheckDuplicatesListener duplicatesListener) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @NonNull List<SettingsItem> items,
+	                 @NonNull List<SettingsItem> selectedItems,
+	                 @Nullable CheckDuplicatesListener duplicatesListener) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -113,9 +113,18 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
+				if (items != null && items.size() > 0) {
+					BackupHelper backupHelper = app.getBackupHelper();
+					PrepareBackupResult backup = backupHelper.getBackup();
+					for (SettingsItem item : items) {
+						item.apply();
+						String fileName = item.getFileName();
+						updateFileUploadTime(backupHelper, fileName, backup, item);
+					}
+				}
+				return items;
 			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
-					boolean forceRead = importType == ImportType.IMPORT_FORCE_READ;
 					BackupHelper backupHelper = app.getBackupHelper();
 					PrepareBackupResult backup = backupHelper.getBackup();
 					JSONObject json = new JSONObject();
@@ -128,48 +137,41 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					List<SettingsItem> filteredItems = new ArrayList<>(items);
 					for (SettingsItem item : items) {
 						String fileName = item.getFileName();
-						if (forceRead)
-						{
-							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName + BackupHelper.INFO_EXT);
-							if (remoteFile != null) {
-								try {
-									fetchRemoteFileInfo(remoteFile, itemsJson);
-									filteredItems.remove(item);
-								} catch (IOException | JSONException | UserNotRegisteredException e) {
-									NetworkSettingsHelper.LOG.error("Failed to generate item info for force read", e);
-								}
-							}
-						}
-						else {
-							item.apply();
-						}
-
-						if (fileName != null) {
-							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
-							if (remoteFile != null) {
-								backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							}
-						}
-						if (forceRead)
-						{
+						RemoteFile remoteInfoFile = backup.getRemoteFile(item.getType().name(), fileName + BackupHelper.INFO_EXT);
+						if (remoteInfoFile != null) {
 							try {
-								SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
-								List<SettingsItem> itms = new ArrayList<>(itemsFactory.getItems());
-								for (SettingsItem it : itms) {
-									it.setShouldReplace(true);
-								}
-								itms.addAll(filteredItems);
-								items = itms;
-							} catch (JSONException e) {
-								NetworkSettingsHelper.LOG.error("Failed to read item info from json", e);
+								fetchRemoteFileInfo(remoteInfoFile, itemsJson);
+								filteredItems.remove(item);
+							} catch (IOException | JSONException | UserNotRegisteredException e) {
+								NetworkSettingsHelper.LOG.error("Failed to generate item info for force read", e);
 							}
-
+						}
+						updateFileUploadTime(backupHelper, fileName, backup, item);
+						try {
+							SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+							List<SettingsItem> settingsItems = new ArrayList<>(itemsFactory.getItems());
+							for (SettingsItem settingsItem : settingsItems) {
+								settingsItem.setShouldReplace(true);
+							}
+							settingsItems.addAll(filteredItems);
+							items = settingsItems;
+						} catch (JSONException e) {
+							NetworkSettingsHelper.LOG.error("Failed to read item info from json", e);
 						}
 					}
 				}
 				return items;
 		}
 		return null;
+	}
+
+	private void updateFileUploadTime(BackupHelper backupHelper, String fileName, PrepareBackupResult backup, SettingsItem item) {
+		if (fileName != null) {
+			RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
+			if (remoteFile != null) {
+				backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+			}
+		}
 	}
 
 	@Override
