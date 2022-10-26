@@ -2542,4 +2542,11 @@
     <string name="reset_deafult_order">기본 항목 순서 복원</string>
     <string name="lang_ckb">중부 쿠르드족</string>
     <string name="co2_mission">CO2 배출</string>
+    <string name="main_actions_descr">버튼이 4개뿐입니다.</string>
+    <string name="context_menu_actions">상황에 맞는 메뉴 작업</string>
+    <string name="quick_action_edit_actions">작업 편집</string>
+    <string name="delete_all_actions_message_q">%d 빠른 작업을 취소할 수 없게 삭제하시겠습니까\?</string>
+    <string name="main_actions">주요 업무</string>
+    <string name="export_import_quick_actions_with_profiles_promo">앱 프로필로 빠른 작업을 내보내거나 가져옵니다.</string>
+    <string name="additional_actions">추가 작업</string>
 </resources>
