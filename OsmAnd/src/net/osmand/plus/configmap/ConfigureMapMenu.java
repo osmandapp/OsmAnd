@@ -20,6 +20,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
+import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -257,7 +259,7 @@ public class ConfigureMapMenu {
 						showRendererSnackbarForAttr(activity, attrName, nightMode, pref);
 					}
 					return false;
-				});
+				}, null);
 				if (item != null) {
 					adapter.addItem(item);
 				}
@@ -657,6 +659,8 @@ public class ConfigureMapMenu {
 				|| CURRENT_TRACK_WIDTH_ATTR.equals(attrName)
 				|| CYCLE_NODE_NETWORK_ROUTES_ATTR.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
+				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
+				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
 		);
 	}
 
@@ -698,7 +702,7 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		if (p.isBoolean()) {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
-			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null);
+			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null, null);
 		} else {
 			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
 			String descr;
@@ -733,34 +737,54 @@ public class ConfigureMapMenu {
 	                                                             @Nullable RenderingRuleProperty property,
 	                                                             @DrawableRes int icon,
 	                                                             boolean nightMode,
-	                                                             @Nullable CallbackWithObject<Boolean> callback) {
+	                                                             @Nullable CallbackWithObject<Boolean> callback,
+	                                                             @Nullable OnClickListener rowClickListener) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
-		return new ContextMenuItem(id)
+		ContextMenuItem menuItem = new ContextMenuItem(id)
 				.setTitle(name)
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					if (property != null) {
-						pref.set(isChecked);
-						activity.refreshMapComplete();
-						activity.updateLayers();
-					} else {
-						isChecked = pref.get();
-					}
-					if (callback != null) {
-						callback.processResult(isChecked);
-					}
-					item.setSelected(pref.get());
-					item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-					item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-					uiAdapter.onDataSetChanged();
-					return false;
-				})
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
 				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
-				.setIcon(icon);
+				.setIcon(icon)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onContextMenuClick(OnDataChangeUiAdapter uiAdapter, View view, ContextMenuItem item, boolean isChecked) {
+						if (property != null) {
+							pref.set(isChecked);
+							activity.refreshMapComplete();
+							activity.updateLayers();
+						} else {
+							isChecked = pref.get();
+						}
+						if (callback != null) {
+							callback.processResult(isChecked);
+						}
+						item.setSelected(pref.get());
+						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+						uiAdapter.onDataSetChanged();
+						return false;
+					}
+
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
+						if (rowClickListener != null) {
+							rowClickListener.onClick();
+						} else {
+							onContextMenuClick(uiAdapter, view, item, !item.getSelected());
+						}
+						return false;
+					}
+				});
+
+		if (rowClickListener != null) {
+			menuItem.setSecondaryIcon(R.drawable.ic_action_additional_option);
+		}
+
+		return menuItem;
 	}
 
 	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,

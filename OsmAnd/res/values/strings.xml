@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_lines_color_scheme">Lines color scheme</string>
+    <string name="shared_string_lines_width">Lines width</string>
+    <string name="depth_contour_lines">Depth contour lines</string>
+    <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on map.</string>
+    <string name="nautical_depth_contours">Nautical depth contours</string>
     <string name="release_4_3">
     • New faster map rendering engine, with 2.5D view\n\n
     • Smooth animation for location changes during movement\n\n

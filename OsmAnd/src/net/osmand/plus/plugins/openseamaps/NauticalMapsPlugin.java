@@ -11,6 +11,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -99,6 +101,9 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 				menuAdapter.addItem(ConfigureMapMenu.createBooleanRenderingProperty(mapActivity, attrName, name, DEPTH_CONTOURS, property, R.drawable.ic_action_nautical_depth, nightMode, result -> {
 					mapActivity.refreshMapComplete();
 					return false;
+				}, () -> {
+					DashboardOnMap dashboard = mapActivity.getDashboard();
+					dashboard.setDashboardVisibility(true, DashboardType.NAUTICAL_DEPTH);
 				}));
 				iterator.remove();
 			}
