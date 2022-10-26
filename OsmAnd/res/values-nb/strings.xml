@@ -4754,7 +4754,7 @@
     <string name="map_widget_ant_heart_rate_desc">Viser brukerens puls i løpet av en aktivitet i sanntid</string>
     <string name="map_widget_ant_bicycle_power_desc">Viser syklistens kraft, som brukes til å bevege sykkelen fremover</string>
     <string name="map_widget_ant_bicycle_cadence">Tråkkfrekvens</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">Viser hastigheten brukeren tråkker med</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Viser hvor fort pedalene tråkkes rundt</string>
     <string name="map_widget_ant_bicycle_speed_desc">Viser kjørehastighet</string>
     <string name="worldwide_maps">Verdenskart</string>
     <string name="developer_widgets">Utviklerminiprogrammer</string>
@@ -4777,4 +4777,11 @@
     <string name="auto_25_chars_route_roundabout_kl">Ta %1$d avkjøringen og hold til venstre</string>
     <string name="auto_25_chars_route_roundabout_kr">Ta %1$d avkjøringen og hold til høyre</string>
     <string name="shared_string_2_5_d_view">2.5 D-visning</string>
+    <string name="external_sensors_plugin_name">Eksterne sensorer</string>
+    <string name="map_widget_altitude_map_center">Høyde: kartsenter</string>
+    <string name="map_widget_altitude_map_center_desc">Viser høyde over havet til gjeldende kartsenter.</string>
+    <string name="map_widget_altitude_current_location">Høyde: gjeldende posisjon</string>
+    <string name="current_location_widget">Koordinater: gjeldende posisjon</string>
+    <string name="map_center_widget">Koordinater: kartsenter</string>
+    <string name="map_widget_altitude_current_location_desc">Viser høyde over havet til gjeldende posisjon.</string>
 </resources>
