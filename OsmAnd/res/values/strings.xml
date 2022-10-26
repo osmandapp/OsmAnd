@@ -10,7 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="release_4_3">
+    • New faster map rendering engine, with 2.5D view\n\n
+    • Smooth animation for location changes during movement\n\n
+    • New widget with coordinates of map center\n\n
+    • \"Distance to tap\" added text size options\n\n
+    • \"Map marker\" widget added option to change click behavior\n\n
+    • Fixed \"Display position\" option\n\n
+    • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
+    • Reorganised \"Nautical maps\" list\n\n
+    • Added support for ANT+ sensors\n\n
+    • Added option to disable UUID\n\n
+    </string>
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
