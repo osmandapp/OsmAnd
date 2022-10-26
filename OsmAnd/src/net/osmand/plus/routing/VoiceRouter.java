@@ -8,7 +8,6 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
@@ -822,7 +821,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	private String getTurnType(TurnType t) {
+	private String getTurnType(@NonNull TurnType t) {
 		if (TurnType.TL == t.getValue()) {
 			return CommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
@@ -842,32 +841,36 @@ public class VoiceRouter {
 		}
 		return null;
 	}
-	
+
 	public void gpsLocationLost() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			p.gpsLocationLost();
+		if (settings.SPEAK_GPS_SIGNAL_STATUS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				p.gpsLocationLost();
+			}
+			play(p);
 		}
-		play(p);
 	}
-	
+
 	public void gpsLocationRecover() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p != null) {
-			p.gpsLocationRecover();
+		if (settings.SPEAK_GPS_SIGNAL_STATUS.get()) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				p.gpsLocationRecover();
+			}
+			play(p);
 		}
-		play(p);
 	}
 
 	public void newRouteIsCalculated(boolean newRoute) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
-			if (!newRoute) {
-				p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
-			} else {
+			if (newRoute) {
 				p.newRouteCalculated(router.getLeftDistance(), router.getLeftTime());
+			} else if (settings.SPEAK_ROUTE_RECALCULATION.get()) {
+				p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
 			}
-		} else if (player == null) {
+		} else if (player == null && (newRoute || settings.SPEAK_ROUTE_RECALCULATION.get())) {
 			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED : VoiceCommandPending.ROUTE_CALCULATED, this);
 		}
 		play(p);
@@ -920,12 +923,14 @@ public class VoiceRouter {
 	 * Command to wait until voice player is initialized
 	 */
 	private class VoiceCommandPending {
+
 		public static final int ROUTE_CALCULATED = 1;
 		public static final int ROUTE_RECALCULATED = 2;
-		protected final int type;
+
+		private final int type;
 		private final VoiceRouter voiceRouter;
-		
-		public VoiceCommandPending(int type, VoiceRouter voiceRouter) {
+
+		public VoiceCommandPending(int type, @NonNull VoiceRouter voiceRouter) {
 			this.type = type;
 			this.voiceRouter = voiceRouter;
 		}

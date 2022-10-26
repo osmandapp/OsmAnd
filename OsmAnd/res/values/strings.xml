@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="speak_gps_signal_status">Announce GPS signal lost or recover</string>
+    <string name="speak_route_recalculation">Anounce route recalculation</string>
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
