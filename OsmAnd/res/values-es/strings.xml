@@ -4799,7 +4799,7 @@
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
-    <string name="rendering_attr_depthContourWidth_description">Anchura de curvas de nivel de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
@@ -4847,7 +4847,7 @@
     <string name="nautical_depth_points">Puntos de profundidad náutica</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
-    <string name="transport_hazmat_no_desc">Los caminos y túneles pueden restringir el transporte de materiales peligrosos.</string>
+    <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos (expresada en fotogramas por segundo o FPS).</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir el uso del tráfico y generar informes anónimos de mapas mensuales.</string>
