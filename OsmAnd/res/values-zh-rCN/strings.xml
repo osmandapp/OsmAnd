@@ -4520,4 +4520,6 @@
     <string name="routing_attr_avoid_sett_name">无鹅卵石或小型原石砖</string>
     <string name="routing_attr_piste_type_downhill_description">适合高山或高山速降滑雪的斜坡，并可使用滑雪缆车。</string>
     <string name="routing_attr_piste_type_sled_description">供雪橇使用的斜坡。</string>
+    <string name="turn_on_profile_desc">请至少打开一个应用配置文件以使用此设置。</string>
+    <string name="routeInfo_winter_ice_road_name">冬季和冰雪道路</string>
 </resources>
