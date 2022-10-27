@@ -1556,7 +1556,7 @@
     <string name="dark_theme">Oscuro</string>
     <string name="lang_pms">Piamontés</string>
     <string name="lang_bn">Bengalí</string>
-    <string name="lang_sh">Serbocroata</string>
+    <string name="lang_sh">Serbo-croata</string>
     <string name="lang_br">Bretón</string>
     <string name="lang_sq">Albanés</string>
     <string name="lang_is">Islandés</string>
@@ -2585,7 +2585,7 @@
     <string name="shared_string_actions">Acciones</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="shared_string_without_name">Sin nombre</string>
-    <string name="lang_lo">Laosiana</string>
+    <string name="lang_lo">Laosiano</string>
     <string name="will_open_tomorrow_at">Abre mañana a las</string>
     <string name="rendering_attr_hidePOILabels_name">Etiquetas de PDI</string>
     <string name="day_off_label">cerrado</string>
@@ -3512,7 +3512,7 @@
     <string name="lang_tg">Tayiko</string>
     <string name="lang_sco">Escocés</string>
     <string name="lang_scn">Siciliano</string>
-    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_pnb">Panyabí</string>
     <string name="lang_ne">Nepalí</string>
     <string name="lang_nap">Napolitano</string>
     <string name="lang_my">Birmano</string>
@@ -4453,7 +4453,7 @@
     <string name="gps_filter_speed_altitude_desc">Sólo los puntos de la traza que coincidan con el intervalo definido aparecerán en el gráfico y el mapa, el resto quedará oculto.</string>
     <string name="gps_filter_smoothing_desc">Define el umbral de distancia entre puntos.
 \nSerán ocultados los puntos de la traza que no estén al menos a esta distancia del último punto visible.
-\nTen en cuenta que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
+\nNótese que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="shared_string_statistics">Estadísticas</string>
     <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
@@ -4539,7 +4539,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Peligroso</string>
     <string name="rendering_attr_horse_scale_impossible_name">Imposible</string>
     <string name="routing_attr_carriage_restrictions_name">Restricciones al transporte</string>
-    <string name="routing_attr_carriage_restrictions_description">Considera los permisos de acceso para los vehículos tirados por caballos</string>
+    <string name="routing_attr_carriage_restrictions_description">Considera los permisos de acceso para los vehículos impulsados a caballo</string>
     <string name="rendering_attr_showTramRoutes_name">Rutas de tranvía</string>
     <string name="rendering_attr_showTrainRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_showLightRailRoutes_name">Rutas de tren ligero</string>
@@ -4756,7 +4756,7 @@
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para curvas de nivel de profundidad</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
 \nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
@@ -4764,9 +4764,9 @@
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
     <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
-    <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
-    <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
-    <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_name">Anchura de curva de nivel de profundidad</string>
     <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
     <string name="auto_25_chars_route_tr_kl">Gira a la derecha y quédate en la izquierda</string>
     <string name="auto_25_chars_route_tr_kr">Gira a la derecha y quédate en la derecha</string>
@@ -4775,7 +4775,7 @@
     <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y quédate en la izquierda</string>
     <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y quédate en la derecha</string>
     <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y quédate en la izquierda</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos exclusivos para el ciclismo de montaña.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
     <string name="connect_with_straight_line">Conectar con una línea recta</string>
