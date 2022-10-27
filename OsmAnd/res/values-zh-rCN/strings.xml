@@ -4522,4 +4522,12 @@
     <string name="routing_attr_piste_type_sled_description">供雪橇使用的斜坡。</string>
     <string name="turn_on_profile_desc">请至少打开一个应用配置文件以使用此设置。</string>
     <string name="routeInfo_winter_ice_road_name">冬季和冰雪道路</string>
+    <string name="rendering_attr_tracktype_grade3_name">多半坚实</string>
+    <string name="rendering_attr_tracktype_grade4_name">多半松软</string>
+    <string name="shared_string_file_is_saved">%s 已保存</string>
+    <string name="shared_string_track_is_saved">轨迹 %s 已保存</string>
+    <string name="app_mode_campervan">露营车（RV）</string>
+    <string name="temporary_conditional_routing">考虑临时限制</string>
+    <string name="rendering_attr_tracktype_grade1_name">坚实（有铺面）</string>
+    <string name="rendering_attr_tracktype_grade2_name">坚实（无铺面）</string>
 </resources>
