@@ -4784,4 +4784,5 @@
     <string name="current_location_widget">Koordinater: gjeldende posisjon</string>
     <string name="map_center_widget">Koordinater: kartsenter</string>
     <string name="map_widget_altitude_current_location_desc">Viser høyde over havet til gjeldende posisjon.</string>
+    <string name="shared_string_terms_of_use">Tjenestevilkår</string>
 </resources>

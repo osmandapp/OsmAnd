@@ -4790,7 +4790,7 @@
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
-    <string name="display_position">Posición de la pantalla</string>
+    <string name="display_position">Posición de la ubicación</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
@@ -4855,7 +4855,7 @@
     <string name="map_widget_altitude_map_center_desc">Muestra la altura sobre el nivel del mar en el centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="map_widget_altitude_current_location_desc">Muestra la altura sobre el nivel del mar en la ubicación geográfica actual.</string>
-    <string name="map_widget_rendering_fps">Renderizando FPS del mapa</string>
+    <string name="map_widget_rendering_fps">Renderizado FPS del mapa</string>
     <string name="simulate_location_by_gpx">Simular ubicación via GPX</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
@@ -4863,4 +4863,27 @@
     <string name="terms_of_service_desc">Al descargar los mapas, aceptas los %1$s y %2$s.</string>
     <string name="shared_string_terms_of_use">Términos de uso</string>
     <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos (expresada en fotogramas por segundo o FPS).</string>
+    <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
+    <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
+    <string name="release_4_3">• Nuevo motor más rápido al visualizar mapas, con vista 2.5D
+\n
+\n • Animación suave para los cambios de ubicación al moverse
+\n
+\n • Nuevo widget con las coordenadas del centro del mapa
+\n
+\n • Se han añadido opciones de tamaño de texto en «Distancia al pulsar».
+\n
+\n • El widget «Marcador del mapa» ha añadido la opción de cambiar el comportamiento de las pulsaciones
+\n
+\n • Se ha corregido la opción «Posición de la ubicación».
+\n
+\n • GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
+\n
+\n • Se ha reorganizado la lista de «Mapas náuticos»
+\n
+\n • Se ha añadido soporte para sensores externos ANT+
+\n
+\n • Se ha añadido la opción de desactivar el UUID
+\n
+\n</string>
 </resources>

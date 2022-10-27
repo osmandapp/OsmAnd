@@ -1127,7 +1127,7 @@
     <string name="index_item_world_seamarks">Globale sømærker</string>
     <string name="index_item_world_bitcoin_payments">Globale bitcoinbetalinger</string>
     <string name="index_item_world_altitude_correction">Global højdekorrektion</string>
-    <string name="always_center_position_on_map">Vis altid position centeret</string>
+    <string name="always_center_position_on_map">Vis altid position centreret</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
@@ -4853,4 +4853,27 @@
     <string name="shared_string_identifiers">Identifikatorer</string>
     <string name="terms_of_service_desc">Ved at downloade kort accepterer du %1$s og %2$s.</string>
     <string name="shared_string_terms_of_use">Vilkår for anvendelse</string>
+    <string name="speak_gps_signal_status">Meddel at GPS-signalet er tabt eller blevet genoprettet</string>
+    <string name="speak_route_recalculation">Meddel genberegning af rute</string>
+    <string name="release_4_3">• Ny, hurtigere kortgengivelse med 2,5D-visning
+\n
+\n • Glidende animation for ændringer i placering under bevægelse
+\n
+\n • Nyt modul med koordinater for kortets centrum
+\n
+\n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse
+\n
+\n • Modulet \"Kortmarkør\" tilføjet mulighed for at ændre klikadfærd
+\n
+\n • Indstillingen \"Vis position\" blev rettet
+\n
+\n • GPX: tilføjede understøttelse af \"link\", \"cmt\", \"desc\" tags og for alle brugerdefinerede udvidelser
+\n
+\n • Omorganiseret liste over \"Nautiske kort\".
+\n
+\n • Der er tilføjet understøttelse af ANT+-sensorer
+\n
+\n • Tilføjet mulighed for at deaktivere UUID
+\n
+\n</string>
 </resources>
