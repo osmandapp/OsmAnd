@@ -4693,7 +4693,7 @@
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del viaje actual.</string>
     <string name="map_widget_average_speed">Velocidad media</string>
-    <string name="transport_hazmat_no_desc">Los caminos y túneles pueden restringir el transporte de materiales peligrosos.</string>
+    <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
     <string name="transport_hazmat_yes_desc">Marca la categoría correspondiente.</string>
     <string name="import_as_one_track">Importar como una traza</string>
@@ -4886,4 +4886,6 @@
 \n • Se ha añadido la opción de desactivar el UUID
 \n
 \n</string>
+    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
+    <string name="external_sensors_support">Sensores externos admitidos</string>
 </resources>
