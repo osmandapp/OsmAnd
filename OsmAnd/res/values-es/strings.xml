@@ -4799,7 +4799,7 @@
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
-    <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_description">Anchura de curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
