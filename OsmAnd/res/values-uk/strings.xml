@@ -4836,7 +4836,7 @@
     <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
     <string name="shared_string_terms_of_use">Умови використання</string>
     <string name="external_sensors_plugin_name">Зовнішні датчики</string>
-    <string name="external_sensors_plugin_description">Відстеження частоти серцевих скорочень, швидкості велосипеда, потужності велосипеда та каденсу. Необхідне з\'єднання пристрою з датчиками цих параметрів з підтримкою протоколу ANT+ (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Відстеження частоти серцевих скорочень, швидкості велосипеда, потужності велосипеда та швидкості обертання педалей. Необхідне з\'єднання пристрою з датчиками цих параметрів з підтримкою протоколу ANT+ (Wireless Personal Network protocol).</string>
     <string name="map_widget_altitude_map_center">Висота: центр мапи</string>
     <string name="current_location_widget">Координати: Поточне місцеперебування</string>
     <string name="map_widget_altitude_current_location">Висота: поточне місцеперебування</string>
@@ -4847,4 +4847,29 @@
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
     <string name="map_widget_rendering_fps_desc">Показує швидкість показу й оновлення мапи та її елементів (виражається у кадрах за секунду, або FPS).</string>
     <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
+    <string name="speak_gps_signal_status">Повідомляти про втрату або відновлення GPS сигналу</string>
+    <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
+    <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
+    <string name="release_4_3">- Новий швидший рушій рендерингу мап з 2.5D виглядом
+\n
+\n - Плавна анімація зміни локації під час руху
+\n
+\n - Новий віджет з координатами центру мапи
+\n
+\n - «Відстань торканням»: додані опції розміру тексту
+\n
+\n - У віджеті «Позначки мапи» додано опцію зміни поведінки натискання
+\n
+\n - Виправлена опція «Показати позицію»
+\n
+\n - GPX: додана підтримка тегів «link», «cmt», «desc» та будь-яких користувацьких розширень
+\n
+\n - Реорганізовано список «Морські мапи»
+\n
+\n - Додано підтримку ANT+ датчиків
+\n
+\n - Додана можливість вимкнення UUID
+\n
+\n</string>
+    <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
 </resources>
