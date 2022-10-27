@@ -3622,12 +3622,12 @@
     <string name="system_screen_timeout">使用系统屏幕超时</string>
     <string name="use_system_language">使用系统语言</string>
     <string name="turn_screen_on_sensor_descr">在屏幕上挥手点亮屏幕。</string>
-    <string name="voice_announces_descr">导航指示和公告</string>
+    <string name="voice_announces_descr">导航指示和通告</string>
     <string name="turn_screen_on_navigation_instructions_descr">每个导航指令都会点亮屏幕。</string>
     <string name="turn_screen_on_navigation_instructions">导航指示</string>
     <string name="profile_appearance">配置外观</string>
     <string name="edit_profile_screen_options_subtitle">选择页面选项</string>
-    <string name="map_look_descr">地图显示</string>
+    <string name="map_look_descr">地图外观</string>
     <string name="configure_profile_info">配置选项：</string>
     <string name="configure_profile">更改配置</string>
     <string name="osmand_live">OsmAnd 实况</string>
@@ -4532,4 +4532,18 @@
     <string name="rendering_attr_tracktype_grade2_name">坚实（无铺面）</string>
     <string name="new_route_calculated_dist_dbg">路线：距离%1$s, 路线时间%2$s
 \n计算：%3$.1f 秒,%4$d 条路,%5$d 个瓦片)</string>
+    <string name="turn_screen_on_info">导航期间在锁定屏幕上显示地图。</string>
+    <string name="vehicle_parameters">车辆参数</string>
+    <string name="get_discount_title">以 %3$s 折扣优惠获取 %1$d %2$s。</string>
+    <string name="get_discount_first_part">以 %1$s 的第一次 %2$s</string>
+    <string name="voice_announces_info">只在导航期间发出语音播报。</string>
+    <string name="manage_profiles">管理应用配置文件…</string>
+    <string name="start_up_message_pref">启动信息</string>
+    <string name="route_parameters_info">所选配置文件 “%1$s”的路线设置。</string>
+    <string name="turn_screen_on">开启屏幕</string>
+    <string name="map_during_navigation_info">导航期间的地图</string>
+    <string name="vehicle_parameters_descr">重量、高度、长度、速度</string>
+    <string name="map_look">地图外观</string>
+    <string name="wake_time">唤醒后超时</string>
+    <string name="manage_profiles_descr">创建、导入、编辑配置文件</string>
 </resources>
