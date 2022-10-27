@@ -2687,4 +2687,18 @@
     <string name="current_location_widget">좌표: 현재 위치</string>
     <string name="exported_osmand_profile">OsmAnd 프로필: %1$s</string>
     <string name="quick_actions_delete">삭제 작업</string>
+    <string name="routing_attr_motor_type_hybrid_name">하이브리드</string>
+    <string name="rendering_attr_depthContourWidth_description">깊이 등고선 선 폭</string>
+    <string name="accessibility_2d_view_on">2.5D 뷰 켜기</string>
+    <string name="download_complete">다운로드 완료</string>
+    <string name="import_as_one_track">하나의 트랙으로 가져오기</string>
+    <string name="rendering_attr_depthContourColorScheme_description">깊이 등고선 색 구성표</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">전기 모터</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="kg">킬로그램</string>
+    <string name="routing_attr_motor_type_diesel_name">디젤</string>
+    <string name="routing_attr_motor_type_petrol_name">가솔린</string>
+    <string name="accessibility_2d_view_off">2.5D 뷰 끄기</string>
+    <string name="rendering_attr_depthContourWidth_name">깊이 등고선 너비</string>
 </resources>
