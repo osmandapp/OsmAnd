@@ -2701,4 +2701,24 @@
     <string name="routing_attr_motor_type_petrol_name">가솔린</string>
     <string name="accessibility_2d_view_off">2.5D 뷰 끄기</string>
     <string name="rendering_attr_depthContourWidth_name">깊이 등고선 너비</string>
+    <string name="average_speed_skip_stops">정류장 고려</string>
+    <string name="map_widget_true_bearing">트루 베어링</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (제한 없음)</string>
+    <string name="av_notes_choose_action_widget_desc">작업 선택.</string>
+    <string name="colour_of_circles">원형의 색상</string>
+    <string name="compass_on_circles">원형에 나침반</string>
+    <string name="battery_widget_desc">장치의 배터리 잔량을 표시합니다.</string>
+    <string name="use_latin_name_if_missing">누락된 경우 라틴어 이름 사용</string>
+    <string name="routing_attr_hazmat_category_description">위험 물질 범주 / 유해 물질 접근 권한 고려</string>
+    <string name="rendering_attr_weatherTempContours_name">온도 아이소라인</string>
+    <string name="routing_attr_hazmat_category_name">유해 물질 카테고리</string>
+    <string name="rendering_attr_horseScale_name">말길의 난이도</string>
+    <string name="map_widget_trip_recording_downhill">다운힐</string>
+    <string name="map_widget_trip_recording_uphill">오르막길</string>
+    <string name="current_time_widget_desc">기기의 현재 시간을 표시합니다.</string>
+    <string name="average_speed_time_interval_desc">속도 평균화의 시간 간격을 지정합니다.</string>
+    <string name="radius_ruler_mode_desc">위젯을 탭하면 반경 눈금자 모드로 전환됩니다.</string>
+    <string name="routing_attr_allow_private_for_truck_description">트럭의 개인 구역에 대한 접근을 허용합니다.</string>
+    <string name="routing_attr_allow_private_for_truck_name">개인 액세스 허용(트럭)</string>
+    <string name="rendering_attr_weatherPressureContours_name">압력 아이소라인</string>
 </resources>
