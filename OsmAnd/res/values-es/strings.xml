@@ -1733,7 +1733,7 @@
     <string name="whats_new">Novedades en</string>
     <string name="lang_nds">Bajo Alemán</string>
     <string name="lang_mk">Macedonio</string>
-    <string name="lang_fy">Frisio</string>
+    <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albanés (Tosk)</string>
     <string name="share_osm_edits_subject">Ediciones de OSM compartidas vía OsmAnd</string>
     <string name="save_poi_without_poi_type_message">¿Guardar el PDI sin especificar el tipo\?</string>
@@ -2185,7 +2185,7 @@
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado.</string>
-    <string name="lang_ber">Berberisco</string>
+    <string name="lang_ber">Bereber (amazig)</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información sobre las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
     <string name="do_not_show_startup_messages">Ocultar mensajes de inicio</string>
@@ -3499,7 +3499,7 @@
     <string name="lang_nap">Napolitano</string>
     <string name="lang_mn">Mongol</string>
     <string name="lang_min">Minangkabau</string>
-    <string name="lang_mg">Madagascarí</string>
+    <string name="lang_mg">Malgache</string>
     <string name="lang_ky">Kirguís</string>
     <string name="lang_gu">Guyaratí</string>
     <string name="lang_cv">Chuvasio</string>
@@ -4867,7 +4867,7 @@
     <string name="map_widget_altitude_desc">Muestran la altura sobre el nivel del mar en la ubicación geográfica actual o en el centro del mapa actual</string>
     <string name="map_widget_altitude_map_center_desc">Muestra la altura sobre el nivel del mar en el centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
-    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: velocidad, potencia y cadencia de la bicicleta, y ritmo cardíaco.</string>
+    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
     <string name="release_4_3">• Nuevo motor más rápido al visualizar mapas, con vista 2.5D
 \n
