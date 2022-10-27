@@ -1752,9 +1752,9 @@
     <string name="months_5">Bulan</string>
     <string name="months_2_4">Bulan</string>
     <string name="month">Bulan</string>
-    <string name="weeks_5">Pekan</string>
-    <string name="week">Pekan</string>
-    <string name="weeks_2_4">Pekan</string>
+    <string name="weeks_5">Minggu</string>
+    <string name="week">Minggu</string>
+    <string name="weeks_2_4">Minggu</string>
     <string name="days_5">Hari</string>
     <string name="days_2_4">Hari</string>
     <string name="day">Hari</string>
@@ -4852,4 +4852,27 @@
     <string name="online_map_settings_descr">Pilih sumber peta ubin daring atau yang telah disimpan.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Peta vektor kemungkinan ditampilkan lebih cepat. Mungkin tidak berfungsi dengan baik pada beberapa perangkat.</string>
     <string name="play_commands_of_currently_selected_voice">Pilih suara dan uji dengan memutar pengumuman:</string>
+    <string name="speak_gps_signal_status">Umumkan sinyal GPS hilang atau pulih</string>
+    <string name="speak_route_recalculation">Umumkan penghitungan ulang rute</string>
+    <string name="release_4_3">- Mesin render peta baru lebih cepat, dengan tampilan 2.5D
+\n
+\n - Animasi halus untuk perubahan lokasi selama pergerakan
+\n
+\n - Widget baru dengan koordinat pusat peta
+\n
+\n - \"Jarak untuk mengetuk\" menambahkan opsi ukuran teks
+\n
+\n - Widget \"Penanda peta\" menambahkan opsi untuk mengubah perilaku klik
+\n
+\n - Diperbaiki opsi \"Posisi tampilan\"
+\n
+\n - GPX: ditambahkan dukungan untuk tag \"link\", \"cmt\", \"desc\" dan untuk ekstensi khusus apa pun
+\n
+\n - Daftar \"Peta bahari\" yang diatur ulang
+\n
+\n - Ditambahkan dukungan untuk sensor ANT+
+\n
+\n - Ditambahkan opsi untuk menonaktifkan UUID
+\n
+\n</string>
 </resources>
