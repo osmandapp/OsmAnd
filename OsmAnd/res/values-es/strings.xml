@@ -4800,7 +4800,7 @@
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
-    <string name="rendering_attr_depthContourWidth_name">Anchura de las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourWidth_name">Anchura de curva de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
