@@ -4530,4 +4530,6 @@
     <string name="temporary_conditional_routing">考虑临时限制</string>
     <string name="rendering_attr_tracktype_grade1_name">坚实（有铺面）</string>
     <string name="rendering_attr_tracktype_grade2_name">坚实（无铺面）</string>
+    <string name="new_route_calculated_dist_dbg">路线：距离%1$s, 路线时间%2$s
+\n计算：%3$.1f 秒,%4$d 条路,%5$d 个瓦片)</string>
 </resources>
