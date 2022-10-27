@@ -2924,7 +2924,7 @@
     <string name="collected_data_descr">Elekti datumojn por kunhavigi al programistoj de OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Helpu al ni scii pri populareco de mapoj de landoj kaj regionoj.</string>
     <string name="visited_screens_collect_descr">Helpu al ni scii pri populareco de eblaĵoj de OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Frapetu “permesi” se vi akceptas nian %1$s</string>
+    <string name="privacy_and_security_change_descr">Frapetu “Permesi”, se vi akceptas nian %1$s</string>
     <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
     <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
     <string name="shared_string_no_thank_you">Ne, mi ne volas</string>
@@ -4822,7 +4822,7 @@
     <string name="send_uuid_preference_desc">Hazarda identigilo UUID estas uzata por elŝuti malkonektajn mapojn el la OsmAnd-serviloj por gardi laŭregulan uzadon de niaj serviloj, antaŭscii uzadon de datumtrafiko kaj generi anonimajn monatajn raportojn pri mapoj.</string>
     <string name="send_uuid_preference">Sendi unikan uzant-identigilon (UUID)</string>
     <string name="shared_string_identifiers">Identigiloj</string>
-    <string name="terms_of_service_desc">Elŝutante mapojn vi konsentas kun nia %1$s kaj %2$s.</string>
+    <string name="terms_of_service_desc">Elŝutante mapojn vi konsentas kun niaj %1$s kaj %2$s.</string>
     <string name="shared_string_terms_of_use">Kondiĉoj pri uzado</string>
     <string name="favorites_backup">Sekurkopio de ŝatataj</string>
     <string name="purchases_feature_desc_cross_buy">Havigu viajn aĉetitajn trajtojn ĉe pluraj platformoj: Android/iOS/ret-aplikaĵo sen kroma pago.</string>
