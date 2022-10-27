@@ -4787,7 +4787,7 @@
     <string name="second_next_turn_widget_desc">Muestra la información sobre el segundo próximo giro, que se activa al aproximarse a este giro.</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para las curvas de profundidad</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de profundidad</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
