@@ -145,7 +145,10 @@ public class RouteCalculationProgress {
 	}
 
 	public float getApproximationProgress() {
-		float progress = approximatedDistance / totalApproximateDistance;
+		float progress = 0;
+		if (totalApproximateDistance > 0) {
+			progress = approximatedDistance / totalApproximateDistance;
+		}
 		progress = INITIAL_PROGRESS + progress * (1 - INITIAL_PROGRESS);
 		return Math.min(progress * 100f, 99);
 	}
