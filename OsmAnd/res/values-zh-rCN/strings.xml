@@ -4520,4 +4520,16 @@
     <string name="routing_attr_avoid_sett_name">无鹅卵石或小型原石砖</string>
     <string name="routing_attr_piste_type_downhill_description">适合高山或高山速降滑雪的斜坡，并可使用滑雪缆车。</string>
     <string name="routing_attr_piste_type_sled_description">供雪橇使用的斜坡。</string>
+    <string name="turn_on_profile_desc">请至少打开一个应用配置文件以使用此设置。</string>
+    <string name="routeInfo_winter_ice_road_name">冬季和冰雪道路</string>
+    <string name="rendering_attr_tracktype_grade3_name">多半坚实</string>
+    <string name="rendering_attr_tracktype_grade4_name">多半松软</string>
+    <string name="shared_string_file_is_saved">%s 已保存</string>
+    <string name="shared_string_track_is_saved">轨迹 %s 已保存</string>
+    <string name="app_mode_campervan">露营车（RV）</string>
+    <string name="temporary_conditional_routing">考虑临时限制</string>
+    <string name="rendering_attr_tracktype_grade1_name">坚实（有铺面）</string>
+    <string name="rendering_attr_tracktype_grade2_name">坚实（无铺面）</string>
+    <string name="new_route_calculated_dist_dbg">路线：距离%1$s, 路线时间%2$s
+\n计算：%3$.1f 秒,%4$d 条路,%5$d 个瓦片)</string>
 </resources>

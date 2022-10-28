@@ -4786,7 +4786,7 @@
     <string name="rendering_attr_depthContourWidth_description">El ancho de las curvas de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="shared_string_large">Largo</string>
-    <string name="display_position">Posición de la pantalla</string>
+    <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
@@ -4849,7 +4849,7 @@
     <string name="simulate_location_by_gpx">Simular ubicación via GPX</string>
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="map_widget_altitude_desc">Muestran la altura sobre el nivel del mar en la ubicación geográfica actual o en el centro del mapa actual</string>
-    <string name="map_widget_rendering_fps">Renderizando FPS del mapa</string>
+    <string name="map_widget_rendering_fps">Renderizado FPS del mapa</string>
     <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos (expresada en fotogramas por segundo o FPS).</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd y supervisar el uso justo de los recursos del servidor, predecir el uso del tráfico y generar informes anónimos de mapas mensuales.</string>
@@ -4862,4 +4862,27 @@
     <string name="external_sensors_plugin_name">Sensores externos</string>
     <string name="external_sensors_plugin_description">Monitorea el ritmo cardíaco junto con la velocidad, potencia y cadencia de la bicicleta. Debes conectar el dispositivo con sensores que admitan ANT+ (protocolo de red personal inalámbrica).</string>
     <string name="map_widget_altitude_map_center">Altitud: centro del mapa</string>
+    <string name="release_4_3">• Nuevo motor más rápido al visualizar mapas, con vista 2.5D
+\n
+\n • Animación suave para los cambios de ubicación al moverse
+\n
+\n • Nuevo widget con las coordenadas del centro del mapa
+\n
+\n • Se han añadido opciones de tamaño de texto en «Distancia al pulsar».
+\n
+\n • El widget «Marcador del mapa» ha añadido la opción de cambiar el comportamiento de las pulsaciones
+\n
+\n • Se ha corregido la opción «Posición de la ubicación».
+\n
+\n • GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
+\n
+\n • Se ha reorganizado la lista de «Mapas náuticos»
+\n
+\n • Se ha añadido soporte para sensores externos ANT+
+\n
+\n • Se ha añadido la opción de desactivar el UUID
+\n
+\n</string>
+    <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
+    <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
 </resources>

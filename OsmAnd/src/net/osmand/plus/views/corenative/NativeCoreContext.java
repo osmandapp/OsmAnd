@@ -16,6 +16,7 @@ import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 
 import java.io.File;
@@ -64,6 +65,9 @@ public class NativeCoreContext {
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.LIVE_INDEX_DIR).getAbsolutePath(), false);
+				if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+					obfsCollection.addDirectory(app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR).getAbsolutePath(), false);
+				}
 				if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app)) {
 					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
 				}
