@@ -14,16 +14,16 @@
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
     <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
-    • New faster map rendering engine, with 2.5D view\n\n
+    • New, faster map rendering engine, with 2.5D view\n\n
     • Smooth animation of location changes while in motion\n\n
-    • New widget with coordinates of map center\n\n
+    • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
     • \"Map marker\" widget: added option to change click behavior\n\n
     • Fixed \"Display position\" option\n\n
     • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
     • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
-    • Added option to disable UUID\n\n
+    • Added option to disable download UUID\n\n
     </string>
     <string name="speak_gps_signal_status">Announce GPS signal loss and recovery</string>
     <string name="speak_route_recalculation">Announce route recalculation</string>
