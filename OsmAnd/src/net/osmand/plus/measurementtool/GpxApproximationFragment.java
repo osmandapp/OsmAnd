@@ -142,9 +142,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			@Override
 			public void updateProgress(GpxApproximator approximator, int progress) {
 				if (isResumed() && approximator == GpxApproximationFragment.this.gpxApproximator) {
-					float partSize = 100f / locationsHolders.size();
-					float p = resultMap.size() * partSize + (progress / 100f) * partSize;
-					GpxApproximationFragment.this.updateProgress((int) p);
+					GpxApproximationFragment.this.updateProgress(progress);
 				}
 			}
 
