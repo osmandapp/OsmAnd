@@ -120,6 +120,7 @@ public class RasterMapMenu {
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					hideWaterPolygonsPref.set(!isChecked);
+					settings.POLYGONS_VISIBILITY_SET_MANUALLY.set(true);
 					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					updateTransparencyBarVisibility(isChecked);
