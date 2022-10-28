@@ -17,15 +17,18 @@ public class RouteCalculationProgress {
 	public int reverseSegmentQueueSize;
 	public float reverseDistance;
 	public float totalEstimatedDistance = 0;
-	
+
+	public float totalApproximateDistance = 0;
+	public float approximatedDistance;
+
 	public float routingCalculatedTime = 0;
-	
+
 	public int visitedSegments = 0;
 	public int visitedDirectSegments = 0;
 	public int visitedOppositeSegments = 0;
 	public int directQueueSize = 0;
 	public int oppositeQueueSize = 0;
-	
+
 	public int totalIterations = 1;
 	public int iteration = -1;
 	
@@ -138,6 +141,12 @@ public class RouteCalculationProgress {
 		} else {
 			progress = (float) ((iteration + Math.min(pr, 0.7)) / totalIterations);
 		}
+		return Math.min(progress * 100f, 99);
+	}
+
+	public float getApproximationProgress() {
+		float progress = approximatedDistance / totalApproximateDistance;
+		progress = INITIAL_PROGRESS + progress * (1 - INITIAL_PROGRESS);
 		return Math.min(progress * 100f, 99);
 	}
 
