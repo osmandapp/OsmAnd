@@ -4851,4 +4851,29 @@
     <string name="map_widget_altitude_current_location">Höhenlage: aktueller Standort</string>
     <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
     <string name="map_widget_altitude_desc">Widgets zeigen die Höhe über dem Meeresspiegel des aktuellen Standorts oder der aktuellen Kartenmitte an</string>
+    <string name="external_sensors_support">Unterstützung für externe Sensoren</string>
+    <string name="speak_gps_signal_status">GPS-Signal verloren melden oder wiederherstellen</string>
+    <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
+    <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
+    <string name="release_4_3">- Neue, schnellere Kartenrendering-Engine mit 2,5D-Ansicht
+\n
+\n - Sanfte Animation für Ortswechsel während der Bewegung
+\n
+\n - Neues Widget mit Koordinaten der Kartenmitte
+\n
+\n - Optionen für die Textgröße bei \"Entfernung zum Tippen\" hinzugefügt
+\n
+\n - Widget \"Kartenmarkierung\" mit Option zur Änderung des Klickverhaltens
+\n
+\n - Option \"Position anzeigen\" korrigiert
+\n
+\n - GPX: Unterstützung für \"link\"-, \"cmt\"- und \"desc\"-Tags sowie für beliebige benutzerdefinierte Erweiterungen hinzugefügt
+\n
+\n - Liste \"Nautische Karten\" neu geordnet
+\n
+\n - Unterstützung für ANT+ Sensoren hinzugefügt
+\n
+\n - Option zur Deaktivierung der UUID wurde zugefügt
+\n
+\n</string>
 </resources>

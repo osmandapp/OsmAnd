@@ -4876,4 +4876,6 @@
 \n • Tilføjet mulighed for at deaktivere UUID
 \n
 \n</string>
+    <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
+    <string name="external_sensors_support">Understøttelse af eksterne sensorer</string>
 </resources>

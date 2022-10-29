@@ -4875,4 +4875,6 @@
 \n - Ditambahkan opsi untuk menonaktifkan UUID
 \n
 \n</string>
+    <string name="external_sensors_support">Dukungan sensor eksternal</string>
+    <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
 </resources>

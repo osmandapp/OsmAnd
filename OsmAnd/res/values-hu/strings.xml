@@ -4840,4 +4840,29 @@
     <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosítót (UUID) a következőkre használható: offline térképek letöltése használják az OsmAnd szerverekről, a szerver erőforrásainak méltányos használatának nyomon követése, a forgalom felhasználásának előrejelzése és névtelen havi térképjelentések készítésére.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
     <string name="external_sensors_plugin_description">Pulzusszám, kerékpársebesség, kerékpár-teljesítmény és lépéstempó figyelemmel kísérése. ANT+ (vezeték nélküli személyes hálózati protokoll) támogatásával rendelkező, és e paraméterek érzékelőivel rendelkező készülék szükséges.</string>
+    <string name="speak_gps_signal_status">GPS-jel elvesztésének vagy helyreállásának bemondása</string>
+    <string name="external_sensors_support">Külső érzékelők támogatása</string>
+    <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
+    <string name="speak_route_recalculation">Útvonal újratervezés bemondása</string>
+    <string name="release_4_3">Új, gyorsabb térképrenderelő motor, 2.5D nézettel
+\n
+\n - Folytonos animáció a mozgás közbeni helyváltoztatáskor
+\n
+\n - Új widget a térkép középpontjának koordinátáival
+\n
+\n - \"Távolság koppintásra\" szövegméret beállítások hozzáadva
+\n
+\n - \"Térképjelző\" widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
+\n
+\n - Javított \"Pozíció megjelenítése\" opció
+\n
+\n - GPX: támogatás hozzáadva a \"link\", \"cmt\", \"desc\" címkékhez és bármilyen egyéni kiterjesztéshez
+\n
+\n - A \"Tengerészeti térképek\" lista módosítása
+\n
+\n - Hozzáadva az ANT+ érzékelők támogatása
+\n
+\n - Hozzáadva az UUID letiltásának lehetősége
+\n
+\n</string>
 </resources>

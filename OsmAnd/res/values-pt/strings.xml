@@ -4852,4 +4852,29 @@
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de utilização</string>
     <string name="shared_string_shows">Mostra</string>
+    <string name="external_sensors_support">Sensores externos suportados</string>
+    <string name="speak_gps_signal_status">Anunciar a perda ou recuperação do sinal GPS</string>
+    <string name="speak_route_recalculation">Anunciar o recálculo da rota</string>
+    <string name="release_4_3">• Novo mecanismo de renderização de mapas mais rápido, com visualização 2.5D
+\n
+\n • Animação suave em alterações de localização durante o movimento
+\n
+\n • Novo widget com coordenadas do centro do mapa
+\n
+\n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
+\n
+\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n
+\n • Corrigida opção de \"Posição no ecrã\"
+\n
+\n • GPX: adicionado suporte para etiquetas \"link\", \"cmt\", \"desc\" e para quaisquer extensões personalizadas
+\n
+\n • Lista de \"mapas náuticos\" reorganizada
+\n
+\n • Adicionado suporte para sensores ANT+
+\n
+\n • Opção adicionada para desativar o UUID
+\n
+\n</string>
+    <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
 </resources>

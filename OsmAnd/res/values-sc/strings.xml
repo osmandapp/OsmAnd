@@ -4845,4 +4845,29 @@
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="terms_of_service_desc">Iscarrighende mapas atzetas sas %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Cunditziones de impreu</string>
+    <string name="speak_route_recalculation">Annùntzia su càrculu nou de s\'àndala</string>
+    <string name="external_sensors_support">Suportu pro sos sensores esternos</string>
+    <string name="purchases_feature_desc_external_sensors">Ammustra e registra datos dae sos sensores esternos: lestresa de sa bitzicleta, potèntzia e cadèntzia suas e sa frecuèntzia cardìaca.</string>
+    <string name="speak_gps_signal_status">Annùntzia sa pèrdida o su recùperu de su sinnale GPS</string>
+    <string name="release_4_3">• Motore de renderizatzione nou de sas mapas prus lestru, cun vista 2.5D
+\n
+\n • Animatzione flùida pro sos càmbios de positzione durante su movimentu
+\n
+\n • Widget nou cun sas coordinadas de su tzentru de sa mapa
+\n
+\n • Annantos issèberos de dimensione de su testu a \"Distàntzia pro tocu\"
+\n
+\n • Annanta a su widget \"Marcadore mapa\" s\'optzione pro modificare su cumportamentu de sas incarcadas
+\n
+\n • Optzione \"Ammustra positzione\" acontzada.
+\n
+\n • GPX: agiuntu su suportu pro sas etichetas \"link\", \"cmt\", \"desc\" e pro estensiones personalizadas eventuales
+\n
+\n • Lista \"Mapas nàuticas\" torrada a organizare
+\n
+\n • Annantu su suportu pro sensores ANT+
+\n
+\n • Annanta optzione pro disabilitare s\'UUID
+\n
+\n</string>
 </resources>
