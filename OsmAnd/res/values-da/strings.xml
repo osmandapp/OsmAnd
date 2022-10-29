@@ -2158,8 +2158,8 @@
     <string name="rendering_attr_depthContours_name">Havdybdekurver</string>
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
     <string name="route_altitude">Rutehøjde</string>
-    <string name="altitude_descent">Ned ad bakke</string>
-    <string name="altitude_ascent">Op ad bakke</string>
+    <string name="altitude_descent">Nedstigning</string>
+    <string name="altitude_ascent">Opstigning</string>
     <string name="altitude_range">Højdeinterval</string>
     <string name="average_altitude">Gennemsnitshøjde</string>
     <string name="shared_string_time">Tid</string>
@@ -3418,9 +3418,9 @@
     <string name="shared_string_octagon">Oktagon</string>
     <string name="multimedia_photo_play_sound">Kameraets lukkelyd</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: En indstilling på 5-meter kan fungere godt, hvis der ikke er behov for at opfange finere detaljer, og der ikke ønskes eksplicit at optage data mens i hvile.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Perioder i hvile registreres slet ikke eller kun ved et punkt hver. Små (virkelige) bevægelser (f.eks. sidelæns for at markere en mulig afkørsel på turen) kan blive filtreret ud. Filen indeholder mindre information til efterbehandling og har dårligere statistik ved at frafiltrere åbenlyse overflødige punkter på optagelsestidspunktet, mens potentielt beholder artefakter forårsaget af dårlig modtagelse eller GPS-chipset-effekter.</string>
-    <string name="monitoring_min_distance_descr">Filteret forhindrer, at der registreres dobbeltpunkter, hvor der muligvis er for lidt faktisk bevægelse. Det giver et pænere rumligt udseende af spor, der ikke efterbehandles senere.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Indstil 5 meters forskydning, hvis du ikke ønsker at registrere mindre detaljer om din rute og ikke har brug for yderligere data om din hvileperiode.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Hvileperioder registreres slet ikke eller kun som et punkt hver. Mindre bevægelser (f.eks. til siden af vejen for at markere en mulig afkørsel på din tur) kan blive filtreret fra. Bemærk, at din fil vil indeholde mindre information til efterbehandling og kan samtidig potentielt gemme GPS-artefakter forårsaget af dårlig modtagelse eller chipset-effekter.</string>
+    <string name="monitoring_min_distance_descr">Oprettelse af dette filter giver dig mulighed for at undgå yderligere dataoptagelse, når der næsten ikke registreres bevægelse. Det giver også et pænere rumligt udseende af spor uden yderligere efterbehandling.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemærk: Hvis GPS\'en har været slukket umiddelbart før en optagelse, kan det første målte punkt have en reduceret nøjagtighed, så i koden skal der måske ventes et sekund, inden der optages et punkt (eller det bedste af 3 på hinanden følgende punkter osv.). Men det er endnu ikke implementeret.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Anbefaling: Det er svært at forudsige, hvad der vil blive optaget og hvad ikke, det kan derfor være bedst at slå filteret fra.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Bivirkning: Som et resultat af filtrering efter nøjagtighed kan der muligvis helt mangle punkter f.eks. under broer, under træer, mellem høje bygninger eller under visse vejrforhold.</string>
@@ -4449,8 +4449,8 @@
     <string name="migration_files_present">Der er %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
     <string name="exit_without_saving_warning">Afslut uden at gemme ændringer\?</string>
     <string name="shared_string_show_slope">Vis hældning</string>
-    <string name="shared_string_uphill">Op ad bakke</string>
-    <string name="shared_string_downhill">Ned ad bakke</string>
+    <string name="shared_string_uphill">Opstigning</string>
+    <string name="shared_string_downhill">Nedstigning</string>
     <string name="shared_string_grade">Graduering</string>
     <string name="shared_string_hide_slope">Skjul hældning</string>
     <string name="elevation_profile">Højdeprofil</string>
@@ -4652,7 +4652,7 @@
     <string name="compass_on_circles">Kompas på cirkler</string>
     <string name="distance_circles">Afstandscirkler</string>
     <string name="circle_settings">Cirkelindstillinger</string>
-    <string name="map_widget_trip_recording_uphill">Op ad bakke</string>
+    <string name="map_widget_trip_recording_uphill">Opstigning</string>
     <string name="map_widget_trip_recording_duration">Varighed</string>
     <string name="routing_attr_allow_private_for_truck_description">Tillad adgang til private områder for lastbiler.</string>
     <string name="routing_attr_allow_private_for_truck_name">Tillad privat adgang (lastbil)</string>
@@ -4662,7 +4662,7 @@
     <string name="map_widget_trip_recording_distance">Afstand</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
-    <string name="map_widget_trip_recording_downhill">Ned ad bakke</string>
+    <string name="map_widget_trip_recording_downhill">Nedstigning</string>
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
     <string name="routing_attr_hazmat_category_name">Transport af farligt gods</string>
@@ -4835,31 +4835,31 @@
     <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/Web) uden ekstra omkostninger.</string>
     <string name="shared_string_cross_buy">Krydskøb</string>
     <string name="external_sensors_plugin_name">Eksterne sensorer</string>
-    <string name="external_sensors_plugin_description">Overvågning af puls, cykelhastighed, cykeleffekt og kadence. Kræver tilslutning af en enhed med sensorer for disse parametre med understøttelse af ANT+ (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Overvågning af puls, cykelhastighed, cykeleffekt og kadence. Kræver at enheden er forbundet med respektive sensorer via ANT+ wireless personal network protocol.</string>
     <string name="map_widget_altitude_current_location">Højde: Nuværende placering</string>
-    <string name="map_widget_altitude_current_location_desc">Viser højden over havets overflade for den aktuelle geolokalisering.</string>
-    <string name="map_widget_altitude_desc">Moduler viser højden over havets overflade for den aktuelle geolokalisering eller for det aktuelle kortcentrum</string>
+    <string name="map_widget_altitude_current_location_desc">Viser højden over havets overflade for den aktuelle geoplacering.</string>
+    <string name="map_widget_altitude_desc">Viser højden over havets overflade for den aktuelle geoplacering eller for det aktuelle kortcentrum</string>
     <string name="map_center_widget">Koordinater: Kortets centrum</string>
     <string name="current_location_widget">Koordinater: Nuværende placering</string>
     <string name="map_widget_altitude_map_center">Højde: Kortets centrum</string>
     <string name="map_widget_altitude_map_center_desc">Viser højden over havniveau for det aktuelle kortcentrum.</string>
     <string name="map_widget_rendering_fps">Kortgengivelse FPS</string>
-    <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kort og kortelementer vises og opdateres (udtrykt i billeder pr. sekund eller FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kortet og kortelementer vises og opdateres, udtrykt i billeder pr. sekund (FPS).</string>
     <string name="simulate_location_by_gpx">Simuler placering med GPX</string>
     <string name="location_simulation_cutoff">Simulering springer de første meter over</string>
     <string name="location_simulation_speedup">Simuleringshastighed</string>
-    <string name="send_uuid_preference_desc">Tilfældig UUID bruges til at downloade offline kort fra OsmAnd-servere for at overvåge fair brug af serverressourcer, forudsige trafikbrug og generere anonyme månedlige kortrapporter.</string>
+    <string name="send_uuid_preference_desc">En tilfældig UUID bruges til at downloade offline kort fra OsmAnd-servere for at overvåge fair brug af serverressourcer, forudsige trafikmønstre og generere anonyme månedlige kortrapporter.</string>
     <string name="send_uuid_preference">Send unikt bruger-id (UUID)</string>
     <string name="shared_string_identifiers">Identifikatorer</string>
     <string name="terms_of_service_desc">Ved at downloade kort accepterer du %1$s og %2$s.</string>
     <string name="shared_string_terms_of_use">Vilkår for anvendelse</string>
-    <string name="speak_gps_signal_status">Meddel at GPS-signalet er tabt eller blevet genoprettet</string>
+    <string name="speak_gps_signal_status">Meddel tab og genoprettelse af GPS-signal</string>
     <string name="speak_route_recalculation">Meddel genberegning af rute</string>
     <string name="release_4_3">• Ny, hurtigere kortgengivelse med 2,5D-visning
 \n
 \n • Glidende animation for ændringer i placering under bevægelse
 \n
-\n • Nyt modul med koordinater for kortets centrum
+\n • Nyt modul med koordinater for kortcentrum og højde for geoplaceringer
 \n
 \n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse
 \n
@@ -4873,7 +4873,7 @@
 \n
 \n • Der er tilføjet understøttelse af ANT+-sensorer
 \n
-\n • Tilføjet mulighed for at deaktivere UUID
+\n • Tilføjet mulighed for at deaktivere UUID for download
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
