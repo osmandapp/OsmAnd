@@ -19,7 +19,7 @@ public class AirPressureWidget extends WeatherWidget {
 	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
 		getMyApplication().runInUIThread(() -> {
 			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
-				setText(formattedValue, "hPa");
+				setText(formattedValue, "mmHg");
 			} else {
 				setText(null, null);
 			}

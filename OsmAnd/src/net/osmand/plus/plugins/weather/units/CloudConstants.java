@@ -6,7 +6,7 @@ public enum CloudConstants {
 
 	PERCENT("%");
 
-	private String unit;
+	private final String unit;
 
 	CloudConstants(@NonNull String unit) {
 		this.unit = unit;

@@ -68,11 +68,6 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
-	}
-
-	@Override
 	public int getMaximumShownMapZoom() {
 		return 22;
 	}

@@ -57,6 +57,8 @@ public class MapRendererContext {
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_SYMBOL_SECTION = 1;
+	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+
 	private final OsmandApplication app;
 	
 	// input parameters
@@ -70,6 +72,7 @@ public class MapRendererContext {
 	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
 	private CachedMapPresentation presentationObjectParams;
 	private MapPresentationEnvironment mapPresentationEnvironment;
+	private MapPrimitiviser mapPrimitiviser;
 	private WeatherTileResourcesManager weatherTileResourcesManager;
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
@@ -248,7 +251,7 @@ public class MapRendererContext {
 	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
-		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
+		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
 		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
 		// Create new map primitives provider
 		MapPrimitivesProvider mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider, mapPrimitiviser,
@@ -337,6 +340,10 @@ public class MapRendererContext {
 
 	private void instantiateWeatherResourcesManager()
 	{
+		if (weatherTileResourcesManager != null) {
+			return;
+		}
+
 		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
 		if (!weatherForecastDir.exists()) {
 			weatherForecastDir.mkdir();
@@ -349,6 +356,11 @@ public class MapRendererContext {
 		weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
 				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
 		webClient.swigReleaseOwnership();
+	}
+
+	@Nullable
+	public MapPrimitiviser getMapPrimitiviser() {
+		return mapPrimitiviser;
 	}
 
 	@Nullable
