@@ -21,7 +21,6 @@ import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.QListDouble;
 import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.WeatherBand;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
@@ -143,6 +142,13 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Override
 	public String getName() {
 		return app.getString(R.string.shared_string_weather);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return app.getSettings().USE_OPENGL_RENDER.get()
+				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
+				&& super.isEnabled();
 	}
 
 	@Override
@@ -323,7 +329,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings cloudBandSettings = new GeoBandSettings(cloudUnit, cloudUnitFormatGeneral,
 				cloudUnitFormatPrecise, "%", cloudTransparency, cloudColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Cloud.swigValue(), cloudBandSettings);
+		bandSettings.set(WeatherBand.WEATHER_BAND_CLOUD, cloudBandSettings);
 
 		String tempUnit = "°C";
 		String tempUnitFormatGeneral = "%d";
@@ -794,7 +800,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings tempBandSettings = new GeoBandSettings(tempUnit, tempUnitFormatGeneral,
 				tempUnitFormatPrecise, "°C", tempTransparency, tempColorProfilePath,
 				tempContourStyleName, contourLevels, contourTypes);
-		bandSettings.set((short) WeatherBand.Temperature.swigValue(), tempBandSettings);
+		bandSettings.set(WeatherBand.WEATHER_BAND_TEMPERATURE, tempBandSettings);
 
 		String pressureUnit = "mmHg";
 		String pressureUnitFormatGeneral = "%d";
@@ -1093,7 +1099,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings pressureBandSettings = new GeoBandSettings(pressureUnit, pressureUnitFormatGeneral,
 				pressureUnitFormatPrecise, "Pa", pressureTransparency, pressureColorProfilePath,
 				pressureContourStyleName, contourLevels, contourTypes);
-		bandSettings.set((short) WeatherBand.Pressure.swigValue(), pressureBandSettings);
+		bandSettings.set(WeatherBand.WEATHER_BAND_PRESSURE, pressureBandSettings);
 
 		String windUnit = "m/s";
 		String windUnitFormatGeneral = "%d";
@@ -1104,7 +1110,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings windBandSettings = new GeoBandSettings(windUnit, windUnitFormatGeneral,
 				windUnitFormatPrecise, "m/s", windTransparency, windColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.WindSpeed.swigValue(), windBandSettings);
+		bandSettings.set(WeatherBand.WEATHER_BAND_WIND_SPEED, windBandSettings);
 
 		String precipUnit = "mm";
 		String precipUnitFormatGeneral = "%d";
@@ -1115,7 +1121,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings precipBandSettings = new GeoBandSettings(precipUnit, precipUnitFormatGeneral,
 				precipUnitFormatPrecise, "kg/(m^2 s)", precipTransparency, precipColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set((short) WeatherBand.Precipitation.swigValue(), precipBandSettings);
+		bandSettings.set(WeatherBand.WEATHER_BAND_PRECIPITATION, precipBandSettings);
 
 		weatherResourcesManager.setBandSettings(bandSettings);
 		bandsSettingsVersion.incrementAndGet();
@@ -1155,15 +1161,15 @@ public class WeatherPlugin extends OsmandPlugin {
 
 		RenderingRuleProperty tempContoursProp = app.getRendererRegistry().getCustomRenderingRuleProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
 		if (tempContoursProp != null) {
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(tempContoursProp.getAttrName());
-			pref.set(enabled ? "true" : "false");
+			CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(tempContoursProp.getAttrName());
+			pref.set(enabled);
 		}
 
 		RenderingRuleProperty pressureContoursProp = app.getRendererRegistry().getCustomRenderingRuleProperty(WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
 		if (pressureContoursProp != null) {
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(pressureContoursProp.getAttrName());
-			//pref.set("true");
-			pref.set("false");
+			CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(pressureContoursProp.getAttrName());
+			//pref.set(true);
+			pref.set(false);
 		}
 	}
 

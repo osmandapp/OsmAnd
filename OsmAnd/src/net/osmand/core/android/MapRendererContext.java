@@ -222,11 +222,9 @@ public class MapRendererContext {
 		// Apply map style settings
 		OsmandSettings prefs = app.getSettings();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-		Map<String, String> props = new HashMap<String, String>();
+		Map<String, String> props = new HashMap<>();
 		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
-				continue;
-			} else if (customProp.isBoolean()) {
+			if (customProp.isBoolean()) {
 				CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
 				props.put(customProp.getAttrName(), pref.get() + "");
 			} else {

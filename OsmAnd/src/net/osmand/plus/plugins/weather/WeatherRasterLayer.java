@@ -8,14 +8,12 @@ import androidx.annotation.NonNull;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.BandIndexList;
 import net.osmand.core.jni.MapLayerConfiguration;
-import net.osmand.core.jni.WeatherBand;
 import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 
@@ -86,19 +84,19 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		for (WeatherInfoType weatherInfoType : enabledLayersCached) {
 			switch (weatherInfoType) {
 				case TEMPERATURE:
-					bands.add((short) WeatherBand.Temperature.swigValue());
+					bands.add(WeatherBand.WEATHER_BAND_TEMPERATURE);
 					break;
 				case PRECIPITATION:
-					bands.add((short) WeatherBand.Precipitation.swigValue());
+					bands.add(WeatherBand.WEATHER_BAND_PRECIPITATION);
 					break;
 				case WIND:
-					bands.add((short) WeatherBand.WindSpeed.swigValue());
+					bands.add(WeatherBand.WEATHER_BAND_WIND_SPEED);
 					break;
 				case CLOUDS:
-					bands.add((short) WeatherBand.Cloud.swigValue());
+					bands.add(WeatherBand.WEATHER_BAND_CLOUD);
 					break;
 				case PRESSURE:
-					bands.add((short) WeatherBand.Pressure.swigValue());
+					bands.add(WeatherBand.WEATHER_BAND_PRESSURE);
 					break;
 			}
 		}

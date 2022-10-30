@@ -17,7 +17,6 @@ import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.SymbolSubsectionConfiguration;
-import net.osmand.core.jni.WeatherBand;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -105,7 +104,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		int screenHeight = tb.getPixHeight();
 		int cacheSize = (screenWidth * 2 / (int) resourcesManager.getTileSize()) * (screenHeight * 2 / (int) resourcesManager.getTileSize());
 		int rasterTileSize = (int) (resourcesManager.getTileSize() * resourcesManager.getDensityFactor());
-		short band = (short) WeatherBand.Temperature.swigValue();
+		short band = WeatherBand.WEATHER_BAND_TEMPERATURE;
 		geoTileObjectsProvider = new GeoTileObjectsProvider(resourcesManager, dateTime, band, false, cacheSize);
 		mapPrimitivesProvider = new MapPrimitivesProvider(geoTileObjectsProvider, mapPrimitiviser, rasterTileSize);
 

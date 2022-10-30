@@ -5,14 +5,13 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.core.jni.WeatherBand;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 public class PrecipitationWidget extends WeatherWidget {
 
 	public PrecipitationWidget(@NonNull MapActivity mapActivity, @NonNull WeatherPlugin weatherPlugin) {
-		super(mapActivity, weatherPlugin, WEATHER_PRECIPITATION_WIDGET, (short) WeatherBand.Precipitation.swigValue());
+		super(mapActivity, weatherPlugin, WEATHER_PRECIPITATION_WIDGET, WeatherBand.WEATHER_BAND_PRECIPITATION);
 	}
 
 	@Override
