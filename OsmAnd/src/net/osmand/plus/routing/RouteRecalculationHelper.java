@@ -239,7 +239,12 @@ class RouteRecalculationHelper {
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
-			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(app);
+			if (gpxRoute != null) {
+				gpxRoute.setTargetPoint(end);
+				params.gpxRoute = gpxRoute.build(app);
+			} else {
+				params.gpxRoute = null;
+			}
 			params.onlyStartPointChanged = onlyStartPointChanged;
 			if (recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE
 					|| (gpxRoute != null && gpxRoute.isPassWholeRoute() && isDeviatedFromRoute())) {
