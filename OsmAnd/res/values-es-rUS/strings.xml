@@ -4866,11 +4866,11 @@
 \n
 \n • Animación suave para los cambios de ubicación al moverse
 \n
-\n • Nuevo widget con las coordenadas del centro del mapa
+\n • Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
 \n
-\n • Se han añadido opciones de tamaño de texto en «Distancia al pulsar».
+\n • «Distancia al pulsar»: nuevas opciones de tamaño de texto.
 \n
-\n • El widget «Marcador del mapa» ha añadido la opción de cambiar el comportamiento de las pulsaciones
+\n • Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
 \n
 \n • Se ha corregido la opción «Posición de la ubicación».
 \n
@@ -4880,7 +4880,7 @@
 \n
 \n • Se ha añadido soporte para sensores externos ANT+
 \n
-\n • Se ha añadido la opción de desactivar el UUID
+\n • Nueva opción para desactivar la descarga del UUID
 \n
 \n</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
