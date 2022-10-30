@@ -259,14 +259,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				GpxDataItem item = new GpxDataItem(fout, analysis);
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
-				updateSavedTrackAppearance(item);
+				saveTrackAppearance(item);
 			}
 			clearRecordedData(warnings.isEmpty());
 		}
 		return new SaveGpxResult(warnings, gpxFilesByName);
 	}
 
-	private void updateSavedTrackAppearance(@NonNull GpxDataItem item) {
+	private void saveTrackAppearance(@NonNull GpxDataItem item) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		gpxDbHelper.updateColor(item, settings.CURRENT_TRACK_COLOR.get());
 		gpxDbHelper.updateWidth(item, settings.CURRENT_TRACK_WIDTH.get());
