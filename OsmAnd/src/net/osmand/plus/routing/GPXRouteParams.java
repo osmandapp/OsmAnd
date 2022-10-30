@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -250,7 +251,7 @@ public class GPXRouteParams {
 					lastIdx = i;
 				}
 			}
-			if (gpxRouteParams.segmentEndpoints != null) {
+			if (!Algorithms.isEmpty(gpxRouteParams.segmentEndpoints)) {
 				List<Location> removedLocations = gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size());
 				List<Location> endpoints = gpxRouteParams.segmentEndpoints;
 				int firstRemovedIdx = 0;
@@ -260,11 +261,25 @@ public class GPXRouteParams {
 						break;
 					}
 				}
-				if (firstRemovedIdx != endpoints.size()) {
+				if (firstRemovedIdx < endpoints.size()) {
 					endpoints.subList(firstRemovedIdx, endpoints.size()).clear();
 				}
 			}
+			if (!Algorithms.isEmpty(gpxRouteParams.routePoints)) {
+				List<WptPt> routePoints = gpxRouteParams.routePoints;
+				int firstRemovedIdx = 1;
+				for (; firstRemovedIdx < routePoints.size(); firstRemovedIdx++) {
+					WptPt routePoint = routePoints.get(firstRemovedIdx);
+					if (routePoint.getTrkPtIndex() > lastIdx) {
+						break;
+					}
+				}
+				if (firstRemovedIdx < routePoints.size()) {
+					routePoints.subList(firstRemovedIdx, routePoints.size()).clear();
+				}
+			}
 			gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size()).clear();
+			gpxRouteParams.route.clear();
 		}
 
 		public void setReverse(boolean reverse) {
