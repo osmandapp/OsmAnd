@@ -772,6 +772,7 @@
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
 \n - Mapas vectoriales compactos sin conexión, disponibles en todo el mundo
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
+\n - Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
 \n
 \n - Búsqueda sin conexión de direcciones y sitios (PDI)
@@ -2889,7 +2890,7 @@
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evitar tranvías</string>
     <string name="routing_attr_avoid_bus_name">Sin autobuses</string>
-    <string name="routing_attr_avoid_bus_description">Evita autobuses y trolebuses</string>
+    <string name="routing_attr_avoid_bus_description">Evitar autobuses y trolebuses</string>
     <string name="routing_attr_avoid_share_taxi_name">Sin taxis compartidos</string>
     <string name="routing_attr_avoid_share_taxi_description">Evitar taxis compartidos</string>
     <string name="routing_attr_avoid_train_name">Sin trenes</string>
