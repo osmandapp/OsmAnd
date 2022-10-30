@@ -3643,9 +3643,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Bivirkning: Som et resultat av filtrering etter nøyaktighet, kan noen punkter mangle helt, f.eks. under broer, under trær, mellom høye bygninger, eller under gitte værforhold.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Anbefaling: Det er vanskelig å forutsi hva som blir tatt opp og ikke, det kan være best å skru dette filteret av.</string>
     <string name="monitoring_min_accuracy_descr_remark">Merk: Hvis GPS har vært av rett før et opptak, kan første punkt ha dårligere nøyaktighet, slik at man fra kodehold kan la det gå et sekund før et punkt blir tatt opp (eller man tar opp det beste av 3 punkter), men dette er ikke implementert enda.</string>
-    <string name="monitoring_min_distance_descr">Filteret unngår dupliserte punkter fra å bli tatt opp der det er for lite bevegelse. Lager et penere resultat uten bruk av etterbehandling.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Bivirkning: Pauseperioder tas ikke opp i det hele tatt, eller kun med ett punkt. Små (faktiske) bevegelser (f.eks. til siden, for å markere en mulig avkjørsel i turen din) kan bli filtrert ut. Din fil inneholder mindre info for etterbehandling, og har dårligere data ved å filtrere ut åpenbart overflødige punkter ved opptak, mens arte-fakter potensielt blir beholdt som følge av dårlige forhold eller GPS-brikkesetteffekter.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: En innstilling på 5 meter kan fungere for deg hvis du ikke vil fange finmaskede detaljer, og ikke ønsker å ta opp data mens du har pause.</string>
+    <string name="monitoring_min_distance_descr">Ved å slå på dette filteret kan du unngå ytterligere dataopptak når bevegelse nesten ikke oppdages. Det forbedrer også det romlige utseendet til spor uten ytterligere behandling.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Bivirkning: Pauseperioder tas ikke opp i det hele tatt eller kun som ett punkt. Mindre bevegelser (f.eks. til siden av veien for å markere en mulig avkjøring i turen din) kan bli filtrert ut. Merk at filen din vil inneholde mindre informasjon for etterbehandling, og kan samtidig potensielt lagre GPS-artefakter forårsaket av dårlig mottak eller brikkesetteffekter.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Still inn 5 meters forskyvning hvis du ikke vil ta opp mindre detaljer om ruten din, og ikke trenger ytterligere data om pauseperioden.</string>
     <string name="live_monitoring_adress_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="multimedia_rec_split_title">Opptaksoppdeling</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-intensjon «%s».</string>
@@ -4787,4 +4787,5 @@
     <string name="shared_string_terms_of_use">Tjenestevilkår</string>
     <string name="external_sensors_support">Støtte for eksterne sensorer</string>
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: sykkelhastighet, sykkelkraft, tråkkfrekvens og puls.</string>
+    <string name="map_widget_altitude_desc">Viser høyde over havet til gjeldende posisjon eller til gjeldende kartsenter.</string>
 </resources>
