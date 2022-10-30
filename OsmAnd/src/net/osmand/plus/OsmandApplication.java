@@ -483,9 +483,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void checkApplicationIsBeingInitialized(AppInitializeListener listener) {
-		// start application if it was previously closed
-		startApplication();
+	public void checkApplicationIsBeingInitialized(@Nullable AppInitializeListener listener) {
 		if (listener != null) {
 			appInitializer.addListener(listener);
 		}
