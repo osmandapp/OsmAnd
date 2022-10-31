@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="show_map_symbols">Show map symbols</string>
+    <string name="show_map_symbols_desc">Text, road signs, and others.</string>
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
     <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
