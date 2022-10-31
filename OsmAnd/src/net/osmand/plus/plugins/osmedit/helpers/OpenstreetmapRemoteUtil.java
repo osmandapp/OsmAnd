@@ -5,6 +5,8 @@ import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import android.util.Xml;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.github.scribejava.core.model.Response;
 
 import net.osmand.NativeLibrary;
@@ -309,7 +311,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity commitEntityImpl(Action action, Entity n, EntityInfo info, String comment,
+	public Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
@@ -320,7 +322,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 
 		try {
-			Entity newE = n;
+			Entity newE = entity;
 			StringWriter writer = new StringWriter(256);
 			XmlSerializer ser = Xml.newSerializer();
 			try {
@@ -332,10 +334,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startTag(null, OsmPoint.stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
-				if (n instanceof Node) {
-					writeNode((Node) n, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
-				} else if (n instanceof Way) {
-					writeWay((Way) n, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
+				if (entity instanceof Node) {
+					writeNode((Node) entity, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
+				} else if (entity instanceof Way) {
+					writeWay((Way) entity, info, ser, changeSetId, plugin.OSM_USER_NAME_OR_EMAIL.get());
 				}
 				ser.endTag(null, OsmPoint.stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
@@ -348,17 +350,17 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			log.debug(res + ""); //$NON-NLS-1$
 			if (res != null) {
 				if (OsmPoint.Action.CREATE == action) {
-					long newId = n.getId();
+					long newId = entity.getId();
 					int i = res.indexOf("new_id=\""); //$NON-NLS-1$
 					if (i > 0) {
 						i = i + "new_id=\"".length(); //$NON-NLS-1$
 						int end = res.indexOf('\"', i); //$NON-NLS-1$
 						if (end > 0) {
 							newId = Long.parseLong(res.substring(i, end)); // << 1;
-							if (n instanceof Node) {
-								newE = new Node((Node) n, newId);
-							} else if (n instanceof Way) {
-								newE = new Way(newId, ((Way) n).getNodeIds(), n.getLatitude(), n.getLongitude());
+							if (entity instanceof Node) {
+								newE = new Node((Node) entity, newId);
+							} else if (entity instanceof Way) {
+								newE = new Way(newId, ((Way) entity).getNodeIds(), entity.getLatitude(), entity.getLongitude());
 							}
 						}
 					}
@@ -382,7 +384,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			log.info("Response : " + response); //$NON-NLS-1$
 			changeSetId = NO_CHANGESET_ID;
 		}
-
 	}
 
 	public EntityInfo loadEntity(Entity n) {
@@ -455,7 +456,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity loadEntity(MapObject object) {
+	public Entity loadEntity(@NonNull MapObject object) {
 		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
