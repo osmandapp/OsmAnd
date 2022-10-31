@@ -3015,6 +3015,9 @@ public class OsmandSettings {
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
 			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
 
+	public final CommonPreference<Boolean> SHOW_BORDERS_OF_DOWNLOADED_MAPS =
+			new BooleanPreference(this, "show_borders_of_downloaded_maps", true).makeProfile();
+
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();
 		StringTokenizer toks = new StringTokenizer(appModesKeys, ",");
