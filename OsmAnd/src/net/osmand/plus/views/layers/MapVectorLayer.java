@@ -31,6 +31,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private boolean visible;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
+	private boolean cachedLabelsVisible;
 
 	public MapVectorLayer(@NonNull Context context) {
 		super(context);
@@ -55,6 +56,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
+		cachedLabelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
 	}
 
 	public boolean isVectorDataVisible() {
@@ -131,6 +133,10 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean alphaChanged = cachedAlpha != alpha;
 		cachedAlpha = alpha;
 
+		boolean labelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
+		boolean labelsVisibleChanged = cachedLabelsVisible != labelsVisible;
+		this.cachedLabelsVisible = labelsVisible;
+
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
@@ -144,7 +150,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			if (visible) {
 				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 			}
-			if ((alphaChanged || visibleChanged) && visible) {
+			if ((alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
 				updateLayerProviderAlpha(alpha);
 			}
 

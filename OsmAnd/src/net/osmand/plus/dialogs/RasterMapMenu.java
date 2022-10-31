@@ -123,6 +123,8 @@ public class RasterMapMenu {
 					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					updateTransparencyBarVisibility(isChecked);
+				} else if (itemId == R.string.show_map_symbols) {
+					settings.KEEP_MAP_LABELS_VISIBLE.set(isChecked);
 				} else if (itemId == R.string.show_parameter_seekbar) {
 					if (isChecked) {
 						settings.SHOW_MAP_LAYER_PARAMETER.set(true);
@@ -194,6 +196,14 @@ public class RasterMapMenu {
 					.setListener(l)
 					.setSelected(transparencySwitchState));
 			ITileSource oveplayMap = plugin.getOverlayLayer().getMap();
+			if (type == RasterMapType.OVERLAY) {
+				contextMenuAdapter.addItem(new ContextMenuItem(null)
+						.setTitleId(R.string.show_map_symbols, mapActivity)
+						.setDescription(app.getString(R.string.show_map_symbols_desc))
+						.setHideDivider(true)
+						.setListener(l)
+						.setSelected(settings.KEEP_MAP_LABELS_VISIBLE.get()));
+			}
 			if (type == RasterMapType.OVERLAY && oveplayMap != null && oveplayMap.getParamType() != ParameterType.UNDEFINED) {
 				contextMenuAdapter.addItem(new ContextMenuItem(null)
 						.setTitleId(R.string.show_parameter_seekbar, mapActivity)
