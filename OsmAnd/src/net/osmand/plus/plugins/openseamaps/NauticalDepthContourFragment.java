@@ -101,7 +101,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 		setupButton(
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_nautical_depth,
-				getString(R.string.nautical_depth_contours),
+				getString(R.string.rendering_attr_depthContours_name),
 				pref.get(),
 				false,
 				v -> {
@@ -157,39 +157,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 				@Override
 				public void onClick(View view) {
 
-					int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-					int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-					AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes));
-
-					b.setTitle(finalTitle);
-
-					int i = Arrays.asList(property.getPossibleValues()).indexOf(pref.get());
-					if (i >= 0) {
-						i++;
-					} else if (Algorithms.isEmpty(pref.get())) {
-						i = 0;
-					}
-					String[] possibleValuesString = new String[property.getPossibleValues().length + 1];
-					possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(app, property.getDefaultValueDescription());
-
-					for (int j = 0; j < property.getPossibleValues().length; j++) {
-						possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(app, property.getPossibleValues()[j]);
-					}
-					DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-							possibleValuesString, nightMode, i, getMyApplication(), currentProfileColor, themeRes, v -> {
-								int which = (int) v.getTag();
-								if (which == 0) {
-									pref.set("");
-								} else {
-									pref.set(property.getPossibleValues()[which - 1]);
-								}
-								mapActivity.refreshMapComplete();
-								String description = AndroidUtils.getRenderingStringPropertyValue(mapActivity, pref.get());
-								tvDesc.setText(description);
-							}
-					);
-					b.setAdapter(dialogAdapter, null);
-					dialogAdapter.setDialog(b.show());
+					dialogOnClick(finalTitle, property, tvDesc, pref);
 				}
 			});
 
@@ -200,6 +168,31 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 			list.addView(view);
 
 		}
+	}
+
+	private void dialogOnClick(String title, RenderingRuleProperty property, TextView tvDesc, CommonPreference<String> pref){
+		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes));
+		b.setTitle(title);
+
+		String[] possibleValuesString = new String[property.getPossibleValues().length];
+
+		for (int j = 0; j < property.getPossibleValues().length; j++) {
+			possibleValuesString[j] = AndroidUtils.getRenderingStringPropertyValue(app, property.getPossibleValues()[j]);
+		}
+		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				possibleValuesString, nightMode, Arrays.asList(property.getPossibleValues()).indexOf(pref.get()), getMyApplication(), currentProfileColor, themeRes, v -> {
+					int which = (int) v.getTag();
+
+					pref.set(property.getPossibleValues()[which]);
+					mapActivity.refreshMapComplete();
+					String description = AndroidUtils.getRenderingStringPropertyValue(mapActivity, pref.get());
+					tvDesc.setText(description);
+				}
+		);
+		b.setAdapter(dialogAdapter, null);
+		dialogAdapter.setDialog(b.show());
 	}
 
 	private void updateScreenMode(boolean enabled) {

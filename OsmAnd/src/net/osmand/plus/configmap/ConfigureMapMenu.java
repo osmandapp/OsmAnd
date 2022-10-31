@@ -259,7 +259,7 @@ public class ConfigureMapMenu {
 						showRendererSnackbarForAttr(activity, attrName, nightMode, pref);
 					}
 					return false;
-				}, null);
+				});
 				if (item != null) {
 					adapter.addItem(item);
 				}
@@ -702,7 +702,7 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		if (p.isBoolean()) {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
-			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null, null);
+			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null);
 		} else {
 			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
 			String descr;
@@ -737,54 +737,34 @@ public class ConfigureMapMenu {
 	                                                             @Nullable RenderingRuleProperty property,
 	                                                             @DrawableRes int icon,
 	                                                             boolean nightMode,
-	                                                             @Nullable CallbackWithObject<Boolean> callback,
-	                                                             @Nullable OnClickListener rowClickListener) {
+	                                                             @Nullable CallbackWithObject<Boolean> callback) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
-		ContextMenuItem menuItem = new ContextMenuItem(id)
+		return new ContextMenuItem(id)
 				.setTitle(name)
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
 				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setIcon(icon)
-				.setListener(new OnRowItemClick() {
-					@Override
-					public boolean onContextMenuClick(OnDataChangeUiAdapter uiAdapter, View view, ContextMenuItem item, boolean isChecked) {
-						if (property != null) {
-							pref.set(isChecked);
-							activity.refreshMapComplete();
-							activity.updateLayers();
-						} else {
-							isChecked = pref.get();
-						}
-						if (callback != null) {
-							callback.processResult(isChecked);
-						}
-						item.setSelected(pref.get());
-						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-						uiAdapter.onDataSetChanged();
-						return false;
+				.setListener((uiAdapter, view, item, isChecked) -> {
+					if (property != null) {
+						pref.set(isChecked);
+						activity.refreshMapComplete();
+						activity.updateLayers();
+					} else {
+						isChecked = pref.get();
 					}
-
-					@Override
-					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
-						if (rowClickListener != null) {
-							rowClickListener.onClick();
-						} else {
-							onContextMenuClick(uiAdapter, view, item, !item.getSelected());
-						}
-						return false;
+					if (callback != null) {
+						callback.processResult(isChecked);
 					}
+					item.setSelected(pref.get());
+					item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+					item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+					uiAdapter.onDataSetChanged();
+					return false;
 				});
-
-		if (rowClickListener != null) {
-			menuItem.setSecondaryIcon(R.drawable.ic_action_additional_option);
-		}
-
-		return menuItem;
 	}
 
 	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,

@@ -331,7 +331,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(TRANSPORT_LINES)) {
 			tv.setText(R.string.rendering_category_transport);
 		}else if (isCurrentType(NAUTICAL_DEPTH)) {
-			tv.setText(R.string.nautical_depth_contours);
+			tv.setText(R.string.rendering_attr_depthContours_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);

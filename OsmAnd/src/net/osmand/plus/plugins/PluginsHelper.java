@@ -593,7 +593,7 @@ public class PluginsHelper {
 	}
 
 	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.registerLayerContextMenuActions(adapter, mapActivity, customRules);
 		}
 	}

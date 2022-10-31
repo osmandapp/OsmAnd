@@ -298,13 +298,15 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if (isLocked()) {
-			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
-					TERRAIN_ID,
-					R.string.shared_string_terrain,
-					R.string.contour_lines_hillshades_slope);
-		} else {
-			createContextMenuItems(adapter, mapActivity);
+		if(isEnabled()){
+			if (isLocked()) {
+				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+						TERRAIN_ID,
+						R.string.shared_string_terrain,
+						R.string.contour_lines_hillshades_slope);
+			} else {
+				createContextMenuItems(adapter, mapActivity);
+			}
 		}
 	}
 

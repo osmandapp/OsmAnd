@@ -642,24 +642,26 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
-			int itemId = item.getTitleId();
-			if (itemId == R.string.layer_recordings) {
-				SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
-				item.setColor(app, SHOW_RECORDINGS.get() ?
-						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				uiAdapter.onDataSetChanged();
-				updateLayers(mapActivity, mapActivity);
-			}
-			return true;
-		};
-		adapter.addItem(new ContextMenuItem(RECORDING_LAYER)
-				.setTitleId(R.string.layer_recordings, app)
-				.setSelected(SHOW_RECORDINGS.get())
-				.setIcon(R.drawable.ic_action_micro_dark)
-				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setItemDeleteAction(SHOW_RECORDINGS)
-				.setListener(listener));
+		if(isEnabled()){
+			ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
+				int itemId = item.getTitleId();
+				if (itemId == R.string.layer_recordings) {
+					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
+					item.setColor(app, SHOW_RECORDINGS.get() ?
+							R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					uiAdapter.onDataSetChanged();
+					updateLayers(mapActivity, mapActivity);
+				}
+				return true;
+			};
+			adapter.addItem(new ContextMenuItem(RECORDING_LAYER)
+					.setTitleId(R.string.layer_recordings, app)
+					.setSelected(SHOW_RECORDINGS.get())
+					.setIcon(R.drawable.ic_action_micro_dark)
+					.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.setItemDeleteAction(SHOW_RECORDINGS)
+					.setListener(listener));
+		}
 	}
 
 	@Override
