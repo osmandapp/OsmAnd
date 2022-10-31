@@ -53,16 +53,13 @@ public class AudioVideoNoteMenuController extends MenuController {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
 						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-						bld.setMessage(R.string.recording_delete_confirm);
-						bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								MapActivity a = getMapActivity();
-								if (mPlugin != null && a != null) {
-									mPlugin.deleteRecording(getRecording(), true);
-									a.getContextMenu().close();
-								}
+						String recordingName = recording.getName(activity, false);
+						bld.setMessage(activity.getString(R.string.delete_confirmation_msg, recordingName));
+						bld.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+							MapActivity a = getMapActivity();
+							if (mPlugin != null && a != null) {
+								mPlugin.deleteRecording(getRecording(), true);
+								a.getContextMenu().close();
 							}
 						});
 						bld.setNegativeButton(R.string.shared_string_no, null);
