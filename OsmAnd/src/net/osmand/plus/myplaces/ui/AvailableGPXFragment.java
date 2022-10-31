@@ -1547,18 +1547,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-						builder.setMessage(R.string.recording_delete_confirm);
-						builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-							operationTask = new DeleteGpxTask();
-							operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfo);
-						});
-						builder.setNegativeButton(R.string.shared_string_cancel, null);
-						builder.show();
-					}
+				.setOnClickListener(_view -> {
+					AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+					String fileName = gpxInfo.getFileName();
+					builder.setMessage(getString(R.string.delete_confirmation_msg, fileName));
+					builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+						operationTask = new DeleteGpxTask();
+						operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfo);
+					});
+					builder.setNegativeButton(R.string.shared_string_cancel, null);
+					builder.show();
 				})
 				.create()
 		);
