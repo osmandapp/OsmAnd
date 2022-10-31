@@ -1,42 +1,45 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
 import java.text.MessageFormat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-
 public class DownloadValidationManager {
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 7;
+	private static boolean DOWNLOAD_MOBILE_INTERNET_CONFIRMED;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final DownloadIndexesThread downloadThread;
 
-	public DownloadValidationManager(OsmandApplication app) {
+	public DownloadValidationManager(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.downloadThread = app.getDownloadThread();
 	}
 
-	public boolean isSpaceEnoughForDownload(FragmentActivity context, boolean showAlert,
+	public boolean isSpaceEnoughForDownload(@NonNull FragmentActivity context, boolean showAlert,
 	                                        IndexItem... items) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;
@@ -60,23 +63,21 @@ public class DownloadValidationManager {
 		double szChange = ((double) szChangeLong) / (1 << 20);
 		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
 
-		// get availabile space
-		double asz = downloadThread.getAvailableSpace();
-		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
+		double availableSpace = downloadThread.getAvailableSpace();
+		if (availableSpace > 0 && (szMaxTemp > availableSpace)) {
 			if (showAlert) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				String message = app.getString(R.string.download_files_error_not_enough_space);
-				builder.setMessage(MessageFormat.format(message, i, szChange, asz, szMaxTemp));
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage(MessageFormat.format(message, i, szChange, availableSpace, szMaxTemp));
 				builder.setNegativeButton(R.string.shared_string_ok, null);
 				builder.show();
 			}
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
-	private long getExistingFileSize(File file) {
+	private long getExistingFileSize(@Nullable File file) {
 		if (file != null) {
 			if (file.canRead()) {
 				return file.length();
@@ -126,18 +127,23 @@ public class DownloadValidationManager {
 	}
 
 	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, IndexItem[] items) {
-		if (!settings.isWifiConnected()) {
-			if (settings.isInternetConnectionAvailable()) {
+		if (settings.isWifiConnected()) {
+			downloadFilesCheck_3_ValidateSpace(context, items);
+		} else if (settings.isInternetConnectionAvailable()) {
+			if (DOWNLOAD_MOBILE_INTERNET_CONFIRMED) {
+				downloadFilesCheck_3_ValidateSpace(context, items);
+			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage(context.getString(R.string.download_using_mobile_internet));
-				builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> downloadFilesCheck_3_ValidateSpace(context, items));
+				builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+					DOWNLOAD_MOBILE_INTERNET_CONFIRMED = true;
+					downloadFilesCheck_3_ValidateSpace(context, items);
+				});
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
-			} else {
-				Toast.makeText(context, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
-			downloadFilesCheck_3_ValidateSpace(context, items);
+			app.showToastMessage(R.string.no_index_file_to_download);
 		}
 	}
 
@@ -163,39 +169,39 @@ public class DownloadValidationManager {
 		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
 
 		// get available space
-		double asz = downloadThread.getAvailableSpace();
-		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
+		double availableSpace = downloadThread.getAvailableSpace();
+		if (availableSpace > 0 && (szMaxTemp > availableSpace)) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			String message = app.getString(R.string.download_files_error_not_enough_space);
-			builder.setMessage(MessageFormat.format(message, i, szChange, asz, szMaxTemp));
+			builder.setMessage(MessageFormat.format(message, i, szChange, availableSpace, szMaxTemp));
 			builder.setNegativeButton(R.string.shared_string_ok, null);
 			builder.show();
-		} else if (asz != -1 && asz > 0 && ((szChange + 10 > asz) || (szMaxTemp + 10 > asz))) {
+		} else if (availableSpace > 0 && ((szChange + 10 > availableSpace) || (szMaxTemp + 10 > availableSpace))) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			if (szChange != szMaxTemp) {
 				String message = app.getString(R.string.download_files_question_space_with_temp);
-				builder.setMessage(MessageFormat.format(message, i, szChange, asz, szMaxTemp));
+				builder.setMessage(MessageFormat.format(message, i, szChange, availableSpace, szMaxTemp));
 			} else {
 				String message = app.getString(R.string.download_files_question_space);
-				builder.setMessage(MessageFormat.format(message, i, szChange, asz));
+				builder.setMessage(MessageFormat.format(message, i, szChange, availableSpace));
 			}
 			builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) ->
-					downloadFileCheck_Final_Run(context, items));
+					downloadFileCheckFinalRun(context, items));
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
-			downloadFileCheck_Final_Run(context, items);
+			downloadFileCheckFinalRun(context, items);
 		}
 	}
 
-	private void downloadFileCheck_Final_Run(@NonNull FragmentActivity context, IndexItem[] items) {
+	private void downloadFileCheckFinalRun(@NonNull FragmentActivity context, IndexItem[] items) {
 		downloadThread.runDownloadFiles(items);
 		if (context instanceof DownloadEvents) {
 			((DownloadEvents) context).downloadInProgress();
 		}
 	}
 
-	public void makeSureUserCancelDownload(FragmentActivity ctx, DownloadItem item) {
+	public void makeSureUserCancelDownload(@NonNull FragmentActivity ctx, DownloadItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(ctx.getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
@@ -208,11 +214,12 @@ public class DownloadValidationManager {
 	}
 
 	public static class InstallPaidVersionDialogFragment extends DialogFragment {
-		public static final String TAG = "InstallPaidVersionDialogFragment";
+
+		public static final String TAG = InstallPaidVersionDialogFragment.class.getSimpleName();
 
 		@NonNull
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
+		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 			String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
 			AlertDialog.Builder msg = new AlertDialog.Builder(requireActivity());
 			msg.setTitle(R.string.free_version_title);
@@ -221,7 +228,7 @@ public class DownloadValidationManager {
 				msg.setPositiveButton(R.string.install_paid, (dialog, which) -> {
 					Activity activity = getActivity();
 					if (activity != null) {
-						Uri uri = Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), "net.osmand.plus"));
+						Uri uri = Uri.parse(Version.getUrlWithUtmRef((OsmandApplication) activity.getApplication(), FULL_VERSION_NAME));
 						Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 						AndroidUtils.startActivityIfSafe(activity, intent);
 					}
@@ -231,10 +238,6 @@ public class DownloadValidationManager {
 				msg.setNeutralButton(R.string.shared_string_ok, null);
 			}
 			return msg.create();
-		}
-
-		private OsmandApplication getMyApplication() {
-			return (OsmandApplication) getActivity().getApplication();
 		}
 	}
 }

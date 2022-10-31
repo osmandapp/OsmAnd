@@ -541,17 +541,16 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	}
 
 	private void deleteNote(Recording recording) {
-		new AlertDialog.Builder(getActivity())
-				.setMessage(R.string.recording_delete_confirm)
-				.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						plugin.deleteRecording(recording, true);
-						listAdapter.remove(recording);
-					}
-				})
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.show();
+		Activity activity = requireActivity();
+		String recordingName = recording.getName(activity, false);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+		bld.setMessage(getString(R.string.delete_confirmation_msg, recordingName));
+		bld.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			plugin.deleteRecording(recording, true);
+			listAdapter.remove(recording);
+		});
+		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.show();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
+import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
@@ -29,20 +30,17 @@ import net.osmand.util.MapUtils;
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 	private static final int IMAGE_LOAD_TIMEOUT = 30000;
-	private static final int UNNECESSARY_IMAGE_LOAD_TIMEOUT = 2000;
 
 	private final String dirWithTiles;
 	private final ResourceManager rm;
 	private final BitmapTilesCache tilesCache;
 	private final ITileSource tileSource;
-	private final MapRendererView mapRenderer;
 	
 	public TileSourceProxyProvider(OsmandApplication app, ITileSource tileSource) {
 		this.dirWithTiles = app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath();
 		this.rm = app.getResourceManager();
 		this.tilesCache = rm.getBitmapTilesCache();
 		this.tileSource = tileSource;
-		mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
 	}
 
 	@Override
@@ -68,6 +66,8 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	@Override
 	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
 		long requestTimestamp = System.currentTimeMillis();
+		IQueryController queryController = request.getQueryController();
+		boolean cacheOnly = request.getCacheOnly();
 		int zoom = request.getZoom().swigValue();
 		int tileX = request.getTileId().getX();
 		int tileY = request.getTileId().getY();
@@ -82,7 +82,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		boolean shiftedTile = offsetY > 0;
 		byte[] firstTileData;
 		byte[] secondTileData;
-		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp);
+		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp, cacheOnly, queryController);
 		if (firstTileData == null) {
 			return SwigUtilities.nullSkImage();
 		}
@@ -97,7 +97,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			Canvas canvas = new Canvas(resultTileBitmap);
 			canvas.translate(0, (float)-offsetY);
 			canvas.drawBitmap(firstTileBitmap, 0, 0, paint);
-			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
+			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp, cacheOnly, queryController);
 			if (secondTileData != null) {
 				Bitmap secondTileBitmap = BitmapFactory.decodeByteArray(secondTileData, 0, secondTileData.length);
 				if (secondTileBitmap == null) {
@@ -188,28 +188,29 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Nullable
-	private byte[] getTileBytes(int tileX, int tileY, int zoom, long requestTimestamp) {
+	private byte[] getTileBytes(int tileX, int tileY, int zoom, long requestTimestamp,
+			boolean cacheOnly, IQueryController queryController) {
 		byte[] bytes = null;
 		try {
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
-			if (tileSource.couldBeDownloadedFromInternet()) {
+			if (!cacheOnly && tileSource.couldBeDownloadedFromInternet()) {
 				TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 				try {
-					int loadTimeout = IMAGE_LOAD_TIMEOUT;
 					while (tilesCache.getTileForMapSync(tileFilename, tileSource, tileX, tileY, zoom, true,
-							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < loadTimeout) {
+							requestTimestamp) == null && System.currentTimeMillis() - requestTimestamp < IMAGE_LOAD_TIMEOUT) {
 						synchronized (tileReadyCallback.getSync()) {
 							if (tileReadyCallback.isReady()) {
 								break;
 							}
 							try {
-								tileReadyCallback.getSync().wait(100);
+								tileReadyCallback.getSync().wait(50);
 							} catch (InterruptedException ignored) {
 							}
 						}
-						if (mapRenderer != null && !mapRenderer.isTileVisible(tileX, tileY, zoom))
-							loadTimeout = UNNECESSARY_IMAGE_LOAD_TIMEOUT;
+						if (queryController == null || queryController.isAborted()) {
+							break;
+						}				
 					}
 				} finally {
 					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);

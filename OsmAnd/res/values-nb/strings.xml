@@ -3682,9 +3682,9 @@
     <string name="track_coloring_solid">Utfylt</string>
     <string name="osm_live_payment_subscription_management_hw">Betalingen blir belastet din AppGallery-konto ved bekreftelse på kjøp.
 \n
-\nAbonnementet forlenges automatisk med mindre det avbrytes før fornyelsesdatoen. Din konto blir belastet for fornyelsesperioden (måned/tre måneder/år) kun på fornyelsesdatoen.
+\nAbonnementet forlenges automatisk med mindre det avbrytes før den valgte fornyelsesperioden.
 \n
-\nDu kan håndtere og avbryte dine abonnementer i dine AppGallery-innstillinger.</string>
+\nHåndter eller avbryt dine abonnementer når som helst i dine AppGallery-innstillinger.</string>
     <string name="gpx_parse_error">OsmAnd-GPX er feilformatert, kontakt brukerstøtte for videre etterforskning.</string>
     <string name="system_screen_timeout_descr">Skrur av skjermen i henhold til systemets skjermtidsavbrudd.</string>
     <string name="lenght_limit_description">Angi lengden på ditt kjøretøy, noen rutebegrensninger kan gjelde for lange kjøretøy.</string>
@@ -3732,7 +3732,7 @@
     <string name="default_screen_timeout">Forvalgt skjermtidsavbrudd</string>
     <string name="street_level_imagery">Bilder på gatenivå</string>
     <string name="plan_route_trim_before">Beskjær før</string>
-    <string name="plan_route_trim_after">Beskjær før</string>
+    <string name="plan_route_trim_after">Beskjær etter</string>
     <string name="development">Utvikling</string>
     <string name="use_live_public_transport">OsmAnd-sanntidsdata</string>
     <string name="use_live_routing">OsmAnd-sanntidsdata</string>
@@ -4785,4 +4785,6 @@
     <string name="map_center_widget">Koordinater: kartsenter</string>
     <string name="map_widget_altitude_current_location_desc">Viser høyde over havet til gjeldende posisjon.</string>
     <string name="shared_string_terms_of_use">Tjenestevilkår</string>
+    <string name="external_sensors_support">Støtte for eksterne sensorer</string>
+    <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: sykkelhastighet, sykkelkraft, tråkkfrekvens og puls.</string>
 </resources>

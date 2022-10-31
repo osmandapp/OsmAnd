@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
+    <string name="show_map_symbols">Show map symbols</string>
+    <string name="show_map_symbols_desc">Text, road signs, and others.</string>
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
     <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
@@ -1403,8 +1406,8 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Side effect: As a result of filtering by accuracy, points may be entirely missing for e.g. below bridges, under trees, between high buildings, or with certain weather conditions.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommendation: It is hard to predict what will be recorded and what not, it may be best to turn this filter off.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remark: If GPS had been off immediately before a recording, the first point measured may have a decreased accuracy,so in our code we may want to wait a second or so before recording a point (or record the best of 3 consecutive points, etc.), but this is not yet implemented.</string>
-    <string name="monitoring_min_distance_descr">Making this filter on allows you to avoid additional data recording when movement is almost not detected. Also it improves the spatial appearance of tracks without further processing.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Side effects: Periods of rest are not recorded at all or just as one point each. Minor movements (for example, to the side of the road to mark a possible turn in your trip) can be filtered out. Note, that your file will contain less information for post-processing, and at the same time can potentially save GPS artifacts caused by bad reception or chipset effects.</string>
+    <string name="monitoring_min_distance_descr">Turning this filter on allows you to avoid additional data recording when movement is almost not detected. It also improves the spatial appearance of tracks without further processing.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Side effects: Periods of rest are not recorded at all or just as one point each. Minor movements (for example, to the side of the road to mark a possible turn in your trip) can be filtered out. Note that your file will contain less information for post-processing, and at the same time can potentially save GPS artifacts caused by bad reception or chipset effects.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommendation: Set 5 meters displacement if you don\'t want to record minor details of your route, and don\'t need additional data about your rest period.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>

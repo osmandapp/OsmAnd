@@ -139,7 +139,7 @@ public class IntentHelper {
 					buildRoute(startLatLon, endLatLon, appMode);
 				}
 
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -169,7 +169,7 @@ public class IntentHelper {
 					settings.setMapLocationToShow(lat, lon, zoom, new PointDescription(lat, lon));
 				}
 
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -210,7 +210,7 @@ public class IntentHelper {
 						LOG.error("Invalid map URL params", e);
 					}
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -242,7 +242,7 @@ public class IntentHelper {
 						LOG.error("error", e);
 					}
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -261,7 +261,7 @@ public class IntentHelper {
 						DiscountHelper.openUrl(mapActivity, url);
 					}
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -294,7 +294,7 @@ public class IntentHelper {
 						LOG.error("parseAddTileSourceIntent error", e);
 					}
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -332,7 +332,7 @@ public class IntentHelper {
 							}
 						});
 
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
@@ -379,7 +379,7 @@ public class IntentHelper {
 				if (openMapMarkersGroupsExtra != null) {
 					MapMarkersDialogFragment.showInstance(mapActivity, openMapMarkersGroupsExtra.getString(MapMarkersGroup.MARKERS_SYNC_GROUP_ID));
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_SETTINGS)) {
 				String appMode = intent.getStringExtra(BaseSettingsFragment.APP_MODE_KEY);
@@ -392,14 +392,14 @@ public class IntentHelper {
 						LOG.error("error", e);
 					}
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.hasExtra(PluginsFragment.OPEN_PLUGINS)) {
 				boolean openPlugins = intent.getBooleanExtra(PluginsFragment.OPEN_PLUGINS, false);
 				if (openPlugins) {
 					PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.hasExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY)) {
 				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
@@ -409,7 +409,7 @@ public class IntentHelper {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
 
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
@@ -421,7 +421,7 @@ public class IntentHelper {
 						ConfigureScreenFragment.showInstance(mapActivity);
 						break;
 				}
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
@@ -430,7 +430,7 @@ public class IntentHelper {
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
 				boolean temporarySelected = intent.getBooleanExtra(TEMPORARY_SELECTED, false);
 				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 			}
 			if (intent.getExtras() != null) {
 				Bundle extras = intent.getExtras();
@@ -480,8 +480,10 @@ public class IntentHelper {
 	}
 
 	private void clearIntent(@NonNull Intent intent) {
+		intent.replaceExtras(new Bundle());
 		intent.setAction(null);
 		intent.setData(null);
+		intent.setFlags(0);
 	}
 
 	private boolean parseSendIntent() {
@@ -507,7 +509,7 @@ public class IntentHelper {
 				if (oauthVerifier != null) {
 					app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
 					app.getOsmOAuthHelper().authorize(oauthVerifier);
-					mapActivity.setIntent(null);
+					clearIntent(intent);
 					return true;
 				}
 			}
@@ -524,7 +526,7 @@ public class IntentHelper {
 				String username = uri.getQueryParameter("opr-nickname");
 				app.getOprAuthHelper().addListener(getOprAuthorizationListener());
 				app.getOprAuthHelper().authorize(token, username);
-				mapActivity.setIntent(null);
+				clearIntent(intent);
 				return true;
 			}
 		}
