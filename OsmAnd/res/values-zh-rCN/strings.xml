@@ -4602,4 +4602,21 @@
     <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
     <string name="location_simulation_cutoff">模拟跳过第一米</string>
     <string name="send_uuid_preference_desc">一个随机的UUID被用来从OsmAnd服务器下载离线地图，以监测服务器资源的公平使用，预测流量模式，并生成匿名的月度地图报告。</string>
+    <string name="ant_heart_rate_write_gpx_desc">将心率写入至轨迹</string>
+    <string name="map_widget_ant_heart_rate">心率</string>
+    <string name="map_widget_ant_heart_rate_desc">实时显示用户在给定活动期间的心率</string>
+    <string name="map_widget_ant_bicycle_power">自行车功率</string>
+    <string name="map_widget_ant_bicycle_power_desc">显示骑车人用于推动自行车前进的功率输出</string>
+    <string name="map_widget_ant_bicycle_cadence">自行车踏频</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">显示用户踩踏的速度</string>
+    <string name="map_widget_ant_bicycle_dist">自行车距离</string>
+    <string name="map_widget_ant_bicycle_dist_desc">显示行驶距离</string>
+    <string name="worldwide_maps">全球地图</string>
+    <string name="map_widget_zoom_level_desc">小工具显示当前的地图缩放级别。</string>
+    <string name="nautical_depth_points">航海深度点</string>
+    <string name="depth_contours">等深线</string>
+    <string name="map_widget_target_distance_desc">小工具显示从摄像机到目标位置的距离。</string>
+    <string name="map_widget_camera_distance_desc">小工具显示相机在地面以上的标高。</string>
+    <string name="map_widget_ant_bicycle_speed">自行车速度</string>
+    <string name="map_widget_ant_bicycle_speed_desc">显示行驶速度</string>
 </resources>
