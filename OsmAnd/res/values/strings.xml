@@ -11,7 +11,7 @@
 	Thx - Hardy
 -->
 
-    <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
+    <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
     <string name="show_map_symbols_desc">Text, road signs, and others.</string>
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
