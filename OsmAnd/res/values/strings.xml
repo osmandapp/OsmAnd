@@ -2383,7 +2383,7 @@
     <string name="file_can_not_be_moved">Could not move file.</string>
     <string name="shared_string_move">Move</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
-    <string name="routing_attr_driving_style_name">Driving style</string>
+    <string name="routing_attr_driving_style_name">Riding style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Downhill</string>
     <string name="altitude_ascent">Uphill</string>
@@ -2403,7 +2403,7 @@
 	\u2022 Visibility enhancements in several map styles and Wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
 	\u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
-	\u2022 \"Driving style\" setting and logic improvements for bicycle routing\n\n
+	\u2022 \"Riding style\" setting and logic improvements for bicycle routing\n\n
 	\u2022 Altitude data settings for bicycle routing\n\n
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…
