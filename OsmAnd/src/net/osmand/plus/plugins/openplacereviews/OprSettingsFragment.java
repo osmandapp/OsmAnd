@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.openplacereviews;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -24,7 +25,7 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OprAuth
 	private OpenPlaceReviewsPlugin plugin;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		authHelper = app.getOprAuthHelper();

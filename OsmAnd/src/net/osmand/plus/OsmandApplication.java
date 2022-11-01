@@ -3,22 +3,17 @@ package net.osmand.plus;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
@@ -57,6 +52,7 @@ import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.LogsHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -101,7 +97,6 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
@@ -114,12 +109,7 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -133,7 +123,6 @@ import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
 
-	public static final String EXCEPTION_PATH = "exception.log";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
@@ -167,6 +156,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDisplayHelper gpxDisplayHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
+	LogsHelper logsHelper;
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
@@ -392,6 +382,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public AnalyticsHelper getAnalyticsHelper() {
 		return analyticsHelper;
+	}
+
+	public LogsHelper getLogsHelper() {
+		return logsHelper;
 	}
 
 	public NotificationHelper getNotificationHelper() {
@@ -674,69 +668,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
-			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
-		}
+		logsHelper.setExceptionHandler();
 		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		appInitializer.startApplication();
-	}
-
-	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
-
-		private final UncaughtExceptionHandler defaultHandler;
-		private final PendingIntent intent;
-
-		public DefaultExceptionHandler() {
-			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
-					new Intent(OsmandApplication.this.getBaseContext(),
-							getAppCustomization().getMapActivity()), 0);
-		}
-
-		@Override
-		public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
-			File file = getAppPath(EXCEPTION_PATH);
-			try {
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				PrintStream printStream = new PrintStream(out);
-				ex.printStackTrace(printStream);
-				StringBuilder msg = new StringBuilder();
-				msg.append("Version  ")
-						.append(Version.getFullVersion(OsmandApplication.this))
-						.append("\n")
-						.append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
-				try {
-					PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-					if (info != null) {
-						msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-					}
-				} catch (Throwable e) {
-				}
-				msg.append("\n")
-						.append("Exception occured in thread ")
-						.append(thread)
-						.append(" : \n")
-						.append(out);
-
-				if (file.getParentFile().canWrite()) {
-					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-					writer.write(msg.toString());
-					writer.close();
-				}
-				if (routingHelper.isFollowingMode()) {
-					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					System.exit(2);
-				}
-				defaultHandler.uncaughtException(thread, ex);
-			} catch (Exception e) {
-				// swallow all exceptions
-				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e);
-			}
-		}
 	}
 
 	public TargetPointsHelper getTargetPointsHelper() {
@@ -808,22 +744,18 @@ public class OsmandApplication extends MultiDexApplication {
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
 	}
-	
+
 	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
-		Message msg = Message.obtain(uiHandler, new Runnable() {
-			
-			@Override
-			public void run() {
-				if (!uiHandler.hasMessages(messageId)) {
-					run.run();
-				}
+		Message msg = Message.obtain(uiHandler, () -> {
+			if (!uiHandler.hasMessages(messageId)) {
+				run.run();
 			}
 		});
 		msg.what = messageId;
 		uiHandler.removeMessages(messageId);
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
-	
+
 	public File getAppPath(@Nullable String path) {
 		if (path == null) {
 			path = "";
@@ -1103,53 +1035,5 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OsmandMap getOsmandMap() {
 		return osmandMap;
-	}
-
-	public void sendCrashLog() {
-		File file = getAppPath(EXCEPTION_PATH);
-		sendCrashLog(file);
-	}
-
-	public void sendCrashLog(File file) {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"crash@osmand.net"});
-		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file));
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		intent.setType("vnd.android.cursor.dir/email");
-		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug");
-		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
-		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
-		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		AndroidUtils.startActivityIfSafe(this, intent, chooserIntent);
-	}
-
-	public void sendSupportEmail(String screenName) {
-		Intent emailIntent = new Intent(Intent.ACTION_SEND)
-				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
-				.putExtra(Intent.EXTRA_SUBJECT, screenName)
-				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
-		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
-		AndroidUtils.startActivityIfSafe(this, emailIntent);
-	}
-
-	public String getDeviceInfo() {
-		StringBuilder text = new StringBuilder();
-		text.append("Device : ").append(Build.DEVICE);
-		text.append("\nBrand : ").append(Build.BRAND);
-		text.append("\nModel : ").append(Build.MODEL);
-		text.append("\nProduct : ").append(Build.PRODUCT);
-		text.append("\nBuild : ").append(Build.DISPLAY);
-		text.append("\nVersion : ").append(Build.VERSION.RELEASE);
-		text.append("\nApp Version : ").append(Version.getAppName(this));
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			if (info != null) {
-				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-			}
-		} catch (PackageManager.NameNotFoundException e) {
-			LOG.error("", e);
-		}
-		return text.toString();
 	}
 }

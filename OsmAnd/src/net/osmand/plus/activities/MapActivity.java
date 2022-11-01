@@ -72,6 +72,7 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.RenderInitErrorBottomSheet;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
@@ -281,7 +282,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMapView().setMapActivity(this);
 		getMapLayers().setMapActivity(this);
 
-		intentHelper = new IntentHelper(this, getMyApplication());
+		intentHelper = new IntentHelper(this);
 		intentHelper.parseLaunchIntents();
 
 		OsmandMapTileView mapView = getMapView();
@@ -412,9 +413,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (event == InitEvents.MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
 						getMapView().refreshMap(false);
-						if (dashboardOnMap != null) {
-							dashboardOnMap.updateLocation(true, true, false);
-						}
+						dashboardOnMap.updateLocation(true, true, false);
 						app.getTargetPointsHelper().lookupAddressAll();
 					}
 					if (event == InitEvents.FAVORITES_INITIALIZED) {
@@ -431,9 +430,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						app.getOsmandMap().setupOpenGLView(false);
 					}
 					getMapView().refreshMap(false);
-					if (dashboardOnMap != null) {
-						dashboardOnMap.updateLocation(true, true, false);
-					}
+					dashboardOnMap.updateLocation(true, true, false);
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
 					findViewById(R.id.drawer_layout).invalidate();
 				}
@@ -443,17 +440,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.getOsmandMap().setupOpenGLView(true);
 			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
-	}
-
-	public void showHorizontalProgressBar() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		setupProgressBar(pb, true);
-		pb.setVisibility(View.VISIBLE);
-	}
-
-	public void hideHorizontalProgressBar() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		pb.setVisibility(View.GONE);
 	}
 
 	private void createProgressBarForRouting() {
@@ -676,6 +662,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!dashboardOnMap.isVisible()) {
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+				} else if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
+					SecondSplashScreenFragment.SHOW = false;
+					RenderInitErrorBottomSheet.showInstance(fragmentManager);
 				} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 					SecondSplashScreenFragment.SHOW = false;
 					CrashBottomSheetDialogFragment.showInstance(fragmentManager);

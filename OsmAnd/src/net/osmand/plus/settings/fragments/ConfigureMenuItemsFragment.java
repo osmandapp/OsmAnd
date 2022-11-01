@@ -1,8 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +28,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
@@ -48,6 +51,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import org.apache.commons.logging.Log;
 
@@ -56,15 +62,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
-
 public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
-		implements SelectCopyAppModeBottomSheet.CopyAppModePrefsListener {
+		implements CopyAppModePrefsListener {
 
 	public static final String TAG = ConfigureMenuItemsFragment.class.getName();
 	public static final int MAIN_BUTTONS_QUANTITY = 4;
@@ -228,12 +227,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				AndroidUtils.getNavigationIconResId(app),
 				getColor(R.color.text_color_secondary_light)));
 		toolbarTitle.setText(screenType.titleRes);
-		toolbarButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				exitFragment();
-			}
-		});
+		toolbarButton.setOnClickListener(view -> exitFragment());
 		appbar.addView(toolbar);
 		recyclerView = root.findViewById(R.id.profiles_list);
 		View cancelButton = root.findViewById(R.id.dismiss_button);
@@ -251,51 +245,46 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		});
 		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
-		applyButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
-				List<String> ids = new ArrayList<>();
-				if (!menuItemsOrder.isEmpty()) {
-					sortByCustomOrder(defItems, menuItemsOrder);
-					for (ContextMenuItem item : defItems) {
-						ids.add(item.getId());
-					}
-				}
-				FragmentManager fm = getFragmentManager();
-				ContextMenuItemsSettings prefToSave;
-				if (screenType == ScreenType.DRAWER) {
-					prefToSave = new DrawerMenuItemsSettings(hiddenMenuItems, ids);
-				} else if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-					prefToSave = new MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
-				} else {
-					prefToSave = new ContextMenuItemsSettings(hiddenMenuItems, ids);
-				}
-				if (fm != null) {
-					ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
-							getSettingForScreen().getId(),
-							prefToSave,
-							getTargetFragment(),
-							false,
-							R.string.back_to_editing,
-							appMode,
-							new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
-								@Override
-								public void onApplied(boolean profileOnly) {
-									dismissFragment();
-								}
-
-								@Override
-								public void onDiscard() {
-
-								}
-							});
+		applyButton.setOnClickListener(v -> {
+			List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);
+			List<String> ids = new ArrayList<>();
+			if (!menuItemsOrder.isEmpty()) {
+				sortByCustomOrder(defItems, menuItemsOrder);
+				for (ContextMenuItem item : defItems) {
+					ids.add(item.getId());
 				}
 			}
+			FragmentManager fm = getFragmentManager();
+			ContextMenuItemsSettings prefToSave;
+			if (screenType == ScreenType.DRAWER) {
+				prefToSave = new DrawerMenuItemsSettings(hiddenMenuItems, ids);
+			} else if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+				prefToSave = new MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
+			} else {
+				prefToSave = new ContextMenuItemsSettings(hiddenMenuItems, ids);
+			}
+			if (fm != null) {
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fm,
+						getSettingForScreen().getId(),
+						prefToSave,
+						getTargetFragment(),
+						false,
+						R.string.back_to_editing,
+						appMode,
+						new ChangeGeneralProfilesPrefBottomSheet.OnChangeSettingListener() {
+							@Override
+							public void onApplied(boolean profileOnly) {
+								dismissFragment();
+							}
+
+							@Override
+							public void onDiscard() {
+
+							}
+						});
+			}
 		});
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
-		}
+		AndroidUtils.addStatusBarPadding21v(app, root);
 		return root;
 	}
 
@@ -436,27 +425,19 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeMenuItemsAdapter.ButtonItem(
 				R.string.reset_to_default,
 				R.drawable.ic_action_reset_to_default_dark,
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						resetToDefault();
-					}
-				})));
+				view -> resetToDefault())));
 		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeMenuItemsAdapter.ButtonItem(
 				R.string.copy_from_other_profile,
 				R.drawable.ic_action_copy,
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						FragmentManager fm = getFragmentManager();
-						if (fm != null) {
-							SelectCopyAppModeBottomSheet.showInstance(
-									fm,
-									ConfigureMenuItemsFragment.this,
-									false,
-									appMode
-							);
-						}
+				view -> {
+					FragmentManager fm = getFragmentManager();
+					if (fm != null) {
+						SelectCopyAppModeBottomSheet.showInstance(
+								fm,
+								ConfigureMenuItemsFragment.this,
+								false,
+								appMode
+						);
 					}
 				})));
 		return items;
@@ -476,12 +457,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		dismissDialog.setTitle(getString(R.string.shared_string_dismiss));
 		dismissDialog.setMessage(getString(R.string.exit_without_saving));
 		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
-		dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dismissFragment();
-			}
-		});
+		dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismissFragment());
 		dismissDialog.show();
 	}
 
@@ -512,14 +488,12 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		if (appMode != null) {
-			isChanged = true;
-			initSavedIds(appMode);
-			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
-				initMainActionsIds(appMode);
-			}
-			rearrangeAdapter.updateItems(getAdapterItems());
+		isChanged = true;
+		initSavedIds(appMode);
+		if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+			initMainActionsIds(appMode);
 		}
+		rearrangeAdapter.updateItems(getAdapterItems());
 	}
 
 	public ContextMenuItemsSettings getMenuItemsSettings(ApplicationMode appMode,

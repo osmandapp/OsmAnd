@@ -46,7 +46,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	private Preference navigationType;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		routingDataUtils = new RoutingDataUtils(app);
 		updateRoutingProfiles();

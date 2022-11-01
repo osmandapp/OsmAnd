@@ -23,10 +23,11 @@ public class TroubleshootingCard extends BaseCard {
 	protected InAppPurchaseHelper purchaseHelper;
 
 	public TroubleshootingCard(@NonNull FragmentActivity activity,
-							   @NonNull InAppPurchaseHelper purchaseHelper,
-							   boolean usedOnMap) {
+	                           @NonNull InAppPurchaseHelper purchaseHelper,
+	                           boolean usedOnMap) {
 		super(activity, usedOnMap);
-		this.purchaseHelper = purchaseHelper;	}
+		this.purchaseHelper = purchaseHelper;
+	}
 
 	@Override
 	public int getCardLayoutId() {
@@ -83,8 +84,6 @@ public class TroubleshootingCard extends BaseCard {
 
 	private void setupContactUsLink() {
 		View contactSupportLinkContainer = view.findViewById(R.id.contact_support_title_container);
-		contactSupportLinkContainer.setOnClickListener(
-				v -> app.sendSupportEmail(app.getString(R.string.purchases)));
+		contactSupportLinkContainer.setOnClickListener(v -> app.getLogsHelper().sendSupportEmail(app.getString(R.string.purchases)));
 	}
-
 }
