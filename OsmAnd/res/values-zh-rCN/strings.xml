@@ -4546,4 +4546,60 @@
     <string name="map_look">地图外观</string>
     <string name="wake_time">唤醒后超时</string>
     <string name="manage_profiles_descr">创建、导入、编辑配置文件</string>
+    <string name="map_widget_altitude_map_center">海拔：地图中心</string>
+    <string name="map_center_widget">坐标：地图中心</string>
+    <string name="map_widget_target_distance">相机到目标的距离</string>
+    <string name="send_uuid_preference">发送唯一用户标识符 （UUID）</string>
+    <string name="external_sensors_support">外部传感器支持</string>
+    <string name="speak_gps_signal_status">宣布 GPS 信号丢失和恢复</string>
+    <string name="speak_route_recalculation">宣布路线重新计算</string>
+    <string name="external_sensors_plugin_name">外部传感器</string>
+    <string name="map_widget_altitude_current_location">海拔：当前位置</string>
+    <string name="map_widget_rendering_fps">地图渲染 FPS</string>
+    <string name="simulate_location_by_gpx">通过 GPX 模拟位置</string>
+    <string name="location_simulation_speedup">模拟加速</string>
+    <string name="shared_string_identifiers">识别码</string>
+    <string name="terms_of_service_desc">下载地图即表示您同意 %1$s 和 %2$s。</string>
+    <string name="shared_string_terms_of_use">使用条款</string>
+    <string name="favorites_backup">收藏夹备份</string>
+    <string name="purchases_feature_desc_cross_buy">在不同的平台（Android/iOS/Web）上使用您的订阅功能，无需额外费用。</string>
+    <string name="ant_widgets">ANT+ 小工具</string>
+    <string name="shared_string_cross_buy">跨平台购买</string>
+    <string name="current_location_widget">坐标：当前位置</string>
+    <string name="external_sensors_plugin_description">监测心率、自行车速度、自行车功率和踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>
+    <string name="map_widget_altitude_current_location_desc">显示当前地理位置的海拔高度。</string>
+    <string name="map_widget_altitude_desc">显示当前地理位置或当前地图中心的海拔高度</string>
+    <string name="map_widget_rendering_fps_desc">显示地图和地图元素的显示和刷新速度，以每秒帧数 （FPS） 表示。</string>
+    <string name="ant_go_to_store">前往商店</string>
+    <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。
+\n您需要安装ANT +插件服务，如果您已经拥有现有版本，则可能需要更新现有版本。
+\n您想启动 Play 商店来获取它吗？</string>
+    <string name="ant_missing_dependency">缺少依赖关系</string>
+    <string name="ant_read_data">读取数据</string>
+    <string name="ant_write_to_gpx">将数据写入轨迹</string>
+    <string name="purchases_feature_desc_external_sensors">显示和记录来自外部传感器的数据：自行车速度、自行车功率、踏频和心率。</string>
+    <string name="release_4_3">- 新的、更快的地图渲染引擎，带有2.5D视图
+\n
+\n - 运动中位置变化的平滑动画
+\n
+\n - 为地图中心坐标和地理位置的高程提供新的小部件
+\n
+\n - \"点击测距\"：增加了文字大小的选项
+\n
+\n - \"地图标记 \"小组件：增加了改变点击行为的选项
+\n
+\n - 修正了 \"显示位置 \"选项
+\n
+\n - GPX：增加了对 \"link\"、\"cmt\"、\"desc \"标签和任何自定义扩展的支持
+\n
+\n - 重新组织了 \"航海地图 \"列表
+\n
+\n - 增加了对ANT+传感器的支持
+\n
+\n - 增加了禁止下载UUID的选项
+\n
+\n</string>
+    <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
+    <string name="location_simulation_cutoff">模拟跳过第一米</string>
+    <string name="send_uuid_preference_desc">一个随机的UUID被用来从OsmAnd服务器下载离线地图，以监测服务器资源的公平使用，预测流量模式，并生成匿名的月度地图报告。</string>
 </resources>
