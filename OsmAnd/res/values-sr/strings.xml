@@ -1442,7 +1442,6 @@
     <string name="remove_from_map_markers">Уклони из ’Ознака карти’</string>
     <string name="date_added">Додато</string>
     <string name="marker_show_distance_descr">Изаберите како указати на растојање и правац ка ознакама карте на карти:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Испод изаберите којом брзином ће промена усмерења прећи из „у правцу кретања“ на „по правцу компаса“.</string>
     <string name="all_markers_moved_to_history">Све ознаке карте су премештене у историју</string>
     <string name="marker_moved_to_history">Ознаке карте су премештене у историју</string>
     <string name="marker_moved_to_active">Ознака карте је премештена у активне</string>
@@ -1484,7 +1483,6 @@
     <string name="rendering_attr_hidePOILabels_name">Ознаке тачака од интереса</string>
     <string name="shared_string_without_name">Без имена</string>
     <string name="empty_state_markers_active_desc">Дуго или кратко притисните на „Места“, онда притисните заставицу кад се појави.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Задршка усмерења карте</string>
     <string name="quick_action_start_stop_navigation_descr">Дугме за почетак или завршетак навођења.</string>
     <string name="store_tracks_in_monthly_directories">Сачувај снимљене путање у месечним фасциклама</string>
     <string name="store_tracks_in_monthly_directories_descrp">Сачувај снимљене путање у подфасциклама према месецима снимања (нпр. 2018-01).</string>

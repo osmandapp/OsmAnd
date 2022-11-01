@@ -2487,7 +2487,6 @@
     <string name="coordinate_input">Vpis koordinat</string>
     <string name="move_to_history">Premakni v zgodovino</string>
     <string name="group_will_be_removed_after_restart">Skupina bo odstranjena ob ponovnem zagonu programa.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
     <string name="all_markers_moved_to_history">Vse označbe zemljevida so premaknjene med zgodovino</string>
     <string name="marker_moved_to_history">Označbe zemljevida so premaknjene med zgodovino</string>
     <string name="osn_modify_dialog_error">Sporočila ni mogoče spremeniti.</string>
@@ -2560,7 +2559,6 @@
     <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se preklopi prikaz gumbov in gradnikov.</string>
     <string name="import_gpx_file_description">je lahko uvožen med priljubljene točke, ali kot datoteka sledi.</string>
     <string name="marker_show_distance_descr">Izberi, kako označiti razdaljo in smer do oznak zemljevida na zemljevidu:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Spodaj izberi hitrost, pri kateri se usmerjenost preklopi iz »smeri gibanja« na »smer kompasa«.</string>
     <string name="what_is_here">Kaj je tu:</string>
     <string name="parked_at">parkirano</string>
     <string name="pick_up_till">Odpelji do</string>

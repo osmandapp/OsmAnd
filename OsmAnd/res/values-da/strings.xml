@@ -2474,8 +2474,6 @@
     <string name="yesterday">I går</string>
     <string name="last_seven_days">Sidste 7 dage</string>
     <string name="this_year">I år</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Tærskel for kortorientering</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg hastighed for skift af kortorientering fra \'Bevægelsesretning\' til \'Kompasretning\' nedenfor.</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>

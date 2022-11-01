@@ -3136,8 +3136,6 @@
     <string name="mapillary_menu_title_pano">Näytä vain 360° kuvat</string>
     <string name="mapillary_menu_date_from">Mistä</string>
     <string name="shared_string_to">Minne</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Valitse suunnan vaihtamisen nopeus valinnasta \"Liikesuunta\" valintaan \"Kompassisuunta\" alla.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartan suuntauskynnys</string>
     <string name="by_type">Tyypin mukaan</string>
     <string name="by_date">Päivämäärän mukaan</string>
     <string name="notes_by_date">A/V-muistiinpanot päivämäärän mukaan</string>

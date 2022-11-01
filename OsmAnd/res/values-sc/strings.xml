@@ -2460,8 +2460,6 @@
     <string name="move_all_to_history">Pone totu in sa cronologia</string>
     <string name="show_direction">Indicatzione de distàntzia</string>
     <string name="sort_by">Òrdina pro</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Lìmite de orientamentu de sa mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Ischerta inoghe in suta sa lestresa cun sa cale sa mapa colat dae \'In sa diretzione de mòvida\' a \'Bùssola\'.</string>
     <string name="all_markers_moved_to_history">Totu sos marcadores de sa mapa sunt istados archiviados in sa Cronologia</string>
     <string name="marker_moved_to_history">Marcadore mapa postu in sa Cronologia</string>
     <string name="marker_moved_to_active">Marcadore mapa postu in sos ativos</string>

@@ -53,6 +53,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final RoutingHelper routingHelper;
 
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
@@ -77,6 +78,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public MapViewTrackingUtilities(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
+		routingHelper = app.getRoutingHelper();
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
@@ -148,12 +150,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > COMPASS_HEADING_THRESHOLD;
 		}
 		if (mapView != null) {
-			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.get() / 3.6f;
-			boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0 &&
-					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			boolean isRotateMapCompass = settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS;
-			boolean isRotateMapBearing = settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING;
-			if ((isRotateMapCompass || (isRotateMapBearing && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
+			if (isRotateMapCompass && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
@@ -190,8 +188,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 				DrivingRegion currentRegion = app.getSettings().DRIVING_REGION.get();
 				if (oldRegion.leftHandDriving != currentRegion.leftHandDriving) {
-					ApplicationMode mode = app.getRoutingHelper().getAppMode();
-					app.getRoutingHelper().onSettingsChanged(mode, true);
+					ApplicationMode mode = routingHelper.getAppMode();
+					routingHelper.onSettingsChanged(mode, true);
 				}
 			}
 			return true;
@@ -227,22 +225,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zoom = autozoom(tb, location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.get() / 3.6f;
-				boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0
-						&& isSmallSpeedForDirectionOfMovement(location, speedForDirectionOfMovement);
-				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);
 				boolean smallSpeedForAnimation = isSmallSpeedForAnimation(location);
 				// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
-				showViewAngle = (!location.hasBearing() || smallSpeedForCompass) && (tb != null &&
+				showViewAngle = !location.hasBearing() && (tb != null &&
 						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (smallSpeedForDirectionOfMovement) {
-						showViewAngle = routePlanningMode;
-					} else if (location.hasBearing() && !smallSpeedForCompass) {
-						// special case when bearing equals to zero (we don't change anything)
-						if (location.getBearing() != 0f) {
-							rotation = -location.getBearing();
-						}
+					// special case when bearing equals to zero (we don't change anything)
+					if (location.hasBearing() && location.getBearing() != 0f) {
+						rotation = -location.getBearing();
 					}
 					if (rotation == null && prevLocation != null && tb != null) {
 						double distDp = (tb.getPixDensity() * MapUtils.getDistance(prevLocation, location)) / tb.getDensity();
@@ -256,7 +246,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_NONE) {
 					pendingRotation = true;
 				}
-				registerUnregisterSensor(location, smallSpeedForDirectionOfMovement);
+				registerUnregisterSensor(location);
 				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation &&
 						settings.TURN_SCREEN_ON_TIME_INT.get() == 0) {
 					mapView.getAnimatedDraggingThread().startMoving(
@@ -287,10 +277,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			} else if (location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null &&
 						NativeUtilities.containsLatLon(mapView.getMapRenderer(), tb, location.getLatitude(), location.getLongitude()));
-				registerUnregisterSensor(location, false);
+				registerUnregisterSensor(location);
 			}
 			this.showViewAngle = showViewAngle;
-			RoutingHelper routingHelper = app.getRoutingHelper();
 			followingMode = routingHelper.isFollowingMode();
 			if (routePlanningMode != routingHelper.isRoutePlanningMode()) {
 				switchRoutePlanningMode();
@@ -307,10 +296,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	public static boolean isSmallSpeedForDirectionOfMovement(Location location, float speedToDirectionOfMovement) {
-		return !location.hasSpeed() || location.getSpeed() < speedToDirectionOfMovement;
-	}
-
 	public static boolean isSmallSpeedForCompass(Location location) {
 		return !location.hasSpeed() || location.getSpeed() < 0.5;
 	}
@@ -324,7 +309,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void switchRoutePlanningMode() {
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		routePlanningMode = routingHelper.isRoutePlanningMode();
 		updateSettings();
 		if (!routePlanningMode && followingMode) {
@@ -345,7 +329,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.setMapPosition(displayPosition);
 			}
 		}
-		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
+		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation());
 	}
 
 	public void appModeChanged() {
@@ -363,11 +347,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	private void registerUnregisterSensor(net.osmand.Location location, boolean smallSpeedForDirectionOfMovement) {
+	private void registerUnregisterSensor(net.osmand.Location location) {
 		int currentMapRotation = settings.ROTATE_MAP.get();
 		boolean registerCompassListener = ((showViewAngle || contextMenu != null) && location != null)
-				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode)
-				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement);
+				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode);
 		// show point view only if gps enabled
 		if (registerCompassListener) {
 			app.getLocationProvider().registerOrUnregisterCompassListener(true);
@@ -455,7 +438,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
 		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom	: mapView.getZoom();
+		int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
 		Runnable startAnimationCallback = () -> {
 			movingToMyLocation = true;
 			if (!isMapLinkedToLocation) {
@@ -499,7 +482,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if (autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode) {
+			if (autoFollow > 0 && routingHelper.isFollowingMode() && !routePlanningMode) {
 				backToLocationWithDelay(autoFollow);
 			}
 		} else {
@@ -518,7 +501,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void switchRotateMapMode() {
-		if (app.getRoutingHelper().isFollowingMode()) {
+		if (routingHelper.isFollowingMode()) {
 			if (compassRequest + COMPASS_REQUEST_TIME_INTERVAL_MS > System.currentTimeMillis()) {
 				compassRequest = 0;
 				switchRotateMapModeImpl();

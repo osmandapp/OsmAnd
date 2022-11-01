@@ -2250,8 +2250,6 @@ Lon %2$s</string>
     <string name="date_added">Engadido</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Escolle de que xeito indicar a distancia e a dirección ás marcaxes do mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Limiar de orientación do mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Escolle a velocidade á que a orientación do mapa muda de \"Para a dirección do movemento\" cara \"Para o compás\".</string>
     <string name="all_markers_moved_to_history">Tódalas marcaxes do mapa foron movidas cara o historial</string>
     <string name="marker_moved_to_history">A marcaxe do mapa foi movida cara o historial</string>
     <string name="marker_moved_to_active">A marcaxe do mapa foi movida cara os activos</string>

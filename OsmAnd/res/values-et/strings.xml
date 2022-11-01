@@ -349,7 +349,6 @@
     <string name="do_not_use_animations_descr">Lülitab kaardianimatsioonid välja.</string>
     <string name="move_all_to_history">Teisalda kõik ajalukku</string>
     <string name="sort_by">Sorteerimisalus</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kaardi orientatsiooni lävi</string>
     <string name="all_markers_moved_to_history">Kõik kaardimarkerid ajalukku teisaldatud</string>
     <string name="marker_moved_to_history">Kaardimarker ajalukku teisaldatud</string>
     <string name="marker_moved_to_active">Kaardimarker teisaldatud aktiivseks</string>
@@ -2574,7 +2573,6 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Määra võrguühenduse puudumisel säilitatavate asukohtade ajaline puhver</string>
     <string name="mappilary_no_internet_desc">Mapillary fotod on saadaval ainult internetiühenduse olemasolul.</string>
     <string name="show_direction">Vahemaa näit</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vali allpool „liikumise suunalt“ „kompassi suunale“ vastavalt orientatsiooni ümberlülitamise kiirus.</string>
     <string name="marker_show_distance_descr">Valige, kuidas esitame kaardil kaugust ja kaardimarkerite suunda:</string>
     <string name="marker_save_as_track_descr">Ekspordi oma markerid järgmisesse GPX faili:</string>
     <string name="group_will_be_removed_after_restart">Järgmisel rakenduse käivitamisel on grupp kadunud.</string>
