@@ -11,15 +11,15 @@
 	Thx - Hardy
 -->
 
-    <string name="rendering_engine_failed_descr">OsmAnd automatically switched to Legacy map rendering engine. You can try to switch back to New rendering engine in Settings.\n\nYou can help us by send crash log.</string>
-    <string name="rendering_engine_failed">OsmAnd map has crashed previously</string>
+    <string name="rendering_engine_failed_descr">OsmAnd has reverted to Legacy map rendering, you can try to switch back to the New rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
+    <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
     <string name="share_crash_log">Share crash log</string>
     <string name="dismiss_changes_descr">All changes will be dismissed.</string>
     <string name="dismiss_changes">Dismiss changes?</string>
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_legacy">Legacy</string>
     <string name="map_rendering_engine_new">New</string>
-    <string name="map_rendering_engine_descr">New map rendering faster engine with support of 2.5D view. Legacy was default before 4.3 release, preferable for old devices.</string>
+    <string name="map_rendering_engine_descr">New, faster map rendering engine with 2.5D view support. The Legacy rendering was the default before release 4.3, and is preferable for older devices.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
