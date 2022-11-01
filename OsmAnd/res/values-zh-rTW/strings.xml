@@ -3323,9 +3323,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
     <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
     <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
-    <string name="monitoring_min_distance_descr">該過濾器可避免記錄可能發生過少實際運動的重複點，讓軌跡看起來更平滑，可不進行後處理。</string>
-    <string name="monitoring_min_distance_descr_side_effect">副作用：完全不記錄休息時間，也不會每次只記錄一個點。較小的（真實世界）移動（例如橫向移動，以標記您的行進路線）可能會被濾除。您的檔案包含的資訊較少，可用於後製，並且由於在記錄時過濾掉了明顯的冗餘點而讓統計資訊變糟，同時還可能保留由不良接收或 GPS 晶片影響所造成的假點。</string>
-    <string name="monitoring_min_distance_descr_recommendation">建議：如果您不需要取得比其更詳細的細節，並且不想在靜止時取得資料，則設定為 5 公尺可能較合適您。</string>
+    <string name="monitoring_min_distance_descr">啟用此過濾器可以避免在幾乎未檢測到移動時記錄額外的資料。其也改進了軌道的空間外觀，無需進一步處理。</string>
+    <string name="monitoring_min_distance_descr_side_effect">副作用：完全不記錄休息時間，或者每次只記錄一個點。也可能會濾除較小的動作（例如在路邊標記行程中可能出現的轉彎）。請注意，您的檔案可能包含較少的後處理資訊，同時可能會儲存因接收不良或晶片組影響而導致的 GPS 假軌跡。</string>
+    <string name="monitoring_min_distance_descr_recommendation">建議：若您不想記錄路線的次要細節，也不需要額外的休息時間資料，請設置 5 公尺位移。</string>
     <string name="live_monitoring_time_buffer">緩衝時間</string>
     <string name="live_monitoring_tracking_interval">軌跡間隔</string>
     <string name="live_monitoring_adress">網址</string>
@@ -4823,14 +4823,14 @@
     <string name="favorites_backup">收藏備份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
     <string name="location_simulation_cutoff">模擬跳過第一公尺</string>
-    <string name="map_widget_altitude_desc">用來顯示目前地理位置或目前地圖中心海拔高度的小工具</string>
-    <string name="send_uuid_preference_desc">隨機 UUID 用於從 OsmAnd 伺服器下載離線地圖，以監控伺服器資源的公平使用情況、預測流量使用狀況並產生匿名的每月地圖報告。</string>
+    <string name="map_widget_altitude_desc">顯示目前地理位置或目前地圖中心的海拔高度</string>
+    <string name="send_uuid_preference_desc">隨機 UUID 用於從 OsmAnd 伺服器下載離線地圖，以監控伺服器資源的公平使用情況、預測流量模式並產生匿名的每月地圖報告。</string>
     <string name="send_uuid_preference">傳送唯一使用者識別碼 (UUID)</string>
     <string name="shared_string_identifiers">識別碼</string>
     <string name="terms_of_service_desc">下載地圖即表示您同意 %1$s 與 %2$s。</string>
     <string name="shared_string_terms_of_use">使用條款</string>
     <string name="external_sensors_plugin_name">外部感測器</string>
-    <string name="external_sensors_plugin_description">監測心率、自行車速度、自行車功率和踩踏頻率。需要將裝置與有這些參數且支援 ANT +（無線個人網絡協定）的感測器連結。</string>
+    <string name="external_sensors_plugin_description">監測心率、自行車速度、自行車功率與踩踏頻率。需要裝置透過 ANT+ 無線個人網路協定連結至對應的感應器。</string>
     <string name="map_widget_altitude_map_center">海拔：地圖中心</string>
     <string name="map_widget_altitude_map_center_desc">顯示目前地圖中心的海拔高度。</string>
     <string name="map_widget_altitude_current_location">海拔：目前位置</string>
@@ -4841,4 +4841,29 @@
     <string name="location_simulation_speedup">模擬加速</string>
     <string name="current_location_widget">座標：目前位置</string>
     <string name="map_center_widget">座標：地圖中心</string>
+    <string name="speak_gps_signal_status">宣佈 GPS 訊號遺失與恢復</string>
+    <string name="speak_route_recalculation">宣佈路線重新計算</string>
+    <string name="purchases_feature_desc_external_sensors">顯示並記錄來自外部感應器的資料：自行車速度、自行車功率、踩踏頻率與心率。</string>
+    <string name="release_4_3">• 新的、較快速的地圖繪製引擎，包含了 2.5D 檢視
+\n
+\n • 運動時位置變化的平滑動畫
+\n
+\n • 用於地圖中心座標與地理位置海拔的新小工具
+\n
+\n • 「到點擊位置的距離」：新增文字大小選項
+\n
+\n • 「地圖標記」小工具：新增用來變更點擊行為的選項
+\n
+\n • 修復「顯示位置」選項
+\n
+\n • GPX：新增「link」、「cmt」、「desc」等標籤與任何擴充的支援
+\n
+\n • 重新整理的「航海地圖」清單
+\n
+\n • 新增對 ANT+ 感應器的支援
+\n
+\n • 新增用來停用下載 UUID 的選項
+\n
+\n</string>
+    <string name="external_sensors_support">外部感應器支援</string>
 </resources>

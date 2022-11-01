@@ -4247,7 +4247,7 @@
     <string name="on_hold_since">Призупинено з %1$s</string>
     <string name="active_till">Активна до %1$s</string>
     <string name="promo_subscription">Промо-передплата</string>
-    <string name="track_has_no_needed_data">Трек не містить відповідних даних.</string>
+    <string name="track_has_no_needed_data">У треку відсутні відповідні дані.</string>
     <string name="benefits_for_contributors_primary_descr">Активні учасники OpenStreetMap.org мають право на необмежене погодинне оновлення мап.</string>
     <string name="benefits_for_contributors_secondary_descr">Увійдіть в OpenStreetMap, щоб перевірити, чи маєте ви право отримувати необмежені щомісячні та погодинні оновлення мап.</string>
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
