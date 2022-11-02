@@ -300,6 +300,8 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public int directionForward = -1;
 		public int directionBackward = -1;
+		public int maxheightForward = -1;
+		public int maxheightBackward = -1;
 		public int directionTrafficSignalsForward = -1;
 		public int directionTrafficSignalsBackward = -1;
 		public int trafficSignals = -1;
@@ -383,6 +385,10 @@ public class BinaryMapRouteReaderAdapter {
 				} else if (val.equals("backward")) {
 					directionBackward = id;
 				}
+			} else if (tags.equals("maxheight:forward") && val != null) {
+				maxheightForward = id;
+			} else if (tags.equals("maxheight:backward") && val != null) {
+				maxheightBackward = id;
 			}
 		}
 		

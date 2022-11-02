@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Debug;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -12,7 +13,6 @@ import androidx.preference.Preference;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -41,7 +41,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private StateChangedListener<Boolean> showHeightmapsListener;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 
@@ -58,8 +58,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference developmentInfo = findPreference("development_info");
 		developmentInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-
-		setupOpenglRenderPref();
 
 		Preference safeCategory = findPreference("safe");
 		safeCategory.setIconSpaceReserved(false);
@@ -91,16 +89,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
 		setupDayNightInfoPref();
-	}
-
-	private void setupOpenglRenderPref() {
-		SwitchPreferenceEx useOpenglRender = findPreference(settings.USE_OPENGL_RENDER.getId());
-		if (Version.isOpenGlAvailable(app)) {
-			useOpenglRender.setDescription(getString(R.string.use_opengl_render_descr));
-			useOpenglRender.setIconSpaceReserved(false);
-		} else {
-			useOpenglRender.setVisible(false);
-		}
 	}
 
 	private void setupSafeModePref() {

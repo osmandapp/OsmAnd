@@ -4757,7 +4757,7 @@
     <string name="auto_backup_preference_desc">Come predefinito Android salva i backup dei preferiti, token della mappa e le impostazioni di OsmAnd per essere ripristinati in un nuovo dispositivo o dopo la reinstallazione. Questo backup è limitato a 25 MB.
 \nSe stai utilizzando OsmAnd Cloud, dopo la reinstallazione questo può portare a fraintendimenti.</string>
     <string name="av_notes_audio_widget_desc">Toccare il widget permette di registrare una nota audio.</string>
-    <string name="goods_delivery_desc_3">Si applica solo a veicoli che trasportano merci che hanno al massimo quattro ruote e pesano meno di 3.5 tonnellate.</string>
+    <string name="goods_delivery_desc_3">Si applica solo ai veicoli di trasporto merci che pesano fino a 3.5 tonnellate.</string>
     <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
     <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
@@ -4832,4 +4832,6 @@
     <string name="map_widget_ant_bicycle_cadence_desc">Mostra la velocità a cui l\'utente sta pedalando</string>
     <string name="map_widget_ant_bicycle_speed">Velocità bicicletta</string>
     <string name="map_widget_ant_bicycle_dist">Distanza bicicletta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
+    <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
 </resources>

@@ -25,6 +25,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
@@ -436,19 +437,12 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	private void addInitPoiTypesListener() {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 					if (event == AppInitializer.InitEvents.POI_TYPES_INITIALIZED) {
 						poiTypesInitialized = true;
 					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
 				}
 			});
 		} else {

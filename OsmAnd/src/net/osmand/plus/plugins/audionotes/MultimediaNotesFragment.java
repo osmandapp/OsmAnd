@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -71,7 +72,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	boolean showSwitchProfile;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		Bundle args = getArguments();

@@ -1,6 +1,18 @@
 package net.osmand.plus.render;
 
+import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
+import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
+import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
+
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -31,18 +43,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
-import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
-import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
-import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
 
 public class TravelRendererHelper implements IRendererLoadedEventListener {
 
@@ -112,19 +112,12 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private void addAppInitListener() {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 					if (event == InitEvents.MAPS_INITIALIZED) {
 						updateVisibilityPrefs();
 					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
 				}
 			});
 		} else {

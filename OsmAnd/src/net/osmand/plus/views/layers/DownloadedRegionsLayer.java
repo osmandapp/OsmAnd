@@ -30,6 +30,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -796,18 +797,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 					if (event == AppInitializer.InitEvents.INDEX_REGION_BOUNDARIES) {
 						indexRegionBoundaries = true;
 					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
 				}
 			});
 		} else {

@@ -397,11 +397,14 @@ public class AnimateDraggingMapThread {
 					animator.cancelAnimation(targetAnimation);
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
-				animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
-			}
-
-			if (animateZoom)
-			{
+				if (animateZoom) {
+					animator.animateZoomToAndPan((float) endZoom, finish31,
+							Math.max(duration, ZOOM_MOVE_ANIMATION_TIME / 1000f),
+							TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
+				} else {
+					animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
+				}
+			} else if (animateZoom) {
 				animator.animateZoomTo((float) endZoom, ZOOM_MOVE_ANIMATION_TIME / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}

@@ -2173,7 +2173,7 @@
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
     <string name="shared_string_time_moving">Tiempo en movimiento</string>
-    <string name="shared_string_time_span">Espacio de tiempo</string>
+    <string name="shared_string_time_span">Duración total</string>
     <string name="shared_string_max">Máx</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>

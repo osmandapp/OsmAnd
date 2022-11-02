@@ -3419,8 +3419,8 @@
     <string name="multimedia_photo_play_sound">Kameraets lukkelyd</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="monitoring_min_distance_descr_recommendation">Anbefaling: Indstil 5 meters forskydning, hvis du ikke ønsker at registrere mindre detaljer om din rute og ikke har brug for yderligere data om din hvileperiode.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Hvileperioder registreres slet ikke eller kun som et punkt hver. Mindre bevægelser (f.eks. til siden af vejen for at markere en mulig afkørsel på din tur) kan blive filtreret fra. Bemærk, at din fil vil indeholde mindre information til efterbehandling og kan samtidig potentielt gemme GPS-artefakter forårsaget af dårlig modtagelse eller chipset-effekter.</string>
-    <string name="monitoring_min_distance_descr">Oprettelse af dette filter giver dig mulighed for at undgå yderligere dataoptagelse, når der næsten ikke registreres bevægelse. Det giver også et pænere rumligt udseende af spor uden yderligere efterbehandling.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Bivirkninger: Hvileperioder registreres slet ikke eller kun som et point hver. Mindre bevægelser (f.eks. til vejsiden for at markere et muligt sving på din tur) kan blive filtreret fra. Bemærk, at din fil vil indeholde færre oplysninger til efterbehandling og samtidig muligvis gemme GPS-artefakter forårsaget af dårlig modtagelse eller chipset-effekter.</string>
+    <string name="monitoring_min_distance_descr">Hvis du slår dette filter til, kan du undgå yderligere dataregistrering, når der næsten ikke registreres bevægelse. Det forbedrer også den rumlige fremtoning af spor uden yderligere behandling.</string>
     <string name="monitoring_min_accuracy_descr_remark">Bemærk: Hvis GPS\'en har været slukket umiddelbart før en optagelse, kan det første målte punkt have en reduceret nøjagtighed, så i koden skal der måske ventes et sekund, inden der optages et punkt (eller det bedste af 3 på hinanden følgende punkter osv.). Men det er endnu ikke implementeret.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Anbefaling: Det er svært at forudsige, hvad der vil blive optaget og hvad ikke, det kan derfor være bedst at slå filteret fra.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Bivirkning: Som et resultat af filtrering efter nøjagtighed kan der muligvis helt mangle punkter f.eks. under broer, under træer, mellem høje bygninger eller under visse vejrforhold.</string>
@@ -4013,7 +4013,7 @@
     <string name="explore_wikipedia_offline">Udforsk Wikipedia offline.</string>
     <string name="on_hold_since">Pauset siden %1$s</string>
     <string name="active_till">Aktiv indtil %1$s</string>
-    <string name="track_has_no_needed_data">Sporet indeholder ikke de pågældende data.</string>
+    <string name="track_has_no_needed_data">Sporet mangler de respektive data.</string>
     <string name="weight_limit_description">Oplys din køretøjsvægt, da der kan gælde visse ruterestriktioner for tunge køretøjer.</string>
     <string name="height_limit_description">Oplys din køretøjshøjde, da der kan gælde visse ruterestriktioner for høje køretøjer.</string>
     <string name="width_limit_description">Angiv din køretøjsbredde. Nogle rutebegrænsninger kan gælde for brede køretøjer.</string>
@@ -4878,4 +4878,7 @@
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
     <string name="external_sensors_support">Understøttelse af eksterne sensorer</string>
+    <string name="show_map_symbols">Vis kortsymboler</string>
+    <string name="show_borders_of_downloaded_maps">Farvelægning af downloadede kortregioner</string>
+    <string name="show_map_symbols_desc">Tekst, vejskilte og andre.</string>
 </resources>

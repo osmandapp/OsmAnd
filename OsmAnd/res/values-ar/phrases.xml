@@ -4361,7 +4361,7 @@
     <string name="poi_playground_activitypanel">لوحة الأنشطة</string>
     <string name="poi_playground_exercise">صالة رياضية خارجية</string>
     <string name="poi_access_yes">السماح بالدخول</string>
-    <string name="poi_playground_basketswing">أرجوحة السلة</string>
+    <string name="poi_playground_basketswing">أرجوحة بسلة</string>
     <string name="poi_playground_aerialrotator">الدوار الجوي</string>
     <string name="poi_playground_trampoline">الترامبولين</string>
     <string name="poi_playground_seesaw">لعبة المرجحة</string>
@@ -4376,4 +4376,6 @@
     <string name="poi_playground_swing">أرجوحة</string>
     <string name="poi_playground_horizontal_bar">عارضة أفقية</string>
     <string name="poi_playground_water">الماء</string>
+    <string name="poi_playground_cushion">وسادة نطاطة</string>
+    <string name="poi_playground_splash_pad">سبلاش باد</string>
 </resources>
