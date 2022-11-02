@@ -1910,16 +1910,7 @@ public class OsmandAidlApi {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					ExternalApiHelper.runSearch(app, searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
 				}
 			});
@@ -1932,17 +1923,9 @@ public class OsmandAidlApi {
 	boolean registerForOsmandInitialization(OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					try {
 						callback.onAppInitialized();
 					} catch (Exception e) {
@@ -2329,17 +2312,9 @@ public class OsmandAidlApi {
 
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
 				}
 			});

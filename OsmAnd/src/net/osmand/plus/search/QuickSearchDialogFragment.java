@@ -1189,16 +1189,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					if (!paused) {
 						reloadCategoriesInternal();
@@ -1319,16 +1310,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					if (!paused) {
 						reloadCitiesInternal();
@@ -1512,16 +1494,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			showProgressBar();
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					if (!paused) {
 						reloadHistoryInternal();
@@ -1689,16 +1662,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (app.isApplicationInitializing() && text.length() > 0) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					if (!paused) {
 						runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);

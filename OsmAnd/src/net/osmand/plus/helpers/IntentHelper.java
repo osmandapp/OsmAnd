@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -25,7 +24,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -69,9 +67,9 @@ public class IntentHelper {
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
 
-	public IntentHelper(MapActivity mapActivity, OsmandApplication app) {
-		this.app = app;
+	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 	}
 
@@ -121,16 +119,9 @@ public class IntentHelper {
 
 				if (app.isApplicationInitializing()) {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
-						@Override
-						public void onStart(AppInitializer init) {
-						}
 
 						@Override
-						public void onProgress(AppInitializer init, InitEvents event) {
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
+						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
 							buildRoute(startLatLon, endLatLon, appMode);
 						}
@@ -319,17 +310,14 @@ public class IntentHelper {
 				}
 				String fileName = name;
 				AndroidNetworkUtils.downloadFileAsync(url, app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName),
-						new CallbackWithObject<String>() {
-							@Override
-							public boolean processResult(String error) {
-								if (error == null) {
-									String downloaded = app.getString(R.string.shared_string_download_successful);
-									app.showShortToastMessage(app.getString(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName));
-								} else {
-									app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
-								}
-								return true;
+						error -> {
+							if (error == null) {
+								String downloaded = app.getString(R.string.shared_string_download_successful);
+								app.showShortToastMessage(app.getString(R.string.ltr_or_rtl_combine_via_colon, downloaded, fileName));
+							} else {
+								app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
 							}
+							return true;
 						});
 
 				clearIntent(intent);
@@ -534,26 +522,20 @@ public class IntentHelper {
 	}
 
 	private OsmAuthorizationListener getOnAuthorizeListener() {
-		return new OsmAuthorizationListener() {
-			@Override
-			public void authorizationCompleted() {
-				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
-					if (fragment instanceof OsmAuthorizationListener) {
-						((OsmAuthorizationListener) fragment).authorizationCompleted();
-					}
+		return () -> {
+			for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
+				if (fragment instanceof OsmAuthorizationListener) {
+					((OsmAuthorizationListener) fragment).authorizationCompleted();
 				}
 			}
 		};
 	}
 
 	private OprAuthorizationListener getOprAuthorizationListener() {
-		return new OprAuthorizationListener() {
-			@Override
-			public void authorizationCompleted() {
-				for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
-					if (fragment instanceof OprAuthorizationListener) {
-						((OprAuthorizationListener) fragment).authorizationCompleted();
-					}
+		return () -> {
+			for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
+				if (fragment instanceof OprAuthorizationListener) {
+					((OprAuthorizationListener) fragment).authorizationCompleted();
 				}
 			}
 		};

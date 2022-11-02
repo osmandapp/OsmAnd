@@ -26,6 +26,14 @@
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
+		android:key="map_rendering_engine"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/map_rendering_engine"
+		app:fragment="net.osmand.plus.settings.fragments.RenderingEngineFragment"
+		tools:icon="@drawable/ic_map" />
+
+	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
@@ -49,8 +57,8 @@
 		android:layout="@layout/preference_with_end_description"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
-		app:fragment="net.osmand.plus.settings.fragments.SendUniqueIdentifiersFragment"
-		android:title="@string/shared_string_identifiers" />
+		android:title="@string/shared_string_identifiers"
+		app:fragment="net.osmand.plus.settings.fragments.SendUniqueIdentifiersFragment" />
 
 	<Preference
 		android:key="history"

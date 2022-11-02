@@ -292,16 +292,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			WeakReference<WikivoyageExploreActivity> activityRef = new WeakReference<>(this);
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					WikivoyageExploreActivity activity = activityRef.get();
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
