@@ -32,6 +32,8 @@ public class SearchPhrase {
 	private final SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
 	
+	public BinaryMapIndexReader file;
+	
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
