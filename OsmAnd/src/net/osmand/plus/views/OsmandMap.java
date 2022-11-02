@@ -44,7 +44,7 @@ public class OsmandMap implements NavigationSessionListener {
 
 		void onSetMapElevation(float angle);
 
-		void onSetupOpenGLView(boolean init);
+		void onSetupOpenGLView();
 	}
 
 	public void addListener(@NonNull OsmandMapListener listener) {
@@ -169,10 +169,10 @@ public class OsmandMap implements NavigationSessionListener {
 		}
 	}
 
-	public void setupOpenGLView(boolean init) {
+	public void setupOpenGLView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		for (OsmandMapListener listener : listeners) {
-			listener.onSetupOpenGLView(init);
+			listener.onSetupOpenGLView();
 		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {

@@ -1752,9 +1752,9 @@
     <string name="months_5">Bulan</string>
     <string name="months_2_4">Bulan</string>
     <string name="month">Bulan</string>
-    <string name="weeks_5">Pekan</string>
-    <string name="week">Pekan</string>
-    <string name="weeks_2_4">Pekan</string>
+    <string name="weeks_5">Minggu</string>
+    <string name="week">Minggu</string>
+    <string name="weeks_2_4">Minggu</string>
     <string name="days_5">Hari</string>
     <string name="days_2_4">Hari</string>
     <string name="day">Hari</string>
@@ -3625,7 +3625,7 @@
     <string name="slope_read_more">Baca lebih lanjut tentang lereng di %1$s.</string>
     <string name="shared_string_rendering_style">Gaya perenderan</string>
     <string name="shared_string_include_data">Sertakan data tambahan</string>
-    <string name="monitoring_min_distance_descr">Filter ini menghindari titik duplikat yang direkam di mana terlalu sedikit gerakan sebenarnya yang mungkin terjadi, membuat tampilan spasial trek yang lebih bagus yang tidak diproses setelahnya.</string>
+    <string name="monitoring_min_distance_descr">Dengan mengaktifkan saringan ini, Anda dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
     <string name="multimedia_rec_split_title">Potong rekaman</string>
     <string name="multimedia_photo_play_sound">Suara rana kamera</string>
     <string name="osm_authorization_success">Otorisasi berhasil</string>
@@ -3640,7 +3640,7 @@
     <string name="live_monitoring_time_buffer">Penyangga waktu</string>
     <string name="live_monitoring_tracking_interval">Interval pelacakan</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempelwaktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode saat istirahat tidak dicatat sama sekali atau hanya masing-masing satu titik. Gerakan kecil (dunia nyata) (misalnya menyamping, untuk menandai kemungkinan belokan di perjalanan Anda) dapat disaring. File Anda berisi lebih sedikit informasi untuk pasca-pemrosesan, dan memiliki statistik yang lebih buruk dengan memfilter titik yang jelas-jelas berlebihan pada waktu perekaman, sambil berpotensi menyimpan artefak yang disebabkan oleh penerimaan yang buruk atau efek chipset GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode istirahat tidak dicatat sama sekali atau hanya sebagai masing-masing satu titik. Pergerakan kecil (misalnya, ke sisi jalan untuk menandai kemungkinan belokan dalam perjalanan Anda) dapat disaring. Perhatikan, bahwa file Anda akan berisi lebih sedikit informasi untuk pasca-pemrosesan, dan pada saat yang sama berpotensi menyimpan artefak GPS yang disebabkan oleh penerimaan yang buruk atau efek chipset.</string>
     <string name="import_routing_file">Impor berkas perutean</string>
     <string name="import_profile">Impor profil</string>
     <string name="monitoring_prefs_descr">Navigasi, akurasi pencatatan</string>
@@ -3735,7 +3735,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Jaringan simpul</string>
     <string name="route_start_point">Titik awal</string>
     <string name="overwrite_profile_q">\'%1$s\' sudah ada. Timpa\?</string>
-    <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Pengaturan 5 meter dapat bekerja dengan baik untuk Anda jika Anda tidak perlu menangkap detail yang lebih baik dari itu, dan tidak ingin secara eksplisit menangkap data saat istirahat.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Tetapkan perpindahan 5 meter jika Anda tidak ingin mencatat detail kecil dari rute Anda, dan tidak memerlukan data tambahan tentang periode istirahat Anda.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
     <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
     <string name="map_widget_trip_recording_distance">Jarak</string>
@@ -4499,20 +4499,20 @@
     <string name="keep_informing_never">Hanya secara manual (ketuk panah)</string>
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
     <string name="external_sensors_plugin_name">Sensor Eksternal</string>
-    <string name="send_uuid_preference_desc">UUID acak digunakan untuk mengunduh peta luring dari server OsmAnda untuk memantau penggunaan sumber daya server yang adil, memprediksi lalu lintas penggunaan, dan membuat laporan peta anonim sebulan.</string>
-    <string name="map_widget_altitude_desc">Widget menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau tengah peta saat ini</string>
-    <string name="location_simulation_cutoff">Simulasi lewati meter pertama</string>
+    <string name="send_uuid_preference_desc">Sebhah UUID acak digunakan untuk mengunduh peta luring dari server OsmAnd untuk memantau penggunaan sumber daya server yang adil, memprediksi pola lalu lintas, dan membuat laporan peta anonim sebulan.</string>
+    <string name="map_widget_altitude_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau untuk pusat peta saat ini</string>
+    <string name="location_simulation_cutoff">Simulasi melewati meter pertama</string>
     <string name="map_center_widget">Koordinat: Tengah peta</string>
     <string name="location_simulation_speedup">Percepatan simulasi</string>
     <string name="map_widget_altitude_map_center">Ketinggian: tengah peta</string>
-    <string name="map_widget_altitude_map_center_desc">Menampilkan ketinggian di atas permukaan laut dari tengah peta saat ini.</string>
+    <string name="map_widget_altitude_map_center_desc">Menunjukkan ketinggian di atas permukaan laut dari pusat peta saat ini.</string>
     <string name="map_widget_altitude_current_location">Ketinggian: lokasi saat ini</string>
     <string name="map_widget_altitude_current_location_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini.</string>
     <string name="shared_string_terms_of_use">Ketentuan Penggunaan</string>
     <string name="map_widget_rendering_fps">FPS perenderan peta</string>
     <string name="simulate_location_by_gpx">Simulasikan lokasi dengan GPX</string>
-    <string name="external_sensors_plugin_description">Pemantauan detak jantung, kecepatan sepeda, daya dan irama sepeda. Membutuhkan koneksi perangkat dengan sensor dengan parameter ini dengan dukungan ANT + (protokol Jaringan Pribadi Nirkabel).</string>
-    <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang (diekspresikan dalam bingkai per detik atau FPS).</string>
+    <string name="external_sensors_plugin_description">Pemantauan denyut jantung, kecepatan sepeda, daya sepeda, dan irama. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
+    <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang, dinyatakan dalam bingkai per detik (FPS).</string>
     <string name="shared_string_identifiers">Pengenal</string>
     <string name="send_uuid_preference">Kirim Pengenal Pengguna Unik (UUID)</string>
     <string name="terms_of_service_desc">Dengan mengunduh peta Anda setuju dengan %1$s dan %2$s.</string>
@@ -4852,4 +4852,29 @@
     <string name="online_map_settings_descr">Pilih sumber peta ubin daring atau yang telah disimpan.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Peta vektor kemungkinan ditampilkan lebih cepat. Mungkin tidak berfungsi dengan baik pada beberapa perangkat.</string>
     <string name="play_commands_of_currently_selected_voice">Pilih suara dan uji dengan memutar pengumuman:</string>
+    <string name="speak_gps_signal_status">Umumkan sinyal GPS hilang dan terpulih</string>
+    <string name="speak_route_recalculation">Umumkan penghitungan ulang rute</string>
+    <string name="release_4_3">- Mesin render peta baru yang lebih cepat, dengan tampilan 2.5D
+\n
+\n - Animasi perubahan lokasi yang mulus saat bergerak
+\n
+\n - Widget baru untuk koordinat pusat peta dan ketinggian geolokasi
+\n
+\n - \"Jarak untuk mengetuk\": menambahkan opsi ukuran teks
+\n
+\n - Widget \"Penanda peta\": menambahkan opsi untuk mengubah perilaku klik
+\n
+\n - Diperbaiki opsi \"Posisi tampilan\"
+\n
+\n - GPX: menambahkan dukungan untuk tag \"link\", \"cmt\", \"desc\" dan untuk ekstensi khusus apa pun
+\n
+\n - Daftar \"Peta bahari\" yang diatur ulang
+\n
+\n - Ditambahkan dukungan untuk sensor ANT+
+\n
+\n - Ditambahkan opsi untuk menonaktifkan UUID unduhan
+\n
+\n</string>
+    <string name="external_sensors_support">Dukungan sensor eksternal</string>
+    <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
 </resources>

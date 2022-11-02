@@ -1056,8 +1056,8 @@
     <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
-    <string name="use_opengl_render">استخدام عرض الرسومات المفتوحة</string>
-    <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة (قد لا تعمل على بعض الأجهزة).</string>
+    <string name="use_opengl_render">عرض 3D</string>
+    <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة 3D (قد لا تعمل على بعض الأجهزة).</string>
     <string name="map_update">يوجد تحديثات ل %1$s من الخرائط</string>
     <string name="search_for">البحث عن</string>
     <string name="coordinates">إحداثيات</string>
@@ -3396,7 +3396,7 @@
     <string name="monitoring_min_accuracy_descr_remark">ملاحظة :إذا كان GPS قد تم إيقافه قبل التسجيل مباشرة ، فقد تكون دقة النقطة الأولى التي تم قياسها منخفضة ، لذلك قد نود في الرمز الخاص بنا الانتظار ثانية أو نحو ذلك قبل تسجيل نقطة (أو تسجيل أفضل 3 نقاط متتالية ، إلخ) .) ، ولكن هذا لم ينفذ بعد.</string>
     <string name="monitoring_min_distance_descr">يتجنب هذا المرشح تسجيل النقاط المكررة حيث قد يكون هناك حركة فعلية قليلة جداً ، مما يجعل المظهر المكاني أجمل للمسارات لا يتم معالجته لاحقاً.</string>
     <string name="monitoring_min_distance_descr_side_effect">الآثار الجانبية: لا يتم تسجيل الفترات في الراحة على الإطلاق أو بنقطة واحدة فقط لكل منها. قد يتم تصفية الحركات الصغيرة (في العالم الحقيقي) (على سبيل المثال ، لوضع علامة على وجود امتداد محتمل في رحلتك). يحتوي ملفك على معلومات أقل للمعالجة اللاحقة ، ويحتوي على إحصائيات أسوأ عن طريق تصفية النقاط الزائدة عن الحاجة بشكل واضح في وقت التسجيل ، مع الاحتفاظ في نفس الوقت بالآثار الناتجة عن الاستقبال السيئ أو تأثيرات شرائح GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">التوصية: قد يكون إعداد 5 أمتار جيداً إذا لم تكن بحاجة إلى التقاط تفاصيل أدق من ذلك ، ولا ترغب في التقاط البيانات بشكل صريح أثناء الراحة.</string>
+    <string name="monitoring_min_distance_descr_recommendation">التوصية: قد يكون إعداد 5 أمتار جيداً إذا لم تكن بحاجة إلى التقاط تفاصيل أدق من ذلك ، ولا ترغب في التقاط البيانات بشكل واضح أثناء الراحة.</string>
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
     <string name="live_monitoring_adress">عنوان صفحة انترنت</string>
@@ -4812,8 +4812,8 @@
     <string name="compass_always_visible">مرئي دائما</string>
     <string name="compass_click_desc">اضغط على البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
-    <string name="accessibility_2d_view_off">عرض 2.5D مغلق</string>
-    <string name="accessibility_2d_view_on">عرض 2.5D مفعل</string>
+    <string name="accessibility_2d_view_off">عرض 3D مغلق</string>
+    <string name="accessibility_2d_view_on">عرض 3D مفعل</string>
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
     <string name="rendering_attr_depthContourColorScheme_description">نظام ألوان عمق خطوط الخطوط المحيطية</string>
@@ -4863,7 +4863,7 @@
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
-    <string name="shared_string_2_5_d_view">2.5 D عرض</string>
+    <string name="shared_string_2_5_d_view">عرض 3D</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
@@ -4895,9 +4895,9 @@
     <string name="depth_contours">ملامح العمق</string>
     <string name="current_location_widget">الإحداثيات: الموقع الحالي</string>
     <string name="external_sensors_plugin_name">مجسات خارجية</string>
-    <string name="external_sensors_plugin_description">مراقبة معدل ضربات القلب وسرعة الدراجة وقوة الدراجة والإيقاع. يتطلب توصيل الجهاز بمستشعرات هذه المعلمات بدعم من مسنشعر ANT + (بروتوكول الشبكة الشخصية اللاسلكية).</string>
+    <string name="external_sensors_plugin_description">مراقبة معدل ضربات القلب وسرعة الدراجة وقوة الدراجة والإيقاع. تتطلب توصيل الجهاز بأجهزة الاستشعار المعنية عبر مستشعر بروتوكول الشبكة الشخصية اللاسلكية ANT +.</string>
     <string name="map_widget_altitude_map_center">الارتفاع: مركز الخريطة</string>
-    <string name="map_widget_altitude_map_center_desc">يظهر الارتفاع فوق مستوى سطح البحر لمركز الخريطة الحالي.</string>
+    <string name="map_widget_altitude_map_center_desc">إظهارالارتفاع فوق مستوى سطح البحر لمركز الخريطة الحالي.</string>
     <string name="terms_of_service_desc">من خلال تنزيل الخرائط ، فإنك توافق على %1$s و %2$s.</string>
     <string name="map_widget_target_distance">المسافة من الكاميرا إلى الهدف</string>
     <string name="simulate_location_by_gpx">محاكاة الموقع بواسطة GPX</string>
@@ -4907,8 +4907,8 @@
     <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
     <string name="map_center_widget">الإحداثيات: مركز الخرائط</string>
     <string name="map_widget_altitude_current_location">الارتفاع: الموقع الحالي</string>
-    <string name="map_widget_altitude_current_location_desc">يظهر الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
-    <string name="map_widget_altitude_desc">ويدجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي أو لمركز الخريطة الحالي</string>
+    <string name="map_widget_altitude_current_location_desc">إظهارالارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
+    <string name="map_widget_altitude_desc">عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي أو لمركز الخريطة الحالي</string>
     <string name="map_widget_rendering_fps">معدل إطارأداء الخريطة</string>
     <string name="location_simulation_speedup">تسريع المحاكاة</string>
     <string name="send_uuid_preference_desc">يستخدم UUID العشوائي لتنزيل الخرائط غير المتصلة بالإنترنت من خوادم أوسماند لمراقبة الاستخدام العادل لموارد الخادم والتنبؤ باستخدام حركة المرور وإنشاء تقارير خرائط شهرية مجهولة المصدر.</string>
@@ -4916,4 +4916,29 @@
     <string name="shared_string_identifiers">معرفات</string>
     <string name="shared_string_terms_of_use">شروط الاستخدام</string>
     <string name="shared_string_cross_buy">شراء عبر</string>
+    <string name="release_4_3">• محرك جديد لعرض الخرائط بشكل أسرع ، مع عرض 3D
+\n
+\n • حركة سلسة لتغييرات الموقع أثناء الحركة
+\n
+\n • ويدجت جديد مع إحداثيات مركز الخريطة
+\n
+\n • تمت إضافة خيار حجم النص \"مسافة بالنقر\"
+\n
+\n • إضافة خيار ويدجت \"علامة الخريطة\" لتغيير سلوك النقر
+\n
+\n • خيار \"وضع العرض\" ثابت
+\n
+\n • GPX: تم إضافة دعم لعلامات \"link\" و \"cmt\" و \"desc\" وأي ملحقات مخصصة
+\n
+\n • إعادة تنظيم قائمة \"الخرائط البحرية\"
+\n
+\n • دعم إضافي لأجهزة الاستشعار ANT +
+\n
+\n • خيار مضاف لتعطيل UUID
+\n
+\n</string>
+    <string name="external_sensors_support">دعم المستشعرات الخارجية</string>
+    <string name="speak_gps_signal_status">الإعلان عن فقدان إشارة GPS واستعادتها</string>
+    <string name="speak_route_recalculation">الإعلام عن إعادة حساب المسار</string>
+    <string name="purchases_feature_desc_external_sensors">عرض وتسجيل البيانات من أجهزة الاستشعار الخارجية: سرعة الدراجة وقوة الدراجة والإيقاع ومعدل ضربات القلب.</string>
 </resources>

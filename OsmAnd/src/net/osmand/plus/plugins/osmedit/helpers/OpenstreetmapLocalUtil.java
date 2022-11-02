@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
+import static net.osmand.data.Amenity.LCN_REF;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -32,53 +35,49 @@ import java.util.Set;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
-	public static final Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
+	private static final Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	private final OsmEditingPlugin plugin;
+	private final List<OnNodeCommittedListener> listeners = new ArrayList<>();
 
-	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin) {
+	public OpenstreetmapLocalUtil(@NonNull OsmEditingPlugin plugin) {
 		this.plugin = plugin;
 	}
 
-	private final List<OnNodeCommittedListener> listeners = new ArrayList<>();
-
-	public void addNodeCommittedListener(OnNodeCommittedListener listener) {
+	public void addNodeCommittedListener(@NonNull OnNodeCommittedListener listener) {
 		if (!listeners.contains(listener)) {
 			listeners.add(listener);
 		}
 	}
 
-	public void removeNodeCommittedListener(OnNodeCommittedListener listener) {
+	public void removeNodeCommittedListener(@NonNull OnNodeCommittedListener listener) {
 		listeners.remove(listener);
 	}
 
 	@Override
-	public EntityInfo getEntityInfo(long id) {
-		return null;
-	}
-
-	@Override
-	public Entity commitEntityImpl(Action action, Entity entity, EntityInfo info, String comment,
+	public Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info, String comment,
 	                               boolean closeChangeSet, Set<String> changedTags) {
 		Entity newEntity = entity;
+		OpenstreetmapsDbHelper dbHelper = plugin.getDBPOI();
 		if (entity.getId() == -1) {
+			long minID = dbHelper.getMinID();
 			if (entity instanceof Node) {
-				newEntity = new Node((Node) entity, Math.min(-2, plugin.getDBPOI().getMinID() - 1));
+				newEntity = new Node((Node) entity, Math.min(-2, minID - 1));
 			} else if (entity instanceof Way) {
-				newEntity = new Way(Math.min(-2, plugin.getDBPOI().getMinID() - 1), ((Way) entity).getNodeIds(), entity.getLatitude(), entity.getLongitude());
+				newEntity = new Way(Math.min(-2, minID - 1), ((Way) entity).getNodeIds(), entity.getLatitude(), entity.getLongitude());
 			} else {
 				return null;
 			}
 		}
-		OpenstreetmapPoint p = new OpenstreetmapPoint();
+		OpenstreetmapPoint point = new OpenstreetmapPoint();
 		newEntity.setChangedTags(changedTags);
-		p.setEntity(newEntity);
-		p.setAction(action);
-		p.setComment(comment);
-		if (p.getAction() == OsmPoint.Action.DELETE && newEntity.getId() < 0) { //if it is our local poi
-			plugin.getDBPOI().deletePOI(p);
+		point.setEntity(newEntity);
+		point.setAction(action);
+		point.setComment(comment);
+		if (point.getAction() == OsmPoint.Action.DELETE && newEntity.getId() < 0) { //if it is our local poi
+			dbHelper.deletePOI(point);
 		} else {
-			plugin.getDBPOI().addOpenstreetmap(p);
+			dbHelper.addOpenstreetmap(point);
 		}
 		for (OnNodeCommittedListener listener : listeners) {
 			listener.onNoteCommitted();
@@ -87,7 +86,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity loadEntity(MapObject mapObject) {
+	public Entity loadEntity(@NonNull MapObject mapObject) {
 		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
@@ -134,7 +133,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			}
 		}
 		String name = mapObject.getName();
-		if (!Algorithms.isEmpty(name) && (amenity == null || !Algorithms.stringsEqual(amenity.getRef(), name))) {
+		if (!Algorithms.isEmpty(name) && (amenity == null ||
+				!Algorithms.stringsEqual(amenity.getRef(), name)
+						&& !Algorithms.stringsEqual(amenity.getSubType(), LCN_REF))) {
 			entity.putTagNoLC(OSMTagKey.NAME.getValue(), name);
 		}
 		if (amenity != null) {
@@ -159,10 +160,6 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			return entity;
 		}
 		return null;
-	}
-
-	@Override
-	public void closeChangeSet() {
 	}
 
 	public interface OnNodeCommittedListener {

@@ -117,8 +117,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		underlayListener = change -> {
 			boolean selected = settings.MAP_UNDERLAY.get() != null;
-			hidePolygonsPref.set(selected);
-			hideWaterPolygonsPref.set(selected);
+			if (!settings.POLYGONS_VISIBILITY_SET_MANUALLY.get()) {
+				hidePolygonsPref.set(selected);
+				hideWaterPolygonsPref.set(selected);
+			}
 
 			if (updateConfigureMapItemCallback != null) {
 				updateConfigureMapItemCallback.processResult(selected);

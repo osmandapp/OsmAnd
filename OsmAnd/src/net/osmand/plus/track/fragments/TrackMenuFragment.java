@@ -1486,7 +1486,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						deleteAndSaveSegment(segment);
 					} else if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(fragmentActivity);
-						builder.setMessage(R.string.recording_delete_confirm);
+						builder.setMessage(getString(R.string.delete_confirmation_msg, gpxItem.trackSegmentName));
 						builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> deleteAndSaveSegment(segment));
 						builder.setNegativeButton(R.string.shared_string_cancel, null);
 						builder.show();

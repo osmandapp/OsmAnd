@@ -172,7 +172,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	@ColorInt
-	protected int getColor(@ColorInt int resId) {
+	protected int getColor(@ColorRes int resId) {
 		return ColorUtilities.getColor(getContext(), resId);
 	}
 

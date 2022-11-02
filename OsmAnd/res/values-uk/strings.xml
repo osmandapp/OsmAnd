@@ -3330,9 +3330,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Побічний ефект: Внаслідок фільтрування за точністю, дані можуть бути повністю відсутні, наприклад, під мостами, під деревами, між високими будинками або за певних погодних умов.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Порада: Важко передбачити, що буде записано, а що ні, можливо, краще взагалі вимкнути цей фільтр.</string>
     <string name="monitoring_min_accuracy_descr_remark">Зауваження: Якщо GPS був вимкнений безпосередньо перед записом, точність визначення першої точки може бути низькою, тому в нашому коді ми можемо зачекати кілька секунд, перш ніж записати точку (або записати найкраще з 3-х послідовних точок тощо), але це ще не реалізовано.</string>
-    <string name="monitoring_min_distance_descr">Цей фільтр запобігає запису повторюваних точок там, де фактичний рух майже не відбувається, поліпшує вигляд треків, без потреби в їх подальшій обробці.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Побічний ефект: Проміжки спокою не реєструються взагалі або записуються лише однією точкою. Невеликі (справжні) рухи (наприклад, вбік, щоб показати можливий поворот у вашому треку) можуть бути відкинуті. Ваш файл міститиме менше відомостей для подальшої обробки та матиме гірші дані, через відкидання вочевидь зайвих точок під час запису, при цьому потенційно зберігаючи артефакти, спричинені слабим сигналом чи особливостями роботи чипів GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Порада: Можливо вам підійде значення 5 метрів, якщо вам не потрібні більш докладні дані, ніж ці, та якщо ви не хочете явно записувати дані, перебуваючи в стані спокою (не рухаючись).</string>
+    <string name="monitoring_min_distance_descr">Увімкнення цього фільтру дозволяє уникнути додаткового запису даних, коли рух майже не визначається. Також це покращує просторовий вигляд треків без додаткової обробки.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Побічні ефекти: Періоди відпочинку не реєструються взагалі або реєструються лише по одному пункту. Незначні переміщення (наприклад, на узбіччя дороги для позначення можливого повороту в дорозі) можуть бути відфільтровані. Зауважте, що ваш файл міститиме менше даних для подальшої обробки, і водночас може потенційно зберегти GPS-артефакти, спричинені слабким сигналом або особливостями роботи чипів.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Порада: Установіть зміщення 5 метрів, якщо ви не хочете записувати дрібні деталі вашого маршруту, а також не потребуєте додаткових даних про період вашого відпочинку.</string>
     <string name="live_monitoring_time_buffer">Буфер часу</string>
     <string name="live_monitoring_tracking_interval">Інтервал надсилання даних</string>
     <string name="live_monitoring_adress">Вебадреса</string>
@@ -4247,7 +4247,7 @@
     <string name="on_hold_since">Призупинено з %1$s</string>
     <string name="active_till">Активна до %1$s</string>
     <string name="promo_subscription">Промо-передплата</string>
-    <string name="track_has_no_needed_data">Трек не містить відповідних даних.</string>
+    <string name="track_has_no_needed_data">У треку відсутні відповідні дані.</string>
     <string name="benefits_for_contributors_primary_descr">Активні учасники OpenStreetMap.org мають право на необмежене погодинне оновлення мап.</string>
     <string name="benefits_for_contributors_secondary_descr">Увійдіть в OpenStreetMap, щоб перевірити, чи маєте ви право отримувати необмежені щомісячні та погодинні оновлення мап.</string>
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
@@ -4828,23 +4828,48 @@
     <string name="favorites_backup">Резервне копіювання вибраного</string>
     <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/Web) без додаткових витрат.</string>
     <string name="shared_string_cross_buy">Перехресна купівля</string>
-    <string name="map_widget_altitude_current_location_desc">Показує висоту над рівнем моря поточного місцеперебування.</string>
+    <string name="map_widget_altitude_current_location_desc">Показує висоту над рівнем моря поточної геолокації.</string>
     <string name="simulate_location_by_gpx">Симулювати місцеперебування за допомогою GPX</string>
     <string name="location_simulation_cutoff">Симуляція пропускає перші метри</string>
     <string name="location_simulation_speedup">Прискорення симуляції</string>
-    <string name="send_uuid_preference_desc">Випадковий UUID використовується для завантаження офлайнових мап з серверів OsmAnd з метою відстеження добросовісного використання ресурсів серверів, прогнозування використання трафіку та створення анонімних щомісячних звітів по мапах.</string>
+    <string name="send_uuid_preference_desc">Випадковий UUID використовується для завантаження офлайнових мап з серверів OsmAnd з метою відстеження добросовісного використання ресурсів серверів, прогнозування моделей трафіку та створення анонімних щомісячних звітів щодо мап.</string>
     <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
     <string name="shared_string_terms_of_use">Умови використання</string>
     <string name="external_sensors_plugin_name">Зовнішні датчики</string>
-    <string name="external_sensors_plugin_description">Відстеження частоти серцевих скорочень, швидкості велосипеда, потужності велосипеда та каденсу. Необхідне з\'єднання пристрою з датчиками цих параметрів з підтримкою протоколу ANT+ (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Відстеження пульсу, швидкості велосипеда, потужності велосипеда та частоти обертання педалей. Вимагає під\'єднання пристрою до відповідних датчиків за протоколом бездротової персональної мережі ANT+.</string>
     <string name="map_widget_altitude_map_center">Висота: центр мапи</string>
     <string name="current_location_widget">Координати: Поточне місцеперебування</string>
     <string name="map_widget_altitude_current_location">Висота: поточне місцеперебування</string>
     <string name="map_widget_altitude_map_center_desc">Показує висоту над рівнем моря поточного центру мапи.</string>
     <string name="shared_string_identifiers">Ідентифікатори</string>
     <string name="map_center_widget">Координати: Центр мапи</string>
-    <string name="map_widget_altitude_desc">Віджети показують висоту над рівнем моря для поточного місцеперебування або для поточного центру мапи</string>
+    <string name="map_widget_altitude_desc">Показ висоти над рівнем моря для поточної геолокації або для поточного центру мапи</string>
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
-    <string name="map_widget_rendering_fps_desc">Показує швидкість показу й оновлення мапи та її елементів (виражається у кадрах за секунду, або FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Показує швидкість появи й оновлення мапи та її елементів (виражається у кадрах на секунду, або FPS).</string>
     <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
+    <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
+    <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
+    <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
+    <string name="release_4_3">- Новий швидший рушій рендерингу мап з 2.5D виглядом
+\n
+\n - Плавна анімація зміни локації під час руху
+\n
+\n - Нові віджети для координат центру мапи та висоти геолокації
+\n
+\n - «Відстань торканням»: додані опції розміру тексту
+\n
+\n - У віджеті «Позначки мапи» додано опцію зміни поведінки натискання
+\n
+\n - Виправлена опція «Показати позицію»
+\n
+\n - GPX: додана підтримка тегів «link», «cmt», «desc» та будь-яких користувацьких розширень
+\n
+\n - Перевпорядковано список «Морські мапи»
+\n
+\n - Додано підтримку ANT+ датчиків
+\n
+\n - Додана можливість вимкнення завантаження UUID
+\n
+\n</string>
+    <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
 </resources>

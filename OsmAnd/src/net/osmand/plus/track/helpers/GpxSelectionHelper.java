@@ -247,9 +247,7 @@ public class GpxSelectionHelper {
 					} else if (obj.has(CURRENT_TRACK)) {
 						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
 						file.selectedByUser = selectedByUser;
-						List<SelectedGpxFile> newSelectedGPXFiles = new ArrayList<>(selectedGPXFiles);
-						newSelectedGPXFiles.add(file);
-						selectedGPXFiles = newSelectedGPXFiles;
+						updateSelected(true, file);
 					}
 				}
 				if (save) {

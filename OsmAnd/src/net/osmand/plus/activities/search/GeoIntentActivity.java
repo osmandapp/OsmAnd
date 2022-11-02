@@ -30,32 +30,13 @@ public class GeoIntentActivity extends OsmandListActivity {
 		setContentView(R.layout.search_address_offline);
 		getSupportActionBar().setTitle(R.string.search_osm_offline);
 
-		getMyApplication().checkApplicationIsBeingInitialized(new AppInitializeListener() {
-			@Override
-			public void onStart(AppInitializer init) {
-
-			}
-
-			@Override
-			public void onProgress(AppInitializer init, InitEvents event) {
-			}
-
-			@Override
-			public void onFinish(AppInitializer init) {
-			}
-		});
 		Intent intent = getIntent();
 		if (intent != null) {
 			ProgressDialog progress = ProgressDialog.show(this, getString(R.string.searching),
 					getString(R.string.searching_address));
 			GeoIntentTask task = new GeoIntentTask(progress, intent);
 
-			progress.setOnCancelListener(new OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					task.cancel(true);
-				}
-			});
+			progress.setOnCancelListener(dialog -> task.cancel(true));
 			progress.setCancelable(true);
 
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

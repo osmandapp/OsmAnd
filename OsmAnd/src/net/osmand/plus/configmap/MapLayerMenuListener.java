@@ -128,6 +128,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);
 			}
 			return false;
+		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
+			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
 		}
 		uiAdapter.onDataSetChanged();
 		mapActivity.updateLayers();

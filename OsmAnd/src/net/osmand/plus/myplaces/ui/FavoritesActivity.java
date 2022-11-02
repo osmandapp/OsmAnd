@@ -245,10 +245,6 @@ public class FavoritesActivity extends TabActivity {
 		viewPager.clearOnPageChangeListeners();
 	}
 
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();

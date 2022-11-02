@@ -135,7 +135,7 @@ public class MapLayers {
 
 		// 1-st in the order
 		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
-		mapView.addLayer(downloadedRegionsLayer, -11.0f);
+		mapView.addLayer(downloadedRegionsLayer, useOpenGLRender ? -11.0f : 0.5f);
 
 		// icons are 2-d in the order (icons +1 000 000 or -10.f by zOrder in core)
 		// text and shields are 5-th in the order

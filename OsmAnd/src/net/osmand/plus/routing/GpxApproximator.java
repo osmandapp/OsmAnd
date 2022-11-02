@@ -189,7 +189,7 @@ public class GpxApproximator {
 						finishProgress();
 					}
 					if (approximationTask != null && calculationProgress != null && !calculationProgress.isCancelled) {
-						float pr = calculationProgress.getLinearProgress();
+						float pr = calculationProgress.getApproximationProgress();
 						approximationProgress.updateProgress(GpxApproximator.this, (int) pr);
 						if (GpxApproximator.this.gctx == gctx) {
 							updateProgress(gctx);

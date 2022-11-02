@@ -4363,4 +4363,22 @@
     <string name="poi_playground_bridge">Ponto (infanludejo)</string>
     <string name="poi_playground_map">Mapo (infanludejo)</string>
     <string name="poi_playground_sandpit">Sabloludejo</string>
+    <string name="poi_playground_ball_pool">Seka naĝejo kun pilkoj</string>
+    <string name="poi_playground_swing">Balancilo pendigita</string>
+    <string name="poi_playground_spinning_circle">Kurtapiŝo ronda</string>
+    <string name="poi_playground_basketswing">Balancilo korba</string>
+    <string name="poi_playground_basketrotator">Rotacianta korbo (infanludejo)</string>
+    <string name="poi_playground_aerialrotator">Mantena karuselo (infanludejo)</string>
+    <string name="poi_playground_seesaw">Baskulo</string>
+    <string name="poi_playground_springy">Risorto (infanludejo)</string>
+    <string name="poi_playground_roundabout">Karuselo (infanludejo)</string>
+    <string name="poi_playground_trampoline">Saltad-tuko</string>
+    <string name="poi_playground_cushion">Saltad-mato</string>
+    <string name="poi_playground_zipwire">Ŝnurega deglitejo (infanludejo)</string>
+    <string name="poi_playground_water">Arĥimeda ŝraŭbo (infanludejo)</string>
+    <string name="poi_playground_splash_pad">Senprofunda naĝejo</string>
+    <string name="poi_playground_horizontal_bar">Horizontala stango (infana)</string>
+    <string name="poi_playground_activitypanel">Panelo de ludoj (infanludejo)</string>
+    <string name="poi_playground_exercise">Ekzerc-parko infana</string>
+    <string name="poi_access_yes">Aliro permesata</string>
 </resources>

@@ -10,39 +10,55 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="shared_string_lines_color_scheme">Lines color scheme</string>
     <string name="shared_string_lines_width">Lines width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on map.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd has reverted to Legacy map rendering, you can try to switch back to the New rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
+    <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
+    <string name="share_crash_log">Share crash log</string>
+    <string name="dismiss_changes_descr">All changes will be dismissed.</string>
+    <string name="dismiss_changes">Dismiss changes?</string>
+    <string name="restart_now">Restart now</string>
+    <string name="map_rendering_engine_legacy">Legacy</string>
+    <string name="map_rendering_engine_new">New</string>
+    <string name="map_rendering_engine_descr">New, faster map rendering engine with 2.5D view support. The Legacy rendering was the default before release 4.3, and is preferable for older devices.</string>
+    <string name="map_rendering_engine">Map rendering engine</string>
+    <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>
+    <string name="show_map_symbols">Show map symbols</string>
+    <string name="show_map_symbols_desc">Text, road signs, and others.</string>
+    <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
+    <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
-    • New faster map rendering engine, with 2.5D view\n\n
-    • Smooth animation for location changes during movement\n\n
-    • New widget with coordinates of map center\n\n
-    • \"Distance to tap\" added text size options\n\n
-    • \"Map marker\" widget added option to change click behavior\n\n
+    • New, faster map rendering engine, with 2.5D view\n\n
+    • Smooth animation of location changes while in motion\n\n
+    • New widgets for map center coordinates and elevation of geolocations\n\n
+    • \"Distance to tap\": added text size options\n\n
+    • \"Map marker\" widget: added option to change click behavior\n\n
     • Fixed \"Display position\" option\n\n
     • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
-    • Reorganised \"Nautical maps\" list\n\n
+    • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
-    • Added option to disable UUID\n\n
+    • Added option to disable download UUID\n\n
     </string>
-    <string name="speak_gps_signal_status">Announce GPS signal lost or recover</string>
-    <string name="speak_route_recalculation">Anounce route recalculation</string>
+    <string name="speak_gps_signal_status">Announce GPS signal loss and recovery</string>
+    <string name="speak_route_recalculation">Announce route recalculation</string>
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
-    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power and cadence. Requires connection of device with sensors of these parameters with support of ANT + (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power, and cadence. Requires the device to be connected to respective sensors via the ANT+ wireless personal network protocol.</string>
     <string name="map_widget_altitude_map_center">Altitude: map center</string>
-    <string name="map_widget_altitude_map_center_desc">Shows the height above sea level of current map center.</string>
+    <string name="map_widget_altitude_map_center_desc">Shows the elevation above sea level of the current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
-    <string name="map_widget_altitude_current_location_desc">Shows the height above sea level of current geolocation.</string>
-    <string name="map_widget_altitude_desc">Widgets show the height above sea level of current geolocation or for current map center</string>
+    <string name="map_widget_altitude_current_location_desc">Shows the elevation above sea level of the current geolocation.</string>
+    <string name="map_widget_altitude_desc">Display the elevation above sea level of the current geolocation or for the current map center</string>
     <string name="map_widget_rendering_fps">Map rendering FPS</string>
-    <string name="map_widget_rendering_fps_desc">Shows how fast map and map elements are shown and refreshed (expressed in frames per second or FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Shows how fast the map and map elements are displayed and refreshed, expressed in frames per second (FPS).</string>
     <string name="simulate_location_by_gpx">Simulate location by GPX</string>
-    <string name="location_simulation_cutoff">Simulation skip first meters </string>
+    <string name="location_simulation_cutoff">Simulation skips the first meters </string>
     <string name="location_simulation_speedup">Simulation speedup</string>
-    <string name="send_uuid_preference_desc">Random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic usage and generate anonymous monthly map reports.</string>
+    <string name="send_uuid_preference_desc">A random UUID is used to download offline maps from OsmAnd servers to monitor fair usage of server resources, predict traffic patterns, and generate anonymous monthly map reports.</string>
     <string name="send_uuid_preference">Send Unique User Identifier (UUID)</string>
     <string name="shared_string_identifiers">Identifiers</string>
     <string name="terms_of_service_desc">By Downloading maps you agree to the %1$s and %2$s.</string>
@@ -1404,9 +1420,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Side effect: As a result of filtering by accuracy, points may be entirely missing for e.g. below bridges, under trees, between high buildings, or with certain weather conditions.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommendation: It is hard to predict what will be recorded and what not, it may be best to turn this filter off.</string>
     <string name="monitoring_min_accuracy_descr_remark">Remark: If GPS had been off immediately before a recording, the first point measured may have a decreased accuracy,so in our code we may want to wait a second or so before recording a point (or record the best of 3 consecutive points, etc.), but this is not yet implemented.</string>
-    <string name="monitoring_min_distance_descr">This filter avoids duplicate points being recorded where too little actual motion may have occurred, makes a nicer spatial appearance of tracks not post-processed later.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Side effects: Periods at rest are not recorded at all or by just one point each. Small (real world) movements (e.g. sideways, to mark a possible turnoff on your trip) may be filtered out. Your file contains less information for post-processing, and has worse stats by filtering out obviously redundant points at recording time, while potentially keeping artifacts caused by bad reception or GPS chipset effects.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Recommendation: A setting of 5 meters may work well for you if you do not require to capture details finer than that, and do not want to explicitly capture data while at rest.</string>
+    <string name="monitoring_min_distance_descr">Turning this filter on allows you to avoid additional data recording when movement is almost not detected. It also improves the spatial appearance of tracks without further processing.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Side effects: Periods of rest are not recorded at all or just as one point each. Minor movements (for example, to the side of the road to mark a possible turn in your trip) can be filtered out. Note that your file will contain less information for post-processing, and at the same time can potentially save GPS artifacts caused by bad reception or chipset effects.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recommendation: Set 5 meters displacement if you don\'t want to record minor details of your route, and don\'t need additional data about your rest period.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
     <string name="live_monitoring_tracking_interval">Tracking interval</string>
     <string name="live_monitoring_adress">Web address</string>
@@ -2381,7 +2397,7 @@
     <string name="file_can_not_be_moved">Could not move file.</string>
     <string name="shared_string_move">Move</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
-    <string name="routing_attr_driving_style_name">Driving style</string>
+    <string name="routing_attr_driving_style_name">Riding style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Downhill</string>
     <string name="altitude_ascent">Uphill</string>
@@ -2401,7 +2417,7 @@
 	\u2022 Visibility enhancements in several map styles and Wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
 	\u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
-	\u2022 \"Driving style\" setting and logic improvements for bicycle routing\n\n
+	\u2022 \"Riding style\" setting and logic improvements for bicycle routing\n\n
 	\u2022 Altitude data settings for bicycle routing\n\n
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…

@@ -80,23 +80,20 @@ public class EditPOIMenuController extends MenuController {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-					bld.setMessage(R.string.recording_delete_confirm);
-					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							MapActivity a = getMapActivity();
-							if (plugin != null && a != null) {
-								boolean deleted = false;
-								OsmPoint point = getOsmPoint();
-								if (point instanceof OsmNotesPoint) {
-									deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
-								} else if (point instanceof OpenstreetmapPoint) {
-									deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
-								}
-								if (deleted) {
-									a.getContextMenu().close();
-								}
+					String itemName = pointDescription.getName();
+					bld.setMessage(activity.getString(R.string.delete_confirmation_msg, itemName));
+					bld.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+						MapActivity a = getMapActivity();
+						if (plugin != null && a != null) {
+							boolean deleted = false;
+							OsmPoint point = getOsmPoint();
+							if (point instanceof OsmNotesPoint) {
+								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
+							} else if (point instanceof OpenstreetmapPoint) {
+								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
+							}
+							if (deleted) {
+								a.getContextMenu().close();
 							}
 						}
 					});

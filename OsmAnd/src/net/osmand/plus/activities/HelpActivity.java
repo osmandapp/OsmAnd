@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -237,12 +238,12 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setLayout(R.layout.help_to_improve_item));
 
-		File exceptionLog = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		File exceptionLog = app.getAppPath(FeedbackHelper.EXCEPTION_PATH);
 		if (exceptionLog.exists()) {
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
 					.setTitle(getString(R.string.send_crash_log))
 					.setListener((uiAdapter, view, item, isChecked) -> {
-						app.sendCrashLog(exceptionLog);
+						app.getFeedbackHelper().sendCrashLog();
 						return false;
 					}));
 		}

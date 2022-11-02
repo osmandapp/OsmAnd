@@ -10,11 +10,11 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 
 public abstract class OsmandListActivity extends
@@ -26,7 +26,7 @@ public abstract class OsmandListActivity extends
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -37,20 +37,12 @@ public abstract class OsmandListActivity extends
 		getListView().setDividerHeight(AndroidUtils.dpToPx(app, 1));
 	}
 
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getApplication();
-	}
-
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		switch (itemId) {
-			case android.R.id.home:
-				finish();
-				return true;
-
+		if (itemId == android.R.id.home) {
+			finish();
+			return true;
 		}
 		return false;
 	}
@@ -70,8 +62,8 @@ public abstract class OsmandListActivity extends
 		return menuItem;
 	}
 
-	public void setListAdapter(ListAdapter adapter){
-		((ListView)findViewById(android.R.id.list)).setAdapter(adapter);
+	public void setListAdapter(ListAdapter adapter) {
+		((ListView) findViewById(android.R.id.list)).setAdapter(adapter);
 		setOnItemClickListener(this);
 
 	}
@@ -83,14 +75,14 @@ public abstract class OsmandListActivity extends
 	public ListAdapter getListAdapter() {
 		ListAdapter adapter = getListView().getAdapter();
 		if (adapter instanceof HeaderViewListAdapter) {
-			return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
+			return ((HeaderViewListAdapter) adapter).getWrappedAdapter();
 		} else {
 			return adapter;
 		}
 	}
 
-	public void setOnItemClickListener(AdapterView.OnItemClickListener childClickListener){
-		((ListView)findViewById(android.R.id.list)).setOnItemClickListener(childClickListener);
+	public void setOnItemClickListener(AdapterView.OnItemClickListener childClickListener) {
+		((ListView) findViewById(android.R.id.list)).setOnItemClickListener(childClickListener);
 	}
 
 	@Override

@@ -3363,9 +3363,9 @@
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
-    <string name="monitoring_min_distance_descr">Dieser Filter verhindert, dass doppelte Punkte aufgenommen werden, bei denen möglicherweise zu wenig tatsächliche Bewegung stattgefunden hat. Er sorgt für ein schöneres räumliches Erscheinungsbild von Spuren, die später nicht nachbearbeitet werden.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Nebenwirkungen: Die Ruhephasen werden nicht oder nur an jeweils einem Punkt erfasst. Kleine (reale) Bewegungen (z. B. seitwärts, um eine mögliche Abzweigung auf Ihrer Reise zu markieren) können herausgefiltert werden. Ihre Datei enthält weniger Informationen für die Nachbearbeitung und hat schlechtere Statistiken, da offensichtlich überflüssige Punkte zur Aufzeichnungszeit herausgefiltert werden, während möglicherweise Artefakte erhalten bleiben, die durch schlechten Empfang oder GPS-Chipsatzeffekte verursacht wurden.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Eine Einstellung von 5 Metern kann für Sie gut funktionieren, wenn Sie keine feineren Details erfassen müssen und keine explizite Datenerfassung im Ruhezustand wünschen.</string>
+    <string name="monitoring_min_distance_descr">Wenn Sie diesen Filter aktivieren, können Sie eine zusätzliche Datenaufzeichnung vermeiden, wenn fast keine Bewegung erkannt wird. Außerdem wird das räumliche Erscheinungsbild von Spuren verbessert ohne weitere Bearbeitung.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Nebeneffekte: Ruhezeiten werden nicht oder nur mit jeweils einem Punkt erfasst. Kleinere Bewegungen (z. B. zum Straßenrand, um eine mögliche Abzweigung zu markieren) können herausgefiltert werden. Beachten Sie, dass Ihre Datei weniger Informationen für die Nachbearbeitung enthält und gleichzeitig möglicherweise GPS-Artefakte aufgrund von schlechtem Empfang oder Chipsatz-Effekten vermieden werden können.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Stellen Sie einen Versatz von 5 Metern ein, wenn Sie keine kleinen Details Ihrer Route aufzeichnen möchten und keine zusätzlichen Daten über Ihre Ruhezeit benötigen.</string>
     <string name="release_3_6">• Profile: jetzt können Sie die Reihenfolge ändern, das Symbol für die Karte festlegen, alle Einstellungen für die Basisprofile ändern und sie wieder auf die Standardeinstellungen zurücksetzen
 \n
 \n • Nummer der Ausfahrt in der Navigation hinzugefügt.
@@ -4837,12 +4837,12 @@
     <string name="map_center_widget">Koordinaten: Kartenmitte</string>
     <string name="current_location_widget">Koordinaten: Aktueller Standort</string>
     <string name="external_sensors_plugin_name">Externe Sensoren</string>
-    <string name="external_sensors_plugin_description">Überwachung von Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung und Trittfrequenz. Erfordert den Anschluss eines Geräts mit Sensoren für diese Parameter mit Unterstützung von ANT + (Wireless Personal Network-Protokoll).</string>
+    <string name="external_sensors_plugin_description">Überwachung von Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung und Trittfrequenz. Das Gerät muss über das drahtlose Netzwerkprotokoll ANT+ mit entsprechenden Sensoren verbunden sein.</string>
     <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
-    <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden (ausgedrückt in Bildern pro Sekunde oder FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden, ausgedrückt in Bildern pro Sekunde (FPS).</string>
     <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
     <string name="location_simulation_cutoff">Simulation überspringt die ersten Meter</string>
-    <string name="send_uuid_preference_desc">Zufällige UUID wird verwendet, um Offline-Karten von OsmAnd-Servern herunterzuladen, um die faire Nutzung von Serverressourcen zu überwachen, die Verkehrsnutzung vorherzusagen und anonyme monatliche Kartenberichte zu erstellen.</string>
+    <string name="send_uuid_preference_desc">Eine zufällige UUID wird zum Herunterladen von Offline-Karten von OsmAnd-Servern verwendet, um die faire Nutzung von Serverressourcen zu überwachen, Verkehrsmuster vorherzusagen und anonyme monatliche Kartenberichte zu erstellen.</string>
     <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
     <string name="shared_string_identifiers">Identifikatoren</string>
     <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
@@ -4850,5 +4850,30 @@
     <string name="map_widget_altitude_map_center_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Kartenmitte an.</string>
     <string name="map_widget_altitude_current_location">Höhenlage: aktueller Standort</string>
     <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
-    <string name="map_widget_altitude_desc">Widgets zeigen die Höhe über dem Meeresspiegel des aktuellen Standorts oder der aktuellen Kartenmitte an</string>
+    <string name="map_widget_altitude_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts oder des aktuellen Kartenmittelpunkts an</string>
+    <string name="external_sensors_support">Unterstützung für externe Sensoren</string>
+    <string name="speak_gps_signal_status">GPS-Signalverlust und Wiederherstellung ankündigen</string>
+    <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
+    <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
+    <string name="release_4_3">• Neue, schnellere Karten-Rendering-Engine mit 2,5D-Ansicht
+\n
+\n• Flüssige Animation von Standortänderungen während der Fahrt
+\n
+\n• Neue Widgets für Kartenzentrierungskoordinaten und Höhe von Geolocations
+\n
+\n• \"Abstand zum Tippen\": Textgrößenoptionen hinzugefügt
+\n
+\n• Widget \"Kartenmarker\": Option hinzugefügt, um das Klickverhalten zu ändern
+\n
+\n• Option \"Anzeigeposition\" korrigiert
+\n
+\n• GPX: Unterstützung für \"link\", \"cmt\", \"desc\" Tags und für alle benutzerdefinierten Erweiterungen hinzugefügt
+\n
+\n• Neu organisierte Liste \"Nautische Karten\"
+\n
+\n• Zusätzliche Unterstützung für ANT+ Sensoren
+\n
+\n• Option hinzugefügt, um Download-UUID zu deaktivieren
+\n
+\n</string>
 </resources>

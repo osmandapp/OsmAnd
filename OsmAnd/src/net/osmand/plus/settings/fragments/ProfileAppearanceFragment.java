@@ -125,7 +125,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private boolean isNewProfile;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		profile = new ApplicationProfileObject();
 		ApplicationMode baseModeForNewProfile = null;
