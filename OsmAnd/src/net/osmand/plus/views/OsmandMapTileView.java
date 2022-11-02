@@ -1706,15 +1706,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					RotatedTileBox tb = getCurrentRotatedTileBox();
 					LatLon latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, e.getX(), e.getY());
 					if (mapRenderer != null) {
-						if (settings.KEEP_DOUBLE_TAP_POSITION.get()) {
-							PointI start31 = mapRenderer.getTarget();
-							PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
-									latlon.getLatitude(), latlon.getLongitude(), false);
-							latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
-									(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
-							    	MapUtils.get31LongitudeX((int) Math.round(
-									(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
-						}
+						PointI start31 = mapRenderer.getTarget();
+						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
+								latlon.getLatitude(), latlon.getLongitude(), false);
+						latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
+								(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
+								MapUtils.get31LongitudeX((int) Math.round(
+								(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
 					}
 					getAnimatedDraggingThread().startMoving(
 							latlon.getLatitude(), latlon.getLongitude(), getZoom() + 1, true);
