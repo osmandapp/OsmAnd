@@ -3435,9 +3435,9 @@
     <string name="live_monitoring_adress">Endereço da web</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_time_buffer">Memória intermédia</string>
-    <string name="monitoring_min_distance_descr_recommendation">Recomendação: uma configuração de 5 metros pode funcionar bem se não precisar capturar detalhes mais refinados do que isso e não quer capturar dados explicitamente enquanto estiver parado.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (no mundo real, por exemplo de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. O seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente os artefactos causados por má receção ou efeitos do chipset GPS.</string>
-    <string name="monitoring_min_distance_descr">Este filtro evita que sejam gravados pontos duplicados quando houver muito pouco movimento real e cria uma aparência espacial mais agradável dos trilhos que não são processados posteriormente.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recomendação: use 5 metros de deslocamento se não quiser gravar detalhes menores da rota, e não precisa de dados adicionais sobre seu período de descanso.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (no mundo real, por exemplo de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. Note que o seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente os artefactos causados por má receção ou efeitos do chipset GPS.</string>
+    <string name="monitoring_min_distance_descr">Ligar este filtro permite evitar a gravação de dados adicionais quando o movimento quase não é detetado. Também melhora a aparência espacial de trilhos sem processamento adicional.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, no nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: é difícil prever o que será gravado e o que não será, talvez seja melhor desativar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efeito colateral: como resultado da filtragem por precisão, os pontos podem estar totalmente ausentes por ex. debaixo de pontes, sob árvores, entre prédios altos ou com certas condições climáticas.</string>
@@ -4833,21 +4833,21 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
     <string name="worldwide_maps">Mapas mundiais</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Monitorização do ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer ligação de dispositivo com sensores destes parâmetros com suporte de ANT + (Wireless Personal Network protocol).</string>
-    <string name="map_widget_altitude_map_center_desc">Mostra a altura acima do nível do mar do centro do mapa atual.</string>
+    <string name="external_sensors_plugin_description">Monitorização do ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o dispositivo esteja ligado aos respetivos sensores através do ANT + (Wireless Personal Network protocol).</string>
+    <string name="map_widget_altitude_map_center_desc">Mostra a elevação acima do nível do mar do centro do mapa atual.</string>
     <string name="map_widget_altitude_current_location">Altitude: localização atual</string>
-    <string name="map_widget_altitude_desc">Mostra a altura acima do nível do mar da geolocalização atual ou para o centro do mapa atual</string>
+    <string name="map_widget_altitude_desc">Mostra a elevação acima do nível do mar da geolocalização atual ou para o centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
     <string name="map_center_widget">Coordenadas:centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Altitude: centro do mapa</string>
-    <string name="map_widget_altitude_current_location_desc">Mostra a altura acima do nível do mar da geolocalização atual.</string>
-    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados (expressos em fotogramas por segundo ou FPS).</string>
+    <string name="map_widget_altitude_current_location_desc">Mostra a elevação acima do nível do mar da geolocalização atual.</string>
+    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados expresso em fotogramas por segundo (FPS).</string>
     <string name="simulate_location_by_gpx">Simular a localização por GPX</string>
     <string name="location_simulation_cutoff">A simulação ignora os primeiros metros</string>
     <string name="location_simulation_speedup">Velocidade da simulação</string>
-    <string name="send_uuid_preference_desc">O UUID aleatório é utilizado para descarregar mapas off-line dos servidores do OsmAnd para monitorizar a utilização justa dos recursos do servidor, prever a utilização do tráfego e gerar relatórios de mapas mensais anónimos.</string>
+    <string name="send_uuid_preference_desc">O UUID aleatório é utilizado para descarregar mapas off-line dos servidores do OsmAnd para monitorizar a utilização justa dos recursos do servidor, prever padrões e gerar relatórios de mapas mensais anónimos.</string>
     <string name="send_uuid_preference">Enviar identificador único de utilizador (UUID)</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de utilização</string>
@@ -4859,7 +4859,7 @@
 \n
 \n • Animação suave em alterações de localização durante o movimento
 \n
-\n • Novo widget com coordenadas do centro do mapa
+\n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
 \n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
 \n
@@ -4873,8 +4873,11 @@
 \n
 \n • Adicionado suporte para sensores ANT+
 \n
-\n • Opção adicionada para desativar o UUID
+\n • Opção adicionada para desativar o descarregamento do UUID
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
+    <string name="show_map_symbols_desc">Texto, sinais de trânsito e outros.</string>
+    <string name="show_map_symbols">Mostrar símbolos do mapa</string>
+    <string name="show_borders_of_downloaded_maps">Coloração de mapas descarregados</string>
 </resources>
