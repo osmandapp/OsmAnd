@@ -422,7 +422,7 @@ public class GeneralRouter implements VehicleRouter {
 				tdirection = 1;
 			} else if (pointTypes[i] == road.region.maxheightBackward) {
 				hdirection = -1;
-			} else if(pointTypes[i] == road.region.maxheightForward) {
+			} else if (pointTypes[i] == road.region.maxheightForward) {
 				hdirection = 1;
 			}
 		}

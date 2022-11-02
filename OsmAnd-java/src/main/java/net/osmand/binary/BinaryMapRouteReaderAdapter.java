@@ -386,10 +386,10 @@ public class BinaryMapRouteReaderAdapter {
 					directionBackward = id;
 				}
 			} else if (tags.equals("maxheight:forward") && val != null) {
-			maxheightForward = id;
-		} else if (tags.equals("maxheight:backward") && val != null) {
-			maxheightBackward = id;
-		}
+				maxheightForward = id;
+			} else if (tags.equals("maxheight:backward") && val != null) {
+				maxheightBackward = id;
+			}
 		}
 		
 		
