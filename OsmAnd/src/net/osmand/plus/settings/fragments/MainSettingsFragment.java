@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.annotation.ColorRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
@@ -55,6 +56,15 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
+	private final OnBackStackChangedListener listener = new OnBackStackChangedListener() {
+		@Override
+		public void onBackStackChanged() {
+			MainSettingsFragment fragment = (MainSettingsFragment) getMapActivity().getSupportFragmentManager().findFragmentByTag(TAG);
+			if(fragment != null){
+				fragment.setupBackupAndRestorePref();
+			}
+		}
+	};
 
 	@Override
 	@ColorRes
@@ -237,7 +247,16 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	}
 
 	@Override
+	public void onResume() {
+		FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
+		fragmentManager.addOnBackStackChangedListener(listener);
+		super.onResume();
+	}
+
+	@Override
 	public void onPause() {
+		FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
+		fragmentManager.removeOnBackStackChangedListener(listener);
 		updateRouteInfoMenu();
 		super.onPause();
 	}
