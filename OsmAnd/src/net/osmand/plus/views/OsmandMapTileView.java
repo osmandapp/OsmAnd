@@ -1704,9 +1704,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (doubleTapScaleDetector != null && !doubleTapScaleDetector.isInZoomMode()) {
 				if (isZoomingAllowed(getZoom(), 1.1f)) {
 					RotatedTileBox tb = getCurrentRotatedTileBox();
-					double lat = tb.getLatFromPixel(e.getX(), e.getY());
-					double lon = tb.getLonFromPixel(e.getX(), e.getY());
-					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+					LatLon latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, e.getX(), e.getY());
+					if (mapRenderer != null) {
+						if (settings.KEEP_DOUBLE_TAP_POSITION.get()) {
+							PointI start31 = mapRenderer.getTarget();
+							PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
+									latlon.getLatitude(), latlon.getLongitude(), false);
+							latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
+									(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
+							    	MapUtils.get31LongitudeX((int) Math.round(
+									(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
+						}
+					}
+					getAnimatedDraggingThread().startMoving(
+							latlon.getLatitude(), latlon.getLongitude(), getZoom() + 1, true);
 				}
 				afterDoubleTap = true;
 				return true;
