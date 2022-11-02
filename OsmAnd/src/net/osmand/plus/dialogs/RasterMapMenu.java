@@ -126,6 +126,7 @@ public class RasterMapMenu {
 					updateTransparencyBarVisibility(isChecked);
 				} else if (itemId == R.string.show_map_symbols) {
 					settings.KEEP_MAP_LABELS_VISIBLE.set(isChecked);
+					mapActivity.getMapView().refreshMap();
 				} else if (itemId == R.string.show_parameter_seekbar) {
 					if (isChecked) {
 						settings.SHOW_MAP_LAYER_PARAMETER.set(true);
