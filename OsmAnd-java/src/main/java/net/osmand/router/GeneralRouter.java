@@ -410,6 +410,7 @@ public class GeneralRouter implements VehicleRouter {
 		int wayOppositeDirection = dir ? -1 : 1;
 		int direction = 0;
 		int tdirection = 0;
+		int hdirection = 0;
 		for (int i = 0; i < pointTypes.length; i++) {
 			if (pointTypes[i] == road.region.directionBackward) {
 				direction = -1;
@@ -419,9 +420,13 @@ public class GeneralRouter implements VehicleRouter {
 				tdirection = -1;
 			} else if(pointTypes[i] == road.region.directionTrafficSignalsForward) {
 				tdirection = 1;
+			} else if (pointTypes[i] == road.region.maxheightBackward) {
+				hdirection = -1;
+			} else if(pointTypes[i] == road.region.maxheightForward) {
+				hdirection = 1;
 			}
 		}
-		if (direction != 0 || tdirection != 0) {
+		if (direction != 0 || tdirection != 0 || hdirection != 0) {
 			TIntArrayList filteredRules = new TIntArrayList();
 			for (int i = 0; i < pointTypes.length; i++) {
 				boolean skip = false;
@@ -429,6 +434,8 @@ public class GeneralRouter implements VehicleRouter {
 						&& direction == wayOppositeDirection) {
 					skip = true;
 				} else if (pointTypes[i] == road.region.trafficSignals && tdirection == wayOppositeDirection) {
+					skip = true;
+				} else if (hdirection == wayOppositeDirection) {
 					skip = true;
 				}
 				if (!skip) {
