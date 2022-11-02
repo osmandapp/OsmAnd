@@ -4537,7 +4537,7 @@
     <string name="rendering_attr_showFitnessTrails_name">Fitnessbaner</string>
     <string name="rendering_attr_showRunningRoutes_name">Løberuter</string>
     <string name="rendering_attr_showRunningRoutes_description">Vis løberuter</string>
-    <string name="routeInfo_horse_scale_description">Gengiv stier i henhold til sværhedsgraden af hestestier</string>
+    <string name="routeInfo_horse_scale_description">Gengiv stier i henhold til sværhedsgraden af ridestier</string>
     <string name="rendering_attr_horse_scale_common_name">Almindelig</string>
     <string name="rendering_attr_horse_scale_demanding_name">Krævende</string>
     <string name="rendering_attr_horse_scale_difficult_name">Vanskelig</string>
@@ -4563,7 +4563,7 @@
     <string name="simulation_real_mode_title">Realistisk simulering</string>
     <string name="simulation_preview_mode_title">Hurtig forhåndsvisningstilstand</string>
     <string name="speed_mode">Hastighedstilstand</string>
-    <string name="routeInfo_horse_scale_name">Hestestiers sværhedsgrad</string>
+    <string name="routeInfo_horse_scale_name">Ridestiers sværhedsgrad</string>
     <string name="rendering_attr_horse_scale_impossible_name">Umulig</string>
     <string name="simulation_preview_mode_desc">Hastigheden i simuleringen er maksimal på lige strækninger og sænkes kun ved kryds.</string>
     <string name="osm_carto_render_descr">Svarende til OpenStreetMap-carto-stilen, der anvendes på det primære OSM-websted</string>
@@ -4658,7 +4658,7 @@
     <string name="routing_attr_allow_private_for_truck_name">Tillad privat adgang (lastbil)</string>
     <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
     <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
-    <string name="rendering_attr_horseScale_name">Sværhedsgraden af hestestier</string>
+    <string name="rendering_attr_horseScale_name">Sværhedsgraden af ridestier</string>
     <string name="map_widget_trip_recording_distance">Afstand</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
@@ -4879,6 +4879,6 @@
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
     <string name="external_sensors_support">Understøttelse af eksterne sensorer</string>
     <string name="show_map_symbols">Vis kortsymboler</string>
-    <string name="show_borders_of_downloaded_maps">Farvelægning af downloadede kortregioner</string>
+    <string name="show_borders_of_downloaded_maps">Farvelægning af downloadede kort</string>
     <string name="show_map_symbols_desc">Tekst, vejskilte og andre.</string>
 </resources>
