@@ -17,7 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.helpers.LogsHelper;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -39,7 +39,7 @@ public class DashErrorFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		View view = inflater.inflate(R.layout.dash_error_fragment, container, false);
-		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), LogsHelper.EXCEPTION_PATH);
+		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), FeedbackHelper.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		ImageView iv = view.findViewById(R.id.error_icon);
 		iv.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_crashlog));
@@ -48,7 +48,7 @@ public class DashErrorFragment extends DashBaseFragment {
 		message.setText(msg);
 		Button errorBtn = view.findViewById(R.id.error_btn);
 		errorBtn.setTypeface(typeface);
-		errorBtn.setOnClickListener(v -> app.getLogsHelper().sendCrashLog());
+		errorBtn.setOnClickListener(v -> app.getFeedbackHelper().sendCrashLog());
 
 		Button cancelBtn = view.findViewById(R.id.error_cancel);
 		cancelBtn.setTypeface(typeface);

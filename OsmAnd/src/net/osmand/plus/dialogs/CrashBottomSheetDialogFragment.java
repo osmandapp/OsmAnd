@@ -40,7 +40,7 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 	@Override
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = requiredMyApplication();
-		app.getLogsHelper().sendCrashLog();
+		app.getFeedbackHelper().sendCrashLog();
 		dismiss();
 	}
 

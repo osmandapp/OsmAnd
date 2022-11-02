@@ -28,15 +28,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 
-public class LogsHelper {
+public class FeedbackHelper {
 
-	private static final Log log = PlatformUtil.getLog(LogsHelper.class);
+	private static final Log log = PlatformUtil.getLog(FeedbackHelper.class);
 
 	public static final String EXCEPTION_PATH = "exception.log";
 
 	private final OsmandApplication app;
 
-	public LogsHelper(@NonNull OsmandApplication app) {
+	public FeedbackHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 

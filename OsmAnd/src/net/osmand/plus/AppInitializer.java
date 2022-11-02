@@ -43,7 +43,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.LogsHelper;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
@@ -248,7 +248,7 @@ public class AppInitializer implements IProgress {
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initVariables();
 		long size = activity.getPreferences(Context.MODE_PRIVATE).getLong(EXCEPTION_FILE_SIZE, 0);
-		File file = app.getAppPath(LogsHelper.EXCEPTION_PATH);
+		File file = app.getAppPath(FeedbackHelper.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !isFirstTime()) {
 				if (writeFileSize) {
@@ -427,7 +427,7 @@ public class AppInitializer implements IProgress {
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
 		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
-		app.logsHelper = startupInit(new LogsHelper(app), LogsHelper.class);
+		app.feedbackHelper = startupInit(new FeedbackHelper(app), FeedbackHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
@@ -754,7 +754,7 @@ public class AppInitializer implements IProgress {
 			} catch (Throwable throwable) {
 				settings.OPENGL_RENDER_FAILED.set(true);
 				LOG.error("NativeCoreContext", throwable);
-				app.getLogsHelper().saveExceptionSilent(Thread.currentThread(), throwable);
+				app.getFeedbackHelper().saveExceptionSilent(Thread.currentThread(), throwable);
 			}
 			if (settings.OPENGL_RENDER_FAILED.get()) {
 				settings.USE_OPENGL_RENDER.set(false);

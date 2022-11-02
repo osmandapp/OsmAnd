@@ -52,7 +52,7 @@ import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.LogsHelper;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -156,7 +156,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDisplayHelper gpxDisplayHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
-	LogsHelper logsHelper;
+	FeedbackHelper feedbackHelper;
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
@@ -384,8 +384,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return analyticsHelper;
 	}
 
-	public LogsHelper getLogsHelper() {
-		return logsHelper;
+	public FeedbackHelper getFeedbackHelper() {
+		return feedbackHelper;
 	}
 
 	public NotificationHelper getNotificationHelper() {
@@ -668,7 +668,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		logsHelper.setExceptionHandler();
+		feedbackHelper.setExceptionHandler();
 		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}

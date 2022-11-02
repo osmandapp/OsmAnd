@@ -84,6 +84,6 @@ public class TroubleshootingCard extends BaseCard {
 
 	private void setupContactUsLink() {
 		View contactSupportLinkContainer = view.findViewById(R.id.contact_support_title_container);
-		contactSupportLinkContainer.setOnClickListener(v -> app.getLogsHelper().sendSupportEmail(app.getString(R.string.purchases)));
+		contactSupportLinkContainer.setOnClickListener(v -> app.getFeedbackHelper().sendSupportEmail(app.getString(R.string.purchases)));
 	}
 }

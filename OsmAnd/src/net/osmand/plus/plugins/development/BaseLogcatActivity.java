@@ -97,7 +97,7 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity imple
 		protected void onPostExecute(File file) {
 			BaseLogcatActivity activity = this.activityRef.get();
 			activity.setSupportProgressBarIndeterminateVisibility(false);
-			activity.getMyApplication().getLogsHelper().sendCrashLog(file);
+			activity.getMyApplication().getFeedbackHelper().sendCrashLog(file);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RENDER_INIT_ERROR_ID;
-import static net.osmand.plus.helpers.LogsHelper.EXCEPTION_PATH;
+import static net.osmand.plus.helpers.FeedbackHelper.EXCEPTION_PATH;
 
 import android.os.Bundle;
 
@@ -53,7 +53,7 @@ public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 	@Override
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = requiredMyApplication();
-		app.getLogsHelper().sendCrashLog();
+		app.getFeedbackHelper().sendCrashLog();
 		dismiss();
 	}
 

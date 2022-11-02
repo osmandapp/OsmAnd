@@ -445,7 +445,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		TextView supportDescription = mainView.findViewById(R.id.contact_support_button);
 		String email = getString(R.string.support_email);
 		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, email));
-		supportDescription.setOnClickListener(v -> app.getLogsHelper().sendSupportEmail(getString(R.string.backup_and_restore)));
+		supportDescription.setOnClickListener(v -> app.getFeedbackHelper().sendSupportEmail(getString(R.string.backup_and_restore)));
 	}
 
 	private void setupKeyboardListener() {
