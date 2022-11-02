@@ -24,7 +24,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -120,16 +119,9 @@ public class IntentHelper {
 
 				if (app.isApplicationInitializing()) {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
-						@Override
-						public void onStart(AppInitializer init) {
-						}
 
 						@Override
-						public void onProgress(AppInitializer init, InitEvents event) {
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
+						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
 							buildRoute(startLatLon, endLatLon, appMode);
 						}

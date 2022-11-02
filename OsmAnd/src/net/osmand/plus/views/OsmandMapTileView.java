@@ -341,23 +341,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setupOpenGLView() {
 		if (application.isApplicationInitializing()) {
 			application.getAppInitializer().addListener(new AppInitializeListener() {
-
 				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					application.getOsmandMap().setupOpenGLView(false);
+				public void onFinish(@NonNull AppInitializer init) {
+					application.getOsmandMap().setupOpenGLView();
 					application.getOsmandMap().refreshMap();
 				}
 			});
 		} else {
-			application.getOsmandMap().setupOpenGLView(true);
+			application.getOsmandMap().setupOpenGLView();
 		}
 	}
 
@@ -632,15 +623,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners = Algorithms.addToList(locationListeners, listener);
+		if (!locationListeners.contains(listener)) {
+			locationListeners = Algorithms.addToList(locationListeners, listener);
+		}
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
 		locationListeners = Algorithms.removeFromList(locationListeners, listener);
 	}
 
-	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
-		this.onDrawMapListener = onDrawMapListener;
+	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
+		this.onDrawMapListener = listener;
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.RestartActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class RenderingEngineFragment extends BaseSettingsFragment {
 
@@ -75,9 +78,30 @@ public class RenderingEngineFragment extends BaseSettingsFragment {
 	private void apply() {
 		if (engineChanged()) {
 			settings.USE_OPENGL_RENDER.set(useOpenglRender);
-			RestartActivity.doRestart(requireContext());
-		} else {
-			dismiss();
+
+			if (useOpenglRender && !NativeCoreContext.isInit()) {
+				FragmentActivity activity = getActivity();
+				String title = app.getString(R.string.loading_smth, "");
+				ProgressDialog progress = ProgressDialog.show(activity, title, app.getString(R.string.loading_data));
+				app.getAppInitializer().initOpenglAsync(() -> {
+					updateMap();
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+				});
+			} else {
+				updateMap();
+			}
+		}
+		dismiss();
+	}
+
+	private void updateMap() {
+		app.getOsmandMap().setupOpenGLView();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMapComplete();
 		}
 	}
 

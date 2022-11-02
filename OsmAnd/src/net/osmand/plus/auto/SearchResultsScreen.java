@@ -100,15 +100,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	}
 
 	@Override
-	public void onStart(AppInitializer init) {
-	}
-
-	@Override
-	public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-	}
-
-	@Override
-	public void onFinish(AppInitializer init) {
+	public void onFinish(@NonNull AppInitializer init) {
 		loading = false;
 		if (!destroyed) {
 			if (!Algorithms.isEmpty(searchText)) {
