@@ -146,13 +146,13 @@ public class SearchCoreFactory {
 			return 0;
 		}
 
-		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api, SearchAmenityByNameAPI poiApi)
+		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
 				throws IOException {
-			subSearchApiOrPublish(phrase, resultMatcher, res, api, true, poiApi);
+			return subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
 		}
 
-		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
-											 boolean publish, SearchAmenityByNameAPI poiApi)
+		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
+											 boolean publish)
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
 			boolean firstUnknownWordMatches = res.firstUnknownWordMatches;
@@ -218,17 +218,10 @@ public class SearchCoreFactory {
 						resultMatcher.getParentSearchResult());
 				api.search(nphrase, resultMatcher);
 				
-				//search poi in city
-				if (poiApi != null && res.objectType == ObjectType.CITY) {
-					SearchPhrase newPhrase = phrase.generateNewPhrase(nphrase.getUnknownSearchPhrase(), phrase.getSettings());
-					newPhrase.file = res.file;
-					newPhrase.getSettings().setOriginalLocation(res.location);
-					poiApi.search(newPhrase, resultMatcher);
-				}
-				
 				resultMatcher.setParentSearchResult(prev);
+				return nphrase;
 			}
-
+			return null;
 		}
 
 		@Override
@@ -388,12 +381,23 @@ public class SearchCoreFactory {
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
-						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi, new SearchCoreFactory.SearchAmenityByNameAPI());
+						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+						searchPoiInCity(nphrase, res, resultMatcher);
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
 					}
 				}
+			}
+		}
+		
+		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
+			if (nphrase != null && res.objectType == ObjectType.CITY) {
+				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase.getUnknownSearchPhrase(), nphrase.getSettings());
+				newPhrase.file = res.file;
+				newPhrase.getSettings().setOriginalLocation(res.location);
+				poiApi.search(newPhrase, resultMatcher);
 			}
 		}
 
@@ -539,9 +543,10 @@ public class SearchCoreFactory {
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
-							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, null);
+							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
-							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi, new SearchCoreFactory.SearchAmenityByNameAPI());
+							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+							searchPoiInCity(nphrase, res, resultMatcher);
 						}
 					}
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
@@ -1292,7 +1297,7 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_STREET_BY_CITY_PRIORITY;
 					//res.priorityDistance = 1;
 					res.objectType = ObjectType.STREET;
-					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI, pub, null);
+					subSearchApiOrPublish(phrase, resultMatcher, res, streetsAPI, pub);
 					if (limit++ > LIMIT) {
 						break;
 					}
