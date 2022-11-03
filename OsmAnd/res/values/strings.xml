@@ -17,8 +17,8 @@
     <string name="dismiss_changes_descr">All changes will be dismissed.</string>
     <string name="dismiss_changes">Dismiss changes?</string>
     <string name="restart_now">Restart now</string>
-    <string name="map_rendering_engine_legacy">Version 1</string>
-    <string name="map_rendering_engine_new">Version 2 (OpenGL)</string>
+    <string name="map_rendering_engine_v1">Version 1</string>
+    <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">Version 2 (OpenGL) is the faster map rendering engine also featuring 2.5D view. Version 1 rendering was the default before release 4.3, and is still preferable for older devices.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>

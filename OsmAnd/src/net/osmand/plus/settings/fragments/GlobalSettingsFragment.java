@@ -256,7 +256,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void setupMapRenderingEnginePref() {
 		Preference preference = findPreference(MAP_RENDERING_ENGINE_ID);
 		preference.setIcon(getContentIcon(R.drawable.ic_map));
-		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_new : R.string.map_rendering_engine_legacy);
+		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_v2 : R.string.map_rendering_engine_v1);
 		preference.setVisible(Version.isOpenGlAvailable(app));
 	}
 
