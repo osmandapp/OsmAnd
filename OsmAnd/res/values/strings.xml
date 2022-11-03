@@ -11,7 +11,7 @@
 	Thx - Hardy
 -->
 
-    <string name="rendering_engine_failed_descr">OsmAnd has reverted to Legacy map rendering, you can try to switch back to the New rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd has reverted to \'Version 1\' map rendering. You can try to switch back to the new \'Version 2 (OpenGL)\' rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
     <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
     <string name="share_crash_log">Share crash log</string>
     <string name="dismiss_changes_descr">All changes will be dismissed.</string>
@@ -27,7 +27,7 @@
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
     <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
-    • New, faster map rendering engine, with 2.5D view\n\n
+    • New, faster Version 2 (OpenGL) map rendering engine, with 2.5D view\n\n
     • Smooth animation of location changes while in motion\n\n
     • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
