@@ -236,7 +236,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		initUI();
 	}
 
-	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+	public void setTrackChartPoints(@Nullable TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
 	}
 
@@ -244,7 +244,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return trackDrawInfo != null;
 	}
 
-	public void setTrackDrawInfo(TrackDrawInfo trackDrawInfo) {
+	public void setTrackDrawInfo(@Nullable TrackDrawInfo trackDrawInfo) {
 		this.trackDrawInfo = trackDrawInfo;
 	}
 
