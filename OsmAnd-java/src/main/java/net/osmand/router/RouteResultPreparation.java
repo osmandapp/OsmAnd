@@ -1481,7 +1481,6 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
