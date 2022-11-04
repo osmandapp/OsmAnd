@@ -258,7 +258,7 @@
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
     <string name="version_index_is_big_for_memory">La versión «{0}» de índices no cabe en memoria</string>
-    <string name="version_index_is_not_supported">No se admite la versión «{0}» de índices</string>
+    <string name="version_index_is_not_supported">La versión del índice «{0}» es incompatible</string>
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.
 \n
 \nNavegación cambiada temporalmente al servicio en línea «CloudMade».</string>
