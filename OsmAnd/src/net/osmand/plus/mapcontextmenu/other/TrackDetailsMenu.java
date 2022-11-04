@@ -322,18 +322,21 @@ public class TrackDetailsMenu {
 
 	@Nullable
 	private LatLon getLocationAtPos(LineChart chart, float pos) {
+		GpxDisplayItem gpxItem = getGpxItem();
+		TrkSegment segment = getTrackSegment(chart);
+		boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
+		return getLocationAtPos(chart, gpxItem, segment, pos, joinSegments);
+	}
+
+	@Nullable
+	public static LatLon getLocationAtPos(LineChart chart, GpxDisplayItem gpxItem, TrkSegment segment,
+	                                      float pos, boolean joinSegments) {
 		WptPt point = null;
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-		GpxDisplayItem gpxItem = getGpxItem();
-		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
-			TrkSegment segment = getTrackSegment(chart);
-			if (segment == null) {
-				return null;
-			}
+		if (!Algorithms.isEmpty(ds) && gpxItem != null && segment != null) {
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			GPXFile gpxFile = gpxItem.group.getGpxFile();
-			boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;

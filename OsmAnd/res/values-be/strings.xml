@@ -4816,4 +4816,5 @@
     <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
+    <string name="show_borders_of_downloaded_maps">Афарбоўка спампаваных мап</string>
 </resources>

@@ -177,6 +177,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+	String FRAGMENT_RENDER_INIT_ERROR_ID = FRAGMENT_ID + "render_init_error";
 	String FRAGMENT_DESTINATION_REACHED_ID = FRAGMENT_ID + "destination_reached";
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";

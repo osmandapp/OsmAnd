@@ -2162,7 +2162,7 @@
     <string name="shared_string_max">أقصى</string>
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
-    <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
+    <string name="routing_attr_driving_style_name">أسلوب الركوب</string>
     <string name="altitude_descent">منحدر</string>
     <string name="altitude_ascent">وعر</string>
     <string name="altitude_range">مدى الارتفاع</string>
@@ -3394,8 +3394,8 @@
     <string name="monitoring_min_accuracy_descr_side_effect">الآثار الجانبية: نتيجة التصفية بدقة ، قد تكون النقاط مفقودة تماماً على سبيل المثال أسفل الجسور ، تحت الأشجار ، بين المباني العالية ، أو مع بعض الظروف الجوية.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصية: من الصعب التنبؤ بما سيتم تسجيله وما لا يتم تسجيله ، قد يكون من الأفضل إيقاف تشغيل هذا المرشح.</string>
     <string name="monitoring_min_accuracy_descr_remark">ملاحظة :إذا كان GPS قد تم إيقافه قبل التسجيل مباشرة ، فقد تكون دقة النقطة الأولى التي تم قياسها منخفضة ، لذلك قد نود في الرمز الخاص بنا الانتظار ثانية أو نحو ذلك قبل تسجيل نقطة (أو تسجيل أفضل 3 نقاط متتالية ، إلخ) .) ، ولكن هذا لم ينفذ بعد.</string>
-    <string name="monitoring_min_distance_descr">يتجنب هذا المرشح تسجيل النقاط المكررة حيث قد يكون هناك حركة فعلية قليلة جداً ، مما يجعل المظهر المكاني أجمل للمسارات لا يتم معالجته لاحقاً.</string>
-    <string name="monitoring_min_distance_descr_side_effect">الآثار الجانبية: لا يتم تسجيل الفترات في الراحة على الإطلاق أو بنقطة واحدة فقط لكل منها. قد يتم تصفية الحركات الصغيرة (في العالم الحقيقي) (على سبيل المثال ، لوضع علامة على وجود امتداد محتمل في رحلتك). يحتوي ملفك على معلومات أقل للمعالجة اللاحقة ، ويحتوي على إحصائيات أسوأ عن طريق تصفية النقاط الزائدة عن الحاجة بشكل واضح في وقت التسجيل ، مع الاحتفاظ في نفس الوقت بالآثار الناتجة عن الاستقبال السيئ أو تأثيرات شرائح GPS.</string>
+    <string name="monitoring_min_distance_descr">يتيح لك تشغيل هذا الفلتر تجنب تسجيل بيانات إضافية عندما لا يتم اكتشاف الحركة تقريبًا. كما أنه يحسن المظهر المكاني للمسارات دون مزيد من المعالجة.</string>
+    <string name="monitoring_min_distance_descr_side_effect">لم يتم تسجيل فترات الراحة على الإطلاق أو كنقطة واحدة فقط. يمكن تصفية الحركات البسيطة (على سبيل المثال ، على جانب الطريق لتحديد منعطف محتمل في رحلتك). لاحظ أنه سيحتوي ملفك على معلومات أقل للمعالجة اللاحقة ، وفي الوقت نفسه يمكن أن يحفظ عناصر GPS الأثرية الناتجة عن ضعف الاستقبال أو تأثيرات مجموعة الشرائح.</string>
     <string name="monitoring_min_distance_descr_recommendation">التوصية: قد يكون إعداد 5 أمتار جيداً إذا لم تكن بحاجة إلى التقاط تفاصيل أدق من ذلك ، ولا ترغب في التقاط البيانات بشكل واضح أثناء الراحة.</string>
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
@@ -4941,4 +4941,7 @@
     <string name="speak_gps_signal_status">الإعلان عن فقدان إشارة GPS واستعادتها</string>
     <string name="speak_route_recalculation">الإعلام عن إعادة حساب المسار</string>
     <string name="purchases_feature_desc_external_sensors">عرض وتسجيل البيانات من أجهزة الاستشعار الخارجية: سرعة الدراجة وقوة الدراجة والإيقاع ومعدل ضربات القلب.</string>
+    <string name="show_map_symbols">إظهار رموز الخريطة</string>
+    <string name="show_map_symbols_desc">النص وعلامات الطرق وغيرها.</string>
+    <string name="show_borders_of_downloaded_maps">تلوين الخرائط التي تم تنزيلها</string>
 </resources>

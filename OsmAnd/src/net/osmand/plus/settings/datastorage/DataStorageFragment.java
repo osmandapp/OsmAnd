@@ -98,7 +98,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		app = getMyApplication();
 		activity = getMyActivity();
 		Bundle args = getArguments();

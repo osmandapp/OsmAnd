@@ -85,7 +85,7 @@ public class GpxMarkerView extends MarkerView {
 	public void refreshContent(@NonNull Entry entry, @NonNull Highlight highlight) {
 		ChartData<?> chartData = getChartView().getData();
 		if (hasIcon && highlight instanceof GPXHighlight) {
-			boolean showIcon = ((GPXHighlight) highlight).shouldShowIcon();
+			boolean showIcon = ((GPXHighlight) highlight).shouldShowLocationIcon();
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_divider), showIcon);
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_container), showIcon);
 		}

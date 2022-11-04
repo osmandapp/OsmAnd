@@ -3625,7 +3625,7 @@
     <string name="slope_read_more">Baca lebih lanjut tentang lereng di %1$s.</string>
     <string name="shared_string_rendering_style">Gaya perenderan</string>
     <string name="shared_string_include_data">Sertakan data tambahan</string>
-    <string name="monitoring_min_distance_descr">Dengan mengaktifkan saringan ini, Anda dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
+    <string name="monitoring_min_distance_descr">Mengaktifkan saringan ini dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
     <string name="multimedia_rec_split_title">Potong rekaman</string>
     <string name="multimedia_photo_play_sound">Suara rana kamera</string>
     <string name="osm_authorization_success">Otorisasi berhasil</string>
@@ -4877,4 +4877,7 @@
 \n</string>
     <string name="external_sensors_support">Dukungan sensor eksternal</string>
     <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
+    <string name="show_map_symbols_desc">Teks, tanda jalan, dan lain-lain.</string>
+    <string name="show_borders_of_downloaded_maps">Warna peta terunduh</string>
+    <string name="show_map_symbols">Tampilkan simbol peta</string>
 </resources>

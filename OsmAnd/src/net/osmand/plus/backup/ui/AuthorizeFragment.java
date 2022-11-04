@@ -1,5 +1,11 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
@@ -36,7 +42,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupListeners;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -52,12 +57,6 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
-import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
 
 public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener {
 
@@ -446,7 +445,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		TextView supportDescription = mainView.findViewById(R.id.contact_support_button);
 		String email = getString(R.string.support_email);
 		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, email));
-		supportDescription.setOnClickListener(v -> app.sendSupportEmail(getString(R.string.backup_and_restore)));
+		supportDescription.setOnClickListener(v -> app.getFeedbackHelper().sendSupportEmail(getString(R.string.backup_and_restore)));
 	}
 
 	private void setupKeyboardListener() {

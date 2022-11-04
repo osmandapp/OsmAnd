@@ -31,6 +31,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
@@ -484,18 +485,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 					if (event == AppInitializer.InitEvents.MAPS_INITIALIZED) {
 						mapsInitialized = true;
 					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
 				}
 			});
 		} else {
