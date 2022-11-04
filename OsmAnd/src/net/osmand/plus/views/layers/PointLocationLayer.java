@@ -60,7 +60,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocationListener,
 		OsmAndCompassListener, IContextMenuProvider {
 
-	public static final float BEARING_SPEED_THRESHOLD = 0.1f;
+	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
 
