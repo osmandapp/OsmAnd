@@ -4846,7 +4846,7 @@
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
     <string name="external_sensors_support">Podpora externých senzorov</string>
-    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy, aj s pohľadom 2.5D
+    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy verzie 2 (OpenGL), aj s pohľadom 2.5D
 \n
 \n • Plynulá animácia zmien polohy počas pohybu
 \n
@@ -4870,4 +4870,16 @@
     <string name="show_borders_of_downloaded_maps">Vyfarbenie stiahnutých máp</string>
     <string name="show_map_symbols">Zobraziť mapové symboly</string>
     <string name="show_map_symbols_desc">Texty, čísla ciest a iné.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd sa vrátil k vykresľovaniu mapy \'Verzia 1\'. Môžete skúsiť prepnúť znovu na \'Verziu 2 (OpenGL)\' v Nastaveniach.
+\n
+\nProsím podporte vylepšenia vykresľovania zaslaním hlásenia o chybe.</string>
+    <string name="rendering_engine_failed">Pri vykresľovaní mapy OsmAnd nedávno nastal pád.</string>
+    <string name="share_crash_log">Zdieľať záznam o páde</string>
+    <string name="dismiss_changes_descr">Všetky zmeny budú zabudnuté.</string>
+    <string name="dismiss_changes">Zahodiť zmeny\?</string>
+    <string name="restart_now">Reštartovať teraz</string>
+    <string name="map_rendering_engine_v1">Verzia 1</string>
+    <string name="map_rendering_engine_v2">Verzia 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Verzia 2 (OpenGL) je rýchlejšie vykresľovanie mapy aj s 2,5D pohľadom. Vykresľovanie Verzia 1 bolo predvolené do verzie OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.</string>
+    <string name="map_rendering_engine">Spôsob vykresľovania mapy</string>
 </resources>
