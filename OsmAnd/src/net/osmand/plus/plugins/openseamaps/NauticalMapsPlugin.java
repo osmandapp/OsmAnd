@@ -101,13 +101,11 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		LocalIndexHelper helper = new LocalIndexHelper(app);
 		if (!isEnabled()) {
-			List<LocalIndexInfo> locals = helper.getLocalIndexData(true, true, null);
-			for (LocalIndexInfo info : locals) {
-				if (info.getType() == LocalIndexType.DEPTH_DATA) {
-					createNauticalItem(menuAdapter, mapActivity, customRules);
-				}
+			LocalIndexHelper helper = new LocalIndexHelper(app);
+			List<LocalIndexInfo> depthData = helper.getLocalIndexData(true, true, null, LocalIndexType.DEPTH_DATA);
+			for (int i = 0; i < depthData.size(); i++) {
+				createNauticalItem(menuAdapter, mapActivity, customRules);
 			}
 		} else {
 			createNauticalItem(menuAdapter, mapActivity, customRules);

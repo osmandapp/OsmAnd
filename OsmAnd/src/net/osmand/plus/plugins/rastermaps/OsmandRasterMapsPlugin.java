@@ -297,137 +297,140 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if(isEnabled()){
-			WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-			ItemClickListener listener = new OnRowItemClick() {
+		if (!isEnabled()) {
+			return;
+		}
 
-				@Override
-				public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
-				                              @NonNull View view, @NonNull ContextMenuItem item) {
-					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity != null && !mapActivity.isFinishing()) {
-						int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
-						int itemId = item.getTitleId();
-						if (itemId == R.string.layer_overlay) {
-							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
-							return false;
-						} else if (itemId == R.string.layer_underlay) {
-							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP, viewCoordinates);
-							return false;
-						}
-					}
-					return true;
-				}
+		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		ItemClickListener listener = new OnRowItemClick() {
 
-				@Override
-				public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
-				                                  @Nullable View view, @NonNull ContextMenuItem item,
-				                                  boolean isChecked) {
-					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity == null || mapActivity.isFinishing()) {
-						return false;
-					}
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				MapActivity mapActivity = mapActivityRef.get();
+				if (mapActivity != null && !mapActivity.isFinishing()) {
+					int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 					int itemId = item.getTitleId();
 					if (itemId == R.string.layer_overlay) {
-						toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
-								canceled -> {
-									MapActivity mapActv = mapActivityRef.get();
-									if (mapActv != null && !mapActv.isFinishing()) {
-										String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
-										boolean hasOverlayDescription = overlayMapDescr != null;
-										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
-										item.setDescription(overlayMapDescr);
-										item.setSelected(hasOverlayDescription);
-										item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-										if (uiAdapter != null) {
-											uiAdapter.onDataSetChanged();
-										}
-									}
-								});
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.OVERLAY_MAP, viewCoordinates);
 						return false;
 					} else if (itemId == R.string.layer_underlay) {
-						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
-								canceled -> {
-									MapActivity mapActv = mapActivityRef.get();
-									if (mapActv != null && !mapActv.isFinishing()) {
-										String underlayMapDescr = settings.MAP_UNDERLAY.get();
-
-										boolean hasUnderlayDescription = underlayMapDescr != null;
-										underlayMapDescr = hasUnderlayDescription
-												? underlayMapDescr
-												: mapActv.getString(R.string.shared_string_none);
-
-										item.setDescription(underlayMapDescr);
-										item.setSelected(hasUnderlayDescription);
-										item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-										if (uiAdapter != null) {
-											uiAdapter.onDataSetChanged();
-										}
-										if (!canceled) {
-											mapActv.refreshMapComplete();
-										}
-									}
-								});
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.UNDERLAY_MAP, viewCoordinates);
 						return false;
 					}
-					return true;
 				}
-			};
+				return true;
+			}
 
-			updateConfigureMapItemCallback = result -> {
-				MapActivity ma = mapActivityRef.get();
-				if (ma != null) {
-					ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(ma);
-					if (fragment != null) {
-						fragment.onRefreshItem(HIDE_ID);
-					}
-					return true;
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NonNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				MapActivity mapActivity = mapActivityRef.get();
+				if (mapActivity == null || mapActivity.isFinishing()) {
+					return false;
 				}
-				return false;
-			};
+				int itemId = item.getTitleId();
+				if (itemId == R.string.layer_overlay) {
+					toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
+							canceled -> {
+								MapActivity mapActv = mapActivityRef.get();
+								if (mapActv != null && !mapActv.isFinishing()) {
+									String overlayMapDescr = mapActv.getMyApplication().getSettings().MAP_OVERLAY.get();
+									boolean hasOverlayDescription = overlayMapDescr != null;
+									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
+									item.setDescription(overlayMapDescr);
+									item.setSelected(hasOverlayDescription);
+									item.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									if (uiAdapter != null) {
+										uiAdapter.onDataSetChanged();
+									}
+								}
+							});
+					return false;
+				} else if (itemId == R.string.layer_underlay) {
+					toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
+							canceled -> {
+								MapActivity mapActv = mapActivityRef.get();
+								if (mapActv != null && !mapActv.isFinishing()) {
+									String underlayMapDescr = settings.MAP_UNDERLAY.get();
 
-			if (overlayLayer.getMap() == null) {
-				settings.MAP_OVERLAY.set(null);
-				settings.MAP_OVERLAY_PREVIOUS.set(null);
+									boolean hasUnderlayDescription = underlayMapDescr != null;
+									underlayMapDescr = hasUnderlayDescription
+											? underlayMapDescr
+											: mapActv.getString(R.string.shared_string_none);
+
+									item.setDescription(underlayMapDescr);
+									item.setSelected(hasUnderlayDescription);
+									item.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									if (uiAdapter != null) {
+										uiAdapter.onDataSetChanged();
+									}
+									if (!canceled) {
+										mapActv.refreshMapComplete();
+									}
+								}
+							});
+					return false;
+				}
+				return true;
 			}
-			if (underlayLayer.getMap() == null) {
-				settings.MAP_UNDERLAY.removeListener(underlayListener);
-				settings.MAP_UNDERLAY.set(null);
-				settings.MAP_UNDERLAY_PREVIOUS.set(null);
-				settings.MAP_UNDERLAY.addListener(underlayListener);
+		};
+
+		updateConfigureMapItemCallback = result -> {
+			MapActivity ma = mapActivityRef.get();
+			if (ma != null) {
+				ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(ma);
+				if (fragment != null) {
+					fragment.onRefreshItem(HIDE_ID);
+				}
+				return true;
 			}
-			String overlayMapDescr = settings.MAP_OVERLAY.get();
-			if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
-				overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
-			}
-			boolean hasOverlayDescription = overlayMapDescr != null;
-			overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-			adapter.addItem(new ContextMenuItem(OVERLAY_MAP)
-					.setTitleId(R.string.layer_overlay, mapActivity)
-					.setDescription(overlayMapDescr)
-					.setSelected(hasOverlayDescription)
-					.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-					.setIcon(R.drawable.ic_layer_top)
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(listener)
-					.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY));
-			String underlayMapDescr = settings.MAP_UNDERLAY.get();
-			if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
-				underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
-			}
-			boolean hasUnderlayDescription = underlayMapDescr != null;
-			underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
-			adapter.addItem(new ContextMenuItem(UNDERLAY_MAP)
-					.setTitleId(R.string.layer_underlay, mapActivity)
-					.setDescription(underlayMapDescr)
-					.setSelected(hasUnderlayDescription)
-					.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-					.setIcon(R.drawable.ic_layer_bottom)
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(listener)
-					.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
+			return false;
+		};
+
+		if (overlayLayer.getMap() == null) {
+			settings.MAP_OVERLAY.set(null);
+			settings.MAP_OVERLAY_PREVIOUS.set(null);
 		}
+		if (underlayLayer.getMap() == null) {
+			settings.MAP_UNDERLAY.removeListener(underlayListener);
+			settings.MAP_UNDERLAY.set(null);
+			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+			settings.MAP_UNDERLAY.addListener(underlayListener);
+		}
+		String overlayMapDescr = settings.MAP_OVERLAY.get();
+		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
+			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
+		}
+		boolean hasOverlayDescription = overlayMapDescr != null;
+		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		adapter.addItem(new ContextMenuItem(OVERLAY_MAP)
+				.setTitleId(R.string.layer_overlay, mapActivity)
+				.setDescription(overlayMapDescr)
+				.setSelected(hasOverlayDescription)
+				.setColor(app, hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_layer_top)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(listener)
+				.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY));
+		String underlayMapDescr = settings.MAP_UNDERLAY.get();
+		if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
+			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
+		}
+		boolean hasUnderlayDescription = underlayMapDescr != null;
+		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
+		adapter.addItem(new ContextMenuItem(UNDERLAY_MAP)
+				.setTitleId(R.string.layer_underlay, mapActivity)
+				.setDescription(underlayMapDescr)
+				.setSelected(hasUnderlayDescription)
+				.setColor(app, hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_layer_bottom)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(listener)
+				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
+
 	}
 
 

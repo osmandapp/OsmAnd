@@ -157,7 +157,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if(isEnabled()){
+		if (isEnabled()) {
 			if (isLocked()) {
 				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
 						WIKIPEDIA_ID,

@@ -27,10 +27,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.transport.TransportLinesMenu;
+import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -45,17 +44,14 @@ import java.util.List;
 public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = NauticalDepthContourFragment.class.getSimpleName();
-	private static final String DEPTH_CONTOUR = "depthContour";
 	public static final String DEPTH_CONTOUR_WIDTH = "depthContourWidth";
 	public static final String DEPTH_CONTOUR_COLOR_SCHEME = "depthContourColorScheme";
 
 	private OsmandApplication app;
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
-	private ApplicationMode appMode;
 
 	private View view;
-	private LayoutInflater themedInflater;
 	private boolean nightMode;
 
 	private CommonPreference<Boolean> pref;
@@ -67,15 +63,6 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		appMode = settings.getApplicationMode();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
@@ -84,12 +71,21 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 			RenderingRuleProperty property = iterator.next();
 			if (DEPTH_CONTOURS.equals(property.getAttrName())) {
 				pref = settings.getCustomRenderBooleanProperty(property.getAttrName());
-
 				iterator.remove();
-			}else if (property.getAttrName().startsWith(DEPTH_CONTOUR)) {
+			} else if (property.getAttrName().startsWith(DEPTH_CONTOUR_WIDTH) ||
+					(property.getAttrName().startsWith(DEPTH_CONTOUR_COLOR_SCHEME))) {
 				rules.add(property);
 			}
 		}
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
+
 		setupMainToggle();
 		setupDepthContourLinesToggles();
 
@@ -98,7 +94,8 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupMainToggle() {
-		setupButton(
+		TransportLinesFragment.setupButton(
+				app,
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_nautical_depth,
 				getString(R.string.rendering_attr_depthContours_name),
@@ -118,8 +115,9 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 			return;
 		}
 
+		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		ViewGroup list = view.findViewById(R.id.nautical_toggles_list);
-		for (RenderingRuleProperty property: rules) {
+		for (RenderingRuleProperty property : rules) {
 			String attrName = property.getAttrName();
 			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(property.getAttrName());
 			View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
@@ -127,10 +125,10 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 			int iconId = 0;
 			String title = null;
 			String descr;
-			if(attrName.equals(DEPTH_CONTOUR_WIDTH)){
+			if (attrName.equals(DEPTH_CONTOUR_WIDTH)) {
 				iconId = R.drawable.circle_background_dark;
 				title = getString(R.string.shared_string_lines_width);
-			} else if(attrName.equals(DEPTH_CONTOUR_COLOR_SCHEME)){
+			} else if (attrName.equals(DEPTH_CONTOUR_COLOR_SCHEME)) {
 				iconId = R.drawable.ic_action_appearance;
 				title = getString(R.string.shared_string_lines_color_scheme);
 			}
@@ -157,7 +155,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 				@Override
 				public void onClick(View view) {
 
-					dialogOnClick(finalTitle, property, tvDesc, pref);
+					showPreferenceDialog(finalTitle, property, tvDesc, pref);
 				}
 			});
 
@@ -170,7 +168,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void dialogOnClick(String title, RenderingRuleProperty property, TextView tvDesc, CommonPreference<String> pref){
+	private void showPreferenceDialog(String title, RenderingRuleProperty property, TextView tvDesc, CommonPreference<String> pref) {
 		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes));
@@ -198,46 +196,6 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	private void updateScreenMode(boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
-	}
-
-	private void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
-	                         boolean showDivider, @Nullable OnClickListener listener) {
-		int activeColor = appMode.getProfileColor(nightMode);
-		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int iconColor = enabled ? activeColor : defColor;
-
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
-		ImageView ivIcon = view.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(icon);
-		ivIcon.setColorFilter(enabled ? activeColor : defColor);
-
-		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(title);
-
-		CompoundButton cb = view.findViewById(R.id.compound_button);
-		cb.setChecked(enabled);
-		cb.setVisibility(View.VISIBLE);
-		UiUtilities.setupCompoundButton(nightMode, activeColor, cb);
-
-		cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			ivIcon.setColorFilter(isChecked ? activeColor : defColor);
-			if (listener != null) {
-				listener.onClick(buttonView);
-			}
-		});
-
-		view.setOnClickListener(v -> {
-			boolean newState = !cb.isChecked();
-			cb.setChecked(newState);
-		});
-
-		View divider = view.findViewById(R.id.bottom_divider);
-		if (divider != null) {
-			AndroidUiHelper.updateVisibility(divider, showDivider);
-		}
-
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
-		AndroidUtils.setBackground(view, background);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

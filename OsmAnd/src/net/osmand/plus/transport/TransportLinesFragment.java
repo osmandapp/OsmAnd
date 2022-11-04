@@ -75,6 +75,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 	private void setupMainToggle() {
 		setupButton(
+				app,
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_transport_bus,
 				getString(R.string.rendering_category_transport),
@@ -90,6 +91,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private void setupTransportStopsToggle() {
 		TransportType type = TransportType.TRANSPORT_STOPS;
 		setupButton(
+				app,
 				view.findViewById(R.id.transport_stops_toggle),
 				type.getIconId(),
 				menu.getTransportName(type.getAttrName()),
@@ -117,6 +119,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch, list, false);
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
+						app,
 						view,
 						menu.getTransportIcon(attrName),
 						menu.getTransportName(attrName, property.getName()),
@@ -137,13 +140,15 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
 	}
 
-	private void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
-	                         boolean showDivider, @Nullable OnClickListener listener) {
-		int activeColor = appMode.getProfileColor(nightMode);
+	static public void setupButton(OsmandApplication app, @NonNull View view, int iconId, @NonNull String title, boolean enabled,
+	                               boolean showDivider, @Nullable OnClickListener listener) {
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 
-		Drawable icon = getPaintedContentIcon(iconId, iconColor);
+		UiUtilities cache = app.getUIUtilities();
+		Drawable icon = cache.getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageDrawable(icon);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);

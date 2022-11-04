@@ -71,22 +71,18 @@ public class ConfigureMapUtils {
 			return new ArrayList<>();
 		}
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
-		boolean useDepthContours = InAppPurchaseHelper.isSubscribedToAny(app)
-				|| InAppPurchaseHelper.isDepthContoursPurchased(app);
 		for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-			if (useDepthContours || !"depthContours".equals(p.getAttrName())) {
-				boolean skip = false;
-				if (skipCategories != null) {
-					for (String category : skipCategories) {
-						if (category.equals(p.getCategory())) {
-							skip = true;
-							break;
-						}
+			boolean skip = false;
+			if (skipCategories != null) {
+				for (String category : skipCategories) {
+					if (category.equals(p.getCategory())) {
+						skip = true;
+						break;
 					}
 				}
-				if (!skip) {
-					customRules.add(p);
-				}
+			}
+			if (!skip) {
+				customRules.add(p);
 			}
 		}
 		return customRules;
