@@ -24,6 +24,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
@@ -285,6 +286,13 @@ public class MapDataMenuController extends MenuController {
 			DownloadActivityType downloadActivityType = getDownloadActivityType();
 			if (downloadActivityType != null) {
 				res += ", " + downloadActivityType.getString(mapActivity);
+				if(downloadActivityType == DownloadActivityType.SRTM_COUNTRY_FILE){
+					if(mapObject.getLocalIndexInfo() != null){
+						res += " " + SrtmDownloadItem.getAbbreviationInScopes(mapActivity, mapObject.getLocalIndexInfo());
+					} else if(mapObject.getIndexItem() != null){
+						res += " " + SrtmDownloadItem.getAbbreviationInScopes(mapActivity, mapObject.getIndexItem());
+					}
+				}
 			}
 		}
 		return res;
@@ -302,7 +310,11 @@ public class MapDataMenuController extends MenuController {
 			return;
 		}
 		if (indexItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, null, indexItem.getType().getString(mapActivity), false, false, null);
+			String type = indexItem.getType().getString(mapActivity);
+			if(getDownloadActivityType() == DownloadActivityType.SRTM_COUNTRY_FILE){
+				type += " " + SrtmDownloadItem.getAbbreviationInScopes(mapActivity, indexItem);
+			}
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, type, false, false, null);
 			StringBuilder sizeStr = new StringBuilder();
 			sizeStr.append(indexItem.getSizeDescription(mapActivity));
 			if (backuped) {
@@ -311,7 +323,11 @@ public class MapDataMenuController extends MenuController {
 			addPlainMenuItem(R.drawable.ic_action_info_dark, null, sizeStr.toString(), false, false, null);
 		} else if (localIndexInfo != null) {
 			if (getDownloadActivityType() != null) {
-				addPlainMenuItem(R.drawable.ic_action_info_dark, null, getDownloadActivityType().getString(mapActivity), false, false, null);
+				String type = getDownloadActivityType().getString(mapActivity);
+				if(getDownloadActivityType() == DownloadActivityType.SRTM_COUNTRY_FILE){
+					type += " " + SrtmDownloadItem.getAbbreviationInScopes(mapActivity, localIndexInfo);
+				}
+				addPlainMenuItem(R.drawable.ic_action_info_dark, null, type, false, false, null);
 			}
 			StringBuilder sizeStr = new StringBuilder();
 			if (localIndexInfo.getSize() >= 0) {
