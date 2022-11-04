@@ -4832,4 +4832,21 @@
     <string name="map_widget_camera_distance_desc">Виджет показывает высоту камеры над уровнем поверхности.</string>
     <string name="map_widget_camera_distance">Высота камеры</string>
     <string name="map_widget_camera_tilt">Наклон камеры</string>
+    <string name="rendering_engine_failed_descr">OsmAnd откатился к старому движку отрисовки карт «Версия 1». В настройках вы можете попробовать переключиться на новый движок отрисовки «Версия 2 (OpenGL)».
+\n
+\nПожалуйста, поддержите улучшения, предоставив свой журнал ошибок.</string>
+    <string name="share_crash_log">Поделиться журналом ошибок</string>
+    <string name="map_rendering_engine_v1">Версия 1</string>
+    <string name="dismiss_changes_descr">Все изменения будут отменены.</string>
+    <string name="dismiss_changes">Отменить изменения\?</string>
+    <string name="restart_now">Перезапустить сейчас</string>
+    <string name="map_rendering_engine_v2">Версия 2 (OpenGL)</string>
+    <string name="external_sensors_plugin_description">Мониторинг частоты сердцебиения, скорости велосипеда, мощности велосипеда и каденса. Требуется подключение устройства к соответствующим датчикам по протоколу беспроводной персональной сети ANT+.</string>
+    <string name="map_widget_ant_bicycle_power">Мощность велосипеда</string>
+    <string name="map_widget_rendering_fps">FPS отрисовки карты</string>
+    <string name="rendering_engine_failed">Произошел сбой отрисовки карт OsmAnd.</string>
+    <string name="map_rendering_engine_descr">Версия 2 (OpenGL) - это более быстрый механизм отрисовки карт, поддерживающий 2,5D вид. Версия 1 использовалась по умолчанию до выпуска 4.3 и по-прежнему предпочтительна для старых устройств.</string>
+    <string name="map_rendering_engine">Движок отрисовки карт</string>
+    <string name="purchases_feature_desc_external_sensors">Отображение и запись данных с внешних датчиков: скорость велосипеда, мощность велосипеда, каденс и частота сердцебиения.</string>
+    <string name="map_widget_ant_bicycle_dist">Расстояние на велосипеде</string>
 </resources>
