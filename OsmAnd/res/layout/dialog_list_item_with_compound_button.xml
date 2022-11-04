@@ -51,14 +51,17 @@
 			
 		</FrameLayout>
 		
-		<TextView
+		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/text"
+			style="@style/TitleStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:layout_gravity="center_vertical|start"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size_large"
+			android:layout_marginVertical="@dimen/content_padding_half"
+			android:layout_marginEnd="@dimen/content_padding"
 			tools:text="Item title"/>
 		
 	</LinearLayout>

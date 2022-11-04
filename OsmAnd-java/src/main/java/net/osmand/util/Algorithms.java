@@ -564,6 +564,17 @@ public class Algorithms {
 		return false;
 	}
 
+	public static boolean equalsToAny(Object o, Object ... args) {
+		if (o != null && args != null) {
+			for (Object o1 : args) {
+				if (o.equals(o1)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm

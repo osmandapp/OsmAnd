@@ -14,6 +14,7 @@ public enum OsmAndFeature {
 	ADVANCED_WIDGETS(R.string.pro_features, R.string.purchases_feature_desc_pro_widgets, R.drawable.ic_action_pro_features_colored, R.drawable.ic_action_pro_features_colored_night),
 	HOURLY_MAP_UPDATES(R.string.daily_map_updates, R.string.purchases_feature_desc_hourly_map_updates, R.drawable.ic_action_map_updates_colored_day, R.drawable.ic_action_map_updates_colored_night),
 	CROSS_BUY(R.string.shared_string_cross_buy, R.string.purchases_feature_desc_cross_buy, R.drawable.ic_action_cross_buy_colored_day, R.drawable.ic_action_cross_buy_colored_night),
+	WEATHER(R.string.shared_string_weather, R.string.weather_plugin_description, R.drawable.ic_action_umbrella_colored, R.drawable.ic_action_umbrella_colored_night),
 	MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.string.purchases_feature_desc_monthly_map_updates, R.drawable.ic_action_monthly_map_updates_colored_day, R.drawable.ic_action_monthly_map_updates_colored_night),
 	UNLIMITED_MAP_DOWNLOADS(R.string.unlimited_map_downloads, R.string.purchases_feature_desc_unlimited_map_download, R.drawable.ic_action_unlimited_downloads_colored_day, R.drawable.ic_action_unlimited_download_colored_night),
 	ANDROID_AUTO(R.string.android_auto, R.string.purchases_feature_desc_android_auto, R.drawable.ic_action_android_auto_colored, R.drawable.ic_action_android_auto_colored_night),
@@ -80,7 +81,8 @@ public enum OsmAndFeature {
 			WIKIVOYAGE,
 			EXTERNAL_SENSORS_SUPPORT,
 			TERRAIN,
-			NAUTICAL
+			NAUTICAL,
+			WEATHER
 	);
 
 	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
@@ -93,7 +95,8 @@ public enum OsmAndFeature {
 			COMBINED_WIKI,
 			EXTERNAL_SENSORS_SUPPORT,
 			TERRAIN,
-			NAUTICAL
+			NAUTICAL,
+			WEATHER
 	);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(
