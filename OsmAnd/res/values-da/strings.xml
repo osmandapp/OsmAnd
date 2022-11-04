@@ -4855,7 +4855,7 @@
     <string name="shared_string_terms_of_use">Vilkår for anvendelse</string>
     <string name="speak_gps_signal_status">Meddel tab og genoprettelse af GPS-signal</string>
     <string name="speak_route_recalculation">Meddel genberegning af rute</string>
-    <string name="release_4_3">• Ny, hurtigere kortgengivelse med 2,5D-visning
+    <string name="release_4_3">• Ny, hurtigere Version 2 (OpenGL)-kortgengivelsesmotor med 2,5D-visning
 \n
 \n • Glidende animation for ændringer i placering under bevægelse
 \n
@@ -4863,7 +4863,7 @@
 \n
 \n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse
 \n
-\n • Modulet \"Kortmarkør\" tilføjet mulighed for at ændre klikadfærd
+\n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikadfærd
 \n
 \n • Indstillingen \"Vis position\" blev rettet
 \n
@@ -4881,4 +4881,16 @@
     <string name="show_map_symbols">Vis kortsymboler</string>
     <string name="show_borders_of_downloaded_maps">Farvelægning af downloadede kort</string>
     <string name="show_map_symbols_desc">Tekst, vejskilte og andre.</string>
+    <string name="rendering_engine_failed">OsmAnd\'s kortgengivelse er for nylig brudt ned.</string>
+    <string name="share_crash_log">Del log over nedbrud</string>
+    <string name="dismiss_changes_descr">Alle ændringer vil blive afvist.</string>
+    <string name="dismiss_changes">Afvis ændringer\?</string>
+    <string name="restart_now">Genstart nu</string>
+    <string name="map_rendering_engine_v1">Version 1</string>
+    <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) er den hurtigere kortgengivelsesmotor, der også har 2,5D-visning. Gengivelses med version 1 var standard før version 4.3 og er stadig at foretrække for ældre enheder.</string>
+    <string name="map_rendering_engine">Kortgengivelsesmotor</string>
+    <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
+\n
+\nStøt forbedringer ved at levere din fejllog.</string>
 </resources>

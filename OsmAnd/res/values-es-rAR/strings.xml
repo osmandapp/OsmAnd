@@ -1202,7 +1202,7 @@
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
     <string name="version_index_is_big_for_memory">La versión «{0}» de índices no cabe en memoria</string>
-    <string name="version_index_is_not_supported">No se admite la versión «{0}» de índices</string>
+    <string name="version_index_is_not_supported">La versión del índice «{0}» es incompatible</string>
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.
 \n
 \nNavegación cambiada temporalmente al servicio en línea «CloudMade».</string>
@@ -3330,7 +3330,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones climáticas.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir lo que se grabará y lo que no, puede ser mejor apagar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado inmediatamente antes de una grabación, el primer punto medido podría tener una precisión disminuida, por lo que en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
-    <string name="monitoring_min_distance_descr">Al activar este filtro, se evita grabar datos adicionales al no detectar movimiento. Además, mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
+    <string name="monitoring_min_distance_descr">Activar este filtro, permite evitar grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Pueden filtrarse los pequeños movimientos (por ejemplo, hacia los lados del camino para marcar un posible desvío en el viaje). Nótese que el archivo contendrá menos información para el post-procesamiento y, al mismo tiempo, podría guardar errores del GPS causados por una mala recepción o por efectos del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendación: Define un desplazamiento de 5 metros si no deseas registrar detalles menores de la ruta y no necesitas datos adicionales sobre el período de descanso.</string>
     <string name="live_monitoring_time_buffer">Memoria intermedia</string>
@@ -4866,7 +4866,7 @@
     <string name="map_widget_rendering_fps_desc">Muestra la rapidez con la que se ven y actualizan el mapa y sus elementos , expresada en fotogramas por segundo (FPS).</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
-    <string name="release_4_3">• Nuevo motor más rápido al visualizar mapas, con vista 2.5D
+    <string name="release_4_3">• Nuevo motor versión 2 (OpenGL) más rápido al visualizar mapas, con vista 2.5D
 \n
 \n • Animación suave para los cambios de ubicación al moverse
 \n
@@ -4889,4 +4889,19 @@
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
+    <string name="rendering_engine_failed_descr">OsmAnd ha vuelto el renderizado de mapas a la «Versión 1». Puedes intentar volver a cambiar al nuevo motor de renderizado «Versión 2 (OpenGL)» en los Ajustes.
+\n
+\nPor favor, ayuda con las mejoras enviando el registro de errores.</string>
+    <string name="show_map_symbols_desc">Texto, señales de tráfico y otros.</string>
+    <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd ha fallado recientemente.</string>
+    <string name="share_crash_log">Compartir registro de fallos</string>
+    <string name="dismiss_changes_descr">Todos los cambios serán descartados.</string>
+    <string name="dismiss_changes">¿Descartar cambios\?</string>
+    <string name="restart_now">Reiniciar ahora</string>
+    <string name="map_rendering_engine_v1">Versión 1</string>
+    <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">La versión 2 (OpenGL) del motor de renderizado de mapas, es más rápido y también cuenta con vista 2.5D. El renderizado de la versión 1, era el predefinido antes de la versión 4.3 de OsmAnd y sigue siendo preferible para los dispositivos más antiguos.</string>
+    <string name="map_rendering_engine">Motor de renderizado del mapa</string>
+    <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
+    <string name="show_map_symbols">Mostrar símbolos del mapa</string>
 </resources>

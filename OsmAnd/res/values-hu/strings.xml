@@ -4844,7 +4844,7 @@
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
     <string name="speak_route_recalculation">Útvonal újratervezés bemondása</string>
-    <string name="release_4_3">Új, gyorsabb térképrenderelő motor, 2.5D nézettel
+    <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térképmegjelenítő motor, 2.5D nézettel
 \n
 \n - Folytonos animáció a mozgás közbeni helyváltoztatáskor
 \n
@@ -4868,4 +4868,16 @@
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
     <string name="show_borders_of_downloaded_maps">A letöltött térképek színezése</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
+    <string name="map_rendering_engine_v1">1-es verzió</string>
+    <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
+    <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az 1-es verziójú térképmegjelenítéshez. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban.
+\n
+\nKérjük, támogassa a fejlesztéseket hibanaplója megadásával.</string>
+    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) a gyorsabb térképmegjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett a 4.3-as kiadás előtt és régebbi eszközökön még mindig előnyösebb a használata.</string>
+    <string name="rendering_engine_failed">Az OsmAnd térképmegjelenítése nemrég összeomlott.</string>
+    <string name="share_crash_log">Összeomlási napló megosztása</string>
+    <string name="dismiss_changes">Változtatások elvetése\?</string>
+    <string name="restart_now">Újraindítás most</string>
+    <string name="map_rendering_engine_v2">2-es verzió (OpenGL)</string>
+    <string name="map_rendering_engine">Térképmegjelenítő motor</string>
 </resources>
