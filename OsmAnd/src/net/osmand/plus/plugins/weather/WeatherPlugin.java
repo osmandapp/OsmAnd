@@ -296,9 +296,15 @@ public class WeatherPlugin extends OsmandPlugin {
 			}
 			mapView.refreshMap();
 		} else {
-			mapView.removeLayer(weatherLayerLow);
-			mapView.removeLayer(weatherLayerHigh);
-			mapView.removeLayer(weatherContourLayer);
+			if (mapView.isLayerExists(weatherLayerLow)) {
+				mapView.removeLayer(weatherLayerLow);
+			}
+			if (mapView.isLayerExists(weatherLayerHigh)) {
+				mapView.removeLayer(weatherLayerHigh);
+			}
+			if (mapView.isLayerExists(weatherContourLayer)) {
+				mapView.removeLayer(weatherContourLayer);
+			}
 		}
 	}
 
