@@ -2150,7 +2150,7 @@
     <string name="average_altitude">平均海拔</string>
     <string name="shared_string_time">時間</string>
     <string name="total_distance">總體距離</string>
-    <string name="routing_attr_driving_style_name">駕駛方式</string>
+    <string name="routing_attr_driving_style_name">騎乘方式</string>
     <string name="shared_string_gpx_tracks">軌跡</string>
     <string name="select_gpx_folder">選擇 GPX 檔案資料夾</string>
     <string name="file_can_not_be_moved">無法移動檔案。</string>
@@ -3323,7 +3323,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
     <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
     <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
-    <string name="monitoring_min_distance_descr">啟用此過濾器可以避免在幾乎未檢測到移動時記錄額外的資料。其也改進了軌道的空間外觀，無需進一步處理。</string>
+    <string name="monitoring_min_distance_descr">開啟此過濾器可以避免在幾乎未檢測到移動時記錄額外的資料。其也改進了軌道的空間外觀，無需進一步處理。</string>
     <string name="monitoring_min_distance_descr_side_effect">副作用：完全不記錄休息時間，或者每次只記錄一個點。也可能會濾除較小的動作（例如在路邊標記行程中可能出現的轉彎）。請注意，您的檔案可能包含較少的後處理資訊，同時可能會儲存因接收不良或晶片組影響而導致的 GPS 假軌跡。</string>
     <string name="monitoring_min_distance_descr_recommendation">建議：若您不想記錄路線的次要細節，也不需要額外的休息時間資料，請設置 5 公尺位移。</string>
     <string name="live_monitoring_time_buffer">緩衝時間</string>
@@ -4866,4 +4866,7 @@
 \n
 \n</string>
     <string name="external_sensors_support">外部感應器支援</string>
+    <string name="show_borders_of_downloaded_maps">已下載地圖的著色</string>
+    <string name="show_map_symbols">顯示地圖符號</string>
+    <string name="show_map_symbols_desc">文字與路標等等。</string>
 </resources>

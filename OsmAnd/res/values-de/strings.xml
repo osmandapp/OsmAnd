@@ -4876,4 +4876,7 @@
 \n• Option hinzugefügt, um Download-UUID zu deaktivieren
 \n
 \n</string>
+    <string name="show_borders_of_downloaded_maps">Einfärbung der heruntergeladenen Karten</string>
+    <string name="show_map_symbols">Kartensymbole anzeigen</string>
+    <string name="show_map_symbols_desc">Text, Verkehrszeichen und andere.</string>
 </resources>

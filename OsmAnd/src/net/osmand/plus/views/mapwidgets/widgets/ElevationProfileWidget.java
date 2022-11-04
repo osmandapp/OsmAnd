@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
@@ -34,12 +33,14 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
@@ -77,6 +78,9 @@ public class ElevationProfileWidget extends MapWidget {
 	private int firstVisiblePointIndex = -1;
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
+
+	@Nullable
+	private TrackChartPoints trackChartPoints;
 
 	private boolean movedToLocation;
 
@@ -388,6 +392,7 @@ public class ElevationProfileWidget extends MapWidget {
 		if (highlightPosition > minVisibleX && highlightPosition < maxVisibleX) {
 			minVisibleX = highlightPosition;
 		}
+		updateTrackChartPoints();
 		double fromDistance = minVisibleX * toMetersMultiplier;
 		double toDistance = maxVisibleX * toMetersMultiplier;
 		List<WptPt> points = this.allPoints;
@@ -423,6 +428,49 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		updateTextWidget(gradeView, maxGradeStr);
 		return true;
+	}
+
+	private void updateTrackChartPoints() {
+		Highlight highlight = getSelectedHighlight();
+		if (highlight != null) {
+			TrackChartPoints trackChartPoints = getTrackChartPoints();
+			LatLon location = TrackDetailsMenu.getLocationAtPos(chart, gpxItem, segment, highlight.getX(), true);
+			if (location != null) {
+				trackChartPoints.setHighlightedPoint(location);
+			}
+			if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+				mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
+			}
+			if (location != null) {
+				mapActivity.refreshMap();
+			}
+		}
+	}
+
+	@NonNull
+	private TrackChartPoints getTrackChartPoints() {
+		TrackChartPoints trackChartPoints = this.trackChartPoints;
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			int segmentColor = segment != null ? segment.getColor(0) : 0;
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setGpx(gpxItem.group.getGpxFile());
+			this.trackChartPoints = trackChartPoints;
+		}
+		return trackChartPoints;
+	}
+
+	@Nullable
+	private Highlight getSelectedHighlight() {
+		Highlight[] highlighted = chart.getHighlighted();
+		if (!Algorithms.isEmpty(highlighted)) {
+			for (Highlight highlight : highlighted) {
+				if (highlight instanceof GPXHighlight && !((GPXHighlight) highlight).shouldShowLocationIcon()) {
+					return highlight;
+				}
+			}
+		}
+		return null;
 	}
 
 	private void updateTextWidget(View container, String text) {

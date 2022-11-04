@@ -13,12 +13,12 @@
 		android:key="engine_opengl"
 		android:layout="@layout/preference_radio_item"
 		android:persistent="false"
-		android:title="@string/map_rendering_engine_new" />
+		android:title="@string/map_rendering_engine_v2" />
 
 	<CheckBoxPreference
 		android:key="engine_legacy"
 		android:layout="@layout/preference_radio_item"
 		android:persistent="false"
-		android:title="@string/map_rendering_engine_legacy" />
+		android:title="@string/map_rendering_engine_v1" />
 
 </PreferenceScreen>

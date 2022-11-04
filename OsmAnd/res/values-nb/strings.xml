@@ -4797,4 +4797,17 @@
     <string name="speak_route_recalculation">Meld om omberegning av rute</string>
     <string name="trip_recording_distance_widget_desc">Viser distansen for det gjeldende turopptaket.</string>
     <string name="trip_recording_uphill_widget_desc">Viser summen av alle stigninger for det gjeldende turopptaket.</string>
+    <string name="map_widget_rendering_fps">Kartgjengivelse FPS</string>
+    <string name="shared_string_identifiers">Identifikatorer</string>
+    <string name="terms_of_service_desc">Ved å laste ned kart godtar du %1$s og %2$s.</string>
+    <string name="location_simulation_speedup">Simulerings-hastighetsøkning</string>
+    <string name="simulate_location_by_gpx">Simuler posisjon med GPX</string>
+    <string name="send_uuid_preference_desc">En tilfeldig UUID brukes til å laste ned frakoblede kart fra OsmAnd-servere for å overvåke rettferdig bruk av serverressurser, forutsi trafikkmønstre og generere anonyme månedlige kartrapporter.</string>
+    <string name="send_uuid_preference">Send unik brukeridentifikator (UUID)</string>
+    <string name="map_widget_rendering_fps_desc">Viser hvor raskt kart og kartelementer vises og gjenoppfriskes, uttrykt i bilder per sekund (FPS).</string>
+    <string name="location_simulation_cutoff">Simulering hopper over de første meterne</string>
+    <string name="favorites_backup">Sikkerhetskopiering av favoritter</string>
+    <string name="show_map_symbols">Vis kartsymboler</string>
+    <string name="show_map_symbols_desc">Tekst, veiskilt og andre.</string>
+    <string name="show_borders_of_downloaded_maps">Fargelegging av nedlastede kartregioner</string>
 </resources>

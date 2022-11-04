@@ -38,7 +38,7 @@
 			android:textSize="@dimen/default_list_text_size"
 			osmand:lineHeight="@dimen/default_title_line_height"
 			osmand:typeface="@string/font_roboto_regular"
-			tools:text="@string/map_rendering_engine_legacy" />
+			tools:text="@string/map_rendering_engine_v1" />
 
 	</LinearLayout>
 
