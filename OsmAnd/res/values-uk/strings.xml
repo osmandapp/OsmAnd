@@ -2103,7 +2103,7 @@
     <string name="file_can_not_be_moved">Файл не може бути переміщений.</string>
     <string name="shared_string_move">Перемістити</string>
     <string name="shared_string_gpx_tracks">Треки</string>
-    <string name="routing_attr_driving_style_name">Стиль водіння</string>
+    <string name="routing_attr_driving_style_name">Стиль їзди</string>
     <string name="route_altitude">Висота маршруту</string>
     <string name="altitude_descent">Спуск</string>
     <string name="altitude_ascent">Підйом</string>
@@ -3330,7 +3330,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Побічний ефект: Внаслідок фільтрування за точністю, дані можуть бути повністю відсутні, наприклад, під мостами, під деревами, між високими будинками або за певних погодних умов.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Порада: Важко передбачити, що буде записано, а що ні, можливо, краще взагалі вимкнути цей фільтр.</string>
     <string name="monitoring_min_accuracy_descr_remark">Зауваження: Якщо GPS був вимкнений безпосередньо перед записом, точність визначення першої точки може бути низькою, тому в нашому коді ми можемо зачекати кілька секунд, перш ніж записати точку (або записати найкраще з 3-х послідовних точок тощо), але це ще не реалізовано.</string>
-    <string name="monitoring_min_distance_descr">Увімкнення цього фільтру дозволяє уникнути додаткового запису даних, коли рух майже не визначається. Також це покращує просторовий вигляд треків без додаткової обробки.</string>
+    <string name="monitoring_min_distance_descr">Увімкнення цього фільтру дозволяє уникнути додаткового запису даних, коли рух майже не визначається. Це також покращує просторовий вигляд треків без додаткової обробки.</string>
     <string name="monitoring_min_distance_descr_side_effect">Побічні ефекти: Періоди відпочинку не реєструються взагалі або реєструються лише по одному пункту. Незначні переміщення (наприклад, на узбіччя дороги для позначення можливого повороту в дорозі) можуть бути відфільтровані. Зауважте, що ваш файл міститиме менше даних для подальшої обробки, і водночас може потенційно зберегти GPS-артефакти, спричинені слабким сигналом або особливостями роботи чипів.</string>
     <string name="monitoring_min_distance_descr_recommendation">Порада: Установіть зміщення 5 метрів, якщо ви не хочете записувати дрібні деталі вашого маршруту, а також не потребуєте додаткових даних про період вашого відпочинку.</string>
     <string name="live_monitoring_time_buffer">Буфер часу</string>
@@ -4872,4 +4872,7 @@
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
+    <string name="show_map_symbols_desc">Текст, дорожні знаки тощо.</string>
+    <string name="show_borders_of_downloaded_maps">Забарвлення завантажених мап</string>
+    <string name="show_map_symbols">Показати символи мапи</string>
 </resources>

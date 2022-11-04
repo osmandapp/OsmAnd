@@ -4867,4 +4867,7 @@
 \n • Pridaná možnosť vypnutia UUID pre sťahovanie
 \n
 \n</string>
+    <string name="show_borders_of_downloaded_maps">Vyfarbenie stiahnutých máp</string>
+    <string name="show_map_symbols">Zobraziť mapové symboly</string>
+    <string name="show_map_symbols_desc">Texty, čísla ciest a iné.</string>
 </resources>
