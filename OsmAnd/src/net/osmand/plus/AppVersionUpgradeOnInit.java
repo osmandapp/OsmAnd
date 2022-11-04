@@ -120,12 +120,12 @@ class AppVersionUpgradeOnInit {
 	private boolean appVersionChanged;
 	private boolean firstTime;
 
-	AppVersionUpgradeOnInit(OsmandApplication app) {
+	AppVersionUpgradeOnInit(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
 	@SuppressLint("ApplySharedPref")
-	void upgradeVersion(SharedPreferences startPrefs, int lastVersion) {
+	void upgradeVersion(@NonNull SharedPreferences startPrefs, int lastVersion) {
 		if (!startPrefs.contains(NUMBER_OF_STARTS)) {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
@@ -158,20 +158,12 @@ class AppVersionUpgradeOnInit {
 						|| Version.getAppVersion(app).equals("3.5.4")) {
 					migratePreferences();
 					app.getAppInitializer().addListener(new AppInitializeListener() {
-						@Override
-						public void onStart(AppInitializer init) {
-
-						}
 
 						@Override
-						public void onProgress(AppInitializer init, InitEvents event) {
+						public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 								migrateHomeWorkParkingToFavorites();
 							}
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
 						}
 					});
 				}
@@ -183,20 +175,12 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_3_7_01) {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
-						@Override
-						public void onStart(AppInitializer init) {
-
-						}
 
 						@Override
-						public void onProgress(AppInitializer init, InitEvents event) {
+						public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
 								app.getFavoritesHelper().fixBlackBackground();
 							}
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
 						}
 					});
 				}
@@ -207,16 +191,8 @@ class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
 
 						@Override
-						public void onStart(AppInitializer init) {
+						public void onStart(@NonNull AppInitializer init) {
 							new MarkersDb39HelperLegacy(app).migrateMarkersGroups();
-						}
-
-						@Override
-						public void onProgress(AppInitializer init, InitEvents event) {
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
 						}
 					});
 				}

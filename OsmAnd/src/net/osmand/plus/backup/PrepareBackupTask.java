@@ -128,16 +128,9 @@ public class PrepareBackupTask {
 	private void doCollectLocalFiles() {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					init.removeListener(this);
 					collectLocalFilesImpl();
 				}

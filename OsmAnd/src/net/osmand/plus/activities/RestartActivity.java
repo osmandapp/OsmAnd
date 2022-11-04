@@ -84,10 +84,12 @@ public class RestartActivity extends AppCompatActivity {
 		doRestart(ctx, ctx.getString(R.string.restart_is_required));
 	}
 
-	public static void doRestart(@NonNull Context ctx, String message) {
+	public static void doRestart(@NonNull Context ctx, @Nullable String message) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(R.string.shared_string_restart);
 		builder.setMessage(message);
-		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> doRestartSilent(ctx));
+		builder.setNegativeButton(R.string.later, null);
+		builder.setPositiveButton(R.string.restart_now, (dialog, which) -> doRestartSilent(ctx));
 		builder.show();
 	}
 

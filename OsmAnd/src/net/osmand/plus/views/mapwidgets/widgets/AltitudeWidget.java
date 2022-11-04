@@ -57,6 +57,7 @@ public class AltitudeWidget extends TextInfoWidget {
 				if (location != null && location.hasAltitude()) {
 					return location.getAltitude();
 				}
+				break;
 			}
 			case ALTITUDE_MAP_CENTER: {
 				MapRendererView mapRenderer = mapView.getMapRenderer();
@@ -65,6 +66,7 @@ public class AltitudeWidget extends TextInfoWidget {
 					PointI screenPoint = new PointI(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 					return NativeUtilities.getAltitudeForPixelPoint(mapRenderer, screenPoint);
 				}
+				break;
 			}
 		}
 		return null;

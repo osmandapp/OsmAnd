@@ -5,11 +5,6 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.Surface;
 
-import net.osmand.Location;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.AppManager;
@@ -19,6 +14,11 @@ import androidx.car.app.SurfaceContainer;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+
+import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 /**
  * A very simple implementation of a renderer for the app's background surface.
@@ -45,84 +45,83 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
 	}
 
-	public final SurfaceCallback mSurfaceCallback =
-			new SurfaceCallback() {
-				@Override
-				public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
-					synchronized (SurfaceRenderer.this) {
-						Log.i(TAG, "Surface available " + surfaceContainer);
-						if (mSurface != null) {
-							mSurface.release();
-						}
-						mSurface = surfaceContainer.getSurface();
-						surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
-						darkMode = mCarContext.isDarkMode();
-						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
-						if (mapView != null) {
-							mapView.setupOpenGLView();
-						}
-						renderFrame();
-					}
+	public final SurfaceCallback mSurfaceCallback = new SurfaceCallback() {
+		@Override
+		public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
+			synchronized (SurfaceRenderer.this) {
+				Log.i(TAG, "Surface available " + surfaceContainer);
+				if (mSurface != null) {
+					mSurface.release();
 				}
+				mSurface = surfaceContainer.getSurface();
+				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
+				darkMode = mCarContext.isDarkMode();
+				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+				if (mapView != null) {
+					mapView.setupRenderingView();
+				}
+				renderFrame();
+			}
+		}
 
-				@Override
-				public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
-					synchronized (SurfaceRenderer.this) {
-						Log.i(TAG, "Visible area changed " + mSurface + ". stableArea: "
-								+ mStableArea + " visibleArea:" + visibleArea);
-						mVisibleArea = visibleArea;
-						renderFrame();
-					}
-				}
+		@Override
+		public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
+			synchronized (SurfaceRenderer.this) {
+				Log.i(TAG, "Visible area changed " + mSurface + ". stableArea: "
+						+ mStableArea + " visibleArea:" + visibleArea);
+				mVisibleArea = visibleArea;
+				renderFrame();
+			}
+		}
 
-				@Override
-				public void onStableAreaChanged(@NonNull Rect stableArea) {
-					synchronized (SurfaceRenderer.this) {
-						Log.i(TAG, "Stable area changed " + mSurface + ". stableArea: "
-								+ mStableArea + " visibleArea:" + mVisibleArea);
-						mStableArea = stableArea;
-						renderFrame();
-					}
-				}
+		@Override
+		public void onStableAreaChanged(@NonNull Rect stableArea) {
+			synchronized (SurfaceRenderer.this) {
+				Log.i(TAG, "Stable area changed " + mSurface + ". stableArea: "
+						+ mStableArea + " visibleArea:" + mVisibleArea);
+				mStableArea = stableArea;
+				renderFrame();
+			}
+		}
 
-				@Override
-				public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
-					synchronized (SurfaceRenderer.this) {
-						Log.i(TAG, "Surface destroyed");
-						if (mSurface != null) {
-							mSurface.release();
-							mSurface = null;
-						}
-						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
-						if (mapView != null) {
-							mapView.setupOpenGLView();
-						}
-					}
+		@Override
+		public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
+			synchronized (SurfaceRenderer.this) {
+				Log.i(TAG, "Surface destroyed");
+				if (mSurface != null) {
+					mSurface.release();
+					mSurface = null;
 				}
+				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+				if (mapView != null) {
+					mapView.setupRenderingView();
+				}
+			}
+		}
 
-				@Override
-				public void onScroll(float distanceX, float distanceY) {
-					synchronized (SurfaceRenderer.this) {
-						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
-						if (mapView != null) {
-							mapView.scrollMap(distanceX, distanceY);
-						}
-					}
+		@Override
+		public void onScroll(float distanceX, float distanceY) {
+			synchronized (SurfaceRenderer.this) {
+				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+				if (mapView != null) {
+					mapView.scrollMap(distanceX, distanceY);
 				}
+			}
+		}
 
-				@Override
-				public void onFling(float velocityX, float velocityY) {
-					OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
-					if (mapView != null) {
-						mapView.flingMap(0, 0, velocityX, velocityY);
-					}
-				}
+		@Override
+		public void onFling(float velocityX, float velocityY) {
+			OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+			if (mapView != null) {
+				mapView.flingMap(0, 0, velocityX, velocityY);
+			}
+		}
 
-				@Override
-				public void onScale(float focusX, float focusY, float scaleFactor) {
-					//TODO handleScale(focusX, focusY, scaleFactor);
-				}
-			};
+		@Override
+		public void onScale(float focusX, float focusY, float scaleFactor) {
+			//TODO handleScale(focusX, focusY, scaleFactor);
+		}
+	};
 
 	public SurfaceRenderer(@NonNull CarContext carContext, @NonNull Lifecycle lifecycle) {
 		mCarContext = carContext;

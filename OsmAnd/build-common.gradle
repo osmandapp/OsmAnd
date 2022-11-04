@@ -198,6 +198,19 @@ task collectHelpContentsAssets(type: Copy) {
 	into "assets/feature_articles"
 }
 
+task copyProjDb(type: Copy) {
+	from("../../resources/proj") {
+		include "proj.db"
+	}
+	into "assets"
+}
+
+task copyWeatherFiles(type: Copy) {
+	from "../../resources/weather"
+	into "assets/weather"
+	include "*.*"
+}
+
 task copyPoiCategories(type: Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
@@ -283,6 +296,8 @@ task collectExternalResources {
 			copyWidgetIcons,
 			copyWidgetIconsHdpi,
 			copyWidgetIconsXhdpi,
+			copyProjDb,
+			copyWeatherFiles,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
 			downloadDefaultWikivoyage

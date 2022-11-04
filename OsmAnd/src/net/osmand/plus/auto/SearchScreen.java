@@ -361,15 +361,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	}
 
 	@Override
-	public void onStart(AppInitializer init) {
-	}
-
-	@Override
-	public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-	}
-
-	@Override
-	public void onFinish(AppInitializer init) {
+	public void onFinish(@NonNull AppInitializer init) {
 		loading = false;
 		if (!destroyed) {
 			reloadHistoryInternal();

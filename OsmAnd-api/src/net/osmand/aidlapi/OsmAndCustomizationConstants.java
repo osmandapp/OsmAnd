@@ -59,6 +59,7 @@ public interface OsmAndCustomizationConstants {
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
+	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
@@ -122,6 +123,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_WIKIPEDIA = "osmand.wikipedia";
 	String PLUGIN_OPEN_PLACE_REVIEWS = "osmand.openplacereviews";
 	String PLUGIN_ANT_PLUS = "osmand.antplus";
+	String PLUGIN_WEATHER = "osmand.weather";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";
@@ -177,6 +179,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+	String FRAGMENT_RENDER_INIT_ERROR_ID = FRAGMENT_ID + "render_init_error";
 	String FRAGMENT_DESTINATION_REACHED_ID = FRAGMENT_ID + "destination_reached";
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";

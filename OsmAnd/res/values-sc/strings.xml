@@ -4821,7 +4821,7 @@
     <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
     <string name="depth_contours">Lìnias nàuticas de profundidade</string>
     <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/Web) chene costos additzionales.</string>
-    <string name="shared_string_cross_buy">Còmpora rugrada</string>
+    <string name="shared_string_cross_buy">Còmpora multi-prataforma</string>
     <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
     <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
     <string name="map_widget_altitude_map_center_desc">Ammustrat s\'artària subra de su livellu de su mare de su tzentru atuale de sa mapa.</string>
@@ -4832,13 +4832,13 @@
     <string name="current_location_widget">Coordinadas: positzione atuale</string>
     <string name="map_widget_altitude_current_location">Artària: positzione atuale</string>
     <string name="map_widget_altitude_current_location_desc">Ammustrat s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale.</string>
-    <string name="map_widget_altitude_desc">Sos widgets ammustrant s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale o de su tzentru atuale de sa mapa</string>
+    <string name="map_widget_altitude_desc">Ammustra s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale o de su tzentru atuale de sa mapa</string>
     <string name="map_widget_rendering_fps">FPS de sa renderizatzione de sa mapa</string>
-    <string name="map_widget_rendering_fps_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados (esprìmidu in fotogrammas pro su segundu o FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados, esprìmidu in fotogrammas pro su segundu (FPS).</string>
     <string name="simulate_location_by_gpx">Sìmula sa positzione cun su GPX</string>
     <string name="location_simulation_cutoff">Sa simulatzione brincat sos primos metros</string>
     <string name="location_simulation_speedup">Atzellerada de sa simulatzione</string>
-    <string name="send_uuid_preference_desc">Unu UUID casuale s\'impreat pro iscarrigare mapas non in lìnia dae sos serbidores de OsmAnd pro monitorare s\'impreu curretu de sas resursas de su serbidore, adivinare s\'impreu de tràficu de tràficu e ingendrare informes anònimos de sas mapas pro cada mese.</string>
+    <string name="send_uuid_preference_desc">Unu UUID casuale s\'impreat pro iscarrigare mapas non in lìnia dae sos serbidores de OsmAnd pro monitorare s\'impreu curretu de sas resursas de su serbidore, adivinare sos modellos de tràficu de tràficu e ingendrare informes anònimos de sas mapas pro cada mese.</string>
     <string name="send_uuid_preference">Imbia un\'identificadore anònimu de impreadore (UUID)</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="terms_of_service_desc">Iscarrighende mapas atzetas sas %1$s e %2$s.</string>

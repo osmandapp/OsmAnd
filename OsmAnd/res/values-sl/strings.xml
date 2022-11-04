@@ -4818,4 +4818,32 @@
     <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
     <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
     <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>
+    <string name="external_sensors_plugin_name">Zunanji senzorji</string>
+    <string name="map_center_widget">Koordinate: središče zemljevida</string>
+    <string name="current_location_widget">Koordinate: trenutna lokacija</string>
+    <string name="speak_gps_signal_status">Napovej izgubo in obnovitev signala GPS</string>
+    <string name="speak_route_recalculation">Napovej preračun poti</string>
+    <string name="external_sensors_support">Podpora za zunanje senzorje</string>
+    <string name="release_4_3">• Nov, hitrejši mehanizem za upodabljanje zemljevidov z 2,5D pogledom.
+\n
+\n • Gladka animacija sprememb lokacije med gibanjem.
+\n
+\n • Novi gradniki za središčne koordinate zemljevida in nadmorsko višino točk.
+\n
+\n • »Razdalja z dotikom«: dodane možnosti velikosti besedila.
+\n
+\n • Pripomoček »Označevalnik zemljevida«: dodana možnost za spreminjanje vedenja pri kliku.
+\n
+\n • Popravljena možnost »Položaj zaslona«.
+\n
+\n • GPX: dodana podpora za oznake »link«, »cmt«, »desc« in za vse razširitve po meri.
+\n
+\n • Prenovljen seznam »Navtične karte«.
+\n
+\n • Dodana podpora za senzorje ANT+.
+\n
+\n • Dodana možnost za onemogočanje prenosa UUID.
+\n
+\n</string>
+    <string name="purchases_feature_desc_external_sensors">Prikaz in snemanje podatkov iz zunanjih senzorjev: hitrost kolesa, moč kolesa, kadenca in srčni utrip.</string>
 </resources>

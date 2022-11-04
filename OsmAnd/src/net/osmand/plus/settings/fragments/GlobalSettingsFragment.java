@@ -18,6 +18,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
@@ -45,6 +46,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String HISTORY_PREF_ID = "history";
+	private static final String MAP_RENDERING_ENGINE_ID = "map_rendering_engine";
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
@@ -54,6 +56,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupDefaultAppModePref();
 		setupPreferredLocalePref();
 		setupExternalStorageDirPref();
+		setupMapRenderingEnginePref();
 
 		setupSendAnonymousDataPref();
 		setupSendUniqueIdentifiersPreference();
@@ -210,7 +213,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			return;
 		}
 		ListPreferenceEx preferredLocale = findPreference(settings.PREFERRED_LOCALE.getId());
-		preferredLocale.setIcon(getActiveIcon(R.drawable.ic_action_map_language));
+		preferredLocale.setIcon(getContentIcon(R.drawable.ic_action_map_language));
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
 		Map<String, String> preferredLanguages = getPreferredDisplayLanguages(ctx);
@@ -218,7 +221,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
 		preferredLocale.setEntries(languagesNames);
 		preferredLocale.setEntryValues(languagesIds);
-
 
 		// Add " (Display language)" to menu title in Latin letters for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
@@ -228,7 +230,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupExternalStorageDirPref() {
 		Preference externalStorageDir = findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
-		externalStorageDir.setIcon(getActiveIcon(R.drawable.ic_action_folder));
+		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
 
 		DataStorageHelper holder = new DataStorageHelper(app);
 		StorageItem currentStorage = holder.getCurrentStorage();
@@ -251,6 +253,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		}
 	}
 
+	private void setupMapRenderingEnginePref() {
+		Preference preference = findPreference(MAP_RENDERING_ENGINE_ID);
+		preference.setIcon(getContentIcon(R.drawable.ic_map));
+		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_v2 : R.string.map_rendering_engine_v1);
+		preference.setVisible(Version.isOpenGlAvailable(app));
+	}
+
 	private void setupSendAnonymousDataPref() {
 		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
@@ -265,13 +274,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupDialogsAndNotificationsPref() {
-		Preference dialogsAndNotifications = findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
-		dialogsAndNotifications.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
-		if (getSettings() == null) {
-			return;
-		}
-		boolean showStartupMessages = !getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get();
-		boolean showDownloadMapDialog = getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get();
+		boolean showStartupMessages = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get();
+		boolean showDownloadMapDialog = settings.SHOW_DOWNLOAD_MAP_DIALOG.get();
 		String summary;
 		if (showStartupMessages && showDownloadMapDialog) {
 			summary = getString(R.string.shared_string_all);
@@ -280,6 +284,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		} else {
 			summary = getString(R.string.shared_string_disabled);
 		}
+		Preference dialogsAndNotifications = findPreference(DIALOGS_AND_NOTIFICATIONS_PREF_ID);
+		dialogsAndNotifications.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 		dialogsAndNotifications.setSummary(summary);
 	}
 

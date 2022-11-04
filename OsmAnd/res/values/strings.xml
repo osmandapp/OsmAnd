@@ -11,13 +11,72 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_offline_forecast">Offline forecast</string>
+    <string name="weather_online_cache">Online cache</string>
+    <string name="map_settings_weather_temp">Temperature</string>
+    <string name="map_settings_weather_air_pressure">Air pressure</string>
+    <string name="map_settings_weather_wind">Wind</string>
+    <string name="map_settings_weather_cloud">Cloud</string>
+    <string name="map_settings_weather_precip">Precipitation</string>
+    <string name="measurement_units">Measurement units</string>
+    <string name="shared_string_weather">Weather</string>
+    <string name="explore_weather_forecast">Explore Weather forecast.</string>
+    <string name="shared_string_contours">Contours</string>
+    <string name="shared_string_layers">Layers</string>
+    <string name="empty_screen_weather_contours">Turn on to view weather contours on the map.</string>
+    <string name="empty_screen_weather_pressure_layer">Turn on to view pressure layer on the map.</string>
+    <string name="empty_screen_weather_clouds_layer">Turn on to view clouds layer on the map.</string>
+    <string name="empty_screen_weather_wind_layer">Turn on to view wind layer on the map.</string>
+    <string name="empty_screen_weather_precipitation_layer">Turn on to view precipitation layer on the map.</string>
+    <string name="empty_screen_weather_temperature_layer">Turn on to view temperature layer on the map.</string>
+    <string name="empty_screen_view_selected_weather_data">Turn on to view selected weather data on map.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Inches</string>
+    <string name="weather_precip_milimeters">Milimeters</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Knots</string>
+    <string name="weather_wind_miles_per_hour">Miles per hour</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometers per hour</string>
+    <string name="weather_wind_meters_per_second">Meters/Second</string>
+    <string name="weather_widgets_secondary_desc">Measurement units could be changed in Weather plugin settings.</string>
+    <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
+    <string name="clouds_widget_desc">Shows clouds for current map center.</string>
+    <string name="wind_widget_desc">Shows wind speed for current map center.</string>
+    <string name="precipitation_widget_desc">Shows precipitation for current map center.</string>
+    <string name="temperature_widget_desc">Shows temperature for current map center.</string>
+    <string name="weather_widget_group_desc">A set of widgets showing a various weather information.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hectopascals</string>
+    <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
+    <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
+    <string name="weather_prefs_descr">24h hourly forecast &amp; 7 days forecast each 3 hours</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd has reverted to \'Version 1\' map rendering. You can try to switch back to the new \'Version 2 (OpenGL)\' rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
+    <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
+    <string name="share_crash_log">Share crash log</string>
+    <string name="dismiss_changes_descr">All changes will be dismissed.</string>
+    <string name="dismiss_changes">Dismiss changes?</string>
+    <string name="restart_now">Restart now</string>
+    <string name="map_rendering_engine_v1">Version 1</string>
+    <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is the faster map rendering engine also featuring 2.5D view. Version 1 rendering was the default before release 4.3, and is still preferable for older devices.</string>
+    <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
     <string name="show_map_symbols_desc">Text, road signs, and others.</string>
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
     <string name="external_sensors_support">External sensors support</string>
     <string name="release_4_3">
-    • New, faster map rendering engine, with 2.5D view\n\n
+    • New, faster Version 2 (OpenGL) map rendering engine, with 2.5D view\n\n
     • Smooth animation of location changes while in motion\n\n
     • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
@@ -2381,7 +2440,7 @@
     <string name="file_can_not_be_moved">Could not move file.</string>
     <string name="shared_string_move">Move</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
-    <string name="routing_attr_driving_style_name">Driving style</string>
+    <string name="routing_attr_driving_style_name">Riding style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Downhill</string>
     <string name="altitude_ascent">Uphill</string>
@@ -2401,7 +2460,7 @@
 	\u2022 Visibility enhancements in several map styles and Wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
 	\u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
-	\u2022 \"Driving style\" setting and logic improvements for bicycle routing\n\n
+	\u2022 \"Riding style\" setting and logic improvements for bicycle routing\n\n
 	\u2022 Altitude data settings for bicycle routing\n\n
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…

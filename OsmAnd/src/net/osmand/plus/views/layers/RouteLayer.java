@@ -158,7 +158,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		super.onUpdateFrame(mapRenderer);
 		if (hasMapRenderer() && !helper.isPublicTransportMode()
 				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			drawLocations(null, view.getRotatedTileBox());
+			getApplication().runInUIThread(() -> drawLocations(null, view.getRotatedTileBox()));
 		}
 	}
 

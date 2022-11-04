@@ -113,4 +113,10 @@
 
 	<asset source="World_basemap_mini.obf" destination="World_basemap_mini.obf" mode="alwaysOverwriteOrCopy" />
 	<asset source="Default_wikivoyage.travel.obf" destination="travel/Default_wikivoyage.travel.obf" mode="copyOnlyIfDoesNotExist" />
+	<asset source="proj.db" destination="proj.db" mode="copyOnlyIfDoesNotExist" />
+	<asset source="weather/cloud_color.txt" destination="weather/cloud_color.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="weather/precip_color.txt" destination="weather/precip_color.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="weather/pressure_color.txt" destination="weather/pressure_color.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="weather/temperature_color.txt" destination="weather/temperature_color.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="weather/wind_color.txt" destination="weather/wind_color.txt" mode="copyOnlyIfDoesNotExist" />
 </assets>

@@ -338,26 +338,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void setupOpenGLView() {
+	public void setupRenderingView() {
 		if (application.isApplicationInitializing()) {
 			application.getAppInitializer().addListener(new AppInitializeListener() {
-
 				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-					application.getOsmandMap().setupOpenGLView(false);
+				public void onFinish(@NonNull AppInitializer init) {
+					application.getOsmandMap().setupRenderingView();
 					application.getOsmandMap().refreshMap();
 				}
 			});
 		} else {
-			application.getOsmandMap().setupOpenGLView(true);
+			application.getOsmandMap().setupRenderingView();
 		}
 	}
 
@@ -632,15 +623,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners = Algorithms.addToList(locationListeners, listener);
+		if (!locationListeners.contains(listener)) {
+			locationListeners = Algorithms.addToList(locationListeners, listener);
+		}
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
 		locationListeners = Algorithms.removeFromList(locationListeners, listener);
 	}
 
-	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
-		this.onDrawMapListener = onDrawMapListener;
+	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
+		this.onDrawMapListener = listener;
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
@@ -1704,9 +1697,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (doubleTapScaleDetector != null && !doubleTapScaleDetector.isInZoomMode()) {
 				if (isZoomingAllowed(getZoom(), 1.1f)) {
 					RotatedTileBox tb = getCurrentRotatedTileBox();
-					double lat = tb.getLatFromPixel(e.getX(), e.getY());
-					double lon = tb.getLonFromPixel(e.getX(), e.getY());
-					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
+					LatLon latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, e.getX(), e.getY());
+					if (mapRenderer != null) {
+						PointI start31 = mapRenderer.getTarget();
+						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
+								latlon.getLatitude(), latlon.getLongitude(), false);
+						latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
+								(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
+								MapUtils.get31LongitudeX((int) Math.round(
+								(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
+					}
+					getAnimatedDraggingThread().startMoving(
+							latlon.getLatitude(), latlon.getLongitude(), getZoom() + 1, true);
 				}
 				afterDoubleTap = true;
 				return true;
