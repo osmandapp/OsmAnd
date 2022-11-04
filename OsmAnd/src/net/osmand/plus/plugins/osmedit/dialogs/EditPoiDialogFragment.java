@@ -63,6 +63,7 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -109,17 +110,17 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String KEY_AMENITY_ENTITY = "key_amenity_entity";
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
+	private static final int ADVANCED_TAB = 1;
 
 	public static final HashSet<String> BASIC_TAGS = new HashSet<String>();
-	public static final int ADVANCED_TAB = 1;
 
 	static {
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.NAME.getValue());
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.PHONE.getValue());
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.WEBSITE.getValue());
-		BASIC_TAGS.add(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
+		BASIC_TAGS.add(OSMTagKey.NAME.getValue());
+		BASIC_TAGS.add(OSMTagKey.ADDR_STREET.getValue());
+		BASIC_TAGS.add(OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
+		BASIC_TAGS.add(OSMTagKey.PHONE.getValue());
+		BASIC_TAGS.add(OSMTagKey.WEBSITE.getValue());
+		BASIC_TAGS.add(OSMTagKey.OPENING_HOURS.getValue());
 	}
 
 	private OsmandApplication app;
@@ -279,15 +280,15 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
 					if (!TextUtils.isEmpty(s)) {
-						getEditPoiData().putTag(OSMSettings.OSMTagKey.NAME.getValue(),
+						getEditPoiData().putTag(OSMTagKey.NAME.getValue(),
 								s.toString());
 					} else {
-						getEditPoiData().removeTag(OSMSettings.OSMTagKey.NAME.getValue());
+						getEditPoiData().removeTag(OSMTagKey.NAME.getValue());
 					}
 				}
 			}
 		});
-		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
+		poiNameEditText.setText(editPoiData.getTag(OSMTagKey.NAME.getValue()));
 		poiNameEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(getActivity(), poiNameEditText);
 		poiTypeTextInputLayout = view.findViewById(R.id.poiTypeTextInputLayout);
@@ -422,13 +423,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
 			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
-			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
+			if (Algorithms.isEmpty(editPoiData.getTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
 				int messageId = R.string.save_poi_without_poi_type_message;
 				SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 			} else {
 				save();
 			}
-		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()))) {
+		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMTagKey.NAME.getValue()))) {
 			int messageId = R.string.save_poi_too_many_uppercase;
 			SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 		} else if (editPoiData.getPoiCategory() == app.getPoiTypes().getOtherPoiCategory()) {

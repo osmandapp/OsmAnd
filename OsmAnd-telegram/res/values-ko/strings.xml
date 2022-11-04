@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="searching_for_gps">포지셔닝…</string>
+    <string name="not_sent_yet">아직 전송되지 않음</string>
+    <string name="send_report">보고서 보내기</string>
+    <string name="status_widget_title">OsmAnd 추적기 상태</string>
+    <string name="shared_string_hide">숨기기</string>
+    <string name="not_possible_to_send_to_telegram_chats">텔레그램 채팅으로 보낼 수 없음:</string>
+    <string name="shared_string_error">오류</string>
+    <string name="last_update_from_telegram_date">텔레그램의 마지막 업데이트: %1$s</string>
+    <string name="logcat_buffer_descr">앱의 상세 로그 확인 및 공유</string>
+    <string name="logcat_buffer">로그캣 버퍼</string>
+    <string name="background_work">배경 작업</string>
+    <string name="battery_optimization_description">OsmAnd 트래커의 배터리 최적화를 꺼서 백그라운드에서 갑자기 꺼지지 않도록 하세요.</string>
+    <string name="sharing_in_background">백그라운드에서 공유</string>
+    <string name="go_to_settings">설정으로 바로 가기</string>
+    <string name="shared_string_export">내보내기</string>
+    <string name="last_response_date">마지막 응답: %1$s</string>
+    <string name="last_response_duration">최근 응답 : %1$s 전</string>
+    <string name="last_update_from_telegram_duration">텔레그램의 최종 업데이트: %1$s 전</string>
+    <string name="back_to_osmand">OsmAnd로 돌아가기</string>
+    <string name="buffer_time">버퍼 만료 시간</string>
+    <string name="shared_string_suggested">제안</string>
+    <string name="last_updated_location">마지막 업데이트 위치:</string>
+    <string name="sending_location_messages">발신 위치</string>
+    <string name="initializing">시작</string>
+    <string name="no_gps_connection">GPS 연결 없음</string>
+    <string name="connecting_to_the_internet">인터넷에 연결하기</string>
+    <string name="not_found_yet">아직 찾을 수 없음</string>
+    <string name="shared_string_status">상태</string>
+    <string name="re_send_location">위치 재전송</string>
+    <string name="last_available_location">사용 가능한 마지막 위치</string>
+    <string name="shared_string_enabled">활성화</string>
+    <string name="sharing_status">공유 상태</string>
+</resources>

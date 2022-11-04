@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class OsmPoint  implements Serializable {
+public abstract class OsmPoint implements Serializable {
 
 	public enum Group {BUG, POI}
 
@@ -14,6 +14,7 @@ public abstract class OsmPoint  implements Serializable {
 
 	public static final Map<Action, String> stringAction = new HashMap<Action, String>();
 	public static final Map<String, Action> actionString = new HashMap<String, Action>();
+
 	static {
 		stringAction.put(Action.CREATE, "create");
 		stringAction.put(Action.MODIFY, "modify");
@@ -28,7 +29,7 @@ public abstract class OsmPoint  implements Serializable {
 
 	private Action action;
 
-	public OsmPoint(){
+	public OsmPoint() {
 	}
 
 	public LatLon getLocation() {
@@ -47,7 +48,6 @@ public abstract class OsmPoint  implements Serializable {
 		return action;
 	}
 
-
 	public void setAction(String action) {
 		this.action = actionString.get(action);
 	}
@@ -56,11 +56,9 @@ public abstract class OsmPoint  implements Serializable {
 		this.action = action;
 	}
 
-
 	@Override
 	public String toString() {
 		return new StringBuffer("Osm Point ").append(this.getAction()).append(" ")
-			.toString();
+				.toString();
 	}
-
 }

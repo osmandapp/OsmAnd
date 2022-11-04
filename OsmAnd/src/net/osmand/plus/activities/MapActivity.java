@@ -2,6 +2,11 @@ package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
@@ -72,6 +77,7 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.RenderInitErrorBottomSheet;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
@@ -281,7 +287,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMapView().setMapActivity(this);
 		getMapLayers().setMapActivity(this);
 
-		intentHelper = new IntentHelper(this, getMyApplication());
+		intentHelper = new IntentHelper(this);
 		intentHelper.parseLaunchIntents();
 
 		OsmandMapTileView mapView = getMapView();
@@ -391,69 +397,50 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
-				boolean openGlSetup;
+
+				boolean openglSetup;
 
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 					String tn = init.getCurrentInitTaskName();
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
-					boolean openGlInitialized = event == InitEvents.NATIVE_OPEN_GL_INITIALIZED && NativeCoreContext.isInit();
-					if ((openGlInitialized || event == InitEvents.NATIVE_INITIALIZED) && !openGlSetup) {
-						app.getOsmandMap().setupOpenGLView(false);
-						openGlSetup = true;
+					boolean openGlInitialized = event == NATIVE_OPEN_GL_INITIALIZED && NativeCoreContext.isInit();
+					if ((openGlInitialized || event == NATIVE_INITIALIZED) && !openglSetup) {
+						app.getOsmandMap().setupOpenGLView();
+						openglSetup = true;
 					}
-					if (event == InitEvents.MAPS_INITIALIZED) {
+					if (event == MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
 						getMapView().refreshMap(false);
-						if (dashboardOnMap != null) {
-							dashboardOnMap.updateLocation(true, true, false);
-						}
+						dashboardOnMap.updateLocation(true, true, false);
 						app.getTargetPointsHelper().lookupAddressAll();
 					}
-					if (event == InitEvents.FAVORITES_INITIALIZED) {
+					if (event == FAVORITES_INITIALIZED) {
 						refreshMap();
 					}
-					if (event == InitEvents.ROUTING_CONFIG_INITIALIZED) {
+					if (event == ROUTING_CONFIG_INITIALIZED) {
 						restoreNavigationHelper.checkRestoreRoutingMode();
 					}
 				}
 
 				@Override
-				public void onFinish(AppInitializer init) {
-					if (!openGlSetup) {
-						app.getOsmandMap().setupOpenGLView(false);
+				public void onFinish(@NonNull AppInitializer init) {
+					if (!openglSetup) {
+						app.getOsmandMap().setupOpenGLView();
 					}
 					getMapView().refreshMap(false);
-					if (dashboardOnMap != null) {
-						dashboardOnMap.updateLocation(true, true, false);
-					}
+					dashboardOnMap.updateLocation(true, true, false);
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
 					findViewById(R.id.drawer_layout).invalidate();
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(initListener);
 		} else {
-			app.getOsmandMap().setupOpenGLView(true);
+			app.getOsmandMap().setupOpenGLView();
 			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
-	}
-
-	public void showHorizontalProgressBar() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		setupProgressBar(pb, true);
-		pb.setVisibility(View.VISIBLE);
-	}
-
-	public void hideHorizontalProgressBar() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
-		pb.setVisibility(View.GONE);
 	}
 
 	private void createProgressBarForRouting() {
@@ -676,6 +663,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (!dashboardOnMap.isVisible()) {
 				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+				} else if (RenderInitErrorBottomSheet.shouldShow(settings, this)) {
+					SecondSplashScreenFragment.SHOW = false;
+					RenderInitErrorBottomSheet.showInstance(fragmentManager);
 				} else if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 					SecondSplashScreenFragment.SHOW = false;
 					CrashBottomSheetDialogFragment.showInstance(fragmentManager);
@@ -1098,10 +1088,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
 		}
-	}
-
-	public OsmandApplication getMyApplication() {
-		return ((OsmandApplication) getApplication());
 	}
 
 	@Override

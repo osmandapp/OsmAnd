@@ -3659,7 +3659,7 @@
 \n
 \n</string>
     <string name="gpx_split_interval_descr">Válassza ki, hogy a nyomvonalon milyen távolság- vagy időintervallumok jelzései jelenjenek meg.</string>
-    <string name="monitoring_min_distance_descr">Ez a szűrő kiküszöböli az ismétlődő pontok felvételét ott, ahol túl kevés tényleges mozgás történhetett, így szebb lesz a később utólag fel nem dolgozott nyomvonalak térbeli megjelenése.</string>
+    <string name="monitoring_min_distance_descr">Ennek a szűrőnek a bekapcsolása kiküszöböli további adatok felvételét akkor, ha mozgás gyakorlatilag nem érzékelhető. Emellett javul a nyomvonalak térbeli megjelenése, utólagos feldolgozás nélkül is.</string>
     <string name="multimedia_rec_split_title">Felvétel vágása</string>
     <string name="disable_recording_once_app_killed_descrp">A nyomvonal naplózása szünetelni fog, amikor az alkalmazást (újabb alkalmazásokkal) kilövik. (Ilyenkor az OsmAnd háttérjelzése is eltűnik az Android értesítési sávjáról.)</string>
     <string name="monitoring_min_speed_descr_recommendation">Javaslat: Először próbálja meg a mozgásérzékelést használni a legkisebb elmozdulást naplózó szűrővel (B). Ez jobb eredményeket hozhat, és kevesebb adatot veszít. Ha a nyomvonalak alacsony sebességnél továbbra is zajosak, próbálkozzon itt nullától eltérő értékekkel. Felhívjuk figyelmét, hogy egyes (hálózatalapú módszereket használó) mérőeszközök egyáltalán nem adnak sebességértéket, így ebben az esetben semmi sem lesz felvéve.</string>
@@ -3704,7 +3704,7 @@
     <string name="open_saved_track">Elmentett nyomvonal megnyitása</string>
     <string name="import_track_descr">Válassza ki a követni kívánt nyomvonalfájlt, vagy importáljon egyet a készülékéről.</string>
     <string name="gpx_direction_arrows">Irányt mutató nyilak</string>
-    <string name="monitoring_min_distance_descr_recommendation">Javaslat: Az 5 méteres beállítás megfelelő lehet, ha nem szükséges ennél finomabb részleteket rögzítenie, és nyugalmi állapotban sem akar kifejezetten adatokat rögzíteni.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Javaslat: Állítson be 5 méteres tűrést, ha nem szükséges ennél finomabb részleteket rögzítenie és nyugalmi állapotban sincs szüksége további adatokra.</string>
     <string name="next_segment">Következő szakasz</string>
     <string name="plan_route_trim_before">Kiigazítás ez előtt:</string>
     <string name="simplified_track">Egyszerűsített nyomvonal</string>
@@ -3748,7 +3748,7 @@
     <string name="nearest_point">Legközelebbi pont</string>
     <string name="empty_state_my_tracks">Nyomvonalfájlok hozzáadása</string>
     <string name="in_case_of_reverse_direction">Ellentétes irány esetén</string>
-    <string name="monitoring_min_distance_descr_side_effect">Mellékhatások: A nyugalmi periódusok egyáltalán nem vagy csak egy ponttal lesznek felvéve. Kiszűrhetők a kis (valós) mozgások (pl. az út során egy átvezető út jelzése céljából megtett kitérők). A fájl kevesebb információt tartalmaz az utófeldolgozáshoz és rosszabb a statisztikája, mivel a felvételkor kiszűri a nyilvánvalóan felesleges pontokat, miközben megtarthatja a rossz vétel vagy a GPS lapkakészlet által okozott hibás mintázatok.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Mellékhatások: A nyugalmi periódusok egyáltalán nem vagy csak egy ponttal lesznek felvéve. Kiszűrhetők a kis (valós) mozgások (pl. egy lehetséges kanyar miatt az út széle felé tett kitérők). Vegye figyelembe, hogy a fájl kevesebb információt fog tartalmazni az utófeldolgozáshoz, miközben megtarthat a rossz vétel vagy a GPS lapkakészlet által okozott hibás mintázatokat.</string>
     <string name="all_next_segments">Minden későbbi szakasz</string>
     <string name="number_of_gpx_files_selected_pattern">%s nyomvonalfájl kijelölve</string>
     <string name="route_between_points_add_track_desc">Jelölje ki azt a nyomvonalfájlt, amelyhez az új szakasz hozzáadódjék.</string>
@@ -4824,11 +4824,11 @@
     <string name="external_sensors_plugin_name">Külső érzékelők</string>
     <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
     <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
-    <string name="map_widget_altitude_desc">A widgetek megjelenítik a jelenlegi helyzet vagy a térképközéppont tengerszint feletti magasságát</string>
+    <string name="map_widget_altitude_desc">Megjeleníti a jelenlegi hely vagy a térképközéppont tengerszint feletti magasságát</string>
     <string name="map_widget_rendering_fps">Térképmegjelenítés (képkocka/másodperc)</string>
     <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelennek meg és frissülnek a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
     <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
-    <string name="location_simulation_cutoff">A szimuláció hagyja ki az első métereket</string>
+    <string name="location_simulation_cutoff">A szimuláció kihagyja az első métereket</string>
     <string name="send_uuid_preference">Egyedi felhasználóazonosító (UUID) elküldése</string>
     <string name="map_widget_altitude_map_center_desc">Megjeleníti a jelenlegi térképközéppont tengerszint feletti magasságát.</string>
     <string name="map_widget_altitude_current_location_desc">Megjeleníti a jelenlegi földrajzi hely tengerszint feletti magasságát.</string>
@@ -4837,7 +4837,35 @@
     <string name="location_simulation_speedup">Szimulációs felgyorsítása</string>
     <string name="current_location_widget">Koordináták: jelenlegi hely</string>
     <string name="map_center_widget">Koordináták: térképközéppont</string>
-    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosítót (UUID) a következőkre használható: offline térképek letöltése használják az OsmAnd szerverekről, a szerver erőforrásainak méltányos használatának nyomon követése, a forgalom felhasználásának előrejelzése és névtelen havi térképjelentések készítésére.</string>
+    <string name="send_uuid_preference_desc">Egy véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szerver erőforrások méltányos használatának nyomon követése, a forgalom mintázatának előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Pulzusszám, kerékpársebesség, kerékpár-teljesítmény és lépéstempó figyelemmel kísérése. ANT+ (vezeték nélküli személyes hálózati protokoll) támogatásával rendelkező, és e paraméterek érzékelőivel rendelkező készülék szükséges.</string>
+    <string name="external_sensors_plugin_description">Pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám figyelemmel kísérése. Szükséges az eszköz az ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása a megfelelő szenzorokhoz.</string>
+    <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
+    <string name="external_sensors_support">Külső érzékelők támogatása</string>
+    <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
+    <string name="speak_route_recalculation">Útvonal újratervezés bemondása</string>
+    <string name="release_4_3">Új, gyorsabb térképrenderelő motor, 2.5D nézettel
+\n
+\n - Folytonos animáció a mozgás közbeni helyváltoztatáskor
+\n
+\n - Új widget a térkép középpontjának koordinátáival és a hely magasságával
+\n
+\n - \"Távolság koppintásra\" szövegméret beállítások hozzáadva
+\n
+\n - \"Térképjelző\" widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
+\n
+\n - Javított \"Pozíció megjelenítése\" opció
+\n
+\n - GPX: támogatás hozzáadva a \"link\", \"cmt\", \"desc\" címkékhez és bármilyen egyéni kiterjesztéshez
+\n
+\n - A \"Tengerészeti térképek\" lista módosítása
+\n
+\n - Hozzáadva az ANT+ érzékelők támogatása
+\n
+\n - Hozzáadva az UUID letöltés letiltásának lehetősége
+\n
+\n</string>
+    <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
+    <string name="show_borders_of_downloaded_maps">A letöltött térképek színezése</string>
+    <string name="show_map_symbols">Térképjelek megjelenítése</string>
 </resources>

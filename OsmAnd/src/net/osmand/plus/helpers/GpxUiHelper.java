@@ -1958,7 +1958,7 @@ public class GpxUiHelper {
 			this.showIcon = showIcon;
 		}
 
-		public boolean shouldShowIcon() {
+		public boolean shouldShowLocationIcon() {
 			return showIcon;
 		}
 	}

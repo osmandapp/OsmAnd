@@ -3367,9 +3367,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Vedľajší efekt: Následkom filtrovania podľa presnosti môžu celkom chýbať body napr. pod mostami, stromami, medzi vysokými budovami alebo pri niektorých poveternostných podmienkach.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Odporúčanie: Je ťažké predpovedať, čo bude zaznamenané a čo nie, preto môže byť vhodné tento filter vypnúť.</string>
     <string name="monitoring_min_accuracy_descr_remark">Poznámka: ak bolo GPS vypnuté tesne pred zaznamenávaním, prvý zmeraný bod môže znížiť presnosť a preto by sme mohli v našom programe chvíľu počkať pred zaznamenaním prvého bodu (alebo zaznamenať najlepší z troch po sebe idúcich bodov), ale toto ešte nie je implementované.</string>
-    <string name="monitoring_min_distance_descr">Tento filter zamedzí zaznamenaniu duplicitných bodov, kde sa udial príliš malý pohyb, čo vytvára krajšie vyzerajúce stopy, ktoré nebudú neskôr ešte spracovávané.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Vedľajšie efekty: Obdobia v pokoji nie sú vôbec zaznamenané, alebo každé len jedným bodom. Malé pohyby (napr. do strany na označenie možnej odbočky na výlete) môžu byť odfiltrované. Váš súbor bude obsahovať menej informácií pre následné spracovanie a má horšie štatistiky odfiltrovaním zjavne nadbytočných bodov pri zázname, ale zachovaním pozostatkov zlého príjmu alebo efektov GPS čipu.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Odporúčanie: Nastavenie 5 metrov môže pre vás fungovať, ak nepotrebujete zaznamenať detaily jemnejšie ako toľko, a tiež nechcete výslovne zaznamenávať údaje v pokoji (bez pohybu).</string>
+    <string name="monitoring_min_distance_descr">Zapnutím tohto filtra zamedzíte zaznamenaniu zbytočných bodov ak nenastal pohyb. Toto tiež zlepší priestorový vzhľad stôp bez ďalšieho spracovávania.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Vedľajšie efekty: Obdobia pokoja nie sú vôbec zaznamenané, alebo každé len jedným bodom. Malé pohyby (napr. do strany na zaznačenie možnej odbočky na výlete) môžu byť odfiltrované. Váš súbor bude obsahovať menej informácií pre následné spracovanie, ale môže zachovať chyby GPS spôsobené zlým príjmom alebo efektmi GPS čipu.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Odporúčanie: Nastavte posun 5 metrov ak nepotrebujete zaznamenať drobné detaily trasy a tiež nepotrebujete zaznamenávať údaje o obdobiach bez pohybu.</string>
     <string name="clear_recorded_data">Vymazať zaznamenané údaje</string>
     <string name="release_3_6">• Profily: teraz môžete zmeniť poradie, nastaviť ikonu pre mapu, zmeniť všetky nastavenia základných profilov a resetovať ich do východzieho stavu
 \n
@@ -4769,7 +4769,7 @@
     <string name="map_widget_altitude_map_center_desc">Zobrazuje nadmorskú výšku v strede mapy.</string>
     <string name="map_widget_altitude_current_location_desc">Zobrazuje nadmorskú výšku súčasnej polohy.</string>
     <string name="map_widget_rendering_fps">Rýchlosť vykresľovania mapy</string>
-    <string name="map_widget_rendering_fps_desc">Zobrazuje ako rýchlo sa mapa a jej prvky zobrazujú a aktualizujú (vyjadrené v snímkach za sekundu (FPS)).</string>
+    <string name="map_widget_rendering_fps_desc">Zobrazuje ako rýchlo sa mapa a jej prvky zobrazujú a aktualizujú, vyjadrené v snímkach za sekundu (FPS).</string>
     <string name="location_simulation_speedup">Zrýchlenie simulácie</string>
     <string name="send_uuid_preference_desc">Náhodný identifikátor UUID sa používa pri sťahovaní offline máp zo serverov OsmAnd pre sledovanie použitia prostriedkov serveru, predpovedanie záťaže a tvorbu anonymných prehľadov mesačného použitia máp.</string>
     <string name="send_uuid_preference">Odosielať jedinečný identifikátor používateľa (UUID)</string>
@@ -4788,8 +4788,8 @@
     <string name="map_widget_ant_bicycle_dist">Vzdialenosť bicykla</string>
     <string name="map_markers_desc">Nástroj zobrazuje vzdialenosť alebo odhadovaný čas príjazdu (ETA) k prvým dvom značkám v zozname značiek.</string>
     <string name="map_widget_altitude_current_location">Nadmorská výška: súčasná poloha</string>
-    <string name="map_widget_altitude_desc">Nástroj zobrazuje nadmorskú výšku súčasnej polohy alebo stredu mapy</string>
-    <string name="external_sensors_plugin_description">Sledovanie srdcového tepu, rýchlosti bicykla, výkonu bicykla a frekvencii šliapania. Vyžaduje spojenie so zariadením so senzormi týchto parametrov s podporou ANT+ (Wireless Personal Network protocol).</string>
+    <string name="map_widget_altitude_desc">Zobraziť nadmorskú výšku súčasnej polohy alebo stredu mapy</string>
+    <string name="external_sensors_plugin_description">Sledovanie srdcového tepu, rýchlosti bicykla, výkonu bicykla a frekvencii šliapania. Vyžaduje zariadenie spojené so senzormi týchto parametrov s pomocou bezdrôtového sieťového protokolu ANT+.</string>
     <string name="simulate_location_by_gpx">Simulovať polohu pomocou GPX</string>
     <string name="location_simulation_cutoff">Simulácia preskočí prvé metre</string>
     <string name="ant_missing_dependency_descr">Požadovaná služba \"%1$s\" sa nenašla.
@@ -4842,4 +4842,32 @@
     <string name="quick_action_current_location_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Súčasná poloha.</string>
     <string name="coordinates_widget_current_location_desc">Nástroj zobrazuje zemepisné súradnice súčasnej polohy</string>
     <string name="rotate_map_none_rotated_opt">Pevné (manuálne otočené)</string>
+    <string name="speak_gps_signal_status">Oznámiť stratu a obnovenie GPS signálu</string>
+    <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
+    <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
+    <string name="external_sensors_support">Podpora externých senzorov</string>
+    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy, aj s pohľadom 2.5D
+\n
+\n • Plynulá animácia zmien polohy počas pohybu
+\n
+\n • Nové nástroje pre súradnice stredu mapy a nadmorskej výšky pre zemepisné polohy
+\n
+\n • \"Vzdialenosť k označenému bodu\": pridané možnosti veľkosti textu
+\n
+\n • Nástroj \"Mapové značky\": pridaná možnosť zmeny správania po kliku
+\n
+\n • Opravená možnosť \"Zobrazenie polohy\"
+\n
+\n • GPX: pridaná podpora pre značky \"link\", \"cmt\", \"desc\" a pre vlastné rozšírenia
+\n
+\n • Preusporiadaný zoznam \"Námorných máp\"
+\n
+\n • Pridaná podpora pre senzory ANT+
+\n
+\n • Pridaná možnosť vypnutia UUID pre sťahovanie
+\n
+\n</string>
+    <string name="show_borders_of_downloaded_maps">Vyfarbenie stiahnutých máp</string>
+    <string name="show_map_symbols">Zobraziť mapové symboly</string>
+    <string name="show_map_symbols_desc">Texty, čísla ciest a iné.</string>
 </resources>

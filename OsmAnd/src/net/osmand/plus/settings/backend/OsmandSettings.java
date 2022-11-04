@@ -1759,6 +1759,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
 
+	public final CommonPreference<Boolean> POLYGONS_VISIBILITY_SET_MANUALLY = new BooleanPreference(this, "polygons_visibility_set_manually", false).makeProfile().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -2875,7 +2877,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= 28).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> OPENGL_RENDER_FAILED = new BooleanPreference(this, "opengl_render_failed", false).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -3012,6 +3014,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
 			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
+
+	public final CommonPreference<Boolean> SHOW_BORDERS_OF_DOWNLOADED_MAPS =
+			new BooleanPreference(this, "show_borders_of_downloaded_maps", true).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();
