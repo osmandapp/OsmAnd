@@ -70,7 +70,7 @@
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">Version 2 (OpenGL) is the faster map rendering engine also featuring 2.5D view. Version 1 rendering was the default before release 4.3, and is still preferable for older devices.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
-    <string name="show_borders_of_downloaded_maps">Coloration of downloaded maps</string>
+    <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
     <string name="show_map_symbols_desc">Text, road signs, and others.</string>
     <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
