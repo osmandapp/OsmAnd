@@ -338,17 +338,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void setupOpenGLView() {
+	public void setupRenderingView() {
 		if (application.isApplicationInitializing()) {
 			application.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
-					application.getOsmandMap().setupOpenGLView();
+					application.getOsmandMap().setupRenderingView();
 					application.getOsmandMap().refreshMap();
 				}
 			});
 		} else {
-			application.getOsmandMap().setupOpenGLView();
+			application.getOsmandMap().setupRenderingView();
 		}
 	}
 

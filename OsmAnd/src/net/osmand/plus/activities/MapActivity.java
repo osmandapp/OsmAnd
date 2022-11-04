@@ -398,7 +398,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 
-				boolean openglSetup;
+				boolean renderingViewSetup;
 
 				@Override
 				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
@@ -407,9 +407,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
 					boolean openGlInitialized = event == NATIVE_OPEN_GL_INITIALIZED && NativeCoreContext.isInit();
-					if ((openGlInitialized || event == NATIVE_INITIALIZED) && !openglSetup) {
-						app.getOsmandMap().setupOpenGLView();
-						openglSetup = true;
+					if ((openGlInitialized || event == NATIVE_INITIALIZED) && !renderingViewSetup) {
+						app.getOsmandMap().setupRenderingView();
+						renderingViewSetup = true;
 					}
 					if (event == MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
@@ -427,8 +427,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
-					if (!openglSetup) {
-						app.getOsmandMap().setupOpenGLView();
+					if (!renderingViewSetup) {
+						app.getOsmandMap().setupRenderingView();
 					}
 					getMapView().refreshMap(false);
 					dashboardOnMap.updateLocation(true, true, false);
@@ -438,7 +438,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(initListener);
 		} else {
-			app.getOsmandMap().setupOpenGLView();
+			app.getOsmandMap().setupRenderingView();
 			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
 	}
