@@ -97,7 +97,7 @@ public class RenderingEngineFragment extends BaseSettingsFragment {
 	}
 
 	private void updateMap() {
-		app.getOsmandMap().setupOpenGLView();
+		app.getOsmandMap().setupRenderingView();
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
