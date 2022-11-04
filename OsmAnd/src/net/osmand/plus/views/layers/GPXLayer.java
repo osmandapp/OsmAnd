@@ -236,7 +236,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		initUI();
 	}
 
-	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+	public void setTrackChartPoints(@Nullable TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
 	}
 
@@ -244,7 +244,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return trackDrawInfo != null;
 	}
 
-	public void setTrackDrawInfo(TrackDrawInfo trackDrawInfo) {
+	public void setTrackDrawInfo(@Nullable TrackDrawInfo trackDrawInfo) {
 		this.trackDrawInfo = trackDrawInfo;
 	}
 
@@ -1191,10 +1191,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private int getTrackColor(GPXFile gpxFile, int defaultColor) {
 		int color = 0;
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
+		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+			color = ColorUtilities.getColorWithAlpha(disabledColor, 0.5f);
+		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			color = trackDrawInfo.getColor();
-		} else if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
-			color = disabledColor;
 		} else if (gpxFile.showCurrentTrack) {
 			color = currentTrackColorPref.get();
 		} else {
@@ -1263,7 +1263,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
+		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+			return false;
+		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowArrows();
 		} else if (gpxFile.showCurrentTrack) {
 			return currentTrackShowArrowsPref.get();

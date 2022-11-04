@@ -329,7 +329,7 @@
     <string name="fav_saved_sucessfully">즐겨찾기가 성공적으로 {0} 에 저장되었습니다</string>
     <string name="no_fav_to_save">저장할 즐겨찾기 포인트가 없습니다</string>
     <string name="error_occurred_loading_gpx">GPX를 로딩하는 도중에 오류가 발생하였습니다</string>
-    <string name="send_report">리포트 전송하기</string>
+    <string name="send_report">보고서 보내기</string>
     <string name="none_region_found">SD 카드에서 영역을 찾을 수 없습니다. 인터넷에서 영역을 다운로드하세요.</string>
     <string name="poi_namefinder_query_empty">POI를 찾는 검색어를 입력하세요</string>
     <string name="any_poi">어떤</string>
@@ -1372,7 +1372,7 @@
     <string name="shared_string_next">다음</string>
     <string name="shared_string_enable">사용</string>
     <string name="shared_string_disable">사용 안 함</string>
-    <string name="shared_string_enabled">활성화됨</string>
+    <string name="shared_string_enabled">활성화</string>
     <string name="shared_string_disabled">비활성화됨</string>
     <string name="shared_string_selected">선택한 것</string>
     <string name="shared_string_selected_lowercase">선택한 것</string>
@@ -1400,7 +1400,7 @@
     <string name="shared_string_import">가져오기</string>
     <string name="shared_string_export">내보내기</string>
     <string name="shared_string_more">더보기…</string>
-    <string name="shared_string_more_actions">더 많은 작업</string>
+    <string name="shared_string_more_actions">추가 작업</string>
     <string name="shared_string_do_not_show_again">다시 표시하지 않음</string>
     <string name="shared_string_remember_my_choice">내 선택을 기억하기</string>
     <string name="shared_string_refresh">새로고침</string>
@@ -1779,7 +1779,7 @@
     <string name="shortcut_navigate_to_work">\'직장\'으로 이동</string>
     <string name="android_auto_map_placeholder_descr">앱에서 지도를 보려면 Android Auto에서 단말기의 연결을 해제하십시오.</string>
     <string name="shared_app_storage_description">Android에서 스토리지 액세스 규칙이 변경되어 공유 메모리를 더 이상 사용할 수 없다.</string>
-    <string name="internal_app_storage_description">사용자 및 다른 앱에 숨겨져 있는 내부 스토리지로, OsmAnd를 제외한 그 누구도 데이터에 액세스할 수 없음</string>
+    <string name="internal_app_storage_description">내부 저장소, 모든 사용자 및 기타 앱에서 숨겨져 있으므로 OsmAnd만 데이터에 액세스할 수 있습니다.</string>
     <string name="shared_storage_warning_title">스토리지 액세스 규칙 변경</string>
     <string name="tiles_storage_descr">다운로드한 타일을 저장하는 방법을 선택하십시오.</string>
     <string name="download_map_dialog">지도 다운로드 대화상자</string>
@@ -2375,7 +2375,7 @@
     <string name="plan_route_create_new_route">새 경로 만들기</string>
     <string name="plan_route_open_existing_track">기존 트랙 열기</string>
     <string name="shared_string_resources">리소스</string>
-    <string name="profile_type_custom_string">커스텀 프로필</string>
+    <string name="profile_type_custom_string">맞춤 프로필</string>
     <string name="shared_string_buttons">버튼구성</string>
     <string name="contact_support">‎지원 팀에 문의‎</string>
     <string name="move_to_history">‎기록으로‎‎ 이동‎</string>
@@ -2542,4 +2542,269 @@
     <string name="reset_deafult_order">기본 항목 순서 복원</string>
     <string name="lang_ckb">중부 쿠르드족</string>
     <string name="co2_mission">CO2 배출</string>
+    <string name="main_actions_descr">버튼이 4개뿐입니다.</string>
+    <string name="context_menu_actions">상황에 맞는 메뉴 작업</string>
+    <string name="quick_action_edit_actions">작업 편집</string>
+    <string name="delete_all_actions_message_q">%d 빠른 작업을 취소할 수 없게 삭제하시겠습니까\?</string>
+    <string name="main_actions">주요 업무</string>
+    <string name="export_import_quick_actions_with_profiles_promo">앱 프로필로 빠른 작업을 내보내거나 가져옵니다.</string>
+    <string name="additional_actions">추가 작업</string>
+    <string name="keep_both">둘 다 유지</string>
+    <string name="replace_all">모두 바꾸기</string>
+    <string name="replace_all_desc">현재 항목은 파일의 항목으로 바꾸기</string>
+    <string name="purchases_feature_desc_cross_buy">추가 비용 없이 다양한 플랫폼(Android/iOS/Web)에서 구독 기능을 사용할 수 있습니다.</string>
+    <string name="shared_string_cross_buy">교차-구매</string>
+    <string name="ant_write_to_gpx">추적할 데이터 쓰기</string>
+    <string name="ant_heart_rate_write_gpx_desc">Heart Rate를 트랙에 쓰기</string>
+    <string name="import_duplicates_title">일부 항목이 이미 존재함</string>
+    <string name="quick_action_map_source_title">지도 소스</string>
+    <string name="shared_string_nothing_selected">선택한 항목 없음</string>
+    <string name="shared_string_profiles">프로필</string>
+    <string name="shared_string_quick_actions">빠른 작업</string>
+    <string name="shared_string_routing">라우팅</string>
+    <string name="import_duplicates_description">OsmAnd에는 이미 가져온 요소와 동일한 이름의 요소가 있습니다.
+\n
+\n작업을 선택합니다.</string>
+    <string name="shared_string_poi_types">POI 유형</string>
+    <string name="shared_string_terms_of_use">이용 약관</string>
+    <string name="favorites_backup">즐겨찾기 백업</string>
+    <string name="map_widget_target_distance">카메라에서 대상까지의 거리</string>
+    <string name="ant_widgets">ANT+ 위젯</string>
+    <string name="ant_missing_dependency">종속성 누락</string>
+    <string name="ant_read_data">데이터 읽기</string>
+    <string name="ant_go_to_store">스토어로 이동</string>
+    <string name="keep_both_desc">가져온 항목은 접두사로 추가</string>
+    <string name="map_widget_ant_bicycle_dist">자전거 거리</string>
+    <string name="map_widget_ant_heart_rate">심박수</string>
+    <string name="map_widget_ant_heart_rate_desc">주어진 활동 중 사용자의 심박수를 실시간으로 표시</string>
+    <string name="map_widget_ant_bicycle_power">자전거 동력</string>
+    <string name="map_widget_ant_bicycle_power_desc">자전거를 앞으로 움직이는 데 사용되는 사이클리스트의 전력 출력을 보여주기</string>
+    <string name="map_widget_ant_bicycle_cadence">자전거 케이던스</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">사용자가 페달을 밟는 속도를 표시</string>
+    <string name="map_widget_ant_bicycle_speed">자전거 속도</string>
+    <string name="map_widget_ant_bicycle_speed_desc">여행 속도 표시</string>
+    <string name="map_center_widget">좌표: 지도 중심</string>
+    <string name="backup_error_user_is_already_registered">이미 전자 메일 주소가 다른 계정에서 사용 중</string>
+    <string name="select_another_colorization">다른 색상 유형을 선택하십시오.</string>
+    <string name="replace_point_descr">이것으로 다른 점을 교체하십시오.</string>
+    <string name="profile_alert_need_profile_name_msg">먼저 프로파일 이름을 지정해야 합니다.</string>
+    <string name="start_editing_card_description">Wikivoyage에 대한 모든 문서를 편집할 수 있고 편집해야 합니다. 지식, 경험, 재능 및 관심을 공유하십시오.</string>
+    <string name="import_as_favorites">즐겨찾기로 가져오기</string>
+    <string name="import_file">파일 가져오기</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX 색상</string>
+    <string name="map_widget_altitude_map_center_desc">현재 지도 중심의 해발 고도를 표시합니다.</string>
+    <string name="map_widget_altitude_current_location">고도: 현재 위치</string>
+    <string name="shared_string_visible_widgets">보이는 위젯</string>
+    <string name="compass_always_visible">항상 표시</string>
+    <string name="reset_items_descr">설정을 숨기면 원래 상태로 재설정됩니다.</string>
+    <string name="reset_to_default">기본값으로 재설정</string>
+    <string name="backup_error_subscription_was_used">다른 계정에서 사용하는 구독 또는 프로모션 %1$s</string>
+    <string name="select_another_track">다른 트랙 선택</string>
+    <string name="shared_string_add_profile">프로필 추가</string>
+    <string name="wrong_input">잘못된 입력</string>
+    <string name="external_input_device">외부 입력 장치</string>
+    <string name="reset_all_profile_settings_descr">모든 프로필 설정을 설치 기본값으로 재설정합니다.</string>
+    <string name="reset_all_profile_settings">모든 프로필 설정을 재설정하시겠습니까\?</string>
+    <string name="profiles_for_action_not_found">해당 프로필을 찾을 수 없습니다.</string>
+    <string name="restore_all_profile_settings_descr">모든 프로필 설정은 이 프로파일을 생성/가져온 후 원래 상태로 복원됩니다.</string>
+    <string name="profile_backup_failed">프로필을 백업할 수 없습니다.</string>
+    <string name="sett_no_ext_input">없음</string>
+    <string name="quick_actions_delete_text">\"%s\" 작업을 삭제하시겠습니까\?</string>
+    <string name="shared_string_actions">작업</string>
+    <string name="delete_profiles_descr">\'적용\'을 탭하면 제거된 프로필이 영구적으로 삭제됩니다.</string>
+    <string name="external_input_device_descr">키보드 또는 WunderLINQ와 같은 외부 제어 장치를 선택합니다.</string>
+    <string name="change_application_profile">앱 프로파일 변경</string>
+    <string name="quick_action_switch_profile_descr">작업 버튼은 선택한 프로필 간에 전환합니다.</string>
+    <string name="changes_applied_to_profile">변경 사항이 \'%1$s\' 프로필에 적용되었습니다.</string>
+    <string name="please_provide_profile_name_message">프로필 이름을 입력</string>
+    <string name="reset_plugin_to_default">플러그인 설정을 기본값으로 재설정</string>
+    <string name="restore_all_profile_settings">모든 프로필 설정을 복원하시겠습니까\?</string>
+    <string name="tap_on_map_to_hide_interface">전체 화면 모드</string>
+    <string name="enter_new_name">새 이름 입력</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions)는 무료, 전 세계 및 고품질 OSM 데이터에 액세스 할 수있는지도 및 탐색 앱입니다.
+\n
+\n음성 및 광학 네비게이터, POI (관심 지점) 보기, GPX 트랙 생성 및 관리, 등고선 시각화 및 고도 정보 (플러그인 사용), 운전, 사이클링, 보행자 모드, OSM 편집 등을 즐기십시오.</string>
+    <string name="osmand_extended_description_part2">GPS 네비게이션
+\n • 오프라인 (해외에있을 때 로밍 요금 없음) 또는 온라인 (더 빠른) 모드 중에서 선택하십시오.
+\n • 턴 바이 턴 음성 안내는 길을 따라 당신을 안내합니다 (녹음 및 합성 된 음성)
+\n • 경로에서 벗어날 때마다 경로가 다시 구축됩니다.
+\n • 차선 안내, 거리 이름 및 예상 도착 시간이 길을 따라 도움이 될 것입니다.
+\n • 여행을 더 안전하게 만들기 위해 주야간 모드가 자동으로 전환됩니다.
+\n • 속도 제한을 표시하고 초과 할 경우 알림을받습니다.
+\n •지도 줌은 당신의 속도에 맞게 조정
+\n • 주소, 유형 (예 : 주차, 레스토랑, 호텔, 주유소, 박물관) 또는 지리적 좌표로 목적지를 검색하십시오.
+\n • 여정의 중간 지점을 지원합니다.
+\n • 자신의 기록을 작성하거나 GPX 트랙을 업로드하고 따르십시오.
+\n</string>
+    <string name="osmand_extended_description_part3">지도
+\n • 당신 주위의 POI (관심 지점)를 표시합니다.
+\n • 움직임의 방향에 대한지도를 조정 (또는 나침반)
+\n • 귀하의 위치와 당신이보고있는 방향을 보여줍니다.
+\n • 친구가 나를 찾을 수 있도록 위치 공유
+\n • 가장 중요한 장소를 \'즐겨 찾기\'에 보관하십시오.
+\n •지도에 이름을 표시하는 방법을 선택할 수 있습니다 : 영어, 지역 또는 음성 철자
+\n • 특수 온라인 타일, 위성보기 (Bing에서), 여행 / 탐색 GPX 트랙과 같은 다른 오버레이 및 사용자 정의 가능한 투명도의 추가 레이어를 표시합니다.
+\n</string>
+    <string name="import_as_gpx">GPX 파일로 가져오기</string>
+    <string name="osmand_extended_description_part4">스키
+\n OsmAnd 스키지도 플러그인을 사용하면 복잡성 수준과 리프트 및 기타 시설의 위치와 같은 몇 가지 추가 정보를 갖춘 스키 트랙을 볼 수 있습니다.</string>
+    <string name="other_menu_group">기타</string>
+    <string name="tap_on_map_to_hide_interface_descr">지도를 탭하면 제어 버튼과 위젯이 전환됩니다.</string>
+    <string name="import_gpx_file_description">즐겨찾기 또는 GPX 파일로 가져올 수 있습니다.</string>
+    <string name="rename_marker">마커 이름 바꾸기</string>
+    <string name="mark_passed">마크 통과</string>
+    <string name="navigation_profiles_item">탐색 프로파일</string>
+    <string name="import_profile_dialog_description">가져온 프로파일에는 추가 데이터가 포함되어 있습니다. \"가져오기\"를 클릭하여 프로필 데이터만 가져오거나 추가 데이터를 선택합니다.</string>
+    <string name="without_profiles_changing">프로파일 변경 안함</string>
+    <string name="start_editing">편집 시작</string>
+    <string name="export_profile_dialog_description">프로파일과 함께 내보낼 추가 데이터를 선택합니다.</string>
+    <string name="reset_to_default_category_button_promo">\'기본값으로 재설정\'은 정렬 순서를 설치 기본값으로 복원합니다.</string>
+    <string name="start_search_from_city">우선 도시/타운/지역 지정</string>
+    <string name="current_track">현재 트랙</string>
+    <string name="sett_generic_ext_input">키보드</string>
+    <string name="saving_new_profile">새 프로파일 저장</string>
+    <string name="profile_prefs_reset_successful">모든 프로필 설정이 기본값으로 복원되었습니다.</string>
+    <string name="export_profile">프로파일 내보내기</string>
+    <string name="export_profile_failed">프로파일을 내보낼 수 없습니다.</string>
+    <string name="plugin_prefs_reset_successful">모든 플러그인 설정이 기본값으로 복원되었습니다.</string>
+    <string name="start_editing_card_image_text">누구나 편집 할 수있는 무료 전세계 여행 가이드.</string>
+    <string name="profile_alert_cant_delete_base">OsmAnd의 기본 프로필은 삭제할 수 없습니다.</string>
+    <string name="profile_alert_delete_title">프로필 삭제</string>
+    <string name="profile_alert_delete_msg">\"%s\" 프로파일 삭제</string>
+    <string name="osmand_extended_description_part5">사이클링
+\n •지도에서 사이클 경로 찾기
+\n • 사이클링 모드의 GPS 네비게이션은 사이클 경로를 사용하여 경로를 구축합니다.
+\n • 속도와 고도를 확인하십시오.
+\n • GPX 녹화 옵션을 사용하면 여행을 기록하고 공유 할 수 있습니다.
+\n • 추가 플러그인을 통해 윤곽선과 언덕 음영을 활성화 할 수 있습니다.</string>
+    <string name="memory_allocated_for_routing_ds">메모리 할당이 높을수록 장거리 경로(500km 이상)의 계산 속도가 빨라지지만 다른 앱의 성능에 영향을 줄 수 있습니다.
+\n짧은 경로의 계산 속도에 영향을 미치지 않습니다.</string>
+    <string name="shared_storage_warning_description">새로운 Android 규칙으로 인해 2021 년 11 월부터 OsmAnd 4.2는 공유 스토리지에 대한 액세스 권한을 잃게됩니다.
+\n
+\n공유 저장소에서 사용 가능한 저장소로 데이터 폴더를 이동하십시오, 그렇지 않으면 응용 프로그램은 오프라인지도, GPX 트랙 등과 같은 데이터에 대한 액세스를 잃게됩니다.</string>
+    <string name="select_postcode">우편번호 검색</string>
+    <string name="shared_string_visible">정보</string>
+    <string name="current_location_widget">좌표: 현재 위치</string>
+    <string name="exported_osmand_profile">OsmAnd 프로필: %1$s</string>
+    <string name="quick_actions_delete">삭제 작업</string>
+    <string name="routing_attr_motor_type_hybrid_name">하이브리드</string>
+    <string name="rendering_attr_depthContourWidth_description">깊이 등고선 선 폭</string>
+    <string name="accessibility_2d_view_on">2.5D 뷰 켜기</string>
+    <string name="download_complete">다운로드 완료</string>
+    <string name="import_as_one_track">하나의 트랙으로 가져오기</string>
+    <string name="rendering_attr_depthContourColorScheme_description">깊이 등고선 색 구성표</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_electric_name">전기 모터</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="kg">킬로그램</string>
+    <string name="routing_attr_motor_type_diesel_name">디젤</string>
+    <string name="routing_attr_motor_type_petrol_name">가솔린</string>
+    <string name="accessibility_2d_view_off">2.5D 뷰 끄기</string>
+    <string name="rendering_attr_depthContourWidth_name">깊이 등고선 너비</string>
+    <string name="average_speed_skip_stops">정류장 고려</string>
+    <string name="map_widget_true_bearing">트루 베어링</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (제한 없음)</string>
+    <string name="av_notes_choose_action_widget_desc">작업 선택.</string>
+    <string name="colour_of_circles">원형의 색상</string>
+    <string name="compass_on_circles">원형에 나침반</string>
+    <string name="battery_widget_desc">장치의 배터리 잔량을 표시합니다.</string>
+    <string name="use_latin_name_if_missing">누락된 경우 라틴어 이름 사용</string>
+    <string name="routing_attr_hazmat_category_description">위험 물질 범주 / 유해 물질 접근 권한 고려</string>
+    <string name="rendering_attr_weatherTempContours_name">온도 아이소라인</string>
+    <string name="routing_attr_hazmat_category_name">유해 물질 카테고리</string>
+    <string name="rendering_attr_horseScale_name">말길의 난이도</string>
+    <string name="map_widget_trip_recording_downhill">다운힐</string>
+    <string name="map_widget_trip_recording_uphill">오르막길</string>
+    <string name="current_time_widget_desc">기기의 현재 시간을 표시합니다.</string>
+    <string name="average_speed_time_interval_desc">속도 평균화의 시간 간격을 지정합니다.</string>
+    <string name="radius_ruler_mode_desc">위젯을 탭하면 반경 눈금자 모드로 전환됩니다.</string>
+    <string name="routing_attr_allow_private_for_truck_description">트럭의 개인 구역에 대한 접근을 허용합니다.</string>
+    <string name="routing_attr_allow_private_for_truck_name">개인 액세스 허용(트럭)</string>
+    <string name="rendering_attr_weatherPressureContours_name">압력 아이소라인</string>
+    <string name="altitude_widget_desc">현재 지리적 위치의 해발 고도를 표시합니다.</string>
+    <string name="lanes_widgets_desc">차선 위젯은 현재 도로 차선 레이아웃을 표시하고 활성 탐색으로 운전할 차선을 강조 표시합니다.</string>
+    <string name="gps_info_widget_desc">장치가 그 순간에 감지하고 사용하는 위성의 수를 표시합니다.</string>
+    <string name="max_speed_widget_desc">현재 주행 도로의 제한 속도를 표시합니다.</string>
+    <string name="magnetic_bearing_widget_desc">자북과 사용자 위치에서 관찰된 목표점 사이의 각도입니다.</string>
+    <string name="street_name_widget_desc">거리 이름 위젯은 직선 위치 화살표가있는 현재 거리 이름 또는 완료해야하는 기동으로 다음 거리 이름을 표시합니다.</string>
+    <string name="current_speed_widget_desc">GPS 센서에서 감지한 현재 속도를 표시합니다.</string>
+    <string name="arrival_time_widget_desc">목적지에 도착한 시간입니다.</string>
+    <string name="local_backup_descr">로컬 파일에서 데이터를 백업하거나 복원합니다.</string>
+    <string name="shared_string_status">상태</string>
+    <string name="audio_video_notes_desc">위젯을 사용하면 녹음 (오디오, 비디오 또는 사진) 촬영을 시작 / 중지 할 수있는 빠른 액세스를 제공합니다.</string>
+    <string name="calculate_altitude">고도를 계산</string>
+    <string name="no_widgets_here_yet">아직 위젯 없음</string>
+    <string name="backup_view_conflicts">충돌 보기</string>
+    <string name="shared_string_symbol">상징</string>
+    <string name="osmand_cloud_help_descr">도움이 필요하신가요\? %1$s로 문의하시기 바랍니다.</string>
+    <string name="routing_attr_avoid_tunnels_description">터널 피하기</string>
+    <string name="loading_list_of_routing_services">사용 가능한 라우팅 서비스 목록 로드 중</string>
+    <string name="navigation_points">탐색 지점</string>
+    <string name="available_widgets">사용 가능한 위젯</string>
+    <string name="backup_confilcts_descr">최신 버전이 서버에 저장되어 있기 때문에 일부 파일을 서버에 업로드할 수 없습니다.</string>
+    <string name="make_backup">백업 만들기</string>
+    <string name="route_maneuvers_desc">내비게이션 위젯은 내비게이션 중에 거리, 도착 또는 좌회전 시간, 다음 턴, 방위, 현재 거리 이름, 차선 정보, 최대 속도, 접근 경고, POI, 웨이 포인트와 같은 정보를 표시 할 수 있습니다.</string>
+    <string name="calculating_altitude">고도 계산</string>
+    <string name="shared_string_widget">위젯</string>
+    <string name="bearing_desc">방위 위젯은 대상에 대한 절대 또는 상대 방위를 각도 단위(180도, 360도, 밀리라디안)로 표시합니다.</string>
+    <string name="map_widget_altitude">현재 위치의 고도</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">선호도 없음</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">중급</string>
+    <string name="no_widgets_descr">사용 가능한 위젯 목록에서 하나 이상의 위젯을 추가합니다.</string>
+    <string name="map_widget_current_speed">현재 속도</string>
+    <string name="add_page">페이지 추가</string>
+    <string name="apply_to_existing_favorites_descr">그룹의 기존 즐겨 찾기 포인트에 변경 사항을 적용하거나 새 포인트에만 변경 사항을 적용합니까\?</string>
+    <string name="apply_to_existing_points_descr">변경 사항을 그룹의 기존 점에 적용하거나 새 점에만 적용합니까\?</string>
+    <string name="make_backup_descr">이 장치에는 많은 변경 사항이 있으므로 손실되지 않도록이 데이터를 백업하십시오.</string>
+    <string name="shared_string_uphill">오르막길</string>
+    <string name="coordinates_widget_desc">현재 위치의 지리적 좌표를 보여줍니다.</string>
+    <string name="osmand_cloud_login_descr">등록한 이메일 주소를 입력하십시오. 다음 단계를 위한 일회용 암호가 전송됩니다.</string>
+    <string name="poi_routes">경로</string>
+    <string name="cloud_email_already_registered">해당 이메일 주소는 이미 등록되었습니다.</string>
+    <string name="shared_string_downhill">내리막길</string>
+    <string name="delete_all_confirmation">예, 모두 삭제</string>
+    <string name="backup_pause_all">모두 일시중지</string>
+    <string name="apply_to_existing">기존에 적용</string>
+    <string name="apply_only_to_new_points">새 포인트에만 적용</string>
+    <string name="apply_only_to_new_favorites">새 즐겨찾기에만 적용</string>
+    <string name="search_more">더 검색…</string>
+    <string name="get_altitude_information">고도 정보 가져오기</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">고급</string>
+    <string name="routing_attr_difficulty_preference_expert_name">전문가</string>
+    <string name="purchases_feature_desc_nautical">해상 깊이 정보에 액세스</string>
+    <string name="navigation_points_desc">내비게이션 위젯은 내비게이션 중에 거리, 도착 또는 좌회전 시간, 다음 턴, 방위, 현재 거리 이름, 차선 정보, 최대 속도, 접근 경고, POI, 웨이 포인트와 같은 정보를 표시 할 수 있습니다.</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">초보자</string>
+    <string name="last_backup">마지막 백업</string>
+    <string name="verification_code_missing_description">10 분 정도 걸릴 수 있습니다. 스팸 폴더에 없는 경우 아래 버튼을 사용하세요.</string>
+    <string name="map_widget_distance_to_destination">목적지까지의 거리</string>
+    <string name="app_mode_mountain_bicycle">산악 자전거</string>
+    <string name="backup_promocode">프로모션 코드</string>
+    <string name="turn_on_public_transport_description">지도에서 대중 교통 경로를 보려면 켜십시오.</string>
+    <string name="delete_version_history">버전 기록 삭제</string>
+    <string name="calculate_online">온라인으로 계산</string>
+    <string name="get_altitude_data">고도 데이터 가져오기</string>
+    <string name="backup_delete_all_data">내 모든 데이터 삭제</string>
+    <string name="shared_string_logout">로그아웃</string>
+    <string name="osmand_cloud_create_account_descr">이메일 주소를 입력하면 인증 코드가 전송됩니다.
+\n모든 데이터가 연결됩니다.</string>
+    <string name="shared_string_itinerary">여정</string>
+    <string name="av_def_action_choose">요청 시</string>
+    <string name="upload_local_version">로컬 버전 업로드</string>
+    <string name="backup_conflicts">충돌</string>
+    <string name="shared_string_predefined">사전 정의</string>
+    <string name="failed_loading_predefined_engines">미리 정의된 템플릿 목록을 로드할 수 없습니다.
+\n인터넷 연결을 확인하십시오.</string>
+    <string name="shared_string_grade">등급</string>
+    <string name="shared_string_show_slope">경사 표시</string>
+    <string name="shared_string_hide_slope">경사 숨기기</string>
+    <string name="logcat_buffer_descr">앱의 상세 로그 확인 및 공유</string>
+    <string name="resend_verification_code">재전송</string>
+    <string name="logcat_buffer">로그캣 버퍼</string>
+    <string name="use_system_language">시스템 언어 사용</string>
+    <string name="track_attach_to_the_roads_descr">트랙은 오프라인 지도를 사용하여 도로에 연결되며 트랙 형상이 변경됩니다.</string>
+    <string name="no_altitude_data">고도 데이터 없음</string>
+    <string name="shared_string_speed">속도</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">필요한 경우</string>
+    <string name="routing_attr_freeride_policy_allow_name">허용</string>
+    <string name="backup_version_history_delete_descr">OsmAnd Cloud에서 더 이상 사용되지 않는 데이터 유형에 대한 변경 로그를 삭제하시겠습니까\?</string>
 </resources>

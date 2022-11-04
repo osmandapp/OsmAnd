@@ -308,15 +308,7 @@ public class PluginsHelper {
 		app.getAppInitializer().addListener(new AppInitializeListener() {
 
 			@Override
-			public void onStart(AppInitializer init) {
-			}
-
-			@Override
-			public void onProgress(AppInitializer init, InitEvents event) {
-			}
-
-			@Override
-			public void onFinish(AppInitializer init) {
+			public void onFinish(@NonNull AppInitializer init) {
 				registerRenderingPreferences(app);
 			}
 		});

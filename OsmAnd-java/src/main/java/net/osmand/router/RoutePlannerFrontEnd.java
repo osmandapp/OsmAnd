@@ -252,8 +252,7 @@ public class RoutePlannerFrontEnd {
 			GpxPoint start = null;
 			GpxPoint prev = null;
 			if (gpxPoints.size() > 0) {
-				gctx.ctx.calculationProgress.totalIterations =
-						(int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.ctx.config.maxStepApproximation + 1);
+				gctx.ctx.calculationProgress.totalApproximateDistance = (float) gpxPoints.get(gpxPoints.size() - 1).cumDist;
 				start = gpxPoints.get(0);
 			}
 			while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
@@ -261,8 +260,6 @@ public class RoutePlannerFrontEnd {
 				GpxPoint next = findNextGpxPointWithin(gpxPoints, start, routeDist);
 				boolean routeFound = false;
 				if (next != null && initRoutingPoint(start, gctx, gctx.ctx.config.minPointApproximation)) {
-					gctx.ctx.calculationProgress.totalEstimatedDistance = 0;
-					gctx.ctx.calculationProgress.iteration = (int) (next.cumDist / gctx.ctx.config.maxStepApproximation);
 					while (routeDist >= gctx.ctx.config.minStepApproximation && !routeFound) {
 						routeFound = initRoutingPoint(next, gctx, gctx.ctx.config.minPointApproximation);
 						if (routeFound) {
@@ -325,6 +322,9 @@ public class RoutePlannerFrontEnd {
 					prev = start;
 				}
 				start = next;
+				if (gctx.ctx.calculationProgress != null && start != null) {
+					gctx.ctx.calculationProgress.approximatedDistance = (float) start.cumDist;
+				}
 			}
 			if (gctx.ctx.calculationProgress != null) {
 				gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;

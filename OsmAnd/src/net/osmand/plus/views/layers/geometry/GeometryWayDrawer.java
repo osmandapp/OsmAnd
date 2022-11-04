@@ -215,7 +215,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		if (dashPattern != null) {
 			VectorDouble vectorDouble = new VectorDouble();
 			for (float i : dashPattern) {
-				vectorDouble.add(i * 6);
+				vectorDouble.add((double) i * 6.0d);
 			}
 			builder.setLineDash(vectorDouble);
 		}

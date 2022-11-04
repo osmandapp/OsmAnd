@@ -22,7 +22,8 @@ import net.osmand.util.MapUtils;
 // Immutable object !
 public class SearchPhrase {
 	public static final String DELIMITER = " ";
-	private static final String ALLDELIMITERS = "\\s|,|-";
+	public static final String ALLDELIMITERS = "\\s|,";
+	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -235,11 +236,11 @@ public class SearchPhrase {
 		return false;
 	}
 
-	public static List<String> splitWords(String w, List<String> ws) {
+	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
 		if (!Algorithms.isEmpty(w)) {
-			String[] wrs = w.split(ALLDELIMITERS);
-			for (int i = 0; i < wrs.length; i++) {
-				String wd = wrs[i].trim();
+			String[] wrs = w.split(delimiters);
+			for (String wr : wrs) {
+				String wd = wr.trim();
 				if (wd.length() > 0) {
 					ws.add(wd);
 				}

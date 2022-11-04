@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_BORDERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
@@ -227,6 +228,15 @@ public class ConfigureMapMenu {
 
 		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
+
+		selected = settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.get();
+		adapter.addItem(new ContextMenuItem(MAP_BORDERS_ID)
+				.setTitleId(R.string.show_borders_of_downloaded_maps, activity)
+				.setSelected(selected)
+				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
+				.setIcon(R.drawable.ic_action_map_download)
+				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
+				.setListener(listener));
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,

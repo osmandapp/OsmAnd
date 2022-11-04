@@ -1627,4 +1627,15 @@
     <string name="poi_departures_board">Išvykimų lenta</string>
     <string name="poi_access_hgv">Prieiga sunkvežimiui</string>
     <string name="poi_railway_yard">Krovinių stotis</string>
+    <string name="poi_playground_map">Žemėlapis</string>
+    <string name="poi_playground_spinning_circle">Besisukantis ratas</string>
+    <string name="poi_playground_swing">Sūpynės</string>
+    <string name="poi_playground_ball_pool">Kamuoliukų baseinas</string>
+    <string name="poi_playground_water">Vanduo</string>
+    <string name="poi_playground_trampoline">Batutas</string>
+    <string name="poi_playground_seesaw">Sūpykla</string>
+    <string name="poi_playground_exercise">Lauko treniruoklių salė</string>
+    <string name="poi_playground_activitypanel">Veiklos skydelis</string>
+    <string name="poi_playground_horizontal_bar">Horizontali juosta</string>
+    <string name="poi_access_yes">Prieiga leidžiama</string>
 </resources>

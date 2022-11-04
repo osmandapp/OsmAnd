@@ -1752,9 +1752,9 @@
     <string name="months_5">Bulan</string>
     <string name="months_2_4">Bulan</string>
     <string name="month">Bulan</string>
-    <string name="weeks_5">Pekan</string>
-    <string name="week">Pekan</string>
-    <string name="weeks_2_4">Pekan</string>
+    <string name="weeks_5">Minggu</string>
+    <string name="week">Minggu</string>
+    <string name="weeks_2_4">Minggu</string>
     <string name="days_5">Hari</string>
     <string name="days_2_4">Hari</string>
     <string name="day">Hari</string>
@@ -3625,7 +3625,7 @@
     <string name="slope_read_more">Baca lebih lanjut tentang lereng di %1$s.</string>
     <string name="shared_string_rendering_style">Gaya perenderan</string>
     <string name="shared_string_include_data">Sertakan data tambahan</string>
-    <string name="monitoring_min_distance_descr">Filter ini menghindari titik duplikat yang direkam di mana terlalu sedikit gerakan sebenarnya yang mungkin terjadi, membuat tampilan spasial trek yang lebih bagus yang tidak diproses setelahnya.</string>
+    <string name="monitoring_min_distance_descr">Mengaktifkan saringan ini dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
     <string name="multimedia_rec_split_title">Potong rekaman</string>
     <string name="multimedia_photo_play_sound">Suara rana kamera</string>
     <string name="osm_authorization_success">Otorisasi berhasil</string>
@@ -3640,7 +3640,7 @@
     <string name="live_monitoring_time_buffer">Penyangga waktu</string>
     <string name="live_monitoring_tracking_interval">Interval pelacakan</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempelwaktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode saat istirahat tidak dicatat sama sekali atau hanya masing-masing satu titik. Gerakan kecil (dunia nyata) (misalnya menyamping, untuk menandai kemungkinan belokan di perjalanan Anda) dapat disaring. File Anda berisi lebih sedikit informasi untuk pasca-pemrosesan, dan memiliki statistik yang lebih buruk dengan memfilter titik yang jelas-jelas berlebihan pada waktu perekaman, sambil berpotensi menyimpan artefak yang disebabkan oleh penerimaan yang buruk atau efek chipset GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efek samping: Periode istirahat tidak dicatat sama sekali atau hanya sebagai masing-masing satu titik. Pergerakan kecil (misalnya, ke sisi jalan untuk menandai kemungkinan belokan dalam perjalanan Anda) dapat disaring. Perhatikan, bahwa file Anda akan berisi lebih sedikit informasi untuk pasca-pemrosesan, dan pada saat yang sama berpotensi menyimpan artefak GPS yang disebabkan oleh penerimaan yang buruk atau efek chipset.</string>
     <string name="import_routing_file">Impor berkas perutean</string>
     <string name="import_profile">Impor profil</string>
     <string name="monitoring_prefs_descr">Navigasi, akurasi pencatatan</string>
@@ -3735,7 +3735,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Jaringan simpul</string>
     <string name="route_start_point">Titik awal</string>
     <string name="overwrite_profile_q">\'%1$s\' sudah ada. Timpa\?</string>
-    <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Pengaturan 5 meter dapat bekerja dengan baik untuk Anda jika Anda tidak perlu menangkap detail yang lebih baik dari itu, dan tidak ingin secara eksplisit menangkap data saat istirahat.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Tetapkan perpindahan 5 meter jika Anda tidak ingin mencatat detail kecil dari rute Anda, dan tidak memerlukan data tambahan tentang periode istirahat Anda.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
     <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
     <string name="map_widget_trip_recording_distance">Jarak</string>
@@ -4498,4 +4498,386 @@
     <string name="unknown_location">Posisi belum diketahui.</string>
     <string name="keep_informing_never">Hanya secara manual (ketuk panah)</string>
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
+    <string name="external_sensors_plugin_name">Sensor Eksternal</string>
+    <string name="send_uuid_preference_desc">Sebhah UUID acak digunakan untuk mengunduh peta luring dari server OsmAnd untuk memantau penggunaan sumber daya server yang adil, memprediksi pola lalu lintas, dan membuat laporan peta anonim sebulan.</string>
+    <string name="map_widget_altitude_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau untuk pusat peta saat ini</string>
+    <string name="location_simulation_cutoff">Simulasi melewati meter pertama</string>
+    <string name="map_center_widget">Koordinat: Tengah peta</string>
+    <string name="location_simulation_speedup">Percepatan simulasi</string>
+    <string name="map_widget_altitude_map_center">Ketinggian: tengah peta</string>
+    <string name="map_widget_altitude_map_center_desc">Menunjukkan ketinggian di atas permukaan laut dari pusat peta saat ini.</string>
+    <string name="map_widget_altitude_current_location">Ketinggian: lokasi saat ini</string>
+    <string name="map_widget_altitude_current_location_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini.</string>
+    <string name="shared_string_terms_of_use">Ketentuan Penggunaan</string>
+    <string name="map_widget_rendering_fps">FPS perenderan peta</string>
+    <string name="simulate_location_by_gpx">Simulasikan lokasi dengan GPX</string>
+    <string name="external_sensors_plugin_description">Pemantauan denyut jantung, kecepatan sepeda, daya sepeda, dan irama. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
+    <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang, dinyatakan dalam bingkai per detik (FPS).</string>
+    <string name="shared_string_identifiers">Pengenal</string>
+    <string name="send_uuid_preference">Kirim Pengenal Pengguna Unik (UUID)</string>
+    <string name="terms_of_service_desc">Dengan mengunduh peta Anda setuju dengan %1$s dan %2$s.</string>
+    <string name="current_location_widget">Koordinat: Lokasi saat ini</string>
+    <string name="srtm_paid_version_msg">Mohon pertimbangkan untuk membayar plugin \'Garis kontur\' untuk mendukung pengembangan lebih lanjut.</string>
+    <string name="native_app_allocated_memory_descr">Total memori asli yang dialokasikan oleh aplikasi %1$s MB (Dalvik %2$s MB, lainnya %3$s MB).
+\n Memori proporsional %4$s MB (batas Android %5$s MB, Dalvik %6$s MB).</string>
+    <string name="save_track_interval">Interval pencatatan selama navigasi</string>
+    <string name="save_track_interval_descr">Tentukan interval pencatatan untuk perekaman trek selama navigasi</string>
+    <string name="voice_provider_descr">Pilih panduan suara untuk navigasi.</string>
+    <string name="enable_proxy_descr">Konfigurasikan proksi HTTP untuk semua permintaan jaringan.</string>
+    <string name="proxy_port_descr">Tentukan nomor port proksi Anda (mis. 8118).</string>
+    <string name="moving_time">Waktu bergerak</string>
+    <string name="layer_amenity_label">Label Titik (POI, Favorit)</string>
+    <string name="use_displayed_track_for_navigation">Gunakan trek yang ditampilkan untuk navigasi\?</string>
+    <string name="routing_attr_height_description">Tentukan tinggi kendaraan yang diizinkan pada rute.</string>
+    <string name="copying_osmand_files_descr">Menyalin file data OsmAnd ke tujuan baru (%s)…</string>
+    <string name="speak_descr">Atur pengumuman nama jalan, peringatan lalu lintas (pemberhentian paksa, polisi tidur), peringatan kamera kecepatan, dan batas kecepatan.</string>
+    <string name="intermediate_items_sort_return">Urutan tujuan perantara yang dioptimalkan dalam perjalanan ke tujuan.</string>
+    <string name="use_kalman_filter_compass_descr">Mengurangi kebisingan dalam pembacaan kompas tetapi menambahkan inersia.</string>
+    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine (SAC)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Menekan tampilan batas wilayah (tingkat admin 5–9).</string>
+    <string name="gps_not_available">Harap aktifkan GPS di pengaturan</string>
+    <string name="gpx_monitoring_disabled_warn">Catat trek menggunakan widget GPX atau melalui pengaturan \'Perekaman perjalanan\'.</string>
+    <string name="routing_attr_piste_type_downhill_description">Lereng untuk ski alpine atau downhill dan akses ke lift ski.</string>
+    <string name="routing_attr_piste_type_skitour_description">Rute untuk tur ski.</string>
+    <string name="routing_attr_allow_advanced_name">Perbolehkan rute lanjutan</string>
+    <string name="routing_attr_allow_advanced_description">Rute yang sulit, dengan hambatan berbahaya dan bagian yang curam.</string>
+    <string name="rendering_attr_showAccess_name">Tampilkan pembatasan akses dan tol</string>
+    <string name="save_as_favorites_points">Simpan sebagai grup Favorit</string>
+    <string name="vector_data_missing">Unduh data (\'luring\') untuk menggunakan peta secara luring.</string>
+    <string name="local_index_action_do">Anda akan %1$s %2$s item. Lanjutkan\?</string>
+    <string name="calculate_osmand_route_gpx">Penghitungan rute OsmAnd secara luring</string>
+    <string name="osb_author_or_password_not_specified">Harap tentukan pengguna dan kata sandi OSM di \'Pengaturan\'</string>
+    <string name="external_input_device">Perangkat masukan eksternal</string>
+    <string name="external_input_device_descr">Pilih perangkat kontrol eksternal, seperti papan ketik atau WunderLINQ.</string>
+    <string name="av_settings_descr">Atur pengaturan audio dan video.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Render jalur sesuai dengan jejak OSMC.</string>
+    <string name="intermediate_point_too_far">Tujuan perantara %1$s terlalu jauh dari jalan terdekat.</string>
+    <string name="osmand_extended_description_part6">Berjalan kaki, hiking, tur kota
+\n - Peta menampilkan jalur berjalan kaki dan hiking
+\n - Wikipedia dalam bahasa pilihan Anda dapat memberi tahu Anda banyak hal selama tur kota
+\n - Perhentian transportasi umum (bus, trem, kereta api), termasuk nama jalur, membantu Anda menavigasi di kota baru
+\n - Navigasi GPS dalam mode pejalan kaki membangun rute Anda menggunakan jalur pejalan kaki
+\n - Unggah dan ikuti rute GPX atau rekam dan bagikan rute Anda sendiri
+\n</string>
+    <string name="osmand_plus_extended_description_part6">Fitur Sepeda dan Pejalan Kaki
+\n - Melihat jalur pejalan kaki, hiking, dan sepeda, baik untuk aktivitas luar ruangan
+\n - Mode perutean dan tampilan khusus untuk sepeda dan pejalan kaki
+\n - Perhentian transportasi umum opsional (bus, trem, kereta api) termasuk nama jalur
+\n - Rekaman perjalanan opsional ke file GPX lokal atau layanan daring
+\n - Tampilan kecepatan dan ketinggian opsional
+\n - Tampilan garis kontur dan bayangan bukit (melalui plugin tambahan)</string>
+    <string name="osmand_plus_extended_description_part7">Berkontribusi langsung ke OSM
+\n - Laporkan kutu data
+\n - Unggah trek GPX ke OSM langsung dari aplikasi
+\n - Tambahkan POI dan langsung mengunggahnya ke OSM (atau nanti jika luring)
+\n - Perekaman perjalanan opsional juga dalam mode latar belakang (saat perangkat dalam mode tidur)
+\n OsmAnd adalah perangkat lunak sumber terbuka yang dikembangkan secara aktif. Setiap orang dapat berkontribusi ke aplikasi dengan melaporkan kutu, memperbaiki terjemahan atau memrogram fitur baru. Selain itu, proyek ini bergantung pada kontribusi keuangan untuk mendanai memrogram dan pengujian fungsi baru.
+\n</string>
+    <string name="osmand_plus_extended_description_part8">Perkiraan cakupan dan kualitas peta:
+\n - Eropa Barat: ****
+\n - Eropa Timur: ***
+\n - Rusia: ***
+\n - Amerika Utara: ***
+\n - Amerika Selatan: **
+\n - Asia: **
+\n - Jepang dan Korea: ***
+\n - Timur Tengah: **
+\n - Afrika: **
+\n - Antartika: *
+\n Sebagian besar negara di seluruh dunia tersedia sebagai unduhan
+\n Dari Afghanistan hingga Zimbabwe, dari Australia hingga Amerika Serikat. Argentina, Brasil, Kanada, Prancis, Jerman, Meksiko, Inggris, Spanyol, ...
+\n</string>
+    <string name="route_updated_loc_found">Menunggu posisi untuk menghitung rute</string>
+    <string name="osmand_parking_position_description">Lokasi kendaraan Anda yang diparkir. %1$s</string>
+    <string name="share_route_as_gpx">Bagikan rute sebagai file GPX</string>
+    <string name="rendering_attr_noPolygons_description">Jadikan semua fitur lahan areal di peta transparan.</string>
+    <string name="left_side_navigation_descr">Untuk negara di mana orang mengemudi di sisi kiri jalan.</string>
+    <string name="accessibility_mode_descr">Mengaktifkan fitur untuk pengguna yang mengalami gangguan.</string>
+    <string name="zoom_by_trackball_descr">Ubah perbesaran peta dengan gerakan bola trek horizontal.</string>
+    <string name="tts_language_not_supported">Bahasa yang dipilih tidak didukung oleh mesin TTS (teks-ke-suara) Android yang diinstal, bahasa TTS prasetelnya akan digunakan sebagai gantinya. Cari mesin TTS lain di toko aplikasi\?</string>
+    <string name="live_monitoring_m">Pelacakan daring (diperlukan GPX)</string>
+    <string name="use_compass_navigation_descr">Gunakan kompas apabila tidak ada arah yang terdeteksi.</string>
+    <string name="validate_gpx_upload_name_pwd">Harap tentukan nama pengguna dan kata sandi OSM Anda untuk mengunggah file GPX.</string>
+    <string name="distance_measurement_finish_subtrack">Mulai subtrek baru</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Tentukan buffer waktu untuk menyimpan lokasi yang akan dikirim tanpa koneksi</string>
+    <string name="enable_plugin_monitoring_services">Aktifkan plugin \"Trip recording\" untuk menggunakan layanan pencatatan posisi (pencatatan GPX, pelacakan daring)</string>
+    <string name="local_index_description">Ketuk item yang ada untuk melihat detail lebih lanjut, ketuk lama untuk menonaktifkan atau menghapus. Data saat ini pada perangkat (%1$s bebas):</string>
+    <string name="routing_attr_piste_type_nordic_name">Ski lintas negara dan nordik</string>
+    <string name="gpx_option_calculate_first_last_segment">Hitung rute OsmAnd untuk segmen rute pertama dan terakhir</string>
+    <string name="animate_routing_route">Simulasikan menggunakan rute yang dihitung</string>
+    <string name="show_warnings_descr">Atur peringatan lalu lintas (batas kecepatan, pemberhentian paksa, polisi tidur, terowongan), peringatan kamera kecepatan, dan info jalur.</string>
+    <string name="basemap_missing">Unduh peta dunia dasar untuk mendapatkan gambaran umum yang mencakup seluruh dunia pada tingkat perbesaran rendah.</string>
+    <string name="settings_direction_style_descr">Pilih gaya untuk mengekspresikan arah relatif saat bergerak</string>
+    <string name="recording_is_recorded">Merekam audio/video. Hentikan dengan mengetuk widget AV.</string>
+    <string name="routing_attr_allow_skating_only_description">Rute yang dipersiapkan untuk gaya bebas atau skating saja tanpa trek klasik.</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nKetuk lama untuk melihat di peta"</string>
+    <string name="delay_navigation_start">Mulai panduan belokan demi belokan secara otomatis</string>
+    <string name="routing_attr_width_description">Tentukan batas lebar kendaraan yang diizinkan pada rute.</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (Petunjuk Arah Navigasi Otomatis OSM)
+\n
+\n OsmAnd adalah aplikasi navigasi perangkat lunak sumber terbuka dengan akses ke berbagai macam data OSM global. Semua data peta (peta vektor atau ubin) dapat disimpan pada kartu memori ponsel untuk penggunaan luring. Fungsionalitas perutean luring dan daring juga ditawarkan, termasuk panduan suara belokan demi belokan.
+\n
+\n Beberapa fitur inti:
+\n - Fungsionalitas luring lengkap (menyimpan peta vektor atau tile yang diunduh dalam penyimpanan perangkat)
+\n - Tersedia peta vektor luring ringkas untuk seluruh dunia
+\n - Unduh peta negara atau wilayah langsung dari aplikasi
+\n - Hamparan beberapa lapisan peta yang memungkinkan, seperti GPX atau trek navigasi, tempat menarik, Favorit, garis kontur, pemberhentian transportasi umum, peta tambahan dengan transparansi yang dapat disesuaikan
+\n - Pencarian luring untuk alamat dan tempat (POI)
+\n - Perutean luring untuk jarak menengah
+\n - Mode mobil, sepeda, dan pejalan kaki dengan fitur opsional:
+\n - Peralihan tampilan siang/malam otomatis
+\n - Pembesaran peta yang bergantung pada kecepatan
+\n - Penyelarasan peta menurut kompas atau arah gerakan
+\n - Panduan lajur, tampilan batas kecepatan, suara yang direkam dan teks-ke-suara
+\n
+\n Keterbatasan versi gratis OsmAnd ini:
+\n - Jumlah unduhan peta terbatas
+\n - Tidak ada akses luring ke POI Wikipedia
+\n
+\n OsmAnd sedang dikembangkan secara aktif dan proyek kami serta kemajuannya yang berkelanjutan bergantung pada kontribusi keuangan untuk pengembangan dan pengujian kemampuan baru. Mohon pertimbangkan untuk membeli OsmAnd+, atau mendanai fitur baru yang spesifik atau memberikan donasi umum di https://osmand.net.</string>
+    <string name="gpx_selection_route_points">%1$s
+\nTitik rute %2$s</string>
+    <string name="calculate_osmand_route_without_internet">Perhitungan luring segmen rute OsmAnd</string>
+    <string name="routing_attr_avoid_borders_description">Menghindari melintasi perbatasan nasional</string>
+    <string name="routing_attr_weight_description">Tentukan batas berat kendaraan yang diizinkan pada rute.</string>
+    <string name="android_19_location_disabled">Pada Android 4.4 (KitKat) dan seterusnya, folder penyimpanan lama (%s) sudah tidak digunakan lagi. Salin semua file OsmAnd ke lokasi penyimpanan baru\?
+\n Catatan 1: File lama Anda akan tetap tidak disentuh (tetapi dapat dihapus secara manual).
+\n Catatan 2: Di lokasi penyimpanan yang baru, Anda tidak dapat berbagi file antara OsmAnd dan OsmAnd+.</string>
+    <string name="copying_osmand_one_file_descr">Menyalin file (%s) ke tujuan baru…</string>
+    <string name="speech_rate_descr">Menentukan kecepatan bicara untuk teks-ke-ucapan.</string>
+    <string name="animate_routing_gpx">Simulasikan menggunakan trek GPX</string>
+    <string name="route_is_too_long_v2">Untuk jarak jauh: Harap tambahkan tujuan perantara jika tidak ada rute yang ditemukan dalam waktu 10 menit.</string>
+    <string name="new_directions_point_dialog">Anda sudah menetapkan tujuan perantara.</string>
+    <string name="use_distance_measurement_help">* Ketuk untuk menandai titik.
+\n * Ketuk lama pada peta untuk menghapus titik sebelumnya.
+\n * Ketuk lama pada titik untuk melihat dan melampirkan deskripsi.
+\n * Ketuk widget pengukuran untuk melihat tindakan lainnya.</string>
+    <string name="use_magnetic_sensor_descr">Untuk pembacaan kompas, gunakan sensor magnetik daripada sensor orientasi.</string>
+    <string name="save_track_to_gpx_globally_descr">Pencatatan posisi umum ke file GPX dapat diaktifkan atau dinonaktifkan dengan menggunakan widget pencatatan GPX pada peta.</string>
+    <string name="save_current_track_descr">Simpan trek saat ini sebagai file GPX sekarang.</string>
+    <string name="save_track_to_gpx">Rekam trek secara otomatis selama navigasi</string>
+    <string name="enable_proxy_title">Aktifkan proksi HTTP</string>
+    <string name="proxy_host_descr">Tentukan nama host proksi Anda (mis. 127.0.0.1).</string>
+    <string name="live_monitoring_m_descr">Kirim data pelacakan ke layanan web tertentu jika pencatatan GPX aktif.</string>
+    <string name="download_additional_maps">Unduh peta yang belum ada %1$s (%2$d MB)\?</string>
+    <string name="none_selected_gpx">Tentukan file GPX dengan mengetuk lama terlebih dahulu.</string>
+    <string name="rendering_attr_coloredBuildings_name">Kode warna bangunan berdasarkan jenisnya</string>
+    <string name="live_monitoring_stop">Hentikan pelacakan daring</string>
+    <string name="gpx_start_new_segment">Mulai segmen baru</string>
+    <string name="rendering_attr_buildings15zoom_name">Bangunan pada perbesaran 15</string>
+    <string name="use_points_as_intermediates">Hitung rute antar titik</string>
+    <string name="routing_attr_avoid_borders_name">Tidak ada penyeberangan perbatasan</string>
+    <string name="no_index_file_to_download">Unduhan tidak ditemukan, harap periksa koneksi Anda ke Internet.</string>
+    <string name="show_zoom_buttons_navigation_descr">Tampilkan tombol perbesaran selama navigasi.</string>
+    <string name="auto_zoom_map_descr">Tingkat perbesaran sesuai dengan kecepatan Anda (sementara peta disinkronkan dengan posisi saat ini).</string>
+    <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
+    <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
+\n%1$s</string>
+    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC.</string>
+    <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
+    <string name="osmand_extended_description_part2">Navigasi GPS
+\n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)
+\n - Panduan suara belokan demi belokan menuntun Anda di sepanjang jalan (suara yang direkam dan disintesis)
+\n - Rute akan dibangun kembali setiap kali Anda menyimpang darinya
+\n - Panduan jalur, nama jalan, dan perkiraan waktu kedatangan akan membantu di sepanjang jalan
+\n - Untuk membuat perjalanan Anda lebih aman, mode siang/malam beralih secara otomatis
+\n - Tampilkan batas kecepatan, dan dapatkan pengingat jika Anda melampauinya
+\n - Perbesaran peta menyesuaikan dengan kecepatan Anda
+\n - Mencari tujuan berdasarkan alamat, jenis (misalnya: Parkir, restoran, hotel, pom bensin, museum), atau koordinat geografis
+\n - Mendukung titik perantara pada rencana perjalanan Anda
+\n - Rekam atau unggah trek GPX Anda sendiri dan ikuti
+\n</string>
+    <string name="osmand_extended_description_part8">OsmAnd adalah perangkat lunak sumber terbuka yang dikembangkan secara aktif. Setiap orang dapat berkontribusi ke aplikasi dengan melaporkan kutu, memperbaiki terjemahan atau memrogram fitur baru. Selain itu, proyek ini bergantung pada kontribusi keuangan untuk mendanai memrograman dan pengujian fungsi baru.
+\n Perkiraan cakupan dan kualitas peta:
+\n - Eropa Barat: ****
+\n - Eropa Timur: ***
+\n - Rusia: ***
+\n - Amerika Utara: ***
+\n - Amerika Selatan: **
+\n - Asia: **
+\n - Jepang dan Korea: ***
+\n - Timur Tengah: **
+\n - Afrika: **
+\n - Antartika: *
+\n Sebagian besar negara di seluruh dunia tersedia untuk diunduh!
+\n Dapatkan navigasi yang dapat diandalkan di negara Anda - baik itu Prancis, Jerman, Meksiko, Inggris, Spanyol, Belanda, Amerika Serikat, Rusia, Brasil, atau lainnya.</string>
+    <string name="osmand_plus_play_title_30_chars">Peta &amp; Navigasi OsmAnd+</string>
+    <string name="osmand_plus_short_description_80_chars">Tampilan Peta Seluler Global &amp; Navigasi untuk Peta OSM Luring dan Daring</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Petunjuk Arah Navigasi Otomatis OSM)
+\n
+\n OsmAnd+ adalah aplikasi navigasi perangkat lunak sumber terbuka dengan akses ke berbagai macam data OSM global. Semua data peta (peta vektor atau ubin) dapat disimpan pada kartu memori telepon untuk penggunaan luring. Fungsionalitas perutean luring dan daring juga ditawarkan, termasuk panduan suara belokan demi belokan.
+\n
+\n OsmAnd+ adalah versi aplikasi berbayar, dengan membelinya Anda mendukung proyek ini, mendanai pengembangan fitur baru, dan menerima update terbaru.
+\n
+\n Beberapa fitur inti:
+\n - Fungsionalitas luring lengkap (menyimpan peta vektor atau ubin yang diunduh di penyimpanan perangkat)
+\n - Tersedia peta vektor luring ringkas untuk seluruh dunia
+\n - Pengunduhan peta negara atau wilayah tanpa batas langsung dari aplikasi
+\n - Fitur Wikipedia offline (unduh POI Wikipedia), baik untuk bertamasya
+\n - Hamparan beberapa lapisan peta yang memungkinkan, seperti GPX atau trek navigasi, tempat menarik, Favorit, garis kontur, pemberhentian transportasi umum, peta tambahan dengan transparansi yang dapat disesuaikan
+\n
+\n - Pencarian offline untuk alamat dan tempat (POI)
+\n - Perutean offline untuk jarak menengah
+\n - Mode mobil, sepeda, dan pejalan kaki dengan fitur opsional:
+\n - Peralihan tampilan siang/malam otomatis
+\n - Pembesaran peta yang bergantung pada kecepatan
+\n - Penyelarasan peta menurut kompas atau arah gerakan
+\n - Panduan lajur, tampilan batas kecepatan, suara yang direkam dan teks-ke-suara
+\n</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Petunjuk Arah Navigasi Otomatis OSM) adalah aplikasi peta dan navigasi dengan akses ke data OSM dunia yang bebas dan berkualitas tinggi.
+\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian, pilihan antara mode mengemudi, bersepeda, pejalan kaki, pengeditan OSM, dan banyak lagi.
+\n
+\n OsmAnd+ adalah versi aplikasi berbayar. Dengan membelinya, Anda mendukung proyek ini, mendanai pengembangan fitur baru, dan menerima pembaruan terbaru.
+\n
+\n Beberapa fitur utama:</string>
+    <string name="osmand_plus_extended_description_part3">Menampilkan Peta
+\n - Menampilkan posisi dan orientasi Anda
+\n - Secara opsional menyelaraskan gambar menurut kompas atau arah gerak Anda
+\n - Menyimpan tempat terpenting Anda sebagai Favorit
+\n - Menampilkan POI (tempat menarik) di sekitar Anda
+\n - Menampilkan ubin daring khusus, tampilan satelit (dari Bing), hamparan yang berbeda seperti trek GPX tur/navigasi dan lapisan tambahan dengan transparansi yang dapat disesuaikan
+\n - Secara opsional menampilkan nama tempat dalam bahasa Inggris, lokal, atau ejaan fonetik
+\n</string>
+    <string name="osmand_plus_extended_description_part4">Gunakan Data OSM dan Wikipedia
+\n - Info berkualitas tinggi dari proyek kolaboratif terbaik di dunia
+\n - Data OSM tersedia per negara atau wilayah
+\n - POI Wikipedia, baik untuk bertamasya
+\n - Unduhan bebas tanpa batas, langsung dari aplikasi
+\n - Peta vektor offline ringkas yang diperbarui setidaknya sebulan sekali
+\n
+\n - Pilihan antara data wilayah yang lengkap dan hanya jaringan jalan (Contoh: Seluruh Jepang adalah 700 MB atau 200 MB untuk bagian jaringan jalan)</string>
+    <string name="offline_navigation_not_available">Navigasi luring OsmAnd untuk sementara tidak tersedia.</string>
+    <string name="osmand_parking_delete_confirm">Hapus penanda lokasi parkir\?</string>
+    <string name="osmand_parking_add_event">Tambahkan pemberitahuan ke aplikasi Kalender</string>
+    <string name="routing_attr_allow_expert_description">Rute yang sangat sulit, dengan rintangan dan lingkungan yang berbahaya.</string>
+    <string name="unknown_from_location">Titik keberangkatan belum ditentukan.</string>
+    <string name="modify_transparency">Atur transparansi (0 - transparan, 255 - buram)</string>
+    <string name="first_time_msg">Terima kasih telah menggunakan OsmAnd. Unduh data wilayah untuk penggunaan luring melalui \'Menu\' → \'Unduh peta\' untuk melihat peta, mencari alamat, mencari POI, menemukan transportasi umum dan banyak lagi.</string>
+    <string name="index_settings_descr">Unduh dan kelola file peta luring yang disimpan di perangkat Anda.</string>
+    <string name="support_new_features_descr">Berdonasi untuk melihat fitur baru yang diterapkan dalam aplikasi.</string>
+    <string name="native_library_not_supported">Pustaka asli tidak didukung di perangkat ini.</string>
+    <string name="old_poi_file_should_be_deleted">File data POI \'%1$s\' berlebihan dan dapat dihapus.</string>
+    <string name="fav_export_confirmation">File yang berisi Favorit yang diekspor sebelumnya sudah ada. Ganti\?</string>
+    <string name="osmand_service_descr">OsmAnd berjalan di latar belakang dengan layar mati.</string>
+    <string name="update_poi_file_not_found">File lokal untuk mempertahankan perubahan POI tidak ditemukan dan tidak dapat dibuat.</string>
+    <string name="choose_auto_follow_route_descr">Waktu hingga tampilan peta disinkronkan dengan posisi saat ini.</string>
+    <string name="data_to_search_poi_not_available">Unduh data luring untuk mencari POI.</string>
+    <string name="show_more_map_detail_descr">Tampilkan beberapa detail peta vektor (jalan, dll.) pada tingkat perbesaran yang lebih rendah.</string>
+    <string name="routing_attr_allow_intermediate_description">Rute yang lebih sulit dengan bagian yang lebih curam. Umumnya beberapa rintangan yang harus dihindari.</string>
+    <string name="switch_to_vector_map_to_see">Peta vektor luring hadir untuk lokasi ini.
+\n\t
+\n\tUntuk menggunakan, aktifkan \'Menu\' → \'Konfigurasi peta\' → \'Sumber Peta...\' → \'Peta vektor luring\'.</string>
+    <string name="dashboard_or_drawer_description">Pilihan ditawarkan untuk mengatur aplikasi melalui dasbor fleksibel atau menu statis. Pilihan Anda selalu dapat diubah dalam pengaturan dasbor.</string>
+    <string name="routing_attr_piste_type_nordic_description">Jalur untuk ski nordik atau lintas negara.</string>
+    <string name="global_app_allocated_memory_descr">Memori yang dialokasikan %1$s MB (batas Android %2$s MB, Dalvik %3$s MB).</string>
+    <string name="audionotes_location_not_defined">Ketuk \'Gunakan lokasi...\' untuk menambahkan catatan ke lokasi.</string>
+    <string name="routing_attr_allow_skating_only_name">Perbolehkan rute skating saja</string>
+    <string name="local_index_upload_gpx_description">Unggah file GPX ke komunitas OSM, untuk memperbaiki peta.</string>
+    <string name="precise_routing_mode_descr">Menghitung rute yang tepat tanpa gangguan. Masih terbatas dengan jarak dan lambat.</string>
+    <string name="arrival_distance_descr">Seberapa cepat Anda ingin pengumuman kedatangan\?</string>
+    <string name="offline_edition_descr">Jika pengeditan luring diaktifkan, maka perubahan akan disimpan secara lokal terlebih dahulu dan diunggah berdasarkan permintaan, jika tidak, perubahan akan segera diunggah.</string>
+    <string name="screen_is_locked">Ketuk ikon kunci untuk membuka kunci</string>
+    <string name="osmand_parking_position_description_add_time">Mobil diparkir di</string>
+    <string name="map_online_data_descr">Gunakan peta daring (unduh dan simpan ubin pada kartu memori).</string>
+    <string name="switch_to_raster_map_to_see">Unduh peta vektor luring untuk lokasi ini di \'Menu\' (\'Unduh peta\'), atau beralih ke plugin \'Peta daring\'.</string>
+    <string name="distance_measurement_load_gpx">Buka file GPX yang sudah ada</string>
+    <string name="favorite_delete_multiple">Hapus %1$d Favorit dan %2$d grup Favorit\?</string>
+    <string name="always_center_position_on_map">Posisi tampilan selalu di tengah</string>
+    <string name="routing_attr_allow_expert_name">Perbolehkan rute ahli</string>
+    <string name="routing_attr_allow_classic_only_description">Rute yang dipersiapkan untuk gaya klasik saja tanpa jalur skating. Ini termasuk rute yang dipersiapkan oleh mobil salju yang lebih kecil dengan jalur yang lebih longgar dan trek yang dibuat secara manual oleh pemain ski.</string>
+    <string name="clear_dest_confirm">Hapus tujuan Anda (dan tujuan perantara)\?</string>
+    <string name="dropbox_plugin_description">Sinkronkan trek dan catatan audio/video dengan akun Dropbox Anda.</string>
+    <string name="osmand_extended_description_part4">Ski
+\n Plugin peta ski OsmAnd memungkinkan Anda untuk melihat trek ski dengan tingkat kerumitan dan beberapa info tambahan, seperti lokasi lift dan fasilitas lainnya.</string>
+    <string name="disable_complex_routing_descr">Nonaktifkan perutean dua fase untuk navigasi mobil.</string>
+    <string name="access_intermediate_arrival_time">Waktu kedatangan perantara</string>
+    <string name="tts_missing_language_data">Pergi ke toko aplikasi untuk mengunduh bahasa yang dipilih\?</string>
+    <string name="routing_attr_piste_type_sled_description">Lereng untuk penggunaan kereta luncur.</string>
+    <string name="quick_action_need_to_add_item_to_list">Tambahkan setidaknya satu item ke daftar dalam pengaturan \'Tindakan cepat\'</string>
+    <string name="routing_attr_allow_intermediate_name">Izinkan rute perantara</string>
+    <string name="complex_route_calculation_failed">Perhitungan rute cepat gagal (%s), kembali ke perhitungan lambat.</string>
+    <string name="rendering_out_of_memory">Memori proses tidak cukup untuk menampilkan area yang dipilih</string>
+    <string name="use_fluorescent_overlays_descr">Gunakan warna neon untuk menampilkan trek dan rute.</string>
+    <string name="live_monitoring_url_descr">Tentukan alamat web dengan sintaks parameter: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="interrupt_music_descr">Perintah suara menjeda pemutaran musik.</string>
+    <string name="osmand_play_title_30_chars">Peta &amp; Navigasi OsmAnd</string>
+    <string name="osmand_short_description_80_chars">Tampilan dan navigasi peta seluler global untuk peta OSM luring dan daring</string>
+    <string name="update_poi_does_not_change_indexes">Perubahan POI di dalam aplikasi tidak mempengaruhi file peta yang diunduh, perubahan disimpan sebagai file di perangkat Anda.</string>
+    <string name="map_version_changed_info">Unduh versi aplikasi baru untuk dapat menggunakan file peta baru.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (Petunjuk Arah Navigasi Otomatis OSM) adalah aplikasi peta dan navigasi dengan akses ke data OSM dunia yang bebas dan berkualitas tinggi.
+\n
+\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian (melalui plugin), pilihan antara mode mengemudi, bersepeda, pejalan kaki, pengeditan OSM, dan banyak lagi.</string>
+    <string name="osmand_extended_description_part3">Peta
+\n - Menampilkan POI (tempat menarik) di sekitar Anda
+\n - Menyesuaikan peta dengan arah gerak Anda (atau kompas)
+\n - Menunjukkan lokasi Anda dan arah yang Anda lihat
+\n - Membagikan lokasi Anda sehingga teman Anda bisa menemukan Anda
+\n - Menyimpan tempat-tempat terpenting Anda di \'Favorit\'
+\n - Memungkinkan Anda memilih cara menampilkan nama pada peta: Dalam bahasa Inggris, lokal, atau ejaan fonetik
+\n - Menampilkan ubin daring khusus, tampilan satelit (dari Bing), hamparan yang berbeda seperti trek GPX tur/navigasi dan lapisan tambahan dengan transparansi yang dapat disesuaikan
+\n</string>
+    <string name="osmand_extended_description_part5">Bersepeda
+\n - Temukan jalur sepeda di peta
+\n - Navigasi GPS dalam mode bersepeda membangun rute Anda menggunakan jalur sepeda
+\n - Lihat kecepatan dan ketinggian Anda
+\n - Opsi perekaman GPX memungkinkan Anda untuk merekam perjalanan Anda dan membagikannya
+\n - Melalui plugin tambahan, Anda dapat mengaktifkan garis kontur dan bayangan bukit</string>
+    <string name="osmand_extended_description_part7">Berkontribusi ke OSM
+\n - Laporkan kutu data
+\n - Unggah trek GPX ke OSM langsung dari aplikasi
+\n - Tambahkan POI dan langsung mengunggahnya ke OSM (atau nanti jika luring)
+\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigasi
+\n - Bekerja secara daring (cepat) atau luring (tidak ada biaya roaming saat Anda berada di luar negeri)
+\n - Panduan suara belokan demi belokan (suara yang direkam dan disintesis)
+\n - Panduan jalur opsional, tampilan nama jalan, dan perkiraan waktu kedatangan
+\n - Mendukung titik perantara pada rencana perjalanan Anda
+\n - Perutean ulang otomatis setiap kali Anda menyimpang dari rute
+\n - Mencari tempat berdasarkan alamat, berdasarkan jenis (misalnya: Restoran, hotel, pom bensin, museum), atau berdasarkan koordinat geografis
+\n</string>
+    <string name="osmand_plus_extended_description_part5">Fitur Keamanan
+\n - Peralihan tampilan siang/malam otomatis secara opsional
+\n - Tampilan batas kecepatan opsional, dengan pengingat jika Anda melampauinya
+\n - Perbesaran opsional yang bergantung pada kecepatan
+\n - Berbagi lokasi Anda sehingga teman Anda dapat menemukan Anda
+\n</string>
+    <string name="continue_follow_previous_route_auto">Terus mengikuti navigasi sebelumnya yang belum selesai\? (%1$s detik)</string>
+    <string name="starting_point_too_far">Titik keberangkatan terlalu jauh dari jalan terdekat.</string>
+    <string name="osmand_parking_event">Ambil mobil dari parkir</string>
+    <string name="osmand_parking_warning_text">Pemberitahuan untuk mengambil mobil Anda telah ditambahkan ke kalender Anda dan dapat diedit atau dihapus di situ.</string>
+    <string name="basemap_was_selected_to_download">Peta dasar yang diperlukan untuk menyediakan kemampuan dasar ada dalam antrean unduhan.</string>
+    <string name="map_online_plugin_is_not_installed">Aktifkan plugin \'Peta daring\' untuk memilih sumber peta yang berbeda</string>
+    <string name="online_map_settings_descr">Pilih sumber peta ubin daring atau yang telah disimpan.</string>
+    <string name="vector_maps_may_display_faster_on_some_devices">Peta vektor kemungkinan ditampilkan lebih cepat. Mungkin tidak berfungsi dengan baik pada beberapa perangkat.</string>
+    <string name="play_commands_of_currently_selected_voice">Pilih suara dan uji dengan memutar pengumuman:</string>
+    <string name="speak_gps_signal_status">Umumkan sinyal GPS hilang dan terpulih</string>
+    <string name="speak_route_recalculation">Umumkan penghitungan ulang rute</string>
+    <string name="release_4_3">- Mesin render peta baru yang lebih cepat, dengan tampilan 2.5D
+\n
+\n - Animasi perubahan lokasi yang mulus saat bergerak
+\n
+\n - Widget baru untuk koordinat pusat peta dan ketinggian geolokasi
+\n
+\n - \"Jarak untuk mengetuk\": menambahkan opsi ukuran teks
+\n
+\n - Widget \"Penanda peta\": menambahkan opsi untuk mengubah perilaku klik
+\n
+\n - Diperbaiki opsi \"Posisi tampilan\"
+\n
+\n - GPX: menambahkan dukungan untuk tag \"link\", \"cmt\", \"desc\" dan untuk ekstensi khusus apa pun
+\n
+\n - Daftar \"Peta bahari\" yang diatur ulang
+\n
+\n - Ditambahkan dukungan untuk sensor ANT+
+\n
+\n - Ditambahkan opsi untuk menonaktifkan UUID unduhan
+\n
+\n</string>
+    <string name="external_sensors_support">Dukungan sensor eksternal</string>
+    <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
+    <string name="show_map_symbols_desc">Teks, tanda jalan, dan lain-lain.</string>
+    <string name="show_borders_of_downloaded_maps">Warna peta terunduh</string>
+    <string name="show_map_symbols">Tampilkan simbol peta</string>
 </resources>

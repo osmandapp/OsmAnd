@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
+import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
@@ -65,6 +66,8 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	@Override
 	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
 		long requestTimestamp = System.currentTimeMillis();
+		IQueryController queryController = request.getQueryController();
+		boolean cacheOnly = request.getCacheOnly();
 		int zoom = request.getZoom().swigValue();
 		int tileX = request.getTileId().getX();
 		int tileY = request.getTileId().getY();
@@ -79,7 +82,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		boolean shiftedTile = offsetY > 0;
 		byte[] firstTileData;
 		byte[] secondTileData;
-		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp);
+		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp, cacheOnly, queryController);
 		if (firstTileData == null) {
 			return SwigUtilities.nullSkImage();
 		}
@@ -94,7 +97,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			Canvas canvas = new Canvas(resultTileBitmap);
 			canvas.translate(0, (float)-offsetY);
 			canvas.drawBitmap(firstTileBitmap, 0, 0, paint);
-			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp);
+			secondTileData = getTileBytes(tileX, tileY + 1, zoom, requestTimestamp, cacheOnly, queryController);
 			if (secondTileData != null) {
 				Bitmap secondTileBitmap = BitmapFactory.decodeByteArray(secondTileData, 0, secondTileData.length);
 				if (secondTileBitmap == null) {
@@ -185,11 +188,12 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Nullable
-	private byte[] getTileBytes(int tileX, int tileY, int zoom, long requestTimestamp) {
+	private byte[] getTileBytes(int tileX, int tileY, int zoom, long requestTimestamp,
+			boolean cacheOnly, IQueryController queryController) {
 		byte[] bytes = null;
 		try {
 			String tileFilename = rm.calculateTileId(tileSource, tileX, tileY, zoom);
-			if (tileSource.couldBeDownloadedFromInternet()) {
+			if (!cacheOnly && tileSource.couldBeDownloadedFromInternet()) {
 				TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource, tileX, tileY, zoom);
 				rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
 				try {
@@ -204,6 +208,9 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 							} catch (InterruptedException ignored) {
 							}
 						}
+						if (queryController == null || queryController.isAborted()) {
+							break;
+						}				
 					}
 				} finally {
 					rm.getMapTileDownloader().removeDownloaderCallback(tileReadyCallback);

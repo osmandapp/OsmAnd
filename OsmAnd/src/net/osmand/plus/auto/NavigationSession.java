@@ -160,7 +160,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (requestPurchaseScreen != null && InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
 			requestPurchaseScreen.finish();
 			requestPurchaseScreen = null;
-			app.getOsmandMap().getMapView().setupOpenGLView();
+			app.getOsmandMap().getMapView().setupRenderingView();
 
 			requestLocationPermission();
 		}

@@ -34,14 +34,15 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
+import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
@@ -167,7 +168,9 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					feature = OsmAndFeature.TERRAIN;
 				} else if (plugin instanceof WikipediaPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
-				}  else if (plugin instanceof WeatherPlugin) {
+				} else if (plugin instanceof AntPlusPlugin) {
+					feature = OsmAndFeature.EXTERNAL_SENSORS_SUPPORT;
+				} else if (plugin instanceof WeatherPlugin) {
 					feature = OsmAndFeature.WEATHER;
 				} else {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));

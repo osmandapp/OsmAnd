@@ -117,6 +117,26 @@
 		android:title="@string/speed_limit_exceed" />
 
 	<Preference
+		android:key="other_divider"
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="other_header"
+		android:layout="@layout/preference_category_title"
+		android:title="@string/shared_string_other" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_gps_signal_status"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_gps_signal_status" />
+
+	<SwitchPreferenceCompat
+		android:key="speak_route_recalculation"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_route_recalculation" />
+
+	<Preference
 		android:key="speed_limit_divider"
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />

@@ -84,6 +84,7 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_MONTHLY_MAP_UPDATES = "monthly-map-updates";
 	private static final String CHOOSE_PLAN_TYPE_UNLIMITED_MAP_DOWNLOADS = "unlimited-map-downloads";
 	private static final String CHOOSE_PLAN_TYPE_COMBINED_WIKI = "combined-wiki";
+	private static final String CHOOSE_PLAN_TYPE_EXTERNAL_SENSORS_SUPPORT = "external-sensors-support";
 	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
 	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
@@ -425,6 +426,9 @@ public class DiscountHelper {
 				break;
 			case CHOOSE_PLAN_TYPE_COMBINED_WIKI:
 				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.COMBINED_WIKI);
+				break;
+			case CHOOSE_PLAN_TYPE_EXTERNAL_SENSORS_SUPPORT:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.EXTERNAL_SENSORS_SUPPORT);
 				break;
 		}
 	}

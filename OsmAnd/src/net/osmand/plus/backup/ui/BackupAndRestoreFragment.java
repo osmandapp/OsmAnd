@@ -140,7 +140,7 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAp
 			BackupAndRestoreFragment fragment = new BackupAndRestoreFragment();
 			fragment.dialogType = dialogType;
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

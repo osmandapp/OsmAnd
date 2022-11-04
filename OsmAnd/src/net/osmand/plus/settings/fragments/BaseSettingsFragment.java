@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -55,7 +54,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
@@ -124,6 +122,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
+		RENDERING_ENGINE(RenderingEngineFragment.class.getName(), false, null, R.xml.rendering_engine, R.layout.global_preference_toolbar),
 		SEND_UUID(SendUniqueIdentifiersFragment.class.getName(), false, null, R.xml.send_uuid_preferences, R.layout.global_preference_toolbar),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
 		NAVIGATION(NavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
@@ -166,7 +165,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
@@ -191,7 +190,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	@SuppressLint("RestrictedApi")
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
@@ -208,9 +207,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-			if (Build.VERSION.SDK_INT >= 21) {
-				AndroidUtils.addStatusBarPadding21v(app, view);
-			}
+			AndroidUtils.addStatusBarPadding21v(app, view);
 		}
 		return view;
 	}
@@ -243,7 +240,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return new PreferenceGroupAdapter(preferenceScreen) {
 
 			@Override
-			public void onBindViewHolder(PreferenceViewHolder holder, int position) {
+			public void onBindViewHolder(@NonNull PreferenceViewHolder holder, int position) {
 				super.onBindViewHolder(holder, position);
 
 				Preference preference = getItem(position);
@@ -271,17 +268,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			}
 		}
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				int colorId = getStatusBarColorId();
-				if (colorId != -1) {
-					if (activity instanceof MapActivity) {
-						((MapActivity) activity).updateStatusBarColor();
-					} else {
-						statusBarColor = activity.getWindow().getStatusBarColor();
-						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-					}
+		Activity activity = getActivity();
+		if (activity != null) {
+			int colorId = getStatusBarColorId();
+			if (colorId != -1) {
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).updateStatusBarColor();
+				} else {
+					statusBarColor = activity.getWindow().getStatusBarColor();
+					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 				}
 			}
 		}
@@ -297,10 +292,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				((MapActivity) activity).enableDrawer();
 			}
 
-			if (Build.VERSION.SDK_INT >= 21) {
-				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-					activity.getWindow().setStatusBarColor(statusBarColor);
-				}
+			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
+				activity.getWindow().setStatusBarColor(statusBarColor);
 			}
 		}
 	}
@@ -308,7 +301,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColorId() != -1) {
+		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
@@ -496,13 +489,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		View closeButton = view.findViewById(R.id.close_button);
 		if (closeButton != null) {
-			closeButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.onBackPressed();
-					}
+			closeButton.setOnClickListener(v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.onBackPressed();
 				}
 			});
 			if (closeButton instanceof ImageView) {
@@ -513,14 +503,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		View switchProfile = toolbarContainer == null ? null : toolbarContainer.findViewById(R.id.profile_button);
 		if (switchProfile != null) {
 			switchProfile.setContentDescription(getString(R.string.switch_profile));
-			switchProfile.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					FragmentManager fragmentManager = getFragmentManager();
-					if (fragmentManager != null) {
-						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
-								BaseSettingsFragment.this, false, getSelectedAppMode(), false);
-					}
+			switchProfile.setOnClickListener(v -> {
+				FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
+							BaseSettingsFragment.this, false, getSelectedAppMode(), false);
 				}
 			});
 			switchProfile.setVisibility(View.GONE);
@@ -566,30 +553,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			int bgColor = ColorUtilities.getColorWithAlpha(iconColor, 0.1f);
 			int selectedColor = ColorUtilities.getColorWithAlpha(iconColor, 0.3f);
 
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				int bgResId = 0;
-				int selectableResId = 0;
-				if (toolbarRes == R.layout.profile_preference_toolbar || toolbarRes == R.layout.profile_preference_toolbar_with_switch) {
-					bgResId = R.drawable.circle_background_light;
-					selectableResId = R.drawable.ripple_circle;
-				} else if (toolbarRes == R.layout.profile_preference_toolbar_big) {
-					bgResId = R.drawable.rectangle_rounded;
-					selectableResId = R.drawable.ripple_rectangle_rounded;
-				}
-				Drawable bgDrawable = getPaintedIcon(bgResId, bgColor);
-				Drawable selectable = getPaintedIcon(selectableResId, selectedColor);
-				Drawable[] layers = {bgDrawable, selectable};
-				AndroidUtils.setBackground(profileButton, new LayerDrawable(layers));
-			} else {
-				int bgResId = 0;
-				if (toolbarRes == R.layout.profile_preference_toolbar || toolbarRes == R.layout.profile_preference_toolbar_with_switch) {
-					bgResId = R.drawable.circle_background_light;
-				} else if (toolbarRes == R.layout.profile_preference_toolbar_big) {
-					bgResId = R.drawable.rectangle_rounded;
-				}
-				Drawable bgDrawable = getPaintedIcon(bgResId, bgColor);
-				AndroidUtils.setBackground(profileButton, bgDrawable);
+			int bgResId = 0;
+			int selectableResId = 0;
+			if (toolbarRes == R.layout.profile_preference_toolbar || toolbarRes == R.layout.profile_preference_toolbar_with_switch) {
+				bgResId = R.drawable.circle_background_light;
+				selectableResId = R.drawable.ripple_circle;
+			} else if (toolbarRes == R.layout.profile_preference_toolbar_big) {
+				bgResId = R.drawable.rectangle_rounded;
+				selectableResId = R.drawable.ripple_rectangle_rounded;
 			}
+			Drawable bgDrawable = getPaintedIcon(bgResId, bgColor);
+			Drawable selectable = getPaintedIcon(selectableResId, selectedColor);
+			Drawable[] layers = {bgDrawable, selectable};
+			AndroidUtils.setBackground(profileButton, new LayerDrawable(layers));
 		}
 	}
 
@@ -652,8 +628,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			MultiSelectBooleanPreference msp = (MultiSelectBooleanPreference) pref;
 			Set<String> values = (Set<String>) newValue;
 			String[] ids = msp.getPrefsIds();
-			for (int i = 0; i < ids.length; i++) {
-				applyPreference(ids[i], applyToAllProfiles, values.contains(ids[i]));
+			for (String id : ids) {
+				applyPreference(id, applyToAllProfiles, values.contains(id));
 			}
 		}
 	}
@@ -728,7 +704,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return ColorUtilities.getSecondaryTextColor(app, isNightMode());
 	}
 
-	protected void registerPreference(Preference preference) {
+	protected void registerPreference(@Nullable Preference preference) {
 		if (preference != null) {
 			preference.setOnPreferenceChangeListener(this);
 			preference.setOnPreferenceClickListener(this);
@@ -787,16 +763,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@NonNull
 	protected OsmandActionBarActivity requireMyActivity() {
 		return (OsmandActionBarActivity) requireActivity();
-	}
-
-	@Nullable
-	protected OsmandInAppPurchaseActivity getInAppPurchaseActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof OsmandInAppPurchaseActivity) {
-			return (OsmandInAppPurchaseActivity) getActivity();
-		} else {
-			return null;
-		}
 	}
 
 	@Nullable
@@ -864,7 +830,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
-		SwitchPreferenceCompat p = new SwitchPreferenceCompat(getContext());
+		SwitchPreferenceCompat p = new SwitchPreferenceCompat(requireContext());
 		p.setTitle(title);
 		p.setKey(b.getId());
 		p.setSummary(summary);
@@ -975,13 +941,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			int selectedColor = ColorUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
 
 			Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
-				Drawable[] layers = {bgDrawable, selectable};
-				AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
-			} else {
-				AndroidUtils.setBackground(selectableView, bgDrawable);
-			}
+			Drawable selectable = getPaintedIcon(R.drawable.ripple_rectangle_rounded, selectedColor);
+			Drawable[] layers = {bgDrawable, selectable};
+			AndroidUtils.setBackground(selectableView, new LayerDrawable(layers));
 			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) selectableView.getLayoutParams();
 			params.setMargins(params.leftMargin, AndroidUtils.dpToPx(app, 6), params.rightMargin, params.bottomMargin);
 		}
@@ -996,12 +958,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			String text = app.getString(R.string.changes_applied_to_profile, modeName);
 			SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, modeName);
 			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
-					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							onApplyPreferenceChange(prefId, true, newValue);
-						}
-					});
+					.setAction(R.string.apply_to_all_profiles, view -> onApplyPreferenceChange(prefId, true, newValue));
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
 			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();

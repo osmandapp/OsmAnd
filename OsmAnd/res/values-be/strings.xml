@@ -1061,7 +1061,7 @@
     <string name="lang_lv">Латышская</string>
     <string name="lang_lt">Летувіская</string>
     <string name="lang_mr">Маратхі</string>
-    <string name="lang_no">Нарвежская (Bokmål)</string>
+    <string name="lang_no">Нарвежская (Букмал)</string>
     <string name="lang_pl">Польская</string>
     <string name="lang_pt">Партугальская</string>
     <string name="lang_ro">Румынская</string>
@@ -4814,4 +4814,7 @@
     <string name="map_center_widget">Цэнтр мапы</string>
     <string name="current_location_widget">Бягучае месцазнаходжанне</string>
     <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
+    <string name="ant_read_data">Чытаць даныя</string>
+    <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
+    <string name="show_borders_of_downloaded_maps">Афарбоўка спампаваных мап</string>
 </resources>

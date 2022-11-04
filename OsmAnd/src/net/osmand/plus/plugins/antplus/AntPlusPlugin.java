@@ -17,6 +17,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice;
@@ -64,6 +65,16 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	@Override
 	public String getName() {
 		return app.getString(R.string.external_sensors_plugin_name);
+	}
+
+	@Override
+	public boolean isPaid() {
+		return true;
+	}
+
+	@Override
+	public boolean isLocked() {
+		return !Version.isPaidVersion(app);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -43,7 +45,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@SuppressLint({ "NewApi", "DefaultLocale" })
+@SuppressLint({"NewApi", "DefaultLocale"})
 public class DownloadIndexesThread {
 
 	private static final Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
@@ -62,11 +64,11 @@ public class DownloadIndexesThread {
 	private static final int THREAD_ID = 10103;
 
 	public interface DownloadEvents {
-		
+
 		void onUpdatedIndexesList();
-		
+
 		void downloadInProgress();
-		
+
 		void downloadHasFinished();
 	}
 
@@ -147,7 +149,7 @@ public class DownloadIndexesThread {
 			}
 		}
 	}
-	
+
 	@UiThread
 	protected void onUpdatedIndexesList() {
 		if (uiActivity != null) {
@@ -158,11 +160,11 @@ public class DownloadIndexesThread {
 
 	// PUBLIC API
 
-	
+
 	public DownloadResources getIndexes() {
 		return indexes;
 	}
-	
+
 	public List<IndexItem> getCurrentDownloadingItems() {
 		List<IndexItem> res = new ArrayList<>();
 		IndexItem ii = currentDownloadingItem;
@@ -178,10 +180,10 @@ public class DownloadIndexesThread {
 	}
 
 	public boolean isDownloading(IndexItem item) {
-		if(item == currentDownloadingItem) {
+		if (item == currentDownloadingItem) {
 			return true;
 		}
-		for(IndexItem ii : indexItemDownloading) {
+		for (IndexItem ii : indexItemDownloading) {
 			if (ii == item) {
 				return true;
 			}
@@ -220,7 +222,7 @@ public class DownloadIndexesThread {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
 			if (checkRunning(false)) {
 				return;
-			}	
+			}
 		}
 		if (uiActivity instanceof Activity) {
 			app.logEvent("download_files");
@@ -309,7 +311,7 @@ public class DownloadIndexesThread {
 				&& !indexes.isDownloadedFromInternet
 				&& !indexes.downloadFromInternetFailed;
 	}
-	
+
 	/// PRIVATE IMPL
 
 	private boolean checkRunning(boolean silent) {
@@ -379,7 +381,7 @@ public class DownloadIndexesThread {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.map_version_changed_info);
 			builder.setPositiveButton(R.string.button_upgrade_osmandplus, (dialog, which) -> {
-				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus"));
+				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME));
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				AndroidUtils.startActivityIfSafe(ctx, intent);
 			});
@@ -541,12 +543,12 @@ public class DownloadIndexesThread {
 			}
 			return true;
 		}
-		
+
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
 			boolean exceed = !Version.isPaidVersion(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
-			if(exceed) {
+			if (exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
 						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
 				publishProgress(breakDownloadMessage);

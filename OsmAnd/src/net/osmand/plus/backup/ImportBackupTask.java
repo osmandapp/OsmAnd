@@ -14,11 +14,19 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
+import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.util.Algorithms;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,9 +54,9 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final ImportType importType;
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @Nullable BackupCollectListener collectListener,
-					 boolean readData) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @Nullable BackupCollectListener collectListener,
+	                 boolean readData) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -58,10 +66,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @NonNull List<SettingsItem> items,
-					 @Nullable ImportListener importListener,
-					 boolean forceReadData) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @NonNull List<SettingsItem> items,
+	                 @Nullable ImportListener importListener,
+	                 boolean forceReadData) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -72,10 +80,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	ImportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @NonNull List<SettingsItem> items,
-					 @NonNull List<SettingsItem> selectedItems,
-					 @Nullable CheckDuplicatesListener duplicatesListener) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @NonNull List<SettingsItem> items,
+	                 @NonNull List<SettingsItem> selectedItems,
+	                 @Nullable CheckDuplicatesListener duplicatesListener) {
 		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
@@ -105,24 +113,65 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				this.duplicates = getDuplicatesData(selectedItems);
 				return selectedItems;
 			case IMPORT:
-			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
 					BackupHelper backupHelper = app.getBackupHelper();
 					PrepareBackupResult backup = backupHelper.getBackup();
 					for (SettingsItem item : items) {
 						item.apply();
 						String fileName = item.getFileName();
-						if (fileName != null) {
-							RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
-							if (remoteFile != null) {
-								backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+						updateFileUploadTime(backupHelper, fileName, backup, item);
+					}
+				}
+				return items;
+			case IMPORT_FORCE_READ:
+				if (items != null && items.size() > 0) {
+					BackupHelper backupHelper = app.getBackupHelper();
+					PrepareBackupResult backup = backupHelper.getBackup();
+					JSONObject json = new JSONObject();
+					JSONArray itemsJson = new JSONArray();
+					try {
+						json.put("items", itemsJson);
+					} catch (JSONException e) {
+						NetworkSettingsHelper.LOG.error("Failed to populate items json", e);
+					}
+					List<SettingsItem> filteredItems = new ArrayList<>(items);
+					for (SettingsItem item : items) {
+						String fileName = item.getFileName();
+						RemoteFile remoteInfoFile = backup.getRemoteFile(item.getType().name(), fileName + BackupHelper.INFO_EXT);
+						if (remoteInfoFile != null) {
+							try {
+								fetchRemoteFileInfo(remoteInfoFile, itemsJson);
+								filteredItems.remove(item);
+							} catch (IOException | JSONException | UserNotRegisteredException e) {
+								NetworkSettingsHelper.LOG.error("Failed to generate item info for force read", e);
 							}
+						}
+						updateFileUploadTime(backupHelper, fileName, backup, item);
+						try {
+							SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, json);
+							List<SettingsItem> settingsItems = new ArrayList<>(itemsFactory.getItems());
+							for (SettingsItem settingsItem : settingsItems) {
+								settingsItem.setShouldReplace(true);
+							}
+							settingsItems.addAll(filteredItems);
+							items = settingsItems;
+						} catch (JSONException e) {
+							NetworkSettingsHelper.LOG.error("Failed to read item info from json", e);
 						}
 					}
 				}
 				return items;
 		}
 		return null;
+	}
+
+	private void updateFileUploadTime(BackupHelper backupHelper, String fileName, PrepareBackupResult backup, SettingsItem item) {
+		if (fileName != null) {
+			RemoteFile remoteFile = backup.getRemoteFile(item.getType().name(), fileName);
+			if (remoteFile != null) {
+				backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+			}
+		}
 	}
 
 	@Override
@@ -183,6 +232,20 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	@Nullable
 	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
 		return itemsProgress.get(type + fileName);
+	}
+
+	private void fetchRemoteFileInfo(RemoteFile remoteFile, JSONArray itemsJson) throws IOException, UserNotRegisteredException, JSONException {
+		File tempDir = FileUtils.getTempDir(app);
+		File tempFile = new File(tempDir, remoteFile.getName());
+		String error = app.getBackupHelper().downloadFile(tempFile, remoteFile, null);
+		if (Algorithms.isEmpty(error)) {
+			String jsonStr = Algorithms.getFileAsString(tempFile);
+			if (!Algorithms.isEmpty(jsonStr)) {
+				itemsJson.put(new JSONObject(jsonStr));
+			} else {
+				throw new IOException("Error reading item info: " + tempFile.getName());
+			}
+		}
 	}
 
 	public List<SettingsItem> getItems() {

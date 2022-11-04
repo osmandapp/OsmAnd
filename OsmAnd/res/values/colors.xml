@@ -452,6 +452,7 @@
 
 	<color name="preference_category_title">#7E33FF</color>
 	<color name="preference_top_switch_off">#808080</color>
+	<color name="preference_action_button_text">#0047B2</color>
 
 	<!-- Basic colors -->
 	<color name="app_bar_main_dark">#101112</color>

@@ -1910,16 +1910,7 @@ public class OsmandAidlApi {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					ExternalApiHelper.runSearch(app, searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
 				}
 			});
@@ -1932,17 +1923,9 @@ public class OsmandAidlApi {
 	boolean registerForOsmandInitialization(OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					try {
 						callback.onAppInitialized();
 					} catch (Exception e) {
@@ -2329,17 +2312,9 @@ public class OsmandAidlApi {
 
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
 				}
 			});
@@ -2455,7 +2430,7 @@ public class OsmandAidlApi {
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

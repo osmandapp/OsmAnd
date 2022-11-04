@@ -69,7 +69,7 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <net.osmand.plus.widgets.LineChartEx
+            <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/line_chart"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/route_info_line_chart_height"

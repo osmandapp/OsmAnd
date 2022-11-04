@@ -1450,6 +1450,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference(this, "speak_cameras", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_TUNNELS = new BooleanPreference(this, "speak_tunnels", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_EXIT_NUMBER_NAMES = new BooleanPreference(this, "exit_number_names", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SPEAK_ROUTE_RECALCULATION = new BooleanPreference(this, "speak_route_recalculation", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SPEAK_GPS_SIGNAL_STATUS = new BooleanPreference(this, "speak_gps_signal_status", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference(this, "speed_cameras_uninstalled", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference(this, "speed_cameras_alert_showed", false).makeGlobal().makeShared();
@@ -1756,6 +1758,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_MAP_LAYER_PARAMETER = new BooleanPreference(this, "show_map_layer_parameter", false).makeProfile().cache();
 
 	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
+
+	public final CommonPreference<Boolean> POLYGONS_VISIBILITY_SET_MANUALLY = new BooleanPreference(this, "polygons_visibility_set_manually", false).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
@@ -2697,23 +2701,22 @@ public class OsmandSettings {
 	public final OsmandPreference<String> LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT = new StringPreference(this, "last_selected_gpx_track_for_new_point", null).makeGlobal().cache();
 
 	// Avoid using this property, probably you need to use PoiFiltersHelper.getSelectedPoiFilters()
-	public final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP = new StringPreference(this, "selected_poi_filter_for_map", null).makeProfile().cache();
+	private final ListStringPreference SELECTED_POI_FILTER_FOR_MAP = (ListStringPreference)
+			new ListStringPreference(this, "selected_poi_filters_for_map", null, ",,").makeProfile().cache();
 
+	@NonNull
 	public Set<String> getSelectedPoiFilters() {
-		Set<String> result = new LinkedHashSet<>();
-		String filtersId = SELECTED_POI_FILTER_FOR_MAP.get();
-		if (filtersId != null && !filtersId.trim().isEmpty()) {
-			Collections.addAll(result, filtersId.split(","));
-		}
-		return result;
+		List<String> result = SELECTED_POI_FILTER_FOR_MAP.getStringsList();
+		return result != null ? new LinkedHashSet<>(result) : Collections.emptySet();
 	}
 
-	public void setSelectedPoiFilters(Set<String> poiFilters) {
+	public void setSelectedPoiFilters(@Nullable Set<String> poiFilters) {
 		setSelectedPoiFilters(APPLICATION_MODE.get(), poiFilters);
 	}
 
-	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, Set<String> poiFilters) {
-		SELECTED_POI_FILTER_FOR_MAP.setModeValue(appMode, android.text.TextUtils.join(",", poiFilters));
+	public void setSelectedPoiFilters(@NonNull ApplicationMode appMode, @Nullable Set<String> poiFilters) {
+		List<String> filters = poiFilters != null ? new ArrayList<>(poiFilters) : null;
+		SELECTED_POI_FILTER_FOR_MAP.setStringsListForProfile(appMode, filters);
 	}
 
 	public final ListStringPreference POI_FILTERS_ORDER = (ListStringPreference)
@@ -2874,7 +2877,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= 28).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> OPENGL_RENDER_FAILED = new BooleanPreference(this, "opengl_render_failed", false).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -3011,6 +3014,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
 			new StringPreference(this, "custom_app_modes_keys", "").makeGlobal().cache();
+
+	public final CommonPreference<Boolean> SHOW_BORDERS_OF_DOWNLOADED_MAPS =
+			new BooleanPreference(this, "show_borders_of_downloaded_maps", true).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

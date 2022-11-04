@@ -48,6 +48,7 @@ public interface OsmAndCustomizationConstants {
 	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
+	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
@@ -178,6 +179,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+	String FRAGMENT_RENDER_INIT_ERROR_ID = FRAGMENT_ID + "render_init_error";
 	String FRAGMENT_DESTINATION_REACHED_ID = FRAGMENT_ID + "destination_reached";
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";

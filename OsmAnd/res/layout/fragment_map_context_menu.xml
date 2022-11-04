@@ -276,7 +276,7 @@
 			                    android:layout_gravity="top"
 			                    android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
 			                    android:paddingTop="1dp"
-			                    android:tint="?attr/secondary_icon_color"
+			                    android:tint="?android:textColorSecondary"
 			                    android:src="@drawable/ic_action_altitude_16" />
 
 		                    <TextView

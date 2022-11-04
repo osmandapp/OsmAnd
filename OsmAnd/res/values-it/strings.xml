@@ -11,7 +11,7 @@
     <string name="local_openstreetmap_upload">Carica la modifica in OSM</string>
     <string name="local_openstreetmap_delete">Elimina la modifica</string>
     <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
-    <string name="local_openstreetmap_settings">PDI/Note OSM salvati in locale</string>
+    <string name="local_openstreetmap_settings">OSM- PDI/-note salvati sul dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/Note OSM inseriti nel database locale.</string>
     <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking online.</string>
     <string name="live_monitoring_interval">Intervallo di tracciamento online</string>
@@ -19,7 +19,7 @@
     <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
     <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
     <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
-    <string name="free_version_message">Puoi scaricare o aggiornare %1$s mappe.</string>
+    <string name="free_version_message">%1$s mappe da scaricare o aggiornare.</string>
     <string name="free_version_title">Versione gratuita</string>
     <string name="poi_context_menu_showdescription">Visualizza descrizione PDI.</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -92,7 +92,7 @@
     <string name="show_more_map_detail">Visualizza più dettagli mappa</string>
     <string name="show_more_map_detail_descr">Visualizza qualche dettaglio delle mappe vettoriali (strade ecc.) anche ai livelli di zoom piu\' bassi.</string>
     <string name="favourites_delete_multiple_succesful">Punti preferiti eliminati.</string>
-    <string name="favorite_delete_multiple">Confermi l\'eliminazione di %1$d Preferiti e %2$d gruppi di Preferiti\?</string>
+    <string name="favorite_delete_multiple">Eliminare %1$d Preferiti e %2$d gruppi di Preferiti\?</string>
     <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amici</string>
     <string name="favorite_places_category">Luoghi</string>
@@ -149,12 +149,12 @@
     <string name="modify_transparency">Imposta trasparenza (0 - trasparente, 255 - opaco)</string>
     <string name="layer_underlay">Mappa di sfondo…</string>
     <string name="map_underlay">Mappa di sfondo</string>
-    <string name="map_underlay_descr">Scegli una mappa di sfondo</string>
+    <string name="map_underlay_descr">Scegli mappa di sfondo</string>
     <string name="layer_overlay">Mappa sovrapposta…</string>
     <string name="map_overlay">Mappa sovrapposta</string>
     <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
     <string name="tile_source_already_installed">Mappa già installata, \'Impostazioni\' verrà aggiornato.</string>
-    <string name="select_tile_source_to_install">Scegli le mappe (mattonelle) da installare o aggiornare.</string>
+    <string name="select_tile_source_to_install">Scegli le mappe (tile) da installare o aggiornare.</string>
     <string name="internet_not_available">Impossibile eseguire l\'operazione senza una connessione a Internet.</string>
     <string name="install_more">Installa altro…</string>
     <string name="level_to_switch_vector_raster_descr">Usare le mappe vettoriali per andare oltre questo livello.</string>
@@ -235,7 +235,7 @@
     <string name="contribution_activity">Installa la versione</string>
     <string name="gps_status_app_not_found">App stato GPS non installata. Cercarla in Market\?</string>
     <string name="voice_is_not_available_msg">Nessuna voce guida disponibile, andare in \'Impostazioni\' → \'Impostazioni Navigazione\' → \'Guida vocale\' e scegli o scarica un pacchetto voce guida.</string>
-    <string name="voice_is_not_available_title">Scegli una pacchetto di annunci voce</string>
+    <string name="voice_is_not_available_title">Seleziona una pacchetto di annunci vocali</string>
     <string name="daynight_mode_day">Giorno</string>
     <string name="daynight_mode_night">Notte</string>
     <string name="daynight_mode_auto">Alba/tramonto</string>
@@ -282,7 +282,7 @@
     <string name="poi_context_menu_delete">Elimina PDI</string>
     <string name="rotate_map_compass_opt">Direzione con bussola</string>
     <string name="rotate_map_bearing_opt">Direzione del movimento</string>
-    <string name="rotate_map_none_opt">No rotazione (nord sempre in alto)</string>
+    <string name="rotate_map_none_opt">Fisso (nord sempre in alto)</string>
     <string name="rotate_map_to_bearing_descr">Allineamento della mappa:</string>
     <string name="rotate_map_to_bearing">Orientamento della mappa</string>
     <string name="show_route">Dettagli percorso</string>
@@ -330,7 +330,7 @@
     <string name="voice_data_initializing">File voce in preparazione…</string>
     <string name="voice_data_not_supported">Versione di dati vocali non supportata</string>
     <string name="voice_data_corrupted">I file voce specificati sono corrotti</string>
-    <string name="voice_data_unavailable">Pacchetto annunci vocali non disponibile</string>
+    <string name="voice_data_unavailable">Pacchetto annunci vocali selezionato non disponibile</string>
     <string name="sd_unmounted">Scheda di memoria non accessibile. 
 \nImpossibile visualizzare le mappe o cercare alcunché.</string>
     <string name="sd_mounted_ro">Memory Card accessibile in sola lettura. 
@@ -482,7 +482,7 @@
     <string name="incremental_search_city">Ricerca incrementale della città</string>
     <string name="incremental_search_street">Ricerca strada in modo incrementale</string>
     <string name="incremental_search_building">Ricerca civico in modo incrementale</string>
-    <string name="choose_available_region">Scegli il paese dall\'elenco</string>
+    <string name="choose_available_region">Seleziona paese dall\'elenco</string>
     <string name="choose_intersected_street">Scegli incrocio</string>
     <string name="Closest_Amenities">Amenità più vicine</string>
     <string name="app_mode_default">Scorri la mappa</string>
@@ -1479,9 +1479,9 @@
     <string name="delay_to_start_navigation">Avvia la guida svolta per svolta dopo…</string>
     <string name="shared_string_go">Vai</string>
     <string name="confirmation_to_clear_history">Cancellare la cronologia\?</string>
-    <string name="local_osm_changes_upload_all_confirm">Confermi l\'invio di %1$d cambiamento/i a OSM\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Inviare %1$d cambiamento/i a OSM\?</string>
     <string name="agps_info">Info A-GPS</string>
-    <string name="agps_data_last_downloaded">ultimo aggiornamento dei dati dell\'A-GPS: %1$s</string>
+    <string name="agps_data_last_downloaded">Dati A-GPS scaricati: %1$s</string>
     <string name="welmode_download_maps">Scarica mappe</string>
     <string name="welcome_select_region">Per rappresentare correttamente i segnali stradali e le restrizioni per favore seleziona la tua regione di guida:</string>
     <string name="confirm_usage_speed_cameras">In molti Paesi (Germania, Francia, Italia, e altri) l\'uso degli avvertimenti di autovelox è illegale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di premere \'Sì\' solo nel caso in cui sia autorizzato l\'uso di questa funzionalità.</string>
@@ -1600,7 +1600,7 @@
     <string name="try_again">Riprova</string>
     <string name="error_message_pattern">Errore: {0}</string>
     <string name="no_updates_available">Non ci sono aggiornamenti disponibili</string>
-    <string name="we_really_care_about_your_opinion">Ci teniamo alla tua opinione e i tuoi suggerimenti sono importanti per noi.</string>
+    <string name="we_really_care_about_your_opinion">La tua opinione e i tuoi suggerimenti sono importanti.</string>
     <string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
     <string name="traffic_warning_hazard">Pericolo</string>
     <string name="dahboard_options_dialog_title">Configura il pannello di controllo</string>
@@ -1612,7 +1612,7 @@
 \n&amp; Navigazione</string>
     <string name="lang_new">Newa/Bhasa del Nepal</string>
     <string name="plugin_settings">Componenti aggiuntivi</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Nessun treno navetta</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evita i treni navetta</string>
     <string name="commit_poi">Contribuisci il/i PDI</string>
     <string name="tab_title_basic">Semplice</string>
@@ -1728,7 +1728,7 @@
     <string name="share_osm_edits_subject">Modifiche di OSM condivise tramite OsmAnd</string>
     <string name="lang_nds">Basso tedesco</string>
     <string name="lang_mk">Macedone</string>
-    <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
+    <string name="save_poi_without_poi_type_message">Salvare il PDI senza specificarne il tipo\?</string>
     <string name="context_menu_item_delete_waypoint">Cancellare i waypoint del GPX?</string>
     <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
     <string name="shared_string_location">Posizione</string>
@@ -1777,7 +1777,7 @@
     <string name="rendering_attr_horseRoutes_name">Percorsi a cavallo</string>
     <string name="no_address_found">Nessun indirizzo trovato</string>
     <string name="looking_up_address">Ricerca dell\'indirizzo in corso</string>
-    <string name="routing_attr_avoid_borders_name">Evita il superamento dei confini</string>
+    <string name="routing_attr_avoid_borders_name">Nessun superamento confini</string>
     <string name="only_download_over_wifi">Scarica solo da rete WiFi</string>
     <string name="live_update">Aggiornamenti in tempo reale</string>
     <string name="lang_fy">Frisone occidentale</string>
@@ -1897,7 +1897,7 @@
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
     <string name="open_street_map_login_and_pass">Nome utente e password di OSM</string>
-    <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
+    <string name="file_name_containes_illegal_char">Carattere non ammesso nel nome del file</string>
     <string name="no_map_markers_found">Aggiungi i marcatori sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
     <string name="rec_split">Suddivisione delle registrazioni</string>
@@ -1980,7 +1980,7 @@
     <string name="search_another_country">Scegli un\'altra regione</string>
     <string name="skip_map_downloading_desc">Non hai mappe offline installate. Si può scegliere una mappa dalla lista o scaricarle in seguito andando su \'Menù - %1$s\'.</string>
     <string name="osm_live_payment_desc">La sottoscrizione viene addebitata ogni mese. Puoi annullarla su Google Play in ogni momento.</string>
-    <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
+    <string name="donation_to_osm">Donazione per la comunità OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
     <string name="get_it">Ottienilo</string>
@@ -2036,7 +2036,7 @@
     <string name="gpx_logging_no_data">Nessun dato</string>
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
-    <string name="trip_rec_notification_settings">Abilita l\'avvio veloce della registrazione</string>
+    <string name="trip_rec_notification_settings">Abilita registrazione rapida</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notifica che permette di iniziare a registrare il viaggio.</string>
     <string name="shared_string_notifications">Notifiche</string>
     <string name="shared_string_resume">Riprendi</string>
@@ -2051,7 +2051,7 @@
     <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Città o regione</string>
     <string name="routing_attr_allow_motorway_name">Usa autostrade</string>
-    <string name="routing_attr_allow_motorway_description">Permetti autostrade.</string>
+    <string name="routing_attr_allow_motorway_description">Permette autostrade.</string>
     <string name="lang_sr_latn">Serbo (latino)</string>
     <string name="lang_zh_hk">Cinese (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_name">Densità linee isoipse</string>
@@ -2069,7 +2069,7 @@
     <string name="quick_action_add_marker">Aggiungi marcatore mappa</string>
     <string name="quick_action_add_poi">Aggiungi PDI</string>
     <string name="quick_action_map_style">Cambia lo stile della mappa</string>
-    <string name="quick_action_map_style_switch">Lo stile della mappa è stato cambiato in \"%s\".</string>
+    <string name="quick_action_map_style_switch">Stile mappa cambiato in \"%s\".</string>
     <string name="quick_action_take_audio_note">Nuova nota audio</string>
     <string name="quick_action_take_video_note">Nuova nota video</string>
     <string name="quick_action_take_photo_note">Nuova nota fotografica</string>
@@ -2129,15 +2129,15 @@
     <string name="quick_action_map_overlay">Cambia la mappa di sovrapposizione</string>
     <string name="quick_action_map_overlay_title">Mappa di sovrapposizione</string>
     <string name="quick_action_map_overlay_action">Aggiungi sovrapposizione</string>
-    <string name="quick_action_map_overlay_switch">La mappa di sovrapposizione è stata cambiata in \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">La mappa di sottofondo è stata cambiata in \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Mappa di sovrapposizione cambiata in \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Mappa di sottofondo cambiata in \"%s\".</string>
     <string name="quick_action_map_underlay">Cambia la mappa di sottofondo</string>
     <string name="quick_action_map_underlay_title">Mappa di sottofondo</string>
     <string name="quick_action_map_underlay_action">Aggiungi sottofondo</string>
     <string name="quick_action_map_source">Cambia la sorgente della mappa</string>
     <string name="quick_action_map_source_title">Sorgenti della mappa</string>
     <string name="quick_action_map_source_action">Aggiungi una sorgente della mappa</string>
-    <string name="quick_action_map_source_switch">La sorgente della mappa è stata cambiata in \"%s\".</string>
+    <string name="quick_action_map_source_switch">Sorgente mappa cambiata in \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Cambia la posizione del pulsante</string>
     <string name="quick_action_btn_tutorial_descr">Tenendo premuto e trascinando si cambia la sua posizione nello schermo.</string>
     <string name="rendering_attr_depthContours_name">Isoipse nautiche</string>
@@ -2326,10 +2326,10 @@
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salva le tracce registrate in sottocartelle per mese di registrazione (come 2018-01).</string>
     <string name="shared_string_reset">Reimposta</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premi questo pulsante per mettere in pausa o riprendere la navigazione.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pulsante per mettere in pausa o riprendere la navigazione.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Navigazione terminata</string>
     <string name="quick_action_start_stop_navigation">Avvia/ferma navigazione</string>
-    <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare o fermare la navigazione.</string>
+    <string name="quick_action_start_stop_navigation_descr">Pulsante per avviare o terminare la navigazione.</string>
     <string name="rendering_value_translucent_pink_name">Rosa traslucido</string>
     <string name="average">Media</string>
     <string name="of">%1$d di %2$d</string>
@@ -2343,7 +2343,7 @@
     <string name="none_point_error">Aggiungi almeno un punto.</string>
     <string name="enter_gpx_name">Nome file GPX:</string>
     <string name="show_on_map_after_saving">Dopo averlo salvato mostralo sulla mappa</string>
-    <string name="mappilary_no_internet_desc">Hai bisogno di essere connesso a Internet per vedere le foto da Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Le foto da Mapillary sono soltanto disponibili via internet.</string>
     <string name="add_waypoint">Aggiungi punto intermedio</string>
     <string name="save_gpx_waypoint">Salva waypoint GPX</string>
     <string name="waypoint_one">Punto intermedio 1</string>
@@ -2360,7 +2360,7 @@
     <string name="choose_navigation_type">Seleziona profilo di navigazione</string>
     <string name="exit_without_saving">Uscire senza salvare?</string>
     <string name="do_not_use_animations">Senza animazioni</string>
-    <string name="do_not_use_animations_descr">Disabilita le animazioni nell\'app.</string>
+    <string name="do_not_use_animations_descr">Disabilita animazioni mappa.</string>
     <string name="keep_showing_on_map">Mantieni visualizzato nella mappa</string>
     <string name="live_monitoring_max_interval_to_send">Buffer temporale per il tracciamento online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo della memoria tampone per memorizzare le localizzazioni quando non c\'è connessione</string>
@@ -2395,13 +2395,13 @@
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
     <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Puoi sempre cambiarlo tappando su \'Opzioni\'.</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Evita strade di ghiaccio e guadi</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">No strade di ghiaccio e guadi</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi.</string>
     <string name="use_location">Utilizza la posizione</string>
     <string name="add_location_as_first_point_descr">Aggiungi la tua posizione come punto di partenza per pianificare il percorso perfetto.</string>
     <string name="my_location">Mia posizione</string>
     <string name="shared_string_finish">Fine</string>
-    <string name="plan_route">Pianifica percorso</string>
+    <string name="plan_route">Pianifica un percorso</string>
     <string name="shared_string_sort">Ordina</string>
     <string name="coordinate_input">Inserimento coordinate</string>
     <string name="marker_save_as_track_descr">Esporta i tuoi marcatori nel seguente file GPX:</string>
@@ -2881,7 +2881,7 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Un pulsante per mostrare o nascondere le tracce GPX selezionate sulla mappa.</string>
     <string name="add_destination_query">Inserire prima una destinazione</string>
     <string name="add_work">Aggiungi lavoro</string>
-    <string name="routing_attr_avoid_sett_name">Evita ciottoli e sampietrini</string>
+    <string name="routing_attr_avoid_sett_name">No ciottoli e sampietrini</string>
     <string name="routing_attr_avoid_sett_description">Evita strade con ciottoli o sampietrini</string>
     <string name="routing_attr_avoid_tram_name">No tram</string>
     <string name="routing_attr_avoid_tram_description">Evita tram</string>
@@ -2939,7 +2939,7 @@
     <string name="profile_alert_need_save_title">Salva le modifiche</string>
     <string name="profile_alert_need_save_msg">Salva le modifiche al profilo prima</string>
     <string name="profile_alert_delete_title">Elimina il profilo</string>
-    <string name="profile_alert_delete_msg">Eliminare il profilo \"%s\" \?</string>
+    <string name="profile_alert_delete_msg">Eliminare il profilo \"%s\"</string>
     <string name="select_nav_profile_dialog_title">Selezioni il tipo di navigazione</string>
     <string name="base_profile_descr_car">Auto, camion, moto</string>
     <string name="base_profile_descr_bicycle">Mountain bike, ciclomotore, cavallo</string>
@@ -3252,7 +3252,7 @@
     <string name="download_map_dialog">Finestra di dialogo download mappe</string>
     <string name="dialogs_and_notifications_title">Notifiche e finestre di dialogo</string>
     <string name="dialogs_and_notifications_descr">Controllo dei popup, finestre di dialogo e notifiche.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodo di reti</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodo reti</string>
     <string name="suggested_maps">Mappe suggerite</string>
     <string name="suggested_maps_descr">Queste mappe sono richieste per il plugin.</string>
     <string name="added_profiles">Profilo aggiunto</string>
@@ -3339,7 +3339,7 @@
     <string name="monitoring_min_distance_descr">Questo filtro evita che punti duplicati siano registrati quando lo spostamento è troppo piccolo, crea un migliore aspetto delle tracce che non vengono successivamente elaborate.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo valore e non vuoi chiaramente registrare dati quando sei fermo.</string>
-    <string name="live_monitoring_time_buffer">Tempo tampone</string>
+    <string name="live_monitoring_time_buffer">Tempo buffer</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
     <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con i parametri della sintassi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -3348,7 +3348,7 @@
     <string name="monitoring_min_accuracy">Accuratezza minima</string>
     <string name="monitoring_min_distance">Minimo spostamento</string>
     <string name="reset_plugin_to_default">Reimposta le impostazioni dei componenti aggiuntivi a quelle preimpostate</string>
-    <string name="multimedia_rec_split_title">Divisione delle registrazioni</string>
+    <string name="multimedia_rec_split_title">Divisione registrazione</string>
     <string name="multimedia_use_system_camera">Usa l\'app di sistema</string>
     <string name="multimedia_photo_play_sound">Suono otturatore fotocamera</string>
     <string name="osm_authorization_success">L\'autorizzazione è andata a buon fine</string>
@@ -3619,7 +3619,7 @@
     <string name="search_poi_types">Cerca in base al PDI</string>
     <string name="export_import_quick_actions_with_profiles_promo">Puoi esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
-    <string name="delete_all_actions_message_q">Sei sicuro di volere cancellare definitivamente %d le azioni rapide\?</string>
+    <string name="delete_all_actions_message_q">Cancellare definitivamente %d azioni rapide\?</string>
     <string name="screen_timeout">Tempo del blocco schermo</string>
     <string name="width_limit_description">Indica la larghezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli larghi.</string>
     <string name="height_limit_description">Indica l\'altezza del veicolo, alcune restrizioni stradali potrebbero essere applicate per veicoli alti.</string>
@@ -3702,7 +3702,7 @@
     <string name="threshold_distance">Soglia distanza</string>
     <string name="route_between_points_add_track_desc">Seleziona un file traccia a cui verrà aggiunto un nuovo segmento.</string>
     <string name="street_level_imagery">Immagini stradali</string>
-    <string name="plan_route_exit_dialog_descr">Sei sicuro di voler scartare tutte le modifiche nel percorso pianificato\?</string>
+    <string name="plan_route_exit_dialog_descr">Scartare tutte le modifiche nel percorso pianificato\?</string>
     <string name="in_case_of_reverse_direction">In caso di direzione inversa</string>
     <string name="save_track_to_gpx">Registra automaticamente la traccia durante la navigazione</string>
     <string name="shared_string_save_as_gpx">Salva come un nuovo file traccia</string>
@@ -3929,7 +3929,7 @@
     <string name="keep_it_empty_if_not">Mantienilo vuoto se non lo fosse</string>
     <string name="online_routing_example_hint">Gli URL con tutti i parametri saranno come questo:</string>
     <string name="test_route_calculation">Prova il calcolo del percorso</string>
-    <string name="routing_engine_vehicle_type_driving">Guida autoveicoli</string>
+    <string name="routing_engine_vehicle_type_driving">Guida</string>
     <string name="routing_engine_vehicle_type_foot">A piedi</string>
     <string name="routing_engine_vehicle_type_bike">Bici</string>
     <string name="routing_engine_vehicle_type_car">Auto</string>
@@ -3948,7 +3948,7 @@
     <string name="shared_string_sec">sec</string>
     <string name="announcement_time_passing">Sorpasso</string>
     <string name="announcement_time_approach">Avvicinamento</string>
-    <string name="announcement_time_prepare_long">Preparazione molto anticipata</string>
+    <string name="announcement_time_prepare_long">Preparazione anticipata</string>
     <string name="announcement_time_prepare">Preparazione</string>
     <string name="announcement_time_off_route">Fuori dal percorso</string>
     <string name="announcement_time_intervals">Intervalli di tempo e distanza</string>
@@ -4257,7 +4257,7 @@
     <string name="routing_attr_avoid_tunnels_description">Evita i tunnel</string>
     <string name="routing_attr_avoid_tunnels_name">Evita i tunnel</string>
     <string name="backup_promocode">Codice promozionale</string>
-    <string name="send_crash_log">Invia il rapporto degli errori</string>
+    <string name="send_crash_log">Invia rapporto errori</string>
     <string name="purchases_feature_desc_terrain">Linee isoipse mappe ombreggiamento dei rilievi con ombre scure e mappe delle pendenze con colori per mostrare picchi e depressioni.</string>
     <string name="purchases_feature_desc_wikivoyage">Esplora Wikivoyage offline. Articoli divisi per nazione e regione e disponibili in tutte le lingue.</string>
     <string name="purchases_feature_desc_wikipedia">Esplora Wikipedia offline. Articoli divisi per nazione e regione e disponibile in tutte le lingue.</string>
@@ -4277,11 +4277,11 @@
     <string name="osmand_pro_tagline">Ottieni il massimo delle funzionalità</string>
     <string name="shared_string_learn_more">Approfondisci</string>
     <string name="cancel_anytime_in_huawei_appgallery">Cancellalo in ogni momento in Huawei AppGallery</string>
-    <string name="cancel_anytime_in_gplay">Cancellalo in ogni momento in Google Play.</string>
+    <string name="cancel_anytime_in_gplay">Puoi cancellarlo in qualsiasi momento da Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
     <string name="amz_manage_subscription_descr">Gestisci la tua sottoscrizione usando l\'app Amazon o dal sito Amazon.com.</string>
     <string name="no_activity_for_intent">Installa una applicazione che possa completare l\'azione.</string>
-    <string name="grey_color_undefined">Il grigio è utilizzato per le parti in cui non sono presenti dati.</string>
+    <string name="grey_color_undefined">Le parti senza dati sono in grigio.</string>
     <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
 \n
 \nSe non cancellato si rinnova alla scadenza del periodo.
@@ -4295,8 +4295,8 @@
     <string name="routeInfo_smoothness_description">Fornisce uno schema di classificazione riguardante l\'usabilità fisica di una strada per i veicoli su ruote, in particolare per quanto riguarda la regolarità/planarità della superficie.</string>
     <string name="routeInfo_surface_description">Fornisce informazioni aggiuntive sulla superficie fisica delle strade/piste pedonali.</string>
     <string name="routeInfo_roadClass_description">Colorazione del percorso o della traccia in base alla classificazione stradale.</string>
-    <string name="add_group_to_markers">Aggiungi gruppo all\'elenco dei marcatori</string>
-    <string name="remove_group_from_markers">Rimuovere il gruppo dall\'elenco dei marcatori</string>
+    <string name="add_group_to_markers">Aggiungi gruppo all\'elenco marcatori</string>
+    <string name="remove_group_from_markers">Rimuovi gruppo dall\'elenco marcatori</string>
     <string name="start_point">Partenza</string>
     <string name="mapillary_menu_filter_description_new">Filtra le immagini per data o tipo. Attivo solo a zoom elevati.</string>
     <string name="service_is_not_available_please_try_later">Sevizio non disponibile, prova più tardi.</string>
@@ -4368,7 +4368,7 @@
     <string name="history_is_disabled_descr">Abilita la cronologia per ottenere un accesso veloce agli ultimi risultati.</string>
     <string name="is_disabled">%1$s è disabilitato</string>
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
-    <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
+    <string name="transparent_status_bar_descr">Mostra mappa sotto la barra di stato</string>
     <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
     <string name="shortcut_navigate_to_work">Naviga fino al \'Lavoro\'</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
@@ -4381,7 +4381,7 @@
     <string name="use_external_timestamps">Utilizza le marche temporali esterne</string>
     <string name="use_external_timestamps_description">Utilizza le marche temporali del navigatore online per correggere il tempo stimato e la velocità media</string>
     <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel \'Menu\' → \'Componenti aggiuntivi\'.</string>
-    <string name="delete_history_items_descr">Sei sicuro di voler eliminare gli elementi della cronologia selezionati\?</string>
+    <string name="delete_history_items_descr">Eliminare elementi della cronologia selezionati\?</string>
     <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
     <string name="quick_action_toggle_preference">Un cursore per cambiare lo stato delle preferenze selezionate.</string>
     <string name="shared_storage_warning_description">A causa delle nuove regole Android da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
@@ -4390,7 +4390,7 @@
     <string name="horseback_riding">A cavallo</string>
     <string name="copying_file">Copia dei file %1$s…</string>
     <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
-    <string name="storage_copying_files_size">In copia %1$s file %2$s</string>
+    <string name="storage_copying_files_size">Copiando %1$s file %2$s</string>
     <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
     <string name="shared_storage_last_step">Puoi specificare una nuova archiviazione dei dati dopo aver scelto Archivio condiviso.</string>
     <string name="shared_storage_migration_descr">A causa dei cambiamenti alle regole Android di accesso alla memoria, OsmAnd non può più utilizzare %1$s.
@@ -4428,7 +4428,7 @@
     <string name="shared_string_memory">Memoria</string>
     <string name="memory_allocated_for_routing_ds">Valori di memoria alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
 \nNon influenza la velocità dei percorsi brevi.</string>
-    <string name="memory_allocated_for_routing">Memoria allocata per il Calcolo del percorso</string>
+    <string name="memory_allocated_for_routing">Memoria allocata per il calcolo percorso</string>
     <string name="reading_files">Lettura file…</string>
     <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
     <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta anche tutti i gruppi lo saranno.</string>
@@ -4500,7 +4500,7 @@
     <string name="rendering_attr_seabedDetail_description">Informazioni testuali aggiuntive sulla superficie del fondale marino, tipi di superfici combinate, categorie e tassonomie delle alghe marine</string>
     <string name="waypoint_template">Template waypoint</string>
     <string name="always_ask_waypoint_appearance_description">Toccando quest\'azione si aprirà la schermata \"Aggiungi punto intermedio\" dove puoi cambiare nome e aspetto.</string>
-    <string name="track_file_description">Toccando questa azione verrà mostrato una finestra di dialogo di scelta delle tracce disponibili.</string>
+    <string name="track_file_description">Toccando questa azione verranno mostrate le tracce disponibili.</string>
     <string name="shared_string_grade">Grado</string>
     <string name="edit_category">Modifica la categoria</string>
     <string name="shared_string_buttons">Bottoni</string>
@@ -4559,7 +4559,7 @@
     <string name="routing_attr_carriage_restrictions_name">Restrizioni al trasporto</string>
     <string name="routing_attr_carriage_restrictions_description">Considera l\'accesso consentito ai veicoli a trazione animale</string>
     <string name="rendering_attr_showLightRailRoutes_name">Percorsi ferroviari urbani leggeri</string>
-    <string name="estimated_download_size">Stima quantità di dati da scaricare</string>
+    <string name="estimated_download_size">Dimensione download stimata</string>
     <string name="apply_to_existing_favorites_descr">Applicare le modifiche ai preferiti esistenti o solo ai nuovi\?</string>
     <string name="navigate_point_format_swiss_grid">Griglia Svizzera (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Griglia Svizzera (CH1903+)</string>
@@ -4599,7 +4599,7 @@
     <string name="av_def_action_choose">Su richiesta</string>
     <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">I widget forniscono un accesso veloce per avviare/fermare l\'acquisizione di una registrazione (audio, video, foto).</string>
+    <string name="audio_video_notes_desc">Il widget fornisce un accesso veloce per avviare/fermare l\'acquisizione di una registrazione (audio, video, foto).</string>
     <string name="street_name_widget_desc">Il widget dei nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome della manovra che si sta completando.</string>
     <string name="colour_of_circles">Colore dei cerchi</string>
     <string name="distance_circles">Cerchi di distanza</string>
@@ -4623,7 +4623,7 @@
     <string name="calculate_online">Calcola online</string>
     <string name="get_altitude_data">Ottieni dati altitudine</string>
     <string name="calculate_altitude">Calcola altitudine</string>
-    <string name="magnetic_bearing_widget_desc">Angolo tra il nord magnetico e la destinazione osservato dalla tua localizzazione.</string>
+    <string name="magnetic_bearing_widget_desc">Angolo tra il nord magnetico e la destinazione osservato dalla tua posizione.</string>
     <string name="routing_attr_avoid_4wd_only_name">Evita le strade 4WD</string>
     <string name="coordinates_widget_secondary_desc">Il formato delle coordinate può essere cambiato in %1$s – %2$s – %3$s.</string>
     <string name="circle_settings">Impostazioni del cerchio</string>
@@ -4673,7 +4673,7 @@
     <string name="transport_hazmat_yes_desc">Seleziona la categoria appropriata.</string>
     <string name="import_as_one_track">Importa come un\'unica traccia</string>
     <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
-    <string name="transport_hazmat_no_desc">In alcune strade e tunnel il trasporto di materiale pericoloso è proibito.</string>
+    <string name="transport_hazmat_no_desc">Strade e tunnel possono proibire il trasporto di materiale pericoloso.</string>
     <string name="transport_hazmat_title">Trasporto di materiale pericoloso</string>
     <string name="routing_attr_goods_restrictions_description">Considera le limitazioni di accesso per categoria di merci</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -4751,13 +4751,13 @@
     <string name="switch_widget_mode_desc">Puoi cambiare la modalità toccando il widget.</string>
     <string name="side_marker_eta">Tempo di arrivo stimato</string>
     <string name="reset_all_settings_desc">Reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
-    <string name="goods_delivery_desc_4">Se il peso del tuo veicolo è superiore alle 3.5 tonnellate devi utilizzare il profilo Camion.</string>
+    <string name="goods_delivery_desc_4">Utilizza il profilo Camion per pesi del veicolo superiori alle 3.5 tonnellate.</string>
     <string name="duplacate_widget_added_snackbar">Un widget duplicato sta per essere aggiunto alla lista.</string>
     <string name="av_notes_photo_widget_desc">Toccare il widget permette di scattare una foto.</string>
     <string name="auto_backup_preference_desc">Come predefinito Android salva i backup dei preferiti, token della mappa e le impostazioni di OsmAnd per essere ripristinati in un nuovo dispositivo o dopo la reinstallazione. Questo backup è limitato a 25 MB.
 \nSe stai utilizzando OsmAnd Cloud, dopo la reinstallazione questo può portare a fraintendimenti.</string>
     <string name="av_notes_audio_widget_desc">Toccare il widget permette di registrare una nota audio.</string>
-    <string name="goods_delivery_desc_3">Si applica solo a veicoli che trasportano merci che hanno al massimo quattro ruote e pesano meno di 3.5 tonnellate.</string>
+    <string name="goods_delivery_desc_3">Si applica solo ai veicoli di trasporto merci che pesano fino a 3.5 tonnellate.</string>
     <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
     <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
@@ -4798,4 +4798,40 @@
     <string name="favorites_backup">Salva i preferiti</string>
     <string name="map_widget_target_distance">Distanza dalla destinazione</string>
     <string name="ant_go_to_store">Vai al Play Store</string>
+    <string name="send_uuid_preference">Invia Unique User Identifier (UUID)</string>
+    <string name="shared_string_cross_buy">Acquisto multi piattaforma</string>
+    <string name="map_widget_ant_heart_rate_desc">Mosta il battito cardicato dell\'utente durante un\'attività in tempo reale</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadenza bicicletta</string>
+    <string name="map_widget_ant_bicycle_power">Potenza bicicletta</string>
+    <string name="worldwide_maps">Mappe internazionali</string>
+    <string name="map_center_widget">Coordinate: Centro della mappa</string>
+    <string name="current_location_widget">Coordinate: Posizione attuale</string>
+    <string name="external_sensors_support">Supporto sensori esterni</string>
+    <string name="external_sensors_plugin_name">Sensori esterni</string>
+    <string name="speak_route_recalculation">Annuncia ricalcolo percorso</string>
+    <string name="map_widget_altitude_map_center">Altitudine: centro mappa</string>
+    <string name="map_widget_altitude_map_center_desc">Mostra l\'altezza sul livello del mare dell\'attuale centro della mappa.</string>
+    <string name="map_widget_altitude_current_location">Altitudine: posizione attuale</string>
+    <string name="map_widget_rendering_fps">FPS rendering mappa</string>
+    <string name="map_widget_rendering_fps_desc">Mosta la velocità con cui la mappa e gli elementi della mappa vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
+    <string name="simulate_location_by_gpx">Simula posizione da GPX</string>
+    <string name="shared_string_identifiers">Identificatori</string>
+    <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
+    <string name="shared_string_terms_of_use">Termini d\'uso</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza alcun costo aggiuntivo.</string>
+    <string name="ant_widgets">Widget ANT+</string>
+    <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
+    <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
+    <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato. 
+\nDevi installare il servizio ANT+ Plugins oppure devi aggiornarlo se lo hai già installato. 
+\nVuoi aprire il Play Store per scaricarlo/aggiornarlo\?</string>
+    <string name="ant_heart_rate_write_gpx_desc">Scrivi battito cardiaco sulla traccia</string>
+    <string name="ant_missing_dependency">Dipendenza mancante</string>
+    <string name="ant_read_data">Leggi dati</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Mostra velocità di viaggio</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Mostra la velocità a cui l\'utente sta pedalando</string>
+    <string name="map_widget_ant_bicycle_speed">Velocità bicicletta</string>
+    <string name="map_widget_ant_bicycle_dist">Distanza bicicletta</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
+    <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
 </resources>
