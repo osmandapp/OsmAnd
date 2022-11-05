@@ -2,11 +2,14 @@
 package net.osmand;
 
 
+import static net.osmand.router.network.NetworkRouteSelector.ROUTE_KEY_VALUE_SEPARATOR;
+
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -2108,6 +2111,50 @@ public class GPXUtilities {
 
 		public void setShowStartFinish(boolean showStartFinish) {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
+		}
+
+		public void addRouteKey(NetworkRouteSelector.RouteKey routeKey) {
+			for (String tag : routeKey.tags) {
+				String key = routeKey.getKeyFromTag(tag);
+				String value = routeKey.getValue(key);
+				if (!Algorithms.isEmpty(value)) {
+					getExtensionsToWrite().put("route_" + routeKey.type.getTag() + ROUTE_KEY_VALUE_SEPARATOR + key, value);
+				}
+			}
+		}
+
+		public NetworkRouteSelector.RouteKey getRouteKey() {
+			NetworkRouteSelector.RouteType routeType = getRouteType();
+			if (routeType != null) {
+				NetworkRouteSelector.RouteKey routeKey = new NetworkRouteSelector.RouteKey(routeType);
+				fillRouteTags(routeKey);
+				return  routeKey;
+			}
+			return null;
+		}
+
+		private void fillRouteTags(NetworkRouteSelector.RouteKey routeKey) {
+			if (extensions != null) {
+				for (Map.Entry<String, String> e : extensions.entrySet()) {
+					String prefix = "route_" + routeKey.type.getTag() + ROUTE_KEY_VALUE_SEPARATOR;
+					if (e.getKey().startsWith(prefix)) {
+						String key = e.getKey().substring(prefix.length());
+						routeKey.addTag(key, e.getValue());
+					}
+				}
+			}
+		}
+
+		private NetworkRouteSelector.RouteType getRouteType() {
+			if (extensions != null) {
+				for (Map.Entry<String, String> e : extensions.entrySet()) {
+					if (e.getKey().startsWith("route_")) {
+						String tag = e.getKey().substring("route_".length(), e.getKey().indexOf("_","route_".length()));
+						return NetworkRouteSelector.RouteType.getByTag(tag);
+					}
+				}
+			}
+			return null;
 		}
 
 		public void setRef(String ref) {

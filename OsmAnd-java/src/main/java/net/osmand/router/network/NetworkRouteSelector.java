@@ -236,7 +236,7 @@ public class NetworkRouteSelector {
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
-		GPXFile gpxFile = createGpxFile(lst);
+		GPXFile gpxFile = createGpxFile(lst, routeKey);
 		res.put(routeKey, gpxFile);
 		return lst;
 	}
@@ -588,19 +588,19 @@ public class NetworkRouteSelector {
 				}
 			}
 		}
+		RouteKey routeKey = segment.routeKey;
 		if (it != 0) {
-			RouteKey rkey = segment.routeKey;
 			TIntArrayList ids = new TIntArrayList();
 			for (int i = lst.size() - 1; i > 0 && i > lst.size() - 50; i--) {
 				ids.add((int) (lst.get(i).getId() >> 7));
 			}
-			String msg = "Route likely has a loop: " + rkey + " iterations " + it + " ids " + ids;
+			String msg = "Route likely has a loop: " + routeKey + " iterations " + it + " ids " + ids;
 			System.err.println(msg); // throw new IllegalStateException();
 		}
 		NetworkRouteSegmentChain ch = new NetworkRouteSegmentChain();
 		ch.start = lst.get(0);
 		ch.connected = lst.subList(1, lst.size());
-		res.put(segment.routeKey, createGpxFile(Collections.singletonList(ch)));
+		res.put(routeKey, createGpxFile(Collections.singletonList(ch), routeKey));
 		debug("FINISH " + lst.size(), null, segment);
 
 	}
@@ -632,13 +632,11 @@ public class NetworkRouteSelector {
 		return false;
 	}
 
-	
-
-	private GPXFile createGpxFile(List<NetworkRouteSegmentChain> chains) {
+	private GPXFile createGpxFile(List<NetworkRouteSegmentChain> chains, RouteKey routeKey) {
 		GPXFile gpxFile = new GPXFile(null, null, null);
 		GPXUtilities.Track track = new GPXUtilities.Track();
 		GPXUtilities.TrkSegment trkSegment;
-		List<Integer> sizes = new ArrayList<>();  
+		List<Integer> sizes = new ArrayList<>();
 		for (NetworkRouteSegmentChain c : chains) {
 			List<NetworkRouteSegment> segmentList = new ArrayList<>();
 			segmentList.add(c.start);
@@ -676,6 +674,7 @@ public class NetworkRouteSelector {
 		}
 		System.out.println(String.format("Segments size %d: %s", track.segments.size(), sizes.toString()));
 		gpxFile.tracks.add(track);
+		gpxFile.addRouteKey(routeKey);
 		return gpxFile;
 	}
 
@@ -714,7 +713,7 @@ public class NetworkRouteSelector {
 	public static class RouteKey {
 
 		public final RouteType type;
-		public final Set<String> set = new TreeSet<>();
+		public final Set<String> tags = new TreeSet<>();
 
 		public RouteKey(RouteType routeType) {
 			this.type = routeType;
@@ -722,13 +721,27 @@ public class NetworkRouteSelector {
 
 		public String getValue(String key) {
 			key = ROUTE_KEY_VALUE_SEPARATOR + key + ROUTE_KEY_VALUE_SEPARATOR;
-			for (String str : set) {
-				int i = str.indexOf(key);
+			for (String tag : tags) {
+				int i = tag.indexOf(key);
 				if (i > 0) {
-					return str.substring(i + key.length());
+					return tag.substring(i + key.length());
 				}
 			}
 			return "";
+		}
+
+		public String getKeyFromTag(String tag) {
+			String prefix = "route_" + type.tag + ROUTE_KEY_VALUE_SEPARATOR;
+			if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
+				int endIdx = tag.indexOf(ROUTE_KEY_VALUE_SEPARATOR, prefix.length());
+				return tag.substring(prefix.length(), endIdx);
+			}
+			return "";
+		}
+
+		public void addTag(String key, String value) {
+			value = Algorithms.isEmpty(value) ? "" : ROUTE_KEY_VALUE_SEPARATOR + value;
+			tags.add("route_" + type.tag + ROUTE_KEY_VALUE_SEPARATOR + key + value);
 		}
 
 		public String getRouteName() {
@@ -739,11 +752,31 @@ public class NetworkRouteSelector {
 			return name;
 		}
 
+		public String getNetwork() {
+			return getValue("network");
+		}
+
+		public String getOperator() {
+			return getValue("operator");
+		}
+
+		public String getSymbol() {
+			return getValue("symbol");
+		}
+
+		public String getWebsite() {
+			return getValue("website");
+		}
+
+		public String getWikipedia() {
+			return getValue("wikipedia");
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + set.hashCode();
+			result = prime * result + tags.hashCode();
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
@@ -757,14 +790,14 @@ public class NetworkRouteSelector {
 			if (getClass() != obj.getClass())
 				return false;
 			RouteKey other = (RouteKey) obj;
-			if (!set.equals(other.set))
+			if (!tags.equals(other.tags))
 				return false;
 			return type == other.type;
 		}
 
 		@Override
 		public String toString() {
-			return "Route [type=" + type + ", set=" + set + "]";
+			return "Route [type=" + type + ", set=" + tags + "]";
 		}
 	}
 	
@@ -785,6 +818,15 @@ public class NetworkRouteSelector {
 
 		public String getTag() {
 			return tag;
+		}
+
+		public static RouteType getByTag(String tag) {
+			for (RouteType routeType : values()) {
+				if (routeType.tag.equals(tag)) {
+					return routeType;
+				}
+			}
+			return null;
 		}
 
 		public static List<RouteKey> getRouteKeys(RouteDataObject obj) {
@@ -857,19 +899,21 @@ public class NetworkRouteSelector {
 				int rq = getRouteQuantity(tags, routeType);
 				for (int routeIdx = 1; routeIdx <= rq; routeIdx++) {
 					String prefix = routeType.tagPrefix + routeIdx;
-					RouteKey key = new RouteKey(routeType);
+					RouteKey routeKey = new RouteKey(routeType);
 					for (Map.Entry<String, String> e : tags.entrySet()) {
 						String tag = e.getKey();
-						if (tag.startsWith(prefix)) {
-							String tagPart = routeType.tagPrefix + tag.substring(prefix.length());
-							if (Algorithms.isEmpty(e.getValue())) {
-								key.set.add(tagPart);
-							} else {
-								key.set.add(tagPart + ROUTE_KEY_VALUE_SEPARATOR + e.getValue());
-							}
+						if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
+//							String tagPart = routeType.tagPrefix + tag.substring(prefix.length());
+							String key = tag.substring(prefix.length() + 1);
+							routeKey.addTag(key, e.getValue());
+//							if (Algorithms.isEmpty(e.getValue())) {
+//								routeKey.set.add(tagPart);
+//							} else {
+//								routeKey.set.add(tagPart + ROUTE_KEY_VALUE_SEPARATOR + e.getValue());
+//							}
 						}
 					}
-					lst.add(key);
+					lst.add(routeKey);
 				}
 			}
 			return lst;
