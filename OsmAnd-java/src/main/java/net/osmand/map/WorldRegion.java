@@ -19,7 +19,7 @@ public class WorldRegion implements Serializable {
 	public static final String ANTARCTICA_REGION_ID = "antarctica";
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
-	public static final String AUSTRALIA_AND_OCEANIA_REGION_ID = "australia-oceania";
+	public static final String AUSTRALIA_AND_OCEANIA_REGION_ID = "australia-oceania-all";
 	public static final String CENTRAL_AMERICA_REGION_ID = "centralamerica";
 	public static final String EUROPE_REGION_ID = "europe";
 	public static final String NORTH_AMERICA_REGION_ID = "northamerica";
