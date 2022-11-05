@@ -4853,7 +4853,7 @@
     <string name="go_to_marker_location">Переход к местоположению маркера</string>
     <string name="shared_string_switch_mode">Переключение режима</string>
     <string name="map_marker_interval_dialog_desc">Укажите интервал времени, в течение которого будет измеряться средняя скорость для расчета предполагаемого времени прибытия.</string>
-    <string name="shared_string_shows">Показывает</string>
+    <string name="shared_string_shows">Показывать</string>
     <string name="coordinates_widget_current_location_desc">Виджет показывает географические координаты текущего местоположения</string>
     <string name="coordinates_widget_map_center">Координаты: центр карты</string>
     <string name="coordinates_widget_current_location">Координаты: текущее местоположение</string>
@@ -4894,4 +4894,58 @@
     <string name="shared_string_2_5_d_view">2,5 D вид</string>
     <string name="worldwide_maps">Карты мира</string>
     <string name="coordinates_widget_map_center_desc">Виджет показывает географические координаты текущего центра карты</string>
+    <string name="map_settings_weather_air_pressure">Давление</string>
+    <string name="map_settings_weather_cloud">Облачность</string>
+    <string name="shared_string_contours">Контуры</string>
+    <string name="shared_string_layers">Слои</string>
+    <string name="weather_offline_forecast">Офлайн-прогноз</string>
+    <string name="weather_online_cache">Онлайн-кэш</string>
+    <string name="explore_weather_forecast">Изучите прогноз погоды.</string>
+    <string name="empty_screen_weather_pressure_layer">Включите для просмотра слоя давления на карте.</string>
+    <string name="empty_screen_weather_temperature_layer">Включите для просмотра температурного слоя на карте.</string>
+    <string name="empty_screen_view_selected_weather_data">Включите для просмотра выбранных погодных данных на карте.</string>
+    <string name="weather_precip_mm">мм</string>
+    <string name="weather_precip_inches">Дюймы</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_milimeters">Миллиметры</string>
+    <string name="weather_wind_kt">уз</string>
+    <string name="weather_wind_mph">миля/ч</string>
+    <string name="weather_wind_kmh">км/ч</string>
+    <string name="weather_wind_knots">Узлы</string>
+    <string name="air_pressure_widget_desc">Виджет показывает атмосферное давление для текущего центра карты.</string>
+    <string name="wind_widget_desc">Виджет показывает скорость ветра для текущего центра карты.</string>
+    <string name="temperature_widget_desc">Виджет показывает температуру для текущего центра карты.</string>
+    <string name="weather_pressure_inhg">дюйм рт. ст.</string>
+    <string name="weather_pressure_mmhg">мм рт. ст.</string>
+    <string name="weather_pressure_hectopascals">Гектопаскали</string>
+    <string name="weather_pressure_hpa">гПа</string>
+    <string name="weather_pressure_inches_of_mercury">Дюймы ртутного столба</string>
+    <string name="weather_pressure_millimeters_of_mercury">Миллиметры ртутного столба</string>
+    <string name="weather_prefs_descr">Почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа</string>
+    <string name="weather_temperature_celsius">Градус Цельсия</string>
+    <string name="weather_widgets_secondary_desc">Единицы измерения можно изменить в настройках плагина «Погода».</string>
+    <string name="map_settings_weather_temp">Температура</string>
+    <string name="map_settings_weather_precip">Осадки</string>
+    <string name="map_settings_weather_wind">Ветер</string>
+    <string name="measurement_units">Единицы измерения</string>
+    <string name="shared_string_weather">Погода</string>
+    <string name="empty_screen_weather_contours">Включите для просмотра контуров погоды на карте.</string>
+    <string name="empty_screen_weather_clouds_layer">Включите для просмотра слоя облачности на карте.</string>
+    <string name="empty_screen_weather_wind_layer">Включите для просмотра слоя ветра на карте.</string>
+    <string name="empty_screen_weather_precipitation_layer">Включите для просмотра слоя осадков на карте.</string>
+    <string name="weather_widget_group_desc">Набор виджетов, отображающих различную информацию о погоде.</string>
+    <string name="weather_wind_ms">м/с</string>
+    <string name="weather_wind_meters_per_second">Метров в секунду</string>
+    <string name="weather_wind_miles_per_hour">Миль в час</string>
+    <string name="weather_wind_kilimeters_per_hour">Километров в час</string>
+    <string name="clouds_widget_desc">Виджет показывает облачность для текущего центра карты.</string>
+    <string name="weather_temperature_fahrenheit">Градус Фаренгейта</string>
+    <string name="precipitation_widget_desc">Виджет показывает количество осадков для текущего центра карты.</string>
+    <string name="action_not_supported_with_map_style">Действие не поддерживается с выбранным стилем карты.</string>
+    <string name="weather_plugin_description">Плагин погоды предоставляет:
+\n- 5 слоев... почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа;
+\n- виджеты на основе местоположения;
+\n- изолинии температуры / давления.
+\nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="rotate_map_none_rotated_opt">фиксированная (повернутая вручную)</string>
 </resources>
