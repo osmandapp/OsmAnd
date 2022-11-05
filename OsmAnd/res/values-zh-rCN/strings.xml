@@ -4699,4 +4699,38 @@
 \n
 \n</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">显示注记标签</string>
+    <string name="waypoint_appearance">航点外观</string>
+    <string name="predefined_waypoint_appearance_description">点击此操作会自动保存带有预定义参数的航点。</string>
+    <string name="rotate_map_none_rotated_opt">固定（手动旋转）</string>
+    <string name="lang_de_casual">每个瓦片一个图像文件</string>
+    <string name="routing_attr_allow_gate_name">允许使用大门</string>
+    <string name="plan_route_change_route_type_after">在此之后更改路径类型</string>
+    <string name="shared_string_redo">重做</string>
+    <string name="always_ask_waypoint_appearance_description">点击此操作将打开“添加航点”屏幕，您可以在其中更改名称和外观。</string>
+    <string name="all_next_segments">所有后续段</string>
+    <string name="plan_route_trim_after">修剪之后</string>
+    <string name="plan_route_change_route_type_before">在此之前更改路线类型</string>
+    <string name="use_two_phase_routing">使用两阶段 A* 路径规划算法</string>
+    <string name="plan_route_trim_before">修剪之前</string>
+    <string name="track_file">轨迹文件</string>
+    <string name="turn_arrows">转向箭头</string>
+    <string name="routing_attr_allow_gate_description">允许使用大门</string>
+    <string name="continue_with">继续 %1$s</string>
+    <string name="navigate_to_track_descr">从我的位置导航到轨迹</string>
+    <string name="routing_attr_allow_streams_description">允许溪流和水渠</string>
+    <string name="pass_whole_track_descr">要导航的轨迹点</string>
+    <string name="import_track_descr">选择要跟随的轨迹文件或从您的设备中导入。</string>
+    <string name="complex_routing_descr">汽车导航的两阶段路径规划。</string>
+    <string name="not_available_with">不适用于 %1$s</string>
+    <string name="previous_segment">上一段</string>
+    <string name="map_source_zoom_levels_descr">用作地图或覆盖层/衬底层时会影响屏幕。
+\n
+\n%1$s：地图仅限于所选的缩放级别范围。
+\n
+\n%2$s 是原始瓦片可见的级别，在这些值之外将发生放大或缩小。</string>
+    <string name="turn_arrows_descr">选择是否在路程线路上指示转弯箭头。</string>
+    <string name="plan_route_add_new_segment">添加新线段</string>
+    <string name="open_street_map_login_mode">先登录以上传新的或修改过的更改。
+\n
+\n使用 OAuth 方法或您的 OSM 用户名和密码。</string>
 </resources>

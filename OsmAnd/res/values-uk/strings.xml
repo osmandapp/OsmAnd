@@ -4850,7 +4850,7 @@
     <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
     <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
     <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
-    <string name="release_4_3">- Новий швидший рушій рендерингу мап з 2.5D виглядом
+    <string name="release_4_3">- Новий швидший рушій рендерингу мап версії 2 (OpenGL) з 2.5D виглядом
 \n
 \n - Плавна анімація зміни локації під час руху
 \n
@@ -4875,4 +4875,16 @@
     <string name="show_map_symbols_desc">Текст, дорожні знаки тощо.</string>
     <string name="show_borders_of_downloaded_maps">Забарвлення завантажених мап</string>
     <string name="show_map_symbols">Показати символи мапи</string>
+    <string name="rendering_engine_failed_descr">OsmAnd повернувся до рендерингу мап \"Version 1\". Ви можете спробувати перемкнутися на новий рушій рендерингу «Версії 2 (OpenGL)» у Налаштуваннях.
+\n
+\nБудь ласка, підтримайте вдосконалення, надавши свій журнал помилок.</string>
+    <string name="map_rendering_engine_v2">Версія 2 (OpenGL)</string>
+    <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
+    <string name="dismiss_changes">Відхилити зміни\?</string>
+    <string name="restart_now">Перезапустити зараз</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це швидший рушій рендерингу мап, який також підтримує 2.5D перегляд. Рендеринг версії 1 був типовим до випуску 4.3, і досі є кращим для старих пристроїв.</string>
+    <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
+    <string name="share_crash_log">Поділитися журналом збоїв</string>
+    <string name="map_rendering_engine_v1">Версія 1</string>
+    <string name="map_rendering_engine">Рушій рендерингу мап</string>
 </resources>
