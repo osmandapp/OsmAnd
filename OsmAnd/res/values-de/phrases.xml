@@ -3496,7 +3496,7 @@
     <string name="poi_bulk_purchase">Verpackungsfreie Waren</string>
     <string name="poi_substation_type">Art</string>
     <string name="poi_bulk_purchase_yes">Ja;Großeinkauf</string>
-    <string name="poi_bulk_purchase_only">Nur;Nur Großeinkauf</string>
+    <string name="poi_bulk_purchase_only">Nur Großeinkauf</string>
     <string name="poi_substation_transmission">Umspannwerk</string>
     <string name="poi_substation_distribution">Verteiler</string>
     <string name="poi_substation_minor_distribution">Haushaltsverteilung</string>
