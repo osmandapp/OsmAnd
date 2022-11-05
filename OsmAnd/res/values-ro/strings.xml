@@ -4778,4 +4778,74 @@
     <string name="download_complete">Descărcare completă</string>
     <string name="available_as_part_of_subscription_plan">Disponibil ca parte a abonamentului %1$s.</string>
     <string name="included_in_your_current_plan">Inclus în planul dumneavoastră actual \"%1$s\"</string>
+    <string name="rendering_engine_failed_descr">OsmAnd a revenit la \"Versiunea 1\" de redare a hărților. Puteți încerca să comutați înapoi la noul motor de redare \'Version 2 (OpenGL)\' în Setări.
+\n
+\nVă rugăm să sprijiniți îmbunătățirile prin furnizarea jurnalului de erori.</string>
+    <string name="send_uuid_preference_desc">Un UUID aleatoriu este utilizat pentru a descărca hărți offline de pe serverele OsmAnd pentru a monitoriza utilizarea echitabilă a resurselor serverului, pentru a prezice tiparele de trafic și pentru a genera rapoarte lunare anonime privind hărțile.</string>
+    <string name="show_borders_of_downloaded_maps">Colorarea hărților descărcate</string>
+    <string name="map_rendering_engine">Motor de redare a hărților</string>
+    <string name="favorites_backup">Copie de rezervă pentru favorite</string>
+    <string name="current_location_widget">Coordonate: Poziția actuală</string>
+    <string name="map_widget_altitude_current_location">Altitudine: locația actuală</string>
+    <string name="map_widget_altitude_current_location_desc">Afișează altitudinea deasupra nivelului mării a geolocației curente.</string>
+    <string name="simulate_location_by_gpx">Simularea locației prin GPX</string>
+    <string name="purchases_feature_desc_external_sensors">Afișați și înregistrați datele de la senzorii externi: viteza bicicletei, puterea bicicletei, cadența și ritmul cardiac.</string>
+    <string name="external_sensors_support">Suport pentru senzori externi</string>
+    <string name="release_4_3">•Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D
+\n
+\n • Animație lină a schimbărilor de locație în timpul mișcării
+\n
+\n • Noi widget-uri pentru coordonatele centrului hărții și altitudinea geolocațiilor
+\n
+\n • \"Distance to tap\": s-au adăugat opțiuni de mărime a textului
+\n
+\n • Widgetul \"Map marker\": a fost adăugată opțiunea de modificare a comportamentului la clic
+\n
+\n • Fixată opțiunea \"Display position\" (Afișare poziție)
+\n
+\n • GPX: adăugat suport pentru etichetele \"link\", \"cmt\", \"desc\" și pentru orice extensii personalizate
+\n
+\n • Reorganizarea listei \"Hărți nautice\"
+\n
+\n • A fost adăugat suport pentru senzorii ANT+
+\n
+\n • A fost adăugată opțiunea de dezactivare a UUID-ului de descărcare
+\n
+\n</string>
+    <string name="speak_gps_signal_status">Anunțați pierderea și recuperarea semnalului GPS</string>
+    <string name="speak_route_recalculation">Anunță recalcularea rutei</string>
+    <string name="map_center_widget">Coordonate: Centrul hărții</string>
+    <string name="external_sensors_plugin_name">Senzori externi</string>
+    <string name="external_sensors_plugin_description">Monitorizarea ritmului cardiac, a vitezei bicicletei, a puterii bicicletei și a cadenței. Necesită ca dispozitivul să fie conectat la senzorii respectivi prin intermediul protocolului de rețea personală fără fir ANT+.</string>
+    <string name="map_widget_altitude_map_center">Altitudine: centrul hărții</string>
+    <string name="map_widget_altitude_map_center_desc">Afișează altitudinea deasupra nivelului mării a centrului actual al hărții.</string>
+    <string name="map_widget_altitude_desc">Afișarea altitudinii deasupra nivelului mării pentru geolocația curentă sau pentru centrul actual al hărții</string>
+    <string name="map_widget_rendering_fps">FPS de redare a hărții</string>
+    <string name="map_widget_rendering_fps_desc">Arată cât de repede sunt afișate și reîmprospătate harta și elementele hărții, exprimat în cadre pe secundă (FPS).</string>
+    <string name="location_simulation_cutoff">Simularea sare peste primii metri</string>
+    <string name="location_simulation_speedup">Creșterea vitezei de simulare</string>
+    <string name="send_uuid_preference">Trimiterea identificatorului unic de utilizator (UUID)</string>
+    <string name="terms_of_service_desc">Prin descărcarea hărților sunteți de acord cu %1$s și %2$s.</string>
+    <string name="shared_string_terms_of_use">Termeni de utilizare</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizați caracteristicile abonamentului dumneavoastră pe diferite platforme (Android/iOS/Web) fără costuri suplimentare.</string>
+    <string name="shared_string_cross_buy">Achiziții încrucișate</string>
+    <string name="ant_widgets">ANT+ widget-uri</string>
+    <string name="ant_missing_dependency_descr">Serviciul necesar \"%1$s\" nu a fost găsit.
+\nTrebuie să instalați serviciul ANT+ Plugins sau este posibil să fie nevoie să actualizați versiunea existentă, dacă o aveți deja.
+\nDoriți să lansați Play Store pentru a-l obține\?</string>
+    <string name="ant_missing_dependency">Lipsește dependența</string>
+    <string name="ant_go_to_store">Mergeți la magazin</string>
+    <string name="ant_read_data">Citiți datele</string>
+    <string name="map_widget_target_distance">Distanța de la cameră la țintă</string>
+    <string name="rendering_engine_failed">Redarea hărții lui OsmAnd s-a blocat recent.</string>
+    <string name="share_crash_log">Partajați jurnalul de accident</string>
+    <string name="dismiss_changes_descr">Toate modificările vor fi respinse.</string>
+    <string name="dismiss_changes">Respingeți modificările\?</string>
+    <string name="restart_now">Reporniți acum</string>
+    <string name="map_rendering_engine_v1">Versiunea 1</string>
+    <string name="map_rendering_engine_v2">Versiunea 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este motorul mai rapid de redare a hărților, care oferă, de asemenea, o vizualizare 2.5D. Renderizarea versiunii 1 a fost cea implicită înainte de versiunea 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
+    <string name="show_map_symbols">Afișați simbolurile hărții</string>
+    <string name="show_map_symbols_desc">Text, indicatoare rutiere și altele.</string>
+    <string name="shared_string_identifiers">Identificatori</string>
 </resources>
