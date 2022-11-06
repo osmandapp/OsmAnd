@@ -4866,7 +4866,7 @@
 \n
 \n</string>
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
-    <string name="show_borders_of_downloaded_maps">Keretek a letöltött térképek körül</string>
+    <string name="show_borders_of_downloaded_maps">Letöltött térképek keretének megjelenítése</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
