@@ -4879,7 +4879,7 @@
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
     <string name="external_sensors_support">Understøttelse af eksterne sensorer</string>
     <string name="show_map_symbols">Vis kortsymboler</string>
-    <string name="show_borders_of_downloaded_maps">Farvelægning af downloadede kort</string>
+    <string name="show_borders_of_downloaded_maps">Vis grænser for downloadede kort</string>
     <string name="show_map_symbols_desc">Tekst, vejskilte og andre.</string>
     <string name="rendering_engine_failed">OsmAnd\'s kortgengivelse er for nylig brudt ned.</string>
     <string name="share_crash_log">Del log over nedbrud</string>
@@ -4893,4 +4893,57 @@
     <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
 \n
 \nStøt forbedringer ved at levere din fejllog.</string>
+    <string name="weather_offline_forecast">Offline prognose</string>
+    <string name="weather_online_cache">Online cache</string>
+    <string name="map_settings_weather_temp">Temperatur</string>
+    <string name="map_settings_weather_air_pressure">Lufttryk</string>
+    <string name="map_settings_weather_wind">Vind</string>
+    <string name="map_settings_weather_cloud">Sky</string>
+    <string name="map_settings_weather_precip">Nedbør</string>
+    <string name="measurement_units">Måleenheder</string>
+    <string name="explore_weather_forecast">Tjek vejrudsigt.</string>
+    <string name="empty_screen_weather_contours">Slå til for at få vist vejrkonturer på kortet.</string>
+    <string name="empty_screen_weather_pressure_layer">Slå til for at få vist tryklaget på kortet.</string>
+    <string name="empty_screen_weather_clouds_layer">Slå til for at få vist skylaget på kortet.</string>
+    <string name="empty_screen_weather_wind_layer">Slå til for at få vist vindlaget på kortet.</string>
+    <string name="weather_precip_inches">Tommer</string>
+    <string name="weather_precip_milimeters">Milimeter</string>
+    <string name="weather_precip_in">tommer</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/t</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Knob</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometer i timen</string>
+    <string name="weather_wind_meters_per_second">Meter/sekund</string>
+    <string name="weather_widgets_secondary_desc">Måleenhederne kan ændres i indstillingerne for Vejr-udvidelsen.</string>
+    <string name="air_pressure_widget_desc">Viser lufttrykket for det aktuelle kortcentrum.</string>
+    <string name="wind_widget_desc">Viser vindhastighed for det aktuelle kortcentrum.</string>
+    <string name="precipitation_widget_desc">Viser nedbør for det aktuelle kortcentrum.</string>
+    <string name="weather_widget_group_desc">Et sæt moduler, der viser forskellige vejroplysninger.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hektopascal</string>
+    <string name="weather_pressure_inches_of_mercury">Tommer kviksølv</string>
+    <string name="weather_pressure_millimeters_of_mercury">Millimeter kviksølv</string>
+    <string name="weather_prefs_descr">24-timers prognose hver time og 7-dages prognose hver 3. time</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke med den valgte korttype.</string>
+    <string name="shared_string_weather">Vejr</string>
+    <string name="weather_plugin_description">Vejr-udvidelse giver
+\n- 5 lag... 24 timers prognose hver time og 7 dages prognose hver 3. time
+\n- lokationsbaserede moduler
+\n- temperatur/tryk-konturlinjer
+\nVejrdata leveres af GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="shared_string_contours">Konturer</string>
+    <string name="empty_screen_view_selected_weather_data">Slå til for at se valgte vejrdata på kortet.</string>
+    <string name="shared_string_layers">Lag</string>
+    <string name="empty_screen_weather_precipitation_layer">Slå til for at få vist nedbørslaget på kortet.</string>
+    <string name="empty_screen_weather_temperature_layer">Slå til for at få vist temperaturlaget på kortet.</string>
+    <string name="weather_wind_miles_per_hour">Mil i timen</string>
+    <string name="temperature_widget_desc">Viser temperatur for det aktuelle kortcentrum.</string>
+    <string name="clouds_widget_desc">Viser skyer for det aktuelle kortcentrum.</string>
 </resources>
