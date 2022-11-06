@@ -4916,7 +4916,7 @@
     <string name="shared_string_identifiers">معرفات</string>
     <string name="shared_string_terms_of_use">شروط الاستخدام</string>
     <string name="shared_string_cross_buy">شراء عبر</string>
-    <string name="release_4_3">• محرك جديد لعرض الخرائط بشكل أسرع ، مع عرض 3D
+    <string name="release_4_3">• مشغل جديد لعرض الخرائط بشكل أسرع ، مع عرض 3D
 \n
 \n • حركة سلسة لتغييرات الموقع أثناء الحركة
 \n
@@ -4943,5 +4943,70 @@
     <string name="purchases_feature_desc_external_sensors">عرض وتسجيل البيانات من أجهزة الاستشعار الخارجية: سرعة الدراجة وقوة الدراجة والإيقاع ومعدل ضربات القلب.</string>
     <string name="show_map_symbols">إظهار رموز الخريطة</string>
     <string name="show_map_symbols_desc">النص وعلامات الطرق وغيرها.</string>
-    <string name="show_borders_of_downloaded_maps">تلوين الخرائط التي تم تنزيلها</string>
+    <string name="show_borders_of_downloaded_maps">إظهار حدود الخرائط التي تم تنزيلها</string>
+    <string name="shared_string_contours">خط كنتور</string>
+    <string name="shared_string_layers">الطبقات</string>
+    <string name="empty_screen_weather_contours">قم بالتشغيل لعرض معالم الطقس على الخريطة.</string>
+    <string name="empty_screen_weather_pressure_layer">قم بالتشغيل لعرض طبقة الضغط على الخريطة.</string>
+    <string name="empty_screen_weather_clouds_layer">قم بالتشغيل لعرض طبقة السحب على الخريطة.</string>
+    <string name="empty_screen_weather_wind_layer">قم بالتشغيل لعرض طبقة الرياح على الخريطة.</string>
+    <string name="empty_screen_weather_precipitation_layer">قم بالتشغيل لعرض طبقة هطول الأمطار على الخريطة.</string>
+    <string name="empty_screen_weather_temperature_layer">قم بالتشغيل لعرض طبقة درجة الحرارة على الخريطة.</string>
+    <string name="empty_screen_view_selected_weather_data">قم بالتشغيل لعرض بيانات الطقس المحددة على الخريطة.</string>
+    <string name="weather_precip_in">في</string>
+    <string name="weather_precip_mm">مليمتر</string>
+    <string name="weather_precip_inches">بوصة</string>
+    <string name="weather_precip_milimeters">الميلمترات</string>
+    <string name="weather_wind_kt">كيلوطن</string>
+    <string name="weather_pressure_hpa">هيكتو</string>
+    <string name="weather_pressure_inhg">بوصة من الزئبق</string>
+    <string name="weather_pressure_mmhg">ملم زئبق</string>
+    <string name="weather_pressure_hectopascals">هيكتوباسكال</string>
+    <string name="weather_pressure_inches_of_mercury">بوصة من الزئبق</string>
+    <string name="weather_pressure_millimeters_of_mercury">ملليمترات من الزئبق</string>
+    <string name="weather_prefs_descr">توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات</string>
+    <string name="weather_temperature_celsius">درجة مئوية</string>
+    <string name="weather_temperature_fahrenheit">فهرنهايت</string>
+    <string name="rendering_engine_failed">تعطل عرض خريطة أوسماند مؤخرا.</string>
+    <string name="share_crash_log">مشاركة سجل الأعطال</string>
+    <string name="dismiss_changes_descr">سيتم رفض كافة التغييرات.</string>
+    <string name="dismiss_changes">هل تريد رفض التغييرات؟</string>
+    <string name="restart_now">أعد التشغيل الآن</string>
+    <string name="map_rendering_engine_v2">الإصدار 2 (3D)</string>
+    <string name="map_rendering_engine">مشغل عرض الخريطة</string>
+    <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات المكون الإضافي للطقس.</string>
+    <string name="weather_plugin_description">يوفر البرنامج الطقس المساعد
+\n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
+\n- ويدجت يعتمد على الموقع
+\n- خطوط متساوية في درجة الحرارة / الضغط
+\nيتم توفير بيانات الطقس من قبل GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="map_settings_weather_temp">درجة الحرارة</string>
+    <string name="weather_online_cache">توقعات متصلة بالانترنت</string>
+    <string name="shared_string_weather">الطقس</string>
+    <string name="explore_weather_forecast">استكشف توقعات الطقس.</string>
+    <string name="weather_wind_kmh">كم / ساعة</string>
+    <string name="weather_wind_ms">م / ث</string>
+    <string name="weather_wind_meters_per_second">متر / ثانية</string>
+    <string name="weather_offline_forecast">توقعات غير متصلة بالإنترنت</string>
+    <string name="weather_wind_miles_per_hour">ميل ساعة</string>
+    <string name="map_settings_weather_air_pressure">الضغط الجوي</string>
+    <string name="map_settings_weather_precip">تساقط</string>
+    <string name="measurement_units">وحدات القياس</string>
+    <string name="map_settings_weather_wind">الرياح</string>
+    <string name="map_settings_weather_cloud">سحاب</string>
+    <string name="weather_wind_kilimeters_per_hour">كم/س</string>
+    <string name="wind_widget_desc">عرض سرعة الرياح لمركز الخريطة الحالي.</string>
+    <string name="weather_wind_mph">ميل في الساعة</string>
+    <string name="weather_wind_knots">عقدة</string>
+    <string name="weather_widget_group_desc">مجموعة من الأدوات تعرض معلومات الطقس المختلفة.</string>
+    <string name="action_not_supported_with_map_style">الإجراء غير مدعوم بنمط الخريطة المحدد.</string>
+    <string name="air_pressure_widget_desc">عرض ضغط الهواء لمركز الخريطة الحالي.</string>
+    <string name="precipitation_widget_desc">عرض هطول الأمطار لمركز الخريطة الحالي.</string>
+    <string name="clouds_widget_desc">عرض السحب لمركز الخريطة الحالي.</string>
+    <string name="temperature_widget_desc">عرض درجة الحرارة لمركز الخريطة الحالي.</string>
+    <string name="map_rendering_engine_v1">الإصدار 1</string>
+    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض خريطة \"الإصدار 1\". يمكنك العودة إلى مشغل العرض الجديد \"الإصدار 2 (3D)\" في الإعدادات.
+\n
+\nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
+    <string name="map_rendering_engine_descr">الإصدار 2 (3D) هو مشغل عرض الخرائط الأسرع الذي يتميز أيضًا بعرض 3D كان عرض الإصدار 1 هو الإعداد الافتراضي قبل الإصدار 4.3 ، ولا يزال مفضلًا للأجهزة القديمة.</string>
 </resources>
