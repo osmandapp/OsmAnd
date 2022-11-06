@@ -4904,4 +4904,57 @@
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
+    <string name="weather_offline_forecast">Pronóstico sin conexión</string>
+    <string name="weather_online_cache">Caché en línea</string>
+    <string name="map_settings_weather_temp">Temperatura</string>
+    <string name="map_settings_weather_air_pressure">Presión atmosférica</string>
+    <string name="map_settings_weather_wind">Viento</string>
+    <string name="map_settings_weather_cloud">Nubes</string>
+    <string name="map_settings_weather_precip">Precipitación</string>
+    <string name="empty_screen_weather_clouds_layer">Activar para ver la capa de nubes en el mapa.</string>
+    <string name="empty_screen_view_selected_weather_data">Activar para ver los datos meteorológicos marcados en el mapa.</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Pulgadas</string>
+    <string name="weather_precip_milimeters">Milímetros</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Nudos</string>
+    <string name="weather_wind_miles_per_hour">Millas por hora</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilómetros por hora</string>
+    <string name="weather_wind_meters_per_second">Metros/Segundo</string>
+    <string name="weather_widgets_secondary_desc">Las unidades de medida pueden cambiarse en los ajustes del complemento del clima.</string>
+    <string name="air_pressure_widget_desc">Muestra la presión atmosférica para el centro del mapa actual.</string>
+    <string name="clouds_widget_desc">Muestra las nubes para el centro del mapa actual.</string>
+    <string name="wind_widget_desc">Muestra la velocidad del viento para el centro del mapa actual.</string>
+    <string name="precipitation_widget_desc">Muestra la precipitación para el centro de mapa actual.</string>
+    <string name="weather_widget_group_desc">Un conjunto de widgets que muestran información meteorológica diversa.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inches_of_mercury">Pulgadas de mercurio</string>
+    <string name="action_not_supported_with_map_style">La acción no se admite con el estilo de mapa marcado.</string>
+    <string name="measurement_units">Unidades de medida</string>
+    <string name="empty_screen_weather_wind_layer">Activar para ver la capa de viento en el mapa.</string>
+    <string name="empty_screen_weather_precipitation_layer">Activar para ver la capa de precipitaciones en el mapa.</string>
+    <string name="weather_plugin_description">El complemento del clima proporciona
+\n- 5 capas... pronóstico horario de 24 horas y pronóstico de 7 días cada 3 horas
+\n- widgets basados en la ubicación
+\n- isolíneas de temperatura / presión
+\nLos datos meteorológicos son proporcionados por GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="shared_string_layers">Capas</string>
+    <string name="shared_string_weather">Clima</string>
+    <string name="explore_weather_forecast">Explora el pronóstico del tiempo.</string>
+    <string name="shared_string_contours">Contornos</string>
+    <string name="empty_screen_weather_temperature_layer">Activar para ver la capa de temperatura en el mapa.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milímetros de mercurio</string>
+    <string name="weather_prefs_descr">Pronóstico horario de 24 horas y pronóstico de 7 días cada 3 horas</string>
+    <string name="empty_screen_weather_pressure_layer">Activar para ver la capa de presión en el mapa.</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="temperature_widget_desc">Muestra la temperatura para el centro de mapa actual.</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_hectopascals">Hectopascales</string>
+    <string name="empty_screen_weather_contours">Activar para ver los contornos meteorológicos en el mapa.</string>
 </resources>
