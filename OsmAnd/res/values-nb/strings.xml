@@ -4810,4 +4810,11 @@
     <string name="show_map_symbols">Vis kartsymboler</string>
     <string name="show_map_symbols_desc">Tekst, veiskilt og andre.</string>
     <string name="show_borders_of_downloaded_maps">Fargelegging av nedlastede kartregioner</string>
+    <string name="map_settings_weather_temp">Temperatur</string>
+    <string name="map_settings_weather_air_pressure">Lufttrykk</string>
+    <string name="map_settings_weather_wind">Vind</string>
+    <string name="map_settings_weather_precip">Nedbør</string>
+    <string name="measurement_units">Målingsenheter</string>
+    <string name="shared_string_weather">Vær</string>
+    <string name="shared_string_layers">Lag</string>
 </resources>
