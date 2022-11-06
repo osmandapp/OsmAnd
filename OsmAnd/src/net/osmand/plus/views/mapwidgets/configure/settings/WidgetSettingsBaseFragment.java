@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -168,6 +169,11 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	protected MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		return activity != null ? ((MapActivity) activity) : null;
+	}
+
+	@StyleRes
+	protected static int getThemeRes(boolean nightMode) {
+		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public static void showFragment(@NonNull FragmentManager manager,

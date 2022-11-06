@@ -23,7 +23,7 @@ public class DialogListItemAdapter extends BaseAdapter {
 
 	public static final int INVALID_ID = -1;
 
-	private final String[] mData;
+	private final CharSequence[] mData;
 	private final boolean multiChoice;
 	private final boolean nightMode;
 	private int selected = INVALID_ID;
@@ -36,19 +36,19 @@ public class DialogListItemAdapter extends BaseAdapter {
 	private final LayoutInflater inflater;
 
 	@NonNull
-	public static DialogListItemAdapter createSingleChoiceAdapter(@NonNull String[] mData, boolean nightMode, int selected, @NonNull OsmandApplication app,
+	public static DialogListItemAdapter createSingleChoiceAdapter(@NonNull CharSequence[] mData, boolean nightMode, int selected, @NonNull OsmandApplication app,
 	                                                              @ColorInt int controlsColor, int themeRes, @Nullable View.OnClickListener listener) {
 		return new DialogListItemAdapter(mData, selected, null, nightMode, app, controlsColor, themeRes, listener, false);
 	}
 
 	@NonNull
-	public static DialogListItemAdapter createMultiChoiceAdapter(@NonNull String[] mData, boolean nightMode, @Nullable boolean[] checkedItems,
+	public static DialogListItemAdapter createMultiChoiceAdapter(@NonNull CharSequence[] mData, boolean nightMode, @Nullable boolean[] checkedItems,
 	                                                             @NonNull OsmandApplication app, @ColorInt int controlsColor, int themeRes,
 	                                                             @Nullable View.OnClickListener listener) {
 		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, controlsColor, themeRes, listener, true);
 	}
 
-	private DialogListItemAdapter(@NonNull String[] mData, int selected, @NonNull boolean[] checkedItems, boolean nightMode,
+	private DialogListItemAdapter(@NonNull CharSequence[] mData, int selected, @NonNull boolean[] checkedItems, boolean nightMode,
 	                              @NonNull OsmandApplication app, int controlsColor, int themeRes,
 	                              @Nullable View.OnClickListener listener, boolean multiChoice) {
 		this.mData = mData;

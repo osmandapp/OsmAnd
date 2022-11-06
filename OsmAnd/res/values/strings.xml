@@ -11,6 +11,16 @@
 	Thx - Hardy
 -->
 
+    <string name="switch_mode_by_tapping_on_widget">You can switch mode by taping on widget.</string>
+    <string name="map_widget_sunset_desc">Shows time of the next sunset or time left to sunset.</string>
+    <string name="map_widget_sunrise_desc">Shows time of the next sunrise or time left to sunrise.</string>
+    <string name="shared_string_next_sunset">Next sunset</string>
+    <string name="shared_string_next_sunrise">Next sunrise</string>
+    <string name="shared_string_time_left">Time left</string>
+    <string name="shared_string_sunset">Sunset</string>
+    <string name="shared_string_sunrise">Sunrise</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Widgets show information about next sunrise and sunset.</string>
+    <string name="map_widget_group_sunrise_sunset">Sunrise, sunset</string>
     <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
