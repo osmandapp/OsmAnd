@@ -2463,8 +2463,6 @@
     <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>

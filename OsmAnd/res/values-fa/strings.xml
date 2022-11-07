@@ -2217,8 +2217,6 @@
     <string name="group_will_be_removed_after_restart">بار بعد که برنامه را باز کنید، گروه حذف خواهد شد.</string>
     <string name="descendingly">نزولی</string>
     <string name="marker_show_distance_descr">مسافت تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">مشخص کنید در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند.</string>
     <string name="all_markers_moved_to_history">همهٔ نشانه‌های نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_history">نشانهٔ نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_active">نشانهٔ نقشه به قسمت فعال منتقل شد</string>

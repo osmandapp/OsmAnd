@@ -1827,8 +1827,6 @@
     <string name="date_added">Data de adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar a distância e a direção para os marcadores no mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade de mudança de orientação de \"Direção do movimento\" a \"Direção da bússola\" abaixo.</string>
     <string name="all_markers_moved_to_history">Todos os marcadores do mapa foram movidos para histórico</string>
     <string name="marker_moved_to_history">Marcador do mapa movido para histórico</string>
     <string name="marker_moved_to_active">Marcador do mapa movido para ativo</string>

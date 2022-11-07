@@ -2458,8 +2458,6 @@
     <string name="move_all_to_history">Presunúť všetko do histórie</string>
     <string name="show_direction">Indikovať vzdialenosť</string>
     <string name="sort_by">Zotriediť podľa</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Citlivosť zmeny orientácie mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Dolu zvoľte rýchlosť pre zmenu orientácie mapy zo \"Smer pohybu\" na \"Smer kompasu\".</string>
     <string name="all_markers_moved_to_history">Všetky mapové značky presunuté do histórie</string>
     <string name="marker_moved_to_history">Mapová značka presunutá do histórie</string>
     <string name="marker_moved_to_active">Mapová značka presunutá do archívu</string>

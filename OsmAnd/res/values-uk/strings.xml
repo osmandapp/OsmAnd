@@ -2461,8 +2461,6 @@
     <string name="do_not_use_animations">Без анімації</string>
     <string name="do_not_use_animations_descr">Вимикає анімацію мапи.</string>
     <string name="marker_show_distance_descr">Вибрати як показувати відстань і напрямок до позначок на мапі:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Зміна орієнтації мапи</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Виберіть далі, на якій швидкості орієнтація мапи перемикається із \'за напрямком руху\' на \'за компасом\'.</string>
     <string name="all_markers_moved_to_history">Усі позначки перенесено до історії</string>
     <string name="marker_moved_to_history">Позначку мапи перенесено до історії</string>
     <string name="marker_moved_to_active">Позначка мапи серед увімкнених</string>

@@ -2150,8 +2150,6 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Lagt til</string>
     <string name="order_by">Sorter etter:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg hastighet for skifte av kartorientering fra \'Bevegelsesretning\' til \'Kompassretning\' nedenfor.</string>
     <string name="srtm_purchase_header">Kjøp og installer \"Koter\"-tillegget for å vise graderte vertikale områder.</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt fra nærmeste vei.</string>

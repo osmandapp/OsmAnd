@@ -3770,8 +3770,6 @@
     <string name="mapillary_menu_title_pano">Afișați numai imagini la 360°</string>
     <string name="mapillary_menu_descr_tile_cache">Reîncărcați dalele pentru a vedea date actualizate.</string>
     <string name="marker_moved_to_active">Indicator de hartă mutat la activ</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selectați viteza de comutare a orientării de la \'Movement direction\' la \'Compass direction\' de mai jos.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Pragul de orientare a hărții</string>
     <string name="hide_passed">Ascundeți trecut</string>
     <string name="show_passed">Arată trecut</string>
     <string name="add_location_as_first_point_descr">Adăugați poziția dvs. ca punct de plecare pentru a planifica traseul perfect.</string>

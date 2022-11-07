@@ -2340,7 +2340,6 @@
     <string name="date_added">Hozzáadva</string>
     <string name="order_by">Rendezés alapja:</string>
     <string name="marker_show_distance_descr">Válassza ki, hogyan jelenjék meg a térképen a térképjelölők távolsága és iránya:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Válassza ki, mekkora sebesség alatt váltson a térkép forgatása „Haladási irány”-ról „Iránytű”-re.</string>
     <string name="all_markers_moved_to_history">Minden térképjelölő áthelyezve az előzményekbe</string>
     <string name="marker_moved_to_history">Térképjelölő áthelyezve az előzményekhez</string>
     <string name="shared_string_list">Lista</string>
@@ -2376,7 +2375,6 @@
     <string name="route_is_calculated">Útvonal kiszámítva</string>
     <string name="round_trip">Körtúra</string>
     <string name="plan_route_no_markers_toast">A funkció használatához legalább egy jelölőt hozzá kell adnia.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Térképforgatást kiváltó küszöbérték</string>
     <string name="marker_moved_to_active">Térképjelölő áthelyezve az aktívakhoz</string>
     <string name="move_all_to_history">Összes áthelyezése az előzményekbe</string>
     <string name="save_as_route_point">Mentés útvonalpontokként</string>

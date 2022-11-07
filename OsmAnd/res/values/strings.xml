@@ -2272,8 +2272,6 @@
     <string name="date_added">Added</string>
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>
