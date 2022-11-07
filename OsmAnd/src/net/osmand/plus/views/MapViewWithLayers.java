@@ -57,7 +57,7 @@ public class MapViewWithLayers extends FrameLayout {
 		inflate(UiUtilities.getThemedContext(context, nightMode), R.layout.map_view_with_layers, this);
 	}
 
-	public void setupOpenGLView() {
+	public void setupRenderingView() {
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
 		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
@@ -66,10 +66,10 @@ public class MapViewWithLayers extends FrameLayout {
 		OsmAndMapSurfaceView surfaceView = findViewById(R.id.MapView);
 		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);
 
-		boolean useOpenglRender = settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
+		boolean useOpenglRender = settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit() && !useAndroidAuto;
 		if (useOpenglRender) {
 			setupAtlasMapRendererView();
-			mapLayersView.setMapView(useAndroidAuto ? null : mapView);
+			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
 		} else {
 			surfaceView.setMapView(useAndroidAuto ? null : mapView);
@@ -142,8 +142,8 @@ public class MapViewWithLayers extends FrameLayout {
 				}
 
 				@Override
-				public void onSetupOpenGLView() {
-					setupOpenGLView();
+				public void onSetupRenderingView() {
+					setupRenderingView();
 				}
 			};
 		}

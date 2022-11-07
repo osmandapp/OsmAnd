@@ -144,6 +144,11 @@ public class ViewCreator {
 			setupDescription(description, item.getDescription(), noProgress);
 		}
 
+		TextView secondaryDescription = convertView.findViewById(R.id.secondary_description);
+		if (secondaryDescription != null) {
+			setupSecondaryDescription(secondaryDescription, item.getSecondaryDescription());
+		}
+
 		View dividerView = convertView.findViewById(R.id.divider);
 		if (dividerView != null) {
 			boolean hideDivider = item.shouldHideDivider();
@@ -294,7 +299,7 @@ public class ViewCreator {
 		return view;
 	}
 
-	private void setupTitle(@NonNull TextView title, @NonNull ContextMenuItem item) {
+	private void setupTitle(@NonNull TextView tvTitle, @NonNull ContextMenuItem item) {
 		int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		Drawable drawable = item.getIcon() != INVALID_ID
 				? iconsCache.getIcon(item.getIcon(), colorId)
@@ -303,8 +308,8 @@ public class ViewCreator {
 			int paddingInPixels = (int) ctx.getResources().getDimension(R.dimen.bottom_sheet_icon_margin);
 			int drawableSizeInPixels = (int) ctx.getResources().getDimension(R.dimen.standard_icon_size);
 			drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
-			title.setCompoundDrawablesRelative(drawable, null, null, null);
-			title.setCompoundDrawablePadding(paddingInPixels);
+			tvTitle.setCompoundDrawablesRelative(drawable, null, null, null);
+			tvTitle.setCompoundDrawablePadding(paddingInPixels);
 		}
 	}
 
@@ -407,12 +412,21 @@ public class ViewCreator {
 		}
 	}
 
-	private void setupDescription(@NonNull TextView descriptionText, @Nullable String description, boolean noProgress) {
+	private void setupDescription(@NonNull TextView tvDesc, @Nullable String description, boolean noProgress) {
 		if (description != null && noProgress) {
-			descriptionText.setText(description);
-			AndroidUiHelper.updateVisibility(descriptionText, true);
+			tvDesc.setText(description);
+			AndroidUiHelper.updateVisibility(tvDesc, true);
 		} else {
-			AndroidUiHelper.updateVisibility(descriptionText, false);
+			AndroidUiHelper.updateVisibility(tvDesc, false);
+		}
+	}
+
+	private void setupSecondaryDescription(@NonNull TextView tvDesc, @Nullable String description) {
+		if (description != null) {
+			tvDesc.setText(description);
+			AndroidUiHelper.updateVisibility(tvDesc, true);
+		} else {
+			AndroidUiHelper.updateVisibility(tvDesc, false);
 		}
 	}
 

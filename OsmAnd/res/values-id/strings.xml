@@ -154,8 +154,6 @@
     <string name="date_added">Ditambahkan</string>
     <string name="order_by">Urut berdasarkan:</string>
     <string name="marker_show_distance_descr">Pilih cara untuk mengindikasikan jarak dan arah ke penanda peta pada layar peta:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Ambang orientasi peta</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Pilih kecepatan mengubah orientasi dari \'Arah gerakan\' ke \'Arah kompas\' di bawah.</string>
     <string name="all_markers_moved_to_history">Semua penanda peta di pindahkan ke riwayat</string>
     <string name="marker_moved_to_history">Penanda peta dipindahkan ke riwayat</string>
     <string name="marker_moved_to_active">Penanda peta dipindahkan ke aktif</string>

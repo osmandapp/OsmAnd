@@ -342,17 +342,19 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	@NonNull
 	private List<WidgetType> excludeGroupsDuplicated(List<WidgetType> widgets) {
 		List<WidgetGroup> visitedGroups = new ArrayList<>();
-		List<WidgetType> matchingWidgets = new ArrayList<>();
+		List<WidgetType> individualWidgets = new ArrayList<>();
+		List<WidgetType> result = new ArrayList<>();
 		for (WidgetType widget : widgets) {
 			WidgetGroup group = widget.getGroup();
 			if (group != null && !visitedGroups.contains(group)) {
 				visitedGroups.add(group);
-				matchingWidgets.add(widget);
+				result.add(widget);
 			} else if (group == null) {
-				matchingWidgets.add(widget);
+				individualWidgets.add(widget);
 			}
 		}
-		return matchingWidgets;
+		result.addAll(individualWidgets);
+		return result;
 	}
 
 	private void inflateAvailableDefaultWidgets(@NonNull List<WidgetType> widgets, boolean hasExternalWidgets) {

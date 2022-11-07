@@ -2341,8 +2341,6 @@
     <string name="do_not_use_animations_descr">Vypne animace mapy.</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Práh pro změnu orientace mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Zvolte rychlost, při níž se orientace mapy změní z \"Ve směru pohybu\" na \"Podle kompasu\".</string>
     <string name="all_markers_moved_to_history">Všechny mapové značky přesunuty do historie</string>
     <string name="marker_moved_to_history">Mapová značka přesunuta do historie</string>
     <string name="marker_moved_to_active">Mapová značka přesunuta do aktivních</string>

@@ -2367,8 +2367,6 @@
     <string name="mark_passed">Markör godkänd</string>
     <string name="show_guide_line">Visa riktlinjer</string>
     <string name="marker_show_distance_descr">Välj hur avstånd och riktning till kartmarkörer ska anges på kartan:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringströskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Välj nedan vilken hastighet kartläget växlar från \"riktning\" till \"kompass\".</string>
     <string name="show_direction">Avståndsindikering</string>
     <string name="measurement_tool_snap_to_road_descr">Charlott ansluter punkter med vägar för den valda profilen.</string>
     <string name="mapillary_menu_descr_tile_cache">Uppdatera rutor för att se aktuell data.</string>

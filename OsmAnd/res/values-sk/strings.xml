@@ -2458,8 +2458,6 @@
     <string name="move_all_to_history">Presunúť všetko do histórie</string>
     <string name="show_direction">Indikovať vzdialenosť</string>
     <string name="sort_by">Zotriediť podľa</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Citlivosť zmeny orientácie mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Dolu zvoľte rýchlosť pre zmenu orientácie mapy zo \"Smer pohybu\" na \"Smer kompasu\".</string>
     <string name="all_markers_moved_to_history">Všetky mapové značky presunuté do histórie</string>
     <string name="marker_moved_to_history">Mapová značka presunutá do histórie</string>
     <string name="marker_moved_to_active">Mapová značka presunutá do archívu</string>
@@ -4846,7 +4844,7 @@
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
     <string name="external_sensors_support">Podpora externých senzorov</string>
-    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy, aj s pohľadom 2.5D
+    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy verzie 2 (OpenGL), aj s pohľadom 2.5D
 \n
 \n • Plynulá animácia zmien polohy počas pohybu
 \n
@@ -4867,7 +4865,72 @@
 \n • Pridaná možnosť vypnutia UUID pre sťahovanie
 \n
 \n</string>
-    <string name="show_borders_of_downloaded_maps">Vyfarbenie stiahnutých máp</string>
+    <string name="show_borders_of_downloaded_maps">Zobraziť hranice stiahnutých máp</string>
     <string name="show_map_symbols">Zobraziť mapové symboly</string>
     <string name="show_map_symbols_desc">Texty, čísla ciest a iné.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd sa vrátil k vykresľovaniu mapy \'Verzia 1\'. Môžete skúsiť prepnúť znovu na \'Verziu 2 (OpenGL)\' v Nastaveniach.
+\n
+\nProsím podporte vylepšenia vykresľovania zaslaním hlásenia o chybe.</string>
+    <string name="rendering_engine_failed">Pri vykresľovaní mapy OsmAnd nedávno nastal pád.</string>
+    <string name="share_crash_log">Zdieľať záznam o páde</string>
+    <string name="dismiss_changes_descr">Všetky zmeny budú zabudnuté.</string>
+    <string name="dismiss_changes">Zahodiť zmeny\?</string>
+    <string name="restart_now">Reštartovať teraz</string>
+    <string name="map_rendering_engine_v1">Verzia 1</string>
+    <string name="map_rendering_engine_v2">Verzia 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Verzia 2 (OpenGL) je rýchlejšie vykresľovanie mapy aj s 2,5D pohľadom. Vykresľovanie Verzia 1 bolo predvolené do verzie OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.</string>
+    <string name="map_rendering_engine">Spôsob vykresľovania mapy</string>
+    <string name="weather_offline_forecast">Offline predpoveď</string>
+    <string name="weather_online_cache">Online vyrovnávacia pamäť</string>
+    <string name="map_settings_weather_temp">Teplota</string>
+    <string name="map_settings_weather_air_pressure">Tlak vzduchu</string>
+    <string name="map_settings_weather_wind">Vietor</string>
+    <string name="map_settings_weather_cloud">Oblačnosť</string>
+    <string name="map_settings_weather_precip">Zrážky</string>
+    <string name="measurement_units">Merné jednotky</string>
+    <string name="shared_string_weather">Počasie</string>
+    <string name="explore_weather_forecast">Preskúmať predpoveď počasia.</string>
+    <string name="shared_string_contours">Vrstevnice</string>
+    <string name="shared_string_layers">Vrstvy</string>
+    <string name="empty_screen_weather_precipitation_layer">Zapnite pre zobrazenie vrstvy zrážok na mape.</string>
+    <string name="weather_precip_in">\'</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Palce</string>
+    <string name="weather_precip_milimeters">Milimetre</string>
+    <string name="weather_wind_kt">uz</string>
+    <string name="weather_wind_mph">mi/h</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_miles_per_hour">Míle za hodinu</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometre za hodinu</string>
+    <string name="weather_widgets_secondary_desc">Merné jednotky je možné zmeniť v nastaveniach modulu Počasie.</string>
+    <string name="air_pressure_widget_desc">Zobrazí tlak vzduchu pre súčasný stred mapy.</string>
+    <string name="clouds_widget_desc">Zobrazí oblačnosť pre súčasný stred mapy.</string>
+    <string name="wind_widget_desc">Zobrazí rýchlosť vetra pre súčasný stred mapy.</string>
+    <string name="precipitation_widget_desc">Zobrazí zrážky pre súčasný stred mapy.</string>
+    <string name="weather_widget_group_desc">Sada nástrojov zobrazujúcich rôzne údaje o počasí.</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hektopascaly</string>
+    <string name="weather_pressure_inches_of_mercury">Palce ortute</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetre ortute</string>
+    <string name="weather_prefs_descr">24h hodinové predpovede &amp; 7-dňové predpovede každé 3 hodiny</string>
+    <string name="weather_temperature_celsius">Stupne Celzia</string>
+    <string name="weather_temperature_fahrenheit">Stupne Fahrenheita</string>
+    <string name="action_not_supported_with_map_style">Akcia nie je podporovaná pri zvolenom mapovom štýle.</string>
+    <string name="empty_screen_weather_temperature_layer">Zapnite pre zobrazenie vrstvy teploty na mape.</string>
+    <string name="weather_plugin_description">Modul Počasie poskytuje
+\n- 5 vrstiev... 24h hodinové predpovede &amp; 7-dňové predpovede každé 3 hodiny
+\n- nástroje podľa pozície
+\n- izočiary teploty a tlaku
+\nÚdaje o počasí sú poskytované GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="empty_screen_weather_clouds_layer">Zapnite pre zobrazenie vrstvy oblakov na mape.</string>
+    <string name="empty_screen_weather_contours">Zapnite pre zobrazenie izočiary počasia na mape.</string>
+    <string name="empty_screen_weather_wind_layer">Zapnite pre zobrazenie vrstvy vetra na mape.</string>
+    <string name="empty_screen_weather_pressure_layer">Zapnite pre zobrazenie vrstvy tlaku na mape.</string>
+    <string name="empty_screen_view_selected_weather_data">Zapnite pre zobrazenie zvolených údajov počasia na mape.</string>
+    <string name="weather_wind_meters_per_second">Metre za sekundu</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_wind_knots">Uzly</string>
+    <string name="temperature_widget_desc">Zobrazí teplotu pre súčasný stred mapy.</string>
 </resources>

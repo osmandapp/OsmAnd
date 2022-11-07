@@ -1,5 +1,25 @@
 package net.osmand.plus.dashboard;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.LIST_MENU;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ROUTE_PREFERENCES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER_LAYER;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -81,6 +101,11 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.plugins.weather.WeatherContoursFragment;
+import net.osmand.plus.plugins.weather.WeatherInfoType;
+import net.osmand.plus.plugins.weather.WeatherLayerFragment;
+import net.osmand.plus.plugins.weather.WeatherMainFragment;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -96,8 +121,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
 
 
 public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInformationListener {
@@ -136,8 +159,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private OnItemClickListener adapterClickListener;
 
 	private boolean visible;
-	private DashboardType visibleType;
-	private DashboardType previousVisibleType;
+	private DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private final List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
@@ -182,6 +204,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		HIKING_ROUTES,
 		TRAVEL_ROUTES,
 		TRANSPORT_LINES,
+		WEAHTER,
+		WEAHTER_LAYER,
+		WEATHER_CONTOURS,
 		NAUTICAL_DEPTH
 	}
 
@@ -330,7 +355,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.travel_routes);
 		} else if (isCurrentType(TRANSPORT_LINES)) {
 			tv.setText(R.string.rendering_category_transport);
-		}else if (isCurrentType(NAUTICAL_DEPTH)) {
+		} else if (isCurrentType(WEAHTER)) {
+			tv.setText(R.string.shared_string_weather);
+		} else if (isCurrentType(WEAHTER_LAYER)) {
+			WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+			WeatherInfoType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
+			if (layer != null) {
+				tv.setText(layer.getTitleId());
+			}
+		} else if (isCurrentType(WEATHER_CONTOURS)) {
+			tv.setText(R.string.shared_string_contours);
+		} else if (isCurrentType(NAUTICAL_DEPTH)) {
 			tv.setText(R.string.rendering_attr_depthContours_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
@@ -467,11 +502,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void hideDashboard() {
-		setDashboardVisibility(false, visibleType);
+		setDashboardVisibility(false, visibleTypes.getCurrent());
 	}
 
 	public void hideDashboard(boolean animation) {
-		setDashboardVisibility(false, visibleType, animation);
+		setDashboardVisibility(false, visibleTypes.getCurrent(), animation);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
@@ -480,15 +515,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, int[] animationCoordinates) {
 		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate, animationCoordinates);
+		setDashboardVisibility(visible, type, animate, animationCoordinates);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation) {
 		setDashboardVisibility(visible, type, animation, null);
-	}
-
-	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animation, animationCoordinates);
 	}
 
 	public void refreshDashboardFragments() {
@@ -500,20 +531,20 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return R.color.status_bar_transparent_gradient;
 	}
 
-	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation, int[] animationCoordinates) {
-		if (visible == this.visible && isCurrentType(type) || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
+		boolean currentType = isCurrentType(type);
+		if (visible == this.visible && currentType || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		this.previousVisibleType = prevItem;
 		this.visible = visible;
+		updateVisibilityStack(type, visible);
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
 
-		boolean refresh = isCurrentType(type) && !appModeChanged;
+		boolean refresh = currentType && !appModeChanged;
 		previousAppMode = currentAppMode;
-		visibleType = type;
 		staticVisible = visible;
 		staticVisibleType = type;
 		mapActivity.enableDrawer();
@@ -521,6 +552,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		removeFragment(MapillaryFiltersFragment.TAG);
 		removeFragment(TerrainFragment.TAG);
 		removeFragment(TransportLinesFragment.TAG);
+		removeFragment(WeatherMainFragment.TAG);
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
@@ -533,7 +565,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			mapActivity.disableDrawer();
 			dashboardView.setVisibility(View.VISIBLE);
 			if (isActionButtonVisible()) {
-				setActionButton(visibleType);
+				setActionButton(visibleTypes.getCurrent());
 				actionButton.setVisibility(View.VISIBLE);
 			} else {
 				hideActionButton();
@@ -546,8 +578,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
-			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY,
-					CYCLE_ROUTES, HIKING_ROUTES, TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, NAUTICAL_DEPTH)) {
+			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
+					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -567,6 +599,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)){
 					TerrainFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(WEAHTER)) {
+					WeatherMainFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(WEAHTER_LAYER)) {
+					WeatherLayerFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(WEATHER_CONTOURS)) {
+					WeatherContoursFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
@@ -614,6 +652,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		mapActivity.updateStatusBarColor();
 	}
 
+	private void updateVisibilityStack(@NonNull DashboardType type, boolean visible) {
+		if (visible) {
+			visibleTypes.add(type);
+		} else {
+			visibleTypes.clear();
+		}
+	}
+
 	public void updateDashboard() {
 		if (isCurrentType(ROUTE_PREFERENCES)) {
 			refreshContent(false);
@@ -631,7 +677,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.setBackgroundColor(backgroundColor);
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, NAUTICAL_DEPTH)) {
+				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER,
+				WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -756,7 +803,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(TravelRoutesFragment.TAG);
 		} else if (isCurrentType(TRANSPORT_LINES)) {
 			refreshFragment(TransportLinesFragment.TAG);
-		}else if (isCurrentType(NAUTICAL_DEPTH)) {
+		} else if (isCurrentType(WEAHTER)) {
+			refreshFragment(WeatherMainFragment.TAG);
+		} else if (isCurrentType(WEAHTER_LAYER)) {
+			refreshFragment(WeatherLayerFragment.TAG);
+		} else if (isCurrentType(WEATHER_CONTOURS)) {
+			refreshFragment(WeatherContoursFragment.TAG);
+		} else if (isCurrentType(NAUTICAL_DEPTH)) {
 			refreshFragment(NauticalDepthContourFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
@@ -976,7 +1029,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentType(@NonNull DashboardType ... types) {
 		for (DashboardType type : types) {
-			if (visibleType == type) {
+			if (visibleTypes.getCurrent() == type) {
 				return true;
 			}
 		}
@@ -1042,12 +1095,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private void backPressed() {
-		if (previousVisibleType != null && isNoCurrentType(previousVisibleType)) {
+		DashboardType previous = visibleTypes.getPrevious();
+		if (previous != null) {
 			if (isCurrentType(MAPILLARY)) {
 				hideKeyboard();
 			}
-			visibleType = null;
-			setDashboardVisibility(true, previousVisibleType);
+			visibleTypes.pop(); // Remove current visible type.
+			visibleTypes.pop(); // Also remove previous type. It will be add later.
+			setDashboardVisibility(true, previous);
 		} else {
 			hideDashboard();
 			mapActivity.backToConfigureProfileFragment();

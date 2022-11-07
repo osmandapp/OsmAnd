@@ -2474,8 +2474,6 @@
     <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
     <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на мапе:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з \"Напрамку руху\" на \"Па компасе\".</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
     <string name="marker_moved_to_history">Адзнака мапы перамешчаная ў гісторыю</string>
     <string name="marker_moved_to_active">Адзнака мапы стала актыўнай</string>

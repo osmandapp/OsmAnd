@@ -2150,8 +2150,6 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Lagt til</string>
     <string name="order_by">Sorter etter:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Velg hastighet for skifte av kartorientering fra \'Bevegelsesretning\' til \'Kompassretning\' nedenfor.</string>
     <string name="srtm_purchase_header">Kjøp og installer \"Koter\"-tillegget for å vise graderte vertikale områder.</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt fra nærmeste vei.</string>
@@ -4810,4 +4808,11 @@
     <string name="show_map_symbols">Vis kartsymboler</string>
     <string name="show_map_symbols_desc">Tekst, veiskilt og andre.</string>
     <string name="show_borders_of_downloaded_maps">Fargelegging av nedlastede kartregioner</string>
+    <string name="map_settings_weather_temp">Temperatur</string>
+    <string name="map_settings_weather_air_pressure">Lufttrykk</string>
+    <string name="map_settings_weather_wind">Vind</string>
+    <string name="map_settings_weather_precip">Nedbør</string>
+    <string name="measurement_units">Målingsenheter</string>
+    <string name="shared_string_weather">Vær</string>
+    <string name="shared_string_layers">Lag</string>
 </resources>

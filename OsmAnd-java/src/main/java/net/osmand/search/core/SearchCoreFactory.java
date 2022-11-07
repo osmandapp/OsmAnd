@@ -146,12 +146,12 @@ public class SearchCoreFactory {
 			return 0;
 		}
 
-		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
+		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
 				throws IOException {
-			subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
+			return subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
 		}
 
-		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
+		protected SearchPhrase subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
 											 boolean publish)
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
@@ -217,9 +217,11 @@ public class SearchCoreFactory {
 				SearchResult prev = resultMatcher.setParentSearchResult(publish ? res :
 						resultMatcher.getParentSearchResult());
 				api.search(nphrase, resultMatcher);
+				
 				resultMatcher.setParentSearchResult(prev);
+				return nphrase;
 			}
-
+			return null;
 		}
 
 		@Override
@@ -379,12 +381,22 @@ public class SearchCoreFactory {
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
-						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+						SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+						searchPoiInCity(nphrase, res, resultMatcher);
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
 						break;
 					}
 				}
+			}
+		}
+		
+		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
+			if (nphrase != null && res.objectType == ObjectType.CITY) {
+				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
+				newPhrase.getSettings().setOriginalLocation(res.location);
+				poiApi.search(newPhrase, resultMatcher);
 			}
 		}
 
@@ -532,7 +544,8 @@ public class SearchCoreFactory {
 						if (res.objectType == ObjectType.STREET) {
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
-							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+							SearchPhrase nphrase = subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
+							searchPoiInCity(nphrase, res, resultMatcher);
 						}
 					}
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
@@ -545,6 +558,7 @@ public class SearchCoreFactory {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 10000 * 1000; // to support city search for basemap
+		private static final int BBOX_RADIUS_POI_IN_CITY = 25 * 1000;
 		private static final int FIRST_WORD_MIN_LENGTH = 3;
 
 		public SearchAmenityByNameAPI() {
@@ -568,7 +582,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
@@ -636,14 +650,21 @@ public class SearchCoreFactory {
 							return resultMatcher.isCancelled() && (limit < LIMIT);
 						}
 					}, rawDataCollector);
-
-			while (offlineIterator.hasNext()) {
-				BinaryMapIndexReader r = offlineIterator.next();
-				currentFile[0] = r;
-				r.searchPoiByName(req);
-
-				resultMatcher.apiSearchRegionFinished(this, r, phrase);
+			
+			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
+			if (fileRequest != null) {
+				fileRequest.searchPoiByName(req);
+				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
+			} else {
+				while (offlineIterator.hasNext()) {
+					BinaryMapIndexReader r = offlineIterator.next();
+					currentFile[0] = r;
+					r.searchPoiByName(req);
+					
+					resultMatcher.apiSearchRegionFinished(this, r, phrase);
+				}
 			}
+			
 			return true;
 		}
 

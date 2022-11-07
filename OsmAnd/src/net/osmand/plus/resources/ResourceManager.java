@@ -540,6 +540,7 @@ public class ResourceManager {
 			warnings.addAll(indexingMaps(progress));
 			warnings.addAll(indexVoiceFiles(progress));
 			warnings.addAll(indexFontFiles(progress));
+			warnings.addAll(indexWeatherFiles(progress));
 			warnings.addAll(PluginsHelper.onIndexingFiles(progress));
 			warnings.addAll(indexAdditionalMaps(progress));
 
@@ -606,6 +607,12 @@ public class ResourceManager {
 			}
 		}
 		return warnings;
+	}
+
+	public List<String> indexWeatherFiles(@Nullable IProgress progress) {
+		File file = context.getAppPath(IndexConstants.WEATHER_INDEX_DIR);
+		file.mkdirs();
+		return new ArrayList<>();
 	}
 
 	public void copyMissingJSAssets() {
