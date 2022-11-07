@@ -4760,9 +4760,7 @@
     <string name="compass_always_visible">Sekogas vidlivo</string>
     <string name="compass_click_desc">Doprete na kompasot za da go prefrlite rezimot na orientacija na kartata.</string>
     <string name="compass_desc">Go pokazuva pravecot kon sever.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourColorScheme_description">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourWidth_description">Sirina na konturnata linija na dlabocina</string>
-    <string name="rendering_attr_depthContourWidth_name">Sirina na konturnata linija na dlabocina</string>
     <string name="next_turn_widget_desc">Vidzetot prikazuva informacii za vaseto sledno vrtenje so slika na manevriranje i rastojanie do nego.</string>
 </resources>

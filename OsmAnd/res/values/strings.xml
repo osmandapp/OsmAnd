@@ -11,11 +11,11 @@
 	Thx - Hardy
 -->
 
-    <string name="shared_string_lines_color_scheme">Lines color scheme</string>
-    <string name="shared_string_lines_width">Lines width</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Lines color scheme</string>
+    <string name="rendering_attr_depthContourWidth_name">Lines width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on map.</string>
-    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  a 24h hour forecast &amp; 7 day forecast every 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers…  a 24h hour forecast &amp; 7 day forecast every 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -212,10 +212,8 @@
     <string name="compass_always_visible">Always visible</string>
     <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
-    <string name="rendering_attr_depthContourWidth_name">Depth contour line width</string>
     <string name="accessibility_2d_view_off">2.5D view off</string>
     <string name="accessibility_2d_view_on">2.5D view on</string>
     <string name="download_complete">Download complete</string>

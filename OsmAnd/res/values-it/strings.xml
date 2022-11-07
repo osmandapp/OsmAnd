@@ -4719,10 +4719,8 @@
     <string name="shared_string_duplicate">Duplicato</string>
     <string name="compass_always_visible">Sempre visibile</string>
     <string name="compass_desc">Mostra la direzione del nord.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Schema di colori linee di profondità</string>
     <string name="rendering_attr_depthContourColorScheme_description">Schema colori delle linee di profondità</string>
     <string name="rendering_attr_depthContourWidth_description">Spessore linee di profondità</string>
-    <string name="rendering_attr_depthContourWidth_name">Spessore linee di profondità</string>
     <string name="accessibility_2d_view_off">Vista 2.5D disattiva</string>
     <string name="accessibility_2d_view_on">Vista 2.5D attiva</string>
     <string name="download_complete">Download completato</string>

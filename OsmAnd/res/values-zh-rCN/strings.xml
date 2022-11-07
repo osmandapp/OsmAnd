@@ -4382,10 +4382,8 @@
     <string name="trip_recording_duration_widget_desc">显示轨迹记录时间，即当前记录行程的分钟/小时持续时间。</string>
     <string name="trip_recording_distance_widget_desc">显示当前记录的行程距离。</string>
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
-    <string name="rendering_attr_depthContourColorScheme_name">等深线的配色方案</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
-    <string name="rendering_attr_depthContourWidth_name">等深线宽度</string>
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">您可以通过点击小部件来切换模式。</string>
     <string name="side_marker_eta">预计到达时间</string>

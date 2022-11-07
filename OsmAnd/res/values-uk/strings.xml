@@ -4747,8 +4747,6 @@
 \nКоли ви використовуєте OsmAnd Cloud, це може призвести до непорозумінь після перевстановлення.</string>
     <string name="first_marker_widget_desc">Ви можете налаштувати віджет, щоб відображати відстань або орієнтовний час прибуття до першої позначки на мапі.</string>
     <string name="time_to_intermediate_widget_desc">Віджет показує «Час прибуття» або «Скільки рухатися» до першого проміжного пункту. Час постійно оновлюється під час навігації, коли пройдено проміжні точки, час буде оновлено до наступної проміжної точки.</string>
-    <string name="rendering_attr_depthContourWidth_name">Ширина ізоліній глибини</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Колірна гамма контурних ліній глибини</string>
     <string name="rendering_attr_depthContourWidth_description">Ширина ізоліній глибини</string>
     <string name="auto_25_chars_route_roundabout_kl">Поверніть у %1$d з\'їзд і тримайтеся ліворуч</string>
     <string name="auto_25_chars_route_roundabout_kr">Поверніть у %1$d з\'їзд і тримайтеся праворуч</string>

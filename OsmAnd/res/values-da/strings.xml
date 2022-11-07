@@ -4746,9 +4746,7 @@
     <string name="compass_visible_if_map_rotated">Synlig, hvis kortet er roteret</string>
     <string name="compass_desc">Viser retning mod nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farvesætning for dybdekonturlinjer</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Farvesætning for dybdekonturlinjer</string>
     <string name="rendering_attr_depthContourWidth_description">Dybdekonturlinjers bredde</string>
-    <string name="rendering_attr_depthContourWidth_name">Dybdekonturlinjers bredde</string>
     <string name="auto_backup_preference_desc">Android gemmer som standard sikkerhedskopier af favoritter, kort-tokens og OsmAnd-indstillinger for at gendanne dem på nye enheder eller efter geninstallation. Denne sikkerhedskopi er begrænset til 25 MB.
 \nNår du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
     <string name="compass_always_visible">Altid synlig</string>

@@ -4726,10 +4726,8 @@
     <string name="widget_with_dot">Nástroj.</string>
     <string name="compass_click_desc">Stlačte kompas pre prepnutie režimu orientácie mapy.</string>
     <string name="compass_desc">Zobrazuje smer k severu.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
-    <string name="rendering_attr_depthContourWidth_name">Hrúbka čiary hĺbkových vrstevníc</string>
     <string name="auto_backup_preference_desc">Predvolene ukladá Android zálohy obľúbených bodov, mapových značiek a nastavení OsmAnd, aby ich mohol obnoviť na novom zariadení alebo po opätovnej inštalácii. Táto záloha je obmedzená na 25 MB.
 \nPri použití OsmAnd Cloud toto môže viesť k nejasnostiam po opätovnej inštalácii.</string>
     <string name="av_notes_video_widget_desc">Stlačenie nástroja vám umožní nahrať video.</string>

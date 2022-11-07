@@ -4628,10 +4628,8 @@
     <string name="compass_always_visible">Semper visìbile</string>
     <string name="compass_click_desc">Toca in sa bùssola pro colare dae una modalidade de orientamentu a s\'àtera.</string>
     <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
-    <string name="rendering_attr_depthContourWidth_name">Largària de sas curvas de livellu de profundidade</string>
     <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
     <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
     <string name="download_complete">Iscarrigamentu agabbadu</string>

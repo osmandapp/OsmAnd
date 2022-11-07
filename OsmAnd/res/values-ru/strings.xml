@@ -4756,9 +4756,7 @@
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажмите на компас, чтобы переключить режим ориентации карты.</string>
     <string name="compass_desc">Показывает направление на север.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
-    <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
     <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>

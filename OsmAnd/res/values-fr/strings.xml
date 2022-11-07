@@ -4717,7 +4717,6 @@
     <string name="compass_visible_if_map_rotated_desc">Masqué lorsque le Nord est vers le haut</string>
     <string name="compass_always_hidden">Toujours masqué</string>
     <string name="compass_always_visible">Toujours affiché</string>
-    <string name="rendering_attr_depthContourWidth_name">Largeur des lignes de profondeur</string>
     <string name="compass_desc">Indique la direction du Nord.</string>
     <string name="compass_visible_if_map_rotated">Affiché lors de la rotation de la carte</string>
     <string name="auto_backup_title">Backup automatique</string>
@@ -4725,7 +4724,6 @@
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
     <string name="compass_click_desc">Appuyez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Un appui sur le gadget, permet de prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Un appui sur le gadget permet d\'enregistrer une vidéo.</string>
     <string name="av_notes_audio_widget_desc">Un appui sur le gadget permet de prendre une note audio.</string>

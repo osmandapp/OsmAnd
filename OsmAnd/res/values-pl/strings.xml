@@ -4716,7 +4716,6 @@
     <string name="download_heightmap_maps">Mapa wysokości</string>
     <string name="favorite_delete_group">Usuń grupę</string>
     <string name="widget_with_dot">Widżet.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Schemat kolorów linii konturów głębokości</string>
     <string name="compass_visible_if_map_rotated_desc">Ukryty, gdy Północ jest na górze</string>
     <string name="compass_always_visible">Zawsze widoczny</string>
     <string name="compass_click_desc">Stuknij w kompas, aby przełączyć tryb orientacji mapy.</string>
