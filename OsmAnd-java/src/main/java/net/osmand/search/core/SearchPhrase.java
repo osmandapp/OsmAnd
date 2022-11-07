@@ -32,6 +32,8 @@ public class SearchPhrase {
 	private final SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
 	
+	private BinaryMapIndexReader fileRequest;
+	
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
@@ -152,6 +154,16 @@ public class SearchPhrase {
 	
 	public Collator getCollator() {
 		return clt;
+	}
+	
+	public BinaryMapIndexReader getFileRequest() {
+		return fileRequest;
+	}
+	
+	public SearchPhrase generateNewPhrase(SearchPhrase phrase, BinaryMapIndexReader file) {
+		SearchPhrase nphrase = generateNewPhrase(phrase.getUnknownSearchPhrase(), phrase.getSettings());
+		nphrase.fileRequest = file;
+		return nphrase;
 	}
 	
 	
@@ -918,4 +930,6 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	
 }
