@@ -4809,7 +4809,7 @@
     <string name="favorites_backup">Sikkerhetskopiering av favoritter</string>
     <string name="show_map_symbols">Vis kartsymboler</string>
     <string name="show_map_symbols_desc">Tekst, veiskilt og andre.</string>
-    <string name="show_borders_of_downloaded_maps">Fargelegging av nedlastede kartregioner</string>
+    <string name="show_borders_of_downloaded_maps">Vis grenser for nedlastede kart</string>
     <string name="map_settings_weather_temp">Temperatur</string>
     <string name="map_settings_weather_air_pressure">Lufttrykk</string>
     <string name="map_settings_weather_wind">Vind</string>
