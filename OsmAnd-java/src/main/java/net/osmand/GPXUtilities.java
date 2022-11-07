@@ -2243,7 +2243,7 @@ public class GPXUtilities {
 			writeRoutes(serializer, file, progress);
 			writeTracks(serializer, file, progress);
 			writeExtensions(serializer, file, progress);
-			writeRouteNetwork(serializer, file, progress);
+			writeNetworkRoute(serializer, file, progress);
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
 			serializer.endDocument();
@@ -2255,7 +2255,7 @@ public class GPXUtilities {
 		return null;
 	}
 
-	private static void writeRouteNetwork(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
+	private static void writeNetworkRoute(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		NetworkRoute networkRoute = new NetworkRoute(file.getRouteKey());
 		assignNetworkRouteExtensionWriter(networkRoute);
 		writeExtensions(serializer, networkRoute, progress);
