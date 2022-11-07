@@ -20,6 +20,8 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class TextInfoWidget extends MapWidget {
 
+	protected static final String NO_VALUE = "—";
+
 	private String contentTitle;
 
 	private final ImageView imageView;
