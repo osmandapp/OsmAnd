@@ -155,7 +155,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void updateMapLayers(@NonNull Context context, @Nullable MapActivity mapActivity,
-								@Nullable CommonPreference<String> settingsToWarnAboutMap) {
+	                            @Nullable CommonPreference<String> settingsToWarnAboutMap) {
 		if (overlayLayer == null) {
 			createLayers(context);
 		}
@@ -213,10 +213,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void selectMapOverlayLayer(@NonNull CommonPreference<String> mapPref,
-									  @NonNull CommonPreference<String> exMapPref,
-									  boolean force,
-									  @NonNull MapActivity mapActivity,
-									  @Nullable OnMapSelectedCallback callback) {
+	                                  @NonNull CommonPreference<String> exMapPref,
+	                                  boolean force,
+	                                  @NonNull MapActivity mapActivity,
+	                                  @Nullable OnMapSelectedCallback callback) {
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
@@ -238,56 +238,56 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		items[i] = app.getString(R.string.install_more);
 		builder.setSingleChoiceItems(items, -1, (dialog, which) -> {
-			MapActivity mapActv = mapActivityRef.get();
-			if (mapActv == null || mapActv.isFinishing()) {
-				return;
-			}
-			if (which == items.length - 1) {
-				installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
-					TileSourceTemplate template;
-					int count;
-					boolean cancel;
+					MapActivity activity = mapActivityRef.get();
+					if (activity == null || activity.isFinishing()) {
+						return;
+					}
+					if (which == items.length - 1) {
+						installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+							TileSourceTemplate template;
+							int count;
+							boolean cancel;
 
-					@Override
-					public boolean publish(TileSourceTemplate object) {
-						MapActivity mapActv = mapActivityRef.get();
-						if (mapActv == null || mapActv.isFinishing()) {
-							cancel = true;
-							return false;
-						}
-						if (object == null) {
-							if (count == 1) {
-								mapPref.set(template.getName());
-								exMapPref.set(template.getName());
-								updateMapLayers(mapActv, mapActv, mapPref);
-								if (callback != null) {
-									callback.onMapSelected(false);
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								MapActivity mapActv = mapActivityRef.get();
+								if (mapActv == null || mapActv.isFinishing()) {
+									cancel = true;
+									return false;
 								}
-							} else {
-								selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+								if (object == null) {
+									if (count == 1) {
+										mapPref.set(template.getName());
+										exMapPref.set(template.getName());
+										updateMapLayers(mapActv, mapActv, mapPref);
+										if (callback != null) {
+											callback.onMapSelected(false);
+										}
+									} else {
+										selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+									}
+								} else {
+									count++;
+									template = object;
+								}
+								return false;
 							}
-						} else {
-							count++;
-							template = object;
-						}
-						return false;
-					}
 
-					@Override
-					public boolean isCancelled() {
-						return cancel;
+							@Override
+							public boolean isCancelled() {
+								return cancel;
+							}
+						});
+					} else {
+						mapPref.set(keys.get(which));
+						exMapPref.set(keys.get(which));
+						updateMapLayers(activity, activity, mapPref);
+						if (callback != null) {
+							callback.onMapSelected(false);
+						}
 					}
-				});
-			} else {
-				mapPref.set(keys.get(which));
-				exMapPref.set(keys.get(which));
-				updateMapLayers(mapActv, mapActv, mapPref);
-				if (callback != null) {
-					callback.onMapSelected(false);
-				}
-			}
-			dialog.dismiss();
-		})
+					dialog.dismiss();
+				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setOnDismissListener(dialog -> {
 					if (callback != null) {
@@ -299,6 +299,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
+
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		ItemClickListener listener = new OnRowItemClick() {
 
@@ -429,7 +433,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
 	}
-
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
@@ -570,8 +573,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void toggleUnderlayState(@NonNull MapActivity mapActivity,
-									@NonNull RasterMapType type,
-									@Nullable OnMapSelectedCallback callback) {
+	                                @NonNull RasterMapType type,
+	                                @Nullable OnMapSelectedCallback callback) {
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
 		MapTileLayer layer;
@@ -588,9 +591,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
 		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
-			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
-			? LayerTransparencySeekbarMode.OVERLAY
-			: LayerTransparencySeekbarMode.UNDERLAY;
+				OsmandRasterMapsPlugin.RasterMapType.OVERLAY
+				? LayerTransparencySeekbarMode.OVERLAY
+				: LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
 			mapTypePreference.set(null);
 			updateMapLayers(mapActivity, mapActivity, null);

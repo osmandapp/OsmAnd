@@ -198,6 +198,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override

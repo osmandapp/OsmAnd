@@ -298,13 +298,15 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if (isLocked()) {
-			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
-					TERRAIN_ID,
-					R.string.shared_string_terrain,
-					R.string.contour_lines_hillshades_slope);
-		} else {
-			createContextMenuItems(adapter, mapActivity);
+		if (isEnabled()) {
+			if (isLocked()) {
+				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+						TERRAIN_ID,
+						R.string.shared_string_terrain,
+						R.string.contour_lines_hillshades_slope);
+			} else {
+				createContextMenuItems(adapter, mapActivity);
+			}
 		}
 	}
 
@@ -548,10 +550,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		if (CONTOUR_LINES_ATTR.equals(prefId)) {
-			defValue = CONTOUR_LINES_DISABLED_VALUE;
-		}
-		return super.registerRenderingPreference(prefId, defValue);
+	protected CommonPreference<String> registerRenderingPreference(@NonNull RenderingRuleProperty property) {
+		String attrName = property.getAttrName();
+		String defValue = CONTOUR_LINES_ATTR.equals(attrName) ? CONTOUR_LINES_DISABLED_VALUE : "";
+		return registerRenderingPreference(attrName, defValue);
 	}
 }

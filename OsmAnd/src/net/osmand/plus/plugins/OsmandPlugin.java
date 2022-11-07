@@ -201,7 +201,6 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	@Nullable
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
 	}
 
@@ -215,6 +214,10 @@ public abstract class OsmandPlugin {
 	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
 	                                             @NonNull JSONObject imageObject) {
 		return false;
+	}
+
+	public boolean disablePreferences() {
+		return !isActive();
 	}
 
 	/**
@@ -435,15 +438,23 @@ public abstract class OsmandPlugin {
 		return preference;
 	}
 
-	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
+	protected CommonPreference<String> registerRenderingPreference(@NonNull RenderingRuleProperty property) {
+		return registerRenderingPreference(property.getAttrName(), "");
+	}
+
+	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull RenderingRuleProperty property) {
+		return registerBooleanRenderingPreference(property.getAttrName(), false);
+	}
+
+	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
+		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
+	private CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
+		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;

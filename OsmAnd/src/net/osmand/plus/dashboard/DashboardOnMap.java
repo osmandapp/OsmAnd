@@ -7,6 +7,7 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.LIST_MENU;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ROUTE_PREFERENCES;
@@ -85,6 +86,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
@@ -204,7 +206,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		TRANSPORT_LINES,
 		WEAHTER,
 		WEAHTER_LAYER,
-		WEATHER_CONTOURS
+		WEATHER_CONTOURS,
+		NAUTICAL_DEPTH
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -362,6 +365,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 		} else if (isCurrentType(WEATHER_CONTOURS)) {
 			tv.setText(R.string.shared_string_contours);
+		} else if (isCurrentType(NAUTICAL_DEPTH)) {
+			tv.setText(R.string.rendering_attr_depthContours_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -574,7 +579,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS)) {
+					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -590,6 +595,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
 					TransportLinesFragment.showInstance(fragmentManager);
+				}else if (isCurrentType(NAUTICAL_DEPTH)) {
+					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)){
 					TerrainFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEAHTER)) {
@@ -670,7 +677,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.setBackgroundColor(backgroundColor);
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS)) {
+				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER,
+				WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -801,6 +809,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(WeatherLayerFragment.TAG);
 		} else if (isCurrentType(WEATHER_CONTOURS)) {
 			refreshFragment(WeatherContoursFragment.TAG);
+		} else if (isCurrentType(NAUTICAL_DEPTH)) {
+			refreshFragment(NauticalDepthContourFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
