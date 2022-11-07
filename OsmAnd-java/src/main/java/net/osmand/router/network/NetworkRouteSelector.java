@@ -24,6 +24,7 @@ import gnu.trove.set.hash.TLongHashSet;
 public class NetworkRouteSelector {
 
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
+	public static final String NETWORK_ROUTE_TYPE = "type";
 
 	private static final boolean GROW_ALGORITHM = false; // not implemented fully and has flaws (should be deleted)
 	private static final int MAX_ITERATIONS = 16000;
@@ -674,7 +675,7 @@ public class NetworkRouteSelector {
 		}
 		System.out.println(String.format("Segments size %d: %s", track.segments.size(), sizes.toString()));
 		gpxFile.tracks.add(track);
-		gpxFile.addRouteKey(routeKey);
+		gpxFile.addRouteKey(routeKey.toGpx());
 		return gpxFile;
 	}
 
@@ -770,6 +771,34 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
+		}
+
+		public static RouteKey fromGpx(Map<String, String> networkRouteKey) {
+			String type = networkRouteKey.get(NETWORK_ROUTE_TYPE);
+			if(!Algorithms.isEmpty(type)) {
+				RouteType routeType = RouteType.getByTag(type);
+				if(routeType!=null) {
+					RouteKey routeKey = new RouteKey(routeType);
+					for(Map.Entry<String, String> tag : networkRouteKey.entrySet()){
+						routeKey.addTag(tag.getKey(), tag.getValue());
+					}
+					return routeKey;
+				}
+			}
+			return null;
+		}
+
+		public Map<String, String> toGpx() {
+			Map<String, String> networkRouteKey = new HashMap<>();
+			networkRouteKey.put(NETWORK_ROUTE_TYPE, type.tag);
+			for (String tag : tags) {
+				String key = getKeyFromTag(tag);
+				String value = getValue(key);
+				if (!Algorithms.isEmpty(value)) {
+					networkRouteKey.put(key, value);
+				}
+			}
+			return networkRouteKey;
 		}
 
 		@Override

@@ -1,15 +1,12 @@
 
 package net.osmand;
 
-
-import static net.osmand.router.network.NetworkRouteSelector.ROUTE_KEY_VALUE_SEPARATOR;
-
 import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
+import net.osmand.binary.StringBundleXmlReader;
 import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -789,6 +786,14 @@ public class GPXUtilities {
 		}
 	}
 
+	public static class NetworkRoute extends GPXExtensions {
+		Map<String, String> routeKey;
+
+		NetworkRoute(Map<String, String> routeKey) {
+			this.routeKey = routeKey;
+		}
+	}
+
 	public static class GPXTrackAnalysis {
 
 		public String name;
@@ -1433,6 +1438,7 @@ public class GPXUtilities {
 
 		private final List<WptPt> points = new ArrayList<>();
 		private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
+		private final Map<String, String> networkRouteKey = new LinkedHashMap<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -2113,48 +2119,12 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
 
-		public void addRouteKey(NetworkRouteSelector.RouteKey routeKey) {
-			for (String tag : routeKey.tags) {
-				String key = routeKey.getKeyFromTag(tag);
-				String value = routeKey.getValue(key);
-				if (!Algorithms.isEmpty(value)) {
-					getExtensionsToWrite().put("route_" + routeKey.type.getTag() + ROUTE_KEY_VALUE_SEPARATOR + key, value);
-				}
-			}
+		public void addRouteKey(Map<String, String> routeKey) {
+			networkRouteKey.putAll(routeKey);
 		}
 
-		public NetworkRouteSelector.RouteKey getRouteKey() {
-			NetworkRouteSelector.RouteType routeType = getRouteType();
-			if (routeType != null) {
-				NetworkRouteSelector.RouteKey routeKey = new NetworkRouteSelector.RouteKey(routeType);
-				fillRouteTags(routeKey);
-				return  routeKey;
-			}
-			return null;
-		}
-
-		private void fillRouteTags(NetworkRouteSelector.RouteKey routeKey) {
-			if (extensions != null) {
-				for (Map.Entry<String, String> e : extensions.entrySet()) {
-					String prefix = "route_" + routeKey.type.getTag() + ROUTE_KEY_VALUE_SEPARATOR;
-					if (e.getKey().startsWith(prefix)) {
-						String key = e.getKey().substring(prefix.length());
-						routeKey.addTag(key, e.getValue());
-					}
-				}
-			}
-		}
-
-		private NetworkRouteSelector.RouteType getRouteType() {
-			if (extensions != null) {
-				for (Map.Entry<String, String> e : extensions.entrySet()) {
-					if (e.getKey().startsWith("route_")) {
-						String tag = e.getKey().substring("route_".length(), e.getKey().indexOf("_","route_".length()));
-						return NetworkRouteSelector.RouteType.getByTag(tag);
-					}
-				}
-			}
-			return null;
+		public Map<String, String> getRouteKey() {
+			return networkRouteKey;
 		}
 
 		public void setRef(String ref) {
@@ -2273,6 +2243,7 @@ public class GPXUtilities {
 			writeRoutes(serializer, file, progress);
 			writeTracks(serializer, file, progress);
 			writeExtensions(serializer, file, progress);
+			writeRouteNetwork(serializer, file, progress);
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
 			serializer.endDocument();
@@ -2282,6 +2253,34 @@ public class GPXUtilities {
 			return e;
 		}
 		return null;
+	}
+
+	private static void writeRouteNetwork(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
+		NetworkRoute networkRoute = new NetworkRoute(file.getRouteKey());
+		assignNetworkRouteExtensionWriter(networkRoute);
+		writeExtensions(serializer, networkRoute, progress);
+	}
+
+	private static void assignNetworkRouteExtensionWriter(final NetworkRoute networkRoute) {
+		if (!Algorithms.isEmpty(networkRoute.routeKey) && networkRoute.getExtensionsWriter() == null) {
+			networkRoute.setExtensionsWriter(new GPXExtensionsWriter() {
+
+				@Override
+				public void writeExtensions(XmlSerializer serializer) {
+					StringBundle bundle = new StringBundle();
+					StringBundle tagsBundle = new StringBundle();
+					tagsBundle.putString("type", networkRoute.routeKey.get("type"));
+					for (Map.Entry<String, String> tag : networkRoute.routeKey.entrySet()) {
+						tagsBundle.putString(tag.getKey(), tag.getValue());
+					}
+					List<StringBundle> routeKeyBundle = new ArrayList<>();
+					routeKeyBundle.add(tagsBundle);
+					bundle.putBundleList("network_route", OSMAND_EXTENSIONS_PREFIX + "route_key", routeKeyBundle);
+					StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
+					bundleWriter.writeBundle();
+				}
+			});
+		}
 	}
 
 	private static void assignPointsGroupsExtensionWriter(final GPXFile gpxFile) {
@@ -2698,6 +2697,7 @@ public class GPXUtilities {
 			boolean routeExtension = false;
 			boolean typesExtension = false;
 			boolean pointsGroupsExtension = false;
+			boolean networkRoute = false;
 			parserState.push(gpxFile);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -2715,6 +2715,8 @@ public class GPXUtilities {
 						} else if (pointsGroupsExtension && tagName.equals("group")) {
 							PointsGroup pointsGroup = PointsGroup.parsePointsGroupAttributes(parser);
 							pointsGroups.add(pointsGroup);
+						} else if (networkRoute && tagName.equals("route_key")) {
+							gpxFile.networkRouteKey.putAll(parseRouteKeyAttributes(parser));
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -2731,6 +2733,9 @@ public class GPXUtilities {
 								break;
 							case "points_groups":
 								pointsGroupsExtension = true;
+								break;
+							case "network_route":
+								networkRoute = true;
 								break;
 
 							default:
@@ -2967,6 +2972,10 @@ public class GPXUtilities {
 						typesExtension = false;
 						continue;
 					}
+					if (extensionReadMode && tag.equals("network_route")) {
+						networkRoute = false;
+						continue;
+					}
 
 					if (tag.equals("metadata")) {
 						Object pop = parserState.pop();
@@ -3036,6 +3045,23 @@ public class GPXUtilities {
 		createArtificialPrimeMeridianPoints(gpxFile);
 
 		return gpxFile;
+	}
+
+	private static Map<String, String> parseRouteKeyAttributes(XmlPullParser parser) {
+		Map<String, String> networkRouteKey = new LinkedHashMap<>();
+		StringBundleXmlReader reader = new StringBundleXmlReader(parser);
+		reader.readBundle();
+		StringBundle bundle = reader.getBundle();
+		if(!bundle.getMap().isEmpty()){
+			for(Map.Entry<String, StringBundle.Item<?>> entry : bundle.getMap().entrySet()){
+				if(entry.getValue().getType() == StringBundle.ItemType.STRING) {
+					String key = entry.getValue().getName();
+					String value = (String) entry.getValue().getValue();
+					networkRouteKey.put(key, value);
+				}
+			}
+		}
+		return networkRouteKey;
 	}
 
 	private static Map<String, PointsGroup> mergePointsGroups(List<PointsGroup> groups, List<WptPt> points) {

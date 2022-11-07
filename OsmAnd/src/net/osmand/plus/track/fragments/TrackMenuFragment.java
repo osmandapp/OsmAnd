@@ -1731,7 +1731,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalysis(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			routeKey = routeKey == null ? selectedGpxFile.getGpxFile().getRouteKey() : routeKey;
+			routeKey = routeKey == null ? RouteKey.fromGpx(selectedGpxFile.getGpxFile().getRouteKey()) : routeKey;
 			fragment.setRouteKey(routeKey);
 
 			if (params != null) {
