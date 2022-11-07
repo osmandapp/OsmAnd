@@ -516,7 +516,7 @@ public class AnimateDraggingMapThread {
 				animateTarget = initTarget31.getX() != target31.getX() || initTarget31.getY() != target31.getY();
 			}
 			if (!animateZoom) {
-				animateZoom = initZoom != zoom;
+				animateZoom = initZoom != zoom && targetIntZoom > 0;
 			}
 			if (!animateAzimuth) {
 				animateAzimuth = initAzimuth != azimuth;

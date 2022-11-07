@@ -24,6 +24,7 @@ import gnu.trove.set.hash.TLongHashSet;
 public class NetworkRouteSelector {
 
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
+	public static final String NETWORK_ROUTE_TYPE = "type";
 
 	private static final boolean GROW_ALGORITHM = false; // not implemented fully and has flaws (should be deleted)
 	private static final int MAX_ITERATIONS = 16000;
@@ -75,13 +76,13 @@ public class NetworkRouteSelector {
 		int y = renderedObject.getY().get(0);
 		return getRoutes(x, y, true);
 	}
-	
+
 	public Map<RouteKey, GPXFile> getRoutes(RenderedObject renderedObject, boolean loadRoutes) throws IOException {
 		int x = renderedObject.getX().get(0);
 		int y = renderedObject.getY().get(0);
 		return getRoutes(x, y, loadRoutes);
 	}
-	
+
 	public Map<RouteKey, GPXFile> getRoutes(int x, int y, boolean loadRoutes) throws IOException {
 		Map<RouteKey, GPXFile> res = new LinkedHashMap<>();
 		for (NetworkRouteSegment segment : rCtx.loadRouteSegment(x, y)) {
@@ -139,15 +140,15 @@ public class NetworkRouteSelector {
 			}
 			return start;
 		}
-		
+
 		public int getEndPointX() {
 			return getLast().getEndPointX();
 		}
-		
+
 		public int getEndPointY() {
 			return getLast().getEndPointY();
 		}
-		
+
 		public void addChain(NetworkRouteSegmentChain toAdd) {
 			if (connected == null) {
 				connected = new ArrayList<>();
@@ -161,7 +162,7 @@ public class NetworkRouteSelector {
 		public void setStart(NetworkRouteSegment newStart) {
 			start = newStart;
 		}
-		
+
 		public void setEnd(NetworkRouteSegment newEnd) {
 			if (connected != null && connected.size() > 0) {
 				connected.remove(connected.size() - 1);
@@ -171,7 +172,7 @@ public class NetworkRouteSelector {
 			}
 		}
 	}
-	
+
 	private List<NetworkRouteSegmentChain> getByPoint(Map<Long, List<NetworkRouteSegmentChain>> chains, long pnt,
 			int radius, NetworkRouteSegmentChain exclude) {
 		List<NetworkRouteSegmentChain> list = null;
@@ -236,7 +237,7 @@ public class NetworkRouteSelector {
 		connectSimpleMerge(chains, endChains, 0, CONNECT_POINTS_DISTANCE_STEP);
 		connectSimpleMerge(chains, endChains, CONNECT_POINTS_DISTANCE_MAX / 2, CONNECT_POINTS_DISTANCE_MAX);
 		List<NetworkRouteSegmentChain> lst = flattenChainStructure(chains);
-		GPXFile gpxFile = createGpxFile(lst);
+		GPXFile gpxFile = createGpxFile(lst, routeKey);
 		res.put(routeKey, gpxFile);
 		return lst;
 	}
@@ -305,8 +306,7 @@ public class NetworkRouteSelector {
 		}
 		return merged;
 	}
-	
-	
+
 	private int reverseToConnectMore(Map<Long, List<NetworkRouteSegmentChain>> chains,
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int reversed = 0;
@@ -332,7 +332,7 @@ public class NetworkRouteSelector {
 		}
 		return reversed;
 	}
-	
+
 	private List<NetworkRouteSegmentChain> filterChains(List<NetworkRouteSegmentChain> lst, NetworkRouteSegmentChain ch, int rad, boolean start) {
 		if (lst.size() == 0) {
 			return lst;
@@ -359,7 +359,7 @@ public class NetworkRouteSelector {
 		return lst;
 	}
 
-	private int connectSimpleStraight(Map<Long, List<NetworkRouteSegmentChain>> chains, 
+	private int connectSimpleStraight(Map<Long, List<NetworkRouteSegmentChain>> chains,
 			Map<Long, List<NetworkRouteSegmentChain>> endChains, int rad, int radE) {
 		int merged = 0;
 		boolean changed = true;
@@ -465,7 +465,7 @@ public class NetworkRouteSelector {
 		}
 		lst.add(chain);
 	}
-	
+
 	private void remove(Map<Long, List<NetworkRouteSegmentChain>> chains, long pnt, NetworkRouteSegmentChain toRemove) {
 		List<NetworkRouteSegmentChain> lch = chains.get(pnt);
 		if (lch == null) {
@@ -588,31 +588,31 @@ public class NetworkRouteSelector {
 				}
 			}
 		}
+		RouteKey routeKey = segment.routeKey;
 		if (it != 0) {
-			RouteKey rkey = segment.routeKey;
 			TIntArrayList ids = new TIntArrayList();
 			for (int i = lst.size() - 1; i > 0 && i > lst.size() - 50; i--) {
 				ids.add((int) (lst.get(i).getId() >> 7));
 			}
-			String msg = "Route likely has a loop: " + rkey + " iterations " + it + " ids " + ids;
+			String msg = "Route likely has a loop: " + routeKey + " iterations " + it + " ids " + ids;
 			System.err.println(msg); // throw new IllegalStateException();
 		}
 		NetworkRouteSegmentChain ch = new NetworkRouteSegmentChain();
 		ch.start = lst.get(0);
 		ch.connected = lst.subList(1, lst.size());
-		res.put(segment.routeKey, createGpxFile(Collections.singletonList(ch)));
+		res.put(routeKey, createGpxFile(Collections.singletonList(ch), routeKey));
 		debug("FINISH " + lst.size(), null, segment);
 
 	}
-	
+
 	private void debug(String msg, Boolean reverse, NetworkRouteSegment ld) {
 		System.out.println(msg + (reverse == null ? "" : (reverse ? '-' : '+')) + " " + ld);
 	}
-	
+
 	private boolean grow(List<NetworkRouteSegment> lst, TLongHashSet visitedIds, boolean reverse, boolean approximate) throws IOException {
 		int lastInd = lst.size() - 1;
 		NetworkRouteSegment obj = lst.get(lastInd);
-		List<NetworkRouteSegment> objs = approximate ? rCtx.loadNearRouteSegment(obj.getEndPointX(), obj.getEndPointY(), MAX_RADIUS_HOLE) : 
+		List<NetworkRouteSegment> objs = approximate ? rCtx.loadNearRouteSegment(obj.getEndPointX(), obj.getEndPointY(), MAX_RADIUS_HOLE) :
 			rCtx.loadRouteSegment(obj.getEndPointX(), obj.getEndPointY());
 		for (NetworkRouteSegment ld : objs) {
 			debug("  CHECK", reverse, ld);
@@ -632,13 +632,11 @@ public class NetworkRouteSelector {
 		return false;
 	}
 
-	
-
-	private GPXFile createGpxFile(List<NetworkRouteSegmentChain> chains) {
+	private GPXFile createGpxFile(List<NetworkRouteSegmentChain> chains, RouteKey routeKey) {
 		GPXFile gpxFile = new GPXFile(null, null, null);
 		GPXUtilities.Track track = new GPXUtilities.Track();
 		GPXUtilities.TrkSegment trkSegment;
-		List<Integer> sizes = new ArrayList<>();  
+		List<Integer> sizes = new ArrayList<>();
 		for (NetworkRouteSegmentChain c : chains) {
 			List<NetworkRouteSegment> segmentList = new ArrayList<>();
 			segmentList.add(c.start);
@@ -676,6 +674,7 @@ public class NetworkRouteSelector {
 		}
 		System.out.println(String.format("Segments size %d: %s", track.segments.size(), sizes.toString()));
 		gpxFile.tracks.add(track);
+		gpxFile.addRouteKeyTags(routeKey.tagsToGpx());
 		return gpxFile;
 	}
 
@@ -683,7 +682,7 @@ public class NetworkRouteSelector {
 	public static class NetworkRouteSelectorFilter {
 		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<RouteType> typeFilter = null; // null -  all
-		
+
 		public List<RouteKey> convert(BinaryMapDataObject obj) {
 			return filterKeys(RouteType.getRouteKeys(obj));
 		}
@@ -714,7 +713,7 @@ public class NetworkRouteSelector {
 	public static class RouteKey {
 
 		public final RouteType type;
-		public final Set<String> set = new TreeSet<>();
+		public final Set<String> tags = new TreeSet<>();
 
 		public RouteKey(RouteType routeType) {
 			this.type = routeType;
@@ -722,13 +721,27 @@ public class NetworkRouteSelector {
 
 		public String getValue(String key) {
 			key = ROUTE_KEY_VALUE_SEPARATOR + key + ROUTE_KEY_VALUE_SEPARATOR;
-			for (String str : set) {
-				int i = str.indexOf(key);
+			for (String tag : tags) {
+				int i = tag.indexOf(key);
 				if (i > 0) {
-					return str.substring(i + key.length());
+					return tag.substring(i + key.length());
 				}
 			}
 			return "";
+		}
+
+		public String getKeyFromTag(String tag) {
+			String prefix = "route_" + type.tag + ROUTE_KEY_VALUE_SEPARATOR;
+			if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
+				int endIdx = tag.indexOf(ROUTE_KEY_VALUE_SEPARATOR, prefix.length());
+				return tag.substring(prefix.length(), endIdx);
+			}
+			return "";
+		}
+
+		public void addTag(String key, String value) {
+			value = Algorithms.isEmpty(value) ? "" : ROUTE_KEY_VALUE_SEPARATOR + value;
+			tags.add("route_" + type.tag + ROUTE_KEY_VALUE_SEPARATOR + key + value);
 		}
 
 		public String getRouteName() {
@@ -739,11 +752,59 @@ public class NetworkRouteSelector {
 			return name;
 		}
 
+		public String getNetwork() {
+			return getValue("network");
+		}
+
+		public String getOperator() {
+			return getValue("operator");
+		}
+
+		public String getSymbol() {
+			return getValue("symbol");
+		}
+
+		public String getWebsite() {
+			return getValue("website");
+		}
+
+		public String getWikipedia() {
+			return getValue("wikipedia");
+		}
+
+		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {
+			String type = networkRouteKeyTags.get(NETWORK_ROUTE_TYPE);
+			if (!Algorithms.isEmpty(type)) {
+				RouteType routeType = RouteType.getByTag(type);
+				if (routeType != null) {
+					RouteKey routeKey = new RouteKey(routeType);
+					for (Map.Entry<String, String> tag : networkRouteKeyTags.entrySet()) {
+						routeKey.addTag(tag.getKey(), tag.getValue());
+					}
+					return routeKey;
+				}
+			}
+			return null;
+		}
+
+		public Map<String, String> tagsToGpx() {
+			Map<String, String> networkRouteKey = new HashMap<>();
+			networkRouteKey.put(NETWORK_ROUTE_TYPE, type.tag);
+			for (String tag : tags) {
+				String key = getKeyFromTag(tag);
+				String value = getValue(key);
+				if (!Algorithms.isEmpty(value)) {
+					networkRouteKey.put(key, value);
+				}
+			}
+			return networkRouteKey;
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + set.hashCode();
+			result = prime * result + tags.hashCode();
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
@@ -757,17 +818,17 @@ public class NetworkRouteSelector {
 			if (getClass() != obj.getClass())
 				return false;
 			RouteKey other = (RouteKey) obj;
-			if (!set.equals(other.set))
+			if (!tags.equals(other.tags))
 				return false;
 			return type == other.type;
 		}
 
 		@Override
 		public String toString() {
-			return "Route [type=" + type + ", set=" + set + "]";
+			return "Route [type=" + type + ", set=" + tags + "]";
 		}
 	}
-	
+
 	public enum RouteType {
 
 		HIKING("hiking"),
@@ -785,6 +846,15 @@ public class NetworkRouteSelector {
 
 		public String getTag() {
 			return tag;
+		}
+
+		public static RouteType getByTag(String tag) {
+			for (RouteType routeType : values()) {
+				if (routeType.tag.equals(tag)) {
+					return routeType;
+				}
+			}
+			return null;
 		}
 
 		public static List<RouteKey> getRouteKeys(RouteDataObject obj) {
@@ -857,19 +927,15 @@ public class NetworkRouteSelector {
 				int rq = getRouteQuantity(tags, routeType);
 				for (int routeIdx = 1; routeIdx <= rq; routeIdx++) {
 					String prefix = routeType.tagPrefix + routeIdx;
-					RouteKey key = new RouteKey(routeType);
+					RouteKey routeKey = new RouteKey(routeType);
 					for (Map.Entry<String, String> e : tags.entrySet()) {
 						String tag = e.getKey();
-						if (tag.startsWith(prefix)) {
-							String tagPart = routeType.tagPrefix + tag.substring(prefix.length());
-							if (Algorithms.isEmpty(e.getValue())) {
-								key.set.add(tagPart);
-							} else {
-								key.set.add(tagPart + ROUTE_KEY_VALUE_SEPARATOR + e.getValue());
-							}
+						if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
+							String key = tag.substring(prefix.length() + 1);
+							routeKey.addTag(key, e.getValue());
 						}
 					}
-					lst.add(key);
+					lst.add(routeKey);
 				}
 			}
 			return lst;
