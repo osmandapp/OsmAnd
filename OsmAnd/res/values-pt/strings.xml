@@ -4734,8 +4734,6 @@
     <string name="next_turn_widget_desc">Mostra informação sobre a próxima curva a fazer com uma imagem da manobra e distância até ela.</string>
     <string name="compass_desc">Mostra a direção para norte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de cores das curvas de nível de profundidade</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das curvas de nível de profundidade</string>
-    <string name="rendering_attr_depthContourWidth_name">Largura da curva de nível de profundidade</string>
     <string name="auto_backup_title">Cópia de segurança automática</string>
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="true_bearing_wdiget_desc">Ângulo entre o verdadeiro norte e o ponto alvo observado a partir da sua localização.</string>

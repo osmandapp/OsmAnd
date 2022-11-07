@@ -4758,7 +4758,6 @@
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
-    <string name="rendering_attr_depthContourWidth_name">Anchura de curva de nivel de profundidad</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="download_complete">Descarga completa</string>
@@ -4781,7 +4780,6 @@
     <string name="compass_always_visible">Siempre visible</string>
     <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="shared_string_large">Largo</string>

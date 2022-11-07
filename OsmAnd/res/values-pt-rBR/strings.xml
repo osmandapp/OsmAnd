@@ -4720,7 +4720,6 @@
     <string name="time_to_destination_widget_desc">O widget mostra \"Hora de chegada\" ou \"Hora de ir\" até o último ponto de destino. O tempo é constantemente atualizado durante a navegação e é igual ao tempo da rota a partir do local atual.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite que você faça uma nota de áudio.</string>
     <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das linhas de contorno de profundidade</string>
     <string name="connect_with_straight_line">Conecte-se com uma linha reta</string>
     <string name="attach_roads_descr">Aproxime sua trilha com uma rota usando o mapa offline. Isso fornecerá valores de elevação corrigidos, detalhes da estrada e curvas usadas durante a navegação.</string>
     <string name="duplacate_widget_added_snackbar">Um widget duplicado está sendo adicionado à lista.</string>
@@ -4748,7 +4747,6 @@
     <string name="time_to_intermediate_widget_desc">O widget mostra \"Hora de chegada\" ou \"Hora de ir\" para o primeiro ponto intermediário. O tempo é atualizado constantemente durante a navegação, uma vez que os pontos intermediários são passados, o tempo será atualizado para o próximo ponto intermediário.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de cores das linhas de curvas de níveis</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da linha de curva de nível</string>
-    <string name="rendering_attr_depthContourWidth_name">Largura da linha de curva de nível</string>
     <string name="distance_to_destination_widget_desc">O widget mostra a distância restante até o último ponto de destino.</string>
     <string name="auto_25_chars_route_tr_kr">Vire à direita e mantenha-se à direita</string>
     <string name="auto_25_chars_route_tu_kl">Faça inversão de marcha e mantenha-se à esquerda</string>

@@ -103,7 +103,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
 		app.getNotificationHelper().refreshNotifications();
 	}

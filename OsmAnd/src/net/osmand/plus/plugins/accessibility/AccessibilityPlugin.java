@@ -80,7 +80,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		if (sounds != null) {
 			sounds.release();
 			sounds = null;

@@ -1,8 +1,10 @@
 package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,13 +12,24 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.download.LocalIndexHelper;
+import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -88,26 +101,91 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
+	                                            @NonNull MapActivity mapActivity,
+	                                            @NonNull List<RenderingRuleProperty> customRules) {
+		if (isEnabled() || hasDepthMaps()) {
+			createNauticalItem(menuAdapter, mapActivity, customRules);
+		}
+	}
+
+	private boolean hasDepthMaps() {
+		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
+		LocalIndexHelper helper = new LocalIndexHelper(app);
+		List<LocalIndexInfo> depthIndexData = helper.getLocalIndexData(readFiles, false, null, DEPTH_DATA);
+		return !Algorithms.isEmpty(depthIndexData);
+	}
+
+	private void createNauticalItem(@NonNull ContextMenuAdapter adapter,
+	                                @NonNull MapActivity mapActivity,
+	                                @NonNull List<RenderingRuleProperty> customRules) {
+		OsmandSettings settings = app.getSettings();
 		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		while (iterator.hasNext()) {
 			RenderingRuleProperty property = iterator.next();
-			if (DEPTH_CONTOURS.equals(property.getAttrName())) {
-				String attrName = property.getAttrName();
-				String name = AndroidUtils.getRenderingStringPropertyName(mapActivity, attrName, property.getName());
-				menuAdapter.addItem(ConfigureMapMenu.createBooleanRenderingProperty(mapActivity, attrName, name, DEPTH_CONTOURS, property, R.drawable.ic_action_nautical_depth, nightMode, result -> {
-					mapActivity.refreshMapComplete();
-					return false;
-				}));
+			String attrName = property.getAttrName();
+			if (DEPTH_CONTOURS.equals(attrName)) {
+				CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
+				ItemClickListener listener = getPropertyItemClickListener(pref, mapActivity);
+
+				adapter.addItem(new ContextMenuItem(DEPTH_CONTOURS)
+						.setTitleId(R.string.nautical_depth, mapActivity)
+						.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+						.setSelected(pref.get())
+						.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+						.setIcon(R.drawable.ic_action_nautical_depth)
+						.setSecondaryIcon(R.drawable.ic_action_additional_option)
+						.setListener(listener));
+
 				iterator.remove();
 			}
 		}
 	}
 
+	public ItemClickListener getPropertyItemClickListener(@NonNull CommonPreference<Boolean> pref,
+	                                                      @NonNull MapActivity mapActivity) {
+		return new OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				DashboardOnMap dashboard = mapActivity.getDashboard();
+				dashboard.setDashboardVisibility(true, DashboardType.NAUTICAL_DEPTH);
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				pref.set(isChecked);
+				item.setSelected(pref.get());
+				item.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+				if (uiAdapter != null) {
+					uiAdapter.onDataSetChanged();
+				}
+				mapActivity.refreshMapComplete();
+				return true;
+			}
+		};
+	}
+
+	@Override
+	public boolean disablePreferences() {
+		return false;
+	}
+
 	@Nullable
 	@Override
 	protected String getRenderPropertyPrefix() {
-		return DEPTH_CONTOURS;
+		return "depthContour";
+	}
+
+	@Override
+	protected CommonPreference<String> registerRenderingPreference(@NonNull RenderingRuleProperty property) {
+		String attrName = property.getAttrName();
+		String defValue = Algorithms.isEmpty(property.getPossibleValues()) ? "" : property.getPossibleValues()[0];
+		return registerRenderingPreference(attrName, defValue);
 	}
 }

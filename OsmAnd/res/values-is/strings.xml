@@ -4669,10 +4669,8 @@
     <string name="compass_always_hidden">Alltaf falið</string>
     <string name="compass_always_visible">Alltaf sýnilegt</string>
     <string name="compass_desc">Sýnir stefnu í norður.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourColorScheme_description">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourWidth_description">Breidd dýptarlína</string>
-    <string name="rendering_attr_depthContourWidth_name">Breidd dýptarlína</string>
     <string name="download_complete">Niðurhali lokið</string>
     <string name="reset_all_settings_desc">Frumstilla allar stillingar á sjálfgefin gildi\?</string>
     <string name="co2_mission">CO2 útblástur</string>

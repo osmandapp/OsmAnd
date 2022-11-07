@@ -4747,9 +4747,7 @@
     <string name="compass_always_visible">一律可見</string>
     <string name="compass_desc">顯示北邊的方向。</string>
     <string name="compass_click_desc">點擊指南針切換地圖方向模式。</string>
-    <string name="rendering_attr_depthContourColorScheme_name">等深線配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
-    <string name="rendering_attr_depthContourWidth_name">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地腳踏車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>

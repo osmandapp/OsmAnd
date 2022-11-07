@@ -4806,7 +4806,6 @@
     <string name="compass_visible_if_map_rotated_desc">يختفي مع تنشيط الشمال</string>
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
-    <string name="rendering_attr_depthContourWidth_name">عرض عمق الخطوط المحيطية</string>
     <string name="compass_always_visible">مرئي دائما</string>
     <string name="compass_click_desc">اضغط على البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
@@ -4815,7 +4814,6 @@
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
     <string name="rendering_attr_depthContourColorScheme_description">نظام ألوان عمق خطوط الخطوط المحيطية</string>
-    <string name="rendering_attr_depthContourColorScheme_name">نظام ألوان عمق الخطوط المحيطية</string>
     <string name="auto_25_chars_route_roundabout_kr">خذ %1$d مخرجا واحتفظ باليمين</string>
     <string name="auto_backup_title">النسخ الاحتياطي التلقائي</string>
     <string name="duplacate_widget_added_snackbar">تتم إضافة الويدجت بعد ذلك في القائمة.</string>

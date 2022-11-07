@@ -4763,9 +4763,7 @@
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
     <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
-    <string name="rendering_attr_depthContourWidth_name">Шырыня контурных ліній глыбіні</string>
     <string name="compass_desc">Паказвае кірунак на поўнач.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
     <string name="without_profiles_changing">Без змены профіляў</string>

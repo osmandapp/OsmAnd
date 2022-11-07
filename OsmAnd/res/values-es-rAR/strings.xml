@@ -4755,7 +4755,6 @@
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color para curvas de nivel de profundidad</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
 \nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
@@ -4765,7 +4764,6 @@
     <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
-    <string name="rendering_attr_depthContourWidth_name">Anchura de curva de nivel de profundidad</string>
     <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
     <string name="auto_25_chars_route_tr_kl">Gira a la derecha y quédate en la izquierda</string>
     <string name="auto_25_chars_route_tr_kr">Gira a la derecha y quédate en la derecha</string>

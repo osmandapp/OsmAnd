@@ -4724,7 +4724,6 @@
     <string name="compass_always_visible">Mindig látható</string>
     <string name="compass_click_desc">Koppintson az iránytűre a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak szélessége</string>
     <string name="time_to_destination_widget_desc">A widget megjeleníti az „Érkezési időt” vagy az utolsó célpontig „Hátralévő időt”. A navigáció során az idő folyamatosan frissül, és megegyezik (a jelenlegi helytől számítva) az útvonal idejével.</string>
@@ -4734,7 +4733,6 @@
     <string name="av_notes_audio_widget_desc">A widgetre koppintva hangjegyzetet készíthet.</string>
     <string name="av_notes_photo_widget_desc">A widgetre koppintva fényképet készíthet.</string>
     <string name="av_notes_video_widget_desc">A widgetre koppintva videofelvételt indíthat.</string>
-    <string name="rendering_attr_depthContourWidth_name">Mélységvonalak szélessége</string>
     <string name="duplacate_widget_added_snackbar">Egy ismétlődő widget lesz hozzáadva a listához.</string>
     <string name="second_marker_widget_desc">Beállíthatja a widgetet úgy, hogy a második térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
     <string name="first_marker_widget_desc">Beállíthatja a widgetet úgy, hogy az első térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>

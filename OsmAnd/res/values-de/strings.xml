@@ -4741,10 +4741,8 @@
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Ausgewiesene Mountainbikestrecken anzeigen.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Farbschema der Tiefenlinien</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farbschema der Tiefenlinien</string>
     <string name="rendering_attr_depthContourWidth_description">Breite der Tiefenlinie</string>
-    <string name="rendering_attr_depthContourWidth_name">Breite der Tiefenlinie</string>
     <string name="distance_to_destination_widget_desc">Das Widget zeigt die verbleibende Entfernung zum letzten Zielpunkt an.</string>
     <string name="second_next_turn_widget_desc">Das Widget zeigt Informationen über Ihre zweitnächste Abbiegung an, die aktiviert wird, wenn sich die Abbiegung in unmittelbarer Nähe befindet.</string>
     <string name="next_turn_widget_desc">Das Widget zeigt Informationen zu Ihrer nächsten Abbiegung an, mit einem Bild des Manövers und entsprechender Entfernungsangabe.</string>

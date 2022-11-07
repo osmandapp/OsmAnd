@@ -4758,10 +4758,8 @@
     <string name="compass_always_hidden">Întotdeauna ascuns</string>
     <string name="compass_always_visible">Întotdeauna vizibil</string>
     <string name="compass_desc">Indică direcția spre nord.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Schema de culori a liniilor de contur de adâncime</string>
     <string name="rendering_attr_depthContourColorScheme_description">Schema de culori a liniilor de contur de adâncime</string>
     <string name="rendering_attr_depthContourWidth_description">Lățimea liniei de contur de adâncime</string>
-    <string name="rendering_attr_depthContourWidth_name">Lățimea liniei de contur de adâncime</string>
     <string name="accessibility_2d_view_off">Vedere 2.5D Oprit</string>
     <string name="time_to_destination_widget_desc">Widgetul afișează \"Ora de sosire\" sau \"Timpul până la destinație\" până la ultimul punct de destinație. Timpul este actualizat în mod constant în timpul navigației și este egal cu timpul de parcurs de la locația curentă.</string>
     <string name="time_to_intermediate_widget_desc">Widgetul afișează \"Ora de sosire\" sau \"Timpul de parcurs\" până la primul punct intermediar. Timpul este actualizat în mod constant în timpul navigației, odată ce punctele intermediare sunt depășite, timpul va fi actualizat până la următorul punct intermediar.</string>

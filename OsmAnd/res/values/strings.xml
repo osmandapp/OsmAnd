@@ -11,7 +11,21 @@
 	Thx - Hardy
 -->
 
-    <string name="weather_plugin_description">5 layers. Daily forecast every 24 hours and 7-day forecast every 3\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+    <string name="switch_mode_by_tapping_on_widget">Switch mode by tapping a widget.</string>
+    <string name="map_widget_sunset_desc">Shows time of or time left to the next sunset.</string>
+    <string name="map_widget_sunrise_desc">Shows time of or time left to next sunrise.</string>
+    <string name="shared_string_next_sunset">Next sunset</string>
+    <string name="shared_string_next_sunrise">Next sunrise</string>
+    <string name="shared_string_time_left">Time left</string>
+    <string name="shared_string_sunset">Sunset</string>
+    <string name="shared_string_sunrise">Sunrise</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Shows info about next sunrise and sunset.</string>
+    <string name="map_widget_group_sunrise_sunset">Sunrise, sunset</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Line color-scheme</string>
+    <string name="rendering_attr_depthContourWidth_name">Line width</string>
+    <string name="depth_contour_lines">Depth contour-lines</string>
+    <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
+    <string name="weather_plugin_description">5 layers. Daily forecast every 24 hours and 7-day forecast every 3 days.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -56,7 +70,7 @@
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">Dauly forecast every 24 hours and 7-day forecast every 3</string>
+    <string name="weather_prefs_descr">Daily forecast every 24 hours and 7-day forecast every 3 days</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Pick a different map style to use this.</string>
@@ -142,8 +156,8 @@
     <string name="developer_widgets">Developer widgets</string>
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the current location widget on the map.</string>
-    <string name="coordinates_widget_map_center_desc">Shows the geographic coordinates of current map center</string>
-    <string name="coordinates_widget_current_location_desc">Shows the geographic coordinates of current geo-location</string>
+    <string name="coordinates_widget_map_center_desc">Shows the geographic coordinates of the current map center.</string>
+    <string name="coordinates_widget_current_location_desc">Shows the geographic coordinates of the current geo-location.</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>
     <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
@@ -208,10 +222,8 @@
     <string name="compass_always_visible">Always visible</string>
     <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
-    <string name="rendering_attr_depthContourWidth_name">Depth contour line width</string>
     <string name="accessibility_2d_view_off">2.5D view off</string>
     <string name="accessibility_2d_view_on">2.5D view on</string>
     <string name="download_complete">Download complete</string>
@@ -293,8 +305,8 @@
     <string name="coordinates_widget_secondary_desc">Coordinates format could be changed in %1$s — %2$s — %3$s.</string>
     <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
     <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
-    <string name="parking_widget_desc">Shows distance from your screen center to the parking place.</string>
-    <string name="mapillary_widget_desc">Provides quick access to Mapillary app to add street-level imagery.</string>
+    <string name="parking_widget_desc">Shows distance from the screen center to your parking place.</string>
+    <string name="mapillary_widget_desc">Provides quick access to the Mapillary app to add street-level imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
     <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
     <string name="current_time_widget_desc">Shows current time from your device.</string>

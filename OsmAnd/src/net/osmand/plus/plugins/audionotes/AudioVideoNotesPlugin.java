@@ -642,6 +642,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int itemId = item.getTitleId();
 			if (itemId == R.string.layer_recordings) {
@@ -1640,7 +1643,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		if (soundPool != null) {
 			soundPool.release();
 			soundPool = null;
