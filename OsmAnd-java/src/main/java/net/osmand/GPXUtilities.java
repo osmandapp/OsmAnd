@@ -3039,20 +3039,18 @@ public class GPXUtilities {
 	}
 
 	private static Map<String, String> parseRouteKeyAttributes(XmlPullParser parser) {
-		Map<String, String> networkRouteKey = new LinkedHashMap<>();
+		Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 		StringBundleXmlReader reader = new StringBundleXmlReader(parser);
 		reader.readBundle();
 		StringBundle bundle = reader.getBundle();
 		if (!bundle.isEmpty()) {
 			for (StringBundle.Item<?> item : bundle.getMap().values()) {
 				if (item.getType() == StringBundle.ItemType.STRING) {
-					String key = item.getName();
-					String value = (String) item.getValue();
-					networkRouteKey.put(key, value);
+					networkRouteKeyTags.put(item.getName(), (String) item.getValue());
 				}
 			}
 		}
-		return networkRouteKey;
+		return networkRouteKeyTags;
 	}
 
 	private static Map<String, PointsGroup> mergePointsGroups(List<PointsGroup> groups, List<WptPt> points) {
