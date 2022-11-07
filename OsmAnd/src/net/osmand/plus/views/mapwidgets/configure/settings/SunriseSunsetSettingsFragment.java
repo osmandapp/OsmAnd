@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
@@ -25,28 +23,24 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String SHOW_TIME_TO_LEFT = "show_time_to_left";
 
 	private static final int UPDATE_UI_PERIOD_MS = 60_000; // every minute
 
-	private TextView tvPreferenceDesc;
-	private Timer updateUiTimer;
-	private Handler handler;
-
 	private OsmandPreference<Boolean> preference;
 	private SunriseSunsetWidget widget;
-	boolean showTimeToLeft;
-	boolean sunriseMode;
+	private TextView timeDescription;
 
+	private boolean sunriseMode;
+	private boolean showTimeToLeft;
+	private boolean updateEnable;
+
+	@NonNull
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		handler = new Handler();
+	public WidgetType getWidget() {
+		return sunriseMode ? WidgetType.SUNRISE : WidgetType.SUNSET;
 	}
 
 	@Override
@@ -65,39 +59,49 @@ public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 	@Override
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_sunrise_sunset, container);
+		timeDescription = container.findViewById(R.id.preference_description);
+
 		View preferenceButton = container.findViewById(R.id.preference_container);
-		tvPreferenceDesc = container.findViewById(R.id.preference_description);
-		preferenceButton.setOnClickListener(v -> {
-			showPreferenceDialog();
-		});
+		preferenceButton.setOnClickListener(v -> showPreferenceDialog());
 		preferenceButton.setBackground(getPressedStateDrawable());
 	}
 
-	private void showPreferenceDialog() {
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(getMapActivity(), getThemeRes(nightMode)));
-		bld.setTitle(R.string.shared_string_show);
-		CharSequence[] items = new CharSequence[2];
+	@Override
+	protected void applySettings() {
+		preference.setModeValue(appMode, showTimeToLeft);
+	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(SHOW_TIME_TO_LEFT, showTimeToLeft);
+	}
+
+	private void showPreferenceDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(timeDescription.getContext());
+		builder.setTitle(R.string.shared_string_show);
+
+		CharSequence[] items = new CharSequence[2];
 		items[0] = getFormattedTime(true);
 		items[1] = getFormattedTime(false);
 
 		int selected = showTimeToLeft ? 0 : 1;
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selected, app, activeColor, getThemeRes(nightMode), v -> {
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(items,
+				nightMode, selected, app, activeColor, themeRes, v -> {
 					int which = (int) v.getTag();
 					showTimeToLeft = which == 0;
-					updatePreferenceDescription();
+					updateTimeDescription();
 				}
 		);
-		bld.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(bld.show());
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
 	}
 
-	private void updatePreferenceDescription() {
-		String description = getFormattedTime(showTimeToLeft).toString();
-		tvPreferenceDesc.setText(description);
+	private void updateTimeDescription() {
+		timeDescription.setText(getFormattedTime(showTimeToLeft));
 	}
 
 	private CharSequence getFormattedTime(boolean showTimeToLeft) {
@@ -123,60 +127,27 @@ public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 		}
 	}
 
-	@NonNull
-	@Override
-	public WidgetType getWidget() {
-		return sunriseMode ? WidgetType.SUNRISE : WidgetType.SUNSET;
-	}
-
-	@Override
-	protected void applySettings() {
-		preference.setModeValue(appMode, showTimeToLeft);
-	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
-		startAutoUiUpdate();
+		updateEnable = true;
+		updateTimeDescription();
+		startHandler();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		stopAutoUiUpdate();
+		updateEnable = false;
 	}
 
-	private void startAutoUiUpdate() {
-		if (updateUiTimer != null) {
-			updateUiTimer.cancel();
-		}
-		updatePreferenceDescription();
-		long delay = 0;
-		long timeLeft = widget.getTimeLeft();
-		if (timeLeft > 0) {
-			delay = timeLeft % UPDATE_UI_PERIOD_MS;
-		}
-		updateUiTimer = new Timer();
-		updateUiTimer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				handler.post(() -> {
-					updatePreferenceDescription();
-				});
+	private void startHandler() {
+		Handler handler = new Handler();
+		handler.postDelayed(() -> {
+			if (getView() != null && updateEnable) {
+				updateTimeDescription();
+				startHandler();
 			}
-		}, delay, UPDATE_UI_PERIOD_MS);
-	}
-
-	private void stopAutoUiUpdate() {
-		if (updateUiTimer != null) {
-			updateUiTimer.cancel();
-			updateUiTimer = null;
-		}
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(SHOW_TIME_TO_LEFT, showTimeToLeft);
+		}, UPDATE_UI_PERIOD_MS);
 	}
 }

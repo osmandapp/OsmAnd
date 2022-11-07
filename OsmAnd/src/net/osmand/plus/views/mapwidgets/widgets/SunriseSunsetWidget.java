@@ -24,8 +24,9 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	private static final String NEXT_TIME_FORMAT = "HH:mm E";
 
-	private static final int TIME_LEFT_UPDATE_INTERVAL = 60_000; // every minute
+	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
 
+	private final DayNightHelper dayNightHelper;
 	private final SunriseSunsetWidgetState widgetState;
 
 	private long lastUpdateTime;
@@ -35,6 +36,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState) {
 		super(mapActivity, widgetState.getWidgetType());
+		dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
@@ -48,28 +50,23 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		if (isUpdateNeeded()) {
-			String value;
-			if (isShowTimeLeft()) {
-				value = formatTimeLeft(app, getTimeLeft());
+		if (!isUpdateNeeded()) {
+			return;
+		}
+		String value = isShowTimeLeft() ? formatTimeLeft(app, getTimeLeft()) : formatNextTime(getNextTime());
+		if (!Algorithms.isBlank(value)) {
+			String[] split = value.split(" ");
+			if (split.length == 2) {
+				setText(split[0], split[1]);
 			} else {
-				value = formatNextTime(getNextTime());
+				setText(value, null);
 			}
-			// Check and update value
-			if (!Algorithms.isBlank(value)) {
-				String[] split = value.split(" ");
-				if (split.length == 2) {
-					setText(split[0], split[1]);
-				} else {
-					setText(value, null);
-				}
-				forceUpdate = false;
-				lastUpdateTime = System.currentTimeMillis();
-				timeToNextUpdate = (cachedNextTime - lastUpdateTime) % TIME_LEFT_UPDATE_INTERVAL;
-			} else {
-				setText(NO_VALUE, null);
-				forceUpdate = true;
-			}
+			forceUpdate = false;
+			lastUpdateTime = System.currentTimeMillis();
+			timeToNextUpdate = (cachedNextTime - lastUpdateTime) % TIME_LEFT_UPDATE_INTERVAL_MS;
+		} else {
+			setText(NO_VALUE, null);
+			forceUpdate = true;
 		}
 	}
 
@@ -104,7 +101,6 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 	}
 
 	public long getNextTime() {
-		DayNightHelper dayNightHelper = app.getDaynightHelper();
 		SunriseSunset sunriseSunset = dayNightHelper.getSunriseSunset();
 		if (sunriseSunset != null) {
 			long now = System.currentTimeMillis();
@@ -114,7 +110,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 				calendar.setTime(nextTimeDate);
 				// If sunrise or sunset has passed today, move the date to the next day
 				if (calendar.getTimeInMillis() <= now) {
-					calendar.add(Calendar.DATE, 1);
+					calendar.add(Calendar.DAY_OF_MONTH, 1);
 				}
 				cachedNextTime = calendar.getTimeInMillis();
 			}
