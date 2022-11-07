@@ -319,7 +319,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		if (weatherResourcesManager == null) {
 			return false;
 		}
+		return updateBandsSettings(weatherResourcesManager);
+	}
 
+	public boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		Map<WeatherInfoType, Integer> transparencies = getLayersTransparencies(appMode);
 

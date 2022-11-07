@@ -4344,4 +4344,14 @@
     <string name="poi_dog_designated">Предназначено для выгула собак</string>
     <string name="poi_dog_leashed">Собаки: только на поводке</string>
     <string name="poi_dog_unleashed">Собаки: без поводка</string>
+    <string name="poi_playground_sandpit">Песочница</string>
+    <string name="poi_playground_climbingwall">Скалолазная стенка</string>
+    <string name="poi_playground_youth_bench">Детская скамейка</string>
+    <string name="poi_playground_map">Карта</string>
+    <string name="poi_playground_bridge">Мост</string>
+    <string name="poi_playground_slide">Горка</string>
+    <string name="poi_playground_balancebeam">Бревно</string>
+    <string name="poi_playground_playhouse">Игровой домик</string>
+    <string name="poi_playground_hopscotch">Классики</string>
+    <string name="poi_playground_sledding">Ледяная горка</string>
 </resources>

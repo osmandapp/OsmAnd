@@ -1656,7 +1656,7 @@
     <string name="poi_payment_jcb_no">JCB-Karten nicht akzeptiert</string>
     <string name="poi_payment_eurowag_yes">Eurowag</string>
     <string name="poi_payment_eurowag_no">Eurowag-Karten nicht akzeptiert</string>
-    <string name="poi_payment_euroshell_yes">Euroshell</string>
+    <string name="poi_payment_euroshell_yes">euroShell</string>
     <string name="poi_payment_euroshell_no">Euroshell-Tankkarten nicht akzeptiert</string>
     <string name="poi_payment_westfalen_card_yes">Westfalen</string>
     <string name="poi_payment_westfalen_card_no">Westfalen-Karten nicht akzeptiert</string>
@@ -3496,7 +3496,7 @@
     <string name="poi_bulk_purchase">Verpackungsfreie Waren</string>
     <string name="poi_substation_type">Art</string>
     <string name="poi_bulk_purchase_yes">Ja;Großeinkauf</string>
-    <string name="poi_bulk_purchase_only">Nur;Nur Großeinkauf</string>
+    <string name="poi_bulk_purchase_only">Nur Großeinkauf</string>
     <string name="poi_substation_transmission">Umspannwerk</string>
     <string name="poi_substation_distribution">Verteiler</string>
     <string name="poi_substation_minor_distribution">Haushaltsverteilung</string>

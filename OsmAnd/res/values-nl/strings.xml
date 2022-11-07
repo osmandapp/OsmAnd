@@ -2454,8 +2454,6 @@
     <string name="date_added">Toegevoegd</string>
     <string name="order_by">Sorteer op:</string>
     <string name="marker_show_distance_descr">Kies hoe afstand en richting aangeduid worden bij markeringen op de kaart:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Snelheidsdrempel kaart oriëntatie</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Kies de snelheid waarboven Kaartrotatie wijzigt van \'Volgens kompas\' naar \'In beweegrichting\'.</string>
     <string name="all_markers_moved_to_history">Alle kaartmarkeringen zijn naar de geschiedenis verplaatst</string>
     <string name="marker_moved_to_history">Kaartmerkering naar geschiedenis verplaatst</string>
     <string name="marker_moved_to_active">Kaartmarkering actief gemaakt</string>

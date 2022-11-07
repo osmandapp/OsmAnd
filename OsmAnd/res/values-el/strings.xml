@@ -1689,8 +1689,6 @@
     <string name="date_added">Προστέθηκε</string>
     <string name="order_by">Ταξινόμηση κατά:</string>
     <string name="marker_show_distance_descr">Επιλογή υπόδειξης απόστασης και κατεύθυνσης σε σημειωτές χαρτών στον χάρτη:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Όριο προσανατολισμού χάρτη</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Επιλέξτε την ταχύτητα εναλλαγής προσανατολισμού από \'Κατεύθυνση κίνησης\' σε \'Κατεύθυνση πυξίδας\' παρακάτω.</string>
     <string name="all_markers_moved_to_history">Όλοι οι δείκτες χάρτη μετακινήθηκαν στο ιστορικό</string>
     <string name="marker_moved_to_history">Ο δείκτης χάρτη μετακινήθηκε στο ιστορικό</string>
     <string name="marker_moved_to_active">Ο δείκτης χάρτη ενεργοποιήθηκε</string>

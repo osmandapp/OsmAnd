@@ -2,9 +2,8 @@ package net.osmand.plus.settings.fragments;
 
 import androidx.preference.Preference;
 
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -20,7 +19,6 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		setupAutoFollowPref();
 		setupAutoZoomMapPref();
 		setupSnapToRoadPref();
-		setupMapDirectionToCompassPref();
 	}
 
 	private void setupAutoFollowPref() {
@@ -71,28 +69,6 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx snapToRoad = findPreference(settings.SNAP_TO_ROAD.getId());
 		snapToRoad.setTitle(getString(R.string.snap_to_road));
 		snapToRoad.setDescription(getString(R.string.snap_to_road_descr));
-	}
-
-	private void setupMapDirectionToCompassPref() {
-		//array size must be equal!
-		Float[] valuesKmh = {0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = {0f, 3f, 5f, 7f, 10f, 15f};
-		String[] names;
-		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
-			names = new String[valuesKmh.length];
-			for (int i = 0; i < names.length; i++) {
-				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);
-			}
-		} else {
-			names = new String[valuesMph.length];
-			for (int i = 0; i < names.length; i++) {
-				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
-			}
-		}
-		ListPreferenceEx switchMapDirectionToCompass = findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS_KMH.getId());
-		switchMapDirectionToCompass.setDescription(R.string.map_orientation_change_in_accordance_with_speed_descr);
-		switchMapDirectionToCompass.setEntries(names);
-		switchMapDirectionToCompass.setEntryValues(valuesKmh);
 	}
 
 	@Override

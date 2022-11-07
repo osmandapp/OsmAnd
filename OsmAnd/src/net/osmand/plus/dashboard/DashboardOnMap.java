@@ -527,7 +527,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
-		if (visible == this.visible && isCurrentType(type) || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+		boolean currentType = isCurrentType(type);
+		if (visible == this.visible && currentType || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
@@ -537,7 +538,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
 		boolean appModeChanged = currentAppMode != previousAppMode;
 
-		boolean refresh = isCurrentType(type) && !appModeChanged;
+		boolean refresh = currentType && !appModeChanged;
 		previousAppMode = currentAppMode;
 		staticVisible = visible;
 		staticVisibleType = type;

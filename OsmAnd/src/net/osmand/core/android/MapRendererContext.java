@@ -30,6 +30,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherWebClient;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -351,9 +352,16 @@ public class MapRendererContext {
 		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
 
 		WeatherWebClient webClient = new WeatherWebClient();
-		weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
+		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
 				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
 		webClient.swigReleaseOwnership();
+
+		//TODO: refactoring needed. Do not use plugin class here.
+		WeatherPlugin weatherPlugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
+		if (weatherPlugin != null) {
+			weatherPlugin.updateBandsSettings(weatherTileResourcesManager);
+		}
+		this.weatherTileResourcesManager = weatherTileResourcesManager;
 	}
 
 	@Nullable

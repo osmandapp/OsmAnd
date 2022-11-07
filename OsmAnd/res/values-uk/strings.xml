@@ -309,8 +309,8 @@
     <string name="si_km_m">Кілометри/метри</string>
     <string name="yard">ярд</string>
     <string name="foot">фут</string>
-    <string name="mile_per_hour">мл/г</string>
-    <string name="mile">мл</string>
+    <string name="mile_per_hour">миль/год</string>
+    <string name="mile">миля</string>
     <string name="send_location_way_choose_title">Поділитись, використовуючи</string>
     <string name="send_location_sms_pattern">Координати: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Щоб побачити розташування, перейдіть за посиланням %1$s або intent-посиланням Android %2$s</string>
@@ -345,7 +345,7 @@
     <string name="indexing_transport">Індексується транспорт…</string>
     <string name="shared_string_io_error">Помилка вводу/виводу</string>
     <string name="km">км</string>
-    <string name="km_h">км/г</string>
+    <string name="km_h">км/год</string>
     <string name="m">м</string>
     <string name="old_map_index_is_not_supported">Застарілий формат даних мапи \'\'{0}\'\' не підтримується</string>
     <string name="poi_filter_car_aid">Автодопомога</string>
@@ -2461,8 +2461,6 @@
     <string name="do_not_use_animations">Без анімації</string>
     <string name="do_not_use_animations_descr">Вимикає анімацію мапи.</string>
     <string name="marker_show_distance_descr">Вибрати як показувати відстань і напрямок до позначок на мапі:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Зміна орієнтації мапи</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Виберіть далі, на якій швидкості орієнтація мапи перемикається із \'за напрямком руху\' на \'за компасом\'.</string>
     <string name="all_markers_moved_to_history">Усі позначки перенесено до історії</string>
     <string name="marker_moved_to_history">Позначку мапи перенесено до історії</string>
     <string name="marker_moved_to_active">Позначка мапи серед увімкнених</string>
@@ -4850,7 +4848,7 @@
     <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
     <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
     <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
-    <string name="release_4_3">- Новий швидший рушій рендерингу мап з 2.5D виглядом
+    <string name="release_4_3">- Новий швидший рушій рендерингу мап версії 2 (OpenGL) з 2.5D виглядом
 \n
 \n - Плавна анімація зміни локації під час руху
 \n
@@ -4873,6 +4871,71 @@
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
     <string name="show_map_symbols_desc">Текст, дорожні знаки тощо.</string>
-    <string name="show_borders_of_downloaded_maps">Забарвлення завантажених мап</string>
+    <string name="show_borders_of_downloaded_maps">Показати межі завантажених мап</string>
     <string name="show_map_symbols">Показати символи мапи</string>
+    <string name="rendering_engine_failed_descr">OsmAnd повернувся до рендерингу мап \"Version 1\". Ви можете спробувати перемкнутися на новий рушій рендерингу «Версії 2 (OpenGL)» у Налаштуваннях.
+\n
+\nБудь ласка, підтримайте вдосконалення, надавши свій журнал помилок.</string>
+    <string name="map_rendering_engine_v2">Версія 2 (OpenGL)</string>
+    <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
+    <string name="dismiss_changes">Відхилити зміни\?</string>
+    <string name="restart_now">Перезапустити зараз</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це швидший рушій рендерингу мап, який також підтримує 2.5D перегляд. Рендеринг версії 1 був типовим до випуску 4.3, і досі є кращим для старих пристроїв.</string>
+    <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
+    <string name="share_crash_log">Поділитися журналом збоїв</string>
+    <string name="map_rendering_engine_v1">Версія 1</string>
+    <string name="map_rendering_engine">Рушій рендерингу мап</string>
+    <string name="weather_offline_forecast">Офлайн-прогноз</string>
+    <string name="shared_string_layers">Шари</string>
+    <string name="empty_screen_weather_contours">Увімкніть, щоб переглянути контури погоди на мапі.</string>
+    <string name="empty_screen_weather_pressure_layer">Увімкніть, щоб переглянути шар тиску на мапі.</string>
+    <string name="weather_plugin_description">Плагін погоди надає
+\n- 5 шарів... 24-годинний і 7-денний прогноз що 3 години
+\n- віджети на основі розташування
+\n- ізолінії температури / тиску
+\nДані про погоду надає GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_online_cache">Мережевий кеш</string>
+    <string name="weather_wind_kt">вузли</string>
+    <string name="weather_wind_kilimeters_per_hour">Кілометрів на годину</string>
+    <string name="clouds_widget_desc">Показує хмари для поточного центру мапи.</string>
+    <string name="map_settings_weather_temp">Температура</string>
+    <string name="map_settings_weather_air_pressure">Тиск повітря</string>
+    <string name="map_settings_weather_wind">Вітер</string>
+    <string name="map_settings_weather_cloud">Хмари</string>
+    <string name="map_settings_weather_precip">Опади</string>
+    <string name="shared_string_contours">Контури</string>
+    <string name="temperature_widget_desc">Показує температуру для поточного центру мапи.</string>
+    <string name="measurement_units">Одиниці вимірювання</string>
+    <string name="shared_string_weather">Погода</string>
+    <string name="empty_screen_weather_temperature_layer">Увімкніть, щоб переглянути температурний шар на мапі.</string>
+    <string name="weather_precip_mm">мм</string>
+    <string name="weather_precip_milimeters">Міліметри</string>
+    <string name="explore_weather_forecast">Дізнатися прогнозом погоди.</string>
+    <string name="empty_screen_weather_wind_layer">Увімкніть, щоб переглянути шар вітру на мапі.</string>
+    <string name="empty_screen_weather_precipitation_layer">Увімкніть, щоб переглянути шар опадів на мапі.</string>
+    <string name="empty_screen_view_selected_weather_data">Увімкніть, щоб переглянути вибрані погодні дані на мапі.</string>
+    <string name="weather_wind_mph">миль/год</string>
+    <string name="empty_screen_weather_clouds_layer">Увімкніть, щоб переглянути шар хмар на мапі.</string>
+    <string name="weather_precip_in">у</string>
+    <string name="weather_widget_group_desc">Набір віджетів, що показують різноманітні відомості про погоду.</string>
+    <string name="weather_pressure_hpa">гПа</string>
+    <string name="weather_pressure_mmhg">мм рт.ст</string>
+    <string name="weather_precip_inches">Дюйми</string>
+    <string name="wind_widget_desc">Показує швидкість вітру для поточного центру мапи.</string>
+    <string name="weather_pressure_hectopascals">Гектопаскалі</string>
+    <string name="weather_pressure_inches_of_mercury">Дюйми ртутного стовпчика</string>
+    <string name="weather_wind_kmh">км/год</string>
+    <string name="weather_wind_knots">Вузлів</string>
+    <string name="weather_wind_ms">м/с</string>
+    <string name="weather_wind_miles_per_hour">Миль на годину</string>
+    <string name="weather_wind_meters_per_second">Метри/Секунди</string>
+    <string name="weather_widgets_secondary_desc">Одиниці виміру можна змінити в налаштуваннях плагіну Погода.</string>
+    <string name="air_pressure_widget_desc">Показує атмосферний тиск для поточного центру мапи.</string>
+    <string name="precipitation_widget_desc">Показує кількість опадів для поточного центру мапи.</string>
+    <string name="weather_pressure_inhg">дюйм рт.ст</string>
+    <string name="weather_prefs_descr">24-годинний прогноз та прогноз на 7 днів що 3 години</string>
+    <string name="weather_temperature_celsius">За цельсієм</string>
+    <string name="weather_temperature_fahrenheit">За фаренгейтом</string>
+    <string name="weather_pressure_millimeters_of_mercury">Міліметри ртутного стовпчика</string>
+    <string name="action_not_supported_with_map_style">Дія не підтримується з вибраним стилем мапи.</string>
 </resources>

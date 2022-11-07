@@ -1791,7 +1791,6 @@
     <string name="osn_add_dialog_success">נוצרה הערה</string>
     <string name="osn_add_dialog_error">לא ניתן ליצור הערה.</string>
     <string name="marker_show_distance_descr">נא לבחור כיצד לציין את המרחק והכיוון לסמני המפה במפה:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">סף כיווניות מפה</string>
     <string name="all_markers_moved_to_history">כל סמני המפה הועברה להיסטוריה</string>
     <string name="marker_moved_to_history">סמן המפה הועבר להיסטוריה</string>
     <string name="marker_moved_to_active">סמן המפה הועבר למצב פעיל</string>
@@ -2245,7 +2244,6 @@
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
     <string name="one_tap_active">הפעלה ב‚נגיעה אחת’</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">ניתן לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
     <string name="index_item_depth_points_southern_hemisphere">נקודות עומק ימיות בחצי הכדור הדרומי</string>
     <string name="index_item_depth_points_northern_hemisphere">נקודות עומק ימיות בחצי הכדור הצפוני</string>
     <string name="do_not_send_anonymous_app_usage_desc">ב־OsmAnd נאסף מידע על אילו חלקים ביישומון משמשים אותך. המיקום שלך אף פעם לא נשלח, גם לא הקלט שלך ביישומון או פרטים על אזורים בהם צפית, חיפשת או הורדת.</string>
