@@ -21,8 +21,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,20 +35,16 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 	private MapActivity mapActivity;
-	private OsmandSettings settings;
-	private ApplicationMode appMode;
 	private TransportLinesMenu menu;
 
 	private View view;
 	private LayoutInflater themedInflater;
 	private boolean isShowAnyTransport;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
 		menu = new TransportLinesMenu(app);
 	}
@@ -58,10 +52,9 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		appMode = settings.getApplicationMode();
 		isShowAnyTransport = menu.isShowAnyTransport();
 
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_transport_lines, container, false);
 
@@ -75,7 +68,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 	private void setupMainToggle() {
 		setupButton(
-				app,
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_transport_bus,
 				getString(R.string.rendering_category_transport),
@@ -91,7 +83,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private void setupTransportStopsToggle() {
 		TransportType type = TransportType.TRANSPORT_STOPS;
 		setupButton(
-				app,
 				view.findViewById(R.id.transport_stops_toggle),
 				type.getIconId(),
 				menu.getTransportName(type.getAttrName()),
@@ -119,7 +110,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch, list, false);
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
-						app,
 						view,
 						menu.getTransportIcon(attrName),
 						menu.getTransportName(attrName, property.getName()),
@@ -140,8 +130,9 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
 	}
 
-	static public void setupButton(OsmandApplication app, @NonNull View view, int iconId, @NonNull String title, boolean enabled,
+	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
 	                               boolean showDivider, @Nullable OnClickListener listener) {
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);

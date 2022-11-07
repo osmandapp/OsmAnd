@@ -1,23 +1,19 @@
 package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin.DEPTH_CONTOURS;
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.DialogListItemAdapter;
@@ -31,50 +27,43 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = NauticalDepthContourFragment.class.getSimpleName();
+
 	public static final String DEPTH_CONTOUR_WIDTH = "depthContourWidth";
 	public static final String DEPTH_CONTOUR_COLOR_SCHEME = "depthContourColorScheme";
 
 	private OsmandApplication app;
-	private MapActivity mapActivity;
 	private OsmandSettings settings;
 
-	private View view;
-	private boolean nightMode;
+	private CommonPreference<Boolean> preference;
+	private final List<RenderingRuleProperty> properties = new ArrayList<>();
 
-	private CommonPreference<Boolean> pref;
-	private final List<RenderingRuleProperty> rules = new ArrayList<>();
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
-		mapActivity = (MapActivity) requireMyActivity();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
-		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
-				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
-		Iterator<RenderingRuleProperty> iterator = customRules.iterator();
-		while (iterator.hasNext()) {
-			RenderingRuleProperty property = iterator.next();
-			if (DEPTH_CONTOURS.equals(property.getAttrName())) {
-				pref = settings.getCustomRenderBooleanProperty(property.getAttrName());
-				iterator.remove();
-			} else if (property.getAttrName().startsWith(DEPTH_CONTOUR_WIDTH) ||
-					(property.getAttrName().startsWith(DEPTH_CONTOUR_COLOR_SCHEME))) {
-				rules.add(property);
+		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app);
+		for (RenderingRuleProperty property : customRules) {
+			String attrName = property.getAttrName();
+			if (DEPTH_CONTOURS.equals(attrName)) {
+				preference = settings.getCustomRenderBooleanProperty(attrName);
+			} else if (DEPTH_CONTOUR_WIDTH.equals(attrName) || DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)) {
+				properties.add(property);
 			}
 		}
 	}
@@ -82,125 +71,129 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
-		setupMainToggle();
-		setupDepthContourLinesToggles();
+		setupHeader(view);
+		setupPropertyPreferences(view);
+		updateScreenMode(view, preference.get());
 
-		updateScreenMode(pref.get());
 		return view;
 	}
 
-	private void setupMainToggle() {
+	private void setupHeader(@NonNull View view) {
 		TransportLinesFragment.setupButton(
-				app,
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_nautical_depth,
 				getString(R.string.rendering_attr_depthContours_name),
-				pref.get(),
+				preference.get(),
 				false,
 				v -> {
-					pref.set(!pref.get());
-					updateScreenMode(pref.get());
-					mapActivity.refreshMapComplete();
+					boolean enabled = !preference.get();
+					preference.set(enabled);
+					updateScreenMode(view, enabled);
+					refreshMap();
 				});
 	}
 
-	private void setupDepthContourLinesToggles() {
-		View container = view.findViewById(R.id.routes_container);
-		if (Algorithms.isEmpty(rules)) {
-			container.setVisibility(View.GONE);
-			return;
-		}
-
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		ViewGroup list = view.findViewById(R.id.nautical_toggles_list);
-		for (RenderingRuleProperty property : rules) {
-			String attrName = property.getAttrName();
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(property.getAttrName());
-			View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
-
-			int iconId = 0;
-			String title = null;
-			String descr;
-			if (attrName.equals(DEPTH_CONTOUR_WIDTH)) {
-				iconId = R.drawable.circle_background_dark;
-				title = getString(R.string.shared_string_lines_width);
-			} else if (attrName.equals(DEPTH_CONTOUR_COLOR_SCHEME)) {
-				iconId = R.drawable.ic_action_appearance;
-				title = getString(R.string.shared_string_lines_color_scheme);
-			}
-
-			if (!Algorithms.isEmpty(pref.get())) {
-				descr = AndroidUtils.getRenderingStringPropertyValue(app, pref.get());
-			} else {
-				descr = AndroidUtils.getRenderingStringPropertyValue(app, property.getDefaultValueDescription());
-			}
-			Drawable icon = getIcon(iconId, ColorUtilities.getDefaultIconColorId(nightMode));
-			ImageView ivIcon = view.findViewById(R.id.icon);
-			ivIcon.setImageDrawable(icon);
-
-			TextView tvTitle = view.findViewById(R.id.title);
-			tvTitle.setText(title);
-
-			TextView tvDesc = view.findViewById(R.id.description);
-			tvDesc.setText(descr);
-			AndroidUiHelper.updateVisibility(tvDesc, true);
-
-			View button = view.findViewById(R.id.button_container);
-			String finalTitle = title;
-			button.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View view) {
-
-					showPreferenceDialog(finalTitle, property, tvDesc, pref);
-				}
-			});
-
-			int color = settings.getApplicationMode().getProfileColor(nightMode);
-			Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
-			AndroidUtils.setBackground(view.findViewById(R.id.button_container), background);
-
-			list.addView(view);
-
-		}
-	}
-
-	private void showPreferenceDialog(String title, RenderingRuleProperty property, TextView tvDesc, CommonPreference<String> pref) {
-		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes));
-		b.setTitle(title);
-
-		String[] possibleValuesString = new String[property.getPossibleValues().length];
-
-		for (int j = 0; j < property.getPossibleValues().length; j++) {
-			possibleValuesString[j] = AndroidUtils.getRenderingStringPropertyValue(app, property.getPossibleValues()[j]);
-		}
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				possibleValuesString, nightMode, Arrays.asList(property.getPossibleValues()).indexOf(pref.get()), getMyApplication(), currentProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-
-					pref.set(property.getPossibleValues()[which]);
-					mapActivity.refreshMapComplete();
-					String description = AndroidUtils.getRenderingStringPropertyValue(mapActivity, pref.get());
-					tvDesc.setText(description);
-				}
-		);
-		b.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(b.show());
-	}
-
-	private void updateScreenMode(boolean enabled) {
+	private void updateScreenMode(@NonNull View view, boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
+	private void setupPropertyPreferences(@NonNull View view) {
+		boolean hasProperties = !Algorithms.isEmpty(properties);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.properties_container), hasProperties);
+		if (!hasProperties) {
+			return;
+		}
+		ViewGroup container = view.findViewById(R.id.nautical_properties);
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		for (RenderingRuleProperty property : properties) {
+			View propertyView = createPropertyView(property, inflater, container);
+			container.addView(propertyView);
+		}
+	}
+
+	private View createPropertyView(@NonNull RenderingRuleProperty property, @NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+		String attrName = property.getAttrName();
+		View view = inflater.inflate(R.layout.configure_screen_list_item, container, false);
+
+		ImageView icon = view.findViewById(R.id.icon);
+		TextView title = view.findViewById(R.id.title);
+		TextView description = view.findViewById(R.id.description);
+		AndroidUiHelper.updateVisibility(description, true);
+
+		CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
+		String propertyValue = Algorithms.isEmpty(pref.get()) ? property.getDefaultValueDescription() : pref.get();
+
+		icon.setImageDrawable(getPropertyIcon(attrName));
+		title.setText(AndroidUtils.getRenderingStringPropertyName(app, attrName, property.getName()));
+		description.setText(AndroidUtils.getRenderingStringPropertyValue(app, propertyValue));
+
+		View button = view.findViewById(R.id.button_container);
+		button.setOnClickListener(v -> showPreferenceDialog(property, pref, description));
+
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, getProfileColor(), 0.3f);
+		AndroidUtils.setBackground(button, background);
+		return view;
+	}
+
+	@ColorInt
+	private int getProfileColor() {
+		return settings.getApplicationMode().getProfileColor(nightMode);
+	}
+
+	private void showPreferenceDialog(@NonNull RenderingRuleProperty property,
+	                                  @NonNull CommonPreference<String> pref,
+	                                  @Nullable TextView description) {
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
+		builder.setTitle(AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName()));
+
+		String[] possibleValues = property.getPossibleValues();
+		String[] possibleValuesString = new String[possibleValues.length];
+
+		for (int i = 0; i < possibleValues.length; i++) {
+			possibleValuesString[i] = AndroidUtils.getRenderingStringPropertyValue(app, possibleValues[i]);
+		}
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(possibleValuesString,
+				nightMode, Arrays.asList(possibleValues).indexOf(pref.get()), app, getProfileColor(), themeRes, v -> {
+					int which = (int) v.getTag();
+					pref.set(possibleValues[which]);
+					refreshMap();
+
+					if (description != null) {
+						description.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
+					}
+				}
+		);
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
+	}
+
+	private void refreshMap() {
+		MapActivity mapActivity = (MapActivity) getMyActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMapComplete();
+			mapActivity.updateLayers();
+		}
+	}
+
+	private Drawable getPropertyIcon(@NonNull String attrName) {
+		switch (attrName) {
+			case DEPTH_CONTOUR_WIDTH:
+				return getContentIcon(R.drawable.circle_background_dark);
+			case DEPTH_CONTOUR_COLOR_SCHEME:
+				return getContentIcon(R.drawable.ic_action_appearance);
+			default:
+				return null;
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			manager.beginTransaction()
 					.replace(R.id.content, new NauticalDepthContourFragment(), TAG)
 					.commitAllowingStateLoss();
 		}

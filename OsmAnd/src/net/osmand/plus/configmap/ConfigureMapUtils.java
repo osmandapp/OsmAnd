@@ -1,9 +1,15 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
+import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -18,13 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
-import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
-import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 
 public class ConfigureMapUtils {
 

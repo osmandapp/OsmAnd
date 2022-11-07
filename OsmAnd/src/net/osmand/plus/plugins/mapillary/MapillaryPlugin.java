@@ -198,37 +198,38 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if(isEnabled()){
-			ItemClickListener listener = new OnRowItemClick() {
-
-				@Override
-				public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
-				                              @NonNull View view, @NonNull ContextMenuItem item) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
-				}
-
-				@Override
-				public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
-					SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
-					updateMapLayers(mapActivity, mapActivity, false);
-					item.setSelected(SHOW_MAPILLARY.get());
-					item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					uiAdapter.onDataSetChanged();
-					return false;
-				}
-			};
-
-			adapter.addItem(new ContextMenuItem(MAPILLARY)
-					.setTitleId(R.string.street_level_imagery, mapActivity)
-					.setDescription("Mapillary")
-					.setSelected(SHOW_MAPILLARY.get())
-					.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-					.setIcon(R.drawable.ic_action_mapillary)
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setItemDeleteAction(SHOW_MAPILLARY)
-					.setListener(listener));
+		if (!isEnabled()) {
+			return;
 		}
+		ItemClickListener listener = new OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+				SHOW_MAPILLARY.set(!SHOW_MAPILLARY.get());
+				updateMapLayers(mapActivity, mapActivity, false);
+				item.setSelected(SHOW_MAPILLARY.get());
+				item.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				uiAdapter.onDataSetChanged();
+				return false;
+			}
+		};
+
+		adapter.addItem(new ContextMenuItem(MAPILLARY)
+				.setTitleId(R.string.street_level_imagery, mapActivity)
+				.setDescription("Mapillary")
+				.setSelected(SHOW_MAPILLARY.get())
+				.setColor(app, SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_mapillary)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(SHOW_MAPILLARY)
+				.setListener(listener));
 	}
 
 	@Override
