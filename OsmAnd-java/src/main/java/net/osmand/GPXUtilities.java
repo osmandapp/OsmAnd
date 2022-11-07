@@ -786,14 +786,6 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class NetworkRoute extends GPXExtensions {
-		Map<String, String> routeKey;
-
-		NetworkRoute(Map<String, String> routeKey) {
-			this.routeKey = routeKey;
-		}
-	}
-
 	public static class GPXTrackAnalysis {
 
 		public String name;
@@ -1438,7 +1430,7 @@ public class GPXUtilities {
 
 		private final List<WptPt> points = new ArrayList<>();
 		private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
-		private final Map<String, String> networkRouteKey = new LinkedHashMap<>();
+		private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 		public Exception error = null;
 		public String path = "";
@@ -2119,12 +2111,12 @@ public class GPXUtilities {
 			getExtensionsToWrite().put("show_start_finish", String.valueOf(showStartFinish));
 		}
 
-		public void addRouteKey(Map<String, String> routeKey) {
-			networkRouteKey.putAll(routeKey);
+		public void addRouteKeyTags(Map<String, String> routeKey) {
+			networkRouteKeyTags.putAll(routeKey);
 		}
 
-		public Map<String, String> getRouteKey() {
-			return networkRouteKey;
+		public Map<String, String> getRouteKeyTags() {
+			return networkRouteKeyTags;
 		}
 
 		public void setRef(String ref) {
@@ -2255,22 +2247,21 @@ public class GPXUtilities {
 		return null;
 	}
 
-	private static void writeNetworkRoute(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
-		NetworkRoute networkRoute = new NetworkRoute(file.getRouteKey());
-		assignNetworkRouteExtensionWriter(networkRoute);
-		writeExtensions(serializer, networkRoute, progress);
+	private static void writeNetworkRoute(XmlSerializer serializer, GPXFile gpxFile, IProgress progress) throws IOException {
+		assignNetworkRouteExtensionWriter(gpxFile);
+		writeExtensions(serializer, gpxFile, progress);
 	}
 
-	private static void assignNetworkRouteExtensionWriter(final NetworkRoute networkRoute) {
-		if (!Algorithms.isEmpty(networkRoute.routeKey) && networkRoute.getExtensionsWriter() == null) {
-			networkRoute.setExtensionsWriter(new GPXExtensionsWriter() {
+	private static void assignNetworkRouteExtensionWriter(final GPXFile gpxFile) {
+		if (!Algorithms.isEmpty(gpxFile.networkRouteKeyTags)) {
+			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
 
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
 					StringBundle bundle = new StringBundle();
 					StringBundle tagsBundle = new StringBundle();
-					tagsBundle.putString("type", networkRoute.routeKey.get("type"));
-					for (Map.Entry<String, String> tag : networkRoute.routeKey.entrySet()) {
+					tagsBundle.putString("type", gpxFile.networkRouteKeyTags.get("type"));
+					for (Map.Entry<String, String> tag : gpxFile.networkRouteKeyTags.entrySet()) {
 						tagsBundle.putString(tag.getKey(), tag.getValue());
 					}
 					List<StringBundle> routeKeyBundle = new ArrayList<>();
@@ -2716,7 +2707,7 @@ public class GPXUtilities {
 							PointsGroup pointsGroup = PointsGroup.parsePointsGroupAttributes(parser);
 							pointsGroups.add(pointsGroup);
 						} else if (networkRoute && tagName.equals("route_key")) {
-							gpxFile.networkRouteKey.putAll(parseRouteKeyAttributes(parser));
+							gpxFile.networkRouteKeyTags.putAll(parseRouteKeyAttributes(parser));
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -3052,11 +3043,11 @@ public class GPXUtilities {
 		StringBundleXmlReader reader = new StringBundleXmlReader(parser);
 		reader.readBundle();
 		StringBundle bundle = reader.getBundle();
-		if(!bundle.getMap().isEmpty()){
-			for(Map.Entry<String, StringBundle.Item<?>> entry : bundle.getMap().entrySet()){
-				if(entry.getValue().getType() == StringBundle.ItemType.STRING) {
-					String key = entry.getValue().getName();
-					String value = (String) entry.getValue().getValue();
+		if (!bundle.isEmpty()) {
+			for (StringBundle.Item<?> item : bundle.getMap().values()) {
+				if (item.getType() == StringBundle.ItemType.STRING) {
+					String key = item.getName();
+					String value = (String) item.getValue();
 					networkRouteKey.put(key, value);
 				}
 			}

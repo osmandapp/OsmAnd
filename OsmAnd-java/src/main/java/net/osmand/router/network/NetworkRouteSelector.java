@@ -674,7 +674,7 @@ public class NetworkRouteSelector {
 		}
 		System.out.println(String.format("Segments size %d: %s", track.segments.size(), sizes.toString()));
 		gpxFile.tracks.add(track);
-		gpxFile.addRouteKey(routeKey.toGpx());
+		gpxFile.addRouteKeyTags(routeKey.tagsToGpx());
 		return gpxFile;
 	}
 
@@ -772,13 +772,13 @@ public class NetworkRouteSelector {
 			return getValue("wikipedia");
 		}
 
-		public static RouteKey fromGpx(Map<String, String> networkRouteKey) {
-			String type = networkRouteKey.get(NETWORK_ROUTE_TYPE);
-			if(!Algorithms.isEmpty(type)) {
+		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {
+			String type = networkRouteKeyTags.get(NETWORK_ROUTE_TYPE);
+			if (!Algorithms.isEmpty(type)) {
 				RouteType routeType = RouteType.getByTag(type);
-				if(routeType!=null) {
+				if (routeType != null) {
 					RouteKey routeKey = new RouteKey(routeType);
-					for(Map.Entry<String, String> tag : networkRouteKey.entrySet()){
+					for (Map.Entry<String, String> tag : networkRouteKeyTags.entrySet()) {
 						routeKey.addTag(tag.getKey(), tag.getValue());
 					}
 					return routeKey;
@@ -787,7 +787,7 @@ public class NetworkRouteSelector {
 			return null;
 		}
 
-		public Map<String, String> toGpx() {
+		public Map<String, String> tagsToGpx() {
 			Map<String, String> networkRouteKey = new HashMap<>();
 			networkRouteKey.put(NETWORK_ROUTE_TYPE, type.tag);
 			for (String tag : tags) {
