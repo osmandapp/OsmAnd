@@ -183,6 +183,10 @@ public class StringBundle {
 		return Collections.unmodifiableMap(map);
 	}
 
+	public boolean isEmpty() {
+		return map.isEmpty();
+	}
+
 	public Item<?> getItem(String key) {
 		return map.get(key);
 	}
