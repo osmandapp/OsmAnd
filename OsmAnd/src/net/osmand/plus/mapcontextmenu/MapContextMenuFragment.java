@@ -767,7 +767,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private List<TransportStopRoute> filterTransportRoutes(List<TransportStopRoute> routes) {
 		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
 		for (TransportStopRoute route : routes) {
-			if (!containsRef(filteredRoutes, route.route)) {
+			if (!containsRef(filteredRoutes, route)) {
 				filteredRoutes.add(route);
 			}
 		}
@@ -781,16 +781,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
 		for (TransportStopRoute route : nearbyFilteredTransportStopRoutes) {
-			if (!containsRef(filterFromRoutes, route.route)) {
+			if (!containsRef(filterFromRoutes, route)) {
 				filteredRoutes.add(route);
 			}
 		}
 		return filteredRoutes;
 	}
 
-	private boolean containsRef(List<TransportStopRoute> routes, TransportRoute transportRoute) {
+	private boolean containsRef(List<TransportStopRoute> routes, TransportStopRoute transportRoute) {
 		for (TransportStopRoute route : routes) {
-			if (route.route.getRef().equals(transportRoute.getRef())) {
+			if (route.type == transportRoute.type && route.route.getRef().equals(transportRoute.route.getRef())) {
 				return true;
 			}
 		}
