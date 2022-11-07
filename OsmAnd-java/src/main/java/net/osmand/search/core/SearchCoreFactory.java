@@ -394,8 +394,7 @@ public class SearchCoreFactory {
 		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
 				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
-				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase.getUnknownSearchPhrase(), nphrase.getSettings());
-				newPhrase.file = res.file;
+				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
 				newPhrase.getSettings().setOriginalLocation(res.location);
 				poiApi.search(newPhrase, resultMatcher);
 			}
@@ -583,7 +582,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			QuadRect bbox = phrase.file != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
@@ -652,9 +651,10 @@ public class SearchCoreFactory {
 						}
 					}, rawDataCollector);
 			
-			if (phrase.file != null) {
-				phrase.file.searchPoiByName(req);
-				resultMatcher.apiSearchRegionFinished(this, phrase.file, phrase);
+			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
+			if (fileRequest != null) {
+				fileRequest.searchPoiByName(req);
+				resultMatcher.apiSearchRegionFinished(this, fileRequest, phrase);
 			} else {
 				while (offlineIterator.hasNext()) {
 					BinaryMapIndexReader r = offlineIterator.next();
