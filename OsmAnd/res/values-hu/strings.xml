@@ -2340,7 +2340,6 @@
     <string name="date_added">Hozzáadva</string>
     <string name="order_by">Rendezés alapja:</string>
     <string name="marker_show_distance_descr">Válassza ki, hogyan jelenjék meg a térképen a térképjelölők távolsága és iránya:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Válassza ki, mekkora sebesség alatt váltson a térkép forgatása „Haladási irány”-ról „Iránytű”-re.</string>
     <string name="all_markers_moved_to_history">Minden térképjelölő áthelyezve az előzményekbe</string>
     <string name="marker_moved_to_history">Térképjelölő áthelyezve az előzményekhez</string>
     <string name="shared_string_list">Lista</string>
@@ -2376,7 +2375,6 @@
     <string name="route_is_calculated">Útvonal kiszámítva</string>
     <string name="round_trip">Körtúra</string>
     <string name="plan_route_no_markers_toast">A funkció használatához legalább egy jelölőt hozzá kell adnia.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Térképforgatást kiváltó küszöbérték</string>
     <string name="marker_moved_to_active">Térképjelölő áthelyezve az aktívakhoz</string>
     <string name="move_all_to_history">Összes áthelyezése az előzményekbe</string>
     <string name="save_as_route_point">Mentés útvonalpontokként</string>
@@ -4726,7 +4724,6 @@
     <string name="compass_always_visible">Mindig látható</string>
     <string name="compass_click_desc">Koppintson az iránytűre a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak szélessége</string>
     <string name="time_to_destination_widget_desc">A widget megjeleníti az „Érkezési időt” vagy az utolsó célpontig „Hátralévő időt”. A navigáció során az idő folyamatosan frissül, és megegyezik (a jelenlegi helytől számítva) az útvonal idejével.</string>
@@ -4736,7 +4733,6 @@
     <string name="av_notes_audio_widget_desc">A widgetre koppintva hangjegyzetet készíthet.</string>
     <string name="av_notes_photo_widget_desc">A widgetre koppintva fényképet készíthet.</string>
     <string name="av_notes_video_widget_desc">A widgetre koppintva videofelvételt indíthat.</string>
-    <string name="rendering_attr_depthContourWidth_name">Mélységvonalak szélessége</string>
     <string name="duplacate_widget_added_snackbar">Egy ismétlődő widget lesz hozzáadva a listához.</string>
     <string name="second_marker_widget_desc">Beállíthatja a widgetet úgy, hogy a második térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
     <string name="first_marker_widget_desc">Beállíthatja a widgetet úgy, hogy az első térképjelölőig hátralévő távolságot vagy becsült érkezési időt mutassa.</string>
@@ -4866,7 +4862,7 @@
 \n
 \n</string>
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
-    <string name="show_borders_of_downloaded_maps">Keretek a letöltött térképek körül</string>
+    <string name="show_borders_of_downloaded_maps">Letöltött térképek keretének megjelenítése</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>

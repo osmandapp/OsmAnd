@@ -2148,8 +2148,6 @@
     <string name="marker_moved_to_active">Oznaka karte je premeštena u aktivne</string>
     <string name="marker_moved_to_history">Oznake karte su premeštene u istoriju</string>
     <string name="all_markers_moved_to_history">Sve oznake karte su premeštene u istoriju</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Ispod izaberite kojom brzinom će promena usmerenja preći iz „u pravcu kretanja“ na „po pravcu kompasa“.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Zadrška usmerenja karte</string>
     <string name="marker_show_distance_descr">Izaberite kako ukazati na rastojanje i pravac ka oznakama karte na karti:</string>
     <string name="order_by">Rasporedi po:</string>
     <string name="date_added">Dodato</string>

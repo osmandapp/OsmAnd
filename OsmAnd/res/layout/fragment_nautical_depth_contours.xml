@@ -29,7 +29,7 @@
 
 		</FrameLayout>
 
-		<!--Empty screen, when public transport disabled-->
+		<!--Empty screen, when nautical depth contours disabled-->
 		<FrameLayout
 			android:id="@+id/empty_screen"
 			android:layout_width="match_parent"
@@ -50,7 +50,7 @@
 					android:layout_height="@dimen/icon_size_double"
 					android:layout_gravity="center"
 					android:layout_marginVertical="@dimen/content_padding"
-					android:src="@drawable/mm_amenity_bus_station"
+					android:src="@drawable/ic_action_nautical_depth"
 					android:tint="?attr/default_icon_color" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -59,14 +59,14 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:gravity="center"
-					android:text="@string/turn_on_public_transport_description"
+					android:text="@string/turn_on_nautical_depth_description"
 					android:textColor="?android:textColorSecondary" />
 
 			</LinearLayout>
 
 		</FrameLayout>
 
-		<!--Normal screen, when public transport enabled-->
+		<!--Normal screen, when public nautical depth contours enabled-->
 		<LinearLayout
 			android:id="@+id/normal_screen"
 			android:layout_width="match_parent"
@@ -75,47 +75,27 @@
 
 			<include layout="@layout/list_item_divider" />
 
-			<FrameLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="?attr/list_background_color">
-
-				<include
-					android:id="@+id/transport_stops_toggle"
-					layout="@layout/bottom_sheet_item_with_switch" />
-
-			</FrameLayout>
-
 			<LinearLayout
-				android:id="@+id/routes_container"
+				android:id="@+id/properties_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
 				android:orientation="vertical">
 
-				<include layout="@layout/list_item_divider" />
-
-				<LinearLayout
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/TitleStyle.Medium"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/list_background_color"
-					android:orientation="vertical">
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:layout_marginVertical="@dimen/content_padding_small"
+					android:text="@string/depth_contour_lines"
+					android:textColor="?android:textColorPrimary" />
 
-					<net.osmand.plus.widgets.TextViewEx
-						style="@style/TitleStyle.Medium"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginHorizontal="@dimen/content_padding"
-						android:layout_marginVertical="@dimen/content_padding_small"
-						android:text="@string/transport_Routes"
-						android:textColor="?android:textColorPrimary" />
-
-					<LinearLayout
-						android:id="@+id/transport_toggles_list"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:orientation="vertical" />
-
-				</LinearLayout>
+				<LinearLayout
+					android:id="@+id/nautical_properties"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
 
 			</LinearLayout>
 

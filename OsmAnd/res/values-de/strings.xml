@@ -2504,8 +2504,6 @@
     <string name="show_passed">Passierte anzeigen</string>
     <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Entfernungs- und Richtungsangabe für Kartenmarkierungen in der Karte:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Hinweis konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Hinweis ändern</string>
@@ -4743,10 +4741,8 @@
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Ausgewiesene Mountainbikestrecken anzeigen.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Farbschema der Tiefenlinien</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farbschema der Tiefenlinien</string>
     <string name="rendering_attr_depthContourWidth_description">Breite der Tiefenlinie</string>
-    <string name="rendering_attr_depthContourWidth_name">Breite der Tiefenlinie</string>
     <string name="distance_to_destination_widget_desc">Das Widget zeigt die verbleibende Entfernung zum letzten Zielpunkt an.</string>
     <string name="second_next_turn_widget_desc">Das Widget zeigt Informationen über Ihre zweitnächste Abbiegung an, die aktiviert wird, wenn sich die Abbiegung in unmittelbarer Nähe befindet.</string>
     <string name="next_turn_widget_desc">Das Widget zeigt Informationen zu Ihrer nächsten Abbiegung an, mit einem Bild des Manövers und entsprechender Entfernungsangabe.</string>
@@ -4876,7 +4872,7 @@
 \n • Option zum Deaktivieren der Download-UUID hinzugefügt
 \n
 \n</string>
-    <string name="show_borders_of_downloaded_maps">Einfärbung der heruntergeladenen Karten</string>
+    <string name="show_borders_of_downloaded_maps">Grenzen von heruntergeladenen Karten anzeigen</string>
     <string name="show_map_symbols">Kartensymbole anzeigen</string>
     <string name="show_map_symbols_desc">Text, Verkehrszeichen und andere.</string>
     <string name="rendering_engine_failed_descr">OsmAnd ist zur \'Version 1\' der Kartendarstellung zurückgekehrt. Sie können versuchen, in den Einstellungen wieder auf die neue \"Version 2 (OpenGL)\"-Rendering-Engine umzuschalten.
@@ -4891,4 +4887,57 @@
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">Version 2 (OpenGL) ist die schnellere Karten-Rendering-Engine mit 2.5D-Ansicht. Das Rendering von Version 1 war vor Release 4.3 der Standard und ist für ältere Geräte immer noch vorzuziehen.</string>
     <string name="map_rendering_engine">Karten-Rendering-Engine</string>
+    <string name="weather_offline_forecast">Offline-Vorhersage</string>
+    <string name="weather_online_cache">Online-Zwischenspeicher</string>
+    <string name="map_settings_weather_temp">Temperatur</string>
+    <string name="map_settings_weather_air_pressure">Luftdruck</string>
+    <string name="map_settings_weather_wind">Wind</string>
+    <string name="map_settings_weather_precip">Niederschlag</string>
+    <string name="map_settings_weather_cloud">Bewölkung</string>
+    <string name="empty_screen_weather_pressure_layer">Aktivieren, um Luftdruck auf der Karte anzuzeigen.</string>
+    <string name="explore_weather_forecast">Wettervorhersage entdecken.</string>
+    <string name="empty_screen_weather_clouds_layer">Aktivieren, um Bewölkung auf der Karte anzuzeigen.</string>
+    <string name="empty_screen_weather_wind_layer">Aktivieren, um die Wind-Ebene auf der Karte anzuzeigen.</string>
+    <string name="empty_screen_weather_temperature_layer">Aktivieren, um die Temperatur-Ebene auf der Karte anzuzeigen.</string>
+    <string name="empty_screen_view_selected_weather_data">Aktivieren, um ausgewählte Wetterdaten auf der Karte anzuzeigen.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Zoll</string>
+    <string name="weather_precip_milimeters">Millimeter</string>
+    <string name="weather_wind_kt">kn</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Knoten</string>
+    <string name="weather_wind_miles_per_hour">Meilen pro Stunde</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometer pro Stunde</string>
+    <string name="weather_wind_meters_per_second">Meter/Sekunde</string>
+    <string name="weather_widgets_secondary_desc">Die Maßeinheiten können in den Einstellungen des Wetter-Plugins geändert werden.</string>
+    <string name="air_pressure_widget_desc">Zeigt den Luftdruck für die aktuelle Kartenmitte an.</string>
+    <string name="clouds_widget_desc">Zeigt die Bewölkung für die aktuelle Kartenmitte an.</string>
+    <string name="wind_widget_desc">Zeigt die Windgeschwindigkeit für die aktuelle Kartenmitte an.</string>
+    <string name="weather_widget_group_desc">Eine Reihe von Widgets mit verschiedenen Wetterinformationen.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hektopascal</string>
+    <string name="weather_pressure_inches_of_mercury">Zoll Quecksilbersäule</string>
+    <string name="weather_pressure_millimeters_of_mercury">Millimeter Quecksilbersäule</string>
+    <string name="weather_prefs_descr">24h stündliche Vorhersage &amp; 7 Tage Vorhersage alle 3 Stunden</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Aktion wird bei gewähltem Kartenstil nicht unterstützt.</string>
+    <string name="measurement_units">Maßeinheiten</string>
+    <string name="weather_plugin_description">Wetter-Plugin bietet
+\n- 5 Ebenen ... 24-Stunden-Vorhersage &amp; 7-Tage-Vorhersage alle 3 Stunden
+\n- Standortbasierte Widgets
+\n- Temperatur-/Luftdruck-Isolinien
+\nWetterdaten werden bereitgestellt von GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="shared_string_weather">Wetter</string>
+    <string name="shared_string_layers">Ebenen</string>
+    <string name="shared_string_contours">Konturen</string>
+    <string name="empty_screen_weather_contours">Aktivieren, um Wetterkonturen auf der Karte anzuzeigen.</string>
+    <string name="empty_screen_weather_precipitation_layer">Aktivieren, um die Niederschlags-Ebene auf der Karte anzuzeigen.</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="precipitation_widget_desc">Zeigt den Niederschlag für die aktuelle Kartenmitte an.</string>
+    <string name="temperature_widget_desc">Zeigt die Temperatur für die aktuelle Kartenmitte an.</string>
+    <string name="weather_pressure_inhg">inHg</string>
 </resources>

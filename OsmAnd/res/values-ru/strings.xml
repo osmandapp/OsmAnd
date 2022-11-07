@@ -2368,8 +2368,6 @@
     <string name="date_added">Добавлено</string>
     <string name="order_by">Критерий сортировки:</string>
     <string name="marker_show_distance_descr">Выберите способ указания расстояния и направления до маркеров на карте:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите скорость, при которой ориентация по направлению движения переключится на ориентацию по компасу.</string>
     <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
     <string name="marker_moved_to_history">Маркер перемещён в историю</string>
     <string name="marker_moved_to_active">Маркер перемещён в действующие</string>
@@ -4758,9 +4756,7 @@
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажмите на компас, чтобы переключить режим ориентации карты.</string>
     <string name="compass_desc">Показывает направление на север.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
-    <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
     <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>
@@ -4946,6 +4942,6 @@
 \n- 5 слоев... почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа;
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
-\nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="rotate_map_none_rotated_opt">фиксированная (повернутая вручную)</string>
 </resources>

@@ -2463,8 +2463,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="import_track">Inportatu GPX fitxategia</string>
     <string name="import_track_desc">%1$s fitxategiak ez du bide-punturik, inportatu lorratz gisa?</string>
     <string name="move_point">Mugitu puntua</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Maparen orientazioaren atalasea</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">"Hautatu maparen orientazioa  \'barne ipar-orratza\' eta ez \'mugimenduaren norabidea\'-ren arabera erabakitzeko abiadura."</string>
     <string name="all_markers_moved_to_history">Markatzaile guztiak historialera mugituta</string>
     <string name="marker_moved_to_history">Mapa-markatzailea historialera eraman da</string>
     <string name="marker_moved_to_active">Mapa-markatzailea aktibora eraman da</string>
@@ -4585,11 +4583,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="compass_always_visible">Beti ikusgai</string>
     <string name="compass_click_desc">Sakatu iparrorratza maparen orientazio modua aldatzeko.</string>
     <string name="compass_desc">Iparraldeko norabidea erakusten du.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Sakonerako sestra-marren kolore-eskema</string>
     <string name="rendering_attr_depthContourColorScheme_description">Sakonerako sestra-marren kolore-eskema</string>
     <string name="rendering_attr_depthContourWidth_description">Sakonerako sestra-marren zabalera</string>
     <string name="next_turn_widget_desc">Widget-ak hurrengo birari buruzko informazioa erakusten du maniobraren argazkiarekin eta harako distantziarekin.</string>
-    <string name="rendering_attr_depthContourWidth_name">Sakonerako sestra-marren zabalera</string>
     <string name="accessibility_2d_view_on">2.5D ikuspegia aktibatuta</string>
     <string name="download_complete">Deskarga burutu da</string>
     <string name="connect_with_straight_line">Konektatu lerro zuzenean</string>

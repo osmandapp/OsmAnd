@@ -2474,8 +2474,6 @@
     <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
     <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на мапе:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з \"Напрамку руху\" на \"Па компасе\".</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
     <string name="marker_moved_to_history">Адзнака мапы перамешчаная ў гісторыю</string>
     <string name="marker_moved_to_active">Адзнака мапы стала актыўнай</string>
@@ -4765,9 +4763,7 @@
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
     <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
-    <string name="rendering_attr_depthContourWidth_name">Шырыня контурных ліній глыбіні</string>
     <string name="compass_desc">Паказвае кірунак на поўнач.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
     <string name="without_profiles_changing">Без змены профіляў</string>

@@ -4382,10 +4382,8 @@
     <string name="trip_recording_duration_widget_desc">显示轨迹记录时间，即当前记录行程的分钟/小时持续时间。</string>
     <string name="trip_recording_distance_widget_desc">显示当前记录的行程距离。</string>
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
-    <string name="rendering_attr_depthContourColorScheme_name">等深线的配色方案</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
-    <string name="rendering_attr_depthContourWidth_name">等深线宽度</string>
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">您可以通过点击小部件来切换模式。</string>
     <string name="side_marker_eta">预计到达时间</string>
@@ -4475,8 +4473,6 @@
 \n在“探索”→“选项”中始终可用。</string>
     <string name="subsequent_dest_description">向上移动目的地，并创建它</string>
     <string name="marker_save_as_track_descr">将您的标记导出到以下 GPX 文件：</string>
-    <string name="map_orientation_change_in_accordance_with_speed">地图方向阈值</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">从下方的“移动方向”到“指南针方向”选择切换方向的速度。</string>
     <string name="marker_moved_to_history">地图标记已移至历史记录</string>
     <string name="marker_moved_to_active">地图标记已移至活动</string>
     <string name="live_monitoring_max_interval_to_send_desrc">指定一段缓冲时间保留位置，以在无连接的情况下发送</string>

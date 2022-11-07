@@ -167,8 +167,6 @@
     <string name="date_added">Ավելացված է</string>
     <string name="order_by">Դասավորել ըստ:</string>
     <string name="marker_show_distance_descr">Ընտրեք, թե ինչպես ցույց տա քարտեզի վրա մարկերները քարտեզագրելու հեռավորությունը եւ ուղղությունը:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Քարտեզի կողմնորոշման շեմը</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Ընտրեք, թե ինչ արագության հասնելուց քարտեզի կողմնորոշումը կպոխվի \"Շարժման ուղղություն\" դեպի «Կողմնացույց»։</string>
     <string name="all_markers_moved_to_history">Բոլոր Մարկերները տեղափոխվել են պատմություն</string>
     <string name="marker_moved_to_history">Քարտեզի Մարկերները տեղափոխվել են պատմություն</string>
     <string name="marker_moved_to_active">Քարտեզի Մարկերները տեղափոխվեցին ակտիվ</string>

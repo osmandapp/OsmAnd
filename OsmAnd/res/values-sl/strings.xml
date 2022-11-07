@@ -2487,7 +2487,6 @@
     <string name="coordinate_input">Vpis koordinat</string>
     <string name="move_to_history">Premakni v zgodovino</string>
     <string name="group_will_be_removed_after_restart">Skupina bo odstranjena ob ponovnem zagonu programa.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
     <string name="all_markers_moved_to_history">Vse označbe zemljevida so premaknjene med zgodovino</string>
     <string name="marker_moved_to_history">Označbe zemljevida so premaknjene med zgodovino</string>
     <string name="osn_modify_dialog_error">Sporočila ni mogoče spremeniti.</string>
@@ -2560,7 +2559,6 @@
     <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se preklopi prikaz gumbov in gradnikov.</string>
     <string name="import_gpx_file_description">je lahko uvožen med priljubljene točke, ali kot datoteka sledi.</string>
     <string name="marker_show_distance_descr">Izberi, kako označiti razdaljo in smer do oznak zemljevida na zemljevidu:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Spodaj izberi hitrost, pri kateri se usmerjenost preklopi iz »smeri gibanja« na »smer kompasa«.</string>
     <string name="what_is_here">Kaj je tu:</string>
     <string name="parked_at">parkirano</string>
     <string name="pick_up_till">Odpelji do</string>
@@ -4738,7 +4736,6 @@
     <string name="first_marker_widget_desc">Gradnik lahko nastaviš tako, da prikaže ali razdaljo ali predvideni čas prihoda do prve oznake na zemljevidu.</string>
     <string name="second_marker_widget_desc">Gradnik lahko nastaviš tako, da prikaže ali razdaljo ali predvideni čas prihoda do druge oznake na zemljevidu.</string>
     <string name="time_to_destination_widget_desc">Gradnik prikazuje »Čas prihoda« ali »Čas potovanja« do zadnje ciljne točke. Čas se med navigacijo nenehno posodablja in je enak času poti od trenutne lokacije.</string>
-    <string name="rendering_attr_depthContourWidth_name">Širina izobat</string>
     <string name="rendering_attr_depthContourWidth_description">Širina izobat (črt za globino)</string>
     <string name="time_to_intermediate_widget_desc">Gradnik prikazuje »Čas prihoda« ali »Čas potovanja« do prve vmesne točke. Čas se med navigacijo stalno posodablja, ko gremo čez vmesno točko, se čas posodobi do naslednje vmesne točke.</string>
     <string name="distance_to_intermediate_widget_desc">Gradnik prikazuje preostalo razdaljo do prve vmesne točke. Ko gremo mimo vmesne točke, se razdalja posodobi do naslednje vmesne točke.</string>
@@ -4751,7 +4748,6 @@
     <string name="compass_visible_if_map_rotated">Viden, če je zemljevid obrnjen</string>
     <string name="compass_always_visible">Vedno viden</string>
     <string name="compass_desc">Kaže smer proti severu.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Barvna shema izobat</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barvna shema izobat (črt za globino)</string>
     <string name="connect_with_straight_line">Poveži z ravno črto</string>
     <string name="attach_roads_warning">Na ceste lahko prilepiš samo posneto sled.</string>

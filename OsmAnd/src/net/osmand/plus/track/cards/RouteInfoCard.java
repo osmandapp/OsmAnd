@@ -48,30 +48,17 @@ public class RouteInfoCard extends MapBaseCard {
 		RouteKey routeKey = this.routeKey;
 		String tag = routeKey.type.getTag();
 
-		String networkTag = routeKey.getValue("network");
+		String networkTag = routeKey.getNetwork();
 		if (!Algorithms.isEmpty(networkTag)) {
 			String network = getStringByProperty(app, "poi_route_" + tag + "_" + networkTag + "_poi");
 			addInfoRow(container, network != null ? network : networkTag, app.getString(R.string.poi_network));
 		}
 		String routeType = getActivityTypeStringPropertyName(app, tag, capitalizeFirstLetterAndLowercase(tag));
 		addInfoRow(container, routeType, app.getString(R.string.layer_route));
-
-		String operatorTag = routeKey.getValue("operator");
-		if (!Algorithms.isEmpty(operatorTag)) {
-			addInfoRow(container, operatorTag, app.getString(R.string.poi_operator));
-		}
-		String symbolTag = routeKey.getValue("symbol");
-		if (!Algorithms.isEmpty(symbolTag)) {
-			addInfoRow(container, symbolTag, app.getString(R.string.shared_string_symbol));
-		}
-		String websiteTag = routeKey.getValue("website");
-		if (!Algorithms.isEmpty(websiteTag)) {
-			addInfoRow(container, websiteTag, app.getString(R.string.website), true);
-		}
-		String wikipediaTag = routeKey.getValue("wikipedia");
-		if (!Algorithms.isEmpty(wikipediaTag)) {
-			addInfoRow(container, wikipediaTag, app.getString(R.string.shared_string_wikipedia));
-		}
+		addInfoRow(container, routeKey.getOperator(), app.getString(R.string.poi_operator));
+		addInfoRow(container, routeKey.getSymbol(), app.getString(R.string.shared_string_symbol));
+		addInfoRow(container, routeKey.getWebsite(), app.getString(R.string.website), true);
+		addInfoRow(container, routeKey.getWikipedia(), app.getString(R.string.shared_string_wikipedia));
 	}
 
 	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description) {
@@ -79,6 +66,9 @@ public class RouteInfoCard extends MapBaseCard {
 	}
 
 	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description, boolean needLinks) {
+		if (Algorithms.isEmpty(text)) {
+			return;
+		}
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
 

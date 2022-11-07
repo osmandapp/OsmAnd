@@ -107,7 +107,6 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 		return devicesHelper.getDevices();
 	}
 
-	@Nullable
 	@Override
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		for (CommonDevice<?> device : devicesHelper.getDevices()) {

@@ -21,7 +21,11 @@
     <string name="shared_string_sunrise">Sunrise</string>
     <string name="map_widget_group_sunrise_sunset_desc">Widgets show information about next sunrise and sunset.</string>
     <string name="map_widget_group_sunrise_sunset">Sunrise, sunset</string>
-    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers...  24h hourly forecast &amp; 7 days forecast each 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Lines color scheme</string>
+    <string name="rendering_attr_depthContourWidth_name">Lines width</string>
+    <string name="depth_contour_lines">Depth contour lines</string>
+    <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on map.</string>
+    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers…  a 24h hour forecast &amp; 7 day forecast every 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -44,7 +48,7 @@
     <string name="weather_precip_in">in</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Inches</string>
-    <string name="weather_precip_milimeters">Milimeters</string>
+    <string name="weather_precip_milimeters">Millimeters</string>
     <string name="weather_wind_kt">kt</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_kmh">km/h</string>
@@ -53,7 +57,7 @@
     <string name="weather_wind_miles_per_hour">Miles per hour</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometers per hour</string>
     <string name="weather_wind_meters_per_second">Meters/Second</string>
-    <string name="weather_widgets_secondary_desc">Measurement units could be changed in Weather plugin settings.</string>
+    <string name="weather_widgets_secondary_desc">Measurement units can be changed in the Weather plugin settings.</string>
     <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
     <string name="clouds_widget_desc">Shows clouds for current map center.</string>
     <string name="wind_widget_desc">Shows wind speed for current map center.</string>
@@ -66,10 +70,10 @@
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">24h hourly forecast &amp; 7 days forecast each 3 hours</string>
+    <string name="weather_prefs_descr">24h hour &amp; 7 day forecast, updated every 3 hours</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Action is not supported with selected map style.</string>
+    <string name="action_not_supported_with_map_style">Action is not supported by selected map style.</string>
     <string name="rendering_engine_failed_descr">OsmAnd has reverted to \'Version 1\' map rendering. You can try to switch back to the new \'Version 2 (OpenGL)\' rendering engine in the Settings.\n\nPlease support improvements by providing your error log.</string>
     <string name="rendering_engine_failed">OsmAnd\'s map rendering has recently crashed.</string>
     <string name="share_crash_log">Share crash log</string>
@@ -78,7 +82,7 @@
     <string name="restart_now">Restart now</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is the faster map rendering engine also featuring 2.5D view. Version 1 rendering was the default before release 4.3, and is still preferable for older devices.</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) is the faster map rendering engine also featuring 2.5D view. Version 1 rendering was the default before OsmAnd 4.3, and is still preferable for older devices.</string>
     <string name="map_rendering_engine">Map rendering engine</string>
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
@@ -119,7 +123,7 @@
     <string name="terms_of_service_desc">By Downloading maps you agree to the %1$s and %2$s.</string>
     <string name="shared_string_terms_of_use">Terms Of Use</string>
     <string name="favorites_backup">Favorites backup</string>
-    <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/Web) at no additional cost.</string>
+    <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
     <string name="ant_widgets">ANT+ widgets</string>
@@ -128,7 +132,7 @@
     <string name="ant_go_to_store">Go to Store</string>
     <string name="ant_read_data">Read data</string>
     <string name="ant_write_to_gpx">Write data to track</string>
-    <string name="ant_heart_rate_write_gpx_desc">Write Heart Rate to track</string>
+    <string name="ant_heart_rate_write_gpx_desc">Include heart rate in track</string>
     <string name="map_widget_ant_heart_rate">Heart Rate</string>
     <string name="map_widget_ant_heart_rate_desc">Shows user\'s heart rate during a given activity in real-time</string>
     <string name="map_widget_ant_bicycle_power">Bicycle Power</string>
@@ -150,8 +154,8 @@
     <string name="map_widget_camera_distance">Camera elevation</string>
     <string name="map_widget_camera_tilt">Camera tilt</string>
     <string name="developer_widgets">Developer widgets</string>
-    <string name="quick_action_map_center_widget_descr">A toggle to show or hide the Map center widget on the map.</string>
-    <string name="quick_action_current_location_widget_descr">A toggle to show or hide the Current location widget on the map.</string>
+    <string name="quick_action_map_center_widget_descr">A toggle to show or hide the map center widget on the map.</string>
+    <string name="quick_action_current_location_widget_descr">A toggle to show or hide the current location widget on the map.</string>
     <string name="coordinates_widget_map_center_desc">Widget shows the geographic coordinates of current map center</string>
     <string name="coordinates_widget_current_location_desc">Widget shows the geographic coordinates of current geo-location</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>
@@ -218,12 +222,10 @@
     <string name="compass_always_visible">Always visible</string>
     <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
-    <string name="rendering_attr_depthContourWidth_name">Depth contour line width</string>
-    <string name="accessibility_2d_view_off">2.5D view Off</string>
-    <string name="accessibility_2d_view_on">2.5D view On</string>
+    <string name="accessibility_2d_view_off">2.5D view off</string>
+    <string name="accessibility_2d_view_on">2.5D view on</string>
     <string name="download_complete">Download complete</string>
     <string name="routing_attr_goods_restrictions_name">Goods delivery</string>
     <string name="routing_attr_goods_restrictions_description">Consider access permissions for light goods vehicles (goods)</string>
@@ -304,7 +306,7 @@
     <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
     <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
     <string name="parking_widget_desc">Widget that shows distance from your screen center to the parking place.</string>
-    <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level-Imagery.</string>
+    <string name="mapillary_widget_desc">Widget that provides quick access to Mapillary app to add Street-Level imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
     <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
     <string name="current_time_widget_desc">Shows current time from your device.</string>
@@ -318,7 +320,7 @@
     <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
     <string name="lanes_widgets_desc">Lanes widget shows the current road lanes layout and highlights lanes to drive with active navigation.</string>
     <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
-    <string name="street_name_widget_desc">Street name widget shows current street name with straight location arrow or next street name with the maneuver that has to be completed.</string>
+    <string name="street_name_widget_desc">The Street name widget shows current street name with straight location arrow or next street name with the maneuver that has to be completed.</string>
     <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="av_def_action_choose">On request</string>
@@ -328,7 +330,7 @@
     <string name="navigation_points">Navigation points</string>
     <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="route_maneuvers">Route maneuvers</string>
-    <string name="get_altitude_information">Get Altitude information</string>
+    <string name="get_altitude_information">Get altitude information</string>
     <string name="calculating_altitude">Calculating altitude</string>
     <string name="calculate_online">Calculate online</string>
     <string name="track_attach_to_the_roads_descr">Track will be attached to the road using offline maps, track geometry will be changed.</string>
@@ -876,7 +878,7 @@
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
     <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
-    <string name="app_restart_required">Application restart required to apply some settings.</string>
+    <string name="app_restart_required">App restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
     <string name="track_recording_description">Stop recording?\nAll unsaved data will be lost.</string>
     <string name="track_recording_title">Track recording stopped</string>
@@ -1210,7 +1212,7 @@
     <string name="speed_cameras_alert">Speed cameras alerts in some countries is prohibited by the law.</string>
     <string name="shared_string_uninstall">Uninstall</string>
     <string name="keep_active">Keep active</string>
-    <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning applications is prohibited by law.
+    <string name="speed_cameras_legal_descr">In some countries or regions, the use of speed camera warning apps is prohibited by law.
         \n\nYou need to make a choice depending on the law of your country.
         \n\nSelect %1$s and you will receive alerts and warnings about speed cameras.
         \n\nSelect %2$s. All data related to speed cameras: alerts, notifications, POIs will be deleted until OsmAnd is completely reinstalled.</string>
@@ -2282,8 +2284,6 @@
     <string name="date_added">Added</string>
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
     <string name="marker_moved_to_history">Map marker moved to history</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>

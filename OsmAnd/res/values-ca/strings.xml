@@ -2458,8 +2458,6 @@
     <string name="move_all_to_history">Mou tot a l\'historial</string>
     <string name="show_direction">Indicació de la distància</string>
     <string name="sort_by">Ordena per</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Interval d\'orientació del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiqueu la velocitat mínima per deixar l\'orientació segons la direcció del moviment i seguir la brúixola interna.</string>
     <string name="all_markers_moved_to_history">Tots els marcadors de mapa s\'han mogut a historial</string>
     <string name="marker_moved_to_history">El marcador de mapa s\'ha mogut a historial</string>
     <string name="marker_moved_to_active">El marcador de mapa ara està actiu</string>

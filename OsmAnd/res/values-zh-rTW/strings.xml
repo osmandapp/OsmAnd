@@ -2454,7 +2454,6 @@
     <string name="move_all_to_history">全部移動到歷程</string>
     <string name="show_direction">距離指示</string>
     <string name="sort_by">排序方式</string>
-    <string name="map_orientation_change_in_accordance_with_speed">地圖定位起點</string>
     <string name="all_markers_moved_to_history">所有的地圖標記已移到歷程記錄</string>
     <string name="marker_moved_to_history">地圖標記已移到歷程記錄</string>
     <string name="marker_moved_to_active">地圖標記已移到活動</string>
@@ -2467,7 +2466,6 @@
     <string name="last_seven_days">最近 7 天</string>
     <string name="this_year">今年</string>
     <string name="marker_show_distance_descr">選擇如何在地圖上表示距離和方向給地圖標記：</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">從下方選擇「行進方向」切換到「羅盤方向」的切換方向速度。</string>
     <string name="remove_from_map_markers">從「地圖標記」中移除</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -4749,9 +4747,7 @@
     <string name="compass_always_visible">一律可見</string>
     <string name="compass_desc">顯示北邊的方向。</string>
     <string name="compass_click_desc">點擊指南針切換地圖方向模式。</string>
-    <string name="rendering_attr_depthContourColorScheme_name">等深線配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
-    <string name="rendering_attr_depthContourWidth_name">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地腳踏車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
