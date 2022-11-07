@@ -3775,7 +3775,6 @@
     <string name="make_round_trip">Gwneud taith gron</string>
     <string name="fast_coordinates_input_descr">Dewis fformat mewnbwn cydlynu. Tapia \'Dewisiadau\' i\'w newid.</string>
     <string name="add_location_as_first_point_descr">Ychwanega dy safle fel man gadael i gynllunio\'r llwybr perffaith.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Trothwy cyfeiriadedd map</string>
     <string name="save_as_route_point">Cadw fel pwyntiau llwybr</string>
     <string name="mapillary_menu_descr_tile_cache">Ail-lwytho teils i weld y data diweddaraf.</string>
     <string name="mapillary_menu_filter_description">Hidlo delweddau yn ôl cyfrannwr, yn ôl dyddiad neu fath. Dim ond yn weithredol yn y chwyddo agos.</string>
@@ -3882,7 +3881,6 @@
     <string name="wake_on_voice">Troi\'r sgrin ymlaen</string>
     <string name="hillshade_purchase_header">Gosod yr ategyn \'Contourlines\' i ddangos ardaloedd fertigol graddedig.</string>
     <string name="osmand_team">Tîm OsmAnd</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Dewisa gyflymder y cyfeiriadedd newid o \'Cyfeiriad symud\' i \'Cyfeiriad cwmpawd\' isod.</string>
     <string name="do_not_send_anonymous_app_usage">Peidio ag anfon ystadegau defnydd ap dienw</string>
     <string name="full_version_thanks">Diolch am brynu\'r fersiwn taledig o OsmAnd.</string>
     <string name="shared_string_time_moving">Amser yn symud</string>

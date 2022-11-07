@@ -2240,8 +2240,6 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">Nema ledeni patišta ili fordovi</string>
     <string name="order_by">Podredeno po:</string>
     <string name="marker_show_distance_descr">Izberete kako da označite rastojanie i nasoka do markerite na kartata na kartata:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Prag na orientacija na kartata</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Izberete brzina na orientacija na prefrluvanje od „Nasoka na dviženje“ vo „Nasoka na kompas“ podolu.</string>
     <string name="all_markers_moved_to_history">Site markeri na kartata se premesteni vo istorijata</string>
     <string name="marker_moved_to_history">Obeležuvačot na kartata e premesten vo istorijata</string>
     <string name="shared_string_list">Spisok</string>

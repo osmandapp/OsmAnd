@@ -2368,8 +2368,6 @@
     <string name="date_added">Добавлено</string>
     <string name="order_by">Критерий сортировки:</string>
     <string name="marker_show_distance_descr">Выберите способ указания расстояния и направления до маркеров на карте:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите скорость, при которой ориентация по направлению движения переключится на ориентацию по компасу.</string>
     <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
     <string name="marker_moved_to_history">Маркер перемещён в историю</string>
     <string name="marker_moved_to_active">Маркер перемещён в действующие</string>
@@ -4704,25 +4702,25 @@
     <string name="routing_attr_motor_type_lpg_name">СУГ (LPG)</string>
     <string name="lang_ckb">Центральный курдский</string>
     <string name="calculate_online_altitude_descr">Рассчитывайте высоту в режиме онлайн на серверах OsmAnd на основе спутниковых снимков и цифровых моделей рельефа. Результат расчета может отличаться от высоты, записанной устройством, и может быть использован в качестве коррекции высоты.</string>
-    <string name="live_update_frequency_hour_variant">Обновления карты будут проверяться каждый час.</string>
-    <string name="live_update_frequency_day_variant">Обновления карты будут проверяться каждый день.</string>
-    <string name="live_update_frequency_week_variant">Обновления карты будут проверяться каждую неделю.</string>
+    <string name="live_update_frequency_hour_variant">Обновление карт проверяется ежечасно.</string>
+    <string name="live_update_frequency_day_variant">Обновление карт проверяется ежедневно.</string>
+    <string name="live_update_frequency_week_variant">Обновление карт проверяются еженедельно.</string>
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
     <string name="no_altitude_data_desc">Вы можете прикрепить свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
-    <string name="next_live_update_date_and_time">Следующее обновление: %1$s в %2$s.</string>
+    <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
-    <string name="reset_all_settings_desc">Вы уверены, что хотите сбросить все настройки по умолчанию\?</string>
-    <string name="goods_delivery_desc_3">Применяется только для транспортных средств, перевозящих грузы, которые имеют не менее четырех колес и весят не более 3,5 тонн.</string>
+    <string name="reset_all_settings_desc">Сбросить все настройки по умолчанию\?</string>
+    <string name="goods_delivery_desc_3">Применяется только к грузовым автомобилям грузоподъемностью не более 3,5 тонн.</string>
     <string name="goods_delivery_desc_2">Дороги, закрытые для доставки грузов, будут избегаться.</string>
     <string name="side_marker_eta">Примерное время прибытия</string>
     <string name="marker_2nd">Второй маркер</string>
-    <string name="map_marker_average_speed_desc">Укажите интервал времени, в течение которого будет измеряться средняя скорость для расчета примерного времени прибытия.</string>
+    <string name="map_marker_average_speed_desc">Укажите временной интервал для усреднения скорости (используется для оценки времени прибытия).</string>
     <string name="marker_1st">Первый маркер</string>
     <string name="goods_delivery_desc">Транспортным средствам, перевозящим товары, может быть ограничен доступ к некоторым дорогам.</string>
-    <string name="goods_delivery_desc_4">Если вес вашего автомобиля превышает 3,5 тонны, вам необходимо использовать профиль грузовика.</string>
+    <string name="goods_delivery_desc_4">Используйте профиль «Грузовик» для автомобилей массой более 3,5 тонн.</string>
     <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
     <string name="download_complete">Загрузка завершена</string>
     <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
@@ -4849,4 +4847,103 @@
     <string name="map_rendering_engine">Движок отрисовки карт</string>
     <string name="purchases_feature_desc_external_sensors">Отображение и запись данных с внешних датчиков: скорость велосипеда, мощность велосипеда, каденс и частота сердцебиения.</string>
     <string name="map_widget_ant_bicycle_dist">Расстояние на велосипеде</string>
+    <string name="click_on_widget">Нажатие на виджет</string>
+    <string name="go_to_marker_location">Переход к местоположению маркера</string>
+    <string name="shared_string_switch_mode">Переключение режима</string>
+    <string name="map_marker_interval_dialog_desc">Укажите интервал времени, в течение которого будет измеряться средняя скорость для расчета предполагаемого времени прибытия.</string>
+    <string name="shared_string_shows">Показывать</string>
+    <string name="coordinates_widget_current_location_desc">Виджет показывает географические координаты текущего местоположения</string>
+    <string name="coordinates_widget_map_center">Координаты: центр карты</string>
+    <string name="coordinates_widget_current_location">Координаты: текущее местоположение</string>
+    <string name="distance_by_tap_use_description">Нажмите на карту, чтобы просмотреть расстояние между текущим местоположением и отмеченной точкой.
+\nНажмите двумя пальцами на карте, чтобы просмотреть расстояние между отмеченными точками.</string>
+    <string name="quick_action_map_center_widget_descr">Переключатель для отображения или скрытия виджета координат центра карты.</string>
+    <string name="quick_action_current_location_widget_descr">Переключатель для отображения или скрытия виджета координат текущего местоположения.</string>
+    <string name="map_widget_target_distance_desc">Виджет показывает расстояние от камеры до цели.</string>
+    <string name="shared_string_large">Большой</string>
+    <string name="ant_heart_rate_write_gpx_desc">Запись сердцебиения в трек</string>
+    <string name="ant_missing_dependency_descr">Требуемая служба \"%1$s\" не найдена.
+\nВам необходимо установить службу ANT+ Plugins или обновить существующую версию, если она у вас уже есть.
+\nЗапустить Play Store для загрузки службы\?</string>
+    <string name="shared_string_normal">Обычный</string>
+    <string name="map_markers_desc">Виджет показывает расстояние или расчетное время прибытия (ETA) для первых двух маркеров в списке маркеров карты.</string>
+    <string name="release_4_3">• Новый, более быстрый движок отрисовки карт «Версия 2 (OpenGL)» с 2,5D видом
+\n
+\n• Плавная анимация изменения местоположения во время движения
+\n
+\n• Новые виджеты для координат центра карты и высоты геолокации
+\n
+\n• «Расстояние по нажатию»: добавлены параметры размера текста
+\n
+\n• Виджет «Маркер карты»: добавлена возможность изменения поведения при нажатии
+\n
+\n• Исправлена опция \"Показать положение\"
+\n
+\n• GPX: добавлена поддержка тегов «link», «cmt», «desc» и любых пользовательских расширений
+\n
+\n• Реорганизован список «Морские карты»
+\n
+\n• Добавлена поддержка датчиков ANT+
+\n
+\n• Добавлена возможность отключения UUID для загрузки
+\n
+\n</string>
+    <string name="how_to_use">Как использовать:</string>
+    <string name="shared_string_2_5_d_view">2,5 D вид</string>
+    <string name="worldwide_maps">Карты мира</string>
+    <string name="coordinates_widget_map_center_desc">Виджет показывает географические координаты текущего центра карты</string>
+    <string name="map_settings_weather_air_pressure">Давление</string>
+    <string name="map_settings_weather_cloud">Облачность</string>
+    <string name="shared_string_contours">Контуры</string>
+    <string name="shared_string_layers">Слои</string>
+    <string name="weather_offline_forecast">Офлайн-прогноз</string>
+    <string name="weather_online_cache">Онлайн-кэш</string>
+    <string name="explore_weather_forecast">Изучите прогноз погоды.</string>
+    <string name="empty_screen_weather_pressure_layer">Включите для просмотра слоя давления на карте.</string>
+    <string name="empty_screen_weather_temperature_layer">Включите для просмотра температурного слоя на карте.</string>
+    <string name="empty_screen_view_selected_weather_data">Включите для просмотра выбранных погодных данных на карте.</string>
+    <string name="weather_precip_mm">мм</string>
+    <string name="weather_precip_inches">Дюймы</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_milimeters">Миллиметры</string>
+    <string name="weather_wind_kt">уз</string>
+    <string name="weather_wind_mph">миля/ч</string>
+    <string name="weather_wind_kmh">км/ч</string>
+    <string name="weather_wind_knots">Узлы</string>
+    <string name="air_pressure_widget_desc">Виджет показывает атмосферное давление для текущего центра карты.</string>
+    <string name="wind_widget_desc">Виджет показывает скорость ветра для текущего центра карты.</string>
+    <string name="temperature_widget_desc">Виджет показывает температуру для текущего центра карты.</string>
+    <string name="weather_pressure_inhg">дюйм рт. ст.</string>
+    <string name="weather_pressure_mmhg">мм рт. ст.</string>
+    <string name="weather_pressure_hectopascals">Гектопаскали</string>
+    <string name="weather_pressure_hpa">гПа</string>
+    <string name="weather_pressure_inches_of_mercury">Дюймы ртутного столба</string>
+    <string name="weather_pressure_millimeters_of_mercury">Миллиметры ртутного столба</string>
+    <string name="weather_prefs_descr">Почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа</string>
+    <string name="weather_temperature_celsius">Градус Цельсия</string>
+    <string name="weather_widgets_secondary_desc">Единицы измерения можно изменить в настройках плагина «Погода».</string>
+    <string name="map_settings_weather_temp">Температура</string>
+    <string name="map_settings_weather_precip">Осадки</string>
+    <string name="map_settings_weather_wind">Ветер</string>
+    <string name="measurement_units">Единицы измерения</string>
+    <string name="shared_string_weather">Погода</string>
+    <string name="empty_screen_weather_contours">Включите для просмотра контуров погоды на карте.</string>
+    <string name="empty_screen_weather_clouds_layer">Включите для просмотра слоя облачности на карте.</string>
+    <string name="empty_screen_weather_wind_layer">Включите для просмотра слоя ветра на карте.</string>
+    <string name="empty_screen_weather_precipitation_layer">Включите для просмотра слоя осадков на карте.</string>
+    <string name="weather_widget_group_desc">Набор виджетов, отображающих различную информацию о погоде.</string>
+    <string name="weather_wind_ms">м/с</string>
+    <string name="weather_wind_meters_per_second">Метров в секунду</string>
+    <string name="weather_wind_miles_per_hour">Миль в час</string>
+    <string name="weather_wind_kilimeters_per_hour">Километров в час</string>
+    <string name="clouds_widget_desc">Виджет показывает облачность для текущего центра карты.</string>
+    <string name="weather_temperature_fahrenheit">Градус Фаренгейта</string>
+    <string name="precipitation_widget_desc">Виджет показывает количество осадков для текущего центра карты.</string>
+    <string name="action_not_supported_with_map_style">Действие не поддерживается с выбранным стилем карты.</string>
+    <string name="weather_plugin_description">Плагин погоды предоставляет:
+\n- 5 слоев... почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа;
+\n- виджеты на основе местоположения;
+\n- изолинии температуры / давления.
+\nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+    <string name="rotate_map_none_rotated_opt">фиксированная (повернутая вручную)</string>
 </resources>

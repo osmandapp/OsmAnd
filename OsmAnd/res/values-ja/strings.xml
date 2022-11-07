@@ -2469,8 +2469,6 @@ POIの更新は利用できません</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">描画処理の省略</string>
     <string name="do_not_use_animations_descr">マップアニメーションをオフにします。</string>
-    <string name="map_orientation_change_in_accordance_with_speed">マップ向きのしきい値</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">マップの向きが「移動方向」から「方位」に切り替わる速度を選択します。</string>
     <string name="all_markers_moved_to_history">すべてのマップマーカーを履歴に移動</string>
     <string name="marker_moved_to_history">マップマーカーを履歴に移動させました</string>
     <string name="marker_moved_to_active">マップマーカーをアクティブ化させました</string>

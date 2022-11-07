@@ -2458,8 +2458,6 @@
     <string name="show_direction">Distanc-vidigo</string>
     <string name="sort_by">Ordigi laŭ</string>
     <string name="marker_show_distance_descr">Elekti kiel vidigi distancon kaj direkton al map-markoj sur la mapo:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Map-orientiĝa sojlo</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Elekti rapidon sube kiun map-orientiĝo ŝanĝiĝos el “laŭ direkto de movado” al “laŭ kompaso”.</string>
     <string name="all_markers_moved_to_history">Ĉiuj map-markoj movitaj al historio</string>
     <string name="marker_moved_to_history">Map-marko movita al historio</string>
     <string name="marker_moved_to_active">Map-marko movita al aktivaj</string>

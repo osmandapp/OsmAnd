@@ -2374,8 +2374,6 @@
     <string name="show_direction">Wskaźnik odległości</string>
     <string name="sort_by">Kolejność sortowania</string>
     <string name="marker_show_distance_descr">Wybierz w jaki sposób wskazywać odległość i kierunek do znaczników mapy:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Próg zmiany orientacji mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Wybiera prędkość, poniżej której orientacja mapy zmieni się z „względem kierunku ruchu” na „względem kompasu”.</string>
     <string name="all_markers_moved_to_history">Wszystkie znaczniki mapy przeniesiono do historii</string>
     <string name="marker_moved_to_history">Znacznik mapy przeniesiono do historii</string>
     <string name="marker_moved_to_active">Znacznik mapy przeniesiono do aktywnych</string>

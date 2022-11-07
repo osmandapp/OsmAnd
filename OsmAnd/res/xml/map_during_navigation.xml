@@ -25,9 +25,4 @@
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/snap_to_road" />
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:key="speed_for_map_to_direction_of_movement"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/map_orientation_change_in_accordance_with_speed" />
-
 </PreferenceScreen>
