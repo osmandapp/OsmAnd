@@ -4794,7 +4794,7 @@
     <string name="distance_by_tap_use_description">Pulse en el mapa para ver la distancia entre su ubicación actual y el punto pulsado.
 \nToque con 2 dedos en el mapa para ver la distancia entre los puntos pulsados</string>
     <string name="auto_backup_title">Copia de seguridad automática</string>
-    <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
+    <string name="routing_attr_motor_type_petrol_name">Gasolina</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
