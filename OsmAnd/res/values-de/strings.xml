@@ -4675,7 +4675,7 @@
     <string name="gps_info_widget_desc">Zeigt die Anzahl der aktuell sichtbaren und verwendeten Satelliten an.</string>
     <string name="coordinates_widget_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an.</string>
     <string name="audio_video_notes_desc">Bietet schnellen Zugriff zum Starten/Stoppen einer Audio-, Video- oder Fotonotiz.</string>
-    <string name="bearing_desc">Das Peilungswidget zeigt die absolute oder relative Peilung zu einem Ziel in Winkeleinheiten (Grad 180, Grad 360, Milliradiant) an.</string>
+    <string name="bearing_desc">Zeigt die absolute oder relative Peilung zu einem Ziel in Winkeleinheiten an (im Modus 180 Grad, 360 Grad oder Milliradian).</string>
     <string name="shared_string_widget">Widget</string>
     <string name="route_maneuvers">Routenmanöver</string>
     <string name="navigation_points">Navigationspunkte</string>
