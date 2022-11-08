@@ -35,7 +35,7 @@
     <string name="poi_bus_stop">Bussholdeplass</string>
     <string name="poi_bus_station">Busstasjon</string>
     <string name="poi_railway_station">Jernbanestasjon;Togstasjon</string>
-    <string name="poi_railway_platform">Jernbaneperrong;Togperrong</string>
+    <string name="poi_railway_platform">Jernbaneperrong;Togperrong;Jernbaneplattform</string>
     <string name="poi_subway_station">Ja;T-banestasjon</string>
     <string name="poi_taxi">Taxiholdeplass</string>
     <string name="poi_aerodrome">Flyplass;Lufthavn</string>
@@ -1722,4 +1722,28 @@
     <string name="poi_laundry_service_yes">Ja</string>
     <string name="poi_ele">Høyde over havet</string>
     <string name="poi_width">Bredde</string>
+    <string name="poi_fitness">Trening</string>
+    <string name="poi_basin">Basseng</string>
+    <string name="poi_scrub">Kratt</string>
+    <string name="poi_fitness_station">Treningsstasjon</string>
+    <string name="poi_fitness_centre">Treningssenter</string>
+    <string name="poi_landmark">Landemerke</string>
+    <string name="poi_pillory">Gapestokk</string>
+    <string name="poi_museum_railway">Jernbane</string>
+    <string name="poi_museum_history">Historie</string>
+    <string name="poi_museum_agriculture">Landbruk</string>
+    <string name="poi_museum_archaeological">Arkeologisk</string>
+    <string name="poi_museum_war">Krig</string>
+    <string name="poi_museum_ethnography">Etnografi</string>
+    <string name="poi_ski_rental">Skiutleie</string>
+    <string name="poi_stile">Gjerdeklyver</string>
+    <string name="poi_wetland_bog">Myr</string>
+    <string name="poi_tomb_pyramid">Type: pyramide</string>
+    <string name="poi_museum_art">Kunst</string>
+    <string name="poi_museum_science">Vitenskap</string>
+    <string name="poi_museum_nature">Natur</string>
+    <string name="poi_museum_technology">Teknologi</string>
+    <string name="poi_museum_open_air">Friluftsmuseum</string>
+    <string name="poi_museum_local">Lokalt</string>
+    <string name="poi_museum_gallery">Galleri</string>
 </resources>
