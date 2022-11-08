@@ -23,9 +23,9 @@
     <string name="map_widget_group_sunrise_sunset">Sunrise, sunset</string>
     <string name="rendering_attr_depthContourColorScheme_name">Line color-scheme</string>
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
-    <string name="depth_contour_lines">Depth contour-lines</string>
+    <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Shows nautical depth data on the map.</string>
-    <string name="weather_plugin_description">- 5 layers.\n- Daily and 7-day forecast updated every 3 hours.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+    <string name="weather_plugin_description">- 5 layers.\n- 1 and 7-day forecast updated every 3 hours.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -59,7 +59,7 @@
     <string name="weather_wind_meters_per_second">Meters/second</string>
     <string name="weather_widgets_secondary_desc">Measurement units can be changed in the Weather plugin settings.</string>
     <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
-    <string name="clouds_widget_desc">Shows clouds for current map center.</string>
+    <string name="clouds_widget_desc">Shows cloud coverage for current map center.</string>
     <string name="wind_widget_desc">Shows wind speed for current map center.</string>
     <string name="precipitation_widget_desc">Shows precipitation for current map center.</string>
     <string name="temperature_widget_desc">Shows temperature for current map center.</string>
@@ -70,10 +70,10 @@
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">Daily and 7-day forecast updated every 3 hours.</string>
+    <string name="weather_prefs_descr">1 and 7-day forecast updated every 3 hours.</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Pick a different map style to use this.</string>
+    <string name="action_not_supported_with_map_style">Pick a different map style to use this function.</string>
     <string name="rendering_engine_failed_descr">Reverted to \'Version 1\' map rendering. Try switching back to the newer \'Version 2 (OpenGL)\' in the settings.\n\nProviding your error log can help improve the rendering engine.</string>
     <string name="rendering_engine_failed">OsmAnd\'s map rendering crashed.</string>
     <string name="share_crash_log">Share crash log</string>
@@ -106,7 +106,7 @@
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
-    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, power, and cadence via ANT+ connection to respective sensors.</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, power, and cadence via ANT+ connection to respective sensors in Android.</string>
     <string name="map_widget_altitude_map_center">Elevation: map center</string>
     <string name="map_widget_altitude_map_center_desc">Shows elevation above sea level of the current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
@@ -127,7 +127,7 @@
     <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
     <string name="ant_widgets">ANT+ widgets</string>
-    <string name="ant_missing_dependency_descr">Could not find the required \"%1$s\" service. \nInstalling the newest version of the ANT+ Plugins service may help. \nOpen the Play Store to get it?"</string>
+    <string name="ant_missing_dependency_descr">Could not find the required \"%1$s\" service.\nOpen Google Play to get it?"</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
     <string name="ant_go_to_store">Go to Store</string>
     <string name="ant_read_data">Read data</string>
@@ -143,12 +143,12 @@
     <string name="map_widget_ant_bicycle_speed_desc">Shows speed of traveling</string>
     <string name="map_widget_ant_bicycle_dist">Bicycle Distance</string>
     <string name="map_widget_ant_bicycle_dist_desc">Shows travelled distance</string>
-    <string name="nautical_depth_points">Nautical depth points</string>
+    <string name="nautical_depth_points">Nautical depth-points</string>
     <string name="depth_contours">Depth contours</string>
     <string name="worldwide_maps">Worldwide maps</string>
     <string name="map_widget_target_distance_desc">Shows the distance from the camera to the target location.</string>
     <string name="map_widget_zoom_level_desc">Shows the current map zoom level.</string>
-    <string name="map_widget_camera_distance_desc">Shows the elevation of the camera above the surface level.</string>
+    <string name="map_widget_camera_distance_desc">Shows how far off the surface level your camera is.</string>
     <string name="map_widget_camera_tilt_desc">Shows the camera tilt angle in perspective mode. The default is 90° (no tilt).</string>
     <string name="map_widget_zoom_level">Zoom level</string>
     <string name="map_widget_camera_distance">Camera elevation</string>
@@ -157,7 +157,7 @@
     <string name="quick_action_map_center_widget_descr">A toggle to show or hide the map center widget on the map.</string>
     <string name="quick_action_current_location_widget_descr">A toggle to show or hide the current location widget on the map.</string>
     <string name="coordinates_widget_map_center_desc">Shows the geographic coordinates of the current map center.</string>
-    <string name="coordinates_widget_current_location_desc">Shows the geographic coordinates of the current geo-location.</string>
+    <string name="coordinates_widget_current_location_desc">Shows the geographic coordinates of the current geolocation.</string>
     <string name="coordinates_widget_map_center">Coordinates: map center</string>
     <string name="coordinates_widget_current_location">Coordinates: current location</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
@@ -232,7 +232,7 @@
     <string name="marker_2nd">Second marker</string>
     <string name="marker_1st">First marker</string>
     <string name="map_marker_average_speed_desc">Specify the time interval for speed averaging (used for the arrival time estimate).</string>
-    <string name="switch_widget_mode_desc">Tapping on the widget switches modes.</string>
+    <string name="switch_widget_mode_desc">Tapping the widget switches modes.</string>
     <string name="side_marker_eta">Estimated arrival time</string>
     <string name="reset_all_settings_desc">Reset all settings to defaults?</string>
     <string name="goods_delivery_desc_4">Use the Truck profile for vehicle weights of more than 3.5 tons.</string>
@@ -312,20 +312,20 @@
     <string name="current_time_widget_desc">Shows the current time as taken from your device.</string>
     <string name="battery_widget_desc">Shows the battery level of your device.</string>
     <string name="gps_info_widget_desc">Shows the number of satellites currently visible and used.</string>
-    <string name="altitude_widget_desc">Shows the height above sea level of current geolocation.</string>
-    <string name="max_speed_widget_desc">Displays the speed limit for the currently driven road.</string>
+    <string name="altitude_widget_desc">Shows the height above sea level where you are.</string>
+    <string name="max_speed_widget_desc">Shows the speed limit for the road you are on.</string>
     <string name="current_speed_widget_desc">Shows your current speed as reported via GPS.</string>
     <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
     <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
     <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
-    <string name="lanes_widgets_desc">Highlights the road lane to take while navigating and shows the layout.</string>
-    <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to show 1 or 2 top markers.</string>
-    <string name="street_name_widget_desc">Shows the current street name with a straight location arrow or next street name with the maneuver to complete.</string>
-    <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
+    <string name="lanes_widgets_desc">Shows the different road lanes and the one to take.</string>
+    <string name="map_markers_bar_widget_desc">Shows the distance and direction to one or two markers from current location in the the top-bar.</string>
+    <string name="street_name_widget_desc">Shows current street name with a straight location arrow, or the next street name with the maneuver to complete.</string>
+    <string name="coordinates_widget_desc">Shows the geographic coordinates where you are.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Provides quick access to start/stop taking a recording (audio, video or photo).</string>
-    <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (degrees 180, degrees 360, milliradians).</string>
+    <string name="bearing_desc">Shows the absolute or relative bearing to a target in angular units (degrees 180, degrees 360, milliradians).</string>
     <string name="navigation_points_desc">Navigational widgets during navigation to display info such as distance, arrival or time left, the next turns, bearing, current street name, lane info, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="navigation_points">Navigation points</string>
     <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display info such as distance, arrival or left time, next turns, bearing, current street name, lane info, max speed, approaching alerts, POIs, waypoints.</string>
@@ -1359,7 +1359,7 @@
     <string name="reorder_or_hide_from">Reorder or hide items from the %1$s.</string>
     <string name="context_menu_actions">Context menu actions</string>
     <string name="shared_string_drawer">Drawer</string>
-    <string name="ui_customization">UI Customization</string>
+    <string name="ui_customization">UI Adjustments</string>
     <string name="ui_customization_short_descr">Drawer items, context menu</string>
     <string name="ui_customization_description">Customize the quantity of items in \"Drawer\", \"Configure Map\" and \"Context Menu\".\n\nTurn off unused plugins to hide all their controls. %1$s.</string>
     <string name="shared_string_min">Min</string>
@@ -3757,7 +3757,7 @@
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
 		- Compact offline vector maps for the whole world available\n
 		- Download country or region maps directly from the app\n
-		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, contour lines, public transport stops, additional maps with customizable transparency\n
+		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, contour lines, public transport stops, additional maps with adjustable transparency\n
 		- Offline search for addresses and places (POIs)\n
 		- Offline routing for medium-range distances\n
 		- Car, bicycle, and pedestrian modes with optional:\n
@@ -3798,7 +3798,7 @@
         • Share your location so that your friends can find you\n
         • Keeps your most important places in \'Favorites\'\n
         • Allows you to choose how to display names on the map: In English, local, or phonetic spelling\n
-        • Displays specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency\n
+        • Displays specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with adjustable transparency\n
     </string>
     <string name="osmand_extended_description_part4">
         Skiing\n
@@ -3847,31 +3847,31 @@
     <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd+ is an open source software navigation app with access to a wide variety of global OSM data. All map data (vector or tile maps) can be stored on your memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		An open source offline and online navigation and routing app. Store full maps on your memory card if you want.\n\n
 
-		OsmAnd+ is the paid app version. Buy it to support the project, fund the development of new features, and to receive the latest updates.\n\n
+		OsmAnd+ is the paid app version. Buy it to support new features in the project, and receive the latest updates.\n\n
 
-		Some of the core features:\n
-		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
-		- Compact offline vector maps for the whole world available\n
-		- Unlimited downloading of country or region maps directly from the app\n
-		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing\n
-		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, contour lines, public transport stops, additional maps with customizable transparency\n\n
-		- Offline search for addresses and places (POIs)\n
-		- Offline routing for medium-range distances\n
+		- Complete offline functionality (store downloaded vector or tile maps in the device storage).\n
+		- Compact offline vector maps for the whole world.\n
+		- Unlimited downloading of country or region maps directly from the app.\n
+		- Many types of OSM data.
+	        - Offline Wikipedia. Ddownloaded points of interest is great for sightseeing.\n
+		- Use many different maps as overlays at the same time, like\n 
+	           GPX or navigation tracks, POIs, favorites, contour lines, public transport stops, more maps adjustable transparency.\n
+		- Offline search for addresses and places (POIs).\n
+		- Offline routing for medium-range distances.\n
 		- Car, bicycle, and pedestrian modes with optional:\n
-		-  Automated day/night view switching\n
-		-  Speed-dependent map zooming\n
+		-  Auto-switching between day and night mode.\n
+		-  Speed-dependent map zooming.\n
 		-  Map alignment according to compass or direction of motion\n
-		-  Lane guidance, speed-limit display, recorded and text-to-speech voices\n
+		-  Lane guidance, speed-limit display, recorded turn-by-turn voice-guidance and text-to-speech.\n
+	        - + many more functions and plugins.
 	</string>
     <string name="osmand_plus_extended_description_part1">
         OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n
-        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.\n\n
+        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, choice of driving, cycling, and pedestrian modes, OSM editing and much more.\n\n
 
-        OsmAnd+ is the paid app version. By buying it, you support the project, fund the development of new features, and receive the latest updates.\n\n
-
-        Some of the main features:
+        OsmAnd+ is the paid app version. Buy it to support the project, fund new features, and receive the latest updates.\n\n
     </string>
     <string name="osmand_plus_extended_description_part2">
         Navigation\n
@@ -3888,7 +3888,7 @@
         • Optionally align the picture according to compass or your direction of motion\n
         • Save your most important places as Favorites\n
         • Display POIs (points of interest) around you\n
-        • Display specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency\n
+        • Display specialized online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with adjustable transparency\n
         • Optionally display place names in English, local, or phonetic spelling\n
     </string>
     <string name="osmand_plus_extended_description_part4">
@@ -3898,15 +3898,14 @@
         • Wikipedia POIs, great for sightseeing\n
         • Unlimited free downloads, directly from the app\n
         • Compact offline vector maps updated at least once a month\n\n
-
-        • Choice between complete region data and just road network (Example: All of Japan is 700 MB or 200 MB for the road network part thereof)
+        • Choice between complete region data and just road network (Example: All of Japan is 700 MB or 200 MB for just its road network)
     </string>
     <string name="osmand_plus_extended_description_part5">
         Safety Features\n
         • Optional automated day/night view switching\n
         • Optional speed limit display, with reminder if you exceed it\n
         • Optional speed-dependent zooming\n
-        • Share your location so that your friends can find you\n
+        • Share your location so your friends can know where you are\n
     </string>
     <string name="osmand_plus_extended_description_part6">
         Bicycle and Pedestrian Features\n
@@ -3915,7 +3914,7 @@
         • Optional public transport stops (bus, tram, train) including line names\n
         • Optional trip recording to local GPX file or online service\n
         • Optional speed and altitude display\n
-        • Display of contour lines and hillshading (via additional plugin)
+        • Display of contour lines and hillshading (via a plugin)
     </string>
     <string name="osmand_plus_extended_description_part7">
         Contribute directly to OSM\n
@@ -3923,7 +3922,7 @@
         • Upload GPX tracks to OSM directly from the app\n
         • Add POIs and directly upload them to OSM (or later if offline)\n
         • Optional trip recording also in background mode (while device is in sleep mode)\n
-        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
+        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Happy donations fund coding and testing new functionality.\n
     </string>
     <string name="osmand_plus_extended_description_part8">
         Approximate map coverage and quality:\n
@@ -3937,7 +3936,7 @@
         • Middle East: **\n
         • Africa: **\n
         • Antarctica: *\n
-        Most countries around the globe available as downloads\n
+        Most countries are available as downloads\n
         From Afghanistan to Zimbabwe, from Australia to the USA. Argentina, Brazil, Canada, France, Germany, Mexico, UK, Spain, …\n
     </string>
     <string name="filterpoi_activity">Create POI filter</string>
