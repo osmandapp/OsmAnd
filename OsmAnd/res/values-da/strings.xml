@@ -4580,7 +4580,7 @@
     <string name="map_widget_current_speed">Aktuel hastighed</string>
     <string name="add_page">Tilføj side</string>
     <string name="page_number">Side %1$s</string>
-    <string name="map_widget_altitude">Højde på nuværende placering</string>
+    <string name="map_widget_altitude">Højde på den nuværende placering</string>
     <string name="shared_string_symbol">Symbol</string>
     <string name="snackbar_page_removed">\"Side %1$s\" er blevet fjernet.</string>
     <string name="no_widgets_descr">Tilføj et eller flere moduler fra listen over tilgængelige moduler.</string>
@@ -4606,40 +4606,40 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Slå til for at se ruter med offentlige transport på kortet.</string>
-    <string name="coordinates_widget_secondary_desc">Koordinaters format kan være ændret i %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Du kan ændre koordinatformatet i %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
-    <string name="elevation_profile_widget_desc">Modul viser højden og hældningsprofilen for den aktuelle rute.</string>
-    <string name="parking_widget_desc">Modul der viser afstanden fra skærmens centrum til parkeringsstedet.</string>
+    <string name="elevation_profile_widget_desc">Viser højden og hældningsprofilen for den aktuelle rute.</string>
+    <string name="parking_widget_desc">Viser afstanden fra skærmens centrum til dit parkeringssted.</string>
     <string name="altitude_widget_desc">Viser højden over havniveau for den aktuelle geografiske placering.</string>
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
-    <string name="map_markers_bar_widget_desc">På modulet i topbjælken kan du se afstanden og retningen til markøren fra den aktuelle position. Det er muligt at konfigurere, om der skal vises 1 eller 2 topmarkører i modulet.</string>
-    <string name="coordinates_widget_desc">Det viser de geografiske koordinater for den aktuelle geografiske placering.</string>
-    <string name="audio_video_notes_desc">Modul giver hurtig adgang til at starte/stoppe en optagelse (lyd, video eller foto).</string>
+    <string name="map_markers_bar_widget_desc">Modulet i topbjælken viser afstanden og retningen til den næste kortmarkør fra din aktuelle position. Det er muligt at konfigurere i modulet, om der skal vises 1 eller 2 markører.</string>
+    <string name="coordinates_widget_desc">Viser de geografiske koordinater for den aktuelle geoplacering.</string>
+    <string name="audio_video_notes_desc">Giver hurtig adgang til at starte/stoppe en optagelse af lyd, video eller foto-note.</string>
     <string name="navigation_points">Navigationspunkter</string>
     <string name="route_maneuvers_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="calculating_altitude">Beregner højde</string>
     <string name="calculate_online">Beregn online</string>
-    <string name="track_attach_to_the_roads_descr">Spor vil blive forbundet til vejen ved hjælp af offline-kort, og sporets geometri vil blive ændret.</string>
+    <string name="track_attach_to_the_roads_descr">Sporet vil blive forbundet til vejene ved hjælp af offline-kortene, og sporets geometri vil blive ændret.</string>
     <string name="get_altitude_data">Få højdedata</string>
     <string name="shared_string_speed">Hastighed</string>
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
-    <string name="gps_info_widget_desc">Viser antallet af satellitter, som enheden registrerer og bruger på det pågældende tidspunkt.</string>
+    <string name="gps_info_widget_desc">Viser antallet af satellitter, der i øjeblikket er synlige og anvendes.</string>
     <string name="time_to_go_desc">Den tid i minutter eller timer, der er nødvendig for at nå din destination.</string>
-    <string name="bearing_secondary_desc">Du kan ændre formatet for de viste data i: %1$s – %2$s – %3$s.</string>
-    <string name="mapillary_widget_desc">Modul der giver hurtig adgang til Mapillary-appen for at tilføje billeder på gadeniveau.</string>
+    <string name="bearing_secondary_desc">Du kan ændre dataformatet brugt i: %1$s – %2$s – %3$s.</string>
+    <string name="mapillary_widget_desc">Giver hurtig adgang til Mapillary-appen for at tilføje billeder på gadeniveau.</string>
     <string name="av_notes_choose_action_widget_desc">Vælg handling.</string>
-    <string name="radius_rules_widget_desc">Radiusmålerværktøjet hjælper med at bestemme radius omkring et valgt punkt på kortet ved visning af afstandscirkler på kortet.</string>
-    <string name="current_time_widget_desc">Viser den aktuelle tid fra din enhed.</string>
+    <string name="radius_rules_widget_desc">Radiusmålerværktøjet viser afstandscirkler omkring et valgt punkt på kortet.</string>
+    <string name="current_time_widget_desc">Viser den aktuelle tid taget fra din enhed.</string>
     <string name="battery_widget_desc">Viser din enheds batteriniveau.</string>
     <string name="max_speed_widget_desc">Viser en hastighedsgrænse for vejen, der aktuelt køres på.</string>
-    <string name="current_speed_widget_desc">Viser din aktuelle hastighed, som den er registreret af GPS-sensoren.</string>
+    <string name="current_speed_widget_desc">Viser din aktuelle hastighed registreret via GPS.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellem magnetisk nord og det målpunkt, der observeres fra din position.</string>
-    <string name="lanes_widgets_desc">Bane-modulet viser det aktuelle vejbanelayout og fremhæver de baner, der skal køres i med aktiv navigation.</string>
-    <string name="street_name_widget_desc">Gadenavn-modulet viser det aktuelle gadenavn med en lige placeringspil eller det næste gadenavn med den manøvre, der skal udføres.</string>
+    <string name="lanes_widgets_desc">Viser det aktuelle vejbanelayout og fremhæver de vejbaner, der skal benyttes under vejvisning.</string>
+    <string name="street_name_widget_desc">Gadenavn-modulet viser det aktuelle gadenavn med en lige placeringspil eller det næste gadenavn med en pil, der angiver et kommende sving.</string>
     <string name="shared_string_widget">Modul</string>
-    <string name="bearing_desc">Pejlingsmodulet viser den absolutte eller relative pejling til et mål i vinkelenheder (grader 180, grader 360, milliradianer).</string>
-    <string name="navigation_points_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt vejnavn, oplysninger om kørebaner, maksimal hastighed, kommende advarsler, IP\'er og rutepunkter.</string>
+    <string name="bearing_desc">Viser den absolutte eller relative pejling til et mål i vinkelenheder (i 180 grader, 360 grader eller milliradianer-tilstand).</string>
+    <string name="navigation_points_desc">Navigations-moduler er aktiveret under navigation for at vise oplysninger såsom afstand, ankomst- eller resterende tid, næste sving, pejling, aktuelt/næste vejnavn, oplysninger om kørebane, maksimal hastighed, kommende advarsler, IP\'er, rutepunkter.</string>
     <string name="get_altitude_information">Få højdeoplysninger</string>
     <string name="calculate_altitude">Beregn højde</string>
     <string name="no_altitude_data">Ingen højdedata</string>
@@ -4790,17 +4790,17 @@
     <string name="shared_string_switch_mode">Skift tilstand</string>
     <string name="map_markers_desc">Modulet viser afstand eller forventet ankomsttid (ETA) for de to første markører på listen over kortmarkører.</string>
     <string name="click_on_widget">Klik på modul</string>
-    <string name="quick_action_current_location_widget_descr">En omskifter til at vise eller skjule Aktuel placering-modulet på kortet.</string>
+    <string name="quick_action_current_location_widget_descr">En omskifter til at vise eller skjule aktuel placering-modulet på kortet.</string>
     <string name="coordinates_widget_map_center">Koordinater: kortcentrum</string>
     <string name="coordinates_widget_current_location">Koordinater: nuværende placering</string>
-    <string name="quick_action_map_center_widget_descr">En omskifter til at vise eller skjule Kortcentrum-modulet på kortet.</string>
-    <string name="coordinates_widget_map_center_desc">Modul viser de geografiske koordinater for det aktuelle kortcentrum</string>
-    <string name="coordinates_widget_current_location_desc">Modul viser de geografiske koordinater for den aktuelle geografiske placering</string>
-    <string name="map_widget_camera_distance_desc">Modul viser kameraets højde over overfladeniveauet.</string>
+    <string name="quick_action_map_center_widget_descr">En omskifter til at vise eller skjule kortcentrum-modulet på kortet.</string>
+    <string name="coordinates_widget_map_center_desc">Viser de geografiske koordinater for det aktuelle kortcentrum</string>
+    <string name="coordinates_widget_current_location_desc">Viser de geografiske koordinater for den aktuelle geografiske placering</string>
+    <string name="map_widget_camera_distance_desc">Viser kameraets højde over overfladeniveauet.</string>
     <string name="map_widget_zoom_level">Zoomniveau</string>
-    <string name="map_widget_target_distance_desc">Modul viser afstanden fra kameraet til målstedet.</string>
-    <string name="map_widget_zoom_level_desc">Modul viser kortets aktuelle zoomniveau.</string>
-    <string name="map_widget_camera_tilt_desc">Modul viser kameraets hældningsvinkel i perspektivtilstand. Standardværdien er 90° (ingen hældning).</string>
+    <string name="map_widget_target_distance_desc">Viser afstanden mellem kameraet til målstedet.</string>
+    <string name="map_widget_zoom_level_desc">Viser kortets aktuelle zoomniveau.</string>
+    <string name="map_widget_camera_tilt_desc">Viser kameraets hældningsvinkel i perspektivtilstand. Standardværdien er 90° (ingen hældning).</string>
     <string name="map_widget_camera_distance">Kamerahøjde</string>
     <string name="map_widget_camera_tilt">Kamerahældning</string>
     <string name="developer_widgets">Moduler til udviklere</string>
@@ -4815,7 +4815,7 @@
     <string name="map_widget_ant_bicycle_cadence_desc">Viser den hastighed, som brugeren træder i pedalerne med</string>
     <string name="map_widget_ant_bicycle_dist_desc">Viser den tilbagelagte afstand</string>
     <string name="ant_go_to_store">Gå til butik</string>
-    <string name="ant_heart_rate_write_gpx_desc">Skriv puls til sporet</string>
+    <string name="ant_heart_rate_write_gpx_desc">Inkluder puls i sporet</string>
     <string name="map_widget_ant_heart_rate_desc">Viser brugerens puls under en given aktivitet i realtid</string>
     <string name="map_widget_ant_bicycle_speed_desc">Viser kørehastighed</string>
     <string name="map_widget_ant_bicycle_dist">Cykelafstand</string>
@@ -4824,17 +4824,17 @@
     <string name="worldwide_maps">Globale kort</string>
     <string name="ant_widgets">ANT+ moduler</string>
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
-\nDu skal installere ANT+ Plugins-tjenesten, eller du skal muligvis opdatere din eksisterende version, hvis du allerede har den.
-\nVil du starte Play Store for at hente den\?</string>
+\nDu skal installere ANT+ Plugins-tjenesten.
+\nVil du starte Play Store for at gøre dette\?</string>
     <string name="map_widget_target_distance">Afstand fra kamera til mål</string>
     <string name="favorites_backup">Sikkerhedskopiering af favoritter</string>
-    <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/Web) uden ekstra omkostninger.</string>
+    <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/web) uden ekstra omkostninger.</string>
     <string name="shared_string_cross_buy">Krydskøb</string>
     <string name="external_sensors_plugin_name">Eksterne sensorer</string>
-    <string name="external_sensors_plugin_description">Overvågning af puls, cykelhastighed, cykeleffekt og kadence. Kræver at enheden er forbundet med respektive sensorer via ANT+ wireless personal network protocol.</string>
+    <string name="external_sensors_plugin_description">Overvågning af puls, cykelhastighed, cykeleffekt og kadence. Kræver at din enhed er forbundet med respektive sensorer via ANT+ wireless personal network protocol.</string>
     <string name="map_widget_altitude_current_location">Højde: Nuværende placering</string>
     <string name="map_widget_altitude_current_location_desc">Viser højden over havets overflade for den aktuelle geoplacering.</string>
-    <string name="map_widget_altitude_desc">Viser højden over havets overflade for den aktuelle geoplacering eller for det aktuelle kortcentrum</string>
+    <string name="map_widget_altitude_desc">Viser højden for den aktuelle geoplacering eller højden for det aktuelle kortcentrum</string>
     <string name="map_center_widget">Koordinater: Kortets centrum</string>
     <string name="current_location_widget">Koordinater: Nuværende placering</string>
     <string name="map_widget_altitude_map_center">Højde: Kortets centrum</string>
@@ -4884,7 +4884,7 @@
     <string name="restart_now">Genstart nu</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) er den hurtigere kortgengivelsesmotor, der også har 2,5D-visning. Gengivelses med version 1 var standard før version 4.3 og er stadig at foretrække for ældre enheder.</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) er en hurtigere kortgengivelsesmotor, der også har 2,5D-visning. Gengivelses med version 1 var standard før OsmAnd 4.3 og er stadig at foretrække for ældre enheder.</string>
     <string name="map_rendering_engine">Kortgengivelsesmotor</string>
     <string name="rendering_engine_failed_descr">OsmAnd er vendt tilbage til kortgengivelse efter \'Version 1\'. Du kan prøve at skifte tilbage til den nye \'Version 2 (OpenGL)\'-gengivelsesmotor i indstillingerne.
 \n
@@ -4900,10 +4900,10 @@
     <string name="explore_weather_forecast">Tjek vejrudsigt.</string>
     <string name="empty_screen_weather_contours">Slå til for at få vist vejrkonturer på kortet.</string>
     <string name="empty_screen_weather_pressure_layer">Slå til for at få vist tryklaget på kortet.</string>
-    <string name="empty_screen_weather_clouds_layer">Slå til for at få vist skylaget på kortet.</string>
+    <string name="empty_screen_weather_clouds_layer">Slå til for at få vist skydækkelaget på kortet.</string>
     <string name="empty_screen_weather_wind_layer">Slå til for at få vist vindlaget på kortet.</string>
     <string name="weather_precip_inches">Tommer</string>
-    <string name="weather_precip_milimeters">Milimeter</string>
+    <string name="weather_precip_milimeters">Millimeter</string>
     <string name="weather_precip_in">tommer</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_wind_kt">kt</string>
@@ -4915,8 +4915,8 @@
     <string name="weather_wind_meters_per_second">Meter/sekund</string>
     <string name="weather_widgets_secondary_desc">Måleenhederne kan ændres i indstillingerne for Vejr-udvidelsen.</string>
     <string name="air_pressure_widget_desc">Viser lufttrykket for det aktuelle kortcentrum.</string>
-    <string name="wind_widget_desc">Viser vindhastighed for det aktuelle kortcentrum.</string>
-    <string name="precipitation_widget_desc">Viser nedbør for det aktuelle kortcentrum.</string>
+    <string name="wind_widget_desc">Viser vindhastigheden for det aktuelle kortcentrum.</string>
+    <string name="precipitation_widget_desc">Viser nedbøren for det aktuelle kortcentrum.</string>
     <string name="weather_widget_group_desc">Et sæt moduler, der viser forskellige vejroplysninger.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -4924,13 +4924,13 @@
     <string name="weather_pressure_hectopascals">Hektopascal</string>
     <string name="weather_pressure_inches_of_mercury">Tommer kviksølv</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeter kviksølv</string>
-    <string name="weather_prefs_descr">24-timers prognose hver time og 7-dages prognose hver 3. time</string>
+    <string name="weather_prefs_descr">24-timers og 7-dages prognose, der opdateres hver 3. time</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke med den valgte korttype.</string>
+    <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte korttype.</string>
     <string name="shared_string_weather">Vejr</string>
     <string name="weather_plugin_description">Vejr-udvidelse giver
-\n- 5 lag... 24 timers prognose hver time og 7 dages prognose hver 3. time
+\n- 5 lag... en 24-timers prognose og 7-dages prognose hver 3. time
 \n- lokationsbaserede moduler
 \n- temperatur/tryk-konturlinjer
 \nVejrdata leveres af GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
@@ -4940,6 +4940,20 @@
     <string name="empty_screen_weather_precipitation_layer">Slå til for at få vist nedbørslaget på kortet.</string>
     <string name="empty_screen_weather_temperature_layer">Slå til for at få vist temperaturlaget på kortet.</string>
     <string name="weather_wind_miles_per_hour">Mil i timen</string>
-    <string name="temperature_widget_desc">Viser temperatur for det aktuelle kortcentrum.</string>
-    <string name="clouds_widget_desc">Viser skyer for det aktuelle kortcentrum.</string>
+    <string name="temperature_widget_desc">Viser temperaturen for det aktuelle kortcentrum.</string>
+    <string name="clouds_widget_desc">Viser skydækket for det aktuelle kortcentrum.</string>
+    <string name="shared_string_time_left">Resterende tid</string>
+    <string name="shared_string_sunset">Solnedgang</string>
+    <string name="shared_string_sunrise">Solopgang</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Disse moduler viser oplysninger om den næste solopgang og solnedgang.</string>
+    <string name="map_widget_group_sunrise_sunset">Solopgang, solnedgang</string>
+    <string name="depth_contour_lines">Dybdekonturlinjer</string>
+    <string name="turn_on_nautical_depth_description">Slå til for at få vist nautiske dybdedata på kortet.</string>
+    <string name="map_widget_sunset_desc">Viser tidspunktet for den næste solnedgang eller den tid, der er tilbage til solnedgang.</string>
+    <string name="switch_mode_by_tapping_on_widget">Skift tilstand ved at trykke på modulet.</string>
+    <string name="map_widget_sunrise_desc">Viser tidspunktet for den næste solopgang eller den tid, der er tilbage til solopgang.</string>
+    <string name="shared_string_next_sunrise">Næste solopgang</string>
+    <string name="shared_string_next_sunset">Næste solnedgang</string>
+    <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
 </resources>
