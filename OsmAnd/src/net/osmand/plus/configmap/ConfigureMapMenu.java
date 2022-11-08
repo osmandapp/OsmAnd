@@ -21,6 +21,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
+import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
@@ -667,6 +669,8 @@ public class ConfigureMapMenu {
 				|| CURRENT_TRACK_WIDTH_ATTR.equals(attrName)
 				|| CYCLE_NODE_NETWORK_ROUTES_ATTR.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
+				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
+				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
 		);
 	}
 
@@ -750,6 +754,10 @@ public class ConfigureMapMenu {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 		return new ContextMenuItem(id)
 				.setTitle(name)
+				.setSelected(pref.get())
+				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+				.setIcon(icon)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (property != null) {
 						pref.set(isChecked);
@@ -766,11 +774,7 @@ public class ConfigureMapMenu {
 					item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 					uiAdapter.onDataSetChanged();
 					return false;
-				})
-				.setSelected(pref.get())
-				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
-				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
-				.setIcon(icon);
+				});
 	}
 
 	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,

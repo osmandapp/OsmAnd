@@ -154,8 +154,6 @@
     <string name="date_added">Ditambahkan</string>
     <string name="order_by">Urut berdasarkan:</string>
     <string name="marker_show_distance_descr">Pilih cara untuk mengindikasikan jarak dan arah ke penanda peta pada layar peta:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Ambang orientasi peta</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Pilih kecepatan mengubah orientasi dari \'Arah gerakan\' ke \'Arah kompas\' di bawah.</string>
     <string name="all_markers_moved_to_history">Semua penanda peta di pindahkan ke riwayat</string>
     <string name="marker_moved_to_history">Penanda peta dipindahkan ke riwayat</string>
     <string name="marker_moved_to_active">Penanda peta dipindahkan ke aktif</string>
@@ -3625,7 +3623,7 @@
     <string name="slope_read_more">Baca lebih lanjut tentang lereng di %1$s.</string>
     <string name="shared_string_rendering_style">Gaya perenderan</string>
     <string name="shared_string_include_data">Sertakan data tambahan</string>
-    <string name="monitoring_min_distance_descr">Dengan mengaktifkan saringan ini, Anda dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
+    <string name="monitoring_min_distance_descr">Mengaktifkan saringan ini dapat menghindari perekaman data tambahan apabila pergerakan hampir tidak terdeteksi. Juga meningkatkan penampilan spasial trek tanpa pemrosesan lebih lanjut.</string>
     <string name="multimedia_rec_split_title">Potong rekaman</string>
     <string name="multimedia_photo_play_sound">Suara rana kamera</string>
     <string name="osm_authorization_success">Otorisasi berhasil</string>
@@ -4155,7 +4153,6 @@
     <string name="compass_always_visible">Selalu terlihat</string>
     <string name="compass_click_desc">Ketuk pada kompas untuk mengubah mode orientasi peta.</string>
     <string name="compass_desc">Menampilkan arah ke utara.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Skema warna garis kontur</string>
     <string name="rendering_attr_depthContourColorScheme_description">Skema warna garis kontur</string>
     <string name="add_points_to_map_markers_q">Tambahkan semua titik sebagai penanda peta\?</string>
     <string name="show_polygons">Tampilkan poligon</string>
@@ -4167,7 +4164,6 @@
     <string name="time_to_destination_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi dan sama dengan waktu rute dari lokasi saat ini.</string>
     <string name="time_to_intermediate_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi, ketika titik perantara dilewati, waktunya akan diperbarui ke titik perantara berikut.</string>
     <string name="rendering_attr_depthContourWidth_description">Lebar garis kontur</string>
-    <string name="rendering_attr_depthContourWidth_name">Lebar garis kontur</string>
     <string name="accessibility_2d_view_off">Tampilan 2.5D nonaktif</string>
     <string name="accessibility_2d_view_on">Tampilan 2.5D aktif</string>
     <string name="download_complete">Unduhan selesai</string>
@@ -4877,4 +4873,7 @@
 \n</string>
     <string name="external_sensors_support">Dukungan sensor eksternal</string>
     <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
+    <string name="show_map_symbols_desc">Teks, tanda jalan, dan lain-lain.</string>
+    <string name="show_borders_of_downloaded_maps">Warna peta terunduh</string>
+    <string name="show_map_symbols">Tampilkan simbol peta</string>
 </resources>

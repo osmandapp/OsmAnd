@@ -17,8 +17,6 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class AltitudeWidget extends TextInfoWidget {
 
-	private static final String NO_VALUE = "—";
-
 	private final OsmandMapTileView mapView;
 	private int cachedAltitude;
 

@@ -124,7 +124,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
 		removePluginItems(null);
 	}

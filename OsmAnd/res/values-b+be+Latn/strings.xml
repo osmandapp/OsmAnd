@@ -2452,8 +2452,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="show_direction">Indykacyja adlehłaści</string>
     <string name="sort_by">Sartavać pa</string>
     <string name="marker_show_distance_descr">Abiarycie, jak pakazvać adliehlaść i napramak da paznak na ekranie mapy:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Paroh aryjentacyi mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Abiarycie chutkasć, na jakoj aryjentacyja mapy pierakliučajecca z «Napramku ruchu» na «Pa kompasu».</string>
     <string name="all_markers_moved_to_history">Usie paznaki pieraniesieny ŭ historyju</string>
     <string name="marker_moved_to_history">Paznaka mapy pieraniesienaja ŭ historyju</string>
     <string name="marker_moved_to_active">Paznaka mapy stala aktyŭnaj</string>

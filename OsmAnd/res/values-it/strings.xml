@@ -2373,8 +2373,6 @@
     <string name="show_direction">Indicazione della direzione</string>
     <string name="sort_by">Ordina per</string>
     <string name="marker_show_distance_descr">Scegli come indicare la distanza e la direzione dei marcatori della mappa nella schermata della mappa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Soglia di orientamento della mappa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selezionare la velocità sotto la quale l\'orientamento della mappa passa da \'Nella direzione del movimento\' a \'Con bussola\'.</string>
     <string name="all_markers_moved_to_history">Tutti i marcatori della mappa sono stati archiviati nella cronologia</string>
     <string name="marker_moved_to_history">Marcatori della mappa spostati nella cronologia</string>
     <string name="marker_moved_to_active">Marcatori della mappa spostati negli attivi</string>
@@ -4721,10 +4719,8 @@
     <string name="shared_string_duplicate">Duplicato</string>
     <string name="compass_always_visible">Sempre visibile</string>
     <string name="compass_desc">Mostra la direzione del nord.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Schema di colori linee di profondità</string>
     <string name="rendering_attr_depthContourColorScheme_description">Schema colori delle linee di profondità</string>
     <string name="rendering_attr_depthContourWidth_description">Spessore linee di profondità</string>
-    <string name="rendering_attr_depthContourWidth_name">Spessore linee di profondità</string>
     <string name="accessibility_2d_view_off">Vista 2.5D disattiva</string>
     <string name="accessibility_2d_view_on">Vista 2.5D attiva</string>
     <string name="download_complete">Download completato</string>

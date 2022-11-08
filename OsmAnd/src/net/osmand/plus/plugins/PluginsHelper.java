@@ -19,7 +19,6 @@ import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -44,6 +43,7 @@ import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -66,8 +66,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -100,6 +98,7 @@ public class PluginsHelper {
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new AntPlusPlugin(app));
+		allPlugins.add(new WeatherPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
 		loadCustomPlugins(app);
@@ -334,7 +333,7 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getEnabledPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (p.isEnabled()) {
 				lst.add(p);
@@ -345,7 +344,7 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (p.isActive()) {
 				lst.add(p);
@@ -356,7 +355,7 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getNotActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (!p.isActive()) {
 				lst.add(p);
@@ -367,7 +366,7 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getMarketPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (p.isMarketPlugin()) {
 				lst.add(p);
@@ -378,7 +377,7 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<CustomOsmandPlugin> getCustomPlugins() {
-		ArrayList<CustomOsmandPlugin> lst = new ArrayList<CustomOsmandPlugin>(allPlugins.size());
+		ArrayList<CustomOsmandPlugin> lst = new ArrayList<>(allPlugins.size());
 		for (OsmandPlugin plugin : allPlugins) {
 			if (plugin instanceof CustomOsmandPlugin) {
 				lst.add((CustomOsmandPlugin) plugin);
@@ -474,7 +473,6 @@ public class PluginsHelper {
 		}
 	}
 
-	@NonNull
 	public static void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		try {
 			for (OsmandPlugin plugin : getEnabledPlugins()) {
@@ -486,7 +484,7 @@ public class PluginsHelper {
 	}
 
 	public static List<String> getDisabledRendererNames() {
-		List<String> l = new ArrayList<String>();
+		List<String> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getNotActivePlugins()) {
 			l.addAll(plugin.getRendererNames());
 		}
@@ -494,7 +492,7 @@ public class PluginsHelper {
 	}
 
 	public static List<String> getDisabledRouterNames() {
-		List<String> l = new ArrayList<String>();
+		List<String> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getNotActivePlugins()) {
 			l.addAll(plugin.getRouterNames());
 		}
@@ -502,7 +500,7 @@ public class PluginsHelper {
 	}
 
 	public static List<String> onIndexingFiles(@Nullable IProgress progress) {
-		List<String> l = new ArrayList<String>();
+		List<String> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			List<String> ls = plugin.indexingFiles(progress);
 			if (ls != null && ls.size() > 0) {
@@ -585,7 +583,7 @@ public class PluginsHelper {
 	}
 
 	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.registerLayerContextMenuActions(adapter, mapActivity, customRules);
 		}
 	}
@@ -604,15 +602,15 @@ public class PluginsHelper {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			String prefix = plugin.getRenderPropertyPrefix();
 			if (prefix != null) {
-				Iterator<RenderingRuleProperty> it = customRules.iterator();
-				while (it.hasNext()) {
-					RenderingRuleProperty rule = it.next();
-					if (rule.getAttrName().startsWith(prefix)) {
-						it.remove();
-						if (rule.isBoolean()) {
-							plugin.registerBooleanRenderingPreference(rule.getAttrName(), false);
+				Iterator<RenderingRuleProperty> iterator = customRules.iterator();
+				while (iterator.hasNext()) {
+					RenderingRuleProperty property = iterator.next();
+					if (property.getAttrName().startsWith(prefix)) {
+						iterator.remove();
+						if (property.isBoolean()) {
+							plugin.registerBooleanRenderingPreference(property);
 						} else {
-							plugin.registerRenderingPreference(rule.getAttrName(), "");
+							plugin.registerRenderingPreference(property);
 						}
 					}
 				}

@@ -2474,8 +2474,6 @@
     <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
     <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на мапе:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з \"Напрамку руху\" на \"Па компасе\".</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
     <string name="marker_moved_to_history">Адзнака мапы перамешчаная ў гісторыю</string>
     <string name="marker_moved_to_active">Адзнака мапы стала актыўнай</string>
@@ -4765,9 +4763,7 @@
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
     <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
-    <string name="rendering_attr_depthContourWidth_name">Шырыня контурных ліній глыбіні</string>
     <string name="compass_desc">Паказвае кірунак на поўнач.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
     <string name="without_profiles_changing">Без змены профіляў</string>
@@ -4816,4 +4812,48 @@
     <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
+    <string name="show_borders_of_downloaded_maps">Афарбоўка спампаваных мап</string>
+    <string name="weather_online_cache">Сеціўны кэш</string>
+    <string name="map_settings_weather_temp">Тэмпература</string>
+    <string name="map_settings_weather_air_pressure">Ціск паветра</string>
+    <string name="map_settings_weather_wind">Вецер</string>
+    <string name="map_settings_weather_cloud">Воблачнасць</string>
+    <string name="map_settings_weather_precip">Ападкі</string>
+    <string name="measurement_units">Адзінкі вымярэння</string>
+    <string name="shared_string_weather">Надвор\'е</string>
+    <string name="explore_weather_forecast">Даследуйце прагноз надвор\'я.</string>
+    <string name="shared_string_contours">Ізалініі</string>
+    <string name="shared_string_layers">Слаі</string>
+    <string name="empty_screen_weather_contours">Уключыце для прагляду ізаліній надвор\'я на мапе.</string>
+    <string name="empty_screen_weather_pressure_layer">Уключыце для прагляду ціску на мапе.</string>
+    <string name="empty_screen_weather_clouds_layer">Уключыце для прагляду воблачнасці на мапе.</string>
+    <string name="empty_screen_weather_wind_layer">Уключыце для прагляду ветру на мапе.</string>
+    <string name="empty_screen_weather_precipitation_layer">Уключыце для прагляду ападкаў на мапе.</string>
+    <string name="empty_screen_weather_temperature_layer">Уключыце для прагляду тэмпературы на мапе.</string>
+    <string name="empty_screen_view_selected_weather_data">Уключыце для прагляду выбраных даных надвор\'я на мапе.</string>
+    <string name="weather_precip_mm">мм</string>
+    <string name="weather_precip_in">″</string>
+    <string name="weather_precip_inches">Цалі</string>
+    <string name="weather_precip_milimeters">Міліметры</string>
+    <string name="weather_wind_kt">kn</string>
+    <string name="weather_wind_mph">міль/г</string>
+    <string name="weather_wind_kmh">км/г</string>
+    <string name="weather_wind_ms">м/с</string>
+    <string name="weather_wind_knots">Вузлы</string>
+    <string name="weather_wind_miles_per_hour"></string>
+    <string name="weather_widgets_secondary_desc">Адзінкі вымярэння можна змяніць у наладах убудовы Надвор\'e.</string>
+    <string name="air_pressure_widget_desc">Паказвае атмасферны ціск для бягучага цэнтра мапы.</string>
+    <string name="wind_widget_desc">Паказвае хуткасць ветру для бягучага цэнтра мапы.</string>
+    <string name="weather_widget_group_desc">Набор віджэтаў, якія паказваюць розную інфармацыю пра надвор\'е.</string>
+    <string name="precipitation_widget_desc">Паказвае колькасць ападкаў для бягучага цэнтра мапы.</string>
+    <string name="temperature_widget_desc">Паказвае тэмпературу для бягучага цэнтра мапы.</string>
+    <string name="action_not_supported_with_map_style">Дзеянне не падтрымліваецца з абраным стылем мапы.</string>
+    <string name="weather_offline_forecast">Пазасеткавы прагноз</string>
+    <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
+    <string name="weather_prefs_descr">пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны</string>
+    <string name="weather_plugin_description">Убудова Надвор\'е забяспечвае:
+\n- 5 слаёў... пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны
+\n- віджэты на аснове месцазнаходжання
+\n- ізалініі тэмпературы / ціску
+\nДаныя надвор\'я прадстаўлены GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
 </resources>

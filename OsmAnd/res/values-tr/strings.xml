@@ -2263,8 +2263,6 @@
     <string name="show_passed">Geçilmiş-olanı göster</string>
     <string name="hide_passed">Geçilmiş-olanı gizle</string>
     <string name="marker_show_distance_descr">Haritada harita işaretleyicilerine olan uzaklık ve yönün nasıl belirtileceğini seçin:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Harita yönlendirme eşiği</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Harita yönünün \'Hareket yönü\'nden \'Pusula yönü\'ne geçiş hızını aşağıdan seçin.</string>
     <string name="save_as_route_point">Rota noktaları olarak kaydet</string>
     <string name="add_point_before">Öncesinde nokta ekle</string>
     <string name="add_point_after">Sonrasında nokta ekle</string>
@@ -4763,10 +4761,8 @@
     <string name="compass_always_visible">Her zaman görünür</string>
     <string name="compass_click_desc">Harita yönlendirme modunu değiştirmek için pusulaya dokunun.</string>
     <string name="compass_desc">Kuzey yönünü gösterir.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Derinlik eş yükselti çizgisi renk düzeni</string>
     <string name="rendering_attr_depthContourColorScheme_description">Derinlik eş yükselti çizgisi renk düzeni</string>
     <string name="rendering_attr_depthContourWidth_description">Derinlik eş yükselti çizgisi genişliği</string>
-    <string name="rendering_attr_depthContourWidth_name">Derinlik eş yükselti çizgisi genişliği</string>
     <string name="attach_roads_descr">Çevrim dışı haritayı kullanarak izinizi bir rota ile yaklaşık olarak belirleyin. Bu, navigasyon sırasında kullanılan düzeltilmiş yükseklik değerlerini, yol ayrıntılarını ve dönüşleri sağlayacaktır.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Özel dağ bisikleti parkurlarını göster.</string>
     <string name="download_tiles">Döşemeleri indir</string>

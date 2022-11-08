@@ -1827,8 +1827,6 @@
     <string name="date_added">Data de adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar a distância e a direção para os marcadores no mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade de mudança de orientação de \"Direção do movimento\" a \"Direção da bússola\" abaixo.</string>
     <string name="all_markers_moved_to_history">Todos os marcadores do mapa foram movidos para histórico</string>
     <string name="marker_moved_to_history">Marcador do mapa movido para histórico</string>
     <string name="marker_moved_to_active">Marcador do mapa movido para ativo</string>
@@ -3435,9 +3433,9 @@
     <string name="live_monitoring_adress">Endereço da web</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
     <string name="live_monitoring_time_buffer">Memória intermédia</string>
-    <string name="monitoring_min_distance_descr_recommendation">Recomendação: uma configuração de 5 metros pode funcionar bem se não precisar capturar detalhes mais refinados do que isso e não quer capturar dados explicitamente enquanto estiver parado.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (no mundo real, por exemplo de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. O seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente os artefactos causados por má receção ou efeitos do chipset GPS.</string>
-    <string name="monitoring_min_distance_descr">Este filtro evita que sejam gravados pontos duplicados quando houver muito pouco movimento real e cria uma aparência espacial mais agradável dos trilhos que não são processados posteriormente.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recomendação: use 5 metros de deslocamento se não quiser gravar detalhes menores da rota, e não precisa de dados adicionais sobre seu período de descanso.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: os períodos em que está parado não são registados em absoluto ou em apenas um ponto cada. Pequenos movimentos (no mundo real, por exemplo de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. Note que o seu ficheiro contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente os artefactos causados por má receção ou efeitos do chipset GPS.</string>
+    <string name="monitoring_min_distance_descr">Ligar este filtro permite evitar a gravação de dados adicionais quando o movimento quase não é detetado. Também melhora a aparência espacial de trilhos sem processamento adicional.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, no nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: é difícil prever o que será gravado e o que não será, talvez seja melhor desativar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efeito colateral: como resultado da filtragem por precisão, os pontos podem estar totalmente ausentes por ex. debaixo de pontes, sob árvores, entre prédios altos ou com certas condições climáticas.</string>
@@ -4736,8 +4734,6 @@
     <string name="next_turn_widget_desc">Mostra informação sobre a próxima curva a fazer com uma imagem da manobra e distância até ela.</string>
     <string name="compass_desc">Mostra a direção para norte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de cores das curvas de nível de profundidade</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das curvas de nível de profundidade</string>
-    <string name="rendering_attr_depthContourWidth_name">Largura da curva de nível de profundidade</string>
     <string name="auto_backup_title">Cópia de segurança automática</string>
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="true_bearing_wdiget_desc">Ângulo entre o verdadeiro norte e o ponto alvo observado a partir da sua localização.</string>
@@ -4833,21 +4829,21 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
     <string name="worldwide_maps">Mapas mundiais</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Monitorização do ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer ligação de dispositivo com sensores destes parâmetros com suporte de ANT + (Wireless Personal Network protocol).</string>
-    <string name="map_widget_altitude_map_center_desc">Mostra a altura acima do nível do mar do centro do mapa atual.</string>
+    <string name="external_sensors_plugin_description">Monitorização do ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o dispositivo esteja ligado aos respetivos sensores através do ANT + (Wireless Personal Network protocol).</string>
+    <string name="map_widget_altitude_map_center_desc">Mostra a elevação acima do nível do mar do centro do mapa atual.</string>
     <string name="map_widget_altitude_current_location">Altitude: localização atual</string>
-    <string name="map_widget_altitude_desc">Mostra a altura acima do nível do mar da geolocalização atual ou para o centro do mapa atual</string>
+    <string name="map_widget_altitude_desc">Mostra a elevação acima do nível do mar da geolocalização atual ou para o centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
     <string name="map_center_widget">Coordenadas:centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Altitude: centro do mapa</string>
-    <string name="map_widget_altitude_current_location_desc">Mostra a altura acima do nível do mar da geolocalização atual.</string>
-    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados (expressos em fotogramas por segundo ou FPS).</string>
+    <string name="map_widget_altitude_current_location_desc">Mostra a elevação acima do nível do mar da geolocalização atual.</string>
+    <string name="map_widget_rendering_fps_desc">Mostra a rapidez com que o mapa e os elementos do mapa são mostrados e atualizados expresso em fotogramas por segundo (FPS).</string>
     <string name="simulate_location_by_gpx">Simular a localização por GPX</string>
     <string name="location_simulation_cutoff">A simulação ignora os primeiros metros</string>
     <string name="location_simulation_speedup">Velocidade da simulação</string>
-    <string name="send_uuid_preference_desc">O UUID aleatório é utilizado para descarregar mapas off-line dos servidores do OsmAnd para monitorizar a utilização justa dos recursos do servidor, prever a utilização do tráfego e gerar relatórios de mapas mensais anónimos.</string>
+    <string name="send_uuid_preference_desc">O UUID aleatório é utilizado para descarregar mapas off-line dos servidores do OsmAnd para monitorizar a utilização justa dos recursos do servidor, prever padrões e gerar relatórios de mapas mensais anónimos.</string>
     <string name="send_uuid_preference">Enviar identificador único de utilizador (UUID)</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de utilização</string>
@@ -4855,11 +4851,11 @@
     <string name="external_sensors_support">Sensores externos suportados</string>
     <string name="speak_gps_signal_status">Anunciar a perda ou recuperação do sinal GPS</string>
     <string name="speak_route_recalculation">Anunciar o recálculo da rota</string>
-    <string name="release_4_3">• Novo mecanismo de renderização de mapas mais rápido, com visualização 2.5D
+    <string name="release_4_3">• Novo mecanismo de renderização de mapas mais rápido (versão 2 - OpenGL), com visualização 2.5D
 \n
 \n • Animação suave em alterações de localização durante o movimento
 \n
-\n • Novo widget com coordenadas do centro do mapa
+\n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
 \n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
 \n
@@ -4873,8 +4869,23 @@
 \n
 \n • Adicionado suporte para sensores ANT+
 \n
-\n • Opção adicionada para desativar o UUID
+\n • Opção adicionada para desativar o descarregamento do UUID
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
+    <string name="show_map_symbols_desc">Texto, sinais de trânsito e outros.</string>
+    <string name="show_map_symbols">Mostrar símbolos do mapa</string>
+    <string name="show_borders_of_downloaded_maps">Coloração de mapas descarregados</string>
+    <string name="rendering_engine_failed_descr">A renderização do mapa foi reposta para a \'Versão 1\'. Pode tentar voltar para o novo motor de renderização \'Versão 2 (OpenGL\') nas Configurações.
+\n
+\nPor favor ajude os programadores a melhorar o OsmAnd fornecendo o relatório de erros.</string>
+    <string name="rendering_engine_failed">A renderização do mapa no OsmAnd falhou recentemente.</string>
+    <string name="share_crash_log">Partilhar relatório de erros</string>
+    <string name="dismiss_changes_descr">Todas as alterações serão descartadas.</string>
+    <string name="dismiss_changes">Descartar as alterações\?</string>
+    <string name="restart_now">Reiniciar agora</string>
+    <string name="map_rendering_engine_v1">Versão 1</string>
+    <string name="map_rendering_engine_v2">Versão 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">A versão 2 (OpenGL) é o motor de renderização de mapas mais rápido também na visualização 2.5D. A versão 1 foi a versão padrão antes da versão 4.3, e ainda é a recomendada em dispositivos mais antigos.</string>
+    <string name="map_rendering_engine">Motor de renderização do mapa</string>
 </resources>

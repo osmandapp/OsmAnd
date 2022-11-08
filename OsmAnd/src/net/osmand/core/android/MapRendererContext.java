@@ -1,10 +1,14 @@
 package net.osmand.core.android;
 
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
+import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
@@ -22,9 +26,12 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileSqliteDatabasesCollection;
+import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherWebClient;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -51,6 +58,8 @@ public class MapRendererContext {
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_SYMBOL_SECTION = 1;
+	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+
 	private final OsmandApplication app;
 	
 	// input parameters
@@ -64,11 +73,13 @@ public class MapRendererContext {
 	private final Map<String, ResolvedMapStyle> mapStyles = new HashMap<>();
 	private CachedMapPresentation presentationObjectParams;
 	private MapPresentationEnvironment mapPresentationEnvironment;
-	
+	private MapPrimitiviser mapPrimitiviser;
+	private WeatherTileResourcesManager weatherTileResourcesManager;
+
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
 	private MapRendererView mapRendererView;
-	
+
 	private float cachedReferenceTileSize;
 	
 	public MapRendererContext(OsmandApplication app, float density) {
@@ -177,6 +188,8 @@ public class MapRendererContext {
 			recreateRasterAndSymbolsProvider();
 			setMapBackgroundColor();
 		}
+
+		instantiateWeatherResourcesManager();
 	}
 
 	private void setMapBackgroundColor() {
@@ -210,11 +223,9 @@ public class MapRendererContext {
 		// Apply map style settings
 		OsmandSettings prefs = app.getSettings();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-		Map<String, String> props = new HashMap<String, String>();
+		Map<String, String> props = new HashMap<>();
 		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())){
-				continue;
-			} else if (customProp.isBoolean()) {
+			if (customProp.isBoolean()) {
 				CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
 				props.put(customProp.getAttrName(), pref.get() + "");
 			} else {
@@ -239,7 +250,7 @@ public class MapRendererContext {
 	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
-		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
+		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
 		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
 		// Create new map primitives provider
 		MapPrimitivesProvider mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider, mapPrimitiviser,
@@ -324,6 +335,43 @@ public class MapRendererContext {
 			// Heightmap
 			recreateHeightmapProvider();
 		}
+	}
+
+	private void instantiateWeatherResourcesManager()
+	{
+		if (weatherTileResourcesManager != null) {
+			return;
+		}
+
+		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
+		if (!weatherForecastDir.exists()) {
+			weatherForecastDir.mkdir();
+		}
+		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
+		int tileSize = 256;
+		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
+
+		WeatherWebClient webClient = new WeatherWebClient();
+		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
+				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
+		webClient.swigReleaseOwnership();
+
+		//TODO: refactoring needed. Do not use plugin class here.
+		WeatherPlugin weatherPlugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
+		if (weatherPlugin != null) {
+			weatherPlugin.updateBandsSettings(weatherTileResourcesManager);
+		}
+		this.weatherTileResourcesManager = weatherTileResourcesManager;
+	}
+
+	@Nullable
+	public MapPrimitiviser getMapPrimitiviser() {
+		return mapPrimitiviser;
+	}
+
+	@Nullable
+	public WeatherTileResourcesManager getWeatherTileResourcesManager() {
+		return weatherTileResourcesManager;
 	}
 
 	private static class CachedMapPresentation {

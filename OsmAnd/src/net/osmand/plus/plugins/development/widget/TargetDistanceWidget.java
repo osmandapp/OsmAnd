@@ -18,8 +18,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class TargetDistanceWidget extends TextInfoWidget {
 
-	private static final String NO_VALUE = "—";
-
 	private final OsmandMapTileView mapView;
 	private float cachedTargetDistance = -1;
 

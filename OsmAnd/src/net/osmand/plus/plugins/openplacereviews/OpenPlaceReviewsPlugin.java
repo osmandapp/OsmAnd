@@ -213,7 +213,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		if (OPR_USE_DEV_URL.get()) {
 			OPR_USE_DEV_URL.set(false);
 			app.getOprAuthHelper().resetAuthorization();

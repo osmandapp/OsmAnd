@@ -32,8 +32,10 @@ import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RadiusRulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
 public class MapWidgetsFactory {
@@ -116,6 +118,12 @@ public class MapWidgetsFactory {
 				return new BatteryWidget(mapActivity);
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
+			case SUNRISE:
+				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
+				return new SunriseSunsetWidget(mapActivity, sunriseState);
+			case SUNSET:
+				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
+				return new SunriseSunsetWidget(mapActivity, sunsetState);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:

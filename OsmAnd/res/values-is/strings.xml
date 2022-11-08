@@ -2214,7 +2214,6 @@
     <string name="ascendingly">A-Ö</string>
     <string name="date_added">Bætt við</string>
     <string name="order_by">Raða eftir:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Þolvik fyrir stefnu korts</string>
     <string name="shared_string_list">Listi</string>
     <string name="shared_string_groups">Hópar</string>
     <string name="passed">Síðast notað: %1$s</string>
@@ -2432,7 +2431,6 @@
     <string name="active_markers_descr">Veldu hve margir stefnuvísar séu birtir.</string>
     <string name="import_gpx_file_description">er hægt að flytja inn sem punkt í eftirlæti eða sem GPX-skrá.</string>
     <string name="marker_show_distance_descr">Veldu hvernig á að gefa til kynna vegalengd og stefnu að kortamerkjum á kortaskjánum:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Veldu undir hvaða hraða stefna kortsins skiptir úr \'Eftir átt hreyfingar\' yfir í \'Eftir áttavita\'.</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd mun tengja punktana við leiðir fyrir valið notandasnið.</string>
     <string name="private_access_routing_req">Áfangastaður þinn er innan svæðis með einkaaðgangi. Viltu leyfa aðgang að einkavegum í þessari ferð?</string>
     <string name="upload_osm_note_description">Þú getur sent OSM-minnispunktinn þinn inn nafnlaust eða með því að nota OpenStreetMap.org notandasniðið þitt.</string>
@@ -4671,10 +4669,8 @@
     <string name="compass_always_hidden">Alltaf falið</string>
     <string name="compass_always_visible">Alltaf sýnilegt</string>
     <string name="compass_desc">Sýnir stefnu í norður.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourColorScheme_description">Litastef dýptarlína</string>
     <string name="rendering_attr_depthContourWidth_description">Breidd dýptarlína</string>
-    <string name="rendering_attr_depthContourWidth_name">Breidd dýptarlína</string>
     <string name="download_complete">Niðurhali lokið</string>
     <string name="reset_all_settings_desc">Frumstilla allar stillingar á sjálfgefin gildi\?</string>
     <string name="co2_mission">CO2 útblástur</string>

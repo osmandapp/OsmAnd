@@ -2150,7 +2150,7 @@
     <string name="average_altitude">平均海拔</string>
     <string name="shared_string_time">時間</string>
     <string name="total_distance">總體距離</string>
-    <string name="routing_attr_driving_style_name">駕駛方式</string>
+    <string name="routing_attr_driving_style_name">騎乘方式</string>
     <string name="shared_string_gpx_tracks">軌跡</string>
     <string name="select_gpx_folder">選擇 GPX 檔案資料夾</string>
     <string name="file_can_not_be_moved">無法移動檔案。</string>
@@ -2454,7 +2454,6 @@
     <string name="move_all_to_history">全部移動到歷程</string>
     <string name="show_direction">距離指示</string>
     <string name="sort_by">排序方式</string>
-    <string name="map_orientation_change_in_accordance_with_speed">地圖定位起點</string>
     <string name="all_markers_moved_to_history">所有的地圖標記已移到歷程記錄</string>
     <string name="marker_moved_to_history">地圖標記已移到歷程記錄</string>
     <string name="marker_moved_to_active">地圖標記已移到活動</string>
@@ -2467,7 +2466,6 @@
     <string name="last_seven_days">最近 7 天</string>
     <string name="this_year">今年</string>
     <string name="marker_show_distance_descr">選擇如何在地圖上表示距離和方向給地圖標記：</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">從下方選擇「行進方向」切換到「羅盤方向」的切換方向速度。</string>
     <string name="remove_from_map_markers">從「地圖標記」中移除</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -3323,7 +3321,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
     <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
     <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
-    <string name="monitoring_min_distance_descr">啟用此過濾器可以避免在幾乎未檢測到移動時記錄額外的資料。其也改進了軌道的空間外觀，無需進一步處理。</string>
+    <string name="monitoring_min_distance_descr">開啟此過濾器可以避免在幾乎未檢測到移動時記錄額外的資料。其也改進了軌道的空間外觀，無需進一步處理。</string>
     <string name="monitoring_min_distance_descr_side_effect">副作用：完全不記錄休息時間，或者每次只記錄一個點。也可能會濾除較小的動作（例如在路邊標記行程中可能出現的轉彎）。請注意，您的檔案可能包含較少的後處理資訊，同時可能會儲存因接收不良或晶片組影響而導致的 GPS 假軌跡。</string>
     <string name="monitoring_min_distance_descr_recommendation">建議：若您不想記錄路線的次要細節，也不需要額外的休息時間資料，請設置 5 公尺位移。</string>
     <string name="live_monitoring_time_buffer">緩衝時間</string>
@@ -4749,9 +4747,7 @@
     <string name="compass_always_visible">一律可見</string>
     <string name="compass_desc">顯示北邊的方向。</string>
     <string name="compass_click_desc">點擊指南針切換地圖方向模式。</string>
-    <string name="rendering_attr_depthContourColorScheme_name">等深線配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
-    <string name="rendering_attr_depthContourWidth_name">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地腳踏車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
@@ -4844,7 +4840,7 @@
     <string name="speak_gps_signal_status">宣佈 GPS 訊號遺失與恢復</string>
     <string name="speak_route_recalculation">宣佈路線重新計算</string>
     <string name="purchases_feature_desc_external_sensors">顯示並記錄來自外部感應器的資料：自行車速度、自行車功率、踩踏頻率與心率。</string>
-    <string name="release_4_3">• 新的、較快速的地圖繪製引擎，包含了 2.5D 檢視
+    <string name="release_4_3">• 新的、較快速的第二版 (OpenGL) 地圖繪製引擎，包含了 2.5D 檢視
 \n
 \n • 運動時位置變化的平滑動畫
 \n
@@ -4866,4 +4862,72 @@
 \n
 \n</string>
     <string name="external_sensors_support">外部感應器支援</string>
+    <string name="show_borders_of_downloaded_maps">顯示已下載地圖的邊界</string>
+    <string name="show_map_symbols">顯示地圖符號</string>
+    <string name="show_map_symbols_desc">文字與路標等等。</string>
+    <string name="weather_offline_forecast">離線預報</string>
+    <string name="map_settings_weather_wind">風</string>
+    <string name="map_settings_weather_cloud">雲</string>
+    <string name="measurement_units">測量單位</string>
+    <string name="shared_string_weather">天氣</string>
+    <string name="explore_weather_forecast">探索天氣預報。</string>
+    <string name="shared_string_layers">圖層</string>
+    <string name="empty_screen_weather_contours">開啟以在地圖上檢視天氣等值線。</string>
+    <string name="empty_screen_weather_pressure_layer">開啟以在地圖上檢視壓力圖層。</string>
+    <string name="empty_screen_weather_clouds_layer">開啟以在地圖上檢視雲圖層。</string>
+    <string name="weather_wind_mph">哩/小時</string>
+    <string name="weather_wind_kmh">公里/小時</string>
+    <string name="weather_wind_miles_per_hour">英里每小時</string>
+    <string name="weather_wind_kilimeters_per_hour">公里每小時</string>
+    <string name="weather_wind_meters_per_second">公尺/秒</string>
+    <string name="weather_widgets_secondary_desc">可以在天氣外掛程式設定中變更測量單位。</string>
+    <string name="clouds_widget_desc">顯示目前地圖中心的雲層。</string>
+    <string name="wind_widget_desc">顯示目前地圖中心的風速。</string>
+    <string name="precipitation_widget_desc">顯示目前地圖中心的降水。</string>
+    <string name="weather_pressure_millimeters_of_mercury">毫米汞柱</string>
+    <string name="weather_prefs_descr">24小時每小時預報與7天每3小時的預報</string>
+    <string name="rendering_engine_failed_descr">OsmAnd 已還原為「第一版」的地圖繪製方式。您可以在設定中嘗試切換回新的「第二版 (OpenGL)」繪製引擎。
+\n
+\n請透過提供您的錯誤紀錄檔支援改善。</string>
+    <string name="rendering_engine_failed">OsmAnd 的地圖繪製最近當機了。</string>
+    <string name="share_crash_log">分享當機紀錄檔</string>
+    <string name="dismiss_changes_descr">所有變更都將被取消。</string>
+    <string name="map_rendering_engine_v1">第一版</string>
+    <string name="map_rendering_engine_v2">第二版 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">第二版 (OpenGL) 是較快的地圖繪製引擎，同時也支援 2.5D 檢視。第一版是 4.3 版以前的預設值，對舊裝置來說可能更好用。</string>
+    <string name="map_rendering_engine">地圖繪製引擎</string>
+    <string name="weather_online_cache">線上預報</string>
+    <string name="empty_screen_weather_wind_layer">開啟以在地圖上檢視風圖層。</string>
+    <string name="empty_screen_view_selected_weather_data">開啟以在地圖上檢視選定的天氣資料。</string>
+    <string name="weather_wind_knots">節</string>
+    <string name="weather_plugin_description">天氣外掛程式提供了
+\n- 五個圖層……24小時的每小時預報與7天每3小時的預報
+\n- 以位置為基礎的小工具
+\n- 等溫線/等壓線
+\n天氣資料由 GFS 提供：https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast。</string>
+    <string name="map_settings_weather_temp">溫度</string>
+    <string name="map_settings_weather_air_pressure">氣壓</string>
+    <string name="map_settings_weather_precip">降水</string>
+    <string name="shared_string_contours">等值線</string>
+    <string name="empty_screen_weather_precipitation_layer">開啟以在地圖上檢視降水圖層。</string>
+    <string name="empty_screen_weather_temperature_layer">開啟以在地圖上檢視溫度圖層。</string>
+    <string name="weather_precip_in">英吋</string>
+    <string name="weather_precip_mm">公釐</string>
+    <string name="weather_precip_inches">英吋</string>
+    <string name="weather_wind_kt">節</string>
+    <string name="weather_precip_milimeters">公釐</string>
+    <string name="weather_pressure_hpa">百帕</string>
+    <string name="weather_wind_ms">公尺/秒</string>
+    <string name="air_pressure_widget_desc">顯示目前地圖中心的氣壓。</string>
+    <string name="temperature_widget_desc">顯示目前地圖中心的溫度。</string>
+    <string name="weather_widget_group_desc">一組顯示各種天氣資訊的小工具。</string>
+    <string name="weather_pressure_hectopascals">百帕</string>
+    <string name="weather_pressure_inhg">英寸汞柱</string>
+    <string name="weather_pressure_mmhg">毫米汞柱</string>
+    <string name="action_not_supported_with_map_style">所選地圖樣式不支援動作。</string>
+    <string name="weather_pressure_inches_of_mercury">英吋汞柱</string>
+    <string name="weather_temperature_celsius">攝氏</string>
+    <string name="weather_temperature_fahrenheit">華氏</string>
+    <string name="dismiss_changes">忽略變更？</string>
+    <string name="restart_now">立刻重新啟動</string>
 </resources>

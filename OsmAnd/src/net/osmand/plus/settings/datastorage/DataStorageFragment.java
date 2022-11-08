@@ -173,7 +173,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			Bundle resultData = (Bundle) newValue;
 			if (resultData.containsKey(ChangeDataStorageBottomSheet.TAG)) {
 				boolean moveMaps = resultData.getBoolean(MOVE_DATA);
-				StorageItem newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);
+				newDataStorage = resultData.getParcelable(CHOSEN_DIRECTORY);
 				if (newDataStorage != null) {
 					if (tmpManuallySpecifiedPath != null) {
 						String directory = tmpManuallySpecifiedPath;
@@ -437,22 +437,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		if (Algorithms.isEmpty(error)) {
 			moveData(files, size);
 		} else {
-			StringBuilder sb = new StringBuilder();
-			Context ctx = getContext();
-			if (ctx == null) {
-				return;
-			}
-
-			sb.append(error);
-			AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
-			bld.setMessage(sb.toString());
-			bld.setPositiveButton(R.string.shared_string_restart, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					confirm(app, activity, newDataStorage, true);
-				}
-			});
-			bld.show();
+			showErrorDialog(error);
 		}
 	}
 
@@ -495,6 +480,21 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	                      @NonNull Pair<Long, Long> filesSize) {
 		MoveFilesTask task = new MoveFilesTask(activity, currentDataStorage, newDataStorage, files, filesSize, this);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void showErrorDialog(@NonNull String error) {
+		StringBuilder sb = new StringBuilder();
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		sb.append(error);
+		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
+		bld.setMessage(sb.toString());
+		bld.setPositiveButton(R.string.shared_string_restart, (dialog, which) -> {
+			confirm(app, activity, newDataStorage, true);
+		});
+		bld.show();
 	}
 
 	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart) {

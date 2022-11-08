@@ -2465,7 +2465,6 @@
 \n• Choix entre les données régionales complètes ou le réseau routier uniquement (par exemple : 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais)</string>
     <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Pilotage de l\'orientation de la carte</string>
     <string name="all_markers_moved_to_history">Toutes les marques ont été déplacées vers l\'Historique</string>
     <string name="marker_moved_to_history">Marque déplacée vers l\'Historique</string>
     <string name="shared_string_list">Liste</string>
@@ -2479,7 +2478,6 @@
     <string name="date_added">Ajouté</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous la vitesse à laquelle l\'orientation doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
     <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les indications de direction</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
@@ -4719,7 +4717,6 @@
     <string name="compass_visible_if_map_rotated_desc">Masqué lorsque le Nord est vers le haut</string>
     <string name="compass_always_hidden">Toujours masqué</string>
     <string name="compass_always_visible">Toujours affiché</string>
-    <string name="rendering_attr_depthContourWidth_name">Largeur des lignes de profondeur</string>
     <string name="compass_desc">Indique la direction du Nord.</string>
     <string name="compass_visible_if_map_rotated">Affiché lors de la rotation de la carte</string>
     <string name="auto_backup_title">Backup automatique</string>
@@ -4727,7 +4724,6 @@
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
     <string name="compass_click_desc">Appuyez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Un appui sur le gadget, permet de prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Un appui sur le gadget permet d\'enregistrer une vidéo.</string>
     <string name="av_notes_audio_widget_desc">Un appui sur le gadget permet de prendre une note audio.</string>

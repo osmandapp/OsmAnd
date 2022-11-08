@@ -16,8 +16,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class CameraDistanceWidget extends TextInfoWidget {
 
-	private static final String NO_VALUE = "—";
-
 	private final OsmandMapTileView mapView;
 	private float cachedCameraDistance = -1;
 

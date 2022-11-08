@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
@@ -29,6 +31,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidge
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 
@@ -100,6 +103,15 @@ public enum WidgetType {
 	ANT_BICYCLE_CADENCE("ant_bicycle_cadence", R.string.map_widget_ant_bicycle_cadence, R.string.map_widget_ant_bicycle_cadence_desc, R.drawable.widget_sensor_cadence_day, R.drawable.widget_sensor_cadence_night, 0, ANT_PLUS, RIGHT),
 	ANT_BICYCLE_SPEED("ant_bicycle_speed", R.string.map_widget_ant_bicycle_speed, R.string.map_widget_ant_bicycle_speed_desc, R.drawable.widget_sensort_distance_day, R.drawable.widget_sensort_distance_night, 0, ANT_PLUS, RIGHT),
 	ANT_BICYCLE_DISTANCE("ant_bicycle_distance", R.string.map_widget_ant_bicycle_dist, R.string.map_widget_ant_bicycle_dist_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, ANT_PLUS, RIGHT),
+
+	WEATHER_TEMPERATURE_WIDGET("weather_temp", R.string.map_settings_weather_temp, R.string.temperature_widget_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, WEATHER, RIGHT),
+	WEATHER_PRECIPITATION_WIDGET("weather_precip", R.string.map_settings_weather_precip, R.string.precipitation_widget_desc, R.drawable.widget_weather_precipitation_day, R.drawable.widget_weather_precipitation_night, 0, WEATHER, RIGHT),
+	WEATHER_WIND_WIDGET("weather_wind", R.string.map_settings_weather_wind, R.string.wind_widget_desc, R.drawable.widget_weather_wind_day, R.drawable.widget_weather_wind_night, 0, WEATHER, RIGHT),
+	WEATHER_CLOUDS_WIDGET("weather_cloud", R.string.map_settings_weather_cloud, R.string.clouds_widget_desc, R.drawable.widget_weather_clouds_day, R.drawable.widget_weather_clouds_night, 0, WEATHER, RIGHT),
+	WEATHER_AIR_PRESSURE_WIDGET("weather_pressure", R.string.map_settings_weather_air_pressure, R.string.air_pressure_widget_desc, R.drawable.widget_weather_air_pressure_day, R.drawable.widget_weather_air_pressure_night, 0, WEATHER, RIGHT),
+
+	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
+	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
@@ -188,7 +200,11 @@ public enum WidgetType {
 		} else if (this == PARKING) {
 			return WidgetGroup.getPartOfPluginDesc(context, ParkingPositionPlugin.class);
 		} else if (group != null) {
-			return group.getSecondaryDescription(context);
+			if (group == WEATHER) {
+				return context.getString(R.string.weather_widgets_secondary_desc);
+			} else {
+				return group.getSecondaryDescription(context);
+			}
 		}
 		return null;
 	}
@@ -253,6 +269,8 @@ public enum WidgetType {
 			return new MapMarkerSideWidgetSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
+		} else if (this == SUNRISE || this == SUNSET) {
+			return new SunriseSunsetSettingsFragment();
 		}
 		return null;
 	}

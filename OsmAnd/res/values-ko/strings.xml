@@ -2700,7 +2700,6 @@
     <string name="routing_attr_motor_type_diesel_name">디젤</string>
     <string name="routing_attr_motor_type_petrol_name">가솔린</string>
     <string name="accessibility_2d_view_off">2.5D 뷰 끄기</string>
-    <string name="rendering_attr_depthContourWidth_name">깊이 등고선 너비</string>
     <string name="average_speed_skip_stops">정류장 고려</string>
     <string name="map_widget_true_bearing">트루 베어링</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (제한 없음)</string>

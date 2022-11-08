@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -119,7 +120,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 quickActionButton.setScaleX(1.5f);
                 quickActionButton.setScaleY(1.5f);
                 quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(onQuickActionTouchListener);
+                quickActionButton.setOnTouchListener(getActionOnTouchListener());
                 return true;
             });
         } else {
@@ -485,83 +486,87 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         return setLayerState(false);
     }
 
-    View.OnTouchListener onQuickActionTouchListener = new View.OnTouchListener() {
-        private int initialMarginX;
-        private int initialMarginY;
-        private float initialTouchX;
-        private float initialTouchY;
+    private OnTouchListener getActionOnTouchListener() {
 
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            MapActivity mapActivity = getMapActivity();
-            if (mapActivity == null) {
+        return new OnTouchListener() {
+
+            private int initialMarginX = 0;
+            private int initialMarginY = 0;
+            private float initialTouchX = 0;
+            private float initialTouchY = 0;
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                MapActivity mapActivity = getMapActivity();
+                if (mapActivity == null) {
+                    return false;
+                }
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        setUpInitialValues(v, event);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        quickActionButton.setOnTouchListener(null);
+                        quickActionButton.setPressed(false);
+                        quickActionButton.setScaleX(1);
+                        quickActionButton.setScaleY(1);
+                        quickActionButton.setAlpha(1f);
+                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+                        if (AndroidUiHelper.isOrientationPortrait(mapActivity))
+                            settings.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+                        else
+                            settings.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
+                            setUpInitialValues(v, event);
+
+                        int padding = calculateTotalSizePx(R.dimen.map_button_margin);
+                        FrameLayout parent = (FrameLayout) v.getParent();
+                        FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+                        int deltaX = (int) (initialTouchX - event.getRawX());
+                        int deltaY = (int) (initialTouchY - event.getRawY());
+
+                        int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
+                        int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
+
+                        if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
+                            param.bottomMargin = newMarginY;
+
+                        if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
+                            param.rightMargin = newMarginX;
+                        }
+
+                        v.setLayoutParams(param);
+
+                        return true;
+                }
                 return false;
             }
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    setUpInitialValues(v, event);
-                    return true;
-                case MotionEvent.ACTION_UP:
-                    quickActionButton.setOnTouchListener(null);
-                    quickActionButton.setPressed(false);
-                    quickActionButton.setScaleX(1);
-                    quickActionButton.setScaleY(1);
-                    quickActionButton.setAlpha(1f);
-                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-                    if (AndroidUiHelper.isOrientationPortrait(mapActivity))
-                        settings.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+
+            private int interpolate(int value, int divider, int boundsSize) {
+                if (value <= divider && value > 0)
+                    return value * value / divider;
+                else {
+                    int leftMargin = boundsSize - value - divider;
+                    if (leftMargin <= divider && value < boundsSize - divider)
+                        return leftMargin - (leftMargin * leftMargin / divider) + value;
                     else
-                        settings.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-                    return true;
-                case MotionEvent.ACTION_MOVE:
-                    if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
-                        setUpInitialValues(v, event);
-
-                    int padding = calculateTotalSizePx(R.dimen.map_button_margin);
-                    FrameLayout parent = (FrameLayout) v.getParent();
-                    FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-                    int deltaX = (int) (initialTouchX - event.getRawX());
-                    int deltaY = (int) (initialTouchY - event.getRawY());
-
-                    int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
-                    int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
-
-                    if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
-                        param.bottomMargin = newMarginY;
-
-                    if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
-                        param.rightMargin = newMarginX;
-                    }
-
-                    v.setLayoutParams(param);
-
-                    return true;
+                        return value;
+                }
             }
-            return false;
-        }
 
-        private int interpolate(int value, int divider, int boundsSize) {
-            if (value <= divider && value > 0)
-                return value * value / divider;
-            else {
-                int leftMargin = boundsSize - value - divider;
-                if (leftMargin <= divider && value < boundsSize - divider)
-                    return leftMargin - (leftMargin * leftMargin / divider) + value;
-                else
-                    return value;
+            private void setUpInitialValues(View v, MotionEvent event) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+                initialMarginX = params.rightMargin;
+                initialMarginY = params.bottomMargin;
+
+                initialTouchX = event.getRawX();
+                initialTouchY = event.getRawY();
             }
-        }
-
-        private void setUpInitialValues(View v, MotionEvent event) {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-            initialMarginX = params.rightMargin;
-            initialMarginY = params.bottomMargin;
-
-            initialTouchX = event.getRawX();
-            initialTouchY = event.getRawY();
-        }
-    };
+        };
+    }
 }
