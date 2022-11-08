@@ -4786,11 +4786,11 @@
     <string name="map_widget_zoom_level">Nagyítási szint</string>
     <string name="map_widget_camera_distance">Kameramagasság</string>
     <string name="map_widget_camera_tilt">Kamera dőlés</string>
-    <string name="map_widget_zoom_level_desc">A widget a térkép aktuális nagyítási szintjét mutatja.</string>
-    <string name="map_widget_camera_distance_desc">A widget a kamera felszín feletti magasságát mutatja.</string>
+    <string name="map_widget_zoom_level_desc">Megjeleníti a térkép aktuális nagyítási szintjét.</string>
+    <string name="map_widget_camera_distance_desc">Megjeleníti a kamera felszín feletti magasságát.</string>
     <string name="map_widget_camera_tilt_desc">A widget a kamera dőlésszögét mutatja perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
     <string name="developer_widgets">Fejlesztői widgetek</string>
-    <string name="map_widget_target_distance_desc">A widget a kamerától a célig tartó távolságot mutatja.</string>
+    <string name="map_widget_target_distance_desc">Megjeleníti a kamera és a cél közötti távolságot.</string>
     <string name="map_widget_ant_bicycle_power_desc">Mutatja a kerékpárosnak a kerékpár meghajtása során leadott teljesítményét</string>
     <string name="map_widget_ant_bicycle_speed">Kerékpáros sebesség</string>
     <string name="map_widget_ant_bicycle_cadence">Pedálfordulatszám</string>
@@ -4810,13 +4810,13 @@
     <string name="ant_go_to_store">Ugrás az áruházhoz</string>
     <string name="ant_missing_dependency">Hiányzó függőség</string>
     <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
-    <string name="ant_heart_rate_write_gpx_desc">Pulzusszám írása a nyomvonalba</string>
+    <string name="ant_heart_rate_write_gpx_desc">Pulzusszám belefoglalása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
     <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
-    <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/Web) további költségek nélkül.</string>
+    <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/web) további költségek nélkül.</string>
     <string name="external_sensors_plugin_name">Külső érzékelők</string>
     <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
     <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
@@ -4903,10 +4903,10 @@
     <string name="weather_pressure_millimeters_of_mercury">Higanymilliméter</string>
     <string name="weather_temperature_celsius">Celsius fok</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit fok</string>
-    <string name="action_not_supported_with_map_style">A művelet nem támogatott a kiválasztott mapstíluson.</string>
+    <string name="action_not_supported_with_map_style">Ez a művelet nem támogatott a kiválasztott mapstíluson.</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_prefs_descr">3 óránként frissített 24 órás és 7 napos időjárási előrejelzés</string>
-    <string name="weather_widget_group_desc">Egy különböző időjárási adatokat megjelenítő bővítménykészlet.</string>
+    <string name="weather_widget_group_desc">Különböző időjárási adatokat megjelenítő bővítménykészlet.</string>
     <string name="map_settings_weather_temp">Hőmérséklet</string>
     <string name="map_settings_weather_air_pressure">Légnyomás</string>
     <string name="map_settings_weather_wind">Szél</string>
@@ -4929,4 +4929,18 @@
 \n- helyfüggő bővítmények
 \n- hőmérséklet/nyomás izolinák
 \nAz időjárási adatokat a GFS szolgáltatja: https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="map_widget_sunset_desc">Megjeleníti a következő naplemente idejét vagy az addig hátralévő időt.</string>
+    <string name="map_widget_sunrise_desc">Megjeleníti a következő napfelkelte idejét vagy az addig hátralévő időt.</string>
+    <string name="shared_string_time_left">Hátralévő idő</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Ezek a widgetek információt jelenítenek meg a következő napfelkeltéről vagy naplementéről.</string>
+    <string name="depth_contour_lines">Magassági vonalak</string>
+    <string name="turn_on_nautical_depth_description">Kapcsolja be a tengeri magasságvonalak ábrázolásához.</string>
+    <string name="map_widget_group_sunrise_sunset">Napfelkelte, naplemente</string>
+    <string name="shared_string_next_sunset">Következő naplemente</string>
+    <string name="shared_string_next_sunrise">Következő napfelkelte</string>
+    <string name="shared_string_sunset">Naplemente</string>
+    <string name="shared_string_sunrise">Napfelkelte</string>
+    <string name="switch_mode_by_tapping_on_widget">Váltson módot a widgetre való koppintással.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Vonal színtémája</string>
+    <string name="rendering_attr_depthContourWidth_name">Vonal szélessége</string>
 </resources>
