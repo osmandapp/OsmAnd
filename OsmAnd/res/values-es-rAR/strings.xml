@@ -4817,7 +4817,7 @@
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
-    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin coste adicional.</string>
+    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="ant_widgets">Widgets de ANT+</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».

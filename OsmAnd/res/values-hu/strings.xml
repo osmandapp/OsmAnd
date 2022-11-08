@@ -3983,7 +3983,7 @@
     <string name="latest_openstreetmap_update">Legújabb elérhető OpenStreetMap-frissítés:</string>
     <string name="quick_action_coordinates_widget_descr">A koordináta-widget megjelenítésének vagy elrejtésének kapcsolója.</string>
     <string name="routing_attr_height_obstacles_description">Az útvonaltervező elkerülheti az erős emelkedőket.</string>
-    <string name="app_restart_required">Egyes beállítások alkalmazásához újra kell indítani az alkalmazást.</string>
+    <string name="app_restart_required">Egyes beállítások érvényesítéséhez újra kell indítani az alkalmazást.</string>
     <string name="on_pause">Szüneteltetve</string>
     <string name="track_recording_description">Megszakítja a felvételt\?
 \nMinden el nem mentett adat el fog veszni.</string>
@@ -4594,24 +4594,24 @@
 \n</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megjelenítéséhez.</string>
     <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
-    <string name="current_time_widget_desc">Megjeleníti a készülék aktuális idejét.</string>
+    <string name="current_time_widget_desc">Megjeleníti a készüléke által szolgáltatott aktuális időt.</string>
     <string name="battery_widget_desc">Megjeleníti a készülék akkumulátorának töltöttségi szintjét.</string>
-    <string name="current_speed_widget_desc">Megjeleníti a GPS-érzékelő által érzékelt aktuális sebességet.</string>
+    <string name="current_speed_widget_desc">Megjeleníti a GPS-vevő által számított sebességet.</string>
     <string name="arrival_time_widget_desc">Az úti célhoz való megérkezés időpontja.</string>
     <string name="time_to_go_desc">A célpont eléréséhez szükséges időtartam percben vagy órában kifejezve.</string>
     <string name="magnetic_bearing_widget_desc">A mágneses észak és a célpont közötti, az Ön tartózkodási helyéről megfigyelt szög.</string>
-    <string name="coordinates_widget_secondary_desc">A koordináták formátuma módosítható erre: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">A(z) %1$s – %2$s – %3$s koordináták formátumát megváltoztathatja.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">Widget, amellyel gyorsan elindítható/leállítható a hang-, videó vagy fényképfelvétel.</string>
-    <string name="coordinates_widget_desc">Ez megjeleníti a jelenlegi pozíció földrajzi koordinátáit.</string>
+    <string name="audio_video_notes_desc">Gyors hozzáférést kínál hang- vagy videófelvétel elindításához/leállításához illetve képjegyzet készítéséhez.</string>
+    <string name="coordinates_widget_desc">Megjeleníti a jelenlegi pozíció földrajzi koordinátáit.</string>
     <string name="get_altitude_information">Magassági adatok lekérése</string>
     <string name="calculating_altitude">Magasság kiszámítása</string>
     <string name="calculate_online">Online kiszámítás</string>
-    <string name="bearing_secondary_desc">A megjelenített adatok formátuma módosítható erre: %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">A(z) %1$s – %2$s – %3$s formátumú adatot megváltoztathatja.</string>
     <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
-    <string name="gps_info_widget_desc">Megjeleníti a készülék által az adott pillanatban észlelt és használt műholdak számát.</string>
-    <string name="elevation_profile_widget_desc">Widget, amely megjeleníti a jelenlegi útvonal magassági adait és lejtési viszonyait.</string>
-    <string name="parking_widget_desc">Widget, amely megjeleníti a képernyő középpontjától a parkolási helyig tartó távolságot.</string>
+    <string name="gps_info_widget_desc">Megjeleníti a készülék által észlelt illetve használt műholdak számát.</string>
+    <string name="elevation_profile_widget_desc">Megjeleníti a jelenlegi útvonal magassági adait és lejtési viszonyait.</string>
+    <string name="parking_widget_desc">Megjeleníti a képernyő középpontjától a parkolási helyig tartó távolságot.</string>
     <string name="altitude_widget_desc">Megjeleníti az aktuális földrajzi hely tengerszint feletti magasságát.</string>
     <string name="max_speed_widget_desc">Megjeleníti az aktuálisan használt úton érvényes sebességkorlátozást.</string>
     <string name="navigation_points">Navigációs pontok</string>
@@ -4622,14 +4622,14 @@
     <string name="shared_string_speed">Sebesség</string>
     <string name="app_mode_mountain_bicycle">Hegyi kerékpár (MTB)</string>
     <string name="av_def_action_choose">Kérésre</string>
-    <string name="mapillary_widget_desc">Widget, amely gyors hozzáférést biztosít a Mapillary alkalmazáshoz utcaszintű képek hozzáadásához.</string>
-    <string name="radius_rules_widget_desc">A sugárvonalzó eszköz úgy segít meghatározni a térképen kijelölt pont körüli sugarat, hogy távolságköröket jelenít meg a térképen.</string>
-    <string name="lanes_widgets_desc">A sáv-widget megjeleníti az aktuális közlekedési sávok elrendezését, és kiemeli azokat, amelyeken az aktív navigáció szerint haladni kell.</string>
-    <string name="map_markers_bar_widget_desc">A felső sávban lévő widgeten láthatja a jelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
-    <string name="bearing_desc">Az irányszög-widget a cél abszolút vagy relatív irányát mutatja szögegységben (180° fok, 360° fok vagy milliradián).</string>
-    <string name="navigation_points_desc">A navigációs widgetek a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, az aktuális utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
-    <string name="track_attach_to_the_roads_descr">A nyomvonal offline térképekkel lesz csatolva az úthoz, ezért a nyomvonal geometriája módosulni fog.</string>
-    <string name="street_name_widget_desc">Az utcanév widget az aktuális utcanevet mutatja egyenes helyzetjelző nyíllal vagy a következő utcanevet az elvégzendő manőverrel.</string>
+    <string name="mapillary_widget_desc">Gyors hozzáférést biztosít a Mapillary alkalmazáshoz utcaszintű képek hozzáadásához.</string>
+    <string name="radius_rules_widget_desc">A sugárvonalzó eszköz egy kijelölt pont körüli távolságköröket jelenít meg a térképen.</string>
+    <string name="lanes_widgets_desc">Megjeleníti az aktuális közlekedési sávok elrendezését, és kiemeli azt, amelyeken a navigáció szerint haladni kell.</string>
+    <string name="map_markers_bar_widget_desc">A felső sávi widget megjeleníti a térképjelölő távolságát és az irányát az aktuális helytől. Beállítható, hogy a widgeten 1 vagy 2 felső jelölő legyen látható.</string>
+    <string name="bearing_desc">Megjeleníti a cél abszolút vagy relatív irányát szögegységben (180° fokos, 360° fokos vagy milliradián mód).</string>
+    <string name="navigation_points_desc">A navigációs widgetek a navigáció során engedélyezettek és olyan információkat jelenítenek meg, mint távolság, érkezési vagy hátralévő idő, következő kanyarok, irány, aktuális/következő utcanév, sávinformációk, maximális sebesség, közeledő figyelmeztetések, érdekes pontok (POI-k), útpontok.</string>
+    <string name="track_attach_to_the_roads_descr">A nyomvonal az offline térképekkel lesz csatolva az úthoz, a nyomvonal geometriája módosulni fog.</string>
+    <string name="street_name_widget_desc">Az utcanév-widget az aktuális utcanevet mutatja egyenes helyzetjelző nyíllal vagy a következő utcanevet egy, az elvégzendő manőverre utaló nyíllal.</string>
     <string name="route_maneuvers_desc">A navigációs widgetek a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, az aktuális utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közeledő figyelmeztetések, az érdekes pontok (POI-k) vagy az útpontok.</string>
     <string name="routing_attr_avoid_4wd_only_name">Nehéz terep elkerülése</string>
     <string name="routing_attr_avoid_4wd_only_description">A csak összkerék-meghajtású járművekkel járható utak elkerülése</string>
@@ -4706,9 +4706,9 @@
     <string name="goods_delivery_desc_3">Csak legfeljebb 3,5 tonna tömegű áruszállító járművekre vonatkozik.</string>
     <string name="map_marker_average_speed_desc">Adja meg azt az időintervallumot az átlagsebesség-számításhoz (felhasználva a becsült érkezési időhöz).</string>
     <string name="routing_attr_goods_restrictions_name">Áruszállítás</string>
-    <string name="accessibility_2d_view_on">2,5D nézet Be</string>
+    <string name="accessibility_2d_view_on">2,5D nézet be</string>
     <string name="download_complete">A letöltés kész</string>
-    <string name="accessibility_2d_view_off">2,5D nézet Ki</string>
+    <string name="accessibility_2d_view_off">2,5D nézet ki</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
     <string name="trip_recording_downhill_widget_desc">Megjeleníti az aktuálisan rögzített utazás összes ereszkedésének összegét.</string>
@@ -4779,16 +4779,16 @@
     <string name="map_markers_desc">A widget a távolságot vagy a becsült érkezési időt (ETA) mutatja a térképjelölők listájában szereplő első két jelölőhöz.</string>
     <string name="quick_action_current_location_widget_descr">Egy kapcsoló az aktuális helyet mutató widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="coordinates_widget_map_center">Koordináták: térképközéppont</string>
-    <string name="coordinates_widget_current_location_desc">A widget az aktuális földrajzi hely földrajzi koordinátáit mutatja</string>
+    <string name="coordinates_widget_current_location_desc">Megjeleníti az aktuális hely földrajzi koordinátáit</string>
     <string name="coordinates_widget_current_location">Koordináták: aktuális hely</string>
-    <string name="coordinates_widget_map_center_desc">A widget az aktuális térképközéppont földrajzi koordinátáit mutatja</string>
+    <string name="coordinates_widget_map_center_desc">Megjeleníti az aktuális térképközéppont földrajzi koordinátáit</string>
     <string name="quick_action_map_center_widget_descr">Egy kapcsoló a térképközéppont widget megjelenítéséhez vagy elrejtéséhez a térképen.</string>
     <string name="map_widget_zoom_level">Nagyítási szint</string>
     <string name="map_widget_camera_distance">Kameramagasság</string>
     <string name="map_widget_camera_tilt">Kamera dőlés</string>
     <string name="map_widget_zoom_level_desc">Megjeleníti a térkép aktuális nagyítási szintjét.</string>
     <string name="map_widget_camera_distance_desc">Megjeleníti a kamera felszín feletti magasságát.</string>
-    <string name="map_widget_camera_tilt_desc">A widget a kamera dőlésszögét mutatja perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
+    <string name="map_widget_camera_tilt_desc">Megjeleníti a kamera dőlésszögét perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
     <string name="developer_widgets">Fejlesztői widgetek</string>
     <string name="map_widget_target_distance_desc">Megjeleníti a kamera és a cél közötti távolságot.</string>
     <string name="map_widget_ant_bicycle_power_desc">Mutatja a kerékpárosnak a kerékpár meghajtása során leadott teljesítményét</string>
@@ -4801,8 +4801,8 @@
     <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
     <string name="nautical_depth_points">Tengeri mélységpontok</string>
     <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található.
-\nTelepítenie kell az ANT+ beépülő szolgáltatást vagy frissítenie kell a meglévő verzióját, ha már rendelkezik vele.
-\nSzeretne belépni a Google Play Áruházba, hogy elvégezze\?</string>
+\nTelepítenie vagy frissítenie kell az ANT+ beépülő szolgáltatást.
+\nSzeretne belépni a Google Play Áruházba\?</string>
     <string name="ant_read_data">Adat olvasása</string>
     <string name="map_widget_ant_bicycle_power">Kerékpáros teljesítmény</string>
     <string name="map_widget_ant_heart_rate">Pulzusszám</string>
@@ -4835,7 +4835,7 @@
     <string name="map_center_widget">Koordináták: térképközéppont</string>
     <string name="send_uuid_preference_desc">Egy véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szerver erőforrások méltányos használatának nyomon követése, a forgalom mintázatának előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám figyelemmel kísérése. Szükséges az eszköz az ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása a megfelelő szenzorokhoz.</string>
+    <string name="external_sensors_plugin_description">Pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám figyelemmel kísérése. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása szükséges a megfelelő szenzorokhoz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
@@ -4869,7 +4869,7 @@
     <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az 1-es verziójú térképmegjelenítéshez. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban.
 \n
 \nKérjük, támogassa a fejlesztéseket hibanaplója megadásával.</string>
-    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) a gyorsabb térképmegjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett a 4.3-as kiadás előtt és régebbi eszközökön még mindig előnyösebb a használata.</string>
+    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy gyorsabb térképmegjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt és régebbi eszközökön még mindig előnyösebb a használata.</string>
     <string name="rendering_engine_failed">Az OsmAnd térképmegjelenítése nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
     <string name="dismiss_changes">Változtatások elvetése\?</string>
@@ -4879,7 +4879,7 @@
     <string name="weather_offline_forecast">Offline időjárási előrejelzés</string>
     <string name="weather_online_cache">Online gyorsítótár</string>
     <string name="measurement_units">Mértékegységek</string>
-    <string name="empty_screen_weather_clouds_layer">Felhőzet réteg bekapcsolása a térképen.</string>
+    <string name="empty_screen_weather_clouds_layer">Kapcsolja be a felhőzet réteg megjelenítéséhez a térképen.</string>
     <string name="empty_screen_weather_wind_layer">Széltérkép réteg bekapcsolása a térképen.</string>
     <string name="empty_screen_weather_precipitation_layer">Csapadék réteg bekapcsolása a térképen.</string>
     <string name="empty_screen_weather_temperature_layer">Hőmérséklet réteg bekapcsolása a térképen.</string>
@@ -4894,7 +4894,7 @@
     <string name="weather_wind_miles_per_hour">mérföld / óra</string>
     <string name="weather_wind_kilimeters_per_hour">kilométer / óra</string>
     <string name="empty_screen_view_selected_weather_data">Kapcsolja be, hogy megjeleníthessen kiválasztott időjárási adatokat a térképen.</string>
-    <string name="clouds_widget_desc">Megjeleníti a térképközéppont felhőzetét.</string>
+    <string name="clouds_widget_desc">Megjeleníti a térképközéppont feletti felhőzet mértékét.</string>
     <string name="precipitation_widget_desc">Megjeleníti a térképközéppontnál mérhető csapadékot.</string>
     <string name="temperature_widget_desc">Megjeleníti a térképközéppontnál mérhető hőmérsékletet.</string>
     <string name="weather_pressure_mmhg">Hgmm</string>

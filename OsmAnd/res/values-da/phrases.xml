@@ -4005,4 +4005,12 @@
     <string name="poi_greenery">Grønt</string>
     <string name="poi_board_type_sight">Seværdighed</string>
     <string name="poi_board_type_welcome_sign">Velkomstskilt</string>
+    <string name="poi_beauty_salon_cosmetics">Kosmetik</string>
+    <string name="poi_beauty_salon_spa">Spa</string>
+    <string name="poi_mattress_yes">Ja;Madras</string>
+    <string name="poi_lgbtq_only">Kun LGBTQ</string>
+    <string name="poi_lgbtq_no">LGBTQ ikke tilladt</string>
+    <string name="poi_mattress_no">Nej</string>
+    <string name="poi_furniture_used">Brugt;Brugt møbel</string>
+    <string name="poi_furniture_office">Kontor;Kontormøbel</string>
 </resources>
