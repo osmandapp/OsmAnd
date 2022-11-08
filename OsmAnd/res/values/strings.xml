@@ -25,7 +25,7 @@
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">Weather plugin provides\n- 5 layers…  a 24h hour forecast &amp; 7 day forecast every 3 hours\n- location-based widgets\n- temperature / pressure isolines\nWeather data is provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_plugin_description">Provides\n- the 24h hour and 7 day weather forecast using 5 layers\n- location-based widgets\n- temperature / pressure isolines\n\nThe weather data is provided by GFS (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
