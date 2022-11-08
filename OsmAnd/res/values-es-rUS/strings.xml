@@ -380,7 +380,7 @@
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
+    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas climáticos, mapas geológicos, capas de sombreado, etc.
 \n
 \nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas vectoriales sin conexión de OsmAnd). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
 \n
@@ -4908,8 +4908,8 @@
     <string name="map_settings_weather_temp">Temperatura</string>
     <string name="map_settings_weather_precip">Precipitación</string>
     <string name="measurement_units">Unidades de medida</string>
-    <string name="shared_string_weather">Pronóstico del tiempo</string>
-    <string name="explore_weather_forecast">Explora el pronóstico del tiempo.</string>
+    <string name="shared_string_weather">Meteorología</string>
+    <string name="explore_weather_forecast">Explora el pronóstico meteorológico.</string>
     <string name="shared_string_contours">Contornos</string>
     <string name="shared_string_layers">Capas</string>
     <string name="empty_screen_view_selected_weather_data">Activar para ver los datos meteorológicos marcados en el mapa.</string>
@@ -4921,12 +4921,12 @@
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_miles_per_hour">Millas por hora</string>
     <string name="weather_wind_kilimeters_per_hour">Kilómetros por hora</string>
-    <string name="weather_widgets_secondary_desc">Las unidades de medida pueden cambiarse dentro del complemento «Pronóstico del tiempo».</string>
+    <string name="weather_widgets_secondary_desc">Las unidades de medida pueden cambiarse dentro del complemento «Meteorología».</string>
     <string name="clouds_widget_desc">Muestra las nubes para el centro del mapa actual.</string>
     <string name="weather_pressure_millimeters_of_mercury">Milímetros de mercurio</string>
     <string name="weather_prefs_descr">Pronóstico horario de 24 horas y pronóstico de 7 días cada 3 horas</string>
     <string name="action_not_supported_with_map_style">La acción no se admite con el estilo de mapa marcado.</string>
-    <string name="weather_plugin_description">El complemento del clima proporciona
+    <string name="weather_plugin_description">Este complemento proporciona
 \n- 5 capas... pronóstico horario de 24 horas y pronóstico de 7 días cada 3 horas
 \n- widgets basados en la ubicación
 \n- isolíneas de temperatura / presión
