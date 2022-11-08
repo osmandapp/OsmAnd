@@ -4736,7 +4736,7 @@
     <string name="weather_wind_meters_per_second">米/秒</string>
     <string name="weather_widgets_secondary_desc">可以在天气插件设置中更改测量单位。</string>
     <string name="air_pressure_widget_desc">显示当前地图中心的气压。</string>
-    <string name="clouds_widget_desc">显示当前地图中心的云层。</string>
+    <string name="clouds_widget_desc">显示当前地图中心的云层覆盖。</string>
     <string name="wind_widget_desc">显示当前地图中心的风速。</string>
     <string name="precipitation_widget_desc">显示当前地图中心的降水。</string>
     <string name="shared_string_contours">等值线</string>
@@ -4783,7 +4783,7 @@
     <string name="map_settings_weather_air_pressure">气压</string>
     <string name="weather_precip_inches">英寸</string>
     <string name="empty_screen_weather_pressure_layer">打开以查看地图上的压力图层。</string>
-    <string name="empty_screen_weather_clouds_layer">打开以查看地图上的云图层。</string>
+    <string name="empty_screen_weather_clouds_layer">打开以查看地图上的云覆盖层。</string>
     <string name="weather_online_cache">在线缓存</string>
     <string name="map_settings_weather_temp">温度</string>
     <string name="map_settings_weather_wind">风</string>
@@ -4795,7 +4795,7 @@
     <string name="shared_string_layers">图层</string>
     <string name="empty_screen_weather_contours">打开以查看地图上的天气等值线。</string>
     <string name="empty_screen_weather_precipitation_layer">打开以在地图上查看降水图层。</string>
-    <string name="weather_prefs_descr">24小时每小时预报和7天每3小时预报</string>
+    <string name="weather_prefs_descr">24小时和7天预报，每3小时更新</string>
     <string name="empty_screen_weather_temperature_layer">打开以在地图上查看温度图层。</string>
     <string name="weather_pressure_hectopascals">百帕斯卡</string>
     <string name="weather_pressure_inches_of_mercury">英寸汞柱</string>
