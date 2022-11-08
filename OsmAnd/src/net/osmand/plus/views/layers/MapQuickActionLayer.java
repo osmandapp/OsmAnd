@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -73,7 +74,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
     private boolean nightMode;
     private Boolean currentWidgetState;
-
+    private final quickActionOnTouchListener actionOnTouchListener = new quickActionOnTouchListener();
     public MapQuickActionLayer(@NonNull Context context) {
         super(context);
         app = getApplication();
@@ -119,7 +120,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 quickActionButton.setScaleX(1.5f);
                 quickActionButton.setScaleY(1.5f);
                 quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(onQuickActionTouchListener);
+                actionOnTouchListener.resetMargins();
+                quickActionButton.setOnTouchListener(actionOnTouchListener);
                 return true;
             });
         } else {
@@ -485,7 +487,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         return setLayerState(false);
     }
 
-    View.OnTouchListener onQuickActionTouchListener = new View.OnTouchListener() {
+    private class quickActionOnTouchListener implements OnTouchListener {
         private int initialMarginX;
         private int initialMarginY;
         private float initialTouchX;
@@ -542,6 +544,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return false;
         }
 
+        public void resetMargins(){
+            initialMarginX = 0;
+            initialMarginY = 0;
+            initialTouchX = 0;
+            initialTouchY = 0;
+        }
+
         private int interpolate(int value, int divider, int boundsSize) {
             if (value <= divider && value > 0)
                 return value * value / divider;
@@ -563,5 +572,5 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             initialTouchX = event.getRawX();
             initialTouchY = event.getRawY();
         }
-    };
+    }
 }
