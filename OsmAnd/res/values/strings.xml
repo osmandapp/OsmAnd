@@ -25,7 +25,7 @@
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">Provides\n- the 24h hour and 7 day weather forecast using 5 layers\n- location-based widgets\n- temperature / pressure isolines\n\nThe weather data is provided by GFS (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+    <string name="weather_plugin_description">Provides\n- the 24h hour and 7 day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -106,7 +106,7 @@
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
-    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power, and cadence. Requires your device to be connected to respective sensors via the ANT+ wireless personal network protocol.</string>
+    <string name="external_sensors_plugin_description">Accesses external sensors to read e.g. your heart rate, bicycle speed, cycling power, or cadence. Requires your device to be connected to respective sensors via the ANT+ wireless personal network protocol.</string>
     <string name="map_widget_altitude_map_center">Elevation: map center</string>
     <string name="map_widget_altitude_map_center_desc">Shows the elevation above sea level of the current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
@@ -723,7 +723,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
-    <string name="purchases_feature_desc_wikipedia">Having offline Wikipedia on your trip helps you learn more about the places you visit. It is available offline and shows Wikipedia articles in relation to the points of interest right on the map. Don\'t forget to download Wikipedia maps for chosen region.</string>
+    <string name="purchases_feature_desc_wikipedia">Provides all place related Wikipedia articles offline, helping you to learn about the places you visit on your trip by simple taps on the map. Don\'t forget to download the Wikipedia map files for the respective regions.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
@@ -907,7 +907,7 @@
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Allows you to make contributions to OpenPlaceReviews project. Such as photos, reviews, links about public places such as restaurants, hotels, museums and waypoints. \n\nYou can find instruction on how to contribute on our website - https://osmand.net/docs/user/plugins/openplacereviews</string>
+    <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
@@ -2357,7 +2357,7 @@
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Brings street-level views. Where imagery is missing, you can just add it yourself so that others can make use of it. To enable the Mapillary layer turn on the \"Street-level imagery\" in Configure map menu.</string>
+    <string name="plugin_mapillary_descr">Imagery of street-level views. You can also contribute yourself. To see the existing data as a map layer, turn on \"Street-level imagery\" in the \"Configure map\" menu.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Allow using private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
@@ -3121,16 +3121,15 @@
     <string name="track_segments">Track segments</string>
     <string name="track_points">Track points</string>
     <string name="shared_string_online_maps">Online maps</string>
-    <string name="osmand_rastermaps_plugin_description">Access many types of online (so called tile or raster) maps, from predefined OSM tiles (like Mapnik) to satellite images, and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.\n\n
-    Any of these maps can be used as the main (base) map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s offline vector maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
-    Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.
-	</string>
+    <string name="osmand_rastermaps_plugin_description">Access many types of online (so called tile or raster) maps, like pre-rendered OSM tiles, satellite images, and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.\n\n
+Any of these maps can be displayed as the main (base) map, or as an overlay or underlay to another base map (like OsmAnd\'s offline vector maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
+Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.</string>
     <string name="record_plugin_name">Trip recording</string>
-    <string name="record_plugin_description">Allows you to record, save and analyze your training or movement data, such as speed, ascents, descents or route relief, which can then be reused, improved, supplemented or shared with friends. \n\nHow to - https://osmand.net/docs/user/plugins/trip-recording</string>
+    <string name="record_plugin_description">Record your trips or trainings, and analyze the data in terms of speed, accumulated ascents and descents, elevation profile, etc. Recorded tracks can be archived, shared with friends, edited, and post-processed.\n\nFurther reading at https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">Terrain information, such as contour lines, hillshades and slopes, helps you visually assess the shape of the land surface, considering curvature, extremes, steepness, points of equal height, and more. Topographic information on a map can be represented by slope shading, contour lines for the uphill and downhill, and the colour of the slope angle deviation from flat. Data from SRTM and ASTER. \n\nHow to - http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="srtm_plugin_description">Terrain information like contour lines, hillshades, and slopes, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3140,20 +3139,20 @@
 		\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_nautical_name">Nautical map view</string>
-    <string name="plugin_nautical_descr">Turn on to enrich your map with information about sailing routes, navigation lights, danger zones, zones where it is allowed or prohibited to sail or dock, etc. To use download Nautical maps and enable \"Nautical map\" type in Configure map. \n\nHow to - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_nautical_descr">Enriches your map with information about sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. To use, download the respective Nautical maps and enable the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="plugin_ski_name">Ski map view</string>
-    <string name="plugin_ski_descr">Designed to navigate at winter sports locations. Watch ski pistes, ski lift markers and colored lines indicating the complexity of each track. To use after enabling go to Configure map and choose \"Winter and ski\" map type.</string>
+    <string name="plugin_ski_descr">Designed to navigate winter sports areas: See ski pistes and ski lifts, and cross country ski tracks, with colored lines indicating the difficulty ratings. To use, enable this plugin and also go to \"Configure map\" and choose the \"Winter and ski\" map style.</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
-    <string name="audionotes_plugin_description">Make audio/photo/video notes during a trip, using either a map button or location context menu.</string>
+    <string name="audionotes_plugin_description">Take audio/photo/video notes during a trip, using either a map button or the location context menu.</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
-    <string name="osmand_parking_plugin_description">Enable to set a point on the map where your car is left on the street and notify your calendar when parking time starts. Plugin helps to track the parking time and location of your car. To place a marker choose a place on the map, then go to Actions and press \"Add parking\".</string>
+    <string name="osmand_parking_plugin_description">Mark where your car is parked, and notify your calendar when the parking meter will expire. To place the marker, choose a place on the map, go to \"Actions\", and tap \"Add parking\".</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
-    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
+    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
-    <string name="osm_editing_plugin_description">Allows you to make contributions to OpenStreetMap, a global community aimed at creating a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instruction on how to edit the map on out website https://osmand.net/docs/user/plugins/osm-editing</string>
-    <string name="osmand_development_plugin_description">Allows to configure OsmAnd for testing: simulate navigation routes, check the screen rendering performance, etc. Plugin is not required for normal application use.</string>
+    <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website https://osmand.net/docs/user/plugins/osm-editing .</string>
+    <string name="osmand_development_plugin_description">Provides functionality to test and debug OsmAnd: simulate navigation routes, monitor the screen rendering, check performance, etc. This plugin is not required for normal app use.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
     <string name="days_behind">days behind</string>
