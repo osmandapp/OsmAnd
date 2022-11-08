@@ -380,7 +380,7 @@
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
+    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas climáticos, mapas geológicos, capas de sombreado, etc.
 \n
 \nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas vectoriales sin conexión de OsmAnd). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
 \n
@@ -1455,7 +1455,7 @@
     <string name="app_mode_bicycle">Bicicleta</string>
     <string name="app_mode_pedestrian">Peatón</string>
     <string name="position_on_map_center">Centro</string>
-    <string name="position_on_map_bottom">Fondo</string>
+    <string name="position_on_map_bottom">Abajo</string>
     <string name="navigate_point_top_text">Ingresa la latitud y longitud en el formato elegido (G - grados, M - minutos, S - segundos)</string>
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
@@ -3325,7 +3325,7 @@
     <string name="monitoring_min_speed_descr_recommendation">Recomendación: Prueba primero a usar la detección de movimiento mediante el filtro de desplazamiento mínimo de registro (B), puede producir mejores resultados y perderá menos datos. Si las trazas siguen siendo ruidosas a bajas velocidades, prueba aquí con valores distintos de cero. Tenga en cuenta que algunas mediciones pueden no informar ningún valor de velocidad (algunos métodos basados en la red), en cuyo caso no se registraría nada.</string>
     <string name="monitoring_min_speed_descr_remark">Observación: comprobar velocidad &gt; 0: La mayoría de los chipsets de GPS informan un valor de velocidad sólo si el algoritmo determina que está en movimiento. Por lo tanto, el uso del ajuste &gt; 0 en este filtro, en cierto sentido usa la detección de movimiento del conjunto de chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos usando esta función en nuestro análisis GPX para determinar la distancia corregida, es decir, el valor que se muestra en ese campo es la distancia grabada en movimiento.</string>
     <string name="monitoring_min_accuracy_descr">Esto registrará solo los puntos medidos con una indicación de precisión mínima (en metros o pies, según lo informado por Android para su conjunto de chips). La precisión es la proximidad de las mediciones a la ubicación real y no está directamente relacionada con la precisión, que es la dispersión de las mediciones repetidas.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones climáticas.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones atmosféricas.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir lo que se grabará y lo que no, puede ser mejor apagar este filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado inmediatamente antes de una grabación, el primer punto medido podría tener una precisión disminuida, por lo que en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
     <string name="monitoring_min_distance_descr">Activar este filtro, permite evitar grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
@@ -4919,26 +4919,26 @@
     <string name="weather_wind_miles_per_hour">Millas por hora</string>
     <string name="weather_wind_kilimeters_per_hour">Kilómetros por hora</string>
     <string name="weather_wind_meters_per_second">Metros/Segundo</string>
-    <string name="weather_widgets_secondary_desc">Las unidades de medida pueden cambiarse en los ajustes del complemento del clima.</string>
+    <string name="weather_widgets_secondary_desc">Las unidades de medida pueden cambiarse dentro del complemento «Meteorología».</string>
     <string name="air_pressure_widget_desc">Muestra la presión atmosférica para el centro del mapa actual.</string>
     <string name="clouds_widget_desc">Muestra las nubes para el centro del mapa actual.</string>
     <string name="wind_widget_desc">Muestra la velocidad del viento para el centro del mapa actual.</string>
     <string name="precipitation_widget_desc">Muestra la precipitación para el centro de mapa actual.</string>
-    <string name="weather_widget_group_desc">Un conjunto de widgets que muestran información meteorológica diversa.</string>
+    <string name="weather_widget_group_desc">Un grupo de widgets que muestran datos meteorológicos diversos.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inches_of_mercury">Pulgadas de mercurio</string>
     <string name="action_not_supported_with_map_style">La acción no se admite con el estilo de mapa marcado.</string>
     <string name="measurement_units">Unidades de medida</string>
     <string name="empty_screen_weather_wind_layer">Activar para ver la capa de viento en el mapa.</string>
     <string name="empty_screen_weather_precipitation_layer">Activar para ver la capa de precipitaciones en el mapa.</string>
-    <string name="weather_plugin_description">El complemento del clima proporciona
+    <string name="weather_plugin_description">Este complemento proporciona
 \n- 5 capas... pronóstico horario de 24 horas y pronóstico de 7 días cada 3 horas
 \n- widgets basados en la ubicación
 \n- isolíneas de temperatura / presión
 \nLos datos meteorológicos son proporcionados por GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
     <string name="shared_string_layers">Capas</string>
-    <string name="shared_string_weather">Clima</string>
-    <string name="explore_weather_forecast">Explora el pronóstico del tiempo.</string>
+    <string name="shared_string_weather">Meteorología</string>
+    <string name="explore_weather_forecast">Explora el pronóstico meteorológico.</string>
     <string name="shared_string_contours">Contornos</string>
     <string name="empty_screen_weather_temperature_layer">Activar para ver la capa de temperatura en el mapa.</string>
     <string name="weather_precip_in">in</string>
@@ -4952,5 +4952,5 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_hectopascals">Hectopascales</string>
-    <string name="empty_screen_weather_contours">Activar para ver los contornos meteorológicos en el mapa.</string>
+    <string name="empty_screen_weather_contours">Activar para ver los bordes meteorológicos en el mapa.</string>
 </resources>

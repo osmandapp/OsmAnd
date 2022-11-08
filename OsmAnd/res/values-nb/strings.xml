@@ -4807,7 +4807,7 @@
     <string name="favorites_backup">Sikkerhetskopiering av favoritter</string>
     <string name="show_map_symbols">Vis kartsymboler</string>
     <string name="show_map_symbols_desc">Tekst, veiskilt og andre.</string>
-    <string name="show_borders_of_downloaded_maps">Fargelegging av nedlastede kartregioner</string>
+    <string name="show_borders_of_downloaded_maps">Vis grenser for nedlastede kart</string>
     <string name="map_settings_weather_temp">Temperatur</string>
     <string name="map_settings_weather_air_pressure">Lufttrykk</string>
     <string name="map_settings_weather_wind">Vind</string>
@@ -4815,4 +4815,20 @@
     <string name="measurement_units">Målingsenheter</string>
     <string name="shared_string_weather">Vær</string>
     <string name="shared_string_layers">Lag</string>
+    <string name="rotate_map_none_rotated_opt">Låst (manuell rotering)</string>
+    <string name="weather_offline_forecast">Frakoblet værvarsel</string>
+    <string name="weather_online_cache">Nettbasert hurtiglager</string>
+    <string name="explore_weather_forecast">Sjekk værmeldingen.</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_knots">Knop</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Grad fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Handlingen støttes ikke for valgt kartstil.</string>
+    <string name="share_crash_log">Del krasjlogg</string>
+    <string name="map_rendering_engine_v1">Versjon 1</string>
+    <string name="map_rendering_engine_v2">Versjon 2 (OpenGL)</string>
+    <string name="map_rendering_engine">Kartopptegningsmotor</string>
+    <string name="coordinates_widget_map_center">Koordinater: kartsentrum</string>
+    <string name="weather_precip_inches">Tommer</string>
+    <string name="weather_precip_milimeters">Millimeter</string>
 </resources>

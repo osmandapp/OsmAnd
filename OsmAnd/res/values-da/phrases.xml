@@ -3585,7 +3585,7 @@
     <string name="poi_access_trailer">Trailer adgang</string>
     <string name="poi_access_motorcycle">Motorcykel adgang</string>
     <string name="poi_access_moped">Knallert adgang</string>
-    <string name="poi_access_mofa">Mofa adgang</string>
+    <string name="poi_access_mofa">Mofa-adgang</string>
     <string name="poi_access_hgv">Lastbil adgang</string>
     <string name="poi_access_goods">Lette lastbiler adgang</string>
     <string name="poi_access_disabled">Handicappede adgang</string>
@@ -3998,4 +3998,11 @@
     <string name="poi_outdoor_seating_poi">Udendørs siddepladser</string>
     <string name="poi_dog">Hunde</string>
     <string name="poi_parking_fee_filter">Parkeringsafgift</string>
+    <string name="poi_tiles">Flisebutik</string>
+    <string name="poi_changing_table_filter">Puslebord</string>
+    <string name="poi_board_type_art">Kunst</string>
+    <string name="poi_access_yes">Adgang er tilladt</string>
+    <string name="poi_greenery">Grønt</string>
+    <string name="poi_board_type_sight">Seværdighed</string>
+    <string name="poi_board_type_welcome_sign">Velkomstskilt</string>
 </resources>

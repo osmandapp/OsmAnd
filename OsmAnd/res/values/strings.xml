@@ -11,9 +11,9 @@
 	Thx - Hardy
 -->
 
-    <string name="switch_mode_by_tapping_on_widget">Switch mode by tapping a widget.</string>
-    <string name="map_widget_sunset_desc">Shows time of or time left to the next sunset.</string>
-    <string name="map_widget_sunrise_desc">Shows time of or time left to next sunrise.</string>
+    <string name="switch_mode_by_tapping_on_widget">Switch mode by tapping the widget.</string>
+    <string name="map_widget_sunset_desc">Shows time of, or time left until the next sunset.</string>
+    <string name="map_widget_sunrise_desc">Shows time of, or time left until next sunrise.</string>
     <string name="shared_string_next_sunset">Next sunset</string>
     <string name="shared_string_next_sunrise">Next sunrise</string>
     <string name="shared_string_time_left">Time left</string>
@@ -24,8 +24,8 @@
     <string name="rendering_attr_depthContourColorScheme_name">Line color-scheme</string>
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour-lines</string>
-    <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">5 layers. Daily forecast every 24 hours and 7-day forecast every 3 days.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+    <string name="turn_on_nautical_depth_description">Shows nautical depth data on the map.</string>
+    <string name="weather_plugin_description">- 5 layers.\n- Daily and 7-day forecast updated every 3 hours.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -40,7 +40,7 @@
     <string name="shared_string_layers">Layers</string>
     <string name="empty_screen_weather_contours">Turn on to view weather contours on the map.</string>
     <string name="empty_screen_weather_pressure_layer">Turn on to view pressure layer on the map.</string>
-    <string name="empty_screen_weather_clouds_layer">Turn on to view clouds layer on the map.</string>
+    <string name="empty_screen_weather_clouds_layer">Turn on to view the cloud coverage layer on the map.</string>
     <string name="empty_screen_weather_wind_layer">Turn on to view wind layer on the map.</string>
     <string name="empty_screen_weather_precipitation_layer">Turn on to view precipitation layer on the map.</string>
     <string name="empty_screen_weather_temperature_layer">Turn on to view temperature layer on the map.</string>
@@ -56,21 +56,21 @@
     <string name="weather_wind_knots">Knots</string>
     <string name="weather_wind_miles_per_hour">Miles per hour</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometers per hour</string>
-    <string name="weather_wind_meters_per_second">Meters/Second</string>
+    <string name="weather_wind_meters_per_second">Meters/second</string>
     <string name="weather_widgets_secondary_desc">Measurement units can be changed in the Weather plugin settings.</string>
     <string name="air_pressure_widget_desc">Shows air pressure for current map center.</string>
     <string name="clouds_widget_desc">Shows clouds for current map center.</string>
     <string name="wind_widget_desc">Shows wind speed for current map center.</string>
     <string name="precipitation_widget_desc">Shows precipitation for current map center.</string>
     <string name="temperature_widget_desc">Shows temperature for current map center.</string>
-    <string name="weather_widget_group_desc">A set of widgets showing a various weather info.</string>
+    <string name="weather_widget_group_desc">A set of widgets showing various weather info.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">Daily forecast every 24 hours and 7-day forecast every 3 days</string>
+    <string name="weather_prefs_descr">Daily and 7-day forecast updated every 3 hours.</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Pick a different map style to use this.</string>
@@ -87,8 +87,8 @@
     <string name="show_borders_of_downloaded_maps">Show borders of downloaded maps</string>
     <string name="show_map_symbols">Show map symbols</string>
     <string name="show_map_symbols_desc">Text, road signs, and others.</string>
-    <string name="purchases_feature_desc_external_sensors">Display and record data from external sensors: bicycle speed, bicycle power, cadence, and heart rate.</string>
-    <string name="external_sensors_support">External sensors</string>
+    <string name="purchases_feature_desc_external_sensors">Display and record bicycle speed, power, cadence, and heart rate.</string>
+    <string name="external_sensors_support">Exercise data</string>
     <string name="release_4_3">
     • New, faster Version 2 (OpenGL) map rendering engine, with 2.5D view\n\n
     • Smooth animation of location changes while in motion\n\n
@@ -106,12 +106,12 @@
     <string name="map_center_widget">Coordinates: Map center</string>
     <string name="current_location_widget">Coordinates: Current location</string>
     <string name="external_sensors_plugin_name">External Sensors</string>
-    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, bicycle power, and cadence. Requires connection to respective sensors via ANT+.</string>
-    <string name="map_widget_altitude_map_center">Altitude: map center</string>
+    <string name="external_sensors_plugin_description">Monitoring of heart rate, bicycle speed, power, and cadence via ANT+ connection to respective sensors.</string>
+    <string name="map_widget_altitude_map_center">Elevation: map center</string>
     <string name="map_widget_altitude_map_center_desc">Shows elevation above sea level of the current map center.</string>
     <string name="map_widget_altitude_current_location">Altitude: current location</string>
     <string name="map_widget_altitude_current_location_desc">Shows elevation above sea level of the current geolocation.</string>
-    <string name="map_widget_altitude_desc">Display elevation above sea level of the current geolocation or for the current map center</string>
+    <string name="map_widget_altitude_desc">Display altitude of the current geolocation or the elevation of current map center.</string>
     <string name="map_widget_rendering_fps">Map rendering FPS</string>
     <string name="map_widget_rendering_fps_desc">Shows how fast the map and map elements are displayed and refreshed, expressed in frames per second (FPS).</string>
     <string name="simulate_location_by_gpx">Simulate location by GPX</string>
@@ -234,7 +234,7 @@
     <string name="map_marker_average_speed_desc">Specify the time interval for speed averaging (used for the arrival time estimate).</string>
     <string name="switch_widget_mode_desc">Tapping on the widget switches modes.</string>
     <string name="side_marker_eta">Estimated arrival time</string>
-    <string name="reset_all_settings_desc">Reset all settings to default?</string>
+    <string name="reset_all_settings_desc">Reset all settings to defaults?</string>
     <string name="goods_delivery_desc_4">Use the Truck profile for vehicle weights of more than 3.5 tons.</string>
     <string name="goods_delivery_desc_3">Applies only to delivery trucks of no more than 3.5 tons.</string>
     <string name="goods_delivery_desc_2">Roads closed for goods delivery will be avoided.</string>
@@ -246,9 +246,9 @@
     <string name="live_update_frequency_hour_variant">Map updates are checked hourly.</string>
     <string name="live_update_frequency_day_variant">Map updates are checked daily.</string>
     <string name="live_update_frequency_week_variant">Map updates are checked weekly.</string>
-    <string name="altitude_correction">Altitude correction</string>
+    <string name="altitude_correction">Elevation correction</string>
     <string name="no_altitude_data_desc">To receive %1$s data, attach your track to the roads or calculate it online.</string>
-    <string name="calculate_online_altitude_descr">Calculate altitude online on OsmAnd servers, based on satellite imagery and digital elevation models. Differences vs. device recorded altitude may be used as altitude correction.</string>
+    <string name="calculate_online_altitude_descr">Calculate elevation online on OsmAnd servers, based on satellite imagery and digital elevation models. Differences vs. device recorded altitude may be used as elevation correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_name">Vehicle engine</string>
@@ -302,49 +302,49 @@
     <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
     <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD vehicles</string>
     <string name="bearing_secondary_desc">You can change format of displayed data in: %1$s — %2$s — %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Coordinates format could be changed in %1$s — %2$s — %3$s.</string>
-    <string name="widget_secondary_desc_part_of">Part of \“%1$s\” plugin.</string>
-    <string name="elevation_profile_widget_desc">Widget shows the elevation and slope profile of the current route.</string>
-    <string name="parking_widget_desc">Shows distance from the screen center to your parking place.</string>
+    <string name="coordinates_widget_secondary_desc">Coordinates format can be changed in %1$s — %2$s — %3$s.</string>
+    <string name="widget_secondary_desc_part_of">Part of the \“%1$s\” plugin.</string>
+    <string name="elevation_profile_widget_desc">Shows the elevation and slope profile of current route.</string>
+    <string name="parking_widget_desc">Shows distance from the screen center to your parking spot.</string>
     <string name="mapillary_widget_desc">Provides quick access to the Mapillary app to add street-level imagery.</string>
     <string name="av_notes_choose_action_widget_desc">Choose action.</string>
-    <string name="radius_rules_widget_desc">The radius-ruler tool helps determine the radius around a selected point on the map showing distance-circles on the map.</string>
-    <string name="current_time_widget_desc">Shows current time from your device.</string>
-    <string name="battery_widget_desc">Shows battery level of your device.</string>
-    <string name="gps_info_widget_desc">Shows a number of satellites that device detects and uses at that moment.</string>
+    <string name="radius_rules_widget_desc">The radius-ruler tool displays distance circles around a selected point on the map.</string>
+    <string name="current_time_widget_desc">Shows the current time as taken from your device.</string>
+    <string name="battery_widget_desc">Shows the battery level of your device.</string>
+    <string name="gps_info_widget_desc">Shows the number of satellites currently visible and used.</string>
     <string name="altitude_widget_desc">Shows the height above sea level of current geolocation.</string>
-    <string name="max_speed_widget_desc">Shows a speed limit for the currently driven road.</string>
-    <string name="current_speed_widget_desc">Shows your current speed detected by GPS-sensor.</string>
+    <string name="max_speed_widget_desc">Displays the speed limit for the currently driven road.</string>
+    <string name="current_speed_widget_desc">Shows your current speed as reported via GPS.</string>
     <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
     <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
     <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
-    <string name="lanes_widgets_desc">Lanes widget shows the current road lanes layout and highlights lanes to drive with active navigation.</string>
-    <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to configure to see 1 or 2 top markers in the widget.</string>
-    <string name="street_name_widget_desc">Shows the current street name with a straight location arrow or next street name with the maneuver that has to be completed.</string>
+    <string name="lanes_widgets_desc">Highlights the road lane to take while navigating and shows the layout.</string>
+    <string name="map_markers_bar_widget_desc">On the top bar widget you could see the distance and the direction to the marker from current location. It is possible to show 1 or 2 top markers.</string>
+    <string name="street_name_widget_desc">Shows the current street name with a straight location arrow or next street name with the maneuver to complete.</string>
     <string name="coordinates_widget_desc">It shows the geographic coordinates of current geo-location.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="av_def_action_choose">On request</string>
     <string name="audio_video_notes_desc">Provides quick access to start/stop taking a recording (audio, video or photo).</string>
     <string name="bearing_desc">The bearing widget shows the absolute or relative bearing to a target in angular units (degrees 180, degrees 360, milliradians).</string>
-    <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display info such as distance, arrival or left time, next turns, bearing, current street name, lane info, max speed, approaching alerts, POIs, waypoints.</string>
+    <string name="navigation_points_desc">Navigational widgets during navigation to display info such as distance, arrival or time left, the next turns, bearing, current street name, lane info, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="navigation_points">Navigation points</string>
     <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display info such as distance, arrival or left time, next turns, bearing, current street name, lane info, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="route_maneuvers">Route maneuvers</string>
-    <string name="get_altitude_information">Get altitude info</string>
-    <string name="calculating_altitude">Calculating altitude</string>
+    <string name="get_altitude_information">Get elevation info</string>
+    <string name="calculating_altitude">Looking up elevation…</string>
     <string name="calculate_online">Calculate online</string>
-    <string name="track_attach_to_the_roads_descr">Track will be attached to the road using offline maps, track geometry will be changed.</string>
-    <string name="get_altitude_data">Get altitude data</string>
-    <string name="calculate_altitude">Calculate altitude</string>
-    <string name="no_altitude_data">No altitude data</string>
+    <string name="track_attach_to_the_roads_descr">Attaches the track to roads using the offline maps, changing the track geometry.</string>
+    <string name="get_altitude_data">Get elevation data</string>
+    <string name="calculate_altitude">Calculate elevation</string>
+    <string name="no_altitude_data">No elevation data</string>
     <string name="shared_string_speed">Speed</string>
-    <string name="app_mode_mountain_bicycle">Mountain bicycle</string>
+    <string name="app_mode_mountain_bicycle">Mountain bike</string>
     <string name="turn_on_public_transport_description">Turn on to see public transport routes on the map.</string>
     <string name="release_4_2">
-    • Widgets redesign: new Look &amp; Feel, group by Pages, change order and combine as you want.\n\n
-    • Hiking / Cycling / Travel routes: tap on the route symbol and get full info about the route.\n\n
-    • Favorite groups: set default appearance for new points in the group\n\n
-    • Fixes: online tile-maps auto-update\n\n
+    • Widget redesign: New Look and feel, group by pages, change order and combine as you want.\n\n
+    • Hiking / cycling / travel routes: Tap the route symbol and get full info about your route.\n\n
+    • Favorite groups: Set default appearance for new points in the group\n\n
+    • Fixes: Online tile-maps auto-update\n\n
     </string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Do not go offpiste</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Only if necessary</string>
@@ -361,7 +361,7 @@
     <string name="no_widgets_here_yet">No widgets here yet</string>
     <string name="available_widgets">Available widgets</string>
     <string name="snackbar_page_removed">\"Page %1$s\" has been removed.</string>
-    <string name="map_widget_altitude">Altitude of current location</string>
+    <string name="map_widget_altitude">Altitude of the current location</string>
     <string name="map_widget_distance_to_destination">Distance to destination</string>
     <string name="map_widget_current_speed">Current speed</string>
     <string name="add_page">Add page</string>
@@ -793,7 +793,7 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="duration_ago">%1$s ago</string>
     <string name="last_backup">Last backup</string>
-    <string name="backup_and_restore">Backup &amp; Restore</string>
+    <string name="backup_and_restore">Backup and Restore</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Search more…</string>
     <string name="shared_string_show_slope">Show slope</string>
@@ -1665,7 +1665,7 @@
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Timeout after wake-up</string>
-    <string name="units_and_formats">Units &amp; formats</string>
+    <string name="units_and_formats">Units and formats</string>
     <string name="map_look_descr">Map appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">Installed plugins</string>
@@ -1987,7 +1987,7 @@
     <string name="arrive_at_time">Arrive at %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
     <string name="powered_by_osmand">By OsmAnd</string>
-    <string name="osm_live_plan_pricing">Plan &amp; Pricing</string>
+    <string name="osm_live_plan_pricing">Plan and pricing</string>
     <string name="osm_live_payment_monthly_title">Monthly</string>
     <string name="osm_live_payment_3_months_title">Every three months</string>
     <string name="osm_live_payment_annual_title">Annually</string>
@@ -2094,7 +2094,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string>
+    <string name="contour_lines_hillshade_maps">Contour lines and hillshade maps</string>
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">Purchase one of the following to receive the offline travel guide functionality:</string>
@@ -2423,7 +2423,7 @@
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
-    <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
+    <string name="do_not_show_startup_messages_desc">Don\'t show app discounts and special local event messages.</string>
     <string name="parking_options">Parking options</string>
     <string name="full_version_thanks">Thank you for purchasing the paid version of OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
@@ -2761,7 +2761,7 @@
     <string name="add_time_span">Add time span</string>
     <string name="road_blocked">Road blocked</string>
     <string name="shared_string_select">Select</string>
-    <string name="switch_start_finish">Reverse starting point &amp; destination</string>
+    <string name="switch_start_finish">Reverse starting point and destination</string>
     <string name="rendering_attr_hideIcons_name">POI icons</string>
     <string name="item_removed">Item removed</string>
     <string name="n_items_removed">items removed</string>
@@ -3746,7 +3746,7 @@
     <string name="snap_to_road">Snap to road</string>
     <string name="interrupt_music_descr">Voice prompts pause music playback.</string>
     <string name="interrupt_music">Pause music</string>
-    <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Maps and Navigation</string>
     <string name="osmand_short_description_80_chars">Global mobile map viewing and navigation for offline and online OSM maps</string>
     <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)\n\n
@@ -3842,14 +3842,14 @@
         Most countries around the globe are available for download!\n
         Get a reliable navigator in your country - be it France, Germany, Mexico, UK, Spain, Netherlands, USA, Russia, Brazil or any other.
     </string>
-    <string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
-    <string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+    <string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps and Navigation</string>
+    <string name="osmand_plus_short_description_80_chars">Global mobile map-viewing and navigation for offline and online OSM maps.</string>
     <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd+ is an open source software navigation app with access to a wide variety of global OSM data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		OsmAnd+ is an open source software navigation app with access to a wide variety of global OSM data. All map data (vector or tile maps) can be stored on your memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
-		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.\n\n
+		OsmAnd+ is the paid app version. Buy it to support the project, fund the development of new features, and to receive the latest updates.\n\n
 
 		Some of the core features:\n
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
@@ -3863,7 +3863,7 @@
 		-  Automated day/night view switching\n
 		-  Speed-dependent map zooming\n
 		-  Map alignment according to compass or direction of motion\n
-		-  Lane guidance, speed limit display, recorded and text-to-speech voices\n
+		-  Lane guidance, speed-limit display, recorded and text-to-speech voices\n
 	</string>
     <string name="osmand_plus_extended_description_part1">
         OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n
@@ -4695,7 +4695,7 @@
     <string name="shared_string_undo">Undo</string>
     <string name="shared_string_skip">Skip</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
+    <string name="offline_maps_and_navigation">Offline Maps\nand Navigation</string>
     <string name="commit_poi">Commit POI</string>
     <string name="tab_title_basic">Basic</string>
     <string name="tab_title_advanced">Advanced</string>
