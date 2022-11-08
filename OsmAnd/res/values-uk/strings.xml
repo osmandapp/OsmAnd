@@ -37,20 +37,20 @@
     <string name="map_online_data_descr">Використовувати онлайн мапи (завантажити та кешувати тайли на карті пам\'яті).</string>
     <string name="shared_string_online_maps">Онлайн мапи</string>
     <string name="online_map_settings_descr">Оберіть онлайн або джерела в кеші (тайлів) мап.</string>
-    <string name="osmand_rastermaps_plugin_description">Надає доступ до різноманітних мап онлайн (растрових), починаючи зі Стандартного стилю OSM, закінчуючи супутниковими знімками та мапами спеціального призначення, такими як метеорологічні, кліматичні, геологічні мапи, рельєф тощо.
+    <string name="osmand_rastermaps_plugin_description">Надає доступ до різноманітних онлайн-мап (растрових), таких як попередньо промальовані тайли OSM, супутникові знімки та мапи спеціального призначення, як-от метеорологічні, кліматичні, геологічні мапи, рельєф тощо.
 \n
 \nБудь-яка з цих мап може використовуватись основною мапою в OsmAnd, або допоміжним шаром чи тлом до іншої основної мапи (наприклад, векторної офлайн-мапи OsmAnd). Певні елементи векторної мапи OsmAnd за бажанням можна легко сховати в меню «Налаштування мапи», щоб зробити фоновий шар помітнішим.
 \n
-\nЗавантажує тайли мап безпосередньо або скопіюйте їх як файли бази даних SQLite в теку даних OsmAnd за допомогою одного з багатьох засобів підготовки мап сторонніх розробників.</string>
+\nЗавантажуйте тайли мап безпосередньо або скопіюйте їх як файли бази даних SQLite в теку даних OsmAnd за допомогою одного з багатьох засобів підготовки мап сторонніх розробників.</string>
     <string name="osmand_background_plugin_description">Показує налаштування для запису треків у фоновому режимі періодично активуючи GPS (без увімкнення екрана).</string>
-    <string name="osmand_accessibility_description">Надає доступ до функції Доступності в пристрої (функції призначені для осіб з особливими потребами та/або інвалідністю) безпосередньо в OsmAnd. Це полегшує, наприклад, налаштування швидкості озвучування голосових сповіщень з допомогою рушія перетворення тексту в голосові повідомлення, налаштування пульту керування інвалідним візком (Direction-Pad) для навігації, використання трекбола для масштабування мапи або використання рушія перетворення тексту на голосові повідомлення, наприклад, щоб автоматично озвучувати назву місця, в якому ви знаходитесь.</string>
-    <string name="osmand_development_plugin_description">Дозволяє налаштувати OsmAnd для тестування: симулювати навігаційні маршрути, перевіряти швидкість рендерингу екрана тощо. Плагін не потрібен для звичайного користування застосунком.</string>
+    <string name="osmand_accessibility_description">Надає доступ до функції доступності пристрою безпосередньо в OsmAnd. Це полегшує, наприклад, регулювання швидкості озвучування голосових сповіщень, налаштування навігації за допомогою D-pad, використання трекбола для керування масштабом або перетворенням тексту в мовлення, наприклад, для автоматичного озвучування вашого місця перебування.</string>
+    <string name="osmand_development_plugin_description">Надає функціональність для тестування та налагодження OsmAnd: моделювання маршрутів навігації, моніторинг рендерингу екрана, перевірка швидкодії тощо. Цей плагін не обов\'язковий для повсякденного користування застосунком.</string>
     <string name="plugins_screen">Плагіни</string>
     <string name="prefs_plugins_descr">Плагіни надають додаткові налаштування та можливості.</string>
     <string name="prefs_plugins">Плагіни</string>
-    <string name="osm_editing_plugin_description">Дає змогу робити внески до OpenStreetMap, глобальної спільноти, мета якої — створення повної мапи світу та надання актуальних відкритих даних кожному користувачеві.
+    <string name="osm_editing_plugin_description">Зробіть внесок у розвиток OpenStreetMap — всесвітню спільноту, яка підтримує повну мапу світу та надає актуальні відкриті дані кожному користувачеві.
 \n
-\nВи можете переглянути інструкції про редагування мапи на нашому вебсайті https://osmand.net/docs/user/plugins/osm-editing</string>
+\nІнструкції з редагування мапи можна знайти на нашому сайті https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи показуються швидше. Підтримуються не всіма пристроями.</string>
     <string name="play_commands_of_currently_selected_voice">Відтворити оголошення вибраним голосом:</string>
     <string name="debugging_and_development">Налагодження і розробка OsmAnd</string>
@@ -713,7 +713,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Місце стоянки</string>
-    <string name="osmand_parking_plugin_description">Увімкніть, щоб установити точку на мапі, де ви залишили авто, і додайте у свій календар час початку паркування. Плагін допомагає стежити за часом паркування та місця перебування вашого авто. Щоб поставити позначку, оберіть місце на мапі, потім перейдіть до Дії та натисніть «Додати місце стоянки».</string>
+    <string name="osmand_parking_plugin_description">Позначайте, де припарковано ваше авто, і додавайте у календар час завершення паркування. Щоб поставити позначку, оберіть місце на мапі, перейдіть в розділ «Дії» і натисніть «Додати місце стоянки».</string>
     <string name="osmand_parking_plugin_name">Місце стоянки</string>
     <string name="context_menu_item_add_parking_point">Позначити як місце паркування</string>
     <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
@@ -818,9 +818,11 @@
     <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії</string>
-    <string name="srtm_plugin_description">Дані про рельєф, наприклад ізолінії, відтінки пагорби та схили, допомагає візуально оцінити форму поверхні землі, враховуючи кривина, екстремуми, крутість, точки рівної висоти тощо. Топографічні дані на мапі можуть бути представлені затемненням схилів, ізолініями підйомів і спусків, а також кольором відхилення кута схилу від плаского. Дані з SRTM і ASTER.
+    <string name="srtm_plugin_description">Дані про рельєф місцевості, така як ізолінії, рельєф пагорбів і схилів, допомагають візуально оцінити рельєф місцевості, можливості судноплавства тощо. Топографічні відомості можуть бути представлені на мапі рельєфом схилів, ізолініями та/або розфарбовуванням крутості.
 \n
-\nЯк це зробити - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nВихідні дані походять від SRTM та ASTER.
+\n
+\nПодробиці за посиланням http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Ізолінії</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -1289,9 +1291,9 @@
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішки</string>
-    <string name="record_plugin_description">Дозволяє записувати, зберігати та аналізувати дані про тренування або пересування, такі як швидкість, підйоми, спуски або рельєф маршруту, які потім можна використовувати повторно, покращувати, доповнювати або ділитися з друзями.
+    <string name="record_plugin_description">Записуйте свої поїздки або тренування та аналізуйте дані щодо швидкості, накопичених підйомів і спусків, профілю висоти тощо. Записані треки можна архівувати, ділитися з друзями, редагувати та обробляти.
 \n
-\nЯк це зробити - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nРозгорнутіший опис за адресою https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал запису</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
@@ -1427,9 +1429,9 @@
     <string name="shared_string_disable">Вимкнути</string>
     <string name="plugin_install_needs_network">Для встановлення цього плагіну вам потрібне з\'єднання з Інтернетом.</string>
     <string name="shared_string_get">Отримати</string>
-    <string name="plugin_nautical_descr">Увімкніть, щоб доповнити вашу мапу даними про вітрильні маршрути, навігаційні вогні, небезпечні зони, зони, де дозволено або заборонено плавати чи причалювати тощо. Щоб використовувати завантажені морські мапи та ввімкніть «Морську мапу» у меню «Налаштувати мапу».
+    <string name="plugin_nautical_descr">Доповнюйте свою мапу даними про вітрильні маршрути, навігаційні вогні, небезпечні морські зони, зони з обмеженнями на плавання або стоянку тощо. Щоб використовувати, завантажте відповідні морські мапи й увімкніть стиль «Морська мапа» у розділі «Налаштувати мапу».
 \n
-\nЯк це зробити - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nЯк це зробити - https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="osmand_parking_overdue">застаріло</string>
     <string name="action_create">Створити дію</string>
     <string name="action_modify">Змінити дію</string>
@@ -1503,7 +1505,7 @@
 \nВін не потребує завантаження окремих мап, стиль створюється на основі даних типової мапи.
 \n
 \nЦей стиль можна вимкнути або змінити на інший тут, чи змінивши «Стиль мапи» на потрібний в «Налаштування мапи».</string>
-    <string name="plugin_ski_descr">Призначений для навігації на локаціях зимових видів спорту. Переглядайте лижні траси, позначки витягів і кольорові лінії, що вказують на складність кожної траси. Для використання після ввімкнення перейдіть до налаштувань мапи та оберіть вигляд мапи «Зимовий/лижний».</string>
+    <string name="plugin_ski_descr">Призначено для навігації зонами зимових видів спорту: перегляд гірськолижних трас і підіймачів, а також трас для бігових лиж з кольоровими лініями, що позначають ступінь складності. Для використання увімкніть цей плагін, а також перейдіть в «Налаштування мапи» та оберіть вигляд мапи «Зимовий/лижний».</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
     <string name="application_dir_change_warning3">Перемістити файли даних OsmAnd в нове місце\?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
@@ -2382,7 +2384,7 @@
     <string name="mapillary_widget">Віджет Mapillary</string>
     <string name="mapillary_widget_descr">Дозволяє швидко поширювати світлини в Mapillary.</string>
     <string name="mapillary_descr">Світлини вулиць в мережі для всіх. Відкрийте для себе нові місця, співпрацюйте та знімайте світ.</string>
-    <string name="plugin_mapillary_descr">Додає огляд вулиць. Там, де зображення відсутні, ви можете додати їх самостійно, щоб інші могли ними переглядати їх. Щоб увімкнути шар Mapillary, увімкніть «Зображення вулиць» в меню «Налаштувати мапу».</string>
+    <string name="plugin_mapillary_descr">Зображення вулиць. Ви також можете зробити внесок самостійно. Щоб переглянути наявні дані у вигляді шару мапи, увімкніть параметр «Зображення вулиць» в меню «Налаштувати мапу».</string>
     <string name="online_photos">Онлайн зображення</string>
     <string name="no_photos_descr">Тут нема світлин.</string>
     <string name="open_mapillary">Відкрити Mapillary</string>
@@ -3961,9 +3963,9 @@
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
     <string name="hillshade_slope_contour_lines">Рельєф / Схили / Ізолінії</string>
-    <string name="open_place_reviews_plugin_description">Дозволяє робити внески у проєкт OpenPlaceReviews. Наприклад, світлини, огляди, посилання на громадські місця, такі як ресторани, готелі, музеї та маршрутні точки.
+    <string name="open_place_reviews_plugin_description">Зробіть свій внесок у проєкт OpenPlaceReviews, наприклад, світлини, відгуки або посилання на громадські місця, такі як ресторани, готелі або музеї.
 \n
-\nНастанови, як зробити внесок, ви можете переглянути на нашому вебсайті - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nІнструкції про те, як зробити свій внесок, можна знайти на нашому вебсайті https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Використовувати test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
@@ -4155,7 +4157,7 @@
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морські глибини</string>
     <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, повноколірна відмивка рельєфу з темними відтінками та мапами схилів в кольорах для показу піків та низин.</string>
     <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в офлайн режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
-    <string name="purchases_feature_desc_wikipedia">Офлайн-Вікіпедія під час подорожі допоможе вам дізнатися більше про місця, які ви відвідуєте. Вона доступна у режимі офлайн і показує статті Вікіпедії про визначні місця прямо на мапі. Не забудьте завантажити мапи Вікіпедії для обраного регіону.</string>
+    <string name="purchases_feature_desc_wikipedia">Надає всі статті Вікіпедії, пов\'язані з конкретними місцями офлайн, допомагаючи вам дізнатися про місця, які ви відвідуєте під час подорожі, простими дотиком до мапи. Не забудьте завантажити файли мап Вікіпедії для відповідних регіонів.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Офлайнові дані, розділені за країнами та доступні всіма мовами.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
@@ -4601,44 +4603,44 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Середня</string>
     <string name="turn_on_public_transport_description">Увімкніть, щоб побачити маршрути громадського транспорту на мапі.</string>
     <string name="av_def_action_choose">За запитом</string>
-    <string name="coordinates_widget_secondary_desc">Формат координат може бути змінений на %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Можна змінити формат координат на %1$s - %2$s - %3$s.</string>
     <string name="widget_secondary_desc_part_of">Частина плагіну %1$s.</string>
-    <string name="elevation_profile_widget_desc">Віджет показує профіль висоти та нахилу поточного маршруту.</string>
-    <string name="parking_widget_desc">Віджет, який показує відстань від центру екрана до місця для паркування.</string>
-    <string name="mapillary_widget_desc">Віджет, який забезпечує швидкий доступ до програми Mapillary для додавання зображень у шарі вулиць.</string>
+    <string name="elevation_profile_widget_desc">Показує висоту і профіль нахилу поточного маршруту.</string>
+    <string name="parking_widget_desc">Показує відстань від центру екрана до місця паркування.</string>
+    <string name="mapillary_widget_desc">Забезпечує швидкий доступ до програми Mapillary для додавання зображень вулиць.</string>
     <string name="av_notes_choose_action_widget_desc">Виберіть дію.</string>
     <string name="battery_widget_desc">Показує рівень заряду акумулятора пристрою.</string>
-    <string name="gps_info_widget_desc">Показує кількість супутників, які пристрій виявляє та використовує в цей момент.</string>
+    <string name="gps_info_widget_desc">Показує кількість супутників, які на цю мить видимі та використовуються.</string>
     <string name="altitude_widget_desc">Показує висоту над рівнем моря поточної геолокації.</string>
     <string name="max_speed_widget_desc">Показує обмеження швидкості для поточної дороги.</string>
     <string name="arrival_time_widget_desc">Час прибуття в пункт призначення.</string>
-    <string name="coordinates_widget_desc">Він показує географічні координати поточної геолокації.</string>
+    <string name="coordinates_widget_desc">Показує географічні координати поточної геолокації.</string>
     <string name="shared_string_widget">Віджет</string>
-    <string name="bearing_secondary_desc">Ви можете змінити формат показуваних даних на: %1$s – %2$s – %3$s.</string>
-    <string name="radius_rules_widget_desc">Інструмент «Лінійка радіуса» допомагає визначити радіус навколо вибраної точки на мапі показуючи кола відстаней на мапі.</string>
+    <string name="bearing_secondary_desc">Ви можете змінити формат використовуваних даних на: %1$s – %2$s – %3$s.</string>
+    <string name="radius_rules_widget_desc">Інструмент «Лінійка радіуса» показує кола відстані навколо вибраної точки на мапі.</string>
     <string name="time_to_go_desc">Час у хвилинах або годинах, необхідний для досягнення пункту призначення.</string>
-    <string name="current_time_widget_desc">Показує поточний час пристрою.</string>
-    <string name="current_speed_widget_desc">Показує вашу поточну швидкість, визначену GPS-датником.</string>
+    <string name="current_time_widget_desc">Показує поточний час, взятий з вашого пристрою.</string>
+    <string name="current_speed_widget_desc">Показує вашу поточну швидкість за даними GPS.</string>
     <string name="magnetic_bearing_widget_desc">Кут між магнітною північчю та цільовою точкою, що визначається з місця вашого розташування.</string>
-    <string name="lanes_widgets_desc">Віджет «Смуги» показує поточне розташування доріг і виділяє смуги для їзди з активною навігацією.</string>
-    <string name="map_markers_bar_widget_desc">На верхньому віджеті панелі ви можете побачити відстань і напрямок до маркера від поточного розташування. Віджет можна налаштувати на показ 1 або 2 верхніх маркерів.</string>
-    <string name="street_name_widget_desc">Віджет назви вулиць показує назву поточної вулиці зі стрілкою напрямку або назву наступної вулиці з маневром, який потрібно виконати.</string>
-    <string name="audio_video_notes_desc">Віджет надає швидкий доступ до початку/зупинки запису (аудіо, відео або фотографування).</string>
-    <string name="bearing_desc">Віджет азимуту показує абсолютний або відносний азимут до цілі в кутових одиницях (градуси 180, градуси 360, мілірадіани).</string>
-    <string name="navigation_points_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
+    <string name="lanes_widgets_desc">Показує поточну схему розташування смуг руху та виділяє ті з них, якими слід керуватися під час навігації.</string>
+    <string name="map_markers_bar_widget_desc">Віджет верхньої панелі показує відстань і напрямок до наступної позначки на мапі від вашого поточного місця перебування. Віджет можна налаштувати на показ 1 або 2 позначок.</string>
+    <string name="street_name_widget_desc">Віджет назв вулиць показує назву поточної вулиці зі стрілкою напрямку або назву наступної вулиці зі стрілкою, що вказує на майбутній поворот.</string>
+    <string name="audio_video_notes_desc">Надає швидкий доступ для початку/зупинки запису аудіо, відео або фотографування.</string>
+    <string name="bearing_desc">Показує абсолютний або відносний азимут до цілі в кутових одиницях (в режимі 180 градусів, 360 градусів або в мілірадіанах).</string>
+    <string name="navigation_points_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час, що залишився, наступні повороти, азимут, назва поточної/наступної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
     <string name="navigation_points">Точки навігації</string>
     <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, прибуття або час до завершення, наступні повороти, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення, цікаві місця, маршрутні точки.</string>
-    <string name="get_altitude_information">Отримати дані про висоту</string>
+    <string name="get_altitude_information">Отримати дані про висоту над рівнем моря</string>
     <string name="calculating_altitude">Обчислення висоти</string>
     <string name="calculate_online">Обчислити онлайн</string>
-    <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до дороги за допомогою офлайн-мап, геометрія треку буде змінена.</string>
+    <string name="track_attach_to_the_roads_descr">Трек буде прив\'язаний до доріг за допомогою офлайн-мап, геометрія треку буде змінена.</string>
     <string name="get_altitude_data">Отримати дані про висоту</string>
     <string name="calculate_altitude">Обчислити висоту</string>
     <string name="no_altitude_data">Немає даних про висоту</string>
     <string name="shared_string_speed">Швидкість</string>
     <string name="app_mode_mountain_bicycle">Гірський велосипед</string>
     <string name="route_maneuvers">Маневри на маршруті</string>
-    <string name="routing_attr_avoid_4wd_only_description">Уникати доріг, призначених лише для автомобілів з повним приводом</string>
+    <string name="routing_attr_avoid_4wd_only_description">Уникати доріг, призначених для лише повнопривідних автомобілів</string>
     <string name="routing_attr_avoid_4wd_only_name">Уникати доріг 4х4</string>
     <string name="colour_of_circles">Колір кіл</string>
     <string name="compass_on_circles">Компас на колах</string>
@@ -4786,27 +4788,27 @@
     <string name="shared_string_normal">Звичайний</string>
     <string name="quick_action_current_location_widget_descr">Перемикач для показу або приховування віджета «Поточне місце перебування» на мапі.</string>
     <string name="coordinates_widget_current_location">Координати: поточне місце перебування</string>
-    <string name="coordinates_widget_current_location_desc">Віджет показує географічні координати поточної геолокації</string>
-    <string name="coordinates_widget_map_center_desc">Віджет показує географічні координати поточного центру мапи</string>
+    <string name="coordinates_widget_current_location_desc">Показує географічні координати поточної геолокації</string>
+    <string name="coordinates_widget_map_center_desc">Показує географічні координати поточного центру мапи</string>
     <string name="quick_action_map_center_widget_descr">Перемикач для показу або приховування віджета «Центр мапи» на мапі.</string>
     <string name="coordinates_widget_map_center">Координати: центр мапи</string>
-    <string name="map_widget_camera_distance_desc">Віджет показує висоту камери над рівнем поверхні.</string>
-    <string name="map_widget_camera_tilt_desc">Віджет показує кут нахилу камери в режимі перспективи. Усталено 90° (без нахилу).</string>
+    <string name="map_widget_camera_distance_desc">Показує висоту камери над рівнем поверхні.</string>
+    <string name="map_widget_camera_tilt_desc">Показує кут нахилу камери в режимі перспективи. Усталено 90° (без нахилу).</string>
     <string name="map_widget_zoom_level">Масштаб</string>
     <string name="map_widget_camera_tilt">Нахил камери</string>
     <string name="developer_widgets">Віджети розробника</string>
-    <string name="map_widget_target_distance_desc">Віджет показує відстань від камери до цільового розташування.</string>
+    <string name="map_widget_target_distance_desc">Показує відстань між камерою і цільовим розташуванням.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
-    <string name="map_widget_zoom_level_desc">Віджет показує поточний масштаб мапи.</string>
+    <string name="map_widget_zoom_level_desc">Показує поточний масштаб мапи.</string>
     <string name="ant_widgets">Віджети ANT+</string>
-    <string name="ant_missing_dependency_descr">Необхідна служба «%1$s» не знайдена.
-\nВам необхідно встановити службу плагінів ANT+ або оновити наявну версію, якщо вона у вас вже є.
-\nБажаєте запустити Play Маркет, щоб отримати її\?</string>
+    <string name="ant_missing_dependency_descr">Не вдалося знайти необхідну службу «%1$s».
+\nВам необхідно встановити або оновити службу плагінів ANT+.
+\nЗапустити для цього Play Маркет\?</string>
     <string name="ant_missing_dependency">Відсутня залежність</string>
     <string name="ant_go_to_store">Перейти до маркету</string>
     <string name="ant_read_data">Прочитати дані</string>
     <string name="ant_write_to_gpx">Записати дані до треку</string>
-    <string name="ant_heart_rate_write_gpx_desc">Записати пульс до треку</string>
+    <string name="ant_heart_rate_write_gpx_desc">Включити пульс у трек</string>
     <string name="map_widget_ant_heart_rate">Пульс</string>
     <string name="map_widget_ant_heart_rate_desc">Показує пульс користувача під час певної активності в режимі реального часу</string>
     <string name="map_widget_ant_bicycle_speed">Швидкість велосипеда</string>
@@ -4822,7 +4824,7 @@
     <string name="depth_contours">Ізолінії глибин</string>
     <string name="map_widget_target_distance">Відстань від камери до цілі</string>
     <string name="favorites_backup">Резервне копіювання вибраного</string>
-    <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/Web) без додаткових витрат.</string>
+    <string name="purchases_feature_desc_cross_buy">Користуйтеся можливостями передплати на різних платформах (Android/iOS/web) без додаткових витрат.</string>
     <string name="shared_string_cross_buy">Перехресна купівля</string>
     <string name="map_widget_altitude_current_location_desc">Показує висоту над рівнем моря поточної геолокації.</string>
     <string name="simulate_location_by_gpx">Симулювати місцеперебування за допомогою GPX</string>
@@ -4832,14 +4834,14 @@
     <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
     <string name="shared_string_terms_of_use">Умови використання</string>
     <string name="external_sensors_plugin_name">Зовнішні датчики</string>
-    <string name="external_sensors_plugin_description">Відстеження пульсу, швидкості велосипеда, потужності велосипеда та частоти обертання педалей. Вимагає під\'єднання пристрою до відповідних датчиків за протоколом бездротової персональної мережі ANT+.</string>
-    <string name="map_widget_altitude_map_center">Висота: центр мапи</string>
+    <string name="external_sensors_plugin_description">Доступ до зовнішніх датчиків для зчитування, наприклад, пульсу, швидкості велосипеда, потужності велоїзди та частоти обертання педалей. Вимагає під\'єднання пристрою до відповідних датчиків за протоколом бездротової персональної мережі ANT+.</string>
+    <string name="map_widget_altitude_map_center">Висота над рівнем моря: центр мапи</string>
     <string name="current_location_widget">Координати: Поточне місцеперебування</string>
     <string name="map_widget_altitude_current_location">Висота: поточне місцеперебування</string>
     <string name="map_widget_altitude_map_center_desc">Показує висоту над рівнем моря поточного центру мапи.</string>
     <string name="shared_string_identifiers">Ідентифікатори</string>
     <string name="map_center_widget">Координати: Центр мапи</string>
-    <string name="map_widget_altitude_desc">Показ висоти над рівнем моря для поточної геолокації або для поточного центру мапи</string>
+    <string name="map_widget_altitude_desc">Показ висоти над рівнем моря поточної геолокації або поточного центру мапи</string>
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
     <string name="map_widget_rendering_fps_desc">Показує швидкість появи й оновлення мапи та її елементів (виражається у кадрах на секунду, або FPS).</string>
     <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
@@ -4878,7 +4880,7 @@
     <string name="dismiss_changes_descr">Усі зміни буде відхилено.</string>
     <string name="dismiss_changes">Відхилити зміни\?</string>
     <string name="restart_now">Перезапустити зараз</string>
-    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це швидший рушій рендерингу мап, який також підтримує 2.5D перегляд. Рендеринг версії 1 був типовим до випуску 4.3, і досі є кращим для старих пристроїв.</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) — це швидший рушій рендерингу мап, який також підтримує 2.5D перегляд. Рендеринг версії 1 був типовим до OsmAnd 4.3, і досі кращий для старих пристроїв.</string>
     <string name="rendering_engine_failed">Стався збій рендерингу мап OsmAnd.</string>
     <string name="share_crash_log">Поділитися журналом збоїв</string>
     <string name="map_rendering_engine_v1">Версія 1</string>
@@ -4887,15 +4889,16 @@
     <string name="shared_string_layers">Шари</string>
     <string name="empty_screen_weather_contours">Увімкніть, щоб переглянути контури погоди на мапі.</string>
     <string name="empty_screen_weather_pressure_layer">Увімкніть, щоб переглянути шар тиску на мапі.</string>
-    <string name="weather_plugin_description">Плагін погоди надає
-\n- 5 шарів... 24-годинний і 7-денний прогноз що 3 години
+    <string name="weather_plugin_description">Надає
+\n- 24-годинний та 7-денний прогноз погоди з 5-ма шарами
 \n- віджети на основі розташування
 \n- ізолінії температури / тиску
-\nДані про погоду надає GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n
+\nДані про погоду надає Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_online_cache">Мережевий кеш</string>
     <string name="weather_wind_kt">вузли</string>
     <string name="weather_wind_kilimeters_per_hour">Кілометрів на годину</string>
-    <string name="clouds_widget_desc">Показує хмари для поточного центру мапи.</string>
+    <string name="clouds_widget_desc">Показує хмарність для поточного центру мапи.</string>
     <string name="map_settings_weather_temp">Температура</string>
     <string name="map_settings_weather_air_pressure">Тиск повітря</string>
     <string name="map_settings_weather_wind">Вітер</string>
@@ -4913,7 +4916,7 @@
     <string name="empty_screen_weather_precipitation_layer">Увімкніть, щоб переглянути шар опадів на мапі.</string>
     <string name="empty_screen_view_selected_weather_data">Увімкніть, щоб переглянути вибрані погодні дані на мапі.</string>
     <string name="weather_wind_mph">миль/год</string>
-    <string name="empty_screen_weather_clouds_layer">Увімкніть, щоб переглянути шар хмар на мапі.</string>
+    <string name="empty_screen_weather_clouds_layer">Увімкніть, щоб переглянути шар хмарності на мапі.</string>
     <string name="weather_precip_in">у</string>
     <string name="weather_widget_group_desc">Набір віджетів, що показують різноманітні відомості про погоду.</string>
     <string name="weather_pressure_hpa">гПа</string>
@@ -4926,14 +4929,28 @@
     <string name="weather_wind_knots">Вузлів</string>
     <string name="weather_wind_ms">м/с</string>
     <string name="weather_wind_miles_per_hour">Миль на годину</string>
-    <string name="weather_wind_meters_per_second">Метри/Секунди</string>
+    <string name="weather_wind_meters_per_second">Метри/секунди</string>
     <string name="weather_widgets_secondary_desc">Одиниці виміру можна змінити в налаштуваннях плагіну Погода.</string>
     <string name="air_pressure_widget_desc">Показує атмосферний тиск для поточного центру мапи.</string>
     <string name="precipitation_widget_desc">Показує кількість опадів для поточного центру мапи.</string>
     <string name="weather_pressure_inhg">дюйм рт.ст</string>
-    <string name="weather_prefs_descr">24-годинний прогноз та прогноз на 7 днів що 3 години</string>
+    <string name="weather_prefs_descr">Прогноз на 24 години та 7 днів, оновлюється що 3 години</string>
     <string name="weather_temperature_celsius">За цельсієм</string>
     <string name="weather_temperature_fahrenheit">За фаренгейтом</string>
     <string name="weather_pressure_millimeters_of_mercury">Міліметри ртутного стовпчика</string>
-    <string name="action_not_supported_with_map_style">Дія не підтримується з вибраним стилем мапи.</string>
+    <string name="action_not_supported_with_map_style">Ця дія не підтримується вибраним стилем мапи.</string>
+    <string name="switch_mode_by_tapping_on_widget">Перемкніть режим торкнувшись віджета.</string>
+    <string name="map_widget_sunset_desc">Показує час наступного заходу сонця або час, що залишився до заходу сонця.</string>
+    <string name="map_widget_sunrise_desc">Показує час наступного сходу сонця або час, що залишився до сходу сонця.</string>
+    <string name="shared_string_next_sunset">Наступний захід сонця</string>
+    <string name="shared_string_next_sunrise">Наступний схід сонця</string>
+    <string name="shared_string_time_left">Часу лишилося</string>
+    <string name="shared_string_sunset">Захід сонця</string>
+    <string name="shared_string_sunrise">Схід сонця</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Ці віджети показують відомості про найближчі схід і захід сонця.</string>
+    <string name="depth_contour_lines">Ізолінії глибини</string>
+    <string name="turn_on_nautical_depth_description">Увімкніть, щоб переглянути дані про морські глибини на мапі.</string>
+    <string name="map_widget_group_sunrise_sunset">Схід, захід сонця</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Колірна схема ліній</string>
+    <string name="rendering_attr_depthContourWidth_name">Ширина лінії</string>
 </resources>
