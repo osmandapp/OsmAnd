@@ -12,7 +12,7 @@
 -->
 
     <string name="switch_mode_by_tapping_on_widget">Switch mode by tapping the widget.</string>
-    <string name="map_widget_sunset_desc">Shows time of, or time left until the next sunset.</string>
+    <string name="map_widget_sunset_desc">Shows time of, or time left until next sunset.</string>
     <string name="map_widget_sunrise_desc">Shows time of, or time left until next sunrise.</string>
     <string name="shared_string_next_sunset">Next sunset</string>
     <string name="shared_string_next_sunrise">Next sunrise</string>
