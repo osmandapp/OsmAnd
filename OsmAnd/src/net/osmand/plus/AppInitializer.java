@@ -28,6 +28,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -468,6 +469,7 @@ public class AppInitializer implements IProgress {
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
 
 		initOpeningHoursParser();
+		checkOpenGlAvailable();
 	}
 
 	private void initOpeningHoursParser() {
@@ -480,6 +482,15 @@ public class AppInitializer implements IProgress {
 		OpeningHoursParser.setAdditionalString("open_till", app.getString(R.string.open_till));
 		OpeningHoursParser.setAdditionalString("will_open_tomorrow_at", app.getString(R.string.will_open_tomorrow_at));
 		OpeningHoursParser.setAdditionalString("will_open_on", app.getString(R.string.will_open_on));
+	}
+
+	private void checkOpenGlAvailable() {
+		OsmandSettings settings = app.getSettings();
+		if (settings.USE_OPENGL_RENDER.get() && !NativeCore.isAvailable()) {
+			LOG.info("Current build does not contain native libraries, force switch to default rendering engine");
+			settings.USE_OPENGL_RENDER.set(false);
+			settings.OPENGL_RENDER_FAILED.set(true);
+		}
 	}
 
 	private void updateRegionVars() {
@@ -747,7 +758,7 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (settings.USE_OPENGL_RENDER.get() && !"qnx".equals(System.getProperty("os.name"))) {
+		if (settings.USE_OPENGL_RENDER.get() && !Version.isQnxOperatingSystem()) {
 			try {
 				NativeCoreContext.init(app);
 				settings.OPENGL_RENDER_FAILED.set(false);
@@ -765,7 +776,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initNativeCore() {
-		if (!"qnx".equals(System.getProperty("os.name"))) {
+		if (!Version.isQnxOperatingSystem()) {
 			OsmandSettings osmandSettings = app.getSettings();
 			if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				osmandSettings.SAFE_MODE.set(true);
