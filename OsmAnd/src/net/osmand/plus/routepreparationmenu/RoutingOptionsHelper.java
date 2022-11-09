@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
@@ -106,9 +107,14 @@ public class RoutingOptionsHelper {
 		}
 	}
 
+	@Nullable
 	public RouteMenuAppModes getRouteMenuAppMode(ApplicationMode appMode) {
-		if (!modes.containsKey(appMode)) {
-			addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
+		if (!isFollowGpxTrack()) {
+			if (!modes.containsKey(appMode)) {
+				addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
+			}
+		} else {
+			modes.clear();
 		}
 		return modes.get(appMode);
 	}
@@ -445,9 +451,8 @@ public class RoutingOptionsHelper {
 	}
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
-		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		GeneralRouter rm = app.getRouter(am);
-		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
+		if (rm == null || (isFollowGpxTrack())) {
 			return null;
 		}
 
@@ -526,10 +531,9 @@ public class RoutingOptionsHelper {
 			return getOsmandRouterParameters(am);
 		}
 
-		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
 		GeneralRouter rm = app.getRouter(am);
-		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
+		if (rm == null || isFollowGpxTrack()) {
 			return list;
 		}
 		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
@@ -555,6 +559,11 @@ public class RoutingOptionsHelper {
 		}
 
 		return list;
+	}
+
+	private boolean isFollowGpxTrack() {
+		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		return rparams != null && !rparams.isCalculateOsmAndRoute() && !rparams.getFile().hasRtePt();
 	}
 
 	private static void updateRoutingParameterIcons(LocalRoutingParameter rp) {
