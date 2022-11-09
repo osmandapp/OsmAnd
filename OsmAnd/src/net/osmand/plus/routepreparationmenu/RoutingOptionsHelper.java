@@ -109,12 +109,11 @@ public class RoutingOptionsHelper {
 
 	@Nullable
 	public RouteMenuAppModes getRouteMenuAppMode(ApplicationMode appMode) {
-		if (!isFollowGpxTrack()) {
-			if (!modes.containsKey(appMode)) {
-				addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
-			}
-		} else {
+		if (isFollowGpxTrack()) {
 			modes.clear();
+		}
+		if (!modes.containsKey(appMode)) {
+			addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
 		}
 		return modes.get(appMode);
 	}
