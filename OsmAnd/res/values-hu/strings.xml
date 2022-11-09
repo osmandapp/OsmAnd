@@ -654,9 +654,9 @@
     <string name="map_online_data_descr">Online térképek használata (csempék letöltése és tárolása memóriakártyán).</string>
     <string name="shared_string_online_maps">Online térképek</string>
     <string name="online_map_settings_descr">Online vagy gyorsítótárazott csempés térképek forrásainak kijelölése.</string>
-    <string name="osmand_rastermaps_plugin_description">Hozzáférhet többféle online (úgynevezett csempés vagy raszteres) térképhez az előre meghatározott OSM-csempéktől kezdve (mint például a Mapnik) műholdképekig és speciális célú rétegekig (pl. időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek stb.).
+    <string name="osmand_rastermaps_plugin_description">Hozzáférhet többféle online (úgynevezett csempés vagy raszteres) térképhez, mint előre leképezett OSM-csempék, műholdképek és speciális célú rétegek (pl. időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek stb.).
 \n
-\nEzek a térképek egyaránt használhatók fő (alap) térképként, illetve egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Az OsmAnd vektoros térképeinek bizonyos elemei elrejthetők a „Térkép beállítása” menün keresztül.
+\nEzek a térképek egyaránt megjeleníthetők fő (alap) térképként, illetve egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Az OsmAnd vektoros térképeinek bizonyos elemei elrejthetők a „Térkép beállítása” menün keresztül.
 \n
 \nTöltse le közvetlenül a csempetérképeket, vagy másolja őket SQLite adatbázis-fájlként az OsmAnd adatmappájába a számos harmadik féltől származó térkép-előkészítő eszköz egyikével.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
@@ -878,9 +878,11 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolások, lejtők segítenek vizuálisan értékelni a földfelszín alakját, figyelembe véve a görbületet, a szélsőségeket, a meredekséget, az azonos magasságú pontokat és egyebeket. A térképen a topográfiai információk lejtőárnyékolással, szintvonalakkal a felfelé ill. lefelé vezető útvonalakhoz, valamint a különböző színű lejtési szögekkel ábrázolhatók. Adatok az SRTM-től és az ASTER-től.
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolások, lejtők segítenek vizuálisan értékelni a földfelszín alakját, domborzati viszonyait, hajózhatóságát és egyebeket. A térképen a topográfiai információk lejtőárnyékolással, szintvonalakkal és/vagy különböző színű lejtési színezéssel ábrázolhatók.
 \n
-\nÚtmutató - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nAz adatok az SRTM-től és az ASTER-től származnak.
+\n
+\nRészletes útmutató itt: http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. Leállításhoz koppintson az A/V widgetre.</string>
     <string name="recording_playing">A megadott felvétel egyik hangfájljának a lejátszása elindult.
 \n%1$s</string>
@@ -898,7 +900,7 @@
     <string name="map_widget_av_notes">Hang/videojegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-bővítmény offline szintvonalakhoz</string>
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
-    <string name="audionotes_plugin_description">Készítsen hang/fénykép/videó jegyzeteket utazás közben egy térképen lévő gomb vagy egy pozíció helyi menüjének használatával.</string>
+    <string name="audionotes_plugin_description">Készítsen hang/fénykép/videó jegyzeteket utazás közben egy térképen lévő gomb vagy a pozíció helyi menüjének használatával.</string>
     <string name="av_def_action_video">Videofelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
     <string name="av_video_format_descr">Kimeneti videoformátum:</string>
@@ -1284,9 +1286,9 @@
     <string name="rendering_value_car_name">Személyautó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
-    <string name="record_plugin_description">Lehetővé teszi az edzés- vagy mozgásadatok, például a sebesség és útvonal domborzati viszonyainak rögzítését, mentését és elemzését, amelyeket aztán újra felhasználhat, javíthat, kiegészíthet vagy a barátaival megoszthat.
+    <string name="record_plugin_description">Rögzítse utazásait vagy edzéseit és elemezze az adatokat a sebesség, az összesített emelkedések és ereszkedések, a magassági profil szempontjából. A rögzített nyomvonalak archiválhatók, megoszthatók barátokkal, szerkeszthetők és utólag feldolgozhatók.
 \n
-\nÚtmutató - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nRészletes útmutató itt: https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Utazás felvétele</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
@@ -2256,8 +2258,8 @@
     <string name="mapillary_action_descr">Ossza meg utcaszintű képeit a Mapillary segítségével.</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
-    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaszintű fényképeket kínál. Ahol hiányoznak a képek, ott Ön is egyszerűen hozzáadhatja őket, hogy mások is felhasználhassák. A Mapillary réteg engedélyezéséhez kapcsolja be az \"utcaszintű képek\" opciót a Térkép beállítása menüpont alatt.</string>
+    <string name="mapillary_descr">Online utcaszintű képek mindenkinek. Fedezzen fel helyeket, dolgozzon együtt másokkal, örökítse meg a világot.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű képek. Ön is közreműködhet ebben. A meglévő adatok térképrétegként való megjelenítéséhez kapcsolja be a \"Térkép konfigurálása\" menüben az \"Utcaszintű képek\" lehetőséget.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
@@ -3957,9 +3959,9 @@
     <string name="toast_select_edits_for_upload">Szerkesztések kijelölése feltöltéshez</string>
     <string name="activity_type_snowmobile_name">Motoros szán</string>
     <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
-    <string name="open_place_reviews_plugin_description">Lehetővé teszi, hogy hozzájáruljon az OpenPlaceReviews projekthez. Például fényképekkel, értékelésekkel, linkekkel nyilvános helyekről, mint éttermek, szállodák, múzeumok és útvonalak.
+    <string name="open_place_reviews_plugin_description">Lehetővé teszi a közreműködést az OpenPlaceReviews projektben. Például fényképekkel, értékelésekkel, linkekkel nyilvános helyekről, mint éttermek, szállodák, múzeumok és útvonalak.
 \n
-\nA hozzájárulás módjára vonatkozó útmutatást megtalálja a weboldalunkon - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nA közreműködés módjára vonatkozó útmutatást megtalálja a weboldalunkon - https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
     <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
@@ -4178,7 +4180,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Havi frissítés az offline térképekhez.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Az összes kontinens és régió offline térképeinek korlátlan számú letöltése.</string>
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
-    <string name="purchases_feature_desc_wikipedia">Az offline Wikipédia segítségével többet tudhat meg a meglátogatott helyekről. Minden nyelven elérhető offline, és a Wikipédia szócikkeit a térképen az érdekes helyekhez kapcsolódóan mutatja. Ne felejtse el letölteni a Wikipedia térképeket a kiválasztott régióhoz.</string>
+    <string name="purchases_feature_desc_wikipedia">Az összes helyhez kapcsolódó Wikipédia-cikk elérhető offline módban, ami segít tájékozódni a térkép egyszerű érintésével az utazása során felkeresett helyekről. Ne felejtse el letölteni a Wikipedia térképeket a megfelelő régióhoz.</string>
     <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikönyvet offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
     <string name="purchases_feature_desc_terrain">Szintvonalak, teljes domborzati térkép domborzatárnyékolással és lejtőtérképek színekkel a csúcsok és síkságok megjelenítésére.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>
@@ -4835,7 +4837,7 @@
     <string name="map_center_widget">Koordináták: térképközéppont</string>
     <string name="send_uuid_preference_desc">Egy véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szerver erőforrások méltányos használatának nyomon követése, a forgalom mintázatának előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám figyelemmel kísérése. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása szükséges a megfelelő szenzorokhoz.</string>
+    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása szükséges a megfelelő szenzorokhoz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
@@ -4924,11 +4926,12 @@
     <string name="wind_widget_desc">Megjeleníti a térképközéppontnál mérhető szelet.</string>
     <string name="air_pressure_widget_desc">Megjeleníti a térképközéppontnál mérhető légnyomást.</string>
     <string name="weather_widgets_secondary_desc">A mértékegységek megváltoztathatók az Időjárás bővítmény beállításaiban.</string>
-    <string name="weather_plugin_description">Az időjárás bővítmény szolgáltatásai
-\n- 5 réteg... 3 óránként frissülő 24 órás és 7 napos előrejelzés
+    <string name="weather_plugin_description">Funkciók
+\n- 3 óránként frissülő 24 órás és 7 napos előrejelzés
 \n- helyfüggő bővítmények
 \n- hőmérséklet/nyomás izolinák
-\nAz időjárási adatokat a GFS szolgáltatja: https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n
+\nAz időjárási adatokat a Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) szolgáltatja.</string>
     <string name="map_widget_sunset_desc">Megjeleníti a következő naplemente idejét vagy az addig hátralévő időt.</string>
     <string name="map_widget_sunrise_desc">Megjeleníti a következő napfelkelte idejét vagy az addig hátralévő időt.</string>
     <string name="shared_string_time_left">Hátralévő idő</string>
