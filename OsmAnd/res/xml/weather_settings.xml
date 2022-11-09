@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/shared_string_weather">
 
 	<PreferenceCategory
@@ -42,16 +41,19 @@
 	<PreferenceCategory
 		android:key="data"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/data_settings" />
+		android:title="@string/data_settings"
+		app:isPreferenceVisible="false" />
 
 	<Preference
 		android:key="weather_online_cache"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/weather_online_cache" />
+		android:title="@string/weather_online_cache"
+		app:isPreferenceVisible="false" />
 
 	<Preference
 		android:key="weather_offline_forecast"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/weather_offline_forecast" />
+		android:title="@string/weather_offline_forecast"
+		app:isPreferenceVisible="false" />
 
 </PreferenceScreen>

@@ -179,6 +179,11 @@
 	<string name="poi_dry_cleaning_filter">Dry cleaning</string>
 	<string name="poi_dog">Dogs</string>
 	<string name="poi_parking_fee_filter">Parking fee</string>
+	<string name="poi_climbing_grade_filter">Climbing grade</string>
+	<string name="poi_climbing_bolt">Climbing bolt</string>
+	<string name="poi_climbing_bolts_filter">Climbing bolts</string>
+	<string name="poi_climbing_bolted_filter"></string>
+	<string name="poi_climbing_quality">Climbing quality</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2528,7 +2533,7 @@
 	<string name="poi_historic_period_old_kingdom">Historic period: old kingdom (2686 – 2181 BC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historic period: first intermediate period (2181 – 2055 BC)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historic period: second intermediate period (1650 – 1550 BC)</string>
-	<string name="poi_historic_period_third_intermediate_period">Historic period: third intermediate period (1069 – 664 BC) </string>
+	<string name="poi_historic_period_third_intermediate_period">Historic period: third intermediate period (1069 – 664 BC)</string>
 	<string name="poi_historic_period_first_persian_period">Historic period: first persian period</string>
 	<string name="poi_historic_period_late_period">Historic period: late period (664 – 332 BC)</string>
 	<string name="poi_historic_period_second_persian_period">Historic period: second persian period</string>
@@ -3746,9 +3751,12 @@
 	<string name="poi_climbing_rock_sandstone">Climbing rock: sandstone</string>
 	<string name="poi_climbing_rock_quartzite">Climbing rock: quartzite</string>
 	<string name="poi_climbing_rock_gneiss">Climbing rock: gneiss</string>
+	<string name="poi_climbing_rock_gritstone">Climbing rock: gritstone</string>
 	<string name="poi_climbing_rock_porphyry">Climbing rock: porphyry</string>
-	<string name="poi_climbing_quality_solid">Climbing quality: solid</string>
-	<string name="poi_climbing_quality_fragile">Climbing quality: fragile</string>
+	<string name="poi_climbing_rock_basalt">Climbing rock: basalt</string>
+	<string name="poi_climbing_rock_conglomerate">Climbing rock: conglomerate</string>
+	<string name="poi_climbing_quality_solid">Solid</string>
+	<string name="poi_climbing_quality_fragile">Fragile</string>
 	<string name="poi_climbing_bolted_yes">Fixed anchors: yes</string>
 	<string name="poi_climbing_bolted_no">Fixed anchors: no</string>
 	<string name="poi_climbing_orientation_n">Orientation of the wall: N</string>
@@ -3762,9 +3770,9 @@
 	<string name="poi_climbing_summit_log_yes">Climbing summit log: yes</string>
 	<string name="poi_climbing_summit_log_no">Climbing summit log: no</string>
 	<string name="poi_climbing_routes">Climbing routes</string>
-	<string name="poi_climbing_grade_saxon_min">Easiest route (Saxon grade) </string>
-	<string name="poi_climbing_grade_french_min">Easiest route (French grade) </string>
-	<string name="poi_climbing_grade_uiaa_min">Easiest route (UIAA grade) </string>
+	<string name="poi_climbing_grade_saxon_min">Easiest route (Saxon grade)</string>
+	<string name="poi_climbing_grade_french_min">Easiest route (French grade)</string>
+	<string name="poi_climbing_grade_uiaa_min">Easiest route (UIAA grade)</string>
 
 	<string name="poi_circumference">Circumference</string>
 	<string name="poi_diameter_crown">Diameter of the crown</string>
@@ -4915,5 +4923,34 @@
 	<string name="poi_playground_exercise">Outdoor gym</string>
 
 	<string name="poi_access_yes">Access is allowed</string>
+
+	<string name="poi_climbing_speed_yes">Speed: yes</string>
+	<string name="poi_climbing_grade_uiaa_max">Hardest route (UIAA grade)</string>
+	<string name="poi_climbing_grade_uiaa_mean">Mean route (UIAA grade)</string>
+	<string name="poi_climbing_grade_french_max">Hardest route (French grade)</string>
+	<string name="poi_climbing_grade_french_mean">Mean route (French grade)</string>
+	<string name="poi_climbing_grade_saxon_max">Hardest route (Saxon grade)</string>
+	<string name="poi_climbing_grade_saxon_mean">Mean route (Saxon grade)</string>
+	<string name="poi_climbing_grade_uiaa">UIAA climbing grade</string>
+	<string name="poi_climbing_grade_french">French climbing grade</string>
+	<string name="poi_climbing_grade_saxon">Saxon climbing grade</string>
+
+	<string name="poi_climbing_grade_novice">Novice</string>
+	<string name="poi_climbing_grade_beginner">Beginner</string>
+	<string name="poi_climbing_grade_intermediate">Intermediate</string>
+	<string name="poi_climbing_grade_advanced">Advanced</string>
+	<string name="poi_climbing_grade_expert">Expert</string>
+	<string name="poi_climbing_grade_super_expert">Super expert</string>
+	<string name="poi_climbing_grade_elite">Elite</string>
+	<string name="poi_climbing_grade_super_elite">Super elite</string>
+	<string name="poi_climbing_grade_aliens">Aliens</string>
+
+	<string name="poi_climbing_bolt_abseil">Abseil</string>
+	<string name="poi_climbing_bolt_anchor">Anchor</string>
+
+	<string name="poi_osmand_climbing_bolts_yes">Yes</string>
+	<string name="poi_osmand_climbing_bolts_no">No</string>
+	<string name="poi_climbing_bolts">Climbing bolts</string>
+	<string name="poi_climbing_quality_medium">Medium</string>
 
 </resources>
