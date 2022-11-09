@@ -4840,7 +4840,7 @@
     <string name="weather_wind_kmh">км/г</string>
     <string name="weather_wind_ms">м/с</string>
     <string name="weather_wind_knots">Вузлы</string>
-    <string name="weather_wind_miles_per_hour"></string>
+    <string name="weather_wind_miles_per_hour">Міляў за гадзіну</string>
     <string name="weather_widgets_secondary_desc">Адзінкі вымярэння можна змяніць у наладах убудовы Надвор\'e.</string>
     <string name="air_pressure_widget_desc">Паказвае атмасферны ціск для бягучага цэнтра мапы.</string>
     <string name="wind_widget_desc">Паказвае хуткасць ветру для бягучага цэнтра мапы.</string>
@@ -4856,4 +4856,16 @@
 \n- віджэты на аснове месцазнаходжання
 \n- ізалініі тэмпературы / ціску
 \nДаныя надвор\'я прадстаўлены GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
+    <string name="weather_wind_meters_per_second">Метры за секунду</string>
+    <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>
+    <string name="shared_string_next_sunset">Наступны заход</string>
+    <string name="shared_string_next_sunrise">Наступны ўзыход</string>
+    <string name="shared_string_time_left">Засталося часу</string>
+    <string name="shared_string_sunset">Заход</string>
+    <string name="map_widget_group_sunrise_sunset">Узыход, заход сонца</string>
+    <string name="map_widget_sunset_desc">Паказвае час заходу сонца або час, які застаўся да заходу сонца.</string>
+    <string name="shared_string_sunrise">Узыход</string>
+    <string name="switch_mode_by_tapping_on_widget">Пераключыце рэжым, націснуўшы на віджэт.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Віджэты паказваюць звесткі пра ўзыход і заход сонца.</string>
 </resources>
