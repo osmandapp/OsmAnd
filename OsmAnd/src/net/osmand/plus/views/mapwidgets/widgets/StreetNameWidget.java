@@ -72,6 +72,7 @@ public class StreetNameWidget extends MapWidget {
 	private final TurnDrawable turnDrawable;
 	private int shadowRadius;
 	private boolean showMarker;
+	private String roadShieldName;
 
 
 	@Override
@@ -141,8 +142,13 @@ public class StreetNameWidget extends MapWidget {
 				if (indexOf > 0) {
 					streetName.text = streetName.text.substring(indexOf);
 				}
+				if (roadShieldName != null && streetName.text.contains(roadShieldName)) {
+					streetName.text = streetName.text.replace(roadShieldName, "");
+					streetName.text = streetName.text.trim();
+				}
 			} else {
 				AndroidUiHelper.updateVisibility(shieldImage, false);
+				roadShieldName = null;
 			}
 
 			if (Algorithms.isEmpty(streetName.exitRef)) {
@@ -268,11 +274,13 @@ public class StreetNameWidget extends MapWidget {
 					"drawable", app.getPackageName());
 		}
 		if (shieldRes == -1) {
+			roadShieldName = null;
 			return false;
 		}
 
 		Drawable shield = AppCompatResources.getDrawable(mapActivity, shieldRes);
 		if (shield == null) {
+			roadShieldName = null;
 			return false;
 		}
 
@@ -298,6 +306,7 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
 		shieldImage.setImageBitmap(bitmap);
+		roadShieldName = name;
 		return true;
 	}
 
