@@ -59,8 +59,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
 
-	private static final int startZoom = 12;
-	private static final int startZoomRoute = 10;
+	private static final int START_ZOOM_ALL_TRANSPORT_STOPS = 12;
+	private static final int START_ZOOM_SELECTED_TRANSPORT_ROUTE = 10;
 
 	private RenderingLineAttributes attrs;
 
@@ -179,7 +179,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private int getRadiusPoi(RotatedTileBox tb){
 		double zoom = tb.getZoom();
 		int r;
-		if(zoom < startZoomRoute){
+		if (zoom < START_ZOOM_SELECTED_TRANSPORT_ROUTE){
 			r = 0;
 		} else if(zoom <= 15){
 			r = 8;
@@ -199,27 +199,45 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		if (!mapsInitialized) {
 			return;
 		}
+
 		List<TransportStop> objects = null;
 		boolean nightMode = settings.isNightMode();
 		OsmandApplication app = getApplication();
 		MapRendererView mapRenderer = getMapRenderer();
+
 		if (mapRenderer != null) {
 			float textScale = getTextScale();
 			int stopRouteDist = stopRoute != null ? stopRoute.distance : 0;
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
-			if (this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated
-					|| tb.getZoom() < startZoomRoute || this.stopRouteDist != stopRouteDist
-					|| this.stopRouteType != stopRouteType || !isShowTransportStops()) {
+
+			boolean clearBoth = this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated;
+			boolean clearTransportRouteCollections = clearBoth
+					|| stopRoute == null
+					|| tb.getZoom() < START_ZOOM_SELECTED_TRANSPORT_ROUTE
+					|| this.stopRouteDist != stopRouteDist
+					|| this.stopRouteType != stopRouteType;
+			boolean clearTransportStopsTileProvider = clearBoth
+					|| !isShowTransportStops()
+					|| tb.getZoom() < START_ZOOM_ALL_TRANSPORT_STOPS
+					|| stopRoute != null;
+
+			if (clearTransportRouteCollections) {
 				clearTransportRouteCollections();
+			}
+			if (clearTransportStopsTileProvider) {
 				clearTransportStopsTileProvider();
 			}
-			if (tb.getZoom() >= startZoomRoute && isShowTransportStops()) {
-				if (stopRoute != null) {
+
+			if (stopRoute != null) {
+				if (tb.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE) {
 					initTransportRouteCollections();
-				} else {
+				}
+			} else if (isShowTransportStops()) {
+				if (tb.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS) {
 					initTransportStopsTileProvider();
 				}
 			}
+
 			mapActivityInvalidated = false;
 			this.nightMode = nightMode;
 			this.textScale = textScale;
@@ -228,7 +246,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			return;
 		}
 
-		if (tb.getZoom() >= startZoomRoute) {
+		if (tb.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE) {
 			if (stopRoute != null) {
 				objects = stopRoute.route.getForwardStops();
 				int color = stopRoute.getColor(app, nightMode);
@@ -258,7 +276,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			}
 		}
 
-		if (isShowTransportStops() && tb.getZoom() >= startZoom && objects == null) {
+		if (isShowTransportStops() && tb.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS && objects == null) {
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}
@@ -364,9 +382,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
-		if(tileBox.getZoom() >= startZoomRoute  && stopRoute != null) {
+		if (tileBox.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE && stopRoute != null) {
 			getFromPoint(tileBox, point, res, stopRoute.route.getForwardStops());
-		} else if (tileBox.getZoom() >= startZoom && data.getResults() != null) {
+		} else if (tileBox.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS && data.getResults() != null) {
 			getFromPoint(tileBox, point, res, data.getResults());
 		}
 	}
