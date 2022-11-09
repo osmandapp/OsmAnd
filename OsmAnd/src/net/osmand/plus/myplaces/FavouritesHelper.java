@@ -484,7 +484,7 @@ public class FavouritesHelper {
 	}
 
 	public Exception exportFavorites() {
-		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), Collections.emptySet());
+		return fileHelper.saveExternalFiles(new ArrayList<>(favoriteGroups), Collections.emptySet());
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {

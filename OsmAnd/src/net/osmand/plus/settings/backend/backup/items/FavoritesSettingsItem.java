@@ -173,7 +173,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public long getEstimatedItemSize(@NonNull FavoriteGroup item) {
-		return item.getPoints().size() * APPROXIMATE_FAVOURITE_SIZE_BYTES;
+		return (long) item.getPoints().size() * APPROXIMATE_FAVOURITE_SIZE_BYTES;
 	}
 
 	@Nullable
