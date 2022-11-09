@@ -608,14 +608,14 @@
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
     <string name="online_map_settings_descr">Elige los repositorios de teselas de mapas en línea o en caché.</string>
-    <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas climáticos, mapas geológicos, capas de sombreado, etc.
+    <string name="osmand_rastermaps_plugin_description">Accede a muchos tipos de mapas en línea (denominados mosaicos o rasterizados), como mosaicos OSM pre-renderizados, imágenes de satélite y capas de propósito especial como mapas meteorológicos, mapas climáticos, mapas geológicos, capas de sombras de colinas, etc.
 \n
-\nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas vectoriales sin conexión de OsmAnd). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
+\n Cualquiera de estos mapas puede mostrarse como el mapa principal (base), o como una superposición o subyacente a otro mapa base (como los mapas vectoriales offline de OsmAnd). Algunos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú \"Configurar mapa\" para hacer más visible cualquier mapa subyacente.
 \n
-\nDescarga las teselas de los mapas directamente, o copialos en la carpeta de datos de OsmAnd como archivos de base de datos SQLite, usando una variedad de herramientas de preparación de mapas de terceros.</string>
+\n Descargue los mosaicos de los mapas directamente, o cópielos como archivos de base de datos SQLite a la carpeta de datos de OsmAnd utilizando una de las muchas herramientas de preparación de mapas de terceros.</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
-    <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zum, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
-    <string name="osmand_development_plugin_description">Permite configurar OsmAnd para realizar pruebas: simular rutas de navegación, comprobar el rendimiento del renderizado de la pantalla, etc. El complemento no es necesario para el uso normal de la aplicación.</string>
+    <string name="osmand_accessibility_description">Hace que las funciones de accesibilidad del dispositivo estén disponibles directamente en OsmAnd. Esto facilita, por ejemplo, el ajuste de la velocidad del habla para las voces de texto a voz, la configuración de la navegación con el D-pad, el uso de un trackball para el control del zoom, o la retroalimentación de texto a voz, por ejemplo para anunciar automáticamente su posición.</string>
+    <string name="osmand_development_plugin_description">Proporciona funcionalidad para probar y depurar OsmAnd: simular rutas de navegación, monitorizar el renderizado de la pantalla, comprobar el rendimiento, etc. Este plugin no es necesario para el uso normal de la app.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
     <string name="prefs_plugins">Complementos</string>
@@ -727,7 +727,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lugar de aparcamiento</string>
-    <string name="osmand_parking_plugin_description">Permite registrar un punto en el mapa en donde el vehículo es dejado en la calle y crea un recordatorio en el calendario sobre el inicio del aparcamiento. El complemento ayuda a seguir el tiempo del aparcamiento y la ubicación del vehículo. Para colocar un marcador, elige un lugar en el mapa, luego ve a «Acciones» y pulsa «Añadir aparcamiento».</string>
+    <string name="osmand_parking_plugin_description">Marque dónde está estacionado su automóvil y notifique a su calendario cuándo caducará el parquímetro. Para colocar el marcador, elija un lugar en el mapa, vaya a \"Acciones\" y toque \"Agregar estacionamiento\".</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de aparcamiento</string>
@@ -885,7 +885,7 @@
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
-    <string name="audionotes_plugin_description">Toma notas de audio, fotografía y/o video durante un viaje, usando un botón en el mapa o el menú contextual de la ubicación.</string>
+    <string name="audionotes_plugin_description">Tome notas de audio / foto / video durante un viaje, utilizando un botón de mapa o el menú contextual de la ubicación.</string>
     <string name="audionotes_plugin_name">Notas audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
@@ -1432,7 +1432,7 @@
     <string name="plugin_nautical_descr">Enriquece tu mapa con información sobre rutas de navegación, luces de navegación, zonas de peligro náutico, zonas con restricciones a la navegación o de atraque, etc. Para utilizarlo, descargue los respectivos mapas náuticos y active el estilo \"Mapa náutico\" en \"Configurar mapa\".
 \n
 \nMás información en https://osmand.net/docs/user/plugins/nautical-charts .</string>
-    <string name="plugin_ski_descr">Diseñado para navegar en lugares de deportes de invierno. Observa las pistas de esquí, los marcadores de los remontes y las líneas de color que indican la complejidad de cada pista. Para usarlo luego de activarlo, ve a «Configurar mapa» y elige el tipo de mapa «Invierno y esquí».</string>
+    <string name="plugin_ski_descr">Diseñado para navegar por zonas de deportes de invierno: Vea las pistas de esquí y los remontes, así como las pistas de esquí de fondo, con líneas de color que indican los grados de dificultad. Para utilizarlo, activa este plugin y ve también a \"Configurar mapa\" y elige el estilo de mapa \"Invierno y esquí\".</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
 \n
 \nEsta vista proporciona, en cualquier nivel de zum del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
@@ -2386,7 +2386,7 @@
     <string name="shared_string_add_photos">Añadir fotos</string>
     <string name="mapillary_action_descr">Comparte tus imágenes a nivel de calle a través de Mapillary.</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
-    <string name="plugin_mapillary_descr">Ofrece vistas a nivel de calle. Si faltan imágenes, puedes añadirlas tú mismo para que otros puedan usarlas. Para activar la capa «Mapillary», activa las «Imágenes a nivel de calle» en el menú «Configurar mapa».</string>
+    <string name="plugin_mapillary_descr">Imágenes vistas a pie de calle. También puedes contribuir tú mismo. Para ver los datos existentes como una capa de mapa, active \"Imágenes a nivel de calle\" en el menú \"Configurar mapa\".</string>
     <string name="no_photos_descr">Sin fotos aquí.</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
@@ -4319,7 +4319,7 @@
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
-    <string name="purchases_feature_desc_wikipedia">Tener Wikipedia sin conexión en tu viaje, te ayuda a conocer mejor los lugares que visitas. Se encuentra disponible sin conexión y muestra los artículos de Wikipedia en relación con los puntos de interés en el mapa. No olvides descargar los mapas de Wikipedia de la región elegida.</string>
+    <string name="purchases_feature_desc_wikipedia">Proporciona todos los artículos de la Wikipedia relacionados con el lugar sin conexión, ayudándote a aprender sobre los lugares que visitas en tu viaje con simples toques en el mapa. No olvides descargar los archivos de los mapas de la Wikipedia para las respectivas regiones.</string>
     <string name="purchases_feature_desc_wikivoyage">Explora Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar picos y tierras bajas.</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
