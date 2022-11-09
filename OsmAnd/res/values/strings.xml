@@ -25,7 +25,7 @@
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Shows nautical depth data on the map.</string>
-    <string name="weather_plugin_description">- 1 and 7-day forecast in 5 layersupdated every 3 hours.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+    <string name="weather_plugin_description">- 1 and 7-day forecast in 5 layers, updated every 3 hours.\n- location-based widgets\n- temperature / pressure isolines\nWeather data provided by GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -3129,7 +3129,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">Terrain info like contour lines, hillshades, and slopes, helps you to visually assess the lay of the land and relief, navigability, and more. The topographic info can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at http://osmand.net/docs/user/plugins/contour-lines .</string>
+    <string name="srtm_plugin_description">Terrain info (such as contour lines, hillshades, and slopes) helps you to visually assess the lay of the land and relief, navigability, and more. The topographic info can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3139,7 +3139,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
 		\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_nautical_name">Nautical map view</string>
-    <string name="plugin_nautical_descr">Brings sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. to yout map. To use, download the respective Nautical maps and turn on the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_nautical_descr">Brings sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. to your map. First download the respective nautical maps and then turn on the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="plugin_ski_descr">Designed to navigate winter sports areas: See ski pistes and ski lifts, and cross country ski tracks, with colored lines indicating the difficulty ratings. To use, enable this plugin and also go to \"Configure map\" and choose the \"Winter and ski\" map style.</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
