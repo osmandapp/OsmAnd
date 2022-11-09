@@ -693,21 +693,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				bottomShadowVisible = routes.size() == 0;
 			} else {
 				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
-				boolean avoidPTTypesCustomized = false;
-				for (LocalRoutingParameter parameter : mode.parameters) {
-					if (parameter instanceof AvoidPTTypesRoutingParameter) {
-						avoidPTTypesCustomized = true;
-						break;
+				if (mode != null) {
+					boolean avoidPTTypesCustomized = false;
+					for (LocalRoutingParameter parameter : mode.parameters) {
+						if (parameter instanceof AvoidPTTypesRoutingParameter) {
+							avoidPTTypesCustomized = true;
+							break;
+						}
 					}
-				}
-				if (avoidPTTypesCustomized) {
-					PublicTransportNotFoundSettingsWarningCard warningCard = new PublicTransportNotFoundSettingsWarningCard(mapActivity);
-					warningCard.setListener(this);
-					menuCards.add(warningCard);
-				} else {
-					PublicTransportNotFoundWarningCard warningCard = new PublicTransportNotFoundWarningCard(mapActivity);
-					warningCard.setListener(this);
-					menuCards.add(warningCard);
+					if (avoidPTTypesCustomized) {
+						PublicTransportNotFoundSettingsWarningCard warningCard = new PublicTransportNotFoundSettingsWarningCard(mapActivity);
+						warningCard.setListener(this);
+						menuCards.add(warningCard);
+					} else {
+						PublicTransportNotFoundWarningCard warningCard = new PublicTransportNotFoundWarningCard(mapActivity);
+						warningCard.setListener(this);
+						menuCards.add(warningCard);
+					}
 				}
 			}
 		} else if (routeCalculationInProgress) {
