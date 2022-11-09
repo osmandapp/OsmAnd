@@ -4559,14 +4559,14 @@
     <string name="ant_widgets">ANT+ 小工具</string>
     <string name="shared_string_cross_buy">跨平台购买</string>
     <string name="current_location_widget">坐标：当前位置</string>
-    <string name="external_sensors_plugin_description">监测心率、自行车速度、自行车功率和踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>
+    <string name="external_sensors_plugin_description">访问外部传感器来读取心率、自行车速度、自行车功率或踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>
     <string name="map_widget_altitude_current_location_desc">显示当前地理位置的海拔高度。</string>
-    <string name="map_widget_altitude_desc">显示当前地理位置或当前地图中心的海拔高度</string>
+    <string name="map_widget_altitude_desc">显示当前地理位置的海拔或当前地图中心的高度</string>
     <string name="map_widget_rendering_fps_desc">显示地图和地图元素的显示和刷新速度，以每秒帧数 （FPS） 表示。</string>
     <string name="ant_go_to_store">前往商店</string>
     <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。
-\n您需要安装ANT +插件服务，如果您已经拥有现有版本，则可能需要更新现有版本。
-\n您想启动 Play 商店来获取它吗？</string>
+\n您需要安装或更新 ANT + 插件服务。
+\n您想启动 Play 商店来进行安装或更新吗？</string>
     <string name="ant_missing_dependency">缺少依赖关系</string>
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
@@ -4748,7 +4748,7 @@
     <string name="dismiss_changes_descr">所有更改都将被驳回。</string>
     <string name="dismiss_changes">忽略更改？</string>
     <string name="map_rendering_engine_v2">版本 2 （OpenGL）</string>
-    <string name="map_rendering_engine_descr">第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。在4.3版之前，第1版的渲染是默认的，对于旧的设备仍然更可取。</string>
+    <string name="map_rendering_engine_descr">第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。在4.3版之前，默认使用第1版的渲染，且其对旧的设备仍然更好。</string>
     <string name="map_rendering_engine">地图渲染引擎</string>
     <string name="system_screen_timeout_descr">根据系统的屏幕超时关闭屏幕。</string>
     <string name="additional_actions_descr">通过点击“%1$s”按钮访问这些操作。</string>
