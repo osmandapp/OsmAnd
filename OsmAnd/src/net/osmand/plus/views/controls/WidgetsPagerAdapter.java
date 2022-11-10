@@ -2,12 +2,14 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +22,8 @@ import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,20 +76,34 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		holder.container.removeAllViews();
 
 		List<View> visibleWidgetsViews = visiblePages.getWidgetsViews(position);
-		for (int i = 0; i < visibleWidgetsViews.size(); i++) {
-			View widgetView = visibleWidgetsViews.get(i);
-			if (widgetView.getParent() instanceof ViewGroup) {
-				((ViewGroup) widgetView.getParent()).removeView(widgetView);
-			}
-			holder.container.addView(visibleWidgetsViews.get(i));
+		if (Algorithms.isEmpty(visibleWidgetsViews)) {
+			holder.container.addView(getEmptyView(holder.container.getContext()));
+		} else {
+			for (int i = 0; i < visibleWidgetsViews.size(); i++) {
+				View widgetView = visibleWidgetsViews.get(i);
+				if (widgetView.getParent() instanceof ViewGroup) {
+					((ViewGroup) widgetView.getParent()).removeView(widgetView);
+				}
+				holder.container.addView(visibleWidgetsViews.get(i));
 
-			boolean last = i + 1 == visibleWidgetsViews.size();
-			AndroidUiHelper.updateVisibility(widgetView.findViewById(R.id.bottom_divider), !last);
+				boolean last = i + 1 == visibleWidgetsViews.size();
+				AndroidUiHelper.updateVisibility(widgetView.findViewById(R.id.bottom_divider), !last);
+			}
 		}
 
 		if (bindListener != null) {
 			bindListener.onViewHolderBound(holder, position);
 		}
+	}
+
+	@NonNull
+	private View getEmptyView(@NonNull Context context) {
+		boolean nightMode = settings.getContext().getDaynightHelper().isNightMode();
+		int color = nightMode ? R.color.map_widget_dark : R.color.map_widget_light;
+		View view = new View(context);
+		view.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT, MATCH_PARENT));
+		view.setBackgroundColor(ContextCompat.getColor(context, color));
+		return view;
 	}
 
 	@Override
@@ -141,19 +159,21 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		public VisiblePages(@NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
 			for (MapWidgetInfo widgetInfo : widgets) {
-				if (widgetInfo.isEnabledForAppMode(appMode) && widgetInfo.widget.isViewVisible()) {
-					addWidgetViewToPage(widgetInfo.pageIndex, widgetInfo.widget.getView());
+				if (widgetInfo.isEnabledForAppMode(appMode)) {
+					addWidgetViewToPage(widgetInfo.pageIndex, widgetInfo.widget);
 				}
 			}
 		}
 
-		private void addWidgetViewToPage(int pageIndex, @NonNull View widgetView) {
+		private void addWidgetViewToPage(int pageIndex, @NonNull MapWidget mapWidget) {
 			List<View> widgetsViews = map.get(pageIndex);
 			if (widgetsViews == null) {
 				widgetsViews = new ArrayList<>();
 				map.put(pageIndex, widgetsViews);
 			}
-			widgetsViews.add(widgetView);
+			if (mapWidget.isViewVisible()) {
+				widgetsViews.add(mapWidget.getView());
+			}
 		}
 
 		public int getPageIndex(int entryIndex) {
@@ -200,7 +220,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		public final ViewGroup container;
 
-		public PageViewHolder(@NonNull LinearLayout itemView) {
+		public PageViewHolder(@NonNull ViewGroup itemView) {
 			super(itemView);
 			container = itemView;
 		}
