@@ -1397,7 +1397,7 @@
     <string name="hillshade_download_description">Additional maps are needed to view hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
     <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
-    <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
+    <string name="hillshade_description">Hillshade map uses dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
