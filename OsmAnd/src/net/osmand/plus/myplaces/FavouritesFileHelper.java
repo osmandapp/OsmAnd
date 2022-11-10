@@ -50,6 +50,7 @@ public class FavouritesFileHelper {
 	public static final String FILE_GROUP_NAME_SEPARATOR = "-";
 	public static final String FILE_TO_SAVE = FILE_PREFIX_TO_SAVE + GPX_FILE_EXT;
 	public static final String FILE_TO_BACKUP = "favourites_bak" + GPX_FILE_EXT;
+	public static final String FILE_DEFAULT_GROUP_NAME = "default";
 
 	private final OsmandApplication app;
 
@@ -67,7 +68,12 @@ public class FavouritesFileHelper {
 	}
 
 	public File getExternalFile(FavoriteGroup group) {
-		return app.getFileStreamPath(FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + group.getName() + GPX_FILE_EXT);
+		File favDir = app.getAppPath(FILE_PREFIX_TO_SAVE);
+		if (!favDir.exists()) {
+			favDir.mkdir();
+		}
+		String fileName = group.getName().isEmpty() ? FILE_DEFAULT_GROUP_NAME : group.getName();
+		return new File(favDir, FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + fileName + GPX_FILE_EXT);
 	}
 
 	@NonNull
@@ -103,7 +109,7 @@ public class FavouritesFileHelper {
 	}
 
 	public boolean loadGPXFiles(@NonNull String prefix, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
-		File file = app.getFileStreamPath(prefix).getParentFile();
+		File file = app.getFileStreamPath(prefix);
 		if (file == null || !file.exists() || !file.isDirectory()) {
 			return false;
 		}
@@ -224,8 +230,15 @@ public class FavouritesFileHelper {
 	@Nullable
 	protected Exception saveExternalFiles(@NonNull List<FavoriteGroup> groups, @NonNull Set<String> deleted) {
 		Exception result = null;
+		boolean firstTimeMigration; // migration: split one file by group names to files
 		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
 		loadGPXFiles(FILE_PREFIX_TO_SAVE, fileGroups);
+		firstTimeMigration = fileGroups.isEmpty();
+		if (firstTimeMigration) {
+			for (FavoriteGroup group : groups) {
+				fileGroups.put(group.getName(), group);
+			}
+		}
 		for (FavoriteGroup group : fileGroups.values()) {
 			// Search corresponding group in memory
 			FavoriteGroup memoryGroup = null;
@@ -255,8 +268,8 @@ public class FavouritesFileHelper {
 			// save favoritePoints from memory in order to update existing
 			memoryGroup.getPoints().addAll(all.values());
 			// Save file if group changed
-			if (!memoryGroup.equals(group)) {
-				Exception exception = saveFile(groups, getExternalFile(memoryGroup));
+			if (!memoryGroup.equals(group) || firstTimeMigration) {
+				Exception exception = saveFile(Collections.singletonList(group), getExternalFile(memoryGroup));
 				if (exception != null) {
 					result = exception;
 				}
