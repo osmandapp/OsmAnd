@@ -3639,7 +3639,7 @@
 \n
 \n • Átdolgozott bővítmény-beállítások
 \n
-\n • Átdolgozott beállításképernyő az összes profil gyors eléréséhez
+\n • Átdolgozott beállítás-képernyő az összes profil gyors eléréséhez
 \n
 \n • Beállítások másolása egy másik profilból
 \n
@@ -3647,13 +3647,13 @@
 \n
 \n • Helyesen igazított POI-ikonok a térképen
 \n
-\n • Naplemente/napkelte adatai a Térkép konfigurálásához
+\n • Napkelte / napnyugta adatai a Térkép konfigurálásához
 \n
-\n • Otthon / Munka ikonok a térképen
+\n • Otthon / munkahely ikonok a térképen
 \n
 \n • Többsoros leírás támogatása a Beállításoknál
 \n
-\n • Helyes átírást Japán térképénél
+\n • Helyes átírás Japán térképénél
 \n
 \n • Antarktisz-térkép
 \n
@@ -4932,17 +4932,17 @@
 \n- hőmérséklet/nyomás izolinák
 \n
 \nAz időjárási adatokat a Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) szolgáltatja.</string>
-    <string name="map_widget_sunset_desc">Megjeleníti a következő naplemente idejét vagy az addig hátralévő időt.</string>
-    <string name="map_widget_sunrise_desc">Megjeleníti a következő napfelkelte idejét vagy az addig hátralévő időt.</string>
+    <string name="map_widget_sunset_desc">Megjeleníti a következő napnyugta idejét vagy az addig hátralévő időt.</string>
+    <string name="map_widget_sunrise_desc">Megjeleníti a következő napkelte idejét vagy az addig hátralévő időt.</string>
     <string name="shared_string_time_left">Hátralévő idő</string>
-    <string name="map_widget_group_sunrise_sunset_desc">Ezek a widgetek információt jelenítenek meg a következő napfelkeltéről vagy naplementéről.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Ezek a widgetek a következő napkeltéről és napnyugtáról tájékoztatnak.</string>
     <string name="depth_contour_lines">Mélységi vonalak</string>
     <string name="turn_on_nautical_depth_description">Kapcsolja be a tengeri mélységvonalak ábrázolásához.</string>
-    <string name="map_widget_group_sunrise_sunset">Napfelkelte, naplemente</string>
-    <string name="shared_string_next_sunset">Következő naplemente</string>
-    <string name="shared_string_next_sunrise">Következő napfelkelte</string>
-    <string name="shared_string_sunset">Naplemente</string>
-    <string name="shared_string_sunrise">Napfelkelte</string>
+    <string name="map_widget_group_sunrise_sunset">Napkelte, napnyugta</string>
+    <string name="shared_string_next_sunset">Következő napnyugta</string>
+    <string name="shared_string_next_sunrise">Következő napkelte</string>
+    <string name="shared_string_sunset">Napnyugta</string>
+    <string name="shared_string_sunrise">Napkelte</string>
     <string name="switch_mode_by_tapping_on_widget">Váltson módot a widgetre való koppintással.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Vonal színséma</string>
     <string name="rendering_attr_depthContourWidth_name">Vonal szélessége</string>
