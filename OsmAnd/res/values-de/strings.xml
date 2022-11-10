@@ -4833,7 +4833,7 @@
     <string name="map_center_widget">Koordinaten: Kartenmitte</string>
     <string name="current_location_widget">Koordinaten: Aktueller Standort</string>
     <string name="external_sensors_plugin_name">Externe Sensoren</string>
-    <string name="external_sensors_plugin_description">Überwachung von Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung und Trittfrequenz. Ihr Gerät muss über das drahtlose Netzwerkprotokoll ANT+ mit entsprechenden Sensoren verbunden sein.</string>
+    <string name="external_sensors_plugin_description">Greift auf externe Sensoren zu, um z. B. Ihre Herzfrequenz, Fahrradgeschwindigkeit, Fahrradleistung oder Trittfrequenz abzulesen. Erfordert, dass Ihr Gerät über das drahtlose persönliche Netzwerkprotokoll ANT+ mit den entsprechenden Sensoren verbunden ist.</string>
     <string name="map_widget_rendering_fps">Kartendarstellung FPS</string>
     <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden, ausgedrückt in Bildern pro Sekunde (FPS).</string>
     <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
@@ -4926,11 +4926,12 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Diese Aktion wird vom ausgewählten Kartenstil nicht unterstützt.</string>
     <string name="measurement_units">Maßeinheiten</string>
-    <string name="weather_plugin_description">Wetter-Plugin bietet
-\n- 5 Ebenen... eine 24-Stunden-Vorhersage &amp; 7-Tage-Vorhersage alle 3 Stunden
+    <string name="weather_plugin_description">Bietet
+\n- 24-Stunden- und 7-Tage-Wettervorhersage mit 5 Ebenen
 \n- Standortbasierte Widgets
-\n- Temperatur / Druck Isolinien
-\nDie Wetterdaten werden bereitgestellt von GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n- Temperatur-/Luftdruck-Isolinien
+\n
+\nWetterdaten werden vom Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) bereitgestellt.</string>
     <string name="shared_string_weather">Wetter</string>
     <string name="shared_string_layers">Ebenen</string>
     <string name="shared_string_contours">Konturen</string>
