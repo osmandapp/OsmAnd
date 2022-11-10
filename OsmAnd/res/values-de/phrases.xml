@@ -105,7 +105,7 @@
     <string name="poi_cave_entrance">Höhleneingang</string>
     <string name="poi_cemetery">Friedhof</string>
     <string name="poi_chalet">Ferienhaus</string>
-    <string name="poi_electricity_combined_charging">Ladestation;Ladestation für elektrische Fahrzeuge;Aufladestation</string>
+    <string name="poi_electricity_combined_charging">Ladepunkt;Ladestation für Elektrofahrzeuge;EV-Ladestation;Stromtankstelle;Ladestation;Elektronische Ladestation;Versorgungseinrichtung für Elektrofahrzeuge</string>
     <string name="poi_chemist">Drogerie</string>
     <string name="poi_chess">Schach</string>
     <string name="poi_clothes_children">Kinderbekleidungsgeschäft</string>
@@ -2768,14 +2768,14 @@
     <string name="poi_observatory_designation">Bezeichnung</string>
     <string name="poi_telescope_type">Art</string>
     <string name="poi_animal_training_type">Art</string>
-    <string name="poi_diplomatic_filter">Art</string>
+    <string name="poi_diplomatic_filter">Diplomatische Institution</string>
     <string name="poi_city_capital">Hauptstadt</string>
     <string name="poi_traffic_signals_sound">Signalton</string>
     <string name="poi_subway_station_filter">U-Bahnstation</string>
     <string name="poi_healthcare_alternative_types">Spezialisierung</string>
     <string name="poi_free_flying_characteristics">Flugmerkmale</string>
     <string name="poi_religion_type">Religion</string>
-    <string name="poi_information_contents">Informationsinhalt</string>
+    <string name="poi_information_contents">Inhalt</string>
     <string name="poi_clock_option">Zusätzlich</string>
     <string name="poi_scout_camp">Pfadfinderlager</string>
     <string name="poi_backcountry">Wildnis-Campingplatz</string>
@@ -2817,7 +2817,7 @@
     <string name="poi_self_service">Selbstbedienung</string>
     <string name="poi_pharmacy_dispensing">Nach Rezept</string>
     <string name="poi_archaeological_site_type">Art</string>
-    <string name="poi_star_rating">Bewertung in Sternen</string>
+    <string name="poi_star_rating">Sterne Bewertung</string>
     <string name="poi_denomination">Konfession</string>
     <string name="poi_information_type">Art</string>
     <string name="poi_drive_in">Drive-in</string>

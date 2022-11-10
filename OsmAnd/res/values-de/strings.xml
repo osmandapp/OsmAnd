@@ -4851,7 +4851,7 @@
     <string name="speak_gps_signal_status">GPS-Signalverlust und Wiederherstellung ankündigen</string>
     <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
     <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
-    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5D-Ansicht
+    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2.5D-Ansicht
 \n
 \n • Reibungslose Animation von Ortswechseln während der Fahrt
 \n
