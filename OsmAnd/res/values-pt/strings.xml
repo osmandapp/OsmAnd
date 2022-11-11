@@ -401,20 +401,20 @@
     <string name="map_online_data_descr">Usar mapas online (descarregar e armazenar mosaicos no cartão de memória).</string>
     <string name="shared_string_online_maps">Mapas online</string>
     <string name="online_map_settings_descr">Configurar origens de mosaicos ou de mapas online.</string>
-    <string name="osmand_rastermaps_plugin_description">Aceda a muitos tipos de mapas online de imagens (raster/mosaicos) do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
+    <string name="osmand_rastermaps_plugin_description">Aceda a muitos tipos de mapas online de imagens (raster/mosaicos) como os mosaicos pré-renderizados do OpenStreetMap, imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.
 \n
-\nQuaisquer desses mapas podem ser usados como mapa principal para ser mostrado no OsmAnd ou na camada superior ou inferior para outro mapa base (como o mapa offline vetorial do OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \"Configurar mapa\".
+\nQuaisquer desses mapas podem ser mostrados como mapa principal ou na camada superior ou inferior para outro mapa base (como o mapa offline vetorial do OsmAnd). Para tornar qualquer camada inferior do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \"Configurar mapa\".
 \n
 \nOs mosaicos dos mapas podem ser descarregados diretamente online ou copiados os ficheiros da base de dados SQLite para a pasta do OsmAnd utilizando uma das muitas ferramentas de terceiros para preparação de mapas.</string>
     <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o aparelho GPS (com o ecrã desligado).</string>
     <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do aparelho disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS (texto-para-fala), configurando a navegação no ecrã com o teclado direcional, usando uma trackball para controlo da ampliação, ou feedback texto-para-fala, por exemplo, para avisar automaticamente por voz a sua posição.</string>
-    <string name="osmand_development_plugin_description">Permite configurar o OsmAnd para testes: simular rotas de navegação, verificar o desempenho da renderização do ecrã, etc. Este complemento não é necessário para uma utilização normal da aplicação.</string>
+    <string name="osmand_development_plugin_description">Fornece a funcionalidade para testar e depurar o OsmAnd: simula rotas de navegação, verificar a renderização do ecrã, verificar o desempenho, etc. Este complemento não é necessário para uma utilização normal da aplicação.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Os complementos ativam configurações avançadas e funcionalidades adicionais.</string>
     <string name="prefs_plugins">Complementos</string>
-    <string name="osm_editing_plugin_description">Permite-lhe fazer contribuições para o OpenStreetMap, uma comunidade global destinada a criar um mapa abrangente do mundo e fornecer dados atualizados sob uma licença livre a todos os utilizadores.
+    <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados sob uma licença livre a todos os utilizadores.
 \n
-\nPode encontrar instruções sobre como editar o mapa em https://osmand.net/docs/user/plugins/osm-editing</string>
+\nPode encontrar instruções sobre como editar o mapa em https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vetoriais são mostrados mais rapidamente. Podem não funcionar bem em alguns aparelhos.</string>
     <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste-a reproduzindo avisos</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
@@ -715,7 +715,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Local de estacionamento</string>
-    <string name="osmand_parking_plugin_description">Ative para definir um ponto no mapa onde o seu veículo é estacionado e notifique automaticamente o seu calendário quando o tempo de estacionamento começa. O complemento ajuda a controlar o tempo de estacionamento e a localização do seu carro. Para colocar um marcador, escolha um lugar no mapa, depois vá a \"Ações\" e escolha \"Estacionar aqui\".</string>
+    <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e seja avisado através da aplicação de calendário quando o tempo do parquímetro estiver a expirar. Para colocar um marcador, escolha um lugar no mapa, depois vá a \"Ações\" e escolha \"Estacionar aqui\".</string>
     <string name="osmand_parking_plugin_name">Local de estacionamento</string>
     <string name="context_menu_item_add_parking_point">Estacionar aqui</string>
     <string name="context_menu_item_delete_parking_point">Eliminar um marcador de estacionamento</string>
@@ -907,9 +907,11 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Tirar uma fotografia</string>
-    <string name="srtm_plugin_description">Informações sobre o terreno, tais como curvas de nível, encostas e declives, ajudam a avaliar visualmente a forma da superfície do terreno, considerando a curvatura, extremos, declive, pontos de igual altura e muito mais. A informação topográfica num mapa pode ser representada por sombreamento da inclinação, linhas de contorno para a subida e descida, e a cor do desvio do ângulo da inclinação em relação a zonas planas. Dados do SRTM e do ASTER.
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam a avaliar visualmente a configuração do terreno e o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por sombreamento de encostas, linhas de contorno e/ou coloração da declividade.
 \n
-\nComo fazer: http://osmand.net/docs/user/plugins/contour-lines</string>
+\nOs dados subjacentes têm origem em SRTM e ASTER.
+\n
+\nVeja mais informações em http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
@@ -1248,9 +1250,9 @@
     <string name="save_track_to_gpx_globally_descr">O registo da posição geral para um ficheiro GPX pode ser ativado ou desativado usando o widget de gravação GPX no ecrã do mapa.</string>
     <string name="save_track_interval_globally">Intervalo de registo</string>
     <string name="rendering_attr_publicTransportMode_name">Rotas de autocarros, troleicarros e transportes vaivém</string>
-    <string name="record_plugin_description">Permite-lhe gravar, guardar e analisar os seus dados de treino ou movimento, tais como velocidade, subidas, descidas ou zonas planas, que podem depois ser reutilizados, melhorados, complementados ou partilhados com amigos.
+    <string name="record_plugin_description">Grave as suas viagens ou treinos e analise os dados em termos de velocidade, subidas e descidas acumuladas, perfil de elevação, etc. Os trilhos gravados podem ser arquivados, partilhados com amigos, editados e pós-processados.
 \n
-\nComo fazer: https://osmand.net/docs/user/plugins/trip-recording</string>
+\nVeja mais informações em https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Gravar viagem</string>
     <string name="int_hour">h</string>
     <string name="duration">Duração</string>
@@ -1898,7 +1900,7 @@
     <string name="mapillary_widget_descr">Permite contribuir rapidamente para o Mapillary.</string>
     <string name="mapillary_descr">Fotografias online ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Mostra a cobertura e as fotografias ao nível das ruas no Mapillary. Onde faltam fotografias, pode simplesmente adicioná-las você mesmo para que outros as possam utilizar. Para ativar a camada Mapillary, vá ao menu e selecione \"Configurar mapa\" e ative a opção \"Imagens das ruas\".</string>
+    <string name="plugin_mapillary_descr">Imagens de vistas ao nível da rua. Também pode contribuir. Para ver os dados existentes como uma camada de mapa, vá ao menu e selecione \"Configurar mapa\" e ative a opção \"Imagens das ruas\".</string>
     <string name="private_access_routing_req">O seu destino está localizado numa área com acesso privado. Permitir a utilização de estradas privadas para esta viagem\?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar raio de pesquisa</string>
@@ -2396,10 +2398,10 @@
     <string name="lang_kab">Cabila</string>
     <string name="lang_ber">Berber</string>
     <string name="disable_recording_once_app_killed">Parar gravação em segundo plano</string>
-    <string name="plugin_nautical_descr">Ative para enriquecer o mapa com informações sobre rotas de navegação, luzes de navegação, zonas perigosas, zonas onde é permitido ou proibido navegar ou atracar, etc. Para o utilizar, descarregue o mapa náutico e ative o tipo \"Mapa náutico\" em Configurar mapa.
+    <string name="plugin_nautical_descr">Enriquece o mapa com informações sobre rotas de navegação, luzes de navegação, zonas de perigo náutico, zonas com restrições de navegação ou atracação, etc. Para utilizar, descarregue os respetivos mapas náuticos e ative o estilo \"Mapa Náutico\" em \"Configurar mapa\".
 \n
-\nComo fazer: https://osmand.net/docs/user/plugins/nautical-charts</string>
-    <string name="plugin_ski_descr">Concebido para navegar em locais de desportos de Inverno. Ver pistas de esqui, marcadores de esqui e linhas coloridas indicando a complexidade de cada pista. Para o utilizar, após o ativar, vá a Configurar mapa e em \"Estilo de mapa\" escolha \"Inverno e esqui\".</string>
+\nVeja mais informações em https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_ski_descr">Projetado para navegar em áreas de desportos de Inverno: Veja pistas de esqui, teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para o utilizar, após o ativar, vá a Configurar mapa e em \"Estilo de mapa\" escolha \"Inverno e esqui\".</string>
     <string name="navigate_point_olc_info_invalid">Código de localização aberto (OLC) inválido
 \n</string>
     <string name="navigate_point_olc_info_short">O código de localização aberto (OLC) é curto
@@ -3176,7 +3178,7 @@
     <string name="rendering_attr_piste_type_downhill_name">Descida</string>
     <string name="rendering_attr_piste_type_nordic_name">Nórdico</string>
     <string name="routeInfo_piste_type_name">Tipo de pista</string>
-    <string name="rendering_attr_piste_difficulty_novice_name">Iniciante</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Novato</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Fácil</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Intermédio</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Avançado</string>
@@ -3911,9 +3913,9 @@
     <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
-    <string name="open_place_reviews_plugin_description">Permite-lhe fazer contribuições para o projeto OpenPlaceReviews. Tais como fotografias, críticas, hiperligações sobre locais públicos tais como restaurantes, hotéis, museus e pontos de passagem.
+    <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
-\nPode encontrar instruções sobre como contribuir no nosso sítio web https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nVeja as instruções sobre como contribuir em https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Iniciar sessão no OpenPlaceReviews</string>
@@ -4159,7 +4161,7 @@
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
     <string name="purchases_feature_desc_terrain">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos estão divididos em conjuntos de países e regiões e disponíveis em todos os idiomas.</string>
-    <string name="purchases_feature_desc_wikipedia">Aceder a artigos da Wikipédia na sua viagem ajuda-o a saber mais sobre os locais que visita. Está disponível para descarregamento, para poder vê-los desligado da Internet e mostra artigos da Wikipédia relacionados com os pontos de interesse diretamente no mapa. Não se esqueça de descarregar os mapas da Wikipédia para a região escolhida.</string>
+    <string name="purchases_feature_desc_wikipedia">Fornece todos os artigos da Wikipédia relacionados a lugares, desligado da Internet, ajudando a aprender sobre os lugares que visita com simples toques no mapa. Não se esqueça de descarregar os ficheiros de mapas da Wikipédia para as respetivas regiões.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma ligação à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha descarregamentos ilimitados para todos os mapas offline de continentes e regiões.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
@@ -4589,7 +4591,7 @@
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Não sair da pista</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Apenas se for necessário</string>
     <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
-    <string name="routing_attr_difficulty_preference_beginner_name">Iniciante</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Principiante</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Avançado</string>
     <string name="routing_attr_difficulty_preference_expert_name">Especialista</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Intermédia</string>
@@ -4829,7 +4831,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
     <string name="worldwide_maps">Mapas mundiais</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Monitorização do ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o seu dispositivo esteja ligado aos respetivos sensores através do ANT + (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Acede a sensores externos para ler, por exemplo, o ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o seu dispositivo esteja ligado aos respetivos sensores através do ANT + (Wireless Personal Network protocol).</string>
     <string name="map_widget_altitude_map_center_desc">Mostra a elevação acima do nível do mar do centro do mapa atual.</string>
     <string name="map_widget_altitude_current_location">Altitude: localização atual</string>
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
@@ -4888,11 +4890,12 @@
     <string name="map_rendering_engine_v2">Versão 2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">A versão 2 (OpenGL) é um motor de renderização de mapas mais rápido também na visualização 2.5D. A versão 1 foi a versão padrão antes da versão do OsmAnd 4.3, e ainda é a recomendada em dispositivos mais antigos.</string>
     <string name="map_rendering_engine">Motor de renderização do mapa</string>
-    <string name="weather_plugin_description">O complemento meteorológico fornece
-\n- 5 camadas… uma previsão de 24 horas e previsão de 7 dias a cada 3 horas
+    <string name="weather_plugin_description">Fornece
+\n- a previsão meteorológica de 24h e 7 dias com 5 camadas
 \n- widgets baseados em localização
-\n- isolinhas de temperatura/pressão
-\nOs dados meteorológicos são fornecidos pela GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n- as isolinhas de temperatura / pressão
+\n
+\nOs dados meteorológicos são fornecidos pelo Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_offline_forecast">Previsão offline</string>
     <string name="empty_screen_weather_temperature_layer">Ative para visualizar a camada de temperatura no mapa.</string>
     <string name="weather_widgets_secondary_desc">As unidades de medida podem ser alteradas nas configurações do complemento Previsão meteorológica.</string>
