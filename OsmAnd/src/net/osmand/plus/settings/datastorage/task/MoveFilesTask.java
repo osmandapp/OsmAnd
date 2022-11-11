@@ -17,7 +17,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
-import net.osmand.plus.settings.datastorage.MoveTaskStopListener;
+import net.osmand.plus.settings.datastorage.MoveFilesStopListener;
 import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
 import net.osmand.plus.settings.datastorage.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.StorageMigrationRestartListener;
@@ -48,7 +48,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 
 	private StorageMigrationListener migrationListener;
 	private StorageMigrationRestartListener restartListener;
-	private MoveTaskStopListener stopTaskListener;
+	private MoveFilesStopListener stopTaskListener;
 	private int copyProgress;
 	private final Pair<Long, Long> filesSize;
 	private final List<File> files;
@@ -60,7 +60,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	                     @NonNull List<File> files,
 	                     @NonNull Pair<Long, Long> filesSize,
 	                     @Nullable StorageMigrationRestartListener listener,
-	                     @Nullable MoveTaskStopListener stopTaskListener) {
+	                     @Nullable MoveFilesStopListener stopTaskListener) {
 		app = activity.getMyApplication();
 		this.activity = new WeakReference<>(activity);
 		this.context = new WeakReference<>(activity);
@@ -177,13 +177,13 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 
 	@Override
 	protected void onCancelled() {
-		super.onCancelled();
 		changeStorage(null);
 	}
 
 	private void changeStorage(@Nullable Map<String, Pair<String, Long>> errors) {
 		Context ctx = context.get();
-		if (ctx != null && errors != null && !errors.isEmpty()) {
+
+		if (ctx != null && Algorithms.isEmpty(errors)) {
 			Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		}
 
@@ -196,10 +196,8 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 		app.getResourceManager().resetStoreDirectory();
 		// immediately proceed with change (to not loose where maps are currently located)
 
-		if (migrationListener != null) {
-			if (!isCancelled()) {
-				migrationListener.onFilesCopyFinished(errors == null ? new HashMap<>() : errors, existingFiles);
-			}
+		if (migrationListener != null && !isCancelled()) {
+			migrationListener.onFilesCopyFinished(errors == null ? new HashMap<>() : errors, existingFiles);
 		}
 	}
 

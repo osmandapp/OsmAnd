@@ -68,7 +68,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter, FilesCollectListener, StorageMigrationRestartListener, MoveTaskStopListener {
+public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter, FilesCollectListener, StorageMigrationRestartListener, MoveFilesStopListener {
 
 	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public static final int UI_REFRESH_TIME_MS = 500;
@@ -93,7 +93,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private boolean storageMigration;
 	private boolean firstUsage;
 
-	private MoveFilesTask task = null;
+	private MoveFilesTask moveFileTask = null;
 	private FilesCollectTask collectTask;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -184,7 +184,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						File fromDirectory = new File(currentDataStorage.getDirectory());
 						updateSelectedFolderFiles(fromDirectory);
 					} else {
-						confirm(app, activity, newDataStorage, false, true);
+						confirm(app, activity, newDataStorage, false);
 					}
 				}
 			} else if (resultData.containsKey(SelectFolderBottomSheet.TAG)) {
@@ -200,7 +200,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 							return false;
 						}
 						if (storageMigration || firstUsage) {
-							confirm(app, activity, manuallySpecified, false, true);
+							confirm(app, activity, manuallySpecified, false);
 						} else {
 							ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), MANUALLY_SPECIFIED,
 									currentDataStorage, manuallySpecified, this, false);
@@ -215,11 +215,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 				newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null && !currentDataStorage.getKey().equals(newDataStorage.getKey())) {
 					if (!key.equals(INTERNAL_STORAGE) && !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
-						requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+						requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					} else if (key.equals(MANUALLY_SPECIFIED)) {
 						showFolderSelectionDialog();
 					} else if (storageMigration || firstUsage) {
-						confirm(app, activity, newDataStorage, false, true);
+						confirm(app, activity, newDataStorage, false);
 					} else {
 						ChangeDataStorageBottomSheet.showInstance(getFragmentManager(), key,
 								currentDataStorage, newDataStorage, this, false);
@@ -236,7 +236,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 				&& permissions.length > 0 && Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				if (newDataStorage != null) {
-					confirm(app, activity, newDataStorage, false, true);
+					confirm(app, activity, newDataStorage, false);
 				}
 			} else {
 				app.showToastMessage(R.string.missing_write_external_storage_permission);
@@ -478,8 +478,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	private void moveData(@NonNull List<File> files,
 	                      @NonNull Pair<Long, Long> filesSize) {
-		task = new MoveFilesTask(activity, currentDataStorage, newDataStorage, files, filesSize, this, this);
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		moveFileTask = new MoveFilesTask(activity, currentDataStorage, newDataStorage, files, filesSize, this, this);
+		moveFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void showErrorDialog(@NonNull String error) {
@@ -492,12 +492,19 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setMessage(sb.toString());
 		bld.setPositiveButton(R.string.shared_string_restart, (dialog, which) -> {
-			confirm(app, activity, newDataStorage, true, true);
+			confirm(app, activity, newDataStorage, true);
 		});
 		bld.show();
 	}
 
-	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart, boolean restartNeeded) {
+	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory, boolean silentRestart) {
+		confirm(app, activity, newStorageDirectory);
+		if (!firstUsage) {
+			restart(silentRestart);
+		}
+	}
+
+	private void confirm(OsmandApplication app, OsmandActionBarActivity activity, StorageItem newStorageDirectory) {
 		String newDirectory = newStorageDirectory.getDirectory();
 		int type = newStorageDirectory.getType();
 		File newDirectoryFile = new File(newDirectory);
@@ -508,13 +515,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			} else {
 				app.setExternalStorageDirectory(type, newDirectory);
 				DataStorageHelper.reloadData(app, activity);
-				if (!firstUsage && restartNeeded) {
-					if (silentRestart) {
-						RestartActivity.doRestartSilent(activity);
-					} else {
-						RestartActivity.doRestart(activity);
-					}
-				}
 			}
 			Fragment target = getTargetFragment();
 			if (target instanceof StorageSelectionListener) {
@@ -526,6 +526,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 		refreshDataInfo();
 		updateAllSettings();
+	}
+
+	private void restart(boolean silentRestart) {
+		if (silentRestart) {
+			RestartActivity.doRestartSilent(activity);
+		} else {
+			RestartActivity.doRestart(activity);
+		}
 	}
 
 	private void refreshDataInfo() {
@@ -551,15 +559,15 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 	@Override
 	public void onRestartSelected() {
-		confirm(app, activity, newDataStorage, true, true);
+		confirm(app, activity, newDataStorage, true);
 	}
 
 	@Override
 	public void onStopTask() {
-		if (task != null) {
-			task.cancel(true);
-			confirm(app, activity, newDataStorage, true, false);
+		if (moveFileTask != null && moveFileTask.getStatus() == AsyncTask.Status.RUNNING) {
+			moveFileTask.cancel(false);
 		}
+		confirm(app, activity, newDataStorage);
 	}
 
 	public interface StorageSelectionListener {
