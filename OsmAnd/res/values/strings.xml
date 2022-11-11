@@ -25,7 +25,7 @@
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">Provides\n- the 24h hour and 7 day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_plugin_description">Provides\n- the 24-hour and 7-day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -70,7 +70,7 @@
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">24h hour &amp; 7 day forecast, updated every 3 hours</string>
+    <string name="weather_prefs_descr">24-hour &amp; 7-day forecast, updated every 3 hours</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">This action is not supported by the selected map style.</string>
