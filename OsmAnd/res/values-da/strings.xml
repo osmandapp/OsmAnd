@@ -2369,7 +2369,7 @@
     <string name="route_is_too_long_v2">Ved lange afstande: tilføj mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter.</string>
     <string name="display_zoom_level">Vise zoomniveau: %1$s</string>
     <string name="srtm_color_scheme">Farveskema</string>
-    <string name="show_from_zoom_level">Vis fra zoomniveau</string>
+    <string name="show_from_zoom_level">Visning starter ved zoomniveau</string>
     <string name="routing_attr_allow_private_name">Tillad privat adgang</string>
     <string name="routing_attr_allow_private_description">Tillad adgang til private områder.</string>
     <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
@@ -3438,7 +3438,7 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Terrænskyggekort viser hjælp af mørke nuancer skråninger, toppe og lavland.</string>
+    <string name="hillshade_description">Terrænskyggekort viser skråninger, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
     <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>

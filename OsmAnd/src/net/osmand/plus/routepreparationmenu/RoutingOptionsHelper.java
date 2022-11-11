@@ -110,7 +110,7 @@ public class RoutingOptionsHelper {
 	@Nullable
 	public RouteMenuAppModes getRouteMenuAppMode(ApplicationMode appMode) {
 		if (isFollowGpxTrack()) {
-			modes.clear();
+			return new RouteMenuAppModes(appMode, getRoutingParameters(appMode, PermanentAppModeOptions.OTHER.routingParameters));
 		}
 		if (!modes.containsKey(appMode)) {
 			addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
@@ -451,7 +451,7 @@ public class RoutingOptionsHelper {
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {
 		GeneralRouter rm = app.getRouter(am);
-		if (rm == null || (isFollowGpxTrack())) {
+		if (rm == null || (isFollowNonApproximatedGpxTrack())) {
 			return null;
 		}
 
@@ -532,7 +532,7 @@ public class RoutingOptionsHelper {
 
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
 		GeneralRouter rm = app.getRouter(am);
-		if (rm == null || isFollowGpxTrack()) {
+		if (rm == null || isFollowNonApproximatedGpxTrack()) {
 			return list;
 		}
 		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
@@ -560,9 +560,14 @@ public class RoutingOptionsHelper {
 		return list;
 	}
 
-	private boolean isFollowGpxTrack() {
+	private boolean isFollowNonApproximatedGpxTrack() {
 		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		return rparams != null && !rparams.isCalculateOsmAndRoute() && !rparams.getFile().hasRtePt();
+	}
+
+	private boolean isFollowGpxTrack() {
+		GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		return rparams != null && !rparams.isCalculateOsmAndRoute();
 	}
 
 	private static void updateRoutingParameterIcons(LocalRoutingParameter rp) {

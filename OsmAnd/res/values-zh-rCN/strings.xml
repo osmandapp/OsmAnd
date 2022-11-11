@@ -4439,7 +4439,7 @@
     <string name="minmax_speed_dialog_title">设置最小/最大速度</string>
     <string name="second_marker_widget_desc">你可以配置小组件来显示距离或估计到达第二个地图标记的时间。</string>
     <string name="first_marker_widget_desc">你可以配置小组件来显示距离或估计到达第一个地图标记的时间。</string>
-    <string name="time_to_destination_widget_desc">该小部件会显示到最后一个目的地点的 \"到达时间 \"或 \"离开时间\"。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
+    <string name="time_to_destination_widget_desc">该小部件会显示需要多少时间才能到达最后一个目的地点。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
     <string name="shared_string_widget">小工具</string>
     <string name="current_time_widget_desc">显示从您的设备获取的当前时间。</string>
     <string name="gps_info_widget_desc">显示设备在那一刻检测到并使用的卫星数量。</string>
@@ -4595,7 +4595,7 @@
     <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
     <string name="location_simulation_cutoff">模拟跳过第一米</string>
     <string name="send_uuid_preference_desc">一个随机的UUID被用来从OsmAnd服务器下载离线地图，以监测服务器资源的公平使用，预测流量模式，并生成匿名的月度地图报告。</string>
-    <string name="ant_heart_rate_write_gpx_desc">将心率写入至轨迹</string>
+    <string name="ant_heart_rate_write_gpx_desc">在轨迹中包含心率</string>
     <string name="map_widget_ant_heart_rate">心率</string>
     <string name="map_widget_ant_heart_rate_desc">实时显示用户在给定活动期间的心率</string>
     <string name="map_widget_ant_bicycle_power">自行车功率</string>
@@ -4605,10 +4605,10 @@
     <string name="map_widget_ant_bicycle_dist">自行车距离</string>
     <string name="map_widget_ant_bicycle_dist_desc">显示行驶距离</string>
     <string name="worldwide_maps">全球地图</string>
-    <string name="map_widget_zoom_level_desc">小工具显示当前的地图缩放级别。</string>
+    <string name="map_widget_zoom_level_desc">显示当前的地图缩放级别。</string>
     <string name="nautical_depth_points">航海深度点</string>
     <string name="depth_contours">等深线</string>
-    <string name="map_widget_target_distance_desc">小工具显示从摄像机到目标位置的距离。</string>
+    <string name="map_widget_target_distance_desc">显示摄像机与目标位置间的距离。</string>
     <string name="map_widget_camera_distance_desc">小工具显示相机在地面以上的标高。</string>
     <string name="map_widget_ant_bicycle_speed">自行车速度</string>
     <string name="map_widget_ant_bicycle_speed_desc">显示行驶速度</string>
@@ -4617,7 +4617,7 @@
     <string name="included_in_your_current_plan">包含在您当前的“%1$s”计划中</string>
     <string name="attach_to_roads_banner_desc">将您的轨迹吸附在道路上以接收详细的导航说明。</string>
     <string name="second_next_turn_widget_desc">该小工具会显示关于你的第二个下一转弯处的信息，如果在接近距离内转弯，则会启用该信息。</string>
-    <string name="time_to_intermediate_widget_desc">小工具会显示“到达时间”或“到达时间”到第一个中间点。时间将在导航过程中不断更新，一旦经过此中间点，时间就会更新到下一个中间点。</string>
+    <string name="time_to_intermediate_widget_desc">该小部件会显示需要多少时间才能到达第一个中间点。时间将在导航过程中不断更新，一旦经过此中间点，就会更新显示到达下一个中间点所需的时间。</string>
     <string name="distance_to_destination_widget_desc">该小工具会显示到最终目的地点的剩余距离。</string>
     <string name="display_position">显示位置</string>
     <string name="download_heightmap_maps">高度图</string>
@@ -4661,8 +4661,8 @@
     <string name="rendering_value_all_name">全部</string>
     <string name="available_as_part_of_subscription_plan">作为 %1$s 订阅的一部分提供。</string>
     <string name="rendering_attr_seabedDetail_description">关于海床surface_qualification、杂草或海草的组合表面类型、类别和分类单元的附加文本信息</string>
-    <string name="distance_to_intermediate_widget_desc">该小工具会显示到第一个中间点的距离。一旦通过中间点，将会更新为到下一个中间点的距离。</string>
-    <string name="next_turn_widget_desc">该小部件会显示有关您的下一个转弯的信息，其中包含操作和距离的图片。</string>
+    <string name="distance_to_intermediate_widget_desc">该小工具会显示离第一个中间点还有多远。一旦通过中间点，将会更新为显示到下一个中间点的距离。</string>
+    <string name="next_turn_widget_desc">该小部件通过移动路线图和距离数显示有关您的下一个转弯的信息。</string>
     <string name="show_map_symbols">显示地图符号</string>
     <string name="show_map_symbols_desc">文字、路标和其它。</string>
     <string name="coordinates_widget_map_center_desc">该小工具显示当前地图中心的地理坐标</string>

@@ -1255,7 +1255,7 @@
     <string name="system_screen_timeout_descr">Turns the screen off as per the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
-    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="gpx_parse_error">Issues found with a GPX file.\n\nYou may contact OsmAnd support to investigate.</string>
     <string name="lenght_limit_description">Provide your vehicle length, some routes restrictions may be applied for long vehicles.</string>
     <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
     <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
@@ -1397,7 +1397,7 @@
     <string name="hillshade_download_description">Additional maps are needed to view hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
     <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
-    <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
+    <string name="hillshade_description">Hillshade map uses dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
@@ -2373,7 +2373,7 @@
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">Buy and install the \'Contour lines\' plugin to show graded vertical areas.</string>
     <string name="srtm_color_scheme">Color scheme</string>
-    <string name="show_from_zoom_level">Display starting at zoom level</string>
+    <string name="show_from_zoom_level">Displaying starts at zoom level</string>
     <string name="routing_attr_allow_private_name">Allow private access</string>
     <string name="routing_attr_allow_private_description">Allow access to private areas.</string>
     <string name="display_zoom_level">Display zoom level: %1$s</string>
