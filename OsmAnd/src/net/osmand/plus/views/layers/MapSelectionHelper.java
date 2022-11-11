@@ -129,7 +129,7 @@ public class MapSelectionHelper {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
 
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
-		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+		if (app.useOpenGlRenderer() && NativeCoreContext.isInit()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
