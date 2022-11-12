@@ -767,7 +767,6 @@
     <string name="whole_track">Celosna trasa</string>
     <string name="route_between_points_desc">Izberete kako da gi povrzete točkite so prava linija ili presmetajte ja rutata meǵu niv kako što e navedeno podolu.</string>
     <string name="threshold_distance">Pocetok na rastojanieto</string>
-    <string name="route_between_points_warning_desc">Sledno, prikačete ja vašata pateka do najbliskiot dozvolen pat so eden od vašite navigaciski profili za da ja koristite ovaa opcija.</string>
     <string name="next_segment">Sleden segment</string>
     <string name="reverse_route">Obratna ruta</string>
     <string name="overwrite_track">Stavete novo ime na zapisot</string>

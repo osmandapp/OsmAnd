@@ -178,7 +178,7 @@
     <string name="favorite_delete_group">Delete Group</string>
     <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
     <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
-    <string name="attach_to_roads_banner_desc">Attach your track to the roads to receive detailed navigation instructions.</string>
+    <string name="attach_to_roads_banner_desc">Attach your track to the nearest allowed roads to route between points with precise turn instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
@@ -1148,7 +1148,6 @@
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="threshold_distance">Threshold distance</string>
-    <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
     <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>

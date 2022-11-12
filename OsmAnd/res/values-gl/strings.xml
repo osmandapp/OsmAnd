@@ -3742,7 +3742,6 @@ Lon %2$s</string>
     <string name="route_between_points_desc">Escolle de que xeito conectar os puntos, cunha liña recta ou calcular unha ruta entre eles como se detalla deseguido.</string>
     <string name="whole_track">Pista enteira</string>
     <string name="next_segment">Seguinte segmento</string>
-    <string name="route_between_points_warning_desc">Deseguido, axusta a pista á estrada permitida máis preto cun perfil de navegación.</string>
     <string name="threshold_distance">Distancia limiar</string>
     <string name="navigation_profile">Perfil de navegación</string>
     <string name="route_between_points_add_track_desc">Escolle un ficheiro de pista ó que se engadirá un novo segmento.</string>

@@ -3121,7 +3121,6 @@
     <string name="route_between_points_whole_track_button_desc">Întreaga pistă va fi recalculată folosind profilul selectat.</string>
     <string name="route_between_points_next_segment_button_desc">Doar următorul segment va fi recalculat folosind profilul selectat.</string>
     <string name="route_between_points_desc">Alegeți cum să conectați punctele, printr-o linie dreaptă sau calculați un traseu între ele, după cum se specifică mai jos.</string>
-    <string name="route_between_points_warning_desc">Apoi, pentru a utiliza această opțiune, fixați pista pe cel mai apropiat drum permis cu unul dintre profilurile de navigație.</string>
     <string name="threshold_distance">Distanța de prag</string>
     <string name="route_between_points_add_track_desc">Selectați un fișier track la care să adăugați noul segment.</string>
     <string name="street_level_imagery">Imagini la nivel de stradă</string>

@@ -4159,7 +4159,6 @@
     <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer genveje med app-profiler.</string>
     <string name="quick_action_showhide_mapillary_descr">En omskifter til at vise eller skjule Mapillary-laget på kortet.</string>
     <string name="track_coloring_solid">Ensfarvet</string>
-    <string name="route_between_points_warning_desc">Fastgør derefter dit spor til den nærmeste tilladte vej med en af dine navigationsprofiler for at bruge denne mulighed.</string>
     <string name="shared_string_enter_param">Angiv param</string>
     <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d genveje\?</string>
     <string name="screen_timeout">Skærm-timeout</string>

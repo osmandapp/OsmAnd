@@ -3569,7 +3569,6 @@
     <string name="icon_group_travel">Cestování</string>
     <string name="keep_screen_on">Nechat obrazovku zapnutou</string>
     <string name="keep_screen_off">Nechat obrazovku vypnutou</string>
-    <string name="route_between_points_warning_desc">Dále, pro použití této možnosti připojte vaši stopu k nejbližší povolené cestě s některým z vašich navigačních profilů.</string>
     <string name="use_system_screen_timeout">Použít systémový časový limit obrazovky</string>
     <string name="reset_to_default_category_button_promo">\"Obnovit do základního nastavení\" nastaví výchozí pořadí.</string>
     <string name="copy_coordinates">Kopírovat souřadnice</string>

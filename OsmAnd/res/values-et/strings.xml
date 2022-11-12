@@ -3679,7 +3679,6 @@
     <string name="plan_route_trim_after">Kärbi pärast</string>
     <string name="plan_route_trim_before">Kärbi enne</string>
     <string name="attach_to_the_roads">Kinnita teede külge</string>
-    <string name="route_between_points_warning_desc">Järgmisena klõpsa oma rada lähimale lubatud teele ühe oma navigatsiooniprofiiliga selle võimaluse kasutamiseks.</string>
     <string name="route_between_points_next_segment_button_desc">Selle valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
     <string name="main_actions">Põhitegevused</string>
     <string name="osm_live_payment_subscription_management">Maksmine toimub Sinu Google Play kontolt ostu kinnitamisel.

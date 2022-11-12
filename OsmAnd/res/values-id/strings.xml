@@ -3144,7 +3144,6 @@
     <string name="all_next_segments">Semua segmen berikutnya</string>
     <string name="save_global_track_interval_descr">Tentukan interval pencatatan untuk perekaman trek umum (diaktifkan melalui widget \'Perekaman perjalanan\' di peta).</string>
     <string name="threshold_distance">Jarak ambang batas</string>
-    <string name="route_between_points_warning_desc">Selanjutnya, pasangkan trek Anda ke jalan terdekat yang diperbolehkan dengan salah satu profil navigasi Anda untuk menggunakan opsi ini.</string>
     <string name="route_between_points_desc">Pilih cara menghubungkan titik-titik, dengan garis lurus, atau hitung rute di antara titik-titik tersebut seperti yang ditentukan di bawah ini.</string>
     <string name="route_between_points_next_segment_button_desc">Hanya segmen berikutnya yang akan dihitung ulang menggunakan profil yang dipilih.</string>
     <string name="route_between_points_whole_track_button_desc">Seluruh trek akan dihitung ulang menggunakan profil yang dipilih.</string>

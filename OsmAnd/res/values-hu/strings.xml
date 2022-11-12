@@ -3724,7 +3724,6 @@
     <string name="track_coloring_solid">Tömör</string>
     <string name="access_hint_enter_address">Adja meg a címet</string>
     <string name="route_between_points_next_segment_button_desc">Csak a következő szakasz lesz újraszámítva a kiválasztott profilnak megfelelően.</string>
-    <string name="route_between_points_warning_desc">Ezután a beállítás használatához igazítsa a nyomvonalat a legközelebbi úthoz az egyik navigációs profil segítségével.</string>
     <string name="shared_string_custom">Egyéni</string>
     <string name="gpx_monitoring_stop">Utazás felvételének szüneteltetése</string>
     <string name="shared_string_save_as_gpx">Mentés új nyomvonalfájlként</string>
