@@ -1528,43 +1528,34 @@ public class GpxUiHelper {
 
 		ArrayList<Entry> values = new ArrayList<>();
 		List<Speed> speedData = analysis.speedData;
-		float nextX = 0;
-		float nextY;
-		float x;
-		for (Speed s : speedData) {
-			switch (axisType) {
-				case TIMEOFDAY:
-				case TIME:
-					x = s.time;
-					break;
-				default:
-					x = s.distance;
-					break;
-			}
+		float currentX = 0;
 
-			if (x > 0) {
-				if (axisType == GPXDataSetAxisType.TIME && x > 60 ||
-						axisType == GPXDataSetAxisType.TIMEOFDAY && x > 60) {
-					values.add(new Entry(nextX + 1, 0));
-					values.add(new Entry(nextX + x - 1, 0));
-				}
+		for (int i = 0; i < speedData.size(); i++) {
+
+			Speed s = speedData.get(i);
+
+			float stepX = axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY
+					? s.time
+					: s.distance;
+
+			if (i == 0 || stepX > 0) {
 				if (!(calcWithoutGaps && s.firstPoint)) {
-					nextX += x / divX;
+					currentX += stepX / divX;
 				}
-				if (Float.isNaN(divSpeed)) {
-					nextY = s.speed * mulSpeed;
-				} else {
-					nextY = divSpeed / s.speed;
+
+				float currentY = Float.isNaN(divSpeed)
+						? s.speed * mulSpeed
+						: divSpeed / s.speed;
+				if (currentY < 0 || Float.isInfinite(currentY)) {
+					currentY = 0;
 				}
-				if (nextY < 0 || Float.isInfinite(nextY)) {
-					nextY = 0;
+
+				if (s.firstPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
 				}
-				if (s.firstPoint) {
-					values.add(new Entry(nextX, 0));
-				}
-				values.add(new Entry(nextX, nextY));
-				if (s.lastPoint) {
-					values.add(new Entry(nextX, 0));
+				values.add(new Entry(currentX, currentY));
+				if (s.lastPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
 				}
 			}
 		}
@@ -1998,10 +1989,13 @@ public class GpxUiHelper {
 					lastHeight = HEIGHT_UNDEFINED;
 				}
 				if (pts.size() == 0) {
+					if (l.hasSpeed() && l.getSpeed() > 0) {
+						point.speed = l.getSpeed();
+					}
 					point.time = System.currentTimeMillis();
 				} else {
 					GPXUtilities.WptPt prevPoint = pts.get(pts.size() - 1);
-					if (l.hasSpeed() && l.getSpeed() != 0) {
+					if (l.hasSpeed() && l.getSpeed() > 0) {
 						point.speed = l.getSpeed();
 						double dist = MapUtils.getDistance(prevPoint.lat, prevPoint.lon, point.lat, point.lon);
 						point.time = prevPoint.time + (long) (dist / point.speed) * SECOND_IN_MILLIS;
