@@ -4793,10 +4793,10 @@
     <string name="map_widget_camera_tilt_desc">Megjeleníti a kamera dőlésszögét perspektivikus módban. Az alapértelmezett 90° (nincs dőlés).</string>
     <string name="developer_widgets">Fejlesztői widgetek</string>
     <string name="map_widget_target_distance_desc">Megjeleníti a kamera és a cél közötti távolságot.</string>
-    <string name="map_widget_ant_bicycle_power_desc">Mutatja a kerékpárosnak a kerékpár meghajtása során leadott teljesítményét</string>
-    <string name="map_widget_ant_bicycle_speed">Kerékpáros sebesség</string>
+    <string name="map_widget_ant_bicycle_power_desc">Megjeleníti a kerékpárosnak a kerékpár meghajtása során leadott teljesítményét</string>
+    <string name="map_widget_ant_bicycle_speed">Kerékpársebesség</string>
     <string name="map_widget_ant_bicycle_cadence">Pedálfordulatszám</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">Mutatja a felhasználó pedálozási sebességét</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Megjeleníti a felhasználó pedálozási sebességét</string>
     <string name="map_widget_ant_bicycle_speed_desc">Mutatja a haladás sebességét</string>
     <string name="map_widget_ant_bicycle_dist">Kerékpáros távolság</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mutatja a megtett távolságot</string>
@@ -4805,26 +4805,26 @@
     <string name="ant_missing_dependency_descr">A szükséges \"%1$s\" szolgáltatás nem található.
 \nTelepítenie vagy frissítenie kell az ANT+ beépülő szolgáltatást.
 \nSzeretne belépni a Google Play Áruházba\?</string>
-    <string name="ant_read_data">Adat olvasása</string>
-    <string name="map_widget_ant_bicycle_power">Kerékpáros teljesítmény</string>
+    <string name="ant_read_data">Adatok olvasása</string>
+    <string name="map_widget_ant_bicycle_power">Kerékpáros-teljesítmény</string>
     <string name="map_widget_ant_heart_rate">Pulzusszám</string>
     <string name="ant_widgets">ANT+ widgetek</string>
     <string name="ant_go_to_store">Ugrás az áruházhoz</string>
     <string name="ant_missing_dependency">Hiányzó függőség</string>
-    <string name="ant_write_to_gpx">Adat írása a nyomvonalba</string>
+    <string name="ant_write_to_gpx">Adatok nyomvonalba írása</string>
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám belefoglalása a nyomvonalba</string>
     <string name="depth_contours">Mélységi szintvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
     <string name="map_widget_target_distance">Távolság a kamerától a célig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
-    <string name="shared_string_cross_buy">Több rendszerre érvényes vásárlás</string>
+    <string name="shared_string_cross_buy">Több platformra érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/web) további költségek nélkül.</string>
     <string name="external_sensors_plugin_name">Külső érzékelők</string>
     <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
     <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
     <string name="map_widget_altitude_desc">Megjeleníti a jelenlegi hely vagy a térképközéppont tengerszint feletti magasságát</string>
     <string name="map_widget_rendering_fps">Térképmegjelenítés (képkocka/másodperc)</string>
-    <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelennek meg és frissülnek a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
+    <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelenik meg és frissül a térkép és a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
     <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
     <string name="location_simulation_cutoff">A szimuláció kihagyja az első métereket</string>
     <string name="send_uuid_preference">Egyedi felhasználóazonosító (UUID) elküldése</string>
@@ -4835,13 +4835,13 @@
     <string name="location_simulation_speedup">Szimulációs felgyorsítása</string>
     <string name="current_location_widget">Koordináták: jelenlegi hely</string>
     <string name="map_center_widget">Koordináták: térképközéppont</string>
-    <string name="send_uuid_preference_desc">Egy véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szerver erőforrások méltányos használatának nyomon követése, a forgalom mintázatának előrejelzése és anonim havi térképjelentések készítése.</string>
+    <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szervererőforrások méltányos igénybevételének nyomon követése, a forgalom mintázatainak előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpáros sebesség, teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztüli csatlakoztatása szükséges a megfelelő szenzorokhoz.</string>
+    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell csatlakoznia a megfelelő szenzorokhoz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
-    <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpáros sebesség, teljesítmény, fordulatszám, valamint pulzusszám.</string>
-    <string name="speak_route_recalculation">Útvonal újratervezés bemondása</string>
+    <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpár-sebesség, -teljesítmény, pedálfordulatszám, valamint pulzusszám.</string>
+    <string name="speak_route_recalculation">Útvonal újratervezésének bemondása</string>
     <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel
 \n
 \n - Folytonos animáció a mozgás közbeni helyváltoztatáskor
@@ -4868,82 +4868,82 @@
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
-    <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az 1-es verziójú térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban.
+    <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban.
 \n
-\nKérjük, támogassa a fejlesztéseket a hibanaplója megadásával.</string>
-    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy gyorsabb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt és régebbi eszközökön még mindig előnyösebb a használata.</string>
+\nKérjük, támogassa a fejlesztéseket a hibanaplója elküldésével.</string>
+    <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy gyorsabb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
     <string name="dismiss_changes">Változtatások elvetése\?</string>
     <string name="restart_now">Újraindítás most</string>
     <string name="map_rendering_engine_v2">2-es verzió (OpenGL)</string>
     <string name="map_rendering_engine">Térkép-megjelenítő motor</string>
-    <string name="weather_offline_forecast">Offline időjárási előrejelzés</string>
+    <string name="weather_offline_forecast">Offline időjárás-előrejelzés</string>
     <string name="weather_online_cache">Online gyorsítótár</string>
     <string name="measurement_units">Mértékegységek</string>
-    <string name="empty_screen_weather_clouds_layer">Kapcsolja be a felhőzet réteg megjelenítéséhez a térképen.</string>
-    <string name="empty_screen_weather_wind_layer">Széltérkép réteg bekapcsolása a térképen.</string>
-    <string name="empty_screen_weather_precipitation_layer">Csapadék réteg bekapcsolása a térképen.</string>
-    <string name="empty_screen_weather_temperature_layer">Hőmérséklet réteg bekapcsolása a térképen.</string>
-    <string name="shared_string_contours">Kontúrvonalak</string>
-    <string name="explore_weather_forecast">Időjárási előrejelzés megtekintése.</string>
-    <string name="weather_precip_in">inch</string>
+    <string name="empty_screen_weather_clouds_layer">Kapcsolja be a felhőzet réteg megtekintéséhez a térképen.</string>
+    <string name="empty_screen_weather_wind_layer">Kapcsolja be a szél réteg megtekintéséhez a térképen.</string>
+    <string name="empty_screen_weather_precipitation_layer">Kapcsolja be a csapadék réteg megtekintéséhez a térképen.</string>
+    <string name="empty_screen_weather_temperature_layer">Kapcsolja be a hőmérséklet réteg megtekintéséhez a térképen.</string>
+    <string name="shared_string_contours">Izovonalak</string>
+    <string name="explore_weather_forecast">Időjárás-előrejelzés megtekintése.</string>
+    <string name="weather_precip_in">hüvelyk</string>
     <string name="weather_precip_mm">mm</string>
-    <string name="weather_precip_inches">inch</string>
-    <string name="weather_wind_mph">mph</string>
+    <string name="weather_precip_inches">hüvelyk</string>
+    <string name="weather_wind_mph">mf/ó</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
-    <string name="weather_wind_miles_per_hour">mérföld / óra</string>
-    <string name="weather_wind_kilimeters_per_hour">kilométer / óra</string>
-    <string name="empty_screen_view_selected_weather_data">Kapcsolja be, hogy megjeleníthessen kiválasztott időjárási adatokat a térképen.</string>
-    <string name="clouds_widget_desc">Megjeleníti a térképközéppont feletti felhőzet mértékét.</string>
-    <string name="precipitation_widget_desc">Megjeleníti a térképközéppontnál mérhető csapadékot.</string>
-    <string name="temperature_widget_desc">Megjeleníti a térképközéppontnál mérhető hőmérsékletet.</string>
+    <string name="weather_wind_miles_per_hour">mérföld/óra</string>
+    <string name="weather_wind_kilimeters_per_hour">kilométer/óra</string>
+    <string name="empty_screen_view_selected_weather_data">Kapcsolja be a kiválasztott időjárási adatok megtekintéséhez a térképen.</string>
+    <string name="clouds_widget_desc">Megjeleníti a felhőzetet a jelenlegi térképközéppontnál.</string>
+    <string name="precipitation_widget_desc">Megjeleníti a csapadékot a jelenlegi térképközéppontnál.</string>
+    <string name="temperature_widget_desc">Megjeleníti a hőmérsékletet a jelenlegi térképközéppontnál.</string>
     <string name="weather_pressure_mmhg">Hgmm</string>
     <string name="weather_pressure_hectopascals">Hektopascal</string>
-    <string name="weather_pressure_inches_of_mercury">Hg inch</string>
+    <string name="weather_pressure_inches_of_mercury">Higanyhüvelyk</string>
     <string name="weather_pressure_millimeters_of_mercury">Higanymilliméter</string>
     <string name="weather_temperature_celsius">Celsius fok</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit fok</string>
-    <string name="action_not_supported_with_map_style">Ez a művelet nem támogatott a kiválasztotttérképtípuson.</string>
-    <string name="weather_pressure_inhg">inHg</string>
-    <string name="weather_prefs_descr">3 óránként frissített 24 órás és 7 napos időjárási előrejelzés</string>
-    <string name="weather_widget_group_desc">Különböző időjárási adatokat megjelenítő bővítménykészlet.</string>
+    <string name="action_not_supported_with_map_style">A kiválasztott térképstílus nem támogatja ezt a műveletet.</string>
+    <string name="weather_pressure_inhg">Hghüv.</string>
+    <string name="weather_prefs_descr">24 órás és 7 napos, 3 óránként frissülő időjárás-előrejelzés</string>
+    <string name="weather_widget_group_desc">Különböző időjárási adatokat megjelenítő widgetkészlet.</string>
     <string name="map_settings_weather_temp">Hőmérséklet</string>
     <string name="map_settings_weather_air_pressure">Légnyomás</string>
     <string name="map_settings_weather_wind">Szél</string>
     <string name="map_settings_weather_cloud">Felhőzet</string>
     <string name="map_settings_weather_precip">Csapadék</string>
     <string name="shared_string_layers">Rétegek</string>
-    <string name="empty_screen_weather_contours">Időjárási kontúrvonalak bekapcsolása a térképen.</string>
+    <string name="empty_screen_weather_contours">Időjárási izovonalak bekapcsolása a térképen.</string>
     <string name="weather_precip_milimeters">milliméter</string>
     <string name="weather_wind_kt">csomó</string>
     <string name="shared_string_weather">Időjárás</string>
-    <string name="empty_screen_weather_pressure_layer">Légnyomás réteg bekapcsolása a térképen.</string>
+    <string name="empty_screen_weather_pressure_layer">Kapcsolja be a légnyomás réteg megtekintéséhez a térképen.</string>
     <string name="weather_wind_knots">csomó</string>
-    <string name="weather_wind_meters_per_second">méter / másodperc</string>
+    <string name="weather_wind_meters_per_second">méter/másodperc</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="wind_widget_desc">Megjeleníti a térképközéppontnál mérhető szelet.</string>
-    <string name="air_pressure_widget_desc">Megjeleníti a térképközéppontnál mérhető légnyomást.</string>
-    <string name="weather_widgets_secondary_desc">A mértékegységek megváltoztathatók az Időjárás bővítmény beállításaiban.</string>
-    <string name="weather_plugin_description">Funkciók
-\n- 3 óránként frissülő 24 órás és 7 napos előrejelzés
-\n- helyalapú bővítmények
-\n- hőmérséklet/nyomás izolinák
+    <string name="wind_widget_desc">Megjeleníti a szelet a jelenlegi térképközéppontnál.</string>
+    <string name="air_pressure_widget_desc">Megjeleníti a légnyomást a jelenlegi térképközéppontnál.</string>
+    <string name="weather_widgets_secondary_desc">A mértékegységek az időjárás bővítmény beállításaiban módosíthatók.</string>
+    <string name="weather_plugin_description">Funkciók:
+\n- 5 rétegű, 24 órás és 7 napos időjárás-előrejelzés,
+\n- helyalapú widgetek,
+\n- hőmérsékleti és légnyomásvonalak (izobárok).
 \n
-\nAz időjárási adatokat a Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) szolgáltatja.</string>
+\nAz időjárási adatok szolgáltatója a Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="map_widget_sunset_desc">Megjeleníti a következő napnyugta idejét vagy az addig hátralévő időt.</string>
     <string name="map_widget_sunrise_desc">Megjeleníti a következő napkelte idejét vagy az addig hátralévő időt.</string>
     <string name="shared_string_time_left">Hátralévő idő</string>
     <string name="map_widget_group_sunrise_sunset_desc">Ezek a widgetek a következő napkeltéről és napnyugtáról tájékoztatnak.</string>
-    <string name="depth_contour_lines">Mélységi vonalak</string>
-    <string name="turn_on_nautical_depth_description">Kapcsolja be a tengeri mélységvonalak ábrázolásához.</string>
+    <string name="depth_contour_lines">Mélységvonalak</string>
+    <string name="turn_on_nautical_depth_description">Kapcsolja be a tengeri mélységadatok megtekintéséhez.</string>
     <string name="map_widget_group_sunrise_sunset">Napkelte, napnyugta</string>
     <string name="shared_string_next_sunset">Következő napnyugta</string>
     <string name="shared_string_next_sunrise">Következő napkelte</string>
     <string name="shared_string_sunset">Napnyugta</string>
     <string name="shared_string_sunrise">Napkelte</string>
-    <string name="switch_mode_by_tapping_on_widget">Váltson módot a widgetre való koppintással.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Vonal színséma</string>
+    <string name="switch_mode_by_tapping_on_widget">Módot válthat a widgetre koppintva.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Vonal színsémája</string>
     <string name="rendering_attr_depthContourWidth_name">Vonal szélessége</string>
 </resources>
