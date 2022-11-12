@@ -4274,7 +4274,7 @@
     <string name="average_speed_widget_desc">显示当前行程的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>
     <string name="map_widget_distance_to_intermediate">到中继点的距离</string>
-    <string name="radius_ruler_mode_desc">点击小部件可以切换到半径标尺模式。</string>
+    <string name="radius_ruler_mode_desc">轻按小部件切换到半径标尺模式。</string>
     <string name="routing_attr_avoid_highway_name">避开高速公路</string>
     <string name="routing_attr_hazmat_category_name">危险品类别</string>
     <string name="parking_widget_desc">显示从屏幕中心到停车位的距离的小部件。</string>
@@ -4334,7 +4334,7 @@
     <string name="rate_dialog_descr">请在Google Play上分享您的反馈并为我们的作品评分。</string>
     <string name="auto_backup_preference_desc">默认情况下，安卓系统会保存收藏夹、地图标记和OsmAnd设置的备份，以便在新设备或重新安装后恢复它们。这个备份被限制在25MB。
 \n当使用OsmAnd云时，这可能导致重新安装后的误解。</string>
-    <string name="altitude_correction">高度校正</string>
+    <string name="altitude_correction">海拔校正</string>
     <string name="no_altitude_data_desc">要接收 %1$s 数据，请将你的轨迹附着在道路上或在线计算。</string>
     <string name="routing_attr_motor_type_name">车辆发动机</string>
     <string name="make_osmand_better_descr">允许OsmAnd收集和处理匿名的应用使用数据。不会收集关于你的位置或你在地图上查看的位置的数据。
@@ -4369,21 +4369,21 @@
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">从 %1$d 出口离开并靠左</string>
     <string name="auto_25_chars_route_roundabout_kr">从 %1$d 出口离开并靠右</string>
-    <string name="attach_roads_descr">您是否想使用附加到离线地图的有效路线来估计您的路线。在这种情况下，您将有校正的道路高度、道路信息和转弯，可以在之后的导航中使用。</string>
+    <string name="attach_roads_descr">借助离线地图的路线近似你的轨迹。这将提供的校正的海拔值、道路细节，以及在导航过程中使用的转弯。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
     <string name="av_notes_video_widget_desc">点击小部件可以让你录制一个视频。</string>
     <string name="av_notes_audio_widget_desc">点击小工具可让您留下一条音频注释。</string>
     <string name="trip_recording_uphill_widget_desc">显示当前记录的行程中所有爬升高度的总和。</string>
-    <string name="trip_recording_duration_widget_desc">显示轨迹记录时间，即当前记录行程的分钟/小时持续时间。</string>
+    <string name="trip_recording_duration_widget_desc">显示当前记录的行程时间。</string>
     <string name="trip_recording_distance_widget_desc">显示当前记录的行程距离。</string>
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
-    <string name="switch_widget_mode_desc">点击小工具可切换模式。</string>
-    <string name="side_marker_eta">预计到达时间</string>
+    <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
+    <string name="side_marker_eta">预计的到达时间</string>
     <string name="accessibility_2d_view_off">2.5D 视图关闭</string>
     <string name="download_complete">下载完成</string>
     <string name="marker_1st">第一个标记</string>
@@ -4393,7 +4393,7 @@
     <string name="transport_hazmat_yes_desc">选择适用的类别。</string>
     <string name="transport_hazmat_no_desc">道路和隧道可能会限制危险材料的运输。</string>
     <string name="transport_hazmat_title">危险品运输</string>
-    <string name="calculate_online_altitude_descr">根据卫星图像和数字高程模型，在OsmAnd服务器上在线计算高程。与设备记录的海拔高度的差异可作为海拔校正。</string>
+    <string name="calculate_online_altitude_descr">基于卫星图像和数字高程模型，在 OsmAnd 服务器上在线计算高程。与设备记录的高度的差异可以用作高程校正。</string>
     <string name="accessibility_2d_view_on">2.5D 视图开启</string>
     <string name="compass_always_hidden">始终隐藏</string>
     <string name="compass_always_visible">始终可见</string>
@@ -4429,12 +4429,12 @@
 \n - 其他错误修正
 \n
 \n</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车IMBA路径</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车 IMBA 路径</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">显示专用的山地自行车小径。</string>
     <string name="connect_with_straight_line">用直线连接</string>
     <string name="attach_roads_warning">只有已录制的轨迹可以附加到道路上。</string>
     <string name="without_profiles_changing">无需更改配置文件</string>
-    <string name="shared_string_only_missing">仅缺失的</string>
+    <string name="shared_string_only_missing">仅缺失项</string>
     <string name="relative_bearing_widget_desc">显示您的前进方向与目标点之间的角度。</string>
     <string name="minmax_speed_dialog_title">设置最小/最大速度</string>
     <string name="second_marker_widget_desc">你可以配置小组件来显示距离或估计到达第二个地图标记的时间。</string>
@@ -4632,8 +4632,8 @@
     <string name="shared_string_used">已使用</string>
     <string name="quick_action_map_center_widget_descr">显示或隐藏地图上的地图中心工具的切换。</string>
     <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置小工具的切换。</string>
-    <string name="distance_by_tap_use_description">点击地图以查看您当前位置与点击点之间的距离。
-\n用两根手指在地图上同时点击以查看点击点之间的距离</string>
+    <string name="distance_by_tap_use_description">轻按地图查看您当前位置与点击点之间的距离。
+\n用两根手指在地图上同时轻按以查看单击点之间的距离</string>
     <string name="shared_string_2_5_d_view">2.5D 视图</string>
     <string name="calculating_altitude">正在计算海拔</string>
     <string name="shared_string_speed">速度</string>
@@ -4648,12 +4648,12 @@
     <string name="map_widget_zoom_level">缩放层级</string>
     <string name="map_widget_camera_distance">相机标高</string>
     <string name="map_widget_camera_tilt">相机倾斜</string>
-    <string name="coordinates_widget_current_location_desc">该小工具显示当前地理位置的地理坐标</string>
+    <string name="coordinates_widget_current_location_desc">显示当前地理位置的地理坐标</string>
     <string name="coordinates_widget_map_center">坐标：地图中心</string>
     <string name="coordinates_widget_current_location">坐标：当前位置</string>
     <string name="import_tracks_descr">%1$s，包含%2$s 分开的轨迹。选择要导入的轨迹。</string>
     <string name="developer_widgets">开发者小工具</string>
-    <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，以计算预计到达时间。</string>
+    <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，计算预估的到达时间。</string>
     <string name="calculate_online">在线计算</string>
     <string name="no_altitude_data">没有海拔数据</string>
     <string name="turn_on_public_transport_description">打开以在地图上查看公共交通路线。</string>
@@ -4665,7 +4665,7 @@
     <string name="next_turn_widget_desc">该小部件通过移动路线图和距离数显示有关您的下一个转弯的信息。</string>
     <string name="show_map_symbols">显示地图符号</string>
     <string name="show_map_symbols_desc">文字、路标和其它。</string>
-    <string name="coordinates_widget_map_center_desc">该小工具显示当前地图中心的地理坐标</string>
+    <string name="coordinates_widget_map_center_desc">显示当前地图中心的地理坐标</string>
     <string name="go_to_marker_location">转到标记位置</string>
     <string name="shared_string_switch_mode">切换模式</string>
     <string name="click_on_widget">点击小工具</string>
