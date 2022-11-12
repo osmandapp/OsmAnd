@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="storage_migration_fragment_close_descr">Copying is done for %1$s%%. If you stop now, the app may not work correctly.</string>
     <string name="switch_mode_by_tapping_on_widget">Switch the mode by tapping on the widget.</string>
     <string name="map_widget_sunset_desc">Shows the time of the next sunset or the time left until sunset.</string>
     <string name="map_widget_sunrise_desc">Shows the time of the next sunrise or the time left until sunrise.</string>
