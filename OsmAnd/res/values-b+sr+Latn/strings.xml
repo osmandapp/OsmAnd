@@ -2973,7 +2973,6 @@
     <string name="route_between_points_desc">Izaberite kako povezati tačke, po pravoj liniji, ili izračunajte rutu između njih kako je dole naznačeno.</string>
     <string name="whole_track">Cela staza</string>
     <string name="next_segment">Sledeći segment</string>
-    <string name="route_between_points_warning_desc">Zatim pomoću jednog od vaših navigacionih profila prislonite stazu na najbliži dozvoljeni put da biste koristili ovu opciju.</string>
     <string name="threshold_distance">Prag udaljenosti</string>
     <string name="navigation_profile">Navigacijski profil</string>
     <string name="route_between_points_add_track_desc">Izaberite datoteku zapisa kojoj će se dodati novi segment.</string>

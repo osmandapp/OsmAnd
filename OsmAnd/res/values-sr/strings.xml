@@ -3700,7 +3700,6 @@
     <string name="route_between_points_desc">Изаберите како повезати тачке, по правој линији, или израчунајте руту између њих како је доле назначено.</string>
     <string name="whole_track">Цела стаза</string>
     <string name="next_segment">Следећи сегмент</string>
-    <string name="route_between_points_warning_desc">Затим помоћу једног од ваших навигационих профила прислоните стазу на најближи дозвољени пут да бисте користили ову опцију.</string>
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Навигацијски профил</string>
     <string name="route_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>

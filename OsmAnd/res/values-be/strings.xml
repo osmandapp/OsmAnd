@@ -3532,7 +3532,6 @@
     <string name="route_between_points_desc">Абярыце спосаб злучэння пунктаў. Варыянты: прамая лінія; разлік маршруту як вызначана ніжэй.</string>
     <string name="whole_track">Увесь след</string>
     <string name="next_segment">Наступны сегмент</string>
-    <string name="route_between_points_warning_desc">Пасля вам патрэбна абраць профіль навігацыі для вызначэння маршруту з улікам параметраў і абмежаванняў гэтага профілю.</string>
     <string name="threshold_distance">Максімальная дыстанцыя</string>
     <string name="navigation_profile">Профіль навігацыі</string>
     <string name="route_between_points_add_track_desc">Абраць файл следу, да якога будзе дададзены новы сегмент.</string>

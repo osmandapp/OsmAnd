@@ -3729,7 +3729,6 @@
     <string name="access_hint_enter_address">Settu inn heimilisfang</string>
     <string name="import_track_descr">Veldu ferilskrá til að fylgja eða flyttu hana inn úr tækinu þínu.</string>
     <string name="add_segment_to_the_track">Bæta í ferilskrá</string>
-    <string name="route_between_points_warning_desc">Í næsta skrefi þarftu að velja leiðsagnarsnið svo hægt sé að finna hvaða vegir séu leyfilegir og hvaða þolvik vegalengdar eigi að miða við til að nálga ferilinn þinn við fyrirliggjandi vegi.</string>
     <string name="empty_state_my_tracks">Bæta við ferilskrám</string>
     <string name="app_mode_inline_skates">Línuskautar</string>
     <string name="add_address">Bæta við heimilisfangi</string>

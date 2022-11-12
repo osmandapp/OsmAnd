@@ -4216,7 +4216,6 @@
     <string name="nearest_point">Najbližja točka</string>
     <string name="whole_track">Celotna sled</string>
     <string name="route_between_points_desc">Izberi, kako povezati točke: po ravni črti ali izračunati pot med njimi, kot je navedeno spodaj.</string>
-    <string name="route_between_points_warning_desc">Nato z enim od navigacijskih profilov, ki omogoča uporabo te možnosti, pritrdi sled na najbližjo dovoljeno cesto.</string>
     <string name="next_segment">Naslednji segment</string>
     <string name="gpx_split_interval_descr">Izberi interval, v katerem bodo prikazane oznake z razdaljo ali časom na sledi.</string>
     <string name="track_coloring_solid">Polno</string>

@@ -1674,7 +1674,6 @@
     <string name="empty_state_my_tracks_desc">Mewnforio neu recordio ffeiliau traciau</string>
     <string name="empty_state_my_tracks">Ychwanegu ffeiliau traciau</string>
     <string name="shared_string_gpx_route">Llwybr trac</string>
-    <string name="route_between_points_warning_desc">Nesaf, snapiwch y trac i\'r ffordd agosach gydag un o\'ch proffiliau llywio i ddefnyddio\'r opsiwn hwn.</string>
     <string name="whole_track">Trac cyfan</string>
     <string name="add_to_a_track">Ychwanegu at drac</string>
     <string name="map_markers_item">Nodau map</string>
