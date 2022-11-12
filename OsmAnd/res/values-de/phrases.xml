@@ -4400,11 +4400,11 @@
     <string name="poi_climbing_grade_aliens">Ausländer</string>
     <string name="poi_climbing_bolt_abseil">Abseilen</string>
     <string name="poi_osmand_climbing_bolts_yes">Ja</string>
-    <string name="poi_climbing_bolts">Kletterbolzen</string>
+    <string name="poi_climbing_bolts">Kletterhaken</string>
     <string name="poi_climbing_quality_medium">Mittel</string>
-    <string name="poi_climbing_bolts_filter">Kletterbolzen</string>
+    <string name="poi_climbing_bolts_filter">Kletterhaken</string>
     <string name="poi_climbing_grade_filter">Klettergrad</string>
-    <string name="poi_climbing_bolt">Kletterbolzen</string>
+    <string name="poi_climbing_bolt">Kletterhaken</string>
     <string name="poi_climbing_bolted_filter">"  "</string>
     <string name="poi_climbing_grade_saxon_max">Schwierigste Route (sächsischer Grad)</string>
     <string name="poi_climbing_grade_french_max">Schwierigste Route (französischer Grad)</string>
@@ -4412,4 +4412,7 @@
     <string name="poi_climbing_grade_saxon">Sächsischer Klettergrad</string>
     <string name="poi_osmand_climbing_bolts_no">Nein</string>
     <string name="poi_climbing_bolt_anchor">Anker</string>
+    <string name="poi_climbing_rock_gritstone">Klettergestein: Sandstein</string>
+    <string name="poi_climbing_rock_conglomerate">Klettergestein: Konglomerat</string>
+    <string name="poi_climbing_speed_yes">Geschwindigkeit: ja</string>
 </resources>
