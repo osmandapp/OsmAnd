@@ -3087,7 +3087,7 @@
     <string name="app_mode_campervan">Autocamper (RV)</string>
     <string name="rendering_attr_showLez_description">Vis miljøzoner på kortet. Påvirker ikke ruteberegning.</string>
     <string name="rendering_attr_showLez_name">Vis miljøzoner</string>
-    <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
+    <string name="temporary_conditional_routing">Tag højde for midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
     <string name="new_route_calculated_dist_dbg">Rute: afstand %1$s, rute tid %2$s
 \nBeregning: %3$.1f s., %4$d veje, %5$d kortfliser</string>
@@ -4032,7 +4032,7 @@
     <string name="open_place_reviews_plugin_description">Lav bidrag til OpenPlaceReviews-projektet som f.eks. fotos, anmeldelser, links for offentlige steder som restauranter, hoteller eller museer.
 \n
 \nFind vejledninger om, hvordan du bidrager, på vores websted https://osmand.net/docs/user/plugins/openplacereviews.</string>
-    <string name="routing_attr_height_obstacles_description">Ruteberegning kan undgå kraftige stigninger.</string>
+    <string name="routing_attr_height_obstacles_description">Den forventede rejsetid vil afspejle højdepåvirkningen. Ruteberegningsvalg kan hjælpe med at undgå stejle opkørsler:</string>
     <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod
 \n
 \n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer
@@ -4236,7 +4236,9 @@
     <string name="select_nav_profile_dialog_message">\'Navigationstype\' afgør, hvordan ruterne beregnes med tilgængelige offline- og online ruteberegningsmotorer.</string>
     <string name="in_grace_period">I henstandsperiode</string>
     <string name="loading_list_of_routing_services">Indlæser liste over tilgængelige ruteberegningstjenester</string>
-    <string name="gpx_parse_error">OsmAnd GPX er ikke korrekt dannet, kontakt venligst supportteamet for at undersøge det nærmere.</string>
+    <string name="gpx_parse_error">Problemer fundet med en GPX-fil.
+\n
+\nDu kan kontakte OsmAnd support for at undersøge det.</string>
     <string name="empty_state_my_tracks_desc">Importer eller optag sporfiler</string>
     <string name="monitoring_control_start">Optag</string>
     <string name="release_3_6">- Profiler: Nu kan du ændre rækkefølge, indstille ikonet for kortet, ændre alle indstillinger for basisprofiler og gendanne dem tilbage til standardindstillingerne
@@ -4765,7 +4767,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier beregnet til mountainbiking.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
     <string name="connect_with_straight_line">Forbind med en lige linje</string>
-    <string name="attach_roads_descr">Tilnærm dit spor en rute ved hjælp af offline-kortet. Dette vil give korrigerede højdeværdier, vejdetaljer og sving til brug ved navigation.</string>
+    <string name="attach_roads_descr">Tilnærm dit spor til tilladte veje for at følge punkter og tilknytte præcise svinginstruktioner og ruteegenskaber.</string>
     <string name="attach_roads_warning">Kun et optaget spor kan vedhæftes vejene.</string>
     <string name="download_tiles">Download kortfliser</string>
     <string name="shared_string_only_missing">Kun manglende</string>
@@ -4958,4 +4960,5 @@
     <string name="shared_string_next_sunset">Næste solnedgang</string>
     <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
+    <string name="storage_migration_fragment_close_descr">Kopiering udføres for %1$s%%. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
 </resources>
