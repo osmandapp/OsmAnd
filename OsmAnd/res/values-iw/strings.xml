@@ -4497,7 +4497,6 @@
     <string name="quick_action_add_route_descr">כפתור להתחלת מסלול מאמצע המסך.</string>
     <string name="purchases_feature_desc_osmand_cloud">הצטרפות ל־OsmAnd Cloud מאפשרת לך לאחסן את כל נתוני ה־OsmAnd שלך באופן מקוון. הנתונים שלך לא הולכים לאיבוד לאחר ההתקנה. ניתן לגבות ולשחזר את כל הנתונים בקלות.</string>
     <string name="purchases_feature_desc_terrain">קווי מתאר של פני שטח, מפת הצללות מלאה עם הצללות כהות ומפות שיפועים עם צבעים להצגת אזורי הפסגה והשפל.</string>
-    <string name="approximate_route_description">לצרף את המסלול לדרכים במפה כדי לקבל את כל הפניות ונתונים נוספים כגון, חלקלקות, סוגי הדרכים וכן הלאה.</string>
     <string name="routeInfo_tracktype_description">לצבוע את הנתיב או קו המסלול לפי הרכב המשטח. בדרך כלל תקף כאשר רשת הכבישים אינה סלולה ברובה.</string>
     <string name="please_provide_group_name_message">נא לספק שם לקבוצה.</string>
     <string name="navigate_point_format_swiss_grid_plus">הרשת השווייצרית (CH1903+‎)</string>

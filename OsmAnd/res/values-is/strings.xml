@@ -4408,7 +4408,6 @@
     <string name="use_routing_fallback">Leiðagerð til vara án nettengingar</string>
     <string name="memory_allocated_for_routing_ds">Úthlutun á meira minni mun hraða útreikningum á löngum leiðum (yfir 500 km), en getur haft áhrif á afköst annarra forrita.
 \nHefur engin áhrif á útreikninga styttri leiða.</string>
-    <string name="approximate_route_description">Hengdu leiðina við vegi á kortinu til að fá fram allar beygjur og viðbótargögn, eins og t.d. áferð, tegund vega, o.fl.</string>
     <string name="backup_error_subscription_was_used">Áskrift eða kynningarafsláttur notaður af öðrum notandaaðgangi %1$s</string>
     <string name="backup_error_subscription_was_expired_descr">OsmAnd Pro áskriftin þín er útrunnin, endurnýjaðu hanta til að nota öryggisafrit. Þú getur ennþá endurheimt gögn úr tölvuskýinu.</string>
     <string name="backup_delete_all_data_warning">Þú ert í þann mund að fara að eyða öllum gögnum sem send hafa verið inn á OsmAnd tölvuskýið, að meðtalinni útgáfuskráningunni.
@@ -4822,7 +4821,6 @@
     <string name="ant_go_to_store">Fara í hugbúnaðarsafnið</string>
     <string name="street_name_widget_desc">Götuheitaviðmótshlutinn sýnir fyrirliggjandi götuheiti með beinni staðsetningarör eða heiti næstu götu ásamt þeirri aðgerð sem þarf að framkvæma.</string>
     <string name="calculate_online_altitude_descr">Reiknaðu hæð á OsmAnd-netþjónum, út frá gervitunglamyndum og stafrænum hæðarlíkönum. Mismunur miðað við hæð tækis getur nýst sem leiðrétting á hæð.</string>
-    <string name="attach_to_roads_banner_desc">Hengdu ferilinn þinn við vegina til að fá nákvæmar ferðaleiðbeiningar.</string>
     <string name="purchases_feature_desc_cross_buy">Notaðu eiginleika áskriftarinnar þinnar á mismunandi kerfum (Android/iOS/vefnum) án nokkurs aukakostnaðar.</string>
     <string name="shared_string_cross_buy">Kaupa á milli kerfa</string>
 </resources>

@@ -4266,7 +4266,6 @@
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
     <string name="enter_verification_code">إدخال كلمة مرور لمرة واحدة</string>
-    <string name="approximate_route_description">قم بإرفاق الطريق بالطرق على الخريطة للحصول على جميع المنعطفات والبيانات الإضافية ، مثل السلاسة وأنواع الطرق وما إلى ذلك.</string>
     <string name="release_4_0">• احتياطية سحابة
 \n
 \n • تمت إضافة الوضع الليلي لنمط الخريطة \"Topo\"
@@ -4832,7 +4831,6 @@
     <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط.</string>
     <string name="download_tiles">تنزيل الطبقات</string>
     <string name="average_speed_skip_stops_desc">سيتم حساب السرعة الأقل من %1$s وتؤثر على متوسط السرعة.</string>
-    <string name="attach_to_roads_banner_desc">قم بإرفاق مسارك بالطرق ، للحصول على تعليمات ملاحة مفصلة.</string>
     <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
     <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
     <string name="download_heightmap_maps">خريطة الارتفاع</string>

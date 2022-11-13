@@ -4197,7 +4197,6 @@
     <string name="backup_error_token_is_not_valid_or_expired">Clave inválida o vencida</string>
     <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
-    <string name="approximate_route_description">Adjuntar la ruta a los caminos en el mapa para obtener todos los giros y datos adicionales, como la suavidad, los tipos de caminos, etc.</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
 \n
 \n• Se ha añadido el modo nocturno para el estilo de mapa «Topo».
@@ -4728,7 +4727,6 @@
     <string name="live_update_frequency_hour_variant">Las actualizaciones de mapas se comprueban cada hora.</string>
     <string name="lang_ckb">Kurdo central</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
-    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos para recibir instrucciones de navegación detalladas.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
     <string name="connect_with_straight_line">Conectar con una línea recta</string>

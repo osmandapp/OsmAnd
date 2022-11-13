@@ -4215,7 +4215,6 @@
 \n
 \n</string>
     <string name="duration_moment_ago">antaŭ momento</string>
-    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn: dekliveco, specoj de vojoj kaj pli.</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
     <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
     <string name="contour_lines_hillshades_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4764,7 +4763,6 @@
     <string name="favorite_confirm_delete_group">Ĉu vi certe volas forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)\?</string>
     <string name="download_heightmap_maps">Altmapo</string>
     <string name="display_position">Montri pozicion</string>
-    <string name="attach_to_roads_banner_desc">Alproksimigi vian spuron al vojoj por akiri detalajn navigajn instrukciojn.</string>
     <string name="favorite_delete_group">Forigi grupon</string>
     <string name="quick_action_current_location_widget_descr">Butono por montri/kaŝi koordinatojn de via nuna pozicio.</string>
     <string name="coordinates_widget_map_center">Koordinatoj: map-centro</string>

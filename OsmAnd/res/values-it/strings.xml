@@ -4250,7 +4250,6 @@
     <string name="backup_storage_taken">Memoria occupata</string>
     <string name="backup_version_history_delete_descr">Cancella il registro dei cambiamenti dei tipi di dati deprecati da OsmAnd Cloud\?</string>
     <string name="send_logcat_log">Invia registro di log</string>
-    <string name="approximate_route_description">Collega il percorso alle strade della mappa per avere tutte le indicazioni di svolta e i dati aggiuntivi come levigatezza, tipo di strade, ecc.</string>
     <string name="grey_color_slope">Il colore grigio è utilizzato quando la pendenza non è definita.</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
     <string name="routing_attr_avoid_tunnels_description">Evita i tunnel</string>
@@ -4740,7 +4739,6 @@
     <string name="attach_roads_warning">Soltanto una traccia registrata può essere allegata alle strade.</string>
     <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla seconda prossima svolta, che sono abilitate se la seconda svolta è immediatamente dopo la prima.</string>
     <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
-    <string name="attach_to_roads_banner_desc">Collega la traccia sulle strade per avere indicazioni di navigazione dettagliate.</string>
     <string name="attach_roads_descr">Approssima la tua traccia usando un percorso della mappa offline. Ciò restituirà valori di elevazione corretti, dettagli stradali e svolte usate durante la navigazione.</string>
     <string name="second_marker_widget_desc">Puoi configurare il widget per mostrare la distanza o il tempo stimato di arrivo al secondo marcatore della mappa.</string>
     <string name="time_to_intermediate_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" al primo punto intermedio. Il tempo è costantemente aggiornato durante la navigazione, quando il punto intermedio viene raggiunto, il tempo verrà aggiornato al successivo punto intermedio.</string>

@@ -4304,7 +4304,6 @@
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
 \n
 \nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
-    <string name="approximate_route_description">Adjuntar la ruta a los caminos en el mapa para obtener todos los giros y datos adicionales, como la suavidad, los tipos de caminos, etc.</string>
     <string name="contour_lines_hillshades_slope">Curvas de nivel, sombreados, pendientes</string>
     <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
     <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
@@ -4721,7 +4720,6 @@
     <string name="shared_string_only_missing">Sólo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
     <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y mantente a la izquierda</string>
-    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos para recibir instrucciones de navegación detalladas.</string>
     <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>

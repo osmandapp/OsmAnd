@@ -3849,7 +3849,6 @@
     <string name="backup_restore_now">Obnovi zdaj</string>
     <string name="backup_setup">Nastavi varnostno kopiranje</string>
     <string name="backup_welcome_back">Dobrodošli nazaj!</string>
-    <string name="approximate_route_description">Pripni pot cestam na zemljevidu, za pridobivanje točnih zavojev in dodatnih podatkov, kot so gladkost, vrsta cest itd.</string>
     <string name="backup_error_no_valid_subscription">Ni veljavne naročnine</string>
     <string name="backup_error_gzip_only_supported_upload">Datoteka mora biti poslana v obliki .gzip</string>
     <string name="backup_error_subscription_was_used">Naročnino ali promocijo uporablja drug račun %1$s</string>
@@ -4755,7 +4754,6 @@
     <string name="download_tiles">Prenesi ploščice</string>
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
     <string name="attach_roads_descr">Približaj svojo sled s potjo na zemljevidu brez povezave. Tako bodo na voljo popravljene vrednosti nadmorske višine, podrobnosti o cestah in ovinki, uporabljeni med navigacijo.</string>
-    <string name="attach_to_roads_banner_desc">Za pridobitev podrobnih navodil za navigacijo, pripni svojo sled na ceste.</string>
     <string name="included_in_your_current_plan">Vključeno v tvoji trenutni naročnini na »%1$s«</string>
     <string name="available_as_part_of_subscription_plan">Na voljo kot del naročnine na %1$s.</string>
     <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>

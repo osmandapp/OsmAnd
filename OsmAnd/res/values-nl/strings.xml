@@ -4373,7 +4373,6 @@
     <string name="skip_confirmation">Ja, sla over</string>
     <string name="shared_storage_second_step">Klik op \"Gebruik deze map\".</string>
     <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse wegcategorieën.</string>
-    <string name="approximate_route_description">Hecht de route vast aan de wegen op de kaart om all richtingsaanwijzingen en extra informatie te verkrijgen zoals effenheid, wegtypes en meer.</string>
     <string name="unlimited_map_downloads">Onbeperkte kaart downloads</string>
     <string name="purchases_feature_desc_wikipedia">Verken Wikipedia offline. Artikels zijn verdeeld over de landen en regio\'s en beschikbaar in alle talen.</string>
     <string name="routing_attr_avoid_tunnels_description">Tunnels vermijden</string>

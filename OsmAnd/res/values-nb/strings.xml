@@ -4188,7 +4188,6 @@
     <string name="output">Resultat</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrensede nedlastinger for alle kontinenter og regionale frakoblede kart.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Få tilgang til hyppige kartoppdateringer. Timevise, daglige, eller ukentlige oppdateringer. Oppdateringer lastes ned i rekkefølge, kun for endret område.</string>
-    <string name="approximate_route_description">Legg ved ruten til veier på kartet for å få alle svinger og ytterligere data, som veijevnhet, veityper, osv.</string>
     <string name="select_segments_description">%1$s inneholder mer enn ett segment. Du må angi delen som skal brukes for navigasjon.</string>
     <string name="gpx_upload_private_visibility_descr">«Privat» betyr at sporet ikke vises i noen offentlige oppføringer, men sporingspunkter fra dem i ukronologisk rekkefølge er tilgjengelig gjennom det offentlige GPS-API-et uten tidsstempler.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Identifiserbart» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer. Altså vil andre kunne laste ned rå sporingsdata og tilknytte den til brukernavnet ditt. Sporingspunktsdata med offentlige tidsstempel fra GPS-API-et servert via sporingspunkts-API-et vil vise til din opprinnelige sporingsside.</string>
