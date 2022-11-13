@@ -3586,7 +3586,9 @@
     <string name="profiles_for_action_not_found">Не вдалося знайти жодного профілю.</string>
     <string name="index_item_world_basemap_detailed">Всесвітня оглядова мапа (докладна)</string>
     <string name="unsupported_type_error">Непідтримуваний тип</string>
-    <string name="gpx_parse_error">OsmAnd GPX недостатньо сформований. Зверніться до служби підтримки для подальшого дослідження.</string>
+    <string name="gpx_parse_error">Виявлено проблеми з файлом GPX.
+\n
+\nВи можете звернутися до служби підтримки OsmAnd для розслідування.</string>
     <string name="shared_string_always">Завжди</string>
     <string name="screen_control">Керування екраном</string>
     <string name="system_screen_timeout_descr">Вимикає екран відповідно до часу очікування екрана системи.</string>
@@ -3998,7 +4000,7 @@
 \nУсі незбережені дані буде втрачено.</string>
     <string name="on_pause">Призупинено</string>
     <string name="app_restart_required">Щоб увімкнути деякі налаштування, необхідно перезапустити застосунок.</string>
-    <string name="routing_attr_height_obstacles_description">Маршрут може оминати круті підйоми.</string>
+    <string name="routing_attr_height_obstacles_description">Прогнозований час у дорозі показуватиме вплив висоти над рівнем моря. Налаштування маршруту може допомогти уникнути крутих підйомів:</string>
     <string name="quick_action_coordinates_widget_descr">Перемикач для показу або приховування віджета Координати на мапі.</string>
     <string name="map_widget_distance_by_tap">Відстань дотиком</string>
     <string name="latest_openstreetmap_update">Доступні оновлення OpenStreetMap:</string>
@@ -4763,7 +4765,7 @@
     <string name="attach_roads_warning">До доріг можна прикріпити лише записаний трек.</string>
     <string name="without_profiles_changing">Без зміни профілів</string>
     <string name="download_tiles">Завантажити тайли</string>
-    <string name="attach_roads_descr">Приблизно прокладіть свій трек за допомогою офлайн-мапи. Це забезпечить коригування значень висоти, деталі дороги та повороти, які використовуються під час навігації.</string>
+    <string name="attach_roads_descr">Приблизно прокладіть свій трек біля дозволених доріг, щоб прокласти маршрут між точками та пов\'язати точні вказівки поворотів і властивості маршруту.</string>
     <string name="shared_string_only_missing">Лише відсутні</string>
     <string name="attach_to_roads_banner_desc">Прикріпіть свій трек до доріг, щоб отримати докладні інструкції з навігації.</string>
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
@@ -4952,4 +4954,5 @@
     <string name="map_widget_group_sunrise_sunset">Схід, захід сонця</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колірна схема ліній</string>
     <string name="rendering_attr_depthContourWidth_name">Ширина лінії</string>
+    <string name="storage_migration_fragment_close_descr">Копіювання виконано на %1$s%%. Якщо ви зупинитеся зараз, застосунок може працювати некоректно.</string>
 </resources>
