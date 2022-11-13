@@ -4759,7 +4759,7 @@
     <string name="attach_roads_warning">Az utakhoz csak rögzített nyomvonal csatolható.</string>
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
-    <string name="attach_roads_descr">Közelítse nyomvonalát az engedélyezett utakhoz a pontok közötti tervezéshez és rendeljen hozzá pontos kanyarodási utasításokat és útvonaltulajdonságokat.</string>
+    <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
     <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
