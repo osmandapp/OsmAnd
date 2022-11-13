@@ -176,7 +176,7 @@
     <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
     <string name="osmand_distance_planning_plugin_description">Crie caminhos tocando no mapa ou usando ou modificando os arquivos GPX existentes para planejar uma viagem e medir a distância entre pontos. O resultado pode ser salvo como um arquivo GPX para uso posterior para orientação.</string>
     <string name="shared_string_accessibility">Acessibilidade</string>
-    <string name="osmand_accessibility_description">Disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita p. ajustar a taxa de fala para vozes de texto para fala, configurar a navegação no D-pad, usar um trackball para controle de zoom ou feedback de texto para fala, por exemplo, para anunciar automaticamente sua posição.</string>
+    <string name="osmand_accessibility_description">Disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Isto facilita e. ajustando a taxa de fala para vozes de texto para fala, configurando a navegação do D-pad, usando um trackball para controle de zoom ou feedback de texto para fala, por exemplo, para anunciar automaticamente sua posição.</string>
     <string name="osm_editing_plugin_name">Edição no OpenStreetMap</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="rename_failed">Renomeação falhou.</string>
@@ -203,11 +203,11 @@
     <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam a avaliar visualmente a forma da superfície do terreno, considerando curvatura, extremos, inclinação, pontos de igual altura e muito mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno para a subida e descida e a cor do desvio do ângulo de inclinação do plano. Dados do SRTM e ASTER.
 \n
 \nComo funciona - http://osmand.net/docs/user/plugins/contour-lines</string>
-    <string name="osmand_parking_plugin_description">Ative para definir um ponto no mapa onde seu carro é deixado na rua e notifique seu calendário quando o tempo de estacionamento começar. Plugin ajuda a rastrear o tempo de estacionamento e localização do seu carro. Para colocar um marcador, escolha um lugar no mapa, depois vá para Ações e pressione \"Adicionar estacionamento\".</string>
-    <string name="osm_editing_plugin_description">Permite que você faça contribuições para o OpenStreetMap, uma comunidade global destinada a criar um mapa abrangente do mundo e fornecer dados atualizados de código aberto para todos os usuários.
+    <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
+    <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
-\nVocê pode encontrar instruções sobre como editar o mapa em nosso site https://osmand.net/docs/user/plugins/osm-editing</string>
-    <string name="osmand_development_plugin_description">Permite configurar o OsmAnd para testes: simular rotas de navegação, verificar o desempenho da renderização da tela, etc. Plugin não é necessário para uso normal do aplicativo.</string>
+\nVocê pode encontrar instruções sobre como editar o mapa em nosso site https://osmand.net/docs/user/plugins/osm-editing .</string>
+    <string name="osmand_development_plugin_description">Fornece funcionalidade para testar e depurar o OsmAnd: simular rotas de navegação, monitorar a renderização da tela, verificar o desempenho, etc. Este plug-in não é necessário para o uso normal do aplicativo.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
     <string name="shared_string_gpx_points">Pontos</string>
@@ -3580,7 +3580,9 @@
     <string name="profiles_for_action_not_found">Não foi possível encontrar nenhum desses perfis.</string>
     <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
     <string name="unsupported_type_error">Tipo não suportado</string>
-    <string name="gpx_parse_error">O arquivo GPX do OsmAnd não está bem formado, entre em contato com a equipe de suporte para investigar mais.</string>
+    <string name="gpx_parse_error">Problemas encontrados com um arquivo GPX.
+\n
+\nVocê pode entrar em contato com o suporte da OsmAnd para investigar.</string>
     <string name="expire_time">Tempo de expiração</string>
     <string name="mercator_projection">Projeção de Mercator</string>
     <string name="storage_format">Formato de armazenamento</string>
@@ -3991,7 +3993,7 @@
 \nTodos os dados não salvos serão perdidos.</string>
     <string name="on_pause">Em pausa</string>
     <string name="app_restart_required">É necessário reiniciar o aplicativo para aplicar algumas configurações.</string>
-    <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas fortes.</string>
+    <string name="routing_attr_height_obstacles_description">O tempo de viagem projetado refletirá o impacto da elevação. A preferência de rota pode ajudar a evitar subidas íngremes:</string>
     <string name="quick_action_coordinates_widget_descr">Uma alternância para mostrar ou ocultar o widget de coordenadas no mapa.</string>
     <string name="latest_openstreetmap_update">Última atualização do OpenStreetMap disponível:</string>
     <string name="updated">Atualizado: %s</string>
@@ -4720,7 +4722,7 @@
     <string name="av_notes_audio_widget_desc">Tocar no widget permite que você faça uma nota de áudio.</string>
     <string name="trip_recording_distance_widget_desc">Mostra a distância decorrida da viagem atual a ser gravada.</string>
     <string name="connect_with_straight_line">Conecte-se com uma linha reta</string>
-    <string name="attach_roads_descr">Aproxime sua trilha com uma rota usando o mapa offline. Isso fornecerá valores de elevação corrigidos, detalhes da estrada e curvas usadas durante a navegação.</string>
+    <string name="attach_roads_descr">Aproxime sua trilha de estradas permitidas para rota entre pontos e associe instruções de curva precisas e propriedades de rota.</string>
     <string name="duplacate_widget_added_snackbar">Um widget duplicado está sendo adicionado à lista.</string>
     <string name="true_bearing_wdiget_desc">Ângulo entre o norte verdadeiro e o ponto alvo observado de sua localização.</string>
     <string name="auto_backup_preference_desc">Por padrão, o Android salva backups dos favoritos, tokens de mapas e configurações do OsmAnd para os restaurar outros dispositivos ou após reinstalação. Esse backup é limitada a 25 MB.
@@ -4797,9 +4799,9 @@
     <string name="map_widget_ant_bicycle_cadence">Cadência de bicicleta</string>
     <string name="ant_go_to_store">Ir para a Loja</string>
     <string name="ant_write_to_gpx">Gravar dados para trilha</string>
-    <string name="ant_missing_dependency_descr">O serviço necessário \"%1$s\" não foi encontrado.
-\nVocê precisa instalar o serviço ANT+ Plugins ou pode precisar atualizar sua versão existente, se já a tiver.
-\nDeseja lançar a Play Store para obtê-lo\?</string>
+    <string name="ant_missing_dependency_descr">Não foi possível encontrar o serviço \"%1$s\".
+\nVocê precisa instalar ou atualizar o Serviço de Plugins ANT+.
+\nDeseja iniciar a Play Store para fazer isso\?</string>
     <string name="ant_read_data">Ler dados</string>
     <string name="map_widget_ant_heart_rate_desc">Mostra a frequência cardíaca do usuário durante uma determinada atividade em tempo real</string>
     <string name="ant_missing_dependency">Dependência ausente</string>
@@ -4834,7 +4836,7 @@
     <string name="location_simulation_speedup">Velocidade da simulação</string>
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="shared_string_terms_of_use">Termos de uso</string>
-    <string name="send_uuid_preference_desc">O UUID aleatório é utilizado para baixar mapas off-line dos servidores do OsmAnd para monitorizar a utilização justa dos recursos do servidor, prever a utilização do tráfego e gerar relatórios de mapas mensais anónimos.</string>
+    <string name="send_uuid_preference_desc">Um UUID aleatório é usado para baixar mapas offline dos servidores OsmAnd para monitorar o uso justo dos recursos do servidor, prever padrões de tráfego e gerar relatórios de mapas mensais anônimos.</string>
     <string name="send_uuid_preference">Enviar identificador único de utilizador (UUID)</string>
     <string name="terms_of_service_desc">Ao baixar mapas, concorda com %1$s e %2$s.</string>
     <string name="current_location_widget">Coordenadas: Localização atual</string>
@@ -4919,4 +4921,26 @@
     <string name="map_rendering_engine_v1">Versão 1</string>
     <string name="purchases_feature_desc_external_sensors">Exiba e registre dados de sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
     <string name="share_crash_log">Compartilhar registro de falhas</string>
+    <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se você parar agora, o aplicativo pode não funcionar corretamente.</string>
+    <string name="release_4_3">Novo mecanismo de renderização de mapas mais rápido (versão 2 - OpenGL), com visualização 2.5D
+\n
+\n • Animação suave em alterações de localização durante o movimento
+\n
+\n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
+\n
+\n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
+\n
+\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n
+\n • Corrigida opção de \"Posição na tela\"
+\n
+\n • GPX: adicionado suporte para etiquetas \"link\", \"cmt\", \"desc\" e para quaisquer extensões personalizadas
+\n
+\n • Lista de \"mapas náuticos\" reorganizada
+\n
+\n • Adicionado suporte para sensores ANT+
+\n
+\n • Opção adicionada para desativar o descarregamento do UUID
+\n
+\n</string>
 </resources>
