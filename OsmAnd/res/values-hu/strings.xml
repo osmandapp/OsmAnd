@@ -253,9 +253,9 @@
     <string name="shared_string_previous">Előző</string>
     <string name="unit_of_length_descr">Távolság mértékegységének módosítása.</string>
     <string name="unit_of_length">Hosszmértékegységek</string>
-    <string name="si_mi_feet">Mérföld/láb</string>
-    <string name="si_mi_yard">Mérföld/yard</string>
-    <string name="si_km_m">Kilométer/méter</string>
+    <string name="si_mi_feet">Mérföld, láb</string>
+    <string name="si_mi_yard">Mérföld, yard</string>
+    <string name="si_km_m">Kilométer, méter</string>
     <string name="yard">yard</string>
     <string name="foot">láb</string>
     <string name="mile_per_hour">mf/h</string>
@@ -1053,7 +1053,7 @@
     <string name="edit_tilesource_choose_existing">Meglévő kijelölése…</string>
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
     <string name="base_world_map">Föld alaptérkép</string>
-    <string name="map_magnifier">Térképnagyító</string>
+    <string name="map_magnifier">Térképnagyítás</string>
     <string name="animate_routing_route_not_calculated">Kérjük, először számítsa ki az útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
@@ -1984,7 +1984,7 @@
     <string name="get_it">Beszerzés</string>
     <string name="osm_live_banner_desc">Szerezzen korlátlan számú térképletöltési lehetőséget, valamint heti, napi vagy akár óránkénti térképfrissítést.</string>
     <string name="osmand_plus_banner_desc">Korlátlan számú térképletöltés és -frissítés, valamint Wikipédia-bővítmény.</string>
-    <string name="si_mi_meters">Mérföld/méter</string>
+    <string name="si_mi_meters">Mérföld, méter</string>
     <string name="search_map">Térkép keresése…</string>
     <string name="first_usage_wizard_desc">Engedélyezd az OsmAndnak a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
     <string name="location_not_found">Hely nem található</string>
@@ -2184,7 +2184,7 @@
     <string name="do_not_show_startup_messages">Ne mutasson üzeneteket indításkor</string>
     <string name="do_not_show_startup_messages_desc">Ne mutassa az alkalmazás árleszállításainak és a különleges helyi események üzeneteit.</string>
     <string name="parking_options">Parkolási beállítások</string>
-    <string name="full_version_thanks">Köszönjük, hogy megvásároltad az OsmAnd fizetős verzióját.</string>
+    <string name="full_version_thanks">Köszönjük, hogy megvásárolta az OsmAnd fizetős verzióját.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
     <string name="driving_region_automatic">Automatikus</string>
@@ -2206,7 +2206,7 @@
     <string name="subscribe_email_error">Hiba</string>
     <string name="subscribe_email_desc">Iratkozzon fel az alkalmazás akciókról szóló hírlevelünkre és kap további 3 térképletöltést!</string>
     <string name="depth_contour_descr">Tengeri mélységvonalak és hajózási jelzések.</string>
-    <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat</string>
+    <string name="sea_depth_thanks">Köszönjük, hogy megvásárolta a tengeri mélységvonalakat</string>
     <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
     <string name="index_item_depth_points_southern_hemisphere">Déli félteke, tengeri mélységpontok</string>
     <string name="index_item_depth_points_northern_hemisphere">Északi félteke, tengeri mélységpontok</string>
@@ -2478,7 +2478,7 @@
     <string name="first_intermediate_dest_description">Első megállót ad hozzá</string>
     <string name="subsequent_dest_description">Célpont följebb mozgatása, vagy létrehozása</string>
     <string name="show_closed_notes">Lezárt jegyzetek megjelenítése</string>
-    <string name="switch_osm_notes_visibility_desc">OSM-jegyzetek megjelenítése vagy elrejtése a térképen.</string>
+    <string name="switch_osm_notes_visibility_desc">OSM-jegyzetek megjelenítése/rejtése a térképen.</string>
     <string name="gpx_file_desc">GPX – megfelelő export a JOSM és más OSM-szerkesztők számára.</string>
     <string name="osc_file_desc">OSC – OpenStreetMapnek megfelelő export.</string>
     <string name="shared_string_gpx_file">GPX-fájl</string>
@@ -3141,7 +3141,7 @@
     <string name="shared_string_default">Alapértelmezett</string>
     <string name="lang_oc">okcitán</string>
     <string name="app_mode_pickup_truck">Kisteherautó</string>
-    <string name="day">napra</string>
+    <string name="day">nappali</string>
     <string name="days_2_4">napra</string>
     <string name="days_5">napra</string>
     <string name="week">hétre</string>
@@ -4611,7 +4611,7 @@
     <string name="calculate_online">Online kiszámítás</string>
     <string name="bearing_secondary_desc">A(z) %1$s – %2$s – %3$s formátumú adatot megváltoztathatja.</string>
     <string name="widget_secondary_desc_part_of">A(z) %1$s bővítmény része.</string>
-    <string name="gps_info_widget_desc">Megjeleníti a készüléek által észlelt illetve használt műholdak számát.</string>
+    <string name="gps_info_widget_desc">Megjeleníti a készüléke által észlelt illetve használt műholdak számát.</string>
     <string name="elevation_profile_widget_desc">Megjeleníti a jelenlegi útvonal magassági adait és lejtési viszonyait.</string>
     <string name="parking_widget_desc">Megjeleníti a képernyő középpontjától a parkolási helyig tartó távolságot.</string>
     <string name="altitude_widget_desc">Megjeleníti az aktuális földrajzi hely tengerszint feletti magasságát.</string>
