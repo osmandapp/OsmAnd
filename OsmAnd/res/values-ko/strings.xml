@@ -2806,4 +2806,45 @@
     <string name="routing_attr_freeride_policy_only_if_necessary_name">필요한 경우</string>
     <string name="routing_attr_freeride_policy_allow_name">허용</string>
     <string name="backup_version_history_delete_descr">OsmAnd Cloud에서 더 이상 사용되지 않는 데이터 유형에 대한 변경 로그를 삭제하시겠습니까\?</string>
+    <string name="empty_screen_weather_contours">지도에서 날씨 등고선을 보려면 켭니다.</string>
+    <string name="empty_screen_weather_pressure_layer">지도에서 압력 레이어를 보려면 켭니다.</string>
+    <string name="send_uuid_preference">고유 사용자 식별자(UUID) 보내기</string>
+    <string name="features_menu_group">기능</string>
+    <string name="change_data_storage_folder">저장 폴더 변경</string>
+    <string name="external_sensors_plugin_description">외부 센서에 액세스하여 심박수, 자전거 속도, 사이클링 파워 또는 케이던스 등을 읽습니다. 장치가 ANT+ 무선 개인 네트워크 프로토콜을 통해 각 센서에 연결되어 있어야 합니다.</string>
+    <string name="shared_string_identifiers">활동추적</string>
+    <string name="custom_search">사용자 지정 검색</string>
+    <string name="quick_action_add_favorite">즐겨찾기 추가</string>
+    <string name="auto_backup_title">자동-백업</string>
+    <string name="shared_string_weather">날씨</string>
+    <string name="explore_weather_forecast">일기 예보를 탐색하십시오.</string>
+    <string name="action_not_supported_with_map_style">이 작업은 선택한 맵 스타일에서 지원되지 않습니다.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd가 \'버전 1\' 맵 렌더링으로 되돌렸습니다. 설정에서 새로운 \'버전 2 (OpenGL)\'렌더링 엔진으로 다시 전환 할 수 있습니다.
+\n
+\n오류 로그를 제공하여 개선을 지원하세요.</string>
+    <string name="external_sensors_support">외부 센서 지원</string>
+    <string name="map_widget_distance_by_tap">탭으로 거리</string>
+    <string name="speed_cameras_alert">일부 국가에서는 과속 단속 카메라 경고가 법으로 금지되어 있습니다.</string>
+    <string name="rendering_engine_failed">OsmAnd의 지도 렌더링이 최근에 충돌했습니다.</string>
+    <string name="map_rendering_engine_v1">버전 1</string>
+    <string name="map_rendering_engine_v2">버전 2 (오픈GL)</string>
+    <string name="map_rendering_engine_descr">버전 2 (OpenGL)는 2.5D보기를 특징으로하는 더 빠른지도 렌더링 엔진입니다. 버전 1 렌더링은 OsmAnd 4.3 이전의 기본값이었으며 구형 장치에서는 여전히 선호됩니다.</string>
+    <string name="map_rendering_engine">지도 렌더링 엔진</string>
+    <string name="osmand_plus_extended_description_part3">지도 보기
+\n • 위치 및 방향 표시
+\n • 선택적으로 나침반 또는 동작 방향에 따라 사진을 정렬합니다.
+\n • 가장 중요한 장소를 즐겨찾기로 저장
+\n • 주변의 POI (관심 지점) 표시
+\n • 특수 온라인 타일, 위성보기 (Bing에서), 투어링 / 내비게이션 GPX 트랙과 같은 다양한 오버레이 및 사용자 정의 가능한 투명도가있는 추가 레이어 표시
+\n • 선택적으로 장소 이름을 영어, 지역 또는 음성 철자로 표시
+\n</string>
+    <string name="no_plugins_enabled">활성화된 플러그인이 없습니다. 사용 가능한 플러그인 목록은 \'메뉴\' → \'플러그인\'에서 찾을 수 있습니다.</string>
+    <string name="skip_map_downloading_desc">오프라인 맵이 설치되어 있지 않습니다. 목록에서 지도를 선택하거나 나중에 \'메뉴 - %1$s\'를 통해 지도를 다운로드할 수 있습니다.</string>
+    <string name="first_usage_greeting">인터넷 연결 없이 길을 찾고 새로운 장소를 발견하세요</string>
+    <string name="storage_directory_shared">공유 메모리</string>
+    <string name="external_sensors_plugin_name">외부 센서</string>
+    <string name="terms_of_service_desc">지도를 다운로드하면 %1$s 및 %2$s에 동의하는 것입니다.</string>
+    <string name="no_purchases">구매한 항목이 없습니다.</string>
+    <string name="speed_cameras_restart_descr">앱을 다시 시작하여 모든 과속 단속 카메라 데이터를 삭제합니다.</string>
+    <string name="speed_cameras_removed_descr">이 기기에는 과속 단속 카메라가 없습니다.</string>
 </resources>

@@ -178,11 +178,10 @@
     <string name="favorite_delete_group">Delete Group</string>
     <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
     <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
-    <string name="attach_to_roads_banner_desc">Attach your track to the nearest allowed roads to route between points with precise turn instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
-    <string name="attach_roads_descr">Approximate your track with a route using the offline map. This will provide corrected elevation values, road details, and turns used during the navigation.</string>
+    <string name="attach_roads_descr">Approximate your track to allowed roads to route between points and associate precise turn instructions and route properties.</string>
     <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
@@ -680,7 +679,6 @@
     • Added option to change the route line appearance\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
-    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>

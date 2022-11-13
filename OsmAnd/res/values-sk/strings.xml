@@ -68,20 +68,20 @@
     <string name="map_online_data_descr">Použiť online mapy (stiahnuť a dočasne uložiť na pamäťovú kartu).</string>
     <string name="shared_string_online_maps">Online mapy</string>
     <string name="online_map_settings_descr">Zvoliť online alebo dlaždicové mapové zdroje.</string>
-    <string name="osmand_rastermaps_plugin_description">Získajte prístup k mnohým online (tiež nazývané dlaždicové alebo rastrové) mapám, od preddefinovaných dlaždíc OpenStreetMap (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.
+    <string name="osmand_rastermaps_plugin_description">Získajte prístup k mnohým online (tiež nazývané dlaždicové alebo rastrové) mapám, ako predgenerované dlaždice OSM, satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.
 \n
-\n Všetky tieto mapy môžu byť použité ako hlavná (základná) mapa alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. offline mapy z OsmAnd). Aby sa podkladová mapa lepšie zviditeľnila, je možné niektoré objekty z vektorových máp OsmAnd skryť cez menu \"Nastaviť mapu\".
+\n Všetky tieto mapy môžu byť zobrazené ako hlavná (základná) mapa alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. offline mapy z OsmAnd). Aby sa podkladová mapa lepšie zviditeľnila, je možné niektoré objekty z vektorových máp OsmAnd skryť cez menu \"Nastaviť mapu\".
 \n
 \n Stiahnite mapy priamo alebo ich skopírujte ako SQLite databázu do dátového priečinka OsmAnd pomocou viacerých programov na prípravu máp.</string>
     <string name="osmand_background_plugin_description">Zobrazí nastavenia na zapnutie stopovania a navigácie v pozadí systému pravidelným prebúdzaním GPS zariadenia (pri vypnutej obrazovke).</string>
     <string name="osmand_accessibility_description">Zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť generovaného hlasu, navigovanie smerovým D-padom, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
-    <string name="osmand_development_plugin_description">Umožňuje nastaviť OsmAnd pre testovanie: simulácia navigačnej trasy, zobrazenie výkonu vykresľovania, skúšobné hlasové pokyny, atď. Modul nie je potrebný pre bežné použitie programu.</string>
+    <string name="osmand_development_plugin_description">Poskytuje funkcie pre testovanie a ladenie OsmAndu: simulácia navigačnej trasy, sledovanie vykresľovania, overenie výkonu, skúšobné hlasové pokyny, atď. Tento modul nie je potrebný pre bežné použitie programu.</string>
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie.</string>
     <string name="prefs_plugins">Zásuvné moduly</string>
-    <string name="osm_editing_plugin_description">Umožní vám prispievať do OpenStreetMap, globálnej komunity s cieľom vytvoriť podrobnú mapu sveta a poskytovať aktuálne slobodné údaje pre všetkých používateľov.
+    <string name="osm_editing_plugin_description">Prispievajte do OpenStreetMap, globálnej komunity tvoriacej podrobnú mapu sveta a poskytujúcej aktuálne slobodné údaje pre každého používateľa.
 \n
-\nInformácie o úpravách mapy môžete nájsť na webstránke https://osmand.net/docs/user/plugins/osm-editing</string>
+\nInformácie o úpravách mapy môžete nájsť na webstránke https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Zvoľte hlas a otestujte ho prehraním oznámení:</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -743,7 +743,7 @@
     <string name="osmand_parking_pm">popoludní</string>
     <string name="osmand_parking_am">dopoludnia</string>
     <string name="osmand_parking_position_name">Parkovacie miesto</string>
-    <string name="osmand_parking_plugin_description">Umožňuje nastaviť bod na mape, kde ste zanechali auto na ulici a oznámiť cez kalendár keď začne čas parkovania. Modul pomáha sledovať čas parkovania a polohu vášho auta. Umiestnite značku na mape a choďte do \"Akcie\" a použite \"Pridať parkovanie\".</string>
+    <string name="osmand_parking_plugin_description">Označte kde je zaparkované vaše auto na ulici a oznámte vášmu kalendáru kedy vyprší čas parkovania. Pre umiestnenie značky označte miesto na mape a choďte do \"Akcie\" a použite \"Pridať parkovanie\".</string>
     <string name="osmand_parking_plugin_name">Parkovacie miesto</string>
     <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
     <string name="context_menu_item_delete_parking_point">Odstrániť parkovaciu značku</string>
@@ -881,9 +881,11 @@
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytvárajte obrazové/zvukové/video poznámky počas výletu, buď tlačidlom na mape alebo v kontextovom menu polohy na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
-    <string name="srtm_plugin_description">Informácie o teréne, ako vrstevnice, tieňované reliéfy a svahy, vám pomôžu opticky zhodnotiť tvar povrchu krajiny, zohľadniť zakrivenie, vrcholy, strmosť, body rovnakej výšky a ďalšie. Topografické informácie môžu byť na mape reprezentované tieňovaním reliéfu, vrstevnicami a farbami vyjadrujúcimi odchýlku od roviny. Údaje pochádzajú od SRTM a ASTER.
+    <string name="srtm_plugin_description">Informácie o teréne, ako vrstevnice, tieňované reliéfy a svahy, vám pomôžu opticky zhodnotiť tvar povrchu krajiny, schodnosť a ďalšie. Topografické informácie môžu byť na mape reprezentované tieňovaním svahov, vrstevnicami a farbami sklonu.
 \n
-\nAko na to - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nÚdaje pochádzajú od SRTM a ASTER.
+\n
+\nĎalšie podrobnosti na http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
@@ -1239,9 +1241,9 @@
     <string name="speak_poi">Blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">Umožňuje nahrať, uložiť a analyzovať údaje o vašom pohybe ako rýchlosť, stúpanie, klesanie alebo reliéf trasy, ktoré môžu byť následne znovu použité, vylepšené, doplnené alebo zdieľané s priateľmi.
+    <string name="record_plugin_description">Nahrajte vaše výlety alebo tréningy a analyzujte údaje o vašom pohybe ako rýchlosť, stúpanie, klesanie alebo reliéf trasy. Zaznamenané stopy môžu byť archivované, zdieľané s priateľmi, upravované alebo ďalej spracovávané.
 \n
-\nAko na to - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
@@ -1362,10 +1364,10 @@
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
     <string name="roads_only">Iba cesty</string>
-    <string name="plugin_nautical_descr">Obohatí mapu o informácie o lodných trasách, navigačných svetlách, nebezpečných zónach, povolených alebo zakázaných zónach pre pohyb lodí, atď. Pre použitie stiahnite Námorné mapy a zapnite štýl \"Námorná mapa\" v \"Nastaviť mapu\".
+    <string name="plugin_nautical_descr">Obohatí mapu o informácie o lodných trasách, navigačných svetlách, nebezpečných námorných zónach, obmedzeniach na pohyb alebo pristávaní lodí, atď. Pre použitie stiahnite príslušné Námorné mapy a zapnite štýl \"Námorná mapa\" v \"Nastaviť mapu\".
 \n
-\nAko na to - https://osmand.net/docs/user/plugins/nautical-charts</string>
-    <string name="plugin_ski_descr">Navrhnutý pre navigáciu v strediskách zimných športov. Sledujte zjazdovky, vleky a stopy farebne rozlíšené podľa obtiažnosti. Po zapnutí použite štýl mapy \"Zima a lyžovanie\" v menu \"Nastaviť mapu\".</string>
+\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_ski_descr">Navrhnutý pre navigáciu v strediskách zimných športov. Sledujte zjazdovky, vleky a bežecké stopy farebne rozlíšené podľa obtiažnosti. Pre požitie zapnite tento modul a použite štýl mapy \"Zima a lyžovanie\" v menu \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Cestovný pohľad\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov. 
 \n 
 \nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). 
@@ -2354,7 +2356,7 @@
     <string name="change_color">Zmeniť farbu</string>
     <string name="edit_name">Upraviť názov</string>
     <string name="srtm_color_scheme">Farebná schéma</string>
-    <string name="show_from_zoom_level">Zobraziť od úrovne priblíženia</string>
+    <string name="show_from_zoom_level">Zobrazenie začne od úrovne priblíženia</string>
     <string name="routing_attr_allow_private_name">Povoliť súkromný prístup</string>
     <string name="routing_attr_allow_private_description">Povoliť prístup do súkromných oblastí.</string>
     <string name="display_zoom_level">Priblíženie zobrazenia: %1$s</string>
@@ -2385,7 +2387,7 @@
     <string name="mapillary_action_descr">Zdieľajte vlastný pohľad z úrovne ulice cez Mapillary.</string>
     <string name="mapillary_widget_descr">Umožňuje rýchle prispievanie do Mapillary.</string>
     <string name="mapillary_descr">Online fotografie z ulíc pre každého. Objavte miesta, spolupracuje, zachyťte svet.</string>
-    <string name="plugin_mapillary_descr">Prináša fotografie z úrovne ulice. Kde obrázky chýbajú, môžete ich pridať vy, aby ich aj iní mohli použiť. Pre zapnutie vrstvy Mapillary zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
+    <string name="plugin_mapillary_descr">Fotografie z úrovne ulice. Môžete prispieť aj vy. Pre zobrazenie existujúcich údajov ako vrstvu na mape zapnite \"Snímky z úrovne ulice\" v menu \"Nastaviť mapu\".</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="mapillary_image">Obrázok Mapillary</string>
     <string name="distance_moving">Vzdialenosť opravená</string>
@@ -3955,9 +3957,9 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
-    <string name="open_place_reviews_plugin_description">Umožňuje vám prispievať do projektu OpenPlaceReviews (otvorené hodnotenia objektov). Napríklad fotografie, recenzie, odkazy o verejných miestach ako sú reštaurácie, hotely, múzeá a body záujmu.
+    <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
-\nInštrukcie ako prispievať nájdete na našej webstránke - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nInštrukcie ako prispievať nájdete na našej webstránke https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
@@ -4200,7 +4202,7 @@
     <string name="purchases_feature_desc_nautical">Získajte prístup k údajom o námornej hĺbke</string>
     <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy s tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
     <string name="purchases_feature_desc_wikivoyage">Skúmajte sprievodcov Wikivoyage offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
-    <string name="purchases_feature_desc_wikipedia">Offline Wikipédia vám na vašich výletoch pomôže zistiť viac o navštívených miestach. Je dostupná bez internetu a zobrazuje články Wikipédie vzťahujúce sa k bodom záujmu na mape. Nezabudnite si stiahnuť mapy Wikipédie pre zvolený región.</string>
+    <string name="purchases_feature_desc_wikipedia">Poskytuje offline všetky články Wikipédie vzťahujúce sa k geografickým miestam, čím vám pomôže spoznať navštevované miesta na vašom výlete jednoduchým stlačením na mape. Nezabudnite si stiahnuť mapy Wikipédie pre príslušný región.</string>
     <string name="release_4_0">• Zálohovanie do Cloudu
 \n
 \n • Pridaný nočný režim pre mapový štýl \"Topo\"
@@ -4594,7 +4596,7 @@
 \n
 \n</string>
     <string name="av_def_action_choose">Na vyžiadanie</string>
-    <string name="street_name_widget_desc">Nástroj názvu ulice zobrazuje názov aktuálnej ulice s priamou šípkou alebo názov nasledujúcej ulice spolu s manévrom, ktorý má byť vykonaný.</string>
+    <string name="street_name_widget_desc">Nástroj Názov ulice zobrazuje názov aktuálnej ulice s priamou šípkou alebo názov nasledujúcej ulice spolu so šípkou označujúcou nasledovné zabočenie.</string>
     <string name="coordinates_widget_desc">Zobrazuje zemepisné súradnice aktuálnej polohy.</string>
     <string name="map_widget_trip_recording_downhill">Z kopca</string>
     <string name="map_widget_trip_recording_uphill">Do kopca</string>
@@ -4609,25 +4611,25 @@
     <string name="map_widget_trip_recording_duration">Trvanie</string>
     <string name="map_widget_trip_recording_distance">Vzdialenosť</string>
     <string name="routing_attr_hazmat_category_name">Kategória nebezpečného nákladu</string>
-    <string name="current_time_widget_desc">Zobrazuje aktuálny čas zariadenia.</string>
-    <string name="get_altitude_information">Získať informácie o výške</string>
+    <string name="current_time_widget_desc">Zobrazuje aktuálny čas podľa vášho zariadenia.</string>
+    <string name="get_altitude_information">Získať informácie o nadmorskej výške</string>
     <string name="navigation_points">Navigačné body</string>
-    <string name="get_altitude_data">Získať údaje výšky</string>
-    <string name="calculate_altitude">Vypočítať výšku</string>
+    <string name="get_altitude_data">Získať údaje nadmorskej výšky</string>
+    <string name="calculate_altitude">Vypočítať nadmorskú výšku</string>
     <string name="shared_string_speed">Rýchlosť</string>
     <string name="colour_of_circles">Farba kružníc</string>
     <string name="compass_on_circles">Kompas na kružniciach</string>
     <string name="distance_circles">Kružnice vzdialenosti</string>
     <string name="circle_settings">Nastavenia kružníc</string>
     <string name="routing_attr_avoid_4wd_only_description">Vyhnúť sa cestám vhodným len terénnym vozidlám s pohonom 4x4</string>
-    <string name="radius_rules_widget_desc">Pravítko pomáha určiť polomer okolo zvoleného bodu na mape zobrazením kružníc vzdialeností na mape.</string>
+    <string name="radius_rules_widget_desc">Polomerové pravítko zobrazuje kružníce vzdialeností od zvoleného bodu na mape.</string>
     <string name="battery_widget_desc">Zobrazuje úroveň nabitia batérie zariadenia.</string>
     <string name="magnetic_bearing_widget_desc">Uhol medzi magnetickým severom a cieľovým bodom pozorovaný z vašej polohy.</string>
     <string name="calculate_online">Vypočítať online</string>
-    <string name="no_altitude_data">Žiadne údaje o výške</string>
+    <string name="no_altitude_data">Žiadne údaje o nadmorskej výške</string>
     <string name="app_mode_mountain_bicycle">Horský bicykel</string>
     <string name="route_maneuvers_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
-    <string name="calculating_altitude">Vypočítava sa výška</string>
+    <string name="calculating_altitude">Vypočítava sa nadmorská výška</string>
     <string name="track_attach_to_the_roads_descr">Stopa bude prichytená k ceste pomocou offline máp, geometria stopy bude zmenená.</string>
     <string name="turn_on_public_transport_description">Zapnite pre zobrazenie liniek hromadnej dopravy na mape.</string>
     <string name="explore_plans">Preskúmať možnosti predplatného</string>
@@ -4639,24 +4641,24 @@
     <string name="arrival_time_widget_desc">Čas príjazdu do cieľového bodu.</string>
     <string name="av_notes_choose_action_widget_desc">Zvoľte akciu.</string>
     <string name="widget_secondary_desc_part_of">Súčasť modulu %1$s.</string>
-    <string name="elevation_profile_widget_desc">Nástroj zobrazuje profil prevýšenia a svahu aktuálnej trasy.</string>
-    <string name="parking_widget_desc">Nástroj zobrazuje vzdialenosť od stredu obrazovky k parkovaciemu miestu.</string>
+    <string name="elevation_profile_widget_desc">Zobrazuje profil prevýšenia a svahu aktuálnej trasy.</string>
+    <string name="parking_widget_desc">Zobrazuje vzdialenosť od stredu obrazovky k vášmu parkovaciemu miestu.</string>
     <string name="altitude_widget_desc">Zobrazuje nadmorskú výšku aktuálnej polohy.</string>
     <string name="max_speed_widget_desc">Zobrazuje max. povolenú rýchlosť na práve používanej ceste.</string>
     <string name="current_speed_widget_desc">Zobrazuje aktuálnu rýchlosť podľa GPS senzora.</string>
-    <string name="gps_info_widget_desc">Zobrazuje počet satelitov, ktoré zariadenie práve vidí a používa.</string>
+    <string name="gps_info_widget_desc">Zobrazuje počet viditeľných a používaných satelitov.</string>
     <string name="shared_string_widget">Nástroj</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Skryť vojenské oblasti</string>
     <string name="routing_attr_avoid_fords_description">Vyhnúť sa brodom</string>
-    <string name="bearing_secondary_desc">Môžete zmeniť formát zobrazených údajov v: %1$s – %2$s – %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Formát súradníc môže byť zmenený v %1$s – %2$s – %3$s.</string>
-    <string name="mapillary_widget_desc">Nástroj poskytuje rýchly prístup k aplikácii Mapillary pre pridanie snímok z úrovne ulice.</string>
-    <string name="map_markers_bar_widget_desc">Nástroj na hornom paneli môže zobrazovať vzdialenosť a smer k značke od aktuálnej polohy. Je možné nastaviť zobrazenie 1 alebo 2 značiek na nástroji.</string>
-    <string name="lanes_widgets_desc">Nástroj jazdných pruhov zobrazuje rozloženie jazdných pruhov cesty a zvýrazňuje, ktoré pruhy použiť pri zapnutej navigácii.</string>
-    <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu, nasledujúce odbočenia, smerovanie, názov ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
-    <string name="bearing_desc">Nástroj smerovania zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (180 stupňov, 360 stupňov, miliradiány).</string>
+    <string name="bearing_secondary_desc">Môžete zmeniť použitý formát údajov v: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Môžete zmeniť formát súradníc v %1$s – %2$s – %3$s.</string>
+    <string name="mapillary_widget_desc">Poskytuje rýchly prístup k aplikácii Mapillary pre pridanie snímok z úrovne ulice.</string>
+    <string name="map_markers_bar_widget_desc">Nástroj Horný panel zobrazuje vzdialenosť a smer od aktuálnej polohy k mapovej značke. Je možné nastaviť nástroj pre zobrazenie 1 alebo 2 značiek.</string>
+    <string name="lanes_widgets_desc">Zobrazuje rozloženie jazdných pruhov cesty a zvýrazňuje, ktoré pruhy použiť počas navigácie.</string>
+    <string name="navigation_points_desc">Navigačné nástroje sa zapnú počas navigácie pre zobrazenie informácií ako vzdialenosť, čas príjazdu alebo zostávajúci čas, nasledujúce odbočenia, smerovanie, názov súčasnej alebo nasledujúcej ulice, jazdné pruhy, maximálna rýchlosť, blížiace sa varovania, body záujmu, body trasy.</string>
+    <string name="bearing_desc">Zobrazuje absolútne alebo relatívne smerovanie k cieľu v uhlových jednotkách (v režime 180 stupňov, 360 stupňov, alebo miliradiánov).</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnúť sa terénnym cestám</string>
-    <string name="audio_video_notes_desc">Nástroj poskytuje rýchly prístup k spusteniu/zastaveniu nahrávky (audio, video alebo foto).</string>
+    <string name="audio_video_notes_desc">Poskytuje rýchly prístup k spusteniu/zastaveniu audio, video alebo foto poznámky.</string>
     <string name="route_maneuvers">Manévre trasy</string>
     <string name="shared_string_mode">Režim</string>
     <string name="time_to_navigation_point_widget_settings_desc">Prepnite režim stlačením nástroja.</string>
@@ -4707,9 +4709,9 @@
     <string name="live_update_frequency_week_variant">Aktualizácie máp sú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd, na základe satelitných snímkov a výškových modelov. Rozdiel od nadmorskej výšky zaznamenanej zariadením môže byť použitý ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
-    <string name="accessibility_2d_view_on">2.5D zobrazenie Zapnuté</string>
+    <string name="accessibility_2d_view_on">2,5D zobrazenie zapnuté</string>
     <string name="download_complete">Sťahovanie dokončené</string>
-    <string name="accessibility_2d_view_off">2.5D zobrazenie Vypnuté</string>
+    <string name="accessibility_2d_view_off">2,5D zobrazenie vypnuté</string>
     <string name="auto_backup_title">Automatické zálohovanie</string>
     <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridávaný ako ďalší v zozname.</string>
     <string name="shared_string_duplicate">Duplikát</string>
@@ -4774,7 +4776,7 @@
     <string name="favorites_backup">Záloha obľúbených bodov</string>
     <string name="ant_missing_dependency">Chýbajúca závislosť</string>
     <string name="ant_write_to_gpx">Zapísať údaje do stopy</string>
-    <string name="ant_heart_rate_write_gpx_desc">Zapísať tep srdca do stopy</string>
+    <string name="ant_heart_rate_write_gpx_desc">Zahrnúť tep srdca do stopy</string>
     <string name="map_widget_ant_heart_rate">Srdcový tep (pulz)</string>
     <string name="map_widget_ant_heart_rate_desc">Zobrazuje srdcový tep používateľa v reálnom čase počas aktivity</string>
     <string name="map_widget_ant_bicycle_power">Výkon bicykla</string>
@@ -4784,12 +4786,12 @@
     <string name="map_markers_desc">Nástroj zobrazuje vzdialenosť alebo odhadovaný čas príjazdu (ETA) k prvým dvom značkám v zozname značiek.</string>
     <string name="map_widget_altitude_current_location">Nadmorská výška: súčasná poloha</string>
     <string name="map_widget_altitude_desc">Zobraziť nadmorskú výšku súčasnej polohy alebo stredu mapy</string>
-    <string name="external_sensors_plugin_description">Sledovanie srdcového tepu, rýchlosti bicykla, výkonu bicykla a frekvencii šliapania. Vyžaduje zariadenie spojené so senzormi týchto parametrov s pomocou bezdrôtového sieťového protokolu ANT+.</string>
+    <string name="external_sensors_plugin_description">Sprístupní externé senzory na čítanie napr. srdcového tepu, rýchlosti bicykla, výkonu bicykla a frekvencii šliapania. Vyžaduje zariadenie spojené so senzormi týchto parametrov s pomocou bezdrôtového sieťového protokolu ANT+.</string>
     <string name="simulate_location_by_gpx">Simulovať polohu pomocou GPX</string>
     <string name="location_simulation_cutoff">Simulácia preskočí prvé metre</string>
-    <string name="ant_missing_dependency_descr">Požadovaná služba \"%1$s\" sa nenašla.
-\nMusíte nainštalovať modul ANT+ alebo ho musíte aktualizovať ak ho už máte.
-\nChcete ho získať v Obchode Play\?</string>
+    <string name="ant_missing_dependency_descr">Nepodarilo sa nájsť požadovanú službu \"%1$s\".
+\nMusíte nainštalovať alebo aktualizovať službu pre moduly ANT+.
+\nChcete to urobiť cez Obchod Play\?</string>
     <string name="map_widget_ant_bicycle_speed_desc">Zobrazuje rýchlosť jazdy</string>
     <string name="current_location_widget">Súradnice: Súčasná poloha</string>
     <string name="purchases_feature_desc_cross_buy">Použite vaše predplatené funkcie na iných platformách (Android/iOS/web) bez ďalších nákladov.</string>
@@ -4814,10 +4816,10 @@
     <string name="nautical_depth_points">Námorné hĺbkové body</string>
     <string name="depth_contours">Hĺbkové vrstevnice</string>
     <string name="worldwide_maps">Celosvetové mapy</string>
-    <string name="map_widget_target_distance_desc">Nástroj zobrazuje vzdialenosť od fotoaparátu k cieľovej pozícii.</string>
-    <string name="map_widget_zoom_level_desc">Nástroj zobrazuje aktuálnu úroveň priblíženia mapy.</string>
-    <string name="map_widget_camera_distance_desc">Nástroj zobrazuje výšku fotoaparátu nad povrchom.</string>
-    <string name="map_widget_camera_tilt_desc">Nástroj zobrazuje uhol sklonu fotoaparátu v režime perspektívy . Predvolený je 90° (no žiadny sklon).</string>
+    <string name="map_widget_target_distance_desc">Zobrazuje vzdialenosť medzi fotoaparátom a cieľovou pozíciou.</string>
+    <string name="map_widget_zoom_level_desc">Zobrazuje aktuálnu úroveň priblíženia mapy.</string>
+    <string name="map_widget_camera_distance_desc">Zobrazuje výšku fotoaparátu nad povrchom.</string>
+    <string name="map_widget_camera_tilt_desc">Zobrazuje uhol sklonu fotoaparátu v režime perspektívy . Predvolený je 90° (žiadny sklon).</string>
     <string name="map_widget_camera_distance">Výška fotoaparátu</string>
     <string name="map_widget_camera_tilt">Sklon fotoaparátu</string>
     <string name="developer_widgets">Nástroje pre vývojárov</string>
@@ -4826,7 +4828,7 @@
     <string name="shared_string_2_5_d_view">2,5D zobrazenie</string>
     <string name="available_as_part_of_subscription_plan">Dostupné ako súčasť predplatného %1$s.</string>
     <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)\?</string>
-    <string name="coordinates_widget_map_center_desc">Nástroj zobrazuje zemepisné súradnice stredu mapy</string>
+    <string name="coordinates_widget_map_center_desc">Zobrazuje zemepisné súradnice stredu mapy</string>
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.
 \nŤuknite dvoma prstami na mapu pre zobrazenie vzdialenosti medzi označenými bodmi</string>
@@ -4875,7 +4877,7 @@
     <string name="restart_now">Reštartovať teraz</string>
     <string name="map_rendering_engine_v1">Verzia 1</string>
     <string name="map_rendering_engine_v2">Verzia 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Verzia 2 (OpenGL) je rýchlejšie vykresľovanie mapy aj s 2,5D pohľadom. Vykresľovanie Verzia 1 bolo predvolené do verzie OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.</string>
+    <string name="map_rendering_engine_descr">Verzia 2 (OpenGL) je rýchlejšie vykresľovanie mapy aj s 2,5D pohľadom. Vykresľovanie Verzia 1 bolo predvolené do OsmAnd 4.3 a je stále vhodnejšie pre staršie zariadenia.</string>
     <string name="map_rendering_engine">Spôsob vykresľovania mapy</string>
     <string name="weather_offline_forecast">Offline predpoveď</string>
     <string name="weather_online_cache">Online vyrovnávacia pamäť</string>
@@ -4910,17 +4912,18 @@
     <string name="weather_pressure_hectopascals">Hektopascaly</string>
     <string name="weather_pressure_inches_of_mercury">Palce ortute</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetre ortute</string>
-    <string name="weather_prefs_descr">24h hodinové predpovede &amp; 7-dňové predpovede každé 3 hodiny</string>
+    <string name="weather_prefs_descr">24-hodinové &amp; 7-dňové predpovede, aktualizované každé 3 hodiny</string>
     <string name="weather_temperature_celsius">Stupne Celzia</string>
     <string name="weather_temperature_fahrenheit">Stupne Fahrenheita</string>
-    <string name="action_not_supported_with_map_style">Akcia nie je podporovaná pri zvolenom mapovom štýle.</string>
+    <string name="action_not_supported_with_map_style">Táto akcia nie je podporovaná zvoleným mapovým štýlom.</string>
     <string name="empty_screen_weather_temperature_layer">Zapnite pre zobrazenie vrstvy teploty na mape.</string>
-    <string name="weather_plugin_description">Modul Počasie poskytuje
-\n- 5 vrstiev... 24h hodinové predpovede &amp; 7-dňové predpovede každé 3 hodiny
+    <string name="weather_plugin_description">Poskytuje
+\n- 24-hodinové a 7-dňové predpovede počasia na 5 vrstvách
 \n- nástroje podľa pozície
 \n- izočiary teploty a tlaku
-\nÚdaje o počasí sú poskytované GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
-    <string name="empty_screen_weather_clouds_layer">Zapnite pre zobrazenie vrstvy oblakov na mape.</string>
+\n
+\nÚdaje o počasí sú poskytované službou Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="empty_screen_weather_clouds_layer">Zapnite pre zobrazenie vrstvy oblačnosti na mape.</string>
     <string name="empty_screen_weather_contours">Zapnite pre zobrazenie izočiary počasia na mape.</string>
     <string name="empty_screen_weather_wind_layer">Zapnite pre zobrazenie vrstvy vetra na mape.</string>
     <string name="empty_screen_weather_pressure_layer">Zapnite pre zobrazenie vrstvy tlaku na mape.</string>
@@ -4930,4 +4933,18 @@
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_wind_knots">Uzly</string>
     <string name="temperature_widget_desc">Zobrazí teplotu pre súčasný stred mapy.</string>
+    <string name="rendering_attr_depthContourWidth_name">Hrúbka čiar</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Farebná schéma čiar</string>
+    <string name="map_widget_sunrise_desc">Zobrazuje čas najbližšieho východu slnka alebo zostávajúci čas do východu slnka.</string>
+    <string name="map_widget_sunset_desc">Zobrazuje čas najbližšieho západu slnka alebo zostávajúci čas do západu slnka.</string>
+    <string name="shared_string_next_sunset">Ďalší západ slnka</string>
+    <string name="shared_string_next_sunrise">Ďalší východ slnka</string>
+    <string name="shared_string_sunset">Západ slnka</string>
+    <string name="shared_string_sunrise">Východ slnka</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Tieto nástroje zobrazujú informácie o nasledujúcim východe a západe slnka.</string>
+    <string name="map_widget_group_sunrise_sunset">Východ slnka, západ slnka</string>
+    <string name="depth_contour_lines">Hĺbkové vrstevnice</string>
+    <string name="turn_on_nautical_depth_description">Zapnite pre zobrazenie námorných hĺbkových údajov na mape.</string>
+    <string name="shared_string_time_left">Zostávajúci čas</string>
+    <string name="switch_mode_by_tapping_on_widget">Prepnite režim stlačením nástroja.</string>
 </resources>
