@@ -164,20 +164,20 @@
     <string name="map_online_data_descr">Online-Karten verwenden (Kacheln auf die Speicherkarte herunterladen und zwischenspeichern).</string>
     <string name="shared_string_online_maps">Online-Karten</string>
     <string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen auswählen.</string>
-    <string name="osmand_rastermaps_plugin_description">Greifen Sie auf viele Arten von Online-Karten (sogenannte Kachel- oder Rasterkarten) zu, von vordefinierten OSM-Kacheln (wie Mapnik) bis hin zu Satellitenbildern und Spezialebenen wie Wetterkarten, Klimakarten, geologischen Karten, Schummerungsebenen usw.
+    <string name="osmand_rastermaps_plugin_description">Zugriff auf viele Online-Karten (so genannte Kachel- oder Rasterkarten), wie vorgerenderte OSM-Kacheln, Satellitenbilder und Spezialebenen wie Wetterkarten, Klimakarten, geologische Karten, Hügelschattenebenen usw.
 \n
-\n Jede dieser Karten kann als anzuzeigende Hauptkarte (Basiskarte) oder als Überlagerung oder Unterlage einer anderen Basiskarte (wie den Offline-Vektorkarten von OsmAnd) verwendet werden. Bestimmte Elemente der OsmAnd-Vektorkarten können über das Menü „Karte konfigurieren“ ausgeblendet werden, um jede unterlegte Karte besser sichtbar zu machen.
+\n Jede dieser Karten kann als Hauptkarte (Basiskarte) oder als Überlagerung oder Hinterlegung anderen Basiskarten (wie die Offline-Vektorkartes von OsmAnd) angezeigt werden. Bestimmte Elemente der OsmAnd-Vektorkarten können über das Menü \"Karte konfigurieren\" ausgeblendet werden, um die darunter liegende Karte besser sichtbar zu machen.
 \n
 \n Laden Sie Kachelkarten direkt herunter oder kopieren Sie sie als SQLite-Datenbankdateien in den Datenordner von OsmAnd, indem Sie eines der vielen Kartenvorbereitungstools von Drittanbietern verwenden.</string>
     <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundverfolgung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm).</string>
-    <string name="osmand_accessibility_description">Stellt die Eingabehilfen des Geräts direkt in OsmAnd zur Verfügung. Dadurch kann z. B. die Abspielgeschwindigkeit der Sprachsynthese-Stimme, die Konfiguration der Steuerkreuz-Navigation, die Benutzung eines Trackballs zur Zoomsteuerung oder die Sprachausgabe, z. B. die automatische Ansage Ihrer Position, konfiguriert werden.</string>
-    <string name="osmand_development_plugin_description">Ermöglicht die Konfiguration von OsmAnd zu Testzwecken: Simulation von Navigationsrouten, Überprüfung der Bildschirmdarstellungsleistung usw. Das Plugin ist für die normale Nutzung der Anwendung nicht erforderlich.</string>
+    <string name="osmand_accessibility_description">Macht die Bedienungshilfen des Geräts direkt in OsmAnd verfügbar. Dies erleichtert z.B. die Anpassung der Sprechgeschwindigkeit für Text-to-Speech-Stimmen, die Konfiguration der D-Pad-Navigation, die Verwendung eines Trackballs zur Zoomsteuerung oder Text-to-Speech-Feedback, um beispielsweise Ihre Position automatisch anzusagen.</string>
+    <string name="osmand_development_plugin_description">Bietet Funktionen zum Testen und Debuggen von OsmAnd: Simulieren von Navigationsrouten, Überwachen der Bildschirmdarstellung, Prüfen der Leistung usw. Dieses (Erweiterungs)Modul ist für die normale Nutzung der App nicht erforderlich.</string>
     <string name="plugins_screen">Erweiterungen</string>
     <string name="prefs_plugins_descr">Erweiterungen aktivieren weitere Einstellungen und zusätzliche Funktionen.</string>
     <string name="prefs_plugins">Erweiterungen</string>
-    <string name="osm_editing_plugin_description">Ermöglicht es Ihnen, Beiträge zu OpenStreetMap zu leisten, einer globalen Gemeinschaft, deren Ziel es ist, eine umfassende Karte der Welt zu erstellen und jedem Nutzer aktuelle Open-Source-Daten zur Verfügung zu stellen.
+    <string name="osm_editing_plugin_description">Leisten Sie einen Beitrag zu OpenStreetMap, einer globalen Gemeinschaft, die eine umfassende Karte der Welt unterhält und jedem Nutzer aktuelle Open-Source-Daten zur Verfügung stellt.
 \n
-\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website https://osmand.net/docs/user/plugins/osm-editing</string>
+\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website https://osmand.net/docs/user/plugins/osm-editing.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden wahrscheinlich schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
     <string name="play_commands_of_currently_selected_voice">Eine Stimme auswählen und mittels Abspielen von Ansagen testen:</string>
     <string name="debugging_and_development">OsmAnd-Entwicklung</string>
@@ -867,7 +867,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkposition</string>
-    <string name="osmand_parking_plugin_description">Ermöglicht das Festlegen eines Punktes auf der Karte, an dem Ihr Auto auf der Straße abgestellt ist, und benachrichtigt Ihren Kalender, wenn die Parkzeit beginnt. Das Plugin hilft dabei, die Parkzeit und den Standort Ihres Autos zu verfolgen. Um eine Markierung zu setzen, wählen Sie einen Ort auf der Karte, dann gehen Sie zu Aktionen und drücken Sie \"Parkplatz hinzufügen\".</string>
+    <string name="osmand_parking_plugin_description">Markieren Sie, wo Ihr Auto geparkt ist, und informieren Sie Ihren Kalender, wenn die Parkuhr abläuft. Um die Markierung zu setzen, wählen Sie einen Ort auf der Karte, gehen Sie zu \"Aktionen\" und tippen Sie auf \"Parkplatz hinzufügen\".</string>
     <string name="osmand_parking_plugin_name">Parkposition</string>
     <string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
     <string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -955,9 +955,11 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Reliefs und Steigungen helfen Ihnen, die Form der Landoberfläche unter Berücksichtigung von Krümmung, Extremen, Steilheit, Punkten gleicher Höhe und mehr visuell zu beurteilen. Topografische Informationen auf einer Karte können durch Hangschattierungen, Höhenlinien für die Steigung und das Gefälle sowie durch die Farbe der Abweichung des Neigungswinkels von der Ebene dargestellt werden. Die Daten stammen von SRTM und ASTER.
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Steigungen helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Neigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
 \n
-\nAnleitungen - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
+\n
+\nWeitere Informationen unter http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\', um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
@@ -1006,7 +1008,7 @@
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
     <string name="map_widget_audionotes">Audio-Notizen</string>
-    <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-, Foto- und Video-Notizen, indem Sie entweder eine Karten-Schaltfläche oder ein Standort-Kontextmenü verwenden.</string>
+    <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-/Foto-/Videonotizen, entweder über eine Kartenschaltfläche oder das Standortkontextmenü.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden … \', um dem Ort eine Notiz zuzuweisen.</string>
     <string name="stop_routing_confirm">Navigation stoppen\?</string>
@@ -1334,9 +1336,9 @@
     <string name="shared_string_all">Alle</string>
     <string name="shared_string_waypoints">Wegpunkte</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Ermöglicht das Aufzeichnen, Speichern und Analysieren von Trainings- oder Bewegungsdaten wie Geschwindigkeit, Steigungen, Gefälle oder Streckenerleichterung, die Sie dann wiederverwenden, verbessern, ergänzen oder mit Freunden teilen können.
+    <string name="record_plugin_description">Zeichnen Sie Ihre Fahrten oder Trainings auf und analysieren Sie die Daten in Bezug auf Geschwindigkeit, kumulierte Anstiege und Abfahrten, Höhenprofil usw. Die aufgezeichneten Strecken können archiviert, mit Freunden geteilt, bearbeitet und nachbearbeitet werden.
 \n
-\nAnleitungen - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nWeitere Informationen unter https://osmand.net/docs/user/plugins/trip-recording.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
     <string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
@@ -1450,10 +1452,10 @@
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
-    <string name="plugin_nautical_descr">Schalten Sie diese Option ein, um Ihre Karte mit Informationen über Segelrouten, Navigationslichter, Gefahrenzonen, Zonen, in denen das Segeln oder Anlegen erlaubt oder verboten ist, usw. anzureichern. Um Nautische Karten herunterzuladen und \"Nautische Karte\" zu aktivieren, geben Sie \"Karte konfigurieren\" ein.
+    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \"Nautische Karte\" unter \"Karte konfigurieren\".
 \n
-\nAnleitungen - https://osmand.net/docs/user/plugins/nautical-charts</string>
-    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten. Beobachten Sie Skipisten, Skiliftmarkierungen und farbige Linien, die den Schwierigkeitsgrad der einzelnen Abfahrten anzeigen. Zur Verwendung nach der Aktivierung gehen Sie zu Karte konfigurieren und wählen Sie den Kartentyp \"Winter und Ski\".</string>
+\nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
+    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die die Schwierigkeitsgrade anzeigen. Um dieses (Erweiterungs)Modul zu verwenden, aktivieren Sie es und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
 \nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Reisedetails, die die Kartendaten enthalten (insbesondere Straßen, Wege, Pfade und Orientierungspunkte). 
@@ -2382,7 +2384,7 @@
     <string name="nothing_found">Nichts gefunden</string>
     <string name="nothing_found_descr">Bitte Suchkriterien ändern oder Suchradius vergrößern.</string>
     <string name="hide_from_zoom_level">Ausblenden ab Zoomstufe</string>
-    <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
+    <string name="show_from_zoom_level">Anzeige beginnt bei Zoomstufe</string>
     <string name="shared_string_add_photos">Fotos hinzufügen</string>
     <string name="mapillary_widget">Mapillary-Steuerelement</string>
     <string name="mapillary_widget_descr">Ermöglicht schnelle Beiträge zu Mapillary.</string>
@@ -2392,7 +2394,7 @@
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
-    <string name="plugin_mapillary_descr">Bringt Ansichten auf Straßenebene. Wo Bildmaterial fehlt, können Sie es einfach selbst hinzufügen, damit andere es nutzen können. Um die Mapillary-Ebene zu aktivieren, schalten Sie die Option \"Straßenbilder\" im Menü \"Karte konfigurieren\" ein.</string>
+    <string name="plugin_mapillary_descr">Bildmaterial von Straßenansichten. Sie können auch selbst einen Beitrag leisten. Um die vorhandenen Daten als Kartenebene zu sehen, aktivieren Sie \"Straßenbilder\" im Menü \"Karte konfigurieren\".</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installieren Sie Mapillary, um Fotos zu dieser Kartenposition hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
@@ -3963,9 +3965,9 @@
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
     <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
-    <string name="open_place_reviews_plugin_description">Ermöglicht es Ihnen, Beiträge zum Projekt OpenPlaceReviews zu leisten. Dazu gehören Fotos, Bewertungen, Links zu öffentlichen Orten wie Restaurants, Hotels, Museen und Wegpunkten.
+    <string name="open_place_reviews_plugin_description">Tragen Sie bei zum OpenPlaceReviews-Projekt, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
 \n
-\nAuf unserer Website finden Sie eine Anleitung, wie Sie einen Beitrag leisten können - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nAuf unserer Website https://osmand.net/docs/user/plugins/openplacereviews finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
     <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
@@ -4183,7 +4185,7 @@
     <string name="regular_price">Normaler Preis</string>
     <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
     <string name="purchases_feature_desc_terrain">Höhenlinien, Reliefkarten mit dunklen Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
-    <string name="purchases_feature_desc_wikipedia">Mit der Offline-Wikipedia können Sie auf Ihrer Reise mehr über die Orte erfahren, die Sie besuchen. Sie ist offline verfügbar und zeigt Wikipedia-Artikel in Verbindung mit den Sehenswürdigkeiten direkt auf der Karte an. Vergessen Sie nicht, Wikipedia-Karten für die gewünschte Region herunterzuladen.</string>
+    <string name="purchases_feature_desc_wikipedia">Stellt alle ortsbezogenen Wikipedia-Artikel offline bereit und hilft Ihnen, mehr über die Orte zu erfahren, die Sie auf Ihrer Reise besuchen, indem Sie einfach auf die Karte tippen. Vergessen Sie nicht, die Wikipedia-Kartendateien für die jeweiligen Regionen herunterzuladen.</string>
     <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den regulären monatlichen Updates für Offlinekarten.</string>

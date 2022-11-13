@@ -4372,4 +4372,11 @@
     <string name="poi_changing_table_filter">Mesa de fraldário</string>
     <string name="poi_payment_american_express_contactless_no">American Express Contactless (AMEX) não aceite</string>
     <string name="poi_playground_aerialrotator">Gira-gira aéreo</string>
+    <string name="poi_climbing_grade_filter">Nível de escalada</string>
+    <string name="poi_climbing_bolt">Parafuso de escalada</string>
+    <string name="poi_climbing_bolts_filter">Parafusos de escalada</string>
+    <string name="poi_climbing_quality">Qualidade da escalada</string>
+    <string name="poi_climbing_rock_conglomerate">Rocha de escalada: conglomerado</string>
+    <string name="poi_climbing_rock_basalt">Rocha de escalada: basalto</string>
+    <string name="poi_climbing_rock_gritstone">Rocha de escalada: arenito</string>
 </resources>
