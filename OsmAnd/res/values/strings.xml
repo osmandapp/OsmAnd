@@ -878,7 +878,7 @@
     <string name="latest_openstreetmap_update">Latest OpenStreetMap update available:</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
-    <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
+    <string name="routing_attr_height_obstacles_description">Projected travel time will reflect elevation impact. Routing preference can help avoid steep uphills:</string>
     <string name="app_restart_required">App restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
     <string name="track_recording_description">Stop recording?\nAll unsaved data will be lost.</string>
