@@ -4957,4 +4957,5 @@
     <string name="map_widget_group_sunrise_sunset_desc">Эти виджеты отображают информацию о следующем восходе и закате солнца.</string>
     <string name="turn_on_nautical_depth_description">Включите для просмотра данных о морских глубинах на карте.</string>
     <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
+    <string name="storage_migration_fragment_close_descr">Выполняется копирование %1$s%%. Если остановить сейчас, приложение может работать некорректно.</string>
 </resources>
