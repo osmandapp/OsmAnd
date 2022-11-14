@@ -4811,7 +4811,7 @@
     <string name="nautical_depth_points">Pontos de profundidade náutica</string>
     <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
     <string name="map_widget_camera_distance_desc">Mostra a elevação da câmara acima do nível da superfície.</string>
-    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="external_sensor_widgets">ANT+ widgets</string>
     <string name="map_widget_ant_bicycle_speed">Velocidade da bicicleta</string>
     <string name="map_widget_ant_bicycle_cadence">Cadência da bicicleta</string>
     <string name="ant_go_to_store">Ir à Store</string>

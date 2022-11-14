@@ -4880,7 +4880,7 @@
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
     <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>
-    <string name="ant_widgets">ويدجت مستشعر ANT+</string>
+    <string name="external_sensor_widgets">ويدجت مستشعر ANT+</string>
     <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
     <string name="ant_heart_rate_write_gpx_desc">كتابة معدل نبضات القلب للمسار</string>
     <string name="nautical_depth_points">نقاط العمق البحري</string>

@@ -4797,7 +4797,7 @@
     <string name="map_widget_target_distance_desc">Показує відстань між камерою і цільовим розташуванням.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Показує поточний масштаб мапи.</string>
-    <string name="ant_widgets">Віджети ANT+</string>
+    <string name="external_sensor_widgets">Віджети ANT+</string>
     <string name="ant_missing_dependency_descr">Не вдалося знайти необхідну службу «%1$s».
 \nВам необхідно встановити або оновити службу плагінів ANT+.
 \nЗапустити для цього Play Маркет\?</string>

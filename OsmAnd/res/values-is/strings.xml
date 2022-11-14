@@ -4775,7 +4775,7 @@
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>
     <string name="rotate_map_none_rotated_opt">Fast (snúið handvirkt)</string>
-    <string name="ant_widgets">ANT+ viðmótshlutar</string>
+    <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>
     <string name="shared_string_switch_mode">Skipta um ham</string>
     <string name="favorites_backup">Öryggisafrit eftirlæta</string>

@@ -4593,7 +4593,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="next_live_update_time">Hurrengo eguneratzea: %1$s barru.</string>
     <string name="favorites_backup">Gogokoen babeskopiak</string>
     <string name="shared_string_cross_buy">Erosketa gurutzatua</string>
-    <string name="ant_widgets">ANT+ widget-ak</string>
+    <string name="external_sensor_widgets">ANT+ widget-ak</string>
     <string name="purchases_feature_desc_cross_buy">Erabili zure harpidetza-abantailak plataforma ezberdinetan (Android/iOS/Web) kostu gehigarririk gabe.</string>
     <string name="map_widget_target_distance">Kameratik xederako distantzia</string>
 </resources>

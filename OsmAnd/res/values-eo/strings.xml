@@ -4818,7 +4818,7 @@
     <string name="favorites_backup">Sekurkopio de ŝatataj</string>
     <string name="purchases_feature_desc_cross_buy">Havigu viajn aĉetitajn trajtojn ĉe pluraj platformoj: Android/iOS/ret-aplikaĵo sen kroma pago.</string>
     <string name="shared_string_cross_buy">Plurplatforma aĉeto</string>
-    <string name="ant_widgets">ANT+</string>
+    <string name="external_sensor_widgets">ANT+</string>
     <string name="ant_missing_dependency">Dependeco mankas</string>
     <string name="ant_go_to_store">Malfermi vendejon</string>
     <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>

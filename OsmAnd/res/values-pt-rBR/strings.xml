@@ -4791,7 +4791,7 @@
     <string name="map_widget_camera_tilt">Inclinação da câmera</string>
     <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmera no modo perspectiva. O padrão é 90° (sem inclinação).</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>
-    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="external_sensor_widgets">ANT+ widgets</string>
     <string name="map_widget_ant_bicycle_cadence">Cadência de bicicleta</string>
     <string name="ant_go_to_store">Ir para a Loja</string>
     <string name="ant_write_to_gpx">Gravar dados para trilha</string>

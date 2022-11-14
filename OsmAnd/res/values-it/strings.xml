@@ -4814,7 +4814,7 @@
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
     <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza alcun costo aggiuntivo.</string>
-    <string name="ant_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
     <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato. 

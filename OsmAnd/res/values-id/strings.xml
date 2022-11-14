@@ -4371,7 +4371,7 @@
     <string name="favorites_backup">Cadangan favorit</string>
     <string name="map_widget_ant_bicycle_power_desc">Menampilkan keluaran daya pengendara sepeda, yang digunakan untuk menggerakkan sepeda supaya maju</string>
     <string name="map_widget_ant_bicycle_dist_desc">Menampilkan jarak yang ditempuh</string>
-    <string name="ant_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="ant_read_data">Baca data</string>
     <string name="map_widget_ant_heart_rate_desc">Menampilkan detak jantung pengguna selama beraktivitas dalam waktu nyata</string>
     <string name="ant_missing_dependency_descr">Layanan \"%1$s\" yang dibutuhkan tidak ditemukan. 

@@ -127,7 +127,7 @@
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
-    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="external_sensor_widgets">External sensors</string>
     <string name="ant_missing_dependency_descr">Could not find the required service \"%1$s\".\nYou need to install or update the ANT+ Plugins Service. \nDo you want to launch the Play Store to do that?</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
     <string name="ant_go_to_store">Go to Store</string>

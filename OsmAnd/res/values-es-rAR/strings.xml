@@ -4818,7 +4818,7 @@
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
-    <string name="ant_widgets">Widgets de ANT+</string>
+    <string name="external_sensor_widgets">Widgets de ANT+</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
 \nDebes instalar o actualizar el servicio para el complemento ANT+.
 \n¿Quieres abrir Play Store para hacer eso\?</string>

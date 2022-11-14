@@ -4554,7 +4554,7 @@
     <string name="shared_string_terms_of_use">使用条款</string>
     <string name="favorites_backup">收藏夹备份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台（Android/iOS/Web）上使用您的订阅功能，无需额外费用。</string>
-    <string name="ant_widgets">ANT+ 小工具</string>
+    <string name="external_sensor_widgets">ANT+ 小工具</string>
     <string name="shared_string_cross_buy">跨平台购买</string>
     <string name="current_location_widget">坐标：当前位置</string>
     <string name="external_sensors_plugin_description">访问外部传感器来读取心率、自行车速度、自行车功率或踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>

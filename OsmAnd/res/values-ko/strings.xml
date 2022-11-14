@@ -2569,7 +2569,7 @@
     <string name="shared_string_terms_of_use">이용 약관</string>
     <string name="favorites_backup">즐겨찾기 백업</string>
     <string name="map_widget_target_distance">카메라에서 대상까지의 거리</string>
-    <string name="ant_widgets">ANT+ 위젯</string>
+    <string name="external_sensor_widgets">ANT+ 위젯</string>
     <string name="ant_missing_dependency">종속성 누락</string>
     <string name="ant_read_data">데이터 읽기</string>
     <string name="ant_go_to_store">스토어로 이동</string>

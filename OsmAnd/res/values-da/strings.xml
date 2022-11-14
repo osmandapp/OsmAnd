@@ -4821,7 +4821,7 @@
     <string name="depth_contours">Dybdekonturer</string>
     <string name="nautical_depth_points">Nautiske dybdepunkter</string>
     <string name="worldwide_maps">Globale kort</string>
-    <string name="ant_widgets">ANT+ moduler</string>
+    <string name="external_sensor_widgets">ANT+ moduler</string>
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten.
 \nVil du starte Play Store for at gøre dette\?</string>

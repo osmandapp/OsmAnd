@@ -4822,7 +4822,7 @@
     <string name="shared_string_terms_of_use">Termeni de utilizare</string>
     <string name="purchases_feature_desc_cross_buy">Utilizați caracteristicile abonamentului dumneavoastră pe diferite platforme (Android/iOS/Web) fără costuri suplimentare.</string>
     <string name="shared_string_cross_buy">Achiziții încrucișate</string>
-    <string name="ant_widgets">ANT+ widget-uri</string>
+    <string name="external_sensor_widgets">ANT+ widget-uri</string>
     <string name="ant_missing_dependency_descr">Serviciul necesar \"%1$s\" nu a fost găsit.
 \nTrebuie să instalați serviciul ANT+ Plugins sau este posibil să fie nevoie să actualizați versiunea existentă, dacă o aveți deja.
 \nDoriți să lansați Play Store pentru a-l obține\?</string>

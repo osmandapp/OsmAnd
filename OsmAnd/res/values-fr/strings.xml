@@ -4792,7 +4792,7 @@
     <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
-    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="external_sensor_widgets">Widgets ANT+</string>
     <string name="ant_missing_dependency">Dépendance manquante</string>
     <string name="ant_go_to_store">Accéder à la boutique</string>
     <string name="ant_read_data">Lire les données</string>
