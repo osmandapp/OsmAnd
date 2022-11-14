@@ -714,13 +714,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			centerWpt.lat = tb.getCenterLatLon().getLatitude();
 			centerWpt.lon = tb.getCenterLatLon().getLongitude();
 			boolean hasPointsBefore = false;
-			boolean hasGapBefore = false;
 			if (before.size() > 0) {
 				TrkSegment segment = before.get(before.size() - 1);
 				if (segment.points.size() > 0) {
 					hasPointsBefore = true;
 					WptPt pt = segment.points.get(segment.points.size() - 1);
-					hasGapBefore = pt.isGap();
 					if (!pt.isGap() || (editingCtx.isInAddPointMode() && !editingCtx.isInAddPointBeforeMode())) {
 						if (hasMapRenderer) {
 							beforeAfterWpt.add(pt);
@@ -737,7 +735,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					}
 				}
 			}
-			if (after.size() > 0) {
+			if (after.size() > 0 && !isLastPointOfSegmentSelected()) {
 				TrkSegment segment = after.get(0);
 				if (segment.points.size() > 0) {
 					if (!hasPointsBefore) {
@@ -748,14 +746,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							ty.add((float) tb.getCenterPixelY());
 						}
 					}
-					if (!hasGapBefore || (editingCtx.isInAddPointMode() && editingCtx.isInAddPointBeforeMode())) {
-						WptPt pt = segment.points.get(0);
-						if (hasMapRenderer) {
-							beforeAfterWpt.add(pt);
-						} else {
-							tx.add(tb.getPixXFromLatLon(pt.lat, pt.lon));
-							ty.add(tb.getPixYFromLatLon(pt.lat, pt.lon));
-						}
+					WptPt pt = segment.points.get(0);
+					if (hasMapRenderer) {
+						beforeAfterWpt.add(pt);
+					} else {
+						tx.add(tb.getPixXFromLatLon(pt.lat, pt.lon));
+						ty.add(tb.getPixYFromLatLon(pt.lat, pt.lon));
 					}
 				}
 			}
@@ -789,6 +785,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			resetBeforeAfterRenderer();
 		}
+	}
+
+	private boolean isLastPointOfSegmentSelected() {
+		return editingCtx.getOriginalPointToMove() != null && editingCtx.getOriginalPointToMove().isGap();
 	}
 
 	private void resetBeforeAfterRenderer() {
