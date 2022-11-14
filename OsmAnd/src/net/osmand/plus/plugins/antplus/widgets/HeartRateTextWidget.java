@@ -29,7 +29,7 @@ public class HeartRateTextWidget extends TextInfoWidget {
 		if (computedHeartRate > 0) {
 			setText(computedHeartRate + (data.isComputedHeartRateInitial() ? "*" : ""), "bpm");
 		} else {
-			setText(null, null);
+			setText(NO_VALUE, null);
 		}
 	}
 }

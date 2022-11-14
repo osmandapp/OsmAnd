@@ -43,7 +43,7 @@
     <string name="poi_lighthouse">Fyrtårn</string>
     <string name="poi_bicycle_rental">Sykkelutleie</string>
     <string name="poi_bicycle_parking">Sykkelparkering</string>
-    <string name="poi_aerialway_gondola">Gondol</string>
+    <string name="poi_aerialway_gondola">Gondolbane</string>
     <string name="poi_bridge">Bru</string>
     <string name="poi_post_office">Postkontor</string>
     <string name="poi_post_box">Postkasse</string>
@@ -161,7 +161,7 @@
     <string name="poi_air_transport">Lufttransport</string>
     <string name="poi_water_transport">Vanntransport</string>
     <string name="poi_bicycle_transport">Sykkeltransport</string>
-    <string name="poi_aerialway_transport">Heistransport</string>
+    <string name="poi_aerialway_transport">Taubanetransport</string>
     <string name="poi_piste_sleigh">Slede-løype</string>
     <string name="poi_public_transport_platform_trolleybus">Trolleybussholdeplass</string>
     <string name="poi_public_transport_platform_tram">Sporvognholdeplass</string>
@@ -305,7 +305,7 @@
     <string name="poi_diet_gluten_free_no">Glutenfri: nei</string>
     <string name="poi_traffic_signals">Trafikklys</string>
     <string name="poi_car_wash">Bilvask</string>
-    <string name="poi_halt">Jernbaneholdeplass;Togholdeplass</string>
+    <string name="poi_halt">Jernbaneholdeplass;Togholdeplass;Jernbanestasjon;Togstasjon;Stasjon</string>
     <string name="poi_water_works">Vannverk</string>
     <string name="poi_pier">Molo</string>
     <string name="poi_works">Fabrikk</string>
@@ -1746,4 +1746,15 @@
     <string name="poi_museum_open_air">Friluftsmuseum</string>
     <string name="poi_museum_local">Lokalt</string>
     <string name="poi_museum_gallery">Galleri</string>
+    <string name="poi_aerialway_station">Taubanestasjon</string>
+    <string name="poi_aerialway_chair_lift">Stolheis</string>
+    <string name="poi_aerialway_pylon">Heismast</string>
+    <string name="poi_aerialway_drag_lift">Skitrekk</string>
+    <string name="poi_aerialway_mixed_lift">Hybridheis</string>
+    <string name="poi_aerialway_platter">Tallerkentrekk</string>
+    <string name="poi_aerialway_t_bar">Skitrekk (T-krok)</string>
+    <string name="poi_aerialway_cable_car">Pendeltaubane</string>
+    <string name="poi_aerialway_j_bar">Skitrekk (J-krok)</string>
+    <string name="poi_aerialway_rope_tow">Skitau</string>
+    <string name="poi_aerialway_magic_carpet">Teppeheis</string>
 </resources>

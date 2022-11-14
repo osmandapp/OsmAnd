@@ -129,6 +129,9 @@ public class RouteResultPreparationTest {
                     String turnLanes = turn + ":" + lanes;
                     String name = segment.getDescription();
                     boolean skipToSpeak = segment.getTurnType().isSkipToSpeak();
+                    if (skipToSpeak) {
+                        turnLanes = "[MUTE] " + turnLanes;
+                    }
                     long segmentId = segment.getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
                     String expectedResult = null;
                     int startPoint = -1;
@@ -142,10 +145,8 @@ public class RouteResultPreparationTest {
                     }
                     
                     if (expectedResult != null) {
-                        if (startPoint < 0 || startPoint > 0 && segment.getStartPointIndex() == startPoint) {
-                            if ("skipToSpeak".equals(expectedResult)) {
-                                Assert.assertTrue("Segment " + segmentId + " is skipToSpeak", skipToSpeak);
-                            } else if (!Algorithms.objectEquals(expectedResult, turnLanes)
+                        if (startPoint < 0 || (startPoint > 0 && segment.getStartPointIndex() == startPoint)) {
+                             if (!Algorithms.objectEquals(expectedResult, turnLanes)
                                     && !Algorithms.objectEquals(expectedResult, lanes)
                                     && !Algorithms.objectEquals(expectedResult, turn)) {
                                 Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);

@@ -1446,8 +1446,10 @@ public class RouteResultPreparation {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
 					t = TurnType.valueOf(tp, leftSide);
+					t.setSkipToSpeak(true);
 				}
 			}
+			
 			for (int k = 0; k < rawLanes.length; k++) {
 				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 				int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
@@ -1481,7 +1483,10 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		t.setSkipToSpeak(!rs.speak);
+		if (TurnType.isKeepDirectionTurn(t.getValue())) {
+			t.setSkipToSpeak(true);
+		}
+		
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);

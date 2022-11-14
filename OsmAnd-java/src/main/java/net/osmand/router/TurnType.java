@@ -424,6 +424,10 @@ public class TurnType {
 		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
 	}
 	
+	public static boolean isKeepDirectionTurn(int type) {
+		return type == C || type == KL || type == KR;
+	}
+	
 	public static boolean hasAnySlightTurnLane(int type) {
 		return TurnType.isSlightTurn(TurnType.getPrimaryTurn(type))
 				|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(type))

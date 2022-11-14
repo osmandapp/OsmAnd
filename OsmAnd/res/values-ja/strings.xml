@@ -3639,9 +3639,6 @@ POIの更新は利用できません</string>
     <string name="route_between_points_desc">地点間を直線で結ぶ方法、または地点だけを指定しその後ルートを計算する方法のどちらかを選択します。</string>
     <string name="whole_track">全経路</string>
     <string name="next_segment">次のセグメント</string>
-    <string name="route_between_points_warning_desc">このオプションを使用するには、OsmAndで経路をマップ上の道路にスナップする必要があります。
-\n
-\n次にナビゲーションプロファイルを選択して、利用予定の道路(一般道、高速道路)と、道路を追跡するおおよその距離を検出する必要があります。</string>
     <string name="threshold_distance">限界距離</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
     <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
@@ -4196,7 +4193,6 @@ POIの更新は利用できません</string>
     <string name="backup_error_token_is_not_valid_or_expired">無効または期限切れのトークン</string>
     <string name="backup_error_user_is_not_registered">そのメールアドレスで登録されているユーザーはいません</string>
     <string name="backup_error_no_valid_subscription">有効なサブスクリプションがありません</string>
-    <string name="approximate_route_description">マップ上の道路にルートを貼り付けると、各移動方向や平滑具合、道路種類などの追加データを得ることができます。</string>
     <string name="duration_moment_ago">すこし前</string>
     <string name="purchases_feature_desc_hourly_map_updates">より短い頻度でマップ更新が可能になります。時間ごと、日ごと、週ごとの更新。更新は変更されたエリアに対してのみ、段階的にダウンロードされます。</string>
     <string name="purchases_feature_desc_nautical">水深に関する情報を入手しましょう</string>

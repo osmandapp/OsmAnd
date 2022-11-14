@@ -66,7 +66,7 @@ public class MapViewWithLayers extends FrameLayout {
 		OsmAndMapSurfaceView surfaceView = findViewById(R.id.MapView);
 		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);
 
-		boolean useOpenglRender = settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit() && !useAndroidAuto;
+		boolean useOpenglRender = app.useOpenGlRenderer() && NativeCoreContext.isInit() && !useAndroidAuto;
 		if (useOpenglRender) {
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);

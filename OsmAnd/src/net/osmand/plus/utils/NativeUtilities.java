@@ -123,17 +123,25 @@ public class NativeUtilities {
 	}
 
 	public static Double getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, double lat, double lon) {
-		PointI screenPoint = getScreenPointFromLatLon(mapRenderer, lat, lon);
-		return getAltitudeForPixelPoint(mapRenderer, screenPoint);
+		int x = MapUtils.get31TileNumberX(lon);
+		int y = MapUtils.get31TileNumberY(lat);
+		return getAltitudeForElevatedPoint(mapRenderer, new PointI(x, y));
 	}
 
 	public static Double getAltitudeForPixelPoint(@Nullable MapRendererView mapRenderer, @Nullable PointI screenPoint) {
-		double altitude = MIN_ALTITUDE_VALUE;
 		if (mapRenderer != null && screenPoint != null) {
 			PointI elevatedPoint = new PointI();
 			if (mapRenderer.getLocationFromElevatedPoint(screenPoint, elevatedPoint)) {
-				altitude = mapRenderer.getLocationHeightInMeters(elevatedPoint);
+				return getAltitudeForElevatedPoint(mapRenderer, elevatedPoint);
 			}
+		}
+		return null;
+	}
+
+	public static Double getAltitudeForElevatedPoint(@Nullable MapRendererView mapRenderer, @Nullable PointI elevatedPoint) {
+		double altitude = MIN_ALTITUDE_VALUE;
+		if (mapRenderer != null && elevatedPoint != null) {
+			altitude = mapRenderer.getLocationHeightInMeters(elevatedPoint);
 		}
 		return altitude > MIN_ALTITUDE_VALUE ? altitude : null;
 	}

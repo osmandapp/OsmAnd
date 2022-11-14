@@ -560,9 +560,9 @@
     <string name="plugins_screen">Componenti aggiuntivi</string>
     <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate.</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
-    <string name="osm_editing_plugin_description">Ti permette di contribuire a OpenStreetMap, una comunità globale con lo scopo di creare una mappa comprensiva del mondo e di fornire dati open-source aggiornati ad ogni utente.
+    <string name="osm_editing_plugin_description">Contribuisci a OpenStreetMap, una comunità globale con lo scopo di gestire una mappa del mondo esaustiva e di fornire dati open-source aggiornati ad ogni utente.
 \n
-\nPuoi trovare istruzioni su come modificare la mappa sul nostro sito web https://osmand.net/docs/user/plugins/osm-editing</string>
+\nPuoi trovare istruzioni su come modificare la mappa sul nostro sito web https://osmand.net/docs/user/plugins/osm-editing.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
     <string name="play_commands_of_currently_selected_voice">Seleziona una voce e provane gli annunci vocali:</string>
     <string name="debugging_and_development">Sviluppo di OsmAnd</string>
@@ -844,9 +844,11 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii aiutano a valutare visualmente la forma della superficie del terreno, considerando le curvature, estremità, pendenze, punti alla medesima altitudine e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, isoipse alla stessa altitudine per le salite e le discese, e il colore di deviazione angolare della pendenza rispetto al terreno pianeggiante. Dati forniti da SRTM e ASTER. 
-\n 
-\nTutorial - http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii aiutano a valutare visualmente la forma della superficie del terreno e dei rilievi, navigabilità e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, isoipse e/o colorazione delle pendenze.
+\n
+\nI dati di base sono forniti da SRTM e ASTER.
+\n
+\nMaggiori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Crea note audio/video/foto durante il viaggio, usando il pulsante nella mappa, oppure direttamente dal menù contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1236,9 +1238,9 @@
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutti</string>
-    <string name="record_plugin_description">Permette di registrare e salvare e analizzare i tuoi allenamenti o dati degli spostamenti come velocità, ascese discese o percorsi di svago, che possono essere riutilizzati, migliorati, integrati o condivisi con gli amici.
+    <string name="record_plugin_description">Registra i tuoi viaggi o allenamenti e ne analizza i dati come velocità, dislivello cumulativo, profilo di elevazione, ecc. Le tracce registrate possono essere archiviate, condivise ccondivise con gli amici, modifcate, e rielaborate.
 \n
-\nHow to - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nMaggiori informazioni su https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -3688,7 +3690,6 @@
     <string name="plan_route_select_track_file_for_open">Scegli un file traccia da aprire.</string>
     <string name="shared_string_done">Fatto</string>
     <string name="navigation_profile">Profilo di navigazione</string>
-    <string name="route_between_points_warning_desc">Poi approssima la traccia alle strade più vicine permesse da uno dei tuoi profili di navigazione per utilizzare questa opzione.</string>
     <string name="route_between_points_desc">Scegli come collegare i punti, con una linea retta, o calcolando un percorso che li colleghi come specificato sotto.</string>
     <string name="overwrite_track">Sovrascrivi traccia</string>
     <string name="save_as_new_track">Salva come nuova traccia</string>
@@ -3903,9 +3904,9 @@
     <string name="uploaded_count">Caricati %1$d di %2$d</string>
     <string name="toast_select_edits_for_upload">Seleziona le modifiche per il caricamento</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Pendenza / Linee di contorno</string>
-    <string name="open_place_reviews_plugin_description">Invia foto, recensioni, e link di luoghi pubblici come ristoranti, hotel, musei, e punti di interesse come open data http://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, musei.
 \n
-\nMaggiori informazioni su: http://openplacereviews.org</string>
+\nTrova informazioni su come contribuire nel nostro sito: https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usa test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Accedi a OpenPlaceReviews</string>
@@ -4249,7 +4250,6 @@
     <string name="backup_storage_taken">Memoria occupata</string>
     <string name="backup_version_history_delete_descr">Cancella il registro dei cambiamenti dei tipi di dati deprecati da OsmAnd Cloud\?</string>
     <string name="send_logcat_log">Invia registro di log</string>
-    <string name="approximate_route_description">Collega il percorso alle strade della mappa per avere tutte le indicazioni di svolta e i dati aggiuntivi come levigatezza, tipo di strade, ecc.</string>
     <string name="grey_color_slope">Il colore grigio è utilizzato quando la pendenza non è definita.</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
     <string name="routing_attr_avoid_tunnels_description">Evita i tunnel</string>
@@ -4739,7 +4739,6 @@
     <string name="attach_roads_warning">Soltanto una traccia registrata può essere allegata alle strade.</string>
     <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla seconda prossima svolta, che sono abilitate se la seconda svolta è immediatamente dopo la prima.</string>
     <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
-    <string name="attach_to_roads_banner_desc">Collega la traccia sulle strade per avere indicazioni di navigazione dettagliate.</string>
     <string name="attach_roads_descr">Approssima la tua traccia usando un percorso della mappa offline. Ciò restituirà valori di elevazione corretti, dettagli stradali e svolte usate durante la navigazione.</string>
     <string name="second_marker_widget_desc">Puoi configurare il widget per mostrare la distanza o il tempo stimato di arrivo al secondo marcatore della mappa.</string>
     <string name="time_to_intermediate_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" al primo punto intermedio. Il tempo è costantemente aggiornato durante la navigazione, quando il punto intermedio viene raggiunto, il tempo verrà aggiornato al successivo punto intermedio.</string>
@@ -4815,7 +4814,7 @@
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
     <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza alcun costo aggiuntivo.</string>
-    <string name="ant_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
     <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato. 
@@ -4830,4 +4829,118 @@
     <string name="map_widget_ant_bicycle_dist">Distanza bicicletta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
     <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
+    <string name="weather_plugin_description">Fornisce
+\n- previsioni meteo, 24 ore per 7 giorni, con 5 livelli
+\n- widgets localizzati
+\n- isoterme / isobare
+\n
+\nI dati meteo sono forniti dal Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_offline_forecast">Previsioni offline</string>
+    <string name="weather_online_cache">Cache online</string>
+    <string name="shared_string_contours">Contorno</string>
+    <string name="shared_string_layers">Strati</string>
+    <string name="empty_screen_weather_pressure_layer">Accendi per visualizzare lo strato della pressione sulla mappa.</string>
+    <string name="empty_screen_weather_clouds_layer">Accendi per visualizzare lo strato della copertura delle nuvole sulla mappa.</string>
+    <string name="empty_screen_view_selected_weather_data">Accendi per visualizzare i dati meteo selezionati sulla mappa.</string>
+    <string name="empty_screen_weather_temperature_layer">Accendi per visualizzare lo strato della temperatura sulla mappa.</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Nodi</string>
+    <string name="weather_wind_meters_per_second">Metri/secondo</string>
+    <string name="weather_widgets_secondary_desc">Le unità di misura possono essere cambiate nelle impostazioni del componente aggiuntivo Meteo.</string>
+    <string name="weather_pressure_inches_of_mercury">Pollici di mercurio</string>
+    <string name="weather_pressure_hectopascals">Ettopascal</string>
+    <string name="weather_prefs_descr">Previsioni meteo 24 ore su 7 giorni, aggiornate ogni 3 ore</string>
+    <string name="weather_pressure_millimeters_of_mercury">Millimetri di mercurio</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="map_rendering_engine">Motore di disegno della mappa</string>
+    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore più veloce di disegno della mappa, fornisce anche la vista 2.5D. Il disegno Versione 1 era il predefinito prima di OsmAnd 4.3, e ancora preferibile per i dispositivi più datati.</string>
+    <string name="show_map_symbols">Mostra i simboli della mappa</string>
+    <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
+    <string name="depth_contours">Isabate</string>
+    <string name="map_widget_sunrise_desc">Mostra l\'orario della prossima alba o il tempo fino alla prossima.</string>
+    <string name="shared_string_next_sunset">Prossimo tramonto</string>
+    <string name="shared_string_next_sunrise">Prossima alba</string>
+    <string name="shared_string_time_left">Tempo mancante</string>
+    <string name="shared_string_sunset">Tramonto</string>
+    <string name="shared_string_sunrise">Alba</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Questo widget mostra le informazioni sull\'alba e il tramonto.</string>
+    <string name="depth_contour_lines">Linee batimetriche</string>
+    <string name="turn_on_nautical_depth_description">Accendere per visualizzare nella mappa le linee batimetriche.</string>
+    <string name="map_settings_weather_temp">Temperatura</string>
+    <string name="map_settings_weather_air_pressure">Pressione atmosferica</string>
+    <string name="map_settings_weather_wind">Vento</string>
+    <string name="map_settings_weather_cloud">Nuvole</string>
+    <string name="map_settings_weather_precip">Precipitazioni</string>
+    <string name="measurement_units">Unità di misura</string>
+    <string name="shared_string_weather">Meteo</string>
+    <string name="explore_weather_forecast">Esplora le previsioni meteo.</string>
+    <string name="empty_screen_weather_wind_layer">Accendi per visualizzare lo strato della ventosità sulla mappa.</string>
+    <string name="empty_screen_weather_precipitation_layer">Accendi per visualizzare lo strato delle precipitazioni sulla mappa.</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Pollici</string>
+    <string name="weather_precip_milimeters">Millimetri</string>
+    <string name="weather_wind_miles_per_hour">Miglia all\'ora</string>
+    <string name="weather_wind_kilimeters_per_hour">kilometri all\'ora</string>
+    <string name="weather_precip_in">in</string>
+    <string name="clouds_widget_desc">Mostra la copertura nuvolosa del centro attuale della mappa.</string>
+    <string name="wind_widget_desc">Mostra la velocità del vento del centro attuale della mappa.</string>
+    <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
+    <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="location_simulation_speedup">Accelerazione della simulazione</string>
+    <string name="map_widget_sunset_desc">Mostra l\'orario del prossimo tramonto o il tempo fino al prossimo.</string>
+    <string name="map_widget_group_sunrise_sunset">Alba, tramonto</string>
+    <string name="empty_screen_weather_contours">Accendi per visualizzare le linee meteo sulla mappa.</string>
+    <string name="air_pressure_widget_desc">Mostra la pressione atmosferica del centro attuale della mappa.</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_widget_group_desc">Un insieme di widget che mostrano varie informazioni meteo.</string>
+    <string name="show_borders_of_downloaded_maps">Mostra i confini delle mappe scaricate</string>
+    <string name="release_4_3">• Nuovo motore di disegno della mappa Versione 2 (OpenGL), più veloce, con vista 2.5D
+\n
+\n • Animazione fluida del cambiamento della localizzazione mentre si è in movimento
+\n
+\n • Nuovi widget per le coordinate del centro della mappa e l\'elevazione della geolocalizzazione
+\n
+\n • \"Distanza dal tap\": aggiunto l\'opzione della dimensione del testo
+\n
+\n • \"Marcatori mappa\" widget: aggiunto l\'opzione per cambiare il comportamento al click
+\n
+\n • Corretta l\'opzione \"Mostra la posizione\"
+\n
+\n • GPX: aggiunto il supporto per le etichette \"link\", \"cmt\", \"desc\" e per altre estensioni personalizzate
+\n
+\n • Riorganizzato la lista \"Mappe nautiche\"
+\n
+\n • Aggiunto il supporto ai sensori ANT+
+\n
+\n • Aggiunto l\'opzione per disabilitare il download UUID
+\n
+\n</string>
+    <string name="location_simulation_cutoff">La simulazione salta i primi metri</string>
+    <string name="switch_mode_by_tapping_on_widget">Cambia la modalità toccando il widget.</string>
+    <string name="map_widget_ant_bicycle_power_desc">Mostra la potenza espressa dal ciclista per fare avanzare la bici</string>
+    <string name="speak_gps_signal_status">Annuncia la perdita e il riaggancio del segnale GPS</string>
+    <string name="external_sensors_plugin_description">Accede ai sensori esterni per rilevare es. la tua frequenza cardiaca, velocità della bicicletta, potenza della pedalata o cadenza. Richiede che il tuo dispositivo sia connesso al rispettivo sensore tramite il protocollo rete personale wireless ANT+.</string>
+    <string name="map_widget_altitude_current_location_desc">Mostra l\'altitudine sopra al livello del mare dell\'attuale geolocalizzazione.</string>
+    <string name="map_widget_altitude_desc">Mostra l\'altitudine dell\'attuale geolocalizzazione o la quota dell\'attuale centro della mappa</string>
+    <string name="send_uuid_preference_desc">Per controllare il corretto utilizzo delle risorse dei nostri server, prevedere dei modelli di traffico e generare dei rapporti mensili anonimi delle mappe, un UUID casuale viene utilizzato per scaricare le mappe offline dai server OsmAnd.</string>
+    <string name="nautical_depth_points">Punti di profondità nautici</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Schema colori delle linee</string>
+    <string name="dismiss_changes">Scartare i cambiamenti\?</string>
+    <string name="restart_now">Riavvia adesso</string>
+    <string name="map_rendering_engine_v1">Versione 1</string>
+    <string name="map_rendering_engine_v2">Versione 2 (OpenGL)</string>
+    <string name="share_crash_log">Condividi il log degli errori</string>
+    <string name="rendering_engine_failed_descr">OsmAnd ha ripristinato lo stile di disegno della mappa alla \'Versione 1\'. Puoi provare a cambiarlo alla \'Versione 2 (OpenGL)\' nelle Impostazioni.
+\n
+\nPer favore aiutaci a migliorare inviando i log degli errori.</string>
+    <string name="rendering_engine_failed">Il disegno della mappa di OsmAnd recentemente è andato in errore.</string>
+    <string name="dismiss_changes_descr">Tutti i cambiamenti saranno persi.</string>
+    <string name="rendering_attr_depthContourWidth_name">Spessore linea</string>
 </resources>

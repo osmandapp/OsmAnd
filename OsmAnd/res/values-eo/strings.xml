@@ -3698,9 +3698,6 @@
     <string name="route_between_points_desc">Elektu kiel konekti punktojn: ĉu per rekta linio, ĉu kalkuli kurson inter ilin uzante la elektitan profilon.</string>
     <string name="whole_track">Tuta kurso</string>
     <string name="next_segment">Sekva segmento</string>
-    <string name="route_between_points_warning_desc">Por uzi tiun ĉi agordon, OsmAnd postulas ĝustigi vian kurson al vojoj sur la mapo.
-\n
-\n Sekve vi devos elekti profilon de navigo (por trovi permesatajn vojojn) kaj sojlan distancon (por alproksimigi vian kurson al vojoj).</string>
     <string name="threshold_distance">Sojla distanco</string>
     <string name="navigation_profile">Profilo de navigo</string>
     <string name="route_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
@@ -4218,7 +4215,6 @@
 \n
 \n</string>
     <string name="duration_moment_ago">antaŭ momento</string>
-    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn: dekliveco, specoj de vojoj kaj pli.</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
     <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
     <string name="contour_lines_hillshades_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4767,7 +4763,6 @@
     <string name="favorite_confirm_delete_group">Ĉu vi certe volas forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)\?</string>
     <string name="download_heightmap_maps">Altmapo</string>
     <string name="display_position">Montri pozicion</string>
-    <string name="attach_to_roads_banner_desc">Alproksimigi vian spuron al vojoj por akiri detalajn navigajn instrukciojn.</string>
     <string name="favorite_delete_group">Forigi grupon</string>
     <string name="quick_action_current_location_widget_descr">Butono por montri/kaŝi koordinatojn de via nuna pozicio.</string>
     <string name="coordinates_widget_map_center">Koordinatoj: map-centro</string>
@@ -4823,7 +4818,7 @@
     <string name="favorites_backup">Sekurkopio de ŝatataj</string>
     <string name="purchases_feature_desc_cross_buy">Havigu viajn aĉetitajn trajtojn ĉe pluraj platformoj: Android/iOS/ret-aplikaĵo sen kroma pago.</string>
     <string name="shared_string_cross_buy">Plurplatforma aĉeto</string>
-    <string name="ant_widgets">ANT+</string>
+    <string name="external_sensor_widgets">ANT+</string>
     <string name="ant_missing_dependency">Dependeco mankas</string>
     <string name="ant_go_to_store">Malfermi vendejon</string>
     <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>

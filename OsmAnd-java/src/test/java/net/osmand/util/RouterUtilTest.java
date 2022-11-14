@@ -24,7 +24,7 @@ public class RouterUtilTest {
         if (roadInfo.contains(ROAD_INFO_DELIMITER)) {
             return Integer.parseInt(roadInfo.split(ROAD_INFO_DELIMITER)[1]);
         }
-        return Integer.parseInt(roadInfo);
+        return -1;
     }
 
     public static Set<Long> getExpectedIdSet(Map<String, String> expectedResults) {

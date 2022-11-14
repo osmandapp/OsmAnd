@@ -3711,7 +3711,6 @@
     <string name="route_between_points_whole_track_button_desc">כל המסלול יחושב מחדש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_next_segment_button_desc">רק המקטע הבא יחושב מחודש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_desc">נא לבחור כיצד לחבר את הנקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
-    <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
     <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
@@ -4498,7 +4497,6 @@
     <string name="quick_action_add_route_descr">כפתור להתחלת מסלול מאמצע המסך.</string>
     <string name="purchases_feature_desc_osmand_cloud">הצטרפות ל־OsmAnd Cloud מאפשרת לך לאחסן את כל נתוני ה־OsmAnd שלך באופן מקוון. הנתונים שלך לא הולכים לאיבוד לאחר ההתקנה. ניתן לגבות ולשחזר את כל הנתונים בקלות.</string>
     <string name="purchases_feature_desc_terrain">קווי מתאר של פני שטח, מפת הצללות מלאה עם הצללות כהות ומפות שיפועים עם צבעים להצגת אזורי הפסגה והשפל.</string>
-    <string name="approximate_route_description">לצרף את המסלול לדרכים במפה כדי לקבל את כל הפניות ונתונים נוספים כגון, חלקלקות, סוגי הדרכים וכן הלאה.</string>
     <string name="routeInfo_tracktype_description">לצבוע את הנתיב או קו המסלול לפי הרכב המשטח. בדרך כלל תקף כאשר רשת הכבישים אינה סלולה ברובה.</string>
     <string name="please_provide_group_name_message">נא לספק שם לקבוצה.</string>
     <string name="navigate_point_format_swiss_grid_plus">הרשת השווייצרית (CH1903+‎)</string>

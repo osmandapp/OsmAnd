@@ -838,7 +838,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		private final LatLon searchLocation;
 		private final String region;
 		private final String olcText;
-		private final int searchCityLimit = 100;
+		private final int searchCityLimit = 500;
 
 
 		ProcessIndexItemsTask(QuickSearchCoordinatesFragment fragment, String region, String olcText, LatLon searchLocation) {

@@ -152,7 +152,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private static final String INITIAL_POINT_KEY = "initial_point_key";
 	private static final String SHOW_SNAP_WARNING_KEY = "show_snap_warning_key";
 	private static final String PROCESS_SRTM_URL = SERVER_URL + "/gpx/process-srtm";
-	private static final String REVERSED_TRACK_SUFFIX = "-reversed";
 
 	public static final int PLAN_ROUTE_MODE = 0x1;
 	public static final int DIRECTION_MODE = 0x2;
@@ -949,7 +948,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
-				if (editingCtx.isNewData() || editingCtx.isReversedRoute()) {
+				if (editingCtx.isNewData()) {
 					if (showDialog) {
 						openSaveAsNewTrackMenu(mapActivity);
 					} else {
@@ -1833,8 +1832,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (gpxData == null || displayedName == null) {
 			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 			displayedName = FileUtils.createUniqueFileName(app, suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
-		} else if (editingCtx.isReversedRoute() && !displayedName.endsWith(REVERSED_TRACK_SUFFIX)) {
-			displayedName += REVERSED_TRACK_SUFFIX;
+		} else {
+			displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxData.getGpxFile().path).getName());
 		}
 		return displayedName;
 	}

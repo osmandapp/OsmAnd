@@ -120,7 +120,7 @@ public class MapLayers {
 	}
 
 	public void createLayers(@NonNull OsmandMapTileView mapView) {
-		boolean useOpenGLRender = app.getSettings().USE_OPENGL_RENDER.get();
+		boolean useOpenGLRender = app.useOpenGlRenderer();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer(app);
 		// 5.95 all labels
@@ -260,7 +260,7 @@ public class MapLayers {
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
-		boolean useOpenGLRender = settings.USE_OPENGL_RENDER.get();
+		boolean useOpenGLRender = app.useOpenGlRenderer();
 
 		// update transparency
 		int mapTransparency = 255;

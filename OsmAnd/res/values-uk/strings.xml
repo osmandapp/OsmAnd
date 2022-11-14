@@ -2203,7 +2203,7 @@
     <string name="shared_string_plugin">Плагін</string>
     <string name="srtm_purchase_header">Для показу ізоліній на мапі, вам потрібно придбати та встановити плагін «Ізолінії».</string>
     <string name="srtm_color_scheme">Схема кольорів</string>
-    <string name="show_from_zoom_level">Показувати починаючи з масштабу</string>
+    <string name="show_from_zoom_level">Показ розпочинається з масштабу</string>
     <string name="routing_attr_allow_private_name">Дозволити приватний доступ</string>
     <string name="routing_attr_allow_private_description">Дозволити доступ на приватну територію.</string>
     <string name="display_zoom_level">Масштаб: %1$s</string>
@@ -3696,7 +3696,6 @@
     <string name="plan_route_select_track_file_for_open">Виберіть який файл з треком відкрити.</string>
     <string name="shared_string_done">Готово</string>
     <string name="overwrite_track">Перезаписати трек</string>
-    <string name="route_between_points_warning_desc">Далі, пов\'яжіть трек до найближчої дозволеної дороги з одним із профілів навігації, щоб скористатися цим параметром.</string>
     <string name="reverse_route">Зворотний маршрут</string>
     <string name="whole_track">Весь трек</string>
     <string name="next_segment">Наступний відрізок</string>
@@ -4199,7 +4198,6 @@
     <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або не чинний</string>
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає чинної передплати</string>
-    <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
     <string name="release_4_0">• Резервне копіювання в хмарі
 \n
 \n• Додано стиль нічного режиму мапи «Топо»
@@ -4766,7 +4764,6 @@
     <string name="download_tiles">Завантажити тайли</string>
     <string name="attach_roads_descr">Приблизно прокладіть свій трек за допомогою офлайн-мапи. Це забезпечить коригування значень висоти, деталі дороги та повороти, які використовуються під час навігації.</string>
     <string name="shared_string_only_missing">Лише відсутні</string>
-    <string name="attach_to_roads_banner_desc">Прикріпіть свій трек до доріг, щоб отримати докладні інструкції з навігації.</string>
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках передплати %1$s.</string>
     <string name="favorite_delete_group">Видалити групу</string>
@@ -4800,7 +4797,7 @@
     <string name="map_widget_target_distance_desc">Показує відстань між камерою і цільовим розташуванням.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Показує поточний масштаб мапи.</string>
-    <string name="ant_widgets">Віджети ANT+</string>
+    <string name="external_sensor_widgets">Віджети ANT+</string>
     <string name="ant_missing_dependency_descr">Не вдалося знайти необхідну службу «%1$s».
 \nВам необхідно встановити або оновити службу плагінів ANT+.
 \nЗапустити для цього Play Маркет\?</string>

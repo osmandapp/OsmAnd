@@ -3437,7 +3437,6 @@
     <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>
     <string name="whole_track">Tol trazáu</string>
     <string name="next_segment">Segmentu siguiente</string>
-    <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="threshold_distance">Threshold distance</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
@@ -4184,7 +4183,6 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="continue_with">Siguir con %1$s</string>
     <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
-    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="release_4_0">• Cloud backup
 \n
 \n • Added night mode for \"Topo\" map style

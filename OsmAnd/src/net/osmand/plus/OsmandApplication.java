@@ -27,6 +27,7 @@ import androidx.multidex.MultiDexApplication;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.core.android.NativeCore;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
@@ -1035,5 +1036,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public OsmandMap getOsmandMap() {
 		return osmandMap;
+	}
+
+	public boolean useOpenGlRenderer() {
+		return NativeCore.isAvailable() && osmandSettings.USE_OPENGL_RENDER.get();
 	}
 }

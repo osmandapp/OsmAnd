@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.weather;
 
-import static com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc.MeasurementDataType.TEMPERATURE;
 import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
@@ -120,7 +119,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		WX_CONTOURS_ENABLED = registerBooleanPreference("map_setting_wx_contours_enabled", true).makeProfile();
 		WX_CONTOURS_TRANSPARENCY = registerIntPreference("map_setting_wx_contours_transparency", DEFAULT_TRANSPARENCY).makeProfile();
 		WX_CONTOURS_TYPE = (EnumStringPreference<WeatherInfoType>) registerEnumStringPreference(
-				"map_setting_wx_contours_type", TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
+				"map_setting_wx_contours_type", WeatherInfoType.TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
 
 		WX_UNIT_TEMPERATURE = (EnumStringPreference<TemperatureConstants>) registerEnumStringPreference(
 				"map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
@@ -146,7 +145,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return app.getSettings().USE_OPENGL_RENDER.get()
+		return app.useOpenGlRenderer()
 				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
 				&& super.isEnabled();
 	}

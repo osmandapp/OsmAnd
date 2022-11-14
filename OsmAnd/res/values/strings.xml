@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="storage_migration_fragment_close_descr">Copying is done for %1$s%%. If you stop now, the app may not work correctly.</string>
     <string name="switch_mode_by_tapping_on_widget">Switch the mode by tapping on the widget.</string>
     <string name="map_widget_sunset_desc">Shows the time of the next sunset or the time left until sunset.</string>
     <string name="map_widget_sunrise_desc">Shows the time of the next sunrise or the time left until sunrise.</string>
@@ -25,7 +26,7 @@
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">Provides\n- the 24h hour and 7 day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_plugin_description">Provides\n- the 24-hour and 7-day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -70,7 +71,7 @@
     <string name="weather_pressure_hectopascals">Hectopascals</string>
     <string name="weather_pressure_inches_of_mercury">Inches of mercury</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeters of mercury</string>
-    <string name="weather_prefs_descr">24h hour &amp; 7 day forecast, updated every 3 hours</string>
+    <string name="weather_prefs_descr">24-hour &amp; 7-day forecast, updated every 3 hours</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">This action is not supported by the selected map style.</string>
@@ -126,7 +127,7 @@
     <string name="purchases_feature_desc_cross_buy">Use your subscription features on different platforms (Android/iOS/web) at no additional cost.</string>
     <string name="shared_string_cross_buy">Cross-buy</string>
     <string name="map_widget_target_distance">Distance from camera to target</string>
-    <string name="ant_widgets">ANT+ widgets</string>
+    <string name="external_sensor_widgets">External sensors</string>
     <string name="ant_missing_dependency_descr">Could not find the required service \"%1$s\".\nYou need to install or update the ANT+ Plugins Service. \nDo you want to launch the Play Store to do that?</string>
     <string name="ant_missing_dependency">Missing Dependency</string>
     <string name="ant_go_to_store">Go to Store</string>
@@ -177,11 +178,10 @@
     <string name="favorite_delete_group">Delete Group</string>
     <string name="available_as_part_of_subscription_plan">Available as part of the %1$s subscription.</string>
     <string name="included_in_your_current_plan">Included in your current \"%1$s\" plan</string>
-    <string name="attach_to_roads_banner_desc">Attach your track to the roads to receive detailed navigation instructions.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
-    <string name="attach_roads_descr">Approximate your track with a route using the offline map. This will provide corrected elevation values, road details, and turns used during the navigation.</string>
+    <string name="attach_roads_descr">Approximate your track to allowed roads to route between points and associate precise turn instructions and route properties.</string>
     <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
@@ -679,7 +679,6 @@
     • Added option to change the route line appearance\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
-    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
@@ -877,7 +876,7 @@
     <string name="latest_openstreetmap_update">Latest OpenStreetMap update available:</string>
     <string name="map_widget_distance_by_tap">Distance by tap</string>
     <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
-    <string name="routing_attr_height_obstacles_description">Routing could avoid strong uphills.</string>
+    <string name="routing_attr_height_obstacles_description">Projected travel time will reflect elevation impact. Routing preference can help avoid steep uphills:</string>
     <string name="app_restart_required">App restart required to apply some settings.</string>
     <string name="on_pause">On pause</string>
     <string name="track_recording_description">Stop recording?\nAll unsaved data will be lost.</string>
@@ -1147,7 +1146,6 @@
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="threshold_distance">Threshold distance</string>
-    <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="next_segment">Next segment</string>
     <string name="whole_track">Whole track</string>
     <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>
@@ -1255,7 +1253,7 @@
     <string name="system_screen_timeout_descr">Turns the screen off as per the system\'s screen timeout.</string>
     <string name="screen_control">Screen control</string>
     <string name="shared_string_always">Always</string>
-    <string name="gpx_parse_error">OsmAnd GPX is not well formed, please contact the support team to investigate further.</string>
+    <string name="gpx_parse_error">Issues found with a GPX file.\n\nYou may contact OsmAnd support to investigate.</string>
     <string name="lenght_limit_description">Provide your vehicle length, some routes restrictions may be applied for long vehicles.</string>
     <string name="weight_limit_description">Provide your vehicle weight, some route restrictions may apply for heavy vehicles.</string>
     <string name="height_limit_description">Provide your vehicle height, some route restrictions may apply for high vehicles.</string>
@@ -1397,7 +1395,7 @@
     <string name="hillshade_download_description">Additional maps are needed to view hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
     <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
-    <string name="hillshade_description">Hillshade map using dark shades to show slopes, peaks and lowlands.</string>
+    <string name="hillshade_description">Hillshade map uses dark shades to show slopes, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
@@ -2373,7 +2371,7 @@
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">Buy and install the \'Contour lines\' plugin to show graded vertical areas.</string>
     <string name="srtm_color_scheme">Color scheme</string>
-    <string name="show_from_zoom_level">Display starting at zoom level</string>
+    <string name="show_from_zoom_level">Displaying starts at zoom level</string>
     <string name="routing_attr_allow_private_name">Allow private access</string>
     <string name="routing_attr_allow_private_description">Allow access to private areas.</string>
     <string name="display_zoom_level">Display zoom level: %1$s</string>
