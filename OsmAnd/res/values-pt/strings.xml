@@ -4225,7 +4225,6 @@
 \n- Atualizações OsmAnd Live movidas para \"Descarregar mapas &gt; Atualizações\".
 \n
 \n</string>
-    <string name="approximate_route_description">Atrair a rota às estradas no mapa para obter todas as viragens e dados adicionais, como a suavidade, tipos de estrada, etc.</string>
     <string name="enter_verification_code">Introduza a palavra-passe de uso único</string>
     <string name="duration_moment_ago">há um momento atrás</string>
     <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
@@ -4770,7 +4769,6 @@
     <string name="attach_roads_descr">Aproxime o seu trilho a uma rota utilizando o mapa offline. Isto fornecerá valores de elevação corrigidos, detalhes de estrada e curvas utilizadas durante a navegação.</string>
     <string name="attach_roads_warning">Só se pode anexar um trilho às estradas.</string>
     <string name="shared_string_only_missing">Só os que faltam</string>
-    <string name="attach_to_roads_banner_desc">Anexe o seu trilho às estradas para obter instruções de navegação.</string>
     <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
     <string name="included_in_your_current_plan">Incluído no seu plano \"%1$s\" atual</string>
     <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>

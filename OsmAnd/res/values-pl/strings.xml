@@ -4216,7 +4216,6 @@
 \n • Aktualizacje OsmAnd Live przeniesione do „Pobrane &gt; Aktualizacje”
 \n
 \n</string>
-    <string name="approximate_route_description">Dołącz trasę do dróg na mapie, aby uzyskać wszystkie zakręty i dodatkowe dane, takie jak gładkość, rodzaje dróg itp.</string>
     <string name="enter_verification_code">Wprowadź jednorazowe hasło</string>
     <string name="duration_moment_ago">przed chwilą</string>
     <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
@@ -4720,7 +4719,6 @@
     <string name="compass_click_desc">Stuknij w kompas, aby przełączyć tryb orientacji mapy.</string>
     <string name="marker_1st">Pierwszy znacznik</string>
     <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s zostanie zliczona i wpłynie na średnią prędkość.</string>
-    <string name="attach_to_roads_banner_desc">Dołącz swój ślad do dróg, aby otrzymywać szczegółowe instrukcje nawigacyjne.</string>
     <string name="auto_backup_title">Automatyczne tworzenie kopii zapasowych</string>
     <string name="av_notes_photo_widget_desc">Stuknięcie widżetu umożliwia zrobienie zdjęcia.</string>
     <string name="available_as_part_of_subscription_plan">Dostępne w ramach subskrypcji %1$s.</string>

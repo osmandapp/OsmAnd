@@ -4214,7 +4214,6 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ungültiges oder abgelaufenes Token</string>
     <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
     <string name="enter_verification_code">Einmalpasswort eingeben</string>
-    <string name="approximate_route_description">Route auf der Straße einrasten, um alle Abbiegungen und zusätzliche Daten, wie Oberflächenbeschaffenheit, Straßentypen usw. zu erhalten.</string>
     <string name="release_4_0">• Datensicherung in der Cloud
 \n
 \n • Nachtmodus für den Kartenstil \"Topo\" hinzugefügt
@@ -4770,7 +4769,6 @@
     <string name="attach_roads_warning">Nur ein aufgezeichneter Track kann an Straßen angehängt werden.</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
-    <string name="attach_to_roads_banner_desc">Den Track an Straßen anhängen um genau Navigationsanweisungen zu erhalten.</string>
     <string name="included_in_your_current_plan">In Ihrem aktuellen \"%1$s\"-Plan enthalten</string>
     <string name="available_as_part_of_subscription_plan">Verfügbar im Rahmen des %1$s Abonnements.</string>
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>

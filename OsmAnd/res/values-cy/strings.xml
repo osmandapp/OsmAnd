@@ -3142,7 +3142,6 @@
 \n • Symudwyd diweddariadau OsmAnd Live i \"Lawrlwythio &gt; Diweddariadau\"
 \n
 \n</string>
-    <string name="approximate_route_description">Cysylltu\'r llwybr â ffyrdd ar y map i gael pob troad a data ychwanegol, fel llyfnder, mathau o ffyrdd ac ati.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Sicrhau lawrlwythiadau diderfyn ar gyfer mapiau all-lein o bob cyfandir a rhanbarth.</string>
     <string name="purchases_feature_desc_combined_wiki">Archwiliwch erthyglau Wicipedia wrth fynd, heb gysylltiad rhyngrwyd. Data all-lein wedi\'i rannu yn ôl gwledydd ac ar gael ym mhob iaith.</string>
     <string name="purchases_feature_desc_wikipedia">Archwiliwch Wicipedia all-lein. Erthyglau wedi\'u rhannu yn ôl gwledydd a rhanbarthau ac ar gael ym mhob iaith.</string>

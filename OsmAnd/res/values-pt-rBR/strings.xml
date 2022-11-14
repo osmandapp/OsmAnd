@@ -4193,7 +4193,6 @@
     <string name="backup_error_user_is_not_registered">Nenhum usuário registrado com esse endereço de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nenhuma assinatura válida presente</string>
     <string name="enter_verification_code">Digite a senha de uso único</string>
-    <string name="approximate_route_description">Anexe a rota às estradas no mapa para obter todas as curvas e dados adicionais, como suavidade, tipos de estradas, etc.</string>
     <string name="release_4_0">- Cópia de segurança para a nuvem
 \n
 \n- Adicionado o modo noturno para o estilo de mapa \"Topográfico\"
@@ -4730,7 +4729,6 @@
     <string name="accessibility_2d_view_off">Visualização 2.5D desligada</string>
     <string name="accessibility_2d_view_on">Visualização 2.5D ligada</string>
     <string name="average_speed_skip_stops_desc">A velocidade menor que %1$s será contada e afetará a velocidade média.</string>
-    <string name="attach_to_roads_banner_desc">Anexe sua trilha às estradas para receber instruções detalhadas de navegação.</string>
     <string name="attach_roads_warning">Apenas uma trilha gravada pode ser anexada às estradas.</string>
     <string name="without_profiles_changing">Sem alteração de perfis</string>
     <string name="compass_desc">Mostra a direção para o norte.</string>

@@ -2828,7 +2828,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="backup_error_file_not_available">Failas neprieinamas</string>
     <string name="backup_error_user_is_not_registered">Šiuo el. pašto adresu neregistruotas joks naudotojas</string>
     <string name="backup_error_no_valid_subscription">Nėra galiojančios prenumeratos</string>
-    <string name="approximate_route_description">Pridėkite maršrutą prie kelių žemėlapyje, kad gautumėte visus posūkius ir papildomus duomenis, pvz., lygumą, kelių tipus ir kt.</string>
     <string name="logcat_buffer_descr">Patikrinkite ir bendrinkite išsamius programos žurnalus</string>
     <string name="release_4_0">• Atsarginės kopijos debesyje
 \n

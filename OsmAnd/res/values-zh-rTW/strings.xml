@@ -4192,7 +4192,6 @@
     <string name="backup_error_user_is_not_registered">沒有使用者使用該電子郵件地址註冊</string>
     <string name="backup_error_no_valid_subscription">無有效的訂閱</string>
     <string name="enter_verification_code">輸入一次性密碼</string>
-    <string name="approximate_route_description">將路線附加到地圖上的道路以取得所有轉彎與其他資料，如平滑度、道路類型等。</string>
     <string name="release_4_0">• 雲端備份
 \n
 \n • 為「Topo」地圖樣式新增了夜間模式
@@ -4758,7 +4757,6 @@
     <string name="without_profiles_changing">不需變更設定檔</string>
     <string name="shared_string_only_missing">僅遺失</string>
     <string name="download_tiles">下載圖磚</string>
-    <string name="attach_to_roads_banner_desc">將您的軌跡貼齊至道路上以接收詳細的導航說明。</string>
     <string name="available_as_part_of_subscription_plan">作為 %1$s 訂閱的一部分提供。</string>
     <string name="included_in_your_current_plan">包含在您目前的「%1$s」方案中</string>
     <string name="favorite_confirm_delete_group">您確定您想要刪除「%1$s」群組與其中所有包含的點 (%2$d) 嗎？</string>

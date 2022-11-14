@@ -3709,7 +3709,6 @@
     <string name="moving_time">Aika liikkeessä</string>
     <string name="save_track_to_gpx_globally_descr">Yleinen sijainnin kirjaaminen GPX-tiedostoon voidaan kytkeä päälle tai pois päältä kartalla olevan GPX-lokitusvidgetin avulla.</string>
     <string name="fav_point_dublicate_message">Suosikki nimettiin uudelleen %1$s, jotta vältyttäisiin päällekkäisyyksiltä.</string>
-    <string name="approximate_route_description">Kiinnitä reitti kartan teihin, niin saat kaikki käännökset ja lisätiedot, kuten tasaisuuden, tietyypit jne.</string>
     <string name="attribute">Ominaisuus</string>
     <string name="shared_string_relation">Suhde</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Väritä reitit niiden yksilöllisen paikallisen värin (jos se on OpenStreetMapissa) ja vaellussymbolin mukaan.</string>

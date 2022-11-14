@@ -4200,7 +4200,6 @@
     <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
     <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
-    <string name="approximate_route_description">Adjuntar la ruta a los caminos en el mapa para obtener todos los giros y datos adicionales, como la suavidad, los tipos de caminos, etc.</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
 \n
 \n• Se ha añadido el modo nocturno para el estilo de mapa «Topo».
@@ -4782,7 +4781,6 @@
     <string name="download_tiles">Descargar teselas</string>
     <string name="attach_roads_descr">Aproxima la traza con una ruta usando los mapas sin conexión. Esto proveerá valores de elevación corregidos, detalles del camino y giros usados durante la navegación.</string>
     <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
-    <string name="attach_to_roads_banner_desc">Adjunta la traza a los caminos para recibir instrucciones de navegación detalladas.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>

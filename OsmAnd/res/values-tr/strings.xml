@@ -4207,7 +4207,6 @@
     <string name="backup_error_user_is_not_registered">Bu e-posta adresiyle kayıtlı kullanıcı yok</string>
     <string name="backup_error_no_valid_subscription">Geçerli abonelik yok</string>
     <string name="contour_lines_hillshades_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
-    <string name="approximate_route_description">Tüm dönüşleri ve düzgünlük, yol türleri vb. gibi ek verileri almak için rotayı haritadaki yollara ekle.</string>
     <string name="release_4_0">• Bulut yedekleme
 \n
 \n • \"Topo\" harita tarzı için gece modu eklendi
@@ -4770,7 +4769,6 @@
     <string name="favorite_confirm_delete_group">\"%1$s\" grubunu ve dahil olan tüm noktaları silmek istediğinizden emin misiniz (%2$d)</string>
     <string name="favorite_delete_group">Grubu Sil</string>
     <string name="display_position">Ekran konumu</string>
-    <string name="attach_to_roads_banner_desc">Ayrıntılı navigasyon yönergeleri almak için izlenen yolunuzu yollara ekleyin.</string>
     <string name="available_as_part_of_subscription_plan">%1$s aboneliğinin bir parçası olarak mevcuttur.</string>
     <string name="included_in_your_current_plan">Mevcut \"%1$s\" planınıza dahildir</string>
 </resources>

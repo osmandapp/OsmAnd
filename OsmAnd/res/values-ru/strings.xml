@@ -4208,7 +4208,6 @@
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
     <string name="duration_moment_ago">только что</string>
-    <string name="approximate_route_description">Прикрепить маршрут к дорогам на карте, чтобы получать данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
     <string name="release_4_0">• Облачное резервное копирование
 \n
 \n• Добавлен ночной режим для стиля карты «Topo»
@@ -4771,7 +4770,6 @@
     <string name="without_profiles_changing">Без смены профиля</string>
     <string name="connect_with_straight_line">Соединить прямой линией</string>
     <string name="attach_roads_descr">Хотите ли вы аппроксимировать свой путь с помощью действующего маршрута, прикрепленного к офлайн-картам\? В этом случае у вас будет скорректированная высота над уровнем моря, информация о дорогах и поворотах, которую в дальнейшем можно будет использовать в навигации.</string>
-    <string name="attach_to_roads_banner_desc">Прикрепите свой трек к дорогам, чтобы получить подробные инструкции по навигации.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
     <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>

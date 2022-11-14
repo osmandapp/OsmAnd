@@ -4268,7 +4268,6 @@
     <string name="regular_price">قیمت پایه</string>
     <string name="on_hold_since">در تعلیق از %1$s</string>
     <string name="active_till">فعال تا %1$s</string>
-    <string name="approximate_route_description">مسیر را روی نقشه به راه‌ها می‌چسباند تا همهٔ گردش‌ها و داده‌های دیگر مانند همواری، نوع راه و... را دریافت کنید.</string>
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>

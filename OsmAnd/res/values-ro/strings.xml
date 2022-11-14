@@ -3026,7 +3026,6 @@
     <string name="backup_error_user_is_not_registered">Nu există niciun utilizator înregistrat cu această adresă de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nu există un abonament valabil</string>
     <string name="contour_lines_hillshades_slope">Linii de contur, umbre de deal, pantă</string>
-    <string name="approximate_route_description">Atașați traseul la drumurile de pe hartă pentru a obține toate virajele și date suplimentare, cum ar fi netezimea, tipurile de drumuri etc.</string>
     <string name="release_4_0">• Backup în cloud
 \n
 \n • A fost adăugat modul de noapte pentru stilul de redare \"Topo\"
@@ -4741,7 +4740,6 @@
     <string name="relative_bearing_widget_desc">Afișează unghiul dintre direcția de deplasare înainte și punctul țintă.</string>
     <string name="first_marker_widget_desc">Puteți configura widget-ul pentru a afișa distanța sau ora estimată de sosire până la primul marker de pe hartă.</string>
     <string name="auto_25_chars_route_roundabout_kr">Ia-o pe ieșirea %1$d și ține-o la dreapta</string>
-    <string name="attach_to_roads_banner_desc">Atașați-vă traseul la drumuri pentru a primi instrucțiuni detaliate de navigare.</string>
     <string name="connect_with_straight_line">Conectați cu o linie dreaptă</string>
     <string name="attach_roads_descr">Aproximați traseul cu o rută folosind harta offline. Aceasta va oferi valori corectate ale altitudinii, detalii despre drumuri și virajele utilizate în timpul navigației.</string>
     <string name="auto_25_chars_route_tl_kr">Întoarceți la stânga și păstrați dreapta</string>

@@ -4206,7 +4206,6 @@
 \nAndmete praegune versioon salvestatakse serverisse ning varem tehtud muudatusi ei saa tagasi võtta.</string>
     <string name="backup_version_history_delete_descr">Kas kustutame vananenud andmetüüpide muutuste logi OsmAndi pilves\?</string>
     <string name="purchases_feature_desc_unlimited_map_download">Hangi kõigi mandrite ja piirkondade võrguühenduseta kaartide piiramatud allalaadimised.</string>
-    <string name="approximate_route_description">Kinnita marsruut kaardil olevatele teedele, et saada kõik pöörded ja lisaandmed, nagu tasasus, teetüübid jne.</string>
     <string name="release_4_0">• Pilvepõhine varundamine
 \n
 \n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks

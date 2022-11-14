@@ -4420,7 +4420,6 @@
     <string name="shared_string_progress">Postup</string>
     <string name="backup_data_removed">Všechna data byla odstraněna.</string>
     <string name="backup_version_history_removed">Historie verzí byla odstraněna.</string>
-    <string name="approximate_route_description">Připojit trasu k cestám na mapě pro získání odboček a doplňujících údajů jako např. hladkost povrchu, typy cest atd.</string>
     <string name="backup_error_no_valid_subscription">Žádné předplatné není aktivní</string>
     <string name="backup_error_user_is_not_registered">Tuto e-mailovou adresu nemá zaregistrovanou žádný uživatel</string>
     <string name="not_available_with">Není dostupné s %1$s</string>

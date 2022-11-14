@@ -4091,7 +4091,6 @@
     <string name="on_hold_since">Na zadršci od %1$s</string>
     <string name="explore_wikipedia_offline">Istražite Vikipediju van mreže.</string>
     <string name="backup_data_removed">Svi podaci su uklonjeni.</string>
-    <string name="approximate_route_description">Prilepi putanju na puteve sa karte da dobijete sva skretanja i dodatne podatke, kao što su uglačanost puta, tip puta i sl.</string>
     <string name="unlimited_map_downloads">Neograničeno preuzimanje mapa</string>
     <string name="shared_string_offline">Van mreže</string>
     <string name="backup_confilcts_descr">Neke datoteke nije moguće otpremiti na server jer na serveru novija verzija.</string>

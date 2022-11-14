@@ -2809,7 +2809,6 @@
     <string name="option_available_only_in_osmand_pro">Tersedia sebagai bagian dari langganan OsmAnd Pro.</string>
     <string name="track_has_no_needed_data">Trek tidak memiliki data terkait.</string>
     <string name="shared_string_progress">Kemajuan</string>
-    <string name="approximate_route_description">Lampirkan rute ke jalan di peta untuk mendapatkan semua belokan dan data tambahan, seperti kehalusan, jenis jalan, dll.</string>
     <string name="backup_error_size_is_exceeded">Ukuran maksimum OsmAnd Cloud melebihi %1$s</string>
     <string name="backup_error_subscription_was_used">Langganan atau promo digunakan oleh akun lain %1$s</string>
     <string name="terrain_maps">Peta medan</string>
@@ -4197,7 +4196,6 @@
     <string name="osb_comment_dialog_error">Tidak dapat menambahkan komentar.</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="application_dir_change_warning3">Pindah file data OsmAnd ke tujuan baru\?</string>
-    <string name="attach_to_roads_banner_desc">Pasang trek Anda pada jalan untuk mendapatkan petunjuk navigasi yang rinci.</string>
     <string name="map_downloaded_descr">Peta %1$s siap untuk digunakan.</string>
     <string name="simulate_initial_startup">Simulasikan pemulaian aplikasi pertama</string>
     <string name="hillshade_layer_disabled">Lapisan bayangan bukit dinonaktifkan</string>

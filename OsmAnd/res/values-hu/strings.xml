@@ -4215,7 +4215,6 @@
 \n • Az OsmAnd Live frissítések átkerültek a „Letöltések &gt; Frissítések” menüpontba
 \n
 \n</string>
-    <string name="approximate_route_description">Hozzáilleszti az útvonalat a térképen lévő utakhoz, hogy megkapja az összes kanyart és további adatokat (pl. az út simasága, úttípusa stb.).</string>
     <string name="enter_verification_code">Egyszeri jelszó megadása</string>
     <string name="logout_from_osmand_cloud">Kijelentkezés az OsmAnd Cloudból</string>
     <string name="logout_from_osmand_cloud_decsr">Kijelentkezik\?
@@ -4758,7 +4757,6 @@
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egy egyenes vonallal</string>
     <string name="attach_roads_descr">Közelítse meg a nyomvonalát egy érvényes útvonallal, az offline térkép használatával. Ez korrigált útmagasság értékeket, út- és kanyarodási információkat biztosít a navigáció során.</string>
-    <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) \"%1$s\" csoportot és minden benne foglalt pontot (%2$d)\?</string>

@@ -3992,7 +3992,6 @@
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
     <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, skråning</string>
-    <string name="approximate_route_description">Fastgør ruten til veje på kortet for at få alle sving og yderligere data, som glathed, vejtyper osv.</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log ud\?
@@ -4771,7 +4770,6 @@
     <string name="shared_string_only_missing">Kun manglende</string>
     <string name="without_profiles_changing">Uden at profiler ændres</string>
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
-    <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at modtage detaljerede navigationsinstruktioner.</string>
     <string name="included_in_your_current_plan">Inkluderet i dit nuværende \"%1$s\" abonnement</string>
     <string name="available_as_part_of_subscription_plan">Tilgængelig som en del af abonnementet %1$s.</string>
     <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)\?</string>
