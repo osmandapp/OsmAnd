@@ -122,7 +122,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
-		RENDERING_ENGINE(RenderingEngineFragment.class.getName(), false, null, R.xml.rendering_engine, R.layout.global_preference_toolbar),
 		SEND_UUID(SendUniqueIdentifiersFragment.class.getName(), false, null, R.xml.send_uuid_preferences, R.layout.global_preference_toolbar),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
 		NAVIGATION(NavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
