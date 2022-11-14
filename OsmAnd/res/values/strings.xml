@@ -10,7 +10,16 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="quick_action_temperature_layer">A toggle to show or hide the temperature layer on the map.</string>
+    <string name="quick_action_precipitation_layer">A toggle to show or hide the precipitation layer on the map.</string>
+    <string name="quick_action_wind_layer">A toggle to show or hide the wind layer on the map.</string>
+    <string name="quick_action_cloud_layer">A toggle to show or hide the cloud layer on the map.</string>
+    <string name="quick_action_air_pressure_layer">A toggle to show or hide the air pressure layer on the map.</string>
+    <string name="temperature_layer">Temperature layer</string>
+    <string name="pressure_layer">Pressure layer</string>
+    <string name="wind_layer">Wind layer</string>
+    <string name="cloud_layer">Cloud layer</string>
+    <string name="precipitation_layer">Precipitation layer</string>
     <string name="storage_migration_fragment_close_descr">Copying is done for %1$s%%. If you stop now, the app may not work correctly.</string>
     <string name="switch_mode_by_tapping_on_widget">Switch the mode by tapping on the widget.</string>
     <string name="map_widget_sunset_desc">Shows the time of the next sunset or the time left until sunset.</string>
