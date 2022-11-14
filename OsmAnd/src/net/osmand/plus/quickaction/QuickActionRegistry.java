@@ -268,11 +268,6 @@ public class QuickActionRegistry {
 		allTypes.add(ShowHideMapillaryAction.TYPE);
 		allTypes.add(ShowHideCurrentLocationWidgetAction.TYPE);
 		allTypes.add(ShowHideMapCenterWidgetAction.TYPE);
-		allTypes.add(ShowHideTemperatureLayerAction.TYPE);
-		allTypes.add(ShowHideWindLayerAction.TYPE);
-		allTypes.add(ShowHideAirPressureLayerAction.TYPE);
-		allTypes.add(ShowHidePrecipitationLayerAction.TYPE);
-		allTypes.add(ShowHideCloudLayerAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);

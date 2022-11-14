@@ -39,6 +39,12 @@ import net.osmand.plus.plugins.weather.units.PrecipConstants;
 import net.osmand.plus.plugins.weather.units.PressureConstants;
 import net.osmand.plus.plugins.weather.units.TemperatureConstants;
 import net.osmand.plus.plugins.weather.units.WindConstants;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.ShowHideAirPressureLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideCloudLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHidePrecipitationLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideTemperatureLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideWindLayerAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -148,6 +154,17 @@ public class WeatherPlugin extends OsmandPlugin {
 		return app.getSettings().USE_OPENGL_RENDER.get()
 				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
 				&& super.isEnabled();
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> action = new ArrayList<>();
+		action.add(ShowHideTemperatureLayerAction.TYPE);
+		action.add(ShowHideWindLayerAction.TYPE);
+		action.add(ShowHideAirPressureLayerAction.TYPE);
+		action.add(ShowHidePrecipitationLayerAction.TYPE);
+		action.add(ShowHideCloudLayerAction.TYPE);
+		return action;
 	}
 
 	@Override
