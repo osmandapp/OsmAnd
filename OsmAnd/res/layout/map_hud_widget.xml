@@ -1,132 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/widget_bg"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minWidth="@dimen/map_minwidth_widget"
-    android:orientation="vertical"
-    tools:background="@drawable/bg_side_widget_day">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/widget_bg"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minWidth="@dimen/map_minwidth_widget"
+	android:orientation="vertical"
+	tools:background="@drawable/bg_side_widget_day">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/widget_top_icon_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/map_widget_text_size"
-            android:visibility="gone"/>
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/widget_top_icon"
-            android:layout_width="@dimen/map_widget_image"
-            android:layout_height="@dimen/map_widget_image"
-            android:layout_gravity="center"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            osmand:srcCompat="@drawable/ic_action_remove_dark"
-            android:visibility="gone"/>
-    </FrameLayout>
+			<TextView
+				android:id="@+id/widget_top_icon_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="2dp"
+				android:gravity="center"
+				android:textColor="@color/color_black"
+				android:textSize="@dimen/map_widget_text_size"
+				android:visibility="gone" />
 
-    <LinearLayout
-        android:id="@+id/widget_bottom_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/map_widget_height"
-        android:orientation="horizontal">
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/widget_top_icon"
+				android:layout_width="@dimen/map_widget_image"
+				android:layout_height="@dimen/map_widget_image"
+				android:layout_gravity="center"
+				android:layout_marginTop="2dp"
+				android:gravity="center"
+				android:visibility="gone"
+				osmand:srcCompat="@drawable/ic_action_remove_dark" />
+		</FrameLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/widget_icon"
-            android:layout_width="@dimen/map_widget_icon"
-            android:layout_height="@dimen/map_widget_icon"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginLeft="@dimen/map_widget_icon_margin"
-            android:layout_marginRight="@dimen/map_widget_icon_margin"
-            android:gravity="center"
-            osmand:srcCompat="@drawable/ic_action_remove_dark"
-	        android:layout_marginEnd="@dimen/map_widget_icon_margin"
-	        android:layout_marginStart="@dimen/map_widget_icon_margin" />
+		<LinearLayout
+			android:id="@+id/widget_bottom_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/map_widget_height"
+			android:orientation="horizontal">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="4dp"
-            android:layout_marginStart="@dimen/map_widget_icon_margin">
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/widget_icon"
+				android:layout_width="@dimen/map_widget_icon"
+				android:layout_height="@dimen/map_widget_icon"
+				android:layout_gravity="start|center_vertical"
+				android:layout_marginStart="@dimen/map_widget_icon_margin"
+				android:layout_marginLeft="@dimen/map_widget_icon_margin"
+				android:layout_marginEnd="@dimen/map_widget_icon_margin"
+				android:layout_marginRight="@dimen/map_widget_icon_margin"
+				android:gravity="center"
+				osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/map_widget_icon_margin"
+				android:layout_marginEnd="4dp">
 
-                <TextView
-                    android:id="@+id/widget_text_shadow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/map_widget_icon_margin"
-                    android:maxLines="1"
-                    android:minWidth="10dp"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/map_widget_text_size"
-                    tools:text="1048"/>
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/widget_text_small_shadow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/widget_text_shadow"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/widget_text_shadow"
-                    android:maxLines="1"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/map_widget_text_size_small"
-                    tools:text="km"/>
-            </RelativeLayout>
+					<TextView
+						android:id="@+id/widget_text_shadow"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/map_widget_icon_margin"
+						android:maxLines="1"
+						android:minWidth="10dp"
+						android:textColor="@color/color_white"
+						android:textSize="@dimen/map_widget_text_size"
+						tools:text="1048" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/widget_text_small_shadow"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignBaseline="@+id/widget_text_shadow"
+						android:layout_marginStart="4dp"
+						android:layout_toEndOf="@+id/widget_text_shadow"
+						android:maxLines="1"
+						android:textColor="@color/color_white"
+						android:textSize="@dimen/map_widget_text_size_small"
+						tools:text="km" />
+				</RelativeLayout>
 
-                <TextView
-                    android:id="@+id/widget_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/map_widget_icon_margin"
-                    android:maxLines="1"
-                    android:minWidth="10dp"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size"
-                    tools:text="1048" />
+				<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/widget_text_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/widget_text"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/widget_text"
-                    android:maxLines="1"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size_small"
-                    tools:text="km"/>
-            </RelativeLayout>
+					<TextView
+						android:id="@+id/widget_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/map_widget_icon_margin"
+						android:maxLines="1"
+						android:minWidth="10dp"
+						android:textColor="@color/color_black"
+						android:textSize="@dimen/map_widget_text_size"
+						tools:text="1048" />
 
-        </FrameLayout>
+					<TextView
+						android:id="@+id/widget_text_small"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignBaseline="@+id/widget_text"
+						android:layout_marginStart="4dp"
+						android:layout_toEndOf="@+id/widget_text"
+						android:maxLines="1"
+						android:textColor="@color/color_black"
+						android:textSize="@dimen/map_widget_text_size_small"
+						tools:text="km" />
+				</RelativeLayout>
 
-    </LinearLayout>
+			</FrameLayout>
 
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:visibility="gone" />
+		</LinearLayout>
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:visibility="gone" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/empty_banner"
+		android:layout_width="@dimen/map_minwidth_widget"
+		android:layout_height="@dimen/map_widget_height"
+		android:visibility="gone" />
 
 </LinearLayout>
