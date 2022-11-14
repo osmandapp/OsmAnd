@@ -94,6 +94,9 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
 	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	
+	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
+	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
 
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 
@@ -1596,7 +1599,6 @@ public class SearchCoreFactory {
 			String text = !unknownWords.isEmpty() ? unknownWords.get(0) : phrase.getUnknownWordToSearch();
 			
 			final List<String> allowedTypes = Arrays.asList("city", "town", "village");
-			final int totalLimit = 500;
 			QuadRect searchBBox31 = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			final NameStringMatcher nm = new NameStringMatcher(text, CHECK_STARTS_FROM_SPACE);
 			final String lang = phrase.getSettings().getLang();
@@ -1615,7 +1617,7 @@ public class SearchCoreFactory {
 				
 				@Override
 				public boolean publish(SearchResult object) {
-					if (count > totalLimit) {
+					if (count > SEARCH_OLC_WITH_CITY_TOTAL_LIMIT) {
 						return false;
 					}
 					Amenity amenity = null;
@@ -1641,11 +1643,11 @@ public class SearchCoreFactory {
 				
 				@Override
 				public boolean isCancelled() {
-					return count > totalLimit || resultMatcher.isCancelled();
+					return count > SEARCH_OLC_WITH_CITY_TOTAL_LIMIT || resultMatcher.isCancelled();
 				}
 			};
 			
-			SearchResultMatcher rm = new SearchResultMatcher(matcher, olcPhrase, 0, new AtomicInteger(0), totalLimit);
+			SearchResultMatcher rm = new SearchResultMatcher(matcher, olcPhrase, 0, new AtomicInteger(0), SEARCH_OLC_WITH_CITY_TOTAL_LIMIT);
 			amenitiesApi.search(olcPhrase, rm);
 			
 			final NameStringMatcher nmEquals = new NameStringMatcher(text, CHECK_EQUALS);
@@ -1675,12 +1677,8 @@ public class SearchCoreFactory {
 					int poiTypeIndex = allowedTypes.indexOf(poi.getSubType());
 					if (poiTypeIndex != 0) {
 						res += poiTypeIndex;
-						if (nmEquals.matches(poi.getName())) {
-							res += 8;
-						} else {
-							if (nmEquals.matches(poi.getName())) {
-								res += 8;
-							}
+						if (nmEquals.matches(poi.getName()) || nmEquals.matches(poi.getOtherNames())) {
+							res += SEARCH_OLC_WITH_CITY_PRIORITY;
 						}
 					}
 					return res;
