@@ -35,7 +35,7 @@ public class BikeSpeedTextWidget extends TextInfoWidget {
 				FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(calculatedSpeed, app);
 				setText(formattedSpeed.value, formattedSpeed.unit);
 			} else {
-				setText(null, null);
+				setText(NO_VALUE, null);
 			}
 		}
 	}
