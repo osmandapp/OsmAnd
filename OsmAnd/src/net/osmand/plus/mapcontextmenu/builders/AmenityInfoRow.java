@@ -11,7 +11,7 @@ public class AmenityInfoRow {
 	public int iconId;
 	public final String textPrefix;
 	public final String text;
-	public final String socialMediaUrl;
+	public final String hiddenUrl;
 	public final CollapsableView collapsableView;
 	public final boolean collapsable;
 	public final int textColor;
@@ -26,7 +26,7 @@ public class AmenityInfoRow {
 	public final int textLinesLimit;
 
 	public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-	                      String socialMediaUrl, boolean collapsable,
+	                      String hiddenUrl, boolean collapsable,
 	                      CollapsableView collapsableView, int textColor, boolean isWiki,
 	                      boolean isText, boolean needLinks, int order, String name,
 	                      boolean isPhoneNumber, boolean isUrl,
@@ -35,7 +35,7 @@ public class AmenityInfoRow {
 		this.icon = icon;
 		this.textPrefix = textPrefix;
 		this.text = text;
-		this.socialMediaUrl = socialMediaUrl;
+		this.hiddenUrl = hiddenUrl;
 		this.collapsable = collapsable;
 		this.collapsableView = collapsableView;
 		this.textColor = textColor;
@@ -51,7 +51,7 @@ public class AmenityInfoRow {
 	}
 
 	public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-	                      String socialMediaUrl, boolean collapsable,
+	                      String hiddenUrl, boolean collapsable,
 	                      CollapsableView collapsableView, int textColor, boolean isWiki,
 	                      boolean isText, boolean needLinks, int order, String name,
 	                      boolean isPhoneNumber, boolean isUrl,
@@ -60,7 +60,7 @@ public class AmenityInfoRow {
 		this.iconId = iconId;
 		this.textPrefix = textPrefix;
 		this.text = text;
-		this.socialMediaUrl = socialMediaUrl;
+		this.hiddenUrl = hiddenUrl;
 		this.collapsable = collapsable;
 		this.collapsableView = collapsableView;
 		this.textColor = textColor;
