@@ -4794,7 +4794,7 @@
     <string name="current_location_widget">Súradnice: Súčasná poloha</string>
     <string name="purchases_feature_desc_cross_buy">Použite vaše predplatené funkcie na iných platformách (Android/iOS/web) bez ďalších nákladov.</string>
     <string name="shared_string_cross_buy">Prenosný nákup</string>
-    <string name="ant_widgets">Nástroje ANT+</string>
+    <string name="external_sensor_widgets">Nástroje ANT+</string>
     <string name="ant_read_data">Načítať údaje</string>
     <string name="ant_go_to_store">Prejsť do obchodu</string>
     <string name="map_widget_ant_bicycle_dist_desc">Zobrazuje prejdenú vzdialenosť</string>

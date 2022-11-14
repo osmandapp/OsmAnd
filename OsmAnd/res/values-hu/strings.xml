@@ -4805,7 +4805,7 @@
     <string name="ant_read_data">Adatok olvasása</string>
     <string name="map_widget_ant_bicycle_power">Kerékpáros-teljesítmény</string>
     <string name="map_widget_ant_heart_rate">Pulzusszám</string>
-    <string name="ant_widgets">ANT+ widgetek</string>
+    <string name="external_sensor_widgets">ANT+ widgetek</string>
     <string name="ant_go_to_store">Ugrás az áruházhoz</string>
     <string name="ant_missing_dependency">Hiányzó függőség</string>
     <string name="ant_write_to_gpx">Adatok nyomvonalba írása</string>

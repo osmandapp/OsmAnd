@@ -4808,7 +4808,7 @@
     <string name="nautical_depth_points">Navtične globinske točke</string>
     <string name="depth_contours">Izobate</string>
     <string name="worldwide_maps">Zemljevidi sveta</string>
-    <string name="ant_widgets">ANT+ gradniki</string>
+    <string name="external_sensor_widgets">ANT+ gradniki</string>
     <string name="shared_string_cross_buy">Navzkrižni nakup</string>
     <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
     <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>

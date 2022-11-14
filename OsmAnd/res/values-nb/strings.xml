@@ -4758,7 +4758,7 @@
     <string name="nautical_depth_points">Sjødybder</string>
     <string name="depth_contours">Dybdekonturer</string>
     <string name="map_widget_zoom_level_desc">Miniprogrammet viser nåværende kartforstørrelsesnivå.</string>
-    <string name="ant_widgets">ANT+-miniprogrammer</string>
+    <string name="external_sensor_widgets">ANT+-miniprogrammer</string>
     <string name="map_widget_ant_bicycle_dist">Sykkeldistanse</string>
     <string name="map_widget_target_distance_desc">Miniprogrammet viser avstanden fra kameraet til målstedet.</string>
     <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».

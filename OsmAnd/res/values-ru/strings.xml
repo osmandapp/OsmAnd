@@ -4792,7 +4792,7 @@
     <string name="favorites_backup">Резервное копирование избранного</string>
     <string name="purchases_feature_desc_cross_buy">Используйте функции подписки на разных платформах (Android/iOS/Web) без дополнительной платы.</string>
     <string name="shared_string_cross_buy">Перекрестная покупка</string>
-    <string name="ant_widgets">Виджеты ANT+</string>
+    <string name="external_sensor_widgets">Виджеты ANT+</string>
     <string name="ant_go_to_store">Перейти в магазин</string>
     <string name="ant_read_data">Чтение данных</string>
     <string name="map_widget_ant_bicycle_speed">Скорость велосипеда</string>

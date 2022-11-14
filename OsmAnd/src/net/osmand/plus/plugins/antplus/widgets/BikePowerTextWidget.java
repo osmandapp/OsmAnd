@@ -32,7 +32,7 @@ public class BikePowerTextWidget extends TextInfoWidget {
 			if (calculatedPower > 0) {
 				setText(String.valueOf(calculatedPower), "W");
 			} else {
-				setText(null, null);
+				setText(NO_VALUE, null);
 			}
 		}
 	}

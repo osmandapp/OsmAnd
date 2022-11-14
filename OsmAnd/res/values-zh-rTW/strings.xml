@@ -4794,7 +4794,7 @@
     <string name="ant_go_to_store">到商店</string>
     <string name="ant_read_data">讀取資料</string>
     <string name="ant_write_to_gpx">將資料寫入至軌跡</string>
-    <string name="ant_widgets">ANT+ 小工具</string>
+    <string name="external_sensor_widgets">ANT+ 小工具</string>
     <string name="map_widget_ant_bicycle_power">自行車功率</string>
     <string name="ant_missing_dependency_descr">找不到必要的服務「%1$s」。
 \n您必須安裝或更新 ANT+ 外掛程式服務。

@@ -4800,7 +4800,7 @@
     <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
     <string name="lang_sat">Santalí</string>
-    <string name="ant_widgets">Widgets de ANT+</string>
+    <string name="external_sensor_widgets">Widgets de ANT+</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
 \nDebes instalar o actualizar el servicio para el complemento ANT+.
 \n¿Quieres abrir Play Store para hacer eso\?</string>

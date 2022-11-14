@@ -4020,7 +4020,7 @@
     <string name="ant_missing_dependency">Falta la dependència</string>
     <string name="ant_read_data">Llegir dades</string>
     <string name="ant_write_to_gpx">Escriure dades en la traça</string>
-    <string name="ant_widgets">Ginys d\'ANT+</string>
+    <string name="external_sensor_widgets">Ginys d\'ANT+</string>
     <string name="map_widget_ant_heart_rate">Ritme cardíac</string>
     <string name="ant_missing_dependency_descr">El servei necessari \"%1$s\" no s\'ha trobat.
 \nHas d\'instal·lar el complement del servei ANT+ o actualitza la versió existent si ja el tens.

@@ -9,6 +9,7 @@ import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -16,7 +17,7 @@ public class LocationSearchTest {
 
 	private void search(String string, LatLon latLon) throws IOException {
 		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, null, 0, null, 100);
-		new SearchCoreFactory.SearchLocationAndUrlAPI().
+		new SearchCoreFactory.SearchLocationAndUrlAPI(null).
 			search(SearchPhrase.emptyPhrase().generateNewPhrase(string, null), srm);
 		Assert.assertEquals(1, srm.getRequestResults().size());
 		Assert.assertEquals(latLon, srm.getRequestResults().get(0).location);

@@ -4748,7 +4748,7 @@
     <string name="shared_string_identifiers">Identyfikatory</string>
     <string name="favorites_backup">Kopia zapasowa ulubionych</string>
     <string name="map_widget_target_distance">Odległość od kamery do celu</string>
-    <string name="ant_widgets">Widżety ANT+</string>
+    <string name="external_sensor_widgets">Widżety ANT+</string>
     <string name="ant_missing_dependency">Brakująca zależność</string>
     <string name="map_widget_ant_heart_rate">Tętno</string>
     <string name="ant_write_to_gpx">Zapisywanie danych do ścieżki</string>

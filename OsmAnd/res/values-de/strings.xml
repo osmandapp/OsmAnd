@@ -4801,7 +4801,7 @@
     <string name="map_widget_camera_tilt">Kameraneigung</string>
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Zeigt die Entfernung zwischen Kamera und Zielort an.</string>
-    <string name="ant_widgets">ANT+ Widgets</string>
+    <string name="external_sensor_widgets">ANT+ Widgets</string>
     <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
