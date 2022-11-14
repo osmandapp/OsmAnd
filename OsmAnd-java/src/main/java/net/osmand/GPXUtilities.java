@@ -211,7 +211,7 @@ public class GPXUtilities {
 
 	public static class Elevation {
 		public float distance;
-		public int time;
+		public float timeDiff;
 		public float elevation;
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
@@ -219,7 +219,7 @@ public class GPXUtilities {
 
 	public static class Speed {
 		public float distance;
-		public int time;
+		public float timeDiff;
 		public float speed;
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
@@ -895,6 +895,7 @@ public class GPXUtilities {
 			float totalElevation = 0;
 			int elevationPoints = 0;
 			int speedCount = 0;
+			long timeDiffMillis = 0;
 			int timeDiff = 0;
 			double totalSpeedSum = 0;
 			points = 0;
@@ -998,7 +999,7 @@ public class GPXUtilities {
 						point.distance = segmentDistance;
 
 						// In case points are reversed and => time is decreasing
-						long timeDiffMillis = Math.max(0, point.time - prev.time);
+						timeDiffMillis = Math.max(0, point.time - prev.time);
 						timeDiff = (int) ((timeDiffMillis) / 1000);
 
 						//Last resort: Derive speed values from displacement if track does not originally contain speed
@@ -1026,7 +1027,7 @@ public class GPXUtilities {
 						//	}
 					}
 
-					elevation1.time = timeDiff;
+					elevation1.timeDiff = ((float) timeDiffMillis) / 1000;
 					elevation1.distance = (j > 0) ? calculations[0] : 0;
 					elevationData.add(elevation1);
 					if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
@@ -1042,7 +1043,7 @@ public class GPXUtilities {
 
 					Speed speed1 = new Speed();
 					speed1.speed = speed;
-					speed1.time = timeDiff;
+					speed1.timeDiff = ((float) timeDiffMillis) / 1000;
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
 					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {

@@ -1265,7 +1265,7 @@ public class GpxUiHelper {
 		for (Elevation e : elevationData) {
 			i++;
 			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
-				x = e.time;
+				x = e.timeDiff;
 			} else {
 				x = e.distance;
 			}
@@ -1535,7 +1535,7 @@ public class GpxUiHelper {
 			Speed s = speedData.get(i);
 
 			float stepX = axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY
-					? s.time
+					? s.timeDiff
 					: s.distance;
 
 			if (i == 0 || stepX > 0) {
@@ -1998,7 +1998,7 @@ public class GpxUiHelper {
 					if (l.hasSpeed() && l.getSpeed() > 0) {
 						point.speed = l.getSpeed();
 						double dist = MapUtils.getDistance(prevPoint.lat, prevPoint.lon, point.lat, point.lon);
-						point.time = prevPoint.time + (long) (dist / point.speed) * SECOND_IN_MILLIS;
+						point.time = prevPoint.time + (long) (dist / point.speed * SECOND_IN_MILLIS);
 					} else {
 						point.time = prevPoint.time;
 					}
