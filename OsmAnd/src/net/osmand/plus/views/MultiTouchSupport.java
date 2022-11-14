@@ -201,6 +201,6 @@ public class MultiTouchSupport {
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
+		return app.useOpenGlRenderer() && NativeCoreContext.isInit();
 	}
 }
