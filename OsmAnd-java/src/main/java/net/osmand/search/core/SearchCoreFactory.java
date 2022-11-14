@@ -94,6 +94,8 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
 	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	
+	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 
 	public static abstract class SearchBaseAPI implements SearchCoreAPI {
 
@@ -1675,12 +1677,8 @@ public class SearchCoreFactory {
 					int poiTypeIndex = allowedTypes.indexOf(poi.getSubType());
 					if (poiTypeIndex != 0) {
 						res += poiTypeIndex;
-						if (nmEquals.matches(poi.getName())) {
-							res += 8;
-						} else {
-							if (nmEquals.matches(poi.getName())) {
-								res += 8;
-							}
+						if (nmEquals.matches(poi.getName()) || nmEquals.matches(poi.getOtherNames())) {
+							res += SEARCH_OLC_WITH_CITY_PRIORITY;
 						}
 					}
 					return res;
