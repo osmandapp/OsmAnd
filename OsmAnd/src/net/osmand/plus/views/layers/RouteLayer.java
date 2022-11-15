@@ -459,7 +459,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
 						}
 					}
-				} else if (useMapCenter) {
+				} else if (useMapCenter && app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 					currentLocation.setLatitude(tb.getLatitude());
 					currentLocation.setLongitude(tb.getLongitude());
 				}
