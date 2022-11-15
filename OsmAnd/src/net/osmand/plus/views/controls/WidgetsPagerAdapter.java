@@ -33,6 +33,7 @@ import java.util.TreeMap;
 
 public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final WidgetsPanel widgetsPanel;
 	private final MapWidgetRegistry widgetRegistry;
@@ -41,6 +42,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	private ViewHolderBindListener bindListener;
 
 	public WidgetsPagerAdapter(@NonNull OsmandApplication app, @NonNull WidgetsPanel widgetsPanel) {
+		this.app = app;
 		this.widgetsPanel = widgetsPanel;
 		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -99,7 +101,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	private VisiblePages collectVisiblePages() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(widgetsPanel);
-		return new VisiblePages(widgetInfos, appMode);
+		return new VisiblePages(app, widgetInfos, appMode);
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
@@ -142,12 +144,13 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		private final Map<Integer, List<View>> visibleViews = new TreeMap<>();
 		private final Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
 
-		public VisiblePages(@NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
+		public VisiblePages(@NonNull OsmandApplication app, @NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
 			for (MapWidgetInfo widgetInfo : widgets) {
 				if (widgetInfo.isEnabledForAppMode(appMode)) {
 					addWidgetViewToPage(widgetInfo.pageIndex, (TextInfoWidget) widgetInfo.widget);
 				}
 			}
+			boolean followingMode = app.getRoutingHelper().isFollowingMode();
 			for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
 				List<View> widgetsViews = new ArrayList<>();
 				for (TextInfoWidget widget : entry.getValue()) {
@@ -156,7 +159,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 						widget.updateBannerVisibility(false);
 					}
 				}
-				if (Algorithms.isEmpty(widgetsViews)) {
+				if (Algorithms.isEmpty(widgetsViews) && followingMode) {
 					TextInfoWidget widget = entry.getValue().get(0);
 					widgetsViews.add(widget.getView());
 					widget.updateBannerVisibility(true);
