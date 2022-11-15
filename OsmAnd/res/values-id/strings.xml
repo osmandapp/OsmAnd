@@ -2099,7 +2099,7 @@
     <string name="default_buttons_commit">Komit</string>
     <string name="m">m</string>
     <string name="enter_verification_code">Masukkan kata sandi sekali pakai</string>
-    <string name="routing_attr_height_obstacles_description"></string>
+    <string name="routing_attr_height_obstacles_description">Waktu perjalanan yang diproyeksikan akan mencerminkan dampak ketinggian. Preferensi perutean dapat membantu menghindari tanjakan yang curam:</string>
     <string name="clear_confirmation_msg">Lupakan %1$s\?</string>
     <string name="online_routing_example_hint">URL dengan semua parameter bernyala akan diperlihatkan seperti berikut:</string>
     <string name="file_import_error">%1$s gagal impor: %2$s</string>
