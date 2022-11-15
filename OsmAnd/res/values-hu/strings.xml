@@ -4947,4 +4947,14 @@
     <string name="rendering_attr_depthContourColorScheme_name">Vonal színsémája</string>
     <string name="rendering_attr_depthContourWidth_name">Vonal szélessége</string>
     <string name="storage_migration_fragment_close_descr">Másolás kész: %1$s%%. Ha most leállítja, az alkalmazás lehet, hogy nem fog megfelelően működni.</string>
+    <string name="quick_action_precipitation_layer">Kapcsoló a csapadék réteg megjelenítéséhez vagy rejtéséhez.</string>
+    <string name="quick_action_wind_layer">Kapcsoló a szél réteg megjelenítéséhez vagy rejtéséhez.</string>
+    <string name="quick_action_cloud_layer">Kapcsoló a felhőzet réteg megjelenítéséhez vagy rejtéséhez.</string>
+    <string name="quick_action_air_pressure_layer">Kapcsoló a légnyomás réteg megjelenítéséhez vagy rejtéséhez.</string>
+    <string name="temperature_layer">Hőmérséklet réteg</string>
+    <string name="pressure_layer">Légnyomás réteg</string>
+    <string name="wind_layer">Szél réteg</string>
+    <string name="cloud_layer">Felhőzet réteg</string>
+    <string name="precipitation_layer">Csapadék réteg</string>
+    <string name="quick_action_temperature_layer">Kapcsoló a hőmérséklet réteg megjelenítéséhez vagy rejtéséhez.</string>
 </resources>
