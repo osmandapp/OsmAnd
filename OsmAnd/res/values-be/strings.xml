@@ -4865,4 +4865,7 @@
     <string name="shared_string_sunrise">Узыход</string>
     <string name="switch_mode_by_tapping_on_widget">Пераключыце рэжым, націснуўшы на віджэт.</string>
     <string name="map_widget_group_sunrise_sunset_desc">Віджэты паказваюць звесткі пра ўзыход і заход сонца.</string>
+    <string name="rendering_attr_depthContourWidth_name">Таўшчыня ізабат</string>
+    <string name="depth_contour_lines">Ізабаты</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
 </resources>
