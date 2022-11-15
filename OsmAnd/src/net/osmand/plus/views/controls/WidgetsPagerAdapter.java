@@ -150,7 +150,9 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 					addWidgetViewToPage(widgetInfo.pageIndex, (TextInfoWidget) widgetInfo.widget);
 				}
 			}
-			boolean followingMode = app.getRoutingHelper().isFollowingMode();
+			boolean followingMode = app.getRoutingHelper().isFollowingMode()
+					|| app.getLocationProvider().getLocationSimulation().isRouteAnimating();
+
 			for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
 				List<View> widgetsViews = new ArrayList<>();
 				for (TextInfoWidget widget : entry.getValue()) {
