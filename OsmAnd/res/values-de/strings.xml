@@ -3594,7 +3594,9 @@
 \nDeaktivieren Sie ungenutzte Plugins, um deren Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
-    <string name="gpx_parse_error">OsmAnd GPX ist nicht optimal geformt, bitte kontaktieren Sie das Support-Team, um weitere Nachforschungen anzustellen.</string>
+    <string name="gpx_parse_error">Probleme mit einer GPX-Datei gefunden.
+\n
+\nSie können sich zur Untersuchung an den OsmAnd-Support wenden.</string>
     <string name="map_source_zoom_levels_descr">Wirkt sich auf den Bildschirm aus, wenn er als Karte oder Overlay/Underlay verwendet wird. 
 \n 
 \n%1$s: Die Karte ist auf den ausgewählten Zoomstufenbereich beschränkt. 
@@ -4015,7 +4017,7 @@
 \nAlle nicht gespeicherten Daten gehen verloren.</string>
     <string name="on_pause">Pausiert</string>
     <string name="app_restart_required">App-Neustart erforderlich, um einige Einstellungen anzuwenden.</string>
-    <string name="routing_attr_height_obstacles_description">Die Streckenführung könnte starke Steigungen vermeiden.</string>
+    <string name="routing_attr_height_obstacles_description">Die voraussichtliche Reisezeit wird den Höhenverlauf berücksichtigen. Die bevorzugte Streckenführung kann helfen, steile Steigungen zu vermeiden:</string>
     <string name="quick_action_coordinates_widget_descr">Ein Umschalter zum Ein- und Ausblenden des Koordinaten-Widgets auf der Karte.</string>
     <string name="latest_openstreetmap_update">Aktuelles OpenStreetMap Update verfügbar:</string>
     <string name="last_time_checked">Zuletzt geprüft: %s</string>
@@ -4765,7 +4767,7 @@
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
     <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden berücksichtigt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
-    <string name="attach_roads_descr">Nähern Sie Ihren Track mit einer Route unter Verwendung der Offline-Karte an. Dadurch werden korrigierte Höhenwerte, Straßendetails und Abbiegungen bereitgestellt, die zur Navigation verwendet werden.</string>
+    <string name="attach_roads_descr">Ihren Track an zulässigen Straßen annähern, um zwischen Punkten zu navigieren und genauen Abbiegeanweisungen und Routeneigenschaften zuzuordnen.</string>
     <string name="attach_roads_warning">Nur ein aufgezeichneter Track kann an Straßen angehängt werden.</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
@@ -4920,7 +4922,7 @@
     <string name="weather_pressure_hectopascals">Hektopascal</string>
     <string name="weather_pressure_inches_of_mercury">Zoll Quecksilbersäule</string>
     <string name="weather_pressure_millimeters_of_mercury">Millimeter Quecksilbersäule</string>
-    <string name="weather_prefs_descr">24-Stunden- und 7-Tage-Vorhersage, alle 3 Stunden aktualisiert</string>
+    <string name="weather_prefs_descr">24-Stunden &amp; 7-Tage-Vorhersage, alle 3 Stunden aktualisiert</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Diese Aktion wird vom ausgewählten Kartenstil nicht unterstützt.</string>
@@ -4954,4 +4956,5 @@
     <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenaufgang und Sonnenuntergang an.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
+    <string name="storage_migration_fragment_close_descr">Das Kopieren ist erfolgt für %1$s%%. Wenn Sie jetzt abbrechen, funktioniert die Anwendung möglicherweise nicht richtig.</string>
 </resources>

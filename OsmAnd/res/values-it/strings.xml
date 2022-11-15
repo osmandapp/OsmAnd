@@ -4605,10 +4605,10 @@
     <string name="routing_attr_avoid_4wd_only_description">Evita le strade percorribili solo con veicoli 4WD</string>
     <string name="bearing_secondary_desc">Puoi cambiare il formato della data visualizza in: %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Parte del componente aggiuntivo %1$s.</string>
-    <string name="elevation_profile_widget_desc">Il widget mostra il profilo altimetrico e della pendenza dell\'attuale percorso.</string>
-    <string name="parking_widget_desc">Widget che mostra la distanza dal centro dello schermo alla posizione di parcheggio.</string>
+    <string name="elevation_profile_widget_desc">Mostra il profilo altimetrico e della pendenza dell\'attuale percorso.</string>
+    <string name="parking_widget_desc">Mostra la distanza dal centro dello schermo alla posizione di parcheggio.</string>
     <string name="av_notes_choose_action_widget_desc">Scegli l\'azione.</string>
-    <string name="gps_info_widget_desc">Mostra il numero di satelliti che il dispositivo ha rilevato e che usa in quel momento.</string>
+    <string name="gps_info_widget_desc">Mostra il numero di satelliti attualmente visibili e utilizzati.</string>
     <string name="max_speed_widget_desc">Mostra il limite di velocità della strada che si sta percorrendo.</string>
     <string name="current_speed_widget_desc">Mostra la velocità determinata dal GPS.</string>
     <string name="mapillary_widget_desc">Widget che fornisce un accesso veloce all\'app Mapillary per aggiungere Immagini-Stradali.</string>
@@ -4619,11 +4619,11 @@
     <string name="get_altitude_information">Ottieni l\'informazione sull\'altitudine</string>
     <string name="calculating_altitude">Calcolo altitudine in corso</string>
     <string name="calculate_online">Calcola online</string>
-    <string name="get_altitude_data">Ottieni dati altitudine</string>
-    <string name="calculate_altitude">Calcola altitudine</string>
+    <string name="get_altitude_data">Ottieni dati sull\'altitudine</string>
+    <string name="calculate_altitude">Calcola l\'altitudine</string>
     <string name="magnetic_bearing_widget_desc">Angolo tra il nord magnetico e la destinazione osservato dalla tua posizione.</string>
     <string name="routing_attr_avoid_4wd_only_name">Evita le strade 4WD</string>
-    <string name="coordinates_widget_secondary_desc">Il formato delle coordinate può essere cambiato in %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Il formato della coordinata può essere cambiato in %1$s – %2$s – %3$s.</string>
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
@@ -4650,11 +4650,11 @@
     <string name="track_attach_to_the_roads_descr">La traccia sarà incollata alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
     <string name="map_widget_true_bearing">Angolo reale</string>
     <string name="routing_attr_hazmat_category_name">Categoria materiale pericoloso</string>
-    <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori nel widget.</string>
+    <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori.</string>
     <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, l\'orario di arrivo o il tempo rimanente, le prossime svolte, il nome della strada attuale, l\'angolo, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nascondi le aree militari</string>
-    <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza tempo di arrivo o il tempo rimanente, prossime svolte, angolo, il nome della strada attuale, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
+    <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, tempo di arrivo o il tempo rimanente, prossime svolte, angolo, il nome della strada attuale o successiva, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="explore_plans">Esplora i Piani</string>
     <string name="shared_string_mode">Modalità</string>
@@ -4721,8 +4721,8 @@
     <string name="compass_desc">Mostra la direzione del nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Schema colori delle linee di profondità</string>
     <string name="rendering_attr_depthContourWidth_description">Spessore linee di profondità</string>
-    <string name="accessibility_2d_view_off">Vista 2.5D disattiva</string>
-    <string name="accessibility_2d_view_on">Vista 2.5D attiva</string>
+    <string name="accessibility_2d_view_off">Disattiva la vista 2.5D</string>
+    <string name="accessibility_2d_view_on">Attiva la vista 2.5D</string>
     <string name="download_complete">Download completato</string>
     <string name="auto_25_chars_route_tu_kl">Fai inversione a U e tieni la sinistra</string>
     <string name="auto_25_chars_route_tu_kr">Fai inversione a U e tieni la destra</string>
@@ -4776,19 +4776,19 @@
     <string name="shared_string_shows">Mostra</string>
     <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
     <string name="map_marker_interval_dialog_desc">Specifica l\'intervallo di tempo per cui verrà misurata la velocità media per calcolare la stima dell\'orario d\'arrivo.</string>
-    <string name="coordinates_widget_map_center_desc">Il widget mostra le coordinate geografiche del centro attuale della mappa</string>
+    <string name="coordinates_widget_map_center_desc">Mostra le coordinate geografiche del centro attuale della mappa</string>
     <string name="quick_action_current_location_widget_descr">Un interruttore per mostrare o nascondere il widget «Posizione attuale» sulla mappa.</string>
     <string name="coordinates_widget_map_center">Coordinate: centro della mappa</string>
     <string name="quick_action_map_center_widget_descr">Un interruttore per mostrare o nascondere il widget «Centro della mappa» sulla mappa.</string>
-    <string name="map_widget_camera_distance_desc">Il widget mostra l\'elevazione della fotocamera dalla superficie.</string>
-    <string name="map_widget_camera_tilt_desc">Il widget mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
-    <string name="map_widget_zoom_level_desc">Il widget mostra il livello d\'ingrandimento attuale della mappa.</string>
+    <string name="map_widget_camera_distance_desc">Mostra l\'elevazione della fotocamera dalla superficie.</string>
+    <string name="map_widget_camera_tilt_desc">Mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
+    <string name="map_widget_zoom_level_desc">Mostra il livello d\'ingrandimento attuale della mappa.</string>
     <string name="map_widget_target_distance_desc">Il widget mostra la distanza tra la fotocamera e la posizione di destinazione.</string>
     <string name="map_widget_zoom_level">Livello d\'ingrandimento</string>
     <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
     <string name="developer_widgets">Widget per sviluppatori</string>
     <string name="map_widget_camera_distance">Elevazione della fotocamera</string>
-    <string name="coordinates_widget_current_location_desc">Il widget mostra le coordinate geografiche della posizione attuale</string>
+    <string name="coordinates_widget_current_location_desc">Mostra le coordinate geografiche della posizione attuale</string>
     <string name="coordinates_widget_current_location">Coordinate: posizione attuale</string>
     <string name="favorites_backup">Salva i preferiti</string>
     <string name="map_widget_target_distance">Distanza dalla destinazione</string>
@@ -4808,7 +4808,7 @@
     <string name="map_widget_altitude_map_center_desc">Mostra l\'altezza sul livello del mare dell\'attuale centro della mappa.</string>
     <string name="map_widget_altitude_current_location">Altitudine: posizione attuale</string>
     <string name="map_widget_rendering_fps">FPS rendering mappa</string>
-    <string name="map_widget_rendering_fps_desc">Mosta la velocità con cui la mappa e gli elementi della mappa vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Mostra la velocità con cui la mappa e gli elementi della mappa vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
     <string name="simulate_location_by_gpx">Simula posizione da GPX</string>
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
@@ -4817,9 +4817,9 @@
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
-    <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato. 
-\nDevi installare il servizio ANT+ Plugins oppure devi aggiornarlo se lo hai già installato. 
-\nVuoi aprire il Play Store per scaricarlo/aggiornarlo\?</string>
+    <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato.
+\nDevi installare il servizio ANT+ oppure aggiornarlo.
+\nVuoi aprire il Play Store per farlo\?</string>
     <string name="ant_heart_rate_write_gpx_desc">Scrivi battito cardiaco sulla traccia</string>
     <string name="ant_missing_dependency">Dipendenza mancante</string>
     <string name="ant_read_data">Leggi dati</string>
@@ -4837,7 +4837,7 @@
 \nI dati meteo sono forniti dal Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_offline_forecast">Previsioni offline</string>
     <string name="weather_online_cache">Cache online</string>
-    <string name="shared_string_contours">Contorno</string>
+    <string name="shared_string_contours">Contorni</string>
     <string name="shared_string_layers">Strati</string>
     <string name="empty_screen_weather_pressure_layer">Accendi per visualizzare lo strato della pressione sulla mappa.</string>
     <string name="empty_screen_weather_clouds_layer">Accendi per visualizzare lo strato della copertura delle nuvole sulla mappa.</string>
@@ -4861,13 +4861,13 @@
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isabate</string>
-    <string name="map_widget_sunrise_desc">Mostra l\'orario della prossima alba o il tempo fino alla prossima.</string>
+    <string name="map_widget_sunrise_desc">Mostra l\'ora della prossima alba o il tempo che manca alla prossima alba.</string>
     <string name="shared_string_next_sunset">Prossimo tramonto</string>
     <string name="shared_string_next_sunrise">Prossima alba</string>
     <string name="shared_string_time_left">Tempo mancante</string>
     <string name="shared_string_sunset">Tramonto</string>
     <string name="shared_string_sunrise">Alba</string>
-    <string name="map_widget_group_sunrise_sunset_desc">Questo widget mostra le informazioni sull\'alba e il tramonto.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Questo widget mostra le informazioni sui prossimi alba e tramonto.</string>
     <string name="depth_contour_lines">Linee batimetriche</string>
     <string name="turn_on_nautical_depth_description">Accendere per visualizzare nella mappa le linee batimetriche.</string>
     <string name="map_settings_weather_temp">Temperatura</string>
@@ -4894,7 +4894,7 @@
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
-    <string name="map_widget_sunset_desc">Mostra l\'orario del prossimo tramonto o il tempo fino al prossimo.</string>
+    <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
     <string name="map_widget_group_sunrise_sunset">Alba, tramonto</string>
     <string name="empty_screen_weather_contours">Accendi per visualizzare le linee meteo sulla mappa.</string>
     <string name="air_pressure_widget_desc">Mostra la pressione atmosferica del centro attuale della mappa.</string>
@@ -4926,7 +4926,7 @@
     <string name="switch_mode_by_tapping_on_widget">Cambia la modalità toccando il widget.</string>
     <string name="map_widget_ant_bicycle_power_desc">Mostra la potenza espressa dal ciclista per fare avanzare la bici</string>
     <string name="speak_gps_signal_status">Annuncia la perdita e il riaggancio del segnale GPS</string>
-    <string name="external_sensors_plugin_description">Accede ai sensori esterni per rilevare es. la tua frequenza cardiaca, velocità della bicicletta, potenza della pedalata o cadenza. Richiede che il tuo dispositivo sia connesso al rispettivo sensore tramite il protocollo rete personale wireless ANT+.</string>
+    <string name="external_sensors_plugin_description">Accede ai sensori esterni per rilevare es. la tua frequenza cardiaca, velocità della bicicletta, potenza della pedalata o cadenza. Richiede che il tuo dispositivo sia connesso ai rispettivi sensori tramite il protocollo di rete wireless ANT+.</string>
     <string name="map_widget_altitude_current_location_desc">Mostra l\'altitudine sopra al livello del mare dell\'attuale geolocalizzazione.</string>
     <string name="map_widget_altitude_desc">Mostra l\'altitudine dell\'attuale geolocalizzazione o la quota dell\'attuale centro della mappa</string>
     <string name="send_uuid_preference_desc">Per controllare il corretto utilizzo delle risorse dei nostri server, prevedere dei modelli di traffico e generare dei rapporti mensili anonimi delle mappe, un UUID casuale viene utilizzato per scaricare le mappe offline dai server OsmAnd.</string>

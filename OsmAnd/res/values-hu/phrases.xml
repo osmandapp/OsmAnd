@@ -4402,7 +4402,7 @@
     <string name="poi_climbing_rock_basalt">Mászószikla: bazalt</string>
     <string name="poi_climbing_grade_saxon_mean">Átlagos útvonal (Saxon szabvány)</string>
     <string name="poi_climbing_grade_elite">Elit</string>
-    <string name="poi_climbing_rock_conglomerate"></string>
+    <string name="poi_climbing_rock_conglomerate"/>
     <string name="poi_climbing_speed_yes">Sebesség: igen</string>
     <string name="poi_climbing_grade_uiaa_mean">Átlagos útvonal (UIAA szabvány)</string>
     <string name="poi_climbing_grade_uiaa_max">Legnehezebb útvonal (UIAA szabvány)</string>
@@ -4410,4 +4410,8 @@
     <string name="poi_climbing_grade_super_elite">Szuperelit</string>
     <string name="poi_climbing_grade_aliens">Földönkívüli</string>
     <string name="poi_climbing_bolt_abseil">Ereszkedő</string>
+    <string name="poi_climbing_bolt">Sziklamászó csavar</string>
+    <string name="poi_climbing_bolts_filter">Sziklamászó csavarok</string>
+    <string name="poi_climbing_bolted_filter">" "</string>
+    <string name="poi_climbing_bolts">Sziklamászó csavarok</string>
 </resources>

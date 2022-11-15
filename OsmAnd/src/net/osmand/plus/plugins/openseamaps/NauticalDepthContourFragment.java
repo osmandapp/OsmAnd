@@ -85,7 +85,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 		TransportLinesFragment.setupButton(
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_nautical_depth,
-				getString(R.string.rendering_attr_depthContours_name),
+				getString(R.string.nautical_depth),
 				preference.get(),
 				false,
 				v -> {
@@ -183,7 +183,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	private Drawable getPropertyIcon(@NonNull String attrName) {
 		switch (attrName) {
 			case DEPTH_CONTOUR_WIDTH:
-				return getContentIcon(R.drawable.circle_background_dark);
+				return getContentIcon(R.drawable.ic_action_width_limit);
 			case DEPTH_CONTOUR_COLOR_SCHEME:
 				return getContentIcon(R.drawable.ic_action_appearance);
 			default:
