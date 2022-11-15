@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.resources.ResourceManager;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -27,7 +28,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 public class DownloadOsmandIndexesHelper {
@@ -120,6 +123,30 @@ public class DownloadOsmandIndexesHelper {
 
 		indexes.sort();
 		return indexes;
+	}
+
+	@NonNull
+	public static Map<String, IndexItem> getSupportedTtsByLanguages(@NonNull OsmandApplication app) {
+		Map<String, IndexItem> byLanguages = new HashMap<>();
+		for (IndexItem indexItem : listTtsVoiceIndexes(app, false)) {
+			String baseName = indexItem.getBasename();
+			String langCode = baseName.replaceAll("-tts", "");
+			byLanguages.put(langCode, indexItem);
+		}
+		return byLanguages;
+	}
+
+	public static void downloadTtsWithoutInternet(@NonNull OsmandApplication app, @NonNull IndexItem item) {
+		try {
+			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
+			ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile);
+			boolean changedDate = de.targetFile.setLastModified(de.dateModified);
+			if (!changedDate) {
+				log.error("Set last timestamp is not supported");
+			}
+		} catch (IOException e) {
+			log.error("Copy exception", e);
+		}
 	}
 
 	private static void addTtsVoiceIndexes(OsmandApplication app, IndexFileList indexes) {

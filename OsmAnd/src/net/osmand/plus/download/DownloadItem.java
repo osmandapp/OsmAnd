@@ -61,6 +61,10 @@ public abstract class DownloadItem {
 		return type.getBasename(this);
 	}
 
+	public boolean isDownloading(@NonNull OsmandApplication app) {
+		return isDownloading(app.getDownloadThread());
+	}
+
 	@NonNull
 	public abstract List<File> getDownloadedFiles(@NonNull OsmandApplication app);
 
