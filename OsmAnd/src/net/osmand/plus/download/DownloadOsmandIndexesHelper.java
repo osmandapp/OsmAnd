@@ -126,7 +126,7 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	@NonNull
-	public static Map<String, IndexItem> getSupportedTtsByLanguages(OsmandApplication app) {
+	public static Map<String, IndexItem> getSupportedTtsByLanguages(@NonNull OsmandApplication app) {
 		Map<String, IndexItem> byLanguages = new HashMap<>();
 		for (IndexItem indexItem : listTtsVoiceIndexes(app, false)) {
 			String baseName = indexItem.getBasename();
@@ -136,7 +136,7 @@ public class DownloadOsmandIndexesHelper {
 		return byLanguages;
 	}
 
-	public static void downloadTtsWithoutInternet(OsmandApplication app, IndexItem item) {
+	public static void downloadTtsWithoutInternet(@NonNull OsmandApplication app, @NonNull IndexItem item) {
 		try {
 			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
 			ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile);
