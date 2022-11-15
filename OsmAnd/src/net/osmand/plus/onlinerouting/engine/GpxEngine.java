@@ -130,24 +130,20 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
-		boolean calculatedTimeSpeed = useExternalTimestamps();
+		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
-			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile, calculationProgress);
-			if (ctx != null) {
-				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
-				if (approximated != null) {
-					calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
-					gpxFile = approximated;
-				}
+			GPXFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
+			if (approximated != null) {
+				gpxFile = approximated;
 			}
 		}
-		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed);
+		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed[0]);
 	}
 
 	@Nullable
-	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GPXFile gpxFile,
-	                                                              @Nullable RouteCalculationProgress calculationProgress) {
+	private GPXFile approximateGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                   @Nullable RouteCalculationProgress calculationProgress,
+	                                   boolean[] calculatedTimeSpeed) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		ApplicationMode appMode = routingHelper.getAppMode();
 		String oldRoutingProfile = appMode.getRoutingProfile();
@@ -182,8 +178,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 					gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				}
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
-				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
-				return ctx;
+				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
+				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();
+				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 			}
 		} catch (IOException | InterruptedException e) {
 			LOG.error(e.getMessage(), e);

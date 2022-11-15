@@ -16,11 +16,11 @@ public class TemperatureWidget extends WeatherWidget {
 
 	@Override
 	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
-		getMyApplication().runInUIThread(() -> {
+		app.runInUIThread(() -> {
 			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
 				setText(formattedValue + " °C", null);
 			} else {
-				setText(null, null);
+				setText(NO_VALUE, null);
 			}
 		});
 	}

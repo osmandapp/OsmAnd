@@ -161,7 +161,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 						widget.updateBannerVisibility(false);
 					}
 				}
-				if (Algorithms.isEmpty(widgetsViews) && followingMode) {
+				if (Algorithms.isEmpty(widgetsViews) && (followingMode || !Algorithms.isEmpty(appMode.getRoutingProfile()))) {
 					TextInfoWidget widget = entry.getValue().get(0);
 					widgetsViews.add(widget.getView());
 					widget.updateBannerVisibility(true);
