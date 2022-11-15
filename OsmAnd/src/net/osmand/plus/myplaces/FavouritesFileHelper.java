@@ -165,23 +165,6 @@ public class FavouritesFileHelper {
 		return GPXUtilities.writeGpxFile(file, gpx);
 	}
 
-	/*
-	public void saveCurrentPointsIntoFile(@NonNull List<FavoriteGroup> groups) {
-		try {
-			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<>();
-			loadPointsFromFile(getInternalFile(), deletedInMemory);
-			for (FavouritePoint point : getPointsFromGroups(groups)) {
-				deletedInMemory.remove(point.getKey());
-			}
-			saveFile(groups, getInternalFile());
-			saveExternalFiles(groups, deletedInMemory.keySet());
-			backup(getBackupFile(), getExternalFile());
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
-	*/
-
 	public void saveCurrentPointsIntoFile(@NonNull List<FavoriteGroup> groups) {
 		try {
 			Map<String, FavoriteGroup> deletedGroups = new LinkedHashMap<>();
@@ -212,28 +195,6 @@ public class FavouritesFileHelper {
 		}
 	}
 
-/*	protected Exception saveExternalFile(@NonNull List<FavoriteGroup> groups, @NonNull Set<String> deleted) {
-		Map<String, FavouritePoint> all = new LinkedHashMap<>();
-		loadPointsFromFile(getExternalFile(), all);
-		for (String key : deleted) {
-			all.remove(key);
-		}
-		// remove already existing in memory
-		for (FavouritePoint point : getPointsFromGroups(groups)) {
-			all.remove(point.getKey());
-		}
-		// save favoritePoints from memory in order to update existing
-		for (FavouritePoint point : all.values()) {
-			for (FavoriteGroup group : groups) {
-				if (Algorithms.stringsEqual(point.getCategory(), group.getName())) {
-					group.getPoints().add(point);
-					break;
-				}
-			}
-		}
-		return saveFile(groups, getExternalFile());
-	}
-*/
 	@Nullable
 	protected Exception saveExternalFiles(@NonNull List<FavoriteGroup> localGroups, @NonNull Set<String> deleted) {
 		Exception result = null;
