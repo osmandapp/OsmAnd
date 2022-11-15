@@ -5,8 +5,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.FragmentActivity;
 
@@ -21,63 +21,69 @@ import net.osmand.plus.widgets.TextViewEx;
 public class MapRenderingEngineDialog {
 	private final OsmandApplication app;
 	private final FragmentActivity fragmentActivity;
-	private AppCompatRadioButton radioButton1;
-	private AppCompatRadioButton radioButton2;
+	private AppCompatRadioButton radioButtonLegacy;
+	private AppCompatRadioButton radioButtonOpengl;
+	private AlertDialog alertDialog;
 
 	public MapRenderingEngineDialog(OsmandApplication app, FragmentActivity fragmentActivity) {
 		this.app = app;
 		this.fragmentActivity = fragmentActivity;
 	}
 
-	private AlertDialog createDialog(OnRenderChangeListener renderChangeListener) {
+	private AlertDialog createDialog(@Nullable OnRenderChangeListener renderChangeListener) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(fragmentActivity, getThemeRes(app)));
-		Context themedContext = UiUtilities.getThemedContext(app, nightMode);
+		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		View alertDialogView = LayoutInflater.from(themedContext).inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
 		builder.setView(alertDialogView);
 
-		View version1 = alertDialogView.findViewById(R.id.version_1);
-		TextViewEx text1 = version1.findViewById(R.id.text);
-		text1.setText(app.getResources().getString(R.string.map_rendering_engine_v1));
-		radioButton1 = version1.findViewById(R.id.radio);
-		radioButton1.setVisibility(View.VISIBLE);
-
-		View version2 = alertDialogView.findViewById(R.id.version_2);
-		radioButton2 = version2.findViewById(R.id.radio);
-		TextViewEx text2 = version2.findViewById(R.id.text);
-		text2.setText(app.getResources().getString(R.string.map_rendering_engine_v2));
-		radioButton2.setVisibility(View.VISIBLE);
-
+		View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
+		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getResources().getString(R.string.map_rendering_engine_v1));
+		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
+		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
 		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
 
-		version1.findViewById(R.id.button).setOnClickListener(view -> {
+		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
 			updateRenderingEngineSetting(false, renderChangeListener);
+			alertDialog.dismiss();
 		});
 
-		version2.findViewById(R.id.button).setOnClickListener(view -> {
+		openglRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
 			updateRenderingEngineSetting(true, renderChangeListener);
+			alertDialog.dismiss();
 		});
 		return builder.create();
 	}
 
-	private void updateRenderingEngineSetting(boolean openglEnabled, OnRenderChangeListener renderChangeListener) {
+	private AppCompatRadioButton setupRadioItem(View view, String name){
+		AppCompatRadioButton radioButton = view.findViewById(R.id.radio);
+		TextViewEx text = view.findViewById(R.id.text);
+		text.setText(name);
+		radioButton.setVisibility(View.VISIBLE);
+
+		return radioButton;
+	}
+
+	private void updateRenderingEngineSetting(boolean openglEnabled,@Nullable OnRenderChangeListener renderChangeListener) {
 		updateRadioButtons(openglEnabled);
 		app.getSettings().USE_OPENGL_RENDER.set(openglEnabled);
 
 		if (openglEnabled && !NativeCoreContext.isInit()) {
-			FragmentActivity activity = fragmentActivity;
 			String title = app.getString(R.string.loading_smth, "");
-			ProgressDialog progress = ProgressDialog.show(activity, title, app.getString(R.string.loading_data));
+			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().initOpenglAsync(() -> {
 				updateMap();
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 					progress.dismiss();
 				}
 			});
 		} else {
 			updateMap();
 		}
-		renderChangeListener.onRenderChange();
+
+		if (renderChangeListener != null) {
+			renderChangeListener.onRenderChange();
+		}
 	}
 
 	private void updateMap() {
@@ -90,16 +96,13 @@ public class MapRenderingEngineDialog {
 	}
 
 	private void updateRadioButtons(boolean openglEnabled) {
-		radioButton1.setChecked(!openglEnabled);
-		radioButton2.setChecked(openglEnabled);
+		radioButtonLegacy.setChecked(!openglEnabled);
+		radioButtonOpengl.setChecked(openglEnabled);
 	}
 
-	public static int getThemeRes(OsmandApplication app) {
-		return app.getDaynightHelper().isNightModeForMapControls() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-	}
-
-	public void showDialog(OnRenderChangeListener renderChangeListener) {
-		createDialog(renderChangeListener).show();
+	public void showDialog(@Nullable OnRenderChangeListener renderChangeListener) {
+		alertDialog = createDialog(renderChangeListener);
+		alertDialog.show();
 	}
 
 	public interface OnRenderChangeListener {

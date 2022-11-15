@@ -41,11 +41,11 @@
 		</LinearLayout>
 
 		<include
-			android:id="@+id/version_1"
+			android:id="@+id/legacy_rendering"
 			layout="@layout/dialog_list_item_with_compound_button" />
 
 		<include
-			android:id="@+id/version_2"
+			android:id="@+id/opengl_rendering"
 			layout="@layout/dialog_list_item_with_compound_button" />
 
 	</LinearLayout>
