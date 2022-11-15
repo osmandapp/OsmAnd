@@ -17,6 +17,7 @@ import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
@@ -318,6 +319,13 @@ public class SearchUICore {
 	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
 	                                                                      final ResultMatcher<SearchResult> matcher,
 	                                                                      boolean resortAll, boolean removeDuplicates) throws IOException {
+		return shallowSearch(cl, text, matcher, true, true, searchSettings);
+	}
+
+	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
+	                                                                      final ResultMatcher<SearchResult> matcher,
+	                                                                      boolean resortAll, boolean removeDuplicates,
+	                                                                      SearchSettings searchSettings) throws IOException {
 		T api = getApiByClass(cl);
 		if (api != null) {
 			if (debugMode) {
@@ -341,11 +349,12 @@ public class SearchUICore {
 	}
 
 	public void init() {
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
+		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		apis.add(amenitiesApi);
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);

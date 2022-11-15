@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.weather;
 
-import static com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc.MeasurementDataType.TEMPERATURE;
 import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
@@ -40,6 +39,12 @@ import net.osmand.plus.plugins.weather.units.PrecipConstants;
 import net.osmand.plus.plugins.weather.units.PressureConstants;
 import net.osmand.plus.plugins.weather.units.TemperatureConstants;
 import net.osmand.plus.plugins.weather.units.WindConstants;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.ShowHideAirPressureLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideCloudLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHidePrecipitationLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideTemperatureLayerAction;
+import net.osmand.plus.quickaction.actions.ShowHideWindLayerAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -120,7 +125,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		WX_CONTOURS_ENABLED = registerBooleanPreference("map_setting_wx_contours_enabled", true).makeProfile();
 		WX_CONTOURS_TRANSPARENCY = registerIntPreference("map_setting_wx_contours_transparency", DEFAULT_TRANSPARENCY).makeProfile();
 		WX_CONTOURS_TYPE = (EnumStringPreference<WeatherInfoType>) registerEnumStringPreference(
-				"map_setting_wx_contours_type", TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
+				"map_setting_wx_contours_type", WeatherInfoType.TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
 
 		WX_UNIT_TEMPERATURE = (EnumStringPreference<TemperatureConstants>) registerEnumStringPreference(
 				"map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
@@ -146,9 +151,20 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return app.getSettings().USE_OPENGL_RENDER.get()
+		return app.useOpenGlRenderer()
 				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
 				&& super.isEnabled();
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> action = new ArrayList<>();
+		action.add(ShowHideTemperatureLayerAction.TYPE);
+		action.add(ShowHideWindLayerAction.TYPE);
+		action.add(ShowHideAirPressureLayerAction.TYPE);
+		action.add(ShowHidePrecipitationLayerAction.TYPE);
+		action.add(ShowHideCloudLayerAction.TYPE);
+		return action;
 	}
 
 	@Override

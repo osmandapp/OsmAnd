@@ -24,7 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
@@ -68,7 +70,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -87,7 +88,9 @@ public class AmenityUIHelper extends MenuBuilder {
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
 
-	private static final String WIKI_LINK = ".wikipedia.org/w";
+	private static final String WIKIPEDIA = "wikipedia";
+	private static final String WIKIPEDIA_DOMAIN = ".wikipedia.org/";
+	private static final String WIKI_LINK = WIKIPEDIA_DOMAIN + "wiki/";
 	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 
 	private final MetricsConstants metricSystem;
@@ -171,10 +174,11 @@ public class AmenityUIHelper extends MenuBuilder {
 			int iconId = 0;
 			int textColor = 0;
 			Drawable icon = null;
-			String socialMediaUrl = null;
+			String hiddenUrl = null;
 			String textPrefix = "";
 			CollapsableView collapsableView = null;
 			boolean collapsable = false;
+			boolean isWikipediaLink = false;
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
@@ -201,11 +205,15 @@ public class AmenityUIHelper extends MenuBuilder {
 				poiTypeKeyName = pType.getKeyName();
 			}
 
-			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
-				isUrl = true;
-			} else if (needLinks) {
-				socialMediaUrl = getSocialMediaUrl(key, vl);
-				if (socialMediaUrl != null) {
+			isUrl = isUrl(vl);
+			if (key.contains(WIKIPEDIA)) {
+				Pair<String, String> wikiParams = getWikipediaParams(key, vl);
+				vl = wikiParams.first;
+				hiddenUrl = wikiParams.second;
+				isWikipediaLink = isUrl = true;
+			} else if (!isUrl && needLinks) {
+				hiddenUrl = getSocialMediaUrl(key, vl);
+				if (hiddenUrl != null) {
 					isUrl = true;
 				}
 			}
@@ -247,7 +255,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					hasWiki = true;
 					isWiki = true;
 					needLinks = false;
-					socialMediaUrl = null;
+					hiddenUrl = null;
 					isUrl = false;
 				} else {
 					continue;
@@ -307,7 +315,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;
-				} else if (isUrl && vl.contains(WIKI_LINK)) {
+				} else if (isWikipediaLink) {
 					iconId = R.drawable.ic_plugin_wikipedia;
 				} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
 					iconId = R.drawable.ic_action_poi_name;
@@ -382,12 +390,11 @@ public class AmenityUIHelper extends MenuBuilder {
 						vl, null, collapsable, collapsableView, 0, false,
 						true, true, 0, "", false, false, matchWidthDivider, 0);
 			} else if (icon != null) {
-				row = new AmenityInfoRow(key, icon, textPrefix, vl, socialMediaUrl, collapsable,
+				row = new AmenityInfoRow(key, icon, textPrefix, vl, hiddenUrl, collapsable,
 						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
 						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			} else {
-
-				row = new AmenityInfoRow(key, iconId, textPrefix, vl, socialMediaUrl, collapsable,
+				row = new AmenityInfoRow(key, iconId, textPrefix, vl, hiddenUrl, collapsable,
 						collapsableView, textColor, isWiki, isText, needLinks, poiTypeOrder,
 						poiTypeKeyName, isPhoneNumber, isUrl, matchWidthDivider, 0);
 			}
@@ -471,16 +478,13 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 
-		Collections.sort(infoRows, new Comparator<AmenityInfoRow>() {
-			@Override
-			public int compare(AmenityInfoRow row1, AmenityInfoRow row2) {
-				if (row1.order < row2.order) {
-					return -1;
-				} else if (row1.order == row2.order) {
-					return row1.name.compareTo(row2.name);
-				} else {
-					return 1;
-				}
+		Collections.sort(infoRows, (row1, row2) -> {
+			if (row1.order < row2.order) {
+				return -1;
+			} else if (row1.order == row2.order) {
+				return row1.name.compareTo(row2.name);
+			} else {
+				return 1;
 			}
 		});
 
@@ -507,6 +511,51 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
+	private Pair<String, String> getWikipediaParams(String key, String value) {
+		String title = null;
+		String langCode = "en";
+		// Full OpenStreetMap Wikipedia tag pattern looks like "operator:wikipedia:lang_code",
+		// "operator" and "lang_code" is optional parameters and may be skipped.
+		if (key.contains(":")) {
+			String[] tagParts = key.split(":");
+			if (tagParts.length == 3) {
+				// In this case tag contains all 3 parameters: "operator", "wikipedia" and "lang_code".
+				langCode = tagParts[2];
+			} else if (tagParts.length == 2) {
+				// In this case one of the optional parameters was skipped.
+				// Parameters never change their order and parameter "wikipedia" is always present.
+				if (WIKIPEDIA.equals(tagParts[0])) {
+					// So if "wikipedia" is the first parameter, then parameter "operator" was skipped.
+					// And the second parameter is "lang_code".
+					langCode = tagParts[1];
+				}
+			}
+		}
+		// Value of an Wikipedia item can be an URL, but it is not recommended.
+		// OSM users should use the following pattern "lang_code:article_title" instead.
+		// Where "lang_code" is optional parameter for multilingual wikipedia tags.
+		String url;
+		if (isUrl(value)) {
+			// In this case a value is already represented as an URL.
+			url = value;
+		} else {
+			if (value.contains(":")) {
+				// If value contains a sign ":" it means that "lang_code" is also present in value.
+				String[] valueParts = value.split(":");
+				langCode = valueParts[0];
+				title = valueParts[1];
+			} else {
+				title = value;
+			}
+			// Full article URL has a pattern: "http://lang_code.wikipedia.org/wiki/article_name"
+			String formattedTitle = title.replaceAll(" ", "_");
+			url = "http://" + langCode + WIKI_LINK + formattedTitle;
+		}
+		String text = title != null ? title : value;
+		return new Pair<>(text, url);
+	}
+
+	@Nullable
 	private String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
 		StringBuilder sb = new StringBuilder(value.trim());
@@ -537,6 +586,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		} else {
 			return null;
 		}
+	}
+
+	private boolean isUrl(String vl) {
+		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};
+		return Algorithms.startsWithAny(vl, urlPrefixes);
 	}
 
 	private String getFormattedInt(String value) {
@@ -622,17 +676,17 @@ public class AmenityUIHelper extends MenuBuilder {
 		return (!prefix.isEmpty()) ? (prefix + ", " + units) : units;
 	}
 
-	private void buildRow(View view, int iconId, String text, String textPrefix, String socialMediaUrl,
+	private void buildRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
 	                      boolean collapsable, CollapsableView collapsableView,
 	                      int textColor, boolean isWiki, boolean isText, boolean needLinks,
 	                      boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, socialMediaUrl,
+		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, hiddenUrl,
 				collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
 	protected void buildRow(View view, Drawable icon, String text, String textPrefix,
-	                        String socialMediaUrl, boolean collapsable,
+	                        String hiddenUrl, boolean collapsable,
 	                        CollapsableView collapsableView, int textColor, boolean isWiki,
 	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
 	                        boolean matchWidthDivider, int textLinesLimit) {
@@ -651,18 +705,15 @@ public class AmenityUIHelper extends MenuBuilder {
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
 		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-		ll.setOnLongClickListener(new View.OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				String textToCopy;
-				if (text.contains(WIKI_LINK)) {
-					textToCopy = text;
-				} else {
-					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
-				}
-				copyToClipboard(textToCopy, view.getContext());
-				return true;
+		ll.setOnLongClickListener(v -> {
+			String textToCopy;
+			if (hiddenUrl != null && hiddenUrl.contains(WIKI_LINK)) {
+				textToCopy = hiddenUrl;
+			} else {
+				textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
 			}
+			copyToClipboard(textToCopy, view.getContext());
+			return true;
 		});
 
 		baseView.addView(ll);
@@ -766,18 +817,15 @@ public class AmenityUIHelper extends MenuBuilder {
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
-						collapsableView.getContentView().setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
-						collapsableView.setCollapsed(true);
-					} else {
-						collapsableView.getContentView().setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
-						collapsableView.setCollapsed(false);
-					}
+			ll.setOnClickListener(v -> {
+				if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
+					collapsableView.getContentView().setVisibility(View.GONE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+					collapsableView.setCollapsed(true);
+				} else {
+					collapsableView.getContentView().setVisibility(View.VISIBLE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+					collapsableView.setCollapsed(false);
 				}
 			});
 			if (collapsableView.isCollapsed()) {
@@ -788,11 +836,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 		if (isWiki) {
-			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
-				}
+			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), v -> {
+				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
 			});
 		}
 
@@ -815,7 +860,7 @@ public class AmenityUIHelper extends MenuBuilder {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
 					} else {
-						String uri = socialMediaUrl == null ? text : socialMediaUrl;
+						String uri = hiddenUrl == null ? text : hiddenUrl;
 						Intent intent = new Intent(Intent.ACTION_VIEW);
 						intent.setData(Uri.parse(uri));
 						AndroidUtils.startActivityIfSafe(v.getContext(), intent);
@@ -835,12 +880,12 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.socialMediaUrl,
+			buildRow(view, info.icon, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		} else {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.socialMediaUrl,
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);

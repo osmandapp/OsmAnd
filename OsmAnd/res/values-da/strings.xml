@@ -32,13 +32,15 @@
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>
-    <string name="audionotes_plugin_description">Lav lyd-/foto-/videonoter under en tur, enten ved hjælp en knap på kortet, eller direkte fra kontekstmenuen for en position på kortet.</string>
+    <string name="audionotes_plugin_description">Tag lyd-/foto-/videnotater under en tur ved hjælp af enten en kortknap eller kontekstmenuen for stedet.</string>
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Terrænoplysninger, f.eks. højdekurver, terrænskygger og skråninger, hjælper dig med at vurdere jordoverfladens beskaffenhed visuelt med hensyn til krumning, ekstremer, stejlhed, punkter med samme højde og meget mere. Topografiske oplysninger på et kort kan repræsenteres ved skravering af skråninger, konturlinjer for op- og nedstigninger og farven på hældningsvinklens afvigelse fra det flade. Data fra SRTM og ASTER.
+    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygger og skråninger hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
 \n
-\nVejledning -http://osmand.net/docs/user/plugins/contour-lines</string>
+\nDe underliggende data stammer fra SRTM og ASTER.
+\n
+\nYderligere oplysninger findes på http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -198,7 +200,7 @@
     <string name="osmand_parking_position_description_add">Afhent køretøj:</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkeringsplads</string>
-    <string name="osmand_parking_plugin_description">Aktivér for at kunne angive et punkt på kortet, hvor din bil står parkeret, og give din kalender besked, når parkeringstiden begynder. Udvidelsen hjælper med at holde styr på parkeringstiden og placeringen af din bil. For at placere en markør skal du vælge et sted på kortet, gå til Handlinger og tryk på \"Tilføj parkering\".</string>
+    <string name="osmand_parking_plugin_description">Markér, hvor din bil er parkeret, og giv din kalender besked om, hvornår parkometeret udløber. Du placerer markeringen ved at vælge et sted på kortet, gå til \"Handlinger\", og tryk på \"Tilføj parkering\".</string>
     <string name="osmand_parking_plugin_name">Parkeringsplacering</string>
     <string name="context_menu_item_add_parking_point">Markér som parkeringssted</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
@@ -249,19 +251,19 @@
     <string name="shared_string_online_maps">Onlinekort</string>
     <string name="online_map_settings_descr">Vælg online- eller cachelagrede kilder til kortfliser.</string>
     <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
-    <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx automatisk at annoncere positionen.</string>
-    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, fra foruddefinerede OSM-kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiske kort og terrænskygger osv.
+    <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter f.eks. justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, f.eks. automatisk at annoncere din position.</string>
+    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, som forbehandlede OSM-kortfliser, satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiske kort og terrænskygger osv.
 \n
-\nEthvert af disse kort kan bruges som det vigtigste (basis) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
+\nEthvert af disse kort kan vises som det vigtigste (basis) kort, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
 \n
 \nDu kan downloade kortfliser direkte eller kopiere dem som SQLite-databasefiler til OsmAnd\'s datamappe ved hjælp af et af de mange tredjeparts værktøjer til kortforberedelse.</string>
-    <string name="osmand_development_plugin_description">Gør det muligt at konfigurere OsmAnd til test: simulere navigationsruter, kontrollere skærmens gengivelse osv. Udvidelse er ikke påkrævet for normal brug af applikationen.</string>
+    <string name="osmand_development_plugin_description">Giver funktionalitet til at teste og fejlfinde OsmAnd: simulere navigationsruter, overvåge skærmgengivelse, kontrollere ydeevne osv. Denne udvidelse er ikke påkrævet for normal brug af appen.</string>
     <string name="plugins_screen">Udvidelser</string>
     <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet,.</string>
     <string name="prefs_plugins">Udvidelser</string>
-    <string name="osm_editing_plugin_description">Giver dig mulighed for at bidrage til OpenStreetMap, et globalt fællesskab, der har til formål at skabe et omfattende kort over verden og stille ajourførte open source-data til rådighed for alle brugere.
+    <string name="osm_editing_plugin_description">Lav bidrag til OpenStreetMap, et globalt fællesskab, der vedligeholder et omfattende kort over verden og stiller ajourførte open source-data til rådighed for alle brugere.
 \n
-\nDu kan finde en vejledning i, hvordan du redigerer kortet, på vores websted https://osmand.net/docs/user/plugins/osm-editing</string>
+\nDu kan finde en vejledning i, hvordan du redigerer kortet, på vores websted https://osmand.net/docs/user/plugins/osm-editing.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
     <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille meddelelser:</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
@@ -1254,9 +1256,9 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optagelse af tur</string>
-    <string name="record_plugin_description">Giver dig mulighed for at registrere, gemme og analysere dine trænings- eller bevægelsesdata, f.eks. hastighed, stigninger, nedkørsler eller rutehøjdekurve, som derefter kan genbruges, forbedres, suppleres eller deles med venner.
+    <string name="record_plugin_description">Registrer dine ture eller træninger, og analysér dataene med hensyn til hastighed, akkumulerede stigninger og nedstigninger, højdeprofil osv. Optagede spor kan arkiveres, deles med venner, redigeres og efterbehandles.
 \n
-\nVejledning - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nYderligere information på https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionslogning til en GPX-fil kan slås til eller fra med GPX-logningsmodulet på kortet.</string>
@@ -1362,7 +1364,7 @@
     <string name="plugin_install_needs_network">Internetforbindelse behøves for at installere udvidelsen.</string>
     <string name="shared_string_get">Hent</string>
     <string name="plugin_ski_name">Skikort</string>
-    <string name="plugin_nautical_name">Søkort</string>
+    <string name="plugin_nautical_name">Søkortsvisning</string>
     <string name="world_ski_missing">Hent det særlige offlinekort for at få vist skifaciliteter.</string>
     <string name="nautical_maps_missing">Hent det særlige offlinekort for at få vist nautiske detaljer.</string>
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
@@ -1375,10 +1377,10 @@
     <string name="watch">Vis</string>
     <string name="share_note">Del note</string>
     <string name="plugin_touringview_name">Touring kortvisning</string>
-    <string name="plugin_nautical_descr">Slå til for at tilføje dit kort oplysninger om sejlruter, navigationslys, farezoner, zoner, hvor det er tilladt eller forbudt at sejle eller lægge til kaj osv. For at bruge det skal du downloade Søkort og aktivere Søkort-typen i Konfigurer kort.
+    <string name="plugin_nautical_descr">Beriger dit kort med oplysninger om sejlruter, navigationslys, nautiske farezoner, zoner med sejlads- eller anløbsrestriktioner osv. For at bruge den skal du downloade de respektive nautiske kort og aktivere stilen \"Søkort\" under \"Konfigurer kort\".
 \n
-\nVejledning - https://osmand.net/docs/user/plugins/nautical-charts</string>
-    <string name="plugin_ski_descr">Designet til at navigere på vintersportssteder. Se skiløjper, skiliftmarkører og farvede linjer, der angiver kompleksiteten af hvert spor. For at bruge det skal du efter aktivering gå til Konfigurer kort og vælge korttypen \"Skikort\".</string>
+\nYderligere læsning på https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_ski_descr">Designet til at navigere i vintersportsområder: Se skipister, skilifter og langrendsspor med farvede linjer, der angiver sværhedsgraden. Hvis du vil gøre brug af dette, skal du aktivere denne udvidelse og også gå til \"Konfigurer kort\" og vælge kortstilen \"Vinter og ski\".</string>
     <string name="plugin_touringview_descr">Aktivering ændrer kortstil til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører. 
 \n 
 \nVisning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). 
@@ -2367,7 +2369,7 @@
     <string name="route_is_too_long_v2">Ved lange afstande: tilføj mellemliggende destinationer, hvis ingen rute er beregnet efter 10 minutter.</string>
     <string name="display_zoom_level">Vise zoomniveau: %1$s</string>
     <string name="srtm_color_scheme">Farveskema</string>
-    <string name="show_from_zoom_level">Vis fra zoomniveau</string>
+    <string name="show_from_zoom_level">Visning starter ved zoomniveau</string>
     <string name="routing_attr_allow_private_name">Tillad privat adgang</string>
     <string name="routing_attr_allow_private_description">Tillad adgang til private områder.</string>
     <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
@@ -2390,7 +2392,7 @@
     <string name="mapillary_descr">Online-fotos på gadeniveau for alle. Oplev steder, samarbejd, indfang verden.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
     <string name="mapillary_action_descr">Del dit eget gadeperspektiv via Mapillary.</string>
-    <string name="plugin_mapillary_descr">Giver billedvisning på gadeniveau. Hvis der mangler billeder, kan du selv tilføje dem, så andre kan gøre brug af dem. For at aktivere Mapillary-laget skal du slå \"Billeder på gadeniveau\" til i menuen Konfigurer kort.</string>
+    <string name="plugin_mapillary_descr">Billedvisning på gadeniveau. Du kan også selv bidrage. Hvis du vil se de eksisterende data som et kortlag, skal du slå \"Billeder på gadeniveau\" til i menuen \"Konfigurer kort\".</string>
     <string name="online_photos">Online-fotos</string>
     <string name="no_photos_descr">Ingen billeder her.</string>
     <string name="shared_string_install">Installer</string>
@@ -3085,7 +3087,7 @@
     <string name="app_mode_campervan">Autocamper (RV)</string>
     <string name="rendering_attr_showLez_description">Vis miljøzoner på kortet. Påvirker ikke ruteberegning.</string>
     <string name="rendering_attr_showLez_name">Vis miljøzoner</string>
-    <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
+    <string name="temporary_conditional_routing">Tag højde for midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
     <string name="new_route_calculated_dist_dbg">Rute: afstand %1$s, rute tid %2$s
 \nBeregning: %3$.1f s., %4$d veje, %5$d kortfliser</string>
@@ -3436,7 +3438,7 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Terrænskyggekort viser hjælp af mørke nuancer skråninger, toppe og lavland.</string>
+    <string name="hillshade_description">Terrænskyggekort viser skråninger, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
     <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>
@@ -3990,7 +3992,6 @@
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
     <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, skråning</string>
-    <string name="approximate_route_description">Fastgør ruten til veje på kortet for at få alle sving og yderligere data, som glathed, vejtyper osv.</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log ud\?
@@ -4027,10 +4028,10 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Giver dig mulighed for at bidrage til OpenPlaceReviews-projektet med f.eks. fotos, anmeldelser, links om offentlige steder som restauranter, hoteller, museer og rutepunkter.
+    <string name="open_place_reviews_plugin_description">Lav bidrag til OpenPlaceReviews-projektet som f.eks. fotos, anmeldelser, links for offentlige steder som restauranter, hoteller eller museer.
 \n
-\nDu kan finde vejledning om, hvordan du bidrager, på vores websted - https://osmand.net/docs/user/plugins/openplacereviews</string>
-    <string name="routing_attr_height_obstacles_description">Ruteberegning kan undgå kraftige stigninger.</string>
+\nFind vejledninger om, hvordan du bidrager, på vores websted https://osmand.net/docs/user/plugins/openplacereviews.</string>
+    <string name="routing_attr_height_obstacles_description">Den forventede rejsetid vil afspejle højdepåvirkningen. Ruteberegningsvalg kan hjælpe med at undgå stejle opkørsler:</string>
     <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod
 \n
 \n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer
@@ -4109,7 +4110,7 @@
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
     <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt terrænskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
-    <string name="purchases_feature_desc_wikipedia">Hvis du har offline Wikipedia med på din rejse, kan du lære mere om de steder, du besøger. Den er tilgængelig offline og viser Wikipedia-artikler tilknyttet interessepunkter direkte på kortet. Glem ikke at downloade Wikipedia-kort for den valgte region.</string>
+    <string name="purchases_feature_desc_wikipedia">Giver dig alle stedrelaterede Wikipedia-artikler offline, så du kan lære mere om de steder, du besøger på din rejse, ved blot at trykke på kortet. Glem ikke at downloade Wikipedia-kortfilerne for de respektive regioner.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Få ubegrænset download af offline kort for alle kontinenter og regioner.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få adgang til regelmæssige månedlige opdateringer af offlinekort.</string>
@@ -4157,7 +4158,6 @@
     <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer genveje med app-profiler.</string>
     <string name="quick_action_showhide_mapillary_descr">En omskifter til at vise eller skjule Mapillary-laget på kortet.</string>
     <string name="track_coloring_solid">Ensfarvet</string>
-    <string name="route_between_points_warning_desc">Fastgør derefter dit spor til den nærmeste tilladte vej med en af dine navigationsprofiler for at bruge denne mulighed.</string>
     <string name="shared_string_enter_param">Angiv param</string>
     <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d genveje\?</string>
     <string name="screen_timeout">Skærm-timeout</string>
@@ -4235,7 +4235,9 @@
     <string name="select_nav_profile_dialog_message">\'Navigationstype\' afgør, hvordan ruterne beregnes med tilgængelige offline- og online ruteberegningsmotorer.</string>
     <string name="in_grace_period">I henstandsperiode</string>
     <string name="loading_list_of_routing_services">Indlæser liste over tilgængelige ruteberegningstjenester</string>
-    <string name="gpx_parse_error">OsmAnd GPX er ikke korrekt dannet, kontakt venligst supportteamet for at undersøge det nærmere.</string>
+    <string name="gpx_parse_error">Problemer fundet med en GPX-fil.
+\n
+\nDu kan kontakte OsmAnd support for at undersøge det.</string>
     <string name="empty_state_my_tracks_desc">Importer eller optag sporfiler</string>
     <string name="monitoring_control_start">Optag</string>
     <string name="release_3_6">- Profiler: Nu kan du ændre rækkefølge, indstille ikonet for kortet, ændre alle indstillinger for basisprofiler og gendanne dem tilbage til standardindstillingerne
@@ -4764,13 +4766,12 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier beregnet til mountainbiking.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
     <string name="connect_with_straight_line">Forbind med en lige linje</string>
-    <string name="attach_roads_descr">Tilnærm dit spor en rute ved hjælp af offline-kortet. Dette vil give korrigerede højdeværdier, vejdetaljer og sving til brug ved navigation.</string>
+    <string name="attach_roads_descr">Tilnærm dit spor til tilladte veje for at følge punkter og tilknytte præcise svinginstruktioner og ruteegenskaber.</string>
     <string name="attach_roads_warning">Kun et optaget spor kan vedhæftes vejene.</string>
     <string name="download_tiles">Download kortfliser</string>
     <string name="shared_string_only_missing">Kun manglende</string>
     <string name="without_profiles_changing">Uden at profiler ændres</string>
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
-    <string name="attach_to_roads_banner_desc">Fastgør dit spor til vejene for at modtage detaljerede navigationsinstruktioner.</string>
     <string name="included_in_your_current_plan">Inkluderet i dit nuværende \"%1$s\" abonnement</string>
     <string name="available_as_part_of_subscription_plan">Tilgængelig som en del af abonnementet %1$s.</string>
     <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)\?</string>
@@ -4822,7 +4823,7 @@
     <string name="depth_contours">Dybdekonturer</string>
     <string name="nautical_depth_points">Nautiske dybdepunkter</string>
     <string name="worldwide_maps">Globale kort</string>
-    <string name="ant_widgets">ANT+ moduler</string>
+    <string name="external_sensor_widgets">ANT+ moduler</string>
     <string name="ant_missing_dependency_descr">Den krævede tjeneste \"%1$s\" blev ikke fundet.
 \nDu skal installere ANT+ Plugins-tjenesten.
 \nVil du starte Play Store for at gøre dette\?</string>
@@ -4831,7 +4832,7 @@
     <string name="purchases_feature_desc_cross_buy">Brug dine abonnementsfunktioner på forskellige platforme (Android/iOS/web) uden ekstra omkostninger.</string>
     <string name="shared_string_cross_buy">Krydskøb</string>
     <string name="external_sensors_plugin_name">Eksterne sensorer</string>
-    <string name="external_sensors_plugin_description">Overvågning af puls, cykelhastighed, cykeleffekt og kadence. Kræver at din enhed er forbundet med respektive sensorer via ANT+ wireless personal network protocol.</string>
+    <string name="external_sensors_plugin_description">Giver adgang til eksterne sensorer for at aflæse f.eks. din puls, cykelhastighed, cykeleffekt eller kadence. Kræver at din enhed er forbundet med respektive sensorer via ANT+ wireless personal network protocol.</string>
     <string name="map_widget_altitude_current_location">Højde: Nuværende placering</string>
     <string name="map_widget_altitude_current_location_desc">Viser højden over havets overflade for den aktuelle geoplacering.</string>
     <string name="map_widget_altitude_desc">Viser højden for den aktuelle geoplacering eller højden for det aktuelle kortcentrum</string>
@@ -4929,11 +4930,12 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Denne handling understøttes ikke af den valgte korttype.</string>
     <string name="shared_string_weather">Vejr</string>
-    <string name="weather_plugin_description">Vejr-udvidelse giver
-\n- 5 lag... en 24-timers prognose og 7-dages prognose hver 3. time
+    <string name="weather_plugin_description">Giver
+\n- 24-timers og 7-dages vejrprognose med 5 lag
 \n- lokationsbaserede moduler
 \n- temperatur/tryk-konturlinjer
-\nVejrdata leveres af GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n
+\nVejrdataene leveres af Global Forecast System(GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="shared_string_contours">Konturer</string>
     <string name="empty_screen_view_selected_weather_data">Slå til for at se valgte vejrdata på kortet.</string>
     <string name="shared_string_layers">Lag</string>
@@ -4956,4 +4958,5 @@
     <string name="shared_string_next_sunset">Næste solnedgang</string>
     <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
+    <string name="storage_migration_fragment_close_descr">Kopiering udføres for %1$s%%. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
 </resources>

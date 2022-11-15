@@ -3750,7 +3750,6 @@
     <string name="route_between_points_desc">مشخص کنید نقطه‌ها با خط مستقیم به هم وصل شوند یا مسیر بینشان مطابق تنظیمات زیر محاسبه شود.</string>
     <string name="whole_track">تمام رد</string>
     <string name="next_segment">پارهٔ بعدی</string>
-    <string name="route_between_points_warning_desc">در ادامه، رد خود را به نزدیک‌ترین جادهٔ مجاز متناسب با یکی از نمایه‌های ناوبری‌تان بچسبانید، تا از این گزینه استفاده کنید.</string>
     <string name="navigation_profile">نمایه ناوبری</string>
     <string name="route_between_points_add_track_desc">یک پروندهٔ رد انتخاب کنید تا پارهٔ جدید را به آن بیفزایید.</string>
     <string name="street_level_imagery">تصاویر سطح خیابان</string>
@@ -4269,7 +4268,6 @@
     <string name="regular_price">قیمت پایه</string>
     <string name="on_hold_since">در تعلیق از %1$s</string>
     <string name="active_till">فعال تا %1$s</string>
-    <string name="approximate_route_description">مسیر را روی نقشه به راه‌ها می‌چسباند تا همهٔ گردش‌ها و داده‌های دیگر مانند همواری، نوع راه و... را دریافت کنید.</string>
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>

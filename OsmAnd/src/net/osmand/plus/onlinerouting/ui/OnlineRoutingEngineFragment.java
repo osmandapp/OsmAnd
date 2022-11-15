@@ -274,7 +274,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		approximateCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
 		approximateCard.build(mapActivity);
 		setApproximateCardTitle();
-		approximateCard.onClickCheckBox(getString(R.string.approximate_route_description), result -> {
+		approximateCard.onClickCheckBox(getString(R.string.attach_roads_descr), result -> {
 			if (getActivity() != null) {
 				boolean networkApproximateRoute = engine.shouldNetworkApproximateRoute();
 				SelectOnlineApproxProfileBottomSheet.showInstance(getActivity(), this,

@@ -3679,7 +3679,6 @@
     <string name="plan_route_trim_after">Kärbi pärast</string>
     <string name="plan_route_trim_before">Kärbi enne</string>
     <string name="attach_to_the_roads">Kinnita teede külge</string>
-    <string name="route_between_points_warning_desc">Järgmisena klõpsa oma rada lähimale lubatud teele ühe oma navigatsiooniprofiiliga selle võimaluse kasutamiseks.</string>
     <string name="route_between_points_next_segment_button_desc">Selle valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
     <string name="main_actions">Põhitegevused</string>
     <string name="osm_live_payment_subscription_management">Maksmine toimub Sinu Google Play kontolt ostu kinnitamisel.
@@ -4207,7 +4206,6 @@
 \nAndmete praegune versioon salvestatakse serverisse ning varem tehtud muudatusi ei saa tagasi võtta.</string>
     <string name="backup_version_history_delete_descr">Kas kustutame vananenud andmetüüpide muutuste logi OsmAndi pilves\?</string>
     <string name="purchases_feature_desc_unlimited_map_download">Hangi kõigi mandrite ja piirkondade võrguühenduseta kaartide piiramatud allalaadimised.</string>
-    <string name="approximate_route_description">Kinnita marsruut kaardil olevatele teedele, et saada kõik pöörded ja lisaandmed, nagu tasasus, teetüübid jne.</string>
     <string name="release_4_0">• Pilvepõhine varundamine
 \n
 \n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks

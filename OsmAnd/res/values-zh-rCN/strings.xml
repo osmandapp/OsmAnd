@@ -1329,7 +1329,7 @@
     <string name="mapillary_widget">Mapillary 小工具</string>
     <string name="mapillary_widget_descr">可以助你迅速将图片提交到 Mapillary。</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">将街道平面照片給每个人。发现新地点、写作、获取整个世界。</string>
+    <string name="plugin_mapillary_descr">街道级视图的影像。您也可以自己贡献。要将现有数据视为地图图层，请在“配置地图”菜单中打开“街道级影像”。</string>
     <string name="quick_action_showhide_osmbugs_descr">轻点动作按钮会在地图上显示或隐藏 OSM 注记。</string>
     <string name="sorted_by_distance">按距离排序</string>
     <string name="search_favorites">在我的收藏中搜索</string>
@@ -2461,7 +2461,7 @@
     <string name="modify_the_search_query">更改搜索。</string>
     <string name="shared_string_actions">操作</string>
     <string name="shared_string_marker">标记</string>
-    <string name="empty_state_osm_edits_descr">创建或修改 OSM 兴趣点，打开或评论 OSM 注记并贡献 GPX 轨迹文件。</string>
+    <string name="empty_state_osm_edits_descr">创建或修改 OpenStreetMap 兴趣点，打开或评论 OSM 注记并贡献 GPX 轨迹文件。</string>
     <string name="shared_string_deleted">已删除</string>
     <string name="shared_string_edited">已编辑</string>
     <string name="shared_string_added">已添加</string>
@@ -2507,7 +2507,7 @@
     <string name="show_number_pad">显示数字盘</string>
     <string name="switch_osm_notes_visibility_desc">在地图上显示或隐藏 OSM 注记。</string>
     <string name="gpx_file_desc">GPX - 适合导出到 JOSM 或其它 OSM 编辑器。</string>
-    <string name="osc_file_desc">OSC - 适合导出到 OSM。</string>
+    <string name="osc_file_desc">OSC - 适合导出到 OpenStreetMap。</string>
     <string name="shared_string_gpx_file">GPX 文件</string>
     <string name="osc_file">OSC 文件</string>
     <string name="choose_file_type">选择文件类型</string>
@@ -2905,7 +2905,7 @@
     <string name="shared_string_uninstall">卸载</string>
     <string name="speed_cameras_alert">在某些国家法律禁止使用测速摄像警报。</string>
     <string name="vessel_height_warning_link">设置船只高度</string>
-    <string name="vessel_height_warning">您可以设置船只高度，以避免过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
+    <string name="vessel_height_warning">设置船只高度以避免低桥。如果桥是可移动的，则使用打开时的高度。</string>
     <string name="vessel_height_limit_description">设置船只高度，以避免过低桥梁。请记住，如果桥是可移动的，我们将使用它在打开状态下的高度。</string>
     <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
     <string name="item_deleted">%1$s 已删除</string>
@@ -2992,7 +2992,7 @@
     <string name="round_trip">往返行程</string>
     <string name="route_is_calculated">路线已计算</string>
     <string name="rendering_value_darkyellow_name">暗黄色</string>
-    <string name="plan_route">规划路线</string>
+    <string name="plan_route">规划路径</string>
     <string name="hide_passed">隐藏已经过</string>
     <string name="show_passed">显示已经过</string>
     <string name="add_line">添加线路</string>
@@ -3181,7 +3181,6 @@
     <string name="route_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
     <string name="route_between_points_desc">选择如何以直线或按下方指明的方法计算路线以连接导航点。</string>
     <string name="next_segment">下一段</string>
-    <string name="route_between_points_warning_desc">接下来，用你的一个导航配置文件将你的轨迹贴合到最近的允许道路上，以使用这个选项。</string>
     <string name="threshold_distance">起始距离</string>
     <string name="navigation_profile">导航文件</string>
     <string name="route_between_points_add_track_desc">选择一个要添加新片段的跟踪文件。</string>
@@ -3262,9 +3261,9 @@
     <string name="toast_select_edits_for_upload">选择要上传的编辑</string>
     <string name="uploaded_count">已上传 %1$d，共 %2$d</string>
     <string name="hillshade_slope_contour_lines">山体阴影/斜坡/等高线</string>
-    <string name="open_place_reviews_plugin_description">将餐厅、酒店、博物馆和路点等公共场所的照片、评论和链接作为开放数据发送 https://openplacereviews.org/data/。
+    <string name="open_place_reviews_plugin_description">为 OpenPlaceReviews 项目做出贡献，例如照片、评论或公共场所（如餐馆、酒店或博物馆）的链接。
 \n
-\n如需阅读更多信息，请访问 https://openplacereviews.org</string>
+\n在我们的网站上查找有关如何做出贡献的说明 https://osmand.net/docs/user/plugins/openplacereviews。</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
     <string name="login_open_place_reviews">登录 OpenPlaceReviews</string>
@@ -3490,7 +3489,7 @@
     <string name="routing_attr_allow_streams_name">允许溪流和水沟</string>
     <string name="routing_attr_allow_intermittent_description">允许间歇性水路</string>
     <string name="routing_attr_allow_intermittent_name">允许间歇性水路</string>
-    <string name="analyze_by_intervals">分析分割间隔</string>
+    <string name="analyze_by_intervals">按间隔分析</string>
     <string name="activity_type_car_name">汽车</string>
     <string name="temporary_conditional_routing_descr">使用地图上有效的道路限制</string>
     <string name="routing_attr_short_way_description">优化的更短路线（节能）</string>
@@ -3593,7 +3592,7 @@
     <string name="select_nav_profile_dialog_title">选择导航类型</string>
     <string name="select_base_profile_dialog_message">基于你的自定义配置文件的默认应用程序配置文件之一，这定义了基本的设置，如部件的默认可见性和速度和距离的单位。这些是默认的应用程序配置文件，以及它们可以扩展到的自定义配置文件的例子：</string>
     <string name="select_base_profile_dialog_title">选择用以开始的配置文件</string>
-    <string name="profile_alert_delete_msg">是否确定要删除“%s”配置文件</string>
+    <string name="profile_alert_delete_msg">删除“%s”配置文件</string>
     <string name="profile_alert_need_save_msg">首先保存配置文件的更改</string>
     <string name="profile_alert_cant_delete_base">你不能删除 OsmAnd 的基本配置文件</string>
     <string name="profile_alert_duplicate_name_msg">已经有该名称的配置文件</string>
@@ -3665,7 +3664,6 @@
     <string name="backup_error_user_is_not_registered">不存在用该电子邮件地址注册的用户</string>
     <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
     <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
-    <string name="approximate_route_description">将路线附在地图上的道路上，以获得所有的转弯和附加数据，如平整度、道路类型等。</string>
     <string name="release_4_0">- 云备份
 \n
 \n - 为 \"Topo \"地图风格增加了夜间模式
@@ -3901,7 +3899,7 @@
     <string name="purchases_feature_desc_hourly_map_updates">获得更频繁的地图更新。每小时、每天或每周更新。更新是增量下载的，只针对更改的区域。</string>
     <string name="purchases_feature_desc_monthly_map_updates">获得离线地图的定期月度更新。</string>
     <string name="purchases_feature_desc_combined_wiki">在没有互联网连接的情况下，探索维基百科上的文章。离线数据按国家划分，提供所有语言版本。</string>
-    <string name="purchases_feature_desc_wikipedia">探索维基百科离线。文章按国家和地区分类，提供所有语言版本。</string>
+    <string name="purchases_feature_desc_wikipedia">离线提供所有与地点相关的维基百科文章，帮助您通过在地图上的简单点击来了解您在旅途中访问的地点。不要忘记下载相应地区的维基百科地图文件。</string>
     <string name="purchases_feature_desc_wikivoyage">离线探索维基导游内容。文章按国家和地区分类，提供所有语言版本。</string>
     <string name="purchases_feature_desc_terrain">地形等高线，带深色阴影的完整山体阴影地图与用颜色显示山峰和低地的坡度地图。</string>
     <string name="purchases_feature_desc_nautical">获得航海深度信息</string>
@@ -4186,7 +4184,7 @@
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="save_heading">包括航向</string>
     <string name="selected_profile">选定的配置文件</string>
-    <string name="monitoring_min_distance_descr_recommendation">建议：如果你不需要捕捉比这更精细的细节，也不想在休息时明确捕捉数据，那么设置为5米可能对你很有效。</string>
+    <string name="monitoring_min_distance_descr_recommendation">建议：如果您不想记录路线的次要细节，并且不需要关于休息时间的额外数据，请设置 5 米位移。</string>
     <string name="live_monitoring_tracking_interval">追踪间隔</string>
     <string name="monitoring_min_distance_descr_side_effect">副作用。休息时将完全不被记录，或只被记录一个点。小的（现实世界的）移动（例如侧道，以标记你的旅行中可能出现的岔道）可能被过滤掉。你的文件包含较少的后处理信息，并且在记录时过滤掉明显多余的点，而有可能保留由不良接收或GPS芯片组影响造成的失真，使统计结果更差。</string>
     <string name="select_nav_icon_descr">在导航或移动时显示的图标。</string>
@@ -4241,7 +4239,7 @@
     <string name="shared_string_open_track">打开轨迹</string>
     <string name="routing_attr_avoid_highway_description">避开高速公路</string>
     <string name="map_widget_trip_recording_downhill">下坡</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">无限制</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A（无限制）</string>
     <string name="coordinates_widget_secondary_desc">坐标格式可以在 %1$s – %2$s – %3$s 中更改。</string>
     <string name="av_notes_choose_action_widget_desc">选择操作。</string>
     <string name="lang_sat">桑塔利语（Satār）</string>
@@ -4256,7 +4254,7 @@
     <string name="circle_settings">圆圈设置</string>
     <string name="widget_secondary_desc_part_of">%1$s 插件的一部分。</string>
     <string name="map_widget_average_speed">平均速度</string>
-    <string name="time_to_navigation_point_widget_settings_desc">通过点击小部件切换模式。</string>
+    <string name="time_to_navigation_point_widget_settings_desc">点击小工具以切换模式。</string>
     <string name="rendering_attr_weatherTempContours_name">等温线</string>
     <string name="rendering_attr_weatherPressureContours_name">等压线</string>
     <string name="map_widget_trip_recording_uphill">上坡</string>
@@ -4270,11 +4268,11 @@
     <string name="distance_circles">距离-圆圈</string>
     <string name="elevation_profile_widget_desc">小部件显示当前路线的高程和坡度剖面。</string>
     <string name="average_speed_skip_stops">考虑到停止</string>
-    <string name="average_speed_time_interval_desc">指定测量平均速度的时间间隔。</string>
-    <string name="average_speed_widget_desc">显示当前骑行的平均速度。</string>
+    <string name="average_speed_time_interval_desc">指定速度平均的时间间隔。</string>
+    <string name="average_speed_widget_desc">显示当前行程的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>
     <string name="map_widget_distance_to_intermediate">到中继点的距离</string>
-    <string name="radius_ruler_mode_desc">点击小部件可以切换到半径标尺模式。</string>
+    <string name="radius_ruler_mode_desc">轻按小部件切换到半径标尺模式。</string>
     <string name="routing_attr_avoid_highway_name">避开高速公路</string>
     <string name="routing_attr_hazmat_category_name">危险品类别</string>
     <string name="parking_widget_desc">显示从屏幕中心到停车位的距离的小部件。</string>
@@ -4334,66 +4332,66 @@
     <string name="rate_dialog_descr">请在Google Play上分享您的反馈并为我们的作品评分。</string>
     <string name="auto_backup_preference_desc">默认情况下，安卓系统会保存收藏夹、地图标记和OsmAnd设置的备份，以便在新设备或重新安装后恢复它们。这个备份被限制在25MB。
 \n当使用OsmAnd云时，这可能导致重新安装后的误解。</string>
-    <string name="altitude_correction">高度校正</string>
-    <string name="no_altitude_data_desc">您可以将轨迹附加到道路上以获取%1$s数据或进行在线计算。</string>
-    <string name="routing_attr_motor_type_name">引擎使用的燃料（motor）</string>
+    <string name="altitude_correction">海拔校正</string>
+    <string name="no_altitude_data_desc">要接收 %1$s 数据，请将你的轨迹附着在道路上或在线计算。</string>
+    <string name="routing_attr_motor_type_name">车辆发动机</string>
     <string name="make_osmand_better_descr">允许OsmAnd收集和处理匿名的应用使用数据。不会收集关于你的位置或你在地图上查看的位置的数据。
 \n
 \n在\'设置\'→\'隐私和安全\'中随时进行配置。</string>
     <string name="reset_all_settings_desc">将所有设置重置为默认值？</string>
-    <string name="routing_attr_motor_type_description">选择你的车辆引擎使用的燃料类型，以计算二氧化碳排放量。</string>
-    <string name="track_file_description">点击此操作将显示可用轨迹的选择对话框。</string>
+    <string name="routing_attr_motor_type_description">选择发动机的燃料类型，这是估算二氧化碳排放量所必需的。</string>
+    <string name="track_file_description">点击此动作会显示可用的轨迹。</string>
     <string name="auto_backup_title">自动备份</string>
     <string name="marker_2nd">第二个标记</string>
     <string name="import_as_one_track">导入为一条轨迹</string>
     <string name="routing_attr_goods_restrictions_description">考虑轻型货车（货物）的访问权限</string>
     <string name="routing_attr_goods_restrictions_name">货物运送</string>
-    <string name="live_update_frequency_hour_variant">将每小时检查一次地图更新。</string>
+    <string name="live_update_frequency_hour_variant">每小时检查一次地图更新。</string>
     <string name="map_marker_average_speed_desc">指定速度平均的时间间隔（用于估计到达时间）。</string>
     <string name="goods_delivery_desc_2">将避免因货物交付而关闭的道路。</string>
     <string name="updated_map_time">已更新： %1$s.</string>
     <string name="goods_delivery_desc">送货车辆可能在某些道路上受到限制。</string>
-    <string name="next_live_update_date_and_time">下次更新于：%2$s 的 %1$s。</string>
+    <string name="next_live_update_date_and_time">在 %2$s 对 %1$s 进行下一次更新。</string>
     <string name="includes_osm_changes_until">包括直到 %1$s 为止所做的 OSM 变更。</string>
-    <string name="next_live_update_time">下次更新：在%1$s 。</string>
+    <string name="next_live_update_time">下次更新于 %1$s。</string>
     <string name="auto_25_chars_route_tr_kl">向右转并靠左</string>
     <string name="auto_25_chars_route_tl_kr">向左转并靠右</string>
     <string name="auto_25_chars_route_tl_kl">向左转并靠左</string>
     <string name="trip_recording_downhill_widget_desc">显示当前记录的行程中所有下降高度的总和。</string>
     <string name="compass_desc">显示向北的方向。</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">显示节点网络自行车路线</string>
-    <string name="live_update_frequency_week_variant">将每周检查一次地图更新情况。</string>
+    <string name="live_update_frequency_week_variant">地图更新每周检查一次。</string>
     <string name="download_tiles">下载瓦片</string>
     <string name="auto_25_chars_route_tr_kr">向右转并靠右</string>
     <string name="auto_25_chars_route_tu_kl">掉头并靠左</string>
     <string name="auto_25_chars_route_tu_kr">掉头并靠右</string>
     <string name="auto_25_chars_route_roundabout_kl">从 %1$d 出口离开并靠左</string>
     <string name="auto_25_chars_route_roundabout_kr">从 %1$d 出口离开并靠右</string>
-    <string name="attach_roads_descr">您是否想使用附加到离线地图的有效路线来估计您的路线。在这种情况下，您将有校正的道路高度、道路信息和转弯，可以在之后的导航中使用。</string>
+    <string name="attach_roads_descr">借助离线地图的路线近似你的轨迹。这将提供的校正的海拔值、道路细节，以及在导航过程中使用的转弯。</string>
     <string name="duplacate_widget_added_snackbar">正在将重复的小工具添加到列表中。</string>
     <string name="shared_string_duplicate">重复</string>
     <string name="av_notes_photo_widget_desc">点击小部件可以让你拍下照片。</string>
     <string name="av_notes_video_widget_desc">点击小部件可以让你录制一个视频。</string>
     <string name="av_notes_audio_widget_desc">点击小工具可让您留下一条音频注释。</string>
     <string name="trip_recording_uphill_widget_desc">显示当前记录的行程中所有爬升高度的总和。</string>
-    <string name="trip_recording_duration_widget_desc">显示轨迹记录时间，即当前记录行程的分钟/小时持续时间。</string>
+    <string name="trip_recording_duration_widget_desc">显示当前记录的行程时间。</string>
     <string name="trip_recording_distance_widget_desc">显示当前记录的行程距离。</string>
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
-    <string name="switch_widget_mode_desc">点击小工具可切换模式。</string>
-    <string name="side_marker_eta">预计到达时间</string>
+    <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
+    <string name="side_marker_eta">预计的到达时间</string>
     <string name="accessibility_2d_view_off">2.5D 视图关闭</string>
     <string name="download_complete">下载完成</string>
     <string name="marker_1st">第一个标记</string>
     <string name="goods_delivery_desc_3">仅适用于不超过 3.5 吨的送货卡车。</string>
-    <string name="live_update_frequency_day_variant">将每天检查地图更新。</string>
+    <string name="live_update_frequency_day_variant">每天都会检查地图更新。</string>
     <string name="average_speed_skip_stops_desc">低于 %1$s 的速度将被计算并影响平均速度。</string>
-    <string name="transport_hazmat_yes_desc">您需要选择适当的类别。</string>
-    <string name="transport_hazmat_no_desc">在一些道路和隧道中，禁止运输危险材料。</string>
+    <string name="transport_hazmat_yes_desc">选择适用的类别。</string>
+    <string name="transport_hazmat_no_desc">道路和隧道可能会限制危险材料的运输。</string>
     <string name="transport_hazmat_title">危险品运输</string>
-    <string name="calculate_online_altitude_descr">根据卫星图像和数字高程模型，在OsmAnd服务器上在线计算海拔高度。它可能与设备记录的海拔高度不同，可以作为海拔校正使用。</string>
+    <string name="calculate_online_altitude_descr">基于卫星图像和数字高程模型，在 OsmAnd 服务器上在线计算高程。与设备记录的高度的差异可以用作高程校正。</string>
     <string name="accessibility_2d_view_on">2.5D 视图开启</string>
     <string name="compass_always_hidden">始终隐藏</string>
     <string name="compass_always_visible">始终可见</string>
@@ -4429,22 +4427,22 @@
 \n - 其他错误修正
 \n
 \n</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车IMBA路径</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车 IMBA 路径</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">显示专用的山地自行车小径。</string>
     <string name="connect_with_straight_line">用直线连接</string>
     <string name="attach_roads_warning">只有已录制的轨迹可以附加到道路上。</string>
     <string name="without_profiles_changing">无需更改配置文件</string>
-    <string name="shared_string_only_missing">仅缺失的</string>
+    <string name="shared_string_only_missing">仅缺失项</string>
     <string name="relative_bearing_widget_desc">显示您的前进方向与目标点之间的角度。</string>
     <string name="minmax_speed_dialog_title">设置最小/最大速度</string>
     <string name="second_marker_widget_desc">你可以配置小组件来显示距离或估计到达第二个地图标记的时间。</string>
     <string name="first_marker_widget_desc">你可以配置小组件来显示距离或估计到达第一个地图标记的时间。</string>
-    <string name="time_to_destination_widget_desc">该小部件会显示到最后一个目的地点的 \"到达时间 \"或 \"离开时间\"。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
+    <string name="time_to_destination_widget_desc">该小部件会显示需要多少时间才能到达最后一个目的地点。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
     <string name="shared_string_widget">小工具</string>
-    <string name="current_time_widget_desc">从您的设备显示当前时间。</string>
+    <string name="current_time_widget_desc">显示从您的设备获取的当前时间。</string>
     <string name="gps_info_widget_desc">显示设备在那一刻检测到并使用的卫星数量。</string>
     <string name="av_def_action_choose">根据要求</string>
-    <string name="lanes_widgets_desc">车道小部件显示当前的道路车道布局，并突出显示要通过主动导航行驶的车道。</string>
+    <string name="lanes_widgets_desc">显示当前的道路车道布局，并突出显示导航时要走的车道。</string>
     <string name="battery_widget_desc">显示您设备的电池电量。</string>
     <string name="time_to_go_desc">到达目的地所需的时间（以分钟或小时为单位）。</string>
     <string name="arrival_time_widget_desc">到达目标地点的时间。</string>
@@ -4456,11 +4454,11 @@
     <string name="navigation_points">导航点</string>
     <string name="current_speed_widget_desc">向您显示由GPS 传感器检测到的当前速度。</string>
     <string name="magnetic_bearing_widget_desc">从您所在位置观察到的磁北与目标点之间的角度。</string>
-    <string name="bearing_desc">方位小部件以角度单位（180 度、360 度、毫弧度）显示与目标的绝对或相对方位。</string>
+    <string name="bearing_desc">以角度单位显示与目标的绝对或相对方位（180度、360度或毫弧度模式）。</string>
     <string name="coordinates_widget_desc">它显示当前地理位置的地理坐标。</string>
-    <string name="street_name_widget_desc">街道名称微件使用直线位置箭头显示当前街道名称，或显示下一个街道名称以及必须完成的操作。</string>
+    <string name="street_name_widget_desc">街道名称小工具显示带有直线位置箭头的当前街道名称，或带有指示即将转弯的箭头的下一条街道名称。</string>
     <string name="map_widget_true_bearing">真方位</string>
-    <string name="radius_rules_widget_desc">半径尺工具有助于确定地图上选定点周围的半径，在地图上显示距离圆环。</string>
+    <string name="radius_rules_widget_desc">半径量尺工具显示地图上所选点周围的距离圆。</string>
     <string name="compass_visible_if_map_rotated_desc">北朝上时不显示</string>
     <string name="compass_visible_if_map_rotated">地图旋转后显示</string>
     <string name="keep_passed_markers_descr">作为一组收藏夹添加的标记或标记为“已通过”的 GPX 航点将保留在地图上。如果组未处于活动状态，则标记将从地图中消失。</string>
@@ -4556,17 +4554,17 @@
     <string name="shared_string_terms_of_use">使用条款</string>
     <string name="favorites_backup">收藏夹备份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台（Android/iOS/Web）上使用您的订阅功能，无需额外费用。</string>
-    <string name="ant_widgets">ANT+ 小工具</string>
+    <string name="external_sensor_widgets">ANT+ 小工具</string>
     <string name="shared_string_cross_buy">跨平台购买</string>
     <string name="current_location_widget">坐标：当前位置</string>
-    <string name="external_sensors_plugin_description">监测心率、自行车速度、自行车功率和踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>
+    <string name="external_sensors_plugin_description">访问外部传感器来读取心率、自行车速度、自行车功率或踏频。要求设备通过ANT +无线个人网络协议连接到相应的传感器。</string>
     <string name="map_widget_altitude_current_location_desc">显示当前地理位置的海拔高度。</string>
-    <string name="map_widget_altitude_desc">显示当前地理位置或当前地图中心的海拔高度</string>
+    <string name="map_widget_altitude_desc">显示当前地理位置的海拔或当前地图中心的高度</string>
     <string name="map_widget_rendering_fps_desc">显示地图和地图元素的显示和刷新速度，以每秒帧数 （FPS） 表示。</string>
     <string name="ant_go_to_store">前往商店</string>
     <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。
-\n您需要安装ANT +插件服务，如果您已经拥有现有版本，则可能需要更新现有版本。
-\n您想启动 Play 商店来获取它吗？</string>
+\n您需要安装或更新 ANT + 插件服务。
+\n您想启动 Play 商店来进行安装或更新吗？</string>
     <string name="ant_missing_dependency">缺少依赖关系</string>
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
@@ -4595,7 +4593,7 @@
     <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
     <string name="location_simulation_cutoff">模拟跳过第一米</string>
     <string name="send_uuid_preference_desc">一个随机的UUID被用来从OsmAnd服务器下载离线地图，以监测服务器资源的公平使用，预测流量模式，并生成匿名的月度地图报告。</string>
-    <string name="ant_heart_rate_write_gpx_desc">将心率写入至轨迹</string>
+    <string name="ant_heart_rate_write_gpx_desc">在轨迹中包含心率</string>
     <string name="map_widget_ant_heart_rate">心率</string>
     <string name="map_widget_ant_heart_rate_desc">实时显示用户在给定活动期间的心率</string>
     <string name="map_widget_ant_bicycle_power">自行车功率</string>
@@ -4605,19 +4603,18 @@
     <string name="map_widget_ant_bicycle_dist">自行车距离</string>
     <string name="map_widget_ant_bicycle_dist_desc">显示行驶距离</string>
     <string name="worldwide_maps">全球地图</string>
-    <string name="map_widget_zoom_level_desc">小工具显示当前的地图缩放级别。</string>
+    <string name="map_widget_zoom_level_desc">显示当前的地图缩放级别。</string>
     <string name="nautical_depth_points">航海深度点</string>
     <string name="depth_contours">等深线</string>
-    <string name="map_widget_target_distance_desc">小工具显示从摄像机到目标位置的距离。</string>
+    <string name="map_widget_target_distance_desc">显示摄像机与目标位置间的距离。</string>
     <string name="map_widget_camera_distance_desc">小工具显示相机在地面以上的标高。</string>
     <string name="map_widget_ant_bicycle_speed">自行车速度</string>
     <string name="map_widget_ant_bicycle_speed_desc">显示行驶速度</string>
     <string name="waypoint_template">航点模板</string>
     <string name="route_maneuvers_desc">导航小工具将在导航期间启用，以显示距离、到达或离开时间、下一个转弯、方位、当前街道名称、车道信息、最大速度、接近警报、兴趣点、航路点等信息。</string>
     <string name="included_in_your_current_plan">包含在您当前的“%1$s”计划中</string>
-    <string name="attach_to_roads_banner_desc">将您的轨迹吸附在道路上以接收详细的导航说明。</string>
     <string name="second_next_turn_widget_desc">该小工具会显示关于你的第二个下一转弯处的信息，如果在接近距离内转弯，则会启用该信息。</string>
-    <string name="time_to_intermediate_widget_desc">小工具会显示“到达时间”或“到达时间”到第一个中间点。时间将在导航过程中不断更新，一旦经过此中间点，时间就会更新到下一个中间点。</string>
+    <string name="time_to_intermediate_widget_desc">该小部件会显示需要多少时间才能到达第一个中间点。时间将在导航过程中不断更新，一旦经过此中间点，就会更新显示到达下一个中间点所需的时间。</string>
     <string name="distance_to_destination_widget_desc">该小工具会显示到最终目的地点的剩余距离。</string>
     <string name="display_position">显示位置</string>
     <string name="download_heightmap_maps">高度图</string>
@@ -4632,8 +4629,8 @@
     <string name="shared_string_used">已使用</string>
     <string name="quick_action_map_center_widget_descr">显示或隐藏地图上的地图中心工具的切换。</string>
     <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置小工具的切换。</string>
-    <string name="distance_by_tap_use_description">点击地图以查看您当前位置与点击点之间的距离。
-\n用两根手指在地图上同时点击以查看点击点之间的距离</string>
+    <string name="distance_by_tap_use_description">轻按地图查看您当前位置与点击点之间的距离。
+\n用两根手指在地图上同时轻按以查看单击点之间的距离</string>
     <string name="shared_string_2_5_d_view">2.5D 视图</string>
     <string name="calculating_altitude">正在计算海拔</string>
     <string name="shared_string_speed">速度</string>
@@ -4644,16 +4641,16 @@
     <string name="favorite_confirm_delete_group">您确定要删除“%1$s”组和所有包含的点（%2$d）吗？</string>
     <string name="rendering_attr_showWaterwayTunnels_name">水路隧道</string>
     <string name="get_altitude_data">获取海拔数据</string>
-    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">不要离开滑雪道</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">不要离开越野滑雪道</string>
     <string name="map_widget_zoom_level">缩放层级</string>
     <string name="map_widget_camera_distance">相机标高</string>
     <string name="map_widget_camera_tilt">相机倾斜</string>
-    <string name="coordinates_widget_current_location_desc">该小工具显示当前地理位置的地理坐标</string>
+    <string name="coordinates_widget_current_location_desc">显示当前地理位置的地理坐标</string>
     <string name="coordinates_widget_map_center">坐标：地图中心</string>
     <string name="coordinates_widget_current_location">坐标：当前位置</string>
     <string name="import_tracks_descr">%1$s，包含%2$s 分开的轨迹。选择要导入的轨迹。</string>
     <string name="developer_widgets">开发者小工具</string>
-    <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，以计算预计到达时间。</string>
+    <string name="map_marker_interval_dialog_desc">指定测量平均速度的时间间隔，计算预估的到达时间。</string>
     <string name="calculate_online">在线计算</string>
     <string name="no_altitude_data">没有海拔数据</string>
     <string name="turn_on_public_transport_description">打开以在地图上查看公共交通路线。</string>
@@ -4661,11 +4658,11 @@
     <string name="rendering_value_all_name">全部</string>
     <string name="available_as_part_of_subscription_plan">作为 %1$s 订阅的一部分提供。</string>
     <string name="rendering_attr_seabedDetail_description">关于海床surface_qualification、杂草或海草的组合表面类型、类别和分类单元的附加文本信息</string>
-    <string name="distance_to_intermediate_widget_desc">该小工具会显示到第一个中间点的距离。一旦通过中间点，将会更新为到下一个中间点的距离。</string>
-    <string name="next_turn_widget_desc">该小部件会显示有关您的下一个转弯的信息，其中包含操作和距离的图片。</string>
+    <string name="distance_to_intermediate_widget_desc">该小工具会显示离第一个中间点还有多远。一旦通过中间点，将会更新为显示到下一个中间点的距离。</string>
+    <string name="next_turn_widget_desc">该小部件通过移动路线图和距离数显示有关您的下一个转弯的信息。</string>
     <string name="show_map_symbols">显示地图符号</string>
     <string name="show_map_symbols_desc">文字、路标和其它。</string>
-    <string name="coordinates_widget_map_center_desc">该小工具显示当前地图中心的地理坐标</string>
+    <string name="coordinates_widget_map_center_desc">显示当前地图中心的地理坐标</string>
     <string name="go_to_marker_location">转到标记位置</string>
     <string name="shared_string_switch_mode">切换模式</string>
     <string name="click_on_widget">点击小工具</string>
@@ -4721,7 +4718,7 @@
 \n%1$s：地图仅限于所选的缩放级别范围。
 \n
 \n%2$s 是原始瓦片可见的级别，在这些值之外将发生放大或缩小。</string>
-    <string name="turn_arrows_descr">选择是否在路程线路上指示转弯箭头。</string>
+    <string name="turn_arrows_descr">选择是否在路线线路上指示转弯箭头。</string>
     <string name="plan_route_add_new_segment">添加新线段</string>
     <string name="open_street_map_login_mode">先登录以上传新的或修改过的更改。
 \n
@@ -4748,7 +4745,7 @@
     <string name="dismiss_changes_descr">所有更改都将被驳回。</string>
     <string name="dismiss_changes">忽略更改？</string>
     <string name="map_rendering_engine_v2">版本 2 （OpenGL）</string>
-    <string name="map_rendering_engine_descr">第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。在4.3版之前，第1版的渲染是默认的，对于旧的设备仍然更可取。</string>
+    <string name="map_rendering_engine_descr">第二版（OpenGL）是更快的地图渲染引擎，也具有2.5D视图。在4.3版之前，默认使用第1版的渲染，且其对旧的设备仍然更好。</string>
     <string name="map_rendering_engine">地图渲染引擎</string>
     <string name="system_screen_timeout_descr">根据系统的屏幕超时关闭屏幕。</string>
     <string name="additional_actions_descr">通过点击“%1$s”按钮访问这些操作。</string>
@@ -4882,4 +4879,11 @@
     <string name="lang_ckb">中库尔德语</string>
     <string name="restart_now">立即重启</string>
     <string name="map_rendering_engine_v1">版本 1</string>
+    <string name="weather_plugin_description">提供
+\n- 24小时和7天的天气预报，包括5个图层
+\n- 基于位置的小工具
+\n- 等温线/等压线
+\n
+\n天气数据由全球预测系统（GFS，https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ）提供。</string>
+    <string name="edit_profiles">编辑配置文件</string>
 </resources>

@@ -3700,7 +3700,6 @@
     <string name="route_between_points_desc">Définissez comment relier les points : par une ligne droite ou en calculant un itinéraire avec le profil ci-dessous.</string>
     <string name="route_between_points_whole_track_button_desc">Toute la trace sera recalculée en utilisant le profil sélectionné.</string>
     <string name="route_between_points_next_segment_button_desc">Seul le prochain segment sera recalculé en utilisant le profil sélectionné.</string>
-    <string name="route_between_points_warning_desc">Sur l\'écran suivant, sélectionnez un profil de navigation ce qui déplacera votre trace sur les routes les plus adaptées.</string>
     <string name="route_between_points_add_track_desc">Sélectionnez le fichier de trace auquel vous souhaitez ajouter un nouveau segment.</string>
     <string name="save_as_new_track">Enregistrer comme nouvelle trace</string>
     <string name="reverse_route">Inverser l\'itinéraire</string>
@@ -4203,7 +4202,6 @@
     <string name="you_can_get_feature_as_part_of_pattern">Obtenez \"%1$s provenant du pack %2$s. Comparaison :</string>
     <string name="backup_error_size_is_exceeded">Taille maximale du Cloud OsmAnd dépassée %1$s</string>
     <string name="backup_error_token_is_not_valid">Une erreur s\'est produite avec l\'ID d\'appareil ou le jeton fournit</string>
-    <string name="approximate_route_description">Déplacer l\'itinéraire sur les routes afin d\'obtenir les bifurcations et des données additionnelles comme la régularité du sol, le type de route, etc...</string>
     <string name="logout_from_osmand_cloud">Se déconnecter de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
 \nVous devrez vous reconnecter pour sauvegarder ou restaurer vos données.</string>
@@ -4761,7 +4759,6 @@
     <string name="connect_with_straight_line">Connecter en ligne droite</string>
     <string name="attach_roads_warning">Seule une trace déjà enregistrée peut être attachée aux routes.</string>
     <string name="attach_roads_descr">Déplace votre trace sur les routes des cartes hors ligne. Pendant le guidage, vous disposerez ainsi d\'une altitude corrigée, d\'informations sur les routes et les bifurcations.</string>
-    <string name="attach_to_roads_banner_desc">Déplacez votre trace sur les routes afin d\'obtenir des instructions de guidage détaillées.</string>
     <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
     <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
     <string name="favorite_delete_group">Supprimer le groupe</string>
@@ -4795,7 +4792,7 @@
     <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
-    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="external_sensor_widgets">Widgets ANT+</string>
     <string name="ant_missing_dependency">Dépendance manquante</string>
     <string name="ant_go_to_store">Accéder à la boutique</string>
     <string name="ant_read_data">Lire les données</string>

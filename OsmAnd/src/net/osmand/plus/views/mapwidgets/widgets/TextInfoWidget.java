@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
@@ -29,6 +30,8 @@ public class TextInfoWidget extends MapWidget {
 	private final TextView textViewShadow;
 	private final TextView smallTextView;
 	private final TextView smallTextViewShadow;
+	private final View container;
+	private final View emptyBanner;
 	private final View bottomDivider;
 
 	@DrawableRes
@@ -42,6 +45,8 @@ public class TextInfoWidget extends MapWidget {
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
 		super(mapActivity, widgetType);
+		container = view.findViewById(R.id.container);
+		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
 		textView = view.findViewById(R.id.widget_text);
 		textViewShadow = view.findViewById(R.id.widget_text_shadow);
@@ -181,12 +186,20 @@ public class TextInfoWidget extends MapWidget {
 	}
 
 	@Override
-	protected boolean updateVisibility(boolean visible) {
-		boolean updatedVisibility = super.updateVisibility(visible);
+	public boolean isViewVisible() {
+		return container.getVisibility() == View.VISIBLE;
+	}
+
+	public boolean updateVisibility(boolean visible) {
+		boolean updatedVisibility = AndroidUiHelper.updateVisibility(container, visible);
 		if (updatedVisibility && app.accessibilityEnabled()) {
-			view.setFocusable(visible);
+			container.setFocusable(visible);
 		}
 		return updatedVisibility;
+	}
+
+	public boolean updateBannerVisibility(boolean visible) {
+		return AndroidUiHelper.updateVisibility(emptyBanner, visible);
 	}
 
 	@DrawableRes

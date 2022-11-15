@@ -747,7 +747,7 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (settings.USE_OPENGL_RENDER.get() && !"qnx".equals(System.getProperty("os.name"))) {
+		if (app.useOpenGlRenderer() && !Version.isQnxOperatingSystem()) {
 			try {
 				NativeCoreContext.init(app);
 				settings.OPENGL_RENDER_FAILED.set(false);
@@ -765,7 +765,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initNativeCore() {
-		if (!"qnx".equals(System.getProperty("os.name"))) {
+		if (!Version.isQnxOperatingSystem()) {
 			OsmandSettings osmandSettings = app.getSettings();
 			if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				osmandSettings.SAFE_MODE.set(true);

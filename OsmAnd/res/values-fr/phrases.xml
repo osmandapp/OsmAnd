@@ -1936,11 +1936,11 @@
     <string name="poi_shoes_type">Type</string>
     <string name="poi_fire_hydrant_type">Type</string>
     <string name="poi_fire_hydrant_position">Position</string>
-    <string name="poi_water_source">Alimentation en eau</string>
+    <string name="poi_water_source">Source d\'eau</string>
     <string name="poi_payment_toll_type">Type de paiement</string>
     <string name="poi_highway_crossing_type">Type</string>
     <string name="poi_service_general">Service</string>
-    <string name="poi_self_service">Libre service</string>
+    <string name="poi_self_service">Libre-service</string>
     <string name="poi_automated">Automatisé</string>
     <string name="poi_parking_type">Type</string>
     <string name="poi_fuel_type">Type de carburant</string>
@@ -1953,7 +1953,7 @@
     <string name="poi_ferry_terminal_cargo">Cargo</string>
     <string name="poi_telescope_type">Type</string>
     <string name="poi_animal_training_type">Type</string>
-    <string name="poi_diplomatic_filter">Type</string>
+    <string name="poi_diplomatic_filter">Institution diplomatique</string>
     <string name="poi_city_capital">Capitale</string>
     <string name="poi_healthcare_alternative_types">Spécialité</string>
     <string name="poi_free_flying_characteristics">Caractéristiques</string>
@@ -3915,7 +3915,7 @@
     <string name="poi_hoops">Anneaux</string>
     <string name="poi_club_social">Club social</string>
     <string name="poi_plateau">Plateau</string>
-    <string name="poi_speedway">Speedway</string>
+    <string name="poi_speedway">Course de motos</string>
     <string name="poi_gladed_yes">Satisfait : oui</string>
     <string name="poi_camp_pitch">Emplacement de camping</string>
     <string name="poi_mobile_library">Arrêt pour la bibliothèque mobile</string>
@@ -4109,7 +4109,7 @@
     <string name="poi_beauty_salon_eyelash">Cils</string>
     <string name="poi_beauty_salon_pedicure">Pédicure</string>
     <string name="poi_massage_chiropractic">Chiropractie</string>
-    <string name="poi_agrarian_yes">Oui, Argarian</string>
+    <string name="poi_agrarian_yes">Oui, agricole</string>
     <string name="poi_agrarian_pesticide">Pesticide</string>
     <string name="poi_agrarian_fertilizer">Engrais</string>
     <string name="poi_agrarian_seed">Semences</string>
@@ -4366,7 +4366,20 @@
     <string name="poi_playground_tunnel_tube">Tunnel</string>
     <string name="poi_playground_sandpit">Bac à sable</string>
     <string name="poi_playground_ball_pool">Piscine à balles</string>
-    <string name="poi_playground_cushion">Coussin gonflable</string>
+    <string name="poi_playground_cushion">Coussin rebondissant</string>
     <string name="poi_playground_zipwire">Tyrolienne</string>
     <string name="poi_playground_type">Type d’aire de jeux</string>
+    <string name="poi_playground_teenshelter">Cabane pour enfants</string>
+    <string name="poi_playground_youth_bench">Banc pour jeunes</string>
+    <string name="poi_playground_speaking_tube">Tuyau pour parler</string>
+    <string name="poi_playground_basketswing">Balançoire-panier</string>
+    <string name="poi_playground_basketrotator">Manège à panier</string>
+    <string name="poi_playground_aerialrotator">Manège aérien</string>
+    <string name="poi_playground_seesaw">Bascule</string>
+    <string name="poi_playground_exercise">Gym. extérieure</string>
+    <string name="poi_playground_slide">Toboggan</string>
+    <string name="poi_parking_fee_filter">Frais de stationnement</string>
+    <string name="poi_access_yes">L\'accès est autorisé</string>
+    <string name="poi_playground_spinning_circle">Cercle tournant</string>
+    <string name="poi_playground_funnel_ball">Balle pour entonnoir</string>
 </resources>

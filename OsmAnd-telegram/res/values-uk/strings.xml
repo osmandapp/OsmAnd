@@ -138,7 +138,7 @@
     <string name="nm">nmi</string>
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
-    <string name="nm_h">вузлів</string>
+    <string name="nm_h">nmi/год</string>
     <string name="m_s">м/с</string>
     <string name="km_h">км/год</string>
     <string name="mile_per_hour">миль/год</string>

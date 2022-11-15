@@ -3615,7 +3615,6 @@
     <string name="add_hidden_group_info">Het toegevoegde punt zal niet zichtbaar zijn op de kaart omdat de geselecteerde groep verborgen is, je kan het vinden in \"%s\".</string>
     <string name="system_default_theme">Standaard</string>
     <string name="route_between_points">Route tussen punten</string>
-    <string name="route_between_points_warning_desc">Zet nu je track vast op de dichtstbijzijnde toegestane weg met een van je navigatieprofielen om deze optie te gebruiken.</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s gegevens alleen beschikbaar op wegen, bereken een route met behulp van \"Route tussen punten\" om grafieken te zien.</string>
     <string name="route_between_points_desc">Kies hoe de punten verbonden worden: via een rechte lijn, of een route berekenen tussen de punten zoals hieronder aangegeven.</string>
     <string name="route_between_points_next_segment_button_desc">Alleen het volgende segment wordt opnieuw berekend met het geselecteerde profiel.</string>
@@ -4374,7 +4373,6 @@
     <string name="skip_confirmation">Ja, sla over</string>
     <string name="shared_storage_second_step">Klik op \"Gebruik deze map\".</string>
     <string name="routeInfo_winter_ice_road_description">Kleur de route- of tracklijn volgens de winterse wegcategorieën.</string>
-    <string name="approximate_route_description">Hecht de route vast aan de wegen op de kaart om all richtingsaanwijzingen en extra informatie te verkrijgen zoals effenheid, wegtypes en meer.</string>
     <string name="unlimited_map_downloads">Onbeperkte kaart downloads</string>
     <string name="purchases_feature_desc_wikipedia">Verken Wikipedia offline. Artikels zijn verdeeld over de landen en regio\'s en beschikbaar in alle talen.</string>
     <string name="routing_attr_avoid_tunnels_description">Tunnels vermijden</string>

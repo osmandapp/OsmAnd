@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="fav_point_dublicate_message">Favorito renomeado a %1$s para evitar a duplicación.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
@@ -916,8 +916,7 @@
     <string name="install_more">Instalar máis…</string>
     <string name="level_to_switch_vector_raster_descr">Empregar mapas vectoriais, alén deste nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel do achegamento vectorial mínimo</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>OSM en liña</u> clasificación de mapa con imaxes.</string>
+    <string name="create_poi_link_to_osm_doc"><u>OSM en liña</u> clasificación de mapas con imaxes.</string>
     <string name="error_doing_search">Non se puido facer a procura sen conexión.</string>
     <string name="search_osm_offline">Procurar localización xeográfica</string>
     <string name="system_locale">Sistema</string>
@@ -1662,7 +1661,7 @@ Lon %2$s</string>
     <string name="unsaved_changes_will_be_lost">Vanse perder as modificacións non gardadas. Proseguer\?</string>
     <string name="downloads_left_template">Faltan %1$s descargas</string>
     <string name="roads">Estradas</string>
-    <string name="downloading_number_of_files">Estase a baixar - ficheiro %1$d</string>
+    <string name="downloading_number_of_files">Descargando %1$d ficheiro…</string>
     <string name="buy">Mercar</string>
     <string name="activate_srtm_plugin">Activa o plugin das \"Curvas de nivel\"</string>
     <string name="later">Noutro intre</string>
@@ -2740,19 +2739,13 @@ Lon %2$s</string>
 \n • (Opcional) Grava a viaxe de xeito local nun ficheiro GPX ou con un servizo en liña 
 \n • (Opcional) Amosa a velocidade e altitude 
 \n • Activa a visualización das curvas do nivel e o asombreado dos outeiros ou colinas (mediante un plugin adicional)</string>
-    <string name="osmand_plus_extended_description_part7">"Contribúe de xeito directo co OSM 
-\n
-\n • Informa sobre problemas dos datos no mapa 
-\n
-\n • Sube pistas GPX ó OSM de xeito directo dende a aplicación 
-\n
-\n • Engade PDI e súbeos de xeito directo ó OSM (ou máis tarde, se non estás conectado) 
-\n
-\n • (Opcional) Gravación da viaxe en segundo plano (mentres o dispositivo está bloqueado) 
-\n
-\n 
-\n  O OsmAnd é un software de código aberto, desenvolvido de xeito activo. Calquera pode contribuír ca aplicación informando sobre erros, mellorando as traducións ou desenvolvendo novas funcións. Ademais, o proxecto tamén depende das contribucións financeiras para desenvolver e probar novas funcionalidades. 
-\n"</string>
+    <string name="osmand_plus_extended_description_part7">Contribuír directamente a OSM
+\n • Informar de erros
+\n • Carga pistas GPX a OSM directamente desde a aplicación
+\n • Engade POIs e cárgaos directamente a OSM (ou máis tarde se está fóra de liña)
+\n • Gravación da viaxe opcional tamén de fondo (mentres o dispositivo está en modo de suspensión)
+\n OsmAnd é un software de código aberto desenvolvido activamente. Todo o mundo pode contribuír á aplicación informando de erros, mellorando as traducións ou codificando novas funcións. Ademais, o proxecto depende das contribucións financeiras para financiar a codificación e a proba de novas funcions.
+\n</string>
     <string name="osmand_plus_extended_description_part8">Cobertura e calidade aproximada do mapa: 
 \n • Europa Occidental: **** 
 \n • Europa Oriental: *** 
@@ -3541,11 +3534,11 @@ Lon %2$s</string>
     <string name="hidden_items_descr">Estes elementos non se amosan no menú, mais as opcións ou plugins que representan seguirán a funcionar.</string>
     <string name="reset_items_descr">Agochar configuracións que as restabelece ó seu estado orixinal.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">"O pagamento será cobrado na túa conta da Google Play na confirmación da compra.
+    <string name="osm_live_payment_subscription_management">O pago cóbrase desde a túa conta de Google Play ao confirmar a compra.
 \n
-\n A subscrición é renovada  de xeito automático, a menos que sexa desbotada antes da data de renovación. A túa conta será cobrada polo período de renovación (mes/trimestre/ano) soamente na data de renovación.
+\nRenovarase a menos que se cancele antes do período de renovación seleccionado.
 \n
-\nPodes xestionar e desbotar as túas subscricións entrando nos axustes da Google Play."</string>
+\nXestiona ou cancela as túas subscricións desde a configuración de Google Play en calquera momento.</string>
     <string name="search_poi_types">Procurar tipos de PDI</string>
     <string name="search_poi_types_descr">Combina tipos de PDI de diferentes categorías. Preme en \"trocar\" para marcar todo, preme o lado esquerdo para escoller unha categoría.</string>
     <string name="download_unsupported_action">Acción %1$s non admitida</string>
@@ -3742,7 +3735,6 @@ Lon %2$s</string>
     <string name="route_between_points_desc">Escolle de que xeito conectar os puntos, cunha liña recta ou calcular unha ruta entre eles como se detalla deseguido.</string>
     <string name="whole_track">Pista enteira</string>
     <string name="next_segment">Seguinte segmento</string>
-    <string name="route_between_points_warning_desc">Deseguido, axusta a pista á estrada permitida máis preto cun perfil de navegación.</string>
     <string name="threshold_distance">Distancia limiar</string>
     <string name="navigation_profile">Perfil de navegación</string>
     <string name="route_between_points_add_track_desc">Escolle un ficheiro de pista ó que se engadirá un novo segmento.</string>
@@ -4087,4 +4079,35 @@ Lon %2$s</string>
     <string name="recorded_description">A voz gravada soa mellor, mais só pode pronunciar frases pregravadas: indicacións de xiro. Non pode anunciar os nomes das rúas ou dos PDI.</string>
     <string name="use_system_language">Empregar lingua do sistema</string>
     <string name="shared_string_itinerary">Itinerario</string>
+    <string name="weather_plugin_description">Proporciona
+\n- a predición meteorolóxica das 24 horas e 7 días con 5 capas
+\n- complementos baseados na localización
+\n- as isolíneas da temperatura/presión
+\n
+\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_offline_forecast">Pronóstico sen conexión</string>
+    <string name="weather_online_cache">Caché en liña</string>
+    <string name="map_settings_weather_temp">Temperatura</string>
+    <string name="map_settings_weather_air_pressure">Presión do aire</string>
+    <string name="map_settings_weather_wind">Vento</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores de liña</string>
+    <string name="rendering_attr_depthContourWidth_name">Ancho da liña</string>
+    <string name="map_widget_sunset_desc">Mostrala hora do seguinte solpor ou o tempo que queda ata o solpor.</string>
+    <string name="map_widget_sunrise_desc">Mostrala hora do seguinte amencer ou o tempo que queda ata o amencer.</string>
+    <string name="shared_string_next_sunset">Próxima posta de sol</string>
+    <string name="shared_string_next_sunrise">Próximo amencer</string>
+    <string name="shared_string_time_left">Tempo restante</string>
+    <string name="shared_string_sunset">Solpor</string>
+    <string name="shared_string_sunrise">Amanecer</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Estes complementos mostran información sobre o seguinte amencer e a posta de sol.</string>
+    <string name="map_widget_group_sunrise_sunset">Amanecer, posta de sol</string>
+    <string name="depth_contour_lines">Curvas de nivel da profundidade</string>
+    <string name="turn_on_nautical_depth_description">Activa para velos datos da profundidade náutica no mapa.</string>
+    <string name="map_settings_weather_cloud">Nube</string>
+    <string name="map_settings_weather_precip">Precipitacións</string>
+    <string name="measurement_units">Unidades de medida</string>
+    <string name="shared_string_weather">Tempo</string>
+    <string name="explore_weather_forecast">Consultala predición do tempo.</string>
+    <string name="shared_string_contours">Contornos</string>
+    <string name="switch_mode_by_tapping_on_widget">Cambialo modo tocando o widget.</string>
 </resources>

@@ -304,7 +304,6 @@
     <string name="backup_deleting_all_data">Se brišat site podatoci…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavuvanje\?
 \nḰe treba povtorno da se najavite za da napravite rezervna kopija ili da gi vratite podatocite.</string>
-    <string name="approximate_route_description">Prikačete ja maršrutata do patištata na kartata za da gi dobiete site svioci i dopolnitelni podatoci, kako što se maznost, tipovi patišta itn.</string>
     <string name="contour_lines_hillshades_slope">Konturni linii, ridovi, nagib</string>
     <string name="backup_error_no_valid_subscription">Nema validna pretplata</string>
     <string name="backup_error_user_is_not_registered">Nitu eden korisnik ne e registriran so taa adresa na e-pošta</string>
@@ -767,7 +766,6 @@
     <string name="whole_track">Celosna trasa</string>
     <string name="route_between_points_desc">Izberete kako da gi povrzete točkite so prava linija ili presmetajte ja rutata meǵu niv kako što e navedeno podolu.</string>
     <string name="threshold_distance">Pocetok na rastojanieto</string>
-    <string name="route_between_points_warning_desc">Sledno, prikačete ja vašata pateka do najbliskiot dozvolen pat so eden od vašite navigaciski profili za da ja koristite ovaa opcija.</string>
     <string name="next_segment">Sleden segment</string>
     <string name="reverse_route">Obratna ruta</string>
     <string name="overwrite_track">Stavete novo ime na zapisot</string>

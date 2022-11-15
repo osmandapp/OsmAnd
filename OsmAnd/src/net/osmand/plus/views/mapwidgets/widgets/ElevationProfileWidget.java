@@ -168,7 +168,7 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	private void setupChart() {
-		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
+		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);

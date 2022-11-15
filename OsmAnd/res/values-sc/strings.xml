@@ -3699,7 +3699,6 @@
     <string name="route_between_points_desc">Issèbera comente connètere sos puntos: cun una lìnia reta o carculende un\'àndala intre issos comente dislindadu inoghe in suta.</string>
     <string name="whole_track">Rasta intrea</string>
     <string name="next_segment">Segmentu imbeniente</string>
-    <string name="route_between_points_warning_desc">In su passu chi benit liga sa rasta tua a su caminu permìtidu prus a curtzu cun unu de sos profilos de navigatzione tuos pro impreare custa optzione.</string>
     <string name="threshold_distance">Lìmite de distàntzia</string>
     <string name="navigation_profile">Profilu de navigatzione</string>
     <string name="route_between_points_add_track_desc">Ischerta unu documentu de rasta in ue annànghere su segmentu nou.</string>
@@ -4208,7 +4207,6 @@
     <string name="backup_error_user_is_not_registered">Perunu impreadore registradu cun custu indiritzu de posta</string>
     <string name="backup_error_no_valid_subscription">Non b\'at perunu abbonamentu vàlidu</string>
     <string name="contour_lines_hillshades_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
-    <string name="approximate_route_description">Liga s\'àndala a sos caminos in sa mapa pro otènnere totu sas bortadas e sos datos in prus, che a s\'uniformidade de su terrinu, sa casta de caminu etz.</string>
     <string name="duration_moment_ago">unu momentu a como</string>
     <string name="logout_from_osmand_cloud">Essi dae OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Cheres essire\?
@@ -4751,7 +4749,6 @@
     <string name="co2_mission">Emissione de CO2</string>
     <string name="routing_attr_goods_restrictions_description">Piga in cunsideru sos permissos de atzessu pro sos veìculos lèbios de trasportu de mercantzias</string>
     <string name="map_marker_average_speed_desc">Ispetzìfica s\'intervallu de tempus pro carculare sa lestresa mèdia (impreadu pro carculare s\'ora de arrivu).</string>
-    <string name="attach_to_roads_banner_desc">Alliga sa rasta tua a sos caminos pro retzire indicatziones de navigatzione a sa minuda.</string>
     <string name="release_4_2">• Disinnu nou de sos widgets: aspetu nou, agrupamentu pro pàginas, càmbiu de òrdine e cumbinatzione lìbera.
 \n
 \n • Escursionismu / Tziclismu / Àndalas de biàgiu: toca in su sìmbulu de s\'àndala e retzi totu sas informatziones subra de s\'àndala.
@@ -4814,7 +4811,7 @@
     <string name="nautical_depth_points">Puntos de profundidade nàutica</string>
     <string name="worldwide_maps">Mapas mundiales</string>
     <string name="map_widget_ant_heart_rate_desc">Ammustrat sa frecuèntzia cardìaca de s\'impreadore in tempus reale durante un\'atividade ispetzificada</string>
-    <string name="ant_widgets">Widgets ANT+</string>
+    <string name="external_sensor_widgets">Widgets ANT+</string>
     <string name="map_widget_ant_bicycle_power_desc">Ammustrat sa potèntzia de su tziclista, impreada pro mòvere sa bitzicleta cara a in antis</string>
     <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
     <string name="depth_contours">Lìnias nàuticas de profundidade</string>

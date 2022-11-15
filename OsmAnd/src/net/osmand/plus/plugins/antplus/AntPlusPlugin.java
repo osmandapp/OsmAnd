@@ -84,7 +84,7 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_laptop;
+		return R.drawable.ic_action_external_sensor;
 	}
 
 	@Override

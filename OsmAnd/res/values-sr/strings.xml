@@ -3700,7 +3700,6 @@
     <string name="route_between_points_desc">Изаберите како повезати тачке, по правој линији, или израчунајте руту између њих како је доле назначено.</string>
     <string name="whole_track">Цела стаза</string>
     <string name="next_segment">Следећи сегмент</string>
-    <string name="route_between_points_warning_desc">Затим помоћу једног од ваших навигационих профила прислоните стазу на најближи дозвољени пут да бисте користили ову опцију.</string>
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Навигацијски профил</string>
     <string name="route_between_points_add_track_desc">Изаберите датотеку записа којој ће се додати нови сегмент.</string>
@@ -4289,7 +4288,6 @@
     <string name="routing_attr_prefer_tactile_paving_description">Преферира тактилно поплочавање</string>
     <string name="upload_gpx_description_hint">Оставите празно, имена путања ће се користити као опис. Унешен опис ће се применити за сваку путању.</string>
     <string name="backup_deleting_all_data_descr">Сачекајте док OsmAnd избрише Ваше податке са облака. Сви подаци на уређају ће остати нетакнути.</string>
-    <string name="approximate_route_description">Прилепи путању на путеве са карте да добијете сва скретања и додатне податке, као што су углачаност пута, тип пута и сл.</string>
     <string name="enter_verification_code">Унесите једнократну лозинку</string>
     <string name="contour_lines_hillshades_slope">Изохипсе, рељеф, нагиб</string>
     <string name="exit_pan_mode_descr">Кликните Изабери да напустите режим померања</string>

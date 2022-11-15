@@ -3570,7 +3570,6 @@
     <string name="track_show_start_finish_icons">Mostra icones d\'inici i final</string>
     <string name="select_track_width">Triar amplària</string>
     <string name="route_between_points_add_track_desc">Trieu un fitxer de ruta al qual s\'afegirà un nou segment.</string>
-    <string name="route_between_points_warning_desc">Desprès, ajusteu la traçada a la carretera permesa més propera amb un dels vostres perfils de navegació per utilitzar aquesta opció.</string>
     <string name="route_between_points_desc">Trieu com connectar els punts, amb una línia recta, o calcular la ruta entre ells segons s\'indica a continuació.</string>
     <string name="gpx_split_interval_descr">Trieu l\'interval a què les marques de distància o temps sobre la ruta es mostraran.</string>
     <string name="shared_string_custom">Personalitzat</string>
@@ -4021,7 +4020,7 @@
     <string name="ant_missing_dependency">Falta la dependència</string>
     <string name="ant_read_data">Llegir dades</string>
     <string name="ant_write_to_gpx">Escriure dades en la traça</string>
-    <string name="ant_widgets">Ginys d\'ANT+</string>
+    <string name="external_sensor_widgets">Ginys d\'ANT+</string>
     <string name="map_widget_ant_heart_rate">Ritme cardíac</string>
     <string name="ant_missing_dependency_descr">El servei necessari \"%1$s\" no s\'ha trobat.
 \nHas d\'instal·lar el complement del servei ANT+ o actualitza la versió existent si ja el tens.

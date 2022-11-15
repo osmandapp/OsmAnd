@@ -12,7 +12,7 @@
 		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginVertical="@dimen/content_padding_small"
 		android:textColor="?android:textColorPrimary"
-		android:text="@string/attach_to_roads_banner_desc"/>
+		android:text="@string/attach_roads_descr"/>
 
 	<View
 		android:layout_width="match_parent"
