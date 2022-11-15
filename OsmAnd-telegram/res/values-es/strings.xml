@@ -121,10 +121,10 @@
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="nm">nmi</string>
+    <string name="nm">Milla náutica</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">Nudo</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
