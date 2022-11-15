@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import static net.osmand.plus.Version.FULL_VERSION_NAME;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,7 +27,6 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
@@ -136,7 +136,8 @@ public class DownloadIndexesThread {
 		if (lang != null) {
 			String lng = lang.split(",")[0];
 			String setTts = null;
-			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
+			Set<String> supportedTtsLanguages = getSupportedTtsByLanguages(app).keySet();
+			for (String s : supportedTtsLanguages) {
 				if (lng.startsWith(s)) {
 					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 					break;

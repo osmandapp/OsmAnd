@@ -4,6 +4,8 @@ package net.osmand.plus.settings.backend;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
@@ -40,6 +42,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
@@ -2708,18 +2711,18 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
-	public static final String[] TTS_AVAILABLE_VOICES = {
-			"de", "en", "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
-	};
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference(this, "voice_provider", null) {
 		@Override
 		public String getProfileDefaultValue(ApplicationMode mode) {
-			Configuration config = ctx.getResources().getConfiguration();
-			for (String lang : TTS_AVAILABLE_VOICES) {
-				if (lang.equals(config.locale.getLanguage())) {
-					return lang + IndexConstants.VOICE_PROVIDER_SUFFIX;
+			String language = ctx.getResources().getConfiguration().locale.getLanguage();
+			Map<String, IndexItem> supportedTTS = getSupportedTtsByLanguages(ctx);
+			IndexItem index = supportedTTS.get(language);
+			if (index != null) {
+				if (!index.isDownloaded() && !index.isDownloading(ctx)) {
+					downloadTtsWithoutInternet(ctx, index);
 				}
+				return language + IndexConstants.VOICE_PROVIDER_SUFFIX;
 			}
 			return VOICE_PROVIDER_NOT_USE;
 		}

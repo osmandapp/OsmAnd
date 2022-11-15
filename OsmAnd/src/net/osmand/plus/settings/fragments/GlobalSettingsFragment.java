@@ -22,6 +22,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
+import net.osmand.plus.dialogs.MapRenderingEngineDialog;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -187,7 +188,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			if (manager != null) {
 				LocationSourceBottomSheet.showInstance(manager, this);
 			}
+		} else if (prefId.equals(MAP_RENDERING_ENGINE_ID)) {
+			new MapRenderingEngineDialog(app, getActivity()).showDialog(this::setupMapRenderingEnginePref);
 		}
+
 		return super.onPreferenceClick(preference);
 	}
 

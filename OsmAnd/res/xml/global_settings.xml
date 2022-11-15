@@ -30,7 +30,6 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/map_rendering_engine"
-		app:fragment="net.osmand.plus.settings.fragments.RenderingEngineFragment"
 		tools:icon="@drawable/ic_map" />
 
 	<Preference
