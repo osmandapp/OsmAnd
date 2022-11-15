@@ -4610,7 +4610,7 @@
     <string name="av_notes_choose_action_widget_desc">Scegli l\'azione.</string>
     <string name="gps_info_widget_desc">Mostra il numero di satelliti attualmente visibili e utilizzati.</string>
     <string name="max_speed_widget_desc">Mostra il limite di velocità della strada che si sta percorrendo.</string>
-    <string name="current_speed_widget_desc">Mostra la velocità determinata dal GPS.</string>
+    <string name="current_speed_widget_desc">Mostra la velocità come indicata dal GPS.</string>
     <string name="mapillary_widget_desc">Widget che fornisce un accesso veloce all\'app Mapillary per aggiungere Immagini-Stradali.</string>
     <string name="time_to_go_desc">Tempo necessario per raggiungere la tua destinazione in ore e minuti.</string>
     <string name="arrival_time_widget_desc">Orario di arrivo alla destinazione.</string>
@@ -4644,7 +4644,7 @@
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_trip_recording_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
-    <string name="radius_rules_widget_desc">Il righello radiale aiuta a determinare il raggio attorno al punto selezionato nella mappa attraverso dei cerchi di distanza sulla mappa.</string>
+    <string name="radius_rules_widget_desc">Il righello radiale mostra la distanza attorno al punto selezionato nella mappa attraverso dei cerchi di distanza sulla mappa.</string>
     <string name="no_altitude_data">Nessun dato di altitudine</string>
     <string name="shared_string_speed">Velocità</string>
     <string name="track_attach_to_the_roads_descr">La traccia sarà incollata alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
@@ -4754,7 +4754,7 @@
     <string name="av_notes_audio_widget_desc">Toccare il widget permette di registrare una nota audio.</string>
     <string name="goods_delivery_desc_3">Si applica solo ai veicoli di trasporto merci che pesano fino a 3.5 tonnellate.</string>
     <string name="goods_delivery_desc_2">Le strade chiuse per il trasporto di merci saranno evitate.</string>
-    <string name="goods_delivery_desc">I veicoli che trasportano merci possono avere l\'accesso limitato ad alcune strade.</string>
+    <string name="goods_delivery_desc">I veicoli di trasporto merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
     <string name="time_to_destination_widget_desc">Il widget mostra \"Orario di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso alla posizione attuale.</string>
     <string name="included_in_your_current_plan">Incluso nel tuo piano attuale \"%1$s\"</string>
@@ -4783,7 +4783,7 @@
     <string name="map_widget_camera_distance_desc">Mostra l\'elevazione della fotocamera dalla superficie.</string>
     <string name="map_widget_camera_tilt_desc">Mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
     <string name="map_widget_zoom_level_desc">Mostra il livello d\'ingrandimento attuale della mappa.</string>
-    <string name="map_widget_target_distance_desc">Il widget mostra la distanza tra la fotocamera e la posizione di destinazione.</string>
+    <string name="map_widget_target_distance_desc">Mostra la distanza tra la fotocamera e la destinazione.</string>
     <string name="map_widget_zoom_level">Livello d\'ingrandimento</string>
     <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
     <string name="developer_widgets">Widget per sviluppatori</string>
@@ -4820,7 +4820,7 @@
     <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato.
 \nDevi installare il servizio ANT+ oppure aggiornarlo.
 \nVuoi aprire il Play Store per farlo\?</string>
-    <string name="ant_heart_rate_write_gpx_desc">Scrivi battito cardiaco sulla traccia</string>
+    <string name="ant_heart_rate_write_gpx_desc">Includi il battito cardiaco nella traccia</string>
     <string name="ant_missing_dependency">Dipendenza mancante</string>
     <string name="ant_read_data">Leggi dati</string>
     <string name="map_widget_ant_bicycle_speed_desc">Mostra velocità di viaggio</string>
@@ -4840,7 +4840,7 @@
     <string name="shared_string_contours">Contorni</string>
     <string name="shared_string_layers">Strati</string>
     <string name="empty_screen_weather_pressure_layer">Accendi per visualizzare lo strato della pressione sulla mappa.</string>
-    <string name="empty_screen_weather_clouds_layer">Accendi per visualizzare lo strato della copertura delle nuvole sulla mappa.</string>
+    <string name="empty_screen_weather_clouds_layer">Abilita per visualizzare lo strato della copertura delle nuvole sulla mappa.</string>
     <string name="empty_screen_view_selected_weather_data">Accendi per visualizzare i dati meteo selezionati sulla mappa.</string>
     <string name="empty_screen_weather_temperature_layer">Accendi per visualizzare lo strato della temperatura sulla mappa.</string>
     <string name="weather_wind_mph">mph</string>
@@ -4878,7 +4878,7 @@
     <string name="measurement_units">Unità di misura</string>
     <string name="shared_string_weather">Meteo</string>
     <string name="explore_weather_forecast">Esplora le previsioni meteo.</string>
-    <string name="empty_screen_weather_wind_layer">Accendi per visualizzare lo strato della ventosità sulla mappa.</string>
+    <string name="empty_screen_weather_wind_layer">Abilita per visualizzare lo strato del vento sulla mappa.</string>
     <string name="empty_screen_weather_precipitation_layer">Accendi per visualizzare lo strato delle precipitazioni sulla mappa.</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pollici</string>
