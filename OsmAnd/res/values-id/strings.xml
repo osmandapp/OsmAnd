@@ -4074,7 +4074,7 @@
     <string name="trip_recording_duration_widget_desc">Menampilkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
     <string name="download_tiles">Unduh ubin</string>
     <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
-    <string name="attach_roads_descr">Perkirakan trek Anda dengan sebuah rute menggunakan peta luring. Ini akan menyediakan nilai ketinggian, detail jalan, dan arahan yang dibenarkan selama navigasi.</string>
+    <string name="attach_roads_descr">Perkirakan trek Anda ke jalan yang diperbolehkan untuk merute antara titik dan kaitkan instruksi belokan</string>
     <string name="auto_backup_title">Pencadangan otomatis</string>
     <string name="without_profiles_changing">Tanpa perubahan profil</string>
     <string name="shared_string_only_missing">Hanya hilang</string>
@@ -4354,7 +4354,7 @@
     <string name="ant_go_to_store">Pergi ke Toko</string>
     <string name="ant_heart_rate_write_gpx_desc">Termasuk detak jantung dalam trek</string>
     <string name="map_widget_ant_bicycle_power">Daya Sepeda</string>
-    <string name="purchases_feature_desc_cross_buy">Gunakan fitur langganan Anda di platform yang berbeda (Android/iOS/Web) tanpa biaya tambahan.</string>
+    <string name="purchases_feature_desc_cross_buy">Gunakan fitur langganan Anda di platform yang berbeda (Android/iOS/web) tanpa biaya tambahan.</string>
     <string name="shared_string_cross_buy">Pembelian silang</string>
     <string name="ant_write_to_gpx">Tulis data ke trek</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Menampilkan kecepatan pengguna dalam mengayuh</string>
@@ -4365,7 +4365,7 @@
     <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)\?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
-    <string name="map_widget_camera_distance_desc">Widget menampilkan ketinggian kamera di atas tingkat permukaan.</string>
+    <string name="map_widget_camera_distance_desc">Menampilkan ketinggian kamera di atas tingkat permukaan.</string>
     <string name="map_widget_zoom_level">Tingkat perbesaran</string>
     <string name="map_widget_camera_tilt">Kemiringan kamera</string>
     <string name="favorites_backup">Cadangan favorit</string>
@@ -4374,11 +4374,11 @@
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="ant_read_data">Baca data</string>
     <string name="map_widget_ant_heart_rate_desc">Menampilkan detak jantung pengguna selama beraktivitas dalam waktu nyata</string>
-    <string name="ant_missing_dependency_descr">Layanan \"%1$s\" yang dibutuhkan tidak ditemukan. 
-\nAnda harus menginstal layanan ANT+ Plugins atau Anda mungkin harus memperbarui jika Anda sudah memilikinya. 
-\nApakah Anda ingin pergi ke Play Store untuk mendapatkannya\?</string>
+    <string name="ant_missing_dependency_descr">Tidak dapat menemukan layanan \"%1$s\" yang dibutuhkan.
+\nAnda harus memasang atau memperbarui Layanan Plugin ANT+.
+\nApakah Anda ingin pergi ke Play Store untuk melakukannya\?</string>
     <string name="map_widget_ant_bicycle_cadence">Irama Sepeda</string>
-    <string name="map_widget_camera_tilt_desc">Widget menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
+    <string name="map_widget_camera_tilt_desc">Menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
     <string name="developer_widgets">Widget pengembang</string>
     <string name="rendering_value_highContrastRoads_name">Jalan kontras tinggi</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas jalan Amerika</string>
@@ -4397,7 +4397,7 @@
 \n
 \nTampilan ini dapat dikembalikan dengan menonaktifkannya lagi di sini, atau dengan mengubah \'Gaya peta\' di bawah \'Konfigurasi peta\' sesuai keinginan.</string>
     <string name="osmand_distance_planning_plugin_name">Alat kalkulator jarak dan perencanaan</string>
-    <string name="coordinates_widget_current_location_desc">Widget menampilkan koordinat geografis lokasi geografis saat ini</string>
+    <string name="coordinates_widget_current_location_desc">Menampilkan koordinat geografis lokasi geografis saat ini</string>
     <string name="coordinates_widget_map_center">Koordinat: tengah peta</string>
     <string name="coordinates_widget_current_location">Koordinat: lokasi saat ini</string>
     <string name="map_widget_ant_bicycle_speed_desc">Menampilkan kecepatan bepergian</string>
@@ -4464,15 +4464,15 @@
     <string name="index_name_tts_voice">Perintah suara (teks-ke-suara, disarankan)</string>
     <string name="poi_search_desc">Pencarian POI (Titik</string>
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
-    <string name="quick_action_map_center_widget_descr">Sebuah alihan untuk menampilkan atau menyembunyikan widget Tengah peta pada peta.</string>
-    <string name="quick_action_current_location_widget_descr">Sebuah alihan untuk menampilkan atau menyembunyikan widget Lokasi saat ini pada peta.</string>
+    <string name="quick_action_map_center_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget tengah peta di peta.</string>
+    <string name="quick_action_current_location_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget lokasi saat ini di peta.</string>
     <string name="rotate_map_none_rotated_opt">Fiks (diputar secara manual)</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
     <string name="routing_attr_avoid_sett_description">Menghindari batu bulat dan sett</string>
     <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
-    <string name="map_widget_target_distance_desc">Widget menampilkan jarak dari kamera ke lokasi sasaran.</string>
-    <string name="map_widget_zoom_level_desc">Widget menampilkan tingkat perbesaran peta saat ini.</string>
+    <string name="map_widget_target_distance_desc">Menampilkan jarak antara kamera dan lokasi sasaran.</string>
+    <string name="map_widget_zoom_level_desc">Menampilkan tingkat perbesaran peta saat ini.</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
     <string name="pref_vector_rendering">Opsi perenderan vektor spesifik</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpine dan turunan</string>
@@ -4493,7 +4493,7 @@
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
     <string name="external_sensors_plugin_name">Sensor Eksternal</string>
     <string name="send_uuid_preference_desc">Sebhah UUID acak digunakan untuk mengunduh peta luring dari server OsmAnd untuk memantau penggunaan sumber daya server yang adil, memprediksi pola lalu lintas, dan membuat laporan peta anonim sebulan.</string>
-    <string name="map_widget_altitude_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau untuk pusat peta saat ini</string>
+    <string name="map_widget_altitude_desc">Menampilkan ketinggian dari geolokasi saat ini atau untuk pusat peta saat ini</string>
     <string name="location_simulation_cutoff">Simulasi melewati meter pertama</string>
     <string name="map_center_widget">Koordinat: Tengah peta</string>
     <string name="location_simulation_speedup">Percepatan simulasi</string>
@@ -4504,7 +4504,7 @@
     <string name="shared_string_terms_of_use">Ketentuan Penggunaan</string>
     <string name="map_widget_rendering_fps">FPS perenderan peta</string>
     <string name="simulate_location_by_gpx">Simulasikan lokasi dengan GPX</string>
-    <string name="external_sensors_plugin_description">Pemantauan denyut jantung, kecepatan sepeda, daya sepeda, dan irama. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
+    <string name="external_sensors_plugin_description">Mengakses sensor eksternal untuk membaca mis. denyut jantung, kecepatan bersepeda, daya bersepeda, atau irama Anda. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
     <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang, dinyatakan dalam bingkai per detik (FPS).</string>
     <string name="shared_string_identifiers">Pengenal</string>
     <string name="send_uuid_preference">Kirim Pengenal Pengguna Unik (UUID)</string>
@@ -4847,7 +4847,7 @@
     <string name="play_commands_of_currently_selected_voice">Pilih suara dan uji dengan memutar pengumuman:</string>
     <string name="speak_gps_signal_status">Umumkan sinyal GPS hilang dan terpulih</string>
     <string name="speak_route_recalculation">Umumkan penghitungan ulang rute</string>
-    <string name="release_4_3">- Mesin render peta baru yang lebih cepat, dengan tampilan 2.5D
+    <string name="release_4_3">- Mesin render peta baru yang lebih cepat Versi 2 (OpenGL), dengan tampilan 2.5D
 \n
 \n - Animasi perubahan lokasi yang mulus saat bergerak
 \n
@@ -4938,4 +4938,30 @@
     <string name="switch_mode_by_tapping_on_widget">Ubah mode dengan mengetuk pada widget.</string>
     <string name="air_pressure_widget_desc">Menampilkan tekanan udara untuk tengah peta saat ini.</string>
     <string name="clouds_widget_desc">Menampilkan cakupan awan untuk tengah peta saat ini.</string>
+    <string name="weather_plugin_description">Menyediakan
+\n- prakiraan cuaca 24 jam dan 7 hari memberikan 5 lapisan
+\n- widget berbasis lokasi
+\n- garis isometrik suhu/tekanan
+\n
+\nData cuaca disediakan oleh Sistem Prakiraan Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="temperature_widget_desc">Menampilkan suhu untuk tengah peta saat ini.</string>
+    <string name="map_widget_sunset_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbenam.</string>
+    <string name="precipitation_widget_desc">Menampilkan curah hujan untuk tengah peta saat ini.</string>
+    <string name="map_rendering_engine_descr">Versi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D. Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.</string>
+    <string name="quick_action_wind_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan angin di peta.</string>
+    <string name="quick_action_cloud_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan awan di peta.</string>
+    <string name="quick_action_air_pressure_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan tekanan udara di peta.</string>
+    <string name="cloud_layer">Lapisan awan</string>
+    <string name="precipitation_layer">Lapisan curah hujan</string>
+    <string name="temperature_layer">Lapisan suhu</string>
+    <string name="rendering_engine_failed">Perenderan peta OsmAnd telah mogok.</string>
+    <string name="pressure_layer">Lapisan tekanan</string>
+    <string name="wind_layer">Lapisan angin</string>
+    <string name="storage_migration_fragment_close_descr">Menyalin selesai %1$s%%. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
+    <string name="quick_action_precipitation_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan curah hujan di peta.</string>
+    <string name="quick_action_temperature_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan suhu di peta.</string>
+    <string name="map_widget_sunrise_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbit.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd telah mengubah ke perenderan peta \'Versi 1\'. Anda dapat mengubah kembali ke mesin perenderan \'Versi 2 (OpenGL)\' baru dalam Pengaturan.
+\n
+\nSilakan mendukung peningkatan dengan menyediakan catatan kesalahan Anda.</string>
 </resources>
