@@ -113,7 +113,7 @@ public class ShareMenu extends BaseMenuController {
 		lon = lon.substring(0, lon.length() - 1);
 		int zoom = mapActivity.getMapView().getZoom();
 		String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-		String httpUrl = "https://osmand.net/go?lat=" + lat + "&lon=" + lon + "&z=" + zoom;
+		String httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
