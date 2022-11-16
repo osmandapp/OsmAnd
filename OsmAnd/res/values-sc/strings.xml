@@ -4604,7 +4604,7 @@
     <string name="first_marker_widget_desc">Podes cunfigurare su widget pro ammustrare sa distàntzia o s\'ora carculada de arrivu a su de unu marcadore de sa mapa.</string>
     <string name="time_to_destination_widget_desc">Su widget ammustrat \"Ora de arrivu\" o \"Tempus chi mancat\" finas a s\'ùrtimu puntu de destinatzione. Custas informatziones s\'agiornant totora durante sa navigatzione e sunt uguales a sa durada de s\'àndala dae sa positzione de cussu momentu.</string>
     <string name="time_to_intermediate_widget_desc">Su widget ammustrat \"Ora de arrivu\" o \"Tempus chi mancat\" finas a su primu puntu de coladòrgiu. Custas informatziones s\'agiornant totora durante sa navigatzione e, a pustis de àere coladu unu puntu de coladòrgiu, s\'ant a carculare pro su puntu de coladòrgiu imbeniente.</string>
-    <string name="attach_roads_descr">Apròssima sa rasta tua cun un\'àndala impreende sa mapa non in lìnia. Custu at a frunire valores de artària curretos, detàllios de sas àndalas e bortadas impreadas durante sa navigatzione.</string>
+    <string name="attach_roads_descr">Apròssima sa rasta tua a sos caminos permìtidos pro carculare s\'àndala intre puntos e assòtzia inditos de bortada pretzisos e propiedades de s\'àndala.</string>
     <string name="auto_25_chars_route_roundabout_kl">Piga sa %1$d essida e mantene·ti a manca</string>
     <string name="trip_recording_downhill_widget_desc">Ammustrat sa summa de totu sas achirradas de su biàgiu registradu atuale.</string>
     <string name="second_marker_widget_desc">Podes cunfigurare su widget pro ammustrare sa distàntzia o su tempus carculadu de arrivu a su de duos marcadore de sa mapa.</string>
@@ -4674,18 +4674,18 @@
     <string name="track_attach_to_the_roads_descr">Sa rasta s\'at a alligare a su caminu impreende mapas non in lìnia e sa geometria de sa rasta at a mudare.</string>
     <string name="calculate_altitude">Càrcula s\'artària</string>
     <string name="widget_secondary_desc_part_of">Parte de s\'estensione %1$s.</string>
-    <string name="elevation_profile_widget_desc">Su widget ammustrat su profilu de s\'artària e de sa pendèntzia de s\'àndala atuale.</string>
+    <string name="elevation_profile_widget_desc">Ammustrat su profilu de s\'artària e de sa pendèntzia de s\'àndala atuale.</string>
     <string name="lanes_widgets_desc">Su widget de sas corsias ammustrat sa dispositzione de sas corsias de su caminu atuale e evidèntziat sas corsias de impreare pro sa navigatzione ativa.</string>
     <string name="route_maneuvers_desc">Sos widgets de navigatzione sunt abilitados durante sa navigatzione pro ammustrare informatziones che a sa distàntzia, s\'ora de arrivu, su tempus chi mancat, sas bortadas imbenientes, su nùmene de sa carrera atuale, sas informatziones de sas corsias, sa lestresa màssima, sos avisos de cosas chi si sunt acurtziende, sos PDI e sos puntos de coladòrgiu.</string>
     <string name="bearing_desc">Su widget de s\'àngulu ammustrat sa diretzione assoluta o relativa cunfronta a un\'obietivu in unidades angulares (180 grados, 360 grados, millirradiantes).</string>
     <string name="app_mode_mountain_bicycle">Bitzicleta de monte</string>
     <string name="map_widget_true_bearing">Àngulu reale</string>
-    <string name="parking_widget_desc">Widget chi ammustrat sa distàntzia dae su tzentru de s\'ischermu tuo finas a su logu de parchègiu.</string>
+    <string name="parking_widget_desc">Ammustrat sa distàntzia dae su tzentru de s\'ischermu finas a su logu de parchègiu tuo.</string>
     <string name="map_widget_trip_recording_duration">Durada</string>
     <string name="map_widget_trip_recording_downhill">Achirrada</string>
     <string name="distance_circles">Chircos de distàntzia</string>
     <string name="circle_settings">Impostatziones de sos chircos</string>
-    <string name="mapillary_widget_desc">Widget chi frunit un\'atzessu lestru a s\'aplicatzione de Mapillary pro annànghere immàgines a livellu de su caminu.</string>
+    <string name="mapillary_widget_desc">Frunit un\'atzessu lestru a s\'aplicatzione de Mapillary pro annànghere immàgines a livellu de su caminu.</string>
     <string name="max_speed_widget_desc">Ammustrat su lìmite de lestresa pro su caminu impreadu atuale.</string>
     <string name="current_speed_widget_desc">Ammustrat sa lestresa atuale tua rilevada dae su sensore GPS.</string>
     <string name="magnetic_bearing_widget_desc">Àngulu intre su nord magnèticu e su puntu de destinatzione bidu dae sa positzione tua.</string>
@@ -4720,7 +4720,7 @@
     <string name="colour_of_circles">Colore de sos chircos</string>
     <string name="compass_on_circles">Bùssola in sos chircos</string>
     <string name="bearing_secondary_desc">Podes mudare su formadu de sos datos ammustrados in: %1$s – %2$s – %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Su formadu de sas coordinadas si podet mudare in %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Podes mudare su formadu de sas coordinadas in %1$s – %2$s – %3$s.</string>
     <string name="current_time_widget_desc">Ammustrat s\'ora atuale dae su dispositivu tuo.</string>
     <string name="calculating_altitude">Carculende s\'artària</string>
     <string name="get_altitude_data">Otene sos datos de s\'artària</string>
@@ -4775,32 +4775,32 @@
     <string name="display_position">Positzione in s\'ischermu</string>
     <string name="map_markers_desc">Su widget ammustrat sa distàntzia o s\'ora de arrivu carculada (ETA) pro sos primos duos marcadores in sa lista de marcadores de sa mapa.</string>
     <string name="quick_action_map_center_widget_descr">Unu butone pro ammustrare o cuare su widget de su tzentru de sa mapa in sa mapa.</string>
-    <string name="coordinates_widget_current_location_desc">Su widget ammustrat sas coordinadas geogràficas de sa positzione atuale</string>
+    <string name="coordinates_widget_current_location_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale</string>
     <string name="shared_string_switch_mode">Càmbia modalidade</string>
     <string name="click_on_widget">Incarca in su widget</string>
     <string name="rotate_map_none_rotated_opt">Fissu (rotatzione manuale)</string>
-    <string name="map_widget_camera_tilt_desc">Su widget ammustrat s\'àngulu de inclinatzione de sa fotocàmera in sa modalidade de prospetiva. Su predefinidu est de 90° (peruna inclinatzione).</string>
+    <string name="map_widget_camera_tilt_desc">Ammustrat s\'àngulu de inclinatzione de sa fotocàmera in sa modalidade de prospetiva. Su predefinidu est de 90° (peruna inclinatzione).</string>
     <string name="map_widget_zoom_level">Livellu de ismanniamentu</string>
     <string name="map_widget_camera_distance">Artària de sa fotocàmera</string>
     <string name="map_widget_camera_tilt">Inclinatzione de sa fotocàmera</string>
     <string name="developer_widgets">Widgets pro sos isvilupadores</string>
     <string name="quick_action_current_location_widget_descr">Unu butone pro ammustrare o cuare su widget de sa positzione atuale in sa mapa.</string>
-    <string name="coordinates_widget_map_center_desc">Su widget ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
+    <string name="coordinates_widget_map_center_desc">Ammustrat sas coordinadas geogràficas de su tzentru de sa mapa atuale</string>
     <string name="map_marker_interval_dialog_desc">Ispetzìfica s\'intervallu de tempus pro su càrculu de sa lestresa mèdia pro carculare s\'ora de arrivu.</string>
     <string name="go_to_marker_location">Bae a sa positzione de su marcadore</string>
-    <string name="map_widget_zoom_level_desc">Su widget ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
-    <string name="map_widget_camera_distance_desc">Su widget ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
-    <string name="map_widget_target_distance_desc">Su widget ammustrat sa distàntzia intre sa fotocàmera e sa destinatzione.</string>
+    <string name="map_widget_zoom_level_desc">Ammustrat su livellu de ismanniamentu atuale de sa mapa.</string>
+    <string name="map_widget_camera_distance_desc">Ammustrat s\'artària de sa fotocàmera subra de su livellu de sa superfìtzie.</string>
+    <string name="map_widget_target_distance_desc">Ammustrat sa distàntzia intre sa fotocàmera e sa destinatzione.</string>
     <string name="coordinates_widget_current_location">Coordinadas: positzione atuale</string>
     <string name="coordinates_widget_map_center">Coordinadas: tzentru de sa mapa</string>
-    <string name="ant_missing_dependency_descr">Su servìtziu netzessàriu \"%1$s\" no est istadu agatadu.
-\nDepes installare su servìtziu de estensiones ANT+ o dias pòdere dèpere agiornare sa versione atuale tua si giai la tenes.
-\nBoles abèrrere su Play Store pro l\'otènnere\?</string>
+    <string name="ant_missing_dependency_descr">No est istadu possìbile agatare su servìtziu netzessàriu \"%1$s\".
+\nDepes installare o agiornare su servìtziu de estensiones ANT+.
+\nBoles abèrrere su Play Store pro lu fàghere\?</string>
     <string name="ant_missing_dependency">Dipendèntzia chi mancat</string>
     <string name="ant_go_to_store">Bae a sa butega</string>
     <string name="ant_read_data">Leghe sos datos</string>
     <string name="ant_write_to_gpx">Iscrie datos in sa rasta</string>
-    <string name="ant_heart_rate_write_gpx_desc">Annanghe sa frecuèntzia cardìaca a sa rasta</string>
+    <string name="ant_heart_rate_write_gpx_desc">Include sa frecuèntzia cardìaca in sa rasta</string>
     <string name="map_widget_ant_heart_rate">Frecuèntzia cardìaca</string>
     <string name="map_widget_ant_bicycle_power">Potèntzia de su tziclista</string>
     <string name="map_widget_ant_bicycle_cadence">Cadèntzia de pedalada</string>
@@ -4815,7 +4815,7 @@
     <string name="map_widget_ant_bicycle_power_desc">Ammustrat sa potèntzia de su tziclista, impreada pro mòvere sa bitzicleta cara a in antis</string>
     <string name="map_widget_ant_bicycle_dist">Distàntzia in bitzicleta</string>
     <string name="depth_contours">Lìnias nàuticas de profundidade</string>
-    <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/Web) chene costos additzionales.</string>
+    <string name="purchases_feature_desc_cross_buy">Imprea sas funtzionalidades de s\'abbonamentu tuo in prataformas diferentes (Android/iOS/web) chene costos additzionales.</string>
     <string name="shared_string_cross_buy">Còmpora multi-prataforma</string>
     <string name="map_widget_target_distance">Distàntzia intre sa fotocàmera e s\'obietivu</string>
     <string name="favorites_backup">Còpia de seguresa de sos preferidos</string>
@@ -4823,11 +4823,11 @@
     <string name="map_center_widget">Coordinadas: tzentru de sa mapa</string>
     <string name="external_sensors_plugin_name">Sensores esternos</string>
     <string name="map_widget_altitude_map_center">Artària: tzentru de sa mapa</string>
-    <string name="external_sensors_plugin_description">Monitoràgiu de su ritmu cardìacu, de sa velotzidade, de sa potèntzia e de sa cadèntzia de sa bitzicleta. Tenet bisòngiu de una connessione a unu dispositivu chi suportet a su ANT+ (protocollu de retza personale chene filos).</string>
+    <string name="external_sensors_plugin_description">Atzedet a sos sensores esternos pro lèghere a es. su ritmu cardìacu e sa velotzidade, sa potèntzia e sa cadèntzia de sa bitzicleta. Tenet bisòngiu de una connessione a unu dispositivu chi suportet a su ANT+ (protocollu de retza personale chene filos).</string>
     <string name="current_location_widget">Coordinadas: positzione atuale</string>
     <string name="map_widget_altitude_current_location">Artària: positzione atuale</string>
     <string name="map_widget_altitude_current_location_desc">Ammustrat s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale.</string>
-    <string name="map_widget_altitude_desc">Ammustra s\'artària subra de su livellu de su mare de sa positzione geogràfica atuale o de su tzentru atuale de sa mapa</string>
+    <string name="map_widget_altitude_desc">Ammustra s\'artària de sa positzione geogràfica atuale o de su tzentru atuale de sa mapa</string>
     <string name="map_widget_rendering_fps">FPS de sa renderizatzione de sa mapa</string>
     <string name="map_widget_rendering_fps_desc">Ammustrat cantu a lestru sa mapa e sos elementos suos benint ammustrados e annoados, esprìmidu in fotogrammas pro su segundu (FPS).</string>
     <string name="simulate_location_by_gpx">Sìmula sa positzione cun su GPX</string>
@@ -4842,7 +4842,7 @@
     <string name="external_sensors_support">Suportu pro sos sensores esternos</string>
     <string name="purchases_feature_desc_external_sensors">Ammustra e registra datos dae sos sensores esternos: lestresa de sa bitzicleta, potèntzia e cadèntzia suas e sa frecuèntzia cardìaca.</string>
     <string name="speak_gps_signal_status">Annùntzia sa pèrdida o su recùperu de su sinnale GPS</string>
-    <string name="release_4_3">• Motore de renderizatzione nou de sas mapas prus lestru, cun vista 2.5D
+    <string name="release_4_3">• Motore de renderizatzione nou de sas mapas versione 2 (OpenGL) prus lestru, cun vista 2.5D
 \n
 \n • Animatzione flùida pro sos càmbios de positzione durante su movimentu
 \n
@@ -4863,4 +4863,98 @@
 \n • Annanta optzione pro disabilitare s\'UUID
 \n
 \n</string>
+    <string name="rendering_engine_failed_descr">OsmAnd est torradu a sa renderizatzione de sa mapa \'Versione 1\'. Podes proare a torrare a su motore de renderizatzione nou \'Versione 2 (OpenGL)\' in sas Impostatziones.
+\n
+\nPro praghere agiuda cun sos megioros frunende su registru de errores tuo.</string>
+    <string name="rendering_engine_failed">Sa renderizatzione de sa mapa de OsmAnd s\'est serrada a sa sola dae pagora.</string>
+    <string name="share_crash_log">Cumpartzi su registru de sas serraduras improvisas</string>
+    <string name="dismiss_changes_descr">Totu sas modìficas s\'ant a iscartare.</string>
+    <string name="dismiss_changes">Iscartare sas modìficas\?</string>
+    <string name="map_rendering_engine_v1">Versione 1</string>
+    <string name="map_rendering_engine_v2">Versione 2 (OpenGL)</string>
+    <string name="map_rendering_engine">Motore de renderizatzione de sa mapa</string>
+    <string name="restart_now">Torra a allùghere como</string>
+    <string name="show_borders_of_downloaded_maps">Ammustra sos oros de sas mapas iscarrigadas</string>
+    <string name="show_map_symbols">Ammustra sos sìmbulos de sa mapa</string>
+    <string name="show_map_symbols_desc">Testu, sinnales de su caminu e àteros.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Ischema de colore de sas lìnias</string>
+    <string name="switch_mode_by_tapping_on_widget">Càmbia sa modalidade tochende su widget.</string>
+    <string name="map_widget_sunrise_desc">Ammustrat s\'ora de s\'arbèschida imbeniente o su tempus chi mancat a s\'arbèschida.</string>
+    <string name="map_widget_sunset_desc">Ammustrat s\'ora de s\'intrinada imbeniente o su tempus chi mancat a s\'intrinada.</string>
+    <string name="shared_string_sunrise">Arbèschida</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Custos widgets ammustrant informatziones subra de s\'intrinada e de s\'arbèschida imbenientes.</string>
+    <string name="map_widget_group_sunrise_sunset">Arbèschida, intrinada</string>
+    <string name="turn_on_nautical_depth_description">Allughe·lu pro bìdere sos datos de livellu de profundidade nàutica in sa mapa.</string>
+    <string name="weather_offline_forecast">Previsiones non in lìnia</string>
+    <string name="map_settings_weather_air_pressure">Pressione atmosfèrica</string>
+    <string name="map_settings_weather_cloud">Nues</string>
+    <string name="map_settings_weather_temp">Temperadura</string>
+    <string name="map_settings_weather_wind">Bentu</string>
+    <string name="map_settings_weather_precip">Pretzipitatziones</string>
+    <string name="measurement_units">Unidades de medida</string>
+    <string name="shared_string_contours">Curvas de livellu</string>
+    <string name="shared_string_weather">Mèteu</string>
+    <string name="explore_weather_forecast">Esplora sas previsiones meteorològicas.</string>
+    <string name="shared_string_layers">Istratos</string>
+    <string name="empty_screen_weather_contours">Allughe·lu pro bìdere sas curvas de livellu meteorològicas in sa mapa.</string>
+    <string name="empty_screen_weather_pressure_layer">Allughe·lu pro bìdere s\'istratu de sa pressione in sa mapa.</string>
+    <string name="empty_screen_weather_clouds_layer">Allughe·lu pro bìdere s\'istratu de cobertura de sas nues in sa mapa.</string>
+    <string name="empty_screen_weather_wind_layer">Allughe·lu pro bìdere s\'istratu de su bentu in sa mapa.</string>
+    <string name="empty_screen_view_selected_weather_data">Allughe·lu pro bìdere sos datos meteorològicos seletzionados in sa mapa.</string>
+    <string name="weather_precip_inches">Pòddighes</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="air_pressure_widget_desc">Ammustrat sa pressione atmosfèrica pro su tzentru atuale de sa mapa.</string>
+    <string name="weather_widget_group_desc">Un\'annantu de widgets chi ammustrant informatziones meteorològicas diferentes.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_inches_of_mercury">Pòddighes de mercùriu</string>
+    <string name="weather_pressure_millimeters_of_mercury">Millìmetros de mercùriu</string>
+    <string name="weather_prefs_descr">Previsiones meteorològicas pro 24 oras e 7 dies, agiornadas cada 3 oras</string>
+    <string name="action_not_supported_with_map_style">Custa atzione no est suportada dae s\'istile de mapa seletzionadu.</string>
+    <string name="storage_migration_fragment_close_descr">Sa còpia pro %1$s%% est fata. Si agabbas como s\'aplicatzione diat pòdere non funtzionare comente si tocat.</string>
+    <string name="shared_string_next_sunset">Intrinada imbeniente</string>
+    <string name="shared_string_next_sunrise">Arbèschida imbeniente</string>
+    <string name="shared_string_time_left">Tempus chi mancat</string>
+    <string name="shared_string_sunset">Intrinada</string>
+    <string name="rendering_attr_depthContourWidth_name">Grussesa de sas lìnias</string>
+    <string name="depth_contour_lines">Curvas de livellu de sa profundidade</string>
+    <string name="weather_plugin_description">Frunit
+\n- sas previsiones meteorològicas pro 24 oras e 7 dies cun 5 istratos
+\n- basados subra de sa posidura
+\n- sas isolìnias de temperadura / pressione
+\n
+\nSos datos meteorològicos los frunit su Sistema de Previsiones Globale (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_wind_meters_per_second">Metros/segundu</string>
+    <string name="weather_widgets_secondary_desc">Sas unidades de medida si podent cambiare in sas impostatziones de s\'estensione de su Mèteu.</string>
+    <string name="clouds_widget_desc">Ammustrat sa cobertura de sas nues pro su tzentru atuale de sa mapa.</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_mph">mi/h</string>
+    <string name="weather_wind_knots">Nodos</string>
+    <string name="weather_wind_miles_per_hour">Mìllias a s\'ora</string>
+    <string name="weather_wind_kilimeters_per_hour">Chilòmetros a s’ora</string>
+    <string name="temperature_widget_desc">Ammustrat sa temperadura pro su tzentru atuale de sa mapa.</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Etopascàls</string>
+    <string name="precipitation_widget_desc">Ammustrat sas pretzipitatziones pro su tzentru atuale de sa mapa.</string>
+    <string name="map_rendering_engine_descr">Sa versione 2 (OpenGL) est unu motore de renderizatzione de sa mapa prus lestru, chi tenet fintzas sa vista 2.5D. Sa versione 1 fiat sa predefinida finas a OsmAnd 4.3, e est galu sa cussigiada pro dispositivos prus betzos.</string>
+    <string name="quick_action_precipitation_layer">Unu butone pro ammustrare o cuare s\'istratu de sas pretzipitatziones in sa mapa.</string>
+    <string name="quick_action_wind_layer">Unu butone pro ammustrare o cuare s\'istratu de su bentu in sa mapa.</string>
+    <string name="quick_action_cloud_layer">Unu butone pro ammustrare o cuare s\'istratu de sas nues in sa mapa.</string>
+    <string name="quick_action_air_pressure_layer">Unu butone pro ammustrare o cuare s\'istratu de sa pressione de s\'àera in sa mapa.</string>
+    <string name="temperature_layer">Istratu de sa temperadura</string>
+    <string name="pressure_layer">Istratu de sa pressione atmosfèrica</string>
+    <string name="wind_layer">Istratu de su bentu</string>
+    <string name="cloud_layer">Istratu de sas nues</string>
+    <string name="precipitation_layer">Istratu de sas pretzipitatziones</string>
+    <string name="weather_online_cache">Memòria temporànea in lìnia</string>
+    <string name="empty_screen_weather_precipitation_layer">Allughe·lu pro bìdere s\'istratu de sas pretzipitatziones in sa mapa.</string>
+    <string name="empty_screen_weather_temperature_layer">Allughe·lu pro bìdere s\'istratu de sa temperadura in sa mapa.</string>
+    <string name="weather_precip_milimeters">Millìmetros</string>
+    <string name="wind_widget_desc">Ammustrat sa lestresa de su bentu pro su tzentru atuale de sa mapa.</string>
+    <string name="weather_temperature_celsius">Cèlsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="quick_action_temperature_layer">Unu butone pro ammustrare o cuare s\'istratu de sa temperadura in sa mapa.</string>
 </resources>
