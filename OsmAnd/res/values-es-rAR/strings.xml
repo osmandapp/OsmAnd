@@ -2074,7 +2074,7 @@
     <string name="quick_action_item_screen">Pantalla %d</string>
     <string name="quick_action_add_marker">Añadir marcador de mapa</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
-    <string name="quick_action_map_style">Cambiar estilo del mapa</string>
+    <string name="quick_action_map_style">Alternar estilo del mapa</string>
     <string name="quick_action_map_style_switch">Estilo del mapa cambiado para «%s».</string>
     <string name="quick_action_take_audio_note">Nueva nota de audio</string>
     <string name="quick_action_take_video_note">Nueva nota de video</string>
@@ -2123,13 +2123,13 @@
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Rellenar todos los parámetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Cambiar mapa superpuesto</string>
+    <string name="quick_action_map_overlay">Alternar mapa superpuesto</string>
     <string name="quick_action_map_overlay_title">Mapas superpuestos</string>
     <string name="quick_action_map_overlay_action">Añadir superposición</string>
-    <string name="quick_action_map_underlay">Cambiar mapa subyacente</string>
+    <string name="quick_action_map_underlay">Alternar mapa subyacente</string>
     <string name="quick_action_map_underlay_title">Mapas subyacentes</string>
     <string name="quick_action_map_underlay_action">Añadir subyacencia</string>
-    <string name="quick_action_map_source">Cambiar repositorio del mapa</string>
+    <string name="quick_action_map_source">Alternar repositorio del mapa</string>
     <string name="quick_action_map_source_title">Repositorio de mapas</string>
     <string name="quick_action_map_source_action">Añadir repositorio del mapa</string>
     <string name="quick_action_map_source_switch">Repositorio del mapa cambiada a «%s».</string>
