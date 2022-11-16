@@ -4593,7 +4593,7 @@
 \n
 \n</string>
     <string name="turn_on_public_transport_description">Attiva per vedere i percorsi del trasporto pubblico sulla mappa.</string>
-    <string name="current_time_widget_desc">Mostra l\'orario del tuo dispositivo.</string>
+    <string name="current_time_widget_desc">Mostra l\'orario attuale fornito dal tuo dispositivo.</string>
     <string name="av_def_action_choose">Su richiesta</string>
     <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
     <string name="shared_string_widget">Widget</string>
@@ -4611,7 +4611,7 @@
     <string name="gps_info_widget_desc">Mostra il numero di satelliti attualmente visibili e utilizzati.</string>
     <string name="max_speed_widget_desc">Mostra il limite di velocità della strada che si sta percorrendo.</string>
     <string name="current_speed_widget_desc">Mostra la velocità come indicata dal GPS.</string>
-    <string name="mapillary_widget_desc">Widget che fornisce un accesso veloce all\'app Mapillary per aggiungere Immagini-Stradali.</string>
+    <string name="mapillary_widget_desc">Fornisce un accesso veloce all\'app Mapillary per aggiungere immagini-stradali.</string>
     <string name="time_to_go_desc">Tempo necessario per raggiungere la tua destinazione in ore e minuti.</string>
     <string name="arrival_time_widget_desc">Orario di arrivo alla destinazione.</string>
     <string name="navigation_points">Punti di navigazione</string>
@@ -4729,7 +4729,7 @@
     <string name="auto_25_chars_route_roundabout_kl">Prendi la %1$d uscita e tieni la sinistra</string>
     <string name="auto_25_chars_route_roundabout_kr">Prendi la %1$d uscita e tieni la destra</string>
     <string name="trip_recording_duration_widget_desc">Mostra la durata della traccia in corso di registrazione.</string>
-    <string name="no_altitude_data_desc">Puoi ancorare la tua traccia alle strade per ottenere il dato %1$s o calcolarlo online.</string>
+    <string name="no_altitude_data_desc">Per ottenere i dati %1$s, collega la traccia alle strade o calcolali online.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostra percorsi MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra percorsi dedicati al mountainbiking.</string>
     <string name="routing_attr_goods_restrictions_name">Trasporto merci</string>
@@ -4777,7 +4777,7 @@
     <string name="map_markers_desc">Il widget mostra la distanza o l\'orario di arrivo stimato per i primi due marcatori nella lista dei marcatori della mappa.</string>
     <string name="map_marker_interval_dialog_desc">Specifica l\'intervallo di tempo per cui verrà misurata la velocità media per calcolare la stima dell\'orario d\'arrivo.</string>
     <string name="coordinates_widget_map_center_desc">Mostra le coordinate geografiche del centro attuale della mappa</string>
-    <string name="quick_action_current_location_widget_descr">Un interruttore per mostrare o nascondere il widget «Posizione attuale» sulla mappa.</string>
+    <string name="quick_action_current_location_widget_descr">Un interruttore per mostrare o nascondere il widget della posizione attuale sulla mappa.</string>
     <string name="coordinates_widget_map_center">Coordinate: centro della mappa</string>
     <string name="quick_action_map_center_widget_descr">Un interruttore per mostrare o nascondere il widget «Centro della mappa» sulla mappa.</string>
     <string name="map_widget_camera_distance_desc">Mostra l\'elevazione della fotocamera dalla superficie.</string>
@@ -4857,7 +4857,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di disegno della mappa</string>
-    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore più veloce di disegno della mappa, fornisce anche la vista 2.5D. Il disegno Versione 1 era il predefinito prima di OsmAnd 4.3, e ancora preferibile per i dispositivi più datati.</string>
+    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il disegno Versione 1 era il predefinito prima di OsmAnd 4.3, e ancora preferibile per i dispositivi più datati.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isabate</string>
@@ -4927,7 +4927,7 @@
     <string name="map_widget_ant_bicycle_power_desc">Mostra la potenza espressa dal ciclista per fare avanzare la bici</string>
     <string name="speak_gps_signal_status">Annuncia la perdita e il riaggancio del segnale GPS</string>
     <string name="external_sensors_plugin_description">Accede ai sensori esterni per rilevare es. la tua frequenza cardiaca, velocità della bicicletta, potenza della pedalata o cadenza. Richiede che il tuo dispositivo sia connesso ai rispettivi sensori tramite il protocollo di rete wireless ANT+.</string>
-    <string name="map_widget_altitude_current_location_desc">Mostra l\'altitudine sopra al livello del mare dell\'attuale geolocalizzazione.</string>
+    <string name="map_widget_altitude_current_location_desc">Mostra l\'altitudine sopra il livello del mare dell\'attuale geolocalizzazione.</string>
     <string name="map_widget_altitude_desc">Mostra l\'altitudine dell\'attuale geolocalizzazione o la quota dell\'attuale centro della mappa</string>
     <string name="send_uuid_preference_desc">Per controllare il corretto utilizzo delle risorse dei nostri server, prevedere dei modelli di traffico e generare dei rapporti mensili anonimi delle mappe, un UUID casuale viene utilizzato per scaricare le mappe offline dai server OsmAnd.</string>
     <string name="nautical_depth_points">Punti di profondità nautici</string>
@@ -4943,4 +4943,15 @@
     <string name="rendering_engine_failed">Il disegno della mappa di OsmAnd recentemente è andato in errore.</string>
     <string name="dismiss_changes_descr">Tutti i cambiamenti saranno persi.</string>
     <string name="rendering_attr_depthContourWidth_name">Spessore linea</string>
+    <string name="quick_action_wind_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato dei venti.</string>
+    <string name="quick_action_air_pressure_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della pressione.</string>
+    <string name="temperature_layer">Strato temperature</string>
+    <string name="pressure_layer">Strato pressione</string>
+    <string name="wind_layer">Strato vento</string>
+    <string name="cloud_layer">Strato nuvolosità</string>
+    <string name="precipitation_layer">Strato precipitazioni</string>
+    <string name="storage_migration_fragment_close_descr">Copia completata per il %1$s%%. Se la fermi adesso, potrebbe non funzionare correttamente.</string>
+    <string name="quick_action_temperature_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della temperatura.</string>
+    <string name="quick_action_precipitation_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato delle precipitazioni.</string>
+    <string name="quick_action_cloud_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della nuvolosità.</string>
 </resources>
