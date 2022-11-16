@@ -309,7 +309,6 @@ public class RouteResultPreparation {
 			double distance = 0;
 
 			//for Naismith/Scarf
-			float prevHeight = 99999.0f;
 			float[] heightDistanceArray = null;
 			if (usePedestrianHeight) {
 				road.calculateHeightArray();
@@ -330,17 +329,16 @@ public class RouteResultPreparation {
 				//for Naismith/Scarf
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
-					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
-						float height = heightDistanceArray[heightIndex];
-						float heightDiff = height - prevHeight;
+					int nextHeightIndex = 2 * next + 1;
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length)
+							&& nextHeightIndex < heightDistanceArray.length && nextHeightIndex > 0) {
+						float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
 						if (heightDiff > 0) { // ascent only
 							// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
-							// - Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph
-							// - Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h
-							//distOnRoadToPass += heightDiff * 6.0f;
+							//   (- Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph)
+							//   (- Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h)
 							distOnRoadToPass += heightDiff * scarfSeconds;
 						}
-						prevHeight = height;
 					}
 				}
 			}

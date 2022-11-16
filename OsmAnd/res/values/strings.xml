@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="rendering_attr_showMtbScale_name">Show MTB scale</string>
+    <string name="rendering_attr_showMtbScale_description">Show trails according to MTB scale.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Show MTB scale uphill</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Show trails according to MTB uphill scale.</string>
+
     <string name="quick_action_temperature_layer">A toggle to show or hide the temperature layer on the map.</string>
     <string name="quick_action_precipitation_layer">A toggle to show or hide the precipitation layer on the map.</string>
     <string name="quick_action_wind_layer">A toggle to show or hide the wind layer on the map.</string>
