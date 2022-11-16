@@ -330,7 +330,7 @@ public class RouteResultPreparation {
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
 					int nextHeightIndex = 2 * next + 1;
-					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length)
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length
 							&& nextHeightIndex < heightDistanceArray.length && nextHeightIndex > 0) {
 						float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
 						if (heightDiff > 0) { // ascent only
