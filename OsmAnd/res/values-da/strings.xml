@@ -4969,4 +4969,8 @@
     <string name="quick_action_temperature_layer">En omskifter til at vise eller skjule temperaturlaget på kortet.</string>
     <string name="quick_action_air_pressure_layer">En omskifter til at vise eller skjule lufttrykslaget på kortet.</string>
     <string name="cloud_layer">Skylag</string>
+    <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
+    <string name="rendering_attr_showMtbScale_description">Vis spor efter MTB-skala.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
 </resources>
