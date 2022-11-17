@@ -149,6 +149,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints), createGradientStyles(colorizationPoints), tb);
 	}
 
+	@Override
+	protected GeometryWayStyle<?> getStyle(int index, GeometryWayStyle<?> defaultWayStyle) {
+		return coloringType.isGradient() && styleMap.containsKey(index)
+				? styleMap.get(index)
+				: super.getStyle(index, defaultWayStyle);
+	}
+
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
