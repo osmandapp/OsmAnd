@@ -121,7 +121,10 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		AndroidUiHelper.updateVisibility(divider, hasDivider);
 
 		View button = view.findViewById(R.id.button);
-		button.setOnClickListener(v -> updateClassificationPreferences(classification));
+		button.setOnClickListener(v -> {
+			updateClassificationPreferences(classification);
+			refreshMap();
+		});
 
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, settings.getApplicationMode().getProfileColor(nightMode), 0.3f);
 		AndroidUtils.setBackground(button, background);
