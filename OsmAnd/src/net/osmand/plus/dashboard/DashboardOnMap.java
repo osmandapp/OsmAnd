@@ -19,6 +19,7 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER_LAYER;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -74,6 +75,7 @@ import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.CycleRoutesFragment;
 import net.osmand.plus.dialogs.HikingRoutesFragment;
+import net.osmand.plus.dialogs.MtbRoutesFragment;
 import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.dialogs.TravelRoutesFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -207,7 +209,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		WEAHTER,
 		WEAHTER_LAYER,
 		WEATHER_CONTOURS,
-		NAUTICAL_DEPTH
+		NAUTICAL_DEPTH,
+		MTB_ROUTES
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -367,6 +370,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.shared_string_contours);
 		} else if (isCurrentType(NAUTICAL_DEPTH)) {
 			tv.setText(R.string.nautical_depth);
+		} else if (isCurrentType(MTB_ROUTES)) {
+			tv.setText(R.string.app_mode_mountain_bicycle);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -579,7 +584,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
+					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -605,6 +610,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					WeatherLayerFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER_CONTOURS)) {
 					WeatherContoursFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(MTB_ROUTES)){
+					MtbRoutesFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
@@ -678,7 +685,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
 				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -811,6 +818,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(WeatherContoursFragment.TAG);
 		} else if (isCurrentType(NAUTICAL_DEPTH)) {
 			refreshFragment(NauticalDepthContourFragment.TAG);
+		} else if (isCurrentType(MTB_ROUTES)) {
+			refreshFragment(MtbRoutesFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}

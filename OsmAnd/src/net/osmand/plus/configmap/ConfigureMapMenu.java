@@ -57,6 +57,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.MtbRoutesFragment;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -107,6 +108,7 @@ public class ConfigureMapMenu {
 	public static final String CYCLE_NODE_NETWORK_ROUTES_ATTR = "showCycleNodeNetworkRoutes";
 	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
 	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
+	public static final String SHOW_MTB_ROUTES = "showMtbRoutes";
 
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -259,6 +261,8 @@ public class ConfigureMapMenu {
 				adapter.addItem(createCycleRoutesItem(activity, attrName, property, nightMode));
 			} else if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
 				adapter.addItem(createHikingRoutesItem(activity, attrName, property, nightMode));
+			} else if(SHOW_MTB_ROUTES.equals(attrName)){
+				adapter.addItem(createMtbRoutesItem(activity, attrName, property, nightMode));
 			} else {
 				String id = ROUTES_ID + attrName;
 				int drawableId = getIconIdForAttr(attrName);
@@ -281,6 +285,27 @@ public class ConfigureMapMenu {
 				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
+	}
+
+	private ContextMenuItem createMtbRoutesItem(@NonNull MapActivity activity, @NonNull String attrName,
+	                                            @Nullable RenderingRuleProperty property, boolean nightMode) {
+
+		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
+
+		return new ContextMenuItem(ROUTES_ID + attrName)
+				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, property != null ? property.getName() : attrName))
+				.setIcon(getIconIdForAttr(attrName))
+				.setSelected(pref.get())
+				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setLayout(R.layout.configure_map_item_with_additional_right_desc)
+				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : null)
+				.setSecondaryDescription(pref.get() ? null : app.getString(R.string.shared_string_off))
+				.setListener((uiAdapter, view, item, isChecked) -> {
+					activity.getDashboard().setDashboardVisibility(true, DashboardType.MTB_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
+					return false;
+				});
 	}
 
 	private ContextMenuItem createCycleRoutesItem(@NonNull MapActivity activity, @NonNull String attrName,
