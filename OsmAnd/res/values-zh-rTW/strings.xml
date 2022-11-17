@@ -3579,7 +3579,9 @@
     <string name="profiles_for_action_not_found">找不到任何這類的設定檔。</string>
     <string name="index_item_world_basemap_detailed">全球地圖總覽（詳細）</string>
     <string name="unsupported_type_error">不支援的類型</string>
-    <string name="gpx_parse_error">OsmAnd GPX 格式不正確，請聯絡支援團隊以進一步調查。</string>
+    <string name="gpx_parse_error">GPX 檔案有問題。
+\n
+\n您可能要聯絡 OsmAnd 支援團隊以進一步調查。</string>
     <string name="shared_string_always">總是</string>
     <string name="screen_control">螢幕控制</string>
     <string name="system_screen_timeout_descr">根據系統的螢幕逾時關閉螢幕。</string>
@@ -3991,7 +3993,7 @@
 \n所有未儲存的資料都將會遺失。</string>
     <string name="on_pause">暫停</string>
     <string name="app_restart_required">需要重新啟動應用程式才能套用某些設定。</string>
-    <string name="routing_attr_height_obstacles_description">路線安排可以避免上坡。</string>
+    <string name="routing_attr_height_obstacles_description">預計行程時間將反映海拔影響。路線偏好可以協助避免陡峭的上坡：</string>
     <string name="quick_action_coordinates_widget_descr">在地圖上顯示或隱藏「座標」小工具的開關。</string>
     <string name="map_widget_distance_by_tap">點擊距離</string>
     <string name="latest_openstreetmap_update">可用的最新 OpenStreetMap 更新：</string>
@@ -4752,7 +4754,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地腳踏車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
     <string name="connect_with_straight_line">以直線連結</string>
-    <string name="attach_roads_descr">使用離線地圖將您的軌跡與路線進行校正。這將提供在導航期間使用的校正高程值、道路詳細資訊與轉彎。</string>
+    <string name="attach_roads_descr">將您的軌跡趨近為允許在點之間路線規劃的道路，並與精確的轉彎指令與路線屬性相關聯。</string>
     <string name="attach_roads_warning">僅紀錄的軌跡可以附加至道路上。</string>
     <string name="without_profiles_changing">不需變更設定檔</string>
     <string name="shared_string_only_missing">僅遺失</string>
@@ -4944,4 +4946,15 @@
     <string name="shared_string_sunset">日落</string>
     <string name="map_widget_group_sunrise_sunset_desc">這些小工具會顯示關於下次日出與日落的資訊。</string>
     <string name="rendering_attr_depthContourWidth_name">線條寬度</string>
+    <string name="storage_migration_fragment_close_descr">複製已完成 %1$s%%。若您立刻停止，應用程式可能會無法正常運作。</string>
+    <string name="quick_action_precipitation_layer">用來在地圖上切換顯示或隱藏降水圖層。</string>
+    <string name="quick_action_wind_layer">用來在地圖上切換顯示或隱藏風力圖層。</string>
+    <string name="quick_action_cloud_layer">用來在地圖上切換顯示或隱藏雲層圖層。</string>
+    <string name="quick_action_air_pressure_layer">用來在地圖上切換顯示或隱藏氣壓圖層。</string>
+    <string name="temperature_layer">溫度圖層</string>
+    <string name="pressure_layer">壓力圖層</string>
+    <string name="wind_layer">風力圖層</string>
+    <string name="precipitation_layer">降水圖層</string>
+    <string name="quick_action_temperature_layer">用來在地圖上切換顯示或隱藏溫度圖層。</string>
+    <string name="cloud_layer">雲層圖層</string>
 </resources>
