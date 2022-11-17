@@ -330,8 +330,7 @@ public class RouteResultPreparation {
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
 					int nextHeightIndex = 2 * next + 1;
-					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length
-							&& nextHeightIndex < heightDistanceArray.length && nextHeightIndex > 0) {
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length && nextHeightIndex < heightDistanceArray.length) {
 						float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
 						if (heightDiff > 0) { // ascent only
 							// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
