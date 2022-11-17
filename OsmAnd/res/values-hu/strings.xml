@@ -4957,4 +4957,8 @@
     <string name="cloud_layer">Felhőzet réteg</string>
     <string name="precipitation_layer">Csapadék réteg</string>
     <string name="quick_action_temperature_layer">A hőmérséklet réteget megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">MTB hegymeneti skála megjelenítése</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Nyomvonalak megjelenítése MTB hegymeneti nehézségi szintek szerint.</string>
+    <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
+    <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB nehézségi szintek szerint.</string>
 </resources>
