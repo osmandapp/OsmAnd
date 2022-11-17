@@ -471,7 +471,7 @@
 						android:gravity="center"
 						android:letterSpacing="@dimen/text_button_letter_spacing"
 						android:maxLines="1"
-						android:text="@string/shared_string_options"
+						android:text="@string/shared_string_settings"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/text_button_text_size"
 						osmand:typeface="@string/font_roboto_medium"
