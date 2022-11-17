@@ -7,8 +7,7 @@ import net.osmand.plus.R;
 
 public enum MtbClassification {
 	SCALE("showMtbScale", R.string.mtb_scale, null),
-	IMBA("showMtbScaleIMBATrails", R.string.mtb_imba, R.string.mtb_imba_description),
-	UPHILL("showMtbScaleUphill", R.string.mtb_uphill, null);
+	IMBA("showMtbScaleIMBATrails", R.string.mtb_imba, R.string.mtb_imba_description);
 
 	public final String attrName;
 	@StringRes

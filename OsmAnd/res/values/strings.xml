@@ -12,7 +12,6 @@
 -->
 
     <string name="mtb_scale">MTB Scale</string>
-    <string name="mtb_uphill">MTB Uphill</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_description">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segment classification</string>
