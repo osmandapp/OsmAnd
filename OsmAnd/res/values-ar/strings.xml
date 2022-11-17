@@ -5032,4 +5032,8 @@
     <string name="wind_layer">طبقة الرياح</string>
     <string name="cloud_layer">طبقة السحب</string>
     <string name="precipitation_layer">طبقة هطول الأمطار</string>
+    <string name="rendering_attr_showMtbScale_description">عرض المسارات وفقا لمقياس MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">عرض مقياس MTB صعودا</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">عرض المسارات وفقا لمقياس MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">عرض مقياس MTB</string>
 </resources>
