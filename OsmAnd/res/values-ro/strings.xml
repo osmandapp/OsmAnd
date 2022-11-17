@@ -4809,10 +4809,10 @@
     <string name="speak_route_recalculation">Anunță recalcularea rutei</string>
     <string name="map_center_widget">Coordonate: Centrul hărții</string>
     <string name="external_sensors_plugin_name">Senzori externi</string>
-    <string name="external_sensors_plugin_description">Monitorizarea ritmului cardiac, a vitezei bicicletei, a puterii bicicletei și a cadenței. Necesită ca dispozitivul să fie conectat la senzorii respectivi prin intermediul protocolului de rețea personală fără fir ANT+.</string>
-    <string name="map_widget_altitude_map_center">Altitudine: centrul hărții</string>
+    <string name="external_sensors_plugin_description">Accesează senzorii externi pentru a citi, de exemplu, ritmul cardiac, viteza bicicletei, puterea de pedalare sau cadența. Necesită ca dispozitivul dvs. să fie conectat la senzorii respectivi prin intermediul protocolului de rețea personală fără fir ANT+.</string>
+    <string name="map_widget_altitude_map_center">Elevație: centrul hărții</string>
     <string name="map_widget_altitude_map_center_desc">Afișează altitudinea deasupra nivelului mării a centrului actual al hărții.</string>
-    <string name="map_widget_altitude_desc">Afișarea altitudinii deasupra nivelului mării pentru geolocația curentă sau pentru centrul actual al hărții</string>
+    <string name="map_widget_altitude_desc">Afișarea altitudinii geolocației curente sau a altitudinii centrului actual al hărții</string>
     <string name="map_widget_rendering_fps">FPS de redare a hărții</string>
     <string name="map_widget_rendering_fps_desc">Arată cât de repede sunt afișate și reîmprospătate harta și elementele hărții, exprimat în cadre pe secundă (FPS).</string>
     <string name="location_simulation_cutoff">Simularea sare peste primii metri</string>
@@ -4820,12 +4820,12 @@
     <string name="send_uuid_preference">Trimiterea identificatorului unic de utilizator (UUID)</string>
     <string name="terms_of_service_desc">Prin descărcarea hărților sunteți de acord cu %1$s și %2$s.</string>
     <string name="shared_string_terms_of_use">Termeni de utilizare</string>
-    <string name="purchases_feature_desc_cross_buy">Utilizați caracteristicile abonamentului dumneavoastră pe diferite platforme (Android/iOS/Web) fără costuri suplimentare.</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizați caracteristicile abonamentului dumneavoastră pe diferite platforme (Android/iOS/web) fără costuri suplimentare.</string>
     <string name="shared_string_cross_buy">Achiziții încrucișate</string>
     <string name="external_sensor_widgets">ANT+ widget-uri</string>
-    <string name="ant_missing_dependency_descr">Serviciul necesar \"%1$s\" nu a fost găsit.
-\nTrebuie să instalați serviciul ANT+ Plugins sau este posibil să fie nevoie să actualizați versiunea existentă, dacă o aveți deja.
-\nDoriți să lansați Play Store pentru a-l obține\?</string>
+    <string name="ant_missing_dependency_descr">Nu s-a putut găsi serviciul necesar \"%1$s\".
+\nTrebuie să instalați sau să actualizați serviciul ANT+ Plugins Service.
+\nDoriți să lansați Play Store pentru a face acest lucru\?</string>
     <string name="ant_missing_dependency">Lipsește dependența</string>
     <string name="ant_go_to_store">Mergeți la magazin</string>
     <string name="ant_read_data">Citiți datele</string>
@@ -4837,7 +4837,7 @@
     <string name="restart_now">Reporniți acum</string>
     <string name="map_rendering_engine_v1">Versiunea 1</string>
     <string name="map_rendering_engine_v2">Versiunea 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este motorul mai rapid de redare a hărților, care oferă, de asemenea, o vizualizare 2.5D. Renderizarea versiunii 1 a fost cea implicită înainte de versiunea 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
+    <string name="map_rendering_engine_descr">Versiunea 2 (OpenGL) este un motor de redare a hărților mai rapid, care oferă, de asemenea, o vizualizare 2.5D. Versiunea 1 de redare a fost cea implicită înainte de OsmAnd 4.3 și este în continuare preferabilă pentru dispozitivele mai vechi.</string>
     <string name="show_map_symbols">Afișați simbolurile hărții</string>
     <string name="show_map_symbols_desc">Text, indicatoare rutiere și altele.</string>
     <string name="shared_string_identifiers">Identificatori</string>
@@ -4852,7 +4852,7 @@
     <string name="explore_weather_forecast">Explorați Prognoza meteo.</string>
     <string name="shared_string_layers">Straturi</string>
     <string name="empty_screen_weather_pressure_layer">Activați pentru a vizualiza contururile meteorologice pe hartă.</string>
-    <string name="empty_screen_weather_clouds_layer">Activați pentru a vizualiza stratul de nori pe hartă.</string>
+    <string name="empty_screen_weather_clouds_layer">Activați pentru a vizualiza stratul de acoperire a norilor pe hartă.</string>
     <string name="empty_screen_weather_wind_layer">Porniți pentru a vizualiza nivelul de vânt pe hartă.</string>
     <string name="empty_screen_weather_precipitation_layer">Activați pentru a vizualiza stratul de precipitații pe hartă.</string>
     <string name="empty_screen_view_selected_weather_data">Activați pentru a vizualiza pe hartă datele meteorologice selectate.</string>
@@ -4865,9 +4865,9 @@
     <string name="weather_wind_kmh">km/oră</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Noduri</string>
-    <string name="weather_widgets_secondary_desc">Unitățile de măsură ar putea fi schimbate în setările pluginului Meteo.</string>
-    <string name="clouds_widget_desc">Afișează norii pentru centrul actual al hărții.</string>
-    <string name="wind_widget_desc">Afișează viteza vântului pentru centrul actual al hărții.</string>
+    <string name="weather_widgets_secondary_desc">Unitățile de măsură pot fi modificate în setările pluginului Meteo.</string>
+    <string name="clouds_widget_desc">Afișează acoperirea norilor pentru centrul actual al hărții.</string>
+    <string name="wind_widget_desc">Arată viteza vântului pentru centrul actual al hărții.</string>
     <string name="precipitation_widget_desc">Afișează precipitațiile pentru centrul actual al hărții.</string>
     <string name="weather_widget_group_desc">Un set de widget-uri care afișează diverse informații despre vreme.</string>
     <string name="weather_pressure_hpa">hPa</string>
@@ -4877,14 +4877,14 @@
     <string name="weather_pressure_inches_of_mercury">În inci de mercur</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetri de mercur</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="action_not_supported_with_map_style">Acțiunea nu este acceptată cu stilul de hartă selectat.</string>
+    <string name="action_not_supported_with_map_style">Această acțiune nu este acceptată de stilul de hartă selectat.</string>
     <string name="ant_write_to_gpx">Scrieți date pe pistă</string>
     <string name="map_widget_ant_bicycle_power">Puterea bicicletei</string>
     <string name="map_widget_ant_bicycle_cadence">Cadența bicicletei</string>
     <string name="map_widget_ant_bicycle_speed">Viteza bicicletei</string>
     <string name="map_widget_ant_bicycle_speed_desc">Arată viteza de deplasare</string>
     <string name="map_widget_ant_bicycle_dist">Distanța pentru bicicletă</string>
-    <string name="map_widget_target_distance_desc">Widgetul arată distanța de la cameră până la locația țintă.</string>
+    <string name="map_widget_target_distance_desc">Afișează distanța dintre cameră și locația țintă.</string>
     <string name="map_widget_camera_distance_desc">Widgetul arată înălțimea camerei deasupra nivelului suprafeței.</string>
     <string name="map_widget_camera_tilt_desc">Widgetul arată unghiul de înclinare a camerei în modul perspectivă. Valoarea implicită este 90° (fără înclinare).</string>
     <string name="map_widget_camera_distance">Înălțarea camerei</string>
@@ -4908,11 +4908,12 @@
     <string name="download_heightmap_maps">Hartă înălțime</string>
     <string name="coordinates_widget_map_center_desc">Widget-ul arată coordonatele geografice ale centrului actual al hărții</string>
     <string name="display_position">Poziția de afișare</string>
-    <string name="weather_plugin_description">Plugin-ul meteo oferă
-\n- 5 straturi.... prognoza pe oră pe 24h și prognoza pe 7 zile la fiecare 3 ore
+    <string name="weather_plugin_description">Oferă
+\n- prognoza meteo pe 24 de ore și 7 zile cu 5 straturi
 \n- widget-uri bazate pe locație
-\n- izolatoare de temperatură / presiune
-\nDatele meteo sunt furnizate de GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n- izolatoarele de temperatură / presiune
+\n
+\nDatele meteorologice sunt furnizate de Sistemul global de prognoză (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="shared_string_contours">Contururi</string>
     <string name="shared_string_weather">Meteo</string>
     <string name="empty_screen_weather_contours">Activați pentru a vizualiza contururile meteorologice pe hartă.</string>
@@ -4920,11 +4921,11 @@
     <string name="weather_wind_miles_per_hour">Mile pe oră</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometri pe oră</string>
     <string name="weather_wind_meters_per_second">Metri/secundă</string>
-    <string name="air_pressure_widget_desc">Afișează presiunea atmosferică pentru centrul actual al hărții.</string>
+    <string name="air_pressure_widget_desc">Arată presiunea atmosferică pentru centrul actual al hărții.</string>
     <string name="temperature_widget_desc">Afișează temperatura pentru centrul actual al hărții.</string>
-    <string name="weather_prefs_descr">Prognoza orară pe 24h și prognoza pe 7 zile la fiecare 3 ore</string>
+    <string name="weather_prefs_descr">Prognoza orară pe 24-ore și prognoza pe 7- zile actualizată la fiecare 3 ore</string>
     <string name="weather_temperature_celsius">Celsius</string>
-    <string name="ant_heart_rate_write_gpx_desc">Scrieți ritmul cardiac pentru a urmări</string>
+    <string name="ant_heart_rate_write_gpx_desc">Includeți ritmul cardiac în urmărire</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Afișează viteza la care pedalează utilizatorul</string>
     <string name="map_marker_interval_dialog_desc">Specificați intervalul de timp pentru care se va măsura viteza medie pentru a calcula ora estimată de sosire.</string>
     <string name="quick_action_map_center_widget_descr">Un comutator pentru a afișa sau a ascunde widgetul de centru al hărții pe hartă.</string>
@@ -4940,4 +4941,29 @@
     <string name="worldwide_maps">Hărți mondiale</string>
     <string name="map_widget_zoom_level_desc">Widgetul afișează nivelul actual de zoom al hărții.</string>
     <string name="map_widget_ant_bicycle_power_desc">Arată puterea de ieșire a biciclistului, care este folosită pentru a mișca bicicleta înainte</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Schema de culori a liniei</string>
+    <string name="rendering_attr_depthContourWidth_name">Lățimea liniei</string>
+    <string name="switch_mode_by_tapping_on_widget">Schimbați modul prin apăsarea pe widget.</string>
+    <string name="map_widget_sunset_desc">Afișează ora următorului apus de soare sau timpul rămas până la apus.</string>
+    <string name="map_widget_sunrise_desc">Afișează ora următorului răsărit al soarelui sau timpul rămas până la răsărit.</string>
+    <string name="shared_string_next_sunset">Următorul apus de soare</string>
+    <string name="shared_string_next_sunrise">Următorul răsărit de soare</string>
+    <string name="shared_string_time_left">Timp rămas</string>
+    <string name="shared_string_sunset">Apus de soare</string>
+    <string name="shared_string_sunrise">Răsărit de soare</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Aceste widgeturi afișează informații despre următorul răsărit și apus de soare.</string>
+    <string name="storage_migration_fragment_close_descr">Copierea se face pentru %1$s%%. Dacă vă opriți acum, este posibil ca aplicația să nu funcționeze corect.</string>
+    <string name="map_widget_group_sunrise_sunset">Răsărit de soare, apus de soare</string>
+    <string name="depth_contour_lines">Linii de contur de adâncime</string>
+    <string name="turn_on_nautical_depth_description">Activați această funcție pentru a vizualiza datele de adâncime nautică pe hartă.</string>
+    <string name="quick_action_wind_layer">Un comutator pentru a afișa sau ascunde stratul de vânt pe hartă.</string>
+    <string name="temperature_layer">Strat de temperatură</string>
+    <string name="pressure_layer">Strat de presiune</string>
+    <string name="wind_layer">Strat de vânt</string>
+    <string name="cloud_layer">Strat de nori</string>
+    <string name="precipitation_layer">Strat de precipitații</string>
+    <string name="quick_action_precipitation_layer">Un comutator pentru a afișa sau ascunde stratul de precipitații pe hartă.</string>
+    <string name="quick_action_temperature_layer">Un comutator pentru a afișa sau ascunde stratul de temperatură pe hartă.</string>
+    <string name="quick_action_cloud_layer">Un comutator pentru a afișa sau ascunde stratul de nori pe hartă.</string>
+    <string name="quick_action_air_pressure_layer">Un comutator pentru a afișa sau ascunde stratul de presiune atmosferică pe hartă.</string>
 </resources>
