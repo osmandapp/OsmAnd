@@ -383,6 +383,11 @@ public class SearchPhrase {
 	}
 	
 	public QuadRect getRadiusBBoxToSearch(int radius) {
+		QuadRect searchBBox31 = this.settings.getSearchBBox31();
+		if (searchBBox31 != null) {
+			return searchBBox31;
+		}
+		
 		int radiusInMeters = getRadiusSearch(radius);
 		QuadRect cache1kmRect = get1km31Rect();
 		if(cache1kmRect == null) {

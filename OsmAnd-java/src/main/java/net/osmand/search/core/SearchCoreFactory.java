@@ -1675,7 +1675,7 @@ public class SearchCoreFactory {
 				private int getIndex(Amenity poi) {
 					int res = 0;
 					int poiTypeIndex = allowedTypes.indexOf(poi.getSubType());
-					if (poiTypeIndex != 0) {
+					if (poiTypeIndex != -1) {
 						res += poiTypeIndex;
 						if (nmEquals.matches(poi.getName()) || nmEquals.matches(poi.getOtherNames())) {
 							res += SEARCH_OLC_WITH_CITY_PRIORITY;
