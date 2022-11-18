@@ -4831,7 +4831,7 @@
     <string name="location_simulation_speedup">Прискорення симуляції</string>
     <string name="send_uuid_preference_desc">Випадковий UUID використовується для завантаження офлайнових мап з серверів OsmAnd з метою відстеження добросовісного використання ресурсів серверів, прогнозування моделей трафіку та створення анонімних щомісячних звітів щодо мап.</string>
     <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
-    <string name="shared_string_terms_of_use">Умови використання</string>
+    <string name="shared_string_terms_of_use">Умови користування</string>
     <string name="external_sensors_plugin_name">Зовнішні датчики</string>
     <string name="external_sensors_plugin_description">Доступ до зовнішніх датчиків для зчитування, наприклад, пульсу, швидкості велосипеда, потужності велоїзди та частоти обертання педалей. Вимагає під\'єднання пристрою до відповідних датчиків за протоколом бездротової персональної мережі ANT+.</string>
     <string name="map_widget_altitude_map_center">Висота над рівнем моря: центр мапи</string>
