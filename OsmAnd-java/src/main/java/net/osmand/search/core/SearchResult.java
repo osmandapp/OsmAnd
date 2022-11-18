@@ -15,6 +15,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import static net.osmand.search.core.SearchPhrase.ALLDELIMITERS_USER_OBJECT;
+
 
 public class SearchResult {
 
@@ -105,12 +107,17 @@ public class SearchResult {
 
 	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
+		double highestPriority = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
 		// if all words from search phrase == the search result words - we prioritize it even higher
 		if (completeMatchRes.allWordsEqual) {
-			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
-					this.location) <= NEAREST_METERS_LIMIT;
-			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
-				res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10 + MAX_PHRASE_WEIGHT_TOTAL / 2;
+			if (ObjectType.isUserObject(objectType)) {
+				res = highestPriority;
+			} else {
+				boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
+						this.location) <= NEAREST_METERS_LIMIT;
+				if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
+					res = highestPriority;
+				}
 			}
 		}
 		return res;
@@ -136,6 +143,8 @@ public class SearchResult {
 	private boolean allWordsMatched(String name, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
 		List<String> localResultNames;
+		
+		name = prepareNameUserObject(name);
 		if (!requiredSearchPhrase.getFullSearchPhrase().contains(HYPHEN)) {
 			// we split '-' words in result, so user can input same without '-'
 			localResultNames = SearchPhrase.splitWords(name, new ArrayList<String>(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN);
@@ -167,6 +176,13 @@ public class SearchResult {
 		}
 		cnt.allWordsInPhraseAreInResult = true;
 		return true;
+	}
+	
+	public String prepareNameUserObject(String name) {
+		if (ObjectType.isUserObject(objectType)) {
+			return name.replaceAll(ALLDELIMITERS_USER_OBJECT, DELIMITER).trim();
+		}
+		return name;
 	}
 	
 	static class CheckWordsMatchCount {

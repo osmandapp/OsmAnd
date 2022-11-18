@@ -24,6 +24,7 @@ public class SearchPhrase {
 	public static final String DELIMITER = " ";
 	public static final String ALLDELIMITERS = "\\s|,";
 	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
+	public static final String ALLDELIMITERS_USER_OBJECT= "\\s|,|-|_|.gpx";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -813,7 +814,8 @@ public class SearchPhrase {
 	
 	public int countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames, int amountMatchingWords) {
 		int r = 0;
-		if (otherUnknownWords.size() > 0) {
+		localeName = sr.prepareNameUserObject(localeName);
+ 		if (otherUnknownWords.size() > 0) {
 			for (int i = 0; i < otherUnknownWords.size(); i++) {
 				boolean match = false;
 				if (i < amountMatchingWords - 1) {

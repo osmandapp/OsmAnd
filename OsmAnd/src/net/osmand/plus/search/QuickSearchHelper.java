@@ -551,8 +551,11 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.preferredZoom = 17;
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
-				} else if (phrase.getFirstUnknownNameStringMatcher().matches(searchResult.localeName)) {
-					resultMatcher.publish(searchResult);
+				} else {
+					int countMatchWords = phrase.countUnknownWordsMatchMainResult(searchResult);
+					if (countMatchWords > 0) {
+						resultMatcher.publish(searchResult);
+					}
 				}
 			}
 			return true;

@@ -38,7 +38,11 @@ public enum ObjectType {
 	}
 
 	public static boolean isTopVisible(ObjectType t) {
-		return t == POI_TYPE || t == FAVORITE || t == FAVORITE_GROUP || t == WPT || t == GPX_TRACK || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
+		return t == POI_TYPE || t == LOCATION || t == PARTIAL_LOCATION || t == INDEX_ITEM;
+	}
+	
+	public static boolean isUserObject(ObjectType t) {
+		return t == ObjectType.GPX_TRACK || t == ObjectType.FAVORITE || t == ObjectType.FAVORITE_GROUP || t == ObjectType.WPT;
 	}
 
 	public static ObjectType getExclusiveSearchType(ObjectType t) {
@@ -53,6 +57,11 @@ public enum ObjectType {
 			return 1;
 		}
 		switch (t) {
+			case GPX_TRACK:
+			case FAVORITE:
+			case FAVORITE_GROUP:
+			case WPT:
+				return 5;
 			case HOUSE:
 			case STREET_INTERSECTION:
 				return 4;
