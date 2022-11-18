@@ -3971,7 +3971,7 @@
     <string name="activity_type_snowmobile_name">雪地摩托車</string>
     <string name="activity_type_riding_name">騎乘</string>
     <string name="activity_type_racing_name">競速</string>
-    <string name="activity_type_mountainbike_name">山地腳踏車</string>
+    <string name="activity_type_mountainbike_name">山地自行車</string>
     <string name="activity_type_cycling_name">腳踏車</string>
     <string name="activity_type_hiking_name">健行</string>
     <string name="activity_type_running_name">跑步</string>
@@ -4632,7 +4632,7 @@
     <string name="bearing_desc">以角度單位（180 度、360 度或毫弧度模式）顯示與目標的絕對或相對方位。</string>
     <string name="get_altitude_data">取得海拔資料</string>
     <string name="calculate_altitude">計算海拔</string>
-    <string name="app_mode_mountain_bicycle">山地腳踏車</string>
+    <string name="app_mode_mountain_bicycle">山地自行車</string>
     <string name="routing_attr_avoid_4wd_only_description">避開僅適合四輪驅動車輛的道路</string>
     <string name="routing_attr_avoid_4wd_only_name">避開四輪驅動道路</string>
     <string name="colour_of_circles">圓圈顏色</string>
@@ -4750,8 +4750,8 @@
     <string name="compass_desc">顯示北邊的方向。</string>
     <string name="compass_click_desc">點擊指南針切換地圖方向模式。</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地腳踏車 IMBA 路徑</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地腳踏車專用路徑。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地自行車 IMBA 路徑</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地自行車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
     <string name="connect_with_straight_line">以直線連結</string>
     <string name="attach_roads_descr">將您的軌跡趨近為允許在點之間路線規劃的道路，並與精確的轉彎指令與路線屬性相關聯。</string>
@@ -4957,4 +4957,8 @@
     <string name="precipitation_layer">降水圖層</string>
     <string name="quick_action_temperature_layer">用來在地圖上切換顯示或隱藏溫度圖層。</string>
     <string name="cloud_layer">雲層圖層</string>
+    <string name="rendering_attr_showMtbScale_name">顯示山地自行車比例</string>
+    <string name="rendering_attr_showMtbScale_description">根據山地自行車比例顯示路徑。</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">顯示山地自行車比例上坡</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">根據山地自行車上坡比例顯示路徑。</string>
 </resources>
