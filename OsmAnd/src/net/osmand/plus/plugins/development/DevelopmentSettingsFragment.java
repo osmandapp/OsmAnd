@@ -114,7 +114,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		showHeightmaps.setVisible(plugin.isHeightmapAllowed());
 		Preference showHeightmapsPromo = findPreference(SHOW_HEIGHTMAP_PROMO);
 		showHeightmapsPromo.setIconSpaceReserved(false);
-		showHeightmapsPromo.setVisible(!plugin.isHeightmapAllowed());
+		showHeightmapsPromo.setVisible(!plugin.isHeightmapPurchased());
 	}
 
 	private void setupSimulateYourLocationPref() {
