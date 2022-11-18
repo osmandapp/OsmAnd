@@ -8,6 +8,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.DataSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.DownloadsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesGroupSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
@@ -163,6 +164,9 @@ public class SettingsItemsFactory {
 				break;
 			case FAVOURITES:
 				item = new FavoritesSettingsItem(app, json);
+				break;
+			case FAVOURITES_GROUP:
+				item = new FavoritesGroupSettingsItem(app, json);
 				break;
 			case ACTIVE_MARKERS:
 				item = new MarkersSettingsItem(app, json);
