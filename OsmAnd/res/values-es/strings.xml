@@ -4967,4 +4967,8 @@
     <string name="wind_layer">Capa de vientos</string>
     <string name="cloud_layer">Capa de nubes</string>
     <string name="precipitation_layer">Capa de precipitaciones</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar los senderos según la escala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar la escala MTB cuesta arriba</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Muestrar los senderos según la escala MTB de ascenso.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar la escala de las MTB</string>
 </resources>
