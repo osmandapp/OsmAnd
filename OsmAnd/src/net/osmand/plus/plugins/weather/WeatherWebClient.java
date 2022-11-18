@@ -15,7 +15,7 @@ public class WeatherWebClient extends interface_IWebClient {
 	}
 
 	@Override
-	public SWIGTYPE_p_QByteArray downloadData(String url, SWIGTYPE_p_std__shared_ptrT_OsmAnd__IWebClient__IRequestResult_const_t requestResult, SWIGTYPE_p_std__functionT_void_funsigned_long_long_const_unsigned_long_long_constF_t progressCallback, SWIGTYPE_p_std__shared_ptrT_IQueryController_const_t queryController) {
+	public SWIGTYPE_p_QByteArray downloadData(String url, SWIGTYPE_p_std__shared_ptrT_OsmAnd__IWebClient__IRequestResult_const_t requestResult, SWIGTYPE_p_std__functionT_void_funsigned_long_long_const_unsigned_long_long_constF_t progressCallback, SWIGTYPE_p_std__shared_ptrT_IQueryController_const_t queryController, String userAgent) {
 		return SwigUtilities.emptyQByteArray();
 	}
 
