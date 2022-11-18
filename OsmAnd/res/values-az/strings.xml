@@ -3255,4 +3255,8 @@
     <string name="snackbar_page_removed">“Səhifə %1$s” silindi.</string>
     <string name="top_widgets_panel">Üst panel</string>
     <string name="bottom_widgets_panel">Alt panel</string>
+    <string name="auto_backup_title">Avtomatik nüsxələmə</string>
+    <string name="change_default_appearance">Standart görünüşü dəyiş</string>
+    <string name="shared_string_shape">Forma</string>
+    <string name="default_appearance_desc">Qrupa əlavə edilmiş favorit nöqtələrə standart rəng, ikon və forma tətbiq olunacaq.</string>
 </resources>
