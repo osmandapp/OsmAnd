@@ -4967,4 +4967,8 @@
     <string name="precipitation_layer">Niederschlagsebene</string>
     <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
+    <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
+    <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
 </resources>

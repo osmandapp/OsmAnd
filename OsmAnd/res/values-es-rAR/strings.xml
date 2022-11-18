@@ -4980,4 +4980,8 @@
     <string name="quick_action_wind_layer">Un botón que alterna la capa de vientos en el mapa.</string>
     <string name="quick_action_temperature_layer">Un botón que alterna la capa de temperatura en el mapa.</string>
     <string name="quick_action_air_pressure_layer">Un botón que alterna la capa de presión atmosférica en el mapa.</string>
+    <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar escala de MTB</string>
 </resources>

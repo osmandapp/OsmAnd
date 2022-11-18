@@ -4968,4 +4968,8 @@
     <string name="rendering_engine_failed_descr">OsmAnd telah mengubah ke perenderan peta \'Versi 1\'. Anda dapat mengubah kembali ke mesin perenderan \'Versi 2 (OpenGL)\' baru dalam Pengaturan.
 \n
 \nSilakan mendukung peningkatan dengan menyediakan catatan kesalahan Anda.</string>
+    <string name="rendering_attr_showMtbScale_description">Tampilkan trek berdasarkan skala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Tampilkan skala naik MTB</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Tampilkan jalur menurut skala naik MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Tampilkan skala MTB</string>
 </resources>
