@@ -4843,7 +4843,7 @@
     <string name="map_widget_altitude_desc">Показ висоти над рівнем моря поточної геолокації або поточного центру мапи</string>
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
     <string name="map_widget_rendering_fps_desc">Показує швидкість появи й оновлення мапи та її елементів (виражається у кадрах на секунду, або FPS).</string>
-    <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування %1$s та %2$s.</string>
+    <string name="terms_of_service_desc">Завантажуючи мапи, ви погоджуєтеся з умовами користування %1$s та %2$s.</string>
     <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
     <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
     <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
