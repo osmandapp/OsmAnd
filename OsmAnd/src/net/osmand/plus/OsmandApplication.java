@@ -27,7 +27,6 @@ import androidx.multidex.MultiDexApplication;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.core.android.NativeCore;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
@@ -101,6 +100,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -1039,6 +1039,6 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean useOpenGlRenderer() {
-		return NativeCore.isAvailable() && osmandSettings.USE_OPENGL_RENDER.get();
+		return NativeCoreContext.isInit() && osmandSettings.USE_OPENGL_RENDER.get();
 	}
 }

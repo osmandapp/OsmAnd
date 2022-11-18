@@ -28,6 +28,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -747,7 +748,7 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (app.useOpenGlRenderer() && !Version.isQnxOperatingSystem()) {
+		if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
 			try {
 				NativeCoreContext.init(app);
 				settings.OPENGL_RENDER_FAILED.set(false);

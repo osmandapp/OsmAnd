@@ -19,6 +19,7 @@ import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.NativeCore;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.DialogListItemAdapter;
@@ -120,7 +121,7 @@ public class MapLayers {
 	}
 
 	public void createLayers(@NonNull OsmandMapTileView mapView) {
-		boolean useOpenGLRender = app.useOpenGlRenderer();
+		boolean useOpenGLRender = app.getSettings().USE_OPENGL_RENDER.get() && NativeCore.isAvailable();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer(app);
 		// 5.95 all labels
