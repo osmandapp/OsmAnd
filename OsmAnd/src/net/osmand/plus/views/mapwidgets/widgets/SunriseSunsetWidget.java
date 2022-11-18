@@ -99,18 +99,27 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 		return getPreference().get();
 	}
 
+	@NonNull
+	public OsmandPreference<Boolean> getPreference() {
+		return widgetState.getPreference();
+	}
+
 	private void updateCachedLocation() {
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
 		LatLon newCenterLatLon = tileBox.getCenterLatLon();
-		if (!Algorithms.objectEquals(cachedCenterLatLon, newCenterLatLon)) {
+		if (!isLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
 			cachedCenterLatLon = newCenterLatLon;
 			isLocationChanged = true;
 		}
 	}
 
-	@NonNull
-	public OsmandPreference<Boolean> getPreference() {
-		return widgetState.getPreference();
+	private boolean isLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
+		if (previousLatLon != null && newLatLon != null) {
+			double lat = previousLatLon.getLatitude();
+			double newLat = newLatLon.getLatitude();
+			return Math.abs(lat - newLat) > 0.001;
+		}
+		return false;
 	}
 
 	public long getTimeLeft() {
