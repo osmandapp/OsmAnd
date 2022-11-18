@@ -203,7 +203,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	public boolean isHeightmapAllowed() {
-		return InAppPurchaseHelper.isOsmAndProAvailable(app);
+		return app.useOpenGlRenderer() && isHeightmapPurchased();
 	}
 
+	public boolean isHeightmapPurchased() {
+		return InAppPurchaseHelper.isOsmAndProAvailable(app);
+	}
 }

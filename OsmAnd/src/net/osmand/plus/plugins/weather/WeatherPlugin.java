@@ -151,9 +151,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return app.useOpenGlRenderer()
-				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
-				&& super.isEnabled();
+		return app.useOpenGlRenderer() && super.isEnabled();
 	}
 
 	@Override
