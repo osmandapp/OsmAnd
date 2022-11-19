@@ -121,7 +121,7 @@ public class InAppPurchaseCard extends BaseCard {
 		purchaseType.setText(R.string.in_app_purchase_desc);
 
 		TextView purchaseDate = view.findViewById(R.id.next_billing_date);
-		long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
+		long purchaseTime = purchase.getPurchaseTime();
 		if (purchaseTime > 0) {
 			String dateStr = dateFormat.format(purchaseTime);
 			String purchased = app.getString(R.string.shared_string_purchased);
