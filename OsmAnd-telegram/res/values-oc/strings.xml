@@ -115,7 +115,7 @@
     <string name="logout_from_osmand_telegram">Volètz desconnectar lo Traçador d\'OsmAnd \?</string>
     <string name="shared_string_name">Nom</string>
     <string name="by_distance">Per distància</string>
-    <string name="by_name">Per nom</string>
+    <string name="by_name">Per lo nom</string>
     <string name="by_group">Per grop</string>
     <string name="shared_string_sort_by">Ordena per</string>
     <string name="choose_osmand_desc">Seleccionatz la version d\'OsmAnd que localiza lei contactes sus la mapa.</string>
@@ -194,4 +194,9 @@
     <string name="shared_string_logout">Se deconnectar</string>
     <string name="foot">ft</string>
     <string name="m">m</string>
+    <string name="units_and_formats">Unitats e formats</string>
+    <string name="shared_string_start">Partença</string>
+    <string name="shared_string_distance">Distància</string>
+    <string name="shared_string_settings">Configuracion</string>
+    <string name="si_min_m">Minutes per mile</string>
 </resources>
