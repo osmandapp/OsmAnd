@@ -4600,7 +4600,7 @@
     <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="audio_video_notes_desc">Il widget fornisce un accesso veloce per avviare/fermare l\'acquisizione di una registrazione (audio, video, foto).</string>
-    <string name="street_name_widget_desc">Il widget dei nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome della manovra che si sta completando.</string>
+    <string name="street_name_widget_desc">Il widget Nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome di quella successiva alla prossima svolta.</string>
     <string name="colour_of_circles">Colore dei cerchi</string>
     <string name="distance_circles">Cerchi di distanza</string>
     <string name="compass_on_circles">Bussola nei cerchi</string>
@@ -4629,7 +4629,7 @@
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="lanes_widgets_desc">Il widget corsie mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione attuale.</string>
+    <string name="lanes_widgets_desc">Mostra le corsie della strada che si sta percorrendo e evidenzia quella da utilizzare per la navigazione.</string>
     <string name="bearing_desc">Il widget bussola mostra l\'angolo assoluto o relativo della destinazione in unità angolari (Gradi 180, Gradi 360, Milliradinati).</string>
     <string name="routing_attr_allow_private_for_truck_description">Permetti agli autotreni l\'accesso alle aree private.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permetti l\'accesso alle aree private (autotreni)</string>
