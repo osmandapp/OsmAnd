@@ -4385,4 +4385,21 @@
     <string name="poi_climbing_rock_gritstone">تسلق الصخور: الحصى</string>
     <string name="poi_climbing_rock_basalt">تسلق الصخور: البازلت</string>
     <string name="poi_climbing_rock_conglomerate">تسلق الصخور: تكتل</string>
+    <string name="poi_climbing_grade_french">درجة التسلق الفرنسية</string>
+    <string name="poi_climbing_grade_saxon">درجة تسلق سكسونية</string>
+    <string name="poi_climbing_grade_novice">مبتدئ</string>
+    <string name="poi_climbing_grade_beginner">مبتدئ</string>
+    <string name="poi_climbing_grade_intermediate">متوسط</string>
+    <string name="poi_climbing_grade_elite">نخبة</string>
+    <string name="poi_climbing_grade_super_elite">النخبة الفائقة</string>
+    <string name="poi_climbing_grade_aliens">كائنات فضائية</string>
+    <string name="poi_climbing_bolt_abseil">الهبوط بالحبل</string>
+    <string name="poi_climbing_bolt_anchor">مِرسَاة</string>
+    <string name="poi_osmand_climbing_bolts_yes">نعم</string>
+    <string name="poi_climbing_grade_advanced">متقدم</string>
+    <string name="poi_climbing_grade_expert">خبير</string>
+    <string name="poi_climbing_grade_super_expert">خبير فائق</string>
+    <string name="poi_osmand_climbing_bolts_no">ﻻ</string>
+    <string name="poi_climbing_bolts">براغي التسلق</string>
+    <string name="poi_climbing_quality_medium">متوسط</string>
 </resources>
