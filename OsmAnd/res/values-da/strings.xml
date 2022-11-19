@@ -4720,7 +4720,7 @@
     <string name="side_marker_eta">Forventet ankomsttidspunkt</string>
     <string name="goods_delivery_desc_3">Gælder kun for varevogne på højst 3,5 tons.</string>
     <string name="goods_delivery_desc">Der kan være restriktioner for varebiler på visse veje.</string>
-    <string name="routing_attr_goods_restrictions_name">Vareleverance</string>
+    <string name="routing_attr_goods_restrictions_name">Varelevering</string>
     <string name="accessibility_2d_view_off">2.5D-visning slået fra</string>
     <string name="accessibility_2d_view_on">2.5D-visning slået til</string>
     <string name="download_complete">Download fuldført</string>
