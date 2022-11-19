@@ -4715,7 +4715,7 @@
     <string name="reset_all_settings_desc">Скинути всі налаштування до типових\?</string>
     <string name="goods_delivery_desc">Транспортні засоби доставляння можуть підлягати обмеженням на деяких дорогах.</string>
     <string name="map_marker_average_speed_desc">Укажіть часовий інтервал для усереднення швидкості (використовується для оцінки часу прибуття).</string>
-    <string name="routing_attr_goods_restrictions_name">Доставлення товарів</string>
+    <string name="routing_attr_goods_restrictions_name">Доставлення вантажів</string>
     <string name="accessibility_2d_view_off">Огляд 2.5D вимкнено</string>
     <string name="accessibility_2d_view_on">Огляд 2.5D увімкнено</string>
     <string name="download_complete">Завантаження завершено</string>
