@@ -309,10 +309,10 @@ public class WeatherPlugin extends OsmandPlugin {
 					.setTitleId(R.string.shared_string_weather, mapActivity)
 					.setDescription(selected ? getWeatherTypesSummary(getEnabledLayers(appMode)) : null)
 					.setSecondaryDescription(selected ? app.getString(R.string.shared_string_on) : null)
-					.setLayout(R.layout.configure_map_item_with_additional_right_desc)
 					.setSelected(selected)
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setIcon(R.drawable.ic_action_umbrella)
+					.setSecondaryIcon(R.drawable.ic_action_additional_option)
 					.setListener(listener));
 		}
 	}
