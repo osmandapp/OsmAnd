@@ -524,6 +524,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
+
+				// for voice navigation. (routingAppMode may have changed.)
+				ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
+				if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
+					setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
+				}
 			}
 		};
 
@@ -694,12 +700,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportActionBar().hide();
 		}
 
-		// for voice navigation
+		// for voice navigation. Lags behind routingAppMode changes, hence repeated under onCalculationFinish()
 		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
 		if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
 			setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
-		} else {
-			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {

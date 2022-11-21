@@ -231,7 +231,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			} else {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
 			}
-			settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
