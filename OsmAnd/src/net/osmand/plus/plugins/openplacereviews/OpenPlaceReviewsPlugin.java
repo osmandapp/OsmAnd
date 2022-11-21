@@ -67,6 +67,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 		return app.getString(R.string.open_place_reviews_plugin_description);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.OPEN_PLACE_REVIEWS;

@@ -7,6 +7,7 @@ import android.media.AudioAttributes;
 import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -69,6 +70,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 		return app.getString(R.string.shared_string_accessibility);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.ACCESSIBILITY_SETTINGS;
