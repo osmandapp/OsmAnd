@@ -119,6 +119,8 @@
     • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
     • Added option to disable download UUID\n\n
+    • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times\n\n
+    • Fixed audio output and volume slider behavior\n\n
     </string>
     <string name="speak_gps_signal_status">Announce GPS signal loss and recovery</string>
     <string name="speak_route_recalculation">Announce route recalculation</string>
