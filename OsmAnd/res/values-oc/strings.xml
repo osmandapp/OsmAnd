@@ -1207,7 +1207,7 @@
     <string name="rendering_value__name">Per defaut</string>
     <string name="transparent_status_bar_descr">Visualizar la mapa sota la barra d\'estat</string>
     <string name="routing_attr_allow_gate_name">Permetre l\'usatge de pòrtas</string>
-    <string name="routing_attr_allow_gate_description">Permet l\'usatge de pòrtas</string>
+    <string name="routing_attr_allow_gate_description">Permetre l\'usatge de pòrtas</string>
     <string name="display_groups_visibility_dialog_description">Podètz contrarotlar la visualizacion dau grop sus la mapa. Se la traça es amagada, totei lei grops seràn amagats tanben.</string>
     <string name="shared_string_skip_warning">Sautar la migracion \? OsmAnd accedís pus a vòstrei fichiers dins la resèrva partejada
 \n
@@ -2109,4 +2109,8 @@
     <string name="navigate_point_olc">Còde de localizacion dobèrt</string>
     <string name="shared_string_routing">Calcul dau percors</string>
     <string name="shared_string_settings">Configuracion</string>
+    <string name="height_limit_description">Indicatz l\'auçada de vòstre veïcul, de restriccions de passatge se pòdon rescontrar per lei veïcules auts.</string>
+    <string name="width_limit_description">Indicatz l\'ample de vòstre veïcul, de restriccions de passatge se pòdon rescontrar per lei veïcules larges.</string>
+    <string name="routing_attr_width_name">Limit de largor</string>
+    <string name="weight_limit_description">Indicatz lo pes de vòstre veïcul, de restriccions de passatge se pòdon rescontrar per lei veïcules pesants.</string>
 </resources>
