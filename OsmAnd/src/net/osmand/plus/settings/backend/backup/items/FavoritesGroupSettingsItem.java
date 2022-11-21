@@ -6,13 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.util.Algorithms;
@@ -21,9 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FavoritesGroupSettingsItem extends FileSettingsItem {
@@ -47,7 +41,7 @@ public class FavoritesGroupSettingsItem extends FileSettingsItem {
 	@NonNull
 	@Override
 	public SettingsItemType getType() {
-		return SettingsItemType.FILE;
+		return SettingsItemType.FAVOURITES;
 	}
 
 	@NonNull
@@ -137,14 +131,14 @@ public class FavoritesGroupSettingsItem extends FileSettingsItem {
 //					}
 //				}
 //			}
-			Map<String, FavouritePoint> favouritePoints = new HashMap<>();
-			 favoritesHelper.getFileHelper().loadPointsFromFile(getFile(),favouritePoints);
-			for (FavouritePoint favourite : favouritePoints.values()) {
-				favoritesHelper.addFavourite(favourite, false, false);
-			}
-			favoritesHelper.sortAll();
-			favoritesHelper.saveCurrentPointsIntoFile();
-			favoritesHelper.loadFavorites();
+//			Map<String, FavouritePoint> favouritePoints = new HashMap<>();
+//			 favoritesHelper.getFileHelper().loadPointsFromFile(getFile(),favouritePoints);
+//			for (FavouritePoint favourite : favouritePoints.values()) {
+//				favoritesHelper.addFavourite(favourite, false, false);
+//			}
+//			favoritesHelper.sortAll();
+//			favoritesHelper.saveCurrentPointsIntoFile();
+//			favoritesHelper.loadFavorites();
 //		}
 	}
 
