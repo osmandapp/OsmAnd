@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.configmap;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,16 +27,25 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CycleRoutesFragment extends BaseOsmAndFragment {
+import static net.osmand.plus.configmap.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
 
-	public static final String TAG = CycleRoutesFragment.class.getSimpleName();
+public class HikingRoutesFragment extends BaseOsmAndFragment {
+
+	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+
+	private CommonPreference<String> pref;
+	@Nullable
+	private RenderingRuleProperty property;
+	private String previousValue;
 
 	private boolean nightMode;
 
@@ -45,6 +55,25 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
+		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
+		if (property == null) {
+			previousValue = pref.get();
+		} else {
+			previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
+		}
+	}
+
+	private boolean isEnabled() {
+		if (property != null) {
+			for (String value : property.getPossibleValues()) {
+				if (Algorithms.stringsEqual(value, pref.get())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -66,40 +95,33 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupHeader(@NonNull View view) {
-		CommonPreference<Boolean> pref = getPreference();
-
 		View container = view.findViewById(R.id.preference_container);
 
 		TextView title = container.findViewById(R.id.title);
 		ImageView icon = container.findViewById(R.id.icon);
 		TextView description = container.findViewById(R.id.description);
 
+		boolean enabled = isEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
-		title.setText(AndroidUtils.getRenderingStringPropertyName(app, SHOW_CYCLE_ROUTES_ATTR, SHOW_CYCLE_ROUTES_ATTR));
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, pref.get() ? selectedColor : disabledColor));
-		description.setText(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled);
+
+		title.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
+		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
+		description.setText(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
 		CompoundButton button = container.findViewById(R.id.toggle_item);
 		button.setClickable(false);
 		button.setFocusable(false);
-		button.setChecked(pref.get());
+		button.setChecked(enabled);
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				pref.set(!pref.get());
-				View view = getView();
-				if (view != null) {
-					setupHeader(view);
-					setupTypesCard(view);
-				}
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.updateLayers();
-				}
+				pref.set(!button.isChecked() ? previousValue : "");
+				setupHeader(view);
+				setupTypesCard(view);
+				refreshMap();
 			}
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
@@ -107,57 +129,70 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupTypesCard(@NonNull View view) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
-
 		View container = view.findViewById(R.id.card_container);
-		TextView title = container.findViewById(R.id.title);
-		TextView description = container.findViewById(R.id.description);
 
-		title.setText(R.string.routes_color_by_type);
-		description.setText(pref.get() ? R.string.rendering_value_walkingRoutesOSMCNodes_description : R.string.walking_route_osmc_description);
+		boolean enabled = property != null && isEnabled();
+		if (enabled) {
+			TextRadioItem selectedItem = null;
+			List<TextRadioItem> items = new ArrayList<>();
+			for (String value : property.getPossibleValues()) {
+				TextRadioItem item = createRadioButton(value);
+				if (Algorithms.stringsEqual(value, pref.get())) {
+					selectedItem = item;
+				}
+				items.add(item);
+			}
 
-		TextRadioItem relation = createRadioButton(pref, false, R.string.layer_route);
-		TextRadioItem nodeNetworks = createRadioButton(pref, true, R.string.rendering_value_walkingRoutesOSMCNodes_name);
+			TextView title = container.findViewById(R.id.title);
+			TextView description = container.findViewById(R.id.description);
 
-		TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
-		radioGroup.setItems(relation, nodeNetworks);
-		radioGroup.setSelectedItem(pref.get() ? nodeNetworks : relation);
-		boolean enabled = getPreference().get();
+			title.setText(R.string.routes_color_by_type);
+			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, pref.get()));
+
+			LinearLayout radioButtonsContainer = view.findViewById(R.id.custom_radio_buttons);
+			TextToggleButton radioGroup = new TextToggleButton(app, radioButtonsContainer, nightMode, true);
+			radioGroup.setItems(items);
+			radioGroup.setSelectedItem(selectedItem);
+		}
 		AndroidUiHelper.updateVisibility(container, enabled);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.topShadowView), enabled);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.topShadowView), enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), enabled);
 	}
 
-	private TextRadioItem createRadioButton(@NonNull CommonPreference<Boolean> pref, boolean enabled, int titleId) {
-		TextRadioItem item = new TextRadioItem(getString(titleId));
+	private TextRadioItem createRadioButton(@NonNull String value) {
+		String name = AndroidUtils.getRenderingStringPropertyValue(app, value);
+		TextRadioItem item = new TextRadioItem(name);
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				pref.set(enabled);
-				View mainView = getView();
-				if (mainView != null) {
-					setupTypesCard(mainView);
+			public boolean onRadioItemClick(RadioItem radioItem, View v) {
+				pref.set(value);
+				previousValue = value;
+
+				View view = getView();
+				if (view != null) {
+					setupHeader(view);
+					setupTypesCard(view);
 				}
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity);
-				}
+				refreshMap();
 				return true;
 			}
 		});
 		return item;
 	}
 
-	private CommonPreference<Boolean> getPreference() {
-		return settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
+	private void refreshMap() {
+		MapActivity mapActivity = (MapActivity) getMyActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMapComplete();
+			mapActivity.updateLayers();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.content, new CycleRoutesFragment(), TAG)
+					.replace(R.id.content, new HikingRoutesFragment(), TAG)
 					.commitAllowingStateLoss();
 		}
 	}

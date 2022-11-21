@@ -57,7 +57,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
-import net.osmand.plus.dialogs.MtbRoutesFragment;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -109,6 +108,7 @@ public class ConfigureMapMenu {
 	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
 	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
 	public static final String SHOW_MTB_ROUTES = "showMtbRoutes";
+	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
 
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -261,7 +261,7 @@ public class ConfigureMapMenu {
 				adapter.addItem(createCycleRoutesItem(activity, attrName, property, nightMode));
 			} else if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
 				adapter.addItem(createHikingRoutesItem(activity, attrName, property, nightMode));
-			} else if(SHOW_MTB_ROUTES.equals(attrName)){
+			} else if (SHOW_MTB_ROUTES.equals(attrName)) {
 				adapter.addItem(createMtbRoutesItem(activity, attrName, property, nightMode));
 			} else {
 				String id = ROUTES_ID + attrName;
@@ -309,7 +309,7 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createCycleRoutesItem(@NonNull MapActivity activity, @NonNull String attrName,
-												  @Nullable RenderingRuleProperty property, boolean nightMode) {
+	                                              @Nullable RenderingRuleProperty property, boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
@@ -436,7 +436,8 @@ public class ConfigureMapMenu {
 		for (RenderingRuleProperty property : customRules) {
 			String attrName = property.getAttrName();
 			if (Algorithms.stringsEqual(property.getCategory(), UI_CATEGORY_ROUTES)
-					&& !Algorithms.stringsEqual(attrName, CYCLE_NODE_NETWORK_ROUTES_ATTR)) {
+					&& !Algorithms.stringsEqual(attrName, CYCLE_NODE_NETWORK_ROUTES_ATTR)
+					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE_IMBA_TRAILS)) {
 				routeAttrNames.add(attrName);
 			}
 		}
@@ -693,6 +694,7 @@ public class ConfigureMapMenu {
 				|| CURRENT_TRACK_COLOR_ATTR.equals(attrName)
 				|| CURRENT_TRACK_WIDTH_ATTR.equals(attrName)
 				|| CYCLE_NODE_NETWORK_ROUTES_ATTR.equals(attrName)
+				|| SHOW_MTB_SCALE_IMBA_TRAILS.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
 				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
 				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
