@@ -109,7 +109,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String rtlArrow = "\u25c0", ltrArrow = "\u25b6";
 		String arrow = isLayoutRtl(app) ? rtlArrow : ltrArrow;
 		String selectedItem = getSelectedItem(app);

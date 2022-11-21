@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -43,7 +44,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener {
+public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener, InAppPurchaseListener {
 
 	private static final Log log = PlatformUtil.getLog(PluginInfoFragment.class);
 
@@ -252,5 +253,10 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updateState();
 	}
 }

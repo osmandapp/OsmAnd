@@ -2,17 +2,17 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -121,12 +121,12 @@ public class QuickAction {
         this.params = params;
     }
 
-    public boolean isActionWithSlash(OsmandApplication application){
+    public boolean isActionWithSlash(@NonNull OsmandApplication app){
         return false;
     }
 
-    public String getActionText(OsmandApplication application){
-        return getName(application);
+    public String getActionText(@NonNull OsmandApplication app){
+        return getName(app);
     }
 
 	public QuickActionType getActionType() {

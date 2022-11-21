@@ -286,6 +286,9 @@ public class WeatherPlugin extends OsmandPlugin {
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
 	                                               @NonNull MapActivity mapActivity,
 	                                               @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WEATHER,
 					WEATHER_ID,

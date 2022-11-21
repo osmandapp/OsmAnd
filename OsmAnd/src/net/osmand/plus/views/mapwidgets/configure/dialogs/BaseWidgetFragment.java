@@ -63,18 +63,6 @@ public abstract class BaseWidgetFragment extends BaseOsmAndFragment implements I
 		return activity instanceof MapActivity ? ((MapActivity) activity) : null;
 	}
 
-	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {}
-
-	@Override
-	public void onGetItems() {}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {}
-
 	protected abstract String getFragmentTag();
 
 	protected void recreateFragment() {

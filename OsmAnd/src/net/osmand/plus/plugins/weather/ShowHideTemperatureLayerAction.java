@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
+import static net.osmand.plus.plugins.weather.WeatherInfoType.TEMPERATURE;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +36,12 @@ public class ShowHideTemperatureLayerAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-		if (weatherPlugin != null) {
-			weatherPlugin.toggleLayerEnable(appMode, WeatherInfoType.TEMPERATURE, !weatherPlugin.isLayerEnabled(appMode, WeatherInfoType.TEMPERATURE));
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		if (plugin != null) {
+			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+			plugin.toggleLayerEnable(appMode, TEMPERATURE, !plugin.isLayerEnabled(appMode, TEMPERATURE));
+			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
-		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	@Override
@@ -51,15 +53,15 @@ public class ShowHideTemperatureLayerAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		String nameRes = application.getString(getNameRes());
-		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
-		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
+	public String getActionText(OsmandApplication app) {
+		String nameRes = app.getString(getNameRes());
+		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
-		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		return weatherPlugin.isLayerEnabled(application.getSettings().getApplicationMode(), WeatherInfoType.TEMPERATURE);
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		return plugin != null && plugin.isLayerEnabled(app.getSettings().getApplicationMode(), TEMPERATURE);
 	}
 }
