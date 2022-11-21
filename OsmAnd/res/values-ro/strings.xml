@@ -4720,7 +4720,7 @@
     <string name="live_update_frequency_day_variant">Actualizările hărților sunt verificate zilnic.</string>
     <string name="live_update_frequency_week_variant">Actualizările hărților sunt verificate săptămânal.</string>
     <string name="no_altitude_data_desc">Pentru a primi datele %1$s, atașați traseul dumneavoastră la drumuri sau calculați-l online.</string>
-    <string name="routing_attr_goods_restrictions_name">Restricții pentru vehiculele de marfă</string>
+    <string name="routing_attr_goods_restrictions_name">Livrarea mărfurilor</string>
     <string name="lang_ckb">Kurdă centrală</string>
     <string name="trip_recording_duration_widget_desc">Afișează timpul de călătorie înregistrat în prezent.</string>
     <string name="compass_click_desc">Apăsați pe busolă pentru a comuta modul de orientare a hărții.</string>
