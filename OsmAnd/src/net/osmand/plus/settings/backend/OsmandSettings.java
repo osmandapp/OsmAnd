@@ -1661,34 +1661,16 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference(this, "level_to_switch_vector_raster", 1).makeGlobal().cache();
 
-	public final OsmandPreference<Integer> AUDIO_MANAGER_STREAM = new IntPreference(this, "audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
-		@Override
-		protected boolean setValue(Object prefs, Integer stream) {
-			boolean valueSaved = super.setValue(prefs, stream);
-
-			if (valueSaved) {
-				CommandPlayer player = ctx.getPlayer();
-				if (player != null) {
-					player.updateAudioStream(get());
-				}
-				// Sync corresponding AUDIO_USAGE value
-				ApplicationMode mode = APPLICATION_MODE.get();
-				if (stream == 3 /*AudioManager.STREAM_MUSIC*/) {
-					AUDIO_USAGE.setModeValue(mode, 12 /*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/);
-				} else if (stream == 5 /*AudioManager.STREAM_NOTIFICATION*/) {
-					AUDIO_USAGE.setModeValue(mode, 5 /*AudioAttributes.USAGE_NOTIFICATION*/);
-				} else if (stream == 0 /*AudioManager.STREAM_VOICE_CALL*/) {
-					AUDIO_USAGE.setModeValue(mode, 2 /*AudioAttributes.USAGE_VOICE_COMMUNICATION*/);
-				}
-			}
-
-			return valueSaved;
-		}
-	}.makeProfile();
+	public final OsmandPreference<Integer> AUDIO_MANAGER_STREAM = new IntPreference(this, "audio_stream", 3/*AudioManager.STREAM_MUSIC*/).makeProfile();
 
 	// Corresponding USAGE value for AudioAttributes
-	public final OsmandPreference<Integer> AUDIO_USAGE = new IntPreference(this, "audio_usage",
-			12/*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/).makeProfile();
+	public final OsmandPreference<Integer>[] AUDIO_USAGE = new IntPreference[10];
+
+	{
+		AUDIO_USAGE[0] = new IntPreference(this, "audio_usage_0", 2).makeGlobal().makeShared().cache(); /*AudioManager.STREAM_VOICE_CALL -> AudioAttributes.USAGE_VOICE_COMMUNICATION*/
+		AUDIO_USAGE[3] = new IntPreference(this, "audio_usage_3", 12).makeGlobal().makeShared().cache(); /*AudioManager.STREAM_MUSIC -> AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/
+		AUDIO_USAGE[5] = new IntPreference(this, "audio_usage_5", 5).makeGlobal().makeShared().cache(); /*AudioManager.STREAM_NOTIFICATION -> AudioAttributes.USAGE_NOTIFICATION*/
+	}
 
 	// For now this can be changed only in TestVoiceActivity
 	public final OsmandPreference<Integer>[] VOICE_PROMPT_DELAY = new IntPreference[10];
