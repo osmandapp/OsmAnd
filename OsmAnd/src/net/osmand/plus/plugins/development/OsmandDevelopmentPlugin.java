@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
@@ -156,6 +157,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return null;
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.DEVELOPMENT_SETTINGS;

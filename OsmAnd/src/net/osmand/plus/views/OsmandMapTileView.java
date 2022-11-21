@@ -53,6 +53,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.CarSurfaceView;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
@@ -171,7 +172,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private BaseMapLayer mainLayer;
 
-	private final Map<OsmandMapLayer, Float> zOrders = new HashMap<>();
+	private final Map<OsmandMapLayer, Float> zOrdersLegacy = new HashMap<>();
+	private final Map<OsmandMapLayer, Float> zOrdersOpenGL = new HashMap<>();
 
 	private OnDrawMapListener onDrawMapListener;
 
@@ -387,7 +389,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float getZorder(@NonNull OsmandMapLayer layer) {
-		Float z = zOrders.get(layer);
+		NavigationSession carNavigationSession = getApplication().getCarNavigationSession();
+		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
+		boolean useOpenGL = getApplication().useOpenGlRenderer() && !androidAutoAttached;
+		Float z = useOpenGL ? zOrdersOpenGL.get(layer) : zOrdersLegacy.get(layer);
 		if (z == null) {
 			return 10;
 		}
@@ -400,13 +405,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrder) {
+		addLayer(layer, zOrder, zOrder);
+	}
+
+	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrderLegacy, float zOrderOpenGL) {
 		int i = 0;
 		for (i = 0; i < layers.size(); i++) {
-			if (zOrders.get(layers.get(i)) > zOrder) {
+			if (zOrdersLegacy.get(layers.get(i)) > zOrderLegacy && zOrdersOpenGL.get(layers.get(i)) > zOrderOpenGL) {
 				break;
 			}
 		}
-		zOrders.put(layer, zOrder);
+		zOrdersLegacy.put(layer, zOrderLegacy);
+		zOrdersOpenGL.put(layer, zOrderOpenGL);
 		layer.initLayer(this);
 		layers.add(i, layer);
 	}
@@ -414,7 +424,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
 		while (layers.remove(layer)) ;
-		zOrders.remove(layer);
+		zOrdersLegacy.remove(layer);
+		zOrdersOpenGL.remove(layer);
 	}
 
 	public synchronized void removeAllLayers() {

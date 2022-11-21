@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeDistanceDevice;
@@ -92,9 +93,16 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 		return app.getUIUtilities().getIcon(R.drawable.osmand_development);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.ANT_PLUS_SETTINGS;
+	}
+
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.EXTERNAL_SENSORS_SUPPORT;
 	}
 
 	@Nullable

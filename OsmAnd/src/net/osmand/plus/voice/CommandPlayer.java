@@ -148,10 +148,12 @@ public abstract class CommandPlayer {
 
 	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
+		streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
+		updateAudioStream(streamType);
 		mAudioFocusHelper = createAudioFocusHelper();
 		if (mAudioFocusHelper != null && app != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(app, applicationMode, streamType);
-			if (audioFocusGranted && settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
+			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(app);
+			if (audioFocusGranted && streamType == 0) {
 				startBluetoothSco();
 			}
 		}
@@ -169,12 +171,11 @@ public abstract class CommandPlayer {
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((app != null && settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0)
-				|| bluetoothScoRunning) {
+		if (streamType == 0 || bluetoothScoRunning) {
 			stopBluetoothSco();
 		}
 		if (app != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonAudFocus(app, applicationMode, streamType);
+			mAudioFocusHelper.abandonAudFocus(app);
 		}
 		mAudioFocusHelper = null;
 	}

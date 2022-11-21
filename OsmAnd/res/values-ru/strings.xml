@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видны</string>
+    <string name="shared_string_visible">Видимые</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -4763,7 +4763,7 @@
     <string name="auto_25_chars_route_tu_kl">Выполните разворот и держитесь левее</string>
     <string name="auto_25_chars_route_tu_kr">Выполните разворот и держитесь правее</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Показать выделенные трассы для горных велосипедов.</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">Маршруты MTB IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Показать маршруты MTB IMBA</string>
     <string name="download_tiles">Скачать тайлы</string>
     <string name="shared_string_only_missing">Только отсутствующие</string>
     <string name="attach_roads_warning">К дорогам можно привязать только записанный трек.</string>
@@ -4895,7 +4895,7 @@
     <string name="weather_online_cache">Онлайн-кэш</string>
     <string name="explore_weather_forecast">Изучите прогноз погоды.</string>
     <string name="empty_screen_weather_pressure_layer">Включите для просмотра слоя давления на карте.</string>
-    <string name="empty_screen_weather_temperature_layer">Включите для просмотра температурного слоя на карте.</string>
+    <string name="empty_screen_weather_temperature_layer">Включите для просмотра слоя температуры на карте.</string>
     <string name="empty_screen_view_selected_weather_data">Включите для просмотра выбранных погодных данных на карте.</string>
     <string name="weather_precip_mm">мм</string>
     <string name="weather_precip_inches">Дюймы</string>
@@ -4956,4 +4956,18 @@
     <string name="turn_on_nautical_depth_description">Включите для просмотра данных о морских глубинах на карте.</string>
     <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
     <string name="storage_migration_fragment_close_descr">Выполняется копирование %1$s%%. Если остановить сейчас, приложение может работать некорректно.</string>
+    <string name="quick_action_temperature_layer">Переключатель для отображения или скрытия слоя температуры на карте.</string>
+    <string name="quick_action_precipitation_layer">Переключатель для отображения или скрытия слоя осадков на карте.</string>
+    <string name="pressure_layer">Слой давления</string>
+    <string name="wind_layer">Слой ветра</string>
+    <string name="temperature_layer">Слой температуры</string>
+    <string name="quick_action_wind_layer">Переключатель для отображения или скрытия слоя ветра на карте.</string>
+    <string name="quick_action_cloud_layer">Переключатель для отображения или скрытия слоя облачности на карте.</string>
+    <string name="quick_action_air_pressure_layer">Переключатель для отображения или скрытия слоя давления на карте.</string>
+    <string name="precipitation_layer">Слой осадков</string>
+    <string name="cloud_layer">Слой облачности</string>
+    <string name="rendering_attr_showMtbScale_name">Показать MTB-шкалу</string>
+    <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с MTB-шкалой.</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
 </resources>
