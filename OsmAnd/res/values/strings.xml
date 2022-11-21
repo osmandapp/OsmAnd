@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="mtb_scale">MTB Scale</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_segment_classification">Segment classification</string>
     <string name="rendering_attr_showMtbScale_name">Show MTB scale</string>
     <string name="rendering_attr_showMtbScale_description">Show trails according to MTB scale.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Show MTB scale uphill</string>
