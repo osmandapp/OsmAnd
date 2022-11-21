@@ -473,6 +473,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
 				startLocationIndex = currentAnimatedRoute;
 				if (lastFixedLocationChanged) {
+					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {
+						currentAnimatedRoute = route.getCurrentRoute();
+					}
 					this.currentAnimatedRoute = currentAnimatedRoute;
 				}
 			} else if (straight) {

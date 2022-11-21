@@ -5,10 +5,13 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.util.Algorithms;
@@ -26,18 +29,22 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
 
+	private final OsmandMapTileView mapView;
 	private final DayNightHelper dayNightHelper;
 	private final SunriseSunsetWidgetState widgetState;
 
 	private long lastUpdateTime;
 	private long timeToNextUpdate;
 	private long cachedNextTime;
+	private LatLon cachedCenterLatLon;
+	private boolean isLocationChanged;
 	private boolean forceUpdate;
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState) {
 		super(mapActivity, widgetState.getWidgetType());
 		dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
+		this.mapView = mapActivity.getMapView();
 		setIcons(widgetState.getWidgetType());
 		setText(NO_VALUE, null);
 		setOnClickListener(v -> {
@@ -50,6 +57,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		updateCachedLocation();
 		if (!isUpdateNeeded()) {
 			return;
 		}
@@ -62,6 +70,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 				setText(value, null);
 			}
 			forceUpdate = false;
+			isLocationChanged = false;
 			lastUpdateTime = System.currentTimeMillis();
 			timeToNextUpdate = (cachedNextTime - lastUpdateTime) % TIME_LEFT_UPDATE_INTERVAL_MS;
 		} else {
@@ -72,7 +81,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 
 	@Override
 	public boolean isUpdateNeeded() {
-		if (forceUpdate) {
+		if (forceUpdate || isLocationChanged) {
 			return true;
 		}
 		if (isShowTimeLeft()) {
@@ -95,26 +104,50 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 		return widgetState.getPreference();
 	}
 
+	private void updateCachedLocation() {
+		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
+		LatLon newCenterLatLon = tileBox.getCenterLatLon();
+		if (!isLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
+			cachedCenterLatLon = newCenterLatLon;
+			isLocationChanged = true;
+		}
+	}
+
+	private boolean isLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
+		if (previousLatLon != null && newLatLon != null) {
+			double lat = previousLatLon.getLatitude();
+			double newLat = newLatLon.getLatitude();
+			return Math.abs(lat - newLat) > 0.001;
+		}
+		return false;
+	}
+
 	public long getTimeLeft() {
 		long nextTime = getNextTime();
 		return nextTime > 0 ? Math.abs(nextTime - System.currentTimeMillis()) : -1;
 	}
 
 	public long getNextTime() {
-		SunriseSunset sunriseSunset = dayNightHelper.getSunriseSunset();
-		if (sunriseSunset != null) {
-			long now = System.currentTimeMillis();
-			if (now >= cachedNextTime) {
-				Date nextTimeDate = isSunriseMode() ? sunriseSunset.getSunrise() : sunriseSunset.getSunset();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(nextTimeDate);
-				// If sunrise or sunset has passed today, move the date to the next day
-				if (calendar.getTimeInMillis() <= now) {
-					calendar.add(Calendar.DAY_OF_MONTH, 1);
+		if (cachedCenterLatLon != null) {
+			double lat = cachedCenterLatLon.getLatitude();
+			double lon = cachedCenterLatLon.getLongitude();
+			SunriseSunset bundle = dayNightHelper.getSunriseSunset(lat, lon);
+			if (bundle != null) {
+				Date nextTimeDate = isSunriseMode() ? bundle.getSunrise() : bundle.getSunset();
+				if (nextTimeDate != null) {
+					long now = System.currentTimeMillis();
+					if (isLocationChanged || now >= cachedNextTime) {
+						Calendar calendar = Calendar.getInstance();
+						calendar.setTime(nextTimeDate);
+						// If sunrise or sunset has passed today, move the date to the next day
+						if (calendar.getTimeInMillis() <= now) {
+							calendar.add(Calendar.DAY_OF_MONTH, 1);
+						}
+						cachedNextTime = calendar.getTimeInMillis();
+					}
+					return cachedNextTime;
 				}
-				cachedNextTime = calendar.getTimeInMillis();
 			}
-			return cachedNextTime;
 		}
 		return -1;
 	}

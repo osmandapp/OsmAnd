@@ -4957,4 +4957,18 @@
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
     <string name="storage_migration_fragment_close_descr">Das Kopieren ist erfolgt für %1$s%%. Wenn Sie jetzt abbrechen, funktioniert die Anwendung möglicherweise nicht richtig.</string>
+    <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
+    <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
+    <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
+    <string name="temperature_layer">Temperaturebene</string>
+    <string name="pressure_layer">Luftdruckebene</string>
+    <string name="wind_layer">Windebene</string>
+    <string name="cloud_layer">Bewölkungsebene</string>
+    <string name="precipitation_layer">Niederschlagsebene</string>
+    <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
+    <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
+    <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
+    <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
 </resources>

@@ -4596,4 +4596,72 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="external_sensor_widgets">ANT+ widget-ak</string>
     <string name="purchases_feature_desc_cross_buy">Erabili zure harpidetza-abantailak plataforma ezberdinetan (Android/iOS/Web) kostu gehigarririk gabe.</string>
     <string name="map_widget_target_distance">Kameratik xederako distantzia</string>
+    <string name="map_settings_weather_temp">Tenperatura</string>
+    <string name="map_settings_weather_air_pressure">Presio atmosferikoa</string>
+    <string name="map_settings_weather_wind">Haizea</string>
+    <string name="map_settings_weather_cloud">Hodeiak</string>
+    <string name="map_settings_weather_precip">Prezipitazioak</string>
+    <string name="shared_string_weather">Eguraldia</string>
+    <string name="measurement_units">Neurketa-unitateak</string>
+    <string name="explore_weather_forecast">Arakatu eguraldiaren iragarpena.</string>
+    <string name="shared_string_contours">Ingerada</string>
+    <string name="shared_string_layers">Geruzak</string>
+    <string name="empty_screen_weather_contours">Aktibatu eguraldiaren sestrak mapan ikusteko.</string>
+    <string name="empty_screen_weather_pressure_layer">Aktibatu presio-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_clouds_layer">Aktibatu hodeien estaldura geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_wind_layer">Aktibatu haize-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_temperature_layer">Aktibatu tenperatura-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_precipitation_layer">Aktibatu prezipitazio-geruza mapan ikusteko.</string>
+    <string name="empty_screen_view_selected_weather_data">Aktibatu hautatutako eguraldiaren datuak mapan ikusteko.</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_milimeters">Milimetroak</string>
+    <string name="weather_precip_inches">Hazbeteak</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_miles_per_hour">Miliak orduko</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_knots">Korapiloak</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometro orduko</string>
+    <string name="weather_wind_meters_per_second">Metro/segundo</string>
+    <string name="precipitation_widget_desc">Uneko mapa-zentrorako prezipitazioa erakusten du.</string>
+    <string name="temperature_widget_desc">Uneko mapa-zentroaren tenperatura erakusten du.</string>
+    <string name="switch_mode_by_tapping_on_widget">Aldatu modua widget-a sakatuta.</string>
+    <string name="map_widget_sunset_desc">Hurrengo ilunabarraren ordua edo ilunabarrera arte geratzen den denbora erakusten du.</string>
+    <string name="map_widget_sunrise_desc">Hurrengo egunsentiaren ordua edo eguzkia atera arte geratzen den denbora erakusten du.</string>
+    <string name="map_widget_group_sunrise_sunset">Egunsentia, ilunabarra</string>
+    <string name="shared_string_time_left">Falta den denbora</string>
+    <string name="shared_string_sunset">Ilunabarra</string>
+    <string name="shared_string_sunrise">Egunsentia</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Widget hauek hurrengo egunsentiari eta ilunabarrari buruzko informazioa erakusten dute.</string>
+    <string name="weather_plugin_description">Ematen du
+\n- 24 orduko eta 7 eguneko eguraldiaren iragarpena 5 geruza dituena
+\n- Kokapenean oinarritutako widgetak
+\n- Tenperatura/presioaren isolineak
+\n
+\nEguraldiaren datuak Global Forecast System-ek (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) ematen ditu.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Lerroaren kolore-eskema</string>
+    <string name="depth_contour_lines">Sakoneraren sestra-kurbak</string>
+    <string name="turn_on_nautical_depth_description">Aktibatu itsas-sakoneraren datuak mapan ikusteko.</string>
+    <string name="quick_action_temperature_layer">Tenperatura-geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_precipitation_layer">Prezipitazio-geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_wind_layer">Haizearen geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_cloud_layer">Hodeien geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_air_pressure_layer">Airearen presioaren geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="temperature_layer">Tenperaturaren geruza</string>
+    <string name="pressure_layer">Presioaren geruza</string>
+    <string name="wind_layer">Haizearen geruza</string>
+    <string name="cloud_layer">Hodeien geruza</string>
+    <string name="precipitation_layer">Prezipitazioen geruza</string>
+    <string name="shared_string_next_sunset">Hurrengo ilunabarra</string>
+    <string name="shared_string_next_sunrise">Hurrengo egunsentia</string>
+    <string name="weather_offline_forecast">Lineaz kanpoko iragarpena</string>
+    <string name="weather_online_cache">Lineako cachea</string>
+    <string name="weather_widgets_secondary_desc">Neurketa-unitateak Eguraldia pluginaren ezarpenetan alda daitezke.</string>
+    <string name="clouds_widget_desc">Uneko mapa-zentroaren hodei-estaldura erakusten du.</string>
+    <string name="wind_widget_desc">Uneko mapa-zentrorako haizearen abiadura bistaratzen du.</string>
+    <string name="rendering_attr_depthContourWidth_name">Lerroaren zabalera</string>
+    <string name="storage_migration_fragment_close_descr">Kopiatzen %1$s%% -ra. Orain gelditzen bazara, baliteke aplikazioak behar bezala ez funtzionatzea.</string>
+    <string name="air_pressure_widget_desc">Uneko mapa-zentrorako presio atmosferikoa bistaratzen du.</string>
 </resources>

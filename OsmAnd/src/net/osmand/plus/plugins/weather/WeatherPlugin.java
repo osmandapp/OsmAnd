@@ -3,6 +3,13 @@ package net.osmand.plus.plugins.weather;
 import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
@@ -34,17 +41,12 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherRasterLayer.WeatherLayer;
-import net.osmand.plus.plugins.weather.units.CloudConstants;
-import net.osmand.plus.plugins.weather.units.PrecipConstants;
-import net.osmand.plus.plugins.weather.units.PressureConstants;
-import net.osmand.plus.plugins.weather.units.TemperatureConstants;
-import net.osmand.plus.plugins.weather.units.WindConstants;
+import net.osmand.plus.plugins.weather.units.CloudUnit;
+import net.osmand.plus.plugins.weather.units.PrecipitationUnit;
+import net.osmand.plus.plugins.weather.units.PressureUnit;
+import net.osmand.plus.plugins.weather.units.TemperatureUnit;
+import net.osmand.plus.plugins.weather.units.WindUnit;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.actions.ShowHideAirPressureLayerAction;
-import net.osmand.plus.quickaction.actions.ShowHideCloudLayerAction;
-import net.osmand.plus.quickaction.actions.ShowHidePrecipitationLayerAction;
-import net.osmand.plus.quickaction.actions.ShowHideTemperatureLayerAction;
-import net.osmand.plus.quickaction.actions.ShowHideWindLayerAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -86,11 +88,29 @@ public class WeatherPlugin extends OsmandPlugin {
 	public final OsmandPreference<Integer> WX_CONTOURS_TRANSPARENCY;
 	public final EnumStringPreference<WeatherInfoType> WX_CONTOURS_TYPE;
 
-	public final EnumStringPreference<TemperatureConstants> WX_UNIT_TEMPERATURE;
-	public final EnumStringPreference<PrecipConstants> WX_UNIT_PRECIPITATION;
-	public final EnumStringPreference<WindConstants> WX_UNIT_WIND;
-	public final EnumStringPreference<CloudConstants> WX_UNIT_CLOUDS;
-	public final EnumStringPreference<PressureConstants> WX_UNIT_PRESSURE;
+	public final EnumStringPreference<WindUnit> weatherWindUnit;
+	public final EnumStringPreference<CloudUnit> weatherCloudUnit;
+	public final EnumStringPreference<TemperatureUnit> weatherTempUnit;
+	public final EnumStringPreference<PressureUnit> weatherPressureUnit;
+	public final EnumStringPreference<PrecipitationUnit> weatherPrecipUnit;
+
+	public final CommonPreference<Boolean> weatherTemp;
+	public final CommonPreference<Boolean> weatherWind;
+	public final CommonPreference<Boolean> weatherCloud;
+	public final CommonPreference<Boolean> weatherPrecip;
+	public final CommonPreference<Boolean> weatherPressure;
+
+	public final CommonPreference<Float> weatherTempAlpha;
+	public final CommonPreference<Float> weatherWindAlpha;
+	public final CommonPreference<Float> weatherCloudAlpha;
+	public final CommonPreference<Float> weatherPrecipAlpha;
+	public final CommonPreference<Float> weatherPressureAlpha;
+
+	public final CommonPreference<Boolean> weatherTempUnitAuto;
+	public final CommonPreference<Boolean> weatherWindUnitAuto;
+	public final CommonPreference<Boolean> weatherCloudUnitAuto;
+	public final CommonPreference<Boolean> weatherPrecipUnitAuto;
+	public final CommonPreference<Boolean> weatherPressureUnitAuto;
 
 	public static final String WEATHER_TEMP_CONTOUR_LINES_ATTR = "weatherTempContours";
 	public static final String WEATHER_PRESSURE_CONTOURS_LINES_ATTR = "weatherPressureContours";
@@ -127,16 +147,32 @@ public class WeatherPlugin extends OsmandPlugin {
 		WX_CONTOURS_TYPE = (EnumStringPreference<WeatherInfoType>) registerEnumStringPreference(
 				"map_setting_wx_contours_type", WeatherInfoType.TEMPERATURE, WeatherInfoType.values(), WeatherInfoType.class).makeProfile();
 
-		WX_UNIT_TEMPERATURE = (EnumStringPreference<TemperatureConstants>) registerEnumStringPreference(
-				"map_settings_weather_temp", TemperatureConstants.CELSIUS, TemperatureConstants.values(), TemperatureConstants.class).makeProfile();
-		WX_UNIT_PRESSURE = (EnumStringPreference<PressureConstants>) registerEnumStringPreference(
-				"map_settings_weather_pressure", PressureConstants.MILLIMETERS_OF_MERCURY, PressureConstants.values(), PressureConstants.class).makeProfile();
-		WX_UNIT_WIND = (EnumStringPreference<WindConstants>) registerEnumStringPreference(
-				"map_settings_weather_wind", WindConstants.METERS_PER_SECOND, WindConstants.values(), WindConstants.class).makeProfile();
-		WX_UNIT_CLOUDS = (EnumStringPreference<CloudConstants>) registerEnumStringPreference(
-				"map_settings_weather_cloud", CloudConstants.PERCENT, CloudConstants.values(), CloudConstants.class).makeProfile();
-		WX_UNIT_PRECIPITATION = (EnumStringPreference<PrecipConstants>) registerEnumStringPreference(
-				"map_settings_weather_precip", PrecipConstants.MILIMETERS, PrecipConstants.values(), PrecipConstants.class).makeProfile();
+		weatherTempUnit = (EnumStringPreference<TemperatureUnit>) registerEnumStringPreference(
+				"map_settings_weather_temp", TemperatureUnit.CELSIUS, TemperatureUnit.values(), TemperatureUnit.class).makeProfile();
+		weatherPressureUnit = (EnumStringPreference<PressureUnit>) registerEnumStringPreference(
+				"map_settings_weather_pressure", PressureUnit.MILLIMETERS_OF_MERCURY, PressureUnit.values(), PressureUnit.class).makeProfile();
+		weatherWindUnit = (EnumStringPreference<WindUnit>) registerEnumStringPreference(
+				"map_settings_weather_wind", WindUnit.METERS_PER_SECOND, WindUnit.values(), WindUnit.class).makeProfile();
+		weatherCloudUnit = (EnumStringPreference<CloudUnit>) registerEnumStringPreference(
+				"map_settings_weather_cloud", CloudUnit.PERCENT, CloudUnit.values(), CloudUnit.class).makeProfile();
+		weatherPrecipUnit = (EnumStringPreference<PrecipitationUnit>) registerEnumStringPreference(
+				"map_settings_weather_precip", PrecipitationUnit.MILIMETERS, PrecipitationUnit.values(), PrecipitationUnit.class).makeProfile();
+
+		weatherTemp = registerBooleanPreference("weatherTemp", false).makeProfile();
+		weatherTempUnitAuto = registerBooleanPreference("weatherTempUnitAuto", true).makeProfile();
+		weatherTempAlpha = registerFloatPreference("weatherTempAlpha", 0.5f).makeProfile();
+		weatherPressure = registerBooleanPreference("weatherPressure", false).makeProfile();
+		weatherPressureUnitAuto = registerBooleanPreference("weatherPressureUnitAuto", true).makeProfile();
+		weatherPressureAlpha = registerFloatPreference("weatherPressureAlpha", 0.6f).makeProfile();
+		weatherWind = registerBooleanPreference("weatherWind", false).makeProfile();
+		weatherWindUnitAuto = registerBooleanPreference("weatherWindUnitAuto", true).makeProfile();
+		weatherWindAlpha = registerFloatPreference("weatherWindToolbarAlpha", 0.6f).makeProfile();
+		weatherCloud = registerBooleanPreference("weatherCloud", false).makeProfile();
+		weatherCloudUnitAuto = registerBooleanPreference("weatherCloudUnitAuto", true).makeProfile();
+		weatherCloudAlpha = registerFloatPreference("weatherCloudAlpha", 0.5f).makeProfile();
+		weatherPrecip = registerBooleanPreference("weatherPrecip", false).makeProfile();
+		weatherPrecipUnitAuto = registerBooleanPreference("weatherPrecipUnitAuto", true).makeProfile();
+		weatherPrecipAlpha = registerFloatPreference("weatherPrecipAlpha", 0.7f).makeProfile();
 	}
 
 	@Override
@@ -151,20 +187,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return app.useOpenGlRenderer()
-				&& !app.getSettings().OPENGL_RENDER_FAILED.get()
-				&& super.isEnabled();
-	}
-
-	@Override
-	protected List<QuickActionType> getQuickActionTypes() {
-		List<QuickActionType> action = new ArrayList<>();
-		action.add(ShowHideTemperatureLayerAction.TYPE);
-		action.add(ShowHideWindLayerAction.TYPE);
-		action.add(ShowHideAirPressureLayerAction.TYPE);
-		action.add(ShowHidePrecipitationLayerAction.TYPE);
-		action.add(ShowHideCloudLayerAction.TYPE);
-		return action;
+		return app.useOpenGlRenderer() && super.isEnabled();
 	}
 
 	@Override
@@ -192,9 +215,16 @@ public class WeatherPlugin extends OsmandPlugin {
 		return !InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
-		return SettingsScreenType.WEATHER_SETTINGS;
+		return WEATHER_SETTINGS;
+	}
+
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return WEATHER;
 	}
 
 	@Override
@@ -242,6 +272,17 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> action = new ArrayList<>();
+		action.add(ShowHideTemperatureLayerAction.TYPE);
+		action.add(ShowHideWindLayerAction.TYPE);
+		action.add(ShowHideAirPressureLayerAction.TYPE);
+		action.add(ShowHidePrecipitationLayerAction.TYPE);
+		action.add(ShowHideCloudLayerAction.TYPE);
+		return action;
+	}
+
+	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
 	                                               @NonNull MapActivity mapActivity,
 	                                               @NonNull List<RenderingRuleProperty> customRules) {
@@ -285,6 +326,23 @@ public class WeatherPlugin extends OsmandPlugin {
 			return TextUtils.join(", ", titles);
 		}
 		return null;
+	}
+
+	@Override
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+
+		if (weatherLayerLow != null) {
+			mapView.removeLayer(weatherLayerLow);
+		}
+		if (weatherLayerHigh != null) {
+			mapView.removeLayer(weatherLayerHigh);
+		}
+		if (weatherContourLayer != null) {
+			mapView.removeLayer(weatherContourLayer);
+		}
+		createLayers();
 	}
 
 	@Override
@@ -354,7 +412,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings cloudBandSettings = new GeoBandSettings(cloudUnit, cloudUnitFormatGeneral,
 				cloudUnitFormatPrecise, "%", cloudTransparency, cloudColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set(WeatherBand.WEATHER_BAND_CLOUD, cloudBandSettings);
+		bandSettings.set(WEATHER_BAND_CLOUD, cloudBandSettings);
 
 		String tempUnit = "°C";
 		String tempUnitFormatGeneral = "%d";
@@ -825,7 +883,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings tempBandSettings = new GeoBandSettings(tempUnit, tempUnitFormatGeneral,
 				tempUnitFormatPrecise, "°C", tempTransparency, tempColorProfilePath,
 				tempContourStyleName, contourLevels, contourTypes);
-		bandSettings.set(WeatherBand.WEATHER_BAND_TEMPERATURE, tempBandSettings);
+		bandSettings.set(WEATHER_BAND_TEMPERATURE, tempBandSettings);
 
 		String pressureUnit = "mmHg";
 		String pressureUnitFormatGeneral = "%d";
@@ -1124,7 +1182,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings pressureBandSettings = new GeoBandSettings(pressureUnit, pressureUnitFormatGeneral,
 				pressureUnitFormatPrecise, "Pa", pressureTransparency, pressureColorProfilePath,
 				pressureContourStyleName, contourLevels, contourTypes);
-		bandSettings.set(WeatherBand.WEATHER_BAND_PRESSURE, pressureBandSettings);
+		bandSettings.set(WEATHER_BAND_PRESSURE, pressureBandSettings);
 
 		String windUnit = "m/s";
 		String windUnitFormatGeneral = "%d";
@@ -1135,7 +1193,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings windBandSettings = new GeoBandSettings(windUnit, windUnitFormatGeneral,
 				windUnitFormatPrecise, "m/s", windTransparency, windColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set(WeatherBand.WEATHER_BAND_WIND_SPEED, windBandSettings);
+		bandSettings.set(WEATHER_BAND_WIND_SPEED, windBandSettings);
 
 		String precipUnit = "mm";
 		String precipUnitFormatGeneral = "%d";
@@ -1146,7 +1204,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		GeoBandSettings precipBandSettings = new GeoBandSettings(precipUnit, precipUnitFormatGeneral,
 				precipUnitFormatPrecise, "kg/(m^2 s)", precipTransparency, precipColorProfilePath,
 				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
-		bandSettings.set(WeatherBand.WEATHER_BAND_PRECIPITATION, precipBandSettings);
+		bandSettings.set(WEATHER_BAND_PRECIPITATION, precipBandSettings);
 
 		weatherResourcesManager.setBandSettings(bandSettings);
 		bandsSettingsVersion.incrementAndGet();
@@ -1307,15 +1365,15 @@ public class WeatherPlugin extends OsmandPlugin {
 	public EnumStringPreference getUnitsPreference(@NonNull WeatherInfoType layer) {
 		switch (layer) {
 			case TEMPERATURE:
-				return WX_UNIT_TEMPERATURE;
+				return weatherTempUnit;
 			case PRESSURE:
-				return WX_UNIT_PRESSURE;
+				return weatherPressureUnit;
 			case WIND:
-				return WX_UNIT_WIND;
+				return weatherWindUnit;
 			case CLOUDS:
-				return WX_UNIT_CLOUDS;
+				return weatherCloudUnit;
 			case PRECIPITATION:
-				return WX_UNIT_PRECIPITATION;
+				return weatherPrecipUnit;
 			default:
 				return null;
 		}
@@ -1324,11 +1382,11 @@ public class WeatherPlugin extends OsmandPlugin {
 	@NonNull
 	public String[] getUnitsPreferencesIds() {
 		return new String[] {
-				WX_UNIT_TEMPERATURE.getId(),
-				WX_UNIT_PRECIPITATION.getId(),
-				WX_UNIT_WIND.getId(),
-				WX_UNIT_CLOUDS.getId(),
-				WX_UNIT_PRESSURE.getId()
+				weatherTempUnit.getId(),
+				weatherPrecipUnit.getId(),
+				weatherWindUnit.getId(),
+				weatherCloudUnit.getId(),
+				weatherPressureUnit.getId()
 		};
 	}
 }

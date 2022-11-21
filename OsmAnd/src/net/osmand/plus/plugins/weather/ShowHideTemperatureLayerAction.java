@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.plugins.weather;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,26 +11,24 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.weather.WeatherInfoType;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
-public class ShowHidePrecipitationLayerAction extends QuickAction {
+public class ShowHideTemperatureLayerAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(40,
-			"precipitation.layer.showhide", ShowHidePrecipitationLayerAction.class)
+	public static final QuickActionType TYPE = new QuickActionType(39,
+			"temperature.layer.showhide", ShowHideTemperatureLayerAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
-			.nameRes(R.string.precipitation_layer)
-			.iconRes(R.drawable.ic_action_precipitation).nonEditable()
+			.nameRes(R.string.temperature_layer)
+			.iconRes(R.drawable.ic_action_thermometer).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
-	public ShowHidePrecipitationLayerAction() {
+	public ShowHideTemperatureLayerAction() {
 		super(TYPE);
 	}
 
-	public ShowHidePrecipitationLayerAction(QuickAction quickAction) {
+	public ShowHideTemperatureLayerAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
@@ -39,7 +37,7 @@ public class ShowHidePrecipitationLayerAction extends QuickAction {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
 		if (weatherPlugin != null) {
-			weatherPlugin.toggleLayerEnable(appMode, WeatherInfoType.PRECIPITATION, !weatherPlugin.isLayerEnabled(appMode, WeatherInfoType.PRECIPITATION));
+			weatherPlugin.toggleLayerEnable(appMode, WeatherInfoType.TEMPERATURE, !weatherPlugin.isLayerEnabled(appMode, WeatherInfoType.TEMPERATURE));
 		}
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
@@ -48,7 +46,7 @@ public class ShowHidePrecipitationLayerAction extends QuickAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
-		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(R.string.quick_action_precipitation_layer));
+		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(R.string.quick_action_temperature_layer));
 		parent.addView(view);
 	}
 
@@ -62,6 +60,6 @@ public class ShowHidePrecipitationLayerAction extends QuickAction {
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		return weatherPlugin.isLayerEnabled(application.getSettings().getApplicationMode(), WeatherInfoType.PRECIPITATION);
+		return weatherPlugin.isLayerEnabled(application.getSettings().getApplicationMode(), WeatherInfoType.TEMPERATURE);
 	}
 }
