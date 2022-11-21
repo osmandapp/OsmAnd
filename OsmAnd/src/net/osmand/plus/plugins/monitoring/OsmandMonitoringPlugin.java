@@ -154,6 +154,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final int[] MINUTES = {2, 3, 5};
 	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.MONITORING_SETTINGS;
