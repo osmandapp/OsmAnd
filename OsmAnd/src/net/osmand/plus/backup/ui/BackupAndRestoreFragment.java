@@ -16,11 +16,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -29,7 +26,9 @@ import net.osmand.plus.backup.ui.status.BackupStatusFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
@@ -147,31 +146,11 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAp
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {
-
-	}
-
-	@Override
-	public void onGetItems() {
-
-	}
-
-	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof InAppPurchaseListener && fragment.isAdded()) {
 				((BackupStatusFragment) fragment).onItemPurchased(sku, active);
 			}
 		}
-	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {
-
-	}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {
-
 	}
 }

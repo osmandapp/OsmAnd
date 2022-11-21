@@ -51,15 +51,15 @@ public class ShowHidePrecipitationLayerAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		String nameRes = application.getString(getNameRes());
-		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
-		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
+	public String getActionText(OsmandApplication app) {
+		String nameRes = app.getString(getNameRes());
+		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash(OsmandApplication app) {
 		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		return weatherPlugin.isLayerEnabled(application.getSettings().getApplicationMode(), WeatherInfoType.PRECIPITATION);
+		return weatherPlugin.isLayerEnabled(app.getSettings().getApplicationMode(), WeatherInfoType.PRECIPITATION);
 	}
 }

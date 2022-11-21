@@ -74,15 +74,25 @@ public abstract class InAppPurchaseHelper {
 
 	public interface InAppPurchaseListener {
 
-		void onError(InAppPurchaseTaskType taskType, String error);
+		default void onError(InAppPurchaseTaskType taskType, String error) {
 
-		void onGetItems();
+		}
 
-		void onItemPurchased(String sku, boolean active);
+		default void onGetItems() {
 
-		void showProgress(InAppPurchaseTaskType taskType);
+		}
 
-		void dismissProgress(InAppPurchaseTaskType taskType);
+		default void onItemPurchased(String sku, boolean active) {
+
+		}
+
+		default void showProgress(InAppPurchaseTaskType taskType) {
+
+		}
+
+		default void dismissProgress(InAppPurchaseTaskType taskType) {
+
+		}
 	}
 
 	public interface InAppPurchaseInitCallback {
