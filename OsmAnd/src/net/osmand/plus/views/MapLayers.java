@@ -121,7 +121,6 @@ public class MapLayers {
 	}
 
 	public void createLayers(@NonNull OsmandMapTileView mapView) {
-		boolean useOpenGLRender = app.getSettings().USE_OPENGL_RENDER.get() && NativeCore.isAvailable();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer(app);
 		// 5.95 all labels
