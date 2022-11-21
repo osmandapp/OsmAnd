@@ -4719,7 +4719,7 @@
     <string name="marker_1st">Erste Markierung</string>
     <string name="marker_2nd">Zweite Markierung</string>
     <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
-    <string name="routing_attr_goods_restrictions_name">Warenlieferung</string>
+    <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
     <string name="accessibility_2d_view_off">2.5D-Ansicht aus</string>
     <string name="accessibility_2d_view_on">2.5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>

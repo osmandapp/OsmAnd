@@ -4683,7 +4683,7 @@
     <string name="transport_hazmat_yes_desc">Виберіть відповідну категорію.</string>
     <string name="transport_hazmat_no_desc">На дорогах і тунелях можуть бути введені обмеження на перевезення небезпечних матеріалів.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
-    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
+    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу для легких транспортних засобів (з вантажами)</string>
     <string name="co2_mission">Викиди CO2</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_electric_name">Електричний</string>
@@ -4715,7 +4715,7 @@
     <string name="reset_all_settings_desc">Скинути всі налаштування до типових\?</string>
     <string name="goods_delivery_desc">Транспортні засоби доставляння можуть підлягати обмеженням на деяких дорогах.</string>
     <string name="map_marker_average_speed_desc">Укажіть часовий інтервал для усереднення швидкості (використовується для оцінки часу прибуття).</string>
-    <string name="routing_attr_goods_restrictions_name">Доставлення товарів</string>
+    <string name="routing_attr_goods_restrictions_name">Доставлення вантажів</string>
     <string name="accessibility_2d_view_off">Огляд 2.5D вимкнено</string>
     <string name="accessibility_2d_view_on">Огляд 2.5D увімкнено</string>
     <string name="download_complete">Завантаження завершено</string>
