@@ -233,8 +233,11 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.preferredZoom = 17;
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
-					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
+					} else {
+						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+						if (matcher.matches(sr.localeName)) {
+							resultMatcher.publish(sr);
+						}
 					}
 				}
 			}
@@ -345,9 +348,11 @@ public class QuickSearchHelper implements ResourceListener {
 				if (phrase.getFullSearchPhrase().length() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
-				} else if (phrase.getFullNameStringMatcher().matches(sr.localeName)) {
-					phrase.countUnknownWordsMatchMainResult(sr);
-					resultMatcher.publish(sr);
+				} else {
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+					if (matcher.matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
 				}
 			}
 			return true;
