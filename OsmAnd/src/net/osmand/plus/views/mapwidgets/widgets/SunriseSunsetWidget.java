@@ -117,7 +117,7 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 		if (previousLatLon != null && newLatLon != null) {
 			double lat = previousLatLon.getLatitude();
 			double newLat = newLatLon.getLatitude();
-			return Math.abs(lat - newLat) > 0.001;
+			return Math.abs(lat - newLat) <= 0.001;
 		}
 		return false;
 	}

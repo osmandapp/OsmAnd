@@ -18,6 +18,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,11 +27,9 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.QListDouble;
-import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
-import net.osmand.core.jni.ZoomLevelStringListHash;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -48,7 +47,6 @@ import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -64,9 +62,13 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -296,25 +298,48 @@ public class WeatherPlugin extends OsmandPlugin {
 					R.string.explore_weather_forecast);
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
-			OsmandSettings settings = app.getSettings();
-			ApplicationMode appMode = settings.getApplicationMode();
-			ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
-				DashboardOnMap dashboard = mapActivity.getDashboard();
-				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
-				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
-				return false;
-			};
-			boolean selected = isAnyDataVisible(appMode);
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+
+			boolean selected = isWeatherEnabled(appMode);
 			adapter.addItem(new ContextMenuItem(WEATHER_ID)
 					.setTitleId(R.string.shared_string_weather, mapActivity)
 					.setDescription(selected ? getWeatherTypesSummary(getEnabledLayers(appMode)) : null)
 					.setSecondaryDescription(selected ? app.getString(R.string.shared_string_on) : null)
-					.setLayout(R.layout.configure_map_item_with_additional_right_desc)
 					.setSelected(selected)
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setIcon(R.drawable.ic_action_umbrella)
-					.setListener(listener));
+					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setListener(getPropertyItemClickListener(mapActivity)));
 		}
+	}
+
+	public ItemClickListener getPropertyItemClickListener(@NonNull MapActivity mapActivity) {
+		return new OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				DashboardOnMap dashboard = mapActivity.getDashboard();
+				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
+				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				WX_ENABLED.set(isChecked);
+				item.setSelected(WX_ENABLED.get());
+				item.setColor(app, WX_ENABLED.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setDescription(isChecked ? getWeatherTypesSummary(getEnabledLayers(app.getSettings().getApplicationMode())) : null);
+				if (uiAdapter != null) {
+					uiAdapter.onDataSetChanged();
+				}
+				mapActivity.refreshMapComplete();
+				return true;
+			}
+		};
 	}
 
 	@Nullable
@@ -414,7 +439,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		String cloudColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "cloud_color.txt").getAbsolutePath();
 		GeoBandSettings cloudBandSettings = new GeoBandSettings(cloudUnit, cloudUnitFormatGeneral,
 				cloudUnitFormatPrecise, "%", cloudTransparency, cloudColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+				"", new ZoomLevelDoubleListHash());
 		bandSettings.set(WEATHER_BAND_CLOUD, cloudBandSettings);
 
 		String tempUnit = "°C";
@@ -781,111 +806,9 @@ public class WeatherPlugin extends OsmandPlugin {
 		ld4.add(60.000000);
 		contourLevels.set(ZoomLevel.ZoomLevel4, ld4);
 
-		ZoomLevelStringListHash contourTypes = new ZoomLevelStringListHash();
-
-		QStringList sl9 = new QStringList();
-		sl9.add("-30°C");
-		sl9.add("-20°C");
-		sl9.add("-10°C");
-		sl9.add("-5°C");
-		sl9.add("0°C");
-		sl9.add("5°C");
-		sl9.add("10°C");
-		sl9.add("20°C");
-		sl9.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel9, sl9);
-		QStringList sl5 = new QStringList();
-		sl5.add("-30°C");
-		sl5.add("-20°C");
-		sl5.add("-10°C");
-		sl5.add("-5°C");
-		sl5.add("0°C");
-		sl5.add("5°C");
-		sl5.add("10°C");
-		sl5.add("20°C");
-		sl5.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel5, sl5);
-		QStringList sl10 = new QStringList();
-		sl10.add("-30°C");
-		sl10.add("-20°C");
-		sl10.add("-10°C");
-		sl10.add("-5°C");
-		sl10.add("0°C");
-		sl10.add("5°C");
-		sl10.add("10°C");
-		sl10.add("20°C");
-		sl10.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel10, sl10);
-		QStringList sl6 = new QStringList();
-		sl6.add("-30°C");
-		sl6.add("-20°C");
-		sl6.add("-10°C");
-		sl6.add("-5°C");
-		sl6.add("0°C");
-		sl6.add("5°C");
-		sl6.add("10°C");
-		sl6.add("20°C");
-		sl6.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel6, sl6);
-		QStringList sl11 = new QStringList();
-		sl11.add("-30°C");
-		sl11.add("-20°C");
-		sl11.add("-10°C");
-		sl11.add("-5°C");
-		sl11.add("0°C");
-		sl11.add("5°C");
-		sl11.add("10°C");
-		sl11.add("20°C");
-		sl11.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel11, sl11);
-		QStringList sl7 = new QStringList();
-		sl7.add("-30°C");
-		sl7.add("-20°C");
-		sl7.add("-10°C");
-		sl7.add("-5°C");
-		sl7.add("0°C");
-		sl7.add("5°C");
-		sl7.add("10°C");
-		sl7.add("20°C");
-		sl7.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel7, sl7);
-		QStringList sl12 = new QStringList();
-		sl12.add("-30°C");
-		sl12.add("-20°C");
-		sl12.add("-10°C");
-		sl12.add("-5°C");
-		sl12.add("0°C");
-		sl12.add("5°C");
-		sl12.add("10°C");
-		sl12.add("20°C");
-		sl12.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel12, sl12);
-		QStringList sl8 = new QStringList();
-		sl8.add("-30°C");
-		sl8.add("-20°C");
-		sl8.add("-10°C");
-		sl8.add("-5°C");
-		sl8.add("0°C");
-		sl8.add("5°C");
-		sl8.add("10°C");
-		sl8.add("20°C");
-		sl8.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel8, sl8);
-		QStringList sl4 = new QStringList();
-		sl4.add("-30°C");
-		sl4.add("-20°C");
-		sl4.add("-10°C");
-		sl4.add("-5°C");
-		sl4.add("0°C");
-		sl4.add("5°C");
-		sl4.add("10°C");
-		sl4.add("20°C");
-		sl4.add("30°C");
-		contourTypes.set(ZoomLevel.ZoomLevel4, sl4);
-
 		GeoBandSettings tempBandSettings = new GeoBandSettings(tempUnit, tempUnitFormatGeneral,
 				tempUnitFormatPrecise, "°C", tempTransparency, tempColorProfilePath,
-				tempContourStyleName, contourLevels, contourTypes);
+				tempContourStyleName, contourLevels);
 		bandSettings.set(WEATHER_BAND_TEMPERATURE, tempBandSettings);
 
 		String pressureUnit = "mmHg";
@@ -1107,84 +1030,9 @@ public class WeatherPlugin extends OsmandPlugin {
 		ld4.add(106656.000000);
 		contourLevels.set(ZoomLevel.ZoomLevel4, ld4);
 */
-		contourTypes = new ZoomLevelStringListHash();
-/*
-		QStringList sl9 = new QStringList();
-		sl9.add("97323mmHg");
-		sl9.add("98656mmHg");
-		sl9.add("99990mmHg");
-		sl9.add("101323mmHg");
-		sl9.add("102656mmHg");
-		sl9.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel9, sl9);
-		QStringList sl5 = new QStringList();
-		sl5.add("97323mmHg");
-		sl5.add("98656mmHg");
-		sl5.add("99990mmHg");
-		sl5.add("101323mmHg");
-		sl5.add("102656mmHg");
-		sl5.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel5, sl5);
-		QStringList sl10 = new QStringList();
-		sl10.add("97323mmHg");
-		sl10.add("98656mmHg");
-		sl10.add("99990mmHg");
-		sl10.add("101323mmHg");
-		sl10.add("102656mmHg");
-		sl10.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel10, sl10);
-		QStringList sl6 = new QStringList();
-		sl6.add("97323mmHg");
-		sl6.add("98656mmHg");
-		sl6.add("99990mmHg");
-		sl6.add("101323mmHg");
-		sl6.add("102656mmHg");
-		sl6.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel6, sl6);
-		QStringList sl11 = new QStringList();
-		sl11.add("97323mmHg");
-		sl11.add("98656mmHg");
-		sl11.add("99990mmHg");
-		sl11.add("101323mmHg");
-		sl11.add("102656mmHg");
-		sl11.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel11, sl11);
-		QStringList sl7 = new QStringList();
-		sl7.add("97323mmHg");
-		sl7.add("98656mmHg");
-		sl7.add("99990mmHg");
-		sl7.add("101323mmHg");
-		sl7.add("102656mmHg");
-		sl7.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel7, sl7);
-		QStringList sl12 = new QStringList();
-		sl12.add("97323mmHg");
-		sl12.add("98656mmHg");
-		sl12.add("99990mmHg");
-		sl12.add("101323mmHg");
-		sl12.add("102656mmHg");
-		sl12.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel12, sl12);
-		QStringList sl8 = new QStringList();
-		sl8.add("97323mmHg");
-		sl8.add("98656mmHg");
-		sl8.add("99990mmHg");
-		sl8.add("101323mmHg");
-		sl8.add("102656mmHg");
-		sl8.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel8, sl8);
-		QStringList sl4 = new QStringList();
-		sl4.add("97323mmHg");
-		sl4.add("98656mmHg");
-		sl4.add("99990mmHg");
-		sl4.add("101323mmHg");
-		sl4.add("102656mmHg");
-		sl4.add("103989mmHg");
-		contourTypes.set(ZoomLevel.ZoomLevel4, sl4);
-*/
 		GeoBandSettings pressureBandSettings = new GeoBandSettings(pressureUnit, pressureUnitFormatGeneral,
 				pressureUnitFormatPrecise, "Pa", pressureTransparency, pressureColorProfilePath,
-				pressureContourStyleName, contourLevels, contourTypes);
+				pressureContourStyleName, contourLevels);
 		bandSettings.set(WEATHER_BAND_PRESSURE, pressureBandSettings);
 
 		String windUnit = "m/s";
@@ -1195,7 +1043,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		String windColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "wind_color.txt").getAbsolutePath();
 		GeoBandSettings windBandSettings = new GeoBandSettings(windUnit, windUnitFormatGeneral,
 				windUnitFormatPrecise, "m/s", windTransparency, windColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+				"", new ZoomLevelDoubleListHash());
 		bandSettings.set(WEATHER_BAND_WIND_SPEED, windBandSettings);
 
 		String precipUnit = "mm";
@@ -1206,7 +1054,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		String precipColorProfilePath = new File(app.getAppPath(WEATHER_INDEX_DIR), "precip_color.txt").getAbsolutePath();
 		GeoBandSettings precipBandSettings = new GeoBandSettings(precipUnit, precipUnitFormatGeneral,
 				precipUnitFormatPrecise, "kg/(m^2 s)", precipTransparency, precipColorProfilePath,
-				"", new ZoomLevelDoubleListHash(), new ZoomLevelStringListHash());
+				"", new ZoomLevelDoubleListHash());
 		bandSettings.set(WEATHER_BAND_PRECIPITATION, precipBandSettings);
 
 		weatherResourcesManager.setBandSettings(bandSettings);
