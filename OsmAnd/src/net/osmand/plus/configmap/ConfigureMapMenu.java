@@ -109,6 +109,8 @@ public class ConfigureMapMenu {
 	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
 	public static final String SHOW_MTB_ROUTES = "showMtbRoutes";
 	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
+	public static final String SHOW_MTB_SCALE = "showMtbScale";
+	public static final String SHOW_MTB_SCALE_UPHILL = "showMtbScaleUphill";
 
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
@@ -437,6 +439,8 @@ public class ConfigureMapMenu {
 			String attrName = property.getAttrName();
 			if (Algorithms.stringsEqual(property.getCategory(), UI_CATEGORY_ROUTES)
 					&& !Algorithms.stringsEqual(attrName, CYCLE_NODE_NETWORK_ROUTES_ATTR)
+					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE)
+					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE_UPHILL)
 					&& !Algorithms.stringsEqual(attrName, SHOW_MTB_SCALE_IMBA_TRAILS)) {
 				routeAttrNames.add(attrName);
 			}
@@ -695,6 +699,8 @@ public class ConfigureMapMenu {
 				|| CURRENT_TRACK_WIDTH_ATTR.equals(attrName)
 				|| CYCLE_NODE_NETWORK_ROUTES_ATTR.equals(attrName)
 				|| SHOW_MTB_SCALE_IMBA_TRAILS.equals(attrName)
+				|| SHOW_MTB_SCALE.equals(attrName)
+				|| SHOW_MTB_SCALE_UPHILL.equals(attrName)
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
 				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
 				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
