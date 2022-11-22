@@ -3991,7 +3991,7 @@
 \nTutti i dati non salvati saranno persi.</string>
     <string name="on_pause">In pausa</string>
     <string name="app_restart_required">Il riavvio dell\'app è richiesto per applicare alcune impostazioni.</string>
-    <string name="routing_attr_height_obstacles_description">Il calcolo del percorso può evitare le salite ripide.</string>
+    <string name="routing_attr_height_obstacles_description">La proiezione del tempo di arrivo terrà conto dell\'impatto del guadagno di quota. Le preferenze di navigazione possono aiutare a evitare le salite ripide:</string>
     <string name="quick_action_coordinates_widget_descr">Un interruttore per mostrare o nascondere il widget delle Coordinate sulla mappa.</string>
     <string name="map_widget_distance_by_tap">Distanza dal tocco</string>
     <string name="latest_openstreetmap_update">Ultimo aggiornamento OpenStreetMap disponibile:</string>
@@ -4956,4 +4956,5 @@
     <string name="quick_action_temperature_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della temperatura.</string>
     <string name="quick_action_precipitation_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato delle precipitazioni.</string>
     <string name="quick_action_cloud_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della nuvolosità.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostra la difficoltà MTB</string>
 </resources>

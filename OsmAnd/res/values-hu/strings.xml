@@ -449,7 +449,7 @@
     <string name="add_new_rule">Új szabály hozzáadása</string>
     <string name="transport_Routes">Útvonalak</string>
     <string name="transport_Stop">Megálló</string>
-    <string name="transport_stops">megállók</string>
+    <string name="transport_stops">megálló</string>
     <string name="transport_search_after">Következő útiterv</string>
     <string name="transport_search_before">Előző útiterv</string>
     <string name="transport_finish_search">Keresés befejezése</string>
