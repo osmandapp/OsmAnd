@@ -55,13 +55,7 @@ public class GeocodingUtilities {
 
 		@Override
 		public int compare(GeocodingResult o1, GeocodingResult o2) {
-			LatLon l1 = o1.getLocation();
-			LatLon l2 = o2.getLocation();
-			if (l1 == null || l2 == null) {
-				return l2 == l1 ? 0 : (l1 == null ? -1 : 1);
-			}
-			return Double.compare(MapUtils.getDistance(l1, o1.searchPoint),
-					MapUtils.getDistance(l2, o2.searchPoint));
+			return Double.compare(o1.getDistance(), o2.getDistance());
 		}
 	};
 
@@ -429,6 +423,7 @@ public class GeocodingUtilities {
 					} else {
 						minBuildingDistance = Math.min(md, minBuildingDistance);
 					}
+					justified.get(0).dist = -1;//clear intermediate cached distance
 					complete.addAll(justified);
 				}
 			} else {
