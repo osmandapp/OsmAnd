@@ -1455,7 +1455,7 @@
     <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \"Nautische Karte\" unter \"Karte konfigurieren\".
 \n
 \nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
-    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die die Schwierigkeitsgrade anzeigen. Um dieses (Erweiterungs)Modul zu verwenden, aktivieren Sie es und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
+    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um dieses (Erweiterungs)Modul zu verwenden, aktivieren Sie es und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
 \nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Reisedetails, die die Kartendaten enthalten (insbesondere Straßen, Wege, Pfade und Orientierungspunkte). 
