@@ -18,6 +18,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +49,6 @@ import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -64,9 +64,13 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -296,15 +300,9 @@ public class WeatherPlugin extends OsmandPlugin {
 					R.string.explore_weather_forecast);
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
-			OsmandSettings settings = app.getSettings();
-			ApplicationMode appMode = settings.getApplicationMode();
-			ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
-				DashboardOnMap dashboard = mapActivity.getDashboard();
-				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
-				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
-				return false;
-			};
-			boolean selected = isAnyDataVisible(appMode);
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+
+			boolean selected = isWeatherEnabled(appMode);
 			adapter.addItem(new ContextMenuItem(WEATHER_ID)
 					.setTitleId(R.string.shared_string_weather, mapActivity)
 					.setDescription(selected ? getWeatherTypesSummary(getEnabledLayers(appMode)) : null)
@@ -313,8 +311,37 @@ public class WeatherPlugin extends OsmandPlugin {
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setIcon(R.drawable.ic_action_umbrella)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(listener));
+					.setListener(getPropertyItemClickListener(mapActivity)));
 		}
+	}
+
+	public ItemClickListener getPropertyItemClickListener(@NonNull MapActivity mapActivity) {
+		return new OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				DashboardOnMap dashboard = mapActivity.getDashboard();
+				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
+				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+			                                  @Nullable View view, @NotNull ContextMenuItem item,
+			                                  boolean isChecked) {
+				WX_ENABLED.set(isChecked);
+				item.setSelected(WX_ENABLED.get());
+				item.setColor(app, WX_ENABLED.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setDescription(isChecked ? getWeatherTypesSummary(getEnabledLayers(app.getSettings().getApplicationMode())) : null);
+				if (uiAdapter != null) {
+					uiAdapter.onDataSetChanged();
+				}
+				mapActivity.refreshMapComplete();
+				return true;
+			}
+		};
 	}
 
 	@Nullable
