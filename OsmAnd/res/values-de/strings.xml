@@ -4872,6 +4872,10 @@
 \n
 \n • Option zum Deaktivieren der Download-UUID hinzugefügt
 \n
+\n • Anpassbare Geschwindigkeitsvorhersagen für Höhen-abhängige Gehe-/Wander-/Renn-Zeiten
+\n
+\n • Audio-Ausgabe und Lautstärkeregler behoben
+\n
 \n</string>
     <string name="show_borders_of_downloaded_maps">Grenzen von heruntergeladenen Karten anzeigen</string>
     <string name="show_map_symbols">Kartensymbole anzeigen</string>
@@ -4971,4 +4975,8 @@
     <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
+    <string name="mtb_scale">MTB-Skala</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_segment_classification">Abschnitts-Klassifizierung</string>
+    <string name="mtb_imba">IMBA</string>
 </resources>
