@@ -83,7 +83,7 @@ public abstract class CommandPlayer {
 		this.settings = app.getSettings();
 		this.applicationMode = applicationMode;
 		this.voiceRouter = voiceRouter;
-		this.streamType = settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
+		this.streamType = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 		this.voiceProviderDir = voiceProviderDir;
 		this.language = defineVoiceProviderLanguage();
 		this.jsScope = initializeJsScope();
