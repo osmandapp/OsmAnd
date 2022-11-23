@@ -65,7 +65,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		}
 		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM
-				.getModeValue(applicationMode).toString());
+				.getModeValue(app.getRoutingHelper().getAppMode()).toString());
 	}
 
 	@NonNull
