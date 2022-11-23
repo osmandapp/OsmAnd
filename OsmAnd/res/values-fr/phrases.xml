@@ -4357,7 +4357,7 @@
     <string name="poi_playground_roundabout">Rond-point</string>
     <string name="poi_playground_splash_pad">Pataugeoire</string>
     <string name="poi_playground_structure">Structure</string>
-    <string name="poi_playground_climbingframe">Cadre d\'escalade</string>
+    <string name="poi_playground_climbingframe">Mur d\'escalade</string>
     <string name="poi_playground_climbingwall">Mur d\'escalade</string>
     <string name="poi_playground_horizontal_bar">Barre horizontale</string>
     <string name="poi_playground_activitypanel">Panneau d\'activité</string>
@@ -4372,11 +4372,11 @@
     <string name="poi_playground_teenshelter">Cabane pour enfants</string>
     <string name="poi_playground_youth_bench">Banc pour jeunes</string>
     <string name="poi_playground_speaking_tube">Tuyau pour parler</string>
-    <string name="poi_playground_basketswing">Balançoire-panier</string>
+    <string name="poi_playground_basketswing">Balançoire</string>
     <string name="poi_playground_basketrotator">Manège à panier</string>
     <string name="poi_playground_aerialrotator">Manège aérien</string>
     <string name="poi_playground_seesaw">Bascule</string>
-    <string name="poi_playground_exercise">Gym. extérieure</string>
+    <string name="poi_playground_exercise">Gymnastique de plein air</string>
     <string name="poi_playground_slide">Toboggan</string>
     <string name="poi_parking_fee_filter">Frais de stationnement</string>
     <string name="poi_access_yes">L\'accès est autorisé</string>
