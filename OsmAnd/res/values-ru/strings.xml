@@ -4970,4 +4970,8 @@
     <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с MTB-шкалой.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
+    <string name="mtb_imba">МАГВ (IMBA)</string>
+    <string name="mtb_imba_full">Международная ассоциация горных велосипедистов</string>
+    <string name="mtb_segment_classification">Классификация сегментов</string>
+    <string name="mtb_scale">MTB шкала</string>
 </resources>

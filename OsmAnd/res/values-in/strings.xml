@@ -4871,6 +4871,10 @@
 \n
 \n - Ditambahkan opsi untuk menonaktifkan UUID unduhan
 \n
+\n- Prakiraan kecepatan standar yang dapat disesuaikan untuk waktu perjalanan berjalan/mendaki/berlari yang bergantung pada ketinggian
+\n
+\n- Diperbaiki keluaran audio dan penggeser volume
+\n
 \n</string>
     <string name="external_sensors_support">Dukungan sensor eksternal</string>
     <string name="purchases_feature_desc_external_sensors">Tampilkan dan rekam data dari sensor eksternal: kecepatan sepeda, daya sepeda, irama, dan detak jantung.</string>
@@ -4972,4 +4976,8 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Tampilkan skala naik MTB</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Tampilkan jalur menurut skala naik MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Tampilkan skala MTB</string>
+    <string name="mtb_scale">Skala MTB</string>
+    <string name="mtb_imba">iMBA</string>
+    <string name="mtb_imba_full">Asosiasi Sepeda Gunung Internasional</string>
+    <string name="mtb_segment_classification">Klasifikasi segmen</string>
 </resources>

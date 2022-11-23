@@ -4860,7 +4860,7 @@
 \n
 \n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse
 \n
-\n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikadfærd
+\n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikopførsel
 \n
 \n • Indstillingen \"Vis position\" blev rettet
 \n
@@ -4871,6 +4871,10 @@
 \n • Der er tilføjet understøttelse af ANT+-sensorer
 \n
 \n • Tilføjet mulighed for at deaktivere UUID for download
+\n
+\n • Standardhastighed justerbar prognose for højdeafhængige gå-/vandre-/løbeturtider
+\n
+\n • Rettet lydoutput og lydstyrkereguleringen
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
@@ -4973,4 +4977,8 @@
     <string name="rendering_attr_showMtbScale_description">Vis spor efter MTB-skala.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_segment_classification">Klassificering af segmenter</string>
+    <string name="mtb_scale">MTB-skala</string>
 </resources>

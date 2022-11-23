@@ -231,7 +231,7 @@
     <string name="app_mode_subway">Mètro</string>
     <string name="app_mode_horse">Cavau</string>
     <string name="app_mode_helicopter">Elicoptèr</string>
-    <string name="app_mode_skiing">Esquí</string>
+    <string name="app_mode_skiing">Esquilh</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Fòrça marrit</string>
     <string name="hide_full_description">Amagar la descripcion completa</string>
     <string name="show_full_description">Mòstra la descripcion completa</string>
@@ -915,7 +915,7 @@
     <string name="quick_action_navigation_voice">Votz activa/desactivada</string>
     <string name="travel_routes">Percors toristics</string>
     <string name="turn_screen_on_navigation_instructions_descr">A cada indicacion de navigacion l\'ecran s\'esclairarà.</string>
-    <string name="default_speed_dialog_msg">Estima l\'ora d\'arribada dei rotas desconegudas e limita la velocitat de totei lei vias (podriá afectar lo percors)</string>
+    <string name="default_speed_dialog_msg">Estimar l\'ora d\'arribada dei rotas desconegudas e limitar la velocitat de totei lei vias (podriá afectar lo percors)</string>
     <string name="route_parameters_descr">Configurar lei paramètres dau percors</string>
     <string name="button_rate">Tant per cent</string>
     <string name="no_map_markers_found">Ajustar de marcadors sus la mapa</string>
@@ -2113,4 +2113,14 @@
     <string name="width_limit_description">Indicatz l\'ample de vòstre veïcul, de restriccions de passatge se pòdon rescontrar per lei veïcules larges.</string>
     <string name="routing_attr_width_name">Limit de largor</string>
     <string name="weight_limit_description">Indicatz lo pes de vòstre veïcul, de restriccions de passatge se pòdon rescontrar per lei veïcules pesants.</string>
+    <string name="app_mode_camper">Campatge</string>
+    <string name="app_mode_bicycle">Bicicleta</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sensa restriccions)</string>
+    <string name="app_mode_campervan">Autocaravana (RV)</string>
+    <string name="app_mode_utv">Tòcatòca</string>
+    <string name="app_mode_pedestrian">A pès</string>
+    <string name="transport">Transpòrt public</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="app_mode_car">Automobila</string>
+    <string name="app_mode_default">Mapa de basa</string>
 </resources>
