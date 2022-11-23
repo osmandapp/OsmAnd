@@ -7,21 +7,23 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum WindConstants {
+public enum WindUnit implements WeatherUnit {
 
-	METERS_PER_SECOND(R.string.weather_wind_meters_per_second, R.string.weather_wind_ms),
-	KILOMETERS_PER_HOUR(R.string.weather_wind_kilimeters_per_hour, R.string.weather_wind_kmh),
-	MILES_PER_HOUR(R.string.weather_wind_miles_per_hour, R.string.weather_wind_mph),
-	KNOTS(R.string.weather_wind_knots, R.string.weather_wind_kt);
+	METERS_PER_SECOND(R.string.weather_wind_meters_per_second, R.string.weather_wind_ms, ">m/s"),
+	KILOMETERS_PER_HOUR(R.string.weather_wind_kilimeters_per_hour, R.string.weather_wind_kmh, "km/h"),
+	MILES_PER_HOUR(R.string.weather_wind_miles_per_hour, R.string.weather_wind_mph, "mph"),
+	KNOTS(R.string.weather_wind_knots, R.string.weather_wind_kt, "kt");
 
 	@StringRes
 	private final int titleId;
 	@StringRes
 	private final int unitId;
+	private final String symbol;
 
-	WindConstants(@StringRes int titleId, @StringRes int unitId) {
+	WindUnit(@StringRes int titleId, @StringRes int unitId, @NonNull String symbol) {
 		this.titleId = titleId;
 		this.unitId = unitId;
+		this.symbol = symbol;
 	}
 
 	@StringRes
@@ -41,4 +43,9 @@ public enum WindConstants {
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
 	}
 
+	@NonNull
+	@Override
+	public String getSymbol() {
+		return symbol;
+	}
 }

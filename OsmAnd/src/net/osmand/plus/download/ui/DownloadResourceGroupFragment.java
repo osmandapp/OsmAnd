@@ -358,10 +358,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {
-	}
-
-	@Override
 	public void onGetItems() {
 		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
@@ -371,10 +367,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
-	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {
 	}
 
 	@Override

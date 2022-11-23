@@ -18,7 +18,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -524,6 +523,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
+
+				// for voice navigation. (routingAppMode may have changed.)
+				ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
+				if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
+					setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
+				}
 			}
 		};
 
@@ -652,7 +657,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 
-		long tm = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
@@ -694,12 +699,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportActionBar().hide();
 		}
 
-		// for voice navigation
+		// for voice navigation. Lags behind routingAppMode changes, hence repeated under onCalculationFinish()
 		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
 		if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
 			setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
-		} else {
-			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
 
 		applicationModeListener = prevAppMode -> app.runInUIThread(() -> {
@@ -758,8 +761,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
-		if (System.currentTimeMillis() - tm > 50) {
-			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+		if (System.currentTimeMillis() - time > 50) {
+			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
 		}
 
 		boolean showOsmAndWelcomeScreen = true;

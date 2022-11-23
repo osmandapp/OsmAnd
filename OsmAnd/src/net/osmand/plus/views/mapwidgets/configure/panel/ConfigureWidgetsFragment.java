@@ -361,21 +361,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {}
-
-	@Override
-	public void onGetItems() {}
-
-	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		onWidgetsConfigurationChanged();
 	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();

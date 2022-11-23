@@ -199,7 +199,11 @@ public class PointDescription {
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
 		int zoom = ctx.getMapView().getZoom();
-		String httpUrl = "https://osmand.net/go?lat=" + (lat) + "&lon=" + (lon) + "&z=" + zoom;
+		String latUrl = LocationConvert.convertLatitude(lat, LocationConvert.FORMAT_DEGREES, false);
+		String lonUrl = LocationConvert.convertLongitude(lon, LocationConvert.FORMAT_DEGREES, false);
+		latUrl = latUrl.substring(0, latUrl.length() - 1);
+		lonUrl = lonUrl.substring(0, lonUrl.length() - 1);
+		String httpUrl = "https://osmand.net/map?pin=" + latUrl + "," + lonUrl + "#" + zoom + "/" + latUrl + "/" + lonUrl;
 		results.put(LOCATION_URL, httpUrl);
 
 		int f = settings.COORDINATES_FORMAT.get();

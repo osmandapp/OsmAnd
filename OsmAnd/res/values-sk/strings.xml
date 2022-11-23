@@ -3601,7 +3601,9 @@
     <string name="storage_format">Formát úložiska</string>
     <string name="map_source_zoom_levels">Nastavte minimálnu a maximálnu úroveň priblíženia, kedy sa zobrazí alebo načíta online mapa.</string>
     <string name="tiles_storage_descr">Vyberte spôsob uloženia prevzatých dlaždíc.</string>
-    <string name="gpx_parse_error">GPX OsmAndu nemá správny tvar, prosím kontaktuje tím podpory pre bližšie preverenie.</string>
+    <string name="gpx_parse_error">Našli sa problémy so súborom GPX.
+\n
+\nMôžete kontaktovať podporu OsmAnd pre preskúmanie chyby.</string>
     <string name="screen_control">Ovládanie obrazovky</string>
     <string name="system_screen_timeout_descr">Vypne obrazovku po systémovom časovom limite.</string>
     <string name="turn_screen_on_navigation_instructions_descr">Každý navigačný pokyn zapne obrazovku.</string>
@@ -4012,7 +4014,7 @@
     <string name="purchases">Nákupy</string>
     <string name="routing_attr_short_way_description">Optimalizovaná kratšia trasa (úspora energie)</string>
     <string name="snap_to_road_descr">Ikona aktuálnej polohy bude prichytená k navigačnej trase</string>
-    <string name="routing_attr_height_obstacles_description">Výpočet trasy sa môže vyhnúť strmým stúpaniam.</string>
+    <string name="routing_attr_height_obstacles_description">Odhadovaný čas cesty zohľadní vplyv stúpania. V nastaveniach výpočtu trasy sa môžete vyhnúť strmým stúpaniam:</string>
     <string name="trip_recording_logging_interval_info">Interval zaznamenávania nastaví ako často bude OsmAnd zisťovať aktuálnu polohu.</string>
     <string name="trip_recording_save_and_continue">Uložiť a pokračovať</string>
     <string name="lost_data_warning">Všetky neuložené údaje budú stratené.</string>
@@ -4757,7 +4759,7 @@
     <string name="without_profiles_changing">Bez zmeny profilov</string>
     <string name="shared_string_only_missing">Len chýbajúce</string>
     <string name="download_tiles">Stiahnuť dlaždice</string>
-    <string name="attach_roads_descr">Aproximujte vašu stopu s trasou pomocou offline máp. Získate opravenú nadmorskú výšku cesty, informácie o ceste a zabočenia použité počas navigácie.</string>
+    <string name="attach_roads_descr">Aproximujte vašu stopu pomocou povolených ciest na medzi bodmi a pre priradenie presných navigačných pokynov a informácií o ceste.</string>
     <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
     <string name="external_sensors_plugin_name">Externé senzory</string>
     <string name="map_widget_altitude_map_center">Nadmorská výška: stred mapy</string>
@@ -4945,4 +4947,19 @@
     <string name="turn_on_nautical_depth_description">Zapnite pre zobrazenie námorných hĺbkových údajov na mape.</string>
     <string name="shared_string_time_left">Zostávajúci čas</string>
     <string name="switch_mode_by_tapping_on_widget">Prepnite režim stlačením nástroja.</string>
+    <string name="storage_migration_fragment_close_descr">Kopírovanie je hotové na %1$s%%. Ak teraz prerušíte, aplikácia nemusí správne pracovať.</string>
+    <string name="precipitation_layer">Vrstva zrážok</string>
+    <string name="rendering_attr_showMtbScale_name">Zobraziť náročnosť pre horské bicykle</string>
+    <string name="quick_action_wind_layer">Prepínač zobrazenia vrstvy vetra na mape.</string>
+    <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa náročnosti pre horské bicykle.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Zobraziť náročnosť stúpania pre horské bicykle</string>
+    <string name="quick_action_temperature_layer">Prepínač zobrazenia vrstvy teploty na mape.</string>
+    <string name="quick_action_precipitation_layer">Prepínač zobrazenia vrstvy zrážok na mape.</string>
+    <string name="cloud_layer">Vrstva oblakov</string>
+    <string name="quick_action_cloud_layer">Prepínač zobrazenia vrstvy oblakov na mape.</string>
+    <string name="quick_action_air_pressure_layer">Prepínač zobrazenia vrstvy atmosférického tlaku na mape.</string>
+    <string name="temperature_layer">Vrstva teploty</string>
+    <string name="pressure_layer">Vrstva tlaku</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Zobraziť trasy podľa náročnosti stúpania pre horské bicykle.</string>
+    <string name="wind_layer">Vrstva vetra</string>
 </resources>

@@ -120,9 +120,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 	private String getVoiceSystemInfo() {
 		String v ="";
-		v += " \u25CF App profile: " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
+		v += " \u25CF App routing profile: " + ((OsmandApplication) getApplication()).getRoutingHelper().getAppMode().getStringKey();
 
-		int stream = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+		int stream = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode());
 		if (stream == 3) {
 			v += "\n \u25CF Voice guidance output: Media/music audio";
 		} else if (stream == 5) {
@@ -232,7 +232,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "System info and settings:", builder(p));
 		addButton(ll, "\u25BA (11.1) (TAP TO FULLY POPULATE)\n" + getVoiceSystemInfo(), builder(p).attention(""));
 		addButton(ll, "\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
-				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
+				((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY
+				[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode())].get() +
 				"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)", builder(p).attention(""));
 		addButton(ll, "\u25BA (11.3) (TAP TO TOGGLE)\n \u25CF Display each TTS utterance on screen: " +
 				((OsmandApplication) getApplication()).getSettings().DISPLAY_TTS_UTTERANCE.get().toString(), builder(p).attention(""));
@@ -292,7 +293,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					// Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
-					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get();
+					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode());
 					OsmandPreference<Integer> pref = ((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams];
 					if (pref != null) {
 						if (pref.get() >= 3000) {
@@ -303,7 +304,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						// Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					}
 					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
-							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.get()].get() +
+							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() +
 							"\u00A0ms\n (Avoids car stereo cutting off prompts. Default is 1500\u00A0ms for Phone call audio, or else 0\u00A0ms.)");
 				}
 				if (description.startsWith("\u25BA (11.3)")) {

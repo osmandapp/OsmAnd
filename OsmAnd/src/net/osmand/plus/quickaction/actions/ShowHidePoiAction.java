@@ -61,15 +61,15 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		String actionName = isActionWithSlash(application) ? application.getString(R.string.shared_string_hide) : application.getString(R.string.shared_string_show);
-		return application.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, getName(application));
+	public String getActionText(@NonNull OsmandApplication app) {
+		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, getName(app));
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 
-		return isCurrentFilters(application);
+		return isCurrentFilters(app);
 	}
 
 	@Override

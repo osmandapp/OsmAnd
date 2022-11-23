@@ -1455,7 +1455,7 @@
     <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \"Nautische Karte\" unter \"Karte konfigurieren\".
 \n
 \nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
-    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die die Schwierigkeitsgrade anzeigen. Um dieses (Erweiterungs)Modul zu verwenden, aktivieren Sie es und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
+    <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um dieses (Erweiterungs)Modul zu verwenden, aktivieren Sie es und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
 \nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Reisedetails, die die Kartendaten enthalten (insbesondere Straßen, Wege, Pfade und Orientierungspunkte). 
@@ -4719,7 +4719,7 @@
     <string name="marker_1st">Erste Markierung</string>
     <string name="marker_2nd">Zweite Markierung</string>
     <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
-    <string name="routing_attr_goods_restrictions_name">Warenlieferung</string>
+    <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
     <string name="accessibility_2d_view_off">2.5D-Ansicht aus</string>
     <string name="accessibility_2d_view_on">2.5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>
@@ -4957,4 +4957,18 @@
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
     <string name="storage_migration_fragment_close_descr">Das Kopieren ist erfolgt für %1$s%%. Wenn Sie jetzt abbrechen, funktioniert die Anwendung möglicherweise nicht richtig.</string>
+    <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
+    <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
+    <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
+    <string name="temperature_layer">Temperaturebene</string>
+    <string name="pressure_layer">Luftdruckebene</string>
+    <string name="wind_layer">Windebene</string>
+    <string name="cloud_layer">Bewölkungsebene</string>
+    <string name="precipitation_layer">Niederschlagsebene</string>
+    <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
+    <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
+    <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
+    <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
 </resources>

@@ -1720,6 +1720,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.MULTIMEDIA_NOTES;

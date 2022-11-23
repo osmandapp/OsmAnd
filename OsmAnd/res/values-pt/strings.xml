@@ -3569,7 +3569,9 @@
     <string name="profiles_for_action_not_found">Não foi possível encontrar um perfil desse tipo.</string>
     <string name="index_item_world_basemap_detailed">Mapa geral do mundo (detalhado)</string>
     <string name="unsupported_type_error">Tipo não suportado</string>
-    <string name="gpx_parse_error">O ficheiro GPX do OsmAnd não está correto. Contacte a nossa equipa de suporte para podermos investigar o problema.</string>
+    <string name="gpx_parse_error">Foram encontrados problemas com um ficheiro GPX.
+\n
+\nPode contactar-nos para podermos investigar o problema.</string>
     <string name="shared_string_always">Sempre</string>
     <string name="screen_control">Controlar ligar/desligar do ecrã</string>
     <string name="system_screen_timeout_descr">Desliga o ecrã após o tempo limite do ecrã de acordo com o do sistema.</string>
@@ -3949,7 +3951,7 @@
 \n• Ecrã \"Gravar viagem\" atualizado.
 \n
 \n</string>
-    <string name="routing_attr_height_obstacles_description">O roteamento pode evitar subidas íngremes.</string>
+    <string name="routing_attr_height_obstacles_description">O tempo de viagem projetado refletirá o impacto da elevação. A preferência de roteamento pode ajudar a evitar subidas íngremes:</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Ciclismo casual</string>
     <string name="voice_prompts_timetable">Tempo de indicações por voz</string>
@@ -4766,7 +4768,7 @@
     <string name="download_tiles">Descarregar mosaicos</string>
     <string name="without_profiles_changing">Sem alteração de perfis</string>
     <string name="average_speed_skip_stops_desc">A velocidade inferior a %1$s será contada e afetará a velocidade média.</string>
-    <string name="attach_roads_descr">Aproxime o seu trilho a uma rota utilizando o mapa offline. Isto fornecerá valores de elevação corrigidos, detalhes de estrada e curvas utilizadas durante a navegação.</string>
+    <string name="attach_roads_descr">Aproxime o seu trilho para estradas permitidas para rotear entre os pontos e associe instruções precisas de curva e propriedades de rota.</string>
     <string name="attach_roads_warning">Só se pode anexar um trilho às estradas.</string>
     <string name="shared_string_only_missing">Só os que faltam</string>
     <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
@@ -4955,4 +4957,19 @@
     <string name="clouds_widget_desc">Mostra a cobertura de nuvens para o centro do mapa atual.</string>
     <string name="precipitation_widget_desc">Mostra a precipitação para o centro do mapa atual.</string>
     <string name="rendering_attr_depthContourWidth_name">Espessura da linha</string>
+    <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se parar agora, a aplicação pode não funcionar corretamente.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme escala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
+    <string name="quick_action_temperature_layer">Uma opção para mostrar ou ocultar a camada de temperatura no mapa.</string>
+    <string name="quick_action_precipitation_layer">Uma opção para mostrar ou ocultar a camada de precipitação no mapa.</string>
+    <string name="quick_action_wind_layer">Um botão para mostrar ou ocultar a camada de ventos no mapa.</string>
+    <string name="quick_action_cloud_layer">Um botão para mostrar ou ocultar a camada de nuvens no mapa.</string>
+    <string name="quick_action_air_pressure_layer">Um botão para mostrar ou ocultar a camada de pressão do ar no mapa.</string>
+    <string name="temperature_layer">Camada de temperatura</string>
+    <string name="pressure_layer">Camada de pressão</string>
+    <string name="wind_layer">Camada de ventos</string>
+    <string name="cloud_layer">Camada de nuvens</string>
+    <string name="precipitation_layer">Camada de precipitação</string>
 </resources>

@@ -140,10 +140,6 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {
-	}
-
-	@Override
 	public void onGetItems() {
 		updateCards();
 	}
@@ -153,14 +149,6 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		if (purchaseHelper != null) {
 			purchaseHelper.requestInventory(false);
 		}
-	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {
-	}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {
 	}
 
 	@Override

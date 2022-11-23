@@ -94,7 +94,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 			if (app != null) {
-				int vpd = settings.VOICE_PROMPT_DELAY[settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode)].get();
+				int vpd = settings.VOICE_PROMPT_DELAY[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get();
 				if (vpd > 0) {
 					try {
 						Thread.sleep(vpd);
@@ -194,7 +194,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 			log.debug("Playing file : " + file);
 			mediaPlayer.reset();
 			mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-					.setUsage(settings.AUDIO_USAGE.get())
+					.setUsage(settings.AUDIO_USAGE[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build());
 
