@@ -38,12 +38,6 @@ import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 public class BackupAuthorizationFragment extends BaseSettingsFragment implements InAppPurchaseListener {
 
 	private static final String AUTHORIZE = "authorize";
-	private static final String LOCAL_BACKUP = "local_backup";
-	private static final String BACKUP_TO_FILE = "backup_to_file";
-	private static final String RESTORE_FROM_FILE = "restore_from_file";
-	private static final String LOCAL_BACKUP_DIVIDER = "local_backup_divider";
-
-	private boolean localBackupVisible = true;
 
 	@Override
 	@ColorRes
@@ -67,44 +61,17 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 
 	@Override
 	protected void setupPreferences() {
-		Preference localBackup = findPreference(LOCAL_BACKUP);
-		localBackup.setIconSpaceReserved(false);
-
-		setupBackupToFilePref();
-		setupRestoreFromFilePref();
 	}
 
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		String prefId = preference.getKey();
-		if (LOCAL_BACKUP.equals(prefId)) {
-			bindLocalBackupPref(holder);
-		} else if (AUTHORIZE.equals(prefId)) {
+		if (AUTHORIZE.equals(prefId)) {
 			bindAuthorizePref(holder);
 		}
 		super.onBindPreferenceViewHolder(preference, holder);
 	}
 
-	private void setupBackupToFilePref() {
-		Preference backupToFile = findPreference(BACKUP_TO_FILE);
-		backupToFile.setIcon(getIcon(R.drawable.ic_action_save_to_file, getActiveColorRes()));
-	}
-
-	private void setupRestoreFromFilePref() {
-		Preference restoreFromFile = findPreference(RESTORE_FROM_FILE);
-		restoreFromFile.setIcon(getIcon(R.drawable.ic_action_read_from_file, getActiveColorRes()));
-	}
-
-	private void bindLocalBackupPref(PreferenceViewHolder holder) {
-		ImageView indicator = holder.itemView.findViewById(R.id.icon_logout);
-		if (!localBackupVisible) {
-			indicator.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
-			indicator.setContentDescription(getString(R.string.access_collapsed_list));
-		} else {
-			indicator.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
-			indicator.setContentDescription(getString(R.string.access_expanded_list));
-		}
-	}
 
 	private void bindAuthorizePref(PreferenceViewHolder holder) {
 		View signUpButton = holder.itemView.findViewById(R.id.sign_up_button);
@@ -138,43 +105,12 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		});
 	}
 
-	private void toggleLocalPrefsVisibility() {
-		localBackupVisible = !localBackupVisible;
-		findPreference(BACKUP_TO_FILE).setVisible(localBackupVisible);
-		findPreference(RESTORE_FROM_FILE).setVisible(localBackupVisible);
-		findPreference(LOCAL_BACKUP_DIVIDER).setVisible(localBackupVisible);
-	}
-
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
 		recyclerView.setItemAnimator(null);
 		recyclerView.setLayoutAnimation(null);
 		return recyclerView;
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		if (BACKUP_TO_FILE.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ApplicationMode mode = getSelectedAppMode();
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				ExportSettingsFragment.showInstance(fragmentManager, mode, null, true);
-				return true;
-			}
-		} else if (RESTORE_FROM_FILE.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
-				return true;
-			}
-		} else if (LOCAL_BACKUP.equals(prefId)) {
-			toggleLocalPrefsVisibility();
-			return true;
-		}
-		return super.onPreferenceClick(preference);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {

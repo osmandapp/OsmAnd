@@ -15,7 +15,7 @@
 		tools:background="?android:attr/selectableItemBackground">
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@android:id/icon"
+			android:id="@+id/icon"
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
