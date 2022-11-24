@@ -4683,7 +4683,7 @@
     <string name="transport_hazmat_yes_desc">Виберіть відповідну категорію.</string>
     <string name="transport_hazmat_no_desc">На дорогах і тунелях можуть бути введені обмеження на перевезення небезпечних матеріалів.</string>
     <string name="transport_hazmat_title">Транспортування небезпечних матеріалів</string>
-    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу до легких транспортних засобів (з товарами)</string>
+    <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу для легких транспортних засобів (з вантажами)</string>
     <string name="co2_mission">Викиди CO2</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_electric_name">Електричний</string>
@@ -4715,7 +4715,7 @@
     <string name="reset_all_settings_desc">Скинути всі налаштування до типових\?</string>
     <string name="goods_delivery_desc">Транспортні засоби доставляння можуть підлягати обмеженням на деяких дорогах.</string>
     <string name="map_marker_average_speed_desc">Укажіть часовий інтервал для усереднення швидкості (використовується для оцінки часу прибуття).</string>
-    <string name="routing_attr_goods_restrictions_name">Доставлення товарів</string>
+    <string name="routing_attr_goods_restrictions_name">Доставлення вантажів</string>
     <string name="accessibility_2d_view_off">Огляд 2.5D вимкнено</string>
     <string name="accessibility_2d_view_on">Огляд 2.5D увімкнено</string>
     <string name="download_complete">Завантаження завершено</string>
@@ -4831,7 +4831,7 @@
     <string name="location_simulation_speedup">Прискорення симуляції</string>
     <string name="send_uuid_preference_desc">Випадковий UUID використовується для завантаження офлайнових мап з серверів OsmAnd з метою відстеження добросовісного використання ресурсів серверів, прогнозування моделей трафіку та створення анонімних щомісячних звітів щодо мап.</string>
     <string name="send_uuid_preference">Надіслати унікальний ідентифікатор користувача (UUID)</string>
-    <string name="shared_string_terms_of_use">Умови використання</string>
+    <string name="shared_string_terms_of_use">Умови користування</string>
     <string name="external_sensors_plugin_name">Зовнішні датчики</string>
     <string name="external_sensors_plugin_description">Доступ до зовнішніх датчиків для зчитування, наприклад, пульсу, швидкості велосипеда, потужності велоїзди та частоти обертання педалей. Вимагає під\'єднання пристрою до відповідних датчиків за протоколом бездротової персональної мережі ANT+.</string>
     <string name="map_widget_altitude_map_center">Висота над рівнем моря: центр мапи</string>
@@ -4843,29 +4843,33 @@
     <string name="map_widget_altitude_desc">Показ висоти над рівнем моря поточної геолокації або поточного центру мапи</string>
     <string name="map_widget_rendering_fps">Відображення FPS мапи</string>
     <string name="map_widget_rendering_fps_desc">Показує швидкість появи й оновлення мапи та її елементів (виражається у кадрах на секунду, або FPS).</string>
-    <string name="terms_of_service_desc">Завантажуючи мапи, Ви погоджуєтеся з умовами користування сайтом %1$s та %2$s.</string>
+    <string name="terms_of_service_desc">Завантажуючи мапи, ви погоджуєтеся з умовами користування %1$s та %2$s.</string>
     <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
     <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
     <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
-    <string name="release_4_3">- Новий швидший рушій рендерингу мап версії 2 (OpenGL) з 2.5D виглядом
+    <string name="release_4_3">• Новий швидший рушій рендерингу мап версії 2 (OpenGL) з 2.5D виглядом
 \n
-\n - Плавна анімація зміни локації під час руху
+\n • Плавна анімація зміни локації під час руху
 \n
-\n - Нові віджети для координат центру мапи та висоти геолокації
+\n • Нові віджети для координат центру мапи та висоти геолокації
 \n
-\n - «Відстань торканням»: додані опції розміру тексту
+\n • «Відстань торканням»: додані опції розміру тексту
 \n
 \n - У віджеті «Позначки мапи» додано опцію зміни поведінки натискання
 \n
-\n - Виправлена опція «Показати позицію»
+\n • Виправлена опція «Показати позицію»
 \n
-\n - GPX: додана підтримка тегів «link», «cmt», «desc» та будь-яких користувацьких розширень
+\n • GPX: додана підтримка тегів «link», «cmt», «desc» і будь-яких користувацьких розширень
 \n
-\n - Перевпорядковано список «Морські мапи»
+\n • Перевпорядковано список «Морські мапи»
 \n
-\n - Додано підтримку ANT+ датчиків
+\n • Додано підтримку ANT+ датчиків
 \n
-\n - Додана можливість вимкнення завантаження UUID
+\n • Додана можливість вимкнення завантаження UUID
+\n
+\n • Прогноз типової швидкості під час ходьби/пішого туризму/пробіжок, що залежать від висоти
+\n
+\n • Виправлено вивід звуку й поведінка повзунка гучності
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
@@ -4963,4 +4967,12 @@
     <string name="quick_action_air_pressure_layer">Перемикач для показу або приховування шару атмосферного тиску на мапі.</string>
     <string name="temperature_layer">Температурний шар</string>
     <string name="quick_action_temperature_layer">Перемикач для показу або приховування температурного шару на мапі.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Показати шкалу MTB для підйому</string>
+    <string name="rendering_attr_showMtbScale_description">Показати траси згідно зі шкалою MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Показати траси згідно зі шкалою підйомів MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Показати шкалу MTB</string>
+    <string name="mtb_scale">Шкала MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Міжнародна асоціація гірського велоспорту</string>
+    <string name="mtb_segment_classification">Класифікація сегментів</string>
 </resources>

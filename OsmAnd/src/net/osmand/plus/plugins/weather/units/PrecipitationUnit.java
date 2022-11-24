@@ -7,19 +7,21 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum PrecipConstants {
+public enum PrecipitationUnit implements WeatherUnit {
 
-	MILIMETERS(R.string.weather_precip_milimeters, R.string.weather_precip_mm),
-	INCHES(R.string.weather_precip_inches, R.string.weather_precip_in);
+	MILIMETERS(R.string.weather_precip_milimeters, R.string.weather_precip_mm, "mm"),
+	INCHES(R.string.weather_precip_inches, R.string.weather_precip_in, "in");
 
 	@StringRes
 	private final int titleId;
 	@StringRes
 	private final int unitId;
+	private final String symbol;
 
-	PrecipConstants(@StringRes int titleId, @StringRes int unitId) {
+	PrecipitationUnit(@StringRes int titleId, @StringRes int unitId, @NonNull String symbol) {
 		this.titleId = titleId;
 		this.unitId = unitId;
+		this.symbol = symbol;
 	}
 
 	@StringRes
@@ -39,4 +41,9 @@ public enum PrecipConstants {
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
 	}
 
+	@NonNull
+	@Override
+	public String getSymbol() {
+		return symbol;
+	}
 }

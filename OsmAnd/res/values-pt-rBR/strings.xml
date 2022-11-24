@@ -4951,4 +4951,8 @@
     <string name="wind_layer">Camada de vento</string>
     <string name="cloud_layer">Camada de nuvem</string>
     <string name="precipitation_layer">Camada de precipitação</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme escala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
 </resources>

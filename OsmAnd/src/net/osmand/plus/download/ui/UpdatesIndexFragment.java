@@ -272,30 +272,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {
-
-	}
-
-	@Override
-	public void onGetItems() {
-
-	}
-
-	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
 		startLoadLiveMapsAsyncTask(getMyApplication());
-	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {
-
-	}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {
-
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {

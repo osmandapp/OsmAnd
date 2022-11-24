@@ -127,6 +127,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return true;
 	}
 
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.WIKIPEDIA;
+	}
+
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 		this.mapActivity = activity;

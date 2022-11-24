@@ -449,7 +449,7 @@
     <string name="add_new_rule">Új szabály hozzáadása</string>
     <string name="transport_Routes">Útvonalak</string>
     <string name="transport_Stop">Megálló</string>
-    <string name="transport_stops">megállók</string>
+    <string name="transport_stops">megálló</string>
     <string name="transport_search_after">Következő útiterv</string>
     <string name="transport_search_before">Előző útiterv</string>
     <string name="transport_finish_search">Keresés befejezése</string>
@@ -4844,23 +4844,27 @@
     <string name="speak_route_recalculation">Útvonal újratervezésének bemondása</string>
     <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel
 \n
-\n - Folytonos animáció a mozgás közbeni helyváltoztatáskor
+\n • Folytonos animáció a mozgás közbeni helyváltoztatáskor
 \n
-\n - Új widget a térkép középpontjának koordinátáival és a hely magasságával
+\n • Új widget a térkép középpontjának koordinátáival és a hely magasságával
 \n
-\n - „Távolság koppintásra” szövegméret beállítások hozzáadva
+\n • „Távolság koppintásra” szövegméret beállítások hozzáadva
 \n
-\n - „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
+\n • „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
 \n
-\n - Javított „Pozíció megjelenítése” opció
+\n • Javított „Pozíció megjelenítése” opció
 \n
-\n - GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
+\n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
 \n
-\n - A \"Tengerészeti térképek\" lista módosítása
+\n • A \"Tengerészeti térképek\" lista módosítása
 \n
-\n - Hozzáadva az ANT+ érzékelők támogatása
+\n • Hozzáadva az ANT+ érzékelők támogatása
 \n
-\n - Hozzáadva az UUID letöltés letiltásának lehetősége
+\n • Hozzáadva az UUID letöltés letiltásának lehetősége
+\n
+\n • Alapértelmezett sebességgel állítható előrejelzés a magasságtól függő gyaloglási/túrázási/futási időkhöz
+\n
+\n • Javított hangkimenet és hangerő-csúszka viselkedés
 \n
 \n</string>
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
@@ -4957,4 +4961,12 @@
     <string name="cloud_layer">Felhőzet réteg</string>
     <string name="precipitation_layer">Csapadék réteg</string>
     <string name="quick_action_temperature_layer">A hőmérséklet réteget megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">MTB hegymeneti skála megjelenítése</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Nyomvonalak megjelenítése MTB hegymeneti nehézségi szintek szerint.</string>
+    <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
+    <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB nehézségi szintek szerint.</string>
+    <string name="mtb_scale">MTB Skála</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Nemzetközi Hegyikerékpáros Szövetség</string>
+    <string name="mtb_segment_classification">Szakasz osztályozás</string>
 </resources>

@@ -283,6 +283,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return osmBugsLayer;
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.OPEN_STREET_MAP_EDITING;

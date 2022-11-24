@@ -6,7 +6,6 @@ import static net.osmand.plus.plugins.weather.WeatherInfoType.PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherInfoType.TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherInfoType.WIND;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -33,11 +32,11 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (plugin != null) {
-			setupUnitsPref(TEMPERATURE, plugin.WX_UNIT_TEMPERATURE.getId());
-			setupUnitsPref(PRESSURE, plugin.WX_UNIT_PRESSURE.getId());
-			setupUnitsPref(WIND, plugin.WX_UNIT_WIND.getId());
-			setupUnitsPref(CLOUDS, plugin.WX_UNIT_CLOUDS.getId());
-			setupUnitsPref(PRECIPITATION, plugin.WX_UNIT_PRECIPITATION.getId());
+			setupUnitsPref(TEMPERATURE, plugin.weatherTempUnit.getId());
+			setupUnitsPref(PRESSURE, plugin.weatherPressureUnit.getId());
+			setupUnitsPref(WIND, plugin.weatherWindUnit.getId());
+			setupUnitsPref(CLOUDS, plugin.weatherCloudUnit.getId());
+			setupUnitsPref(PRECIPITATION, plugin.weatherPrecipUnit.getId());
 			setupOfflineForecastPref();
 			setupOnlineCachePref();
 		}
@@ -101,35 +100,31 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void showChooseUnitDialog(ListPreferenceEx listPreference) {
+	private void showChooseUnitDialog(@NonNull ListPreferenceEx preference) {
 		boolean nightMode = isNightMode();
-		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
 		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(listPreference.getTitle());
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		String[] entries = preference.getEntries();
+		Integer[] entryValues = (Integer[]) preference.getEntryValues();
+		int i = preference.getValueIndex();
 
-		String[] entries = listPreference.getEntries();
-		Integer[] entryValues = (Integer[]) listPreference.getEntryValues();
-		int i = listPreference.getValueIndex();
-
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				entries, nightMode, i, app, profileColor, themeRes, v -> {
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(entries,
+				nightMode, i, app, profileColor, themeRes, v -> {
 					int selectedEntryIndex = (int) v.getTag();
 					Object value = entryValues[selectedEntryIndex];
-					if (listPreference.callChangeListener(value)) {
-						listPreference.setValue(value);
+					if (preference.callChangeListener(value)) {
+						preference.setValue(value);
 					}
 					Fragment target = getTargetFragment();
 					if (target instanceof OnPreferenceChanged) {
-						((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
+						((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
 					}
 				}
 		);
 
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getActivity(), nightMode));
+		builder.setTitle(preference.getTitle());
 		builder.setAdapter(adapter, null);
 		adapter.setDialog(builder.show());
 	}
-
 }
