@@ -62,7 +62,7 @@
     <string name="enter_another_device_name">Escolle un nome que aínda non está a ser empregado</string>
     <string name="device_added_successfully">%1$s engadido.</string>
     <string name="shared_string_cancel">Desbotar</string>
-    <string name="nm">nmi</string>
+    <string name="nm">Milla náutica</string>
     <string name="si_kmh">Quilómetros por hora</string>
     <string name="si_mph">Millas por hora</string>
     <string name="si_m_s">Metros por segundo</string>
@@ -160,7 +160,7 @@
     <string name="m">m</string>
     <string name="min_mile">min/mi</string>
     <string name="min_km">min/km</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">Nudo</string>
     <string name="m_s">m/seg</string>
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mi/h</string>
