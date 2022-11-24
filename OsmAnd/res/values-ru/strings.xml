@@ -4626,7 +4626,7 @@
     <string name="street_name_widget_desc">Виджет показывает название текущей улицы со стрелкой направления или название следующей улицы с маневром, который необходимо выполнить.</string>
     <string name="audio_video_notes_desc">Виджет обеспечивает быстрый доступ к съемке фото и запуску/остановке записи аудио и видео.</string>
     <string name="route_maneuvers">Маршрутные маневры</string>
-    <string name="bearing_desc">Виджет показывает абсолютный (магнитный) пеленг или курсовой угол на цель в угловых единицах (градусы 180, градусы 360, миллирадианы).</string>
+    <string name="bearing_desc">Виджет показывает абсолютный (магнитный) пеленг или курсовой угол на цель в угловых единицах (в режиме 180 градусов, 360 градусов или миллирадианы).</string>
     <string name="shared_string_speed">Скорость</string>
     <string name="shared_string_widget">Виджет</string>
     <string name="navigation_points_desc">Навигационные виджеты включаются во время навигации для отображения такой информации, как расстояние, время прибытия или оставшееся время, следующие повороты, пеленг, название текущей улицы, информация о полосах движения, максимальная скорость, предупреждения о приближении, POI, путевые точки.</string>
@@ -4782,7 +4782,7 @@
     <string name="map_widget_altitude_map_center">Высота: центр карты</string>
     <string name="map_widget_altitude_desc">Виджеты показывают высоту над уровнем моря для текущей геолокации или для текущего центра карты</string>
     <string name="map_widget_altitude_current_location">Высота: текущее местоположение</string>
-    <string name="map_widget_rendering_fps_desc">Показывает, насколько быстро отображаются и обновляются карта и ее элементы (выражается в кадрах в секунду или FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Виджет показывает насколько быстро отображаются и обновляются карта и ее элементы, выражается в кадрах в секунду (FPS).</string>
     <string name="map_widget_altitude_map_center_desc">Виджет показывает высоту над уровнем моря для текущего центра карты.</string>
     <string name="terms_of_service_desc">Загружая карты, вы соглашаетесь с положениями %1$s и %2$s.</string>
     <string name="ant_write_to_gpx">Запись данных в трек</string>
@@ -4790,7 +4790,7 @@
     <string name="map_widget_ant_heart_rate">Частота сердцебиения</string>
     <string name="map_widget_ant_heart_rate_desc">Показывает частоту сердечных сокращений пользователя во время определенной деятельности в режиме реального времени</string>
     <string name="favorites_backup">Резервное копирование избранного</string>
-    <string name="purchases_feature_desc_cross_buy">Используйте функции подписки на разных платформах (Android/iOS/Web) без дополнительной платы.</string>
+    <string name="purchases_feature_desc_cross_buy">Используйте функции подписки на разных платформах (Android/iOS/web) без дополнительной платы.</string>
     <string name="shared_string_cross_buy">Перекрестная покупка</string>
     <string name="external_sensor_widgets">Виджеты ANT+</string>
     <string name="ant_go_to_store">Перейти в магазин</string>
@@ -4799,7 +4799,7 @@
     <string name="map_widget_ant_bicycle_speed_desc">Показывает скорость передвижения</string>
     <string name="map_widget_ant_bicycle_dist_desc">Показывает пройденное расстояние</string>
     <string name="nautical_depth_points">Точки морских глубин</string>
-    <string name="map_widget_zoom_level_desc">Виджет показывает текущий уровень масштаба карты.</string>
+    <string name="map_widget_zoom_level_desc">Виджет показывает текущий уровень масштабирования карты.</string>
     <string name="map_widget_target_distance">Расстояние от камеры до цели</string>
     <string name="map_widget_zoom_level">Уровень масштабирования</string>
     <string name="ant_missing_dependency">Отсутствует зависимость</string>
@@ -4854,7 +4854,7 @@
 \nНажмите двумя пальцами на карте, чтобы просмотреть расстояние между отмеченными точками.</string>
     <string name="quick_action_map_center_widget_descr">Переключатель для отображения или скрытия виджета координат центра карты.</string>
     <string name="quick_action_current_location_widget_descr">Переключатель для отображения или скрытия виджета координат текущего местоположения.</string>
-    <string name="map_widget_target_distance_desc">Виджет показывает расстояние от камеры до цели.</string>
+    <string name="map_widget_target_distance_desc">Виджет показывает расстояние между камерой и целью.</string>
     <string name="shared_string_large">Большой</string>
     <string name="ant_heart_rate_write_gpx_desc">Запись сердцебиения в трек</string>
     <string name="ant_missing_dependency_descr">Требуемая служба \"%1$s\" не найдена.
@@ -4881,6 +4881,10 @@
 \n• Добавлена поддержка датчиков ANT+
 \n
 \n• Добавлена возможность отключения UUID для загрузки
+\n
+\n• Прогноз типичной скорости во время ходьбы / пешего туризма / бега в зависимости от высоты
+\n
+\n• Исправлены вывод звука и поведение ползунка громкости
 \n
 \n</string>
     <string name="how_to_use">Как использовать:</string>
@@ -4966,12 +4970,12 @@
     <string name="quick_action_air_pressure_layer">Переключатель для отображения или скрытия слоя давления на карте.</string>
     <string name="precipitation_layer">Слой осадков</string>
     <string name="cloud_layer">Слой облачности</string>
-    <string name="rendering_attr_showMtbScale_name">Показать MTB-шкалу</string>
+    <string name="rendering_attr_showMtbScale_name">Показать MTB шкалу</string>
     <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с MTB-шкалой.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
-    <string name="mtb_imba_full">Международная ассоциация горных велосипедистов</string>
+    <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
 </resources>
