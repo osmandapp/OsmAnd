@@ -95,12 +95,16 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 				if (id == null) {
 					id = RenderingIcons.getIconNameForAmenity(amenity);
 				}
+				PointImageDrawable pointImageDrawable;
 				if (id != null) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(),
+					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(),
 							true, RenderingIcons.getResId(id));
-					pointImageDrawable.setAlpha(0.8f);
-					bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
+				} else {
+					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(),
+							true, RenderingIcons.getResId("craft_default"));
 				}
+				pointImageDrawable.setAlpha(0.8f);
+				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 			} else {
 				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(), true);
 				pointImageDrawable.setAlpha(0.8f);
