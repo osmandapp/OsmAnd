@@ -56,6 +56,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -434,7 +435,7 @@ public class MapSelectionHelper {
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                                   @NonNull IContextMenuProvider gpxMenuProvider,
 	                                   @NonNull QuadRect rect, double searchDistance) {
-		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
+		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();
