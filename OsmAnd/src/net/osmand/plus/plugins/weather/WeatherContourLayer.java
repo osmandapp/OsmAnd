@@ -132,7 +132,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = getApplication().getWeatherHelper().getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null) {
 			return;
 		}

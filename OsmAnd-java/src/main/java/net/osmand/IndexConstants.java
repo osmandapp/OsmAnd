@@ -2,7 +2,7 @@ package net.osmand;
 
 
 public class IndexConstants {
-	
+
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
 	public static final int POI_TABLE_VERSION = 1;
@@ -51,6 +51,7 @@ public class IndexConstants {
 	public static final String ROUTING_FILE_EXT = ".xml";
 
 	public static final String RENDERER_INDEX_EXT = ".render.xml";
+	public static final String ADDON_RENDERER_INDEX_EXT = ".addon" + RENDERER_INDEX_EXT;
 
 	public static final String GPX_FILE_EXT = ".gpx";
 	public static final String GPX_GZ_FILE_EXT = ".gpx.gz";

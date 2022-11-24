@@ -11,6 +11,7 @@ import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -23,8 +24,10 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	private final OsmandSettings settings;
 	private final WeatherPlugin weatherPlugin;
+	private final WeatherHelper weatherHelper;
 
 	private WeatherRasterLayerProvider provider;
+	private WeatherTileResourcesManager resourcesManager;
 
 	private final WeatherLayer weatherLayer;
 	private boolean weatherEnabledCached;
@@ -40,9 +43,12 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	public WeatherRasterLayer(@NonNull Context context, @NonNull WeatherLayer weatherLayer) {
 		super(context);
-		this.settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		this.settings = app.getSettings();
+		this.weatherHelper = app.getWeatherHelper();
 		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		this.weatherLayer = weatherLayer;
+		this.resourcesManager = weatherHelper.getWeatherResourcesManager();
 		this.dateTime = System.currentTimeMillis();
 	}
 
@@ -126,7 +132,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = getApplication().getWeatherHelper().getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null) {
 			return;
 		}
@@ -141,7 +147,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		List<WeatherInfoType> enabledLayers = weatherPlugin.getEnabledLayers(appMode);
 		boolean layersChanged = !Algorithms.objectEquals(enabledLayers, enabledLayersCached);
 		enabledLayersCached = enabledLayers;
-		int bandsSettingsVersion = weatherPlugin.getBandsSettingsVersion();
+		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();
 		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
 		bandsSettingsVersionCached = bandsSettingsVersion;
 		boolean dateTimeChanged = cachedDateTime != dateTime;

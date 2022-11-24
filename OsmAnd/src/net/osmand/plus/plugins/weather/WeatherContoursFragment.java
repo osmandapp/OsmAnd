@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.weather;
 
-import static net.osmand.plus.plugins.weather.WeatherPlugin.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
-import static net.osmand.plus.plugins.weather.WeatherPlugin.WEATHER_TEMP_CONTOUR_LINES_ATTR;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,11 +24,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.render.RenderingRuleProperty;
 
 import java.util.HashMap;
 import java.util.Map;

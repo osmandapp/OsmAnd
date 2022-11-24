@@ -76,6 +76,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -191,13 +192,14 @@ public class OsmandApplication extends MultiDexApplication {
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
+	WeatherHelper weatherHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
 	// Typeface
-	
+
 	@Override
 	public void onCreate() {
 		if (RestartActivity.isRestartProcess(this)) {
@@ -284,7 +286,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public AppInitializer getAppInitializer() {
 		return appInitializer;
 	}
-	
+
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
 	}
@@ -306,7 +308,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public UiUtilities getUIUtilities() {
 		return iconsCache;
 	}
-	
+
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
@@ -322,11 +324,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
-	
+
 	public OsmAndTaskManager getTaskManager() {
 		return taskManager;
 	}
-	
+
 	public AvoidSpecificRoads getAvoidSpecificRoads() {
 		return avoidSpecificRoads;
 	}
@@ -338,7 +340,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmAndLocationProvider getLocationProvider() {
 		return locationProvider;
 	}
-	
+
 	public OsmAndAppCustomization getAppCustomization() {
 		return appCustomization;
 	}
@@ -483,13 +485,13 @@ public class OsmandApplication extends MultiDexApplication {
 			appInitializer.addListener(listener);
 		}
 	}
-	
+
 	public void unsubscribeInitListener(AppInitializeListener listener) {
 		if (listener != null) {
 			appInitializer.removeListener(listener);
 		}
 	}
-	
+
 	public boolean isApplicationInitializing() {
 		return appInitializer.isAppInitializing();
 	}
@@ -558,6 +560,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	@NonNull
+	public WeatherHelper getWeatherHelper() {
+		return weatherHelper;
 	}
 
 	public CommandPlayer getPlayer() {

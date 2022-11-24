@@ -30,16 +30,14 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		if (plugin != null) {
-			setupUnitsPref(TEMPERATURE, plugin.weatherTempUnit.getId());
-			setupUnitsPref(PRESSURE, plugin.weatherPressureUnit.getId());
-			setupUnitsPref(WIND, plugin.weatherWindUnit.getId());
-			setupUnitsPref(CLOUDS, plugin.weatherCloudUnit.getId());
-			setupUnitsPref(PRECIPITATION, plugin.weatherPrecipUnit.getId());
-			setupOfflineForecastPref();
-			setupOnlineCachePref();
-		}
+		WeatherSettings weatherSettings = app.getWeatherHelper().getWeatherSettings();
+		setupUnitsPref(TEMPERATURE, weatherSettings.weatherTempUnit.getId());
+		setupUnitsPref(PRESSURE, weatherSettings.weatherPressureUnit.getId());
+		setupUnitsPref(WIND, weatherSettings.weatherWindUnit.getId());
+		setupUnitsPref(CLOUDS, weatherSettings.weatherCloudUnit.getId());
+		setupUnitsPref(PRECIPITATION, weatherSettings.weatherPrecipUnit.getId());
+		setupOfflineForecastPref();
+		setupOnlineCachePref();
 	}
 
 	private void setupUnitsPref(@NonNull WeatherInfoType layer, @NonNull String prefId) {
