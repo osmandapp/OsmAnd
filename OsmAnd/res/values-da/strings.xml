@@ -2716,7 +2716,7 @@
     <string name="show_images">Vis billeder</string>
     <string name="purchase_cancelled_dialog_title">OsmAnd Live-abonnement er annulleret</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
-    <string name="download_all">Hent alt</string>
+    <string name="download_all">Download alle</string>
     <string name="open_wikipedia_link_online">Åbn Wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">Linket vil blive åbnet i en webbrowser.</string>
     <string name="read_wikipedia_offline_description">Abonner på OsmAnd Live for at læse Wikipedia og Wikivoyage artikler offline.</string>
