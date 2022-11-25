@@ -1646,6 +1646,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.setOriginalPointToMove(null);
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.exitMovePointMode();
+		}
 	}
 
 	void cancelModes() {
