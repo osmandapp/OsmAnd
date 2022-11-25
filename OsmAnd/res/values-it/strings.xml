@@ -4957,4 +4957,6 @@
     <string name="quick_action_precipitation_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato delle precipitazioni.</string>
     <string name="quick_action_cloud_layer">Un pulsante per mostrare o nascondere sulla mappa lo strato della nuvolosità.</string>
     <string name="rendering_attr_showMtbScale_name">Mostra la difficoltà MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
 </resources>
