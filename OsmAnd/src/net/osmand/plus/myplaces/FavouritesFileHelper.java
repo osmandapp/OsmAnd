@@ -200,26 +200,26 @@ public class FavouritesFileHelper {
 		Exception result = null;
 		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
 		loadGPXFiles(FILE_PREFIX_TO_SAVE, fileGroups);
-		for (FavoriteGroup group : fileGroups.values()) {
+		for (FavoriteGroup fileGroup : fileGroups.values()) {
 			// Search corresponding group in memory
-			FavoriteGroup memoryGroup = null;
-			for (FavoriteGroup gr : localGroups) {
-				if (Algorithms.stringsEqual(gr.getName(), group.getName())) {
-					memoryGroup = gr;
+			boolean hasLocalGroup = false;
+			for (FavoriteGroup group : localGroups) {
+				if (Algorithms.stringsEqual(group.getName(), fileGroup.getName())) {
+					hasLocalGroup = true;
 					break;
 				}
 			}
-			// Delete external group file if it does not exist in memory groups
-			if (memoryGroup == null) {
-				getExternalFile(group).delete();
+			// Delete external group file if it does not exist in local groups
+			if (!hasLocalGroup) {
+				getExternalFile(fileGroup).delete();
 			}
 		}
-		for (FavoriteGroup memoryGroup : localGroups) {
-			FavoriteGroup group = fileGroups.get(memoryGroup.getName());
+		for (FavoriteGroup localGroup : localGroups) {
+			FavoriteGroup fileGroup = fileGroups.get(localGroup.getName());
 			// Collect non deleted points from external group
 			Map<String, FavouritePoint> all = new LinkedHashMap<>();
-			if (group != null) {
-				for (FavouritePoint point : group.getPoints()) {
+			if (fileGroup != null) {
+				for (FavouritePoint point : fileGroup.getPoints()) {
 					String key = point.getKey();
 					if (!deleted.contains(key)) {
 						all.put(key, point);
@@ -227,14 +227,14 @@ public class FavouritesFileHelper {
 				}
 			}
 			// Remove already existing in memory
-			for (FavouritePoint point : memoryGroup.getPoints()) {
+			for (FavouritePoint point : localGroup.getPoints()) {
 				all.remove(point.getKey());
 			}
 			// save favoritePoints from memory in order to update existing
-			memoryGroup.getPoints().addAll(all.values());
+			localGroup.getPoints().addAll(all.values());
 			// Save file if group changed
-			if (!memoryGroup.equals(group)) {
-				Exception exception = saveFile(Collections.singletonList(memoryGroup), getExternalFile(memoryGroup));
+			if (!localGroup.equals(fileGroup)) {
+				Exception exception = saveFile(Collections.singletonList(localGroup), getExternalFile(localGroup));
 				if (exception != null) {
 					result = exception;
 				}
