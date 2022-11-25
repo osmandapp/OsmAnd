@@ -65,6 +65,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -718,7 +719,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		if (selectionResult.timeoutError || selectionResult.executionError) {
 			String message = "map is busy by other operation";
-			getApplication().showToastMessage(R.string.error_message_pattern, message);
+			if (getMapActivity() != null) {
+				getApplication().showShortToastMessage(MessageFormat.format(
+						getMapActivity().getString(R.string.error_message_pattern), message));
+			}
 			return false;
 		}
 

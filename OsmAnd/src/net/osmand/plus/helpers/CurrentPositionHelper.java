@@ -43,8 +43,6 @@ public class CurrentPositionHelper {
 	private ApplicationMode am;
 	private List<BinaryMapReaderResource> usedReaders = new ArrayList<>();
 	private static final Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
-
-	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private final LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
 
 	public CurrentPositionHelper(OsmandApplication app) {
@@ -108,7 +106,7 @@ public class CurrentPositionHelper {
 			}
 			int request = requestNumber.incrementAndGet();
 			AtomicInteger finalRequestNumber = requestNumber;
-			singleThreadExecutor.submit(new Runnable() {
+			app.getLocationProvider().getSingleThreadExecutor().submit(new Runnable() {
 				@Override
 				public void run() {
 					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);

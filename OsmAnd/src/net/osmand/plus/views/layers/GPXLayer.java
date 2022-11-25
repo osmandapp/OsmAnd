@@ -1691,7 +1691,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
 							mapActivity, routeKey, rect, callback);
-					selectionTask.executeOnExecutor(singleThreadExecutor);
+					selectionTask.executeOnExecutor(app.getLocationProvider().getSingleThreadExecutor());
 					networkRouteSelectionTask = selectionTask;
 					return true;
 				}

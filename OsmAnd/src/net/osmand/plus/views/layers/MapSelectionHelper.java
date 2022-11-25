@@ -101,7 +101,6 @@ public class MapSelectionHelper {
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
-	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private List<String> publicTransportTypes;
 
@@ -134,7 +133,7 @@ public class MapSelectionHelper {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
 
-		Future<MapSelectionResult> future = singleThreadExecutor.submit(() -> {
+		Future<MapSelectionResult> future = app.getLocationProvider().getSingleThreadExecutor().submit(() -> {
 			NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 			if (app.useOpenGlRenderer()) {
 				selectObjectsFromOpenGl(result, tileBox, point);

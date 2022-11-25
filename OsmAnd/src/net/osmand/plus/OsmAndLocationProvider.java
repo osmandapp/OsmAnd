@@ -56,6 +56,8 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OsmAndLocationProvider implements SensorEventListener {
@@ -139,6 +141,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private final List<OsmAndLocationListener> locationListeners = new ArrayList<>();
 	private final List<OsmAndCompassListener> compassListeners = new ArrayList<>();
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private Object gpsStatusListener;
 	private final float[] mRotationM = new float[9];
 
@@ -1000,5 +1003,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_PERMISSION);
 		}
+	}
+
+	public ExecutorService getSingleThreadExecutor() {
+		return singleThreadExecutor;
 	}
 }
