@@ -53,6 +53,9 @@ public class AnnounceTimeDistances {
 	public AnnounceTimeDistances(ApplicationMode appMode, OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		locationProvider = app.getLocationProvider();
+		if (getRoutingHelper() != null) {
+			appMode = app.getRoutingHelper().getAppMode();
+		}
 		if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			// keep it as minimum 30 km/h for voice announcement
 			DEFAULT_SPEED = Math.max(8, appMode.getDefaultSpeed());
