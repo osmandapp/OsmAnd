@@ -4886,4 +4886,6 @@
 \n
 \n天气数据由全球预测系统（GFS，https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ）提供。</string>
     <string name="edit_profiles">编辑配置文件</string>
+    <string name="shared_string_sunset">日落</string>
+    <string name="shared_string_sunrise">日出</string>
 </resources>

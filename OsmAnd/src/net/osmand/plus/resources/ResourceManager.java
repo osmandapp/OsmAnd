@@ -1420,6 +1420,18 @@ public class ResourceManager {
 		fileReaders.clear();
 	}
 
+	public BinaryMapIndexReader[] getReverseGeocodingMapFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for (BinaryMapReaderResource r : fileReaders) {
+			BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.REVERSE_GEOCODING);
+			if (reader != null) {
+				readers.add(reader);
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[0]);
+	}
+
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());

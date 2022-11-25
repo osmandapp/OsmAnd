@@ -1617,7 +1617,7 @@ Lon %2$s</string>
     <string name="favorite_category_select">Escoller categoría</string>
     <string name="default_speed_system_descr">Define a unidade de velocidade.</string>
     <string name="default_speed_system">Unidade de velocidade</string>
-    <string name="nm">nmi</string>
+    <string name="nm">Milla náutica</string>
     <string name="si_nm">Millas náuticas</string>
     <string name="si_kmh">Quilómetros por hora</string>
     <string name="si_mph">Millas por hora</string>
