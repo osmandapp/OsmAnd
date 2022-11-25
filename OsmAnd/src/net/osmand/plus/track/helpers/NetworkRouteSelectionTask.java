@@ -46,7 +46,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	@Override
 	protected GPXFile doInBackground(Void... voids) {
-		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
+		BinaryMapIndexReader[] readers = app.getResourceManager().getStreetLookupMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(
 				readers, selectorFilter, this::isCancelled);

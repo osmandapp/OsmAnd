@@ -115,6 +115,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
@@ -208,6 +210,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
 	private OsmandPreference<Boolean> currentTrackShowStartFinishPref;
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	public GPXLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -1688,7 +1691,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					NetworkRouteSelectionTask selectionTask = new NetworkRouteSelectionTask(
 							mapActivity, routeKey, rect, callback);
-					selectionTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					selectionTask.executeOnExecutor(singleThreadExecutor);
 					networkRouteSelectionTask = selectionTask;
 					return true;
 				}

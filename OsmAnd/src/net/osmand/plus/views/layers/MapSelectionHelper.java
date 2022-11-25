@@ -79,6 +79,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class MapSelectionHelper {
 
@@ -90,10 +96,12 @@ public class MapSelectionHelper {
 	public static final long RELATION_BIT = 1L << SHIFT_MULTIPOLYGON_IDS - 1; //According IndexPoiCreator SHIFT_MULTIPOLYGON_IDS
 	public static final long SPLIT_BIT = 1L << SHIFT_NON_SPLIT_EXISTING_IDS - 1; //According IndexVectorMapCreator
 	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
+	public static final int SELECT_MAP_OBJECT_DELAY = 500;//milliseconds
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private List<String> publicTransportTypes;
 
@@ -123,16 +131,28 @@ public class MapSelectionHelper {
 	@NonNull
 	protected MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
 		LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox, point.x, point.y);
-		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
-
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
-		if (app.useOpenGlRenderer()) {
-			selectObjectsFromOpenGl(result, tileBox, point);
-		} else if (nativeLib != null) {
-			selectObjectsFromNative(result, nativeLib, tileBox, point);
-		}
+
+		Future<MapSelectionResult> future = singleThreadExecutor.submit(() -> {
+			NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+			if (app.useOpenGlRenderer()) {
+				selectObjectsFromOpenGl(result, tileBox, point);
+			} else if (nativeLib != null) {
+				selectObjectsFromNative(result, nativeLib, tileBox, point);
+			}
+			return result;
+		});
+
 		processTransportStops(selectedObjects);
+
+		try {
+			return future.get(SELECT_MAP_OBJECT_DELAY, TimeUnit.MILLISECONDS);
+		} catch (ExecutionException | InterruptedException e) {
+			result.executionError = true;
+		} catch (TimeoutException e) {
+			result.timeoutError = true;
+		}
 		return result;
 	}
 
@@ -434,7 +454,7 @@ public class MapSelectionHelper {
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                                   @NonNull IContextMenuProvider gpxMenuProvider,
 	                                   @NonNull QuadRect rect, double searchDistance) {
-		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
+		BinaryMapIndexReader[] readers = app.getResourceManager().getStreetLookupMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();
@@ -635,11 +655,15 @@ public class MapSelectionHelper {
 		final Map<Object, IContextMenuProvider> selectedObjects;
 
 		private LatLon objectLatLon;
+		public boolean timeoutError;
+		public boolean executionError;
 
 		public MapSelectionResult(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 		                          @NonNull LatLon pointLatLon) {
 			this.pointLatLon = pointLatLon;
 			this.selectedObjects = selectedObjects;
+			timeoutError = false;
+			executionError = false;
 		}
 
 		public LatLon getObjectLatLon() {

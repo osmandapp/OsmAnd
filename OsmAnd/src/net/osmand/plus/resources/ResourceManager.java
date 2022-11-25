@@ -125,7 +125,6 @@ public class ResourceManager {
 	// Indexes
 	public enum BinaryMapReaderResourceType {
 		POI,
-		REVERSE_GEOCODING,
 		STREET_LOOKUP,
 		TRANSPORT,
 		ADDRESS,
@@ -1420,11 +1419,11 @@ public class ResourceManager {
 		fileReaders.clear();
 	}
 
-	public BinaryMapIndexReader[] getReverseGeocodingMapFiles() {
+	public BinaryMapIndexReader[] getStreetLookupMapFiles() {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
-			BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.REVERSE_GEOCODING);
+			BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			if (reader != null) {
 				readers.add(reader);
 			}

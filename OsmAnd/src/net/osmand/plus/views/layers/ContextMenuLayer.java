@@ -715,6 +715,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return false;
 		}
 		MapSelectionResult selectionResult = selectionHelper.selectObjectsFromMap(point, tileBox, showUnknownLocation);
+
+		if (selectionResult.timeoutError || selectionResult.executionError) {
+			String message = "map is busy by other operation";
+			getApplication().showToastMessage(R.string.error_message_pattern, message);
+			return false;
+		}
+
 		LatLon pointLatLon = selectionResult.pointLatLon;
 		Map<Object, IContextMenuProvider> selectedObjects = selectionResult.selectedObjects;
 
