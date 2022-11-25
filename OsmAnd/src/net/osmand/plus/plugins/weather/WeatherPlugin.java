@@ -3,6 +3,12 @@ package net.osmand.plus.plugins.weather;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
@@ -29,12 +35,18 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
 import net.osmand.plus.plugins.weather.WeatherRasterLayer.WeatherLayer;
+import net.osmand.plus.plugins.weather.actions.ShowHideAirPressureLayerAction;
+import net.osmand.plus.plugins.weather.actions.ShowHideCloudLayerAction;
+import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
+import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
+import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
+import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -54,29 +66,25 @@ import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class WeatherPlugin extends OsmandPlugin {
 
 	private static final Log log = PlatformUtil.getLog(WeatherPlugin.class);
 
-	private WeatherInfoType currentConfigureLayer = null;
+	private static final float ZORDER_RASTER_LOW = 0.8f;
+	private static final float ZORDER_RASTER_HIGH = 0.81f;
+	private static final float ZORDER_CONTOURS = 0.82f;
+
+	private final WeatherHelper weatherHelper;
+	private final WeatherSettings weatherSettings;
 
 	private WeatherRasterLayer weatherLayerLow;
 	private WeatherRasterLayer weatherLayerHigh;
-	private static final float ZORDER_RASTER_LOW = 0.8f;
-	private static final float ZORDER_RASTER_HIGH = 0.81f;
 	private WeatherContourLayer weatherContourLayer;
-	private static final float ZORDER_CONTOURS = 0.82f;
 
-	private WeatherHelper weatherHelper;
-	private WeatherSettings weatherSettings;
-
+	@WeatherBandType
+	private short currentConfigureBand = WEATHER_BAND_UNDEFINED;
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -174,15 +182,15 @@ public class WeatherPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
-				return new TemperatureWidget(mapActivity, this);
+				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_TEMPERATURE);
 			case WEATHER_PRECIPITATION_WIDGET:
-				return new PrecipitationWidget(mapActivity, this);
+				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_PRECIPITATION);
 			case WEATHER_WIND_WIDGET:
-				return new WindWidget(mapActivity, this);
+				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_WIND_SPEED);
 			case WEATHER_CLOUDS_WIDGET:
-				return new CloudsWidget(mapActivity, this);
+				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_CLOUD);
 			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new AirPressureWidget(mapActivity, this);
+				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_PRESSURE);
 		}
 		return null;
 	}
@@ -211,13 +219,10 @@ public class WeatherPlugin extends OsmandPlugin {
 					R.string.shared_string_weather,
 					R.string.explore_weather_forecast);
 		} else {
-			OsmandApplication app = mapActivity.getMyApplication();
-			ApplicationMode appMode = app.getSettings().getApplicationMode();
-
-			boolean selected = isWeatherEnabled(appMode);
+			boolean selected = isWeatherEnabled();
 			adapter.addItem(new ContextMenuItem(WEATHER_ID)
 					.setTitleId(R.string.shared_string_weather, mapActivity)
-					.setDescription(selected ? getWeatherTypesSummary(getEnabledLayers(appMode)) : null)
+					.setDescription(selected ? getWeatherTypesSummary(weatherHelper.getVisibleBands()) : null)
 					.setSecondaryDescription(selected ? app.getString(R.string.shared_string_on) : null)
 					.setSelected(selected)
 					.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -235,7 +240,7 @@ public class WeatherPlugin extends OsmandPlugin {
 			                              @NonNull View view, @NonNull ContextMenuItem item) {
 				DashboardOnMap dashboard = mapActivity.getDashboard();
 				int[] coordinates = AndroidUtils.getCenterViewCoordinates(view);
-				dashboard.setDashboardVisibility(true, DashboardType.WEAHTER, coordinates);
+				dashboard.setDashboardVisibility(true, DashboardType.WEATHER, coordinates);
 				return false;
 			}
 
@@ -243,10 +248,10 @@ public class WeatherPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
 			                                  @Nullable View view, @NotNull ContextMenuItem item,
 			                                  boolean isChecked) {
-				weatherSettings.WX_ENABLED.set(isChecked);
-				item.setSelected(weatherSettings.WX_ENABLED.get());
-				item.setColor(app, weatherSettings.WX_ENABLED.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				item.setDescription(isChecked ? getWeatherTypesSummary(getEnabledLayers(app.getSettings().getApplicationMode())) : null);
+				weatherSettings.weatherEnabled.set(isChecked);
+				item.setSelected(weatherSettings.weatherEnabled.get());
+				item.setColor(app, weatherSettings.weatherEnabled.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setDescription(isChecked ? getWeatherTypesSummary(weatherHelper.getVisibleBands()) : null);
 				if (uiAdapter != null) {
 					uiAdapter.onDataSetChanged();
 				}
@@ -257,13 +262,11 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
-	public String getWeatherTypesSummary(@NonNull List<WeatherInfoType> types) {
-		if (!Algorithms.isEmpty(types)) {
+	public String getWeatherTypesSummary(@NonNull List<WeatherBand> weatherBands) {
+		if (!Algorithms.isEmpty(weatherBands)) {
 			List<String> titles = new ArrayList<>();
-			for (WeatherInfoType layer : WeatherInfoType.values()) {
-				if (types.contains(layer)) {
-					titles.add(app.getString(layer.getTitleId()));
-				}
+			for (WeatherBand weatherBand : weatherBands) {
+				titles.add(weatherBand.getMeasurementName());
 			}
 			return TextUtils.join(", ", titles);
 		}
@@ -330,26 +333,26 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherContourLayer = new WeatherContourLayer(app);
 	}
 
-	public void setWeatherEnabled(@NonNull ApplicationMode appMode, boolean enable) {
-		weatherSettings.WX_ENABLED.setModeValue(appMode, enable);
+	public void setWeatherEnabled(boolean enable) {
+		weatherSettings.weatherEnabled.set(enable);
 	}
 
-	public boolean isWeatherEnabled(@NonNull ApplicationMode appMode) {
-		return weatherSettings.WX_ENABLED.getModeValue(appMode);
+	public boolean isWeatherEnabled() {
+		return weatherSettings.weatherEnabled.get();
 	}
 
-	public boolean isAnyDataVisible(@NonNull ApplicationMode appMode) {
-		boolean isAnyLayerEnabled = !Algorithms.isEmpty(getEnabledLayers(appMode));
-		boolean isContoursEnabled = isContoursEnabled(appMode);
-		return isWeatherEnabled(appMode) && (isAnyLayerEnabled || isContoursEnabled);
+	public boolean isAnyDataVisible() {
+		boolean isContoursEnabled = isContoursEnabled();
+		boolean isAnyLayerEnabled = weatherHelper.hasVisibleBands();
+		return isWeatherEnabled() && (isAnyLayerEnabled || isContoursEnabled);
 	}
 
-	public boolean isContoursEnabled(@NonNull ApplicationMode appMode) {
-		return weatherSettings.WX_CONTOURS_ENABLED.getModeValue(appMode);
+	public boolean isContoursEnabled() {
+		return weatherSettings.weatherContoursEnabled.get();
 	}
 
-	public void setContoursEnabled(@NonNull ApplicationMode appMode, boolean enabled) {
-		weatherSettings.WX_CONTOURS_ENABLED.setModeValue(appMode, enabled);
+	public void setContoursEnabled(boolean enabled) {
+		weatherSettings.weatherContoursEnabled.set(enabled);
 
 		RenderingRuleProperty tempContoursProp = app.getRendererRegistry().getCustomRenderingRuleProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
 		if (tempContoursProp != null) {
@@ -365,137 +368,30 @@ public class WeatherPlugin extends OsmandPlugin {
 		}
 	}
 
-	public int getContoursTransparency(@NonNull ApplicationMode appMode) {
-		Integer value = weatherSettings.WX_CONTOURS_TRANSPARENCY.getModeValue(appMode);
+	public int getContoursTransparency() {
+		Integer value = weatherSettings.weatherContoursTransparency.get();
 		return value != null ? value : WeatherSettings.DEFAULT_TRANSPARENCY;
 	}
 
-	public void setContoursTransparency(@NonNull ApplicationMode appMode, @NonNull Integer transparency) {
-		weatherSettings.WX_CONTOURS_TRANSPARENCY.setModeValue(appMode, transparency);
+	public void setContoursTransparency(@NonNull Integer transparency) {
+		weatherSettings.weatherContoursTransparency.set(transparency);
 	}
 
 	@NonNull
-	public WeatherInfoType getSelectedContoursType(@NonNull ApplicationMode appMode) {
-		return weatherSettings.WX_CONTOURS_TYPE.getModeValue(appMode);
+	public WeatherContour getSelectedContoursType() {
+		return weatherSettings.weatherContoursType.get();
 	}
 
-	public void setSelectedContoursType(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType contoursType) {
-		weatherSettings.WX_CONTOURS_TYPE.setModeValue(appMode, contoursType);
+	public void setSelectedContoursType(@NonNull WeatherContour contoursType) {
+		weatherSettings.weatherContoursType.set(contoursType);
 	}
 
-	public void setCurrentConfigureLayer(@Nullable WeatherInfoType layer) {
-		this.currentConfigureLayer = layer;
+	public void setCurrentConfigureBand(@WeatherBandType short currentConfigureBand) {
+		this.currentConfigureBand = currentConfigureBand;
 	}
 
-	@Nullable
-	public WeatherInfoType getCurrentConfiguredLayer() {
-		return currentConfigureLayer;
-	}
-
-	@NonNull
-	public List<WeatherInfoType> getEnabledLayers(@NonNull ApplicationMode appMode) {
-		Set<WeatherInfoType> result = new HashSet<>();
-		String storedValue = weatherSettings.WX_ENABLED_LAYERS.getModeValue(appMode);
-		if (!Algorithms.isEmpty(storedValue)) {
-			for (WeatherInfoType type : WeatherInfoType.values()) {
-				if (storedValue.contains(type.name())) {
-					result.add(type);
-				}
-			}
-		}
-		return new ArrayList<>(result);
-	}
-
-	public void toggleLayerEnable(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer, boolean enable) {
-		List<WeatherInfoType> enabledLayers = getEnabledLayers(appMode);
-		if (enable) {
-			enabledLayers.add(layer);
-		} else {
-			enabledLayers.remove(layer);
-		}
-		List<String> valueToSave = new ArrayList<>();
-		for (WeatherInfoType type : enabledLayers) {
-			valueToSave.add(type.name());
-		}
-		weatherSettings.WX_ENABLED_LAYERS.setModeValues(appMode, valueToSave);
-	}
-
-	public boolean isLayerEnabled(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer) {
-		return getEnabledLayers(appMode).contains(layer);
-	}
-
-	public int getLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer) {
-		Integer value = getLayersTransparencies(appMode).get(layer);
-		return value != null ? value : weatherSettings.DEFAULT_TRANSPARENCY;
-	}
-
-	public void setLayerTransparency(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer, @NonNull Integer transparency) {
-		Map<WeatherInfoType, Integer> transparencies = getLayersTransparencies(appMode);
-		transparencies.put(layer, transparency);
-		List<String> valuesToSave = new ArrayList<>();
-		for (Entry<WeatherInfoType, Integer> layerTransp : transparencies.entrySet()) {
-			valuesToSave.add(layerTransp.getKey().name() + ":" + layerTransp.getValue());
-		}
-		weatherSettings.WX_LAYERS_TRANSPARENCY.setModeValues(appMode, valuesToSave);
-		weatherHelper.updateBandsSettings();
-	}
-
-	@NonNull
-	public Map<WeatherInfoType, Integer> getLayersTransparencies(@NonNull ApplicationMode appMode) {
-		Map<WeatherInfoType, Integer> transparencies = new HashMap<>();
-		List<String> storedValues = weatherSettings.WX_LAYERS_TRANSPARENCY.getStringsListForProfile(appMode);
-		if (!Algorithms.isEmpty(storedValues)) {
-			for (String value : storedValues) {
-				try {
-					String[] bundle = value.split(":");
-					WeatherInfoType type = WeatherInfoType.valueOf(bundle[0].trim());
-					Integer transparency = Integer.parseInt(bundle[1].trim());
-					transparencies.put(type, transparency);
-				} catch (Exception e) {
-					// implement logs
-				}
-			}
-		}
-		return transparencies;
-	}
-
-	@NonNull
-	public Enum<?> getSelectedLayerUnit(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer) {
-		EnumStringPreference preference = getUnitsPreference(layer);
-		return (Enum<?>) preference.getModeValue(appMode);
-	}
-
-	public void setSelectedLayerUnit(@NonNull ApplicationMode appMode, @NonNull WeatherInfoType layer, @NonNull Enum<?> value) {
-		EnumStringPreference preference = getUnitsPreference(layer);
-		preference.setModeValue(appMode, value);
-	}
-
-	@Nullable
-	public EnumStringPreference getUnitsPreference(@NonNull WeatherInfoType layer) {
-		switch (layer) {
-			case TEMPERATURE:
-				return weatherSettings.weatherTempUnit;
-			case PRESSURE:
-				return weatherSettings.weatherPressureUnit;
-			case WIND:
-				return weatherSettings.weatherWindUnit;
-			case CLOUDS:
-				return weatherSettings.weatherCloudUnit;
-			case PRECIPITATION:
-				return weatherSettings.weatherPrecipUnit;
-			default:
-				return null;
-		}
-	}
-
-	@NonNull
-	public String[] getUnitsPreferencesIds() {
-		return new String[] {
-				weatherSettings.weatherTempUnit.getId(),
-				weatherSettings.weatherPrecipUnit.getId(),
-				weatherSettings.weatherWindUnit.getId(),
-				weatherSettings.weatherCloudUnit.getId(),
-				weatherSettings.weatherPressureUnit.getId()
-		};
+	@WeatherBandType
+	public short getCurrentConfigureBand() {
+		return currentConfigureBand;
 	}
 }

@@ -19,9 +19,12 @@ import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WeatherHelper {
@@ -41,7 +44,7 @@ public class WeatherHelper {
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
 
-	private final List<WeatherBand> weatherBands = new ArrayList<>();
+	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 
 	private MapPresentationEnvironment mapPresentationEnvironment;
@@ -50,16 +53,41 @@ public class WeatherHelper {
 		this.app = app;
 		this.weatherSettings = new WeatherSettings(app);
 
-		weatherBands.add(WeatherBand.withWeatherBand(app, WEATHER_BAND_TEMPERATURE));
-		weatherBands.add(WeatherBand.withWeatherBand(app, WEATHER_BAND_PRESSURE));
-		weatherBands.add(WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_SPEED));
-		weatherBands.add(WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
-		weatherBands.add(WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
+		weatherBands.put(WEATHER_BAND_TEMPERATURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_TEMPERATURE));
+		weatherBands.put(WEATHER_BAND_PRESSURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRESSURE));
+		weatherBands.put(WEATHER_BAND_WIND_SPEED, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_SPEED));
+		weatherBands.put(WEATHER_BAND_CLOUD, WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
+		weatherBands.put(WEATHER_BAND_PRECIPITATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
 	}
 
 	@NonNull
 	public WeatherSettings getWeatherSettings() {
 		return weatherSettings;
+	}
+
+	@NonNull
+	public List<WeatherBand> getWeatherBands() {
+		return new ArrayList<>(weatherBands.values());
+	}
+
+	public boolean hasVisibleBands() {
+		return !Algorithms.isEmpty(getVisibleBands());
+	}
+
+	@NonNull
+	public List<WeatherBand> getVisibleBands() {
+		List<WeatherBand> bands = new ArrayList<>();
+		for (WeatherBand band : weatherBands.values()) {
+			if (band.isBandVisible()) {
+				bands.add(band);
+			}
+		}
+		return bands;
+	}
+
+	@Nullable
+	public WeatherBand getWeatherBand(short bandIndex) {
+		return weatherBands.get(bandIndex);
 	}
 
 	public void updateMapPresentationEnvironment(@Nullable MapPresentationEnvironment environment) {
@@ -91,7 +119,7 @@ public class WeatherHelper {
 	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		RenderingRulesStorage rulesStorage = app.getRendererRegistry().getRenderer(WEATHER_RENDER);
 		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
-		for (WeatherBand band : weatherBands) {
+		for (WeatherBand band : weatherBands.values()) {
 			String unit = band.getBandUnit().getSymbol();
 			String unitFormatGeneral = band.getBandGeneralUnitFormat();
 			String unitFormatPrecise = band.getBandPreciseUnitFormat();

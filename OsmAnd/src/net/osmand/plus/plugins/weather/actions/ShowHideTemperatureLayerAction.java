@@ -1,6 +1,6 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.actions;
 
-import static net.osmand.plus.plugins.weather.WeatherInfoType.TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +12,10 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class ShowHideTemperatureLayerAction extends QuickAction {
 
@@ -36,10 +36,12 @@ public class ShowHideTemperatureLayerAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		if (plugin != null) {
-			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-			plugin.toggleLayerEnable(appMode, TEMPERATURE, !plugin.isLayerEnabled(appMode, TEMPERATURE));
+		OsmandApplication app = mapActivity.getMyApplication();
+		WeatherHelper weatherHelper = app.getWeatherHelper();
+		WeatherBand weatherBand = weatherHelper.getWeatherBand(WEATHER_BAND_TEMPERATURE);
+		if (weatherBand != null) {
+			boolean visible = !weatherBand.isBandVisible();
+			weatherBand.setBandVisible(visible);
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 	}
@@ -60,8 +62,8 @@ public class ShowHideTemperatureLayerAction extends QuickAction {
 	}
 
 	@Override
-	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		return plugin != null && plugin.isLayerEnabled(app.getSettings().getApplicationMode(), TEMPERATURE);
+	public boolean isActionWithSlash(OsmandApplication app) {
+		WeatherBand weatherBand = app.getWeatherHelper().getWeatherBand(WEATHER_BAND_TEMPERATURE);
+		return weatherBand != null && weatherBand.isBandVisible();
 	}
 }

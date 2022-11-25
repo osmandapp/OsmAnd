@@ -86,7 +86,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		getListView().addItemDecoration(createDividerItemDecoration());
@@ -95,7 +95,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);

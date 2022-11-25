@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
@@ -50,7 +51,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {

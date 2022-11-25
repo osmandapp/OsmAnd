@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.widgets;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,29 +11,33 @@ import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
-public abstract class WeatherWidget extends TextInfoWidget {
+public class WeatherWidget extends TextInfoWidget {
 
-	protected final WeatherPlugin weatherPlugin;
+	protected final WeatherHelper weatherHelper;
 	protected final IObtainValueAsyncCallback callback;
+	protected final WeatherBand weatherBand;
 	protected final short band;
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;
 	private long lastDateTime;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WeatherPlugin weatherPlugin,
-	                     @NonNull WidgetType widgetType, short band) {
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
 		super(mapActivity, widgetType);
-		this.weatherPlugin = weatherPlugin;
 		this.band = band;
+		this.weatherHelper = app.getWeatherHelper();
+		this.weatherBand = weatherHelper.getWeatherBand(band);
 		this.callback = new IObtainValueAsyncCallback() {
 			@Override
 			public void method(boolean succeeded, double value, SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
-				WeatherTileResourcesManager resourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
+				WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 				if (succeeded && resourcesManager != null) {
 					value = resourcesManager.getConvertedBandValue(band, value);
 					String formattedValue = resourcesManager.getFormattedBandValue(band, value, true);
@@ -47,7 +51,15 @@ public abstract class WeatherWidget extends TextInfoWidget {
 		setIcons(widgetType);
 	}
 
-	public abstract void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue);
+	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
+		app.runInUIThread(() -> {
+			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
+				setText(formattedValue, weatherBand.getBandUnit().getSymbol());
+			} else {
+				setText(NO_VALUE, null);
+			}
+		});
+	}
 
 	@Nullable
 	public PointI getPoint31() {

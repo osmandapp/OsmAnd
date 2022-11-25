@@ -11,10 +11,10 @@ import static net.osmand.plus.plugins.weather.units.TemperatureUnit.CELSIUS;
 import static net.osmand.plus.plugins.weather.units.TemperatureUnit.FAHRENHEIT;
 import static net.osmand.plus.plugins.weather.units.WindUnit.KILOMETERS_PER_HOUR;
 import static net.osmand.plus.plugins.weather.units.WindUnit.KNOTS;
+import static net.osmand.plus.plugins.weather.units.WindUnit.METERS_PER_SECOND;
 import static net.osmand.plus.plugins.weather.units.WindUnit.MILES_PER_HOUR;
 
-import android.graphics.drawable.Drawable;
-
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.weather.units.PressureUnit;
 import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -77,7 +78,7 @@ public class WeatherBand {
 	private static final List<TemperatureUnit> TEMP_UNITS = new ArrayList<>(Arrays.asList(CELSIUS, FAHRENHEIT));
 	private static final List<PressureUnit> PRESSURE_UNITS = new ArrayList<>(Arrays.asList(HECTOPASCALS, MILLIMETERS_OF_MERCURY, INCHES_OF_MERCURY));
 	private static final List<CloudUnit> CLOUD_UNITS = new ArrayList<>(Collections.singletonList(PERCENT));
-	private static final List<WindUnit> WIND_UNITS = new ArrayList<>(Arrays.asList(MILES_PER_HOUR, KILOMETERS_PER_HOUR, MILES_PER_HOUR, KNOTS));
+	private static final List<WindUnit> WIND_UNITS = new ArrayList<>(Arrays.asList(METERS_PER_SECOND, KILOMETERS_PER_HOUR, MILES_PER_HOUR, KNOTS));
 	private static final List<PrecipitationUnit> PRECIPITATION_UNITS = new ArrayList<>(Arrays.asList(MILIMETERS, INCHES));
 
 	private static final String INTERNAL_TEMP_UNIT = "°C";
@@ -98,35 +99,35 @@ public class WeatherBand {
 	private static final WindUnit DEFAULT_WIND_SPEED_UNIT = MILES_PER_HOUR;
 	private static final PrecipitationUnit DEFAULT_PRECIP_UNIT = MILIMETERS;
 
-	private static Map<String, String> kGeneralUnitFormats = new HashMap<>();
-	private static Map<String, String> kPreciseUnitFormats = new HashMap<>();
+	private static final Map<String, String> GENERAL_UNIT_FORMATS = new HashMap<>();
+	private static final Map<String, String> PRECISE_UNIT_FORMATS = new HashMap<>();
 
 	static {
-		kGeneralUnitFormats.put(CloudUnit.PERCENT.getSymbol(), "%d");
-		kGeneralUnitFormats.put(TemperatureUnit.CELSIUS.getSymbol(), "%d");
-		kGeneralUnitFormats.put(TemperatureUnit.FAHRENHEIT.getSymbol(), "%d");
-		kGeneralUnitFormats.put(PressureUnit.HECTOPASCALS.getSymbol(), "%d");
-		kGeneralUnitFormats.put(PressureUnit.MILLIMETERS_OF_MERCURY.getSymbol(), "%d");
-		kGeneralUnitFormats.put(PressureUnit.INCHES_OF_MERCURY.getSymbol(), "%d");
-		kGeneralUnitFormats.put(WindUnit.METERS_PER_SECOND.getSymbol(), "%d");
-		kGeneralUnitFormats.put(WindUnit.KILOMETERS_PER_HOUR.getSymbol(), "%d");
-		kGeneralUnitFormats.put(WindUnit.MILES_PER_HOUR.getSymbol(), "%d");
-		kGeneralUnitFormats.put(WindUnit.KNOTS.getSymbol(), "%d");
-		kGeneralUnitFormats.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%d");
-		kGeneralUnitFormats.put(PrecipitationUnit.INCHES.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(CloudUnit.PERCENT.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(TemperatureUnit.CELSIUS.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(TemperatureUnit.FAHRENHEIT.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PressureUnit.HECTOPASCALS.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PressureUnit.MILLIMETERS_OF_MERCURY.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PressureUnit.INCHES_OF_MERCURY.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(METERS_PER_SECOND.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(WindUnit.KILOMETERS_PER_HOUR.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(WindUnit.MILES_PER_HOUR.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(WindUnit.KNOTS.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.INCHES.getSymbol(), "%d");
 
-		kPreciseUnitFormats.put(CloudUnit.PERCENT.getSymbol(), "%d");
-		kPreciseUnitFormats.put(TemperatureUnit.CELSIUS.getSymbol(), "%.1f");
-		kPreciseUnitFormats.put(TemperatureUnit.FAHRENHEIT.getSymbol(), "%d");
-		kPreciseUnitFormats.put(PressureUnit.HECTOPASCALS.getSymbol(), "%d");
-		kPreciseUnitFormats.put(PressureUnit.MILLIMETERS_OF_MERCURY.getSymbol(), "%d");
-		kPreciseUnitFormats.put(PressureUnit.INCHES_OF_MERCURY.getSymbol(), "%.1f");
-		kPreciseUnitFormats.put(WindUnit.METERS_PER_SECOND.getSymbol(), "%d");
-		kPreciseUnitFormats.put(WindUnit.KILOMETERS_PER_HOUR.getSymbol(), "%d");
-		kPreciseUnitFormats.put(WindUnit.MILES_PER_HOUR.getSymbol(), "%d");
-		kPreciseUnitFormats.put(WindUnit.KNOTS.getSymbol(), "%d");
-		kPreciseUnitFormats.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%.1f");
-		kPreciseUnitFormats.put(PrecipitationUnit.INCHES.getSymbol(), "%.1f");
+		PRECISE_UNIT_FORMATS.put(CloudUnit.PERCENT.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(TemperatureUnit.CELSIUS.getSymbol(), "%.1f");
+		PRECISE_UNIT_FORMATS.put(TemperatureUnit.FAHRENHEIT.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(PressureUnit.HECTOPASCALS.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(PressureUnit.MILLIMETERS_OF_MERCURY.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(PressureUnit.INCHES_OF_MERCURY.getSymbol(), "%.1f");
+		PRECISE_UNIT_FORMATS.put(WindUnit.METERS_PER_SECOND.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(WindUnit.KILOMETERS_PER_HOUR.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(WindUnit.MILES_PER_HOUR.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(WindUnit.KNOTS.getSymbol(), "%d");
+		PRECISE_UNIT_FORMATS.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%.1f");
+		PRECISE_UNIT_FORMATS.put(PrecipitationUnit.INCHES.getSymbol(), "%.1f");
 	}
 
 	private final OsmandApplication app;
@@ -145,7 +146,7 @@ public class WeatherBand {
 	}
 
 	@NonNull
-	private WeatherSettings getWeatherSettings() {
+	public WeatherSettings getWeatherSettings() {
 		return app.getWeatherHelper().getWeatherSettings();
 	}
 
@@ -172,19 +173,65 @@ public class WeatherBand {
 		return false;
 	}
 
-	@Nullable
-	public WeatherUnit getBandUnit() {
+	public boolean setBandVisible(boolean visible) {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudUnit.get();
+				return getWeatherSettings().weatherCloud.set(visible);
 			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempUnit.get();
+				return getWeatherSettings().weatherTemp.set(visible);
 			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureUnit.get();
+				return getWeatherSettings().weatherPressure.set(visible);
 			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindUnit.get();
+				return getWeatherSettings().weatherWind.set(visible);
 			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipUnit.get();
+				return getWeatherSettings().weatherPrecip.set(visible);
+			case WEATHER_BAND_UNDEFINED:
+				return false;
+		}
+		return false;
+	}
+
+	@Nullable
+	public WeatherUnit getBandUnit() {
+		CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();
+		if (preference != null) {
+			return preference.get();
+		}
+		return null;
+	}
+
+	@Nullable
+	public CommonPreference<? extends WeatherUnit> getBandUnitPref() {
+		switch (bandIndex) {
+			case WEATHER_BAND_CLOUD:
+				return getWeatherSettings().weatherCloudUnit;
+			case WEATHER_BAND_TEMPERATURE:
+				return getWeatherSettings().weatherTempUnit;
+			case WEATHER_BAND_PRESSURE:
+				return getWeatherSettings().weatherPressureUnit;
+			case WEATHER_BAND_WIND_SPEED:
+				return getWeatherSettings().weatherWindUnit;
+			case WEATHER_BAND_PRECIPITATION:
+				return getWeatherSettings().weatherPrecipUnit;
+			case WEATHER_BAND_UNDEFINED:
+				return null;
+		}
+		return null;
+	}
+
+	@Nullable
+	public String getBandUnitPrefId() {
+		switch (bandIndex) {
+			case WEATHER_BAND_CLOUD:
+				return getWeatherSettings().weatherCloudUnit.getId();
+			case WEATHER_BAND_TEMPERATURE:
+				return getWeatherSettings().weatherTempUnit.getId();
+			case WEATHER_BAND_PRESSURE:
+				return getWeatherSettings().weatherPressureUnit.getId();
+			case WEATHER_BAND_WIND_SPEED:
+				return getWeatherSettings().weatherWindUnit.getId();
+			case WEATHER_BAND_PRECIPITATION:
+				return getWeatherSettings().weatherPrecipUnit.getId();
 			case WEATHER_BAND_UNDEFINED:
 				return null;
 		}
@@ -246,23 +293,23 @@ public class WeatherBand {
 		}
 	}
 
-	@Nullable
-	public Drawable getIcon() {
+	@DrawableRes
+	public int getIconId() {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_clouds);
+				return R.drawable.ic_action_clouds;
 			case WEATHER_BAND_TEMPERATURE:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_thermometer);
+				return R.drawable.ic_action_thermometer;
 			case WEATHER_BAND_PRESSURE:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_air_pressure);
+				return R.drawable.ic_action_air_pressure;
 			case WEATHER_BAND_WIND_SPEED:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_wind);
+				return R.drawable.ic_action_wind;
 			case WEATHER_BAND_PRECIPITATION:
-				return app.getUIUtilities().getThemedIcon(R.drawable.ic_action_precipitation);
+				return R.drawable.ic_action_precipitation;
 			case WEATHER_BAND_UNDEFINED:
-				return null;
+				return -1;
 		}
-		return null;
+		return -1;
 	}
 
 	@Nullable
@@ -287,13 +334,13 @@ public class WeatherBand {
 	@Nullable
 	public String getBandGeneralUnitFormat() {
 		WeatherUnit unit = getBandUnit();
-		return unit != null ? kGeneralUnitFormats.get(unit.getSymbol()) : null;
+		return unit != null ? GENERAL_UNIT_FORMATS.get(unit.getSymbol()) : null;
 	}
 
 	@Nullable
 	public String getBandPreciseUnitFormat() {
 		WeatherUnit unit = getBandUnit();
-		return unit != null ? kPreciseUnitFormats.get(unit.getSymbol()) : null;
+		return unit != null ? PRECISE_UNIT_FORMATS.get(unit.getSymbol()) : null;
 	}
 
 	@Nullable
@@ -382,6 +429,25 @@ public class WeatherBand {
 	}
 
 	@Nullable
+	public CommonPreference<Float> getAlphaPreference() {
+		switch (bandIndex) {
+			case WEATHER_BAND_CLOUD:
+				return getWeatherSettings().weatherCloudAlpha;
+			case WEATHER_BAND_TEMPERATURE:
+				return getWeatherSettings().weatherTempAlpha;
+			case WEATHER_BAND_PRESSURE:
+				return getWeatherSettings().weatherPressureAlpha;
+			case WEATHER_BAND_WIND_SPEED:
+				return getWeatherSettings().weatherWindAlpha;
+			case WEATHER_BAND_PRECIPITATION:
+				return getWeatherSettings().weatherPrecipAlpha;
+			case WEATHER_BAND_UNDEFINED:
+				return null;
+		}
+		return null;
+	}
+
+	@Nullable
 	public String getColorFilePath() {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
@@ -420,7 +486,7 @@ public class WeatherBand {
 	}
 
 	@Nullable
-	private String getBandType() {
+	public String getBandType() {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
 				return "cloud";

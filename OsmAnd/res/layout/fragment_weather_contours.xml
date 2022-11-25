@@ -101,6 +101,7 @@
 			<include layout="@layout/list_item_divider" />
 
 			<LinearLayout
+				android:id="@+id/transparency_card"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="?attr/list_background_color"

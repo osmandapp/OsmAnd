@@ -20,7 +20,6 @@ import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -140,14 +139,13 @@ public class WeatherContourLayer extends BaseMapLayer {
 			return;
 		}
 
-		ApplicationMode appMode = settings.getApplicationMode();
-		boolean weatherEnabled = weatherPlugin.isWeatherEnabled(appMode);
+		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		boolean contoursEnabled = weatherPlugin.isContoursEnabled(appMode);
+		boolean contoursEnabled = weatherPlugin.isContoursEnabled();
 		boolean contoursEnabledChanged = contoursEnabled != contoursEnabledCached;
 		contoursEnabledCached = contoursEnabled;
-		int transparency = weatherPlugin.getContoursTransparency(appMode);
+		int transparency = weatherPlugin.getContoursTransparency();
 		boolean transparencyChanged = cachedTransparency != transparency;
 		cachedTransparency = transparency;
 		boolean dateTimeChanged = cachedDateTime != dateTime;

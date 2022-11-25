@@ -183,7 +183,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 		if (isNewProfile) {
 			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
@@ -244,7 +244,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	@SuppressLint("InlinedApi")
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			FrameLayout preferencesContainer = view.findViewById(android.R.id.list_container);

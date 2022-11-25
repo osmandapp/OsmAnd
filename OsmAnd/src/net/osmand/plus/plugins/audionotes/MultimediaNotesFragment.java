@@ -82,7 +82,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		View switchProfile = view.findViewById(R.id.profile_button);
