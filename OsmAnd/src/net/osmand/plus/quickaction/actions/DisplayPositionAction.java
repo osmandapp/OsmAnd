@@ -68,11 +68,11 @@ public class DisplayPositionAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		if (getPreference(application).get()) {
-			return application.getString(R.string.shared_string_disable);
+	public String getActionText(@NonNull OsmandApplication app) {
+		if (getPreference(app).get()) {
+			return app.getString(R.string.shared_string_disable);
 		} else {
-			return application.getString(R.string.shared_string_enable);
+			return app.getString(R.string.shared_string_enable);
 		}
 	}
 

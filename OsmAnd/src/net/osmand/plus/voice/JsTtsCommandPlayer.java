@@ -65,7 +65,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		}
 		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM
-				.getModeValue(applicationMode).toString());
+				.getModeValue(app.getRoutingHelper().getAppMode()).toString());
 	}
 
 	@NonNull
@@ -174,14 +174,14 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				mTts.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(settings.AUDIO_USAGE.get())
+						.setUsage(settings.AUDIO_USAGE[settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode())].get())
 						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 						.build());
 				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 				if (app != null) {
-					Integer streamModeValue = settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
+					Integer streamModeValue = settings.AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 					OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[streamModeValue];
-					int vpd = pref == null ? 0 : pref.getModeValue(applicationMode);
+					int vpd = pref == null ? 0 : pref.getModeValue(app.getRoutingHelper().getAppMode());
 					if (vpd > 0) {
 						ttsRequests++;
 						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());

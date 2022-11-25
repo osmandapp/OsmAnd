@@ -7,18 +7,18 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
-public enum TemperatureConstants {
+public enum TemperatureUnit implements WeatherUnit {
 
 	CELSIUS(R.string.weather_temperature_celsius, "°C"),
 	FAHRENHEIT(R.string.weather_temperature_fahrenheit, "°F");
 
 	@StringRes
 	private final int titleId;
-	private final String unit;
+	private final String symbol;
 
-	TemperatureConstants(@StringRes int titleId, @NonNull String unit) {
+	TemperatureUnit(@StringRes int titleId, @NonNull String symbol) {
 		this.titleId = titleId;
-		this.unit = unit;
+		this.symbol = symbol;
 	}
 
 	@StringRes
@@ -27,14 +27,14 @@ public enum TemperatureConstants {
 	}
 
 	@NonNull
-	public String getUnit() {
-		return unit;
+	public String toHumanString(@NonNull Context ctx) {
+		String title = ctx.getString(titleId);
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + symbol + ")");
 	}
 
 	@NonNull
-	public String toHumanString(@NonNull Context ctx) {
-		String title = ctx.getString(titleId);
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
+	@Override
+	public String getSymbol() {
+		return symbol;
 	}
-
 }

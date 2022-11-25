@@ -189,27 +189,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {
-
-	}
-
-	@Override
-	public void onGetItems() {
-
-	}
-
-	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		updatePreference(findPreference(AUTHORIZE));
-	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {
-
-	}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {
-
 	}
 }

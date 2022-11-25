@@ -224,7 +224,7 @@
     <string name="mapillary_widget_descr">Memungkinkan berkontribusi cepat ke Mapillary.</string>
     <string name="mapillary_descr">Foto tingkat jalanan daring untuk semuanya. Jelajahi tempat, kolaborasi, tangkap dunia.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Menyediakan tampilan tingkat jalanan. Di mana citra belum ada, Anda dapat menambahkannya secara sendiri supaya orang lain dapat menggunakannya. Untuk mengaktifkan lapisan Mapillary aktifkan \"Citra tingkat jalanan\" di menu Konfigurasi peta.</string>
+    <string name="plugin_mapillary_descr">Citra tampilan tingkat jalan. Anda dapat berkontribusi sendiri. Untuk melihat data yang sudah ada sebagai lapisan peta, aktifkan \"Citra tingkat jalan\" dalam menu \"Konfigurasi peta\".</string>
     <string name="private_access_routing_req">Tujuan Anda terletak di area dengan akses pribadi. Izinkan menggunakan jalan pribadi untuk perjalanan ini\?</string>
     <string name="restart_search">Ulangi pencarian</string>
     <string name="increase_search_radius">Tingkatkan radius pencarian</string>
@@ -2099,7 +2099,7 @@
     <string name="default_buttons_commit">Komit</string>
     <string name="m">m</string>
     <string name="enter_verification_code">Masukkan kata sandi sekali pakai</string>
-    <string name="routing_attr_height_obstacles_description">Perutean dapat menghindari tanjakan yang kuat.</string>
+    <string name="routing_attr_height_obstacles_description">Waktu perjalanan yang diproyeksikan akan mencerminkan dampak ketinggian. Preferensi perutean dapat membantu menghindari tanjakan yang curam:</string>
     <string name="clear_confirmation_msg">Lupakan %1$s\?</string>
     <string name="online_routing_example_hint">URL dengan semua parameter bernyala akan diperlihatkan seperti berikut:</string>
     <string name="file_import_error">%1$s gagal impor: %2$s</string>
@@ -2451,9 +2451,9 @@
 \nWeb / Wikimedia - foto POI sesuai data OpenStreetMap.</string>
     <string name="use_dev_url_descr">Ubah untuk menggunakan dev.openstreetmap.org daripada openstreetmap.org untuk menguji coba mengunggah Catatan / POI / GPX OSM.</string>
     <string name="clear_osm_token">Hapus token OAuth OpenStreetMap</string>
-    <string name="osm_editing_plugin_description">Memungkinkan Anda untuk membuat kontribusi ke OpenStreetMap, sebuah komunitas global yang membuat peta dunia dan menyediakan data sumber terbuka terbaru kepada pengguna siapa pun.
+    <string name="osm_editing_plugin_description">Buat kontribusi ke OpenStreetMap, sebuah komunitas global yang membuat peta dunia dan menyediakan data sumber terbuka terbaru kepada pengguna siapa pun.
 \n
-\nAnda dapat menemukan petunjuk cara menyunting peta di situs web kami https://osmand.net/docs/user/plugins/osm-editing</string>
+\nAnda dapat menemukan petunjuk cara menyunting peta di situs web kami https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="choose_audio_stream">Output panduan suara</string>
     <string name="choose_audio_stream_descr">Pilih speaker untuk panduan suara.</string>
     <string name="voice_stream_voice_call">Audio panggilan ponsel (untuk menginterupsi stereo Bluetooth mobil)</string>
@@ -2815,7 +2815,7 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia dan Wikivoyage luring</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dapatkan pembaruan peta lebih sering. Pembaruan setiap jam, hari, atau minggu. Pembaruan diunduh secara bertahap, hanya untuk area yang diubah.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Dapatkan unduhan tidak terbatas untuk semua peta benua dan wilayah luring.</string>
-    <string name="purchases_feature_desc_wikipedia">Memiliki Wikipedia secara luring di perjalanan Anda membantu Anda mengetahui lebih lanjut tentang tempat-tempat yang Anda kunjungi. Tersedia secara luring dan menampilkan artikel Wikipedia dalam relasi titik menarik pada peta. Jangan lupa untuk mengunduh peta Wikipedia untuk wilayah yang dipilih.</string>
+    <string name="purchases_feature_desc_wikipedia">Menyediakan semua artikel Wikipedia berkaitan dengan tempat secara luring, membantu Anda untuk mempelajari tentang tempat-tempat yang Anda kunjungi saat perjalanan Anda dengan ketukan sederhana di peta. Jangan lupa untuk mengunduh berkas peta Wikipedia untuk wilayah sendiri-sendiri.</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Peta medan: garis kontur, bayangan bukit, lereng</string>
     <string name="purchases_feature_desc_terrain">Garis kontur medan, peta bayangan bukit penuh dengan nuansa gelap dan peta lereng dengan warna untuk menunjukkan puncak dan dataran rendah.</string>
     <string name="backup_version_history_delete_descr">Hapus catatan perubahan untuk tipe data usang dari OsmAnd Cloud\?</string>
@@ -2830,9 +2830,9 @@
     <string name="renew_subscription">Perbarui langganan</string>
     <string name="three_months_subscription">Langganan tiga bulan</string>
     <string name="map_widget_distance_by_tap">Jarak dengan ketukan</string>
-    <string name="open_place_reviews_plugin_description">Memungkinkan Anda untuk membuat kontribusi ke proyek OpenPlaceReviews. Seperti foto, ulasan, tautan tentang tempat-tempat publik seperti restoran, hotel, museum dan titik jalan.
+    <string name="open_place_reviews_plugin_description">Buat kontribusi ke proyek OpenPlaceReviews, seperti foto, ulasan, atau tautan untuk tempat publik seperti restoran, hotel, atau museum.
 \n
-\nAnda dapat menemukan petunjuk cara berkontribusi di situs web kami - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nCari petunjuk cara berkontribusi di situs web kami https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="activity_type_riding_name">Berkendara</string>
     <string name="activity_type_winter_name">Musim dingin</string>
     <string name="routing_engine_vehicle_type_hgv">HGV</string>
@@ -3382,7 +3382,7 @@
 \n • Rute GPX lengkap dari navigasi mendukung jalur lalu lintas dan petunjuk belokan lengkap
 \n
 \n • Perbaiki ukuran UI pada tablet
-\n
+\nditampilkan
 \n • Perbaiki bug dengan RTL
 \n
 \n</string>
@@ -3448,7 +3448,9 @@
     <string name="auto_zoom_close">Untuk close-up</string>
     <string name="sett_no_ext_input">Nihil</string>
     <string name="osmand_service">Mode latar belakang</string>
-    <string name="gpx_parse_error">GPX OsmAnd tidak terbentuk dengan baik, mohon hubungi tim dukungan untuk menyelidiki lebih lanjut.</string>
+    <string name="gpx_parse_error">Masalah ditemukan dengan sebuah berkas GPX.
+\n
+\nAnda dapat menghubungi dukungan OsmAnd untuk menyelidiki.</string>
     <string name="lenght_limit_description">Sediakan panjang kendaraan Anda, beberapa pembatasan rute mungkin diterapkan untuk kendaraan panjang.</string>
     <string name="select_wikipedia_article_langs">Pilih bahasa untuk artikel Wikipedia pada peta. Beralih ke bahasa apa pun yang tersedia saat membaca artikel.</string>
     <string name="shared_string_language">Bahasa</string>
@@ -3517,8 +3519,8 @@
     <string name="confirm_every_run">Selalu tanya</string>
     <string name="voice_provider">Panduan suara</string>
     <string name="native_rendering">Perenderan asli</string>
-    <string name="bearing_secondary_desc">Anda dapat mengubah format data yang ditampilkan di: %1$s – %2$s – %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Format koordinat dapat diubah dalam %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">Anda dapat mengubah format data yang digunakan dalam: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Anda dapat mengubah format koordinat dalam %1$s – %2$s – %3$s.</string>
     <string name="storage_directory">Penyimpanan Peta</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nomor rumah</string>
     <string name="shared_string_logoff">Keluar</string>
@@ -3554,7 +3556,7 @@
     <string name="gpx_selection_point">Titik %1$s</string>
     <string name="lang_no">Norwegia</string>
     <string name="routing_attr_weight_name">Batas berat</string>
-    <string name="battery_widget_desc">Menunjukkan tingkat baterai perangkat Anda.</string>
+    <string name="battery_widget_desc">Menampilkan tingkat baterai perangkat Anda.</string>
     <string name="arrival_time_widget_desc">Waktu tiba di titik tujuan.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="osb_comment_dialog_author">Nama penulis</string>
@@ -3583,7 +3585,7 @@
     <string name="auto_zoom_farthest">Ke jarak panjang</string>
     <string name="speech_rate">Tingkat Ucapan</string>
     <string name="map_widget_intermediate_distance">Tujuan perantara</string>
-    <string name="radius_rules_widget_desc">Alat penggaris radius membantu menentukan radius di sekitar titik yang dipilih pada peta dengan menampilkan lingkaran jarak pada peta.</string>
+    <string name="radius_rules_widget_desc">Alat penggaris radius menampilkan lingkaran jarak di sekitar sebuah titik yang dipilih di peta.</string>
     <string name="gps_info_widget_desc">Menunjukkan jumlah satelit yang saat ini terlihat dan digunakan.</string>
     <string name="max_speed_widget_desc">Menampilkan batas kecepatan untuk jalan mengemudi saat ini.</string>
     <string name="current_time_widget_desc">Menunjukkan waktu saat ini dari perangkat Anda.</string>
@@ -3592,7 +3594,7 @@
     <string name="mapillary_widget_desc">Menyediakan akses cepat ke aplikasi Mapillary untuk menambahkan citra tingkat jalanan.</string>
     <string name="av_notes_choose_action_widget_desc">Pilih tindakan.</string>
     <string name="altitude_widget_desc">Menunjukkan ketinggian di atas permukaan laut dari lokasi geografis saat ini.</string>
-    <string name="current_speed_widget_desc">Menunjukkan kecepatan Anda saat ini yang terdeteksi oleh sensor GPS.</string>
+    <string name="current_speed_widget_desc">Menampilkan kecepatan Anda saat ini yang dilaporkan dari GPS.</string>
     <string name="magnetic_bearing_widget_desc">Sudut antara utara magnetik dan titik target diamati dari lokasi Anda.</string>
     <string name="time_to_go_desc">Waktu dalam menit atau jam yang dibutuhkan untuk mencapai tujuan Anda.</string>
     <string name="show_cameras">Kamera kecepatan</string>
@@ -3671,10 +3673,10 @@
     <string name="reset_all_profile_settings">Atur ulang semua pengaturan profil\?</string>
     <string name="profile_import">Impor profil</string>
     <string name="terrain_slider_description">Atur tingkat perbesaran minimum dan maksimum di mana lapisan akan ditampilkan.</string>
-    <string name="lanes_widgets_desc">Widget jalur menunjukkan tata letak jalur jalan saat ini dan menyoroti jalur untuk dikendarai dengan navigasi aktif.</string>
-    <string name="map_markers_bar_widget_desc">Di widget bilah atas Anda dapat melihat jarak dan arah ke penanda dari lokasi saat ini. Dimungkinkan untuk mengkonfigurasi untuk melihat 1 atau 2 penanda teratas di widget.</string>
-    <string name="street_name_widget_desc">Widget nama jalan menunjukkan nama jalan saat ini dengan panah lokasi lurus atau nama jalan berikutnya dengan manuver yang harus diselesaikan.</string>
-    <string name="audio_video_notes_desc">Widget menyediakan akses cepat untuk memulai/menghentikan perekaman (audio, video, atau foto).</string>
+    <string name="lanes_widgets_desc">Menampilkan tata letak jalur jalan saat ini dan menyoroti satu yang akan digunakan saat bernavigasi.</string>
+    <string name="map_markers_bar_widget_desc">Widget bilah atas menampilkan jarak dan arah ke penanda Peta berikutnya dari lokasi Anda saat ini. Widget dapat diatur untuk menampilkan 1 atau 2 penanda.</string>
+    <string name="street_name_widget_desc">Widget Nama jalan menampilkan nama jalan saat ini dengan panah lokasi lurus, atau nama jalan berikutnya dengan panah yang menandakan belokan berikutnya.</string>
+    <string name="audio_video_notes_desc">Menyediakan akses cepat untuk memulai/mengakhiri catatan audio, video, atau foto.</string>
     <string name="navigation_points">Titik navigasi</string>
     <string name="get_altitude_data">Dapatkan data ketinggian</string>
     <string name="file_does_not_contain_routing_rules">Tidak ada aturan perutean di \'%1$s\'. Mohon pilih file yang lain.</string>
@@ -3688,7 +3690,7 @@
     <string name="compass_on_circles">Kompas pada lingkaran</string>
     <string name="distance_circles">Jarak-lingkaran</string>
     <string name="circle_settings">Pengaturan lingkaran</string>
-    <string name="navigation_points_desc">Widget navigasi diaktifkan selama navigasi untuk menampilkan informasi seperti jarak, waktu kedatangan atau kiri, belokan berikutnya, arah, nama jalan saat ini, informasi jalur, kecepatan maksimal, peringatan mendekat, POI, titik jalan.</string>
+    <string name="navigation_points_desc">Widget navigasi diaktifkan selama navigasi untuk menampilkan informasi seperti jarak, waktu kedatangan atau tersisa, belokan berikutnya, arah, nama jalan saat ini atau berikutnya, informasi jalur, kecepatan maksimal, peringatan mendekat, POI, titik jalan.</string>
     <string name="calculating_altitude">Menghitung ketinggian</string>
     <string name="calculate_online">Kalkulasi secara daring</string>
     <string name="track_attach_to_the_roads_descr">Trek akan dilampirkan ke jalan menggunakan peta luring, geometri trek akan diubah.</string>
@@ -3717,8 +3719,8 @@
     <string name="profile_import_descr">Tambahkan profil dengan membuka filenya dengan OsmAnd.</string>
     <string name="quick_action_contour_lines_descr">Tombol menampilkan atau menyembunyikan garis kontur pada peta.</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Lebih suka jalan yang tidak beraspal daripada jalan beraspal untuk perutean.</string>
-    <string name="coordinates_widget_desc">Ini menunjukkan koordinat geografis lokasi geografis saat ini.</string>
-    <string name="bearing_desc">Widget bantalan menunjukkan bantalan absolut atau relatif ke target dalam satuan sudut (Derajat 180, Derajat 360, Miliradian).</string>
+    <string name="coordinates_widget_desc">Menampilkan koordinat geografis dari geolokasi saat ini.</string>
+    <string name="bearing_desc">Menampilkan bantalan absolut atau relatif ke sebuah sasaran dalam satuan sudut (dalam mode 180 derajat, 360 derajat, atau miliradian).</string>
     <string name="app_mode_mountain_bicycle">Sepeda gunung</string>
     <string name="recalc_angle_dialog_descr">Segmen ekstra lurus antara lokasi saya dan rute yang dihitung akan ditampilkan hingga rute dihitung ulang</string>
     <string name="quick_action_hillshade_descr">Tombol untuk menampilkan atau menyembunyikan bayangan bukit di peta.</string>
@@ -4074,7 +4076,7 @@
     <string name="trip_recording_duration_widget_desc">Menampilkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
     <string name="download_tiles">Unduh ubin</string>
     <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
-    <string name="attach_roads_descr">Perkirakan trek Anda dengan sebuah rute menggunakan peta luring. Ini akan menyediakan nilai ketinggian, detail jalan, dan arahan yang dibenarkan selama navigasi.</string>
+    <string name="attach_roads_descr">Perkirakan trek Anda ke jalan yang diperbolehkan untuk merute antara titik dan kaitkan instruksi belokan tepat dan properti rute.</string>
     <string name="auto_backup_title">Pencadangan otomatis</string>
     <string name="without_profiles_changing">Tanpa perubahan profil</string>
     <string name="shared_string_only_missing">Hanya hilang</string>
@@ -4205,9 +4207,9 @@
     <string name="filter_poi_hint">Saring berdasarkan nama</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asisten pemetaan OSM</string>
     <string name="restart_is_required">Pemulaian ulang dibutuhkan untuk menetapkan perubahan.</string>
-    <string name="osmand_rastermaps_plugin_description">Akses banyak jenis peta daring (disebut ubin atau raster), dari ubin OSM yang telah ditentukan sebelumnya (seperti Mapnik) hingga gambar satelit, dan lapisan tujuan khusus seperti peta cuaca, peta iklim, peta geologi, lapisan bayangan bukit, dll. 
-\n 
-\n Salah satu dari peta ini dapat digunakan sebagai peta (dasar) utama yang akan ditampilkan, atau sebagai hamparan atau dasaran ke peta dasar lain (seperti peta vektor luring OsmAnd). Elemen tertentu dari peta vektor OsmAnd dapat disembunyikan melalui menu \'Konfigurasi peta\' untuk membuat peta dasar lebih terlihat.
+    <string name="osmand_rastermaps_plugin_description">Akses banyak jenis peta daring (disebut ubin atau raster), seperti ubin OSM yang telah dirender, gambar satelit, dan lapisan tujuan khusus seperti peta cuaca, peta iklim, peta geologi, lapisan bayangan bukit, dll.
+\n
+\n Salah satu dari peta ini dapat ditampilkan sebagai peta (dasar) utama, atau sebagai hamparan atau dasaran ke peta dasar lain (seperti peta vektor luring OsmAnd). Elemen tertentu dari peta vektor OsmAnd dapat disembunyikan melalui menu \'Konfigurasi peta\' untuk membuat peta dasar lebih terlihat.
 \n
 \n Unduh peta ubin secara langsung, atau salin sebagai file basis data SQLite ke folder data OsmAnd menggunakan salah satu dari banyak alat persiapan peta pihak ketiga.</string>
     <string name="osm_edit_modified_poi">POI OSM termodifikasi</string>
@@ -4239,9 +4241,9 @@
     <string name="short_location_on_map">Lat %1$s
 \nLon%2$s</string>
     <string name="tips_and_tricks_descr">Pertanyaan yang sering ditanyakan, perubahan terkini, dan lainnya.</string>
-    <string name="record_plugin_description">Memungkinkan Anda untuk merekam, simpan dan analisa data latihan atau gerakan, seperti kecepatan, kenaikan, keturunan atau relief rute, yang dapat digunakan kembali, diperbaiki, ditambahkan atau dibagikan dengan teman-teman.
+    <string name="record_plugin_description">Rekam perjalanan atau latihan Anda, dan analisa data tentang kecepatan, kenaikan dan keturunan yang terjadi, profil ketinggian, dll. Trek yang direkam dapat diarsip, dibagikan kepada orang lain, disunting, dan diproses setelah itu.
 \n
-\nCara penggunaan - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nBaca lebih lanjut di https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="rendering_value_translucent_lightgreen_name">Hijau muda translucent</string>
     <string name="access_from_map_description">Tombol menu meluncurkan dasbor daripada menu</string>
     <string name="osm_edit_context_menu_delete">Hapus suntingan OSM</string>
@@ -4249,9 +4251,11 @@
     <string name="world_map_download_descr">Peta dasar dunia (menutupi semua dunia pada tingkat perbesaran yang rendah) tidak ada atau usang. Mohon pertimbangkan untuk diperbarui untuk ikhtisar global.</string>
     <string name="rendering_value_translucent_pink_name">Merah muda translucent</string>
     <string name="rendering_value_darkyellow_name">Kuning gelap</string>
-    <string name="srtm_plugin_description">Informasi medan, seperti garis kontur, bayangan bukit dan tanjakan, membantu Anda untuk menyelidiki bentuk permukaan tanah, menentukan lengkungan, tanjakan, atau titik ketinggian yang sama, dan lainnya secara visual. Informasi topografi pada peta dapat ditampilkan dengan bayangan lereng untuk kenaikan dan keturunan, dan warna deviasi sudut lereng dari datar. Data dari SRTM dan ASTER.
+    <string name="srtm_plugin_description">Informasi medan seperti garis kontur, bayangan bukit, dan tanjakan, membantu Anda untuk menyelidiki bentuk permukaan tanah dan relief, navigasi, dan lain-lain. Informasi topografis di atas peta dapat ditampilkan dengan bayangan lereng, garis kontur, dan/atau pewarnaan kecuraman.
 \n
-\nCara penggunaan - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nData berasal dari SRTM dan ASTER.
+\n
+\nBaca lebih lanjut di http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="download_wikipedia_files">Unduh data Wikipedia tambahan (%1$s MB)\?</string>
     <string name="storage_directory_internal_app">Memori aplikasi internal</string>
     <string name="confirm_usage_speed_cameras">Dalam banyak negara (Jerman, Prancis, Italia, dan lainnya) penggunaan peringatan kamera kecepatan ilegal. OsmAnd tidak mengasumsikan tanggung jawab apa pun jika Anda melanggar hukum. Mohon hanya ketuk \'Iya\' jika Anda memenuhi syarat untuk menggunakan fitur ini.</string>
@@ -4354,7 +4358,7 @@
     <string name="ant_go_to_store">Pergi ke Toko</string>
     <string name="ant_heart_rate_write_gpx_desc">Termasuk detak jantung dalam trek</string>
     <string name="map_widget_ant_bicycle_power">Daya Sepeda</string>
-    <string name="purchases_feature_desc_cross_buy">Gunakan fitur langganan Anda di platform yang berbeda (Android/iOS/Web) tanpa biaya tambahan.</string>
+    <string name="purchases_feature_desc_cross_buy">Gunakan fitur langganan Anda di platform yang berbeda (Android/iOS/web) tanpa biaya tambahan.</string>
     <string name="shared_string_cross_buy">Pembelian silang</string>
     <string name="ant_write_to_gpx">Tulis data ke trek</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Menampilkan kecepatan pengguna dalam mengayuh</string>
@@ -4365,7 +4369,7 @@
     <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)\?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
-    <string name="map_widget_camera_distance_desc">Widget menampilkan ketinggian kamera di atas tingkat permukaan.</string>
+    <string name="map_widget_camera_distance_desc">Menampilkan ketinggian kamera di atas tingkat permukaan.</string>
     <string name="map_widget_zoom_level">Tingkat perbesaran</string>
     <string name="map_widget_camera_tilt">Kemiringan kamera</string>
     <string name="favorites_backup">Cadangan favorit</string>
@@ -4374,11 +4378,11 @@
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="ant_read_data">Baca data</string>
     <string name="map_widget_ant_heart_rate_desc">Menampilkan detak jantung pengguna selama beraktivitas dalam waktu nyata</string>
-    <string name="ant_missing_dependency_descr">Layanan \"%1$s\" yang dibutuhkan tidak ditemukan. 
-\nAnda harus menginstal layanan ANT+ Plugins atau Anda mungkin harus memperbarui jika Anda sudah memilikinya. 
-\nApakah Anda ingin pergi ke Play Store untuk mendapatkannya\?</string>
+    <string name="ant_missing_dependency_descr">Tidak dapat menemukan layanan \"%1$s\" yang dibutuhkan.
+\nAnda harus memasang atau memperbarui Layanan Plugin ANT+.
+\nApakah Anda ingin pergi ke Play Store untuk melakukannya\?</string>
     <string name="map_widget_ant_bicycle_cadence">Irama Sepeda</string>
-    <string name="map_widget_camera_tilt_desc">Widget menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
+    <string name="map_widget_camera_tilt_desc">Menampilkan sudut kemiringan kamera dalam mode perspektif. Bawaan adalah 90° (tanpa kemiringan).</string>
     <string name="developer_widgets">Widget pengembang</string>
     <string name="rendering_value_highContrastRoads_name">Jalan kontras tinggi</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas jalan Amerika</string>
@@ -4397,18 +4401,18 @@
 \n
 \nTampilan ini dapat dikembalikan dengan menonaktifkannya lagi di sini, atau dengan mengubah \'Gaya peta\' di bawah \'Konfigurasi peta\' sesuai keinginan.</string>
     <string name="osmand_distance_planning_plugin_name">Alat kalkulator jarak dan perencanaan</string>
-    <string name="coordinates_widget_current_location_desc">Widget menampilkan koordinat geografis lokasi geografis saat ini</string>
+    <string name="coordinates_widget_current_location_desc">Menampilkan koordinat geografis lokasi geografis saat ini</string>
     <string name="coordinates_widget_map_center">Koordinat: tengah peta</string>
     <string name="coordinates_widget_current_location">Koordinat: lokasi saat ini</string>
     <string name="map_widget_ant_bicycle_speed_desc">Menampilkan kecepatan bepergian</string>
     <string name="routing_attr_avoid_shuttle_train_name">Tidak ada kereta antar jemput</string>
-    <string name="osmand_parking_plugin_description">Aktifkan untuk menyetel titik di peta tempat mobil Anda tertinggal di jalan dan memberi tahu kalender Anda saat waktu parkir dimulai. Plugin membantu melacak waktu parkir dan lokasi mobil Anda. Untuk menempatkan penanda, pilih tempat di peta, lalu buka Tindakan dan tekan \"Tambahkan parkir\".</string>
+    <string name="osmand_parking_plugin_description">Tandai di mana mobil Anda diparkir, dan beri tahu kalender Anda ketika meteran parkir akan kedaluwarsa. Untuk menaruh penanda, pilih sebuah tempat di peta, pergi ke \"Tindakan\", dan ketuk \"Tambahkan parkir\".</string>
     <string name="osmand_distance_planning_plugin_description">Buat jalur dengan mengetuk peta, atau dengan menggunakan atau memodifikasi file GPX yang ada, untuk merencanakan perjalanan dan mengukur jarak antar titik. Hasilnya dapat disimpan sebagai file GPX untuk digunakan nanti sebagai panduan.</string>
     <string name="depth_contours">Kontur kedalaman</string>
-    <string name="plugin_nautical_descr">Nyalakan untuk memperkaya peta Anda dengan informasi tentang rute berlayar, lampu navigasi, zona bahaya, zona di mana diperbolehkan atau dilarang untuk berlayar atau berlabuh, dll. Untuk menggunakan unduh peta Laut dan aktifkan \"Peta laut\" ketik di Konfigurasi peta. 
-\n 
-\nBagaimana caranya - https://osmand.net/docs/user/plugins/nautical-charts</string>
-    <string name="audionotes_plugin_description">Buat catatan audio/foto/video selama perjalanan, menggunakan menu tombol peta atau konteks lokasi.</string>
+    <string name="plugin_nautical_descr">Memperkaya peta Anda dengan informasi tentang rute pelayaran, lampu navigasi, zona bahaya bahari, zona dengan batasan pelayaran atau perkaitan, dll. Untuk menggunakan, unduh peta Bahari masing-masing dan aktifkan gaya \"Peta laut\" dalam \"Konfigurasi peta\".
+\n
+\nBaca lebih lanjut di https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="audionotes_plugin_description">Ambil catatan audio/foto/video selama perjalanan, menggunakan menu tombol peta atau konteks lokasi.</string>
     <string name="navigate_point_olc">Open Location Code</string>
     <string name="use_opengl_render_descr">Gunakan perenderan OpenGL yang dipercepat oleh perangkat keras (dapat menggunakan lebih banyak baterai, atau tidak bekerja pada perangkat lawas).</string>
     <string name="speed_limit_exceed_message">Pilih batas tolerasi batas kecepatan, jika melebihi Anda akan mendapatkan peringatan suara.</string>
@@ -4452,8 +4456,8 @@
     <string name="plugin_ski_name">Tampilan peta ski</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Bagikan rute taksi</string>
     <string name="routing_attr_avoid_shuttle_train_description">Menghindari menggunakan kereta antar jemput</string>
-    <string name="plugin_ski_descr">Dirancang untuk bernavigasi di lokasi olahraga musim dingin. Lihat jalur ski, penanda lift ski, dan garis berwarna yang menunjukkan kerumitan setiap trek. Untuk menggunakan setelah mengaktifkan, buka Konfigurasi peta dan pilih jenis peta \"Musim dingin dan ski\".</string>
-    <string name="osmand_development_plugin_description">Memungkinkan untuk mengatur OsmAnd untuk uji coba: simulasi rute navigasi, periksa performa perenderan layar, dll. Plugin tidak dibutuhkan untuk penggunaan aplikasi normal.</string>
+    <string name="plugin_ski_descr">Dirancang untuk bernavigasi di area olahraga musim dingin. Lihat jalur dan lift ski, dan trek ski perbatasan negara, dengan garis berwarna yang menandakan nilai kerumitan. Untuk menggunakan, aktifkan plugin ini dan juga pergi ke \"Konfigurasi peta\" dan pilih gaya peta \"Musim dingin dan ski\".</string>
+    <string name="osmand_development_plugin_description">Menyediakan kemampuan untuk uji dan awakutu OsmAnd: simulasi rute navigasi, periksa performa perenderan layar, periksa performa, dll. Plugin ini tidak dibutuhkan untuk penggunaan aplikasi normal.</string>
     <string name="world_ski_missing">Unduh peta khusus luring untuk menampilkan fasilitas ski.</string>
     <string name="arrival_distance_factor_at_last">Dalam meter akhir</string>
     <string name="nautical_maps_missing">Unduh peta khusus luring untuk menampilkan detail laut.</string>
@@ -4464,15 +4468,15 @@
     <string name="index_name_tts_voice">Perintah suara (teks-ke-suara, disarankan)</string>
     <string name="poi_search_desc">Pencarian POI (Titik</string>
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
-    <string name="quick_action_map_center_widget_descr">Sebuah alihan untuk menampilkan atau menyembunyikan widget Tengah peta pada peta.</string>
-    <string name="quick_action_current_location_widget_descr">Sebuah alihan untuk menampilkan atau menyembunyikan widget Lokasi saat ini pada peta.</string>
+    <string name="quick_action_map_center_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget tengah peta di peta.</string>
+    <string name="quick_action_current_location_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget lokasi saat ini di peta.</string>
     <string name="rotate_map_none_rotated_opt">Fiks (diputar secara manual)</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
     <string name="routing_attr_avoid_sett_description">Menghindari batu bulat dan sett</string>
     <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
-    <string name="map_widget_target_distance_desc">Widget menampilkan jarak dari kamera ke lokasi sasaran.</string>
-    <string name="map_widget_zoom_level_desc">Widget menampilkan tingkat perbesaran peta saat ini.</string>
+    <string name="map_widget_target_distance_desc">Menampilkan jarak antara kamera dan lokasi sasaran.</string>
+    <string name="map_widget_zoom_level_desc">Menampilkan tingkat perbesaran peta saat ini.</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
     <string name="pref_vector_rendering">Opsi perenderan vektor spesifik</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpine dan turunan</string>
@@ -4493,7 +4497,7 @@
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
     <string name="external_sensors_plugin_name">Sensor Eksternal</string>
     <string name="send_uuid_preference_desc">Sebhah UUID acak digunakan untuk mengunduh peta luring dari server OsmAnd untuk memantau penggunaan sumber daya server yang adil, memprediksi pola lalu lintas, dan membuat laporan peta anonim sebulan.</string>
-    <string name="map_widget_altitude_desc">Menampilkan ketinggian di atas permukaan laut dari geolokasi saat ini atau untuk pusat peta saat ini</string>
+    <string name="map_widget_altitude_desc">Menampilkan ketinggian dari geolokasi saat ini atau untuk pusat peta saat ini</string>
     <string name="location_simulation_cutoff">Simulasi melewati meter pertama</string>
     <string name="map_center_widget">Koordinat: Tengah peta</string>
     <string name="location_simulation_speedup">Percepatan simulasi</string>
@@ -4504,7 +4508,7 @@
     <string name="shared_string_terms_of_use">Ketentuan Penggunaan</string>
     <string name="map_widget_rendering_fps">FPS perenderan peta</string>
     <string name="simulate_location_by_gpx">Simulasikan lokasi dengan GPX</string>
-    <string name="external_sensors_plugin_description">Pemantauan denyut jantung, kecepatan sepeda, daya sepeda, dan irama. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
+    <string name="external_sensors_plugin_description">Mengakses sensor eksternal untuk membaca mis. denyut jantung, kecepatan bersepeda, daya bersepeda, atau irama Anda. Memerlukan perangkat untuk dihubungkan ke masing-masing sensor melalui protokol jaringan pribadi nirkabel ANT+.</string>
     <string name="map_widget_rendering_fps_desc">Menampilkan seberapa cepat peta dan elemen peta ditampilkan dan dimuat ulang, dinyatakan dalam bingkai per detik (FPS).</string>
     <string name="shared_string_identifiers">Pengenal</string>
     <string name="send_uuid_preference">Kirim Pengenal Pengguna Unik (UUID)</string>
@@ -4847,7 +4851,7 @@
     <string name="play_commands_of_currently_selected_voice">Pilih suara dan uji dengan memutar pengumuman:</string>
     <string name="speak_gps_signal_status">Umumkan sinyal GPS hilang dan terpulih</string>
     <string name="speak_route_recalculation">Umumkan penghitungan ulang rute</string>
-    <string name="release_4_3">- Mesin render peta baru yang lebih cepat, dengan tampilan 2.5D
+    <string name="release_4_3">- Mesin render peta baru yang lebih cepat Versi 2 (OpenGL), dengan tampilan 2.5D
 \n
 \n - Animasi perubahan lokasi yang mulus saat bergerak
 \n
@@ -4866,6 +4870,10 @@
 \n - Ditambahkan dukungan untuk sensor ANT+
 \n
 \n - Ditambahkan opsi untuk menonaktifkan UUID unduhan
+\n
+\n- Prakiraan kecepatan standar yang dapat disesuaikan untuk waktu perjalanan berjalan/mendaki/berlari yang bergantung pada ketinggian
+\n
+\n- Diperbaiki keluaran audio dan penggeser volume
 \n
 \n</string>
     <string name="external_sensors_support">Dukungan sensor eksternal</string>
@@ -4938,4 +4946,38 @@
     <string name="switch_mode_by_tapping_on_widget">Ubah mode dengan mengetuk pada widget.</string>
     <string name="air_pressure_widget_desc">Menampilkan tekanan udara untuk tengah peta saat ini.</string>
     <string name="clouds_widget_desc">Menampilkan cakupan awan untuk tengah peta saat ini.</string>
+    <string name="weather_plugin_description">Menyediakan
+\n- prakiraan cuaca 24 jam dan 7 hari memberikan 5 lapisan
+\n- widget berbasis lokasi
+\n- garis isometrik suhu/tekanan
+\n
+\nData cuaca disediakan oleh Sistem Prakiraan Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="temperature_widget_desc">Menampilkan suhu untuk tengah peta saat ini.</string>
+    <string name="map_widget_sunset_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbenam.</string>
+    <string name="precipitation_widget_desc">Menampilkan curah hujan untuk tengah peta saat ini.</string>
+    <string name="map_rendering_engine_descr">Versi 2 (OpenGL) adalah mesin perenderan peta yang lebih cepat, juga menyediakan tampilan 2,5D. Perenderan Versi 1 adalah bawaan sebelum OsmAnd 4.3, dan masih dimungkinkan untuk perangkat yang lawas.</string>
+    <string name="quick_action_wind_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan angin di peta.</string>
+    <string name="quick_action_cloud_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan awan di peta.</string>
+    <string name="quick_action_air_pressure_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan tekanan udara di peta.</string>
+    <string name="cloud_layer">Lapisan awan</string>
+    <string name="precipitation_layer">Lapisan curah hujan</string>
+    <string name="temperature_layer">Lapisan suhu</string>
+    <string name="rendering_engine_failed">Perenderan peta OsmAnd telah mogok.</string>
+    <string name="pressure_layer">Lapisan tekanan</string>
+    <string name="wind_layer">Lapisan angin</string>
+    <string name="storage_migration_fragment_close_descr">Menyalin selesai %1$s%%. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
+    <string name="quick_action_precipitation_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan curah hujan di peta.</string>
+    <string name="quick_action_temperature_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan suhu di peta.</string>
+    <string name="map_widget_sunrise_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbit.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd telah mengubah ke perenderan peta \'Versi 1\'. Anda dapat mengubah kembali ke mesin perenderan \'Versi 2 (OpenGL)\' baru dalam Pengaturan.
+\n
+\nSilakan mendukung peningkatan dengan menyediakan catatan kesalahan Anda.</string>
+    <string name="rendering_attr_showMtbScale_description">Tampilkan trek berdasarkan skala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Tampilkan skala naik MTB</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Tampilkan jalur menurut skala naik MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Tampilkan skala MTB</string>
+    <string name="mtb_scale">Skala MTB</string>
+    <string name="mtb_imba">iMBA</string>
+    <string name="mtb_imba_full">Asosiasi Sepeda Gunung Internasional</string>
+    <string name="mtb_segment_classification">Klasifikasi segmen</string>
 </resources>

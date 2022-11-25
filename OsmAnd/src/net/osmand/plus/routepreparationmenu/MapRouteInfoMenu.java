@@ -966,7 +966,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.getSettings().setApplicationMode(next, false);
 			app.initVoiceCommandPlayer(mapActivity, next, null, true,
-					false, false, true);
+					false, true, true);
 			routingHelper.onSettingsChanged(true);
 		}
 	}

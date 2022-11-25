@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.weather.units.CloudConstants;
-import net.osmand.plus.plugins.weather.units.PrecipConstants;
-import net.osmand.plus.plugins.weather.units.PressureConstants;
-import net.osmand.plus.plugins.weather.units.TemperatureConstants;
-import net.osmand.plus.plugins.weather.units.WindConstants;
+import net.osmand.plus.plugins.weather.units.CloudUnit;
+import net.osmand.plus.plugins.weather.units.PrecipitationUnit;
+import net.osmand.plus.plugins.weather.units.PressureUnit;
+import net.osmand.plus.plugins.weather.units.TemperatureUnit;
+import net.osmand.plus.plugins.weather.units.WindUnit;
 
 public enum WeatherInfoType {
 
@@ -51,15 +51,15 @@ public enum WeatherInfoType {
 	public Enum<?>[] getUnits() {
 		switch (this) {
 			case TEMPERATURE:
-				return TemperatureConstants.values();
+				return TemperatureUnit.values();
 			case PRESSURE:
-				return PressureConstants.values();
+				return PressureUnit.values();
 			case WIND:
-				return WindConstants.values();
+				return WindUnit.values();
 			case CLOUDS:
-				return CloudConstants.values();
+				return CloudUnit.values();
 			case PRECIPITATION:
-				return PrecipConstants.values();
+				return PrecipitationUnit.values();
 			default:
 				return null;
 		}
@@ -67,16 +67,16 @@ public enum WeatherInfoType {
 
 	@Nullable
 	public String getUnitName(@NonNull Context ctx, @NonNull Enum<?> value) {
-		if (value instanceof TemperatureConstants) {
-			return ((TemperatureConstants) value).toHumanString(ctx);
-		} else if (value instanceof PressureConstants) {
-			return ((PressureConstants) value).toHumanString(ctx);
-		} else if (value instanceof WindConstants) {
-			return ((WindConstants) value).toHumanString(ctx);
-		} else if (value instanceof CloudConstants) {
-			return ((CloudConstants) value).getUnit();
-		} else if (value instanceof PrecipConstants) {
-			return ((PrecipConstants) value).toHumanString(ctx);
+		if (value instanceof TemperatureUnit) {
+			return ((TemperatureUnit) value).toHumanString(ctx);
+		} else if (value instanceof PressureUnit) {
+			return ((PressureUnit) value).toHumanString(ctx);
+		} else if (value instanceof WindUnit) {
+			return ((WindUnit) value).toHumanString(ctx);
+		} else if (value instanceof CloudUnit) {
+			return ((CloudUnit) value).getSymbol();
+		} else if (value instanceof PrecipitationUnit) {
+			return ((PrecipitationUnit) value).toHumanString(ctx);
 		}
 		return null;
 	}

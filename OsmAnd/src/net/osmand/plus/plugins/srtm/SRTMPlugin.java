@@ -166,6 +166,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		return "feature_articles/contour-lines-plugin.html";
 	}
 
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.TERRAIN;
+	}
+
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();

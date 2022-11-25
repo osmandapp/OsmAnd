@@ -3717,4 +3717,10 @@
     <string name="radius_ruler_item">Χάρακας ακτίνας</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="map_markers_desc">Το γραφικό στοιχείο δείχνει την απόσταση ή την εκτιμώμενη ώρα άφιξης (ETA) για τους δύο πρώτους δείκτες στη λίστα δεικτών χάρτη.</string>
+    <string name="shared_string_next_sunset">Επόμενο ηλιοβασίλεμα</string>
+    <string name="shared_string_next_sunrise">Επόμενη ανατολή</string>
+    <string name="shared_string_time_left">Χρόνος που απομένει</string>
+    <string name="shared_string_sunset">Δύση ηλίου</string>
+    <string name="shared_string_sunrise">Ανατολή ηλίου</string>
+    <string name="map_widget_group_sunrise_sunset">Ανατολή, δύση ηλίου</string>
 </resources>

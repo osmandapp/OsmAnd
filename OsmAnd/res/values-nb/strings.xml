@@ -3682,7 +3682,9 @@
 \nAbonnementet forlenges automatisk med mindre det avbrytes før den valgte fornyelsesperioden.
 \n
 \nHåndter eller avbryt dine abonnementer når som helst i dine AppGallery-innstillinger.</string>
-    <string name="gpx_parse_error">OsmAnd-GPX er feilformatert, kontakt brukerstøtte for videre etterforskning.</string>
+    <string name="gpx_parse_error">Funnet problemer med en GPX-fil.
+\n
+\nDu kan kontakte OsmAnd-brukerstøtte for å undersøke det.</string>
     <string name="system_screen_timeout_descr">Skrur av skjermen i henhold til systemets skjermtidsavbrudd.</string>
     <string name="lenght_limit_description">Angi lengden på ditt kjøretøy, noen rutebegrensninger kan gjelde for lange kjøretøy.</string>
     <string name="turn_screen_on_power_button_disabled">Avskrudd. Krever «Behold skjerm på» under «Tidsavbrudd etter oppvåkning».</string>
@@ -3916,7 +3918,7 @@
     <string name="activity_type_walking_name">Gåing</string>
     <string name="routing_attr_short_way_description">Optimalisert kortere rute (energisparende)</string>
     <string name="snap_to_road_descr">Aktuelle posisjonsikon vil festes til gjeldende navigeringsrute</string>
-    <string name="routing_attr_height_obstacles_description">Ruting kan unngå kraftige oppoverbakker.</string>
+    <string name="routing_attr_height_obstacles_description">Anslått reisetid vil reflektere høydepåvirkning. Rutingpreferanse kan bidra til å unngå bratte oppoverbakker:</string>
     <string name="trip_recording_save_and_continue">Lagre og fortsett</string>
     <string name="lost_data_warning">All ulagret data vil gå tapt.</string>
     <string name="show_start_dialog">Vis startdialog</string>
@@ -4358,11 +4360,11 @@
     <string name="shared_string_grade">Gradering</string>
     <string name="shared_string_uphill">Oppoverbakke</string>
     <string name="shared_string_downhill">Nedoverbakke</string>
-    <string name="use_routing_fallback_description">Bruk frakoblet ruting når nettbasert kilde ikke kan nås.</string>
+    <string name="use_routing_fallback_description">Bruk frakoblet ruting når nettbasert ruting ikke er tilgjengelig.</string>
     <string name="shared_string_hide_slope">Skjul helning</string>
     <string name="shared_string_show_slope">Vis helning</string>
     <string name="elevation_profile">Høydeprofil</string>
-    <string name="use_routing_fallback">Andrevalgsruting</string>
+    <string name="use_routing_fallback">Frakoblet rutingalternativ</string>
     <string name="shared_string_precision">Presisjon</string>
     <string name="shared_string_statistics">Statistikk</string>
     <string name="distance_between_points">Avstand mellom punkter</string>
@@ -4758,7 +4760,7 @@
     <string name="nautical_depth_points">Sjødybder</string>
     <string name="depth_contours">Dybdekonturer</string>
     <string name="map_widget_zoom_level_desc">Miniprogrammet viser nåværende kartforstørrelsesnivå.</string>
-    <string name="external_sensor_widgets">ANT+-miniprogrammer</string>
+    <string name="external_sensor_widgets">Eksterne sensorer</string>
     <string name="map_widget_ant_bicycle_dist">Sykkeldistanse</string>
     <string name="map_widget_target_distance_desc">Miniprogrammet viser avstanden fra kameraet til målstedet.</string>
     <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».
@@ -4843,4 +4845,5 @@
     <string name="weather_wind_kmh">km/t</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="accessibility_2d_view_off">2.5D-visning av</string>
+    <string name="attach_roads_descr">Tilnærm sporet ditt til tillatte veier for å rute mellom punkter og tilknytte nøyaktige svinginstruksjoner og ruteegenskaper.</string>
 </resources>

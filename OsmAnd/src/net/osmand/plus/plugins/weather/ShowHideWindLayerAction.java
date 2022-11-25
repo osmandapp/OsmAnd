@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction.actions;
+package net.osmand.plus.plugins.weather;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,29 +10,35 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
-public class ShowHideCurrentLocationWidgetAction extends QuickAction {
-	public static final QuickActionType TYPE = new QuickActionType(35,
-			"coordinates.current_location.showhide", ShowHideCurrentLocationWidgetAction.class)
+public class ShowHideWindLayerAction extends QuickAction {
+
+	public static final QuickActionType TYPE = new QuickActionType(41,
+			"wind.layer.showhide", ShowHideWindLayerAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
-			.nameRes(R.string.current_location_widget)
-			.iconRes(R.drawable.ic_action_coordinates_location).nonEditable()
-			.category(QuickActionType.CONFIGURE_SCREEN);
+			.nameRes(R.string.wind_layer)
+			.iconRes(R.drawable.ic_action_wind).nonEditable()
+			.category(QuickActionType.CONFIGURE_MAP);
 
-	public ShowHideCurrentLocationWidgetAction() {
+	public ShowHideWindLayerAction() {
 		super(TYPE);
 	}
 
-	public ShowHideCurrentLocationWidgetAction(QuickAction quickAction) {
+	public ShowHideWindLayerAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		mapActivity.getMyApplication().getSettings().SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.set(
-				!mapActivity.getMyApplication().getSettings().SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get());
+		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+		if (weatherPlugin != null) {
+			weatherPlugin.toggleLayerEnable(appMode, WeatherInfoType.WIND, !weatherPlugin.isLayerEnabled(appMode, WeatherInfoType.WIND));
+		}
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
@@ -40,8 +46,7 @@ public class ShowHideCurrentLocationWidgetAction extends QuickAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
-		((TextView) view.findViewById(R.id.text)).setText(
-				R.string.quick_action_current_location_widget_descr);
+		((TextView) view.findViewById(R.id.text)).setText(mapActivity.getString(R.string.quick_action_wind_layer));
 		parent.addView(view);
 	}
 
@@ -54,6 +59,7 @@ public class ShowHideCurrentLocationWidgetAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication app) {
-		return app.getSettings().SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get();
+		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		return weatherPlugin.isLayerEnabled(app.getSettings().getApplicationMode(), WeatherInfoType.WIND);
 	}
 }

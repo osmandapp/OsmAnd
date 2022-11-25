@@ -257,6 +257,15 @@ public class GeoPointParserUtil {
 							zoom = parseZoom(params.get("zoom"));
 						}
 						return new GeoParsedPoint(lat, lon, zoom);
+					} else if (params.containsKey("pin")) {
+						String[] coordinates = params.get("pin").split(",");
+						final double lat = parseSilentDouble(coordinates[0]);
+						final double lon = parseSilentDouble(coordinates[1]);
+						int zoom = GeoParsedPoint.NO_ZOOM;
+						if (!Algorithms.isEmpty(fragment)) {
+							zoom = parseZoom(fragment.split("/")[0]);
+						}
+						return new GeoParsedPoint(lat, lon, zoom);
 					}
 				} else if (host.matches("(?:www\\.)?(?:maps\\.)?yandex\\.[a-z]+")) {
 					String ll = params.get("ll");

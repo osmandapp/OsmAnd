@@ -130,6 +130,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 				adapter.addItem(new ContextMenuItem(DEPTH_CONTOURS)
 						.setTitleId(R.string.nautical_depth, mapActivity)
+						.setSecondaryIcon(R.drawable.ic_action_additional_option)
 						.setSecondaryDescription(pref.get() ? app.getString(R.string.shared_string_on) : app.getString(R.string.shared_string_off))
 						.setSelected(pref.get())
 						.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)

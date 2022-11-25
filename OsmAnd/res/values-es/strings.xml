@@ -3568,7 +3568,9 @@
     <string name="width_limit_description">Proporciona el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
     <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
     <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
-    <string name="gpx_parse_error">El GPX de OsmAnd no está bien formado, por favor, contacta con el equipo de soporte para investigar más a fondo.</string>
+    <string name="gpx_parse_error">Problemas encontrados con un archivo GPX.
+\n
+\nPuede ponerse en contacto con el soporte de OsmAnd para investigar.</string>
     <string name="shared_string_always">Siempre</string>
     <string name="screen_control">Control de pantalla</string>
     <string name="system_screen_timeout_descr">Apaga la pantalla según el tiempo de espera del sistema.</string>
@@ -4001,7 +4003,7 @@
 \nTodos los datos no guardados se perderán.</string>
     <string name="on_pause">En pausa</string>
     <string name="app_restart_required">Es necesario reiniciar la aplicación para aplicar algunos ajustes.</string>
-    <string name="routing_attr_height_obstacles_description">La ruta podría evitar las fuertes subidas.</string>
+    <string name="routing_attr_height_obstacles_description">El tiempo de viaje proyectado reflejará el impacto de la elevación. La preferencia de ruta puede ayudar a evitar cuestas empinadas:</string>
     <string name="quick_action_coordinates_widget_descr">Un botón que muestra u oculta el widget de coordenadas en el mapa.</string>
     <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
     <string name="latest_openstreetmap_update">Última actualización de OpenStreetMap disponible:</string>
@@ -4715,7 +4717,7 @@
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
     <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
     <string name="connect_with_straight_line">Conectar con una línea recta</string>
-    <string name="attach_roads_descr">Aproxima la traza con una ruta usando los mapas sin conexión. Esto proveerá valores de elevación corregidos, detalles del camino y giros usados durante la navegación.</string>
+    <string name="attach_roads_descr">Aproxime su recorrido a las carreteras permitidas para enrutar entre puntos y asocie instrucciones precisas de giro y propiedades de ruta.</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
     <string name="shared_string_only_missing">Sólo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
@@ -4931,14 +4933,14 @@
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_pressure_hectopascals">Hectopascales</string>
     <string name="weather_pressure_inches_of_mercury">Pulgadas de mercurio</string>
-    <string name="weather_prefs_descr">Pronóstico de 24 horas cada hora y 7 días cada 3 horas</string>
+    <string name="weather_prefs_descr">Pronóstico de 24 horas y 7 días actualizado cada 3 horas</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="weather_plugin_description">Proporciona
-\n- la previsión meteorológica las 24 horas y 7 días con 5 capas diferentes
-\n- widgets basados en la localización
-\n- las isolíneas de temperatura y presión
+\n- el pronóstico del tiempo de 24 horas y 7 días con 5 capas
+\n- widgets basados en la ubicación
+\n- las isolíneas de temperatura/presión
 \n
-\nLos datos meteorológicos son proporcionados por el Sistema de Previsión Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nLos datos meteorológicos son proporcionados por el Sistema de Pronóstico Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="shared_string_weather">Meteorología</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
     <string name="map_widget_sunset_desc">Muestra la hora del próximo atardecer o el tiempo que queda hasta éste.</string>
@@ -4954,4 +4956,19 @@
     <string name="depth_contour_lines">Curvas de nivel de profundidad</string>
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
+    <string name="storage_migration_fragment_close_descr">La copia se hace para%1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="quick_action_precipitation_layer">Un botón para mostrar u ocultar la capa de precipitaciones en el mapa.</string>
+    <string name="quick_action_cloud_layer">Un botón para mostrar u ocultar la capa de nubes en el mapa.</string>
+    <string name="quick_action_air_pressure_layer">Un botón para mostrar u ocultar la capa de presión atmosférica en el mapa.</string>
+    <string name="quick_action_temperature_layer">Un botón para mostrar u ocultar la capa de temperatura en el mapa.</string>
+    <string name="quick_action_wind_layer">Un botón para mostrar u ocultar la capa de vientos en el mapa.</string>
+    <string name="temperature_layer">Capa de temperaturas</string>
+    <string name="pressure_layer">Capa de presión atmosférica</string>
+    <string name="wind_layer">Capa de vientos</string>
+    <string name="cloud_layer">Capa de nubes</string>
+    <string name="precipitation_layer">Capa de precipitaciones</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar los senderos según la escala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar la escala MTB cuesta arriba</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Muestrar los senderos según la escala MTB de ascenso.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar la escala de las MTB</string>
 </resources>
