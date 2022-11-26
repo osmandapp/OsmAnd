@@ -4688,7 +4688,7 @@
     <string name="goods_delivery_desc_3">Dotyczy tylko samochodów dostawczych o masie nie większej niż 3,5 tony.</string>
     <string name="next_live_update_date_and_time">Następna aktualizacja %1$s o %2$s.</string>
     <string name="no_altitude_data_desc">Aby otrzymać dane %1$s, dołącz swój ślad do dróg lub oblicz go online.</string>
-    <string name="audio_video_notes_desc">Widget zapewnia szybki dostęp do startu/zatrzymania nagrywania (audio, wideo lub zdjęcia).</string>
+    <string name="audio_video_notes_desc">Zapewnia szybki dostęp do uruchamiania/zatrzymania wykonywania notatki audio, wideo lub zdjęcia.</string>
     <string name="no_altitude_data">Brak danych wysokościowych</string>
     <string name="live_update_frequency_day_variant">Aktualizacje map są sprawdzane codziennie.</string>
     <string name="live_update_frequency_week_variant">Aktualizacje map są sprawdzane co tydzień.</string>
