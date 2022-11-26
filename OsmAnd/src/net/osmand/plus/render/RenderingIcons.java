@@ -118,12 +118,25 @@ public class RenderingIcons {
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		return getIconNameForPoiType(poiType);
+	}
+
+	@Nullable
+	public static String getIconNameForPoiType(@NonNull PoiType poiType) {
 		if (poiType == null) {
 			return null;
 		} else if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
 		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
+		}
+
+		if (poiType.getParentType() != null) {
+			return poiType.getParentType().getIconKeyName();
+		} else if (poiType.getFilter() != null) {
+			return poiType.getFilter().getIconKeyName();
+		} else if (poiType.getCategory() != null) {
+			return poiType.getCategory().getIconKeyName();
 		}
 		return null;
 	}
