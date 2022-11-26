@@ -850,8 +850,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private List<WptPt> collectRoutePointsFromSegment(TrkSegment segment, int segmentIndex) {
-		RouteImporter routeImporter = new RouteImporter(segment);
-		List<RouteSegmentResult> routeSegments = routeImporter.importRoute();
 		List<WptPt> routePoints = gpxData.getGpxFile().getRoutePoints(segmentIndex);
 		int prevPointIndex = 0;
 		List<WptPt> points = segment.points;
@@ -859,6 +857,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			routePoints.add(points.get(0));
 			routePoints.add(points.get(points.size() - 1));
 		}
+
+		RouteImporter routeImporter = new RouteImporter(segment, routePoints);
+		List<RouteSegmentResult> routeSegments = routeImporter.importRoute();
+
 		for (int i = 0; i < routePoints.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(routePoints.get(i), routePoints.get(i + 1));
 			int startIndex = pair.first.getTrkPtIndex();

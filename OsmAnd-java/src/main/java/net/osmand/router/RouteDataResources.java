@@ -12,11 +12,14 @@ import java.util.Map;
 
 public class RouteDataResources {
 
-	private Map<RouteTypeRule, Integer> rules = new LinkedHashMap<>();
+	private final Map<RouteTypeRule, Integer> rules = new LinkedHashMap<>();
 
-	private List<Location> locations;
+	private final List<Location> locations;
 	private int currentLocation;
-	private Map<RouteDataObject, int[][]> pointNamesMap = new HashMap<>();
+
+	private final List<Integer> routePointIndexes = new ArrayList<>();
+
+	private final Map<RouteDataObject, int[][]> pointNamesMap = new HashMap<>();
 
 	public RouteDataResources() {
 		this.locations = new ArrayList<>();
@@ -34,8 +37,8 @@ public class RouteDataResources {
 		return locations;
 	}
 
-	public boolean hasLocations() {
-		return locations.size() > 0;
+	public List<Integer> getRoutePointIndexes() {
+		return routePointIndexes;
 	}
 
 	public Location getLocation(int index) {
@@ -44,6 +47,10 @@ public class RouteDataResources {
 			throw new IllegalStateException("Locations index: " + index + " out of bounds");
 		}
 		return locations.get(index);
+	}
+
+	public int getCurrentLocationIndex() {
+		return currentLocation;
 	}
 
 	public void incrementCurrentLocation(int index) {
