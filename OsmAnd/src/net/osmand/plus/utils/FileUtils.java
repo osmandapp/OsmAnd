@@ -12,6 +12,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
 public class FileUtils {
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
+	public static String DOWNLOAD_EXTENSION = ".download";
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
@@ -224,6 +226,27 @@ public class FileUtils {
 		} else {
 			list.add(file);
 		}
+	}
+
+	@NonNull
+	public static File getFileWithDownloadExtension(@NonNull File original) {
+		File folder = original.getParentFile();
+		String fileName = original.getName() + DOWNLOAD_EXTENSION;
+		return new File(folder, fileName);
+	}
+
+	@NonNull
+	public static boolean replaceTargetFile(@NonNull File sourceFile, @NonNull File targetFile) {
+		return replaceTargetFile(null, sourceFile, targetFile);
+	}
+
+	public static boolean replaceTargetFile(@Nullable ResourceManager manager,
+	                                        @NonNull File sourceFile, @NonNull File targetFile) {
+		boolean removed = Algorithms.removeAllFiles(targetFile);
+		if (manager != null && removed) {
+			manager.closeFile(targetFile.getName());
+		}
+		return sourceFile.renameTo(targetFile);
 	}
 
 	public interface RenameCallback {
