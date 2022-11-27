@@ -238,6 +238,7 @@ public class OsmandApplication extends MultiDexApplication {
 			// Remove travel sqlite db files
 			removeSqliteDbTravelFiles();
 		}
+		FileUtils.removeFilesWithExtension(getAppPath(null), IndexConstants.DOWNLOAD_EXT);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();

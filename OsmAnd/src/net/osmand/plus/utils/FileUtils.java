@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
+
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
-	public static String DOWNLOAD_EXTENSION = ".download";
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
@@ -231,8 +231,23 @@ public class FileUtils {
 	@NonNull
 	public static File getFileWithDownloadExtension(@NonNull File original) {
 		File folder = original.getParentFile();
-		String fileName = original.getName() + DOWNLOAD_EXTENSION;
+		String fileName = original.getName() + IndexConstants.DOWNLOAD_EXT;
 		return new File(folder, fileName);
+	}
+
+	public static void removeFilesWithExtension(@NonNull File folder, @NonNull String ... extensions) {
+		File[] files = folder.listFiles();
+		if (files == null) {
+			return;
+		}
+		for (File file : files) {
+			String fileName = file.getName();
+			if (file.isDirectory()) {
+				removeFilesWithExtension(file, extensions);
+			} else if (Algorithms.endsWithAny(fileName, extensions)) {
+				file.delete();
+			}
+		}
 	}
 
 	@NonNull
