@@ -1744,8 +1744,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					R.id.distance_to_center_text_view,
 					R.id.up_down_button,
 					R.id.measure_mode_controls,
-					R.id.info_type_buttons_container,
-					R.id.bottom_panel_divider);
+					R.id.info_type_buttons_container);
 		}
 	}
 
