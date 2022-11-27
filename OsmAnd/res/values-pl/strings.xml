@@ -3945,7 +3945,7 @@
     <string name="routing_engine_vehicle_type_truck">Ciężarówka</string>
     <string name="routing_engine_vehicle_type_scooter">Skuter</string>
     <string name="routing_engine_vehicle_type_racingbike">Rower wyścigowy</string>
-    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="routing_engine_vehicle_type_mtb">Rower górski (MTB)</string>
     <string name="message_server_error">Błąd serwera: %1$s</string>
     <string name="message_name_is_already_exists">Nazwa już istnieje</string>
     <string name="online_routing_engine">Silnik wyznaczania tras online</string>
@@ -4697,7 +4697,7 @@
     <string name="get_altitude_data">Uzyskaj dane dotyczące wysokości</string>
     <string name="calculate_altitude">Obliczanie wysokości</string>
     <string name="shared_string_symbol">Symbol</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaż trasy MTB IMBA</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaż szlaki MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Pokaż dedykowane szlaki kolarstwa górskiego.</string>
     <string name="auto_25_chars_route_tl_kl">Skręć w lewo i trzymaj się lewej strony</string>
     <string name="connect_with_straight_line">Połącz z linią prostą</string>
@@ -4959,4 +4959,10 @@
     <string name="first_marker_widget_desc">Możesz skonfigurować widżet, aby pokazywał odległość lub szacunkowy pozostały czas przybycia do pierwszego markera mapy.</string>
     <string name="speak_gps_signal_status">Ogłaszanie utraty sygnału GPS i jego odzyskiwanie</string>
     <string name="click_on_widget">Kliknij widżet</string>
+    <string name="mtb_scale">Skala MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="rendering_attr_showMtbScale_name">Pokaż skalę MTB</string>
+    <string name="rendering_attr_showMtbScale_description">Pokaż szlaki według skali MTB.</string>
+    <string name="mtb_segment_classification">Klasyfikacja segmentów</string>
+    <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
 </resources>
