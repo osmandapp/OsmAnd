@@ -1,11 +1,13 @@
 package net.osmand.plus.render;
 
+import static net.osmand.IndexConstants.ADDON_RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -25,18 +27,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-
 
 public class RendererRegistry {
 
 	private static final Log log = PlatformUtil.getLog(RendererRegistry.class);
-	
+
 	public static final String DEFAULT_RENDER = "OsmAnd";
 	public static final String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
 	public static final String TOURING_VIEW = "Touring view (contrast and details)";
@@ -49,6 +50,7 @@ public class RendererRegistry {
 	public static final String UNIRS_RENDER = "UniRS";
 	public static final String DESERT_RENDER = "Desert";
 	public static final String SNOWMOBILE_RENDER = "Snowmobile";
+	public static final String WEATHER_RENDER = "Weather";
 
 	private final OsmandApplication app;
 
@@ -60,7 +62,7 @@ public class RendererRegistry {
 	private final Map<String, RenderingRulesStorage> loadedRenderers = new LinkedHashMap<>();
 	private final List<IRendererLoadedEventListener> rendererLoadedListeners = new ArrayList<>();
 
-    public interface IRendererLoadedEventListener {
+	public interface IRendererLoadedEventListener {
 		void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
 	}
 
@@ -77,8 +79,9 @@ public class RendererRegistry {
 		internalRenderers.put(OFFROAD_RENDER, "offroad" + RENDERER_INDEX_EXT);
 		internalRenderers.put(DESERT_RENDER, "desert" + RENDERER_INDEX_EXT);
 		internalRenderers.put(SNOWMOBILE_RENDER, "snowmobile" + RENDERER_INDEX_EXT);
+		internalRenderers.put(WEATHER_RENDER, "weather" + ADDON_RENDERER_INDEX_EXT);
 	}
-	
+
 	public RenderingRulesStorage defaultRender() {
 		if (defaultRender == null) {
 			defaultRender = getRenderer(DEFAULT_RENDER);
@@ -123,7 +126,7 @@ public class RendererRegistry {
 		updateExternalRenderers();
 		return externalRenderers.containsKey(name) || getInternalRender(name) != null;
 	}
-	
+
 	private String getInternalRender(String name) {
 		// check by key and by value
 		for (Entry<String, String> e : internalRenderers.entrySet()) {
@@ -137,10 +140,10 @@ public class RendererRegistry {
 		}
 		return null;
 	}
-	
+
 	@Nullable
 	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
-			Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
+	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
 		InputStream is = getInputStream(name);
 		if (is == null) {
 			return null;
@@ -154,7 +157,7 @@ public class RendererRegistry {
 					String tagName = parser.getName();
 					if (tagName.equals("renderingConstant")) {
 						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"), 
+							renderingConstants.put(parser.getAttributeValue("", "name"),
 									parser.getAttributeValue("", "value"));
 						}
 					}
@@ -200,10 +203,10 @@ public class RendererRegistry {
 	@Nullable
 	public InputStream getInputStream(String name) throws FileNotFoundException {
 		InputStream is = null;
-		if("default".equalsIgnoreCase(name)) {
+		if ("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
-		} 
-		if(externalRenderers.containsKey(name)){
+		}
+		if (externalRenderers.containsKey(name)) {
 			is = new FileInputStream(externalRenderers.get(name));
 		} else {
 			if (getInternalRender(name) == null) {
@@ -239,7 +242,7 @@ public class RendererRegistry {
 			log.error(e.getMessage(), e);
 		}
 	}
-	
+
 	public Map<String, String> getInternalRenderers() {
 		return internalRenderers;
 	}
@@ -250,13 +253,13 @@ public class RendererRegistry {
 				? new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml")
 				: new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
 	}
-	
-	public void initRenderers(IProgress progress) {
+
+	public void initRenderers() {
 		updateExternalRenderers();
 		String r = app.getSettings().RENDERER.get();
-		if(r != null){
+		if (r != null) {
 			RenderingRulesStorage obj = getRenderer(r);
-			if(obj != null){
+			if (obj != null) {
 				setCurrentSelectedRender(obj);
 			}
 		}
@@ -296,6 +299,13 @@ public class RendererRegistry {
 
 		for (Map.Entry<String, File> entry : externalRenderers.entrySet()) {
 			renderers.put(entry.getKey(), entry.getValue().getName());
+		}
+		Iterator<Entry<String, String>> iterator = renderers.entrySet().iterator();
+		while (iterator.hasNext()) {
+			String rendererVal = iterator.next().getValue();
+			if (rendererVal.endsWith(ADDON_RENDERER_INDEX_EXT)) {
+				iterator.remove();
+			}
 		}
 		return renderers;
 	}
@@ -351,9 +361,9 @@ public class RendererRegistry {
 			case DESERT_RENDER:
 				return ctx.getString(R.string.desert_render_descr);
 			case SNOWMOBILE_RENDER:
-			return ctx.getString(R.string.snowmobile_render_descr);
+				return ctx.getString(R.string.snowmobile_render_descr);
 		}
-		return ""; 
+		return "";
 	}
 
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
@@ -362,7 +372,7 @@ public class RendererRegistry {
 		}
 		return currentSelectedRender;
 	}
-	
+
 	public void setCurrentSelectedRender(RenderingRulesStorage currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
 	}

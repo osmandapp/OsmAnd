@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.weather.units;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 public enum CloudUnit implements WeatherUnit {
@@ -15,6 +17,11 @@ public enum CloudUnit implements WeatherUnit {
 	@NonNull
 	@Override
 	public String getSymbol() {
+		return symbol;
+	}
+
+	@Override
+	public String toHumanString(@NonNull Context ctx) {
 		return symbol;
 	}
 }

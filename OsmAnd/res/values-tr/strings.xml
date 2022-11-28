@@ -4786,7 +4786,7 @@
     <string name="empty_screen_weather_wind_layer">Harita üzerinde rüzgar katmanını görüntülemek için açın.</string>
     <string name="empty_screen_weather_precipitation_layer">Harita üzerinde yağış katmanını görüntülemek için açın.</string>
     <string name="empty_screen_weather_temperature_layer">Harita üzerinde sıcaklık katmanını görüntülemek için açın.</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_knots">Knot</string>
     <string name="weather_wind_miles_per_hour">Mil/saat</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometre/saat</string>

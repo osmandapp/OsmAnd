@@ -4909,7 +4909,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Zoll</string>
     <string name="weather_precip_milimeters">Millimeter</string>
-    <string name="weather_wind_kt">kn</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Knoten</string>

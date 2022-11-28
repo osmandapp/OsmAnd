@@ -30,7 +30,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherWebClient;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -54,7 +54,7 @@ import java.util.Map;
  * @author Alexey Pelykh
  */
 public class MapRendererContext {
-    private static final String TAG = "MapRendererContext";
+	private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_SYMBOL_SECTION = 1;
@@ -117,7 +117,7 @@ public class MapRendererContext {
 		if (mapRendererView instanceof AtlasMapRendererView && cachedReferenceTileSize != getReferenceTileSize()) {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(getReferenceTileSize());
 		}
-		if(mapPresentationEnvironment != null) {
+		if (mapPresentationEnvironment != null) {
 			updateMapPresentationEnvironment();
 		}
 	}
@@ -136,7 +136,7 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		return (int)(getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
+		return (int) (getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
 	}
 	
 	private float getReferenceTileSize() {
@@ -148,36 +148,37 @@ public class MapRendererContext {
 	 */
 	private void updateMapPresentationEnvironment() {
 		// Create new map presentation environment
-		String langId = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		OsmandSettings settings = app.getSettings();
+		String langId = settings.MAP_PREFERRED_LOCALE.get();
 		// TODO make setting
 		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
-		String rendName = app.getSettings().RENDERER.get();
+		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
 		}
 		if (!mapStyles.containsKey(rendName)) {
-            Log.d(TAG, "Style '" + rendName + "' not in cache");
-            if (mapStylesCollection.getStyleByName(rendName) == null) {
-                Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
+			Log.d(TAG, "Style '" + rendName + "' not in cache");
+			if (mapStylesCollection.getStyleByName(rendName) == null) {
+				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
 
-                // Ensure parents are loaded (this may also trigger load)
+				// Ensure parents are loaded (this may also trigger load)
 				loadRenderer(rendName);
-            }
-            ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
-            if (mapStyle != null) {
-                mapStyles.put(rendName, mapStyle);
-            } else {
-                Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
-                rendName = "default";
-            }
+			}
+			ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
+			if (mapStyle != null) {
+				mapStyles.put(rendName, mapStyle);
+			} else {
+				Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
+				rendName = "default";
+			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
 		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density,
-				app.getSettings().MAP_DENSITY.get(), app.getSettings().TEXT_SCALE.get());
+				settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get());
 		if (this.presentationObjectParams == null || !this.presentationObjectParams.equalsFields(pres)) {
 			this.presentationObjectParams = pres;
 			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density,
-					app.getSettings().MAP_DENSITY.get(), app.getSettings().TEXT_SCALE.get(), langId,
+					settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get(), langId,
 					langPref);
 		}
 
@@ -238,9 +239,9 @@ public class MapRendererContext {
 		}
 
 		QStringStringHash convertedStyleSettings = new QStringStringHash();
-        for (Map.Entry<String, String> setting : props.entrySet()) {
-            convertedStyleSettings.set(setting.getKey(), setting.getValue());
-        }
+		for (Map.Entry<String, String> setting : props.entrySet()) {
+			convertedStyleSettings.set(setting.getKey(), setting.getValue());
+		}
 		if (nightMode) {
 			convertedStyleSettings.set("nightMode", "true");
 		}
@@ -320,7 +321,7 @@ public class MapRendererContext {
 				});
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
-			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
+			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 
 		if (isVectorLayerEnabled()) {
@@ -337,8 +338,7 @@ public class MapRendererContext {
 		}
 	}
 
-	private void instantiateWeatherResourcesManager()
-	{
+	private void instantiateWeatherResourcesManager() {
 		if (weatherTileResourcesManager != null) {
 			return;
 		}
@@ -356,11 +356,10 @@ public class MapRendererContext {
 				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
 		webClient.swigReleaseOwnership();
 
-		//TODO: refactoring needed. Do not use plugin class here.
-		WeatherPlugin weatherPlugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		if (weatherPlugin != null) {
-			weatherPlugin.updateBandsSettings(weatherTileResourcesManager);
-		}
+		WeatherHelper weatherHelper = app.getWeatherHelper();
+		weatherHelper.updateMapPresentationEnvironment(mapPresentationEnvironment);
+		weatherTileResourcesManager.setBandSettings(weatherHelper.getBandSettings(weatherTileResourcesManager));
+
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 	}
 
@@ -375,7 +374,7 @@ public class MapRendererContext {
 	}
 
 	private static class CachedMapPresentation {
-		String langId ;
+		String langId;
 		LanguagePreference langPref;
 		ResolvedMapStyle mapStyle;
 		float displayDensityFactor;
@@ -394,9 +393,9 @@ public class MapRendererContext {
 			this.mapScaleFactor = mapScaleFactor;
 			this.symbolsScaleFactor = symbolsScaleFactor;
 		}
-		
-		
-		public boolean equalsFields(CachedMapPresentation other ) {
+
+
+		public boolean equalsFields(CachedMapPresentation other) {
 			if (Double.compare(displayDensityFactor, other.displayDensityFactor) != 0)
 				return false;
 			if (Double.compare(mapScaleFactor, other.mapScaleFactor) != 0)
@@ -416,42 +415,36 @@ public class MapRendererContext {
 		}
 	}
 
-    private void loadStyleFromStream(String name, InputStream source) {
-    	if (source == null) {
-    		return;
-    	}
-        if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
-	        try {
-	            source.close();
-	        } catch (IOException ignored) {
-	        }
-	        return;
-        }
+	private void loadStyleFromStream(String name, InputStream source) {
+		if (source == null) {
+			return;
+		}
+		if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
+			Algorithms.closeStream(source);
+			return;
+		}
 
-        Log.d(TAG, "Going to pass '" + name + "' style content to native");
-        byte[] content;
-        try {
-            ByteArrayOutputStream intermediateBuffer = new ByteArrayOutputStream();
-            int nRead;
-            byte[] data = new byte[16384];
-            while ((nRead = source.read(data, 0, data.length)) != -1) {
-                intermediateBuffer.write(data, 0, nRead);
-            }
-            intermediateBuffer.flush();
-            content = intermediateBuffer.toByteArray();
-        } catch(IOException e) {
-            Log.e(TAG, "Failed to read style content", e);
-            return;
-        } finally {
-            try {
-            	source.close();
-            } catch (IOException ignored) {
-            }
-        }
+		Log.d(TAG, "Going to pass '" + name + "' style content to native");
+		byte[] content;
+		try {
+			ByteArrayOutputStream intermediateBuffer = new ByteArrayOutputStream();
+			int nRead;
+			byte[] data = new byte[16384];
+			while ((nRead = source.read(data, 0, data.length)) != -1) {
+				intermediateBuffer.write(data, 0, nRead);
+			}
+			intermediateBuffer.flush();
+			content = intermediateBuffer.toByteArray();
+		} catch (IOException e) {
+			Log.e(TAG, "Failed to read style content", e);
+			return;
+		} finally {
+			Algorithms.closeStream(source);
+		}
 
-        if (!mapStylesCollection.addStyleFromByteArray(
-                SwigUtilities.createQByteArrayAsCopyOf(content), name)) {
-            Log.w(TAG, "Failed to add style from byte array");
-        }
-    }
+		if (!mapStylesCollection.addStyleFromByteArray(
+				SwigUtilities.createQByteArrayAsCopyOf(content), name)) {
+			Log.w(TAG, "Failed to add style from byte array");
+		}
+	}
 }
