@@ -4866,7 +4866,7 @@
     <string name="measurement_units">Jednostki miary</string>
     <string name="shared_string_weather">Pogoda</string>
     <string name="weather_precip_milimeters">Milimetry</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="empty_screen_view_selected_weather_data">Włącz, aby wyświetlić wybrane dane pogodowe na mapie.</string>
     <string name="weather_precip_in">cale</string>
     <string name="weather_precip_mm">mm</string>

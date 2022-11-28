@@ -4899,7 +4899,7 @@
 \n
 \nДані про погоду надає Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="weather_online_cache">Мережевий кеш</string>
-    <string name="weather_wind_kt">вузли</string>
+    <string name="weather_wind_kn">вузли</string>
     <string name="weather_wind_kilimeters_per_hour">Кілометрів на годину</string>
     <string name="clouds_widget_desc">Показує хмарність для поточного центру мапи.</string>
     <string name="map_settings_weather_temp">Температура</string>

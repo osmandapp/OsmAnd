@@ -36,15 +36,16 @@ public enum PressureUnit implements WeatherUnit {
 	}
 
 	@NonNull
-	public String toHumanString(@NonNull Context ctx) {
-		String title = ctx.getString(titleId);
-		String unit = ctx.getString(unitId);
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
+	@Override
+	public String getSymbol() {
+		return symbol;
 	}
 
 	@NonNull
 	@Override
-	public String getSymbol() {
-		return symbol;
+	public String toHumanString(@NonNull Context ctx) {
+		String title = ctx.getString(titleId);
+		String unit = ctx.getString(unitId);
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, title, "(" + unit + ")");
 	}
 }

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.widgets;
 
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
@@ -24,7 +24,22 @@ import java.util.TimeZone;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public abstract class WeatherWidget extends TextInfoWidget {
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.SWIGTYPE_p_std__shared_ptrT_Metric_t;
+import net.osmand.core.jni.WeatherTileResourcesManager;
+import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
+import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
+import net.osmand.core.jni.ZoomLevel;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
+
+public  class WeatherWidget extends TextInfoWidget {
 
 	private static final long TRUNCATE_MINUTES = 60 * 60 * 1000;
 
@@ -35,9 +50,10 @@ public abstract class WeatherWidget extends TextInfoWidget {
 		forecastNamingFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	protected final WeatherPlugin weatherPlugin;
-	protected final IObtainValueAsyncCallback callback;
-	protected final short band;
+	private final WeatherHelper weatherHelper;
+	private final IObtainValueAsyncCallback callback;
+	private final WeatherBand weatherBand;
+	private final short band;
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;
@@ -46,15 +62,15 @@ public abstract class WeatherWidget extends TextInfoWidget {
 	private boolean lastObtainingFailed;
 	private long lastSuccessfulObtainedRequestTime;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WeatherPlugin weatherPlugin,
-	                     @NonNull WidgetType widgetType, short band) {
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
 		super(mapActivity, widgetType);
-		this.weatherPlugin = weatherPlugin;
 		this.band = band;
+		this.weatherHelper = app.getWeatherHelper();
+		this.weatherBand = weatherHelper.getWeatherBand(band);
 		this.callback = new IObtainValueAsyncCallback() {
 			@Override
 			public void method(boolean succeeded, long requestedTime, double value, SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
-				WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
+				WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 				if (succeeded && resourcesManager != null) {
 					lastObtainingFailed = false;
 					lastSuccessfulObtainedRequestTime = requestedTime;
@@ -76,7 +92,15 @@ public abstract class WeatherWidget extends TextInfoWidget {
 		});
 	}
 
-	public abstract void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue);
+	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
+		app.runInUIThread(() -> {
+			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
+				setText(formattedValue, weatherBand.getBandUnit().getSymbol());
+			} else {
+				setText(NO_VALUE, null);
+			}
+		});
+	}
 
 	@Nullable
 	public PointI getPoint31() {
@@ -112,7 +136,7 @@ public abstract class WeatherWidget extends TextInfoWidget {
 		PointI point31 = getPoint31();
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();
-		WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
 		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
 			ValueRequest request = new ValueRequest();
 			request.setBand(band);
@@ -128,7 +152,7 @@ public abstract class WeatherWidget extends TextInfoWidget {
 	}
 
 	private void showForecastInfoToast() {
-		WeatherTileResourcesManager weatherResourcesManager = weatherPlugin.getWeatherResourcesManager();
+		WeatherTileResourcesManager weatherResourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (weatherResourcesManager == null) {
 			return;
 		}
