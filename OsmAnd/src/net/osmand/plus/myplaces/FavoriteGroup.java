@@ -15,6 +15,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FavoriteGroup {
 
@@ -107,6 +108,8 @@ public class FavoriteGroup {
 		return getDisplayName(ctx, name);
 	}
 
+
+
 	public static String getDisplayName(@NonNull Context ctx, String name) {
 		if (isPersonal(name)) {
 			return ctx.getString(R.string.personal_category_name);
@@ -115,6 +118,25 @@ public class FavoriteGroup {
 		} else {
 			return name;
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		FavoriteGroup that = (FavoriteGroup) o;
+		return color == that.color && visible == that.visible && Algorithms.stringsEqual(name, that.name)
+				&& Algorithms.stringsEqual(iconName, that.iconName) && backgroundType == that.backgroundType
+				&& points.equals(that.points);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, iconName, backgroundType, points.size(), color, visible);
 	}
 
 	private static boolean isPersonal(@NonNull String name) {
