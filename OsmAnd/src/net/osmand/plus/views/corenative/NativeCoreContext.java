@@ -16,6 +16,7 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
@@ -37,7 +38,7 @@ public class NativeCoreContext {
 	}
 
 	public static void init(@NonNull OsmandApplication app) {
-		if (!init && NativeCore.isAvailable()) {
+		if (!init && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
 			if (!NativeCore.isLoaded())
 				NativeCore.load(CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app));
 			if (NativeCore.isLoaded()) {

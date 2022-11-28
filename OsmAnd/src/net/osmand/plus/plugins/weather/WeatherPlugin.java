@@ -1,29 +1,11 @@
 package net.osmand.plus.plugins.weather;
 
-import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
-import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.QListDouble;
@@ -32,6 +14,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
@@ -79,6 +62,25 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
 public class WeatherPlugin extends OsmandPlugin {
 
@@ -189,7 +191,10 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnabled() {
-		return app.useOpenGlRenderer() && super.isEnabled();
+		return app.getSettings().USE_OPENGL_RENDER.get()
+				&& NativeCore.isAvailable()
+				&& !Version.isQnxOperatingSystem()
+				&& super.isEnabled();
 	}
 
 	@Override
