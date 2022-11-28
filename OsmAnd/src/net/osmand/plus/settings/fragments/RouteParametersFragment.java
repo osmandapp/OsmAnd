@@ -248,8 +248,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		clearParameters();
 		if (router != null) {
 			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, router);
-			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)
-					&& RoutingHelperUtils.getParameterForDerivedProfile(USE_SHORTEST_WAY, am, router) != null) {
+			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR) && parameters.get(USE_SHORTEST_WAY) != null) {
 				screen.addPreference(fastRoute);
 			}
 			for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
