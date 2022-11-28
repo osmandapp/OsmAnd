@@ -174,9 +174,9 @@ public abstract class WeatherWidget extends TextInfoWidget {
 
 	@NonNull
 	private String getTilesStatus(@NonNull WeatherTileResourcesManager weatherResourcesManager, long lastDateTime) {
-		if (weatherResourcesManager.isTileProviderEvaluatingTilesToObtainValue(lastDateTime)) {
+		if (weatherResourcesManager.isEvaluatingTiles(lastDateTime)) {
 			return "processing tiles";
-		} else if (weatherResourcesManager.isTileProviderDownloadingTilesToObtainValue(lastDateTime)) {
+		} else if (weatherResourcesManager.isDownloadingTiles(lastDateTime)) {
 			return "downloading tiles";
 		} else if (lastObtainingFailed) {
 			return "error";
