@@ -5036,4 +5036,7 @@
     <string name="rendering_attr_showMtbScaleUphill_name">عرض مقياس MTB صعودا</string>
     <string name="rendering_attr_showMtbScaleUphill_description">عرض المسارات وفقا لمقياس MTB.</string>
     <string name="rendering_attr_showMtbScale_name">عرض مقياس MTB</string>
+    <string name="mtb_scale">مقياس MTB</string>
+    <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>
+    <string name="mtb_segment_classification">تصنيف القطاعات</string>
 </resources>
