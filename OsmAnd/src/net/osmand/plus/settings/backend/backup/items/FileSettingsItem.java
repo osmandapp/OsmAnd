@@ -6,20 +6,19 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.myplaces.FavouritesFileHelper;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -46,7 +45,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		TILES_MAP("tiles_map", IndexConstants.TILES_INDEX_DIR, R.drawable.ic_map),
 		ROAD_MAP("road_map", IndexConstants.ROADS_INDEX_DIR, R.drawable.ic_map),
 		GPX("gpx", IndexConstants.GPX_INDEX_DIR, R.drawable.ic_action_route_distance),
-		FAVORITES_GROUPS("group", IndexConstants.FAVORITES_INDEX_DIR, R.drawable.ic_action_folder_favorites),
 		TTS_VOICE("tts_voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
 		VOICE("voice", IndexConstants.VOICE_INDEX_DIR, R.drawable.ic_action_volume_up),
 		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
@@ -134,13 +132,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 						break;
 					case NAUTICAL_DEPTH:
 						if (name.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
-							return subtype;
-						}
-						break;
-					case FAVORITES_GROUPS:
-						if (name.startsWith(subtype.subtypeFolder)
-								&& (name.contains(FavouritesFileHelper.FILE_PREFIX_TO_SAVE + FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR)
-								|| name.contains(FavouritesFileHelper.FILE_TO_SAVE))) {
 							return subtype;
 						}
 						break;

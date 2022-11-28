@@ -27,7 +27,6 @@ import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -45,7 +44,6 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FavoritesGroupSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
@@ -225,15 +223,7 @@ public abstract class SettingsHelper {
 				? app.getFavoritesHelper().getFavoriteGroups()
 				: Collections.emptyList();
 		if (!favoriteGroups.isEmpty() || addEmptyItems) {
-			// convert to files
-			List<File> files = new ArrayList<>();
-			for (FavoriteGroup favoriteGroup : favoriteGroups) {
-				File file = app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup);
-				if (file.exists() && !file.isDirectory()) {
-					files.add(file);
-				}
-			}
-			myPlacesItems.put(ExportSettingsType.FAVORITES, files);
+			myPlacesItems.put(ExportSettingsType.FAVORITES, favoriteGroups);
 		}
 		List<GpxDataItem> gpxItems = settingsTypes == null || settingsTypes.contains(ExportSettingsType.TRACKS)
 				? app.getGpxDbHelper().getItems()
@@ -468,13 +458,7 @@ public abstract class SettingsHelper {
 				try {
 					File file = (File) object;
 					if (file.getName().endsWith(IndexConstants.GPX_FILE_EXT)) {
-						if (file.getParentFile().getName().equals(FavouritesFileHelper.FOLDER_TO_SAVE)
-								&& (file.getName().startsWith(FavouritesFileHelper.FILE_PREFIX_TO_SAVE + FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR)
-								|| file.getName().equals(FavouritesFileHelper.FILE_TO_SAVE))) {
-							result.add(new FavoritesGroupSettingsItem(app, file));
-						} else {
-							result.add(new GpxSettingsItem(app, file));
-						}
+						result.add(new GpxSettingsItem(app, file));
 					} else {
 						result.add(new FileSettingsItem(app, file));
 					}
@@ -547,8 +531,14 @@ public abstract class SettingsHelper {
 			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		if (!favoriteGroups.isEmpty()) {
-			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
-			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			if (export) {
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					result.add(new FavoritesSettingsItem(app, null, Collections.singletonList(favoriteGroup)));
+				}
+			} else {
+				FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+				result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			}
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
@@ -658,7 +648,6 @@ public abstract class SettingsHelper {
 		List<OsmNotesPoint> notesPointList = new ArrayList<>();
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
-		List<FileSettingsItem> favoriteGroupFiles = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<HistoryEntry> historyEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
@@ -687,8 +676,6 @@ public abstract class SettingsHelper {
 						ttsVoiceFilesList.add(fileItem.getFile());
 					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
 						voiceFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_GROUPS) {
-						favoriteGroupFiles.add(fileItem);
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -746,10 +733,6 @@ public abstract class SettingsHelper {
 					FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) item;
 					favoriteGroups.addAll(favoritesSettingsItem.getItems());
 					break;
-//				case FAVOURITES_GROUP:
-//					FavoritesGroupSettingsItem favSettingsItem = (FavoritesGroupSettingsItem) item;
-//					favoriteGroups.addAll(favSettingsItem.getFavoriteGroups());
-//					break;
 				case ACTIVE_MARKERS:
 					MarkersSettingsItem markersSettingsItem = (MarkersSettingsItem) item;
 					markersGroups.add(markersSettingsItem.getMarkersGroup());
@@ -818,10 +801,6 @@ public abstract class SettingsHelper {
 						if (!voiceFilesList.isEmpty() || addEmptyItems) {
 							settingsToOperate.put(ExportSettingsType.VOICE, voiceFilesList);
 						}
-					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_GROUPS) {
-						if (!favoriteGroupFiles.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroupFiles);
-						}
 					}
 					break;
 				case QUICK_ACTIONS:
@@ -860,11 +839,6 @@ public abstract class SettingsHelper {
 					}
 					break;
 				case FAVOURITES:
-					if (!favoriteGroups.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
-					}
-					break;
-				case FAVOURITES_GROUP:
 					if (!favoriteGroups.isEmpty() || addEmptyItems) {
 						settingsToOperate.put(ExportSettingsType.FAVORITES, favoriteGroups);
 					}

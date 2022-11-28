@@ -63,18 +63,20 @@ public class FavouritesFileHelper {
 	}
 
 	@NonNull
-	public File getExternalFile() {
+	public File getOldExternalFile() {
 		return new File(app.getAppPath(null), FILE_TO_SAVE);
 	}
 
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = group.getName().isEmpty() ? "" : FILE_GROUP_NAME_SEPARATOR + group.getName();
-		return new File(favDir, FILE_PREFIX_TO_SAVE + fileName + GPX_FILE_EXT);
+		String fileName = FILE_PREFIX_TO_SAVE
+				+ (group.getName().isEmpty() ? "" : FILE_GROUP_NAME_SEPARATOR + group.getName())
+				+ GPX_FILE_EXT;
+		return new File(favDir, fileName);
 	}
 
 	@NonNull
-	private File getExternalDir() {
+	public File getExternalDir() {
 		File favFolder = app.getAppPath(FOLDER_TO_SAVE);
 		if (!favFolder.exists()) {
 			favFolder.mkdir();

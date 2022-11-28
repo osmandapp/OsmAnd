@@ -2,6 +2,8 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_PREFIX_TO_SAVE;
 
 import android.content.Context;
 
@@ -22,6 +24,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,13 +70,13 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public long getLocalModifiedTime() {
-		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		File favoritesFile = favoritesHelper.getFileHelper().getExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
 		}
@@ -82,13 +85,21 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@NonNull
 	@Override
 	public String getName() {
-		return "favourites";
+		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		return !Algorithms.isEmpty(groupName)
+				? FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + groupName
+				: FILE_PREFIX_TO_SAVE;
 	}
 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return ctx.getString(R.string.shared_string_favorites);
+		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		if (!Algorithms.isEmpty(groupName)) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
+		} else {
+			return ctx.getString(R.string.shared_string_favorites);
+		}
 	}
 
 	@NonNull

@@ -716,7 +716,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 		@Override
 		public FavouritePoint getChild(int groupPosition, int childPosition) {
-			return favoriteGroups.get(groups.get(groupPosition)).get(childPosition);
+			FavoriteGroup group = groups.get(groupPosition);
+			List<FavouritePoint> points = favoriteGroups.get(group);
+			return points != null ? points.get(childPosition) : null;
 		}
 
 		@Override
@@ -726,7 +728,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			return favoriteGroups.get(groups.get(groupPosition)).size();
+			FavoriteGroup group = groups.get(groupPosition);
+			List<FavouritePoint> points = favoriteGroups.get(group);
+			return points != null ? points.size() : 0;
 		}
 
 		@Override
@@ -864,6 +868,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			ImageView icon = row.findViewById(R.id.favourite_icon);
 
 			FavouritePoint model = getChild(groupPosition, childPosition);
+			if (model == null) {
+				return row;
+			}
 			FavoriteGroup group = getGroup(groupPosition);
 			boolean visible = model.isVisible();
 			row.setTag(model);
