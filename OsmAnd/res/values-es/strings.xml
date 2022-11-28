@@ -4926,7 +4926,7 @@
     <string name="empty_screen_view_selected_weather_data">Activar para ver los datos meteorológicos marcados en el mapa.</string>
     <string name="weather_precip_inches">Pulgadas</string>
     <string name="weather_precip_milimeters">Milímetros</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nudos</string>
     <string name="weather_wind_miles_per_hour">Millas por hora</string>

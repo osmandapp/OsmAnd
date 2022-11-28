@@ -7,6 +7,7 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.LIST_MENU;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
@@ -15,11 +16,10 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEAHTER_LAYER;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_LAYER;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -70,14 +70,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
-import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.configmap.CycleRoutesFragment;
 import net.osmand.plus.configmap.HikingRoutesFragment;
 import net.osmand.plus.configmap.MtbRoutesFragment;
-import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.configmap.TravelRoutesFragment;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
+import net.osmand.plus.dashboard.tools.TransactionBuilder;
+import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
@@ -93,6 +93,11 @@ import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.dialogs.WeatherContoursFragment;
+import net.osmand.plus.plugins.weather.dialogs.WeatherLayerFragment;
+import net.osmand.plus.plugins.weather.dialogs.WeatherMainFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
@@ -103,11 +108,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
-import net.osmand.plus.plugins.weather.WeatherContoursFragment;
-import net.osmand.plus.plugins.weather.WeatherInfoType;
-import net.osmand.plus.plugins.weather.WeatherLayerFragment;
-import net.osmand.plus.plugins.weather.WeatherMainFragment;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -206,8 +206,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		HIKING_ROUTES,
 		TRAVEL_ROUTES,
 		TRANSPORT_LINES,
-		WEAHTER,
-		WEAHTER_LAYER,
+		WEATHER,
+		WEATHER_LAYER,
 		WEATHER_CONTOURS,
 		NAUTICAL_DEPTH,
 		MTB_ROUTES
@@ -358,13 +358,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.travel_routes);
 		} else if (isCurrentType(TRANSPORT_LINES)) {
 			tv.setText(R.string.rendering_category_transport);
-		} else if (isCurrentType(WEAHTER)) {
+		} else if (isCurrentType(WEATHER)) {
 			tv.setText(R.string.shared_string_weather);
-		} else if (isCurrentType(WEAHTER_LAYER)) {
+		} else if (isCurrentType(WEATHER_LAYER)) {
 			WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-			WeatherInfoType layer = plugin != null ? plugin.getCurrentConfiguredLayer() : null;
-			if (layer != null) {
-				tv.setText(layer.getTitleId());
+			if (plugin != null) {
+				WeatherBand weatherBand = getMyApplication().getWeatherHelper().getWeatherBand(plugin.getCurrentConfigureBand());
+				if (weatherBand != null) {
+					tv.setText(weatherBand.getMeasurementName());
+				}
 			}
 		} else if (isCurrentType(WEATHER_CONTOURS)) {
 			tv.setText(R.string.shared_string_contours);
@@ -584,11 +586,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
 			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEAHTER, WEAHTER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
+					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
-				} else if(isCurrentType(CONFIGURE_MAP)) {
+				} else if (isCurrentType(CONFIGURE_MAP)) {
 					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAPILLARY)) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
@@ -600,17 +602,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
 					TransportLinesFragment.showInstance(fragmentManager);
-				}else if (isCurrentType(NAUTICAL_DEPTH)) {
+				} else if (isCurrentType(NAUTICAL_DEPTH)) {
 					NauticalDepthContourFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(TERRAIN)){
+				} else if (isCurrentType(TERRAIN)) {
 					TerrainFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(WEAHTER)) {
+				} else if (isCurrentType(WEATHER)) {
 					WeatherMainFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(WEAHTER_LAYER)) {
+				} else if (isCurrentType(WEATHER_LAYER)) {
 					WeatherLayerFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER_CONTOURS)) {
 					WeatherContoursFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(MTB_ROUTES)){
+				} else if (isCurrentType(MTB_ROUTES)) {
 					MtbRoutesFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
@@ -684,7 +686,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.setBackgroundColor(backgroundColor);
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
-				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEAHTER, WEAHTER_LAYER,
+				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
 				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
@@ -810,9 +812,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(TravelRoutesFragment.TAG);
 		} else if (isCurrentType(TRANSPORT_LINES)) {
 			refreshFragment(TransportLinesFragment.TAG);
-		} else if (isCurrentType(WEAHTER)) {
+		} else if (isCurrentType(WEATHER)) {
 			refreshFragment(WeatherMainFragment.TAG);
-		} else if (isCurrentType(WEAHTER_LAYER)) {
+		} else if (isCurrentType(WEATHER_LAYER)) {
 			refreshFragment(WeatherLayerFragment.TAG);
 		} else if (isCurrentType(WEATHER_CONTOURS)) {
 			refreshFragment(WeatherContoursFragment.TAG);
@@ -1036,7 +1038,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return visible;
 	}
 
-	public boolean isCurrentType(@NonNull DashboardType ... types) {
+	public boolean isCurrentType(@NonNull DashboardType... types) {
 		for (DashboardType type : types) {
 			if (visibleTypes.getCurrent() == type) {
 				return true;
@@ -1045,7 +1047,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return false;
 	}
 
-	public boolean isNoCurrentType(@NonNull DashboardType ... types) {
+	public boolean isNoCurrentType(@NonNull DashboardType... types) {
 		return !isCurrentType(types);
 	}
 
@@ -1247,10 +1249,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	@Override
-	public void onDownMotionEvent() { }
+	public void onDownMotionEvent() {
+	}
 
 	@Override
-	public void onUpOrCancelMotionEvent(ScrollState scrollState) { }
+	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+	}
 
 	<T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {
 		for (WeakReference<DashBaseFragment> f : fragList) {
@@ -1300,7 +1304,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public static <T> void handleNumberOfRows(List<T> list, OsmandSettings settings,
-											  String rowNumberTag) {
+	                                          String rowNumberTag) {
 		int numberOfRows = settings.registerIntPreference(rowNumberTag, 3)
 				.makeGlobal().get();
 		if (list.size() > numberOfRows) {
@@ -1317,11 +1321,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	@Override
-	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) { }
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+	}
 
 	@Override
-	public void routeWasCancelled() { }
+	public void routeWasCancelled() {
+	}
 
 	@Override
-	public void routeWasFinished() { }
+	public void routeWasFinished() {
+	}
 }

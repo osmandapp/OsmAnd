@@ -63,6 +63,7 @@ import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
+import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -82,7 +83,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.plugins.weather.WeatherSettingsFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -469,7 +469,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		adapter.onPreferenceChange(preference);
 	}
 
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 

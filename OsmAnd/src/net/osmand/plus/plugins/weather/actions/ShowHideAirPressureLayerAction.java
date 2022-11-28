@@ -1,4 +1,6 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.actions;
+
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +12,10 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class ShowHideAirPressureLayerAction extends QuickAction {
 
@@ -34,12 +36,14 @@ public class ShowHideAirPressureLayerAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
-		if (weatherPlugin != null) {
-			weatherPlugin.toggleLayerEnable(appMode, WeatherInfoType.PRESSURE, !weatherPlugin.isLayerEnabled(appMode, WeatherInfoType.PRESSURE));
+		OsmandApplication app = mapActivity.getMyApplication();
+		WeatherHelper weatherHelper = app.getWeatherHelper();
+		WeatherBand weatherBand = weatherHelper.getWeatherBand(WEATHER_BAND_PRESSURE);
+		if (weatherBand != null) {
+			boolean visible = !weatherBand.isBandVisible();
+			weatherBand.setBandVisible(visible);
+			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
-		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class ShowHideAirPressureLayerAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication app) {
-		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		return weatherPlugin.isLayerEnabled(app.getSettings().getApplicationMode(), WeatherInfoType.PRESSURE);
+		WeatherBand weatherBand = app.getWeatherHelper().getWeatherBand(WEATHER_BAND_PRESSURE);
+		return weatherBand != null && weatherBand.isBandVisible();
 	}
 }
