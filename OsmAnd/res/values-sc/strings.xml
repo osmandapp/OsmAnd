@@ -4934,7 +4934,7 @@
     <string name="weather_wind_meters_per_second">Metros/segundu</string>
     <string name="weather_widgets_secondary_desc">Sas unidades de medida si podent cambiare in sas impostatziones de s\'estensione de su Mèteu.</string>
     <string name="clouds_widget_desc">Ammustrat sa cobertura de sas nues pro su tzentru atuale de sa mapa.</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mi/h</string>
     <string name="weather_wind_knots">Nodos</string>
     <string name="weather_wind_miles_per_hour">Mìllias a s\'ora</string>

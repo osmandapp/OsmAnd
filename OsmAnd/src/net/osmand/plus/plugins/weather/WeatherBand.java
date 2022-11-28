@@ -55,20 +55,12 @@ public class WeatherBand {
 
 	private static final Log log = PlatformUtil.getLog(WeatherBand.class);
 
-	public static final short CONTOUR_VALUE_LEVELS = 0;
-	public static final short CONTOUR_VALUE_TYPES = 1;
-
 	public static final short WEATHER_BAND_UNDEFINED = 0;
 	public static final short WEATHER_BAND_CLOUD = 1;
 	public static final short WEATHER_BAND_TEMPERATURE = 2;
 	public static final short WEATHER_BAND_PRESSURE = 3;
 	public static final short WEATHER_BAND_WIND_SPEED = 4;
 	public static final short WEATHER_BAND_PRECIPITATION = 5;
-
-	@Retention(RetentionPolicy.SOURCE)
-	@IntDef({CONTOUR_VALUE_LEVELS, CONTOUR_VALUE_TYPES})
-	public @interface ContourValueType {
-	}
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({WEATHER_BAND_UNDEFINED, WEATHER_BAND_CLOUD, WEATHER_BAND_TEMPERATURE, WEATHER_BAND_PRESSURE, WEATHER_BAND_WIND_SPEED, WEATHER_BAND_PRECIPITATION})

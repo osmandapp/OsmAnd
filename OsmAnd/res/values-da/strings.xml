@@ -4911,7 +4911,7 @@
     <string name="weather_precip_milimeters">Millimeter</string>
     <string name="weather_precip_in">tommer</string>
     <string name="weather_precip_mm">mm</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_kmh">km/t</string>
     <string name="weather_wind_ms">m/s</string>

@@ -12,7 +12,7 @@ public enum WindUnit implements WeatherUnit {
 	METERS_PER_SECOND(R.string.weather_wind_meters_per_second, R.string.weather_wind_ms, ">m/s"),
 	KILOMETERS_PER_HOUR(R.string.weather_wind_kilimeters_per_hour, R.string.weather_wind_kmh, "km/h"),
 	MILES_PER_HOUR(R.string.weather_wind_miles_per_hour, R.string.weather_wind_mph, "mph"),
-	KNOTS(R.string.weather_wind_knots, R.string.weather_wind_kt, "kt");
+	KNOTS(R.string.weather_wind_knots, R.string.weather_wind_kn, "kn");
 
 	@StringRes
 	private final int titleId;
