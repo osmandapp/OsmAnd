@@ -11,9 +11,12 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -23,21 +26,6 @@ import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_std__shared_ptrT_Metric_t;
-import net.osmand.core.jni.WeatherTileResourcesManager;
-import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
-import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
-import net.osmand.core.jni.ZoomLevel;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.weather.WeatherBand;
-import net.osmand.plus.plugins.weather.WeatherHelper;
-import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-import net.osmand.util.Algorithms;
 
 public  class WeatherWidget extends TextInfoWidget {
 
@@ -85,6 +73,7 @@ public  class WeatherWidget extends TextInfoWidget {
 		};
 		this.callback.swigReleaseOwnership();
 		setIcons(widgetType);
+		setText(NO_VALUE, null);
 		setOnClickListener(v -> {
 			if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 				showForecastInfoToast();
