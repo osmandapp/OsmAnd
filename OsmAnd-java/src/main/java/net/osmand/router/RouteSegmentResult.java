@@ -377,7 +377,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			}
 		}
 		this.distance = distance;
-		resources.incrementCurrentLocation(length - 1);
+
+		int nextLocationIndex = resources.getCurrentLocationIndex() + length;
+		int routePointIndex = resources.getRoutePointIndexes().indexOf(nextLocationIndex);
+		boolean intermediateRoutePoint = routePointIndex > 0
+				&& routePointIndex < resources.getRoutePointIndexes().size() - 1;
+		resources.incrementCurrentLocation(intermediateRoutePoint ? length : length - 1);
 	}
 
 	public float[] getHeightValues() {
