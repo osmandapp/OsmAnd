@@ -3179,7 +3179,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Średnia</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Zaawansowana</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Ekspert</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Bardzo trudna</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremalna</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Niezdefiniowana</string>
     <string name="routeInfo_piste_difficulty_name">Trudność trasy</string>
@@ -3977,7 +3977,7 @@
     <string name="activity_type_running_name">Bieganie</string>
     <string name="activity_type_walking_name">Chodzenie</string>
     <string name="activity_type_motorbike_name">Motocykl</string>
-    <string name="activity_type_offroad_name">Off-road</string>
+    <string name="activity_type_offroad_name">Terenowe</string>
     <string name="activity_type_car_name">Samochód</string>
     <string name="select_segments">Wybierz segmenty</string>
     <string name="temporary_conditional_routing_descr">Użyj ograniczeń drogowych, które są aktywne w danej chwili na mapie</string>
@@ -4163,7 +4163,7 @@
     <string name="osmand_pro_tagline">Uzyskaj maksymalną funkcjonalność</string>
     <string name="shared_string_not_included">Nie zawiera</string>
     <string name="shared_string_learn_more">Dowiedz się więcej</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Anuluj w dowolnym momencie w Huawei AppGallery.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Anuluj w dowolnym momencie w Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Anuluj w dowolnym momencie w Google Play.</string>
     <string name="shared_string_includes">Zawiera</string>
     <string name="from_with_param">Od %1$s</string>
@@ -4330,25 +4330,29 @@
     <string name="history_preferences_descr">Rejestrowanie historii można wyłączyć indywidualnie dla każdego typu historii.</string>
     <string name="shortcut_navigate_to_home">Nawiguj do domu</string>
     <string name="android_auto_map_placeholder_descr">Odłącz urządzenie od Android Auto, aby wyświetlić mapę w aplikacji.</string>
-    <string name="release_4_1">• Dodano początkową obsługę Android Auto
+    <string name="release_4_1">- Dodano wstępne wsparcie dla Android Auto
 \n
-\n • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
+\n - Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
 \n
-\n • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
+\n - Filtr GPS dla śladów GPX
 \n
-\n • Planowanie trasy: użyje wybranego profilu po uruchomieniu
+\n - Widżet wysokości (wersja Pro)
 \n
-\n • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
+\n - Ulubione: dodano możliwość wyświetlania ostatnio używanych ikon
 \n
-\n • Dodano ekran do zarządzania całą historią w aplikacji
+\n - Planowanie trasy: po uruchomieniu będzie korzystać z wybranego profilu
 \n
-\n • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
+\n - Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
 \n
-\n • Ulepszone renderowanie znaczników wysokości SRTM
+\n - Dodano ekran do zarządzania całą historią w aplikacji
 \n
-\n • Poprawiono arabskie podpisy pod mapami
+\n - Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
 \n
-\n • Naprawiono różne problemy z routingiem
+\n - Poprawiono renderowanie znaczników wysokości SRTM
+\n
+\n - Poprawiono arabskie napisy na mapie
+\n
+\n - Naprawiono różne problemy z trasą
 \n
 \n</string>
     <string name="routing_attr_allow_gate_name">Zezwól na użycie bramy</string>
@@ -4520,7 +4524,7 @@
     <string name="edit_category">Edytuj kategorię</string>
     <string name="shared_string_visible_widgets">Widoczne widżety</string>
     <string name="bottom_widgets_panel">Panel dolny</string>
-    <string name="routeInfo_horse_scale_name">Trudność szlaków konnych</string>
+    <string name="routeInfo_horse_scale_name">Poziom trudności szlaków konnych</string>
     <string name="top_widgets_panel">Panel górny</string>
     <string name="shared_string_item">Pozycja</string>
     <string name="routeInfo_horse_scale_description">Twórz trasy na podstawie trudności przejazdu z końmi</string>
@@ -4530,10 +4534,10 @@
     <string name="osm_carto_render_descr">Podobny do stylu OpenStreetMap-carto używanego na głównej stronie OSM</string>
     <string name="rendering_attr_horse_scale_demanding_name">Wymagająca</string>
     <string name="rendering_attr_horse_scale_critical_name">Krytyczny</string>
-    <string name="rendering_attr_showTramRoutes_name">Trasy tramwajowe</string>
-    <string name="rendering_attr_showTrainRoutes_name">Trasy kolejowe</string>
+    <string name="rendering_attr_showTramRoutes_name">Trasy tramwajów</string>
+    <string name="rendering_attr_showTrainRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_showBusRoutes_name">Linie autobusowe</string>
-    <string name="rendering_attr_showTrolleybusRoutes_name">Trasy trolejbusowe</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Trasy trolejbusów</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Trasy wahadłowe</string>
     <string name="shared_string_buttons">Przyciski</string>
     <string name="configure_screen_widgets_descr">Wybierz stronę ekranu, aby dodać lub zmienić rozmieszczenie widżetów.</string>
@@ -4551,8 +4555,8 @@
 \nW przypadku sygnalizacji świetlnej, znaków stop itp. zostaną zastosowane dodatkowe kary.</string>
     <string name="apply_to_existing_points_descr">Zastosować zmiany do istniejących punktów grupy czy tylko do nowych\?</string>
     <string name="apply_to_existing">Zastosuj do istniejących</string>
-    <string name="rendering_attr_horse_scale_common_name">Wspólny</string>
-    <string name="routing_attr_carriage_restrictions_description">Rozważ uprawnienia dostępu dla pojazdów konnych</string>
+    <string name="rendering_attr_horse_scale_common_name">Zwykły</string>
+    <string name="routing_attr_carriage_restrictions_description">Rozważ uprawnienia dostępu dla pojazdów ciągniętych przez konie</string>
     <string name="rendering_attr_showLightRailRoutes_name">Trasy lekkiej kolei</string>
     <string name="rendering_attr_showMonorailRoutes_name">Trasy kolei jednoszynowej</string>
     <string name="rendering_attr_showFunicularRoutes_name">Trasy kolejki linowej</string>
@@ -4605,7 +4609,7 @@
     <string name="navigation_points">Punkty nawigacyjne</string>
     <string name="calculate_online">Oblicz online</string>
     <string name="shared_string_speed">Prędkość</string>
-    <string name="coordinates_widget_desc">Pokazuje współrzędne geograficzne bieżącej lokalizacji geograficznej.</string>
+    <string name="coordinates_widget_desc">Pokazuje współrzędne geograficzne bieżącej geolokalizacji.</string>
     <string name="app_mode_mountain_bicycle">Rower górski</string>
     <string name="routing_attr_allow_private_for_truck_description">Zezwól na dostęp do obszarów prywatnych dla ciężarówek.</string>
     <string name="rendering_attr_weatherPressureContours_name">Izolinie ciśnienia</string>
@@ -4660,7 +4664,7 @@
     <string name="max_speed_widget_desc">Wyświetla ograniczenie prędkości dla aktualnie przejeżdżanej drogi.</string>
     <string name="current_speed_widget_desc">Pokazuje aktualną prędkość zgłaszaną przez GPS.</string>
     <string name="magnetic_bearing_widget_desc">Kąt między północą magnetyczną a punktem docelowym obserwowanym z Twojej lokalizacji.</string>
-    <string name="street_name_widget_desc">Widżet nazwy ulicy pokazuje aktualną nazwę ulicy z prostą strzałką lokalizacji lub nazwę następnej ulicy z manewrem, który należy wykonać.</string>
+    <string name="street_name_widget_desc">Widżet Nazwa ulicy pokazuje bieżącą nazwę ulicy z prostą strzałką lokalizacji lub nazwę następnej ulicy ze strzałką wskazującą zbliżający się zakręt.</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektryczny</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
@@ -4736,7 +4740,7 @@
     <string name="trip_recording_distance_widget_desc">Pokazuje aktualnie zarejestrowany dystans podróży.</string>
     <string name="true_bearing_wdiget_desc">Kąt między rzeczywistą północą a punktem docelowym obserwowanym z Twojej lokalizacji.</string>
     <string name="relative_bearing_widget_desc">Pokazuje kąt między kierunkiem ruchu do przodu a punktem docelowym.</string>
-    <string name="bearing_desc">Widżet namiaru pokazuje bezwzględny lub względny namiar na cel w jednostkach kątowych (180 stopni, 360 stopni, miliradianów).</string>
+    <string name="bearing_desc">Pokazuje bezwzględne lub względne namiary na cel w jednostkach kątowych (w trybie 180 stopni, 360 stopni lub miliradianów).</string>
     <string name="distance_to_destination_widget_desc">Widżet pokazuje odległość, jaka pozostała do ostatniego punktu docelowego.</string>
     <string name="accessibility_2d_view_off">Widok 2.5D wyłączony</string>
     <string name="accessibility_2d_view_on">Widok 2.5D włączony</string>
@@ -4937,15 +4941,15 @@
     <string name="route_maneuvers_desc">Widżety nawigacyjne są włączone podczas nawigacji, aby wyświetlać informacje takie jak odległość, czas przyjazdu lub wyjazdu, następne zakręty, kierunek, aktualna nazwa ulicy, informacje o pasach ruchu, prędkość maksymalna, alerty o zbliżaniu się, punkty POI, punkty orientacyjne.</string>
     <string name="release_4_3">- Nowy, szybszy silnik renderujący mapy w wersji 2 (OpenGL), z widokiem 2.5D
 \n
-\n - Płynna animacja zmian lokalizacji podczas ruchu
+\n - Płynna animacja zmian położenia podczas ruchu
 \n
 \n - Nowe widżety dla współrzędnych środka mapy i wysokości geolokalizacji
 \n
-\n - \"Odległość przez stuknięcie\": dodano opcje rozmiaru tekstu
+\n - \"Odległość do stuknięcia\": dodano opcje rozmiaru tekstu
 \n
-\n - Widżet \"Marker mapy\": dodana opcja zmiany zachowania kliknięcia
+\n - Widżet \"Znaczniki mapy\": dodana opcja zmiany zachowania kliknięcia
 \n
-\n - Naprawiono opcję \"Wyświetl położenie\"
+\n - Naprawiono opcję \"Wyświetl pozycję\"
 \n
 \n - GPX: dodano obsługę znaczników \"link\", \"cmt\", \"desc\" oraz wszelkich niestandardowych rozszerzeń
 \n
@@ -4954,6 +4958,10 @@
 \n - Dodano wsparcie dla czujników ANT+
 \n
 \n - Dodano opcję wyłączenia pobierania UUID
+\n
+\n - Możliwość ustawienia domyślnej prędkości prognozy dla czasów podróży pieszych/wspinaczkowych/biegowych zależnych od wysokości
+\n
+\n - Naprawiono wyjście audio i zachowanie suwaka głośności
 \n
 \n</string>
     <string name="first_marker_widget_desc">Możesz skonfigurować widżet, aby pokazywał odległość lub szacunkowy pozostały czas przybycia do pierwszego markera mapy.</string>
