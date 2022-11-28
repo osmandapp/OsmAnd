@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_PREFIX_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.LEGACY_FILE_TO_READ;
 
 import android.content.Context;
 
@@ -88,7 +89,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
 		return !Algorithms.isEmpty(groupName)
 				? FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + groupName
-				: FILE_PREFIX_TO_SAVE;
+				: LEGACY_FILE_TO_READ;
 	}
 
 	@NonNull
