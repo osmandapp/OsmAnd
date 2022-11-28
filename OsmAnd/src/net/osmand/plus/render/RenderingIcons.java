@@ -131,14 +131,18 @@ public class RenderingIcons {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
 
+		String iconName = null;
 		if (poiType.getParentType() != null) {
-			return poiType.getParentType().getIconKeyName();
+			iconName = poiType.getParentType().getIconKeyName();
 		} else if (poiType.getFilter() != null) {
-			return poiType.getFilter().getIconKeyName();
+			iconName = poiType.getFilter().getIconKeyName();
 		} else if (poiType.getCategory() != null) {
-			return poiType.getCategory().getIconKeyName();
+			iconName = poiType.getCategory().getIconKeyName();
 		}
-		return null;
+		if (containsSmallIcon(iconName)) {
+			return iconName;
+		}
+		return "craft_default";
 	}
 
 	public static int getBigIconResourceId(String s) {
