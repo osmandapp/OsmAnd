@@ -4407,7 +4407,7 @@
     <string name="icon_group_education">Istruzione</string>
     <string name="icon_group_industrial">Industriale</string>
     <string name="rendering_attr_natureReserves_description">Mostra riserve naturali, aree protette e parchi naturali.</string>
-    <string name="shared_storage_third_step">concedi il permesso di accedere alla cartella. Senza il permesso OsmAnd non può copiare i file.</string>
+    <string name="shared_storage_third_step">Concedi il permesso di accedere alla cartella. Senza di esso OsmAnd non può copiare i file.</string>
     <string name="files_remaining">File rimanenti: %1$s %2$s</string>
     <string name="from_to_with_params">Da %1$s a %2$s</string>
     <string name="progress_complete">%1$s completato</string>
@@ -4426,8 +4426,8 @@
     <string name="add_to_group">Aggiungi al gruppo</string>
     <string name="app_modes_options">Scegli modalità app</string>
     <string name="shared_string_memory">Memoria</string>
-    <string name="memory_allocated_for_routing_ds">Valori di memoria alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
-\nNon influenza la velocità dei percorsi brevi.</string>
+    <string name="memory_allocated_for_routing_ds">Valori di memoria più alti velocizzano il calcolo dei lunghi percorsi (sopra i 500 km), ma può impattare sulle prestazioni delle altre applicazioni.
+\nNon influenza la velocità nel calcolo dei percorsi brevi.</string>
     <string name="memory_allocated_for_routing">Memoria allocata per il calcolo percorso</string>
     <string name="reading_files">Lettura file…</string>
     <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
