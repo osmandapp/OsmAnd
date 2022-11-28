@@ -2272,6 +2272,8 @@ public class GPXUtilities {
 					bundleWriter.writeBundle();
 				}
 			});
+		} else {
+			gpxFile.setExtensionsWriter(null);
 		}
 	}
 

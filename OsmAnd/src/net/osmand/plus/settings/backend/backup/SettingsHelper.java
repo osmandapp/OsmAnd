@@ -531,8 +531,14 @@ public abstract class SettingsHelper {
 			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		if (!favoriteGroups.isEmpty()) {
-			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
-			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			if (export) {
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					result.add(new FavoritesSettingsItem(app, null, Collections.singletonList(favoriteGroup)));
+				}
+			} else {
+				FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+				result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			}
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();
