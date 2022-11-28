@@ -129,10 +129,10 @@ public class FavouritesHelper {
 
 		File oldExternalFile = fileHelper.getOldExternalFile();
 		// Force save favorites to file if internals are different from externals
-		// or no favorites created yet or old favourites.gpx present
+		// or no favorites created yet or old favorites.gpx present
 		if (changed || !fileHelper.getExternalDir().exists() || oldExternalFile.exists()) {
 			saveCurrentPointsIntoFile();
-			// Delete old favourites.gpx if exists
+			// Delete old favorites.gpx if exists
 			if (oldExternalFile.exists()) {
 				oldExternalFile.delete();
 			}
