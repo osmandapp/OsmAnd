@@ -37,6 +37,7 @@ public class RenderingIcons {
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
 	private static Bitmap cacheBmp;
+	private static final String defaultPoiIconName = "craft_default";
 
 	public static boolean containsSmallIcon(String s) {
 		return smallIcons.containsKey(s);
@@ -142,7 +143,7 @@ public class RenderingIcons {
 		if (containsSmallIcon(iconName)) {
 			return iconName;
 		}
-		return "craft_default";
+		return defaultPoiIconName;
 	}
 
 	public static int getBigIconResourceId(String s) {
