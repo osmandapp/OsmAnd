@@ -186,11 +186,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 				String subfolderPath = fileName.substring(folderIndex + subtype.subtypeFolder.length(), nameIndex);
 				subtypeFolder = subtypeFolder + subfolderPath;
 			}
-			if (nameIndex != -1 && folderIndex == -1 && subtype == FileSubtype.GPX) {
-				this.file = new File(app.getAppPath(subtypeFolder), fileName);
-			} else {
-				this.file = new File(app.getAppPath(subtypeFolder), name);
-			}
+			this.file = new File(app.getAppPath(subtypeFolder), name);
 		}
 	}
 
