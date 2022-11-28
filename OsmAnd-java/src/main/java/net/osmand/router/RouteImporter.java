@@ -12,6 +12,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringBundle;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -29,7 +30,9 @@ public class RouteImporter {
 
 	private File file;
 	private GPXFile gpxFile;
+
 	private TrkSegment segment;
+	private List<WptPt> segmentRoutePoints;
 
 	private final List<RouteSegmentResult> route = new ArrayList<>();
 
@@ -41,8 +44,9 @@ public class RouteImporter {
 		this.gpxFile = gpxFile;
 	}
 
-	public RouteImporter(TrkSegment segment) {
+	public RouteImporter(TrkSegment segment, List<WptPt> segmentRoutePoints) {
 		this.segment = segment;
+		this.segmentRoutePoints = segmentRoutePoints;
 	}
 
 	public List<RouteSegmentResult> importRoute() {
@@ -75,20 +79,22 @@ public class RouteImporter {
 
 	private void parseRoute() {
 		if (segment != null) {
-			parseRoute(segment);
+			parseRoute(segment, segmentRoutePoints);
 		} else if (gpxFile != null) {
 			List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(true);
-			for (TrkSegment s : segments) {
-				parseRoute(s);
+			for (int i = 0; i < segments.size(); i++) {
+				TrkSegment segment = segments.get(i);
+				parseRoute(segment, gpxFile.getRoutePoints(i));
 			}
 		}
 	}
 
-	private void parseRoute(TrkSegment segment) {
+	private void parseRoute(TrkSegment segment, List<WptPt> segmentRoutePoints) {
 		RouteRegion region = new RouteRegion();
 		RouteDataResources resources = new RouteDataResources();
 
 		collectLocations(resources, segment);
+		collectRoutePointIndexes(resources, segmentRoutePoints);
 		List<RouteSegmentResult> route = collectRouteSegments(region, resources, segment);
 		collectRouteTypes(region, segment);
 		for (RouteSegmentResult routeSegment : route) {
@@ -110,6 +116,15 @@ public class RouteImporter {
 					loc.setAltitude(lastElevation);
 				}
 				locations.add(loc);
+			}
+		}
+	}
+
+	private void collectRoutePointIndexes(RouteDataResources resources, List<WptPt> segmentRoutePoints) {
+		List<Integer> routePointIndexes = resources.getRoutePointIndexes();
+		if (!Algorithms.isEmpty(segmentRoutePoints)) {
+			for (WptPt routePoint : segmentRoutePoints) {
+				routePointIndexes.add(routePoint.getTrkPtIndex());
 			}
 		}
 	}

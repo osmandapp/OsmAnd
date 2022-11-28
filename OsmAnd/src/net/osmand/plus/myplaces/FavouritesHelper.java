@@ -26,6 +26,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,8 +127,15 @@ public class FavouritesHelper {
 		recalculateCachedFavPoints();
 		sortAll();
 
-		if (changed || !fileHelper.getExternalFile().exists()) {
+		File oldExternalFile = fileHelper.getOldExternalFile();
+		// Force save favorites to file if internals are different from externals
+		// or no favorites created yet or old favorites.gpx present
+		if (changed || !fileHelper.getExternalDir().exists() || oldExternalFile.exists()) {
 			saveCurrentPointsIntoFile();
+			// Delete old favorites.gpx if exists
+			if (oldExternalFile.exists()) {
+				oldExternalFile.delete();
+			}
 		} else {
 			updateLastModifiedTime();
 		}
@@ -484,7 +492,7 @@ public class FavouritesHelper {
 	}
 
 	public Exception exportFavorites() {
-		return fileHelper.saveExternalFile(new ArrayList<>(favoriteGroups), Collections.emptySet());
+		return fileHelper.saveExternalFiles(new ArrayList<>(favoriteGroups), Collections.emptySet());
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group) {

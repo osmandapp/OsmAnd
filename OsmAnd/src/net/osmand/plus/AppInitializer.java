@@ -638,7 +638,9 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
+  			settings.USE_OPENGL_RENDER.set(false);
+		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
 			try {
 				NativeCoreContext.init(app);
 				settings.OPENGL_RENDER_FAILED.set(false);

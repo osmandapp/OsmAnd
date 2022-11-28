@@ -8,32 +8,23 @@ import android.text.Spanned;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
-
-	private static final Log log = PlatformUtil.getLog(ShareFavoritesAsyncTask.class);
 
 	private static final int MAX_CHARS_IN_DESCRIPTION = 100000;
 
 	private final OsmandApplication app;
 	private final FavouritesHelper favouritesHelper;
 
-	private final FavoriteGroup group;
-	private final File srcFile;
+	private final List<FavoriteGroup> groups;
 	private final File destFile;
 
 	private Spanned pointsDescription;
@@ -43,16 +34,16 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	                               @Nullable FavoriteGroup group,
 	                               @Nullable ShareFavoritesListener listener) {
 		this.app = app;
-		this.group = group;
+		this.groups = group != null
+				? Collections.singletonList(group) : app.getFavoritesHelper().getFavoriteGroups();
 		this.listener = listener;
-		favouritesHelper = app.getFavoritesHelper();
+		this.favouritesHelper = app.getFavoritesHelper();
 
 		File dir = new File(app.getCacheDir(), "share");
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		srcFile = group == null ? favouritesHelper.getFileHelper().getExternalFile() : null;
-		destFile = new File(dir, srcFile != null ? srcFile.getName() : FavouritesFileHelper.FILE_TO_SAVE);
+		destFile = new File(dir, FavouritesFileHelper.FILE_TO_SAVE);
 	}
 
 	@Override
@@ -64,23 +55,8 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		List<FavoriteGroup> groups;
-		if (group != null) {
-			favouritesHelper.getFileHelper().saveFile(Collections.singletonList(group), destFile);
-			groups = new ArrayList<>();
-			groups.add(group);
-		} else {
-			groups = app.getFavoritesHelper().getFavoriteGroups();
-		}
+		favouritesHelper.getFileHelper().saveFile(groups, destFile);
 		pointsDescription = Html.fromHtml(generateHtmlPrint(groups));
-		try {
-			if (srcFile != null && destFile != null) {
-				Algorithms.fileCopy(srcFile, destFile);
-			}
-		} catch (IOException e) {
-			log.error(e);
-			app.showToastMessage("Error sharing favorites: " + e.getMessage());
-		}
 		return null;
 	}
 

@@ -6,6 +6,7 @@ import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
 import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -247,7 +248,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		clearParameters();
 		if (router != null) {
 			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, router);
-			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR) && parameters.get(USE_SHORTEST_WAY) != null) {
 				screen.addPreference(fastRoute);
 			}
 			for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
