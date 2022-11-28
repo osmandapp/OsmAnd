@@ -459,7 +459,7 @@
     <string name="poi_erotic">Sex-shop</string>
     <string name="poi_herbalist">Herboriste</string>
     <string name="poi_kitchen">Magasin de cuisines</string>
-    <string name="poi_stationery">Papèterie</string>
+    <string name="poi_stationery">Papeterie</string>
     <string name="poi_ticket">Billetterie</string>
     <string name="poi_vacuum_cleaner">Magasin d\'aspirateurs</string>
     <string name="poi_mountain_pass">Col</string>
@@ -3993,7 +3993,7 @@
     <string name="poi_shelter_filter">Abri</string>
     <string name="poi_authentication_none">Aucune authentification requise</string>
     <string name="poi_access_bicycle">Accès vélo</string>
-    <string name="poi_access_general">Accès pour tous</string>
+    <string name="poi_access_general">Accès en général</string>
     <string name="poi_arch">Arche naturelle</string>
     <string name="poi_shelter_no">Abri : non</string>
     <string name="poi_permanent_camping_only">Uniquement ; camping permanent uniquement</string>
@@ -4357,7 +4357,7 @@
     <string name="poi_playground_roundabout">Rond-point</string>
     <string name="poi_playground_splash_pad">Pataugeoire</string>
     <string name="poi_playground_structure">Structure</string>
-    <string name="poi_playground_climbingframe">Cadre d\'escalade</string>
+    <string name="poi_playground_climbingframe">Mur d\'escalade</string>
     <string name="poi_playground_climbingwall">Mur d\'escalade</string>
     <string name="poi_playground_horizontal_bar">Barre horizontale</string>
     <string name="poi_playground_activitypanel">Panneau d\'activité</string>
@@ -4372,14 +4372,27 @@
     <string name="poi_playground_teenshelter">Cabane pour enfants</string>
     <string name="poi_playground_youth_bench">Banc pour jeunes</string>
     <string name="poi_playground_speaking_tube">Tuyau pour parler</string>
-    <string name="poi_playground_basketswing">Balançoire-panier</string>
+    <string name="poi_playground_basketswing">Balançoire</string>
     <string name="poi_playground_basketrotator">Manège à panier</string>
     <string name="poi_playground_aerialrotator">Manège aérien</string>
     <string name="poi_playground_seesaw">Bascule</string>
-    <string name="poi_playground_exercise">Gym. extérieure</string>
+    <string name="poi_playground_exercise">Gymnastique de plein air</string>
     <string name="poi_playground_slide">Toboggan</string>
     <string name="poi_parking_fee_filter">Frais de stationnement</string>
     <string name="poi_access_yes">L\'accès est autorisé</string>
     <string name="poi_playground_spinning_circle">Cercle tournant</string>
     <string name="poi_playground_funnel_ball">Balle pour entonnoir</string>
+    <string name="poi_climbing_speed_yes">Vitesse : Oui</string>
+    <string name="poi_climbing_grade_novice">Novice</string>
+    <string name="poi_climbing_grade_beginner">Débutant</string>
+    <string name="poi_climbing_grade_intermediate">Intermédiaire</string>
+    <string name="poi_climbing_grade_advanced">Avancé</string>
+    <string name="poi_climbing_grade_expert">Expert</string>
+    <string name="poi_climbing_grade_super_expert">Super expert</string>
+    <string name="poi_climbing_grade_elite">Elite</string>
+    <string name="poi_climbing_grade_super_elite">Super élite</string>
+    <string name="poi_climbing_grade_aliens">Extra-terrestre</string>
+    <string name="poi_osmand_climbing_bolts_yes">Oui</string>
+    <string name="poi_osmand_climbing_bolts_no">Non</string>
+    <string name="poi_climbing_quality_medium">Médium</string>
 </resources>

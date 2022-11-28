@@ -138,7 +138,7 @@
     <string name="poi_public_transport_station">Estación de transporte público</string>
     <string name="poi_bus_station">Estación de autobús;Terminal de ómnibus</string>
     <string name="poi_railway_station">Estación ferroviaria;Estación de ferrocarril;Estación de tren</string>
-    <string name="poi_halt">Parada de ferrocarril;Parada de tren;Estación de ferrocarril;Estación de tren;Estación</string>
+    <string name="poi_halt">Parada de ferrocarril ;Parada de tren ; Estación de ferrocarril;Estación de ferrocarril;Estación de tren;Estación</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
     <string name="poi_subway_station">Sí;Estación de metro</string>
     <string name="poi_aerodrome">Aeropuerto;Aeródromo</string>
@@ -2786,7 +2786,7 @@
     <string name="poi_piste_grooming">Estado de la pista</string>
     <string name="poi_theatre_genre">Género</string>
     <string name="poi_outdoor_seating">Mesas al aire libre</string>
-    <string name="poi_fee">Tarifado</string>
+    <string name="poi_fee">Tarifa</string>
     <string name="poi_smoking">Permitido fumar</string>
     <string name="poi_delivery">Envío a domicilio;Delivery</string>
     <string name="poi_takeaway">Comida para llevar</string>
@@ -4348,7 +4348,7 @@
     <string name="poi_dog_designated">Específico para perros</string>
     <string name="poi_playground_structure">Estructura</string>
     <string name="poi_playground_map">Mapa</string>
-    <string name="poi_parking_fee_filter">Aparcamiento tarifado</string>
+    <string name="poi_parking_fee_filter">Tarifa de aparcamiento</string>
     <string name="poi_access_yes">Acceso permitido</string>
     <string name="poi_playground_slide">Tobogán;Deslizador</string>
     <string name="poi_playground_climbingframe">Estructura de escalada</string>
@@ -4413,4 +4413,5 @@
     <string name="poi_climbing_grade_saxon_mean">Ruta media (grado sajón)</string>
     <string name="poi_climbing_grade_french">Grado de escalada francés</string>
     <string name="poi_climbing_grade_aliens">Extraterrestres</string>
+    <string name="poi_trampoline_park">Parque de camas elásticas</string>
 </resources>

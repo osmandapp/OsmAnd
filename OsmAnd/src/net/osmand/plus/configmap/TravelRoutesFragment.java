@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.configmap;
 
 import android.os.Bundle;
 import android.view.Gravity;

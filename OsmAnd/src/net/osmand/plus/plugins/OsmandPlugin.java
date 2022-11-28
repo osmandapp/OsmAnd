@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
@@ -96,6 +97,7 @@ public abstract class OsmandPlugin {
 		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
+	@Nullable
 	public SettingsScreenType getSettingsScreenType() {
 		return null;
 	}
@@ -163,6 +165,11 @@ public abstract class OsmandPlugin {
 
 	public String getInstallURL() {
 		return installURL;
+	}
+
+	@Nullable
+	public OsmAndFeature getOsmAndFeature() {
+		return null;
 	}
 
 	public String getComponentId1() {

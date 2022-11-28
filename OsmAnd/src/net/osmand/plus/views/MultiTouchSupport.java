@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -201,6 +200,6 @@ public class MultiTouchSupport {
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
-		return app.useOpenGlRenderer() && NativeCoreContext.isInit();
+		return app.useOpenGlRenderer();
 	}
 }

@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -40,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter {
+public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter, InAppPurchaseListener {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
@@ -101,6 +102,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 				bindItemView(item, llList);
 			}
 		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		recreateView();
 	}
 
 	private void recreateView() {

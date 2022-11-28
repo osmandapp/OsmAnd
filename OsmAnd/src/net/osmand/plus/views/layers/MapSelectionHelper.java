@@ -59,12 +59,10 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
@@ -129,7 +127,7 @@ public class MapSelectionHelper {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
 
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
-		if (app.useOpenGlRenderer() && NativeCoreContext.isInit()) {
+		if (app.useOpenGlRenderer()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
@@ -436,7 +434,7 @@ public class MapSelectionHelper {
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                                   @NonNull IContextMenuProvider gpxMenuProvider,
 	                                   @NonNull QuadRect rect, double searchDistance) {
-		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
+		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();

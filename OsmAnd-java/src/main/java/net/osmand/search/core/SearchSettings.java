@@ -114,6 +114,11 @@ public class SearchSettings {
 		s.originalLocation = l;
 		return s;
 	}
+	
+	public QuadRect getSearchBBox31() {
+		return searchBBox31;
+	}
+	
 	public SearchSettings setSearchBBox31(QuadRect searchBBox31) {
 		SearchSettings s = new SearchSettings(this);
 		s.searchBBox31 = searchBBox31;

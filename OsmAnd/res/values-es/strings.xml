@@ -4850,25 +4850,29 @@
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
-    <string name="release_4_3">• Nuevo motor versión 2 (OpenGL) más rápido al visualizar mapas, con vista 2.5D
+    <string name="release_4_3">- Nuevo y más rápido motor de renderizado de los mapas de la versión 2 (OpenGL), con vista 2.5D
 \n
-\n • Animación suave para los cambios de ubicación al moverse
+\n - Animación suave de los cambios de ubicación en movimiento
 \n
-\n • Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
+\n - Nuevos widgets para las coordenadas del centro del mapa y la elevación de las geolocalizaciones
 \n
-\n • «Distancia al pulsar»: nuevas opciones de tamaño de texto.
+\n - \"Distancia al tocar\": se han añadido opciones del tamaño de texto
 \n
-\n • Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
+\n - Widget \"Marcador de mapa\": se ha añadido la opción de cambiar el comportamiento del clic
 \n
-\n • Se ha corregido la opción «Posición de la ubicación».
+\n - Corregida la opción \"Mostrar posición\"
 \n
-\n • GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
+\n - GPX: añadido soporte para las etiquetas \"link\", \"cmt\", \"desc\" y para cualquier extensión personalizada
 \n
-\n • Se ha reorganizado la lista de «Mapas náuticos»
+\n - Reorganización de la lista de \"Mapas náuticos
 \n
-\n • Se ha añadido soporte para sensores externos ANT+
+\n - Añadido soporte para sensores ANT+
 \n
-\n • Nueva opción para desactivar la descarga del UUID
+\n - Añadida la opción de desactivar la descarga de UUID
+\n
+\n - Previsión ajustable de la velocidad por defecto para los tiempos de viaje a pie/camino/carrera dependientes de la elevación
+\n
+\n - Corregido el comportamiento de la salida de audio y del deslizador de volumen
 \n
 \n</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
@@ -4957,4 +4961,22 @@
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
     <string name="storage_migration_fragment_close_descr">La copia se hace para%1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="quick_action_precipitation_layer">Un botón para mostrar u ocultar la capa de precipitaciones en el mapa.</string>
+    <string name="quick_action_cloud_layer">Un botón para mostrar u ocultar la capa de nubes en el mapa.</string>
+    <string name="quick_action_air_pressure_layer">Un botón para mostrar u ocultar la capa de presión atmosférica en el mapa.</string>
+    <string name="quick_action_temperature_layer">Un botón para mostrar u ocultar la capa de temperatura en el mapa.</string>
+    <string name="quick_action_wind_layer">Un botón para mostrar u ocultar la capa de vientos en el mapa.</string>
+    <string name="temperature_layer">Capa de temperaturas</string>
+    <string name="pressure_layer">Capa de presión atmosférica</string>
+    <string name="wind_layer">Capa de vientos</string>
+    <string name="cloud_layer">Capa de nubes</string>
+    <string name="precipitation_layer">Capa de precipitaciones</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar los senderos según la escala MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar la escala MTB cuesta arriba</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">Muestrar los senderos según la escala MTB de ascenso.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar la escala de las MTB</string>
+    <string name="mtb_imba_full">Asociación Internacional de Ciclismo de Montaña</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_segment_classification">Segmentación</string>
+    <string name="mtb_scale">Báscula BTT</string>
 </resources>

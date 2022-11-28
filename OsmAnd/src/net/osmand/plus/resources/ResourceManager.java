@@ -115,6 +115,8 @@ public class ResourceManager {
 	private final OsmandApplication context;
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
 
+	private boolean reloadingIndexes;
+
 	public interface ResourceListener {
 		void onMapsIndexed();
 		void onMapClosed(String fileName);
@@ -526,6 +528,7 @@ public class ResourceManager {
 
 		@Override
 		protected void onPreExecute() {
+			context.runInUIThread(() -> reloadingIndexes = true);
 			if (listener != null) {
 				listener.reloadIndexesStarted();
 			}
@@ -549,6 +552,7 @@ public class ResourceManager {
 
 		@Override
 		protected void onPostExecute(List<String> warnings) {
+			context.runInUIThread(() -> reloadingIndexes = false);
 			if (listener != null) {
 				listener.reloadIndexesFinished(warnings);
 			}
@@ -613,6 +617,10 @@ public class ResourceManager {
 		File file = context.getAppPath(IndexConstants.WEATHER_INDEX_DIR);
 		file.mkdirs();
 		return new ArrayList<>();
+	}
+
+	public boolean isReloadingIndexes() {
+		return reloadingIndexes;
 	}
 
 	public void copyMissingJSAssets() {
@@ -1410,6 +1418,18 @@ public class ResourceManager {
 			res.close();
 		}
 		fileReaders.clear();
+	}
+
+	public BinaryMapIndexReader[] getReverseGeocodingMapFiles() {
+		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for (BinaryMapReaderResource r : fileReaders) {
+			BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.REVERSE_GEOCODING);
+			if (reader != null) {
+				readers.add(reader);
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
