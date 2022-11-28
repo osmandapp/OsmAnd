@@ -46,11 +46,11 @@ public class FavouritesFileHelper {
 	private static final int BACKUP_MAX_COUNT = 10;
 	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
 
-	public static final String FILE_PREFIX_TO_SAVE = "favourites";
-	public static final String FOLDER_TO_SAVE = "favourites";
+	public static final String FILE_PREFIX_TO_SAVE = "favorites";
+	public static final String FOLDER_TO_SAVE = "favorites";
 	public static final String FILE_GROUP_NAME_SEPARATOR = "-";
 	public static final String FILE_TO_SAVE = FILE_PREFIX_TO_SAVE + GPX_FILE_EXT;
-	public static final String FILE_TO_BACKUP = "favourites_bak" + GPX_FILE_EXT;
+	public static final String FILE_TO_BACKUP = "favorites_bak" + GPX_FILE_EXT;
 
 	private final OsmandApplication app;
 
