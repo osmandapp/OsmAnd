@@ -137,23 +137,22 @@ public abstract class WeatherWidget extends TextInfoWidget {
 
 		if (lastSuccessfulObtainedRequestTime != 0) {
 			long forecastTime = lastSuccessfulObtainedRequestTime / TRUNCATE_MINUTES * TRUNCATE_MINUTES;
-			stringBuilder.append("Weather forecast for: ")
+			stringBuilder.append("For date: ")
 					.append(timeFormat.format(new Date(forecastTime)));
 
 			long lastDownload = getForecastDbLastDownload(lastSuccessfulObtainedRequestTime);
 			if (lastDownload != 0) {
-				stringBuilder.append("\n")
-						.append("Weather forecast downloaded: ")
+				stringBuilder.append(". Downloaded: ")
 						.append(timeFormat.format(new Date(lastDownload)));
 			}
 		}
 
 		if (lastDateTime != 0) {
 			if (stringBuilder.length() > 0) {
-				stringBuilder.append("\n");
+				stringBuilder.append(". ");
 			}
 			String tilesStatus = getTilesStatus(weatherResourcesManager, lastDateTime);
-			stringBuilder.append("Tiles status: ")
+			stringBuilder.append("Status: ")
 					.append(tilesStatus);
 		}
 
