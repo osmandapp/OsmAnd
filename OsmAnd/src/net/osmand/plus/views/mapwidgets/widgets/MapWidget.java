@@ -141,8 +141,7 @@ public abstract class MapWidget {
 				textShadow.getPaint().setStrokeWidth(shadowRadius);
 				textShadow.getPaint().setStyle(Style.STROKE);
 				textShadow.setTextColor(textShadowColor);
-
-				textShadow.setText(textShadow.getText()); // Not to wait for setText() by widget itself
+				textShadow.invalidate();
 			} else {
 				AndroidUiHelper.updateVisibility(textShadow, false);
 			}

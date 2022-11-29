@@ -754,7 +754,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		}
 	}
 
-	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
+	public List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters = new ArrayList<>();
 
 		boolean osmandRouter = applicationMode.getRouteService() == RouteService.OSMAND;
