@@ -4878,7 +4878,7 @@
 \n • Audio-Ausgabe und Lautstärkeregler behoben
 \n
 \n</string>
-    <string name="show_borders_of_downloaded_maps">Grenzen von heruntergeladenen Karten anzeigen</string>
+    <string name="show_borders_of_downloaded_maps">Grenzen der heruntergeladenen Karten anzeigen</string>
     <string name="show_map_symbols">Kartensymbole anzeigen</string>
     <string name="show_map_symbols_desc">Text, Verkehrszeichen und andere.</string>
     <string name="rendering_engine_failed_descr">OsmAnd ist zur \'Version 1\' der Kartendarstellung zurückgekehrt. Sie können versuchen, in den Einstellungen wieder auf die neue \"Version 2 (OpenGL)\"-Rendering-Engine umzuschalten.
