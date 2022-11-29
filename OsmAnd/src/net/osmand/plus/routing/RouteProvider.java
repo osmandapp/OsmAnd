@@ -1110,7 +1110,7 @@ public class RouteProvider {
 
 		List<Location> locations = route.getImmutableAllLocations();
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
-		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, points);
+		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, points);
 		return exporter.exportRoute();
 	}
 
