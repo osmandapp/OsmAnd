@@ -70,7 +70,7 @@ public class FavouritesFileHelper {
 
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = (group.getName().isEmpty() ? LEGACY_FILE_PREFIX_TO_SAVE : FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + group.getName())
+		String fileName = (group.getName().isEmpty() ? FILE_PREFIX_TO_SAVE : FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + group.getName())
 				+ GPX_FILE_EXT;
 		return new File(favDir, fileName);
 	}
