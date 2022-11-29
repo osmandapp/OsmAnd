@@ -116,13 +116,13 @@ public class FavouritesFileHelper {
 		return true;
 	}
 
-	public boolean loadGPXFiles(@NonNull String prefix, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
+	private boolean loadGPXFiles(@NonNull String prefix, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
 		File file = app.getAppPath(FOLDER_TO_SAVE);
 		if (file == null || !file.exists() || !file.isDirectory()) {
 			return false;
 		}
 		File[] files = file.listFiles((dir, name) ->
-				name.startsWith(prefix + FILE_GROUP_NAME_SEPARATOR) || name.equals(LEGACY_FILE_TO_SAVE));
+				name.startsWith(prefix + FILE_GROUP_NAME_SEPARATOR) || name.equals(FILE_PREFIX_TO_SAVE + GPX_FILE_EXT) || name.equals(LEGACY_FILE_TO_SAVE));
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
