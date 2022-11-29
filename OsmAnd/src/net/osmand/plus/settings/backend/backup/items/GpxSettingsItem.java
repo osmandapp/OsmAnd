@@ -32,6 +32,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	public GpxSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
+		updateFile();
 	}
 
 	@Nullable
@@ -117,6 +118,13 @@ public class GpxSettingsItem extends FileSettingsItem {
 		});
 		if (dataItem != null) {
 			appearanceInfo = new GpxAppearanceInfo(dataItem);
+		}
+	}
+
+	private void updateFile() {
+		String subtypeFolder = subtype.getSubtypeFolder();
+		if (fileName.contains(name) && !fileName.contains(subtypeFolder)) {
+			this.file = new File(app.getAppPath(subtypeFolder), fileName);
 		}
 	}
 }
