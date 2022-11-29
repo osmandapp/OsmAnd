@@ -45,7 +45,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		super(context);
 		this.settings = getApplication().getSettings();
 		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		this.dateTime = System.currentTimeMillis();
+		setDateTime(System.currentTimeMillis());
 	}
 
 	public long getDateTime() {
@@ -53,7 +53,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = dateTime;
+		this.dateTime = WeatherHelper.roundForecastTimeToHour(dateTime);
 	}
 
 	@Override
