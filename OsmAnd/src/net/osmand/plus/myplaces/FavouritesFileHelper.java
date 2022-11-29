@@ -40,7 +40,7 @@ public class FavouritesFileHelper {
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
 	private static final String TIME_PATTERN = "yyyy_MM_dd_hh_mm_ss";
-	private static final String GPX_FILE_EXT = ".gpx";
+	public static final String GPX_FILE_EXT = ".gpx";
 	private static final String ZIP_FILE_EXT = ".zip";
 
 	private static final int BACKUP_MAX_COUNT = 10;
