@@ -271,7 +271,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								}
 							} else if (activity != null) {
 								ActivityCompat.requestPermissions(activity,
-										new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+										new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
+												Manifest.permission.ACCESS_COARSE_LOCATION},
 										OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 							}
 						}

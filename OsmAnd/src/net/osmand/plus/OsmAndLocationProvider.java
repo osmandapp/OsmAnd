@@ -990,14 +990,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public static boolean isLocationPermissionAvailable(Context context) {
-		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+		boolean accessFineLocation = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
 				== PackageManager.PERMISSION_GRANTED;
+		boolean accessCoarseLocation = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+				== PackageManager.PERMISSION_GRANTED;
+		return accessFineLocation || accessCoarseLocation;
 	}
 
 	public static void requestFineLocationPermissionIfNeeded(Activity activity) {
 		if (!isLocationPermissionAvailable(activity)) {
-			ActivityCompat.requestPermissions(activity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+			ActivityCompat.requestPermissions(activity, new String[] {
+							Manifest.permission.ACCESS_FINE_LOCATION,
+							Manifest.permission.ACCESS_COARSE_LOCATION},
 					REQUEST_LOCATION_PERMISSION);
 		}
 	}
