@@ -4913,7 +4913,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pulgadas</string>
     <string name="weather_precip_milimeters">Milímetros</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nudos</string>

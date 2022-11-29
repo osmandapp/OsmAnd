@@ -903,7 +903,7 @@ public class RouteProvider {
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);
 			points.addAll(locationsFromWpts(segment.points));
-			RouteImporter routeImporter = new RouteImporter(segment);
+			RouteImporter routeImporter = new RouteImporter(segment, gpxFile.getRoutePoints(selectedSegment));
 			return routeImporter.importRoute();
 		} else {
 			collectPointsFromSegments(segments, points, segmentEndpoints);

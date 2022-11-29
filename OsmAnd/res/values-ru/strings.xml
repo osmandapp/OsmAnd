@@ -4905,7 +4905,7 @@
     <string name="weather_precip_inches">Дюймы</string>
     <string name="weather_precip_in">in</string>
     <string name="weather_precip_milimeters">Миллиметры</string>
-    <string name="weather_wind_kt">уз</string>
+    <string name="weather_wind_kn">уз</string>
     <string name="weather_wind_mph">миля/ч</string>
     <string name="weather_wind_kmh">км/ч</string>
     <string name="weather_wind_knots">Узлы</string>

@@ -2724,7 +2724,7 @@
     <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd-Live-Abonnement, um Wikipedia- und Wikivoyage-Artikel offline zu lesen.</string>
     <string name="how_to_open_link">Wie öffnet man den Link?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
-    <string name="download_all">Alles herunterladen</string>
+    <string name="download_all">Alle herunterladen</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
     <string name="nautical_render_descr">Zur nautischen Navigation. Merkmale: Bojen, Leuchttürme, Flussläufe, Schifffahrtswege und -zeichen, Häfen, Seezeichendienste und Tiefenlinien.</string>
@@ -4909,7 +4909,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Zoll</string>
     <string name="weather_precip_milimeters">Millimeter</string>
-    <string name="weather_wind_kt">kn</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Knoten</string>

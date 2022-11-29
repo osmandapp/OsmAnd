@@ -14,7 +14,7 @@ import net.osmand.plus.plugins.weather.units.PressureUnit;
 import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 
-public enum WeatherInfoType {
+public enum WeatherContour {
 
 	TEMPERATURE(R.string.map_settings_weather_temp, R.drawable.ic_action_thermometer),
 	PRECIPITATION(R.string.map_settings_weather_precip, R.drawable.ic_action_precipitation),
@@ -22,7 +22,7 @@ public enum WeatherInfoType {
 	CLOUDS(R.string.map_settings_weather_cloud, R.drawable.ic_action_clouds),
 	PRESSURE(R.string.map_settings_weather_air_pressure, R.drawable.ic_action_air_pressure);
 
-	WeatherInfoType(int titleId, int iconId) {
+	WeatherContour(int titleId, int iconId) {
 		this.titleId = titleId;
 		this.iconId = iconId;
 	}
@@ -80,5 +80,4 @@ public enum WeatherInfoType {
 		}
 		return null;
 	}
-
 }

@@ -4920,7 +4920,7 @@
     <string name="weather_precip_in">英吋</string>
     <string name="weather_precip_mm">公釐</string>
     <string name="weather_precip_inches">英吋</string>
-    <string name="weather_wind_kt">節</string>
+    <string name="weather_wind_kn">節</string>
     <string name="weather_precip_milimeters">公釐</string>
     <string name="weather_pressure_hpa">百帕</string>
     <string name="weather_wind_ms">公尺/秒</string>
