@@ -62,6 +62,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -322,6 +323,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
+	}
+
+	public void buildRouteByGivenGpx(GPXFile gpxFile) {
+		MapActivity mapActivity = getMapActivity();
+		MapActions mapActions = mapActivity != null ? mapActivity.getMapActions() : app.getOsmandMap().getMapActions();
+		mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, MenuState.HEADER_ONLY);
 	}
 
 	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon) {
