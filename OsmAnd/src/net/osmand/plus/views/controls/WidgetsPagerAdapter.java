@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
@@ -145,13 +146,23 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		private final Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
 
 		public VisiblePages(@NonNull OsmandApplication app, @NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
+			boolean hasVisibleWidgets = false;
 			for (MapWidgetInfo widgetInfo : widgets) {
 				if (widgetInfo.isEnabledForAppMode(appMode)) {
-					addWidgetViewToPage(widgetInfo.pageIndex, (TextInfoWidget) widgetInfo.widget);
+					TextInfoWidget widget = (TextInfoWidget) widgetInfo.widget;
+					addWidgetViewToPage(widgetInfo.pageIndex, widget);
+					hasVisibleWidgets |= widget.isViewVisible();
 				}
 			}
-			boolean followingMode = app.getRoutingHelper().isFollowingMode()
+			RoutingHelper routingHelper = app.getRoutingHelper();
+
+			boolean showBanner = routingHelper.isFollowingMode()
 					|| app.getLocationProvider().getLocationSimulation().isRouteAnimating();
+
+			if (routingHelper.isRoutePlanningMode()
+					|| (Algorithms.isEmpty(appMode.getRoutingProfile()) && !hasVisibleWidgets)) {
+				showBanner = false;
+			}
 
 			for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
 				List<View> widgetsViews = new ArrayList<>();
@@ -161,7 +172,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 						widget.updateBannerVisibility(false);
 					}
 				}
-				if (Algorithms.isEmpty(widgetsViews) && (followingMode || !Algorithms.isEmpty(appMode.getRoutingProfile()))) {
+				if (Algorithms.isEmpty(widgetsViews) && showBanner) {
 					TextInfoWidget widget = entry.getValue().get(0);
 					widgetsViews.add(widget.getView());
 					widget.updateBannerVisibility(true);
