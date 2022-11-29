@@ -286,8 +286,9 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					duplicateItems.addAll(duplicates);
 				}
 			} else if (item instanceof FileSettingsItem) {
-				if (item.exists()) {
-					duplicateItems.add(((FileSettingsItem) item).getFile());
+				FileSettingsItem settingsItem = (FileSettingsItem) item;
+				if (item.exists() && !isDefaultObfMap(settingsItem)) {
+					duplicateItems.add(settingsItem.getFile());
 				}
 			}
 		}
@@ -315,5 +316,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				}
 			}
 		};
+	}
+
+	private boolean isDefaultObfMap(@NonNull FileSettingsItem settingsItem) {
+		String fileName = BackupHelper.getItemFileName(settingsItem);
+		return BackupHelper.isDefaultObfMap(app, settingsItem, fileName);
 	}
 }

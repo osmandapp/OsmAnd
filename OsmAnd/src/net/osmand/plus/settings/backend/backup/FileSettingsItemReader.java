@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -25,7 +26,6 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 
 	@Override
 	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
-		OutputStream output;
 		FileSettingsItem item = getItem();
 		String fileName = item.getFileName();
 
@@ -40,7 +40,8 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 		if (savedFile.getParentFile() != null && !savedFile.getParentFile().exists()) {
 			savedFile.getParentFile().mkdirs();
 		}
-		output = new FileOutputStream(savedFile);
+		File downloadFile = FileUtils.getFileWithDownloadExtension(savedFile);
+		OutputStream output = new FileOutputStream(downloadFile);
 		byte[] buffer = new byte[SettingsHelper.BUFFER];
 		int count;
 		try {
@@ -51,9 +52,11 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 		} finally {
 			Algorithms.closeStream(output);
 		}
-		long lastModifiedTime = item.getLastModifiedTime();
-		if (lastModifiedTime != -1) {
-			savedFile.setLastModified(lastModifiedTime);
+		if (FileUtils.replaceTargetFile(downloadFile, savedFile)) {
+			long lastModifiedTime = item.getLastModifiedTime();
+			if (lastModifiedTime != -1) {
+				savedFile.setLastModified(lastModifiedTime);
+			}
 		}
 	}
 }
