@@ -43,7 +43,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		destFile = new File(dir, FavouritesFileHelper.LEGACY_FILE_TO_SAVE);
+		destFile = new File(dir, FavouritesFileHelper.FILE_PREFIX_TO_SAVE + FavouritesFileHelper.GPX_FILE_EXT);
 	}
 
 	@Override

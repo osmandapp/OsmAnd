@@ -37,6 +37,7 @@ public class RenderingIcons {
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
 	private static Bitmap cacheBmp;
+	private static final String defaultPoiIconName = "craft_default";
 
 	public static boolean containsSmallIcon(String s) {
 		return smallIcons.containsKey(s);
@@ -118,6 +119,11 @@ public class RenderingIcons {
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		return getIconNameForPoiType(poiType);
+	}
+
+	@Nullable
+	public static String getIconNameForPoiType(@NonNull PoiType poiType) {
 		if (poiType == null) {
 			return null;
 		} else if (containsSmallIcon(poiType.getIconKeyName())) {
@@ -125,7 +131,19 @@ public class RenderingIcons {
 		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
-		return null;
+
+		String iconName = null;
+		if (poiType.getParentType() != null) {
+			iconName = poiType.getParentType().getIconKeyName();
+		} else if (poiType.getFilter() != null) {
+			iconName = poiType.getFilter().getIconKeyName();
+		} else if (poiType.getCategory() != null) {
+			iconName = poiType.getCategory().getIconKeyName();
+		}
+		if (containsSmallIcon(iconName)) {
+			return iconName;
+		}
+		return defaultPoiIconName;
 	}
 
 	public static int getBigIconResourceId(String s) {
