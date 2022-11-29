@@ -586,7 +586,7 @@ public class AppInitializer implements IProgress {
 
 	private void restoreBackupForFavoritesFiles() {
 		File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
+		File save = new File(appDir, FavouritesFileHelper.LEGACY_FILE_TO_SAVE);
 		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
 		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
 			if (save.exists()) {

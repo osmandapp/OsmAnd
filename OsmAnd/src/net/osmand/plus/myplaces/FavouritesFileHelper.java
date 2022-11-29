@@ -46,12 +46,12 @@ public class FavouritesFileHelper {
 	private static final int BACKUP_MAX_COUNT = 10;
 	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
 
-	public static final String FILE_PREFIX_TO_SAVE = "favourites";
+	public static final String FILE_PREFIX_TO_SAVE = "favorites";
 	public static final String FOLDER_TO_SAVE = "favorites";
 	public static final String FILE_GROUP_NAME_SEPARATOR = "-";
-	public static final String FILE_TO_SAVE = FILE_PREFIX_TO_SAVE + GPX_FILE_EXT;
-	public static final String FILE_TO_BACKUP = FILE_PREFIX_TO_SAVE + "_bak" + GPX_FILE_EXT;
-	public static final String LEGACY_FILE_TO_READ = "favourites" + GPX_FILE_EXT;
+	public static final String LEGACY_FILE_PREFIX_TO_SAVE = "favourites";
+	public static final String LEGACY_FILE_TO_SAVE = LEGACY_FILE_PREFIX_TO_SAVE + GPX_FILE_EXT;
+	public static final String FILE_TO_BACKUP = LEGACY_FILE_PREFIX_TO_SAVE + "_bak" + GPX_FILE_EXT;
 
 	private final OsmandApplication app;
 
@@ -65,13 +65,12 @@ public class FavouritesFileHelper {
 
 	@NonNull
 	public File getOldExternalFile() {
-		return new File(app.getAppPath(null), LEGACY_FILE_TO_READ);
+		return new File(app.getAppPath(null), LEGACY_FILE_TO_SAVE);
 	}
 
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = FILE_PREFIX_TO_SAVE
-				+ (group.getName().isEmpty() ? "" : FILE_GROUP_NAME_SEPARATOR + group.getName())
+		String fileName = (group.getName().isEmpty() ? LEGACY_FILE_PREFIX_TO_SAVE : FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + group.getName())
 				+ GPX_FILE_EXT;
 		return new File(favDir, fileName);
 	}
@@ -123,7 +122,7 @@ public class FavouritesFileHelper {
 			return false;
 		}
 		File[] files = file.listFiles((dir, name) ->
-				name.startsWith(prefix + FILE_GROUP_NAME_SEPARATOR) || name.equals(FILE_TO_SAVE));
+				name.startsWith(prefix + FILE_GROUP_NAME_SEPARATOR) || name.equals(LEGACY_FILE_TO_SAVE));
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
