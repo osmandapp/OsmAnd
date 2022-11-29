@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -57,6 +59,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	private ApplicationMode appMode;
 	private List<RoutingParameter> parameters;
 	private CommonPreference<Boolean> useHeightPref;
+	private LocalRoutingParameter heightObstacleParameter;
 
 	private BottomSheetItemWithCompoundButton useHeightButton;
 	private final List<BottomSheetItemWithCompoundButton> reliefFactorButtons = new ArrayList<>();
@@ -116,6 +119,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 
 		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
 
+		heightObstacleParameter = getHeightObstacleParameter();
 		createUseHeightButton(themedCtx);
 
 		int contentPaddingSmall = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
@@ -123,6 +127,19 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(new ShortDescriptionItem((getString(R.string.routing_attr_height_obstacles_description))));
 
 		createReliefFactorButtons(themedCtx);
+	}
+
+	private LocalRoutingParameter getHeightObstacleParameter(){
+		Fragment target = getTargetFragment();
+		if (target instanceof RouteOptionsBottomSheet) {
+			List<LocalRoutingParameter> list = ((RouteOptionsBottomSheet) target).getRoutingParameters(appMode);
+			for (LocalRoutingParameter optionsItem : list) {
+				if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey())) {
+					return optionsItem;
+				}
+			}
+		}
+		return null;
 	}
 
 	private void createUseHeightButton(Context context) {
@@ -133,27 +150,35 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)
 				.setCustomView(getCustomButtonView(app, appMode, checked, nightMode))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean newValue = !useHeightPref.getModeValue(appMode);
-						Fragment target = getTargetFragment();
-						if (target instanceof OnConfirmPreferenceChange) {
-							OnConfirmPreferenceChange confirmInterface = (OnConfirmPreferenceChange) target;
-							if (confirmInterface.onConfirmPreferenceChange(useHeightPref.getId(), newValue, ApplyQueryType.NONE)) {
-								updateUseHeightButton(useHeightButton, newValue);
-
-								if (target instanceof BaseSettingsFragment) {
-									((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
-								}
-							}
-						} else {
-							useHeightPref.setModeValue(appMode, newValue);
+				.setOnClickListener(v -> {
+					boolean newValue = !useHeightPref.getModeValue(appMode);
+					Fragment target = getTargetFragment();
+					if (target instanceof OnConfirmPreferenceChange) {
+						OnConfirmPreferenceChange confirmInterface = (OnConfirmPreferenceChange) target;
+						if (confirmInterface.onConfirmPreferenceChange(useHeightPref.getId(), newValue, ApplyQueryType.NONE)) {
 							updateUseHeightButton(useHeightButton, newValue);
+
+							if (target instanceof BaseSettingsFragment) {
+								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+							}
 						}
+					} else {
+						applyRoutingParameter();
+
+						useHeightPref.setModeValue(appMode, newValue);
+						updateUseHeightButton(useHeightButton, newValue);
 					}
 				}).create();
 		items.add(useHeightButton);
+	}
+
+	private void applyRoutingParameter() {
+		if (heightObstacleParameter != null) {
+			RoutingOptionsHelper routingOptionsHelper = app.getRoutingOptionsHelper();
+			routingOptionsHelper.addNewRouteMenuParameter(appMode, heightObstacleParameter);
+			boolean selected = !heightObstacleParameter.isSelected(app.getSettings());
+			routingOptionsHelper.applyRoutingParameter(heightObstacleParameter, selected);
+		}
 	}
 
 	private void updateUseHeightButton(BottomSheetItemWithCompoundButton button, boolean newValue) {
