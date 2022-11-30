@@ -4891,7 +4891,7 @@
     <string name="restart_now">Jetzt neu starten</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">Version 2 (OpenGL) ist eine schnellere Karten-Rendering-Engine mit 2,5-D-Ansicht. Das Rendering von Version 1 war vor OsmAnd 4.3 der Standard und ist für ältere Geräte immer noch vorzuziehen.</string>
+    <string name="map_rendering_engine_descr">Version 2 (OpenGL) ist eine schnellere Karten-Rendering-Engine mit 2,5D-Ansicht. Das Rendering von Version 1 war vor OsmAnd 4.3 der Standard und ist für ältere Geräte immer noch vorzuziehen.</string>
     <string name="map_rendering_engine">Karten-Rendering-Engine</string>
     <string name="weather_offline_forecast">Offline-Vorhersage</string>
     <string name="weather_online_cache">Online-Zwischenspeicher</string>
