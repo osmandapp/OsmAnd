@@ -284,7 +284,7 @@ public class FavouritesFileHelper {
 
 	private File getBackupFile() {
 		clearOldBackups(getBackupFilesForToday(), BACKUP_MAX_PER_DAY);
-		String baseName = formatTime(System.currentTimeMillis());
+		String baseName = FAV_FILE_PREFIX + BAK_FILE_SUFFIX + "_" + formatTime(System.currentTimeMillis());
 		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_EXT);
 	}
 
