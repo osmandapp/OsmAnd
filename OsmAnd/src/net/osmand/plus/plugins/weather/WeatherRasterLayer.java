@@ -13,7 +13,6 @@ import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -24,13 +23,11 @@ import java.util.List;
 
 public class WeatherRasterLayer extends BaseMapLayer {
 
-	private final WeatherPlugin weatherPlugin;
 	private final WeatherHelper weatherHelper;
-	private final WeatherTileResourcesManager resourcesManager;
+	private final WeatherLayer weatherLayer;
 
 	private WeatherRasterLayerProvider provider;
 
-	private final WeatherLayer weatherLayer;
 	private boolean weatherEnabledCached;
 	private List<WeatherBand> enabledBandsCached;
 	private int bandsSettingsVersionCached;
@@ -48,10 +45,8 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		super(context);
 		OsmandApplication app = getApplication();
 		this.weatherHelper = app.getWeatherHelper();
-		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		this.weatherLayer = weatherLayer;
-		this.resourcesManager = weatherHelper.getWeatherResourcesManager();
-		this.dateTime = System.currentTimeMillis();
+		setDateTime(System.currentTimeMillis());
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
 			CommonPreference<Float> preference = weatherBand.getAlphaPreference();
 			if (preference != null) {
-				StateChangedListener<Float> listener = change -> getApplication().runInUIThread(this::updateWeatherLayerAlpha);
+				StateChangedListener<Float> listener = change -> weatherHelper.updateBandsSettings();
 				preference.addListener(listener);
 				alphaChangeListeners.add(listener);
 			}
@@ -73,7 +68,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = dateTime;
+		this.dateTime = WeatherHelper.roundForecastTimeToHour(dateTime);
 	}
 
 	@Override
@@ -143,8 +138,9 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
+
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = getApplication().getWeatherHelper().getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null) {
 			return;
 		}
@@ -152,28 +148,24 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
+		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get();
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		List<WeatherBand> enabledLayers = weatherHelper.getVisibleBands();
-		boolean layersChanged = !Algorithms.objectEquals(enabledLayers, enabledBandsCached);
-		enabledBandsCached = enabledLayers;
+		List<WeatherBand> enabledBands = weatherHelper.getVisibleBands();
+		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
+		enabledBandsCached = enabledBands;
 		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();
 		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
 		bandsSettingsVersionCached = bandsSettingsVersion;
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
 		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged || mapActivityInvalidated) {
-			if (weatherEnabled && !enabledLayers.isEmpty()) {
+			if (weatherEnabled && !enabledBands.isEmpty()) {
 				recreateLayerProvider(mapRenderer, resourcesManager);
 			} else {
 				resetLayerProvider();
 			}
 		}
 		mapActivityInvalidated = false;
-	}
-
-	private void updateWeatherLayerAlpha() {
-		resourcesManager.setBandSettings(weatherHelper.getBandSettings(resourcesManager));
 	}
 }

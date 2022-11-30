@@ -1627,7 +1627,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}, 1);
 			} else if (requestCode == MapActivityActions.REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION
 					&& permissions.length > 0
-					&& Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0])) {
+					&& (Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0])
+					|| Manifest.permission.ACCESS_COARSE_LOCATION.equals(permissions[0]))) {
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					LatLon latLon = getContextMenu().getLatLon();
 					if (latLon != null) {

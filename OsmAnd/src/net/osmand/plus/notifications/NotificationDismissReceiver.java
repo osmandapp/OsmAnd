@@ -31,6 +31,6 @@ public class NotificationDismissReceiver extends BroadcastReceiver {
 		Intent intent = new Intent(context, NotificationDismissReceiver.class);
 		intent.putExtra(NOTIFICATION_TYPE_KEY_NAME, notificationType.name());
 		return PendingIntent.getBroadcast(context.getApplicationContext(),
-				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+				0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 	}
 }

@@ -1,8 +1,29 @@
 package net.osmand.plus.plugins.weather;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
@@ -48,27 +69,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
-import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
-import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
-import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
 public class WeatherPlugin extends OsmandPlugin {
 
@@ -154,6 +154,15 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Override
 	public OsmAndFeature getOsmAndFeature() {
 		return WEATHER;
+	}
+
+	public void setCurrentConfigureBand(@WeatherBandType short currentConfigureBand) {
+		this.currentConfigureBand = currentConfigureBand;
+	}
+
+	@WeatherBandType
+	public short getCurrentConfigureBand() {
+		return currentConfigureBand;
 	}
 
 	@Override
@@ -389,14 +398,5 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherContoursType.set(contoursType);
-	}
-
-	public void setCurrentConfigureBand(@WeatherBandType short currentConfigureBand) {
-		this.currentConfigureBand = currentConfigureBand;
-	}
-
-	@WeatherBandType
-	public short getCurrentConfigureBand() {
-		return currentConfigureBand;
 	}
 }

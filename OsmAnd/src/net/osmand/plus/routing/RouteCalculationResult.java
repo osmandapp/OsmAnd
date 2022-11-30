@@ -368,8 +368,12 @@ public class RouteCalculationResult {
 				}
 				tunnelAlarm = null;
 			}
+
+			boolean lastSegment = routeInd + 1 == list.size();
+			RouteSegmentResult nextSegment = lastSegment ? null : list.get(routeInd + 1);
+			boolean gapAfter = nextSegment != null && !nextSegment.continuesBeyondRouteSegment(s);
 			while (true) {
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+				if (i == s.getEndPointIndex() && !gapAfter && !lastSegment) {
 					break;
 				}
 				Location n = new Location("");

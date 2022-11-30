@@ -172,7 +172,7 @@ public class LiveUpdatesHelper {
 		String fileNameNoExt = Algorithms.getFileNameWithoutExtension(file);
 		intent.putExtra(LOCAL_INDEX_INFO, fileName);
 		intent.setAction(fileNameNoExt);
-		return PendingIntent.getBroadcast(context, 0, intent, 0);
+		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 	}
 
 	public static void setAlarmForPendingIntent(PendingIntent alarmIntent, AlarmManager alarmMgr, UpdateFrequency updateFrequency, TimeOfDay timeOfDayToUpdate) {

@@ -125,8 +125,8 @@ public class WeatherHelper {
 			String unitFormatPrecise = band.getBandPreciseUnitFormat();
 			String internalUnit = band.getInternalBandUnit();
 			float opacity = band.getBandOpacity();
-			String colorProfilePath = band.getColorFilePath();
 			String contourStyleName = band.getContourStyleName();
+			String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
 			ZoomLevelDoubleListHash contourLevels = band.getWeatherContourLevels(weatherResourcesManager, rulesStorage);
 
 			GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
@@ -138,5 +138,10 @@ public class WeatherHelper {
 
 	public int getBandsSettingsVersion() {
 		return bandsSettingsVersion.get();
+	}
+
+	public static long roundForecastTimeToHour(long time) {
+		long hour = 60 * 60 * 1000;
+		return (time + hour / 2) / hour * hour;
 	}
 }
