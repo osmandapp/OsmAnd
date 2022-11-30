@@ -8,7 +8,7 @@ android {
 	// compileNdkVersion "android-ndk-r17b"
 
 	defaultConfig {
-		targetSdkVersion 31
+		targetSdkVersion 29
 		multiDexEnabled true
 		vectorDrawables.useSupportLibrary = true
 	}
