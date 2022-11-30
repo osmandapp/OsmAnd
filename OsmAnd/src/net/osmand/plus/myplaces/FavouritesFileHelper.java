@@ -59,7 +59,7 @@ public class FavouritesFileHelper {
 		this.app = app;
 	}
 
-	public File getInternalFile() {
+	private File getInternalFile() {
 		return app.getFileStreamPath(LEGACY_FAV_FILE_PREFIX + BAK_FILE_SUFFIX + GPX_FILE_EXT);
 	}
 
