@@ -11,6 +11,19 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_unsynced">Unsynced</string>
+    <string name="check_for_updates">Check for updates</string>
+    <string name="all_changes_uploaded_descr">All changes made on this device are synchronized with OsmAnd Cloud.</string>
+    <string name="all_changes_uploaded">All changes uploaded</string>
+    <string name="shared_string_cloud">Cloud</string>
+    <string name="shared_string_local">Local</string>
+    <string name="shared_string_conflicts">Conflicts</string>
+    <string name="shared_string_changes">Changes</string>
+    <string name="changes">Changes %1$s</string>
+    <string name="sync_now">Sync now</string>
+    <string name="local_changes">Local changes</string>
+    <string name="cloud_changes">Cloud changes</string>
+    <string name="no_new_changes">No new changes</string>
     <string name="import_export">Import/Export</string>
     <string name="export_to_file">Export to file</string>
     <string name="last_sync">Last sync</string>
