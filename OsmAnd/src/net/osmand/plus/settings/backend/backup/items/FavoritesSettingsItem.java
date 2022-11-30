@@ -68,24 +68,41 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return SettingsItemType.FAVOURITES;
 	}
 
+	@Nullable
+	public FavoriteGroup getSingleGroup() {
+		return !Algorithms.isEmpty(items) && items.size() == 1 ? items.get(0) : null;
+	}
+
 	@Override
 	public long getLocalModifiedTime() {
+		FavoriteGroup singleGroup = getSingleGroup();
+		File groupFile = singleGroup != null ? favoritesHelper.getFileHelper().getExternalFile(singleGroup) : null;
+		if (groupFile != null && groupFile.exists()) {
+			return groupFile.lastModified();
+		}
 		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
-		if (favoritesFile.exists()) {
-			favoritesFile.setLastModified(lastModifiedTime);
+		FavoriteGroup singleGroup = getSingleGroup();
+		File groupFile = singleGroup != null ? favoritesHelper.getFileHelper().getExternalFile(singleGroup) : null;
+		if (groupFile != null && groupFile.exists()) {
+			groupFile.setLastModified(lastModifiedTime);
+		} else {
+			File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+			if (favoritesFile.exists()) {
+				favoritesFile.setLastModified(lastModifiedTime);
+			}
 		}
 	}
 
 	@NonNull
 	@Override
 	public String getName() {
-		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		FavoriteGroup singleGroup = getSingleGroup();
+		String groupName = singleGroup != null ? singleGroup.getName() : null;
 		return !Algorithms.isEmpty(groupName)
 				? FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + groupName
 				: FILE_PREFIX_TO_SAVE;
@@ -94,7 +111,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		FavoriteGroup singleGroup = getSingleGroup();
+		String groupName = singleGroup != null ? singleGroup.getName() : null;
 		if (!Algorithms.isEmpty(groupName)) {
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else {
