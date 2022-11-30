@@ -536,8 +536,8 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
-			// restore backuped favorites to normal file
-			restoreBackupForFavoritesFiles();
+			// restore backuped favorites to normal file -> this is obsolete with new favorite concept
+			//restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroups();
 			app.searchUICore.initSearchUICore();
@@ -584,17 +584,17 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	private void restoreBackupForFavoritesFiles() {
-		File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
-		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
-		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
-			if (save.exists()) {
-				save.delete();
-			}
-			bak.renameTo(save);
-		}
-	}
+//	private void restoreBackupForFavoritesFiles() {
+//		File appDir = app.getAppPath(null);
+//		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
+//		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
+//		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
+//			if (save.exists()) {
+//				save.delete();
+//			}
+//			bak.renameTo(save);
+//		}
+//	}
 
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
