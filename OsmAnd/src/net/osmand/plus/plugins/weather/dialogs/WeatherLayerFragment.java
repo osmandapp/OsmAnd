@@ -96,7 +96,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
-		app.runInUIThread(mapActivity::refreshMapComplete);
+		app.runInUIThread(mapActivity::refreshMap);
 	}
 
 	private void setupTransparencySliderCard(@NonNull View view) {
@@ -120,6 +120,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				if (fromUser) {
 					weatherBand.getAlphaPreference().set(newValue);
 					tvCurrentValue.setText(formatAlpha(newValue));
+					refreshMap((MapActivity) getMyActivity());
 				}
 			});
 			int activeColor = settings.getApplicationMode().getProfileColor(nightMode);

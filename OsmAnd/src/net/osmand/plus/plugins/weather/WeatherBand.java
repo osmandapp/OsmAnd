@@ -137,14 +137,14 @@ public class WeatherBand {
 		return band;
 	}
 
-	@NonNull
-	public WeatherSettings getWeatherSettings() {
-		return app.getWeatherHelper().getWeatherSettings();
-	}
-
 	@WeatherBandType
 	public short getBandIndex() {
 		return bandIndex;
+	}
+
+	@NonNull
+	public WeatherSettings getWeatherSettings() {
+		return app.getWeatherHelper().getWeatherSettings();
 	}
 
 	public boolean isBandVisible() {
@@ -205,25 +205,6 @@ public class WeatherBand {
 				return getWeatherSettings().weatherWindUnit;
 			case WEATHER_BAND_PRECIPITATION:
 				return getWeatherSettings().weatherPrecipUnit;
-			case WEATHER_BAND_UNDEFINED:
-				return null;
-		}
-		return null;
-	}
-
-	@Nullable
-	public String getBandUnitPrefId() {
-		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				return getWeatherSettings().weatherCloudUnit.getId();
-			case WEATHER_BAND_TEMPERATURE:
-				return getWeatherSettings().weatherTempUnit.getId();
-			case WEATHER_BAND_PRESSURE:
-				return getWeatherSettings().weatherPressureUnit.getId();
-			case WEATHER_BAND_WIND_SPEED:
-				return getWeatherSettings().weatherWindUnit.getId();
-			case WEATHER_BAND_PRECIPITATION:
-				return getWeatherSettings().weatherPrecipUnit.getId();
 			case WEATHER_BAND_UNDEFINED:
 				return null;
 		}

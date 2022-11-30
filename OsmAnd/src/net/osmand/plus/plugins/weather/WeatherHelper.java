@@ -125,8 +125,8 @@ public class WeatherHelper {
 			String unitFormatPrecise = band.getBandPreciseUnitFormat();
 			String internalUnit = band.getInternalBandUnit();
 			float opacity = band.getBandOpacity();
-			String colorProfilePath = band.getColorFilePath();
 			String contourStyleName = band.getContourStyleName();
+			String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
 			ZoomLevelDoubleListHash contourLevels = band.getWeatherContourLevels(weatherResourcesManager, rulesStorage);
 
 			GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,

@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.weather.widgets;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -24,10 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public  class WeatherWidget extends TextInfoWidget {
+public class WeatherWidget extends TextInfoWidget {
 
 	private static final long TRUNCATE_MINUTES = 60 * 60 * 1000;
 
@@ -125,7 +125,7 @@ public  class WeatherWidget extends TextInfoWidget {
 		PointI point31 = getPoint31();
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();
-		WeatherTileResourcesManager resourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
 			ValueRequest request = new ValueRequest();
 			request.setBand(band);
