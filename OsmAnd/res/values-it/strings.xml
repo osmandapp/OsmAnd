@@ -560,7 +560,7 @@
     <string name="plugins_screen">Componenti aggiuntivi</string>
     <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate.</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
-    <string name="osm_editing_plugin_description">Contribuisci a OpenStreetMap, una comunità globale con lo scopo di gestire una mappa del mondo esaustiva e di fornire dati open-source aggiornati ad ogni utente.
+    <string name="osm_editing_plugin_description">Contribuisci a OpenStreetMap, una comunità globale che mantiene una mappa completa del mondo e fornisce dati open source aggiornati ad ogni utente.
 \n
 \nPuoi trovare istruzioni su come modificare la mappa sul nostro sito web https://osmand.net/docs/user/plugins/osm-editing.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
@@ -850,7 +850,7 @@
 \n
 \nMaggiori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="index_srtm_ele">Linee isoipse</string>
-    <string name="audionotes_plugin_description">Crea note audio/video/foto durante il viaggio, usando il pulsante nella mappa, oppure direttamente dal menù contestuale della posizione.</string>
+    <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd per le curve di livello offline</string>
@@ -1366,9 +1366,7 @@
 		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
-    <string name="plugin_ski_descr">Questo plugin per OsmAnd mette a portata di mano i dettagli delle piste da sci di fondo e alpino, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno speciale stile \'Inverno\' della mappa, che con esso sembra un paesaggio imbiancato dalla neve.
-\n
-\nAttivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere disattivata da qui oppure cambiando lo \'Stile della mappa\' in \'Configura mappa\' come si desidera.</string>
+    <string name="plugin_ski_descr">Progettato per navigare nelle aree di sport invernali: vedi piste da sci e impianti di risalita, piste da sci di fondo, con linee colorate che indicano i livelli di difficoltà. Per utilizzarlo, abilita questo plugin e vai anche su \"Configura mappa\" e scegli lo stile della mappa \"Inverno e sci\".</string>
     <string name="plugin_touringview_descr">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali. 
 \n
 \nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento). 
@@ -2211,9 +2209,9 @@
     <string name="quick_action_add_destination">Imposta destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
-    <string name="quick_action_add_destination_desc">Toccando il pulsante azione il centro dello schermo diviene la destinazione del percorso, la destinazione impostata in precedenza diverrà l\'ultimo punto intermedio.</string>
+    <string name="quick_action_add_destination_desc">Un pulsante per centrare lo schermo sulla destinazione del percorso: una destinazione precedentemente selezionata diventerebbe l\'ultima destinazione intermedia.</string>
     <string name="quick_action_replace_destination_desc">Toccando questo pulsante azione centrerai lo schermo sulla nuova destinazione, sostituendo la destinazione scelta in precedenza (se esiste).</string>
-    <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione renderai il centro dello schermo il primo punto intermedio.</string>
+    <string name="quick_action_add_first_intermediate_desc">Un pulsante per rendere il centro dello schermo come primo punto intermedio.</string>
     <string name="no_overlay">Nessun stato sovrapposto</string>
     <string name="no_underlay">Nessun strato di sfondo</string>
     <string name="shared_string_paused">In pausa</string>
@@ -2226,7 +2224,7 @@
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
     <string name="animate_my_location">Simula la mia posizione</string>
-    <string name="animate_my_location_desc">In navigazione abilita l\'interpolazione della \'Mia Posizione\'.</string>
+    <string name="animate_my_location_desc">Attiva la panoramica animata della mappa di \"La mia posizione\" durante la navigazione.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
     <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
@@ -2307,7 +2305,7 @@
     <string name="open_mapillary">Apri Mapillary</string>
     <string name="shared_string_install">Installa</string>
     <string name="improve_coverage_mapillary">Migliora la copertura fotografica con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installa Mapillary per aggiungere una o più foto a questa posizione della mappa.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installa Mapillary per aggiungere fotografie a questa posizione della mappa.</string>
     <string name="mapillary_image">Immagine Mapillary</string>
     <string name="distance_moving">Distanza corretta</string>
     <string name="shared_string_permissions">Permessi</string>
@@ -2393,7 +2391,7 @@
     <string name="order_by">Ordina per:</string>
     <string name="coordinates_format">Formato coordinate</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
-    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Puoi sempre cambiarlo tappando su \'Opzioni\'.</string>
+    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Cambialo tappando su \'Opzioni\'.</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">No strade di ghiaccio e guadi</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi.</string>
@@ -2878,7 +2876,7 @@
     <string name="exit_at">Esci a</string>
     <string name="sit_on_the_stop">Sali alla fermata</string>
     <string name="shared_string_swap">Inverti</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Un pulsante per mostrare o nascondere le tracce GPX selezionate sulla mappa.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un pulsante per mostrare o nascondere le tracce sulla mappa.</string>
     <string name="add_destination_query">Inserire prima una destinazione</string>
     <string name="add_work">Aggiungi lavoro</string>
     <string name="routing_attr_avoid_sett_name">No ciottoli e sampietrini</string>
@@ -3231,7 +3229,7 @@
     <string name="quick_action_hillshade_descr">Un controllo per mostrare o nascondere nella mappa le ombreggiature dei rilievi.</string>
     <string name="tts_initialization_error">Impossibile avviare il motore dal-testo-alla-voce.</string>
     <string name="simulate_your_location_gpx_descr">Simula la mia posizione utilizzando una traccia GPX registrata.</string>
-    <string name="default_speed_dialog_msg">Utilizzata per stimare l\'orario d\'arrivo per le strade di tipo sconosciute e come limite di velocità per tutte le strade (può influenzare il calcolo del percorso)</string>
+    <string name="default_speed_dialog_msg">Stima l\'ora di arrivo per i tipi di strada sconosciuti e limita la velocità per tutte le strade (può influire sul calcolo del percorso)</string>
     <string name="export_profile">Esporta profilo</string>
     <string name="exported_osmand_profile">Profilo OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Il profilo \'%1$s\' c\'è già. Sovrascriverlo\?</string>
@@ -3246,7 +3244,7 @@
     <string name="track_saved">Traccia salvata</string>
     <string name="empty_filename">Nome del file vuoto</string>
     <string name="shared_string_revert">Ripristina</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra i nodi della rete dei percorsi ciclistici</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra i nodi della rete dei percorsi ciclabili</string>
     <string name="clear_confirmation_msg">Cancella %1$s\?</string>
     <string name="quick_action_directions_from_desc">Un pulsante che rende il centro dello schermo il punto di partenza e calcola il percorso per la destinazione o apre una finestra di dialogo per scegliere la destinazione se il marcatore della destinazione non è sulla mappa.</string>
     <string name="download_map_dialog">Finestra di dialogo download mappe</string>
@@ -3333,12 +3331,12 @@
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
     <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza si riferisce alla variabilità di misure ripetute, e non è direttamente correlato alla precisione, che definisce quanto la tua misurazione è vicina alla vera posizione.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio per accuratezza, i punti possono essere completamente mancanti per esempio sotto a ponti, alberi, in mezzo a edifici elevati o in certe condizioni meteo.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile da predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio in base alla precisione, i punti potrebbero mancare del tutto ad es. sotto i ponti, sotto gli alberi, tra edifici elevati, o in determinate condizioni atmosferiche.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Osservazione: se il GPS è stato disattivato poco prima di una registrazione, i primi punti misurati potrebbero avere una minore accuratezza, perciò nel nostro codice noi possiamo voler attendere qualche secondo prima oppure prima di registrare dei punti (o registrare i 3 migliori punti consecutivi, ecc...), ma questo non è ancora implementato .</string>
-    <string name="monitoring_min_distance_descr">Questo filtro evita che punti duplicati siano registrati quando lo spostamento è troppo piccolo, crea un migliore aspetto delle tracce che non vengono successivamente elaborate.</string>
+    <string name="monitoring_min_distance_descr">L\'attivazione di questo filtro consente di evitare ulteriori registrazioni di dati quando il movimento non viene quasi rilevato. Migliora anche l\'aspetto spaziale delle tracce senza ulteriore elaborazione.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: un valore di 5 metri potrebbe funzionare bene se non necessiti di registrare dettagli che hanno una misura inferiore di questo valore e non vuoi chiaramente registrare dati quando sei fermo.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: imposta uno spostamento di 5 metri se non vuoi registrare dettagli minori del tuo percorso, e non hai bisogno di dati aggiuntivi quando sei fermo.</string>
     <string name="live_monitoring_time_buffer">Tempo buffer</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
@@ -3389,9 +3387,9 @@
     <string name="please_provide_profile_name_message">Dai un nome a questo profilo</string>
     <string name="open_settings">Apri le impostazioni</string>
     <string name="plugin_disabled">Plugin disabilitato</string>
-    <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata, se non vuoi più utilizzarlo, rimuovi l\' applicazione separatamente.
+    <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata: disabilitandolo non lo rimuovi.
 \n
-\nIl plugin resterà sul dispositivo dopo la rimozione di OsmAnd.</string>
+\nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo</string>
@@ -3619,7 +3617,7 @@
     <string name="lang_lmo">Lombardo</string>
     <string name="custom_color">Colore personalizzato</string>
     <string name="search_poi_types">Cerca in base al PDI</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Puoi esportare o importare le azioni veloci con i profili dell\'applicazione.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Esporta o importa le azioni veloci con i profili dell\'applicazione.</string>
     <string name="shared_string_delete_all_q">Cancellare tutto\?</string>
     <string name="delete_all_actions_message_q">Cancellare definitivamente %d azioni rapide\?</string>
     <string name="screen_timeout">Tempo del blocco schermo</string>
@@ -3634,7 +3632,7 @@
     <string name="add_online_source">Aggiungi sorgente online</string>
     <string name="clear_tiles_warning">Applicando questi cambiamenti, i dati memorizzati nella cache verranno cancellati per questa sorgente di mattonelle</string>
     <string name="vessel_height_warning_link">Imposta l\'altezza dell\'imbarcazione</string>
-    <string name="vessel_height_warning">Puoi mpostare l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
+    <string name="vessel_height_warning">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Se il ponte è mobile, verrà usata la sua altezza da aperto.</string>
     <string name="vessel_height_limit_description">Imposta l\'altezza dell\'imbarcazione per evitare ponti bassi. Ricorda che, se il ponte è mobile, useremo la sua altezza da aperto.</string>
     <string name="vessel_width_limit_description">Imposta la larghezza della\"imbarcazione per evitare i ponti stretti</string>
     <string name="quick_action_showhide_mapillary_descr">Un pulsante per visualizzare o nascondere nella mappa il livello Mapillary .</string>
@@ -3673,7 +3671,7 @@
     <string name="app_mode_go_cart">Go-kart</string>
     <string name="osm_edit_closed_note">Chiudi la nota OSM</string>
     <string name="app_mode_wheelchair_forward">Sedia a rotelle in avanti</string>
-    <string name="add_hidden_group_info">Il punto aggiunto non sarà visibile sulla mappa, dato che il gruppo selezionato è nascosto, puoi trovarlo in \"%s\".</string>
+    <string name="add_hidden_group_info">Il punto aggiunto si trova in \"%s\". Mostra il gruppo selezionato per mostrarlo sulla mappa.</string>
     <string name="route_between_points">Percorso tra i punti</string>
     <string name="track_show_start_finish_icons">Mostra le icone di inizio e fine</string>
     <string name="shared_string_custom">Personalizzato</string>
@@ -3739,7 +3737,7 @@
     <string name="simplified_track_description">Solo la linea del percorso verrà salvata, i punti intermedi saranno cancellati.</string>
     <string name="shared_string_file_name">Nome del file</string>
     <string name="number_of_gpx_files_selected_pattern">%s file traccia selezionati</string>
-    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione della traccia quando l\'applicazione viene terminata (attraverso le app recenti). (L\'indicazione di OsmAnd in background scomparirà dalla barra delle notifiche di Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione della traccia quando l\'applicazione viene terminata (attraverso app recenti). (L\'indicazione di OsmAnd in background scomparirà dalla barra delle notifiche di Android.)</string>
     <string name="save_global_track_interval_descr">Specifica l\'intervallo per la registrazione delle tracce (avviata attraverso il pulsante di \'Registrazione del viaggio\' sulla mappa).</string>
     <string name="gpx_monitoring_stop">Sospendi la registrazione del viaggio</string>
     <string name="gpx_monitoring_start">Riprendi la registrazione del viaggio</string>
@@ -3817,7 +3815,7 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Aggiungi almeno due punti</string>
     <string name="osm_edit_close_note">Chiudi la nota OSM</string>
     <string name="osm_edit_comment_note">Commenta la nota OSM</string>
-    <string name="osm_login_descr">Puoi autenticarti con il metodo sicuro OAuth o utilizzare le tue credenziali.</string>
+    <string name="osm_login_descr">Puoi autenticarti con il metodo sicuro OAuth, o utilizzare le tue credenziali su OSM</string>
     <string name="shared_string_add_photo">Aggiungi foto</string>
     <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
@@ -4292,7 +4290,7 @@
     <string name="no_items_of_type_message">Non hai elementi di questo tipo</string>
     <string name="routeInfo_tracktype_description">Colora il percorso o la traccia in base alle condizioni della superficie. Tipicamente si applica quando la rete stradale è in gran parte sterrata.</string>
     <string name="routeInfo_winter_ice_road_description">Colora il percorso o la traccia secondo la classificazione stradale invernale.</string>
-    <string name="routeInfo_smoothness_description">Fornisce uno schema di classificazione riguardante l\'usabilità fisica di una strada per i veicoli su ruote, in particolare per quanto riguarda la regolarità/planarità della superficie.</string>
+    <string name="routeInfo_smoothness_description">Classificazione della manovrabilità stradale/pedonale per veicoli su ruote, in particolare per quanto riguarda la regolarità/planarità del manto stradale.</string>
     <string name="routeInfo_surface_description">Fornisce informazioni aggiuntive sulla superficie fisica dei percorsi pedonali.</string>
     <string name="routeInfo_roadClass_description">Colora il percorso o la traccia in base alla classificazione stradale.</string>
     <string name="add_group_to_markers">Aggiungi gruppo all\'elenco marcatori</string>
@@ -4349,7 +4347,7 @@
 \n • Corretti diversi errori di calcolo del percorso
 \n
 \n</string>
-    <string name="clear_all_history_warning">Cancellare la completa cronologia dell\'app comprese le ricerche, la cronologia di navigazione e dei marcatori\?</string>
+    <string name="clear_all_history_warning">Cancellare la cronologia completa dell\'applicazione comprese le ricerche, la cronologia di navigazione e dei marcatori\?</string>
     <string name="clear_all_history">Cancella tutta la cronologia</string>
     <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
     <string name="navigation_history">Cronologia di navigazione</string>
@@ -4960,4 +4958,5 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="rendering_attr_showMtbScale_description">Mostra i percorsi nella scala di difficoltà MTB.</string>
+    <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
 </resources>

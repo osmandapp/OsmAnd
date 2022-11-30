@@ -4979,6 +4979,6 @@
     <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
-    <string name="mtb_segment_classification">Klassificering af segmenter</string>
+    <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
 </resources>
