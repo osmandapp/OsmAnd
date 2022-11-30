@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
 
 import androidx.annotation.NonNull;
@@ -35,23 +34,24 @@ import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
+import static net.osmand.IndexConstants.FAVORITES_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.ZIP_EXT;
+
 public class FavouritesFileHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
-	private static final String TIME_PATTERN = "yyyy_MM_dd_hh_mm_ss";
-	public static final String GPX_FILE_EXT = ".gpx";
-	private static final String ZIP_FILE_EXT = ".zip";
+	private static final String TIME_PATTERN = "yyyy-MM-dd_hhmmss";
 
 	private static final int BACKUP_MAX_COUNT = 10;
 	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
 
-	public static final String FILE_PREFIX_TO_SAVE = "favorites";
-	public static final String FOLDER_TO_SAVE = "favorites";
-	public static final String FILE_GROUP_NAME_SEPARATOR = "-";
-	public static final String LEGACY_FILE_PREFIX_TO_SAVE = "favourites";
-	public static final String LEGACY_FILE_TO_SAVE = LEGACY_FILE_PREFIX_TO_SAVE + GPX_FILE_EXT;
-	public static final String FILE_TO_BACKUP = LEGACY_FILE_PREFIX_TO_SAVE + "_bak" + GPX_FILE_EXT;
+	public static final String FAV_FILE_PREFIX = "favorites";
+	public static final String FAV_GROUP_NAME_SEPARATOR = "-";
+	public static final String LEGACY_FAV_FILE_PREFIX = "favourites";
+	public static final String BAK_FILE_SUFFIX = "_bak";
 
 	private final OsmandApplication app;
 
@@ -60,24 +60,23 @@ public class FavouritesFileHelper {
 	}
 
 	public File getInternalFile() {
-		return app.getFileStreamPath(FILE_TO_BACKUP);
+		return app.getFileStreamPath(LEGACY_FAV_FILE_PREFIX + BAK_FILE_SUFFIX + GPX_FILE_EXT);
 	}
 
 	@NonNull
 	public File getOldExternalFile() {
-		return new File(app.getAppPath(null), LEGACY_FILE_TO_SAVE);
+		return new File(app.getAppPath(null), LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT);
 	}
 
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = (group.getName().isEmpty() ? FILE_PREFIX_TO_SAVE : FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + group.getName())
-				+ GPX_FILE_EXT;
+		String fileName = (group.getName().isEmpty() ? FAV_FILE_PREFIX : FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + group.getName()) + GPX_FILE_EXT;
 		return new File(favDir, fileName);
 	}
 
 	@NonNull
 	public File getExternalDir() {
-		File favFolder = app.getAppPath(FOLDER_TO_SAVE);
+		File favFolder = app.getAppPath(FAVORITES_INDEX_DIR);
 		if (!favFolder.exists()) {
 			favFolder.mkdir();
 		}
@@ -94,7 +93,7 @@ public class FavouritesFileHelper {
 	@NonNull
 	public Map<String, FavoriteGroup> loadExternalGroups() {
 		Map<String, FavoriteGroup> favoriteGroups = new LinkedHashMap<>();
-		loadGPXFiles(FILE_PREFIX_TO_SAVE, favoriteGroups);
+		loadGPXFiles(favoriteGroups);
 		return favoriteGroups;
 	}
 
@@ -116,13 +115,15 @@ public class FavouritesFileHelper {
 		return true;
 	}
 
-	private boolean loadGPXFiles(@NonNull String prefix, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
-		File file = app.getAppPath(FOLDER_TO_SAVE);
+	private boolean loadGPXFiles(@NonNull Map<String, FavoriteGroup> favoriteGroups) {
+		File file = app.getAppPath(FAVORITES_INDEX_DIR);
 		if (file == null || !file.exists() || !file.isDirectory()) {
 			return false;
 		}
 		File[] files = file.listFiles((dir, name) ->
-				name.startsWith(prefix + FILE_GROUP_NAME_SEPARATOR) || name.equals(FILE_PREFIX_TO_SAVE + GPX_FILE_EXT) || name.equals(LEGACY_FILE_TO_SAVE));
+				name.startsWith(FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR)
+					|| name.equals(FAV_FILE_PREFIX + GPX_FILE_EXT)
+					|| name.equals(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT));
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
@@ -201,7 +202,7 @@ public class FavouritesFileHelper {
 	protected Exception saveExternalFiles(@NonNull List<FavoriteGroup> localGroups, @NonNull Set<String> deleted) {
 		Exception result = null;
 		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
-		loadGPXFiles(FILE_PREFIX_TO_SAVE, fileGroups);
+		loadGPXFiles(fileGroups);
 		for (FavoriteGroup fileGroup : fileGroups.values()) {
 			// Search corresponding group in memory
 			boolean hasLocalGroup = false;
@@ -247,7 +248,7 @@ public class FavouritesFileHelper {
 
 	public void backup(@NonNull File backupFile, @NonNull File externalFile) {
 		String name = backupFile.getName();
-		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_FILE_EXT));
+		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_EXT));
 		FileInputStream fis = null;
 		ZipOutputStream zos = null;
 		try {
@@ -284,7 +285,7 @@ public class FavouritesFileHelper {
 	private File getBackupFile() {
 		clearOldBackups(getBackupFilesForToday(), BACKUP_MAX_PER_DAY);
 		String baseName = formatTime(System.currentTimeMillis());
-		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_FILE_EXT);
+		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_EXT);
 	}
 
 	@NonNull
@@ -305,7 +306,7 @@ public class FavouritesFileHelper {
 		File[] files = getBackupsFolder().listFiles();
 		if (!Algorithms.isEmpty(files)) {
 			for (File file : files) {
-				if (file.getName().endsWith(GPX_FILE_EXT + ZIP_FILE_EXT)) {
+				if (file.getName().endsWith(GPX_FILE_EXT + ZIP_EXT)) {
 					backupFiles.add(file);
 				}
 			}

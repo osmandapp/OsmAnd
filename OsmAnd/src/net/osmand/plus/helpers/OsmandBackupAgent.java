@@ -18,6 +18,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import java.io.IOException;
 import java.util.List;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 /**
  * Requires android API from android-8
  */
@@ -56,7 +58,7 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 
 	private String[] collectFiles() {
 		return new String[] {
-				FavouritesFileHelper.FILE_TO_BACKUP,
+				FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + GPX_FILE_EXT,
 				"../databases/" + MapMarkersDbHelper.DB_NAME,
 				"../databases/" + OsmBugsDbHelper.OSMBUGS_DB_NAME
 		};
