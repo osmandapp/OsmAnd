@@ -43,7 +43,7 @@ public class FavouritesFileHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
-	private static final String TIME_PATTERN = "yyyy-MM-dd_hhmmss";
+	private static final String TIME_PATTERN = "yyyy-MM-dd_HHmmss";
 
 	private static final int BACKUP_MAX_COUNT = 10;
 	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
