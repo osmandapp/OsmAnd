@@ -51,7 +51,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		this.weatherLayer = weatherLayer;
 		this.resourcesManager = weatherHelper.getWeatherResourcesManager();
-		this.dateTime = System.currentTimeMillis();
+		setDateTime(System.currentTimeMillis());
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = dateTime;
+		this.dateTime = WeatherHelper.roundForecastTimeToHour(dateTime);
 	}
 
 	@Override

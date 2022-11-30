@@ -139,4 +139,9 @@ public class WeatherHelper {
 	public int getBandsSettingsVersion() {
 		return bandsSettingsVersion.get();
 	}
+
+	public static long roundForecastTimeToHour(long time) {
+		long hour = 60 * 60 * 1000;
+		return (time + hour / 2) / hour * hour;
+	}
 }

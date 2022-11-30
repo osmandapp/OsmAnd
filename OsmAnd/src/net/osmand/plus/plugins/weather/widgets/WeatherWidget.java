@@ -104,7 +104,7 @@ public  class WeatherWidget extends TextInfoWidget {
 	}
 
 	public long getDateTime() {
-		return System.currentTimeMillis() / 60000 * 60000; // TODO: get correct time
+		return WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis());
 	}
 
 	private boolean shouldObtainValue(@Nullable PointI point31, @Nullable ZoomLevel zoom, long dateTime) {
