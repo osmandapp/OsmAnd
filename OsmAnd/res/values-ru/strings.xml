@@ -4940,7 +4940,7 @@
     <string name="precipitation_widget_desc">Виджет показывает количество осадков для текущего центра карты.</string>
     <string name="action_not_supported_with_map_style">Действие не поддерживается с выбранным стилем карты.</string>
     <string name="weather_plugin_description">Плагин погоды предоставляет:
-\n- 5 слоев... почасовой прогноз на 24 часа и прогноз на 7 дней каждые 3 часа;
+\n- 24-часовой и 7-дневный прогноз с 5 слоями ;
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
