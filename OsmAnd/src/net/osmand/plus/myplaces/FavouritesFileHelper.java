@@ -191,8 +191,9 @@ public class FavouritesFileHelper {
 			saveFile(groups, getInternalFile());
 			// Save groups to external files
 			saveExternalFiles(groups, deletedPoints.keySet());
-			// Save groups to backup
-			backup(groups, getBackupFile());
+			// Save groups to backup file//
+			//backup(groups, getBackupFile()); //creates new, but does not zip
+			backup(getBackupFile(), getInternalFile()); //simply backs up internal file, hence internal name is reflected in gpx <name> metadata
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -246,7 +247,7 @@ public class FavouritesFileHelper {
 		return result;
 	}
 
-	public void backup(@NonNull File backupFile, @NonNull File externalFile) {
+	private void backup(@NonNull File backupFile, @NonNull File externalFile) {
 		String name = backupFile.getName();
 		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_EXT));
 		FileInputStream fis = null;
@@ -269,10 +270,10 @@ public class FavouritesFileHelper {
 		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
 	}
 
-	public void backup(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File backupFile) {
-		saveFile(favoriteGroups, backupFile);
-		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
-	}
+//	private void backup(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File backupFile) {
+//		saveFile(favoriteGroups, backupFile);
+//		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
+//	}
 
 	private File getBackupsFolder() {
 		File folder = new File(app.getAppPath(null), BACKUP_INDEX_DIR);
