@@ -4841,4 +4841,10 @@
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Prikaz in snemanje podatkov iz zunanjih senzorjev: hitrost kolesa, moč kolesa, kadenca in srčni utrip.</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_scale">MTB lestvica</string>
+    <string name="mtb_imba_full">Svetovna gorsko kolesarska zveza (International Mountain Bicycling Association)</string>
+    <string name="mtb_segment_classification">Klasifikacija segmenta</string>
+    <string name="rendering_attr_showMtbScale_description">Prikaže proge razvrščene po MTB lestvici.</string>
+    <string name="rendering_attr_showMtbScale_name">Pokaži MTB lestvico</string>
 </resources>

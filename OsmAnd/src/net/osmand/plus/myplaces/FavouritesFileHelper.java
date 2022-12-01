@@ -64,7 +64,7 @@ public class FavouritesFileHelper {
 	}
 
 	@NonNull
-	public File getOldExternalFile() {
+	public File getLegacyExternalFile() {
 		return new File(app.getAppPath(null), LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT);
 	}
 

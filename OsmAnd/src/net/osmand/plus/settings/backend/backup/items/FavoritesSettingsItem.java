@@ -80,7 +80,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (groupFile != null && groupFile.exists()) {
 			return groupFile.lastModified();
 		}
-		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
@@ -91,7 +91,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (groupFile != null && groupFile.exists()) {
 			groupFile.setLastModified(lastModifiedTime);
 		} else {
-			File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+			File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
 			if (favoritesFile.exists()) {
 				favoritesFile.setLastModified(lastModifiedTime);
 			}
