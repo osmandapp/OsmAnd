@@ -186,4 +186,9 @@
     <string name="type_contact_or_group_name">Įveskite kontakto arba grupės pavadinimą</string>
     <string name="search_contacts_descr">Ieškokite visose grupėse ir kontaktuose.</string>
     <string name="search_contacts">Ieškoti kontaktuose</string>
+    <string name="enter_phone_number">Įveskite telefono numerį</string>
+    <string name="enter_authentication_code">Įveskite autentifikavimo kodą</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="shared_string_error">Klaida</string>
 </resources>

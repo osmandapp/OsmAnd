@@ -1638,4 +1638,17 @@
     <string name="poi_playground_activitypanel">Veiklos skydelis</string>
     <string name="poi_playground_horizontal_bar">Horizontali juosta</string>
     <string name="poi_access_yes">Prieiga leidžiama</string>
+    <string name="poi_parking_fee_yes">Taip</string>
+    <string name="poi_furniture_no">Ne</string>
+    <string name="poi_heating_no">Ne</string>
+    <string name="poi_mattress_no">Ne</string>
+    <string name="poi_laundry_service_yes">Taip</string>
+    <string name="poi_dry_cleaning_yes">Taip</string>
+    <string name="poi_laundry_service_no">Ne</string>
+    <string name="poi_dry_cleaning_no">Ne</string>
+    <string name="poi_fridge_no">Ne</string>
+    <string name="poi_membership_no">Ne</string>
+    <string name="poi_parking_fee_no">Ne</string>
+    <string name="poi_coffee_no">Ne</string>
+    <string name="poi_osmand_climbing_bolts_yes">Taip</string>
 </resources>
