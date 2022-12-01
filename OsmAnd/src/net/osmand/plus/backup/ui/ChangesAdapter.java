@@ -5,12 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType;
+import net.osmand.plus.backup.ui.status.ChangesItemViewHolder;
 import net.osmand.plus.backup.ui.status.EmptyStateChangesViewHolder;
 import net.osmand.plus.backup.ui.status.ListHeaderViewHolder;
 import net.osmand.plus.backup.ui.status.SyncStatusViewHolder;
@@ -30,14 +31,14 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final List<Object> items = new ArrayList<>();
 	private final List<SettingsItem> changesList;
 	private final boolean nightMode;
-	private final MapActivity mapActivity;
 	private final ChangesTabType tabType;
+	private final FragmentManager supportFragmentManager;
 
-	ChangesAdapter(@NonNull MapActivity mapActivity, List<SettingsItem> changesList, boolean nightMode, ChangesTabType tabType) {
+	ChangesAdapter(List<SettingsItem> changesList, boolean nightMode, ChangesTabType tabType, FragmentManager supportFragmentManager) {
 		this.changesList = changesList;
 		this.nightMode = nightMode;
-		this.mapActivity = mapActivity;
 		this.tabType = tabType;
+		this.supportFragmentManager = supportFragmentManager;
 		updateItems();
 	}
 
@@ -55,6 +56,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case LIST_HEADER_TYPE:
 				itemView = inflater.inflate(R.layout.changes_list_header_item, parent, false);
 				return new ListHeaderViewHolder(itemView);
+			case LIST_ITEM_TYPE:
+				itemView = inflater.inflate(R.layout.changes_item, parent, false);
+				return new ChangesItemViewHolder(itemView);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -69,9 +73,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return EMPTY_STATE_TYPE;
 		} else if (Algorithms.objectEquals(obj, LIST_HEADER_TYPE)) {
 			return LIST_HEADER_TYPE;
-		}/* else if (obj instanceof ?) {
+		} else if (obj instanceof SettingsItem) {
 			return LIST_ITEM_TYPE;
-		}*/ else {
+		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
 	}
@@ -87,6 +91,10 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof ListHeaderViewHolder) {
 			ListHeaderViewHolder viewHolder = (ListHeaderViewHolder) holder;
 			viewHolder.bindView(tabType, changesList.size());
+		} else if (holder instanceof ChangesItemViewHolder) {
+			ChangesItemViewHolder viewHolder = (ChangesItemViewHolder) holder;
+			SettingsItem item = (SettingsItem) items.get(position);
+			viewHolder.bindView(item, supportFragmentManager, true);
 		}
 	}
 
@@ -99,12 +107,11 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		items.clear();
 
 		items.add(SYNC_STATUS_HEADER_TYPE);
-
 		if (Algorithms.isEmpty(changesList)) {
 			items.add(EMPTY_STATE_TYPE);
 		} else {
 			items.add(LIST_HEADER_TYPE);
-			//items.addAll(changesList);
+			items.addAll(changesList);
 		}
 
 		notifyDataSetChanged();

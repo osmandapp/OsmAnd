@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_unsynced">Unsynced</string>
     <string name="check_for_updates">Check for updates</string>
     <string name="all_changes_uploaded_descr">All changes made on this device are synchronized with OsmAnd Cloud.</string>

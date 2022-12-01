@@ -99,7 +99,7 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAp
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(R.string.backup_and_restore);
+		toolbarTitle.setText(R.string.osmand_cloud);
 
 		ImageView closeButton = toolbar.findViewById(R.id.action_button_icon);
 		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));

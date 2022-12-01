@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/item"
+		layout="@layout/changes_item" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?divider_color_basic" />
+
+	<include
+		android:id="@+id/download_item"
+		layout="@layout/changes_item" />
+
+	<include
+		android:id="@+id/upload_item"
+		layout="@layout/changes_item" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

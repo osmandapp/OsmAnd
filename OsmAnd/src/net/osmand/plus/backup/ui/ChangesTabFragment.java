@@ -38,7 +38,7 @@ public class ChangesTabFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
 
-		adapter = new ChangesAdapter(app.getOsmandMap().getMapView().getMapActivity(), changeList, nightMode, tabType);
+		adapter = new ChangesAdapter(changeList, nightMode, tabType, getActivity().getSupportFragmentManager());
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -53,12 +53,15 @@ public class ChangesTabFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		updateAdapter();
-
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+	}
+
+	public List<SettingsItem> getChangeList() {
+		return changeList;
 	}
 
 	public void setChangeList(List<SettingsItem> changeList) {
@@ -73,7 +76,7 @@ public class ChangesTabFragment extends BaseOsmAndFragment {
 		return tabType;
 	}
 
-	public String getTitle(){
+	public String getTitle() {
 		return app.getString(tabType.resId);
 	}
 

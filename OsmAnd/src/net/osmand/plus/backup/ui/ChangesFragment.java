@@ -8,28 +8,38 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 
 public class ChangesFragment extends BaseOsmAndFragment {
 	public static final String TAG = ChangesFragment.class.getSimpleName();
 
+	private final int BACKGROUND_ACTIVE_COLOR_ALPHA = 10;
+
 	private boolean nightMode;
 	private ChangesTabType currentTabType;
 	private BackupInfo info;
+	private View view;
+	private ChangesPagerAdapter adapter;
+	private ViewPager viewPager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,16 +51,16 @@ public class ChangesFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
+		view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
 
-		setupTabs(view);
-		setupToolbar(view);
-
+		setupTabs();
+		setupToolbar();
+		updateActionButtons();
 		return view;
 	}
 
-	private void setupToolbar(View view) {
+	private void setupToolbar() {
 		view.findViewById(R.id.close_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -61,15 +71,66 @@ public class ChangesFragment extends BaseOsmAndFragment {
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
-	private void setupTabs(View view) {
+	private void updateActionButtons() {
+		TextViewEx downloadTextView = view.findViewById(R.id.download_button_text);
+		AppCompatImageView downloadImageView = view.findViewById(R.id.download_button_icon);
+		View downloadButton = view.findViewById(R.id.download_button);
+		View downloadContainer = view.findViewById(R.id.download_container);
+
+		ChangesTabFragment fragment = (ChangesTabFragment) adapter.getItem(viewPager.getCurrentItem());
+		ChangesTabType currentChangesType = fragment.getTabType();
+
+		StringBuilder downloadButtonText = new StringBuilder("");
+		int iconColor;
+		int textColor;
+		int backgroundColor;
+		int backgroundAlpha;
+
+		if (Algorithms.isEmpty(fragment.getChangeList())) {
+			iconColor = ColorUtilities.getDefaultIconColor(requireMyApplication(), nightMode);
+			textColor = ColorUtilities.getSecondaryTextColor(requireMyApplication(), nightMode);
+			backgroundColor = ColorUtilities.getInactiveButtonsAndLinksColor(requireMyApplication(), nightMode);
+			backgroundAlpha = 100;
+		} else {
+			iconColor = ColorUtilities.getActiveIconColor(requireMyApplication(), nightMode);
+			textColor = ColorUtilities.getActiveColor(requireMyApplication(), nightMode);
+			backgroundColor = ColorUtilities.getActiveColor(requireMyApplication(), nightMode);
+			backgroundAlpha = BACKGROUND_ACTIVE_COLOR_ALPHA;
+		}
+
+		if (currentChangesType.equals(ChangesTabType.LOCAL_CHANGES)) {
+			downloadButtonText.append(getString(R.string.shared_string_upload));
+			downloadImageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload));
+		} else if (currentChangesType.equals(ChangesTabType.CLOUD_CHANGES)) {
+			downloadButtonText.append(getString(R.string.shared_string_download));
+			downloadImageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload));
+		} else if (currentChangesType.equals(ChangesTabType.CONFLICTS)) {
+			downloadImageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload));
+		}
+
+		downloadImageView.getDrawable().setTint(iconColor);
+		downloadButtonText.append(" ").append(getString(R.string.shared_string_all));
+
+		downloadTextView.setTextColor(textColor);
+		downloadTextView.setText(downloadButtonText);
+		downloadContainer.setBackgroundColor(backgroundColor);
+		downloadContainer.getBackground().setAlpha(backgroundAlpha);
+
+		downloadButton.setOnClickListener(view1 -> {
+
+		});
+	}
+
+	private void setupTabs() {
 		ArrayList<Fragment> fragments = new ArrayList<>();
 		for (ChangesTabType type : ChangesTabType.values()) {
 			fragments.add(createTabFragment(type));
 		}
-		ViewPager viewPager = view.findViewById(R.id.pager);
-		ChangesPagerAdapter adapter = new ChangesPagerAdapter(getChildFragmentManager(), fragments);
+		viewPager = view.findViewById(R.id.pager);
+		adapter = new ChangesPagerAdapter(getChildFragmentManager(), fragments);
 		viewPager.setAdapter(adapter);
 		viewPager.setCurrentItem(currentTabType.ordinal());
+		viewPager.addOnPageChangeListener(getPageChangeListener());
 
 		PagerSlidingTabStrip pagerSlidingTabStrip = view.findViewById(R.id.sliding_tabs);
 		pagerSlidingTabStrip.setShouldExpand(true);
@@ -79,7 +140,7 @@ public class ChangesFragment extends BaseOsmAndFragment {
 	private ChangesTabFragment createTabFragment(ChangesTabType type) {
 		ChangesTabFragment fragment = new ChangesTabFragment(requireMyApplication());
 		if (type.equals(ChangesTabType.LOCAL_CHANGES)) {
-			fragment.setChangeList(info.itemsToUpload);
+			fragment.setChangeList(new ArrayList<>());
 		} else if (type.equals(ChangesTabType.CLOUD_CHANGES)) {
 			fragment.setChangeList(info.itemsToUpload);
 		} else if (type.equals(ChangesTabType.CONFLICTS)) {
@@ -87,6 +148,25 @@ public class ChangesFragment extends BaseOsmAndFragment {
 		}
 		fragment.setTabType(type);
 		return fragment;
+	}
+
+	private OnPageChangeListener getPageChangeListener() {
+		return new OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				updateActionButtons();
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+
+			}
+		};
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, ChangesTabType tabType, BackupInfo info) {
@@ -131,10 +211,6 @@ public class ChangesFragment extends BaseOsmAndFragment {
 		@Override
 		public int getCount() {
 			return mPages.size();
-		}
-
-		public Fragment getItemAt(int position) {
-			return mPages.get(position);
 		}
 
 		@Override
