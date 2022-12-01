@@ -3237,7 +3237,7 @@
     <string name="poi_scooter_no">Скутер: нет</string>
     <string name="poi_truck_yes">Грузовик: да</string>
     <string name="poi_truck_no">Грузовик: нет</string>
-    <string name="poi_parking_fee_yes">Оплата за парковку: есть</string>
+    <string name="poi_parking_fee_yes">Есть</string>
     <string name="poi_parking_fee_no">Оплата за парковку: нет</string>
     <string name="poi_amperage">Ток</string>
     <string name="poi_charging_station_output">Мощность зарядной станции</string>
@@ -4355,4 +4355,6 @@
     <string name="poi_playground_hopscotch">Классики</string>
     <string name="poi_playground_sledding">Ледяная горка</string>
     <string name="poi_access_yes">Доступ разрешен</string>
+    <string name="poi_parking_fee_filter">Оплата за парковку</string>
+    <string name="poi_trampoline_park">Батутный парк</string>
 </resources>

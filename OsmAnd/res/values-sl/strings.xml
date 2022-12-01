@@ -4847,4 +4847,94 @@
     <string name="mtb_segment_classification">Klasifikacija segmenta</string>
     <string name="rendering_attr_showMtbScale_description">Prikaže proge razvrščene po MTB lestvici.</string>
     <string name="rendering_attr_showMtbScale_name">Pokaži MTB lestvico</string>
+    <string name="weather_plugin_description">Zagotavlja:
+\n- 24-urno in 7-dnevno vremensko napoved s petimi plastmi;
+\n- gradniki, ki temeljijo na lokaciji;
+\n- izoterme in izobare (izočrte temperature in zračnega tlaka).
+\n
+\nVremenske podatke zagotavlja globalni sistem napovedi (Global Forecast System - GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="shared_string_contours">Obrisi</string>
+    <string name="measurement_units">Merske enote</string>
+    <string name="shared_string_weather">Vreme</string>
+    <string name="map_settings_weather_precip">Padavine</string>
+    <string name="empty_screen_weather_clouds_layer">Vklopi, če želiš na zemljevidu prikazati sloj oblačnosti.</string>
+    <string name="weather_precip_milimeters">Milimetrov</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hektopaskali</string>
+    <string name="rendering_engine_failed">OsmAndovo upodabljanje zemljevidov se je pred kratkim zrušilo.</string>
+    <string name="action_not_supported_with_map_style">Izbrani slog zemljevida ne podpira tega dejanja.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd se je vrnil k upodabljanju zemljevidov različice 1. V nastavitvah lahko poskusiš preklopiti nazaj na novo različico 2 (OpenGL).
+\n
+\nProsimo, podpri izboljšave s posredovanjem dnevnika napak.</string>
+    <string name="share_crash_log">Deli dnevnik zrušitve</string>
+    <string name="switch_mode_by_tapping_on_widget">Preklopi način tako, da tapneš na gradnik.</string>
+    <string name="map_widget_sunrise_desc">Prikazuje čas naslednjega sončnega vzhoda ali čas, ki ostaja do sončnega vzhoda.</string>
+    <string name="map_widget_sunset_desc">Prikazuje čas naslednjega sončnega zahoda ali čas, ki ostaja do sončnega zahoda.</string>
+    <string name="shared_string_next_sunset">Naslednji sončni zahod</string>
+    <string name="shared_string_time_left">Preostali čas</string>
+    <string name="shared_string_sunset">Sončni zahod</string>
+    <string name="shared_string_sunrise">Sončni vzhod</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Ti gradniki prikazujejo informacije o naslednjem sončnem vzhodu in zahodu.</string>
+    <string name="map_widget_group_sunrise_sunset">Sončni vzhod, sončni zahod</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Barvna shema črte</string>
+    <string name="depth_contour_lines">Izobate</string>
+    <string name="weather_offline_forecast">Napoved brez povezave</string>
+    <string name="weather_online_cache">Spletni predpomnilnik</string>
+    <string name="map_settings_weather_air_pressure">Zračni tlak</string>
+    <string name="map_settings_weather_cloud">Oblaki</string>
+    <string name="map_settings_weather_wind">Veter</string>
+    <string name="explore_weather_forecast">Razišči vremensko napoved.</string>
+    <string name="empty_screen_weather_contours">Vklopi, če želiš na zemljevidu prikazati vremenske izočrte.</string>
+    <string name="empty_screen_weather_pressure_layer">Vklopi, če želiš na zemljevidu prikazati sloj zračnega tlaka.</string>
+    <string name="empty_screen_view_selected_weather_data">Vklopi, če želiš na zemljevidu prikazati izbrane vremenske podatke.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">Palcev</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Vozli</string>
+    <string name="weather_wind_miles_per_hour">Milje na uro</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometri na uro</string>
+    <string name="weather_wind_meters_per_second">Metri na sekundo</string>
+    <string name="weather_widgets_secondary_desc">Merilne enote lahko spremeniš v nastavitvah vtičnika Vreme.</string>
+    <string name="air_pressure_widget_desc">Prikazuje zračni tlak za trenutno središče zemljevida.</string>
+    <string name="clouds_widget_desc">Prikazuje pokritost z oblaki za trenutno središče zemljevida.</string>
+    <string name="wind_widget_desc">Prikazuje hitrost vetra za trenutno središče zemljevida.</string>
+    <string name="precipitation_widget_desc">Prikazuje padavine za trenutno središče zemljevida.</string>
+    <string name="temperature_widget_desc">Prikazuje temperaturo za trenutno središče zemljevida.</string>
+    <string name="weather_prefs_descr">24-urna in 7-dnevna napoved, posodobljena vsake 3 ure</string>
+    <string name="weather_temperature_celsius">Celzija</string>
+    <string name="map_rendering_engine_descr">Različica 2 (OpenGL) je hitrejši mehanizem za upodabljanje zemljevidov, ki vključuje tudi 2,5D pogled. Različica 1 je bila privzeta pred OsmAnd 4.3 in je še vedno primernejša za starejše naprave.</string>
+    <string name="map_rendering_engine_v2">Različica 2 (OpenGL)</string>
+    <string name="storage_migration_fragment_close_descr">Kopiranje je opravljeno za %1$s%%. Če se zdaj ustaviš, aplikacija morda ne bo delovala pravilno.</string>
+    <string name="rendering_attr_depthContourWidth_name">Debelina črte</string>
+    <string name="shared_string_next_sunrise">Naslednji sončni vzhod</string>
+    <string name="shared_string_layers">Sloji</string>
+    <string name="weather_widget_group_desc">Komplet gradnikov, ki prikazujejo različne vremenske informacije.</string>
+    <string name="dismiss_changes_descr">Vse spremembe bodo zavrnjene.</string>
+    <string name="map_settings_weather_temp">Temperatura</string>
+    <string name="turn_on_nautical_depth_description">Vklopi, če želiš na zemljevidu prikazati podatke o morski globini.</string>
+    <string name="weather_wind_kn">voz</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="quick_action_temperature_layer">Stikalo za prikaz ali skrivanje sloja temperatur na zemljevidu.</string>
+    <string name="quick_action_precipitation_layer">Stikalo za prikaz ali skrivanje sloja padavin na zemljevidu.</string>
+    <string name="quick_action_wind_layer">Stikalo za prikaz ali skrivanje sloja vetrov na zemljevidu.</string>
+    <string name="quick_action_cloud_layer">Stikalo za prikaz ali skrivanje sloja oblačnosti na zemljevidu.</string>
+    <string name="restart_now">Ponovno zaženi</string>
+    <string name="map_rendering_engine_v1">Različica 1</string>
+    <string name="quick_action_air_pressure_layer">Stikalo za prikaz ali skrivanje sloja zračnega tlaka na zemljevidu.</string>
+    <string name="temperature_layer">Sloj temperatur</string>
+    <string name="pressure_layer">Sloj zračnega tlaka</string>
+    <string name="wind_layer">Sloj vetrov</string>
+    <string name="empty_screen_weather_wind_layer">Vklopi, če želiš na zemljevidu prikazati sloj vetrov.</string>
+    <string name="empty_screen_weather_precipitation_layer">Vklopi, če želiš na zemljevidu prikazati sloj padavin.</string>
+    <string name="cloud_layer">Sloj oblačnosti</string>
+    <string name="precipitation_layer">Sloj padavin</string>
+    <string name="empty_screen_weather_temperature_layer">Vklopi, če želiš na zemljevidu prikazati sloj temperatur.</string>
+    <string name="weather_pressure_inches_of_mercury">Palci živega srebra</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetri živega srebra</string>
+    <string name="dismiss_changes">Zavrniti spremembe\?</string>
 </resources>

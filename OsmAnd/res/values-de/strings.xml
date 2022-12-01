@@ -4721,8 +4721,8 @@
     <string name="marker_2nd">Zweite Markierung</string>
     <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
     <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
-    <string name="accessibility_2d_view_off">2,5-D-Ansicht aus</string>
-    <string name="accessibility_2d_view_on">2,5-D-Ansicht an</string>
+    <string name="accessibility_2d_view_off">2,5D-Ansicht aus</string>
+    <string name="accessibility_2d_view_on">2,5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>
     <string name="auto_25_chars_route_tl_kr">Links abbiegen und rechts halten</string>
     <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
@@ -4853,7 +4853,7 @@
     <string name="speak_gps_signal_status">GPS-Signalverlust und Wiederherstellung ankündigen</string>
     <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
     <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
-    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5-D-Ansicht
+    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5D-Ansicht
 \n
 \n • Reibungslose Animation von Ortswechseln während der Fahrt
 \n
