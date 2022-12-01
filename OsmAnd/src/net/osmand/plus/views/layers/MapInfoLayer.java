@@ -201,7 +201,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
-		rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+		if (rulerWidgets != null) {
+			rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+		}
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
