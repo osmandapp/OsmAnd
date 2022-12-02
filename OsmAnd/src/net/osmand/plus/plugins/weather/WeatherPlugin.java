@@ -28,6 +28,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -105,6 +108,15 @@ public class WeatherPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_WIND_WIDGET, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_CLOUDS_WIDGET, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_AIR_PRESSURE_WIDGET, noAppMode);
+
+		app.getAppInitializer().addListener(new AppInitializeListener() {
+			@Override
+			public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
+				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+					updateLayers(app, null);
+				}
+			}
+		});
 	}
 
 	@Override
