@@ -4933,6 +4933,10 @@
 \n
 \n • خيار مضاف لتعطيل UUID
 \n
+\n• توقعات السرعة الافتراضية القابلة للتعديل للمشي المعتمد على الارتفاع
+\n
+\n• إخراج الصوت الثابت وسلوك شريط تمرير الصوت
+\n
 \n</string>
     <string name="external_sensors_support">دعم المستشعرات الخارجية</string>
     <string name="speak_gps_signal_status">الإعلان عن فقدان إشارة GPS واستعادتها</string>
@@ -5039,4 +5043,5 @@
     <string name="mtb_scale">مقياس MTB</string>
     <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>
     <string name="mtb_segment_classification">تصنيف القطاعات</string>
+    <string name="mtb_imba">الرابطة الدولية لركوب الدراجات الجبلية</string>
 </resources>
