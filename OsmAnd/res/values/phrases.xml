@@ -101,6 +101,7 @@
 	<string name="poi_socket_chademo_output_filter">CHAdeMO output</string>
 	<string name="poi_socket_type2_output_filter">Type 2 output</string>
 	<string name="poi_socket_type2_combo_output_filter">Type 2 combo output</string>
+	<string name="poi_socket_type2_cable_output_filter">Type 2 cable output</string>
 	<string name="poi_socket_type3_output_filter">Type 3 output</string>
 	<string name="poi_socket_type3a_output_filter">Type 3a output</string>
 	<string name="poi_socket_type3c_output_filter">Type 3c output</string>
@@ -3655,6 +3656,9 @@
 	<string name="poi_socket_type2_combo">Socket: Type 2 combo</string>
 	<string name="poi_socket_type2_combo_current">Socket: Type 2 combo: current</string>
 	<string name="poi_socket_type2_combo_output">Socket: Type 2 combo: output</string>
+	<string name="poi_socket_type2_cable">Socket: Type 2 cable</string>
+	<string name="poi_socket_type2_cable_current">Socket: Type 2 cable: current</string>
+	<string name="poi_socket_type2_cable_output">Socket: Type 2 cable: output</string>
 	<string name="poi_socket_type3">Socket: Type 3</string>
 	<string name="poi_socket_type3_current">Socket: Type 3: current</string>
 	<string name="poi_socket_type3_output">Socket: Type 3: output</string>
@@ -4996,6 +5000,9 @@
 	<string name="poi_socket_type2_combo_voltage_high">High</string>
 	<string name="poi_socket_type2_combo_voltage_medium">Medium</string>
 	<string name="poi_socket_type2_combo_voltage_low">Low</string>
+	<string name="poi_socket_type2_cable_voltage_high">High</string>
+	<string name="poi_socket_type2_cable_voltage_medium">Medium</string>
+	<string name="poi_socket_type2_cable_voltage_low">Low</string>
 	<string name="poi_socket_type3a_voltage_high">High</string>
 	<string name="poi_socket_type3a_voltage_medium">Medium</string>
 	<string name="poi_socket_type3a_voltage_low">Low</string>
