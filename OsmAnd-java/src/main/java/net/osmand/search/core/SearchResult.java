@@ -106,7 +106,7 @@ public class SearchResult {
 	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10;
 		// if all words from search phrase == the search result words - we prioritize it even higher
-		if (completeMatchRes.allWordsEqual) {
+		if (completeMatchRes.allWordsEqual && requiredSearchPhrase.getLastTokenLocation() != null && this.location != null) {
 			boolean closeDistance = MapUtils.getDistance(requiredSearchPhrase.getLastTokenLocation(),
 					this.location) <= NEAREST_METERS_LIMIT;
 			if (objectType == ObjectType.CITY || objectType == ObjectType.VILLAGE || closeDistance) {
