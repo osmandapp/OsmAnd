@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
@@ -105,6 +106,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider = view.findViewById(R.id.time_slider);
 		timeSlider.setValueTo(24);
 		timeSlider.setValueFrom(0);
+		timeSlider.setLabelFormatter(value -> String.valueOf((int) value));
 
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
@@ -114,6 +116,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			updateSelectedDate(calendar.getTime());
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
+		timeSlider.setLabelBehavior(LABEL_FLOATING);
 
 		updateTimeSlider();
 	}

@@ -119,7 +119,7 @@ public class WeatherHelper {
 		return updateBandsSettings(weatherResourcesManager);
 	}
 
-	public boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
+	private boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = getBandSettings(weatherResourcesManager);
 		weatherResourcesManager.setBandSettings(bandSettings);
 		bandsSettingsVersion.incrementAndGet();

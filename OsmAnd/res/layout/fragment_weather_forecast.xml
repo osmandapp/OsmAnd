@@ -135,8 +135,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
-				android:stepSize="1"
-				app:labelBehavior="withinBounds" />
+				android:stepSize="1"/>
 
 		</LinearLayout>
 
