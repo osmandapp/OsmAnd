@@ -39,6 +39,12 @@ public class WeatherSettings {
 	public final CommonPreference<Boolean> weatherPrecip;
 	public final CommonPreference<Boolean> weatherPressure;
 
+	public final CommonPreference<Boolean> weatherForecastTemp;
+	public final CommonPreference<Boolean> weatherForecastWind;
+	public final CommonPreference<Boolean> weatherForecastCloud;
+	public final CommonPreference<Boolean> weatherForecastPrecip;
+	public final CommonPreference<Boolean> weatherForecastPressure;
+
 	public final CommonPreference<Float> weatherTempAlpha;
 	public final CommonPreference<Float> weatherWindAlpha;
 	public final CommonPreference<Float> weatherCloudAlpha;
@@ -70,6 +76,12 @@ public class WeatherSettings {
 		weatherWind = settings.registerBooleanPreference("weatherWind", false).makeProfile();
 		weatherCloud = settings.registerBooleanPreference("weatherCloud", false).makeProfile();
 		weatherPrecip = settings.registerBooleanPreference("weatherPrecip", false).makeProfile();
+
+		weatherForecastTemp = settings.registerBooleanPreference("weatherForecastTemp", false).makeProfile();
+		weatherForecastPressure = settings.registerBooleanPreference("weatherForecastPressure", false).makeProfile();
+		weatherForecastWind = settings.registerBooleanPreference("weatherForecastWind", false).makeProfile();
+		weatherForecastCloud = settings.registerBooleanPreference("weatherForecastCloud", false).makeProfile();
+		weatherForecastPrecip = settings.registerBooleanPreference("weatherForecastPrecip", false).makeProfile();
 
 		weatherTempUnit = (EnumStringPreference<TemperatureUnit>) settings.registerEnumStringPreference(
 				"weatherTempUnit", TemperatureUnit.CELSIUS, TemperatureUnit.values(), TemperatureUnit.class).makeProfile();
