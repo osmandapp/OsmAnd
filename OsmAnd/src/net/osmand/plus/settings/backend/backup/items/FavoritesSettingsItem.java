@@ -1,9 +1,9 @@
 package net.osmand.plus.settings.backend.backup.items;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_PREFIX_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.GPX_FILE_EXT;
 
 import android.content.Context;
 
@@ -80,7 +80,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (groupFile != null && groupFile.exists()) {
 			return groupFile.lastModified();
 		}
-		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+		File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
@@ -91,7 +91,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (groupFile != null && groupFile.exists()) {
 			groupFile.setLastModified(lastModifiedTime);
 		} else {
-			File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+			File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
 			if (favoritesFile.exists()) {
 				favoritesFile.setLastModified(lastModifiedTime);
 			}
@@ -113,7 +113,14 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	public String getPublicName(@NonNull Context ctx) {
 		FavoriteGroup singleGroup = getSingleGroup();
 		String groupName = singleGroup != null ? singleGroup.getName() : null;
+		String fileName = getFileName();
 		if (!Algorithms.isEmpty(groupName)) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
+		} else if (!Algorithms.isEmpty(fileName)) {
+			groupName = fileName.replace(FILE_PREFIX_TO_SAVE, "").replace(GPX_FILE_EXT, "");
+			if (groupName.startsWith(FILE_GROUP_NAME_SEPARATOR)) {
+				groupName = groupName.substring(1);
+			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else {
 			return ctx.getString(R.string.shared_string_favorites);

@@ -64,7 +64,7 @@ public class FavouritesFileHelper {
 	}
 
 	@NonNull
-	public File getOldExternalFile() {
+	public File getLegacyExternalFile() {
 		return new File(app.getAppPath(null), LEGACY_FILE_TO_SAVE);
 	}
 

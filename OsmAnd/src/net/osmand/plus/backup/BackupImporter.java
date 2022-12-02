@@ -5,6 +5,7 @@ import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
@@ -147,6 +148,9 @@ class BackupImporter {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, remoteFile.getName());
 					if (forceReadData) {
+						if (item instanceof CollectionSettingsItem<?>) {
+							((CollectionSettingsItem<?>) item).processDuplicateItems();
+						}
 						item.apply();
 					}
 					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());

@@ -127,7 +127,7 @@ public class FavouritesHelper {
 		recalculateCachedFavPoints();
 		sortAll();
 
-		File oldExternalFile = fileHelper.getOldExternalFile();
+		File oldExternalFile = fileHelper.getLegacyExternalFile();
 		// Force save favorites to file if internals are different from externals
 		// or no favorites created yet or legacy favourites.gpx present
 		if (changed || !fileHelper.getExternalDir().exists() || oldExternalFile.exists()) {
