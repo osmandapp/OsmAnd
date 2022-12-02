@@ -59,7 +59,7 @@ class ForecastAdapter extends RecyclerView.Adapter<DateViewHolder> {
 		this.currentDate = currentDate;
 		this.selectedDate = selectedDate;
 
-		Calendar calendar = WeatherForecastFragment.getCalendar();
+		Calendar calendar = WeatherForecastFragment.getDefaultCalendar();
 		dates.add(currentDate.getTime());
 		for (int i = 0; i <= MAX_FORECAST_DAYS; i++) {
 			calendar.add(Calendar.DAY_OF_MONTH, 1);

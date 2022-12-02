@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FORECAST_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
@@ -44,6 +45,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHideCloudLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
+import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -342,6 +344,20 @@ public class WeatherPlugin extends OsmandPlugin {
 			if (mapView.isLayerExists(weatherContourLayer)) {
 				mapView.removeLayer(weatherContourLayer);
 			}
+		}
+	}
+
+	@Override
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+		if (isActive()) {
+			helper.addItem(new ContextMenuItem(DRAWER_WEATHER_FORECAST_ID)
+					.setTitleId(R.string.shared_string_weather, mapActivity)
+					.setIcon(R.drawable.ic_action_umbrella)
+					.setListener((uiAdapter, view, item, isChecked) -> {
+						app.logEvent("weatherForecastOpen");
+						WeatherForecastFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}));
 		}
 	}
 
