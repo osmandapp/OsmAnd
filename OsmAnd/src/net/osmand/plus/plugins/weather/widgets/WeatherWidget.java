@@ -45,6 +45,7 @@ public class WeatherWidget extends TextInfoWidget {
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;
+	private Long dateTime;
 	private long lastDateTime;
 
 	private boolean lastObtainingFailed;
@@ -91,6 +92,10 @@ public class WeatherWidget extends TextInfoWidget {
 		});
 	}
 
+	public void setDateTime(@Nullable Date date) {
+		this.dateTime = date != null ? date.getTime() : null;
+	}
+
 	@Nullable
 	public PointI getPoint31() {
 		MapRendererView mapRenderer = getMyApplication().getOsmandMap().getMapView().getMapRenderer();
@@ -104,7 +109,8 @@ public class WeatherWidget extends TextInfoWidget {
 	}
 
 	public long getDateTime() {
-		return WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis());
+		long time = dateTime != null ? dateTime : System.currentTimeMillis();
+		return WeatherHelper.roundForecastTimeToHour(time);
 	}
 
 	private boolean shouldObtainValue(@Nullable PointI point31, @Nullable ZoomLevel zoom, long dateTime) {

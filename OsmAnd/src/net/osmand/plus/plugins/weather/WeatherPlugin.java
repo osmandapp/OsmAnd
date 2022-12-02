@@ -68,6 +68,7 @@ import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WeatherPlugin extends OsmandPlugin {
@@ -84,6 +85,9 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerLow;
 	private WeatherRasterLayer weatherLayerHigh;
 	private WeatherContourLayer weatherContourLayer;
+
+	@Nullable
+	private Date forecastDate;
 
 	@WeatherBandType
 	private short currentConfigureBand = WEATHER_BAND_UNDEFINED;
@@ -193,7 +197,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
 				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_TEMPERATURE);
@@ -398,5 +402,18 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherContoursType.set(contoursType);
+	}
+
+	public boolean hasCustomForecast() {
+		return forecastDate != null;
+	}
+
+	public void updateWeatherDate(@Nullable Date date) {
+		forecastDate = date;
+
+		long time = date != null ? date.getTime() : System.currentTimeMillis();
+		weatherLayerLow.setDateTime(time);
+		weatherLayerHigh.setDateTime(time);
+		weatherContourLayer.setDateTime(time);
 	}
 }

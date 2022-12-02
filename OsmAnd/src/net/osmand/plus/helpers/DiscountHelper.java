@@ -536,7 +536,7 @@ public class DiscountHelper {
 		}
 
 		@Override
-		public int getStatusBarColor(Context context, boolean night) {
+		public int getStatusBarColor(Context context, boolean nightMode) {
 			return statusBarColor;
 		}
 
