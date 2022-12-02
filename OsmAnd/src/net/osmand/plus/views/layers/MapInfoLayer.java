@@ -37,11 +37,9 @@ import java.util.List;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
-	private final OsmandApplication app;
 	private final RouteLayer routeLayer;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
-	private final MapLayers mapLayers;
 
 	private ViewGroup topWidgetsContainer;
 	private SideWidgetsPanel leftWidgetsPanel;
@@ -51,6 +49,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;
 	private List<RulerWidget> rulerWidgets;
+	private List<SideWidgetsPanel> sideWidgetsPanels;
 
 	private AndroidAutoMapPlaceholderView androidAutoMapPlaceholderView;
 
@@ -63,9 +62,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		super(context);
 		this.routeLayer = layer;
 
-		app = getApplication();
+		OsmandApplication app = getApplication();
 		settings = app.getSettings();
-		mapLayers = app.getOsmandMap().getMapLayers();
+		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
 	}
 
@@ -95,6 +94,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			drawSettings = null;
 			alarmControl = null;
 			rulerWidgets = null;
+			sideWidgetsPanels = null;
 			topToolbarView = null;
 		}
 	}
@@ -145,6 +145,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
 		rulerWidgets = new ArrayList<>();
+		sideWidgetsPanels = new ArrayList<>();
 
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
@@ -163,8 +164,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 			recreateWidgetsPanel(topWidgetsContainer, WidgetsPanel.TOP, appMode);
 			recreateWidgetsPanel(bottomWidgetsContainer, WidgetsPanel.BOTTOM, appMode);
-			leftWidgetsPanel.update();
-			rightWidgetsPanel.update();
+			leftWidgetsPanel.update(drawSettings);
+			rightWidgetsPanel.update(drawSettings);
 		}
 	}
 
@@ -204,6 +205,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
 	}
 
+	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
+		sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
+		panel.updateColors(calculateTextState());
+	}
+
+	public void removeSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
+		sideWidgetsPanels = Algorithms.removeFromList(sideWidgetsPanels, panel);
+	}
+
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
@@ -232,21 +242,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
-			TextState ts = calculateTextState();
+			TextState state = calculateTextState();
 			for (MapWidgetInfo widgetInfo : widgetRegistry.getAllWidgets()) {
-				widgetInfo.widget.updateColors(ts);
+				widgetInfo.widget.updateColors(state);
 			}
 			updateTopToolbar(nightMode);
-			leftWidgetsPanel.updateColors(ts);
-			rightWidgetsPanel.updateColors(ts);
+			leftWidgetsPanel.updateColors(state);
+			rightWidgetsPanel.updateColors(state);
 
 			topWidgetsContainer.invalidate();
 			bottomWidgetsContainer.invalidate();
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
+				rulerWidget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
 			}
-
+			for (SideWidgetsPanel panel : sideWidgetsPanels) {
+				panel.updateColors(state);
+			}
 			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
 	}
@@ -301,13 +313,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (getMapActivity() != null) {
 			updateColorShadowsOfText();
 			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
-			leftWidgetsPanel.update();
-			rightWidgetsPanel.update();
+			leftWidgetsPanel.update(drawSettings);
+			rightWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateInfo(tileBox);
+			}
+			for (SideWidgetsPanel panel : sideWidgetsPanels) {
+				panel.update(drawSettings);
 			}
 		}
 	}
