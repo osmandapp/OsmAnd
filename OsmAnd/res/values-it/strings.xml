@@ -4959,4 +4959,5 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="rendering_attr_showMtbScale_description">Mostra i percorsi nella scala di difficoltà MTB.</string>
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
+    <string name="mtb_segment_classification">Classificazione del segmento</string>
 </resources>
