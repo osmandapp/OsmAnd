@@ -49,6 +49,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
@@ -62,7 +63,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
 
-	private final Calendar currentDate = Calendar.getInstance();
+	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 	private final Calendar selectedDate = getDefaultCalendar();
 
 	private boolean nightMode;
@@ -275,7 +276,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	@NonNull
 	protected static Calendar getDefaultCalendar() {
-		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		calendar.set(Calendar.HOUR_OF_DAY, 12);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
