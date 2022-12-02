@@ -49,7 +49,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 			entryValues[i] = ((Enum<?>) unit).ordinal();
 		}
 
-		ListPreferenceEx preference = createListPreferenceEx(weatherBand.getBandUnitPrefId(), entries,
+		ListPreferenceEx preference = createListPreferenceEx(weatherBand.getBandUnitPref().getId(), entries,
 				entryValues, weatherBand.getMeasurementName(), R.layout.preference_with_descr);
 		preference.setEntries(entries);
 		preference.setEntryValues(entryValues);

@@ -4280,7 +4280,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
     <string name="benefits_for_contributors_primary_descr">Aktywni współtwórcy OpenStreetMap.org mogą być uprawnieni do nieograniczonych godzinnych aktualizacji map.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
-    <string name="contributions_may_calculate_with_delay">Obliczanie składek może trwać kilka godzin.</string>
+    <string name="contributions_may_calculate_with_delay">Obliczanie wkładu może trwać kilka godzin.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
@@ -4315,7 +4315,7 @@
     <string name="routing_attr_only_permitted_streets_description">Korzystaj tylko z ulic, które są celowo dozwolone</string>
     <string name="upload_gpx_description_hint">Pozostaw puste, nazwy ścieżek zostaną użyte jako opis. Wprowadzony opis zostanie zastosowany do każdej ścieżki.</string>
     <string name="search_title">Szukaj: %1$s</string>
-    <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramowania</string>
+    <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramy</string>
     <string name="icon_group_nautical">Morski</string>
     <string name="shared_string_details">Szczegóły</string>
     <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna z powodu zmienionego dostępu do pamięci masowej systemu Android.</string>
@@ -4461,25 +4461,25 @@
     <string name="elevation_profile">Profil wysokościowy</string>
     <string name="memory_allocated_for_routing_ds">Wyższy przydział pamięci przyspiesza obliczanie długich tras (ponad 500 km), ale może mieć wpływ na działanie innych aplikacji.
 \nNie ma wpływu na szybkość obliczania tras krótkich.</string>
-    <string name="not_enough_contributions_descr">Co najmniej %1$s zmian w ciągu ostatnich dwóch miesięcy %2$s jest wymagane, aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map.</string>
+    <string name="not_enough_contributions_descr">Aby uzyskać dostęp do nieograniczonych godzinowych aktualizacji map wymagane jest wprowadzenie co najmniej %1$s zmian z okresu ostatnich dwóch miesięcy %2$s.</string>
     <string name="waypoint_template">Szablon punktu trasy</string>
-    <string name="predefined_waypoint_appearance_description">Naciśnięcie tej akcji spowoduje automatyczne zapisanie punktu trasy z predefiniowanymi parametrami.</string>
-    <string name="always_ask_waypoint_appearance_description">Stuknięcie tej akcji otworzy ekran „Dodaj punkt trasy”, na którym możesz zmienić nazwę i wygląd.</string>
+    <string name="predefined_waypoint_appearance_description">Naciśnięcie tej czynności spowoduje automatyczne zapisanie punktu trasy z predefiniowanymi parametrami.</string>
+    <string name="always_ask_waypoint_appearance_description">Stuknięcie tej czynności otworzy ekran „Dodaj punkt trasy”, na którym możesz zmienić nazwę i wygląd.</string>
     <string name="waypoint_appearance">Wygląd punktu trasy</string>
-    <string name="track_file_description">Kliknięcie akcji spowoduje wyświetlenie dialogu ze wszystkimi dostępnymi ścieżkami do wybrania.</string>
+    <string name="track_file_description">Stuknięcie tej czynności powoduje wyświetlenie dostępnych ścieżek.</string>
     <string name="shared_string_not_used">Nieużywane</string>
     <string name="shared_string_used">Używane</string>
     <string name="track_file">Plik ścieżki</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="files_with_route_restrictions">Pliki z ograniczeniami trasy</string>
     <string name="storage_copying_files_size">Kopiowanie %1$s plików %2$s</string>
-    <string name="icon_group_industrial">Przemysłowy</string>
+    <string name="icon_group_industrial">Przemysłowe</string>
     <string name="shared_string_migration">Migracja</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Tagi Fixme</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Pokaż tagi fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tagi notatek</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Pokaż tagi notatek</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małym zbliżeniu</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony przy małych powiększeniach</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematyczne wyświetlanie ikon przy małych powiększeniach</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Tunele dróg wodnych</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
@@ -4491,9 +4491,9 @@
     <string name="rendering_attr_seabedDetail_name">Szczegóły dna morskiego</string>
     <string name="please_provide_group_name_message">Podaj nazwę grupy.</string>
     <string name="quick_action_add_route_descr">Przycisk rozpoczęcia trasy od środka ekranu.</string>
-    <string name="gpx_no_routes_descr">Możesz użyć narzędzia „%1$s”, aby zapisać trasę w pliku.</string>
+    <string name="gpx_no_routes_descr">Możesz użyć narzędzia „%1$s”, aby dodać trasę do pliku.</string>
     <string name="gpx_no_routes_title">Brak tras</string>
-    <string name="save_track_to_gpx_descrp">Automatyczne rozpoczynanie nagrywania ścieżki podczas nawigacji i automatyczne zapisywanie po zakończeniu.</string>
+    <string name="save_track_to_gpx_descrp">Automatyczne uruchamianie nagrywania ścieżki podczas nawigacji i automatyczne zapisywanie po zakończeniu.</string>
     <string name="rendering_value_omit_name">Pomiń</string>
     <string name="google_play_services">Usługi Google Play</string>
     <string name="location_source">Źródło lokalizacji</string>
@@ -4505,14 +4505,14 @@
     <string name="exit_import">Wyjść\?</string>
     <string name="import_tracks">Importuj trasy</string>
     <string name="memory_allocated_for_routing">Pamięć przydzielona do routingu</string>
-    <string name="rendering_attr_showFitnessTrails_name">Trasy fitness</string>
-    <string name="default_appearance_desc">Domyślny kolor, ikona i kształt zostaną zastosowane do dodanych ulubionych punktów do grupy.</string>
+    <string name="rendering_attr_showFitnessTrails_name">Ścieżki zdrowia</string>
+    <string name="default_appearance_desc">Domyślny kolor, ikona i kształt będą stosowane do dodawanych ulubionych punktów do grupy.</string>
     <string name="location_source_descr">OsmAnd zainstalowany domyślnie z Google Play używa %1$s do określenia lokalizacji.
 \n
 \nJeśli otrzymasz niedokładne informacje o lokalizacji lub korzystasz z urządzenia bez %2$s, spróbuj przełączyć się na „%3$s”</string>
     <string name="default_appearance">Wygląd domyślny</string>
     <string name="rendering_attr_showRunningRoutes_description">Pokaż trasy biegowe</string>
-    <string name="rendering_attr_showFitnessTrails_description">Pokaż trasy fitness</string>
+    <string name="rendering_attr_showFitnessTrails_description">Pokaż ścieżki zdrowia</string>
     <string name="stop_and_exit">Zatrzymaj i wyjdź</string>
     <string name="estimated_download_size">Szacowany rozmiar pobierania</string>
     <string name="move_map_to_select_area">Przesuń mapę, aby wybrać żądany obszar.</string>
@@ -4538,7 +4538,7 @@
     <string name="rendering_attr_showTrainRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_showBusRoutes_name">Linie autobusowe</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trasy trolejbusów</string>
-    <string name="rendering_attr_showShareTaxiRoutes_name">Trasy wahadłowe</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Trasy transportu wahadłowego</string>
     <string name="shared_string_buttons">Przyciski</string>
     <string name="configure_screen_widgets_descr">Wybierz stronę ekranu, aby dodać lub zmienić rozmieszczenie widżetów.</string>
     <string name="simulation_real_mode_title">Realistyczna symulacja</string>
@@ -4550,17 +4550,17 @@
     <string name="apply_to_existing_favorites_descr">Zastosować zmiany do istniejących ulubionych punktów grupy czy tylko do nowych\?</string>
     <string name="add_page">Dodaj stronę</string>
     <string name="points_selection_descr">Zamknąć i utracić wszystkie zmiany\?</string>
-    <string name="simulation_real_mode_desc">Na prostych odcinkach dróg prędkość będzie zbliżona do maksymalnej dozwolonej prędkości.
+    <string name="simulation_real_mode_desc">Na prostych odcinkach dróg prędkość będzie przybliżona do maksymalnej dozwolonej prędkości.
 \nNa skrzyżowaniach symulacja będzie zwalniać.
-\nW przypadku sygnalizacji świetlnej, znaków stop itp. zostaną zastosowane dodatkowe kary.</string>
+\nW sytuacjach sygnalizatorów, znaków stopu itp. mają zastosowanie dodatkowe kary.</string>
     <string name="apply_to_existing_points_descr">Zastosować zmiany do istniejących punktów grupy czy tylko do nowych\?</string>
     <string name="apply_to_existing">Zastosuj do istniejących</string>
     <string name="rendering_attr_horse_scale_common_name">Zwykły</string>
     <string name="routing_attr_carriage_restrictions_description">Rozważ uprawnienia dostępu dla pojazdów ciągniętych przez konie</string>
-    <string name="rendering_attr_showLightRailRoutes_name">Trasy lekkiej kolei</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy kolei miejskiej</string>
     <string name="rendering_attr_showMonorailRoutes_name">Trasy kolei jednoszynowej</string>
     <string name="rendering_attr_showFunicularRoutes_name">Trasy kolejki linowej</string>
-    <string name="zoom_levels_difference_description">Duża różnica między poziomami zbliżenia może zwiększać wielkość pobranych danych.</string>
+    <string name="zoom_levels_difference_description">Duża różnica między poziomami zbliżenia może zwiększać rozmiar pobieranych danych.</string>
     <string name="navigate_point_format_swiss_grid">Szwajcarska siatka (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Szwajcarska siatka (CH1903+)</string>
     <string name="routing_attr_carriage_restrictions_name">Ograniczenia przewozu</string>

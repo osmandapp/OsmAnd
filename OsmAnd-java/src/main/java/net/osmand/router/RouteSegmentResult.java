@@ -543,6 +543,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return convertPoint(object, endPointIndex);
 	}
 
+	public boolean continuesBeyondRouteSegment(RouteSegmentResult segment) {
+		boolean commonX = object.pointsX[startPointIndex] == segment.object.pointsX[segment.endPointIndex];
+		boolean commonY = object.pointsY[startPointIndex] == segment.object.pointsY[segment.endPointIndex];
+		return commonX && commonY;
+	}
+
 	public boolean isForwardDirection() {
 		return endPointIndex - startPointIndex > 0;
 	}

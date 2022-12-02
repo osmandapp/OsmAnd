@@ -2474,7 +2474,7 @@
     <string name="remove_from_map_markers">Boga dae sos \'Marcadores Mapa\'</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
-    <string name="date_added">Annànghidu</string>
+    <string name="date_added">Annantu</string>
     <string name="order_by">Òrdina pro:</string>
     <string name="marker_show_distance_descr">Issèbera comente indicare sa distàntzia e sa diretzione a sos marcadores in sa mapa:</string>
     <string name="passed">Ùrtimu impreu: %1$s</string>
@@ -4866,6 +4866,10 @@
 \n
 \n • Annanta optzione pro disabilitare s\'UUID
 \n
+\n • Previsione adeguàbile de sa lestresa predefinida pro sos tempos de biàgiu caminende/faghende escursionismu/currende in funtzione de s\'artària
+\n
+\n • Essida de su sonu e cumportamentu de su reguladore de su volume acontzados
+\n
 \n</string>
     <string name="rendering_engine_failed_descr">OsmAnd est torradu a sa renderizatzione de sa mapa \'Versione 1\'. Podes proare a torrare a su motore de renderizatzione nou \'Versione 2 (OpenGL)\' in sas Impostatziones.
 \n
@@ -4965,4 +4969,8 @@
     <string name="rendering_attr_showMtbScale_name">Ammustra sos grados de dificultade MTB (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_description">Ammustra sas camineras segundu sos grados de dificultade MTB (pro bitzicletas de monte).</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Ammustra sas camineras segundu sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte).</string>
+    <string name="mtb_segment_classification">Classificatzione de sos segmentos</string>
+    <string name="mtb_scale">Iscala MTB (pro bitzicletas de monte)</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Assòtziu Internatzionale de su Tziclismu de Monte (International Mountain Bicycling Association)</string>
 </resources>

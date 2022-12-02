@@ -17,6 +17,8 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private static final int MAX_CHARS_IN_DESCRIPTION = 100000;
@@ -47,7 +49,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 			File file = app.getFavoritesHelper().getFileHelper().getExternalFile(this.groups.get(0));
 			destFile = new File(dir, file.getName());
 		} else {
-			destFile = new File(dir, FavouritesFileHelper.FILE_PREFIX_TO_SAVE + FavouritesFileHelper.GPX_FILE_EXT);
+			destFile = new File(dir, FavouritesFileHelper.FAV_FILE_PREFIX + GPX_FILE_EXT);
 		}
 	}
 

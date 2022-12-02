@@ -50,7 +50,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Context container and utility class for MapRendererView and derivatives. 
+ * Context container and utility class for MapRendererView and derivatives.
+ *
  * @author Alexey Pelykh
  */
 public class MapRendererContext {
@@ -61,11 +62,11 @@ public class MapRendererContext {
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
 
 	private final OsmandApplication app;
-	
+
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
 	private IObfsCollection obfsCollection;
-	
+
 	private boolean nightMode;
 	private final float density;
 
@@ -81,14 +82,15 @@ public class MapRendererContext {
 	private MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
-	
+
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
 		this.density = density;
 	}
-	
+
 	/**
 	 * Bounds specified map renderer view to this context
+	 *
 	 * @param mapRendererView Reference to MapRendererView
 	 */
 	public void setMapRendererView(MapRendererView mapRendererView) {
@@ -112,7 +114,7 @@ public class MapRendererContext {
 			updateMapSettings();
 		}
 	}
-	
+
 	public void updateMapSettings() {
 		if (mapRendererView instanceof AtlasMapRendererView && cachedReferenceTileSize != getReferenceTileSize()) {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(getReferenceTileSize());
@@ -121,9 +123,10 @@ public class MapRendererContext {
 			updateMapPresentationEnvironment();
 		}
 	}
-	
+
 	/**
 	 * Setup OBF map on layer 0 with symbols
+	 *
 	 * @param obfsCollection OBFs collection
 	 */
 	public void setupObfMap(MapStylesCollection mapStylesCollection, IObfsCollection obfsCollection) {
@@ -138,11 +141,11 @@ public class MapRendererContext {
 	protected int getRasterTileSize() {
 		return (int) (getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
 	}
-	
+
 	private float getReferenceTileSize() {
 		return 256 * Math.max(1, density);
 	}
-	
+
 	/**
 	 * Update map presentation environment and everything that depends on it
 	 */
@@ -247,7 +250,7 @@ public class MapRendererContext {
 		}
 		return convertedStyleSettings;
 	}
-	
+
 	public void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
 		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
@@ -295,7 +298,7 @@ public class MapRendererContext {
 			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
 		}
 	}
-	
+
 	private void updateObfMapSymbolsProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// If there's current provider and bound view, remove it
 		if (obfMapSymbolsProvider != null && mapRendererView != null) {
@@ -309,7 +312,7 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
 		}
 	}
-	
+
 	private void applyCurrentContextToView() {
 		mapRendererView.setMapRendererSetupOptionsConfigurator(
 				new MapRendererView.IMapRendererSetupOptionsConfigurator() {
@@ -380,12 +383,12 @@ public class MapRendererContext {
 		float displayDensityFactor;
 		float mapScaleFactor;
 		float symbolsScaleFactor;
-		
+
 		public CachedMapPresentation(String langId,
-				LanguagePreference langPref, ResolvedMapStyle mapStyle,
-				float displayDensityFactor,
-				float mapScaleFactor,
-				float symbolsScaleFactor) {
+		                             LanguagePreference langPref, ResolvedMapStyle mapStyle,
+		                             float displayDensityFactor,
+		                             float mapScaleFactor,
+		                             float symbolsScaleFactor) {
 			this.langId = langId;
 			this.langPref = langPref;
 			this.mapStyle = mapStyle;

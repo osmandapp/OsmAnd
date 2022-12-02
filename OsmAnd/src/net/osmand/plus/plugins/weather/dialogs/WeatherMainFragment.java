@@ -22,8 +22,8 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
-import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -89,7 +89,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 	}
 
 	private void refreshMap(@NonNull MapActivity mapActivity) {
-		app.runInUIThread(mapActivity::refreshMapComplete);
+		app.runInUIThread(mapActivity::refreshMap);
 	}
 
 	private void setupWeatherLayers(@NonNull View view, @NonNull LayoutInflater inflater) {
