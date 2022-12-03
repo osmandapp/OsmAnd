@@ -25,7 +25,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROF
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FORECAST_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
@@ -90,8 +89,6 @@ import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.profiles.data.RoutingProfilesHolder;
@@ -515,17 +512,6 @@ public class MapActivityActions extends MapActions {
 		if (PluginsHelper.isActive(OsmEditingPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits,
 					R.drawable.ic_action_folder_osm_notes, DRAWER_OSM_EDITS_ID);
-		}
-
-		if (PluginsHelper.isActive(WeatherPlugin.class)) {
-			optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_WEATHER_FORECAST_ID)
-					.setTitleId(R.string.shared_string_weather, mapActivity)
-					.setIcon(R.drawable.ic_action_umbrella)
-					.setListener((uiAdapter, view, item, isChecked) -> {
-						app.logEvent("weatherForecastOpen");
-						WeatherForecastFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return true;
-					}));
 		}
 
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_BACKUP_RESTORE_ID)

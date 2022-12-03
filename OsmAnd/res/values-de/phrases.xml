@@ -392,7 +392,7 @@
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
     <string name="poi_radiotechnics">Funktechnik/Elektronikladen</string>
-    <string name="poi_halt">Eisenbahnhaltestelle;Einsenbahnhaltepunkt;Bahnhof;Haltepunkt</string>
+    <string name="poi_halt">Eisenbahnhaltestelle;Eisenbahnhaltepunkt;Bahnhof;Haltepunkt</string>
     <string name="poi_railway_platform">Bahnsteig</string>
     <string name="poi_railway_station">Bahnhof</string>
     <string name="poi_rapids">Stromschnelle</string>
@@ -429,17 +429,17 @@
     <string name="poi_anchor_berth">Ankerplatz</string>
     <string name="poi_anchorage">Verankerung</string>
     <string name="poi_beacon">Bake</string>
-    <string name="poi_beacon_cardinal">Untiefenbake (Kardinal)</string>
-    <string name="poi_beacon_lateral">Fahrrinnenbake (Lateral)</string>
+    <string name="poi_beacon_cardinal">Untiefenbake (kardinal)</string>
+    <string name="poi_beacon_lateral">Fahrrinnenbake (lateral)</string>
     <string name="poi_beacon_safe_water">Mitte-Fahrwasser-Bake</string>
     <string name="poi_beacon_special_purpose">Sonderzeichen-Bake</string>
     <string name="poi_berth">Landesteg</string>
     <string name="poi_seamark_bridge">Seezeichen: Brücke</string>
     <string name="poi_seamark_building">Seezeichengebäude</string>
-    <string name="poi_buoy_cardinal">Untiefentonne (Kardinal)</string>
+    <string name="poi_buoy_cardinal">Untiefentonne (kardinal)</string>
     <string name="poi_buoy_installation">Ansteuertonne</string>
     <string name="poi_buoy_isolated_danger">Einzelgefahrtonne</string>
-    <string name="poi_buoy_lateral">Fahrrinnentonne (Lateral)</string>
+    <string name="poi_buoy_lateral">Fahrrinnentonne (lateral)</string>
     <string name="poi_buoy_safe_water">Mitte-Fahrwasser-Tonne</string>
     <string name="poi_buoy_special_purpose">Sonderzeichen-Tonne</string>
     <string name="poi_daymark">Tagzeichen</string>
@@ -503,7 +503,7 @@
     <string name="poi_stripclub">Stripclub</string>
     <string name="poi_studio">Studio</string>
     <string name="poi_suburb">Stadtteil</string>
-    <string name="poi_subway_entrance">U-Bahnhofeingang</string>
+    <string name="poi_subway_entrance">U-Bahn-Eingang</string>
     <string name="poi_subway_station">Ja;U-Bahnstation</string>
     <string name="poi_craft_sun_protection">Sonnenschutz</string>
     <string name="poi_supermarket">Supermarkt</string>
@@ -763,7 +763,7 @@
     <string name="poi_wiki_place">Wikipedia</string>
     <string name="poi_wiki_lang_en">Englisches Wiki</string>
     <string name="poi_wiki_lang_ar">Arabisches Wiki</string>
-    <string name="poi_wiki_lang_be">Weißrussisches Wiki</string>
+    <string name="poi_wiki_lang_be">Belarussisches Wiki</string>
     <string name="poi_wiki_lang_bg">Bulgarisches Wiki</string>
     <string name="poi_wiki_lang_ceb">Cebuano-Wiki</string>
     <string name="poi_wiki_lang_cs">Tschechisches Wiki</string>
@@ -3925,7 +3925,7 @@
     <string name="poi_office_diplomatic">Diplomatische Vertretung</string>
     <string name="poi_bay_filter">Art der Bucht</string>
     <string name="poi_plateau">Plateau</string>
-    <string name="poi_club_social">Freizeitclub</string>
+    <string name="poi_club_social">Freizeitklub</string>
     <string name="poi_health_post">Gesundheitsstation</string>
     <string name="poi_pillory">Pranger</string>
     <string name="poi_shop_water">Trinkwasserverkauf</string>
@@ -4288,7 +4288,7 @@
     <string name="poi_access_permit">Genehmigung erforderlich</string>
     <string name="poi_parcel_locker">Paketschließfach</string>
     <string name="poi_museum_open_air">Freilicht</string>
-    <string name="poi_museum_living_history">Reenactment</string>
+    <string name="poi_museum_living_history">Lebendige Geschichte</string>
     <string name="poi_handwashing_creme_yes">Handwaschcreme: ja</string>
     <string name="poi_handwashing_creme_no">Handwaschcreme: nein</string>
     <string name="poi_post_office_post_annex">Postfiliale - Privat betrieben im Auftrag des Postdienstleisters</string>

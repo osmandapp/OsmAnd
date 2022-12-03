@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
@@ -49,6 +50,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
@@ -62,8 +64,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
 
-	private final Calendar currentDate = getCalendar();
-	private final Calendar selectedDate = getCalendar();
+	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+	private final Calendar selectedDate = getDefaultCalendar();
 
 	private boolean nightMode;
 
@@ -104,8 +106,9 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider = view.findViewById(R.id.time_slider);
 		timeSlider.setValueTo(24);
 		timeSlider.setValueFrom(0);
+		timeSlider.setLabelFormatter(value -> String.valueOf((int) value));
 
-		Calendar calendar = getCalendar();
+		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
 			calendar.setTime(selectedDate.getTime());
 			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
@@ -113,13 +116,15 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			updateSelectedDate(calendar.getTime());
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
+		timeSlider.setLabelBehavior(LABEL_FLOATING);
 
 		updateTimeSlider();
 	}
 
 	private void updateTimeSlider() {
+		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(12);
-		timeSlider.setStepSize(OsmAndFormatter.isSameDay(selectedDate, currentDate) ? 1 : 3);
+		timeSlider.setStepSize(today ? 1 : 3);
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -273,8 +278,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	@NonNull
-	protected static Calendar getCalendar() {
-		Calendar calendar = Calendar.getInstance();
+	protected static Calendar getDefaultCalendar() {
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		calendar.set(Calendar.HOUR_OF_DAY, 12);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
