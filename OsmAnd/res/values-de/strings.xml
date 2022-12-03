@@ -1698,7 +1698,7 @@
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
     <string name="nm">sm</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">min/m</string>
+    <string name="min_mile">min/mile</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
