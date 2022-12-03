@@ -3435,8 +3435,8 @@
 \n
 \nVælg en handling.</string>
     <string name="listed_exist">Det angivne %1$s findes allerede.</string>
-    <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
-    <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
+    <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
+    <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten er genberegnet</string>
     <string name="shared_string_terrain">Terræn</string>
     <string name="hillshade_description">Terrænskyggekort viser skråninger, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>

@@ -3333,4 +3333,7 @@
     <string name="shared_string_terms_of_use">İstifadə qaydaları</string>
     <string name="how_to_use">İstifadə qaydası:</string>
     <string name="shared_string_normal">Normal</string>
+    <string name="favorite_delete_group">Qrupu sil</string>
+    <string name="distance_by_tap_use_description">Xəritəyə toxunaraq hazırkı məkanınız və toxunduğunuz nöqtə arasındakı məsafəni görün.
+\nXəritəyə 2 barmağınızla toxunaraq toxunulan nöqtələr arasındakı məsafəni görün.</string>
 </resources>
