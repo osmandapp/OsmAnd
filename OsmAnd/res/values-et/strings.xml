@@ -4431,4 +4431,7 @@
     <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Nupud</string>
     <string name="turn_arrows">Pöörangute nooled</string>
+    <string name="live_update_frequency_week_variant">Kaardiuuendusi kontrollitakse kord nädalas.</string>
+    <string name="live_update_frequency_day_variant">Kaardiuuendusi kontrollitakse kord päevas.</string>
+    <string name="live_update_frequency_hour_variant">Kaardiuuendusi kontrollitakse kord tunnis.</string>
 </resources>
