@@ -4919,10 +4919,10 @@
     <string name="mtb_scale">Échelle de difficulté VTT</string>
     <string name="mtb_segment_classification">Classification du segment</string>
     <string name="quick_action_temperature_layer">Afficher ou masquer la sur-couche de température sur la carte.</string>
-    <string name="quick_action_precipitation_layer">Afficher ou masquer la sur-couche de précipitations sur la carte.</string>
+    <string name="quick_action_precipitation_layer">Afficher ou masquer la sur-couche des précipitations sur la carte.</string>
     <string name="quick_action_wind_layer">Afficher ou masquer la sur-couche des vents sur la carte.</string>
     <string name="quick_action_air_pressure_layer">Afficher ou masquer la sur-couche barométrique sur la carte.</string>
-    <string name="quick_action_cloud_layer">Afficher ou masquer la sur-couche de couverture nuageuse la carte.</string>
+    <string name="quick_action_cloud_layer">Afficher ou masquer la sur-couche de couverture nuageuse sur la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Couleurs des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
