@@ -844,11 +844,11 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii aiutano a valutare visualmente la forma della superficie del terreno e dei rilievi, navigabilità e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, isoipse e/o colorazione delle pendenze.
+    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza.
 \n
 \nI dati di base sono forniti da SRTM e ASTER.
 \n
-\nMaggiori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nUlteriori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1892,7 +1892,7 @@
     <string name="finish_navigation">Termina la navigazione</string>
     <string name="avoid_road">Evita strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
-    <string name="storage_directory_readonly_desc">Dato che la cartella di memorizzazione selezionata è in sola lettura, la cartella di memorizzazione è stata spostata nella memoria interna. Per favore scegli una cartella di memorizzazione scrivibile.</string>
+    <string name="storage_directory_readonly_desc">Passato alla memoria interna poiché la cartella di archiviazione dei dati selezionata è protetta da scrittura. Per favore seleziona una directory di archiviazione scrivibile.</string>
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
