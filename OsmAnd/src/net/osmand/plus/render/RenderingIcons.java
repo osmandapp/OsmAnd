@@ -42,7 +42,7 @@ public class RenderingIcons {
 	public static boolean containsSmallIcon(String s) {
 		return smallIcons.containsKey(s);
 	}
-	
+
 	public static boolean containsBigIcon(String s) {
 		return bigIcons.containsKey(s);
 	}
@@ -77,7 +77,7 @@ public class RenderingIcons {
 		bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
-	
+
 	public static byte[] getIconRawData(Context ctx, String s) {
 		Integer resId = shaderIcons.get(s);
 		if (resId == null) {
@@ -119,14 +119,12 @@ public class RenderingIcons {
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		return getIconNameForPoiType(poiType);
+		return poiType != null ? getIconNameForPoiType(poiType) : null;
 	}
 
 	@Nullable
 	public static String getIconNameForPoiType(@NonNull PoiType poiType) {
-		if (poiType == null) {
-			return null;
-		} else if (containsSmallIcon(poiType.getIconKeyName())) {
+		if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
 		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
@@ -150,7 +148,7 @@ public class RenderingIcons {
 		Integer i = bigIcons.get(s);
 		return i == null ? 0 : i;
 	}
-	
+
 	public static Drawable getBigIcon(Context ctx, String s) {
 		Integer resId = bigIcons.get(s);
 		if (resId != null) {
