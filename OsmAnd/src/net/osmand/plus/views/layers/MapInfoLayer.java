@@ -202,16 +202,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
-		rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+		if (rulerWidgets != null) {
+			rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+		}
 	}
 
 	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
-		sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
-		panel.updateColors(calculateTextState());
+		if (sideWidgetsPanels != null) {
+			sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
+			panel.updateColors(calculateTextState());
+		}
 	}
 
 	public void removeSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
-		sideWidgetsPanels = Algorithms.removeFromList(sideWidgetsPanels, panel);
+		if (sideWidgetsPanels != null) {
+			sideWidgetsPanels = Algorithms.removeFromList(sideWidgetsPanels, panel);
+		}
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {

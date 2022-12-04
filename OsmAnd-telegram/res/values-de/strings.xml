@@ -99,7 +99,7 @@
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="min_mile">min/m</string>
+    <string name="min_mile">min/mile</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>

@@ -1453,7 +1453,7 @@
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
-    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \"Nautische Karte\" unter \"Karte konfigurieren\".
+    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \'Nautisch\' unter \'Menü → Karte konfigurieren → Kartendarstellung\'.
 \n
 \nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
@@ -1698,7 +1698,7 @@
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
     <string name="nm">sm</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">min/m</string>
+    <string name="min_mile">min/mile</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
@@ -3421,7 +3421,7 @@
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
     <string name="shared_string_angle_param">Winkel: %s°</string>
     <string name="shared_string_angle">Winkel</string>
-    <string name="recalc_angle_dialog_descr">Zusätzliches gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
+    <string name="recalc_angle_dialog_descr">Ein gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
     <string name="recalc_angle_dialog_title">Minimaler Winkel zwischen meinem Standort und der Route</string>
     <string name="shared_string_quick_actions">Schnellaktionen</string>
     <string name="shared_string_profiles">Profile</string>
@@ -4869,7 +4869,7 @@
 \n
 \n • Reorganisierte Liste \"Seekarten\".
 \n
-\n • Unterstützung für ANT+-Sensoren hinzugefügt
+\n • Unterstützung für ANT+ Sensoren hinzugefügt
 \n
 \n • Option zum Deaktivieren der Download-UUID hinzugefügt
 \n

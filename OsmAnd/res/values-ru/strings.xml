@@ -360,14 +360,14 @@
     <string name="map_online_data_descr">Использовать онлайн-карты (загрузка и кеширование на SD-карте).</string>
     <string name="shared_string_online_maps">Онлайн-карты</string>
     <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
-    <string name="osmand_rastermaps_plugin_description">Доступ к разнообразным онлайн-картам (т. н. тайловым или растровым) — от встроенных (как OSM Mapnik) до спутниковых снимков и слоёв специального назначения, таких как затенения рельефа, карты погоды, геологические, климатические карты и др.
+    <string name="osmand_rastermaps_plugin_description">Доступ к разнообразным онлайн-картам (т. н. тайловым или растровым) — таких как предварительно обработанные тайлы OSM, спутниковые снимке, слои специального назначения, например, карты погоды, климатические, геологические карты, затенение рельефа (отмывка) и др.
 \n
 \n Любую из карт можно использовать в качестве основной или как подложку к другой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd можно скрыть в меню «Настройки карты».
 \n
 \n Карты можно загрузить из интернета или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
     <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путём периодического пробуждения устройства GPS (с выключенным экраном).</string>
     <string name="osmand_accessibility_description">Поддержка специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, настройку скорости речи для преобразования текста в речь, настройку навигации по D-pad, использование трекбола для управления масштабированием или обратной связи между текстом и речью, например, для автоматического объявления вашей позиции.</string>
-    <string name="osmand_development_plugin_description">Настройки для функций разработки и отладки, таких как проверка или имитация маршрутизации, производительность отрисовки, проверка голосовых подсказок. Эти настройки предназначены для разработчиков и не нужны обычному пользователю.</string>
+    <string name="osmand_development_plugin_description">Предоставляет функциональные возможности для тестирования и отладки OsmAnd: моделирование маршрутов навигации, мониторинг отрисовки экрана, проверка производительности и т. д. Эти настройки предназначены для разработчиков и не нужны обычному пользователю.</string>
     <string name="plugins_screen">Плагины</string>
     <string name="prefs_plugins_descr">Плагины активируют дополнительные возможности приложения.</string>
     <string name="prefs_plugins">Плагины</string>
@@ -663,7 +663,7 @@
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">по направлению компаса</string>
     <string name="rotate_map_bearing_opt">по направлению движения</string>
-    <string name="rotate_map_none_opt">не вращать (север сверху)</string>
+    <string name="rotate_map_none_opt">фиксированная (север сверху)</string>
     <string name="rotate_map_to_bearing_descr">Выравнивание карты:</string>
     <string name="rotate_map_to_bearing">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
@@ -1477,7 +1477,7 @@
     <string name="sort_by_distance">Сортировать по расстоянию</string>
     <string name="sort_by_name">Сортировать по имени</string>
     <string name="osmo_edit_color">Цвет метки</string>
-    <string name="none_selected_gpx">Укажите GPX-файл, сделав длительное нажатие.</string>
+    <string name="none_selected_gpx">Укажите GPX-файл с помощью длительного нажатия.</string>
     <string name="local_index_select_gpx_file">Выберите трек</string>
     <string name="rendering_attr_hideBuildings_name">Строения</string>
     <string name="rendering_attr_hideText_name">Текст</string>
@@ -3434,7 +3434,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
     <string name="monitoring_min_distance_descr">Фильтр предотвращает запись точек при отсутствии фактического перемещения и улучшает вид треков без обработки.</string>
     <string name="monitoring_min_distance_descr_side_effect">Побочные эффекты: периоды в состоянии покоя не записываются вообще или только по одной точке каждый. Небольшие (в реальности) перемещения (например, в сторону, указывающие возможное изменение направления движения) могут быть отфильтрованы. Файл содержит меньше информации для последующей обработки и имеет худшую статистику, отфильтровывая явно избыточные точки во время записи, при этом потенциально сохраняя артефакты, вызванные плохим приёмом или эффектами модуля GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Рекомендация: настройка 5 метров подходит, если не нужно фиксировать более короткие перемещения и вы не хотите записывать данные в состоянии покоя.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Рекомендация: установите смещение 5 метров, если вы не хотите записывать мелкие детали маршрута и вам не нужны дополнительные данные о времени отдыха.</string>
     <string name="listed_exist">Указанные %1$s уже существуют в OsmAnd.</string>
     <string name="importing_from">Импорт данных из %1$s</string>
     <string name="shared_string_importing">Импортирование</string>
@@ -3593,7 +3593,9 @@
     <string name="shared_string_resume">Продолжить</string>
     <string name="index_item_world_basemap_detailed">Мировая обзорная карта (подробная)</string>
     <string name="unsupported_type_error">Неподдерживаемый тип</string>
-    <string name="gpx_parse_error">GPX сформирован неправильно, пожалуйста, свяжитесь со службой поддержки для выяснения причин.</string>
+    <string name="gpx_parse_error">В GPX-файле обнаружены проблемы.
+\n
+\nДля выяснения причин свяжитесь со службой поддержки .</string>
     <string name="turn_screen_on_navigation_instructions_descr">Каждая навигационная инструкция включает экран.</string>
     <string name="turn_screen_on_navigation_instructions">Навигационные инструкции</string>
     <string name="screen_timeout_descr">Если функция «%1$s» включена, время работы будет зависеть от неё.</string>
@@ -3650,13 +3652,13 @@
     <string name="vessel_width_limit_description">Укажите ширину судна, чтобы избежать узких мостов</string>
     <string name="quick_action_showhide_mapillary_descr">Переключатель для отображения или скрытия слоя Mapillary на карте.</string>
     <string name="shared_string_legal">Законодательство</string>
-    <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование предупреждений о камерах контроля скорости запрещено законом. 
-\n 
-\nВам нужно сделать выбор в зависимости от законодательства вашей страны. 
-\n 
-\nВыберите «%1$s», чтобы получать предупреждения о камерах контроля скорости. 
-\n 
-\nВыберите «%2$s», чтобы удалить все данные, связанные с камерами контроля скорости (уведомления, предупреждения и POI), до полной переустановки OsmAnd.</string>
+    <string name="speed_cameras_legal_descr">В некоторых странах и регионах использование приложений для предупреждения о камерах контроля скорости запрещено законом.
+\n
+\nВам нужно сделать выбор в зависимости от законодательства вашей страны.
+\n
+\nВыберите «%1$s», чтобы получать предупреждения о камерах контроля скорости.
+\n
+\nВыберите «%2$s». Все данные, связанные с камерами контроля скорости: оповещения, уведомления, POI будут удалены до полной переустановки OsmAnd.</string>
     <string name="keep_active">Оставить включёнными</string>
     <string name="uninstall_speed_cameras">Удалить камеры контроля скорости</string>
     <string name="speed_camera_pois">POI камер контроля скорости</string>
@@ -4013,7 +4015,7 @@
     <string name="track_recording_description">Остановить запись\?
 \nВсе несохранённые данные будут потеряны.</string>
     <string name="on_pause">На паузе</string>
-    <string name="routing_attr_height_obstacles_description">Позволяет избегать больших подъёмов при навигации.</string>
+    <string name="routing_attr_height_obstacles_description">Прогнозируемое время в пути будет учитывать перепады высот. Выбор маршрута может помочь избежать крутых подъемов:</string>
     <string name="quick_action_coordinates_widget_descr">Переключатель для отображения или скрытия виджета координат.</string>
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>

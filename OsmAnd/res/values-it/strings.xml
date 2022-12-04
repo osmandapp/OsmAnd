@@ -844,11 +844,11 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">Informazioni del terreno come isoipse, ombreggiamento dei rilievi e dei pendii aiutano a valutare visualmente la forma della superficie del terreno e dei rilievi, navigabilità e altro. Le informazioni topografiche in una mappa possono essere rappresentate dagli ombreggiamenti dei pendii, isoipse e/o colorazione delle pendenze.
+    <string name="srtm_plugin_description">Informazioni sul terreno come curve di livello, ombreggiature e pendii ti aiutano a valutare visivamente la conformazione del terreno e il rilievo, la navigabilità e altro ancora. Le informazioni topografiche possono essere rappresentate mediante ombreggiatura della pendenza, curve di livello e/o colorazione della pendenza.
 \n
 \nI dati di base sono forniti da SRTM e ASTER.
 \n
-\nMaggiori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nUlteriori approfondimenti su http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Crea note audio/foto/video durante un viaggio, utilizzando un pulsante della mappa o il menu contestuale della posizione.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1892,7 +1892,7 @@
     <string name="finish_navigation">Termina la navigazione</string>
     <string name="avoid_road">Evita strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
-    <string name="storage_directory_readonly_desc">Dato che la cartella di memorizzazione selezionata è in sola lettura, la cartella di memorizzazione è stata spostata nella memoria interna. Per favore scegli una cartella di memorizzazione scrivibile.</string>
+    <string name="storage_directory_readonly_desc">Passato alla memoria interna poiché la cartella di archiviazione dei dati selezionata è protetta da scrittura. Per favore seleziona una directory di archiviazione scrivibile.</string>
     <string name="report">Rapporto</string>
     <string name="storage_permission_restart_is_required">L\'applicazione è ora in grado di scrivere sulla memoria esterna, ma deve essere riavviata per farlo.</string>
     <string name="full_report">Rapporto completo</string>
@@ -1981,7 +1981,7 @@
     <string name="skip_map_downloading_desc">Non hai mappe offline installate. Si può scegliere una mappa dalla lista o scaricarle in seguito andando su \'Menù - %1$s\'.</string>
     <string name="osm_live_payment_desc">La sottoscrizione viene addebitata ogni mese. Puoi annullarla su Google Play in ogni momento.</string>
     <string name="donation_to_osm">Donazione per la comunità OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
+    <string name="donation_to_osm_desc">Parte della tua donazione viene inviata ai contributori di OSM. Il costo dell\'abbonamento rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
     <string name="get_it">Ottienilo</string>
     <string name="get_for">Ottieni per %1$s</string>
@@ -2210,7 +2210,7 @@
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
     <string name="quick_action_add_destination_desc">Un pulsante per centrare lo schermo sulla destinazione del percorso: una destinazione precedentemente selezionata diventerebbe l\'ultima destinazione intermedia.</string>
-    <string name="quick_action_replace_destination_desc">Toccando questo pulsante azione centrerai lo schermo sulla nuova destinazione, sostituendo la destinazione scelta in precedenza (se esiste).</string>
+    <string name="quick_action_replace_destination_desc">Un pulsante per centrare lo schermo sulla nuova destinazione del percorso, sostituendo la destinazione selezionata in precedenza (se presente).</string>
     <string name="quick_action_add_first_intermediate_desc">Un pulsante per rendere il centro dello schermo come primo punto intermedio.</string>
     <string name="no_overlay">Nessun stato sovrapposto</string>
     <string name="no_underlay">Nessun strato di sfondo</string>
@@ -2235,7 +2235,7 @@
     <string name="increase_search_radius">Aumenta il raggio di ricerca</string>
     <string name="nothing_found">Nessun risultato</string>
     <string name="nothing_found_descr">Cambia la ricerca o aumenta il raggio.</string>
-    <string name="quick_action_showhide_osmbugs_descr">Toccando il pulsante azione verranno mostrate o nascoste le note OSM sulla mappa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Un pulsante per mostrare o nascondere le note di OSM sulla mappa.</string>
     <string name="sorted_by_distance">Ordinato per distanza</string>
     <string name="search_favorites">Cerca nei Preferiti</string>
     <string name="hillshade_menu_download_descr">Scarica la mappa \'Ombreggiatura dei Rilievi\' per visualizzare le ombreggiature dei rilievi.</string>
@@ -2243,7 +2243,7 @@
     <string name="hide_from_zoom_level">Nascondi dal livello di zoom</string>
     <string name="srtm_menu_download_descr">Scaricare la mappa \'Linee isoipse\' per l\'utilizzo in questa regione.</string>
     <string name="shared_string_plugin">Componente aggiuntivo</string>
-    <string name="srtm_purchase_header">Per visualizzare le linee isoipse nella mappa acquista e installa il componente aggiuntivo \'Linee Isoipse\'.</string>
+    <string name="srtm_purchase_header">Acquista e installa il componente aggiuntivo \'Linee Isoipse\' per visualizzare il gradiente verticale delle aree.</string>
     <string name="srtm_color_scheme">Schema colori</string>
     <string name="routing_attr_allow_private_name">Permetti l\'accesso alle proprietà private</string>
     <string name="routing_attr_allow_private_description">Permetti l\'accesso alle aree private.</string>
@@ -2299,7 +2299,7 @@
     <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
     <string name="shared_string_add_photos">Aggiungi foto</string>
     <string name="mapillary_action_descr">Contribuisci le tue foto stradali con Mapillary.</string>
-    <string name="plugin_mapillary_descr">Foto stradali per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
+    <string name="plugin_mapillary_descr">Immagini a livello stradale. Puoi contribuire anche tu. Per visualizzare i dati esistenti come livello, attiva \"Immagini a livello stradale\" nel menu \"Configura mappa\".</string>
     <string name="online_photos">Foto online</string>
     <string name="no_photos_descr">Non ci sono foto qui.</string>
     <string name="open_mapillary">Apri Mapillary</string>
@@ -3246,7 +3246,7 @@
     <string name="shared_string_revert">Ripristina</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra i nodi della rete dei percorsi ciclabili</string>
     <string name="clear_confirmation_msg">Cancella %1$s\?</string>
-    <string name="quick_action_directions_from_desc">Un pulsante che rende il centro dello schermo il punto di partenza e calcola il percorso per la destinazione o apre una finestra di dialogo per scegliere la destinazione se il marcatore della destinazione non è sulla mappa.</string>
+    <string name="quick_action_directions_from_desc">Un pulsante che rende il centro dello schermo il punto di partenza. Chiederà quindi di impostare la destinazione o di attivare il calcolo del percorso.</string>
     <string name="download_map_dialog">Finestra di dialogo download mappe</string>
     <string name="dialogs_and_notifications_title">Notifiche e finestre di dialogo</string>
     <string name="dialogs_and_notifications_descr">Controllo dei popup, finestre di dialogo e notifiche.</string>
@@ -3335,7 +3335,7 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Osservazione: se il GPS è stato disattivato poco prima di una registrazione, i primi punti misurati potrebbero avere una minore accuratezza, perciò nel nostro codice noi possiamo voler attendere qualche secondo prima oppure prima di registrare dei punti (o registrare i 3 migliori punti consecutivi, ecc...), ma questo non è ancora implementato .</string>
     <string name="monitoring_min_distance_descr">L\'attivazione di questo filtro consente di evitare ulteriori registrazioni di dati quando il movimento non viene quasi rilevato. Migliora anche l\'aspetto spaziale delle tracce senza ulteriore elaborazione.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: periodi di riposo non sono registrati affatto oppure con un singolo punto. Piccoli (reali) movimenti (es. lateralmente, per marcare un possible spegnimento nel tuo viaggio) possono essere scartati dal filtro. Il file contiene meno informazioni per la post-elaborazione e presenta statistiche peggiori filtrando i punti ovviamente ridondanti al momento della registrazione, mantenendo potenzialmente artefatti causati da cattiva ricezione o effetti del chipset GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: i periodi di riposo non sono registrati affatto oppure registrati come un singolo punto. I movimenti minori (ad esempio, a lato della strada per segnalare una possibile svolta nel viaggio) possono essere scartati dal filtro. Tieni presente che il tuo file conterrà meno informazioni per la post-elaborazione e allo stesso tempo può potenzialmente salvare artefatti GPS causati da cattiva ricezione o effetti del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: imposta uno spostamento di 5 metri se non vuoi registrare dettagli minori del tuo percorso, e non hai bisogno di dati aggiuntivi quando sei fermo.</string>
     <string name="live_monitoring_time_buffer">Tempo buffer</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
@@ -3451,7 +3451,7 @@
     <string name="app_mode_ski_touring">Sci alpino</string>
     <string name="shared_string_rendering_style">Stile di rappresentazione</string>
     <string name="shared_string_terrain">Terreno</string>
-    <string name="hillshade_description">La mappa Ombreggiamento dei rilievi utilizza le ombre per visualizzare le pendenze, i picchi e i bassipiani.</string>
+    <string name="hillshade_description">La mappa Ombreggiamento dei rilievi utilizza le ombre per mostrare pendii, cime e pianure.</string>
     <string name="slope_description">La pendenza è visualizzata sul terreno tramite colorazione.</string>
     <string name="terrain_slider_description">Imposta lo zoom minimo e massimo a cui lo strato sarà visualizzato.</string>
     <string name="hillshade_download_description">Sono necessarie mappe addizionali per visualizzare l\'ombreggiatura dei rilievi sulla mappa.</string>
@@ -3640,13 +3640,13 @@
     <string name="uninstall_speed_cameras">Disinstalla autovelox</string>
     <string name="shared_string_legal">Legale</string>
     <string name="speed_camera_pois">PDI autovelox</string>
-    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge. 
-\n 
-\nDevi scegliere in base alle leggi del tuo paese. 
-\n 
-\nScegliendo %1$s riceverai gli avvisi della presenza di autovelox. 
-\n 
-\nScegliendo %2$s. tutti i dati relativi agli autovelox (avvisi, notifiche, PDI) saranno cancellati fino a che OsmAnd non sarà completamente reinstallato.</string>
+    <string name="speed_cameras_legal_descr">In alcuni paesi o regioni, gli avvisi di presenza di autovelox sono proibiti dalla legge.
+\n
+\nDevi scegliere in base alle leggi del tuo paese.
+\n
+\nScegliendo %1$s riceverai gli avvisi della presenza di autovelox.
+\n
+\nScegliendo %2$s tutti i dati relativi agli autovelox come avvisi, notifiche, PDI saranno cancellati fino a quando OsmAnd non sarà completamente reinstallato.</string>
     <string name="keep_active">Mantieni attivo</string>
     <string name="shared_string_uninstall">Disinstalla</string>
     <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni Paesi sono proibiti dalla legge.</string>
@@ -3778,7 +3778,7 @@
     <string name="osm_live_payment_desc_hw">Sottoscrizione addebitata per il periodo selezionato. Cancellala nell\'AppGallery in ogni momento.</string>
     <string name="osm_live_payment_subscription_management_hw">Il pagamento sarà addebitato nella tuo account AppGallery alla conferma dell\'acquisto.
 \n
-\nLe sottoscrizioni si rinnovano automaticamente finché non vengono cancellate prima della date del rinnovo. Il tuo account sarà addebitato per i rinnovi periodici solo (mensile/trimestrale/annuale) solo alla data di rinnovo.
+\nSi rinnova a meno che non venga annullato prima del periodo di rinnovo selezionato.
 \n
 \nPuoi gestire e cancellare le tue sottoscrizioni nelle impostazioni della tua AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Evita i marciapiedi</string>
@@ -3904,7 +3904,7 @@
     <string name="uploaded_count">Caricati %1$d di %2$d</string>
     <string name="toast_select_edits_for_upload">Seleziona le modifiche per il caricamento</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Pendenza / Linee di contorno</string>
-    <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, musei.
+    <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, o musei.
 \n
 \nTrova informazioni su come contribuire nel nostro sito: https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4248,7 +4248,7 @@
     <string name="pro_features">Funzionalità avanzate</string>
     <string name="backup_version_history">Cronologia della versione</string>
     <string name="backup_storage_taken">Memoria occupata</string>
-    <string name="backup_version_history_delete_descr">Cancella il registro dei cambiamenti dei tipi di dati deprecati da OsmAnd Cloud\?</string>
+    <string name="backup_version_history_delete_descr">Eliminare il registro delle modifiche per i tipi di dati deprecati da OsmAnd Cloud\?</string>
     <string name="send_logcat_log">Invia registro di log</string>
     <string name="grey_color_slope">Il colore grigio è utilizzato quando la pendenza non è definita.</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
@@ -4330,19 +4330,19 @@
 \n
 \n • Profilo altimetrico (Pro)
 \n
-\n • Preferiti: aggiunta la capacità di visualizzare le icone usate recenti
+\n • Preferiti: aggiunta la capacità di visualizzare le icone usate recentemente
 \n
-\n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
+\n • Pianificazione del percorso: utilizzerà il profilo selezionato dopo l\'avvio
 \n
 \n • Corretto lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
 \n
-\n • Aggiunta la schermata per gestire tutta la cronologia dell\'app
+\n • Aggiunta la schermata per gestire tutta la cronologia dell\'applicazione
 \n
-\n • L\'orientamento della mappa non viene più reimpostato al riavvio dell\'app
+\n • L\'orientamento della mappa non viene più reimpostato al riavvio dell\'applicazione
 \n
 \n • Migliorato la rappresentazione delle linee isoipse SRTM
 \n
-\n • Corretta la visualizzazione nella mappa dell\'Arabo
+\n • Corretta la visualizzazione nella mappa in Arabo
 \n
 \n • Corretti diversi errori di calcolo del percorso
 \n
@@ -4390,7 +4390,7 @@
     <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s file %2$s</string>
     <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
-    <string name="shared_storage_last_step">Puoi specificare una nuova archiviazione dei dati dopo aver scelto Archivio condiviso.</string>
+    <string name="shared_storage_last_step">Successivamente potrai specificare una nuova cartella dati.</string>
     <string name="shared_storage_migration_descr">A causa dei cambiamenti alle regole di accesso alla memoria di Android, OsmAnd non può più utilizzare %1$s.
 \n
 \nDevi copiare tutti i tuoi dati nella nuova cartella.</string>
@@ -4410,9 +4410,9 @@
     <string name="from_to_with_params">Da %1$s a %2$s</string>
     <string name="progress_complete">%1$s completato</string>
     <string name="storage_found_files_descr">Tocca “%1$s” per copiare %2$s file da “%3$s” a “%4$s”. Potrebbe richiedere tempo.</string>
-    <string name="shared_string_skip_warning">Sei sicuro di voler saltare la migrazione\? OsmAnd non ha più accesso ai tuoi file nell\'archiviazione condivisa.
+    <string name="shared_string_skip_warning">Sei sicuro di voler saltare la migrazione\? OsmAnd non avrà più accesso ai tuoi file nell\'archivio condiviso.
 \n
-\nL\'applicazione partirà dalla nuova cartella con i tuoi dati.</string>
+\nL\'applicazione partirà usando la nuova cartella con i tuoi dati.</string>
     <string name="shared_storage">Memorizzazione condivisa</string>
     <string name="shared_storage_first_step">Premi \"%1$s\".
 \nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
@@ -4598,7 +4598,7 @@
     <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="audio_video_notes_desc">Il widget fornisce un accesso veloce per avviare/fermare l\'acquisizione di una nota (audio, video, foto).</string>
-    <string name="street_name_widget_desc">Il widget Nomi delle strade mostra il nome della strada corrente con la freccia di direzione o con il nome di quella successiva alla prossima svolta.</string>
+    <string name="street_name_widget_desc">Il widget Nomi delle strade mostra il nome della strada corrente con una freccia di direzione, o il nome della strada con una freccia che indica la prossima svolta.</string>
     <string name="colour_of_circles">Colore dei cerchi</string>
     <string name="distance_circles">Cerchi di distanza</string>
     <string name="compass_on_circles">Bussola nei cerchi</string>
@@ -4920,6 +4920,10 @@
 \n • Aggiunto il supporto ai sensori ANT+
 \n
 \n • Aggiunto l\'opzione per disabilitare il download UUID
+\n
+\n • Previsione regolabile della velocità predefinita per tempi di percorrenza a piedi/trekking/corsa dipendenti dall\'altitudine
+\n
+\n Risolto il problema con l\'uscita audio e il comportamento del dispositivo di scorrimento del volume
 \n
 \n</string>
     <string name="location_simulation_cutoff">La simulazione salta i primi metri</string>
