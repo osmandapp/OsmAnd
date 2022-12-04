@@ -4855,12 +4855,12 @@
     <string name="weather_pressure_millimeters_of_mercury">Millimètres de mercure</string>
     <string name="show_map_symbols">Afficher les symboles</string>
     <string name="show_map_symbols_desc">Texte, panneaux de signalisation routière et autres.</string>
-    <string name="switch_mode_by_tapping_on_widget">Basculez de mode en appuyant sur le widget.</string>
+    <string name="switch_mode_by_tapping_on_widget">Changez de mode en appuyant sur le widget.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_widget_sunrise_desc">Affiche l\'heure ou le temps restant jusqu\'au prochain lever de soleil.</string>
     <string name="map_widget_sunset_desc">Affiche l\'heure ou le temps restant jusqu\'au prochain coucher de soleil.</string>
-    <string name="shared_string_next_sunset">Prochain lever de soleil</string>
-    <string name="shared_string_next_sunrise">Prochain coucher de soleil</string>
+    <string name="shared_string_next_sunset">Prochain coucher de soleil</string>
+    <string name="shared_string_next_sunrise">Prochain lever de soleil</string>
     <string name="shared_string_time_left">Temps restant</string>
     <string name="map_settings_weather_air_pressure">Pression atmosphérique</string>
     <string name="map_settings_weather_wind">Vent</string>
@@ -4875,14 +4875,14 @@
     <string name="speak_gps_signal_status">Annoncer la perte et la réception du signal GPS</string>
     <string name="temperature_layer">Couche de température</string>
     <string name="pressure_layer">Couche de pression</string>
-    <string name="wind_layer">Couche vent</string>
+    <string name="wind_layer">Couche des vents</string>
     <string name="precipitation_layer">Couche des précipitations</string>
     <string name="shared_string_sunset">Coucher de soleil</string>
     <string name="cloud_layer">Couche de la couverture nuageuse</string>
     <string name="shared_string_sunrise">Lever de soleil</string>
     <string name="map_widget_group_sunrise_sunset_desc">Ces widgets affichent des informations sur les prochains levers et couchers de soleil.</string>
     <string name="map_widget_group_sunrise_sunset">Lever de soleil, coucher de soleil</string>
-    <string name="depth_contour_lines">Lignes de contour de la profondeur</string>
+    <string name="depth_contour_lines">Lignes de sondes</string>
     <string name="turn_on_nautical_depth_description">Activez pour afficher les données de profondeur sur la carte marine.</string>
     <string name="map_settings_weather_cloud">Nuages</string>
     <string name="map_settings_weather_precip">Précipitations</string>
@@ -4905,7 +4905,7 @@
     <string name="temperature_widget_desc">Affiche la température pour le centre actuel de la carte.</string>
     <string name="weather_widget_group_desc">Un ensemble de widgets affichant diverses informations météorologiques.</string>
     <string name="weather_pressure_inhg">inHg</string>
-    <string name="rendering_attr_depthContourWidth_name">Largeur de la ligne</string>
+    <string name="rendering_attr_depthContourWidth_name">Épaisseur des courbes</string>
     <string name="speak_route_recalculation">Annoncer le recalcul de l’itinéraire</string>
     <string name="map_rendering_engine_v1">Version 1</string>
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
@@ -4916,4 +4916,15 @@
     <string name="dismiss_changes_descr">Toutes les modifications seront perdues.</string>
     <string name="dismiss_changes">Ignorer les modifications \?</string>
     <string name="restart_now">Redémarrer maintenant</string>
+    <string name="mtb_scale">Échelle de difficulté VTT</string>
+    <string name="mtb_segment_classification">Classification du segment</string>
+    <string name="quick_action_temperature_layer">Afficher ou masquer la sur-couche de température sur la carte.</string>
+    <string name="quick_action_precipitation_layer">Afficher ou masquer la sur-couche de précipitations sur la carte.</string>
+    <string name="quick_action_wind_layer">Afficher ou masquer la sur-couche des vents sur la carte.</string>
+    <string name="quick_action_air_pressure_layer">Afficher ou masquer la sur-couche barométrique sur la carte.</string>
+    <string name="quick_action_cloud_layer">Afficher ou masquer la sur-couche de couverture nuageuse la carte.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Couleurs des courbes</string>
+    <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT.</string>
+    <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
+    <string name="storage_migration_fragment_close_descr">La copie est réalisée à %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
 </resources>
