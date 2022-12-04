@@ -4926,5 +4926,5 @@
     <string name="rendering_attr_depthContourColorScheme_name">Couleurs des courbes</string>
     <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
-    <string name="storage_migration_fragment_close_descr">La copie est terminée à %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
+    <string name="storage_migration_fragment_close_descr">La copie est réalisée à %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
 </resources>
