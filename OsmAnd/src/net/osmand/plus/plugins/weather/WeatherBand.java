@@ -183,6 +183,42 @@ public class WeatherBand {
 		return false;
 	}
 
+	public boolean isForecastBandVisible() {
+		switch (bandIndex) {
+			case WEATHER_BAND_CLOUD:
+				return getWeatherSettings().weatherForecastCloud.get();
+			case WEATHER_BAND_TEMPERATURE:
+				return getWeatherSettings().weatherForecastTemp.get();
+			case WEATHER_BAND_PRESSURE:
+				return getWeatherSettings().weatherForecastPressure.get();
+			case WEATHER_BAND_WIND_SPEED:
+				return getWeatherSettings().weatherForecastWind.get();
+			case WEATHER_BAND_PRECIPITATION:
+				return getWeatherSettings().weatherForecastPrecip.get();
+			case WEATHER_BAND_UNDEFINED:
+				return false;
+		}
+		return false;
+	}
+
+	public boolean setForecastBandVisible(boolean visible) {
+		switch (bandIndex) {
+			case WEATHER_BAND_CLOUD:
+				return getWeatherSettings().weatherForecastCloud.set(visible);
+			case WEATHER_BAND_TEMPERATURE:
+				return getWeatherSettings().weatherForecastTemp.set(visible);
+			case WEATHER_BAND_PRESSURE:
+				return getWeatherSettings().weatherForecastPressure.set(visible);
+			case WEATHER_BAND_WIND_SPEED:
+				return getWeatherSettings().weatherForecastWind.set(visible);
+			case WEATHER_BAND_PRECIPITATION:
+				return getWeatherSettings().weatherForecastPrecip.set(visible);
+			case WEATHER_BAND_UNDEFINED:
+				return false;
+		}
+		return false;
+	}
+
 	@Nullable
 	public WeatherUnit getBandUnit() {
 		CommonPreference<? extends WeatherUnit> preference = getBandUnitPref();

@@ -85,6 +85,17 @@ public class WeatherHelper {
 		return bands;
 	}
 
+	@NonNull
+	public List<WeatherBand> getVisibleForecastBands() {
+		List<WeatherBand> bands = new ArrayList<>();
+		for (WeatherBand band : weatherBands.values()) {
+			if (band.isForecastBandVisible()) {
+				bands.add(band);
+			}
+		}
+		return bands;
+	}
+
 	@Nullable
 	public WeatherBand getWeatherBand(short bandIndex) {
 		return weatherBands.get(bandIndex);
@@ -108,7 +119,7 @@ public class WeatherHelper {
 		return updateBandsSettings(weatherResourcesManager);
 	}
 
-	public boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
+	private boolean updateBandsSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = getBandSettings(weatherResourcesManager);
 		weatherResourcesManager.setBandSettings(bandSettings);
 		bandsSettingsVersion.incrementAndGet();

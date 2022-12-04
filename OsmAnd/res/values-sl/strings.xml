@@ -4774,27 +4774,27 @@
     <string name="map_marker_interval_dialog_desc">Določi časovni interval, v katerem se bo merila povprečna hitrost za izračun predvidenega časa prihoda.</string>
     <string name="map_markers_desc">Gradnik prikazuje razdaljo ali predvideni čas prihoda (ETA) za prvi dve oznaki na seznamu oznak na zemljevidu.</string>
     <string name="quick_action_map_center_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Središče zemljevida na zemljevidu.</string>
-    <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje pripomočka Trenutna lokacija na zemljevidu.</string>
-    <string name="coordinates_widget_map_center_desc">Gradnik prikazuje geografske koordinate trenutnega središča zemljevida</string>
-    <string name="coordinates_widget_current_location_desc">Gradnik prikazuje geografske koordinate trenutne zemljepisne lege</string>
+    <string name="quick_action_current_location_widget_descr">Stikalo za prikaz ali skrivanje gradnika trenutne lokacije na zemljevidu.</string>
+    <string name="coordinates_widget_map_center_desc">Prikazuje geografske koordinate trenutnega središča zemljevida</string>
+    <string name="coordinates_widget_current_location_desc">Prikazuje geografske koordinate trenutne zemljepisne lege</string>
     <string name="coordinates_widget_map_center">Koordinate: središče zemljevida</string>
     <string name="coordinates_widget_current_location">Koordinate: trenutna lokacija</string>
-    <string name="map_widget_camera_tilt_desc">Gradnik prikazuje kot nagiba kamere v perspektivnem načinu. Privzeta vrednost je 90° (brez nagiba).</string>
+    <string name="map_widget_camera_tilt_desc">Prikazuje kot nagiba kamere v perspektivnem načinu. Privzeta vrednost je 90° (brez nagiba).</string>
     <string name="map_widget_zoom_level">Stopnja povečave</string>
     <string name="map_widget_camera_distance">Nadmorska višina kamere</string>
     <string name="developer_widgets">Gradniki za razvijalce</string>
     <string name="map_widget_camera_tilt">Nagib kamere</string>
-    <string name="map_widget_target_distance_desc">Gradnik prikazuje razdaljo od kamere do ciljne lokacije.</string>
-    <string name="map_widget_camera_distance_desc">Gradnik prikazuje višino kamere nad nivojem površine.</string>
-    <string name="map_widget_zoom_level_desc">Gradnik prikazuje trenutno stopnjo povečave zemljevida.</string>
+    <string name="map_widget_target_distance_desc">Prikazuje razdaljo med kamero in ciljno lokacijo.</string>
+    <string name="map_widget_camera_distance_desc">Prikazuje višino kamere nad nivojem površine.</string>
+    <string name="map_widget_zoom_level_desc">Prikazuje trenutno stopnjo povečave zemljevida.</string>
     <string name="ant_missing_dependency_descr">Zahtevana storitev »%1$s« ni bila najdena.
-\nNamestiti moraš storitev ANT+ gradniki ali pa posodobiti obstoječo različico, če jo že imaš.
+\nNamestiti ali posodobiti moraš storitev ANT+ gradniki.
 \nŽeliš zagnati Trgovino Play, da jo namestiš/posodobiš\?</string>
     <string name="ant_missing_dependency">Manjkajoča odvisnost</string>
     <string name="ant_go_to_store">Pojdi v Trgovino</string>
     <string name="ant_read_data">Preberi podatke</string>
     <string name="ant_write_to_gpx">Napiši podatke v sled</string>
-    <string name="ant_heart_rate_write_gpx_desc">Napiši srčni utrip v sled</string>
+    <string name="ant_heart_rate_write_gpx_desc">Vključi srčni utrip v sled</string>
     <string name="map_widget_ant_heart_rate">Srčni utrip</string>
     <string name="map_widget_ant_heart_rate_desc">V realnem času prikazuje uporabnikov srčni utrip med določeno dejavnostjo</string>
     <string name="map_widget_ant_bicycle_power">Moč kolesarja</string>
@@ -4810,7 +4810,7 @@
     <string name="worldwide_maps">Zemljevidi sveta</string>
     <string name="external_sensor_widgets">ANT+ gradniki</string>
     <string name="shared_string_cross_buy">Navzkrižni nakup</string>
-    <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/Splet), brez dodatnih stroškov.</string>
+    <string name="purchases_feature_desc_cross_buy">Uporabi svoje naročniške funkcije na različnih platformah (Android/iOS/splet), brez dodatnih stroškov.</string>
     <string name="map_widget_target_distance">Razdalja od kamere do cilja</string>
     <string name="favorites_backup">Varnostno kopiranje priljubljenih</string>
     <string name="external_sensors_plugin_name">Zunanji senzorji</string>
@@ -4833,11 +4833,15 @@
 \n
 \n • GPX: dodana podpora za oznake »link«, »cmt«, »desc« in za vse razširitve po meri.
 \n
-\n • Prenovljen seznam »Navtične karte«.
+\n • Prenovljen seznam »Navtičnih kart«.
 \n
 \n • Dodana podpora za senzorje ANT+.
 \n
 \n • Dodana možnost za onemogočanje prenosa UUID.
+\n
+\n • Privzeta prilagodljiva napoved hitrosti za čas hoje/planinarjenja/teka, ki je odvisen od nadmorske višine.
+\n
+\n • Popravljeno obnašanje zvočnega izpisa in drsnika za glasnost.
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Prikaz in snemanje podatkov iz zunanjih senzorjev: hitrost kolesa, moč kolesa, kadenca in srčni utrip.</string>
@@ -4937,4 +4941,24 @@
     <string name="weather_pressure_inches_of_mercury">Palci živega srebra</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetri živega srebra</string>
     <string name="dismiss_changes">Zavrniti spremembe\?</string>
+    <string name="map_widget_altitude_current_location_desc">Prikazuje nadmorsko višino trenutne zemljepisne lege.</string>
+    <string name="map_widget_altitude_desc">Prikaže nadmorsko višino trenutne zemljepisne lege ali nadmorsko višino trenutnega središča zemljevida</string>
+    <string name="map_widget_altitude_current_location">Nadmorska višina: trenutna lokacija</string>
+    <string name="location_simulation_cutoff">Simulacija preskoči prve metre</string>
+    <string name="location_simulation_speedup">Pospešitev simulacije</string>
+    <string name="map_rendering_engine">Mehanizem upodabljanja zemljevidov</string>
+    <string name="shared_string_identifiers">Identifikatorji</string>
+    <string name="shared_string_terms_of_use">Pogoji uporabe</string>
+    <string name="show_borders_of_downloaded_maps">Pokaži obrobe prenesenih zemljevidov</string>
+    <string name="show_map_symbols">Prikaži simbole na zemljevidu</string>
+    <string name="show_map_symbols_desc">Tekst, prometni znaki in drugo.</string>
+    <string name="map_widget_altitude_map_center">Nadmorska višina: sredina zemljevida</string>
+    <string name="map_widget_altitude_map_center_desc">Prikazuje nadmorsko višino trenutnega središča zemljevida.</string>
+    <string name="map_widget_rendering_fps">FPS za izrisovanje zemljevida</string>
+    <string name="map_widget_rendering_fps_desc">Prikazuje hitrost prikaza in osveževanja zemljevida in elementov zemljevida, izraženo v sličicah na sekundo (FPS).</string>
+    <string name="send_uuid_preference_desc">Naključni UUID se uporablja za prenos zemljevidov brez povezave s strežnikov OsmAnd za spremljanje poštene uporabe strežniških virov, napovedovanje vzorcev prometa in izdelavo anonimnih mesečnih poročil o zemljevidih.</string>
+    <string name="send_uuid_preference">Pošlji edinstven identifikator uporabnika (UUID)</string>
+    <string name="external_sensors_plugin_description">Dostopa do zunanjih senzorjev za branje npr. tvojega srčnega utripa, hitrost kolesa, moč kolesarjenja ali kadenco. Zahteva, da je tvoja naprava povezana z ustreznimi senzorji prek brezžičnega osebnega omrežnega protokola ANT+.</string>
+    <string name="simulate_location_by_gpx">Simulacija lokacije iz GPX-a</string>
+    <string name="terms_of_service_desc">S prenosom zemljevidov se strinjaš z %1$s in %2$s.</string>
 </resources>

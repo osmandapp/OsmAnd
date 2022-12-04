@@ -115,6 +115,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
+import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -2017,6 +2018,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public WeatherForecastFragment getWeatherForecastFragment() {
+		return getFragment(WeatherForecastFragment.TAG);
 	}
 
 	public void dismissTrackMenu() {
