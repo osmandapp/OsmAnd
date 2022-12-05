@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="rendering_attr_weatherCloudContours_name">Cloud isolines</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Precipitation isolines</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Gusts of wind isolines</string>
     <string name="mtb_scale">MTB Scale</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
