@@ -298,6 +298,10 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
+	public static String getAmenityIconName(@NonNull Amenity amenity) {
+		return RenderingIcons.getIconNameForAmenity(amenity);
+	}
+
 	@Nullable
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		if (searchResult == null || searchResult.objectType == null) {
@@ -344,7 +348,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				String id = RenderingIcons.getBigIconNameForAmenity(amenity);
+				String id = getAmenityIconName(amenity);
 				Drawable icon = null;
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
@@ -433,7 +437,7 @@ public class QuickSearchListItem {
 				Amenity a = (Amenity) object;
 				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(RenderingIcons.getBigIconNameForAmenity(a));
+				pointDescription.setIconName(getAmenityIconName(a));
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -444,7 +448,7 @@ public class QuickSearchListItem {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-						pointDescription.setIconName(RenderingIcons.getBigIconNameForAmenity(amenity));
+						pointDescription.setIconName(getAmenityIconName(amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
