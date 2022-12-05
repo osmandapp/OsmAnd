@@ -407,7 +407,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			List<String> filteredTags = new ArrayList<String>();
 			String query = constraint.toString().trim();
 			for (String tag : allTags) {
-				if (tag.contains(query)) {
+				if (tag.startsWith(query) || tag.contains(":" + query)) {
 					filteredTags.add(tag);
 				}
 			}
