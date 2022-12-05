@@ -117,6 +117,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 		timeSlider.setLabelBehavior(LABEL_FLOATING);
+		timeSlider.setTrackActiveTintList(timeSlider.getTrackInactiveTintList());
 
 		updateTimeSlider();
 	}
@@ -125,6 +126,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(12);
 		timeSlider.setStepSize(today ? 1 : 3);
+		timeSlider.setCurrentDate(today ? currentDate : null);
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
