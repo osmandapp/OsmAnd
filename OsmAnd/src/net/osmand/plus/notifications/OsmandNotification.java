@@ -73,7 +73,7 @@ public abstract class OsmandNotification {
 	protected Builder createBuilder(boolean wearable) {
 		Intent contentIntent = getContentIntent();
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}

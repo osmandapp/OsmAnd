@@ -127,14 +127,14 @@ public class FavouritesHelper {
 		recalculateCachedFavPoints();
 		sortAll();
 
-		File oldExternalFile = fileHelper.getOldExternalFile();
+		File legacyExternalFile = fileHelper.getLegacyExternalFile();
 		// Force save favorites to file if internals are different from externals
-		// or no favorites created yet or old favorites.gpx present
-		if (changed || !fileHelper.getExternalDir().exists() || oldExternalFile.exists()) {
+		// or no favorites created yet or legacy favourites.gpx present
+		if (changed || !fileHelper.getExternalDir().exists() || legacyExternalFile.exists()) {
 			saveCurrentPointsIntoFile();
-			// Delete old favorites.gpx if exists
-			if (oldExternalFile.exists()) {
-				oldExternalFile.delete();
+			// Delete legacy favourites.gpx if exists
+			if (legacyExternalFile.exists()) {
+				legacyExternalFile.delete();
 			}
 		} else {
 			updateLastModifiedTime();

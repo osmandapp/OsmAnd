@@ -2911,4 +2911,6 @@
     <string name="show_polygons">다각형 표시</string>
     <string name="show_transparency_seekbar">투명 탐색 표시줄 표시</string>
     <string name="map_markers_bar">지도 마커 막대</string>
+    <string name="read_more">더 읽어보기</string>
+    <string name="public_transport_warning_descr_blog">블로그에서 OsmAnd 라우팅에 대해 자세히 알아보세요.</string>
 </resources>

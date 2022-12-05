@@ -351,9 +351,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			return false;
 		}
 
-		return (this.latitude == point.latitude)
-				&& (this.longitude == point.longitude)
-				&& (this.altitude == point.altitude)
+		return Double.compare(this.latitude, point.latitude) == 0
+				&& Double.compare(this.longitude, point.longitude) == 0
+				&& Double.compare(this.altitude, point.altitude) == 0
 				&& (this.timestamp == point.timestamp)
 				&& (this.visitedDate == point.visitedDate)
 				&& (this.pickupDate == point.pickupDate)

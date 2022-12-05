@@ -4832,7 +4832,7 @@
     <string name="weather_precip_in">″</string>
     <string name="weather_precip_inches">Цалі</string>
     <string name="weather_precip_milimeters">Міліметры</string>
-    <string name="weather_wind_kt">kn</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">міль/г</string>
     <string name="weather_wind_kmh">км/г</string>
     <string name="weather_wind_ms">м/с</string>

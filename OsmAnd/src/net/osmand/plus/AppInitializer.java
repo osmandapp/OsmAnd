@@ -16,7 +16,6 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,6 @@ import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -42,9 +40,9 @@ import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
@@ -62,6 +60,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -101,7 +100,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -288,116 +286,7 @@ public class AppInitializer implements IProgress {
 		} else {
 			app.poiTypes.init();
 		}
-
-		Resources resources = app.getLocaleHelper().getLocalizedResources("en");
-
-		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
-
-			@Override
-			public String getTranslation(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					String translation = getTranslation(baseLangType);
-					String langTranslation = " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
-					if (translation != null) {
-						return translation + langTranslation;
-					} else {
-						return app.poiTypes.getBasePoiName(baseLangType) + langTranslation;
-					}
-				}
-				return getTranslation(type.getIconKeyName());
-			}
-
-			@Override
-			public String getTranslation(String keyName) {
-				try {
-					Field f = R.string.class.getField("poi_" + keyName);
-					if (f != null) {
-						Integer in = (Integer) f.get(null);
-						String val = app.getString(in);
-						if (val != null) {
-							int ind = val.indexOf(';');
-							if (ind > 0) {
-								return val.substring(0, ind);
-							}
-						}
-						return val;
-					}
-				} catch (Throwable e) {
-					LOG.info("No translation: " + keyName);
-				}
-				return null;
-			}
-
-			@Override
-			public String getSynonyms(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					return getSynonyms(baseLangType);
-				}
-				return getSynonyms(type.getIconKeyName());
-			}
-
-
-			@Override
-			public String getSynonyms(String keyName) {
-				try {
-					Field f = R.string.class.getField("poi_" + keyName);
-					if (f != null) {
-						Integer in = (Integer) f.get(null);
-						String val = app.getString(in);
-						if (val != null) {
-							int ind = val.indexOf(';');
-							if (ind > 0) {
-								return val.substring(ind + 1);
-							}
-							return "";
-						}
-						return val;
-					}
-				} catch (Exception e) {
-				}
-				return "";
-			}
-
-			@Override
-			public String getAllLanguagesTranslationSuffix() {
-				return app.getString(R.string.shared_string_all_languages).toLowerCase();
-			}
-
-			@Override
-			public String getEnTranslation(AbstractPoiType type) {
-				AbstractPoiType baseLangType = type.getBaseLangType();
-				if (baseLangType != null) {
-					return getEnTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
-				}
-				return getEnTranslation(type.getIconKeyName());
-			}
-
-			@Override
-			public String getEnTranslation(String keyName) {
-				if (resources == null) {
-					return Algorithms.capitalizeFirstLetter(
-							keyName.replace('_', ' '));
-				}
-				try {
-					Field f = R.string.class.getField("poi_" + keyName);
-					if (f != null) {
-						Integer in = (Integer) f.get(null);
-						String val = resources.getString(in);
-						if (val != null) {
-							int ind = val.indexOf(';');
-							if (ind > 0) {
-								return val.substring(0, ind);
-							}
-						}
-						return val;
-					}
-				} catch (Exception e) {
-				}
-				return null;
-			}
-		});
+		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
 	}
 
 	public void onCreateApplication() {
@@ -467,6 +356,7 @@ public class AppInitializer implements IProgress {
 		app.gpsFilterHelper = startupInit(new GpsFilterHelper(app), GpsFilterHelper.class);
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
+		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -622,7 +512,7 @@ public class AppInitializer implements IProgress {
 		try {
 			notifyStart();
 			startBgTime = System.currentTimeMillis();
-			app.getRendererRegistry().initRenderers(this);
+			app.getRendererRegistry().initRenderers();
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
@@ -646,8 +536,8 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
-			// restore backuped favorites to normal file
-			restoreBackupForFavoritesFiles();
+			// restore backuped favorites to normal file -> this is obsolete with new favorite concept
+			//restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroups();
 			app.searchUICore.initSearchUICore();
@@ -694,17 +584,17 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	private void restoreBackupForFavoritesFiles() {
-		File appDir = app.getAppPath(null);
-		File save = new File(appDir, FavouritesFileHelper.FILE_TO_SAVE);
-		File bak = new File(appDir, FavouritesFileHelper.FILE_TO_BACKUP);
-		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
-			if (save.exists()) {
-				save.delete();
-			}
-			bak.renameTo(save);
-		}
-	}
+//	private void restoreBackupForFavoritesFiles() {
+//		File appDir = app.getAppPath(null);
+//		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
+//		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
+//		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
+//			if (save.exists()) {
+//				save.delete();
+//			}
+//			bak.renameTo(save);
+//		}
+//	}
 
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {

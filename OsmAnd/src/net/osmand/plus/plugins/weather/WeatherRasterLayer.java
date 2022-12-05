@@ -5,33 +5,38 @@ import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.BandIndexList;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherRasterLayer extends BaseMapLayer {
 
-	private final OsmandSettings settings;
-	private final WeatherPlugin weatherPlugin;
+	private final WeatherHelper weatherHelper;
+	private final WeatherPlugin plugin;
+	private final WeatherLayer weatherLayer;
 
 	private WeatherRasterLayerProvider provider;
 
-	private final WeatherLayer weatherLayer;
 	private boolean weatherEnabledCached;
-	private List<WeatherInfoType> enabledLayersCached;
+	private List<WeatherBand> enabledBandsCached;
 	private int bandsSettingsVersionCached;
 	private long dateTime;
 	private long cachedDateTime;
+
+	private final List<StateChangedListener<Float>> alphaChangeListeners = new ArrayList<>();
 
 	public enum WeatherLayer {
 		LOW,
@@ -40,10 +45,25 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	public WeatherRasterLayer(@NonNull Context context, @NonNull WeatherLayer weatherLayer) {
 		super(context);
-		this.settings = getApplication().getSettings();
-		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		OsmandApplication app = getApplication();
+		this.weatherHelper = app.getWeatherHelper();
 		this.weatherLayer = weatherLayer;
-		this.dateTime = System.currentTimeMillis();
+		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		setDateTime(System.currentTimeMillis());
+	}
+
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
+
+		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
+			CommonPreference<Float> preference = weatherBand.getAlphaPreference();
+			if (preference != null) {
+				StateChangedListener<Float> listener = change -> weatherHelper.updateBandsSettings();
+				preference.addListener(listener);
+				alphaChangeListeners.add(listener);
+			}
+		}
 	}
 
 	public long getDateTime() {
@@ -51,13 +71,22 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = dateTime;
+		this.dateTime = WeatherHelper.roundForecastTimeToHour(dateTime);
 	}
 
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
 		resetLayerProvider();
+
+		for (StateChangedListener<Float> listener : alphaChangeListeners) {
+			for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
+				CommonPreference<Float> preference = weatherBand.getAlphaPreference();
+				if (preference != null) {
+					preference.removeListener(listener);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -81,23 +110,10 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	private void recreateLayerProvider(@NonNull MapRendererView mapRenderer, @NonNull WeatherTileResourcesManager resourcesManager) {
 		BandIndexList bands = new BandIndexList();
-		for (WeatherInfoType weatherInfoType : enabledLayersCached) {
-			switch (weatherInfoType) {
-				case TEMPERATURE:
-					bands.add(WeatherBand.WEATHER_BAND_TEMPERATURE);
-					break;
-				case PRECIPITATION:
-					bands.add(WeatherBand.WEATHER_BAND_PRECIPITATION);
-					break;
-				case WIND:
-					bands.add(WeatherBand.WEATHER_BAND_WIND_SPEED);
-					break;
-				case CLOUDS:
-					bands.add(WeatherBand.WEATHER_BAND_CLOUD);
-					break;
-				case PRESSURE:
-					bands.add(WeatherBand.WEATHER_BAND_PRESSURE);
-					break;
+		for (WeatherBand weatherBand : enabledBandsCached) {
+			short bandIndex = weatherBand.getBandIndex();
+			if (bandIndex != WeatherBand.WEATHER_BAND_UNDEFINED) {
+				bands.add(bandIndex);
 			}
 		}
 		if (!bands.isEmpty()) {
@@ -125,8 +141,9 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
+
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = weatherPlugin.getWeatherResourcesManager();
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (view == null || mapRenderer == null || resourcesManager == null) {
 			return;
 		}
@@ -134,20 +151,22 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		ApplicationMode appMode = settings.getApplicationMode();
-		boolean weatherEnabled = weatherPlugin.isWeatherEnabled(appMode);
+		boolean hasCustomForecast = plugin.hasCustomForecast();
+		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get() || hasCustomForecast;
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		List<WeatherInfoType> enabledLayers = weatherPlugin.getEnabledLayers(appMode);
-		boolean layersChanged = !Algorithms.objectEquals(enabledLayers, enabledLayersCached);
-		enabledLayersCached = enabledLayers;
-		int bandsSettingsVersion = weatherPlugin.getBandsSettingsVersion();
+
+		List<WeatherBand> enabledBands = hasCustomForecast ? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
+
+		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
+		enabledBandsCached = enabledBands;
+		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();
 		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
 		bandsSettingsVersionCached = bandsSettingsVersion;
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
 		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged || mapActivityInvalidated) {
-			if (weatherEnabled && !enabledLayers.isEmpty()) {
+			if (weatherEnabled && !enabledBands.isEmpty()) {
 				recreateLayerProvider(mapRenderer, resourcesManager);
 			} else {
 				resetLayerProvider();

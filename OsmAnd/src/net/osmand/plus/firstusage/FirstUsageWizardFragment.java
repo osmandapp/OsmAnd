@@ -305,7 +305,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 					FragmentActivity activity = requireActivity();
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
-								new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+								new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
+										Manifest.permission.ACCESS_COARSE_LOCATION},
 								FIRST_USAGE_LOCATION_PERMISSION);
 					} else {
 						app.getLocationProvider().addLocationListener(this);

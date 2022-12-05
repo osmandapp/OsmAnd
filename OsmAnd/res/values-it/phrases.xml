@@ -2659,7 +2659,7 @@
     <string name="poi_hgv_delivery">Consegna</string>
     <string name="poi_cellar_entrance">Ingresso cantina</string>
     <string name="poi_craft_distillery">Distilleria</string>
-    <string name="poi_charge">Carica</string>
+    <string name="poi_charge">Tariffa</string>
     <string name="poi_cash_withdrawal_postfinance_card">Carta Postfinance</string>
     <string name="poi_cash_withdrawal_migros_bank">Banca Migros</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>

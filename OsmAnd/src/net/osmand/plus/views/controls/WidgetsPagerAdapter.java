@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
@@ -98,10 +99,63 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	}
 
 	@NonNull
-	private VisiblePages collectVisiblePages() {
+	public VisiblePages collectVisiblePages() {
+		Map<Integer, List<View>> visibleViews = new TreeMap<>();
 		ApplicationMode appMode = settings.getApplicationMode();
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(widgetsPanel);
-		return new VisiblePages(app, widgetInfos, appMode);
+
+		collectVisibleViews(visibleViews, widgetInfos, appMode);
+
+		return new VisiblePages(visibleViews);
+	}
+
+	public void collectVisibleViews(@NonNull Map<Integer, List<View>> visibleViews,
+	                                @NonNull Set<MapWidgetInfo> widgets,
+	                                @NonNull ApplicationMode appMode) {
+		Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
+		boolean hasVisibleWidgets = false;
+		for (MapWidgetInfo widgetInfo : widgets) {
+			if (widgetInfo.isEnabledForAppMode(appMode)) {
+				TextInfoWidget widget = (TextInfoWidget) widgetInfo.widget;
+				addWidgetViewToPage(textInfoWidgets, widgetInfo.pageIndex, widget);
+				hasVisibleWidgets |= widget.isViewVisible();
+			}
+		}
+		RoutingHelper routingHelper = app.getRoutingHelper();
+
+		boolean showBanner = routingHelper.isFollowingMode()
+				|| app.getLocationProvider().getLocationSimulation().isRouteAnimating();
+
+		if (routingHelper.isRoutePlanningMode()
+				|| (Algorithms.isEmpty(appMode.getRoutingProfile()) && !hasVisibleWidgets)) {
+			showBanner = false;
+		}
+
+		for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
+			List<View> widgetsViews = new ArrayList<>();
+			for (TextInfoWidget widget : entry.getValue()) {
+				if (widget.isViewVisible()) {
+					widgetsViews.add(widget.getView());
+					widget.updateBannerVisibility(false);
+				}
+			}
+			if (Algorithms.isEmpty(widgetsViews) && showBanner) {
+				TextInfoWidget widget = entry.getValue().get(0);
+				widgetsViews.add(widget.getView());
+				widget.updateBannerVisibility(true);
+			}
+			visibleViews.put(entry.getKey(), widgetsViews);
+		}
+	}
+
+	private void addWidgetViewToPage(@NonNull Map<Integer, List<TextInfoWidget>> textInfoWidgets,
+	                                 int pageIndex, @NonNull TextInfoWidget widget) {
+		List<TextInfoWidget> widgetsViews = textInfoWidgets.get(pageIndex);
+		if (widgetsViews == null) {
+			widgetsViews = new ArrayList<>();
+			textInfoWidgets.put(pageIndex, widgetsViews);
+		}
+		widgetsViews.add(widget);
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
@@ -139,44 +193,16 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		}
 	}
 
-	private static class VisiblePages {
+	public static class VisiblePages {
 
 		private final Map<Integer, List<View>> visibleViews = new TreeMap<>();
-		private final Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
 
-		public VisiblePages(@NonNull OsmandApplication app, @NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
-			for (MapWidgetInfo widgetInfo : widgets) {
-				if (widgetInfo.isEnabledForAppMode(appMode)) {
-					addWidgetViewToPage(widgetInfo.pageIndex, (TextInfoWidget) widgetInfo.widget);
-				}
-			}
-			boolean followingMode = app.getRoutingHelper().isFollowingMode()
-					|| app.getLocationProvider().getLocationSimulation().isRouteAnimating();
-
-			for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
-				List<View> widgetsViews = new ArrayList<>();
-				for (TextInfoWidget widget : entry.getValue()) {
-					if (widget.isViewVisible()) {
-						widgetsViews.add(widget.getView());
-						widget.updateBannerVisibility(false);
-					}
-				}
-				if (Algorithms.isEmpty(widgetsViews) && (followingMode || !Algorithms.isEmpty(appMode.getRoutingProfile()))) {
-					TextInfoWidget widget = entry.getValue().get(0);
-					widgetsViews.add(widget.getView());
-					widget.updateBannerVisibility(true);
-				}
-				visibleViews.put(entry.getKey(), widgetsViews);
-			}
+		public VisiblePages(@NonNull Map<Integer, List<View>> visibleViews) {
+			this.visibleViews.putAll(visibleViews);
 		}
 
-		private void addWidgetViewToPage(int pageIndex, @NonNull TextInfoWidget widget) {
-			List<TextInfoWidget> widgetsViews = textInfoWidgets.get(pageIndex);
-			if (widgetsViews == null) {
-				widgetsViews = new ArrayList<>();
-				textInfoWidgets.put(pageIndex, widgetsViews);
-			}
-			widgetsViews.add(widget);
+		public VisiblePages(@NonNull List<View> views) {
+			this.visibleViews.put(0, views);
 		}
 
 		public int getPageIndex(int entryIndex) {

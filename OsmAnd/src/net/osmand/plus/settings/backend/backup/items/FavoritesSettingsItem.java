@@ -2,8 +2,8 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_GROUP_NAME_SEPARATOR;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_PREFIX_TO_SAVE;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_FILE_PREFIX;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
 
 import android.content.Context;
 
@@ -68,34 +68,59 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		return SettingsItemType.FAVOURITES;
 	}
 
+	@Nullable
+	public FavoriteGroup getSingleGroup() {
+		return !Algorithms.isEmpty(items) && items.size() == 1 ? items.get(0) : null;
+	}
+
 	@Override
 	public long getLocalModifiedTime() {
-		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
+		FavoriteGroup singleGroup = getSingleGroup();
+		File groupFile = singleGroup != null ? favoritesHelper.getFileHelper().getExternalFile(singleGroup) : null;
+		if (groupFile != null && groupFile.exists()) {
+			return groupFile.lastModified();
+		}
+		File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
 		return favoritesFile.exists() ? favoritesFile.lastModified() : 0;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		File favoritesFile = favoritesHelper.getFileHelper().getOldExternalFile();
-		if (favoritesFile.exists()) {
-			favoritesFile.setLastModified(lastModifiedTime);
+		FavoriteGroup singleGroup = getSingleGroup();
+		File groupFile = singleGroup != null ? favoritesHelper.getFileHelper().getExternalFile(singleGroup) : null;
+		if (groupFile != null && groupFile.exists()) {
+			groupFile.setLastModified(lastModifiedTime);
+		} else {
+			File favoritesFile = favoritesHelper.getFileHelper().getLegacyExternalFile();
+			if (favoritesFile.exists()) {
+				favoritesFile.setLastModified(lastModifiedTime);
+			}
 		}
 	}
 
 	@NonNull
 	@Override
 	public String getName() {
-		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		FavoriteGroup singleGroup = getSingleGroup();
+		String groupName = singleGroup != null ? singleGroup.getName() : null;
 		return !Algorithms.isEmpty(groupName)
-				? FILE_PREFIX_TO_SAVE + FILE_GROUP_NAME_SEPARATOR + groupName
-				: FILE_PREFIX_TO_SAVE;
+				? FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + groupName
+				: FAV_FILE_PREFIX;
 	}
 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		String groupName = !Algorithms.isEmpty(items) ? items.get(0).getName() : null;
+		FavoriteGroup singleGroup = getSingleGroup();
+		String groupName = singleGroup != null ? singleGroup.getName() : null;
+		String fileName = getFileName();
 		if (!Algorithms.isEmpty(groupName)) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
+		} else if (!Algorithms.isEmpty(fileName)) {
+			groupName = fileName.replace(FAV_FILE_PREFIX, "").replace(GPX_FILE_EXT, "");
+			if (groupName.startsWith(FAV_GROUP_NAME_SEPARATOR)) {
+				groupName = groupName.substring(1);
+			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else {
 			return ctx.getString(R.string.shared_string_favorites);

@@ -4618,7 +4618,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="weather_precip_milimeters">Milimetroak</string>
     <string name="weather_precip_inches">Hazbeteak</string>
     <string name="weather_wind_mph">mph</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_miles_per_hour">Miliak orduko</string>
     <string name="weather_wind_kmh">km/h</string>

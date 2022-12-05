@@ -525,45 +525,6 @@ public class BackupHelper {
 		return error;
 	}
 
-	boolean isObfMapExistsOnServer(@NonNull String name) {
-		boolean[] exists = new boolean[1];
-
-		Map<String, String> params = new HashMap<>();
-		params.put("name", name);
-		params.put("type", "file");
-
-		OperationLog operationLog = new OperationLog("isObfMapExistsOnServer", DEBUG);
-		operationLog.startOperation(name);
-
-		AndroidNetworkUtils.sendRequest(app, "https://osmand.net/userdata/check-file-on-server",
-				params, "Check obf map on server", false, false,
-				(result, error, resultCode) -> {
-					int status;
-					String message;
-					if (!Algorithms.isEmpty(error)) {
-						status = STATUS_SERVER_ERROR;
-						message = "Check obf map on server error: " + new BackupError(error);
-					} else if (!Algorithms.isEmpty(result)) {
-						try {
-							JSONObject obj = new JSONObject(result);
-							String fileStatus = obj.optString("status");
-							exists[0] = Algorithms.stringsEqual(fileStatus, "present");
-
-							status = STATUS_SUCCESS;
-							message = name + " exists: " + exists[0];
-						} catch (JSONException e) {
-							status = STATUS_PARSE_JSON_ERROR;
-							message = "Check obf map on server error: json parsing";
-						}
-					} else {
-						status = STATUS_EMPTY_RESPONSE_ERROR;
-						message = "Check obf map on server error: empty response";
-					}
-					operationLog.finishOperation("(" + status + "): " + message);
-				});
-		return exists[0];
-	}
-
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 	                 @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
@@ -969,5 +930,54 @@ public class BackupHelper {
 			}
 		};
 		task.executeOnExecutor(executor);
+	}
+
+	public static boolean isDefaultObfMap(@NonNull OsmandApplication app,
+	                                      @NonNull FileSettingsItem settingsItem,
+	                                      @NonNull String fileName) {
+		FileSubtype subtype = settingsItem.getSubtype();
+		if (subtype.isMap()) {
+			return isObfMapExistsOnServer(app, fileName);
+		}
+		return false;
+	}
+
+	private static boolean isObfMapExistsOnServer(@NonNull OsmandApplication app, @NonNull String name) {
+		boolean[] exists = new boolean[1];
+
+		Map<String, String> params = new HashMap<>();
+		params.put("name", name);
+		params.put("type", "file");
+
+		OperationLog operationLog = new OperationLog("isObfMapExistsOnServer", DEBUG);
+		operationLog.startOperation(name);
+
+		AndroidNetworkUtils.sendRequest(app, "https://osmand.net/userdata/check-file-on-server",
+				params, "Check obf map on server", false, false,
+				(result, error, resultCode) -> {
+					int status;
+					String message;
+					if (!Algorithms.isEmpty(error)) {
+						status = STATUS_SERVER_ERROR;
+						message = "Check obf map on server error: " + new BackupError(error);
+					} else if (!Algorithms.isEmpty(result)) {
+						try {
+							JSONObject obj = new JSONObject(result);
+							String fileStatus = obj.optString("status");
+							exists[0] = Algorithms.stringsEqual(fileStatus, "present");
+
+							status = STATUS_SUCCESS;
+							message = name + " exists: " + exists[0];
+						} catch (JSONException e) {
+							status = STATUS_PARSE_JSON_ERROR;
+							message = "Check obf map on server error: json parsing";
+						}
+					} else {
+						status = STATUS_EMPTY_RESPONSE_ERROR;
+						message = "Check obf map on server error: empty response";
+					}
+					operationLog.finishOperation("(" + status + "): " + message);
+				});
+		return exists[0];
 	}
 }

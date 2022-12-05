@@ -4900,7 +4900,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Palce</string>
     <string name="weather_precip_milimeters">Milimetre</string>
-    <string name="weather_wind_kt">uz</string>
+    <string name="weather_wind_kn">uz</string>
     <string name="weather_wind_mph">mi/h</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>

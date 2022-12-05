@@ -101,9 +101,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
 	public static final String ADJUST_MAP_KEY = "adjust_map_key";
 
-	private static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
-	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
-	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
+	public static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
+	public static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
+	public static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
 	@Nullable
 	private LockableViewPager viewPager;

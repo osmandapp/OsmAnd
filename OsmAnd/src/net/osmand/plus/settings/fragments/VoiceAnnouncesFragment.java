@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +35,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {

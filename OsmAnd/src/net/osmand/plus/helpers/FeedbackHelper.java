@@ -141,7 +141,7 @@ public class FeedbackHelper {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 			intent = PendingIntent.getActivity(app.getBaseContext(), 0,
 					new Intent(app.getBaseContext(),
-							app.getAppCustomization().getMapActivity()), 0);
+							app.getAppCustomization().getMapActivity()), PendingIntent.FLAG_IMMUTABLE);
 		}
 
 		@Override

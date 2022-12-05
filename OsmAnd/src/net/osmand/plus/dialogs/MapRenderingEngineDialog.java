@@ -44,6 +44,7 @@ public class MapRenderingEngineDialog {
 		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
 		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
 		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
+		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
 
 		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
 			updateRenderingEngineSetting(false, renderChangeListener);
