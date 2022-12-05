@@ -110,7 +110,9 @@ class AppVersionUpgradeOnInit {
 	// 4007 - 4.0-07 (Update type of "Selected POI" preference)
 	public static final int VERSION_4_3_01 = 4301;
 
-	public static final int LAST_APP_VERSION = VERSION_4_3_01;
+	public static final int VERSION_4_4_01 = 4401;
+
+	public static final int LAST_APP_VERSION = VERSION_4_4_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
