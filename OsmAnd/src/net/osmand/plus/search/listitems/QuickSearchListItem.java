@@ -298,18 +298,6 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
-	public static String getAmenityIconName(@NonNull Amenity amenity) {
-		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (st != null) {
-			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-				return st.getIconKeyName();
-			} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-				return st.getOsmTag() + "_" + st.getOsmValue();
-			}
-		}
-		return null;
-	}
-
 	@Nullable
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		if (searchResult == null || searchResult.objectType == null) {
@@ -353,7 +341,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				String id = getAmenityIconName(amenity);
+				String id = RenderingIcons.getBigIconNameForAmenity(amenity);
 				Drawable icon = null;
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
@@ -442,7 +430,7 @@ public class QuickSearchListItem {
 				Amenity a = (Amenity) object;
 				String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 				pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
-				pointDescription.setIconName(getAmenityIconName(a));
+				pointDescription.setIconName(RenderingIcons.getBigIconNameForAmenity(a));
 				break;
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) object;
@@ -453,7 +441,7 @@ public class QuickSearchListItem {
 						object = amenity;
 						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 								OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
-						pointDescription.setIconName(getAmenityIconName(amenity));
+						pointDescription.setIconName(RenderingIcons.getBigIconNameForAmenity(amenity));
 					}
 				} else if (pointDescription.isFavorite()) {
 					LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());

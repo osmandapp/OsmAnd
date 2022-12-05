@@ -324,7 +324,16 @@ public class MapSelectionHelper {
 								}
 								if (onPathMapSymbol == null) {
 									amenity = getAmenity(result.objectLatLon, obfMapObject);
-									if (amenity == null) {
+									if (amenity != null) {
+										RasterMapSymbol rasterMapSymbol = null;
+										try {
+											rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+										} catch (Exception ignore) {
+										}
+										if (rasterMapSymbol != null) {
+											amenity.setMapIconName(rasterMapSymbol.getContent());
+										}
+									} else {
 										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
 								}
@@ -469,6 +478,7 @@ public class MapSelectionHelper {
 				amenity.getX().addAll(object.getX());
 				amenity.getY().addAll(object.getY());
 			}
+			amenity.setMapIconName(object.getIconRes());
 			if (isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
 				result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
 			}

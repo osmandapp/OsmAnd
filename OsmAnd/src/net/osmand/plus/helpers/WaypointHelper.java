@@ -21,7 +21,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -809,18 +808,9 @@ public class WaypointHelper {
 		public Drawable getDrawable(Context uiCtx, OsmandApplication app, boolean nightMode) {
 			if (type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
-				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-				if (st != null) {
-					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-						return AppCompatResources.getDrawable(uiCtx,
-								RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
-					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-						return AppCompatResources.getDrawable(uiCtx,
-								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
-					}
-				}
-				return null;
-
+				String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+				return iconName == null ? null : AppCompatResources.getDrawable(uiCtx,
+						RenderingIcons.getBigIconResourceId(iconName));
 			} else if (type == TARGETS) {
 				UiUtilities iconsCache = app.getUIUtilities();
 				if (((TargetPoint) point).start) {
