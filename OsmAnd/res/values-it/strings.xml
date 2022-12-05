@@ -3,7 +3,7 @@
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi.</string>
     <string name="offline_edition">Modifiche offline</string>
-    <string name="offline_edition_descr">Usa sempre la modifica offline.</string>
+    <string name="offline_edition_descr">Se è abilitata la modifica offline, le modifiche verranno prima salvate localmente e caricate su richiesta, altrimenti le modifiche verranno caricate immediatamente.</string>
     <string name="update_poi_does_not_change_indexes">Le modifiche dei PDI all\'interno dell\'app non si riflettono nelle mappe scaricate, le modifiche sono salvate in un file locale.</string>
     <string name="local_openstreetmap_uploading">Caricamento…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PDI/note sono stati caricati</string>
@@ -135,7 +135,9 @@
     <string name="gpx_option_reverse_route">Inverti direzione traccia</string>
     <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
     <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
-    <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
+    <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.
+\n\t
+\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
     <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
     <string name="choose_audio_stream_descr">Seleziona l\'altoparlante per la guida vocale.</string>
     <string name="voice_stream_voice_call">Audio delle chiamate telefoniche (interrompe lo stereo Bluetooth dell\'auto)</string>
@@ -229,7 +231,7 @@
     <string name="build_installed">Build {0} installata ({1}).</string>
     <string name="downloading_build">Download della versione…</string>
     <string name="install_selected_build">Installare OsmAnd - {0} del {1} {2} MB \?</string>
-    <string name="loading_builds_failed">Caricamento elenco delle versioni di OsmAnd fallito</string>
+    <string name="loading_builds_failed">Impossibile recuperare l\'elenco delle versioni di OsmAnd</string>
     <string name="loading_builds">Caricamento delle versioni di OsmAnd…</string>
     <string name="select_build_to_install">Seleziona una versione OsmAnd da installare</string>
     <string name="contribution_activity">Installa la versione</string>
@@ -549,14 +551,14 @@
     <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda di memoria).</string>
     <string name="shared_string_online_maps">Mappe online</string>
     <string name="online_map_settings_descr">Scegli la sorgente online o in cache dei tile delle mappe.</string>
-    <string name="osmand_rastermaps_plugin_description">Con questo plugin puoi accedere a molti tipi di mappe online (chiamate a tasselli o raster), a partire dai tasselli predefiniti di OpenStreetMap (come Mapnik) alle immagini satellitari e strati per scopi speciali come le mappe meteorologiche, climatiche, geologiche, di ombreggiamento dei rilievi ecc. 
-\n 
-\nTutte queste mappe possono essere usate sia come mappa principale (di base) da visualizzare nella mappa di OsmAnd sia come uno strato di sovrapposizione o di fondo su un\'altra mappa di base (come le mappe offline OsmAnd standard). Per permettere una maggiore visibilità delle mappe di sfondo, certi elementi delle mappe vettoriali possono essere facilmente nascosti come desiderato attraverso il menu \'Configura mappa\'. 
-\n 
-\nLe mappe a tasselli possono essere ricevuto direttamente dalle risorse online oppure preparate in precedenza per l\'uso offline (e copiate manualmente nella cartella dati di OsmAnd) come un database sqlite che può essere prodotto da molteplici strumenti per la costruzione di mappe di terze parti.</string>
+    <string name="osmand_rastermaps_plugin_description">Accedi a molti tipi di mappe online (le cosiddette tile o raster), come tile OSM pre-renderizzate, immagini satellitari, e layer per scopi speciali come mappe meteorologiche, mappe climatiche, mappe geologiche, layer di ombreggiature, ecc.
+\n
+\nOgnuna di queste mappe può essere visualizzata come mappa principale (base) o come sovrapposizione o sottostante a un\'altra mappa base (come le mappe vettoriali offline di OsmAnd). Alcuni elementi delle mappe vettoriali OsmAnd possono essere nascosti tramite il menù \"Configura mappa\" per rendere più visibile qualsiasi mappa sottostante.
+\n
+\nScarica direttamente le mappe a tasselli, o copiale come file di database SQLite nella cartella dei dati di OsmAnd utilizzando uno dei tanti strumenti di preparazione delle mappe di terze parti.</string>
     <string name="osmand_background_plugin_description">Visualizza le impostazioni per abilitare il tracking e navigazione in background (a schermo spento) tramite il risveglio periodico del GPS.</string>
-    <string name="osmand_accessibility_description">Questo componente aggiuntivo rende disponibili le funzioni per l\'accessibilità direttamente in OsmAnd. Facilita per esempio la regolazione della velocità di lettura per le voci dal testo-alla-voce, la configurazione del pad direzionale di navigazione a schermo, l\'utilizzo di una trackball per il controllo dello zoom, oppure l\'utilizzo del feedback text-to-speech, ad esempio per annunciare automaticamente la vostra posizione.</string>
-    <string name="osmand_development_plugin_description">Questo plugin visualizza le impostazioni per le funzionalità di sviluppo e debug come il test o la simulazione di navigazione, la prestazione del rendering o gli annunci vocali. Queste impostazioni sono utili agli sviluppatori e non sono necessarie per gli utenti finali.</string>
+    <string name="osmand_accessibility_description">Rende disponibili le funzioni per l\'accessibilità del dispositivo direttamente in OsmAnd. Ciò facilita ad es. la regolazione della velocità del parlato per le voci di sintesi vocale, la configurazione del pad direzionale di navigazione a schermo, l\'utilizzo di una trackball per il controllo dello zoom, oppure feedback di sintesi vocale, ad esempio per annunciare automaticamente la tua posizione.</string>
+    <string name="osmand_development_plugin_description">Fornisce funzionalità per testare ed eseguire il debug di OsmAnd: simula percorsi di navigazione, monitora il rendering dello schermo, controlla le prestazioni, ecc. Questo plugin non è richiesto per il normale utilizzo dell\'applicazione.</string>
     <string name="plugins_screen">Componenti aggiuntivi</string>
     <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate.</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
@@ -943,7 +945,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra dei punti. I risultati possono essere salvati come file GPX, che può essere usato in seguito per la navigazione.</string>
+    <string name="osmand_distance_planning_plugin_description">Crea percorsi toccando la mappa, o utilizzando o modificando i file GPX esistenti, per pianificare un viaggio e misurare la distanza tra due punti. Il risultato può essere salvato come file GPX da utilizzare in seguito come guida.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolo distanza e pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto. 
 \n* Premere e tenere premuto sulla mappa per eliminare il punto precedente. 
@@ -1023,7 +1025,7 @@
     <string name="animate_routing_route_not_calculated">Per favore calcolare il percorso prima</string>
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
-    <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
+    <string name="edit_tilesource_elliptic_tile">Proiezione ellittica di Mercatore</string>
     <string name="local_osm_changes_delete_all_confirm">Eliminare %1$d modifiche OSM\?</string>
     <string name="app_mode_hiking">Escursionismo</string>
     <string name="app_mode_motorcycle">Motocicletta</string>
@@ -1351,7 +1353,7 @@
     <string name="shared_string_get">Ottieni</string>
     <string name="plugin_ski_name">Visualizzazione mappa sci</string>
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
-    <string name="world_ski_missing">Scarica la speciale mappa offline per visualizzare le infrastrutture per sciatori.</string>
+    <string name="world_ski_missing">Scarica la speciale mappa offline per visualizzare gli impianti sciistici.</string>
     <string name="nautical_maps_missing">Scarica la mappa speciale offline per visualizzare i dettagli nautici.</string>
     <string name="rendering_attr_pisteGrooming_name">Piste per sci da fondo</string>
     <string name="free">Libera %1$s</string>
@@ -1362,10 +1364,9 @@
     <string name="notes">Note A/V</string>
     <string name="online_map">Mappa online</string>
     <string name="share_note">Condividi l\'appunto</string>
-    <string name="plugin_nautical_descr">Attivando questa visualizzazione lo stile della mappa diventerà Nautico, quindi mostrerà tutta la simbologia per la navigazione.
-		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
-		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
-	</string>
+    <string name="plugin_nautical_descr">Arricchisci la tua mappa con informazioni quali rotte di navigazione, luci di navigazione, zone di pericolo, zone con restrizioni di navigazione o di attracco, ecc. Per utilizzarle, scarica le rispettive mappe nautiche e abilita lo stile \"Mappa nautica\" in \"Configura mappa\".
+\n
+\nUlteriori informazioni su https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="plugin_ski_descr">Progettato per navigare nelle aree di sport invernali: vedi piste da sci e impianti di risalita, piste da sci di fondo, con linee colorate che indicano i livelli di difficoltà. Per utilizzarlo, abilita questo plugin e vai anche su \"Configura mappa\" e scegli lo stile della mappa \"Inverno e sci\".</string>
     <string name="plugin_touringview_descr">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali. 
 \n
@@ -1733,7 +1734,7 @@
     <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
     <string name="shared_string_location">Posizione</string>
     <string name="poi_context_menu_modify_osm_change">Modifica i cambiamenti di OSM</string>
-    <string name="access_from_map_description">Il pulsante del menù apre il pannello di controllo, non il menù</string>
+    <string name="access_from_map_description">Il pulsante del menù apre il pannello di controllo piuttosto che il menù</string>
     <string name="access_from_map">Accedi dalla mappa</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="osm_save_offline">Salva offline</string>
@@ -1920,7 +1921,7 @@
     <string name="access_widget_expand">Espandi</string>
     <string name="access_shared_string_navigate_up">Naviga in su</string>
     <string name="access_sort">Ordina</string>
-    <string name="access_no_destination">Destinazione non impostata</string>
+    <string name="access_no_destination">Plugin di accessibilità: nessuna destinazione impostata</string>
     <string name="map_widget_magnetic_bearing">Bussola magnetica</string>
     <string name="map_widget_bearing">Bussola relativa</string>
     <string name="access_disable_offroute_recalc">Non ricalcolare il percorso quando lo si abbandona</string>
@@ -2271,29 +2272,29 @@
 \n • Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep) 
 \n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd è un software open-source attivamente sviluppato. Chiunque può contribuire all\'app segnalando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa anche sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. 
-\n Copertura e qualità della mappa approssimativa: 
-\n • Ovest Europa: **** 
-\n • Est Europa: *** 
-\n • Russia: *** 
-\n • Nord America: *** 
-\n • Sud America: ** 
-\n • Asia: ** 
-\n • Giappone e Corea: *** 
-\n • Medio Oriente: ** 
-\n • Africa: ** 
-\n • Antartide: * 
-\nLa maggior parte delle nazioni del mondo sono disponibili per il download! 
-\n Scarica un affidabile navigatore del tuo paese - sia che tu sia in Francia, Germania, Messico, Gran Bretagna, Spagna, Olanda, USA, Russia, Brasile o qualsiasi altra.</string>
+    <string name="osmand_extended_description_part8">OsmAnd è un software open source attivamente sviluppato. Chiunque può contribuire all\'applicazione segnalando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa anche sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
+\n Indicativamente copertura e qualità della mappa:
+\n • Ovest Europa: ****
+\n • Est Europa: ***
+\n • Russia: ***
+\n • Nord America: ***
+\n • Sud America: **
+\n • Asia: **
+\n • Giappone e Corea: ***
+\n • Medio Oriente: **
+\n • Africa: **
+\n • Antartide: *
+\nLa maggior parte delle nazioni del mondo sono disponibili per il download!
+\n Scarica un navigatore affidabile del tuo paese - sia che sei in Francia, Germania, Messico, Gran Bretagna, Spagna, Olanda, USA, Russia, Brasile o qualsiasi altra.</string>
     <string name="osmand_extended_description_part7">Contribuire a OSM 
 \n • Segnala errori nei dati 
 \n • Carica tracce GPX in OSM direttamente dall\'app 
 \n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)
 \n</string>
     <string name="mapillary">Mapillary</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automatizzata Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM). 
-\n 
-\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle linee isoipse e delle informazioni di altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Direzioni di Navigazione Automatizzate) è un\'applicazione di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM).
+\n
+\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e le informazioni sull\'altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.</string>
     <string name="mapillary_widget">Widget di Mapillary</string>
     <string name="mapillary_widget_descr">Permette di contribuire facilmente a Mapillary.</string>
     <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
@@ -2372,7 +2373,7 @@
     <string name="move_all_to_history">Sposta tutto nella cronologia</string>
     <string name="show_direction">Indicazione della direzione</string>
     <string name="sort_by">Ordina per</string>
-    <string name="marker_show_distance_descr">Scegli come indicare la distanza e la direzione dei marcatori della mappa nella schermata della mappa:</string>
+    <string name="marker_show_distance_descr">Scegli come indicare la distanza e la direzione dei marcatori sulla mappa:</string>
     <string name="all_markers_moved_to_history">Tutti i marcatori della mappa sono stati archiviati nella cronologia</string>
     <string name="marker_moved_to_history">Marcatori della mappa spostati nella cronologia</string>
     <string name="marker_moved_to_active">Marcatori della mappa spostati negli attivi</string>
@@ -2430,11 +2431,11 @@
 \n • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, in lingua locale, oppure secondo la pronuncia 
 \n • Visualizza mattonelle online speciali, vista satellitare (da Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili
 \n</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità di OpenStreetMap (OSM). 
-\n Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. 
-\n 
-\n OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti. 
-\n 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Direzioni di Navigazione Automatizzate) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità di OpenStreetMap (OSM).
+\n Goditi la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle curve di livello e le informazioni sull\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro.
+\n
+\n OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti.
+\n
 \n Alcune delle maggiori caratteristiche:</string>
     <string name="osn_modify_dialog_title">Modifica la nota</string>
     <string name="context_menu_item_modify_note">Modifica la nota OSM</string>
@@ -3330,10 +3331,10 @@
     <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in un\'elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
-    <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza si riferisce alla variabilità di misure ripetute, e non è direttamente correlato alla precisione, che definisce quanto la tua misurazione è vicina alla vera posizione.</string>
+    <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza è la vicinanza delle misurazioni alla posizione reale, e non è direttamente correlata alla precisione, che è la dispersione delle misurazioni ripetute.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio in base alla precisione, i punti potrebbero mancare del tutto ad es. sotto i ponti, sotto gli alberi, tra edifici elevati, o in determinate condizioni atmosferiche.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Osservazione: se il GPS è stato disattivato poco prima di una registrazione, i primi punti misurati potrebbero avere una minore accuratezza, perciò nel nostro codice noi possiamo voler attendere qualche secondo prima oppure prima di registrare dei punti (o registrare i 3 migliori punti consecutivi, ecc...), ma questo non è ancora implementato .</string>
+    <string name="monitoring_min_accuracy_descr_remark">Nota: se il GPS era stato disattivato immediatamente prima di una registrazione, il primo punto misurato potrebbe avere una precisione ridotta, quindi nel nostro codice potremmo voler attendere circa un secondo prima di registrare un punto (o registrare il meglio di 3 punti consecutivi, ecc.), ma non è ancora stato implementato.</string>
     <string name="monitoring_min_distance_descr">L\'attivazione di questo filtro consente di evitare ulteriori registrazioni di dati quando il movimento non viene quasi rilevato. Migliora anche l\'aspetto spaziale delle tracce senza ulteriore elaborazione.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: i periodi di riposo non sono registrati affatto oppure registrati come un singolo punto. I movimenti minori (ad esempio, a lato della strada per segnalare una possibile svolta nel viaggio) possono essere scartati dal filtro. Tieni presente che il tuo file conterrà meno informazioni per la post-elaborazione e allo stesso tempo può potenzialmente salvare artefatti GPS causati da cattiva ricezione o effetti del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: imposta uno spostamento di 5 metri se non vuoi registrare dettagli minori del tuo percorso, e non hai bisogno di dati aggiuntivi quando sei fermo.</string>
@@ -3752,19 +3753,19 @@
     <string name="shared_string_is_saved">è salvato</string>
     <string name="one_point_error">Aggiungi almeno due punti.</string>
     <string name="shared_string_redo">Ripeti</string>
-    <string name="release_3_8">• Aggiornata la modalità Pianificazione dell\'Itinerario che permette l\'utilizzo di diversi profili di navigazione per ogni segmento e incolla le tracce alle strade
+    <string name="release_3_8">• Aggiornata la funzione Pianifica un percorso: consente di utilizzare diversi tipi di navigazione per segmento e l\'inclusione di tracce
 \n
-\n •Nuove opzioni per l\'Aspetto delle tracce: scegli il colore, lo spessore, la visualizzazione delle frecce di direzione, e i marcatori di inizio e fine
+\n • Nuovo menu Aspetto per le tracce: seleziona il colore, lo spessore, le frecce di direzione del display, le icone di inizio e fine
 \n
-\n • Migliorata la visibilità dei nodi ciclistici
+\n • Migliorata la visibilità dei nodi ciclabili
 \n
 \n • Le tracce adesso sono tappabili, hanno un nuovo menù contestuale con informazioni di base
 \n
-\n • Migliorato l\'algoritmo di ricerca
+\n • Migliorati gli algoritmi di ricerca
 \n
 \n • Migliorate le opzioni Segui traccia in Navigazione
 \n
-\n • Corretto il problema all\'importa/esporta le impostazioni dei profili
+\n • Corretti i problemi con l\'importazione/esportazione delle impostazioni del profilo
 \n
 \n</string>
     <string name="simplified_track">Traccia semplificata</string>
@@ -3815,7 +3816,7 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Aggiungi almeno due punti</string>
     <string name="osm_edit_close_note">Chiudi la nota OSM</string>
     <string name="osm_edit_comment_note">Commenta la nota OSM</string>
-    <string name="osm_login_descr">Puoi autenticarti con il metodo sicuro OAuth, o utilizzare le tue credenziali su OSM</string>
+    <string name="osm_login_descr">Puoi autenticarti con il metodo OAuth, o utilizzare le tue credenziali su OSM.</string>
     <string name="shared_string_add_photo">Aggiungi foto</string>
     <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
@@ -4021,13 +4022,13 @@
     <string name="routing_attr_allow_streams_name">Permetti ruscelli e scoli</string>
     <string name="release_4_0_beta">• Aggiunta opzione per scaricare le linee di contorno in piedi
 \n
-\n• Panoramica pianificazione percorso: aggiunte schede per passare da punti a grafici
+\n• Panoramica pianificazione percorso: aggiunte schede per passare tra punti a tra grafici
 \n
 \n• Aggiornamenti OsmAnd Live spostati in \"Scarica mappe &gt; Aggiornamenti\"
 \n
-\n• Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza
+\n• Le tracce adesso possono essere colorate in base all\'altitudine, velocità o pendenza.
 \n
-\n• Aggiunta l\'opzione per cambiare l\'aspetto della linea del percorso di navigazione
+\n• Aggiunta l\'opzione per cambiare l\'aspetto della linea del percorso.
 \n
 \n• Aggiornata la finestra di dialogo \"Registra il percorso\"
 \n
@@ -4309,7 +4310,7 @@
     <string name="routing_attr_allow_gate_description">Permetti l\'utilizzo dei cancelli</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferisci pavimentazione tattile</string>
     <string name="shared_storage_warning_title">Cambiamenti delle regole di acceso alla memorizzazione</string>
-    <string name="purchases_feature_desc_android_auto">Mappe OsmAnd offline e navigazione nello schermo del tuo veicolo. Integrato opportunamente con i comandi del tuo veicolo.</string>
+    <string name="purchases_feature_desc_android_auto">Porta le mappe offline di OsmAnd nello schermo del tuo veicolo e integralo con i comandi del tuo veicolo.</string>
     <string name="icon_group_nautical">Nautico</string>
     <string name="routing_attr_only_permitted_streets_name">Strade esplicitamente permesse</string>
     <string name="routing_attr_only_permitted_streets_description">Utilizza solo le strade esplicitamente permesse</string>
@@ -4891,7 +4892,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_inhg">mmHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -4964,4 +4965,5 @@
     <string name="rendering_attr_showMtbScale_description">Mostra i percorsi nella scala di difficoltà MTB.</string>
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
     <string name="mtb_segment_classification">Classificazione del segmento</string>
+    <string name="mtb_scale">Scala di difficoltà per MTB</string>
 </resources>
