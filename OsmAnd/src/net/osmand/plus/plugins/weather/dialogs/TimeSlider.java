@@ -9,18 +9,26 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.slider.Slider;
 
+import java.util.Calendar;
+
 public class TimeSlider extends Slider {
 
+	private Calendar currentDate;
+
 	public TimeSlider(@NonNull Context context) {
-		super(context);
+		this(context, null);
 	}
 
 	public TimeSlider(@NonNull Context context, @Nullable AttributeSet attrs) {
-		super(context, attrs);
+		this(context, attrs, 0);
 	}
 
 	public TimeSlider(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+	}
+
+	public void setCurrentDate(@Nullable Calendar currentDate) {
+		this.currentDate = currentDate;
 	}
 
 	@Override
