@@ -151,12 +151,12 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get();
+		boolean hasCustomForecast = plugin.hasCustomForecast();
+		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get() || hasCustomForecast;
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
 
-		List<WeatherBand> enabledBands = plugin.hasCustomForecast()
-				? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
+		List<WeatherBand> enabledBands = hasCustomForecast ? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
 
 		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
 		enabledBandsCached = enabledBands;

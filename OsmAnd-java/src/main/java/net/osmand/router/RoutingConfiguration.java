@@ -150,7 +150,7 @@ public class RoutingConfiguration {
 //		}
 
 		public RoutingConfiguration build(String router, RoutingMemoryLimits memoryLimits) {
-			return build(router, null, memoryLimits, null);
+			return build(router, null, memoryLimits, new LinkedHashMap<String, String>());
 		}
 		
 		public RoutingConfiguration build(String router,
