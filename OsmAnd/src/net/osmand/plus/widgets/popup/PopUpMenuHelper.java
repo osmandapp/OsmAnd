@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.ListPopupWindow;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -26,16 +27,19 @@ public class PopUpMenuHelper {
 	private final int backgroundColor;
 	private final AdapterView.OnItemClickListener listener;
 	private final boolean nightMode;
+	private final int layoutId;
 
 	private PopUpMenuHelper(@NonNull View anchorView,
 	                        @NonNull List<PopUpMenuItem> items,
 	                        PopUpMenuWidthType widthType,
 	                        @ColorInt int backgroundColor,
+	                        @LayoutRes int layoutId,
 	                        AdapterView.OnItemClickListener listener,
 	                        boolean nightMode) {
 		this.anchorView = anchorView;
 		this.items = items;
 		this.widthType = widthType;
+		this.layoutId = layoutId;
 		this.backgroundColor = backgroundColor;
 		this.listener = listener;
 		this.nightMode = nightMode;
@@ -71,8 +75,7 @@ public class PopUpMenuHelper {
 		}
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
 
-		PopUpMenuArrayAdapter adapter =
-				new PopUpMenuArrayAdapter(ctx, R.layout.popup_menu_item, items, nightMode);
+		PopUpMenuArrayAdapter adapter = new PopUpMenuArrayAdapter(ctx, layoutId, items, nightMode);
 		ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
 		listPopupWindow.setAnchorView(anchorView);
 		listPopupWindow.setContentWidth(totalWidth);
@@ -102,6 +105,7 @@ public class PopUpMenuHelper {
 	}
 
 	public static class Builder {
+
 		private final View anchorView;
 		private final List<PopUpMenuItem> items;
 		@ColorInt
@@ -109,10 +113,17 @@ public class PopUpMenuHelper {
 		private AdapterView.OnItemClickListener listener;
 		private PopUpMenuWidthType widthType = PopUpMenuWidthType.AS_ANCHOR_VIEW;
 		private final boolean nightMode;
+		@LayoutRes
+		private final int layoutId;
 
 		public Builder(View anchorView, List<PopUpMenuItem> items, boolean nightMode) {
+			this(anchorView, items, nightMode, R.layout.popup_menu_item);
+		}
+
+		public Builder(View anchorView, List<PopUpMenuItem> items, boolean nightMode, int layoutId) {
 			this.anchorView = anchorView;
 			this.items = items;
+			this.layoutId = layoutId;
 			this.nightMode = nightMode;
 		}
 
@@ -142,7 +153,7 @@ public class PopUpMenuHelper {
 					}
 				};
 			}
-			new PopUpMenuHelper(anchorView, items, widthType, backgroundColor, listener, nightMode).show();
+			new PopUpMenuHelper(anchorView, items, widthType, backgroundColor, layoutId, listener, nightMode).show();
 		}
 	}
 }

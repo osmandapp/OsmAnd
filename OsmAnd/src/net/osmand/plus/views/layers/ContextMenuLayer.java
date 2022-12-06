@@ -47,6 +47,8 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -339,7 +341,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void recreateContextMarkerCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null ) {
+		if (mapRenderer != null) {
 			clearContextMarkerCollection();
 
 			if (contextMarkerImage == null) {
@@ -771,8 +773,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean disableSingleTap() {
 		MapActivity mapActivity = getMapActivity();
+		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
 		if (mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
-				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible) {
+				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
+				|| (plugin != null && plugin.hasCustomForecast())) {
 			return true;
 		}
 		boolean res = false;
