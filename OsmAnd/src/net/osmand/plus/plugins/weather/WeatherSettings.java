@@ -26,6 +26,7 @@ public class WeatherSettings {
 	public final OsmandPreference<Boolean> weatherContoursEnabled;
 	public final OsmandPreference<Integer> weatherContoursTransparency;
 	public final EnumStringPreference<WeatherContour> weatherContoursType;
+	public final EnumStringPreference<WeatherContour> weatherForecastContoursType;
 
 	public final EnumStringPreference<WindUnit> weatherWindUnit;
 	public final EnumStringPreference<CloudUnit> weatherCloudUnit;
@@ -70,6 +71,8 @@ public class WeatherSettings {
 		weatherContoursTransparency = settings.registerIntPreference("weatherContoursTransparency", DEFAULT_TRANSPARENCY).makeProfile();
 		weatherContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
 				"weatherContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
+		weatherForecastContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
+				"weatherForecastContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
 
 		weatherTemp = settings.registerBooleanPreference("weatherTemp", false).makeProfile();
 		weatherPressure = settings.registerBooleanPreference("weatherPressure", false).makeProfile();

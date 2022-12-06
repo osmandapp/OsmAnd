@@ -42,6 +42,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
@@ -173,7 +174,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		});
 		view.findViewById(R.id.raster_layers).setOnClickListener(this::chooseLayers);
 		view.findViewById(R.id.contour_layers).setOnClickListener(this::chooseContour);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.contour_layers), false);
 	}
 
 	public void updateSelectedDate(@Nullable Date date) {
@@ -185,23 +185,23 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateSelectedDate(selectedDate.getTime());
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
+		updateSelectedDate(selectedDate.getTime());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		updateSelectedDate(null);
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.enableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().removeSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
+		updateSelectedDate(null);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -228,22 +228,26 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void chooseContour(@NonNull View view) {
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
-		for (WeatherContour contour : WeatherContour.values()) {
+		for (WeatherContour weatherContour : WeatherContour.values()) {
 			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(contour.getTitleId())
-					.setIcon(getContentIcon(contour.getIconId()))
+					.setTitleId(weatherContour.getTitleId())
+					.setIcon(getContentIcon(weatherContour.getIconId()))
+					.showCompoundBtn(activeColor)
 					.setOnClickListener(v -> {
-
+						plugin.setSelectedForecastContoursType(weatherContour);
+						requireMapActivity().refreshMap();
 					})
-					.setSelected(false)
+					.setSelected(weatherContour == plugin.getSelectedForecastContoursType())
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+		new PopUpMenuHelper.Builder(view, items, nightMode).setWidthType(PopUpMenuWidthType.STANDARD).show();
 	}
 
 	private void chooseLayers(@NonNull View view) {
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		for (WeatherBand band : weatherHelper.getWeatherBands()) {
@@ -252,6 +256,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(band.getMeasurementName())
 					.setIcon(icon)
+					.showCompoundBtn(activeColor)
 					.setOnClickListener(v -> {
 						boolean visible = !band.isForecastBandVisible();
 						band.setForecastBandVisible(visible);
@@ -261,7 +266,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+		new PopUpMenuHelper.Builder(view, items, nightMode, R.layout.popup_menu_item_checkbox).setWidthType(PopUpMenuWidthType.STANDARD).show();
 	}
 
 	@Nullable
