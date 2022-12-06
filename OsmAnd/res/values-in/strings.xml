@@ -4980,4 +4980,7 @@
     <string name="mtb_imba">iMBA</string>
     <string name="mtb_imba_full">Asosiasi Sepeda Gunung Internasional</string>
     <string name="mtb_segment_classification">Klasifikasi segmen</string>
+    <string name="rendering_attr_weatherCloudContours_name">Garis isometris awan</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Garis isometris curah hujan</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Garis isometris embusan angin</string>
 </resources>
