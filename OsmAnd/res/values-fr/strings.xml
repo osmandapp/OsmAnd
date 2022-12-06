@@ -4845,7 +4845,7 @@
     <string name="shared_string_contours">Lignes de niveau</string>
     <string name="shared_string_layers">Couches</string>
     <string name="empty_screen_weather_pressure_layer">Activez pour afficher la couche de pression atmosphérique sur la carte.</string>
-    <string name="empty_screen_weather_contours">Activez pour afficher les lignes d\'iso-niveau météorologiques sur la carte.</string>
+    <string name="empty_screen_weather_contours">Activez pour afficher les lignes d\'iso-niveaux météorologiques sur la carte.</string>
     <string name="empty_screen_weather_clouds_layer">Activez pour afficher la couche de couverture nuageuse sur la carte.</string>
     <string name="empty_screen_weather_wind_layer">Activez pour afficher la couche des vents sur la carte.</string>
     <string name="wind_widget_desc">Affiche la vitesse du vent pour le centre actuel de la carte.</string>
@@ -4932,5 +4932,5 @@
 \n- Des widgets basés sur la position
 \n- Les cartes d\'isobares et d\'isothermes
 \n
-\nLes données météorologiques sont fournies par le modèle GFS ( https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
 </resources>

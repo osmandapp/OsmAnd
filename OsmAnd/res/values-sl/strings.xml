@@ -337,7 +337,7 @@
     <string name="osmand_parking_position_description">Položaj parkiranega vozila: %1$s</string>
     <string name="osmand_parking_position_description_add">Prevzem vozila ob:</string>
     <string name="osmand_parking_position_name">Mesto parkiranja</string>
-    <string name="osmand_parking_plugin_description">Omogoči za nastavitev točke na zemljevidu, kjer si pustil svoj avtomobil, in obvesti koledar, ko se začne čas parkiranja. Vtičnik pomaga pri spremljanju časa parkiranja in lokacije tvojega avtomobila. Če želiš postaviti oznako, izberite kraj na zemljevidu, nato pojdi v možnosti Akcije in pritisni »Dodaj parkirišče«.</string>
+    <string name="osmand_parking_plugin_description">Označi, kje je tvoj avto parkiran, in obvesti koledar, kdaj se izteče parkirni števec. Če želiš dodati oznako, izberi mesto na zemljevidu, pojdi na »Dejanja« in tapni »Dodaj parkirišče«.</string>
     <string name="osmand_parking_plugin_name">Parkirno mesto</string>
     <string name="context_menu_item_add_parking_point">Označi kot mesto parkiranja</string>
     <string name="context_menu_item_delete_parking_point">Izbriši označbo parkirnega mesta</string>
@@ -372,7 +372,7 @@
     <string name="closing_changeset">Zapiranje paketa sprememb …</string>
     <string name="show_poi_over_map_description">Prikaži nazadnje uporabljeno POI prekrivanje.</string>
     <string name="prefs_plugins_descr">Vstavki omogočajo podporo za dodatne možnosti in nastavitve programa.</string>
-    <string name="osmand_development_plugin_description">Omogoča konfiguracijo programa OsmAnd za testiranje: simuliranje poti za navigacijo, preverjanje zmogljivosti upodabljanja zaslona, itd. Vtičnik ni potreben za običajno uporabo aplikacije.</string>
+    <string name="osmand_development_plugin_description">Zagotavlja funkcionalnost za testiranje in odpravljanje napak OsmAnd: simulacija poti za navigacijo, spremljanje upodabljanja zaslona, preverjanje delovanja itd. Ta vtičnik ni potreben za običajno uporabo aplikacije.</string>
     <string name="osmand_accessibility_description">Omogoča, da so funkcije dostopnosti naprave neposredno na voljo v aplikaciji OsmAnd. Podpira npr. prilagajanje hitrosti govora za pretvorbo besedila-v-govor, nastavitev navigacije D-pad, uporabo sledilne krogle za nadzor povečave ali povratne informacije besedila-v-govor, na primer za samodejno napoved trenutnega položaja.</string>
     <string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v ozadnjem načinu (izklopljen zaslon) in občasno uporabo GPS.</string>
     <string name="shared_string_close">Zapri</string>
@@ -489,14 +489,14 @@
     <string name="map_online_data_descr">Uporabi spletne zemljevide (prejete datoteke so shranjene na pomnilniški kartici).</string>
     <string name="shared_string_online_maps">Spletni zemljevidi</string>
     <string name="online_map_settings_descr">Izberi vir spletnih ali shranjenih ploščic zemljevida.</string>
-    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), od privzetih OpenStreetMap (kot npr. Mapnik), do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki, senčenje terena, itd.
+    <string name="osmand_rastermaps_plugin_description">Omogoča dostop do različnih vrst spletnih zemljevidov (rastrski ali s ploščicami), kot so vnaprej upodobljene ploščice OSM, satelitske slik ter posebni prekrivni zemljevidi, kot so vremenski, klimatski, geološki, senčenje terena, itd.
 \n
-\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podlaga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd vektorski zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
+\n Vsi ti zemljevidi so lahko prikazani kot osnovni zemljevidi, ali pa so podlaga oziroma prekrivni zemljevid drugim standardnim zemljevidom (kot so OsmAnd vektorski zemljevidi brez povezave). Določene elemente vektorskih zemljevidov OsmAnd lahko prek menija »Nastavitev zemljevida« skriješ, da je zemljevid v podlagi bolj viden.
 \n
-\nPrenesi zemljevide ploščic neposredno ali jih kopiraj v podatkovno mapo OsmAnd, kot datoteke podatkovne zbirke SQLite, z enim od številnih orodij tretjih oseb, za pripravo zemljevidov.</string>
-    <string name="osm_editing_plugin_description">Omogoča ti, da prispevaš v OpenStreetMap, globalno skupnost, katere cilj je ustvariti celovit zemljevid sveta, in vsakemu uporabniku zagotoviti najnovejše odprtokodne podatke.
+\n Prenesi zemljevide ploščic neposredno ali jih kopiraj v podatkovno mapo OsmAnd, kot datoteke podatkovne zbirke SQLite, z enim od številnih orodij tretjih oseb, za pripravo zemljevidov.</string>
+    <string name="osm_editing_plugin_description">Prispevaj v OpenStreetMap, globalno skupnost, ki vzdržuje celovit zemljevid sveta in vsakemu uporabniku zagotavlja posodobljene odprtokodne podatke.
 \n
-\nNavodila za urejanje zemljevida najdeš na spletni strani https://osmand.net/docs/user/plugins/osm-editing</string>
+\nNavodila za urejanje zemljevida najdeš na spletni strani https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
     <string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
     <string name="native_rendering">Izvorno izrisovanje</string>
@@ -874,9 +874,11 @@
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
     <string name="index_srtm_ele">Izris izohips</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti obliko zemeljske površine, pri čemer upoštevajo ukrivljenost, skrajnosti, strmino, enako visoke točke in drugo. Topografske informacije na zemljevidu so lahko predstavljene z naklonom, izohipsami za vzpon in spust ter barvo odstopanja kota naklona od ravnine. Podatki iz SRTM in ASTER.
+    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego zemlje in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine.
 \n
-\nKako - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nOsnovni podatki izvirajo iz SRTM in ASTER.
+\n
+\nNadaljnje branje na http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
@@ -1296,9 +1298,9 @@
     <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC.</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti s pripomočkom za beleženje GPX na zemljevidu.</string>
-    <string name="record_plugin_description">Omogoča zapisovanje, shranjevanje in analizo podatkov o treningu ali gibanju, kot so hitrost, vzponi, spusti ali relief poti, ki jih lahko nato ponovno uporabiš, izboljšaš, dopolniš ali deliš s prijatelji.
+    <string name="record_plugin_description">Posnemi svoja potovanja ali treninge in analizirajte podatke v smislu hitrosti, skupnih vzponov in spustov, višinskega profila itd. Posnete poti je mogoče arhivirati, deliti s prijatelji, urejati in naknadno obdelati.
 \n
-\nKako - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nNadaljnje branje na https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Izris stez po sledeh OSMC.</string>
     <string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
     <string name="traffic_warning_border_control">Mejni prehod</string>
@@ -1514,10 +1516,10 @@
 \nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso zahtevani.
 \n
 \nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti, ali pa s spreminjanjem vrste prikaza zemljevida.</string>
-    <string name="plugin_ski_descr">Zasnovan za navigacijo na lokacijah za zimske športe. Oglej si smučarske proge, oznake smučarskih vlečnic in barvne črte, ki označujejo zahtevnost posamezne proge. Za uporabo, ko si vključil vtičnik, pojdi na Konfiguracija zemljevida in izberi vrsto zemljevida »Zima in smučanje«.</string>
-    <string name="plugin_nautical_descr">Vklopi, da zemljevid obogatiš z informacijami o plovnih poteh, navigacijskih lučeh, nevarnih območjih, območjih, kjer je dovoljeno ali prepovedano jadrati ali se privezati, itd. Za uporabo prenesi Navtične zemljevide in omogoči »Navtični zemljevid« v vrstici Konfiguracija zemljevida.
+    <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Konfiguriraj zemljevid« ter izberite slog zemljevida »Zima in smučanje«.</string>
+    <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Konfiguriraj zemljevid«.
 \n
-\nKako - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nNadaljnje branje na https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
     <string name="routing_attr_height_name">Omejitev višine</string>
     <string name="routing_attr_height_description">Navedi dovoljeno višino vozila na poteh.</string>
@@ -2259,7 +2261,7 @@
     <string name="mapillary_action_descr">Deli svoje posnetke na ravni ulice prek aplikacije Mapillary.</string>
     <string name="mapillary_widget_descr">Omogoča hitre prispevke v Mapillary.</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
-    <string name="plugin_mapillary_descr">Prinaša poglede z ulice. Kjer manjkajo posnetki, jih lahko dodaš sam/a, tako da jih lahko uporabijo tudi drugi. Če želiš omogočiti sloj Mapillary, v meniju Konfiguracija zemljevida vklopi možnost »Slike na ravni ulice«.</string>
+    <string name="plugin_mapillary_descr">Posnetki pogledov z ravni ulice. Prispevaš lahko tudi sam/a. Če si želiš ogledati obstoječe podatke kot sloj zemljevida, v meniju »Konfiguriraj zemljevid« vklopi »Posnetke na ravni ulice«.</string>
     <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali lahko za to potovanje uporabljamo tudi zasebne ceste\?</string>
     <string name="quick_action_showhide_osmbugs_descr">Gumb za prikaz ali skrivanje OSM opomb na zemljevidu.</string>
     <string name="animate_my_location">Animiraj trenutno mesto</string>
@@ -2280,7 +2282,7 @@
     <string name="hide_from_zoom_level">Končaj prikazovati od ravni povečave</string>
     <string name="srtm_menu_download_descr">Prenesi zemljevid »Izohipse« za to območje.</string>
     <string name="srtm_purchase_header">Za prikaz reliefa na zemljevidu, kupi in namesti vtičnik »Izohipse«.</string>
-    <string name="show_from_zoom_level">Začni prikazovati od ravni povečave</string>
+    <string name="show_from_zoom_level">Prikazovanje se začne na ravni povečave</string>
     <string name="display_zoom_level">Raven približanja: %1$s</string>
     <string name="distance_moving">Razdalja je popravljena</string>
     <string name="mapillary_image">Slika Mapillary</string>
@@ -3814,7 +3816,7 @@
     <string name="backup_error_user_is_already_registered">Ta e-poštni naslov se že uporablja v drugem računu</string>
     <string name="shared_string_discussion">Razprava</string>
     <string name="purchases_feature_desc_combined_wiki">Razišči članke iz Wikipedije na poti, brez internetne povezave. Podatki brez povezave, razdeljeni po državah in na voljo v vseh jezikih.</string>
-    <string name="purchases_feature_desc_wikipedia">Z Wikipedijo brez povezave na potovanju lahko bolje spoznaš kraje, ki jih obiskuješ. Na voljo je brez povezave in neposredno na zemljevidu prikazuje članke Wikipedije v povezavi z zanimivostmi. Ne pozabi prenesti zemljevidov Wikipedije za izbrano regijo.</string>
+    <string name="purchases_feature_desc_wikipedia">Zagotavlja vse članke Wikipedije, povezane s kraji, brez povezave, kar ti pomaga izvedeti več o krajih, ki jih obiščeš na svojem potovanju, s preprostim dotikom zemljevida. Ne pozabi prenesti zemljevidov Wikipedije za posamezne regije.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Pridobi neomejeno število prenosov za vse celine in regije zemljevidov brez povezave.</string>
     <string name="restore_complete">Obnovljeno</string>
     <string name="backup_version_history">Zgodovina različic</string>
@@ -3885,7 +3887,7 @@
     <string name="next_billing_date">Datum naslednjega obračuna: %1$s</string>
     <string name="monthly_subscription">Mesečna naročnina</string>
     <string name="empty_purchases_description">Če tvoji nakupi niso prikazani tukaj, tapni na »%1$s« ali se obrni na našo ekipo za podporo.</string>
-    <string name="routing_attr_height_obstacles_description">Z načrtovanjem poti bi se lahko izognili močnim vzponom.</string>
+    <string name="routing_attr_height_obstacles_description">Predvideni potovalni čas bo odražal vpliv višinske razlike. Z nastavitvami usmerjanja se lahko izogneš strmim vzponom:</string>
     <string name="quick_action_add_gpx">Dodaj točko poti</string>
     <string name="context_menu_item_add_waypoint">Dodaj točko sledi</string>
     <string name="shared_string_gpx_files">Sledi</string>
@@ -4007,9 +4009,9 @@
     <string name="osm_edit_comment_note">Komentiraj OSM opombo</string>
     <string name="gpx_upload_trackable_visibility_descr">»Sledljivo« pomeni, da se sled ne prikaže v nobenem javnem seznamu, ampak se prikažejo samo obdelane točke sledi s časovnimi žigi (ki jih ni mogoče neposredno povezati s tabo) iz javnega API-ja GPS.</string>
     <string name="shared_string_search_history">Zgodovina iskanja</string>
-    <string name="open_place_reviews_plugin_description">Omogoča, da prispevaš k projektu OpenPlaceReviews. Na primer fotografije, ocene, povezave o javnih mestih, kot so restavracije, hoteli, muzeji in točke poti.
+    <string name="open_place_reviews_plugin_description">Prispevaj k projektu OpenPlaceReviews, kot npr. fotografije, ocene, povezave o javnih mestih, kot so restavracije, hoteli, ali muzeji.
 \n
-\nNavodila za prispevanje najdeš na našem spletnem mestu - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nNavodila za prispevanje najdeš na naši spletni strani https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="routing_attr_allow_intermittent_name">Omogoči občasne vodotoke</string>
     <string name="app_mode_motorboat">Motorni čoln</string>
     <string name="edit_online_routing_engine">Urejanje spletnega usmerjevalnika</string>
@@ -4073,29 +4075,29 @@
     <string name="enter_text_separated">Vnesi oznake, ločene z vejico.</string>
     <string name="contour_lines_thanks">Hvala za nakup pripomočka »Izohipse«</string>
     <string name="back_to_editing">Nazaj na urejanje</string>
-    <string name="elevation_profile_widget_desc">Pripomoček prikazuje profil nadmorske višine in naklona trenutne poti.</string>
-    <string name="parking_widget_desc">Pripomoček, ki prikazuje razdaljo od središča zaslona do parkirišča.</string>
-    <string name="mapillary_widget_desc">Pripomoček, ki omogoča hiter dostop do aplikacije Mapillary za dodajanje slik na ravni ulice.</string>
+    <string name="elevation_profile_widget_desc">Prikazuje profil nadmorske višine in naklona trenutne poti.</string>
+    <string name="parking_widget_desc">Prikazuje razdaljo od središča zaslona do tvojega parkirnega mesta.</string>
+    <string name="mapillary_widget_desc">Omogoča hiter dostop do aplikacije Mapillary za dodajanje slik na ravni ulice.</string>
     <string name="av_notes_choose_action_widget_desc">Izberite dejanje.</string>
-    <string name="radius_rules_widget_desc">Orodje ravnilo polmera pomaga določiti polmer okoli izbrane točke na zemljevidu s prikazovanjem krogov-razdalje na zemljevidu.</string>
-    <string name="current_time_widget_desc">Prikazuje trenutni čas iz tvoje naprave.</string>
+    <string name="radius_rules_widget_desc">Orodje ravnilo polmera prikazuje kroge razdalj okoli izbrane točke na zemljevidu.</string>
+    <string name="current_time_widget_desc">Prikazuje trenutni čas, vzet iz tvoje naprave.</string>
     <string name="battery_widget_desc">Prikazuje nivo baterije v napravi.</string>
-    <string name="gps_info_widget_desc">Prikazuje število satelitov, ki jih naprava sprejema in uporablja v tem trenutku.</string>
+    <string name="gps_info_widget_desc">Prikazuje število trenutno vidnih in uporabljenih satelitov.</string>
     <string name="altitude_widget_desc">Prikazuje nadmorsko višino trenutne zemljepisne lege.</string>
     <string name="max_speed_widget_desc">Prikazuje omejitev hitrosti na cesti, kjer trenutno voziš.</string>
     <string name="current_speed_widget_desc">Prikazuje trenutno hitrost po GPS-u.</string>
     <string name="time_to_go_desc">Čas v minutah ali urah, potreben za dosego cilja.</string>
     <string name="arrival_time_widget_desc">Čas prihoda na ciljno točko.</string>
-    <string name="lanes_widgets_desc">Gradnik Pasovi prikazuje trenutno razporeditev cestnih pasov in označuje pasove za vožnjo z aktivno navigacijo.</string>
+    <string name="lanes_widgets_desc">Prikazuje trenutno razporeditev cestnih pasov in izpostavi tiste, ki jih je treba izbrati med navigacijo.</string>
     <string name="coordinates_widget_desc">Prikazuje geografske koordinate trenutne zemljepisne lege.</string>
-    <string name="audio_video_notes_desc">Gradnik omogoča hiter dostop do začetka/ustavitve snemanja (zvoka, videoposnetka ali fotografije).</string>
+    <string name="audio_video_notes_desc">Omogoča hiter dostop do začetka/ustavitve snemanja zvočnega, video ali fotografskega zapisa.</string>
     <string name="navigation_points">Navigacijske točke</string>
     <string name="route_maneuvers_desc">Navigacijski gradniki so omogočeni med navigacijo in prikazujejo informacije, kot so razdalja, čas prihoda ali odhoda, naslednji zavoji, smer, ime trenutne ulice, informacije o voznih pasovih, omejitve hitrosti, opozorila o približevanju, POI, točke poti.</string>
     <string name="route_maneuvers">Manevri na poti</string>
     <string name="get_altitude_information">Pridobi informacije o nadmorski višini</string>
     <string name="calculating_altitude">Izračunavanje nadmorske višine</string>
     <string name="calculate_online">Izračunavanje na spletu</string>
-    <string name="track_attach_to_the_roads_descr">Proga bo na cesto pritrjena s pomočjo zemljevidov brez povezave, geometrija proge se bo spremenila.</string>
+    <string name="track_attach_to_the_roads_descr">Sled bo na cesto pritrjena s pomočjo zemljevidov brez povezave, geometrija sledi se bo spremenila.</string>
     <string name="no_altitude_data">Ni podatkov o nadmorski višini</string>
     <string name="shared_string_speed">Hitrost</string>
     <string name="app_mode_mountain_bicycle">Gorsko kolo</string>
@@ -4126,15 +4128,15 @@
     <string name="follow_track">Sledi sledi</string>
     <string name="route_between_points_add_track_desc">Izberi datoteko sledi, v katero želiš dodati nov segment.</string>
     <string name="parking_positions">Parkirna mesta</string>
-    <string name="bearing_secondary_desc">Obliko prikazanih datumov lahko spremeniš v: %1$s - %2$s - %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Format koordinat lahko spremeniš v %1$s - %2$s - %3$s.</string>
+    <string name="bearing_secondary_desc">Obliko podatkov lahko spremeniš v: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Obliko koordinat lahko spremeniš v %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Del vtičnika %1$s.</string>
     <string name="magnetic_bearing_widget_desc">Kot med magnetnim severom in ciljno točko, opazovano s trenutne lokacije.</string>
-    <string name="map_markers_bar_widget_desc">V gradniku zgornje vrstice lahko vidiš razdaljo in smer do označbe od trenutne lokacije. Mogoče je nastaviti, da se v gradniku prikažeta 1 ali 2 zgornji označbi.</string>
-    <string name="street_name_widget_desc">Gradnik za imena ulic prikazuje trenutno ime ulice z neposredno lokacijsko puščico ali ime naslednje ulice z manevrom, ki ga je treba dokončati.</string>
+    <string name="map_markers_bar_widget_desc">Gradnik zgornje vrstice prikazuje razdaljo in smer do oznake od trenutne lokacije. Gradnik lahko nastaviš tako, da prikazuje 1 ali 2 oznaki.</string>
+    <string name="street_name_widget_desc">Gradnik za imena ulic prikazuje trenutno ime ulice z neposredno lokacijsko puščico ali ime naslednje ulice s puščico, ki označuje prihajajoči zavoj.</string>
     <string name="shared_string_widget">Gradnik</string>
-    <string name="bearing_desc">Gradnik za smer prikazuje absolutno ali relativno smer do cilja v kotnih enotah (stopinje 180, stopinje 360, miliradiani).</string>
-    <string name="navigation_points_desc">Navigacijski gradniki so omogočeni med navigacijo in prikazujejo informacije, kot so razdalja, čas prihoda ali odhoda, naslednji zavoji, smer, ime trenutne ulice, informacije o voznih pasovih, omejitve hitrosti, opozorila o približevanju, POI, točke poti.</string>
+    <string name="bearing_desc">Prikazuje absolutno ali relativno usmeritev do cilja v kotnih enotah (v načinu 180 stopinj, 360 stopinj ali miliradianov).</string>
+    <string name="navigation_points_desc">Navigacijski gradniki so omogočeni med navigacijo in prikazujejo informacije, kot so razdalja, čas prihoda ali preostali čas, naslednji zavoji, smer, ime trenutne/naslednje ulice, informacije o voznih pasovih, omejitve hitrosti, opozorila o približevanju, POI, točke poti.</string>
     <string name="calculate_altitude">Izračunaj nadmorsko višino</string>
     <string name="osm_edits_view_descr">Oglej si vse svoje še nenaložene popravke ali napake OSM v %1$s. Že naložene spremembe ne bodo več prikazane.</string>
     <string name="get_altitude_data">Pridobi podatke o nadmorski višini</string>
@@ -4239,7 +4241,9 @@
     <string name="turn_screen_on_power_button_disabled">Onemogočeno. Zahteva »Ohrani zaslon vklopljen« pod »Časovna omejitev po prebujanju«.</string>
     <string name="system_screen_timeout">Uporabi sistemsko časovno omejitev</string>
     <string name="keep_screen_on">Zaslon naj bo vklopen</string>
-    <string name="gpx_parse_error">OsmAnd GPX ni dobro oblikovan, za nadaljnjo preiskavo obrni se na skupino za podporo.</string>
+    <string name="gpx_parse_error">Ugotovljene težave z datoteko GPX.
+\n
+\nZa preiskavo se lahko obrneš na OsmAnd podporo.</string>
     <string name="profiles_for_action_not_found">Takšnih profilov ni bilo mogoče najti.</string>
     <string name="lenght_limit_description">Navedi dolžino svojega vozila, ker za dolga vozila lahko veljajo nekatere omejitve na poti.</string>
     <string name="weight_limit_description">Navedi težo svojega vozila, ker za težka vozila lahko veljajo nekatere omejitve na poti.</string>
@@ -4539,10 +4543,10 @@
     <string name="lang_ba">Baškirščina</string>
     <string name="lang_bar">Bavarščina</string>
     <string name="lang_ce">Čečenščina</string>
-    <string name="monitoring_min_distance_descr_recommendation">Priporočilo: nastavitev 5 metrov lahko dobro deluje, če ne želiš zajemati drobnih podrobnosti in ne želiš izrecno zajemati podatkov med mirovanjem.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Priporočilo: če ne želiš beležiti manjših podrobnosti o poti in ne potrebuješ dodatnih podatkov o času počitka, nastavi premik na 5 metrov.</string>
     <string name="live_monitoring_time_buffer">Časovni medpomnilnik</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Za usmerjanje raje uporabi neasfaltirane kot asfaltirane ceste.</string>
-    <string name="monitoring_min_distance_descr">Ta filter preprečuje snemanje podvojenih točk, kjer je morda prišlo do premalo dejanskega gibanja. Tako sledi, ki niso naknadno obdelane, zgledajo lepše.</string>
+    <string name="monitoring_min_distance_descr">Če vklopiš ta filter, se lahko izogneš dodatnemu snemanju podatkov, kadar gibanja skoraj ni zaznati. Izboljša tudi prostorski videz sledi brez nadaljnje obdelave.</string>
     <string name="monitoring_min_distance_descr_side_effect">Neželeni učinki: obdobja mirovanja se sploh ne beležijo ali pa se vsakokrat shrani le ena točka. Majhni (resnični) premiki (npr. stranka pot, da označiš možen odcep na tvojem potovanju) se lahko izloči. Končna datoteka vsebuje manj informacij za naknadno obdelavo in ima slabšo statistiko, saj filtrira očitno odvečne točke v času snemanja, hkrati pa potencialno ohranja artefakte, ki jih povzroča slab sprejem ali učinki nabora GPS čipov.</string>
     <string name="track_storage_directory">Mapa za shranjevanje sledi</string>
     <string name="shared_string_osmand_usage">Uporaba OsmAnd</string>
@@ -4684,10 +4688,10 @@
     <string name="live_update_frequency_hour_variant">Posodobitve zemljevidov se bodo preverjale vsako uro.</string>
     <string name="live_update_frequency_week_variant">Posodobitve zemljevidov se bodo preverjale tedensko.</string>
     <string name="live_update_frequency_day_variant">Posodobitve zemljevidov se bodo preverjale dnevno.</string>
-    <string name="calculate_online_altitude_descr">Izračunaj nadmorsko višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo za popravek nadmorske višine.</string>
+    <string name="calculate_online_altitude_descr">Izračunaj višino na spletu na strežnikih OsmAnd na podlagi satelitskih posnetkov in digitalnih modelov višin. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo za popravek višine.</string>
     <string name="lang_ckb">Soranska kurdščina</string>
     <string name="next_live_update_time">Naslednja posodobitev ob %1$s.</string>
-    <string name="altitude_correction">Popravek nadmorske višine</string>
+    <string name="altitude_correction">Popravek višine</string>
     <string name="no_altitude_data_desc">Svojo sled lahko pritrdiš na ceste in tako dobiš podatke %1$s, ali jih izračunaš prek spleta.</string>
     <string name="includes_osm_changes_until">Vključuje spremembe OSM, narejene do %1$s.</string>
     <string name="updated_map_time">Posodobljeno: %1$s.</string>
@@ -4704,8 +4708,8 @@
     <string name="goods_delivery_desc_3">Velja samo za dostavna vozila, ki ne presegajo 3,5 tone.</string>
     <string name="routing_attr_goods_restrictions_name">Dostava blaga</string>
     <string name="download_complete">Prenos končan</string>
-    <string name="accessibility_2d_view_off">2.5D pogled Izklopljen</string>
-    <string name="accessibility_2d_view_on">2.5D pogled Vklopljen</string>
+    <string name="accessibility_2d_view_off">2.5D pogled izklopljen</string>
+    <string name="accessibility_2d_view_on">2.5D pogled vklopljen</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikaži namenske poti za gorsko kolesarjenje.</string>
     <string name="auto_25_chars_route_tl_kr">Zavij levo in drži se desne</string>
     <string name="auto_25_chars_route_tr_kl">Zavij desno in drži se leve</string>
@@ -4753,7 +4757,7 @@
     <string name="shared_string_only_missing">Samo manjkajoče</string>
     <string name="download_tiles">Prenesi ploščice</string>
     <string name="average_speed_skip_stops_desc">Hitrost manjša od %1$s se upošteva in vpliva na povprečno hitrost.</string>
-    <string name="attach_roads_descr">Približaj svojo sled s potjo na zemljevidu brez povezave. Tako bodo na voljo popravljene vrednosti nadmorske višine, podrobnosti o cestah in ovinki, uporabljeni med navigacijo.</string>
+    <string name="attach_roads_descr">Približaj svojo sled dovoljenim cestam za pot med točkami, da dobiš natančna navodila za zavijanje ter lastnosti poti.</string>
     <string name="included_in_your_current_plan">Vključeno v tvoji trenutni naročnini na »%1$s«</string>
     <string name="available_as_part_of_subscription_plan">Na voljo kot del naročnine na %1$s.</string>
     <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>
