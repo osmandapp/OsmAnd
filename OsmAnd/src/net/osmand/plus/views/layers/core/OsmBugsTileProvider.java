@@ -79,6 +79,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		@Override
 		public SWIGTYPE_p_sk_spT_SkImage_const_t getImageBitmap(boolean isFullSize) {
 			Bitmap bitmap = null;
+			if (!osmNote.isOpened() && !showClosed) {
+				return SwigUtilities.nullSkImage();
+			}
 			if (isFullSize) {
 				int iconId;
 				int backgroundColorRes;
@@ -95,18 +98,16 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 						backgroundType);
 				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 			} else {
-				if (osmNote.isOpened() || showClosed) {
-					int backgroundColorRes;
-					if (osmNote.isOpened()) {
-						backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
-					} else {
-						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
-					}
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
-							ContextCompat.getColor(ctx, backgroundColorRes), true,
-							false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
-					bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
+				int backgroundColorRes;
+				if (osmNote.isOpened()) {
+					backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
+				} else {
+					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
+				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+						ContextCompat.getColor(ctx, backgroundColorRes), true,
+						false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
+				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
 			}
 			return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
 		}

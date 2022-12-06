@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -956,16 +955,16 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		}
 
 		@Override
-		public void updateToolbar(TopToolbarView view) {
-			super.updateToolbar(view);
-			View shadow = view.getShadowView();
+		public void updateToolbar(@NonNull TopToolbarView toolbarView) {
+			super.updateToolbar(toolbarView);
+			View shadow = toolbarView.getShadowView();
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
 		}
 
 		@Override
-		public int getStatusBarColor(Context context, boolean night) {
+		public int getStatusBarColor(Context context, boolean nightMode) {
 			return NO_COLOR;
 		}
 	}

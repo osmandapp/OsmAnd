@@ -847,13 +847,13 @@ public class TrackDetailsMenu {
 		}
 
 		@Override
-		public void updateToolbar(TopToolbarView view) {
-			super.updateToolbar(view);
-			AndroidUiHelper.updateVisibility(view.getShadowView(), false);
+		public void updateToolbar(@NonNull TopToolbarView toolbarView) {
+			super.updateToolbar(toolbarView);
+			AndroidUiHelper.updateVisibility(toolbarView.getShadowView(), false);
 		}
 
 		@Override
-		public int getStatusBarColor(Context context, boolean night) {
+		public int getStatusBarColor(Context context, boolean nightMode) {
 			return NO_COLOR;
 		}
 	}

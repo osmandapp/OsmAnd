@@ -13,6 +13,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_TRACKS_ID = DRAWER_ITEM_ID_SCHEME + "tracks";
 	String DRAWER_AV_NOTES_ID = DRAWER_ITEM_ID_SCHEME + "av_notes";
 	String DRAWER_OSM_EDITS_ID = DRAWER_ITEM_ID_SCHEME + "osm_edits";
+	String DRAWER_WEATHER_FORECAST_ID = DRAWER_ITEM_ID_SCHEME + "weather_forecast";
 	String DRAWER_BACKUP_RESTORE_ID = DRAWER_ITEM_ID_SCHEME + "backup_restore";
 	String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
 	String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";

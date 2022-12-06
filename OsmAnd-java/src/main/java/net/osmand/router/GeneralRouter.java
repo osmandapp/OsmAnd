@@ -790,8 +790,8 @@ public class GeneralRouter implements VehicleRouter {
 				paramContext = new ParameterContext();
 				paramContext.vars = params;
 			}
-			for(RouteAttributeEvalRule rt : original.rules){
-				if(checkParameter(rt)){
+			for (RouteAttributeEvalRule rt : original.rules) {
+				if (checkParameter(rt)) {
 					rules.add(rt);
 				}
 			}

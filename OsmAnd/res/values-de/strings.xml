@@ -1237,7 +1237,7 @@
     <string name="lang_af">Afrikaans</string>
     <string name="lang_al">Albanisch</string>
     <string name="lang_ar">Arabisch</string>
-    <string name="lang_be">Weißrussisch</string>
+    <string name="lang_be">Belarussisch</string>
     <string name="lang_bg">Bulgarisch</string>
     <string name="lang_bs">Bosnisch</string>
     <string name="lang_ca">Katalanisch</string>
@@ -1453,7 +1453,7 @@
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
-    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \"Nautische Karte\" unter \"Karte konfigurieren\".
+    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \'Nautisch\' unter \'Menü → Karte konfigurieren → Kartendarstellung\'.
 \n
 \nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
@@ -1698,7 +1698,7 @@
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
     <string name="nm">sm</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">min/m</string>
+    <string name="min_mile">min/mile</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
@@ -1963,7 +1963,7 @@
     <string name="change_markers_position">Position der Markierung ändern</string>
     <string name="current_track">Aktueller Track</string>
     <string name="lang_es_us">Spanisch (Amerikanisch)</string>
-    <string name="lang_be_by">Weißrussisch (Lateinische Schrift)</string>
+    <string name="lang_be_by">Belarussisch (Lateinische Schrift)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Englisch (Vereinigtes Königreich)</string>
     <string name="lang_ast">Asturisch</string>
@@ -3421,7 +3421,7 @@
     <string name="profile_type_custom_string">Benutzerdefiniertes Profil</string>
     <string name="shared_string_angle_param">Winkel: %s°</string>
     <string name="shared_string_angle">Winkel</string>
-    <string name="recalc_angle_dialog_descr">Zusätzliches gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
+    <string name="recalc_angle_dialog_descr">Ein gerades Segment zwischen meinem Standort und berechneter Route wird angezeigt, bis die Route neu berechnet wird</string>
     <string name="recalc_angle_dialog_title">Minimaler Winkel zwischen meinem Standort und der Route</string>
     <string name="shared_string_quick_actions">Schnellaktionen</string>
     <string name="shared_string_profiles">Profile</string>
@@ -3491,7 +3491,7 @@
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
     <string name="shared_string_all_languages">Alle Sprachen</string>
-    <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt um Wikipedia-POIs auf der Karte anzuzeigen.</string>
+    <string name="wiki_menu_download_descr">Zusätzliche Karten werden benötigt, um Wikipedia-POIs auf der Karte anzuzeigen.</string>
     <string name="developer_plugin">Entwickler-Plugin</string>
     <string name="ui_customization">Anpassung der Benutzeroberfläche</string>
     <string name="context_menu_actions">Aktionen im Kontextmenü</string>
@@ -4535,8 +4535,8 @@
     <string name="estimated_download_size">Geschätzte Downloadgröße</string>
     <string name="number_of_tiles">Anzahl der Kacheln</string>
     <string name="move_map_to_select_area">Bewegen Sie die Karte, um den gewünschten Bereich auszuwählen.</string>
-    <string name="rendering_attr_showFitnessTrails_description">Fitness Parcours anzeigen</string>
-    <string name="rendering_attr_showFitnessTrails_name">Fitness Parcours</string>
+    <string name="rendering_attr_showFitnessTrails_description">Fitness-Parcours anzeigen</string>
+    <string name="rendering_attr_showFitnessTrails_name">Fitness-Parcours</string>
     <string name="rendering_attr_showRunningRoutes_name">Laufrouten</string>
     <string name="rendering_attr_showRunningRoutes_description">Laufrouten anzeigen</string>
     <string name="routeInfo_horse_scale_name">Schwierigkeitsgrad von Reitwegen</string>
@@ -4721,8 +4721,8 @@
     <string name="marker_2nd">Zweite Markierung</string>
     <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
     <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
-    <string name="accessibility_2d_view_off">2,5-D-Ansicht aus</string>
-    <string name="accessibility_2d_view_on">2,5-D-Ansicht an</string>
+    <string name="accessibility_2d_view_off">2,5D-Ansicht aus</string>
+    <string name="accessibility_2d_view_on">2,5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>
     <string name="auto_25_chars_route_tl_kr">Links abbiegen und rechts halten</string>
     <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
@@ -4747,7 +4747,7 @@
     <string name="rendering_attr_depthContourColorScheme_description">Farbschema der Tiefenlinien</string>
     <string name="rendering_attr_depthContourWidth_description">Breite der Tiefenlinie</string>
     <string name="distance_to_destination_widget_desc">Das Widget zeigt die verbleibende Entfernung zum letzten Zielpunkt an.</string>
-    <string name="second_next_turn_widget_desc">Das Widget zeigt Informationen über Ihre zweitnächste Abbiegung an, die aktiviert wird, wenn sich die Abbiegung in unmittelbarer Nähe befindet.</string>
+    <string name="second_next_turn_widget_desc">Das Widget zeigt Informationen über Ihre übernächste Abbiegung an, die aktiviert wird, wenn sich die Abbiegung in unmittelbarer Nähe befindet.</string>
     <string name="next_turn_widget_desc">Das Widget zeigt Informationen zu Ihrer nächsten Abbiegung an, mit einem Bild des Manövers und entsprechender Entfernungsangabe.</string>
     <string name="widget_with_dot">Widget.</string>
     <string name="compass_visible_if_map_rotated_desc">Ausgeblendet, wenn Norden oben ist</string>
@@ -4853,7 +4853,7 @@
     <string name="speak_gps_signal_status">GPS-Signalverlust und Wiederherstellung ankündigen</string>
     <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
     <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
-    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5-D-Ansicht
+    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5D-Ansicht
 \n
 \n • Reibungslose Animation von Ortswechseln während der Fahrt
 \n
@@ -4869,7 +4869,7 @@
 \n
 \n • Reorganisierte Liste \"Seekarten\".
 \n
-\n • Unterstützung für ANT+-Sensoren hinzugefügt
+\n • Unterstützung für ANT+ Sensoren hinzugefügt
 \n
 \n • Option zum Deaktivieren der Download-UUID hinzugefügt
 \n

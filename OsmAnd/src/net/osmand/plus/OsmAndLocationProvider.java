@@ -305,6 +305,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	@SuppressLint("MissingPermission")
 	private void registerGpsStatusListener(@NonNull LocationManager service) {
+		if (!hasFineLocationPermission(app)) {
+			return;
+		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 			gpsStatusListener = new GnssStatus.Callback() {
 
@@ -324,7 +327,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
 					boolean fixed = false;
 					int u = 0;
-					int	satCount = status.getSatelliteCount();
+					int satCount = status.getSatelliteCount();
 					for (int i = 0; i < satCount; i++) {
 						if (status.usedInFix(i)) {
 							u++;
@@ -341,6 +344,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else {
 			gpsStatusListener = new Listener() {
 				private GpsStatus gpsStatus;
+
 				@Override
 				public void onGpsStatusChanged(int event) {
 					gpsStatus = service.getGpsStatus(gpsStatus);
@@ -351,7 +355,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			service.addGpsStatusListener((Listener) gpsStatusListener);
 		}
 	}
-	
+
 	private void updateGPSInfo(@Nullable GpsStatus s) {
 		boolean fixed = false;
 		int n = 0;
@@ -989,12 +993,20 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return true;
 	}
 
-	public static boolean isLocationPermissionAvailable(Context context) {
-		boolean accessFineLocation = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-				== PackageManager.PERMISSION_GRANTED;
-		boolean accessCoarseLocation = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
-				== PackageManager.PERMISSION_GRANTED;
+	public static boolean isLocationPermissionAvailable(@NonNull Context context) {
+		boolean accessFineLocation = hasFineLocationPermission(context);
+		boolean accessCoarseLocation = hasCoarseLocationPermission(context);
 		return accessFineLocation || accessCoarseLocation;
+	}
+
+	public static boolean hasFineLocationPermission(@NonNull Context context) {
+		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+				== PackageManager.PERMISSION_GRANTED;
+	}
+
+	public static boolean hasCoarseLocationPermission(@NonNull Context context) {
+		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+				== PackageManager.PERMISSION_GRANTED;
 	}
 
 	public static void requestFineLocationPermissionIfNeeded(Activity activity) {

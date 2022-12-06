@@ -26,6 +26,7 @@ public class WeatherSettings {
 	public final OsmandPreference<Boolean> weatherContoursEnabled;
 	public final OsmandPreference<Integer> weatherContoursTransparency;
 	public final EnumStringPreference<WeatherContour> weatherContoursType;
+	public final EnumStringPreference<WeatherContour> weatherForecastContoursType;
 
 	public final EnumStringPreference<WindUnit> weatherWindUnit;
 	public final EnumStringPreference<CloudUnit> weatherCloudUnit;
@@ -38,6 +39,12 @@ public class WeatherSettings {
 	public final CommonPreference<Boolean> weatherCloud;
 	public final CommonPreference<Boolean> weatherPrecip;
 	public final CommonPreference<Boolean> weatherPressure;
+
+	public final CommonPreference<Boolean> weatherForecastTemp;
+	public final CommonPreference<Boolean> weatherForecastWind;
+	public final CommonPreference<Boolean> weatherForecastCloud;
+	public final CommonPreference<Boolean> weatherForecastPrecip;
+	public final CommonPreference<Boolean> weatherForecastPressure;
 
 	public final CommonPreference<Float> weatherTempAlpha;
 	public final CommonPreference<Float> weatherWindAlpha;
@@ -64,12 +71,20 @@ public class WeatherSettings {
 		weatherContoursTransparency = settings.registerIntPreference("weatherContoursTransparency", DEFAULT_TRANSPARENCY).makeProfile();
 		weatherContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
 				"weatherContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
+		weatherForecastContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
+				"weatherForecastContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
 
 		weatherTemp = settings.registerBooleanPreference("weatherTemp", false).makeProfile();
 		weatherPressure = settings.registerBooleanPreference("weatherPressure", false).makeProfile();
 		weatherWind = settings.registerBooleanPreference("weatherWind", false).makeProfile();
 		weatherCloud = settings.registerBooleanPreference("weatherCloud", false).makeProfile();
 		weatherPrecip = settings.registerBooleanPreference("weatherPrecip", false).makeProfile();
+
+		weatherForecastTemp = settings.registerBooleanPreference("weatherForecastTemp", false).makeProfile();
+		weatherForecastPressure = settings.registerBooleanPreference("weatherForecastPressure", false).makeProfile();
+		weatherForecastWind = settings.registerBooleanPreference("weatherForecastWind", false).makeProfile();
+		weatherForecastCloud = settings.registerBooleanPreference("weatherForecastCloud", false).makeProfile();
+		weatherForecastPrecip = settings.registerBooleanPreference("weatherForecastPrecip", false).makeProfile();
 
 		weatherTempUnit = (EnumStringPreference<TemperatureUnit>) settings.registerEnumStringPreference(
 				"weatherTempUnit", TemperatureUnit.CELSIUS, TemperatureUnit.values(), TemperatureUnit.class).makeProfile();

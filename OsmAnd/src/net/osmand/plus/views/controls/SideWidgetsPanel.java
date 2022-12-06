@@ -27,6 +27,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class SideWidgetsPanel extends FrameLayout {
@@ -37,14 +38,14 @@ public class SideWidgetsPanel extends FrameLayout {
 	private final Paint borderPaint = new Paint();
 	private final Path borderPath = new Path();
 
-	private boolean nightMode;
-	private boolean rightSide;
-	private boolean selfShowAllowed;
-	private boolean selfVisibilityChanging;
+	protected boolean nightMode;
+	protected boolean rightSide;
+	protected boolean selfShowAllowed;
+	protected boolean selfVisibilityChanging;
 
-	private ViewPager2 viewPager;
-	private WidgetsPagerAdapter adapter;
-	private LinearLayout dots;
+	protected ViewPager2 viewPager;
+	protected WidgetsPagerAdapter adapter;
+	protected LinearLayout dots;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -95,7 +96,7 @@ public class SideWidgetsPanel extends FrameLayout {
 	private void setupChildren() {
 		dots = findViewById(R.id.dots);
 
-		adapter = new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
+		adapter = createWidgetsPagerAdapter();
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
 				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.container);
@@ -113,6 +114,10 @@ public class SideWidgetsPanel extends FrameLayout {
 			}
 		});
 		updateDots();
+	}
+
+	protected WidgetsPagerAdapter createWidgetsPagerAdapter() {
+		return new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
 	}
 
 	private void updateDots() {
@@ -151,7 +156,7 @@ public class SideWidgetsPanel extends FrameLayout {
 		}
 	}
 
-	public void update() {
+	public void update(DrawSettings drawSettings) {
 		adapter.updateIfNeeded();
 		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
 		boolean show = adapter.getItemCount() > 0 && selfShowAllowed;
@@ -202,12 +207,12 @@ public class SideWidgetsPanel extends FrameLayout {
 	}
 
 	@NonNull
-	private UiUtilities getIconsCache() {
+	protected UiUtilities getIconsCache() {
 		return getMyApplication().getUIUtilities();
 	}
 
 	@NonNull
-	private OsmandApplication getMyApplication() {
+	protected OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
 	}
 }

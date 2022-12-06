@@ -13,6 +13,7 @@ import net.osmand.core.jni.WeatherRasterLayerProvider;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -24,6 +25,7 @@ import java.util.List;
 public class WeatherRasterLayer extends BaseMapLayer {
 
 	private final WeatherHelper weatherHelper;
+	private final WeatherPlugin plugin;
 	private final WeatherLayer weatherLayer;
 
 	private WeatherRasterLayerProvider provider;
@@ -46,6 +48,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		OsmandApplication app = getApplication();
 		this.weatherHelper = app.getWeatherHelper();
 		this.weatherLayer = weatherLayer;
+		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		setDateTime(System.currentTimeMillis());
 	}
 
@@ -148,10 +151,13 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get();
+		boolean hasCustomForecast = plugin.hasCustomForecast();
+		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get() || hasCustomForecast;
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		List<WeatherBand> enabledBands = weatherHelper.getVisibleBands();
+
+		List<WeatherBand> enabledBands = hasCustomForecast ? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
+
 		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
 		enabledBandsCached = enabledBands;
 		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();

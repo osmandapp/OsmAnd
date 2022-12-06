@@ -328,7 +328,7 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				if (searchResult.object instanceof AbstractPoiType) {
 					String iconName = PoiUIFilter.getPoiTypeIconName((AbstractPoiType) searchResult.object);
-					if (Algorithms.isEmpty(iconName)) {
+					if (Algorithms.isEmpty(iconName) && searchResult.object instanceof PoiType) {
 						iconName = RenderingIcons.getIconNameForPoiType((PoiType) searchResult.object);
 					}
 					if (!Algorithms.isEmpty(iconName)) {

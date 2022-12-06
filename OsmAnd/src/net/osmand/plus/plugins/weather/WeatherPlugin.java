@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FORECAST_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
@@ -27,6 +28,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -44,6 +48,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHideCloudLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
+import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -68,6 +73,7 @@ import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WeatherPlugin extends OsmandPlugin {
@@ -85,6 +91,9 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerHigh;
 	private WeatherContourLayer weatherContourLayer;
 
+	@Nullable
+	private Date forecastDate;
+
 	@WeatherBandType
 	private short currentConfigureBand = WEATHER_BAND_UNDEFINED;
 
@@ -99,6 +108,15 @@ public class WeatherPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_WIND_WIDGET, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_CLOUDS_WIDGET, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_AIR_PRESSURE_WIDGET, noAppMode);
+
+		app.getAppInitializer().addListener(new AppInitializeListener() {
+			@Override
+			public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
+				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+					updateLayers(app, null);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -193,7 +211,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
 				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_TEMPERATURE);
@@ -341,6 +359,20 @@ public class WeatherPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Override
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+		if (isActive()) {
+			helper.addItem(new ContextMenuItem(DRAWER_WEATHER_FORECAST_ID)
+					.setTitleId(R.string.shared_string_weather, mapActivity)
+					.setIcon(R.drawable.ic_action_umbrella)
+					.setListener((uiAdapter, view, item, isChecked) -> {
+						app.logEvent("weatherForecastOpen");
+						WeatherForecastFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}));
+		}
+	}
+
 	private void createLayers() {
 		weatherLayerLow = new WeatherRasterLayer(app, WeatherLayer.LOW);
 		weatherLayerHigh = new WeatherRasterLayer(app, WeatherLayer.HIGH);
@@ -398,5 +430,27 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherContoursType.set(contoursType);
+	}
+
+	@NonNull
+	public WeatherContour getSelectedForecastContoursType() {
+		return weatherSettings.weatherForecastContoursType.get();
+	}
+
+	public void setSelectedForecastContoursType(@NonNull WeatherContour contoursType) {
+		weatherSettings.weatherForecastContoursType.set(contoursType);
+	}
+
+	public boolean hasCustomForecast() {
+		return forecastDate != null;
+	}
+
+	public void updateWeatherDate(@Nullable Date date) {
+		forecastDate = date;
+
+		long time = date != null ? date.getTime() : System.currentTimeMillis();
+		weatherLayerLow.setDateTime(time);
+		weatherLayerHigh.setDateTime(time);
+		weatherContourLayer.setDateTime(time);
 	}
 }

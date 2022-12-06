@@ -3237,7 +3237,7 @@
     <string name="poi_scooter_no">Скутер: нет</string>
     <string name="poi_truck_yes">Грузовик: да</string>
     <string name="poi_truck_no">Грузовик: нет</string>
-    <string name="poi_parking_fee_yes">Оплата за парковку: есть</string>
+    <string name="poi_parking_fee_yes">Есть</string>
     <string name="poi_parking_fee_no">Оплата за парковку: нет</string>
     <string name="poi_amperage">Ток</string>
     <string name="poi_charging_station_output">Мощность зарядной станции</string>
@@ -4355,4 +4355,22 @@
     <string name="poi_playground_hopscotch">Классики</string>
     <string name="poi_playground_sledding">Ледяная горка</string>
     <string name="poi_access_yes">Доступ разрешен</string>
+    <string name="poi_parking_fee_filter">Оплата за парковку</string>
+    <string name="poi_trampoline_park">Батутный парк</string>
+    <string name="poi_playground_trampoline">Батут</string>
+    <string name="poi_playground_roundabout">Карусель</string>
+    <string name="poi_playground_activitypanel">Игровая панель</string>
+    <string name="poi_playground_horizontal_bar">Турник</string>
+    <string name="poi_playground_exercise">Уличный тренажёр</string>
+    <string name="poi_playground_structure">Игровая конструкция</string>
+    <string name="poi_playground_funnel_ball">Мяч-воронка</string>
+    <string name="poi_playground_tunnel_tube">Туннель</string>
+    <string name="poi_playground_speaking_tube">Переговорная труба</string>
+    <string name="poi_playground_ball_pool">Бассейн с шариками</string>
+    <string name="poi_playground_swing">Качели</string>
+    <string name="poi_playground_basketswing">Качели гнездо</string>
+    <string name="poi_playground_seesaw">Качели-балансир</string>
+    <string name="poi_playground_springy">Качалка на пружине</string>
+    <string name="poi_playground_zipwire">Тарзанка</string>
+    <string name="poi_playground_teenshelter">Навес</string>
 </resources>
