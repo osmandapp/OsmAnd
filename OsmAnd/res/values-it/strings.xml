@@ -3330,7 +3330,7 @@
     <string name="monitoring_min_speed_descr">Questo è un filtro delle basse velocità per non registrare i punti inferiori a una data velocità. Questo può permettere di registrare tracce dall\'aspetto più pulito quando visualizzate sulla mappa.</string>
     <string name="monitoring_min_speed_descr_side_effect">Effetto collaterale: alle tue tracce mancheranno tutte le sezioni in cui il criterio della velocità non sarà soddisfatto (es. quando spingi la tua bici in un\'elevata pendenza). Altrettanto non ci saranno informazioni nei periodi di riposo o ristoro. Questo ha effetto su tutte le analisi ed elaborazione dei dati, come quando si prova a determinare la lunghezza totale del tuo percorso, il tempo in movimento, o la velocità media.</string>
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
-    <string name="monitoring_min_speed_descr_remark">Osservazione: controllo velocità &gt; 0 : molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che tu sei in movimento, e nessuno invece se non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso utilizza il sensore di movimento del chip GPS. Ma anche se non filtrati qui nel momento della registrazione, comunque utilizziamo questa caratteristica nell\'analisi dei nostri file GPX per determinare al distanza corretta, es. il valore visualizzato in questo campo è la distanza registrata finché si è in movimento.</string>
+    <string name="monitoring_min_speed_descr_remark">Note: controllo velocità &gt; 0. Molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che sei in movimento, e nessuno se invece non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso si usa il sensore di movimento del chip GPS. Ma anche se non filtrati nel momento della registrazione, comunque utilizziamo questa funzione nell\'analisi dei nostri file GPX per determinare la distanza corretta, es. il valore visualizzato in quel campo è la distanza registrata quando si era in movimento.</string>
     <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza è la vicinanza delle misurazioni alla posizione reale, e non è direttamente correlata alla precisione, che è la dispersione delle misurazioni ripetute.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio in base alla precisione, i punti potrebbero mancare del tutto ad es. sotto i ponti, sotto gli alberi, tra edifici elevati, o in determinate condizioni atmosferiche.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
@@ -4416,7 +4416,7 @@
 \nL\'applicazione partirà usando la nuova cartella con i tuoi dati.</string>
     <string name="shared_storage">Memorizzazione condivisa</string>
     <string name="shared_storage_first_step">Premi \"%1$s\".
-\nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
+\nIl gestore di file aprirà la cartella OsmAnd di cui hai bisogno.</string>
     <string name="show_parameter_seekbar">Mostra la barra di ricerca dei parametri</string>
     <string name="sample_wikivoyage">Esempio Wikivoyage</string>
     <string name="fold_unfold">compatta/espandi</string>
@@ -4832,7 +4832,7 @@
     <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
     <string name="weather_plugin_description">Fornisce
 \n- previsioni meteo, 24 ore per 7 giorni, con 5 livelli
-\n- widgets localizzati
+\n- widget localizzati
 \n- isoterme / isobare
 \n
 \nI dati meteo sono forniti dal Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
@@ -4966,4 +4966,5 @@
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
     <string name="mtb_segment_classification">Classificazione del segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
+    <string name="release_4_4_pre">• Qui ci saranno le stringhe per la versione 4.4</string>
 </resources>
