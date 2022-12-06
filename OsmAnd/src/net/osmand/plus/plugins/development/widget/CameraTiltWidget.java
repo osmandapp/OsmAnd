@@ -13,7 +13,6 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class CameraTiltWidget extends TextInfoWidget {
 
-	private static final char DELIMITER_DEGREES = '';
 
 	private final OsmandMapTileView mapView;
 	private double cachedMapTilt;
