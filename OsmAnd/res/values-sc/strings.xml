@@ -3410,7 +3410,7 @@
     <string name="profile_type_custom_string">Profilu personalizadu</string>
     <string name="shared_string_angle_param">Àngulu: %s°</string>
     <string name="shared_string_angle">Àngulu</string>
-    <string name="recalc_angle_dialog_descr">Unu segmentu dritu intre sa positzione mea e s\'àndala carculada at a èssere ammustradu finas a cando s\'àndala no at a bènnere carculada torra</string>
+    <string name="recalc_angle_dialog_descr">Unu segmentu dritu intre sa positzione mea e s\'àndala carculada at a èssere ammustradu finas a cando s\'àndala non s\'at a torrare a carculare</string>
     <string name="recalc_angle_dialog_title">Àngulu mìnimu intre sa positzione mea e s\'àndala</string>
     <string name="shared_string_preparing">Ammaniende</string>
     <string name="shared_string_poi_types">Castas de PDI</string>
@@ -4969,8 +4969,12 @@
     <string name="rendering_attr_showMtbScale_name">Ammustra sos grados de dificultade MTB (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_description">Ammustra sas camineras segundu sos grados de dificultade MTB (pro bitzicletas de monte).</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Ammustra sas camineras segundu sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte).</string>
-    <string name="mtb_segment_classification">Classificatzione de sos segmentos</string>
+    <string name="mtb_segment_classification">Classificatzione de su segmentu</string>
     <string name="mtb_scale">Iscala MTB (pro bitzicletas de monte)</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Assòtziu Internatzionale de su Tziclismu de Monte (International Mountain Bicycling Association)</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Isolìnias de sas pretzipitatziones</string>
+    <string name="release_4_4_pre">• Inoghe b\'ant a èssere istringas pro sa versione 4.4</string>
+    <string name="rendering_attr_weatherCloudContours_name">Isolìnias de sas nues</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolìnias de sas ufuladas de bentu</string>
 </resources>
