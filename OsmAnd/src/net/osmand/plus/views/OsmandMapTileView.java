@@ -56,7 +56,9 @@ import net.osmand.plus.auto.CarSurfaceView;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -980,7 +982,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// skip it
 			}
 		}
-		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom()) {
+		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
+		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom() || (plugin != null && plugin.hasCustomForecast())) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
@@ -988,7 +991,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
 		}
 	}
-
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
 		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);
@@ -1716,7 +1718,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
 								(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
 								MapUtils.get31LongitudeX((int) Math.round(
-								(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
+										(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
 					}
 					getAnimatedDraggingThread().startMoving(
 							latlon.getLatitude(), latlon.getLongitude(), getZoom() + 1, true);

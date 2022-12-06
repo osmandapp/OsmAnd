@@ -432,6 +432,15 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherSettings.weatherContoursType.set(contoursType);
 	}
 
+	@NonNull
+	public WeatherContour getSelectedForecastContoursType() {
+		return weatherSettings.weatherForecastContoursType.get();
+	}
+
+	public void setSelectedForecastContoursType(@NonNull WeatherContour contoursType) {
+		weatherSettings.weatherForecastContoursType.set(contoursType);
+	}
+
 	public boolean hasCustomForecast() {
 		return forecastDate != null;
 	}
