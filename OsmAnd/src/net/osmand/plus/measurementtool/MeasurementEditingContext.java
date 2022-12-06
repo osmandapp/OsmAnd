@@ -1227,6 +1227,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
 		List<RouteSegmentResult> route = new ArrayList<>();
 		List<Location> locations = new ArrayList<>();
+		List<Integer> routePointIndexes = new ArrayList<>();
+		routePointIndexes.add(0);
+
 		for (int i = startPointIndex; i < endPointIndex; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
 			RoadSegmentData data = this.roadSegmentData.get(pair);
@@ -1244,11 +1247,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				}
 				pair.second.setTrkPtIndex(i + 1 < before.points.size() - 1 ? locations.size() : locations.size() - 1);
 				route.addAll(dataSegments);
+				routePointIndexes.add(i + 1 == endPointIndex ? locations.size() - 1 : locations.size());
 			}
 		}
 		if (!locations.isEmpty() && !route.isEmpty()) {
 			before.points.get(startPointIndex).setTrkPtIndex(0);
-			return new RouteExporter("", route, locations, null).generateRouteSegment();
+			return new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
 			TrkSegment segment = new TrkSegment();
 			segment.points = new ArrayList<>(before.points.subList(startPointIndex, endPointIndex + 1));

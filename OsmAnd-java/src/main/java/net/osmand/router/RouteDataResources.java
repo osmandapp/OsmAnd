@@ -15,18 +15,20 @@ public class RouteDataResources {
 	private final Map<RouteTypeRule, Integer> rules = new LinkedHashMap<>();
 
 	private final List<Location> locations;
-	private int currentLocation;
+	private int currentSegmentStartLocationIndex;
 
-	private final List<Integer> routePointIndexes = new ArrayList<>();
+	private final List<Integer> routePointIndexes;
 
 	private final Map<RouteDataObject, int[][]> pointNamesMap = new HashMap<>();
 
 	public RouteDataResources() {
 		this.locations = new ArrayList<>();
+		routePointIndexes = new ArrayList<>();
 	}
 
-	public RouteDataResources(List<Location> locations) {
+	public RouteDataResources(List<Location> locations, List<Integer> routePointIndexes) {
 		this.locations = locations;
+		this.routePointIndexes = routePointIndexes;
 	}
 
 	public Map<RouteTypeRule, Integer> getRules() {
@@ -41,20 +43,25 @@ public class RouteDataResources {
 		return routePointIndexes;
 	}
 
-	public Location getLocation(int index) {
-		index += currentLocation;
-		if (index >= locations.size()) {
-			throw new IllegalStateException("Locations index: " + index + " out of bounds");
+	public Location getCurrentSegmentLocation(int offset) {
+		int locationIndex = currentSegmentStartLocationIndex + offset;
+		if (locationIndex >= locations.size()) {
+			throw new IllegalStateException("Locations index: " + locationIndex + " out of bounds");
 		}
-		return locations.get(index);
+		return locations.get(locationIndex);
 	}
 
-	public int getCurrentLocationIndex() {
-		return currentLocation;
+	public int getCurrentSegmentStartLocationIndex() {
+		return currentSegmentStartLocationIndex;
 	}
 
-	public void incrementCurrentLocation(int index) {
-		currentLocation += index;
+	public void updateNextSegmentStartLocation(int currentSegmentLength) {
+		int routePointIndex = routePointIndexes.indexOf(currentSegmentStartLocationIndex + currentSegmentLength);
+		boolean overlappingNextRouteSegment =
+				!(routePointIndex > 0 && routePointIndex < routePointIndexes.size() - 1);
+		currentSegmentStartLocationIndex += overlappingNextRouteSegment
+				? currentSegmentLength - 1
+				: currentSegmentLength;
 	}
 
 	public Map<RouteDataObject, int[][]> getPointNamesMap() {
