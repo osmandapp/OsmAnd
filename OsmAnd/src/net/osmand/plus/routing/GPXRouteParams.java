@@ -139,7 +139,6 @@ public class GPXRouteParams {
 		private boolean useIntermediateRtePoints;
 		private int selectedSegment = -1;
 		private int selectedRoute = -1;
-		private LatLon targetPoint;
 
 		public GPXRouteParamsBuilder(@NonNull GPXFile file, @NonNull OsmandSettings settings) {
 			this.file = file;
@@ -220,16 +219,16 @@ public class GPXRouteParams {
 			return passWholeRoute;
 		}
 
-		public void setTargetPoint(LatLon targetPoint) {
-			this.targetPoint = targetPoint;
+		public GPXRouteParams build(OsmandApplication app) {
+			return build(app, null);
 		}
 
-		public GPXRouteParams build(OsmandApplication app) {
+		public GPXRouteParams build(OsmandApplication app, LatLon targetPoint) {
 			GPXRouteParams gpxRouteParams = new GPXRouteParams();
 			try {
 				gpxRouteParams.prepareGPXFile(this);
 				if (targetPoint != null && !targetPoint.equals(gpxRouteParams.getLastPoint())) {
-					cutGpxTail(gpxRouteParams);
+					cutGpxTail(gpxRouteParams, targetPoint);
 				}
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
@@ -238,7 +237,7 @@ public class GPXRouteParams {
 			return gpxRouteParams;
 		}
 
-		private void cutGpxTail(GPXRouteParams gpxRouteParams) {
+		private void cutGpxTail(GPXRouteParams gpxRouteParams, LatLon targetPoint) {
 			int lastIdx = 0;
 			double minDist = Float.MAX_VALUE;
 			List<Location> locations = gpxRouteParams.points;
@@ -279,7 +278,9 @@ public class GPXRouteParams {
 				}
 			}
 			gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size()).clear();
-			gpxRouteParams.route.clear();
+			if (!Algorithms.isEmpty(gpxRouteParams.route)) {
+				gpxRouteParams.route.clear();
+			}
 		}
 
 		public void setReverse(boolean reverse) {
