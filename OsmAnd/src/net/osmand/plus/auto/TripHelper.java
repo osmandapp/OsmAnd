@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -330,7 +329,7 @@ public class TripHelper {
 		if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS) {
 			displayUnit = Distance.UNIT_KILOMETERS;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			displayUnit = Distance.UNIT_MILES;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -349,12 +348,14 @@ public class TripHelper {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+		} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else {
 			if (mc == net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS) {
 				return Distance.create(meters,  Distance.UNIT_METERS);
-			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
 			} else if (mc == net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS) {
 				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);

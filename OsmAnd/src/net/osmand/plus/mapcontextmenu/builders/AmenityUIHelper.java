@@ -369,7 +369,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					float distance = Float.parseFloat(vl);
 					vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
 					String collapsibleVal;
-					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS || metricSystem ==  MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.KILOMETERS_AND_METERS);
 					} else {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.MILES_AND_FEET);
@@ -622,7 +622,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			case "seamark_height":
 				if (Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
-					if (metricSystem == MetricsConstants.MILES_AND_FEET) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
 								+ " " + mapActivity.getResources().getString(R.string.foot);
 					} else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {
