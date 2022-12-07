@@ -4967,4 +4967,6 @@
     <string name="mtb_segment_classification">Classificazione del segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
     <string name="release_4_4_pre">• Qui ci saranno le stringhe per la versione 4.4</string>
+    <string name="shared_string_open">Apri</string>
+    <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
 </resources>
