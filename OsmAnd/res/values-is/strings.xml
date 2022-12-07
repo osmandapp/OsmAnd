@@ -4941,4 +4941,7 @@
     <string name="map_widget_altitude_map_center_desc">Sýnir hæð yfir sjávarmáli á núverandi miðju landakortsins.</string>
     <string name="map_widget_altitude_current_location_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu.</string>
     <string name="purchases_feature_desc_external_sensors">Birtu og skráðu gögn frá utanaðkomandi skynjurum: hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt.</string>
+    <string name="shared_string_open">Opið</string>
+    <string name="open_weather_action_description">Gerir þér kleift að opna skjá með nákvæmum veðurupplýsingum.</string>
+    <string name="open_weather_action">Opna veður</string>
 </resources>
