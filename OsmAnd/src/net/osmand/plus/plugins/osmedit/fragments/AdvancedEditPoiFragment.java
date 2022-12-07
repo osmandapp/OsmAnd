@@ -420,11 +420,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			if (results.values != null) {
-				synchronized (mAdapter) {
-					String[] filteredHints = ((List<String>) results.values).toArray(new String[0]);
-					mAdapter.setTagData(filteredHints);
-					mAdapter.tagAdapter.notifyDataSetChanged();
-				}
+				String[] filteredHints = ((List<String>) results.values).toArray(new String[0]);
+				mAdapter.setTagData(filteredHints);
+				mAdapter.tagAdapter.notifyDataSetChanged();
 			}
 		}
 	}
