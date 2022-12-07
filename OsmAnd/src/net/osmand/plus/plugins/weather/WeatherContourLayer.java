@@ -28,6 +28,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -44,6 +45,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 	private GeoTileObjectsProvider geoTileObjectsProvider;
 	private MapPrimitivesProvider mapPrimitivesProvider;
 
+	private WeatherUnit weatherUnitCached;
 	private boolean weatherEnabledCached;
 	private boolean contoursEnabledCached;
 	private int cachedTransparency;
@@ -168,7 +170,13 @@ public class WeatherContourLayer extends BaseMapLayer {
 		} else if (weatherContour == WeatherContour.PRECIPITATION) {
 			band = WEATHER_BAND_PRECIPITATION;
 		}
-
+		WeatherUnit weatherUnit = null;
+		WeatherBand weatherBand = weatherHelper.getWeatherBand(band);
+		if (weatherBand != null) {
+			weatherUnit = weatherBand.getBandUnit();
+		}
+		boolean weatherUnitChanged = weatherUnit != weatherUnitCached;
+		weatherUnitCached = weatherUnit;
 		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
@@ -183,7 +191,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
 		if (weatherEnabledChanged || contoursEnabledChanged || transparencyChanged || bandChanged
-				|| dateTimeChanged || mapActivityInvalidated) {
+				|| weatherUnitChanged || dateTimeChanged || mapActivityInvalidated) {
 			if (weatherEnabled && contoursEnabled && band != WEATHER_BAND_UNDEFINED) {
 				recreateLayerProvider(mapRenderer, resourcesManager, band);
 			} else {
