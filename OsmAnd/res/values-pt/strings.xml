@@ -4980,4 +4980,7 @@
     <string name="mtb_scale">Escala MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_segment_classification">Classificação de segmento</string>
+    <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolinhas de rajadas de vento</string>
 </resources>

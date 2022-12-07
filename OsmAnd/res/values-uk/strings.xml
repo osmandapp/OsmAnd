@@ -3412,7 +3412,7 @@
     <string name="profile_type_custom_string">Власний профіль</string>
     <string name="shared_string_angle_param">Кут: %s°</string>
     <string name="shared_string_angle">Кут</string>
-    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм місцем перебування та обчисленим маршрутом буде показаний, поки маршрут не буде переобчислено</string>
+    <string name="recalc_angle_dialog_descr">Додатковий прямий відрізок між моїм розташуванням та прокладеним маршрутом показуватиметься, поки маршрут не буде переобчислено</string>
     <string name="recalc_angle_dialog_title">Найменший кут між моїм розташуванням і маршрутом</string>
     <string name="shared_string_preparing">Підготування</string>
     <string name="shared_string_poi_types">Типи точок інтересу</string>
@@ -4975,4 +4975,8 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Міжнародна асоціація гірського велоспорту</string>
     <string name="mtb_segment_classification">Класифікація сегментів</string>
+    <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії поривів вітру</string>
+    <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
 </resources>

@@ -531,7 +531,7 @@
     <string name="shared_string_download_map">Hämta karta</string>
     <string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Hantera kartfiler</string>
-    <string name="select_max_zoom_preload_area">Välj maximal zoom att förladda</string>
+    <string name="select_max_zoom_preload_area">Maximal zoom att förladda</string>
     <string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
     <string name="continuous_rendering">Kontinuerlig rendering</string>
     <string name="continuous_rendering_descr">Visa kontinuerlig rendering istället för direkt-bild.</string>
@@ -561,7 +561,7 @@
     <string name="transport_context_menu">Sök efter transport vid hållplats</string>
     <string name="poi_context_menu_modify">Ändra Intressepunkt</string>
     <string name="poi_context_menu_delete">Ta bort POI</string>
-    <string name="rotate_map_compass_opt">Till kompass</string>
+    <string name="rotate_map_compass_opt">Kompassriktning</string>
     <string name="rotate_map_bearing_opt">Färdriktning</string>
     <string name="rotate_map_none_opt">Rotera inte (norr är alltid uppåt)</string>
     <string name="rotate_map_to_bearing_descr">Kartjustering:</string>
@@ -1997,7 +1997,7 @@
     <string name="shared_string_trip">Tripp</string>
     <string name="shared_string_recorded">Inspelat</string>
     <string name="shared_string_record">Spela in</string>
-    <string name="gpx_logging_no_data">Inga data</string>
+    <string name="gpx_logging_no_data">Ingen data</string>
     <string name="trip_rec_notification_settings_desc">Visa ett systemmeddelande som gör det möjligt att starta trippinspelning.</string>
     <string name="routing_attr_allow_motorway_name">Använd motorvägar</string>
     <string name="routing_attr_allow_motorway_description">Tillåter motorvägar.</string>
@@ -3898,7 +3898,7 @@
     <string name="shared_string_revert">Återställ</string>
     <string name="shared_preference">Delad</string>
     <string name="shared_sting_tiles">Rasterkartor</string>
-    <string name="connect_track_points_as">Koppla ihop ruttpunkter</string>
+    <string name="connect_track_points_as">Sammanlänka ruttpunkter</string>
     <string name="rendering_attr_piste_type_downhill_name">Utförsåkning</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="rendering_value_white_name">Vit</string>
@@ -3989,7 +3989,7 @@
     <string name="keep_screen_off">Håll skärmen avstängd</string>
     <string name="keep_screen_on">Håll skärmen påslagen</string>
     <string name="profile_appearance">Profilutseende</string>
-    <string name="rendering_attr_showBusRoutes_name">Busrutter</string>
+    <string name="rendering_attr_showBusRoutes_name">Bussrutter</string>
     <string name="choose_icon_color_name">Ikon, färg och namn</string>
     <string name="map_widget_average_speed">Medelhastighet</string>
     <string name="calculate_altitude">Beräkna altitud</string>
@@ -4033,7 +4033,7 @@
     <string name="routing_attr_motor_type_description">Välj färdmedelstyp som används av ditt fordons motor, för att beräkna CO2-utsläpp.</string>
     <string name="routing_attr_motor_type_name">Färdmedel som används av motorn</string>
     <string name="side_marker_eta">Uppskattad ankomsttid</string>
-    <string name="reset_all_settings_desc">Är du säker på att du vill återställa alla inställningar till standard\?</string>
+    <string name="reset_all_settings_desc">Återställ alla inställningar till standard\?</string>
     <string name="co2_mission">CO2-utsläpp</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Bensin</string>
@@ -4080,4 +4080,12 @@
     <string name="add_custom_category">Lägg till skräddarsydd kategori</string>
     <string name="altitude_correction">Höjdrättning</string>
     <string name="mtb_imba">IMBA</string>
+    <string name="edit_category">Redigera kategori</string>
+    <string name="estimated_download_size">Uppskattad nedladdningsstorlek</string>
+    <string name="simulation_constant_mode_title">Konstant hastighet</string>
+    <string name="default_appearance">Standardutseende</string>
+    <string name="rendering_attr_showTramRoutes_name">Spårvagnsrutter</string>
+    <string name="shared_string_visible_widgets">Synliga widgetar</string>
+    <string name="simulation_real_mode_title">Realistisk simulering</string>
+    <string name="shared_string_complete">färdig</string>
 </resources>

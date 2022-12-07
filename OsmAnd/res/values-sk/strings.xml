@@ -4970,4 +4970,8 @@
     <string name="mtb_scale">Stupnica pre horské bicykle</string>
     <string name="mtb_imba_full">Medzinárodné združenie pre horské bicyklovanie</string>
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary nárazov vetra</string>
+    <string name="release_4_4_pre">• Tu budú texty pre verziu 4.4</string>
+    <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
 </resources>
