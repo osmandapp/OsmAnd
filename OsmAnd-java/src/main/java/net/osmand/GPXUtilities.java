@@ -47,6 +47,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
+import static net.osmand.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+
 public class GPXUtilities {
 
 	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -648,8 +650,12 @@ public class GPXUtilities {
 	}
 
 	public static class RouteSegment {
+
+		public static final String START_TRKPT_IDX_ATTR = "startTrkptIdx";
+
 		public String id;
 		public String length;
+		public String startTrackPointIndex;
 		public String segmentTime;
 		public String speed;
 		public String turnType;
@@ -664,6 +670,7 @@ public class GPXUtilities {
 			RouteSegment s = new RouteSegment();
 			s.id = bundle.getString("id", null);
 			s.length = bundle.getString("length", null);
+			s.startTrackPointIndex = bundle.getString(START_TRKPT_IDX_ATTR, null);
 			s.segmentTime = bundle.getString("segmentTime", null);
 			s.speed = bundle.getString("speed", null);
 			s.turnType = bundle.getString("turnType", null);
@@ -680,6 +687,7 @@ public class GPXUtilities {
 			StringBundle bundle = new StringBundle();
 			bundle.putString("id", id);
 			bundle.putString("length", length);
+			bundle.putString(START_TRKPT_IDX_ATTR, startTrackPointIndex);
 			bundle.putString("segmentTime", segmentTime);
 			bundle.putString("speed", speed);
 			bundle.putString("turnType", turnType);
@@ -3118,6 +3126,7 @@ public class GPXUtilities {
 		RouteSegment segment = new RouteSegment();
 		segment.id = parser.getAttributeValue("", "id");
 		segment.length = parser.getAttributeValue("", "length");
+		segment.startTrackPointIndex = parser.getAttributeValue("", START_TRKPT_IDX_ATTR);
 		segment.segmentTime = parser.getAttributeValue("", "segmentTime");
 		segment.speed = parser.getAttributeValue("", "speed");
 		segment.turnType = parser.getAttributeValue("", "turnType");
