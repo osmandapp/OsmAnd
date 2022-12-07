@@ -4969,4 +4969,8 @@
     <string name="mtb_imba">國際山地自行車協會</string>
     <string name="mtb_imba_full">國際山地自行車協會</string>
     <string name="mtb_segment_classification">細分分類</string>
+    <string name="release_4_4_pre">• 這裡會有 4.4 版的字串</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">降水等值線</string>
+    <string name="rendering_attr_weatherCloudContours_name">雲層等值線</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">陣風等值線</string>
 </resources>
