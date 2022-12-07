@@ -9,6 +9,7 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
@@ -47,6 +48,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class OsmAndFormatter {
 	public static final float METERS_IN_KILOMETER = 1000f;
@@ -743,7 +745,7 @@ public class OsmAndFormatter {
 					.append(DELIMITER_MINUTES);
 		} else {
 			sb.append(secDf.format(formatCoordinate(
-					formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
+							formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
 					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
@@ -786,14 +788,24 @@ public class OsmAndFormatter {
 		}
 	}
 
-	private static class TimeFormatter {
+	public static class TimeFormatter {
 
 		private final DateFormat simpleTimeFormat;
 		private final DateFormat amPmTimeFormat;
 
 		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern, @NonNull String amPmPattern) {
+			this(locale, pattern, amPmPattern, null);
+		}
+
+		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern,
+		                     @NonNull String amPmPattern, @Nullable TimeZone timeZone) {
 			simpleTimeFormat = new SimpleDateFormat(pattern, locale);
 			amPmTimeFormat = new SimpleDateFormat(amPmPattern, locale);
+
+			if (timeZone != null) {
+				simpleTimeFormat.getCalendar().setTimeZone(timeZone);
+				amPmTimeFormat.getCalendar().setTimeZone(timeZone);
+			}
 		}
 
 		public String format(@NonNull Date date, boolean twelveHoursFormat) {
