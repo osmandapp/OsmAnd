@@ -40,12 +40,15 @@ public abstract class BaseWeatherQuickAction extends QuickAction {
 		OsmandApplication app = mapActivity.getMyApplication();
 		WeatherHelper weatherHelper = app.getWeatherHelper();
 		WeatherBand weatherBand = weatherHelper.getWeatherBand(getWeatherBand());
-		if (weatherBand != null) {
+		WeatherPlugin weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+
+		if (weatherBand != null && weatherPlugin != null) {
 			boolean visible = !weatherBand.isBandVisible();
-			if(visible && !PluginsHelper.isEnabled(WeatherPlugin.class)){
-				PluginsHelper.enablePlugin(mapActivity, app, PluginsHelper.getPlugin(WeatherPlugin.class), true);
+			if (visible && !PluginsHelper.isEnabled(WeatherPlugin.class)) {
+				PluginsHelper.enablePlugin(mapActivity, app, weatherPlugin, true);
 			}
 			weatherBand.setBandVisible(visible);
+			weatherPlugin.setWeatherEnabled(weatherHelper.hasVisibleBands());
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 	}

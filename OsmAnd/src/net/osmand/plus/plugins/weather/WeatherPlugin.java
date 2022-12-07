@@ -43,6 +43,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
 import net.osmand.plus.plugins.weather.WeatherRasterLayer.WeatherLayer;
+import net.osmand.plus.plugins.weather.actions.OpenWeatherAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideAirPressureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideCloudLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
@@ -235,6 +236,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		action.add(ShowHideAirPressureLayerAction.TYPE);
 		action.add(ShowHidePrecipitationLayerAction.TYPE);
 		action.add(ShowHideCloudLayerAction.TYPE);
+		action.add(OpenWeatherAction.TYPE);
 		return action;
 	}
 
