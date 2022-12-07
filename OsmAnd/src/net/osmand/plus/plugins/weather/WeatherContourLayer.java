@@ -101,6 +101,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		if (mapPrimitiviser == null) {
 			return;
 		}
+		resetLayerProvider();
 
 		SymbolSubsectionConfiguration symbolSubsectionConfiguration = new SymbolSubsectionConfiguration();
 		symbolSubsectionConfiguration.setOpacityFactor(cachedTransparency / 100.0f);

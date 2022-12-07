@@ -30,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.NativeCore;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -61,6 +62,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -416,9 +418,8 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setContoursEnabled(boolean enabled) {
 		weatherSettings.weatherContoursEnabled.set(enabled);
-
 		if (!isAnyWeatherContourLinesEnabled()) {
-			setContoursType(WeatherContour.PRECIPITATION);
+			setContoursType(WeatherContour.TEMPERATURE);
 		}
 	}
 
@@ -464,6 +465,15 @@ public class WeatherPlugin extends OsmandPlugin {
 		cloudPref.set(attrName.equals(WEATHER_CLOUD_CONTOURS_LINES_ATTR));
 		windPref.set(attrName.equals(WEATHER_WIND_CONTOURS_LINES_ATTR));
 		precipitationPref.set(attrName.equals(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR));
+
+		updateMapSettings();
+	}
+
+	private void updateMapSettings() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateMapSettings();
+		}
 	}
 
 	public boolean hasCustomForecast() {
