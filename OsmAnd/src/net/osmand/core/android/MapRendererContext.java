@@ -48,6 +48,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Context container and utility class for MapRendererView and derivatives.
@@ -155,6 +156,7 @@ public class MapRendererContext {
 		String langId = settings.MAP_PREFERRED_LOCALE.get();
 		// TODO make setting
 		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
+		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
@@ -209,6 +211,21 @@ public class MapRendererContext {
 		mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
 	}
 
+	private void loadRendererAddons() {
+		Map<String, String> rendererAddons = app.getRendererRegistry().getRendererAddons();
+		for (Entry<String, String> addonEntry : rendererAddons.entrySet()) {
+			String name = addonEntry.getKey();
+			String fileName = addonEntry.getValue();
+			if (mapStylesCollection.getStyleByName(fileName) == null) {
+				try {
+					loadStyleFromStream(fileName, app.getRendererRegistry().getInputStream(name));
+				} catch (IOException e) {
+					Log.e(TAG, "Failed to load '" + fileName + "'", e);
+				}
+			}
+		}
+	}
+
 	private void loadRenderer(String rendName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
 		if (mapStylesCollection.getStyleByName(rendName) == null && renderer != null) {
@@ -242,7 +259,7 @@ public class MapRendererContext {
 		}
 
 		QStringStringHash convertedStyleSettings = new QStringStringHash();
-		for (Map.Entry<String, String> setting : props.entrySet()) {
+		for (Entry<String, String> setting : props.entrySet()) {
 			convertedStyleSettings.set(setting.getKey(), setting.getValue());
 		}
 		if (nightMode) {

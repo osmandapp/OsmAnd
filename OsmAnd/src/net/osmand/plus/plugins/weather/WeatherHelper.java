@@ -138,7 +138,7 @@ public class WeatherHelper {
 			float opacity = band.getBandOpacity();
 			String contourStyleName = band.getContourStyleName();
 			String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
-			ZoomLevelDoubleListHash contourLevels = band.getWeatherContourLevels(weatherResourcesManager, rulesStorage);
+			ZoomLevelDoubleListHash contourLevels = band.getContourLevels(weatherResourcesManager, mapPresentationEnvironment);
 
 			GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
 					internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);

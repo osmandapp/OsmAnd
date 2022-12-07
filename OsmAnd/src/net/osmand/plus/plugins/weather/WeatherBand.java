@@ -21,7 +21,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.jni.MapPresentationEnvironment;
-import net.osmand.core.jni.QListDouble;
 import net.osmand.core.jni.WeatherLayer;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherType;
@@ -36,8 +35,6 @@ import net.osmand.plus.plugins.weather.units.TemperatureUnit;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.units.WindUnit;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -520,67 +517,22 @@ public class WeatherBand {
 		if (mapPresentationEnvironment == null) {
 			return contourLevels;
 		}
-		ZoomLevel minZoom = weatherResourcesManager.getMinTileZoom(WeatherType.Contour, WeatherLayer.High);
-		ZoomLevel maxZoom = weatherResourcesManager.getMaxTileZoom(WeatherType.Contour, WeatherLayer.High);
-
 		String type = getBandType();
 		if (Algorithms.isEmpty(type)) {
 			return contourLevels;
 		}
 		String unit = getBandUnit().getSymbol();
 		String internalUnit = getInternalBandUnit();
-		int zoom = minZoom.swigValue();
-		while (zoom <= maxZoom.swigValue()) {
+		int minZoom = weatherResourcesManager.getMinTileZoom(WeatherType.Contour, WeatherLayer.High).swigValue();
+		int maxZoom = weatherResourcesManager.getMaxTileZoom(WeatherType.Contour, WeatherLayer.High).swigValue();
+		int zoom = minZoom;
+		while (zoom <= maxZoom) {
 			String qUnit = unit.replace("°", "");
 			String result = mapPresentationEnvironment.getWeatherContourLevels(type + "_" + qUnit, ZoomLevel.swigToEnum(zoom));
 			if (!Algorithms.isEmpty(result)) {
 				return contourLevels;
 			}
 			zoom++;
-		}
-		return contourLevels;
-	}
-
-	@NonNull
-	public ZoomLevelDoubleListHash getWeatherContourLevels(@NonNull WeatherTileResourcesManager resourcesManager,
-	                                                       @Nullable RenderingRulesStorage rulesStorage) {
-		ZoomLevelDoubleListHash contourLevels = new ZoomLevelDoubleListHash();
-		if (rulesStorage == null) {
-			return contourLevels;
-		}
-		String type = getBandType();
-		if (Algorithms.isEmpty(type)) {
-			return contourLevels;
-		}
-		String unit = getBandUnit().getSymbol().replace("°", "");
-		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(rulesStorage);
-
-		ZoomLevel minZoom = resourcesManager.getMinTileZoom(WeatherType.Contour, WeatherLayer.High);
-		ZoomLevel maxZoom = resourcesManager.getMaxTileZoom(WeatherType.Contour, WeatherLayer.High);
-
-		for (int zoom = minZoom.swigValue(); zoom < maxZoom.swigValue(); zoom++) {
-			searchRequest.setIntFilter(rulesStorage.PROPS.R_MINZOOM, zoom);
-			searchRequest.setIntFilter(rulesStorage.PROPS.R_MAXZOOM, zoom);
-			searchRequest.setStringFilter(rulesStorage.PROPS.R_ADDITIONAL, "weatherType=" + type + "_" + unit);
-
-			String attrStringValue = null;
-			if (searchRequest.searchRenderingAttribute("weatherContourLevels")) {
-				attrStringValue = searchRequest.getStringPropertyValue(rulesStorage.PROPS.R_ATTR_STRING_VALUE);
-			}
-			if (!Algorithms.isEmpty(attrStringValue)) {
-				String[] values = attrStringValue.split(",");
-				if (!Algorithms.isEmpty(values)) {
-					QListDouble qListDouble = new QListDouble();
-					for (String value : values) {
-						try {
-							qListDouble.add(Double.parseDouble(value));
-						} catch (NumberFormatException e) {
-							log.error(e);
-						}
-					}
-					contourLevels.set(ZoomLevel.swigToEnum(zoom), qListDouble);
-				}
-			}
 		}
 		return contourLevels;
 	}

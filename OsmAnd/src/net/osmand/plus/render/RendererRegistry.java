@@ -310,6 +310,22 @@ public class RendererRegistry {
 		return renderers;
 	}
 
+	@NonNull
+	public Map<String, String> getRendererAddons() {
+		Map<String, String> rendererAddons = new LinkedHashMap<>(internalRenderers);
+		for (Map.Entry<String, File> entry : externalRenderers.entrySet()) {
+			rendererAddons.put(entry.getKey(), entry.getValue().getName());
+		}
+		Iterator<Entry<String, String>> it = rendererAddons.entrySet().iterator();
+		while (it.hasNext()) {
+			String rendererVal = it.next().getValue();
+			if (!rendererVal.endsWith(ADDON_RENDERER_INDEX_EXT)) {
+				it.remove();
+			}
+		}
+		return rendererAddons;
+	}
+
 	public String getSelectedRendererName() {
 		RenderingRulesStorage storage = getCurrentSelectedRenderer();
 		if (storage == null) {
