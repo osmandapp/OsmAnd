@@ -187,6 +187,7 @@
 	<string name="poi_climbing_bolts_filter">Climbing bolts</string>
 	<string name="poi_climbing_bolted_filter"></string>
 	<string name="poi_climbing_quality">Climbing quality</string>
+	<string name="poi_hiking_filter">Suitable for hiking</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5015,5 +5016,7 @@
 	<string name="poi_socket_schuko_voltage_high">High</string>
 	<string name="poi_socket_schuko_voltage_medium">Medium</string>
 	<string name="poi_socket_schuko_voltage_low">Low</string>
+
+	<string name="poi_hiking_yes">Yes</string>
 
 </resources>
