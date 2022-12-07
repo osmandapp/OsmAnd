@@ -226,7 +226,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="shared_string_all">Todo</string>
+    <string name="shared_string_all">Todos</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
