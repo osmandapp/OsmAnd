@@ -3238,7 +3238,7 @@
     <string name="screen_alerts_descr">Varsler vises nede til venstre under navigering.</string>
     <string name="map_during_navigation_info">Kart under navigasjon</string>
     <string name="map_during_navigation">Kart under navigasjon</string>
-    <string name="voice_announces_info">Stemmekunngjøringer finner kun sted under navigasjon.</string>
+    <string name="voice_announces_info">Talemeldinger forekommer kun under navigering.</string>
     <string name="voice_announces_descr">Navigasjonsinstruks og kunngjøringer</string>
     <string name="voice_announces">Talemeldinger</string>
     <string name="route_parameters_descr">Sett opp ruteparameter</string>
