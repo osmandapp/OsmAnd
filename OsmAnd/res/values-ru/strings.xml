@@ -4858,9 +4858,9 @@
     <string name="quick_action_current_location_widget_descr">Переключатель для отображения или скрытия виджета координат текущего местоположения.</string>
     <string name="map_widget_target_distance_desc">Виджет показывает расстояние между камерой и целью.</string>
     <string name="shared_string_large">Большой</string>
-    <string name="ant_heart_rate_write_gpx_desc">Запись сердцебиения в трек</string>
-    <string name="ant_missing_dependency_descr">Требуемая служба \"%1$s\" не найдена.
-\nВам необходимо установить службу ANT+ Plugins или обновить существующую версию, если она у вас уже есть.
+    <string name="ant_heart_rate_write_gpx_desc">Включить частоту сердцебиения в трек</string>
+    <string name="ant_missing_dependency_descr">Требуемая служба «%1$s» не найдена.
+\nВам необходимо установить службу ANT+ Plugins Service.
 \nЗапустить Play Store для загрузки службы\?</string>
     <string name="shared_string_normal">Обычный</string>
     <string name="map_markers_desc">Виджет показывает расстояние или расчетное время прибытия (ETA) для первых двух маркеров в списке маркеров карты.</string>
