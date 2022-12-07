@@ -2074,7 +2074,7 @@
     <string name="quick_action_item_screen">Pantalla %d</string>
     <string name="quick_action_add_marker">Añadir marcador de mapa</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
-    <string name="quick_action_map_style">Cambiar estilo del mapa</string>
+    <string name="quick_action_map_style">Alternar estilo del mapa</string>
     <string name="quick_action_map_style_switch">Estilo del mapa cambiado para «%s».</string>
     <string name="quick_action_take_audio_note">Nueva nota de audio</string>
     <string name="quick_action_take_video_note">Nueva nota de video</string>
@@ -2123,13 +2123,13 @@
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Rellenar todos los parámetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Cambiar mapa superpuesto</string>
+    <string name="quick_action_map_overlay">Alternar mapa superpuesto</string>
     <string name="quick_action_map_overlay_title">Mapas superpuestos</string>
     <string name="quick_action_map_overlay_action">Añadir superposición</string>
-    <string name="quick_action_map_underlay">Cambiar mapa subyacente</string>
+    <string name="quick_action_map_underlay">Alternar mapa subyacente</string>
     <string name="quick_action_map_underlay_title">Mapas subyacentes</string>
     <string name="quick_action_map_underlay_action">Añadir subyacencia</string>
-    <string name="quick_action_map_source">Cambiar repositorio del mapa</string>
+    <string name="quick_action_map_source">Alternar repositorio del mapa</string>
     <string name="quick_action_map_source_title">Repositorio de mapas</string>
     <string name="quick_action_map_source_action">Añadir repositorio del mapa</string>
     <string name="quick_action_map_source_switch">Repositorio del mapa cambiada a «%s».</string>
@@ -4862,23 +4862,27 @@
     <string name="map_widget_altitude_map_center">Elevación: centro del mapa</string>
     <string name="release_4_3">• Nuevo motor versión 2 (OpenGL) más rápido al visualizar mapas, con vista 2.5D
 \n
-\n • Animación suave para los cambios de ubicación al moverse
+\n• Animación suave para los cambios de ubicación al moverse
 \n
-\n • Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
+\n• Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
 \n
-\n • «Distancia al pulsar»: nuevas opciones de tamaño de texto.
+\n• «Distancia al pulsar»: nuevas opciones de tamaño de texto.
 \n
-\n • Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
+\n• Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
 \n
-\n • Se ha corregido la opción «Posición de la ubicación».
+\n• Se ha corregido la opción «Posición de la ubicación».
 \n
-\n • GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
+\n• GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
 \n
-\n • Se ha reorganizado la lista de «Mapas náuticos»
+\n• Se ha reorganizado la lista de «Mapas náuticos»
 \n
-\n • Se ha añadido soporte para sensores externos ANT+
+\n• Se ha añadido soporte para sensores externos ANT+
 \n
-\n • Nueva opción para desactivar la descarga del UUID
+\n• Nueva opción para desactivar la descarga del UUID
+\n
+\n• Previsión ajustable de la velocidad predefinida para los tiempos de desplazamiento en senderismo, excursionismo o corriendo, en función de la altitud
+\n
+\n• Corregido el comportamiento de la salida de audio y del regulador de volumen
 \n
 \n</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
@@ -4983,4 +4987,15 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
+    <string name="release_4_4_pre">• Aquí estarán las cadenas para la versión 4.4</string>
+    <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
+    <string name="open_weather_action">Ver meteorología</string>
+    <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
+    <string name="shared_string_open">Abrir</string>
+    <string name="mtb_scale">Escala de MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
+    <string name="mtb_segment_classification">Clasificación de segmentos</string>
 </resources>
