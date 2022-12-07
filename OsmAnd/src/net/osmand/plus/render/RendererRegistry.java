@@ -144,32 +144,18 @@ public class RendererRegistry {
 	@Nullable
 	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
 	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
-		InputStream is = getInputStream(name);
-		if (is == null) {
+		if (!readRenderingConstants(name, renderingConstants)) {
 			return null;
 		}
-		try {
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(is, "UTF-8");
-			int tok;
-			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok == XmlPullParser.START_TAG) {
-					String tagName = parser.getName();
-					if (tagName.equals("renderingConstant")) {
-						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"),
-									parser.getAttributeValue("", "value"));
-						}
-					}
-				}
-			}
-		} finally {
-			is.close();
+
+		Map<String, String> rendererAddons = getRendererAddons();
+		for (String addonName : rendererAddons.keySet()) {
+			readRenderingConstants(addonName, renderingConstants);
 		}
 
 		// parse content
 		RenderingRulesStorage main = null;
-		is = getInputStream(name);
+		InputStream is = getInputStream(name);
 		if (is != null) {
 			main = new RenderingRulesStorage(name, renderingConstants);
 			loadedRenderers.put(name, main);
@@ -193,11 +179,47 @@ public class RendererRegistry {
 			} finally {
 				is.close();
 			}
+			for (String addonName : rendererAddons.keySet()) {
+				is = getInputStream(addonName);
+				if (is != null) {
+					try {
+						main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
+					} finally {
+						is.close();
+					}
+				}
+			}
 			for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
 				listener.onRendererLoaded(name, main, getInputStream(name));
 			}
 		}
 		return main;
+	}
+
+	private boolean readRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
+		InputStream is = getInputStream(name);
+		if (is == null) {
+			return false;
+		}
+		try {
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			parser.setInput(is, "UTF-8");
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok == XmlPullParser.START_TAG) {
+					String tagName = parser.getName();
+					if (tagName.equals("renderingConstant")) {
+						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
+							renderingConstants.put(parser.getAttributeValue("", "name"),
+									parser.getAttributeValue("", "value"));
+						}
+					}
+				}
+			}
+		} finally {
+			is.close();
+		}
+		return true;
 	}
 
 	@Nullable

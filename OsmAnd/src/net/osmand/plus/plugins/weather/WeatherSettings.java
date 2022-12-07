@@ -17,6 +17,9 @@ public class WeatherSettings {
 
 	public static final String WEATHER_TEMP_CONTOUR_LINES_ATTR = "weatherTempContours";
 	public static final String WEATHER_PRESSURE_CONTOURS_LINES_ATTR = "weatherPressureContours";
+	public static final String WEATHER_CLOUD_CONTOURS_LINES_ATTR = "weatherCloudContours";
+	public static final String WEATHER_WIND_CONTOURS_LINES_ATTR = "weatherWindSpeedContours";
+	public static final String WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR = "weatherPrecipitationContours";
 	public static final String WEATHER_NONE_CONTOURS_LINES_VALUE = "none";
 
 	public static int DEFAULT_TRANSPARENCY = 50;

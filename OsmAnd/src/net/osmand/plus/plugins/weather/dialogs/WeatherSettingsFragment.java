@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
@@ -94,14 +95,19 @@ public class WeatherSettingsFragment extends BaseSettingsFragment {
 			if (target instanceof OnPreferenceChanged) {
 				((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
 			}
+			app.getWeatherHelper().updateBandsSettings();
+
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
 		};
 		showChooseUnitDialog(requireContext(), weatherBand, preference.getValueIndex(), profileColor, nightMode, listener);
 	}
 
 	public static void showChooseUnitDialog(@NonNull Context ctx, @NonNull WeatherBand band,
-	                                         int selected, int profileColor, boolean nightMode,
-	                                         @NonNull OnClickListener listener) {
-
+	                                        int selected, int profileColor, boolean nightMode,
+	                                        @NonNull OnClickListener listener) {
 		List<? extends WeatherUnit> bandUnits = band.getAvailableBandUnits();
 		String[] entries = new String[bandUnits.size()];
 		for (int i = 0; i < entries.length; i++) {
