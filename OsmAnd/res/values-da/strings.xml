@@ -4985,4 +4985,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Vindstøds-konturlinjer</string>
+    <string name="shared_string_open">Åbn</string>
+    <string name="open_weather_action">Åbn vejr</string>
+    <string name="open_weather_action_description">Giver dig mulighed for at åbne en skærm med detaljerede vejroplysninger.</string>
 </resources>
