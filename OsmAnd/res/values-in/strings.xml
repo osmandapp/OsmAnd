@@ -4983,4 +4983,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Garis isometris awan</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Garis isometris curah hujan</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Garis isometris embusan angin</string>
+    <string name="shared_string_open">Buka</string>
+    <string name="open_weather_action_description">Memungkinkan Anda untuk membuka layar dengan informasi cuaca rinci.</string>
+    <string name="open_weather_action">Buka cuaca</string>
 </resources>
