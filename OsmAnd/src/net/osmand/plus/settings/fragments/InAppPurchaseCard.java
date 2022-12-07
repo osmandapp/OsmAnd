@@ -37,7 +37,7 @@ public class InAppPurchaseCard extends BaseCard {
 	private final InAppPurchases purchases;
 
 	public InAppPurchaseCard(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull InAppPurchase purchase) {
-		super(activity);
+		super(activity, false);
 		this.purchase = purchase;
 		this.purchaseHelper = purchaseHelper;
 		purchases = purchaseHelper.getInAppPurchases();
