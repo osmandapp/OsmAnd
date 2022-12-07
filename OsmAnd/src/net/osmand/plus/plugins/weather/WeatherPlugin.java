@@ -418,7 +418,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherSettings.weatherContoursEnabled.set(enabled);
 
 		if (!isAnyWeatherContourLinesEnabled()) {
-			setContoursType(WeatherContour.PRECIPITATION);
+			setContoursType(WeatherContour.TEMPERATURE);
 		}
 	}
 
