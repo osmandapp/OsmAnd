@@ -2347,9 +2347,11 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'.
 \n
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.)
-\n 
-\nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Yfirborðsupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi. 
+\n
+\nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
+\n
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
 \n
 \nSérstök kortaviðbót fyrir OsmAnd mun koma með öll sjómerki og leiðatákn þeim tengd, til rötunar á sjó eða ströndum. Lýsing sjómerkja inniheldur öll þau atriði sem nauðsynleg er til að auðkenna þau og hvað þau þýða (flokkur, lögun, litur, röð, tilvísun, o.s.frv.). 
@@ -4909,4 +4911,34 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="terms_of_service_desc">Með því að sækja landakort samþykkir þú %1$s og %2$s.</string>
     <string name="mtb_scale">Kvarði fjallahjólreiða</string>
+    <string name="wind_widget_desc">Sýnir vindhraða fyrir núverandi miðju landakortsins.</string>
+    <string name="clouds_widget_desc">Sýnir skýjahulu fyrir núverandi miðju landakortsins.</string>
+    <string name="weather_prefs_descr">24-klst og 7-daga veðurspá, uppfært á 3 klst. fresti</string>
+    <string name="map_widget_rendering_fps_desc">Sýnir hve hratt landakort og kortaeiningar séu birtar og endurlesnar, í römmum á sekúndu (FPS).</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Þessir viðmótshlutar birta upplýsingar um næstu sólarupprás og sólsetur.</string>
+    <string name="empty_screen_view_selected_weather_data">Virkjaðu þetta til að skoða valin veðurgögn á kortinu.</string>
+    <string name="map_widget_altitude_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu eða á núverandi miðju landakortsins</string>
+    <string name="switch_mode_by_tapping_on_widget">Skiptu um ham með því að slá á viðmótshlutann.</string>
+    <string name="map_widget_sunset_desc">Sýnir tíma næsta sólarlags eða tímann þar til sólin sest.</string>
+    <string name="map_widget_sunrise_desc">Sýnir tíma næstu sólarupprásar eða tímann þar til sólin rís.</string>
+    <string name="shared_string_time_left">Tími eftir</string>
+    <string name="empty_screen_weather_contours">Virkjaðu þetta til að skoða ýmsar veðurlínur á kortinu.</string>
+    <string name="empty_screen_weather_pressure_layer">Virkjaðu þetta til að skoða loftþrýstingslag á kortinu.</string>
+    <string name="empty_screen_weather_wind_layer">Virkjaðu þetta til að skoða vindalag á kortinu.</string>
+    <string name="weather_widgets_secondary_desc">Mælieiningum er hægt að breyta í stillingum Veðurviðbótarinnar.</string>
+    <string name="air_pressure_widget_desc">Sýnir loftþrýsting fyrir núverandi miðju landakortsins.</string>
+    <string name="precipitation_widget_desc">Sýnir úrkomu fyrir núverandi miðju landakortsins.</string>
+    <string name="temperature_widget_desc">Sýnir hitastig fyrir núverandi miðju landakortsins.</string>
+    <string name="rendering_engine_failed">Myndgerð OsmAnd-korts hefur nýverið hrunið.</string>
+    <string name="speak_gps_signal_status">Tilkynna þegar GPS-merki tapast og endurheimtist</string>
+    <string name="empty_screen_weather_clouds_layer">Virkjaðu þetta til að skoða skýjahululag á kortinu.</string>
+    <string name="empty_screen_weather_precipitation_layer">Virkjaðu þetta til að skoða úrkomulag á kortinu.</string>
+    <string name="empty_screen_weather_temperature_layer">Virkjaðu þetta til að skoða hitastigslag á kortinu.</string>
+    <string name="action_not_supported_with_map_style">Þessi aðgerð er ekki studd af völdum kortastíl.</string>
+    <string name="external_sensors_support">Stuðningur við utanáliggjandi skynjara</string>
+    <string name="storage_migration_fragment_close_descr">Afritun er lokið fyrir %1$s%%. Ef þú hættir núna, er ekki víst að forritið virki rétt.</string>
+    <string name="weather_widget_group_desc">Sett viðmótshluta sem birta ýmsar veðurupplýsingar.</string>
+    <string name="map_widget_altitude_map_center_desc">Sýnir hæð yfir sjávarmáli á núverandi miðju landakortsins.</string>
+    <string name="map_widget_altitude_current_location_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu.</string>
+    <string name="purchases_feature_desc_external_sensors">Birtu og skráðu gögn frá utanaðkomandi skynjurum: hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt.</string>
 </resources>

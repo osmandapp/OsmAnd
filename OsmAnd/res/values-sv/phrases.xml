@@ -4261,4 +4261,6 @@
     <string name="poi_faculty_filter">Fakultet</string>
     <string name="poi_club_aviation">Flygklubb</string>
     <string name="poi_club_bicycle">Cykelklubb</string>
+    <string name="poi_parking_fee_filter">Parkeringsavgift</string>
+    <string name="poi_dog">Hundar</string>
 </resources>

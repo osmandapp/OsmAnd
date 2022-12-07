@@ -4979,4 +4979,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії поривів вітру</string>
     <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
+    <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
+    <string name="open_weather_action">Відкрити погоду</string>
+    <string name="shared_string_open">Відкрити</string>
 </resources>
