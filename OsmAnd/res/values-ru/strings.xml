@@ -4984,4 +4984,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
+    <string name="open_weather_action_description">Позволяет открыть экран с подробной информацией о погоде.</string>
+    <string name="open_weather_action">Открыть прогноз погоды</string>
+    <string name="shared_string_open">Открыть</string>
 </resources>
