@@ -47,6 +47,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 	private boolean weatherEnabledCached;
 	private boolean contoursEnabledCached;
 	private int cachedTransparency;
+	private int bandСached;
 	private long dateTime;
 	private long cachedDateTime;
 
@@ -175,10 +176,12 @@ public class WeatherContourLayer extends BaseMapLayer {
 		contoursEnabledCached = contoursEnabled;
 		int transparency = weatherPlugin.getContoursTransparency();
 		boolean transparencyChanged = cachedTransparency != transparency;
+		boolean bandChanged = bandСached != band;
+		bandСached = band;
 		cachedTransparency = transparency;
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
-		if (weatherEnabledChanged || contoursEnabledChanged || transparencyChanged
+		if (weatherEnabledChanged || contoursEnabledChanged || transparencyChanged || bandChanged
 				|| dateTimeChanged || mapActivityInvalidated) {
 			if (weatherEnabled && contoursEnabled && band != WEATHER_BAND_UNDEFINED) {
 				recreateLayerProvider(mapRenderer, resourcesManager, band);

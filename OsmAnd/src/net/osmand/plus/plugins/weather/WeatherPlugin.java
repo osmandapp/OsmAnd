@@ -10,8 +10,11 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_CLOUD_CONTOURS_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_WIND_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
@@ -390,7 +393,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	public boolean isAnyDataVisible() {
-		boolean isContoursEnabled = isContoursEnabled();
+		boolean isContoursEnabled = isAnyWeatherContourLinesEnabled();
 		boolean isAnyLayerEnabled = weatherHelper.hasVisibleBands();
 		return isWeatherEnabled() && (isAnyLayerEnabled || isContoursEnabled);
 	}
@@ -399,20 +402,23 @@ public class WeatherPlugin extends OsmandPlugin {
 		return weatherSettings.weatherContoursEnabled.get();
 	}
 
+	public boolean isAnyWeatherContourLinesEnabled() {
+		return isWeatherContourLinesEnabled(WEATHER_TEMP_CONTOUR_LINES_ATTR)
+				|| isWeatherContourLinesEnabled(WEATHER_PRESSURE_CONTOURS_LINES_ATTR)
+				|| isWeatherContourLinesEnabled(WEATHER_CLOUD_CONTOURS_LINES_ATTR)
+				|| isWeatherContourLinesEnabled(WEATHER_WIND_CONTOURS_LINES_ATTR)
+				|| isWeatherContourLinesEnabled(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR);
+	}
+
+	public boolean isWeatherContourLinesEnabled(@NonNull String attr) {
+		return settings.getCustomRenderBooleanProperty(attr).get();
+	}
+
 	public void setContoursEnabled(boolean enabled) {
 		weatherSettings.weatherContoursEnabled.set(enabled);
 
-		RenderingRuleProperty tempContoursProp = app.getRendererRegistry().getCustomRenderingRuleProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
-		if (tempContoursProp != null) {
-			CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(tempContoursProp.getAttrName());
-			pref.set(enabled);
-		}
-
-		RenderingRuleProperty pressureContoursProp = app.getRendererRegistry().getCustomRenderingRuleProperty(WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
-		if (pressureContoursProp != null) {
-			CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(pressureContoursProp.getAttrName());
-			//pref.set(true);
-			pref.set(false);
+		if (!isAnyWeatherContourLinesEnabled()) {
+			setContoursType(WeatherContour.PRECIPITATION);
 		}
 	}
 
@@ -432,6 +438,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherContoursType.set(contoursType);
+		setContoursType(contoursType);
 	}
 
 	@NonNull
@@ -441,6 +448,22 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedForecastContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherForecastContoursType.set(contoursType);
+	}
+
+	private void setContoursType(@NonNull WeatherContour contoursType) {
+		CommonPreference<Boolean> temperaturePref = settings.getCustomRenderBooleanProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
+		CommonPreference<Boolean> pressurePref = settings.getCustomRenderBooleanProperty(WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
+		CommonPreference<Boolean> cloudPref = settings.getCustomRenderBooleanProperty(WEATHER_CLOUD_CONTOURS_LINES_ATTR);
+		CommonPreference<Boolean> windPref = settings.getCustomRenderBooleanProperty(WEATHER_WIND_CONTOURS_LINES_ATTR);
+		CommonPreference<Boolean> precipitationPref = settings.getCustomRenderBooleanProperty(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR);
+
+		String attrName = contoursType.getAttrName();
+
+		temperaturePref.set(attrName.equals(WEATHER_TEMP_CONTOUR_LINES_ATTR));
+		pressurePref.set(attrName.equals(WEATHER_PRESSURE_CONTOURS_LINES_ATTR));
+		cloudPref.set(attrName.equals(WEATHER_CLOUD_CONTOURS_LINES_ATTR));
+		windPref.set(attrName.equals(WEATHER_WIND_CONTOURS_LINES_ATTR));
+		precipitationPref.set(attrName.equals(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR));
 	}
 
 	public boolean hasCustomForecast() {
