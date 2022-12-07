@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.weather;
 
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_CLOUD_CONTOURS_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
+import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_WIND_CONTOURS_LINES_ATTR;
+
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
@@ -16,21 +22,24 @@ import net.osmand.plus.plugins.weather.units.WindUnit;
 
 public enum WeatherContour {
 
-	TEMPERATURE(R.string.map_settings_weather_temp, R.drawable.ic_action_thermometer),
-	PRECIPITATION(R.string.map_settings_weather_precip, R.drawable.ic_action_precipitation),
-	WIND(R.string.map_settings_weather_wind, R.drawable.ic_action_wind),
-	CLOUDS(R.string.map_settings_weather_cloud, R.drawable.ic_action_clouds),
-	PRESSURE(R.string.map_settings_weather_air_pressure, R.drawable.ic_action_air_pressure);
+	TEMPERATURE(R.string.map_settings_weather_temp, R.drawable.ic_action_thermometer, WEATHER_TEMP_CONTOUR_LINES_ATTR),
+	PRECIPITATION(R.string.map_settings_weather_precip, R.drawable.ic_action_precipitation, WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR),
+	WIND(R.string.map_settings_weather_wind, R.drawable.ic_action_wind, WEATHER_WIND_CONTOURS_LINES_ATTR),
+	CLOUDS(R.string.map_settings_weather_cloud, R.drawable.ic_action_clouds, WEATHER_CLOUD_CONTOURS_LINES_ATTR),
+	PRESSURE(R.string.map_settings_weather_air_pressure, R.drawable.ic_action_air_pressure, WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
 
-	WeatherContour(int titleId, int iconId) {
+	WeatherContour(int titleId, int iconId, String attrName) {
 		this.titleId = titleId;
 		this.iconId = iconId;
+		this.attrName = attrName;
 	}
 
 	@StringRes
 	private final int titleId;
 	@DrawableRes
 	private final int iconId;
+
+	private final String attrName;
 
 	@StringRes
 	public int getTitleId() {
@@ -40,6 +49,11 @@ public enum WeatherContour {
 	@DrawableRes
 	public int getIconId() {
 		return iconId;
+	}
+
+	@NonNull
+	public String getAttrName() {
+		return attrName;
 	}
 
 	@NonNull

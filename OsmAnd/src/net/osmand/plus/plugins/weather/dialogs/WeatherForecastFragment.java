@@ -7,6 +7,7 @@ import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.slider.LabelFormatter;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,6 +36,7 @@ import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
@@ -51,6 +55,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
@@ -67,6 +72,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 	private final Calendar selectedDate = getDefaultCalendar();
+	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a", TimeZone.getTimeZone("UTC"));
 
 	private boolean nightMode;
 
@@ -107,7 +113,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider = view.findViewById(R.id.time_slider);
 		timeSlider.setValueTo(24);
 		timeSlider.setValueFrom(0);
-		timeSlider.setLabelFormatter(value -> String.valueOf((int) value));
+		timeSlider.setLabelFormatter(getLabelFormatter());
 
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
@@ -121,6 +127,15 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider.setTrackActiveTintList(timeSlider.getTrackInactiveTintList());
 
 		updateTimeSlider();
+	}
+
+	private LabelFormatter getLabelFormatter() {
+		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
+		Calendar calendar = getDefaultCalendar();
+		return value -> {
+			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
+			return timeFormatter.format(calendar.getTime(), twelveHoursFormat);
+		};
 	}
 
 	private void updateTimeSlider() {

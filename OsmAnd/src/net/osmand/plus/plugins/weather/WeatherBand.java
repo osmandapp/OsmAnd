@@ -21,6 +21,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.jni.MapPresentationEnvironment;
+import net.osmand.core.jni.QListDouble;
+import net.osmand.core.jni.WeatherDataConverter.Precipitation;
+import net.osmand.core.jni.WeatherDataConverter.Pressure;
+import net.osmand.core.jni.WeatherDataConverter.Speed;
+import net.osmand.core.jni.WeatherDataConverter.Temperature;
 import net.osmand.core.jni.WeatherLayer;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherType;
@@ -530,7 +535,51 @@ public class WeatherBand {
 			String qUnit = unit.replace("°", "");
 			String result = mapPresentationEnvironment.getWeatherContourLevels(type + "_" + qUnit, ZoomLevel.swigToEnum(zoom));
 			if (!Algorithms.isEmpty(result)) {
-				return contourLevels;
+				QListDouble levels = new QListDouble();
+				String[] params = result.split(",");
+				for (String p : params) {
+					double level;
+					try {
+						level = Double.parseDouble(p);
+					} catch (NumberFormatException e) {
+						continue;
+					}
+					if (!unit.equals(internalUnit)) {
+						switch (bandIndex) {
+							case WEATHER_BAND_CLOUD:
+								// Assume cloud in % only
+								break;
+							case WEATHER_BAND_TEMPERATURE:
+								Temperature.Unit temperatureUnit = Temperature.unitFromString(unit);
+								Temperature.Unit temperatureInternalUnit = Temperature.unitFromString(internalUnit);
+								Temperature temperature = new Temperature(temperatureUnit, level);
+								level = temperature.toUnit(temperatureInternalUnit);
+								break;
+							case WEATHER_BAND_PRESSURE:
+								Pressure.Unit pressureUnit = Pressure.unitFromString(unit);
+								Pressure.Unit pressureInternalUnit = Pressure.unitFromString(internalUnit);
+								Pressure pressure = new Pressure(pressureUnit, level);
+								level = pressure.toUnit(pressureInternalUnit);
+								break;
+							case WEATHER_BAND_WIND_SPEED:
+								Speed.Unit speedUnit = Speed.unitFromString(unit);
+								Speed.Unit speedInternalUnit = Speed.unitFromString(internalUnit);
+								Speed speed = new Speed(speedUnit, level);
+								level = speed.toUnit(speedInternalUnit);
+								break;
+							case WEATHER_BAND_PRECIPITATION:
+								Precipitation.Unit precipitationUnit = Precipitation.unitFromString(unit);
+								Precipitation.Unit precipitationInternalUnit = Precipitation.unitFromString(internalUnit);
+								Precipitation precipitation = new Precipitation(precipitationUnit, level);
+								level = precipitation.toUnit(precipitationInternalUnit);
+								break;
+							case WEATHER_BAND_UNDEFINED:
+								break;
+						}
+					}
+					levels.add(level);
+				}
+				contourLevels.set(ZoomLevel.swigToEnum(zoom), levels);
 			}
 			zoom++;
 		}

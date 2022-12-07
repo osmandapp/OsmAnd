@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITA
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
-import static net.osmand.plus.render.RendererRegistry.WEATHER_RENDER;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +16,8 @@ import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -128,21 +127,23 @@ public class WeatherHelper {
 
 	@NonNull
 	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
-		RenderingRulesStorage rulesStorage = app.getRendererRegistry().getRenderer(WEATHER_RENDER);
 		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
 		for (WeatherBand band : weatherBands.values()) {
-			String unit = band.getBandUnit().getSymbol();
-			String unitFormatGeneral = band.getBandGeneralUnitFormat();
-			String unitFormatPrecise = band.getBandPreciseUnitFormat();
-			String internalUnit = band.getInternalBandUnit();
-			float opacity = band.getBandOpacity();
-			String contourStyleName = band.getContourStyleName();
-			String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
-			ZoomLevelDoubleListHash contourLevels = band.getContourLevels(weatherResourcesManager, mapPresentationEnvironment);
+			WeatherUnit weatherUnit = band.getBandUnit();
+			if (weatherUnit != null) {
+				String unit = weatherUnit.getSymbol();
+				String unitFormatGeneral = band.getBandGeneralUnitFormat();
+				String unitFormatPrecise = band.getBandPreciseUnitFormat();
+				String internalUnit = band.getInternalBandUnit();
+				float opacity = band.getBandOpacity();
+				String contourStyleName = band.getContourStyleName();
+				String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
+				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(weatherResourcesManager, mapPresentationEnvironment);
 
-			GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
-					internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);
-			bandSettings.set(band.getBandIndex(), settings);
+				GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
+						internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);
+				bandSettings.set(band.getBandIndex(), settings);
+			}
 		}
 		return bandSettings;
 	}
