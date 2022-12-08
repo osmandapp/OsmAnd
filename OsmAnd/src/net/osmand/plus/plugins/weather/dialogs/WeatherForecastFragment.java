@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +50,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -73,6 +75,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 	private final Calendar selectedDate = getDefaultCalendar();
 	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a", TimeZone.getTimeZone("UTC"));
+	private final TimeFormatter timeShortFormatter = new TimeFormatter(Locale.getDefault(), "HH", "h a", TimeZone.getTimeZone("UTC"));
+	private final SimpleDateFormat simpleHoursFormat = new SimpleDateFormat(" K", Locale.getDefault());
 
 	private boolean nightMode;
 
@@ -89,6 +93,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		selectedDate.setTime(currentDate.getTime());
+		simpleHoursFormat.getCalendar().setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
 	@Nullable
@@ -104,6 +109,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		setupToolBar(view);
 		setupDatesView(view);
 		setupTimeSlider(view);
+		setupTimeLegend(view);
 		buildZoomButtons(view);
 
 		return view;
@@ -129,18 +135,43 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		updateTimeSlider();
 	}
 
-	private LabelFormatter getLabelFormatter() {
-		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
+	private void setupTimeLegend(@NonNull View view) {
 		Calendar calendar = getDefaultCalendar();
-		return value -> {
-			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
-			return timeFormatter.format(calendar.getTime(), twelveHoursFormat);
-		};
+		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
+
+		int hours = 0;
+		ViewGroup timeLegend = view.findViewById(R.id.time_legend);
+		for (int i = 0; i <= timeLegend.getChildCount(); i++) {
+			View child = timeLegend.getChildAt(i);
+			if (child instanceof TextView) {
+				TextView textView = (TextView) child;
+				textView.setText(getFormattedHours(calendar, hours, twelveHoursFormat));
+				hours += 3;
+			}
+		}
+	}
+
+	private String getFormattedHours(@NonNull Calendar calendar, int hours, boolean twelveHoursFormat) {
+		calendar.set(Calendar.HOUR_OF_DAY, hours);
+
+		String formattedHours;
+		if (twelveHoursFormat && hours != 12) {
+			formattedHours = simpleHoursFormat.format(calendar.getTime());
+		} else {
+			formattedHours = timeShortFormatter.format(calendar.getTime(), twelveHoursFormat);
+		}
+		return formattedHours;
+	}
+
+	private LabelFormatter getLabelFormatter() {
+		Calendar calendar = getDefaultCalendar();
+		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
+		return value -> getFormattedHours(calendar, (int) value, twelveHoursFormat);
 	}
 
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(12);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
 		timeSlider.setStepSize(today ? 1 : 3);
 		timeSlider.setCurrentDate(today ? currentDate : null);
 	}

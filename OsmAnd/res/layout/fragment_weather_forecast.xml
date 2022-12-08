@@ -135,7 +135,50 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
-				android:stepSize="1"/>
+				android:stepSize="1" />
+
+			<LinearLayout
+				android:id="@+id/time_legend"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:orientation="horizontal">
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+				<include layout="@layout/simple_space" />
+
+				<include layout="@layout/simple_description" />
+
+			</LinearLayout>
 
 		</LinearLayout>
 
