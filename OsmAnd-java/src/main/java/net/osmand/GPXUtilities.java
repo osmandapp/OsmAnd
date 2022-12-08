@@ -727,7 +727,7 @@ public class GPXUtilities {
 		public final String name;
 		public String iconName;
 		public String backgroundType;
-		public final List<WptPt> points = new ArrayList<>();
+		public List<WptPt> points = new ArrayList<>();
 		public int color;
 
 		public PointsGroup(String name) {
@@ -1440,7 +1440,7 @@ public class GPXUtilities {
 		public List<Route> routes = new ArrayList<>();
 
 		private final List<WptPt> points = new ArrayList<>();
-		private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
+		private Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 		private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 		public Exception error = null;
@@ -1536,6 +1536,10 @@ public class GPXUtilities {
 			pointsGroups.put(group.name, group);
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;
+		}
+		
+		public void setPointsGroups(Map<String, PointsGroup> groups) {
+			pointsGroups = groups;
 		}
 
 		private void addPointsToGroups(Collection<? extends WptPt> collection) {
