@@ -449,9 +449,10 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void setSelectedForecastContoursType(@NonNull WeatherContour contoursType) {
 		weatherSettings.weatherForecastContoursType.set(contoursType);
+		setContoursType(contoursType);
 	}
 
-	private void setContoursType(@NonNull WeatherContour contoursType) {
+	public void setContoursType(@NonNull WeatherContour contoursType) {
 		CommonPreference<Boolean> temperaturePref = settings.getCustomRenderBooleanProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
 		CommonPreference<Boolean> pressurePref = settings.getCustomRenderBooleanProperty(WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
 		CommonPreference<Boolean> cloudPref = settings.getCustomRenderBooleanProperty(WEATHER_CLOUD_CONTOURS_LINES_ATTR);
@@ -474,6 +475,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		if (mapContext != null) {
 			mapContext.updateMapSettings();
 		}
+		weatherHelper.updateBandsSettings();
 	}
 
 	public boolean hasCustomForecast() {

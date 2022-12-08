@@ -64,6 +64,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
 
+	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
+
 	private OsmandApplication app;
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
@@ -74,9 +76,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 	private final Calendar selectedDate = getDefaultCalendar();
-	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a", TimeZone.getTimeZone("UTC"));
+
 	private final TimeFormatter timeShortFormatter = new TimeFormatter(Locale.getDefault(), "HH", "h a", TimeZone.getTimeZone("UTC"));
 	private final SimpleDateFormat simpleHoursFormat = new SimpleDateFormat(" K", Locale.getDefault());
+
+	private WeatherContour previousWeatherContour;
 
 	private boolean nightMode;
 
@@ -94,6 +98,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		selectedDate.setTime(currentDate.getTime());
 		simpleHoursFormat.getCalendar().setTimeZone(TimeZone.getTimeZone("UTC"));
+
+		if (savedInstanceState != null) {
+			previousWeatherContour = WeatherContour.valueOf(savedInstanceState.getString(PREVIOUS_WEATHER_CONTOUR_KEY, WeatherContour.TEMPERATURE.name()));
+		} else {
+			previousWeatherContour = plugin.getSelectedContoursType();
+		}
+		plugin.setContoursType(plugin.getSelectedForecastContoursType());
 	}
 
 	@Nullable
@@ -271,6 +282,21 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 				mapInfoLayer.removeRulerWidgets(Collections.singletonList(rulerWidget));
 			}
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(PREVIOUS_WEATHER_CONTOUR_KEY, previousWeatherContour.name());
+	}
+
+	@Override
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			plugin.setSelectedContoursType(previousWeatherContour);
+		}
+		super.onDestroy();
 	}
 
 	private void chooseContour(@NonNull View view) {
