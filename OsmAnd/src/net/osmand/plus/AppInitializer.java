@@ -17,12 +17,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
+import net.osmand.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -134,6 +136,11 @@ public class AppInitializer implements IProgress {
 		MAPS_INITIALIZED, POI_TYPES_INITIALIZED, POI_FILTERS_INITIALIZED, ASSETS_COPIED,
 		INIT_RENDERERS, RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS,
 		ROUTING_CONFIG_INITIALIZED
+	}
+
+	static {
+		//Set old time format of GPX for Android 6.0 and lower
+		GPXUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
 	}
 
 	public interface AppInitializeListener {
