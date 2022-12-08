@@ -4973,4 +4973,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">降水等值線</string>
     <string name="rendering_attr_weatherCloudContours_name">雲層等值線</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">陣風等值線</string>
+    <string name="shared_string_open">開啟</string>
+    <string name="open_weather_action_description">讓您可以開啟有詳細天氣資訊的畫面。</string>
+    <string name="open_weather_action">開啟天氣</string>
 </resources>
