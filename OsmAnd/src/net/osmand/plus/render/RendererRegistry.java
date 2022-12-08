@@ -100,10 +100,16 @@ public class RendererRegistry {
 		}
 
 		try {
-			RenderingRulesStorage renderer = loadRenderer(name, new LinkedHashMap<>(), new LinkedHashMap<>());
+			Map<String, String> renderingConstants = new LinkedHashMap<>();
+			RenderingRulesStorage renderer = loadRenderer(null, name, new LinkedHashMap<>(), renderingConstants);
 			if (renderer != null) {
+				for (String addonName : getRendererAddons().keySet()) {
+					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
+//					renderer.mergeDependsOrAddon(storage);
+				}
 				loadedRenderers.put(name, renderer);
 			}
+
 			return renderer;
 		} catch (IOException | XmlPullParserException e) {
 			log.error("Error loading renderer", e);
@@ -142,26 +148,19 @@ public class RendererRegistry {
 	}
 
 	@Nullable
-	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
+	private RenderingRulesStorage loadRenderer(RenderingRulesStorage main, String name, Map<String, RenderingRulesStorage> loadedRenderers,
 	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
 		if (!readRenderingConstants(name, renderingConstants)) {
 			return null;
 		}
-
-		Map<String, RenderingRulesStorage> rendererAddons = new LinkedHashMap<>();
-		if (!getRendererAddons().keySet().contains(name)) {
-			// don't load other addons while addon is being loaded
-			for (String addonName : getRendererAddons().keySet()) {
-				RenderingRulesStorage storage = loadRenderer(addonName, loadedRenderers, renderingConstants);
-				rendererAddons.put(addonName, storage);
-			}
-		}
-
 		// parse content
-		RenderingRulesStorage main = null;
 		InputStream is = getInputStream(name);
+		boolean addon = main != null;
 		if (is != null) {
-			main = new RenderingRulesStorage(name, renderingConstants);
+			if (main == null) {
+				// reuse same storage for addons
+				main = new RenderingRulesStorage(name, renderingConstants);
+			}
 			loadedRenderers.put(name, main);
 			try {
 				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
@@ -171,7 +170,7 @@ public class RendererRegistry {
 					}
 					RenderingRulesStorage dep = null;
 					try {
-						dep = loadRenderer(nm, loadedRenderers, renderingConstants);
+						dep = loadRenderer(null, nm, loadedRenderers, renderingConstants);
 					} catch (IOException e) {
 						log.warn("Dependent renderer not found: " + e.getMessage(), e);
 					}
@@ -183,11 +182,11 @@ public class RendererRegistry {
 			} finally {
 				is.close();
 			}
-			for (String addonName : rendererAddons.keySet()) {
-				main.mergeDependsOrAddon(rendererAddons.get(addonName));
-			}
-			for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
-				listener.onRendererLoaded(name, main, getInputStream(name));
+
+			if (!addon) {
+				for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+					listener.onRendererLoaded(name, main, getInputStream(name));
+				}
 			}
 		}
 		return main;

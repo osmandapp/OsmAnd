@@ -19,6 +19,7 @@ import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
@@ -81,6 +82,15 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 
 		for (WeatherWidget widget : weatherWidgets) {
 			widget.updateInfo(drawSettings);
+		}
+	}
+
+	@Override
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+
+		for (WeatherWidget widget : weatherWidgets) {
+			widget.updateColors(textState);
 		}
 	}
 

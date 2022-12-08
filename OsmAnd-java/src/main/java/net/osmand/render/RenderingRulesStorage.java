@@ -389,11 +389,12 @@ public class RenderingRulesStorage {
 					renderingConstants.put(attrsMap.get("name"), attrsMap.get("value"));
 				}
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
+				// here we need to check that style is not addon and throw unsupported exception
 				String depends = attrsMap.get("depends");
-				if(depends != null && depends.length()> 0){
+				if (depends != null && depends.length() > 0) {
 					this.dependsStorage = resolver.resolve(depends, resolver);
 				}
-				if(dependsStorage != null){
+				if (dependsStorage != null) {
 					// copy dictionary
 					dictionary = new ArrayList<String>(dependsStorage.dictionary);
 					dictionaryMap = new LinkedHashMap<String, Integer>(dependsStorage.dictionaryMap);
