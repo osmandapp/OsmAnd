@@ -148,9 +148,13 @@ public class RendererRegistry {
 			return null;
 		}
 
-		Map<String, String> rendererAddons = getRendererAddons();
-		for (String addonName : rendererAddons.keySet()) {
-			readRenderingConstants(addonName, renderingConstants);
+		Map<String, RenderingRulesStorage> rendererAddons = new LinkedHashMap<>();
+		if (!getRendererAddons().keySet().contains(name)) {
+			// don't load other addons while addon is being loaded
+			for (String addonName : getRendererAddons().keySet()) {
+				RenderingRulesStorage storage = loadRenderer(addonName, loadedRenderers, renderingConstants);
+				rendererAddons.put(addonName, storage);
+			}
 		}
 
 		// parse content
@@ -163,7 +167,7 @@ public class RendererRegistry {
 				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
 					// reload every time to propogate rendering constants
 					if (loadedRenderers.containsKey(nm)) {
-						log.warn("Circular dependencies found " + nm);
+						log.warn("Possible Circular dependencies found " + nm);
 					}
 					RenderingRulesStorage dep = null;
 					try {
@@ -180,14 +184,7 @@ public class RendererRegistry {
 				is.close();
 			}
 			for (String addonName : rendererAddons.keySet()) {
-				is = getInputStream(addonName);
-				if (is != null) {
-					try {
-						main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
-					} finally {
-						is.close();
-					}
-				}
+				main.mergeDependsOrAddon(rendererAddons.get(addonName));
 			}
 			for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
 				listener.onRendererLoaded(name, main, getInputStream(name));
