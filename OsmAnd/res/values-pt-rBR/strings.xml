@@ -4963,4 +4963,7 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Associação Internacional de Ciclismo de Montanha</string>
     <string name="mtb_segment_classification">Classificação de segmento</string>
+    <string name="shared_string_open">Aberto</string>
+    <string name="open_weather_action_description">Permite abrir uma tela com informações meteorológicas detalhadas.</string>
+    <string name="open_weather_action">Abrir meteorologia</string>
 </resources>
