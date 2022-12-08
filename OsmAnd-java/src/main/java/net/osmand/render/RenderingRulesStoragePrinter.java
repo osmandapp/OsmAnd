@@ -59,11 +59,11 @@ public class RenderingRulesStoragePrinter {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
 				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
-				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
+				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref, false);
 				return depends;
 			}
 		};
-		storage.parseRulesFromXmlInputStream(is, resolver);
+		storage.parseRulesFromXmlInputStream(is, resolver, false);
 		new RenderingRulesStoragePrinter().printJavaFile(outputPath, name, storage);
 	
 	}
