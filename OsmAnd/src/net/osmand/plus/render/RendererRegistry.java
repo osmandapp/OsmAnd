@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -148,11 +149,13 @@ public class RendererRegistry {
 			return null;
 		}
 
-		Map<String, String> rendererAddons = getRendererAddons();
+		Map<String, String> rendererAddons = new HashMap<>();
+		// FIXME not supported addons for legacy
 		if (app.useOpenGlRenderer()) {
-			for (String addonName : rendererAddons.keySet()) {
-				readRenderingConstants(addonName, renderingConstants);
-			}
+			rendererAddons = getRendererAddons();
+		}
+		for (String addonName : rendererAddons.keySet()) {
+			readRenderingConstants(addonName, renderingConstants);
 		}
 
 		// parse content
@@ -181,15 +184,13 @@ public class RendererRegistry {
 			} finally {
 				is.close();
 			}
-			if (app.useOpenGlRenderer()) {
-				for (String addonName : rendererAddons.keySet()) {
-					is = getInputStream(addonName);
-					if (is != null) {
-						try {
-							main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
-						} finally {
-							is.close();
-						}
+			for (String addonName : rendererAddons.keySet()) {
+				is = getInputStream(addonName);
+				if (is != null) {
+					try {
+						main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
+					} finally {
+						is.close();
 					}
 				}
 			}
