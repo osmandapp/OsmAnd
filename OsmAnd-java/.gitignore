@@ -12,7 +12,7 @@ src/main/resources/*.lib
 # Gradle
 .gradle
 /local.properties
-
+test-results/
 # MacOSX
 .DS_Store
 

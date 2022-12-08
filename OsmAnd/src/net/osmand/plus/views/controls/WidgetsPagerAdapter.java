@@ -1,10 +1,8 @@
 package net.osmand.plus.views.controls;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
@@ -34,7 +31,6 @@ import java.util.TreeMap;
 
 public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
-	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final WidgetsPanel widgetsPanel;
 	private final MapWidgetRegistry widgetRegistry;
@@ -43,11 +39,15 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	private ViewHolderBindListener bindListener;
 
 	public WidgetsPagerAdapter(@NonNull OsmandApplication app, @NonNull WidgetsPanel widgetsPanel) {
-		this.app = app;
 		this.widgetsPanel = widgetsPanel;
 		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		visiblePages = collectVisiblePages();
+	}
+
+	@NonNull
+	public VisiblePages getVisiblePages() {
+		return visiblePages;
 	}
 
 	public void setViewHolderBindListener(@Nullable ViewHolderBindListener bindListener) {
@@ -66,10 +66,8 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	@NonNull
 	@Override
 	public PageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LinearLayout linearLayout = new LinearLayout(parent.getContext());
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-		return new PageViewHolder(linearLayout);
+		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+		return new PageViewHolder(inflater.inflate(R.layout.widgets_panel_page, parent, false));
 	}
 
 	@Override
@@ -95,7 +93,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 	@Override
 	public int getItemCount() {
-		return visiblePages.getCount();
+		return Math.max(1, visiblePages.getCount());
 	}
 
 	@NonNull
@@ -113,22 +111,11 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	                                @NonNull Set<MapWidgetInfo> widgets,
 	                                @NonNull ApplicationMode appMode) {
 		Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
-		boolean hasVisibleWidgets = false;
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(appMode)) {
 				TextInfoWidget widget = (TextInfoWidget) widgetInfo.widget;
 				addWidgetViewToPage(textInfoWidgets, widgetInfo.pageIndex, widget);
-				hasVisibleWidgets |= widget.isViewVisible();
 			}
-		}
-		RoutingHelper routingHelper = app.getRoutingHelper();
-
-		boolean showBanner = routingHelper.isFollowingMode()
-				|| app.getLocationProvider().getLocationSimulation().isRouteAnimating();
-
-		if (routingHelper.isRoutePlanningMode()
-				|| (Algorithms.isEmpty(appMode.getRoutingProfile()) && !hasVisibleWidgets)) {
-			showBanner = false;
 		}
 
 		for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
@@ -136,14 +123,13 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 			for (TextInfoWidget widget : entry.getValue()) {
 				if (widget.isViewVisible()) {
 					widgetsViews.add(widget.getView());
-					widget.updateBannerVisibility(false);
 				}
+				widget.updateBannerVisibility(false);
 			}
-			if (Algorithms.isEmpty(widgetsViews) && (routingHelper.isFollowingMode() || !Algorithms.isEmpty(appMode.getRoutingProfile()))) {
+			if (Algorithms.isEmpty(widgetsViews)) {
 				TextInfoWidget widget = entry.getValue().get(0);
 				widgetsViews.add(widget.getView());
-				//widget.updateBannerVisibility(true);
-				widget.updateBannerVisibility(false);
+				widget.updateBannerVisibility(textInfoWidgets.size() > 1);
 			}
 			visibleViews.put(entry.getKey(), widgetsViews);
 		}
@@ -250,9 +236,9 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		public final ViewGroup container;
 
-		public PageViewHolder(@NonNull LinearLayout itemView) {
-			super(itemView);
-			container = itemView;
+		public PageViewHolder(@NonNull View view) {
+			super(view);
+			container = view.findViewById(R.id.container);
 		}
 	}
 
