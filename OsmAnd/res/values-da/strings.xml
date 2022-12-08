@@ -1298,7 +1298,7 @@
     <string name="rendering_category_routes">Ruter</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Togruter</string>
     <string name="rendering_attr_tramRoutes_name">Sporvognsruter</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Delebilruter</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Deletaxiruter</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybusruter</string>
     <string name="rendering_attr_busRoutes_name">Busruter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tog- og sporvognsruter</string>
