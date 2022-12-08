@@ -4980,4 +4980,11 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Abschnittsklassifizierung</string>
     <string name="mtb_imba">IMBA</string>
+    <string name="open_weather_action_description">Ermöglicht es dir, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
+    <string name="open_weather_action">Wetter öffnen</string>
+    <string name="shared_string_open">Öffnen</string>
+    <string name="release_4_4_pre">• Hier werden die Strings für die 4.4 Version sein</string>
+    <string name="rendering_attr_weatherCloudContours_name">Wolkenisolinien</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlagsisolinien</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Windböenisolinien</string>
 </resources>
