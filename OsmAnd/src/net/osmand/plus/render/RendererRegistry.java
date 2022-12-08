@@ -178,7 +178,7 @@ public class RendererRegistry {
 						log.warn("Dependent renderer not found: " + nm);
 					}
 					return dep;
-				});
+				}, addon);
 			} finally {
 				is.close();
 			}

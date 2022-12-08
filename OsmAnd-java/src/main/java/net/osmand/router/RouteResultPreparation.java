@@ -782,7 +782,7 @@ public class RouteResultPreparation {
 						throws XmlPullParserException, IOException {
 					throw new UnsupportedOperationException();
 				}
-			});
+			}, false);
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 			List<RouteStatistics> rsr = RouteStatisticsHelper.calculateRouteStatistic(result, null, rrs, null, req);
 			for(RouteStatistics r : rsr) {
