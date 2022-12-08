@@ -2352,14 +2352,10 @@
 \nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
 \n
 \nLeiðbeiningar - https://osmand.net/docs/user/plugins/contour-lines</string>
-    <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
+    <string name="plugin_nautical_descr">Virkjaðu þetta til að bæta á kortið myndrænni framsetningu fyrir siglingaleiðir, ljósvita, hættusvæði, bannsvæði, hvar megi kasta akkerum, bryggjur, o.s.frv. Til að nota þetta skaltu sækja sjókortaviðbótina, fara í kortastillingarnar og setja stíl kortsins á \'Sjókort\'.
 \n
-\nSérstök kortaviðbót fyrir OsmAnd mun koma með öll sjómerki og leiðatákn þeim tengd, til rötunar á sjó eða ströndum. Lýsing sjómerkja inniheldur öll þau atriði sem nauðsynleg er til að auðkenna þau og hvað þau þýða (flokkur, lögun, litur, röð, tilvísun, o.s.frv.). 
-\n
-\nTil að snúa aftur í hefðbundnari kortastíla OsmAnd, þarf einfaldlega að gera viðbótina óvirka aftur eða breyta stílnum í \'Stíll korts\' í \'Stilla kort\' valmyndinni.</string>
-    <string name="plugin_ski_descr">Þessi viðbót fyrir OsmAnd setur við fingurgóma þína allskyns smáatriði varðandi skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi, og birtast í sérstökum \'Vetrar\'-kortastíl sem líkir eftir snævi þöktu landslagi. 
-\n
-\nVirkjun á þessari sýn breytirstíl kortsins yfir í \'Vetur og skíði\', þar sem allt landslag birtist í vetraraðstæðum. Til að snúa aftur í hefðbundnari kortastíla OsmAnd, þarf einfaldlega að gera viðbótina óvirka aftur eða breyta stílnum í \'Stíll korts\' í \'Stilla kort\' valmyndinni.</string>
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="plugin_ski_descr">Hannað til að rata um vetraríþróttasvæði. Skoðaðu skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi. Til að nota þetta er viðbótin fyrst virkjuð, síðan farið í stillingar kortsins og \'Vetur og skíði\' valið sem stíll þess.</string>
     <string name="select_index_file_to_download">Ekkert fannst, en þú getur aftur útbúið það sjálf(ur) (skoðaðu https://osmand.net).</string>
     <string name="index_item_world_bitcoin_payments">Bitcoin-greiðslur um víða veröld</string>
     <string name="app_modes_choose_descr">Veldu notkunarsnið sem á að birta.</string>
@@ -2369,9 +2365,9 @@
 \n OsmAnd skíðakortaviðbótin gerir þér kleift að skoða skíðasvæði nokkuð nákvæmlega með ýmsum stigum upplýsinga, eins og staðsetningar á lyftum og öðrum mannvirkjum.</string>
     <string name="osm_recipients_label">OSM viðtakendur</string>
     <string name="total_donations">Heildarstyrkir</string>
-    <string name="record_plugin_description">Þessi viðbót virkjar eiginleikann til að skrá og vista ferlana þína með því að snerta GPX-skráningarmerkið á kortaskjánum, en einnig til að skrá sjálfvirkt allar leiðir sem þú ferð yfir í GPX-skrá. 
+    <string name="record_plugin_description">Gerir kleift að skrá, vista og greina ferla yfir hreyfingu, eins og til dæmis hraða, hækkun, lækkun eða hæðasnið leiða, sem þá er hægt að endurnýta, bæta eða deila með vinum.
 \n
-\nHægt er að deila skráðum ferlum með vinum þínum eða nota þá við framlög í OSM. Íþróttafólk geta notað skráða ferla til að fylgjast með æfingunum sínum. Einhverja einfalda greiningu ferla er hægt að framkvæma beint í OsmAnd, á borð við tímatökur umferða, skoða meðalhraða o.s.frv., en auðvitað er einnig hægt að greina ferlana betur í sértækum utanaðkomandi greiningarforritum.</string>
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="plugin_touringview_descr">Sé þessi sýn virkjuð, breytist kortastíll OsmAnd í \'Ferðakort\', sem er sérstök ásýnd með mörgum smáatriðum sem skipta máli fyrir ferðamenn jafnt sem atvinnubílstjóra. 
 \n
 \nKortasýnin birtir, við hvaða aðdrátt korts sem er, hámarksmagn ferðaupplýsinga sem tiltækar eru í kortagögnunum (sérstaklega vegi, slóðir, stíga og allskyns vegvísa). 
@@ -4944,4 +4940,6 @@
     <string name="shared_string_open">Opið</string>
     <string name="open_weather_action_description">Gerir þér kleift að opna skjá með nákvæmum veðurupplýsingum.</string>
     <string name="open_weather_action">Opna veður</string>
+    <string name="map_markers_bar_widget_desc">Viðmótshluti toppstikunnar birtir vegalengd og stefnu að næsta kortamerki miðað við fyrirliggjandi staðsetningu þína. Hægt er að stilla viðmótshlutann á að birta eitt eða tvö kortamerki.</string>
+    <string name="external_sensors_plugin_description">Sækir gögn frá utanaðkomandi skynjurum til að lesa t.d. hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt. Krefst þess að tækið þitt sé tengt við viðkomandi skynjara með samskiptamáta fyrir þráðlaus ANT+ einkanet.</string>
 </resources>
