@@ -149,8 +149,10 @@ public class RendererRegistry {
 		}
 
 		Map<String, String> rendererAddons = getRendererAddons();
-		for (String addonName : rendererAddons.keySet()) {
-			readRenderingConstants(addonName, renderingConstants);
+		if (app.useOpenGlRenderer()) {
+			for (String addonName : rendererAddons.keySet()) {
+				readRenderingConstants(addonName, renderingConstants);
+			}
 		}
 
 		// parse content
@@ -179,13 +181,15 @@ public class RendererRegistry {
 			} finally {
 				is.close();
 			}
-			for (String addonName : rendererAddons.keySet()) {
-				is = getInputStream(addonName);
-				if (is != null) {
-					try {
-						main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
-					} finally {
-						is.close();
+			if (app.useOpenGlRenderer()) {
+				for (String addonName : rendererAddons.keySet()) {
+					is = getInputStream(addonName);
+					if (is != null) {
+						try {
+							main.parseRulesFromXmlInputStream(is, (nm, ref) -> null);
+						} finally {
+							is.close();
+						}
 					}
 				}
 			}
