@@ -157,7 +157,8 @@ public class WeatherContourLayer extends BaseMapLayer {
 		}
 
 		short band = WEATHER_BAND_UNDEFINED;
-		WeatherContour weatherContour = weatherPlugin.getSelectedContoursType();
+		WeatherContour weatherContour = weatherPlugin.hasCustomForecast() ?
+				weatherPlugin.getSelectedForecastContoursType() : weatherPlugin.getSelectedContoursType();
 
 		if (weatherContour == WeatherContour.TEMPERATURE) {
 			band = WEATHER_BAND_TEMPERATURE;
@@ -180,7 +181,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		boolean contoursEnabled = weatherPlugin.isContoursEnabled();
+		boolean contoursEnabled = weatherPlugin.isContoursEnabled() || weatherPlugin.hasCustomForecast();
 		boolean contoursEnabledChanged = contoursEnabled != contoursEnabledCached;
 		contoursEnabledCached = contoursEnabled;
 		int transparency = weatherPlugin.getContoursTransparency();
