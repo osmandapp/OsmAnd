@@ -163,12 +163,12 @@ public class SideWidgetsPanel extends FrameLayout {
 
 	public void update(DrawSettings drawSettings) {
 		adapter.updateIfNeeded();
-		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
-		boolean show = adapter.getItemCount() > 0 && selfShowAllowed;
+		boolean show = hasVisibleWidgets() && selfShowAllowed;
 		selfVisibilityChanging = true;
 		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
 			selfShowAllowed = true;
 		}
+		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
 		selfVisibilityChanging = false;
 		updateDots();
 	}
@@ -184,22 +184,25 @@ public class SideWidgetsPanel extends FrameLayout {
 	protected void dispatchDraw(Canvas canvas) {
 		super.dispatchDraw(canvas);
 
-		boolean shouldHideBorder = false;
+		if (hasVisibleWidgets()) {
+			drawBorder(canvas);
+		}
+	}
+
+	private boolean hasVisibleWidgets() {
 		if (adapter != null) {
 			VisiblePages visiblePages = adapter.getVisiblePages();
 			List<View> views = visiblePages.getWidgetsViews(viewPager.getCurrentItem());
 			if (!Algorithms.isEmpty(views)) {
-				boolean hasVisibleViews = false;
 				for (View view : views) {
-					hasVisibleViews |= view.findViewById(R.id.container).getVisibility() == VISIBLE;
-					hasVisibleViews |= view.findViewById(R.id.empty_banner).getVisibility() == VISIBLE;
+					if (view.findViewById(R.id.container).getVisibility() == VISIBLE
+							|| view.findViewById(R.id.empty_banner).getVisibility() == VISIBLE) {
+						return true;
+					}
 				}
-				shouldHideBorder = !hasVisibleViews;
 			}
 		}
-		if (!shouldHideBorder) {
-			drawBorder(canvas);
-		}
+		return false;
 	}
 
 	private void drawBorder(@NonNull Canvas canvas) {
