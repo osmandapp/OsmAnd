@@ -4474,4 +4474,6 @@
     <string name="poi_socket_type2_cable_voltage_high">Alta</string>
     <string name="poi_socket_type3a_voltage_low">Baixa</string>
     <string name="poi_socket_cee_blue_voltage_high">Alta</string>
+    <string name="poi_hiking_filter">Adequado para caminhada</string>
+    <string name="poi_hiking_yes">Sim</string>
 </resources>
