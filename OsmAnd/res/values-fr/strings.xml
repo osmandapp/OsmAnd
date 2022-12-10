@@ -3585,9 +3585,9 @@
     <string name="change_application_profile">Modifier le profil</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
-    <string name="gpx_parse_error">Problèmes trouvés avec ce fichier GPX.
+    <string name="gpx_parse_error">Ce fichier GPX comporte des erreurs.
 \n
-\nVous pouvez contacter le support OsmAnd pour enquêter.</string>
+\nContactez le support OsmAnd pour analyser ce problème.</string>
     <string name="system_screen_timeout_descr">Éteint l\'écran en fonction du délai système.</string>
     <string name="map_source_zoom_levels_descr">Affecte l\'affichage de la carte ou des sur-couche / sous-couche. 
 \n 
