@@ -4798,7 +4798,7 @@
     <string name="ant_read_data">Lire les données</string>
     <string name="map_widget_ant_heart_rate">Fréquence cardiaque</string>
     <string name="ant_write_to_gpx">Ajouter des données à la trace</string>
-    <string name="ant_heart_rate_write_gpx_desc">Inclue la fréquence cardiaque à la trace</string>
+    <string name="ant_heart_rate_write_gpx_desc">Ajouter la fréquence cardiaque à la trace</string>
     <string name="ant_missing_dependency_descr">Impossible de trouver le service « %1$s ».
 \nVous devez installer ou mettre à jour les services ANT+.
 \nVoulez-vous lancer Google Play Store pour le faire \?</string>
@@ -4820,7 +4820,7 @@
     <string name="external_sensors_plugin_name">Capteurs externes</string>
     <string name="map_widget_altitude_map_center_desc">Affiche l’altitude du centre de la carte.</string>
     <string name="simulate_location_by_gpx">Simuler la position via GPX</string>
-    <string name="map_widget_altitude_desc">Affiche l\'altitude de l\'emplacement actuel ou du centre de la carte</string>
+    <string name="map_widget_altitude_desc">Affiche l\'altitude de la position actuelle ou du centre de la carte</string>
     <string name="location_simulation_cutoff">La simulation ignore les premiers mètres</string>
     <string name="location_simulation_speedup">Accélération de la simulation</string>
     <string name="shared_string_identifiers">Identifiants</string>
@@ -4828,11 +4828,11 @@
     <string name="send_uuid_preference">Envoyer l\'identifiant unique de l\'utilisateur (UUID)</string>
     <string name="map_widget_altitude_current_location">Altitude : Emplacement actuel</string>
     <string name="map_widget_altitude_map_center">Altitude : Centre de la carte</string>
-    <string name="map_widget_altitude_current_location_desc">Affiche l’altitude de l’emplacement actuel.</string>
+    <string name="map_widget_altitude_current_location_desc">Affiche l’altitude de la position actuelle.</string>
     <string name="map_widget_rendering_fps">Rendu FPS de la carte</string>
-    <string name="send_uuid_preference_desc">Un UUID aléatoire est utilisé pour le téléchargement des cartes hors ligne à partir des serveurs d\'OsmAnd et ainsi garantir une utilisation équitable des ressources du serveur, prévoir le trafic et générer des rapports d\'utilisation mensuelle et anonyme des cartes.</string>
+    <string name="send_uuid_preference_desc">Un UUID aléatoire est utilisé pour télécharger les cartes hors ligne à partir des serveurs OsmAnd ; ce qui permet de garantir une utilisation équitable des ressources du serveur, de prévoir le trafic et de générer des rapports d\'utilisation mensuelle et anonyme des cartes.</string>
     <string name="map_widget_ant_bicycle_power">Puissance développée sur le vélo</string>
-    <string name="external_sensors_plugin_description">Accède aux capteurs externes pour récupérer, par exemple, vos battements cardiaques, la vitesse de votre vélo, la puissance ou la cadence. Demande que votre appareil soit connecté aux capteurs respectifs via le protocole ANT+.</string>
+    <string name="external_sensors_plugin_description">Accède aux capteurs externes pour récupérer, par exemple, votre fréquence cardiaque, la vitesse du vélo, la puissance ou la cadence. Nécessite que votre appareil soit connecté aux capteurs via le protocole ANT+.</string>
     <string name="current_location_widget">Coordonnées : Emplacement actuel</string>
     <string name="map_center_widget">Coordonnées : Centre de la carte</string>
     <string name="map_widget_rendering_fps_desc">Affiche la vitesse d\'affichage et d’actualisation de la carte et de ses éléments, exprimé en images par seconde (FPS).</string>
@@ -4947,7 +4947,7 @@
 \nAfin de nous aider à améliorer l\'application, merci de nous envoyer vos journaux d\'erreur.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
-    <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et pulsations cardiaques.</string>
+    <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et fréquence cardiaque.</string>
     <string name="release_4_3">• Nouvelle version, plus rapide, du moteur de rendu de la carte, avec vue 2.5D
 \n
 \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
