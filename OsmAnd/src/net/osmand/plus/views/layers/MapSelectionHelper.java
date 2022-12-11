@@ -325,14 +325,7 @@ public class MapSelectionHelper {
 								if (onPathMapSymbol == null) {
 									amenity = getAmenity(result.objectLatLon, obfMapObject);
 									if (amenity != null) {
-										RasterMapSymbol rasterMapSymbol = null;
-										try {
-											rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-										} catch (Exception ignore) {
-										}
-										if (rasterMapSymbol != null) {
-											amenity.setMapIconName(rasterMapSymbol.getContent());
-										}
+										amenity.setMapIconName(getMapIconName(symbolInfo));
 									} else {
 										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
@@ -348,14 +341,17 @@ public class MapSelectionHelper {
 		}
 	}
 
+	private String getMapIconName(MapSymbolInformation symbolInfo) {
+		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
+		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
+			return rasterMapSymbol.getContent();
+		}
+		return null;
+	}
+
 	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
 	                               @NonNull ObfMapObject obfMapObject) {
-		RasterMapSymbol rasterMapSymbol;
-		try {
-			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-		} catch (Exception eRasterMapSymbol) {
-			rasterMapSymbol = null;
-		}
+		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
 			renderedObject.setId(obfMapObject.getId().getId().longValue());
@@ -376,6 +372,15 @@ public class MapSelectionHelper {
 			}
 			result.selectedObjects.put(renderedObject, null);
 		}
+	}
+
+	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
+		RasterMapSymbol rasterMapSymbol  = null;
+		try {
+			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+		} catch (Exception ignore) {
+		}
+		return rasterMapSymbol;
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
