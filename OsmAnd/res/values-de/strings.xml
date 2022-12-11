@@ -25,8 +25,8 @@
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
     <string name="traffic_warning_speed_camera">Blitzer</string>
     <string name="traffic_warning">Verkehrswarnung</string>
-    <string name="speak_favorites">Nahegelegene Favoriten</string>
-    <string name="speak_poi">Nahegelegene POI</string>
+    <string name="speak_favorites">Nahe gelegene Favoriten</string>
+    <string name="speak_poi">Nahe gelegene POI</string>
     <string name="confirm_every_run">Immer fragen</string>
     <string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
     <string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
@@ -868,7 +868,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkposition</string>
-    <string name="osmand_parking_plugin_description">Markieren Sie, wo Ihr Auto geparkt ist, und informieren Sie Ihren Kalender, wenn die Parkuhr abläuft. Um die Markierung zu setzen, wählen Sie einen Ort auf der Karte, gehen Sie zu \"Aktionen\" und tippen Sie auf \"Parkplatz hinzufügen\".</string>
+    <string name="osmand_parking_plugin_description">Markieren Sie, wo Ihr Auto geparkt ist, und informieren Sie Ihren Kalender, wann die Parkuhr abläuft. Um die Markierung zu setzen, wählen Sie einen Ort auf der Karte, gehen Sie zu \"Aktionen\" und tippen Sie auf \"Parkplatz hinzufügen\".</string>
     <string name="osmand_parking_plugin_name">Parkposition</string>
     <string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
     <string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -2642,7 +2642,7 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Optionaler Punktname</string>
-    <string name="transport_nearby_routes_within">Nahegelegene Routen innerhalb von</string>
+    <string name="transport_nearby_routes_within">Nahe gelegene Routen innerhalb von</string>
     <string name="transport_nearby_routes">Innerhalb</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
@@ -4983,8 +4983,8 @@
     <string name="open_weather_action_description">Ermöglicht es dir, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    <string name="release_4_4_pre">• Hier werden die Strings für die 4.4 Version sein</string>
-    <string name="rendering_attr_weatherCloudContours_name">Wolkenisolinien</string>
-    <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlagsisolinien</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Windböenisolinien</string>
+    <string name="release_4_4_pre">• Hier werden die Strings für die Version 4.4 sein</string>
+    <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Windböen-Isolinien</string>
 </resources>
