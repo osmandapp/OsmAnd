@@ -606,9 +606,9 @@
     <string name="plugins_screen">Gestionnaire d\'extensions</string>
     <string name="prefs_plugins_descr">Les extensions ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
     <string name="prefs_plugins">Gestionnaire d\'extensions</string>
-    <string name="osm_editing_plugin_description">Faites des contributions à OpenStreetMap, un projet global maintenant à jour une carte détaille du monde et donnant des données libres à chaque utilisateur.
+    <string name="osm_editing_plugin_description">Contribuez à OpenStreetMap, un projet communautaire global qui maintient à jour une carte complète du monde et fournit des données géographiques libres.
 \n
-\nVous pouvez trouver des informations sur comment modifier la carte sur notre site https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPour découvrir comment modifier une carte, consultez notre site https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
@@ -721,7 +721,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
-    <string name="osmand_parking_plugin_description">Marquez où est garée votre voiture et soyez notifié lorsque le temps de stationnement arrive à expiration. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans \"Actions\" et choisissez \"Stationnement\".</string>
+    <string name="osmand_parking_plugin_description">Mémorisez la position de votre véhicule et soyez alertés avant la fin de durée du stationnement. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans \"Actions\" et sélectionnez \"Stationnement\".</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
     <string name="context_menu_item_add_parking_point">Stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
@@ -1430,7 +1430,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Partager la note</string>
     <string name="shared_string_export">Exporter</string>
-    <string name="plugin_ski_descr">Conçu pour visualiser les zones de sports d\'hiver. Affiche les pistes de ski (y compris les chemins hors-piste), les télésièges et colorie les lignes suivant la difficulté. Pour l\'utiliser, activez cette extension et allez dans \"Paramétrer la carte\" et choisissez le style \"Hiver et Ski\".</string>
+    <string name="plugin_ski_descr">Affichage optimisé pour les zones de sports d\'hiver : visualisez les remontées mécaniques et les pistes de ski (y compris les itinéraires hors-piste) qui sont colorées selon leur niveau de difficulté. Pour afficher cette vue, activez cette extension puis allez dans \"Paramétrer la carte\" et enfin sélectionnez le style \"Hiver et Ski\".</string>
     <string name="plugin_touringview_descr">Activer cette vue bascule vers le style d\'affichage « Grand tourisme », affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers. 
 \n 
 \nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. 
@@ -1443,9 +1443,9 @@
 \n 
 \nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans « Paramétrer la carte ».</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
-    <string name="plugin_nautical_descr">Enrichit la carte avec des informations concernant les voies maritimes, les feux de navigation, les zones maritimes dangereuses et/ou concernées par des restrictions, etc. Pour l\'utiliser, téléchargez la carte marine correspondante et activez-la dans \"Paramétrer la carte\".
+    <string name="plugin_nautical_descr">Enrichit la carte avec des informations sur les routes maritimes, le balisage, les zones de danger, les restrictions de mouillage, etc. Pour afficher cette vue, téléchargez la carte marine correspondante puis activez-la dans \"Paramétrer la carte\".
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nPlus d\'informations sur https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -4911,7 +4911,7 @@
     <string name="map_rendering_engine_v2">Version 2 (OpenGL)</string>
     <string name="map_rendering_engine">Moteur de rendu de la carte</string>
     <string name="show_borders_of_downloaded_maps">Afficher les bordures des cartes téléchargées</string>
-    <string name="rendering_engine_failed">Le rendu de carte OsmAnd a récemment planté.</string>
+    <string name="rendering_engine_failed">Le rendu de carte OsmAnd a planté récemment.</string>
     <string name="share_crash_log">Partager le journal d\'erreur</string>
     <string name="dismiss_changes_descr">Toutes les modifications seront perdues.</string>
     <string name="dismiss_changes">Ignorer les modifications \?</string>
@@ -4939,13 +4939,13 @@
     <string name="release_4_4_pre">Nouvelles chaînes de caractères pour la version 4.4</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
-    <string name="action_not_supported_with_map_style">Cette action n\'est pas supportée par le style de carte sélectionné.</string>
-    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet la vue 2.5D. La version 1 était celle utilisée avant la version 4.3 et est toujours recommandée pour les téléphones les plus anciens.</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Contour des vitesses des vents</string>
-    <string name="rendering_engine_failed_descr">OsmAnd est revenu à la version 1 du moteur de rendu de la carte. Vous pouvez essayer de revenir à la version 2 (OpenGL) dans les paramètres.
+    <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
+    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet l’affichage en 2.5D. La version 1 était utilisée jusqu\'à OsmAnd 4.3 et reste recommandée pour les smartphones plus anciens.</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Contour des rafales de vent</string>
+    <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la version 1 du moteur de rendu de la carte. Pour essayer la version 2 (OpenGL) allez dans les paramètres.
 \n
-\nN\'hésitez pas à envoyer votre historique d\'erreurs pour nous aider à améliorer l\'application.</string>
+\nAfin de nous aider à améliorer l\'application, n\'hésitez pas à nous envoyer vos journaux d\'erreur.</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
-    <string name="purchases_feature_desc_external_sensors">Enregistre et affiche les informations récupérées par les capteurs externes : vitesse du vélo, puissance du vélo, cadence et battements cardiaques.</string>
+    <string name="mtb_imba_full">Association Internationale de VTT</string>
+    <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et pulsations cardiaques.</string>
 </resources>
