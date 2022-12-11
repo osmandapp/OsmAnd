@@ -4611,7 +4611,7 @@
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="max_speed_widget_desc">Indique la limitation de vitesse de la route actuelle.</string>
-    <string name="radius_rules_widget_desc">L\'outil Rayon affiche des cercles de rayon précis autour d\'un point sélectionné sur la carte.</string>
+    <string name="radius_rules_widget_desc">L\'outil Rayon affiche des cercles de rayon autour d\'un point sélectionné sur la carte.</string>
     <string name="altitude_widget_desc">Indique l’altitude, par rapport au niveau de la mer, de la position actuelle.</string>
     <string name="audio_video_notes_desc">Permet un accès rapide pour démarrer / arrêter un enregistrement d\'audio, de vidéo ou de photo.</string>
     <string name="get_altitude_data">Obtenir les données d\'altitude</string>
@@ -4620,7 +4620,7 @@
     <string name="battery_widget_desc">Affiche le niveau de batterie de votre appareil.</string>
     <string name="navigation_points">Points de navigation</string>
     <string name="app_mode_mountain_bicycle">VTT</string>
-    <string name="current_speed_widget_desc">Indique votre vitesse actuelle (par GPS).</string>
+    <string name="current_speed_widget_desc">Indique votre vitesse actuelle (d\'après le GPS).</string>
     <string name="coordinates_widget_desc">Indique les coordonnées de la position actuelle.</string>
     <string name="route_maneuvers">Manœuvres sur l\'itinéraire</string>
     <string name="get_altitude_information">Obtenir les informations d\'altitude</string>
@@ -4635,7 +4635,7 @@
     <string name="magnetic_bearing_widget_desc">Depuis votre position, angle entre le nord magnétique et la cible.</string>
     <string name="routing_attr_avoid_4wd_only_description">Éviter les routes adaptées uniquement aux 4 x 4</string>
     <string name="routing_attr_avoid_4wd_only_name">Éviter les routes pour 4 x 4</string>
-    <string name="mapillary_widget_desc">Permet d\'accéder rapidement à l\'application Mapillary et ajouter des images des rues.</string>
+    <string name="mapillary_widget_desc">Permet d\'accéder rapidement à l\'application Mapillary et d\'ajouter des photos de rue.</string>
     <string name="map_markers_bar_widget_desc">Le widget vous permet d\'afficher la distance et la direction du prochain marqueur depuis votre position actuelle. Le widget peut être configuré pour afficher 1 ou 2 marqueur(s).</string>
     <string name="street_name_widget_desc">Le widget des noms de rue affiche le nom de la rue actuelle ou le nom de la rue suivante avec une flèche indiquant la manœuvre à effectuer.</string>
     <string name="lanes_widgets_desc">Affiche la disposition des voies de la route et met en évidence la voie à emprunter pendant la navigation.</string>
@@ -4688,7 +4688,7 @@
     <string name="co2_mission">Émissions de CO₂</string>
     <string name="live_update_frequency_day_variant">Les mises à jour de carte sont vérifiées chaque jour.</string>
     <string name="live_update_frequency_week_variant">Les mises à jour de la carte sont vérifiées chaque semaine.</string>
-    <string name="calculate_online_altitude_descr">Calculez l\'altitude en ligne grâce aux serveurs d\'OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Si cette altitude est différente de l\'altitude fournie par l\'appareil, l\'altitude pourra être corrigée.</string>
+    <string name="calculate_online_altitude_descr">Calcule l\'altitude en ligne grâce aux serveurs OsmAnd qui se basent sur les photos satellites et des modèles numériques d\'altitude. Si cette altitude est différente de l\'altitude fournie par l\'appareil, l\'altitude pourra être corrigée.</string>
     <string name="live_update_frequency_hour_variant">Les mises à jour de la carte sont vérifiées chaque heure.</string>
     <string name="altitude_correction">Correction de l\'altitude</string>
     <string name="no_altitude_data_desc">Pour obtenir les données %1$s, déplacez votre trace sur les routes ou calculez l\'itinéraire en ligne.</string>
