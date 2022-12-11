@@ -606,7 +606,9 @@
     <string name="plugins_screen">Gestionnaire d\'extensions</string>
     <string name="prefs_plugins_descr">Les extensions ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
     <string name="prefs_plugins">Gestionnaire d\'extensions</string>
-    <string name="osm_editing_plugin_description">Contribuez à OpenStreetMap (OSM) directement depuis l\'application OsmAnd. Par exemple : créez ou modifiez les points d\'intérêt OSM, créez ou modifiez les notes OSM et envoyez vos traces GPX (nécessite un compte OSM). OpenStreetMap est une communauté ouverte et mondiale de cartographie publique.</string>
+    <string name="osm_editing_plugin_description">Faites des contributions à OpenStreetMap, un projet global maintenant à jour une carte détaille du monde et donnant des données libres à chaque utilisateur.
+\n
+\nVous pouvez trouver des informations sur comment modifier la carte sur notre site https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
@@ -719,9 +721,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
-    <string name="osmand_parking_plugin_description">Enregistrez l\'emplacement de stationnement de votre véhicule et, si besoin, mesurez la durée de stationnement restante.
-\nPlacez une marque sur la carte puis utilisez l\'action \"Stationnement\".
-\nLes informations sont visibles sur le Tableau de bord et sur la carte. Un rappel peut aussi être ajouté à votre calendrier.</string>
+    <string name="osmand_parking_plugin_description">Marquez où est garée votre voiture et soyez notifié lorsque le temps de stationnement arrive à expiration. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans \"Actions\" et choisissez \"Stationnement\".</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
     <string name="context_menu_item_add_parking_point">Stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
@@ -3989,7 +3989,7 @@
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">L\'itinéraire pourrait éviter les fortes pentes.</string>
+    <string name="routing_attr_height_obstacles_description">Le temps restant estimé prendra en compte l\'altitude. Ce paramètre peut aider à éviter les fortes pentes :</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4933,4 +4933,8 @@
 \n- Les cartes d\'isobares et d\'isothermes
 \n
 \nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+    <string name="shared_string_open">Ouvert</string>
+    <string name="open_weather_action_description">Vous permet d\'afficher des informations météo détaillées.</string>
+    <string name="open_weather_action">Ouvrir la météo</string>
+    <string name="release_4_4_pre">Nouvelles chaînes de caractères pour la version 4.4</string>
 </resources>

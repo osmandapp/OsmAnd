@@ -4969,4 +4969,8 @@
     <string name="release_4_4_pre">• Qui ci saranno le stringhe per la versione 4.4</string>
     <string name="shared_string_open">Apri</string>
     <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
+    <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
+    <string name="open_weather_action">Apri schermata meteo</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
 </resources>
