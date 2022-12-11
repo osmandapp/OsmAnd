@@ -602,7 +602,7 @@
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Activez, dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse des voix de synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
-    <string name="osmand_development_plugin_description">Permet de configurer OsmAnd pour test et débogage : simulation de guidage, vérification des performances d\'affichage, etc. Cette extension est conçue pour les développeurs et peut être ignorée pour une utilisation normale de l\'application.</string>
+    <string name="osmand_development_plugin_description">Permet d\'accéder à des fonctionnalités pour tester et déboguer OsmAnd : simuler des guidages, gérer les rendus, vérifier les performances, etc. Cette extension n\'est pas recommandée pour une utilisation normale de l\'application.</string>
     <string name="plugins_screen">Gestionnaire d\'extensions</string>
     <string name="prefs_plugins_descr">Les extensions ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
     <string name="prefs_plugins">Gestionnaire d\'extensions</string>
@@ -889,7 +889,7 @@
     <string name="index_srtm_parts">parties</string>
     <string name="audionotes_location_not_defined">Appuyez sur « Utiliser la position… » pour ajouter une note sur le point.</string>
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
+    <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire, soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     <string name="osmand_srtm_short_description_80_chars">Extension OsmAnd pour les courbes de niveau hors-ligne</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1295,9 +1295,9 @@
     <string name="speak_poi">POI à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Cette extension permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
+    <string name="record_plugin_description">Enregistre vos voyages ou entraînements et analyse les données de vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et affinées.
 \n
-\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OsmAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
+\nPlus d\'informations sur https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -4610,7 +4610,7 @@
     <string name="time_to_go_desc">Temps (en minutes ou en heures) nécessaire pour atteindre votre destination.</string>
     <string name="arrival_time_widget_desc">Heure d\'arrivée à destination.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="max_speed_widget_desc">Indique la limitation de vitesse de la route actuelle.</string>
+    <string name="max_speed_widget_desc">Affiche la limitation de vitesse de la route actuelle.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon affiche des cercles de rayon autour d\'un point sélectionné sur la carte.</string>
     <string name="altitude_widget_desc">Indique l’altitude, par rapport au niveau de la mer, de la position actuelle.</string>
     <string name="audio_video_notes_desc">Permet un accès rapide pour démarrer / arrêter un enregistrement d\'audio, de vidéo ou de photo.</string>
