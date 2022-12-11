@@ -4469,4 +4469,6 @@
     <string name="poi_socket_as3112_voltage">Vtičnica: AS/NZS 3112: napetost</string>
     <string name="poi_socket_type3a_voltage_high">visoka</string>
     <string name="poi_socket_type3c_voltage_high">visoka</string>
+    <string name="poi_hiking_yes">Da</string>
+    <string name="poi_hiking_filter">Primerno za pohodništvo</string>
 </resources>

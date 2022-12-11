@@ -4983,4 +4983,8 @@
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinhas de rajadas de vento</string>
+    <string name="open_weather_action">Abrir previsão meteorológica</string>
+    <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
+    <string name="release_4_4_pre">• Aqui estarão as cadeias para a versão 4.4</string>
+    <string name="shared_string_open">Aberto</string>
 </resources>
