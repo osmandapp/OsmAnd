@@ -4887,7 +4887,7 @@
     <string name="map_settings_weather_cloud">Couverture nuageuse</string>
     <string name="map_settings_weather_precip">Précipitations</string>
     <string name="empty_screen_view_selected_weather_data">Activez pour afficher les données météorologiques sélectionnées sur la carte.</string>
-    <string name="weather_precip_in">dans</string>
+    <string name="weather_precip_in">in</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pouces</string>
     <string name="weather_precip_milimeters">Millimètres</string>
@@ -4948,4 +4948,29 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et pulsations cardiaques.</string>
+    <string name="release_4_3">• Nouvelle version, plus rapide, du moteur de rendu de la carte, avec vue 2.5D
+\n
+\n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
+\n
+\n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude.
+\n
+\n• Ajout d\'options de taille du texte dans le mode \"Distance par appui\"
+\n
+\n• Ajout d\'une option permettant de changer le comportement du clic dans le mode \"Marques\"
+\n
+\n• Correction de l\'option \"Afficher la position\"
+\n
+\n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX
+\n
+\n• Réorganisation de la liste des cartes marines
+\n
+\n• Ajout du support pour les capteurs ANT+
+\n
+\n• Ajout d\'une option permettant de désactiver l\'UUID de téléchargement
+\n
+\n• Prévision ajustable du temps de trajet pour les itinéraires dépendants de l\'altitude
+\n
+\n• Correction de la sortie son et du comportement de la barre de volume
+\n
+\n</string>
 </resources>
