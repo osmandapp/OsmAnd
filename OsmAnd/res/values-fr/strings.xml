@@ -4784,12 +4784,12 @@
     <string name="coordinates_widget_current_location">Coordonnées : position actuelle</string>
     <string name="coordinates_widget_map_center_desc">Gadget affichant les coordonnées du centre de la carte</string>
     <string name="quick_action_map_center_widget_descr">Bouton pour afficher ou masquer le gadget Centre de la carte.</string>
-    <string name="map_widget_zoom_level_desc">Ce gadget indique le niveau de zoom actuel.</string>
+    <string name="map_widget_zoom_level_desc">Indique le niveau de zoom actuel.</string>
     <string name="map_widget_camera_distance_desc">Ce gadget indique l\'altitude de l\'appareil photo au-dessus de la surface.</string>
     <string name="map_widget_camera_tilt_desc">Ce gadget indique l\'angle de l\'appareil photo en mode perspective. La valeur par défaut est 90° (aucune inclinaison).</string>
     <string name="developer_widgets">Gadgets pour les développeurs</string>
     <string name="map_widget_camera_tilt">Angle de l\'appareil photo</string>
-    <string name="map_widget_target_distance_desc">Ce gadget indique la distance entre l\'appareil photo et la destination.</string>
+    <string name="map_widget_target_distance_desc">Indique la distance entre l\'appareil photo et la destination.</string>
     <string name="map_widget_zoom_level">Niveau de zoom</string>
     <string name="map_widget_camera_distance">Altitude de l\'appareil photo</string>
     <string name="external_sensor_widgets">Widgets ANT+</string>
@@ -4798,10 +4798,10 @@
     <string name="ant_read_data">Lire les données</string>
     <string name="map_widget_ant_heart_rate">Fréquence cardiaque</string>
     <string name="ant_write_to_gpx">Ajouter des données à la trace</string>
-    <string name="ant_heart_rate_write_gpx_desc">Ajouter la fréquence cardiaque à la trace</string>
-    <string name="ant_missing_dependency_descr">Le service « %1$s » est introuvable.
-\nInstallez le service ANT+ ou mettez à jour votre version s\'il est déjà installé.
-\nVoulez-vous lancer Google Play Store pour l\'installer \?</string>
+    <string name="ant_heart_rate_write_gpx_desc">Inclue la fréquence cardiaque à la trace</string>
+    <string name="ant_missing_dependency_descr">Impossible de trouver le service « %1$s ».
+\nVous devez installer ou mettre à jour les services ANT+.
+\nVoulez-vous lancer Google Play Store pour le faire \?</string>
     <string name="map_widget_ant_heart_rate_desc">Affiche, en temps réel, la fréquence cardiaque de l\'utilisateur pendant une activité</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Affiche la vitesse à laquelle l\'utilisateur pédale</string>
     <string name="map_widget_ant_bicycle_speed">Vitesse du vélo</string>
@@ -4814,13 +4814,13 @@
     <string name="map_widget_ant_bicycle_cadence">Cadence de pédalage</string>
     <string name="nautical_depth_points">Points de sonde marine</string>
     <string name="map_widget_target_distance">Distance entre l’appareil photo et la cible</string>
-    <string name="purchases_feature_desc_cross_buy">Utilisez votre abonnement sur toutes les plateformes (Android, iOS, Web) sans frais supplémentaire.</string>
+    <string name="purchases_feature_desc_cross_buy">Utilisez votre abonnement sur toutes les plateformes (Android, iOS, web) sans frais supplémentaire.</string>
     <string name="shared_string_cross_buy">Achat multi-plateformes</string>
     <string name="favorites_backup">Sauvegarde des favoris</string>
     <string name="external_sensors_plugin_name">Capteurs externes</string>
     <string name="map_widget_altitude_map_center_desc">Affiche l’altitude du centre de la carte.</string>
     <string name="simulate_location_by_gpx">Simuler la position via GPX</string>
-    <string name="map_widget_altitude_desc">Ces widgets affichent l\'altitude de l\'emplacement actuel ou du centre de la carte</string>
+    <string name="map_widget_altitude_desc">Affiche l\'altitude de l\'emplacement actuel ou du centre de la carte</string>
     <string name="location_simulation_cutoff">La simulation ignore les premiers mètres</string>
     <string name="location_simulation_speedup">Accélération de la simulation</string>
     <string name="shared_string_identifiers">Identifiants</string>
@@ -4832,10 +4832,10 @@
     <string name="map_widget_rendering_fps">Rendu FPS de la carte</string>
     <string name="send_uuid_preference_desc">Un UUID aléatoire est utilisé pour le téléchargement des cartes hors ligne à partir des serveurs d\'OsmAnd et ainsi garantir une utilisation équitable des ressources du serveur, prévoir le trafic et générer des rapports d\'utilisation mensuelle et anonyme des cartes.</string>
     <string name="map_widget_ant_bicycle_power">Puissance développée sur le vélo</string>
-    <string name="external_sensors_plugin_description">Suivi de la fréquence cardiaque, de la vitesse du vélo, de la puissance développée et de la cadence. Nécessite une connexion entre l\'appareil et les capteurs via ANT+ (protocole de communication sans fil).</string>
+    <string name="external_sensors_plugin_description">Accède aux capteurs externes pour récupérer, par exemple, vos battements cardiaques, la vitesse de votre vélo, la puissance ou la cadence. Demande que votre appareil soit connecté aux capteurs respectifs via le protocole ANT+.</string>
     <string name="current_location_widget">Coordonnées : Emplacement actuel</string>
     <string name="map_center_widget">Coordonnées : Centre de la carte</string>
-    <string name="map_widget_rendering_fps_desc">Affiche la vitesse d\'affichage et d’actualisation de la carte et de ses éléments (en images par seconde ou FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Affiche la vitesse d\'affichage et d’actualisation de la carte et de ses éléments, exprimé en images par seconde (FPS).</string>
     <string name="terms_of_service_desc">En téléchargeant des cartes, vous acceptez les conditions de %1$s et %2$s.</string>
     <string name="weather_offline_forecast">Prévisions hors-ligne</string>
     <string name="weather_online_cache">Cache en ligne</string>
