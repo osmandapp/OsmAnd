@@ -4636,11 +4636,11 @@
     <string name="routing_attr_avoid_4wd_only_description">Éviter les routes adaptées uniquement aux 4 x 4</string>
     <string name="routing_attr_avoid_4wd_only_name">Éviter les routes pour 4 x 4</string>
     <string name="mapillary_widget_desc">Permet d\'accéder rapidement à l\'application Mapillary et d\'ajouter des photos de rue.</string>
-    <string name="map_markers_bar_widget_desc">Le widget vous permet d\'afficher la distance et la direction du prochain marqueur depuis votre position actuelle. Le widget peut être configuré pour afficher 1 ou 2 marqueur(s).</string>
-    <string name="street_name_widget_desc">Le widget des noms de rue affiche le nom de la rue actuelle ou le nom de la rue suivante avec une flèche indiquant la manœuvre à effectuer.</string>
+    <string name="map_markers_bar_widget_desc">Le widget affiche la distance et la direction de la prochaine marque à partir de votre position actuelle. Le widget peut être configuré pour afficher 1 ou 2 marque(s).</string>
+    <string name="street_name_widget_desc">Le widget des noms de rue affiche le nom de la rue actuelle ou le nom de la rue suivante avec une flèche indiquant la prochaine manœuvre à effectuer.</string>
     <string name="lanes_widgets_desc">Affiche la disposition des voies de la route et met en évidence la voie à emprunter pendant la navigation.</string>
     <string name="bearing_desc">Indique le cap absolu ou relatif d\'une cible (sur 180 degrés, 360 degrés ou en milliradians).</string>
-    <string name="navigation_points_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou le temps restant, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
+    <string name="navigation_points_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou la durée restante, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
     <string name="track_attach_to_the_roads_descr">La trace sera déplacée sur la route en utilisant les cartes hors ligne, la géométrie de la trace sera modifiée.</string>
     <string name="route_maneuvers_desc">Les widgets de navigation sont activés pendant la navigation et affichent des informations telles que la distance, l\'heure d\'arrivée ou de départ, les prochaines bifurcations, l\'orientation, le nom de la rue actuelle, les informations sur les voies, la vitesse maximale, les alertes, les POI et les points de passage.</string>
     <string name="distance_circles">Cercles de distance</string>
