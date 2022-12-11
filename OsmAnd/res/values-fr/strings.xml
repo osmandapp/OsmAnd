@@ -4934,7 +4934,7 @@
 \n
 \nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="shared_string_open">Ouvert</string>
-    <string name="open_weather_action_description">Vous permet de consulter des informations détaillées sur la météo.</string>
+    <string name="open_weather_action_description">Vous permet d\'afficher des informations météo détaillées.</string>
     <string name="open_weather_action">Ouvrir la météo</string>
     <string name="release_4_4_pre">Nouvelles chaînes de caractères pour la version 4.4</string>
 </resources>
