@@ -4937,4 +4937,15 @@
     <string name="open_weather_action_description">Vous permet d\'afficher des informations météo détaillées.</string>
     <string name="open_weather_action">Ouvrir la météo</string>
     <string name="release_4_4_pre">Nouvelles chaînes de caractères pour la version 4.4</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
+    <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
+    <string name="action_not_supported_with_map_style">Cette action n\'est pas supportée par le style de carte sélectionné.</string>
+    <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet la vue 2.5D. La version 1 était celle utilisée avant la version 4.3 et est toujours recommandée pour les téléphones les plus anciens.</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Contour des vitesses des vents</string>
+    <string name="rendering_engine_failed_descr">OsmAnd est revenu à la version 1 du moteur de rendu de la carte. Vous pouvez essayer de revenir à la version 2 (OpenGL) dans les paramètres.
+\n
+\nN\'hésitez pas à envoyer votre historique d\'erreurs pour nous aider à améliorer l\'application.</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="purchases_feature_desc_external_sensors">Enregistre et affiche les informations récupérées par les capteurs externes : vitesse du vélo, puissance du vélo, cadence et battements cardiaques.</string>
 </resources>
