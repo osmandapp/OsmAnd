@@ -3881,7 +3881,7 @@
     <string name="login_open_street_map">Logg inn på OpenStreetMap</string>
     <string name="user_login">Logg inn</string>
     <string name="announcement_time_passing">Ved passering</string>
-    <string name="announcement_time_approach">Ankomst</string>
+    <string name="announcement_time_approach">Nærme seg</string>
     <string name="context_menu_edit_descr">Rediger beskrivelse</string>
     <string name="copy_to_map_markers">Kopier til kartmarkører</string>
     <string name="copy_to_map_favorites">Kopier til favoritter</string>
@@ -4846,4 +4846,9 @@
     <string name="weather_wind_ms">m/s</string>
     <string name="accessibility_2d_view_off">2.5D-visning av</string>
     <string name="attach_roads_descr">Tilnærm sporet ditt til tillatte veier for å rute mellom punkter og tilknytte nøyaktige svinginstruksjoner og ruteegenskaper.</string>
+    <string name="mtb_scale">MTB-skala</string>
+    <string name="mtb_segment_classification">Segmentklassifisering</string>
+    <string name="rendering_attr_showMtbScale_description">Vis løyper ifølge MTB-skala.</string>
+    <string name="shared_string_open">Åpne</string>
+    <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
 </resources>
