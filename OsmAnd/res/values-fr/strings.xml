@@ -878,11 +878,11 @@
     <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9).</string>
     <string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">Les informations concernant le terrain (comme les courbes de niveau, l\'ombrage du relief et les dénivelés) vous aident à visualiser le relief et la praticité de celui-ci. Les informations topographiques peuvent être représentées sur la carte par des ombres de dénivelé, des courbes de niveau et/ou des couleurs suivant le dénivelé.
+    <string name="srtm_plugin_description">Fournit des informations sur le terrain (ombrage du relief, courbes de niveau, pente) pour vous aider à mieux interpréter le relief et l’accessibilité. Ces informations topographiques peuvent être représentées sur la carte par des ombres, des lignes d\'altitude et des couleurs variant selon la pente.
 \n
 \nLes données proviennent de SRTM et ASTER.
 \n
-\nPlus d\'informations sur http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nPlus d\'informations sur http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -3585,9 +3585,9 @@
     <string name="change_application_profile">Modifier le profil</string>
     <string name="index_item_world_basemap_detailed">Carte mondiale générale (plus détaillée)</string>
     <string name="unsupported_type_error">Type non pris en charge</string>
-    <string name="gpx_parse_error">Ce fichier GPX comporte des erreurs.
+    <string name="gpx_parse_error">Ce fichier GPX contient des erreurs.
 \n
-\nContactez le support OsmAnd pour analyser ce problème.</string>
+\nContactez le support OsmAnd pour analyser le problème.</string>
     <string name="system_screen_timeout_descr">Éteint l\'écran en fonction du délai système.</string>
     <string name="map_source_zoom_levels_descr">Affecte l\'affichage de la carte ou des sur-couche / sous-couche. 
 \n 
@@ -3989,7 +3989,7 @@
     <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
-    <string name="routing_attr_height_obstacles_description">Le temps restant estimé prendra en compte l\'altitude. Ce paramètre peut aider à éviter les fortes pentes :</string>
+    <string name="routing_attr_height_obstacles_description">La durée estimée prendra en compte l\'altitude. Ce paramètre peut aider à éviter les fortes ascensions :</string>
     <string name="map_widget_distance_by_tap">Distance par appui</string>
     <string name="latest_openstreetmap_update">Dernière mise à jour d\'OpenStreetMap disponible :</string>
     <string name="updated">Mis à jour : %s</string>
@@ -4934,17 +4934,17 @@
 \n
 \nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="shared_string_open">Ouvert</string>
-    <string name="open_weather_action_description">Vous permet d\'afficher des informations météo détaillées.</string>
-    <string name="open_weather_action">Ouvrir la météo</string>
+    <string name="open_weather_action_description">Vous permet de consulter des informations météo détaillées.</string>
+    <string name="open_weather_action">Afficher la météo</string>
     <string name="release_4_4_pre">Nouvelles chaînes de caractères pour la version 4.4</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
     <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet l’affichage en 2.5D. La version 1 était utilisée jusqu\'à OsmAnd 4.3 et reste recommandée pour les smartphones plus anciens.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Contour des rafales de vent</string>
-    <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la version 1 du moteur de rendu de la carte. Pour essayer la version 2 (OpenGL) allez dans les paramètres.
+    <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la version 1 du moteur de rendu de la carte. Pour essayer la version 2 (OpenGL), allez dans les paramètres.
 \n
-\nAfin de nous aider à améliorer l\'application, n\'hésitez pas à nous envoyer vos journaux d\'erreur.</string>
+\nAfin de nous aider à améliorer l\'application, merci de nous envoyer vos journaux d\'erreur.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et pulsations cardiaques.</string>
@@ -4952,7 +4952,7 @@
 \n
 \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
 \n
-\n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude.
+\n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude
 \n
 \n• Ajout d\'options de taille du texte dans le mode \"Distance par appui\"
 \n
@@ -4964,13 +4964,13 @@
 \n
 \n• Réorganisation de la liste des cartes marines
 \n
-\n• Ajout du support pour les capteurs ANT+
+\n• Ajout de la prise en charge des capteurs ANT+
 \n
 \n• Ajout d\'une option permettant de désactiver l\'UUID de téléchargement
 \n
 \n• Prévision ajustable du temps de trajet pour les itinéraires dépendants de l\'altitude
 \n
-\n• Correction de la sortie son et du comportement de la barre de volume
+\n• Correction de la sortie sonore et du comportement de la barre de volume
 \n
 \n</string>
 </resources>
