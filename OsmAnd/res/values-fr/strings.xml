@@ -595,9 +595,9 @@
     <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
     <string name="online_map_settings_descr">Sélectionnez la source de la carte : en ligne ou tuile en cache.</string>
-    <string name="osmand_rastermaps_plugin_description">Accédez à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, l\'ombrage du relief, etc.
+    <string name="osmand_rastermaps_plugin_description">Accédez à un grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) comme des tuiles OSM pré-rendues, des images satellites ou encore des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, l\'ombrage du relief, etc.
 \n
-\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes et améliorer la lisibilité, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu « Paramétrer la carte ».
+\nChacune de ces cartes est visualisable comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes et améliorer la lisibilité, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu « Paramétrer la carte ».
 \n
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
@@ -2289,7 +2289,7 @@
     <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées.</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
-    <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
+    <string name="show_from_zoom_level">L\'affichage commence à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des étapes.</string>
     <string name="srtm_menu_download_descr">Téléchargez la carte \'Courbes de niveau\' de cette région.</string>
     <string name="shared_string_plugin">Extension</string>
@@ -2344,7 +2344,7 @@
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
-    <string name="plugin_mapillary_descr">Permet l\'affichage d\'images des rues. Lorsque des images manquent, vous pouvez les ajouter vous-même. Pour activer la couche Mapillary, activez l’option « Images de rue » dans le menu Paramétrer la carte.</string>
+    <string name="plugin_mapillary_descr">Imagerie de vues des rues. Vous pouvez aussi contribuer vous-même. Pour voir les données existantes sous forme de surcouche, activez l\'option correspondante dans le menu \"Configurer la carte\".</string>
     <string name="mapillary_image">Image Mapillary</string>
     <string name="distance_moving">Distance corrigée</string>
     <string name="shared_string_permissions">Autorisations</string>
