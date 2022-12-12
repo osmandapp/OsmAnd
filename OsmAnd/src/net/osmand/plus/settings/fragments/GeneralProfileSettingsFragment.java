@@ -138,6 +138,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
 		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt), getString(R.string.rotate_map_none_rotated_opt)});
 		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS, OsmandSettings.ROTATE_MAP_MANUAL});		rotateMap.setIcon(getRotateMapIcon());
+		rotateMap.setIcon(getRotateMapIcon());
 	}
 
 	private Drawable getRotateMapIcon() {
