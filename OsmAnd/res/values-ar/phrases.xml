@@ -4435,4 +4435,7 @@
     <string name="poi_socket_type3a_output_filter">مخرج نوع 3a</string>
     <string name="poi_socket_type3a">مخرج نوع 3a</string>
     <string name="poi_socket_type3a_current">مأخذ التوصيل: النوع 3: التيار</string>
+    <string name="poi_socket_type1_voltage">المقبس: النوع 1: الجهد الكهربائي</string>
+    <string name="poi_socket_cee_red_125a_voltage">المقبس: CEE أحمر 125A: الجهد االكهربائي</string>
+    <string name="poi_socket_type1_combo_voltage">المقبس: النوع 1 الدمج: الجهد الكهربائي</string>
 </resources>

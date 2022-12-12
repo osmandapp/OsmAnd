@@ -13,6 +13,9 @@
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
+    <string name="shared_string_open">Open</string>
+    <string name="open_weather_action_description">Allows you to open a screen with detailed weather information.</string>
+    <string name="open_weather_action">Open weather</string>
     <string name="rendering_attr_weatherCloudContours_name">Cloud isolines</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Precipitation isolines</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Gusts of wind isolines</string>

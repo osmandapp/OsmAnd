@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.core.android.MapRendererContext.WEATHER_CONTOURS_SYMBOL_SECTION;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -19,7 +20,10 @@ import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -28,23 +32,28 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 public class WeatherContourLayer extends BaseMapLayer {
 
 	private final OsmandSettings settings;
-	private final WeatherPlugin weatherPlugin;
+	private final WeatherPlugin plugin;
+	private final WeatherHelper weatherHelper;
 
 	private IMapLayerProvider rasterMapProvider;
 	private MapObjectsSymbolsProvider mapObjectsSymbolsProvider;
 	private GeoTileObjectsProvider geoTileObjectsProvider;
 	private MapPrimitivesProvider mapPrimitivesProvider;
 
+	private WeatherUnit weatherUnitCached;
 	private boolean weatherEnabledCached;
 	private boolean contoursEnabledCached;
 	private int cachedTransparency;
+	private int bandСached;
 	private long dateTime;
 	private long cachedDateTime;
 
 	public WeatherContourLayer(@NonNull Context context) {
 		super(context);
-		this.settings = getApplication().getSettings();
-		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		OsmandApplication app = getApplication();
+		this.settings = app.getSettings();
+		this.weatherHelper = app.getWeatherHelper();
+		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		setDateTime(System.currentTimeMillis());
 	}
 
@@ -81,13 +90,15 @@ public class WeatherContourLayer extends BaseMapLayer {
 	public void onDraw(Canvas canvas, RotatedTileBox tilesRect, OsmandMapLayer.DrawSettings drawSettings) {
 	}
 
-	private void recreateLayerProvider(@NonNull MapRendererView mapRenderer, @NonNull WeatherTileResourcesManager resourcesManager) {
-
+	private void recreateLayerProvider(@NonNull MapRendererView mapRenderer,
+	                                   @NonNull WeatherTileResourcesManager resourcesManager,
+	                                   @WeatherBandType short band) {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		MapPrimitiviser mapPrimitiviser = mapContext != null ? mapContext.getMapPrimitiviser() : null;
 		if (mapPrimitiviser == null) {
 			return;
 		}
+		resetLayerProvider();
 
 		SymbolSubsectionConfiguration symbolSubsectionConfiguration = new SymbolSubsectionConfiguration();
 		symbolSubsectionConfiguration.setOpacityFactor(cachedTransparency / 100.0f);
@@ -103,7 +114,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		int screenHeight = tb.getPixHeight();
 		int cacheSize = (screenWidth * 2 / (int) resourcesManager.getTileSize()) * (screenHeight * 2 / (int) resourcesManager.getTileSize());
 		int rasterTileSize = (int) (resourcesManager.getTileSize() * resourcesManager.getDensityFactor());
-		short band = WeatherBand.WEATHER_BAND_TEMPERATURE;
+
 		geoTileObjectsProvider = new GeoTileObjectsProvider(resourcesManager, dateTime, band, false, cacheSize);
 		mapPrimitivesProvider = new MapPrimitivesProvider(geoTileObjectsProvider, mapPrimitiviser, rasterTileSize);
 
@@ -130,34 +141,62 @@ public class WeatherContourLayer extends BaseMapLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tilesRect, drawSettings);
+
 		MapRendererView mapRenderer = getMapRenderer();
-		WeatherTileResourcesManager resourcesManager = getApplication().getWeatherHelper().getWeatherResourcesManager();
-		if (view == null || mapRenderer == null || resourcesManager == null) {
-			return;
-		}
-		if (resourcesManager.getBandSettings().empty()) {
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
+		if (view == null || mapRenderer == null || resourcesManager == null
+				|| resourcesManager.getBandSettings().empty()) {
 			return;
 		}
 
-		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
-		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
-		weatherEnabledCached = weatherEnabled;
-		boolean contoursEnabled = weatherPlugin.isContoursEnabled();
-		boolean contoursEnabledChanged = contoursEnabled != contoursEnabledCached;
-		contoursEnabledCached = contoursEnabled;
-		int transparency = weatherPlugin.getContoursTransparency();
-		boolean transparencyChanged = cachedTransparency != transparency;
-		cachedTransparency = transparency;
-		boolean dateTimeChanged = cachedDateTime != dateTime;
-		cachedDateTime = dateTime;
-		if (weatherEnabledChanged || contoursEnabledChanged || transparencyChanged
-				|| dateTimeChanged || mapActivityInvalidated) {
-			if (weatherEnabled && contoursEnabled) {
-				recreateLayerProvider(mapRenderer, resourcesManager);
+		WeatherContour contour = plugin.hasCustomForecast() ?
+				plugin.getSelectedForecastContoursType() : plugin.getSelectedContoursType();
+
+		short band = contour != null ? contour.getBandIndex() : WEATHER_BAND_UNDEFINED;
+		if (shouldUpdateLayer(band) || mapActivityInvalidated) {
+			if (shouldDrawLayer(band)) {
+				recreateLayerProvider(mapRenderer, resourcesManager, band);
 			} else {
 				resetLayerProvider();
 			}
 		}
 		mapActivityInvalidated = false;
+	}
+
+	private boolean shouldDrawLayer(@WeatherBandType short band) {
+		return band != WEATHER_BAND_UNDEFINED && (plugin.hasCustomForecast() ||
+				plugin.isWeatherEnabled() && plugin.isContoursEnabled());
+	}
+
+	private boolean shouldUpdateLayer(@WeatherBandType short band) {
+		WeatherUnit weatherUnit = null;
+		WeatherBand weatherBand = weatherHelper.getWeatherBand(band);
+		if (weatherBand != null) {
+			weatherUnit = weatherBand.getBandUnit();
+		}
+		boolean weatherUnitChanged = weatherUnit != weatherUnitCached;
+		weatherUnitCached = weatherUnit;
+
+		boolean hasCustomForecast = plugin.hasCustomForecast();
+		boolean weatherEnabled = plugin.isWeatherEnabled() || hasCustomForecast;
+		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
+		weatherEnabledCached = weatherEnabled;
+
+		boolean contoursEnabled = plugin.isContoursEnabled() || hasCustomForecast;
+		boolean contoursEnabledChanged = contoursEnabled != contoursEnabledCached;
+		contoursEnabledCached = contoursEnabled;
+
+		int transparency = plugin.getContoursTransparency();
+		boolean transparencyChanged = cachedTransparency != transparency;
+		cachedTransparency = transparency;
+
+		boolean bandChanged = bandСached != band;
+		bandСached = band;
+
+		boolean dateTimeChanged = cachedDateTime != dateTime;
+		cachedDateTime = dateTime;
+
+		return weatherEnabledChanged || contoursEnabledChanged || transparencyChanged || bandChanged
+				|| weatherUnitChanged || dateTimeChanged;
 	}
 }

@@ -4474,4 +4474,6 @@
     <string name="poi_socket_type3c_output">Роз\'єм: Type 3c: потужність</string>
     <string name="poi_socket_cee_red_63a_voltage">Роз\'єм: CEE red 63A: напруга</string>
     <string name="poi_socket_cee_red_125a_voltage">Роз\'єм: CEE red 125A: напруга</string>
+    <string name="poi_hiking_filter">Підходить для походів</string>
+    <string name="poi_hiking_yes">Так</string>
 </resources>

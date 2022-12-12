@@ -17,6 +17,9 @@ public class WeatherSettings {
 
 	public static final String WEATHER_TEMP_CONTOUR_LINES_ATTR = "weatherTempContours";
 	public static final String WEATHER_PRESSURE_CONTOURS_LINES_ATTR = "weatherPressureContours";
+	public static final String WEATHER_CLOUD_CONTOURS_LINES_ATTR = "weatherCloudContours";
+	public static final String WEATHER_WIND_CONTOURS_LINES_ATTR = "weatherWindSpeedContours";
+	public static final String WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR = "weatherPrecipitationContours";
 	public static final String WEATHER_NONE_CONTOURS_LINES_VALUE = "none";
 
 	public static int DEFAULT_TRANSPARENCY = 50;
@@ -26,6 +29,7 @@ public class WeatherSettings {
 	public final OsmandPreference<Boolean> weatherContoursEnabled;
 	public final OsmandPreference<Integer> weatherContoursTransparency;
 	public final EnumStringPreference<WeatherContour> weatherContoursType;
+	public final EnumStringPreference<WeatherContour> weatherForecastContoursType;
 
 	public final EnumStringPreference<WindUnit> weatherWindUnit;
 	public final EnumStringPreference<CloudUnit> weatherCloudUnit;
@@ -57,12 +61,8 @@ public class WeatherSettings {
 	public final CommonPreference<Boolean> weatherPrecipUnitAuto;
 	public final CommonPreference<Boolean> weatherPressureUnitAuto;
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-
 	public WeatherSettings(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 
 		weatherEnabled = settings.registerBooleanPreference("weatherEnabled", true).makeProfile();
 
@@ -70,6 +70,8 @@ public class WeatherSettings {
 		weatherContoursTransparency = settings.registerIntPreference("weatherContoursTransparency", DEFAULT_TRANSPARENCY).makeProfile();
 		weatherContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
 				"weatherContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
+		weatherForecastContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
+				"weatherForecastContoursType", null, WeatherContour.values(), WeatherContour.class).makeProfile();
 
 		weatherTemp = settings.registerBooleanPreference("weatherTemp", false).makeProfile();
 		weatherPressure = settings.registerBooleanPreference("weatherPressure", false).makeProfile();

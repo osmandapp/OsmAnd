@@ -7,6 +7,7 @@ import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.slider.LabelFormatter;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,6 +36,7 @@ import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
@@ -42,6 +46,7 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
@@ -50,11 +55,15 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
+
+	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
+	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
 
 	private OsmandApplication app;
 	private WeatherHelper weatherHelper;
@@ -64,8 +73,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
 
-	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+	private final Calendar currentDate = getDefaultCalendar();
 	private final Calendar selectedDate = getDefaultCalendar();
+	private final Calendar utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+
+	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a");
+
+	private WeatherContour previousWeatherContour;
 
 	private boolean nightMode;
 
@@ -81,7 +95,16 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		weatherHelper = app.getWeatherHelper();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+
+		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis()));
 		selectedDate.setTime(currentDate.getTime());
+
+		if (savedInstanceState != null) {
+			previousWeatherContour = WeatherContour.valueOf(savedInstanceState.getString(PREVIOUS_WEATHER_CONTOUR_KEY, WeatherContour.TEMPERATURE.name()));
+		} else {
+			previousWeatherContour = plugin.getSelectedContoursType();
+		}
+		plugin.setContoursType(plugin.getSelectedForecastContoursType());
 	}
 
 	@Nullable
@@ -106,7 +129,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		timeSlider = view.findViewById(R.id.time_slider);
 		timeSlider.setValueTo(24);
 		timeSlider.setValueFrom(0);
-		timeSlider.setLabelFormatter(value -> String.valueOf((int) value));
+		timeSlider.setLabelFormatter(getLabelFormatter());
 
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
@@ -122,9 +145,18 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		updateTimeSlider();
 	}
 
+	private LabelFormatter getLabelFormatter() {
+		Calendar calendar = getDefaultCalendar();
+		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
+		return value -> {
+			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
+			return timeFormatter.format(calendar.getTime(), twelveHoursFormat);
+		};
+	}
+
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(12);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
 		timeSlider.setStepSize(today ? 1 : 3);
 		timeSlider.setCurrentDate(today ? currentDate : null);
 	}
@@ -173,35 +205,49 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		});
 		view.findViewById(R.id.raster_layers).setOnClickListener(this::chooseLayers);
 		view.findViewById(R.id.contour_layers).setOnClickListener(this::chooseContour);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.contour_layers), false);
 	}
 
 	public void updateSelectedDate(@Nullable Date date) {
+		checkDateOffset(date);
 		widgetsPanel.setSelectedDate(date);
-		plugin.updateWeatherDate(date);
+		plugin.setForecastDate(date);
 		requireMapActivity().refreshMap();
+	}
+
+	private void checkDateOffset(@Nullable Date date) {
+		if (date != null && (date.getTime() - currentDate.getTimeInMillis() >= MIN_UTC_HOURS_OFFSET)) {
+			utcCalendar.setTime(date);
+			int hours = utcCalendar.get(Calendar.HOUR_OF_DAY);
+			int offset = hours % 3;
+			if (offset == 2) {
+				utcCalendar.set(Calendar.HOUR_OF_DAY, hours + 1);
+			} else if (offset == 1) {
+				utcCalendar.set(Calendar.HOUR_OF_DAY, hours - 1);
+			}
+			date.setTime(utcCalendar.getTimeInMillis());
+		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateSelectedDate(selectedDate.getTime());
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
+		updateSelectedDate(selectedDate.getTime());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		updateSelectedDate(null);
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.enableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().removeSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
+		updateSelectedDate(null);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -227,23 +273,54 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void chooseContour(@NonNull View view) {
-		List<PopUpMenuItem> items = new ArrayList<>();
-		for (WeatherContour contour : WeatherContour.values()) {
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(contour.getTitleId())
-					.setIcon(getContentIcon(contour.getIconId()))
-					.setOnClickListener(v -> {
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(PREVIOUS_WEATHER_CONTOUR_KEY, previousWeatherContour.name());
+	}
 
+	@Override
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			plugin.setSelectedContoursType(previousWeatherContour);
+		}
+		super.onDestroy();
+	}
+
+	private void chooseContour(@NonNull View view) {
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		List<PopUpMenuItem> items = new ArrayList<>();
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_none)
+				.setIcon(getContentIcon(R.drawable.ic_action_thermometer))
+				.showCompoundBtn(activeColor)
+				.setOnClickListener(v -> {
+					plugin.setSelectedForecastContoursType(null);
+					requireMapActivity().refreshMap();
+				})
+				.setSelected(plugin.getSelectedForecastContoursType() == null)
+				.create()
+		);
+
+		for (WeatherContour weatherContour : WeatherContour.values()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(weatherContour.getTitleId())
+					.setIcon(getContentIcon(weatherContour.getIconId()))
+					.showCompoundBtn(activeColor)
+					.setOnClickListener(v -> {
+						plugin.setSelectedForecastContoursType(weatherContour);
+						requireMapActivity().refreshMap();
 					})
-					.setSelected(false)
+					.setSelected(weatherContour == plugin.getSelectedForecastContoursType())
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+		new PopUpMenuHelper.Builder(view, items, nightMode).setWidthType(PopUpMenuWidthType.STANDARD).show();
 	}
 
 	private void chooseLayers(@NonNull View view) {
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		for (WeatherBand band : weatherHelper.getWeatherBands()) {
@@ -252,6 +329,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(band.getMeasurementName())
 					.setIcon(icon)
+					.showCompoundBtn(activeColor)
 					.setOnClickListener(v -> {
 						boolean visible = !band.isForecastBandVisible();
 						band.setForecastBandVisible(visible);
@@ -261,7 +339,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+		new PopUpMenuHelper.Builder(view, items, nightMode, R.layout.popup_menu_item_checkbox).setWidthType(PopUpMenuWidthType.STANDARD).show();
 	}
 
 	@Nullable
@@ -281,7 +359,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	@NonNull
 	protected static Calendar getDefaultCalendar() {
-		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 12);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);

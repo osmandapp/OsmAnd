@@ -240,8 +240,7 @@ class RouteRecalculationHelper {
 			params.end = end;
 			params.intermediates = intermediates;
 			if (gpxRoute != null) {
-				gpxRoute.setTargetPoint(end);
-				params.gpxRoute = gpxRoute.build(app);
+				params.gpxRoute = gpxRoute.build(app, end);
 			} else {
 				params.gpxRoute = null;
 			}

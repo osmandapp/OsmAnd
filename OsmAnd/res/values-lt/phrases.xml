@@ -2569,4 +2569,6 @@
     <string name="poi_toilets_position_squat">Tualetų padėtis: pritūpimas</string>
     <string name="poi_furniture_used">Naudoti;Naudoti baldai</string>
     <string name="poi_furniture_bedroom">Miegamasis;Miegamojo baldai</string>
+    <string name="poi_hiking_filter">Tinkama žygiams</string>
+    <string name="poi_hiking_yes">Taip</string>
 </resources>

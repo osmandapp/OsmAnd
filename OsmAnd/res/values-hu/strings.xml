@@ -4969,4 +4969,11 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Nemzetközi Hegyikerékpáros Szövetség</string>
     <string name="mtb_segment_classification">Szakasz osztályozás</string>
+    <string name="rendering_attr_weatherCloudContours_name">Felhő-izovonalak</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Csapadék-izovonalak</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Széllökés-izovonalak</string>
+    <string name="release_4_4_pre">• Itt a 4.4 kiadáshoz szükséges karakterláncok lesznek</string>
+    <string name="open_weather_action">Időjárás megnyitása</string>
+    <string name="shared_string_open">Megnyitás</string>
+    <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
 </resources>

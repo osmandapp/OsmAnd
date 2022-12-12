@@ -172,6 +172,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				int selected = (int) v.getTag();
 				settings.setPreference(weatherBand.getBandUnitPref().getId(), selected);
 				updateMeasurementUnitsCard(view);
+				app.getWeatherHelper().updateBandsSettings();
 				refreshMap((MapActivity) getMyActivity());
 			};
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);

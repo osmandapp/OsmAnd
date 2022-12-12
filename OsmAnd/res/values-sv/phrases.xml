@@ -330,14 +330,14 @@
     <string name="poi_tram_stop">Spårvagnshållplats</string>
     <string name="poi_public_transport_station">Kollektivtrafikstation</string>
     <string name="poi_bus_station">Busstation</string>
-    <string name="poi_railway_station">Järnvägsstation</string>
-    <string name="poi_railway_platform">Järnvägsplattform</string>
+    <string name="poi_railway_station">Järnvägsstation;Järnvägsstation;Tågstation</string>
+    <string name="poi_railway_platform">Järnvägsplattform;Tågplattform</string>
     <string name="poi_halt">Järnvägsstopp</string>
     <string name="poi_subway_entrance">Tunnelbaneingång</string>
-    <string name="poi_subway_station">Ja</string>
+    <string name="poi_subway_station">Ja;Tunnelbanestation</string>
     <string name="poi_railway_buffer_stop">Stoppbock</string>
     <string name="poi_taxi">Taxistation</string>
-    <string name="poi_aerodrome">Flygplats</string>
+    <string name="poi_aerodrome">Flygplats;Flygfält</string>
     <string name="poi_helipad">Helikopterplatta</string>
     <string name="poi_runway">Landningsbana</string>
     <string name="poi_aeroway_terminal">Flygterminal</string>
@@ -524,7 +524,7 @@
     <string name="poi_customs">Tull</string>
     <string name="poi_country">Land</string>
     <string name="poi_city">Stad</string>
-    <string name="poi_capital">Ja</string>
+    <string name="poi_capital">Ja;Huvudstad</string>
     <string name="poi_town">Stad</string>
     <string name="poi_village">By</string>
     <string name="poi_hamlet">Småort</string>
@@ -1149,9 +1149,9 @@
     <string name="poi_disused">Nedlagd</string>
     <string name="poi_operator">Operatör</string>
     <string name="poi_brand">Märke</string>
-    <string name="poi_fee_yes">Ja</string>
+    <string name="poi_fee_yes">Ja;Avgift</string>
     <string name="poi_fee_no">Nej</string>
-    <string name="poi_drinking_water_yes">Ja</string>
+    <string name="poi_drinking_water_yes">Ja;Dricksvatten</string>
     <string name="poi_whitewater_rapid_name">Namn på flodforsar</string>
     <string name="poi_outpost">Butiken är utlämningsställe</string>
     <string name="poi_free_flying">Freflying-tillbehör</string>
@@ -1217,7 +1217,7 @@
     <string name="poi_crossing_unmarked">Omarkerat</string>
     <string name="poi_start_date">Startdatum</string>
     <string name="poi_wheelchair_accessibility">Tillgänglighet för rullstol</string>
-    <string name="poi_wheelchair_yes">Ja</string>
+    <string name="poi_wheelchair_yes">Ja;Rullstol</string>
     <string name="poi_wheelchair_no">Inga</string>
     <string name="poi_wheelchair_limited">Begränsat</string>
     <string name="poi_wholesale">Grosshandel</string>
@@ -1362,7 +1362,7 @@
     <string name="poi_board_type_public_transport">Kollektivtrafik</string>
     <string name="poi_board_type_technology">Teknik</string>
     <string name="poi_board_type_astronomy">Astronomi</string>
-    <string name="poi_fireplace_yes">Ja</string>
+    <string name="poi_fireplace_yes">Ja;Eldplats</string>
     <string name="poi_fireplace_no">Ingen eldstad</string>
     <string name="poi_covered_yes">Ja</string>
     <string name="poi_covered_no">Täcks inte</string>
@@ -1424,7 +1424,7 @@
     <string name="poi_garden_style_english">Typ av trädgård: engelsk</string>
     <string name="poi_garden_style_japanese">Typ av trädgård: japansk</string>
     <string name="poi_capacity">Kapacitet</string>
-    <string name="poi_capacity_disabled_yes">Ja</string>
+    <string name="poi_capacity_disabled_yes">Ja;Plats för funktionshindrade</string>
     <string name="poi_capacity_disabled_no">Inga särskilda platser för funktionshindrade</string>
     <string name="poi_capacity_disabled">Särskilda platser för funktionshindrade</string>
     <string name="poi_capacity_women_yes">Särskilda platser för kvinnor</string>
@@ -1636,13 +1636,13 @@
     <string name="poi_drive_through_yes">Ja</string>
     <string name="poi_drive_through_no">Drive-through: nej</string>
     <string name="poi_brewery_additional">Bryggerinamn</string>
-    <string name="poi_microbrewery_yes">Ja</string>
+    <string name="poi_microbrewery_yes">Ja;Mikrobryggeri</string>
     <string name="poi_microbrewery_no">Inget mikrobryggeri</string>
-    <string name="poi_takeaway_filter_yes">Ja</string>
+    <string name="poi_takeaway_filter_yes">Ja;Takeaway</string>
     <string name="poi_takeaway_yes">Takeaway</string>
     <string name="poi_takeaway_no">Ingen avhämtning</string>
     <string name="poi_takeaway_only">Endast avhämtning</string>
-    <string name="poi_delivery_filter_yes">Ja</string>
+    <string name="poi_delivery_filter_yes">Ja;Leverans</string>
     <string name="poi_delivery_yes">Leverans</string>
     <string name="poi_delivery_no">Ingen leverans</string>
     <string name="poi_delivery_only">Endast leverans</string>
@@ -4261,4 +4261,6 @@
     <string name="poi_faculty_filter">Fakultet</string>
     <string name="poi_club_aviation">Flygklubb</string>
     <string name="poi_club_bicycle">Cykelklubb</string>
+    <string name="poi_parking_fee_filter">Parkeringsavgift</string>
+    <string name="poi_dog">Hundar</string>
 </resources>

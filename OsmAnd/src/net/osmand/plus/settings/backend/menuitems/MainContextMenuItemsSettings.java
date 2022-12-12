@@ -30,7 +30,7 @@ public class MainContextMenuItemsSettings extends ContextMenuItemsSettings {
 	}
 
 	@Override
-	public void readFromJson(JSONObject json, String idScheme) {
+	public void readFromJson(@NonNull JSONObject json, @NonNull String idScheme) {
 		super.readFromJson(json, idScheme);
 		mainIds = readIdsList(json.optJSONArray(MAIN), idScheme);
 	}

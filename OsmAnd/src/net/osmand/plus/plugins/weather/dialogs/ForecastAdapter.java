@@ -36,7 +36,7 @@ class ForecastAdapter extends RecyclerView.Adapter<DateViewHolder> {
 	private final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("d.M", Locale.getDefault());
 	private final SimpleDateFormat DAY_OF_WEEK_FORMAT = new SimpleDateFormat("E", Locale.getDefault());
 
-	private static final int MAX_FORECAST_DAYS = 7;
+	private static final int MAX_FORECAST_DAYS = 6;
 
 	private final Context ctx;
 	private final LayoutInflater inflater;

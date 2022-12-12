@@ -4883,6 +4883,10 @@
 \n
 \n• Nueva opción para desactivar la descarga del UUID
 \n
+\n• Previsión ajustable de la velocidad predefinida para los tiempos de desplazamiento en senderismo, excursionismo o corriendo, en función de la altitud
+\n
+\n• Corregido el comportamiento de la salida de audio y del regulador de volumen
+\n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
@@ -4988,4 +4992,11 @@
     <string name="mtb_scale">Escala de MTB</string>
     <string name="mtb_segment_classification">Clasificación de segmentos</string>
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
+    <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
+    <string name="release_4_4_pre">• Aquí estarán las cadenas para la versión 4.4</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
+    <string name="shared_string_open">Abrir</string>
+    <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
+    <string name="open_weather_action">Ver meteorología</string>
 </resources>
