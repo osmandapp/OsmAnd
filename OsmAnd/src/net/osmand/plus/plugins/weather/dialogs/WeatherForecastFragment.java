@@ -210,7 +210,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	public void updateSelectedDate(@Nullable Date date) {
 		checkDateOffset(date);
 		widgetsPanel.setSelectedDate(date);
-		plugin.updateWeatherDate(date);
+		plugin.setForecastDate(date);
 		requireMapActivity().refreshMap();
 	}
 
@@ -291,6 +291,18 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void chooseContour(@NonNull View view) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_none)
+				.setIcon(getContentIcon(R.drawable.ic_action_thermometer))
+				.showCompoundBtn(activeColor)
+				.setOnClickListener(v -> {
+					plugin.setSelectedForecastContoursType(null);
+					requireMapActivity().refreshMap();
+				})
+				.setSelected(plugin.getSelectedForecastContoursType() == null)
+				.create()
+		);
+
 		for (WeatherContour weatherContour : WeatherContour.values()) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(weatherContour.getTitleId())
