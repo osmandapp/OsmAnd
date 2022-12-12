@@ -1627,6 +1627,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_NONE = 0;
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
+	public static final int ROTATE_MAP_MANUAL = 3;
 	public final CommonPreference<Integer> ROTATE_MAP =
 			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
