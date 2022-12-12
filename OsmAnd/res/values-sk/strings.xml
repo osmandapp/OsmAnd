@@ -4974,5 +4974,5 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary nárazov vetra</string>
     <string name="release_4_4_pre">• Tu budú texty pre verziu 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
-    <string name="open_weather_action_description">Dovolí Vám otvoriť obrazovku s detailnou informáciou o počasí</string>
+    <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
 </resources>
