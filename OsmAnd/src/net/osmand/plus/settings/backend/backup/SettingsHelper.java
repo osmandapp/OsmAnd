@@ -536,24 +536,25 @@ public abstract class SettingsHelper {
 					result.add(new FavoritesSettingsItem(app, null, Collections.singletonList(favoriteGroup)));
 				}
 			} else {
-				if (settingsItems.size() == 1) {
-					FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
-					result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
-				} else {
-					for (FavoriteGroup favoriteGroup : favoriteGroups) {
-						FavoritesSettingsItem favSettingsItem = null;
-						for (SettingsItem item : settingsItems) {
-							String fileName = item.getFileName();
-							if (item instanceof FavoritesSettingsItem
-									&& app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName().equals(fileName)) {
-								favSettingsItem = (FavoritesSettingsItem) item;
-								break;
-							}
-						}
-						if (favSettingsItem != null) {
-							result.add(new FavoritesSettingsItem(app, favSettingsItem, Collections.singletonList(favoriteGroup)));
+				boolean hasGroupFile = false;
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					FavoritesSettingsItem favSettingsItem = null;
+					for (SettingsItem item : settingsItems) {
+						String fileName = item.getFileName();
+						if (item instanceof FavoritesSettingsItem
+								&& app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName().equals(fileName)) {
+							favSettingsItem = (FavoritesSettingsItem) item;
+							break;
 						}
 					}
+					if (favSettingsItem != null) {
+						result.add(new FavoritesSettingsItem(app, favSettingsItem, Collections.singletonList(favoriteGroup)));
+						hasGroupFile = true;
+					}
+				}
+				if (!hasGroupFile) {
+					FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+					result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
 				}
 			}
 		}
