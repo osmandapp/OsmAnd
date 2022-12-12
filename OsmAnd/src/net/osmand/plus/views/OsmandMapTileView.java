@@ -170,7 +170,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private AccessibilityActionsProvider accessibilityActions;
 
-	private final List<OsmandMapLayer> layers = new ArrayList<>();
+	private final List<OsmandMapLayer> layersLegacy = new ArrayList<>();
+	private final List<OsmandMapLayer> layersOpenGL = new ArrayList<>();
 
 	private BaseMapLayer mainLayer;
 
@@ -387,14 +388,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized boolean isLayerExists(@NonNull OsmandMapLayer layer) {
-		return layers.contains(layer);
+		if (isUseOpenGL()) {
+			return layersOpenGL.contains(layer);
+		} else {
+			return layersLegacy.contains(layer);
+		}
 	}
 
 	public float getZorder(@NonNull OsmandMapLayer layer) {
-		NavigationSession carNavigationSession = getApplication().getCarNavigationSession();
-		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
-		boolean useOpenGL = getApplication().useOpenGlRenderer() && !androidAutoAttached;
-		Float z = useOpenGL ? zOrdersOpenGL.get(layer) : zOrdersLegacy.get(layer);
+		Float z = isUseOpenGL() ? zOrdersOpenGL.get(layer) : zOrdersLegacy.get(layer);
 		if (z == null) {
 			return 10;
 		}
@@ -412,37 +414,44 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrderLegacy, float zOrderOpenGL) {
 		int i = 0;
-		for (i = 0; i < layers.size(); i++) {
-			if (zOrdersLegacy.get(layers.get(i)) > zOrderLegacy && zOrdersOpenGL.get(layers.get(i)) > zOrderOpenGL) {
+		for (i = 0; i < layersLegacy.size(); i++) {
+			if (zOrdersLegacy.get(layersLegacy.get(i)) > zOrderLegacy) {
 				break;
 			}
 		}
-		zOrdersLegacy.put(layer, zOrderLegacy);
-		zOrdersOpenGL.put(layer, zOrderOpenGL);
 		layer.initLayer(this);
-		layers.add(i, layer);
+		zOrdersLegacy.put(layer, zOrderLegacy);
+		layersLegacy.add(i, layer);
+
+		i = 0;
+		for (i = 0; i < layersOpenGL.size(); i++) {
+			if (zOrdersOpenGL.get(layersOpenGL.get(i)) > zOrderOpenGL) {
+				break;
+			}
+		}
+		zOrdersOpenGL.put(layer, zOrderOpenGL);
+		layersOpenGL.add(i, layer);
 	}
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
-		while (layers.remove(layer)) ;
+		while (layersLegacy.remove(layer));
+		while (layersOpenGL.remove(layer));
 		zOrdersLegacy.remove(layer);
 		zOrdersOpenGL.remove(layer);
 	}
 
-	public synchronized void removeAllLayers() {
-		while (layers.size() > 0) {
-			removeLayer(layers.get(0));
-		}
-	}
-
 	public List<OsmandMapLayer> getLayers() {
-		return layers;
+		if (isUseOpenGL()) {
+			return layersOpenGL;
+		} else {
+			return layersLegacy;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
-		for (OsmandMapLayer lr : layers) {
+		for (OsmandMapLayer lr : getLayers()) {
 			if (cl.isInstance(lr)) {
 				return (T) lr;
 			}
@@ -490,7 +499,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
-		for (OsmandMapLayer layer : layers) {
+		for (OsmandMapLayer layer : getLayers()) {
 			if (!layer.isMapGestureAllowed(type)) {
 				return false;
 			}
@@ -772,6 +781,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		QuadPoint c = tileBox.getCenterPixelPoint();
 		Canvas canvas = new Canvas(bufferBitmapTmp);
 		fillCanvas(canvas, drawSettings);
+		List<OsmandMapLayer> layers = getLayers();
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
@@ -965,6 +975,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			onDrawMapListener.onDrawOverMap();
 		}
 
+		List<OsmandMapLayer> layers = getLayers();
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
@@ -1493,6 +1504,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			doubleTapScaleDetector.onTouchEvent(event);
 		}
 		if (!isMultiTouch && doubleTapScaleDetector != null && !doubleTapScaleDetector.isInZoomMode()) {
+			List<OsmandMapLayer> layers = getLayers();
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
@@ -1836,6 +1848,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if ((accessibilityActions != null) && accessibilityActions.onLongClick(point, getCurrentRotatedTileBox())) {
 				return;
 			}
+			List<OsmandMapLayer> layers = getLayers();
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onLongPressEvent(point, getCurrentRotatedTileBox())) {
 					return;
@@ -1872,6 +1885,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if ((accessibilityActions != null) && accessibilityActions.onClick(point, getCurrentRotatedTileBox())) {
 				return true;
 			}
+			List<OsmandMapLayer> layers = getLayers();
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onSingleTap(point, getCurrentRotatedTileBox())) {
 					return true;
@@ -1897,5 +1911,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public LatLon getLatLonFromPixel(float x, float y) {
 		RotatedTileBox tileBox = getCurrentRotatedTileBox();
 		return NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, new PointI((int) x, (int) y));
+	}
+
+	private boolean isUseOpenGL() {
+		NavigationSession carNavigationSession = getApplication().getCarNavigationSession();
+		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
+		return getApplication().useOpenGlRenderer() && !androidAutoAttached;
 	}
 }

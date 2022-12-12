@@ -384,6 +384,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherLayerLow = new WeatherRasterLayer(app, WeatherLayer.LOW);
 		weatherLayerHigh = new WeatherRasterLayer(app, WeatherLayer.HIGH);
 		weatherContourLayer = new WeatherContourLayer(app);
+		updateLayersDate();
 	}
 
 	public void setWeatherEnabled(boolean enable) {
@@ -442,30 +443,30 @@ public class WeatherPlugin extends OsmandPlugin {
 		setContoursType(contoursType);
 	}
 
-	@NonNull
+	@Nullable
 	public WeatherContour getSelectedForecastContoursType() {
 		return weatherSettings.weatherForecastContoursType.get();
 	}
 
-	public void setSelectedForecastContoursType(@NonNull WeatherContour contoursType) {
+	public void setSelectedForecastContoursType(@Nullable WeatherContour contoursType) {
 		weatherSettings.weatherForecastContoursType.set(contoursType);
 		setContoursType(contoursType);
 	}
 
-	public void setContoursType(@NonNull WeatherContour contoursType) {
+	public void setContoursType(@Nullable WeatherContour contoursType) {
 		CommonPreference<Boolean> temperaturePref = settings.getCustomRenderBooleanProperty(WEATHER_TEMP_CONTOUR_LINES_ATTR);
 		CommonPreference<Boolean> pressurePref = settings.getCustomRenderBooleanProperty(WEATHER_PRESSURE_CONTOURS_LINES_ATTR);
 		CommonPreference<Boolean> cloudPref = settings.getCustomRenderBooleanProperty(WEATHER_CLOUD_CONTOURS_LINES_ATTR);
 		CommonPreference<Boolean> windPref = settings.getCustomRenderBooleanProperty(WEATHER_WIND_CONTOURS_LINES_ATTR);
 		CommonPreference<Boolean> precipitationPref = settings.getCustomRenderBooleanProperty(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR);
 
-		String attrName = contoursType.getAttrName();
+		String attrName = contoursType != null ? contoursType.getAttrName() : null;
 
-		temperaturePref.set(attrName.equals(WEATHER_TEMP_CONTOUR_LINES_ATTR));
-		pressurePref.set(attrName.equals(WEATHER_PRESSURE_CONTOURS_LINES_ATTR));
-		cloudPref.set(attrName.equals(WEATHER_CLOUD_CONTOURS_LINES_ATTR));
-		windPref.set(attrName.equals(WEATHER_WIND_CONTOURS_LINES_ATTR));
-		precipitationPref.set(attrName.equals(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR));
+		temperaturePref.set(WEATHER_TEMP_CONTOUR_LINES_ATTR.equals(attrName));
+		pressurePref.set(WEATHER_PRESSURE_CONTOURS_LINES_ATTR.equals(attrName));
+		cloudPref.set(WEATHER_CLOUD_CONTOURS_LINES_ATTR.equals(attrName));
+		windPref.set(WEATHER_WIND_CONTOURS_LINES_ATTR.equals(attrName));
+		precipitationPref.set(WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR.equals(attrName));
 
 		updateMapSettings();
 	}
@@ -482,12 +483,21 @@ public class WeatherPlugin extends OsmandPlugin {
 		return forecastDate != null;
 	}
 
-	public void updateWeatherDate(@Nullable Date date) {
+	public void setForecastDate(@Nullable Date date) {
 		forecastDate = date;
+		updateLayersDate();
+	}
 
-		long time = date != null ? date.getTime() : System.currentTimeMillis();
-		weatherLayerLow.setDateTime(time);
-		weatherLayerHigh.setDateTime(time);
-		weatherContourLayer.setDateTime(time);
+	private void updateLayersDate() {
+		long time = forecastDate != null ? forecastDate.getTime() : System.currentTimeMillis();
+		if (weatherLayerLow != null) {
+			weatherLayerLow.setDateTime(time);
+		}
+		if (weatherLayerHigh != null) {
+			weatherLayerHigh.setDateTime(time);
+		}
+		if (weatherContourLayer != null) {
+			weatherContourLayer.setDateTime(time);
+		}
 	}
 }

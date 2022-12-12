@@ -61,12 +61,8 @@ public class WeatherSettings {
 	public final CommonPreference<Boolean> weatherPrecipUnitAuto;
 	public final CommonPreference<Boolean> weatherPressureUnitAuto;
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-
 	public WeatherSettings(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 
 		weatherEnabled = settings.registerBooleanPreference("weatherEnabled", true).makeProfile();
 
@@ -75,7 +71,7 @@ public class WeatherSettings {
 		weatherContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
 				"weatherContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
 		weatherForecastContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(
-				"weatherForecastContoursType", WeatherContour.TEMPERATURE, WeatherContour.values(), WeatherContour.class).makeProfile();
+				"weatherForecastContoursType", null, WeatherContour.values(), WeatherContour.class).makeProfile();
 
 		weatherTemp = settings.registerBooleanPreference("weatherTemp", false).makeProfile();
 		weatherPressure = settings.registerBooleanPreference("weatherPressure", false).makeProfile();

@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +49,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -65,6 +63,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
+	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
 
 	private OsmandApplication app;
 	private WeatherHelper weatherHelper;
@@ -74,11 +73,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
 
-	private final Calendar currentDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+	private final Calendar currentDate = getDefaultCalendar();
 	private final Calendar selectedDate = getDefaultCalendar();
+	private final Calendar utcCalendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
-	private final TimeFormatter timeShortFormatter = new TimeFormatter(Locale.getDefault(), "HH", "h a", TimeZone.getTimeZone("UTC"));
-	private final SimpleDateFormat simpleHoursFormat = new SimpleDateFormat(" K", Locale.getDefault());
+	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a");
 
 	private WeatherContour previousWeatherContour;
 
@@ -96,8 +95,9 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		weatherHelper = app.getWeatherHelper();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+
+		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis()));
 		selectedDate.setTime(currentDate.getTime());
-		simpleHoursFormat.getCalendar().setTimeZone(TimeZone.getTimeZone("UTC"));
 
 		if (savedInstanceState != null) {
 			previousWeatherContour = WeatherContour.valueOf(savedInstanceState.getString(PREVIOUS_WEATHER_CONTOUR_KEY, WeatherContour.TEMPERATURE.name()));
@@ -120,7 +120,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		setupToolBar(view);
 		setupDatesView(view);
 		setupTimeSlider(view);
-		setupTimeLegend(view);
 		buildZoomButtons(view);
 
 		return view;
@@ -146,38 +145,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		updateTimeSlider();
 	}
 
-	private void setupTimeLegend(@NonNull View view) {
-		Calendar calendar = getDefaultCalendar();
-		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
-
-		int hours = 0;
-		ViewGroup timeLegend = view.findViewById(R.id.time_legend);
-		for (int i = 0; i <= timeLegend.getChildCount(); i++) {
-			View child = timeLegend.getChildAt(i);
-			if (child instanceof TextView) {
-				TextView textView = (TextView) child;
-				textView.setText(getFormattedHours(calendar, hours, twelveHoursFormat));
-				hours += 3;
-			}
-		}
-	}
-
-	private String getFormattedHours(@NonNull Calendar calendar, int hours, boolean twelveHoursFormat) {
-		calendar.set(Calendar.HOUR_OF_DAY, hours);
-
-		String formattedHours;
-		if (twelveHoursFormat && hours != 12) {
-			formattedHours = simpleHoursFormat.format(calendar.getTime());
-		} else {
-			formattedHours = timeShortFormatter.format(calendar.getTime(), twelveHoursFormat);
-		}
-		return formattedHours;
-	}
-
 	private LabelFormatter getLabelFormatter() {
 		Calendar calendar = getDefaultCalendar();
 		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
-		return value -> getFormattedHours(calendar, (int) value, twelveHoursFormat);
+		return value -> {
+			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
+			return timeFormatter.format(calendar.getTime(), twelveHoursFormat);
+		};
 	}
 
 	private void updateTimeSlider() {
@@ -234,9 +208,24 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateSelectedDate(@Nullable Date date) {
+		checkDateOffset(date);
 		widgetsPanel.setSelectedDate(date);
-		plugin.updateWeatherDate(date);
+		plugin.setForecastDate(date);
 		requireMapActivity().refreshMap();
+	}
+
+	private void checkDateOffset(@Nullable Date date) {
+		if (date != null && (date.getTime() - currentDate.getTimeInMillis() >= MIN_UTC_HOURS_OFFSET)) {
+			utcCalendar.setTime(date);
+			int hours = utcCalendar.get(Calendar.HOUR_OF_DAY);
+			int offset = hours % 3;
+			if (offset == 2) {
+				utcCalendar.set(Calendar.HOUR_OF_DAY, hours + 1);
+			} else if (offset == 1) {
+				utcCalendar.set(Calendar.HOUR_OF_DAY, hours - 1);
+			}
+			date.setTime(utcCalendar.getTimeInMillis());
+		}
 	}
 
 	@Override
@@ -302,6 +291,18 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void chooseContour(@NonNull View view) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_none)
+				.setIcon(getContentIcon(R.drawable.ic_action_thermometer))
+				.showCompoundBtn(activeColor)
+				.setOnClickListener(v -> {
+					plugin.setSelectedForecastContoursType(null);
+					requireMapActivity().refreshMap();
+				})
+				.setSelected(plugin.getSelectedForecastContoursType() == null)
+				.create()
+		);
+
 		for (WeatherContour weatherContour : WeatherContour.values()) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(weatherContour.getTitleId())
@@ -358,7 +359,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	@NonNull
 	protected static Calendar getDefaultCalendar() {
-		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 12);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
