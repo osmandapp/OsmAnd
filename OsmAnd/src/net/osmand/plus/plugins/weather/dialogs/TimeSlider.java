@@ -9,9 +9,22 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
+
+import org.apache.commons.logging.Log;
+
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class TimeSlider extends Slider {
+
+	private static final Log log = PlatformUtil.getLog(TimeSlider.class);
+
+	private final TimeFormatter timeShortFormatter = new TimeFormatter(Locale.getDefault(), "HH", "h a");
+	private final SimpleDateFormat simpleHoursFormat = new SimpleDateFormat("K", Locale.getDefault());
 
 	private Calendar currentDate;
 
@@ -34,5 +47,20 @@ public class TimeSlider extends Slider {
 	@Override
 	protected void onDraw(@NonNull Canvas canvas) {
 		super.onDraw(canvas);
+	}
+
+	public float[] getTicksCoordinates() {
+		try {
+			Field[] fields = getClass().getSuperclass().getSuperclass().getDeclaredFields();
+			for (Field field : fields) {
+				if ("ticksCoordinates".equals(field.getName())) {
+					field.setAccessible(true);
+					return (float[]) field.get(this);
+				}
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return null;
 	}
 }
