@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="y_axis">Y-Axis</string>
+    <string name="x_axis">X-Axis</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
