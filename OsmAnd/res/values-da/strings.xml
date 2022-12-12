@@ -4239,7 +4239,7 @@
 \n
 \nDu kan kontakte OsmAnd support for at undersøge det.</string>
     <string name="empty_state_my_tracks_desc">Importer eller optag sporfiler</string>
-    <string name="monitoring_control_start">Optag</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="release_3_6">- Profiler: Nu kan du ændre rækkefølge, indstille ikonet for kortet, ændre alle indstillinger for basisprofiler og gendanne dem tilbage til standardindstillingerne
 \n
 \n - Tilføjet afkørselsnummer i navigationen
