@@ -245,6 +245,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 					pendingRotation = true;
 				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_NONE) {
+					rotation = 0.0f;
+					pendingRotation = true;
+				} else if (currentMapRotation == OsmandSettings.ROTATE_MAP_MANUAL) {
 					pendingRotation = true;
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
@@ -331,6 +334,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
+		if (mapView != null && settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+			mapView.setRotate(0.0f, true);
+		}
 	}
 
 	public void appModeChanged() {
@@ -520,18 +526,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private void switchRotateMapModeImpl() {
 		if (mapView != null) {
 			String rotMode = app.getString(R.string.rotate_map_none_rotated_opt);
-			if (shouldResetRotation()) {
+			int vl = (settings.ROTATE_MAP.get() + 1) % 4;
+			settings.ROTATE_MAP.set(vl);
+
+			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+				rotMode = app.getString(R.string.rotate_map_bearing_opt);
+			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
+				rotMode = app.getString(R.string.rotate_map_compass_opt);
+			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 				mapView.resetManualRotation();
 				rotMode = app.getString(R.string.rotate_map_none_opt);
-			} else {
-				int vl = (settings.ROTATE_MAP.get() + 1) % 3;
-				settings.ROTATE_MAP.set(vl);
-
-				if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-					rotMode = app.getString(R.string.rotate_map_bearing_opt);
-				} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-					rotMode = app.getString(R.string.rotate_map_compass_opt);
-				}
 			}
 			rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
 			app.showShortToastMessage(rotMode);
@@ -543,9 +547,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	public boolean shouldResetRotation() {
-		return settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE
-				&& mapView != null && mapView.getRotate() != 0;
+	public void setRotationNoneToManual(){
+		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+			settings.ROTATE_MAP.set(OsmandSettings.ROTATE_MAP_MANUAL);
+			app.showShortToastMessage(app.getString(R.string.rotate_map_to_bearing)
+					+ ":\n" + app.getString(R.string.rotate_map_none_rotated_opt));
+		}
 	}
 
 	public LatLon getMapLocation() {
