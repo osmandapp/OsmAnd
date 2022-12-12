@@ -4650,7 +4650,7 @@
     <string name="shared_string_speed">Velocità</string>
     <string name="track_attach_to_the_roads_descr">La traccia sarà unita alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
     <string name="map_widget_true_bearing">Angolo reale</string>
-    <string name="routing_attr_hazmat_category_name">Categoria materiale pericoloso</string>
+    <string name="routing_attr_hazmat_category_name">Categoria di materiale pericoloso</string>
     <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori.</string>
     <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, ora di arrivo o tempo rimanente, prossime svolte, angolazione, nome della strada attuale, indicazioni di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
