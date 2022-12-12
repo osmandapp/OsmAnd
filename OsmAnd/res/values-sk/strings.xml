@@ -4975,4 +4975,6 @@
     <string name="release_4_4_pre">• Tu budú texty pre verziu 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
+    <string name="shared_string_open">Otvoriť</string>
+    <string name="open_weather_action">Otvoriť počasie</string>
 </resources>
