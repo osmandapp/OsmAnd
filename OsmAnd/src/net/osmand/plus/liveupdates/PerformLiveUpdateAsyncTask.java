@@ -18,10 +18,12 @@ import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -75,14 +77,14 @@ public class PerformLiveUpdateAsyncTask
 	}
 
 	@Override
-	protected IncrementalChangesManager.IncrementalUpdateList doInBackground(String... params) {
+	protected IncrementalUpdateList doInBackground(String... params) {
 		LOG.debug("doInBackground");
 		IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
 		return changesManager.getUpdatesByMonth(params[0]);
 	}
 
 	@Override
-	protected void onPostExecute(IncrementalChangesManager.IncrementalUpdateList result) {
+	protected void onPostExecute(IncrementalUpdateList result) {
 		if (context instanceof AbstractDownloadActivity) {
 			AbstractDownloadActivity activity = (AbstractDownloadActivity) context;
 			activity.setSupportProgressBarIndeterminateVisibility(false);
@@ -95,7 +97,7 @@ public class PerformLiveUpdateAsyncTask
 			tryRescheduleDownload(context, settings, localIndexFileName);
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
-			List<IncrementalChangesManager.IncrementalUpdate> updates = result.getItemsForUpdate();
+			List<IncrementalUpdate> updates = result.getItemsForUpdate();
 			LOG.debug("Updates quantity: " + (updates == null ? "null" : updates.size()));
 			boolean hasUpdates = !Algorithms.isEmpty(updates);
 			if (hasUpdates) {
@@ -112,8 +114,8 @@ public class PerformLiveUpdateAsyncTask
 				}
 				LOG.debug("Items to download size: " + itemsToDownload.size());
 				DownloadIndexesThread downloadThread = app.getDownloadThread();
-				if (context instanceof DownloadIndexesThread.DownloadEvents) {
-					downloadThread.setUiActivity((DownloadIndexesThread.DownloadEvents) context);
+				if (context instanceof DownloadEvents) {
+					downloadThread.setUiActivity((DownloadEvents) context);
 				}
 				boolean downloadViaWiFi =
 						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexFileName, settings).get();
@@ -138,8 +140,8 @@ public class PerformLiveUpdateAsyncTask
 							IndexItem[] itemsArray = new IndexItem[itemsToDownload.size()];
 							itemsArray = itemsToDownload.toArray(itemsArray);
 							downloadThread.runDownloadFiles(itemsArray);
-							if (context instanceof DownloadIndexesThread.DownloadEvents) {
-								((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
+							if (context instanceof DownloadEvents) {
+								((DownloadEvents) context).downloadInProgress();
 							}
 							updateTimestamps(lastMapUpdateTimestamp);
 						} else {
@@ -148,13 +150,11 @@ public class PerformLiveUpdateAsyncTask
 					}
 					LOG.debug("onPostExecute: No internet connection");
 				}
-			} else {
-				if (context instanceof DownloadIndexesThread.DownloadEvents) {
-					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
-					if (userRequested && context instanceof DownloadActivity) {
-						updateTimestamps(0);
-						app.showShortToastMessage(R.string.no_updates_available);
-					}
+			} else if (context instanceof DownloadEvents) {
+				((DownloadEvents) context).downloadInProgress();
+				if (userRequested && context instanceof DownloadActivity) {
+					updateTimestamps(0);
+					app.showShortToastMessage(R.string.no_updates_available);
 				}
 			}
 		}
