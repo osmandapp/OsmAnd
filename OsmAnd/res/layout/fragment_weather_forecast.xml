@@ -121,7 +121,6 @@
 				android:id="@+id/recycler_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="@dimen/content_padding_half"
 				android:clipToPadding="false"
 				android:orientation="horizontal"
 				android:paddingHorizontal="@dimen/content_padding_half"
@@ -135,50 +134,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
-				android:stepSize="1" />
-
-			<LinearLayout
-				android:id="@+id/time_legend"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginHorizontal="@dimen/content_padding"
-				android:orientation="horizontal">
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-				<include layout="@layout/simple_space" />
-
-				<include layout="@layout/simple_description" />
-
-			</LinearLayout>
+				android:valueTo="24"
+				tools:stepSize="1"
+				tools:value="12"
+				tools:valueFrom="0" />
 
 		</LinearLayout>
 

@@ -1,12 +1,7 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.core.android.MapRendererContext.WEATHER_CONTOURS_SYMBOL_SECTION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -37,7 +32,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 public class WeatherContourLayer extends BaseMapLayer {
 
 	private final OsmandSettings settings;
-	private final WeatherPlugin weatherPlugin;
+	private final WeatherPlugin plugin;
 	private final WeatherHelper weatherHelper;
 
 	private IMapLayerProvider rasterMapProvider;
@@ -58,7 +53,7 @@ public class WeatherContourLayer extends BaseMapLayer {
 		OsmandApplication app = getApplication();
 		this.settings = app.getSettings();
 		this.weatherHelper = app.getWeatherHelper();
-		this.weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		setDateTime(System.currentTimeMillis());
 	}
 
@@ -149,28 +144,31 @@ public class WeatherContourLayer extends BaseMapLayer {
 
 		MapRendererView mapRenderer = getMapRenderer();
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
-		if (view == null || mapRenderer == null || resourcesManager == null) {
-			return;
-		}
-		if (resourcesManager.getBandSettings().empty()) {
+		if (view == null || mapRenderer == null || resourcesManager == null
+				|| resourcesManager.getBandSettings().empty()) {
 			return;
 		}
 
-		short band = WEATHER_BAND_UNDEFINED;
-		WeatherContour weatherContour = weatherPlugin.hasCustomForecast() ?
-				weatherPlugin.getSelectedForecastContoursType() : weatherPlugin.getSelectedContoursType();
+		WeatherContour contour = plugin.hasCustomForecast() ?
+				plugin.getSelectedForecastContoursType() : plugin.getSelectedContoursType();
 
-		if (weatherContour == WeatherContour.TEMPERATURE) {
-			band = WEATHER_BAND_TEMPERATURE;
-		} else if (weatherContour == WeatherContour.PRESSURE) {
-			band = WEATHER_BAND_PRESSURE;
-		} else if (weatherContour == WeatherContour.CLOUDS) {
-			band = WEATHER_BAND_CLOUD;
-		} else if (weatherContour == WeatherContour.WIND) {
-			band = WEATHER_BAND_WIND_SPEED;
-		} else if (weatherContour == WeatherContour.PRECIPITATION) {
-			band = WEATHER_BAND_PRECIPITATION;
+		short band = contour != null ? contour.getBandIndex() : WEATHER_BAND_UNDEFINED;
+		if (shouldUpdateLayer(band) || mapActivityInvalidated) {
+			if (shouldDrawLayer(band)) {
+				recreateLayerProvider(mapRenderer, resourcesManager, band);
+			} else {
+				resetLayerProvider();
+			}
 		}
+		mapActivityInvalidated = false;
+	}
+
+	private boolean shouldDrawLayer(@WeatherBandType short band) {
+		return band != WEATHER_BAND_UNDEFINED && (plugin.hasCustomForecast() ||
+				plugin.isWeatherEnabled() && plugin.isContoursEnabled());
+	}
+
+	private boolean shouldUpdateLayer(@WeatherBandType short band) {
 		WeatherUnit weatherUnit = null;
 		WeatherBand weatherBand = weatherHelper.getWeatherBand(band);
 		if (weatherBand != null) {
@@ -178,27 +176,27 @@ public class WeatherContourLayer extends BaseMapLayer {
 		}
 		boolean weatherUnitChanged = weatherUnit != weatherUnitCached;
 		weatherUnitCached = weatherUnit;
-		boolean weatherEnabled = weatherPlugin.isWeatherEnabled();
+
+		boolean hasCustomForecast = plugin.hasCustomForecast();
+		boolean weatherEnabled = plugin.isWeatherEnabled() || hasCustomForecast;
 		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
 		weatherEnabledCached = weatherEnabled;
-		boolean contoursEnabled = weatherPlugin.isContoursEnabled() || weatherPlugin.hasCustomForecast();
+
+		boolean contoursEnabled = plugin.isContoursEnabled() || hasCustomForecast;
 		boolean contoursEnabledChanged = contoursEnabled != contoursEnabledCached;
 		contoursEnabledCached = contoursEnabled;
-		int transparency = weatherPlugin.getContoursTransparency();
+
+		int transparency = plugin.getContoursTransparency();
 		boolean transparencyChanged = cachedTransparency != transparency;
+		cachedTransparency = transparency;
+
 		boolean bandChanged = bandСached != band;
 		bandСached = band;
-		cachedTransparency = transparency;
+
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
-		if (weatherEnabledChanged || contoursEnabledChanged || transparencyChanged || bandChanged
-				|| weatherUnitChanged || dateTimeChanged || mapActivityInvalidated) {
-			if (weatherEnabled && contoursEnabled && band != WEATHER_BAND_UNDEFINED) {
-				recreateLayerProvider(mapRenderer, resourcesManager, band);
-			} else {
-				resetLayerProvider();
-			}
-		}
-		mapActivityInvalidated = false;
+
+		return weatherEnabledChanged || contoursEnabledChanged || transparencyChanged || bandChanged
+				|| weatherUnitChanged || dateTimeChanged;
 	}
 }
