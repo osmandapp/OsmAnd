@@ -4836,7 +4836,7 @@
     <string name="dismiss_changes">Отменить изменения\?</string>
     <string name="restart_now">Перезапустить сейчас</string>
     <string name="map_rendering_engine_v2">Версия 2 (OpenGL)</string>
-    <string name="external_sensors_plugin_description">Мониторинг частоты сердцебиения, скорости велосипеда, мощности велосипеда и каденса. Требуется подключение устройства к соответствующим датчикам по протоколу беспроводной персональной сети ANT+.</string>
+    <string name="external_sensors_plugin_description">Доступ к внешним датчикам для считывания, например, частоты сердцебиения, скорости велосипеда, мощности велосипедиста или каденса. Требуется подключение устройства к соответствующим датчикам по протоколу беспроводной персональной сети ANT+.</string>
     <string name="map_widget_ant_bicycle_power">Мощность велосипеда</string>
     <string name="map_widget_rendering_fps">FPS отрисовки карты</string>
     <string name="rendering_engine_failed">Произошел сбой отрисовки карт OsmAnd.</string>

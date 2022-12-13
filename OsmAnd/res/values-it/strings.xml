@@ -684,7 +684,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto di parcheggio</string>
-    <string name="osmand_parking_plugin_description">Imposta il punto sulla mappa dove hai parcheggiato e sul calendario l\'orario di fine parcheggio. Per impostare un segnaposto scegli un punto sulla mappa, vai su \"Azioni\" e premi \"Marca come parcheggio\".</string>
+    <string name="osmand_parking_plugin_description">Segna il punto sulla mappa dove hai parcheggiato e sul calendario l\'orario di fine parcheggio. Per impostare un segnaposto scegli un punto sulla mappa, vai su \"Azioni\" e tocca \"Aggiungi parcheggio\".</string>
     <string name="osmand_parking_plugin_name">Posizione parcheggio</string>
     <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
     <string name="context_menu_item_delete_parking_point">Elimina marcatore di parcheggio</string>
@@ -1802,7 +1802,7 @@
     <string name="rec_split_clip_length_desc">Limite massimo della durata delle clip registrate.</string>
     <string name="rec_split_storage_size">Dimensione della memoria</string>
     <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupata dal totale delle clip.</string>
-    <string name="update_time">Ora di aggiornamento</string>
+    <string name="update_time">Tempo di aggiornamento</string>
     <string name="updates_size">Dimensione aggiornamenti</string>
     <string name="last_map_change">Ultima modifica alla mappa: %s</string>
     <string name="hourly">Orario</string>
@@ -3306,7 +3306,7 @@
     <string name="login_and_pass">Nome utente e password</string>
     <string name="plugin_global_prefs_info">Queste impostazioni del plugin sono globali e si applicano a tutti i profili</string>
     <string name="osm_editing">Modifica OSM</string>
-    <string name="osm_edits_view_descr">Visualizza tutte le modifiche non caricate o le note OSM in %1$s. Le modifiche caricate non verranno più visualizzate.</string>
+    <string name="osm_edits_view_descr">Visualizza tutte le tue modifiche non ancora caricate o le note OSM in %1$s. Le modifiche già caricate non verranno più visualizzate.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icona visualizzata durante la navigazione o in movimento.</string>
     <string name="logcat_buffer_descr">Controlla e condividi log dettagliati dell\'applicazione</string>
@@ -3338,7 +3338,7 @@
     <string name="monitoring_min_distance_descr">L\'attivazione di questo filtro consente di evitare ulteriori registrazioni di dati quando il movimento non viene quasi rilevato. Migliora anche l\'aspetto spaziale delle tracce senza ulteriore elaborazione.</string>
     <string name="monitoring_min_distance_descr_side_effect">Effetto collaterale: i periodi di riposo non sono registrati affatto oppure registrati come un singolo punto. I movimenti minori (ad esempio, a lato della strada per segnalare una possibile svolta nel viaggio) possono essere scartati dal filtro. Tieni presente che il tuo file conterrà meno informazioni per la post-elaborazione e allo stesso tempo può potenzialmente salvare artefatti GPS causati da cattiva ricezione o effetti del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Raccomandazione: imposta uno spostamento di 5 metri se non vuoi registrare dettagli minori del tuo percorso, e non hai bisogno di dati aggiuntivi quando sei fermo.</string>
-    <string name="live_monitoring_time_buffer">Tempo buffer</string>
+    <string name="live_monitoring_time_buffer">Buffer temporale</string>
     <string name="live_monitoring_tracking_interval">Intervallo di tracciamento</string>
     <string name="live_monitoring_adress">Indirizzo web</string>
     <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con i parametri della sintassi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -3505,9 +3505,9 @@
     <string name="legend_item_description">Guida alla simbologia di una mappa.</string>
     <string name="navigation_profiles_item">Profili di navigazione</string>
     <string name="unsupported_type_error">Tipo non supportato</string>
-    <string name="gpx_parse_error">La traccia GPX ha un problema.
+    <string name="gpx_parse_error">Problemi riscontrati con un file GPX.
 \n
-\nContatta il team di supporto per approfondire.</string>
+\nPuoi contattare il team di supporto per approfondire.</string>
     <string name="shared_string_always">Sempre</string>
     <string name="screen_control">Controllo dello schermo</string>
     <string name="system_screen_timeout_descr">Spegni lo schermo dopo il tempo di spegnimento di sistema dello schermo.</string>
@@ -4348,7 +4348,7 @@
 \n • Corretti diversi errori di calcolo del percorso
 \n
 \n</string>
-    <string name="clear_all_history_warning">Cancellare la cronologia completa dell\'applicazione comprese le ricerche, la cronologia di navigazione e dei marcatori\?</string>
+    <string name="clear_all_history_warning">Cancellare tutta la cronologia dell\'applicazione comprese le ricerche, la cronologia di navigazione e dei marcatori\?</string>
     <string name="clear_all_history">Cancella tutta la cronologia</string>
     <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
     <string name="navigation_history">Cronologia di navigazione</string>
@@ -4363,7 +4363,7 @@
     <string name="transparent_status_bar">Barra di stato trasparente</string>
     <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
     <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia dalle Impostazioni.</string>
-    <string name="markers_history_is_disabled_descr">Abilita la cronologia per ottenere la lista dei marcatori della mappa visitati.</string>
+    <string name="markers_history_is_disabled_descr">Abilita la cronologia per memorizzare la lista dei marcatori della mappa visitati.</string>
     <string name="history_is_disabled_descr">Abilita la cronologia per ottenere un accesso veloce agli ultimi risultati.</string>
     <string name="is_disabled">%1$s è disabilitato</string>
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
@@ -4383,15 +4383,15 @@
     <string name="delete_history_items_descr">Eliminare elementi della cronologia selezionati\?</string>
     <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
     <string name="quick_action_toggle_preference">Un cursore per cambiare lo stato delle preferenze selezionate.</string>
-    <string name="shared_storage_warning_description">A causa delle nuove regole di Android, da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
+    <string name="shared_storage_warning_description">A causa delle nuove regole di Android, a partire da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
 \n
-\nSposta i dati dalla memoria condivisa alla memoria disponibile, oppure l\'applicazione perderà l\'accesso ai tuoi dati quali mappe offline, tracce GPX, ecc.</string>
+\nSposta la cartella dei dati dalla memoria condivisa alla memoria disponibile, oppure l\'applicazione perderà l\'accesso ai tuoi dati quali mappe offline, tracce GPX, ecc.</string>
     <string name="horseback_riding">A cavallo</string>
     <string name="copying_file">Copia dei file %1$s…</string>
     <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s file %2$s</string>
     <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
-    <string name="shared_storage_last_step">Successivamente potrai specificare una nuova cartella dati.</string>
+    <string name="shared_storage_last_step">Successivamente è possibile specificare una nuova cartella dati.</string>
     <string name="shared_storage_migration_descr">A causa dei cambiamenti alle regole di accesso alla memoria di Android, OsmAnd non può più utilizzare %1$s.
 \n
 \nDevi copiare tutti i tuoi dati nella nuova cartella.</string>
@@ -4494,7 +4494,7 @@
     <string name="quick_action_add_route_descr">Un pulsante per avviare un percorso dal centro dello schermo.</string>
     <string name="gpx_no_routes_descr">Puoi usare lo strumento \"%1$s\" per salvare il percorso su un file .</string>
     <string name="gpx_no_routes_title">Non ci sono percorsi</string>
-    <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione mentre si sta navigando e successivamente la salva.</string>
+    <string name="save_track_to_gpx_descrp">Avvia automaticamente la registrazione della traccia durante la navigazione e la salva automaticamente in seguito.</string>
     <string name="rendering_attr_seabedDetail_name">Dettagli del fondale marino</string>
     <string name="rendering_attr_seabedDetail_description">Informazioni testuali aggiuntive sulla superficie del fondale marino, tipi di superfici combinate, categorie e tassonomie delle alghe marine</string>
     <string name="waypoint_template">Template waypoint</string>
@@ -4598,7 +4598,7 @@
     <string name="av_def_action_choose">Su richiesta</string>
     <string name="coordinates_widget_desc">Mostra le coordinate geografiche della localizzazione attuale.</string>
     <string name="shared_string_widget">Widget</string>
-    <string name="audio_video_notes_desc">Il widget fornisce un accesso veloce per avviare/fermare l\'acquisizione di una nota (audio, video, foto).</string>
+    <string name="audio_video_notes_desc">Fornisce un accesso rapido per avviare/interrompere l\'acquisizione di una nota audio, video o fotografica.</string>
     <string name="street_name_widget_desc">Il widget Nomi delle strade mostra il nome della strada corrente con una freccia di direzione, o il nome della strada con una freccia che indica la prossima svolta.</string>
     <string name="colour_of_circles">Colore dei cerchi</string>
     <string name="distance_circles">Cerchi di distanza</string>
@@ -4612,7 +4612,7 @@
     <string name="gps_info_widget_desc">Mostra il numero di satelliti attualmente visibili e utilizzati.</string>
     <string name="max_speed_widget_desc">Mostra il limite di velocità della strada che si sta percorrendo.</string>
     <string name="current_speed_widget_desc">Mostra la velocità come indicata dal GPS.</string>
-    <string name="mapillary_widget_desc">Fornisce un accesso veloce all\'app Mapillary per aggiungere immagini al livello stradale.</string>
+    <string name="mapillary_widget_desc">Fornisce un rapido accesso all\'app Mapillary per aggiungere immagini a livello stradale.</string>
     <string name="time_to_go_desc">Tempo necessario per raggiungere la tua destinazione in ore e minuti.</string>
     <string name="arrival_time_widget_desc">Orario di arrivo alla destinazione.</string>
     <string name="navigation_points">Punti di navigazione</string>
@@ -4628,8 +4628,8 @@
     <string name="circle_settings">Impostazioni del cerchio</string>
     <string name="battery_widget_desc">Mostra il livello della batteria del tuo dispositivo.</string>
     <string name="altitude_widget_desc">Mostra l\'altezza sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="lanes_widgets_desc">Mostra le corsie della strada che si sta percorrendo ed evidenzia quella da utilizzare per la navigazione.</string>
-    <string name="bearing_desc">Mostra l\'angolo assoluto o relativo della destinazione in unità angolari (in 180 gradi, in 360 gradi o in milliradianti).</string>
+    <string name="lanes_widgets_desc">Mostra l\'attuale disposizione delle corsie stradali ed evidenzia quella da utilizzare per la navigazione.</string>
+    <string name="bearing_desc">Mostra l\'angolo assoluto o relativo rispetto la destinazione in unità angolari (in 180 gradi, in 360 gradi o in milliradianti).</string>
     <string name="routing_attr_allow_private_for_truck_description">Permetti agli autotreni l\'accesso alle aree private.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permetti l\'accesso alle aree private (autotreni)</string>
     <string name="rendering_attr_weatherTempContours_name">Isoterme</string>
@@ -4645,17 +4645,17 @@
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_trip_recording_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
-    <string name="radius_rules_widget_desc">Il righello radiale mostra la distanza attorno al punto selezionato nella mappa attraverso dei cerchi di distanza sulla mappa.</string>
+    <string name="radius_rules_widget_desc">Lo strumento righello radiale mostra la distanza attorno al punto selezionato nella mappa attraverso dei cerchi.</string>
     <string name="no_altitude_data">Nessun dato di altitudine</string>
     <string name="shared_string_speed">Velocità</string>
     <string name="track_attach_to_the_roads_descr">La traccia sarà unita alla strada utilizzando le mappe offline, la geometria della traccia sarà cambiata.</string>
     <string name="map_widget_true_bearing">Angolo reale</string>
-    <string name="routing_attr_hazmat_category_name">Categoria materiale pericoloso</string>
+    <string name="routing_attr_hazmat_category_name">Categoria di materiale pericoloso</string>
     <string name="map_markers_bar_widget_desc">Nel widget della barra superiore puoi vedere la distanza e la direzione dalla posizione attuale al marcatore. È possibile configurare la visualizzazione di 1 o 2 marcatori.</string>
-    <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, ora di arrivo o tempo rimanente, prossime svolte, l\'angolo, nome della strada attuale, indicazioni di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
+    <string name="route_maneuvers_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, ora di arrivo o tempo rimanente, prossime svolte, angolazione, nome della strada attuale, indicazioni di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Nascondi le aree militari</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Nascondi le aree militari</string>
-    <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, tempo di arrivo o il tempo rimanente, prossime svolte, angolo, il nome della strada attuale o successiva, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
+    <string name="navigation_points_desc">I widget di navigazione sono abilitati durante la navigazione per mostrare informazioni quali distanza, tempo di arrivo o rimanente, prossime svolte, direzione, il nome della strada attuale o successiva, indicazione di corsia, velocità massima, avvisi di avvicinamento, PDI, punti intermedi.</string>
     <string name="app_mode_mountain_bicycle">Mountain bike</string>
     <string name="explore_plans">Esplora i Piani</string>
     <string name="shared_string_mode">Modalità</string>
@@ -4729,7 +4729,7 @@
     <string name="auto_25_chars_route_tu_kr">Fai inversione a U e tieni la destra</string>
     <string name="auto_25_chars_route_roundabout_kl">Prendi la %1$d uscita e tieni la sinistra</string>
     <string name="auto_25_chars_route_roundabout_kr">Prendi la %1$d uscita e tieni la destra</string>
-    <string name="trip_recording_duration_widget_desc">Mostra la durata della traccia in corso di registrazione.</string>
+    <string name="trip_recording_duration_widget_desc">Mostra la durata del viaggio attualmente registrato.</string>
     <string name="no_altitude_data_desc">Per ottenere i dati %1$s, collega la tua traccia alle strade o calcolali online.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostra percorsi MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra percorsi dedicati al mountainbiking.</string>
@@ -4746,7 +4746,7 @@
     <string name="distance_to_intermediate_widget_desc">Il widget mostra la distanza al primo punto intermedio. Quando il punto intermedio viene raggiunto, la distanza verrà aggiornata al successivo punto intermedio.</string>
     <string name="switch_widget_mode_desc">Puoi cambiare la modalità toccando il widget.</string>
     <string name="side_marker_eta">Tempo di arrivo stimato</string>
-    <string name="reset_all_settings_desc">Reimpostare tutte le impostazioni a quelle di fabbrica\?</string>
+    <string name="reset_all_settings_desc">Reimpostare tutto ai valori predefiniti\?</string>
     <string name="goods_delivery_desc_4">Utilizza il profilo Camion per pesi del veicolo superiori alle 3.5 tonnellate.</string>
     <string name="duplacate_widget_added_snackbar">Un widget duplicato sta per essere aggiunto alla lista.</string>
     <string name="av_notes_photo_widget_desc">Toccare il widget permette di scattare una foto.</string>
@@ -4809,7 +4809,7 @@
     <string name="map_widget_altitude_map_center_desc">Mostra l\'altezza sul livello del mare dell\'attuale centro della mappa.</string>
     <string name="map_widget_altitude_current_location">Altitudine: posizione attuale</string>
     <string name="map_widget_rendering_fps">FPS rendering mappa</string>
-    <string name="map_widget_rendering_fps_desc">Mostra la velocità con cui la mappa e gli elementi della mappa vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
+    <string name="map_widget_rendering_fps_desc">Mostra la velocità con cui la mappa e e i suoi elementi vengono mostrati e aggiornati (espressi in fotogrammi per secondo o FPS).</string>
     <string name="simulate_location_by_gpx">Simula posizione da GPX</string>
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
@@ -4933,8 +4933,8 @@
     <string name="speak_gps_signal_status">Annuncia la perdita e il riaggancio del segnale GPS</string>
     <string name="external_sensors_plugin_description">Accede ai sensori esterni per rilevare es. la tua frequenza cardiaca, velocità della bicicletta, potenza della pedalata o cadenza. Richiede che il tuo dispositivo sia connesso ai rispettivi sensori tramite il protocollo di rete wireless ANT+.</string>
     <string name="map_widget_altitude_current_location_desc">Mostra l\'altitudine sopra il livello del mare dell\'attuale geolocalizzazione.</string>
-    <string name="map_widget_altitude_desc">Mostra l\'altitudine dell\'attuale geolocalizzazione o la quota dell\'attuale centro della mappa</string>
-    <string name="send_uuid_preference_desc">Per controllare il corretto utilizzo delle risorse dei nostri server, prevedere dei modelli di traffico e generare dei rapporti mensili anonimi delle mappe, un UUID casuale viene utilizzato per scaricare le mappe offline dai server OsmAnd.</string>
+    <string name="map_widget_altitude_desc">Mostra l\'altitudine dell\'attuale geolocalizzazione o l\'elevazione dell\'attuale centro della mappa</string>
+    <string name="send_uuid_preference_desc">Un UUID casuale viene utilizzato per scaricare mappe offline dai server OsmAnd per monitorare il corretto utilizzo delle risorse del server, prevedere i modelli di traffico e generare rapporti mensili anonimi sulle mappe.</string>
     <string name="nautical_depth_points">Punti di profondità nautici</string>
     <string name="rendering_attr_depthContourColorScheme_name">Schema colori delle linee</string>
     <string name="dismiss_changes">Scartare i cambiamenti\?</string>

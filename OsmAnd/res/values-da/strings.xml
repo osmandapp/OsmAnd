@@ -555,7 +555,7 @@
     <string name="error_doing_search">Kunne ikke udføre offline søgning.</string>
     <string name="search_osm_offline">Søg efter geografisk placering</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Vælg sprog i appen (træder i kraft efter genstart).</string>
+    <string name="preferred_locale_descr">Sprog i appen (træder i kraft efter genstart).</string>
     <string name="preferred_locale">Vist sprog</string>
     <string name="incomplete_locale">ufuldstændig</string>
     <string name="unit_of_length_descr">Ændr enhed for afstand.</string>
@@ -1806,7 +1806,7 @@
     <string name="impassable_road_desc">Vælg veje, der skal undgås under navigation.</string>
     <string name="shared_string_sound">Lyd</string>
     <string name="select_voice_provider">Vælg talevejledning</string>
-    <string name="select_voice_provider_descr">Vælg eller hent talevejledning på eget sprog.</string>
+    <string name="select_voice_provider_descr">Vælg eller hent talevejledning på dit sprog.</string>
     <string name="live_updates">Realtidsopdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>

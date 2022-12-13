@@ -1295,9 +1295,9 @@
     <string name="speak_poi">POI à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Enregistre vos voyages ou entraînements et analyse les données de vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et affinées.
+    <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nPlus d\'informations sur https://osmand.net/docs/user/plugins/trip-recording.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -4533,9 +4533,9 @@
     <string name="rendering_attr_showRunningRoutes_name">Itinéraires de course à pied</string>
     <string name="rendering_attr_showRunningRoutes_description">Afficher les itinéraires de course à pied</string>
     <string name="configure_screen_widgets_descr">Sélectionnez le côté de l\'écran pour ajouter ou réorganiser les widgets.</string>
-    <string name="simulation_real_mode_desc">Sur les sections de routes droites, la vitesse sera approximativement égale à la vitesse maximale autorisée.
-\nAux intersections, la simulation ralentira.
-\nDes pénalités supplémentaires seront appliquées sur les feux de signalisation, les panneaux stop, etc.</string>
+    <string name="simulation_real_mode_desc">Sur les sections droites des routes, la vitesse sera fonction de la vitesse maximale autorisée.
+\nAux bifurcations, la simulation ralentira.
+\nD\'autres ralentissements seront appliqués en fonction des feux tricolores, des panneaux stop, etc.</string>
     <string name="routeInfo_horse_scale_description">Afficher les chemins en fonction de la difficulté des sentiers équestres</string>
     <string name="rendering_attr_horse_scale_common_name">Commun</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigeant</string>
@@ -4758,7 +4758,7 @@
     <string name="shared_string_only_missing">Manquant seulement</string>
     <string name="connect_with_straight_line">Connecter en ligne droite</string>
     <string name="attach_roads_warning">Seule une trace déjà enregistrée peut être attachée aux routes.</string>
-    <string name="attach_roads_descr">Approxime la trace aux routes de la carte pour obtenir un meilleur itinéraire, des directions plus précises et associer les attributs des routes.</string>
+    <string name="attach_roads_descr">Déplace votre itinéraire entre points sur les routes autorisées afin obtenir un meilleur guidage et de disposer d\'informations plus justes.</string>
     <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
     <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
     <string name="favorite_delete_group">Supprimer le groupe</string>

@@ -65,7 +65,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	@Override
-	protected void update(OsmandApplication app) {
+	protected void update(@NonNull OsmandApplication app) {
 		GPXTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
 		smoothingFilter.updateAnalysis(sourceAnalysis);
 		speedFilter.updateAnalysis(sourceAnalysis);
@@ -124,7 +124,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	@Override
-	protected boolean processSplit(@Nullable OsmandApplication app) {
+	protected boolean processSplit(@NonNull OsmandApplication app) {
 		return GpxDisplayHelper.processSplit(app, this);
 	}
 
