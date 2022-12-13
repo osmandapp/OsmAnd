@@ -1,9 +1,15 @@
 package net.osmand.plus.liveupdates;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastOsmChange;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -13,6 +19,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -30,12 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastOsmChange;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-
 public class PerformLiveUpdateAsyncTask
 		extends AsyncTask<String, Object, IncrementalChangesManager.IncrementalUpdateList> {
 
@@ -51,8 +52,8 @@ public class PerformLiveUpdateAsyncTask
 	private Runnable runOnSuccess;
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
-									  @NonNull String localIndexFileName,
-									  boolean userRequested) {
+	                                  @NonNull String localIndexFileName,
+	                                  boolean userRequested) {
 		this.context = context;
 		this.app = getMyApplication();
 		this.settings = app.getSettings();
@@ -160,13 +161,12 @@ public class PerformLiveUpdateAsyncTask
 	}
 
 	public static void tryRescheduleDownload(@NonNull Context context,
-											 @NonNull OsmandSettings settings,
-											 @NonNull String localIndexFileName) {
+	                                         @NonNull OsmandSettings settings,
+	                                         @NonNull String localIndexFileName) {
 		CommonPreference<Integer> updateFrequencyPreference =
 				preferenceUpdateFrequency(localIndexFileName, settings);
 		Integer frequencyOrdinal = updateFrequencyPreference.get();
-		if (LiveUpdatesHelper.UpdateFrequency.values()[frequencyOrdinal]
-				== LiveUpdatesHelper.UpdateFrequency.HOURLY) {
+		if (UpdateFrequency.values()[frequencyOrdinal] == UpdateFrequency.HOURLY) {
 			return;
 		}
 		Integer retriesLeft = settings.LIVE_UPDATES_RETRIES.get();
@@ -175,8 +175,7 @@ public class PerformLiveUpdateAsyncTask
 
 			long timeToRetry = System.currentTimeMillis() + AlarmManager.INTERVAL_HOUR;
 
-			AlarmManager alarmMgr = (AlarmManager) context
-					.getSystemService(Context.ALARM_SERVICE);
+			AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 			alarmMgr.set(AlarmManager.RTC, timeToRetry, alarmIntent);
 			settings.LIVE_UPDATES_RETRIES.set(retriesLeft - 1);
 		} else {
