@@ -48,10 +48,10 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
@@ -576,16 +576,14 @@ public class AppInitializer implements IProgress {
 				continue;
 			}
 			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
-			LiveUpdatesHelper.UpdateFrequency updateFrequency =
-					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
+			UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
 			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
 			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
 				runLiveUpdate(app, fileName, false, null);
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
 				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-				LiveUpdatesHelper.TimeOfDay timeOfDayToUpdate =
-						LiveUpdatesHelper.TimeOfDay.values()[timeOfDayOrd];
+				TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
 				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
 			}
 		}
@@ -646,7 +644,7 @@ public class AppInitializer implements IProgress {
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
 		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
-  			settings.USE_OPENGL_RENDER.set(false);
+			settings.USE_OPENGL_RENDER.set(false);
 		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
 			try {
 				NativeCoreContext.init(app);
