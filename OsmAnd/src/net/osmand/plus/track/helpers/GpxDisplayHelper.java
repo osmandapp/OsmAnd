@@ -171,8 +171,8 @@ public class GpxDisplayHelper {
 		return dg;
 	}
 
-	public static boolean processSplit(@Nullable OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
-		if (app == null || app.isApplicationInitializing()) {
+	public static boolean processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
+		if (app.isApplicationInitializing()) {
 			return false;
 		}
 
