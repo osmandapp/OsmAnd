@@ -26,7 +26,6 @@ import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
@@ -93,7 +92,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			InAppPurchase purchase = mainPurchases.get(i);
 			cardsContainer.addView(new InAppPurchaseCard(activity, purchaseHelper, purchase).build(activity));
 		}
-		boolean promoActive = app.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		boolean promoActive = app.getSettings().BACKUP_PURCHASE_ACTIVE.get();
 		if (promoActive) {
 			cardsContainer.addView(new PromoPurchaseCard(activity).build(activity));
 		}

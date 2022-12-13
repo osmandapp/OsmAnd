@@ -39,9 +39,9 @@ public class PromoPurchaseCard extends BaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.manage_subscription), false);
 
 		OsmandSettings settings = app.getSettings();
-		long startTime = settings.BACKUP_PROMOCODE_START_TIME.get();
-		long expiredTime = settings.BACKUP_PROMOCODE_EXPIRE_TIME.get();
-		SubscriptionState state = settings.BACKUP_PROMOCODE_STATE.get();
+		long startTime = settings.BACKUP_PURCHASE_START_TIME.get();
+		long expiredTime = settings.BACKUP_PURCHASE_EXPIRE_TIME.get();
+		SubscriptionState state = settings.BACKUP_PURCHASE_STATE.get();
 
 		InAppPurchaseCard.setupStatus(view, state, startTime, expiredTime);
 	}

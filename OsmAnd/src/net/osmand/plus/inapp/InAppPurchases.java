@@ -736,6 +736,15 @@ public abstract class InAppPurchases {
 			}
 		}
 
+		public enum ProSubscriptionOrigin {
+			SUBSCRIPTION_ORIGIN_UNDEFINED,
+			SUBSCRIPTION_ORIGIN_ANDROID,
+			SUBSCRIPTION_ORIGIN_PROMO,
+			SUBSCRIPTION_ORIGIN_IOS,
+			SUBSCRIPTION_ORIGIN_AMAZON,
+			SUBSCRIPTION_ORIGIN_HUAWEY,
+		};
+
 		InAppSubscription(int id, @NonNull String skuNoVersion, int version) {
 			super(id, skuNoVersion + "_v" + version);
 			this.skuNoVersion = skuNoVersion;
