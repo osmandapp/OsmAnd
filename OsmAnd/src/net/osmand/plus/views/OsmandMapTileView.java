@@ -419,7 +419,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				break;
 			}
 		}
-		layer.initLayer(this);
 		zOrdersLegacy.put(layer, zOrderLegacy);
 		layersLegacy.add(i, layer);
 
@@ -431,6 +430,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		zOrdersOpenGL.put(layer, zOrderOpenGL);
 		layersOpenGL.add(i, layer);
+		layer.initLayer(this);
 	}
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
