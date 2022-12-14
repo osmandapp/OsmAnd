@@ -4851,4 +4851,6 @@
     <string name="rendering_attr_showMtbScale_description">Vis løyper ifølge MTB-skala.</string>
     <string name="shared_string_open">Åpne</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
+    <string name="distance_by_tap_use_description">Trykk på kartet for å vise avstanden mellom din nåværende posisjon og det trykte punktet.
+\nTrykk med 2 fingre på kartet for å vise avstanden mellom de trykte punktene.</string>
 </resources>
