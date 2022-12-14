@@ -55,7 +55,6 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private OsmandApplication app;
 	private boolean openTrack;
 	private boolean showOnMap;
-	private boolean nameChanged = false;
 	private File savedGpxFile;
 	private String initialGpxName = "";
 	private String newGpxName = "";
@@ -114,7 +113,6 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 						nameEditText.setError(app.getString(R.string.file_name_containes_illegal_char));
 					}
 				}
-				nameChanged = true;
 			}
 		});
 		nameEditText.setOnEditorActionListener((v, actionId, event) -> {
@@ -182,13 +180,11 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private void finish() {
 		if (processFileName()) {
 			dismiss();
-		} else if (!nameChanged) {
-			dismiss();
 		}
 	}
 
 	private boolean processFileName() {
-		File dest = null;
+		File dest;
 		if (Algorithms.isBlank(newGpxName)) {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return false;
@@ -197,9 +193,11 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			dest = FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
 			if (dest != null) {
 				savedGpxFile = dest;
+			} else {
+				return false;
 			}
 		}
-		return dest != null;
+		return true;
 	}
 
 	@Override
