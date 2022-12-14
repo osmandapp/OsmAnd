@@ -1382,7 +1382,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!Algorithms.isEmpty(lastCityName)) {
 			String selectStreets = app.getString(R.string.search_street);
 			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
-			Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
+			Spannable spannable = new SpannableString((selectStreets + " " + inCityName).toUpperCase());
 			boolean light = settings.isLightContent();
 			spannable.setSpan(new ForegroundColorSpan(app.getColor(light ? R.color.icon_color_default_light : R.color.color_white)),
 					selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
