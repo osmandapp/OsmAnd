@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -146,6 +147,19 @@ public class IncrementalChangesManager {
 		protected File file;
 		protected String date;
 		protected long obfCreated;
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			RegionUpdate that = (RegionUpdate) o;
+			return obfCreated == that.obfCreated && Objects.equals(file, that.file) && Objects.equals(date, that.date);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(file, date, obfCreated);
+		}
 	}
 
 	protected class RegionUpdateFiles {
@@ -161,23 +175,24 @@ public class IncrementalChangesManager {
 
 		public boolean addUpdate(String date, File file, long dateCreated) {
 			String monthYear = date.substring(0, 5);
-			RegionUpdate ru = new RegionUpdate();
-			ru.date = date;
-			ru.file = file;
-			ru.obfCreated = dateCreated;
+			RegionUpdate regionUpdate = new RegionUpdate();
+			regionUpdate.date = date;
+			regionUpdate.file = file;
+			regionUpdate.obfCreated = dateCreated;
 			if (date.endsWith("00")) {
-				monthUpdates.put(monthYear, ru);
+				monthUpdates.put(monthYear, regionUpdate);
 			} else {
-				List<RegionUpdate> list = dayUpdates.get(monthYear);
-				if (list == null) {
-					list = new ArrayList<IncrementalChangesManager.RegionUpdate>();
+				List<RegionUpdate> regionUpdates = dayUpdates.get(monthYear);
+				if (regionUpdates == null) {
+					regionUpdates = new ArrayList<>();
 				}
-				list.add(ru);
-				dayUpdates.put(monthYear, list);
+				if (!regionUpdates.contains(regionUpdate)) {
+					regionUpdates.add(regionUpdate);
+					dayUpdates.put(monthYear, regionUpdates);
+				}
 			}
 			return true;
 		}
-
 	}
 
 	public class IncrementalUpdateList {

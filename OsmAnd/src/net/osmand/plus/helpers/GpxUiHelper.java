@@ -1047,14 +1047,11 @@ public class GpxUiHelper {
 				}
 				dlg.dismiss();
 				String warn = w;
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (warn.length() > 0) {
-							Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
-						} else {
-							callbackWithObject.processResult(result);
-						}
+				activity.runOnUiThread(() -> {
+					if (warn.length() > 0) {
+						Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+					} else {
+						callbackWithObject.processResult(result);
 					}
 				});
 			}
