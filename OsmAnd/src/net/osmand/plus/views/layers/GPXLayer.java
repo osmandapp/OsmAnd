@@ -1778,6 +1778,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	@Override
+	public void destroyLayer() {
+		super.destroyLayer();
+		clearXAxisPoints();
+		clearPoints();
+		clearSelectedFilesSplits();
+	}
+
 	private void syncGpx(GPXFile gpxFile) {
 		MapMarkersGroup group = app.getMapMarkersHelper().getMarkersGroup(gpxFile);
 		if (group != null) {
