@@ -1829,4 +1829,14 @@
     <string name="poi_craft_basket_maker">Pembuat keranjang</string>
     <string name="poi_craft_hvac">Pemanasan, ventilasi, pendingin udara</string>
     <string name="poi_craft_optician">Ahli optik</string>
+    <string name="poi_craft_shoemaker">Pembuat sepatu</string>
+    <string name="poi_socket_type3c_voltage_low">Rendah</string>
+    <string name="poi_socket_cee_blue_voltage_high">Tinggi</string>
+    <string name="poi_socket_cee_blue_voltage_medium">Menengah</string>
+    <string name="poi_socket_cee_blue_voltage_low">Rendah</string>
+    <string name="poi_socket_schuko_voltage_high">Tinggi</string>
+    <string name="poi_socket_schuko_voltage_medium">Menengah</string>
+    <string name="poi_socket_schuko_voltage_low">Rendah</string>
+    <string name="poi_hiking_yes">Ya</string>
+    <string name="poi_craft_tailor">Penjahit</string>
 </resources>
