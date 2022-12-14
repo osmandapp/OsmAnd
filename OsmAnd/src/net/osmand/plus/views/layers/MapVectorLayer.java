@@ -18,6 +18,7 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
@@ -176,6 +177,12 @@ public class MapVectorLayer extends BaseMapLayer {
 			MapRenderRepositories renderer = resourceManager.getRenderer();
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
+			OsmandSettings osmandSettings = getApplication().getSettings();
+			if (alpha != 255 && osmandSettings.MAP_OVERLAY_TRANSPARENCY.get() != null) {
+				//switching map engine when overlay layer is on
+				setAlpha(255);
+				cachedAlpha = 255;
+			}
 		}
 	}
 
