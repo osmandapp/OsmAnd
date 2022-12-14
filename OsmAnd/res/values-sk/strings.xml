@@ -4863,6 +4863,10 @@
 \n
 \n • Pridaná možnosť vypnutia UUID pre sťahovanie
 \n
+\n • Nastaviteľná predpoveď pre čas výletu počas chôdze/turistike/behu
+\n
+\n • Opravený výstup zvuku a správanie ovládača hlasitosti
+\n
 \n</string>
     <string name="show_borders_of_downloaded_maps">Zobraziť hranice stiahnutých máp</string>
     <string name="show_map_symbols">Zobraziť mapové symboly</string>
@@ -4896,7 +4900,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Palce</string>
     <string name="weather_precip_milimeters">Milimetre</string>
-    <string name="weather_wind_kt">uz</string>
+    <string name="weather_wind_kn">uz</string>
     <string name="weather_wind_mph">mi/h</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
@@ -4962,4 +4966,8 @@
     <string name="pressure_layer">Vrstva tlaku</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Zobraziť trasy podľa náročnosti stúpania pre horské bicykle.</string>
     <string name="wind_layer">Vrstva vetra</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_scale">Stupnica pre horské bicykle</string>
+    <string name="mtb_imba_full">Medzinárodné združenie pre horské bicyklovanie</string>
+    <string name="mtb_segment_classification">Klasifikácia úseku</string>
 </resources>

@@ -531,8 +531,32 @@ public abstract class SettingsHelper {
 			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		if (!favoriteGroups.isEmpty()) {
-			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
-			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			if (export) {
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					result.add(new FavoritesSettingsItem(app, null, Collections.singletonList(favoriteGroup)));
+				}
+			} else {
+				boolean hasGroupFile = false;
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					FavoritesSettingsItem favSettingsItem = null;
+					for (SettingsItem item : settingsItems) {
+						String fileName = item.getFileName();
+						if (item instanceof FavoritesSettingsItem
+								&& app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName().equals(fileName)) {
+							favSettingsItem = (FavoritesSettingsItem) item;
+							break;
+						}
+					}
+					if (favSettingsItem != null) {
+						result.add(new FavoritesSettingsItem(app, favSettingsItem, Collections.singletonList(favoriteGroup)));
+						hasGroupFile = true;
+					}
+				}
+				if (!hasGroupFile) {
+					FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+					result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+				}
+			}
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();

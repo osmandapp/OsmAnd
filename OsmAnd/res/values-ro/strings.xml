@@ -1913,7 +1913,7 @@
     <string name="shared_string_bookmark">Semn de carte</string>
     <string name="hide_full_description">Ascundeți descrierea completă</string>
     <string name="show_full_description">Arată descrierea completă</string>
-    <string name="download_all">Descarcă-le pe toate</string>
+    <string name="download_all">Descărcați toate</string>
     <string name="shared_string_restart">Repornire aplicație</string>
     <string name="show_images">Afișează imaginile</string>
     <string name="maps_you_need">Hărți de care ai nevoie</string>
@@ -4788,7 +4788,7 @@
     <string name="simulate_location_by_gpx">Simularea locației prin GPX</string>
     <string name="purchases_feature_desc_external_sensors">Afișați și înregistrați datele de la senzorii externi: viteza bicicletei, puterea bicicletei, cadența și ritmul cardiac.</string>
     <string name="external_sensors_support">Suport pentru senzori externi</string>
-    <string name="release_4_3">•Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D
+    <string name="release_4_3">• Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D
 \n
 \n • Animație lină a schimbărilor de locație în timpul mișcării
 \n
@@ -4807,6 +4807,10 @@
 \n • A fost adăugat suport pentru senzorii ANT+
 \n
 \n • A fost adăugată opțiunea de dezactivare a UUID-ului de descărcare
+\n
+\n • Prognoză reglabilă a vitezei implicite pentru timpii de deplasare în funcție de altitudine pentru mersul pe jos/călătorie/ alergare
+\n
+\n • A fost reparată ieșirea audio și comportamentul cursorului de volum
 \n
 \n</string>
     <string name="speak_gps_signal_status">Anunțați pierderea și recuperarea semnalului GPS</string>
@@ -4864,7 +4868,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Inci</string>
     <string name="weather_precip_milimeters">Milimetri</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_kmh">km/oră</string>
     <string name="weather_wind_ms">m/s</string>
@@ -4974,4 +4978,8 @@
     <string name="rendering_attr_showMtbScale_description">Afișați traseele în funcție de scara MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Arată scara MTB în urcare</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Afișați traseele în funcție de scara de urcare a MTB.</string>
+    <string name="mtb_segment_classification">Clasificarea pe segmente</string>
+    <string name="mtb_scale">Scala MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Asociația Internațională de Ciclism Montan</string>
 </resources>

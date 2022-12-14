@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +14,8 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,7 +42,9 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -64,6 +69,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 	private EditText currentTagEditText;
 
 	private Drawable deleteDrawable;
+	private String[] allTags;
 
 	@Nullable
 	@Override
@@ -87,6 +93,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		mAdapter.setTagData(tagKeys.toArray(new String[0]));
 		mAdapter.setValueData(valueKeys.toArray(new String[0]));
+		allTags = tagKeys.toArray(new String[0]);
 
 		View addTagButton = view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(v -> {
@@ -186,7 +193,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
-		private final ArrayAdapter<String> tagAdapter;
+		public final OsmTagsArrayAdapter tagAdapter;
 		private final ArrayAdapter<String> valueAdapter;
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
@@ -194,7 +201,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			this.linearLayout = linearLayout;
 			this.editPoiData = editPoiData;
 
-			tagAdapter = new ArrayAdapter<>(linearLayout.getContext(), R.layout.list_textview);
+			tagAdapter = new OsmTagsArrayAdapter(linearLayout.getContext(), R.layout.list_textview);
 			valueAdapter = new ArrayAdapter<>(linearLayout.getContext(), R.layout.list_textview);
 		}
 
@@ -372,6 +379,51 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 		} else {
 			throw new IllegalArgumentException("abstractPoiType can't be instance of class "
 					+ abstractPoiType.getClass());
+		}
+	}
+
+	private class OsmTagsArrayAdapter extends ArrayAdapter implements Filterable {
+
+		private OsmTagsFilter filter;
+
+		public OsmTagsArrayAdapter(Context context, int resource) {
+			super(context, resource);
+		}
+
+		@Override
+		public Filter getFilter() {
+			if (filter == null) {
+				filter = new OsmTagsFilter();
+			}
+			return filter;
+		}
+	}
+
+	private class OsmTagsFilter extends Filter {
+
+		@Override
+		protected FilterResults performFiltering(CharSequence constraint) {
+			FilterResults results = new FilterResults();
+			List<String> filteredTags = new ArrayList<String>();
+			String query = constraint.toString().trim();
+			for (String tag : allTags) {
+				if (tag.startsWith(query) || tag.contains(":" + query)) {
+					filteredTags.add(tag);
+				}
+			}
+			results.values = filteredTags;
+			results.count = filteredTags.size();
+			return results;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		protected void publishResults(CharSequence constraint, FilterResults results) {
+			if (results.values != null) {
+				String[] filteredHints = ((List<String>) results.values).toArray(new String[0]);
+				mAdapter.setTagData(filteredHints);
+				mAdapter.tagAdapter.notifyDataSetChanged();
+			}
 		}
 	}
 }

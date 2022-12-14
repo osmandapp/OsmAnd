@@ -23,11 +23,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.ObjectType;
 import net.osmand.util.Algorithms;
+import net.osmand.IndexConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 /**
  * The route preview screen for the app.
@@ -56,8 +61,15 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		getLifecycle().addObserver(this);
 
 		calculating = true;
-		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
-				searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
+		if (searchResult.objectType == ObjectType.GPX_TRACK) {
+			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
+			File file = new File(getApp().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
+			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
+		} else {
+			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
+					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
+		}
 	}
 
 	@NonNull

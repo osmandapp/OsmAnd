@@ -538,8 +538,8 @@ public class RouteProvider {
 			if (prevSegmentPoint.distanceTo(newSegmentPoint) <= MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 				continue;
 			}
-			int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
-			int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
+			int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, false);
+			int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, false);
 			if (indexPrev != -1 && indexPrev > nearestGpxPointInd && indexNew != -1) {
 				List<RouteSegmentResult> route = result.getOriginalRoute(lastIndex, indexPrev, true);
 				if (!Algorithms.isEmpty(route)) {
@@ -903,7 +903,7 @@ public class RouteProvider {
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);
 			points.addAll(locationsFromWpts(segment.points));
-			RouteImporter routeImporter = new RouteImporter(segment);
+			RouteImporter routeImporter = new RouteImporter(segment, gpxFile.getRoutePoints(selectedSegment));
 			return routeImporter.importRoute();
 		} else {
 			collectPointsFromSegments(segments, points, segmentEndpoints);
@@ -1110,7 +1110,7 @@ public class RouteProvider {
 
 		List<Location> locations = route.getImmutableAllLocations();
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
-		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, points);
+		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, points);
 		return exporter.exportRoute();
 	}
 

@@ -115,6 +115,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
+import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -1627,7 +1628,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}, 1);
 			} else if (requestCode == MapActivityActions.REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION
 					&& permissions.length > 0
-					&& Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0])) {
+					&& (Manifest.permission.ACCESS_FINE_LOCATION.equals(permissions[0])
+					|| Manifest.permission.ACCESS_COARSE_LOCATION.equals(permissions[0]))) {
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					LatLon latLon = getContextMenu().getLatLon();
 					if (latLon != null) {
@@ -2016,6 +2018,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public WeatherForecastFragment getWeatherForecastFragment() {
+		return getFragment(WeatherForecastFragment.TAG);
 	}
 
 	public void dismissTrackMenu() {

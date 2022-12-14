@@ -4914,7 +4914,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pulgadas</string>
     <string name="weather_precip_milimeters">Milímetros</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_miles_per_hour">Millas por hora</string>
     <string name="weather_wind_kilimeters_per_hour">Kilómetros por hora</string>

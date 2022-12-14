@@ -4861,6 +4861,10 @@
 \n
 \n • 新增用來停用下載 UUID 的選項
 \n
+\n • 依賴於海拔的步行/遠足/跑步旅行時間的預設速度可調預測
+\n
+\n • 修復音訊輸出與音量滑桿行為
+\n
 \n</string>
     <string name="external_sensors_support">外部感應器支援</string>
     <string name="show_borders_of_downloaded_maps">顯示已下載地圖的邊界</string>
@@ -4916,7 +4920,7 @@
     <string name="weather_precip_in">英吋</string>
     <string name="weather_precip_mm">公釐</string>
     <string name="weather_precip_inches">英吋</string>
-    <string name="weather_wind_kt">節</string>
+    <string name="weather_wind_kn">節</string>
     <string name="weather_precip_milimeters">公釐</string>
     <string name="weather_pressure_hpa">百帕</string>
     <string name="weather_wind_ms">公尺/秒</string>
@@ -4961,4 +4965,8 @@
     <string name="rendering_attr_showMtbScale_description">根據山地自行車比例顯示路徑。</string>
     <string name="rendering_attr_showMtbScaleUphill_name">顯示山地自行車比例上坡</string>
     <string name="rendering_attr_showMtbScaleUphill_description">根據山地自行車上坡比例顯示路徑。</string>
+    <string name="mtb_scale">山地自行車比例</string>
+    <string name="mtb_imba">國際山地自行車協會</string>
+    <string name="mtb_imba_full">國際山地自行車協會</string>
+    <string name="mtb_segment_classification">細分分類</string>
 </resources>

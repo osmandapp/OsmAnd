@@ -47,6 +47,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TimeZone;
 
+import static net.osmand.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+
 public class GPXUtilities {
 
 	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -71,9 +73,11 @@ public class GPXUtilities {
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
 	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
+	public static boolean GPX_TIME_OLD_FORMAT = false;
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -648,8 +652,12 @@ public class GPXUtilities {
 	}
 
 	public static class RouteSegment {
+
+		public static final String START_TRKPT_IDX_ATTR = "startTrkptIdx";
+
 		public String id;
 		public String length;
+		public String startTrackPointIndex;
 		public String segmentTime;
 		public String speed;
 		public String turnType;
@@ -664,6 +672,7 @@ public class GPXUtilities {
 			RouteSegment s = new RouteSegment();
 			s.id = bundle.getString("id", null);
 			s.length = bundle.getString("length", null);
+			s.startTrackPointIndex = bundle.getString(START_TRKPT_IDX_ATTR, null);
 			s.segmentTime = bundle.getString("segmentTime", null);
 			s.speed = bundle.getString("speed", null);
 			s.turnType = bundle.getString("turnType", null);
@@ -680,6 +689,7 @@ public class GPXUtilities {
 			StringBundle bundle = new StringBundle();
 			bundle.putString("id", id);
 			bundle.putString("length", length);
+			bundle.putString(START_TRKPT_IDX_ATTR, startTrackPointIndex);
 			bundle.putString("segmentTime", segmentTime);
 			bundle.putString("speed", speed);
 			bundle.putString("turnType", turnType);
@@ -2272,6 +2282,8 @@ public class GPXUtilities {
 					bundleWriter.writeBundle();
 				}
 			});
+		} else {
+			gpxFile.setExtensionsWriter(null);
 		}
 	}
 
@@ -2604,7 +2616,11 @@ public class GPXUtilities {
 	}
 
 	public static long parseTime(String text) {
-		return parseTime(text, getTimeFormatterTZ(), getTimeFormatterMills());
+		if (GPX_TIME_OLD_FORMAT) {
+			return parseTime(text, getTimeFormatter(), getTimeFormatterMills());
+		} else {
+			return parseTime(text, getTimeFormatterTZ(), getTimeFormatterMills());
+		}
 	}
 
 	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
@@ -2636,7 +2652,8 @@ public class GPXUtilities {
 	}
 
 	private static SimpleDateFormat getTimeFormatterMills() {
-		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_MILLIS_PATTERN, Locale.US);
+		String pattern = GPX_TIME_OLD_FORMAT ? GPX_TIME_MILLIS_PATTERN_OLD : GPX_TIME_MILLIS_PATTERN;
+		SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
@@ -3116,6 +3133,7 @@ public class GPXUtilities {
 		RouteSegment segment = new RouteSegment();
 		segment.id = parser.getAttributeValue("", "id");
 		segment.length = parser.getAttributeValue("", "length");
+		segment.startTrackPointIndex = parser.getAttributeValue("", START_TRKPT_IDX_ATTR);
 		segment.segmentTime = parser.getAttributeValue("", "segmentTime");
 		segment.speed = parser.getAttributeValue("", "speed");
 		segment.turnType = parser.getAttributeValue("", "turnType");

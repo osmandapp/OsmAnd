@@ -2716,7 +2716,7 @@
     <string name="show_images">Vis billeder</string>
     <string name="purchase_cancelled_dialog_title">OsmAnd Live-abonnement er annulleret</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
-    <string name="download_all">Hent alt</string>
+    <string name="download_all">Download alle</string>
     <string name="open_wikipedia_link_online">Åbn Wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">Linket vil blive åbnet i en webbrowser.</string>
     <string name="read_wikipedia_offline_description">Abonner på OsmAnd Live for at læse Wikipedia og Wikivoyage artikler offline.</string>
@@ -3435,8 +3435,8 @@
 \n
 \nVælg en handling.</string>
     <string name="listed_exist">Det angivne %1$s findes allerede.</string>
-    <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
-    <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
+    <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
+    <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten er genberegnet</string>
     <string name="shared_string_terrain">Terræn</string>
     <string name="hillshade_description">Terrænskyggekort viser skråninger, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>
@@ -4911,7 +4911,7 @@
     <string name="weather_precip_milimeters">Millimeter</string>
     <string name="weather_precip_in">tommer</string>
     <string name="weather_precip_mm">mm</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_kmh">km/t</string>
     <string name="weather_wind_ms">m/s</string>
@@ -4979,6 +4979,6 @@
     <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
-    <string name="mtb_segment_classification">Klassificering af segmenter</string>
+    <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
 </resources>

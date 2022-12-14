@@ -15,7 +15,8 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -2594,10 +2595,10 @@ public class OsmandAidlApi {
 				app.getDownloadThread().updateLoadedFiles();
 			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
 				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
-						&& !FILE_TO_SAVE.equals(fileName)) {
+						&& !(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT).equals(fileName)) {
 					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
 					showGpx(new File(destinationDir, fileName).getPath());
-				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
+				} else if (destinationDir.isEmpty() && (LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT).equals(fileName)) {
 					app.getFavoritesHelper().loadFavorites();
 				}
 			}

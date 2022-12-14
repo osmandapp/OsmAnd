@@ -4865,23 +4865,23 @@
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
     <string name="release_4_3">• Nuevo motor versión 2 (OpenGL) más rápido al visualizar mapas, con vista 2.5D
 \n
-\n • Animación suave para los cambios de ubicación al moverse
+\n• Animación suave para los cambios de ubicación al moverse
 \n
-\n • Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
+\n• Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica
 \n
-\n • «Distancia al pulsar»: nuevas opciones de tamaño de texto.
+\n• «Distancia al pulsar»: nuevas opciones de tamaño de texto.
 \n
-\n • Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
+\n• Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones
 \n
-\n • Se ha corregido la opción «Posición de la ubicación».
+\n• Se ha corregido la opción «Posición de la ubicación».
 \n
-\n • GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
+\n• GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada
 \n
-\n • Se ha reorganizado la lista de «Mapas náuticos»
+\n• Se ha reorganizado la lista de «Mapas náuticos»
 \n
-\n • Se ha añadido soporte para sensores externos ANT+
+\n• Se ha añadido soporte para sensores externos ANT+
 \n
-\n • Nueva opción para desactivar la descarga del UUID
+\n• Nueva opción para desactivar la descarga del UUID
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
@@ -4913,7 +4913,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Pulgadas</string>
     <string name="weather_precip_milimeters">Milímetros</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nudos</string>
@@ -4984,4 +4984,8 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala de MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_scale">Escala de MTB</string>
+    <string name="mtb_segment_classification">Clasificación de segmentos</string>
+    <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
 </resources>

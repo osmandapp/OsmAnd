@@ -4858,7 +4858,7 @@
 \n
 \n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
-\n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
+\n • Opções de tamanho de texto adicionadas em \"Distância com 2 dedos\"
 \n
 \n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
 \n
@@ -4871,6 +4871,10 @@
 \n • Adicionado suporte para sensores ANT+
 \n
 \n • Opção adicionada para desativar o descarregamento do UUID
+\n
+\n • Previsão ajustável de velocidade padrão para tempos de viagem dos perfis \"a pé/caminhada/corrida\" dependentes da elevação
+\n
+\n • Saída de áudio e comportamento do controle deslizante de volume corrigidas
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
@@ -4949,7 +4953,7 @@
     <string name="weather_wind_kmh">km/h</string>
     <string name="empty_screen_weather_wind_layer">Ative para visualizar a camada de vento no mapa.</string>
     <string name="weather_wind_mph">mph</string>
-    <string name="weather_wind_kt">nós</string>
+    <string name="weather_wind_kn">nós</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nós</string>
     <string name="wind_widget_desc">Mostra a velocidade do vento para o centro do mapa atual.</string>
@@ -4972,4 +4976,8 @@
     <string name="wind_layer">Camada de ventos</string>
     <string name="cloud_layer">Camada de nuvens</string>
     <string name="precipitation_layer">Camada de precipitação</string>
+    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_scale">Escala MTB</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_segment_classification">Classificação de segmento</string>
 </resources>

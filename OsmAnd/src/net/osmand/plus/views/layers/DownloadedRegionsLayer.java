@@ -689,7 +689,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 		if (polygonsCollection != null
 				&& selectedSize == selectedObjects.size()
-				&& !showDownloadedMapsChanged) {
+				&& !showDownloadedMapsChanged && !mapActivityInvalidated) {
 			return;
 		}
 		List<WorldRegion> downloadedRegions = new ArrayList<>();
@@ -742,10 +742,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			addToPolygonsCollection(selectedRegions, paintSelected, baseOrder);
 		}
-		if (needRedrawOpenGL && polygonsCollection != null) {
+		if ((needRedrawOpenGL || mapActivityInvalidated) && polygonsCollection != null) {
 			mapRenderer.addSymbolsProvider(polygonsCollection);
 			needRedrawOpenGL = false;
 		}
+		mapActivityInvalidated = false;
 	}
 
 	/**OpenGL*/

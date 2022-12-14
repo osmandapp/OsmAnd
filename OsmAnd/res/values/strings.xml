@@ -28,6 +28,12 @@
     <string name="import_export">Import/Export</string>
     <string name="export_to_file">Export to file</string>
     <string name="last_sync">Last sync</string>
+    <string name="shared_string_open">Open</string>
+    <string name="open_weather_action_description">Allows you to open a screen with detailed weather information.</string>
+    <string name="open_weather_action">Open weather</string>
+    <string name="rendering_attr_weatherCloudContours_name">Cloud isolines</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Precipitation isolines</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Gusts of wind isolines</string>
     <string name="mtb_scale">MTB Scale</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
@@ -83,7 +89,7 @@
     <string name="weather_precip_mm">mm</string>
     <string name="weather_precip_inches">Inches</string>
     <string name="weather_precip_milimeters">Millimeters</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="weather_wind_ms">m/s</string>

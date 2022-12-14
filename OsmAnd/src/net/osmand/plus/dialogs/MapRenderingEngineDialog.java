@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,6 +43,8 @@ public class MapRenderingEngineDialog {
 		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
 		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
 		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
+		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
+		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
 
 		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
 			updateRenderingEngineSetting(false, renderChangeListener);
@@ -79,6 +82,9 @@ public class MapRenderingEngineDialog {
 			});
 		} else {
 			updateMap();
+			if (app.getSettings().MAP_OVERLAY_TRANSPARENCY != null) {
+				app.getOsmandMap().getMapLayers().getMapVectorLayer().setAlpha(255);
+			}
 		}
 
 		if (renderChangeListener != null) {

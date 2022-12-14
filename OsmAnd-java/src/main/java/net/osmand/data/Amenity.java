@@ -67,12 +67,21 @@ public class Amenity extends MapObject {
 	// context menu geometry;
 	private TIntArrayList y;
 	private TIntArrayList x;
+	private String mapIconName;
 
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
 		public Location pointB;
+	}
+
+	public String getMapIconName() {
+		return mapIconName;
+	}
+
+	public void setMapIconName(String mapIconName) {
+		this.mapIconName = mapIconName;
 	}
 
 	public PoiCategory getType() {

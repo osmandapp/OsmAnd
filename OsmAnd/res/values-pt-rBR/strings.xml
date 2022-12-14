@@ -4840,7 +4840,7 @@
     <string name="current_location_widget">Coordenadas: Localização atual</string>
     <string name="weather_offline_forecast">Previsão off-line</string>
     <string name="weather_precip_mm">mm</string>
-    <string name="weather_wind_kt">kt</string>
+    <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mph</string>
     <string name="weather_wind_miles_per_hour">Milhas por hora</string>
     <string name="map_settings_weather_cloud">Nuvem</string>

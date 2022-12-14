@@ -2,7 +2,7 @@ package net.osmand;
 
 
 public class IndexConstants {
-	
+
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
 	public static final int POI_TABLE_VERSION = 1;
@@ -38,6 +38,8 @@ public class IndexConstants {
 	public static final String HTML_EXT = ".html";
 	public static final String GEN_LOG_EXT = ".gen.log";
 	public static final String HEIGHTMAP_SQLITE_EXT = ".sqlite";
+	public static final String DOWNLOAD_EXT = ".download";
+	public static final String TIFF_DB_EXT = ".tiff.db";
 
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip";
 	public static final String TTSVOICE_INDEX_EXT_JS = "tts.js";
@@ -51,6 +53,7 @@ public class IndexConstants {
 	public static final String ROUTING_FILE_EXT = ".xml";
 
 	public static final String RENDERER_INDEX_EXT = ".render.xml";
+	public static final String ADDON_RENDERER_INDEX_EXT = ".addon" + RENDERER_INDEX_EXT;
 
 	public static final String GPX_FILE_EXT = ".gpx";
 	public static final String GPX_GZ_FILE_EXT = ".gpx.gz";
@@ -67,6 +70,7 @@ public class IndexConstants {
 	public static final String MAPS_PATH = "";
 	public static final String BACKUP_INDEX_DIR = "backup/";
 	public static final String GPX_INDEX_DIR = "tracks/";
+	public static final String FAVORITES_INDEX_DIR = "favorites/";
 	public static final String MAP_MARKERS_INDEX_DIR = "/map markers";
 	public static final String GPX_RECORDED_INDEX_DIR = GPX_INDEX_DIR + "rec/";
 	public static final String GPX_IMPORT_DIR = GPX_INDEX_DIR + "import/";

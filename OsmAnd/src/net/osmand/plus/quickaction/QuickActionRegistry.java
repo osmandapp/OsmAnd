@@ -76,6 +76,8 @@ public class QuickActionRegistry {
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS);
+	public static final QuickActionType TYPE_OPEN = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
 
 
 	private final OsmandSettings settings;
@@ -301,6 +303,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_NAVIGATION, result);
 		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
 		filterQuickActions(TYPE_SETTINGS, result);
+		filterQuickActions(TYPE_OPEN, result);
 		return result;
 	}
 

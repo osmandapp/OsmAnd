@@ -39,6 +39,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -66,6 +67,7 @@ public abstract class OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(PluginsHelper.class);
 
 	protected OsmandApplication app;
+	protected OsmandSettings settings;
 
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
@@ -74,6 +76,7 @@ public abstract class OsmandPlugin {
 
 	public OsmandPlugin(@NonNull OsmandApplication app) {
 		this.app = app;
+		settings = app.getSettings();
 	}
 
 	public abstract String getId();
@@ -389,42 +392,42 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.registerBooleanPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Boolean> registerBooleanAccessibilityPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.registerBooleanAccessibilityPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<String> registerStringPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		CommonPreference<String> preference = settings.registerStringPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
-		CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		CommonPreference<Integer> preference = settings.registerIntPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Long> registerLongPreference(@NonNull String prefId, long defValue) {
-		CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		CommonPreference<Long> preference = settings.registerLongPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Float> registerFloatPreference(@NonNull String prefId, float defValue) {
-		CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		CommonPreference<Float> preference = settings.registerFloatPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
@@ -432,14 +435,14 @@ public abstract class OsmandPlugin {
 
 	protected <T extends Enum<?>> CommonPreference<T> registerEnumStringPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
 	                                                                               @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
-		CommonPreference<T> preference = app.getSettings().registerEnumStringPreference(prefId, defaultValue, values, clz);
+		CommonPreference<T> preference = settings.registerEnumStringPreference(prefId, defaultValue, values, clz);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected ListStringPreference registerListStringPreference(@NonNull String prefId, @Nullable String defValue, @NonNull String delimiter) {
-		ListStringPreference preference = app.getSettings().registerStringListPreference(prefId, defValue, delimiter);
+		ListStringPreference preference = settings.registerStringListPreference(prefId, defValue, delimiter);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
@@ -454,14 +457,14 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
+		CommonPreference<String> preference = settings.registerCustomRenderProperty(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	private CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.registerCustomRenderBooleanProperty(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;

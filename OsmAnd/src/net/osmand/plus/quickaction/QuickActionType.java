@@ -12,6 +12,7 @@ public class QuickActionType {
 	public static final int NAVIGATION = 2;
 	public static final int CONFIGURE_SCREEN = 3;
 	public static final int SETTINGS = 4;
+	public static final int OPEN = 5;
 
 	private final int id;
 	private final String stringId;

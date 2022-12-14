@@ -19,6 +19,8 @@ import java.util.Map;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
+import static net.osmand.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
 	// this should be bigger (50-80m) but tests need to be fixed first
@@ -277,9 +279,14 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	@Override
 	public void writeToBundle(RouteDataBundle bundle) {
-		Map<RouteTypeRule, Integer> rules = bundle.getResources().getRules();
+		RouteDataResources resources = bundle.getResources();
+		Map<RouteTypeRule, Integer> rules = resources.getRules();
+
 		boolean reversed = endPointIndex < startPointIndex;
-		bundle.putInt("length", Math.abs(endPointIndex - startPointIndex) + 1);
+		int length = Math.abs(endPointIndex - startPointIndex) + 1;
+
+		bundle.putInt("length", length);
+		bundle.putInt(START_TRKPT_IDX_ATTR, resources.getCurrentSegmentStartLocationIndex());
 		bundle.putFloat("segmentTime", segmentTime, 2);
 		bundle.putFloat("speed", speed, 2);
 		if (turnType != null) {
@@ -319,6 +326,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			}
 			bundle.putArray("pointNames", convertPointNames(types, names, rules));
 		}
+
+		resources.updateNextSegmentStartLocation(length);
 	}
 
 	@Override
@@ -355,7 +364,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		float distance = 0;
 		Location prevLocation = null;
 		for (int i = 0; i < length; i++) {
-			Location location = resources.getLocation(index);
+			Location location = resources.getCurrentSegmentLocation(index);
 			double dist = 0;
 			if (prevLocation != null) {
 				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
@@ -377,7 +386,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			}
 		}
 		this.distance = distance;
-		resources.incrementCurrentLocation(length - 1);
+
+		resources.updateNextSegmentStartLocation(length);
 	}
 
 	public float[] getHeightValues() {
@@ -536,6 +546,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public LatLon getEndPoint() {
 		return convertPoint(object, endPointIndex);
+	}
+
+	public boolean continuesBeyondRouteSegment(RouteSegmentResult segment) {
+		boolean commonX = object.pointsX[startPointIndex] == segment.object.pointsX[segment.endPointIndex];
+		boolean commonY = object.pointsY[startPointIndex] == segment.object.pointsY[segment.endPointIndex];
+		return commonX && commonY;
 	}
 
 	public boolean isForwardDirection() {

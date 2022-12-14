@@ -4933,6 +4933,10 @@
 \n
 \n • خيار مضاف لتعطيل UUID
 \n
+\n• توقعات السرعة الافتراضية القابلة للتعديل للمشي المعتمد على الارتفاع
+\n
+\n• إخراج الصوت الثابت وسلوك شريط تمرير الصوت
+\n
 \n</string>
     <string name="external_sensors_support">دعم المستشعرات الخارجية</string>
     <string name="speak_gps_signal_status">الإعلان عن فقدان إشارة GPS واستعادتها</string>
@@ -4954,7 +4958,7 @@
     <string name="weather_precip_mm">مليمتر</string>
     <string name="weather_precip_inches">بوصة</string>
     <string name="weather_precip_milimeters">مليمترات</string>
-    <string name="weather_wind_kt">كيلوطن</string>
+    <string name="weather_wind_kn">كيلوطن</string>
     <string name="weather_pressure_hpa">هيكتو</string>
     <string name="weather_pressure_inhg">بوصة من الزئبق</string>
     <string name="weather_pressure_mmhg">ملم زئبق</string>
@@ -5036,4 +5040,8 @@
     <string name="rendering_attr_showMtbScaleUphill_name">عرض مقياس MTB صعودا</string>
     <string name="rendering_attr_showMtbScaleUphill_description">عرض المسارات وفقا لمقياس MTB.</string>
     <string name="rendering_attr_showMtbScale_name">عرض مقياس MTB</string>
+    <string name="mtb_scale">مقياس MTB</string>
+    <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>
+    <string name="mtb_segment_classification">تصنيف القطاعات</string>
+    <string name="mtb_imba">الرابطة الدولية لركوب الدراجات الجبلية</string>
 </resources>

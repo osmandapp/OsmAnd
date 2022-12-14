@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -27,6 +28,7 @@ public class TopToolbarController {
 		TRACK_DETAILS,
 		DISCOUNT,
 		MEASUREMENT_TOOL,
+		WEATHER,
 		POI_FILTER,
 		DOWNLOAD_MAP
 	}
@@ -146,8 +148,8 @@ public class TopToolbarController {
 	}
 
 	@ColorInt
-	public int getStatusBarColor(Context context, boolean night) {
-		return ContextCompat.getColor(context, night ? R.color.status_bar_route_dark : R.color.status_bar_route_light);
+	public int getStatusBarColor(Context context, boolean nightMode) {
+		return ContextCompat.getColor(context, nightMode ? R.color.status_bar_route_dark : R.color.status_bar_route_light);
 	}
 
 	public void setTitle(String title) {
@@ -324,11 +326,11 @@ public class TopToolbarController {
 		this.onCloseToolbarListener = onCloseToolbarListener;
 	}
 
-	public void updateToolbar(TopToolbarView view) {
-		TextView titleView = view.getTitleView();
-		TextView descrView = view.getDescrView();
-		LinearLayout bottomViewLayout = view.getBottomViewLayout();
-		SwitchCompat switchCompat = view.getTopBarSwitch();
+	public void updateToolbar(@NonNull TopToolbarView toolbarView) {
+		TextView titleView = toolbarView.getTitleView();
+		TextView descrView = toolbarView.getDescrView();
+		LinearLayout bottomViewLayout = toolbarView.getBottomViewLayout();
+		SwitchCompat switchCompat = toolbarView.getTopBarSwitch();
 		if (title != null) {
 			titleView.setText(title);
 			AndroidUiHelper.updateVisibility(titleView, true);
@@ -358,7 +360,7 @@ public class TopToolbarController {
 				DrawableCompat.setTint(switchCompat.getTrackDrawable(), ContextCompat.getColor(switchCompat.getContext(), R.color.map_toolbar_switch_track_color));
 			}
 		}
-		View shadowView = view.getShadowView();
+		View shadowView = toolbarView.getShadowView();
 		if (shadowView != null) {
 			AndroidUiHelper.updateVisibility(shadowView, isShadowViewVisible());
 		}

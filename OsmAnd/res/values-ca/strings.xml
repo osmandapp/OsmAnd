@@ -4077,4 +4077,16 @@
     <string name="navigation_history">Historial de navegació</string>
     <string name="history_preferences_descr">Podeu desactivar el registre de l\'historial individualment per a cada tipus d\'historial.</string>
     <string name="depth_contours">Isòbates</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="quick_action_air_pressure_layer">Un botó per a mostrar o amagar la capa de pressió atmosfèrica en el mapa.</string>
+    <string name="mtb_imba_full">Associació Internacional de Ciclisme de Muntanya</string>
+    <string name="pressure_layer">Capa de pressió atmosfèrica</string>
+    <string name="quick_action_temperature_layer">Un botó per a mostrar o amagar la capa de temperatura en el mapa.</string>
+    <string name="quick_action_precipitation_layer">Un botó per a mostrar o amagar la capa de precipitació en el mapa.</string>
+    <string name="quick_action_wind_layer">Un botó per a mostrar o amagar la capa de vent en el mapa.</string>
+    <string name="quick_action_cloud_layer">Un botó per a mostrar o amagar la capa de núvols en el mapa.</string>
+    <string name="temperature_layer">Capa de temperatura</string>
+    <string name="wind_layer">Capa de vents</string>
+    <string name="cloud_layer">Capa de núvols</string>
+    <string name="precipitation_layer">Capa de precipitacions</string>
 </resources>

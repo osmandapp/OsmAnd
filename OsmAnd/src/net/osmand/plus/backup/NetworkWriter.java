@@ -9,7 +9,6 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -138,11 +137,7 @@ public class NetworkWriter extends AbstractWriter {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
 			FileSettingsItem settingsItem = (FileSettingsItem) item;
-			FileSubtype subtype = settingsItem.getSubtype();
-			if (subtype == FileSubtype.OBF_MAP || subtype == FileSubtype.ROAD_MAP || subtype == FileSubtype.WIKI_MAP
-					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP || subtype == FileSubtype.NAUTICAL_DEPTH) {
-				return backupHelper.isObfMapExistsOnServer(fileName);
-			}
+			return BackupHelper.isDefaultObfMap(backupHelper.getApp(), settingsItem, fileName);
 		}
 		return false;
 	}
