@@ -454,7 +454,7 @@
     <string name="shared_string_and">و</string>
     <string name="shared_string_or">أو</string>
     <string name="av_camera_focus_continuous">التركيز المستمر</string>
-    <string name="free_version_title"> الإصدار المجاني</string>
+    <string name="free_version_title">الإصدار المجاني</string>
     <string name="index_name_north_america">أمريكا الشمالية</string>
     <string name="index_name_us">أمريكا الشمالية - الولايات المتحدة</string>
     <string name="index_name_central_america">أمريكا الوسطى</string>
@@ -687,7 +687,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nاضغط مطولا لعرض الخيارات"</string>
-    <string name="local_index_installed"> الإصدار المحلي</string>
+    <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
     <string name="local_index_items_restored">تم تفعيل %1$d من %2$d خريطة.</string>
@@ -1058,7 +1058,7 @@
     <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
-    <string name="use_opengl_render">عرض 3D</string>
+    <string name="use_opengl_render">استخدام عرض 3D</string>
     <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة 3D (قد لا تعمل على بعض الأجهزة).</string>
     <string name="map_update">يوجد تحديثات ل %1$s من الخرائط</string>
     <string name="search_for">البحث عن</string>
@@ -1155,7 +1155,7 @@
     <string name="osm_editing_plugin_name">تعديل خريطة الشارع المفتوحة</string>
     <string name="free">فارغ %1$s</string>
     <string name="parking_place">موقف السيارات</string>
-    <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
+    <string name="version_settings_descr">الإصدارات الليلية المحملة.</string>
     <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
     <string name="traffic_warning_pedestrian">ممرات الراجلين</string>
@@ -1348,8 +1348,8 @@
     <string name="use_online_routing">استخدم الملاحة على الإنترنت</string>
     <string name="use_english_names_descr">اختر بين الأسماء المحلية أو الإنجليزية.</string>
     <string name="data_settings">بيانات</string>
-    <string name="map_view_3d_descr">تمكن عرض الخريطة ثلاثي الأبعاد.</string>
-    <string name="map_view_3d">عرض الخريطة ثلاثي الأبعاد</string>
+    <string name="map_view_3d_descr">تمكين عرض 3D للخريطة.</string>
+    <string name="map_view_3d">عرض الخريطة 3D</string>
     <string name="mark_point">هدف</string>
     <string name="reload_tile">إعادة تحميل التجانبية/المربع</string>
     <string name="update_tile">تحديث الخريطة</string>
@@ -4913,7 +4913,7 @@
     <string name="shared_string_identifiers">معرفات</string>
     <string name="shared_string_terms_of_use">شروط الاستخدام</string>
     <string name="shared_string_cross_buy">شراء عبر</string>
-    <string name="release_4_3">• مشغل جديد لعرض الخرائط بشكل أسرع ، مع عرض 3D
+    <string name="release_4_3">• طريقة عرض الخرائط بشكل أسرع ، مع عرض 3D
 \n
 \n • حركة سلسة لتغييرات الموقع أثناء الحركة
 \n
@@ -4973,8 +4973,8 @@
     <string name="dismiss_changes_descr">سيتم رفض كافة التغييرات.</string>
     <string name="dismiss_changes">هل تريد رفض التغييرات؟</string>
     <string name="restart_now">أعد التشغيل الآن</string>
-    <string name="map_rendering_engine_v2">الإصدار 2 (3D)</string>
-    <string name="map_rendering_engine">مشغل عرض الخريطة</string>
+    <string name="map_rendering_engine_v2">عرض 3D</string>
+    <string name="map_rendering_engine">طريقة عرض الخريطة</string>
     <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات الاداة الخاصة بالطقس.</string>
     <string name="weather_plugin_description">يوفر البرنامج الطقس المساعد
 \n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
@@ -5006,11 +5006,11 @@
     <string name="precipitation_widget_desc">يعرض هطول الأمطار لمركز الخريطة الحالي.</string>
     <string name="clouds_widget_desc">يظهر التغطية السحابية لمركز الخريطة الحالي.</string>
     <string name="temperature_widget_desc">يعرض درجة الحرارة لمركز الخريطة الحالي.</string>
-    <string name="map_rendering_engine_v1">الإصدار 1</string>
-    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض خريطة \"الإصدار 1\". يمكنك العودة إلى مشغل العرض الجديد \"الإصدار 2 (3D)\" في الإعدادات.
+    <string name="map_rendering_engine_v1">عرض عادي</string>
+    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
 \n
 \nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
-    <string name="map_rendering_engine_descr">الإصدار 2 (OpenGL) هو محرك عرض خرائط أسرع ، ويتميز أيضا بعرض 2.5D. كان عرض الإصدار 1 هو الافتراضي قبل نسخة OsmAnd 4.3 ، ولا يزال مفضلا للأجهزة القديمة.</string>
+    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
     <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
     <string name="shared_string_next_sunset">غروب الشمس القادم</string>
     <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
