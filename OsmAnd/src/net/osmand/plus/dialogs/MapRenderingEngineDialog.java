@@ -82,6 +82,9 @@ public class MapRenderingEngineDialog {
 			});
 		} else {
 			updateMap();
+			if (app.getSettings().MAP_OVERLAY_TRANSPARENCY != null) {
+				app.getOsmandMap().getMapLayers().getMapVectorLayer().setAlpha(255);
+			}
 		}
 
 		if (renderChangeListener != null) {
