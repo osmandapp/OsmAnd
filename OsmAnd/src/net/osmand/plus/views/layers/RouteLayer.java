@@ -811,6 +811,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		return false;
 	}
 
+	@Override
+	public void destroyLayer() {
+		super.destroyLayer();
+		clearXAxisPoints();
+	}
+
 	/** OpenGL */
 	private void resetLayer() {
 		clearXAxisPoints();
