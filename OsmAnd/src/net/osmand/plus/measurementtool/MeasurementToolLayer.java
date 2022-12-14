@@ -1031,6 +1031,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();
+		clearXAxisPoints();
 		multiProfileGeometry.clearWay();
 	}
 
