@@ -3669,8 +3669,6 @@
 	<string name="poi_socket_type2_cable_current">Socket: Type 2 cable: current</string>
 	<string name="poi_socket_type2_cable_output">Socket: Type 2 cable: output</string>
 	<string name="poi_socket_type3">Socket: Type 3</string>
-	<string name="poi_socket_type3a">Socket: Type 3a</string>
-	<string name="poi_socket_type3c">Socket: Type 3c</string>
 	<string name="poi_socket_type3_current">Socket: Type 3: current</string>
 	<string name="poi_socket_type3_output">Socket: Type 3: output</string>
 	<string name="poi_socket_chademo">Socket: CHAdeMO</string>
@@ -4972,11 +4970,9 @@
 
 	<string name="poi_trampoline_park">Trampoline park</string>
 
-	<string name="poi_socket_type3a">Type 3a output</string>
 	<string name="poi_socket_type3a_current">Socket: Type 3a: current</string>
 	<string name="poi_socket_type3a_output">Socket: Type 3a: output</string>
 	<string name="poi_socket_type3a_voltage">Socket: Type 3a: voltage</string>
-	<string name="poi_socket_type3c">Type 3c output</string>
 	<string name="poi_socket_type3c_current">Socket: Type 3c: current</string>
 	<string name="poi_socket_type3c_output">Socket: Type 3c: output</string>
 	<string name="poi_socket_type3c_voltage">Socket: Type 3c: voltage</string>
