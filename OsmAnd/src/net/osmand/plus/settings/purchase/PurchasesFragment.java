@@ -89,6 +89,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
 		for (int i = 0; i < mainPurchases.size(); i++) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createUiData(app, mainPurchases.get(i));
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
@@ -96,13 +97,16 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 		boolean backupPurchaseActive = app.getSettings().BACKUP_PURCHASE_ACTIVE.get();
 		if (backupPurchaseActive) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
 		}
 
-		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
+		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
+		if (!Version.isPaidVersion(app) || (!hasMainPurchases && !backupPurchaseActive)) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
