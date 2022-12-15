@@ -3307,8 +3307,8 @@
     <string name="poi_scooter_no">スクーター:不可</string>
     <string name="poi_truck_yes">トラック:可</string>
     <string name="poi_truck_no">トラック:不可</string>
-    <string name="poi_parking_fee_yes">駐車料金:必要</string>
-    <string name="poi_parking_fee_no">駐車料金:不要</string>
+    <string name="poi_parking_fee_yes">必要</string>
+    <string name="poi_parking_fee_no">不要</string>
     <string name="poi_parking_fee">駐車料金</string>
     <string name="poi_amperage">アンペア数</string>
     <string name="poi_charging_station_output">充電スタンド全体の最大出力(kW)</string>
@@ -3667,10 +3667,10 @@
     <string name="poi_bus_designated">バス;専用</string>
     <string name="poi_caravan_yes">キャンプトレーラー;可</string>
     <string name="poi_caravan_designated">キャンプトレーラー;専用</string>
-    <string name="poi_motorhome_yes">RV・キャンピングカー;可</string>
-    <string name="poi_motorhome_designated">RV・キャンピングカー;専用</string>
-    <string name="poi_trailer_yes">トレーラー;可</string>
-    <string name="poi_trailer_designated">トレーラー;専用</string>
+    <string name="poi_motorhome_yes">可;RV・キャンピングカー</string>
+    <string name="poi_motorhome_designated">専用;RV・キャンピングカー専用</string>
+    <string name="poi_trailer_yes">可;トレーラー</string>
+    <string name="poi_trailer_designated">専用;トレーラー専用</string>
     <string name="poi_motorcycle_yes">オートバイ;可</string>
     <string name="poi_motorcycle_permissive">オートバイ;基本的には可</string>
     <string name="poi_motorcycle_destination">オートバイ;通り抜け禁止</string>
@@ -4328,4 +4328,6 @@
     <string name="poi_food_no">食事提供:無し</string>
     <string name="poi_flow_rate">公称流量</string>
     <string name="poi_golf_pin">ゴルフピン</string>
+    <string name="poi_access_yes">アクセス可能</string>
+    <string name="poi_parking_fee_filter">駐車料金</string>
 </resources>
