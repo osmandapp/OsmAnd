@@ -435,8 +435,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
 		layer.destroyLayer();
-		while (layersLegacy.remove(layer));
-		while (layersOpenGL.remove(layer));
+		while (layersLegacy.remove(layer)) ;
+		while (layersOpenGL.remove(layer)) ;
 		zOrdersLegacy.remove(layer);
 		zOrdersOpenGL.remove(layer);
 	}
@@ -467,6 +467,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	@NonNull
 	public OsmandApplication getApplication() {
 		return application;
 	}
@@ -770,7 +771,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0) {
+		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0 || mapRenderer != null) {
 			return;
 		}
 		if (bufferBitmapTmp == null || tileBox.getPixHeight() != bufferBitmapTmp.getHeight()
@@ -1905,12 +1906,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isLayoutRtl() {
 		return AndroidUtils.isLayoutRtl(application);
-	}
-
-	@NonNull
-	public LatLon getLatLonFromPixel(float x, float y) {
-		RotatedTileBox tileBox = getCurrentRotatedTileBox();
-		return NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, new PointI((int) x, (int) y));
 	}
 
 	private boolean isUseOpenGL() {
