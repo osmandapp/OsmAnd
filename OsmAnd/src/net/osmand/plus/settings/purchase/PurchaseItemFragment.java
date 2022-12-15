@@ -27,6 +27,7 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -40,7 +41,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class PurchaseItemFragment extends BaseOsmAndDialogFragment {
+public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 
 	public static final String TAG = PurchaseItemFragment.class.getName();
 
@@ -213,14 +214,16 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment {
 		AndroidUiHelper.updateVisibility(osmandLive, visible);
 	}
 
-	private void setupSelectableBackground(@NonNull View view) {
-		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.active_color_basic);
-		Drawable drawable = UiUtilities.getColoredSelectableDrawable(view.getContext(), color, 0.3f);
-		AndroidUtils.setBackground(view.findViewById(R.id.selectable_list_item), drawable);
+	@Override
+	public void onGetItems() {
+		updateView();
 	}
 
-	private Drawable getActiveIcon(@DrawableRes int iconId) {
-		return iconsCache.getIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		if (inAppPurchaseHelper != null) {
+			inAppPurchaseHelper.requestInventory(false);
+		}
 	}
 
 	@Nullable
@@ -231,6 +234,16 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment {
 		} else {
 			return null;
 		}
+	}
+
+	private void setupSelectableBackground(@NonNull View view) {
+		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.active_color_basic);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(view.getContext(), color, 0.3f);
+		AndroidUtils.setBackground(view.findViewById(R.id.selectable_list_item), drawable);
+	}
+
+	private Drawable getActiveIcon(@DrawableRes int iconId) {
+		return iconsCache.getIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
 	}
 
 	private Pair<String, String> parseSubscriptionState(@NonNull SubscriptionState state, long startTime, long expireTime) {

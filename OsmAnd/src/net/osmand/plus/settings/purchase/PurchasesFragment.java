@@ -160,15 +160,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	}
 
 	@Override
-	public void onSearchResult(CountryItem name) {
-
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {}
+	public void onSearchResult(CountryItem name) {}
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {

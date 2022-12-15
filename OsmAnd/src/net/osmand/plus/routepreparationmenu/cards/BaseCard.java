@@ -36,9 +36,9 @@ public abstract class BaseCard {
 	private CardListener listener;
 
 	public interface CardListener {
-		void onCardLayoutNeeded(@NonNull BaseCard card);
-		void onCardPressed(@NonNull BaseCard card);
-		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
+		default void onCardLayoutNeeded(@NonNull BaseCard card) {}
+		default void onCardPressed(@NonNull BaseCard card) {}
+		default void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {}
 	}
 
 	public BaseCard(@NonNull FragmentActivity activity) {
