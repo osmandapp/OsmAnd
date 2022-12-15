@@ -3671,7 +3671,7 @@
     <string name="poi_motorhome_designated">専用;RV・キャンピングカー専用</string>
     <string name="poi_trailer_yes">可;トレーラー</string>
     <string name="poi_trailer_designated">専用;トレーラー専用</string>
-    <string name="poi_motorcycle_yes">オートバイ;可</string>
+    <string name="poi_motorcycle_yes">可;オートバイ</string>
     <string name="poi_motorcycle_permissive">オートバイ;基本的には可</string>
     <string name="poi_motorcycle_destination">オートバイ;通り抜け禁止</string>
     <string name="poi_motorcycle_designated">オートバイ;専用</string>
