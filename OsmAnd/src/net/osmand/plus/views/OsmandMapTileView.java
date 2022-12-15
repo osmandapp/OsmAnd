@@ -1517,6 +1517,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setMapRenderer(@Nullable MapRendererView mapRenderer) {
+		if (this.mapRenderer != null) {
+			this.mapRenderer.removeAllSymbolsProviders();
+		}
 		this.mapRenderer = mapRenderer;
 	}
 
