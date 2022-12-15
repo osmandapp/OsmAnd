@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.purchase;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin.ANDROID;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -143,9 +145,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment {
 		String platform = getString(origin.getStoreNameId());
 		updateInformationBlock(R.id.platform_block, purchasedOn, platform);
 
-
 		// Bottom buttons
-		boolean manageVisible = purchase.isSubscription();
+		boolean manageVisible = purchase.isSubscription() && origin == ANDROID;
 		boolean liveVisible = purchase.isLiveUpdateSubscription();
 		setupLiveButton(liveVisible);
 		setupManageButton(manageVisible);
