@@ -4839,7 +4839,7 @@
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
     <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
-    <string name="nautical_depth_points">Puntos de profundidad náutica</string>
+    <string name="nautical_depth_points">Puntos de profundidad náuticos</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
     <string name="map_widget_altitude_map_center">Elevación: centro del mapa</string>
