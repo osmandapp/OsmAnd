@@ -4742,7 +4742,7 @@
     <string name="auto_25_chars_route_tl_kr">Поверните налево и держитесь правее</string>
     <string name="auto_25_chars_route_tr_kl">Поверните направо и держитесь левее</string>
     <string name="auto_25_chars_route_tr_kr">Поверните направо и держитесь правее</string>
-    <string name="trip_recording_duration_widget_desc">Показывает время записи трека, продолжительность в минутах/часах текущего записываемого маршрута.</string>
+    <string name="trip_recording_duration_widget_desc">Виджет показывает текущее записанное время маршрута.</string>
     <string name="trip_recording_uphill_widget_desc">Показывает сумму всех подъёмов в текущем записываемом маршруте.</string>
     <string name="trip_recording_downhill_widget_desc">Показывает сумму всех спусков в текущем записываемом маршруте.</string>
     <string name="auto_25_chars_route_roundabout_kr">Сверните на %1$d съезд и держитесь правее</string>
