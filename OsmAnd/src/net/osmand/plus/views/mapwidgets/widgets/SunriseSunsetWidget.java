@@ -156,7 +156,9 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 	public static String formatTimeLeft(@NonNull Context ctx, long timeLeft) {
 		if (timeLeft >= 0) {
 			long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.MILLISECONDS);
-			String timeUnits = diffInMinutes >= 60 ? "h" : "m";
+			String hour = ctx.getString(R.string.int_hour);
+			String minute = ctx.getString(R.string.int_min);
+			String timeUnits = diffInMinutes >= 60 ? hour : minute;
 			String formattedDuration = Algorithms.formatMinutesDuration((int) diffInMinutes);
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, formattedDuration, timeUnits);
 		}
