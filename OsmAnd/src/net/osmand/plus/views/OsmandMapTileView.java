@@ -1908,15 +1908,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return AndroidUtils.isLayoutRtl(application);
 	}
 
-	@Nullable
-	public LatLon getLatLonFromPixel(float x, float y) {
-		if (mapRenderer != null) {
-			RotatedTileBox tileBox = getCurrentRotatedTileBox();
-			return NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, new PointI((int) x, (int) y));
-		}
-		return null;
-	}
-
 	private boolean isUseOpenGL() {
 		NavigationSession carNavigationSession = getApplication().getCarNavigationSession();
 		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
