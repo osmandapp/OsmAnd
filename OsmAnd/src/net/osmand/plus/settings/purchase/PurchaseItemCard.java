@@ -38,7 +38,6 @@ public class PurchaseItemCard extends BaseCard {
 
 	private final PurchaseUiData purchase;
 	private final InAppPurchaseHelper purchaseHelper;
-	private final InAppPurchases purchases;
 
 	public PurchaseItemCard(@NonNull FragmentActivity activity,
 	                        @NonNull InAppPurchaseHelper purchaseHelper,
@@ -46,7 +45,6 @@ public class PurchaseItemCard extends BaseCard {
 		super(activity, false);
 		this.purchase = purchase;
 		this.purchaseHelper = purchaseHelper;
-		purchases = purchaseHelper.getInAppPurchases();
 	}
 
 	@Override
