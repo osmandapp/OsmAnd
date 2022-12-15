@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.Period;
+import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -22,8 +22,8 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.ProSubscriptionOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -108,8 +108,8 @@ public abstract class InAppPurchaseHelper {
 		SubscriptionState state = SubscriptionState.UNDEFINED;
 		long startTime;
 		long expireTime;
-		Period.PeriodUnit subscriptionPeriod;
-		ProSubscriptionOrigin origin;
+		PeriodUnit periodUnit;
+		SubscriptionOrigin origin;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -291,12 +291,26 @@ public abstract class InAppPurchaseHelper {
 		return subscriptions;
 	}
 
+	@Nullable
+	public InAppPurchase getEverMadePurchaseBySku(@NonNull String sku) {
+		for (InAppPurchase purchase : getEverMadeMainPurchases()) {
+			if (Algorithms.objectEquals(purchase.getSku(), sku)) {
+				return purchase;
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	public List<InAppPurchase> getEverMadeMainPurchases() {
 		List<InAppPurchase> purchases = new ArrayList<>(getEverMadeSubscriptions());
+		// Add full version if it is purchased or available by default
 		InAppPurchase fullVersion = getFullVersion();
-		if (fullVersion != null && fullVersion.isPurchased()) {
-			purchases.add(fullVersion);
+		if (fullVersion != null) {
+			boolean isFullVersionByDefault = Version.isFullVersion(ctx) && !Version.isDeveloperBuild(ctx);
+			if (fullVersion.isPurchased() || isFullVersionByDefault) {
+				purchases.add(fullVersion);
+			}
 		}
 		return purchases;
 	}
@@ -607,13 +621,14 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.expireTime = subObj.optLong("expire_time");
 					stateHolder.origin = getSubscriptionOriginBySku(sku);
 
-					Period.PeriodUnit periodUnit = null;
-					if (stateHolder.origin == ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_PROMO || sku.contains("annual")) {
-						periodUnit = Period.PeriodUnit.YEAR;
+					PeriodUnit periodUnit = null;
+					if (stateHolder.origin == SubscriptionOrigin.PROMO || sku.contains("annual")) {
+						periodUnit = PeriodUnit.YEAR;
 					} else if (sku.contains("monthly")) {
-						periodUnit = Period.PeriodUnit.MONTH;
+						periodUnit = PeriodUnit.MONTH;
 					}
-					stateHolder.subscriptionPeriod = periodUnit;
+					stateHolder.periodUnit = periodUnit;
+
 					subscriptionStateMap.put(sku, stateHolder);
 				}
 			}
@@ -662,11 +677,12 @@ public abstract class InAppPurchaseHelper {
 			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
 			if (!Algorithms.isEmpty(subscriptionStates)) {
 				SubscriptionStateHolder stateHolder = subscriptionStates.entrySet().iterator().next().getValue();
-				ctx.getSettings().PRO_SUBSCRIPTION_ORIGIN.set(stateHolder.origin);
-				ctx.getSettings().BACKUP_PURCHASE_STATE.set(stateHolder.state);
-				ctx.getSettings().BACKUP_PURCHASE_START_TIME.set(stateHolder.startTime);
-				ctx.getSettings().BACKUP_PURCHASE_EXPIRE_TIME.set(stateHolder.expireTime);
-				ctx.getSettings().BACKUP_PURCHASE_PERIOD.set(stateHolder.subscriptionPeriod);
+				OsmandSettings settings = ctx.getSettings();
+				settings.BACKUP_PURCHASE_STATE.set(stateHolder.state);
+				settings.BACKUP_PURCHASE_START_TIME.set(stateHolder.startTime);
+				settings.BACKUP_PURCHASE_EXPIRE_TIME.set(stateHolder.expireTime);
+				settings.BACKUP_PURCHASE_PERIOD.set(stateHolder.periodUnit);
+				settings.BACKUP_SUBSCRIPTION_ORIGIN.set(stateHolder.origin);
 				return stateHolder.state.isActive();
 			}
 			return false;
@@ -1072,22 +1088,22 @@ public abstract class InAppPurchaseHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private ProSubscriptionOrigin getSubscriptionOriginBySku(String sku) {
+	private SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
 		if (sku.equals("promo_website")) {
-			return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_PROMO;
+			return SubscriptionOrigin.PROMO;
 		}
 		if (sku.toLowerCase().startsWith("osmand_pro_")) {
-			return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_ANDROID;
+			return SubscriptionOrigin.ANDROID;
 		}
 		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
-			return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_IOS;
+			return SubscriptionOrigin.IOS;
 		}
 		if (sku.toLowerCase().contains(".huawei.annual.pro") || sku.toLowerCase().contains(".huawei.monthly.pro")) {
-			return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_HUAWEY;
+			return SubscriptionOrigin.HUAWEY;
 		}
 		if (sku.toLowerCase().contains(".amazon.pro")) {
-			return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_AMAZON;
+			return SubscriptionOrigin.AMAZON;
 		}
-		return ProSubscriptionOrigin.SUBSCRIPTION_ORIGIN_UNDEFINED;
+		return SubscriptionOrigin.UNDEFINED;
 	}
 }

@@ -690,6 +690,25 @@ public abstract class InAppPurchases {
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 
+		public enum SubscriptionOrigin {
+			UNDEFINED(R.string.shared_string_undefined),
+			ANDROID(R.string.google_play),
+			AMAZON(R.string.amazon_market),
+			HUAWEY(R.string.huawei_market),
+			IOS(R.string.apple_app_store),
+			PROMO(R.string.promo);
+
+			int storeNameId;
+
+			SubscriptionOrigin(int storeNameId) {
+				this.storeNameId = storeNameId;
+			}
+
+			public int getStoreNameId() {
+				return storeNameId;
+			}
+		}
+
 		public enum SubscriptionState {
 			UNDEFINED("undefined", R.string.shared_string_undefined),
 			ACTIVE("active", R.string.osm_live_active),
@@ -735,15 +754,6 @@ public abstract class InAppPurchases {
 				return this == ACTIVE || this == CANCELLED || this == IN_GRACE_PERIOD;
 			}
 		}
-
-		public enum ProSubscriptionOrigin {
-			SUBSCRIPTION_ORIGIN_UNDEFINED,
-			SUBSCRIPTION_ORIGIN_ANDROID,
-			SUBSCRIPTION_ORIGIN_PROMO,
-			SUBSCRIPTION_ORIGIN_IOS,
-			SUBSCRIPTION_ORIGIN_AMAZON,
-			SUBSCRIPTION_ORIGIN_HUAWEY,
-		};
 
 		InAppSubscription(int id, @NonNull String skuNoVersion, int version) {
 			super(id, skuNoVersion + "_v" + version);

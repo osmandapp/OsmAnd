@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_expires">Expires</string>
+    <string name="shared_string_purchased_on">Purchased on</string>
     <string name="shared_string_open">Open</string>
     <string name="open_weather_action_description">Allows you to open a screen with detailed weather information.</string>
     <string name="open_weather_action">Open weather</string>
