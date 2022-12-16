@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -21,6 +22,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -106,6 +108,8 @@ public abstract class InAppPurchaseHelper {
 		SubscriptionState state = SubscriptionState.UNDEFINED;
 		long startTime;
 		long expireTime;
+		PeriodUnit periodUnit;
+		SubscriptionOrigin origin;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -185,7 +189,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public static boolean isSubscribedToPromo(@NonNull OsmandApplication ctx) {
-		return ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		return ctx.getSettings().BACKUP_PURCHASE_ACTIVE.get();
 	}
 
 	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication app) {
@@ -287,12 +291,26 @@ public abstract class InAppPurchaseHelper {
 		return subscriptions;
 	}
 
+	@Nullable
+	public InAppPurchase getEverMadePurchaseBySku(@NonNull String sku) {
+		for (InAppPurchase purchase : getEverMadeMainPurchases()) {
+			if (Algorithms.objectEquals(purchase.getSku(), sku)) {
+				return purchase;
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	public List<InAppPurchase> getEverMadeMainPurchases() {
 		List<InAppPurchase> purchases = new ArrayList<>(getEverMadeSubscriptions());
+		// Add full version if it is purchased or available by default
 		InAppPurchase fullVersion = getFullVersion();
-		if (fullVersion != null && fullVersion.isPurchased()) {
-			purchases.add(fullVersion);
+		if (fullVersion != null) {
+			boolean isFullVersionByDefault = Version.isFullVersion(ctx) && !Version.isDeveloperBuild(ctx);
+			if (fullVersion.isPurchased() || isFullVersionByDefault) {
+				purchases.add(fullVersion);
+			}
 		}
 		return purchases;
 	}
@@ -589,6 +607,10 @@ public abstract class InAppPurchaseHelper {
 			JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
 			for (int i = 0; i < subArrJson.length(); i++) {
 				JSONObject subObj = subArrJson.getJSONObject(i);
+				boolean valid = subObj.getBoolean("valid");
+				if (!valid) {
+					continue;
+				}
 				String sku = subObj.getString("sku");
 				String state = subObj.getString("state");
 
@@ -597,6 +619,16 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
+					stateHolder.origin = getSubscriptionOriginBySku(sku);
+
+					PeriodUnit periodUnit = null;
+					if (stateHolder.origin == SubscriptionOrigin.PROMO || sku.contains("annual")) {
+						periodUnit = PeriodUnit.YEAR;
+					} else if (sku.contains("monthly")) {
+						periodUnit = PeriodUnit.MONTH;
+					}
+					stateHolder.periodUnit = periodUnit;
+
 					subscriptionStateMap.put(sku, stateHolder);
 				}
 			}
@@ -629,6 +661,7 @@ public abstract class InAppPurchaseHelper {
 					promoActive = checkPromoSubscription(promocode);
 				}
 				if (!promoActive) {
+					//Get only PRO subscriptions
 					String orderId = getOrderIdByDeviceIdAndToken();
 					if (!Algorithms.isEmpty(orderId)) {
 						promoActive = checkPromoSubscription(orderId);
@@ -643,15 +676,14 @@ public abstract class InAppPurchaseHelper {
 		private boolean checkPromoSubscription(@NonNull String orderId) {
 			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
 			if (!Algorithms.isEmpty(subscriptionStates)) {
-				for (Map.Entry<String, SubscriptionStateHolder> entry : subscriptionStates.entrySet()) {
-					if ("promo_website".equals(entry.getKey())) {
-						SubscriptionStateHolder stateHolder = entry.getValue();
-						ctx.getSettings().BACKUP_PROMOCODE_STATE.set(stateHolder.state);
-						ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(stateHolder.startTime);
-						ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(stateHolder.expireTime);
-						return stateHolder.state.isActive();
-					}
-				}
+				SubscriptionStateHolder stateHolder = subscriptionStates.entrySet().iterator().next().getValue();
+				OsmandSettings settings = ctx.getSettings();
+				settings.BACKUP_PURCHASE_STATE.set(stateHolder.state);
+				settings.BACKUP_PURCHASE_START_TIME.set(stateHolder.startTime);
+				settings.BACKUP_PURCHASE_EXPIRE_TIME.set(stateHolder.expireTime);
+				settings.BACKUP_PURCHASE_PERIOD.set(stateHolder.periodUnit);
+				settings.BACKUP_SUBSCRIPTION_ORIGIN.set(stateHolder.origin);
+				return stateHolder.state.isActive();
 			}
 			return false;
 		}
@@ -660,7 +692,7 @@ public abstract class InAppPurchaseHelper {
 		protected void onPostExecute(Boolean active) {
 			promoRequested = true;
 			lastPromoCheckTime = System.currentTimeMillis();
-			ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.set(active);
+			ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
 
 			if (listener != null) {
 				listener.processResult(active);
@@ -1054,5 +1086,24 @@ public abstract class InAppPurchaseHelper {
 
 	protected void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
+	}
+
+	private SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
+		if (sku.equals("promo_website")) {
+			return SubscriptionOrigin.PROMO;
+		}
+		if (sku.toLowerCase().startsWith("osmand_pro_")) {
+			return SubscriptionOrigin.ANDROID;
+		}
+		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
+			return SubscriptionOrigin.IOS;
+		}
+		if (sku.toLowerCase().contains(".huawei.annual.pro") || sku.toLowerCase().contains(".huawei.monthly.pro")) {
+			return SubscriptionOrigin.HUAWEI;
+		}
+		if (sku.toLowerCase().contains(".amazon.pro")) {
+			return SubscriptionOrigin.AMAZON;
+		}
+		return SubscriptionOrigin.UNDEFINED;
 	}
 }
