@@ -814,7 +814,7 @@ public abstract class InAppPurchaseHelper {
 				}
 			});
 
-		} else if (fullVersion != null && info.getSku().equals(fullVersion.getSku())) {
+		} else if (fullVersion != null && info.getSku().contains(fullVersion.getSku())) {
 			// bought full version
 			fullVersion.setPurchaseState(PurchaseState.PURCHASED);
 			fullVersion.setPurchaseInfo(ctx, info);
@@ -827,7 +827,7 @@ public abstract class InAppPurchaseHelper {
 			refreshAndroidAuto();
 			stop(true);
 
-		} else if (depthContours != null && info.getSku().equals(depthContours.getSku())) {
+		} else if (depthContours != null && info.getSku().contains(depthContours.getSku())) {
 			// bought sea depth contours
 			depthContours.setPurchaseState(PurchaseState.PURCHASED);
 			depthContours.setPurchaseInfo(ctx, info);
@@ -840,7 +840,7 @@ public abstract class InAppPurchaseHelper {
 			notifyItemPurchased(depthContours.getSku(), false);
 			stop(true);
 
-		} else if (contourLines != null && info.getSku().equals(contourLines.getSku())) {
+		} else if (contourLines != null && info.getSku().contains(contourLines.getSku())) {
 			// bought contour lines
 			contourLines.setPurchaseState(PurchaseState.PURCHASED);
 			contourLines.setPurchaseInfo(ctx, info);
@@ -963,7 +963,7 @@ public abstract class InAppPurchaseHelper {
 				@Nullable
 				private PurchaseInfo getPurchaseInfo(String sku) {
 					for (PurchaseInfo info : purchaseInfoList) {
-						if (info.getSku().equals(sku)) {
+						if (info.getSku().contains(sku)) {
 							return info;
 						}
 					}

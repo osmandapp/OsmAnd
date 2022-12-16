@@ -534,6 +534,28 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		return false;
 	}
 
+	@Override
+	public void destroyLayer() {
+		super.destroyLayer();
+		clearMapProviders();
+	}
+
+	private void clearMapProviders() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		if (mapMarkersCollection != null) {
+			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
+			mapMarkersCollection = null;
+		}
+		if (mapillaryTilesProvider != null) {
+			int layerIndex = view.getLayerIndex(this);
+			mapRenderer.resetMapLayerProvider(layerIndex);
+			mapillaryTilesProvider = null;
+		}
+	}
+
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && mapillaryTilesProvider != null) {

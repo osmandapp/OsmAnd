@@ -35,6 +35,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -170,7 +171,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(String sku, Receipt receipt) {
-		return new PurchaseInfo(sku, receipt.getReceiptId(), getUserId(),
+		return new PurchaseInfo(Collections.singletonList(sku), receipt.getReceiptId(), getUserId(),
 				receipt.getPurchaseDate().getTime(), 0, true, !receipt.isCanceled());
 	}
 
