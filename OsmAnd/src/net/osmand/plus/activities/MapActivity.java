@@ -328,6 +328,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
+		updateLayers();
 		mapView.refreshMap(true);
 
 		drawerLayout = findViewById(R.id.drawer_layout);
