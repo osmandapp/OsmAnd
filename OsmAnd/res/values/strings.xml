@@ -13,6 +13,8 @@
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
+    <string name="shared_string_expires">Expires</string>
+    <string name="shared_string_purchased_on">Purchased on</string>
     <string name="shared_string_open">Open</string>
     <string name="open_weather_action_description">Allows you to open a screen with detailed weather information.</string>
     <string name="open_weather_action">Open weather</string>

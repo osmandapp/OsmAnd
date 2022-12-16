@@ -7,17 +7,13 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<include layout="@layout/list_item_divider" />
-
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/list_background_color"
+		android:foreground="?attr/selectableItemBackground"
 		android:orientation="horizontal"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingLeft="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
+		android:paddingHorizontal="@dimen/content_padding"
 		android:paddingBottom="@dimen/title_padding">
 
 		<androidx.appcompat.widget.AppCompatImageView
@@ -26,7 +22,6 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/map_widget_height"
-			android:layout_marginRight="@dimen/map_widget_height"
 			app:srcCompat="@drawable/ic_action_subscription_osmand_live" />
 
 		<LinearLayout
@@ -72,12 +67,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/content_padding_small"
-				android:paddingStart="@dimen/content_padding_small"
-				android:paddingLeft="@dimen/content_padding_small"
-				android:paddingTop="@dimen/content_padding_small_half"
-				android:paddingEnd="@dimen/content_padding_small"
-				android:paddingRight="@dimen/content_padding_small"
-				android:paddingBottom="@dimen/content_padding_small_half"
+				android:paddingHorizontal="@dimen/content_padding_small"
+				android:paddingVertical="@dimen/content_padding_small_half"
 				android:textColor="?attr/app_bar_primary_item_color"
 				osmand:typeface="@string/font_roboto_medium"
 				tools:background="@drawable/bg_osmand_live_active"
@@ -95,12 +86,8 @@
 					android:id="@+id/renew"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:paddingStart="@dimen/content_padding"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingTop="@dimen/content_padding_half"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="@dimen/content_padding_half"
+					android:paddingHorizontal="@dimen/content_padding"
+					android:paddingVertical="@dimen/content_padding_half"
 					android:text="@string/renew_subscription"
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -112,21 +99,5 @@
 		</LinearLayout>
 
 	</LinearLayout>
-
-	<include
-		android:id="@+id/card_divider"
-		layout="@layout/simple_divider_item" />
-
-	<include
-		android:id="@+id/manage_subscription"
-		layout="@layout/preference_button" />
-
-	<include
-		android:id="@+id/buttons_divider"
-		layout="@layout/divider_half_item" />
-
-	<include
-		android:id="@+id/osmand_live"
-		layout="@layout/preference_button" />
 
 </LinearLayout>
