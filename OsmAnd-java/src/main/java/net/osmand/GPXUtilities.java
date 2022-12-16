@@ -1440,8 +1440,8 @@ public class GPXUtilities {
 		public Metadata metadata = new Metadata();
 		public List<Track> tracks = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
-
-		private final List<WptPt> points = new ArrayList<>();
+		
+		private List<WptPt> points = new ArrayList<>();
 		private Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 		private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
@@ -1578,9 +1578,6 @@ public class GPXUtilities {
 			PointsGroup group = pointsGroups.get(groupName);
 			if (group != null) {
 				group.points.remove(point);
-				if (Algorithms.isEmpty(group.points)) {
-					pointsGroups.remove(groupName);
-				}
 			}
 		}
 
