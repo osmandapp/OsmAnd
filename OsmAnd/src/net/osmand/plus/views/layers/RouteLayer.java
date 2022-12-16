@@ -395,6 +395,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		if (helper.isPublicTransportMode()) {
+			publicTransportRouteGeometry.baseOrder = getBaseOrder();
 			int currentRoute = transportHelper.getCurrentRoute();
 			if (publicTransportRouteGeometry.hasMapRenderer()) {
 				renderState.updateTransportRouteState(currentRoute);
@@ -417,6 +418,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						startLocation, 0);
 			}
 		} else {
+			routeGeometry.baseOrder = getBaseOrder();
 			RouteCalculationResult route = helper.getRoute();
 			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
