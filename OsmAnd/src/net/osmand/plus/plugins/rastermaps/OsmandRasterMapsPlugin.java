@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.resources.ResourceManager.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +38,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -127,6 +129,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
+
+		ResourceListener resourceListener = new ResourceListener() {
+			@Override
+			public void onMapsIndexed() {
+
+			}
+
+			@Override
+			public void onMapClosed(String fileName) {
+				clearLayer(fileName);
+			}
+		};
+		app.getResourceManager().addResourceListener(resourceListener);
 		return true;
 	}
 
@@ -213,6 +228,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void clearLayer(@NonNull String tileSourceName) {
+		int idx = tileSourceName.lastIndexOf(SQLiteTileSource.EXT);
+		if (idx > 0) {
+			tileSourceName = tileSourceName.substring(0, idx);
+		}
 		if (overlayLayer != null && overlayLayer.getMap() != null
 				&& tileSourceName.equals(overlayLayer.getMap().getName())) {
 			overlayLayer.setMap(null);

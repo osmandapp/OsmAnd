@@ -55,7 +55,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -80,8 +79,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment
-		implements DownloadEvents, OnMapSourceUpdateListener, RenameCallback, ResourceListener {
+public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
+		OnMapSourceUpdateListener, RenameCallback {
 
 	private LoadLocalIndexTask asyncLoader;
 	private final Map<String, IndexItem> filesToUpdate = new HashMap<>();
@@ -106,7 +105,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
-		getMyApplication().getResourceManager().addResourceListener(this);
 		return view;
 	}
 
@@ -207,27 +205,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			activity.reloadLocalIndexes();
-		}
-	}
-
-	@Override
-	public void onMapsIndexed() {
-
-	}
-
-	@Override
-	public void onMapClosed(String fileName) {
-		int idx = fileName.lastIndexOf(SQLiteTileSource.EXT);
-		if (idx > 0) {
-			fileName = fileName.substring(0, idx);
-		}
-		clearUnderlayOverlayLayer(fileName);
-	}
-
-	private void clearUnderlayOverlayLayer(@NonNull String fileName) {
-		OsmandRasterMapsPlugin osmandRasterMapsPlugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
-		if (osmandRasterMapsPlugin != null) {
-			osmandRasterMapsPlugin.clearLayer(fileName);
 		}
 	}
 
@@ -443,6 +420,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 
 			return "";
 		}
+
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
