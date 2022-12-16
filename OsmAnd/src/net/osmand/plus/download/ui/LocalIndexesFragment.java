@@ -55,6 +55,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -79,8 +80,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents,
-		OnMapSourceUpdateListener, RenameCallback {
+public class LocalIndexesFragment extends OsmandExpandableListFragment
+		implements DownloadEvents, OnMapSourceUpdateListener, RenameCallback, ResourceListener {
 
 	private LoadLocalIndexTask asyncLoader;
 	private final Map<String, IndexItem> filesToUpdate = new HashMap<>();
@@ -105,6 +106,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
+		getMyApplication().getResourceManager().addResourceListener(this);
 		return view;
 	}
 
@@ -205,6 +207,27 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
 			activity.reloadLocalIndexes();
+		}
+	}
+
+	@Override
+	public void onMapsIndexed() {
+
+	}
+
+	@Override
+	public void onMapClosed(String fileName) {
+		int idx = fileName.lastIndexOf(SQLiteTileSource.EXT);
+		if (idx > 0) {
+			fileName = fileName.substring(0, idx);
+		}
+		clearUnderlayOverlayLayer(fileName);
+	}
+
+	private void clearUnderlayOverlayLayer(@NonNull String fileName) {
+		OsmandRasterMapsPlugin osmandRasterMapsPlugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
+		if (osmandRasterMapsPlugin != null) {
+			osmandRasterMapsPlugin.clearLayer(fileName);
 		}
 	}
 
@@ -381,10 +404,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 								Algorithms.removeAllFiles(tWal);
 							}
 							clearMapillaryTiles(info);
-							ITileSource tileSource = (ITileSource) info.getAttachedObject();
-							if (tileSource != null) {
-								deleteUnderlayOverlay(tileSource);
-							}
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -423,13 +442,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 
 			return "";
-		}
-
-		private void deleteUnderlayOverlay(@NonNull ITileSource tileSource) {
-			OsmandRasterMapsPlugin osmandRasterMapsPlugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
-			if (osmandRasterMapsPlugin != null) {
-				osmandRasterMapsPlugin.deleteLayer(tileSource);
-			}
 		}
 
 		@Override

@@ -212,13 +212,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public void deleteLayer(@NonNull ITileSource tileSource) {
-		if (overlayLayer != null && tileSource.equals(overlayLayer.getMap())) {
+	public void clearLayer(@NonNull String tileSourceName) {
+		if (overlayLayer != null && overlayLayer.getMap() != null
+				&& tileSourceName.equals(overlayLayer.getMap().getName())) {
 			overlayLayer.setMap(null);
 			settings.MAP_OVERLAY.set(null);
 			settings.MAP_OVERLAY_PREVIOUS.set(null);
 		}
-		if (underlayLayer != null && tileSource.equals(underlayLayer.getMap())) {
+		if (underlayLayer != null && underlayLayer.getMap() != null
+				&& tileSourceName.equals(underlayLayer.getMap().getName())) {
 			underlayLayer.setMap(null);
 			settings.MAP_UNDERLAY.set(null);
 			settings.MAP_UNDERLAY_PREVIOUS.set(null);
