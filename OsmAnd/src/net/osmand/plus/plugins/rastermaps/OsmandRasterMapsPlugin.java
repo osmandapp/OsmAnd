@@ -392,6 +392,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		};
 
+		updateLayers(mapActivity, mapActivity);
 		if (overlayLayer.getMap() == null) {
 			settings.MAP_OVERLAY.set(null);
 			settings.MAP_OVERLAY_PREVIOUS.set(null);
