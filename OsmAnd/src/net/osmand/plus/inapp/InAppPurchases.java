@@ -694,7 +694,7 @@ public abstract class InAppPurchases {
 			UNDEFINED(R.string.shared_string_undefined),
 			ANDROID(R.string.google_play),
 			AMAZON(R.string.amazon_market),
-			HUAWEY(R.string.huawei_market),
+			HUAWEI(R.string.huawei_market),
 			IOS(R.string.apple_app_store),
 			PROMO(R.string.promo);
 

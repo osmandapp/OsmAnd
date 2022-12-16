@@ -1099,7 +1099,7 @@ public abstract class InAppPurchaseHelper {
 			return SubscriptionOrigin.IOS;
 		}
 		if (sku.toLowerCase().contains(".huawei.annual.pro") || sku.toLowerCase().contains(".huawei.monthly.pro")) {
-			return SubscriptionOrigin.HUAWEY;
+			return SubscriptionOrigin.HUAWEI;
 		}
 		if (sku.toLowerCase().contains(".amazon.pro")) {
 			return SubscriptionOrigin.AMAZON;
