@@ -381,6 +381,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 								Algorithms.removeAllFiles(tWal);
 							}
 							clearMapillaryTiles(info);
+							ITileSource tileSource = (ITileSource) info.getAttachedObject();
+							if (tileSource != null) {
+								deleteUnderlayOverlay(tileSource);
+							}
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -421,6 +425,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			return "";
 		}
 
+		private void deleteUnderlayOverlay(@NonNull ITileSource tileSource) {
+			OsmandRasterMapsPlugin osmandRasterMapsPlugin = PluginsHelper.getPlugin(OsmandRasterMapsPlugin.class);
+			if (osmandRasterMapsPlugin != null) {
+				osmandRasterMapsPlugin.deleteLayer(tileSource);
+			}
+		}
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {

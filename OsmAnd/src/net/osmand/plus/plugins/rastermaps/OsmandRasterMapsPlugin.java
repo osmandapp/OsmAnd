@@ -212,6 +212,19 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return false;
 	}
 
+	public void deleteLayer(@NonNull ITileSource tileSource) {
+		if (overlayLayer != null && tileSource.equals(overlayLayer.getMap())) {
+			overlayLayer.setMap(null);
+			settings.MAP_OVERLAY.set(null);
+			settings.MAP_OVERLAY_PREVIOUS.set(null);
+		}
+		if (underlayLayer != null && tileSource.equals(underlayLayer.getMap())) {
+			underlayLayer.setMap(null);
+			settings.MAP_UNDERLAY.set(null);
+			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+		}
+	}
+
 	public void selectMapOverlayLayer(@NonNull CommonPreference<String> mapPref,
 	                                  @NonNull CommonPreference<String> exMapPref,
 	                                  boolean force,
@@ -392,16 +405,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		};
 
-		if (overlayLayer.getMap() == null) {
-			settings.MAP_OVERLAY.set(null);
-			settings.MAP_OVERLAY_PREVIOUS.set(null);
-		}
-		if (underlayLayer.getMap() == null) {
-			settings.MAP_UNDERLAY.removeListener(underlayListener);
-			settings.MAP_UNDERLAY.set(null);
-			settings.MAP_UNDERLAY_PREVIOUS.set(null);
-			settings.MAP_UNDERLAY.addListener(underlayListener);
-		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
 			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
