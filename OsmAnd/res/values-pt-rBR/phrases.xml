@@ -2429,7 +2429,7 @@
     <string name="poi_payment_type">Tipo de pagamento</string>
     <string name="poi_payment_fuel_type">Cartões de combustível</string>
     <string name="poi_additional_type">Adicional</string>
-    <string name="poi_internet_access_type">Tipo de acesso à Internet</string>
+    <string name="poi_internet_access_type">Tipo de acesso à internet</string>
     <string name="poi_vending_type">Tipo de venda</string>
     <string name="poi_bicycle_service">Serviço de bicicleta</string>
     <string name="poi_clothes_type">Tipo</string>
