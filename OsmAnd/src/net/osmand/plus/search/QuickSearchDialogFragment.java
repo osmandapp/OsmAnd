@@ -1380,7 +1380,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		String lastCityName = lastCity == null ? settings.getLastSearchedCityName() : lastCity.localeName;
 		if (!Algorithms.isEmpty(lastCityName)) {
-			String selectStreets = app.getString(R.string.search_street);
+			String selectStreets = app.getString(R.string.search_street).toUpperCase();
 			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
 			Spannable spannable = new SpannableString((selectStreets + " " + inCityName).toUpperCase());
 			boolean light = settings.isLightContent();
