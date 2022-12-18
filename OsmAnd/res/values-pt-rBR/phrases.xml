@@ -2429,7 +2429,7 @@
     <string name="poi_payment_type">Tipo de pagamento</string>
     <string name="poi_payment_fuel_type">Cartões de combustível</string>
     <string name="poi_additional_type">Adicional</string>
-    <string name="poi_internet_access_type">Tipo de acesso à Internet</string>
+    <string name="poi_internet_access_type">Tipo de acesso à internet</string>
     <string name="poi_vending_type">Tipo de venda</string>
     <string name="poi_bicycle_service">Serviço de bicicleta</string>
     <string name="poi_clothes_type">Tipo</string>
@@ -3983,7 +3983,7 @@
     <string name="poi_access_bicycle">Acesso de bicicleta</string>
     <string name="poi_access_motorcar">Acesso de automóveis</string>
     <string name="poi_authentication_none_yes">Sim;Sem autenticação</string>
-    <string name="poi_authentication_none_no">Autenticação não requerida: não</string>
+    <string name="poi_authentication_none_no">Sem autenticação: não</string>
     <string name="poi_authentication_short_message_yes">Sim</string>
     <string name="poi_authentication_phone_call_number">Número de telefone usado para autenticação</string>
     <string name="poi_authentication_phone_call_yes">Sim</string>

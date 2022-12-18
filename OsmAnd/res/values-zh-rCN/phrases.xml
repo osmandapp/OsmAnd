@@ -913,8 +913,8 @@
     <string name="poi_rtsa_scale_filter">难度类别</string>
     <string name="poi_bulk_purchase">批量采购</string>
     <string name="poi_glacier_type">冰川类型</string>
-    <string name="poi_socket_type3_output_filter">Type 3 充电接口</string>
-    <string name="poi_socket_type2_output_filter">Type2 充电接口</string>
+    <string name="poi_socket_type3_output_filter">Type 3 型输出连接器</string>
+    <string name="poi_socket_type2_output_filter">Type 2 型输出连接器</string>
     <string name="poi_home_visit">家访</string>
     <string name="poi_service_car">汽车服务</string>
     <string name="poi_access_bus">公交车通道</string>
@@ -1314,7 +1314,7 @@
     <string name="poi_bird_hide">观鸟地点</string>
     <string name="poi_tactile_paving_no">没有盲道</string>
     <string name="poi_australian_football">澳式橄榄球</string>
-    <string name="poi_socket_chademo_output_filter">CHAdeMO 充电接口</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO 输出连接器</string>
     <string name="poi_beachvolleyball">沙滩排球</string>
     <string name="poi_bmx">小轮车</string>
     <string name="poi_laundry_service_no">无</string>
@@ -1526,7 +1526,7 @@
     <string name="poi_canoe">皮划艇</string>
     <string name="poi_archery">射箭</string>
     <string name="poi_fuel_electricity">电能</string>
-    <string name="poi_socket_type2_combo_output_filter">Type 2 混合接口</string>
+    <string name="poi_socket_type2_combo_output_filter">Type 2 混合输出连接器</string>
     <string name="poi_visibility_area">能见度：区域</string>
     <string name="poi_recycling_animal_waste">动物粪便</string>
     <string name="poi_recycling_diapers">尿布</string>

@@ -4861,4 +4861,7 @@
 \n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn
 \n
 \n</string>
+    <string name="shared_string_open">Malfermi</string>
+    <string name="open_weather_action_description">Ebligas al vi malfermi ekranon kun detalaj informoj pri vetero.</string>
+    <string name="open_weather_action">Malfermi veter-informojn</string>
 </resources>

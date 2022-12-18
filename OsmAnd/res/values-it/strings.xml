@@ -3946,7 +3946,7 @@
     <string name="rename_track">Rinomina la traccia</string>
     <string name="change_folder">Cambia cartella</string>
     <string name="shared_string_sec">sec</string>
-    <string name="announcement_time_passing">Sorpasso</string>
+    <string name="announcement_time_passing">Passaggio</string>
     <string name="announcement_time_approach">Avvicinamento</string>
     <string name="announcement_time_prepare_long">Preparazione anticipata</string>
     <string name="announcement_time_prepare">Preparazione</string>
@@ -4959,18 +4959,18 @@
     <string name="quick_action_temperature_layer">Un pulsante per mostrare o nascondere le temperature sulla mappa.</string>
     <string name="quick_action_precipitation_layer">Un pulsante per mostrare o nascondere le precipitazioni sulla mappa.</string>
     <string name="quick_action_cloud_layer">Un pulsante per mostrare o nascondere la nuvolosità sulla mappa.</string>
-    <string name="rendering_attr_showMtbScale_name">Mostra la scala di difficoltà MTB</string>
+    <string name="rendering_attr_showMtbScale_name">Mostra scala di difficoltà MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="rendering_attr_showMtbScale_description">Mostra i percorsi nella scala di difficoltà MTB.</string>
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
-    <string name="mtb_segment_classification">Classificazione del segmento</string>
+    <string name="mtb_segment_classification">Classificazione segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
     <string name="release_4_4_pre">• Qui ci saranno le stringhe per la versione 4.4</string>
     <string name="shared_string_open">Apri</string>
     <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
-    <string name="open_weather_action">Apri schermata meteo</string>
+    <string name="open_weather_action">Apri meteo</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
 </resources>
