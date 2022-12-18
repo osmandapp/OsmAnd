@@ -4982,4 +4982,6 @@
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
+    <string name="shared_string_purchased_on">Придбано</string>
+    <string name="shared_string_expires">Діє до</string>
 </resources>
