@@ -4988,4 +4988,6 @@
     <string name="shared_string_open">Åbn</string>
     <string name="open_weather_action">Åbn vejr</string>
     <string name="open_weather_action_description">Giver dig mulighed for at åbne en skærm med detaljerede vejroplysninger.</string>
+    <string name="shared_string_purchased_on">Købt</string>
+    <string name="shared_string_expires">Udløber</string>
 </resources>
