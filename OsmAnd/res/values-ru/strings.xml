@@ -4987,4 +4987,6 @@
     <string name="open_weather_action_description">Позволяет открыть экран с подробной информацией о погоде.</string>
     <string name="open_weather_action">Открыть прогноз погоды</string>
     <string name="shared_string_open">Открыть</string>
+    <string name="shared_string_purchased_on">Приобретено</string>
+    <string name="shared_string_expires">Истекает</string>
 </resources>
