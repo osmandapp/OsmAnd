@@ -132,11 +132,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		ResourceListener resourceListener = new ResourceListener() {
 			@Override
-			public void onMapsIndexed() {
-
-			}
-
-			@Override
 			public void onMapClosed(String fileName) {
 				clearLayer(fileName);
 			}
@@ -235,13 +230,21 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (overlayLayer != null && overlayLayer.getMap() != null
 				&& tileSourceName.equals(overlayLayer.getMap().getName())) {
 			overlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY.get())) {
 			settings.MAP_OVERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY_PREVIOUS.get())) {
 			settings.MAP_OVERLAY_PREVIOUS.set(null);
 		}
 		if (underlayLayer != null && underlayLayer.getMap() != null
 				&& tileSourceName.equals(underlayLayer.getMap().getName())) {
 			underlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY.get())) {
 			settings.MAP_UNDERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY_PREVIOUS.get())) {
 			settings.MAP_UNDERLAY_PREVIOUS.set(null);
 		}
 	}
