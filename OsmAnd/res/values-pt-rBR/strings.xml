@@ -165,11 +165,11 @@
 \n
 \nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar.</string>
     <string name="plugin_nautical_name">Mapa náutico</string>
-    <string name="plugin_nautical_descr">Ligue para enriquecer seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas de perigo, zonas onde é permitido ou proibido navegar ou atracar, etc.
+    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
 \n
-\nComo funciona - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nLeitura adicional em https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
-    <string name="plugin_ski_descr">Projetado para navegar em locais de esportes de inverno. Observe as pistas de esqui, os marcadores do teleférico e as linhas coloridas que indicam a complexidade de cada pista. Para usar depois de ativar, vá para Configurar mapa e escolha o tipo de mapa \"Inverno e esqui\".</string>
+    <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="audionotes_plugin_description">Faça anotações de áudio/foto/vídeo durante uma viagem, usando um botão de mapa ou o menu de contexto da localização.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
