@@ -4987,4 +4987,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windböen-Isolinien</string>
+    <string name="shared_string_expires">Abgelaufen</string>
+    <string name="shared_string_purchased_on">Gekauft am</string>
 </resources>
