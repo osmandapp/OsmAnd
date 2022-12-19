@@ -5051,4 +5051,6 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">هبات الرياح المتساوية</string>
     <string name="release_4_4_pre">• هنا ستكون سلاسل للإصدار 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">تساوي السحب</string>
+    <string name="shared_string_purchased_on">تم الشراء في</string>
+    <string name="shared_string_expires">انتهاء</string>
 </resources>
