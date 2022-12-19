@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +62,10 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
+	// Use after widget recreation
+	private static float prevChartMinVisibleX = -1;
+	private static boolean prevChartFitToHighlight;
+
 	private View uphillView;
 	private View downhillView;
 	private View gradeView;
@@ -83,6 +88,10 @@ public class ElevationProfileWidget extends MapWidget {
 	private TrackChartPoints trackChartPoints;
 
 	private boolean movedToLocation;
+
+	private Boolean firstVisibleUpdate;
+	private boolean readyToUpdate;
+	private boolean processingGesture;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
@@ -141,8 +150,37 @@ public class ElevationProfileWidget extends MapWidget {
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowElevationProfileWidget();
 		updateVisibility(visible);
-		if (visible) {
+		checkChartReadyForUpdates();
+		updatePrevChartParams();
+		if (visible && readyToUpdate) {
+			if (firstVisibleUpdate == null) {
+				firstVisibleUpdate = true;
+			}
 			updateInfoImpl();
+			firstVisibleUpdate = false;
+		}
+	}
+
+	private void checkChartReadyForUpdates() {
+		if (readyToUpdate) {
+			return;
+		}
+
+		view.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
+			@Override
+			public boolean onPreDraw() {
+				view.getViewTreeObserver().removeOnPreDrawListener(this);
+				readyToUpdate = true;
+				return false;
+			}
+		});
+	}
+
+	private void updatePrevChartParams() {
+		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+		if (this.route != null && this.route != route || !route.isCalculated()) {
+			prevChartMinVisibleX = -1;
+			prevChartFitToHighlight = false;
 		}
 	}
 
@@ -231,12 +269,14 @@ public class ElevationProfileWidget extends MapWidget {
 				if (!setupDrawX) {
 					highlightDrawX = -1;
 				}
+				processingGesture = true;
 			}
 
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 				app.runInUIThread(() -> updateWidgets());
+				processingGesture = false;
 			}
 
 			@Override
@@ -288,6 +328,7 @@ public class ElevationProfileWidget extends MapWidget {
 					}
 				}
 				app.runInUIThread(() -> updateWidgets());
+				prevChartMinVisibleX = chart.getLowestVisibleX();
 			}
 		});
 	}
@@ -324,20 +365,30 @@ public class ElevationProfileWidget extends MapWidget {
 		float startMoveChartPosition = minVisibleX + twentyPercent;
 		float pos = distanceFromStart / ((OrderedLineDataSet) ds.get(0)).getDivX();
 
-		boolean movedToLocation = this.movedToLocation;
-		if (pos >= minVisibleX && pos <= maxVisibleX || movedToLocation) {
-			if (pos >= startMoveChartPosition) {
+ 		boolean restorePrevChartScroll = firstVisibleUpdate && !prevChartFitToHighlight && prevChartMinVisibleX != -1;
+		boolean highlightVisible = pos >= minVisibleX && pos <= maxVisibleX;
+		boolean forceScrollToHighlight = movedToLocation || (prevChartFitToHighlight && firstVisibleUpdate);
+
+		if (restorePrevChartScroll) {
+			float biggestLeftVisibleX = chart.getXChartMax() - chart.getVisibleXRange();
+			moveViewToX(chart, Math.min(prevChartMinVisibleX, biggestLeftVisibleX));
+			prevChartFitToHighlight = false;
+		} else if (highlightVisible || forceScrollToHighlight) {
+			if (pos >= startMoveChartPosition && !processingGesture) {
 				float nextVisibleX = pos - twentyPercent;
 				moveViewToX(chart, nextVisibleX);
-			} else if (movedToLocation) {
+			} else if (forceScrollToHighlight) {
 				moveViewToX(chart, Math.max(pos - twentyPercent, chart.getXChartMin()));
 			}
 			if (movedToLocation) {
-				this.movedToLocation = false;
+				movedToLocation = false;
 			}
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
 			refreshHighlights(newLocationHighlight);
+			prevChartFitToHighlight = true;
+		} else {
+			prevChartFitToHighlight = false;
 		}
 		return true;
 	}
