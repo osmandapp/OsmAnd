@@ -856,15 +856,24 @@ public class BackupHelper {
 					if (localFile != null) {
 						long remoteUploadTime = remoteFile.getClienttimems();
 						long localUploadTime = localFile.uploadTime;
+						long localModifiedTime = localFile.localModifiedTime;
+
 						if (remoteFile.isDeleted()) {
+							// Remote file deleted
 							info.localFilesToDelete.add(localFile);
-						} else if (remoteUploadTime == localUploadTime) {
-							if (localUploadTime < localFile.localModifiedTime) {
+						} else if (localModifiedTime > localUploadTime) {
+							// Local file modified since last upload
+							if (remoteUploadTime > localUploadTime) {
+								// Remote file modified also. Have conflict. Needs to be resolved.
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							} else {
+								// Remote file is non modified. Suggest to upload local file to the cloud.
 								info.filesToUpload.add(localFile);
-								info.filesToDownload.add(remoteFile);
 							}
-						} else {
-							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							// Allow possibility to restore cloud version if needed.
+							info.filesToDownload.add(remoteFile);
+						} else if (remoteUploadTime > localUploadTime) {
+							// Remote file modified. Suggest to download from the cloud.
 							info.filesToDownload.add(remoteFile);
 						}
 						long localFileSize = localFile.file == null ? 0 : localFile.file.length();
