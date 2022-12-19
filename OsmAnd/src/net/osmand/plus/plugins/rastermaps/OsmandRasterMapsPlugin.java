@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.resources.ResourceManager.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +38,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -127,6 +129,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
+
+		ResourceListener resourceListener = new ResourceListener() {
+			@Override
+			public void onMapClosed(String fileName) {
+				clearLayer(fileName);
+			}
+		};
+		app.getResourceManager().addResourceListener(resourceListener);
 		return true;
 	}
 
@@ -210,6 +220,33 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return true;
 		}
 		return false;
+	}
+
+	public void clearLayer(@NonNull String tileSourceName) {
+		int idx = tileSourceName.lastIndexOf(SQLiteTileSource.EXT);
+		if (idx > 0) {
+			tileSourceName = tileSourceName.substring(0, idx);
+		}
+		if (overlayLayer != null && overlayLayer.getMap() != null
+				&& tileSourceName.equals(overlayLayer.getMap().getName())) {
+			overlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY.get())) {
+			settings.MAP_OVERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY_PREVIOUS.get())) {
+			settings.MAP_OVERLAY_PREVIOUS.set(null);
+		}
+		if (underlayLayer != null && underlayLayer.getMap() != null
+				&& tileSourceName.equals(underlayLayer.getMap().getName())) {
+			underlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY.get())) {
+			settings.MAP_UNDERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY_PREVIOUS.get())) {
+			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+		}
 	}
 
 	public void selectMapOverlayLayer(@NonNull CommonPreference<String> mapPref,
@@ -392,16 +429,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		};
 
-		if (overlayLayer.getMap() == null) {
-			settings.MAP_OVERLAY.set(null);
-			settings.MAP_OVERLAY_PREVIOUS.set(null);
-		}
-		if (underlayLayer.getMap() == null) {
-			settings.MAP_UNDERLAY.removeListener(underlayListener);
-			settings.MAP_UNDERLAY.set(null);
-			settings.MAP_UNDERLAY_PREVIOUS.set(null);
-			settings.MAP_UNDERLAY.addListener(underlayListener);
-		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
 			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");

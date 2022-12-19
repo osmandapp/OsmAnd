@@ -6,6 +6,10 @@
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
+    <string name="amazon_market">Amazon</string>
+    <string name="huawei_market">Huawei</string>
+    <string name="apple_app_store">Apple App Store</string>
+    <string name="google_play">Google Play</string>
     <string name="google_play_services">Google Play Services</string>
     <string name="android_api">Android API</string>
     <string name="github">GitHub</string>

@@ -5,6 +5,7 @@ import net.osmand.binary.StringBundle;
 import net.osmand.binary.StringBundleWriter;
 import net.osmand.binary.StringBundleXmlReader;
 import net.osmand.binary.StringBundleXmlWriter;
+import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
@@ -339,10 +340,11 @@ public class GPXUtilities {
 
 		public String getAmenityOriginName() {
 			Map<String, String> extensionsToRead = getExtensionsToRead();
-			if (!extensionsToRead.isEmpty()) {
-				return extensionsToRead.get(AMENITY_ORIGIN_EXTENSION);
+			String amenityOrigin = extensionsToRead.get(AMENITY_ORIGIN_EXTENSION);
+			if (amenityOrigin == null && comment != null && comment.startsWith(Amenity.class.getSimpleName())) {
+				amenityOrigin = comment;
 			}
-			return null;
+			return amenityOrigin;
 		}
 
 		public void setAmenityOriginName(String originName) {

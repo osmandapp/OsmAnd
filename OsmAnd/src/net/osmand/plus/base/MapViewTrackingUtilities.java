@@ -248,8 +248,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					pendingRotation = true;
 				}
 				registerUnregisterSensor(location, smallSpeedForCompass);
-				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation &&
-						settings.TURN_SCREEN_ON_TIME_INT.get() == 0) {
+				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation) {
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom,
 							pendingRotation, rotation, movingTime, false,
