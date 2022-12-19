@@ -234,6 +234,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 		ImportListener importListener = new ImportListener() {
 			@Override
+			public void onImportProgressUpdate(int value, int uploadedKb) {
+
+			}
+
+			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 
 			}

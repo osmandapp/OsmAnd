@@ -100,6 +100,9 @@ public abstract class SettingsHelper {
 	}
 
 	public interface ImportListener {
+
+		void onImportProgressUpdate(int value, int uploadedKb);
+
 		void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work);
 
 		void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value);

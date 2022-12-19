@@ -24,9 +24,11 @@ public class BackupInfo {
 	public List<SettingsItem> itemsToDelete;
 	public List<LocalFile> filteredFilesToUpload;
 	public List<RemoteFile> filteredFilesToDelete;
+	public List<RemoteFile> filteredFilesToDownload;
 	public List<Pair<LocalFile, RemoteFile>> filteredFilesToMerge;
 
 	void createItemCollections(@NonNull OsmandApplication app) {
+		createFilteredFilesToDownload(app);
 		createFilteredFilesToUpload(app);
 		createItemsToUpload();
 		createFilteredFilesToDelete(app);
@@ -54,6 +56,18 @@ public class BackupInfo {
 			}
 		}
 		itemsToDelete = new ArrayList<>(items);
+	}
+
+	private void createFilteredFilesToDownload(@NonNull OsmandApplication app) {
+		List<RemoteFile> files = new ArrayList<>();
+		BackupHelper helper = app.getBackupHelper();
+		for (RemoteFile remoteFile : filesToDownload) {
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
+			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
+				files.add(remoteFile);
+			}
+		}
+		filteredFilesToDownload = files;
 	}
 
 	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {

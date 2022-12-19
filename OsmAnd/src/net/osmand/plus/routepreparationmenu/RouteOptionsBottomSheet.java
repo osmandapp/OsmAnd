@@ -65,7 +65,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;

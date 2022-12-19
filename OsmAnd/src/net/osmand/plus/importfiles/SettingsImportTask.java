@@ -134,6 +134,11 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private ImportListener getImportListener(File file) {
 		return new ImportListener() {
 			@Override
+			public void onImportProgressUpdate(int value, int uploadedKb) {
+
+			}
+
+			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 
 			}
@@ -187,6 +192,11 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		}
 
 		ImportListener importListener = new ImportListener() {
+			@Override
+			public void onImportProgressUpdate(int value, int uploadedKb) {
+
+			}
+
 			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 

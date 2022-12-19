@@ -201,6 +201,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
 			@Override
+			public void onImportProgressUpdate(int value, int uploadedKb) {
+
+			}
+
+			@Override
 			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 
 			}

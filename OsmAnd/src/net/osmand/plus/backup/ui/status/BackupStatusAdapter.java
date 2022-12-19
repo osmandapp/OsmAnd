@@ -38,7 +38,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 	public static final int CONFLICTS_TYPE = 3;
 	public static final int ACTION_BUTTON_TYPE = 4;
 	public static final int RESTORE_TYPE = 5;
-	public static final int LOCAL_BACKUP_TYPE = 6;
 	public static final int INTRODUCTION_TYPE = 7;
 	public static final int SYNC_CARD_TYPE = 8;
 
@@ -110,10 +109,8 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 				items.add(ACTION_BUTTON_TYPE);
 			}
 		}
-
 		items.add(SYNC_CARD_TYPE);
 		items.add(RESTORE_TYPE);
-		items.add(LOCAL_BACKUP_TYPE);
 		notifyDataSetChanged();
 	}
 
@@ -125,9 +122,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 			case RESTORE_TYPE:
 				View itemView = inflater.inflate(R.layout.restore_backup_card, viewGroup, false);
 				return new RestoreBackupViewHolder(itemView);
-			case LOCAL_BACKUP_TYPE:
-				itemView = inflater.inflate(R.layout.local_backup_card, viewGroup, false);
-				return new LocalBackupViewHolder(itemView);
 			case HEADER_TYPE:
 				itemView = inflater.inflate(R.layout.backup_status_header, viewGroup, false);
 				return new HeaderStatusViewHolder(itemView);
@@ -183,9 +177,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		} else if (holder instanceof ActionButtonViewHolder) {
 			ActionButtonViewHolder viewHolder = (ActionButtonViewHolder) holder;
 			viewHolder.bindView(mapActivity, backup, fragment, uploadItemsVisible, nightMode);
-		} else if (holder instanceof LocalBackupViewHolder) {
-			LocalBackupViewHolder viewHolder = (LocalBackupViewHolder) holder;
-			viewHolder.bindView(mapActivity, nightMode);
 		} else if (holder instanceof RestoreBackupViewHolder) {
 			RestoreBackupViewHolder viewHolder = (RestoreBackupViewHolder) holder;
 			viewHolder.bindView(mapActivity, nightMode);
@@ -203,8 +194,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		Object obj = items.get(position);
 		if (Algorithms.objectEquals(obj, RESTORE_TYPE)) {
 			return RESTORE_TYPE;
-		} else if (Algorithms.objectEquals(obj, LOCAL_BACKUP_TYPE)) {
-			return LOCAL_BACKUP_TYPE;
 		} else if (Algorithms.objectEquals(obj, HEADER_TYPE)) {
 			return HEADER_TYPE;
 		} else if (Algorithms.objectEquals(obj, WARNING_TYPE)) {
@@ -307,6 +296,11 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
+
+	}
+
+	@Override
+	public void onImportProgressUpdate(int value, int uploadedKb) {
 
 	}
 

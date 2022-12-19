@@ -214,6 +214,11 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
+	public void onImportProgressUpdate(int value, int uploadedKb) {
+
+	}
+
+	@Override
 	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 		if (adapter != null) {
 			adapter.onImportItemStarted(type, fileName, work);

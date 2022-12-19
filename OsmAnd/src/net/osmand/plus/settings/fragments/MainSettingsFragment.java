@@ -8,20 +8,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
-import net.osmand.plus.settings.purchase.PurchasesFragment;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -33,6 +28,10 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.settings.purchase.PurchasesFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -52,8 +51,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
 	private static final String LOCAL_BACKUP = "local_backup";
-	private static final String BACKUP_TO_FILE = "backup_to_file";
-	private static final String RESTORE_FROM_FILE = "restore_from_file";
+	private static final String EXPORT_TO_FILE = "export_to_file";
+	private static final String IMPORT_FROM_FILE = "import_from_file";
 
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
@@ -80,8 +79,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		appProfiles.setIconSpaceReserved(false);
 		setupAppProfiles(appProfiles);
 		profileManagementPref();
-		setupBackupToFilePref();
-		setupRestoreFromFilePref();
+		setupLocalBackup();
 	}
 
 	@Override
@@ -97,7 +95,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
 		} else if (LOCAL_BACKUP.equals(key)) {
-			bindLocalBackupPref(holder);
+			TextView title = holder.itemView.findViewById(android.R.id.title);
+			title.setTextColor(ColorUtilities.getPrimaryTextColor(app, isNightMode()));
 		}
 		boolean visible = !ApplicationMode.DEFAULT.getStringKey().equals(key);
 		AndroidUiHelper.updateVisibility(holder.findViewById(R.id.switchWidget), visible);
@@ -143,7 +142,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 			}
-		} else if (BACKUP_TO_FILE.equals(prefId)) {
+		} else if (EXPORT_TO_FILE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				ApplicationMode mode = getSelectedAppMode();
@@ -151,7 +150,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				ExportSettingsFragment.showInstance(fragmentManager, mode, null, true);
 				return true;
 			}
-		} else if (RESTORE_FROM_FILE.equals(prefId)) {
+		} else if (IMPORT_FROM_FILE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
@@ -162,24 +161,20 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		return super.onPreferenceClick(preference);
 	}
 
+	private void setupLocalBackup() {
+		setupBackupToFilePref();
+		setupRestoreFromFilePref();
+		findPreference(LOCAL_BACKUP).setIconSpaceReserved(false);
+	}
+
 	private void setupBackupToFilePref() {
-		Preference backupToFile = findPreference(BACKUP_TO_FILE);
+		Preference backupToFile = findPreference(EXPORT_TO_FILE);
 		backupToFile.setIcon(getIcon(R.drawable.ic_action_save_to_file, getActiveColorRes()));
 	}
 
 	private void setupRestoreFromFilePref() {
-		Preference restoreFromFile = findPreference(RESTORE_FROM_FILE);
+		Preference restoreFromFile = findPreference(IMPORT_FROM_FILE);
 		restoreFromFile.setIcon(getIcon(R.drawable.ic_action_read_from_file, getActiveColorRes()));
-	}
-
-	private void bindLocalBackupPref(PreferenceViewHolder holder) {
-		ImageView indicator = holder.itemView.findViewById(R.id.icon_logout);
-		indicator.setVisibility(View.GONE);
-		AppCompatImageView icon = holder.itemView.findViewById(R.id.icon);
-		icon.setVisibility(View.GONE);
-
-		View button = holder.itemView.findViewById(R.id.selectable_list_item);
-		button.setBackground(null);
 	}
 
 	private void setupConfigureProfilePref() {
@@ -212,11 +207,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		int activeColorPrimaryResId = ColorUtilities.getActiveColorId(isNightMode());
 
 		Preference createProfile = findPreference(CREATE_PROFILE);
-		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorPrimaryResId));
-
+		createProfile.setIcon(getIcon(R.drawable.ic_action_plus, activeColorPrimaryResId));
 
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
-		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, activeColorPrimaryResId));
+		reorderProfiles.setIcon(getIcon(R.drawable.ic_action_edit_dark, activeColorPrimaryResId));
 	}
 
 	private void setupAppProfiles(PreferenceCategory preferenceCategory) {
