@@ -1883,4 +1883,15 @@
     <string name="poi_dry_cleaning">Pembersihan kering</string>
     <string name="poi_crematorium">Krematorium</string>
     <string name="poi_rapids">Jeram</string>
+    <string name="poi_beacon_lateral">Suar lateral</string>
+    <string name="poi_buoy_installation">Pelampung pemasangan</string>
+    <string name="poi_seamark_building">Gedung tanda laut</string>
+    <string name="poi_beacon">Suar</string>
+    <string name="poi_beacon_cardinal">Suar kardinal</string>
+    <string name="poi_beacon_safe_water">Suar air aman</string>
+    <string name="poi_beacon_special_purpose">Suar tujuan khusus</string>
+    <string name="poi_berth">Tempat tidur</string>
+    <string name="poi_seamark_bridge">Jembatan tanda laut</string>
+    <string name="poi_buoy_cardinal">Pelampung kardinal</string>
+    <string name="poi_buoy_isolated_danger">Pelampung, bahaya terisolasi</string>
 </resources>
