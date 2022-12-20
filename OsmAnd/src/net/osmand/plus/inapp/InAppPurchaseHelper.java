@@ -693,7 +693,7 @@ public abstract class InAppPurchaseHelper {
 			promoRequested = true;
 			lastPromoCheckTime = System.currentTimeMillis();
 			ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
-
+			notifyGetItems();
 			if (listener != null) {
 				listener.processResult(active);
 			}
