@@ -4978,4 +4978,6 @@
 \n- isolinhas de temperatura / pressão
 \n
 \nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="shared_string_expires">Expira</string>
+    <string name="shared_string_purchased_on">Comprado em</string>
 </resources>
