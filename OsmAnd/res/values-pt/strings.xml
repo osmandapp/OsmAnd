@@ -4704,10 +4704,10 @@
     <string name="altitude_correction">Correção de elevação</string>
     <string name="no_altitude_data_desc">Para receber os dados de %1$s, anexe o seu trilho às estradas ou calcule-a online.</string>
     <string name="co2_mission">Emissão de CO2</string>
-    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_diesel_name">Gasóleo</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
     <string name="routing_attr_motor_type_electric_name">Elétrico</string>
-    <string name="routing_attr_motor_type_gas_name">GNV</string>
+    <string name="routing_attr_motor_type_gas_name">Gás natural comprimido</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="goods_delivery_desc_3">Aplica-se apenas a camiões de mercadorias até 3,5 toneladas.</string>
     <string name="next_live_update_time">Próxima atualização às %1$s.</string>
