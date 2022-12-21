@@ -419,7 +419,7 @@ public abstract class InAppPurchaseHelper {
 	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-		new CheckPromoTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
@@ -639,16 +639,16 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {
-		CheckPromoTask task = new CheckPromoTask(listener);
+		CheckBackupSubscriptionTask task = new CheckBackupSubscriptionTask(listener);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private class CheckPromoTask extends AsyncTask<Void, Void, Boolean> {
+	private class CheckBackupSubscriptionTask extends AsyncTask<Void, Void, Boolean> {
 
 		private final CallbackWithObject<Boolean> listener;
 
-		public CheckPromoTask(@Nullable CallbackWithObject<Boolean> listener) {
+		public CheckBackupSubscriptionTask(@Nullable CallbackWithObject<Boolean> listener) {
 			this.listener = listener;
 		}
 
@@ -693,7 +693,7 @@ public abstract class InAppPurchaseHelper {
 			promoRequested = true;
 			lastPromoCheckTime = System.currentTimeMillis();
 			ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
-
+			notifyGetItems();
 			if (listener != null) {
 				listener.processResult(active);
 			}
