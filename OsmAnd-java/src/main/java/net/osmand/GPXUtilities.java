@@ -190,6 +190,10 @@ public class GPXUtilities {
 		public void setColor(int color) {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
+		
+		public void setColor(String color) {
+			getExtensionsToWrite().put("color", color);
+		}
 
 		public void removeColor() {
 			getExtensionsToWrite().remove("color");
@@ -505,6 +509,28 @@ public class GPXUtilities {
 			}
 			if (backgroundType != null) {
 				setBackgroundType(backgroundType);
+			}
+		}
+		
+		private void updatePoint(double lat, double lon, String description, String name,
+		                         String category, String color, String iconName, String backgroundType, String address) {
+			this.lat = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			this.lon = Double.parseDouble(LAT_LON_FORMAT.format(lon));
+			this.time = System.currentTimeMillis();
+			this.desc = description;
+			this.name = name;
+			this.category = category;
+			if (color != null) {
+				setColor(color);
+			}
+			if (iconName != null) {
+				setIconName(iconName);
+			}
+			if (backgroundType != null) {
+				setBackgroundType(backgroundType);
+			}
+			if (address != null) {
+				setAddress(address);
 			}
 		}
 	}
@@ -1569,6 +1595,25 @@ public class GPXUtilities {
 
 			return points.remove(point);
 		}
+		
+		public boolean deleteWptPt(String wptName) {
+			int index = -1;
+			WptPt point = null;
+			for (WptPt p : points) {
+				if (p.name.equals(wptName)) {
+					index = points.indexOf(p);
+					break;
+				}
+			}
+			if (index != -1) {
+				point = points.get(index);
+			}
+			removePointFromGroup(points.get(index));
+			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
+			
+			return points.remove(point);
+		}
 
 		private void removePointFromGroup(WptPt point) {
 			removePointFromGroup(point, point.category);
@@ -1580,6 +1625,25 @@ public class GPXUtilities {
 				group.points.remove(point);
 			}
 		}
+		
+		public void updateWptPtWeb(WptPt wptPt, String wptName) {
+			int index = -1;
+			for (WptPt p : points) {
+				if (p.name.equals(wptName)) {
+					index = points.indexOf(p);
+					break;
+				}
+			}
+			
+			if (index != -1) {
+				updateWptPt(points.get(index), wptPt.lat, wptPt.lon,
+						wptPt.desc, wptPt.name, wptPt.category, wptPt.extensions.get(COLOR_NAME_EXTENSION),
+						wptPt.extensions.get(ICON_NAME_EXTENSION), wptPt.extensions.get(BACKGROUND_TYPE_EXTENSION),
+						wptPt.extensions.get(ADDRESS_EXTENSION));
+			} else {
+				addPoint(wptPt);
+			}
+		}
 
 		public void updateWptPt(WptPt point, double lat, double lon, String description, String name,
 		                        String category, int color, String iconName, String backgroundType) {
@@ -1587,6 +1651,25 @@ public class GPXUtilities {
 			String prevGroupName = point.category;
 			point.updatePoint(lat, lon, description, name, category, color, iconName, backgroundType);
 
+			if (Algorithms.stringsEqual(category, prevGroupName)
+					|| Algorithms.isEmpty(category) && Algorithms.isEmpty(prevGroupName)) {
+				removePointFromGroup(point, prevGroupName);
+				PointsGroup pointsGroup = getOrCreateGroup(point);
+				pointsGroup.points.add(point);
+			}
+			if (index != -1) {
+				points.set(index, point);
+			}
+			modifiedTime = System.currentTimeMillis();
+			pointsModifiedTime = modifiedTime;
+		}
+		
+		public void updateWptPt(WptPt point, double lat, double lon, String description, String name,
+		                        String category, String color, String iconName, String backgroundType, String address) {
+			int index = points.indexOf(point);
+			String prevGroupName = point.category;
+			point.updatePoint(lat, lon, description, name, category, color, iconName, backgroundType, address);
+			
 			if (Algorithms.stringsEqual(category, prevGroupName)
 					|| Algorithms.isEmpty(category) && Algorithms.isEmpty(prevGroupName)) {
 				removePointFromGroup(point, prevGroupName);
