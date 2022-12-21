@@ -11,12 +11,12 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -250,7 +250,7 @@ public class PoiFiltersHelper {
 	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
 		if (cacheTopStandardFilters == null) {
 			// user defined
-			cacheTopStandardFilters = new ArrayList<>(getUserDefinedPoiFilters(true));
+			List<PoiUIFilter> cacheTopStandardFilters = new ArrayList<>(getUserDefinedPoiFilters(true));
 			// default
 			List<PoiUIFilter> filters = new ArrayList<>();
 			MapPoiTypes poiTypes = application.getPoiTypes();
@@ -259,7 +259,7 @@ public class PoiFiltersHelper {
 				filters.add(f);
 			}
 			PluginsHelper.registerCustomPoiFilters(filters);
-			cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
+			this.cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
 		for (PoiUIFilter filter : cacheTopStandardFilters) {
