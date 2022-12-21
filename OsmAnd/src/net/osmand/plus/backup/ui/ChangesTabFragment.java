@@ -19,17 +19,24 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 
-public class ChangesTabFragment extends BaseOsmAndFragment {
+public abstract class ChangesTabFragment extends BaseOsmAndFragment {
+
 	protected OsmandApplication app;
-	private boolean nightMode;
 
-	private ChangesAdapter adapter;
-	private List<SettingsItem> changeList;
+	private List<SettingsItem> settingsItems;
+
 	private ChangesTabType tabType;
+	private ChangesAdapter adapter;
 
-	public ChangesTabFragment(OsmandApplication app) {
-		this.app = app;
-		nightMode = !app.getSettings().isLightContent();
+	protected boolean nightMode;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = requireMyApplication();
+		nightMode = isNightMode(false);
+		tabType = getChangesTabType();
+		settingsItems = getSettingsItems();
 	}
 
 	@Nullable
@@ -38,7 +45,7 @@ public class ChangesTabFragment extends BaseOsmAndFragment {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
 
-		adapter = new ChangesAdapter(changeList, nightMode, tabType, getActivity().getSupportFragmentManager());
+		adapter = new ChangesAdapter(settingsItems, nightMode, tabType, requireActivity().getSupportFragmentManager());
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -49,35 +56,14 @@ public class ChangesTabFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	public abstract ChangesTabType getChangesTabType();
+
+	public abstract List<SettingsItem> getSettingsItems();
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		updateAdapter();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	public List<SettingsItem> getChangeList() {
-		return changeList;
-	}
-
-	public void setChangeList(List<SettingsItem> changeList) {
-		this.changeList = changeList;
-	}
-
-	public void setTabType(ChangesTabType tabType) {
-		this.tabType = tabType;
-	}
-
-	public ChangesTabType getTabType() {
-		return tabType;
-	}
-
-	public String getTitle() {
-		return app.getString(tabType.resId);
 	}
 
 	private void updateAdapter() {

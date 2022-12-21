@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -98,238 +97,43 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:id="@+id/local_changes"
+			android:id="@+id/actions_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			tools:background="?android:attr/selectableItemBackground">
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginStart="@dimen/settings_divider_margin_start"
-				android:background="?attr/dashboard_divider"
-				android:focusable="false" />
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/local_changes_icon"
-					android:layout_width="@dimen/standard_icon_size"
-					android:layout_height="@dimen/standard_icon_size"
-					android:layout_gravity="center_vertical"
-					android:layout_margin="@dimen/content_padding"
-					android:src="@drawable/ic_action_phone_filled" />
-
-				<LinearLayout
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
-					android:layout_weight="1"
-					android:orientation="vertical"
-					android:paddingHorizontal="@dimen/content_padding">
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:ellipsize="marquee"
-						android:fadingEdge="horizontal"
-						android:letterSpacing="@dimen/text_button_letter_spacing"
-						android:maxLines="2"
-						android:text="@string/local_changes"
-						android:textColor="?android:textColorPrimary"
-						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
-
-				</LinearLayout>
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/local_changes_count"
-					style="@style/SmallDescStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:gravity="center_vertical"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:textColor="?android:textColorSecondary"
-					tools:text="0" />
-
-			</LinearLayout>
-
-		</LinearLayout>
-
-
-		<LinearLayout
-			android:id="@+id/cloud_changes"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?android:attr/selectableItemBackground"
 			android:orientation="vertical">
 
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:layout_marginStart="@dimen/settings_divider_margin_start"
-				android:background="?attr/dashboard_divider"
-				android:focusable="false" />
+				android:layout_marginStart="@dimen/content_padding"
+				android:background="?attr/divider_color_basic" />
 
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+			<include
+				android:id="@+id/local_changes_button"
+				layout="@layout/preference_button_end_text" />
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/cloud_changes_icon"
-					android:layout_width="@dimen/standard_icon_size"
-					android:layout_height="@dimen/standard_icon_size"
-					android:layout_gravity="center_vertical"
-					android:layout_margin="@dimen/content_padding"
-					android:src="@drawable/ic_action_cloud" />
+			<include layout="@layout/divider_half_item" />
 
-				<LinearLayout
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
-					android:layout_weight="1"
-					android:orientation="vertical"
-					android:paddingHorizontal="@dimen/content_padding">
+			<include
+				android:id="@+id/cloud_changes_button"
+				layout="@layout/preference_button_end_text" />
 
-					<net.osmand.plus.widgets.TextViewEx
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:ellipsize="marquee"
-						android:fadingEdge="horizontal"
-						android:letterSpacing="@dimen/text_button_letter_spacing"
-						android:maxLines="2"
-						android:text="@string/cloud_changes"
-						android:textColor="?android:textColorPrimary"
-						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+			<include layout="@layout/divider_half_item" />
 
-				</LinearLayout>
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/cloud_changes_count"
-					style="@style/SmallDescStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:gravity="center_vertical"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:textColor="?android:textColorSecondary"
-					tools:text="0" />
-
-			</LinearLayout>
+			<include
+				android:id="@+id/conflicts_button"
+				layout="@layout/preference_button_end_text" />
 
 		</LinearLayout>
 
-		<LinearLayout
-			android:id="@+id/conflict_button"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			tools:background="?android:attr/selectableItemBackground">
+		<include layout="@layout/simple_divider_item" />
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginStart="@dimen/settings_divider_margin_start"
-				android:background="?attr/dashboard_divider"
-				android:focusable="false" />
+		<include
+			android:id="@+id/sync_button"
+			layout="@layout/preference_button" />
 
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/conflicts_icon"
-					android:layout_width="@dimen/standard_icon_size"
-					android:layout_height="@dimen/standard_icon_size"
-					android:layout_gravity="center_vertical"
-					android:layout_margin="@dimen/content_padding"
-					android:src="@drawable/ic_action_alert" />
-
-				<LinearLayout
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
-					android:layout_weight="1"
-					android:orientation="vertical"
-					android:paddingHorizontal="@dimen/content_padding">
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:ellipsize="marquee"
-						android:fadingEdge="horizontal"
-						android:letterSpacing="@dimen/text_button_letter_spacing"
-						android:maxLines="2"
-						android:text="@string/backup_conflicts"
-						android:textColor="?android:textColorPrimary"
-						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
-
-				</LinearLayout>
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/conflicts_count"
-					style="@style/SmallDescStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:gravity="center_vertical"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:textColor="?android:textColorSecondary"
-					tools:text="0" />
-
-			</LinearLayout>
-
-		</LinearLayout>
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"
-			android:focusable="false" />
-
-		<LinearLayout
-			android:id="@+id/sync_now_button"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			tools:background="?android:attr/selectableItemBackground">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@android:id/icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
-				android:layout_margin="@dimen/content_padding"
-				android:src="@drawable/ic_action_update"
-				android:tint="?colorAccent" />
-
-			<LinearLayout
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:orientation="vertical"
-				android:paddingHorizontal="@dimen/content_padding">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/sync_now_title"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:ellipsize="marquee"
-					android:fadingEdge="horizontal"
-					android:letterSpacing="@dimen/text_button_letter_spacing"
-					android:maxLines="2"
-					android:text="@string/sync_now"
-					android:textColor="?colorAccent"
-					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular" />
-			</LinearLayout>
-
-		</LinearLayout>
 	</LinearLayout>
 
+	<include layout="@layout/card_bottom_divider" />
 
 </LinearLayout>

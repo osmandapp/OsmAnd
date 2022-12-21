@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> {
+
 	public static final int SYNC_STATUS_HEADER_TYPE = 0;
 	public static final int LIST_HEADER_TYPE = 1;
 	public static final int LIST_ITEM_TYPE = 2;

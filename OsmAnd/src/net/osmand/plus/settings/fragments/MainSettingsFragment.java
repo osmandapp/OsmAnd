@@ -20,8 +20,8 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
@@ -137,7 +137,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				if (app.getBackupHelper().isRegistered()) {
-					BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+					BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
 				} else {
 					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}

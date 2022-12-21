@@ -39,7 +39,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 	public static final int ACTION_BUTTON_TYPE = 4;
 	public static final int RESTORE_TYPE = 5;
 	public static final int INTRODUCTION_TYPE = 7;
-	public static final int SYNC_CARD_TYPE = 8;
 
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
@@ -109,7 +108,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 				items.add(ACTION_BUTTON_TYPE);
 			}
 		}
-		items.add(SYNC_CARD_TYPE);
 		items.add(RESTORE_TYPE);
 		notifyDataSetChanged();
 	}
@@ -140,9 +138,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 			case INTRODUCTION_TYPE:
 				itemView = inflater.inflate(R.layout.backup_introduction_card, viewGroup, false);
 				return new IntroductionViewHolder(itemView);
-			case SYNC_CARD_TYPE:
-				itemView = inflater.inflate(R.layout.cloud_sync_card, viewGroup, false);
-				return new CloudSyncCardViewHolder(itemView);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -183,9 +178,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		} else if (holder instanceof IntroductionViewHolder) {
 			IntroductionViewHolder viewHolder = (IntroductionViewHolder) holder;
 			viewHolder.bindView(mapActivity, fragment, backup, dialogType, nightMode);
-		} else if (holder instanceof CloudSyncCardViewHolder) {
-			CloudSyncCardViewHolder viewHolder = (CloudSyncCardViewHolder) holder;
-			viewHolder.bindView(nightMode, mapActivity.getSupportFragmentManager(), info);
 		}
 	}
 
@@ -202,8 +194,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 			return ACTION_BUTTON_TYPE;
 		} else if (Algorithms.objectEquals(obj, INTRODUCTION_TYPE)) {
 			return INTRODUCTION_TYPE;
-		} else if (Algorithms.objectEquals(obj, SYNC_CARD_TYPE)) {
-			return SYNC_CARD_TYPE;
 		} else if (obj instanceof SettingsItem) {
 			return UPLOAD_TYPE;
 		} else if (obj instanceof Pair) {

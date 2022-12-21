@@ -25,7 +25,7 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -102,16 +102,16 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Nullable
 	public LoginDialogType getDialogType() {
 		Fragment parent = getParentFragment();
-		if (parent instanceof BackupAndRestoreFragment) {
-			return ((BackupAndRestoreFragment) parent).getDialogType();
+		if (parent instanceof BackupCloudFragment) {
+			return ((BackupCloudFragment) parent).getDialogType();
 		}
 		return null;
 	}
 
 	public void removeDialogType() {
 		Fragment parent = getParentFragment();
-		if (parent instanceof BackupAndRestoreFragment) {
-			((BackupAndRestoreFragment) parent).removeDialogType();
+		if (parent instanceof BackupCloudFragment) {
+			((BackupCloudFragment) parent).removeDialogType();
 		}
 	}
 

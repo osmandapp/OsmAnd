@@ -238,10 +238,12 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	public static int calculateMaxProgress(@NonNull OsmandApplication app) {
 		int maxProgress = 0;
 		BackupHelper backupHelper = app.getBackupHelper();
-		PrepareBackupResult backup = backupHelper.getBackup();
-//		for (RemoteFile file : backup.getBackupInfo().filesToDownload) {
-//			maxProgress += backupHelper.calculateFileSize(file);
-//		}
+		BackupInfo info = backupHelper.getBackup().getBackupInfo();
+		if (info != null) {
+			for (RemoteFile file : info.filesToDownload) {
+				maxProgress += backupHelper.calculateFileSize(file);
+			}
+		}
 		return maxProgress;
 	}
 

@@ -202,6 +202,11 @@ public class BackupHelper {
 		if (info != null) {
 			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
 				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
+				if (restoreItem instanceof CollectionSettingsItem) {
+					CollectionSettingsItem settingsItem = (CollectionSettingsItem) restoreItem;
+					settingsItem.processDuplicateItems();
+					settingsItem.setShouldReplace(true);
+				}
 				if (restoreItem != null && !restoreItem.exists()) {
 					itemsForRestore.add(restoreItem);
 				}
