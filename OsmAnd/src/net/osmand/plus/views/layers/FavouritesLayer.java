@@ -242,7 +242,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
 			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
-				for (FavouritePoint favoritePoint : group.getPoints()) {
+				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
+				for (FavouritePoint favoritePoint : points) {
 					double lat = favoritePoint.getLatitude();
 					double lon = favoritePoint.getLongitude();
 					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
