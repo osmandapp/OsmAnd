@@ -4810,7 +4810,7 @@
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
     <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Zeigt die Geschwindigkeit an, mit der der Benutzer in die Pedale tritt</string>
-    <string name="depth_contours">Tiefenkonturen</string>
+    <string name="depth_contours">Tiefenlinien</string>
     <string name="worldwide_maps">Weltweite Karten</string>
     <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
     <string name="ant_missing_dependency_descr">Der erforderliche Dienst \"%1$s\" konnte nicht gefunden werden.
@@ -4987,4 +4987,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windböen-Isolinien</string>
+    <string name="shared_string_expires">Abgelaufen</string>
+    <string name="shared_string_purchased_on">Gekauft am</string>
 </resources>

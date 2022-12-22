@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class LiveUpdatesHelper {
+
 	private static final String UPDATE_TIMES_POSTFIX = "_update_times";
 	private static final String TIME_OF_DAY_TO_UPDATE_POSTFIX = "_time_of_day_to_update";
 	private static final String DOWNLOAD_VIA_WIFI_POSTFIX = "_download_via_wifi";
@@ -254,12 +255,7 @@ public class LiveUpdatesHelper {
 
 	public static void runLiveUpdate(Context context, boolean userRequested, LiveUpdateListener listener) {
 		for (LocalIndexInfo mapToUpdate : listener.getMapsToUpdate()) {
-			runLiveUpdate(context, mapToUpdate.getFileName(), userRequested, new Runnable() {
-				@Override
-				public void run() {
-					listener.processFinish();
-				}
-			});
+			runLiveUpdate(context, mapToUpdate.getFileName(), userRequested, listener::processFinish);
 		}
 	}
 

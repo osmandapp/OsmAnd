@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Τύπος καυσίμου</string>
     <string name="poi_fuel_avia_type">Τύπος καυσίμου (αεροπορία)</string>
@@ -32,7 +32,7 @@
     <string name="poi_observatory_designation">Περιγραφή</string>
     <string name="poi_telescope_type">Τύπος</string>
     <string name="poi_animal_training_type">Τύπος</string>
-    <string name="poi_diplomatic_filter">Τύπος</string>
+    <string name="poi_diplomatic_filter">Διπλωματικό ίδρυμα</string>
     <string name="poi_city_capital">Πρωτεύουσα</string>
     <string name="poi_pharmacy_dispensing">Διανομή</string>
     <string name="poi_healthcare_alternative_types">Ειδικότητα</string>
@@ -194,7 +194,6 @@
     <string name="poi_dive">Καταδυτικός εξοπλισμός</string>
     <string name="poi_doityourself">Ανακαίνιση</string>
     <string name="poi_doors">Θύρες</string>
-    
     <string name="poi_fishing">Εξοπλισμός ψαρέματος</string>
     <string name="poi_florist">Ανθοπωλείο</string>
     <string name="poi_frame">Κατάστημα κορνιζών</string>
@@ -236,7 +235,6 @@
     <string name="poi_scuba_diving_shop">Είδη αυτόνομης κατάδυσης</string>
     <string name="poi_ship_chandler">Προμηθευτής πλοίων</string>
     <string name="poi_sports">Αθλητικά είδη</string>
-    
     <string name="poi_cuisine_deli">Εδεσματοπωλείο</string>
     <string name="poi_stationery">Είδη γραφείου</string>
     <string name="poi_ticket">Εισιτήρια</string>
@@ -283,7 +281,7 @@
     <string name="poi_ambulance_station">Σταθμός ασθενοφόρων</string>
     <string name="poi_ses_station">Σταθμός SES</string>
     <string name="poi_emergency_access_point">Σημείο επείσουσας πρόσβασης</string>
-    <string name="poi_ford">Πέρασμα</string>
+    <string name="poi_ford">Υδάτινο πέρασμα / Ιρλανδική διάβαση</string>
     <string name="poi_ford_stepping_stones">Πέρασμα με πέτρες</string>
     <string name="poi_mountain_pass">Ορεινό πέρασμα</string>
     <string name="poi_gate">Πύλη</string>
@@ -343,7 +341,7 @@
     <string name="poi_halt">Στάση σιδηροδρόμου</string>
     <string name="poi_subway_entrance">Είσοδος μετρό</string>
     <string name="poi_subway_station">Ναι</string>
-    <string name="poi_traffic_calming_cushion">Μαξιλαράκι ταχύτητας</string>
+    <string name="poi_traffic_calming_cushion">Σαμαράκι</string>
     <string name="poi_traffic_calming_chicane">Επιβραδυντής (απότομη στροφή)</string>
     <string name="poi_traffic_calming_rumble_strip">Λωρίδα τραχειάς επιφάνειας</string>
     <string name="poi_traffic_calming_table">Πίνακας ταχύτητας</string>
@@ -393,9 +391,8 @@
     <string name="poi_groyne">Πρόβολος</string>
     <string name="poi_power_generator">Ηλεκτρική γεννήτρια</string>
     <string name="poi_power_tower">Ηλεκτρικός πυλώνας</string>
-    <string name="poi_traffic_calming_choker">Σαμαράκι (στραγγαλιστής)</string>
+    <string name="poi_traffic_calming_choker">Στραγγαλιστής</string>
     <string name="poi_aerialway_pylon">Πυλώνας εναέριου αναβατήρα</string>
-    
     <string name="poi_communication_tower">Πύργος επικοινωνιών</string>
     <string name="poi_observation_tower">Παρατηρητήριο</string>
     <string name="poi_bell_tower">Καμπαναριό</string>
@@ -547,7 +544,6 @@
     <string name="poi_pension_fund">Ταμείο συντάξεων</string>
     <string name="poi_migration">Μετανάστευση</string>
     <string name="poi_tax_inspection">Φορολογική επιθεώρηση</string>
-    
     <string name="poi_customs">Τελωνεία</string>
     <string name="poi_country">Ύπαιθρος</string>
     <string name="poi_city">Πόλη</string>
@@ -992,7 +988,7 @@
     <string name="poi_sinkhole">Καταβόθρα</string>
     <string name="poi_waterfall">Καταρράκτης</string>
     <string name="poi_river">Ποταμός</string>
-    <string name="poi_stream">Ρυάκι</string>
+    <string name="poi_stream">Ρέμα</string>
     <string name="poi_rapids">Ορμητικό ρεύμα</string>
     <string name="poi_stone">Αξιοσημείωτος λίθος</string>
     <string name="poi_cape">Ακρωτήριο</string>
@@ -2857,7 +2853,6 @@
     <string name="poi_aquaculture_shrimp">Υδατοκαλλιέργεια: γαρίδα</string>
     <string name="poi_aquaculture_fish">Υδατοκαλλιέργεια: ψάρια</string>
     <string name="poi_aquaculture_mussels">Υδατοκαλλιέργεια: μύδια</string>
-    
     <string name="poi_min_age">Ελάχιστη ηλικία</string>
     <string name="poi_organic_yes">Ναι</string>
     <string name="poi_organic_no">Όχι</string>
@@ -3807,4 +3802,19 @@
     <string name="poi_sms_yes">Ναι</string>
     <string name="poi_dive_centre">Κέντρο αυτόνομης κατάδυσης</string>
     <string name="poi_resort_hunting">Βάση κυνηγιού</string>
+    <string name="poi_embassy_filter">Πρεσβεία</string>
+    <string name="poi_consulate_filter">Προξενιό</string>
+    <string name="poi_access_general">Γενική πρόσβαση</string>
+    <string name="poi_bay_filter">Τύπος όρμου</string>
+    <string name="poi_access_motorcar">Πρόσβαση μηχανοκίνητου αυτοκινήτου</string>
+    <string name="poi_access_bicycle">Πρόσβαση ποδηλάτου</string>
+    <string name="poi_shelter_filter">Καταφύγιο</string>
+    <string name="poi_tobacco_filter">Τσιγάρα</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Μη μεταναστευτικές βίζες</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Μεταναστευτικές βίζες</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Υπηρεσίες πολίτη</string>
+    <string name="poi_coffee_filter">Καφές</string>
+    <string name="poi_ice_cream_filter">Παγωτό</string>
+    <string name="poi_access_scooter">Πρόσβαση σκούτερ</string>
+    <string name="poi_authentication_contactless">Ανέπαφη επαλήθευση</string>
 </resources>

@@ -140,15 +140,15 @@
     <string name="route_points">Pontos da rota</string>
     <string name="track_segments">Segmentos da trilha</string>
     <string name="shared_string_online_maps">Mapas on-line</string>
-    <string name="osmand_rastermaps_plugin_description">Acesse quantos tipos de mapas on-line (os chamados mosaicos ou varreduras) desejados, desde mosaicos OSM predefinidos (como Mapnik) a imagens de satélite e camadas de finalidade especial, como mapas climáticos, mapas climáticos, mapas geológicos, camadas de colinas, etc.
+    <string name="osmand_rastermaps_plugin_description">Acesse quantos tipos de mapas on-line (os chamados mosaicos ou varreduras) desejados, como mosaicos OSM pré-renderizados, imagens de satélite e camadas de finalidade especial, como mapas meteorológicos, mapas climáticos, mapas geológicos, camadas de sombra de relevo, etc.
 \n
-\n  Qualquer um desses mapas pode ser usado como o mapa padrão a ser exibido ou como uma sobreposição ou sobreposição em outro mapa base (como os mapas offline padrão do OsmAnd). Certos elementos dos mapas vetoriais do OsmAnd podem ser ocultados no menu \'Configurar mapa\' para tornar qualquer mapa subjacente mais visível.
+\n  Qualquer um desses mapas pode ser mostrado como o mapa padrão (base) ou como uma sobrecamada ou subcamada em outro mapa base (como os mapas de vetor offline do OsmAnd). Certos elementos dos mapas vetoriais do OsmAnd podem ser ocultados no menu \'Configurar mapa\' para tornar qualquer mapa subjacente mais visível.
 \n
-\n  Faça o download dos mapas de blocos diretamente on-line ou prepare-os para uso offline (copiados manualmente para a pasta de dados do OsmAnd) como um banco de dados SQLite que pode ser produzido por uma variedade de ferramentas de preparação de mapas de terceiros.</string>
+\n  Baixe os mapas de blocos diretamente ou copie como arquivos de banco de dados SQLite para a pasta de dados do OsmAnd usando ferramentas de preparação de mapas de terceiros.</string>
     <string name="record_plugin_name">Gravação de viagem</string>
-    <string name="record_plugin_description">Permite gravar, salvar e analisar seus dados de treinamento ou movimento, como velocidade, subidas, descidas ou alívio de rota, que podem ser reutilizados, aprimorados, complementados ou compartilhados com amigos.
+    <string name="record_plugin_description">Grave suas viagens ou treinamentos e analise os em termos de velocidades e subidas e descidas acumuladas. As trilhas gravadas podem ser arquivadas, compartilhadas com os amigos, editada e pós processadas.
 \n
-\nComo funciona - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nLeia mais em https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nível</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para curvas de nível off-line</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
@@ -165,11 +165,11 @@
 \n
 \nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar.</string>
     <string name="plugin_nautical_name">Mapa náutico</string>
-    <string name="plugin_nautical_descr">Ligue para enriquecer seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas de perigo, zonas onde é permitido ou proibido navegar ou atracar, etc.
+    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
 \n
-\nComo funciona - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nLeitura adicional em https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
-    <string name="plugin_ski_descr">Projetado para navegar em locais de esportes de inverno. Observe as pistas de esqui, os marcadores do teleférico e as linhas coloridas que indicam a complexidade de cada pista. Para usar depois de ativar, vá para Configurar mapa e escolha o tipo de mapa \"Inverno e esqui\".</string>
+    <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
     <string name="audionotes_plugin_description">Faça anotações de áudio/foto/vídeo durante uma viagem, usando um botão de mapa ou o menu de contexto da localização.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
@@ -200,9 +200,11 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam a avaliar visualmente a forma da superfície do terreno, considerando curvatura, extremos, inclinação, pontos de igual altura e muito mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno para a subida e descida e a cor do desvio do ângulo de inclinação do plano. Dados do SRTM e ASTER.
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras e declives, ajudam você a visualizar a forma e a suavidade do terreno, a dirigibilidade e mais. As informações topográficas em um mapa podem ser representadas pelo sombreamento do declive, linhas de contorno e/ou cor da inclinação do plano. 
 \n
-\nComo funciona - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nOs dados subjacentes são originários do SRTM e ASTER.
+\n
+\nLeia mais em http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
     <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
@@ -3325,7 +3327,7 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Recomendação: é difícil prever o que será gravado e o que não será, talvez seja melhor desativar esse filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observação: se o GPS estava desligado imediatamente antes de uma gravação, o primeiro ponto medido pode ter uma precisão diminuída; portanto, em nosso código, podemos esperar um segundo antes da gravação de um ponto (ou gravar o melhor de três pontos consecutivos, etc.), mas isso ainda não foi implementado.</string>
     <string name="monitoring_min_distance_descr">Ligar este filtro permite evitar a gravação de dados adicionais quando o movimento quase não é detectado. Também melhora a aparência espacial de trilhas sem processamento adicional.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: períodos em repouso não são registrados em absoluto ou em apenas um ponto cada. Pequenos movimentos (do mundo real) (por exemplo, de lado, para marcar um possível desvio na sua viagem) podem ser filtrados. Seu arquivo contém menos informações para pós-processamento e possui estatísticas piores ao filtrar pontos obviamente redundantes no tempo de gravação, mantendo potencialmente artefatos causados por má recepção ou efeitos de chipset GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efeitos colaterais: períodos em repouso não são registrados em absoluto ou em apenas um ponto cada. Pequenos movimentos (por exemplo, ao lado da via para marcar um possível desvio na sua viagem) podem ser filtrados. Note que seu arquivo contém menos informações para o pós processamento e, ao mesmo tempo, pode potencialmente salvar artefatos de GPS causados por má recepção ou efeitos de chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendação: Defina um deslocamento de 5 metros se você não quiser registrar pequenos detalhes de sua rota e não precisar de dados adicionais sobre seu período de descanso.</string>
     <string name="live_monitoring_time_buffer">Buffer de tempo</string>
     <string name="live_monitoring_tracking_interval">Intervalo de rastreamento</string>
@@ -3442,7 +3444,7 @@
     <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
     <string name="shared_string_terrain">Terreno</string>
-    <string name="hillshade_description">Mapa de sombras de relevo usando tons escuros para mostrar encostas, picos e planícies.</string>
+    <string name="hillshade_description">Mapas de sombra de relevo usa tons escuros para mostrar encostas, picos e planícies.</string>
     <string name="slope_description">A inclinação usa cores para visualizar a inclinação do terreno.</string>
     <string name="terrain_slider_description">Defina os níveis mínimo e máximo de zoom nos quais a camada será exibida.</string>
     <string name="hillshade_download_description">Mapas adicionais são necessários para visualizar sombras de relevo no mapa.</string>
@@ -3641,7 +3643,7 @@
     <string name="uninstall_speed_cameras">Desinstalar radares de velocidade</string>
     <string name="shared_string_legal">Legal</string>
     <string name="speed_camera_pois">POIs de radares de velocidade</string>
-    <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de aplicativos de aviso de radares é proibido por lei.
+    <string name="speed_cameras_legal_descr">Em alguns países ou regiões, o uso de apps de alerta de radares é proibido por lei.
 \n
 \nVocê precisa fazer uma escolha, dependendo da lei do seu país.
 \n
@@ -4529,7 +4531,7 @@
     <string name="max_speed_widget_desc">Exibe o limite de velocidade para a estrada atual.</string>
     <string name="battery_widget_desc">Mostra o nível da bateria do seu dispositivo.</string>
     <string name="radius_rules_widget_desc">A ferramenta de régua de raio exibe círculos de distância ao redor de um ponto selecionado no mapa.</string>
-    <string name="current_speed_widget_desc">Mostra sua velocidade atual detectada pelo sensor GPS.</string>
+    <string name="current_speed_widget_desc">Mostra a sua velocidade atual reportada via GPS.</string>
     <string name="shared_string_mode">Modo</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares</string>
@@ -4564,7 +4566,7 @@
     <string name="simulation_preview_mode_title">Modo de visualização rápida</string>
     <string name="audio_video_notes_desc">Permite um acesso rápido para iniciar/parar uma gravação de áudio, vídeo ou fotografia.</string>
     <string name="map_markers_bar_widget_desc">Na barra superior, mostra a distância e a direção do marcador a partir da localização atual. É possível configurar para ver 1 ou 2 marcadores superiores.</string>
-    <string name="track_attach_to_the_roads_descr">A trilha será anexada à estrada usando mapas offline, a geometria da trilha será alterada.</string>
+    <string name="track_attach_to_the_roads_descr">A trilha será anexada à estradas usando mapas offline, a geometria da trilha será alterada.</string>
     <string name="on_with_params">%1$s em %2$s</string>
     <string name="simulation_constant_mode_desc">A simulação será realizada com velocidade selecionada constante.</string>
     <string name="map_widget_distance_to_intermediate">Distância para intermediário</string>
@@ -4660,7 +4662,7 @@
     <string name="list_of_groups">Lista de grupos</string>
     <string name="exit_import_descr">Sair sem salvar nenhuma alteração\?</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
-    <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para exibir informações como distância, chegada ou tempo esquerdo, curvas nas próximas, rolamentos, nome da rua atual, informações de faixas, velocidade máxima, alertas, POIs, waypoints se aproximando.</string>
+    <string name="navigation_points_desc">Os widgets de navegação são ativados durante a navegação para exibir informações como distância, chegada ou tempo restante, próximas curvas, rolamentos, nome da rua atual/seguinte, informações de faixa, velocidade máxima, aproximação de alertas, POI e pontos de trajetos.</string>
     <string name="street_name_widget_desc">Mostra o nome da rua atual com uma seta de direção em frente ou então o nome da rua seguinte com uma seta a indicar a manobra seguinte.</string>
     <string name="add_page">Adicionar página</string>
     <string name="page_number">Página %1$s</string>
@@ -4920,15 +4922,15 @@
     <string name="purchases_feature_desc_external_sensors">Exiba e registre dados de sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
     <string name="share_crash_log">Compartilhar registro de falhas</string>
     <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se você parar agora, o aplicativo pode não funcionar corretamente.</string>
-    <string name="release_4_3">Novo mecanismo de renderização de mapas mais rápido (versão 2 - OpenGL), com visualização 2.5D
+    <string name="release_4_3">• Novo, mais rápido Versão 2 (OpenGL) do motor de renderização de mapa, com visualização 2.5D
 \n
-\n • Animação suave em alterações de localização durante o movimento
+\n • Animação suave em alterações de localização em movimento
 \n
 \n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
-\n • Opções de tamanho de texto adicionadas \"Distância com 2 dedos\"
+\n • \"Distância com 2 dedos\": Adicionado opções de tamanho de texto
 \n
-\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n • Widget \"Marcadores\": Adicionada opção para alterar o comportamento do clique
 \n
 \n • Corrigida opção de \"Posição na tela\"
 \n
@@ -4939,6 +4941,10 @@
 \n • Adicionado suporte para sensores ANT+
 \n
 \n • Opção adicionada para desativar o descarregamento do UUID
+\n
+\n• Previsão ajustável de velocidade padrão para tempos de viagem de caminhada/caminhada/corrida dependentes da elevação
+\n
+\n• Saída de áudio corrigida e comportamento do controle deslizante de volume
 \n
 \n</string>
     <string name="quick_action_temperature_layer">Uma alternância para mostrar ou ocultar a camada de temperatura no mapa.</string>
@@ -4966,4 +4972,10 @@
     <string name="shared_string_open">Aberto</string>
     <string name="open_weather_action_description">Permite abrir uma tela com informações meteorológicas detalhadas.</string>
     <string name="open_weather_action">Abrir meteorologia</string>
+    <string name="weather_plugin_description">Fornece
+\n- a previsão do tempo para 24 horas e 7 dias com 5 camadas
+\n- widgets baseados na localização
+\n- isolinhas de temperatura / pressão
+\n
+\nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
 </resources>

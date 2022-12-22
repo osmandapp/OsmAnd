@@ -4986,4 +4986,7 @@
     <string name="shared_string_open">Buka</string>
     <string name="open_weather_action_description">Memungkinkan Anda untuk membuka layar dengan informasi cuaca rinci.</string>
     <string name="open_weather_action">Buka cuaca</string>
+    <string name="shared_string_purchased_on">Dibeli pada</string>
+    <string name="shared_string_expires">Kedaluwarsa pada</string>
+    <string name="release_4_4_pre">• Di sini akan ada string untuk rilis 4.4</string>
 </resources>

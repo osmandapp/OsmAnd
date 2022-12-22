@@ -4987,4 +4987,6 @@
     <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
     <string name="release_4_4_pre">• Aqui estarão as cadeias para a versão 4.4</string>
     <string name="shared_string_open">Aberto</string>
+    <string name="shared_string_expires">Expira</string>
+    <string name="shared_string_purchased_on">Comprado em</string>
 </resources>

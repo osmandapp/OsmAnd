@@ -61,6 +61,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import static net.osmand.plus.download.DownloadIndexesThread.*;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.DEFAULT_LAST_CHECK;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
@@ -77,7 +78,8 @@ import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
-public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
+public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment
+		implements RefreshLiveUpdates, DownloadEvents {
 
 	public static final String TAG = LiveUpdatesSettingsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsBottomSheet.class);
@@ -599,6 +601,19 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 			confirmationInterface.updateList();
 		}
 		refreshUpdateTimeInfo();
+		updateFileSize();
+	}
+
+	@Override
+	public void onUpdatedIndexesList() {
+	}
+
+	@Override
+	public void downloadInProgress() {
+	}
+
+	@Override
+	public void downloadHasFinished() {
 		updateFileSize();
 	}
 

@@ -3336,4 +3336,13 @@
     <string name="favorite_delete_group">Qrupu sil</string>
     <string name="distance_by_tap_use_description">Xəritəyə toxunaraq hazırkı məkanınız və toxunduğunuz nöqtə arasındakı məsafəni görün.
 \nXəritəyə 2 barmağınızla toxunaraq toxunulan nöqtələr arasındakı məsafəni görün.</string>
+    <string name="old_map_index_is_not_supported">Köhnəlmiş xəritə məlumatları formatı “{0}” dəstəklənmir</string>
+    <string name="warning_tile_layer_not_downloadable">Proqram %1$s xəritə qatını endirə bilmir, yenidən quraşdırmaq problemi həll edə bilər.</string>
+    <string name="version_index_is_big_for_memory">“{0}” indeksi üçün yaddaşda yer yoxdur</string>
+    <string name="version_index_is_not_supported">“{0}” indeksinin versiyası dəstəklənmir</string>
+    <string name="search_osm_offline">Coğrafi məkana görə axtarış</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_olc_info_area">Etibarlı tam OLC
+\nTəmsil edilən ərazi: %1$s x %2$s</string>
+    <string name="map_widget_distance_by_tap">Toxunuşla məsafə</string>
 </resources>

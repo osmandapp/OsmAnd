@@ -4976,4 +4976,6 @@
     <string name="shared_string_open">開啟</string>
     <string name="open_weather_action_description">讓您可以開啟有詳細天氣資訊的畫面。</string>
     <string name="open_weather_action">開啟天氣</string>
+    <string name="shared_string_expires">過期</string>
+    <string name="shared_string_purchased_on">購買於</string>
 </resources>

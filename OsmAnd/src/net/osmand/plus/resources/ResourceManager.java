@@ -118,8 +118,8 @@ public class ResourceManager {
 	private boolean reloadingIndexes;
 
 	public interface ResourceListener {
-		void onMapsIndexed();
-		void onMapClosed(String fileName);
+		default void onMapsIndexed() {}
+		default void onMapClosed(String fileName) {}
 	}
 
 	// Indexes

@@ -417,7 +417,7 @@
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
     <string name="search_poi_category_hint">Enigu ion por serĉi</string>
     <string name="agps_info">A-GPS informoj</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Etikedoj “riparu min!”</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Ŝlosiloj “Riparu min!”</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
@@ -4242,10 +4242,10 @@
     <string name="promo_subscription">Reklamkoda abono</string>
     <string name="track_has_no_needed_data">La spuro ne enhavas bezonatajn datumojn.</string>
     <string name="routes_color_by_type">Kolorigi kursojn laŭ…</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo «osmc:symbol»).</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi kursojn laŭ prizorganto.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
-    <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
+    <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo «osmc:symbol») aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
     <string name="option_available_only_in_osmand_pro">Havebla por abonantoj de la plano OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Akiru aliron al altnivelaj agordoj: kolorigo de kursoj kaj pli.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ekkonu kun planoj de OsmAnd por trovi la plej taŭgan por vi.</string>
@@ -4463,16 +4463,16 @@
     <string name="use_routing_fallback_description">Uzi malkonektan navigilon, se la elektita enerta navigilo ne funkcias.</string>
     <string name="navigate_point_format_swiss_grid">Svislanda koordinatsistemo (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Svislanda koordinatsistemo (CH1903+)</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Etikedoj “Rimarko”</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Ŝlosiloj “Rimarko”</string>
     <string name="waypoint_template">Ŝablono de navigadpunkto</string>
     <string name="waypoint_appearance">Aspekto de navigadpunkto</string>
     <string name="track_file_description">Tiu ĉi ago montros disponeblajn spurojn.</string>
     <string name="always_ask_waypoint_appearance_description">Tiu ĉi ago malfermos la fenestron “Aldoni navigadpunkton”, kie vi povas ŝanĝi nomon kaj aspekton de punkto.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etikedoj “Riparu min!”</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Ŝlosiloj “Riparu min!”</string>
     <string name="predefined_waypoint_appearance_description">Tiu ĉi ago aŭtomate konservos navigadpunkton kun antaŭagorditaj parametroj.</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri etikedojn «fixme»</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Montri etikedojn «note»</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri ŝlosilojn «fixme»</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Montri ŝlosilojn «note»</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malaltaj skal-niveloj</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Tuneloj de akvovojoj</string>
@@ -4861,4 +4861,17 @@
 \n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn
 \n
 \n</string>
+    <string name="shared_string_open">Malfermi</string>
+    <string name="open_weather_action_description">Ebligas al vi malfermi ekranon kun detalaj informoj pri vetero.</string>
+    <string name="open_weather_action">Malfermi veter-informojn</string>
+    <string name="rendering_attr_weatherCloudContours_name">Egal-nubkovriĝ-linioj</string>
+    <string name="quick_action_temperature_layer">Butono por montri/kaŝi tavolon de temperaturo sur la mapo.</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Egal-precipitaĵ-linioj</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Egal-ventrapid-linioj</string>
+    <string name="mtb_scale">Etikedo «mtb:scale»</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Interŝtata Asocio de Montara Biciklado (IMBA)</string>
+    <string name="mtb_segment_classification">Klasifiki segmentojn</string>
+    <string name="rendering_attr_showMtbScale_name">Montbiciklaj kursoj OSM</string>
+    <string name="rendering_attr_showMtbScale_description">Montri montbiciklajn kursojn laŭ la skalo en la ŝlosilo «mtb:scale».</string>
 </resources>

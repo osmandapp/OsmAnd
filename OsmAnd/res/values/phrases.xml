@@ -98,15 +98,23 @@
 	<string name="poi_water_place_access">Water place access</string>
 	<string name="poi_climbing_style">Climbing style</string>
 	<string name="poi_socket">Socket</string>
-	<string name="poi_socket_chademo_output_filter">CHAdeMO output</string>
-	<string name="poi_socket_type2_output_filter">Type 2 output</string>
-	<string name="poi_socket_type2_combo_output_filter">Type 2 combo output</string>
-	<string name="poi_socket_type2_cable_output_filter">Type 2 cable output</string>
-	<string name="poi_socket_type3_output_filter">Type 3 output</string>
-	<string name="poi_socket_type3a_output_filter">Type 3a output</string>
-	<string name="poi_socket_type3c_output_filter">Type 3c output</string>
-	<string name="poi_socket_cee_blue_output_filter">CEE blue output</string>
-	<string name="poi_socket_schuko_output_filter">Schuko output</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO connector output</string>
+	<string name="poi_socket_chademo_voltage_filter">CHAdeMO connector voltage</string>
+	<string name="poi_socket_type2_output_filter">Type 2 connector output</string>
+	<string name="poi_socket_type2_voltage_filter">Type 2 connector voltage</string>
+	<string name="poi_socket_type2_combo_output_filter">Type 2 combo connector output</string>
+	<string name="poi_socket_type2_combo_voltage_filter">Type 2 combo connector voltage</string>
+	<string name="poi_socket_type2_cable_output_filter">Type 2 cable connector output</string>
+	<string name="poi_socket_type2_cable_voltage_filter">Type 2 cable connector voltage</string>
+	<string name="poi_socket_type3_output_filter">Type 3 connector output</string>
+	<string name="poi_socket_type3a_output_filter">Type 3a connector output</string>
+	<string name="poi_socket_type3a_voltage_filter">Type 3a connector voltage</string>
+	<string name="poi_socket_type3c_output_filter">Type 3c connector output</string>
+	<string name="poi_socket_type3c_voltage_filter">Type 3c connector voltage</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blue connector output</string>
+	<string name="poi_socket_cee_blue_voltage_filter">CEE blue connector voltage</string>
+	<string name="poi_socket_schuko_output_filter">Schuko connector output</string>
+	<string name="poi_socket_schuko_voltage_filter">Schuko connector voltage</string>
 	<string name="poi_service_car">Car service</string>
 	<string name="poi_glacier_type">Glacier type</string>
 	<string name="poi_checkpoint_type">Checkpoint type</string>
@@ -4962,11 +4970,9 @@
 
 	<string name="poi_trampoline_park">Trampoline park</string>
 
-	<string name="poi_socket_type3a">Type 3a output</string>
 	<string name="poi_socket_type3a_current">Socket: Type 3a: current</string>
 	<string name="poi_socket_type3a_output">Socket: Type 3a: output</string>
 	<string name="poi_socket_type3a_voltage">Socket: Type 3a: voltage</string>
-	<string name="poi_socket_type3c">Type 3c output</string>
 	<string name="poi_socket_type3c_current">Socket: Type 3c: current</string>
 	<string name="poi_socket_type3c_output">Socket: Type 3c: output</string>
 	<string name="poi_socket_type3c_voltage">Socket: Type 3c: voltage</string>
@@ -5018,5 +5024,15 @@
 	<string name="poi_socket_schuko_voltage_low">Low</string>
 
 	<string name="poi_hiking_yes">Yes</string>
+
+	<string name="poi_socket_type2_cable_output_high">High</string>
+	<string name="poi_socket_type2_cable_output_medium">Medium</string>
+	<string name="poi_socket_type2_cable_output_low">Low</string>
+	<string name="poi_socket_type3a_output_high">High</string>
+	<string name="poi_socket_type3a_output_medium">Medium</string>
+	<string name="poi_socket_type3a_output_low">Low</string>
+	<string name="poi_socket_type3c_output_high">High</string>
+	<string name="poi_socket_type3c_output_medium">Medium</string>
+	<string name="poi_socket_type3c_output_low">Low</string>
 
 </resources>

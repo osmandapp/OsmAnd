@@ -4976,4 +4976,6 @@
     <string name="open_weather_action">Időjárás megnyitása</string>
     <string name="shared_string_open">Megnyitás</string>
     <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
+    <string name="shared_string_expires">Lejár</string>
+    <string name="shared_string_purchased_on">Megvásárolva ekkor:</string>
 </resources>
