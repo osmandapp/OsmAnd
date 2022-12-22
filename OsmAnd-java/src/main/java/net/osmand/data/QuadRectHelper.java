@@ -14,73 +14,73 @@ import java.util.List;
  */
 public class QuadRectHelper {
 	public static QuadRect createRectForBoundingBoxDetermination() {
-        /* With following initiale values, first position will automatically initialize boundaries of the QuadRect,
-         * thus avoiding the need to detect first insertion.
-         */
+		/* With following initiale values, first position will automatically initialize boundaries of the QuadRect,
+		 * thus avoiding the need to detect first insertion.
+		 */
 		return new QuadRect(Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE, Double.MAX_VALUE);
 	}
 
 	public static void includeLatLon(QuadRect r, double latitude, double longitude) {
 		r.left = Math.min(r.left, longitude);
-        r.right = Math.max(r.right, longitude);
-        r.top = Math.max(r.top, latitude);
-        r.bottom = Math.min(r.bottom, latitude);
+		r.right = Math.max(r.right, longitude);
+		r.top = Math.max(r.top, latitude);
+		r.bottom = Math.min(r.bottom, latitude);
 	}
 
-    /* This function does the same thing than includeLatLon but on a set of Locations.
-     * Code is dupplicated for optimization purposes, the set of points possibly being huge.
-     */
-    public static void includeLocations(QuadRect r, List<Location> list) {
+	/* This function does the same thing than includeLatLon but on a set of Locations.
+	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
+	 */
+	public static void includeLocations(QuadRect r, List<Location> list) {
 		double latitude;
-        double longitude;
-        
-        for (Location l : list) {
+		double longitude;
+		
+		for (Location l : list) {
 			latitude = l.getLatitude();
-            longitude = l.getLongitude();
+			longitude = l.getLongitude();
 
-            r.left = Math.min(r.left, longitude);
-            r.right = Math.max(r.right, longitude);
-            r.top = Math.max(r.top, latitude);
-            r.bottom = Math.min(r.bottom, latitude);
+			r.left = Math.min(r.left, longitude);
+			r.right = Math.max(r.right, longitude);
+			r.top = Math.max(r.top, latitude);
+			r.bottom = Math.min(r.bottom, latitude);
 		}
-    }
+	}
 
-    /* This function does the same thing than includeLatLon but on a set of Nodes.
-     * Code is dupplicated for optimization purposes, the set of points possibly being huge.
-     */
-    public static void includeNodes(QuadRect r, List<Node> nodes) {
+	/* This function does the same thing than includeLatLon but on a set of Nodes.
+	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
+	 */
+	public static void includeNodes(QuadRect r, List<Node> nodes) {
 		double latitude;
-        double longitude;
-        
-        for (Node n : nodes) {
+		double longitude;
+		
+		for (Node n : nodes) {
 			latitude = n.getLatitude();
-            longitude = n.getLongitude();
+			longitude = n.getLongitude();
 
-            r.left = Math.min(r.left, longitude);
-            r.right = Math.max(r.right, longitude);
-            r.top = Math.max(r.top, latitude);
-            r.bottom = Math.min(r.bottom, latitude);
+			r.left = Math.min(r.left, longitude);
+			r.right = Math.max(r.right, longitude);
+			r.top = Math.max(r.top, latitude);
+			r.bottom = Math.min(r.bottom, latitude);
 		}
-    }
+	}
 
-    /* This function does the same thing than includeLatLon but on a set of TargetPoints.
-     * Code is dupplicated for optimization purposes, the set of points possibly being huge.
-     */
-    public static void includeTargetPoints(QuadRect r, List<TargetPointsHelper.TargetPoint> points) {
+	/* This function does the same thing than includeLatLon but on a set of TargetPoints.
+	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
+	 */
+	public static void includeTargetPoints(QuadRect r, List<TargetPointsHelper.TargetPoint> points) {
 		double latitude;
-        double longitude;
-        
-        for (TargetPointsHelper.TargetPoint p : points) {
+		double longitude;
+		
+		for (TargetPointsHelper.TargetPoint p : points) {
 			latitude = p.getLatitude();
-            longitude = p.getLongitude();
+			longitude = p.getLongitude();
 
-            r.left = Math.min(r.left, longitude);
-            r.right = Math.max(r.right, longitude);
-            r.top = Math.max(r.top, latitude);
-            r.bottom = Math.min(r.bottom, latitude);
+			r.left = Math.min(r.left, longitude);
+			r.right = Math.max(r.right, longitude);
+			r.top = Math.max(r.top, latitude);
+			r.bottom = Math.min(r.bottom, latitude);
 		}
-    }
-    
+	}
+	
 	/* Returns true if at least one point has been included
 	 * i.e. If both left to right and bottom to top are increasing or equal.
 	*/
