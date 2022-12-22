@@ -7,6 +7,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadRectHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -47,7 +48,7 @@ public class RoutingHelperUtils {
 
 	@Nullable
 	public static QuadRect getRouteRect(@NonNull OsmandApplication app, @NonNull RouteCalculationResult result) {
-		QuadRect rect = new QuadRect(0, 0, 0, 0);
+		QuadRect rect = QuadRectHelper.createRectForBoundingBoxDetermination();
 		Location lt = app.getRoutingHelper().getLastProjection();
 		if (lt == null) {
 			lt = app.getTargetPointsHelper().getPointToStartLocation();
@@ -56,18 +57,13 @@ public class RoutingHelperUtils {
 			lt = app.getLocationProvider().getLastKnownLocation();
 		}
 		if (lt != null) {
-			MapUtils.insetLatLonRect(rect, lt.getLatitude(), lt.getLongitude());
-		}
-		List<Location> list = result.getImmutableAllLocations();
-		for (Location l : list) {
-			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
-		}
-		List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-		for (TargetPointsHelper.TargetPoint l : targetPoints) {
-			MapUtils.insetLatLonRect(rect, l.getLatitude(), l.getLongitude());
+			QuadRectHelper.includeLatLon(rect, lt.getLatitude(), lt.getLongitude());
 		}
 
-		return rect.left == 0 && rect.right == 0 ? null : rect;
+		QuadRectHelper.includeLocations(rect, result.getImmutableAllLocations());
+		QuadRectHelper.includeTargetPoints(rect, app.getTargetPointsHelper().getIntermediatePointsWithTarget());
+
+		return !QuadRectHelper.pointsHasBeenIncluded(rect) ? null : rect;
 	}
 
 	public static Location getProject(Location loc, Location from, Location to) {

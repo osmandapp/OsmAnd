@@ -710,20 +710,6 @@ public class MapUtils {
 		}
 	}
 
-	public static void insetLatLonRect(QuadRect r, double latitude, double longitude) {
-		if (r.left == 0 && r.right == 0) {
-			r.left = longitude;
-			r.right = longitude;
-			r.top = latitude;
-			r.bottom = latitude;
-		} else {
-			r.left = Math.min(r.left, longitude);
-			r.right = Math.max(r.right, longitude);
-			r.top = Math.max(r.top, latitude);
-			r.bottom = Math.min(r.bottom, latitude);
-		}
-	}
-
 	public static boolean areLatLonEqual(Location l1, Location l2) {
 		return l1 == null && l2 == null
 				|| (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));

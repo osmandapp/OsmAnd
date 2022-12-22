@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadRectHelper;
 import net.osmand.data.ValueHolder;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
@@ -360,30 +361,24 @@ public class TransportRoutingHelper {
 	@Nullable
 	public QuadRect getTransportRouteRect(@NonNull TransportRouteResult result) {
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
-		QuadRect r = new QuadRect(0, 0, 0, 0);
+		QuadRect r = QuadRectHelper.createRectForBoundingBoxDetermination();
 		TransportRouteResultSegment s1;
 		TransportRouteResultSegment s2 = null;
 		for (TransportRouteResultSegment segment : result.getSegments()) {
 			s1 = segment;
-			for (Node n : segment.getNodes()) {
-				MapUtils.insetLatLonRect(r, n.getLatitude(), n.getLongitude());
-			}
+			QuadRectHelper.includeNodes(r, segment.getNodes());
 			RouteCalculationResult wrs = s2 == null ? transportRoutingHelper.getWalkingRouteSegment(null, s1) :
 					transportRoutingHelper.getWalkingRouteSegment(s1, s2);
 			if (wrs != null) {
-				for (Location p : wrs.getRouteLocations()) {
-					MapUtils.insetLatLonRect(r, p.getLatitude(), p.getLongitude());
-				}
+				QuadRectHelper.includeLocations(r, wrs.getRouteLocations());
 			}
 			s2 = s1;
 		}
 		RouteCalculationResult wrs = transportRoutingHelper.getWalkingRouteSegment(s2, null);
 		if (wrs != null) {
-			for (Location p : wrs.getRouteLocations()) {
-				MapUtils.insetLatLonRect(r, p.getLatitude(), p.getLongitude());
-			}
+			QuadRectHelper.includeLocations(r, wrs.getRouteLocations());
 		}
-		return r.left == 0 && r.right == 0 ? null : r;
+		return !QuadRectHelper.pointsHasBeenIncluded(r) ? null : r;
 	}
 
 	public void setApplicationMode(ApplicationMode applicationMode) {
