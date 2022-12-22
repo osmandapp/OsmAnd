@@ -85,7 +85,7 @@ public class QuadRectHelper {
 	 * i.e. If both left to right and bottom to top are increasing or equal.
 	*/
 	@NonNull
-	public static boolean pointsHasBeenIncluded() {
+	public static boolean pointsHaveBeenIncluded() {
 		return (this.left <= this.right && this.bottom <= this.top) ? true : false;
 	}
 }

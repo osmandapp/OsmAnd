@@ -63,7 +63,7 @@ public class RoutingHelperUtils {
 		QuadRectHelper.includeLocations(rect, result.getImmutableAllLocations());
 		QuadRectHelper.includeTargetPoints(rect, app.getTargetPointsHelper().getIntermediatePointsWithTarget());
 
-		return !QuadRectHelper.pointsHasBeenIncluded(rect) ? null : rect;
+		return !QuadRectHelper.pointsHaveBeenIncluded(rect) ? null : rect;
 	}
 
 	public static Location getProject(Location loc, Location from, Location to) {

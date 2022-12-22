@@ -378,7 +378,7 @@ public class TransportRoutingHelper {
 		if (wrs != null) {
 			QuadRectHelper.includeLocations(r, wrs.getRouteLocations());
 		}
-		return !QuadRectHelper.pointsHasBeenIncluded(r) ? null : r;
+		return !QuadRectHelper.pointsHaveBeenIncluded(r) ? null : r;
 	}
 
 	public void setApplicationMode(ApplicationMode applicationMode) {
