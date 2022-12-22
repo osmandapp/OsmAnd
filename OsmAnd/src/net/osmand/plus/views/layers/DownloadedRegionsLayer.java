@@ -812,9 +812,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private boolean isShowDownloadedMaps() {
-		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		boolean weatherForecastShown = plugin != null && plugin.hasCustomForecast();
-		return app.getSettings().SHOW_BORDERS_OF_DOWNLOADED_MAPS.get() && !weatherForecastShown;
+		return app.getSettings().SHOW_BORDERS_OF_DOWNLOADED_MAPS.get() &&
+				!PluginsHelper.layerShouldBeDisabled(this);
 	}
 
 	@Override
