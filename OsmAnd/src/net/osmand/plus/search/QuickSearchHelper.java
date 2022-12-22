@@ -234,7 +234,8 @@ public class QuickSearchHelper implements ResourceListener {
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else {
-						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+								StringMatcherMode.CHECK_CONTAINS);
 						if (matcher.matches(sr.localeName)) {
 							resultMatcher.publish(sr);
 						}
@@ -349,7 +350,8 @@ public class QuickSearchHelper implements ResourceListener {
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
