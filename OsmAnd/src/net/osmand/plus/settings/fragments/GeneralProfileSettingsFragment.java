@@ -136,14 +136,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupRotateMapPref() {
 		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
-		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
-		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt), getString(R.string.rotate_map_none_rotated_opt)});
+		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS, OsmandSettings.ROTATE_MAP_MANUAL});
 		rotateMap.setIcon(getRotateMapIcon());
 	}
 
 	private Drawable getRotateMapIcon() {
 		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
+				return getActiveIcon(R.drawable.ic_action_direction_north);
+			case OsmandSettings.ROTATE_MAP_MANUAL:
 				return getActiveIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
 				return getActiveIcon(R.drawable.ic_action_direction_movement);

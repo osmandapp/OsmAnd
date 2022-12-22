@@ -1595,6 +1595,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
+			if (angleRelative != 0) {
+				application.getMapViewTrackingUtilities().setRotationNoneToManual();
+			}
 			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
