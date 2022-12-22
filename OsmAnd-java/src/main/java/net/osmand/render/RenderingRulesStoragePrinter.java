@@ -21,8 +21,6 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RenderingRulesStoragePrinter {
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
-		RenderingRulesStorage.STORE_ATTRIBUTES = true;
-//		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		String defaultFile = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
 		if(args.length > 0) {
 			defaultFile = args[0];
@@ -32,42 +30,11 @@ public class RenderingRulesStoragePrinter {
 			outputPath = args[1];
 		}
 		String name = "Style";
-		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(defaultFile);
-		// buggy attributes
-		try {
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(is, "UTF-8");
-			int tok;
-			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok == XmlPullParser.START_TAG) {
-					String tagName = parser.getName();
-					if (tagName.equals("renderingConstant")) {
-						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"), 
-									parser.getAttributeValue("", "value"));
-						}
-					}
-				}
-			}
-		} finally {
-			is.close();
-		}
-		is = new FileInputStream(defaultFile);
-		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
-		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
-			@Override
-			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
-				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
-				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref, false);
-				return depends;
-			}
-		};
-		storage.parseRulesFromXmlInputStream(is, resolver, false);
+		RenderingRulesStorage storage = RenderingRulesStorage.getTestStorageForStyle(defaultFile);
 		new RenderingRulesStoragePrinter().printJavaFile(outputPath, name, storage);
 	
 	}
-	
+
 	protected void printJavaFile(String path, String name, RenderingRulesStorage storage) throws IOException {
 		PrintStream out = System.out;
 		out = new PrintStream(new File(path, name + "RenderingRulesStorage.java"));
