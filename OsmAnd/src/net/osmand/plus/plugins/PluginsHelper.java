@@ -49,6 +49,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -724,6 +725,15 @@ public class PluginsHelper {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			if (p.mapActivityKeyUp(mapActivity, keyCode))
 				return true;
+		}
+		return false;
+	}
+
+	public static boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (plugin.layerShouldBeDisabled(layer)) {
+				return true;
+			}
 		}
 		return false;
 	}
