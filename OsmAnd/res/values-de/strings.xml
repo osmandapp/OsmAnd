@@ -778,7 +778,7 @@
     <string name="app_mode_car">Auto</string>
     <string name="app_mode_bicycle">Fahrrad</string>
     <string name="app_mode_pedestrian">Fußgänger</string>
-    <string name="position_on_map_center">Mitte</string>
+    <string name="position_on_map_center">Zentrieren</string>
     <string name="position_on_map_bottom">Unten</string>
     <string name="navigate_point_top_text">Breiten- und Längengrad im folgenden Format angeben (D - Grad, M - Minuten, S - Sekunden)</string>
     <string name="navigate_point_latitude">Breitengrad</string>
@@ -4653,12 +4653,12 @@
     <string name="av_notes_choose_action_widget_desc">Aktion auswählen.</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
-    <string name="routing_attr_motor_type_gas_name">Erdgas</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="lang_ckb">Zentralkurdisch</string>
-    <string name="routing_attr_motor_type_lpg_name">Autogas</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektrisch</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
-    <string name="co2_mission">CO2-Ausstoß</string>
+    <string name="co2_mission">CO2-Emission</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
     <string name="routing_attr_motor_type_name">Fahrzeugmotor</string>

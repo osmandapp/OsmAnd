@@ -4973,4 +4973,5 @@
     <string name="open_weather_action">Apri meteo</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
+    <string name="shared_string_purchased_on">Acquistato su</string>
 </resources>

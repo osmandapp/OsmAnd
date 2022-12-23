@@ -4977,4 +4977,6 @@
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
     <string name="shared_string_open">Otvoriť</string>
     <string name="open_weather_action">Otvoriť počasie</string>
+    <string name="shared_string_expires">Skončí</string>
+    <string name="shared_string_purchased_on">Zakúpené dňa</string>
 </resources>

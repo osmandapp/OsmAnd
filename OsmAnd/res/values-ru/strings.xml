@@ -4680,7 +4680,7 @@
     <string name="map_widget_distance_to_intermediate">Расстояние до промежуточного пункта</string>
     <string name="lang_sat">Сантали</string>
     <string name="average_speed_skip_stops">Учитывать остановки</string>
-    <string name="average_speed_time_interval_desc">Укажите интервал времени, для которого будет измеряться средняя скорость.</string>
+    <string name="average_speed_time_interval_desc">Укажите временной интервал для усреднения скорости.</string>
     <string name="average_speed_widget_desc">Виджет показывает среднюю скорость текущей поездки.</string>
     <string name="map_widget_average_speed">Средняя скорость</string>
     <string name="average_speed_skip_stops_desc">Скорость меньше %1$s будет учитываться и влиять на среднюю скорость.</string>
@@ -4694,8 +4694,8 @@
     <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_diesel_name">Дизельное топливо</string>
-    <string name="routing_attr_motor_type_name">Топливо, используемое двигателем</string>
-    <string name="routing_attr_motor_type_description">Выберите тип топлива, используемый двигателем вашего автомобиля, для расчета выбросов CO2.</string>
+    <string name="routing_attr_motor_type_name">Двигатель автомобиля</string>
+    <string name="routing_attr_motor_type_description">Выберите тип топлива для вашего двигателя, это необходимо для оценки выбросов CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_electric_name">Электричество</string>
     <string name="routing_attr_motor_type_gas_name">КПГ (CNG)</string>
@@ -4708,7 +4708,7 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">Вы можете прикрепить свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
+    <string name="no_altitude_data_desc">Прикрепите свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
@@ -4719,7 +4719,7 @@
     <string name="marker_2nd">Второй маркер</string>
     <string name="map_marker_average_speed_desc">Укажите временной интервал для усреднения скорости (используется для оценки времени прибытия).</string>
     <string name="marker_1st">Первый маркер</string>
-    <string name="goods_delivery_desc">Транспортным средствам, перевозящим товары, может быть ограничен доступ к некоторым дорогам.</string>
+    <string name="goods_delivery_desc">Транспортные средства доставки могут быть ограничены на некоторых дорогах.</string>
     <string name="goods_delivery_desc_4">Используйте профиль «Грузовик» для автомобилей массой более 3,5 тонн.</string>
     <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
     <string name="download_complete">Загрузка завершена</string>
@@ -4771,7 +4771,7 @@
     <string name="attach_roads_warning">К дорогам можно привязать только записанный трек.</string>
     <string name="without_profiles_changing">Без смены профиля</string>
     <string name="connect_with_straight_line">Соединить прямой линией</string>
-    <string name="attach_roads_descr">Хотите ли вы аппроксимировать свой путь с помощью действующего маршрута, прикрепленного к офлайн-картам\? В этом случае у вас будет скорректированная высота над уровнем моря, информация о дорогах и поворотах, которую в дальнейшем можно будет использовать в навигации.</string>
+    <string name="attach_roads_descr">Приблизьте свой трек к действующим дорогам, чтобы проложить маршрут между точками и связать точные указания поворотов и свойства маршрута.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
     <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
