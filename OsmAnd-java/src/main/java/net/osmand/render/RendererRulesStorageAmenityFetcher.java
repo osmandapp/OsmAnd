@@ -18,11 +18,11 @@ public class RendererRulesStorageAmenityFetcher {
         RenderingRulesStorage storage = RenderingRulesStorage.getTestStorageForStyle(path);
 
         Map<String, String> iconStyle = null;
-        if(args.length > 5) {
-            iconStyle = getAmenityIconStyle(args[1], args[2], args[3],args[4], args[5].equals("true"), storage);
+        if(args.length > 6) {
+            iconStyle = getAmenityIconStyle(args[1], args[2], args[3],args[4], args[5].equals("true"), Integer.parseInt(args[6]), storage);
         } else {
             // for manual testing case
-            // iconStyle = getAmenityIconStyle("amenity", "fuel", null, null, false, storage);
+            // iconStyle = getAmenityIconStyle("amenity", "fuel", null, null, false, 19, storage);
         }
         return iconStyle;
     }
@@ -39,7 +39,7 @@ public class RendererRulesStorageAmenityFetcher {
     }
 
     public static Map<String, String> getAmenityIconStyle(String tag, String value, String tag2, String value2,
-                                                          boolean nightMode, RenderingRulesStorage storage)  throws XmlPullParserException, IOException {
+                                                          boolean nightMode, int zoom, RenderingRulesStorage storage)  throws XmlPullParserException, IOException {
 
         RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
 
@@ -51,8 +51,8 @@ public class RendererRulesStorageAmenityFetcher {
         }
 
         searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, nightMode);
-        searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 19);
-        searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 19);
+        searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, zoom);
+        searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, zoom);
         for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
             if (customProp.isBoolean()) {
                 searchRequest.setBooleanFilter(customProp, false);
