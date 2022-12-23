@@ -4868,11 +4868,12 @@
     <string name="quick_action_temperature_layer">Butono por montri/kaŝi tavolon de temperaturoj sur la mapo.</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Egal-precipitaĵ-linioj</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Egal-ventrapid-linioj</string>
-    <string name="mtb_scale">Etikedo «mtb:scale»</string>
+    <string name="mtb_scale">Ŝlosilo «mtb:scale»</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Interŝtata Asocio de Montara Biciklado (IMBA)</string>
-    <string name="mtb_segment_classification">Klasifiki segmentojn</string>
+    <string name="mtb_segment_classification">Klasifiko de segmentoj</string>
     <string name="rendering_attr_showMtbScale_name">Montbiciklaj kursoj OSM</string>
     <string name="rendering_attr_showMtbScale_description">Montri montbiciklajn kursojn laŭ la skalo en la ŝlosilo «mtb:scale».</string>
     <string name="quick_action_precipitation_layer">Butono por montri/kaŝi tavolon de veter-alfalaĵoj sur la mapo.</string>
+    <string name="quick_action_wind_layer">Butono por montri/kaŝi tavolon de ventoj sur la mapo.</string>
 </resources>
