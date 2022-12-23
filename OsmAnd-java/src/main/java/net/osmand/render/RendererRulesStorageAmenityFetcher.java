@@ -9,6 +9,9 @@ import java.util.Map;
 
 public class RendererRulesStorageAmenityFetcher {
 
+    // Fill repo patch manually:
+    static String resourcesRepoPath = "/Users/nnngrach/Documents/Projects/Coding/OsmAnd/resources";
+
     public static Map<String, String> main(String[] args) throws XmlPullParserException, IOException {
         String styleName = args.length > 0 ? args[0] : "default";
         String path = getStylePath(styleName);
@@ -25,9 +28,6 @@ public class RendererRulesStorageAmenityFetcher {
     }
 
     private static String getStylePath(String styleName) {
-        //String stylesDirPath = "../resources/rendering_styles/";
-        String stylesDirPath = "/Users/nnngrach/Documents/Projects/Coding/OsmAnd/resources/rendering_styles/";
-
         String[] allStylesNames = new String[] {"default", "desert", "LightRS", "mapnik", "nautical",
                 "offroad", "osm-carto", "regions", "skimap", "snowmobile", "standalone-template",
                 "Topo-map-assimilation", "topo", "Touring-view_(more-contrast-and-details)", "UniRS",
@@ -35,7 +35,7 @@ public class RendererRulesStorageAmenityFetcher {
         if (Algorithms.isEmpty(styleName) || !Arrays.asList(allStylesNames).contains(styleName)) {
             styleName = "default";
         }
-        return stylesDirPath + styleName + ".render.xml";
+        return resourcesRepoPath + "/rendering_styles/"  + styleName + ".render.xml";
     }
 
     public static Map<String, String> getAmenityIconStyle(String tag, String value, String tag2, String value2,
