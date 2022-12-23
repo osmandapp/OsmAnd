@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Skip download</string>
+    <string name="determine_location">Allow us to determine your location</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
