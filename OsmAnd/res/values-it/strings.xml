@@ -268,7 +268,7 @@
     <string name="phone">Telefono</string>
     <string name="download_type_to_filter">Chiave filtro</string>
     <string name="use_high_res_maps">Schermo ad alta risoluzione</string>
-    <string name="use_high_res_maps_descr">Non stirare (né offuscare) le mattonelle della mappa nei dispositivi con display ad alta densità.</string>
+    <string name="use_high_res_maps_descr">Non deformare (né sfocare) le mattonelle della mappa sui display ad alta densità.</string>
     <string name="unknown_location">Posizione non ancora conosciuta.</string>
     <string name="context_menu_item_search_transport">Ricerca trasporti pubblici</string>
     <string name="transport_searching_transport">Risultati trasporti pubblici (nessuna destinazione):</string>
@@ -4974,4 +4974,5 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
     <string name="shared_string_purchased_on">Acquistato su</string>
+    <string name="shared_string_expires">Scade</string>
 </resources>
