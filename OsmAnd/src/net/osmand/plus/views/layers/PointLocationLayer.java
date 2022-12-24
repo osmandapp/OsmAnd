@@ -71,6 +71,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 
 	private ApplicationMode appMode;
 	private boolean carView;
+	private boolean hasMapRenderer;
 	private float textScale = 1f;
 	@ColorInt
 	private int profileColor;
@@ -595,13 +596,15 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		int headingIconId = appMode.getLocationIcon().getHeadingIconId();
 		float textScale = getTextScale();
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
+		boolean hasMapRenderer = hasMapRenderer();
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
 				|| this.profileColor != profileColor
 				|| this.locationIconId != locationIconId
 				|| this.headingIconId != headingIconId
 				|| this.navigationIconId != navigationIconId
 				|| this.textScale != textScale
-				|| this.carView != carView) {
+				|| this.carView != carView
+				|| this.hasMapRenderer != hasMapRenderer) {
 			this.appMode = appMode;
 			this.profileColor = profileColor;
 			this.nm = nighMode;
@@ -611,6 +614,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			this.navigationIconId = navigationIconId;
 			this.textScale = textScale;
 			this.carView = carView;
+			this.hasMapRenderer = hasMapRenderer;
 			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 			if (navigationIcon != null) {
 				DrawableCompat.setTint(navigationIcon.getDrawable(1), profileColor);

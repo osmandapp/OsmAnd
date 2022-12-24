@@ -74,7 +74,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		return context;
 	}
 
-	public void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, List<Float> tx, List<Float> ty,
+	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
 								   List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
 		List<PathPoint> arrows = new ArrayList<>();
 

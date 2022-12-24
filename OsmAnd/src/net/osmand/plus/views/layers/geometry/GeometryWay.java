@@ -195,7 +195,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return null;
 	}
 
-	public void drawSegments(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude,
+	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude,
 							 double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
 		if (locationProvider == null || locationProvider.getSize() == 0) {
 			return;
@@ -563,7 +563,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 	}
 
-	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Integer> indexes,
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
+	                             List<Integer> indexes,
 	                             List<Float> tx, List<Float> ty,
 	                             List<Integer> tx31, List<Integer> ty31,
 								 List<Double> angles, List<Double> distances, double distToFinish,
@@ -593,7 +594,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						drawPathLine(tb, pathsData);
 					}
 					pathsData31Cache.add(pathsData);
-				} else {
+				} else if (canvas != null) {
 					List<DrawPathData> pathsData = new ArrayList<>();
 					canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 					canvasRotated = true;
@@ -618,7 +619,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						this.vectorLineArrowsProvider = arrowsProvider;
 						mapRenderer.addSymbolsProvider(arrowsProvider);
 					}
-				} else {
+				} else if (canvas != null) {
 					drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
 				}
 			} else {
