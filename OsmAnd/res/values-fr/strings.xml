@@ -4973,4 +4973,6 @@
 \n• Correction de la sortie sonore et du comportement de la barre de volume
 \n
 \n</string>
+    <string name="shared_string_purchased_on">Acheté le</string>
+    <string name="shared_string_expires">Expire</string>
 </resources>
