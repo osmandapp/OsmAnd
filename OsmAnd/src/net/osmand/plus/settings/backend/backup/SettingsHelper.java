@@ -101,15 +101,25 @@ public abstract class SettingsHelper {
 
 	public interface ImportListener {
 
-		void onImportProgressUpdate(int value, int uploadedKb);
+		default void onImportProgressUpdate(int value, int uploadedKb) {
 
-		void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work);
+		}
 
-		void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value);
+		default void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 
-		void onImportItemFinished(@NonNull String type, @NonNull String fileName);
+		}
 
-		void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
+		default void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+		}
+
+		default void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+		}
+
+		default void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+
+		}
 	}
 
 	public interface CheckDuplicatesListener {

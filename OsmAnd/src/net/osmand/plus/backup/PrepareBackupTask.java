@@ -9,6 +9,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.util.Algorithms;
@@ -162,7 +163,7 @@ public class PrepareBackupTask {
 							backup.setSettingsItems(items);
 							backup.setRemoteFiles(remoteFiles);
 						} else {
-							onError("Download remote items error");
+							onError(app.getString(R.string.backup_error_failed_to_fetch_remote_items));
 						}
 						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}

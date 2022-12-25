@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
@@ -32,7 +33,6 @@ import java.util.Map;
 
 public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implements BackupExportListener, OnDeleteFilesListener, ImportListener {
 
-	public static final int HEADER_TYPE = 0;
 	public static final int WARNING_TYPE = 1;
 	public static final int UPLOAD_TYPE = 2;
 	public static final int CONFLICTS_TYPE = 3;
@@ -50,13 +50,13 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	private final List<Object> items = new ArrayList<>();
 
-	private final BackupStatusFragment fragment;
+	private final BackupCloudFragment fragment;
 	private final LoginDialogType dialogType;
 
 	private boolean uploadItemsVisible;
 	private final boolean nightMode;
 
-	public BackupStatusAdapter(@NonNull MapActivity mapActivity, @NonNull BackupStatusFragment fragment, boolean nightMode) {
+	public BackupStatusAdapter(@NonNull MapActivity mapActivity, @NonNull BackupCloudFragment fragment, boolean nightMode) {
 		this.mapActivity = mapActivity;
 		this.app = (OsmandApplication) mapActivity.getApplication();
 		this.fragment = fragment;
@@ -91,8 +91,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		if (showIntroductionItem) {
 			items.add(INTRODUCTION_TYPE);
 		} else {
-			items.add(HEADER_TYPE);
-
 			if (status.warningTitleRes != -1 || !Algorithms.isEmpty(error)) {
 				items.add(WARNING_TYPE);
 			}
@@ -120,9 +118,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 			case RESTORE_TYPE:
 				View itemView = inflater.inflate(R.layout.restore_backup_card, viewGroup, false);
 				return new RestoreBackupViewHolder(itemView);
-			case HEADER_TYPE:
-				itemView = inflater.inflate(R.layout.backup_status_header, viewGroup, false);
-				return new HeaderStatusViewHolder(itemView);
 			case WARNING_TYPE:
 				itemView = inflater.inflate(R.layout.backup_warning, viewGroup, false);
 				return new WarningViewHolder(itemView);
@@ -145,10 +140,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		if (holder instanceof HeaderStatusViewHolder) {
-			HeaderStatusViewHolder viewHolder = (HeaderStatusViewHolder) holder;
-			viewHolder.bindView(this, status, nightMode);
-		} else if (holder instanceof WarningViewHolder) {
+		if (holder instanceof WarningViewHolder) {
 			boolean hideBottomPadding = false;
 			if (items.size() > position + 1) {
 				Object item = items.get(position + 1);
@@ -159,7 +151,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		} else if (holder instanceof ConflictViewHolder) {
 			Pair<LocalFile, RemoteFile> pair = (Pair<LocalFile, RemoteFile>) items.get(position);
 			ConflictViewHolder viewHolder = (ConflictViewHolder) holder;
-			viewHolder.bindView(pair, fragment, fragment, nightMode);
+//			viewHolder.bindView(pair, fragment, fragment, nightMode);
 		} else if (holder instanceof ItemViewHolder) {
 			boolean lastBackupItem = false;
 			if (items.size() > position + 1) {
@@ -171,7 +163,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 			viewHolder.bindView(item, lastBackupItem, info.itemsToDelete.contains(item));
 		} else if (holder instanceof ActionButtonViewHolder) {
 			ActionButtonViewHolder viewHolder = (ActionButtonViewHolder) holder;
-			viewHolder.bindView(mapActivity, backup, fragment, uploadItemsVisible, nightMode);
+//			viewHolder.bindView(mapActivity, backup, fragment, uploadItemsVisible, nightMode);
 		} else if (holder instanceof RestoreBackupViewHolder) {
 			RestoreBackupViewHolder viewHolder = (RestoreBackupViewHolder) holder;
 			viewHolder.bindView(mapActivity, nightMode);
@@ -186,8 +178,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		Object obj = items.get(position);
 		if (Algorithms.objectEquals(obj, RESTORE_TYPE)) {
 			return RESTORE_TYPE;
-		} else if (Algorithms.objectEquals(obj, HEADER_TYPE)) {
-			return HEADER_TYPE;
 		} else if (Algorithms.objectEquals(obj, WARNING_TYPE)) {
 			return WARNING_TYPE;
 		} else if (Algorithms.objectEquals(obj, ACTION_BUTTON_TYPE)) {
@@ -217,18 +207,15 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onBackupExportStarted() {
-		notifyItemChanged(items.indexOf(HEADER_TYPE));
 		notifyItemChanged(items.indexOf(ACTION_BUTTON_TYPE));
 	}
 
 	@Override
 	public void onBackupExportProgressUpdate(int value) {
-		notifyItemChanged(items.indexOf(HEADER_TYPE));
 	}
 
 	@Override
 	public void onBackupExportFinished(@Nullable String error) {
-		notifyItemChanged(items.indexOf(HEADER_TYPE));
 	}
 
 	@Override
@@ -286,11 +273,6 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onFilesDeleteError(int status, @NonNull String message) {
-
-	}
-
-	@Override
-	public void onImportProgressUpdate(int value, int uploadedKb) {
 
 	}
 

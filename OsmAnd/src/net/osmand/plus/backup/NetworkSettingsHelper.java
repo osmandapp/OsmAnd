@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -29,12 +30,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	final Map<String, ExportBackupTask> exportAsyncTasks = new HashMap<>();
 	final Map<String, SyncBackupTask> syncBackupTasks = new HashMap<>();
 
-	public enum BackupSyncOperationType {
-		BACKUP_SYNC_OPERATION_NONE,
-		BACKUP_SYNC_OPERATION_SYNC,
-		BACKUP_SYNC_OPERATION_UPLOAD,
-		BACKUP_SYNC_OPERATION_DOWNLOAD,
-		BACKUP_SYNC_OPERATION_DELETE
+	public enum SyncOperationType {
+		SYNC_OPERATION_NONE,
+		SYNC_OPERATION_SYNC,
+		SYNC_OPERATION_UPLOAD,
+		SYNC_OPERATION_DOWNLOAD,
+		SYNC_OPERATION_DELETE
 	}
 
 	public interface BackupExportListener {
@@ -213,9 +214,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void syncSettingsItems(@NonNull String key, @NonNull BackupSyncOperationType operation) {
+	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation,
+	                              @Nullable OnBackupSyncListener listener) {
 		if (!syncBackupTasks.containsKey(key)) {
-			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation);
+			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
 			syncBackupTasks.put(key, syncTask);
 			syncTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -223,21 +225,25 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void syncSettingsItems(@NonNull String key, @Nullable LocalFile localFile, @NonNull RemoteFile remoteFile, @NonNull BackupSyncOperationType operation) {
+	public void syncSettingsItems(@NonNull String key,
+	                              @Nullable LocalFile localFile,
+	                              @NonNull RemoteFile remoteFile,
+	                              @NonNull SyncOperationType operation,
+	                              @Nullable OnBackupSyncListener listener) {
 		if (!syncBackupTasks.containsKey(key)) {
-			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation);
+			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
 			syncBackupTasks.put(key, syncTask);
 
 			String fileName = BackupHelper.getItemFileName(localFile != null ? localFile.item : remoteFile.item);
 
 			switch (operation) {
-				case BACKUP_SYNC_OPERATION_DELETE:
+				case SYNC_OPERATION_DELETE:
 					syncTask.deleteItem(remoteFile.item, fileName);
 					break;
-				case BACKUP_SYNC_OPERATION_UPLOAD:
+				case SYNC_OPERATION_UPLOAD:
 					syncTask.uploadLocalItem(localFile.item, fileName);
 					break;
-				case BACKUP_SYNC_OPERATION_DOWNLOAD:
+				case SYNC_OPERATION_DOWNLOAD:
 					syncTask.downloadRemoteVersion(remoteFile.item, fileName);
 					break;
 			}

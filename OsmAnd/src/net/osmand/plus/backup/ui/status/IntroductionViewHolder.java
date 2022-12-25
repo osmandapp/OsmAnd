@@ -10,16 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.backup.ui.BackupTypesFragment;
 import net.osmand.plus.backup.ui.RestoreSettingsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 public class IntroductionViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +40,7 @@ public class IntroductionViewHolder extends RecyclerView.ViewHolder {
 		restoreButton = itemView.findViewById(R.id.restore_button);
 	}
 
-	public void bindView(@NonNull FragmentActivity activity, @NonNull BackupStatusFragment fragment,
+	public void bindView(@NonNull FragmentActivity activity, @NonNull BackupCloudFragment fragment,
 						 @NonNull PrepareBackupResult backup, @NonNull LoginDialogType dialogType, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		UiUtilities iconsCache = app.getUIUtilities();
@@ -59,7 +60,7 @@ public class IntroductionViewHolder extends RecyclerView.ViewHolder {
 		setupRestoreButton(activity, fragment, backup, nightMode);
 	}
 
-	private void setupRestoreButton(@NonNull FragmentActivity activity, @NonNull BackupStatusFragment fragment,
+	private void setupRestoreButton(@NonNull FragmentActivity activity, @NonNull BackupCloudFragment fragment,
 									@NonNull PrepareBackupResult backup, boolean nightMode) {
 		if (!Algorithms.isEmpty(backup.getRemoteFiles())) {
 			restoreButton.setOnClickListener(v -> {
@@ -83,7 +84,7 @@ public class IntroductionViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	private void setupBackupButton(@NonNull FragmentActivity activity, @NonNull BackupStatusFragment fragment,
+	private void setupBackupButton(@NonNull FragmentActivity activity, @NonNull BackupCloudFragment fragment,
 								   @NonNull PrepareBackupResult backup, boolean nightMode) {
 		if (!Algorithms.isEmpty(backup.getLocalFiles())) {
 			backupButton.setOnClickListener(v -> {

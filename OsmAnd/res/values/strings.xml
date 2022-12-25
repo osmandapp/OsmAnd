@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_modified">Modified</string>
+    <string name="res_unknown">Unknown</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_unsynced">Unsynced</string>
     <string name="check_for_updates">Check for updates</string>
@@ -27,6 +29,7 @@
     <string name="no_new_changes">No new changes</string>
     <string name="import_export">Import/Export</string>
     <string name="export_to_file">Export to file</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>

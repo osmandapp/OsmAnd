@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
 import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.CLOUD_CHANGES;
 import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.CONFLICTS;
 import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.LOCAL_CHANGES;
@@ -28,9 +29,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupSyncOperationType;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.status.CloudSyncCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -42,7 +43,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurchaseListener, CardListener, OnPrepareBackupListener {
+public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurchaseListener,
+		OnPrepareBackupListener, CardListener, OnBackupSyncListener {
 
 	public static final String TAG = BackupCloudFragment.class.getSimpleName();
 
@@ -77,7 +79,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-
 		nightMode = !requireMyApplication().getSettings().isLightContent();
 
 		if (savedInstanceState != null && savedInstanceState.containsKey(DIALOG_TYPE_KEY)) {
@@ -92,8 +93,8 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		View view = themedInflater.inflate(R.layout.osmand_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
 
-		setupToolbar(view);
 		setupCards(view);
+		setupToolbar(view);
 
 		if (!settingsHelper.isBackupExporting()) {
 			app.getBackupHelper().prepareBackup();
@@ -151,10 +152,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		super.onResume();
 		backupHelper.addPrepareBackupListener(this);
 
-		if (!backupHelper.isBackupPreparing()) {
-			onBackupPrepared(backupHelper.getBackup());
-		}
-
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
@@ -172,9 +169,42 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
+	@Override
+	public void onBackupPreparing() {
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+	}
+
+	@Override
+	public void onBackupSyncStarted() {
+
+	}
+
+	@Override
+	public void onBackupProgressUpdate(float progress) {
+
+	}
+
+	@Override
+	public void onBackupSyncFinished(@Nullable String error) {
+
+	}
+
+	@Override
+	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+	}
+
+	@Override
+	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+	}
+
+	@Override
+	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+
 	}
 
 	@Override
@@ -185,7 +215,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 		if (card instanceof CloudSyncCard) {
 			if (SYNC_BUTTON_INDEX == buttonIndex) {
-				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, BackupSyncOperationType.BACKUP_SYNC_OPERATION_SYNC);
+				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
 			} else if (LOCAL_CHANGES_BUTTON_INDEX == buttonIndex) {
 				ChangesFragment.showInstance(manager, LOCAL_CHANGES);
 			} else if (CLOUD_CHANGES_BUTTON_INDEX == buttonIndex) {
@@ -196,16 +226,9 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 	}
 
-	@Override
-	public void onBackupPreparing() {
-
-	}
-
-	@Override
-	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-		if (syncCard != null) {
-			syncCard.update();
-		}
+	@Nullable
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -33,7 +33,6 @@ import net.osmand.plus.backup.commands.RegisterUserCommand;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -216,13 +215,13 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	public static List<Pair<RemoteFile, SettingsItem>> getItemsMapForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
-		List<Pair<RemoteFile, SettingsItem>> itemsForRestore = new ArrayList<>();
+	public static Map<RemoteFile, SettingsItem> getItemsMapForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
+		Map<RemoteFile, SettingsItem> itemsForRestore = new HashMap<>();
 		if (info != null) {
 			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
 				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
 				if (restoreItem != null && !restoreItem.exists()) {
-					itemsForRestore.add(new Pair<>(remoteFile, restoreItem));
+					itemsForRestore.put(remoteFile, restoreItem);
 				}
 			}
 		}
@@ -654,16 +653,15 @@ public class BackupHelper {
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
-	public int calculateFileSize(@NonNull RemoteFile remoteFile) {
-		int size = remoteFile.getFilesize() / 1024;
+	public long calculateFileSize(@NonNull RemoteFile remoteFile) {
+		long size = remoteFile.getFilesize() / 1024;
 		if (remoteFile.item.getType() == SettingsItemType.FILE) {
-			FileSettingsItem item = (FileSettingsItem) remoteFile.item;
-
-			if (item.getSubtype() == FileSubtype.OBF_MAP) {
-				String mapId = item.getFileName().toLowerCase();
-				RegionAddressRepository res = app.getResourceManager().getRegionRepository(mapId);
-				if (res != null) {
-//					size = res->size / 1024;
+			FileSettingsItem fileItem = (FileSettingsItem) remoteFile.item;
+			String fileName = fileItem.getFileName();
+			if (fileItem.getSubtype() == FileSubtype.OBF_MAP && fileName != null) {
+				File file = app.getResourceManager().getIndexFiles().get(fileName.toLowerCase());
+				if (file != null) {
+					size = file.length() / 1024;
 				}
 			}
 		}

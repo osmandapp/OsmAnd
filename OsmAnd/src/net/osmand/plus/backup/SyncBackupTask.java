@@ -1,10 +1,10 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
-import static net.osmand.plus.backup.NetworkSettingsHelper.BackupSyncOperationType.BACKUP_SYNC_OPERATION_DOWNLOAD;
-import static net.osmand.plus.backup.NetworkSettingsHelper.BackupSyncOperationType.BACKUP_SYNC_OPERATION_SYNC;
-import static net.osmand.plus.backup.NetworkSettingsHelper.BackupSyncOperationType.BACKUP_SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 
 import android.os.AsyncTask;
 
@@ -15,7 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
-import net.osmand.plus.backup.NetworkSettingsHelper.BackupSyncOperationType;
+import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -37,7 +37,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private final BackupHelper backupHelper;
 	private final NetworkSettingsHelper networkSettingsHelper;
 
-	private final BackupSyncOperationType operation;
+	private final SyncOperationType operation;
+	private final OnBackupSyncListener syncListener;
 	private final boolean singleOperation;
 
 	private long maxProgress;
@@ -45,15 +46,25 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private long currentProgress;
 
 	public SyncBackupTask(@NonNull OsmandApplication app, @NonNull String key,
-	                      @NonNull BackupSyncOperationType operation) {
-		this.key = key;
+	                      @NonNull SyncOperationType operation,
+	                      @Nullable OnBackupSyncListener syncListener) {
 		this.app = app;
+		this.key = key;
 		this.operation = operation;
-		this.singleOperation = operation != BACKUP_SYNC_OPERATION_SYNC;
-
+		this.singleOperation = operation != SYNC_OPERATION_SYNC;
+		this.syncListener = syncListener;
 		this.backupHelper = app.getBackupHelper();
 		this.networkSettingsHelper = app.getNetworkSettingsHelper();
+
 		backupHelper.addPrepareBackupListener(this);
+	}
+
+	public long getMaxProgress() {
+		return maxProgress;
+	}
+
+	public long getGeneralProgress() {
+		return lastProgress;
 	}
 
 	@Override
@@ -62,8 +73,11 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	@Override
-	protected void onPostExecute(Void unused) {
-		backupHelper.removePrepareBackupListener(this);
+	protected Void doInBackground(Void... voids) {
+		if (!backupHelper.isBackupPreparing()) {
+			startSync();
+		}
+		return null;
 	}
 
 	private void startSync() {
@@ -72,15 +86,18 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 		List<SettingsItem> settingsItems = BackupHelper.getItemsForRestore(info, backup.getSettingsItems());
 
-		if (operation != BACKUP_SYNC_OPERATION_DOWNLOAD) {
+		if (operation != SYNC_OPERATION_DOWNLOAD) {
 			maxProgress += calculateExportMaxProgress() / 1024;
 		}
-		if (operation != BACKUP_SYNC_OPERATION_UPLOAD) {
+		if (operation != SYNC_OPERATION_UPLOAD) {
 			maxProgress += ImportBackupTask.calculateMaxProgress(app);
 		}
-		if (settingsItems.size() > 0 && operation != BACKUP_SYNC_OPERATION_UPLOAD) {
+		if (syncListener != null) {
+			syncListener.onBackupSyncStarted();
+		}
+		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
 			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, this);
-		} else if (operation != BACKUP_SYNC_OPERATION_DOWNLOAD) {
+		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
 			onSyncFinished(null);
@@ -100,10 +117,6 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		networkSettingsHelper.exportSettings(fileName, Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
-	private void onSyncFinished(@Nullable String error) {
-		networkSettingsHelper.syncBackupTasks.remove(key);
-	}
-
 	private void uploadNewItems() {
 		if (isCancelled()) {
 			return;
@@ -121,16 +134,6 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 	}
 
-	@Override
-	public void onBackupPreparing() {
-
-	}
-
-	@Override
-	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-		startSync();
-	}
-
 	private long calculateExportMaxProgress() {
 		BackupInfo info = backupHelper.getBackup().getBackupInfo();
 
@@ -145,11 +148,16 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	@Override
-	protected Void doInBackground(Void... voids) {
-		if (!backupHelper.isBackupPreparing()) {
-			startSync();
+	public void onBackupPreparing() {
+
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		startSync();
+		if (syncListener != null) {
+			syncListener.onBackupSyncStarted();
 		}
-		return null;
 	}
 
 	@Override
@@ -161,11 +169,57 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			app.getRendererRegistry().updateExternalRenderers();
 			app.getPoiFilters().loadSelectedPoiFilters();
 			AppInitializer.loadRoutingFiles(app, null);
+//			app.getResourceManager().reloadIndexesAsync(null, null);
+//			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+//			if (plugin != null) {
+//				plugin.indexingFiles(true, true);
+//			}
 		}
 		if (singleOperation) {
 			onSyncFinished(null);
 		}
 		uploadNewItems();
+	}
+
+	@Override
+	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		if (syncListener != null) {
+			syncListener.onBackupItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (syncListener != null) {
+			syncListener.onBackupItemProgress(type, fileName, value);
+		}
+	}
+
+	@Override
+	public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (syncListener != null) {
+			syncListener.onBackupItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onImportProgressUpdate(int value, int uploadedKb) {
+		currentProgress = uploadedKb;
+		float progress = (float) currentProgress / maxProgress;
+		progress = progress > 1 ? 1 : progress;
+
+		if (syncListener != null) {
+			syncListener.onBackupProgressUpdate(progress);
+		}
+	}
+
+	private void onSyncFinished(@Nullable String error) {
+		backupHelper.removePrepareBackupListener(this);
+		networkSettingsHelper.syncBackupTasks.remove(key);
+
+		if (syncListener != null) {
+			syncListener.onBackupSyncFinished(error);
+		}
 	}
 
 	@Override
@@ -175,20 +229,11 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			currentProgress += exportTask.getGeneralProgress() - lastProgress;
 			float progress = (float) currentProgress / maxProgress;
 			progress = progress > 1 ? 1 : progress;
+			if (syncListener != null) {
+				syncListener.onBackupProgressUpdate(progress);
+			}
 			lastProgress = exportTask.getGeneralProgress();
 		}
-	}
-
-	@Override
-	public void onBackupExportFinished(@Nullable String error) {
-		onSyncFinished(error);
-	}
-
-	@Override
-	public void onImportProgressUpdate(int value, int uploadedKb) {
-		currentProgress = uploadedKb;
-		float progress = (float) currentProgress / maxProgress;
-		progress = progress > 1 ? 1 : progress;
 	}
 
 	@Override
@@ -197,33 +242,43 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	@Override
-	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-	}
-
-	@Override
-	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
+	public void onBackupExportFinished(@Nullable String error) {
+		onSyncFinished(error);
 	}
 
 	@Override
 	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
-
-	}
-
-
-	@Override
-	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
+		if (syncListener != null) {
+			syncListener.onBackupItemFinished(type, fileName);
+		}
 	}
 
 	@Override
-	public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
+	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		if (syncListener != null) {
+			syncListener.onBackupItemStarted(type, fileName, work);
+		}
 	}
 
 	@Override
-	public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (syncListener != null) {
+			syncListener.onBackupItemProgress(type, fileName, value);
+		}
+	}
 
+	public interface OnBackupSyncListener {
+
+		void onBackupSyncStarted();
+
+		void onBackupProgressUpdate(float progress);
+
+		void onBackupSyncFinished(@Nullable String error);
+
+		void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work);
+
+		void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value);
+
+		void onBackupItemFinished(@NonNull String type, @NonNull String fileName);
 	}
 }
