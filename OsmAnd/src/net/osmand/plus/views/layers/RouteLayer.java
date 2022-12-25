@@ -95,6 +95,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
+	private interface ConditionMatcher {
+		boolean match();
+	}
+
 	public RouteLayer(@NonNull Context context) {
 		super(context);
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -156,9 +160,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (hasMapRenderer() && !helper.isPublicTransportMode()
-				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			getApplication().runInUIThread(() -> drawLocations(null, view.getRotatedTileBox()));
+		ConditionMatcher drawLocationsMatcher = () -> hasMapRenderer() && !helper.isPublicTransportMode()
+				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated();
+		if (drawLocationsMatcher.match()) {
+			getApplication().runInUIThread(() -> {
+				if (drawLocationsMatcher.match()) {
+					drawLocations(null, view.getRotatedTileBox());
+				}
+			});
 		}
 	}
 
@@ -189,7 +198,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		mapActivityInvalidated = false;
 	}
 
-	private void drawLocations(Canvas canvas, RotatedTileBox tileBox) {
+	private void drawLocations(@Nullable Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		int w = tileBox.getPixWidth();
 		int h = tileBox.getPixHeight();
 		Location lastProjection = helper.getLastProjection();
@@ -203,7 +212,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 		QuadRect latlonRect = cp.getLatLonBounds();
 		QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
-		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
+		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left,
+				correctedQuadRect.bottom, correctedQuadRect.right);
 	}
 
 	public Location getLastRouteProjection() {
@@ -393,7 +403,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+	public void drawLocations(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
+	                          double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		if (helper.isPublicTransportMode()) {
 			publicTransportRouteGeometry.baseOrder = getBaseOrder();
 			int currentRoute = transportHelper.getCurrentRoute();

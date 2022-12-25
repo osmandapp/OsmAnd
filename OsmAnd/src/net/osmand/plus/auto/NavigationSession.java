@@ -142,7 +142,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 			return requestPurchaseScreen;
 		}
 
-		if (isLocationPermissionAvailable()) {
+		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
@@ -163,14 +163,14 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	public boolean isLocationPermissionAvailable() {
 		boolean accessFineLocation = ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-				!= PackageManager.PERMISSION_GRANTED;
+				== PackageManager.PERMISSION_GRANTED;
 		boolean accessCoarseLocation = ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
 				== PackageManager.PERMISSION_GRANTED;
 		return accessFineLocation || accessCoarseLocation;
 	}
 
 	private boolean requestLocationPermission() {
-		if (isLocationPermissionAvailable()) {
+		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(
 					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
 			return true;

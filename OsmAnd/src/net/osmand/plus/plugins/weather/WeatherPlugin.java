@@ -63,6 +63,8 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -499,5 +501,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		if (weatherContourLayer != null) {
 			weatherContourLayer.setDateTime(time);
 		}
+	}
+
+	@Override
+	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
 	}
 }
