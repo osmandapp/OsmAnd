@@ -4088,4 +4088,6 @@
     <string name="shared_string_visible_widgets">Synliga widgetar</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
     <string name="shared_string_complete">färdig</string>
+    <string name="rendering_attr_surface_compacted_name">Kompakterad</string>
+    <string name="shared_string_launch">Starta</string>
 </resources>
