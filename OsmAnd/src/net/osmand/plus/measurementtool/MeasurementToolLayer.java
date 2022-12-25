@@ -323,8 +323,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tb, settings);
 		boolean hasMapRenderer = hasMapRenderer();
+		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated || mapRendererChanged;
+			if (mapRendererChanged) {
+				this.mapRendererChanged = false;
+			}
 			if (editingCtx.isInApproximationMode()) {
 				drawApproximatedLines(canvas, tb, updated);
 			}
@@ -1028,8 +1032,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();

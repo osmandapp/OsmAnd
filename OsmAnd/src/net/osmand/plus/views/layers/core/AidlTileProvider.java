@@ -1,6 +1,5 @@
 package net.osmand.plus.views.layers.core;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,10 +8,8 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.aidl.AidlMapPointWrapper;
-import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
@@ -25,19 +22,13 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
-import net.osmand.data.BackgroundType;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 

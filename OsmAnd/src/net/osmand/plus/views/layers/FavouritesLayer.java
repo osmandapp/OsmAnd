@@ -86,8 +86,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearFavorites();
 	}
 
@@ -134,9 +134,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		this.favoritesChangedTime = favoritesChangedTime;
 
 		if (hasMapRenderer()) {
-			if (mapActivityInvalidated || nightModeChanged || showFavoritesChanged
+			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged) {
 				showFavorites();
+				mapRendererChanged = false;
 			}
 		} else {
 			cache.clear();

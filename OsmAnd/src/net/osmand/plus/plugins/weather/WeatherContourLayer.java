@@ -66,8 +66,8 @@ public class WeatherContourLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		resetLayerProvider();
 	}
 
@@ -153,13 +153,14 @@ public class WeatherContourLayer extends BaseMapLayer {
 				plugin.getSelectedForecastContoursType() : plugin.getSelectedContoursType();
 
 		short band = contour != null ? contour.getBandIndex() : WEATHER_BAND_UNDEFINED;
-		if (shouldUpdateLayer(band) || mapActivityInvalidated) {
+		if (shouldUpdateLayer(band) || mapActivityInvalidated || mapRendererChanged) {
 			if (shouldDrawLayer(band)) {
 				recreateLayerProvider(mapRenderer, resourcesManager, band);
 			} else {
 				resetLayerProvider();
 			}
 		}
+		mapRendererChanged = false;
 		mapActivityInvalidated = false;
 	}
 

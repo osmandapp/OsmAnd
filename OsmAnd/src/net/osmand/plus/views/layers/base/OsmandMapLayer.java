@@ -72,6 +72,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private MapActivity mapActivity;
 	protected OsmandMapTileView view;
 	protected boolean mapActivityInvalidated;
+	protected boolean mapRendererChanged;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -144,6 +145,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
+	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
+	                                @Nullable MapRendererView newMapRenderer) {
+		if (newMapRenderer == null) {
+			cleanupResources();
+		} else {
+			mapRendererChanged = true;
+		}
+	}
+
 	@NonNull
 	public MapActivity requireMapActivity() {
 		MapActivity mapActivity = getMapActivity();
@@ -201,6 +211,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	public void destroyLayer() {
+		cleanupResources();
+	}
+
+	protected void cleanupResources() {
 		clearMapMarkersCollections();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {

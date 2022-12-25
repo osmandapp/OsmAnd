@@ -71,7 +71,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 
 	private ApplicationMode appMode;
 	private boolean carView;
-	private boolean hasMapRenderer;
 	private float textScale = 1f;
 	@ColorInt
 	private int profileColor;
@@ -180,22 +179,26 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-		if (mapActivity != null) {
-			initCoreRenderer();
-		} else {
+		if (mapActivity == null) {
 			clearMapMarkersCollections();
+		} else {
+			initCoreRenderer();
+		}
+	}
+
+	@Override
+	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer, @Nullable MapRendererView newMapRenderer) {
+		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
+		if (newMapRenderer != null) {
+			initCoreRenderer();
 		}
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-		boolean hasMapRenderer = hasMapRenderer();
-		if (hasMapRenderer) {
-			initCoreRenderer();
-		} else {
-			initLegacyRenderer();
-		}
+		initCoreRenderer();
+		initLegacyRenderer();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 		locationProvider.addLocationListener(this);
 		locationProvider.addCompassListener(this);
@@ -550,7 +553,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		super.destroyLayer();
 		locationProvider.removeLocationListener(this);
 		locationProvider.removeCompassListener(this);
-		clearMapMarkersCollections();
 	}
 
 	@Override
@@ -596,15 +598,13 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		int headingIconId = appMode.getLocationIcon().getHeadingIconId();
 		float textScale = getTextScale();
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
-		boolean hasMapRenderer = hasMapRenderer();
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
 				|| this.profileColor != profileColor
 				|| this.locationIconId != locationIconId
 				|| this.headingIconId != headingIconId
 				|| this.navigationIconId != navigationIconId
 				|| this.textScale != textScale
-				|| this.carView != carView
-				|| this.hasMapRenderer != hasMapRenderer) {
+				|| this.carView != carView) {
 			this.appMode = appMode;
 			this.profileColor = profileColor;
 			this.nm = nighMode;
@@ -614,7 +614,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			this.navigationIconId = navigationIconId;
 			this.textScale = textScale;
 			this.carView = carView;
-			this.hasMapRenderer = hasMapRenderer;
 			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 			if (navigationIcon != null) {
 				DrawableCompat.setTint(navigationIcon.getDrawable(1), profileColor);
