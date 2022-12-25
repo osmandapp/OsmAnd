@@ -4876,4 +4876,16 @@
     <string name="rendering_attr_showMtbScale_description">Montri montbiciklajn kursojn laŭ la skalo en la ŝlosilo «mtb:scale».</string>
     <string name="quick_action_precipitation_layer">Butono por montri/kaŝi tavolon de veter-alfalaĵoj sur la mapo.</string>
     <string name="quick_action_wind_layer">Butono por montri/kaŝi tavolon de ventoj sur la mapo.</string>
+    <string name="pressure_layer">Tavolo de aer-premoj</string>
+    <string name="quick_action_cloud_layer">Butono por montri/kaŝi tavolon de nuboj sur la mapo.</string>
+    <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aer-premo sur la mapo.</string>
+    <string name="shared_string_next_sunset">Sekva sunsubiro</string>
+    <string name="switch_mode_by_tapping_on_widget">Baskulu la reĝimon per frapeti la fenestraĵon.</string>
+    <string name="temperature_layer">Tavolo de temperaturoj</string>
+    <string name="cloud_layer">Tavolo de nuboj</string>
+    <string name="wind_layer">Tavolo de ventoj</string>
+    <string name="precipitation_layer">Tavolo de precipitaĵoj</string>
+    <string name="storage_migration_fragment_close_descr">Kopiado plenumita en %1$s%%. Se vi ĉesigos ĝin nun, la aplikaĵo povos ne funkcii ĝuste.</string>
+    <string name="map_widget_sunset_desc">Montras la horon de la sekva sunsubiro aŭ la tempon ĝis la sekva sunsubiro.</string>
+    <string name="map_widget_sunrise_desc">Montras la horon de la sekva sunleviĝo aŭ la tempon ĝis la sekva sunleviĝo.</string>
 </resources>
