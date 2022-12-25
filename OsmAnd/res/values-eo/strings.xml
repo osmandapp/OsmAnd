@@ -4888,4 +4888,10 @@
     <string name="storage_migration_fragment_close_descr">Kopiado plenumita en %1$s%%. Se vi ĉesigos ĝin nun, la aplikaĵo povos ne funkcii ĝuste.</string>
     <string name="map_widget_sunset_desc">Montras la horon de la sekva sunsubiro aŭ la tempon ĝis la sekva sunsubiro.</string>
     <string name="map_widget_sunrise_desc">Montras la horon de la sekva sunleviĝo aŭ la tempon ĝis la sekva sunleviĝo.</string>
+    <string name="map_widget_group_sunrise_sunset">Sunleviĝo/sunsubiro</string>
+    <string name="shared_string_time_left">Restanta tempo</string>
+    <string name="shared_string_sunset">Sunsubiro</string>
+    <string name="shared_string_sunrise">Sunleviĝo</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Fenestraĵoj montrantaj informojn pri la sekva sunsubiro kaj sunleviĝo.</string>
+    <string name="shared_string_next_sunrise">Sekva sunvleviĝo</string>
 </resources>
