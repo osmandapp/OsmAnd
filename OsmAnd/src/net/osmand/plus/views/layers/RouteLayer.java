@@ -95,6 +95,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 
+	private interface ConditionMatcher {
+		boolean match();
+	}
+
 	public RouteLayer(@NonNull Context context) {
 		super(context);
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -156,9 +160,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
-		if (hasMapRenderer() && !helper.isPublicTransportMode()
-				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			getApplication().runInUIThread(() -> drawLocations(null, view.getRotatedTileBox()));
+		ConditionMatcher drawLocationsMatcher = () -> hasMapRenderer() && !helper.isPublicTransportMode()
+				&& helper.getFinalLocation() != null && helper.getRoute().isCalculated();
+		if (drawLocationsMatcher.match()) {
+			getApplication().runInUIThread(() -> {
+				if (drawLocationsMatcher.match()) {
+					drawLocations(null, view.getRotatedTileBox());
+				}
+			});
 		}
 	}
 
@@ -178,7 +187,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (mapRenderer == null) {
 				drawXAxisPoints(trackChartPoints, canvas, tileBox);
 			} else {
-				if (highlightedPointCollection == null || mapActivityInvalidated) {
+				if (highlightedPointCollection == null || mapActivityInvalidated || mapRendererChanged) {
 					recreateHighlightedPointCollection();
 				}
 				drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
@@ -187,9 +196,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			resetLayer();
 		}
 		mapActivityInvalidated = false;
+		if (mapRenderer != null) {
+			mapRendererChanged = false;
+		}
 	}
 
-	private void drawLocations(Canvas canvas, RotatedTileBox tileBox) {
+	private void drawLocations(@Nullable Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		int w = tileBox.getPixWidth();
 		int h = tileBox.getPixHeight();
 		Location lastProjection = helper.getLastProjection();
@@ -203,7 +215,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 		QuadRect latlonRect = cp.getLatLonBounds();
 		QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
-		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left, correctedQuadRect.bottom, correctedQuadRect.right);
+		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left,
+				correctedQuadRect.bottom, correctedQuadRect.right);
 	}
 
 	public Location getLastRouteProjection() {
@@ -249,7 +262,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
-			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null && !mapActivityInvalidated) {
+			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints) && trackChartPointsProvider != null
+					&& !mapActivityInvalidated && !mapRendererChanged) {
 				return;
 			}
 			xAxisPointsCached = xAxisPoints;
@@ -393,7 +407,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+	public void drawLocations(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
+	                          double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		if (helper.isPublicTransportMode()) {
 			publicTransportRouteGeometry.baseOrder = getBaseOrder();
 			int currentRoute = transportHelper.getCurrentRoute();
@@ -408,7 +423,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			routeGeometry.clearRoute();
 			boolean routeUpdated = publicTransportRouteGeometry.updateRoute(tb, route);
 			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute
-					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivityInvalidated;
+					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivityInvalidated || mapRendererChanged;
 			if (route != null && draw) {
 				LatLon start = transportHelper.getStartLocation();
 				Location startLocation = new Location("transport");
@@ -492,7 +507,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(lastProjection, startLocationIndex, actualColoringType, routeLineColor,
 						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
-				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated;
+				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated || mapRendererChanged;
 				if (draw) {
 					routeGeometry.resetSymbolProviders();
 				} else {
@@ -507,7 +522,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			Iterator<RouteDirectionInfo> it = rd.iterator();
 			if (!directTo && tb.getZoom() >= 14 && shouldShowTurnArrows) {
 				if (routeGeometry.hasMapRenderer()) {
-					if (routeUpdated || renderState.shouldUpdateActionPoints || mapActivityInvalidated) {
+					if (routeUpdated || renderState.shouldUpdateActionPoints || mapActivityInvalidated || mapRendererChanged) {
 						List<Location> actionPoints = calculateActionPoints(helper.getLastProjection(),
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);
@@ -814,9 +829,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
-		clearXAxisPoints();
+	protected void cleanupResources() {
+		super.cleanupResources();
+		resetLayer();
 	}
 
 	/** OpenGL */

@@ -18,7 +18,6 @@ import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
-import net.osmand.core.jni.MapRendererSetupOptions;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
@@ -94,7 +93,7 @@ public class MapRendererContext {
 	 *
 	 * @param mapRendererView Reference to MapRendererView
 	 */
-	public void setMapRendererView(MapRendererView mapRendererView) {
+	public void setMapRendererView(@Nullable MapRendererView mapRendererView) {
 		boolean update = (this.mapRendererView != mapRendererView);
 		this.mapRendererView = mapRendererView;
 		if (!update) {
@@ -117,6 +116,7 @@ public class MapRendererContext {
 	}
 
 	public void updateMapSettings() {
+		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView instanceof AtlasMapRendererView && cachedReferenceTileSize != getReferenceTileSize()) {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(getReferenceTileSize());
 		}
@@ -208,7 +208,10 @@ public class MapRendererContext {
 				color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
 			}
 		}
-		mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
+		}
 	}
 
 	private void loadRendererAddons() {
@@ -281,6 +284,7 @@ public class MapRendererContext {
 	}
 
 	public void resetRasterAndSymbolsProvider() {
+		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
 		}
@@ -290,6 +294,7 @@ public class MapRendererContext {
 	}
 
 	public void recreateHeightmapProvider() {
+		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 			if (plugin == null || !plugin.isHeightmapEnabled()) {
@@ -306,11 +311,18 @@ public class MapRendererContext {
 					mapRendererView.getElevationDataTileSize()));
 		}
 	}
+	public void resetHeightmapProvider() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.resetElevationDataProvider();
+		}
+	}
 
 	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// Create new OBF map raster layer provider
 		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
 		// In case there's bound view and configured layer, perform setup
+		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
 		}
@@ -318,6 +330,7 @@ public class MapRendererContext {
 
 	private void updateObfMapSymbolsProvider(MapPrimitivesProvider mapPrimitivesProvider) {
 		// If there's current provider and bound view, remove it
+		MapRendererView mapRendererView = this.mapRendererView;
 		if (obfMapSymbolsProvider != null && mapRendererView != null) {
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
@@ -331,14 +344,12 @@ public class MapRendererContext {
 	}
 
 	private void applyCurrentContextToView() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView == null) {
+			return;
+		}
 		mapRendererView.setMapRendererSetupOptionsConfigurator(
-				new MapRendererView.IMapRendererSetupOptionsConfigurator() {
-					@Override
-					public void configureMapRendererSetupOptions(
-							MapRendererSetupOptions mapRendererSetupOptions) {
-						mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
-					}
-				});
+				mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);

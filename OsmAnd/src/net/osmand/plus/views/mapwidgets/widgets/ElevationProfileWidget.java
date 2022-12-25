@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -84,9 +85,14 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private boolean movedToLocation;
 
+	private static Matrix lastStateMatrix;
+	private static String lastRoute;
+	private static boolean lastLinkedToLocation;
+
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
 			movedToLocation = true;
+			lastLinkedToLocation = true;
 		}
 	};
 
@@ -95,6 +101,26 @@ public class ElevationProfileWidget extends MapWidget {
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	private void restoreLastState() {
+		if (chart != null && lastStateMatrix != null && route != null) {
+			if (Algorithms.stringsEqual(lastRoute, route.toString())) {
+				chart.getViewPortHandler().refresh(new Matrix(lastStateMatrix), chart, false);
+			} else {
+				lastStateMatrix = null;
+			}
+			if (lastLinkedToLocation) {
+				movedToLocation = true;
+			}
+		}
+	}
+
+	private void storeLastState() {
+		if (chart != null) {
+			lastStateMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+		}
+		lastLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 	}
 
 	@Override
@@ -155,12 +181,22 @@ public class ElevationProfileWidget extends MapWidget {
 		if (chartUpdated) {
 			updateWidgets();
 		}
+		if (settingsUpdated) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					restoreLastState();
+				}
+			});
+		}
 	}
 
 	private boolean updateSettings() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		boolean routeChanged = this.route != route;
 		this.route = route;
+		lastRoute = route.toString();
 		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
 		boolean slopesChanged = showSlopes != this.showSlopes;
 		this.showSlopes = showSlopes;
@@ -236,6 +272,7 @@ public class ElevationProfileWidget extends MapWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+				storeLastState();
 				app.runInUIThread(() -> updateWidgets());
 			}
 

@@ -43,6 +43,8 @@ import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.utils.NativeUtilities;
@@ -319,7 +321,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			String name = null;
 			Map.Entry<WorldRegion, BinaryMapDataObject> res = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
 			if (res != null && res.getKey() != null) {
-				WorldRegion regionData  = res.getKey();
+				WorldRegion regionData = res.getKey();
 				List<IndexItem> indexItems = indexes.getIndexItems(regionData);
 				if (indexItems.size() == 0) {
 					if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
@@ -454,8 +456,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		RotatedTileBox queriedBox = data.getQueriedBox();
 		List<BinaryMapDataObject> currentObjects = data.getResults();
 		if (osmandRegions.isInitialized() && queriedBox != null) {
-			if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&
-					currentObjects != null){
+			if (zoom >= ZOOM_TO_SHOW_MAP_NAMES && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&
+					currentObjects != null) {
 				btnName.setLength(0);
 				btnName.append(view.getResources().getString(R.string.shared_string_download));
 				filter.setLength(0);
@@ -492,7 +494,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 		}
-		if(filter.length() == 0) {
+		if (filter.length() == 0) {
 			return null;
 		}
 		return filter.toString();
@@ -508,15 +510,17 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return false;
 	}
 
-
-
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
 		rm.removeResourceListener(this);
-		clearPolygonsCollections();
 	}
 
+	@Override
+	protected void cleanupResources() {
+		super.cleanupResources();
+		clearPolygonsCollections();
+	}
 
 	// IContextMenuProvider
 	@Override
@@ -810,7 +814,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private boolean isShowDownloadedMaps() {
-		return app.getSettings().SHOW_BORDERS_OF_DOWNLOADED_MAPS.get();
+		return app.getSettings().SHOW_BORDERS_OF_DOWNLOADED_MAPS.get() &&
+				!PluginsHelper.layerShouldBeDisabled(this);
 	}
 
 	@Override
