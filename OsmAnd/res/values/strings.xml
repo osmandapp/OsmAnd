@@ -4293,8 +4293,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="search_offline_clear_search">New Search</string>
     <string name="map_text_size_descr">Text size for names on the map:</string>
     <string name="map_text_size">Map font size</string>
-    <string name="trace_rendering">Rendering debug info</string>
-    <string name="trace_rendering_descr">Display the rendering performance.</string>
+    <string name="trace_rendering">Performance debug info</string>
+    <string name="trace_rendering_descr">Display the rendering and navigation performance.</string>
     <string name="installing_new_resources">Unpacking new data…</string>
     <string name="internet_connection_required_for_online_route">Online navigation does not work offline.</string>
     <string name="tts_language_not_supported_title">Unsupported language</string>
