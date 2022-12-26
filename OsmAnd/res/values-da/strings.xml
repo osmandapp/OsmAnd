@@ -514,8 +514,8 @@
     <string name="search_offline_clear_search">Ny søgning</string>
     <string name="map_text_size_descr">Tekststørrelse for navne på kortet:</string>
     <string name="map_text_size">Tekststørrelse</string>
-    <string name="trace_rendering">Gengivelsesfejlfinding</string>
-    <string name="trace_rendering_descr">Vis gengivelsesydeevne.</string>
+    <string name="trace_rendering">Info til fejlfinding af ydeevne</string>
+    <string name="trace_rendering_descr">Vis gengivelses - og navigationsydeevne.</string>
     <string name="installing_new_resources">Udpakker nye data…</string>
     <string name="internet_connection_required_for_online_route">Online navigation fungerer ikke offline.</string>
     <string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
