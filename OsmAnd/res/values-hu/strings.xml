@@ -205,8 +205,8 @@
     <string name="search_offline_clear_search">Új keresés</string>
     <string name="map_text_size_descr">A térképen szereplő nevek szövegmérete:</string>
     <string name="map_text_size">Szövegméret</string>
-    <string name="trace_rendering">Hibakeresési (debug) információ megjelenítése</string>
-    <string name="trace_rendering_descr">Megjelenítési teljesítmény kijelzése.</string>
+    <string name="trace_rendering">Teljesítmény hibakeresési (debug) információ</string>
+    <string name="trace_rendering_descr">Megjelenítési és navigációs teljesítmény kijelzése.</string>
     <string name="installing_new_resources">Új adatok kicsomagolása…</string>
     <string name="internet_connection_required_for_online_route">Az online navigáció offline üzemmódban nem működik.</string>
     <string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
