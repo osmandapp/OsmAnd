@@ -271,8 +271,8 @@
     <string name="search_offline_clear_search">Nové hľadanie</string>
     <string name="map_text_size_descr">Veľkosť písma pre názvy na mape:</string>
     <string name="map_text_size">Veľkosť písma</string>
-    <string name="trace_rendering">Ladiace info vykresľovania</string>
-    <string name="trace_rendering_descr">Zobraziť údaje výkonu vykresľovania pre účely ladenia.</string>
+    <string name="trace_rendering">Informácie pre ladenie výkonu</string>
+    <string name="trace_rendering_descr">Zobraziť údaje výkonu vykresľovania a navigácie.</string>
     <string name="installing_new_resources">Rozbaľujú sa nové údaje…</string>
     <string name="internet_connection_required_for_online_route">Online navigačná služba nefunguje bez pripojenia na Internet.</string>
     <string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
