@@ -226,7 +226,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="shared_string_all">Todos</string>
+    <string name="shared_string_all">Todo</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
@@ -4835,7 +4835,7 @@
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
     <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
-    <string name="nautical_depth_points">Puntos de profundidad náutica</string>
+    <string name="nautical_depth_points">Puntos de profundidad náuticos</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
@@ -4998,4 +4998,6 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="mtb_segment_classification">Clasificación de segmentos</string>
+    <string name="shared_string_expires">Expira</string>
+    <string name="shared_string_purchased_on">Comprado el</string>
 </resources>
