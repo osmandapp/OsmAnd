@@ -258,8 +258,8 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для підписів на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Дані для пошуку вад рендерингу</string>
-    <string name="trace_rendering_descr">Відомості про швидкість рендерингу.</string>
+    <string name="trace_rendering">Інформація про налагодження швидкодії</string>
+    <string name="trace_rendering_descr">Відомості про швидкість рендерингу та швидкодії навігації.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Онлайн навігація не працює без під\'єднання до мережі.</string>
     <string name="tts_language_not_supported_title">Мова не підтримується</string>
