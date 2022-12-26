@@ -20,7 +20,7 @@ public class QuadRectHelper {
 		return new QuadRect(Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE, Double.MAX_VALUE);
 	}
 
-	public static void includeLatLon(QuadRect r, double latitude, double longitude) {
+	public static void includeLatLon(@NonNull QuadRect r, double latitude, double longitude) {
 		r.left = Math.min(r.left, longitude);
 		r.right = Math.max(r.right, longitude);
 		r.top = Math.max(r.top, latitude);
@@ -30,7 +30,7 @@ public class QuadRectHelper {
 	/* This function does the same thing than includeLatLon but on a set of Locations.
 	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
 	 */
-	public static void includeLocations(QuadRect r, List<Location> list) {
+	public static void includeLocations(@NonNull QuadRect r, @NonNull List<Location> list) {
 		double latitude;
 		double longitude;
 		
@@ -48,7 +48,7 @@ public class QuadRectHelper {
 	/* This function does the same thing than includeLatLon but on a set of Nodes.
 	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
 	 */
-	public static void includeNodes(QuadRect r, List<Node> nodes) {
+	public static void includeNodes(@NonNull QuadRect r, @NonNull List<Node> nodes) {
 		double latitude;
 		double longitude;
 		
@@ -66,7 +66,7 @@ public class QuadRectHelper {
 	/* This function does the same thing than includeLatLon but on a set of TargetPoints.
 	 * Code is dupplicated for optimization purposes, the set of points possibly being huge.
 	 */
-	public static void includeTargetPoints(QuadRect r, List<TargetPointsHelper.TargetPoint> points) {
+	public static void includeTargetPoints(@NonNull QuadRect r, @NonNull List<TargetPointsHelper.TargetPoint> points) {
 		double latitude;
 		double longitude;
 		
@@ -85,7 +85,7 @@ public class QuadRectHelper {
 	 * i.e. If both left to right and bottom to top are increasing or equal.
 	*/
 	@NonNull
-	public static boolean pointsHaveBeenIncluded(QuadRect r) {
+	public static boolean pointsHaveBeenIncluded(@NonNull QuadRect r) {
 		return (r.left <= r.right && r.bottom <= r.top) ? true : false;
 	}
 }
