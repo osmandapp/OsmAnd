@@ -4620,7 +4620,7 @@
     <string name="av_def_action_choose">Demandi</string>
     <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton al la mapo.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
-    <string name="rendering_attr_weatherPressureContours_name">Egal-prem-linioj (izobaroj)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
     <string name="map_widget_trip_recording_distance">Distanco</string>
     <string name="map_widget_trip_recording_downhill">Malsupreniroj</string>
@@ -4876,9 +4876,9 @@
     <string name="rendering_attr_showMtbScale_description">Montri montbiciklajn kursojn laŭ la skalo en la ŝlosilo «mtb:scale».</string>
     <string name="quick_action_precipitation_layer">Butono por montri/kaŝi tavolon de veter-alfalaĵoj sur la mapo.</string>
     <string name="quick_action_wind_layer">Butono por montri/kaŝi tavolon de ventoj sur la mapo.</string>
-    <string name="pressure_layer">Tavolo de aer-premoj</string>
+    <string name="pressure_layer">Tavolo de aerpremoj</string>
     <string name="quick_action_cloud_layer">Butono por montri/kaŝi tavolon de nuboj sur la mapo.</string>
-    <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aer-premo sur la mapo.</string>
+    <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aerpremoj sur la mapo.</string>
     <string name="shared_string_next_sunset">Sekva sunsubiro</string>
     <string name="switch_mode_by_tapping_on_widget">Baskulu la reĝimon per frapeti la fenestraĵon.</string>
     <string name="temperature_layer">Tavolo de temperaturoj</string>
@@ -4894,4 +4894,17 @@
     <string name="shared_string_sunrise">Sunleviĝo</string>
     <string name="map_widget_group_sunrise_sunset_desc">Fenestraĵoj montrantaj informojn pri la sekva sunsubiro kaj sunleviĝo.</string>
     <string name="shared_string_next_sunrise">Sekva sunvleviĝo</string>
+    <string name="weather_offline_forecast">Malkonekta veterproggnozo</string>
+    <string name="map_settings_weather_temp">Temperaturo</string>
+    <string name="depth_contour_lines">Maraj profundec-kurboj</string>
+    <string name="turn_on_nautical_depth_description">Aktivigu por vidigi datumojn pri mara profundeco sur la mapo.</string>
+    <string name="weather_online_cache">Kaŝmemoro</string>
+    <string name="weather_plugin_description">Liveras:
+\n • 24-horan 7-tagan veterprognozojn kun 5 tavoloj
+\n • fenestraĵojn agordiĝantajn laŭ loko
+\n • egal-temperatur-liniojn kaj egal-aerprem-liniojn.
+\n
+\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="rendering_attr_depthContourWidth_name">Larĝo de kurboj</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
 </resources>
