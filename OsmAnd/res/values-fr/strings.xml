@@ -147,8 +147,8 @@
     <string name="search_offline_clear_search">Nouvelle recherche</string>
     <string name="map_text_size_descr">Taille des noms sur la carte :</string>
     <string name="map_text_size">Taille du texte</string>
-    <string name="trace_rendering">Infos de débogage du rendu</string>
-    <string name="trace_rendering_descr">Afficher les performances du rendu.</string>
+    <string name="trace_rendering">Infos de débogage des performances</string>
+    <string name="trace_rendering_descr">Afficher les performances du rendu et de la navigation.</string>
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Le calcul d\'itinéraire en ligne est sélectionné mais une connexion Internet est indispensable pour qu\'il fonctionne.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
