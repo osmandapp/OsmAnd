@@ -86,6 +86,11 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		setupToolbar(view);
 		setupBottomButtons();
 
+		if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()
+				&& backupHelper.getBackup().getBackupInfo() == null) {
+			backupHelper.prepareBackup();
+		}
+
 		return view;
 	}
 

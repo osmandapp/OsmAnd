@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 import static net.osmand.plus.backup.BackupHelper.STATUS_NO_ORDER_ID_ERROR;
 
@@ -52,6 +53,7 @@ public enum BackupStatus {
 			BackupError error = new BackupError(backup.getError());
 			int errorCode = error.getCode();
 			if (errorCode == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT
+					|| errorCode == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
 					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
 				return SUBSCRIPTION_EXPIRED;
 			}

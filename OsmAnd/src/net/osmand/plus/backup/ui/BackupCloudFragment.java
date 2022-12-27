@@ -2,9 +2,9 @@ package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
-import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_CONFLICTS;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
+import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CLOUD_CHANGES_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CONFLICTS_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.LOCAL_CHANGES_BUTTON_INDEX;
@@ -270,6 +270,9 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 		if (card instanceof IntroductionCard) {
 			if (IntroductionCard.SYNC_BUTTON_INDEX == buttonIndex) {
+				if (!backupHelper.isBackupPreparing() && backupHelper.getBackup().getBackupInfo() == null) {
+					backupHelper.prepareBackup();
+				}
 				if (!settingsHelper.isBackupSyncing()) {
 					settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
 				}
