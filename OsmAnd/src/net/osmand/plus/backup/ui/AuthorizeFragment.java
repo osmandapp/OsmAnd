@@ -393,7 +393,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					if (!fragmentManager.isStateSaved()) {
 						fragmentManager.popBackStack(BackupAuthorizationFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 					}
-					BackupAndRestoreFragment.showInstance(fragmentManager, signIn ? LoginDialogType.SIGN_IN : LoginDialogType.SIGN_UP);
+					BackupCloudFragment.showInstance(fragmentManager, signIn ? LoginDialogType.SIGN_IN : LoginDialogType.SIGN_UP);
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
 					buttonContinue.setEnabled(false);

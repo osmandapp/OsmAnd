@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -33,10 +34,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	private long maxProgress;
 
 	ExportBackupTask(@NonNull String key,
-					 @NonNull NetworkSettingsHelper helper,
-					 @NonNull List<SettingsItem> items,
-					 @NonNull List<SettingsItem> itemsToDelete,
-					 @Nullable BackupExportListener listener) {
+	                 @NonNull NetworkSettingsHelper helper,
+	                 @NonNull List<SettingsItem> items,
+	                 @NonNull List<SettingsItem> itemsToDelete,
+	                 @Nullable BackupExportListener listener) {
 		this.key = key;
 		this.helper = helper;
 		this.listener = listener;
@@ -78,7 +79,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		long itemsSize = getEstimatedItemsSize();
+		OsmandApplication app = helper.getApp();
+		long itemsSize = getEstimatedItemsSize(app, exporter.getItems(),
+				exporter.getItemsToDelete(), exporter.getOldItemsToDelete());
 		publishProgress(itemsSize / 1024L);
 
 		String error = null;
@@ -91,10 +94,13 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		return error;
 	}
 
-	private long getEstimatedItemsSize() {
+	public static long getEstimatedItemsSize(@NonNull OsmandApplication app,
+	                                         @NonNull List<SettingsItem> items,
+	                                         @NonNull List<SettingsItem> itemsToDelete,
+	                                         @NonNull List<SettingsItem> oldItemsToDelete) {
 		long size = 0;
-		BackupHelper backupHelper = helper.getApp().getBackupHelper();
-		for (SettingsItem item : exporter.getItems()) {
+		BackupHelper backupHelper = app.getBackupHelper();
+		for (SettingsItem item : items) {
 			if (item instanceof FileSettingsItem) {
 				List<File> filesToUpload = backupHelper.collectItemFilesForUpload((FileSettingsItem) item);
 				for (File file : filesToUpload) {
@@ -106,7 +112,6 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		}
 		Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(PrepareBackupResult.RemoteFilesType.UNIQUE);
 		if (remoteFilesMap != null) {
-			List<SettingsItem> itemsToDelete = exporter.getItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : itemsToDelete) {
 					if (item.equals(remoteFile.item)) {
@@ -114,7 +119,6 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 					}
 				}
 			}
-			List<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : oldItemsToDelete) {
 					SettingsItem remoteFileItem = remoteFile.item;
