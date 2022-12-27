@@ -459,9 +459,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		clearPoiTileProvider();
 		routingHelper.removeListener(this);
 		travelRendererHelper.removeFileVisibilityListener(this);
+	}
+
+	@Override
+	protected void cleanupResources() {
+		super.cleanupResources();
+		clearPoiTileProvider();
 	}
 
 	@Override

@@ -305,8 +305,9 @@ public class MapTileLayer extends BaseMapLayer {
 		if (hasMapRenderer()) {
 			ITileSource map = visible ? this.map : null;
 			boolean providerUpdated = false;
-			if (needUpdateProvider) {
+			if (needUpdateProvider || mapRendererChanged) {
 				providerUpdated = setLayerProvider(map);
+				mapRendererChanged = false;
 				needUpdateProvider = false;
 			} else if (visibleChanged) {
 				providerUpdated = setLayerProvider(map);
@@ -485,6 +486,11 @@ public class MapTileLayer extends BaseMapLayer {
 		if (resourceManager != null) {
 			resourceManager.removeMapTileLayerSize(this);
 		}
+	}
+
+	@Override
+	protected void cleanupResources() {
+		super.cleanupResources();
 		setLayerProvider(null);
 	}
 

@@ -360,13 +360,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackMarkersChangedTime = trackMarkersChangedTime;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged;
+			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}
 			drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			drawSelectedFilesSplitsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate);
 			drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate || trackMarkersChanged);
+			mapRendererChanged = false;
 		} else {
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
@@ -632,7 +633,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean updateBitmaps() {
 		if (hasMapRenderer()) {
 			float textScale = getTextScale();
-			if (this.textScale != textScale || startPointImage == null) {
+			if (this.textScale != textScale || startPointImage == null || mapRendererChanged) {
 				this.textScale = textScale;
 				recreateBitmaps();
 				return true;
@@ -1779,8 +1780,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearXAxisPoints();
 		clearPoints();
 		clearSelectedFilesSplits();
