@@ -2,12 +2,13 @@ package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_SYNC;
-import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.CLOUD_CHANGES;
-import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.CONFLICTS;
-import static net.osmand.plus.backup.ui.ChangesFragment.ChangesTabType.LOCAL_CHANGES;
+import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
+import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_CONFLICTS;
+import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CLOUD_CHANGES_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.CONFLICTS_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.LOCAL_CHANGES_BUTTON_INDEX;
+import static net.osmand.plus.backup.ui.status.CloudSyncCard.STOP_BUTTON_INDEX;
 import static net.osmand.plus.backup.ui.status.CloudSyncCard.SYNC_BUTTON_INDEX;
 
 import android.os.Bundle;
@@ -20,20 +21,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.status.BackupStatus;
 import net.osmand.plus.backup.ui.status.CloudSyncCard;
+import net.osmand.plus.backup.ui.status.IntroductionCard;
+import net.osmand.plus.backup.ui.status.WarningStatusCard;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -42,6 +50,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurchaseListener,
 		OnPrepareBackupListener, CardListener, OnBackupSyncListener {
@@ -49,14 +58,18 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	public static final String TAG = BackupCloudFragment.class.getSimpleName();
 
 	private static final String DIALOG_TYPE_KEY = "dialog_type_key";
+	private static final String CHANGES_VISIBLE_KEY = "changes_visible_key";
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
 	private CloudSyncCard syncCard;
-	private LoginDialogType dialogType;
+	private WarningStatusCard warningCard;
+	private IntroductionCard introductionCard;
 
+	private LoginDialogType dialogType;
+	private boolean changesVisible;
 	private boolean nightMode;
 
 	@Override
@@ -64,13 +77,12 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	@Nullable
-	public LoginDialogType getDialogType() {
-		return dialogType;
+	public boolean isChangesVisible() {
+		return changesVisible;
 	}
 
-	public void removeDialogType() {
-		dialogType = null;
+	public void toggleActionsVisibility() {
+		changesVisible = !changesVisible;
 	}
 
 	@Override
@@ -81,8 +93,11 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		settingsHelper = app.getNetworkSettingsHelper();
 		nightMode = !requireMyApplication().getSettings().isLightContent();
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(DIALOG_TYPE_KEY)) {
-			dialogType = LoginDialogType.valueOf(savedInstanceState.getString(DIALOG_TYPE_KEY));
+		if (savedInstanceState != null) {
+			changesVisible = savedInstanceState.getBoolean(CHANGES_VISIBLE_KEY);
+			if (savedInstanceState.containsKey(DIALOG_TYPE_KEY)) {
+				dialogType = LoginDialogType.valueOf(savedInstanceState.getString(DIALOG_TYPE_KEY));
+			}
 		}
 	}
 
@@ -93,22 +108,11 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		View view = themedInflater.inflate(R.layout.osmand_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
 
-		setupCards(view);
 		setupToolbar(view);
-
-		if (!settingsHelper.isBackupExporting()) {
-			app.getBackupHelper().prepareBackup();
-		}
+		setupSwipeRefresh(view);
+		setupCards(view);
 
 		return view;
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		if (dialogType != null) {
-			outState.putString(DIALOG_TYPE_KEY, dialogType.name());
-		}
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -129,22 +133,63 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
 		actionButton.setImageDrawable(getIcon(R.drawable.ic_action_settings));
-		actionButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				BackupSettingsFragment.showInstance(activity.getSupportFragmentManager());
-			}
-		});
+		actionButton.setOnClickListener(v -> openSettings());
 		AndroidUiHelper.updateVisibility(actionButton, true);
 	}
 
-	private void setupCards(@NonNull View view) {
+	private void openSettings() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			BackupSettingsFragment.showInstance(activity.getSupportFragmentManager());
+		}
+		dialogType = null;
+	}
+
+	private void setupSwipeRefresh(@NonNull View view) {
+		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
+		swipeRefresh.setColorSchemeColors(swipeColor);
+		swipeRefresh.setOnRefreshListener(() -> {
+			if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
+				backupHelper.prepareBackup();
+			}
+			swipeRefresh.setRefreshing(false);
+		});
+	}
+
+	private void setupCards(@Nullable View view) {
+		if (view == null) {
+			return;
+		}
 		ViewGroup container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
-		syncCard = new CloudSyncCard(requireActivity());
-		syncCard.setListener(this);
-		container.addView(syncCard.build(view.getContext()));
+		PrepareBackupResult backup = backupHelper.getBackup();
+		BackupInfo info = backup.getBackupInfo();
+		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
+
+		boolean backupSaved = !Algorithms.isEmpty(backup.getRemoteFiles());
+		boolean showIntroductionItem = info != null && dialogType == LoginDialogType.SIGN_UP && !backupSaved
+				|| (dialogType == LoginDialogType.SIGN_IN && (backupSaved || !Algorithms.isEmpty(backup.getLocalFiles())));
+
+		if (showIntroductionItem) {
+			introductionCard = new IntroductionCard(requireActivity(), dialogType);
+			introductionCard.setListener(this);
+			container.addView(introductionCard.build(view.getContext()));
+		} else {
+			if (status.warningTitleRes != -1 || !Algorithms.isEmpty(backup.getError())) {
+				warningCard = new WarningStatusCard(requireActivity());
+				warningCard.setListener(this);
+				container.addView(warningCard.build(view.getContext()));
+			}
+			syncCard = new CloudSyncCard(requireActivity(), this);
+			syncCard.setListener(this);
+			container.addView(syncCard.build(view.getContext()));
+		}
+	}
+
+	private void refreshContent() {
+		setupCards(getView());
 	}
 
 	@Override
@@ -170,41 +215,51 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	@Override
-	public void onBackupPreparing() {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (dialogType != null) {
+			outState.putString(DIALOG_TYPE_KEY, dialogType.name());
+		}
+		outState.putBoolean(CHANGES_VISIBLE_KEY, changesVisible);
 	}
 
 	@Override
-	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+	public void onItemPurchased(String sku, boolean active) {
+		refreshContent();
+	}
+
+	@Override
+	public void onBackupPreparing() {
+		app.runInUIThread(this::refreshContent);
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backup) {
+		app.runInUIThread(this::refreshContent);
 	}
 
 	@Override
 	public void onBackupSyncStarted() {
-
+		app.runInUIThread(this::refreshContent);
 	}
 
 	@Override
 	public void onBackupProgressUpdate(float progress) {
-
+		app.runInUIThread(() -> {
+			if (syncCard != null) {
+				syncCard.onBackupProgressUpdate(progress);
+			}
+		});
 	}
 
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
-
-	}
-
-	@Override
-	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-	}
-
-	@Override
-	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
-	}
-
-	@Override
-	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
-
+		if (!Algorithms.isEmpty(error)) {
+			refreshContent();
+			app.showToastMessage(new BackupError(error).getLocalizedError(app));
+		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
+			backupHelper.prepareBackup();
+		}
 	}
 
 	@Override
@@ -213,15 +268,27 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		if (manager == null) {
 			return;
 		}
-		if (card instanceof CloudSyncCard) {
+		if (card instanceof IntroductionCard) {
+			if (IntroductionCard.SYNC_BUTTON_INDEX == buttonIndex) {
+				if (!settingsHelper.isBackupSyncing()) {
+					settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
+				}
+			} else if (IntroductionCard.SETTINGS_BUTTON_INDEX == buttonIndex) {
+				openSettings();
+			}
+		} else if (card instanceof CloudSyncCard) {
 			if (SYNC_BUTTON_INDEX == buttonIndex) {
-				settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
+				if (!settingsHelper.isBackupSyncing()) {
+					settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
+				}
+			} else if (STOP_BUTTON_INDEX == buttonIndex) {
+				settingsHelper.cancelSync();
 			} else if (LOCAL_CHANGES_BUTTON_INDEX == buttonIndex) {
-				ChangesFragment.showInstance(manager, LOCAL_CHANGES);
+				ChangesFragment.showInstance(manager, RECENT_CHANGES_LOCAL);
 			} else if (CLOUD_CHANGES_BUTTON_INDEX == buttonIndex) {
-				ChangesFragment.showInstance(manager, CLOUD_CHANGES);
+				ChangesFragment.showInstance(manager, RECENT_CHANGES_REMOTE);
 			} else if (CONFLICTS_BUTTON_INDEX == buttonIndex) {
-				ChangesFragment.showInstance(manager, CONFLICTS);
+				ChangesFragment.showInstance(manager, RECENT_CHANGES_CONFLICTS);
 			}
 		}
 	}

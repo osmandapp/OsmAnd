@@ -75,6 +75,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public ExportBackupTask getExportTask(@NonNull String key) {
 		return exportAsyncTasks.get(key);
 	}
+	@Nullable
+	public SyncBackupTask getSyncTask(@NonNull String key) {
+		return syncBackupTasks.get(key);
+	}
 
 	@Nullable
 	public ImportType getImportTaskType(@NonNull String key) {
@@ -226,7 +230,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void syncSettingsItems(@NonNull String key,
-	                              @Nullable LocalFile localFile,
+	                              @NonNull LocalFile localFile,
 	                              @NonNull RemoteFile remoteFile,
 	                              @NonNull SyncOperationType operation,
 	                              @Nullable OnBackupSyncListener listener) {
@@ -234,7 +238,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
 			syncBackupTasks.put(key, syncTask);
 
-			String fileName = BackupHelper.getItemFileName(localFile != null ? localFile.item : remoteFile.item);
+			String fileName = BackupHelper.getItemFileName(localFile.item != null ? localFile.item : remoteFile.item);
 
 			switch (operation) {
 				case SYNC_OPERATION_DELETE:

@@ -15,11 +15,18 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<LinearLayout
-		android:id="@+id/container"
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+		android:id="@+id/swipe_refresh"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="?attr/activity_background_color"
-		android:orientation="vertical" />
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:id="@+id/container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_color"
+			android:orientation="vertical" />
+
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -109,9 +109,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					CollectItemsResult result = importer.collectItems(importType == ImportType.COLLECT_AND_READ);
 					remoteFiles = result.remoteFiles;
 					return result.items;
-				} catch (IllegalArgumentException e) {
-					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
-				} catch (IOException e) {
+				} catch (IllegalArgumentException | IOException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				}
 				break;

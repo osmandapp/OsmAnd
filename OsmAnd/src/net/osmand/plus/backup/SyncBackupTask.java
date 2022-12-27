@@ -269,16 +269,28 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	public interface OnBackupSyncListener {
 
-		void onBackupSyncStarted();
+		default void onBackupSyncStarted() {
 
-		void onBackupProgressUpdate(float progress);
+		}
 
-		void onBackupSyncFinished(@Nullable String error);
+		default void onBackupProgressUpdate(float progress) {
 
-		void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work);
+		}
 
-		void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value);
+		default void onBackupSyncFinished(@Nullable String error) {
 
-		void onBackupItemFinished(@NonNull String type, @NonNull String fileName);
+		}
+
+		default void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+		}
+
+		default void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+		}
+
+		default void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+
+		}
 	}
 }

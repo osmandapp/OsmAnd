@@ -191,16 +191,16 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		Preference backupSettings = findPreference(BACKUP_AND_RESTORE);
 		backupSettings.setIcon(getContentIcon(R.drawable.ic_action_cloud_upload));
 
-		String time = getLastBackupTimeDescription(app);
+		String time = getLastBackupTimeDescription(app, "");
 		if (!Algorithms.isEmpty(time)) {
 			String summary = getString(R.string.last_sync);
 			backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 		}
 	}
 
-	public static String getLastBackupTimeDescription(OsmandApplication app) {
+	public static String getLastBackupTimeDescription(OsmandApplication app, String def) {
 		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, "");
+		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, def);
 	}
 
 	private void profileManagementPref() {

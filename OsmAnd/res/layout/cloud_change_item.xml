@@ -81,7 +81,6 @@
 			osmand:mpb_setBothDrawables="true"
 			osmand:mpb_useIntrinsicPadding="false" />
 
-
 	</LinearLayout>
 
 	<include

@@ -16,34 +16,41 @@
 			android:id="@+id/header_container"
 			layout="@layout/backup_status_header" />
 
-		<View
+		<LinearLayout
+			android:id="@+id/changes_container"
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:layout_marginStart="@dimen/content_padding"
-			android:background="?attr/divider_color_basic" />
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
-		<include
-			android:id="@+id/local_changes_button"
-			layout="@layout/preference_button_end_text" />
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginStart="@dimen/content_padding"
+				android:background="?attr/divider_color_basic" />
 
-		<include layout="@layout/divider_half_item" />
+			<include
+				android:id="@+id/local_changes_button"
+				layout="@layout/preference_button_end_text" />
 
-		<include
-			android:id="@+id/cloud_changes_button"
-			layout="@layout/preference_button_end_text" />
+			<include layout="@layout/divider_half_item" />
 
-		<include layout="@layout/divider_half_item" />
+			<include
+				android:id="@+id/cloud_changes_button"
+				layout="@layout/preference_button_end_text" />
 
-		<include
-			android:id="@+id/conflicts_button"
-			layout="@layout/preference_button_end_text" />
+			<include layout="@layout/divider_half_item" />
 
+			<include
+				android:id="@+id/conflicts_button"
+				layout="@layout/preference_button_end_text" />
+
+		</LinearLayout>
 
 		<include layout="@layout/simple_divider_item" />
 
 		<include
 			android:id="@+id/sync_button"
-			layout="@layout/preference_button" />
+			layout="@layout/cloud_sync_button" />
 
 	</LinearLayout>
 

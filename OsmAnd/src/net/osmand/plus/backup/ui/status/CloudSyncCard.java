@@ -1,15 +1,21 @@
 package net.osmand.plus.backup.ui.status;
 
-import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
+import static net.osmand.plus.backup.ui.status.BackupStatus.BACKUP_COMPLETE;
+import static net.osmand.plus.backup.ui.status.BackupStatus.CONFLICTS;
+import static net.osmand.plus.backup.ui.status.BackupStatus.MAKE_BACKUP;
 import static net.osmand.plus.base.OsmandBaseExpandableListAdapter.adjustIndicator;
+import static net.osmand.plus.settings.fragments.MainSettingsFragment.getLastBackupTimeDescription;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -17,32 +23,43 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
-import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
+import net.osmand.plus.backup.SyncBackupTask;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.util.Algorithms;
 
-public class CloudSyncCard extends BaseCard {
+public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnPrepareBackupListener {
 
+	public static final int INVALID_ID = -1;
 	public static final int LOCAL_CHANGES_BUTTON_INDEX = 0;
 	public static final int CLOUD_CHANGES_BUTTON_INDEX = 1;
 	public static final int CONFLICTS_BUTTON_INDEX = 2;
 	public static final int SYNC_BUTTON_INDEX = 3;
+	public static final int STOP_BUTTON_INDEX = 4;
 
 	private final BackupHelper backupHelper;
 	private final NetworkSettingsHelper settingsHelper;
+	private final BackupCloudFragment fragment;
 
-	private boolean actionsVisible;
+	private View header;
+	private ProgressBar progressBar;
+	private View changesContainer;
+	private View localChangesButton;
+	private View cloudChangesButton;
+	private View conflictsButton;
+	private View syncButton;
 
-	public CloudSyncCard(@NonNull FragmentActivity activity) {
+	public CloudSyncCard(@NonNull FragmentActivity activity, @NonNull BackupCloudFragment fragment) {
 		super(activity, false);
+		this.fragment = fragment;
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
 	}
@@ -54,128 +71,161 @@ public class CloudSyncCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
+		header = view.findViewById(R.id.header_container);
+		progressBar = view.findViewById(R.id.progress_bar);
+		changesContainer = view.findViewById(R.id.changes_container);
+		localChangesButton = view.findViewById(R.id.local_changes_button);
+		cloudChangesButton = view.findViewById(R.id.cloud_changes_button);
+		conflictsButton = view.findViewById(R.id.conflicts_button);
+		syncButton = view.findViewById(R.id.sync_button);
+
 		PrepareBackupResult backup = backupHelper.getBackup();
+
 		setupHeader(backup);
-		setupButtons(backup);
+		setupLocalChangesButton(backup);
+		setupCloudChangesButton(backup);
+		setupConflictsButton(backup);
+		setupSyncButton(backup);
+
 		updateButtonsVisibility();
 	}
 
 	private void setupHeader(@NonNull PrepareBackupResult backup) {
-		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
+		TextView title = header.findViewById(R.id.title);
+		ImageView icon = header.findViewById(R.id.icon);
+		TextView description = header.findViewById(R.id.description);
+		description.setText(getLastBackupTimeDescription(app, app.getString(R.string.shared_string_never)));
 
-		View headerContainer = view.findViewById(R.id.header_container);
-		TextView title = headerContainer.findViewById(R.id.title);
-		ImageView icon = headerContainer.findViewById(R.id.icon);
-		TextView description = headerContainer.findViewById(R.id.description);
-		ProgressBar progressBar = headerContainer.findViewById(R.id.progress_bar);
-
-		ExportBackupTask exportTask = settingsHelper.getExportTask(BACKUP_ITEMS_KEY);
+		SyncBackupTask exportTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
 		if (exportTask != null) {
-			title.setText(R.string.uploading);
-			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));
+			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update));
 
-			int progress = exportTask.getGeneralProgress();
+			int progress = (int) exportTask.getGeneralProgress();
 			int maxProgress = (int) exportTask.getMaxProgress();
 			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 
-			String uploading = app.getString(R.string.local_openstreetmap_uploading);
-			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, percentage + "%"));
+			title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));
 
 			progressBar.setMax(maxProgress);
 			progressBar.setProgress(progress);
-
-			AndroidUiHelper.updateVisibility(description, false);
-			AndroidUiHelper.updateVisibility(progressBar, true);
 		} else {
-			description.setText(status.statusTitleRes);
+			BackupStatus status = BackupStatus.getBackupStatus(app, backup);
+			title.setText(status.statusTitleRes);
 			icon.setImageDrawable(getContentIcon(status.statusIconRes));
-
-			String backupTime = MainSettingsFragment.getLastBackupTimeDescription(app);
-			if (Algorithms.isEmpty(backupTime)) {
-				title.setText(R.string.shared_string_never);
-			} else {
-				title.setText(backupTime);
-			}
-			AndroidUiHelper.updateVisibility(description, true);
-			AndroidUiHelper.updateVisibility(progressBar, false);
 		}
-		headerContainer.setOnClickListener(v -> {
-			actionsVisible = !actionsVisible;
+		header.setOnClickListener(v -> {
+			fragment.toggleActionsVisibility();
 			updateButtonsVisibility();
-			adjustIndicator(app, headerContainer, actionsVisible, nightMode);
 		});
-		setupSelectableBackground(headerContainer);
+		setupSelectableBackground(header);
+		AndroidUiHelper.updateVisibility(progressBar, exportTask != null);
+		AndroidUiHelper.updateVisibility(description, exportTask == null);
 	}
 
-	private void setupButtons(@NonNull PrepareBackupResult backup) {
-		setupLocalChangesButton(backup);
-		setupCloudChangesButton(backup);
-		setupConflictsButton(backup);
-		setupSyncButton();
-	}
+	private void setupSyncButton(@NonNull PrepareBackupResult backup) {
+		boolean syncing = settingsHelper.isBackupSyncing();
+		boolean preparing = backupHelper.isBackupPreparing();
+		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 
-	private void setupSyncButton() {
-		String title = app.getString(R.string.sync_now);
-		Drawable icon = getActiveIcon(R.drawable.ic_action_update);
-		setupButton(view.findViewById(R.id.sync_button), title, icon, null, SYNC_BUTTON_INDEX);
+		if (preparing) {
+			String title = app.getString(R.string.checking_progress);
+			syncButton.setEnabled(true);
+			setupButton(syncButton, title, null, null);
+		} else if (syncing) {
+			String title = app.getString(R.string.shared_string_control_stop);
+			Drawable icon = getTwoStateIcon(R.drawable.ic_action_rec_stop);
+
+			syncButton.setEnabled(true);
+			setupButton(syncButton, title, icon, v -> notifyButtonPressed(STOP_BUTTON_INDEX));
+		} else {
+			String title = app.getString(R.string.sync_now);
+			Drawable icon = getTwoStateIcon(R.drawable.ic_action_update);
+
+			setupButton(syncButton, title, icon, v -> notifyButtonPressed(SYNC_BUTTON_INDEX));
+			syncButton.setEnabled(status == MAKE_BACKUP || status == CONFLICTS || status == BACKUP_COMPLETE);
+		}
+
+		ImageView imageView = syncButton.findViewById(android.R.id.icon);
+		ProgressBar progressBar = syncButton.findViewById(R.id.progress_bar_small);
+
+		AndroidUiHelper.updateVisibility(imageView, !preparing);
+		AndroidUiHelper.updateVisibility(progressBar, preparing);
 	}
 
 	private void setupLocalChangesButton(@NonNull PrepareBackupResult backup) {
-		View buttonView = view.findViewById(R.id.local_changes_button);
 		BackupInfo info = backup.getBackupInfo();
-		if (info != null) {
-			String title = app.getString(R.string.local_changes);
-			Drawable icon = getActiveIcon(R.drawable.ic_action_phone_filled);
-			int count = info.filteredFilesToUpload.size() + info.filteredFilesToDelete.size();
-			setupButton(buttonView, title, icon, String.valueOf(count), LOCAL_CHANGES_BUTTON_INDEX);
+		int itemsSize = info != null ? info.filteredFilesToUpload.size() + info.filteredFilesToDelete.size() : -1;
+		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
+		String title = app.getString(R.string.local_changes);
+		Drawable icon;
+		if (itemsSize >= 0) {
+			icon = getActiveIcon(R.drawable.ic_action_phone_filled);
+		} else {
+			icon = getContentIcon(R.drawable.ic_action_phone_filled);
 		}
-		AndroidUiHelper.updateVisibility(buttonView, info != null);
+		OnClickListener listener = v -> notifyButtonPressed(LOCAL_CHANGES_BUTTON_INDEX);
+
+		setupButton(localChangesButton, title, icon, listener);
+		TextView countView = localChangesButton.findViewById(R.id.count);
+		countView.setText(count);
 	}
 
 	private void setupCloudChangesButton(@NonNull PrepareBackupResult backup) {
-		View buttonView = view.findViewById(R.id.cloud_changes_button);
 		BackupInfo info = backup.getBackupInfo();
-		if (info != null) {
-			String title = app.getString(R.string.cloud_changes);
-			Drawable icon = getActiveIcon(R.drawable.ic_action_cloud);
-			int count = BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size();
-			setupButton(buttonView, title, icon, String.valueOf(count), CLOUD_CHANGES_BUTTON_INDEX);
+		int itemsSize = info != null ? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() : -1;
+		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
+		String title = app.getString(R.string.cloud_changes);
+		Drawable icon;
+		if (itemsSize >= 0) {
+			icon = getActiveIcon(R.drawable.ic_action_cloud);
+		} else {
+			icon = getContentIcon(R.drawable.ic_action_cloud);
 		}
-		AndroidUiHelper.updateVisibility(buttonView, info != null);
+		OnClickListener listener = v -> notifyButtonPressed(CLOUD_CHANGES_BUTTON_INDEX);
+
+		setupButton(cloudChangesButton, title, icon, listener);
+		TextView countView = cloudChangesButton.findViewById(R.id.count);
+		countView.setText(count);
 	}
 
 	private void setupConflictsButton(@NonNull PrepareBackupResult backup) {
-		View buttonView = view.findViewById(R.id.conflicts_button);
 		BackupInfo info = backup.getBackupInfo();
-		if (info != null) {
-			String title = app.getString(R.string.backup_conflicts);
-			Drawable icon = getActiveIcon(R.drawable.ic_small_warning);
-			int count = backup.getBackupInfo().filteredFilesToMerge.size();
-			setupButton(buttonView, title, icon, String.valueOf(count), CONFLICTS_BUTTON_INDEX);
+		int itemsSize = info != null ? backup.getBackupInfo().filteredFilesToMerge.size() : -1;
+		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
+		String title = app.getString(R.string.backup_conflicts);
+		Drawable icon;
+		if (itemsSize >= 0) {
+			icon = getActiveIcon(R.drawable.ic_small_warning);
+		} else {
+			icon = getContentIcon(R.drawable.ic_small_warning);
 		}
-		AndroidUiHelper.updateVisibility(buttonView, info != null);
+		OnClickListener listener = v -> notifyButtonPressed(CONFLICTS_BUTTON_INDEX);
+
+		setupButton(conflictsButton, title, icon, listener);
+		TextView countView = conflictsButton.findViewById(R.id.count);
+		countView.setText(count);
 	}
 
-	private void setupButton(@NonNull View button, @Nullable String text, @Nullable Drawable icon, @Nullable String count, int index) {
+	private void setupButton(@NonNull View button, @Nullable String text, @Nullable Drawable icon, @Nullable OnClickListener listener) {
 		TextView textView = button.findViewById(android.R.id.title);
 		ImageView imageView = button.findViewById(android.R.id.icon);
 
 		textView.setText(text);
 		imageView.setImageDrawable(icon);
-		button.setOnClickListener(v -> notifyButtonPressed(index));
+		button.setOnClickListener(listener);
 		setupSelectableBackground(button);
+	}
 
-		TextView countView = button.findViewById(R.id.count);
-		if (countView != null) {
-			countView.setText(count);
-		}
+	private Drawable getTwoStateIcon(@DrawableRes int iconId) {
+		Drawable enabled = UiUtilities.createTintedDrawable(app, iconId, ColorUtilities.getActiveColor(app, nightMode));
+		Drawable disabled = UiUtilities.createTintedDrawable(app, iconId, ColorUtilities.getDefaultIconColor(app, nightMode));
+		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 	}
 
 	private void updateButtonsVisibility() {
-		adjustIndicator(app, view.findViewById(R.id.header_container), actionsVisible, nightMode);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.local_changes_button), actionsVisible);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.cloud_changes_button), actionsVisible);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.conflicts_button), actionsVisible);
+		boolean visible = fragment.isChangesVisible();
+		adjustIndicator(app, header, visible, nightMode);
+		AndroidUiHelper.updateVisibility(changesContainer, visible);
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -183,5 +233,31 @@ public class CloudSyncCard extends BaseCard {
 		int color = ColorUtilities.getActiveColor(ctx, nightMode);
 		AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(ctx, color, 0.3f));
 	}
-}
 
+	@Override
+	public void onBackupPreparing() {
+		update();
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		update();
+	}
+
+	@Override
+	public void onBackupSyncStarted() {
+		app.runInUIThread(this::update);
+	}
+
+	@Override
+	public void onBackupProgressUpdate(float progress) {
+		if (progressBar != null) {
+			progressBar.setProgress((int) (progress * 100));
+		}
+	}
+
+	@Override
+	public void onBackupSyncFinished(@Nullable String error) {
+		app.runInUIThread(this::update);
+	}
+}
