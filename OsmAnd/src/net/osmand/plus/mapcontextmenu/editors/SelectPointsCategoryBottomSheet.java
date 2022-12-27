@@ -12,6 +12,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
@@ -122,7 +123,8 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		AppCompatImageView button = itemView.findViewById(R.id.icon);
 		button.setPadding(0, 0, dp8, 0);
 		if (isHidden) {
-			button.setImageResource(R.drawable.ic_action_hide);
+			button.setImageResource(R.drawable.ic_action_folder_hidden);
+			button.getDrawable().setTint(ContextCompat.getColor(app, R.color.text_color_secondary_light));
 		} else {
 			int categoryColor = pointsGroup.color;
 			if (categoryColor != 0) {

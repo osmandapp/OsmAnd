@@ -21,7 +21,7 @@ import net.osmand.plus.utils.UiUtilities;
 public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
 	private GPXFile gpxFile;
-
+	public WptPtEditorFragment parentFragment;
 	@Override
 	protected int getDefaultColorId() {
 		return R.color.gpx_color_point;
@@ -52,7 +52,7 @@ public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 		ViewGroup container = view.findViewById(R.id.list_container);
 
 		for (PointsGroup pointsGroup : pointsGroups.values()) {
-			container.addView(createCategoryItem(pointsGroup, false));
+			container.addView(createCategoryItem(pointsGroup, parentFragment != null && !parentFragment.isCategoryVisible(pointsGroup.name)));
 		}
 
 		return new BaseBottomSheetItem.Builder()
@@ -72,12 +72,13 @@ public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @NonNull String selectedCategory,
-	                                @Nullable CategorySelectionListener listener) {
+	                                WptPtEditorFragment wptPtEditorFragment, @Nullable CategorySelectionListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectGpxGroupBottomSheet fragment = new SelectGpxGroupBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(KEY_SELECTED_CATEGORY, selectedCategory);
 
+			fragment.parentFragment = wptPtEditorFragment;
 			fragment.setArguments(args);
 			fragment.setListener(listener);
 			fragment.setRetainInstance(true);

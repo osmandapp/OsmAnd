@@ -39,6 +39,7 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -74,7 +75,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			WptPt wpt = editor.getWptPt();
 			this.wpt = wpt;
 			pointsGroups.putAll(editor.getPointsGroups());
-			selectedGroup = pointsGroups.get(Algorithms.isEmpty(wpt.category) ? "" : wpt.category);
+			selectedGroup = editor.getPointsGroups().get(Algorithms.isEmpty(wpt.category) ? "" : wpt.category);
 
 			setColor(getPointColor());
 			setIconName(getInitialIconName(wpt));
@@ -93,6 +94,17 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			}
 			editor.setProcessingOrdinaryPoint();
 			editor.setOnDismissListener(null);
+
+			ArrayList<String> keysToDelete = new ArrayList<>();
+			Map<String, PointsGroup> groups = editor.getPointsGroups();
+			for (Map.Entry<String, PointsGroup> entry : groups.entrySet()) {
+				if(entry.getValue().points.isEmpty()){
+					keysToDelete.add(entry.getKey());
+				}
+			}
+			for(String key : keysToDelete){
+				groups.remove(key);
+			}
 		}
 	}
 
@@ -205,7 +217,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			wpt.setBackgroundType(getBackgroundType().getTypeName());
 			wpt.setIconName(getIconName());
 
-			PointsGroup group = pointsGroups.get(category);
+			PointsGroup group = editor.getPointsGroups().get(category);
 			int categoryColor = group != null ? group.color : 0;
 
 			editor.getOnWaypointTemplateAddedListener().onAddWaypointTemplate(wpt, categoryColor);
@@ -319,7 +331,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
-		pointsGroups.put(group.name, group);
+		if (editor != null) {
+			editor.getPointsGroups().put(group.name, group);
+		}
 		super.setPointsGroup(group, updateAppearance);
 	}
 
@@ -367,8 +381,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	public int getPointColor() {
 		WptPt wptPt = getWpt();
 		int color = wptPt != null ? wptPt.getColor() : 0;
-		if (wptPt != null && color == 0) {
-			PointsGroup group = pointsGroups.get(wptPt.category);
+		if (wptPt != null && color == 0 && editor != null) {
+			PointsGroup group = editor.getPointsGroups().get(wptPt.category);
 			if (group != null && group.color != 0) {
 				color = group.color;
 			}
@@ -382,11 +396,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@NonNull
 	@Override
 	public Map<String, PointsGroup> getPointsGroups() {
+		if (editor != null){
+			return editor.getPointsGroups();
+		}
 		return pointsGroups;
 	}
 
 	@Override
-	protected boolean isCategoryVisible(String categoryName) {
+	public boolean isCategoryVisible(String categoryName) {
 		WptPtEditor editor = getWptPtEditor();
 		if (editor == null || editor.getGpxFile() == null) {
 			return true;
@@ -423,7 +440,8 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	protected void showSelectCategoryDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			SelectGpxGroupBottomSheet.showInstance(manager, getSelectedCategory(), null);
+			hideKeyboard();
+			SelectGpxGroupBottomSheet.showInstance(manager, getSelectedCategory(), this, null);
 		}
 	}
 

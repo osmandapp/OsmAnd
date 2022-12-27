@@ -396,6 +396,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	protected void showSelectCategoryDialog() {
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
+			hideKeyboard();
 			SelectFavouriteGroupBottomSheet.showInstance(fragmentManager, getSelectedCategory(), null);
 		}
 	}

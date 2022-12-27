@@ -57,10 +57,22 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	protected PointsGroup selectedGroup;
 	protected boolean skipConfirmationDialog;
+	protected String ORIENTATION_KEY = "ORIENTATION_KEY";
+	protected boolean orientationChanged = false;
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.point_editor_fragment;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		int savedOrientation = savedInstanceState != null ?
+				savedInstanceState.getInt(ORIENTATION_KEY)
+				: getResources().getConfiguration().orientation;
+		int orientation = getResources().getConfiguration().orientation;
+		orientationChanged = orientation != savedOrientation;
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -186,7 +198,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			showKeyboard();
+
+			if(!orientationChanged){
+				showKeyboard();
+			}
 		} else {
 			toolbarAction.setImageDrawable(getPaintedIcon(R.drawable.ic_action_delete_dark, activeColor));
 			deleteButton.setVisibility(View.VISIBLE);
