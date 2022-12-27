@@ -645,6 +645,7 @@ public class AppInitializer implements IProgress {
 			settings.USE_OPENGL_RENDER.set(false);
 		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
 			try {
+				settings.OPENGL_RENDER_FAILED.set(true);
 				NativeCoreContext.init(app);
 				settings.OPENGL_RENDER_FAILED.set(false);
 			} catch (Throwable throwable) {
