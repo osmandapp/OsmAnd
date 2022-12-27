@@ -9,25 +9,24 @@ import java.util.Map;
 
 public class RendererRulesStorageAmenityFetcher {
 
-    // Fill repo patch manually:
-    static String resourcesRepoPath = "/Users/nnngrach/Documents/Projects/Coding/OsmAnd/resources";
-
     public static Map<String, String> main(String[] args) throws XmlPullParserException, IOException {
-        String styleName = args.length > 0 ? args[0] : "default";
-        String path = getStylePath(styleName);
-        RenderingRulesStorage storage = RenderingRulesStorage.getTestStorageForStyle(path);
-
         Map<String, String> iconStyle = null;
-        if(args.length > 6) {
+        if(args.length > 7) {
+            String styleName = args[0];
+            String resourcesRepoPath = args[7];
+            String path = getStylePath(styleName, resourcesRepoPath);
+            RenderingRulesStorage storage = RenderingRulesStorage.getTestStorageForStyle(path);
             iconStyle = getAmenityIconStyle(args[1], args[2], args[3],args[4], args[5].equals("true"), Integer.parseInt(args[6]), storage);
         } else {
             // for manual testing case
+            // String path = "/Users/nnngrach/Documents/Projects/Coding/OsmAnd/resources/rendering_styles/default.render.xml";
+            // RenderingRulesStorage storage = RenderingRulesStorage.getTestStorageForStyle(path);
             // iconStyle = getAmenityIconStyle("amenity", "fuel", null, null, false, 19, storage);
         }
         return iconStyle;
     }
 
-    private static String getStylePath(String styleName) {
+    private static String getStylePath(String styleName, String resourcesRepoPath) {
         String[] allStylesNames = new String[] {"default", "desert", "LightRS", "mapnik", "nautical",
                 "offroad", "osm-carto", "regions", "skimap", "snowmobile", "standalone-template",
                 "Topo-map-assimilation", "topo", "Touring-view_(more-contrast-and-details)", "UniRS",
