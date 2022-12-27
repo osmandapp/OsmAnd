@@ -14,6 +14,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment 
 		implements AbstractProfileMenuAdapter.ButtonPressedListener, AbstractProfileMenuAdapter.ProfilePressedListener {
@@ -81,12 +82,12 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	@Override
 	public void onProfilePressed(ApplicationMode item) {
 		this.dismiss();
-		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE, item);
+		BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE, item);
 	}
 
 	@Override
 	public void onButtonPressed() {
 		this.dismiss();
-		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+		BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.MAIN_SETTINGS);
 	}
 }

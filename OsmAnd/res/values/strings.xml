@@ -13,6 +13,8 @@
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
+    <string name="import_export">Import/Export</string>
+    <string name="export_to_file">Export to file</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>
     <string name="shared_string_open">Open</string>

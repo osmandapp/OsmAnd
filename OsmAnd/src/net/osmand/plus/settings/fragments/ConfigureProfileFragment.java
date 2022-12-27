@@ -201,21 +201,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
 			@Override
-			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-			}
-
-			@Override
-			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
-			}
-
-			@Override
-			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
-
-			}
-
-			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
 				updateCopiedOrResetPrefs();
