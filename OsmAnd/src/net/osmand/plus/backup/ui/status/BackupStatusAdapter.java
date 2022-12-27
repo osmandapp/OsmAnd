@@ -142,7 +142,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 				itemView = inflater.inflate(R.layout.backup_action_button, viewGroup, false);
 				return new ActionButtonViewHolder(itemView);
 			case INTRODUCTION_TYPE:
-				itemView = inflater.inflate(R.layout.backup_introduction_card, viewGroup, false);
+				itemView = inflater.inflate(R.layout.cloud_introduction_card, viewGroup, false);
 				return new IntroductionViewHolder(itemView);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");

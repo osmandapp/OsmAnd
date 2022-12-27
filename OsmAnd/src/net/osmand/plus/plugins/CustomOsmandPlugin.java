@@ -234,21 +234,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 		ImportListener importListener = new ImportListener() {
 			@Override
-			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-			}
-
-			@Override
-			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
-			}
-
-			@Override
-			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
-
-			}
-
-			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();

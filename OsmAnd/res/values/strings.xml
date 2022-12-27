@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="import_export">Import/Export</string>
+    <string name="export_to_file">Export to file</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>
     <string name="shared_string_open">Open</string>

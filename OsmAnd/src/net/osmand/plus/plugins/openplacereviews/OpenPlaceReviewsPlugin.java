@@ -19,7 +19,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
