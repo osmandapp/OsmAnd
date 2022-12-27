@@ -323,8 +323,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tb, settings);
 		boolean hasMapRenderer = hasMapRenderer();
+		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated || mapRendererChanged;
+			if (mapRendererChanged) {
+				this.mapRendererChanged = false;
+			}
 			if (editingCtx.isInApproximationMode()) {
 				drawApproximatedLines(canvas, tb, updated);
 			}
@@ -640,22 +644,24 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			points.addAll(editingCtx.getAfterPoints());
 			showPointsZoomCache = zoom;
 			boolean showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(points, showPointsZoomCache);
-			if (showPointsMinZoom && !this.showPointsMinZoom && mapRenderer != null || oldMovedPointRedraw) {
-				clearPointsProvider();
-				DataTileManager<WptCollectionPoint> tilePoints = new DataTileManager<>(zoom);
-				if (oldMovedPointRedraw && editingCtx.getOriginalPointToMove() != null){
+			if (mapRenderer != null) {
+				if ((showPointsMinZoom && !this.showPointsMinZoom) || oldMovedPointRedraw) {
+					clearPointsProvider();
+					DataTileManager<WptCollectionPoint> tilePoints = new DataTileManager<>(zoom);
+					if (oldMovedPointRedraw && editingCtx.getOriginalPointToMove() != null) {
 						WptPt point = editingCtx.getOriginalPointToMove();
 						tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
 								new WptCollectionPoint(point, oldMovedPointIcon));
+					}
+					for (WptPt point : points) {
+						tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
+								new WptCollectionPoint(point, pointIcon));
+					}
+					pointsProvider = new TilePointsProvider<>(getContext(), tilePoints,
+							getPointsOrder() - 500, false, null, getTextScale(), view.getDensity(),
+							START_ZOOM, 31);
+					pointsProvider.drawSymbols(mapRenderer);
 				}
-				for (WptPt point : points) {
-					tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
-							new WptCollectionPoint(point, pointIcon));
-				}
-				pointsProvider = new TilePointsProvider<>(getContext(), tilePoints,
-						getPointsOrder() - 500, false, null, getTextScale(), view.getDensity(),
-						START_ZOOM, 31);
-				pointsProvider.drawSymbols(mapRenderer);
 			}
 			this.showPointsMinZoom = showPointsMinZoom;
 			oldMovedPointRedraw = false;
@@ -1026,8 +1032,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();

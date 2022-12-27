@@ -1518,8 +1518,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setMapRenderer(@Nullable MapRendererView mapRenderer) {
+		List<OsmandMapLayer> layers = getLayers();
+		for (OsmandMapLayer layer : layers) {
+			layer.onMapRendererChange(this.mapRenderer, mapRenderer);
+		}
 		if (this.mapRenderer != null) {
+			// Trying to avoid possible crash if some layer did not cleanup providers
 			this.mapRenderer.removeAllSymbolsProviders();
+			this.mapRenderer.resetElevationDataProvider();
 		}
 		this.mapRenderer = mapRenderer;
 	}

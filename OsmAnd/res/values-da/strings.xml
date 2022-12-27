@@ -902,7 +902,7 @@
     <string name="app_mode_bicycle">Cykling</string>
     <string name="app_mode_pedestrian">Fodgænger</string>
     <string name="position_on_map_center">Centrum</string>
-    <string name="position_on_map_bottom">Bunden</string>
+    <string name="position_on_map_bottom">Bund</string>
     <string name="navigate_point_top_text">Indtast bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
@@ -4690,8 +4690,8 @@
     <string name="use_latin_name_if_missing">Brug latinsk navn, hvis det mangler</string>
     <string name="routing_attr_goods_restrictions_description">Tag hensyn til adgangstilladelser for lette varebiler (varer)</string>
     <string name="routing_attr_motor_type_electric_name">Elektrisk</string>
-    <string name="routing_attr_motor_type_lpg_name">LPG</string>
-    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_lpg_name">Flaskegas</string>
+    <string name="routing_attr_motor_type_gas_name">Komprimeret naturgas</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
     <string name="co2_mission">CO2-udledning</string>
@@ -4988,4 +4988,6 @@
     <string name="shared_string_open">Åbn</string>
     <string name="open_weather_action">Åbn vejr</string>
     <string name="open_weather_action_description">Giver dig mulighed for at åbne en skærm med detaljerede vejroplysninger.</string>
+    <string name="shared_string_purchased_on">Købt</string>
+    <string name="shared_string_expires">Udløber</string>
 </resources>

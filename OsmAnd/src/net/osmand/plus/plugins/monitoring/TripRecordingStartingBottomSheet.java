@@ -25,7 +25,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;

@@ -66,7 +66,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -96,6 +96,7 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -457,7 +458,7 @@ public class MapActivityActions extends MapActions {
 				.setTag(PROFILES_CONTROL_BUTTON_TAG)
 				.setTitle(getString(R.string.shared_string_manage))
 				.setListener((uiAdapter, view, item, isChecked) -> {
-					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MAIN_SETTINGS);
 					return true;
 				}));
 
@@ -520,7 +521,7 @@ public class MapActivityActions extends MapActions {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_backup_restore_open");
 					if (app.getBackupHelper().isRegistered()) {
-						BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
 					} else {
 						BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 					}
@@ -709,7 +710,7 @@ public class MapActivityActions extends MapActions {
 				.setTitle(getString(R.string.configure_profile))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					mapActivity.dismissSettingsScreens();
-					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE);
 					return true;
 				}));
 	}

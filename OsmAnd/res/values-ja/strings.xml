@@ -465,7 +465,7 @@ POIの更新は利用できません</string>
     <string name="poi_error_unexpected_template">操作{0}実行中に予期せぬエラーが発生しました。</string>
     <string name="poi_error_io_error_template">操作{0}実行中にI/O エラーが発生しました。</string>
     <string name="poi_error_info_not_loaded">ノードに関する情報はロードされませんでした</string>
-    <string name="poi_dialog_opening_hours">オープン日時</string>
+    <string name="poi_dialog_opening_hours">営業中</string>
     <string name="poi_dialog_comment">コメント</string>
     <string name="poi_dialog_comment_default">POI 変更</string>
     <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
@@ -1524,7 +1524,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_edit">編集</string>
     <string name="shared_string_places">場所</string>
     <string name="shared_string_search">検索</string>
-    <string name="shared_string_is_open">今すぐ開く</string>
+    <string name="shared_string_is_open">営業時間内</string>
     <string name="filter_poi_hint">名前でフィルター</string>
     <string name="search_poi_category_hint">検索語句</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
@@ -1982,7 +1982,7 @@ POIの更新は利用できません</string>
     <string name="city_type_district">地区</string>
     <string name="city_type_neighbourhood">小字・丁目</string>
     <string name="map_widget_search">検索</string>
-    <string name="shared_string_is_open_24_7">年中無休</string>
+    <string name="shared_string_is_open_24_7">24時間年中無休</string>
     <string name="storage_directory_card">メモリーカード</string>
     <string name="shared_string_topbar">画面上部のバー</string>
     <string name="lang_hsb">ソルビア語</string>
@@ -3821,7 +3821,7 @@ POIの更新は利用できません</string>
     <string name="message_you_need_add_two_points_to_show_graphs">少なくとも2つの地点を追加する必要があります</string>
     <string name="login_open_street_map">OpenStreetMapにログイン</string>
     <string name="login_open_street_map_org">OpenStreetMap.orgにログイン</string>
-    <string name="sign_in_with_open_street_map">OpenStreetMapにOAuthログイン</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMapにログイン</string>
     <string name="open_street_map_login_mode">新たな情報または変更を最初にアップロードする時に、ログインが必要となります。
 \n
 \nログインは安全なOAuth方式、またはOSMのユーザー名とパスワードによる直接方式が選択できます。</string>
@@ -4103,14 +4103,14 @@ POIの更新は利用できません</string>
     <string name="backup_no_internet_descr">インターネット接続を確認してから、再度ダウンロードしてください。</string>
     <string name="backup_pause_all">すべてを一時停止</string>
     <string name="upload_local_version">現在のバージョンをアップロード</string>
-    <string name="backup_delete_all_data_descr">OsmAndクラウド上のすべてのデータが削除されます。現在のバージョンは変更されません。</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloudのすべてのデータが削除されます。現在のバージョンは変更されません。</string>
     <string name="download_server_version">サーバー上のバージョンをダウンロード</string>
     <string name="shared_string_logout">ログアウト</string>
     <string name="backup_delete_all_data">すべてのデータを削除する</string>
-    <string name="backup_delete_all_data_warning">バージョン履歴を含め、以前にOsmAndクラウドにアップロードされたすべてのデータを削除しようとしています。
+    <string name="backup_delete_all_data_warning">バージョン履歴を含め、以前にOsmAnd Cloudにアップロードされたすべてのデータを削除しようとしています。
 \n
 \n削除されたデータを復元することはできません。</string>
-    <string name="backup_delete_old_data_descr">データの現在のバージョンがOsmAndクラウドに保存されます</string>
+    <string name="backup_delete_old_data_descr">データの現在のバージョンがOsmAnd Cloudに保存されます</string>
     <string name="backup_delete_old_data_warning">以前ロードしたデータの変更履歴を削除しようとしています。
 \n
 \nデータの現在のバージョンはサーバーに保存されますが、以前に行った変更に戻すことはできません。</string>
@@ -4121,7 +4121,7 @@ POIの更新は利用できません</string>
     <string name="select_backup_data_descr">バックアップするデータとフォルダーを選択します。</string>
     <string name="backup_restore_data_descr">オンラインバックアップを利用して、端末にデータを復元します。</string>
     <string name="backup_restore_data">データの復元</string>
-    <string name="restore_from_osmand_cloud">OsmAndクラウドから復元</string>
+    <string name="restore_from_osmand_cloud">OsmAnd Cloudから復元</string>
     <string name="choose_what_to_restore">復元したいものを選択してください。</string>
     <string name="restore_selected_data">選択したデータを復元</string>
     <string name="receiving_data_from_server">サーバーからデータを受信…</string>
@@ -4135,7 +4135,7 @@ POIの更新は利用できません</string>
     <string name="backup_promocode">プロモーションコード</string>
     <string name="send_crash_log">クラッシュログの送信</string>
     <string name="send_logcat_log">Logcatログの送信</string>
-    <string name="purchases_feature_desc_osmand_cloud">OsmAndクラウドを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
+    <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloudを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
     <string name="unlimited_map_downloads">マップの無制限ダウンロード</string>
     <string name="wikipedia_and_wikivoyage_offline">WikipediaとWikivoyageはオフライン</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">地形マップ:等高線、陰影起伏図、傾斜</string>
@@ -4219,7 +4219,7 @@ POIの更新は利用できません</string>
     <string name="backup_and_restore">バックアップ＆復元</string>
     <string name="last_backup">最終バックアップ</string>
     <string name="duration_ago">%1$s前</string>
-    <string name="osmand_cloud">OsmAndクラウド</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">データを失うことはありません。すべての情報を簡単にバックアップおよび復元できます。</string>
     <string name="local_backup_descr">ファイルを介してデータをバックアップまたは復元します。</string>
     <string name="backup_into_file">ファイルにバックアップ</string>
@@ -4232,7 +4232,7 @@ POIの更新は利用できません</string>
     <string name="verify_email_address">メールアドレスを確認します</string>
     <string name="verify_email_address_descr">ワンタイムパスワードが%1$sに送信されました。下部へ入力してください。</string>
     <string name="enter_verification_code">ワンタイムパスワードを入力してください</string>
-    <string name="cloud_email_not_registered">このメールアドレスはOsmAndクラウドに登録されていません</string>
+    <string name="cloud_email_not_registered">このメールアドレスはOsmAnd Cloudに登録されていません</string>
     <string name="cloud_email_already_registered">このメールアドレスはすでに登録されています。</string>
     <string name="resend_verification_code">再送信</string>
     <string name="verification_code_missing">確認コードを受け取りませんでした</string>
@@ -4571,4 +4571,12 @@ POIの更新は利用できません</string>
     <string name="map_widget_current_speed">現行速度</string>
     <string name="shared_string_buttons">ボタン</string>
     <string name="auto_backup_title">自動バックアップ</string>
+    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)でのルート</string>
+    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカーでのルート</string>
+    <string name="show_map_symbols">地図記号を表示</string>
+    <string name="rendering_attr_showMonorailRoutes_name">モノレールでのルート</string>
+    <string name="app_mode_mountain_bicycle">マウンテンバイク</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバスでのルート</string>
+    <string name="rendering_attr_showBusRoutes_name">バスでのルート</string>
+    <string name="map_widget_rendering_fps">マップ描画FPS</string>
 </resources>

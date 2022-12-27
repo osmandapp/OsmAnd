@@ -4999,4 +4999,6 @@
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
+    <string name="shared_string_purchased_on">Comprado el</string>
+    <string name="shared_string_expires">Expira</string>
 </resources>

@@ -4480,7 +4480,7 @@
     <string name="bearing_desc">Het richtingswidget toont de absolute of relatieve richting tot een doel in een hoekeenheid (180 graden, 360 graden, miliradialen).</string>
     <string name="battery_widget_desc">Widget toont het batterijniveau van je toestel.</string>
     <string name="current_time_widget_desc">Dit widget toont de huidige tijd van je toestel.</string>
-    <string name="time_to_navigation_point_widget_settings_desc">U kan van modus wisselen door op het widget te klikken.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Raak de widget om van modus te wisselen.</string>
     <string name="street_name_widget_desc">Straatnamenwidget toont de huidige straatnaam met een rechte pijl of de volgende straatnaam met het manoeuvre dat moet worden uitgevoerd.</string>
     <string name="magnetic_bearing_widget_desc">Hoek tussen het magnetische noorden en het doelpunt gezien vanaf jouw locatie.</string>
     <string name="time_to_go_desc">Tijd (in minuten of uren) benodigd om je bestemming te bereiken.</string>
@@ -4525,4 +4525,9 @@
     <string name="widget_with_dot">Widget.</string>
     <string name="shared_string_size">Grootte</string>
     <string name="compass_always_hidden">Altijd verborgen</string>
+    <string name="shared_string_next_sunrise">Volgende zonsopkomst</string>
+    <string name="shared_string_time_left">Resterende tijd</string>
+    <string name="shared_string_sunset">Zonsondergang</string>
+    <string name="shared_string_sunrise">Zonsopkomst</string>
+    <string name="shared_string_next_sunset">Volgende zonsondergang</string>
 </resources>

@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.MAPS_PATH;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
@@ -232,15 +233,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
-		if (appInitializer.isAppVersionChanged()) {
-			// Reset mapillary tile sources
-			File tilesPath = getAppPath(IndexConstants.TILES_INDEX_DIR);
-			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
-			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
-			// Remove travel sqlite db files
-			removeSqliteDbTravelFiles();
-		}
-		FileUtils.removeFilesWithExtension(getAppPath(null), IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();

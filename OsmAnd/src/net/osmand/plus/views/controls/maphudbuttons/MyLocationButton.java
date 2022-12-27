@@ -34,7 +34,20 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.startTilting(45);
+			int zoom = mapView.getZoom();
+			if (zoom < 10) {
+				animateDraggingMapThread.startTilting(35);
+			} else if (zoom < 12) {
+				animateDraggingMapThread.startTilting(40);
+			} else if (zoom < 14) {
+				animateDraggingMapThread.startTilting(45);
+			} else if (zoom < 16) {
+				animateDraggingMapThread.startTilting(50);
+			} else if (zoom < 17) {
+				animateDraggingMapThread.startTilting(55);
+			} else {
+				animateDraggingMapThread.startTilting(60);
+			}
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {

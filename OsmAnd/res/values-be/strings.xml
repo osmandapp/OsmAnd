@@ -1257,9 +1257,9 @@
     <string name="speak_poi">Навакольныя POI</string>
     <string name="shared_string_all">Усе</string>
     <string name="index_tours">Паездкі</string>
-    <string name="record_plugin_description">Дазваляе запісваць, захоўваць і аналізаваць даныя трэнінгу або руху, такія як хуткасць, уздымы, з\'езды або рэльеф маршруту, якія потым можна паўторна выкарыстоўваць, паляпшаць, дапаўняць або дзяліцца з сябрамі.
+    <string name="record_plugin_description">Запісвайце свае паездкі або трэнінгі і аналізуйце даныя па хуткасці, колькасці уздымаў і спускаў, профілю вышыні і г.д. Запісаныя сляды можна архіваваць, дзяліцца з сябрамі, рэдагаваць і апрацоўваць.
 \n
-\n Інструкцыя - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nБольш падрабязна https://osmand.net/docs/user/plugins/trip-recording.</string>
     <string name="record_plugin_name">Запіс падарожжа</string>
     <string name="int_hour">г</string>
     <string name="duration">Працягласць</string>
@@ -3731,7 +3731,9 @@
     <string name="height_limit_description">Пазначце вышыню аўтамабіля, для высокіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
     <string name="weight_limit_description">Пазначце вагу аўтамабіля, для цяжкіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
     <string name="lenght_limit_description">Пазначце даўжыню аўтамабіля, для доўгіх транспартных сродкаў на маршруце могуць ужывацца абмежаванні.</string>
-    <string name="gpx_parse_error">OsmAnd стварыў GPX не зусім правільна. Калі ласка, звяжыцеся са службай падтрымкі.</string>
+    <string name="gpx_parse_error">У файле GPX выяўленыя праблемы. 
+\n
+\nЗвяжыцеся са службай падтрымкі OsmAnd.</string>
     <string name="shared_string_always">Заўсёды</string>
     <string name="screen_control">Кіраванне экранам</string>
     <string name="system_screen_timeout_descr">Экран будзе выключацца пасля вызначанага ў сістэмных наладах перыяду бяздзейнасці.</string>
@@ -3972,9 +3974,9 @@
     <string name="uploaded_count">Адпраўлена %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Абярыце змены для адпраўлення</string>
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
-    <string name="open_place_reviews_plugin_description">Адпраўляйце спасылкі, фотаздымкі і агляды грамадскіх месцаў кшталту рэстаранаў, музеяў і іншых пунктаў шляху як адкрытыя даныя http://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Рабіце ўнёскі у праект OpenPlaceReviews, напрыклад фатаграфіі, агляды або спасылкі на грамадскія месцы (рэстараны, гасцініцы або музеі).
 \n
-\nПадрабязней можна даведацца http://openplacereviews.org</string>
+\nЗнайсці інструкцыі можна на нашым сайце https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
@@ -3993,7 +3995,7 @@
     <string name="activity_type_car_name">Аўтамабіль</string>
     <string name="routing_attr_short_way_description">Аптымальны карацейшы маршрут</string>
     <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прывязвацца да бягучага маршруту навігацыі</string>
-    <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
+    <string name="routing_attr_height_obstacles_description">Прагназаваны час руху будзе ўлічваць вышыні. Параметр маршруту можа дапамагчы пазбегнуць крутых схілаў:</string>
     <string name="purchases">Куплі</string>
     <string name="shared_string_contributions">Унёскі</string>
     <string name="contributions_may_calculate_with_delay">Унёскі могуць разлічвацца з затрымкай у некалькі гадзін.</string>
@@ -4848,11 +4850,16 @@
     <string name="weather_offline_forecast">Пазасеткавы прагноз</string>
     <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
     <string name="weather_prefs_descr">пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны</string>
-    <string name="weather_plugin_description">Убудова Надвор\'е забяспечвае:
-\n- 5 слаёў... пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны
+    <string name="weather_plugin_description">Змяшчае:
+\n
+\n- 5-слаёвы прагноз на 24 гадзіны і 7 дзён
+\n
 \n- віджэты на аснове месцазнаходжання
+\n
 \n- ізалініі тэмпературы / ціску
-\nДаныя надвор\'я прадстаўлены GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\n
+\n
+\nДаныя бяруцца з GFS (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
     <string name="weather_wind_meters_per_second">Метры за секунду</string>
     <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>

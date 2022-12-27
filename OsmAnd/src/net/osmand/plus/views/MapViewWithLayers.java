@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.AtlasMapRendererView;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
@@ -75,7 +76,9 @@ public class MapViewWithLayers extends FrameLayout {
 			surfaceView.setMapView(useAndroidAuto ? null : mapView);
 		}
 		mapView.setMapRenderer(useOpenglRender ? atlasMapRendererView : null);
-
+		if (!useOpenglRender) {
+			resetMapRendererView();
+		}
 		if (useAndroidAuto) {
 			AndroidUiHelper.updateVisibility(surfaceView, false);
 			AndroidUiHelper.updateVisibility(mapLayersView, false);
@@ -88,6 +91,13 @@ public class MapViewWithLayers extends FrameLayout {
 		AndroidUiHelper.updateVisibility(androidAutoPlaceholder, useAndroidAuto);
 	}
 
+	private void resetMapRendererView() {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			mapRendererContext.setMapRendererView(null);
+		}
+	}
+
 	private void setupAtlasMapRendererView() {
 		ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
 		if (atlasMapRendererView == null) {
@@ -95,7 +105,10 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.setAzimuth(0);
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
-			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
+		}
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			mapRendererContext.setMapRendererView(atlasMapRendererView);
 		}
 	}
 

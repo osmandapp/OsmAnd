@@ -1516,14 +1516,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
 				.setOnClickListener(v1 -> {
-					Activity activity = getActivity();
-					if (activity != null) {
-						Uri fileUri = AndroidUtils.getUriForFile(activity, gpxInfo.file);
-						Intent sendIntent = new Intent(Intent.ACTION_SEND)
-								.putExtra(Intent.EXTRA_STREAM, fileUri)
-								.setType("text/plain")
-								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					if (gpxInfo.gpx.showCurrentTrack) {
+						GpxUiHelper.saveAndShareCurrentGpx(app, gpxInfo.gpx);
+					} else if (!Algorithms.isEmpty(gpxInfo.gpx.path)) {
+						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxInfo.gpx);
 					}
 				})
 				.create()

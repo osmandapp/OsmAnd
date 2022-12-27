@@ -43,7 +43,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -469,4 +470,9 @@ public abstract class OsmandPlugin {
 		pluginPreferences.add(preference);
 		return preference;
 	}
+
+	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		return false;
+	}
+
 }

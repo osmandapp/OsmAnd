@@ -2913,4 +2913,15 @@
     <string name="map_markers_bar">지도 마커 막대</string>
     <string name="read_more">더 읽어보기</string>
     <string name="public_transport_warning_descr_blog">블로그에서 OsmAnd 라우팅에 대해 자세히 알아보세요.</string>
+    <string name="osmand_settings_descr">앱의 전체영역에 효력</string>
+    <string name="shared_string_turn_off">끄기</string>
+    <string name="shared_string_no_thank_you">필요없음</string>
+    <string name="settings_privacy_and_security_desc">공유할 데이터 선택</string>
+    <string name="shared_string_privacy_policy">개인 정보 정책</string>
+    <string name="make_osmand_better_descr">OsmAnd가 익명의 앱 사용 데이터를 수집하고 처리하도록 허용합니다. 내 위치 또는 지도에서 보는 위치에 대한 데이터는 수집되지 않습니다.
+\n
+\n\'설정\' → \'개인 정보 및 보안\'에서 언제든지 구성할 수 있습니다.</string>
+    <string name="shared_string_legal">법적고지</string>
+    <string name="privacy_and_security_change_descr">%1$s에 동의하면 \"허용\"을 누릅니다.</string>
+    <string name="settings_privacy_and_security">개인 정보 보호 및 보안</string>
 </resources>

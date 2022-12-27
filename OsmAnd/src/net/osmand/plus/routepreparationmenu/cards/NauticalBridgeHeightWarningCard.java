@@ -6,7 +6,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.*;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.*;
 
 public class NauticalBridgeHeightWarningCard extends WarningCard {
 

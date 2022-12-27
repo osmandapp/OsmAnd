@@ -53,6 +53,9 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private final ImportType importType;
 
+	private int maxProgress;
+	private int generalProgress;
+
 	ImportBackupTask(@NonNull String key,
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @Nullable BackupCollectListener collectListener,
@@ -63,6 +66,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.collectListener = collectListener;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
+		maxProgress = calculateMaxProgress(app);
 	}
 
 	ImportBackupTask(@NonNull String key,
@@ -77,6 +81,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.items = items;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
+		maxProgress = calculateMaxProgress(app);
 	}
 
 	ImportBackupTask(@NonNull String key,
@@ -92,6 +97,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.selectedItems = selectedItems;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = ImportType.CHECK_DUPLICATES;
+		maxProgress = calculateMaxProgress(app);
 	}
 
 	@Override
@@ -103,9 +109,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 					CollectItemsResult result = importer.collectItems(importType == ImportType.COLLECT_AND_READ);
 					remoteFiles = result.remoteFiles;
 					return result.items;
-				} catch (IllegalArgumentException e) {
-					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
-				} catch (IOException e) {
+				} catch (IllegalArgumentException | IOException e) {
 					NetworkSettingsHelper.LOG.error("Failed to collect items for backup", e);
 				}
 				break;
@@ -184,8 +188,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		switch (importType) {
 			case COLLECT:
 			case COLLECT_AND_READ:
-				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				helper.importAsyncTasks.remove(key);
+				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				break;
 			case CHECK_DUPLICATES:
 				if (duplicatesListener != null) {
@@ -227,6 +231,18 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				}
 			}
 		}
+	}
+
+	public static int calculateMaxProgress(@NonNull OsmandApplication app) {
+		int maxProgress = 0;
+		BackupHelper backupHelper = app.getBackupHelper();
+		BackupInfo info = backupHelper.getBackup().getBackupInfo();
+		if (info != null) {
+			for (RemoteFile file : info.filesToDownload) {
+				maxProgress += backupHelper.calculateFileSize(file);
+			}
+		}
+		return maxProgress;
 	}
 
 	@Nullable
@@ -306,6 +322,14 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			@Override
 			public void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress) {
 				publishProgress(new ItemProgressInfo(type, fileName, progress, 0, false));
+			}
+
+			@Override
+			public void updateGeneralProgress(int downloadedItems, int uploadedKb) {
+				generalProgress = uploadedKb;
+				if (importListener != null) {
+					importListener.onImportProgressUpdate(generalProgress, uploadedKb);
+				}
 			}
 
 			@Override

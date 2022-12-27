@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class TabActivity extends ActionBarProgressActivity {
 
-	public TabItem getTabIndicator(int resId, Class<?> fragment){
+	public TabItem getTabIndicator(int resId, Class<?> fragment) {
 		return new TabItem(resId, getString(resId), fragment);
 	}
 
@@ -37,8 +38,8 @@ public class TabActivity extends ActionBarProgressActivity {
 
 		private final List<TabItem> mTabs;
 
-		public OsmandFragmentPagerAdapter(FragmentManager fm, List<TabItem> items) {
-			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+		public OsmandFragmentPagerAdapter(@NonNull FragmentManager manager, @NonNull List<TabItem> items) {
+			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			mTabs = items;
 		}
 
@@ -46,6 +47,7 @@ public class TabActivity extends ActionBarProgressActivity {
 		 * Return the {@link Fragment} to be displayed at {@code position}.
 		 * <p>
 		 */
+		@NonNull
 		@Override
 		public Fragment getItem(int i) {
 			try {
@@ -60,7 +62,6 @@ public class TabActivity extends ActionBarProgressActivity {
 			return mTabs.size();
 		}
 
-		// BEGIN_INCLUDE (pageradapter_getpagetitle)
 		/**
 		 * Return the title of the item at {@code position}. This is important as what this method
 		 * returns is what is displayed in the {@link com.example.android.common.view.SlidingTabLayout}.

@@ -347,9 +347,7 @@ public class AppInitializer implements IProgress {
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
-		// TODO TRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
-		TravelHelper travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		app.travelHelper = startupInit(travelHelper, TravelHelper.class);
+		app.travelHelper = startupInit(new TravelObfHelper(app), TravelHelper.class);
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);

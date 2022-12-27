@@ -46,7 +46,7 @@
     <string name="shared_string_telegram">テレグラム</string>
     <string name="privacy_policy_use_telegram">テレグラム(メッセージングアプリ)は、他の人々と通信するために使用されます。</string>
     <string name="privacy_policy_telegram_client">OsmAndトラッカーは、Telegramオープンプラットフォームを利用するクライアントの1つです。連絡先は他のTelegramクライアントのものを利用できます。</string>
-    <string name="privacy_policy_agree">続行をクリックすると、TelegramおよびOsmAndプライバシーポリシーの条件に同意したとみなされます。</string>
+    <string name="privacy_policy_agree">続行をタップすると、TelegramおよびOsmAndプライバシーポリシーの条件に同意したとみなされます。</string>
     <string name="shared_string_accept">決定</string>
     <string name="telegram_privacy_policy">Telegramプライバシーポリシー</string>
     <string name="osmand_privacy_policy">OsmAndプライバシーポリシー</string>

@@ -635,8 +635,8 @@
     <string name="app_mode_car">Автівка</string>
     <string name="app_mode_bicycle">Велосипед</string>
     <string name="app_mode_pedestrian">Пішохід</string>
-    <string name="position_on_map_center">В центрі</string>
-    <string name="position_on_map_bottom">Внизу</string>
+    <string name="position_on_map_center">Центр</string>
+    <string name="position_on_map_bottom">Униз</string>
     <string name="navigate_point_top_text">Широта та довгота у вибраному форматі (D - градуси, M - хвилини, S - секунди)</string>
     <string name="navigate_point_latitude">Широта</string>
     <string name="navigate_point_longitude">Довгота</string>
@@ -4686,9 +4686,9 @@
     <string name="routing_attr_goods_restrictions_description">Перегляньте дозволи доступу для легких транспортних засобів (з вантажами)</string>
     <string name="co2_mission">Викиди CO2</string>
     <string name="kg">кг</string>
-    <string name="routing_attr_motor_type_electric_name">Електричний</string>
+    <string name="routing_attr_motor_type_electric_name">Електро</string>
     <string name="routing_attr_motor_type_gas_name">Метан</string>
-    <string name="routing_attr_motor_type_hybrid_name">Гібридний</string>
+    <string name="routing_attr_motor_type_hybrid_name">Гібрид</string>
     <string name="routing_attr_motor_type_name">Двигун автомобіля</string>
     <string name="routing_attr_motor_type_description">Виберіть тип палива вашого двигуна, це необхідно для оцінки викидів CO2.</string>
     <string name="routing_attr_motor_type_diesel_name">Дизель</string>
@@ -4982,4 +4982,6 @@
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
+    <string name="shared_string_purchased_on">Придбано</string>
+    <string name="shared_string_expires">Діє до</string>
 </resources>

@@ -39,8 +39,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		resetLayerProvider();
 	}
 
@@ -100,6 +100,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.resetRasterAndSymbolsProvider();
+			mapContext.resetHeightmapProvider();
 		}
 	}
 
@@ -140,7 +141,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
-			if (visibleChanged) {
+			if (visibleChanged || mapRendererChanged) {
 				if (visible) {
 					recreateLayerProvider();
 				} else {
@@ -162,6 +163,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				float zoomMagnifier = getMapDensity();
 				mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 			}
+			mapRendererChanged = false;
 			mapActivityInvalidated = false;
 		} else if (visible) {
 			if (!view.isZooming()) {
