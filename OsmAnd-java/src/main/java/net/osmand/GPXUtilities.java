@@ -1596,11 +1596,11 @@ public class GPXUtilities {
 			return points.remove(point);
 		}
 		
-		public boolean deleteWptPt(String wptName) {
+		public boolean deleteWptPt(String wptName, int ind) {
 			int index = -1;
 			WptPt point = null;
 			for (WptPt p : points) {
-				if (p.name.equals(wptName)) {
+				if (p.name.equals(wptName) && points.indexOf(p) == ind) {
 					index = points.indexOf(p);
 					break;
 				}
@@ -1626,10 +1626,10 @@ public class GPXUtilities {
 			}
 		}
 		
-		public void updateWptPtWeb(WptPt wptPt, String wptName) {
+		public void updateWptPtWeb(WptPt wptPt, String wptName, int ind) {
 			int index = -1;
 			for (WptPt p : points) {
-				if (p.name.equals(wptName)) {
+				if (p.name.equals(wptName) && points.indexOf(p) == ind) {
 					index = points.indexOf(p);
 					break;
 				}
