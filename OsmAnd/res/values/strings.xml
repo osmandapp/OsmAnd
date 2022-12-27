@@ -40,7 +40,6 @@
     <string name="cloud_all_changes_downloaded">All changes downloaded</string>
     <string name="cloud_all_changes_uploaded_descr">All changes made on this device are synchronized with OsmAnd Cloud.</string>
     <string name="cloud_no_conflicts">There are no conflicts</string>
-    <string name="upload_local_version">Upload local version</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_do_not_exist">Do not exist</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
