@@ -418,8 +418,8 @@
     <string name="search_offline_clear_search">新的查尋</string>
     <string name="map_text_size_descr">地圖上的名稱文字大小：</string>
     <string name="map_text_size">地圖字型大小</string>
-    <string name="trace_rendering">繪製除錯資訊</string>
-    <string name="trace_rendering_descr">顯示繪製效能。</string>
+    <string name="trace_rendering">效能除錯資訊</string>
+    <string name="trace_rendering_descr">顯示繪製與導航效能。</string>
     <string name="installing_new_resources">安裝新資料…</string>
     <string name="internet_connection_required_for_online_route">線上導航無法在離線時運作。</string>
     <string name="tts_language_not_supported_title">未支援的語言</string>
