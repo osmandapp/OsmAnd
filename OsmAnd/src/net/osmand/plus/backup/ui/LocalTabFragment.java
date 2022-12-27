@@ -35,6 +35,9 @@ public class LocalTabFragment extends ChangesTabFragment {
 
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
+		if (info == null) {
+			return changeItems;
+		}
 		Map<String, FileInfo> filesByName = new HashMap<>();
 		List<LocalFile> localFiles = info.filteredFilesToUpload;
 		for (LocalFile localFile : localFiles) {

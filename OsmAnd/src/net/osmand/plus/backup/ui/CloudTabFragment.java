@@ -35,8 +35,10 @@ public class CloudTabFragment extends ChangesTabFragment {
 
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
+		if (info == null) {
+			return changeItems;
+		}
 		Map<String, FileInfo> filesByName = new HashMap<>();
-
 		Map<RemoteFile, SettingsItem> downloadItems = BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems());
 		for (Map.Entry<RemoteFile, SettingsItem> entry : downloadItems.entrySet()) {
 			RemoteFile remoteFile = entry.getKey();

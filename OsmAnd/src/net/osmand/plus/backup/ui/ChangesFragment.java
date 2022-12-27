@@ -164,6 +164,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
 
+		if (info == null) {
+			return false;
+		}
+
 		switch (tabType) {
 			case RECENT_CHANGES_REMOTE:
 				return BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
