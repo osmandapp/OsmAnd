@@ -87,12 +87,12 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private static Matrix lastStateMatrix;
 	private static String lastRoute;
-	private static boolean lastLinkedToLocation;
+	private static boolean lastChartLinkedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
 			movedToLocation = true;
-			lastLinkedToLocation = true;
+			lastChartLinkedToLocation = true;
 		}
 	};
 
@@ -110,17 +110,17 @@ public class ElevationProfileWidget extends MapWidget {
 			} else {
 				lastStateMatrix = null;
 			}
-			if (lastLinkedToLocation) {
+			if (lastChartLinkedToLocation) {
 				movedToLocation = true;
 			}
 		}
 	}
 
-	private void storeLastState() {
+	private void storeLastState(boolean chartLinkedToLocation) {
 		if (chart != null) {
 			lastStateMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 		}
-		lastLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		lastChartLinkedToLocation = chartLinkedToLocation;
 	}
 
 	@Override
@@ -272,7 +272,7 @@ public class ElevationProfileWidget extends MapWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-				storeLastState();
+				storeLastState(false);
 				app.runInUIThread(() -> updateWidgets());
 			}
 
@@ -375,6 +375,7 @@ public class ElevationProfileWidget extends MapWidget {
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
 			refreshHighlights(newLocationHighlight);
+			storeLastState(true);
 		}
 		return true;
 	}
