@@ -61,7 +61,7 @@ public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 		OsmandApplication app = activity.getMyApplication();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_RENDER_INIT_ERROR_ID)) {
 			File file = app.getAppPath(EXCEPTION_PATH);
-			return settings.OPENGL_RENDER_FAILED.get() && file.exists() && file.length() > 0;
+			return settings.OPENGL_RENDER_FAILED.get() > 0 && file.exists() && file.length() > 0;
 		}
 		return true;
 	}
