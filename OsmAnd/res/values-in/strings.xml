@@ -4263,7 +4263,7 @@
     <string name="keep_intermediate_points">Simpan tujuan perantara</string>
     <string name="auto_zoom_map">Perbesar peta secara otomatis</string>
     <string name="map_text_size">Ukuran fon peta</string>
-    <string name="trace_rendering">Info pengawakutu perenderan</string>
+    <string name="trace_rendering">Info pengawakutu performa</string>
     <string name="routing_attr_piste_type_skitour_name">Tur ski</string>
     <string name="download_heightmap_maps">Peta ketinggian</string>
     <string name="gpx_info_diff_altitude">Rentang ketinggian: %1$s</string>
@@ -4449,7 +4449,7 @@
     <string name="live_monitoring_interval_descr">Tetapkan interval pelacakan daring.</string>
     <string name="live_monitoring_url">Alamat web pelacakan daring</string>
     <string name="local_index_no_items_to_do">Tidak ada item untuk %1$s</string>
-    <string name="trace_rendering_descr">Tampilkan performa perenderan.</string>
+    <string name="trace_rendering_descr">Tampilkan performa perenderan dan navigasi.</string>
     <string name="internet_connection_required_for_online_route">Navigasi daring tidak bekerja secara luring.</string>
     <string name="sleep_mode_stop_dialog">Hentikan mode latar belakang GPS\?</string>
     <string name="plugin_nautical_name">Tampilan peta laut</string>
