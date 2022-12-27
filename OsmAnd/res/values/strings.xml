@@ -20,8 +20,6 @@
     <string name="check_for_updates">Check for updates</string>
     <string name="changes">Changes %1$s</string>
     <string name="cloud_changes">Cloud changes</string>
-    <string name="import_export">Import/Export</string>
-    <string name="export_to_file">Export to file</string>
     <string name="shared_string_uploaded">Uploaded</string>
     <string name="shared_string_cloud">Cloud</string>
     <string name="new_file">New file</string>
@@ -47,6 +45,8 @@
     <string name="shared_string_do_not_exist">Do not exist</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
+    <string name="import_export">Import/Export</string>
+    <string name="export_to_file">Export to file</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>
     <string name="shared_string_open">Open</string>
@@ -815,6 +815,8 @@
     <string name="backup_delete_all_data_descr">All data on OsmAnd Cloud will be deleted. Local versions will stay untouched.</string>
     <string name="backup_delete_all_data">Delete all my data</string>
     <string name="shared_string_logout">Log out</string>
+    <string name="download_server_version">Download server version</string>
+    <string name="upload_local_version">Upload local version</string>
     <string name="backup_pause_all">Pause all</string>
     <string name="backup_no_internet_descr">Check your internet connection and download again.</string>
     <string name="backup_view_conflicts">View conflicts</string>
