@@ -66,7 +66,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -521,7 +521,7 @@ public class MapActivityActions extends MapActions {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_backup_restore_open");
 					if (app.getBackupHelper().isRegistered()) {
-						BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
 					} else {
 						BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 					}

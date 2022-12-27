@@ -52,14 +52,14 @@
 			tools:text="@string/backup_dont_have_any_descr" />
 
 		<include
-			android:id="@+id/restore_button"
+			android:id="@+id/sync_button"
 			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_height"
 			android:layout_marginBottom="@dimen/content_padding" />
 
 		<include
-			android:id="@+id/backup_button"
+			android:id="@+id/settings_button"
 			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_height"

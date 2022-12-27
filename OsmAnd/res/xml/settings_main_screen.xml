@@ -21,7 +21,7 @@
 		android:key="backup_and_restore"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
-		android:title="@string/backup_and_restore"
+		android:title="@string/osmand_cloud"
 		tools:icon="@drawable/ic_action_cloud_upload"
 		tools:summary="@string/last_backup" />
 

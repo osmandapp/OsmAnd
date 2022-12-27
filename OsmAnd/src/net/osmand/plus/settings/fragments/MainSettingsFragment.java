@@ -20,8 +20,8 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
@@ -137,7 +137,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				if (app.getBackupHelper().isRegistered()) {
-					BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+					BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
 				} else {
 					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
@@ -193,13 +193,9 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 		String time = getLastBackupTimeDescription(app, "");
 		if (!Algorithms.isEmpty(time)) {
-			String summary = getString(R.string.last_backup);
+			String summary = getString(R.string.last_sync);
 			backupSettings.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 		}
-	}
-
-	public static String getLastBackupTimeDescription(OsmandApplication app) {
-		return getLastBackupTimeDescription(app, "");
 	}
 
 	public static String getLastBackupTimeDescription(OsmandApplication app, String def) {
