@@ -425,10 +425,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	}
 
 	@Override
-	public void onFilesCollectingStarted() {
-	}
-
-	@Override
 	public void onFilesCollectingFinished(@Nullable String error,
 	                                      @NonNull File folder,
 	                                      @NonNull List<File> files,
