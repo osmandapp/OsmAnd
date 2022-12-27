@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
