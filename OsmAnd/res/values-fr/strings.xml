@@ -4981,4 +4981,5 @@
     <string name="res_unknown">Inconnu</string>
     <string name="shared_string_unsynced">Non synchronisé</string>
     <string name="check_for_updates">Vérifier les mises à jour</string>
+    <string name="shared_string_modified">Modifié</string>
 </resources>
