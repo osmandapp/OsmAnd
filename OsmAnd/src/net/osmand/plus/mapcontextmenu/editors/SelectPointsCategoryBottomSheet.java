@@ -123,8 +123,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		AppCompatImageView button = itemView.findViewById(R.id.icon);
 		button.setPadding(0, 0, dp8, 0);
 		if (isHidden) {
-			button.setImageResource(R.drawable.ic_action_folder_hidden);
-			button.getDrawable().setTint(ContextCompat.getColor(app, R.color.text_color_secondary_light));
+			button.setImageDrawable(getIcon(R.drawable.ic_action_folder_hidden, R.color.text_color_secondary_light));
 		} else {
 			int categoryColor = pointsGroup.color;
 			if (categoryColor != 0) {
