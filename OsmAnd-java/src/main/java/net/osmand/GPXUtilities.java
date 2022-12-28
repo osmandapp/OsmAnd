@@ -173,7 +173,7 @@ public class GPXUtilities {
 		public int getColor(int defColor) {
 			String clrValue = null;
 			if (extensions != null) {
-				clrValue = extensions.get("color");
+				clrValue = extensions.get(COLOR_NAME_EXTENSION);
 				if (clrValue == null) {
 					clrValue = extensions.get("colour");
 				}
@@ -188,15 +188,15 @@ public class GPXUtilities {
 		}
 
 		public void setColor(int color) {
-			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
+			setColor(Algorithms.colorToString(color));
 		}
 		
 		public void setColor(String color) {
-			getExtensionsToWrite().put("color", color);
+			getExtensionsToWrite().put(COLOR_NAME_EXTENSION, color);
 		}
 
 		public void removeColor() {
-			getExtensionsToWrite().remove("color");
+			getExtensionsToWrite().remove(COLOR_NAME_EXTENSION);
 		}
 	}
 
@@ -328,10 +328,9 @@ public class GPXUtilities {
 			this.desc = desc;
 			this.name = name;
 			this.category = category;
-			this.extensions = new LinkedHashMap<>();
-			this.extensions.put(COLOR_NAME_EXTENSION, color);
-			this.extensions.put(ICON_NAME_EXTENSION, icon);
-			this.extensions.put(BACKGROUND_TYPE_EXTENSION, background);
+			setColor(color);
+			setIconName(icon);
+			setBackgroundType(background);
 		}
 
 		public boolean isVisible() {
@@ -1463,7 +1462,7 @@ public class GPXUtilities {
 		public List<Track> tracks = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 		
-		private List<WptPt> points = new ArrayList<>();
+		private final List<WptPt> points = new ArrayList<>();
 		private Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 		private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
@@ -1593,10 +1592,9 @@ public class GPXUtilities {
 		}
 		
 		public boolean deleteWptPt(String wptName, int index) {
-			WptPt wpt = points.get(index);
-			if (wpt.name.equals(wptName)) {
-				removePointFromGroup(wpt);
-				points.remove(wpt);
+			WptPt currentWpt = getWptPt(wptName, index);
+			if (currentWpt != null) {
+				return deleteWptPt(currentWpt);
 			}
 			return false;
 		}
@@ -1611,30 +1609,39 @@ public class GPXUtilities {
 				group.points.remove(point);
 			}
 		}
-		
-		public void updateWptPtWeb(WptPt wptPt, String wptName, int wptIndex) {
-			if (points.get(wptIndex).name.equals(wptName)) {
-				WptPt currentWpt = points.get(wptIndex);
-				currentWpt.updatePoint(wptPt);
-				getOrCreateGroup(currentWpt).points.add(currentWpt);
-				points.set(wptIndex, currentWpt);
+
+		public void updateWptPt(String wptName, int wptIndex, WptPt newWpt) {
+			WptPt currentWpt = getWptPt(wptName, wptIndex);
+			if (currentWpt != null) {
+				updateWptPt(currentWpt, newWpt);
 			} else {
-				addPoint(wptPt);
+				addPoint(newWpt);
 			}
 		}
-		
-		public void updateWptPt(WptPt point, WptPt pointInfo) {
-			int index = points.indexOf(point);
-			String prevGroupName = point.category;
-			point.updatePoint(pointInfo);
-			if (Algorithms.stringsEqual(pointInfo.category, prevGroupName)
-					|| Algorithms.isEmpty(pointInfo.category) && Algorithms.isEmpty(prevGroupName)) {
-				removePointFromGroup(point, prevGroupName);
-				PointsGroup pointsGroup = getOrCreateGroup(point);
-				pointsGroup.points.add(point);
+
+		private WptPt getWptPt(String wptName, int wptIndex) {
+			WptPt currentWpt = null;
+			if (wptIndex < points.size() && wptIndex >= 0) {
+				currentWpt = points.get(wptIndex);
+				if (!currentWpt.name.equals(wptName)) {
+					currentWpt = null;
+				}
 			}
-			if (index != -1) {
-				points.set(index, point);
+			return currentWpt;
+		}
+
+		public void updateWptPt(WptPt existingPoint, WptPt newWpt) {
+			int index = points.indexOf(existingPoint);
+			if (index == -1) {
+				return;
+			}
+			String prevGroupName = existingPoint.category;
+			existingPoint.updatePoint(newWpt);
+			if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
+					|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {
+				removePointFromGroup(existingPoint, prevGroupName);
+				PointsGroup pointsGroup = getOrCreateGroup(existingPoint);
+				pointsGroup.points.add(existingPoint);
 			}
 			modifiedTime = System.currentTimeMillis();
 			pointsModifiedTime = modifiedTime;

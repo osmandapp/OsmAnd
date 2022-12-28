@@ -39,7 +39,7 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 			} else {
 				WptPt wptRes = wpt;
 				wptRes.desc = editedText;
-				gpx.updateWptPt(wpt,wptRes);
+				gpx.updateWptPt(wpt, wptRes);
 				saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
