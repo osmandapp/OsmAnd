@@ -1,7 +1,7 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.GPXUtilities.OSM_PREFIX;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SEPARATOR;

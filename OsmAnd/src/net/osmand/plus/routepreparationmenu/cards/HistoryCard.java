@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.R;

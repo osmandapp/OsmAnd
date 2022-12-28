@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.GPXUtilities.ADDRESS_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 
@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;

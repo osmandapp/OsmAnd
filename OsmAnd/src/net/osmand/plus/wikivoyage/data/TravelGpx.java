@@ -4,8 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
+import net.osmand.gpx.GPXTrackAnalysis;
 
-import static net.osmand.GPXUtilities.*;
+import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 public class TravelGpx extends TravelArticle {

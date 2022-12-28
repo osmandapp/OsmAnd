@@ -1,10 +1,10 @@
 package net.osmand.plus.wikivoyage.data;
 
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
-import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.GPXUtilities.writeGpxFile;
+import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
+import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
+import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
+import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
+import static net.osmand.gpx.GPXUtilities.writeGpxFile;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
@@ -32,10 +32,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;

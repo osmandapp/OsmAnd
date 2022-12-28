@@ -5,8 +5,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
 
 class WptCollectionPoint implements TilePointsProvider.ICollectionPoint {
