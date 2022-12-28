@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.view.LayoutInflater;
@@ -27,8 +29,6 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
@@ -224,16 +224,15 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
-
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, (Integer) newValue);
 			} else {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
 			}
-		} else {
-			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}
 	}
 
