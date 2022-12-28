@@ -4982,4 +4982,6 @@
     <string name="check_for_updates">Controllo gli aggiornamenti</string>
     <string name="changes">%1$s modifiche</string>
     <string name="cloud_changes">Cambiamenti cloud</string>
+    <string name="shared_string_uploaded">Inviato</string>
+    <string name="shared_string_cloud">Cloud</string>
 </resources>
