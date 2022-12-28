@@ -4975,4 +4975,7 @@
 \n</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
+    <string name="cloud_sync_progress">Sync…%1$s</string>
+    <string name="checking_progress">Vérification…</string>
+    <string name="choose_what_to_sync">Choisir quoi synchroniser</string>
 </resources>
