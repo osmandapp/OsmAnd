@@ -229,16 +229,15 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
+			if (applyToAllProfiles) {
+				settings.setPreferenceForAllModes(prefId, newValue);
+			}
 			// Sync DEFAULT value with CAR value, as we have other way to set it for now
 
 			if (getSelectedAppMode().equals(ApplicationMode.CAR) && newValue instanceof Integer) {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, (Integer) newValue);
 			} else {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
-			}
-
-			if (applyToAllProfiles) {
-				settings.setPreferenceForAllModes(prefId, newValue);
 			}
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
