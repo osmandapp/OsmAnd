@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -112,6 +115,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -1749,9 +1753,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				gpxFile.updateWptPt(objectInMotion, position.getLatitude(), position.getLongitude(),
-						objectInMotion.desc, objectInMotion.name, objectInMotion.category,
-						objectInMotion.getColor(), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				WptPt wptInfo = new WptPt(position.getLatitude(), position.getLongitude(), objectInMotion.desc, objectInMotion.name, objectInMotion.category,
+						Algorithms.colorToString(objectInMotion.getColor()), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				gpxFile.updateWptPt(objectInMotion, wptInfo);
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {

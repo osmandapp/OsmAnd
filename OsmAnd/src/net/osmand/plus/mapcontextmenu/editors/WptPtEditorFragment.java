@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 import android.app.AlertDialog;
@@ -269,8 +272,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						gpxSelectionHelper.setGpxFileToDisplay(gpx);
 					}
 				} else {
-					gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), description, name,
-							category, getColor(), getIconName(), getBackgroundType().getTypeName());
+					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
+					Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
+					gpx.updateWptPt(wpt,wptInfo);
 					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);

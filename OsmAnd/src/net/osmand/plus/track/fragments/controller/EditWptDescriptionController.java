@@ -37,8 +37,9 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 				savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText,
 						wpt.name, wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
 			} else {
-				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText, wpt.name,
-						wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
+				WptPt wptRes = wpt;
+				wptRes.desc = editedText;
+				gpx.updateWptPt(wpt,wptRes);
 				saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());

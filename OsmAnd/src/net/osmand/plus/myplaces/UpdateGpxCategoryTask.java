@@ -1,5 +1,9 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -14,6 +18,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 
 public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Exception> {
 
@@ -87,8 +92,9 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 			app.getSavingTrackHelper().updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
 					wpt.desc, wpt.name, category, color, iconName, backgroundType);
 		} else {
-			gpxFile.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name,
-					category, color, iconName, backgroundType);
+			WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name, category,
+					Algorithms.colorToString(color), iconName, backgroundType);
+			gpxFile.updateWptPt(wpt, wptInfo);
 		}
 	}
 

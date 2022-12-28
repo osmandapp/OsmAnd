@@ -3,6 +3,10 @@ package net.osmand.plus.mapmarkers;
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
+import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -89,6 +93,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -176,7 +181,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				gpx.updateWptPt(selectedWpt, lat, lon, description, name, category, color, null, null);
+				WptPt wptInfo = new WptPt(lat, lon, description, name, category,
+						Algorithms.colorToString(color), null, null);
+				gpx.updateWptPt(selectedWpt, wptInfo);
 			}
 		}
 	}
