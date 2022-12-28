@@ -215,6 +215,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			}
 		}
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
+			ListPreferenceEx audioStreamGuidance = findPreference(settings.AUDIO_MANAGER_STREAM.getId());
+			if (audioStreamGuidance != null) {
+				audioStreamGuidance.setValue(newValue);
+			}
 			return onConfirmPreferenceChange(
 					settings.AUDIO_MANAGER_STREAM.getId(), newValue, ApplyQueryType.SNACK_BAR);
 		}
@@ -231,6 +235,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, (Integer) newValue);
 			} else {
 				settings.AUDIO_MANAGER_STREAM.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_MANAGER_STREAM.getModeValue(ApplicationMode.CAR));
+			}
+
+			if(applyToAllProfiles){
+				settings.setPreferenceForAllModes(prefId, newValue);
 			}
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
