@@ -215,10 +215,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			}
 		}
 		if (prefId.equals(settings.AUDIO_MANAGER_STREAM.getId())) {
-			ListPreferenceEx audioStreamGuidance = findPreference(settings.AUDIO_MANAGER_STREAM.getId());
-			if (audioStreamGuidance != null) {
-				audioStreamGuidance.setValue(newValue);
-			}
 			return onConfirmPreferenceChange(
 					settings.AUDIO_MANAGER_STREAM.getId(), newValue, ApplyQueryType.SNACK_BAR);
 		}
