@@ -4975,4 +4975,13 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
     <string name="shared_string_purchased_on">Acquistato su</string>
     <string name="shared_string_expires">Scade</string>
+    <string name="checking_progress">Controllo…</string>
+    <string name="shared_string_modified">Modificato</string>
+    <string name="res_unknown">Sconosciuto</string>
+    <string name="shared_string_unsynced">Non sincronizzato</string>
+    <string name="check_for_updates">Controllo gli aggiornamenti</string>
+    <string name="changes">%1$s modifiche</string>
+    <string name="cloud_changes">Cambiamenti cloud</string>
+    <string name="shared_string_uploaded">Inviato</string>
+    <string name="shared_string_cloud">Cloud</string>
 </resources>
