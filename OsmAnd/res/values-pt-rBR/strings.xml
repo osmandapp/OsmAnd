@@ -5012,4 +5012,7 @@
     <string name="cloud_recent_changes">Alterações</string>
     <string name="cloud_all_changes_downloaded">Todas as alterações foram baixadas</string>
     <string name="shared_string_do_not_exist">Não existe</string>
+    <string name="changes">Alterações %1$s</string>
+    <string name="cloud_changes">mudanças na nuvem</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de arquivo para áudio é 3GPP (.3gp).</string>
 </resources>
