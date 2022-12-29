@@ -5025,4 +5025,5 @@
     <string name="export_to_file">Eksporter til fil</string>
     <string name="last_sync">Sidste synkronisering</string>
     <string name="shared_string_do_not_exist">Findes ikke</string>
+    <string name="av_audio_format_bottom_sheet_descr">Vælg lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
 </resources>
