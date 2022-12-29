@@ -113,6 +113,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			dismiss();
 		});
 		downloadItem.setEnabled(enabled);
+		AndroidUiHelper.updateVisibility(downloadItem.findViewById(R.id.second_icon), false);
 	}
 
 	private void setupUploadAction(@NonNull View view) {
@@ -144,6 +145,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			dismiss();
 		});
 		uploadItem.setEnabled(enabled);
+		AndroidUiHelper.updateVisibility(uploadItem.findViewById(R.id.second_icon), false);
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {

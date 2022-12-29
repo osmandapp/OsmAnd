@@ -65,8 +65,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	private NetworkSettingsHelper settingsHelper;
 
 	private CloudSyncCard syncCard;
-	private WarningStatusCard warningCard;
-	private IntroductionCard introductionCard;
 
 	private LoginDialogType dialogType;
 	private boolean changesVisible;
@@ -179,12 +177,12 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 				|| (dialogType == LoginDialogType.SIGN_IN && (backupSaved || !Algorithms.isEmpty(backup.getLocalFiles())));
 
 		if (showIntroductionItem) {
-			introductionCard = new IntroductionCard(requireActivity(), dialogType);
+			IntroductionCard introductionCard = new IntroductionCard(requireActivity(), dialogType);
 			introductionCard.setListener(this);
 			container.addView(introductionCard.build(view.getContext()));
 		} else {
 			if (status.warningTitleRes != -1 || !Algorithms.isEmpty(backup.getError())) {
-				warningCard = new WarningStatusCard(requireActivity());
+				WarningStatusCard warningCard = new WarningStatusCard(requireActivity());
 				warningCard.setListener(this);
 				container.addView(warningCard.build(view.getContext()));
 			}
