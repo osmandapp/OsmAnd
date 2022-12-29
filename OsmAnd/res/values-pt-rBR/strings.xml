@@ -4980,4 +4980,36 @@
 \nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
+    <string name="choose_what_to_sync">Escolha o que sincronizar</string>
+    <string name="checking_progress">Checando…</string>
+    <string name="shared_string_modified">Alterado</string>
+    <string name="res_unknown">Desconhecido</string>
+    <string name="shared_string_unsynced">Não sincronizado</string>
+    <string name="check_for_updates">Verificar por atualizações</string>
+    <string name="shared_string_uploaded">Enviado</string>
+    <string name="shared_string_cloud">Nuvem</string>
+    <string name="new_file">Novo arquivo</string>
+    <string name="sync_now">Sincronizar agora</string>
+    <string name="cloud_all_changes_uploaded">Todas as alterações enviadas</string>
+    <string name="cloud_no_conflicts">Não há conflitos</string>
+    <string name="download_cloud_version">Baixar versão da nuvem</string>
+    <string name="import_export">Importar/exportar</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Falha ao buscar a lista de arquivos do servidor.</string>
+    <string name="last_sync">Última sincronização</string>
+    <string name="export_to_file">Exportar para o arquivo</string>
+    <string name="deleted_file">Arquivo excluído</string>
+    <string name="modified_file">Arquivo modificado</string>
+    <string name="upload_change">Carregar alterações</string>
+    <string name="cloud_version_will_be_removed">A versão na nuvem será removida</string>
+    <string name="cloud_changes_will_be_dismissed">As alterações na nuvem serão descartadas</string>
+    <string name="local_file_will_be_restored">O arquivo local será restaurado</string>
+    <string name="local_changes">Alterações locais</string>
+    <string name="local_changes_will_be_dismissed">Alterações locais serão descartadas</string>
+    <string name="upload_all">Enviar todos</string>
+    <string name="cloud_conflicts">Conflitos</string>
+    <string name="cloud_all_changes_uploaded_descr">Todas as alterações feitas neste dispositivo são sincronizadas com o OsmAnd Cloud.</string>
+    <string name="cloud_conflict">Conflito</string>
+    <string name="cloud_recent_changes">Alterações</string>
+    <string name="cloud_all_changes_downloaded">Todas as alterações foram baixadas</string>
+    <string name="shared_string_do_not_exist">Não existe</string>
 </resources>
