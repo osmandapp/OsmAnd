@@ -430,10 +430,10 @@
     <string name="shared_string_next">Nästa</string>
     <string name="shared_string_previous">Föregående</string>
     <string name="unit_of_length_descr">Ändra vad avstånd mäts i.</string>
-    <string name="unit_of_length">Enhet för längd</string>
+    <string name="unit_of_length">Längdenhet</string>
     <string name="si_mi_feet">Miles/fot</string>
     <string name="si_mi_yard">Miles/yard</string>
-    <string name="si_km_m">Kilomter/meter</string>
+    <string name="si_km_m">Kilometer/meter</string>
     <string name="yard">yd</string>
     <string name="send_location_way_choose_title">Dela platsen med</string>
     <string name="send_location_sms_pattern">Plats: %1$s\n%2$s</string>
@@ -2734,7 +2734,7 @@
 \nGe oss feedback</string>
     <string name="increase_search_radius_to">Utöka sökradie till %1$s</string>
     <string name="thank_you_for_feedback">Tack för din återkoppling</string>
-    <string name="send_search_query">Skicka sökförfråga?</string>
+    <string name="send_search_query">Skicka sökfråga\?</string>
     <string name="shared_string_world">Värld</string>
     <string name="ask_for_location_permission">Vänligen ge OsmAnd platsåtkomst för att fortsätta.</string>
     <string name="send_search_query_description">Vi skickar din sökfråga: \"%1$s\", såväl som din plats.\n
@@ -4002,7 +4002,7 @@
     <string name="map_widget_time_to_destination">Tid till destination</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Göm militärområden</string>
     <string name="battery_widget_desc">Visar din enhets batterinivå.</string>
-    <string name="transport_hazmat_no_desc">På vissa vägar och i vissa tunnlar är transport av farligt gods förbjudet.</string>
+    <string name="transport_hazmat_no_desc">Vissa vägar och tunnlar kan begränsa transport av farligt gods.</string>
     <string name="time_to_go_desc">Tid i minuter eller timmar för att nå din destination.</string>
     <string name="arrival_time_widget_desc">Ankomsttid till destinationen.</string>
     <string name="list_of_groups">Lista över grupper</string>
@@ -4030,8 +4030,8 @@
     <string name="routing_attr_freeride_policy_allow_name">Tillåt</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Avancerad</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_description">Välj färdmedelstyp som används av ditt fordons motor, för att beräkna CO2-utsläpp.</string>
-    <string name="routing_attr_motor_type_name">Färdmedel som används av motorn</string>
+    <string name="routing_attr_motor_type_description">Välj din motors bränsletyp, det används för att uppskatta koldioxidutsläpp.</string>
+    <string name="routing_attr_motor_type_name">Fordonets motor</string>
     <string name="side_marker_eta">Uppskattad ankomsttid</string>
     <string name="reset_all_settings_desc">Återställ alla inställningar till standard\?</string>
     <string name="co2_mission">CO2-utsläpp</string>
@@ -4046,8 +4046,8 @@
     <string name="routing_attr_goods_restrictions_name">Godsleverans</string>
     <string name="current_speed_widget_desc">Visar din nuvarande hastighet enligt GPS-sensor.</string>
     <string name="includes_osm_changes_until">Inkluderar OSM-ändringar gjorda fram till %1$s.</string>
-    <string name="next_live_update_date_and_time">Nästa uppdatering: %1$s kl. %2$s.</string>
-    <string name="parking_widget_desc">Widget som visar avståndet från mitten av din skärm till parkeringsplatsen.</string>
+    <string name="next_live_update_date_and_time">Nästa uppdatering den %1$s kl. %2$s.</string>
+    <string name="parking_widget_desc">Visar avståndet från skärmens mitt till din parkeringsplats.</string>
     <string name="no_widgets_here_yet">Inga widgetar här ännu</string>
     <string name="no_widgets_descr">Lägg till en eller flera widgetar från listan av tillgängliga widgetar.</string>
     <string name="available_widgets">Tillgängliga widgetar</string>
@@ -4058,8 +4058,8 @@
     <string name="current_time_widget_desc">Visar din enhets aktuella tid.</string>
     <string name="gps_info_widget_desc">Visar antal satelliter som enheten för närvarande hittar och använder.</string>
     <string name="download_complete">Nedladdning komplett</string>
-    <string name="goods_delivery_desc_4">Om ditt fordon väger mer än 3,5 ton måste du använda Lastbil-profilen.</string>
-    <string name="elevation_profile_widget_desc">Widgeten visar höjd- och lutningsprofil för den nuvarande rutten.</string>
+    <string name="goods_delivery_desc_4">Använd Lastbils-profilen om ditt fordon väger mer än 3,5 ton.</string>
+    <string name="elevation_profile_widget_desc">Visar höjd- och lutningsprofil för den nuvarande rutten.</string>
     <string name="max_speed_widget_desc">Visar hastighetsbegränsningen för nuvarande körda väg.</string>
     <string name="mapillary_widget_desc">Widget som ger snabb tillgång till Mapillary-appen för att lägga till gatunivåbilder.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellan den magnetiska nordpolen och målpunkten sett från din plats.</string>
@@ -4090,4 +4090,6 @@
     <string name="shared_string_complete">färdig</string>
     <string name="rendering_attr_surface_compacted_name">Kompakterad</string>
     <string name="shared_string_launch">Starta</string>
+    <string name="shared_string_weather">Väder</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometer i timmen</string>
 </resources>
