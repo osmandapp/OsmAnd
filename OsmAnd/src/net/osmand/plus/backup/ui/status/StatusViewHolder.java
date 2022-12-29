@@ -61,7 +61,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 			PrepareBackupResult backup = app.getBackupHelper().getBackup();
 			BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 			title.setText(status.statusTitleRes);
-			icon.setImageDrawable(uiUtilities.getThemedIcon(status.statusIconRes));
+			icon.setImageDrawable(uiUtilities.getIcon(status.statusIconRes));
 		}
 		AndroidUiHelper.updateVisibility(progressBar, exportTask != null);
 		AndroidUiHelper.updateVisibility(description, exportTask == null);

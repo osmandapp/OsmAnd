@@ -16,12 +16,12 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.util.Algorithms;
 
 public enum BackupStatus {
-	BACKUP_COMPLETE(R.string.last_sync, R.drawable.ic_action_cloud_done, -1, -1, -1, R.string.sync_now),
-	MAKE_BACKUP(R.string.last_sync, R.drawable.ic_action_cloud_alert, -1, -1, -1, R.string.sync_now),
-	CONFLICTS(R.string.last_sync, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, -1, -1, R.string.backup_view_conflicts),
-	NO_INTERNET_CONNECTION(R.string.last_sync, R.drawable.ic_action_cloud_done, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
-	SUBSCRIPTION_EXPIRED(R.string.last_sync, R.drawable.ic_action_cloud_done, R.drawable.ic_action_osmand_pro_logo_colored, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
-	ERROR(R.string.last_sync, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, -1, -1, R.string.contact_support);
+	BACKUP_COMPLETE(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, -1, -1, -1, R.string.sync_now),
+	MAKE_BACKUP(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, -1, -1, -1, R.string.sync_now),
+	CONFLICTS(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.backup_view_conflicts),
+	NO_INTERNET_CONNECTION(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
+	SUBSCRIPTION_EXPIRED(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, R.drawable.ic_action_osmand_pro_logo_colored, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
+	ERROR(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.contact_support);
 
 	@StringRes
 	public final int statusTitleRes;
