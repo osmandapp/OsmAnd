@@ -150,11 +150,15 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 		swipeRefresh.setColorSchemeColors(swipeColor);
 		swipeRefresh.setOnRefreshListener(() -> {
-			if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
-				backupHelper.prepareBackup();
-			}
+			prepareBackup();
 			swipeRefresh.setRefreshing(false);
 		});
+	}
+
+	private void prepareBackup() {
+		if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
+			backupHelper.prepareBackup();
+		}
 	}
 
 	private void setupCards(@Nullable View view) {
@@ -225,7 +229,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		refreshContent();
+		prepareBackup();
 	}
 
 	@Override
@@ -257,8 +261,8 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		if (!Algorithms.isEmpty(error)) {
 			refreshContent();
 			app.showToastMessage(new BackupError(error).getLocalizedError(app));
-		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
-			backupHelper.prepareBackup();
+		} else {
+			prepareBackup();
 		}
 	}
 
@@ -270,20 +274,13 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 		if (card instanceof IntroductionCard) {
 			if (IntroductionCard.SYNC_BUTTON_INDEX == buttonIndex) {
-				if (!backupHelper.isBackupPreparing() && backupHelper.getBackup().getBackupInfo() == null) {
-					backupHelper.prepareBackup();
-				}
-				if (!settingsHelper.isBackupSyncing()) {
-					settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
-				}
+				startSync();
 			} else if (IntroductionCard.SETTINGS_BUTTON_INDEX == buttonIndex) {
 				openSettings();
 			}
 		} else if (card instanceof CloudSyncCard) {
 			if (SYNC_BUTTON_INDEX == buttonIndex) {
-				if (!settingsHelper.isBackupSyncing()) {
-					settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
-				}
+				startSync();
 			} else if (STOP_BUTTON_INDEX == buttonIndex) {
 				settingsHelper.cancelSync();
 			} else if (LOCAL_CHANGES_BUTTON_INDEX == buttonIndex) {
@@ -293,6 +290,15 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			} else if (CONFLICTS_BUTTON_INDEX == buttonIndex) {
 				ChangesFragment.showInstance(manager, RECENT_CHANGES_CONFLICTS);
 			}
+		}
+	}
+
+	private void startSync() {
+		if (!backupHelper.isBackupPreparing() && backupHelper.getBackup().getBackupInfo() == null) {
+			backupHelper.prepareBackup();
+		}
+		if (!settingsHelper.isBackupSyncing()) {
+			settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
 		}
 	}
 

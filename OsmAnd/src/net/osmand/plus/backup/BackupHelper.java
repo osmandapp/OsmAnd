@@ -666,7 +666,7 @@ public class BackupHelper {
 
 	public long calculateFileSize(@NonNull RemoteFile remoteFile) {
 		long size = remoteFile.getFilesize() / 1024;
-		if (remoteFile.item.getType() == SettingsItemType.FILE) {
+		if (remoteFile.item != null && remoteFile.item.getType() == SettingsItemType.FILE) {
 			FileSettingsItem fileItem = (FileSettingsItem) remoteFile.item;
 			String fileName = fileItem.getFileName();
 			if (fileItem.getSubtype() == FileSubtype.OBF_MAP && fileName != null) {
