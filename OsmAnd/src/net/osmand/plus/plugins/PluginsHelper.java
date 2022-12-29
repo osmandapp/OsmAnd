@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
@@ -762,6 +763,12 @@ public class PluginsHelper {
 	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
+		}
+	}
+
+	public static void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			p.updateMapPresentationEnvironment(mapRendererContext);
 		}
 	}
 }
