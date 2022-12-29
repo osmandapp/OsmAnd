@@ -119,22 +119,8 @@ public class WeatherHelper {
 		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
 		if (!weatherForecastDir.exists()) {
 			weatherForecastDir.mkdir();
-			SimpleDateFormat frmt = new SimpleDateFormat("yyyyMMdd");
-			long cleanup = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(2);
-			for (File f : weatherForecastDir.listFiles()) {
-				String fileName = f.getName();
-				if (fileName.endsWith(".db") && fileName.length() > 8) {
-					try {
-						Date dt = frmt.parse(fileName.substring(0, 8));
-						if (dt.getTime() < cleanup) {
-							f.delete();
-						}
-					} catch (RuntimeException | ParseException e) {
-						log.error(String.format("Unexpected file name in weather folder %s", fileName));
-					}
-				}
-			}
 		}
+		cleanupOldFiles(weatherForecastDir, 2);
 		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
 		int tileSize = 256;
 		MapPresentationEnvironment mapPresentationEnvironment = mapRendererContext.getMapPresentationEnvironment();
@@ -147,6 +133,25 @@ public class WeatherHelper {
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 	}
+
+	private void cleanupOldFiles(File weatherForecastDir, int days) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		long cleanup = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(days);
+		for (File f : weatherForecastDir.listFiles()) {
+			String fileName = f.getName();
+			if (fileName.endsWith(".db") && fileName.length() > 8) {
+				try {
+					Date dt = format.parse(fileName.substring(0, 8));
+					if (dt.getTime() < cleanup) {
+						f.delete();
+					}
+				} catch (RuntimeException | ParseException e) {
+					log.error(String.format("Unexpected file name in weather folder %s", fileName));
+				}
+			}
+		}
+	}
+
 
 	@Nullable
 	public WeatherTileResourcesManager getWeatherResourcesManager() {
