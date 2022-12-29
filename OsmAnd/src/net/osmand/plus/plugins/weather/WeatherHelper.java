@@ -148,7 +148,6 @@ public class WeatherHelper {
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 	}
 
-
 	@Nullable
 	public WeatherTileResourcesManager getWeatherResourcesManager() {
 		return weatherTileResourcesManager;

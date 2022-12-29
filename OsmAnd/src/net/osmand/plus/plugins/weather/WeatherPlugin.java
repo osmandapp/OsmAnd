@@ -122,6 +122,7 @@ public class WeatherPlugin extends OsmandPlugin {
 			@Override
 			public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+					updateMapPresentationEnvironment();
 					updateLayers(app, null);
 				}
 			}
@@ -140,14 +141,18 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		if(!app.getAppInitializer().isAppInitializing() && weatherHelper.getWeatherResourcesManager() == null &&
-				NativeCoreContext.getMapRendererContext() != null) {
-			// app is initialized so plugin was enabled later
-			weatherHelper.updateMapPresentationEnvironment(NativeCoreContext.getMapRendererContext());
+		if (!app.getAppInitializer().isAppInitializing()) {
+			updateMapPresentationEnvironment();
 		}
 		return super.init(app, activity);
 	}
 
+	private void updateMapPresentationEnvironment() {
+		MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
+		if (weatherHelper.getWeatherResourcesManager() == null && rendererContext != null) {
+			weatherHelper.updateMapPresentationEnvironment(rendererContext);
+		}
+	}
 
 	@Override
 	public boolean isEnabled() {
