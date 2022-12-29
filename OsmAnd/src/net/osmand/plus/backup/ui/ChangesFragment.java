@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -214,11 +215,45 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	@Override
 	public void onBackupPreparing() {
 		app.runInUIThread(this::setupBottomButtons);
+
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof OnPrepareBackupListener) {
+				((OnPrepareBackupListener) fragment).onBackupPreparing();
+			}
+		}
 	}
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		app.runInUIThread(this::setupBottomButtons);
+
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof OnPrepareBackupListener) {
+				((OnPrepareBackupListener) fragment).onBackupPrepared(backupResult);
+			}
+		}
+	}
+
+	@Override
+	public void onBackupSyncStarted() {
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof OnBackupSyncListener) {
+				((OnBackupSyncListener) fragment).onBackupSyncStarted();
+			}
+		}
+	}
+
+	@Override
+	public void onBackupProgressUpdate(int progress) {
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof OnBackupSyncListener) {
+				((OnBackupSyncListener) fragment).onBackupProgressUpdate(progress);
+			}
+		}
 	}
 
 	@Override
@@ -227,6 +262,12 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			app.showToastMessage(new BackupError(error).getLocalizedError(app));
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
+		}
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof OnBackupSyncListener) {
+				((OnBackupSyncListener) fragment).onBackupSyncFinished(error);
+			}
 		}
 	}
 
