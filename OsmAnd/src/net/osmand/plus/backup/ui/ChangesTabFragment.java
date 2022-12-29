@@ -102,12 +102,12 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onBackupSyncStarted() {
-		app.runInUIThread(this::updateAdapter);
+		app.runInUIThread(() -> adapter.onBackupSyncStarted());
 	}
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
-		app.runInUIThread(this::updateAdapter);
+		app.runInUIThread(() -> adapter.onBackupProgressUpdate(progress));
 	}
 
 	@Override
