@@ -5023,4 +5023,5 @@
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios realizados en este dispositivo se sincronizan con OsmAnd Cloud.</string>
     <string name="cloud_changes">Cambios en la nube</string>
     <string name="cloud_all_changes_uploaded">Subidos todos los cambios</string>
+    <string name="av_audio_format_bottom_sheet_descr">Seleccione el formato de salida de audio. El formato del tipo de archivo de audio es 3GPP (.3gp).</string>
 </resources>
