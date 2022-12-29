@@ -216,10 +216,12 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	public void onBackupPreparing() {
 		app.runInUIThread(this::setupBottomButtons);
 
-		FragmentManager manager = getChildFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof OnPrepareBackupListener) {
-				((OnPrepareBackupListener) fragment).onBackupPreparing();
+		if (isAdded()) {
+			FragmentManager manager = getChildFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				if (fragment instanceof OnPrepareBackupListener) {
+					((OnPrepareBackupListener) fragment).onBackupPreparing();
+				}
 			}
 		}
 	}
@@ -228,30 +230,36 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		app.runInUIThread(this::setupBottomButtons);
 
-		FragmentManager manager = getChildFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof OnPrepareBackupListener) {
-				((OnPrepareBackupListener) fragment).onBackupPrepared(backupResult);
+		if (isAdded()) {
+			FragmentManager manager = getChildFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				if (fragment instanceof OnPrepareBackupListener) {
+					((OnPrepareBackupListener) fragment).onBackupPrepared(backupResult);
+				}
 			}
 		}
 	}
 
 	@Override
 	public void onBackupSyncStarted() {
-		FragmentManager manager = getChildFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof OnBackupSyncListener) {
-				((OnBackupSyncListener) fragment).onBackupSyncStarted();
+		if (isAdded()) {
+			FragmentManager manager = getChildFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				if (fragment instanceof OnBackupSyncListener) {
+					((OnBackupSyncListener) fragment).onBackupSyncStarted();
+				}
 			}
 		}
 	}
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
-		FragmentManager manager = getChildFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof OnBackupSyncListener) {
-				((OnBackupSyncListener) fragment).onBackupProgressUpdate(progress);
+		if (isAdded()) {
+			FragmentManager manager = getChildFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				if (fragment instanceof OnBackupSyncListener) {
+					((OnBackupSyncListener) fragment).onBackupProgressUpdate(progress);
+				}
 			}
 		}
 	}
@@ -263,10 +271,12 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-		FragmentManager manager = getChildFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof OnBackupSyncListener) {
-				((OnBackupSyncListener) fragment).onBackupSyncFinished(error);
+		if (isAdded()) {
+			FragmentManager manager = getChildFragmentManager();
+			for (Fragment fragment : manager.getFragments()) {
+				if (fragment instanceof OnBackupSyncListener) {
+					((OnBackupSyncListener) fragment).onBackupSyncFinished(error);
+				}
 			}
 		}
 	}

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +26,7 @@ import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
@@ -149,7 +151,15 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {
-		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation, null);
+		OnBackupSyncListener listener = null;
+		Fragment target = getTargetFragment();
+		if (target != null) {
+			Fragment parent = target.getParentFragment();
+			if (parent instanceof OnBackupSyncListener) {
+				listener = (OnBackupSyncListener) parent;
+			}
+		}
+		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation, listener);
 	}
 
 	private String getTitleForOperation() {
