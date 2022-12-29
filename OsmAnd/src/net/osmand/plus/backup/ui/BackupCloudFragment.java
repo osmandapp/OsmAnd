@@ -112,6 +112,8 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 		setupSwipeRefresh(view);
 		setupCards(view);
 
+		prepareBackup();
+
 		return view;
 	}
 
