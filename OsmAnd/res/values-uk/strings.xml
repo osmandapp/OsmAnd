@@ -5019,4 +5019,5 @@
     <string name="changes">Зміни %1$s</string>
     <string name="sync_now">Синхронізувати зараз</string>
     <string name="cloud_all_changes_downloaded">Усі зміни завантажено</string>
+    <string name="av_audio_format_bottom_sheet_descr">Виберіть формат аудіовиходу. Формат типу файлу для аудіо - 3GPP (.3gp).</string>
 </resources>
