@@ -559,7 +559,8 @@ public class QuickSearchHelper implements ResourceListener {
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(searchResult.localeName)) {
 						resultMatcher.publish(searchResult);
 					}
