@@ -219,6 +219,7 @@ public class BackupHelper {
 		Map<RemoteFile, SettingsItem> itemsForRestore = new HashMap<>();
 		if (info != null) {
 			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
+				// FIXME: 1) restoreItem could be null 2) double loop to check names 1000 x 1000 cycles
 				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
 				if (restoreItem != null && !restoreItem.exists()) {
 					itemsForRestore.put(remoteFile, restoreItem);

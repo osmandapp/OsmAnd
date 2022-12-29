@@ -86,7 +86,10 @@ public class LocalTabFragment extends ChangesTabFragment {
 				operation = SYNC_OPERATION_UPLOAD;
 			}
 			CloudChangeItem changeItem = rowFromKey(key, operation, fileInfo.localFile, fileInfo.remoteFile);
-			changeItems.add(changeItem);
+			if (changeItem != null) {
+				// FIXME
+				changeItems.add(changeItem);
+			}
 		}
 		return changeItems;
 	}

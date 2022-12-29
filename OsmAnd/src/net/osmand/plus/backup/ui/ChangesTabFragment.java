@@ -139,6 +139,9 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 	                                     LocalFile localFile,
 	                                     RemoteFile remoteFile) {
 		SettingsItem settingsItem = getSettingsItem(localFile, remoteFile);
+		if (settingsItem == null) {
+			return null;
+		}
 		long time = getTime(operation, localFile, remoteFile);
 		String summary = localizedSummaryForOperation(operation, localFile, remoteFile);
 
@@ -194,15 +197,9 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 	private SettingsItem getSettingsItem(LocalFile localFile, RemoteFile remoteFile) {
 		SettingsItem settingsItem;
 		if (tabType == RECENT_CHANGES_LOCAL) {
-			settingsItem = localFile.item;
-			if (settingsItem == null) {
-				settingsItem = remoteFile.item;
-			}
+			settingsItem = localFile == null ? remoteFile.item : localFile.item;
 		} else {
-			settingsItem = remoteFile.item;
-			if (settingsItem == null) {
-				settingsItem = localFile.item;
-			}
+			settingsItem = remoteFile == null ? localFile.item : remoteFile.item;
 		}
 		return settingsItem;
 	}

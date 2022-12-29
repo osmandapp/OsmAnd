@@ -35,7 +35,10 @@ public class ConflictsTabFragment extends ChangesTabFragment {
 			for (Pair<LocalFile, RemoteFile> pair : info.filteredFilesToMerge) {
 				String key = pair.first.getTypeFileName();
 				CloudChangeItem changeItem = rowFromKey(key, SYNC_OPERATION_NONE, pair.first, pair.second);
-				changeItems.add(changeItem);
+				if (changeItem != null) {
+					// FIXME
+					changeItems.add(changeItem);
+				}
 			}
 		}
 		return changeItems;

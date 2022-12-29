@@ -87,7 +87,10 @@ public class CloudTabFragment extends ChangesTabFragment {
 				operation = SYNC_OPERATION_DOWNLOAD;
 			}
 			CloudChangeItem changeItem = rowFromKey(key, operation, fileInfo.localFile, fileInfo.remoteFile);
-			changeItems.add(changeItem);
+			if (changeItem != null) {
+				// FIXME
+				changeItems.add(changeItem);
+			}
 		}
 
 		return changeItems;
