@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -475,4 +476,5 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
+	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) { }
 }

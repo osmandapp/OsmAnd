@@ -75,7 +75,6 @@ public class MapRendererContext {
 	private CachedMapPresentation presentationObjectParams;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	private MapPrimitiviser mapPrimitiviser;
-	private WeatherTileResourcesManager weatherTileResourcesManager;
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
@@ -154,7 +153,6 @@ public class MapRendererContext {
 		// Create new map presentation environment
 		OsmandSettings settings = app.getSettings();
 		String langId = settings.MAP_PREFERRED_LOCALE.get();
-		// TODO make setting
 		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
 		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
@@ -194,8 +192,12 @@ public class MapRendererContext {
 			recreateRasterAndSymbolsProvider();
 			setMapBackgroundColor();
 		}
+		PluginsHelper.updateMapPresentationEnvironment(this);
 
-		instantiateWeatherResourcesManager();
+	}
+
+	public MapPresentationEnvironment getMapPresentationEnvironment() {
+		return mapPresentationEnvironment;
 	}
 
 	private void setMapBackgroundColor() {
@@ -369,40 +371,11 @@ public class MapRendererContext {
 		}
 	}
 
-	private void instantiateWeatherResourcesManager() {
-		if (weatherTileResourcesManager != null) {
-			return;
-		}
-
-		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
-		if (!weatherForecastDir.exists()) {
-			weatherForecastDir.mkdir();
-		}
-		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
-		int tileSize = 256;
-		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
-
-		WeatherWebClient webClient = new WeatherWebClient();
-		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
-				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
-		webClient.swigReleaseOwnership();
-
-		WeatherHelper weatherHelper = app.getWeatherHelper();
-		weatherHelper.updateMapPresentationEnvironment(mapPresentationEnvironment);
-		weatherTileResourcesManager.setBandSettings(weatherHelper.getBandSettings(weatherTileResourcesManager));
-
-		this.weatherTileResourcesManager = weatherTileResourcesManager;
-	}
-
 	@Nullable
 	public MapPrimitiviser getMapPrimitiviser() {
 		return mapPrimitiviser;
 	}
 
-	@Nullable
-	public WeatherTileResourcesManager getWeatherTileResourcesManager() {
-		return weatherTileResourcesManager;
-	}
 
 	private static class CachedMapPresentation {
 		String langId;

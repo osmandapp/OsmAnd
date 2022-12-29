@@ -22,6 +22,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -136,6 +137,17 @@ public class WeatherPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(R.string.shared_string_weather);
 	}
+
+	@Override
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		if(!app.getAppInitializer().isAppInitializing() && weatherHelper.getWeatherResourcesManager() == null &&
+				NativeCoreContext.getMapRendererContext() != null) {
+			// app is initialized so plugin was enabled later
+			weatherHelper.updateMapPresentationEnvironment(NativeCoreContext.getMapRendererContext());
+		}
+		return super.init(app, activity);
+	}
+
 
 	@Override
 	public boolean isEnabled() {
@@ -329,6 +341,12 @@ public class WeatherPlugin extends OsmandPlugin {
 			mapView.removeLayer(weatherContourLayer);
 		}
 		createLayers();
+	}
+
+
+	@Override
+	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+		weatherHelper.updateMapPresentationEnvironment(mapRendererContext);
 	}
 
 	@Override
