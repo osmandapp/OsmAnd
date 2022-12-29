@@ -4938,4 +4938,5 @@
     <string name="weather_wind_knots">Nodoj</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometroj en horo</string>
     <string name="weather_wind_miles_per_hour">Mejloj en horo</string>
+    <string name="wind_widget_desc">Fenestraĵo montranta ventan rapidon por la nuna map-centro.</string>
 </resources>
