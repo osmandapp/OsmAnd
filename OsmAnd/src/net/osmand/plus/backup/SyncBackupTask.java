@@ -104,17 +104,17 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 	}
 
-	public void uploadLocalItem(@NonNull SettingsItem item, @NonNull String fileName) {
-		networkSettingsHelper.exportSettings(fileName, Collections.singletonList(item), Collections.emptyList(), this);
+	public void uploadLocalItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), Collections.emptyList(), this);
 	}
 
-	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull String fileName) {
+	public void downloadRemoteVersion(@NonNull SettingsItem item) {
 		item.setShouldReplace(true);
-		networkSettingsHelper.importSettings(fileName, Collections.singletonList(item), true, this);
+		networkSettingsHelper.importSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), true, this);
 	}
 
-	public void deleteItem(@NonNull SettingsItem item, @NonNull String fileName) {
-		networkSettingsHelper.exportSettings(fileName, Collections.emptyList(), Collections.singletonList(item), this);
+	public void deleteItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
 	private void uploadNewItems() {
