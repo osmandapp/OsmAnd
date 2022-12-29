@@ -946,7 +946,9 @@ public class BackupHelper {
 						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						// suggest to remove only if file exists in db
 						if (fileInfo != null && fileInfo.getUploadTime() < remoteFile.getUpdatetimems()) {
-							info.filesToMerge.add(new Pair<>(null, remoteFile));
+							// conflicts not supported yet
+							// info.filesToMerge.add(new Pair<>(null, remoteFile));
+							info.filesToDownload.add(remoteFile);
 						} else {
 							info.filesToDelete.add(remoteFile);
 						}
