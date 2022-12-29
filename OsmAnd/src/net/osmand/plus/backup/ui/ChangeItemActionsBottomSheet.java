@@ -108,7 +108,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		titleTv.setText(R.string.download_cloud_version);
 		descriptionTv.setText(description);
 		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload, ColorUtilities.getActiveColorId(nightMode)));
-		downloadItem.setOnClickListener(v -> syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD));
+		downloadItem.setOnClickListener(v -> {
+			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD);
+			dismiss();
+		});
 		downloadItem.setEnabled(enabled);
 	}
 
@@ -136,7 +139,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		titleTv.setText(title);
 		descriptionTv.setText(description);
 		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload, ColorUtilities.getActiveColorId(nightMode)));
-		uploadItem.setOnClickListener(v -> syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD));
+		uploadItem.setOnClickListener(v -> {
+			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
+			dismiss();
+		});
 		uploadItem.setEnabled(enabled);
 	}
 
