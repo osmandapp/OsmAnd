@@ -933,8 +933,8 @@ public class BackupHelper {
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
 					if (localFile != null) {
-						boolean fileChangedLocally =  localFile.localModifiedTime > localFile.uploadTime;
-						boolean fileChangedRemotely =  remoteFile.getUpdatetimems() > localFile.uploadTime;
+						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
+						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
 						if (fileChangedRemotely && fileChangedLocally) {
 							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 						} else if (fileChangedLocally) {

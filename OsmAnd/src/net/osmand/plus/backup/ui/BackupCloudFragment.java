@@ -244,11 +244,15 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 
 	@Override
 	public void onBackupSyncStarted() {
-		app.runInUIThread(this::refreshContent);
+		app.runInUIThread(() -> {
+			if (syncCard != null) {
+				syncCard.onBackupSyncStarted();
+			}
+		});
 	}
 
 	@Override
-	public void onBackupProgressUpdate(float progress) {
+	public void onBackupProgressUpdate(int progress) {
 		app.runInUIThread(() -> {
 			if (syncCard != null) {
 				syncCard.onBackupProgressUpdate(progress);
