@@ -98,7 +98,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 		SyncBackupTask exportTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
 		if (exportTask != null) {
-			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update));
+			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update_colored));
 
 			int progress = exportTask.getGeneralProgress();
 			int maxProgress = exportTask.getMaxProgress();
@@ -112,7 +112,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 			PrepareBackupResult backup = backupHelper.getBackup();
 			BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 			title.setText(status.statusTitleRes);
-			icon.setImageDrawable(getContentIcon(status.statusIconRes));
+			icon.setImageDrawable(getIcon(status.statusIconRes));
 		}
 		header.setOnClickListener(v -> {
 			fragment.toggleActionsVisibility();
