@@ -4840,7 +4840,7 @@
     <string name="map_widget_rendering_fps_desc">Zeigt an, wie schnell die Karte und Kartenelemente angezeigt und aktualisiert werden, ausgedrückt in Bildern pro Sekunde (FPS).</string>
     <string name="simulate_location_by_gpx">Standort per GPX simulieren</string>
     <string name="location_simulation_cutoff">Simulation überspringt die ersten Meter</string>
-    <string name="send_uuid_preference_desc">Eine zufällige UUID wird zum Herunterladen von Offline-Karten von OsmAnd-Servern verwendet, um die faire Nutzung von Serverressourcen zu überwachen, Verkehrsmuster vorherzusagen und anonyme monatliche Kartenberichte zu erstellen.</string>
+    <string name="send_uuid_preference_desc">Eine zufällige UUID wird zum Herunterladen von Offline-Karten von OsmAnd-Servern verwendet, um die faire Nutzung von Serverressourcen zu überwachen, Vorhersagen von Datenverkehrsmustern und anonyme monatliche Kartenberichte zu erstellen.</string>
     <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
     <string name="shared_string_identifiers">Identifikatoren</string>
     <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
