@@ -5035,4 +5035,5 @@
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
     <string name="export_to_file">Exportar a archivo</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
 </resources>
