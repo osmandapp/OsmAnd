@@ -5013,4 +5013,5 @@
     <string name="last_sync">上次同步</string>
     <string name="import_export">匯入 / 匯出</string>
     <string name="export_to_file">匯出至檔案</string>
+    <string name="av_audio_format_bottom_sheet_descr">選取音訊輸出格式。音訊的檔案類型格式為 3GPP (.3gp)。</string>
 </resources>
