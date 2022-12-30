@@ -13,6 +13,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
+import net.osmand.plus.settings.backend.backup.FileSettingsItemReader.OnFileMoveListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -367,7 +368,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return new FileSettingsItemReader(this);
+		return new FileSettingsItemReader(this, getFileMoveListener());
 	}
 
 	@Nullable
@@ -382,5 +383,19 @@ public class FileSettingsItem extends StreamSettingsItem {
 			}
 		}
 		return new StreamSettingsItemWriter(this);
+	}
+
+	private OnFileMoveListener getFileMoveListener() {
+		return new OnFileMoveListener() {
+			@Override
+			public void onFileMoveStarted(@NonNull File file) {
+				app.getTemporaryFilesRegistry().add(file);
+			}
+
+			@Override
+			public void onFileMoveFinished(@NonNull File file) {
+				app.getTemporaryFilesRegistry().remove(file);
+			}
+		};
 	}
 }

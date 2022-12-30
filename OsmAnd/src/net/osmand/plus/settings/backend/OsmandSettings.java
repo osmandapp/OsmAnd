@@ -2939,6 +2939,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference(this, NUMBER_OF_FREE_DOWNLOADS_ID, 0).makeGlobal();
 
+	public final ListStringPreference FILES_WITH_TEMPORARY_EXTENSION = (ListStringPreference) new ListStringPreference(this, "files_with_temporary_extension", "", ",,").makeShared().makeGlobal();
+
 	// For RateUsDialog
 	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
 			new LongPreference(this, "last_display_time", 0).makeGlobal().cache();

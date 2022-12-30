@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.MAPS_PATH;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
@@ -30,7 +29,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
@@ -46,6 +44,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.download.TemporaryFilesRegistry;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -143,6 +142,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
+	private final TemporaryFilesRegistry temporaryFilesRegistry = new TemporaryFilesRegistry(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -232,9 +232,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
 
-		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
-		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
-
+		temporaryFilesRegistry.deleteTemporaryFilesAtStartup();
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
@@ -559,6 +557,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public WeatherHelper getWeatherHelper() {
 		return weatherHelper;
+	}
+
+	@NonNull
+	public TemporaryFilesRegistry getTemporaryFilesRegistry() {
+		return temporaryFilesRegistry;
 	}
 
 	public CommandPlayer getPlayer() {

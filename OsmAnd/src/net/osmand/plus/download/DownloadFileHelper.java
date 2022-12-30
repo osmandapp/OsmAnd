@@ -208,6 +208,7 @@ public class DownloadFileHelper {
 	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress,
 								List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
+			TemporaryFilesRegistry temporaryFilesRegistry = ctx.getTemporaryFilesRegistry();
 			List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
 			log.info("Url downloading " + de.urlToDownload);
@@ -215,10 +216,12 @@ public class DownloadFileHelper {
 			de.fileToDownload = de.targetFile;
 			if (!de.unzipFolder) {
 				de.fileToDownload = FileUtils.getFileWithDownloadExtension(de.targetFile);
+				temporaryFilesRegistry.add(de.fileToDownload);
 			}
 			unzipFile(de, progress, downloadInputStreams);
 			if (!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())) {
 				ResourceManager rm = ctx.getResourceManager();
+				temporaryFilesRegistry.remove(de.fileToDownload);
 				boolean success = FileUtils.replaceTargetFile(rm, de.fileToDownload, de.targetFile);
 				if (!success) {
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");

@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.backend.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.FileUtils;
@@ -15,9 +16,12 @@ import java.io.OutputStream;
 public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem> {
 
 	private File savedFile;
+	private final OnFileMoveListener onFileMoveListener;
 
-	public FileSettingsItemReader(@NonNull FileSettingsItem item) {
+	public FileSettingsItemReader(@NonNull FileSettingsItem item,
+	                              @Nullable OnFileMoveListener onFileMoveListener) {
 		super(item);
+		this.onFileMoveListener = onFileMoveListener;
 	}
 
 	public File getSavedFile() {
@@ -44,24 +48,44 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 		OutputStream output = new FileOutputStream(downloadFile);
 		byte[] buffer = new byte[SettingsHelper.BUFFER];
 		int count;
-		boolean success = false;
+		boolean fileMovedSuccessfully;
 		try {
+			notifyOnFileMoveStarted(downloadFile);
 			while ((count = inputStream.read(buffer)) != -1) {
 				output.write(buffer, 0, count);
 			}
+			fileMovedSuccessfully = true;
 			output.flush();
-			success = true;
+		} catch (Exception e) {
+			fileMovedSuccessfully = false;
 		} finally {
 			Algorithms.closeStream(output);
-			if (!success && downloadFile.exists()) {
-				downloadFile.delete();
+		}
+		if (fileMovedSuccessfully) {
+			notifyOnFileMoveFinished(downloadFile);
+			if (FileUtils.replaceTargetFile(downloadFile, savedFile)) {
+				long lastModifiedTime = item.getLastModifiedTime();
+				if (lastModifiedTime != -1) {
+					savedFile.setLastModified(lastModifiedTime);
+				}
 			}
 		}
-		if (FileUtils.replaceTargetFile(downloadFile, savedFile)) {
-			long lastModifiedTime = item.getLastModifiedTime();
-			if (lastModifiedTime != -1) {
-				savedFile.setLastModified(lastModifiedTime);
-			}
+	}
+
+	private void notifyOnFileMoveStarted(@NonNull File file) {
+		if (onFileMoveListener != null) {
+			onFileMoveListener.onFileMoveStarted(file);
 		}
+	}
+
+	private void notifyOnFileMoveFinished(@NonNull File file) {
+		if (onFileMoveListener != null) {
+			onFileMoveListener.onFileMoveFinished(file);
+		}
+	}
+
+	public interface OnFileMoveListener {
+		void onFileMoveStarted(@NonNull File file);
+		void onFileMoveFinished(@NonNull File file);
 	}
 }
