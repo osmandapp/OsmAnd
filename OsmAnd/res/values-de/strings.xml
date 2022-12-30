@@ -5024,4 +5024,5 @@
     <string name="cloud_no_conflicts">Es gibt keine Konflikte</string>
     <string name="cloud_all_changes_uploaded_descr">Alle auf diesem Gerät vorgenommenen Änderungen werden mit OsmAnd Cloud synchronisiert.</string>
     <string name="download_cloud_version">Cloud-Version herunterladen</string>
+    <string name="av_audio_format_bottom_sheet_descr">Audio-Ausgabe-Format auswählen. Dateitypformat für Audio is 3GPP (.3gp).</string>
 </resources>
