@@ -3119,7 +3119,7 @@
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
     <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo: “%1$s”.</string>
     <string name="wake_time">Aktiveca periodo de ekrano</string>
-    <string name="units_and_formats">Mezurunuoj &amp; formoj</string>
+    <string name="units_and_formats">Mezurunuoj kaj formoj</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
     <string name="list_of_installed_plugins">Instalitaj kromprogramoj</string>
@@ -4909,7 +4909,7 @@
     <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
     <string name="empty_screen_view_selected_weather_data">Aktivigu por vidigi elektitajn veterajn datumojn sur la mapo.</string>
     <string name="weather_widgets_secondary_desc">Mezurunuoj estas ŝanĝeblaj en agordoj de la kromprogramo “Vetero”.</string>
-    <string name="measurement_units">Mezur-unuoj</string>
+    <string name="measurement_units">Mezurunuoj</string>
     <string name="empty_screen_weather_precipitation_layer">Aktivigu por vidigi tavolon de veter-alfalaĵoj sur la mapo.</string>
     <string name="air_pressure_widget_desc">Fenestraĵo montranta aeran premon por la nuna map-centro.</string>
     <string name="clouds_widget_desc">Fenestraĵo montranta nub-kovriĝon por la nuna map-centro.</string>
@@ -4939,4 +4939,27 @@
     <string name="weather_wind_kilimeters_per_hour">Kilometroj en horo</string>
     <string name="weather_wind_miles_per_hour">Mejloj en horo</string>
     <string name="wind_widget_desc">Fenestraĵo montranta ventan rapidon por la nuna map-centro.</string>
+    <string name="share_crash_log">Kunhavigi erar-protokolon</string>
+    <string name="dismiss_changes_descr">Ĉiuj ŝanĝoj pereos.</string>
+    <string name="dismiss_changes">Ĉu rezigni ŝanĝojn\?</string>
+    <string name="restart_now">Restartigi nun</string>
+    <string name="map_rendering_engine_v1">Versio 1</string>
+    <string name="weather_temperature_fahrenheit">Farenhejta</string>
+    <string name="action_not_supported_with_map_style">Tiu ĉi ago ne estas subtenata je la elektita map-stilo.</string>
+    <string name="weather_prefs_descr">24-hora kaj 7-taga veterprognozo, aktualigata ĉiu-3-hore</string>
+    <string name="map_rendering_engine_v2">Versio 2 (OpenGL)</string>
+    <string name="precipitation_widget_desc">Fenestraĵo montranta precipitaĵojn por la nuna map-centro.</string>
+    <string name="weather_pressure_hectopascals">Hektopaskaloj</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetroj da hidrargo</string>
+    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuli al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo.
+\n
+\nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
+    <string name="weather_widget_group_desc">Fenestraĵoj montrantaj diversajn informojn pri vetero.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_inches_of_mercury">Coloj da hidrargo</string>
+    <string name="weather_temperature_celsius">Celsia</string>
+    <string name="rendering_engine_failed">La map-bildigilo de OsmAnd antaŭnelonge paneis.</string>
+    <string name="temperature_widget_desc">Fenestraĵo montranta temperaturon por la nuna map-centro.</string>
 </resources>
