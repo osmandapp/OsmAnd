@@ -5024,4 +5024,5 @@
     <string name="cloud_version_will_be_removed">A versão em nuvem será removida</string>
     <string name="cloud_changes_will_be_dismissed">As alterações na nuvem serão descartadas</string>
     <string name="cloud_all_changes_uploaded">Todas as alterações foram enviadas</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de ficheiro para áudio é 3GPP (.3gp).</string>
 </resources>
