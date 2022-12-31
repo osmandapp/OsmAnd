@@ -4980,8 +4980,8 @@
     <string name="res_unknown">Sconosciuto</string>
     <string name="shared_string_unsynced">Non sincronizzato</string>
     <string name="check_for_updates">Controllo gli aggiornamenti</string>
-    <string name="changes">%1$s modifiche</string>
-    <string name="cloud_changes">Cambiamenti cloud</string>
+    <string name="changes">Modifica %1$s</string>
+    <string name="cloud_changes">Cambiamenti nel cloud</string>
     <string name="shared_string_uploaded">Inviato</string>
     <string name="shared_string_cloud">Cloud</string>
     <string name="new_file">Nuovo file</string>
@@ -5004,8 +5004,11 @@
     <string name="cloud_no_conflicts">Non ci sono conflitti</string>
     <string name="download_cloud_version">Scarica la versione cloud</string>
     <string name="shared_string_do_not_exist">Non esiste</string>
-    <string name="backup_error_failed_to_fetch_remote_items">È fallito il recupero della lista dei file dal server.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Recupero della lista dei file dal server fallito.</string>
     <string name="last_sync">Ultima sincronizzazione</string>
     <string name="import_export">Importa/Esporta</string>
     <string name="export_to_file">Esporta su file</string>
+    <string name="choose_what_to_sync">Scegli cosa sincronizzare</string>
+    <string name="cloud_sync_progress">Sincronizza...%1$s</string>
+    <string name="av_audio_format_bottom_sheet_descr">Seleziona il formato di uscita audio. Il formato di file per l\'audio è 3GPP (.3gp).</string>
 </resources>
