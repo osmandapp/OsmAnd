@@ -4981,7 +4981,7 @@
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
-    <string name="release_4_4_pre">• Здесь может быть ваша реклама</string>
+    <string name="release_4_4_pre">• Здесь может быть ваша реклама, шутка, здесь будет описание изменений для версии 4.4, как только они появятся</string>
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
@@ -5004,7 +5004,7 @@
     <string name="deleted_file">Удалённый файл</string>
     <string name="modified_file">Изменённый файл</string>
     <string name="shared_string_uploaded">Выгружено</string>
-    <string name="upload_all">Выгрузить всё</string>
+    <string name="upload_all">Выгрузить все</string>
     <string name="cloud_all_changes_uploaded">Все изменения выгружены</string>
     <string name="cloud_all_changes_downloaded">Все изменения загружены</string>
     <string name="download_cloud_version">Загрузить облачную версию</string>
@@ -5020,4 +5020,10 @@
     <string name="last_sync">Последняя синхронизация</string>
     <string name="import_export">Импорт/Экспорт</string>
     <string name="cloud_changes">Изменения в облаке</string>
+    <string name="local_changes_will_be_dismissed">Локальные изменения будут отклонены</string>
+    <string name="shared_string_modified">Изменён</string>
+    <string name="res_unknown">Неизвестно</string>
+    <string name="local_file_will_be_restored">Локальный файл будет восстановлен</string>
+    <string name="shared_string_unsynced">Не синхронизировано</string>
+    <string name="av_audio_format_bottom_sheet_descr">Выберите формат вывода аудио. Формат типа файла для аудио - 3GPP (.3gp).</string>
 </resources>
