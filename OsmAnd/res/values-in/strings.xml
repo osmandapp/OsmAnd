@@ -46,7 +46,7 @@
     <string name="donations">Donasi</string>
     <string name="number_of_recipients">Jumlah penerima</string>
     <string name="osm_user_stat">Sunting %1$s, peringkat %2$s, total suntingan %3$s</string>
-    <string name="osm_editors_ranking">Peringkat Editor OSM</string>
+    <string name="osm_editors_ranking">Peringkat Penyunting OSM</string>
     <string name="osm_live_subscription">Langganan OSM Live</string>
     <string name="osm_live_subscribe_btn">Berlangganan</string>
     <string name="osm_live_email_desc">Dibutuhkan untuk memperbarui Anda tentang kontribusi Anda.</string>
@@ -67,7 +67,7 @@
     <string name="sort_by">Urutkan menurut</string>
     <string name="modify_the_search_query">Ubah penelusuran Anda.</string>
     <string name="empty_state_osm_edits">Buat atau ubah objek OpenStreetMap</string>
-    <string name="empty_state_osm_edits_descr">Buat atau ubah POI OpenStreetMap, buka atau komentari catatan OSM, dan kontribusi berkas GPX yang direkam.</string>
+    <string name="empty_state_osm_edits_descr">Buat atau ubah POI OpenStreetMap, buka atau komentar catatan OSM, dan kontribusi berkas GPX yang direkam.</string>
     <string name="shared_string_deleted">Dihapus</string>
     <string name="shared_string_edited">Disunting</string>
     <string name="shared_string_added">Ditambahkan</string>
@@ -79,7 +79,7 @@
     <string name="notes_by_date">Catatan A/V berdasarkan tanggal</string>
     <string name="by_date">Menurut tanggal</string>
     <string name="by_type">Menurut tipe</string>
-    <string name="looking_for_tracks_with_waypoints">Mencari trek-trek dengan titik arah</string>
+    <string name="looking_for_tracks_with_waypoints">Mencari trek dengan titik arah</string>
     <string name="shared_string_more_without_dots">Lebih banyak</string>
     <string name="appearance_on_the_map">Tampilan pada peta</string>
     <string name="add_track_to_markers_descr">Pilih sebuah trek untuk menambahkan tanda arahnya pada penanda.</string>
@@ -258,8 +258,8 @@
     <string name="nearest_cities">Kota terdekat</string>
     <string name="select_city">Pilih kota</string>
     <string name="select_postcode">Pencarian kode pos</string>
-    <string name="quick_action_auto_zoom">Perbesar otomatis peta hidup/mati</string>
-    <string name="quick_action_auto_zoom_desc">Tombol untuk menghidupkan atau mematikan pembesaran yang diatur oleh kecepatan.</string>
+    <string name="quick_action_auto_zoom">Perbesar otomatis peta nyala/mati</string>
+    <string name="quick_action_auto_zoom_desc">Tombol untuk menyalakan atau mematikan pembesaran yang diatur oleh kecepatan.</string>
     <string name="quick_action_auto_zoom_on">Aktifkan pembesaran otomatis</string>
     <string name="quick_action_auto_zoom_off">Nonaktifkan pembesaran otomatis</string>
     <string name="quick_action_add_destination">Tetapkan tujuan</string>
@@ -316,7 +316,7 @@
     <string name="select_gpx_folder">Pilih folder berkas GPX</string>
     <string name="file_can_not_be_moved">Tidak dapat memindahkan berkas.</string>
     <string name="shared_string_move">Pindah</string>
-    <string name="shared_string_gpx_tracks">Trek-trek</string>
+    <string name="shared_string_gpx_tracks">Trek</string>
     <string name="routing_attr_driving_style_name">Gaya berkendara</string>
     <string name="route_altitude">Ketinggian Rute</string>
     <string name="altitude_descent">Turun</string>
@@ -348,7 +348,7 @@
     <string name="route_roundabout_short">Ambil %1$d keluar dan pergi</string>
     <string name="upload_poi">Unggah POI</string>
     <string name="route_calculation">Perhitungan Rute</string>
-    <string name="gpx_no_tracks_title">Anda belum memiliki berkas trek apapun</string>
+    <string name="gpx_no_tracks_title">Anda belum memiliki berkas trek apa pun</string>
     <string name="gpx_no_tracks_title_folder">Anda juga dapat menambahkan berkas-berkas trek ke folder</string>
     <string name="gpx_add_track">Tambah lebih banyak…</string>
     <string name="shared_string_appearance">Tampilan</string>
@@ -378,7 +378,7 @@
     <string name="rendering_attr_surfaceIntegrity_name">Integritas permukaan jalan</string>
     <string name="search_hint">Ketik kota, alamat, nama POI</string>
     <string name="translit_names">Terjemahkan nama</string>
-    <string name="edit_filter">Sunting kategori-kategori</string>
+    <string name="edit_filter">Sunting kategori</string>
     <string name="subcategories">Subkategori-subkategori</string>
     <string name="selected_categories">Kategori yang dipilih</string>
     <string name="create_custom_poi">Buat filter khusus</string>
@@ -491,7 +491,7 @@
     <string name="profile_alert_delete_title">Hapus profil</string>
     <string name="profile_alert_delete_msg">Hapus profil \"%s\"</string>
     <string name="select_base_profile_dialog_title">Pilih profil untuk memulai</string>
-    <string name="select_base_profile_dialog_message">Dasarkan profil kustom Anda pada salah satu profil aplikasi default, ini menentukan pengaturan dasar seperti visibilitas default widget dan unit kecepatan dan jarak. Ini adalah profil aplikasi default, bersama dengan contoh profil khusus yang dapat diperluas ke:</string>
+    <string name="select_base_profile_dialog_message">Dasarkan profil kustom Anda pada salah satu profil aplikasi bawaan, ini menentukan pengaturan dasar seperti visibilitas default widget dan unit kecepatan dan jarak. Ini adalah profil aplikasi bawaan, bersama dengan contoh profil khusus yang dapat diperluas ke:</string>
     <string name="select_nav_profile_dialog_title">Pilih tipe navigasi</string>
     <string name="base_profile_descr_car">Mobil, truk, sepeda motor</string>
     <string name="base_profile_descr_bicycle">Sepeda gunung, motor bebek, kuda</string>
@@ -575,7 +575,7 @@
     <string name="osc_file_desc">OSC - cocok untuk diekspor ke OpenStreetMap.</string>
     <string name="osc_file">Berkas OSC</string>
     <string name="choose_file_type">Pilih jenis berkas</string>
-    <string name="osm_edits_export_desc">Ekspor sebagai catatan-catatan OSM, POI, atau keduanya.</string>
+    <string name="osm_edits_export_desc">Ekspor sebagai catatan OSM, POI, atau keduanya.</string>
     <string name="all_data">Semua data</string>
     <string name="osm_notes">Catatan OSM</string>
     <string name="make_as_start_point">Buat ini sebagai titik keberangkatan</string>
@@ -594,7 +594,7 @@
     <string name="enter_lat_and_lon">Masukkan garis lintang dan bujur</string>
     <string name="group_deleted">Grup dihapus</string>
     <string name="shared_string_total">Jumlah</string>
-    <string name="nothing_found_in_radius">Tidak bisa menemukan apapun:</string>
+    <string name="nothing_found_in_radius">Tidak bisa menemukan apa pun:</string>
     <string name="use_two_digits_longitude">Gunakan digit ganda garis bujur</string>
     <string name="shared_string_result">Hasil</string>
     <string name="saved_articles">Artikel tersimpan</string>
@@ -662,7 +662,7 @@
     <string name="wikivoyage_travel_guide_descr">Panduan tempat-tempat paling menarik di planet ini, di dalam OsmAnd, tanpa perlu tersambung ke internet.</string>
     <string name="shared_string_travel_guides">Panduan perjalanan</string>
     <string name="get_osmand_live">Dapatkan OsmAnd Live untuk membuka semua fitur: Pembaruan peta harian dengan unduhan tidak terbatas, semua plugin berbayar dan gratis, Wikivoyage, dan masih banyak lagi.</string>
-    <string name="quick_action_edit_actions">Sunting tindakan-tindakan</string>
+    <string name="quick_action_edit_actions">Sunting tindakan</string>
     <string name="error_notification_desc">Silakan kirim tangkapan layar dari notifikasi ini ke support@osmand.net</string>
     <string name="coord_input_edit_point">Sunting titik</string>
     <string name="coord_input_add_point">Tambahkan titik</string>
@@ -673,7 +673,7 @@
 \nInformasi personal tidak dikumpulkan, data pencarian hanya digunakan untuk meningkatkan pencarian.</string>
     <string name="send_search_query">Kirim kata pencarian\?</string>
     <string name="thank_you_for_feedback">Terima kasih atas masukan Anda</string>
-    <string name="search_no_results_feedback">Tidak menemukan apapun\?
+    <string name="search_no_results_feedback">Tidak menemukan apa pun\?
 \nBerikan masukan</string>
     <string name="ask_for_location_permission">Izinkan OsmAnd mengakses lokasi untuk melanjutkan.</string>
     <string name="search_street">Cari jalan</string>
@@ -844,10 +844,10 @@
     <string name="shared_string_min_height">Tinggi min.</string>
     <string name="shared_string_max_height">Tinggi maks.</string>
     <string name="language_description">Pilih bahasa yang disukai dan jenis suara arahan.</string>
-    <string name="tts_description">Text-to-speech (TTS) dapat mengucapkan semua jenis instruksi: nama jalan, instruksi belokan, nama POI dll.</string>
-    <string name="recorded_description">Suara yang direkam terdengar lebih bagus, tapi hanya dapat mengucapkan frasa-frasa yang telah direkam: instruksi belokan. Tidak dapat mengumumkan nama jalan atau nama POI.</string>
+    <string name="tts_description">Teks ke suara (TTS) dapat mengucapkan semua jenis instruksi: nama jalan, instruksi belokan, nama POI dll.</string>
+    <string name="recorded_description">Suara yang direkam terdengar lebih bagus, tapi hanya dapat mengucapkan frasa yang telah direkam: instruksi belokan. Tidak dapat mengumumkan nama jalan atau nama POI.</string>
     <string name="use_system_language">Gunakan bahasa sistem</string>
-    <string name="poi_routes">Rute-rute</string>
+    <string name="poi_routes">Rute</string>
     <string name="north_abbreviation">U</string>
     <string name="south_abbreviation">S</string>
     <string name="west_abbreviation">B</string>
@@ -859,7 +859,7 @@
     <string name="monitoring_min_accuracy">Akurasi minimum</string>
     <string name="monitoring_min_speed">Kecepatan minimum</string>
     <string name="monitoring_notification">Notifikasi</string>
-    <string name="settings_preset">Profil default</string>
+    <string name="settings_preset">Profil bawaan</string>
     <string name="app_mode_default">Jelajahi peta</string>
     <string name="context_menu_item_directions_from">Arah dari</string>
     <string name="speak_traffic_warnings">Peringatan lalu lintas</string>
@@ -883,7 +883,7 @@
     <string name="weight_limit_description">Sediakan berat kendaraan Anda, beberapa pembatasan rute mungkin berlaku untuk kendaraan berat.</string>
     <string name="shared_string_always">Selalu</string>
     <string name="screen_control">Kendali layar</string>
-    <string name="turn_screen_on_navigation_instructions_descr">Setiap instruksi navigasi akan menghidupkan layar.</string>
+    <string name="turn_screen_on_navigation_instructions_descr">Setiap instruksi navigasi akan menyalakan layar.</string>
     <string name="turn_screen_on_navigation_instructions">Instruksi navigasi</string>
     <string name="sqlite_db_file">Berkas SQLiteDB</string>
     <string name="edit_online_source">Sunting sumber daring</string>
@@ -921,7 +921,7 @@
     <string name="development">Pengembangan</string>
     <string name="use_live_public_transport">Data OsmAnd Live</string>
     <string name="use_live_routing">Data OsmAnd Live</string>
-    <string name="perform_oauth_authorization_description">Masuk dengan OAuth untuk menggunakan fitur-fitur osmedit</string>
+    <string name="perform_oauth_authorization_description">Masuk dengan OAuth untuk menggunakan fitur osmedit</string>
     <string name="perform_oauth_authorization">Masuk dengan OAuth</string>
     <string name="file_already_imported">Berkas sudah diimpor di OsmAnd</string>
     <string name="shared_string_graph">Grafik</string>
@@ -949,7 +949,7 @@
     <string name="shared_string_add_photo">Tambahkan foto</string>
     <string name="register_on_openplacereviews">Daftar di
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Foto-foto disediakan oleh proyek data terbuka OpenPlaceReviews.org. Untuk mengunggah foto, Anda perlu mendaftar di situs web mereka.</string>
+    <string name="register_on_openplacereviews_desc">Foto disediakan oleh proyek data terbuka OpenPlaceReviews.org. Untuk mengunggah foto, Anda perlu mendaftar di situs webnya.</string>
     <string name="register_opr_create_new_account">Buat akun baru</string>
     <string name="register_opr_have_account">Saya sudah memiliki sebuah akun</string>
     <string name="shared_string_search_history">Riwayat pencarian</string>
@@ -978,7 +978,7 @@
     <string name="routing_engine_vehicle_type_bike">Sepeda</string>
     <string name="routing_engine_vehicle_type_car">Mobil</string>
     <string name="copy_address">Salin alamat</string>
-    <string name="shared_string_folders">Folder-folder</string>
+    <string name="shared_string_folders">Folder</string>
     <string name="select_folder">Pilih folder</string>
     <string name="select_folder_descr">Pilih folder atau buat yang baru</string>
     <string name="shared_string_empty">Kosong</string>
@@ -1027,7 +1027,7 @@
     <string name="latest_openstreetmap_update">Pembaruan OpenStreetMap terbaru tersedia:</string>
     <string name="updated">Diperbarui: %s</string>
     <string name="last_time_checked">Terakhir diperiksa: %s</string>
-    <string name="purchases">Pembelian-pembelian</string>
+    <string name="purchases">Pembelian</string>
     <string name="select_category_descr">Pilih kategori atau buat yang baru</string>
     <string name="track_recording_will_be_continued">Perekaman akan dilanjutkan.</string>
     <string name="copy_poi_name">Salin nama POI</string>
@@ -1040,7 +1040,7 @@
     <string name="customize_route_line">Sesuaikan garis rute</string>
     <string name="shared_string_route_line">Garis rute</string>
     <string name="specify_color_for_map_mode">Tentukan warna untuk mode peta %1$s.</string>
-    <string name="no_purchases">Anda tidak memiliki pembelian apapun</string>
+    <string name="no_purchases">Anda tidak memiliki pembelian apa pun</string>
     <string name="will_open_on">Dibuka pada</string>
     <string name="will_open_at">Dibuka pada</string>
     <string name="first_intermediate_dest_description">Menambahkan perhentian awal</string>
@@ -1214,9 +1214,9 @@
     <string name="record_plugin_name">Perekaman perjalanan</string>
     <string name="shared_string_online_maps">Peta daring</string>
     <string name="shared_string_audio">Audio</string>
-    <string name="shared_string_tracks">Trek-trek</string>
+    <string name="shared_string_tracks">Trek</string>
     <string name="shared_string_my_favorites">Favorit</string>
-    <string name="shared_string_my_places">Tempat-tempat Saya</string>
+    <string name="shared_string_my_places">Tempat Saya</string>
     <string name="shared_string_my_location">Posisi Saya</string>
     <string name="shared_string_add_to_favorites">Tambahkan ke \'Favorit\'</string>
     <string name="shared_string_add">Tambahkan</string>
@@ -1238,7 +1238,7 @@
     <string name="shared_string_disable">Nonaktifkan</string>
     <string name="shared_string_enable">Aktifkan</string>
     <string name="shared_string_off">Mati</string>
-    <string name="shared_string_on">Hidup</string>
+    <string name="shared_string_on">Nyala</string>
     <string name="shared_string_do_not_use">Jangan gunakan</string>
     <string name="shared_string_cancel">Batalkan</string>
     <string name="shared_string_ok">OKE</string>
@@ -1257,7 +1257,7 @@
     <string name="shared_string_show_description">Tampilkan keterangan.</string>
     <string name="shared_string_search">Cari</string>
     <string name="confirmation_to_clear_history">Hapus riwayat\?</string>
-    <string name="your_edits">Suntingan-suntingan Anda</string>
+    <string name="your_edits">Suntingan Anda</string>
     <string name="shared_string_minute_lowercase">men</string>
     <string name="osmand_parking_hour">j</string>
     <string name="shared_string_deselect">Batalkan pemilihan</string>
@@ -1404,7 +1404,7 @@
     <string name="gpx_file_name">Nama berkas GPX</string>
     <string name="delete_point">Hapus Titik</string>
     <string name="intermediate_items_sort_by_distance">Sortir pintu ke pintu</string>
-    <string name="edit_tilesource_minzoom">Zoom minima</string>
+    <string name="edit_tilesource_minzoom">Zoom minimal</string>
     <string name="edit_tilesource_maxzoom">Zoom maksimum</string>
     <string name="base_world_map">Peta dasar dunia</string>
     <string name="map_magnifier">Kaca pembesar peta</string>
@@ -1513,7 +1513,7 @@
     <string name="north">utara</string>
     <string name="distance_nearest">Terdekat lebih dulu</string>
     <string name="distance_farthest">Terjauh lebih dulu</string>
-    <string name="start_editing_card_description">Anda dapat dan harus menyunting artikel apapun di Wikivoyage. Bagikan pengetahuan, pengalaman, bakat, dan perhatian Anda.</string>
+    <string name="start_editing_card_description">Anda dapat dan seharusnya menyunting artikel apa pun di Wikivoyage. Bagikan pengetahuan, pengalaman, bakat, dan perhatian Anda.</string>
     <string name="show_along_the_route">Tampilkan sepanjang rute</string>
     <string name="coord_input_save_as_track_descr">Anda menambahkan %1$s titik. Ketik nama berkas dan ketuk \"Simpan\".</string>
     <string name="coord_input_save_as_track">Simpan sebagai trek</string>
@@ -1555,7 +1555,7 @@
     <string name="quick_action_new_action">Tambahkan tindakan</string>
     <string name="quick_action_add_parking">Tambahkan tempat parkir</string>
     <string name="quick_action_navigation_voice_on">Bisukan Suara</string>
-    <string name="quick_action_navigation_voice">Suara hidup/mati</string>
+    <string name="quick_action_navigation_voice">Suara nyala/mati</string>
     <string name="quick_action_add_osm_bug">Tambahkan Catatan OSM</string>
     <string name="quick_action_take_photo_note">Catatan foto baru</string>
     <string name="quick_action_take_video_note">Catatan video baru</string>
@@ -1785,9 +1785,9 @@
     <string name="rendering_value_white_name">Putih</string>
     <string name="suggested_maps">Peta yang disarankan</string>
     <string name="dialogs_and_notifications_descr">Kendalikan popup, dialog dan notifikasi.</string>
-    <string name="dialogs_and_notifications_title">Dialog-dialog dan notifikasi-notifikasi</string>
+    <string name="dialogs_and_notifications_title">Dialog dan notifikasi</string>
     <string name="download_map_dialog">Unduh dialog peta</string>
-    <string name="join_segments">Gabungkan segmen-segmen</string>
+    <string name="join_segments">Gabungkan segmen</string>
     <string name="selected_profile">Profil yang dipilih</string>
     <string name="reorder_profiles">Sunting daftar profil</string>
     <string name="choose_icon_color_name">Ikon, warna dan nama</string>
@@ -1816,16 +1816,16 @@
     <string name="add_custom_category">Tambahkan kategori kustom</string>
     <string name="shared_string_available">Tersedia</string>
     <string name="sunrise_at">Matahari terbit pada %1$s</string>
-    <string name="wake_on_voice_descr">Hidupkan layar perangkat (jika mati) ketika mendekati sebuah belokan.</string>
+    <string name="wake_on_voice_descr">Nyalakan layar perangkat (jika mati) ketika mendekati sebuah belokan.</string>
     <string name="no_internet_connection">Tidak dapat mengunduh, mohon periksa koneksi Internet Anda.</string>
     <string name="download_tab_local">Lokal</string>
-    <string name="wake_on_voice">Hidupkan layar</string>
+    <string name="wake_on_voice">Nyalakan layar</string>
     <string name="delay_to_start_navigation">Mulai arahan belokan-demi-belokan setelah…</string>
-    <string name="gps_network_not_enabled">Layanan lokasi mati. Hidupkan\?</string>
-    <string name="step_by_step">Belokan-demi-belokan</string>
-    <string name="turn_screen_on_sensor_descr">Melambaikan tangan melintasi layar akan menghidupkan layar.</string>
+    <string name="gps_network_not_enabled">Layanan lokasi tidak aktif. Aktifkan\?</string>
+    <string name="step_by_step">Belokan demi belokan</string>
+    <string name="turn_screen_on_sensor_descr">Melambaikan tangan melintasi layar akan menyalakan layar.</string>
     <string name="turn_screen_on_time_descr">Atur seberapa lama layar harus menyala.</string>
-    <string name="turn_screen_on">Hidupkan layar</string>
+    <string name="turn_screen_on">Nyalakan layar</string>
     <string name="turn_screen_on_info">Tampilkan peta di layar kunci selama navigasi.</string>
     <string name="shared_string_turn_off">Nonaktifkan</string>
     <string name="shared_string_turn">Belok</string>
@@ -1840,16 +1840,16 @@
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
-    <string name="shared_string_maps">Peta-peta</string>
-    <string name="shared_sting_tiles">Ubin-ubin</string>
+    <string name="shared_string_maps">Peta</string>
+    <string name="shared_sting_tiles">Ubin</string>
     <string name="shared_string_osmand_usage">Penggunaan OsmAnd</string>
     <string name="shared_string_calculate">Hitung</string>
     <string name="shared_string_memory_used_kb_desc">Menggunakan %1$s KB</string>
     <string name="shared_string_memory_used_mb_desc">Menggunakan %1$s MB</string>
     <string name="shared_string_memory_used_gb_desc">Menggunakan %1$s TB</string>
     <string name="shared_string_memory_used_tb_desc">Menggunakan %1$s TB</string>
-    <string name="layer_osm_edits">Suntingan-suntingan OSM</string>
-    <string name="tts_initialization_error">Tidak dapat memulai mesin text-to-speech.</string>
+    <string name="layer_osm_edits">Suntingan OSM</string>
+    <string name="tts_initialization_error">Tidak dapat memulai mesin teks ke suara.</string>
     <string name="file_imported_successfully">%1$s diimpor.</string>
     <string name="next_billing_date">Tanggal penagihan selanjutnya: %1$s</string>
     <string name="downloading_number_of_files">Mengunduh %1$d file…</string>
@@ -1879,13 +1879,13 @@
     <string name="backup_into_file">Cadangkan sebagai berkas</string>
     <string name="restore_from_file">Pulihkan dari berkas</string>
     <string name="osmand_cloud_help_descr">Butuh bantuan\? Silakan hubungi kami di %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Mohon masukkan alamat e-mail Anda, sebuah kode verifikasi akan dikirim,
-\ndan semua data akan ditautkan ke alamat e-mail.</string>
-    <string name="osmand_cloud_login_descr">Mohon masukkan alamat e-mail yang Anda daftarkan. Sebuah kata sandi sekali pakai untuk langkah berikutnya akan dikirim.</string>
-    <string name="verify_email_address">Verifikasi alamat e-mail</string>
+    <string name="osmand_cloud_create_account_descr">Mohon masukkan alamat surel Anda, sebuah kode verifikasi akan dikirim,
+\ndan semua data akan ditautkan ke alamat surel.</string>
+    <string name="osmand_cloud_login_descr">Mohon masukkan alamat surel yang Anda daftarkan. Sebuah kata sandi sekali pakai untuk langkah berikutnya akan dikirim.</string>
+    <string name="verify_email_address">Verifikasi alamat surel</string>
     <string name="verify_email_address_descr">Kode verifikasi terkirim ke %1$s, mohon masukkan di bidang di bawah ini.</string>
-    <string name="cloud_email_not_registered">Alamat e-mail ini belum terdaftar di OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Alamat e-mail ini telah didaftarkan.</string>
+    <string name="cloud_email_not_registered">Alamat surel ini belum terdaftar di OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Alamat surel ini telah didaftarkan.</string>
     <string name="resend_verification_code">Kirim ulang</string>
     <string name="verification_code_missing">Saya tidak mendapatkan kode verifikasi</string>
     <string name="verification_code_missing_description">Dapat selama 10 menit. Gunakan tombol di bawah jika tidak ada di folder spam Anda.</string>
@@ -1916,15 +1916,15 @@
     <string name="download_server_version">Unduh versi server</string>
     <string name="shared_string_logout">Keluar</string>
     <string name="backup_delete_all_data">Hapus semua data saya</string>
-    <string name="backup_delete_all_data_descr">Semua data di OsmAnd Cloud akan dihapus. Versi-versi lokal tidak akan disentuh.</string>
+    <string name="backup_delete_all_data_descr">Semua data di OsmAnd Cloud akan dihapus. Versi lokal tidak akan disentuh.</string>
     <string name="backup_danger_zone">Zona berbahaya</string>
     <string name="delete_all_confirmation">Ya, hapus semua</string>
     <string name="backup_complete">Pencadangan selesai</string>
     <string name="backup_now">Cadangkan sekarang</string>
     <string name="make_backup_descr">Ada banyak perubahan pada perangkat ini, harap melakukan pencadangan dari data ini agar tidak hilang.</string>
-    <string name="backup_conflicts">Konflik-konflik</string>
+    <string name="backup_conflicts">Konflik</string>
     <string name="backup_confilcts_descr">Beberapa berkas tidak dapat diunggah ke server karena versi lebih baru dari berkas itu sudah disimpan di server.</string>
-    <string name="backup_view_conflicts">Lihat konflik-konflik</string>
+    <string name="backup_view_conflicts">Lihat konflik</string>
     <string name="backup_data">Cadangkan data</string>
     <string name="backup_restore_data">Pulihkan data</string>
     <string name="restore_from_osmand_cloud">Pulihkan dari OsmAnd Cloud</string>
@@ -1946,7 +1946,7 @@
     <string name="routing_attr_avoid_tunnels_description">Hindari terowongan</string>
     <string name="routing_attr_avoid_tunnels_name">Hindari terowongan</string>
     <string name="backup_promocode">Kode promo</string>
-    <string name="purchases_feature_desc_wikivoyage">Jelajahi Wikivoyage secara luring. Artikel-artikel dibagi berdasarkan negara dan daerah dan tersedia pada bahasa apa pun.</string>
+    <string name="purchases_feature_desc_wikivoyage">Jelajahi Wikivoyage secara luring. Artikel dibagi berdasarkan negara dan daerah dan tersedia pada bahasa apa pun.</string>
     <string name="purchases_feature_desc_osmand_cloud">Dapatkan OsmAnd Cloud untuk menyimpan data OsmAnd secara daring. Tidak ada data yang hilang setelah penginstalan ulang. Cadangkan dan pulihkan semua info secara mudah.</string>
     <string name="unlimited_map_downloads">Unduhan peta tanpa batas</string>
     <string name="offline_wikipeadia">Wikipedia Luring</string>
@@ -1996,7 +1996,7 @@
     <string name="poi_filter_parking">Parkir</string>
     <string name="recording_context_menu_play">Mainkan</string>
     <string name="poi_filter_entertainment">Hiburan</string>
-    <string name="maps_define_edit">Definisikan/Edit…</string>
+    <string name="maps_define_edit">Definisikan/Sunting…</string>
     <string name="plugin_distance_point">Titik</string>
     <string name="plugin_distance_point_ele">ketinggian</string>
     <string name="logcat_buffer_descr">Periksa dan bagikan log aplikasi yang berdetail</string>
@@ -2105,7 +2105,7 @@
     <string name="file_import_error">%1$s gagal impor: %2$s</string>
     <string name="precision_hdop_and_vdop">Presisi horisontal: %1$s, vertikal: %2$s</string>
     <string name="configure_profile_info">Pengaturan profil:</string>
-    <string name="pref_selected_by_default_for_profiles">Pengaturan ini dipilih secara standar buat profil: %s</string>
+    <string name="pref_selected_by_default_for_profiles">Pengaturan ini dipilih secara bawaan buat profil: %s</string>
     <string name="lang_ca">Katalan</string>
     <string name="lang_hi">Hindi</string>
     <string name="lang_iw">Ibrani</string>
@@ -2204,7 +2204,7 @@
     <string name="shared_string_complete">selesai</string>
     <string name="estimated_download_size">Estimasi ukuran unduhan</string>
     <string name="move_map_to_select_area">Gerakkan peta untuk memilih area yang dibutuhkan.</string>
-    <string name="edit_category">Edit kategori</string>
+    <string name="edit_category">Sunting kategori</string>
     <string name="shared_string_shape">Bentuk</string>
     <string name="default_appearance">Tampilan bawaan</string>
     <string name="location_source_descr">Secara bawaan, OsmAnd yang terinstal dari Google Play menggunakan %1$s untuk menentukan lokasi.
@@ -2260,7 +2260,7 @@
     <string name="add_group_to_markers">Tambahkan grup ke daftar tanda</string>
     <string name="empty_state_my_tracks">Tambahkan file trek</string>
     <string name="add_to_a_track">Tambahkan pada sebuah trek</string>
-    <string name="add_edit_favorite">Tambahkan atau edit favorit</string>
+    <string name="add_edit_favorite">Tambahkan atau sunting favorit</string>
     <string name="shared_string_all_languages">Semua bahasa</string>
     <string name="add_description">Tambahkan deskripsi</string>
     <string name="added_profiles">Profil ditambahkan</string>
@@ -2334,7 +2334,7 @@
     <string name="copying_file">Menyalin berkas %1$s…</string>
     <string name="map_widget_view_direction">Arah tampilan</string>
     <string name="quick_action_item_action">Aksi %d</string>
-    <string name="fav_points_edited">Titik favorit diedit</string>
+    <string name="fav_points_edited">Titik favorit disunting</string>
     <string name="routing_attr_carriage_restrictions_description">Pertimbangkan izin akses untuk kendaraan yang ditarik kuda</string>
     <string name="simulation_preview_mode_desc">Kecepatan simulasi akan maksimal pada ruas lurus dan melambat hanya pada persimpangan.</string>
     <string name="simulation_real_mode_desc">Pada ruas jalan lurus, kecepatan akan mendekati kecepatan maksimum yang diizinkan.
@@ -2526,7 +2526,7 @@
     <string name="map_tile_source_descr">Pilih sumber ubin peta daring atau yang di-cache.</string>
     <string name="show_gps_coordinates_text">Tampilkan koordinat GPS pada peta</string>
     <string name="add_favorite_dialog_top_text">Masukkan nama Favorit</string>
-    <string name="favourites_context_menu_edit">Edit Favorit</string>
+    <string name="favourites_context_menu_edit">Sunting Favorit</string>
     <string name="favourites_context_menu_delete">Hapus Favorit</string>
     <string name="favourites_remove_dialog_msg">Hapus titik Favorit \'%s\'\?</string>
     <string name="favourites_remove_dialog_success">Titik favorit {0} dihapus.</string>
@@ -2601,7 +2601,7 @@
     <string name="start_point">Mulai</string>
     <string name="shortcut_navigate_to_home">Navigasi ke \'Rumah\'</string>
     <string name="android_auto_map_placeholder_title">Peta ditampilkan pada layar kendaraan.</string>
-    <string name="local_openstreetmap_descr_title">Pengeditan OSM asinkron:</string>
+    <string name="local_openstreetmap_descr_title">Penyuntingan OSM asinkron:</string>
     <string name="local_openstreetmap_settings">POI/catatan OSM yang tersimpan pada perangkat</string>
     <string name="level_to_switch_vector_raster_descr">Gunakan peta raster untuk apa pun lebih dari tingkat ini.</string>
     <string name="level_to_switch_vector_raster">Tingkat perbesaran vektor minimal</string>
@@ -2728,7 +2728,7 @@
     <string name="quick_action_btn_tutorial_descr">Pengetukan lama dan menggerakkan tombol mengubah posisinya pada layar.</string>
     <string name="nautical_renderer">Bahari</string>
     <string name="quick_action_add_osm_bug_descr">Sebuah tombol untuk menambahkan sebuah catatan OSM di tengah layar.</string>
-    <string name="osm_editing_plugin_name">Pengeditan OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Penyuntingan OpenStreetMap</string>
     <string name="use_trackball">Gunakan trackball</string>
     <string name="download_files_question">Unduh {0} file ({1} MB)\?</string>
     <string name="no_plugins_enabled">Anda tidak punya plugin yang aktif. Anda dapat mencari daftar plugin yang tersedia dalam \'Menu\' → \'Plugin\'.</string>
@@ -2836,7 +2836,7 @@
     <string name="activity_type_riding_name">Berkendara</string>
     <string name="activity_type_winter_name">Musim dingin</string>
     <string name="routing_engine_vehicle_type_hgv">HGV</string>
-    <string name="edit_track">Edit trek</string>
+    <string name="edit_track">Sunting trek</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Bersepeda biasa</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Bersepeda di gunung</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bersepeda listrik</string>
@@ -2936,16 +2936,16 @@
     <string name="routing_attr_allow_streams_description">Perbolehkan aliran dan saluran</string>
     <string name="release_3_9">• Tambahkan opsi untuk mengekspor dan mengimpor semua data termasuk pengaturan, sumber daya, tempat saya
 \n
-\n • Rencanakan Rute: grafik untuk segmen trek dengan rute, dan menambahkan kemampuan untuk membuat dan mengedit beberapa segmen trek
+\n • Rencanakan Rute: grafik untuk segmen trek dengan rute, dan menambahkan kemampuan untuk membuat dan menyunting beberapa segmen trek
 \n
-\n • Tambahkan metode autentikasi OAuth untuk OpenStreetMap, UI dialog OSM yang ditingkatkan
+\n • Tambahkan metode autentikasi OAuth untuk OpenStreetMap, UI dialog OSM ditingkatkan
 \n
 \n • Dukung warna khusus untuk favorit dan lacak titik jalan
 \n
 \n</string>
     <string name="routing_engine_vehicle_type_foot">Kaki</string>
     <string name="shared_string_enter_param">Masukkan parameter</string>
-    <string name="edit_online_routing_engine">Edit mesin perutean daring</string>
+    <string name="edit_online_routing_engine">Sunting mesin perutean daring</string>
     <string name="profile_by_default_description">Pilih profilnya, itu akan digunakan pada pemulaian aplikasi.</string>
     <string name="reverse_all_points">Balikkan semua titik</string>
     <string name="one_point_error">Mohon tambahkan setidaknya dua titik.</string>
@@ -2961,7 +2961,7 @@
     <string name="reverse_route">Balikkan rute</string>
     <string name="save_as_new_track">Simpan sebagai trek baru</string>
     <string name="overwrite_track">Timpa trek</string>
-    <string name="plan_route_last_edited">Terakhir diedit</string>
+    <string name="plan_route_last_edited">Terakhir disunting</string>
     <string name="routing_attr_prefer_horse_routes_description">Lebih suka rute kuda</string>
     <string name="horseback_riding">Menunggang kuda</string>
     <string name="routeInfo_tracktype_description">Warnai rute atau jalur lintasan dengan komposisi permukaannya. Biasanya berlaku ketika jaringan jalan sebagian besar tidak beraspal.</string>
@@ -3103,7 +3103,7 @@
     <string name="export_not_enough_space_descr">Perangkat Anda hanya memiliki %1$s tersisa. Kosongkan beberapa ruang atau batalkan pilihan beberapa item untuk diekspor.</string>
     <string name="segments_count">Segmen %1$d</string>
     <string name="purchases_feature_desc_android_auto">Menyediakan peta luring dan navigasi OsmAnd ke layar kendaraan Anda dan integrasi kontrol kendaraan Anda.</string>
-    <string name="backup_delete_old_data">Hapus versi-versi lama</string>
+    <string name="backup_delete_old_data">Hapus versi lama</string>
     <string name="backup_restore_data_descr">Pulihkan data pada perangkat, menggunakan pencadangan daring.</string>
     <string name="select_backup_data_descr">Pilih data dan folder untuk dicadangkan.</string>
     <string name="quick_action_coordinates_widget_descr">Alihan untuk menampilkan atau menyembunyikan widget Koordinat pada peta.</string>
@@ -3143,13 +3143,13 @@
     <string name="all_next_segments">Semua segmen berikutnya</string>
     <string name="save_global_track_interval_descr">Tentukan interval pencatatan untuk perekaman trek umum (diaktifkan melalui widget \'Perekaman perjalanan\' di peta).</string>
     <string name="threshold_distance">Jarak ambang batas</string>
-    <string name="route_between_points_desc">Pilih cara menghubungkan titik-titik, dengan garis lurus, atau hitung rute di antara titik-titik tersebut seperti yang ditentukan di bawah ini.</string>
+    <string name="route_between_points_desc">Pilih cara menghubungkan titik, dengan garis lurus, atau hitung rute di antara titik tersebut seperti yang ditentukan di bawah ini.</string>
     <string name="route_between_points_next_segment_button_desc">Hanya segmen berikutnya yang akan dihitung ulang menggunakan profil yang dipilih.</string>
     <string name="route_between_points_whole_track_button_desc">Seluruh trek akan dihitung ulang menggunakan profil yang dipilih.</string>
     <string name="track_coloring_solid">Padat</string>
     <string name="gpx_direction_arrows">Panah arah</string>
     <string name="gpx_split_interval_descr">Pilih interval di mana tanda dengan jarak atau waktu di trek akan ditampilkan.</string>
-    <string name="route_between_points">Rute antara titik-titik</string>
+    <string name="route_between_points">Rute antara titik</string>
     <string name="osm_edit_closed_note">Catatan OSM ditutup</string>
     <string name="add_hidden_group_info">Poin tambahan dapat ditemukan di \"%s\". Perlihatkan grup yang dipilih untuk ditampilkan di peta.</string>
     <string name="quick_action_showhide_mapillary_descr">Sebuah alihan untuk menampilkan atau menyembunyikan layer Mapillary pada peta.</string>
@@ -3200,7 +3200,7 @@
     <string name="lang_is">Islandia</string>
     <string name="lang_bpy">Bisnupriya</string>
     <string name="app_mode_inline_skates">Sepatu roda</string>
-    <string name="expire_time_descr">Ubin yang di-cache akan diunduh ulang setelah jumlah menit yang ditentukan. Biarkan bidang ini kosong agar tidak pernah menyegarkan ubin untuk sumber ini.
+    <string name="expire_time_descr">Ubin yang ditembolok akan diunduh ulang setelah jumlah menit yang ditentukan. Biarkan bidang ini kosong agar tidak pernah menyegarkan ubin untuk sumber ini.
 \n
 \nSatu hari adalah 1440 menit.
 \nSatu minggu adalah 10 080 menit.
@@ -3325,7 +3325,7 @@
     <string name="shared_string_languages">Bahasa</string>
     <string name="replace_point_descr">Ganti titik lain dengan ini.</string>
     <string name="reset_items_descr">Menyembunyikan pengaturan akan mengatur ulang ke keadaan semula.</string>
-    <string name="hidden_items_descr">Item-item ini disembunyikan dari menu, tetapi opsi atau plugin yang diwakili akan terus berfungsi.</string>
+    <string name="hidden_items_descr">Item ini disembunyikan dari menu, tetapi opsi atau plugin yang diwakili akan terus berfungsi.</string>
     <string name="shared_string_hidden">Tersembunyi</string>
     <string name="download_slope_maps">Lereng</string>
     <string name="select_distance_route_will_recalc">Pilih jarak setelah itu rute akan dikalkulasi ulang.</string>
@@ -3498,14 +3498,14 @@
     <string name="rendering_attr_transportStops_name">Perhentian transportasi</string>
     <string name="speak_favorites">Favorit terdekat</string>
     <string name="edit_tilesource_choose_existing">Pilih yang sudah ada…</string>
-    <string name="layer_map_appearance">Konfigurasikan layar</string>
+    <string name="layer_map_appearance">Konfigurasi layar</string>
     <string name="download_srtm_maps">Garis kontur</string>
     <string name="current_route">Rute saat ini</string>
     <string name="waypoint_visit_before">Kunjungi sebelum</string>
     <string name="shared_string_deselect_all">Batalkan semua pilihan</string>
     <string name="shared_string_clear_all">Hapus semua</string>
     <string name="srtm_plugin_name">Garis kontur</string>
-    <string name="edit_group">Edit grup</string>
+    <string name="edit_group">Sunting grup</string>
     <string name="proxy_host_title">Host Proksi</string>
     <string name="app_modes_choose">Profil aplikasi</string>
     <string name="download_roads_only_maps">Peta hanya jalan</string>
@@ -3572,7 +3572,7 @@
     <string name="routing_attr_avoid_motorway_name">Tidak ada jalan raya</string>
     <string name="cancel_route">Abaikan rute\?</string>
     <string name="map_widget_max_speed">Batas kecepatan</string>
-    <string name="map_widget_config">Konfigurasikan layar</string>
+    <string name="map_widget_config">Konfigurasi layar</string>
     <string name="local_index_installed">Versi lokal</string>
     <string name="tts_language_not_supported_title">Bahasa tidak didukung</string>
     <string name="tts_missing_language_data_title">Data hilang</string>
@@ -3655,7 +3655,7 @@
     <string name="get_altitude_information">Dapatkan informasi ketinggian</string>
     <string name="monitoring_min_speed_descr_recommendation">Rekomendasi: Coba gunakan deteksi gerakan melalui filter perpindahan minimum pencatatan (B) terlebih dahulu, ini dapat menghasilkan hasil yang lebih baik, dan Anda akan kehilangan lebih sedikit data. Jika trek Anda tetap berisik pada kecepatan rendah, coba nilai non-nol di sini. Harap dicatat bahwa beberapa pengukuran mungkin tidak melaporkan nilai kecepatan sama sekali (beberapa metode berbasis jaringan), dalam hal ini Anda tidak akan merekam apa pun.</string>
     <string name="tracks_view_descr">Trek yang Anda rekam ada di %1$s, atau folder OsmAnd.</string>
-    <string name="edit_profiles">Edit profil</string>
+    <string name="edit_profiles">Sunting profil</string>
     <string name="added_profiles_descr">Profil yang ditambahkan oleh plugin</string>
     <string name="track_saved">Trek disimpan</string>
     <string name="reset_to_default_category_button_promo">\'Atur ulang ke bawaan\' akan mengembalikan urutan pengurutan ke instalasi bawaan.</string>
@@ -3688,7 +3688,7 @@
     <string name="live_monitoring_descr">Memungkinkan berbagi lokasi saat ini menggunakan perekaman perjalanan.</string>
     <string name="colour_of_circles">Warna lingkaran</string>
     <string name="compass_on_circles">Kompas pada lingkaran</string>
-    <string name="distance_circles">Jarak-lingkaran</string>
+    <string name="distance_circles">Jarak lingkaran</string>
     <string name="circle_settings">Pengaturan lingkaran</string>
     <string name="navigation_points_desc">Widget navigasi diaktifkan selama navigasi untuk menampilkan informasi seperti jarak, waktu kedatangan atau tersisa, belokan berikutnya, arah, nama jalan saat ini atau berikutnya, informasi jalur, kecepatan maksimal, peringatan mendekat, POI, titik jalan.</string>
     <string name="calculating_altitude">Menghitung ketinggian</string>
@@ -3707,7 +3707,7 @@
     <string name="recalc_angle_dialog_title">Sudut minimum antara lokasi dan rute saya</string>
     <string name="shared_string_app_default_w_val">Bawaan Aplikasi (%s)</string>
     <string name="plugin_prefs_reset_successful">Semua pengaturan plugin dikembalikan ke default.</string>
-    <string name="profile_prefs_reset_successful">Semua pengaturan profil dikembalikan ke default.</string>
+    <string name="profile_prefs_reset_successful">Semua pengaturan profil dikembalikan ke bawaan.</string>
     <string name="import_profile_dialog_description">Profil yang diimpor berisi data tambahan. Ketuk \"Impor\" untuk mengimpor data profil saja, atau pilih data tambahan.</string>
     <string name="permission_is_required">Izin diperlukan untuk menggunakan opsi ini.</string>
     <string name="monitoring_min_speed_descr">Ini adalah filter cut-off kecepatan rendah untuk tidak merekam titik di bawah kecepatan tertentu. Ini dapat membuat trek yang direkam terlihat lebih halus saat dilihat di peta.</string>
@@ -3729,7 +3729,7 @@
     <string name="default_speed_dialog_msg">Perkiraan waktu kedatangan untuk jenis jalan yang tidak diketahui, dan membatasi kecepatan untuk semua jalan (dapat mempengaruhi perutean)</string>
     <string name="export_profile">Ekspor profil</string>
     <string name="monitoring_min_speed_descr_remark">Keterangan: pemeriksaan kecepatan &gt; 0: Sebagian besar chipset GPS melaporkan nilai kecepatan hanya jika algoritma menentukan Anda sedang bergerak, dan tidak ada jika Anda tidak. Oleh karena itu menggunakan pengaturan &gt; 0 dalam filter ini dalam arti menggunakan deteksi gerakan chipset GPS. Tetapi bahkan jika tidak disaring di sini pada waktu perekaman, kami masih menggunakan fitur ini dalam analisis GPX kami untuk menentukan Jarak yang dikoreksi, yaitu nilai yang ditampilkan di bidang itu adalah jarak yang direkam saat bergerak.</string>
-    <string name="edit_profiles_descr">Profil default OsmAnd tidak dapat dihapus, tetapi dinonaktifkan (pada layar sebelumnya), atau diurutkan ke bawah.</string>
+    <string name="edit_profiles_descr">Profil bawaan OsmAnd tidak dapat dihapus, tetapi dinonaktifkan (pada layar sebelumnya), atau diurutkan ke bawah.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Jaringan simpul</string>
     <string name="route_start_point">Titik awal</string>
     <string name="overwrite_profile_q">\'%1$s\' sudah ada. Timpa\?</string>
@@ -3770,7 +3770,7 @@
     <string name="rendering_attr_currentTrackWidth_description">Lebar GPX</string>
     <string name="map_widget_true_bearing">Bantalan sebenarnya</string>
     <string name="shared_string_by_default">Secara default</string>
-    <string name="manage_profiles_descr">Buat, impor, edit profil</string>
+    <string name="manage_profiles_descr">Buat, impor, sunting profil</string>
     <string name="screen_alerts">Peringatan layar</string>
     <string name="explore_plans">Jelajahi Paket</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sembunyikan area militer</string>
@@ -3821,7 +3821,7 @@
     <string name="temporary_conditional_routing">Pertimbangkan batasan sementara</string>
     <string name="rendering_attr_winter_road_name">Jalan musim dingin</string>
     <string name="av_audio_bitrate">Kecepatan bit audio</string>
-    <string name="configure_profile">Konfigurasikan profil</string>
+    <string name="configure_profile">Konfigurasi profil</string>
     <string name="utm_format_descr">OsmAnd menggunakan Standar UTM, yang serupa tetapi tidak identik dengan format UTM NATO.</string>
     <string name="routing_attr_avoid_highway_description">Hindari jalan tol</string>
     <string name="routing_attr_avoid_highway_name">Hindari jalan tol</string>
@@ -3942,7 +3942,7 @@
     <string name="routing_attr_avoid_subway_description">Menghindari kereta bawah tanah dan transportasi kereta api ringan</string>
     <string name="public_transport_warning_title">Navigasi transportasi umum saat ini dalam pengujian beta, kemungkinan ada kesalahan dan ketidakbenaran.</string>
     <string name="no_altitude_data_desc">Untuk menerima data %1$s, pasang trek Anda ke jalan atau hitung secara daring.</string>
-    <string name="edit_map_marker">Edit penanda peta</string>
+    <string name="edit_map_marker">Sunting penanda peta</string>
     <string name="release_3_4">• Profil aplikasi: Buat profil khusus untuk kebutuhan Anda sendiri, dengan ikon dan warna khusus
 \n
 \n• Sekarang Anda dapat sesuaikan profil apa pun default dan kecepatan min/maks
@@ -4028,7 +4028,7 @@
     <string name="waypoints_removed_from_map_markers">Titik jalan dihapus dari penanda peta</string>
     <string name="show_closed_notes">Tampilkan catatan yang telah ditutup</string>
     <string name="will_open_tomorrow_at">Buka besok pada</string>
-    <string name="context_menu_points_of_group">Semua poin dari kelompok</string>
+    <string name="context_menu_points_of_group">Semua titik dari kelompok</string>
     <string name="lang_ckb">Kurdi Tengah</string>
     <string name="routing_attr_goods_restrictions_name">Pengiriman barang</string>
     <string name="gpx_saved_sucessfully">Berkas GPX disimpan ke {0}</string>
@@ -4060,13 +4060,13 @@
     <string name="auto_follow_location_enabled">Tampilan peta tengah otomatis sedang digunakan.</string>
     <string name="animate_routing_route_not_calculated">Harap hitung rute terlebih dahulu</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Tampilkan jalur MTB IMBA</string>
-    <string name="auto_25_chars_route_tu_kr">Putar balik dan tetap ke kanan</string>
+    <string name="auto_25_chars_route_tu_kr">Putar balik dan tetap di kanan</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Tampilkan jalur khusus untuk bersepeda gunung.</string>
     <string name="auto_25_chars_route_tl_kl">Belok kiri dan tetap kiri</string>
     <string name="auto_25_chars_route_tl_kr">Belok kiri dan tetap kanan</string>
     <string name="auto_25_chars_route_tr_kl">Belok kanan dan tetap kiri</string>
     <string name="auto_25_chars_route_tr_kr">Belok kanan dan tetap kanan</string>
-    <string name="auto_25_chars_route_tu_kl">Putar balikkan U dan tetap di kiri</string>
+    <string name="auto_25_chars_route_tu_kl">Putar balik dan tetap di kiri</string>
     <string name="attach_roads_warning">Hanya trek yang sudah direkam dapat dipasang pada jalan.</string>
     <string name="auto_25_chars_route_roundabout_kl">Ambil jalan keluar %1$d dan tetap kiri</string>
     <string name="auto_25_chars_route_roundabout_kr">Ambil jalan keluar %1$d dan tetap kanan</string>
@@ -4087,7 +4087,7 @@
     <string name="trip_recording_downhill_widget_desc">Menampilkan jumlah semua turunan dari perjalanan yang direkam saat ini.</string>
     <string name="trip_recording_uphill_widget_desc">Menunjukkan jumlah semua pendakian dari perjalanan yang sedang direkam.</string>
     <string name="storage_directory_readonly_desc">Diubah ke memori internal karena folder penyimpanan data yang dipilih dilindungi dari penulisan. Mohon pilih direktori penyimpanan yang dapat dituliskan.</string>
-    <string name="osm_recipient_stat">Pengeditan %1$s, jumlah %2$s mBTC</string>
+    <string name="osm_recipient_stat">Penyuntingan %1$s, jumlah %2$s mBTC</string>
     <string name="select_map_marker">Pilih penanda peta</string>
     <string name="no_microphone_permission">Berikan akses mikrofon.</string>
     <string name="find_parking">Cari parkir</string>
@@ -4185,7 +4185,7 @@
     <string name="mark_to_delete">Tandai untuk dihapus</string>
     <string name="plugin_touringview_name">Tampilan peta tur</string>
     <string name="context_menu_item_delete_waypoint">Hapus titik jalan GPX\?</string>
-    <string name="context_menu_item_edit_waypoint">Edit titik jalan GPX</string>
+    <string name="context_menu_item_edit_waypoint">Sunting titik jalan GPX</string>
     <string name="osmand_running_in_background">Jalan pada latar belakang</string>
     <string name="gps_wake_up_timer">Interval pembangunan GPS</string>
     <string name="simulate_your_location">Simulasikan posisi Anda</string>
@@ -4212,7 +4212,7 @@
 \n Salah satu dari peta ini dapat ditampilkan sebagai peta (dasar) utama, atau sebagai hamparan atau dasaran ke peta dasar lain (seperti peta vektor luring OsmAnd). Elemen tertentu dari peta vektor OsmAnd dapat disembunyikan melalui menu \'Konfigurasi peta\' untuk membuat peta dasar lebih terlihat.
 \n
 \n Unduh peta ubin secara langsung, atau salin sebagai file basis data SQLite ke folder data OsmAnd menggunakan salah satu dari banyak alat persiapan peta pihak ketiga.</string>
-    <string name="osm_edit_modified_poi">POI OSM termodifikasi</string>
+    <string name="osm_edit_modified_poi">POI OSM Diubah</string>
     <string name="copying_osmand_file_failed">Pemindahan file gagal</string>
     <string name="context_menu_item_open_note">Buka Catatan OSM</string>
     <string name="osn_add_dialog_error">Tidak dapat membuat catatan.</string>
@@ -4222,7 +4222,7 @@
     <string name="rendering_value_translucent_lightblue_name">Biru muda translucent</string>
     <string name="available_as_part_of_subscription_plan">Tersedia sebagai bagian dari langganan %1$s.</string>
     <string name="included_in_your_current_plan">Termasuk dalam langganan \"%1$s\" Anda saat ini</string>
-    <string name="osm_edit_deleted_poi">POI OSM terhapus</string>
+    <string name="osm_edit_deleted_poi">POI OSM Dihapus</string>
     <string name="osm_edit_commented_note">Berkomentar pada Catatan OSM</string>
     <string name="share_osm_edits_subject">Suntingan OSM dibagikan via OsmAnd</string>
     <string name="what_is_new">Apa yang baru</string>
@@ -4465,7 +4465,7 @@
     <string name="si_nm_h">Mil laut per jam (knot)</string>
     <string name="proxy_pref_descr">Atur server proksi.</string>
     <string name="index_name_other">Peta dunia dan topik</string>
-    <string name="index_name_tts_voice">Perintah suara (teks-ke-suara, disarankan)</string>
+    <string name="index_name_tts_voice">Perintah suara (teks ke suara, disarankan)</string>
     <string name="poi_search_desc">Pencarian POI (Titik</string>
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
     <string name="quick_action_map_center_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget tengah peta di peta.</string>
@@ -4488,7 +4488,7 @@
     <string name="navigate_point_olc_info_short">OLC Pendek 
 \nMohon sediakan kode lengkap</string>
     <string name="avoid_unpaved">Tidak ada jalan yang tidak diaspal</string>
-    <string name="osmand_accessibility_description">Membuat fitur aksesibilitas perangkat tersedia langsung di OsmAnd. Ini memfasilitasi mis. menyesuaikan kecepatan bicara untuk suara teks-ke-suara, mengatur navigasi D-pad, menggunakan trackball untuk kontrol perbesaran, atau umpan balik teks-ke-suara, misalnya untuk mengumumkan posisi Anda secara otomatis.</string>
+    <string name="osmand_accessibility_description">Membuat fitur aksesibilitas perangkat tersedia langsung di OsmAnd. Ini memfasilitasi mis. menyesuaikan kecepatan bicara untuk suara teks kesuara, mengatur navigasi D-pad, menggunakan trackball untuk kontrol perbesaran, atau umpan balik teks ke suara, misalnya untuk mengumumkan posisi Anda secara otomatis.</string>
     <string name="map_markers_desc">Widget menampilkan jarak atau perkiraan waktu tiba (PWT) untuk dua penanda pertama di daftar penanda peta.</string>
     <string name="routing_attr_no_new_routing_name">TIdak ada aturan perutean v1.9</string>
     <string name="shared_string_2_5_d_view">Tampilan 2.5D</string>
@@ -4591,7 +4591,7 @@
     <string name="left_side_navigation_descr">Untuk negara di mana orang mengemudi di sisi kiri jalan.</string>
     <string name="accessibility_mode_descr">Mengaktifkan fitur untuk pengguna yang mengalami gangguan.</string>
     <string name="zoom_by_trackball_descr">Ubah perbesaran peta dengan gerakan bola trek horizontal.</string>
-    <string name="tts_language_not_supported">Bahasa yang dipilih tidak didukung oleh mesin TTS (teks-ke-suara) Android yang diinstal, bahasa TTS prasetelnya akan digunakan sebagai gantinya. Cari mesin TTS lain di toko aplikasi\?</string>
+    <string name="tts_language_not_supported">Bahasa yang dipilih tidak didukung oleh mesin TTS (teks ke suara) Android yang diinstal, bahasa TTS prasetelnya akan digunakan sebagai gantinya. Cari mesin TTS lain di toko aplikasi\?</string>
     <string name="live_monitoring_m">Pelacakan daring (diperlukan GPX)</string>
     <string name="use_compass_navigation_descr">Gunakan kompas apabila tidak ada arah yang terdeteksi.</string>
     <string name="validate_gpx_upload_name_pwd">Harap tentukan nama pengguna dan kata sandi OSM Anda untuk mengunggah file GPX.</string>
@@ -4724,7 +4724,7 @@
 \n - Panduan lajur, tampilan batas kecepatan, suara yang direkam dan teks-ke-suara
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (Petunjuk Arah Navigasi Otomatis OSM) adalah aplikasi peta dan navigasi dengan akses ke data OSM dunia yang bebas dan berkualitas tinggi.
-\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian, pilihan antara mode mengemudi, bersepeda, pejalan kaki, pengeditan OSM, dan banyak lagi.
+\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian, pilihan antara mode mengemudi, bersepeda, pejalan kaki, penyuntingan OSM, dan banyak lagi.
 \n
 \n OsmAnd+ adalah versi aplikasi berbayar. Dengan membelinya, Anda mendukung proyek ini, mendanai pengembangan fitur baru, dan menerima pembaruan terbaru.
 \n
@@ -4774,7 +4774,7 @@
     <string name="local_index_upload_gpx_description">Unggah file GPX ke komunitas OSM, untuk memperbaiki peta.</string>
     <string name="precise_routing_mode_descr">Menghitung rute yang tepat tanpa gangguan. Masih terbatas dengan jarak dan lambat.</string>
     <string name="arrival_distance_descr">Seberapa cepat Anda ingin pengumuman kedatangan\?</string>
-    <string name="offline_edition_descr">Jika pengeditan luring diaktifkan, maka perubahan akan disimpan secara lokal terlebih dahulu dan diunggah berdasarkan permintaan, jika tidak, perubahan akan segera diunggah.</string>
+    <string name="offline_edition_descr">Jika penyuntingan luring diaktifkan, maka perubahan akan disimpan secara lokal terlebih dahulu dan diunggah berdasarkan permintaan, jika tidak, perubahan akan segera diunggah.</string>
     <string name="screen_is_locked">Ketuk ikon kunci untuk membuka kunci</string>
     <string name="osmand_parking_position_description_add_time">Mobil diparkir di</string>
     <string name="map_online_data_descr">Gunakan peta daring (unduh dan simpan ubin pada kartu memori).</string>
@@ -4805,7 +4805,7 @@
     <string name="map_version_changed_info">Unduh versi aplikasi baru untuk dapat menggunakan file peta baru.</string>
     <string name="osmand_extended_description_part1">OsmAnd (Petunjuk Arah Navigasi Otomatis OSM) adalah aplikasi peta dan navigasi dengan akses ke data OSM dunia yang bebas dan berkualitas tinggi.
 \n
-\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian (melalui plugin), pilihan antara mode mengemudi, bersepeda, pejalan kaki, pengeditan OSM, dan banyak lagi.</string>
+\n Nikmati navigasi suara dan optik, melihat POI (tempat menarik), membuat dan mengelola trek GPX, menggunakan visualisasi garis kontur dan info ketinggian (melalui plugin), pilihan antara mode mengemudi, bersepeda, pejalan kaki, penyuntingan OSM, dan banyak lagi.</string>
     <string name="osmand_extended_description_part3">Peta
 \n - Menampilkan POI (tempat menarik) di sekitar Anda
 \n - Menyesuaikan peta dengan arah gerak Anda (atau kompas)
@@ -4843,7 +4843,7 @@
     <string name="continue_follow_previous_route_auto">Terus mengikuti navigasi sebelumnya yang belum selesai\? (%1$s detik)</string>
     <string name="starting_point_too_far">Titik keberangkatan terlalu jauh dari jalan terdekat.</string>
     <string name="osmand_parking_event">Ambil mobil dari parkir</string>
-    <string name="osmand_parking_warning_text">Pemberitahuan untuk mengambil mobil Anda telah ditambahkan ke kalender Anda dan dapat diedit atau dihapus di situ.</string>
+    <string name="osmand_parking_warning_text">Pemberitahuan untuk mengambil mobil Anda telah ditambahkan ke kalender Anda dan dapat disunting atau dihapus di situ.</string>
     <string name="basemap_was_selected_to_download">Peta dasar yang diperlukan untuk menyediakan kemampuan dasar ada dalam antrean unduhan.</string>
     <string name="map_online_plugin_is_not_installed">Aktifkan plugin \'Peta daring\' untuk memilih sumber peta yang berbeda</string>
     <string name="online_map_settings_descr">Pilih sumber peta ubin daring atau yang telah disimpan.</string>
@@ -5024,4 +5024,5 @@
     <string name="changes">Perubahan %1$s</string>
     <string name="local_changes_will_be_dismissed">Perubahan lokal akan diabaikan</string>
     <string name="import_export">Impor/Ekspor</string>
+    <string name="av_audio_format_bottom_sheet_descr">Pilih format keluaran audio. Jenis format berkas untuk audio adalah 3GPP (.3gp).</string>
 </resources>
