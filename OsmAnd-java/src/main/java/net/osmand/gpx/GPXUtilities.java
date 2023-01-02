@@ -1,24 +1,8 @@
 
 package net.osmand.gpx;
 
-import net.osmand.IProgress;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.StringBundle;
-import net.osmand.binary.StringBundleWriter;
-import net.osmand.binary.StringBundleXmlReader;
-import net.osmand.binary.StringBundleXmlWriter;
-import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXTrackAnalysis.SplitMetric;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
+import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -49,7 +33,23 @@ import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
 
-import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
+import net.osmand.IProgress;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.StringBundle;
+import net.osmand.binary.StringBundleWriter;
+import net.osmand.binary.StringBundleXmlReader;
+import net.osmand.binary.StringBundleXmlWriter;
+import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
+import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class GPXUtilities {
 
