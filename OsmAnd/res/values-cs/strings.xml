@@ -1643,7 +1643,7 @@
     <string name="closing_at">Otevřeno do</string>
     <string name="count_of_lines">Počet řádků</string>
     <string name="show_on_start">Zobrazit po spuštění</string>
-    <string name="are_you_sure">Jste si jisti?</string>
+    <string name="are_you_sure">Jste si jistý\?</string>
     <string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
     <string name="srtm_plugin_disabled">Vrstevnice vypnuty</string>
     <string name="favorite_category_add_new">Přidat nový</string>
@@ -4126,18 +4126,18 @@
     <string name="upload_local_version">Nahrát místní verzi</string>
     <string name="download_server_version">Stáhnout verzi ze serveru</string>
     <string name="shared_string_logout">Odhlásit se</string>
-    <string name="backup_delete_all_data">Smazat všechny mé údaje</string>
+    <string name="backup_delete_all_data">Smazat všechna moje data</string>
     <string name="backup_delete_all_data_descr">Všechny údaje v OsmAnd Cloud budou smazány. Místní verze zůstanou nedotčeny.</string>
     <string name="backup_delete_all_data_warning">Chystáte se smazat všechny údaje dříve nahrané do OsmAnd Cloud, včetně historie verzí.
 \n
 \nSmazané údaje nebude možné obnovit.</string>
-    <string name="backup_danger_zone">Nebezpečná oblast</string>
-    <string name="delete_all_confirmation">Ano, smazat vše</string>
+    <string name="backup_danger_zone">Nebezpečná zóna</string>
+    <string name="delete_all_confirmation">Ano, vymazat vše</string>
     <string name="backup_delete_old_data">Odstranit staré verze</string>
     <string name="backup_delete_old_data_descr">Aktuální verze vašich údajů budou uchovány v OsmAnd Cloud</string>
-    <string name="backup_delete_old_data_warning">Chystáte se smazat historii změn dříve načtených údajů.
+    <string name="backup_delete_old_data_warning">Chystáte se odstranit historii změn pro dříve načtená data.
 \n
-\nAktuální verze údajů bude uložena na serveru, ale nebudete se moci vrátit k dříve provedeným změnám.</string>
+\nAktuální verze dat bude na serveru uložena, ale nebude možné se vrátit k dříve provedeným změnám.</string>
     <string name="backup_data">Zálohovat údaje</string>
     <string name="select_backup_data_descr">Vyberte údaje a složky pro zálohování.</string>
     <string name="backup_restore_data_descr">Obnovit údaje v zařízení pomocí online záloh.</string>
@@ -4345,7 +4345,7 @@
     <string name="setting_supported_by_style">Toto nastavení je poskytováno mapovým stylem \'%1$s\'</string>
     <string name="explore_osmnad_plans_to_find_suitable">Prozkoumejte předplatné OsmAnd a najděte si takové, které vám bude vyhovovat.</string>
     <string name="option_available_only_in_osmand_pro">Dostupné v předplatném OsmAnd.</string>
-    <string name="track_has_no_needed_data">Ve stopě chybí potřebná data.</string>
+    <string name="track_has_no_needed_data">Na trase chybí příslušné údaje.</string>
     <string name="promo_subscription">Propagační předplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="backup_setup">Nastavit zálohování</string>
