@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,11 +27,11 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -84,9 +85,14 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private boolean movedToLocation;
 
+	private static Matrix lastStateMatrix;
+	private static String lastRoute;
+	private static boolean lastChartLinkedToLocation;
+
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
 			movedToLocation = true;
+			lastChartLinkedToLocation = true;
 		}
 	};
 
@@ -95,6 +101,26 @@ public class ElevationProfileWidget extends MapWidget {
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	private void restoreLastState() {
+		if (chart != null && lastStateMatrix != null && route != null) {
+			if (Algorithms.stringsEqual(lastRoute, route.toString())) {
+				chart.getViewPortHandler().refresh(new Matrix(lastStateMatrix), chart, false);
+			} else {
+				lastStateMatrix = null;
+			}
+			if (lastChartLinkedToLocation) {
+				movedToLocation = true;
+			}
+		}
+	}
+
+	private void storeLastState(boolean chartLinkedToLocation) {
+		if (chart != null) {
+			lastStateMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+		}
+		lastChartLinkedToLocation = chartLinkedToLocation;
 	}
 
 	@Override
@@ -155,12 +181,22 @@ public class ElevationProfileWidget extends MapWidget {
 		if (chartUpdated) {
 			updateWidgets();
 		}
+		if (settingsUpdated) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					restoreLastState();
+				}
+			});
+		}
 	}
 
 	private boolean updateSettings() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		boolean routeChanged = this.route != route;
 		this.route = route;
+		lastRoute = route.toString();
 		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
 		boolean slopesChanged = showSlopes != this.showSlopes;
 		this.showSlopes = showSlopes;
@@ -236,6 +272,7 @@ public class ElevationProfileWidget extends MapWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+				storeLastState(false);
 				app.runInUIThread(() -> updateWidgets());
 			}
 
@@ -338,6 +375,7 @@ public class ElevationProfileWidget extends MapWidget {
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
 			refreshHighlights(newLocationHighlight);
+			storeLastState(true);
 		}
 		return true;
 	}

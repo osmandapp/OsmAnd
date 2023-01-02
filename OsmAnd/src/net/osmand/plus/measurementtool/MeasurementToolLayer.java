@@ -15,9 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -323,8 +323,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tb, settings);
 		boolean hasMapRenderer = hasMapRenderer();
+		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated || mapRendererChanged;
+			if (mapRendererChanged) {
+				this.mapRendererChanged = false;
+			}
 			if (editingCtx.isInApproximationMode()) {
 				drawApproximatedLines(canvas, tb, updated);
 			}
@@ -1028,8 +1032,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();

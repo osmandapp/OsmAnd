@@ -8,7 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.settings.enums.MetricsConstants;

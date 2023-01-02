@@ -55,9 +55,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -176,7 +176,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				gpx.updateWptPt(selectedWpt, lat, lon, description, name, category, color, null, null);
+				WptPt wptInfo = new WptPt(lat, lon, description, name, category,
+						Algorithms.colorToString(color), null, null);
+				gpx.updateWptPt(selectedWpt, wptInfo);
 			}
 		}
 	}

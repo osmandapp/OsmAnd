@@ -15,9 +15,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsGroup;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
@@ -269,8 +269,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						gpxSelectionHelper.setGpxFileToDisplay(gpx);
 					}
 				} else {
-					gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), description, name,
-							category, getColor(), getIconName(), getBackgroundType().getTypeName());
+					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
+					Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
+					gpx.updateWptPt(wpt, wptInfo);
 					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);

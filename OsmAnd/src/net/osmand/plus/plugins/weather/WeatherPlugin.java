@@ -15,13 +15,14 @@ import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITAT
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRESSURE_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_TEMP_CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_WIND_CONTOURS_LINES_ATTR;
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.WEATHER_SETTINGS;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.WEATHER_SETTINGS;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_TEMPERATURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -59,10 +60,12 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.layers.DownloadedRegionsLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -119,6 +122,7 @@ public class WeatherPlugin extends OsmandPlugin {
 			@Override
 			public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
 				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+					updateMapPresentationEnvironment();
 					updateLayers(app, null);
 				}
 			}
@@ -133,6 +137,21 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Override
 	public String getName() {
 		return app.getString(R.string.shared_string_weather);
+	}
+
+	@Override
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		if (!app.getAppInitializer().isAppInitializing()) {
+			updateMapPresentationEnvironment();
+		}
+		return super.init(app, activity);
+	}
+
+	private void updateMapPresentationEnvironment() {
+		MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
+		if (weatherHelper.getWeatherResourcesManager() == null && rendererContext != null) {
+			weatherHelper.updateMapPresentationEnvironment(rendererContext);
+		}
 	}
 
 	@Override
@@ -329,6 +348,12 @@ public class WeatherPlugin extends OsmandPlugin {
 		createLayers();
 	}
 
+
+	@Override
+	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+		weatherHelper.updateMapPresentationEnvironment(mapRendererContext);
+	}
+
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -499,5 +524,10 @@ public class WeatherPlugin extends OsmandPlugin {
 		if (weatherContourLayer != null) {
 			weatherContourLayer.setDateTime(time);
 		}
+	}
+
+	@Override
+	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
 	}
 }

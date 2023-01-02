@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -234,7 +234,8 @@ public class QuickSearchHelper implements ResourceListener {
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else {
-						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+								StringMatcherMode.CHECK_CONTAINS);
 						if (matcher.matches(sr.localeName)) {
 							resultMatcher.publish(sr);
 						}
@@ -349,7 +350,8 @@ public class QuickSearchHelper implements ResourceListener {
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
@@ -557,7 +559,8 @@ public class QuickSearchHelper implements ResourceListener {
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase(), StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(searchResult.localeName)) {
 						resultMatcher.publish(searchResult);
 					}

@@ -65,13 +65,11 @@
 
 		</LinearLayout>
 
-		<FrameLayout
-			android:id="@+id/action_container"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginHorizontal="@dimen/content_padding_half"
-			android:layout_marginVertical="@dimen/bottom_sheet_title_padding_top"
+		<ImageButton
+			android:id="@+id/action_button"
+			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+			android:layout_width="@dimen/toolbar_height"
+			android:layout_height="@dimen/toolbar_height"
 			android:visibility="gone" />
 
 	</LinearLayout>

@@ -8,15 +8,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,20 +29,21 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.tools.TextWatcherAdapter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -154,65 +152,48 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, colorId);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, !isLightTheme));
 
 		ImageButton moreButton = view.findViewById(R.id.moreButton);
-		moreButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				UiUtilities iconsCache = app.getUIUtilities();
-				PopupMenu optionsMenu = new PopupMenu(getContext(), v);
-				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-				MenuItem item;
+		moreButton.setOnClickListener(v -> {
+			UiUtilities iconsCache = app.getUIUtilities();
+			PopupMenu optionsMenu = new PopupMenu(getContext(), v);
+			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+			MenuItem item;
 
-				if (!filter.isStandardFilter()) {
-					item = optionsMenu.getMenu().add(R.string.edit_filter).setIcon(
-							iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							editFilter();
-							return true;
-						}
-					});
-				}
-
-				if (!filter.isStandardFilter()) {
-					item = optionsMenu.getMenu().add(R.string.edit_filter_save_as_menu_item).setIcon(
-							iconsCache.getThemedIcon(R.drawable.ic_action_save));
-				} else {
-					item = optionsMenu.getMenu().add(R.string.save_filter).setIcon(
-							iconsCache.getThemedIcon(R.drawable.ic_action_save));
-				}
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						saveFilter();
-						return true;
-					}
+			if (!filter.isStandardFilter()) {
+				item = optionsMenu.getMenu().add(R.string.edit_filter).setIcon(
+						iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+				item.setOnMenuItemClickListener(_item -> {
+					editFilter();
+					return true;
 				});
-
-				if (!filter.isStandardFilter()) {
-					item = optionsMenu.getMenu().add(R.string.delete_filter)
-							.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
-					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							deleteFilter();
-							return true;
-						}
-					});
-				}
-
-				optionsMenu.show();
 			}
+
+			if (!filter.isStandardFilter()) {
+				item = optionsMenu.getMenu().add(R.string.edit_filter_save_as_menu_item).setIcon(
+						iconsCache.getThemedIcon(R.drawable.ic_action_save));
+			} else {
+				item = optionsMenu.getMenu().add(R.string.save_filter).setIcon(
+						iconsCache.getThemedIcon(R.drawable.ic_action_save));
+			}
+			item.setOnMenuItemClickListener(_item -> {
+				saveFilter();
+				return true;
+			});
+
+			if (!filter.isStandardFilter()) {
+				item = optionsMenu.getMenu().add(R.string.delete_filter)
+						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_dark));
+				item.setOnMenuItemClickListener(_item -> {
+					deleteFilter();
+					return true;
+				});
+			}
+
+			optionsMenu.show();
 		});
 
 		listView = view.findViewById(android.R.id.list);
@@ -222,17 +203,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		editText = editTextView.findViewById(R.id.editText);
 		editTextView.findViewById(R.id.divider).setVisibility(View.GONE);
 		editText.setText(nameFilterText);
-		editText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
-
+		editText.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				nameFilterText = s.toString();
@@ -256,33 +227,30 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		listView.addFooterView(bottomShadowView, null, false);
 		adapter = new PoiFilterListAdapter(app, getListItems());
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				PoiFilterListItem item = adapter.getItem(position - listView.getHeaderViewsCount());
-				if (item != null) {
-					switch (item.type) {
-						case GROUP_HEADER:
-							if (item.category != null) {
-								if (collapsedCategories.contains(item.category)) {
-									collapsedCategories.remove(item.category);
-								} else {
-									collapsedCategories.add(item.category);
-								}
-								updateListView();
+		listView.setOnItemClickListener((parent, view, position, id) -> {
+			PoiFilterListItem item = adapter.getItem(position - listView.getHeaderViewsCount());
+			if (item != null) {
+				switch (item.type) {
+					case GROUP_HEADER:
+						if (item.category != null) {
+							if (collapsedCategories.contains(item.category)) {
+								collapsedCategories.remove(item.category);
+							} else {
+								collapsedCategories.add(item.category);
 							}
-							break;
-						case CHECKBOX_ITEM:
-							CheckBox checkBox = view.findViewById(R.id.checkboxItem);
-							adapter.toggleCheckbox(item, checkBox, !checkBox.isChecked());
-							break;
-						case BUTTON_ITEM:
-							if (item.category != null) {
-								showAllCategories.add(item.category);
-								updateListView();
-							}
-							break;
-					}
+							updateListView();
+						}
+						break;
+					case CHECKBOX_ITEM:
+						CheckBox checkBox = view.findViewById(R.id.checkboxItem);
+						adapter.toggleCheckbox(item, checkBox, !checkBox.isChecked());
+						break;
+					case BUTTON_ITEM:
+						if (item.category != null) {
+							showAllCategories.add(item.category);
+							updateListView();
+						}
+						break;
 				}
 			}
 		});
@@ -290,22 +258,19 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		applyFilterButtonShadow = view.findViewById(R.id.bottomButtonShadow);
 		applyFilterButton = view.findViewById(R.id.bottomButton);
 		applyFilterButton.setText(app.getString(R.string.apply_filters));
-		applyFilterButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				applyFilterFields();
-				if (!filter.isStandardFilter()) {
-					filter.setSavedFilterByName(filter.getFilterByName());
-					if (app.getPoiFilters().editPoiFilter(filter)) {
-						app.getSearchUICore().refreshCustomPoiFilters();
-						((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, "");
-						((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
-						dismiss();
-					}
-				} else {
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, nameFilterText.trim());
+		applyFilterButton.setOnClickListener(v -> {
+			applyFilterFields();
+			if (!filter.isStandardFilter()) {
+				filter.setSavedFilterByName(filter.getFilterByName());
+				if (app.getPoiFilters().editPoiFilter(filter)) {
+					app.getSearchUICore().refreshCustomPoiFilters();
+					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, "");
+					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
 					dismiss();
 				}
+			} else {
+				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, nameFilterText.trim());
+				dismiss();
 			}
 		});
 		updateApplyButton();
@@ -324,20 +289,16 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setMessage(R.string.edit_filter_delete_dialog_title);
 		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-				if (app.getPoiFilters().removePoiFilter(filter)) {
-					Toast.makeText(getContext(),
-							getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
-							Toast.LENGTH_SHORT).show();
-					app.getSearchUICore().refreshCustomPoiFilters();
-					QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
-					quickSearchDialogFragment.reloadCategories();
-					quickSearchDialogFragment.clearLastWord();
-					QuickSearchPoiFilterFragment.this.dismiss();
-				}
+		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			if (app.getPoiFilters().removePoiFilter(filter)) {
+				Toast.makeText(getContext(),
+						getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
+						Toast.LENGTH_SHORT).show();
+				app.getSearchUICore().refreshCustomPoiFilters();
+				QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
+				quickSearchDialogFragment.reloadCategories();
+				quickSearchDialogFragment.clearLastWord();
+				QuickSearchPoiFilterFragment.this.dismiss();
 			}
 		});
 		builder.create().show();
@@ -630,7 +591,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 			if (collapsedCategories.contains(category) && !extractAll) {
 				if (!additionalsMap.containsKey(category)) {
-					additionalsMap.put(category, new ArrayList<PoiType>());
+					additionalsMap.put(category, new ArrayList<>());
 				}
 				continue;
 			}
@@ -829,7 +790,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 						titleBold.setText(item.text);
 						if (item.expandable) {
 							expandItem.setImageDrawable(item.expanded ?
-									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_up) : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_down));
+									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_up) :
+									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_down));
 							expandItem.setVisibility(View.VISIBLE);
 						} else {
 							expandItem.setVisibility(View.GONE);
@@ -845,11 +807,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 						titleRegular.setVisibility(View.VISIBLE);
 						switchItem.setVisibility(View.VISIBLE);
 						switchItem.setChecked(item.checked);
-						switchItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								toggleSwitch(item, isChecked);
-							}
+						switchItem.setOnCheckedChangeListener((buttonView, isChecked) -> {
+							toggleSwitch(item, isChecked);
 						});
 						titleBold.setVisibility(View.GONE);
 						titleButton.setVisibility(View.GONE);
@@ -861,11 +820,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 						titleRegular.setVisibility(View.VISIBLE);
 						checkBoxItem.setVisibility(View.VISIBLE);
 						checkBoxItem.setChecked(item.checked);
-						checkBoxItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								toggleCheckbox(item, checkBoxItem, isChecked);
-							}
+						checkBoxItem.setOnCheckedChangeListener((buttonView, isChecked) -> {
+							toggleCheckbox(item, checkBoxItem, isChecked);
 						});
 						switchItem.setVisibility(View.GONE);
 						titleBold.setVisibility(View.GONE);

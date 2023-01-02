@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -37,7 +37,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 	@Override
 	protected Boolean doInBackground(Void... params) {
 		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-		Map<String, GPXUtilities.GPXFile> files = savingTrackHelper.collectRecordedData();
+		Map<String, GPXFile> files = savingTrackHelper.collectRecordedData();
 		File dir;
 		boolean shouldClearPath = false;
 		if (gpx.path.isEmpty()) {

@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.antplus.devices;
 
-import static net.osmand.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
 
 import androidx.annotation.NonNull;
 

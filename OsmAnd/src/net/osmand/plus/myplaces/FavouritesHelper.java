@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 import android.graphics.drawable.Drawable;

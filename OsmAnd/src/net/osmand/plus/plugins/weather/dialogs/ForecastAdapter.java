@@ -103,7 +103,7 @@ class ForecastAdapter extends RecyclerView.Adapter<DateViewHolder> {
 	}
 
 	private void updateBackground(@NonNull DateViewHolder holder, boolean selected) {
-		GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(ctx, R.drawable.bg_select_group_button_outline);
+		GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(ctx, R.drawable.bg_select_group_button_outline_small);
 		if (rectContourDrawable != null) {
 			if (selected) {
 				int activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
@@ -112,8 +112,9 @@ class ForecastAdapter extends RecyclerView.Adapter<DateViewHolder> {
 				rectContourDrawable.setStroke(AndroidUtils.dpToPx(ctx, 2), strokeColor);
 				rectContourDrawable.setColor(ColorUtilities.getColorWithAlpha(activeColor, 0.1f));
 			} else {
-				int strokeColor = ContextCompat.getColor(ctx, nightMode ? R.color.stroked_buttons_and_links_outline_dark
-						: R.color.stroked_buttons_and_links_outline_light);
+				int strokeColor = ContextCompat.getColor(ctx, nightMode ?
+						R.color.stroked_buttons_and_links_outline_dark :
+						R.color.stroked_buttons_and_links_outline_light);
 				rectContourDrawable.setStroke(AndroidUtils.dpToPx(ctx, 1), strokeColor);
 				rectContourDrawable.setColor(AndroidUtils.getColorFromAttr(ctx, R.attr.ctx_menu_card_btn));
 			}

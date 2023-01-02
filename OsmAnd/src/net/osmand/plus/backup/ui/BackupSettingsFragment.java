@@ -12,16 +12,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -34,6 +33,9 @@ import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmD
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -44,6 +46,8 @@ import java.util.Map;
 
 public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener,
 		OnConfirmDeletionListener, OnPrepareBackupListener {
+
+	public static final String TAG = BackupSettingsFragment.class.getSimpleName();
 
 	private static final Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
 
@@ -77,8 +81,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
+		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
+		setupToolbar(view);
 		setupAccount(view);
 		setupBackupTypes(view);
 		setupDeleteAllData(view);
@@ -103,6 +109,23 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		super.onPause();
 		backupHelper.removePrepareBackupListener(this);
 		backupHelper.getBackupListeners().removeDeleteFilesListener(this);
+	}
+
+	protected void setupToolbar(View view) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+		toolbarTitle.setText(R.string.shared_string_settings);
+
+		ImageView closeButton = toolbar.findViewById(R.id.close_button);
+		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
+		closeButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
+		});
+		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
 	private void setupBackupTypes(View view) {
@@ -335,5 +358,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onDeletionConfirmed() {
 		deleteAllFiles();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			BackupSettingsFragment fragment = new BackupSettingsFragment();
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

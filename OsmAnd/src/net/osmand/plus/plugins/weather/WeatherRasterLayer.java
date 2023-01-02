@@ -79,7 +79,6 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		resetLayerProvider();
 
 		for (StateChangedListener<Float> listener : alphaChangeListeners) {
 			for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
@@ -89,6 +88,12 @@ public class WeatherRasterLayer extends BaseMapLayer {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected void cleanupResources() {
+		super.cleanupResources();
+		resetLayerProvider();
 	}
 
 	@Override
@@ -151,13 +156,14 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			return;
 		}
 
-		if (shouldUpdateLayer() || mapActivityInvalidated) {
+		if (shouldUpdateLayer() || mapActivityInvalidated || mapRendererChanged) {
 			if (shouldDrawLayer()) {
 				recreateLayerProvider(mapRenderer, resourcesManager);
 			} else {
 				resetLayerProvider();
 			}
 		}
+		mapRendererChanged = false;
 		mapActivityInvalidated = false;
 	}
 

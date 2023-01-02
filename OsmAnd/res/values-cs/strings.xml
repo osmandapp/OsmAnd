@@ -584,7 +584,7 @@
     <string name="app_mode_car">Řízení vozidla</string>
     <string name="app_mode_bicycle">Jízda na kole</string>
     <string name="app_mode_pedestrian">Chůze</string>
-    <string name="position_on_map_center">Uprostřed</string>
+    <string name="position_on_map_center">Střed</string>
     <string name="position_on_map_bottom">Dole</string>
     <string name="navigate_point_top_text">Zadejte zeměpisnou šířku a délku ve vybraném formátu (D - stupně, M - minuty, S - vteřiny)</string>
     <string name="navigate_point_latitude">Šířka</string>
@@ -1643,7 +1643,7 @@
     <string name="closing_at">Otevřeno do</string>
     <string name="count_of_lines">Počet řádků</string>
     <string name="show_on_start">Zobrazit po spuštění</string>
-    <string name="are_you_sure">Jste si jisti?</string>
+    <string name="are_you_sure">Jste si jistý\?</string>
     <string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
     <string name="srtm_plugin_disabled">Vrstevnice vypnuty</string>
     <string name="favorite_category_add_new">Přidat nový</string>
@@ -2433,7 +2433,7 @@
     <string name="empty_state_osm_edits_descr">Vytvořit nebo upravit body zájmu OpenStreetMap, otevřít nebo okomentovat OSM poznámky a přispět zaznamenanými GPX soubory.</string>
     <string name="shared_string_deleted">Odstraněné</string>
     <string name="shared_string_edited">Upravené</string>
-    <string name="shared_string_added">Přidané</string>
+    <string name="shared_string_added">Přidáno</string>
     <string name="marker_activated">Značka %s aktivována.</string>
     <string name="one_tap_active_descr">Klepněte na značku na mapě pro její přesunutí na první místo v aktivních značkách bez otevření kontextové nabídky.</string>
     <string name="empty_state_av_notes">Dělejte si poznámky!</string>
@@ -4114,7 +4114,7 @@
     <string name="failed_loading_predefined_engines">Seznam předdefinovaných šablon se nepodařilo načíst.
 \nZkontrolujte prosím připojení k internetu.</string>
     <string name="shared_string_predefined">Předdefinované</string>
-    <string name="backup_complete">Zálohování dokončeno</string>
+    <string name="backup_complete">Záloha dokončena</string>
     <string name="backup_now">Zálohovat</string>
     <string name="make_backup">Vytvořit zálohu</string>
     <string name="make_backup_descr">Na tomto zařízení je mnoho změn. Vytvořte si zálohu těchto údajů, ať o ně nepřijdete.</string>
@@ -4126,18 +4126,18 @@
     <string name="upload_local_version">Nahrát místní verzi</string>
     <string name="download_server_version">Stáhnout verzi ze serveru</string>
     <string name="shared_string_logout">Odhlásit se</string>
-    <string name="backup_delete_all_data">Smazat všechny mé údaje</string>
+    <string name="backup_delete_all_data">Smazat všechna moje data</string>
     <string name="backup_delete_all_data_descr">Všechny údaje v OsmAnd Cloud budou smazány. Místní verze zůstanou nedotčeny.</string>
     <string name="backup_delete_all_data_warning">Chystáte se smazat všechny údaje dříve nahrané do OsmAnd Cloud, včetně historie verzí.
 \n
 \nSmazané údaje nebude možné obnovit.</string>
-    <string name="backup_danger_zone">Nebezpečná oblast</string>
-    <string name="delete_all_confirmation">Ano, smazat vše</string>
+    <string name="backup_danger_zone">Nebezpečná zóna</string>
+    <string name="delete_all_confirmation">Ano, vymazat vše</string>
     <string name="backup_delete_old_data">Odstranit staré verze</string>
     <string name="backup_delete_old_data_descr">Aktuální verze vašich údajů budou uchovány v OsmAnd Cloud</string>
-    <string name="backup_delete_old_data_warning">Chystáte se smazat historii změn dříve načtených údajů.
+    <string name="backup_delete_old_data_warning">Chystáte se odstranit historii změn pro dříve načtená data.
 \n
-\nAktuální verze údajů bude uložena na serveru, ale nebudete se moci vrátit k dříve provedeným změnám.</string>
+\nAktuální verze dat bude na serveru uložena, ale nebude možné se vrátit k dříve provedeným změnám.</string>
     <string name="backup_data">Zálohovat údaje</string>
     <string name="select_backup_data_descr">Vyberte údaje a složky pro zálohování.</string>
     <string name="backup_restore_data_descr">Obnovit údaje v zařízení pomocí online záloh.</string>
@@ -4345,7 +4345,7 @@
     <string name="setting_supported_by_style">Toto nastavení je poskytováno mapovým stylem \'%1$s\'</string>
     <string name="explore_osmnad_plans_to_find_suitable">Prozkoumejte předplatné OsmAnd a najděte si takové, které vám bude vyhovovat.</string>
     <string name="option_available_only_in_osmand_pro">Dostupné v předplatném OsmAnd.</string>
-    <string name="track_has_no_needed_data">Ve stopě chybí potřebná data.</string>
+    <string name="track_has_no_needed_data">Na trase chybí příslušné údaje.</string>
     <string name="promo_subscription">Propagační předplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="backup_setup">Nastavit zálohování</string>
@@ -4526,4 +4526,61 @@
     <string name="stop_download_desc">Stahování není dokončeno. Pokud jej teď přerušíte, budete moci prohlížet jen část dlaždic.</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitness trasy</string>
     <string name="rendering_attr_showFitnessTrails_description">Zobrazit fitness trasy</string>
+    <string name="lang_ckb">Centrální kurdština</string>
+    <string name="routing_attr_goods_restrictions_name">Dodávání zboží</string>
+    <string name="map_widget_rendering_fps">Vykreslení mapy FPS</string>
+    <string name="routing_attr_motor_type_electric_name">Elektřina</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_petrol_name">Benzín</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="nautical_depth_points">Plavební hloubkové body</string>
+    <string name="rendering_attr_showRunningRoutes_name">Běžecké trasy</string>
+    <string name="routing_attr_allow_private_for_truck_name">Umožnit soukromý vjezd (nákladní automobil)</string>
+    <string name="release_4_4_pre">• Zde budou řetězce pro verzi 4.4</string>
+    <string name="mtb_segment_classification">Klasifikace úseku</string>
+    <string name="show_borders_of_downloaded_maps">Zobrazit hranice stažených map</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hybridní</string>
+    <string name="routeInfo_horse_scale_description">Vykreslení cest podle obtížnosti koňských stezek</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (bez omezení)</string>
+    <string name="routeInfo_horse_scale_name">Obtížnost stezek pro koně</string>
+    <string name="depth_contours">Hloubkové vrstevnice</string>
+    <string name="worldwide_maps">Celosvětové mapy</string>
+    <string name="deleted_file">Smazaný soubor</string>
+    <string name="sync_now">Synchronizovat nyní</string>
+    <string name="local_changes">Místní změny</string>
+    <string name="upload_change">Nahrát změnu</string>
+    <string name="cloud_version_will_be_removed">Cloudová verze bude odstraněna</string>
+    <string name="choose_what_to_sync">Vyberte, co synchronizovat</string>
+    <string name="cloud_sync_progress">Synchronizace...%1$s</string>
+    <string name="checking_progress">Kontroluje se…</string>
+    <string name="shared_string_modified">Upraveno</string>
+    <string name="res_unknown">Neznámý</string>
+    <string name="shared_string_unsynced">Nesynchronizováno</string>
+    <string name="check_for_updates">Zkontrolovat aktualizace</string>
+    <string name="changes">Změny %1$s</string>
+    <string name="cloud_changes">Změny v cloudu</string>
+    <string name="shared_string_cloud">Cloud</string>
+    <string name="new_file">Nový soubor</string>
+    <string name="shared_string_uploaded">Nahráno</string>
+    <string name="modified_file">Změněný soubor</string>
+    <string name="cloud_changes_will_be_dismissed">Změny v cloudu budou zamítnuty</string>
+    <string name="local_file_will_be_restored">Místní soubor bude obnoven</string>
+    <string name="local_changes_will_be_dismissed">Místní změny budou zamítnuty</string>
+    <string name="cloud_conflicts">Konflikty</string>
+    <string name="cloud_conflict">Konflikt</string>
+    <string name="upload_all">Nahrát vše</string>
+    <string name="cloud_recent_changes">Změny</string>
+    <string name="cloud_all_changes_uploaded">Všechny změny byly nahrány</string>
+    <string name="cloud_all_changes_downloaded">Všechny změny byly staženy</string>
+    <string name="cloud_all_changes_uploaded_descr">Všechny změny provedené v tomto zařízení jsou synchronizovány s OsmAnd Cloud.</string>
+    <string name="cloud_no_conflicts">Nejsou žádné konflikty</string>
+    <string name="download_cloud_version">Stáhnout cloudovou verzi</string>
+    <string name="shared_string_do_not_exist">Neexistuje</string>
+    <string name="depth_contour_lines">Hloubkové vrstevnice</string>
+    <string name="measurement_units">Měrné jednotky</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Nepodařilo se načíst seznam souborů ze serveru.</string>
+    <string name="last_sync">Poslední synchronizace</string>
+    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="rendering_attr_showRunningRoutes_description">Zobrazení běžeckých tras</string>
+    <string name="av_audio_format_bottom_sheet_descr">Vyberte výstupní formát zvuku. Formát typu souboru pro zvuk je 3GPP (.3gp).</string>
 </resources>

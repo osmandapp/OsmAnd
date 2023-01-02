@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 
 import java.util.List;
 import java.util.Map;

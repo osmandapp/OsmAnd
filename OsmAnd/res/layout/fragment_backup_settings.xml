@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -7,7 +7,17 @@
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
 	android:fillViewport="true"
-	android:focusable="true">
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/global_preference_toolbar" />
+
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 		android:id="@+id/progress_bar"
@@ -280,4 +290,4 @@
 
 	</ScrollView>
 
-</FrameLayout>
+</LinearLayout>

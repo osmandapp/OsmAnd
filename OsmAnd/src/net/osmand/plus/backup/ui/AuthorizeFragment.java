@@ -49,7 +49,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -110,7 +109,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		app = requireMyApplication();
 		settings = app.getSettings();
 		backupHelper = app.getBackupHelper();
-		nightMode = !settings.isLightContent();
+		nightMode = isNightMode(false);
 
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
@@ -392,9 +391,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (!fragmentManager.isStateSaved()) {
-						fragmentManager.popBackStack(BaseSettingsFragment.SettingsScreenType.BACKUP_AUTHORIZATION.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+						fragmentManager.popBackStack(BackupAuthorizationFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 					}
-					BackupAndRestoreFragment.showInstance(fragmentManager, signIn ? LoginDialogType.SIGN_IN : LoginDialogType.SIGN_UP);
+					BackupCloudFragment.showInstance(fragmentManager, signIn ? LoginDialogType.SIGN_IN : LoginDialogType.SIGN_UP);
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
 					buttonContinue.setEnabled(false);

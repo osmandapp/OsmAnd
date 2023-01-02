@@ -14,8 +14,7 @@
 		android:background="?attr/list_background_color"
 		android:orientation="vertical"
 		android:paddingLeft="@dimen/content_padding"
-		android:paddingRight="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding">
+		android:paddingRight="@dimen/content_padding">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
@@ -53,17 +52,18 @@
 			tools:text="@string/backup_dont_have_any_descr" />
 
 		<include
-			android:id="@+id/restore_button"
+			android:id="@+id/sync_button"
 			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_height"
-			tools:layout_marginBottom="@dimen/content_padding" />
+			android:layout_marginBottom="@dimen/content_padding" />
 
 		<include
-			android:id="@+id/backup_button"
+			android:id="@+id/settings_button"
 			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height" />
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_marginBottom="@dimen/content_padding" />
 
 	</LinearLayout>
 

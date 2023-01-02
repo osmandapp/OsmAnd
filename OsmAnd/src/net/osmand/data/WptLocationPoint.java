@@ -2,7 +2,7 @@ package net.osmand.data;
 
 import android.content.Context;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXUtilities;
 
 public class WptLocationPoint implements LocationPoint {
 

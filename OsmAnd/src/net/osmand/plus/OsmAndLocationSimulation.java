@@ -15,7 +15,8 @@ import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -338,7 +339,7 @@ public class OsmAndLocationSimulation {
 	}
 
 	public static List<SimulatedLocation> getSimulatedLocationsForGpx(OsmandApplication app, int firstLocationOffset,
-																	  GPXUtilities.GPXFile f) {
+																	  GPXFile f) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
 		List<GPXUtilities.WptPt> points = f.getAllSegmentsPoints();

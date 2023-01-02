@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -146,7 +146,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	                               GpxDataItem dataItem, boolean currentlyRecordingTrack,
 	                               OsmandApplication app) {
 		holder.title.setText(itemTitle.replace("/", " • ").trim());
-		GPXUtilities.GPXTrackAnalysis analysis = null;
+		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (dataItem != null) {
