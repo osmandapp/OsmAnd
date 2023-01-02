@@ -516,7 +516,7 @@ public class BackupHelper {
 	}
 
 	@Nullable
-	String uploadFile(@NonNull String fileName, @NonNull String type,
+	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
 	                  @NonNull StreamWriter streamWriter, @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
@@ -525,7 +525,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
 		params.put("type", type);
-		params.put("clienttime", String.valueOf(System.currentTimeMillis()));
+		params.put("clienttime", String.valueOf(lastModifiedTime));
 
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");

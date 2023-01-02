@@ -91,8 +91,8 @@ public class NetworkWriter extends AbstractWriter {
 					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					outputStream.flush();
 				};
-				return backupHelper.uploadFile(fileName, item.getType().name(), streamWriter,
-						getUploadFileListener(item));
+				return backupHelper.uploadFile(fileName, item.getType().name(), item.getLastModifiedTime(),
+						streamWriter, getUploadFileListener(item));
 			} else {
 				return null;
 			}
@@ -108,9 +108,10 @@ public class NetworkWriter extends AbstractWriter {
 		if (isCancelled()) {
 			throw new InterruptedIOException();
 		} else {
-			String type = itemWriter.getItem().getType().name();
+			SettingsItem item = itemWriter.getItem();
+			String type = item.getType().name();
 			StreamWriter streamWriter = getStreamWriter(itemWriter, fileName);
-			return backupHelper.uploadFile(fileName, type, streamWriter, listener);
+			return backupHelper.uploadFile(fileName, type, item.getLastModifiedTime(), streamWriter, listener);
 		}
 	}
 
