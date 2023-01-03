@@ -57,13 +57,11 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	protected PointsGroup selectedGroup;
 	protected boolean skipConfirmationDialog;
-	protected String ORIENTATION_KEY = "ORIENTATION_KEY";
 
 	@Override
 	protected int getLayoutId() {
 		return R.layout.point_editor_fragment;
 	}
-
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -189,7 +187,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
 
-			if(savedInstanceState == null){
+			if (savedInstanceState == null) {
 				showKeyboard();
 			}
 		} else {
