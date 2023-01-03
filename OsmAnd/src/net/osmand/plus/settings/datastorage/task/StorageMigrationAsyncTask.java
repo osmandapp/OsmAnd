@@ -47,6 +47,7 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 
 	private final WeakReference<FragmentActivity> activityRef;
 	private StorageMigrationListener migrationListener;
+	private ProgressHelper progressHelper;
 
 	private int generalProgress;
 	private final boolean usedOnMap;
@@ -72,6 +73,11 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 			StorageItem sharedStorage;
 			DataStorageHelper storageHelper = new DataStorageHelper(app);
 			sharedStorage = storageHelper.getCurrentStorage();
+			progressHelper = new ProgressHelper(() -> {
+				generalProgress = progressHelper.getLastKnownProgress();
+				publishProgress(generalProgress);
+			});
+			progressHelper.setTimeInterval(100); // update progress each 100 ms
 
 			FragmentManager manager = activity.getSupportFragmentManager();
 			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, sharedStorage, filesSize,
@@ -82,9 +88,11 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 	@Override
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
-		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize.second / 1024);
+		FileCopyListener fileCopyListener = getCopyFilesListener();
 
 		long remainingSize = filesSize.first;
+		long totalSize = filesSize.second / 1024;
+		progressHelper.onStartWork((int) totalSize);
 		for (int i = 0; i < documentFiles.size(); i++) {
 			DocumentFile file = documentFiles.get(i);
 			long fileLength = file.length();
@@ -93,25 +101,26 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 			Uri uri = file.getUri();
 			String fileName = getFileName(uri, file.getName());
 			if (fileName != null) {
-				copyFilesListener.onFileCopyStarted(fileName);
+				fileCopyListener.onFileCopyStarted(fileName);
 
 				File destFile = new File(selectedStorage.getDirectory(), fileName);
 				if (!destFile.exists()) {
-					String error = copyFile(uri, fileName, copyFilesListener);
+					String error = copyFile(uri, fileName, fileCopyListener);
 					if (error == null) {
 						file.delete();
 					} else {
 						errors.put(fileName, new Pair<>(error, fileLength));
 					}
-					copyFilesListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
+					fileCopyListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				} else {
 					existingFiles.add(destFile);
 					int progress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
-					copyFilesListener.onFileCopyFinished(fileName, progress);
+					fileCopyListener.onFileCopyFinished(fileName, progress);
 				}
 			}
 			publishProgress(new Pair<>(documentFiles.size() - i, remainingSize));
 		}
+		progressHelper.onFinishTask();
 		return errors;
 	}
 
@@ -145,7 +154,7 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 	}
 
 	@Nullable
-	private String copyFile(@NonNull Uri uri, @NonNull String fileName, @NonNull CopyFilesListener filesListener) {
+	private String copyFile(@NonNull Uri uri, @NonNull String fileName, @NonNull FileCopyListener filesListener) {
 		String error = null;
 		InputStream stream = null;
 		OutputStream outputStream = null;
@@ -172,15 +181,11 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 	}
 
 	@NonNull
-	private IProgress getCopyProgress(@NonNull String fileName, @NonNull CopyFilesListener filesListener) {
+	private IProgress getCopyProgress(@NonNull String fileName, @NonNull FileCopyListener filesListener) {
 		return new AbstractProgress() {
-
-			private int progress;
-
 			@Override
 			public void progress(int deltaWork) {
-				progress += deltaWork;
-				filesListener.onFileCopyProgress(fileName, progress, deltaWork);
+				filesListener.onFileCopyProgress(fileName, deltaWork);
 			}
 		};
 	}
@@ -198,23 +203,16 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 	}
 
 	@NonNull
-	private CopyFilesListener getCopyFilesListener(long size) {
-		return new CopyFilesListener() {
-
-			private ProgressHelper progressHelper;
+	private FileCopyListener getCopyFilesListener() {
+		return new FileCopyListener() {
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
-				progressHelper = new ProgressHelper(() -> {
-					generalProgress += progressHelper.getLastAddedDeltaProgress();
-					publishProgress(generalProgress);
-				});
-				progressHelper.onStartWork((int) size);
 				publishProgress(fileName);
 			}
 
 			@Override
-			public void onFileCopyProgress(@NonNull String fileName, int p, int deltaWork) {
+			public void onFileCopyProgress(@NonNull String fileName, int deltaWork) {
 				progressHelper.onProgress(deltaWork);
 			}
 
@@ -225,11 +223,9 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 		};
 	}
 
-	public interface CopyFilesListener {
-		void onFileCopyStarted(@NonNull String fileName);
-
-		void onFileCopyProgress(@NonNull String fileName, int progress, int deltaWork);
-
-		void onFileCopyFinished(@NonNull String fileName, int progress);
+	public interface FileCopyListener {
+		default void onFileCopyStarted(@NonNull String fileName) { }
+		default void onFileCopyProgress(@NonNull String fileName, int deltaWork) { }
+		default void onFileCopyFinished(@NonNull String fileName, int deltaWork) { }
 	}
 }
