@@ -21,6 +21,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -2115,7 +2116,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		reloadHistory();
 	}
 
@@ -2127,12 +2128,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		heading = value;
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			Location location = this.location;
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					updateLocationUI(location, value);
-				}
-			});
+			app.runInUIThread(() -> updateLocationUI(location, value));
 		} else {
 			heading = lastHeading;
 		}
@@ -2141,12 +2137,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void updateLocation(Location location) {
 		Float heading = this.heading;
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				updateLocationUI(location, heading);
-			}
-		});
+		app.runInUIThread(() -> updateLocationUI(location, heading));
 	}
 
 	private void updateLocationUI(Location location, Float heading) {
@@ -2325,15 +2316,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				QuickSearchCategoriesListFragment.class.getName(),
 				QuickSearchAddressListFragment.class.getName()
 		};
-		private final int[] titleIds = {
-				QuickSearchHistoryListFragment.TITLE,
-				QuickSearchCategoriesListFragment.TITLE,
-				QuickSearchAddressListFragment.TITLE
-		};
 		private final String[] titles;
 
 		public SearchFragmentPagerAdapter(FragmentManager fm, Resources res) {
 			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+			int[] titleIds = {
+					QuickSearchHistoryListFragment.TITLE,
+					QuickSearchCategoriesListFragment.TITLE,
+					QuickSearchAddressListFragment.TITLE
+			};
 			titles = new String[titleIds.length];
 			for (int i = 0; i < titleIds.length; i++) {
 				titles[i] = res.getString(titleIds[i]);
@@ -2345,6 +2336,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			return fragments.length;
 		}
 
+		@NonNull
 		@Override
 		public Fragment getItem(int position) {
 			return Fragment.instantiate(QuickSearchDialogFragment.this.getContext(), fragments[position]);
