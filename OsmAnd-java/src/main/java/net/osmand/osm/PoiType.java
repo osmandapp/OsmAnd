@@ -1,6 +1,7 @@
 package net.osmand.osm;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 public class PoiType extends AbstractPoiType {
@@ -164,7 +165,22 @@ public class PoiType extends AbstractPoiType {
 
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		if (isAdditional()) {
-			return parentType.putTypes(acceptedTypes);
+			parentType.putTypes(acceptedTypes);
+			if (filterOnly) {
+				LinkedHashSet<String> set = acceptedTypes.get(category);
+				for (PoiType pt : category.getPoiTypes()) {
+					List<PoiType> poiAdditionals = pt.getPoiAdditionals();
+					if (poiAdditionals == null) {
+						continue;
+					}
+					for (PoiType poiType : poiAdditionals) {
+						if (poiType.getKeyName().equals(keyName)) {
+							set.add(pt.getKeyName());
+						}
+					}
+				}
+			}
+			return acceptedTypes;
 		}
 		PoiType rt = getReferenceType();
 		PoiType poiType = rt != null ? rt : this;

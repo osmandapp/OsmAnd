@@ -1,6 +1,6 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.GPXUtilities.loadGPXFile;
+import static net.osmand.gpx.GPXUtilities.loadGPXFile;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 

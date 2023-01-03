@@ -87,7 +87,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	}
 
 	public float getDownloadProgress() {
-		return progressHelper.getDownloadProgress();
+		return progressHelper.getLastKnownPercent();
 	}
 
 	public void setInterrupted(boolean interrupted) {

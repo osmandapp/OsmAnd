@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.data.LatLon;
 
 import java.util.List;

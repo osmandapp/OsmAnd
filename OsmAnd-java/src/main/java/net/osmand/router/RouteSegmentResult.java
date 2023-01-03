@@ -19,7 +19,7 @@ import java.util.Map;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import static net.osmand.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {

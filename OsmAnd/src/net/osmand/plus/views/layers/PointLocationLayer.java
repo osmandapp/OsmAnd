@@ -179,22 +179,26 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-		if (mapActivity != null) {
-			initCoreRenderer();
-		} else {
+		if (mapActivity == null) {
 			clearMapMarkersCollections();
+		} else {
+			initCoreRenderer();
+		}
+	}
+
+	@Override
+	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer, @Nullable MapRendererView newMapRenderer) {
+		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
+		if (newMapRenderer != null) {
+			initCoreRenderer();
 		}
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-		boolean hasMapRenderer = hasMapRenderer();
-		if (hasMapRenderer) {
-			initCoreRenderer();
-		} else {
-			initLegacyRenderer();
-		}
+		initCoreRenderer();
+		initLegacyRenderer();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 		locationProvider.addLocationListener(this);
 		locationProvider.addCompassListener(this);
@@ -549,7 +553,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		super.destroyLayer();
 		locationProvider.removeLocationListener(this);
 		locationProvider.removeCompassListener(this);
-		clearMapMarkersCollections();
 	}
 
 	@Override

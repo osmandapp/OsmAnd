@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -77,7 +77,7 @@ public class TravelGpxCard extends BaseTravelCard {
 									}
 
 									@Override
-									public void onGpxFileRead(@Nullable GPXUtilities.GPXFile gpxFile) {
+									public void onGpxFileRead(@Nullable GPXFile gpxFile) {
 										File file = app.getTravelHelper().createGpxFile(article);
 										TrackMenuFragment.openTrack(activity, file, null);
 									}

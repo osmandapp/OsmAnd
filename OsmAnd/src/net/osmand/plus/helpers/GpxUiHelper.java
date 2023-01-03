@@ -65,14 +65,14 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.Elevation;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Speed;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.Elevation;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.Speed;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -1047,14 +1047,11 @@ public class GpxUiHelper {
 				}
 				dlg.dismiss();
 				String warn = w;
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (warn.length() > 0) {
-							Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
-						} else {
-							callbackWithObject.processResult(result);
-						}
+				activity.runOnUiThread(() -> {
+					if (warn.length() > 0) {
+						Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+					} else {
+						callbackWithObject.processResult(result);
 					}
 				});
 			}
@@ -1164,7 +1161,7 @@ public class GpxUiHelper {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -1181,7 +1178,8 @@ public class GpxUiHelper {
 				mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
-				mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+				mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters ||
+				mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 
 			divX = mainUnitInMeters;
 			if (fmt == null) {
@@ -1194,7 +1192,7 @@ public class GpxUiHelper {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				divX = 1f;
 				mainUnitStr = R.string.m;
-			} else if (mc == MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				divX = 1f / FEET_IN_ONE_METER;
 				mainUnitStr = R.string.foot;
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
@@ -1403,7 +1401,7 @@ public class GpxUiHelper {
 															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		boolean light = settings.isLightContent();
 		float convEle = useFeet ? 3.28084f : 1.0f;
 
@@ -1640,7 +1638,7 @@ public class GpxUiHelper {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 

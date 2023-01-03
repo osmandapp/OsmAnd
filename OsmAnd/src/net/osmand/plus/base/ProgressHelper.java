@@ -16,6 +16,7 @@ public class ProgressHelper {
 	private int deltaProgress;
 	private int lastAddedDeltaProgress;
 	private int sizeInterval = UPDATE_SIZE_INTERVAL_KB;
+	private int timeInterval = UPDATE_TIME_INTERVAL_MS;
 	private long lastUpdateTime;
 	private boolean notifyOnUpdate;
 
@@ -31,8 +32,12 @@ public class ProgressHelper {
 		}
 	}
 
-	public void setSizeInterval(int minSizeToUpdate) {
+	private void setSizeInterval(int minSizeToUpdate) {
 		this.sizeInterval = minSizeToUpdate;
+	}
+
+	public void setTimeInterval(int timeInterval) {
+		this.timeInterval = timeInterval;
 	}
 
 	public void onStartWork(int total) {
@@ -40,8 +45,8 @@ public class ProgressHelper {
 		if (this.totalWork == 0) {
 			this.totalWork = 1;
 		}
-		// one percent of total work size
-		setMinimumSizeInterval(totalWork / 100);
+		int onePercent = totalWork / 100;
+		setMinimumSizeInterval(onePercent);
 		deltaProgress = 0;
 		progress = 0;
 	}
@@ -65,7 +70,7 @@ public class ProgressHelper {
 	}
 
 	public boolean isTimeToUpdate() {
-		return System.currentTimeMillis() - lastUpdateTime > UPDATE_TIME_INTERVAL_MS;
+		return System.currentTimeMillis() - lastUpdateTime > timeInterval;
 	}
 
 	public void onFinishTask() {
@@ -81,7 +86,7 @@ public class ProgressHelper {
 		return progress;
 	}
 
-	public float getDownloadProgress() {
+	public float getLastKnownPercent() {
 		return normalizeProgress(totalWork > 0 ? (float) (progress * 100) / totalWork : progress);
 	}
 

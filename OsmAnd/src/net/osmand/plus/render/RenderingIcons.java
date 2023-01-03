@@ -144,6 +144,19 @@ public class RenderingIcons {
 		return defaultPoiIconName;
 	}
 
+	@Nullable
+	public static String getBigIconNameForAmenity(@NonNull Amenity amenity) {
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (poiType == null) {
+			return null;
+		} else if (containsBigIcon(poiType.getIconKeyName())) {
+			return poiType.getIconKeyName();
+		} else if (containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
+		}
+		return null;
+	}
+
 	public static int getBigIconResourceId(String s) {
 		Integer i = bigIcons.get(s);
 		return i == null ? 0 : i;

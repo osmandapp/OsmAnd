@@ -10,8 +10,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;

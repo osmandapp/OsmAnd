@@ -592,10 +592,6 @@ public class SearchPhrase {
 		return unknownWordsMatcher.get(i);
 	}
 
-	public NameStringMatcher getFullNameStringMatcher() {
-		return getNameStringMatcher(fullTextSearchPhrase.trim(), false);
-	}
-
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {
 		return new NameStringMatcher(word,
 				(complete ?

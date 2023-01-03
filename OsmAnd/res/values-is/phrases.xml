@@ -4473,4 +4473,6 @@
     <string name="poi_socket_schuko_voltage_high">Mikil</string>
     <string name="poi_socket_schuko_voltage_medium">Miðlungs</string>
     <string name="poi_socket_schuko_voltage_low">Lítil</string>
+    <string name="poi_hiking_filter">Hentar fyrir gönguferðir</string>
+    <string name="poi_hiking_yes">Já</string>
 </resources>

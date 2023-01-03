@@ -417,7 +417,7 @@
     <string name="filter_poi_hint">Filtri laŭ nomo</string>
     <string name="search_poi_category_hint">Enigu ion por serĉi</string>
     <string name="agps_info">A-GPS informoj</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">Etikedoj “riparu min!”</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Ŝlosiloj “Riparu min!”</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
@@ -3119,7 +3119,7 @@
     <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
     <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo: “%1$s”.</string>
     <string name="wake_time">Aktiveca periodo de ekrano</string>
-    <string name="units_and_formats">Mezurunuoj &amp; formoj</string>
+    <string name="units_and_formats">Mezurunuoj kaj formoj</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
     <string name="list_of_installed_plugins">Instalitaj kromprogramoj</string>
@@ -4242,10 +4242,10 @@
     <string name="promo_subscription">Reklamkoda abono</string>
     <string name="track_has_no_needed_data">La spuro ne enhavas bezonatajn datumojn.</string>
     <string name="routes_color_by_type">Kolorigi kursojn laŭ…</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo «osmc:symbol»).</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi kursojn laŭ prizorganto.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
-    <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
+    <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo «osmc:symbol») aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
     <string name="option_available_only_in_osmand_pro">Havebla por abonantoj de la plano OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Akiru aliron al altnivelaj agordoj: kolorigo de kursoj kaj pli.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ekkonu kun planoj de OsmAnd por trovi la plej taŭgan por vi.</string>
@@ -4463,16 +4463,16 @@
     <string name="use_routing_fallback_description">Uzi malkonektan navigilon, se la elektita enerta navigilo ne funkcias.</string>
     <string name="navigate_point_format_swiss_grid">Svislanda koordinatsistemo (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Svislanda koordinatsistemo (CH1903+)</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Etikedoj “Rimarko”</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Ŝlosiloj “Rimarko”</string>
     <string name="waypoint_template">Ŝablono de navigadpunkto</string>
     <string name="waypoint_appearance">Aspekto de navigadpunkto</string>
     <string name="track_file_description">Tiu ĉi ago montros disponeblajn spurojn.</string>
     <string name="always_ask_waypoint_appearance_description">Tiu ĉi ago malfermos la fenestron “Aldoni navigadpunkton”, kie vi povas ŝanĝi nomon kaj aspekton de punkto.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Etikedoj “Riparu min!”</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Ŝlosiloj “Riparu min!”</string>
     <string name="predefined_waypoint_appearance_description">Tiu ĉi ago aŭtomate konservos navigadpunkton kun antaŭagorditaj parametroj.</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri etikedojn «fixme»</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Montri etikedojn «note»</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Montri ŝlosilojn «fixme»</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Montri ŝlosilojn «note»</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malaltaj skal-niveloj</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Tuneloj de akvovojoj</string>
@@ -4620,7 +4620,7 @@
     <string name="av_def_action_choose">Demandi</string>
     <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton al la mapo.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
-    <string name="rendering_attr_weatherPressureContours_name">Egal-prem-linioj (izobaroj)</string>
+    <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
     <string name="map_widget_trip_recording_distance">Distanco</string>
     <string name="map_widget_trip_recording_downhill">Malsupreniroj</string>
@@ -4861,4 +4861,105 @@
 \n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn
 \n
 \n</string>
+    <string name="shared_string_open">Malfermi</string>
+    <string name="open_weather_action_description">Ebligas al vi malfermi ekranon kun detalaj informoj pri vetero.</string>
+    <string name="open_weather_action">Malfermi veter-informojn</string>
+    <string name="rendering_attr_weatherCloudContours_name">Egal-nubkovriĝ-linioj</string>
+    <string name="quick_action_temperature_layer">Butono por montri/kaŝi tavolon de temperaturoj sur la mapo.</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Egal-precipitaĵ-linioj</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Egal-ventrapid-linioj</string>
+    <string name="mtb_scale">Ŝlosilo «mtb:scale»</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Interŝtata Asocio de Montara Biciklado (IMBA)</string>
+    <string name="mtb_segment_classification">Klasifiko de segmentoj</string>
+    <string name="rendering_attr_showMtbScale_name">Montbiciklaj kursoj OSM</string>
+    <string name="rendering_attr_showMtbScale_description">Montri montbiciklajn kursojn laŭ la skalo en la ŝlosilo «mtb:scale».</string>
+    <string name="quick_action_precipitation_layer">Butono por montri/kaŝi tavolon de veter-alfalaĵoj sur la mapo.</string>
+    <string name="quick_action_wind_layer">Butono por montri/kaŝi tavolon de ventoj sur la mapo.</string>
+    <string name="pressure_layer">Tavolo de aerpremoj</string>
+    <string name="quick_action_cloud_layer">Butono por montri/kaŝi tavolon de nuboj sur la mapo.</string>
+    <string name="quick_action_air_pressure_layer">Butono por montri/kaŝi tavolon de aerpremoj sur la mapo.</string>
+    <string name="shared_string_next_sunset">Sekva sunsubiro</string>
+    <string name="switch_mode_by_tapping_on_widget">Baskulu la reĝimon per frapeti la fenestraĵon.</string>
+    <string name="temperature_layer">Tavolo de temperaturoj</string>
+    <string name="cloud_layer">Tavolo de nuboj</string>
+    <string name="wind_layer">Tavolo de ventoj</string>
+    <string name="precipitation_layer">Tavolo de precipitaĵoj</string>
+    <string name="storage_migration_fragment_close_descr">Kopiado plenumita en %1$s%%. Se vi ĉesigos ĝin nun, la aplikaĵo povos ne funkcii ĝuste.</string>
+    <string name="map_widget_sunset_desc">Montras la horon de la sekva sunsubiro aŭ la tempon ĝis la sekva sunsubiro.</string>
+    <string name="map_widget_sunrise_desc">Montras la horon de la sekva sunleviĝo aŭ la tempon ĝis la sekva sunleviĝo.</string>
+    <string name="map_widget_group_sunrise_sunset">Sunleviĝo/sunsubiro</string>
+    <string name="shared_string_time_left">Restanta tempo</string>
+    <string name="shared_string_sunset">Sunsubiro</string>
+    <string name="shared_string_sunrise">Sunleviĝo</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Fenestraĵoj montrantaj informojn pri la sekva sunsubiro kaj sunleviĝo.</string>
+    <string name="shared_string_next_sunrise">Sekva sunvleviĝo</string>
+    <string name="weather_offline_forecast">Malkonekta veterprognozo</string>
+    <string name="map_settings_weather_temp">Temperaturo</string>
+    <string name="depth_contour_lines">Maraj profundec-kurboj</string>
+    <string name="turn_on_nautical_depth_description">Aktivigu por vidigi datumojn pri mara profundeco sur la mapo.</string>
+    <string name="weather_online_cache">Kaŝmemoro</string>
+    <string name="weather_plugin_description">Liveras:
+\n • 24-horan 7-tagan veterprognozojn kun 5 tavoloj
+\n • fenestraĵojn agordiĝantajn laŭ loko
+\n • egal-temperatur-liniojn kaj egal-aerprem-liniojn.
+\n
+\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="rendering_attr_depthContourWidth_name">Larĝo de kurboj</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
+    <string name="empty_screen_view_selected_weather_data">Aktivigu por vidigi elektitajn veterajn datumojn sur la mapo.</string>
+    <string name="weather_widgets_secondary_desc">Mezurunuoj estas ŝanĝeblaj en agordoj de la kromprogramo “Vetero”.</string>
+    <string name="measurement_units">Mezurunuoj</string>
+    <string name="empty_screen_weather_precipitation_layer">Aktivigu por vidigi tavolon de veter-alfalaĵoj sur la mapo.</string>
+    <string name="air_pressure_widget_desc">Fenestraĵo montranta aeran premon por la nuna map-centro.</string>
+    <string name="clouds_widget_desc">Fenestraĵo montranta nub-kovriĝon por la nuna map-centro.</string>
+    <string name="map_settings_weather_wind">Vento</string>
+    <string name="map_settings_weather_air_pressure">Aerpremo</string>
+    <string name="empty_screen_weather_wind_layer">Aktivigu por vidigi tavolon de ventoj sur la mapo.</string>
+    <string name="weather_wind_meters_per_second">Metroj en sekundo</string>
+    <string name="map_settings_weather_precip">Precipitaĵoj</string>
+    <string name="map_settings_weather_cloud">Nub-kovriĝo</string>
+    <string name="explore_weather_forecast">Ekkoni veterprognozon.</string>
+    <string name="shared_string_contours">Konturoj</string>
+    <string name="shared_string_layers">Tavoloj</string>
+    <string name="shared_string_weather">Vetero</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_precip_milimeters">Milimetroj</string>
+    <string name="weather_precip_inches">Coloj</string>
+    <string name="empty_screen_weather_contours">Aktivigu por vidigi veterajn konturojn sur la mapo.</string>
+    <string name="empty_screen_weather_clouds_layer">Aktivigu por vidigi tavolon de nub-kovriĝo sur la mapo.</string>
+    <string name="empty_screen_weather_pressure_layer">Aktivigu por vidigi tavolon de aerpremoj sur la mapo.</string>
+    <string name="empty_screen_weather_temperature_layer">Aktivigu por vidigi tavolon de temperaturoj sur la mapo.</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_mph">mi/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_knots">Nodoj</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometroj en horo</string>
+    <string name="weather_wind_miles_per_hour">Mejloj en horo</string>
+    <string name="wind_widget_desc">Fenestraĵo montranta ventan rapidon por la nuna map-centro.</string>
+    <string name="share_crash_log">Kunhavigi erar-protokolon</string>
+    <string name="dismiss_changes_descr">Ĉiuj ŝanĝoj pereos.</string>
+    <string name="dismiss_changes">Ĉu rezigni ŝanĝojn\?</string>
+    <string name="restart_now">Restartigi nun</string>
+    <string name="map_rendering_engine_v1">Versio 1</string>
+    <string name="weather_temperature_fahrenheit">Farenhejta</string>
+    <string name="action_not_supported_with_map_style">Tiu ĉi ago ne estas subtenata je la elektita map-stilo.</string>
+    <string name="weather_prefs_descr">24-hora kaj 7-taga veterprognozo, aktualigata ĉiu-3-hore</string>
+    <string name="map_rendering_engine_v2">Versio 2 (OpenGL)</string>
+    <string name="precipitation_widget_desc">Fenestraĵo montranta precipitaĵojn por la nuna map-centro.</string>
+    <string name="weather_pressure_hectopascals">Hektopaskaloj</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetroj da hidrargo</string>
+    <string name="rendering_engine_failed_descr">OsmAnd retropaŝis al la map-bildigilo en versio 1. Provu rebaskuli al la nova map-bildigilo “Versio 2 (OpenGL)” en agordoj de la aplikaĵo.
+\n
+\nBonvolu subteni ripari erarojn per liveri erar-protokolojn.</string>
+    <string name="weather_widget_group_desc">Fenestraĵoj montrantaj diversajn informojn pri vetero.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_inches_of_mercury">Coloj da hidrargo</string>
+    <string name="weather_temperature_celsius">Celsia</string>
+    <string name="rendering_engine_failed">La map-bildigilo de OsmAnd antaŭnelonge paneis.</string>
+    <string name="temperature_widget_desc">Fenestraĵo montranta temperaturon por la nuna map-centro.</string>
 </resources>

@@ -1,8 +1,8 @@
 package net.osmand.plus.wikivoyage.data;
 
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import static net.osmand.gpx.GPXUtilities.WptPt;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 

@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Route;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -171,8 +171,8 @@ public class GpxDisplayHelper {
 		return dg;
 	}
 
-	public static boolean processSplit(@Nullable OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
-		if (app == null || app.isApplicationInitializing()) {
+	public static boolean processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
+		if (app.isApplicationInitializing()) {
 			return false;
 		}
 

@@ -9,7 +9,8 @@ public enum MetricsConstants {
 	MILES_AND_FEET(R.string.si_mi_feet, "mi-f"),
 	MILES_AND_METERS(R.string.si_mi_meters, "mi-m"),
 	MILES_AND_YARDS(R.string.si_mi_yard, "mi-y"),
-	NAUTICAL_MILES(R.string.si_nm, "nm");
+	NAUTICAL_MILES_AND_METERS(R.string.si_nm_mt, "nm-m"),
+	NAUTICAL_MILES_AND_FEET(R.string.si_nm_ft, "nm-f");
 
 	private final int key;
 	private final String ttsString;

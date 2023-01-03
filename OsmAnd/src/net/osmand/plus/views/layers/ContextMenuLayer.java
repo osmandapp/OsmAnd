@@ -793,11 +793,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
+		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
 		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
 				|| mapActivity.getGpsFilterFragment() != null
-				|| mapActivity.getDownloadTilesFragment() != null) {
+				|| mapActivity.getDownloadTilesFragment() != null
+				|| (plugin != null && plugin.hasCustomForecast())) {
 			return true;
 		}
 		boolean res = false;

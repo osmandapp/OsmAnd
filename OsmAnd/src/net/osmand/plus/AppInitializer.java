@@ -17,12 +17,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -46,10 +48,10 @@ import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
+import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesFileHelper;
 import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
@@ -85,7 +87,6 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
@@ -114,6 +115,8 @@ public class AppInitializer implements IProgress {
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS";
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
+	private static final int MAX_OPENGL_FAILURES = 3;
+	private static final int MAX_OPENGL_DISABLE = 6;
 
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
@@ -134,6 +137,11 @@ public class AppInitializer implements IProgress {
 		MAPS_INITIALIZED, POI_TYPES_INITIALIZED, POI_FILTERS_INITIALIZED, ASSETS_COPIED,
 		INIT_RENDERERS, RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS,
 		ROUTING_CONFIG_INITIALIZED
+	}
+
+	static {
+		//Set old time format of GPX for Android 6.0 and lower
+		GPXUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
 	}
 
 	public interface AppInitializeListener {
@@ -340,9 +348,7 @@ public class AppInitializer implements IProgress {
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
 		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
-		// TODO TRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
-		TravelHelper travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		app.travelHelper = startupInit(travelHelper, TravelHelper.class);
+		app.travelHelper = startupInit(new TravelObfHelper(app), TravelHelper.class);
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
@@ -569,16 +575,14 @@ public class AppInitializer implements IProgress {
 				continue;
 			}
 			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
-			LiveUpdatesHelper.UpdateFrequency updateFrequency =
-					LiveUpdatesHelper.UpdateFrequency.values()[updateFrequencyOrd];
+			UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
 			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
 			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
 				runLiveUpdate(app, fileName, false, null);
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
 				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-				LiveUpdatesHelper.TimeOfDay timeOfDayToUpdate =
-						LiveUpdatesHelper.TimeOfDay.values()[timeOfDayOrd];
+				TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
 				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
 			}
 		}
@@ -639,20 +643,27 @@ public class AppInitializer implements IProgress {
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
 		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
-  			settings.USE_OPENGL_RENDER.set(false);
+			settings.USE_OPENGL_RENDER.set(false);
 		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
-			try {
-				NativeCoreContext.init(app);
-				settings.OPENGL_RENDER_FAILED.set(false);
-			} catch (Throwable throwable) {
-				settings.OPENGL_RENDER_FAILED.set(true);
-				LOG.error("NativeCoreContext", throwable);
-				app.getFeedbackHelper().saveExceptionSilent(Thread.currentThread(), throwable);
-			}
-			if (settings.OPENGL_RENDER_FAILED.get()) {
-				settings.USE_OPENGL_RENDER.set(false);
+			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
+			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
+				settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
+				// show warnings before disable
 				warnings.add("Native OpenGL library is not supported. Please try again after exit");
+				if (failedCounter > MAX_OPENGL_DISABLE) {
+					settings.USE_OPENGL_RENDER.set(false);
+				}
+			} else {
+				try {
+					settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
+					NativeCoreContext.init(app);
+					settings.OPENGL_RENDER_FAILED.set(0);
+				} catch (Throwable throwable) {
+					LOG.error("NativeCoreContext", throwable);
+					app.getFeedbackHelper().saveExceptionSilent(Thread.currentThread(), throwable);
+				}
 			}
+
 		}
 		notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 	}

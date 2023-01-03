@@ -8,12 +8,12 @@ import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -37,6 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +80,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_BACKGROUND = "background";
 
 	private static final float NO_HEADING = -1.0f;
+
+	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -508,7 +514,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 			if (location.hasBearing()) {
 				try {
-					json.put(TRACK_COL_BEARING, String.format("%.1f", location.getBearing()));
+					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}

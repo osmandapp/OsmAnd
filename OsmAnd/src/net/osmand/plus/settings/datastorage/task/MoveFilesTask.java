@@ -21,7 +21,7 @@ import net.osmand.plus.settings.datastorage.MoveFilesStopListener;
 import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
 import net.osmand.plus.settings.datastorage.StorageMigrationListener;
 import net.osmand.plus.settings.datastorage.StorageMigrationRestartListener;
-import net.osmand.plus.settings.datastorage.task.StorageMigrationAsyncTask.CopyFilesListener;
+import net.osmand.plus.settings.datastorage.task.StorageMigrationAsyncTask.FileCopyListener;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -46,6 +46,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	private final StorageItem from;
 	private final StorageItem to;
 
+	private ProgressHelper progressHelper;
 	private StorageMigrationListener migrationListener;
 	private StorageMigrationRestartListener restartListener;
 	private MoveFilesStopListener stopTaskListener;
@@ -77,6 +78,11 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 		FragmentActivity fActivity = activity.get();
 		if (AndroidUtils.isActivityNotDestroyed(fActivity)) {
 			FragmentManager manager = fActivity.getSupportFragmentManager();
+			progressHelper = new ProgressHelper(() -> {
+				copyProgress = progressHelper.getLastKnownProgress();
+				publishProgress(copyProgress);
+			});
+			progressHelper.setTimeInterval(100); // update progress each 100 ms
 			migrationListener = StorageMigrationFragment.showInstance(manager, to, from, filesSize,
 					copyProgress, files.size(), false, restartListener, stopTaskListener);
 		}
@@ -101,43 +107,47 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	@Override
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
-		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize.second / 1024);
+		FileCopyListener fileCopyListener = getCopyFilesListener();
 
 		long remainingSize = filesSize.first;
+		long totalSize = filesSize.second / 1024;
+		progressHelper.onStartWork((int) totalSize);
 		for (int i = 0; i < files.size(); i++) {
 			if (isCancelled()) {
-				return errors;
+				break;
 			}
-
 			File file = files.get(i);
 			long fileLength = file.length();
 			remainingSize -= fileLength;
 			String fileName = file.getName();
 			String filePathWithoutStorage = file.getAbsolutePath().replace(from.getDirectory(), "");
 
-			copyFilesListener.onFileCopyStarted(fileName);
+			fileCopyListener.onFileCopyStarted(fileName);
 			File destFile = new File(to.getDirectory() + filePathWithoutStorage);
 			if (!destFile.exists()) {
 				String newDirectory = to.getDirectory() + filePathWithoutStorage.replace(fileName, "");
 				File outputDirectory = new File(newDirectory);
-				String error = copyFile(from.getDirectory(), to.getDirectory(), filePathWithoutStorage, fileName, outputDirectory, copyFilesListener);
+				String error = copyFile(from.getDirectory(), to.getDirectory(), filePathWithoutStorage, fileName, outputDirectory, fileCopyListener);
 				if (error != null) {
 					errors.put(fileName, new Pair<>(error, fileLength));
 				}
-				copyFilesListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
+				fileCopyListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 			} else {
 				existingFiles.add(destFile);
-				int progress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
-				copyFilesListener.onFileCopyFinished(fileName, progress);
+				int deltaProgress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
+				fileCopyListener.onFileCopyFinished(fileName, deltaProgress);
 			}
 			file.delete();
 			publishProgress(new Pair<>(files.size() - i, remainingSize));
 		}
+		progressHelper.onFinishTask();
 		return errors;
 	}
 
 	@Nullable
-	private String copyFile(@NonNull String inputPath, @NonNull String outputPath, @NonNull String filePathWithoutStorage, @NonNull String fileName, @NonNull File outputDirectory, @NonNull CopyFilesListener filesListener) {
+	private String copyFile(@NonNull String inputPath, @NonNull String outputPath,
+	                        @NonNull String filePathWithoutStorage, @NonNull String fileName,
+	                        @NonNull File outputDirectory, @NonNull FileCopyListener filesListener) {
 		String error = null;
 		InputStream stream = null;
 		OutputStream outputStream = null;
@@ -162,15 +172,11 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	}
 
 	@NonNull
-	private IProgress getCopyProgress(@NonNull String fileName, @NonNull CopyFilesListener filesListener) {
+	private IProgress getCopyProgress(@NonNull String fileName, @NonNull FileCopyListener filesListener) {
 		return new AbstractProgress() {
-
-			private int progress;
-
 			@Override
 			public void progress(int deltaWork) {
-				progress += deltaWork;
-				filesListener.onFileCopyProgress(fileName, progress, deltaWork);
+				filesListener.onFileCopyProgress(fileName, deltaWork);
 			}
 		};
 	}
@@ -183,7 +189,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	private void changeStorage(@Nullable Map<String, Pair<String, Long>> errors) {
 		Context ctx = context.get();
 
-		if (ctx != null && Algorithms.isEmpty(errors)) {
+		if (ctx != null && !Algorithms.isEmpty(errors)) {
 			Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		}
 
@@ -202,23 +208,16 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	}
 
 	@NonNull
-	private CopyFilesListener getCopyFilesListener(long size) {
-		return new CopyFilesListener() {
-
-			private ProgressHelper progressHelper;
+	private FileCopyListener getCopyFilesListener() {
+		return new FileCopyListener() {
 
 			@Override
 			public void onFileCopyStarted(@NonNull String fileName) {
-				progressHelper = new ProgressHelper(() -> {
-					copyProgress += progressHelper.getLastAddedDeltaProgress();
-					publishProgress(copyProgress);
-				});
-				progressHelper.onStartWork((int) size);
 				publishProgress(fileName);
 			}
 
 			@Override
-			public void onFileCopyProgress(@NonNull String fileName, int p, int deltaWork) {
+			public void onFileCopyProgress(@NonNull String fileName, int deltaWork) {
 				progressHelper.onProgress(deltaWork);
 			}
 

@@ -690,6 +690,25 @@ public abstract class InAppPurchases {
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 
+		public enum SubscriptionOrigin {
+			UNDEFINED(R.string.shared_string_undefined),
+			ANDROID(R.string.google_play),
+			AMAZON(R.string.amazon_market),
+			HUAWEI(R.string.huawei_market),
+			IOS(R.string.apple_app_store),
+			PROMO(R.string.promo);
+
+			int storeNameId;
+
+			SubscriptionOrigin(int storeNameId) {
+				this.storeNameId = storeNameId;
+			}
+
+			public int getStoreNameId() {
+				return storeNameId;
+			}
+		}
+
 		public enum SubscriptionState {
 			UNDEFINED("undefined", R.string.shared_string_undefined),
 			ACTIVE("active", R.string.osm_live_active),

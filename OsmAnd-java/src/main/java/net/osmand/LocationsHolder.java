@@ -1,6 +1,6 @@
 package net.osmand;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 

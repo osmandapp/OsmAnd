@@ -1704,8 +1704,8 @@
     <string name="local_indexes_cat_tts">Raddskipanir (TTS)</string>
     <string name="ttsvoice">TTS-rödd</string>
     <string name="map_text_size_descr">Stærð leturs fyrir nöfn á kortinu:</string>
-    <string name="trace_rendering">Aflúsunarupplýsingar myndgerðar</string>
-    <string name="trace_rendering_descr">Birta afköst myndgerðar.</string>
+    <string name="trace_rendering">Aflúsunarupplýsingar afkasta</string>
+    <string name="trace_rendering_descr">Birta afköst myndgerðar og leiðsagnar.</string>
     <string name="gpx_option_reverse_route">Snúa við stefnu ferils</string>
     <string name="choose_audio_stream">Frálag raddleiðsagnar</string>
     <string name="voice_stream_music">Hljóð í margmiðlun/tónlist</string>
@@ -2347,17 +2347,15 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'.
 \n
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.)
-\n 
-\nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
+    <string name="srtm_plugin_description">Yfirborðsupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi. 
 \n
-\nSérstök kortaviðbót fyrir OsmAnd mun koma með öll sjómerki og leiðatákn þeim tengd, til rötunar á sjó eða ströndum. Lýsing sjómerkja inniheldur öll þau atriði sem nauðsynleg er til að auðkenna þau og hvað þau þýða (flokkur, lögun, litur, röð, tilvísun, o.s.frv.). 
+\nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
 \n
-\nTil að snúa aftur í hefðbundnari kortastíla OsmAnd, þarf einfaldlega að gera viðbótina óvirka aftur eða breyta stílnum í \'Stíll korts\' í \'Stilla kort\' valmyndinni.</string>
-    <string name="plugin_ski_descr">Þessi viðbót fyrir OsmAnd setur við fingurgóma þína allskyns smáatriði varðandi skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi, og birtast í sérstökum \'Vetrar\'-kortastíl sem líkir eftir snævi þöktu landslagi. 
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/contour-lines .</string>
+    <string name="plugin_nautical_descr">Virkjaðu þetta til að bæta á kortið myndrænni framsetningu fyrir siglingaleiðir, ljósvita, hættusvæði, bannsvæði, hvar megi kasta akkerum, bryggjur, o.s.frv. Til að nota þetta skaltu sækja sjókortaviðbótina, fara í kortastillingarnar og setja stíl kortsins á \'Sjókort\'.
 \n
-\nVirkjun á þessari sýn breytirstíl kortsins yfir í \'Vetur og skíði\', þar sem allt landslag birtist í vetraraðstæðum. Til að snúa aftur í hefðbundnari kortastíla OsmAnd, þarf einfaldlega að gera viðbótina óvirka aftur eða breyta stílnum í \'Stíll korts\' í \'Stilla kort\' valmyndinni.</string>
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_ski_descr">Hannað til að rata um vetraríþróttasvæði. Skoðaðu skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi. Til að nota þetta er viðbótin fyrst virkjuð, síðan farið í stillingar kortsins og \'Vetur og skíði\' valið sem stíll þess.</string>
     <string name="select_index_file_to_download">Ekkert fannst, en þú getur aftur útbúið það sjálf(ur) (skoðaðu https://osmand.net).</string>
     <string name="index_item_world_bitcoin_payments">Bitcoin-greiðslur um víða veröld</string>
     <string name="app_modes_choose_descr">Veldu notkunarsnið sem á að birta.</string>
@@ -2367,9 +2365,9 @@
 \n OsmAnd skíðakortaviðbótin gerir þér kleift að skoða skíðasvæði nokkuð nákvæmlega með ýmsum stigum upplýsinga, eins og staðsetningar á lyftum og öðrum mannvirkjum.</string>
     <string name="osm_recipients_label">OSM viðtakendur</string>
     <string name="total_donations">Heildarstyrkir</string>
-    <string name="record_plugin_description">Þessi viðbót virkjar eiginleikann til að skrá og vista ferlana þína með því að snerta GPX-skráningarmerkið á kortaskjánum, en einnig til að skrá sjálfvirkt allar leiðir sem þú ferð yfir í GPX-skrá. 
+    <string name="record_plugin_description">Gerir kleift að skrá, vista og greina ferla yfir hreyfingu, eins og til dæmis hraða, hækkun, lækkun eða hæðasnið leiða, sem þá er hægt að endurnýta, bæta eða deila með vinum.
 \n
-\nHægt er að deila skráðum ferlum með vinum þínum eða nota þá við framlög í OSM. Íþróttafólk geta notað skráða ferla til að fylgjast með æfingunum sínum. Einhverja einfalda greiningu ferla er hægt að framkvæma beint í OsmAnd, á borð við tímatökur umferða, skoða meðalhraða o.s.frv., en auðvitað er einnig hægt að greina ferlana betur í sértækum utanaðkomandi greiningarforritum.</string>
+\nLeiðbeiningar - https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="plugin_touringview_descr">Sé þessi sýn virkjuð, breytist kortastíll OsmAnd í \'Ferðakort\', sem er sérstök ásýnd með mörgum smáatriðum sem skipta máli fyrir ferðamenn jafnt sem atvinnubílstjóra. 
 \n
 \nKortasýnin birtir, við hvaða aðdrátt korts sem er, hámarksmagn ferðaupplýsinga sem tiltækar eru í kortagögnunum (sérstaklega vegi, slóðir, stíga og allskyns vegvísa). 
@@ -3987,7 +3985,7 @@
     <string name="activity_type_offroad_name">Utanvegaakstur</string>
     <string name="activity_type_motorbike_name">Vélhjól</string>
     <string name="activity_type_car_name">Akandi</string>
-    <string name="routing_attr_height_obstacles_description">Tímaáætlanir munu taka mið af hækkunum. Leiðagerð gæti forðast miklar brekkur upp í mót.</string>
+    <string name="routing_attr_height_obstacles_description">Tímaáætlanir munu taka mið af hækkunum. Leiðagerð gæti forðast miklar brekkur upp í mót:</string>
     <string name="select_category_descr">Veldu flokk eða bættu við nýjum</string>
     <string name="open_place_reviews_plugin_description">Leggðu þitt af mörkum til OpenPlaceReviews vekefnisins. Sendu ljósmyndir, umsagnir og tengla í aðrar veitur um opinbera staði á borð við veitingastaði, hótel, söfn og leiðarpunkta.
 \n
@@ -4863,7 +4861,7 @@
     <string name="mtb_imba_full">Alþjóðlegu fjallahjólreiðasamtökin</string>
     <string name="quick_action_air_pressure_layer">Víxlhnappur til að birta eða fela loftþrýstingslagið á kortinu.</string>
     <string name="measurement_units">Mælieiningar</string>
-    <string name="explore_weather_forecast">Skoðaðu veðurspá</string>
+    <string name="explore_weather_forecast">Skoðaðu veðurspá.</string>
     <string name="shared_string_contours">Útlínur</string>
     <string name="weather_wind_knots">Hnútar</string>
     <string name="weather_pressure_mmhg">mmHg</string>
@@ -4909,4 +4907,80 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="terms_of_service_desc">Með því að sækja landakort samþykkir þú %1$s og %2$s.</string>
     <string name="mtb_scale">Kvarði fjallahjólreiða</string>
+    <string name="wind_widget_desc">Sýnir vindhraða fyrir núverandi miðju landakortsins.</string>
+    <string name="clouds_widget_desc">Sýnir skýjahulu fyrir núverandi miðju landakortsins.</string>
+    <string name="weather_prefs_descr">24-klst og 7-daga veðurspá, uppfært á 3 klst. fresti</string>
+    <string name="map_widget_rendering_fps_desc">Sýnir hve hratt landakort og kortaeiningar séu birtar og endurlesnar, í römmum á sekúndu (FPS).</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Þessir viðmótshlutar birta upplýsingar um næstu sólarupprás og sólsetur.</string>
+    <string name="empty_screen_view_selected_weather_data">Virkjaðu þetta til að skoða valin veðurgögn á kortinu.</string>
+    <string name="map_widget_altitude_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu eða á núverandi miðju landakortsins</string>
+    <string name="switch_mode_by_tapping_on_widget">Skiptu um ham með því að slá á viðmótshlutann.</string>
+    <string name="map_widget_sunset_desc">Sýnir tíma næsta sólarlags eða tímann þar til sólin sest.</string>
+    <string name="map_widget_sunrise_desc">Sýnir tíma næstu sólarupprásar eða tímann þar til sólin rís.</string>
+    <string name="shared_string_time_left">Tími eftir</string>
+    <string name="empty_screen_weather_contours">Virkjaðu þetta til að skoða ýmsar veðurlínur á kortinu.</string>
+    <string name="empty_screen_weather_pressure_layer">Virkjaðu þetta til að skoða loftþrýstingslag á kortinu.</string>
+    <string name="empty_screen_weather_wind_layer">Virkjaðu þetta til að skoða vindalag á kortinu.</string>
+    <string name="weather_widgets_secondary_desc">Mælieiningum er hægt að breyta í stillingum Veðurviðbótarinnar.</string>
+    <string name="air_pressure_widget_desc">Sýnir loftþrýsting fyrir núverandi miðju landakortsins.</string>
+    <string name="precipitation_widget_desc">Sýnir úrkomu fyrir núverandi miðju landakortsins.</string>
+    <string name="temperature_widget_desc">Sýnir hitastig fyrir núverandi miðju landakortsins.</string>
+    <string name="rendering_engine_failed">Myndgerð OsmAnd-korts hefur nýverið hrunið.</string>
+    <string name="speak_gps_signal_status">Tilkynna þegar GPS-merki tapast og endurheimtist</string>
+    <string name="empty_screen_weather_clouds_layer">Virkjaðu þetta til að skoða skýjahululag á kortinu.</string>
+    <string name="empty_screen_weather_precipitation_layer">Virkjaðu þetta til að skoða úrkomulag á kortinu.</string>
+    <string name="empty_screen_weather_temperature_layer">Virkjaðu þetta til að skoða hitastigslag á kortinu.</string>
+    <string name="action_not_supported_with_map_style">Þessi aðgerð er ekki studd af völdum kortastíl.</string>
+    <string name="external_sensors_support">Stuðningur við utanáliggjandi skynjara</string>
+    <string name="storage_migration_fragment_close_descr">Afritun er lokið fyrir %1$s%%. Ef þú hættir núna, er ekki víst að forritið virki rétt.</string>
+    <string name="weather_widget_group_desc">Sett viðmótshluta sem birta ýmsar veðurupplýsingar.</string>
+    <string name="map_widget_altitude_map_center_desc">Sýnir hæð yfir sjávarmáli á núverandi miðju landakortsins.</string>
+    <string name="map_widget_altitude_current_location_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu.</string>
+    <string name="purchases_feature_desc_external_sensors">Birtu og skráðu gögn frá utanaðkomandi skynjurum: hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt.</string>
+    <string name="shared_string_open">Opið</string>
+    <string name="open_weather_action_description">Gerir þér kleift að opna skjá með nákvæmum veðurupplýsingum.</string>
+    <string name="open_weather_action">Opna veður</string>
+    <string name="map_markers_bar_widget_desc">Viðmótshluti toppstikunnar birtir vegalengd og stefnu að næsta kortamerki miðað við fyrirliggjandi staðsetningu þína. Hægt er að stilla viðmótshlutann á að birta eitt eða tvö kortamerki.</string>
+    <string name="external_sensors_plugin_description">Sækir gögn frá utanaðkomandi skynjurum til að lesa t.d. hraða reiðhjóls, afl við hjólreiðar, takt og hjartslátt. Krefst þess að tækið þitt sé tengt við viðkomandi skynjara með samskiptamáta fyrir þráðlaus ANT+ einkanet.</string>
+    <string name="map_rendering_engine_descr">Útgáfa 2 (OpenGL) er hraðvirk myndgerðarvél fyrir landakort, sem byður einnig upp á 2.5D-sýn. Myndgerð í útgáfu 1 var sjálfgefin allt að OsmAnd útgáfu 4.3 og er enn sú besta fyrir eldri tæki.</string>
+    <string name="weather_plugin_description">Gefur kost á
+\n- 24-stunda og 7-daga veðurspá með 5 gagnalögum
+\n- staðarháðum viðmótshlutum
+\n- hitastigs- / loftþrýstingslínum
+\n
+\nVeðurgögnin koma frá Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="distance_by_tap_use_description">Ýttu á kortið til að sjá vegalengdina milli fyrirliggjandi staðsetningar þinnar og punktsins sem þú ýttir á.
+\nÝttu á kortið með 2 fingrum til að sjá vegalengdina milli punktanna sem þú ýttir á</string>
+    <string name="auto_backup_preference_desc">Sjálfgefið vistar Android öryggisafrit af eftirlætum, kortateiknum og stillingum OsmAnd til að endurheimta þær á nýjum tækjum eftir enduruppsetningu. Þetta öryggisafrit takmarkast við 25 MB.
+\nÞegar verið er að nota OsmAnd Cloud-tölvuskýið, getur þetta valdið misskilningi eftir enduruppsetningu.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd hefur snúið aftur í \'Útgáfa 1\' kortamyndgerð. Þú getur reynt að skipta aftur yfir í \'Útgáfa 2 (OpenGL)\' myndgerðarvélina í stillingunum.
+\n
+\nHjálpaðu til við að bæta þetta með því að senda okkur atvikaskrána þína.</string>
+    <string name="release_4_3">• Ný, hraðvirkari Útgáfa 2 (OpenGL) myndgerðarvél fyrir kort, með 2.5D-sýn
+\n
+\n • Mýkt hreyfing við breytingar á staðsetningu
+\n
+\n • Nýir viðmótshlutar fyrir hnit og hæð á miðju korts
+\n
+\n • \"Vegalengd að\": fleiri valkostir texta
+\n
+\n • Viðmótshlutinn \"Kortamerki\": hægt að breyta hegðun við smell
+\n
+\n • Lagfært \"Staðsetning á skjá\" kosturinn
+\n
+\n • GPX: bætt við stuðningi við merkin \"link\", \"cmt\", \"desc\" og í sérsniðnum viðbótum
+\n
+\n • \"Sjókort\"-listanum endurraðað
+\n
+\n • Stuðningur við ANT+ skynjara
+\n
+\n • Hægt að birta UUID niðurhals
+\n
+\n • Sjálfgefinn-hraði spá fyrir for tímaútreikning á hæðarháðum göngu/hlaupaleiðum
+\n
+\n • Lagfæringar á hljóði og hljóðstyrkssleða
+\n
+\n</string>
+    <string name="send_uuid_preference_desc">Tilviljanakennt UUID er notað til að sækja ónettengd kort á netþjóna OsmAnd í þeim tilgangi að fylgjast með sanngjarnri notkun á vinnslu netþjónanna, spá fyrir um myndtur netumferðar og til að útbúa mánaðarleg nafnlaus yfirlit um landakortin.</string>
+    <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
 </resources>

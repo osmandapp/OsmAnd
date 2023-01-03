@@ -15,8 +15,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Metadata;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;

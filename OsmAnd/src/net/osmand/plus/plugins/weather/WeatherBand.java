@@ -107,8 +107,8 @@ public class WeatherBand {
 		GENERAL_UNIT_FORMATS.put(WindUnit.KILOMETERS_PER_HOUR.getSymbol(), "%d");
 		GENERAL_UNIT_FORMATS.put(WindUnit.MILES_PER_HOUR.getSymbol(), "%d");
 		GENERAL_UNIT_FORMATS.put(WindUnit.KNOTS.getSymbol(), "%d");
-		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%d");
-		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.INCHES.getSymbol(), "%d");
+		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.MILIMETERS.getSymbol(), "%.1f");
+		GENERAL_UNIT_FORMATS.put(PrecipitationUnit.INCHES.getSymbol(), "%.1f");
 
 		PRECISE_UNIT_FORMATS.put(CloudUnit.PERCENT.getSymbol(), "%d");
 		PRECISE_UNIT_FORMATS.put(TemperatureUnit.CELSIUS.getSymbol(), "%.1f");

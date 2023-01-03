@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -186,7 +186,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			showKeyboard();
+
+			if (savedInstanceState == null) {
+				showKeyboard();
+			}
 		} else {
 			toolbarAction.setImageDrawable(getPaintedIcon(R.drawable.ic_action_delete_dark, activeColor));
 			deleteButton.setVisibility(View.VISIBLE);

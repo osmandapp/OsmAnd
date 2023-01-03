@@ -44,13 +44,18 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 		OutputStream output = new FileOutputStream(downloadFile);
 		byte[] buffer = new byte[SettingsHelper.BUFFER];
 		int count;
+		boolean success = false;
 		try {
 			while ((count = inputStream.read(buffer)) != -1) {
 				output.write(buffer, 0, count);
 			}
 			output.flush();
+			success = true;
 		} finally {
 			Algorithms.closeStream(output);
+			if (!success && downloadFile.exists()) {
+				downloadFile.delete();
+			}
 		}
 		if (FileUtils.replaceTargetFile(downloadFile, savedFile)) {
 			long lastModifiedTime = item.getLastModifiedTime();

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -43,7 +44,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -469,4 +471,10 @@ public abstract class OsmandPlugin {
 		pluginPreferences.add(preference);
 		return preference;
 	}
+
+	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		return false;
+	}
+
+	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) { }
 }
