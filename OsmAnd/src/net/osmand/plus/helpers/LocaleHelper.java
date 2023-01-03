@@ -39,21 +39,14 @@ public class LocaleHelper {
 		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
 
 		if (!Algorithms.isEmpty(lang)) {
-			lang = backwardCompatibleNonIsoCodes(lang);
 			Locale.Builder builder = new Locale.Builder();
-			boolean isLocaleCorrect = false;
+			lang = backwardCompatibleNonIsoCodes(lang);
 			String langLowerCase = lang.toLowerCase();
-
 			for (String locale : Locale.getISOLanguages()) {
 				if (locale.toLowerCase().equals(langLowerCase)) {
-					isLocaleCorrect = true;
+					builder.setLanguage(lang);
 					break;
 				}
-			}
-			if (isLocaleCorrect) {
-				builder.setLanguage(lang);
-			} else {
-				lang = "";
 			}
 			if (!Algorithms.isEmpty(country)) {
 				builder.setRegion(country);
@@ -88,12 +81,12 @@ public class LocaleHelper {
 	}
 
 	private String backwardCompatibleNonIsoCodes(String lang) {
-		if (lang.equalsIgnoreCase("he")) {
-			lang = "iw";
-		} else if (lang.equalsIgnoreCase("yi")) {
-			lang = "ji";
-		} else if (lang.equalsIgnoreCase("in")) {
-			lang = "id";
+		if (lang.equalsIgnoreCase("iw")) {
+			return "he";
+		} else if (lang.equalsIgnoreCase("ji")) {
+			return "yi";
+		} else if (lang.equalsIgnoreCase("id")) {
+			return "in";
 		}
 		return lang;
 	}
