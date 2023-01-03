@@ -13,7 +13,10 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class LocaleHelper {
 
@@ -40,15 +43,7 @@ public class LocaleHelper {
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
-			boolean isLocaleCorrect = false;
-			String langLowerCase = lang.toLowerCase();
-			for (String locale : Locale.getISOLanguages()) {
-				if (locale.toLowerCase().equals(langLowerCase)) {
-					isLocaleCorrect = true;
-					break;
-				}
-			}
-			if (isLocaleCorrect) {
+			if (isLocaleCorrect(lang)) {
 				builder.setLanguage(lang);
 			} else {
 				lang = "";
@@ -104,6 +99,22 @@ public class LocaleHelper {
 			}
 		}
 		updateTimeFormatting(newLocale != null ? newLocale : Locale.getDefault());
+	}
+
+	private boolean isLocaleCorrect(@NonNull String language) {
+		Set<String> locales = new HashSet<>();
+		Collections.addAll(locales, Locale.getISOLanguages());
+		String[] oldCodes = new String[] {"iw", "ji", "in"};
+		Collections.addAll(locales, oldCodes);
+
+		String langLowerCase = language.toLowerCase();
+		for (String locale : locales) {
+			String localeLowerCase = locale.toLowerCase();
+			if (Algorithms.objectEquals(langLowerCase, localeLowerCase)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Nullable
