@@ -39,9 +39,11 @@ public class LocaleHelper {
 		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
 
 		if (!Algorithms.isEmpty(lang)) {
+			lang = backwardCompatibleNonIsoCodes(lang);
 			Locale.Builder builder = new Locale.Builder();
 			boolean isLocaleCorrect = false;
 			String langLowerCase = lang.toLowerCase();
+
 			for (String locale : Locale.getISOLanguages()) {
 				if (locale.toLowerCase().equals(langLowerCase)) {
 					isLocaleCorrect = true;
@@ -83,6 +85,17 @@ public class LocaleHelper {
 			conf.locale = selectedLocale;
 			localizedResources = app.createConfigurationContext(conf).getResources();
 		}
+	}
+
+	private String backwardCompatibleNonIsoCodes(String lang) {
+		if (lang.equalsIgnoreCase("he")) {
+			lang = "iw";
+		} else if (lang.equalsIgnoreCase("yi")) {
+			lang = "ji";
+		} else if (lang.equalsIgnoreCase("in")) {
+			lang = "id";
+		}
+		return lang;
 	}
 
 	public void setLanguage(@NonNull Context context) {
