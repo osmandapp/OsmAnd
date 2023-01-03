@@ -14,11 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,32 +29,30 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,7 +66,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 	private static final String FAV_SEARCH_QUERY_KEY = "fav_search_query_key";
 
-	private Toolbar toolbar;
 	private EditText searchEditText;
 	private ProgressBar progressBar;
 	private ImageButton clearButton;
@@ -83,7 +79,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		accessibilityAssistant = new AccessibilityAssistant(getActivity());
+		accessibilityAssistant = new AccessibilityAssistant(requireActivity());
 		boolean isLightTheme = app.getSettings().isLightContent();
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -91,9 +87,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 
 	@Override
 	@SuppressLint("PrivateResource, ValidFragment")
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		Activity activity = getActivity();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Activity activity = requireActivity();
 		View view = inflater.inflate(R.layout.search_favs_fragment, container, false);
 
 		Bundle arguments = getArguments();
@@ -107,18 +102,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 			searchQuery = "";
 		}
 
-		toolbar = view.findViewById(R.id.toolbar);
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		Drawable icBack = app.getUIUtilities().getThemedIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dismiss();
-					}
-				}
-		);
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
 		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_favorites);
@@ -146,14 +134,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 		progressBar = view.findViewById(R.id.searchProgressBar);
 		clearButton = view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
-		clearButton.setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (searchEditText.getText().length() > 0) {
-							searchEditText.setText("");
-							searchEditText.setSelection(0);
-						}
+		clearButton.setOnClickListener(v -> {
+					if (searchEditText.getText().length() > 0) {
+						searchEditText.setText("");
+						searchEditText.setSelection(0);
 					}
 				}
 		);
@@ -164,10 +148,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		if (listView != null) {
-			listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			listView.setOnScrollListener(new OnScrollListener() {
 				public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 				}
 
@@ -177,14 +161,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 					}
 				}
 			});
-			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					FavouritePoint point = listAdapter.getItem(position);
-					if (point != null) {
-						showOnMap(point);
-						dismiss();
-					}
+			listView.setOnItemClickListener((parent, view1, position, id) -> {
+				FavouritePoint point = listAdapter.getItem(position);
+				if (point != null) {
+					showOnMap(point);
+					dismiss();
 				}
 			});
 			listAdapter = new FavoritesSearchListAdapter(getMyApplication(), getActivity());
@@ -198,17 +179,12 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getActivity(), getTheme()){
+		return new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				cancel();
 			}
 		};
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
 	}
 
 	@Override
@@ -218,7 +194,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		Activity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = getChildFragmentManager();
@@ -238,22 +214,22 @@ public class FavoritesSearchFragment extends DialogFragment {
 				settings.getLastKnownMapZoom(),
 				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
 				true,
-				point); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+				point);
+		MapActivity.launchMapActivityMoveToTop(requireActivity());
 	}
 
 	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
+		return (OsmandApplication) requireActivity().getApplication();
 	}
 
 	private void openKeyboard() {
 		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(getActivity(), searchEditText);
+		AndroidUtils.softKeyboardDelayed(requireActivity(), searchEditText);
 	}
 
 	public void hideKeyboard() {
 		if (searchEditText.hasFocus()) {
-			AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
+			AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
 		}
 	}
 
@@ -348,18 +324,15 @@ public class FavoritesSearchFragment extends DialogFragment {
 					points.addAll(list);
 				}
 			}
-			Collections.sort(points, new Comparator<FavouritePoint>() {
-				@Override
-				public int compare(FavouritePoint p1, FavouritePoint p2) {
-					if (p1.isVisible() && p2.isVisible() || !p1.isVisible() && !p2.isVisible()) {
-						int d1 = (int) (MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(),
-								location.getLatitude(), location.getLongitude()));
-						int d2 = (int) (MapUtils.getDistance(p2.getLatitude(), p2.getLongitude(),
-								location.getLatitude(), location.getLongitude()));
-						return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
-					} else {
-						return (p1.isVisible() == p2.isVisible()) ? 0 : (p1.isVisible() ? -1 : 1);
-					}
+			Collections.sort(points, (p1, p2) -> {
+				if (p1.isVisible() && p2.isVisible() || !p1.isVisible() && !p2.isVisible()) {
+					int d1 = (int) (MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(),
+							location.getLatitude(), location.getLongitude()));
+					int d2 = (int) (MapUtils.getDistance(p2.getLatitude(), p2.getLongitude(),
+							location.getLatitude(), location.getLongitude()));
+					return Integer.compare(d1, d2);
+				} else {
+					return (p1.isVisible() == p2.isVisible()) ? 0 : (p1.isVisible() ? -1 : 1);
 				}
 			});
 			notifyDataSetChanged();
@@ -532,20 +505,20 @@ public class FavoritesSearchFragment extends DialogFragment {
 				results.count = 1;
 			} else {
 				Set<Object> filter = new HashSet<>();
-				String cs = constraint.toString().toLowerCase();
-				for (FavoriteGroup g : helper.getFavoriteGroups()) {
-					String gName;
-					if (Algorithms.isEmpty(g.getName())) {
-						gName = favorites;
+				String cs = constraint.toString().toLowerCase().trim();
+				for (FavoriteGroup group : helper.getFavoriteGroups()) {
+					String groupName;
+					if (Algorithms.isEmpty(group.getName())) {
+						groupName = favorites;
 					} else {
-						gName = g.getName().toLowerCase();
+						groupName = group.getName().toLowerCase();
 					}
-					if (gName.contains(cs)) {
-						filter.add(g);
+					if (groupName.contains(cs)) {
+						filter.add(group);
 					} else {
-						for (FavouritePoint fp : g.getPoints()) {
-							if (fp.getName().toLowerCase().contains(cs)) {
-								filter.add(fp);
+						for (FavouritePoint point : group.getPoints()) {
+							if (point.getName().toLowerCase().contains(cs)) {
+								filter.add(point);
 							}
 						}
 					}
