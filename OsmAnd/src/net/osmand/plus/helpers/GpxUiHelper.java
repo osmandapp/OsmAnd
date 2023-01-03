@@ -1161,7 +1161,7 @@ public class GpxUiHelper {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -1178,7 +1178,8 @@ public class GpxUiHelper {
 				mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
-				mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+				mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters ||
+				mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 
 			divX = mainUnitInMeters;
 			if (fmt == null) {
@@ -1191,7 +1192,7 @@ public class GpxUiHelper {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				divX = 1f;
 				mainUnitStr = R.string.m;
-			} else if (mc == MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				divX = 1f / FEET_IN_ONE_METER;
 				mainUnitStr = R.string.foot;
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
@@ -1400,7 +1401,7 @@ public class GpxUiHelper {
 															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		boolean light = settings.isLightContent();
 		float convEle = useFeet ? 3.28084f : 1.0f;
 
@@ -1640,7 +1641,7 @@ public class GpxUiHelper {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
