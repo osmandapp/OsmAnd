@@ -21,7 +21,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,7 +66,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -143,14 +141,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
-	private SearchFragmentPagerAdapter pagerAdapter;
-	private TabLayout tabLayout;
 	private View tabToolbarView;
 	private View tabsView;
 	private View searchView;
 	private View buttonToolbarView;
 	private View sendEmptySearchView;
-	private ImageView buttonToolbarImage;
 	private ImageButton buttonToolbarFilter;
 	private TextView buttonToolbarText;
 	private TextView sendEmptySearchText;
@@ -248,7 +243,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = getMapActivity();
 		UiUtilities iconsCache = app.getUIUtilities();
 		View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
@@ -303,7 +298,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchView = view.findViewById(R.id.search_view);
 
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
-		buttonToolbarImage = view.findViewById(R.id.buttonToolbarImage);
+		ImageView buttonToolbarImage = view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
 		buttonToolbarFilter = view.findViewById(R.id.filterButton);
 		buttonToolbarFilter.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_filter));
@@ -500,7 +495,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		viewPager = view.findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(2);
-		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
+		SearchFragmentPagerAdapter pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
 		switch (showSearchTab) {
 			case HISTORY:
@@ -514,13 +509,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				break;
 		}
 
-		tabLayout = view.findViewById(R.id.tab_layout);
+		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
 		viewPager.addOnPageChangeListener(
 				new ViewPager.OnPageChangeListener() {
 					@Override
 					public void onPageScrolled(int position, float positionOffset,
-											   int positionOffsetPixels) {
+					                           int positionOffsetPixels) {
 					}
 
 					@Override
@@ -682,7 +677,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getActivity(), getTheme()) {
+		Dialog dialog = new Dialog(requireActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				onBackButtonPressed();
@@ -710,7 +705,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void saveCustomFilter() {
 		OsmandApplication app = getMyApplication();
 		PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
-		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 		builder.setTitle(R.string.access_hint_enter_name);
 
 		EditText editText = new EditText(getContext());
@@ -722,7 +717,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LinearLayout ll = new LinearLayout(getContext());
 		ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setPadding(AndroidUtils.dpToPx(getContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f), AndroidUtils.dpToPx(getContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f));
+		ll.setPadding(AndroidUtils.dpToPx(requireContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f), AndroidUtils.dpToPx(getContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f));
 		ll.addView(editText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		textView.setPadding(AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 6f), AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 4f));
 		ll.addView(textView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -1025,7 +1020,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			hideToolbar();
@@ -1532,7 +1527,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				historySearchFragment.updateListAdapter(rows, false, historyEnabled);
 			} catch (Exception e) {
-				e.printStackTrace();
+				LOG.error(e);
 				app.showToastMessage(e.getMessage());
 			}
 		}

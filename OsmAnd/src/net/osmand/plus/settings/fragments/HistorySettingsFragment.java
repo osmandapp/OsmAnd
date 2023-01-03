@@ -233,7 +233,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		updateSetting(prefId);
 	}
 }
