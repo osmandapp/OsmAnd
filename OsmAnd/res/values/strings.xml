@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="si_nm_mt">Nautical miles/meters</string>
+    <string name="si_nm_ft">Nautical miles/feet</string>
     <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release

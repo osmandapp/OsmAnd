@@ -1017,7 +1017,7 @@ public class OsmandSettings {
 			if (mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			}
-			if (mc == MetricsConstants.NAUTICAL_MILES) {
+			if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			} else if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				return SpeedConstants.KILOMETERS_PER_HOUR;
