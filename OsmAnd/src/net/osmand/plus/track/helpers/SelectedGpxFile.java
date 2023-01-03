@@ -3,9 +3,9 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;

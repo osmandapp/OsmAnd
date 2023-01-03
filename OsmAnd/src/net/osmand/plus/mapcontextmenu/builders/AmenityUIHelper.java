@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.GPXUtilities.ADDRESS_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 
@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
@@ -369,7 +369,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					float distance = Float.parseFloat(vl);
 					vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
 					String collapsibleVal;
-					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS || metricSystem ==  MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.KILOMETERS_AND_METERS);
 					} else {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.MILES_AND_FEET);
@@ -622,7 +622,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			case "seamark_height":
 				if (Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
-					if (metricSystem == MetricsConstants.MILES_AND_FEET) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
 								+ " " + mapActivity.getResources().getString(R.string.foot);
 					} else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {

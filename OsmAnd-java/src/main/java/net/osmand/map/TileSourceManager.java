@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -425,7 +426,7 @@ public class TileSourceManager {
 			double xmax = MapUtils.getLongitudeFromTile(zoom, x+1);
 			double ymin = MapUtils.getLatitudeFromTile(zoom, y+1);
 			double ymax = MapUtils.getLatitudeFromTile(zoom, y);
-			return String.format("%.8f,%.8f,%.8f,%.8f", xmin, ymin, xmax, ymax);
+			return String.format(Locale.US, "%.8f,%.8f,%.8f,%.8f", xmin, ymin, xmax, ymax);
 		}
 
 		public static String buildUrlToLoad(String urlTemplate, String[] randomsArray, int x, int y, int zoom, Map<String, String> params) {

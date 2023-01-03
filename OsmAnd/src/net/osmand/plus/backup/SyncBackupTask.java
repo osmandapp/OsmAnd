@@ -41,9 +41,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private final OnBackupSyncListener syncListener;
 	private final boolean singleOperation;
 
-	private long maxProgress;
-	private long lastProgress;
-	private long currentProgress;
+	private int maxProgress;
+	private int lastProgress;
+	private int currentProgress;
 
 	public SyncBackupTask(@NonNull OsmandApplication app, @NonNull String key,
 	                      @NonNull SyncOperationType operation,
@@ -59,11 +59,11 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		backupHelper.addPrepareBackupListener(this);
 	}
 
-	public long getMaxProgress() {
+	public int getMaxProgress() {
 		return maxProgress;
 	}
 
-	public long getGeneralProgress() {
+	public int getGeneralProgress() {
 		return lastProgress;
 	}
 
@@ -104,17 +104,17 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 	}
 
-	public void uploadLocalItem(@NonNull SettingsItem item, @NonNull String fileName) {
-		networkSettingsHelper.exportSettings(fileName, Collections.singletonList(item), Collections.emptyList(), this);
+	public void uploadLocalItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), Collections.emptyList(), this);
 	}
 
-	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull String fileName) {
+	public void downloadRemoteVersion(@NonNull SettingsItem item) {
 		item.setShouldReplace(true);
-		networkSettingsHelper.importSettings(fileName, Collections.singletonList(item), true, this);
+		networkSettingsHelper.importSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), true, this);
 	}
 
-	public void deleteItem(@NonNull SettingsItem item, @NonNull String fileName) {
-		networkSettingsHelper.exportSettings(fileName, Collections.emptyList(), Collections.singletonList(item), this);
+	public void deleteItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
 	private void uploadNewItems() {
@@ -205,11 +205,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	@Override
 	public void onImportProgressUpdate(int value, int uploadedKb) {
 		currentProgress = uploadedKb;
-		float progress = (float) currentProgress / maxProgress;
-		progress = progress > 1 ? 1 : progress;
-
 		if (syncListener != null) {
-			syncListener.onBackupProgressUpdate(progress);
+			syncListener.onBackupProgressUpdate(currentProgress);
 		}
 	}
 
@@ -227,10 +224,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		ExportBackupTask exportTask = networkSettingsHelper.getExportTask(BACKUP_ITEMS_KEY);
 		if (exportTask != null) {
 			currentProgress += exportTask.getGeneralProgress() - lastProgress;
-			float progress = (float) currentProgress / maxProgress;
-			progress = progress > 1 ? 1 : progress;
 			if (syncListener != null) {
-				syncListener.onBackupProgressUpdate(progress);
+				syncListener.onBackupProgressUpdate(currentProgress);
 			}
 			lastProgress = exportTask.getGeneralProgress();
 		}
@@ -273,7 +268,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 		}
 
-		default void onBackupProgressUpdate(float progress) {
+		default void onBackupProgressUpdate(int progress) {
 
 		}
 

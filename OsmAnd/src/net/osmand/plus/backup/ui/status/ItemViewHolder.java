@@ -15,16 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.ExportBackupTask;
-import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
-import net.osmand.plus.backup.ImportBackupTask;
-import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.ui.ChangeItemActionsBottomSheet;
 import net.osmand.plus.backup.ui.ChangesTabFragment;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -64,6 +58,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} : null;
 		itemView.setOnClickListener(listener);
+		itemView.setEnabled(app.getNetworkSettingsHelper().getSyncTask(item.fileName) == null);
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
 	}
 

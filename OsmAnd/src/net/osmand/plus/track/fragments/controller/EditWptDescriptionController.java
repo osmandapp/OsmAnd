@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
@@ -37,8 +37,9 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 				savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText,
 						wpt.name, wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
 			} else {
-				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText, wpt.name,
-						wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
+				WptPt wptRes = wpt;
+				wptRes.desc = editedText;
+				gpx.updateWptPt(wpt, wptRes);
 				saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());

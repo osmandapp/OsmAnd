@@ -229,6 +229,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
+
 	public void syncSettingsItems(@NonNull String key,
 	                              @NonNull LocalFile localFile,
 	                              @NonNull RemoteFile remoteFile,
@@ -237,18 +238,16 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
 			syncBackupTasks.put(key, syncTask);
-
-			String fileName = BackupHelper.getItemFileName(localFile.item != null ? localFile.item : remoteFile.item);
-
+			SettingsItem settingsItem = localFile == null || localFile.item == null ? remoteFile.item : localFile.item;
 			switch (operation) {
 				case SYNC_OPERATION_DELETE:
-					syncTask.deleteItem(remoteFile.item, fileName);
+					syncTask.deleteItem(remoteFile.item);
 					break;
 				case SYNC_OPERATION_UPLOAD:
-					syncTask.uploadLocalItem(localFile.item, fileName);
+					syncTask.uploadLocalItem(localFile.item);
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
-					syncTask.downloadRemoteVersion(remoteFile.item, fileName);
+					syncTask.downloadRemoteVersion(remoteFile.item);
 					break;
 			}
 		} else {

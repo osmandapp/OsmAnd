@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -87,7 +87,6 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
@@ -116,6 +115,8 @@ public class AppInitializer implements IProgress {
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS";
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
+	private static final int MAX_OPENGL_FAILURES = 3;
+	private static final int MAX_OPENGL_DISABLE = 6;
 
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
@@ -644,18 +645,25 @@ public class AppInitializer implements IProgress {
 		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
 			settings.USE_OPENGL_RENDER.set(false);
 		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
-			try {
-				NativeCoreContext.init(app);
-				settings.OPENGL_RENDER_FAILED.set(false);
-			} catch (Throwable throwable) {
-				settings.OPENGL_RENDER_FAILED.set(true);
-				LOG.error("NativeCoreContext", throwable);
-				app.getFeedbackHelper().saveExceptionSilent(Thread.currentThread(), throwable);
-			}
-			if (settings.OPENGL_RENDER_FAILED.get()) {
-				settings.USE_OPENGL_RENDER.set(false);
+			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
+			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
+				settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
+				// show warnings before disable
 				warnings.add("Native OpenGL library is not supported. Please try again after exit");
+				if (failedCounter > MAX_OPENGL_DISABLE) {
+					settings.USE_OPENGL_RENDER.set(false);
+				}
+			} else {
+				try {
+					settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
+					NativeCoreContext.init(app);
+					settings.OPENGL_RENDER_FAILED.set(0);
+				} catch (Throwable throwable) {
+					LOG.error("NativeCoreContext", throwable);
+					app.getFeedbackHelper().saveExceptionSilent(Thread.currentThread(), throwable);
+				}
 			}
+
 		}
 		notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 	}

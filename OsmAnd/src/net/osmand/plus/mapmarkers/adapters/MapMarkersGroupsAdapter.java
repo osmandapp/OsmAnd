@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;

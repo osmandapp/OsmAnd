@@ -5,9 +5,9 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;

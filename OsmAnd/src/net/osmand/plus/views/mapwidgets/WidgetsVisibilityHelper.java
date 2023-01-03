@@ -138,7 +138,6 @@ public class WidgetsVisibilityHelper {
 				|| isInFollowTrackMode()
 				|| isInRouteLineAppearanceMode()
 				|| isInGpsFilteringMode()
-				|| isInWeatherForecastMode()
 				|| isSelectingTilesZone();
 	}
 

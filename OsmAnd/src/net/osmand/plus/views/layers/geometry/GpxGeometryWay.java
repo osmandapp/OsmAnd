@@ -3,7 +3,7 @@ package net.osmand.plus.views.layers.geometry;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;

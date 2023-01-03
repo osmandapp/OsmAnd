@@ -1,6 +1,6 @@
 package net.osmand.data;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
@@ -9,8 +9,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;

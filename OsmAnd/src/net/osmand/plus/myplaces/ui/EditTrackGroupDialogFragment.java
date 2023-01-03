@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

@@ -111,7 +111,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 			}
 		}
 		Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(PrepareBackupResult.RemoteFilesType.UNIQUE);
-		if (remoteFilesMap != null) {
+		if (!Algorithms.isEmpty(remoteFilesMap)) {
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : itemsToDelete) {
 					if (item.equals(remoteFile.item)) {

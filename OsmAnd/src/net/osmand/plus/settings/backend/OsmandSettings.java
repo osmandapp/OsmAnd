@@ -1017,7 +1017,7 @@ public class OsmandSettings {
 			if (mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			}
-			if (mc == MetricsConstants.NAUTICAL_MILES) {
+			if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			} else if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				return SpeedConstants.KILOMETERS_PER_HOUR;
@@ -2819,7 +2819,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= 28).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> OPENGL_RENDER_FAILED = new BooleanPreference(this, "opengl_render_failed", false).makeGlobal().cache();
+	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 

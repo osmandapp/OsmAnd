@@ -206,8 +206,11 @@ public class OsmAndFormatter {
 		} else if (mc == MetricsConstants.MILES_AND_METERS) {
 			mainUnitInMeter = 1;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS) {
 			mainUnitInMeter = 1;
+			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+			mainUnitInMeter = FEET_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			mainUnitInMeter = YARDS_IN_ONE_METER;
@@ -327,7 +330,7 @@ public class OsmAndFormatter {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -350,12 +353,14 @@ public class OsmAndFormatter {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
-		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
-			} else if (mc == MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				int feet = (int) (meters * FEET_IN_ONE_METER + 0.5);
 				return formatValue(feet, R.string.foot, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
@@ -382,7 +387,7 @@ public class OsmAndFormatter {
 	public static FormattedValue getFormattedAltitudeValue(double altitude,
 	                                                       @NonNull OsmandApplication ctx,
 	                                                       @NonNull MetricsConstants mc) {
-		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS;
+		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
 		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);

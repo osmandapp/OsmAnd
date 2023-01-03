@@ -935,7 +935,7 @@
     <string name="poi_crossing_traffic_signals">So svetelnou signalizáciou</string>
     <string name="poi_crossing_uncontrolled">Neriadený</string>
     <string name="poi_crossing_unmarked">Nevyznačený</string>
-    <string name="poi_access_private">Prístup len pre vlastníka</string>
+    <string name="poi_access_private">Prístup len so súhlasom vlastníka</string>
     <string name="poi_access_no">Žiadny prístup</string>
     <string name="poi_access_destination">Prístup len k cieľu</string>
     <string name="poi_access_permissive">Prístup povolený</string>
@@ -3380,7 +3380,7 @@
     <string name="poi_motorcar_customers">Prístup áut: zákazníci</string>
     <string name="poi_motorcar_forestry">Prístup áut: lesnícke</string>
     <string name="poi_motor_vehicle_yes">Prístup motorových vozidiel: áno</string>
-    <string name="poi_motor_vehicle_private">Prístup motorových vozidiel: súkromné</string>
+    <string name="poi_motor_vehicle_private">Prístup motorových vozidiel: súkromný</string>
     <string name="poi_motor_vehicle_no">Prístup motorových vozidiel: nie</string>
     <string name="poi_motor_vehicle_destination">Prístup motorových vozidiel: návštevníci cieľa</string>
     <string name="poi_motor_vehicle_permissive">Prístup motorových vozidiel: dovolený</string>
@@ -3389,13 +3389,13 @@
     <string name="poi_motor_vehicle_delivery">Prístup motorových vozidiel: zásobovanie</string>
     <string name="poi_motor_vehicle_forestry">Prístup motorových vozidiel: lesnícke</string>
     <string name="poi_motor_vehicle_agricultural">Prístup motorových vozidiel: poľnohospodárske</string>
-    <string name="poi_hgv_private">Prístup nákladných vozidiel: súkromné</string>
+    <string name="poi_hgv_private">Prístup nákladných vozidiel: súkromný</string>
     <string name="poi_hgv_no">Prístup nákladných vozidiel: nie</string>
     <string name="poi_hgv_agricultural">Prístup nákladných vozidiel: poľnohospodárske</string>
     <string name="poi_hgv_discouraged">Prístup nákladných vozidiel: neodporúčaný</string>
     <string name="poi_hgv_unsuitable">Prístup nákladných vozidiel: nevhodný</string>
     <string name="poi_goods_no">Prístup ľahkých nákladných vozidiel: nie</string>
-    <string name="poi_motorcycle_private">Prístup motocyklov: súkromné</string>
+    <string name="poi_motorcycle_private">Prístup motocyklov: súkromný</string>
     <string name="poi_motorcycle_no">Prístup motocyklov: nie</string>
     <string name="poi_moped_no">Prístup mopedov: nie</string>
     <string name="poi_mofa_no">Prístup malých mopedov: nie</string>

@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -27,11 +27,11 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -87,12 +87,12 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private static Matrix lastStateMatrix;
 	private static String lastRoute;
-	private static boolean lastLinkedToLocation;
+	private static boolean lastChartLinkedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
 			movedToLocation = true;
-			lastLinkedToLocation = true;
+			lastChartLinkedToLocation = true;
 		}
 	};
 
@@ -110,17 +110,17 @@ public class ElevationProfileWidget extends MapWidget {
 			} else {
 				lastStateMatrix = null;
 			}
-			if (lastLinkedToLocation) {
+			if (lastChartLinkedToLocation) {
 				movedToLocation = true;
 			}
 		}
 	}
 
-	private void storeLastState() {
+	private void storeLastState(boolean chartLinkedToLocation) {
 		if (chart != null) {
 			lastStateMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 		}
-		lastLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		lastChartLinkedToLocation = chartLinkedToLocation;
 	}
 
 	@Override
@@ -272,7 +272,7 @@ public class ElevationProfileWidget extends MapWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-				storeLastState();
+				storeLastState(false);
 				app.runInUIThread(() -> updateWidgets());
 			}
 
@@ -375,6 +375,7 @@ public class ElevationProfileWidget extends MapWidget {
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
 			refreshHighlights(newLocationHighlight);
+			storeLastState(true);
 		}
 		return true;
 	}

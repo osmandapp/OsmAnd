@@ -220,7 +220,7 @@ public class BackupExporter extends Exporter {
 			}
 
 			@Override
-			public void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error) {
+			public void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, @Nullable String error) {
 				String type = item.getType().name();
 				if (!Algorithms.isEmpty(error)) {
 					errors.put(type + "/" + fileName, error);

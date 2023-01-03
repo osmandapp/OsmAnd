@@ -26,7 +26,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;

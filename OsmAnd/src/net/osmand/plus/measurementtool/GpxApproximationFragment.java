@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;

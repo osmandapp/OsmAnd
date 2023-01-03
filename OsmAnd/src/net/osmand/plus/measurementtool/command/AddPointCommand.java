@@ -3,7 +3,7 @@ package net.osmand.plus.measurementtool.command;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;

@@ -219,6 +219,7 @@ public class BackupHelper {
 		Map<RemoteFile, SettingsItem> itemsForRestore = new HashMap<>();
 		if (info != null) {
 			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
+				// FIXME: 1) restoreItem could be null 2) double loop to check names 1000 x 1000 cycles
 				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
 				if (restoreItem != null && !restoreItem.exists()) {
 					itemsForRestore.put(remoteFile, restoreItem);
@@ -515,9 +516,8 @@ public class BackupHelper {
 	}
 
 	@Nullable
-	String uploadFile(@NonNull String fileName, @NonNull String type,
-	                  @NonNull StreamWriter streamWriter, long uploadTime,
-	                  @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
+	String uploadFile(@NonNull String fileName, @NonNull String type, long lastModifiedTime,
+	                  @NonNull StreamWriter streamWriter, @Nullable OnUploadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -525,7 +525,7 @@ public class BackupHelper {
 		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
 		params.put("type", type);
-		params.put("clienttime", String.valueOf(uploadTime));
+		params.put("clienttime", String.valueOf(lastModifiedTime));
 
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
@@ -567,8 +567,20 @@ public class BackupHelper {
 						return super.isInterrupted();
 					}
 				});
+		String status = "";
+		long uploadTime = 0;
+		String response = networkResult.getResponse();
+		if (!Algorithms.isEmpty(response)) {
+			try {
+				JSONObject responseObj = new JSONObject(response);
+				status = responseObj.optString("status", "");
+				uploadTime = Long.parseLong(responseObj.optString("updatetime", "0"));
+			} catch (JSONException | NumberFormatException e) {
+				LOG.error("Cannot obtain updatetime after upload. Server response: " + response);
+			}
+		}
 		String error = networkResult.getError();
-		if (error == null) {
+		if (error == null && status.equals("ok")) {
 			updateFileUploadTime(type, fileName, uploadTime);
 		}
 		if (listener != null) {
@@ -655,7 +667,7 @@ public class BackupHelper {
 
 	public long calculateFileSize(@NonNull RemoteFile remoteFile) {
 		long size = remoteFile.getFilesize() / 1024;
-		if (remoteFile.item.getType() == SettingsItemType.FILE) {
+		if (remoteFile.item != null && remoteFile.item.getType() == SettingsItemType.FILE) {
 			FileSettingsItem fileItem = (FileSettingsItem) remoteFile.item;
 			String fileName = fileItem.getFileName();
 			if (fileItem.getSubtype() == FileSubtype.OBF_MAP && fileName != null) {
@@ -922,41 +934,25 @@ public class BackupHelper {
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
 					if (localFile != null) {
-						long remoteUploadTime = remoteFile.getClienttimems();
-						long localUploadTime = localFile.uploadTime;
-						long localModifiedTime = localFile.localModifiedTime;
-
-						if (remoteFile.isDeleted()) {
-							// Remote file deleted
-							info.localFilesToDelete.add(localFile);
-						} else if (localModifiedTime > localUploadTime) {
-							// Local file modified since last upload
-							if (remoteUploadTime > localUploadTime) {
-								// Remote file modified also. Have conflict. Needs to be resolved.
-								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
-							} else {
-								// Remote file is non modified. Suggest to upload local file to the cloud.
-								info.filesToUpload.add(localFile);
-							}
-							// Allow possibility to restore cloud version if needed.
-							info.filesToDownload.add(remoteFile);
-						} else if (remoteUploadTime > localUploadTime) {
-							// Remote file modified. Suggest to download from the cloud.
+						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
+						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
+						if (fileChangedRemotely && fileChangedLocally) {
+							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+						} else if (fileChangedLocally) {
+							info.filesToUpload.add(localFile);
+						} else if (fileChangedRemotely) {
 							info.filesToDownload.add(remoteFile);
 						}
-						long localFileSize = localFile.file == null ? 0 : localFile.file.length();
-						long remoteFileSize = remoteFile.getFilesize();
-						if (remoteFileSize > 0 && localFileSize > 0 && localFileSize != remoteFileSize && !info.filesToDownload.contains(remoteFile)) {
-							info.filesToDownload.add(remoteFile);
-						}
-					}
-					if (localFile == null && !remoteFile.isDeleted()) {
+					} else if (!remoteFile.isDeleted()) {
 						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						// suggest to remove only if file exists in db
-						if (fileInfo != null) {
+						if (fileInfo != null && fileInfo.getUploadTime() >= remoteFile.getUpdatetimems()) {
+							// conflicts not supported yet
+							// info.filesToMerge.add(new Pair<>(null, remoteFile));
 							info.filesToDelete.add(remoteFile);
+						} else {
+							info.filesToDownload.add(remoteFile);
 						}
-						info.filesToDownload.add(remoteFile);
 					}
 				}
 				for (LocalFile localFile : localFiles.values()) {

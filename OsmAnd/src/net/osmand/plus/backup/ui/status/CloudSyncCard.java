@@ -81,7 +81,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 		PrepareBackupResult backup = backupHelper.getBackup();
 
-		setupHeader(backup);
+		setupHeader();
 		setupLocalChangesButton(backup);
 		setupCloudChangesButton(backup);
 		setupConflictsButton(backup);
@@ -90,7 +90,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		updateButtonsVisibility();
 	}
 
-	private void setupHeader(@NonNull PrepareBackupResult backup) {
+	private void setupHeader() {
 		TextView title = header.findViewById(R.id.title);
 		ImageView icon = header.findViewById(R.id.icon);
 		TextView description = header.findViewById(R.id.description);
@@ -98,10 +98,10 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 		SyncBackupTask exportTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
 		if (exportTask != null) {
-			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update));
+			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update_colored));
 
-			int progress = (int) exportTask.getGeneralProgress();
-			int maxProgress = (int) exportTask.getMaxProgress();
+			int progress = exportTask.getGeneralProgress();
+			int maxProgress = exportTask.getMaxProgress();
 			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 
 			title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));
@@ -109,9 +109,10 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 			progressBar.setMax(maxProgress);
 			progressBar.setProgress(progress);
 		} else {
+			PrepareBackupResult backup = backupHelper.getBackup();
 			BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 			title.setText(status.statusTitleRes);
-			icon.setImageDrawable(getContentIcon(status.statusIconRes));
+			icon.setImageDrawable(getIcon(status.statusIconRes));
 		}
 		header.setOnClickListener(v -> {
 			fragment.toggleActionsVisibility();
@@ -250,10 +251,8 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 	}
 
 	@Override
-	public void onBackupProgressUpdate(float progress) {
-		if (progressBar != null) {
-			progressBar.setProgress((int) (progress * 100));
-		}
+	public void onBackupProgressUpdate(int progress) {
+		app.runInUIThread(this::setupHeader);
 	}
 
 	@Override

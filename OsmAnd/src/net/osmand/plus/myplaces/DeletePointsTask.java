@@ -2,8 +2,8 @@ package net.osmand.plus.myplaces;
 
 import android.os.AsyncTask;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;

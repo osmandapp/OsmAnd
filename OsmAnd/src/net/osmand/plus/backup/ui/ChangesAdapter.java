@@ -5,13 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
@@ -19,7 +16,6 @@ import net.osmand.plus.backup.ui.status.EmptyStateViewHolder;
 import net.osmand.plus.backup.ui.status.HeaderViewHolder;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.backup.ui.status.StatusViewHolder;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -128,4 +124,13 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 		return items.size();
 	}
 
+	@Override
+	public void onBackupSyncStarted() {
+		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+	}
+
+	@Override
+	public void onBackupProgressUpdate(int progress) {
+		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+	}
 }

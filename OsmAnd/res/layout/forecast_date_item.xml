@@ -10,7 +10,7 @@
 		android:id="@+id/outlineRect"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:srcCompat="@drawable/bg_select_group_button_outline" />
+		app:srcCompat="@drawable/bg_select_group_button_outline_small" />
 
 	<LinearLayout
 		android:layout_width="wrap_content"

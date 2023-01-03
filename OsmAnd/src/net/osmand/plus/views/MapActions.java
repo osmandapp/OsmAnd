@@ -3,8 +3,8 @@ package net.osmand.plus.views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

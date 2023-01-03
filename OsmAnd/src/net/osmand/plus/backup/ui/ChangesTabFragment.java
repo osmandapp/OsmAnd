@@ -21,7 +21,10 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
+import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -36,7 +39,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public abstract class ChangesTabFragment extends BaseOsmAndFragment {
+public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
+		OnBackupSyncListener {
 
 	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
@@ -86,9 +90,43 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 		updateAdapter();
 	}
 
+	@Override
+	public void onBackupPreparing() {
+		app.runInUIThread(this::updateAdapter);
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		app.runInUIThread(this::updateAdapter);
+	}
+
+	@Override
+	public void onBackupSyncStarted() {
+		app.runInUIThread(() -> adapter.onBackupSyncStarted());
+	}
+
+	@Override
+	public void onBackupProgressUpdate(int progress) {
+		app.runInUIThread(() -> adapter.onBackupProgressUpdate(progress));
+	}
+
+	@Override
+	public void onBackupSyncFinished(@Nullable String error) {
+		app.runInUIThread(() -> {
+			updateAdapter();
+			prepareBackup();
+		});
+	}
+
 	private void updateAdapter() {
 		if (adapter != null) {
 			adapter.setCloudChangeItems(generateData());
+		}
+	}
+
+	private void prepareBackup() {
+		if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
+			backupHelper.prepareBackup();
 		}
 	}
 
@@ -115,7 +153,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 		}
 	}
 
-
 	static class FileInfo {
 		public LocalFile localFile;
 		public RemoteFile remoteFile;
@@ -134,11 +171,14 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 		public SyncOperationType operation;
 	}
 
-	protected CloudChangeItem rowFromKey(String key,
-	                                     SyncOperationType operation,
-	                                     LocalFile localFile,
-	                                     RemoteFile remoteFile) {
+	protected CloudChangeItem createChangeItem(String key,
+	                                           SyncOperationType operation,
+	                                           LocalFile localFile,
+	                                           RemoteFile remoteFile) {
 		SettingsItem settingsItem = getSettingsItem(localFile, remoteFile);
+		if (settingsItem == null) {
+			return null;
+		}
 		long time = getTime(operation, localFile, remoteFile);
 		String summary = localizedSummaryForOperation(operation, localFile, remoteFile);
 
@@ -194,15 +234,9 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment {
 	private SettingsItem getSettingsItem(LocalFile localFile, RemoteFile remoteFile) {
 		SettingsItem settingsItem;
 		if (tabType == RECENT_CHANGES_LOCAL) {
-			settingsItem = localFile.item;
-			if (settingsItem == null) {
-				settingsItem = remoteFile.item;
-			}
+			settingsItem = localFile == null ? remoteFile.item : localFile.item;
 		} else {
-			settingsItem = remoteFile.item;
-			if (settingsItem == null) {
-				settingsItem = localFile.item;
-			}
+			settingsItem = remoteFile == null ? localFile.item : remoteFile.item;
 		}
 		return settingsItem;
 	}

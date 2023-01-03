@@ -1704,8 +1704,8 @@
     <string name="local_indexes_cat_tts">Raddskipanir (TTS)</string>
     <string name="ttsvoice">TTS-rödd</string>
     <string name="map_text_size_descr">Stærð leturs fyrir nöfn á kortinu:</string>
-    <string name="trace_rendering">Aflúsunarupplýsingar myndgerðar</string>
-    <string name="trace_rendering_descr">Birta afköst myndgerðar.</string>
+    <string name="trace_rendering">Aflúsunarupplýsingar afkasta</string>
+    <string name="trace_rendering_descr">Birta afköst myndgerðar og leiðsagnar.</string>
     <string name="gpx_option_reverse_route">Snúa við stefnu ferils</string>
     <string name="choose_audio_stream">Frálag raddleiðsagnar</string>
     <string name="voice_stream_music">Hljóð í margmiðlun/tónlist</string>

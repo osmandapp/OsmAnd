@@ -351,7 +351,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
 	}
 
-	private void drawActionArrows(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {
+	private void drawActionArrows(@NonNull RotatedTileBox tb, @NonNull Canvas canvas, @NonNull List<Location> actionPoints) {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
@@ -395,7 +395,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void drawProjectionPoint(Canvas canvas, double[] projectionXY) {
+	private void drawProjectionPoint(@NonNull Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
 			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), LocationIcon.DEFAULT.getIconId());
@@ -527,7 +527,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 								route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
 						routeGeometry.buildActionArrows(actionPoints, customTurnArrowColor);
 					}
-				} else {
+				} else if (canvas != null) {
 					List<Location> actionPoints = calculateActionPoints(topLatitude, leftLongitude,
 							bottomLatitude, rightLongitude, helper.getLastProjection(),
 							route.getRouteLocations(), route.getCurrentRoute(), it, tb.getZoom());
@@ -541,7 +541,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (directTo) {
 				//add projection point on original route
 				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper, tb);
-				if (projectionOnRoute != null) {
+				if (projectionOnRoute != null && canvas != null) {
 					drawProjectionPoint(canvas, projectionOnRoute);
 				}
 			}

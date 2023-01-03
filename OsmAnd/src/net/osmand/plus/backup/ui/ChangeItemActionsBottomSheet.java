@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +26,7 @@ import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
+import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
@@ -107,9 +109,13 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 		titleTv.setText(R.string.download_cloud_version);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload, ColorUtilities.getActiveColorId(nightMode)));
-		downloadItem.setOnClickListener(v -> syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD));
+		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, ColorUtilities.getActiveColorId(nightMode)));
+		downloadItem.setOnClickListener(v -> {
+			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD);
+			dismiss();
+		});
 		downloadItem.setEnabled(enabled);
+		AndroidUiHelper.updateVisibility(downloadItem.findViewById(R.id.second_icon), false);
 	}
 
 	private void setupUploadAction(@NonNull View view) {
@@ -135,13 +141,25 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 		titleTv.setText(title);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload, ColorUtilities.getActiveColorId(nightMode)));
-		uploadItem.setOnClickListener(v -> syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD));
+		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, ColorUtilities.getActiveColorId(nightMode)));
+		uploadItem.setOnClickListener(v -> {
+			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
+			dismiss();
+		});
 		uploadItem.setEnabled(enabled);
+		AndroidUiHelper.updateVisibility(uploadItem.findViewById(R.id.second_icon), false);
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {
-		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation, null);
+		OnBackupSyncListener listener = null;
+		Fragment target = getTargetFragment();
+		if (target != null) {
+			Fragment parent = target.getParentFragment();
+			if (parent instanceof OnBackupSyncListener) {
+				listener = (OnBackupSyncListener) parent;
+			}
+		}
+		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation, listener);
 	}
 
 	private String getTitleForOperation() {
