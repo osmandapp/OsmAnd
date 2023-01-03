@@ -11,12 +11,14 @@ import android.os.Build;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -58,11 +60,19 @@ public class FeedbackHelper {
 	}
 
 	public void sendSupportEmail(@NonNull String screenName) {
+		sendSupportEmail(screenName, null);
+	}
+
+	public void sendSupportEmail(@NonNull String screenName, @Nullable String additional) {
+		String info = getDeviceInfo();
+		if (!Algorithms.isEmpty(additional)) {
+			info = info + "\n" + additional;
+		}
 		Intent emailIntent = new Intent(Intent.ACTION_SEND)
 				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
 				.putExtra(Intent.EXTRA_SUBJECT, screenName)
-				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
+				.putExtra(Intent.EXTRA_TEXT, info);
 		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
 		AndroidUtils.startActivityIfSafe(app, emailIntent);
 	}

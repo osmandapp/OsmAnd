@@ -3,9 +3,9 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
@@ -65,7 +65,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	@Override
-	protected void update(OsmandApplication app) {
+	protected void update(@NonNull OsmandApplication app) {
 		GPXTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
 		smoothingFilter.updateAnalysis(sourceAnalysis);
 		speedFilter.updateAnalysis(sourceAnalysis);
@@ -124,7 +124,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	}
 
 	@Override
-	protected boolean processSplit(@Nullable OsmandApplication app) {
+	protected boolean processSplit(@NonNull OsmandApplication app) {
 		return GpxDisplayHelper.processSplit(app, this);
 	}
 

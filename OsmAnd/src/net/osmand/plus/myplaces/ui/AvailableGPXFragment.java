@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,11 +44,11 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
@@ -1516,14 +1515,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
 				.setOnClickListener(v1 -> {
-					Activity activity = getActivity();
-					if (activity != null) {
-						Uri fileUri = AndroidUtils.getUriForFile(activity, gpxInfo.file);
-						Intent sendIntent = new Intent(Intent.ACTION_SEND)
-								.putExtra(Intent.EXTRA_STREAM, fileUri)
-								.setType("text/plain")
-								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					if (gpxInfo.gpx.showCurrentTrack) {
+						GpxUiHelper.saveAndShareCurrentGpx(app, gpxInfo.gpx);
+					} else if (!Algorithms.isEmpty(gpxInfo.gpx.path)) {
+						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxInfo.gpx);
 					}
 				})
 				.create()

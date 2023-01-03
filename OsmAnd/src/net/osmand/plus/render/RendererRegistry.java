@@ -100,10 +100,16 @@ public class RendererRegistry {
 		}
 
 		try {
-			RenderingRulesStorage renderer = loadRenderer(name, new LinkedHashMap<>(), new LinkedHashMap<>());
+			Map<String, String> renderingConstants = new LinkedHashMap<>();
+			RenderingRulesStorage renderer = loadRenderer(null, name, new LinkedHashMap<>(), renderingConstants);
 			if (renderer != null) {
+				for (String addonName : getRendererAddons().keySet()) {
+					loadRenderer(renderer, addonName, loadedRenderers, renderingConstants);
+//					renderer.mergeDependsOrAddon(storage);
+				}
 				loadedRenderers.put(name, renderer);
 			}
+
 			return renderer;
 		} catch (IOException | XmlPullParserException e) {
 			log.error("Error loading renderer", e);
@@ -142,11 +148,54 @@ public class RendererRegistry {
 	}
 
 	@Nullable
-	private RenderingRulesStorage loadRenderer(String name, Map<String, RenderingRulesStorage> loadedRenderers,
+	private RenderingRulesStorage loadRenderer(RenderingRulesStorage main, String name, Map<String, RenderingRulesStorage> loadedRenderers,
 	                                           Map<String, String> renderingConstants) throws IOException, XmlPullParserException {
+		if (!readRenderingConstants(name, renderingConstants)) {
+			return null;
+		}
+		// parse content
+		InputStream is = getInputStream(name);
+		boolean addon = main != null;
+		if (is != null) {
+			if (main == null) {
+				// reuse same storage for addons
+				main = new RenderingRulesStorage(name, renderingConstants);
+			}
+			loadedRenderers.put(name, main);
+			try {
+				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
+					// reload every time to propogate rendering constants
+					if (loadedRenderers.containsKey(nm)) {
+						log.warn("Possible Circular dependencies found " + nm);
+					}
+					RenderingRulesStorage dep = null;
+					try {
+						dep = loadRenderer(null, nm, loadedRenderers, renderingConstants);
+					} catch (IOException e) {
+						log.warn("Dependent renderer not found: " + e.getMessage(), e);
+					}
+					if (dep == null) {
+						log.warn("Dependent renderer not found: " + nm);
+					}
+					return dep;
+				}, addon);
+			} finally {
+				is.close();
+			}
+
+			if (!addon) {
+				for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+					listener.onRendererLoaded(name, main, getInputStream(name));
+				}
+			}
+		}
+		return main;
+	}
+
+	private boolean readRenderingConstants(String name, Map<String, String> renderingConstants) throws XmlPullParserException, IOException {
 		InputStream is = getInputStream(name);
 		if (is == null) {
-			return null;
+			return false;
 		}
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
@@ -166,38 +215,7 @@ public class RendererRegistry {
 		} finally {
 			is.close();
 		}
-
-		// parse content
-		RenderingRulesStorage main = null;
-		is = getInputStream(name);
-		if (is != null) {
-			main = new RenderingRulesStorage(name, renderingConstants);
-			loadedRenderers.put(name, main);
-			try {
-				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
-					// reload every time to propogate rendering constants
-					if (loadedRenderers.containsKey(nm)) {
-						log.warn("Circular dependencies found " + nm);
-					}
-					RenderingRulesStorage dep = null;
-					try {
-						dep = loadRenderer(nm, loadedRenderers, renderingConstants);
-					} catch (IOException e) {
-						log.warn("Dependent renderer not found: " + e.getMessage(), e);
-					}
-					if (dep == null) {
-						log.warn("Dependent renderer not found: " + nm);
-					}
-					return dep;
-				});
-			} finally {
-				is.close();
-			}
-			for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
-				listener.onRendererLoaded(name, main, getInputStream(name));
-			}
-		}
-		return main;
+		return true;
 	}
 
 	@Nullable
@@ -308,6 +326,22 @@ public class RendererRegistry {
 			}
 		}
 		return renderers;
+	}
+
+	@NonNull
+	public Map<String, String> getRendererAddons() {
+		Map<String, String> rendererAddons = new LinkedHashMap<>(internalRenderers);
+		for (Map.Entry<String, File> entry : externalRenderers.entrySet()) {
+			rendererAddons.put(entry.getKey(), entry.getValue().getName());
+		}
+		Iterator<Entry<String, String>> it = rendererAddons.entrySet().iterator();
+		while (it.hasNext()) {
+			String rendererVal = it.next().getValue();
+			if (!rendererVal.endsWith(ADDON_RENDERER_INDEX_EXT)) {
+				it.remove();
+			}
+		}
+		return rendererAddons;
 	}
 
 	public String getSelectedRendererName() {

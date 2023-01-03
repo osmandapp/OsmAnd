@@ -10,6 +10,7 @@ import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
+import android.os.Build;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,8 +25,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
-import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -97,7 +99,8 @@ public class DownloadIndexesThread {
 
 	@UiThread
 	protected void downloadHasStarted() {
-		if (app.getDownloadService() == null) {
+		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
+		if (app.getDownloadService() == null && shouldStartService) {
 			app.startDownloadService();
 		}
 		updateNotification();
@@ -331,7 +334,7 @@ public class DownloadIndexesThread {
 	}
 
 	private void updateNotification() {
-		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
+		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
 	}
 
 	private class ReloadIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, DownloadResources> {
@@ -423,7 +426,7 @@ public class DownloadIndexesThread {
 					String name = item.getBasename();
 					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
-					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
+					HistoryDownloadEntry entry = new HistoryDownloadEntry(name, count);
 					if (count == 1) {
 						dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 					} else {

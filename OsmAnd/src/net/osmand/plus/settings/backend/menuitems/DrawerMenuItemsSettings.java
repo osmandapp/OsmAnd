@@ -27,8 +27,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FOR
 
 import androidx.annotation.NonNull;
 
-import net.osmand.util.Algorithms;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +96,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 			}
 
 			boolean unordered = !orderIds.contains(currentItemId);
-			if (!Algorithms.isEmpty(orderIds) && unordered) {
+			if (unordered) {
 				insertItemByOriginalOrder(currentItemId);
 			}
 		}

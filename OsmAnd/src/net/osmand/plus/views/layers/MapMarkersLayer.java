@@ -25,8 +25,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;

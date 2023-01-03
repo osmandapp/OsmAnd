@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

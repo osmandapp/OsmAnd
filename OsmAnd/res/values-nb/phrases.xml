@@ -1757,4 +1757,7 @@
     <string name="poi_aerialway_j_bar">Skitrekk (J-krok)</string>
     <string name="poi_aerialway_rope_tow">Skitau</string>
     <string name="poi_aerialway_magic_carpet">Teppeheis</string>
+    <string name="poi_hiking_filter">Egnet for fotturer</string>
+    <string name="poi_hiking_yes">Ja</string>
+    <string name="poi_trampoline_park">Trampolinepark</string>
 </resources>

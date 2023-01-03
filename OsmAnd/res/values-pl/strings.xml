@@ -4973,4 +4973,13 @@
     <string name="rendering_attr_showMtbScale_description">Pokaż szlaki według skali MTB.</string>
     <string name="mtb_segment_classification">Klasyfikacja segmentów</string>
     <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
+    <string name="av_audio_format_bottom_sheet_descr">Wybierz format wyjścia dźwięku. Typ pliku dźwięku to 3GPP (.3gp).</string>
+    <string name="release_4_4_pre">• Tutaj będą ciągi napisowe dla wydania 4.4</string>
+    <string name="choose_what_to_sync">Wybierz co synchronizować</string>
+    <string name="cloud_sync_progress">Synchronizacja…%1$s</string>
+    <string name="checking_progress">Sprawdzanie…</string>
+    <string name="shared_string_modified">Zmieniony</string>
+    <string name="res_unknown">Nieznany</string>
+    <string name="shared_string_unsynced">Niezsynchronizowany</string>
+    <string name="check_for_updates">Sprawdź aktualizacje</string>
 </resources>

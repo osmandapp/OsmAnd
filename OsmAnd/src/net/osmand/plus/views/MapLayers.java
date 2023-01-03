@@ -13,13 +13,12 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.android.NativeCore;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.DialogListItemAdapter;
@@ -314,7 +313,10 @@ public class MapLayers {
 						mapView.getZoom(), true);
 			}
 			mapView.refreshMap();
-			dashboard.refreshContent(false);
+
+			if (dashboard.isVisible()) {
+				dashboard.refreshContent(false);
+			}
 			return true;
 		};
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());

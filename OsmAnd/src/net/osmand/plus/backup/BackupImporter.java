@@ -5,8 +5,6 @@ import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -17,10 +15,12 @@ import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
+import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -63,6 +63,8 @@ class BackupImporter {
 		void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress);
 
 		void itemExportDone(@NonNull String type, @NonNull String fileName);
+
+		void updateGeneralProgress(int downloadedItems, int uploadedKb);
 	}
 
 	BackupImporter(@NonNull BackupHelper backupHelper, @Nullable NetworkImportProgressListener listener) {
@@ -342,8 +344,8 @@ class BackupImporter {
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
-								   @NonNull List<RemoteFile> remoteInfoFiles,
-								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
+	                               @NonNull List<RemoteFile> remoteInfoFiles,
+	                               @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
 		for (RemoteFile remoteFile : remoteInfoFiles) {
 			String fileName = remoteFile.getName();
 			fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
@@ -369,8 +371,8 @@ class BackupImporter {
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
-								   @NonNull Map<File, RemoteFile> remoteInfoFiles,
-								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException, IOException {
+	                               @NonNull Map<File, RemoteFile> remoteInfoFiles,
+	                               @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException, IOException {
 		List<FileDownloadTask> tasks = new ArrayList<>();
 		for (Entry<File, RemoteFile> fileEntry : remoteInfoFiles.entrySet()) {
 			tasks.add(new FileDownloadTask(fileEntry.getKey(), fileEntry.getValue()));
@@ -424,7 +426,7 @@ class BackupImporter {
 	}
 
 	private void downloadAndReadItemFiles(@NonNull Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead,
-										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws IOException {
+	                                      @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws IOException {
 		OsmandApplication app = backupHelper.getApp();
 		List<FileDownloadTask> fileDownloadTasks = new ArrayList<>();
 		for (Entry<File, RemoteFile> fileEntry : remoteFilesForDownload.entrySet()) {
@@ -469,7 +471,7 @@ class BackupImporter {
 	}
 
 	private void downloadItemFile(@NonNull OsmandApplication app, @NonNull File tempFile,
-								  @NonNull SettingsItemReader<? extends SettingsItem> reader) {
+	                              @NonNull SettingsItemReader<? extends SettingsItem> reader) {
 		SettingsItem item = reader.getItem();
 		FileInputStream is = null;
 		try {
@@ -488,7 +490,7 @@ class BackupImporter {
 	}
 
 	private void updateFilesInfo(@NonNull Map<String, RemoteFile> remoteFiles,
-								 @NonNull List<SettingsItem> settingsItemList) {
+	                             @NonNull List<SettingsItem> settingsItemList) {
 		Map<String, RemoteFile> remoteFilesMap = new HashMap<>(remoteFiles);
 		for (SettingsItem settingsItem : settingsItemList) {
 			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
@@ -607,7 +609,7 @@ class BackupImporter {
 		private final SettingsItemReader<? extends SettingsItem> reader;
 
 		public ItemFileDownloadTask(@NonNull OsmandApplication app, @NonNull File file,
-									@NonNull SettingsItemReader<? extends SettingsItem> reader) {
+		                            @NonNull SettingsItemReader<? extends SettingsItem> reader) {
 			this.app = app;
 			this.file = file;
 			this.reader = reader;

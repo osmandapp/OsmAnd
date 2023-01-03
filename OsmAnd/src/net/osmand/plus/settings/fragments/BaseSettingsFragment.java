@@ -54,16 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
-import net.osmand.plus.plugins.antplus.AntPlusSettingsFragment;
-import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
-import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
-import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
-import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
-import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -76,7 +67,6 @@ import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomShee
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
-import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -115,53 +105,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
-
-	public enum SettingsScreenType {
-
-		MAIN_SETTINGS(MainSettingsFragment.class.getName(), false, null, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
-		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, null, R.xml.global_settings, R.layout.global_preference_toolbar),
-		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, null, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
-		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, null, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
-		SEND_UUID(SendUniqueIdentifiersFragment.class.getName(), false, null, R.xml.send_uuid_preferences, R.layout.global_preference_toolbar),
-		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.general_profile_settings, R.layout.profile_preference_toolbar),
-		NAVIGATION(NavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
-		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.coordinates_format, R.layout.profile_preference_toolbar),
-		ROUTE_PARAMETERS(RouteParametersFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.route_parameters, R.layout.profile_preference_toolbar),
-		SCREEN_ALERTS(ScreenAlertsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.screen_alerts, R.layout.profile_preference_toolbar_with_switch),
-		VOICE_ANNOUNCES(VoiceAnnouncesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.voice_announces, R.layout.profile_preference_toolbar_with_switch),
-		VEHICLE_PARAMETERS(VehicleParametersFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.vehicle_parameters, R.layout.profile_preference_toolbar),
-		MAP_DURING_NAVIGATION(MapDuringNavigationFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.map_during_navigation, R.layout.profile_preference_toolbar),
-		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.turn_screen_on, R.layout.profile_preference_toolbar),
-		DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
-		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preference_toolbar),
-		HISTORY_SETTINGS(HistorySettingsFragment.class.getName(), false, null, R.xml.history_preferences, R.layout.global_preference_toolbar),
-		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
-		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
-		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
-		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
-		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
-		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
-		OPEN_PLACE_REVIEWS(OprSettingsFragment.class.getName(), false, null, R.xml.open_place_reviews, R.layout.global_preference_toolbar),
-		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
-		BACKUP_AUTHORIZATION(BackupAuthorizationFragment.class.getName(), false, null, R.xml.backup_authorization, R.layout.profile_preference_toolbar),
-		SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
-		ANT_PLUS_SETTINGS(AntPlusSettingsFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
-		WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar);
-
-		public final String fragmentName;
-		public final boolean profileDependent;
-		public final ApplyQueryType applyQueryType;
-		public final int preferencesResId;
-		public final int toolbarResId;
-
-		SettingsScreenType(String fragmentName, boolean profileDependent, ApplyQueryType applyQueryType, int preferencesResId, int toolbarResId) {
-			this.fragmentName = fragmentName;
-			this.profileDependent = profileDependent;
-			this.applyQueryType = applyQueryType;
-			this.preferencesResId = preferencesResId;
-			this.toolbarResId = toolbarResId;
-		}
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -235,7 +178,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@SuppressLint("RestrictedApi")
 	@Override
-	protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+	protected RecyclerView.Adapter<PreferenceViewHolder> onCreateAdapter(PreferenceScreen preferenceScreen) {
 		return new PreferenceGroupAdapter(preferenceScreen) {
 
 			@Override
@@ -463,10 +406,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	@SuppressLint("RestrictedApi")
 	protected void updatePreference(Preference preference) {
 		PreferenceGroupAdapter adapter = (PreferenceGroupAdapter) getListView().getAdapter();
-		adapter.onPreferenceChange(preference);
+		if (adapter != null) {
+			adapter.onPreferenceChange(preference);
+		}
 	}
 
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {

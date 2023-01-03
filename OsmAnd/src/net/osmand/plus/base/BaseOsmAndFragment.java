@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -198,6 +200,11 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected OsmandSettings requireSettings() {
 		OsmandApplication app = requireMyApplication();
 		return app.getSettings();
+	}
+
+	@Dimension
+	protected int getDimensionPixelSize(@DimenRes int resId) {
+		return getResources().getDimensionPixelSize(resId);
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {

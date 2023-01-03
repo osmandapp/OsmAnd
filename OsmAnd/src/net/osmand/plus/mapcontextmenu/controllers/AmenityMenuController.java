@@ -14,7 +14,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -76,7 +75,7 @@ public class AmenityMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						openTrack();
+						openTrack(mapActivity);
 					}
 				}
 			};
@@ -100,14 +99,13 @@ public class AmenityMenuController extends MenuController {
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 	}
 
-	void openTrack() {
-		OsmandApplication app = getMapActivity().getMyApplication();
-		TravelHelper travelHelper = app.getTravelHelper();
+	void openTrack(MapActivity mapActivity) {
+		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
 		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
 		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
 		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 		if (article != null) {
-			travelHelper.openTrackMenu(article, getMapActivity(), name, amenity.getLocation());
+			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
 		}
 	}
 
@@ -143,21 +141,16 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	public static int getRightIconId(Amenity amenity) {
-		String id = amenity.getGpxIcon();
-		if (id == null) {
-			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			if (st != null) {
-				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-					id = st.getIconKeyName();
-				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-					id = st.getOsmTag() + "_" + st.getOsmValue();
-				}
+		String iconName = amenity.getGpxIcon();
+		if (iconName == null) {
+			String mapIconName = amenity.getMapIconName();
+			if (!Algorithms.isEmpty(mapIconName) && (RenderingIcons.containsBigIcon(mapIconName))) {
+				iconName = mapIconName;
+			} else {
+				iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
 			}
 		}
-		if (id != null) {
-			return RenderingIcons.getBigIconResourceId(id);
-		}
-		return 0;
+		return iconName == null ? 0 : RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	@Override

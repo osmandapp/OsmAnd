@@ -36,6 +36,7 @@ import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -224,7 +225,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(InAppPurchaseData purchase) {
-		return new PurchaseInfo(purchase.getProductId(), purchase.getSubscriptionId(), purchase.getPurchaseToken(),
+		return new PurchaseInfo(Collections.singletonList(purchase.getProductId()), purchase.getSubscriptionId(), purchase.getPurchaseToken(),
 				purchase.getPurchaseTime(), purchase.getPurchaseState(), true, purchase.isAutoRenewing());
 	}
 

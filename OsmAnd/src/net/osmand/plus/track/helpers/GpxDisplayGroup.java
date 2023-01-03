@@ -4,8 +4,8 @@ import static net.osmand.plus.track.helpers.GpxDisplayHelper.processGroupTrack;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Track;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 

@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
@@ -105,19 +104,7 @@ public class ProgressImplementation implements IProgress {
 		dlg.setMessage(message);
 		dlg.setIndeterminate(style == ProgressDialog.STYLE_HORIZONTAL); // re-set in mViewUpdateHandler.handleMessage above
 		dlg.setCancelable(true);
-		// we'd prefer a plain progress bar without numbers,
-		// but that is only available starting from API level 11
-		try {
-			ProgressDialog.class
-				.getMethod("setProgressNumberFormat", new Class[] { String.class })
-				.invoke(dlg, (String)null);
-		} catch (NoSuchMethodException nsme) {
-			// failure, must be older device
-		} catch (IllegalAccessException nsme) {
-			// failure, must be older device
-		} catch (java.lang.reflect.InvocationTargetException nsme) {
-			// failure, must be older device
-		}
+		dlg.setProgressNumberFormat(null);
 		dlg.setProgressStyle(style);
 		return new ProgressImplementation(dlg, true);
 	}
@@ -128,16 +115,12 @@ public class ProgressImplementation implements IProgress {
 		this.finishRunnable = finish;
 	}
 
-	public void setDialog(ProgressDialog dlg){
-		if(dlg != null){
-			if(cancelable){
-				dlg.setOnCancelListener(new OnCancelListener(){
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						if(run != null){
-							run.stop();
-						}
-
+	public void setDialog(ProgressDialog dlg) {
+		if (dlg != null) {
+			if (cancelable) {
+				dlg.setOnCancelListener(dialog -> {
+					if (run != null) {
+						run.stop();
 					}
 				});
 			}

@@ -2,7 +2,7 @@ package net.osmand.plus.measurementtool.command;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 public class MovePointCommand extends MeasurementModeCommand {

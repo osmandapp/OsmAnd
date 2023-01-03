@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.R;

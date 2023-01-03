@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
@@ -49,6 +50,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -728,6 +730,15 @@ public class PluginsHelper {
 		return false;
 	}
 
+	public static boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (plugin.layerShouldBeDisabled(layer)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static void registerQuickActionTypesPlugins(List<QuickActionType> allTypes,
 	                                                   List<QuickActionType> enabledTypes) {
 		for (OsmandPlugin p : getAvailablePlugins()) {
@@ -752,6 +763,12 @@ public class PluginsHelper {
 	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
+		}
+	}
+
+	public static void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			p.updateMapPresentationEnvironment(mapRendererContext);
 		}
 	}
 }

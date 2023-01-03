@@ -25,6 +25,7 @@ import java.util.List;
 public class WeatherRasterLayer extends BaseMapLayer {
 
 	private final WeatherHelper weatherHelper;
+	private final WeatherSettings weatherSettings;
 	private final WeatherPlugin plugin;
 	private final WeatherLayer weatherLayer;
 
@@ -47,6 +48,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		super(context);
 		OsmandApplication app = getApplication();
 		this.weatherHelper = app.getWeatherHelper();
+		this.weatherSettings = weatherHelper.getWeatherSettings();
 		this.weatherLayer = weatherLayer;
 		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		setDateTime(System.currentTimeMillis());
@@ -77,7 +79,6 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		resetLayerProvider();
 
 		for (StateChangedListener<Float> listener : alphaChangeListeners) {
 			for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
@@ -87,6 +88,12 @@ public class WeatherRasterLayer extends BaseMapLayer {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected void cleanupResources() {
+		super.cleanupResources();
+		resetLayerProvider();
 	}
 
 	@Override
@@ -144,34 +151,48 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 		MapRendererView mapRenderer = getMapRenderer();
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
-		if (view == null || mapRenderer == null || resourcesManager == null) {
+		if (view == null || mapRenderer == null || resourcesManager == null
+				|| resourcesManager.getBandSettings().empty()) {
 			return;
 		}
-		if (resourcesManager.getBandSettings().empty()) {
-			return;
-		}
 
-		boolean hasCustomForecast = plugin.hasCustomForecast();
-		boolean weatherEnabled = weatherHelper.getWeatherSettings().weatherEnabled.get() || hasCustomForecast;
-		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
-		weatherEnabledCached = weatherEnabled;
-
-		List<WeatherBand> enabledBands = hasCustomForecast ? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
-
-		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
-		enabledBandsCached = enabledBands;
-		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();
-		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
-		bandsSettingsVersionCached = bandsSettingsVersion;
-		boolean dateTimeChanged = cachedDateTime != dateTime;
-		cachedDateTime = dateTime;
-		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged || mapActivityInvalidated) {
-			if (weatherEnabled && !enabledBands.isEmpty()) {
+		if (shouldUpdateLayer() || mapActivityInvalidated || mapRendererChanged) {
+			if (shouldDrawLayer()) {
 				recreateLayerProvider(mapRenderer, resourcesManager);
 			} else {
 				resetLayerProvider();
 			}
 		}
+		mapRendererChanged = false;
 		mapActivityInvalidated = false;
+	}
+
+	private boolean shouldDrawLayer() {
+		return (weatherSettings.weatherEnabled.get() || plugin.hasCustomForecast())
+				&& !Algorithms.isEmpty(getVisibleBands());
+	}
+
+	private boolean shouldUpdateLayer() {
+		boolean weatherEnabled = weatherSettings.weatherEnabled.get() || plugin.hasCustomForecast();
+		boolean weatherEnabledChanged = weatherEnabled != weatherEnabledCached;
+		weatherEnabledCached = weatherEnabled;
+
+		List<WeatherBand> enabledBands = getVisibleBands();
+		boolean layersChanged = !Algorithms.objectEquals(enabledBands, enabledBandsCached);
+		enabledBandsCached = enabledBands;
+
+		int bandsSettingsVersion = weatherHelper.getBandsSettingsVersion();
+		boolean bandsSettingsChanged = bandsSettingsVersion != bandsSettingsVersionCached;
+		bandsSettingsVersionCached = bandsSettingsVersion;
+
+		boolean dateTimeChanged = cachedDateTime != dateTime;
+		cachedDateTime = dateTime;
+
+		return weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged;
+	}
+
+	@NonNull
+	private List<WeatherBand> getVisibleBands() {
+		return plugin.hasCustomForecast() ? weatherHelper.getVisibleForecastBands() : weatherHelper.getVisibleBands();
 	}
 }

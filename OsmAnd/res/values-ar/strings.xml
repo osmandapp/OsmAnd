@@ -246,8 +246,8 @@
     <string name="shared_string_show_on_map">عرض على الخريطة</string>
     <string name="navigate_point_latitude">خط العرض</string>
     <string name="navigate_point_longitude">خط الطول</string>
-    <string name="position_on_map_center">مركز</string>
-    <string name="position_on_map_bottom">أسفل</string>
+    <string name="position_on_map_center">المركز</string>
+    <string name="position_on_map_bottom">الأسفل</string>
     <string name="app_mode_car">سيارة</string>
     <string name="app_mode_bicycle">دراجة</string>
     <string name="app_mode_pedestrian">مشي</string>
@@ -454,7 +454,7 @@
     <string name="shared_string_and">و</string>
     <string name="shared_string_or">أو</string>
     <string name="av_camera_focus_continuous">التركيز المستمر</string>
-    <string name="free_version_title"> الإصدار المجاني</string>
+    <string name="free_version_title">الإصدار المجاني</string>
     <string name="index_name_north_america">أمريكا الشمالية</string>
     <string name="index_name_us">أمريكا الشمالية - الولايات المتحدة</string>
     <string name="index_name_central_america">أمريكا الوسطى</string>
@@ -687,7 +687,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nاضغط مطولا لعرض الخيارات"</string>
-    <string name="local_index_installed"> الإصدار المحلي</string>
+    <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
     <string name="local_index_items_restored">تم تفعيل %1$d من %2$d خريطة.</string>
@@ -708,8 +708,8 @@
     <string name="search_offline_clear_search">بحث جديد</string>
     <string name="map_text_size_descr">حدد حجم النص للأسماء على الخريطة:</string>
     <string name="map_text_size">حجم خط الخريطة</string>
-    <string name="trace_rendering">تقديم معلومات التصحيح</string>
-    <string name="trace_rendering_descr">عرض أداء معلومات التصحيح (غير مستحسن).</string>
+    <string name="trace_rendering">معلومات تصحيح الأداء</string>
+    <string name="trace_rendering_descr">إظهار أداء العرض والتنقل.</string>
     <string name="installing_new_resources">يثبت البيانات الجديدة…</string>
     <string name="internet_connection_required_for_online_route">خدمة التنقل عبر الإنترنت غير متاحة دون اتصال بالانترنت.</string>
     <string name="tts_language_not_supported_title">لغة غير مدعومة</string>
@@ -1058,7 +1058,7 @@
     <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
-    <string name="use_opengl_render">عرض 3D</string>
+    <string name="use_opengl_render">استخدام عرض 3D</string>
     <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة 3D (قد لا تعمل على بعض الأجهزة).</string>
     <string name="map_update">يوجد تحديثات ل %1$s من الخرائط</string>
     <string name="search_for">البحث عن</string>
@@ -1155,7 +1155,7 @@
     <string name="osm_editing_plugin_name">تعديل خريطة الشارع المفتوحة</string>
     <string name="free">فارغ %1$s</string>
     <string name="parking_place">موقف السيارات</string>
-    <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
+    <string name="version_settings_descr">الإصدارات الليلية المحملة.</string>
     <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
     <string name="traffic_warning_pedestrian">ممرات الراجلين</string>
@@ -1348,8 +1348,8 @@
     <string name="use_online_routing">استخدم الملاحة على الإنترنت</string>
     <string name="use_english_names_descr">اختر بين الأسماء المحلية أو الإنجليزية.</string>
     <string name="data_settings">بيانات</string>
-    <string name="map_view_3d_descr">تمكن عرض الخريطة ثلاثي الأبعاد.</string>
-    <string name="map_view_3d">عرض الخريطة ثلاثي الأبعاد</string>
+    <string name="map_view_3d_descr">تمكين عرض 3D للخريطة.</string>
+    <string name="map_view_3d">عرض الخريطة 3D</string>
     <string name="mark_point">هدف</string>
     <string name="reload_tile">إعادة تحميل التجانبية/المربع</string>
     <string name="update_tile">تحديث الخريطة</string>
@@ -4753,15 +4753,15 @@
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
     <string name="routing_attr_motor_type_name">محرك السيارة</string>
-    <string name="routing_attr_motor_type_petrol_name">بنزين</string>
+    <string name="routing_attr_motor_type_petrol_name">البنزين</string>
     <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
     <string name="routing_attr_motor_type_electric_name">كهربائي</string>
     <string name="routing_attr_motor_type_gas_name">الغاز الطبيعي المضغوط</string>
     <string name="routing_attr_motor_type_hybrid_name">هجين</string>
     <string name="routing_attr_motor_type_description">حدد نوع الوقود المستخدم من قبل محرك سيارتك ، لحساب انبعاثات CO2.</string>
     <string name="kg">كلم</string>
-    <string name="routing_attr_motor_type_diesel_name">ديزل</string>
-    <string name="co2_mission">ثاني أكسيد الكربون</string>
+    <string name="routing_attr_motor_type_diesel_name">الديزل</string>
+    <string name="co2_mission">انبعاث CO2</string>
     <string name="switch_widget_mode_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="side_marker_eta">الوقت المقدر للوصول</string>
     <string name="goods_delivery_desc_4">إذا كان وزن سيارتك أكثر من 3.5 طن، فأنت بحاجة إلى استخدام وضع الشاحنة.</string>
@@ -4913,7 +4913,7 @@
     <string name="shared_string_identifiers">معرفات</string>
     <string name="shared_string_terms_of_use">شروط الاستخدام</string>
     <string name="shared_string_cross_buy">شراء عبر</string>
-    <string name="release_4_3">• مشغل جديد لعرض الخرائط بشكل أسرع ، مع عرض 3D
+    <string name="release_4_3">• طريقة عرض الخرائط بشكل أسرع ، مع عرض 3D
 \n
 \n • حركة سلسة لتغييرات الموقع أثناء الحركة
 \n
@@ -4973,8 +4973,8 @@
     <string name="dismiss_changes_descr">سيتم رفض كافة التغييرات.</string>
     <string name="dismiss_changes">هل تريد رفض التغييرات؟</string>
     <string name="restart_now">أعد التشغيل الآن</string>
-    <string name="map_rendering_engine_v2">الإصدار 2 (3D)</string>
-    <string name="map_rendering_engine">مشغل عرض الخريطة</string>
+    <string name="map_rendering_engine_v2">عرض 3D</string>
+    <string name="map_rendering_engine">طريقة عرض الخريطة</string>
     <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات الاداة الخاصة بالطقس.</string>
     <string name="weather_plugin_description">يوفر البرنامج الطقس المساعد
 \n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
@@ -5006,11 +5006,11 @@
     <string name="precipitation_widget_desc">يعرض هطول الأمطار لمركز الخريطة الحالي.</string>
     <string name="clouds_widget_desc">يظهر التغطية السحابية لمركز الخريطة الحالي.</string>
     <string name="temperature_widget_desc">يعرض درجة الحرارة لمركز الخريطة الحالي.</string>
-    <string name="map_rendering_engine_v1">الإصدار 1</string>
-    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض خريطة \"الإصدار 1\". يمكنك العودة إلى مشغل العرض الجديد \"الإصدار 2 (3D)\" في الإعدادات.
+    <string name="map_rendering_engine_v1">عرض عادي</string>
+    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
 \n
 \nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
-    <string name="map_rendering_engine_descr">الإصدار 2 (OpenGL) هو محرك عرض خرائط أسرع ، ويتميز أيضا بعرض 2.5D. كان عرض الإصدار 1 هو الافتراضي قبل نسخة OsmAnd 4.3 ، ولا يزال مفضلا للأجهزة القديمة.</string>
+    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
     <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
     <string name="shared_string_next_sunset">غروب الشمس القادم</string>
     <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
@@ -5044,4 +5044,49 @@
     <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>
     <string name="mtb_segment_classification">تصنيف القطاعات</string>
     <string name="mtb_imba">الرابطة الدولية لركوب الدراجات الجبلية</string>
+    <string name="open_weather_action_description">يسمح لك بفتح شاشة تحتوي على معلومات مفصلة عن الطقس.</string>
+    <string name="shared_string_open">فتح</string>
+    <string name="open_weather_action">الطقس المفتوح</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">تساوي هطول الأمطار</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">هبات الرياح المتساوية</string>
+    <string name="release_4_4_pre">• هنا ستكون سلاسل للإصدار 4.4</string>
+    <string name="rendering_attr_weatherCloudContours_name">تساوي السحب</string>
+    <string name="shared_string_purchased_on">تم الشراء في</string>
+    <string name="shared_string_expires">انتهاء</string>
+    <string name="av_audio_format_bottom_sheet_descr">حدد تنسيق إخراج الصوت. تنسيق نوع الملف للصوت هو 3GPP (.3gp).</string>
+    <string name="backup_error_failed_to_fetch_remote_items">فشل في جلب قائمة الملفات من الخادم.</string>
+    <string name="checking_progress">التحقق…</string>
+    <string name="cloud_sync_progress">مزامنه... %1$s</string>
+    <string name="new_file">ملف جديد</string>
+    <string name="cloud_changes">التغييرات السحابية</string>
+    <string name="shared_string_uploaded">تم الرفع</string>
+    <string name="shared_string_cloud">سحابة</string>
+    <string name="modified_file">ملف معدل</string>
+    <string name="deleted_file">ملف محذوف</string>
+    <string name="sync_now">المزامنة الآن</string>
+    <string name="local_changes">التغييرات المحلية</string>
+    <string name="upload_change">تحميل التغيير</string>
+    <string name="cloud_version_will_be_removed">ستتم إزالة النسخة السحابية</string>
+    <string name="cloud_changes_will_be_dismissed">سيتم رفض التغييرات السحابية</string>
+    <string name="local_file_will_be_restored">سيتم استعادة الملف المحلي</string>
+    <string name="local_changes_will_be_dismissed">سيتم رفض التغييرات المحلية</string>
+    <string name="cloud_conflicts">المشاكل</string>
+    <string name="cloud_conflict">نزاع</string>
+    <string name="upload_all">رفع الكل</string>
+    <string name="cloud_recent_changes">التغييرات</string>
+    <string name="cloud_all_changes_uploaded">جميع التغييرات المحملة</string>
+    <string name="cloud_all_changes_downloaded">جميع التغييرات المحملة</string>
+    <string name="cloud_all_changes_uploaded_descr">تتم مزامنة جميع التغييرات التي تم إجراؤها على هذا الجهاز مع أوسماند كلاود.</string>
+    <string name="cloud_no_conflicts">لا يوجد نزاع</string>
+    <string name="download_cloud_version">تنزيل الإصدار السحابي</string>
+    <string name="shared_string_do_not_exist">غير موجود</string>
+    <string name="choose_what_to_sync">اختيار ما تريد مزامنته</string>
+    <string name="shared_string_modified">تم التعديل</string>
+    <string name="res_unknown">غير معروف</string>
+    <string name="shared_string_unsynced">غير متزامن</string>
+    <string name="check_for_updates">التحقق من وجود تحديثات</string>
+    <string name="changes">التغييرات %1$s</string>
+    <string name="last_sync">آخر مزامنة</string>
+    <string name="import_export">استيراد/تصدير</string>
+    <string name="export_to_file">تصدير إلى ملف</string>
 </resources>

@@ -18,7 +18,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.aidl.AidlMapLayerWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
@@ -316,8 +315,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearAidlTileProvider();
 	}
 

@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend.menuitems;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
@@ -12,8 +15,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class ContextMenuItemsSettings implements Serializable {
 
@@ -50,12 +51,13 @@ public class ContextMenuItemsSettings implements Serializable {
 		}
 	}
 
-	public void readFromJson(JSONObject json, String idScheme) {
+	public void readFromJson(@NonNull JSONObject json, @NonNull String idScheme) {
 		hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
 		orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
 	}
 
-	protected List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
+	@NonNull
+	protected List<String> readIdsList(@Nullable JSONArray jsonArray, @NonNull String idScheme) {
 		List<String> list = new ArrayList<>();
 		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.length(); i++) {

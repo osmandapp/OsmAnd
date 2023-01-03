@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -33,7 +34,10 @@ public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean
 			newRenderer = registry.defaultRender();
 		}
 		if (mapView.getMapRenderer() != null) {
-			NativeCoreContext.getMapRendererContext().updateMapSettings();
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.updateMapSettings();
+			}
 		}
 		boolean changed = registry.getCurrentSelectedRenderer() != newRenderer;
 		if (changed) {

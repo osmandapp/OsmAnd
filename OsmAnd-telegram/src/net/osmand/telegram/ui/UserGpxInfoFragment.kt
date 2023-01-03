@@ -21,9 +21,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
+import net.osmand.gpx.GPXFile
+import net.osmand.gpx.GPXTrackAnalysis
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramSettings
@@ -470,8 +471,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	data class GpxDataItem(
-		val gpxFile: GPXUtilities.GPXFile,
-		val analysis: GPXUtilities.GPXTrackAnalysis
+            val gpxFile: GPXFile,
+            val analysis: GPXTrackAnalysis
 	)
 
 	companion object {

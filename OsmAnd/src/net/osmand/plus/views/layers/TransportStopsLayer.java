@@ -140,7 +140,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
-							  List<TransportStop> objects) {
+	                          List<TransportStop> objects) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
@@ -210,7 +210,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 			int stopRouteDist = stopRoute != null ? stopRoute.distance : 0;
 			TransportStopType stopRouteType = stopRoute != null ? stopRoute.type : null;
 
-			boolean clearBoth = this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated;
+			boolean clearBoth = this.nightMode != nightMode || this.textScale != textScale || mapActivityInvalidated || mapRendererChanged;
 			boolean clearTransportRouteCollections = clearBoth
 					|| stopRoute == null
 					|| tb.getZoom() < START_ZOOM_SELECTED_TRANSPORT_ROUTE
@@ -238,6 +238,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				}
 			}
 
+			mapRendererChanged = false;
 			mapActivityInvalidated = false;
 			this.nightMode = nightMode;
 			this.textScale = textScale;
@@ -330,8 +331,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearTransportStopsTileProvider();
 		clearTransportRouteCollections();
 	}

@@ -5,10 +5,10 @@ import java.util.Collection;
 
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;

@@ -103,7 +103,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		return view;
 	}
 
-	protected void setupToolbar(View view) {
+	protected void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
@@ -111,13 +111,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
-		toolbar.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		closeButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
