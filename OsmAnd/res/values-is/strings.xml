@@ -5021,4 +5021,6 @@
     <string name="cloud_all_changes_uploaded_descr">Allar breytingar sem gerðar hafa verið á þessu tæki eru samstilltar við OsmAnd Cloud-tölvuskýið.</string>
     <string name="cloud_no_conflicts">Það eru engir árekstrar</string>
     <string name="download_cloud_version">Sækja útgáfu á skýi</string>
+    <string name="si_nm_mt">Sjómílur/metrar</string>
+    <string name="si_nm_ft">Sjómílur/fet</string>
 </resources>
