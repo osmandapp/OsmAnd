@@ -89,6 +89,7 @@ public class WeatherWidget extends TextInfoWidget {
 			} else {
 				setText(NO_VALUE, null);
 			}
+			mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();
 		});
 	}
 
