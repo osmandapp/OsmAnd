@@ -5013,4 +5013,7 @@
     <string name="local_changes_will_be_dismissed">A helyi változások el lesznek vetve</string>
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd felhőszolgáltatással.</string>
     <string name="cloud_sync_progress">Szinkronizálás...%1$s</string>
+    <string name="si_nm_ft">Tengeri mérföld/láb</string>
+    <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
+    <string name="si_nm_mt">Tengeri mérföld/méter</string>
 </resources>
