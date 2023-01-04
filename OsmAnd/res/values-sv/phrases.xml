@@ -1224,10 +1224,10 @@
     <string name="poi_access_private">Privat åtkomst</string>
     <string name="poi_access_no">Ingen åtkomst</string>
     <string name="poi_access_destination">Åtkomst vid mål</string>
-    <string name="poi_access_permissive">Åtkomst med tillstånd</string>
+    <string name="poi_access_permissive">Åtkomst tillåten tillsvidare</string>
     <string name="poi_access_customers">Åtkomst för kunder</string>
     <string name="poi_access_delivery">Åtkomst vid leverans</string>
-    <string name="poi_access_agricultural">Åtkomst vid jordbruk</string>
+    <string name="poi_access_agricultural">Åtkomst för jordbruk</string>
     <string name="poi_content_silage">Innehåll: ensilage</string>
     <string name="poi_content_water">Innehåll: vatten</string>
     <string name="poi_content_slurry">Innehåll: flytgödsel</string>
@@ -1448,9 +1448,9 @@
     <string name="poi_aerialway_access_entry">Inträde endast</string>
     <string name="poi_aerialway_access_exit">Endast utgång</string>
     <string name="poi_aerialway_access_both">Inresa och utresa</string>
-    <string name="poi_aerialway_summer_access_entry">Sommaråtkomst: Endast entré</string>
-    <string name="poi_aerialway_summer_access_exit">Sommartillgång: Endast utgång</string>
-    <string name="poi_aerialway_summer_access_both">Sommartillgång: inresa och utgång</string>
+    <string name="poi_aerialway_summer_access_entry">Sommaråtkomst: Endast ingång</string>
+    <string name="poi_aerialway_summer_access_exit">Sommaråtkomst: Endast utgång</string>
+    <string name="poi_aerialway_summer_access_both">Sommaråtkomst: ingång och utgång</string>
     <string name="poi_stars_1">1 (turist)</string>
     <string name="poi_stars_1s">1S (Superior Turist)</string>
     <string name="poi_stars_2">2 (Standard)</string>
@@ -1681,8 +1681,8 @@
     <string name="poi_indoor_no">Utomhus</string>
     <string name="poi_toilets_yes">Ja;Toaletter</string>
     <string name="poi_toilets_no">Utan toaletter</string>
-    <string name="poi_toilets_wheelchair_yes">Tillgång till toaletter för rullstol: ja</string>
-    <string name="poi_toilets_wheelchair_no">Tillgång till toaletter för rullstol: nej</string>
+    <string name="poi_toilets_wheelchair_yes">Toalett tillgänglig för rullstol: ja</string>
+    <string name="poi_toilets_wheelchair_no">Toalett tillgänglig för rullstol: nej</string>
     <string name="poi_toilets_access_customers">Toalettillgång: kunder</string>
     <string name="poi_toilets_access_permissive">Toalettillgång: tillåtande</string>
     <string name="poi_toilets_access_community">Toalettillgång: gemenskap</string>
@@ -3038,7 +3038,7 @@
     <string name="poi_toilets_disposal_flush">Toalettyp: vattenklosett</string>
     <string name="poi_toilets_disposal_pitlatrine">Toalettyp: latringrop</string>
     <string name="poi_toilets_disposal_chemical">Toalettyp: kemisk</string>
-    <string name="poi_toilets_disposal_bucket">Toalettyp: spann</string>
+    <string name="poi_toilets_disposal_bucket">Toalettyp: latrintunna</string>
     <string name="poi_public_bookcase">Offentlig bokhylla</string>
     <string name="poi_public_bookcase_type_phone_box">Typ: telefonkiosk</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Typ: träskåp</string>
@@ -4293,4 +4293,5 @@
     <string name="poi_medical_supply_home_care">Hemsjukvård</string>
     <string name="poi_hiking_yes">Ja</string>
     <string name="poi_hiking_filter">Lämplig för vandring</string>
+    <string name="poi_toilets_disposal_dry_toilet">Toalettyp: torrtoalett</string>
 </resources>
