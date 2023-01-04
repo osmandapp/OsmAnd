@@ -5014,7 +5014,7 @@
     <string name="deleted_file">Archivo borrado</string>
     <string name="sync_now">Sincronizar ahora</string>
     <string name="local_changes">Cambios locales</string>
-    <string name="cloud_version_will_be_removed">Se quitará la versión en la nube</string>
+    <string name="cloud_version_will_be_removed">La versión en la nube será quitada</string>
     <string name="cloud_changes_will_be_dismissed">Los cambios en la nube serán descartados</string>
     <string name="local_file_will_be_restored">El archivo local será restaurado</string>
     <string name="local_changes_will_be_dismissed">Los cambios locales serán descartados</string>
