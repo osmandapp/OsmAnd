@@ -4971,4 +4971,8 @@
     <string name="show_map_symbols">Montri simbolojn</string>
     <string name="show_map_symbols_desc">Tekstoj, trafiksignoj kaj aliaj.</string>
     <string name="map_rendering_engine_descr">La map-bildigilo en versio 2 (OpenGL) estas pli rapida kaj subtenas 2,5-dimensian vidon. La map-bildigilo en versio 1 estis implicita ĝis OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.</string>
+    <string name="si_nm_mt">Marmejloj/metroj</string>
+    <string name="si_nm_ft">Marmejloj/futoj</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elekti formon de sona eligo. Dosierformo por sono estas 3GPP (.3gp).</string>
+    <string name="choose_what_to_sync">Elektu kion samtempigi</string>
 </resources>
