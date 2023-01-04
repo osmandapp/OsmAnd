@@ -4627,7 +4627,7 @@
     <string name="shortcut_start_recording">Пачаць запіс</string>
     <string name="from_with_param">Ад %1$s</string>
     <string name="routing_attr_avoid_tunnels_description">Пазбягаць тунэляў</string>
-    <string name="routing_attr_goods_restrictions_description">Улічваць дазволы на доступ для лёгкіх грузавых транспартных сродкаў (з таварам)</string>
+    <string name="routing_attr_goods_restrictions_description">Улічваць дазвол на доступ для лёгкіх грузавых транспартных сродкаў (з таварам)</string>
     <string name="transport_hazmat_no_desc">Па некаторых дарогах і тунэлях перавозка небяспечных матэрыялаў забаронена.</string>
     <string name="use_latin_name_if_missing">Пры адсутнасці выкарыстоўваць назву на лацінке</string>
     <string name="routing_attr_carriage_restrictions_name">Абмежаванні на перавозку</string>
@@ -4692,8 +4692,8 @@
     <string name="top_widgets_panel">Верхняя панэль</string>
     <string name="reading_files">Чытанне файлаў…</string>
     <string name="routing_attr_motor_type_name">Паліва, якое выкарыстоўваецца рухавіком</string>
-    <string name="marker_2nd">Другая пазнака</string>
-    <string name="marker_1st">Першая пазнака</string>
+    <string name="marker_2nd">Другая адзнака</string>
+    <string name="marker_1st">Першая адзнака</string>
     <string name="switch_widget_mode_desc">Вы можаце пераключыць рэжым, націснуўшы на віджэт.</string>
     <string name="reset_all_settings_desc">Вы ўпэўнены, што хочаце скінуць усе налады да прадвызначаных\?</string>
     <string name="goods_delivery_desc_4">Калі вага вашага аўтамабіля больш за 3,5 тоны, вам неабходна выкарыстоўваць профіль \"Грузавік\".</string>
@@ -4756,7 +4756,7 @@
     <string name="true_bearing_wdiget_desc">Вугал паміж сапраўднай поўначчу і мэтавым пунктам, які назіраецца з вашага месцазнаходжання.</string>
     <string name="relative_bearing_widget_desc">Паказвае вугал паміж вашым напрамкам руху наперад і мэтавым пунктам.</string>
     <string name="second_marker_widget_desc">Вы можаце наладзіць віджэт на адлюстраванне адлегласці або прыблізнага часу прыбыцця да другой адзнакі на мапе.</string>
-    <string name="second_next_turn_widget_desc">Віджэт паказвае інфармацыю аб вашым другім наступным павароце, які ўключаецца, калі паварот знаходзіцца на адлегласці набліжэння.</string>
+    <string name="second_next_turn_widget_desc">Віджэт паказвае інфармацыю пра ваш другі наступны паварот, калі вы набліжаецеся да паварота на пэўную адлегласць.</string>
     <string name="widget_with_dot">Віджэт.</string>
     <string name="next_turn_widget_desc">Віджэт паказвае інфармацыю пра ваш наступны паварот з выявай манеўру і адлегласцю да павароту.</string>
     <string name="compass_visible_if_map_rotated_desc">Схаваны, калі зверху поўнач</string>
