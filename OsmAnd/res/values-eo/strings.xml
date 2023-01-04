@@ -4799,7 +4799,7 @@
     <string name="map_widget_altitude_map_center_desc">Vidigas altecon super la marnivelo por la montrata centro de la mapo.</string>
     <string name="map_widget_altitude_desc">Fenestraĵoj montrantaj supermaran altecon de via nuna pozicio aŭ de la map-centro.</string>
     <string name="current_location_widget">Koordinatoj: nuna pozicio</string>
-    <string name="external_sensors_plugin_description">Ebligas legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas por ke la aparato estu konektita al kongruaj sentiloj per la sendrata protokolo ANT+.</string>
+    <string name="external_sensors_plugin_description">Aliro al eksteraj sentiloj por legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas por ke la aparato estu konektita al kongruaj sentiloj per la sendrata protokolo ANT+.</string>
     <string name="map_widget_rendering_fps">Rapido de map-bildigado</string>
     <string name="map_widget_rendering_fps_desc">Montras kiel rapide la mapo kaj ĝiaj elementoj estas bildigataj sur la ekrano (en kadroj en sekundo [FPS]).</string>
     <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”.
@@ -4813,7 +4813,7 @@
     <string name="send_uuid_preference_desc">Hazarda identigilo UUID estas uzata por elŝuti malkonektajn mapojn el la OsmAnd-serviloj por gardi laŭregulan uzadon de niaj serviloj, antaŭscii uzadon de datumtrafiko kaj generi anonimajn monatajn raportojn pri mapoj.</string>
     <string name="send_uuid_preference">Sendi unikan uzant-identigilon (UUID)</string>
     <string name="shared_string_identifiers">Identigiloj</string>
-    <string name="terms_of_service_desc">Elŝutante mapojn vi konsentas kun niaj %1$s kaj %2$s.</string>
+    <string name="terms_of_service_desc">Elŝutante mapojn vi konsentas kun: %1$s kaj %2$s.</string>
     <string name="shared_string_terms_of_use">Kondiĉoj pri uzado</string>
     <string name="favorites_backup">Sekurkopio de ŝatataj</string>
     <string name="purchases_feature_desc_cross_buy">Havigu viajn aĉetitajn trajtojn ĉe pluraj platformoj: Android/iOS/ret-aplikaĵo sen kroma pago.</string>
@@ -4824,7 +4824,7 @@
     <string name="ant_write_to_gpx">Konservi datumojn al spuro</string>
     <string name="map_widget_ant_heart_rate">Kora pulso</string>
     <string name="map_widget_ant_bicycle_power_desc">Montras povumon generatan de biciklisto por movi la biciklon</string>
-    <string name="ant_heart_rate_write_gpx_desc">Konservi koran pulson al spuro</string>
+    <string name="ant_heart_rate_write_gpx_desc">Inkluzivi koran pulson en spuro</string>
     <string name="map_widget_ant_bicycle_cadence">Rapido de pedalado</string>
     <string name="map_widget_ant_bicycle_speed_desc">Montras rapidon de movado</string>
     <string name="nautical_depth_points">Punktoj de marfundoj</string>
@@ -4859,6 +4859,10 @@
 \n• subteno por sentiloj ANT+
 \n
 \n• eblo malaktivigi sendi unikan uzant-identigilon «UUID» dum elŝuti mapojn
+\n
+\n• antaŭkalkulitaj alvenaj tempoj konsiderantaj altitudon kaj agorditan rapidon por piediradaj kursoj
+\n
+\n• riparita sinteno de sona eligo kaj sonforteca ŝovilo
 \n
 \n</string>
     <string name="shared_string_open">Malfermi</string>
@@ -4962,4 +4966,9 @@
     <string name="weather_temperature_celsius">Celsia</string>
     <string name="rendering_engine_failed">La map-bildigilo de OsmAnd antaŭnelonge paneis.</string>
     <string name="temperature_widget_desc">Fenestraĵo montranta temperaturon por la nuna map-centro.</string>
+    <string name="map_rendering_engine">Map-bildigilo</string>
+    <string name="show_borders_of_downloaded_maps">Montri randojn de elŝutitaj mapoj</string>
+    <string name="show_map_symbols">Montri simbolojn</string>
+    <string name="show_map_symbols_desc">Tekstoj, trafiksignoj kaj aliaj.</string>
+    <string name="map_rendering_engine_descr">La map-bildigilo en versio 2 (OpenGL) estas pli rapida kaj subtenas 2,5-dimensian vidon. La map-bildigilo en versio 1 estis implicita ĝis OsmAnd 4.3 kaj plue estas konsilinda por pli malnovaj aparatoj.</string>
 </resources>

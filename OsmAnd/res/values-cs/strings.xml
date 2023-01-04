@@ -884,7 +884,7 @@
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávání audia/videa. Stiskněte tlačítko Stop pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
-    <string name="recording_delete_confirm">Smazat tento záznam\?</string>
+    <string name="recording_delete_confirm">Smazat tuto položku\?</string>
     <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
     <string name="recording_context_menu_vrecord">Nahrát video poznámku</string>
     <string name="recording_can_not_be_played">Nepodařilo se přehrát záznam.</string>
@@ -3272,8 +3272,8 @@
     <string name="shared_string_poi_types">Typy POI</string>
     <string name="shared_string_preparing">Připravuji</string>
     <string name="shared_string_app_default_w_val">Výchozí hodnota (%s)</string>
-    <string name="recalc_angle_dialog_title">Minimální úhel mezi mojí polohou a trasou</string>
-    <string name="recalc_angle_dialog_descr">Dokud nebude trasa přepočítána, zobrazí se navíc rovný úsek mezi aktuální polohou a vypočítanou trasou</string>
+    <string name="recalc_angle_dialog_title">Minimální úhel mezi mou polohou a trasou</string>
+    <string name="recalc_angle_dialog_descr">Dokud nebude trasa přepočítána, bude mezi mou polohou a vypočtenou trasou zobrazen další přímý úsek</string>
     <string name="profile_type_custom_string">Vlastní profil</string>
     <string name="import_rendering_file">Importovat soubor vykreslování</string>
     <string name="select_track_file">Vyberte soubor stopy</string>
@@ -3796,8 +3796,8 @@
     <string name="monitoring_min_speed_descr">Tento filtr nebude zaznamenávat body při nižších rychlostech. Díky tomu může být zaznamenaná stopa hladší při zobrazení na mapě.</string>
     <string name="plugin_global_prefs_info">Tato nastavení jsou globální a platí pro všechny profily</string>
     <string name="login_open_street_map">Přihlásit se do OpenStreetMap</string>
-    <string name="login_open_street_map_org">Přihlásit se do OpenStreetMap.org</string>
-    <string name="sign_in_with_open_street_map">Zaregistrovat se do OpenStreetMap</string>
+    <string name="login_open_street_map_org">Přihlášení do OpenStreetMap.org</string>
+    <string name="sign_in_with_open_street_map">Přihlaste se pomocí OpenStreetMap</string>
     <string name="osm_edits_view_descr">Zobrazte své dosud neodeslané změny či chyby v OSM v %1$s. Odeslané změny se již v OsmAnd nezobrazují.</string>
     <string name="open_street_map_login_mode">Abyste mohli odeslat nová nebo změněná data, musíte se nejprve přihlásit.
 \n
@@ -3963,9 +3963,9 @@
     <string name="uploaded_count">Nahráno %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
     <string name="hillshade_slope_contour_lines">Stínované svahy / Sklon svahů / Vrstevnice</string>
-    <string name="open_place_reviews_plugin_description">Posílejte fotografie, hodnocení a odkazy o veřejných místech jako jsou restaurace, hotely, muzea a body zájmu jako otevřená data na http://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Přispívejte do projektu OpenPlaceReviews, například fotografiemi, recenzemi nebo odkazy na veřejná místa, jako jsou restaurace, hotely nebo muzea.
 \n
-\nPřečtěte si více na http://openplacereviews.org</string>
+\nNávod, jak přispět, najdete na našich webových stránkách https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
@@ -3999,7 +3999,7 @@
 \nVeškerá neuložená data budou ztracena.</string>
     <string name="on_pause">Při pozastavení</string>
     <string name="app_restart_required">Některá nastavení vyžadují restart aplikace.</string>
-    <string name="routing_attr_height_obstacles_description">Algoritmus výpočtu trasy se může vyhnout strmým svahům.</string>
+    <string name="routing_attr_height_obstacles_description">Předpokládaná doba jízdy bude odrážet vliv nadmořské výšky. Preference trasování může pomoci vyhnout se strmým stoupáním:</string>
     <string name="quick_action_coordinates_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje Souřadnice na mapě.</string>
     <string name="map_widget_distance_by_tap">Vzdálenost klepnutím</string>
     <string name="latest_openstreetmap_update">Dostupná nejnovější aktualizace OpenStreetMap:</string>
@@ -4328,15 +4328,15 @@
     <string name="delete_history_items_descr">Smazat vybrané položky historie\?</string>
     <string name="routeInfo_winter_ice_road_description">Obarvit čáru trasy nebo stopy podle její zimní klasifikace.</string>
     <string name="connect_track_points_as">Spojit body trasy</string>
-    <string name="benefits_for_contributors_primary_descr">Aktivní přispěvatelé do OpenStreetMap.org mohou mít nárok na neomezené hodinové aktualizace map.</string>
+    <string name="benefits_for_contributors_primary_descr">Aktivní přispěvatelé na OpenStreetMap.org mohou mít nárok na neomezené hodinové aktualizace map.</string>
     <string name="backup_deleted_all_data">Všechna data byla odstraněna.</string>
     <string name="backup_deleting_all_data">Odstraňují se všechna data…</string>
     <string name="purchases_feature_desc_osmand_cloud">Získejte OsmAnd Cloud pro ukládání všech OsmAnd dat. Po přeinstalování již neztratíte svá data. Zálohujte a obnovujte data jednoduše.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Získejte přístup k častějším aktualizacím map. Hodinové, denní nebo týdenní aktualizace. Aktualizace se stahují inkrementálně, pouze pro změněnou oblast.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Získejte neomezené stahování offline map všech kontinentů a oblastí.</string>
     <string name="enough_contributions_descr">Gratulujeme, dostatečně přispíváte do OpenStreetMap, a proto můžete nyní využívat neomezené aktualizace map v OsmAnd!</string>
-    <string name="benefits_for_contributors">Výhody pro aktivní OSM přispěvatele</string>
-    <string name="map_updates_for_mappers">Aktualizace map pro mapery</string>
+    <string name="benefits_for_contributors">Výhody pro aktivní přispěvatele OSM</string>
+    <string name="map_updates_for_mappers">Aktualizace map pro mappery</string>
     <string name="online_maps_searching_descr">Hledá se online…</string>
     <string name="offline_maps_required_descr">Některé offline mapy nezbytné pro výpočet této trasy chybějí.</string>
     <string name="direct_line_maps_required_descr">Výpočet trasy trvá déle než je obvyklé.
@@ -4383,7 +4383,7 @@
     <string name="purchases_feature_desc_wikivoyage">Prozkoumejte průvodce Wikivoyage offline. Články jsou rozdělené podle zemí a oblastí a jsou dostupné ve všech jazycích.</string>
     <string name="purchases_feature_desc_nautical">Získejte přístup k informacím o námořní hloubce</string>
     <string name="rendering_attr_natureReserves_name">Přírodní rezervace</string>
-    <string name="benefits_for_contributors_secondary_descr">Přihlaste se do OpenStreetMap, abyste zjistili, zda máte nárok na neomezené měsíční a hodinové aktualizace map.</string>
+    <string name="benefits_for_contributors_secondary_descr">Přihlaste se do OpenStreetMap a zkontrolujte, zda máte nárok na neomezené měsíční a hodinové aktualizace map.</string>
     <string name="use_login_and_password">Použít jméno a heslo</string>
     <string name="duration_moment_ago">před chvílí</string>
     <string name="online_maps_required_descr">Bohužel, OsmAnd nenašel trasu pro vaše nastavení.
@@ -4583,4 +4583,22 @@
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="rendering_attr_showRunningRoutes_description">Zobrazení běžeckých tras</string>
     <string name="av_audio_format_bottom_sheet_descr">Vyberte výstupní formát zvuku. Formát typu souboru pro zvuk je 3GPP (.3gp).</string>
+    <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
+    <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s nebude započítaná a neovlivní vaši průměrnou rychlost.</string>
+    <string name="weather_offline_forecast">Předpověď v režimu offline</string>
+    <string name="auto_25_chars_route_tr_kl">Odbočte vpravo a držte se vlevo.</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Mezinárodní asociace horské cyklistiky</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie srážek</string>
+    <string name="rendering_attr_weatherCloudContours_name">Izolinie mraků</string>
+    <string name="rendering_attr_showMtbScale_description">Zobrazit trasy podle stupnice MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Zobrazit stupnici MTB</string>
+    <string name="co2_mission">Emise CO2</string>
+    <string name="import_export">Import/Export</string>
+    <string name="export_to_file">Export do souboru</string>
+    <string name="shared_string_expires">Platnost končí</string>
+    <string name="shared_string_purchased_on">Zakoupeno dne</string>
+    <string name="shared_string_open">Otevřeno</string>
+    <string name="mtb_scale">Stupnice MTB</string>
+    <string name="simulation_real_mode_title">Realistická simulace</string>
 </resources>

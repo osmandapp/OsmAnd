@@ -4165,5 +4165,26 @@
     <string name="poi_playground_climbingframe">Lezecká sieť</string>
     <string name="poi_playground_climbingwall">Lezecká stena</string>
     <string name="poi_playground_balancebeam">Balančné brvno</string>
-    <string name="poi_playground_swing">Hojdačka</string>
+    <string name="poi_playground_swing">Visiaca hojdačka</string>
+    <string name="poi_playground_map">Detská mapa</string>
+    <string name="poi_playground_bridge">Mostík</string>
+    <string name="poi_playground_basketrotator">Rotujúci kôš</string>
+    <string name="poi_playground_aerialrotator">Závesný kolotoč</string>
+    <string name="poi_playground_horizontal_bar">Hrazda</string>
+    <string name="poi_playground_activitypanel">Panel s úlohou</string>
+    <string name="poi_playground_zipwire">Lanový sklz</string>
+    <string name="poi_playground_exercise">Vonkajšia posilňovňa</string>
+    <string name="poi_playground_splash_pad">Vodná spŕška</string>
+    <string name="poi_playground_youth_bench">Detská lavička</string>
+    <string name="poi_playground_sledding">Sánkovací sklz</string>
+    <string name="poi_playground_hopscotch">Značky na skákanie na chodníku</string>
+    <string name="poi_playground_teenshelter">Detský prístrešok</string>
+    <string name="poi_playground_springy">Pružinová hojdačka</string>
+    <string name="poi_playground_trampoline">Trampolína</string>
+    <string name="poi_playground_seesaw">Prevažovacia hojdačka</string>
+    <string name="poi_playground_basketswing">Hojdací kôš</string>
+    <string name="poi_playground_roundabout">Kolotoč</string>
+    <string name="poi_playground_cushion">Nafukovací vankúš</string>
+    <string name="poi_playground_spinning_circle">Rotujúci kruh</string>
+    <string name="poi_playground_water">Archimedova skrutka/zariadenie na prenos vody</string>
 </resources>
