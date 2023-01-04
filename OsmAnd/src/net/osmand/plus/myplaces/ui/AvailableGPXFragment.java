@@ -1107,7 +1107,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		public void addLocalIndexInfo(GpxInfo info) {
 			String catName;
 			if (info.gpx != null && info.gpx.showCurrentTrack) {
-				catName = info.name;
+				catName = info.getName();
 			} else {
 				// local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
 				// catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
@@ -1647,70 +1647,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		allGpxAdapter.notifyDataSetInvalidated();
 		return true;
-	}
-
-	public static class GpxInfo {
-		public boolean currentlyRecordingTrack;
-		public GPXFile gpx;
-		public File file;
-		public String subfolder;
-
-		private String name;
-		private int sz = -1;
-		private String fileName;
-		private boolean corrupted;
-
-		public GpxInfo() {
-		}
-
-		public GpxInfo(GPXFile file, String name) {
-			this.gpx = file;
-			this.name = name;
-		}
-
-		public String getName() {
-			if (name == null) {
-				name = GpxUiHelper.getGpxTitle(file.getName());
-			}
-			return name;
-		}
-
-		public boolean isCorrupted() {
-			return corrupted;
-		}
-
-		public int getSize() {
-			if (sz == -1) {
-				if (file == null) {
-					return -1;
-				}
-				sz = (int) ((file.length() + 512));
-			}
-			return sz;
-		}
-
-		public long getFileDate() {
-			if (file == null) {
-				return 0;
-			}
-			return file.lastModified();
-		}
-
-		public void setGpx(GPXFile gpx) {
-			this.gpx = gpx;
-		}
-
-		@NonNull
-		public String getFileName() {
-			if (fileName != null) {
-				return fileName;
-			} else if (file == null) {
-				return "";
-			} else {
-				fileName = file.getName();
-				return fileName;
-			}
-		}
 	}
 
 	public interface GpxInfoViewCallback {
