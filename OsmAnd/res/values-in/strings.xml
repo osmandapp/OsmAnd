@@ -5025,4 +5025,6 @@
     <string name="local_changes_will_be_dismissed">Perubahan lokal akan diabaikan</string>
     <string name="import_export">Impor/Ekspor</string>
     <string name="av_audio_format_bottom_sheet_descr">Pilih format keluaran audio. Jenis format berkas untuk audio adalah 3GPP (.3gp).</string>
+    <string name="si_nm_mt">Mil/meter laut</string>
+    <string name="si_nm_ft">Mil/kaki laut</string>
 </resources>
