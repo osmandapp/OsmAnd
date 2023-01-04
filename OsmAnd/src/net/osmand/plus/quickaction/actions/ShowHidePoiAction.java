@@ -40,11 +40,12 @@ import java.util.List;
 import java.util.Set;
 
 public class ShowHidePoiAction extends QuickAction {
+	private static final int defaultActionNameId = R.string.poi;
 
 	public static final QuickActionType TYPE = new QuickActionType(5,
 			"poi.showhide", ShowHidePoiAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
-			.nameRes(R.string.poi)
+			.nameRes(defaultActionNameId)
 			.iconRes(R.drawable.ic_action_info_dark)
 			.category(QuickActionType.CONFIGURE_MAP);
 
@@ -183,22 +184,18 @@ public class ShowHidePoiAction extends QuickAction {
 			}
 
 			holder.title.setText(filter.getName());
-			holder.delete.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
+			holder.delete.setOnClickListener(view -> {
+				String oldTitle = getTitle(filters);
 
-					String oldTitle = getTitle(filters);
+				filters.remove(position);
+				savePoiFilters(filters);
 
-					filters.remove(position);
-					savePoiFilters(filters);
+				notifyDataSetChanged();
 
-					notifyDataSetChanged();
-
-					String titleContent = title.getText().toString();
-					if (oldTitle.equals(titleContent) || titleContent.equals(getName(holder.title.getContext()))) {
-						String newTitle = getTitle(filters);
-						title.setText(newTitle);
-					}
+				String titleContent = title.getText().toString();
+				if (oldTitle.equals(titleContent) || titleContent.equals(view.getContext().getString(defaultActionNameId))) {
+					String newTitle = getTitle(filters);
+					title.setText(newTitle);
 				}
 			});
 		}
@@ -285,34 +282,26 @@ public class ShowHidePoiAction extends QuickAction {
 		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
 		ArrayAdapter<ContextMenuItem> listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
+		builder.setAdapter(listAdapter, (dialog, which) -> {
+			String oldTitle = getTitle(filtersAdapter.filters);
 
-				String oldTitle = getTitle(filtersAdapter.filters);
+			filtersAdapter.addItem(list.get(which));
 
-				filtersAdapter.addItem(list.get(which));
-
-				String titleContent = title.getText().toString();
-				if (oldTitle.equals(titleContent) || titleContent.equals(getName(mapActivity))) {
-					String newTitle = getTitle(filtersAdapter.filters);
-					title.setText(newTitle);
-				}
+			String titleContent = title.getText().toString();
+			if (oldTitle.equals(titleContent) || titleContent.equals(mapActivity.getString(defaultActionNameId))) {
+				String newTitle = getTitle(filtersAdapter.filters);
+				title.setText(newTitle);
 			}
-
 		});
 		builder.setTitle(R.string.show_poi_over_map);
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 
 		AlertDialog alertDialog = builder.create();
 
-		alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-				Drawable drawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_multiselect);
-				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-			}
+		alertDialog.setOnShowListener(dialog -> {
+			Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+			Drawable drawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_multiselect);
+			neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 		});
 
 		alertDialog.show();
