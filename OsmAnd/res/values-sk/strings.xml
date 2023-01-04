@@ -5015,4 +5015,6 @@
     <string name="last_sync">Posledná synchronizácia</string>
     <string name="import_export">Import/Export</string>
     <string name="export_to_file">Exportovať do súboru</string>
+    <string name="si_nm_mt">Námorné míle/metre</string>
+    <string name="si_nm_ft">Námorné míle/stopy</string>
 </resources>
