@@ -5012,5 +5012,5 @@
     <string name="changes">Modifications %1$s</string>
     <string name="si_nm_ft">Milles marins / pieds</string>
     <string name="si_nm_mt">Milles marins / mètres</string>
-    <string name="av_audio_format_bottom_sheet_descr">Sélectionner le format audio de sortie. Le format pour les fichiers audio est 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Sélectionnez le format audio de sortie. Les fichiers audio sont de type 3GPP (.3gp).</string>
 </resources>
