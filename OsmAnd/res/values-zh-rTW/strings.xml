@@ -777,8 +777,8 @@
     <string name="app_mode_car">駕駛</string>
     <string name="app_mode_bicycle">自行車</string>
     <string name="app_mode_pedestrian">走路</string>
-    <string name="position_on_map_center">中間</string>
-    <string name="position_on_map_bottom">下方</string>
+    <string name="position_on_map_center">中心</string>
+    <string name="position_on_map_bottom">下面</string>
     <string name="navigate_point_top_text">以選定的格式輸入輸入緯度和經度（D - 度，M - 分，S - 秒）</string>
     <string name="navigate_point_latitude">緯度</string>
     <string name="navigate_point_longitude">經度</string>
