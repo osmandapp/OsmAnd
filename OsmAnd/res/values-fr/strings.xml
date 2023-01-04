@@ -5010,4 +5010,6 @@
     <string name="cloud_no_conflicts">Il n\'y a aucun conflit</string>
     <string name="cloud_all_changes_uploaded_descr">Toutes les modifications effectuées sur cet appareil sont synchronisées avec OsmAnd Cloud.</string>
     <string name="changes">Modifications %1$s</string>
+    <string name="si_nm_ft">Milles marins / pieds</string>
+    <string name="si_nm_mt">Milles marin / mètres</string>
 </resources>
