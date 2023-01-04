@@ -4584,7 +4584,7 @@
     <string name="rendering_attr_showRunningRoutes_description">Zobrazení běžeckých tras</string>
     <string name="av_audio_format_bottom_sheet_descr">Vyberte výstupní formát zvuku. Formát typu souboru pro zvuk je 3GPP (.3gp).</string>
     <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
-    <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s nebude započítaná a neovlivní vaši průměrnou rychlost.</string>
+    <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s bude započítaná a ovlivní vaši průměrnou rychlost.</string>
     <string name="weather_offline_forecast">Předpověď v režimu offline</string>
     <string name="auto_25_chars_route_tr_kl">Odbočte vpravo a držte se vlevo.</string>
     <string name="mtb_imba">IMBA</string>
@@ -4601,4 +4601,5 @@
     <string name="shared_string_open">Otevřeno</string>
     <string name="mtb_scale">Stupnice MTB</string>
     <string name="simulation_real_mode_title">Realistická simulace</string>
+    <string name="transport_hazmat_title">Přeprava nebezpečných materiálů</string>
 </resources>
