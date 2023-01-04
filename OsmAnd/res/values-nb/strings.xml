@@ -4853,4 +4853,35 @@
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="distance_by_tap_use_description">Trykk på kartet for å vise avstanden mellom din nåværende posisjon og det trykte punktet.
 \nTrykk med 2 fingre på kartet for å vise avstanden mellom de trykte punktene.</string>
+    <string name="shared_string_purchased_on">Kjøpt</string>
+    <string name="si_nm_ft">Sjømil/fot</string>
+    <string name="cloud_no_conflicts">Ingen konflikter</string>
+    <string name="download_cloud_version">Last ned sky-verjson</string>
+    <string name="shared_string_do_not_exist">Finnes ikke</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Klarte ikke å hente fillisten fra tjeneren.</string>
+    <string name="last_sync">Siste synkronisering</string>
+    <string name="import_export">Import/eksport</string>
+    <string name="cloud_changes">Sky-endringer</string>
+    <string name="shared_string_uploaded">Opplastet</string>
+    <string name="shared_string_cloud">Sky</string>
+    <string name="new_file">Ny fil</string>
+    <string name="modified_file">Endret fil</string>
+    <string name="deleted_file">Slettet fil</string>
+    <string name="sync_now">Synkroniser nå</string>
+    <string name="local_changes">Lokale endringer</string>
+    <string name="upload_change">Last opp endring</string>
+    <string name="cloud_version_will_be_removed">Sky-versjon vil bli fjernet</string>
+    <string name="cloud_changes_will_be_dismissed">Sky-endringer vil bli forkastet</string>
+    <string name="local_file_will_be_restored">Lokal fil vil bli gjenopprettet</string>
+    <string name="local_changes_will_be_dismissed">Lokale endringer vil bli forkastet</string>
+    <string name="cloud_conflicts">Konflikter</string>
+    <string name="cloud_conflict">Konflikt</string>
+    <string name="upload_all">Last opp alle</string>
+    <string name="cloud_recent_changes">Endringer</string>
+    <string name="cloud_all_changes_downloaded">Alle endringer nedlastet</string>
+    <string name="cloud_all_changes_uploaded_descr">Alle endringer på denne enheten synkroniseres med OsmAnd-sky.</string>
+    <string name="export_to_file">Eksporter til fil</string>
+    <string name="shared_string_expires">Utløper</string>
+    <string name="cloud_all_changes_uploaded">Alle endringer opplastet</string>
+    <string name="si_nm_mt">Sjømil/meter</string>
 </resources>
