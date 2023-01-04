@@ -5020,4 +5020,6 @@
     <string name="sync_now">Синхронізувати зараз</string>
     <string name="cloud_all_changes_downloaded">Усі зміни завантажено</string>
     <string name="av_audio_format_bottom_sheet_descr">Виберіть формат аудіовиходу. Формат типу файлу для аудіо - 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Морські милі/фути</string>
+    <string name="si_nm_mt">Морські милі/метри</string>
 </resources>
