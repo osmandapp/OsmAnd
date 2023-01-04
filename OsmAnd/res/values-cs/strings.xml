@@ -4591,7 +4591,7 @@
     <string name="mtb_imba_full">Mezinárodní asociace horské cyklistiky</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie srážek</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinie mraků</string>
-    <string name="rendering_attr_showMtbScale_description">Zobrazte trasy podle stupnice MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Zobrazit trasy podle stupnice MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Zobrazit stupnici MTB</string>
     <string name="co2_mission">Emise CO2</string>
     <string name="import_export">Import/Export</string>
