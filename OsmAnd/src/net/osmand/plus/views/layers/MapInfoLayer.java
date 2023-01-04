@@ -139,6 +139,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void updateSideWidgets(){
 		leftWidgetsPanel.update(drawSettings);
 		rightWidgetsPanel.update(drawSettings);
+		for(SideWidgetsPanel sideWidgetsPanel : sideWidgetsPanels){
+			sideWidgetsPanel.update(drawSettings);
+		}
 	}
 
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
