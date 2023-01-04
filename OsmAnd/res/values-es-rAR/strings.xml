@@ -5014,7 +5014,7 @@
     <string name="deleted_file">Archivo borrado</string>
     <string name="sync_now">Sincronizar ahora</string>
     <string name="local_changes">Cambios locales</string>
-    <string name="cloud_version_will_be_removed">Se quitará la versión en la nube</string>
+    <string name="cloud_version_will_be_removed">La versión en la nube será quitada</string>
     <string name="cloud_changes_will_be_dismissed">Los cambios en la nube serán descartados</string>
     <string name="local_file_will_be_restored">El archivo local será restaurado</string>
     <string name="local_changes_will_be_dismissed">Los cambios locales serán descartados</string>
@@ -5029,7 +5029,7 @@
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="last_sync">Última sincronización</string>
     <string name="import_export">Importar/Exportar</string>
-    <string name="export_to_file">Exportar a archivo</string>
+    <string name="export_to_file">Exportar a un archivo</string>
     <string name="changes">Cambios %1$s</string>
     <string name="cloud_sync_progress">Sincronizar... %1$s</string>
     <string name="cloud_changes">Cambios en la nube</string>
@@ -5037,4 +5037,6 @@
     <string name="upload_change">Subir cambio</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
     <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Millas/pies náuticos</string>
+    <string name="si_nm_mt">Millas/metros náuticos</string>
 </resources>
