@@ -5011,5 +5011,6 @@
     <string name="cloud_all_changes_uploaded_descr">Toutes les modifications effectuées sur cet appareil sont synchronisées avec OsmAnd Cloud.</string>
     <string name="changes">Modifications %1$s</string>
     <string name="si_nm_ft">Milles marins / pieds</string>
-    <string name="si_nm_mt">Milles marin / mètres</string>
+    <string name="si_nm_mt">Milles marins / mètres</string>
+    <string name="av_audio_format_bottom_sheet_descr">Sélectionner le format audio de sortie. Le format pour les fichiers audio est 3GPP (.3gp).</string>
 </resources>
