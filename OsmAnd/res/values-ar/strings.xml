@@ -2072,7 +2072,7 @@
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourDensity_description">كثافة الخط الكنتوري</string>
     <string name="rendering_attr_contourDensity_name">كثافة الخط الكنتوري</string>
-    <string name="rendering_value_high_name">عالي</string>
+    <string name="rendering_value_high_name">عال</string>
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
     <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
@@ -5089,4 +5089,6 @@
     <string name="last_sync">آخر مزامنة</string>
     <string name="import_export">استيراد/تصدير</string>
     <string name="export_to_file">تصدير إلى ملف</string>
+    <string name="si_nm_ft">ميل بحري/قدم</string>
+    <string name="si_nm_mt">ميل بحري/متر</string>
 </resources>
