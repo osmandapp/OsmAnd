@@ -5014,4 +5014,6 @@
     <string name="import_export">匯入 / 匯出</string>
     <string name="export_to_file">匯出至檔案</string>
     <string name="av_audio_format_bottom_sheet_descr">選取音訊輸出格式。音訊的檔案類型格式為 3GPP (.3gp)。</string>
+    <string name="si_nm_mt">海浬/公尺</string>
+    <string name="si_nm_ft">海浬/英呎</string>
 </resources>
