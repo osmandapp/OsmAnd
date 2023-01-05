@@ -84,8 +84,8 @@
     <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
     <string name="map_text_size_descr">Rozmiar tekstu dla nazw na mapie:</string>
     <string name="map_text_size">Rozmiar tekstu</string>
-    <string name="trace_rendering">Informacje o diagnozowaniu błędów renderowania</string>
-    <string name="trace_rendering_descr">Wyświetla informacje o wydajności renderowania.</string>
+    <string name="trace_rendering">Informacje o debugowaniu wydajności</string>
+    <string name="trace_rendering_descr">Wyświetl wydajność renderowania i nawigacji.</string>
     <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
     <string name="internet_connection_required_for_online_route">Nawigacja online nie działa offline.</string>
     <string name="tts_language_not_supported_title">Nieobsługiwany język</string>
@@ -254,7 +254,7 @@
     <string name="poi_context_menu_delete">Usuń użyteczne miejsce</string>
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
-    <string name="rotate_map_none_opt">Bez obracania (północ zawsze na górze)</string>
+    <string name="rotate_map_none_opt">Zablokowane (północ jest na górze)</string>
     <string name="rotate_map_to_bearing_descr">Obracanie mapy:</string>
     <string name="rotate_map_to_bearing">Orientacja mapy</string>
     <string name="show_route">Szczegóły trasy</string>
@@ -547,14 +547,14 @@
     <string name="map_online_data_descr">Korzystaj z map online (pobieraj i przechowuj kafelki na karcie pamięci).</string>
     <string name="shared_string_online_maps">Mapy online</string>
     <string name="online_map_settings_descr">Wybierz źródła kafelków online i offline.</string>
-    <string name="osmand_rastermaps_plugin_description">Umożliwia dostęp do wielu rodzajów map online (tzw. kafelkowych lub rastrowych), od predefiniowanych kafelków OSM (jak Mapnik) po zdjęcia satelitarne, i warstw specjalnego przeznaczenia, takich jak mapy pogodowe, mapy klimatyczne, mapy geologiczne, warstwy mapy cieniowanej itd.
+    <string name="osmand_rastermaps_plugin_description">Umożliwia dostęp do wielu rodzajów map online (tzw. kafelkowych lub rastrowych), jak prerenderowane kafelki OSM,zdjęcia satelitarne, i warstw specjalnego przeznaczenia, takich jak mapy pogodowe, mapy klimatyczne, mapy geologiczne, warstwy mapy cieniowanej itd.
 \n
-\nKażda z tych map może być używana jako główna (podstawowa) mapa, która ma być wyświetlana jako nakładka lub podkład do innej mapy podstawowej (jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można ukryć za pomocą menu „Skonfiguruj mapę”, aby podkład był bardziej widoczny.
+\nKażda z tych map może być wyświetlana jako główna (podstawowa) mapa, która ma być wyświetlana jako nakładka lub podkład do innej mapy podstawowej (jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można ukryć za pomocą menu „Skonfiguruj mapę”, aby podkład był bardziej widoczny.
 \n
 \nPobieraj mapy kafelkowe bezpośrednio online albo przygotuj je do użytku w trybie offline (ręcznie skopiowane do katalogu danych OsmAnd) jako baza danych SQLite, którą można utworzyć za pomocą różnych narzędzi do przygotowywania map od innych firm.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
-    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
-    <string name="osmand_development_plugin_description">Umożliwia skonfigurowanie OsmAnd do testowania: symulowanie tras nawigacji, sprawdzanie wydajności renderowania ekranu itp. Wtyczka nie jest wymagana do normalnego użytkowania aplikacji.</string>
+    <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala to np. na dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
+    <string name="osmand_development_plugin_description">Zapewnia funkcjonalność do testowania i debugowania OsmAnd: symuluj trasy nawigacji, monitoruj renderowanie ekranu, sprawdzaj wydajność itp. Ta wtyczka nie jest wymagana do normalnego użytkowania aplikacji.</string>
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
     <string name="prefs_plugins">Wtyczki</string>
@@ -885,7 +885,7 @@
 \nWięcej informacji na stronie http://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
-    <string name="audionotes_plugin_description">Twórz uwagi audio/zdjęcia/wideo podczas podróży, korzystając z przycisku mapy lub menu kontekstowego lokalizacji.</string>
+    <string name="audionotes_plugin_description">Rób notatki audio/zdjęcia/wideo podczas podróży, używając przycisku mapy lub menu kontekstowego lokalizacji.</string>
     <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
     <string name="audionotes_location_not_defined">Naciśnij „Użyj położenia…”, aby dodać uwagę do lokalizacji.</string>
     <string name="map_widget_audionotes">Uwagi z audio</string>
@@ -1498,7 +1498,7 @@
     <string name="plugin_nautical_descr">Wzbogaca mapę o informacje o szlakach żeglarskich, światłach nawigacyjnych, strefach niebezpiecznych dla żeglugi, strefach z ograniczeniami żeglugi lub dokowania itp. Aby użyć, pobierz odpowiednie mapy żeglarskie i włącz styl \"Mapa żeglarska\" w \"Konfiguracja mapy\".
 \n
 \nWięcej informacji na stronie https://osmand.net/docs/user/plugins/nautical-charts .</string>
-    <string name="plugin_ski_descr">Zaprojektowany do nawigacji w miejscach uprawiania sportów zimowych. Obserwuj trasy narciarskie, znaczniki wyciągów oraz kolorowe linie wskazujące stopień skomplikowania każdej trasy. Aby użyć po włączeniu przejdź do Konfiguracja mapy i wybierz typ mapy \"Zima i narty\".</string>
+    <string name="plugin_ski_descr">Zaprojektowany do poruszania się po obszarach sportów zimowych: Zobacz trasy narciarskie i wyciągi narciarskie oraz trasy narciarstwa biegowego, z kolorowymi liniami wskazującymi stopnie trudności. Aby użyć, włącz tę wtyczkę, a także przejdź do „Konfiguruj mapę” i wybierz styl mapy „Zima i narty”.</string>
     <string name="shared_string_message">Wiadomość</string>
     <string name="shared_string_do_not_use">Nie używaj</string>
     <string name="shared_string_address">Adres</string>
@@ -2254,7 +2254,7 @@
     <string name="edit_name">Zmień nazwę</string>
     <string name="display_zoom_level">Stopień przybliżenia: %1$s</string>
     <string name="srtm_color_scheme">Zestaw kolorów</string>
-    <string name="show_from_zoom_level">Wyświetlaj, zaczynając od stopnia przybliżenia</string>
+    <string name="show_from_zoom_level">Wyświetlanie rozpoczyna się na poziomie powiększenia</string>
     <string name="routing_attr_allow_private_name">Uwzględniaj prywatne obszary</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów.</string>
     <string name="route_is_too_long_v2">Na duże odległości: Dodaj pośrednie cele podróży, jeśli w ciągu 10 minut nie zostanie znaleziona żadna trasa.</string>
@@ -2295,7 +2295,7 @@
     <string name="mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="online_photos">Zdjęcia w sieci</string>
     <string name="no_photos_descr">Nie ma tu zdjęć.</string>
-    <string name="plugin_mapillary_descr">Wyświetla widoki z poziomu ulicy. Tam, gdzie brakuje zdjęć, możesz dodać je samodzielnie, aby inni mogli z nich skorzystać. Aby włączyć warstwę Mapillary, włącz „Zdjęcia na poziomie ulicy” w menu Konfiguruj mapę.</string>
+    <string name="plugin_mapillary_descr">Zdjęcia widoków z poziomu ulicy. Możesz również samemu je zrobić. Aby zobaczyć istniejące dane jako warstwę mapy, włącz „Zdjęcia z poziomu ulicy” w menu „Konfiguruj mapę”.</string>
     <string name="shared_string_install">Zainstaluj</string>
     <string name="improve_coverage_mapillary">Zwiększ pokrycie zdjęć Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Zainstaluj Mapillary, aby dodać zdjęcia do tej lokalizacji na mapie.</string>
@@ -3321,7 +3321,7 @@
     <string name="monitoring_min_speed_descr_remark">Uwaga: kontrola prędkości &gt; 0: większość zestawów GPS zgłasza wartość prędkości tylko wtedy, gdy algorytm określa, że jesteś w ruchu, a żadna, jeśli nie jesteś. Dlatego użycie ustawienia &gt; 0 w tym filtrze w pewnym sensie wykorzystuje wykrywanie ruchu chipsetu GPS. Ale nawet jeśli nie zostanie przefiltrowane tutaj w czasie nagrywania, nadal używamy tej funkcji w naszej analizie GPX do określenia skorygowanej odległości, tj. wartość wyświetlana w tym polu to odległość zarejestrowana podczas ruchu.</string>
     <string name="monitoring_min_accuracy_descr">Spowoduje to rejestrowanie tylko punktów mierzonych przy minimalnym wskaźniku dokładności (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność to bliskość pomiarów do rzeczywistej pozycji i nie jest bezpośrednio związana z precyzją, która jest rozrzutem powtarzanych pomiarów.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: trudno jest przewidzieć, jakie dane zostaną zarejestrowane, a jakie nie. Możliwe, że najlepiej będzie wyłączyć ten filtr.</string>
-    <string name="monitoring_min_distance_descr">Zapobiega zapisywaniu powielonych punktów, zbyt mało oddalonych od siebie. Zapewnia bardziej przejrzysty wygląd tras niepoddawanych późniejszej obróbce.</string>
+    <string name="monitoring_min_distance_descr">Włączenie tego filtra pozwala uniknąć dodatkowego rejestrowania danych, gdy ruch jest prawie niewykryty. Poprawia również przestrzenny wygląd ścieżek bez dalszej obróbki.</string>
     <string name="search_offline_geo_error">Nie można przeanalizować intencji geograficznej \'%s\'.</string>
     <string name="multimedia_notes_view_descr">Twoje uwagi OSM są w %1$s.</string>
     <string name="osm_authorization_success">Uwierzytelniono</string>
@@ -3399,7 +3399,7 @@
     <string name="index_name_antarctica">Antarktyda</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efekt uboczny: w wyniku filtrowania wg dokładności niektóre punkty mogą zostać całkowicie pominięte, np pod mostami, drzewami, pomiędzy budynkami lub w pewnych warunkach pogodowych.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efekt uboczny: okresy podczas spoczynku nie są w ogóle rejestrowane lub są rejestrowane jako pojedynczy punkt. Niewielkie ruchy (np. zboczenia z drogi, aby zaznaczyć możliwe warianty trasy) mogą zostać odfiltrowane. Plik zawiera mniej informacji do dalszej obróbki. Trasa ma gorsze statystyki po odfiltrowaniu zbędnych punktów podczas rejestrowania, ale zachowa artefakty spowodowane błędami odbioru lub błędami działania układu GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">Zalecenie: ustawienie 5 metrów może działać dobrze, jeśli nie potrzeba rejestrować szczegółów trasy mniejszych niż ta odległość i nie potrzeba rejestrować danych podczas odpoczynku.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Zalecenie: Ustaw przemieszczenie o 5 metrów, jeśli nie chcesz rejestrować drobnych szczegółów trasy i nie potrzebujesz dodatkowych danych o czasie odpoczynku.</string>
     <string name="live_monitoring_time_buffer">Bufor czasu</string>
     <string name="live_monitoring_tracking_interval">Częstość rejestrowania</string>
     <string name="live_monitoring_adress_descr">Określa adres internetowy z zachowaniem składni parametrów: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -3915,13 +3915,13 @@
     <string name="select_folder">Wybierz folder</string>
     <string name="select_folder_descr">Wybierz folder lub dodaj nowy</string>
     <string name="shared_string_empty">Puste</string>
-    <string name="analyze_by_intervals">Analiza przedziałów czasowych</string>
+    <string name="analyze_by_intervals">Analizuj według przedziałów</string>
     <string name="upload_to_openstreetmap">Prześlij do OpenStreetMap</string>
     <string name="edit_track">Edytuj trasę</string>
     <string name="rename_track">Zmień nazwę trasy</string>
     <string name="change_folder">Zmień folder</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_passing">Przekazywanie</string>
+    <string name="announcement_time_passing">Upłynęło</string>
     <string name="announcement_time_approach">Podejście</string>
     <string name="announcement_time_prepare_long">Długie przygotowanie</string>
     <string name="announcement_time_prepare">Przygotuj</string>
@@ -3991,7 +3991,7 @@
     <string name="shared_strings_all_regions">Wszystkie regiony</string>
     <string name="delete_number_files_question">Usunąć pliki %1$d\?</string>
     <string name="track_recording_stop_without_saving">Zatrzymaj bez zapisywania</string>
-    <string name="app_restart_required">Wymagane ponowne uruchomienie aplikacji w celu zastosowania niektórych ustawień.</string>
+    <string name="app_restart_required">Aby zastosować niektóre ustawienia, wymagane jest ponowne uruchomienie aplikacji.</string>
     <string name="quick_action_coordinates_widget_descr">Przełącznik służący do pokazywania lub ukrywania widżetu Współrzędne na mapie.</string>
     <string name="latest_openstreetmap_update">Dostępna najnowsza aktualizacja OpenStreetMap:</string>
     <string name="updated">Zaktualizowano: %s</string>
@@ -4172,7 +4172,7 @@
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
     <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami pokazującymi szczyty i niziny.</string>
     <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipodróże w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
-    <string name="purchases_feature_desc_wikipedia">Posiadanie Wikipedii offline podczas podróży pomaga dowiedzieć się więcej o odwiedzanych miejscach. Jest dostępny w trybie offline i pokazuje artykuły Wikipedii w odniesieniu do interesujących miejsc bezpośrednio na mapie. Nie zapomnij pobrać map Wikipedii dla wybranego regionu.</string>
+    <string name="purchases_feature_desc_wikipedia">Udostępnia wszystkie artykuły Wikipedii związane z miejscami w trybie offline, pomagając Ci dowiedzieć się o miejscach, które odwiedzasz podczas podróży, za pomocą prostych dotknięć mapy. Nie zapomnij pobrać plików map Wikipedii dla odpowiednich regionów.</string>
     <string name="purchases_feature_desc_combined_wiki">Przeglądaj artykuły z Wikipedii w podróży, bez połączenia z Internetem. Dane w trybie offline podzielone według krajów i dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Uzyskaj nieograniczone pobierania map offline dla wszystkich kontynentów i regionów.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Uzyskaj dostęp do regularnych, comiesięcznych aktualizacji dla map offline.</string>
@@ -4445,7 +4445,7 @@
     <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
     <string name="fold_unfold">zwiń/rozwiń</string>
     <string name="app_profile_type">Typ profilu aplikacji</string>
-    <string name="storage_copied_files_size">Skopiowane %1$s pliki %2$s</string>
+    <string name="storage_copied_files_size">Skopiowano %1$s pliki %2$s</string>
     <string name="rendering_attr_natureReserves_description">Pokaż rezerwat przyrody, obszary chronione i parki narodowe.</string>
     <string name="migration_files_present">W wybranej lokalizacji \'%3$s\' znajdują się pliki %1$d (%2$s).</string>
     <string name="map_marker_options">Opcje znaczników mapy</string>
@@ -4982,4 +4982,42 @@
     <string name="res_unknown">Nieznany</string>
     <string name="shared_string_unsynced">Niezsynchronizowany</string>
     <string name="check_for_updates">Sprawdź aktualizacje</string>
+    <string name="shared_string_expires">Wygasa</string>
+    <string name="shared_string_purchased_on">Zakupiony</string>
+    <string name="shared_string_uploaded">Przesłano</string>
+    <string name="cloud_changes">Zmiany w chmurze</string>
+    <string name="shared_string_cloud">Chmura</string>
+    <string name="deleted_file">Plik usunięty</string>
+    <string name="local_changes_will_be_dismissed">Lokalne zmiany zostaną odrzucone</string>
+    <string name="cloud_recent_changes">Zmiany</string>
+    <string name="cloud_no_conflicts">Nie ma żadnych konfliktów</string>
+    <string name="shared_string_open">Otwórz</string>
+    <string name="open_weather_action">Otwarta pogoda</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie porywów wiatru</string>
+    <string name="rendering_attr_weatherCloudContours_name">Izolinie chmur</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie opadów</string>
+    <string name="si_nm_ft">Mile morskie/stopy</string>
+    <string name="changes">Zmiany %1$s</string>
+    <string name="new_file">Nowy plik</string>
+    <string name="modified_file">Plik zmieniony</string>
+    <string name="local_changes">Zmiany lokalne</string>
+    <string name="upload_change">Prześlij zmianę</string>
+    <string name="cloud_changes_will_be_dismissed">Zmiany w chmurze zostaną odrzucone</string>
+    <string name="cloud_conflicts">Konflikty</string>
+    <string name="upload_all">Prześlij wszystko</string>
+    <string name="cloud_all_changes_uploaded">Wszystkie zmiany przesłane</string>
+    <string name="cloud_all_changes_downloaded">Pobrane wszystkie zmiany</string>
+    <string name="download_cloud_version">Pobierz wersję z chmury</string>
+    <string name="shared_string_do_not_exist">Nie istnieje</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Nie udało się pobrać listy plików z serwera.</string>
+    <string name="last_sync">Ostatnia synchronizacja</string>
+    <string name="import_export">Import/Eksport</string>
+    <string name="export_to_file">Eksportuj do pliku</string>
+    <string name="sync_now">Synchronizuj teraz</string>
+    <string name="si_nm_mt">Mile morskie/metry</string>
+    <string name="cloud_version_will_be_removed">Wersja w chmurze zostanie usunięta</string>
+    <string name="local_file_will_be_restored">Plik lokalny zostanie przywrócony</string>
+    <string name="cloud_conflict">Konflikt</string>
+    <string name="cloud_all_changes_uploaded_descr">Wszystkie zmiany dokonane na tym urządzeniu są synchronizowane z Chmurą OsmAnd.</string>
+    <string name="open_weather_action_description">Umożliwia otwarcie ekranu ze szczegółowymi informacjami o pogodzie.</string>
 </resources>
