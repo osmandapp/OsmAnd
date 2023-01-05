@@ -129,7 +129,7 @@ class SettingsImporter {
 					try {
 						SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 						if (reader != null) {
-							reader.readFromStream(ois, fileName);
+							reader.readFromStream(ois, file, fileName);
 						}
 						item.applyAdditionalParams(reader);
 					} catch (IllegalArgumentException | IOException e) {
