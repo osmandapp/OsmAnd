@@ -136,6 +136,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
+	public void updateSideWidgets(){
+		leftWidgetsPanel.update(drawSettings);
+		rightWidgetsPanel.update(drawSettings);
+		for(SideWidgetsPanel sideWidgetsPanel : sideWidgetsPanels){
+			sideWidgetsPanel.update(drawSettings);
+		}
+	}
+
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
 		widgetRegistry.clearWidgets();
 		registerAllControls(mapActivity);
