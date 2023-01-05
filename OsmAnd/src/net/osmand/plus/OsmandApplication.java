@@ -1,7 +1,14 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
+import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
 import android.content.Context;
@@ -30,7 +37,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
@@ -234,6 +240,13 @@ public class OsmandApplication extends MultiDexApplication {
 
 		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
 		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(ROADS_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(LIVE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(SRTM_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(NAUTICAL_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(WIKI_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(WIKIVOYAGE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(HEIGHTMAP_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -261,7 +274,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	private void removeSqliteDbTravelFiles() {
-		File[] files = getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		File[] files = getAppPath(WIKIVOYAGE_INDEX_DIR).listFiles();
 		if (files != null) {
 			for (File file : files) {
 				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {

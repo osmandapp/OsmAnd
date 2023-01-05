@@ -252,7 +252,6 @@ public class FileUtils {
 		}
 	}
 
-	@NonNull
 	public static boolean replaceTargetFile(@NonNull File sourceFile, @NonNull File targetFile) {
 		return replaceTargetFile(null, sourceFile, targetFile);
 	}
