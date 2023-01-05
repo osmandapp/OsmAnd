@@ -1247,6 +1247,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		changeKeyguardFlags();
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
+		app.getSearchUICore().refreshCustomPoiFilters();
 		getMapViewTrackingUtilities().appModeChanged();
 
 		OsmandMapTileView mapView = getMapView();
