@@ -168,7 +168,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		}
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (T point : tilePoints) {
-			interface_MapTiledCollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
+			CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
 			res.add(collectionPoint.instantiateProxy(true));
 			collectionPoint.swigReleaseOwnership();
 		}
