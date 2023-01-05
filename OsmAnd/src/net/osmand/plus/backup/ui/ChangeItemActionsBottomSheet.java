@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -26,7 +25,6 @@ import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
-import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
@@ -74,7 +72,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	private void setupHeaderItem(@NonNull View view) {
 		View container = view.findViewById(R.id.item);
-		ItemViewHolder itemViewHolder = new ItemViewHolder(container);
+		ItemViewHolder itemViewHolder = new ItemViewHolder(container, nightMode);
 		itemViewHolder.bindView(item, null, false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.bottom_divider), false);
@@ -151,15 +149,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {
-		OnBackupSyncListener listener = null;
-		Fragment target = getTargetFragment();
-		if (target != null) {
-			Fragment parent = target.getParentFragment();
-			if (parent instanceof OnBackupSyncListener) {
-				listener = (OnBackupSyncListener) parent;
-			}
-		}
-		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation, listener);
+		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, operation);
 	}
 
 	private String getTitleForOperation() {
@@ -193,6 +183,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			ChangeItemActionsBottomSheet fragment = new ChangeItemActionsBottomSheet();
 			fragment.item = item;
 			fragment.recentChangesType = target.getChangesTabType();
+			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}

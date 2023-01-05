@@ -81,13 +81,23 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		recyclerView.setItemAnimator(null);
 		recyclerView.setLayoutAnimation(null);
 
+		updateAdapter();
+
 		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateAdapter();
+		backupHelper.addPrepareBackupListener(this);
+		settingsHelper.addBackupSyncListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		backupHelper.removePrepareBackupListener(this);
+		settingsHelper.removeBackupSyncListener(this);
 	}
 
 	@Override
@@ -112,21 +122,27 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
-		app.runInUIThread(() -> {
-			updateAdapter();
-			prepareBackup();
-		});
+		app.runInUIThread(this::updateAdapter);
+	}
+
+	@Override
+	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		app.runInUIThread(() -> adapter.onBackupItemStarted(type, fileName, work));
+	}
+
+	@Override
+	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		app.runInUIThread(() -> adapter.onBackupItemProgress(type, fileName, value));
+	}
+
+	@Override
+	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+		app.runInUIThread(() -> adapter.onBackupItemFinished(type, fileName));
 	}
 
 	private void updateAdapter() {
 		if (adapter != null) {
 			adapter.setCloudChangeItems(generateData());
-		}
-	}
-
-	private void prepareBackup() {
-		if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
-			backupHelper.prepareBackup();
 		}
 	}
 
@@ -190,7 +206,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		changeItem.operation = operation;
 		changeItem.localFile = localFile;
 		changeItem.remoteFile = remoteFile;
-		changeItem.fileName = Algorithms.getFileWithoutDirs(key);
+		changeItem.fileName = BackupHelper.getItemFileName(settingsItem);
 
 		return changeItem;
 	}

@@ -233,6 +233,14 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		}
 	}
 
+	public int getMaxProgress() {
+		return maxProgress;
+	}
+
+	public int getGeneralProgress() {
+		return generalProgress;
+	}
+
 	public static int calculateMaxProgress(@NonNull OsmandApplication app) {
 		int maxProgress = 0;
 		BackupHelper backupHelper = app.getBackupHelper();

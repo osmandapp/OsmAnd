@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -16,6 +17,7 @@ import net.osmand.plus.backup.ui.status.EmptyStateViewHolder;
 import net.osmand.plus.backup.ui.status.HeaderViewHolder;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.backup.ui.status.StatusViewHolder;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -79,7 +81,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 				return new HeaderViewHolder(itemView);
 			case LIST_ITEM_TYPE:
 				itemView = inflater.inflate(R.layout.cloud_change_item, parent, false);
-				return new ItemViewHolder(itemView);
+				return new ItemViewHolder(itemView, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -114,8 +116,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 			viewHolder.bindView(tabType, cloudChangeItems.size());
 		} else if (holder instanceof ItemViewHolder) {
 			CloudChangeItem item = (CloudChangeItem) items.get(position);
+			boolean lastItem = position == getItemCount() - 1;
 			ItemViewHolder viewHolder = (ItemViewHolder) holder;
-			viewHolder.bindView(item, fragment, false);
+			viewHolder.bindView(item, fragment, lastItem);
 		}
 	}
 
@@ -126,11 +129,46 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 
 	@Override
 	public void onBackupSyncStarted() {
-		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
 		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+	}
+
+	@Override
+	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Override
+	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Override
+	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Nullable
+	private CloudChangeItem getChangeItem(@NonNull String type, @NonNull String fileName) {
+		for (CloudChangeItem item : cloudChangeItems) {
+			if (Algorithms.stringsEqual(item.fileName, fileName)
+					&& item.settingsItem.getType() == SettingsItemType.fromName(type)) {
+				return item;
+			}
+		}
+		return null;
 	}
 }

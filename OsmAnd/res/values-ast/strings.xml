@@ -4218,7 +4218,7 @@
     <string name="backup_do_not_have_any">You have no online backup yet.</string>
     <string name="backup_dont_have_any_descr">Schedule automatic backups and never lose data.</string>
     <string name="backup_welcome_back">¡Volvi afayate!</string>
-    <string name="backup_welcome_back_descr">Restore data on this device using existing backups, or back up data to OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restore data on this device using OsmAnd Cloud.</string>
     <string name="backup_setup">Set up backup</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="attribute">Atributu</string>

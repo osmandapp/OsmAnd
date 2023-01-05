@@ -49,8 +49,8 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 			int color = ColorUtilities.getActiveColorId(nightMode);
 			icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_update, color));
 
-			int progress = (int) exportTask.getGeneralProgress();
-			int maxProgress = (int) exportTask.getMaxProgress();
+			int progress = exportTask.getGeneralProgress();
+			int maxProgress = exportTask.getMaxProgress();
 			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 
 			title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));

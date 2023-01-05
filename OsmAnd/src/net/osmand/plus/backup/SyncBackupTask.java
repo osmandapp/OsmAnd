@@ -108,13 +108,13 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), Collections.emptyList(), this);
 	}
 
+	public void deleteItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(), Collections.singletonList(item), this);
+	}
+
 	public void downloadRemoteVersion(@NonNull SettingsItem item) {
 		item.setShouldReplace(true);
 		networkSettingsHelper.importSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), true, this);
-	}
-
-	public void deleteItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
 	private void uploadNewItems() {
@@ -136,15 +136,17 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	private long calculateExportMaxProgress() {
 		BackupInfo info = backupHelper.getBackup().getBackupInfo();
-
-		List<SettingsItem> oldItemsToDelete = new ArrayList<>();
-		for (SettingsItem item : info.itemsToUpload) {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-			if (exportType != null && backupHelper.getVersionHistoryTypePref(exportType).get()) {
-				oldItemsToDelete.add(item);
+		if (info != null) {
+			List<SettingsItem> oldItemsToDelete = new ArrayList<>();
+			for (SettingsItem item : info.itemsToUpload) {
+				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+				if (exportType != null && backupHelper.getVersionHistoryTypePref(exportType).get()) {
+					oldItemsToDelete.add(item);
+				}
 			}
+			return ExportBackupTask.getEstimatedItemsSize(app, info.itemsToUpload, info.itemsToDelete, oldItemsToDelete);
 		}
-		return ExportBackupTask.getEstimatedItemsSize(app, info.itemsToUpload, info.itemsToDelete, oldItemsToDelete);
+		return 0;
 	}
 
 	@Override
