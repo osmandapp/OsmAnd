@@ -291,7 +291,7 @@
     <string name="poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
     <string name="poi_fuel_diesel">Diesel</string>
     <string name="poi_fuel_gtl_diesel">GTL-diesel</string>
-    <string name="poi_fuel_hgv_diesel">HGV-diesel</string>
+    <string name="poi_fuel_hgv_diesel">Lastbilsdiesel</string>
     <string name="poi_fuel_biodiesel">Biodiesel</string>
     <string name="poi_fuel_lpg">Motorgas (LPG)</string>
     <string name="poi_fuel_octane_80">80 oktan</string>
@@ -1374,7 +1374,7 @@
     <string name="poi_smoking_dedicated">Tillägnad rökare</string>
     <string name="poi_toll_yes">Tull</string>
     <string name="poi_toll_no">Ingen tull</string>
-    <string name="poi_toll_hgv_yes">Tull för tunga fordon</string>
+    <string name="poi_toll_hgv_yes">Vägavgift för tung lastbil</string>
     <string name="poi_tactile_paving_yes">Ja;Taktila ledstråk</string>
     <string name="poi_tactile_paving_no">Utan taktil beläggning</string>
     <string name="poi_traffic_signals_sound_yes">Ja;Ljudsignal vid övergångsställe</string>
@@ -2383,7 +2383,7 @@
     <string name="poi_cargo_vehicle">Fordon</string>
     <string name="poi_cargo_bicycle">Cyklar</string>
     <string name="poi_cargo_container">Container</string>
-    <string name="poi_cargo_hgv">Tunga fordon</string>
+    <string name="poi_cargo_hgv">Tunga fordon/lastbilar</string>
     <string name="poi_fitness_station">Fitness-station</string>
     <string name="poi_hackerspace">Hackerspace</string>
     <string name="poi_craft_electronics_repair">Reparation av elektronik</string>
@@ -3637,11 +3637,11 @@
     <string name="poi_motorcycle_no">Motorcykelåtkomst: nej</string>
     <string name="poi_motorcycle_private">Motorcykelåtkomst: privat</string>
     <string name="poi_goods_no">Åtkomst för lätta lastbilar: nej</string>
-    <string name="poi_hgv_unsuitable">HGV-åtkomst: olämpligt</string>
-    <string name="poi_hgv_discouraged">HGV-åtkomst: avråds</string>
-    <string name="poi_hgv_agricultural">HGV-åtkomst: jordbruk</string>
-    <string name="poi_hgv_no">HGV-åtkomst: nej</string>
-    <string name="poi_hgv_private">HGV-åtkomst: privat</string>
+    <string name="poi_hgv_unsuitable">Åtkomst för tung lastbil: olämpligt</string>
+    <string name="poi_hgv_discouraged">Åtkomst för tung lastbil: avråds</string>
+    <string name="poi_hgv_agricultural">Åtkomst för tunga fordon: jordbruk</string>
+    <string name="poi_hgv_no">Åtkomst för tung lastbil: nej</string>
+    <string name="poi_hgv_private">Åtkomst för tung lastbil: privat</string>
     <string name="poi_motor_vehicle_agricultural">Motorfordonåtkomst: jordbruk</string>
     <string name="poi_motor_vehicle_forestry">Motorfordonåtkomst: skogsbruk</string>
     <string name="poi_motor_vehicle_delivery">Motorfordonåtkomst: levernas</string>
