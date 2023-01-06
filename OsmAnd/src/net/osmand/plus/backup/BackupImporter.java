@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class BackupImporter {
 
@@ -51,6 +52,9 @@ class BackupImporter {
 	private final NetworkImportProgressListener listener;
 
 	private boolean cancelled;
+
+	private AtomicInteger dataProgress;
+	private AtomicInteger itemsProgress;
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -102,6 +106,8 @@ class BackupImporter {
 	}
 
 	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
+		dataProgress = new AtomicInteger(0);
+		itemsProgress = new AtomicInteger(0);
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -533,15 +539,19 @@ class BackupImporter {
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(type, fileName, progress);
+					listener.updateGeneralProgress(itemsProgress.get(), p);
 				}
 			}
 
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				itemsProgress.addAndGet(1);
 				if (listener != null) {
 					listener.itemExportDone(type, fileName);
+					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());
 				}
 			}
 
@@ -564,15 +574,19 @@ class BackupImporter {
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(type, itemFileName, progress);
+					listener.updateGeneralProgress(itemsProgress.get(), p);
 				}
 			}
 
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				itemsProgress.addAndGet(1);
 				if (listener != null) {
 					listener.itemExportDone(type, itemFileName);
+					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());
 				}
 			}
 

@@ -48,6 +48,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 	private final AppCompatImageView icon;
 	private final AppCompatImageView secondIcon;
 	private final View divider;
+	private final View bottomShadow;
 	private final View selectableView;
 	private final boolean nightMode;
 
@@ -63,6 +64,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		secondIcon = itemView.findViewById(R.id.second_icon);
 		description = itemView.findViewById(R.id.description);
 		divider = itemView.findViewById(R.id.bottom_divider);
+		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
 		selectableView = itemView.findViewById(R.id.selectable_list_item);
 	}
 
@@ -87,6 +89,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 		setupSelectableBackground();
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
+		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 	}
 
 	private void setupProgress(@NonNull CloudChangeItem item) {

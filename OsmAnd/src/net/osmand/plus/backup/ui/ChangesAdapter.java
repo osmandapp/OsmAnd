@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
@@ -31,11 +32,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	public static final int LIST_ITEM_TYPE = 2;
 	public static final int EMPTY_STATE_TYPE = 3;
 
-	enum ItemStatusType {
-		ITEM_STATUS_STARTED_TYPE,
-		ITEM_STATUS_IN_PROGRESS_TYPE,
-		ITEM_STATUS_FINISHED_TYPE
-	}
+	private final OsmandApplication app;
 
 	private final List<Object> items = new ArrayList<>();
 	private List<CloudChangeItem> cloudChangeItems = new ArrayList<>();
@@ -44,7 +41,8 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	private final RecentChangesType tabType;
 	private final boolean nightMode;
 
-	ChangesAdapter(@NonNull ChangesTabFragment fragment, boolean nightMode) {
+	ChangesAdapter(@NonNull OsmandApplication app, @NonNull ChangesTabFragment fragment, boolean nightMode) {
+		this.app = app;
 		this.fragment = fragment;
 		this.tabType = fragment.getChangesTabType();
 		this.nightMode = nightMode;
@@ -57,7 +55,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 		items.add(STATUS_HEADER_TYPE);
 
 		if (changeItems.isEmpty()) {
-			items.add(EMPTY_STATE_TYPE);
+			if (!app.getBackupHelper().isBackupPreparing()) {
+				items.add(EMPTY_STATE_TYPE);
+			}
 		} else {
 			items.add(LIST_HEADER_TYPE);
 			items.addAll(changeItems);
