@@ -438,7 +438,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
 		extensions.putAll(getAmenityExtensions());
-		if (!isVisible()) {
+		if (isVisible()) {
+			extensions.remove(HIDDEN);
+		} else {
 			extensions.put(HIDDEN, "true");
 		}
 		if (isAddressSpecified()) {
