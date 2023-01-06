@@ -3532,13 +3532,13 @@
     <string name="shared_string_bearing">Курс</string>
     <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј Mapillary слој на карти.</string>
     <string name="routing_attr_length_description">Одаберите дужину возила која је дозвољена на путевима.</string>
-    <string name="speed_cameras_legal_descr">У неким државама или областима, коришћење апликација за обавештавање о радарима на путу је забрањено законом.
+    <string name="speed_cameras_legal_descr">У неким државама или областима, коришћење програма за обавештавање о радарима на путу је забрањено законом.
 \n
-\nМорате направити избор овде, у зависности од закона Ваше државе.
+\nМорате направити избор овде, у зависности од закона своје државе.
 \n
-\nОдаберите %1$s и примажете обавештења и упозорења о радарима и камерама за брзину.
+\nОдаберите %1$s и примааћете обавештења и упозорења о радарима и брзинским камерама.
 \n
-\nОдаберите %2$s. Сви подаци везани за радере: упозорења, обавештења, тачке од интереса ће бити обрисане док се OsmAnd поново не инсталира.</string>
+\nОдаберите %2$s. Сви подаци везани за радаре: упозорења, обавештења, занимљиве тачке ће бити обрисане док се OsmAnd поново не угради.</string>
     <string name="shared_string_legal">Правно</string>
     <string name="screen_timeout_descr">Ако је „%1$s” укључен, време активности ће зависити од тога.</string>
     <string name="uninstall_speed_cameras">Избриши радаре</string>
@@ -3613,7 +3613,7 @@
     <string name="shared_string_hillshade">Сенке брда</string>
     <string name="select_track_file">Изаберите фајл стазе</string>
     <string name="shared_string_resume">Настави</string>
-    <string name="hillshade_description">Мапа сенка брда користи тамне нијансе за приказивање нагиба, врхова и низина.</string>
+    <string name="hillshade_description">Карта сенка брда користи тамне преливе за приказивање нагиба, врхова и низина.</string>
     <string name="slope_description">При нагибу користе се боје за визуелизацију стрмине терена.</string>
     <string name="terrain_slider_description">Поставите минимални и максимални ниво зума, при коме ће слој бити приказан.</string>
     <string name="hillshade_download_description">Додатне мапе су потребне да бисте видели сенке брда на мапи.</string>
@@ -3654,7 +3654,9 @@
 \n • Исправљени багови са РТЛ
 \n
 \n</string>
-    <string name="gpx_parse_error">OsmAnd GPX није добро формиран, молимо обратите се тиму подршке ради даље истраге.</string>
+    <string name="gpx_parse_error">Пронађен је проблем са датотеком ГПИкса
+\n
+\nМожете се обратити подршци ОсмАнда ради истраге.</string>
     <string name="turn_screen_on_power_button_disabled">Онемогућено. Захтева \'Држи екран упаљеним\' под \'Тајмаут после буђења\'.</string>
     <string name="turn_screen_on_wake_time_descr">Одаберите тајмаут екрана после буђења. (\"%1$s\" се односи на тајмаут.)</string>
     <string name="map_source_zoom_levels_descr">Утиче на екран када се користи као мапа или подслој/надслој.
@@ -3901,7 +3903,7 @@
     <string name="track_recording_title">Снимање путање заустављено</string>
     <string name="track_recording_description">Зауставити снимање\?
 \nСве несачувани подаци ће бити изгубљени.</string>
-    <string name="app_restart_required">Потребан је рестарт апликације да се нека подешавања примене.</string>
+    <string name="app_restart_required">Потребно је препокретање програма ради примене неких поставки.</string>
     <string name="on_pause">Паузирано</string>
     <string name="updated">Ажурирано: %s</string>
     <string name="last_time_checked">Последње време провере: %s</string>
@@ -4153,7 +4155,7 @@
     <string name="purchases_feature_desc_nautical">Приступите информацијама о наутичкој дубини</string>
     <string name="purchases_feature_desc_terrain">Изохипсе терена, цела карта рељефа са тамним сенчењем и мапе нагиба са бојама за приказ, врхова и низија.</string>
     <string name="purchases_feature_desc_wikivoyage">Истражите Википутовање ван мреже. Чланци су подељени по земљама и регионима и доступни на свим језицима.</string>
-    <string name="purchases_feature_desc_wikipedia">Истражите Википедију ван мреже. Чланци су подељени по земљама и регионима и доступни на свим језицима.</string>
+    <string name="purchases_feature_desc_wikipedia">Приказује све чланке повезаних места Википедије ван мреже, помажући Вам да сазнате нешто о тим местима које ћете посетити на пропутовању једноставним тапкањем на карти. Не заборавите да преузмете датотеке карата Википедије за одговарајуће области.</string>
     <string name="purchases_feature_desc_combined_wiki">Истражујте чланке на Википедији у покрету, без интернет везе. Офлајн подаци су подељени по земљама и доступни на свим језицима.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Набавите неограничена преузимања офлајн мапа за све континенте и регионе.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Обезбедите приступ редовним месечним исправкама за офлајн мапе.</string>
@@ -4462,14 +4464,14 @@
     <string name="shared_string_size">Величина</string>
     <string name="created_on">Датум стварања</string>
     <string name="waypoint_appearance">Изглед путне тачке</string>
-    <string name="track_file_description">Додиром на ову радњу приказаће се дијалог за избор доступних путања.</string>
+    <string name="track_file_description">Додиром на ову радњу приказаће доступне путање.</string>
     <string name="track_file">Датотека путање</string>
     <string name="use_routing_fallback_description">Користите офлајн рутирање док онлајн рутирање није доступно.</string>
     <string name="navigate_point_format_swiss_grid">Швајцарска мрежа (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Швајцарска мрежа (CH1903+)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Иконе при малом зумирању</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Шематски приказ икона при малим зумовима</string>
-    <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се екран „Додај пролазну тачку“, где можете променити име и изглед.</string>
+    <string name="always_ask_waypoint_appearance_description">Додиром на ову радњу отвориће се заслон „Додај пролазну тачку“, где можете променити име и појаву.</string>
     <string name="shared_string_open_street_map">ОпенСтритМап</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Ознаке поправке</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Тунели пловних путева</string>
@@ -4481,7 +4483,7 @@
     <string name="shared_string_used">Користи се</string>
     <string name="files_with_route_restrictions">Датотеке са ограничењима руте</string>
     <string name="waypoint_template">Шаблон путне тачке</string>
-    <string name="predefined_waypoint_appearance_description">Додиром на ову радњу аутоматски ће се сачувати путна тачка са унапред дефинисаним параметрима.</string>
+    <string name="predefined_waypoint_appearance_description">Додир на ову радњу ће самостално сачувати пролазне тачка са унапред одређеним својствима.</string>
     <string name="turn_arrows">Стрелице скретања</string>
     <string name="turn_arrows_descr">Изаберите да ли су стрелице за скретање приказане на линији руте.</string>
     <string name="use_routing_fallback">Замена за ванмрежно рутирање</string>
@@ -4566,7 +4568,7 @@
     <string name="apply_only_to_new_favorites">Примени само на нове омиљене</string>
     <string name="change_default_appearance">Промените подразумевани изглед</string>
     <string name="apply_to_existing_points_descr">Применити промене на постојеће тачке групе или само на нове\?</string>
-    <string name="map_widget_altitude">Надморска висина тренутне локације</string>
+    <string name="map_widget_altitude">Надморска висина тренутног положаја</string>
     <string name="add_page">Додај страницу</string>
     <string name="page_number">Страница %1$s</string>
     <string name="map_widget_distance_to_destination">Удаљеност до одредишта</string>
@@ -4596,26 +4598,26 @@
     <string name="routing_attr_avoid_highway_name">Избегавај аутопутеве</string>
     <string name="routing_attr_avoid_highway_description">Избегавање аутопутева</string>
     <string name="routing_attr_hazmat_category_description">Категорија опасних материја / Размотрите дозволе за хазмат приступ</string>
-    <string name="routing_attr_avoid_4wd_only_description">Избегавање путева који су погодни само за возила са погоном на сва четири точка</string>
+    <string name="routing_attr_avoid_4wd_only_description">Избегавање путева који су погодни за возила са погоном на сва четири точка</string>
     <string name="av_notes_choose_action_widget_desc">Изаберите акцију.</string>
-    <string name="radius_rules_widget_desc">Алатка за лењир радијуса помаже да се одреди радијус око изабране тачке на мапи тако што приказује кругове удаљености на мапи.</string>
-    <string name="bearing_secondary_desc">Формат приказаних података можете променити у: %1$s – %2$s – %3$s.</string>
-    <string name="coordinates_widget_secondary_desc">Формат координата се може променити у %1$s – %2$s – %3$s.</string>
+    <string name="radius_rules_widget_desc">Алатка за мерни шестар приказује кружнице растојања око изабране тачке на карти.</string>
+    <string name="bearing_secondary_desc">Облик приказаних података можете променити у: %1$s – %2$s – %3$s.</string>
+    <string name="coordinates_widget_secondary_desc">Облик координата се можете променити у %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Део %1$s додатка.</string>
-    <string name="elevation_profile_widget_desc">Виџет приказује висину и профил нагиба тренутне руте.</string>
-    <string name="parking_widget_desc">Виџет који показује удаљеност од центра екрана до паркинг места.</string>
-    <string name="mapillary_widget_desc">Виџет који омогућава брз приступ апликацији Мапилари за додавање слика на нивоу улице.</string>
-    <string name="current_time_widget_desc">Приказује тренутно време са вашег уређаја.</string>
-    <string name="battery_widget_desc">Приказује ниво батерије вашег уређаја.</string>
-    <string name="gps_info_widget_desc">Виџет приказује број сателита које уређај детектује и користи у том тренутку.</string>
+    <string name="elevation_profile_widget_desc">Справица приказује висину и пресек нагиба тренутне путање.</string>
+    <string name="parking_widget_desc">Приказује удаљеност од средишта заслона до места паркирања.</string>
+    <string name="mapillary_widget_desc">Омогућава брзи приступ програму Мапилари за додавање слика улица.</string>
+    <string name="current_time_widget_desc">Приказује тренутно време Вашег уређаја.</string>
+    <string name="battery_widget_desc">Приказује попуњеност батерије Вашег уређаја.</string>
+    <string name="gps_info_widget_desc">Приказује број сателита тренутно видљивих и коришћених.</string>
     <string name="altitude_widget_desc">Приказује висину изнад нивоа мора тренутне геолокације.</string>
-    <string name="max_speed_widget_desc">Приказује ограничење брзине за пут којим се тренутно вози.</string>
-    <string name="current_speed_widget_desc">Приказује вашу тренутну брзину коју је детектовао ГПС сензор.</string>
+    <string name="max_speed_widget_desc">Приказује ограничење брзине пута којим се тренутно вози.</string>
+    <string name="current_speed_widget_desc">Приказује тренутну брзину пријављену ГПС-ом.</string>
     <string name="magnetic_bearing_widget_desc">Угао између магнетног севера и циљне тачке посматрано са ваше локације.</string>
     <string name="time_to_go_desc">Време у минутима или сатима потребно да стигнете на одредиште.</string>
     <string name="arrival_time_widget_desc">Време доласка на одредишну тачку.</string>
-    <string name="lanes_widgets_desc">Виџет за траке приказује тренутни распоред трака пута и истиче траке за вожњу уз активну навигацију.</string>
-    <string name="map_markers_bar_widget_desc">На виџету при горњој траци можете да видите растојање и правац до маркера од тренутне локације. Могуће је конфигурисати да видите 1 или 2 горња маркера у виџету.</string>
+    <string name="lanes_widgets_desc">Приказује тренутни распоред коловозне траке и истиче траке за престројавање приликом навођења.</string>
+    <string name="map_markers_bar_widget_desc">Справица горње траке приказује растојање и правац до ознака тренутне тренутног положаја. Могуће је подесити справицу за приказ 1 или 2 горње ознаке.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Додирните справицу ради промене начина рада.</string>
     <string name="map_widget_time_to_destination">Време до одредишта</string>
     <string name="map_widget_time_to_intermediate">Време до посредне тачке</string>
@@ -4628,31 +4630,31 @@
     <string name="navigation_points">Навигационе тачке</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не иди ван стазе</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Само ако је неопходно</string>
-    <string name="coordinates_widget_desc">Приказује географске координате тренутне гео-локације.</string>
+    <string name="coordinates_widget_desc">Приказује земљописне координате тренутног земаљског положаја.</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Напредни</string>
     <string name="on_with_params">%1$s на %2$s</string>
     <string name="no_widgets_descr">Додајте један или више виџета са листе доступних виџета.</string>
     <string name="lang_sat">Санталски</string>
     <string name="route_maneuvers_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ПОИ, тачке пута.</string>
-    <string name="audio_video_notes_desc">Виџет омогућава брз приступ за почетак/заустављање снимања (аудио, видео или фото).</string>
+    <string name="audio_video_notes_desc">Омогућава брзи приступ за почетак/заустављање снимања звука, видеа или сликовне белешке.</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Средњи</string>
     <string name="calculate_online">Рачуњање онлајн</string>
-    <string name="track_attach_to_the_roads_descr">Стаза ће бити прикачена за пут помоћу офлајн мапа, геометрија стазе ће бити промењена.</string>
+    <string name="track_attach_to_the_roads_descr">Стаза ће бити прикачена за пут помоћу ванмрежних карата, облик стазе ће бити промењен.</string>
     <string name="get_altitude_data">Добави податке о надморској висини</string>
-    <string name="calculate_altitude">Рачуњање надморске висине</string>
+    <string name="calculate_altitude">Рачунај надморску висину</string>
     <string name="no_altitude_data">Нема података о надморској висини</string>
     <string name="app_mode_mountain_bicycle">Брдски бицикл</string>
-    <string name="bearing_desc">Виџет смера показује апсолутни или релативни смер ка циљу у угаоним јединицама (степени 180, степени 360, милирадијани).</string>
-    <string name="navigation_points_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ПОИ, тачке пута.</string>
+    <string name="bearing_desc">Показује општи или односни смер ка циљу у угаоним јединицама (степени 180, степени 360, милирадијани).</string>
+    <string name="navigation_points_desc">Справице навођења су омогућене током навођења за приказ података као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, подаци о тракама, дозвољеној брзини, упозорења о приближавању, занимљиве и пролазне тачке пута.</string>
     <string name="turn_on_public_transport_description">Укључите да видите руте јавног превоза на мапи.</string>
     <string name="routing_attr_freeride_policy_allow_name">Дозволи</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Почетник</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Тежи ка ван стазе</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Без преференци</string>
-    <string name="street_name_widget_desc">Виџет за назив улице приказује тренутни назив улице са правом локационом стрелицом или следећи назив улице са маневром који треба да се заврши.</string>
-    <string name="get_altitude_information">Достави информације о надморској висини</string>
+    <string name="street_name_widget_desc">Справица назива улице приказује тренутни назив улице са правом стрелицом положаја или следећи назив улице стрелицом указивачем на долазно скретање.</string>
+    <string name="get_altitude_information">Добави податке о надморској висини</string>
     <string name="route_maneuvers">Маневри руте</string>
-    <string name="calculating_altitude">Израчунавање надморске висине</string>
+    <string name="calculating_altitude">Израчунавам надморску висину</string>
     <string name="no_widgets_here_yet">Овде још нема виџета</string>
     <string name="available_widgets">Доступни виџети</string>
     <string name="snackbar_page_removed">„Страница %1$s“ је уклоњена.</string>
@@ -4668,7 +4670,7 @@
     <string name="shared_string_symbol">Симбол</string>
     <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
     <string name="average_speed_skip_stops">Узми у обзир заустављања</string>
-    <string name="average_speed_time_interval_desc">Наведите временски интервал за који ће се мерити просечна брзина.</string>
+    <string name="average_speed_time_interval_desc">Наведите временско раздобље за просечну брзину.</string>
     <string name="average_speed_widget_desc">Приказује просечну брзину тренутног пута.</string>
     <string name="map_widget_average_speed">Просечна брзина</string>
     <string name="routing_attr_goods_restrictions_description">Проверите дозволе приступа за лака товарна возила (роба)</string>
@@ -4678,7 +4680,7 @@
     <string name="routing_attr_motor_type_name">Мотор возила</string>
     <string name="routing_attr_motor_type_lpg_name">Плин</string>
     <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
-    <string name="transport_hazmat_no_desc">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
+    <string name="transport_hazmat_no_desc">На неким путевима и тунелима може бити забрањен превоз опасних материја.</string>
     <string name="routing_attr_motor_type_description">Одредите врсту горива возила, потребно је ради процене количине издува CO2.</string>
     <string name="co2_mission">издув CO2</string>
     <string name="kg">kg</string>
@@ -4970,4 +4972,45 @@
     <string name="auto_backup_preference_desc">Подразумевано, Андроид чува складиште омиљених, значака карата, и поставке Османда ради њиховог повраћаја на нове уређаје након поновне уградње. Складиште је ограничено на 25 МБ.
 \nПриликом коришћења Облака Османда, ово може одвести до неразумевања након поновне уградње.</string>
     <string name="first_marker_widget_desc">Можете подесити справицу да приказује растојање или процењено преостало време доласка на првој ознаци карте.</string>
+    <string name="release_4_3">• Ново, брже издање 2 погона обраде карте (Опенгл), са погледом у 2.5 димензије
+\n
+\n • Глатко оживљавање измене положаја при кретању
+\n
+\n • Нова справица за координате средишта карте и земљописне висине земаљског положаја
+\n
+\n • „Размак за таптање“ додата могућност величине додатог писма
+\n
+\n • Исправка могућности „Прикажи положај“
+\n
+\n • ГПИкс: додата подршка за ознаке „везу“, „цмт“, „силаз“ и било које произвољно проширење
+\n
+\n • Преуређен списак „Пловне карте“
+\n
+\n • Додатна подршка за АНТ + пријемнике
+\n
+\n • Додатна могућност за онемогућавање јединственог личног броја преузимања
+\n
+\n • Подесива подразумевана брзина временских прилика за ходање/планинарење/трчање зависно од надморске висине
+\n
+\n • Исправљено понашање звучног излаза и клизача гласноће
+\n
+\n</string>
+    <string name="goods_delivery_desc_2">Путеви забрањени за доставна возила ће бити избегавани.</string>
+    <string name="includes_osm_changes_until">Укључује измене ОСМ-а начињене до %1$s.</string>
+    <string name="goods_delivery_desc_4">Користите одељак теретног возила за возила тежа од 3.5 тона.</string>
+    <string name="average_speed_skip_stops_desc">Брзине мање од %1$s ће бити урачунате и утицаће на просечну брзину.</string>
+    <string name="goods_delivery_desc_3">Примењује се само на теретна доставна возила лакша од 3.5 тона.</string>
+    <string name="next_live_update_time">Следеће освежење у %1$s.</string>
+    <string name="live_update_frequency_day_variant">Освежења карата се проверавају дневно.</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Приказуј трагове МТБ ИМБА</string>
+    <string name="goods_delivery_desc">Доставна возила могу бити забрањена на неким путевима.</string>
+    <string name="next_live_update_date_and_time">Следеће освежење на %1$s у %2$s.</string>
+    <string name="calculate_online_altitude_descr">Израчунајте надморску висину на служитељима Османда, засновану на сателитским сликама и дигиталним моделима надморске висине. Различитости у односу на висине снимљене уређајем могу бити кориштене за исправку надморске висине.</string>
+    <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу „%1$s“
+\nТреба да уградите или освежите АНТ + службу прикључака
+\nДа ли желите да покренете складиште игара за то\?</string>
+    <string name="updated_map_time">Освежено: %1$s</string>
+    <string name="live_update_frequency_hour_variant">Освежења карата се проверавају сваког сата.</string>
+    <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
+    <string name="no_altitude_data_desc">Ради пријема података %1$s, придодајте своју стазу путу или прорачунајте је на мрежи.</string>
 </resources>
