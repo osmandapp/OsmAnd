@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.backend.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,7 +33,8 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 												   @NonNull JSONObject json) throws JSONException;
 
 	@Override
-	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
+	public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+	                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 		StringBuilder buf = new StringBuilder();
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));

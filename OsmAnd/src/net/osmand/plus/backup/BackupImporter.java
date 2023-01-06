@@ -145,10 +145,11 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
-				if (Algorithms.isEmpty(error)) {
+				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
+				boolean error = !Algorithms.isEmpty(errorStr);
+				if (!error) {
 					is = new FileInputStream(tempFile);
-					reader.readFromStream(is, remoteFile.getName());
+					reader.readFromStream(is, tempFile, remoteFile.getName());
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
@@ -163,18 +164,16 @@ class BackupImporter {
 									remoteFile.getClienttimems());
 						}
 					}
-				} else {
-					throw new IOException("Error reading temp item file " + fileName + ": " + error);
+				}
+				if (tempFile.exists()) {
+					tempFile.delete();
+				}
+				if (error) {
+					throw new IOException("Error reading temp item file " + fileName + ": " + errorStr);
 				}
 			}
 			item.applyAdditionalParams(reader);
-		} catch (IllegalArgumentException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (IOException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (UserNotRegisteredException e) {
+		} catch (IllegalArgumentException | IOException | UserNotRegisteredException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
 		} finally {
@@ -454,7 +453,14 @@ class BackupImporter {
 			}
 			ThreadPoolTaskExecutor<ItemFileDownloadTask> itemFilesDownloadExecutor = createExecutor();
 			itemFilesDownloadExecutor.run(itemFileDownloadTasks);
-		} else {
+		}
+		for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
+			File tempFile = entry.getKey();
+			if (tempFile.exists()) {
+				tempFile.delete();
+			}
+		}
+		if (hasDownloadErrors) {
 			throw new IOException("Error downloading temp item files");
 		}
 	}
@@ -476,12 +482,9 @@ class BackupImporter {
 		FileInputStream is = null;
 		try {
 			is = new FileInputStream(tempFile);
-			reader.readFromStream(is, item.getFileName());
+			reader.readFromStream(is, tempFile, item.getFileName());
 			item.applyAdditionalParams(reader);
-		} catch (IllegalArgumentException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (IOException e) {
+		} catch (IllegalArgumentException | IOException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
 		} finally {
