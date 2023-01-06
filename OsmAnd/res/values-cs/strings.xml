@@ -4408,7 +4408,7 @@
     <string name="from_with_param">Od %1$s</string>
     <string name="offline_wikipeadia">Offline Wikipedie</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terénu: vrstevnice, stínování svahů, sklony svahů</string>
-    <string name="purchases_feature_desc_wikipedia">Prozkoumejte Wikipedii offline. Články jsou rozdělené podle zemí a oblastí a jsou dostupné ve všech jazycích.</string>
+    <string name="purchases_feature_desc_wikipedia">Poskytuje všechny články z Wikipedie týkající se míst v režimu offline a pomáhá vám dozvědět se informace o místech, která navštívíte na své cestě, pouhým klepnutím na mapu. Nezapomeňte si stáhnout mapové soubory Wikipedie pro příslušné regiony.</string>
     <string name="enter_verification_code">Zadejte jednorázové heslo</string>
     <string name="contributions_may_calculate_with_delay">Výpočet příspěvků může trvat několik hodin.</string>
     <string name="shared_string_contributions">Příspěvky</string>
@@ -4471,10 +4471,10 @@
     <string name="track_file">Soubor se stopou</string>
     <string name="shared_string_used">Použito</string>
     <string name="files_with_route_restrictions">Soubory s omezeními trasy</string>
-    <string name="predefined_waypoint_appearance_description">Klepnutím na akci se automaticky uloží bod trasy s přednastavenými parametry.</string>
-    <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku \"Přidat bod trasy\", kde můžete změnit jméno a vzhled.</string>
+    <string name="predefined_waypoint_appearance_description">Po klepnutí na tuto akci se bod cesty automaticky uloží s předdefinovanými parametry.</string>
+    <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku \"Přidat bod trasy\", kde můžete změnit název a vzhled.</string>
     <string name="waypoint_appearance">Vzhled bodu trasy</string>
-    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dialog se všemi dostupnými trasami.</string>
+    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dostupné trasy.</string>
     <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švýcarské souřadnice (CH1903+)</string>
     <string name="shared_string_not_used">Nepoužito</string>
@@ -4497,7 +4497,7 @@
     <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
     <string name="please_provide_group_name_message">Pojmenujte prosím skupinu.</string>
     <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
-    <string name="gpx_no_routes_descr">Pro uložení cesty do souboru můžete použít nástroj \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">K přidání trasy do souboru můžete použít nástroj \"%1$s\".</string>
     <string name="selected_waypoints_descr">Vybrané body budou přidány do stopy \"%1$s\"</string>
     <string name="shared_string_reading_file">Načítání souboru…</string>
     <string name="all_groups">Všechny skupiny</string>
@@ -4586,7 +4586,7 @@
     <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
     <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s bude započítaná a ovlivní vaši průměrnou rychlost.</string>
     <string name="weather_offline_forecast">Předpověď v režimu offline</string>
-    <string name="auto_25_chars_route_tr_kl">Odbočte vpravo a držte se vlevo.</string>
+    <string name="auto_25_chars_route_tr_kl">Odbočte vpravo a držte se vlevo</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Mezinárodní asociace horské cyklistiky</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie srážek</string>
@@ -4602,4 +4602,8 @@
     <string name="mtb_scale">Stupnice MTB</string>
     <string name="simulation_real_mode_title">Realistická simulace</string>
     <string name="transport_hazmat_title">Přeprava nebezpečných materiálů</string>
+    <string name="av_def_action_choose">Na vyžádání</string>
+    <string name="live_update_frequency_hour_variant">Aktualizace map se kontrolují každou hodinu.</string>
+    <string name="live_update_frequency_day_variant">Aktualizace map se kontrolují denně.</string>
+    <string name="live_update_frequency_week_variant">Aktualizace map se kontrolují každý týden.</string>
 </resources>
