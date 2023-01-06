@@ -574,15 +574,19 @@ class BackupImporter {
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(type, itemFileName, progress);
+					listener.updateGeneralProgress(itemsProgress.get(), p);
 				}
 			}
 
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				itemsProgress.addAndGet(1);
 				if (listener != null) {
 					listener.itemExportDone(type, itemFileName);
+					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());
 				}
 			}
 

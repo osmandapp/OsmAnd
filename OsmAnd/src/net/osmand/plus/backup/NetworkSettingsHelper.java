@@ -41,7 +41,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public interface BackupExportListener {
 		void onBackupExportStarted();
 
-		void onBackupExportProgressUpdate(int value);
+		void onBackupExportProgressUpdate(int progress);
 
 		void onBackupExportFinished(@Nullable String error);
 

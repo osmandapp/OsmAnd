@@ -81,7 +81,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		recyclerView.setAdapter(adapter);
 		recyclerView.setItemAnimator(null);
 		recyclerView.setLayoutAnimation(null);
-		updateAdapter();
 
 		return view;
 	}
@@ -91,6 +90,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		super.onResume();
 		backupHelper.addPrepareBackupListener(this);
 		settingsHelper.addBackupSyncListener(this);
+		updateAdapter();
 	}
 
 	@Override
