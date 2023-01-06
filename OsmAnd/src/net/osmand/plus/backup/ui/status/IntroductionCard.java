@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
 
 import android.view.View;
@@ -17,6 +18,7 @@ import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 public class IntroductionCard extends BaseCard {
 
@@ -63,9 +65,13 @@ public class IntroductionCard extends BaseCard {
 	}
 
 	private void setupSettingsButton(boolean nightMode) {
+		boolean signIn = dialogType == LoginDialogType.SIGN_IN;
+		int titleId = signIn ? R.string.choose_what_to_sync : R.string.set_up_backup;
+		DialogButtonType buttonType = signIn ? SECONDARY : SECONDARY_ACTIVE;
+
 		View settingsButton = view.findViewById(R.id.settings_button);
 		settingsButton.setOnClickListener(v -> notifyButtonPressed(SETTINGS_BUTTON_INDEX));
-		UiUtilities.setupDialogButton(nightMode, settingsButton, SECONDARY_ACTIVE, R.string.choose_what_to_sync);
+		UiUtilities.setupDialogButton(nightMode, settingsButton, buttonType, titleId);
 	}
 
 	private boolean shouldShowSyncButton() {

@@ -13,8 +13,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +27,8 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	final Map<String, ImportBackupTask> importAsyncTasks = new HashMap<>();
 	final Map<String, ExportBackupTask> exportAsyncTasks = new HashMap<>();
 	final Map<String, SyncBackupTask> syncBackupTasks = new HashMap<>();
+
+	private final List<OnBackupSyncListener> syncListeners = new ArrayList<>();
 
 	public enum SyncOperationType {
 		SYNC_OPERATION_NONE,
@@ -62,6 +62,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		super(app);
 	}
 
+	@Nullable
 	private BackupHelper getBackupHelper() {
 		return getApp().getBackupHelper();
 	}
@@ -75,9 +76,18 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public ExportBackupTask getExportTask(@NonNull String key) {
 		return exportAsyncTasks.get(key);
 	}
+
 	@Nullable
 	public SyncBackupTask getSyncTask(@NonNull String key) {
 		return syncBackupTasks.get(key);
+	}
+
+	public void addBackupSyncListener(@NonNull OnBackupSyncListener listener) {
+		syncListeners.add(listener);
+	}
+
+	public void removeBackupSyncListener(@NonNull OnBackupSyncListener listener) {
+		syncListeners.remove(listener);
 	}
 
 	@Nullable
@@ -132,18 +142,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 	public boolean isBackupSyncing() {
 		return !Algorithms.isEmpty(syncBackupTasks);
-	}
-
-	public void updateExportListener(@Nullable BackupExportListener listener) {
-		for (ExportBackupTask exportTask : exportAsyncTasks.values()) {
-			exportTask.setListener(listener);
-		}
-	}
-
-	public void updateImportListener(@Nullable ImportListener listener) {
-		for (ImportBackupTask importTask : importAsyncTasks.values()) {
-			importTask.setImportListener(listener);
-		}
 	}
 
 	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
@@ -218,10 +216,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation,
-	                              @Nullable OnBackupSyncListener listener) {
+	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation) {
 		if (!syncBackupTasks.containsKey(key)) {
-			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
+			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			syncBackupTasks.put(key, syncTask);
 			syncTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -233,12 +230,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void syncSettingsItems(@NonNull String key,
 	                              @NonNull LocalFile localFile,
 	                              @NonNull RemoteFile remoteFile,
-	                              @NonNull SyncOperationType operation,
-	                              @Nullable OnBackupSyncListener listener) {
+	                              @NonNull SyncOperationType operation) {
 		if (!syncBackupTasks.containsKey(key)) {
-			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, listener);
+			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			syncBackupTasks.put(key, syncTask);
-			SettingsItem settingsItem = localFile == null || localFile.item == null ? remoteFile.item : localFile.item;
 			switch (operation) {
 				case SYNC_OPERATION_DELETE:
 					syncTask.deleteItem(remoteFile.item);
@@ -255,8 +250,49 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void exportSettings(@NonNull String key, @Nullable BackupExportListener listener,
-	                           @NonNull SettingsItem... items) throws IllegalStateException {
-		exportSettings(key, new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
+	private OnBackupSyncListener getOnBackupSyncListener() {
+		return new OnBackupSyncListener() {
+			@Override
+			public void onBackupSyncStarted() {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupSyncStarted();
+				}
+			}
+
+			@Override
+			public void onBackupProgressUpdate(int progress) {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupProgressUpdate(progress);
+				}
+			}
+
+			@Override
+			public void onBackupSyncFinished(@Nullable String error) {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupSyncFinished(error);
+				}
+			}
+
+			@Override
+			public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupItemStarted(type, fileName, work);
+				}
+			}
+
+			@Override
+			public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupItemProgress(type, fileName, value);
+				}
+			}
+
+			@Override
+			public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupItemFinished(type, fileName);
+				}
+			}
+		};
 	}
 }

@@ -17,6 +17,7 @@
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
+    <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
     <string name="cloud_sync_progress">Sync…%1$s</string>
     <string name="checking_progress">Checking…</string>
@@ -720,10 +721,10 @@
     <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="backup_setup">Set up backup</string>
-    <string name="backup_welcome_back_descr">Restore data on this device using existing backups, or back up data to OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restore data on this device using OsmAnd Cloud.</string>
     <string name="backup_welcome_back">Welcome back!</string>
-    <string name="backup_dont_have_any_descr">Schedule automatic backups and never lose data.</string>
-    <string name="backup_do_not_have_any">You have no online backup yet.</string>
+    <string name="backup_dont_have_any_descr">Set up an automatic backup so you don\'t have to worry about lost data.</string>
+    <string name="backup_do_not_have_any">You don\'t have any online backup yet</string>
     <string name="shared_string_progress">Progress</string>
     <string name="backup_data_removed">All data has been removed.</string>
     <string name="backup_version_history_removed">All version history has been removed.</string>

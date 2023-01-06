@@ -1,5 +1,9 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,16 +17,30 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.ExportBackupTask;
+import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
+import net.osmand.plus.backup.ImportBackupTask;
+import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.SyncBackupTask;
 import net.osmand.plus.backup.ui.ChangeItemActionsBottomSheet;
 import net.osmand.plus.backup.ui.ChangesTabFragment;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+
+import org.apache.commons.logging.Log;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
+	private static final Log log = PlatformUtil.getLog(ItemViewHolder.class);
+
 	private final OsmandApplication app;
+	private final NetworkSettingsHelper settingsHelper;
 
 	private final TextView title;
 	private final TextView description;
@@ -30,16 +48,22 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 	private final AppCompatImageView icon;
 	private final AppCompatImageView secondIcon;
 	private final View divider;
+	private final View selectableView;
+	private final boolean nightMode;
 
-	public ItemViewHolder(@NonNull View itemView) {
+	public ItemViewHolder(@NonNull View itemView, boolean nightMode) {
 		super(itemView);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		settingsHelper = app.getNetworkSettingsHelper();
+		this.nightMode = nightMode;
+
 		title = itemView.findViewById(R.id.title);
 		icon = itemView.findViewById(R.id.icon);
 		progressBar = itemView.findViewById(R.id.progressBar);
 		secondIcon = itemView.findViewById(R.id.second_icon);
 		description = itemView.findViewById(R.id.description);
 		divider = itemView.findViewById(R.id.bottom_divider);
+		selectableView = itemView.findViewById(R.id.selectable_list_item);
 	}
 
 	public void bindView(@NonNull CloudChangeItem item, @Nullable ChangesTabFragment fragment, boolean lastItem) {
@@ -51,6 +75,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		}
 		secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
 
+		setupProgress(item);
 		OnClickListener listener = fragment != null ? view -> {
 			FragmentManager manager = fragment.getFragmentManager();
 			if (manager != null) {
@@ -58,13 +83,56 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} : null;
 		itemView.setOnClickListener(listener);
-		itemView.setEnabled(app.getNetworkSettingsHelper().getSyncTask(item.fileName) == null);
+		itemView.setEnabled(!isSyncing(item));
+
+		setupSelectableBackground();
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
 	}
 
-	@Nullable
-	protected Drawable getContentIcon(@DrawableRes int icon) {
-		return app.getUIUtilities().getIcon(icon, R.color.icon_color_secondary_light);
+	private void setupProgress(@NonNull CloudChangeItem item) {
+		ItemProgressInfo progressInfo = getItemProgressInfo(item);
+		if (progressInfo != null) {
+			progressBar.setMax(progressInfo.getWork());
+			progressBar.setProgress(progressInfo.getValue());
+		}
+		boolean syncing = isSyncing(item);
+		AndroidUiHelper.updateVisibility(secondIcon, !syncing);
+		AndroidUiHelper.updateVisibility(progressBar, syncing);
 	}
 
+	private ItemProgressInfo getItemProgressInfo(@NonNull CloudChangeItem item) {
+		ImportBackupTask importTask = settingsHelper.getImportTask(item.fileName);
+		if (importTask == null) {
+			importTask = settingsHelper.getImportTask(RESTORE_ITEMS_KEY);
+		}
+		if (importTask != null) {
+			return importTask.getItemProgressInfo(item.settingsItem.getType().name(), item.fileName);
+		}
+		ExportBackupTask exportTask = settingsHelper.getExportTask(item.fileName);
+		if (exportTask == null) {
+			exportTask = settingsHelper.getExportTask(BACKUP_ITEMS_KEY);
+		}
+		if (exportTask != null) {
+			return exportTask.getItemProgressInfo(item.settingsItem.getType().name(), item.fileName);
+		}
+		return null;
+	}
+
+	private boolean isSyncing(@NonNull CloudChangeItem item) {
+		SyncBackupTask syncTask = settingsHelper.getSyncTask(item.fileName);
+		if (syncTask == null) {
+			syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
+		}
+		return syncTask != null;
+	}
+
+	private void setupSelectableBackground() {
+		int color = ColorUtilities.getActiveColor(app, nightMode);
+		AndroidUtils.setBackground(selectableView, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
+	}
+
+	@Nullable
+	private Drawable getContentIcon(@DrawableRes int icon) {
+		return app.getUIUtilities().getIcon(icon, R.color.icon_color_secondary_light);
+	}
 }

@@ -4235,7 +4235,7 @@
     <string name="logout_from_osmand_cloud">Выйти из OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Выйти\?
 \nВам нужно будет снова войти в OsmAnd Cloud для резервного копирования или восстановления данных.</string>
-    <string name="backup_welcome_back_descr">Восстановите данные на этом устройстве, используя существующие резервные копии или создайте резервную копию данных в OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Восстановите данные на этом устройстве, используя OsmAnd Cloud.</string>
     <string name="backup_restore_now">Восстановить</string>
     <string name="backup_welcome_back">С возвращением!</string>
     <string name="attribute">Атрибут</string>

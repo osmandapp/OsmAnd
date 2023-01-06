@@ -231,7 +231,8 @@ public class FavouritesFileHelper {
 				}
 			}
 			// Remove already existing in memory
-			for (FavouritePoint point : localGroup.getPoints()) {
+			List<FavouritePoint> localPoints = new ArrayList<>(localGroup.getPoints());
+			for (FavouritePoint point : localPoints) {
 				all.remove(point.getKey());
 			}
 			// save favoritePoints from memory in order to update existing
