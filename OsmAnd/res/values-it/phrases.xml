@@ -26,7 +26,7 @@
     <string name="poi_bathroom_furnishing">Arredo bagno</string>
     <string name="poi_bed">Negozio biancheria da letto</string>
     <string name="poi_carpet">Negozio tappeti</string>
-    <string name="poi_chemist">Mesticheria</string>
+    <string name="poi_chemist">Prodotti per l\'igiene e la pulizia</string>
     <string name="poi_clothes">Abbigliamento</string>
     <string name="poi_clothes_children">Abbigliamento bambini</string>
     <string name="poi_shoes">Negozio calzature</string>
@@ -94,7 +94,7 @@
     <string name="poi_optician">Optometrista</string>
     <string name="poi_organic">Prodotti biologici</string>
     <string name="poi_outdoor">Negozio articoli per l\'attività all\'aperto</string>
-    <string name="poi_paint">Negozio articoli pittura</string>
+    <string name="poi_paint">Mesticheria</string>
     <string name="poi_pet">Negozio animali domestici</string>
     <string name="poi_second_hand">Negozio dell\'usato</string>
     <string name="poi_tobacco">Tabaccheria</string>
@@ -862,7 +862,7 @@
     <string name="poi_financial">Ufficio finanziario</string>
     <string name="poi_political_party">Ufficio partito politico</string>
     <string name="poi_notary">Notaio</string>
-    <string name="poi_pitch">Piazzola</string>
+    <string name="poi_pitch">Campo da gioco</string>
     <string name="poi_leisure_track">Pista sportiva</string>
     <string name="poi_raceway">Circuito</string>
     <string name="poi_sport_multi">Multi sport</string>
@@ -1242,7 +1242,7 @@
     <string name="poi_denomination_latter_day_saints">Santi degli ultimi giorni</string>
     <string name="poi_denomination_united_church_of_christ">Chiesa unita di Cristo</string>
     <string name="poi_denomination_romanian_orthodox">Ortodosso romano</string>
-    <string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodosso tewahedo Etiopica</string>
+    <string name="poi_denomination_ethiopian_orthodox_tewahedo">ortodosso etiope \"tewahedo\"</string>
     <string name="poi_denomination_maronite">Maronita</string>
     <string name="poi_wine_cellar">Cantina per vini</string>
     <string name="poi_craft_winery">Azienda vinicola</string>
@@ -2202,11 +2202,11 @@
     <string name="poi_diaper_room">Locale cambio pannolino</string>
     <string name="poi_socket">Presa</string>
     <string name="poi_socket_chademo_output_filter">Uscita CHAdeMO</string>
-    <string name="poi_socket_type2_output_filter">Uscita Tipo 2</string>
+    <string name="poi_socket_type2_output_filter">Uscita connettore Tipo 2</string>
     <string name="poi_socket_type2_combo_output_filter">Uscita Tipo 2 combinata</string>
     <string name="poi_socket_type3_output_filter">Uscita Tipo 3</string>
     <string name="poi_socket_cee_blue_output_filter">Uscita CEE blu</string>
-    <string name="poi_socket_schuko_output_filter">Uscita Schuko</string>
+    <string name="poi_socket_schuko_output_filter">Uscita connettore Schuko</string>
     <string name="poi_operational_status">Stato di servizio</string>
     <string name="poi_via_ferrata">Via ferrata</string>
     <string name="poi_via_ferrata_scale">Difficoltà</string>
