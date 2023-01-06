@@ -37,6 +37,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
@@ -73,14 +74,13 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
 
-		adapter = new ChangesAdapter(this, nightMode);
+		adapter = new ChangesAdapter(app, this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 		recyclerView.setAdapter(adapter);
 		recyclerView.setItemAnimator(null);
 		recyclerView.setLayoutAnimation(null);
-
 		updateAdapter();
 
 		return view;
@@ -94,8 +94,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDestroy() {
+		super.onDestroy();
 		backupHelper.removePrepareBackupListener(this);
 		settingsHelper.removeBackupSyncListener(this);
 	}
@@ -142,7 +142,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	private void updateAdapter() {
 		if (adapter != null) {
-			adapter.setCloudChangeItems(generateData());
+			boolean preparing = backupHelper.isBackupPreparing();
+			adapter.setCloudChangeItems(!preparing ? generateData() : Collections.emptyList());
 		}
 	}
 

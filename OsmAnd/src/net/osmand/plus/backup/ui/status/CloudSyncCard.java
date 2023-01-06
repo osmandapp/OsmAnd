@@ -121,6 +121,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		setupSelectableBackground(header);
 		AndroidUiHelper.updateVisibility(progressBar, syncTask != null);
 		AndroidUiHelper.updateVisibility(description, syncTask == null);
+		AndroidUiHelper.updateVisibility(header.findViewById(R.id.bottom_divider), false);
 	}
 
 	private void setupSyncButton(@NonNull PrepareBackupResult backup) {
