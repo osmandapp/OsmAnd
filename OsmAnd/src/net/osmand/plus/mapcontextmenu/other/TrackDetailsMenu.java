@@ -697,31 +697,14 @@ public class TrackDetailsMenu {
 		ImageView yAxisIcon = parentView.findViewById(R.id.y_axis_icon);
 		TextView yAxisTitle = parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
-		if (analysis.hasElevationData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
-		}
-		if (analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
-		}
-		if (analysis.hasElevationData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
-		}
-		if (analysis.hasElevationData && analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
-		}
-
-		if (analysis.hasElevationData && analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
-		}
+		List<GPXDataSetType[]> availableTypes = getAvailableYTypes(analysis);
 
 		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
 			yAxis.setOnClickListener(v -> {
-				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet(app, mapActivity, gpxItem, getAvailableXTypes(analysis), availableTypes, getAxisSelectedListener());
-				bottomSheet.show();
+				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet();
+				bottomSheet.show(mapActivity.getSupportFragmentManager(), AnalyzeBottomSheet.TAG);
 			});
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -746,8 +729,8 @@ public class TrackDetailsMenu {
 		}
 		if (analysis.isTimeSpecified()) {
 			xAxis.setOnClickListener(v -> {
-				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet(app, mapActivity, gpxItem, getAvailableXTypes(analysis), availableTypes, getAxisSelectedListener());
-				bottomSheet.show();
+				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet();
+				bottomSheet.show(mapActivity.getSupportFragmentManager(), AnalyzeBottomSheet.TAG);
 			});
 			xAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -758,7 +741,7 @@ public class TrackDetailsMenu {
 
 		refreshChart(chart, forceFitTrackOnMap, true);
 	}
-	private ArrayList<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis){
+	public ArrayList<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis){
 		ArrayList<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 
 		for(GPXDataSetAxisType type : GPXDataSetAxisType.values()){
@@ -774,7 +757,29 @@ public class TrackDetailsMenu {
 		return availableTypes;
 	}
 
-	private AxisSelectedListener getAxisSelectedListener(){
+	public List<GPXDataSetType[]> getAvailableYTypes(GPXTrackAnalysis analysis){
+		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+
+		if (analysis.hasElevationData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
+		}
+		if (analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
+		}
+		if (analysis.hasElevationData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
+		}
+		if (analysis.hasElevationData && analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
+		}
+		if (analysis.hasElevationData && analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
+		}
+		return availableTypes;
+	}
+
+	public AxisSelectedListener getAxisSelectedListener(){
 		return new AxisSelectedListener() {
 			@Override
 			public void onXAxisSelected(GPXDataSetAxisType type) {
@@ -793,7 +798,9 @@ public class TrackDetailsMenu {
 			public void onYAxisSelected(GPXDataSetType[] type) {
 				fitTrackOnMapForbidden = true;
 				GpxDisplayItem item = getGpxItem();
-				item.chartTypes = type;
+				if (item != null) {
+					item.chartTypes = type;
+				}
 				update();
 				fitTrackOnMapForbidden = false;
 			}
