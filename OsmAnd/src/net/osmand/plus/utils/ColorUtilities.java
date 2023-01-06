@@ -166,6 +166,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getButtonSecondaryTextColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getButtonSecondaryTextColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getButtonSecondaryTextColorId(boolean nightMode) {
+		return nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
+	}
+
+	@ColorInt
 	public static int getActivityBgColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getActivityBgColorId(nightMode));
 	}

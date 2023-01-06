@@ -200,6 +200,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	public void onResume() {
 		super.onResume();
 		backupHelper.addPrepareBackupListener(this);
+		settingsHelper.addBackupSyncListener(this);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -211,6 +212,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	public void onPause() {
 		super.onPause();
 		backupHelper.removePrepareBackupListener(this);
+		settingsHelper.removeBackupSyncListener(this);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -302,7 +304,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			backupHelper.prepareBackup();
 		}
 		if (!settingsHelper.isBackupSyncing()) {
-			settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC, this);
+			settingsHelper.syncSettingsItems(SYNC_ITEMS_KEY, SYNC_OPERATION_SYNC);
 		}
 	}
 

@@ -4236,9 +4236,9 @@
     <string name="backup_data_removed">Усі дані було вилучено.</string>
     <string name="shared_string_progress">Виконання</string>
     <string name="backup_do_not_have_any">У вас немає резервної онлайн-копії.</string>
-    <string name="backup_dont_have_any_descr">Запланувати автоматичне резервне копіювання, щоб ніколи не втратити дані.</string>
+    <string name="backup_dont_have_any_descr">Налаштувати автоматичне резервне копіювання, щоб ніколи не втратити дані.</string>
     <string name="backup_welcome_back">З поверненням!</string>
-    <string name="backup_welcome_back_descr">Відновити дані на цьому пристрої за допомогою наявних резервних копій або створити резервну копію даних в OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Відновити дані на цьому пристрої за допомогою OsmAnd Cloud.</string>
     <string name="backup_setup">Налаштувати резервне копіювання</string>
     <string name="backup_restore_now">Відновити зараз</string>
     <string name="attribute">Атрибут</string>
