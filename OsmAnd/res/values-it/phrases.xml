@@ -3033,7 +3033,7 @@
     <string name="poi_heating_filter">Riscaldamento</string>
     <string name="poi_fridge_filter">Frigoriferi</string>
     <string name="poi_laundry_service_filter">Lavanderia</string>
-    <string name="poi_dry_cleaning_filter">Asciugatrice</string>
+    <string name="poi_dry_cleaning_filter">Lavasecco</string>
     <string name="poi_coffee_filter">Caffè</string>
     <string name="poi_ice_cream_filter">Gelato</string>
     <string name="poi_outdoor_seating_poi">Posti a sedere all\'aperto</string>
