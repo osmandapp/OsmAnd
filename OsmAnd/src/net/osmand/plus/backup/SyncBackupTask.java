@@ -42,8 +42,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private final boolean singleOperation;
 
 	private int maxProgress;
-	private int lastProgress;
-	private int currentProgress;
+	private int importProgress;
+	private int exportProgress;
 
 	public SyncBackupTask(@NonNull OsmandApplication app, @NonNull String key,
 	                      @NonNull SyncOperationType operation,
@@ -64,7 +64,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	public int getGeneralProgress() {
-		return lastProgress;
+		return importProgress + exportProgress;
 	}
 
 	@Override
@@ -206,9 +206,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	@Override
 	public void onImportProgressUpdate(int value, int uploadedKb) {
-		currentProgress = uploadedKb;
+		importProgress = uploadedKb;
 		if (syncListener != null) {
-			syncListener.onBackupProgressUpdate(currentProgress);
+			syncListener.onBackupProgressUpdate(getGeneralProgress());
 		}
 	}
 
@@ -222,14 +222,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	@Override
-	public void onBackupExportProgressUpdate(int value) {
-		ExportBackupTask exportTask = networkSettingsHelper.getExportTask(BACKUP_ITEMS_KEY);
-		if (exportTask != null) {
-			currentProgress += exportTask.getGeneralProgress() - lastProgress;
-			if (syncListener != null) {
-				syncListener.onBackupProgressUpdate(currentProgress);
-			}
-			lastProgress = exportTask.getGeneralProgress();
+	public void onBackupExportProgressUpdate(int progress) {
+		exportProgress = progress;
+		if (syncListener != null) {
+			syncListener.onBackupProgressUpdate(getGeneralProgress());
 		}
 	}
 
