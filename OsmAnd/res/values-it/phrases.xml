@@ -943,7 +943,7 @@
     <string name="poi_access_no">Nessun accesso</string>
     <string name="poi_access_permissive">Accesso permissivo</string>
     <string name="poi_access_customers">Accesso cliente</string>
-    <string name="poi_access_delivery">Accesso alla consegna</string>
+    <string name="poi_access_delivery">Accesso autorizzato per la consegna</string>
     <string name="poi_access_agricultural">Accesso agricolo</string>
     <string name="poi_content_silage">Contenuto: insilato</string>
     <string name="poi_content_water">Contenuto: acqua</string>
