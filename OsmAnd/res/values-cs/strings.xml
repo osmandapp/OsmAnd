@@ -4604,6 +4604,6 @@
     <string name="transport_hazmat_title">Přeprava nebezpečných materiálů</string>
     <string name="av_def_action_choose">Na vyžádání</string>
     <string name="live_update_frequency_hour_variant">Aktualizace map se kontrolují každou hodinu.</string>
-    <string name="live_update_frequency_day_variant">Aktualizace map jsou kontrolovány denně.</string>
+    <string name="live_update_frequency_day_variant">Aktualizace map se kontrolují denně.</string>
     <string name="live_update_frequency_week_variant">Aktualizace map se kontrolují každý týden.</string>
 </resources>
