@@ -4474,7 +4474,7 @@
     <string name="predefined_waypoint_appearance_description">Po klepnutí na tuto akci se bod cesty automaticky uloží s předdefinovanými parametry.</string>
     <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku \"Přidat bod trasy\", kde můžete změnit název a vzhled.</string>
     <string name="waypoint_appearance">Vzhled bodu trasy</string>
-    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dostupné trasy.</string>
+    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dostupné stopy.</string>
     <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švýcarské souřadnice (CH1903+)</string>
     <string name="shared_string_not_used">Nepoužito</string>
