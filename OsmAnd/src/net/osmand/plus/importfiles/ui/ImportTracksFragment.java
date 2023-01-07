@@ -1,5 +1,6 @@
 package net.osmand.plus.importfiles.ui;
 
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
@@ -109,7 +110,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 		if (savedInstanceState == null) {
 			collectTracks();
-			selectedFolder = app.getAppPath(GPX_INDEX_DIR).getName();
+			selectedFolder = app.getAppPath(GPX_IMPORT_DIR).getName();
 		} else {
 			selectedFolder = savedInstanceState.getString(SELECTED_DIRECTORY_KEY);
 		}
