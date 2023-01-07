@@ -4474,7 +4474,7 @@
     <string name="predefined_waypoint_appearance_description">Po klepnutí na tuto akci se bod cesty automaticky uloží s předdefinovanými parametry.</string>
     <string name="always_ask_waypoint_appearance_description">Klepnutím na tuto akci otevřete obrazovku \"Přidat bod trasy\", kde můžete změnit název a vzhled.</string>
     <string name="waypoint_appearance">Vzhled bodu trasy</string>
-    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dostupné trasy.</string>
+    <string name="track_file_description">Klepnutím na tuto akci zobrazíte dostupné stopy.</string>
     <string name="navigate_point_format_swiss_grid">Švýcarské souřadnice (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švýcarské souřadnice (CH1903+)</string>
     <string name="shared_string_not_used">Nepoužito</string>
@@ -4606,4 +4606,19 @@
     <string name="live_update_frequency_hour_variant">Aktualizace map se kontrolují každou hodinu.</string>
     <string name="live_update_frequency_day_variant">Aktualizace map se kontrolují denně.</string>
     <string name="live_update_frequency_week_variant">Aktualizace map se kontrolují každý týden.</string>
+    <string name="si_nm_mt">Námořní míle/metry</string>
+    <string name="si_nm_ft">Námořní míle/stopy</string>
+    <string name="open_weather_action">Open počasí</string>
+    <string name="quick_action_temperature_layer">Přepínač pro zobrazení nebo skrytí teplotní vrstvy na mapě.</string>
+    <string name="quick_action_cloud_layer">Přepínač pro zobrazení nebo skrytí vrstvy mraků na mapě.</string>
+    <string name="temperature_layer">Teplotní vrstva</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie nárazového větru</string>
+    <string name="quick_action_precipitation_layer">Přepínač pro zobrazení nebo skrytí vrstvy srážek na mapě.</string>
+    <string name="quick_action_air_pressure_layer">Přepínač pro zobrazení nebo skrytí vrstvy tlaku vzduchu na mapě.</string>
+    <string name="pressure_layer">Tlaková vrstva</string>
+    <string name="wind_layer">Větrná vrstva</string>
+    <string name="cloud_layer">Vrstva mraků</string>
+    <string name="precipitation_layer">Vrstva srážek</string>
+    <string name="storage_migration_fragment_close_descr">Kopírování provedeno pro %1$s%%. Pokud nyní přestanete, aplikace nemusí fungovat správně.</string>
+    <string name="quick_action_wind_layer">Přepínač pro zobrazení nebo skrytí vrstvy větru na mapě.</string>
 </resources>
