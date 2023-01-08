@@ -4206,7 +4206,7 @@
     <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
 \nVous devrez vous reconnecter pour sauvegarder ou restaurer vos données.</string>
 =======
-    <string name="backup_welcome_back_descr">Restaurer des données sur cet appareil en utilisant les sauvegardes réalisées ou paramétrer une nouvelle sauvegarde de l\'appareil sur OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurer des données sur cet appareil en utilisant OsmAnd Cloud.</string>
     <string name="backup_error_subscription_was_expired_descr">Votre abonnement OsmAnd Pro a expiré, renouvelez-le pour utiliser la sauvegarde. Vous pouvez toujours restaurer des données à partir du Cloud.</string>
     <string name="contour_lines_hillshades_slope">Courbes de niveau, ombres, pentes</string>
     <string name="backup_deleting_all_data">Suppression de toutes les données …</string>
@@ -4216,8 +4216,8 @@
     <string name="backup_version_history_removed">L’historique de toutes les versions a été supprimé.</string>
     <string name="backup_data_removed">Toutes les données ont été supprimées.</string>
     <string name="shared_string_progress">Avancement</string>
-    <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne.</string>
-    <string name="backup_dont_have_any_descr">Planifiez une sauvegarde automatique pour ne jamais perdre vos données.</string>
+    <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne</string>
+    <string name="backup_dont_have_any_descr">Paramétrer une sauvegarde automatique pour ne plus vous soucier de la perte de vos données.</string>
     <string name="backup_welcome_back">Content de vous revoir !</string>
     <string name="backup_setup">Paramétrer la sauvegarde</string>
     <string name="backup_restore_now">Restaurer maintenant</string>
@@ -4975,9 +4975,9 @@
 \n</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
-    <string name="cloud_sync_progress">Synchro…%1$s</string>
+    <string name="cloud_sync_progress">Synchronisation…%1$s</string>
     <string name="checking_progress">Vérification…</string>
-    <string name="choose_what_to_sync">Sélectionner que synchroniser</string>
+    <string name="choose_what_to_sync">Sélectionner quoi synchroniser</string>
     <string name="res_unknown">Inconnu</string>
     <string name="shared_string_unsynced">Non synchronisé</string>
     <string name="check_for_updates">Vérifier les mises à jour</string>
@@ -5013,4 +5013,5 @@
     <string name="si_nm_ft">Milles marins / pieds</string>
     <string name="si_nm_mt">Milles marins / mètres</string>
     <string name="av_audio_format_bottom_sheet_descr">Sélectionnez le format audio de sortie. Les fichiers audio sont de type 3GPP (.3gp).</string>
+    <string name="set_up_backup">Paramétrer la sauvegarde</string>
 </resources>
