@@ -4233,13 +4233,13 @@
     <string name="logout_from_osmand_cloud_decsr">Terminar a sessão\?
 \nTerá de se autenticar novamente para fazer a cópia de segurança ou restaurar os dados.</string>
     <string name="backup_welcome_back">Bem-vindo(a) de volta!</string>
-    <string name="backup_welcome_back_descr">Restaure dados neste dispositivo usando as cópias de segurança existentes ou faça uma cópia de segurança para o OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurar dados neste aparelho usando o OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar cópia de segurança</string>
     <string name="backup_restore_now">Restaurar agora</string>
     <string name="attribute">Atributo</string>
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explore a Wikipédia offline.</string>
-    <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática e nunca perca informação.</string>
+    <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática para não ter de se preocupar com a perda de dados.</string>
     <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para poder usar cópias de segurança. Ainda pode restaurar os dados da Cloud.</string>
     <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, declives</string>
     <string name="backup_deleting_all_data">A eliminar todos os dados…</string>
@@ -4249,7 +4249,7 @@
     <string name="backup_version_history_removed">Todo o histórico da versão foi removido.</string>
     <string name="backup_data_removed">Todos os dados foram removidos.</string>
     <string name="shared_string_progress">Progresso</string>
-    <string name="backup_do_not_have_any">Ainda não tem uma cópia de segurança online.</string>
+    <string name="backup_do_not_have_any">Ainda não tem uma cópia de segurança online</string>
     <string name="on_hold_since">Em espera desde %1$s</string>
     <string name="active_till">Ativa até %1$s</string>
     <string name="promo_subscription">Subscrição promocional</string>
@@ -5027,4 +5027,5 @@
     <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de ficheiro para áudio é 3GPP (.3gp).</string>
     <string name="si_nm_ft">Milhas náuticas/pés</string>
     <string name="si_nm_mt">Milhas náuticas/metros</string>
+    <string name="set_up_backup">Configurar cópia de segurança</string>
 </resources>
