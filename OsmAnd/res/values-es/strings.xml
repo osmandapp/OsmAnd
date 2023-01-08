@@ -4101,10 +4101,10 @@
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
-    <string name="backup_dont_have_any_descr">Programa copias de seguridad automáticas y no pierdas nunca los datos.</string>
+    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
+    <string name="backup_dont_have_any_descr">Configure una copia de seguridad automática para que no tenga que preocuparse por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
-    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaure los datos en este dispositivo usando OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
     <string name="backup_restore_now">Restaurar ahora</string>
     <string name="attribute">Atributo</string>
@@ -5026,4 +5026,5 @@
     <string name="av_audio_format_bottom_sheet_descr">Seleccione el formato de salida de audio. El formato del tipo de archivo de audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas náuticas /pies</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
+    <string name="set_up_backup">Crear una copia de seguridad</string>
 </resources>
