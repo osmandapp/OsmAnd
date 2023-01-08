@@ -4205,8 +4205,8 @@
     <string name="backup_version_history_removed">Tutti i dati della cronologia sono stati rimossi.</string>
     <string name="backup_data_removed">Tutti i dati sono stati rimossi.</string>
     <string name="shared_string_progress">Avanzamento</string>
-    <string name="backup_do_not_have_any">Non hai ancora un backup online.</string>
-    <string name="backup_dont_have_any_descr">Imposta backup automatici e non perderai mai i dati.</string>
+    <string name="backup_do_not_have_any">Non hai ancora alcun backup online</string>
+    <string name="backup_dont_have_any_descr">Imposta un backup automatico in modo da non doverti preoccupare della perdita di dati.</string>
     <string name="backup_welcome_back">Bentornato!</string>
     <string name="backup_setup">Imposta il backup</string>
     <string name="backup_restore_now">Ripristina adesso</string>
@@ -4245,7 +4245,7 @@
     <string name="purchases_restored">Acquisti ripristinati</string>
     <string name="enter_verification_code">Immetti la password usa e getta</string>
     <string name="purchases_feature_desc_nautical">Ottieni l\'accesso alle informazioni batimetriche</string>
-    <string name="backup_welcome_back_descr">Ripristina i dati su questo dispositivo utilizzando i backup esistenti, oppure invia il backup a OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Ripristina i dati su questo dispositivo utilizzando OsmAnd Cloud.</string>
     <string name="pro_features">Funzionalità avanzate</string>
     <string name="backup_version_history">Cronologia della versione</string>
     <string name="backup_storage_taken">Memoria occupata</string>
@@ -5011,4 +5011,7 @@
     <string name="choose_what_to_sync">Scegli cosa sincronizzare</string>
     <string name="cloud_sync_progress">Sincronizza...%1$s</string>
     <string name="av_audio_format_bottom_sheet_descr">Seleziona il formato di uscita audio. Il formato di file per l\'audio è 3GPP (.3gp).</string>
+    <string name="set_up_backup">Impostare il backup</string>
+    <string name="si_nm_ft">Miglia/piedi nautici</string>
+    <string name="si_nm_mt">Miglia/metri nautici</string>
 </resources>
