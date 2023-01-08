@@ -249,7 +249,7 @@
     <string name="trace_rendering">Подаци о отклону грешака приказа</string>
     <string name="trace_rendering_descr">Приказуј учинак приказа.</string>
     <string name="installing_new_resources">Распакујем нове податке…</string>
-    <string name="internet_connection_required_for_online_route">Навигација преко интернета не ради кад нисте на интернету.</string>
+    <string name="internet_connection_required_for_online_route">Навођење преко интернета не ради кад нисте на интернету.</string>
     <string name="tts_language_not_supported_title">Језик није подржан</string>
     <string name="tts_missing_language_data_title">Недостају подаци</string>
     <string name="tts_missing_language_data">Отићи до продавнице да скинете изабрани језик?</string>
