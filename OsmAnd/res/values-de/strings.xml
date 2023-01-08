@@ -4252,10 +4252,10 @@
     <string name="backup_version_history_removed">Die gesamte Versionshistorie wurde entfernt.</string>
     <string name="backup_data_removed">Alle Daten wurden entfernt.</string>
     <string name="shared_string_progress">Fortschritt</string>
-    <string name="backup_do_not_have_any">Sie haben noch keine Online-Datensicherung.</string>
-    <string name="backup_dont_have_any_descr">Planen Sie automatische Backups und verlieren Sie keine Daten.</string>
+    <string name="backup_do_not_have_any">Sie haben noch keine Online-Datensicherung</string>
+    <string name="backup_dont_have_any_descr">Richten Sie automatische Backups ein und machen Sie sich keine Sorgen über verlorene Daten.</string>
     <string name="backup_welcome_back">Willkommen zurück!</string>
-    <string name="backup_welcome_back_descr">Daten auf diesem Gerät mithilfe vorhandener Sicherungen wiederherstellen oder Daten in der OsmAnd Cloud sichern.</string>
+    <string name="backup_welcome_back_descr">Daten auf diesem Gerät mithilfe der OsmAnd Cloud wiederherstellen.</string>
     <string name="backup_setup">Datensicherung einrichten</string>
     <string name="backup_restore_now">Jetzt wiederherstellen</string>
     <string name="attribute">Attribut</string>
@@ -5027,4 +5027,5 @@
     <string name="av_audio_format_bottom_sheet_descr">Audio-Ausgabe-Format auswählen. Dateitypformat für Audio is 3GPP (.3gp).</string>
     <string name="si_nm_ft">Nautische Meilen/Fuß</string>
     <string name="si_nm_mt">Nautische Meilen/Meter</string>
+    <string name="set_up_backup">Backup einrichten</string>
 </resources>
