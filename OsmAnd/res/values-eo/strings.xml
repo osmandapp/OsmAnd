@@ -4999,4 +4999,12 @@
     <string name="cloud_conflict">Konflikto</string>
     <string name="upload_all">Alŝuti ĉiujn</string>
     <string name="cloud_recent_changes">Ŝanĝoj</string>
+    <string name="import_export">Enporti/elporti</string>
+    <string name="cloud_all_changes_downloaded">Elŝutis ĉiujn ŝanĝojn</string>
+    <string name="cloud_all_changes_uploaded_descr">Ĉiuj ŝanĝoj faritaj en tiu ĉi aparato estas samtempigitaj kun OsmAnd-Nubo.</string>
+    <string name="cloud_no_conflicts">Neniu konflikto</string>
+    <string name="download_cloud_version">Elŝuti nuban version</string>
+    <string name="shared_string_do_not_exist">Ne ekzistas</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Fiaskis elŝuti dosierliston el la servilo.</string>
+    <string name="last_sync">Antaŭa samtempigo</string>
 </resources>
