@@ -146,8 +146,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 
 	private void showSwissGrid(double lat, double lon, boolean swissGridPlus){
 		LatLon latLon = new LatLon(lat, lon);
-		double[] swissGrid;
-		swissGrid = swissGridPlus
+		double[] swissGrid = swissGridPlus
 				? SwissGridApproximation.convertWGS84ToLV95(latLon)
 				: SwissGridApproximation.convertWGS84ToLV03(latLon);
 		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
