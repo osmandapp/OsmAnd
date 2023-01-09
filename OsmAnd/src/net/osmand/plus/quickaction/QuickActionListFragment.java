@@ -135,7 +135,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         fab = view.findViewById(R.id.fabButton);
         fab.setOnClickListener(v -> showAddQuickActionDialog());
 
-        AndroidUtils.addStatusBarPadding21v(requireContext(), view);
+        AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
         bottomPanel = view.findViewById(R.id.bottom_panel);
         View btnSelectAll = bottomPanel.findViewById(R.id.select_all);

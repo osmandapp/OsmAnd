@@ -104,7 +104,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.osmand_cloud, container, false);
-		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar(view);
 		setupSwipeRefresh(view);

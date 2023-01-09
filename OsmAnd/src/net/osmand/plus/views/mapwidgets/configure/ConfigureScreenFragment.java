@@ -109,7 +109,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
-			AndroidUtils.addStatusBarPadding21v(app, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 
 		appBar = view.findViewById(R.id.appbar);

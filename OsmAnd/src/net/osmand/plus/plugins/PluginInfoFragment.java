@@ -87,7 +87,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		mainView = themedInflater.inflate(R.layout.plugin, container, false);
-		AndroidUtils.addStatusBarPadding21v(context, mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(plugin.getName());

@@ -70,7 +70,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		PointEditor editor = getEditor();
 		if (editor == null) {
 			view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
-			AndroidUtils.addStatusBarPadding21v(context, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 			return view;
 		}
 
