@@ -18,9 +18,6 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
@@ -75,13 +72,11 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		void fileVisibilityChanged();
 	}
 
-	public TravelRendererHelper(OsmandApplication app) {
+	public TravelRendererHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		resourceManager = app.getResourceManager();
 		rendererRegistry = app.getRendererRegistry();
-		updateRouteArticleFilter();
-		updateRouteArticlePointsFilter();
 		addListeners();
 	}
 
@@ -94,7 +89,6 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	private void addListeners() {
-		addAppInitListener();
 		addShowTravelPrefListener();
 		rendererRegistry.addRendererLoadedEventListener(this);
 		fileVisibilityPropertiesListener = change -> {
@@ -107,22 +101,6 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private void addShowTravelPrefListener() {
 		listener = change -> updateTravelVisibility();
 		settings.SHOW_TRAVEL.addListener(listener);
-	}
-
-	private void addAppInitListener() {
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-
-				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-					if (event == InitEvents.MAPS_INITIALIZED) {
-						updateVisibilityPrefs();
-					}
-				}
-			});
-		} else {
-			updateVisibilityPrefs();
-		}
 	}
 
 	public void updateVisibilityPrefs() {
