@@ -44,6 +44,7 @@ import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.DisplayCutout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -625,6 +626,32 @@ public class AndroidUtils {
 		return result;
 	}
 
+	private static int getCutoutHeight(Context ctx, View view){
+		Activity activity = null;
+
+		if (ctx instanceof Activity) {
+			activity = (Activity) ctx;
+		} else if (view.getContext() instanceof Activity) {
+			activity = ((Activity) view.getContext());
+		}
+
+		return getCutoutHeight(activity);
+	}
+
+	public static int getCutoutHeight(Activity activity){
+		int cutoutHeight = 0;
+
+		if (activity != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+			DisplayCutout displayCutout = activity.getWindowManager().getDefaultDisplay().getCutout();
+			if (displayCutout != null) {
+				Rect rect = displayCutout.getBoundingRectTop();
+				cutoutHeight = rect.height();
+			}
+		}
+
+		return cutoutHeight;
+	}
+
 	public static void addStatusBarPadding21v(Context ctx, View view) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		if (!PluginsHelper.isDevelopment() || app.getSettings().TRANSPARENT_STATUS_BAR.get()) {
@@ -632,7 +659,14 @@ public class AndroidUtils {
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();
 			int paddingBottom = view.getPaddingBottom();
-			view.setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom);
+
+			int statusBarHeight = getStatusBarHeight(ctx);
+			int cutoutHeight = getCutoutHeight(ctx, view);
+
+			view.setPadding(paddingLeft,
+					paddingTop + statusBarHeight > cutoutHeight ? statusBarHeight : cutoutHeight,
+					paddingRight,
+					paddingBottom);
 		}
 	}
 
