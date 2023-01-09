@@ -143,7 +143,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
 		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 		}
 		return root;
 	}

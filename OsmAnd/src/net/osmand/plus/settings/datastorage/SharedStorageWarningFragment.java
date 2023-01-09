@@ -112,7 +112,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		setupToolbar();
 		updateContent();
-		AndroidUtils.addStatusBarPadding21v(mainView.getContext(), mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
 
 		return mainView;

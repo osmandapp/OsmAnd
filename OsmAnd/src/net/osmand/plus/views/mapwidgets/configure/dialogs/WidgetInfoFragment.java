@@ -91,7 +91,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		Context context = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater themedInflater = LayoutInflater.from(context);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(context, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		ViewGroup mainContent = view.findViewById(R.id.main_content);
 		themedInflater.inflate(R.layout.widget_info_fragment_content, mainContent);

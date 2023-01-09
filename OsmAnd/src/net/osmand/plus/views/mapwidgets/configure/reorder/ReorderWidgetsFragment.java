@@ -119,7 +119,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_reorder_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
-			AndroidUtils.addStatusBarPadding21v(app, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 
 		toolbar = view.findViewById(R.id.toolbar);
