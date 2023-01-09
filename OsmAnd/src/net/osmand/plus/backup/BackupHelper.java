@@ -199,16 +199,14 @@ public class BackupHelper {
 	public static List<SettingsItem> getItemsForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
 		List<SettingsItem> itemsForRestore = new ArrayList<>();
 		if (info != null) {
-			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
-				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
+			Map<RemoteFile, SettingsItem> restoreItems = getRemoteFilesSettingsItems(settingsItems, info.filteredFilesToDownload, false);
+			for (SettingsItem restoreItem : restoreItems.values()) {
 				if (restoreItem instanceof CollectionSettingsItem) {
-					CollectionSettingsItem settingsItem = (CollectionSettingsItem) restoreItem;
+					CollectionSettingsItem<?> settingsItem = (CollectionSettingsItem<?>) restoreItem;
 					settingsItem.processDuplicateItems();
 					settingsItem.setShouldReplace(true);
 				}
-				if (restoreItem != null && !restoreItem.exists()) {
-					itemsForRestore.add(restoreItem);
-				}
+				itemsForRestore.add(restoreItem);
 			}
 		}
 		return itemsForRestore;
@@ -218,25 +216,33 @@ public class BackupHelper {
 	public static Map<RemoteFile, SettingsItem> getItemsMapForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
 		Map<RemoteFile, SettingsItem> itemsForRestore = new HashMap<>();
 		if (info != null) {
-			for (RemoteFile remoteFile : info.filteredFilesToDownload) {
-				// FIXME: 1) restoreItem could be null 2) double loop to check names 1000 x 1000 cycles
-				SettingsItem restoreItem = getRestoreItem(settingsItems, remoteFile);
-				if (restoreItem != null && !restoreItem.exists()) {
-					itemsForRestore.put(remoteFile, restoreItem);
-				}
-			}
+			itemsForRestore.putAll(getRemoteFilesSettingsItems(settingsItems, info.filteredFilesToDownload, false));
 		}
 		return itemsForRestore;
 	}
 
-	@Nullable
-	public static SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
+	@NonNull
+	public static Map<RemoteFile, SettingsItem> getRemoteFilesSettingsItems(@NonNull List<SettingsItem> items,
+	                                                                        @NonNull List<RemoteFile> remoteFiles,
+	                                                                        boolean infoFiles) {
+		Map<RemoteFile, SettingsItem> res = new HashMap<>();
+		List<RemoteFile> files = new ArrayList<>(remoteFiles);
 		for (SettingsItem item : items) {
-			if (applyItem(item, remoteFile.getType(), remoteFile.getName())) {
-				return item;
+			List<RemoteFile> processedFiles = new ArrayList<>();
+			for (RemoteFile file : files) {
+				String type = file.getType();
+				String name = file.getName();
+				if (infoFiles && name.endsWith(INFO_EXT)) {
+					name = name.substring(0, name.length() - INFO_EXT.length());
+				}
+				if (applyItem(item, type, name)) {
+					res.put(file, item);
+					processedFiles.add(file);
+				}
 			}
+			files.removeAll(processedFiles);
 		}
-		return null;
+		return res;
 	}
 
 	@Nullable

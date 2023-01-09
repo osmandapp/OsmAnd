@@ -62,7 +62,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		super(app);
 	}
 
-	@Nullable
 	private BackupHelper getBackupHelper() {
 		return getApp().getBackupHelper();
 	}

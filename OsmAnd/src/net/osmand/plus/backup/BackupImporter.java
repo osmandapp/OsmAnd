@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
+import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,7 +78,7 @@ class BackupImporter {
 	}
 
 	@NonNull
-	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
+	CollectItemsResult collectItems(@Nullable List<SettingsItem> settingsItems, boolean readItems) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		OperationLog operationLog = new OperationLog("collectRemoteItems", BackupHelper.DEBUG);
@@ -85,6 +86,10 @@ class BackupImporter {
 		try {
 			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
+					if (settingsItems != null) {
+						Map<RemoteFile, SettingsItem> items = getRemoteFilesSettingsItems(settingsItems, remoteFiles, true);
+						remoteFiles = new ArrayList<>(items.keySet());
+					}
 					result.remoteFiles = remoteFiles;
 					try {
 						result.items = getRemoteItems(remoteFiles, readItems);
@@ -129,8 +134,12 @@ class BackupImporter {
 					break;
 				}
 			}
-			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
-				tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+			if (item != null) {
+				if (!item.shouldReadOnCollecting() || forceReadData) {
+					tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+				} else {
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+				}
 			}
 		}
 		ThreadPoolTaskExecutor<ItemFileImportTask> executor = createExecutor();
@@ -162,12 +171,12 @@ class BackupImporter {
 						}
 						item.apply();
 					}
-					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getUpdatetimems());
 					if (item instanceof FileSettingsItem) {
 						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 						if (app.getAppPath(itemFileName).isDirectory()) {
 							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-									remoteFile.getClienttimems());
+									remoteFile.getUpdatetimems());
 						}
 					}
 				}
@@ -233,7 +242,7 @@ class BackupImporter {
 					}
 					UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
 					long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
-					if (readItems && (uploadTime != remoteFile.getClienttimems() || delete)) {
+					if (readItems && (uploadTime != remoteFile.getUpdatetimems() || delete)) {
 						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 					}
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
