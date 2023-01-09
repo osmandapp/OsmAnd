@@ -276,9 +276,7 @@ public class ConfigureMapMenu {
 					}
 					return false;
 				});
-				if (item != null) {
-					adapter.addItem(item);
-				}
+				adapter.addItem(item);
 			}
 			customRules.remove(property);
 		}
@@ -773,6 +771,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
+	@NonNull
 	public static ContextMenuItem createBooleanRenderingProperty(@NonNull MapActivity activity,
 	                                                             @NonNull String attrName,
 	                                                             @NonNull String name,

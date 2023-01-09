@@ -87,7 +87,6 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
@@ -529,6 +528,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			app.travelHelper.initializeDataOnAppStartup();
+			app.travelRendererHelper.updateVisibilityPrefs();
 			// native depends on renderers
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
