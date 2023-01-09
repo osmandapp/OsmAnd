@@ -96,7 +96,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			syncListener.onBackupSyncStarted();
 		}
 		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, this);
+			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, true, this);
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
@@ -123,9 +123,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 		try {
 			BackupInfo info = backupHelper.getBackup().getBackupInfo();
-			List<SettingsItem> items = info.itemsToUpload;
-			if (items.size() > 0 || info.filteredFilesToUpload.size() > 0) {
-				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, this);
+			List<SettingsItem> itemsToUpload = info.itemsToUpload;
+			List<SettingsItem> itemsToDelete = info.itemsToDelete;
+			if (itemsToUpload.size() > 0 || itemsToDelete.size() > 0) {
+				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, itemsToUpload, itemsToDelete, this);
 			} else {
 				onSyncFinished(null);
 			}

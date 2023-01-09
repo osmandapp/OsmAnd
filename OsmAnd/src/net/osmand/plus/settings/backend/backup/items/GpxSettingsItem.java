@@ -75,17 +75,26 @@ public class GpxSettingsItem extends FileSettingsItem {
 				savedFile = ((FileSettingsItemReader) reader).getSavedFile();
 			}
 			if (savedFile != null) {
-				GpxDataItem dataItem = app.getGpxDbHelper().getItem(savedFile, new GpxDataItemCallback() {
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
+				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+				boolean readItem = gpxDbHelper.hasItem(savedFile);
+				GpxDataItem dataItem = null;
+				if (!readItem) {
+					dataItem = new GpxDataItem(savedFile);
+					readItem = !gpxDbHelper.add(dataItem);
+				}
+				if (readItem) {
+					dataItem = gpxDbHelper.getItem(savedFile, new GpxDataItemCallback() {
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
 
-					@Override
-					public void onGpxDataItemReady(GpxDataItem item) {
-						updateGpxParams(item);
-					}
-				});
+						@Override
+						public void onGpxDataItemReady(GpxDataItem item) {
+							updateGpxParams(item);
+						}
+					});
+				}
 				if (dataItem != null) {
 					updateGpxParams(dataItem);
 				}

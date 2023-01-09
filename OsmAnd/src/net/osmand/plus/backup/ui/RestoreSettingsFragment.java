@@ -36,6 +36,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class RestoreSettingsFragment extends ImportSettingsFragment implements OnPrepareBackupListener {
@@ -171,16 +172,6 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	private void collectAndReadSettings() {
 		BackupCollectListener collectListener = new BackupCollectListener() {
 
-			@Nullable
-			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
-				for (SettingsItem item : items) {
-					if (BackupHelper.applyItem(item, remoteFile.getType(), remoteFile.getName())) {
-						return item;
-					}
-				}
-				return null;
-			}
-
 			@Override
 			public void onBackupCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items, @NonNull List<RemoteFile> remoteFiles) {
 				FragmentActivity activity = getActivity();
@@ -194,12 +185,8 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 						BackupInfo info = backup.getBackupInfo();
 						Set<SettingsItem> itemsForRestore = new HashSet<>();
 						if (info != null) {
-							for (RemoteFile remoteFile : info.filesToDownload) {
-								SettingsItem restoreItem = getRestoreItem(items, remoteFile);
-								if (restoreItem != null) {
-									itemsForRestore.add(restoreItem);
-								}
-							}
+							Map<RemoteFile, SettingsItem> restoreItems = BackupHelper.getRemoteFilesSettingsItems(items, info.filesToDownload, false);
+							itemsForRestore.addAll(restoreItems.values());
 						}
 						setSettingsItems(new ArrayList<>(itemsForRestore));
 						dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);

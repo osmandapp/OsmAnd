@@ -169,16 +169,20 @@ public class GpxDbHelper {
 		return db.getItems();
 	}
 
-	public GpxDataItem getItem(File file) {
+	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
 	}
 
-	public GpxDataItem getItem(File file, @Nullable GpxDataItemCallback callback) {
+	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
 		if (isAnalyseNeeded(file, item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
+	}
+
+	public boolean hasItem(@NonNull File file) {
+		return itemsCache.containsKey(file);
 	}
 
 	public List<GpxDataItem> getSplitItems() {

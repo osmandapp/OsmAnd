@@ -242,17 +242,21 @@ public class GPXDatabase {
 			this.analysis = analysis;
 		}
 
-		public GpxDataItem(File file, int color) {
+		public GpxDataItem(@NonNull File file) {
+			this.file = file;
+		}
+
+		public GpxDataItem(@NonNull File file, int color) {
 			this.file = file;
 			this.color = color;
 		}
 
-		public GpxDataItem(File file, long fileLastUploadedTime) {
+		public GpxDataItem(@NonNull File file, long fileLastUploadedTime) {
 			this.file = file;
 			this.fileLastUploadedTime = fileLastUploadedTime;
 		}
 
-		public GpxDataItem(File file, @NonNull GPXFile gpxFile) {
+		public GpxDataItem(@NonNull File file, @NonNull GPXFile gpxFile) {
 			this.file = file;
 			readGpxParams(gpxFile);
 		}
