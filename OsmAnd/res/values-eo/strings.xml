@@ -2911,7 +2911,7 @@
     <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
     <string name="press_again_to_change_the_map_orientation">Frapetu ree por ŝanĝi map‑orientiĝon</string>
     <string name="rate_dialog_descr">Bonvolu kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
-    <string name="shared_string_privacy_policy">privatecan politikon</string>
+    <string name="shared_string_privacy_policy">Privateca politiko</string>
     <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona</string>
     <string name="make_osmand_better_descr">Permesu al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado. Neniuj datumoj pri via pozicio kaj pri foliumataj lokoj estos kolektataj.
 \n
@@ -2922,7 +2922,7 @@
     <string name="collected_data_descr">Elekti datumojn por kunhavigi al programistoj de OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Helpu al ni scii pri populareco de mapoj de landoj kaj regionoj.</string>
     <string name="visited_screens_collect_descr">Helpu al ni scii pri populareco de eblaĵoj de OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Frapetu “Permesi”, se vi akceptas nian %1$s</string>
+    <string name="privacy_and_security_change_descr">Frapetu “Permesi”, se vi akceptas la dokumenton %1$s</string>
     <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
     <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
     <string name="shared_string_no_thank_you">Ne, mi ne volas</string>
@@ -4169,7 +4169,7 @@
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
     <string name="purchases_feature_desc_terrain">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
     <string name="purchases_feature_desc_wikivoyage">Esploru Vikivojaĝon malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
-    <string name="purchases_feature_desc_wikipedia">Malkonekta Vikipedio ebligos al vi sciiĝi pli pri lokoj vizitataj dum vojaĝo. Ĝi funkcias sen interreta konekto kaj vidigas artikolojn de Vikipedio pri lokoj sur la mapo. Post instali ne forgesu elŝuti Vikimediajn mapojn por la elektita regiono.</string>
+    <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ komenci vojaĝon.</string>
     <string name="purchases_feature_desc_combined_wiki">Esploru artikolojn de Vikipedio dum vojaĝi sen interreta konekto. Datumoj estas dividitaj laŭ landoj kaj liveras artikolojn en ĉiuj lingvoj.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Akiru aliron al senlimaj elŝutoj de malkonektaj mapoj de ĉiuj kontinentoj kaj regionoj.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
@@ -4615,10 +4615,10 @@
     <string name="current_time_widget_desc">Fenestraĵo montranta la nunan horon (de la operaciumo).</string>
     <string name="altitude_widget_desc">Fenestraĵo montranta altecon super la marnivelo por la nuna pozicio.</string>
     <string name="max_speed_widget_desc">Fenestraĵo montranta rapidlimon por la nune veturigata ŝoseo.</string>
-    <string name="current_speed_widget_desc">Fenestraĵo montranta vian nunan rapidon determinitan surbaze de GPS-legoj.</string>
+    <string name="current_speed_widget_desc">Fenestraĵo montranta vian nunan rapidon determinitan per GPS.</string>
     <string name="shared_string_widget">Fenestraĵo</string>
     <string name="av_def_action_choose">Demandi</string>
-    <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton al la mapo.</string>
+    <string name="audio_video_notes_desc">Fenestraĵoj ebligantaj rapide ekigi/fini videan/sonan noton aŭ fari fotan noton.</string>
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
     <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
@@ -4627,21 +4627,21 @@
     <string name="routing_attr_avoid_4wd_only_name">Eviti vojojn por terenaj aŭtomobiloj</string>
     <string name="routing_attr_avoid_4wd_only_description">Eviti vojojn travetureblajn nur per ajnagrundaj aŭtomobiloj</string>
     <string name="elevation_profile_widget_desc">Fenestraĵo montranta profilon de altitudo kaj dekliveco por la nuna kurso.</string>
-    <string name="radius_rules_widget_desc">Cirkelo, kiu ebligas al vi determini distancojn ĉirkaŭ la elektita punkto sur la mapo per vidigi cirklojn kun distancoj sur la mapo.</string>
+    <string name="radius_rules_widget_desc">Cirkelo, kiu ebligas al vi determini distancojn ĉirkaŭ la elektita punkto sur la mapo.</string>
     <string name="battery_widget_desc">Fenestraĵo montranta nivelon de baterio de via aparato.</string>
     <string name="magnetic_bearing_widget_desc">Angulo inter la magneta nordo, via nuna pozicio kaj la alcela loko.</string>
     <string name="time_to_go_desc">Tempo en minutoj aŭ horoj necesa por akiri vian alcelan lokon.</string>
-    <string name="lanes_widgets_desc">Fenestraĵo montranta la nunajn vetur-koridorojn (lenojn) kaj emfazas koridorojn por sekvi dum aktiva navigado.</string>
+    <string name="lanes_widgets_desc">Fenestraĵo montranta aranĝon de nunaj vetur-koridoroj (lenoj) kaj emfazas koridorojn por sekvi dum aktiva navigado.</string>
     <string name="bearing_desc">Fenestraĵo montranta absolutan (magnetan) aŭ relativan direkton al la celo en angulaj mezurunuoj (gradoj 180°, gradoj 360° aŭ miliradianoj).</string>
     <string name="widget_secondary_desc_part_of">Parto de la kromprogramo %1$s.</string>
-    <string name="gps_info_widget_desc">Fenestraĵo montranta nombron de satelitoj, kiuj estas konataj kaj uzataj de via aparato por trovi pozicion.</string>
-    <string name="map_markers_bar_widget_desc">Fenestraĵo montranta distancon kaj direkton al la aktiva map-marko el via nuna pozicio. Eblas alĝustigi la fenestraĵon por vidigi 1 aŭ 2 map-markojn.</string>
+    <string name="gps_info_widget_desc">Fenestraĵo montranta nombron da nune videblaj kaj uzataj satelitoj.</string>
+    <string name="map_markers_bar_widget_desc">Fenestraĵo montranta distancon kaj direkton al la sekva map-marko el via nuna pozicio. Eblas alĝustigi la fenestraĵon por vidigi 1 aŭ 2 map-markojn.</string>
     <string name="coordinates_widget_desc">Fenestraĵo montranta geografiajn koordinatojn de la nuna pozicio.</string>
     <string name="street_name_widget_desc">Fenestraĵo montranta nomon de la nuna strato kun sageto “rekten” aŭ nomon de la sekva strato kun farenda manovro.</string>
     <string name="compass_on_circles">Kompaso sur cirkloj</string>
     <string name="distance_circles">Distanco sur cirkloj</string>
     <string name="circle_settings">Alĝustigi cirklojn</string>
-    <string name="navigation_points_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
+    <string name="navigation_points_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distancon, tempon de alveno aŭ restan tempon, sekvan turniĝon, direkton, nomon de nuna/sekva strato, vetur-koridorojn, maksimuman rapidon, avertojn, interesejojn, navigadpunktojn.</string>
     <string name="navigation_points">Navigadpunktoj</string>
     <string name="route_maneuvers_desc">Fenestraĵoj aktiviĝantaj dum navigado, kiuj vidigas la jenajn informojn: distanco, tempo de alveno, restanta tempo, sekva turniĝo, direkto, nomo de strato, vetur-koridoroj, maksimuma rapido, avertoj, interesejoj, navigadpunktoj.</string>
     <string name="map_widget_true_bearing">Vera direkto</string>
@@ -4724,7 +4724,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Elektu la %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
     <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
     <string name="connect_with_straight_line">Konekti per rekta linio</string>
-    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj uzante malkonektan mapon. Tiel altitudo estos korektita kaj informoj pri ŝoseoj kaj turniĝoj povos esti uzataj poste por navigi.</string>
+    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por difini kurson inter punktoj kaj por akiri precizajn informojn pri turniĝoj kaj ŝoseoj.</string>
     <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
@@ -4764,10 +4764,10 @@
     <string name="download_heightmap_maps">Altmapo</string>
     <string name="display_position">Montri pozicion</string>
     <string name="favorite_delete_group">Forigi grupon</string>
-    <string name="quick_action_current_location_widget_descr">Butono por montri/kaŝi koordinatojn de via nuna pozicio.</string>
+    <string name="quick_action_current_location_widget_descr">Butono por montri/kaŝi fenestraĵon de koordinatoj de via nuna pozicio.</string>
     <string name="coordinates_widget_map_center">Koordinatoj: map-centro</string>
     <string name="coordinates_widget_current_location">Koordinatoj: nuna pozicio</string>
-    <string name="quick_action_map_center_widget_descr">Butono por montri/kaŝi koordinatojn de la map-centro.</string>
+    <string name="quick_action_map_center_widget_descr">Butono por montri/kaŝi fenestraĵon de koordinatoj de la map-centro.</string>
     <string name="coordinates_widget_map_center_desc">Fenestraĵo montranta geografiajn koordinatojn de la montrata centro de la mapo.</string>
     <string name="coordinates_widget_current_location_desc">Fenestraĵo montranta geografiajn koordinatojn de via nuna pozicio.</string>
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
@@ -5007,4 +5007,9 @@
     <string name="shared_string_do_not_exist">Ne ekzistas</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fiaskis elŝuti dosierliston el la servilo.</string>
     <string name="last_sync">Antaŭa samtempigo</string>
+    <string name="export_to_file">Elporti al dosiero</string>
+    <string name="shared_string_expires">Malvalidiĝas je</string>
+    <string name="shared_string_purchased_on">Aĉetita je</string>
+    <string name="set_up_backup">Agordi sekurkopion</string>
+    <string name="cloud_all_changes_uploaded">Alŝutis ĉiujn ŝanĝojn</string>
 </resources>
