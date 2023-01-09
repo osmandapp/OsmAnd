@@ -4217,7 +4217,7 @@
     <string name="backup_data_removed">Toutes les données ont été supprimées.</string>
     <string name="shared_string_progress">Avancement</string>
     <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne</string>
-    <string name="backup_dont_have_any_descr">Paramétrer une sauvegarde automatique pour ne plus vous soucier de la perte de vos données.</string>
+    <string name="backup_dont_have_any_descr">Paramétrer une sauvegarde automatique pour ne plus vous inquiéter de perde vos données.</string>
     <string name="backup_welcome_back">Content de vous revoir !</string>
     <string name="backup_setup">Paramétrer la sauvegarde</string>
     <string name="backup_restore_now">Restaurer maintenant</string>

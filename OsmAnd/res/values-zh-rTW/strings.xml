@@ -4228,10 +4228,10 @@
     <string name="backup_version_history_removed">已移除所有版本歷史紀錄。</string>
     <string name="backup_data_removed">已移除所有資料。</string>
     <string name="shared_string_progress">進度</string>
-    <string name="backup_do_not_have_any">您還沒有線上備份。</string>
-    <string name="backup_dont_have_any_descr">安排自動備份，永不遺失資料。</string>
+    <string name="backup_do_not_have_any">您還沒有任何線上備份</string>
+    <string name="backup_dont_have_any_descr">安排自動備份，如此一來您就不必擔心資料遺失。</string>
     <string name="backup_welcome_back">歡迎回來！</string>
-    <string name="backup_welcome_back_descr">使用現有備份來還原此裝置上的資料，或是備份資料至 OsmAnd Cloud。</string>
+    <string name="backup_welcome_back_descr">使用 OsmAnd Cloud 來在此裝置上還原資料。</string>
     <string name="backup_setup">設定備份</string>
     <string name="backup_restore_now">立刻還原</string>
     <string name="attribute">屬性</string>
@@ -5016,4 +5016,5 @@
     <string name="av_audio_format_bottom_sheet_descr">選取音訊輸出格式。音訊的檔案類型格式為 3GPP (.3gp)。</string>
     <string name="si_nm_mt">海浬/公尺</string>
     <string name="si_nm_ft">海浬/英呎</string>
+    <string name="set_up_backup">設定備份</string>
 </resources>

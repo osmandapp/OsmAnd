@@ -4222,10 +4222,10 @@
     <string name="logout_from_osmand_cloud_decsr">Kijelentkezik\?
 \nAz adatok biztonsági mentéséhez vagy visszaállításához újra be kell jelentkeznie.</string>
     <string name="shared_string_progress">Haladás</string>
-    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése.</string>
-    <string name="backup_dont_have_any_descr">Ütemezzen be automatikus biztonsági mentéseket, hogy soha ne veszítsen adatokat.</string>
+    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése</string>
+    <string name="backup_dont_have_any_descr">Állítson be automatikus biztonsági mentést, hogy ne kelljen aggódnia adatvesztés miatt.</string>
     <string name="backup_welcome_back">Isten hozta újra!</string>
-    <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása meglévő biztonsági másolatok használatával, vagy biztonsági másolat készítése az OsmAnd Cloud-ra.</string>
+    <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása az OsmAnd Cloud használatával.</string>
     <string name="backup_setup">Biztonsági mentés beállítása</string>
     <string name="backup_restore_now">Visszaállítás most</string>
     <string name="attribute">Tulajdonság</string>
@@ -5016,4 +5016,5 @@
     <string name="si_nm_ft">Tengeri mérföld/láb</string>
     <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
+    <string name="set_up_backup">Biztonsági mentés beállítása</string>
 </resources>
