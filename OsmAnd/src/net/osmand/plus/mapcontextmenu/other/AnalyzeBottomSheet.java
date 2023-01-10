@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -45,9 +46,6 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 	private final ArrayList<View> xAxisViews = new ArrayList<>();
 	private final ArrayList<View> yAxisViews = new ArrayList<>();
 
-	public AnalyzeBottomSheet() {
-	}
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +70,10 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		View dialogView = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.analyze_charts_bottom_sheet, null);
 		setupDialogView(dialogView);
 		return dialogView;
+	}
+
+	public static void showInstance(FragmentManager fragmentManager) {
+		new AnalyzeBottomSheet().show(fragmentManager, TAG);
 	}
 
 	private void setupDialogView(View dialogView) {
@@ -100,20 +102,9 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private View createAxisType(GPXDataSetAxisType type) {
-		String title;
-		int iconId;
 		boolean selected = type == gpxDisplayItem.chartAxisType;
-
-		if (type == GPXDataSetAxisType.TIME) {
-			iconId = GPXDataSetAxisType.TIME.getImageId();
-			title = app.getString(GPXDataSetAxisType.TIME.getStringId());
-		} else if (type == GPXDataSetAxisType.TIMEOFDAY) {
-			iconId = GPXDataSetAxisType.TIMEOFDAY.getImageId();
-			title = app.getString(GPXDataSetAxisType.TIMEOFDAY.getStringId());
-		} else {
-			iconId = GPXDataSetAxisType.DISTANCE.getImageId();
-			title = app.getString(GPXDataSetAxisType.DISTANCE.getStringId());
-		}
+		int iconId = type.getImageId();
+		String title = getString(type.getStringId());
 
 		return createAxisTypeItem(title, iconId, selected, type);
 	}
@@ -123,13 +114,7 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		View itemView = inflater.inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		TextView tvTitle = itemView.findViewById(R.id.title);
 		tvTitle.setText(title);
-
-		ImageView ivIcon = itemView.findViewById(R.id.icon);
-		Drawable drawableIcon = app.getUIUtilities().getIcon(iconId, selected ?
-				ColorUtilities.getActiveColorId(nightMode) :
-				ColorUtilities.getDefaultIconColorId(nightMode));
-
-		ivIcon.setImageDrawable(drawableIcon);
+		updateItemView(itemView, selected, iconId);
 
 		TextView tvDescription = itemView.findViewById(R.id.description);
 		AndroidUiHelper.updateVisibility(tvDescription, false);
@@ -160,27 +145,34 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		updateViews(xAxisViews);
 	}
 
-	private void updateViews(ArrayList<View> views){
+	private void updateViews(ArrayList<View> views) {
 		for (View view : views) {
 			Object obj = view.getTag();
 			boolean selected = false;
-
+			int iconId = 0;
 			if (obj instanceof GPXDataSetType[]) {
 				GPXDataSetType[] types = (GPXDataSetType[]) obj;
 				selected = Arrays.equals(types, gpxDisplayItem.chartTypes);
+				iconId = types[0].getImageId();
 			} else if (obj instanceof GPXDataSetAxisType) {
 				GPXDataSetAxisType types = (GPXDataSetAxisType) obj;
 				selected = types.equals(gpxDisplayItem.chartAxisType);
+				iconId = types.getImageId();
 			}
 
-			ImageView ivIcon = view.findViewById(R.id.icon);
-			ivIcon.setColorFilter(selected ?
-					ColorUtilities.getActiveColor(app, nightMode) :
-					ColorUtilities.getDefaultIconColor(app, nightMode));;
-
-			CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-			compoundButton.setChecked(selected);
+			updateItemView(view, selected, iconId);
 		}
+	}
+
+	private void updateItemView(View view, boolean selected, @DrawableRes int iconId){
+		ImageView ivIcon = view.findViewById(R.id.icon);
+		Drawable drawableIcon = app.getUIUtilities().getIcon(iconId, selected ?
+				ColorUtilities.getActiveColorId(nightMode) :
+				ColorUtilities.getDefaultIconColorId(nightMode));
+		ivIcon.setImageDrawable(drawableIcon);
+
+		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
+		compoundButton.setChecked(selected);
 	}
 }
 

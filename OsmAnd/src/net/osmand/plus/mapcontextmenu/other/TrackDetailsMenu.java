@@ -674,7 +674,7 @@ public class TrackDetailsMenu {
 								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 					case SLOPE:
-						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE && gpxItem.chartTypes.length > 1;
+						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
 						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
 								gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
@@ -703,8 +703,7 @@ public class TrackDetailsMenu {
 		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
 			yAxis.setOnClickListener(v -> {
-				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet();
-				bottomSheet.show(mapActivity.getSupportFragmentManager(), AnalyzeBottomSheet.TAG);
+				AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 			});
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -741,12 +740,13 @@ public class TrackDetailsMenu {
 
 		refreshChart(chart, forceFitTrackOnMap, true);
 	}
-	public ArrayList<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis){
-		ArrayList<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 
-		for(GPXDataSetAxisType type : GPXDataSetAxisType.values()){
-			if(type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIMEOFDAY){
-				if(analysis.isTimeSpecified()){
+	public List<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis) {
+		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
+
+		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
+			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIMEOFDAY) {
+				if (analysis.isTimeSpecified()) {
 					availableTypes.add(type);
 				}
 			} else {
@@ -757,7 +757,7 @@ public class TrackDetailsMenu {
 		return availableTypes;
 	}
 
-	public List<GPXDataSetType[]> getAvailableYTypes(GPXTrackAnalysis analysis){
+	public List<GPXDataSetType[]> getAvailableYTypes(GPXTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 
 		if (analysis.hasElevationData) {
@@ -779,7 +779,7 @@ public class TrackDetailsMenu {
 		return availableTypes;
 	}
 
-	public AxisSelectedListener getAxisSelectedListener(){
+	public AxisSelectedListener getAxisSelectedListener() {
 		return new AxisSelectedListener() {
 			@Override
 			public void onXAxisSelected(GPXDataSetAxisType type) {
@@ -800,8 +800,8 @@ public class TrackDetailsMenu {
 				GpxDisplayItem item = getGpxItem();
 				if (item != null) {
 					item.chartTypes = type;
+					update();
 				}
-				update();
 				fitTrackOnMapForbidden = false;
 			}
 		};
