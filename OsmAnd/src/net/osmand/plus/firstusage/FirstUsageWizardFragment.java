@@ -95,13 +95,13 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
 
-	private WizardType wizardType = null;
+	public WizardType wizardType = null;
 	private final WizardType DEFAULT_WIZARD_TYPE = WizardType.SEARCH_LOCATION;
 	private boolean searchLocationByIp;
 
 	private Timer locationSearchTimer;
 	private boolean waitForIndexes;
-	private boolean deviceNightMode;
+	public boolean deviceNightMode;
 
 	private Location location;
 	private WorldRegion mapDownloadRegion;
@@ -311,55 +311,18 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	private void setupActionButton() {
 		ImageButton otherButton = view.findViewById(R.id.actions_button);
-		Fragment fragment = this;
-
-		FirstUsageActionsBottomSheet bottomSheetDialogFragment = new FirstUsageActionsBottomSheet(app, deviceNightMode, wizardType, new OtherClickListener() {
-			@Override
-			public void onRestoreFromCloud() {
-				if (app.getBackupHelper().isRegistered()) {
-					BackupAndRestoreFragment.showInstance(getFragmentManager());
-				} else {
-					BackupAuthorizationFragment.showInstance(getFragmentManager());
-				}
-			}
-
-			@Override
-			public void onSelectStorageFolder() {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					Bundle args = new Bundle();
-					args.putBoolean(FIRST_USAGE, true);
-					BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, fragment);
-				}
-			}
-		});
-		otherButton.setOnClickListener(view1 -> bottomSheetDialogFragment.show(getFragmentManager(), null));
+		FirstUsageActionsBottomSheet bottomSheetDialogFragment = new FirstUsageActionsBottomSheet();
+		bottomSheetDialogFragment.setTargetFragment(this, 0);
+		otherButton.setOnClickListener(view -> bottomSheetDialogFragment.show(activity.getSupportFragmentManager(), null));
 	}
 
 	private void setupLocationButton() {
 		ImageButton locationButton = view.findViewById(R.id.location_button);
-
-		FirstUsageActionsBottomSheet bottomSheetDialogFragment = new FirstUsageActionsBottomSheet(app, deviceNightMode, new LocationClickListener() {
-			@Override
-			public void onSelectCountry() {
-				searchCountryMap();
-			}
-
-			@Override
-			public void onDetermineLocation() {
-				if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
-					location = null;
-					ActivityCompat.requestPermissions(activity,
-							new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
-									Manifest.permission.ACCESS_COARSE_LOCATION},
-							FIRST_USAGE_LOCATION_PERMISSION);
-				} else {
-					findLocation(activity, false, true);
-				}
-			}
+		FirstUsageLocationBottomSheet bottomSheetDialogFragment = new FirstUsageLocationBottomSheet();
+		bottomSheetDialogFragment.setTargetFragment(this, 0);
+		locationButton.setOnClickListener(view -> {
+			bottomSheetDialogFragment.show(activity.getSupportFragmentManager(), null);
 		});
-
-		locationButton.setOnClickListener(view1 -> bottomSheetDialogFragment.show(getFragmentManager(), null));
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -779,6 +742,47 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		setWizardType(WizardType.MAP_DOWNLOADED, updateWizardView);
 	}
 
+	public FirstUsageBottomSheetListener getFirstUsageBSListener() {
+		return new FirstUsageBottomSheetListener() {
+			@Override
+			public void onSelectCountry() {
+				searchCountryMap();
+			}
+
+			@Override
+			public void onDetermineLocation() {
+				if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+					location = null;
+					ActivityCompat.requestPermissions(activity,
+							new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
+									Manifest.permission.ACCESS_COARSE_LOCATION},
+							FIRST_USAGE_LOCATION_PERMISSION);
+				} else {
+					findLocation(activity, false, true);
+				}
+			}
+
+			@Override
+			public void onRestoreFromCloud() {
+				if (app.getBackupHelper().isRegistered()) {
+					BackupAndRestoreFragment.showInstance(activity.getSupportFragmentManager());
+				} else {
+					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
+				}
+			}
+
+			@Override
+			public void onSelectStorageFolder() {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					Bundle args = new Bundle();
+					args.putBoolean(FIRST_USAGE, true);
+					BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+				}
+			}
+		};
+	}
+
 	private static boolean showFragment(@Nullable FragmentActivity activity) {
 		if (!wizardClosed && activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -798,4 +802,14 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
 	}
+}
+
+interface FirstUsageBottomSheetListener {
+	void onSelectCountry();
+
+	void onDetermineLocation();
+
+	void onRestoreFromCloud();
+
+	void onSelectStorageFolder();
 }
