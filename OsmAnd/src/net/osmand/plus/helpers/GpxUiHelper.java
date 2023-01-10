@@ -1635,9 +1635,6 @@ public class GpxUiHelper {
 														   boolean useRightAxis,
 														   boolean drawFilled,
 														   boolean calcWithoutGaps) {
-		if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
-			return null;
-		}
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -1645,8 +1642,15 @@ public class GpxUiHelper {
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
+		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		float divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
+			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
+		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
+			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
+		} else {
+			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+		}
 
 		final String mainUnitY = "%";
 
@@ -1731,8 +1735,13 @@ public class GpxUiHelper {
 		boolean hasSameY = false;
 		Entry lastEntry = null;
 		lastIndex = calculatedSlopeDist.length - 1;
+		float timeSpanInSeconds = analysis.timeSpan / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
-			x = (float) calculatedSlopeDist[i] / divX;
+			if ((axisType == GPXDataSetAxisType.TIMEOFDAY || axisType == GPXDataSetAxisType.TIME) && analysis.isTimeSpecified()) {
+				x = (timeSpanInSeconds * i) / calculatedSlopeDist.length;
+			} else {
+				x = (float) calculatedSlopeDist[i] / divX;
+			}
 			slope = (float) calculatedSlope[i];
 			if (prevSlope != -80000) {
 				if (prevSlope == slope && i < lastIndex) {

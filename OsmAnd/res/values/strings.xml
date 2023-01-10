@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="y_axis">Y-Axis</string>
+    <string name="x_axis">X-Axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
     <string name="si_nm_ft">Nautical miles/feet</string>
     <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>

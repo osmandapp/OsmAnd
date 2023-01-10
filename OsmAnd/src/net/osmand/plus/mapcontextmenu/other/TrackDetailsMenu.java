@@ -5,11 +5,9 @@ import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,8 +52,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -678,8 +674,9 @@ public class TrackDetailsMenu {
 								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 					case SLOPE:
+						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
 						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true, withoutGaps);
+								gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
 				}
 				if (dataSet != null) {
@@ -700,55 +697,13 @@ public class TrackDetailsMenu {
 		ImageView yAxisIcon = parentView.findViewById(R.id.y_axis_icon);
 		TextView yAxisTitle = parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
-		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
-		boolean hasSlopeChart = false;
-		if (analysis.hasElevationData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
-			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME
-					&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
-				availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
-			}
-		}
-		if (analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
-		}
-		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME
-				&& gpxItem.chartAxisType != GPXDataSetAxisType.TIMEOFDAY) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
-		}
-		if (analysis.hasElevationData && analysis.hasSpeedData) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
-		}
+		List<GPXDataSetType[]> availableTypes = getAvailableYTypes(analysis);
 
-		for (GPXDataSetType t : gpxItem.chartTypes) {
-			if (t == GPXDataSetType.SLOPE) {
-				hasSlopeChart = true;
-				break;
-			}
-		}
 		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
 			yAxis.setOnClickListener(v -> {
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (GPXDataSetType[] types : availableTypes) {
-					String title = GPXDataSetType.getName(app, types);
-					Drawable icon = GPXDataSetType.getImageDrawable(app, types);
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitle(title)
-							.setIcon(icon)
-							.create());
-				}
-				AdapterView.OnItemClickListener listener = (parent, view, position, id) -> {
-					fitTrackOnMapForbidden = true;
-					GpxDisplayItem item = getGpxItem();
-					item.chartTypes = availableTypes.get(position);
-					update();
-					fitTrackOnMapForbidden = false;
-				};
-				new PopUpMenuHelper.Builder(v, items, nightMode)
-						.setListener(listener)
-						.show();
+				AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 			});
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -771,27 +726,10 @@ public class TrackDetailsMenu {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_marker_dark));
 			xAxisTitle.setText(app.getString(R.string.distance));
 		}
-		if (analysis.isTimeSpecified() && !hasSlopeChart) {
+		if (analysis.isTimeSpecified()) {
 			xAxis.setOnClickListener(v -> {
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(type.getStringId())
-							.setIcon(type.getImageDrawable(app))
-							.create());
-				}
-				new PopUpMenuHelper.Builder(v, items, nightMode)
-						.setListener((parent, view, position, id) -> {
-							fitTrackOnMapForbidden = true;
-							GpxDisplayItem item = getGpxItem();
-							if (item != null) {
-								item.chartAxisType = GPXDataSetAxisType.values()[position];
-								item.chartHighlightPos = -1;
-								item.chartMatrix = null;
-								update();
-							}
-							fitTrackOnMapForbidden = false;
-						}).show();
+				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet();
+				bottomSheet.show(mapActivity.getSupportFragmentManager(), AnalyzeBottomSheet.TAG);
 			});
 			xAxisArrow.setVisibility(View.VISIBLE);
 		} else {
@@ -801,6 +739,72 @@ public class TrackDetailsMenu {
 		}
 
 		refreshChart(chart, forceFitTrackOnMap, true);
+	}
+
+	public List<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis) {
+		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
+
+		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
+			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIMEOFDAY) {
+				if (analysis.isTimeSpecified()) {
+					availableTypes.add(type);
+				}
+			} else {
+				availableTypes.add(type);
+			}
+		}
+
+		return availableTypes;
+	}
+
+	public List<GPXDataSetType[]> getAvailableYTypes(GPXTrackAnalysis analysis) {
+		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+
+		if (analysis.hasElevationData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
+		}
+		if (analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
+		}
+		if (analysis.hasElevationData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
+		}
+		if (analysis.hasElevationData && analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
+		}
+		if (analysis.hasElevationData && analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
+		}
+		return availableTypes;
+	}
+
+	public AxisSelectedListener getAxisSelectedListener() {
+		return new AxisSelectedListener() {
+			@Override
+			public void onXAxisSelected(GPXDataSetAxisType type) {
+				fitTrackOnMapForbidden = true;
+				GpxDisplayItem item = getGpxItem();
+				if (item != null) {
+					item.chartAxisType = type;
+					item.chartHighlightPos = -1;
+					item.chartMatrix = null;
+					update();
+				}
+				fitTrackOnMapForbidden = false;
+			}
+
+			@Override
+			public void onYAxisSelected(GPXDataSetType[] type) {
+				fitTrackOnMapForbidden = true;
+				GpxDisplayItem item = getGpxItem();
+				if (item != null) {
+					item.chartTypes = type;
+					update();
+				}
+				fitTrackOnMapForbidden = false;
+			}
+		};
 	}
 
 	private void updateChart(LineChart chart) {
