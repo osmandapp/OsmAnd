@@ -558,6 +558,9 @@ public class AndroidNetworkUtils {
 			}
 			LOG.warn("Cannot download file: " + url, e);
 		}
+		if (progress != null) {
+			progress.finishTask();
+		}
 		return error;
 	}
 

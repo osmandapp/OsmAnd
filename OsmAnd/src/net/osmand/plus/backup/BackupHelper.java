@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -672,18 +674,18 @@ public class BackupHelper {
 	}
 
 	public long calculateFileSize(@NonNull RemoteFile remoteFile) {
-		long size = remoteFile.getFilesize() / 1024;
+		long size = remoteFile.getFilesize();
 		if (remoteFile.item != null && remoteFile.item.getType() == SettingsItemType.FILE) {
 			FileSettingsItem fileItem = (FileSettingsItem) remoteFile.item;
 			String fileName = fileItem.getFileName();
 			if (fileItem.getSubtype() == FileSubtype.OBF_MAP && fileName != null) {
 				File file = app.getResourceManager().getIndexFiles().get(fileName.toLowerCase());
 				if (file != null) {
-					size = file.length() / 1024;
+					size = file.length();
 				}
 			}
 		}
-		return size;
+		return size + APPROXIMATE_FILE_SIZE_BYTES;
 	}
 
 	@NonNull
@@ -739,6 +741,14 @@ public class BackupHelper {
 						return listener.isDownloadCancelled();
 					}
 					return super.isInterrupted();
+				}
+
+				@Override
+				public void finishTask() {
+					int remainingProgress = progressHelper.getTotalWork() - progressHelper.getLastKnownProgress();
+					if (remainingProgress > 0) {
+						progress(remainingProgress);
+					}
 				}
 			};
 			iProgress.startWork(remoteFile.getFilesize() / 1024);
