@@ -454,7 +454,7 @@ public class MapSelectionHelper {
 		Map<RouteKey, GPXFile> routes = new LinkedHashMap<>();
 		try {
 			routes = routeSelector.getRoutes(rect, false, null);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error(e);
 		}
 		for (RouteKey routeKey : routes.keySet()) {
