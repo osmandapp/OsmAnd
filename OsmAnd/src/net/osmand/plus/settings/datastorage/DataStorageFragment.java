@@ -7,9 +7,9 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_STORAGE_SIZE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_STORAGE_SIZE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.UpdateMemoryInfoUIAdapter;
 import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.STORAGE_MIGRATION;
 
@@ -292,7 +292,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					TextView tvMemory = itemView.findViewById(R.id.memory);
 					String summary = "";
 					int color = 0;
-					if (mi.getKey().equals(TILES_MEMORY) && !calculateTilesBtnPressed) {
+					if (mi.getKey().equals(TILES_STORAGE_SIZE) && !calculateTilesBtnPressed) {
 						summary = getString(R.string.shared_string_calculate);
 						color = activeColor;
 						tvMemory.setOnClickListener(v -> {
@@ -306,7 +306,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						summary = DataStorageHelper.getFormattedMemoryInfo(mi.getUsedMemoryBytes(), memoryUnitsFormats);
 					}
 					View divider = itemView.findViewById(R.id.divider);
-					if (mi.getKey().equals(OTHER_MEMORY)) {
+					if (mi.getKey().equals(OTHER_STORAGE_SIZE)) {
 						divider.setVisibility(View.VISIBLE);
 					} else {
 						divider.setVisibility(View.GONE);
@@ -548,7 +548,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	@Override
 	public void onFinishUpdating(String tag) {
 		updateAllSettings();
-		if (TILES_MEMORY.equals(tag)) {
+		if (TILES_STORAGE_SIZE.equals(tag)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
 		}
 	}
