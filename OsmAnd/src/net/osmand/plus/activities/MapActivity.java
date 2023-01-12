@@ -133,8 +133,8 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
@@ -326,7 +326,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		PluginsHelper.onMapActivityCreate(this);
 		importHelper = new ImportHelper(this, getMyApplication());
 		if (System.currentTimeMillis() - tm > 50) {
-			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
+			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
 
@@ -763,7 +763,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getMapMarkersHelper().addListener(this);
 
 		if (System.currentTimeMillis() - time > 50) {
-			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
+			LOG.error("onResume for MapActivity took " + (System.currentTimeMillis() - time) + " ms");
 		}
 
 		boolean showOsmAndWelcomeScreen = true;

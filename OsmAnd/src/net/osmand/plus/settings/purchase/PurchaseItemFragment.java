@@ -134,12 +134,17 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			Pair<String, String> stateStrings = parseSubscriptionState(state, startTime, endTime);
 			purchaseTitle = stateStrings.first;
 			purchaseDesc = stateStrings.second;
+			updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
 		} else {
 			long purchaseTime = purchase.getPurchaseTime();
-			purchaseDesc = dateFormat.format(purchaseTime);
-			purchaseTitle = app.getString(R.string.shared_string_purchased);
+			boolean hasTime = purchaseTime > 0;
+			if (hasTime) {
+				purchaseDesc = dateFormat.format(purchaseTime);
+				purchaseTitle = app.getString(R.string.shared_string_purchased);
+				updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
+			}
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.purchasing_period_block), hasTime);
 		}
-		updateInformationBlock(R.id.purchasing_period_block, purchaseTitle, purchaseDesc);
 
 		String purchasedOn = getString(R.string.shared_string_purchased_on);
 		SubscriptionOrigin origin = purchase.getOrigin();
