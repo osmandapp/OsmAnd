@@ -5014,4 +5014,6 @@
     <string name="set_up_backup">Impostare il backup</string>
     <string name="si_nm_ft">Miglia/piedi nautici</string>
     <string name="si_nm_mt">Miglia/metri nautici</string>
+    <string name="x_axis">Asse X</string>
+    <string name="y_axis">Asse Y</string>
 </resources>
