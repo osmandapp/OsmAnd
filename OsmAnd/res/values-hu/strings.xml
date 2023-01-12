@@ -5017,4 +5017,6 @@
     <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
     <string name="set_up_backup">Biztonsági mentés beállítása</string>
+    <string name="y_axis">Y-tengely</string>
+    <string name="x_axis">X-tengely</string>
 </resources>
