@@ -5029,4 +5029,6 @@
     <string name="si_nm_ft">Sømil/fod</string>
     <string name="si_nm_mt">Sømil/meter</string>
     <string name="set_up_backup">Indstil sikkerhedskopiering</string>
+    <string name="x_axis">X-akse</string>
+    <string name="y_axis">Y-akse</string>
 </resources>
