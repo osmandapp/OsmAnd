@@ -5023,4 +5023,6 @@
     <string name="si_nm_ft">Морські милі/фути</string>
     <string name="si_nm_mt">Морські милі/метри</string>
     <string name="set_up_backup">Налаштувати резервне копіювання</string>
+    <string name="y_axis">Вісь Y</string>
+    <string name="x_axis">Вісь X</string>
 </resources>
