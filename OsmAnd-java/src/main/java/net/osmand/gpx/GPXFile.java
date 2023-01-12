@@ -199,7 +199,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		if (index == -1) {
 			return;
 		}
-		String prevGroupName = existingPoint.category;
+		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
 		existingPoint.updatePoint(newWpt);
 		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
 				|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {
