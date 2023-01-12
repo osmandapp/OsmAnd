@@ -204,16 +204,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void startHandler() {
 		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (getView() != null && updateEnable) {
-					updateCurrentTrack();
-					if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
-						allGpxAdapter.notifyDataSetChanged();
-					}
-					startHandler();
+		updateCurrentRecordingTrack.postDelayed(() -> {
+			if (getView() != null && updateEnable) {
+				updateCurrentTrack();
+				if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
+					allGpxAdapter.notifyDataSetChanged();
 				}
+				startHandler();
 			}
 		}, 2000);
 	}
@@ -304,12 +301,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				plugin.saveCurrentTrack(new Runnable() {
-					@Override
-					public void run() {
-						if (isResumed()) {
-							reloadTracks();
-						}
+				plugin.saveCurrentTrack(() -> {
+					if (isResumed()) {
+						reloadTracks();
 					}
 				});
 				updateCurrentTrack();
@@ -1024,13 +1018,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			private long lastUpdateTime;
 
-			private final Runnable updateItemsProc = new Runnable() {
-				@Override
-				public void run() {
-					if (updateEnable) {
-						lastUpdateTime = System.currentTimeMillis();
-						allGpxAdapter.notifyDataSetChanged();
-					}
+			private final Runnable updateItemsProc = () -> {
+				if (updateEnable) {
+					lastUpdateTime = System.currentTimeMillis();
+					allGpxAdapter.notifyDataSetChanged();
 				}
 			};
 

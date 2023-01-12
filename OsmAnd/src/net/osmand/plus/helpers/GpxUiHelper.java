@@ -372,13 +372,10 @@ public class GpxUiHelper {
 			this.listAdapter = listAdapter;
 		}
 
-		private final Runnable updateItemsProc = new Runnable() {
-			@Override
-			public void run() {
-				if (updateEnable) {
-					lastUpdateTime = System.currentTimeMillis();
-					listAdapter.notifyDataSetChanged();
-				}
+		private final Runnable updateItemsProc = () -> {
+			if (updateEnable) {
+				lastUpdateTime = System.currentTimeMillis();
+				listAdapter.notifyDataSetChanged();
 			}
 		};
 
@@ -1026,36 +1023,32 @@ public class GpxUiHelper {
 	                                                File dir, GPXFile currentFile, String... filename) {
 		ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
-				int k = 0;
-				String w = "";
-				if (currentFile != null) {
-					result[k++] = currentFile;
-				}
-				for (String fname : filename) {
-					File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile(f);
-					if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
-						w += res.error.getMessage() + "\n";
-					} else {
-						res.addGeneralTrack();
-					}
-					result[k++] = res;
-				}
-				dlg.dismiss();
-				String warn = w;
-				activity.runOnUiThread(() -> {
-					if (warn.length() > 0) {
-						Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
-					} else {
-						callbackWithObject.processResult(result);
-					}
-				});
+		new Thread(() -> {
+			GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
+			int k = 0;
+			String w = "";
+			if (currentFile != null) {
+				result[k++] = currentFile;
 			}
-
+			for (String fname : filename) {
+				File f = new File(dir, fname);
+				GPXFile res = GPXUtilities.loadGPXFile(f);
+				if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
+					w += res.error.getMessage() + "\n";
+				} else {
+					res.addGeneralTrack();
+				}
+				result[k++] = res;
+			}
+			dlg.dismiss();
+			String warn = w;
+			activity.runOnUiThread(() -> {
+				if (warn.length() > 0) {
+					Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+				} else {
+					callbackWithObject.processResult(result);
+				}
+			});
 		}, "Loading gpx").start(); //$NON-NLS-1$
 	}
 

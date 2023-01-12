@@ -564,12 +564,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onUpdateLocalIndex(item, isChecked, new Runnable() {
-							@Override
-							public void run() {
-								runSort();
-							}
-						});
+						onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort);
 					}
 				});
 			} else {

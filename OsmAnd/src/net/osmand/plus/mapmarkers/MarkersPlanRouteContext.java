@@ -132,12 +132,7 @@ public class MarkersPlanRouteContext {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (!snapToRoadPairsToCalculate.isEmpty() && !routingHelper.isRouteBeingCalculated()) {
 			routingHelper.startRouteCalculationThread(getParams());
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					listener.showProgressBar();
-				}
-			});
+			app.runInUIThread(listener::showProgressBar);
 		}
 	}
 
@@ -172,12 +167,7 @@ public class MarkersPlanRouteContext {
 			}
 		}
 		listener.showMarkersRouteOnMap(adjustMap);
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				listener.updateText();
-			}
-		});
+		app.runInUIThread(listener::updateText);
 	}
 
 	private List<WptPt> getPointsToCalculate() {
@@ -264,21 +254,11 @@ public class MarkersPlanRouteContext {
 				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
 				recreateSnapTrkSegment(false);
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						listener.refresh();
-					}
-				});
+				app.runInUIThread(listener::refresh);
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					app.getRoutingHelper().startRouteCalculationThread(getParams());
 				} else {
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							listener.hideProgressBar(false);
-						}
-					});
+					app.runInUIThread(() -> listener.hideProgressBar(false));
 				}
 			}
 		};

@@ -837,37 +837,24 @@ public class MapRenderRepositories {
 				}
 				String msg = timeInfo;
 				log.info(msg);
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-					}
-				});
+				handler.post(() -> Toast.makeText(context, msg, Toast.LENGTH_LONG).show());
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime memory exception", e); //$NON-NLS-1$
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
-				}
-			});
+			handler.post(() -> Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show());
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e); //$NON-NLS-1$
 			cObjects = new ArrayList<BinaryMapDataObject>();
 			cObjectsBox = new QuadRect();
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-//					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-//					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-//					activityManager.getMemoryInfo(memoryInfo);
-//					int avl = (int) (memoryInfo.availMem / (1 << 20));
-					int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
-					int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
-					String s = " (" + avl + " MB available of " + max  + ") ";
-					Toast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
-				}
+			handler.post(() -> {
+//				ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+//				ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//				activityManager.getMemoryInfo(memoryInfo);
+//				int avl = (int) (memoryInfo.availMem / (1 << 20));
+				int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
+				int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+				String s = " (" + avl + " MB available of " + max  + ") ";
+				Toast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
 			});
 		} finally {
 			if(currentRenderingContext != null) {

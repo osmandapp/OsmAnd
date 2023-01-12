@@ -306,12 +306,9 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			}
 			final Exception e = ex;
 			if (this.activity != null) {
-				this.activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (activity != null) {
-							activity.endThreadOperation(operationId, e);
-						}
+				this.activity.runOnUiThread(() -> {
+					if (activity != null) {
+						activity.endThreadOperation(operationId, e);
 					}
 				});
 			}

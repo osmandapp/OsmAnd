@@ -337,41 +337,35 @@ public class SRTMPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
 				int itemId = item.getTitleId();
 				if (itemId == R.string.srtm_plugin_name) {
-					toggleContourLines(mapActivity, isChecked, new Runnable() {
-						@Override
-						public void run() {
-							RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
-							if (contourLinesProp != null) {
-								CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+					toggleContourLines(mapActivity, isChecked, () -> {
+						RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+						if (contourLinesProp != null) {
+							CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+							boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
-								SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-								PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
-
-								item.setDescription(app.getString(R.string.display_zoom_level,
-										getPrefDescription(app, contourLinesProp, pref)));
-								item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-								item.setSelected(selected);
-								uiAdapter.onDataSetChanged();
-								mapActivity.refreshMapComplete();
-							}
-						}
-					});
-				} else if (itemId == R.string.shared_string_terrain) {
-					toggleTerrain(mapActivity, isChecked, new Runnable() {
-						@Override
-						public void run() {
-							boolean selected = TERRAIN.get();
 							SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-							if (selected) {
-								PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
-							}
+							PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+
+							item.setDescription(app.getString(R.string.display_zoom_level,
+									getPrefDescription(app, contourLinesProp, pref)));
 							item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							item.setSelected(selected);
 							uiAdapter.onDataSetChanged();
-							updateLayers(mapActivity, mapActivity);
 							mapActivity.refreshMapComplete();
 						}
+					});
+				} else if (itemId == R.string.shared_string_terrain) {
+					toggleTerrain(mapActivity, isChecked, () -> {
+						boolean selected = TERRAIN.get();
+						SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+						if (selected) {
+							PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
+						}
+						item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setSelected(selected);
+						uiAdapter.onDataSetChanged();
+						updateLayers(mapActivity, mapActivity);
+						mapActivity.refreshMapComplete();
 					});
 				}
 				return true;
