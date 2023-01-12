@@ -1108,9 +1108,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 
-		boolean visible = hasMapRenderer || QuadRect.trivialOverlap(tileBox.getLatLonBounds(),
-				calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
+		boolean visible = hasMapRenderer
+				? getMapRenderer().isPathVisible(selectedGpxFile.getPath31ToDisplay())
+				: QuadRect.trivialOverlap(tileBox.getLatLonBounds(),
+					calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
 		if (!gpxFile.hasTrkPt() && coloringType.isGradient() || !visible) {
+			Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
+			if (renderedSegments != null) {
+				Iterator<TrkSegment> it = renderedSegments.iterator();
+				while (it.hasNext()) {
+					TrkSegment renderedSegment = it.next();
+					resetSymbolProviders(renderedSegment);
+					it.remove();
+				}
+			}	
 			segmentsCache.remove(gpxFilePath);
 			return;
 		}

@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -97,6 +98,14 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@Override
 	public void processPoints(OsmandApplication app) {
 		processedPointsToDisplay = gpxFile.proccessPoints();
+		if (app.getOsmandMap() != null &&
+			app.getOsmandMap().getMapView() != null &&
+			app.getOsmandMap().getMapView().hasMapRenderer()) {
+			path31 = trackPointsToPath31(processedPointsToDisplay);
+		} else {
+			path31 = null;
+		}
+		path31FromGeneralTrack = false;
 	}
 
 	private int calculatePointsCount(@NonNull GPXFile gpxFile) {
@@ -134,6 +143,28 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
 				? gpxFile.getGeneralTrack().segments
 				: processedPointsToDisplay;
+	}
+
+	@NonNull
+	@Override
+	public QVectorPointI getPath31ToDisplay() {
+		if (joinSegments && gpxFile != null) {
+			if (!gpxFile.hasGeneralTrack()) {
+				if (gpxFile.getGeneralTrack() != null) {
+					path31 = trackPointsToPath31(gpxFile.getGeneralTrack().segments);
+					path31FromGeneralTrack = true;
+				}
+			} else {
+				if (!path31FromGeneralTrack || path31 == null) {
+					path31 = trackPointsToPath31(gpxFile.getGeneralTrack().segments);
+					path31FromGeneralTrack = true;
+				}
+			}
+		}
+		if (path31 == null) {
+			path31 = trackPointsToPath31(processedPointsToDisplay);
+		}
+		return path31;
 	}
 
 	@NonNull
