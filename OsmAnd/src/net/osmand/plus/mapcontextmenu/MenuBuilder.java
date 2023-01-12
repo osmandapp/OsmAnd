@@ -105,6 +105,7 @@ public class MenuBuilder {
 	protected static final String NEAREST_WIKI_KEY = "nearest_wiki_key";
 	protected static final String NEAREST_POI_KEY = "nearest_poi_key";
 	protected static final String DIVIDER_ROW_KEY = "divider_row_key";
+	protected static final String NAMES_ROW_KEY = "names_row_key";
 
 	private static final int NEARBY_MAX_POI_COUNT = 10;
 	private static final int NEARBY_POI_MIN_RADIUS = 250;
