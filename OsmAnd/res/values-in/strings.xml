@@ -5028,4 +5028,6 @@
     <string name="si_nm_mt">Mil/meter laut</string>
     <string name="si_nm_ft">Mil/kaki laut</string>
     <string name="set_up_backup">Mulai pencadangan</string>
+    <string name="y_axis">Sumbu Y</string>
+    <string name="x_axis">Sumbu X</string>
 </resources>
