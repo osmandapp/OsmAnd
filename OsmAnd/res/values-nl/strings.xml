@@ -3988,7 +3988,7 @@
     <string name="track_recording_title">Trackopname gestopt</string>
     <string name="on_pause">Pauze</string>
     <string name="app_restart_required">Herstarten van de applicatie is vereist om bepaalde instellingen toe te passen.</string>
-    <string name="routing_attr_height_obstacles_description">Routebepaling kan sterke hellingen vermijden.</string>
+    <string name="routing_attr_height_obstacles_description">Routebepaling kan sterke hellingen vermijden:</string>
     <string name="quick_action_coordinates_widget_descr">Een schuifschakelaar om de coördinaten widget op de kaart weer te geven of te verbergen.</string>
     <string name="map_widget_distance_by_tap">Afstand bij het tikken</string>
     <string name="latest_openstreetmap_update">Nieuwste OpenStreetMap update beschikbaar:</string>
@@ -4124,7 +4124,7 @@
     <string name="backup_deleted_all_data">Verwijder alle gegevens.</string>
     <string name="backup_data_removed">Alle gegevens zijn verwijderd.</string>
     <string name="shared_string_progress">Voortgang</string>
-    <string name="backup_do_not_have_any">Je hebt nog geen online back-up.</string>
+    <string name="backup_do_not_have_any">Je hebt nog geen online back-up</string>
     <string name="backup_dont_have_any_descr">Plan automatische back-ups in zodat je nooit geen gegevens verliest.</string>
     <string name="backup_welcome_back">Welkom terug!</string>
     <string name="attribute">Eigenschappen</string>

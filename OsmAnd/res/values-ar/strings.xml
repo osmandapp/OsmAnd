@@ -4304,10 +4304,10 @@
     <string name="backup_version_history_removed">تمت إزالة كافة محفوظات الإصدار.</string>
     <string name="backup_data_removed">تمت إزالة كافة البيانات.</string>
     <string name="shared_string_progress">تقدم</string>
-    <string name="backup_do_not_have_any">ليس لديك أي نسخة احتياطية عبر الإنترنت بعد.</string>
-    <string name="backup_dont_have_any_descr">جدول النسخ الاحتياطي التلقائي ولا تفقد البيانات أبدا.</string>
+    <string name="backup_do_not_have_any">ليس لديك أي نسخة احتياطية على الإنترنت حتى بعد</string>
+    <string name="backup_dont_have_any_descr">قم بإعداد نسخة احتياطية تلقائية حتى لا تقلق بشأن فقدان البيانات.</string>
     <string name="backup_welcome_back">مرحبا بعودتك!</string>
-    <string name="backup_welcome_back_descr">استعد البيانات على هذا الجهاز باستخدام النسخ الاحتياطية الموجودة، أو انسخ البيانات الاحتياطية إلى سحابة OsmAnd.</string>
+    <string name="backup_welcome_back_descr">قم باستعادة البيانات الموجودة على هذا الجهاز باستخدام OsmAnd Cloud.</string>
     <string name="backup_setup">إنشاء نسخة احتياطية</string>
     <string name="backup_restore_now">استعادة الآن</string>
     <string name="attribute">ميزة</string>
@@ -5091,4 +5091,5 @@
     <string name="export_to_file">تصدير إلى ملف</string>
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="si_nm_mt">ميل بحري/متر</string>
+    <string name="set_up_backup">إنشاء نسخة احتياطية</string>
 </resources>

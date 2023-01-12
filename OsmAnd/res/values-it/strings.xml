@@ -3406,7 +3406,7 @@
     <string name="profile_type_custom_string">Profilo personalizzato</string>
     <string name="shared_string_angle_param">Angolo: %s°</string>
     <string name="shared_string_angle">Angolo</string>
-    <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
+    <string name="recalc_angle_dialog_descr">Un extra segmento rettilineo verrà visualizzato tra la mia posizione e il percorso calcolato fino a quando il percorso non viene ricalcolato</string>
     <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e il percorso</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
@@ -4115,7 +4115,7 @@
     <string name="backup_confilcts_descr">Alcuni file potrebbero non essere caricati nel server perché la versione sul server è più recente.</string>
     <string name="backup_view_conflicts">Visualizza i conflitti</string>
     <string name="backup_no_internet_descr">Controlla la tua connessione internet e scarica nuovamente.</string>
-    <string name="backup_pause_all">Metti in tutto in pausa</string>
+    <string name="backup_pause_all">Metti tutto in pausa</string>
     <string name="upload_local_version">Upload la versione locale</string>
     <string name="download_server_version">Scarica la versione del server</string>
     <string name="shared_string_logout">Esci</string>
@@ -4238,7 +4238,7 @@
     <string name="map_updates_for_mappers">Aggiornamenti della mappa per i mappatori</string>
     <string name="benefits_for_contributors_primary_descr">I contributori attivi di OpenStreetMap.org potrebbero essere idonei gli aggiornamenti mensili e orari illimitati delle mappe.</string>
     <string name="benefits_for_contributors_secondary_descr">Accedi a OpenStreetMap per controllare se sei idoneo per gli aggiornamenti mensili e orari illimitati delle mappe.</string>
-    <string name="use_login_and_password">Utilizza il nomeutente e password</string>
+    <string name="use_login_and_password">Utilizza il nome utente e password</string>
     <string name="shared_string_contributions">Contributi</string>
     <string name="map_updates_are_unavailable_yet">Non sono ancora disponibili aggiornamenti per le mappe :-(</string>
     <string name="connect_track_points_as">Collega i punti del percorso</string>
@@ -4814,7 +4814,7 @@
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
-    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza alcun costo aggiuntivo.</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su diverse piattaforme (Android/iOS/Web) senza costi aggiuntivi.</string>
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
