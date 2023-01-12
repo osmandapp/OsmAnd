@@ -87,8 +87,8 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -930,6 +930,13 @@ public class GpxUiHelper {
 			return new GPXInfo(fileName, file.lastModified(), file.length());
 		}
 		return null;
+	}
+
+	@NonNull
+	public static List<GPXInfo> getGPXFiles(@NonNull File dir, boolean absolutePath) {
+		List<GPXInfo> gpxInfos = new ArrayList<>();
+		readGpxDirectory(dir, gpxInfos, "", absolutePath);
+		return gpxInfos;
 	}
 
 	@NonNull

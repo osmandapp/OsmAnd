@@ -18,7 +18,6 @@ import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -202,7 +201,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	public static int calculateMaxProgress(@NonNull OsmandApplication app) {
-		int maxProgress = 0;
+		long maxProgress = 0;
 		BackupHelper backupHelper = app.getBackupHelper();
 		BackupInfo info = backupHelper.getBackup().getBackupInfo();
 		if (info != null) {
@@ -210,7 +209,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				maxProgress += backupHelper.calculateFileSize(file);
 			}
 		}
-		return maxProgress;
+		return (int) (maxProgress / 1024);
 	}
 
 	@Nullable
