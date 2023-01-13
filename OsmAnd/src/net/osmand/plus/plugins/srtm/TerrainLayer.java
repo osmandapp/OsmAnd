@@ -58,18 +58,16 @@ public class TerrainLayer extends MapTileLayer {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		int zoom = tileBox.getZoom();
 		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
 			setAlpha(srtmPlugin.getTerrainTransparency());
-			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else if(zoom > srtmPlugin.getTerrainMaxZoom()) {
 			// backward compatibility 100 -> 20 with overscale
 			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
-			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		} else {
 			// ignore
 		}
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 	}
 
 	private void indexTerrainFiles(OsmandApplication app) {
