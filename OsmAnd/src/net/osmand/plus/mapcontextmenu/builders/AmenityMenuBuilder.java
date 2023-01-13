@@ -4,13 +4,14 @@ import static net.osmand.data.Amenity.MAPILLARY;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.LocaleList;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -101,14 +102,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Nullable
 	private Locale getAvailablePreferredLocale(Map<String, String> namesMap) {
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-			LocaleList deviceLanguages = Resources.getSystem().getConfiguration().getLocales();
+		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
 
-			for (int index = 0; index < deviceLanguages.size(); index++) {
-				String language = deviceLanguages.get(index).getLanguage();
-				if (namesMap.containsKey(language)) {
-					return new Locale(language);
-				}
+		for (int index = 0; index < deviceLanguages.size(); index++) {
+			String language = deviceLanguages.get(index).getLanguage();
+			if (namesMap.containsKey(language)) {
+				return new Locale(language);
 			}
 		}
 		return null;
