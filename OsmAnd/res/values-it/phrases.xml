@@ -1378,7 +1378,7 @@
     <string name="poi_automated_yes">Sì;Automatizzato</string>
     <string name="poi_automated_no">Non automatizzato</string>
     <string name="poi_full_service_yes">Servizio completo</string>
-    <string name="poi_brushless_yes">Sì;senza spazzole</string>
+    <string name="poi_brushless_yes">Sì;Senza spazzole</string>
     <string name="poi_brushless_no">Senza spazzola: no</string>
     <string name="poi_car_wash_no">No;Autolavaggio: no</string>
     <string name="poi_public_bath">Bagno pubblico</string>
@@ -3388,7 +3388,7 @@
     <string name="poi_bridge_movable_swing">Tipo di ponte mobile: altalena</string>
     <string name="poi_hiking_filter">Adatto per l\'escursionismo</string>
     <string name="poi_notice">Avviso, segno di mare</string>
-    <string name="poi_leaf_type_needleleaved">Agugliato</string>
+    <string name="poi_leaf_type_needleleaved">Foglia agugliata</string>
     <string name="poi_windfall">Manna</string>
     <string name="poi_diaper_table_count">Conteggio del tavolo dei pannolini</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
