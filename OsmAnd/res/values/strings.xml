@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="weight_limit_error">Minimum value is 3.5 tons. Use the "Driving" profile if the vehicle weight is less than the minimum value.</string>
     <string name="y_axis">Y-Axis</string>
     <string name="x_axis">X-Axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
