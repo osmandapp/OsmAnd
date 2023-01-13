@@ -2440,7 +2440,9 @@
     <string name="srtm_plugin_description">Овај додатак омогућава приказ слоја изохипси и рељефа изнад стандардних ОсмАнд карти. Ову функционалност ће највише знати да цене спортисти, планинари, трекери и свако кога занима рељефна структура предела (приметите да су изохипсе и рељефни подаци одвојени, посебна скидања за њих су доступна када се овај додатак активира.)
 \n
 \nГлобални подаци (између 70° северно и 70° јужно) се базирани на SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментима за сликање на водећем НАСА-ином сателиту Terra. ASTER је заједнички напор НАСА-е, јапанског министарства економије, трговине и индустрије (METI), и јапанског свемирског система (J-spacesystems).</string>
-    <string name="osm_editing_plugin_description">Доприносите ОСМ-у, преко прављења и измена ОСМ објеката тачака од интереса, отварања или коментарисања ОСМ белешки, и прилагањем снимљених GPX фајлова из ОсмАнд-а тако што дате Ваше корисничко име и лозинку. OpenStreetMap.org је глобални пројекат мапирања света у јавном домену, вођен заједницом.</string>
+    <string name="osm_editing_plugin_description">Доприносите ОСМ-у, преко прављења и измена ОСМ објеката тачака од интереса, отварања или коментарисања ОСМ белешки, и прилагањем снимљених GPX фајлова из ОсмАнд-а тако што дате
+\n
+\nВаше корисничко име и лозинку. OpenStreetMap.org је глобални пројекат мапирања света у јавном домену, вођен заједницом.</string>
     <string name="save_track_to_gpx_globally_descr">Главно бележење позиције у GPX фајл може да се укључи и искључи коришћењем справице за GPX бележење на карти.</string>
     <string name="android_19_location_disabled">Од Андроида 4.4 (KitKat), фасциклу за складиште (%s) је застарела. Копирај све ОсмАнд фајлове на нови локацију за складиште\?
 \n Белешка 1: Ваши стари фајлови неће вити дирани (али можете их Ви сами обрисати).
@@ -4253,7 +4255,7 @@
     <string name="backup_version_history_removed">Сва издања историје су уклоњена.</string>
     <string name="backup_data_removed">Сви подаци су уклоњени.</string>
     <string name="shared_string_progress">Напредак</string>
-    <string name="backup_do_not_have_any">Још увек немате на мрежи ниједну резервну копију.</string>
+    <string name="backup_do_not_have_any">Још увек немате на мрежи ниједну резервну копију</string>
     <string name="backup_dont_have_any_descr">Закажите прављење аутоматских резервних копија и никада не губите податке.</string>
     <string name="backup_welcome_back">Добродошли назад!</string>
     <string name="backup_setup">Подеси резервну копију</string>
@@ -4694,7 +4696,7 @@
     <string name="download_heightmap_maps">Висинска карта</string>
     <string name="av_notes_photo_widget_desc">Тап по справици ће усликати слику.</string>
     <string name="compass_always_visible">Увек видљиво</string>
-    <string name="compass_click_desc">"Тапните по  компасу ради промене усмерења карте."</string>
+    <string name="compass_click_desc">Тапните по компасу ради промене усмерења карте.</string>
     <string name="compass_desc">Приказује усмерење ка северу.</string>
     <string name="go_to_marker_location">Иди на положај ознаке</string>
     <string name="altitude_correction">Исправка надморске висине</string>
@@ -4706,7 +4708,7 @@
     <string name="switch_widget_mode_desc">Кликтање на справицу мења начине.</string>
     <string name="auto_25_chars_route_tr_kr">Скрените десно и држите десно</string>
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
-    <string name="av_notes_video_widget_desc">"Тап  по справици ће снимити видео."</string>
+    <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="accessibility_2d_view_off">2.5D поглед искључен</string>
     <string name="rotate_map_none_rotated_opt">Фискно (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
@@ -4840,7 +4842,7 @@
     <string name="current_location_widget">Координате: тренутни положај</string>
     <string name="map_center_widget">Координате: средиште карте</string>
     <string name="external_sensors_plugin_name">Спољни пријемници</string>
-    <string name="external_sensors_plugin_description">Приступ спољним пријемницима, нпр. откуцајима срца, брзини бицикла, снази кретања бицикла, или такту. Захтева да уређај буде повезан са одговарајућим пријемницима преко АНТ + протокола личне бежичне мреже</string>
+    <string name="external_sensors_plugin_description">Приступ спољним пријемницима, нпр. откуцајима срца, брзини бицикла, снази кретања бицикла, или такту. Захтева да уређај буде повезан са одговарајућим пријемницима преко АНТ + протокола личне бежичне мреже.</string>
     <string name="quick_action_temperature_layer">Прекидач за приказ или скривање топлотних слојева на карти.</string>
     <string name="quick_action_precipitation_layer">Прекидач за приказ или скривање слојева падавина на карти.</string>
     <string name="quick_action_wind_layer">Прекидач за приказ или скривање слојева ветрова на карти.</string>
@@ -4866,7 +4868,7 @@
     <string name="map_rendering_engine">Погон приказа карата</string>
     <string name="external_sensors_support">Подршка спољних пријемника</string>
     <string name="external_sensor_widgets">Спољашњи пријемници</string>
-    <string name="map_widget_camera_tilt_desc">Приказује нагнутост камере у прегледу простора. Подразумевана нагнутост је 90° (без нагињања)</string>
+    <string name="map_widget_camera_tilt_desc">Приказује нагнутост камере у прегледу простора. Подразумевана нагнутост је 90° (без нагињања).</string>
     <string name="map_widget_camera_distance_desc">Приказује уздигнуће камере изнад површи.</string>
     <string name="map_widget_ant_bicycle_dist">Растојање бицикла</string>
     <string name="coordinates_widget_map_center_desc">Приказује земљописне координате тренутног средишта карте</string>
@@ -4955,7 +4957,7 @@
     <string name="last_sync">Последње усклађивање</string>
     <string name="import_export">Увоз/извоз</string>
     <string name="shared_string_purchased_on">Купљено</string>
-    <string name="map_widget_altitude_map_center_desc">Приказује надморску висину на тренутном средишту карте</string>
+    <string name="map_widget_altitude_map_center_desc">Приказује надморску висину на тренутном средишту карте.</string>
     <string name="ant_read_data">Читај податке</string>
     <string name="map_widget_ant_bicycle_power_desc">Приказује излазну снагу бициклисте, која се користи да погони бицикл</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Приказује брзину којом бициклиста педала</string>
