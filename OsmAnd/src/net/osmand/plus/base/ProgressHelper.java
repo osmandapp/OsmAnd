@@ -60,7 +60,7 @@ public class ProgressHelper {
 				deltaProgress = 0;
 				notifyOnUpdate = true;
 			}
-			if (notifyOnUpdate || isTimeToUpdate()) {
+			if (notifyOnUpdate && isTimeToUpdate()) {
 				notifyOnUpdate = false;
 				lastUpdateTime = System.currentTimeMillis();
 				updateProgressListener.onProgressUpdated();
