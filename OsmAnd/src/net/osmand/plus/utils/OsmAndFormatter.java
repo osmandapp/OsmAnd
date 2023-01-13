@@ -718,6 +718,10 @@ public class OsmAndFormatter {
 		return result.toString();
 	}
 
+	public static String getUrlFormattedCoordinate(double coordinate) {
+		return String.format(Locale.US, "%.6f", coordinate);
+	}
+
 	private static String formatCoordinate(double coordinate, int outputType) {
 
 		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
