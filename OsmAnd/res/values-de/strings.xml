@@ -5028,4 +5028,6 @@
     <string name="si_nm_ft">Nautische Meilen/Fuß</string>
     <string name="si_nm_mt">Nautische Meilen/Meter</string>
     <string name="set_up_backup">Backup einrichten</string>
+    <string name="x_axis">X-Achse</string>
+    <string name="y_axis">Y-Achse</string>
 </resources>

@@ -4234,10 +4234,10 @@
     <string name="backup_version_history_removed">Cała historia wersji została usunięta.</string>
     <string name="backup_data_removed">Wszystkie dane zostały usunięte.</string>
     <string name="shared_string_progress">Postęp</string>
-    <string name="backup_do_not_have_any">Nie masz jeszcze kopii zapasowej online.</string>
-    <string name="backup_dont_have_any_descr">Zaplanuj automatyczne tworzenie kopii zapasowych by nigdy nie utracić danych.</string>
+    <string name="backup_do_not_have_any">Nie masz jeszcze żadnej kopii zapasowej</string>
+    <string name="backup_dont_have_any_descr">Ustaw automatyczną kopię zapasową, aby zapobiec utracie danych.</string>
     <string name="backup_welcome_back">Witamy ponownie!</string>
-    <string name="backup_welcome_back_descr">Przywróć dane na tym urządzeniu, korzystając z istniejących kopii zapasowych lub wykonaj kopię zapasową danych w chmurze OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Przywróć dane na tym urządzeniu za pomocą chmury OsmAnd Cloud.</string>
     <string name="backup_setup">Skonfiguruj kopię zapasową</string>
     <string name="backup_restore_now">Przywróć teraz</string>
     <string name="attribute">Atrybut</string>
@@ -5020,4 +5020,7 @@
     <string name="cloud_conflict">Konflikt</string>
     <string name="cloud_all_changes_uploaded_descr">Wszystkie zmiany dokonane na tym urządzeniu są synchronizowane z Chmurą OsmAnd.</string>
     <string name="open_weather_action_description">Umożliwia otwarcie ekranu ze szczegółowymi informacjami o pogodzie.</string>
+    <string name="x_axis">Oś X</string>
+    <string name="set_up_backup">Skonfiguruj kopię zapasową</string>
+    <string name="y_axis">Oś Y</string>
 </resources>

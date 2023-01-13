@@ -5027,4 +5027,6 @@
     <string name="si_nm_ft">Millas náuticas /pies</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Crear una copia de seguridad</string>
+    <string name="x_axis">Eje X</string>
+    <string name="y_axis">Eje Y</string>
 </resources>

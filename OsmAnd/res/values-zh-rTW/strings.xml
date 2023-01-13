@@ -5017,4 +5017,6 @@
     <string name="si_nm_mt">海浬/公尺</string>
     <string name="si_nm_ft">海浬/英呎</string>
     <string name="set_up_backup">設定備份</string>
+    <string name="x_axis">X 軸</string>
+    <string name="y_axis">Y 軸</string>
 </resources>

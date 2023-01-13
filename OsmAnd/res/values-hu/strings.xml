@@ -586,8 +586,8 @@
     <string name="app_mode_car">Autóvezetés</string>
     <string name="app_mode_bicycle">Kerékpározás</string>
     <string name="app_mode_pedestrian">Gyaloglás</string>
-    <string name="position_on_map_center">Középen</string>
-    <string name="position_on_map_bottom">Alul</string>
+    <string name="position_on_map_center">Középre</string>
+    <string name="position_on_map_bottom">Alulra</string>
     <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
     <string name="navigate_point_latitude">Szélesség</string>
     <string name="navigate_point_longitude">Hosszúság</string>
@@ -5017,4 +5017,6 @@
     <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
     <string name="set_up_backup">Biztonsági mentés beállítása</string>
+    <string name="y_axis">Y-tengely</string>
+    <string name="x_axis">X-tengely</string>
 </resources>

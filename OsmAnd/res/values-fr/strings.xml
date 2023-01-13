@@ -5014,4 +5014,6 @@
     <string name="si_nm_mt">Milles marins / mètres</string>
     <string name="av_audio_format_bottom_sheet_descr">Sélectionnez le format audio de sortie. Les fichiers audio sont de type 3GPP (.3gp).</string>
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
+    <string name="x_axis">Axe des abscisses</string>
+    <string name="y_axis">Axe des ordonnées</string>
 </resources>
