@@ -4187,10 +4187,10 @@
     <string name="backup_version_history_removed">História verzií bola odstránená.</string>
     <string name="backup_data_removed">Všetky údaje boli odstránené.</string>
     <string name="shared_string_progress">Postup</string>
-    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy.</string>
-    <string name="backup_dont_have_any_descr">Naplánujte automatické zálohovanie a nikdy nestraťte údaje.</string>
+    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy</string>
+    <string name="backup_dont_have_any_descr">Nastavte automatické zálohovanie a nikdy nestraťte údaje.</string>
     <string name="backup_welcome_back">Vitajte späť!</string>
-    <string name="backup_welcome_back_descr">Obnovte údaje na tomto zariadení pomocou existujúcej zálohy alebo zálohujte údaje do OsmAnd Cloudu.</string>
+    <string name="backup_welcome_back_descr">Obnovte údaje na tomto zariadení pomocou OsmAnd Cloudu.</string>
     <string name="backup_setup">Nastaviť zálohovanie</string>
     <string name="backup_restore_now">Obnoviť teraz</string>
     <string name="attribute">Vlastnosť</string>
@@ -5017,4 +5017,7 @@
     <string name="export_to_file">Exportovať do súboru</string>
     <string name="si_nm_mt">Námorné míle/metre</string>
     <string name="si_nm_ft">Námorné míle/stopy</string>
+    <string name="set_up_backup">Nastaviť zálohovanie</string>
+    <string name="y_axis">Os Y</string>
+    <string name="x_axis">Os X</string>
 </resources>
