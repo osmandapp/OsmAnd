@@ -381,8 +381,10 @@ public class BackupHelper {
 	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
-		if (!isLimitedFilesCollectionItem(item)
-				&& info != null && (!Algorithms.isEmpty(info.filesToUpload) || !Algorithms.isEmpty(info.filesToMerge))) {
+		if (!isLimitedFilesCollectionItem(item) && info != null &&
+				(!Algorithms.isEmpty(info.filesToUpload)
+						|| !Algorithms.isEmpty(info.filesToMerge)
+						|| !Algorithms.isEmpty(info.filesToDownload))) {
 			for (LocalFile localFile : info.filesToUpload) {
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
@@ -394,6 +396,13 @@ public class BackupHelper {
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
 					filesToUpload.add(file);
+				}
+			}
+			for (RemoteFile remoteFile : info.filesToDownload) {
+				if (remoteFile.item instanceof FileSettingsItem) {
+					if (item.equals(remoteFile.item)) {
+						filesToUpload.add(((FileSettingsItem) remoteFile.item).getFile());
+					}
 				}
 			}
 		} else {
