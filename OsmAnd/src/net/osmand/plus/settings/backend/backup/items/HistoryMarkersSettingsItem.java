@@ -110,6 +110,11 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 	}
 
 	@Override
+	protected void deleteItem(MapMarker item) {
+		markersHelper.removeMarker(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull MapMarker mapMarker) {
 		for (MapMarker marker : existingItems) {
 			if (marker.equals(mapMarker)

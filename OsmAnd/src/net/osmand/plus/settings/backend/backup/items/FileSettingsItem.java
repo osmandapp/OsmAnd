@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
@@ -362,6 +363,12 @@ public class FileSettingsItem extends StreamSettingsItem {
 				return newFile;
 			}
 		}
+	}
+
+	@Override
+	public void delete() {
+		super.delete();
+		// TODO: delete settings item
 	}
 
 	@Nullable

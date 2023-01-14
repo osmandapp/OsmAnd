@@ -152,6 +152,10 @@ public abstract class SettingsItem {
 		// non implemented
 	}
 
+	public void delete() {
+		// non implemented
+	}
+
 	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		// non implemented
 	}

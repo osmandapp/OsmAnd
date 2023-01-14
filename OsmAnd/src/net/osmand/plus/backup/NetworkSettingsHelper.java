@@ -205,9 +205,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void exportSettings(@NonNull String key,
 	                           @NonNull List<SettingsItem> items,
 	                           @NonNull List<SettingsItem> itemsToDelete,
+	                           @NonNull List<SettingsItem> itemsToLocalDelete,
 	                           @Nullable BackupExportListener listener) throws IllegalStateException {
 		if (!exportAsyncTasks.containsKey(key)) {
-			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
+			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, itemsToLocalDelete, listener);
 			exportAsyncTasks.put(key, exportTask);
 			exportTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {

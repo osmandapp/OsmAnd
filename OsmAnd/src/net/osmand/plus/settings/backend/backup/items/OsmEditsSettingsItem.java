@@ -108,9 +108,12 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 					db.addOpenstreetmap(point);
 				}
 			}
-
-
 		}
+	}
+
+	@Override
+	protected void deleteItem(OpenstreetmapPoint item) {
+		// TODO: delete settings item
 	}
 
 	@Override
