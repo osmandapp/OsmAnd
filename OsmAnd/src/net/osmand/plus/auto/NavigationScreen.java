@@ -209,7 +209,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	@Override
 	public Template onGetTemplate() {
 		NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
-		builder.setBackgroundColor(CarColor.SECONDARY);
+		// FIXME: HACK / Workaround: consider dark mode for the direction panel color by abusing carColorPrimary and carColorSecondary to switch as its not properly considered with AA and HUR
+		builder.setBackgroundColor(getCarContext().isDarkMode() ? CarColor.SECONDARY : CarColor.PRIMARY);
 
 		// Set the action strip.
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
