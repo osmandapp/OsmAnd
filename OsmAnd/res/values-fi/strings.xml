@@ -1861,7 +1861,7 @@
     <string name="offline_maps_and_navigation">Offline kartat
 \n&amp; navigointi</string>
     <string name="commit_poi"/>
-    <string name="tab_title_advanced"/>
+    <string name="tab_title_advanced">Edistynyt</string>
     <string name="confirm_download_roadmaps">Vain tiet-karttaa ei tarvita, koska sinulla on jo vakio (täysi) kartta. Ladataanko se silti\?</string>
     <string name="free_downloads_used">Käytetyt ilmaiset lataukset</string>
     <string name="free_downloads_used_description">Näyttää jäljellä olevien ilmaisten latausten määrän.</string>
@@ -3986,4 +3986,6 @@
     <string name="rendering_attr_showFitnessTrails_description">Näytä kuntopolut</string>
     <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan päivittäin.</string>
     <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan tunnin välein.</string>
+    <string name="y_axis">y-akseli</string>
+    <string name="x_axis">x-akseli</string>
 </resources>
