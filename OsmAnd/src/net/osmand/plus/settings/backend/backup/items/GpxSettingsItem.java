@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -15,6 +16,8 @@ import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +101,18 @@ public class GpxSettingsItem extends FileSettingsItem {
 				if (dataItem != null) {
 					updateGpxParams(dataItem);
 				}
+			}
+		}
+	}
+
+	@Override
+	public void delete() {
+		super.delete();
+		if (FileUtils.removeGpxFile(app, file)) {
+			File parentFile = file.getParentFile();
+			File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			if (parentFile != null && !parentFile.equals(gpxDir)) {
+				parentFile.delete();
 			}
 		}
 	}

@@ -176,6 +176,11 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	}
 
 	@Override
+	protected void deleteItem(FavoriteGroup item) {
+		favoritesHelper.deleteGroup(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull FavoriteGroup favoriteGroup) {
 		String name = favoriteGroup.getName();
 		if (favoriteGroup.isPersonal()) {

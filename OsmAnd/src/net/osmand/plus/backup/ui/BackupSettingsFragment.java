@@ -339,11 +339,6 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	}
 
 	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
-
-	}
-
-	@Override
 	public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
 		updateProgressVisibility(false);
 		backupHelper.prepareBackup();

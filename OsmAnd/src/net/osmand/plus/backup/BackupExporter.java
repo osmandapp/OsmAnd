@@ -33,6 +33,7 @@ public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final List<SettingsItem> itemsToDelete = new ArrayList<>();
+	private final List<SettingsItem> itemsToLocalDelete = new ArrayList<>();
 	private final List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
@@ -61,6 +62,10 @@ public class BackupExporter extends Exporter {
 		return itemsToDelete;
 	}
 
+	public List<SettingsItem> getItemsToLocalDelete() {
+		return itemsToLocalDelete;
+	}
+
 	@NonNull
 	public List<SettingsItem> getOldItemsToDelete() {
 		return oldItemsToDelete;
@@ -68,6 +73,10 @@ public class BackupExporter extends Exporter {
 
 	public void addItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
 		itemsToDelete.add(item);
+	}
+
+	public void addItemToLocalDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
+		itemsToLocalDelete.add(item);
 	}
 
 	public void addOldItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
@@ -138,6 +147,7 @@ public class BackupExporter extends Exporter {
 		writeItems(networkWriter);
 		deleteFiles(deleteFilesListener);
 		deleteOldFiles(deleteFilesListener);
+		deleteLocalFiles(itemsProgress, dataProgress);
 		if (!isCancelled()) {
 			backupHelper.updateBackupUploadTime();
 		}
@@ -165,6 +175,20 @@ public class BackupExporter extends Exporter {
 			}
 		} catch (UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
+		}
+	}
+
+	protected void deleteLocalFiles(Set<Object> itemsProgress, AtomicInteger dataProgress) throws IOException {
+		List<SettingsItem> itemsToLocalDelete = this.itemsToLocalDelete;
+		for (SettingsItem item : itemsToLocalDelete) {
+			item.delete();
+			itemsProgress.add(item);
+			if (listener != null) {
+				int p = dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
+				String fileName = BackupHelper.getItemFileName(item);
+				listener.itemExportDone(item.getType().name(), fileName);
+				listener.updateGeneralProgress(itemsProgress.size(), p);
+			}
 		}
 	}
 
@@ -236,12 +260,6 @@ public class BackupExporter extends Exporter {
 
 	private OnDeleteFilesListener getOnDeleteFilesListener(Set<Object> itemsProgress, AtomicInteger dataProgress) {
 		return new OnDeleteFilesListener() {
-
-			@Override
-			public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
-
-			}
-
 			@Override
 			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 				int p = dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
@@ -250,16 +268,6 @@ public class BackupExporter extends Exporter {
 					listener.itemExportDone(file.getType(), file.getName());
 					listener.updateGeneralProgress(itemsProgress.size(), p);
 				}
-			}
-
-			@Override
-			public void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) {
-
-			}
-
-			@Override
-			public void onFilesDeleteError(int status, @NonNull String message) {
-
 			}
 		};
 	}

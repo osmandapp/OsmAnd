@@ -110,6 +110,11 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 		}
 	}
 
+	@Override
+	protected void deleteItem(QuickAction item) {
+		// TODO: delete settings item
+	}
+
 	@NonNull
 	@Override
 	public String getName() {

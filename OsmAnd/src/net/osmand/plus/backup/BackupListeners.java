@@ -14,13 +14,13 @@ public class BackupListeners {
 	private final List<OnRegisterDeviceListener> registerDeviceListeners = new ArrayList<>();
 
 	public interface OnDeleteFilesListener {
-		void onFilesDeleteStarted(@NonNull List<RemoteFile> files);
+		default void onFilesDeleteStarted(@NonNull List<RemoteFile> files) { }
 
-		void onFileDeleteProgress(@NonNull RemoteFile file, int progress);
+		default void onFileDeleteProgress(@NonNull RemoteFile file, int progress) { }
 
-		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
+		default void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors) { }
 
-		void onFilesDeleteError(int status, @NonNull String message);
+		default void onFilesDeleteError(int status, @NonNull String message) { }
 	}
 
 	public interface OnRegisterUserListener {
