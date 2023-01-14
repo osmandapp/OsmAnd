@@ -4978,7 +4978,7 @@
     <string name="mtb_imba_full">Asociación Internacional de Ciclismo de Montaña</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_segment_classification">Segmentación</string>
-    <string name="mtb_scale">Báscula BTT</string>
+    <string name="mtb_scale">Escala de MTB</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de las nubes</string>
     <string name="release_4_4_pre">- Aquí estarán las cadenas para la versión 4.4</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas del viento</string>
