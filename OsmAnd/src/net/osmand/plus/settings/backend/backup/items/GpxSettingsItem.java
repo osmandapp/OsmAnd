@@ -5,24 +5,29 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class GpxSettingsItem extends FileSettingsItem {
 
@@ -150,5 +155,24 @@ public class GpxSettingsItem extends FileSettingsItem {
 		if (fileName.contains(name) && !fileName.contains(subtypeFolder)) {
 			this.file = new File(app.getAppPath(subtypeFolder), fileName);
 		}
+	}
+
+	@Nullable
+	@Override
+	public SettingsItemReader<? extends SettingsItem> getReader() {
+		return new FileSettingsItemReader(this) {
+			@Override
+			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
+				super.readFromStream(inputStream, inputFile, entryName);
+				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
+				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
+				if (selectedGpxFile != null) {
+					GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+					GpxSelectionParams params = GpxSelectionParams.newInstance()
+							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
+					gpxHelper.selectGpxFile(gpxFile, params);
+				}
+			}
+		};
 	}
 }
