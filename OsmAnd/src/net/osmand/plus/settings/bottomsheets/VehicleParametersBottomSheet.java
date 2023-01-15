@@ -46,7 +46,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
-	private static final float MIN_TRUCK_WEIGHT = 3.4f;
+	private static final float MIN_TRUCK_WEIGHT = 3.5f;
 
 	private String selectedItem;
 	private float currentValue;
@@ -103,8 +103,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			}
 		});
 
-		boolean isTruckMode = app.getRoutingHelper().getAppMode().getStringKey().equals(ApplicationMode.TRUCK.getStringKey());
-		boolean isWeightParameter = vehicleSizeAssets != null && vehicleSizeAssets.equals(VehicleSizeAssets.WEIGHT);
+		boolean isTruckMode = getAppMode().isDerivedRoutingFrom(ApplicationMode.TRUCK);
+		boolean isWeightParameter = vehicleSizeAssets == VehicleSizeAssets.WEIGHT;
 
 		text.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -127,9 +127,9 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 					currentValue = 0.0f;
 				}
 				if (isTruckMode && isWeightParameter &&
-					currentValue <= MIN_TRUCK_WEIGHT && currentValue != 0f) {
+						currentValue <= MIN_TRUCK_WEIGHT - 0.02f && currentValue > 0f) {
 					updateApplyButton(false);
-					text.setError(getString(R.string.weight_limit_error));
+					text.setError(getString(R.string.weight_limit_error, String.format(Locale.US, "%.1f", MIN_TRUCK_WEIGHT), getString(ApplicationMode.CAR.getNameKeyResource())));
 				} else {
 					updateApplyButton(true);
 					selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
