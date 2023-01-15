@@ -5092,4 +5092,6 @@
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="si_nm_mt">ميل بحري/متر</string>
     <string name="set_up_backup">إنشاء نسخة احتياطية</string>
+    <string name="x_axis">محور-س</string>
+    <string name="y_axis">محور-ص</string>
 </resources>
