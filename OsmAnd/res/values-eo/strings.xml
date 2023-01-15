@@ -4228,10 +4228,10 @@
     <string name="backup_version_history_removed">Forigis ĉiujn historion de versioj.</string>
     <string name="backup_data_removed">Forigis ĉiujn datumojn.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Vi ankoraŭ havas neniun sekurkopion.</string>
-    <string name="backup_dont_have_any_descr">Plani aŭtomatajn sekurkopiojn por eviti perdi datumojn.</string>
+    <string name="backup_do_not_have_any">Vi ankoraŭ havas neniun sekurkopion</string>
+    <string name="backup_dont_have_any_descr">Agordi aŭtomatajn sekurkopiojn por ne klopodi pri perdi datumojn.</string>
     <string name="backup_welcome_back">Bonvenon ree!</string>
-    <string name="backup_welcome_back_descr">Restarigi datumojn al tiu ĉi aparato uzante ekzistajn sekurkopiojn aŭ fari sekurkopion al OsmAnd-Nubo.</string>
+    <string name="backup_welcome_back_descr">Restarigi datumojn al tiu ĉi aparato uzante OsmAnd-Nubon.</string>
     <string name="backup_setup">Agordi sekurkopion</string>
     <string name="backup_restore_now">Restarigi nun</string>
     <string name="attribute">Atributo</string>
@@ -5012,4 +5012,6 @@
     <string name="shared_string_purchased_on">Aĉetita je</string>
     <string name="set_up_backup">Agordi sekurkopion</string>
     <string name="cloud_all_changes_uploaded">Alŝutis ĉiujn ŝanĝojn</string>
+    <string name="y_axis">Akso Y</string>
+    <string name="x_axis">Akso X</string>
 </resources>
