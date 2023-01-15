@@ -43,7 +43,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -58,6 +57,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
@@ -68,6 +68,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -534,20 +536,20 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	private void shareLink(OsmandApplication app) {
+	private void shareLink(@NonNull OsmandApplication app) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.setType("text/plain");
-			sendIntent.putExtra(Intent.EXTRA_TEXT, app.getRoutingHelper().generateUrl());
+			sendIntent.putExtra(Intent.EXTRA_TEXT, IntentHelper.generateRouteUrl(app));
 			Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
 
 			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
 		}
 	}
 
-	private void shareFile(OsmandApplication app) {
+	private void shareFile(@NonNull OsmandApplication app) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
@@ -559,24 +561,29 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				dir.mkdir();
 			}
 			File dst = new File(dir, "route.gpx");
-			try {
-				FileWriter fw = new FileWriter(dst);
-				GPXUtilities.writeGpx(fw, gpx, null);
-				fw.close();
-				Intent sendIntent = new Intent();
-				sendIntent.setAction(Intent.ACTION_SEND);
-				sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-						routingHelper.getGeneralRouteInformation(), routingHelper.generateUrl()).toString()));
-				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-				sendIntent.setType("text/plain");
-				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
 
-				AndroidUtils.startActivityIfSafe(activity, chooserIntent);
-			} catch (IOException e) {
-			}
+			new SaveGpxAsyncTask(dst, gpx, new SaveGpxListener() {
+				@Override
+				public void gpxSavingStarted() {}
+
+				@Override
+				public void gpxSavingFinished(Exception errorMessage) {
+					if (errorMessage == null) {
+						Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND);
+						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
+								routingHelper.getGeneralRouteInformation(), IntentHelper.generateRouteUrl(app)).toString()));
+						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
+						sendIntent.setType("text/plain");
+						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+
+						AndroidUtils.startActivityIfSafe(activity, chooserIntent);
+					}
+				}
+			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

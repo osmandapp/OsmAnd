@@ -1,8 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.utils.OsmAndFormatter.getUrlFormattedCoordinate;
-
-import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -53,12 +50,6 @@ public class RoutingHelper {
 	// 3) calculate max allowed deviation before route recalculation * multiplier
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
-	private static final String URL_SCHEME = "https";
-	private static final String URL_AUTHORITY = "osmand.net";
-	private static final String URL_PATH = "map";
-	private static final String URL_PARAMETER_START = "start";
-	private static final String URL_PARAMETER_END = "end";
-	private static final String URL_PARAMETER_MODE = "mode";
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -921,28 +912,5 @@ public class RoutingHelper {
 		if (route.isCalculated()) {
 			voiceRouter.newRouteIsCalculated(true);
 		}
-	}
-
-	public String generateUrl() {
-		LatLon startPoint = settings.getPointToStart();
-		LatLon endPoint = settings.getPointToNavigate();
-		Uri.Builder builder = new Uri.Builder();
-		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
-		builder.scheme(URL_SCHEME)
-				.authority(URL_AUTHORITY)
-				.appendPath(URL_PATH);
-
-		if (startPoint != null) {
-			String startPointCoordinates = getUrlFormattedCoordinate(startPoint.getLatitude()) + "," + getUrlFormattedCoordinate(startPoint.getLongitude());
-			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
-		}
-		if (endPoint != null) {
-			String endPointCoordinates = getUrlFormattedCoordinate(endPoint.getLatitude()) + "," + getUrlFormattedCoordinate(endPoint.getLongitude());
-			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
-		}
-		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
-				.encodedFragment(mapTileView.getZoom() + "/" + getUrlFormattedCoordinate(mapTileView.getLatitude()) + "/" + getUrlFormattedCoordinate(mapTileView.getLongitude()));
-
-		return builder.build().toString();
 	}
 }
