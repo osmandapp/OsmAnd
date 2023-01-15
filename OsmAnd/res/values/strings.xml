@@ -16,6 +16,9 @@
     <string name="si_nm_mt">Nautical miles/meters</string>
     <string name="si_nm_ft">Nautical miles/feet</string>
     <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
+    <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Skip download</string>
+    <string name="determine_location">Allow us to determine your location</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
