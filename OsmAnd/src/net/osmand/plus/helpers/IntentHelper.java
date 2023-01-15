@@ -48,6 +48,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 
@@ -55,6 +56,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,6 +64,13 @@ import java.util.regex.Pattern;
 public class IntentHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(IntentHelper.class);
+
+	private static final String URL_SCHEME = "https";
+	private static final String URL_AUTHORITY = "osmand.net";
+	private static final String URL_PATH = "map";
+	private static final String URL_PARAMETER_START = "start";
+	private static final String URL_PARAMETER_END = "end";
+	private static final String URL_PARAMETER_MODE = "mode";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -577,5 +586,33 @@ public class IntentHelper {
 	private boolean isPathPrefix(@NonNull Uri uri, @NonNull String pathPrefix) {
 		String path = uri.getPath();
 		return path != null && path.startsWith(pathPrefix);
+	}
+
+	public static String generateRouteUrl(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		LatLon startPoint = settings.getPointToStart();
+		LatLon endPoint = settings.getPointToNavigate();
+		Uri.Builder builder = new Uri.Builder();
+		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+		builder.scheme(URL_SCHEME)
+				.authority(URL_AUTHORITY)
+				.appendPath(URL_PATH);
+
+		if (startPoint != null) {
+			String startPointCoordinates = getUrlFormattedCoordinate(startPoint.getLatitude()) + "," + getUrlFormattedCoordinate(startPoint.getLongitude());
+			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
+		}
+		if (endPoint != null) {
+			String endPointCoordinates = getUrlFormattedCoordinate(endPoint.getLatitude()) + "," + getUrlFormattedCoordinate(endPoint.getLongitude());
+			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
+		}
+		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
+				.encodedFragment(mapTileView.getZoom() + "/" + getUrlFormattedCoordinate(mapTileView.getLatitude()) + "/" + getUrlFormattedCoordinate(mapTileView.getLongitude()));
+
+		return builder.build().toString();
+	}
+
+	public static String getUrlFormattedCoordinate(double coordinate) {
+		return String.format(Locale.US, "%.6f", coordinate);
 	}
 }

@@ -43,7 +43,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -58,6 +57,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
@@ -68,6 +68,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -77,6 +79,8 @@ import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
@@ -503,34 +507,20 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		shareRoute.setImageDrawable(shareIcon);
 		shareRouteFlow.setImageDrawable(shareIcon);
 		OnClickListener shareOnClick = v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-				GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-				Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
-				File dir = new File(app.getCacheDir(), "share");
-				if (!dir.exists()) {
-					dir.mkdir();
-				}
-				File dst = new File(dir, "route.gpx");
-				try {
-					FileWriter fw = new FileWriter(dst);
-					GPXUtilities.writeGpx(fw, gpx, null);
-					fw.close();
-					Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-							routingHelper.getGeneralRouteInformation()).toString()));
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					AndroidUtils.startActivityIfSafe(activity, sendIntent);
-				} catch (IOException e) {
-				}
-			}
+			List<PopUpMenuItem> items = new ArrayList<>();
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(getString(R.string.share_as_file))
+					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_file_routing, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setOnClickListener(_view -> shareFile(app))
+					.create());
+
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(getString(R.string.share_link))
+					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_external_link, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setOnClickListener(_view -> shareLink(app))
+					.create());
+
+			new PopUpMenuHelper.Builder(v, items, nightMode).show();
 		};
 		shareRoute.setOnClickListener(shareOnClick);
 		shareRouteFlow.setOnClickListener(shareOnClick);
@@ -543,6 +533,57 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (publicTransportMode || !portrait || !featureEnabled) {
 			view.findViewById(R.id.toolbar_options_flow).setVisibility(View.GONE);
 			view.findViewById(R.id.toolbar_options_flow_bg).setVisibility(View.GONE);
+		}
+	}
+
+	private void shareLink(@NonNull OsmandApplication app) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent sendIntent = new Intent();
+			sendIntent.setAction(Intent.ACTION_SEND);
+			sendIntent.setType("text/plain");
+			sendIntent.putExtra(Intent.EXTRA_TEXT, IntentHelper.generateRouteUrl(app));
+			Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+
+			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
+		}
+	}
+
+	private void shareFile(@NonNull OsmandApplication app) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+			GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+			File dir = new File(app.getCacheDir(), "share");
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			File dst = new File(dir, "route.gpx");
+
+			new SaveGpxAsyncTask(dst, gpx, new SaveGpxListener() {
+				@Override
+				public void gpxSavingStarted() {}
+
+				@Override
+				public void gpxSavingFinished(Exception errorMessage) {
+					if (errorMessage == null) {
+						Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND);
+						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
+								routingHelper.getGeneralRouteInformation(), IntentHelper.generateRouteUrl(app)).toString()));
+						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
+						sendIntent.setType("text/plain");
+						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+
+						AndroidUtils.startActivityIfSafe(activity, chooserIntent);
+					}
+				}
+			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
@@ -591,7 +632,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return file;
 	}
 
-	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title) {
+	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title, String url) {
 		StringBuilder html = new StringBuilder();
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
@@ -599,6 +640,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 		if (!TextUtils.isEmpty(title)) {
 			html.append("<h1>");
+			html.append(url);
+			html.append("<br>");
+			html.append("<br>");
 			html.append(title);
 			html.append("</h1>");
 		}

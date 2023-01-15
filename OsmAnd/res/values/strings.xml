@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="share_link">Share link</string>
+    <string name="share_as_file">Share as file</string>
     <string name="y_axis">Y-Axis</string>
     <string name="x_axis">X-Axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
