@@ -36,7 +36,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -87,7 +87,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		mainView = themedInflater.inflate(R.layout.plugin, container, false);
-		AndroidUtils.addStatusBarPadding21v(context, mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(plugin.getName());

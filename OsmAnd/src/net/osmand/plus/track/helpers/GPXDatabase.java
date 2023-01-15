@@ -3,9 +3,9 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -242,17 +242,21 @@ public class GPXDatabase {
 			this.analysis = analysis;
 		}
 
-		public GpxDataItem(File file, int color) {
+		public GpxDataItem(@NonNull File file) {
+			this.file = file;
+		}
+
+		public GpxDataItem(@NonNull File file, int color) {
 			this.file = file;
 			this.color = color;
 		}
 
-		public GpxDataItem(File file, long fileLastUploadedTime) {
+		public GpxDataItem(@NonNull File file, long fileLastUploadedTime) {
 			this.file = file;
 			this.fileLastUploadedTime = fileLastUploadedTime;
 		}
 
-		public GpxDataItem(File file, @NonNull GPXFile gpxFile) {
+		public GpxDataItem(@NonNull File file, @NonNull GPXFile gpxFile) {
 			this.file = file;
 			readGpxParams(gpxFile);
 		}

@@ -702,7 +702,7 @@ public class UiUtilities {
 			case SECONDARY:
 				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
-				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
+				textAndIconColorResId = ColorUtilities.getButtonSecondaryTextColorId(nightMode);
 				break;
 			case SECONDARY_HARMFUL:
 				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
@@ -712,12 +712,12 @@ public class UiUtilities {
 			case SECONDARY_ACTIVE:
 				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
-				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
+				textAndIconColorResId = ColorUtilities.getButtonSecondaryTextColorId(nightMode);
 				break;
 			case STROKED:
 				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
-				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
+				textAndIconColorResId = ColorUtilities.getButtonSecondaryTextColorId(nightMode);
 				break;
 		}
 		if (textAndIconColorResId != INVALID_ID) {

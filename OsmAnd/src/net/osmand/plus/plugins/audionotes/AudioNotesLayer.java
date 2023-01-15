@@ -168,8 +168,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearAudioVideoNotes();
 	}
 

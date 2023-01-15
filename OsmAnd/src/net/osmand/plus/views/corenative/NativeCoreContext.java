@@ -51,15 +51,24 @@ public class NativeCoreContext {
 				mgr.getDefaultDisplay().getMetrics(dm);
 
 				ObfsCollection obfsCollection = new ObfsCollection();
+				obfsCollection.setIndexCacheFile(app.getCacheDir().getAbsolutePath() + "/ind_core.cache");
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), false);
 				obfsCollection.addDirectory(app.getAppPath(IndexConstants.LIVE_INDEX_DIR).getAbsolutePath(), false);
 
-				if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseHelper.isDepthContoursPurchased(app)) {
-					obfsCollection.addDirectory(app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR).getAbsolutePath(), false);
+				if (PluginsHelper.isActive(NauticalMapsPlugin.class) ||	InAppPurchaseHelper.isDepthContoursPurchased(app)) {
+					File nauticalIndexDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
+					if (!nauticalIndexDir.exists()) {
+						nauticalIndexDir.mkdir();
+					}			
+					obfsCollection.addDirectory(nauticalIndexDir.getAbsolutePath(), false);
 				}
-				if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app)) {
-					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
+				if (PluginsHelper.isActive(SRTMPlugin.class) ||	InAppPurchaseHelper.isContourLinesPurchased(app)) {
+					File srtmIndexDir = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+					if (!srtmIndexDir.exists()) {
+						srtmIndexDir.mkdir();
+					}			
+					obfsCollection.addDirectory(srtmIndexDir.getAbsolutePath(), false);
 				}
 
 				mapRendererContext = new MapRendererContext(app, dm.density);

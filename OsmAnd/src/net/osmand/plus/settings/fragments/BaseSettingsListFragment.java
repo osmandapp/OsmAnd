@@ -96,7 +96,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, root);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		selectedItemsSize = root.findViewById(R.id.file_size);
 		itemsSizeContainer = root.findViewById(R.id.file_size_container);

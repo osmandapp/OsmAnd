@@ -112,7 +112,8 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	public void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
+	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
+	                               List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
 		path.reset();
 		GeometryMultiProfileWayStyle prevStyle = null;
 		for (int i = 0; i < styles.size(); i++) {

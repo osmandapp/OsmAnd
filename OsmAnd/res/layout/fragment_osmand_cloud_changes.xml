@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_basic"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/appbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/actionModeBackground">
+
+			<include layout="@layout/global_preference_toolbar" />
+
+			<net.osmand.plus.views.controls.PagerSlidingTabStrip
+				android:id="@+id/sliding_tabs"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height" />
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<androidx.viewpager.widget.ViewPager
+			android:id="@+id/pager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="@dimen/bottom_sheet_title_height" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/buttons_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/bottom_sheet_top_shadow_height"
+			android:layout_gravity="bottom"
+			android:src="@drawable/shadow" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:minHeight="@dimen/bottom_sheet_title_height"
+			android:orientation="horizontal">
+
+			<include
+				android:id="@+id/cancel_button"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="center_vertical"
+				android:layout_margin="@dimen/content_padding_half" />
+
+			<View
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1" />
+
+			<include
+				android:id="@+id/action_button"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="center_vertical"
+				android:layout_margin="@dimen/content_padding_half" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

@@ -285,7 +285,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 
 		if (isSingleFragment()) {
-			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);

@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,6 +24,7 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +110,11 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	}
 
 	@Override
+	protected void deleteItem(MapMarker item) {
+		markersHelper.removeMarker(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull MapMarker mapMarker) {
 		for (MapMarker marker : existingItems) {
 			if (marker.equals(mapMarker)
@@ -157,7 +163,8 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 		return new SettingsItemReader<MarkersSettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			                           @Nullable String entryName) throws IllegalArgumentException {
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));

@@ -68,7 +68,7 @@
     <string name="bearing">Direkto</string>
     <string name="proxy_settings">Agordoj pri la Retperanto</string>
     <string name="proxy_type">Tipo de retperanto</string>
-    <string name="units_and_formats">Mezurunuoj &amp; formoj</string>
+    <string name="units_and_formats">Mezurunuoj kaj formoj</string>
     <string name="shared_string_export">Elporti</string>
     <string name="points_size">%1$d punktoj</string>
     <string name="shared_string_appearance">Aspekto</string>

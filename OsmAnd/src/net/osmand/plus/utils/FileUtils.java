@@ -235,22 +235,23 @@ public class FileUtils {
 		return new File(folder, fileName);
 	}
 
-	public static void removeFilesWithExtension(@NonNull File folder, @NonNull String ... extensions) {
-		File[] files = folder.listFiles();
+	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String ... extensions) {
+		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
+				? withSubdirs : Algorithms.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {
 			return;
 		}
 		for (File file : files) {
-			String fileName = file.getName();
 			if (file.isDirectory()) {
-				removeFilesWithExtension(file, extensions);
-			} else if (Algorithms.endsWithAny(fileName, extensions)) {
+				if (withSubdirs) {
+					removeFilesWithExtensions(file, true, extensions);
+				}
+			} else {
 				file.delete();
 			}
 		}
 	}
 
-	@NonNull
 	public static boolean replaceTargetFile(@NonNull File sourceFile, @NonNull File targetFile) {
 		return replaceTargetFile(null, sourceFile, targetFile);
 	}

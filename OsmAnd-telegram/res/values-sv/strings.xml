@@ -10,7 +10,7 @@
     <string name="shared_string_hour_short">t</string>
     <string name="si_mi_meters">Miles/meter</string>
     <string name="si_nm">Distansminuter</string>
-    <string name="si_km_m">Kilomter/meter</string>
+    <string name="si_km_m">Kilometer/meter</string>
     <string name="si_mi_yard">Miles/yard</string>
     <string name="si_mi_feet">Miles/fot</string>
     <string name="si_nm_h">Sjömil per timme (knop)</string>
@@ -252,7 +252,7 @@
     <string name="saved_messages">Sparade meddelanden</string>
     <string name="unit_of_speed_system">Enhet för hastighet</string>
     <string name="unit_of_speed_system_descr">Definera enhet för hastighet.</string>
-    <string name="unit_of_length">Enhet för längd</string>
+    <string name="unit_of_length">Längdenhet</string>
     <string name="unit_of_length_descr">Ändra vad avstånd mäts i.</string>
     <string name="units_and_formats">Enheter &amp; format</string>
     <string name="time_zone">Tidszon</string>

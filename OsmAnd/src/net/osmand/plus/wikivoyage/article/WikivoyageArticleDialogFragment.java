@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

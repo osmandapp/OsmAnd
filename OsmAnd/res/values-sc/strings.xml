@@ -815,11 +815,11 @@
     <string name="rotate_map_bearing_opt">Diretzione de sa mòvida</string>
     <string name="show_view_angle">Ammustra diretzione de osservatzione de abbistadura</string>
     <string name="choose_auto_follow_route">Tzentra automaticamente sa mapa</string>
-    <string name="choose_auto_follow_route_descr">Issèbera s’intervallu de tempus pro sa sincronizatzione de sa bisura de sa mapa cun sa positzione atuale.</string>
+    <string name="choose_auto_follow_route_descr">Issèbera s’intervallu de tempus pro sa sincronizatzione de sa vista de sa mapa cun sa positzione atuale.</string>
     <string name="keep_informing_descr">Torra ad annuntziare sas indicatziones de navigatzione a intervallos regulares.</string>
     <string name="auto_follow_route_navigation">Tzentra automaticamente petzi durante sa navigatzione</string>
     <string name="auto_follow_route_navigation_descr">Tzentra automaticamente sa vista de sa mapa petzi durante sa navigatzione.</string>
-    <string name="auto_follow_location_enabled">Bisura de sa mapa tzentrada automaticamente.</string>
+    <string name="auto_follow_location_enabled">Vista de sa mapa tzentrada in automàticu.</string>
     <string name="pref_vector_rendering">Optziones dislindadas pro su disinnu vetoriale</string>
     <string name="pref_overlay">Subrapositzione / isfundu</string>
     <string name="delete_confirmation_msg">Iscantzellare %1$s?</string>
@@ -1199,8 +1199,8 @@
     <string name="choose_street">Issèbera sa carrera</string>
     <string name="choose_city">Issèbera sa tzitade o su cap</string>
     <string name="ChooseCountry">Issèbera s’istadu</string>
-    <string name="map_view_3d_descr">Abìlita sa bisura 3D de sa mapa.</string>
-    <string name="map_view_3d">Bisura mapa 3D</string>
+    <string name="map_view_3d_descr">Abìlita sa vista 3D de sa mapa.</string>
+    <string name="map_view_3d">Vista mapa 3D</string>
     <string name="show_poi_over_map_description">Ammustra s\'ùrtimu istratu superiore de sos PDI impreadu.</string>
     <string name="show_poi_over_map">Ammustra s\'istratu de sos PDI</string>
     <string name="map_tile_source_descr">Issèbera sa mitza pro sos tasseddos in lìnia o in sa memòria temporànea (cache).</string>
@@ -4981,4 +4981,14 @@
     <string name="open_weather_action_description">Ti permitit de abèrrere un\'ischermada cun informatziones meteorològicas a sa minuda.</string>
     <string name="shared_string_open">Aberi</string>
     <string name="open_weather_action">Aberi su mèteu</string>
+    <string name="choose_what_to_sync">Issèbera ite sincronizare</string>
+    <string name="checking_progress">Verifichende…</string>
+    <string name="shared_string_modified">Modificadu</string>
+    <string name="res_unknown">Disconnotu</string>
+    <string name="shared_string_unsynced">Non sincronizadu</string>
+    <string name="cloud_sync_progress">Sincronizende…%1$s</string>
+    <string name="set_up_backup">Imposta sa còpia de seguresa</string>
+    <string name="si_nm_mt">Mìllios nàuticos/metros</string>
+    <string name="si_nm_ft">Mìllios nàuticos/pees</string>
+    <string name="av_audio_format_bottom_sheet_descr">Seletziona su formadu de essida de s\'àudio. Su formadu de sa casta de documentu pro s\'àudio est 3GPP (.3gp).</string>
 </resources>

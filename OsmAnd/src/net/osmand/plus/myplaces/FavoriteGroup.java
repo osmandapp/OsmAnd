@@ -6,8 +6,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.PointsGroup;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
@@ -108,8 +108,6 @@ public class FavoriteGroup {
 		return getDisplayName(ctx, name);
 	}
 
-
-
 	public static String getDisplayName(@NonNull Context ctx, String name) {
 		if (isPersonal(name)) {
 			return ctx.getString(R.string.personal_category_name);
@@ -129,7 +127,7 @@ public class FavoriteGroup {
 			return false;
 		}
 		FavoriteGroup that = (FavoriteGroup) o;
-		return color == that.color && visible == that.visible && Algorithms.stringsEqual(name, that.name)
+		return color == that.color && Algorithms.stringsEqual(name, that.name)
 				&& Algorithms.stringsEqual(iconName, that.iconName) && backgroundType == that.backgroundType
 				&& points.equals(that.points);
 	}
@@ -159,6 +157,7 @@ public class FavoriteGroup {
 
 	public PointsGroup toPointsGroup(@NonNull Context ctx) {
 		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor());
+		List<FavouritePoint> points = new ArrayList<>(this.points);
 		for (FavouritePoint point : points) {
 			pointsGroup.points.add(point.toWpt(ctx));
 		}

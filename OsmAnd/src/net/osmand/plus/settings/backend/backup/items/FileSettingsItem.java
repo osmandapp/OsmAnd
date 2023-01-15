@@ -159,12 +159,13 @@ public class FileSettingsItem extends StreamSettingsItem {
 	private long size;
 
 	public FileSettingsItem(@NonNull OsmandApplication app, @NonNull File file) throws IllegalArgumentException {
-		super(app, file.getPath().replace(app.getAppPath(null).getPath(), ""));
+		super(app, file.getPath().replace(app.getAppPath(null).getPath() + File.separator, ""));
 		this.file = file;
 		this.appPath = app.getAppPath(null);
 		String fileName = getFileName();
 		if (fileName != null) {
 			this.subtype = FileSubtype.getSubtypeByFileName(fileName);
+			this.name = Algorithms.getFileWithoutDirs(fileName);
 		}
 		if (subtype == FileSubtype.UNKNOWN || subtype == null) {
 			throw new IllegalArgumentException("Unknown file subtype: " + fileName);
@@ -362,6 +363,12 @@ public class FileSettingsItem extends StreamSettingsItem {
 				return newFile;
 			}
 		}
+	}
+
+	@Override
+	public void delete() {
+		super.delete();
+		// TODO: delete settings item
 	}
 
 	@Nullable

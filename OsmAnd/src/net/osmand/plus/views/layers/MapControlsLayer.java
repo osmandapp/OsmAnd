@@ -74,7 +74,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

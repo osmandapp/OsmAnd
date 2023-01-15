@@ -1,6 +1,6 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.GPXUtilities.calculateTrackBounds;
+import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
@@ -28,10 +28,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
@@ -360,13 +360,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		this.trackMarkersChangedTime = trackMarkersChangedTime;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged;
+			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
 			}
 			drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			drawSelectedFilesSplitsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate);
 			drawSelectedFilesPointsOpenGl(mapRenderer, tileBox, visibleGPXFiles, forceUpdate || trackMarkersChanged);
+			mapRendererChanged = false;
 		} else {
 			if (!visibleGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, visibleGPXFiles, settings);
@@ -632,7 +633,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean updateBitmaps() {
 		if (hasMapRenderer()) {
 			float textScale = getTextScale();
-			if (this.textScale != textScale || startPointImage == null) {
+			if (this.textScale != textScale || startPointImage == null || mapRendererChanged) {
 				this.textScale = textScale;
 				recreateBitmaps();
 				return true;
@@ -1748,9 +1749,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				gpxFile.updateWptPt(objectInMotion, position.getLatitude(), position.getLongitude(),
-						objectInMotion.desc, objectInMotion.name, objectInMotion.category,
-						objectInMotion.getColor(), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				WptPt wptInfo = new WptPt(position.getLatitude(), position.getLongitude(), objectInMotion.desc, objectInMotion.name, objectInMotion.category,
+						Algorithms.colorToString(objectInMotion.getColor()), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
+				gpxFile.updateWptPt(objectInMotion, wptInfo);
 				syncGpx(gpxFile);
 				if (gpxFile.showCurrentTrack) {
 					if (callback != null) {
@@ -1779,8 +1780,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearXAxisPoints();
 		clearPoints();
 		clearSelectedFilesSplits();

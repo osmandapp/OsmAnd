@@ -2,8 +2,6 @@ package net.osmand.data;
 
 import android.content.Context;
 
-import net.osmand.GPXUtilities;
-
 
 /**
  */

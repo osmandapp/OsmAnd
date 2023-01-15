@@ -8,8 +8,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -136,7 +136,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
 			List<WptPt> points = selectedGpxFile.getGpxFile().getPoints();
-			GPXUtilities.GPXFile gpx = selectedGpxFile.getGpxFile();
+			GPXFile gpx = selectedGpxFile.getGpxFile();
 			if (points.size() > 0) {
 				String title = view.getContext().getString(R.string.context_menu_points_of_group);
 				File file = new File(gpx.path);
@@ -168,7 +168,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		return visit;
 	}
 
-	private CollapsableView getCollapsableWaypointsView(Context context, boolean collapsed, @NonNull GPXUtilities.GPXFile gpxFile, WptPt selectedPoint) {
+	private CollapsableView getCollapsableWaypointsView(Context context, boolean collapsed, @NonNull GPXFile gpxFile, WptPt selectedPoint) {
 		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();

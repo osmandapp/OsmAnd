@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -172,7 +172,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 					}
 
 					@Override
-					public void onSaveComplete(boolean success, GPXUtilities.GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile result) {
 
 					}
 				});

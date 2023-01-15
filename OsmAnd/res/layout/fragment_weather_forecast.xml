@@ -85,7 +85,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/list_header_height">
+			android:layout_marginBottom="@dimen/content_padding_small_half">
 
 			<include
 				layout="@layout/map_ruler"

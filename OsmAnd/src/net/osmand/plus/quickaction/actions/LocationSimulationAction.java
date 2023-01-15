@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
@@ -61,7 +61,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 				if (!Algorithms.isEmpty(routes)) {
 					return routes.values().iterator().next();
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e);
 			}
 		}

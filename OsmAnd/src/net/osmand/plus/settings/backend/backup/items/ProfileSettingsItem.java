@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -197,6 +198,12 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			appMode = ApplicationMode.saveProfile(builder, app);
 		}
 		ApplicationMode.changeProfileAvailability(appMode, true, app);
+	}
+
+	@Override
+	public void delete() {
+		super.delete();
+		ApplicationMode.deleteCustomModes(Collections.singletonList(appMode), app);
 	}
 
 	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {

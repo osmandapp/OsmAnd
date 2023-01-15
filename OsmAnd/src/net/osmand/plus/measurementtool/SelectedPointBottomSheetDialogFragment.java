@@ -10,7 +10,7 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

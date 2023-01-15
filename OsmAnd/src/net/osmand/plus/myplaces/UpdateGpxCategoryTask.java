@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsGroup;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -87,8 +87,9 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 			app.getSavingTrackHelper().updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
 					wpt.desc, wpt.name, category, color, iconName, backgroundType);
 		} else {
-			gpxFile.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name,
-					category, color, iconName, backgroundType);
+			WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), wpt.desc, wpt.name, category,
+					Algorithms.colorToString(color), iconName, backgroundType);
+			gpxFile.updateWptPt(wpt, wptInfo);
 		}
 	}
 

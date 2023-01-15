@@ -284,7 +284,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 						});
 			}
 		});
-		AndroidUtils.addStatusBarPadding21v(app, root);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 		return root;
 	}
 

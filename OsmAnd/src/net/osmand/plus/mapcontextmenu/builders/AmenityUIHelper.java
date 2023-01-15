@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.GPXUtilities.ADDRESS_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.GPXUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.GPXUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 
@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
@@ -369,7 +369,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					float distance = Float.parseFloat(vl);
 					vl = OsmAndFormatter.getFormattedAlt(distance, app, metricSystem);
 					String collapsibleVal;
-					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.MILES_AND_YARDS || metricSystem ==  MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.KILOMETERS_AND_METERS);
 					} else {
 						collapsibleVal = OsmAndFormatter.getFormattedAlt(distance, app, MetricsConstants.MILES_AND_FEET);
@@ -622,7 +622,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			case "seamark_height":
 				if (Algorithms.isFloat(value)) {
 					double valueAsDouble = Double.valueOf(value);
-					if (metricSystem == MetricsConstants.MILES_AND_FEET) {
+					if (metricSystem == MetricsConstants.MILES_AND_FEET || metricSystem == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 						formattedValue = DISTANCE_FORMAT.format(valueAsDouble * OsmAndFormatter.FEET_IN_ONE_METER)
 								+ " " + mapActivity.getResources().getString(R.string.foot);
 					} else if (metricSystem == MetricsConstants.MILES_AND_YARDS) {
@@ -876,6 +876,134 @@ public class AmenityUIHelper extends MenuBuilder {
 		rowBuilt();
 
 		setDividerWidth(matchWidthDivider);
+	}
+
+	public void buildNamesRow(@NonNull View view, @Nullable Drawable icon, String text, String textPrefix,
+	                          @Nullable CollapsableView collapsableView, boolean parentRow) {
+		if (!isFirstRow() && !parentRow) {
+			View horizontalLine = new View(view.getContext());
+			horizontalLine.setTag(DIVIDER_ROW_KEY);
+			LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+			llHorLineParams.gravity = Gravity.BOTTOM;
+			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
+
+			horizontalLine.setLayoutParams(llHorLineParams);
+			horizontalLine.setBackgroundColor(getColor(light ? R.color.ctx_menu_bottom_view_divider_light : R.color.ctx_menu_bottom_view_divider_dark));
+			((LinearLayout) view).addView(horizontalLine);
+		}
+		boolean collapsable = collapsableView != null;
+
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+
+		LinearLayout ll = new LinearLayout(view.getContext());
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(v -> {
+			copyToClipboard(text, view.getContext());
+			return true;
+		});
+
+		baseView.addView(ll);
+
+		if (icon != null) {
+			LinearLayout llIcon = new LinearLayout(view.getContext());
+			llIcon.setOrientation(LinearLayout.HORIZONTAL);
+			llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(64f), dpToPx(48f)));
+			llIcon.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIcon);
+
+			ImageView iconView = new ImageView(view.getContext());
+			LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			AndroidUtils.setMargins(llIconParams, dpToPx(16f), dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconParams.gravity = Gravity.CENTER_VERTICAL;
+			iconView.setLayoutParams(llIconParams);
+			iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconView.setImageDrawable(icon);
+			llIcon.addView(iconView);
+		}
+
+		LinearLayout llText = new LinearLayout(view.getContext());
+		llText.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(llText);
+
+		TextView textPrefixView = null;
+		if (!Algorithms.isEmpty(textPrefix)) {
+			textPrefixView = new TextView(view.getContext());
+			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			int topMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
+			AndroidUtils.setMargins(llTextParams, topMargin, dpToPx(8f), 0, 0);
+			textPrefixView.setLayoutParams(llTextParams);
+			textPrefixView.setTextSize(12);
+			textPrefixView.setTextColor(getColor(R.color.ctx_menu_buttons_text_color));
+			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
+			textPrefixView.setMinLines(1);
+			textPrefixView.setMaxLines(1);
+			textPrefixView.setText(textPrefix);
+		}
+
+		TextView textView = new TextView(view.getContext());
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		int topMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
+		AndroidUtils.setMargins(llTextParams, topMargin,
+				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
+		textView.setLayoutParams(llTextParams);
+		textView.setTextSize(16);
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
+		textView.setText(text);
+		textView.setEllipsize(TextUtils.TruncateAt.END);
+		textView.setMinLines(1);
+		textView.setMaxLines(10);
+
+		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextViewParams.weight = 1f;
+		AndroidUtils.setMargins(llTextViewParams, 0, 0, dpToPx(10f), 0);
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llText.setLayoutParams(llTextViewParams);
+		if (textPrefixView != null) {
+			llText.addView(textPrefixView);
+		}
+		llText.addView(textView);
+
+		ImageView iconViewCollapse = new ImageView(view.getContext());
+		if (collapsableView != null) {
+			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
+			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), ViewGroup.LayoutParams.MATCH_PARENT));
+			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
+			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIconCollapse);
+
+			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			AndroidUtils.setMargins(llIconCollapseParams, 0, dpToPx(12f), dpToPx(24f), dpToPx(12f));
+			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
+			iconViewCollapse.setLayoutParams(llIconCollapseParams);
+			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
+			llIconCollapse.addView(iconViewCollapse);
+			ll.setOnClickListener(v -> {
+				if (collapsableView.getContentView().getVisibility() == View.VISIBLE) {
+					collapsableView.getContentView().setVisibility(View.GONE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+					collapsableView.setCollapsed(true);
+				} else {
+					collapsableView.getContentView().setVisibility(View.VISIBLE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+					collapsableView.setCollapsed(false);
+				}
+			});
+			if (collapsableView.isCollapsed()) {
+				collapsableView.getContentView().setVisibility(View.GONE);
+				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+			}
+			baseView.addView(collapsableView.getContentView());
+		}
+
+		((LinearLayout) view).addView(baseView);
+		rowBuilt();
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {

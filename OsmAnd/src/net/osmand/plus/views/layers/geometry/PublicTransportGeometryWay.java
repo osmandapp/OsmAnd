@@ -168,7 +168,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 	}
 
 	@Override
-	public void drawRouteSegment(RotatedTileBox tb, Canvas canvas, List<Integer> indexes,
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes,
 	                             List<Float> tx, List<Float> ty,
 	                             List<Integer> tx31, List<Integer> ty31,
 								 List<Double> angles, List<Double> distances, double distToFinish,

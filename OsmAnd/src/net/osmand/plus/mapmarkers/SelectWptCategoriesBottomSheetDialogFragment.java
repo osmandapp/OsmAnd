@@ -2,8 +2,8 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

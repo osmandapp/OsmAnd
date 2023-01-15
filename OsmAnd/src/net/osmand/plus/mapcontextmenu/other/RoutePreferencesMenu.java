@@ -18,7 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -361,10 +361,10 @@ public class RoutePreferencesMenu {
 	}
 
 	protected void openGPXFileSelection(TextView gpxSpinner) {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXFile[]>() {
 
 			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
+			public boolean processResult(GPXFile[] result) {
 				mapActivity.getMapActions().setGPXRouteParams(result[0]);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
 				updateSpinnerItems(gpxSpinner);

@@ -3304,8 +3304,8 @@
     <string name="poi_parking_fee_no">nincs</string>
     <string name="poi_parking_fee">Parkolási díj</string>
     <string name="poi_amperage">Áramerősség (A)</string>
-    <string name="poi_charging_station_output">Töltőállomás teljesítménye</string>
-    <string name="poi_charging_station">Töltőállomás</string>
+    <string name="poi_charging_station_output">Töltőpont teljesítménye</string>
+    <string name="poi_charging_station">Töltőpont</string>
     <string name="poi_depot">Járműtároló</string>
     <string name="poi_letter_box">Levélszekrény</string>
     <string name="poi_post_street">Utca</string>

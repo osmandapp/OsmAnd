@@ -33,8 +33,14 @@ public class TargetDistanceWidget extends TextInfoWidget {
 		float targetDistance = getTargetDistanceInMeters();
 		if (isUpdateNeeded() || targetDistance != cachedTargetDistance) {
 			cachedTargetDistance = targetDistance;
-			String text = cachedTargetDistance > 0 ? formatDistance(cachedTargetDistance) : NO_VALUE;
-			setText(text, null);
+			if (cachedTargetDistance > 0) {
+				setText(NO_VALUE, null);
+			} else {
+				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
+				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedTargetDistance,
+						app, false, metricsConstants);
+				setText(formattedDistance.value, formattedDistance.unit);
+			}
 		}
 	}
 

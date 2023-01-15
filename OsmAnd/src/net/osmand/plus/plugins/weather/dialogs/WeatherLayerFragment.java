@@ -84,7 +84,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		TransportLinesFragment.setupButton(
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_umbrella,
-				getString(R.string.shared_string_weather),
+				weatherBand.getMeasurementName(),
 				weatherBand.isBandVisible(),
 				false,
 				v -> {

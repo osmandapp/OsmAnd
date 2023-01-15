@@ -50,8 +50,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static net.osmand.GPXUtilities.GPXFile;
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;

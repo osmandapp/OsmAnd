@@ -11,6 +11,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -121,6 +122,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		setupDatesView(view);
 		setupTimeSlider(view);
 		buildZoomButtons(view);
+		moveCompassButton(view);
 
 		return view;
 	}
@@ -228,6 +230,22 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void moveCompassButton(@NonNull View view) {
+		int btnSizePx = getDimensionPixelSize(R.dimen.map_small_button_size);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
+		int toolbarHeight = getDimensionPixelSize(R.dimen.toolbar_height);
+		int topMargin = getDimensionPixelSize(R.dimen.map_small_button_margin);
+		int startMargin = getDimensionPixelSize(R.dimen.map_button_margin);
+		AndroidUtils.setMargins(params, startMargin,topMargin + toolbarHeight, 0, 0);
+
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			MapLayers mapLayers = activity.getMapLayers();
+			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
+			mapControlsLayer.moveCompassButton((ViewGroup) view, params);
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -265,6 +283,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+			layer.restoreCompassButton();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();

@@ -8,8 +8,8 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.util.Pair;
 
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -21,7 +21,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

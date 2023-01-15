@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
+import static net.osmand.plus.settings.fragments.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.GpxInfo;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;

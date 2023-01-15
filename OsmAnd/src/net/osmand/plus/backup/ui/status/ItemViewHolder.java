@@ -1,147 +1,143 @@
 package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
-import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.SyncBackupTask;
+import net.osmand.plus.backup.ui.ChangeItemActionsBottomSheet;
+import net.osmand.plus.backup.ui.ChangesTabFragment;
+import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+
+import org.apache.commons.logging.Log;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
+	private static final Log log = PlatformUtil.getLog(ItemViewHolder.class);
+
+	private final OsmandApplication app;
+	private final NetworkSettingsHelper settingsHelper;
+
 	private final TextView title;
 	private final TextView description;
-	private final ImageView icon;
-	private final ImageView secondIcon;
 	private final ProgressBar progressBar;
+	private final AppCompatImageView icon;
+	private final AppCompatImageView secondIcon;
 	private final View divider;
+	private final View bottomShadow;
+	private final View selectableView;
+	private final boolean nightMode;
 
-	public ItemViewHolder(@NonNull View itemView) {
+	public ItemViewHolder(@NonNull View itemView, boolean nightMode) {
 		super(itemView);
+		app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		settingsHelper = app.getNetworkSettingsHelper();
+		this.nightMode = nightMode;
+
 		title = itemView.findViewById(R.id.title);
 		icon = itemView.findViewById(R.id.icon);
+		progressBar = itemView.findViewById(R.id.progressBar);
 		secondIcon = itemView.findViewById(R.id.second_icon);
 		description = itemView.findViewById(R.id.description);
-		progressBar = itemView.findViewById(R.id.progressBar);
 		divider = itemView.findViewById(R.id.bottom_divider);
+		bottomShadow = itemView.findViewById(R.id.bottom_shadow);
+		selectableView = itemView.findViewById(R.id.selectable_list_item);
 	}
 
-	public void bindView(SettingsItem item, boolean lastBackupItem, boolean deleteItem) {
-		setupItemView(BACKUP_ITEMS_KEY, item, deleteItem);
-		AndroidUiHelper.updateVisibility(divider, !lastBackupItem);
+	public void bindView(@NonNull CloudChangeItem item, @Nullable ChangesTabFragment fragment, boolean lastItem) {
+		title.setText(item.title);
+		description.setText(item.description);
+
+		if (item.iconId != -1) {
+			icon.setImageDrawable(getContentIcon(item.iconId));
+		}
+		secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
+
+		setupProgress(item);
+		OnClickListener listener = fragment != null ? view -> {
+			FragmentManager manager = fragment.getFragmentManager();
+			if (manager != null) {
+				ChangeItemActionsBottomSheet.showInstance(manager, item, fragment);
+			}
+		} : null;
+		itemView.setOnClickListener(listener);
+		boolean enabled = listener != null && !isSyncing(item);
+		itemView.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground();
+		}
+		AndroidUiHelper.updateVisibility(divider, !lastItem);
+		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 	}
 
-	protected void setupItemView(@NonNull String exportKey, @NonNull SettingsItem item, boolean deleteItem) {
-		OsmandApplication app = getApplication();
-		String publicName = item.getPublicName(app);
-		if (item instanceof FileSettingsItem) {
-			FileSettingsItem settingsItem = (FileSettingsItem) item;
-			if (settingsItem.getSubtype() == FileSubtype.VOICE) {
-				publicName += " (" + app.getString(R.string.shared_string_recorded) + ")";
-			} else if (settingsItem.getSubtype() == FileSubtype.TTS_VOICE) {
-				publicName += " (" + app.getString(R.string.tts_title) + ")";
-			}
-		}
-		title.setText(publicName);
-
-		String fileName = BackupHelper.getItemFileName(item);
-		String summary = app.getString(R.string.last_backup);
-		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
-		if (info != null) {
-			String time = OsmAndFormatter.getFormattedPassedTime(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
-			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
-		} else {
-			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));
-		}
-		icon.setImageDrawable(getItemIcon(item));
-
-		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
-		ImportBackupTask importTask = settingsHelper.getImportTask(exportKey);
-		ExportBackupTask exportTask = settingsHelper.getExportTask(exportKey);
-
-		if (exportTask == null && importTask == null) {
-			AndroidUiHelper.updateVisibility(secondIcon, deleteItem);
-			AndroidUiHelper.updateVisibility(progressBar, false);
-			secondIcon.setImageDrawable(getContentIcon(deleteItem ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_cloud_done));
-		} else {
-			ItemProgressInfo progressInfo = null;
-			if (exportTask != null) {
-				progressInfo = exportTask.getItemProgressInfo(item.getType().name(), fileName);
-			}
-			if (importTask != null) {
-				progressInfo = importTask.getItemProgressInfo(item.getType().name(), fileName);
-			}
-			setupProgress(progressInfo);
-		}
-		itemView.setTag(item);
-	}
-
-	private void setupProgress(@Nullable ItemProgressInfo progressInfo) {
+	private void setupProgress(@NonNull CloudChangeItem item) {
+		ItemProgressInfo progressInfo = getItemProgressInfo(item);
 		if (progressInfo != null) {
-			if (progressInfo.isFinished()) {
-				secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
-				AndroidUiHelper.updateVisibility(secondIcon, true);
-				AndroidUiHelper.updateVisibility(progressBar, false);
-				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
-				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
-			} else {
-				progressBar.setMax(progressInfo.getWork());
-				progressBar.setProgress(progressInfo.getValue());
-
-				AndroidUiHelper.updateVisibility(progressBar, true);
-				AndroidUiHelper.updateVisibility(secondIcon, false);
-			}
-		} else {
-			AndroidUiHelper.updateVisibility(progressBar, false);
-			AndroidUiHelper.updateVisibility(secondIcon, false);
+			progressBar.setMax(progressInfo.getWork());
+			progressBar.setProgress(progressInfo.getValue());
 		}
+		boolean syncing = isSyncing(item);
+		AndroidUiHelper.updateVisibility(secondIcon, !syncing);
+		AndroidUiHelper.updateVisibility(progressBar, syncing);
 	}
 
-	@Nullable
-	protected Drawable getItemIcon(@NonNull SettingsItem item) {
-		if (item instanceof ProfileSettingsItem) {
-			ProfileSettingsItem profileItem = (ProfileSettingsItem) item;
-			ApplicationMode mode = profileItem.getAppMode();
-			return getContentIcon(mode.getIconRes());
+	private ItemProgressInfo getItemProgressInfo(@NonNull CloudChangeItem item) {
+		ImportBackupTask importTask = settingsHelper.getImportTask(item.fileName);
+		if (importTask == null) {
+			importTask = settingsHelper.getImportTask(RESTORE_ITEMS_KEY);
 		}
-		ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
-		if (type != null) {
-			return getContentIcon(type.getIconRes());
+		if (importTask != null) {
+			return importTask.getItemProgressInfo(item.settingsItem.getType().name(), item.fileName);
+		}
+		ExportBackupTask exportTask = settingsHelper.getExportTask(item.fileName);
+		if (exportTask == null) {
+			exportTask = settingsHelper.getExportTask(BACKUP_ITEMS_KEY);
+		}
+		if (exportTask != null) {
+			return exportTask.getItemProgressInfo(item.settingsItem.getType().name(), item.fileName);
 		}
 		return null;
 	}
 
-	@Nullable
-	protected Drawable getContentIcon(@DrawableRes int icon) {
-		OsmandApplication app = getApplication();
-		return app.getUIUtilities().getIcon(icon, R.color.description_font_and_bottom_sheet_icons);
+	private boolean isSyncing(@NonNull CloudChangeItem item) {
+		SyncBackupTask syncTask = settingsHelper.getSyncTask(item.fileName);
+		if (syncTask == null) {
+			syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
+		}
+		return syncTask != null;
 	}
 
-	@NonNull
-	protected OsmandApplication getApplication() {
-		return (OsmandApplication) itemView.getContext().getApplicationContext();
+	private void setupSelectableBackground() {
+		int color = ColorUtilities.getActiveColor(app, nightMode);
+		AndroidUtils.setBackground(selectableView, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
+	}
+
+	@Nullable
+	private Drawable getContentIcon(@DrawableRes int icon) {
+		return app.getUIUtilities().getIcon(icon, R.color.icon_color_secondary_light);
 	}
 }

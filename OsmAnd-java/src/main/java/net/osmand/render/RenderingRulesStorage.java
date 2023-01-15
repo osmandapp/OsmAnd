@@ -636,6 +636,44 @@ public class RenderingRulesStorage {
 		//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
 	}
 
+	public static RenderingRulesStorage getTestStorageForStyle(String filePath) throws XmlPullParserException, IOException  {
+		RenderingRulesStorage.STORE_ATTRIBUTES = true;
+		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+
+		InputStream is = new FileInputStream(filePath);
+		// buggy attributes
+		try {
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			parser.setInput(is, "UTF-8");
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok == XmlPullParser.START_TAG) {
+					String tagName = parser.getName();
+					if (tagName.equals("renderingConstant")) {
+						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
+							renderingConstants.put(parser.getAttributeValue("", "name"),
+									parser.getAttributeValue("", "value"));
+						}
+					}
+				}
+			}
+		} finally {
+			is.close();
+		}
+		is = new FileInputStream(filePath);
+		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
+		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
+			@Override
+			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
+				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref, false);
+				return depends;
+			}
+		};
+		storage.parseRulesFromXmlInputStream(is, resolver, false);
+		return storage;
+	}
+
 	protected static void printAllRules(RenderingRulesStorage storage) {
 		System.out.println("\n\n--------- POINTS ----- ");
 		storage.printDebug(POINT_RULES, System.out);

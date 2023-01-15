@@ -9,8 +9,8 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.ReadDescriptionFragment;
-import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 
