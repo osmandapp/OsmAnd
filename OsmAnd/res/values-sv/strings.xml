@@ -2121,7 +2121,7 @@
     <string name="routing_attr_driving_style_balance_name">Balanserat</string>
     <string name="routing_attr_driving_style_safety_name">Föredra småvägar</string>
     <string name="right_side_navigation">Högertrafik</string>
-    <string name="driving_region_automatic">Automatisk</string>
+    <string name="shared_string_automatic">Automatisk</string>
     <string name="do_not_send_anonymous_app_usage">Skicka inte anonym appanvändningsstatistik</string>
     <string name="do_not_show_startup_messages">Visa inte uppstartsmeddelanden</string>
     <string name="do_not_show_startup_messages_desc">Visa inga apprabatter och meddelanden om speciella lokala evenemang.</string>

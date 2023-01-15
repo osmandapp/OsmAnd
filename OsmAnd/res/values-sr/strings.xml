@@ -1274,7 +1274,7 @@
     <string name="shared_string_visible">Видљиво</string>
     <string name="restore_purchases">Поврати трговину</string>
     <string name="fonts_header">Словни ликови на карти</string>
-    <string name="driving_region_automatic">Самостално</string>
+    <string name="shared_string_automatic">Самостално</string>
     <string name="right_side_navigation">Вожња десном траком</string>
     <string name="do_not_send_anonymous_app_usage">Не шаљи безимене податке о коришћеном програму</string>
     <string name="do_not_send_anonymous_app_usage_desc">ОсмАнд прикупља податке о томе које делове програма отварате. Ваш положај се не шаље, нити ишта што унесете у програм нити појединости о областима које видите, тражите или преузмете.</string>

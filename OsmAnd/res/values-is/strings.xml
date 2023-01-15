@@ -1982,7 +1982,7 @@
     <string name="restore_purchases">Endurheimta innkaup</string>
     <string name="fonts_header">Letur fyrir kort</string>
     <string name="right_side_navigation">Ekið á hægri akrein</string>
-    <string name="driving_region_automatic">Sjálfvirkt</string>
+    <string name="shared_string_automatic">Sjálfvirkt</string>
     <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
     <string name="incremental_search_city">Stigvaxandi leit í borg</string>
     <string name="rendering_attr_showRoadMaps_description">Veldu þegar birta á kort einungis með vegum:</string>

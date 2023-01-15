@@ -2207,7 +2207,7 @@
     <string name="full_version_thanks">Дякуй вам за набыццё платнай версіі OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
     <string name="right_side_navigation">Правабаковы рух</string>
-    <string name="driving_region_automatic">Аўтаматычна</string>
+    <string name="shared_string_automatic">Аўтаматычна</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты мапы</string>
     <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>

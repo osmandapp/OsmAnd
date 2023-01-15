@@ -284,7 +284,7 @@
     <string name="restore_purchases">Pulihkan pembelian</string>
     <string name="fonts_header">Font peta</string>
     <string name="right_side_navigation">Lalu lintas sebelah kanan</string>
-    <string name="driving_region_automatic">Otomatis</string>
+    <string name="shared_string_automatic">Otomatis</string>
     <string name="do_not_send_anonymous_app_usage">Jangan kirim statistik pemakaian anonim</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd mengumpulkan informasi tentang bagian mana dari aplikasi yang Anda buka. Lokasi Anda tidak pernah dikirim, juga tidak ada yang masuk ke aplikasi atau detail area yang Anda lihat, telusuri, atau unduh.</string>
     <string name="do_not_show_startup_messages">Jangan tampilkan pesan startup</string>

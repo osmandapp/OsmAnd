@@ -2195,7 +2195,7 @@
     <string name="nautical_maps">الخرائط البحرية</string>
     <string name="fonts_header">خطوط الخريطة</string>
     <string name="right_side_navigation">القيادة بالجهة اليمنى</string>
-    <string name="driving_region_automatic">تلقائي</string>
+    <string name="shared_string_automatic">تلقائي</string>
     <string name="parking_options">خيارات الموقف</string>
     <string name="full_version_thanks">شكراً لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">أقصر الطرق</string>

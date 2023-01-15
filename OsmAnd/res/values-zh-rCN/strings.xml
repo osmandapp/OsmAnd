@@ -1117,7 +1117,7 @@
     <string name="subscribe_email_error">错误</string>
     <string name="fonts_header">地图字体</string>
     <string name="right_side_navigation">右侧行驶</string>
-    <string name="driving_region_automatic">自动</string>
+    <string name="shared_string_automatic">自动</string>
     <string name="do_not_send_anonymous_app_usage">不发送匿名应用使用情况统计信息</string>
     <string name="restore_purchases">恢复购买内容</string>
     <string name="shared_string_visible">可见性</string>

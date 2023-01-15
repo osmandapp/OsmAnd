@@ -2192,7 +2192,7 @@
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kolektas informojn pri uzataj partoj de la aplikaĵo. Via pozicio neniam estas sendata, nek ion ajn, kion vi entajpas en la aplikaĵo nek detaloj pri ejoj foliumataj, serĉataj aŭ elŝutataj.</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
     <string name="do_not_show_startup_messages_desc">Ne montri mesaĝojn pri rabatoj por aplikaĵo pri kaj specialaj lokaj okazoj.</string>
-    <string name="driving_region_automatic">Aŭtomata</string>
+    <string name="shared_string_automatic">Aŭtomata</string>
     <string name="right_side_navigation">Dekstr‑flanka trafiko</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
 \n 

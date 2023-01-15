@@ -2201,7 +2201,7 @@
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
     <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
-    <string name="driving_region_automatic">Automatisch</string>
+    <string name="shared_string_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten. 
 \n 
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>

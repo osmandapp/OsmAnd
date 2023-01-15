@@ -2729,7 +2729,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
     <string name="parking_options">Parking options</string>
     <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="right_side_navigation">Circulación pela derecha</string>
     <string name="fonts_header">Map fonts</string>
     <string name="download_depth_countours">Nautical depth contours</string>

@@ -2756,7 +2756,7 @@
     <string name="map_widget_ruler_control">Sädeviivain</string>
     <string name="monitoring_control_start">REC</string>
     <string name="routing_attr_length_name">Pituusrajoitus</string>
-    <string name="driving_region_automatic">Automaattinen</string>
+    <string name="shared_string_automatic">Automaattinen</string>
     <string name="transport_nearby_routes">Sisältäen</string>
     <string name="transport_nearby_routes_within">Lähellä olevat reitit</string>
     <string name="years_5">Vuotta</string>

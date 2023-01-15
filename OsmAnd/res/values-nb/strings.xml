@@ -1994,7 +1994,7 @@
     <string name="subscribe_email_error">Feil</string>
     <string name="shared_string_visible">Synlig</string>
     <string name="fonts_header">Skrifttyper for kart</string>
-    <string name="driving_region_automatic">Automatisk</string>
+    <string name="shared_string_automatic">Automatisk</string>
     <string name="do_not_show_startup_messages">Ikke vis oppstartsmeldinger</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kupert</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Småkupert</string>

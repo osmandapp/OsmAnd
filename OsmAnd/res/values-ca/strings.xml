@@ -2190,7 +2190,7 @@
     <string name="do_not_show_startup_messages_desc">No mostris descomptes de l\'aplicació ni missatges d\'esdeveniments locals destacats.</string>
     <string name="parking_options">Opcions d\'aparcament</string>
     <string name="right_side_navigation">Trànsit per la dreta</string>
-    <string name="driving_region_automatic">Automàtic</string>
+    <string name="shared_string_automatic">Automàtic</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) és una aplicació de navegació i de consulta de mapes que accedeix a les dades obertes de tot el món i d\'alta-qualitat d\'OSM. 
 \n
 \n Gaudiu del guiatge visual i de veu, representant PDIs (punts d\'interès), creant i gestionat traces GPX, activant la representació de corbes de nivell i d\'informació d\'elevació (requereix connector), optant entre els modes de conducció amb vehicle, bicicleta o com vianant, editant d\'OSM i molt més.</string>

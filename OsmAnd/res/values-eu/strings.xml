@@ -2185,7 +2185,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>
-    <string name="driving_region_automatic">Automatikoa</string>
+    <string name="shared_string_automatic">Automatikoa</string>
     <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd-ek aplikazioan irekitzen dituzun atalei buruzko informazioa jasotzen du. Zure kokalekua ez da inoiz bidaltzen, ezta aplikazioan idazten duzun ezer edo ikusi, bilatu edo deskargatzen dituzun zonaldeei buruzko ezer ere.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak abioan</string>

@@ -2491,7 +2491,7 @@
     <string name="restore_purchases">Restore purchases</string>
     <string name="fonts_header">Map fonts</string>
     <string name="right_side_navigation">Right-hand traffic</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>

@@ -2164,7 +2164,7 @@
     <string name="routing_attr_height_obstacles_name">Hoogtegegevens gebruiken</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="right_side_navigation">Rechts rijdend</string>
-    <string name="driving_region_automatic">Automatisch</string>
+    <string name="shared_string_automatic">Automatisch</string>
     <string name="do_not_send_anonymous_app_usage">Geen anonieme app-gebruiksstatistieken versturen</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd verzamelt gegevens over welke onderdelen van de app je opent. Je locatiegegevens worden nooit verstuurd en ook niets van wat je invoert in de app of details van gebieden die je bekijkt, opzoekt of download.</string>
     <string name="do_not_show_startup_messages">Geen startmeldingen weergeven</string>

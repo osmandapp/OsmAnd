@@ -2202,7 +2202,7 @@
     <string name="do_not_show_startup_messages">Vis ikke opstartsmeddelelser</string>
     <string name="do_not_show_startup_messages_desc">Vis ikke app-rabatter &amp; særlige lokale begivenhedsmeddelelser.</string>
     <string name="right_side_navigation">Højrekørsel</string>
-    <string name="driving_region_automatic">Automatisk</string>
+    <string name="shared_string_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis og verdensomspændende OpenStreetMap (OSM)-data af høj kvalitet.
 \n
 \nNyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og højdeinfo (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>

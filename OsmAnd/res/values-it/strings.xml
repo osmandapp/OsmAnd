@@ -2182,7 +2182,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferisci strade secondarie</string>
     <string name="relief_smoothness_factor_descr">Terreno preferito: pianeggiante o collinoso.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleziona la variabilità della quota</string>
-    <string name="driving_region_automatic">Automatica</string>
+    <string name="shared_string_automatic">Automatica</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi, cerchi o scarichi.</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>

@@ -2048,7 +2048,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="restore_purchases">Atkurti pirkinius</string>
     <string name="fonts_header">Žemėlapio šriftai</string>
     <string name="right_side_navigation">Vairavimas dešinėje</string>
-    <string name="driving_region_automatic">Automatinis</string>
+    <string name="shared_string_automatic">Automatinis</string>
     <string name="do_not_send_anonymous_app_usage">Nesiųsti anoniminės programėlės naudojimo informacijos</string>
     <string name="shared_string_install">Įdiegti</string>
     <string name="improve_coverage_mapillary">Pagerinti nuotraukų aprėptį su Mapillary</string>

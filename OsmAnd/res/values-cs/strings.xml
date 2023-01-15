@@ -2195,7 +2195,7 @@
     <string name="full_version_thanks">Děkujeme vám za zakoupení placené verze OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Zvolte kolísání výšky</string>
     <string name="right_side_navigation">Pravostranný provoz</string>
-    <string name="driving_region_automatic">Automaticky</string>
+    <string name="shared_string_automatic">Automaticky</string>
     <string name="restore_purchases">Obnovit nákupy</string>
     <string name="fonts_header">Mapová písma</string>
     <string name="type_address">Zadejte adresu</string>

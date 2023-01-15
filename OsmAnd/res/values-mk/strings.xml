@@ -2294,7 +2294,7 @@
     <string name="do_not_show_startup_messages_desc">Ne prikažuvajte popusti za aplikacii i poraki za specijalni lokalni nastani.</string>
     <string name="parking_options">Parking opcii</string>
     <string name="full_version_thanks">Vi blagodarime što ja kupivte platenata verzija na OsmAnd.</string>
-    <string name="driving_region_automatic">Automatik</string>
+    <string name="shared_string_automatic">Automatik</string>
     <string name="do_not_send_anonymous_app_usage">Ne ispraḱajte anonimna statistika za koristenje na aplikacii</string>
     <string name="do_not_show_startup_messages">Ne prikažuvaj start up poraki</string>
     <string name="shared_string_gpx_track">Sledenje</string>

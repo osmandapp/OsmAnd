@@ -2213,7 +2213,7 @@
     <string name="restore_purchases">恢復購買</string>
     <string name="fonts_header">地圖字體</string>
     <string name="right_side_navigation">靠右行駛</string>
-    <string name="driving_region_automatic">自動</string>
+    <string name="shared_string_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
     <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： 
 \n• 西歐： **** 

@@ -230,7 +230,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
 		defaultDrivingRegion.setIcon(getActiveIcon(R.drawable.ic_action_car_dark));
-		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
+		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.shared_string_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 
 	private void setupUnitsOfLengthPref() {
@@ -362,7 +362,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		b.setTitle(getString(R.string.driving_region));
 
 		List<Object> drs = new ArrayList<>();
-		drs.add(getString(R.string.driving_region_automatic));
+		drs.add(getString(R.string.shared_string_automatic));
 		drs.addAll(Arrays.asList(DrivingRegion.values()));
 		int sel = -1;
 		ApplicationMode selectedMode = getSelectedAppMode();

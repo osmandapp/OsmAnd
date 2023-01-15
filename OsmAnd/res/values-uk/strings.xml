@@ -2244,7 +2244,7 @@
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Видимі</string>
     <string name="restore_purchases">Відновлення придбань</string>
-    <string name="driving_region_automatic">Автоматично</string>
+    <string name="shared_string_automatic">Автоматично</string>
     <string name="do_not_send_anonymous_app_usage">Не надсилати анонімну статистику про користування застосунком</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає відомості про те, які Ви використовуєте частини застосунку. Ваше місце розташування ніколи не надсилається, як і все, що Ви вводите, які місця переглядаєте, що шукаєте чи завантажуєте.</string>
     <string name="parking_options">Стоянка (параметри)</string>

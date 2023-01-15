@@ -1874,7 +1874,7 @@
     <string name="restore_purchases">Restabilirea achiziției</string>
     <string name="fonts_header">Fonturi hartă</string>
     <string name="right_side_navigation">Trafic pe dreapta</string>
-    <string name="driving_region_automatic">Automat</string>
+    <string name="shared_string_automatic">Automat</string>
     <string name="do_not_send_anonymous_app_usage">Nu trimite statistici de utilizare anonime ale aplicației</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd colectează informații despre părțile din aplicatie folosite. Locația dumneavoastră și datele introduse în aplicație nu vor fi niciodată trimise, sau detalii despre zona în care vă aflați, căutari sau descărcări.</string>
     <string name="do_not_show_startup_messages">Nu arăta mesaje la pornire</string>

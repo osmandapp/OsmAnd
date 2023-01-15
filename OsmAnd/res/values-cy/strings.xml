@@ -470,7 +470,7 @@
     <string name="map_widget_monitoring">Recordio taith</string>
     <string name="shared_string_preparing">Yn paratoi</string>
     <string name="shared_string_world">Byd</string>
-    <string name="driving_region_automatic">Awtomatig</string>
+    <string name="shared_string_automatic">Awtomatig</string>
     <string name="shared_string_continue">Parhau</string>
     <string name="access_widget_expand">Ehangu</string>
     <string name="rendering_value_disabled_name">Analluogwyd</string>

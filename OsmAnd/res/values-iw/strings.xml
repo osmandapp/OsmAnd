@@ -1743,7 +1743,7 @@
     <string name="restore_purchases">שחזור רכישות</string>
     <string name="fonts_header">גופנים למפה</string>
     <string name="right_side_navigation">מושב הנהג מימין</string>
-    <string name="driving_region_automatic">אוטומטי</string>
+    <string name="shared_string_automatic">אוטומטי</string>
     <string name="shared_string_go">התחלה</string>
     <string name="later">אחר כך</string>
     <string name="get_full_version">גרסה מלאה</string>
