@@ -5,35 +5,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment.WizardType;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.TextViewEx;
 
 public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragment {
-	private OsmandApplication app;
-	private boolean nightMode;
+
+	protected OsmandApplication app;
+
 	protected WizardType wizardType;
-	protected FirstUsageBottomSheetListener listener;
+	protected FirstUsageActionsListener listener;
+
+	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
+		app = requiredMyApplication();
 
-		if (getTargetFragment() != null && getTargetFragment() instanceof FirstUsageWizardFragment) {
-			FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) getTargetFragment();
-			listener = fragment.getFirstUsageBSListener();
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof FirstUsageWizardFragment) {
+			FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) targetFragment;
+			listener = fragment.getFirstUsageActionsListener();
 			wizardType = fragment.wizardType;
 			nightMode = fragment.deviceNightMode;
 		}
@@ -42,30 +45,30 @@ public abstract class BaseFirstUsageBottomSheet extends BottomSheetDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater layoutInflater = UiUtilities.getInflater(getContext(), nightMode);
-		View dialogView = layoutInflater.inflate(R.layout.first_usage_bottom_sheet, container, false);
-		TextViewEx bottomSheetTitle = dialogView.findViewById(R.id.title);
-		LinearLayout layoutContainer = dialogView.findViewById(R.id.container);
+		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.first_usage_bottom_sheet, container, false);
+		TextView titleTv = view.findViewById(R.id.title);
+		ViewGroup itemsContainer = view.findViewById(R.id.container);
 
-		fillLayout(layoutContainer, layoutInflater);
-		bottomSheetTitle.setText(getTitle());
+		setupItems(itemsContainer, themedInflater);
+		titleTv.setText(getTitle());
 
-		return dialogView;
+		return view;
 	}
-
-	protected abstract void fillLayout(LinearLayout layout, LayoutInflater inflater);
 
 	protected abstract String getTitle();
 
-	protected View createItemView(LayoutInflater layoutInflater, String title, @DrawableRes int iconId, OnClickListener onClickListener) {
-		View item = layoutInflater.inflate(R.layout.item_with_left_icon, null);
-		TextViewEx titleView = item.findViewById(R.id.title);
-		AppCompatImageView iconView = item.findViewById(R.id.icon);
-		View button = item.findViewById(R.id.button);
+	protected abstract void setupItems(@NonNull ViewGroup container, @NonNull LayoutInflater inflater);
+
+	protected View createItemView(@NonNull LayoutInflater inflater, @Nullable String title,
+	                              @DrawableRes int iconId, @Nullable OnClickListener listener) {
+		View item = inflater.inflate(R.layout.item_with_left_icon, null);
+		TextView titleView = item.findViewById(R.id.title);
+		ImageView iconView = item.findViewById(R.id.icon);
 
 		titleView.setText(title);
-		iconView.setImageDrawable(ContextCompat.getDrawable(app, iconId));
-		button.setOnClickListener(onClickListener);
+		iconView.setImageDrawable(app.getUIUtilities().getThemedIcon(iconId));
+		item.findViewById(R.id.button).setOnClickListener(listener);
 		return item;
 	}
 }

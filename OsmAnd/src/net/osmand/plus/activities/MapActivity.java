@@ -804,7 +804,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		enableDrawer();
 
-		if (showWelcomeScreen && FirstUsageWizardFragment.startWizard(mapViewMapActivity)) {
+		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(mapViewMapActivity)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
@@ -1539,7 +1539,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			openDrawer();
 		}
 	}
-
 
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
 		FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) getSupportFragmentManager()

@@ -27,7 +27,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -44,8 +43,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -84,16 +83,18 @@ import java.util.TimerTask;
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener {
 
-	public static final String TAG = "FirstUsageWizardFrag";
-	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
+	public static final String TAG = FirstUsageWizardFragment.class.getSimpleName();
+
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
+	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
 	public static boolean SHOW = true;
 
 	private OsmandApplication app;
-	private View view;
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
+
+	private View view;
 
 	public WizardType wizardType = null;
 	private final WizardType DEFAULT_WIZARD_TYPE = WizardType.SEARCH_LOCATION;
@@ -615,10 +616,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
-	public static boolean startWizard(FragmentActivity activity) {
-		return showFragment(activity);
-	}
-
 	public void closeWizard() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -742,8 +739,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		setWizardType(WizardType.MAP_DOWNLOADED, updateWizardView);
 	}
 
-	public FirstUsageBottomSheetListener getFirstUsageBSListener() {
-		return new FirstUsageBottomSheetListener() {
+	public FirstUsageActionsListener getFirstUsageActionsListener() {
+		return new FirstUsageActionsListener() {
 			@Override
 			public void onSelectCountry() {
 				searchCountryMap();
@@ -765,7 +762,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			@Override
 			public void onRestoreFromCloud() {
 				if (app.getBackupHelper().isRegistered()) {
-					BackupAndRestoreFragment.showInstance(activity.getSupportFragmentManager());
+					BackupCloudFragment.showInstance(activity.getSupportFragmentManager());
 				} else {
 					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
 				}
@@ -783,7 +780,11 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		};
 	}
 
-	private static boolean showFragment(@Nullable FragmentActivity activity) {
+	private void logError(String msg, Throwable e) {
+		Log.e(TAG, "Error: " + msg, e);
+	}
+
+	public static boolean showFragment(@Nullable FragmentActivity activity) {
 		if (!wizardClosed && activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {
@@ -798,13 +799,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 		return false;
 	}
-
-	private void logError(String msg, Throwable e) {
-		Log.e(TAG, "Error: " + msg, e);
-	}
 }
 
-interface FirstUsageBottomSheetListener {
+interface FirstUsageActionsListener {
 	void onSelectCountry();
 
 	void onDetermineLocation();
