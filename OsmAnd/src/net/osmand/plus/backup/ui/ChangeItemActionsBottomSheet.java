@@ -75,7 +75,6 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		ItemViewHolder itemViewHolder = new ItemViewHolder(container, nightMode);
 		itemViewHolder.bindView(item, null, false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.bottom_divider), false);
 	}
 
 	private void setupDownloadAction(@NonNull View view) {
@@ -113,7 +112,14 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			dismiss();
 		});
 		downloadItem.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground(downloadItem);
+		}
 		AndroidUiHelper.updateVisibility(downloadItem.findViewById(R.id.second_icon), false);
+		View divider = downloadItem.findViewById(R.id.bottom_divider);
+		View bottomShadow = downloadItem.findViewById(R.id.bottom_shadow);
+		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(bottomShadow, false);
 	}
 
 	private void setupUploadAction(@NonNull View view) {
@@ -145,7 +151,20 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			dismiss();
 		});
 		uploadItem.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground(uploadItem);
+		}
 		AndroidUiHelper.updateVisibility(uploadItem.findViewById(R.id.second_icon), false);
+		View divider = uploadItem.findViewById(R.id.bottom_divider);
+		View bottomShadow = uploadItem.findViewById(R.id.bottom_shadow);
+		AndroidUiHelper.updateVisibility(divider, true);
+		AndroidUiHelper.updateVisibility(bottomShadow, false);
+	}
+
+	private void setupSelectableBackground(@NonNull View view) {
+		int color = ColorUtilities.getActiveColor(app, nightMode);
+		View selectableView = view.findViewById(R.id.selectable_list_item);
+		AndroidUtils.setBackground(selectableView, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {
