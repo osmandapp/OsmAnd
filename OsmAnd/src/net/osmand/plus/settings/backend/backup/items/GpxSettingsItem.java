@@ -5,7 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -167,7 +168,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 				if (selectedGpxFile != null) {
-					GPXUtilities.GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+					GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
