@@ -8,7 +8,7 @@
     <string name="poi_club">نادي</string>
     <string name="poi_cafe_and_restaurant">مطعم و مقهى</string>
     <string name="poi_finance">ماليّة</string>
-    <string name="poi_osmwiki">ويكيبديا</string>
+    <string name="poi_osmwiki">ويكيبيديا</string>
     <string name="poi_chocolate">متجر شوكلاته</string>
     <string name="poi_coffee">متجر قهوة</string>
     <string name="poi_mall">مجمّع</string>
@@ -413,7 +413,7 @@
     <string name="poi_shelter_type_public_transport">نقل عام</string>
     <string name="poi_shelter_type_picnic_shelter">متنزه</string>
     <string name="poi_shelter_type_basic_hut">كوخ عادي</string>
-    <string name="poi_wiki_link">ويكيبديا</string>
+    <string name="poi_wiki_link">ويكيبيديا</string>
     <string name="poi_payment_type">طريقة الدفع</string>
     <string name="poi_payment_fuel_type">بطاقات الوقود</string>
     <string name="poi_internet_access_type">نوع الوصول إلى الإنترنت</string>

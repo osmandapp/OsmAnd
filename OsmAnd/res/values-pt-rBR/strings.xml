@@ -5018,4 +5018,11 @@
     <string name="set_up_backup">Configurar backup</string>
     <string name="si_nm_mt">Milhas náuticas/metros</string>
     <string name="si_nm_ft">Milhas náuticas/pés</string>
+    <string name="share_link">Compartilhar link</string>
+    <string name="share_as_file">Compartilhe como arquivo</string>
+    <string name="y_axis">Y-Axis</string>
+    <string name="x_axis">X-Axis</string>
+    <string name="value_downloaded_of_mb">Baixando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Pular download</string>
+    <string name="determine_location">Permita-nos determinar sua localização</string>
 </resources>

@@ -5031,4 +5031,9 @@
     <string name="set_up_backup">Indstil sikkerhedskopiering</string>
     <string name="x_axis">X-akse</string>
     <string name="y_axis">Y-akse</string>
+    <string name="share_as_file">Del som fil</string>
+    <string name="value_downloaded_of_mb">Downloader %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Spring download over</string>
+    <string name="determine_location">Tillad os at fastslå din placering</string>
+    <string name="share_link">Del link</string>
 </resources>

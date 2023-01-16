@@ -5028,4 +5028,12 @@
     <string name="av_audio_format_bottom_sheet_descr">Выберите формат вывода аудио. Формат типа файла для аудио - 3GPP (.3gp).</string>
     <string name="si_nm_ft">Морские мили/футы</string>
     <string name="si_nm_mt">Морские мили/метры</string>
+    <string name="value_downloaded_of_mb">Загрузка %1$.1f/%2$.1f МБ</string>
+    <string name="skip_download">Пропустить загрузку</string>
+    <string name="determine_location">Позвольте нам определить ваше местоположение</string>
+    <string name="share_as_file">Поделиться файлом</string>
+    <string name="y_axis">Ось Y</string>
+    <string name="x_axis">Ось X</string>
+    <string name="set_up_backup">Настройка резервного копирования</string>
+    <string name="share_link">Поделиться ссылкой</string>
 </resources>

@@ -5030,4 +5030,9 @@
     <string name="set_up_backup">Configurar cópia de segurança</string>
     <string name="y_axis">Eixo Y</string>
     <string name="x_axis">Eixo X</string>
+    <string name="share_as_file">Partilhar como ficheiro</string>
+    <string name="value_downloaded_of_mb">A descarregar %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Ignorar descarregamento</string>
+    <string name="determine_location">Permita-nos determinar a sua localização</string>
+    <string name="share_link">Partilhar a ligação</string>
 </resources>

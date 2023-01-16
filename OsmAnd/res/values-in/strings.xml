@@ -5030,4 +5030,9 @@
     <string name="set_up_backup">Mulai pencadangan</string>
     <string name="y_axis">Sumbu Y</string>
     <string name="x_axis">Sumbu X</string>
+    <string name="skip_download">Lewatkan unduhan</string>
+    <string name="share_as_file">Bagikan sebagai berkas</string>
+    <string name="share_link">Bagikan tautan</string>
+    <string name="value_downloaded_of_mb">Mengunduh %1$.1f/%2$.1f MB</string>
+    <string name="determine_location">Perbolehkan kami untuk mengetahui lokasi Anda</string>
 </resources>

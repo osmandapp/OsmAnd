@@ -5019,4 +5019,9 @@
     <string name="set_up_backup">Biztonsági mentés beállítása</string>
     <string name="y_axis">Y-tengely</string>
     <string name="x_axis">X-tengely</string>
+    <string name="share_as_file">Megosztás fájlként</string>
+    <string name="value_downloaded_of_mb">Letöltés %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Letöltés kihagyása</string>
+    <string name="determine_location">Engedélyezze, hogy meghatározzuk a helyzetét</string>
+    <string name="share_link">Hivatkozás megosztása</string>
 </resources>

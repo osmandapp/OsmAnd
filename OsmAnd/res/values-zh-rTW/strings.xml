@@ -5019,4 +5019,9 @@
     <string name="set_up_backup">設定備份</string>
     <string name="x_axis">X 軸</string>
     <string name="y_axis">Y 軸</string>
+    <string name="share_link">分享連結</string>
+    <string name="skip_download">略過下載</string>
+    <string name="share_as_file">分享為檔案</string>
+    <string name="value_downloaded_of_mb">下載 %1$.1f/%2$.1f MB</string>
+    <string name="determine_location">讓我們確定您的位置</string>
 </resources>

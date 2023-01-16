@@ -5025,4 +5025,9 @@
     <string name="set_up_backup">Налаштувати резервне копіювання</string>
     <string name="y_axis">Вісь Y</string>
     <string name="x_axis">Вісь X</string>
+    <string name="share_as_file">Надіслати як файл</string>
+    <string name="value_downloaded_of_mb">Завантаження %1$.1f/%2$.1f МБ</string>
+    <string name="share_link">Поділитись посиланням</string>
+    <string name="determine_location">Дозвольте нам визначити ваше розташування</string>
+    <string name="skip_download">Пропустити завантаження</string>
 </resources>

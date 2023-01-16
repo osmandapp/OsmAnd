@@ -3344,7 +3344,7 @@
     <string name="poi_climbing_quality_solid">firma</string>
     <string name="poi_climbing_quality_fragile">malfirma</string>
     <string name="poi_climbing_bolted_yes">Fiksitaj sekurigiloj: jes</string>
-    <string name="poi_climbing_bolted_no">Fiksitaj sekurigiloj: ne</string>
+    <string name="poi_climbing_bolted_no">Fiksaj sekurigiloj: ne</string>
     <string name="poi_climbing_orientation_n">Orientiĝo de muro: norda</string>
     <string name="poi_climbing_orientation_ne">Orientiĝo de muro: nord-orienta</string>
     <string name="poi_climbing_orientation_e">Orientiĝo de muro: orienta</string>
@@ -4428,4 +4428,8 @@
     <string name="poi_climbing_grade_aliens">nur por superhomoj/eksterteranoj</string>
     <string name="poi_climbing_rock_conglomerate">Grimpada roko: konglomerato</string>
     <string name="poi_hiking_filter">Taŭga por turisma marŝado</string>
+    <string name="poi_climbing_bolt_abseil">malleviĝa</string>
+    <string name="poi_climbing_bolt_anchor">fiksa</string>
+    <string name="poi_osmand_climbing_bolts_yes">jes</string>
+    <string name="poi_osmand_climbing_bolts_no">ne</string>
 </resources>
