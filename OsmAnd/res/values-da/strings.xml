@@ -1129,7 +1129,7 @@
     <string name="index_item_world_seamarks">Globale sømærker</string>
     <string name="index_item_world_bitcoin_payments">Globale bitcoinbetalinger</string>
     <string name="index_item_world_altitude_correction">Global højdekorrektion</string>
-    <string name="always_center_position_on_map">Vis altid position centreret</string>
+    <string name="always_center_position_on_map">Placering af position altid centreret</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
@@ -4777,7 +4777,7 @@
     <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)\?</string>
     <string name="favorite_delete_group">Slet gruppe</string>
     <string name="download_heightmap_maps">Højdekort</string>
-    <string name="display_position">Vis position</string>
+    <string name="display_position">Placering af position</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Brugervejledning:</string>
     <string name="distance_by_tap_use_description">Tryk på kortet for at få vist afstanden mellem din nuværende placering og det punkt, du har trykket på.
@@ -4862,7 +4862,7 @@
 \n
 \n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikopførsel
 \n
-\n • Indstillingen \"Vis position\" blev rettet
+\n • Indstillingen \"Placering af position\" blev rettet
 \n
 \n • GPX: tilføjede understøttelse af \"link\", \"cmt\", \"desc\" tags og for alle brugerdefinerede udvidelser
 \n
