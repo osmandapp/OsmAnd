@@ -329,10 +329,15 @@ public class AmenityUIHelper extends MenuBuilder {
 					iconId = R.drawable.ic_action_info_dark;
 				}
 				if (pType != null) {
+					String cat = pType.getOsmTag().replace(':', '_');
+					if (!cat.isEmpty()) {
+						int catIconId = app.getResources().getIdentifier("mx_" + cat, "drawable", app.getPackageName());
+						iconId = catIconId != 0 ? catIconId : iconId;
+					}
 					poiTypeOrder = pType.getOrder();
 					poiTypeKeyName = pType.getKeyName();
 					if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
-						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
+						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + cat + "_" + pType.getOsmValue());
 					}
 					if (!pType.isText()) {
 						vl = pType.getTranslation();
