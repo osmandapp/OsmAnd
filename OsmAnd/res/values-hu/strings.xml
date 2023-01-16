@@ -1156,7 +1156,7 @@
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline kiszámítása</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
-    <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
+    <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
     <string name="localization_pref_title">Nyelv</string>
@@ -4765,7 +4765,7 @@
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
-    <string name="display_position">Pozíció megjelenítése</string>
+    <string name="display_position">Pozíció elhelyezése</string>
     <string name="shared_string_2_5_d_view">2,5D nézet</string>
     <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
@@ -4852,7 +4852,7 @@
 \n
 \n • „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
 \n
-\n • Javított „Pozíció megjelenítése” opció
+\n • Javított „Pozíció elhelyezés” opció
 \n
 \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
 \n
