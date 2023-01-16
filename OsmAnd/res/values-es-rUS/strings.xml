@@ -5039,4 +5039,11 @@
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
+    <string name="y_axis">Eje Y</string>
+    <string name="x_axis">Eje X</string>
+    <string name="share_as_file">Compartir como archivo</string>
+    <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Omitir descarga</string>
+    <string name="determine_location">Permítenos determinar tu ubicación</string>
+    <string name="share_link">Compartir enlace</string>
 </resources>
