@@ -2265,7 +2265,8 @@
     <string name="av_camera_pic_size">Величина слике фотоапарата</string>
     <string name="av_camera_pic_size_descr">Величина слике уграђеног фотоапарата</string>
     <string name="shared_string_undo">Поништи</string>
-    <string name="offline_maps_and_navigation">Карте ван мреже и навођење</string>
+    <string name="offline_maps_and_navigation">Карте ван мреже
+\nи навођење</string>
     <string name="saved_at_time">Сачувано сада у: %1$s</string>
     <string name="poi_deleted_localy">Тачка занимања ће бити обрисана када отпремите Ваше измене</string>
     <string name="downloading_number_of_files">Преузимам %1$d датотеку(е)…</string>
@@ -2436,7 +2437,9 @@
 \nЗемаљски подаци (између 70° северно и 70° јужно) се засновани на СРТМ и АСТЕР.
 \n
 \nВише података на http://osmand.net/docs/user/plugins/contour-lines .</string>
-    <string name="osm_editing_plugin_description">Доприносите ОСМ-у, преко прављења и измена ОСМ објеката тачака од интереса, отварања или коментарисања ОСМ белешки, и прилагањем снимљених GPX фајлова из ОсмАнд-а тако што дате Ваше корисничко име и лозинку. OpenStreetMap.org је глобални пројекат мапирања света у јавном домену, вођен заједницом.</string>
+    <string name="osm_editing_plugin_description">Доприносите ОСМ-у, општој заједници која одржава обимну карту света и обезбеђује редовне податке слободним програмима сваком кориснику.
+\n
+\nМожете пронаћи упутсва како уређивати карту на нашим страницама https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="save_track_to_gpx_globally_descr">Главно бележење позиције у GPX фајл може да се укључи и искључи коришћењем справице за GPX бележење на карти.</string>
     <string name="android_19_location_disabled">Од Андроида 4.4 (KitKat), фасциклу за складиште (%s) је застарела. Копирај све ОсмАнд фајлове на нови локацију за складиште\?
 \n Белешка 1: Ваши стари фајлови неће вити дирани (али можете их Ви сами обрисати).
@@ -3002,8 +3005,8 @@
     <string name="external_input_device">Екстерни улазни уређај</string>
     <string name="sett_no_ext_input">Ниједан</string>
     <string name="sett_generic_ext_input">Тастатура</string>
-    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
-    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="sett_wunderlinq_ext_input">Вундерлинк (WunderLINQ)</string>
+    <string name="sett_parrot_ext_input">Папагај (Parrot)</string>
     <string name="turn_on_profile_desc">Укључите бар један апликативни профил да користите ово подешавање.</string>
     <string name="rendering_attr_winter_road_name">Снежни коловоз</string>
     <string name="rendering_attr_ice_road_name">Залеђени коловоз</string>
@@ -3744,7 +3747,7 @@
     <string name="osm_edit_logout_success">Одјављен</string>
     <string name="gpx_upload_private_visibility_descr">„Приватно“ значи да се траг не појављује ни на једној јавној листи, али су тачке праћења у њему у нехронолошком редоследу доступне путем јавног ГПС API-ја без временских ознака.</string>
     <string name="gpx_upload_identifiable_visibility_descr">„Могуће је идентификовати“ значи да ће се траг јавно приказати у Вашим ГПС траговима и у јавним списковима ГПС трагова, тј. други корисници ће моћи да преузму необрађени траг и повежу га са Вашим корисничким именом. Јавни подаци о временским тачкама трага из ГПС API-ја који се сервирају путем API-ја за тачке праћења имаће референцу на вашу оригиналну страницу праћења.</string>
-    <string name="gpx_upload_trackable_visibility_descr">„Следљиво“ значи да се траг не приказује нигде на јавним листама, али обрађене тачке праћења са временским ознакама у њима (које не могу бити директно повезане са вама) иду кроз преузимања са јавног ГПС API-ја.</string>
+    <string name="gpx_upload_trackable_visibility_descr">„Следљиво“ значи да се траг не приказује нигде на јавним списковима, али обрађене тачке праћења са временским ознакама у њима (које не могу бити директно повезане са вама) иду кроз преузимања са јавног ГПС API-ја.</string>
     <string name="osm_edit_close_note">Затвори ОСМ белешку</string>
     <string name="osm_edit_comment_note">Коментар ОСМ напомене</string>
     <string name="osm_login_descr">Пријавите се користећи безбедан OAuth метод или користити своје корисничко име и лозинку.</string>
@@ -4001,7 +4004,7 @@
     <string name="delete_waypoints">Обриши пролазну тачку</string>
     <string name="copy_to_map_markers">Копирај у ознаке карте</string>
     <string name="hillshade_slope_contour_lines">Рељеф / Нагиб / Изохипсе</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews">Утисци отворених места (OpenPlaceReviews</string>
     <string name="login_open_place_reviews">Пријавите се за OpenPlaceReviews</string>
     <string name="activity_type_offroad_name">Вожња ван пута</string>
     <string name="quick_action_coordinates_widget_descr">Прекидач да на карти покаже или сакрије справицу са координатама.</string>
@@ -4249,7 +4252,7 @@
     <string name="backup_version_history_removed">Сва издања историје су уклоњена.</string>
     <string name="backup_data_removed">Сви подаци су уклоњени.</string>
     <string name="shared_string_progress">Напредак</string>
-    <string name="backup_do_not_have_any">Још увек немате на мрежи ниједну резервну копију.</string>
+    <string name="backup_do_not_have_any">Још увек немате на мрежи ни једно складиште умножака</string>
     <string name="backup_dont_have_any_descr">Закажите прављење аутоматских резервних копија и никада не губите податке.</string>
     <string name="backup_welcome_back">Добродошли назад!</string>
     <string name="backup_setup">Подеси резервну копију</string>
@@ -4589,7 +4592,7 @@
     <string name="compass_on_circles">Компас на круговима</string>
     <string name="explore_plans">Истражите планове</string>
     <string name="map_widget_trip_recording_downhill">Низбрдо</string>
-    <string name="routing_attr_hazmat_category_name">Хазмат категорија</string>
+    <string name="routing_attr_hazmat_category_name">Врста опасних материја</string>
     <string name="routing_attr_avoid_fords_name">Избегавај фордове</string>
     <string name="rendering_attr_horseScale_name">Тежина коњских стаза</string>
     <string name="distance_circles">Кругови растојања</string>
@@ -4690,7 +4693,7 @@
     <string name="download_heightmap_maps">Висинска карта</string>
     <string name="av_notes_photo_widget_desc">Тап по справици ће усликати слику.</string>
     <string name="compass_always_visible">Увек видљиво</string>
-    <string name="compass_click_desc">"Тапните по  компасу ради промене усмерења карте."</string>
+    <string name="compass_click_desc">Тапните по компасу ради промене усмерења карте.</string>
     <string name="compass_desc">Приказује усмерење ка северу.</string>
     <string name="go_to_marker_location">Иди на положај ознаке</string>
     <string name="altitude_correction">Исправка надморске висине</string>
@@ -4702,7 +4705,7 @@
     <string name="switch_widget_mode_desc">Кликтање на справицу мења начине.</string>
     <string name="auto_25_chars_route_tr_kr">Скрените десно и држите десно</string>
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
-    <string name="av_notes_video_widget_desc">"Тап  по справици ће снимити видео."</string>
+    <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="accessibility_2d_view_off">2.5D поглед искључен</string>
     <string name="rotate_map_none_rotated_opt">Фискно (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
@@ -4836,7 +4839,7 @@
     <string name="current_location_widget">Координате: тренутни положај</string>
     <string name="map_center_widget">Координате: средиште карте</string>
     <string name="external_sensors_plugin_name">Спољни пријемници</string>
-    <string name="external_sensors_plugin_description">Приступ спољним пријемницима, нпр. откуцајима срца, брзини бицикла, снази кретања бицикла, или такту. Захтева да уређај буде повезан са одговарајућим пријемницима преко АНТ + протокола личне бежичне мреже</string>
+    <string name="external_sensors_plugin_description">Приступ спољним пријемницима, нпр. откуцајима срца, брзини бицикла, снази кретања бицикла, или такту. Захтева да уређај буде повезан са одговарајућим пријемницима преко АНТ + протокола личне бежичне мреже.</string>
     <string name="quick_action_temperature_layer">Прекидач за приказ или скривање топлотних слојева на карти.</string>
     <string name="quick_action_precipitation_layer">Прекидач за приказ или скривање слојева падавина на карти.</string>
     <string name="quick_action_wind_layer">Прекидач за приказ или скривање слојева ветрова на карти.</string>
@@ -4862,7 +4865,7 @@
     <string name="map_rendering_engine">Погон приказа карата</string>
     <string name="external_sensors_support">Подршка спољних пријемника</string>
     <string name="external_sensor_widgets">Спољашњи пријемници</string>
-    <string name="map_widget_camera_tilt_desc">Приказује нагнутост камере у прегледу простора. Подразумевана нагнутост је 90° (без нагињања)</string>
+    <string name="map_widget_camera_tilt_desc">Приказује нагнутост камере у прегледу простора. Подразумевана нагнутост је 90° (без нагињања).</string>
     <string name="map_widget_camera_distance_desc">Приказује уздигнуће камере изнад површи.</string>
     <string name="map_widget_ant_bicycle_dist">Растојање бицикла</string>
     <string name="coordinates_widget_map_center_desc">Приказује земљописне координате тренутног средишта карте</string>
@@ -4951,7 +4954,7 @@
     <string name="last_sync">Последње усклађивање</string>
     <string name="import_export">Увоз/извоз</string>
     <string name="shared_string_purchased_on">Купљено</string>
-    <string name="map_widget_altitude_map_center_desc">Приказује надморску висину на тренутном средишту карте</string>
+    <string name="map_widget_altitude_map_center_desc">Приказује надморску висину на тренутном средишту карте.</string>
     <string name="ant_read_data">Читај податке</string>
     <string name="map_widget_ant_bicycle_power_desc">Приказује излазну снагу бициклисте, која се користи да погони бицикл</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Приказује брзину којом бициклиста педала</string>
@@ -5009,7 +5012,7 @@
     <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу „%1$s“
 \nТреба да уградите или освежите АНТ + службу прикључака
 \nДа ли желите да покренете складиште игара за то\?</string>
-    <string name="updated_map_time">Освежено: %1$s</string>
+    <string name="updated_map_time">Освежено: %1$s.</string>
     <string name="live_update_frequency_hour_variant">Освежења карата се проверавају сваког сата.</string>
     <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
     <string name="no_altitude_data_desc">Ради пријема података %1$s, придодајте своју стазу путу или прорачунајте је на мрежи.</string>
