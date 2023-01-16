@@ -5016,4 +5016,6 @@
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
     <string name="x_axis">Axe des abscisses</string>
     <string name="y_axis">Axe des ordonnées</string>
+    <string name="value_downloaded_of_mb">Téléchargement %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Partager le lien</string>
 </resources>
