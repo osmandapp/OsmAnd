@@ -286,7 +286,7 @@
     <string name="gpx_selection_track">%1$s
 \nTraza %2$s</string>
     <string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
-    <string name="always_center_position_on_map">Mostrar ubicación en el centro</string>
+    <string name="always_center_position_on_map">Mostrar ubicación siempre en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
