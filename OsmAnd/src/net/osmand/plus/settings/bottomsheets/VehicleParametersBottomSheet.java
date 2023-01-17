@@ -1,13 +1,14 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
+
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -26,9 +27,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -66,6 +70,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	@SuppressLint("ClickableViewAccessibility")
 	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
 		SizePreference preference = (SizePreference) getPreference();
+		MetricsConstants metricsConstants = app.getSettings().METRIC_SYSTEM.get();
 		View mainView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_edit_with_chips_view, null);
 		TextView title = mainView.findViewById(R.id.title);
@@ -88,19 +93,25 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		} catch (NumberFormatException e) {
 			currentValue = 0.0f;
 		}
-		selectedItem = preference.getEntryFromValue(preference.getValue());
-		String currentValueStr = currentValue == 0.0f ? "" : df.format(currentValue + 0.01f);
+
+		String currentValueStr;
+		if (preference.isLengthAssets()) {
+			selectedItem = OsmAndFormatter.convertLength(app, metricsConstants, currentValue).value;
+			currentValueStr = currentValue == 0.0f ? "" : selectedItem;
+		} else {
+			selectedItem = preference.getEntryFromValue(preference.getValue());
+			currentValueStr = currentValue == 0.0f ? "" : df.format(currentValue + 0.01f);
+		}
 		text.setText(currentValueStr);
 		text.clearFocus();
-		text.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				text.onTouchEvent(event);
-				text.setSelection(text.getText().length());
-				return true;
-			}
+		text.setOnTouchListener((v, event) -> {
+			text.onTouchEvent(event);
+			text.setSelection(text.getText().length());
+			return true;
 		});
 		text.addTextChangedListener(new TextWatcher() {
+			final DecimalFormat df = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
@@ -111,16 +122,27 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 			@Override
 			public void afterTextChanged(Editable s) {
+				float value = 0.0f;
+
 				if (!Algorithms.isEmpty(s)) {
 					try {
-						currentValue = Float.parseFloat(s.toString()) - 0.01f;
+						if (preference.isLengthAssets()) {
+							value = Float.parseFloat(s.toString());
+							currentValue = Float.parseFloat(df.format(convertLengthToMeters(app, value)));
+						} else {
+							currentValue = Float.parseFloat(s.toString()) - 0.01f;
+						}
 					} catch (NumberFormatException e) {
 						currentValue = 0.0f;
 					}
 				} else {
 					currentValue = 0.0f;
 				}
-				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
+
+				selectedItem = preference.isLengthAssets()
+						? df.format(value)
+						: preference.getEntryFromValue(String.valueOf(currentValue));
+
 				ChipItem selected = chipsView.getChipById(selectedItem);
 				chipsView.setSelected(selected);
 				if (selected != null) {
@@ -131,18 +153,41 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		});
 
 		List<ChipItem> chips = new ArrayList<>();
-		for (String entry : preference.getEntries()) {
-			ChipItem chip = new ChipItem(entry);
-			chip.title = entry;
+		for (int i = 0; i < preference.getEntryValues().length; i++) {
+			String value;
+			String chipTitle;
+			if (preference.isLengthAssets()) {
+				float entryValue = Float.parseFloat(preference.getEntryValues()[i]) + 0.01f;
+				FormattedValue formattedValue = OsmAndFormatter.convertLength(app, metricsConstants, entryValue);
+				value = formattedValue.value;
+				chipTitle = (entryValue - 0.01f) == 0f ? getString(R.string.shared_string_none) : formattedValue.format(app);
+			} else {
+				String entryValue = preference.getEntries()[i];
+				value = entryValue;
+				chipTitle = entryValue;
+			}
+
+			ChipItem chip = new ChipItem(value);
+			chip.title = chipTitle;
 			chips.add(chip);
 		}
 		chipsView.setItems(chips);
 
 		chipsView.setOnSelectChipListener(chip -> {
 			selectedItem = chip.id;
-			currentValue = preference.getValueFromEntries(selectedItem);
-			String currentValueStr1 = currentValue == 0.0f
-					? "" : df.format(currentValue + 0.01f);
+			String currentValueStr1;
+			if (preference.isLengthAssets()) {
+				try {
+					currentValue = (float) convertLengthToMeters(app, Float.parseFloat(chip.id));
+				} catch (NumberFormatException e){
+					currentValue = 0.0f;
+				}
+				currentValueStr1 = currentValue == 0.0f ? "" : chip.id;
+			} else {
+				currentValue = preference.getValueFromEntries(selectedItem);
+				currentValueStr1 = currentValue == 0.0f
+						? "" : df.format(currentValue + 0.01f);
+			}
 			text.setText(currentValueStr1);
 			if (text.hasFocus()) {
 				text.setSelection(text.getText().length());
@@ -154,6 +199,19 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
 				.create();
+	}
+
+	private double convertLengthToMeters(@NonNull OsmandApplication app, float value) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		float resultValue;
+		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+			resultValue = value / FEET_IN_ONE_METER;
+		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
+			resultValue = value / YARDS_IN_ONE_METER;
+		} else {
+			resultValue = value;
+		}
+		return resultValue;
 	}
 
 	@Nullable

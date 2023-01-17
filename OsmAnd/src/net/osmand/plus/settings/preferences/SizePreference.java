@@ -6,6 +6,9 @@ import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
+import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 
 import java.math.BigDecimal;
@@ -19,6 +22,15 @@ public class SizePreference extends DialogPreference {
 	private String[] entryValues;
 	private String description;
 	private VehicleSizeAssets assets;
+	private MetricsConstants metricsConstants;
+
+	public MetricsConstants getMetricsConstants() {
+		return metricsConstants;
+	}
+
+	public void setMetricsConstants(MetricsConstants metricsConstants) {
+		this.metricsConstants = metricsConstants;
+	}
 
 	public VehicleSizeAssets getAssets() {
 		return assets;
@@ -94,10 +106,16 @@ public class SizePreference extends DialogPreference {
 		}
 		if (!isPersistedStringEqualsZero(persistedString)) {
 			try {
-				DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
-				persistedString = df.format(Double.parseDouble(persistedString) + 0.01d);
-				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
-						persistedString, getContext().getString(assets.getMetricShortRes()));
+				if(isLengthAssets()){
+					FormattedValue formattedValue = OsmAndFormatter.convertLength(getContext(), metricsConstants, Float.parseFloat(persistedString));
+					summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
+							formattedValue.value, formattedValue.unit);
+				}else{
+					DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+					persistedString = df.format(Double.parseDouble(persistedString) + 0.01d);
+					summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
+							persistedString, getContext().getString(assets.getMetricShortRes()));
+				}
 			} catch (NumberFormatException e) {
 				summary = entries[0];
 			}
@@ -111,5 +129,11 @@ public class SizePreference extends DialogPreference {
 
 	public String getValue () {
 		return getPersistedString(defaultValue);
+	}
+
+	public boolean isLengthAssets(){
+		return assets == VehicleSizeAssets.LENGTH || assets == VehicleSizeAssets.BOAT_HEIGHT
+				|| assets == VehicleSizeAssets.HEIGHT || assets == VehicleSizeAssets.BOAT_WIDTH
+				|| assets == VehicleSizeAssets.WIDTH;
 	}
 }

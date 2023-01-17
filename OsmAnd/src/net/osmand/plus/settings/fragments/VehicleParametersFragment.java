@@ -119,6 +119,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		vehicleSizePref.setEntries(entriesStr);
 		vehicleSizePref.setEntryValues(valuesStr);
 		vehicleSizePref.setSummary(description);
+		vehicleSizePref.setMetricsConstants(app.getSettings().METRIC_SYSTEM.get());
 		vehicleSizePref.setIcon(getPreferenceIcon(parameterId));
 		vehicleSizePref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(vehicleSizePref);

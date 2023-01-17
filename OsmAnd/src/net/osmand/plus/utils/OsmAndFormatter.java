@@ -768,6 +768,22 @@ public class OsmAndFormatter {
 		return coordinate;
 	}
 
+	public static FormattedValue convertLength(@NonNull Context context, @NonNull MetricsConstants metricsConstants, float valueInMeters) {
+		float resultValue;
+		String valueFormat;
+		if (metricsConstants == MetricsConstants.MILES_AND_FEET || metricsConstants == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+			resultValue = valueInMeters * FEET_IN_ONE_METER;
+			valueFormat = context.getString(R.string.foot);
+		} else if (metricsConstants == MetricsConstants.MILES_AND_YARDS) {
+			resultValue = valueInMeters * YARDS_IN_ONE_METER;
+			valueFormat = context.getString(R.string.yard);
+		} else {
+			resultValue = valueInMeters;
+			valueFormat = context.getString(R.string.m);
+		}
+		return new FormattedValue(String.format(Locale.US, "%.1f", resultValue), valueFormat);
+	}
+
 	public static class FormattedValue {
 
 		public final String value;
