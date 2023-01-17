@@ -72,12 +72,15 @@ public class MapViewWithLayers extends FrameLayout {
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
+			mapView.setMapRenderer(atlasMapRendererView);
+			atlasMapRendererView.show();
 		} else {
 			surfaceView.setMapView(useAndroidAuto ? null : mapView);
-		}
-		mapView.setMapRenderer(useOpenglRender ? atlasMapRendererView : null);
-		if (!useOpenglRender) {
+			mapView.setMapRenderer(null);
 			resetMapRendererView();
+			if (atlasMapRendererView != null) {
+				atlasMapRendererView.hide();
+			}	
 		}
 		if (useAndroidAuto) {
 			AndroidUiHelper.updateVisibility(surfaceView, false);
