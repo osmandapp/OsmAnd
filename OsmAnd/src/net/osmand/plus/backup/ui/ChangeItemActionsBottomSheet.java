@@ -124,14 +124,14 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	private void setupUploadAction(@NonNull View view) {
 		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE;
-		boolean enabled = isRowEnabled(item.fileName) && (item.localFile != null || deleteOperation);
-		String title = getString(deleteOperation ? R.string.upload_change : R.string.upload_local_version);
+		boolean enabled = isRowEnabled(item.fileName);
+		String title = getString(deleteOperation || item.localFile == null ? R.string.upload_change : R.string.upload_local_version);
 		String description;
 		if (deleteOperation) {
 			description = recentChangesType == RECENT_CHANGES_LOCAL ? getString(R.string.cloud_version_will_be_removed)
 					: generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 		} else if (item.localFile == null) {
-			description = getString(R.string.shared_string_do_not_exist);
+			description = getString(R.string.cloud_version_will_be_removed);
 		} else {
 			description = generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 			if (recentChangesType == RECENT_CHANGES_REMOTE) {
@@ -147,7 +147,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		descriptionTv.setText(description);
 		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, ColorUtilities.getActiveColorId(nightMode)));
 		uploadItem.setOnClickListener(v -> {
-			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
+			syncItem(deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
 			dismiss();
 		});
 		uploadItem.setEnabled(enabled);
