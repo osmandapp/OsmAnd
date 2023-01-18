@@ -516,7 +516,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_external_link, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_link, ColorUtilities.getDefaultIconColorId(nightMode)))
 					.setOnClickListener(_view -> shareLink(app))
 					.create());
 
