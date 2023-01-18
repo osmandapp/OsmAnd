@@ -1168,7 +1168,7 @@
     <string name="lang_uk">Ukrainien</string>
     <string name="lang_vi">Vietnamien</string>
     <string name="lang_cy">Gallois</string>
-    <string name="always_center_position_on_map">Centrer l\'écran sur la position actuelle</string>
+    <string name="always_center_position_on_map">Placement de la position toujours au centre</string>
     <string name="voice_pref_title">Voix</string>
     <string name="misc_pref_title">Divers</string>
     <string name="localization_pref_title">Paramètres régionaux</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Affichage sur l\'écran</string>
+    <string name="display_position">Position placement</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
@@ -4948,7 +4948,55 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et fréquence cardiaque.</string>
-    <string name="release_4_3">• Nouvelle version, plus rapide, du moteur de rendu de la carte, avec vue 2.5D
+    <string name="release_4_3">• New, faster Version 2 (OpenGL) map rendering engine, with 2.5D view
+\n
+\n • Smooth animation of location changes while in motion
+\n
+\n • New widgets for map center coordinates and elevation of geolocations
+\n
+\n • \"Distance to tap\": added text size options
+\n
+\n • \"Map marker\" widget: added option to change click behavior
+\n
+\n • Fixed \"Position placement\" option
+\n
+\n • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions
+\n
+\n • Reorganized \"Nautical maps\" list
+\n
+\n • Added support for ANT+ sensors
+\n
+\n • Added option to disable download UUID
+\n
+\n • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times
+\n
+\n • Fixed audio output and volume slider behavior
+\n
+\n
+\n
+\n • Smooth animation of location changes while in motion
+\n
+\n • New widgets for map center coordinates and elevation of geolocations
+\n
+\n • \"Distance to tap\": added text size options
+\n
+\n • \"Map marker\" widget: added option to change click behavior
+\n
+\n • Fixed \"Position placement\" option
+\n
+\n • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions
+\n
+\n • Reorganized \"Nautical maps\" list
+\n
+\n • Added support for ANT+ sensors
+\n
+\n • Added option to disable download UUID
+\n
+\n • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times
+\n
+\n • Fixed audio output and volume slider behavior
+\n
+\n
 \n
 \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
 \n
@@ -5018,4 +5066,7 @@
     <string name="y_axis">Axe des ordonnées</string>
     <string name="value_downloaded_of_mb">Téléchargement %1$.1f/%2$.1f MB</string>
     <string name="share_link">Partager le lien</string>
+    <string name="share_as_file">Partager en tant que fichier</string>
+    <string name="skip_download">Ignorer le téléchargement</string>
+    <string name="determine_location">Permettez-nous de déterminer votre emplacement</string>
 </resources>
