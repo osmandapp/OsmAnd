@@ -51,7 +51,8 @@
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
 						android:tint="@color/icon_color_default_light"
-						osmand:srcCompat="@drawable/ic_arrow_back" />
+						osmand:srcCompat="@drawable/ic_arrow_back"
+						android:contentDescription="@string/shared_string_back"/>
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/toolbar_title"
@@ -78,7 +79,8 @@
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
 						android:tint="?default_icon_color"
-						osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+						osmand:srcCompat="@drawable/ic_overflow_menu_white"
+						android:contentDescription="@string/shared_string_menu"/>
 
 				</LinearLayout>
 
