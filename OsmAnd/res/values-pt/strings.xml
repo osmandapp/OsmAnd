@@ -4858,23 +4858,23 @@
 \n
 \n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
-\n • Opções de tamanho de texto adicionadas em \"Distância com 2 dedos\"
+\n • Adicionadas opções de tamanho de texto em \"Distância com 2 dedos\"
 \n
-\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do toque/clique
 \n
 \n • Corrigida opção de \"Posição no ecrã\"
 \n
 \n • GPX: adicionado suporte para etiquetas \"link\", \"cmt\", \"desc\" e para quaisquer extensões personalizadas
 \n
-\n • Lista de \"mapas náuticos\" reorganizada
+\n • Reorganização da lista de \"mapas náuticos\"
 \n
-\n • Adicionado suporte para sensores ANT+
+\n • Adicionado suporte a sensores ANT+
 \n
-\n • Opção adicionada para desativar o descarregamento do UUID
+\n • Adicionada opção para desativar o descarregamento do UUID
 \n
 \n • Previsão ajustável de velocidade padrão para tempos de viagem dos perfis \"a pé/caminhada/corrida\" dependentes da elevação
 \n
-\n • Saída de áudio e comportamento do controle deslizante de volume corrigidas
+\n • Correções na saída de áudio e comportamento do controle deslizante de volume
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>

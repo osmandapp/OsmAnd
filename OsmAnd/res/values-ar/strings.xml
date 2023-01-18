@@ -842,7 +842,7 @@
 \nاضغط مطولا للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
-    <string name="always_center_position_on_map">الموقع في المنتصف</string>
+    <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
@@ -4840,7 +4840,7 @@
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
-    <string name="display_position">عرض الموقف</string>
+    <string name="display_position">تنسيق الموضع</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+    <string name="always_center_position_on_map">Pone sa positzione semper in su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -662,7 +662,7 @@
     <string name="accessibility_preferences_descr">Preferèntzias ligadas a s’atzessibilidade.</string>
     <string name="shared_string_accessibility">Atzessibilidade</string>
     <string name="local_openstreetmap_uploading">Carrighende…</string>
-    <string name="local_openstreetmap_uploadall">Carriga totu</string>
+    <string name="local_openstreetmap_uploadall">Càrriga totu</string>
     <string name="show_current_gpx_title">Ammustra sa rasta currente</string>
     <string name="free_version_title">Versione gratùita</string>
     <string name="poi_context_menu_showdescription">Ammustra descritzione PDI.</string>
@@ -865,8 +865,8 @@
     <string name="search_offline_clear_search">Chirca noa</string>
     <string name="map_text_size_descr">Mannària de su testu pro sos nùmenes in sa mapa:</string>
     <string name="map_text_size">Mannaria testos mapa</string>
-    <string name="trace_rendering">Informatziones diagnosticas disinnu</string>
-    <string name="trace_rendering_descr">Ammustra sa prestatzione de su disinnu.</string>
+    <string name="trace_rendering">Informatziones de depuratzione de còdighe de su rendimentu</string>
+    <string name="trace_rendering_descr">Ammustra sas prestatziones de renderizatzione e navigatzione.</string>
     <string name="installing_new_resources">Aperinde datos novos…</string>
     <string name="internet_connection_required_for_online_route">Sa navigatzione in lìnia non funtzionat si non ses cunnessu.</string>
     <string name="tts_language_not_supported_title">Limba non suportada</string>
@@ -4192,7 +4192,7 @@
     <string name="shared_string_discussion">Arresonu</string>
     <string name="shared_string_view_all">Pòmpia totu</string>
     <string name="backup_welcome_back">Bene torradu!</string>
-    <string name="backup_welcome_back_descr">Riprìstina sos datos in custu dispositivu impreende còpias de seguresa chi esistint giai o sarvende·nde una in OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Riprìstina sos datos in custu dispositivu impreende OsmAnd Cloud.</string>
     <string name="backup_setup">Imposta sa còpia de seguresa</string>
     <string name="backup_restore_now">Riprìstina como</string>
     <string name="attribute">Propiedades</string>
@@ -4223,8 +4223,8 @@
     <string name="backup_version_history_removed">Totu sas versiones sunt istadas iscantzelladas.</string>
     <string name="backup_data_removed">Totu sos datos sunt istados iscantzellados.</string>
     <string name="shared_string_progress">Progressu</string>
-    <string name="backup_do_not_have_any">Non tenes galu una còpia de seguresa in lìnia.</string>
-    <string name="backup_dont_have_any_descr">Pranìfica còpias de seguresa automàticas pro non pèrdere mai sos datos tuos.</string>
+    <string name="backup_do_not_have_any">Non tenes galu peruna còpia de seguresa in lìnia.</string>
+    <string name="backup_dont_have_any_descr">Imposta una còpia de seguresa automàtica in manera de non tènnere su pensamentu de sos datos pèrdidos.</string>
     <string name="track_has_no_needed_data">Sa rasta non tenet sos datos currispondentes.</string>
     <string name="enter_verification_code">Inserta sa crae a impreu sìngulu</string>
     <string name="backup_error_user_is_already_registered">Custu indiritzu de posta l\'impreat giai un\'àteru contu</string>
@@ -4731,9 +4731,9 @@
     <string name="get_altitude_data">Otene sos datos de s\'artària</string>
     <string name="no_altitude_data">Perunu datu de artària</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferi su foras de pista</string>
-    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_diesel_name">Gasòliu</string>
     <string name="routing_attr_motor_type_electric_name">Elètricu</string>
-    <string name="routing_attr_motor_type_gas_name">Metanu</string>
+    <string name="routing_attr_motor_type_gas_name">Metanu GNC</string>
     <string name="audio_video_notes_desc">Frunit un\'atzessu lestru pro fàghere partire/firmare una nota sonora, vìdeu o foto.</string>
     <string name="calculate_online_altitude_descr">Càrcula s\'artària in lìnia in sos serbidores de OsmAnd in base a sas immàgines satellitares e sos modellos de artària digitale. Sas diferèntzias cunfronta a s\'artària registrada dae su dispositivu si diat pòdere impreare comente curretzione de s\'artària.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Toca su widget pro cambiare modalidade.</string>
@@ -4777,7 +4777,7 @@
     <string name="shared_string_large">Mannu</string>
     <string name="shared_string_normal">Normale</string>
     <string name="how_to_use">Comente s\'impreat:</string>
-    <string name="display_position">Positzione in s\'ischermu</string>
+    <string name="display_position">Ponidura de sa positzione</string>
     <string name="map_markers_desc">Su widget ammustrat sa distàntzia o s\'ora de arrivu carculada (ETA) pro sos primos duos marcadores in sa lista de marcadores de sa mapa.</string>
     <string name="quick_action_map_center_widget_descr">Unu butone pro ammustrare o cuare su widget de su tzentru de sa mapa in sa mapa.</string>
     <string name="coordinates_widget_current_location_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale</string>
@@ -4857,7 +4857,7 @@
 \n
 \n • Annanta a su widget \"Marcadore mapa\" s\'optzione pro modificare su cumportamentu de sas incarcadas
 \n
-\n • Optzione \"Ammustra positzione\" acontzada.
+\n • Optzione \"Ponidura de sa positzione\" acontzada.
 \n
 \n • GPX: agiuntu su suportu pro sas etichetas \"link\", \"cmt\", \"desc\" e pro estensiones personalizadas eventuales
 \n
@@ -4991,4 +4991,42 @@
     <string name="si_nm_mt">Mìllios nàuticos/metros</string>
     <string name="si_nm_ft">Mìllios nàuticos/pees</string>
     <string name="av_audio_format_bottom_sheet_descr">Seletziona su formadu de essida de s\'àudio. Su formadu de sa casta de documentu pro s\'àudio est 3GPP (.3gp).</string>
+    <string name="check_for_updates">Chirca agiornamentos</string>
+    <string name="changes">Modìficas %1$s</string>
+    <string name="cloud_changes">Modìficas in sa nue</string>
+    <string name="deleted_file">Documentu iscantzelladu</string>
+    <string name="sync_now">Sincroniza como</string>
+    <string name="local_file_will_be_restored">Su documentu locale s\'at a ripristinare</string>
+    <string name="local_changes_will_be_dismissed">Sas modìficas locales s\'ant a ignorare</string>
+    <string name="upload_change">Càrriga sa modìfica</string>
+    <string name="cloud_version_will_be_removed">Sa versione de sa nue s\'at a iscantzellare</string>
+    <string name="cloud_changes_will_be_dismissed">Sas modìficas in sa nue s\'ant a iscartare</string>
+    <string name="shared_string_do_not_exist">No esistit</string>
+    <string name="x_axis">Asse X</string>
+    <string name="shared_string_uploaded">Carrigadu</string>
+    <string name="local_changes">Modìficas locales</string>
+    <string name="cloud_conflicts">Cunflitos</string>
+    <string name="cloud_recent_changes">Modìficas</string>
+    <string name="cloud_no_conflicts">Non bi sunt cunflitos</string>
+    <string name="last_sync">Ùrtima sincronizatzione</string>
+    <string name="shared_string_expires">Iscadit</string>
+    <string name="shared_string_purchased_on">Comporadu su</string>
+    <string name="share_link">Cumpartzi su ligàmene</string>
+    <string name="share_as_file">Cumpartzi comente documentu</string>
+    <string name="value_downloaded_of_mb">Iscarrighende %1$.1f/%2$.1f MB</string>
+    <string name="y_axis">Asse Y</string>
+    <string name="skip_download">Brinca s\'iscarrigamentu</string>
+    <string name="determine_location">Permite·nos de determinare sa positzione tua</string>
+    <string name="modified_file">Documentu modificadu</string>
+    <string name="cloud_all_changes_uploaded">Totu sas modìficas sunt istadas carrigadas</string>
+    <string name="shared_string_cloud">Nue</string>
+    <string name="new_file">Documentu nou</string>
+    <string name="cloud_conflict">Cunflitu</string>
+    <string name="upload_all">Càrriga totu</string>
+    <string name="cloud_all_changes_downloaded">Totu sas modìficas sunt istadas iscarrigadas</string>
+    <string name="cloud_all_changes_uploaded_descr">Totu sas modìficas fatas in custu dispositivu sunt sincronizadas cun OsmAnd Cloud.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Recùperu de sa lista de documentos dae su serbidore fallidu.</string>
+    <string name="download_cloud_version">Iscàrriga sa versione de sa nue</string>
+    <string name="import_export">Importa/Esporta</string>
+    <string name="export_to_file">Esporta a unu documentu</string>
 </resources>
