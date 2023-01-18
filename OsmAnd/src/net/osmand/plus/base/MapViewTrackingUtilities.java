@@ -321,7 +321,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (isMapLinkedToLocation) {
 				boolean trackDetailsVisible = detailsMenu != null && detailsMenu.isVisible();
 				int displayPosition;
-				if (settings.CENTER_POSITION_ON_MAP.get() || trackDetailsVisible) {
+				if (settings.POSITION_PLACEMENT_ON_MAP.get() == OsmandSettings.POSITION_PLACEMENT_CENTER
+					|| ((settings.POSITION_PLACEMENT_ON_MAP.get() == OsmandSettings.POSITION_PLACEMENT_AUTOMATIC) && (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_BEARING))
+					|| trackDetailsVisible) {
 					displayPosition = OsmandSettings.CENTER_CONSTANT;
 				} else {
 					displayPosition = OsmandSettings.BOTTOM_CONSTANT;
