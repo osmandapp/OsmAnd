@@ -5068,5 +5068,5 @@
     <string name="share_link">Partager le lien</string>
     <string name="share_as_file">Partager en tant que fichier</string>
     <string name="skip_download">Ignorer le téléchargement</string>
-    <string name="determine_location">Permettez-nous de déterminer votre emplacement</string>
+    <string name="determine_location">Nous permet d’estimer votre position</string>
 </resources>
