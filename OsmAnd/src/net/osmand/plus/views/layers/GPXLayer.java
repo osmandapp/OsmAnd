@@ -1782,9 +1782,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
+		clearSelectedFilesSegments();
 		clearXAxisPoints();
 		clearPoints();
 		clearSelectedFilesSplits();
+	}
+
+	private void clearSelectedFilesSegments() {
+		segmentsCache.clear();
+		if (hasMapRenderer()) {
+			for (Set<TrkSegment> segments : renderedSegmentsCache.values()) {
+				for (TrkSegment segment : segments) {
+					resetSymbolProviders(segment);
+				}
+			}
+		}
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
