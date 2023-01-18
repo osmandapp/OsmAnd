@@ -194,7 +194,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	Paint paintCenter;
 
 	private DisplayMetrics dm;
-	private MapRendererView mapRenderer;
+	private volatile MapRendererView mapRenderer;
 
 	private Bitmap bufferBitmap;
 	private RotatedTileBox bufferImgLoc;

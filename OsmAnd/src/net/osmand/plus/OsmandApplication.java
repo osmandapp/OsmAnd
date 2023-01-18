@@ -205,8 +205,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
-	private volatile int activeRendererVersion;
-
 	// Typeface
 
 	@Override
@@ -1056,17 +1054,5 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean useOpenGlRenderer() {
 		return NativeCoreContext.isInit() && osmandSettings.USE_OPENGL_RENDER.get();
-	}
-
-	public void setActiveRendererVersion(int version) {
-		activeRendererVersion = version;
-	}
-
-	public boolean isLegacyActive() {
-		return activeRendererVersion == 1;
-	}
-
-	public boolean isOpenGlActive() {
-		return activeRendererVersion == 2;
 	}
 }
