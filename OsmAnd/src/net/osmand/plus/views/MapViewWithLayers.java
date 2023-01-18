@@ -68,16 +68,18 @@ public class MapViewWithLayers extends FrameLayout {
 		OsmAndMapLayersView mapLayersView = findViewById(R.id.MapLayersView);
 
 		boolean useOpenglRender = app.useOpenGlRenderer() && !useAndroidAuto;
+		app.setActiveRendererVersion(0);
 		if (useOpenglRender) {
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
+			mapView.setMapRenderer(atlasMapRendererView);
+			app.setActiveRendererVersion(2);
 		} else {
 			surfaceView.setMapView(useAndroidAuto ? null : mapView);
-		}
-		mapView.setMapRenderer(useOpenglRender ? atlasMapRendererView : null);
-		if (!useOpenglRender) {
+			mapView.setMapRenderer(null);
 			resetMapRendererView();
+			app.setActiveRendererVersion(1);
 		}
 		if (useAndroidAuto) {
 			AndroidUiHelper.updateVisibility(surfaceView, false);
@@ -125,6 +127,7 @@ public class MapViewWithLayers extends FrameLayout {
 	}
 
 	public void onDestroy() {
+		app.setActiveRendererVersion(0);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
