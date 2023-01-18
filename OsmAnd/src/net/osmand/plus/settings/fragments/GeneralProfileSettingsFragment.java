@@ -168,7 +168,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Drawable icon;
 		String summary;
 		if (positionPlacement == 0) {
-			icon = getActiveIcon(R.drawable.ic_action_keep_both);
+			icon = getActiveIcon(R.drawable.ic_action_bearing);
 			summary = getString(R.string.shared_string_automatic);
 		} else if (positionPlacement == 1) {
 			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
