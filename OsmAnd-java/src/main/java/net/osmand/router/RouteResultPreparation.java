@@ -1598,17 +1598,18 @@ public class RouteResultPreparation {
 			}
 
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
-				if (smallTargetVariation || smallStraightVariation) {
+				boolean hasThrough = hasThroughWOSightly(turnLanesPrevSegm, currentSegm, prevSegm, attachedOnTheRight);
+				if ((smallTargetVariation || smallStraightVariation) && !hasThrough) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						if(turnLanesAttachedRoad != null) {
+						if (turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
@@ -1624,7 +1625,27 @@ public class RouteResultPreparation {
 		}
 		return rs;
 	}
-	
+
+	private boolean hasThroughWOSightly(String turnLanesPrevSeg, RouteSegmentResult currentSeg,
+	                                    RouteSegmentResult prevSeg, boolean attachedOnTheRight) {
+		String turnLanesCurSeg = getTurnLanesString(currentSeg);
+		if (turnLanesPrevSeg != null && turnLanesCurSeg != null
+				&& prevSeg.getTurnType() == null && currentSeg.getTurnType() == null) {
+			int[] turnsCur = calculateRawTurnLanes(turnLanesCurSeg, TurnType.C);
+			int laneCur = attachedOnTheRight ? turnsCur[turnsCur.length - 1] : turnsCur[0];
+			int[] turns = calculateRawTurnLanes(turnLanesPrevSeg, TurnType.C);
+			int lane = attachedOnTheRight ? turns[turns.length - 1] : turnsCur[0];
+			boolean hasActiveThrough = TurnType.getPrimaryTurn(lane) == TurnType.C && TurnType.getPrimaryTurn(laneCur) == TurnType.C;
+			boolean hasNotSlightTurn = !hasSlightlyTurn(turnLanesCurSeg); // test 2.3. Highway 161 Service Road to Lyndon B Johnson Freeway (I 635) link
+			return hasActiveThrough && hasNotSlightTurn;
+		}
+		return false;
+	}
+
+	private static boolean hasSlightlyTurn(String turnLanesCurSegm) {
+		return turnLanesCurSegm.contains("slight_left") || turnLanesCurSegm.contains("slight_right");
+	}
+
 	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
 		if (turnLanesPrevSegm != null) {
 			int[] turns = calculateRawTurnLanes(turnLanesPrevSegm, TurnType.C);
