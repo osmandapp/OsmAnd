@@ -202,6 +202,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 				entries, nightMode, selected, app, profileColor, themeRes, v -> {
 					int selectedEntryIndex = (int) v.getTag();
 					applyPreferenceWithSnackBar(preference.getKey(), selectedEntryIndex);
+					MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+					if (mapViewTrackingUtilities != null) {
+						mapViewTrackingUtilities.updateSettings();
+					}
 				}
 		);
 
