@@ -214,7 +214,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showRouteInfoMenu(int menuState) {
-		mapRouteInfoMenu.setShowMenu(menuState);
+		if (mapRouteInfoMenu != null) {
+			mapRouteInfoMenu.setShowMenu(menuState);
+		}
 	}
 
 	public void initDashboardRelatedControls() {

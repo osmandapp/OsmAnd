@@ -176,7 +176,7 @@ public class IntentHelper {
 
 		if (intermediatePoints != null) {
 			app.getSettings().clearIntermediatePoints();
-			for(TargetPoint point : intermediatePoints){
+			for (TargetPoint point : intermediatePoints) {
 				app.getSettings().insertIntermediatePoint(point.getLatitude(), point.getLongitude(),
 						null, app.getSettings().getIntermediatePoints().size());
 			}
