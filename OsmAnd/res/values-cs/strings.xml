@@ -4659,4 +4659,6 @@
     <string name="shared_string_time_left">Zbývající čas</string>
     <string name="rendering_attr_depthContourWidth_name">Tloušťka čáry</string>
     <string name="shared_string_layers">Vrstvy</string>
+    <string name="share_as_file">Sdílet jako soubor</string>
+    <string name="share_link">Sdílet odkaz</string>
 </resources>
