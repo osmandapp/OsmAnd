@@ -5,7 +5,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/list_background_color"
-	android:clickable="true"
 	android:orientation="vertical">
 
 	<ScrollView
@@ -26,15 +25,15 @@
 				android:orientation="horizontal">
 
 				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/back_button"
-					android:layout_width="38dp"
-					android:layout_height="42dp"
+					android:id="@+id/logo"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
 					android:layout_marginStart="22dp"
 					android:layout_marginTop="16dp"
+					android:scaleType="centerCrop"
 					osmand:layout_constraintStart_toStartOf="parent"
 					osmand:layout_constraintTop_toTopOf="parent"
 					osmand:srcCompat="@drawable/ic_action_osmand_logo"
-					android:scaleType="centerCrop"
 					osmand:tint="@color/icon_color_osmand_light" />
 
 				<ImageButton
@@ -57,8 +56,9 @@
 					android:text="@string/welcome_header"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="24sp"
+					android:textStyle="bold"
 					osmand:layout_constraintStart_toStartOf="parent"
-					osmand:layout_constraintTop_toBottomOf="@+id/back_button"
+					osmand:layout_constraintTop_toBottomOf="@+id/logo"
 					osmand:typeface="@string/font_roboto_medium" />
 
 			</androidx.constraintlayout.widget.ConstraintLayout>
@@ -68,7 +68,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_margin="@dimen/content_padding"
-				android:layout_marginStart="@dimen/content_padding"
 				android:text="@string/first_usage_wizard_desc"
 				android:textColor="?android:attr/textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
@@ -76,8 +75,7 @@
 			<View
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="@color/divider_color"
-				android:layout_marginBottom="@dimen/content_padding_small_half"/>
+				android:background="?attr/list_divider" />
 
 			<LinearLayout
 				android:id="@+id/wizard_card"
@@ -97,9 +95,9 @@
 						android:id="@+id/wizard_progress_bar_icon"
 						android:layout_width="54dp"
 						android:layout_height="60dp"
-						android:padding="10dp"
 						android:indeterminate="true"
-						android:visibility="gone"/>
+						android:padding="10dp"
+						android:visibility="gone" />
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/wizard_icon"
@@ -148,13 +146,14 @@
 						osmand:srcCompat="@drawable/ic_action_my_location" />
 
 				</LinearLayout>
+
 				<include
 					android:id="@+id/wizard_action_button"
 					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/setting_list_item_small_height"
-					android:gravity="center"
-					android:layout_marginHorizontal="@dimen/content_padding" />
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:gravity="center" />
 
 
 			</LinearLayout>
@@ -164,9 +163,8 @@
 				style="@style/DescStyle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginStart="40dp"
-				android:layout_marginEnd="40dp"
 				android:text="@string/terms_of_service_desc"
 				android:textColor="?android:textColorSecondary" />
 
