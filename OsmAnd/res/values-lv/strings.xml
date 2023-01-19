@@ -2178,7 +2178,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="select_city">Izvēlieties pilsētu</string>
     <string name="select_postcode">Izvēlieties pasta kodu</string>
     <string name="quick_action_auto_zoom">Kartes automātiskā tālummaiņa iesl/izsl</string>
-    <string name="driving_region_automatic">Automātiski</string>
+    <string name="shared_string_automatic">Automātiski</string>
     <string name="private_access_routing_req">Galamērķis atrodas privātas teritorijas vietā. Vai iekļaut maršrutā ierobežotas piekļuves ceļus\?</string>
     <string name="restart_search">Meklēt atkārtoti</string>
     <string name="increase_search_radius">Paplašināt meklēšanas rādiusu</string>
@@ -2447,8 +2447,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="import_as_favorites">Importēt kā Izlasi</string>
     <string name="import_file">Importēt failu</string>
     <string name="marker_show_distance_descr">Izvēlieties kā rādīt distanci un virzienu uz marķieriem kartē:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartes orientācijas maiņa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Izvēlieties ātrumu, pie kura pārslēgsies kartes orientācija no \'kustības virzienā\' uz \'kompasa virzienā\'.</string>
     <string name="all_markers_moved_to_history">Visi kartes marķieri ir pārvietoti uz vēsturi</string>
     <string name="marker_moved_to_history">Kartes marķieris ir pārvietots uz vēsturi</string>
     <string name="marker_moved_to_active">Kartes marķieris ir aktivizēts</string>

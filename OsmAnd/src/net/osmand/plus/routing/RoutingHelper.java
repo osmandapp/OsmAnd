@@ -3,7 +3,7 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
@@ -25,6 +25,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -274,7 +275,7 @@ public class RoutingHelper {
 					l.newRouteIsCalculated(newRoute, showToast);
 				}
 			}
-			if (showToast.value && newRoute && PluginsHelper.isDevelopment()) {
+			if (showToast.value && newRoute && PluginsHelper.isDevelopment() && settings.DEBUG_RENDERING_INFO.get()) {
 				String msg = app.getString(R.string.new_route_calculated_dist_dbg,
 						OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
 						((int) res.getRoutingTime()) + " sec",
@@ -440,9 +441,10 @@ public class RoutingHelper {
 				}
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
+				Location prev = route.getRouteLocationByDistance(-15);//-15 meters
 				boolean isStraight =
 						route.getRouteService() == RouteService.DIRECT_TO || route.getRouteService() == RouteService.STRAIGHT;
-				boolean wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(currentLocation, next);
+				boolean wrongMovementDirection = RoutingHelperUtils.checkWrongMovementDirection(currentLocation, prev, next);
 				if ((allowableDeviation > 0 && wrongMovementDirection && !isStraight
 						&& (currentLocation.distanceTo(routeNodes.get(currentRoute)) > allowableDeviation)) && !settings.DISABLE_WRONG_DIRECTION_RECALC.get()) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
@@ -796,7 +798,7 @@ public class RoutingHelper {
 	}
 
 	public List<RouteDirectionInfo> getRouteDirections() {
-		return route.getRouteDirections();
+		return new ArrayList<>(route.getRouteDirections());
 	}
 
 	public void onSettingsChanged() {

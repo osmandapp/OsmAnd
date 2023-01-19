@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -8,12 +8,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
@@ -27,19 +27,21 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.GPXTrackAnalysis.ElevationDiffsCalculator;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
@@ -78,11 +80,19 @@ public class ElevationProfileWidget extends MapWidget {
 	private int lastVisiblePointIndex = -1;
 	private OrderedLineDataSet slopeDataSet;
 
+	@Nullable
+	private TrackChartPoints trackChartPoints;
+
 	private boolean movedToLocation;
+
+	private static Matrix lastStateMatrix;
+	private static String lastRoute;
+	private static boolean lastChartLinkedToLocation;
 
 	private final StateChangedListener<Boolean> linkedToLocationListener = change -> {
 		if (change) {
 			movedToLocation = true;
+			lastChartLinkedToLocation = true;
 		}
 	};
 
@@ -91,6 +101,26 @@ public class ElevationProfileWidget extends MapWidget {
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	private void restoreLastState() {
+		if (chart != null && lastStateMatrix != null && route != null) {
+			if (Algorithms.stringsEqual(lastRoute, route.toString())) {
+				chart.getViewPortHandler().refresh(new Matrix(lastStateMatrix), chart, false);
+			} else {
+				lastStateMatrix = null;
+			}
+			if (lastChartLinkedToLocation) {
+				movedToLocation = true;
+			}
+		}
+	}
+
+	private void storeLastState(boolean chartLinkedToLocation) {
+		if (chart != null) {
+			lastStateMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+		}
+		lastChartLinkedToLocation = chartLinkedToLocation;
 	}
 
 	@Override
@@ -151,12 +181,22 @@ public class ElevationProfileWidget extends MapWidget {
 		if (chartUpdated) {
 			updateWidgets();
 		}
+		if (settingsUpdated) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					restoreLastState();
+				}
+			});
+		}
 	}
 
 	private boolean updateSettings() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		boolean routeChanged = this.route != route;
 		this.route = route;
+		lastRoute = route.toString();
 		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
 		boolean slopesChanged = showSlopes != this.showSlopes;
 		this.showSlopes = showSlopes;
@@ -164,7 +204,7 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	private void setupChart() {
-		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
+		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
@@ -232,6 +272,7 @@ public class ElevationProfileWidget extends MapWidget {
 			@Override
 			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 				gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+				storeLastState(false);
 				app.runInUIThread(() -> updateWidgets());
 			}
 
@@ -245,13 +286,18 @@ public class ElevationProfileWidget extends MapWidget {
 
 			@Override
 			public void onChartSingleTapped(MotionEvent me) {
-				Highlight h = chart.getHighlightByTouchPoint(me.getX(), me.getY());
 				Highlight locationHighlight = ElevationProfileWidget.this.locationHighlight;
-				h = createHighlight(h.getX(), false);
-				if (locationHighlight != null) {
-					chart.highlightValues(new Highlight[] {locationHighlight, h});
-				} else {
-					chart.highlightValue(h, true);
+				Highlight touchHighlight = chart.getHighlightByTouchPoint(me.getX(), me.getY());
+				if (touchHighlight != null) {
+					touchHighlight = createHighlight(touchHighlight.getX(), false);
+				}
+
+				if (locationHighlight != null && touchHighlight != null) {
+					chart.highlightValues(new Highlight[] {locationHighlight, touchHighlight});
+				} else if (locationHighlight != null) {
+					chart.highlightValue(locationHighlight, true);
+				} else if (touchHighlight != null) {
+					chart.highlightValue(touchHighlight, true);
 				}
 			}
 
@@ -329,6 +375,7 @@ public class ElevationProfileWidget extends MapWidget {
 			gpxItem.chartHighlightPos = pos;
 			Highlight newLocationHighlight = createHighlight(pos, true);
 			refreshHighlights(newLocationHighlight);
+			storeLastState(true);
 		}
 		return true;
 	}
@@ -383,6 +430,7 @@ public class ElevationProfileWidget extends MapWidget {
 		if (highlightPosition > minVisibleX && highlightPosition < maxVisibleX) {
 			minVisibleX = highlightPosition;
 		}
+		updateTrackChartPoints();
 		double fromDistance = minVisibleX * toMetersMultiplier;
 		double toDistance = maxVisibleX * toMetersMultiplier;
 		List<WptPt> points = this.allPoints;
@@ -418,6 +466,49 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 		updateTextWidget(gradeView, maxGradeStr);
 		return true;
+	}
+
+	private void updateTrackChartPoints() {
+		Highlight highlight = getSelectedHighlight();
+		if (highlight != null) {
+			TrackChartPoints trackChartPoints = getTrackChartPoints();
+			LatLon location = TrackDetailsMenu.getLocationAtPos(chart, gpxItem, segment, highlight.getX(), true);
+			if (location != null) {
+				trackChartPoints.setHighlightedPoint(location);
+			}
+			if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+				mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
+			}
+			if (location != null) {
+				mapActivity.refreshMap();
+			}
+		}
+	}
+
+	@NonNull
+	private TrackChartPoints getTrackChartPoints() {
+		TrackChartPoints trackChartPoints = this.trackChartPoints;
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			int segmentColor = segment != null ? segment.getColor(0) : 0;
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setGpx(gpxItem.group.getGpxFile());
+			this.trackChartPoints = trackChartPoints;
+		}
+		return trackChartPoints;
+	}
+
+	@Nullable
+	private Highlight getSelectedHighlight() {
+		Highlight[] highlighted = chart.getHighlighted();
+		if (!Algorithms.isEmpty(highlighted)) {
+			for (Highlight highlight : highlighted) {
+				if (highlight instanceof GPXHighlight && !((GPXHighlight) highlight).shouldShowLocationIcon()) {
+					return highlight;
+				}
+			}
+		}
+		return null;
 	}
 
 	private void updateTextWidget(View container, String text) {

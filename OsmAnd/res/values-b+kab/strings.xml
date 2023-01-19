@@ -310,7 +310,7 @@
     <string name="shared_string_in_name">"di  %1$s"</string>
     <string name="subscribe_email_error">Tuccḍa</string>
     <string name="shared_string_visible">Uman</string>
-    <string name="driving_region_automatic">Awurman</string>
+    <string name="shared_string_automatic">Awurman</string>
     <string name="shared_string_gpx_track">Abrid</string>
     <string name="shared_string_max">Afellay</string>
     <string name="shared_string_start_time">Temps de début</string>

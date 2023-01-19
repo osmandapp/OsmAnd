@@ -21,8 +21,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -133,7 +133,7 @@ public class FavoritesActivity extends TabActivity {
 					}
 
 					@Override
-					public void onSaveComplete(boolean success, GPXUtilities.GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile result) {
 
 					}
 				});
@@ -243,10 +243,6 @@ public class FavoritesActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 		viewPager.clearOnPageChangeListeners();
-	}
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
 	}
 
 	@Override

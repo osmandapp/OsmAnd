@@ -37,6 +37,8 @@ public class RoutePlannerFrontEnd {
 	public boolean useSmartRouteRecalculation = true;
 	public boolean useNativeApproximation = true;
 
+	private static final boolean TRACE_ROUTING = false;
+
 	
 	public RoutePlannerFrontEnd() {
 	}
@@ -250,8 +252,7 @@ public class RoutePlannerFrontEnd {
 			GpxPoint start = null;
 			GpxPoint prev = null;
 			if (gpxPoints.size() > 0) {
-				gctx.ctx.calculationProgress.totalIterations =
-						(int) (gpxPoints.get(gpxPoints.size() - 1).cumDist / gctx.ctx.config.maxStepApproximation + 1);
+				gctx.ctx.calculationProgress.totalApproximateDistance = (float) gpxPoints.get(gpxPoints.size() - 1).cumDist;
 				start = gpxPoints.get(0);
 			}
 			while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
@@ -259,8 +260,6 @@ public class RoutePlannerFrontEnd {
 				GpxPoint next = findNextGpxPointWithin(gpxPoints, start, routeDist);
 				boolean routeFound = false;
 				if (next != null && initRoutingPoint(start, gctx, gctx.ctx.config.minPointApproximation)) {
-					gctx.ctx.calculationProgress.totalEstimatedDistance = 0;
-					gctx.ctx.calculationProgress.iteration = (int) (next.cumDist / gctx.ctx.config.maxStepApproximation);
 					while (routeDist >= gctx.ctx.config.minStepApproximation && !routeFound) {
 						routeFound = initRoutingPoint(next, gctx, gctx.ctx.config.minPointApproximation);
 						if (routeFound) {
@@ -323,6 +322,9 @@ public class RoutePlannerFrontEnd {
 					prev = start;
 				}
 				start = next;
+				if (gctx.ctx.calculationProgress != null && start != null) {
+					gctx.ctx.calculationProgress.approximatedDistance = (float) start.cumDist;
+				}
 			}
 			if (gctx.ctx.calculationProgress != null) {
 				gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
@@ -950,10 +952,10 @@ public class RoutePlannerFrontEnd {
 
 	public RouteSegmentPoint getRecalculationEnd(final RoutingContext ctx) {
 		RouteSegmentPoint recalculationEnd = null;
-		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
+		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && !ctx.previouslyCalculatedRoute.isEmpty()
 				&& ctx.config.recalculateDistance != 0;
 		if (runRecalculation) {
-			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
+			List<RouteSegmentResult> rlist = new ArrayList<>();
 			float distanceThreshold = ctx.config.recalculateDistance;
 			float threshold = 0;
 			for (RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
@@ -963,7 +965,7 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 
-			if (rlist.size() > 0) {
+			if (!rlist.isEmpty()) {
 				RouteSegment previous = null;
 				for (int i = 0; i < rlist.size(); i++) {
 					RouteSegmentResult rr = rlist.get(i);
@@ -973,7 +975,13 @@ public class RoutePlannerFrontEnd {
 						previous = segment;
 					} else {
 						recalculationEnd = new RouteSegmentPoint(rr.getObject(), rr.getStartPointIndex(), 0);
-						previous = recalculationEnd;
+						if (Math.abs(rr.getEndPointIndex() - rr.getStartPointIndex()) > 1) {
+							RouteSegment segment = new RouteSegment(rr.getObject(), recalculationEnd.segEnd, rr.getEndPointIndex());
+							recalculationEnd.setParentRoute(segment);
+							previous = segment;
+						} else {
+							previous = recalculationEnd;
+						}
 					}
 				}
 			}
@@ -997,17 +1005,40 @@ public class RoutePlannerFrontEnd {
 
 	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
 		refreshProgressDistance(ctx);
+		if (recalculationEnd != null) {
+			if (TRACE_ROUTING) {
+				log.info("RecalculationEnd = " + recalculationEnd.road + " ind=" + recalculationEnd.getSegmentStart() + "->" + recalculationEnd.getSegmentEnd());
+			}
+		}
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		// long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
+		if (TRACE_ROUTING) {
+			log.info("Native routing result!");
+			for (RouteSegmentResult r : res) {
+				log.info("Road = " + r.getObject().id / 64 + " " + r.getStartPointIndex() + "->" + r.getEndPointIndex());
+			}
+		}
 		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
 		List<RouteSegmentResult> result = new ArrayList<>(Arrays.asList(res));
+		if (TRACE_ROUTING) {
+			log.info("RecalculationEnd result!");
+		}
 		if (recalculationEnd != null) {
 			log.info("Native routing use precalculated route");
 			RouteSegment current = recalculationEnd;
+			if (!hasSegment(result, current)) {
+				if (TRACE_ROUTING) {
+					log.info("Add recalculationEnd to result = " + current.getRoad() + " " + current.getSegmentStart() + "->" + current.getSegmentEnd());
+				}
+				result.add(new RouteSegmentResult(current.getRoad(), current.getSegmentStart(), current.getSegmentEnd()));
+			}
 			while (current.getParentRoute() != null) {
 				RouteSegment pr = current.getParentRoute();
 				result.add(new RouteSegmentResult(pr.getRoad(), pr.getSegmentStart(), pr.getSegmentEnd()));
+				if (TRACE_ROUTING) {
+					log.info("Road = " + pr.getRoad() + " " + pr.getSegmentStart() + "->" + pr.getSegmentEnd());
+				}
 				current = pr;
 			}
 		}
@@ -1015,6 +1046,16 @@ public class RoutePlannerFrontEnd {
 		return new RouteResultPreparation().prepareResult(ctx, result, recalculationEnd != null);
 	}
 
+	private boolean hasSegment(List<RouteSegmentResult> result, RouteSegment current) {
+		for (RouteSegmentResult r : result) {
+			long currentId = r.getObject().id;
+			if (currentId == current.getRoad().id && r.getStartPointIndex() == current.getSegmentStart()
+					&& r.getEndPointIndex() == current.getSegmentEnd()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private List<RouteSegmentResult> searchRouteImpl(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection)
 			throws IOException, InterruptedException {

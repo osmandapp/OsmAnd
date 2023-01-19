@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
-import android.annotation.SuppressLint;
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
@@ -21,14 +21,15 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-@SuppressLint("Registered")
 public class OsmandInAppPurchaseActivity extends AppCompatActivity implements InAppPurchaseListener {
+
 	private static final Log LOG = PlatformUtil.getLog(OsmandInAppPurchaseActivity.class);
 
 	private InAppPurchaseHelper purchaseHelper;
@@ -43,12 +44,12 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		deinitInAppPurchaseHelper();
+		stopInAppPurchaseHelper();
 		activityDestroyed = true;
 	}
 
 	private void initInAppPurchaseHelper() {
-		deinitInAppPurchaseHelper();
+		stopInAppPurchaseHelper();
 		OsmandApplication app = getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		if (purchaseHelper == null) {
@@ -85,7 +86,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	private void deinitInAppPurchaseHelper() {
+	private void stopInAppPurchaseHelper() {
 		if (purchaseHelper != null) {
 			purchaseHelper.resetUiActivity(this);
 			purchaseHelper.stop();
@@ -108,7 +109,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 			} else {
 				app.logEvent("paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
+						Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME)));
 				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		}
@@ -144,6 +145,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
+	@NonNull
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
@@ -164,7 +166,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseErrorOnFragments(@NonNull FragmentManager fragmentManager,
-												  InAppPurchaseTaskType taskType, String error) {
+	                                              InAppPurchaseTaskType taskType, String error) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -205,7 +207,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager,
-														  String sku, boolean active) {
+	                                                      String sku, boolean active) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -221,7 +223,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseShowProgressOnFragments(@NonNull FragmentManager fragmentManager,
-														 InAppPurchaseTaskType taskType) {
+	                                                     InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
@@ -237,7 +239,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
-															InAppPurchaseTaskType taskType) {
+	                                                        InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {

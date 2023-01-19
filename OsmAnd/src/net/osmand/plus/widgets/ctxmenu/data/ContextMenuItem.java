@@ -6,6 +6,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
@@ -35,8 +36,9 @@ public class ContextMenuItem {
 
 	@StringRes
 	private int titleId;
-	private String description;
 	private String title;
+	private String description;
+	private String secondaryDescription;
 
 	private boolean useNaturalIconColor;
 	@ColorInt
@@ -60,10 +62,11 @@ public class ContextMenuItem {
 	private ProgressListener progressListener;
 	private OnItemDeleteAction itemDeleteAction;
 
-	public ContextMenuItem(String id) {
+	public ContextMenuItem(@Nullable String id) {
 		this.id = id;
 	}
 
+	@Nullable
 	public String getId() {
 		return id;
 	}
@@ -102,10 +105,17 @@ public class ContextMenuItem {
 		return titleId;
 	}
 
+	@Nullable
 	public String getDescription() {
 		return description;
 	}
 
+	@Nullable
+	public String getSecondaryDescription() {
+		return secondaryDescription;
+	}
+
+	@Nullable
 	public String getTitle() {
 		return title;
 	}
@@ -115,6 +125,7 @@ public class ContextMenuItem {
 	}
 
 	@ColorInt
+	@Nullable
 	public Integer getColor() {
 		return color;
 	}
@@ -169,45 +180,54 @@ public class ContextMenuItem {
 		return progressListener;
 	}
 
+	@Nullable
 	public OnItemDeleteAction getItemDeleteAction() {
 		return itemDeleteAction;
 	}
 
+	@NonNull
 	public ContextMenuItem setTag(int tag) {
 		this.tag = tag;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setLayout(@LayoutRes int layout) {
 		this.layout = layout;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setCategory(boolean category) {
 		isCategory = category;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem hideCompoundButton(boolean hideCompoundButton) {
 		this.hideCompoundButton = hideCompoundButton;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setHideDivider(boolean hideDivider) {
 		this.hideDivider = hideDivider;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setClickable(boolean clickable) {
 		this.clickable = clickable;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setMinHeight(int minHeight) {
 		this.minHeight = minHeight;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setTitleId(@StringRes int titleId,
 	                                  @Nullable Context context) {
 		this.titleId = titleId;
@@ -217,97 +237,123 @@ public class ContextMenuItem {
 		return this;
 	}
 
-	public ContextMenuItem setDescription(String description) {
+	@NonNull
+	public ContextMenuItem setDescription(@Nullable String description) {
 		this.description = description;
 		return this;
 	}
 
-	public ContextMenuItem setTitle(String title) {
+	@NonNull
+	public ContextMenuItem setSecondaryDescription(@Nullable String secondaryDescription) {
+		this.secondaryDescription = secondaryDescription;
+		return this;
+	}
+
+	@NonNull
+	public ContextMenuItem setTitle(@Nullable String title) {
 		this.title = title;
 		this.titleId = title.hashCode();
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setUseNaturalIconColor(boolean useNaturalIconColor) {
 		this.useNaturalIconColor = useNaturalIconColor;
 		return this;
 	}
 
-	public ContextMenuItem setColor(@ColorInt Integer color) {
+	@NonNull
+	public ContextMenuItem setColor(@ColorInt @Nullable Integer color) {
 		this.color = color;
 		return this;
 	}
 
-	public ContextMenuItem setColor(Context context, @ColorRes int colorRes) {
+	@NonNull
+	public ContextMenuItem setColor(@NonNull Context context, @ColorRes int colorRes) {
 		this.color = colorRes != INVALID_ID ? ContextCompat.getColor(context, colorRes) : null;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setIcon(@DrawableRes int icon) {
 		this.icon = icon;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setSecondaryIcon(@DrawableRes int secondaryIcon) {
 		this.secondaryIcon = secondaryIcon;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setSelected(boolean selected) {
 		this.selected = selected;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setProgress(int progress) {
 		this.progress = progress;
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setLoading(boolean loading) {
 		this.loading = loading;
 		return this;
 	}
 
-	public void setHidden(boolean hidden) {
+	@NonNull
+	public ContextMenuItem setHidden(boolean hidden) {
 		this.hidden = hidden;
+		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem setOrder(int order) {
 		this.order = order;
 		return this;
 	}
 
-	public ContextMenuItem setRefreshCallback(OnRefreshCallback onRefreshCallback) {
+	@NonNull
+	public ContextMenuItem setRefreshCallback(@Nullable OnRefreshCallback onRefreshCallback) {
 		this.onRefreshCallback = onRefreshCallback;
 		refreshWithActualData();
 		return this;
 	}
 
-	public ContextMenuItem setListener(ItemClickListener itemClickListener) {
+	@NonNull
+	public ContextMenuItem setListener(@Nullable ItemClickListener itemClickListener) {
 		this.itemClickListener = itemClickListener;
 		return this;
 	}
 
-	public ContextMenuItem setLongClickListener(ItemLongClickListener longClickListener) {
+	@NonNull
+	public ContextMenuItem setLongClickListener(@Nullable ItemLongClickListener longClickListener) {
 		this.itemLongClickListener = longClickListener;
 		return this;
 	}
 
-	public ContextMenuItem setIntegerListener(OnIntegerValueChangedListener integerListener) {
+	@NonNull
+	public ContextMenuItem setIntegerListener(@Nullable OnIntegerValueChangedListener integerListener) {
 		this.integerListener = integerListener;
 		return this;
 	}
 
-	public ContextMenuItem setProgressListener(ProgressListener progressListener) {
+	@NonNull
+	public ContextMenuItem setProgressListener(@Nullable ProgressListener progressListener) {
 		this.progressListener = progressListener;
 		return this;
 	}
 
-	public ContextMenuItem setItemDeleteAction(OsmandPreference<?>... prefs) {
+	@NonNull
+	public ContextMenuItem setItemDeleteAction(@Nullable OsmandPreference<?>... prefs) {
 		this.itemDeleteAction = OnItemDeleteAction.makeDeleteAction(prefs);
 		return this;
 	}
 
+	@NonNull
 	public ContextMenuItem refreshWithActualData() {
 		if (onRefreshCallback != null) {
 			onRefreshCallback.onRefreshMenuItem(this);

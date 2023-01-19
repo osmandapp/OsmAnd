@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
@@ -138,7 +138,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 		Context context = requireContext();
 		view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
-		AndroidUtils.addStatusBarPadding21v(context, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar();
 		setupScrollListener();

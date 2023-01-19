@@ -2410,7 +2410,6 @@
     <string name="connect_track_points_as">Свързване на точки от маршрута</string>
     <string name="add_line">Добави линия</string>
     <string name="contour_lines_hillshades_slope">Контурни линии, хълмове, наклон</string>
-    <string name="approximate_route_description">Прикачете маршрута към пътища на картата, за да получите всички завои и допълнителни данни, като гладкост, видове пътища и др.</string>
     <string name="duration_moment_ago">преди малко</string>
     <string name="logout_from_osmand_cloud">Изход от OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Сигурни ли сте, че искате да излезете от системата\?
@@ -2512,7 +2511,7 @@
     <string name="follow_track">Следване на маршрута</string>
     <string name="show_gpx">Трасета</string>
     <string name="process_downloading_service">Услуга за изтегляне на OsnAnd</string>
-    <string name="driving_region_automatic">Автоматично</string>
+    <string name="shared_string_automatic">Автоматично</string>
     <string name="access_widget_expand">Разтваряне</string>
     <string name="lang_ber">Берберски</string>
     <string name="lang_kn">Каннада</string>

@@ -86,7 +86,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		getListView().addItemDecoration(createDividerItemDecoration());
@@ -95,7 +95,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
@@ -200,21 +200,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
-			@Override
-			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-			}
-
-			@Override
-			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
-			}
-
-			@Override
-			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
-
-			}
-
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);

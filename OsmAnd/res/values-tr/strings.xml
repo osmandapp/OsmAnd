@@ -2168,7 +2168,7 @@
     <string name="subscribe_email_error">Hata</string>
     <string name="analyze_on_map">Harita üzerinde analiz et</string>
     <string name="shared_string_visible">Görünür</string>
-    <string name="driving_region_automatic">Otomatik</string>
+    <string name="shared_string_automatic">Otomatik</string>
     <string name="do_not_send_anonymous_app_usage">Anonim uygulama kullanım istatistiklerini gönderme</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd uygulamanın hangi kısımlarını açtığınızla ilgili bilgi toplar. Konum bilginiz, ya da uygulamaya girdiğiniz herhangi bir şey veya görüntülediğiniz, aradığınız ya da indirdiğiniz bölgelerin ayrıntıları asla gönderilmez.</string>
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>
@@ -2263,8 +2263,6 @@
     <string name="show_passed">Geçilmiş-olanı göster</string>
     <string name="hide_passed">Geçilmiş-olanı gizle</string>
     <string name="marker_show_distance_descr">Haritada harita işaretleyicilerine olan uzaklık ve yönün nasıl belirtileceğini seçin:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Harita yönlendirme eşiği</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Harita yönünün \'Hareket yönü\'nden \'Pusula yönü\'ne geçiş hızını aşağıdan seçin.</string>
     <string name="save_as_route_point">Rota noktaları olarak kaydet</string>
     <string name="add_point_before">Öncesinde nokta ekle</string>
     <string name="add_point_after">Sonrasında nokta ekle</string>
@@ -3700,7 +3698,6 @@
     <string name="plan_route_select_track_file_for_open">Açmak için bir yol dosyası seçin.</string>
     <string name="shared_string_done">Bitti</string>
     <string name="overwrite_track">Yolun üzerine yaz</string>
-    <string name="route_between_points_warning_desc">Ardından, bu seçeneği kullanmak için navigasyon profillerinizden biriyle izlenen yolunuzu izin verilen en yakın yola tutturun.</string>
     <string name="save_as_new_track">Yeni bir izleme olarak kaydet</string>
     <string name="reverse_route">Ters rota</string>
     <string name="route_between_points_whole_track_button_desc">Tüm yol, seçilen profil kullanılarak yeniden hesaplanacak.</string>
@@ -4210,7 +4207,6 @@
     <string name="backup_error_user_is_not_registered">Bu e-posta adresiyle kayıtlı kullanıcı yok</string>
     <string name="backup_error_no_valid_subscription">Geçerli abonelik yok</string>
     <string name="contour_lines_hillshades_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
-    <string name="approximate_route_description">Tüm dönüşleri ve düzgünlük, yol türleri vb. gibi ek verileri almak için rotayı haritadaki yollara ekle.</string>
     <string name="release_4_0">• Bulut yedekleme
 \n
 \n • \"Topo\" harita tarzı için gece modu eklendi
@@ -4763,10 +4759,8 @@
     <string name="compass_always_visible">Her zaman görünür</string>
     <string name="compass_click_desc">Harita yönlendirme modunu değiştirmek için pusulaya dokunun.</string>
     <string name="compass_desc">Kuzey yönünü gösterir.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Derinlik eş yükselti çizgisi renk düzeni</string>
     <string name="rendering_attr_depthContourColorScheme_description">Derinlik eş yükselti çizgisi renk düzeni</string>
     <string name="rendering_attr_depthContourWidth_description">Derinlik eş yükselti çizgisi genişliği</string>
-    <string name="rendering_attr_depthContourWidth_name">Derinlik eş yükselti çizgisi genişliği</string>
     <string name="attach_roads_descr">Çevrim dışı haritayı kullanarak izinizi bir rota ile yaklaşık olarak belirleyin. Bu, navigasyon sırasında kullanılan düzeltilmiş yükseklik değerlerini, yol ayrıntılarını ve dönüşleri sağlayacaktır.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Özel dağ bisikleti parkurlarını göster.</string>
     <string name="download_tiles">Döşemeleri indir</string>
@@ -4775,7 +4769,108 @@
     <string name="favorite_confirm_delete_group">\"%1$s\" grubunu ve dahil olan tüm noktaları silmek istediğinizden emin misiniz (%2$d)</string>
     <string name="favorite_delete_group">Grubu Sil</string>
     <string name="display_position">Ekran konumu</string>
-    <string name="attach_to_roads_banner_desc">Ayrıntılı navigasyon yönergeleri almak için izlenen yolunuzu yollara ekleyin.</string>
     <string name="available_as_part_of_subscription_plan">%1$s aboneliğinin bir parçası olarak mevcuttur.</string>
     <string name="included_in_your_current_plan">Mevcut \"%1$s\" planınıza dahildir</string>
+    <string name="weather_plugin_description">Sağladıkları:
+\n- 5 katman içeren 24 saatlik ve 7 günlük hava tahmini
+\n- konum tabanlı widget\'lar
+\n- sıcaklık/basınç eş değer eğrileri
+\n
+\nHava durumu verileri Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) tarafından sağlanır.</string>
+    <string name="weather_offline_forecast">Çevrim dışı tahmin</string>
+    <string name="map_settings_weather_temp">Sıcaklık</string>
+    <string name="map_settings_weather_air_pressure">Hava basıncı</string>
+    <string name="empty_screen_weather_clouds_layer">Harita üzerinde bulut kaplama alanı katmanını görüntülemek için açın.</string>
+    <string name="empty_screen_weather_contours">Harita üzerinde hava durumu eş çizgilerini görüntülemek için açın.</string>
+    <string name="empty_screen_weather_pressure_layer">Harita üzerinde basınç katmanını görüntülemek için açın.</string>
+    <string name="empty_screen_weather_wind_layer">Harita üzerinde rüzgar katmanını görüntülemek için açın.</string>
+    <string name="empty_screen_weather_precipitation_layer">Harita üzerinde yağış katmanını görüntülemek için açın.</string>
+    <string name="empty_screen_weather_temperature_layer">Harita üzerinde sıcaklık katmanını görüntülemek için açın.</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_wind_knots">Knot</string>
+    <string name="weather_wind_miles_per_hour">Mil/saat</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometre/saat</string>
+    <string name="weather_widget_group_desc">Çeşitli hava durumu bilgilerini gösteren bir dizi widget.</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_pressure_hectopascals">Hektopascal</string>
+    <string name="weather_pressure_inches_of_mercury">Cıva inç</string>
+    <string name="weather_temperature_celsius">Santigrat</string>
+    <string name="weather_temperature_fahrenheit">Fahrenhayt</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Çizgi rengi düzeni</string>
+    <string name="mtb_imba_full">Uluslararası Dağ Bisikleti Birliği</string>
+    <string name="weather_prefs_descr">24 saatlik ve 7 günlük hava tahmini, her 3 saatte bir güncellenir</string>
+    <string name="switch_mode_by_tapping_on_widget">Widget\'a dokunarak modu değiştirin.</string>
+    <string name="map_widget_sunrise_desc">Bir sonraki gün doğumu saatini veya gün doğumuna kalan süreyi gösterir.</string>
+    <string name="map_widget_sunset_desc">Bir sonraki gün batımı saatini veya gün batımına kalan süreyi gösterir.</string>
+    <string name="shared_string_next_sunset">Sonraki gün batımı</string>
+    <string name="shared_string_next_sunrise">Sonraki gün doğumu</string>
+    <string name="shared_string_time_left">Kalan zaman</string>
+    <string name="shared_string_sunset">Gün batımı</string>
+    <string name="shared_string_sunrise">Gün doğumu</string>
+    <string name="turn_on_nautical_depth_description">Harita üzerinde deniz derinliği verilerini görüntülemek için açın.</string>
+    <string name="weather_online_cache">Çevrim içi önbelleği</string>
+    <string name="measurement_units">Ölçü birimleri</string>
+    <string name="empty_screen_view_selected_weather_data">Harita üzerinde seçilen hava durumu verilerini görüntülemek için açın.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_milimeters">Milimetre</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_meters_per_second">Metre/saniye</string>
+    <string name="clouds_widget_desc">Geçerli harita merkezi için bulut kaplamasını gösterir.</string>
+    <string name="wind_widget_desc">Geçerli harita merkezi için rüzgar hızını görüntüler.</string>
+    <string name="action_not_supported_with_map_style">Bu eylem, seçilen harita tarzı tarafından desteklenmiyor.</string>
+    <string name="storage_migration_fragment_close_descr">Kopyalama işlemi %%%1$s tamamlandı. Şimdi durdurursanız, uygulama düzgün çalışmayabilir.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Bu widget\'lar bir sonraki gün doğumu ve gün batımı hakkında bilgi gösterir.</string>
+    <string name="map_widget_group_sunrise_sunset">Gün doğumu, gün batımı</string>
+    <string name="rendering_attr_depthContourWidth_name">Çizgi genişliği</string>
+    <string name="depth_contour_lines">Eş derinlik eğrileri</string>
+    <string name="map_settings_weather_wind">Rüzgar</string>
+    <string name="map_settings_weather_cloud">Bulut</string>
+    <string name="shared_string_weather">Hava</string>
+    <string name="explore_weather_forecast">Hava tahminini keşfedin.</string>
+    <string name="shared_string_contours">Eş çizgiler</string>
+    <string name="shared_string_layers">Katmanlar</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">İnç</string>
+    <string name="weather_widgets_secondary_desc">Ölçüm birimleri hava durumu eklentisi ayarlarından değiştirilebilir.</string>
+    <string name="air_pressure_widget_desc">Geçerli harita merkezi için hava basıncını görüntüler.</string>
+    <string name="precipitation_widget_desc">Geçerli harita merkezi için yağışı gösterir.</string>
+    <string name="temperature_widget_desc">Geçerli harita merkezi için sıcaklığı gösterir.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetre cıva</string>
+    <string name="mtb_scale">MTB Ölçeği</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_segment_classification">Bölüm sınıflandırması</string>
+    <string name="precipitation_layer">Yağış katmanı</string>
+    <string name="map_settings_weather_precip">Yağış</string>
+    <string name="purchases_feature_desc_external_sensors">Harici sensörlerden gelen verileri görüntüleyin ve kaydedin: bisiklet hızı, bisiklet gücü, ritim ve kalp atış hızı.</string>
+    <string name="external_sensors_support">Harici sensör desteği</string>
+    <string name="rendering_attr_showMtbScale_name">MTB ölçeğini göster</string>
+    <string name="rendering_attr_showMtbScale_description">Yolları MTB ölçeğine göre göster.</string>
+    <string name="quick_action_temperature_layer">Harita üzerinde sıcaklık katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="quick_action_precipitation_layer">Harita üzerinde yağış katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="quick_action_wind_layer">Harita üzerinde rüzgar katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="quick_action_cloud_layer">Harita üzerinde bulut katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="quick_action_air_pressure_layer">Harita üzerinde hava basıncı katmanını göstermek veya gizlemek için bir geçiş.</string>
+    <string name="temperature_layer">Sıcaklık katmanı</string>
+    <string name="pressure_layer">Basınç katmanı</string>
+    <string name="wind_layer">Rüzgar katmanı</string>
+    <string name="cloud_layer">Bulut katmanı</string>
+    <string name="rendering_engine_failed_descr">OsmAnd, \'Sürüm 1\' harita görselleştirmeye geri döndü. Ayarlar\'dan yeni \'Sürüm 2 (OpenGL)\' görselleştirme motoruna geri dönmeyi deneyebilirsiniz.
+\n
+\nLütfen hata günlüğünüzü sağlayarak iyileştirmeleri destekleyin.</string>
+    <string name="rendering_engine_failed">OsmAnd harita görselleştirme özelliği yakın zamanda çöktü.</string>
+    <string name="share_crash_log">Çökme günlüğünü paylaş</string>
+    <string name="dismiss_changes_descr">Tüm değişiklikler iptal edilecek.</string>
+    <string name="dismiss_changes">Değişiklikler iptal edilsin mi\?</string>
+    <string name="restart_now">Şimdi yeniden başlat</string>
+    <string name="map_rendering_engine_v1">Sürüm 1</string>
+    <string name="map_rendering_engine_v2">Sürüm 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Sürüm 2 (OpenGL) daha hızlı bir harita görselleştirme motorudur ve 2.5D görünüm özelliğine de sahiptir. Sürüm 1 görselleştirme OsmAnd 4.3\'ten önce öntanımlıydı ve eski aygıtlar için hala tercih edilir.</string>
+    <string name="map_rendering_engine">Harita görselleştirme motoru</string>
+    <string name="show_borders_of_downloaded_maps">İndirilen haritaların sınırlarını göster</string>
+    <string name="show_map_symbols">Harita sembollerini göster</string>
+    <string name="show_map_symbols_desc">Metin, yol işaretleri ve diğerleri.</string>
 </resources>

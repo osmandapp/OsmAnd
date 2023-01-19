@@ -1861,7 +1861,7 @@
     <string name="offline_maps_and_navigation">Offline kartat
 \n&amp; navigointi</string>
     <string name="commit_poi"/>
-    <string name="tab_title_advanced"/>
+    <string name="tab_title_advanced">Edistynyt</string>
     <string name="confirm_download_roadmaps">Vain tiet-karttaa ei tarvita, koska sinulla on jo vakio (täysi) kartta. Ladataanko se silti\?</string>
     <string name="free_downloads_used">Käytetyt ilmaiset lataukset</string>
     <string name="free_downloads_used_description">Näyttää jäljellä olevien ilmaisten latausten määrän.</string>
@@ -2605,7 +2605,6 @@
     <string name="whole_track">Koko jälki</string>
     <string name="navigation_profile">Navigaatioprofiili</string>
     <string name="route_between_points_add_track_desc">Valitse jälkitiedosto johon uusi segmentti lisätään.</string>
-    <string name="route_between_points_warning_desc">Seuraavaksi laita jälkesi lähimpään sallittuun tiehen yhdellä navigaatioprofiileistasi jotta voit käyttää tätä asetusta.</string>
     <string name="route_between_points_desc">Valitse miten pisteet yhdistetään, suoralla viivalla tai laskemalla reitti niiden välillä alla määritellyllä tavalla.</string>
     <string name="in_case_of_reverse_direction">Jos suunta on päinvastainen</string>
     <string name="plan_route_select_track_file_for_open">Valitse avattava jälkitiedosto.</string>
@@ -2757,7 +2756,7 @@
     <string name="map_widget_ruler_control">Sädeviivain</string>
     <string name="monitoring_control_start">REC</string>
     <string name="routing_attr_length_name">Pituusrajoitus</string>
-    <string name="driving_region_automatic">Automaattinen</string>
+    <string name="shared_string_automatic">Automaattinen</string>
     <string name="transport_nearby_routes">Sisältäen</string>
     <string name="transport_nearby_routes_within">Lähellä olevat reitit</string>
     <string name="years_5">Vuotta</string>
@@ -3136,8 +3135,6 @@
     <string name="mapillary_menu_title_pano">Näytä vain 360° kuvat</string>
     <string name="mapillary_menu_date_from">Mistä</string>
     <string name="shared_string_to">Minne</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Valitse suunnan vaihtamisen nopeus valinnasta \"Liikesuunta\" valintaan \"Kompassisuunta\" alla.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kartan suuntauskynnys</string>
     <string name="by_type">Tyypin mukaan</string>
     <string name="by_date">Päivämäärän mukaan</string>
     <string name="notes_by_date">A/V-muistiinpanot päivämäärän mukaan</string>
@@ -3712,7 +3709,6 @@
     <string name="moving_time">Aika liikkeessä</string>
     <string name="save_track_to_gpx_globally_descr">Yleinen sijainnin kirjaaminen GPX-tiedostoon voidaan kytkeä päälle tai pois päältä kartalla olevan GPX-lokitusvidgetin avulla.</string>
     <string name="fav_point_dublicate_message">Suosikki nimettiin uudelleen %1$s, jotta vältyttäisiin päällekkäisyyksiltä.</string>
-    <string name="approximate_route_description">Kiinnitä reitti kartan teihin, niin saat kaikki käännökset ja lisätiedot, kuten tasaisuuden, tietyypit jne.</string>
     <string name="attribute">Ominaisuus</string>
     <string name="shared_string_relation">Suhde</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Väritä reitit niiden yksilöllisen paikallisen värin (jos se on OpenStreetMapissa) ja vaellussymbolin mukaan.</string>
@@ -3990,4 +3986,6 @@
     <string name="rendering_attr_showFitnessTrails_description">Näytä kuntopolut</string>
     <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan päivittäin.</string>
     <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan tunnin välein.</string>
+    <string name="y_axis">y-akseli</string>
+    <string name="x_axis">x-akseli</string>
 </resources>

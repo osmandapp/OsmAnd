@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -50,7 +52,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 	private OsmEditingPlugin plugin;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		authHelper = app.getOsmOAuthHelper();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
@@ -83,7 +85,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);

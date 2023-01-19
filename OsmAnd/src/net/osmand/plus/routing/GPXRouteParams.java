@@ -4,8 +4,8 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -219,14 +220,67 @@ public class GPXRouteParams {
 		}
 
 		public GPXRouteParams build(OsmandApplication app) {
-			GPXRouteParams res = new GPXRouteParams();
+			return build(app, null);
+		}
+
+		public GPXRouteParams build(OsmandApplication app, LatLon targetPoint) {
+			GPXRouteParams gpxRouteParams = new GPXRouteParams();
 			try {
-				res.prepareGPXFile(this);
+				gpxRouteParams.prepareGPXFile(this);
+				if (targetPoint != null && !targetPoint.equals(gpxRouteParams.getLastPoint())) {
+					cutGpxTail(gpxRouteParams, targetPoint);
+				}
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 				app.showShortToastMessage(app.getString(R.string.gpx_parse_error) + " " + e.getMessage());
 			}
-			return res;
+			return gpxRouteParams;
+		}
+
+		private void cutGpxTail(GPXRouteParams gpxRouteParams, LatLon targetPoint) {
+			int lastIdx = 0;
+			double minDist = Float.MAX_VALUE;
+			List<Location> locations = gpxRouteParams.points;
+			for (int i = 0; i < locations.size(); i++) {
+				Location point = locations.get(i);
+				double distance = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
+						targetPoint.getLatitude(), targetPoint.getLongitude());
+				if (distance < minDist) {
+					minDist = distance;
+					lastIdx = i;
+				}
+			}
+			if (!Algorithms.isEmpty(gpxRouteParams.segmentEndpoints)) {
+				List<Location> removedLocations = gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size());
+				List<Location> endpoints = gpxRouteParams.segmentEndpoints;
+				int firstRemovedIdx = 0;
+				for (; firstRemovedIdx < endpoints.size(); firstRemovedIdx++) {
+					Location point = endpoints.get(firstRemovedIdx);
+					if (removedLocations.contains(point)) {
+						break;
+					}
+				}
+				if (firstRemovedIdx < endpoints.size()) {
+					endpoints.subList(firstRemovedIdx, endpoints.size()).clear();
+				}
+			}
+			if (!Algorithms.isEmpty(gpxRouteParams.routePoints)) {
+				List<WptPt> routePoints = gpxRouteParams.routePoints;
+				int firstRemovedIdx = 1;
+				for (; firstRemovedIdx < routePoints.size(); firstRemovedIdx++) {
+					WptPt routePoint = routePoints.get(firstRemovedIdx);
+					if (routePoint.getTrkPtIndex() > lastIdx) {
+						break;
+					}
+				}
+				if (firstRemovedIdx < routePoints.size()) {
+					routePoints.subList(firstRemovedIdx, routePoints.size()).clear();
+				}
+			}
+			gpxRouteParams.points.subList(lastIdx, gpxRouteParams.points.size()).clear();
+			if (!Algorithms.isEmpty(gpxRouteParams.route)) {
+				gpxRouteParams.route.clear();
+			}
 		}
 
 		public void setReverse(boolean reverse) {

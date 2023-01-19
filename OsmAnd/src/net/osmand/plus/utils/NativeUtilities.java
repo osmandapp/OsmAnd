@@ -2,7 +2,6 @@ package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
-import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -20,6 +19,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
 
 public class NativeUtilities {
+
+	public static final int MIN_ALTITUDE_VALUE = -20_000;
+
 	public static SWIGTYPE_p_sk_spT_SkImage_const_t createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
 		return SwigUtilities.createSkImageARGB888With(
 				inputBmp.getWidth(), inputBmp.getHeight(), AndroidUtils.getByteArrayFromBitmap(inputBmp));
@@ -113,22 +115,59 @@ public class NativeUtilities {
 		return latLon;
 	}
 
+	public static Double getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon) {
+		if (latLon != null) {
+			return getAltitudeForLatLon(mapRenderer, latLon.getLatitude(), latLon.getLongitude());
+		}
+		return null;
+	}
+
+	public static Double getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, double lat, double lon) {
+		int x = MapUtils.get31TileNumberX(lon);
+		int y = MapUtils.get31TileNumberY(lat);
+		return getAltitudeForElevatedPoint(mapRenderer, new PointI(x, y));
+	}
+
+	public static Double getAltitudeForPixelPoint(@Nullable MapRendererView mapRenderer, @Nullable PointI screenPoint) {
+		if (mapRenderer != null && screenPoint != null) {
+			PointI elevatedPoint = new PointI();
+			if (mapRenderer.getLocationFromElevatedPoint(screenPoint, elevatedPoint)) {
+				return getAltitudeForElevatedPoint(mapRenderer, elevatedPoint);
+			}
+		}
+		return null;
+	}
+
+	public static Double getAltitudeForElevatedPoint(@Nullable MapRendererView mapRenderer, @Nullable PointI elevatedPoint) {
+		double altitude = MIN_ALTITUDE_VALUE;
+		if (mapRenderer != null && elevatedPoint != null) {
+			altitude = mapRenderer.getLocationHeightInMeters(elevatedPoint);
+		}
+		return altitude > MIN_ALTITUDE_VALUE ? altitude : null;
+	}
+
 	@NonNull
 	public static PointF getPixelFromLatLon(@Nullable MapRendererView mapRenderer, @NonNull RotatedTileBox tileBox,
 	                                        double lat, double lon) {
-		PointF point = null;
+		PointI screenPoint = getScreenPointFromLatLon(mapRenderer, lat, lon);
+		if (screenPoint != null) {
+			return new PointF(screenPoint.getX(), screenPoint.getY());
+		} else {
+			return new PointF(tileBox.getPixXFromLatLon(lat, lon), tileBox.getPixYFromLatLon(lat, lon));
+		}
+	}
+
+	@Nullable
+	public static PointI getScreenPointFromLatLon(@Nullable MapRendererView mapRenderer, double lat, double lon) {
 		if (mapRenderer != null) {
 			int x31 = MapUtils.get31TileNumberX(lon);
 			int y31 = MapUtils.get31TileNumberY(lat);
 			PointI screenPoint = new PointI();
 			if (mapRenderer.getScreenPointFromLocation(new PointI(x31, y31), screenPoint, true)) {
-				point = new PointF(screenPoint.getX(), screenPoint.getY());
+				return screenPoint;
 			}
 		}
-		if (point == null) {
-			point = new PointF(tileBox.getPixXFromLatLon(lat, lon), tileBox.getPixYFromLatLon(lat, lon));
-		}
-		return point;
+		return null;
 	}
 
 	@NonNull

@@ -47,6 +47,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -125,7 +126,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 		View view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
-			AndroidUtils.addStatusBarPadding21v(app, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 		AppBarLayout appBar = view.findViewById(R.id.appbar);
 		appBar.addOnOffsetChangedListener(this);
@@ -284,7 +285,8 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
 				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
-				return widgetRegistry.createCustomWidget(id, widget, widgetType, panel, selectedAppMode);
+				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
+				return creator.createCustomWidgetInfo(id, widget, widgetType, panel);
 			}
 		}
 		return null;
@@ -359,21 +361,9 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	}
 
 	@Override
-	public void onError(InAppPurchaseTaskType taskType, String error) {}
-
-	@Override
-	public void onGetItems() {}
-
-	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		onWidgetsConfigurationChanged();
 	}
-
-	@Override
-	public void showProgress(InAppPurchaseTaskType taskType) {}
-
-	@Override
-	public void dismissProgress(InAppPurchaseTaskType taskType) {}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();

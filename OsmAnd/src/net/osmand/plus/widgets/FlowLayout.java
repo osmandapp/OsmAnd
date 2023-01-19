@@ -1,23 +1,39 @@
 package net.osmand.plus.widgets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class FlowLayout extends ViewGroup {
 
 	private int line_height;
 	private boolean horizontalAutoSpacing;
+	private final int defaultHorizontalSpacing;
+	private final int defaultVerticalSpacing;
 
 	public FlowLayout(Context context) {
-		super(context);
+		this(context, null);
 	}
 
 	public FlowLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
+		this(context, attrs, 0);
+	}
+
+	public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		TypedArray a = context.getTheme().obtainStyledAttributes(
+				attrs,
+				R.styleable.FlowLayout,
+				defStyleAttr,
+				0
+		);
+		defaultHorizontalSpacing = (int) a.getDimension(R.styleable.FlowLayout_horizontalItemsSpacing, 1);
+		defaultVerticalSpacing = (int) a.getDimension(R.styleable.FlowLayout_verticalItemsSpacing, 1);
 	}
 
 	// If true, available horizontal space is added to items horizontalSpacing to fit the screen width.
@@ -47,15 +63,14 @@ public class FlowLayout extends ViewGroup {
 		for (int i = 0; i < count; i++) {
 			View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				LayoutParams lp = (LayoutParams) child.getLayoutParams();
 				child.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST), childHeightMeasureSpec);
 				int childWidth = child.getMeasuredWidth();
-				line_height = Math.max(line_height, child.getMeasuredHeight() + lp.verticalSpacing);
+				line_height = Math.max(line_height, child.getMeasuredHeight() + getItemVerticalSpacing(child));
 				if (horizontalPosition + childWidth > width) {
 					horizontalPosition = getPaddingLeft();
 					verticalPosition += line_height;
 				}
-				horizontalPosition += childWidth + lp.horizontalSpacing;
+				horizontalPosition += childWidth + getItemHorizontalSpacing(child);
 			}
 		}
 
@@ -90,10 +105,9 @@ public class FlowLayout extends ViewGroup {
 		for (int i = 0; i < count; i++) {
 			View child = getChildAt(i);
 			if (child.getVisibility() != GONE) {
-				LayoutParams lp = (LayoutParams) child.getLayoutParams();
 				int childWidth = child.getMeasuredWidth();
 				int childHeight = child.getMeasuredHeight();
-				int freeSizeSpacing = getFreeSizeSpacing(width, lp, childWidth);
+				int freeSizeSpacing = getFreeSizeSpacing(width, childWidth, getItemHorizontalSpacing(child));
 				if (isLayoutRtl) {
 					if (horizontalPosition - childWidth < getPaddingLeft()) {
 						horizontalPosition = width - getPaddingRight();
@@ -113,17 +127,31 @@ public class FlowLayout extends ViewGroup {
 		}
 	}
 
-	private int getFreeSizeSpacing(int width, LayoutParams lp, int childWidth) {
+	private int getFreeSizeSpacing(int width, int childWidth, int horizontalSpacing) {
 		int freeSizeSpacing;
-		int itemsCount = width / (childWidth + lp.horizontalSpacing);
+		int itemsCount = width / (childWidth + horizontalSpacing);
 		if (itemsCount > 1 && horizontalAutoSpacing) {
 			freeSizeSpacing = (width - childWidth) / (itemsCount-1);
 		} else if (!horizontalAutoSpacing) {
-			freeSizeSpacing = childWidth + lp.horizontalSpacing;
+			freeSizeSpacing = childWidth + horizontalSpacing;
 		} else {
 			freeSizeSpacing = (width % childWidth / itemsCount);
 		}
 		return freeSizeSpacing;
+	}
+
+	private int getItemHorizontalSpacing(View view) {
+		if (view.getLayoutParams() instanceof LayoutParams) {
+			return ((LayoutParams) view.getLayoutParams()).horizontalSpacing;
+		}
+		return defaultHorizontalSpacing;
+	}
+
+	private int getItemVerticalSpacing(View view) {
+		if (view.getLayoutParams() instanceof LayoutParams) {
+			return ((LayoutParams) view.getLayoutParams()).verticalSpacing;
+		}
+		return defaultVerticalSpacing;
 	}
 
 	public static class LayoutParams extends ViewGroup.LayoutParams {

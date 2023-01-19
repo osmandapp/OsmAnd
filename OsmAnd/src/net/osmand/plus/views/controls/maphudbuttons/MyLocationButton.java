@@ -6,6 +6,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -13,9 +16,6 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MultiTouchSupport;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 
 public class MyLocationButton extends MapButton {
 
@@ -34,7 +34,20 @@ public class MyLocationButton extends MapButton {
 		this.mapView = mapActivity.getMapView();
 		this.animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		this.tiltMapListener = v -> {
-			animateDraggingMapThread.startTilting(45);
+			int zoom = mapView.getZoom();
+			if (zoom < 10) {
+				animateDraggingMapThread.startTilting(55);
+			} else if (zoom < 12) {
+				animateDraggingMapThread.startTilting(50);
+			} else if (zoom < 14) {
+				animateDraggingMapThread.startTilting(45);
+			} else if (zoom < 16) {
+				animateDraggingMapThread.startTilting(40);
+			} else if (zoom < 17) {
+				animateDraggingMapThread.startTilting(35);
+			} else {
+				animateDraggingMapThread.startTilting(30);
+			}
 			mapView.refreshMap();
 		};
 		this.resetMapTiltListener = v -> {
@@ -54,7 +67,8 @@ public class MyLocationButton extends MapButton {
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
+					 Manifest.permission.ACCESS_COARSE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 		}
 		return false;

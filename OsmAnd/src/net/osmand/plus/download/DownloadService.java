@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.notifications.OsmandNotification.DOWNLOAD_NOTIFICATION_SERVICE_ID;
+
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
@@ -8,7 +10,7 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 
 public class DownloadService extends Service {
@@ -35,8 +37,8 @@ public class DownloadService extends Service {
 		app.setDownloadService(this);
 
 		Notification notification = app.getNotificationHelper().buildDownloadNotification();
-		startForeground(OsmandNotification.DOWNLOAD_NOTIFICATION_SERVICE_ID, notification);
-		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
+		startForeground(DOWNLOAD_NOTIFICATION_SERVICE_ID, notification);
+		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
 
 		return START_NOT_STICKY;
 	}
@@ -49,12 +51,7 @@ public class DownloadService extends Service {
 
 		// remove notification
 		stopForeground(Boolean.TRUE);
-		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
-			}
-		}, 500);
+		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
+		app.runInUIThread(() -> app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD), 500);
 	}
 }

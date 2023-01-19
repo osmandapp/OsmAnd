@@ -9,6 +9,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -28,13 +30,15 @@ import java.util.zip.ZipInputStream;
 public class DownloadFileHelper {
 	
 	private static final Log log = PlatformUtil.getLog(DownloadFileHelper.class);
+
 	private static final int BUFFER_SIZE = 32256;
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
+
 	private final OsmandApplication ctx;
 	private boolean interruptDownloading;
-	
-	
+
+
 	public DownloadFileHelper(OsmandApplication ctx){
 		this.ctx = ctx;
 	}
@@ -210,17 +214,13 @@ public class DownloadFileHelper {
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
 			if (!de.unzipFolder) {
-				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() + ".download");
+				de.fileToDownload = FileUtils.getFileWithDownloadExtension(de.targetFile);
 			}
 			unzipFile(de, progress, downloadInputStreams);
 			if (!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())) {
-				boolean successful = Algorithms.removeAllFiles(de.targetFile);
-				if (successful) {
-					ctx.getResourceManager().closeFile(de.targetFile.getName());
-				}
-
-				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
-				if (!renamed) {
+				ResourceManager rm = ctx.getResourceManager();
+				boolean success = FileUtils.replaceTargetFile(rm, de.fileToDownload, de.targetFile);
+				if (!success) {
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");
 					return false;
 				}

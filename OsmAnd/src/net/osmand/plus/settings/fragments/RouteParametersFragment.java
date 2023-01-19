@@ -6,6 +6,7 @@ import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
 import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -95,7 +97,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private StateChangedListener<String> customRoutingPrefListener;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		booleanRoutingPrefListener = change -> app.runInUIThread(this::recalculateRoute);
 		customRoutingPrefListener = change -> app.runInUIThread(this::recalculateRoute);
@@ -246,7 +248,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		clearParameters();
 		if (router != null) {
 			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, router);
-			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			if (!am.isDerivedRoutingFrom(ApplicationMode.CAR) && parameters.get(USE_SHORTEST_WAY) != null) {
 				screen.addPreference(fastRoute);
 			}
 			for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {

@@ -1,9 +1,10 @@
 package net.osmand.telegram.utils
 
 import android.os.AsyncTask
-import net.osmand.GPXUtilities
+import net.osmand.gpx.GPXUtilities
 import net.osmand.Location
 import net.osmand.data.LatLon
+import net.osmand.gpx.GPXFile
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.LocationMessages.BufferMessage
@@ -417,8 +418,8 @@ object OsmandLocationUtils {
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
-	fun convertLocationMessagesToGpxFiles(app: TelegramApplication, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
-		val dataTracks = ArrayList<GPXUtilities.GPXFile>()
+	fun convertLocationMessagesToGpxFiles(app: TelegramApplication, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXFile> {
+		val dataTracks = ArrayList<GPXFile>()
 
 		var previousTime: Long = -1
 		var previousChatId: Long = -1
@@ -426,7 +427,7 @@ object OsmandLocationUtils {
 		var previousDeviceName = ""
 		var segment: GPXUtilities.TrkSegment? = null
 		var track: GPXUtilities.Track? = null
-		var gpx: GPXUtilities.GPXFile? = null
+		var gpx: GPXFile? = null
 		var countedLocations = 0
 
 		items.forEach {
@@ -435,7 +436,7 @@ object OsmandLocationUtils {
 			val deviceName = it.deviceName
 			val time = it.time
 			if (previousUserId != userId || previousDeviceName != deviceName || (newGpxPerChat && previousChatId != chatId)) {
-				gpx = GPXUtilities.GPXFile(app.packageName).apply {
+				gpx = GPXFile(app.packageName).apply {
 					metadata = GPXUtilities.Metadata().apply {
 						name = getGpxFileNameForUserId(app, userId, chatId, time)
 					}
@@ -487,7 +488,7 @@ object OsmandLocationUtils {
 		return dataTracks
 	}
 
-	fun saveGpx(app: TelegramApplication, gpxFile: GPXUtilities.GPXFile, listener: SaveGpxListener) {
+	fun saveGpx(app: TelegramApplication, gpxFile: GPXFile, listener: SaveGpxListener) {
 		if (!gpxFile.isEmpty) {
 			val dir = File(app.getExternalFilesDir(null), TRACKS_DIR)
 			val task = SaveGPXTrackToFileTask(listener, gpxFile, dir)
@@ -547,9 +548,9 @@ object OsmandLocationUtils {
 	}
 
 	private class SaveGPXTrackToFileTask internal constructor(
-		private val listener: SaveGpxListener?,
-		private val gpxFile: GPXUtilities.GPXFile,
-		private val dir: File
+            private val listener: SaveGpxListener?,
+            private val gpxFile: GPXFile,
+            private val dir: File
 	) :
 		AsyncTask<Void, Void, java.lang.Exception>() {
 

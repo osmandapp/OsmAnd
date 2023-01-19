@@ -15,7 +15,8 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FILE_TO_SAVE;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.myplaces.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -42,9 +43,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -70,7 +71,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -129,6 +129,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -401,10 +402,11 @@ public class OsmandAidlApi {
 							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
-							MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-							MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
-									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
-							widgetRegistry.registerWidget(widgetInfo);
+							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+							MapWidgetInfo widgetInfo = creator.createExternalWidget(widgetKey, widget, menuIconId,
+									widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
+							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+							registry.registerWidget(widgetInfo);
 
 							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
@@ -1908,16 +1910,7 @@ public class OsmandAidlApi {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onStart(AppInitializer init) {
-
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					ExternalApiHelper.runSearch(app, searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
 				}
 			});
@@ -1930,17 +1923,9 @@ public class OsmandAidlApi {
 	boolean registerForOsmandInitialization(OsmandAppInitCallback callback) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					try {
 						callback.onAppInitialized();
 					} catch (Exception e) {
@@ -2327,17 +2312,9 @@ public class OsmandAidlApi {
 
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-
-				}
 
 				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
+				public void onFinish(@NonNull AppInitializer init) {
 					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
 				}
 			});
@@ -2453,7 +2430,7 @@ public class OsmandAidlApi {
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}
@@ -2617,10 +2594,10 @@ public class OsmandAidlApi {
 				app.getDownloadThread().updateLoadedFiles();
 			} else if (fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
 				if (destinationDir.startsWith(IndexConstants.GPX_INDEX_DIR)
-						&& !FILE_TO_SAVE.equals(fileName)) {
+						&& !(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT).equals(fileName)) {
 					destinationDir = destinationDir.replaceFirst(IndexConstants.GPX_INDEX_DIR, "");
 					showGpx(new File(destinationDir, fileName).getPath());
-				} else if (destinationDir.isEmpty() && FILE_TO_SAVE.equals(fileName)) {
+				} else if (destinationDir.isEmpty() && (LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT).equals(fileName)) {
 					app.getFavoritesHelper().loadFavorites();
 				}
 			}

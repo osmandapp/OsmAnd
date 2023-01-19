@@ -858,7 +858,7 @@
     <string name="poi_enforcement_check">Kontrol: tjek</string>
     <string name="poi_enforcement_access">Kontrol: adgang</string>
     <string name="poi_enforcement_toll">Kontrol: vejafgift</string>
-    <string name="poi_country">Landlig</string>
+    <string name="poi_country">Land</string>
     <string name="poi_fee_yes">Ja</string>
     <string name="poi_abandoned_poi">Forladt objekt</string>
     <string name="poi_route_hiking_iwn_poi">International vandrerute</string>
@@ -1519,9 +1519,9 @@
     <string name="poi_diaper_yes">Puslebord</string>
     <string name="poi_diaper_no">Ingen puslebord</string>
     <string name="poi_diaper_room">Puslerum</string>
-    <string name="poi_events_venue">Kulturhus</string>
+    <string name="poi_events_venue">Selskabslokale</string>
     <string name="poi_car_wash_no">Nej</string>
-    <string name="poi_maxstay">Parkering tidsgrænse</string>
+    <string name="poi_maxstay">Parkeringstidsgrænse</string>
     <string name="poi_vending_parking_tickets">Parkeringsbilletter</string>
     <string name="poi_vending_cigarettes">Cigaretter</string>
     <string name="poi_vending_public_transport_tickets">Billetter til offentlig transport</string>
@@ -3585,7 +3585,7 @@
     <string name="poi_access_trailer">Trailer adgang</string>
     <string name="poi_access_motorcycle">Motorcykel adgang</string>
     <string name="poi_access_moped">Knallert adgang</string>
-    <string name="poi_access_mofa">Mofa adgang</string>
+    <string name="poi_access_mofa">Mofa-adgang</string>
     <string name="poi_access_hgv">Lastbil adgang</string>
     <string name="poi_access_goods">Lette lastbiler adgang</string>
     <string name="poi_access_disabled">Handicappede adgang</string>
@@ -3997,4 +3997,20 @@
     <string name="poi_access_permit">Tilladelse påkrævet</string>
     <string name="poi_outdoor_seating_poi">Udendørs siddepladser</string>
     <string name="poi_dog">Hunde</string>
+    <string name="poi_parking_fee_filter">Parkeringsafgift</string>
+    <string name="poi_tiles">Flisebutik</string>
+    <string name="poi_changing_table_filter">Puslebord</string>
+    <string name="poi_board_type_art">Kunst</string>
+    <string name="poi_access_yes">Adgang er tilladt</string>
+    <string name="poi_greenery">Grønt</string>
+    <string name="poi_board_type_sight">Seværdighed</string>
+    <string name="poi_board_type_welcome_sign">Velkomstskilt</string>
+    <string name="poi_beauty_salon_cosmetics">Kosmetik</string>
+    <string name="poi_beauty_salon_spa">Spa</string>
+    <string name="poi_mattress_yes">Ja;Madras</string>
+    <string name="poi_lgbtq_only">Kun LGBTQ</string>
+    <string name="poi_lgbtq_no">LGBTQ ikke tilladt</string>
+    <string name="poi_mattress_no">Nej</string>
+    <string name="poi_furniture_used">Brugt;Brugt møbel</string>
+    <string name="poi_furniture_office">Kontor;Kontormøbel</string>
 </resources>

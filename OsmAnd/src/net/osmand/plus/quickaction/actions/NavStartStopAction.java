@@ -77,12 +77,12 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		RoutingHelper helper = application.getRoutingHelper();
+	public String getActionText(OsmandApplication app) {
+		RoutingHelper helper = app.getRoutingHelper();
 		if (helper.isPauseNavigation() || helper.isFollowingMode()) {
-			return application.getString(R.string.cancel_navigation);
+			return app.getString(R.string.cancel_navigation);
 		}
-		return application.getString(R.string.follow);
+		return app.getString(R.string.follow);
 	}
 
 	@Override
@@ -98,8 +98,8 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
-		RoutingHelper helper = application.getRoutingHelper();
+	public boolean isActionWithSlash(OsmandApplication app) {
+		RoutingHelper helper = app.getRoutingHelper();
 		return helper.isPauseNavigation() || helper.isFollowingMode();
 	}
 }

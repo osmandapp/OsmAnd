@@ -32,7 +32,7 @@ public class BikeCadenceTextWidget extends TextInfoWidget {
 			if (calculatedCadence > 0) {
 				setText(String.valueOf(calculatedCadence), "rpm");
 			} else {
-				setText(null, null);
+				setText(NO_VALUE, null);
 			}
 		}
 	}

@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">Ei</string>
-    <string name="shared_string_yes">Jah</string>
-    <string name="osmand_app_not_found">OsmAnd ei ole paigaldatud</string>
-    <string name="app_name">OsmAnd Parkimine</string>
-    <string name="parking_plugin_installed">OsmAnd Parkimine on paigaldatud ja aktiveeritud OsmAnd seadetes.</string>
-</resources>

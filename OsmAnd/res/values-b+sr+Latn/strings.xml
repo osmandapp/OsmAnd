@@ -2148,8 +2148,6 @@
     <string name="marker_moved_to_active">Oznaka karte je premeštena u aktivne</string>
     <string name="marker_moved_to_history">Oznake karte su premeštene u istoriju</string>
     <string name="all_markers_moved_to_history">Sve oznake karte su premeštene u istoriju</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Ispod izaberite kojom brzinom će promena usmerenja preći iz „u pravcu kretanja“ na „po pravcu kompasa“.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Zadrška usmerenja karte</string>
     <string name="marker_show_distance_descr">Izaberite kako ukazati na rastojanje i pravac ka oznakama karte na karti:</string>
     <string name="order_by">Rasporedi po:</string>
     <string name="date_added">Dodato</string>
@@ -2843,7 +2841,7 @@
     <string name="do_not_show_startup_messages">Ne prikazuj poruke pri pokretanju</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd prikuplja podatke o tome koje delove programa otvarate. Vaš položaj se ne šalje, niti išta što unesete u program niti pojedinosti o oblastima koje vidite, tražite ili preuzmete.</string>
     <string name="do_not_send_anonymous_app_usage">Ne šalji bezimene podatke o korišćenom programu</string>
-    <string name="driving_region_automatic">Automatsko</string>
+    <string name="shared_string_automatic">Automatsko</string>
     <string name="right_side_navigation">Vožnja desnom trakom</string>
     <string name="fonts_header">Fontovi na karti</string>
     <string name="restore_purchases">Povrati trgovinu</string>
@@ -2975,7 +2973,6 @@
     <string name="route_between_points_desc">Izaberite kako povezati tačke, po pravoj liniji, ili izračunajte rutu između njih kako je dole naznačeno.</string>
     <string name="whole_track">Cela staza</string>
     <string name="next_segment">Sledeći segment</string>
-    <string name="route_between_points_warning_desc">Zatim pomoću jednog od vaših navigacionih profila prislonite stazu na najbliži dozvoljeni put da biste koristili ovu opciju.</string>
     <string name="threshold_distance">Prag udaljenosti</string>
     <string name="navigation_profile">Navigacijski profil</string>
     <string name="route_between_points_add_track_desc">Izaberite datoteku zapisa kojoj će se dodati novi segment.</string>
@@ -4094,7 +4091,6 @@
     <string name="on_hold_since">Na zadršci od %1$s</string>
     <string name="explore_wikipedia_offline">Istražite Vikipediju van mreže.</string>
     <string name="backup_data_removed">Svi podaci su uklonjeni.</string>
-    <string name="approximate_route_description">Prilepi putanju na puteve sa karte da dobijete sva skretanja i dodatne podatke, kao što su uglačanost puta, tip puta i sl.</string>
     <string name="unlimited_map_downloads">Neograničeno preuzimanje mapa</string>
     <string name="shared_string_offline">Van mreže</string>
     <string name="backup_confilcts_descr">Neke datoteke nije moguće otpremiti na server jer na serveru novija verzija.</string>

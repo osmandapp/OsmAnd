@@ -9,6 +9,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 
@@ -28,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -71,7 +73,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	boolean showSwitchProfile;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		Bundle args = getArguments();
@@ -81,7 +83,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	protected void createToolbar(LayoutInflater inflater, View view) {
+	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
 
 		View switchProfile = view.findViewById(R.id.profile_button);
@@ -221,6 +223,10 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		if (entries.length > 0) {
 			cameraPictureSize.setEntries(entries);
 			cameraPictureSize.setEntryValues(entryValues);
+			if((Integer) cameraPictureSize.getValue() == AV_PHOTO_SIZE_DEFAULT){
+				cameraPictureSize.setValueIndex(0);
+				updatePreference(cameraPictureSize);
+			}
 		} else {
 			cameraPictureSize.setVisible(false);
 		}
@@ -299,12 +305,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		ListPreferenceEx audioFormat = findPreference(plugin.AV_AUDIO_FORMAT.getId());
 		audioFormat.setEntries(entries);
 		audioFormat.setEntryValues(entryValues);
-		audioFormat.setDescription(R.string.av_audio_format_descr);
+		audioFormat.setDescription(R.string.av_audio_format_bottom_sheet_descr);
 	}
 
 	private void setupAudioBitratePref(AudioVideoNotesPlugin plugin) {
-		Integer[] entryValues = {AUDIO_BITRATE_DEFAULT, 16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
-		String[] entries = {getString(R.string.shared_string_default), "16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
+		Integer[] entryValues = {16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
+		String[] entries = {"16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
 
 		ListPreferenceEx audioBitrate = findPreference(plugin.AV_AUDIO_BITRATE.getId());
 		audioBitrate.setEntries(entries);

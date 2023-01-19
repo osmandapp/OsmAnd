@@ -39,6 +39,7 @@ public class Amenity extends MapObject {
 	public static final String MAPILLARY = "mapillary";
 	public static final String DISH = "dish";
 	public static final String REF = "ref";
+	public static final String LCN_REF = "lcn_ref";
 	public static final String OSM_DELETE_VALUE = "delete";
 	public static final String OSM_DELETE_TAG = "osmand_change";
 	public static final String IMAGE_TITLE = "image_title";
@@ -66,12 +67,21 @@ public class Amenity extends MapObject {
 	// context menu geometry;
 	private TIntArrayList y;
 	private TIntArrayList x;
+	private String mapIconName;
 
 	public static class AmenityRoutePoint {
 		public double deviateDistance;
 		public boolean deviationDirectionRight;
 		public Location pointA;
 		public Location pointB;
+	}
+
+	public String getMapIconName() {
+		return mapIconName;
+	}
+
+	public void setMapIconName(String mapIconName) {
+		this.mapIconName = mapIconName;
 	}
 
 	public PoiCategory getType() {

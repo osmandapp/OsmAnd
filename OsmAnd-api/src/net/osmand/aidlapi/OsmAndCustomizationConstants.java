@@ -13,6 +13,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_TRACKS_ID = DRAWER_ITEM_ID_SCHEME + "tracks";
 	String DRAWER_AV_NOTES_ID = DRAWER_ITEM_ID_SCHEME + "av_notes";
 	String DRAWER_OSM_EDITS_ID = DRAWER_ITEM_ID_SCHEME + "osm_edits";
+	String DRAWER_WEATHER_FORECAST_ID = DRAWER_ITEM_ID_SCHEME + "weather_forecast";
 	String DRAWER_BACKUP_RESTORE_ID = DRAWER_ITEM_ID_SCHEME + "backup_restore";
 	String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
 	String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";
@@ -48,6 +49,7 @@ public interface OsmAndCustomizationConstants {
 	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
+	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
@@ -58,6 +60,7 @@ public interface OsmAndCustomizationConstants {
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
+	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
@@ -121,6 +124,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_WIKIPEDIA = "osmand.wikipedia";
 	String PLUGIN_OPEN_PLACE_REVIEWS = "osmand.openplacereviews";
 	String PLUGIN_ANT_PLUS = "osmand.antplus";
+	String PLUGIN_WEATHER = "osmand.weather";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";
@@ -176,6 +180,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_ID = "fragment.";
 	String FRAGMENT_RATE_US_ID = FRAGMENT_ID + "rate_us";
 	String FRAGMENT_CRASH_ID = FRAGMENT_ID + "crash";
+	String FRAGMENT_RENDER_INIT_ERROR_ID = FRAGMENT_ID + "render_init_error";
 	String FRAGMENT_DESTINATION_REACHED_ID = FRAGMENT_ID + "destination_reached";
 	String FRAGMENT_WHATS_NEW_ID = FRAGMENT_ID + "whats_new";
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";

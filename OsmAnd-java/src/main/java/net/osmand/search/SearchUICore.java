@@ -17,6 +17,7 @@ import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
@@ -50,7 +51,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 	
-	public static final int SEARCH_PRIORITY_COEF = 10;
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final int TIMEOUT_BEFORE_SEARCH = 50;
@@ -319,6 +319,13 @@ public class SearchUICore {
 	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
 	                                                                      final ResultMatcher<SearchResult> matcher,
 	                                                                      boolean resortAll, boolean removeDuplicates) throws IOException {
+		return shallowSearch(cl, text, matcher, resortAll, removeDuplicates, searchSettings);
+	}
+
+	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
+	                                                                      final ResultMatcher<SearchResult> matcher,
+	                                                                      boolean resortAll, boolean removeDuplicates,
+	                                                                      SearchSettings searchSettings) throws IOException {
 		T api = getApiByClass(cl);
 		if (api != null) {
 			if (debugMode) {
@@ -342,11 +349,12 @@ public class SearchUICore {
 	}
 
 	public void init() {
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
+		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		apis.add(amenitiesApi);
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
 				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
@@ -952,7 +960,7 @@ public class SearchUICore {
 				SearchPhrase ph = o1.requiredSearchPhrase;
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
-				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SEARCH_PRIORITY_COEF > 1) {
+				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
 					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}

@@ -41,6 +41,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -197,6 +198,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
@@ -230,9 +234,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(widget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 
 	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {

@@ -349,7 +349,6 @@
     <string name="do_not_use_animations_descr">Lülitab kaardianimatsioonid välja.</string>
     <string name="move_all_to_history">Teisalda kõik ajalukku</string>
     <string name="sort_by">Sorteerimisalus</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kaardi orientatsiooni lävi</string>
     <string name="all_markers_moved_to_history">Kõik kaardimarkerid ajalukku teisaldatud</string>
     <string name="marker_moved_to_history">Kaardimarker ajalukku teisaldatud</string>
     <string name="marker_moved_to_active">Kaardimarker teisaldatud aktiivseks</string>
@@ -1033,7 +1032,7 @@
     <string name="reorder_profiles">Muuda profiililoendit</string>
     <string name="selected_profile">Valitud profiil</string>
     <string name="right_side_navigation">Parempoolne liiklus</string>
-    <string name="driving_region_automatic">Automaatne</string>
+    <string name="shared_string_automatic">Automaatne</string>
     <string name="fonts_header">Kaardi kirjastiilid</string>
     <string name="restore_purchases">Taasta ostud</string>
     <string name="shared_string_visible">Nähtaval</string>
@@ -2574,7 +2573,6 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Määra võrguühenduse puudumisel säilitatavate asukohtade ajaline puhver</string>
     <string name="mappilary_no_internet_desc">Mapillary fotod on saadaval ainult internetiühenduse olemasolul.</string>
     <string name="show_direction">Vahemaa näit</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vali allpool „liikumise suunalt“ „kompassi suunale“ vastavalt orientatsiooni ümberlülitamise kiirus.</string>
     <string name="marker_show_distance_descr">Valige, kuidas esitame kaardil kaugust ja kaardimarkerite suunda:</string>
     <string name="marker_save_as_track_descr">Ekspordi oma markerid järgmisesse GPX faili:</string>
     <string name="group_will_be_removed_after_restart">Järgmisel rakenduse käivitamisel on grupp kadunud.</string>
@@ -3681,7 +3679,6 @@
     <string name="plan_route_trim_after">Kärbi pärast</string>
     <string name="plan_route_trim_before">Kärbi enne</string>
     <string name="attach_to_the_roads">Kinnita teede külge</string>
-    <string name="route_between_points_warning_desc">Järgmisena klõpsa oma rada lähimale lubatud teele ühe oma navigatsiooniprofiiliga selle võimaluse kasutamiseks.</string>
     <string name="route_between_points_next_segment_button_desc">Selle valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
     <string name="main_actions">Põhitegevused</string>
     <string name="osm_live_payment_subscription_management">Maksmine toimub Sinu Google Play kontolt ostu kinnitamisel.
@@ -4209,7 +4206,6 @@
 \nAndmete praegune versioon salvestatakse serverisse ning varem tehtud muudatusi ei saa tagasi võtta.</string>
     <string name="backup_version_history_delete_descr">Kas kustutame vananenud andmetüüpide muutuste logi OsmAndi pilves\?</string>
     <string name="purchases_feature_desc_unlimited_map_download">Hangi kõigi mandrite ja piirkondade võrguühenduseta kaartide piiramatud allalaadimised.</string>
-    <string name="approximate_route_description">Kinnita marsruut kaardil olevatele teedele, et saada kõik pöörded ja lisaandmed, nagu tasasus, teetüübid jne.</string>
     <string name="release_4_0">• Pilvepõhine varundamine
 \n
 \n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks
@@ -4435,4 +4431,7 @@
     <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Nupud</string>
     <string name="turn_arrows">Pöörangute nooled</string>
+    <string name="live_update_frequency_week_variant">Kaardiuuendusi kontrollitakse kord nädalas.</string>
+    <string name="live_update_frequency_day_variant">Kaardiuuendusi kontrollitakse kord päevas.</string>
+    <string name="live_update_frequency_hour_variant">Kaardiuuendusi kontrollitakse kord tunnis.</string>
 </resources>

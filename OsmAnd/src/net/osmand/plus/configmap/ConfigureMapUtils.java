@@ -1,9 +1,15 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
+import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
+import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -19,16 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-
-import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
-import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
-import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
-
 public class ConfigureMapUtils {
 
-	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	@NonNull
 	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
@@ -71,22 +70,18 @@ public class ConfigureMapUtils {
 			return new ArrayList<>();
 		}
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
-		boolean useDepthContours = InAppPurchaseHelper.isSubscribedToAny(app)
-				|| InAppPurchaseHelper.isDepthContoursPurchased(app);
 		for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-			if (useDepthContours || !"depthContours".equals(p.getAttrName())) {
-				boolean skip = false;
-				if (skipCategories != null) {
-					for (String category : skipCategories) {
-						if (category.equals(p.getCategory())) {
-							skip = true;
-							break;
-						}
+			boolean skip = false;
+			if (skipCategories != null) {
+				for (String category : skipCategories) {
+					if (category.equals(p.getCategory())) {
+						skip = true;
+						break;
 					}
 				}
-				if (!skip) {
-					customRules.add(p);
-				}
+			}
+			if (!skip) {
+				customRules.add(p);
 			}
 		}
 		return customRules;

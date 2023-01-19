@@ -74,7 +74,7 @@ public class WrapContentViewPager2Callback extends OnPageChangeCallback {
 	}
 
 	@Nullable
-	private static View getCurrentPageView(@NonNull ViewPager2 viewPager) {
+	public static View getCurrentPageView(@NonNull ViewPager2 viewPager) {
 		RecyclerView recyclerView = (RecyclerView) viewPager.getChildAt(0);
 		ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(viewPager.getCurrentItem());
 		return viewHolder != null ? viewHolder.itemView : null;

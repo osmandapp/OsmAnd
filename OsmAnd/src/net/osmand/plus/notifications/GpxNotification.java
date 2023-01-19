@@ -1,5 +1,7 @@
 package net.osmand.plus.notifications;
 
+import static net.osmand.plus.NavigationService.USED_BY_GPX;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,15 +13,13 @@ import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 
 import net.osmand.plus.NavigationService;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.NavigationService.USED_BY_GPX;
 
 public class GpxNotification extends OsmandNotification {
 
@@ -154,11 +154,11 @@ public class GpxNotification extends OsmandNotification {
 
 		Intent saveIntent = new Intent(OSMAND_SAVE_GPX_SERVICE_ACTION);
 		PendingIntent savePendingIntent = PendingIntent.getBroadcast(app, 0, saveIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		if (isGpxRecording) {
 			Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 			PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT);
+					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_pause,
 						app.getString(R.string.shared_string_pause), stopPendingIntent);
@@ -171,7 +171,7 @@ public class GpxNotification extends OsmandNotification {
 		} else {
 			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 			PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT);
+					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_rec_start,
 						app.getString(R.string.shared_string_resume), startPendingIntent);

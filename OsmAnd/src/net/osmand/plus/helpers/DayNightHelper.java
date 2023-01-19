@@ -130,11 +130,15 @@ public class DayNightHelper implements SensorEventListener {
 		if (lastKnownLocation == null) {
 			return null;
 		}
-		double longitude = lastKnownLocation.getLongitude();
+		return getSunriseSunset(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+	}
+
+	public SunriseSunset getSunriseSunset(double lat, double lon) {
 		Date actualTime = new Date();
-		return new SunriseSunset(lastKnownLocation.getLatitude(),
-				longitude < 0 ? 360 + longitude : longitude,
-				actualTime, TimeZone.getDefault());
+		if (lon < 0) {
+			lon = 360 + lon;
+		}
+		return new SunriseSunset(lat, lon, actualTime, TimeZone.getDefault());
 	}
 
 	public void setMapThemeProvider(@Nullable MapThemeProvider mapThemeProvider) {

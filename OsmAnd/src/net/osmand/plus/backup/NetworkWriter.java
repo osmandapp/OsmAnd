@@ -9,7 +9,6 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -35,7 +34,7 @@ public class NetworkWriter extends AbstractWriter {
 
 		void onItemFileUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
 
-		void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
+		void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, @Nullable String error);
 	}
 
 	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadItemListener listener) {
@@ -46,23 +45,22 @@ public class NetworkWriter extends AbstractWriter {
 	@Override
 	public void write(@NonNull SettingsItem item) throws IOException {
 		String error;
-		long uploadTime = System.currentTimeMillis();
 		String fileName = BackupHelper.getItemFileName(item);
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {
-				error = uploadEntry(itemWriter, fileName, uploadTime);
+				error = uploadEntry(itemWriter, fileName);
 				if (error == null) {
-					error = uploadItemInfo(item, fileName + BackupHelper.INFO_EXT, uploadTime);
+					error = uploadItemInfo(item, fileName + BackupHelper.INFO_EXT);
 				}
 			} catch (UserNotRegisteredException e) {
 				throw new IOException(e.getMessage(), e);
 			}
 		} else {
-			error = uploadItemInfo(item, fileName + BackupHelper.INFO_EXT, uploadTime);
+			error = uploadItemInfo(item, fileName + BackupHelper.INFO_EXT);
 		}
 		if (listener != null) {
-			listener.onItemUploadDone(item, fileName, uploadTime, error);
+			listener.onItemUploadDone(item, fileName, error);
 		}
 		if (error != null) {
 			throw new IOException(error);
@@ -71,17 +69,17 @@ public class NetworkWriter extends AbstractWriter {
 
 	@Nullable
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-	                           @NonNull String fileName, long uploadTime)
+	                           @NonNull String fileName)
 			throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			return uploadDirWithFiles(itemWriter, fileName, uploadTime);
+			return uploadDirWithFiles(itemWriter, fileName);
 		} else {
-			return uploadItemFile(itemWriter, fileName, getUploadFileListener(itemWriter.getItem()), uploadTime);
+			return uploadItemFile(itemWriter, fileName, getUploadFileListener(itemWriter.getItem()));
 		}
 	}
 
 	@Nullable
-	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime) throws IOException {
+	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName) throws IOException {
 		try {
 			JSONObject json = item.toJsonObj();
 			boolean hasFile = json.has("file");
@@ -93,8 +91,8 @@ public class NetworkWriter extends AbstractWriter {
 					Algorithms.streamCopy(inputStream, outputStream, progress, 1024);
 					outputStream.flush();
 				};
-				return backupHelper.uploadFile(fileName, item.getType().name(), streamWriter, uploadTime,
-						getUploadFileListener(item));
+				return backupHelper.uploadFile(fileName, item.getType().name(), item.getLastModifiedTime(),
+						streamWriter, getUploadFileListener(item));
 			} else {
 				return null;
 			}
@@ -105,14 +103,15 @@ public class NetworkWriter extends AbstractWriter {
 
 	@Nullable
 	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-	                              @NonNull String fileName, @Nullable OnUploadFileListener listener,
-	                              long uploadTime) throws UserNotRegisteredException, IOException {
+	                              @NonNull String fileName, @Nullable OnUploadFileListener listener)
+			throws UserNotRegisteredException, IOException {
 		if (isCancelled()) {
 			throw new InterruptedIOException();
 		} else {
-			String type = itemWriter.getItem().getType().name();
+			SettingsItem item = itemWriter.getItem();
+			String type = item.getType().name();
 			StreamWriter streamWriter = getStreamWriter(itemWriter, fileName);
-			return backupHelper.uploadFile(fileName, type, streamWriter, uploadTime, listener);
+			return backupHelper.uploadFile(fileName, type, item.getLastModifiedTime(), streamWriter, listener);
 		}
 	}
 
@@ -138,21 +137,20 @@ public class NetworkWriter extends AbstractWriter {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
 			FileSettingsItem settingsItem = (FileSettingsItem) item;
-			FileSubtype subtype = settingsItem.getSubtype();
-			if (subtype == FileSubtype.OBF_MAP || subtype == FileSubtype.ROAD_MAP || subtype == FileSubtype.WIKI_MAP
-					|| subtype == FileSubtype.SRTM_MAP || subtype == FileSubtype.TILES_MAP || subtype == FileSubtype.NAUTICAL_DEPTH) {
-				return backupHelper.isObfMapExistsOnServer(fileName);
-			}
+			return BackupHelper.isDefaultObfMap(backupHelper.getApp(), settingsItem, fileName);
 		}
 		return false;
 	}
 
 	@Nullable
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-	                                  @NonNull String fileName, long uploadTime)
+	                                  @NonNull String fileName)
 			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
 		List<File> filesToUpload = backupHelper.collectItemFilesForUpload(item);
+		if (filesToUpload.isEmpty()) {
+			return "No files to upload";
+		}
 		long size = 0;
 		for (File file : filesToUpload) {
 			size += file.length();
@@ -161,7 +159,7 @@ public class NetworkWriter extends AbstractWriter {
 		for (File file : filesToUpload) {
 			item.setFileToWrite(file);
 			String name = BackupHelper.getFileItemName(file, item);
-			String error = uploadItemFile(itemWriter, name, uploadListener, uploadTime);
+			String error = uploadItemFile(itemWriter, name, uploadListener);
 			if (error != null) {
 				return error;
 			}

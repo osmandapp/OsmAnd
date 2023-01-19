@@ -37,7 +37,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 
 import org.apache.commons.logging.Log;
 
@@ -88,7 +88,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.plugins, container, false);
-		AndroidUtils.addStatusBarPadding21v(getContext(), view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.plugins_screen);

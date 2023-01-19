@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.annotation.SuppressLint;
@@ -211,9 +211,9 @@ public class IconsCard extends MapBaseCard {
 		iconsSelector.removeAllViews();
 		iconsSelector.setHorizontalAutoSpacing(true);
 
+		int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		for (String iconName : getIconNameListToShow()) {
-			int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 			LayoutParams layoutParams = new LayoutParams(width, 0);
 			iconsSelector.addView(createIconItemView(inflater, iconName), layoutParams);
 		}

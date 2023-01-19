@@ -73,7 +73,7 @@
     <string name="poi_military_bunker">Búnquer militar</string>
     <string name="poi_military_barracks">Barracons militars</string>
     <string name="poi_military_danger_area">Zona de tir</string>
-    <string name="poi_organic">Menjar ecològic</string>
+    <string name="poi_organic">Productes ecològics</string>
     <string name="poi_paint">Pintures</string>
     <string name="poi_pet">Botiga d\'animals</string>
     <string name="poi_radiotechnics">Radiotècnia</string>
@@ -116,8 +116,8 @@
     <string name="poi_fabric">Merceria</string>
     <string name="poi_public_transport_platform">Parada de transport públic</string>
     <string name="poi_bus_station">Estació d\'autobusos</string>
-    <string name="poi_railway_station">Estació de tren</string>
-    <string name="poi_railway_platform">Andana de tren</string>
+    <string name="poi_railway_station">Estació ferroviària;Estació de ferrocarril;Estació de tren</string>
+    <string name="poi_railway_platform">Andana de tren;Andana de ferrocarril;Andana ferroviària;Plataforma de tren</string>
     <string name="poi_halt">Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
     <string name="poi_subway_station">Sí</string>
@@ -201,7 +201,7 @@
     <string name="poi_village">Poble</string>
     <string name="poi_hamlet">Llogaret</string>
     <string name="poi_isolated_dwelling">Assentament aïllat</string>
-    <string name="poi_suburb">Barri</string>
+    <string name="poi_suburb">Suburbi/Districte</string>
     <string name="poi_place_allotments">Horts familiars</string>
     <string name="poi_place_farm">Granja</string>
     <string name="poi_pharmacy">Farmàcia</string>
@@ -424,8 +424,8 @@
     <string name="poi_gasometer">Gasòmetre</string>
     <string name="poi_silo">Sitja</string>
     <string name="poi_storage_tank">Dipòsit d\'emmagatzematge</string>
-    <string name="poi_quarter">Barri</string>
-    <string name="poi_neighbourhood">Veïnatge</string>
+    <string name="poi_quarter">Districte</string>
+    <string name="poi_neighbourhood">Barri;Veïnat</string>
     <string name="poi_locality">Assentament</string>
     <string name="poi_residential">Àrea residencial</string>
     <string name="poi_dentist">Dentista</string>
@@ -572,8 +572,8 @@
     <string name="poi_biergarten">Cerveseria amb terrassa</string>
     <string name="poi_restaurant">Restaurant</string>
     <string name="poi_fast_food">Menjar ràpid</string>
-    <string name="poi_bar">Bar</string>
-    <string name="poi_pub">Pub</string>
+    <string name="poi_bar">Pub (bar de copes)</string>
+    <string name="poi_pub">Bar</string>
     <string name="poi_food_court">Menjador comú</string>
     <string name="poi_drinking_water">Aigua potable</string>
     <string name="poi_barbecue">Barbacoa</string>
@@ -877,7 +877,7 @@
     <string name="poi_access_delivery">Accés per a lliuraments</string>
     <string name="poi_access_agricultural">Accés per a activitats agrícoles</string>
     <string name="poi_monitoring_station">Centre de control</string>
-    <string name="poi_capital">Sí</string>
+    <string name="poi_capital">Sí;Capital</string>
     <string name="poi_fee_no">No</string>
     <string name="poi_email">Correu electrònic</string>
     <string name="poi_fax">Fax</string>
@@ -2074,11 +2074,11 @@
     <string name="poi_hygrometer_yes">Higròmetre</string>
     <string name="poi_hygrometer_no">Higròmetre: no</string>
     <string name="poi_fuel_type">Tipus de combustible</string>
-    <string name="poi_fuel_avia_type">Tipus de combustible (avia)</string>
+    <string name="poi_fuel_avia_type">Tipus de combustible (avions)</string>
     <string name="poi_payment_type">Tipus de pagament</string>
-    <string name="poi_payment_fuel_type">Targetes per carburants</string>
+    <string name="poi_payment_fuel_type">Targetes de combustible</string>
     <string name="poi_additional_type">Addicional</string>
-    <string name="poi_internet_access_type">Tipus d\'accés d\'Internet</string>
+    <string name="poi_internet_access_type">Tipus d\'accés a Internet</string>
     <string name="poi_bicycle_service">Servei de bicicletes</string>
     <string name="poi_clothes_type">Tipus</string>
     <string name="poi_shoes_type">Tipus</string>
@@ -2335,7 +2335,7 @@
     <string name="poi_cuisine_breakfast">Esmorzars</string>
     <string name="poi_cuisine_steak">Bistecs</string>
     <string name="poi_cuisine_tapas">Tapes</string>
-    <string name="poi_cuisine_gastropub">Bar gastronòmic</string>
+    <string name="poi_cuisine_gastropub">Bar gastronòmic;Gastrobar</string>
     <string name="poi_cuisine_diner">Sopars</string>
     <string name="poi_cuisine_sausage">Llonganisses</string>
     <string name="poi_cuisine_pasta">Pasta</string>
@@ -2642,7 +2642,7 @@
     <string name="poi_public_bookcase_type_phone_box">Tipus: cabina telefònica</string>
     <string name="poi_public_bookcase_type_reading_box">Tipus: cabina de lectura</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Tipus: cabina de fusta</string>
-    <string name="poi_public_bookcase_type_metal_cabinet">Tipus: cabina metàlica</string>
+    <string name="poi_public_bookcase_type_metal_cabinet">Tipus: cabina metàl·lica</string>
     <string name="poi_public_bookcase_type_shelf">Tipus: prestatge</string>
     <string name="poi_tower_construction_freestanding">Construcció: independent</string>
     <string name="poi_tower_construction_dish">Construcció: parabòlica</string>
@@ -2900,4 +2900,20 @@
     <string name="poi_heating_filter">Calefacció</string>
     <string name="poi_computer_sales">Venda d\'ordinadors</string>
     <string name="poi_faculty_filter">Facultat</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visats per a no immigrants</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Serveis al ciutadà</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Visats per a no immigrants</string>
+    <string name="poi_operator_type_public">Tipus d\'operador: públic</string>
+    <string name="poi_access_disabled">Accés per a persones amb diversitat funcional</string>
+    <string name="poi_bay_filter">Tipus de badia</string>
+    <string name="poi_departures_board">Tauler de sortides</string>
+    <string name="poi_drinking_water_refill">Recàrrega d\'aigua potable</string>
+    <string name="poi_access_goods">Accés per a vehicles de mercaderies lleugeres</string>
+    <string name="poi_access_mofa">Accés per a bicimotos</string>
+    <string name="poi_climbing_crag_filter">Penyal d\'escalada</string>
+    <string name="poi_access_motorcar">Accés en automòbil</string>
+    <string name="poi_government_public_service">Servei públic</string>
+    <string name="poi_access_hgv">Accés per a vehicles pesats</string>
+    <string name="poi_city_block">Illa urbana;Illa de cases</string>
+    <string name="poi_access_scooter">Accés en escúter</string>
 </resources>

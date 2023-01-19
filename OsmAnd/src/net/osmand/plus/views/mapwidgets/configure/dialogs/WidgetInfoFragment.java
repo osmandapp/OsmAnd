@@ -23,6 +23,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -90,7 +91,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		Context context = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater themedInflater = LayoutInflater.from(context);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(context, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		ViewGroup mainContent = view.findViewById(R.id.main_content);
 		themedInflater.inflate(R.layout.widget_info_fragment_content, mainContent);
@@ -112,7 +113,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			throw new IllegalStateException("Failed to find widget by id: " + widgetId);
 		}
 		widgetType = widgetInfo.getWidgetType();
-		widgetGroup = widgetType == null ? null : widgetType.group;
+		widgetGroup = widgetType == null ? null : widgetType.getGroup();
 		panel = widgetInfo.widgetPanel;
 	}
 
@@ -300,8 +301,9 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
 		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType);
-		MapWidgetInfo duplicateWidgetInfo = widgetRegistry
-				.createCustomWidget(duplicateId, duplicateWidget, widgetType, panel, appMode);
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+		MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
+				duplicateId, duplicateWidget, widgetType, panel);
 		duplicateWidgetInfo.enableDisableForMode(appMode, true);
 		widgetInfo.widget.copySettings(appMode, duplicateId);
 

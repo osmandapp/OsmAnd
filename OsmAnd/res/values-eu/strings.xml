@@ -2185,7 +2185,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>
-    <string name="driving_region_automatic">Automatikoa</string>
+    <string name="shared_string_automatic">Automatikoa</string>
     <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd-ek aplikazioan irekitzen dituzun atalei buruzko informazioa jasotzen du. Zure kokalekua ez da inoiz bidaltzen, ezta aplikazioan idazten duzun ezer edo ikusi, bilatu edo deskargatzen dituzun zonaldeei buruzko ezer ere.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak abioan</string>
@@ -2463,8 +2463,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="import_track">Inportatu GPX fitxategia</string>
     <string name="import_track_desc">%1$s fitxategiak ez du bide-punturik, inportatu lorratz gisa?</string>
     <string name="move_point">Mugitu puntua</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Maparen orientazioaren atalasea</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">"Hautatu maparen orientazioa  \'barne ipar-orratza\' eta ez \'mugimenduaren norabidea\'-ren arabera erabakitzeko abiadura."</string>
     <string name="all_markers_moved_to_history">Markatzaile guztiak historialera mugituta</string>
     <string name="marker_moved_to_history">Mapa-markatzailea historialera eraman da</string>
     <string name="marker_moved_to_active">Mapa-markatzailea aktibora eraman da</string>
@@ -3652,7 +3650,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="gpx_direction_arrows">Norabideko geziak</string>
     <string name="plan_route_create_new_route">Sortu ibilbide berria</string>
     <string name="threshold_distance">Distantzia margena</string>
-    <string name="route_between_points_warning_desc">Ondoren, lotu zure lorratza baimendutako errepiderik hurbilenera zure nabigazio profil batekin aukera hau erabiltzeko.</string>
     <string name="plan_route_last_edited">Editatutako azkena</string>
     <string name="plan_route_import_track">Inportatu lorratza</string>
     <string name="plan_route_open_existing_track">Ireki dagoen lorratz bat</string>
@@ -4396,7 +4393,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="map_widget_distance_by_tap">Distantzia sakatuz</string>
     <string name="contour_lines_hillshades_slope">Sestra-lerroak, itzalak, maldak</string>
     <string name="shared_string_uphill">Maldan gora</string>
-    <string name="approximate_route_description">Erantsi ibilbidea mapako errepideei bira guztiak eta datu gehigarriak lortzeko, hala nola, leuntasuna, errepide motak etab.</string>
     <string name="backup_error_no_valid_subscription">Ez dago baliozko harpidetzarik</string>
     <string name="contact_support_description">Galderarik baduzu, jarri gurekin harremanetan %1$s helbidean.</string>
     <string name="live_update_delete_updates_msg">%s zuzeneko eguneratze guztiak ezabatu\?</string>
@@ -4585,11 +4581,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="compass_always_visible">Beti ikusgai</string>
     <string name="compass_click_desc">Sakatu iparrorratza maparen orientazio modua aldatzeko.</string>
     <string name="compass_desc">Iparraldeko norabidea erakusten du.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Sakonerako sestra-marren kolore-eskema</string>
     <string name="rendering_attr_depthContourColorScheme_description">Sakonerako sestra-marren kolore-eskema</string>
     <string name="rendering_attr_depthContourWidth_description">Sakonerako sestra-marren zabalera</string>
     <string name="next_turn_widget_desc">Widget-ak hurrengo birari buruzko informazioa erakusten du maniobraren argazkiarekin eta harako distantziarekin.</string>
-    <string name="rendering_attr_depthContourWidth_name">Sakonerako sestra-marren zabalera</string>
     <string name="accessibility_2d_view_on">2.5D ikuspegia aktibatuta</string>
     <string name="download_complete">Deskarga burutu da</string>
     <string name="connect_with_straight_line">Konektatu lerro zuzenean</string>
@@ -4599,7 +4593,75 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="next_live_update_time">Hurrengo eguneratzea: %1$s barru.</string>
     <string name="favorites_backup">Gogokoen babeskopiak</string>
     <string name="shared_string_cross_buy">Erosketa gurutzatua</string>
-    <string name="ant_widgets">ANT+ widget-ak</string>
+    <string name="external_sensor_widgets">ANT+ widget-ak</string>
     <string name="purchases_feature_desc_cross_buy">Erabili zure harpidetza-abantailak plataforma ezberdinetan (Android/iOS/Web) kostu gehigarririk gabe.</string>
     <string name="map_widget_target_distance">Kameratik xederako distantzia</string>
+    <string name="map_settings_weather_temp">Tenperatura</string>
+    <string name="map_settings_weather_air_pressure">Presio atmosferikoa</string>
+    <string name="map_settings_weather_wind">Haizea</string>
+    <string name="map_settings_weather_cloud">Hodeiak</string>
+    <string name="map_settings_weather_precip">Prezipitazioak</string>
+    <string name="shared_string_weather">Eguraldia</string>
+    <string name="measurement_units">Neurketa-unitateak</string>
+    <string name="explore_weather_forecast">Arakatu eguraldiaren iragarpena.</string>
+    <string name="shared_string_contours">Ingerada</string>
+    <string name="shared_string_layers">Geruzak</string>
+    <string name="empty_screen_weather_contours">Aktibatu eguraldiaren sestrak mapan ikusteko.</string>
+    <string name="empty_screen_weather_pressure_layer">Aktibatu presio-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_clouds_layer">Aktibatu hodeien estaldura geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_wind_layer">Aktibatu haize-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_temperature_layer">Aktibatu tenperatura-geruza mapan ikusteko.</string>
+    <string name="empty_screen_weather_precipitation_layer">Aktibatu prezipitazio-geruza mapan ikusteko.</string>
+    <string name="empty_screen_view_selected_weather_data">Aktibatu hautatutako eguraldiaren datuak mapan ikusteko.</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_milimeters">Milimetroak</string>
+    <string name="weather_precip_inches">Hazbeteak</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_miles_per_hour">Miliak orduko</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_knots">Korapiloak</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometro orduko</string>
+    <string name="weather_wind_meters_per_second">Metro/segundo</string>
+    <string name="precipitation_widget_desc">Uneko mapa-zentrorako prezipitazioa erakusten du.</string>
+    <string name="temperature_widget_desc">Uneko mapa-zentroaren tenperatura erakusten du.</string>
+    <string name="switch_mode_by_tapping_on_widget">Aldatu modua widget-a sakatuta.</string>
+    <string name="map_widget_sunset_desc">Hurrengo ilunabarraren ordua edo ilunabarrera arte geratzen den denbora erakusten du.</string>
+    <string name="map_widget_sunrise_desc">Hurrengo egunsentiaren ordua edo eguzkia atera arte geratzen den denbora erakusten du.</string>
+    <string name="map_widget_group_sunrise_sunset">Egunsentia, ilunabarra</string>
+    <string name="shared_string_time_left">Falta den denbora</string>
+    <string name="shared_string_sunset">Ilunabarra</string>
+    <string name="shared_string_sunrise">Egunsentia</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Widget hauek hurrengo egunsentiari eta ilunabarrari buruzko informazioa erakusten dute.</string>
+    <string name="weather_plugin_description">Ematen du
+\n- 24 orduko eta 7 eguneko eguraldiaren iragarpena 5 geruza dituena
+\n- Kokapenean oinarritutako widgetak
+\n- Tenperatura/presioaren isolineak
+\n
+\nEguraldiaren datuak Global Forecast System-ek (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) ematen ditu.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Lerroaren kolore-eskema</string>
+    <string name="depth_contour_lines">Sakoneraren sestra-kurbak</string>
+    <string name="turn_on_nautical_depth_description">Aktibatu itsas-sakoneraren datuak mapan ikusteko.</string>
+    <string name="quick_action_temperature_layer">Tenperatura-geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_precipitation_layer">Prezipitazio-geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_wind_layer">Haizearen geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_cloud_layer">Hodeien geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="quick_action_air_pressure_layer">Airearen presioaren geruza mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="temperature_layer">Tenperaturaren geruza</string>
+    <string name="pressure_layer">Presioaren geruza</string>
+    <string name="wind_layer">Haizearen geruza</string>
+    <string name="cloud_layer">Hodeien geruza</string>
+    <string name="precipitation_layer">Prezipitazioen geruza</string>
+    <string name="shared_string_next_sunset">Hurrengo ilunabarra</string>
+    <string name="shared_string_next_sunrise">Hurrengo egunsentia</string>
+    <string name="weather_offline_forecast">Lineaz kanpoko iragarpena</string>
+    <string name="weather_online_cache">Lineako cachea</string>
+    <string name="weather_widgets_secondary_desc">Neurketa-unitateak Eguraldia pluginaren ezarpenetan alda daitezke.</string>
+    <string name="clouds_widget_desc">Uneko mapa-zentroaren hodei-estaldura erakusten du.</string>
+    <string name="wind_widget_desc">Uneko mapa-zentrorako haizearen abiadura bistaratzen du.</string>
+    <string name="rendering_attr_depthContourWidth_name">Lerroaren zabalera</string>
+    <string name="storage_migration_fragment_close_descr">Kopiatzen %1$s%% -ra. Orain gelditzen bazara, baliteke aplikazioak behar bezala ez funtzionatzea.</string>
+    <string name="air_pressure_widget_desc">Uneko mapa-zentrorako presio atmosferikoa bistaratzen du.</string>
 </resources>

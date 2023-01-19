@@ -1,11 +1,13 @@
 package net.osmand.telegram.utils
 
-import android.Manifest
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
@@ -70,12 +72,27 @@ object AndroidUtils {
 	}
 
 	fun isLocationPermissionAvailable(context: Context): Boolean {
-		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+		val accessFineLocation = hasFineLocationPermission(context)
+		val accessCoarseLocation = hasCoarseLocationPermission(context)
+		return accessFineLocation || accessCoarseLocation
 	}
 
+	private fun hasFineLocationPermission(context: Context): Boolean {
+		return ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PERMISSION_GRANTED
+	}
+
+	private fun hasCoarseLocationPermission(context: Context): Boolean {
+		return ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
+	}
 
 	fun requestLocationPermission(activity: Activity) {
-		ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
+		if (!isLocationPermissionAvailable(activity)) {
+			ActivityCompat.requestPermissions(
+				activity,
+				arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
+				PERMISSION_REQUEST_LOCATION
+			)
+		}
 	}
 	
 	fun dpToPx(ctx: Context, dp: Float): Int {

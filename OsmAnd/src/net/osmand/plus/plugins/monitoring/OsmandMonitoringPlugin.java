@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
@@ -36,12 +36,12 @@ import net.osmand.plus.plugins.monitoring.widgets.TripRecordingTimeWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -103,7 +103,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
 		app.getNotificationHelper().refreshNotifications();
 	}
@@ -154,6 +154,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final int[] MINUTES = {2, 3, 5};
 	public static final int[] MAX_INTERVAL_TO_SEND_MINUTES = {1, 2, 5, 10, 15, 20, 30, 60, 90, 2 * 60, 3 * 60, 4 * 60, 6 * 60, 12 * 60, 24 * 60};
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.MONITORING_SETTINGS;
@@ -184,19 +185,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(distanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(distanceWidget));
 
 		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(timeWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(timeWidget));
 
 		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(uphillWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(uphillWidget));
 
 		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(downhillWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(downhillWidget));
 	}
 
 	@Override

@@ -435,11 +435,11 @@ public class RoutingContext {
 		}
 		
 		TLongHashSet ts = new TLongHashSet(); 
-		for(int i = -t; i <= t; i++) {
-			for(int j = -t; j <= t; j++) {
-				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0));		
-			}
-		}
+        for (int i = -t; i <= t; i++) {
+            for (int j = -t; j <= t; j++) {
+                ts.add(getRoutingTile(x31 + i * coordinatesShift, y31 + j * coordinatesShift, 0));
+            }
+        }
 		TLongIterator it = ts.iterator();
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		while (it.hasNext()) {

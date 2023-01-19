@@ -38,7 +38,7 @@ public class BikeDistanceTextWidget extends TextInfoWidget {
 						app, false, metricsConstants);
 				setText(formattedDistance.value, formattedDistance.unit);
 			} else {
-				setText(null, null);
+				setText(NO_VALUE, null);
 			}
 		}
 	}

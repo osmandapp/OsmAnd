@@ -1743,7 +1743,7 @@
     <string name="restore_purchases">שחזור רכישות</string>
     <string name="fonts_header">גופנים למפה</string>
     <string name="right_side_navigation">מושב הנהג מימין</string>
-    <string name="driving_region_automatic">אוטומטי</string>
+    <string name="shared_string_automatic">אוטומטי</string>
     <string name="shared_string_go">התחלה</string>
     <string name="later">אחר כך</string>
     <string name="get_full_version">גרסה מלאה</string>
@@ -1791,7 +1791,6 @@
     <string name="osn_add_dialog_success">נוצרה הערה</string>
     <string name="osn_add_dialog_error">לא ניתן ליצור הערה.</string>
     <string name="marker_show_distance_descr">נא לבחור כיצד לציין את המרחק והכיוון לסמני המפה במפה:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">סף כיווניות מפה</string>
     <string name="all_markers_moved_to_history">כל סמני המפה הועברה להיסטוריה</string>
     <string name="marker_moved_to_history">סמן המפה הועבר להיסטוריה</string>
     <string name="marker_moved_to_active">סמן המפה הועבר למצב פעיל</string>
@@ -2245,7 +2244,6 @@
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
     <string name="one_tap_active">הפעלה ב‚נגיעה אחת’</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">ניתן לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
     <string name="index_item_depth_points_southern_hemisphere">נקודות עומק ימיות בחצי הכדור הדרומי</string>
     <string name="index_item_depth_points_northern_hemisphere">נקודות עומק ימיות בחצי הכדור הצפוני</string>
     <string name="do_not_send_anonymous_app_usage_desc">ב־OsmAnd נאסף מידע על אילו חלקים ביישומון משמשים אותך. המיקום שלך אף פעם לא נשלח, גם לא הקלט שלך ביישומון או פרטים על אזורים בהם צפית, חיפשת או הורדת.</string>
@@ -3713,7 +3711,6 @@
     <string name="route_between_points_whole_track_button_desc">כל המסלול יחושב מחדש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_next_segment_button_desc">רק המקטע הבא יחושב מחודש באמצעות הפרופיל הנבחר.</string>
     <string name="route_between_points_desc">נא לבחור כיצד לחבר את הנקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
-    <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
     <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
@@ -4500,7 +4497,6 @@
     <string name="quick_action_add_route_descr">כפתור להתחלת מסלול מאמצע המסך.</string>
     <string name="purchases_feature_desc_osmand_cloud">הצטרפות ל־OsmAnd Cloud מאפשרת לך לאחסן את כל נתוני ה־OsmAnd שלך באופן מקוון. הנתונים שלך לא הולכים לאיבוד לאחר ההתקנה. ניתן לגבות ולשחזר את כל הנתונים בקלות.</string>
     <string name="purchases_feature_desc_terrain">קווי מתאר של פני שטח, מפת הצללות מלאה עם הצללות כהות ומפות שיפועים עם צבעים להצגת אזורי הפסגה והשפל.</string>
-    <string name="approximate_route_description">לצרף את המסלול לדרכים במפה כדי לקבל את כל הפניות ונתונים נוספים כגון, חלקלקות, סוגי הדרכים וכן הלאה.</string>
     <string name="routeInfo_tracktype_description">לצבוע את הנתיב או קו המסלול לפי הרכב המשטח. בדרך כלל תקף כאשר רשת הכבישים אינה סלולה ברובה.</string>
     <string name="please_provide_group_name_message">נא לספק שם לקבוצה.</string>
     <string name="navigate_point_format_swiss_grid_plus">הרשת השווייצרית (CH1903+‎)</string>

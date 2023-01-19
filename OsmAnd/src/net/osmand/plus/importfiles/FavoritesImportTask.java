@@ -8,8 +8,8 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
@@ -53,7 +53,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
-			favoritesHelper.addFavourite(favourite, false);
+			favoritesHelper.addFavourite(favourite, false, false);
 
 			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
 				plugin.updateParkingPoint(favourite);

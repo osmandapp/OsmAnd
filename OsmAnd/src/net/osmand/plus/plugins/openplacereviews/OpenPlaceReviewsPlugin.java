@@ -19,7 +19,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
@@ -67,6 +67,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 		return app.getString(R.string.open_place_reviews_plugin_description);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.OPEN_PLACE_REVIEWS;
@@ -213,7 +214,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void disable(OsmandApplication app) {
+	public void disable(@NonNull OsmandApplication app) {
 		if (OPR_USE_DEV_URL.get()) {
 			OPR_USE_DEV_URL.set(false);
 			app.getOprAuthHelper().resetAuthorization();

@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -25,6 +26,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
@@ -38,10 +40,12 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -65,6 +69,7 @@ public abstract class OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(PluginsHelper.class);
 
 	protected OsmandApplication app;
+	protected OsmandSettings settings;
 
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
@@ -73,6 +78,7 @@ public abstract class OsmandPlugin {
 
 	public OsmandPlugin(@NonNull OsmandApplication app) {
 		this.app = app;
+		settings = app.getSettings();
 	}
 
 	public abstract String getId();
@@ -96,6 +102,7 @@ public abstract class OsmandPlugin {
 		return app.getUIUtilities().getIcon(getLogoResourceId());
 	}
 
+	@Nullable
 	public SettingsScreenType getSettingsScreenType() {
 		return null;
 	}
@@ -165,6 +172,11 @@ public abstract class OsmandPlugin {
 		return installURL;
 	}
 
+	@Nullable
+	public OsmAndFeature getOsmAndFeature() {
+		return null;
+	}
+
 	public String getComponentId1() {
 		return null;
 	}
@@ -201,7 +213,6 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	@Nullable
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
 	}
 
@@ -215,6 +226,10 @@ public abstract class OsmandPlugin {
 	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
 	                                             @NonNull JSONObject imageObject) {
 		return false;
+	}
+
+	public boolean disablePreferences() {
+		return !isActive();
 	}
 
 	/**
@@ -379,42 +394,42 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<Boolean> registerBooleanPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.registerBooleanPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Boolean> registerBooleanAccessibilityPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		CommonPreference<Boolean> preference = settings.registerBooleanAccessibilityPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<String> registerStringPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		CommonPreference<String> preference = settings.registerStringPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
-		CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		CommonPreference<Integer> preference = settings.registerIntPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Long> registerLongPreference(@NonNull String prefId, long defValue) {
-		CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		CommonPreference<Long> preference = settings.registerLongPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected CommonPreference<Float> registerFloatPreference(@NonNull String prefId, float defValue) {
-		CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		CommonPreference<Float> preference = settings.registerFloatPreference(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
@@ -422,30 +437,44 @@ public abstract class OsmandPlugin {
 
 	protected <T extends Enum<?>> CommonPreference<T> registerEnumStringPreference(@NonNull String prefId, @NonNull Enum<?> defaultValue,
 	                                                                               @NonNull Enum<?>[] values, @NonNull Class<T> clz) {
-		CommonPreference<T> preference = app.getSettings().registerEnumStringPreference(prefId, defaultValue, values, clz);
+		CommonPreference<T> preference = settings.registerEnumStringPreference(prefId, defaultValue, values, clz);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
 	protected ListStringPreference registerListStringPreference(@NonNull String prefId, @Nullable String defValue, @NonNull String delimiter) {
-		ListStringPreference preference = app.getSettings().registerStringListPreference(prefId, defValue, delimiter);
+		ListStringPreference preference = settings.registerStringListPreference(prefId, defValue, delimiter);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
 
-	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
-		CommonPreference<Boolean> preference = app.getSettings().registerCustomRenderBooleanProperty(prefId, defValue);
-		preference.setRelatedPlugin(this);
-		pluginPreferences.add(preference);
-		return preference;
+	protected CommonPreference<String> registerRenderingPreference(@NonNull RenderingRuleProperty property) {
+		return registerRenderingPreference(property.getAttrName(), "");
+	}
+
+	protected CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull RenderingRuleProperty property) {
+		return registerBooleanRenderingPreference(property.getAttrName(), false);
 	}
 
 	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		CommonPreference<String> preference = app.getSettings().registerCustomRenderProperty(prefId, defValue);
+		CommonPreference<String> preference = settings.registerCustomRenderProperty(prefId, defValue);
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;
 	}
+
+	private CommonPreference<Boolean> registerBooleanRenderingPreference(@NonNull String prefId, boolean defValue) {
+		CommonPreference<Boolean> preference = settings.registerCustomRenderBooleanProperty(prefId, defValue);
+		preference.setRelatedPlugin(this);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
+		return false;
+	}
+
+	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) { }
 }

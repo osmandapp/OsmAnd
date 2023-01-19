@@ -1,5 +1,8 @@
 package net.osmand.plus.liveupdates;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.LOCAL_INDEX_INFO;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,16 +15,14 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-
 public class LiveUpdatesAlarmReceiver extends BroadcastReceiver {
+
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesAlarmReceiver.class);
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String fileName = intent.getAction();
-		String localIndexInfoFile =
-				intent.getStringExtra(LiveUpdatesHelper.LOCAL_INDEX_INFO);
+		String localIndexInfoFile = intent.getStringExtra(LOCAL_INDEX_INFO);
 		if (localIndexInfoFile == null) {
 			LOG.error("Unexpected: localIndexInfoFile is null");
 			return;

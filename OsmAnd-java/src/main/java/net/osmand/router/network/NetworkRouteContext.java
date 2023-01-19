@@ -194,28 +194,32 @@ public class NetworkRouteContext {
 
 	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req, long tileId) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile(tileId);
-		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> reader : readers.entrySet()) {
+		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> readerSubregions : readers.entrySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
-			List<RouteSubregion> subregions = reader.getKey().searchRouteIndexTree(req, reader.getValue());
-			stats.loadTimeNs += (System.nanoTime() - nt);
-			for (RouteSubregion sub : subregions) {
-				List<RouteDataObject> objects = loadedSubregions.get(sub);
-				if (objects == null) {
-					nt = System.nanoTime();
-					objects = reader.getKey().loadRouteIndexData(sub);
-					loadedSubregions.put(sub, objects);
-					stats.loadTimeNs += (System.nanoTime() - nt);
-				}
-				for (RouteDataObject obj : objects) {
-					if (obj == null) {
-						continue;
+			BinaryMapIndexReader reader = readerSubregions.getKey();
+			synchronized (reader) {
+				List<RouteSubregion> routeSubregions = readerSubregions.getValue();
+				List<RouteSubregion> subregions = reader.searchRouteIndexTree(req, routeSubregions);
+				stats.loadTimeNs += (System.nanoTime() - nt);
+				for (RouteSubregion sub : subregions) {
+					List<RouteDataObject> objects = loadedSubregions.get(sub);
+					if (objects == null) {
+						nt = System.nanoTime();
+						objects = reader.loadRouteIndexData(sub);
+						loadedSubregions.put(sub, objects);
+						stats.loadTimeNs += (System.nanoTime() - nt);
 					}
-					stats.loadedObjects++;
-					List<RouteKey> keys = filter.convert(obj);
-					for (RouteKey rk : keys) {
-						stats.loadedRoutes++;
-						osmcRoutesTile.add(obj, rk);
+					for (RouteDataObject obj : objects) {
+						if (obj == null) {
+							continue;
+						}
+						stats.loadedObjects++;
+						List<RouteKey> keys = filter.convert(obj);
+						for (RouteKey rk : keys) {
+							stats.loadedRoutes++;
+							osmcRoutesTile.add(obj, rk);
+						}
 					}
 				}
 			}
@@ -228,14 +232,16 @@ public class NetworkRouteContext {
 		for (BinaryMapIndexReader reader : readers.keySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
-			List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
-			stats.loadTimeNs += (System.nanoTime() - nt);
-			for (BinaryMapDataObject obj : objects) {
-				stats.loadedObjects++;
-				List<RouteKey> keys = filter.convert(obj);
-				for (RouteKey rk : keys) {
-					stats.loadedRoutes++;
-					osmcRoutesTile.add(obj, rk);
+			synchronized (reader) {
+				List<BinaryMapDataObject> objects = reader.searchMapIndex(req);
+				stats.loadTimeNs += (System.nanoTime() - nt);
+				for (BinaryMapDataObject obj : objects) {
+					stats.loadedObjects++;
+					List<RouteKey> keys = filter.convert(obj);
+					for (RouteKey rk : keys) {
+						stats.loadedRoutes++;
+						osmcRoutesTile.add(obj, rk);
+					}
 				}
 			}
 		}

@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 
 public interface SegmentActionsListener {

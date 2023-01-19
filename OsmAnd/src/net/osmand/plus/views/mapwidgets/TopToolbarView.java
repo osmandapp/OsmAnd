@@ -297,4 +297,8 @@ public class TopToolbarView {
 		}
 		updateColors();
 	}
+
+	public boolean isNightMode() {
+		return nightMode;
+	}
 }

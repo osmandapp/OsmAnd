@@ -20,6 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
@@ -31,6 +32,10 @@ import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import org.apache.commons.logging.Log;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public abstract class CoordinatesBaseWidget extends MapWidget {
 	private static final Log log = PlatformUtil.getLog(CoordinatesMapCenterWidget.class);
@@ -105,6 +110,10 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showMgrsCoordinates(lat, lon);
 		} else if (format == PointDescription.OLC_FORMAT) {
 			showOlcCoordinates(lat, lon);
+		} else if(format == PointDescription.SWISS_GRID_FORMAT){
+			showSwissGrid(lat, lon, false);
+		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT){
+			showSwissGrid(lat, lon, true);
 		} else {
 			showStandardCoordinates(lat, lon, format);
 		}
@@ -133,6 +142,23 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			olcCoordinates = "0, 0";
 		}
 		firstCoordinate.setText(olcCoordinates);
+	}
+
+	private void showSwissGrid(double lat, double lon, boolean swissGridPlus){
+		LatLon latLon = new LatLon(lat, lon);
+		double[] swissGrid = swissGridPlus
+				? SwissGridApproximation.convertWGS84ToLV95(latLon)
+				: SwissGridApproximation.convertWGS84ToLV03(latLon);
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+		formatSymbols.setDecimalSeparator('.');
+		formatSymbols.setGroupingSeparator(' ');
+		DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+
+		firstIcon.setImageDrawable(getLatitudeIcon(lat));
+		secondIcon.setImageDrawable(getLongitudeIcon(lon));
+
+		firstCoordinate.setText(swissGridFormat.format(swissGrid[0]));
+		secondCoordinate.setText(swissGridFormat.format(swissGrid[1]));
 	}
 
 	private void setupForNonStandardFormat() {

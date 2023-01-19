@@ -86,8 +86,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearFavorites();
 	}
 
@@ -134,9 +134,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		this.favoritesChangedTime = favoritesChangedTime;
 
 		if (hasMapRenderer()) {
-			if (mapActivityInvalidated || nightModeChanged || showFavoritesChanged
+			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged) {
 				showFavorites();
+				mapRendererChanged = false;
 			}
 		} else {
 			cache.clear();
@@ -149,7 +150,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					QuadRect latLonBounds = tileBox.getLatLonBounds();
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
-					for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
+					for (FavoriteGroup group : getFavoriteGroups()) {
 						List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
 						boolean synced = isSynced(group);
 						for (FavouritePoint favoritePoint : group.getPoints()) {
@@ -225,6 +226,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
 
+	private List<FavoriteGroup> getFavoriteGroups() {
+		return new ArrayList<>(favouritesHelper.getFavoriteGroups());
+	}
+
 	public void showFavorites() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
@@ -236,9 +241,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				getTextStyle(textScale), view.getDensity());
 
 		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
-			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
+			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
-				for (FavouritePoint favoritePoint : group.getPoints()) {
+				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
+				for (FavouritePoint favoritePoint : points) {
 					double lat = favoritePoint.getLatitude();
 					double lon = favoritePoint.getLongitude();
 					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {

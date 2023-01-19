@@ -6,8 +6,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.GPXUtilities.PointsGroup;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
@@ -15,6 +15,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FavoriteGroup {
 
@@ -117,6 +118,25 @@ public class FavoriteGroup {
 		}
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		FavoriteGroup that = (FavoriteGroup) o;
+		return color == that.color && Algorithms.stringsEqual(name, that.name)
+				&& Algorithms.stringsEqual(iconName, that.iconName) && backgroundType == that.backgroundType
+				&& points.equals(that.points);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, iconName, backgroundType, points.size(), color, visible);
+	}
+
 	private static boolean isPersonal(@NonNull String name) {
 		return PERSONAL_CATEGORY.equals(name);
 	}
@@ -137,6 +157,7 @@ public class FavoriteGroup {
 
 	public PointsGroup toPointsGroup(@NonNull Context ctx) {
 		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor());
+		List<FavouritePoint> points = new ArrayList<>(this.points);
 		for (FavouritePoint point : points) {
 			pointsGroup.points.add(point.toWpt(ctx));
 		}

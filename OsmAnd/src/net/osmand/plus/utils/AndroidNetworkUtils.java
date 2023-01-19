@@ -558,6 +558,9 @@ public class AndroidNetworkUtils {
 			}
 			LOG.warn("Cannot download file: " + url, e);
 		}
+		if (progress != null) {
+			progress.finishTask();
+		}
 		return error;
 	}
 
@@ -900,7 +903,7 @@ public class AndroidNetworkUtils {
 		}
 	}
 
-	protected abstract static class NetworkProgress implements IProgress {
+	public abstract static class NetworkProgress implements IProgress {
 		@Override
 		public void startTask(String taskName, int work) {
 		}
@@ -910,7 +913,8 @@ public class AndroidNetworkUtils {
 		}
 
 		@Override
-		public abstract void progress(int deltaWork);
+		public void progress(int deltaWork) {
+		}
 
 		@Override
 		public void remaining(int remainingWork) {

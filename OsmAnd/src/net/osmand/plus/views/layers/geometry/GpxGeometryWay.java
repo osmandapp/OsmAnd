@@ -3,7 +3,7 @@ package net.osmand.plus.views.layers.geometry;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
@@ -147,6 +147,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			colorizationPoints.add(cp);
 		}
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints), createGradientStyles(colorizationPoints), tb);
+	}
+
+	@Override
+	protected GeometryWayStyle<?> getStyle(int index, GeometryWayStyle<?> defaultWayStyle) {
+		return coloringType.isGradient() && styleMap.containsKey(index)
+				? styleMap.get(index)
+				: super.getStyle(index, defaultWayStyle);
 	}
 
 	@NonNull

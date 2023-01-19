@@ -8,12 +8,12 @@ import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -22,9 +22,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -35,6 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,6 +80,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_BACKGROUND = "background";
 
 	private static final float NO_HEADING = -1.0f;
+
+	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -257,10 +265,22 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				GpxDataItem item = new GpxDataItem(fout, analysis);
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();
+				saveTrackAppearance(item);
 			}
 			clearRecordedData(warnings.isEmpty());
 		}
 		return new SaveGpxResult(warnings, gpxFilesByName);
+	}
+
+	private void saveTrackAppearance(@NonNull GpxDataItem item) {
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		gpxDbHelper.updateColor(item, settings.CURRENT_TRACK_COLOR.get());
+		gpxDbHelper.updateWidth(item, settings.CURRENT_TRACK_WIDTH.get());
+		gpxDbHelper.updateShowArrows(item, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		gpxDbHelper.updateShowStartFinish(item, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
+		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
+		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
+		gpxDbHelper.updateColoringType(item, coloringType.getName(routeInfoAttribute));
 	}
 
 	public void clearRecordedData(boolean isWarningEmpty) {
@@ -494,7 +514,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 			if (location.hasBearing()) {
 				try {
-					json.put(TRACK_COL_BEARING, String.format("%.1f", location.getBearing()));
+					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}

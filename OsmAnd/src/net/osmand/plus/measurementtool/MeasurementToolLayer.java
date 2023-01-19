@@ -15,9 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -69,6 +69,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
+	private Bitmap oldMovedPointIcon;
 	private Bitmap applyingPointIcon;
 	private Paint bitmapPaint;
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
@@ -112,6 +113,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	private boolean showPointsMinZoom;
 	private int showPointsZoomCache;
+	private boolean oldMovedPointRedraw;
 
 	private TrackChartPoints trackChartPoints;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
@@ -133,6 +135,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
+		oldMovedPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day_disable);
 		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 		highlightedPointImage = chartPointsHelper.createHighlightedPointBitmap();
 
@@ -270,6 +273,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	void enterMovingPointMode() {
 		moveMapToPoint(editingCtx.getSelectedPointPosition());
 		WptPt pt = editingCtx.removePoint(editingCtx.getSelectedPointPosition(), false);
+		oldMovedPointRedraw = true;
 		editingCtx.setOriginalPointToMove(pt);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}
@@ -319,8 +323,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tb, settings);
 		boolean hasMapRenderer = hasMapRenderer();
+		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated;
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated || mapRendererChanged;
+			if (mapRendererChanged) {
+				this.mapRendererChanged = false;
+			}
 			if (editingCtx.isInApproximationMode()) {
 				drawApproximatedLines(canvas, tb, updated);
 			}
@@ -631,24 +639,32 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		int zoom = tileBox.getZoom();
 		MapRendererView mapRenderer = getMapRenderer();
-		if (showPointsZoomCache != zoom || mapActivityInvalidated) {
+		if (showPointsZoomCache != zoom || mapActivityInvalidated || oldMovedPointRedraw) {
 			List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 			points.addAll(editingCtx.getAfterPoints());
 			showPointsZoomCache = zoom;
 			boolean showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(points, showPointsZoomCache);
-			if (showPointsMinZoom && !this.showPointsMinZoom && mapRenderer != null) {
-				clearPointsProvider();
-				DataTileManager<WptCollectionPoint> tilePoints = new DataTileManager<>(zoom);
-				for (WptPt point : points) {
-					tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
-							new WptCollectionPoint(point, pointIcon));
+			if (mapRenderer != null) {
+				if ((showPointsMinZoom && !this.showPointsMinZoom) || oldMovedPointRedraw) {
+					clearPointsProvider();
+					DataTileManager<WptCollectionPoint> tilePoints = new DataTileManager<>(zoom);
+					if (oldMovedPointRedraw && editingCtx.getOriginalPointToMove() != null) {
+						WptPt point = editingCtx.getOriginalPointToMove();
+						tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
+								new WptCollectionPoint(point, oldMovedPointIcon));
+					}
+					for (WptPt point : points) {
+						tilePoints.registerObject(point.getLatitude(), point.getLongitude(),
+								new WptCollectionPoint(point, pointIcon));
+					}
+					pointsProvider = new TilePointsProvider<>(getContext(), tilePoints,
+							getPointsOrder() - 500, false, null, getTextScale(), view.getDensity(),
+							START_ZOOM, 31);
+					pointsProvider.drawSymbols(mapRenderer);
 				}
-				pointsProvider = new TilePointsProvider<>(getContext(), tilePoints,
-						getPointsOrder() - 500, false, null, getTextScale(), view.getDensity(),
-						START_ZOOM, 31);
-				pointsProvider.drawSymbols(mapRenderer);
 			}
 			this.showPointsMinZoom = showPointsMinZoom;
+			oldMovedPointRedraw = false;
 		}
 		if (showPointsMinZoom) {
 			if (!hasMapRenderer()) {
@@ -714,13 +730,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			centerWpt.lat = tb.getCenterLatLon().getLatitude();
 			centerWpt.lon = tb.getCenterLatLon().getLongitude();
 			boolean hasPointsBefore = false;
-			boolean hasGapBefore = false;
 			if (before.size() > 0) {
 				TrkSegment segment = before.get(before.size() - 1);
 				if (segment.points.size() > 0) {
 					hasPointsBefore = true;
 					WptPt pt = segment.points.get(segment.points.size() - 1);
-					hasGapBefore = pt.isGap();
 					if (!pt.isGap() || (editingCtx.isInAddPointMode() && !editingCtx.isInAddPointBeforeMode())) {
 						if (hasMapRenderer) {
 							beforeAfterWpt.add(pt);
@@ -737,7 +751,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					}
 				}
 			}
-			if (after.size() > 0) {
+			if (after.size() > 0 && !isLastPointOfSegmentSelected()) {
 				TrkSegment segment = after.get(0);
 				if (segment.points.size() > 0) {
 					if (!hasPointsBefore) {
@@ -748,14 +762,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							ty.add((float) tb.getCenterPixelY());
 						}
 					}
-					if (!hasGapBefore || (editingCtx.isInAddPointMode() && editingCtx.isInAddPointBeforeMode())) {
-						WptPt pt = segment.points.get(0);
-						if (hasMapRenderer) {
-							beforeAfterWpt.add(pt);
-						} else {
-							tx.add(tb.getPixXFromLatLon(pt.lat, pt.lon));
-							ty.add(tb.getPixYFromLatLon(pt.lat, pt.lon));
-						}
+					WptPt pt = segment.points.get(0);
+					if (hasMapRenderer) {
+						beforeAfterWpt.add(pt);
+					} else {
+						tx.add(tb.getPixXFromLatLon(pt.lat, pt.lon));
+						ty.add(tb.getPixYFromLatLon(pt.lat, pt.lon));
 					}
 				}
 			}
@@ -789,6 +801,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			resetBeforeAfterRenderer();
 		}
+	}
+
+	private boolean isLastPointOfSegmentSelected() {
+		return editingCtx.getOriginalPointToMove() != null && editingCtx.getOriginalPointToMove().isGap();
 	}
 
 	private void resetBeforeAfterRenderer() {
@@ -912,6 +928,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return point;
 	}
 
+	public void exitMovePointMode() {
+		oldMovedPointRedraw = true;
+	}
+
 	private void moveMapToLatLon(double lat, double lon) {
 		view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
 	}
@@ -1012,11 +1032,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearCachedCounters();
 		clearCachedRenderables();
 		clearPointsProvider();
+		clearXAxisPoints();
 		multiProfileGeometry.clearWay();
 	}
 

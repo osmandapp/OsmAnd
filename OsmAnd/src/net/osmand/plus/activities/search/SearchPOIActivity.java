@@ -789,27 +789,20 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				direction.setImageDrawable(draw);
 			}
 			net.osmand.Location loc = location;
-			if(searchNearBy) {
-				updateLocationViewCache.specialFrom = null; 
-			} else if(loc != null) {
+			if (searchNearBy) {
+				updateLocationViewCache.specialFrom = null;
+			} else if (loc != null) {
 				updateLocationViewCache.specialFrom = new LatLon(loc.getLatitude(), loc.getLongitude());
 			}
 			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, amenity.getLocation());
 			direction.setImageDrawable(draw);
-			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			if (st != null) {
-				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
-				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
-				} else {
-					icon.setImageDrawable(null);
-				}
+			String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
+			if (iconName != null) {
+				icon.setImageResource(RenderingIcons.getBigIconResourceId(iconName));
 			} else {
 				icon.setImageDrawable(null);
 			}
-
-			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, 
+			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity,
 					app.getSettings().MAP_PREFERRED_LOCALE.get(),
 					app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 			label.setText(poiType);

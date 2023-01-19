@@ -164,12 +164,13 @@ public class NativeLibrary {
 			RouteRegion reg = new RouteRegion();
 			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 			for (int i = 0; i < routeToTarget.size(); i++) {
-				RouteDataObject rdo = new RouteDataObject(reg);
-				rdo.pointsX = routeToTarget.get(i).getObject().pointsX;
-				rdo.pointsY = routeToTarget.get(i).getObject().pointsY;
-				rdo.types = routeToTarget.get(i).getObject().getTypes();
-				rdo.id = -1;
-				routeToTarget.get(i).setObject(rdo);
+				RouteDataObject newRdo = new RouteDataObject(reg);
+				RouteDataObject rdo = routeToTarget.get(i).getObject();
+				newRdo.pointsX = rdo.pointsX;
+				newRdo.pointsY = rdo.pointsY;
+				newRdo.types = rdo.getTypes();
+				newRdo.id = -1;
+				routeToTarget.get(i).setObject(newRdo);
 			}
 		}
 	}
@@ -236,28 +237,33 @@ public class NativeLibrary {
 
 	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
 		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
-		for (RouteRegion region : regions) {
-			BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
-			if (reader != null) {
-				try {
-					reader.initRouteRegion(region);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		int listSize = gpxPoints.size();
-		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[listSize];
-		for (int i = 0; i < listSize; i++) {
+		int pointsSize = gpxPoints.size();
+		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[pointsSize];
+		for (int i = 0; i < pointsSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
 		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions);
 		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
 			gCtx.finalPoints.add(point.convertToGpxPoint());
 		}
-		gCtx.result.addAll(nativeResult.result);
+		List<RouteSegmentResult> results = nativeResult.result;
+		for (RouteSegmentResult rsr : results) {
+			initRouteRegion(gCtx, rsr);
+		}
+		gCtx.result.addAll(results);
 		return gCtx;
+	}
+
+	private void initRouteRegion(GpxRouteApproximation gCtx, RouteSegmentResult rsr) {
+		RouteRegion region = rsr.getObject().region;
+		BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
+		if (reader != null) {
+			try {
+				reader.initRouteRegion(region);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {

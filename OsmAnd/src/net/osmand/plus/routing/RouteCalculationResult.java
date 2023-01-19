@@ -368,8 +368,12 @@ public class RouteCalculationResult {
 				}
 				tunnelAlarm = null;
 			}
+
+			boolean lastSegment = routeInd + 1 == list.size();
+			RouteSegmentResult nextSegment = lastSegment ? null : list.get(routeInd + 1);
+			boolean gapAfter = nextSegment != null && !nextSegment.continuesBeyondRouteSegment(s);
 			while (true) {
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+				if (i == s.getEndPointIndex() && !gapAfter && !lastSegment) {
 					break;
 				}
 				Location n = new Location("");
@@ -1233,6 +1237,19 @@ public class RouteCalculationResult {
 	public Location getNextRouteLocation(int after) {
 		if (currentRoute + after >= 0 && currentRoute + after < locations.size()) {
 			return locations.get(currentRoute + after);
+		}
+		return null;
+	}
+
+	@Nullable
+	public Location getRouteLocationByDistance(int meters) {
+		int increase = meters > 0 ? 1 : -1;
+		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
+			Location loc = locations.get(currentRoute + i);
+			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
+			if (Math.abs(meters) >= dist) {
+				return loc;
+			}
 		}
 		return null;
 	}

@@ -15,8 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,6 +28,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.ui.GpxInfo;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -160,7 +161,7 @@ public class DashTrackFragment extends DashBaseFragment {
 
 		for (String filename : list) {
 			File file = new File(filename);
-			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
+			GpxInfo info = new GpxInfo();
 			info.subfolder = "";
 			info.file = file;
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
@@ -257,7 +258,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.hideFromMap().syncGroup().saveSelection();
 					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
-					AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
+					GpxInfo info = new GpxInfo();
 					info.subfolder = "";
 					info.file = f;
 					AvailableGPXFragment.updateGpxInfoView(pView, info, app, true, null);

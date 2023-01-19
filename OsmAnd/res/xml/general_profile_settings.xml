@@ -27,7 +27,7 @@
 		android:title="@string/shared_string_2_5_d_view" />
 
 	<Preference
-		android:key="center_position_on_map"
+		android:key="position_placement_on_map"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/display_position" />
 

@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
@@ -1022,13 +1022,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void buttonSharePressed() {
 		MenuController menuController = getMenuController();
+		String address = getAddressToShare();
 		LatLon latLon = getLatLon();
 		if (menuController != null) {
-			menuController.share(latLon, nameStr, streetStr);
+			menuController.share(latLon, nameStr, address);
 		} else {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				ShareMenu.show(latLon, nameStr, streetStr, mapActivity);
+				ShareMenu.show(latLon, nameStr, address, mapActivity);
 			}
 		}
 	}
@@ -1060,6 +1061,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			mapActivity.getMapActions().showAdditionalActionsFragment(adapter, listener);
 		}
+	}
+
+	@Nullable
+	private String getAddressToShare() {
+		String address = null;
+		Object object = getObject();
+		if (object instanceof FavouritePoint) {
+			FavouritePoint point = (FavouritePoint) object;
+			address = point.getAddress();
+		} else if (object instanceof WptPt) {
+			WptPt point = (WptPt) object;
+			address = point.getAddress();
+		}
+		return address != null ? address : streetStr;
 	}
 
 	private void callMenuAction(boolean waitForAddressLookup, MenuAction menuAction) {
@@ -1455,6 +1470,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public boolean displayDistanceDirection() {
 		MenuController menuController = getMenuController();
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public CharSequence getFormattedAltitude() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return menuController.getFormattedAltitude();
+		}
+		return "";
 	}
 
 	public CharSequence getSubtypeStr() {

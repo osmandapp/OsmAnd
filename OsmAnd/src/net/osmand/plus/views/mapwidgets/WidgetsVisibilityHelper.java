@@ -9,7 +9,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -54,6 +53,7 @@ public class WidgetsVisibilityHelper {
 				&& !isContextMenuFragmentVisible()
 				&& !isMultiSelectionMenuFragmentVisible()
 				&& !isInGpsFilteringMode()
+				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
 
@@ -77,6 +77,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInGpsFilteringMode()
+				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
 	public boolean shouldHideMapMarkersWidget() {
@@ -92,6 +93,7 @@ public class WidgetsVisibilityHelper {
 				|| isInPlanRouteMode()
 				|| isInRouteLineAppearanceMode()
 				|| isInGpsFilteringMode()
+				|| isInWeatherForecastMode()
 				|| isSelectingTilesZone();
 	}
 
@@ -107,6 +109,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInTrackAppearanceMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
+				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
 
@@ -148,6 +151,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
+				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
 
@@ -193,6 +197,7 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowDownloadMapWidget() {
 		return !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
+				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
 
@@ -284,6 +289,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isInGpsFilteringMode() {
 		return mapActivity.getGpsFilterFragment() != null;
+	}
+
+	private boolean isInWeatherForecastMode() {
+		return mapActivity.getWeatherForecastFragment() != null;
 	}
 
 	private boolean isSelectingTilesZone() {

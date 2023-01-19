@@ -14,6 +14,7 @@ import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,9 @@ public enum WidgetGroup {
 	AUDIO_VIDEO_NOTES(R.string.map_widget_av_notes, R.string.audio_video_notes_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, R.string.docs_widget_av_notes),
 	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0),
 	ALTITUDE(R.string.altitude, R.string.map_widget_altitude_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, 0),
-	ANT_PLUS(R.string.ant_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0);
+	ANT_PLUS(R.string.external_sensor_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0),
+	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
+	SUNRISE_SUNSET(R.string.map_widget_group_sunrise_sunset, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0);
 
 	@StringRes
 	public final int titleId;
@@ -58,7 +61,7 @@ public enum WidgetGroup {
 	public List<WidgetType> getWidgets() {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.group) {
+			if (this == widget.getGroup()) {
 				widgets.add(widget);
 			}
 		}
@@ -114,6 +117,8 @@ public enum WidgetGroup {
 			return getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == ANT_PLUS) {
 			return getPartOfPluginDesc(context, AntPlusPlugin.class);
+		} else if (this == WEATHER) {
+			return getPartOfPluginDesc(context, WeatherPlugin.class);
 		}
 		return null;
 	}
@@ -122,7 +127,8 @@ public enum WidgetGroup {
 	public int getSecondaryIconId() {
 		if (this == BEARING || this == COORDINATES_WIDGET) {
 			return R.drawable.ic_action_help;
-		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS || this == ANT_PLUS) {
+		} else if (this == TRIP_RECORDING || this == AUDIO_VIDEO_NOTES || this == DEVELOPER_OPTIONS
+				|| this == WEATHER || this == ANT_PLUS) {
 			return R.drawable.ic_extension_dark;
 		}
 		return 0;

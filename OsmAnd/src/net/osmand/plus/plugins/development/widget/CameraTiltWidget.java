@@ -13,10 +13,9 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class CameraTiltWidget extends TextInfoWidget {
 
-	private static final char DELIMITER_DEGREES = '°';
 
 	private final OsmandMapTileView mapView;
-	private int cachedMapTilt;
+	private double cachedMapTilt;
 
 	public CameraTiltWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, WidgetType.DEV_CAMERA_TILT);
@@ -27,10 +26,10 @@ public class CameraTiltWidget extends TextInfoWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		int mapTilt = (int) mapView.getElevationAngle();
-		if (isUpdateNeeded() || mapTilt != cachedMapTilt) {
+		double mapTilt = mapView.getElevationAngle();
+		if (isUpdateNeeded() || Math.abs(mapTilt - cachedMapTilt) > 0.05d) {
 			cachedMapTilt = mapTilt;
-			setText(cachedMapTilt + " " + DELIMITER_DEGREES, null);
+			setText(String.format("%.1f °", cachedMapTilt ), null);
 		}
 	}
 }

@@ -1,10 +1,8 @@
 package net.osmand.plus.views.controls;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +18,8 @@ import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +45,11 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		visiblePages = collectVisiblePages();
 	}
 
+	@NonNull
+	public VisiblePages getVisiblePages() {
+		return visiblePages;
+	}
+
 	public void setViewHolderBindListener(@Nullable ViewHolderBindListener bindListener) {
 		this.bindListener = bindListener;
 	}
@@ -61,10 +66,8 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	@NonNull
 	@Override
 	public PageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LinearLayout linearLayout = new LinearLayout(parent.getContext());
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-		return new PageViewHolder(linearLayout);
+		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+		return new PageViewHolder(inflater.inflate(R.layout.widgets_panel_page, parent, false));
 	}
 
 	@Override
@@ -90,14 +93,56 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 	@Override
 	public int getItemCount() {
-		return visiblePages.getCount();
+		return Math.max(1, visiblePages.getCount());
 	}
 
 	@NonNull
-	private VisiblePages collectVisiblePages() {
+	public VisiblePages collectVisiblePages() {
+		Map<Integer, List<View>> visibleViews = new TreeMap<>();
 		ApplicationMode appMode = settings.getApplicationMode();
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(widgetsPanel);
-		return new VisiblePages(widgetInfos, appMode);
+
+		collectVisibleViews(visibleViews, widgetInfos, appMode);
+
+		return new VisiblePages(visibleViews);
+	}
+
+	public void collectVisibleViews(@NonNull Map<Integer, List<View>> visibleViews,
+	                                @NonNull Set<MapWidgetInfo> widgets,
+	                                @NonNull ApplicationMode appMode) {
+		Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
+		for (MapWidgetInfo widgetInfo : widgets) {
+			if (widgetInfo.isEnabledForAppMode(appMode)) {
+				TextInfoWidget widget = (TextInfoWidget) widgetInfo.widget;
+				addWidgetViewToPage(textInfoWidgets, widgetInfo.pageIndex, widget);
+			}
+		}
+
+		for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
+			List<View> widgetsViews = new ArrayList<>();
+			for (TextInfoWidget widget : entry.getValue()) {
+				if (widget.isViewVisible()) {
+					widgetsViews.add(widget.getView());
+				}
+				widget.updateBannerVisibility(false);
+			}
+			if (Algorithms.isEmpty(widgetsViews)) {
+				TextInfoWidget widget = entry.getValue().get(0);
+				widgetsViews.add(widget.getView());
+				widget.updateBannerVisibility(textInfoWidgets.size() > 1);
+			}
+			visibleViews.put(entry.getKey(), widgetsViews);
+		}
+	}
+
+	private void addWidgetViewToPage(@NonNull Map<Integer, List<TextInfoWidget>> textInfoWidgets,
+	                                 int pageIndex, @NonNull TextInfoWidget widget) {
+		List<TextInfoWidget> widgetsViews = textInfoWidgets.get(pageIndex);
+		if (widgetsViews == null) {
+			widgetsViews = new ArrayList<>();
+			textInfoWidgets.put(pageIndex, widgetsViews);
+		}
+		widgetsViews.add(widget);
 	}
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
@@ -135,25 +180,16 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		}
 	}
 
-	private static class VisiblePages {
+	public static class VisiblePages {
 
-		private final Map<Integer, List<View>> map = new TreeMap<>();
+		private final Map<Integer, List<View>> visibleViews = new TreeMap<>();
 
-		public VisiblePages(@NonNull Set<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
-			for (MapWidgetInfo widgetInfo : widgets) {
-				if (widgetInfo.isEnabledForAppMode(appMode) && widgetInfo.widget.isViewVisible()) {
-					addWidgetViewToPage(widgetInfo.pageIndex, widgetInfo.widget.getView());
-				}
-			}
+		public VisiblePages(@NonNull Map<Integer, List<View>> visibleViews) {
+			this.visibleViews.putAll(visibleViews);
 		}
 
-		private void addWidgetViewToPage(int pageIndex, @NonNull View widgetView) {
-			List<View> widgetsViews = map.get(pageIndex);
-			if (widgetsViews == null) {
-				widgetsViews = new ArrayList<>();
-				map.put(pageIndex, widgetsViews);
-			}
-			widgetsViews.add(widgetView);
+		public VisiblePages(@NonNull List<View> views) {
+			this.visibleViews.put(0, views);
 		}
 
 		public int getPageIndex(int entryIndex) {
@@ -169,12 +205,12 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		@Nullable
 		public Page getPage(int entryIndex) {
-			List<Entry<Integer, List<View>>> entries = new ArrayList<>(map.entrySet());
+			List<Entry<Integer, List<View>>> entries = new ArrayList<>(visibleViews.entrySet());
 			return entryIndex < 0 || entryIndex >= entries.size() ? null : new Page(entries.get(entryIndex));
 		}
 
 		public int getCount() {
-			return map.size();
+			return visibleViews.size();
 		}
 	}
 
@@ -200,9 +236,9 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
 		public final ViewGroup container;
 
-		public PageViewHolder(@NonNull LinearLayout itemView) {
-			super(itemView);
-			container = itemView;
+		public PageViewHolder(@NonNull View view) {
+			super(view);
+			container = view.findViewById(R.id.container);
 		}
 	}
 

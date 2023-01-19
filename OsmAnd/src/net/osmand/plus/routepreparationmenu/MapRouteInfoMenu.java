@@ -40,8 +40,8 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -693,21 +693,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				bottomShadowVisible = routes.size() == 0;
 			} else {
 				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
-				boolean avoidPTTypesCustomized = false;
-				for (LocalRoutingParameter parameter : mode.parameters) {
-					if (parameter instanceof AvoidPTTypesRoutingParameter) {
-						avoidPTTypesCustomized = true;
-						break;
+				if (mode != null) {
+					boolean avoidPTTypesCustomized = false;
+					for (LocalRoutingParameter parameter : mode.parameters) {
+						if (parameter instanceof AvoidPTTypesRoutingParameter) {
+							avoidPTTypesCustomized = true;
+							break;
+						}
 					}
-				}
-				if (avoidPTTypesCustomized) {
-					PublicTransportNotFoundSettingsWarningCard warningCard = new PublicTransportNotFoundSettingsWarningCard(mapActivity);
-					warningCard.setListener(this);
-					menuCards.add(warningCard);
-				} else {
-					PublicTransportNotFoundWarningCard warningCard = new PublicTransportNotFoundWarningCard(mapActivity);
-					warningCard.setListener(this);
-					menuCards.add(warningCard);
+					if (avoidPTTypesCustomized) {
+						PublicTransportNotFoundSettingsWarningCard warningCard = new PublicTransportNotFoundSettingsWarningCard(mapActivity);
+						warningCard.setListener(this);
+						menuCards.add(warningCard);
+					} else {
+						PublicTransportNotFoundWarningCard warningCard = new PublicTransportNotFoundWarningCard(mapActivity);
+						warningCard.setListener(this);
+						menuCards.add(warningCard);
+					}
 				}
 			}
 		} else if (routeCalculationInProgress) {
@@ -964,7 +966,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			routingHelper.setAppMode(next);
 			app.getSettings().setApplicationMode(next, false);
 			app.initVoiceCommandPlayer(mapActivity, next, null, true,
-					false, false, true);
+					false, true, true);
 			routingHelper.onSettingsChanged(true);
 		}
 	}
@@ -1187,7 +1189,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View cancelButton = mainView.findViewById(R.id.cancel_button);
 		TextView cancelButtonText = mainView.findViewById(R.id.cancel_button_descr);
 		if (helper.isRouteCalculated() || helper.isRouteBeingCalculated() || isTransportRouteCalculated()) {
-			cancelButtonText.setText(R.string.shared_string_dismiss);
+			cancelButtonText.setText(R.string.stop_navigation_service);
 		} else {
 			cancelButtonText.setText(R.string.shared_string_cancel);
 		}

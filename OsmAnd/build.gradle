@@ -36,9 +36,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 23
-		versionCode 4300
+		versionCode 4400
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "4.3.0"
+		versionName "4.4.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -84,10 +84,6 @@ android {
 			java.srcDirs = ["src-google", "src-osmand"]
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
-		rescueTrack {
-			java.srcDirs = ["src-google"]
-			manifest.srcFile "AndroidManifest-rescueTrack.xml"
-		}
 		amazonFree {
 			java.srcDirs = ["src-amazon"]
 			manifest.srcFile "AndroidManifest-amazonFree.xml"
@@ -120,12 +116,6 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus"
 			resValue "string", "app_name", "OsmAnd~"
-			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
-		}
-		rescueTrack {
-			dimension "version"
-			applicationId "net.osmand.plus"
-			resValue "string", "app_name", "OsmAnd"
 			resValue "string", "app_edition", System.getenv("APP_EDITION") ? System.getenv("APP_EDITION") : ""
 		}
 		gplayFree {

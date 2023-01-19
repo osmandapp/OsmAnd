@@ -127,6 +127,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return true;
 	}
 
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.WIKIPEDIA;
+	}
+
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {
 		this.mapActivity = activity;
@@ -157,13 +163,15 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if (isLocked()) {
-			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
-					WIKIPEDIA_ID,
-					R.string.shared_string_wikipedia,
-					R.string.explore_wikipedia_offline);
-		} else {
-			createWikipediaItem(adapter, mapActivity);
+		if (isEnabled()) {
+			if (isLocked()) {
+				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
+						WIKIPEDIA_ID,
+						R.string.shared_string_wikipedia,
+						R.string.explore_wikipedia_offline);
+			} else {
+				createWikipediaItem(adapter, mapActivity);
+			}
 		}
 	}
 

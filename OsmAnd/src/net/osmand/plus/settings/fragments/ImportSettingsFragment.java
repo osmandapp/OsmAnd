@@ -8,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.IProgress;
@@ -26,9 +29,6 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 
@@ -89,22 +89,6 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 
 	public ImportListener getImportListener() {
 		return new ImportListener() {
-
-			@Override
-			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
-
-			}
-
-			@Override
-			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-
-			}
-
-			@Override
-			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
-
-			}
-
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {

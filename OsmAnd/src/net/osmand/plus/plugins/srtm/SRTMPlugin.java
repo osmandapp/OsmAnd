@@ -92,7 +92,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
 		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
-		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 57).makeProfile();
+		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 100).makeProfile();
 
 		SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
 		SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();
@@ -164,6 +164,12 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public String getHelpFileName() {
 		return "feature_articles/contour-lines-plugin.html";
+	}
+
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.TERRAIN;
 	}
 
 	@Override
@@ -298,13 +304,15 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if (isLocked()) {
-			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
-					TERRAIN_ID,
-					R.string.shared_string_terrain,
-					R.string.contour_lines_hillshades_slope);
-		} else {
-			createContextMenuItems(adapter, mapActivity);
+		if (isEnabled()) {
+			if (isLocked()) {
+				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+						TERRAIN_ID,
+						R.string.shared_string_terrain,
+						R.string.contour_lines_hillshades_slope);
+			} else {
+				createContextMenuItems(adapter, mapActivity);
+			}
 		}
 	}
 
@@ -548,10 +556,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected CommonPreference<String> registerRenderingPreference(@NonNull String prefId, @Nullable String defValue) {
-		if (CONTOUR_LINES_ATTR.equals(prefId)) {
-			defValue = CONTOUR_LINES_DISABLED_VALUE;
-		}
-		return super.registerRenderingPreference(prefId, defValue);
+	protected CommonPreference<String> registerRenderingPreference(@NonNull RenderingRuleProperty property) {
+		String attrName = property.getAttrName();
+		String defValue = CONTOUR_LINES_ATTR.equals(attrName) ? CONTOUR_LINES_DISABLED_VALUE : "";
+		return registerRenderingPreference(attrName, defValue);
 	}
 }

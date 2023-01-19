@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.datastorage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -65,7 +67,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private StorageItem currentStorage;
 
 	private StorageMigrationRestartListener restartListener;
-
+	private MoveFilesStopListener stopTaskListener;
 	private View mainView;
 	private View remainingFiles;
 	private View copyFilesDescr;
@@ -84,6 +86,8 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	private boolean nightMode;
 	private boolean usedOnMap;
+
+	private AlertDialog closeDialog = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -156,11 +160,38 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		CollapsingToolbarLayout toolbarLayout = mainView.findViewById(R.id.toolbar_layout);
 		toolbarLayout.setTitle(copyFinished ? getString(R.string.copying_completed) : getString(R.string.copying_osmand_files));
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(copyFinished ? null : getIcon(AndroidUtils.getNavigationIconResId(app)));
+
+		toolbar.setNavigationIcon(copyFinished ? null : getIcon(R.drawable.ic_action_close));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
+			closeDialog = createCancelDialog();
+			closeDialog.show();
+		});
+	}
+
+	private void updateDialogMessage() {
+		int maxProgress = progressBar.getMax();
+		int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(generalProgress * 100 / maxProgress) : 0;
+		closeDialog.setMessage(getString(R.string.storage_migration_fragment_close_descr, String.valueOf(percentage)));
+	}
+
+	private AlertDialog createCancelDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		int maxProgress = progressBar.getMax();
+		int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(generalProgress * 100 / maxProgress) : 0;
+
+		builder.setMessage(getString(R.string.storage_migration_fragment_close_descr, String.valueOf(percentage)))
+				.setTitle(R.string.osmand_parking_warning);
+
+		builder.setPositiveButton(R.string.shared_string_continue, (dialog, id) -> dialog.dismiss());
+
+		builder.setNeutralButton(R.string.stop_and_exit, (dialog, id) -> {
+			stopTaskListener.onStopTask();
+			dialog.dismiss();
 			dismiss();
 		});
+
+		return builder.create();
 	}
 
 	private void setupButtons() {
@@ -309,6 +340,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		generalProgress = progress;
 		if (isAdded()) {
 			updateProgress(progress);
+			if (closeDialog != null && closeDialog.isShowing()) {
+				updateDialogMessage();
+			}
 		}
 	}
 
@@ -321,6 +355,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
 		if (isAdded()) {
 			updateContent();
+			if (closeDialog != null && closeDialog.isShowing()) {
+				closeDialog.dismiss();
+			}
 		}
 	}
 
@@ -331,7 +368,8 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	                                                    int generalProgress,
 	                                                    int filesCount,
 	                                                    boolean usedOnMap,
-	                                                    @Nullable StorageMigrationRestartListener listener) {
+	                                                    @Nullable StorageMigrationRestartListener listener,
+	                                                    @Nullable MoveFilesStopListener cancelTaskListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			StorageMigrationFragment fragment = new StorageMigrationFragment();
 			fragment.usedOnMap = usedOnMap;
@@ -343,6 +381,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
 			fragment.restartListener = listener;
+			fragment.stopTaskListener = cancelTaskListener;
 			return fragment;
 		}
 		return null;

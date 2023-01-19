@@ -309,7 +309,6 @@ public class RouteResultPreparation {
 			double distance = 0;
 
 			//for Naismith/Scarf
-			float prevHeight = 99999.0f;
 			float[] heightDistanceArray = null;
 			if (usePedestrianHeight) {
 				road.calculateHeightArray();
@@ -330,17 +329,15 @@ public class RouteResultPreparation {
 				//for Naismith/Scarf
 				if (usePedestrianHeight) {
 					int heightIndex = 2 * j + 1;
-					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length) {
-						float height = heightDistanceArray[heightIndex];
-						float heightDiff = height - prevHeight;
+					int nextHeightIndex = 2 * next + 1;
+					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length && nextHeightIndex < heightDistanceArray.length) {
+						float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
 						if (heightDiff > 0) { // ascent only
 							// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
-							// - Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph
-							// - Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h
-							//distOnRoadToPass += heightDiff * 6.0f;
+							//   (- Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph)
+							//   (- Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h)
 							distOnRoadToPass += heightDiff * scarfSeconds;
 						}
-						prevHeight = height;
 					}
 				}
 			}
@@ -785,7 +782,7 @@ public class RouteResultPreparation {
 						throws XmlPullParserException, IOException {
 					throw new UnsupportedOperationException();
 				}
-			});
+			}, false);
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 			List<RouteStatistics> rsr = RouteStatisticsHelper.calculateRouteStatistic(result, null, rrs, null, req);
 			for(RouteStatistics r : rsr) {
@@ -1446,8 +1443,10 @@ public class RouteResultPreparation {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
 					t = TurnType.valueOf(tp, leftSide);
+					t.setSkipToSpeak(true);
 				}
 			}
+			
 			for (int k = 0; k < rawLanes.length; k++) {
 				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 				int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
@@ -1481,7 +1480,10 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		t.setSkipToSpeak(!rs.speak);
+		if (TurnType.isKeepDirectionTurn(t.getValue())) {
+			t.setSkipToSpeak(true);
+		}
+		
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);

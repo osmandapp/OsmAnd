@@ -1,14 +1,23 @@
 package net.osmand.plus.render;
 
+import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
+import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
+import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
+
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
@@ -31,18 +40,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
-import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
-import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
-import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
 
 public class TravelRendererHelper implements IRendererLoadedEventListener {
 
@@ -75,13 +72,11 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		void fileVisibilityChanged();
 	}
 
-	public TravelRendererHelper(OsmandApplication app) {
+	public TravelRendererHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		resourceManager = app.getResourceManager();
 		rendererRegistry = app.getRendererRegistry();
-		updateRouteArticleFilter();
-		updateRouteArticlePointsFilter();
 		addListeners();
 	}
 
@@ -94,7 +89,6 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	private void addListeners() {
-		addAppInitListener();
 		addShowTravelPrefListener();
 		rendererRegistry.addRendererLoadedEventListener(this);
 		fileVisibilityPropertiesListener = change -> {
@@ -107,29 +101,6 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private void addShowTravelPrefListener() {
 		listener = change -> updateTravelVisibility();
 		settings.SHOW_TRAVEL.addListener(listener);
-	}
-
-	private void addAppInitListener() {
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onStart(AppInitializer init) {
-				}
-
-				@Override
-				public void onProgress(AppInitializer init, InitEvents event) {
-					if (event == InitEvents.MAPS_INITIALIZED) {
-						updateVisibilityPrefs();
-					}
-				}
-
-				@Override
-				public void onFinish(AppInitializer init) {
-				}
-			});
-		} else {
-			updateVisibilityPrefs();
-		}
 	}
 
 	public void updateVisibilityPrefs() {

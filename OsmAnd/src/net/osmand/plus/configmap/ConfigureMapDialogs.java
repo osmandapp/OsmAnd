@@ -254,7 +254,7 @@ public class ConfigureMapDialogs {
 		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 		int themeRes = ConfigureMapMenu.getThemeRes(nightMode);
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
+		AlertDialog.Builder b = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 
 		String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
 
@@ -278,8 +278,7 @@ public class ConfigureMapDialogs {
 						pref.set(p.getPossibleValues()[which - 1]);
 					}
 					activity.refreshMapComplete();
-					String description = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
-					item.setDescription(description);
+					item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
 					String id = item.getId();
 					if (!Algorithms.isEmpty(id)) {
 						uiAdapter.onRefreshItem(id);

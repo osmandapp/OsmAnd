@@ -48,7 +48,7 @@ public class MapUtils {
 			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
 	};
-
+	
 	public static int calculateFromBaseZoomPrecisionXY(int baseZoom, int finalZoom, int xFinal, int yFinal) {
 		int px = xFinal;
 		int py = yFinal;
@@ -335,8 +335,12 @@ public class MapUtils {
 	}
 
 	public static double getTileDistanceWidth(float zoom) {
-		LatLon ll = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 0));
-		LatLon ll2 = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 1));
+		return getTileDistanceWidth(30, zoom);
+	}
+	
+	public static double getTileDistanceWidth(double lat, float zoom) {
+		LatLon ll = new LatLon(lat, MapUtils.getLongitudeFromTile(zoom, 0));
+		LatLon ll2 = new LatLon(lat, MapUtils.getLongitudeFromTile(zoom, 1));
 		return getDistance(ll, ll2);
 	}
 

@@ -3,7 +3,8 @@ package net.osmand.plus.views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -86,6 +87,13 @@ public class MapActions {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
+		if (gpxFile != null && gpxFile.hasRtePt() && appMode == null) {
+			GPXUtilities.WptPt routePoint = gpxFile.getRoutePoints().get(0);
+			ApplicationMode routePointAppMode = ApplicationMode.valueOfStringKey(routePoint.getProfileType(), ApplicationMode.DEFAULT);
+			if (routePointAppMode != ApplicationMode.DEFAULT) {
+				appMode = routePointAppMode;
+			}
+		}
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
 		app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);

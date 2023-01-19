@@ -24,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AnimatedValue;
 import net.osmand.core.jni.MapMarker;
@@ -44,6 +43,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -55,13 +55,10 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.util.List;
 
 public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocationListener,
 		OsmAndCompassListener, IContextMenuProvider {
-	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
@@ -182,22 +179,26 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-		if (mapActivity != null) {
-			initCoreRenderer();
-		} else {
+		if (mapActivity == null) {
 			clearMapMarkersCollections();
+		} else {
+			initCoreRenderer();
+		}
+	}
+
+	@Override
+	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer, @Nullable MapRendererView newMapRenderer) {
+		super.onMapRendererChange(currentMapRenderer, newMapRenderer);
+		if (newMapRenderer != null) {
+			initCoreRenderer();
 		}
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-		boolean hasMapRenderer = hasMapRenderer();
-		if (hasMapRenderer) {
-			initCoreRenderer();
-		} else {
-			initLegacyRenderer();
-		}
+		initCoreRenderer();
+		initLegacyRenderer();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 		locationProvider.addLocationListener(this);
 		locationProvider.addCompassListener(this);
@@ -416,10 +417,26 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	}
 
 	private boolean shouldShowBearing(@Nullable Location location) {
-		return !locationOutdated && location != null
-				// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
-				&& location.hasBearing() && (location.getBearing() != 0.0f)
-				&& (!location.hasSpeed() || location.getSpeed() > BEARING_SPEED_THRESHOLD);
+		return getBearingToShow(location) != null;
+	}
+
+	@Nullable
+	private Float getBearingToShow(@Nullable Location location) {
+		if (!locationOutdated && location != null) {
+			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
+			boolean hasBearing = location.hasBearing() && location.getBearing() != 0.0f;
+			if ((hasBearing || isUseRouting() && lastBearingCached != null)
+					&& (!location.hasSpeed() || location.getSpeed() > BEARING_SPEED_THRESHOLD)) {
+				return hasBearing ? location.getBearing() : lastBearingCached;
+			}
+		}
+		return null;
+	}
+
+	private boolean isUseRouting() {
+		RoutingHelper routingHelper = getApplication().getRoutingHelper();
+		return routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
+				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated();
 	}
 
 	private boolean isLocationVisible(@NonNull RotatedTileBox tb, @NonNull Location l) {
@@ -456,37 +473,29 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 						locationY - headingIcon.getHeight() / 2f, headingPaint);
 				canvas.restore();
 			}
-			if (shouldShowBearing(lastKnownLocation)) {
-				float bearing = lastKnownLocation.getBearing();
+			Float bearing = getBearingToShow(lastKnownLocation);
+			if (bearing != null) {
 				canvas.rotate(bearing - 90, locationX, locationY);
-				int width = (int) (navigationIcon.getIntrinsicWidth() * textScale);
-				int height = (int) (navigationIcon.getIntrinsicHeight() * textScale);
-				width += width % 2 == 1 ? 1 : 0;
-				height += height % 2 == 1 ? 1 : 0;
-				if (textScale == 1) {
-					navigationIcon.setBounds(locationX - width / 2, locationY - height / 2,
-							locationX + width / 2, locationY + height / 2);
-					navigationIcon.draw(canvas);
-				} else {
-					navigationIcon.setBounds(0, 0, width, height);
-					Bitmap bitmap = AndroidUtils.createScaledBitmap(navigationIcon, width, height);
-					canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-				}
+				drawIcon(canvas, navigationIcon, locationX, locationY);
 			} else {
-				int width = (int) (locationIcon.getIntrinsicWidth() * textScale);
-				int height = (int) (locationIcon.getIntrinsicHeight() * textScale);
-				width += width % 2 == 1 ? 1 : 0;
-				height += height % 2 == 1 ? 1 : 0;
-				if (textScale == 1) {
-					locationIcon.setBounds(locationX - width / 2, locationY - height / 2,
-							locationX + width / 2, locationY + height / 2);
-					locationIcon.draw(canvas);
-				} else {
-					locationIcon.setBounds(0, 0, width, height);
-					Bitmap bitmap = AndroidUtils.createScaledBitmap(locationIcon, width, height);
-					canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-				}
+				drawIcon(canvas, locationIcon, locationX, locationY);
 			}
+		}
+	}
+
+	private void drawIcon(@NonNull Canvas canvas, @NonNull Drawable icon, int locationX, int locationY) {
+		int width = (int) (icon.getIntrinsicWidth() * textScale);
+		int height = (int) (icon.getIntrinsicHeight() * textScale);
+		width += width % 2 == 1 ? 1 : 0;
+		height += height % 2 == 1 ? 1 : 0;
+		if (textScale == 1) {
+			icon.setBounds(locationX - width / 2, locationY - height / 2,
+					locationX + width / 2, locationY + height / 2);
+			icon.draw(canvas);
+		} else {
+			icon.setBounds(0, 0, width, height);
+			Bitmap bitmap = AndroidUtils.createScaledBitmap(icon, width, height);
+			canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
 		}
 	}
 
@@ -544,7 +553,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		super.destroyLayer();
 		locationProvider.removeLocationListener(this);
 		locationProvider.removeCompassListener(this);
-		clearMapMarkersCollections();
 	}
 
 	@Override

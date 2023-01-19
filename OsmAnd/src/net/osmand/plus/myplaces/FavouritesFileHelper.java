@@ -1,14 +1,13 @@
 package net.osmand.plus.myplaces;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
@@ -24,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -36,19 +34,24 @@ import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
+import static net.osmand.IndexConstants.FAVORITES_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.ZIP_EXT;
+
 public class FavouritesFileHelper {
 
 	private static final Log log = PlatformUtil.getLog(FavouritesFileHelper.class);
 
-	private static final String TIME_PATTERN = "yyyy_MM_dd_hh_mm_ss";
-	private static final String GPX_FILE_EXT = ".gpx";
-	private static final String ZIP_FILE_EXT = ".zip";
+	private static final String TIME_PATTERN = "yyyy-MM-dd_HHmmss";
 
 	private static final int BACKUP_MAX_COUNT = 10;
 	private static final int BACKUP_MAX_PER_DAY = 2; // The third one is the current backup
 
-	public static final String FILE_TO_SAVE = "favourites.gpx";
-	public static final String FILE_TO_BACKUP = "favourites_bak.gpx";
+	public static final String FAV_FILE_PREFIX = "favorites";
+	public static final String FAV_GROUP_NAME_SEPARATOR = "-";
+	public static final String LEGACY_FAV_FILE_PREFIX = "favourites";
+	public static final String BAK_FILE_SUFFIX = "_bak";
 
 	private final OsmandApplication app;
 
@@ -56,13 +59,28 @@ public class FavouritesFileHelper {
 		this.app = app;
 	}
 
-	public File getInternalFile() {
-		return app.getFileStreamPath(FILE_TO_BACKUP);
+	private File getInternalFile() {
+		return app.getFileStreamPath(LEGACY_FAV_FILE_PREFIX + BAK_FILE_SUFFIX + GPX_FILE_EXT);
 	}
 
 	@NonNull
-	public File getExternalFile() {
-		return new File(app.getAppPath(null), FILE_TO_SAVE);
+	public File getLegacyExternalFile() {
+		return new File(app.getAppPath(null), LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT);
+	}
+
+	public File getExternalFile(FavoriteGroup group) {
+		File favDir = getExternalDir();
+		String fileName = (group.getName().isEmpty() ? FAV_FILE_PREFIX : FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + group.getName()) + GPX_FILE_EXT;
+		return new File(favDir, fileName);
+	}
+
+	@NonNull
+	public File getExternalDir() {
+		File favFolder = app.getAppPath(FAVORITES_INDEX_DIR);
+		if (!favFolder.exists()) {
+			favFolder.mkdir();
+		}
+		return favFolder;
 	}
 
 	@NonNull
@@ -75,7 +93,7 @@ public class FavouritesFileHelper {
 	@NonNull
 	public Map<String, FavoriteGroup> loadExternalGroups() {
 		Map<String, FavoriteGroup> favoriteGroups = new LinkedHashMap<>();
-		loadGPXFile(getExternalFile(), favoriteGroups);
+		loadGPXFiles(favoriteGroups);
 		return favoriteGroups;
 	}
 
@@ -93,6 +111,31 @@ public class FavouritesFileHelper {
 			FavoriteGroup favoriteGroup = FavoriteGroup.fromPointsGroup(pointsGroup);
 
 			favoriteGroups.put(key, favoriteGroup);
+		}
+		return true;
+	}
+
+	private boolean loadGPXFiles(@NonNull Map<String, FavoriteGroup> favoriteGroups) {
+		File file = app.getAppPath(FAVORITES_INDEX_DIR);
+		if (file == null || !file.exists() || !file.isDirectory()) {
+			return false;
+		}
+		File[] files = file.listFiles((dir, name) ->
+				name.startsWith(FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR)
+					|| name.equals(FAV_FILE_PREFIX + GPX_FILE_EXT)
+					|| name.equals(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT));
+		if (Algorithms.isEmpty(files)) {
+			return false;
+		}
+		for (File f : files) {
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(f);
+			if (gpxFile.error != null) {
+				continue;
+			}
+			Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
+			if (loadGPXFile(f, groups)) {
+				favoriteGroups.putAll(groups);
+			}
 		}
 		return true;
 	}
@@ -127,44 +170,87 @@ public class FavouritesFileHelper {
 
 	public void saveCurrentPointsIntoFile(@NonNull List<FavoriteGroup> groups) {
 		try {
-			Map<String, FavouritePoint> deletedInMemory = new LinkedHashMap<>();
-			loadPointsFromFile(getInternalFile(), deletedInMemory);
-			for (FavouritePoint point : getPointsFromGroups(groups)) {
-				deletedInMemory.remove(point.getKey());
+			Map<String, FavoriteGroup> deletedGroups = new LinkedHashMap<>();
+			Map<String, FavouritePoint> deletedPoints = new LinkedHashMap<>();
+			loadGPXFile(getInternalFile(), deletedGroups);
+			// Get all points from internal file to filter later
+			for (FavoriteGroup group : deletedGroups.values()) {
+				for (FavouritePoint point : group.getPoints()) {
+					deletedPoints.put(point.getKey(), point);
+				}
 			}
+			// Hold only deleted points in map
+			for (FavouritePoint point : getPointsFromGroups(groups)) {
+				deletedPoints.remove(point.getKey());
+			}
+			// Hold only deleted groups in map
+			for (FavoriteGroup group : groups) {
+				deletedGroups.remove(group.getName());
+			}
+			// Save groups to internal file
 			saveFile(groups, getInternalFile());
-			saveExternalFile(groups, deletedInMemory.keySet());
-			backup(getBackupFile(), getExternalFile());
+			// Save groups to external files
+			saveExternalFiles(groups, deletedPoints.keySet());
+			// Save groups to backup file//
+			//backup(groups, getBackupFile()); //creates new, but does not zip
+			backup(getBackupFile(), getInternalFile()); //simply backs up internal file, hence internal name is reflected in gpx <name> metadata
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 
-	protected Exception saveExternalFile(@NonNull List<FavoriteGroup> groups, @NonNull Set<String> deleted) {
-		Map<String, FavouritePoint> all = new LinkedHashMap<>();
-		loadPointsFromFile(getExternalFile(), all);
-		for (String key : deleted) {
-			all.remove(key);
-		}
-		// remove already existing in memory
-		for (FavouritePoint point : getPointsFromGroups(groups)) {
-			all.remove(point.getKey());
-		}
-		// save favoritePoints from memory in order to update existing
-		for (FavouritePoint point : all.values()) {
-			for (FavoriteGroup group : groups) {
-				if (Algorithms.stringsEqual(point.getCategory(), group.getName())) {
-					group.getPoints().add(point);
+	@Nullable
+	protected Exception saveExternalFiles(@NonNull List<FavoriteGroup> localGroups, @NonNull Set<String> deleted) {
+		Exception result = null;
+		Map<String, FavoriteGroup> fileGroups = new LinkedHashMap<>();
+		loadGPXFiles(fileGroups);
+		for (FavoriteGroup fileGroup : fileGroups.values()) {
+			// Search corresponding group in memory
+			boolean hasLocalGroup = false;
+			for (FavoriteGroup group : localGroups) {
+				if (Algorithms.stringsEqual(group.getName(), fileGroup.getName())) {
+					hasLocalGroup = true;
 					break;
 				}
 			}
+			// Delete external group file if it does not exist in local groups
+			if (!hasLocalGroup) {
+				getExternalFile(fileGroup).delete();
+			}
 		}
-		return saveFile(groups, getExternalFile());
+		for (FavoriteGroup localGroup : localGroups) {
+			FavoriteGroup fileGroup = fileGroups.get(localGroup.getName());
+			// Collect non deleted points from external group
+			Map<String, FavouritePoint> all = new LinkedHashMap<>();
+			if (fileGroup != null) {
+				for (FavouritePoint point : fileGroup.getPoints()) {
+					String key = point.getKey();
+					if (!deleted.contains(key)) {
+						all.put(key, point);
+					}
+				}
+			}
+			// Remove already existing in memory
+			List<FavouritePoint> localPoints = new ArrayList<>(localGroup.getPoints());
+			for (FavouritePoint point : localPoints) {
+				all.remove(point.getKey());
+			}
+			// save favoritePoints from memory in order to update existing
+			localGroup.getPoints().addAll(all.values());
+			// Save file if group changed
+			if (!localGroup.equals(fileGroup)) {
+				Exception exception = saveFile(Collections.singletonList(localGroup), getExternalFile(localGroup));
+				if (exception != null) {
+					result = exception;
+				}
+			}
+		}
+		return result;
 	}
 
-	public void backup(@NonNull File backupFile, @NonNull File externalFile) {
+	private void backup(@NonNull File backupFile, @NonNull File externalFile) {
 		String name = backupFile.getName();
-		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_FILE_EXT));
+		String nameNoExt = name.substring(0, name.lastIndexOf(ZIP_EXT));
 		FileInputStream fis = null;
 		ZipOutputStream zos = null;
 		try {
@@ -185,6 +271,11 @@ public class FavouritesFileHelper {
 		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
 	}
 
+//	private void backup(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File backupFile) {
+//		saveFile(favoriteGroups, backupFile);
+//		clearOldBackups(getBackupFiles(), BACKUP_MAX_COUNT);
+//	}
+
 	private File getBackupsFolder() {
 		File folder = new File(app.getAppPath(null), BACKUP_INDEX_DIR);
 		if (!folder.exists()) {
@@ -195,8 +286,8 @@ public class FavouritesFileHelper {
 
 	private File getBackupFile() {
 		clearOldBackups(getBackupFilesForToday(), BACKUP_MAX_PER_DAY);
-		String baseName = formatTime(System.currentTimeMillis());
-		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_FILE_EXT);
+		String baseName = FAV_FILE_PREFIX + BAK_FILE_SUFFIX + "_" + formatTime(System.currentTimeMillis());
+		return new File(getBackupsFolder(), baseName + GPX_FILE_EXT + ZIP_EXT);
 	}
 
 	@NonNull
@@ -213,9 +304,16 @@ public class FavouritesFileHelper {
 	}
 
 	public List<File> getBackupFiles() {
-		File folder = getBackupsFolder();
-		File[] files = folder.listFiles();
-		return files != null ? Arrays.asList(files) : Collections.emptyList();
+		List<File> backupFiles = new ArrayList<>();
+		File[] files = getBackupsFolder().listFiles();
+		if (!Algorithms.isEmpty(files)) {
+			for (File file : files) {
+				if (file.getName().endsWith(GPX_FILE_EXT + ZIP_EXT)) {
+					backupFiles.add(file);
+				}
+			}
+		}
+		return backupFiles;
 	}
 
 	private void clearOldBackups(List<File> files, int maxCount) {

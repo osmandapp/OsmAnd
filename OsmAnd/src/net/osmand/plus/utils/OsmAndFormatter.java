@@ -9,6 +9,7 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
@@ -47,6 +48,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class OsmAndFormatter {
 	public static final float METERS_IN_KILOMETER = 1000f;
@@ -204,8 +206,11 @@ public class OsmAndFormatter {
 		} else if (mc == MetricsConstants.MILES_AND_METERS) {
 			mainUnitInMeter = 1;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS) {
 			mainUnitInMeter = 1;
+			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+			mainUnitInMeter = FEET_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			mainUnitInMeter = YARDS_IN_ONE_METER;
@@ -325,7 +330,7 @@ public class OsmAndFormatter {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -348,12 +353,14 @@ public class OsmAndFormatter {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
-		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
-			} else if (mc == MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				int feet = (int) (meters * FEET_IN_ONE_METER + 0.5);
 				return formatValue(feet, R.string.foot, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
@@ -380,7 +387,7 @@ public class OsmAndFormatter {
 	public static FormattedValue getFormattedAltitudeValue(double altitude,
 	                                                       @NonNull OsmandApplication ctx,
 	                                                       @NonNull MetricsConstants mc) {
-		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS;
+		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
 		FormattedValue formattedValue;
 		if (useFeet) {
 			int feet = (int) (altitude * FEET_IN_ONE_METER + 0.5);
@@ -711,6 +718,7 @@ public class OsmAndFormatter {
 		return result.toString();
 	}
 
+
 	private static String formatCoordinate(double coordinate, int outputType) {
 
 		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
@@ -743,7 +751,7 @@ public class OsmAndFormatter {
 					.append(DELIMITER_MINUTES);
 		} else {
 			sb.append(secDf.format(formatCoordinate(
-					formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
+							formatCoordinate(coordinate, sb, DELIMITER_DEGREES), sb, DELIMITER_MINUTES)))
 					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
@@ -786,14 +794,24 @@ public class OsmAndFormatter {
 		}
 	}
 
-	private static class TimeFormatter {
+	public static class TimeFormatter {
 
 		private final DateFormat simpleTimeFormat;
 		private final DateFormat amPmTimeFormat;
 
 		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern, @NonNull String amPmPattern) {
+			this(locale, pattern, amPmPattern, null);
+		}
+
+		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern,
+		                     @NonNull String amPmPattern, @Nullable TimeZone timeZone) {
 			simpleTimeFormat = new SimpleDateFormat(pattern, locale);
 			amPmTimeFormat = new SimpleDateFormat(amPmPattern, locale);
+
+			if (timeZone != null) {
+				simpleTimeFormat.getCalendar().setTimeZone(timeZone);
+				amPmTimeFormat.getCalendar().setTimeZone(timeZone);
+			}
 		}
 
 		public String format(@NonNull Date date, boolean twelveHoursFormat) {

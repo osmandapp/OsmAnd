@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -309,12 +309,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-		OsmAndLocationSimulation sim = application.getLocationProvider().getLocationSimulation();
+	public String getActionText(OsmandApplication app) {
+		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
-			return application.getString(R.string.stop_navigation_service);
+			return app.getString(R.string.stop_navigation_service);
 		}
-		return application.getString(R.string.simulate_location_by_gpx);
+		return app.getString(R.string.simulate_location_by_gpx);
 	}
 
 	@NonNull

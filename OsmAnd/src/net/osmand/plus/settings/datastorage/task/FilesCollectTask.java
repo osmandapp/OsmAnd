@@ -79,9 +79,8 @@ public class FilesCollectTask extends AsyncTask<Void, Void, String> {
 	}
 
 	public interface FilesCollectListener {
-
-		void onFilesCollectingStarted();
-
-		void onFilesCollectingFinished(@Nullable String error, @NonNull File folder, @NonNull List<File> files, @NonNull Pair<Long, Long> filesSize);
+		default void onFilesCollectingStarted() { }
+		default void onFilesCollectingFinished(@Nullable String error, @NonNull File folder,
+		                                       @NonNull List<File> files, @NonNull Pair<Long, Long> filesSize) { }
 	}
 }

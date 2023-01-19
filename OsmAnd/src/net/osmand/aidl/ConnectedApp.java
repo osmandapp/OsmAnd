@@ -25,7 +25,7 @@ import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -181,7 +181,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	void createWidgetControls(@NonNull MapActivity mapActivity,
 	                          @NonNull List<MapWidgetInfo> widgetsInfos,
 	                          @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
 			int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
@@ -189,8 +189,8 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 
 			TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
-			MapWidgetInfo widgetInfo = widgetRegistry.createExternalWidget(widgetKey, widget, menuIconId,
-					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder(), appMode);
+			MapWidgetInfo widgetInfo = creator.createExternalWidget(widgetKey, widget, menuIconId,
+					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
 			((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
 
 			widgetsInfos.add(widgetInfo);

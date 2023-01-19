@@ -22,7 +22,8 @@ import net.osmand.util.MapUtils;
 // Immutable object !
 public class SearchPhrase {
 	public static final String DELIMITER = " ";
-	private static final String ALLDELIMITERS = "\\s|,|-";
+	public static final String ALLDELIMITERS = "\\s|,";
+	public static final String ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -30,6 +31,8 @@ public class SearchPhrase {
 	private final Collator clt;
 	private final SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
+	
+	private BinaryMapIndexReader fileRequest;
 	
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
@@ -153,6 +156,16 @@ public class SearchPhrase {
 		return clt;
 	}
 	
+	public BinaryMapIndexReader getFileRequest() {
+		return fileRequest;
+	}
+	
+	public SearchPhrase generateNewPhrase(SearchPhrase phrase, BinaryMapIndexReader file) {
+		SearchPhrase nphrase = generateNewPhrase(phrase.getUnknownSearchPhrase(), phrase.getSettings());
+		nphrase.fileRequest = file;
+		return nphrase;
+	}
+	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
 		String textToSearch = Algorithms.normalizeSearchText(text);
@@ -235,11 +248,11 @@ public class SearchPhrase {
 		return false;
 	}
 
-	public static List<String> splitWords(String w, List<String> ws) {
+	public static List<String> splitWords(String w, List<String> ws, String delimiters) {
 		if (!Algorithms.isEmpty(w)) {
-			String[] wrs = w.split(ALLDELIMITERS);
-			for (int i = 0; i < wrs.length; i++) {
-				String wd = wrs[i].trim();
+			String[] wrs = w.split(delimiters);
+			for (String wr : wrs) {
+				String wd = wr.trim();
 				if (wd.length() > 0) {
 					ws.add(wd);
 				}
@@ -370,6 +383,11 @@ public class SearchPhrase {
 	}
 	
 	public QuadRect getRadiusBBoxToSearch(int radius) {
+		QuadRect searchBBox31 = this.settings.getSearchBBox31();
+		if (searchBBox31 != null) {
+			return searchBBox31;
+		}
+		
 		int radiusInMeters = getRadiusSearch(radius);
 		QuadRect cache1kmRect = get1km31Rect();
 		if(cache1kmRect == null) {
@@ -572,10 +590,6 @@ public class SearchPhrase {
 			unknownWordsMatcher.add(getNameStringMatcher(otherUnknownWords.get(ind), completeMatch));
 		}
 		return unknownWordsMatcher.get(i);
-	}
-
-	public NameStringMatcher getFullNameStringMatcher() {
-		return getNameStringMatcher(fullTextSearchPhrase.trim(), false);
 	}
 
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {
@@ -917,4 +931,6 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
+
+	
 }

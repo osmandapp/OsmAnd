@@ -2729,7 +2729,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
     <string name="parking_options">Parking options</string>
     <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="right_side_navigation">Circulación pela derecha</string>
     <string name="fonts_header">Map fonts</string>
     <string name="download_depth_countours">Nautical depth contours</string>
@@ -2817,8 +2817,6 @@
     <string name="save_as_line">Save as line</string>
     <string name="save_as_route_point">Save as route points</string>
     <string name="marker_moved_to_active">Map marker moved to active</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass direction\' below.</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
     <string name="order_by">Order by:</string>
     <string name="date_added">Added</string>
@@ -3439,7 +3437,6 @@
     <string name="route_between_points_desc">Choose how to connect the points, by a straight line, or calculate a route between them as specified below.</string>
     <string name="whole_track">Tol trazáu</string>
     <string name="next_segment">Segmentu siguiente</string>
-    <string name="route_between_points_warning_desc">Next, snap your track to the nearest allowed road with one of your navigation profiles to use this option.</string>
     <string name="threshold_distance">Threshold distance</string>
     <string name="navigation_profile">Navigation profile</string>
     <string name="route_between_points_add_track_desc">Select a track file to add the new segment to.</string>
@@ -4186,7 +4183,6 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="continue_with">Siguir con %1$s</string>
     <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
-    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="release_4_0">• Cloud backup
 \n
 \n • Added night mode for \"Topo\" map style
@@ -4222,7 +4218,7 @@
     <string name="backup_do_not_have_any">You have no online backup yet.</string>
     <string name="backup_dont_have_any_descr">Schedule automatic backups and never lose data.</string>
     <string name="backup_welcome_back">¡Volvi afayate!</string>
-    <string name="backup_welcome_back_descr">Restore data on this device using existing backups, or back up data to OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restore data on this device using OsmAnd Cloud.</string>
     <string name="backup_setup">Set up backup</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="attribute">Atributu</string>

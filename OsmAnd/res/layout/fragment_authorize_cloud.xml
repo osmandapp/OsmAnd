@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="match_parent"
 	android:background="?attr/list_background_color"
 	android:clickable="true"
 	android:focusable="true"
 	android:orientation="vertical">
+
+	<include layout="@layout/profile_preference_toolbar" />
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -17,7 +19,7 @@
 		<net.osmand.plus.widgets.BackupIconsView
 			android:id="@+id/animatedView"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/backup_icons_view_height"/>
+			android:layout_height="@dimen/backup_icons_view_height" />
 
 		<FrameLayout
 			android:id="@+id/main_image_container"
@@ -40,11 +42,12 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="0dp"
 		android:layout_marginStart="@dimen/dialog_content_margin"
 		android:layout_marginLeft="@dimen/dialog_content_margin"
 		android:layout_marginEnd="@dimen/dialog_content_margin"
 		android:layout_marginRight="@dimen/dialog_content_margin"
+		android:layout_weight="1"
 		android:orientation="vertical"
 		android:paddingTop="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding">

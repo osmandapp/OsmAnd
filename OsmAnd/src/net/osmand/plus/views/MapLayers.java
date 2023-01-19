@@ -13,8 +13,8 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -120,7 +120,6 @@ public class MapLayers {
 	}
 
 	public void createLayers(@NonNull OsmandMapTileView mapView) {
-		boolean useOpenGLRender = app.getSettings().USE_OPENGL_RENDER.get();
 		// first create to make accessible
 		mapTextLayer = new MapTextLayer(app);
 		// 5.95 all labels
@@ -135,7 +134,7 @@ public class MapLayers {
 
 		// 1-st in the order
 		downloadedRegionsLayer = new DownloadedRegionsLayer(app);
-		mapView.addLayer(downloadedRegionsLayer, -11.0f);
+		mapView.addLayer(downloadedRegionsLayer, 0.5f, -11.0f);
 
 		// icons are 2-d in the order (icons +1 000 000 or -10.f by zOrder in core)
 		// text and shields are 5-th in the order
@@ -146,11 +145,11 @@ public class MapLayers {
 		// gpx layer points 6-th in the order
 		gpxLayer = new GPXLayer(app);
 		gpxLayer.setPointsOrder(0.9f);
-		mapView.addLayer(gpxLayer, useOpenGLRender ? -5.0f : 0.9f);
+		mapView.addLayer(gpxLayer, 0.9f, -5.0f);
 
 		// route layer, 4-th in the order
 		routeLayer = new RouteLayer(app);
-		mapView.addLayer(routeLayer, useOpenGLRender ? -2.0f : 1.0f);
+		mapView.addLayer(routeLayer, 1.0f, -2.0f);
 
 		// 1.5 preview route line layer
 		previewRouteLineLayer = new PreviewRouteLineLayer(app);
@@ -208,9 +207,12 @@ public class MapLayers {
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
 		overlayTransparencyListener = change -> app.runInUIThread(() -> {
-			mapTileLayer.setAlpha(255 - change);
-			mapVectorLayer.setAlpha(255 - change);
-			mapView.refreshMap();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapTileLayer.setAlpha(255 - change);
+				mapVectorLayer.setAlpha(255 - change);
+				mapRenderer.requestRender();
+			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
 
@@ -257,12 +259,13 @@ public class MapLayers {
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
+		boolean useOpenGLRender = app.useOpenGlRenderer();
 
 		// update transparency
 		int mapTransparency = 255;
 		if (settings.MAP_UNDERLAY.get() != null) {
 			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (settings.MAP_OVERLAY.get() != null) {
+		} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
 			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
 		}
 		mapTileLayer.setAlpha(mapTransparency);
@@ -310,7 +313,10 @@ public class MapLayers {
 						mapView.getZoom(), true);
 			}
 			mapView.refreshMap();
-			dashboard.refreshContent(false);
+
+			if (dashboard.isVisible()) {
+				dashboard.refreshContent(false);
+			}
 			return true;
 		};
 		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());

@@ -1,11 +1,11 @@
 package net.osmand.router;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.RouteSegment;
-import net.osmand.GPXUtilities.RouteType;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.RouteSegment;
+import net.osmand.gpx.GPXUtilities.RouteType;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
@@ -23,12 +23,15 @@ public class RouteExporter {
 	private final String name;
 	private final List<RouteSegmentResult> route;
 	private final List<Location> locations;
+	private final List<Integer> routePointIndexes;
 	private final List<WptPt> points;
 
-	public RouteExporter(String name, List<RouteSegmentResult> route, List<Location> locations, List<WptPt> points) {
+	public RouteExporter(String name, List<RouteSegmentResult> route, List<Location> locations,
+	                     List<Integer> routePointIndexes, List<WptPt> points) {
 		this.name = name;
 		this.route = route;
 		this.locations = locations;
+		this.routePointIndexes = routePointIndexes == null ? new ArrayList<Integer>() : routePointIndexes;
 		this.points = points;
 	}
 
@@ -66,7 +69,7 @@ public class RouteExporter {
 	}
 
 	public TrkSegment generateRouteSegment() {
-		RouteDataResources resources = new RouteDataResources(locations);
+		RouteDataResources resources = new RouteDataResources(locations, routePointIndexes);
 		List<StringBundle> routeItems = new ArrayList<>();
 		if (!Algorithms.isEmpty(route)) {
 			for (RouteSegmentResult sr : route) {

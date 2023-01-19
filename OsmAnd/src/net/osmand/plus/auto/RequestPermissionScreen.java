@@ -1,5 +1,6 @@
 package net.osmand.plus.auto;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,7 @@ public class RequestPermissionScreen extends Screen {
 	public Template onGetTemplate() {
 		List<String> permissions = new ArrayList<>();
 		permissions.add(ACCESS_FINE_LOCATION);
+		permissions.add(ACCESS_COARSE_LOCATION);
 
 		String message = getCarContext().getString(R.string.location_access_request_title);
 

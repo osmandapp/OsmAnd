@@ -97,6 +97,11 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 	}
 
 	@Override
+	protected void deleteItem(HistoryEntry item) {
+		// TODO: delete settings item
+	}
+
+	@Override
 	void readItemsFromJson(@NonNull JSONObject json) throws IllegalArgumentException {
 		try {
 			if (!json.has("items")) {

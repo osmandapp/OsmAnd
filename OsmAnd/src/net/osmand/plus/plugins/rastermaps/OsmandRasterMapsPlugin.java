@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.resources.ResourceManager.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +38,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -117,14 +119,24 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		underlayListener = change -> {
 			boolean selected = settings.MAP_UNDERLAY.get() != null;
-			hidePolygonsPref.set(selected);
-			hideWaterPolygonsPref.set(selected);
+			if (!settings.POLYGONS_VISIBILITY_SET_MANUALLY.get()) {
+				hidePolygonsPref.set(selected);
+				hideWaterPolygonsPref.set(selected);
+			}
 
 			if (updateConfigureMapItemCallback != null) {
 				updateConfigureMapItemCallback.processResult(selected);
 			}
 		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
+
+		ResourceListener resourceListener = new ResourceListener() {
+			@Override
+			public void onMapClosed(String fileName) {
+				clearLayer(fileName);
+			}
+		};
+		app.getResourceManager().addResourceListener(resourceListener);
 		return true;
 	}
 
@@ -153,7 +165,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void updateMapLayers(@NonNull Context context, @Nullable MapActivity mapActivity,
-								@Nullable CommonPreference<String> settingsToWarnAboutMap) {
+	                            @Nullable CommonPreference<String> settingsToWarnAboutMap) {
 		if (overlayLayer == null) {
 			createLayers(context);
 		}
@@ -210,11 +222,38 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return false;
 	}
 
+	public void clearLayer(@NonNull String tileSourceName) {
+		int idx = tileSourceName.lastIndexOf(SQLiteTileSource.EXT);
+		if (idx > 0) {
+			tileSourceName = tileSourceName.substring(0, idx);
+		}
+		if (overlayLayer != null && overlayLayer.getMap() != null
+				&& tileSourceName.equals(overlayLayer.getMap().getName())) {
+			overlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY.get())) {
+			settings.MAP_OVERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_OVERLAY_PREVIOUS.get())) {
+			settings.MAP_OVERLAY_PREVIOUS.set(null);
+		}
+		if (underlayLayer != null && underlayLayer.getMap() != null
+				&& tileSourceName.equals(underlayLayer.getMap().getName())) {
+			underlayLayer.setMap(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY.get())) {
+			settings.MAP_UNDERLAY.set(null);
+		}
+		if (Algorithms.stringsEqual(tileSourceName, settings.MAP_UNDERLAY_PREVIOUS.get())) {
+			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+		}
+	}
+
 	public void selectMapOverlayLayer(@NonNull CommonPreference<String> mapPref,
-									  @NonNull CommonPreference<String> exMapPref,
-									  boolean force,
-									  @NonNull MapActivity mapActivity,
-									  @Nullable OnMapSelectedCallback callback) {
+	                                  @NonNull CommonPreference<String> exMapPref,
+	                                  boolean force,
+	                                  @NonNull MapActivity mapActivity,
+	                                  @Nullable OnMapSelectedCallback callback) {
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
@@ -236,56 +275,56 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 		items[i] = app.getString(R.string.install_more);
 		builder.setSingleChoiceItems(items, -1, (dialog, which) -> {
-			MapActivity mapActv = mapActivityRef.get();
-			if (mapActv == null || mapActv.isFinishing()) {
-				return;
-			}
-			if (which == items.length - 1) {
-				installMapLayers(mapActv, new ResultMatcher<TileSourceTemplate>() {
-					TileSourceTemplate template;
-					int count;
-					boolean cancel;
+					MapActivity activity = mapActivityRef.get();
+					if (activity == null || activity.isFinishing()) {
+						return;
+					}
+					if (which == items.length - 1) {
+						installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+							TileSourceTemplate template;
+							int count;
+							boolean cancel;
 
-					@Override
-					public boolean publish(TileSourceTemplate object) {
-						MapActivity mapActv = mapActivityRef.get();
-						if (mapActv == null || mapActv.isFinishing()) {
-							cancel = true;
-							return false;
-						}
-						if (object == null) {
-							if (count == 1) {
-								mapPref.set(template.getName());
-								exMapPref.set(template.getName());
-								updateMapLayers(mapActv, mapActv, mapPref);
-								if (callback != null) {
-									callback.onMapSelected(false);
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								MapActivity mapActv = mapActivityRef.get();
+								if (mapActv == null || mapActv.isFinishing()) {
+									cancel = true;
+									return false;
 								}
-							} else {
-								selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+								if (object == null) {
+									if (count == 1) {
+										mapPref.set(template.getName());
+										exMapPref.set(template.getName());
+										updateMapLayers(mapActv, mapActv, mapPref);
+										if (callback != null) {
+											callback.onMapSelected(false);
+										}
+									} else {
+										selectMapOverlayLayer(mapPref, exMapPref, false, mapActv, null);
+									}
+								} else {
+									count++;
+									template = object;
+								}
+								return false;
 							}
-						} else {
-							count++;
-							template = object;
-						}
-						return false;
-					}
 
-					@Override
-					public boolean isCancelled() {
-						return cancel;
+							@Override
+							public boolean isCancelled() {
+								return cancel;
+							}
+						});
+					} else {
+						mapPref.set(keys.get(which));
+						exMapPref.set(keys.get(which));
+						updateMapLayers(activity, activity, mapPref);
+						if (callback != null) {
+							callback.onMapSelected(false);
+						}
 					}
-				});
-			} else {
-				mapPref.set(keys.get(which));
-				exMapPref.set(keys.get(which));
-				updateMapLayers(mapActv, mapActv, mapPref);
-				if (callback != null) {
-					callback.onMapSelected(false);
-				}
-			}
-			dialog.dismiss();
-		})
+					dialog.dismiss();
+				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setOnDismissListener(dialog -> {
 					if (callback != null) {
@@ -297,6 +336,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
+
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		ItemClickListener listener = new OnRowItemClick() {
 
@@ -386,16 +429,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		};
 
-		if (overlayLayer.getMap() == null) {
-			settings.MAP_OVERLAY.set(null);
-			settings.MAP_OVERLAY_PREVIOUS.set(null);
-		}
-		if (underlayLayer.getMap() == null) {
-			settings.MAP_UNDERLAY.removeListener(underlayListener);
-			settings.MAP_UNDERLAY.set(null);
-			settings.MAP_UNDERLAY_PREVIOUS.set(null);
-			settings.MAP_UNDERLAY.addListener(underlayListener);
-		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
 			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
@@ -427,7 +460,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setItemDeleteAction(settings.MAP_UNDERLAY, settings.MAP_UNDERLAY_PREVIOUS));
 	}
-
 
 	@Override
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
@@ -568,8 +600,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public void toggleUnderlayState(@NonNull MapActivity mapActivity,
-									@NonNull RasterMapType type,
-									@Nullable OnMapSelectedCallback callback) {
+	                                @NonNull RasterMapType type,
+	                                @Nullable OnMapSelectedCallback callback) {
 		CommonPreference<String> mapTypePreference;
 		CommonPreference<String> exMapTypePreference;
 		MapTileLayer layer;
@@ -586,9 +618,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
 		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
-			OsmandRasterMapsPlugin.RasterMapType.OVERLAY
-			? LayerTransparencySeekbarMode.OVERLAY
-			: LayerTransparencySeekbarMode.UNDERLAY;
+				OsmandRasterMapsPlugin.RasterMapType.OVERLAY
+				? LayerTransparencySeekbarMode.OVERLAY
+				: LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
 			mapTypePreference.set(null);
 			updateMapLayers(mapActivity, mapActivity, null);

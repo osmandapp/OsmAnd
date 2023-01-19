@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -299,15 +299,7 @@ public class QuickSearchListItem {
 	}
 
 	public static String getAmenityIconName(@NonNull Amenity amenity) {
-		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (st != null) {
-			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-				return st.getIconKeyName();
-			} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-				return st.getOsmTag() + "_" + st.getOsmValue();
-			}
-		}
-		return null;
+		return RenderingIcons.getIconNameForAmenity(amenity);
 	}
 
 	@Nullable
@@ -336,6 +328,9 @@ public class QuickSearchListItem {
 			case POI_TYPE:
 				if (searchResult.object instanceof AbstractPoiType) {
 					String iconName = PoiUIFilter.getPoiTypeIconName((AbstractPoiType) searchResult.object);
+					if (Algorithms.isEmpty(iconName) && searchResult.object instanceof PoiType) {
+						iconName = RenderingIcons.getIconNameForPoiType((PoiType) searchResult.object);
+					}
 					if (!Algorithms.isEmpty(iconName)) {
 						iconId = RenderingIcons.getBigIconResourceId(iconName);
 					}

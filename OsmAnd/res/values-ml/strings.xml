@@ -1748,7 +1748,7 @@
     <string name="srtm_color_scheme">നിറങ്ങളുടെ സ്കീം</string>
     <string name="shared_string_overview">അവലോകനം</string>
     <string name="shared_string_visible">ദൃശ്യമായ</string>
-    <string name="driving_region_automatic">തനിയെയുള്ള</string>
+    <string name="shared_string_automatic">തനിയെയുള്ള</string>
     <string name="shared_string_color">നിറം</string>
     <string name="rendering_value_high_name">കൂടിയ</string>
     <string name="rendering_value_medium_w_name">ഇടത്തരം</string>
@@ -2471,8 +2471,6 @@
     <string name="import_track_desc">%1$s ഫയലില്‍ -വേപോയിന്റ് ഇല്ല, ട്രാക്കായി ഇംപോർട്ട് ചെയ്യണോ\?</string>
     <string name="move_point">പോയിന്റ് നീക്കുക</string>
     <string name="show_direction">ദൂരം സൂചന</string>
-    <string name="map_orientation_change_in_accordance_with_speed">മാപ്പ് ഓറിയന്റേഷൻ ത്രെഷോൾഡ്</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">"താഴെയുള്ള \'ചലന ദിശ\' നിന്നും \'Compass Directon\' എന്നതിലേക്കുള്ള സ്വിച്ചുചെയ്യാനുള്ള  വേഗത തിരഞ്ഞെടുക്കുക."</string>
     <string name="all_markers_moved_to_history">എല്ലാ മാപ്പ് മാർക്കറുകളും ചരിത്രത്തിലേക്ക് നീക്കി</string>
     <string name="marker_moved_to_history">മാപ്പ് മാർക്കർ ചരിത്രത്തിലേക്ക് നീക്കി</string>
     <string name="marker_moved_to_active">മാപ്പ് മാർക്കർ സജീവമാക്കി</string>

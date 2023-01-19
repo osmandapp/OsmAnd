@@ -1,6 +1,6 @@
 package net.osmand.data;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
@@ -9,8 +9,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
@@ -33,8 +33,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
 
-	private String name = "";
-	private String category = "";
+	private String name;
+	private String category;
 	private String description;
 	private String address;
 	private String comment;
@@ -54,7 +54,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private boolean calendarEvent;
 
 	private String amenityOriginName;
-	private Map<String, String> amenityExtensions = new HashMap<String, String>();
+	private Map<String, String> amenityExtensions = new HashMap<>();
 
 	private boolean visible = true;
 
@@ -87,12 +87,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = point.visible;
 		this.amenityOriginName = point.amenityOriginName;
 		this.address = point.address;
+		this.comment = point.comment;
 		this.iconId = point.iconId;
 		this.backgroundType = point.backgroundType;
 		this.altitude = point.altitude;
 		this.timestamp = point.timestamp;
 		this.visitedDate = point.visitedDate;
 		this.pickupDate = point.pickupDate;
+		this.calendarEvent = point.calendarEvent;
+		this.amenityExtensions = new HashMap<>(point.amenityExtensions);
 		initPersonalType();
 	}
 
@@ -324,44 +327,40 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-
-		if (o == null) return false;
-
-		if (getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null) {
+			return false;
+		}
+		if (getClass() != o.getClass()) {
+			return false;
+		}
 
 		FavouritePoint point = (FavouritePoint) o;
-
-		if (name == null) {
-			if (point.name != null)
-				return false;
-		} else if (!name.equals(point.name))
+		if (!Algorithms.stringsEqual(name, point.name)) {
 			return false;
-
-		if (category == null) {
-			if (point.category != null)
-				return false;
-		} else if (!category.equals(point.category))
+		}
+		if (!Algorithms.stringsEqual(category, point.category)) {
 			return false;
-
-		if (description == null) {
-			if (point.description != null)
-				return false;
-		} else if (!description.equals(point.description))
+		}
+		if (!Algorithms.stringsEqual(description, point.description)) {
 			return false;
-
-		if (amenityOriginName == null) {
-			if (point.amenityOriginName != null)
-				return false;
-		} else if (!amenityOriginName.equals(point.amenityOriginName))
+		}
+		if (!Algorithms.stringsEqual(amenityOriginName, point.amenityOriginName)) {
 			return false;
+		}
 
-		return (this.latitude == point.latitude)
-				&& (this.longitude == point.longitude)
-				&& (this.altitude == point.altitude)
+		return Double.compare(this.latitude, point.latitude) == 0
+				&& Double.compare(this.longitude, point.longitude) == 0
+				&& Double.compare(this.altitude, point.altitude) == 0
 				&& (this.timestamp == point.timestamp)
 				&& (this.visitedDate == point.visitedDate)
-				&& (this.pickupDate == point.pickupDate);
+				&& (this.pickupDate == point.pickupDate)
+				&& (this.color == point.color)
+				&& (this.iconId == point.iconId)
+				&& (this.backgroundType == point.backgroundType)
+				&& (this.specialPointType == point.specialPointType);
 	}
 
 	@Override
@@ -439,7 +438,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		Map<String, String> extensions = point.getExtensionsToWrite();
 		extensions.putAll(getAmenityExtensions());
-		if (!isVisible()) {
+		if (isVisible()) {
+			extensions.remove(HIDDEN);
+		} else {
 			extensions.put(HIDDEN, "true");
 		}
 		if (isAddressSpecified()) {

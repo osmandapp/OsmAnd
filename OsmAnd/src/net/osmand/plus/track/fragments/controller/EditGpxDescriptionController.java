@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.SaveGpxAsyncTask;

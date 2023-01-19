@@ -163,14 +163,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupCenterPositionOnMapPref() {
-		CommonPreference<Boolean> preference = settings.CENTER_POSITION_ON_MAP;
-		boolean isCenterSelected = preference.getModeValue(getSelectedAppMode());
-		Drawable icon = getActiveIcon(isCenterSelected ?
-				R.drawable.ic_action_display_position_center :
-				R.drawable.ic_action_display_position_bottom);
-		String summary = getString(isCenterSelected ?
-				R.string.position_on_map_center :
-				R.string.position_on_map_bottom);
+		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
+		int positionPlacement = preference.getModeValue(getSelectedAppMode());
+		Drawable icon;
+		String summary;
+		if (positionPlacement == 0) {
+			icon = getActiveIcon(R.drawable.ic_action_bearing);
+			summary = getString(R.string.shared_string_automatic);
+		} else if (positionPlacement == 1) {
+			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
+			summary = getString(R.string.position_on_map_center);
+		} else {
+			icon = getActiveIcon(R.drawable.ic_action_display_position_bottom);
+			summary = getString(R.string.position_on_map_bottom);
+		}
 		Preference displayPosition = findPreference(preference.getId());
 		displayPosition.setIcon(icon);
 		displayPosition.setSummary(summary);
@@ -186,16 +192,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
 		String[] entries = new String[] {
+				getString(R.string.shared_string_automatic),
 				getString(R.string.position_on_map_center),
 				getString(R.string.position_on_map_bottom),
 		};
-		Boolean[] entryValues = new Boolean[] {true, false};
-		int selected = settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? 0 : 1;
+		int selected = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode());
 
 		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				entries, nightMode, selected, app, profileColor, themeRes, v -> {
 					int selectedEntryIndex = (int) v.getTag();
-					applyPreferenceWithSnackBar(preference.getKey(), entryValues[selectedEntryIndex]);
+					applyPreferenceWithSnackBar(preference.getKey(), selectedEntryIndex);
+					MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+					if (mapViewTrackingUtilities != null) {
+						mapViewTrackingUtilities.updateSettings();
+					}
 				}
 		);
 
@@ -230,7 +240,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
 		defaultDrivingRegion.setIcon(getActiveIcon(R.drawable.ic_action_car_dark));
-		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
+		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.shared_string_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 
 	private void setupUnitsOfLengthPref() {
@@ -362,7 +372,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		b.setTitle(getString(R.string.driving_region));
 
 		List<Object> drs = new ArrayList<>();
-		drs.add(getString(R.string.driving_region_automatic));
+		drs.add(getString(R.string.shared_string_automatic));
 		drs.addAll(Arrays.asList(DrivingRegion.values()));
 		int sel = -1;
 		ApplicationMode selectedMode = getSelectedAppMode();
@@ -446,7 +456,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
 			return true;
-		} else if (preference.getKey().equals(settings.CENTER_POSITION_ON_MAP.getId())) {
+		} else if (preference.getKey().equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
 			showDisplayPositionDialog(preference);
 			return true;
 		}

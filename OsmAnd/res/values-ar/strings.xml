@@ -246,8 +246,8 @@
     <string name="shared_string_show_on_map">عرض على الخريطة</string>
     <string name="navigate_point_latitude">خط العرض</string>
     <string name="navigate_point_longitude">خط الطول</string>
-    <string name="position_on_map_center">مركز</string>
-    <string name="position_on_map_bottom">أسفل</string>
+    <string name="position_on_map_center">المركز</string>
+    <string name="position_on_map_bottom">الأسفل</string>
     <string name="app_mode_car">سيارة</string>
     <string name="app_mode_bicycle">دراجة</string>
     <string name="app_mode_pedestrian">مشي</string>
@@ -411,7 +411,7 @@
     <string name="osmand_parking_pm">مساء</string>
     <string name="osmand_parking_am">صباحاً</string>
     <string name="osmand_parking_position_name">مكان للوقوف</string>
-    <string name="osmand_parking_plugin_description">قم بتمكين هذا الخيار لتعيين نقطة ومكان توقف سيارتك على الخريطة وربط التقويم الخاص بك وقت بدء وقت الوقوف. يساعد هذا الخيار على تتبع موقف السيارة ووقت الوقوف. لتحديد الموقف ، اختر مكانا على الخريطة ، ثم انتقل إلى الإجراءات واضغط على \"إضافة موقف سيارات\".</string>
+    <string name="osmand_parking_plugin_description">حدد مكان وقوف سيارتك ، وسجل بالتقويم الخاص بك عندما تنتهي صلاحية عداد الوقوف. لوضع محدّد الموقع ، اختر مكانًا على الخريطة ، وانتقل إلى \"الإجراءات\" ، ثم انقر على \"إضافة موقف سيارات\".</string>
     <string name="osmand_parking_plugin_name">مكان الموقف</string>
     <string name="context_menu_item_add_parking_point">موقف السيارة</string>
     <string name="context_menu_item_delete_parking_point">احذف علامة وقوف السيارات</string>
@@ -441,20 +441,20 @@
     <string name="online_map_settings_descr">حدد مصادر خريطة التجانب المخزنة مؤقتاً عبر الإنترنت.</string>
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات.</string>
-    <string name="osmand_accessibility_description">هذا الملحق يضيف إلى أوسماند ميزة تسهيل الاستخدام/إمكانية الوصول المتاحة في نظامك، فهو على سبيل المثال يسمح لك بضبط معدل الكلام المنطوق من النص ومثل إتاحة التحكم من كرة التحكم بالريموت أو التفاعل عبر خدمة تحويل النص إلى كلام مثل إعلامك صوتيا بمكانك.</string>
+    <string name="osmand_accessibility_description">يجعل ميزات إمكانية الوصول الخاصة بالجهاز متاحة مباشرة في أوسماند. حيث يسهل على سبيل المثال ضبط معدل الكلام لأصوات تحويل النص إلى كلام ، وتكوين التنقل عبر لوحة D ، واستخدام كرة التتبع للتحكم في التكبير / التصغير ، أو تعليقات تحويل النص إلى كلام ، على سبيل المثال للإعلان تلقائيًا عن موقعك.</string>
     <string name="osmand_development_plugin_description">هذا الملحق يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، وأداء الشاشة، أوالإشعار الصوتي. هذه الإعدادات معدة للمطورين ولا يحتاجها المستخدم العام .</string>
     <string name="plugins_screen">الملحقات</string>
     <string name="prefs_plugins_descr">تقوم الملحقات بتفعيل إعدادات متقدمة ووظائف إضافية.</string>
-    <string name="osm_editing_plugin_description">يمكن استخدام المكون الإضافي لتحرير OSM لتقديم مساهمات OSM مثل إنشاء أو تعديل كائنات POI ، وفتح أو التعليق على OSM Notes ، والمساهمة في ملفات GPX المسجلة. OSM هو مشروع رسم خرائط للمجال العام على مستوى المجتمع. لمزيد من المعلومات ، يرجى الرجوع إلى https://osm.org. يمكن إجراء المساهمات مباشرة من OsmAnd ، إذا قمت بتحديد بيانات اعتماد OSM الخاصة بك في التطبيق.
+    <string name="osm_editing_plugin_description">قدم مساهمات إلى خريطة الشارع المفتوحة ، وهو مجتمع عالمي يحتفظ بخريطة شاملة للعالم ويوفر بيانات محدثة مفتوحة المصدر لكل مستخدم.
 \n
-\nيمكنك العثور على تعليمات حول كيفية تحرير الخريطة على الموقع الإلكتروني https://osmand.net/docs/user/plugins/osm-editing</string>
+\nيمكنك العثور على تعليمات حول كيفية تحرير الخريطة على موقعنا https://osmand.net/docs/user/plugins/osm-editing.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
     <string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي:</string>
     <string name="switch_to_raster_map_to_see">لا توجد خرائط توجيه لهذا المكان. قم بتحميل إحدها ، أو التغيير لخرائط الإنترنت (فعّل ملحق خرائط الإنترنت).</string>
     <string name="shared_string_and">و</string>
     <string name="shared_string_or">أو</string>
     <string name="av_camera_focus_continuous">التركيز المستمر</string>
-    <string name="free_version_title"> الإصدار المجاني</string>
+    <string name="free_version_title">الإصدار المجاني</string>
     <string name="index_name_north_america">أمريكا الشمالية</string>
     <string name="index_name_us">أمريكا الشمالية - الولايات المتحدة</string>
     <string name="index_name_central_america">أمريكا الوسطى</string>
@@ -552,9 +552,11 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح. البيانات من SRTM و ASTER.
+    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح. 
 \n
-\nكيف - http://osmand.net/docs/user/plugins/contour-lines</string>
+\nالبيانات من SRTM و ASTER.
+\n
+\nكيف - http://osmand.net/docs/user/plugins/contour-lines.</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلي OSM)
 \n
 \n أوسماند هو تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى مجموعة واسعة من بيانات OpenStreetMap (OSM) العالمية. يمكن تخزين جميع بيانات الخريطة (خرائط التوجيه أو خرائط جانبية) على ذاكرة الهاتف للاستخدام في وضع عدم الاتصال. كما يتم توفير وظائف التوجيه عبر الإنترنت وبدونه ، بما في ذلك التوجيه الصوتي خطوة بخطوة.
@@ -581,7 +583,7 @@
 \n
 \n يمكن استخدام أي من هذه الخرائط كخريطة رئيسية (أساسية) ليتم عرضها ، أو علوية أو سفلية أو طبقة أساسية لخريطة أساسية أخرى (مثل خرائط أوسماند غير المتصلة بالإنترنت). يمكن إخفاء عناصر معينة من خرائط أوسماند من خلال قائمة \"تكوين الخريطة\" لجعل أي خريطة أساسية أكثر وضوحًا.
 \n
-\n قم بتنزيل خرائط الطبقات المباشرةً ، أو انسخها كملفات قاعدة بيانات SQLite إلى مجلد بيانات أوسماند باستخدام إحدى أدوات إعداد الخرائط العديدة.</string>
+\n قم بتنزيل خرائط الطبقات المباشرةً ، أو انسخها كملفات قاعدة بيانات SQLite إلى مجلد بيانات أوسماند باستخدام إحدى أدوات إعداد الخرائط المتعددة.</string>
     <string name="update_poi_does_not_change_indexes">التغييرات POI داخل التطبيق لا تؤثرعلى ملفات الخرائط المحملة، يتم حفظ التغييرات إلى ملف محلي بدلا من ذلك.</string>
     <string name="av_camera_focus_descr">وضع تركيز الكاميرا:</string>
     <string name="osmand_plus_long_description_1000_chars">أوسماند+ (OSM اتجاهات التنقل التلقائية)
@@ -612,7 +614,7 @@
     <string name="poi_context_menu_showdescription">إظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
     <string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
-    <string name="amenity_type_osmwiki">ويكييديا (بدون اتصال)</string>
+    <string name="amenity_type_osmwiki">ويكيبيديا (بدون اتصال)</string>
     <string name="amenity_type_user_defined">يحددها المستخدم</string>
     <string name="fav_export_confirmation">ملف المفضلة سبق تصديره هل تريد استبداله؟</string>
     <string name="global_settings">الاعدادت العالمية</string>
@@ -685,7 +687,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nاضغط مطولا لعرض الخيارات"</string>
-    <string name="local_index_installed"> الإصدار المحلي</string>
+    <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
     <string name="local_index_items_restored">تم تفعيل %1$d من %2$d خريطة.</string>
@@ -706,8 +708,8 @@
     <string name="search_offline_clear_search">بحث جديد</string>
     <string name="map_text_size_descr">حدد حجم النص للأسماء على الخريطة:</string>
     <string name="map_text_size">حجم خط الخريطة</string>
-    <string name="trace_rendering">تقديم معلومات التصحيح</string>
-    <string name="trace_rendering_descr">عرض أداء معلومات التصحيح (غير مستحسن).</string>
+    <string name="trace_rendering">معلومات تصحيح الأداء</string>
+    <string name="trace_rendering_descr">إظهار أداء العرض والتنقل.</string>
     <string name="installing_new_resources">يثبت البيانات الجديدة…</string>
     <string name="internet_connection_required_for_online_route">خدمة التنقل عبر الإنترنت غير متاحة دون اتصال بالانترنت.</string>
     <string name="tts_language_not_supported_title">لغة غير مدعومة</string>
@@ -840,7 +842,7 @@
 \nاضغط مطولا للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
-    <string name="always_center_position_on_map">الموقع في المنتصف</string>
+    <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
@@ -1056,8 +1058,8 @@
     <string name="download_tab_local">على الهاتف</string>
     <string name="no_internet_connection">تعذر التنزيل ، يرجى التحقق من اتصالك بالإنترنت.</string>
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
-    <string name="use_opengl_render">استخدام عرض الرسومات المفتوحة</string>
-    <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة (قد لا تعمل على بعض الأجهزة).</string>
+    <string name="use_opengl_render">استخدام عرض 3D</string>
+    <string name="use_opengl_render_descr">استخدام أداء الرسومات المفتوحة 3D (قد لا تعمل على بعض الأجهزة).</string>
     <string name="map_update">يوجد تحديثات ل %1$s من الخرائط</string>
     <string name="search_for">البحث عن</string>
     <string name="coordinates">إحداثيات</string>
@@ -1153,7 +1155,7 @@
     <string name="osm_editing_plugin_name">تعديل خريطة الشارع المفتوحة</string>
     <string name="free">فارغ %1$s</string>
     <string name="parking_place">موقف السيارات</string>
-    <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
+    <string name="version_settings_descr">الإصدارات الليلية المحملة.</string>
     <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
     <string name="traffic_warning_pedestrian">ممرات الراجلين</string>
@@ -1346,8 +1348,8 @@
     <string name="use_online_routing">استخدم الملاحة على الإنترنت</string>
     <string name="use_english_names_descr">اختر بين الأسماء المحلية أو الإنجليزية.</string>
     <string name="data_settings">بيانات</string>
-    <string name="map_view_3d_descr">تمكن عرض الخريطة ثلاثي الأبعاد.</string>
-    <string name="map_view_3d">عرض الخريطة ثلاثي الأبعاد</string>
+    <string name="map_view_3d_descr">تمكين عرض 3D للخريطة.</string>
+    <string name="map_view_3d">عرض الخريطة 3D</string>
     <string name="mark_point">هدف</string>
     <string name="reload_tile">إعادة تحميل التجانبية/المربع</string>
     <string name="update_tile">تحديث الخريطة</string>
@@ -1599,9 +1601,9 @@
     <string name="route_duration">الزمن :</string>
     <string name="route_tr">انعطف يميناً</string>
     <string name="route_tl">انعطف يسارا واذهب</string>
-    <string name="plugin_nautical_descr">تشغيل الخريطة لإثراء خريطتك بمعلومات حول طرق الإبحار وأضواء الملاحة ومناطق الخطر والمناطق التي يسمح أو يحظر فيها الإبحار أو الرسو ، إلخ. لاستخدام تنزيل الخرائط البحرية وتمكين نوع \"الخريطة البحرية\" في تكوين الخريطة.
+    <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك.
 \n
-\nكيفية - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nمزيد من القراءة على https://osmand.net/docs/user/plugins/nautical-charts.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
     <string name="map_markers">التوجيه المباشر</string>
@@ -1882,9 +1884,9 @@
     <string name="shared_string_others">أخرى</string>
     <string name="local_index_action_do">%1$s %2$s عنصر ؟</string>
     <string name="amenity_type_geocache">البيانات الجغرافية المؤقتة</string>
-    <string name="record_plugin_description">قم بتسجيل المسارات وحفظها يدويا باستخدام الملحق الإضافي لتسجيل الرحلة. قم بتصدير مساراتك كملف gpx أو شاركه أو استخدمه للمساهمة في مشروع خريطة الشارع المفتوح. أداة مفيدة للعدائين والمتنزهين وأي شخص مهتم بتسجيل مساراتهم.
+    <string name="record_plugin_description">سجل رحلاتك أو تدريباتك ، وقم بتحليل البيانات من حيث السرعة ، والصعود والهبوط المتراكم ، وملف الارتفاع ، وما إلى ذلك. يمكن أرشفة المسارات المسجلة ومشاركتها مع الأصدقاء وتحريرها ومعالجتها لاحقًا.
 \n
-\nللمزيد - https://osmand.net/docs/user/plugins/trip-recording</string>
+\nمزيد من القراءة على https://osmand.net/docs/user/plugins/trip-recording.</string>
     <string name="missing_write_external_storage_permission">أوسماند ليس لديه إذن لاستخدام ذاكرة البطاقة</string>
     <string name="save_poi_without_poi_type_message">حفظ موضع الاهتمام بدون نوع؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
@@ -1981,7 +1983,7 @@
     <string name="activate_seamarks_plugin">يرجى تفعيل ملحق المعالم البحرية</string>
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
-    <string name="plugin_ski_descr">خريطة أوسماند للتزلج هي مكون إضافي لتطبيق أوسماند للملاحة وهو مصمم للتنقل في مواقع الرياضات الشتوية. حيث يوفر معلومات حول مسارات التزلج وعلامات رفع التزلج وحتى الخطوط الملونة التي تشير إلى تعقيد كل مسار. يمكنك الحصول على معلومات حول مسارات التزلج نفسها وكذلك البنية التحتية المحيطة بها.تعليمات الاستخدام: قم بتمكين المكون الإضافي في تطبيق أوسماند ، واضغط على زر الخريطة واضبط نوع الخريطة على خرائط التزلج.</string>
+    <string name="plugin_ski_descr">مصممة للتنقل في مناطق الرياضات الشتوية: شاهد ممرات التزلج ومصاعد التزلج ومسارات التزلج ، مع خطوط ملونة تشير إلى تصنيفات الصعوبة. للاستخدام ، قم بتمكين هذا المكون الإضافي وانتقل أيضًا إلى \"تكوين الخريطة\" واختر نمط الخريطة \"الشتاء والتزلج\".</string>
     <string name="rendering_attr_hideOverground_name">أشياء فوق سطح الأرض</string>
     <string name="shared_string_change">تغيير</string>
     <string name="get_started">ابدأ</string>
@@ -1989,7 +1991,7 @@
     <string name="replace_favorite_confirmation">استبدال \"%1$s\" المفضلة؟</string>
     <string name="clear_tile_data">حذف جميع الطبقات</string>
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
-    <string name="skip_map_downloading">تخط التحميل</string>
+    <string name="skip_map_downloading">تخط تنزيل الخرائط</string>
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك تحديد خريطة من اللائحة أو تنزيل خرائط لاحقاً عبر \'القائمة - %1$s\'.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
     <string name="search_map">البحث في الخريطة …</string>
@@ -2070,7 +2072,7 @@
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourDensity_description">كثافة الخط الكنتوري</string>
     <string name="rendering_attr_contourDensity_name">كثافة الخط الكنتوري</string>
-    <string name="rendering_value_high_name">عالي</string>
+    <string name="rendering_value_high_name">عال</string>
     <string name="rendering_value_medium_w_name">وسط</string>
     <string name="rendering_value_low_name">منخفض</string>
     <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
@@ -2162,7 +2164,7 @@
     <string name="shared_string_max">أقصى</string>
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الانتهاء</string>
-    <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
+    <string name="routing_attr_driving_style_name">أسلوب الركوب</string>
     <string name="altitude_descent">منحدر</string>
     <string name="altitude_ascent">وعر</string>
     <string name="altitude_range">مدى الارتفاع</string>
@@ -2193,7 +2195,7 @@
     <string name="nautical_maps">الخرائط البحرية</string>
     <string name="fonts_header">خطوط الخريطة</string>
     <string name="right_side_navigation">القيادة بالجهة اليمنى</string>
-    <string name="driving_region_automatic">تلقائي</string>
+    <string name="shared_string_automatic">تلقائي</string>
     <string name="parking_options">خيارات الموقف</string>
     <string name="full_version_thanks">شكراً لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">أقصر الطرق</string>
@@ -2259,7 +2261,7 @@
     <string name="quick_action_showhide_osmbugs_descr">زر يظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط الكنتورية لهذه المنطقة لعرضها.</string>
-    <string name="show_from_zoom_level">العرض بداية من مستوى التكبير</string>
+    <string name="show_from_zoom_level">يبدأ العرض عند مستوى التكبير/التصغير</string>
     <string name="display_zoom_level">عرض مستوى التكبير: %1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة خطوط التضاريس على الخريطة، يجب تحميل الملحق أولاً.</string>
@@ -2460,8 +2462,6 @@
     <string name="import_track">استيراد مسار</string>
     <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود إدخاله كمسار؟</string>
     <string name="move_point">نقل نقطة</string>
-    <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">حدد سرعة تبديل الاتجاه من \"اتجاه الحركة\" إلى \"اتجاه البوصلة\" أدناه.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
     <string name="marker_moved_to_history">تم نقل التوجيه المباشر إلى السجل</string>
     <string name="marker_moved_to_active">التوجيه المباشر انتقل كنشط</string>
@@ -3394,9 +3394,9 @@
     <string name="monitoring_min_accuracy_descr_side_effect">الآثار الجانبية: نتيجة التصفية بدقة ، قد تكون النقاط مفقودة تماماً على سبيل المثال أسفل الجسور ، تحت الأشجار ، بين المباني العالية ، أو مع بعض الظروف الجوية.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصية: من الصعب التنبؤ بما سيتم تسجيله وما لا يتم تسجيله ، قد يكون من الأفضل إيقاف تشغيل هذا المرشح.</string>
     <string name="monitoring_min_accuracy_descr_remark">ملاحظة :إذا كان GPS قد تم إيقافه قبل التسجيل مباشرة ، فقد تكون دقة النقطة الأولى التي تم قياسها منخفضة ، لذلك قد نود في الرمز الخاص بنا الانتظار ثانية أو نحو ذلك قبل تسجيل نقطة (أو تسجيل أفضل 3 نقاط متتالية ، إلخ) .) ، ولكن هذا لم ينفذ بعد.</string>
-    <string name="monitoring_min_distance_descr">يتجنب هذا المرشح تسجيل النقاط المكررة حيث قد يكون هناك حركة فعلية قليلة جداً ، مما يجعل المظهر المكاني أجمل للمسارات لا يتم معالجته لاحقاً.</string>
-    <string name="monitoring_min_distance_descr_side_effect">الآثار الجانبية: لا يتم تسجيل الفترات في الراحة على الإطلاق أو بنقطة واحدة فقط لكل منها. قد يتم تصفية الحركات الصغيرة (في العالم الحقيقي) (على سبيل المثال ، لوضع علامة على وجود امتداد محتمل في رحلتك). يحتوي ملفك على معلومات أقل للمعالجة اللاحقة ، ويحتوي على إحصائيات أسوأ عن طريق تصفية النقاط الزائدة عن الحاجة بشكل واضح في وقت التسجيل ، مع الاحتفاظ في نفس الوقت بالآثار الناتجة عن الاستقبال السيئ أو تأثيرات شرائح GPS.</string>
-    <string name="monitoring_min_distance_descr_recommendation">التوصية: قد يكون إعداد 5 أمتار جيداً إذا لم تكن بحاجة إلى التقاط تفاصيل أدق من ذلك ، ولا ترغب في التقاط البيانات بشكل صريح أثناء الراحة.</string>
+    <string name="monitoring_min_distance_descr">يتيح لك تشغيل هذا الفلتر تجنب تسجيل بيانات إضافية عندما لا يتم اكتشاف الحركة تقريبًا. كما أنه يحسن المظهر المكاني للمسارات دون مزيد من المعالجة.</string>
+    <string name="monitoring_min_distance_descr_side_effect">لم يتم تسجيل فترات الراحة على الإطلاق أو كنقطة واحدة فقط. يمكن تصفية الحركات البسيطة (على سبيل المثال ، على جانب الطريق لتحديد منعطف محتمل في رحلتك). لاحظ أنه سيحتوي ملفك على معلومات أقل للمعالجة اللاحقة ، وفي الوقت نفسه يمكن أن يحفظ عناصر GPS الأثرية الناتجة عن ضعف الاستقبال أو تأثيرات مجموعة الشرائح.</string>
+    <string name="monitoring_min_distance_descr_recommendation">التوصية: قد يكون إعداد 5 أمتار جيداً إذا لم تكن بحاجة إلى التقاط تفاصيل أدق من ذلك ، ولا ترغب في التقاط البيانات بشكل واضح أثناء الراحة.</string>
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
     <string name="live_monitoring_adress">عنوان صفحة انترنت</string>
@@ -3614,7 +3614,7 @@
     <string name="quick_action_item">إجراء سريع</string>
     <string name="radius_ruler_item">مسطرة البوصلة</string>
     <string name="measure_distance_item">قياس المسافة</string>
-    <string name="travel_item">السفر (Wikivoyage و Wikipedia)</string>
+    <string name="travel_item">السفر (ويكي الرحلات و ويكيبيديا)</string>
     <string name="map_markers_item">العلامات</string>
     <string name="favorites_item">المفضلة</string>
     <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
@@ -3654,7 +3654,9 @@
     <string name="profiles_for_action_not_found">لم يتم العثور على الأوضاع المحددة لهذا الإجراء.</string>
     <string name="index_item_world_basemap_detailed">خريطة عامة للعالم (تفصيلية)</string>
     <string name="unsupported_type_error">نوع غير معتمد</string>
-    <string name="gpx_parse_error">لم يتم تكوين OsmAnd GPX بشكل جيد ، يرجى الاتصال بفريق الدعم لمزيد من التحقيقات.</string>
+    <string name="gpx_parse_error">تم العثور على مشاكل مع ملف GPX.
+\n
+\nيمكنك الاتصال بالدعم والتحقق من الملف.</string>
     <string name="shared_string_always">دائما</string>
     <string name="screen_control">التحكم في الشاشة</string>
     <string name="system_screen_timeout_descr">إيقاف تشغيل الشاشة بعد انتهاء مهلة شاشة النظام.</string>
@@ -3720,12 +3722,12 @@
     <string name="item_deleted">%1$s محذوفة</string>
     <string name="speed_cameras_restart_descr">إعادة التشغيل مطلوبة لحذف بيانات كاميرا السرعة بالكامل.</string>
     <string name="shared_string_uninstall_and_restart">إلغاء التثبيت وإعادة التشغيل</string>
-    <string name="speed_cameras_legal_descr">في بعض البلدان أو المناطق، يحظر القانون استخدام تطبيقات التحذير من كاميرا السرعة. 
-\n 
-\nعليك أن تختار اعتمادا على قانون بلدك. 
-\n 
-\nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة. 
-\n 
+    <string name="speed_cameras_legal_descr">في بعض البلدان أو المناطق، يحظر القانون استخدام تطبيقات التحذير من كاميرا السرعة.
+\n
+\nعليك أن تختار اعتمادا على قانون بلدك.
+\n
+\nحدد %1$s وستتلقى تنبيهات وتحذيرات حول كاميرات السرعة.
+\n
 \nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإشعارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
     <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="routing_attr_length_name">حد الطول</string>
@@ -3773,7 +3775,6 @@
     <string name="route_between_points_desc">حدد كيفية توصيل النقاط، بخط مستقيم، أو حساب مسار بينها على النحو المحدد أدناه.</string>
     <string name="whole_track">مسار كامل</string>
     <string name="next_segment">المقطع التالي</string>
-    <string name="route_between_points_warning_desc">بعد ذلك، قم بمحاذاة المسار إلى أقرب طريق مسموح به باستخدام أحد ملفات تعريف التنقل لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
     <string name="plan_route_exit_dialog_descr">هل تريد تجاهل كافة التغييرات في المسار المخطط؟</string>
@@ -4032,9 +4033,9 @@
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
-    <string name="open_place_reviews_plugin_description">أرسل صورا وتعليقات وروابط حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق كبيانات مفتوحة https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">قدم مساهمات في مشروع OpenPlaceReviews ، مثل الصور أو المراجعات أو الروابط للأماكن العامة مثل المطاعم أو الفنادق أو المتاحف.
 \n
-\nاقرأ المزيد على https://openplacereviews.org</string>
+\nاعثر على إرشادات حول كيفية المساهمة على موقعنا https://osmand.net/docs/user/plugins/openplacereviews.</string>
     <string name="open_place_reviews">موقع OpenPlaceReviews</string>
     <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
     <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
@@ -4070,7 +4071,7 @@
 \nستفقد جميع البيانات غير المحفوظة.</string>
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">مطلوب إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
-    <string name="routing_attr_height_obstacles_description">التوجيه يمكن أن يتجنب المرتفعات القوية.</string>
+    <string name="routing_attr_height_obstacles_description">سيعكس وقت السفر المتوقع تأثير الارتفاع. يمكن أن يساعد تفضيل التوجيه في تجنب المرتفعات الشديدة:</string>
     <string name="quick_action_coordinates_widget_descr">زر لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
@@ -4225,8 +4226,8 @@
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="purchases_feature_desc_nautical">الحصول على معلومات العمق البحري</string>
     <string name="purchases_feature_desc_terrain">خطوط محيطية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
-    <string name="purchases_feature_desc_wikivoyage">استكشف Wikivoyage دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
-    <string name="purchases_feature_desc_wikipedia">استكشف ويكيبيديا في وضع عدم الاتصال. مقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
+    <string name="purchases_feature_desc_wikivoyage">استكشف ويكي الرحلات دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
+    <string name="purchases_feature_desc_wikipedia">يوفر جميع مقالات ويكيبيديا المتعلقة بالأماكن في وضع عدم الاتصال ، مما يساعدك على التعرف على الأماكن التي تزورها في رحلتك من خلال نقرات بسيطة على الخريطة. لا بد من تنزيل ملفات خرائط ويكيبيديا للمناطق المعنية مسبقا.</string>
     <string name="purchases_feature_desc_combined_wiki">استكشف مقالات ويكيبيديا أثناء التنقل ، بدون اتصال بالإنترنت. البيانات غير المتصلة بالإنترنت مقسمة على البلدان ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_monthly_map_updates">احصل على التحديثات الشهرية المنتظمة للخرائط غير المتصلة بالإنترنت.</string>
@@ -4236,7 +4237,7 @@
     <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
     <string name="offline_wikipeadia">ويكيبيديا غير متصل</string>
-    <string name="offline_wikivoyage">Wikivoyage غير متصل</string>
+    <string name="offline_wikivoyage">ويكي الرحلات (بدون اتصال)</string>
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
     <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
@@ -4269,7 +4270,6 @@
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
     <string name="enter_verification_code">إدخال كلمة مرور لمرة واحدة</string>
-    <string name="approximate_route_description">قم بإرفاق الطريق بالطرق على الخريطة للحصول على جميع المنعطفات والبيانات الإضافية ، مثل السلاسة وأنواع الطرق وما إلى ذلك.</string>
     <string name="release_4_0">• احتياطية سحابة
 \n
 \n • تمت إضافة الوضع الليلي لنمط الخريطة \"Topo\"
@@ -4304,10 +4304,10 @@
     <string name="backup_version_history_removed">تمت إزالة كافة محفوظات الإصدار.</string>
     <string name="backup_data_removed">تمت إزالة كافة البيانات.</string>
     <string name="shared_string_progress">تقدم</string>
-    <string name="backup_do_not_have_any">ليس لديك أي نسخة احتياطية عبر الإنترنت بعد.</string>
-    <string name="backup_dont_have_any_descr">جدول النسخ الاحتياطي التلقائي ولا تفقد البيانات أبدا.</string>
+    <string name="backup_do_not_have_any">ليس لديك أي نسخة احتياطية على الإنترنت حتى بعد</string>
+    <string name="backup_dont_have_any_descr">قم بإعداد نسخة احتياطية تلقائية حتى لا تقلق بشأن فقدان البيانات.</string>
     <string name="backup_welcome_back">مرحبا بعودتك!</string>
-    <string name="backup_welcome_back_descr">استعد البيانات على هذا الجهاز باستخدام النسخ الاحتياطية الموجودة، أو انسخ البيانات الاحتياطية إلى سحابة OsmAnd.</string>
+    <string name="backup_welcome_back_descr">قم باستعادة البيانات الموجودة على هذا الجهاز باستخدام OsmAnd Cloud.</string>
     <string name="backup_setup">إنشاء نسخة احتياطية</string>
     <string name="backup_restore_now">استعادة الآن</string>
     <string name="attribute">ميزة</string>
@@ -4376,7 +4376,7 @@
     <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا.</string>
     <string name="shared_string_files">الملفات</string>
     <string name="travel_route_types">أنواع المسار</string>
-    <string name="sample_wikivoyage">مثال عن Wikivoyage</string>
+    <string name="sample_wikivoyage">مثال عن ويكي الرحلات</string>
     <string name="shared_string_mini">مصغرة</string>
     <string name="horseback_riding">ركوب الخيل</string>
     <string name="routing_attr_only_permitted_ways_name">الطرق المسموحة بها علنا</string>
@@ -4480,7 +4480,7 @@
     <string name="folder_access_denied">الإذن مطلوب للوصول إلى المجلد المحدد.</string>
     <string name="copying_completed">تم النسخ</string>
     <string name="shared_string_copy_to">نسخ إلى</string>
-    <string name="skip_confirmation">نعم، تخطي</string>
+    <string name="skip_confirmation">نعم، تخط</string>
     <string name="shared_storage">التخزين المشترك</string>
     <string name="shared_string_migration">الترحيل</string>
     <string name="icon_group_education">التعليم</string>
@@ -4676,7 +4676,7 @@
     <string name="mapillary_widget_desc">ويدجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
     <string name="current_time_widget_desc">ويدجت عرض الوقت الحالي من جهازك.</string>
     <string name="battery_widget_desc">ويدجت عرض مستوى بطارية جهازك.</string>
-    <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية التي يكتشفها الجهاز ويستخدمها في تلك اللحظة.</string>
+    <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية المستخدمة في هذه اللحظة.</string>
     <string name="altitude_widget_desc">ويدجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
     <string name="time_to_go_desc">الوقت بالدقائق أو الساعات المتوقعة للوصول إلى وجهتك.</string>
     <string name="arrival_time_widget_desc">وقت الوصول إلى وجهتك.</string>
@@ -4698,7 +4698,7 @@
     <string name="app_mode_mountain_bicycle">دراجة جبلية</string>
     <string name="av_def_action_choose">تحت الطلب</string>
     <string name="elevation_profile_widget_desc">ويدجت عرض ملف تعريف الارتفاع والمنحدر للمسار الحالي.</string>
-    <string name="bearing_secondary_desc">يمكنك تغيير تنسيق البيانات المعروضة في: %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">يمكنك تغيير تنسيق البيانات المستخدمة في: %1$s – %2$s – %3$s.</string>
     <string name="parking_widget_desc">ويدجت عرض المسافة من مركز الشاشة إلى مكان وقوف السيارات.</string>
     <string name="av_notes_choose_action_widget_desc">اختر إجراء.</string>
     <string name="radius_rules_widget_desc">تساعد أداة مسطرة نصف القطر على تحديد نصف القطر حول النقطة المحددة على الخريطة من خلال عرض دوائر القياس على الخريطة.</string>
@@ -4710,7 +4710,7 @@
     <string name="navigation_points_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
     <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
     <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
-    <string name="routing_attr_avoid_4wd_only_description">تجنب الطرق المناسبة لمركبات الدفع الرباعي فقط</string>
+    <string name="routing_attr_avoid_4wd_only_description">تجنب طرق مركبات الدفع الرباعي</string>
     <string name="colour_of_circles">لون الدوائر</string>
     <string name="compass_on_circles">دوائر البوصلة</string>
     <string name="distance_circles">دوائر المسافة</string>
@@ -4753,15 +4753,15 @@
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
     <string name="routing_attr_motor_type_name">محرك السيارة</string>
-    <string name="routing_attr_motor_type_petrol_name">بنزين</string>
+    <string name="routing_attr_motor_type_petrol_name">البنزين</string>
     <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
     <string name="routing_attr_motor_type_electric_name">كهربائي</string>
     <string name="routing_attr_motor_type_gas_name">الغاز الطبيعي المضغوط</string>
     <string name="routing_attr_motor_type_hybrid_name">هجين</string>
     <string name="routing_attr_motor_type_description">حدد نوع الوقود المستخدم من قبل محرك سيارتك ، لحساب انبعاثات CO2.</string>
     <string name="kg">كلم</string>
-    <string name="routing_attr_motor_type_diesel_name">ديزل</string>
-    <string name="co2_mission">ثاني أكسيد الكربون</string>
+    <string name="routing_attr_motor_type_diesel_name">الديزل</string>
+    <string name="co2_mission">انبعاث CO2</string>
     <string name="switch_widget_mode_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
     <string name="side_marker_eta">الوقت المقدر للوصول</string>
     <string name="goods_delivery_desc_4">إذا كان وزن سيارتك أكثر من 3.5 طن، فأنت بحاجة إلى استخدام وضع الشاحنة.</string>
@@ -4808,16 +4808,14 @@
     <string name="compass_visible_if_map_rotated_desc">يختفي مع تنشيط الشمال</string>
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
-    <string name="rendering_attr_depthContourWidth_name">عرض عمق الخطوط المحيطية</string>
     <string name="compass_always_visible">مرئي دائما</string>
     <string name="compass_click_desc">اضغط على البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
-    <string name="accessibility_2d_view_off">عرض 2.5D مغلق</string>
-    <string name="accessibility_2d_view_on">عرض 2.5D مفعل</string>
+    <string name="accessibility_2d_view_off">إيقاف عرض 3D</string>
+    <string name="accessibility_2d_view_on">تفعيل عرض 3D</string>
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
     <string name="rendering_attr_depthContourColorScheme_description">نظام ألوان عمق خطوط الخطوط المحيطية</string>
-    <string name="rendering_attr_depthContourColorScheme_name">نظام ألوان عمق الخطوط المحيطية</string>
     <string name="auto_25_chars_route_roundabout_kr">خذ %1$d مخرجا واحتفظ باليمين</string>
     <string name="auto_backup_title">النسخ الاحتياطي التلقائي</string>
     <string name="duplacate_widget_added_snackbar">تتم إضافة الويدجت بعد ذلك في القائمة.</string>
@@ -4831,21 +4829,20 @@
     <string name="true_bearing_wdiget_desc">الزاوية بين الشمال الحقيقي ونقطة الهدف التي تم تعيينها من موقعك.</string>
     <string name="relative_bearing_widget_desc">يوضح الزاوية بين اتجاه الحركة إلى الأمام والنقطة المستهدفة.</string>
     <string name="connect_with_straight_line">الاتصال بخط مستقيم</string>
-    <string name="attach_roads_descr">تقريب مسارك بمسار باستخدام الخريطة غير المتصلة بالإنترنت. سيوفر هذا قيم الارتفاع المصححة وتفاصيل الطريق والمنعطفات المستخدمة أثناء التنقل.</string>
+    <string name="attach_roads_descr">تقريب مسارك إلى الطرق المسموح بها للتوجيه بين النقاط وربط تعليمات الانعطاف الدقيقة وخصائص المسار.</string>
     <string name="without_profiles_changing">دون تغيير البروفايلات</string>
     <string name="shared_string_only_missing">المفقود فقط</string>
     <string name="attach_roads_warning">يمكنك إرفاق المسارات المسجلة على الطريق فقط.</string>
     <string name="download_tiles">تنزيل الطبقات</string>
     <string name="average_speed_skip_stops_desc">سيتم حساب السرعة الأقل من %1$s وتؤثر على متوسط السرعة.</string>
-    <string name="attach_to_roads_banner_desc">قم بإرفاق مسارك بالطرق ، للحصول على تعليمات ملاحة مفصلة.</string>
     <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
     <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
-    <string name="display_position">عرض الموقف</string>
+    <string name="display_position">تنسيق الموضع</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
-    <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائها على الخريطة.</string>
+    <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
     <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
@@ -4858,12 +4855,12 @@
     <string name="map_widget_camera_tilt">إمالة الكاميرا</string>
     <string name="map_widget_zoom_level_desc">تعرض الأداة مستوى تكبير/تصغير الخريطة الحالي.</string>
     <string name="map_widget_zoom_level">مستوى التكبير/التصغير</string>
-    <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى السطح.</string>
+    <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى الحامل.</string>
     <string name="developer_widgets">أدوات المطور</string>
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
-    <string name="shared_string_2_5_d_view">2.5 D عرض</string>
+    <string name="shared_string_2_5_d_view">عرض 3D</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
@@ -4871,7 +4868,7 @@
     <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
-    <string name="ant_missing_dependency_descr">لم يتم العثور على الخدمة المطلوبة \"%1$s\".
+    <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
 \nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
     <string name="ant_missing_dependency">التابع مفقود</string>
@@ -4887,10 +4884,219 @@
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
     <string name="map_widget_ant_heart_rate">معدل نبضات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>
-    <string name="ant_widgets">ويدجت مستشعر ANT+</string>
+    <string name="external_sensor_widgets">ويدجت مستشعر ANT+</string>
     <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
-    <string name="ant_heart_rate_write_gpx_desc">كتابة معدل نبضات القلب للمسار</string>
+    <string name="ant_heart_rate_write_gpx_desc">تضمين معدل نبضات القلب للمسار</string>
     <string name="nautical_depth_points">نقاط العمق البحري</string>
     <string name="worldwide_maps">خرائط عالمية</string>
     <string name="depth_contours">ملامح العمق</string>
+    <string name="current_location_widget">الإحداثيات: الموقع الحالي</string>
+    <string name="external_sensors_plugin_name">مجسات خارجية</string>
+    <string name="external_sensors_plugin_description">مراقبة معدل ضربات القلب وسرعة الدراجة وقوة الدراجة والإيقاع. تتطلب توصيل الجهاز بأجهزة الاستشعار المعنية عبر مستشعر بروتوكول الشبكة الشخصية اللاسلكية ANT +.</string>
+    <string name="map_widget_altitude_map_center">الارتفاع: مركز الخريطة</string>
+    <string name="map_widget_altitude_map_center_desc">إظهارالارتفاع فوق مستوى سطح البحر لمركز الخريطة الحالي.</string>
+    <string name="terms_of_service_desc">من خلال تنزيل الخرائط ، فإنك توافق على %1$s و %2$s.</string>
+    <string name="map_widget_target_distance">المسافة من الكاميرا إلى الهدف</string>
+    <string name="simulate_location_by_gpx">محاكاة الموقع بواسطة GPX</string>
+    <string name="location_simulation_cutoff">محاكاة تخطي الأمتار الأولى</string>
+    <string name="map_widget_rendering_fps_desc">يوضح مدى سرعة إظهار الخريطة وعناصر الخريطة وتحديثها (معبرًا عنها في الإطارات في الثانية أو FPS).</string>
+    <string name="favorites_backup">النسخ الاحتياطي للمفضلة</string>
+    <string name="purchases_feature_desc_cross_buy">استخدم ميزات اشتراكك على منصات مختلفة (Android / iOS / Web) دون أي تكلفة إضافية.</string>
+    <string name="map_center_widget">الإحداثيات: مركز الخرائط</string>
+    <string name="map_widget_altitude_current_location">الارتفاع: الموقع الحالي</string>
+    <string name="map_widget_altitude_current_location_desc">يظهر الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
+    <string name="map_widget_altitude_desc">عرض ارتفاع الموقع الجغرافي الحالي أو ارتفاع مركز الخريطة الحالي</string>
+    <string name="map_widget_rendering_fps">معدل إطارأداء الخريطة</string>
+    <string name="location_simulation_speedup">تسريع المحاكاة</string>
+    <string name="send_uuid_preference_desc">يستخدم UUID العشوائي لتنزيل الخرائط غير المتصلة بالإنترنت من خوادم أوسماند لمراقبة الاستخدام العادل لموارد الخادم والتنبؤ باستخدام حركة المرور وإنشاء تقارير خرائط شهرية مجهولة المصدر.</string>
+    <string name="send_uuid_preference">إرسال معرف مستخدم وحيد(UUID)</string>
+    <string name="shared_string_identifiers">معرفات</string>
+    <string name="shared_string_terms_of_use">شروط الاستخدام</string>
+    <string name="shared_string_cross_buy">شراء عبر</string>
+    <string name="release_4_3">• طريقة عرض الخرائط بشكل أسرع ، مع عرض 3D
+\n
+\n • حركة سلسة لتغييرات الموقع أثناء الحركة
+\n
+\n • ويدجت جديد مع إحداثيات مركز الخريطة
+\n
+\n • تمت إضافة خيار حجم النص \"مسافة بالنقر\"
+\n
+\n • إضافة خيار ويدجت \"علامة الخريطة\" لتغيير سلوك النقر
+\n
+\n • خيار \"وضع العرض\" ثابت
+\n
+\n • GPX: تم إضافة دعم لعلامات \"link\" و \"cmt\" و \"desc\" وأي ملحقات مخصصة
+\n
+\n • إعادة تنظيم قائمة \"الخرائط البحرية\"
+\n
+\n • دعم إضافي لأجهزة الاستشعار ANT +
+\n
+\n • خيار مضاف لتعطيل UUID
+\n
+\n• توقعات السرعة الافتراضية القابلة للتعديل للمشي المعتمد على الارتفاع
+\n
+\n• إخراج الصوت الثابت وسلوك شريط تمرير الصوت
+\n
+\n</string>
+    <string name="external_sensors_support">دعم المستشعرات الخارجية</string>
+    <string name="speak_gps_signal_status">الإعلان عن فقدان إشارة GPS واستعادتها</string>
+    <string name="speak_route_recalculation">الإعلام عن إعادة حساب المسار</string>
+    <string name="purchases_feature_desc_external_sensors">عرض وتسجيل البيانات من أجهزة الاستشعار الخارجية: سرعة الدراجة وقوة الدراجة والإيقاع ومعدل ضربات القلب.</string>
+    <string name="show_map_symbols">إظهار رموز الخريطة</string>
+    <string name="show_map_symbols_desc">النص وعلامات الطرق وغيرها.</string>
+    <string name="show_borders_of_downloaded_maps">إظهار حدود الخرائط التي تم تنزيلها</string>
+    <string name="shared_string_contours">خط كنتور</string>
+    <string name="shared_string_layers">الطبقات</string>
+    <string name="empty_screen_weather_contours">قم بالتشغيل لعرض معالم الطقس على الخريطة.</string>
+    <string name="empty_screen_weather_pressure_layer">قم بالتشغيل لعرض طبقة الضغط على الخريطة.</string>
+    <string name="empty_screen_weather_clouds_layer">قم بالتشغيل لعرض طبقة التغطية السحابية على الخريطة.</string>
+    <string name="empty_screen_weather_wind_layer">قم بالتشغيل لعرض طبقة الرياح على الخريطة.</string>
+    <string name="empty_screen_weather_precipitation_layer">قم بالتشغيل لعرض طبقة هطول الأمطار على الخريطة.</string>
+    <string name="empty_screen_weather_temperature_layer">قم بالتشغيل لعرض طبقة درجة الحرارة على الخريطة.</string>
+    <string name="empty_screen_view_selected_weather_data">قم بالتشغيل لعرض بيانات الطقس المحددة على الخريطة.</string>
+    <string name="weather_precip_in">في</string>
+    <string name="weather_precip_mm">مليمتر</string>
+    <string name="weather_precip_inches">بوصة</string>
+    <string name="weather_precip_milimeters">مليمترات</string>
+    <string name="weather_wind_kn">كيلوطن</string>
+    <string name="weather_pressure_hpa">هيكتو</string>
+    <string name="weather_pressure_inhg">بوصة من الزئبق</string>
+    <string name="weather_pressure_mmhg">ملم زئبق</string>
+    <string name="weather_pressure_hectopascals">هيكتوباسكال</string>
+    <string name="weather_pressure_inches_of_mercury">بوصة من الزئبق</string>
+    <string name="weather_pressure_millimeters_of_mercury">ملليمترات من الزئبق</string>
+    <string name="weather_prefs_descr">توقعات على مدار 24 ساعة و 7 أيام، توقعات كل 3 ساعات</string>
+    <string name="weather_temperature_celsius">درجة مئوية</string>
+    <string name="weather_temperature_fahrenheit">فهرنهايت</string>
+    <string name="rendering_engine_failed">تعطل عرض خريطة أوسماند مؤخرا.</string>
+    <string name="share_crash_log">مشاركة سجل الأعطال</string>
+    <string name="dismiss_changes_descr">سيتم رفض كافة التغييرات.</string>
+    <string name="dismiss_changes">هل تريد رفض التغييرات؟</string>
+    <string name="restart_now">أعد التشغيل الآن</string>
+    <string name="map_rendering_engine_v2">عرض 3D</string>
+    <string name="map_rendering_engine">طريقة عرض الخريطة</string>
+    <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات الاداة الخاصة بالطقس.</string>
+    <string name="weather_plugin_description">يوفر البرنامج الطقس المساعد
+\n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
+\n- ويدجت يعتمد على الموقع
+\n- خطوط متساوية لدرجة الحرارة / الضغط
+\n
+\nيتم توفير بيانات الطقس من قبل GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+    <string name="map_settings_weather_temp">درجة الحرارة</string>
+    <string name="weather_online_cache">توقعات متصلة بالانترنت</string>
+    <string name="shared_string_weather">الطقس</string>
+    <string name="explore_weather_forecast">استكشف توقعات الطقس.</string>
+    <string name="weather_wind_kmh">كم / ساعة</string>
+    <string name="weather_wind_ms">م / ث</string>
+    <string name="weather_wind_meters_per_second">متر / ثانية</string>
+    <string name="weather_offline_forecast">توقعات غير متصلة بالإنترنت</string>
+    <string name="weather_wind_miles_per_hour">ميل ساعة</string>
+    <string name="map_settings_weather_air_pressure">الضغط الجوي</string>
+    <string name="map_settings_weather_precip">تساقط</string>
+    <string name="measurement_units">وحدات القياس</string>
+    <string name="map_settings_weather_wind">الرياح</string>
+    <string name="map_settings_weather_cloud">سحاب</string>
+    <string name="weather_wind_kilimeters_per_hour">كم/س</string>
+    <string name="wind_widget_desc">يعرض سرعة الرياح لمركز الخريطة الحالي.</string>
+    <string name="weather_wind_mph">ميل في الساعة</string>
+    <string name="weather_wind_knots">عقدة</string>
+    <string name="weather_widget_group_desc">مجموعة من الأدوات تعرض معلومات الطقس المختلفة.</string>
+    <string name="action_not_supported_with_map_style">هذا الإجراء غير مدعوم من قبل نمط الخريطة المحدد.</string>
+    <string name="air_pressure_widget_desc">يعرض ضغط الهواء لمركز الخريطة الحالي.</string>
+    <string name="precipitation_widget_desc">يعرض هطول الأمطار لمركز الخريطة الحالي.</string>
+    <string name="clouds_widget_desc">يظهر التغطية السحابية لمركز الخريطة الحالي.</string>
+    <string name="temperature_widget_desc">يعرض درجة الحرارة لمركز الخريطة الحالي.</string>
+    <string name="map_rendering_engine_v1">عرض عادي</string>
+    <string name="rendering_engine_failed_descr">أوسماند قام بالتغيير إلى عرض الخريطة العادي . يمكنك العودة إلى مشغل العرض (3D)\" في الإعدادات.
+\n
+\nالرجاء دعم التحسينات من خلال توفير سجل الأخطاء الخاص بك.</string>
+    <string name="map_rendering_engine_descr">عرض 3D هو نمط عرض خرائط أسرع . كان عرض الإصدار العادي هو الافتراضي قبل نسخة أوسماند 4.3 ، ولا يزال هو الأنسب للأجهزة القديمة.</string>
+    <string name="rendering_attr_depthContourWidth_name">عرض الخط</string>
+    <string name="shared_string_next_sunset">غروب الشمس القادم</string>
+    <string name="shared_string_next_sunrise">شروق الشمس القادم</string>
+    <string name="shared_string_time_left">الوقت المتبقي</string>
+    <string name="shared_string_sunset">غروب الشمس</string>
+    <string name="shared_string_sunrise">شروق الشمس</string>
+    <string name="map_widget_group_sunrise_sunset">شروق الشمس، غروب الشمس</string>
+    <string name="depth_contour_lines">خطوط كنتورالعمق</string>
+    <string name="turn_on_nautical_depth_description">قم بالتشغيل لعرض بيانات العمق البحري على الخريطة.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">نظام لون الخط</string>
+    <string name="switch_mode_by_tapping_on_widget">قم بتبديل الوضع من خلال النقر على الأداة.</string>
+    <string name="map_widget_sunrise_desc">يعرض وقت شروق الشمس التالي أو الوقت المتبقي حتى شروق الشمس.</string>
+    <string name="map_widget_sunset_desc">يعرض وقت غروب الشمس التالي أو الوقت المتبقي حتى غروب الشمس.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">تعرض هذه الأدوات معلومات حول شروق الشمس وغروبها التاليين.</string>
+    <string name="storage_migration_fragment_close_descr">تم النسخ لـ %1$s ٪٪. إذا توقفت الآن ، فقد لا يعمل التطبيق بشكل صحيح.</string>
+    <string name="quick_action_precipitation_layer">تبديل لإظهار أو إخفاء طبقة هطول الأمطار على الخريطة.</string>
+    <string name="quick_action_wind_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرياح على الخريطة.</string>
+    <string name="quick_action_cloud_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرياح على الخريطة.</string>
+    <string name="quick_action_air_pressure_layer">مفتاح تبديل لإظهار أو إخفاء طبقة ضغط الهواء على الخريطة.</string>
+    <string name="temperature_layer">طبقة درجة الحرارة</string>
+    <string name="pressure_layer">طبقة الضغط</string>
+    <string name="quick_action_temperature_layer">مفتاح تبديل لإظهار أو إخفاء طبقة درجة الحرارة على الخريطة.</string>
+    <string name="wind_layer">طبقة الرياح</string>
+    <string name="cloud_layer">طبقة السحب</string>
+    <string name="precipitation_layer">طبقة هطول الأمطار</string>
+    <string name="rendering_attr_showMtbScale_description">عرض المسارات وفقا لمقياس MTB.</string>
+    <string name="rendering_attr_showMtbScaleUphill_name">عرض مقياس MTB صعودا</string>
+    <string name="rendering_attr_showMtbScaleUphill_description">عرض المسارات وفقا لمقياس MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">عرض مقياس MTB</string>
+    <string name="mtb_scale">مقياس MTB</string>
+    <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>
+    <string name="mtb_segment_classification">تصنيف القطاعات</string>
+    <string name="mtb_imba">الرابطة الدولية لركوب الدراجات الجبلية</string>
+    <string name="open_weather_action_description">يسمح لك بفتح شاشة تحتوي على معلومات مفصلة عن الطقس.</string>
+    <string name="shared_string_open">فتح</string>
+    <string name="open_weather_action">الطقس المفتوح</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">تساوي هطول الأمطار</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">هبات الرياح المتساوية</string>
+    <string name="release_4_4_pre">• هنا ستكون سلاسل للإصدار 4.4</string>
+    <string name="rendering_attr_weatherCloudContours_name">تساوي السحب</string>
+    <string name="shared_string_purchased_on">تم الشراء في</string>
+    <string name="shared_string_expires">انتهاء</string>
+    <string name="av_audio_format_bottom_sheet_descr">حدد تنسيق إخراج الصوت. تنسيق نوع الملف للصوت هو 3GPP (.3gp).</string>
+    <string name="backup_error_failed_to_fetch_remote_items">فشل في جلب قائمة الملفات من الخادم.</string>
+    <string name="checking_progress">التحقق…</string>
+    <string name="cloud_sync_progress">مزامنه... %1$s</string>
+    <string name="new_file">ملف جديد</string>
+    <string name="cloud_changes">التغييرات السحابية</string>
+    <string name="shared_string_uploaded">تم الرفع</string>
+    <string name="shared_string_cloud">سحابة</string>
+    <string name="modified_file">ملف معدل</string>
+    <string name="deleted_file">ملف محذوف</string>
+    <string name="sync_now">المزامنة الآن</string>
+    <string name="local_changes">التغييرات المحلية</string>
+    <string name="upload_change">تحميل التغيير</string>
+    <string name="cloud_version_will_be_removed">ستتم إزالة النسخة السحابية</string>
+    <string name="cloud_changes_will_be_dismissed">سيتم رفض التغييرات السحابية</string>
+    <string name="local_file_will_be_restored">سيتم استعادة الملف المحلي</string>
+    <string name="local_changes_will_be_dismissed">سيتم رفض التغييرات المحلية</string>
+    <string name="cloud_conflicts">المشاكل</string>
+    <string name="cloud_conflict">نزاع</string>
+    <string name="upload_all">رفع الكل</string>
+    <string name="cloud_recent_changes">التغييرات</string>
+    <string name="cloud_all_changes_uploaded">جميع التغييرات المحملة</string>
+    <string name="cloud_all_changes_downloaded">جميع التغييرات المحملة</string>
+    <string name="cloud_all_changes_uploaded_descr">تتم مزامنة جميع التغييرات التي تم إجراؤها على هذا الجهاز مع أوسماند كلاود.</string>
+    <string name="cloud_no_conflicts">لا يوجد نزاع</string>
+    <string name="download_cloud_version">تنزيل الإصدار السحابي</string>
+    <string name="shared_string_do_not_exist">غير موجود</string>
+    <string name="choose_what_to_sync">اختيار ما تريد مزامنته</string>
+    <string name="shared_string_modified">تم التعديل</string>
+    <string name="res_unknown">غير معروف</string>
+    <string name="shared_string_unsynced">غير متزامن</string>
+    <string name="check_for_updates">التحقق من وجود تحديثات</string>
+    <string name="changes">التغييرات %1$s</string>
+    <string name="last_sync">آخر مزامنة</string>
+    <string name="import_export">استيراد/تصدير</string>
+    <string name="export_to_file">تصدير إلى ملف</string>
+    <string name="si_nm_ft">ميل بحري/قدم</string>
+    <string name="si_nm_mt">ميل بحري/متر</string>
+    <string name="set_up_backup">إنشاء نسخة احتياطية</string>
+    <string name="x_axis">محور-س</string>
+    <string name="y_axis">محور-ص</string>
+    <string name="share_link">مشاركة الرابط</string>
+    <string name="share_as_file">مشاركة كملف</string>
+    <string name="skip_download">تخط التنزيل</string>
+    <string name="value_downloaded_of_mb">جاري تنزيل %1$.1f/%2$.1f ميغابايت</string>
+    <string name="determine_location">اسمح لنا بتحديد موقعك</string>
 </resources>

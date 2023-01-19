@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -180,24 +180,23 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	private void finish() {
 		if (processFileName()) {
 			dismiss();
-		} else if (openTrack) {
-			openTrack = false;
 		}
 	}
 
 	private boolean processFileName() {
-		File dest = null;
 		if (Algorithms.isBlank(newGpxName)) {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return false;
 		}
 		if (!initialGpxName.equalsIgnoreCase(newGpxName)) {
-			dest = FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
+			File dest = FileUtils.renameGpxFile(app, savedGpxFile, newGpxName + IndexConstants.GPX_FILE_EXT, true, null);
 			if (dest != null) {
 				savedGpxFile = dest;
+			} else {
+				return false;
 			}
 		}
-		return dest != null;
+		return savedGpxFile != null;
 	}
 
 	@Override

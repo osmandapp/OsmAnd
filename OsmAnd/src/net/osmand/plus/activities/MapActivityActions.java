@@ -1,86 +1,5 @@
 package net.osmand.plus.activities;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesFragment;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
-import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
-import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
-import net.osmand.plus.profiles.data.ProfileDataObject;
-import net.osmand.plus.profiles.data.RoutingDataUtils;
-import net.osmand.plus.profiles.data.RoutingProfilesHolder;
-import net.osmand.plus.routepreparationmenu.WaypointsFragment;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.MapActions;
-import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
-import net.osmand.plus.widgets.ctxmenu.ViewCreator;
-import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -118,6 +37,88 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_S
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_NORMAL_PROFILE_TAG;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
+import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.StartPlanRouteBottomSheet;
+import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
+import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.RoutingDataUtils;
+import net.osmand.plus.profiles.data.RoutingProfilesHolder;
+import net.osmand.plus.routepreparationmenu.WaypointsFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.MapActions;
+import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapActivityActions extends MapActions {
@@ -378,8 +379,8 @@ public class MapActivityActions extends MapActions {
 
 	@Override
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
-											   PointDescription fromName, boolean useIntermediatePointsByDefault,
-											   boolean showMenu, int menuState) {
+	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
+	                                           boolean showMenu, int menuState) {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName, useIntermediatePointsByDefault,
 				showMenu, menuState);
 		if (showMenu) {
@@ -457,7 +458,7 @@ public class MapActivityActions extends MapActions {
 				.setTag(PROFILES_CONTROL_BUTTON_TAG)
 				.setTitle(getString(R.string.shared_string_manage))
 				.setListener((uiAdapter, view, item, isChecked) -> {
-					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MAIN_SETTINGS);
 					return true;
 				}));
 
@@ -520,7 +521,7 @@ public class MapActivityActions extends MapActions {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_backup_restore_open");
 					if (app.getBackupHelper().isRegistered()) {
-						BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
 					} else {
 						BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 					}
@@ -709,7 +710,7 @@ public class MapActivityActions extends MapActions {
 				.setTitle(getString(R.string.configure_profile))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					mapActivity.dismissSettingsScreens();
-					BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE);
+					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE);
 					return true;
 				}));
 	}

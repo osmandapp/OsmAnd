@@ -85,8 +85,16 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
+
+		OsmandApplication app = getApplication();
 		MapRendererView mapRenderer = getMapRenderer();
+
 		if (mapRenderer != null) {
+			if (app.getResourceManager().isReloadingIndexes()) {
+				clearAudioVideoNotes();
+				return;
+			}
+
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			List<Recording> objects =  recs.getAllObjects();
 			int objectsCount = objects.size() - (contextMenuLayer.isInChangeMarkerPositionMode()
@@ -108,7 +116,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			}
 		} else {
 			if (tileBox.getZoom() >= startZoom) {
-				OsmandApplication app = getApplication();
 				float textScale = getTextScale();
 				float iconSize = getIconSize(app);
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
@@ -161,8 +168,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		clearAudioVideoNotes();
 	}
 
@@ -182,7 +189,10 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 				}
 				return new PointDescription(rec.getSearchHistoryType(), recName);
 			} else {
-				plugin.deleteRecording(rec, true);
+				boolean reloadingIndexes = getApplication().getResourceManager().isReloadingIndexes();
+				if (!reloadingIndexes) {
+					plugin.deleteRecording(rec, true);
+				}
 			}
 		}
 		return null;

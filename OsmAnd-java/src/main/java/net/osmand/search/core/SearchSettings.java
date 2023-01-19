@@ -4,6 +4,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.MapUtils;
@@ -36,6 +37,8 @@ public class SearchSettings {
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
+	private QuadRect searchBBox31;
+	private boolean addressSearch;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 
 	public SearchSettings(SearchSettings s) {
@@ -46,6 +49,8 @@ public class SearchSettings {
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
+			this.searchBBox31 = s.searchBBox31;
+			this.addressSearch = s.addressSearch;
 			this.regions = s.regions;
 			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
@@ -107,6 +112,22 @@ public class SearchSettings {
 		double distance = this.originalLocation == null ? -1 : MapUtils.getDistance(l, this.originalLocation);
 		s.regionLang = (distance > MIN_DISTANCE_REGION_LANG_RECALC || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
 		s.originalLocation = l;
+		return s;
+	}
+	
+	public QuadRect getSearchBBox31() {
+		return searchBBox31;
+	}
+	
+	public SearchSettings setSearchBBox31(QuadRect searchBBox31) {
+		SearchSettings s = new SearchSettings(this);
+		s.searchBBox31 = searchBBox31;
+		return s;
+	}
+	
+	public SearchSettings setAddressSearch(boolean addressSearch) {
+		SearchSettings s = new SearchSettings(this);
+		s.addressSearch = addressSearch;
 		return s;
 	}
 

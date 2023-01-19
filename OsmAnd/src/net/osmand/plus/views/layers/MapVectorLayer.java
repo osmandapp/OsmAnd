@@ -31,6 +31,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private boolean visible;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
+	private boolean cachedLabelsVisible;
 
 	public MapVectorLayer(@NonNull Context context) {
 		super(context);
@@ -38,8 +39,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	protected void cleanupResources() {
+		super.cleanupResources();
 		resetLayerProvider();
 	}
 
@@ -55,6 +56,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
+		cachedLabelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
 	}
 
 	public boolean isVectorDataVisible() {
@@ -98,6 +100,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.resetRasterAndSymbolsProvider();
+			mapContext.resetHeightmapProvider();
 		}
 	}
 
@@ -131,10 +134,14 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean alphaChanged = cachedAlpha != alpha;
 		cachedAlpha = alpha;
 
+		boolean labelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
+		boolean labelsVisibleChanged = cachedLabelsVisible != labelsVisible;
+		this.cachedLabelsVisible = labelsVisible;
+
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			// opengl renderer
-			if (visibleChanged) {
+			if (visibleChanged || mapRendererChanged) {
 				if (visible) {
 					recreateLayerProvider();
 				} else {
@@ -144,7 +151,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			if (visible) {
 				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 			}
-			if ((alphaChanged || visibleChanged) && visible) {
+			if ((alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
 				updateLayerProviderAlpha(alpha);
 			}
 
@@ -156,6 +163,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				float zoomMagnifier = getMapDensity();
 				mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 			}
+			mapRendererChanged = false;
 			mapActivityInvalidated = false;
 		} else if (visible) {
 			if (!view.isZooming()) {

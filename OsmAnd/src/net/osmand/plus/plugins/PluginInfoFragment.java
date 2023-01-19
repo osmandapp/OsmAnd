@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -33,20 +32,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener {
+public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStateListener, InAppPurchaseListener {
 
 	private static final Log log = PlatformUtil.getLog(PluginInfoFragment.class);
 
@@ -89,19 +87,16 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		mainView = themedInflater.inflate(R.layout.plugin, container, false);
-		AndroidUtils.addStatusBarPadding21v(context, mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		TextView toolbarTitle = mainView.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(plugin.getName());
 
 		ImageView closeButton = mainView.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Activity activity = getMyActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		closeButton.setOnClickListener(v -> {
+			Activity activity = getMyActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 		UiUtilities.rotateImageByLayoutDirection(closeButton);
@@ -125,33 +120,27 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			AndroidUtils.removeLinkUnderline(descriptionView);
 		}
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
-		settingsButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
-					if (settingsScreenType != null) {
-						Bundle args = new Bundle();
-						args.putBoolean(PLUGIN_INFO, true);
-						BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args, null);
-					}
+		settingsButton.setOnClickListener(view -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
+				if (settingsScreenType != null) {
+					Bundle args = new Bundle();
+					args.putBoolean(PLUGIN_INFO, true);
+					BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args, null);
 				}
 			}
 		});
 
 		CompoundButton enableDisableButton = mainView.findViewById(R.id.plugin_enable_disable);
-		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isEnabled() != isChecked) {
-					if (PluginsHelper.enablePlugin(getActivity(), app, plugin, isChecked)) {
-						updateState();
+		enableDisableButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			if (plugin.isEnabled() != isChecked) {
+				if (PluginsHelper.enablePlugin(getActivity(), app, plugin, isChecked)) {
+					updateState();
 
-						Fragment target = getTargetFragment();
-						if (target instanceof PluginStateListener) {
-							((PluginStateListener) target).onPluginStateChanged(plugin);
-						}
+					Fragment target = getTargetFragment();
+					if (target instanceof PluginStateListener) {
+						((PluginStateListener) target).onPluginStateChanged(plugin);
 					}
 				}
 			}
@@ -161,17 +150,12 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		getButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				OsmAndFeature feature = null;
-				if (plugin instanceof SRTMPlugin) {
-					feature = OsmAndFeature.TERRAIN;
-				} else if (plugin instanceof WikipediaPlugin) {
-					feature = OsmAndFeature.WIKIPEDIA;
+				OsmAndFeature feature = plugin.getOsmAndFeature();
+				if (feature != null) {
+					ChoosePlanFragment.showInstance(activity, feature);
 				} else {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
 					AndroidUtils.startActivityIfSafe(activity, intent);
-				}
-				if (feature != null) {
-					ChoosePlanFragment.showInstance(activity, feature);
 				}
 			}
 		});
@@ -224,11 +208,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			installHeader.setVisibility(View.VISIBLE);
 			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);
 			Drawable worldGlobeDrawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_world_globe_dark);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				worldGlobeIcon.setBackground(worldGlobeDrawable);
-			} else {
-				worldGlobeIcon.setBackground(worldGlobeDrawable);
-			}
+			worldGlobeIcon.setBackground(worldGlobeDrawable);
 		} else {
 			getButton.setVisibility(View.GONE);
 
@@ -260,21 +240,23 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
-	                                   @NonNull OsmandPlugin plugin) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target, @NonNull OsmandPlugin plugin) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 
 			PluginInfoFragment fragment = new PluginInfoFragment();
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
-			fragmentManager.beginTransaction()
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-			return true;
 		}
-		return false;
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updateState();
 	}
 }

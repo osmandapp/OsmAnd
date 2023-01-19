@@ -160,6 +160,9 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			return new QListMapTiledCollectionPoint();
+		}
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		QuadRect latLonBounds = tb.getLatLonBounds();
 		List<T> tilePoints = points.getObjects(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right);
@@ -168,7 +171,7 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		}
 		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
 		for (T point : tilePoints) {
-			interface_MapTiledCollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
+			CollectionPoint collectionPoint = new CollectionPoint(ctx, point, textScale, density);
 			res.add(collectionPoint.instantiateProxy(true));
 			collectionPoint.swigReleaseOwnership();
 		}

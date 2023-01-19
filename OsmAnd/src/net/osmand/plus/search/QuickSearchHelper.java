@@ -1,12 +1,13 @@
 package net.osmand.plus.search;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -15,6 +16,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -32,8 +34,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -59,8 +61,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -133,6 +133,9 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public void refreshCustomPoiFilters() {
+		if (!app.getPoiTypes().isInit()) {
+			return;
+		}
 		core.clearCustomSearchPoiFilters();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters(false)) {
@@ -233,8 +236,12 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.preferredZoom = 17;
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
-					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
+					} else {
+						NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+								StringMatcherMode.CHECK_CONTAINS);
+						if (matcher.matches(sr.localeName)) {
+							resultMatcher.publish(sr);
+						}
 					}
 				}
 			}
@@ -345,9 +352,12 @@ public class QuickSearchHelper implements ResourceListener {
 				if (phrase.getFullSearchPhrase().length() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
-				} else if (phrase.getFullNameStringMatcher().matches(sr.localeName)) {
-					phrase.countUnknownWordsMatchMainResult(sr);
-					resultMatcher.publish(sr);
+				} else {
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
+					if (matcher.matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
 				}
 			}
 			return true;
@@ -551,8 +561,12 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.preferredZoom = 17;
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
-				} else if (phrase.getFirstUnknownNameStringMatcher().matches(searchResult.localeName)) {
-					resultMatcher.publish(searchResult);
+				} else {
+					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
+							StringMatcherMode.CHECK_CONTAINS);
+					if (matcher.matches(searchResult.localeName)) {
+						resultMatcher.publish(searchResult);
+					}
 				}
 			}
 			return true;

@@ -1,5 +1,8 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +10,7 @@ import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
+import android.os.Build;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,10 +25,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
-import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,7 +47,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@SuppressLint({ "NewApi", "DefaultLocale" })
+@SuppressLint({"NewApi", "DefaultLocale"})
 public class DownloadIndexesThread {
 
 	private static final Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
@@ -62,11 +66,11 @@ public class DownloadIndexesThread {
 	private static final int THREAD_ID = 10103;
 
 	public interface DownloadEvents {
-		
+
 		void onUpdatedIndexesList();
-		
+
 		void downloadInProgress();
-		
+
 		void downloadHasFinished();
 	}
 
@@ -95,7 +99,8 @@ public class DownloadIndexesThread {
 
 	@UiThread
 	protected void downloadHasStarted() {
-		if (app.getDownloadService() == null) {
+		boolean shouldStartService = Build.VERSION.SDK_INT < Build.VERSION_CODES.S || uiActivity != null;
+		if (app.getDownloadService() == null && shouldStartService) {
 			app.startDownloadService();
 		}
 		updateNotification();
@@ -134,7 +139,8 @@ public class DownloadIndexesThread {
 		if (lang != null) {
 			String lng = lang.split(",")[0];
 			String setTts = null;
-			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
+			Set<String> supportedTtsLanguages = getSupportedTtsByLanguages(app).keySet();
+			for (String s : supportedTtsLanguages) {
 				if (lng.startsWith(s)) {
 					setTts = s + IndexConstants.VOICE_PROVIDER_SUFFIX;
 					break;
@@ -147,7 +153,7 @@ public class DownloadIndexesThread {
 			}
 		}
 	}
-	
+
 	@UiThread
 	protected void onUpdatedIndexesList() {
 		if (uiActivity != null) {
@@ -158,11 +164,11 @@ public class DownloadIndexesThread {
 
 	// PUBLIC API
 
-	
+
 	public DownloadResources getIndexes() {
 		return indexes;
 	}
-	
+
 	public List<IndexItem> getCurrentDownloadingItems() {
 		List<IndexItem> res = new ArrayList<>();
 		IndexItem ii = currentDownloadingItem;
@@ -178,10 +184,10 @@ public class DownloadIndexesThread {
 	}
 
 	public boolean isDownloading(IndexItem item) {
-		if(item == currentDownloadingItem) {
+		if (item == currentDownloadingItem) {
 			return true;
 		}
-		for(IndexItem ii : indexItemDownloading) {
+		for (IndexItem ii : indexItemDownloading) {
 			if (ii == item) {
 				return true;
 			}
@@ -220,7 +226,7 @@ public class DownloadIndexesThread {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
 			if (checkRunning(false)) {
 				return;
-			}	
+			}
 		}
 		if (uiActivity instanceof Activity) {
 			app.logEvent("download_files");
@@ -309,7 +315,7 @@ public class DownloadIndexesThread {
 				&& !indexes.isDownloadedFromInternet
 				&& !indexes.downloadFromInternetFailed;
 	}
-	
+
 	/// PRIVATE IMPL
 
 	private boolean checkRunning(boolean silent) {
@@ -328,7 +334,7 @@ public class DownloadIndexesThread {
 	}
 
 	private void updateNotification() {
-		app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.DOWNLOAD);
+		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
 	}
 
 	private class ReloadIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, DownloadResources> {
@@ -379,7 +385,7 @@ public class DownloadIndexesThread {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.map_version_changed_info);
 			builder.setPositiveButton(R.string.button_upgrade_osmandplus, (dialog, which) -> {
-				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus"));
+				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME));
 				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 				AndroidUtils.startActivityIfSafe(ctx, intent);
 			});
@@ -420,7 +426,7 @@ public class DownloadIndexesThread {
 					String name = item.getBasename();
 					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
-					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
+					HistoryDownloadEntry entry = new HistoryDownloadEntry(name, count);
 					if (count == 1) {
 						dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 					} else {
@@ -541,12 +547,12 @@ public class DownloadIndexesThread {
 			}
 			return true;
 		}
-		
+
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
 			boolean exceed = !Version.isPaidVersion(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
-			if(exceed) {
+			if (exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
 						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
 				publishProgress(breakDownloadMessage);
@@ -566,6 +572,7 @@ public class DownloadIndexesThread {
 			List<String> warnings = new ArrayList<>();
 			manager.indexVoiceFiles(this);
 			manager.indexFontFiles(this);
+			manager.indexWeatherFiles(this);
 			if (vectorMapsToReindex) {
 				warnings = manager.indexingMaps(this, filesToReindex);
 			}

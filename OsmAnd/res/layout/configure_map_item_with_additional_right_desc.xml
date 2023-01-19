@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/setting_profile_item_height">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		tools:src="@drawable/ic_action_coordinates_latitude" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/setting_profile_item_height">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginVertical="@dimen/content_padding"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/title"
+						style="@style/TitleStyle"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="2"
+						android:textColor="?android:textColorPrimary"
+						tools:text="Title" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/secondary_description"
+						style="@style/SmallDescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?android:textColorSecondary"
+						tools:text="off" />
+
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/description"
+					style="@style/DescStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorSecondary"
+					tools:text="Description" />
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+		<View
+			android:id="@+id/divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+	</LinearLayout>
+
+</LinearLayout>

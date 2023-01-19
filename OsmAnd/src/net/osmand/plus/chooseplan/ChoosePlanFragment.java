@@ -30,7 +30,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.settings.fragments.PurchasesFragment;
+import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -306,8 +306,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 		String description = null;
 		InAppPurchase purchase = purchaseHelper.getFullVersion();
-		if (purchase != null && purchase.getPurchaseInfo() != null) {
-			long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
+		long purchaseTime = purchase != null ? purchase.getPurchaseTime() : 0;
+		if (purchaseTime > 0) {
 			description = DATE_FORMAT.format(purchaseTime);
 		}
 		tvDescription.setText(description);

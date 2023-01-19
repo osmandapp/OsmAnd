@@ -17,7 +17,9 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeDistanceDevice;
@@ -33,9 +35,9 @@ import net.osmand.plus.plugins.antplus.widgets.BikeSpeedTextWidget;
 import net.osmand.plus.plugins.antplus.widgets.HeartRateTextWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 
@@ -67,13 +69,23 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	}
 
 	@Override
+	public boolean isPaid() {
+		return true;
+	}
+
+	@Override
+	public boolean isLocked() {
+		return !Version.isPaidVersion(app);
+	}
+
+	@Override
 	public CharSequence getDescription() {
 		return app.getString(R.string.external_sensors_plugin_description);
 	}
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_laptop;
+		return R.drawable.ic_action_external_sensor;
 	}
 
 	@Override
@@ -81,9 +93,16 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 		return app.getUIUtilities().getIcon(R.drawable.osmand_development);
 	}
 
+	@Nullable
 	@Override
 	public SettingsScreenType getSettingsScreenType() {
 		return SettingsScreenType.ANT_PLUS_SETTINGS;
+	}
+
+	@Nullable
+	@Override
+	public OsmAndFeature getOsmAndFeature() {
+		return OsmAndFeature.EXTERNAL_SENSORS_SUPPORT;
 	}
 
 	@Nullable
@@ -96,7 +115,6 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 		return devicesHelper.getDevices();
 	}
 
-	@Nullable
 	@Override
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		for (CommonDevice<?> device : devicesHelper.getDevices()) {
@@ -135,22 +153,22 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
 		MapWidget heartRateWidget = createMapWidgetForParams(mapActivity, ANT_HEART_RATE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(heartRateWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));
 
 		MapWidget bikePowerWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_POWER);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikePowerWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikePowerWidget));
 
 		MapWidget bikeCadenceWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_CADENCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeCadenceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeCadenceWidget));
 
 		MapWidget bikeSpeedWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_SPEED);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeSpeedWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeSpeedWidget));
 
 		MapWidget bikeDistanceWidget = createMapWidgetForParams(mapActivity, ANT_BICYCLE_DISTANCE);
-		widgetsInfos.add(widgetRegistry.createWidgetInfo(bikeDistanceWidget, appMode));
+		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
 	}
 
 	@Override

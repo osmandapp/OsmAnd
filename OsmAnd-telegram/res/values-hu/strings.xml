@@ -164,11 +164,11 @@
     <string name="si_min_km">perc/km</string>
     <string name="si_min_m">perc/mérföld</string>
     <string name="si_nm_h">Tengeri mérföld per óra (csomó)</string>
-    <string name="si_mi_feet">Mérföld/láb</string>
-    <string name="si_mi_yard">Mérföld/yard</string>
-    <string name="si_km_m">Kilométer/méter</string>
+    <string name="si_mi_feet">Mérföld, láb</string>
+    <string name="si_mi_yard">Mérföld, yard</string>
+    <string name="si_km_m">Kilométer, méter</string>
     <string name="si_nm">Tengeri mérföld</string>
-    <string name="si_mi_meters">Mérföld/méter</string>
+    <string name="si_mi_meters">Mérföld, méter</string>
     <string name="shared_string_hour_short">óra</string>
     <string name="shared_string_minute_short">perc</string>
     <string name="shared_string_second_short">másodperc</string>

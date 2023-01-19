@@ -285,7 +285,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 
 		if (isSingleFragment()) {
-			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -349,7 +349,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 			{
 				OsmandApplication app = requireMyApplication();
 				scroller = new OverScroller(app);
-				ViewConfiguration configuration = ViewConfiguration.get(app);
+				ViewConfiguration configuration = ViewConfiguration.get(requireContext());
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
 				maximumVelocity = configuration.getScaledMaximumFlingVelocity();
 			}

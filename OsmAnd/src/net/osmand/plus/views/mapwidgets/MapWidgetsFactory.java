@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.views.mapwidgets.widgets.AltitudeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
@@ -31,8 +32,10 @@ import net.osmand.plus.views.mapwidgets.widgets.NextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RadiusRulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
 
 public class MapWidgetsFactory {
@@ -51,6 +54,13 @@ public class MapWidgetsFactory {
 	}
 
 	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType) {
+		if (isWidgetCreationAllowed(widgetType)) {
+			return createMapWidgetImpl(customId, widgetType);
+		}
+		return null;
+	}
+
+	private MapWidget createMapWidgetImpl(@Nullable String customId, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
 			case NEXT_TURN:
 				return new NextTurnWidget(mapActivity, false);
@@ -108,10 +118,24 @@ public class MapWidgetsFactory {
 				return new BatteryWidget(mapActivity);
 			case RADIUS_RULER:
 				return new RadiusRulerWidget(mapActivity);
+			case SUNRISE:
+				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, true);
+				return new SunriseSunsetWidget(mapActivity, sunriseState);
+			case SUNSET:
+				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
+				return new SunriseSunsetWidget(mapActivity, sunsetState);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:
 				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}
+	}
+
+	private boolean isWidgetCreationAllowed(@NonNull WidgetType widgetType) {
+		if (widgetType == ALTITUDE_MAP_CENTER) {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			return plugin != null && plugin.isHeightmapEnabled();
+		}
+		return true;
 	}
 }

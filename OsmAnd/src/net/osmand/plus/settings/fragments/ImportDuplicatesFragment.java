@@ -123,7 +123,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 				}
 			}
 		});
-		AndroidUtils.addStatusBarPadding21v(app, root);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 
 		return root;
 	}

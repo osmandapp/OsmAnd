@@ -1,6 +1,6 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
@@ -60,10 +60,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -91,7 +91,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.ui.GpxInfo;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
@@ -1486,7 +1486,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						deleteAndSaveSegment(segment);
 					} else if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(fragmentActivity);
-						builder.setMessage(R.string.recording_delete_confirm);
+						builder.setMessage(getString(R.string.delete_confirmation_msg, gpxItem.trackSegmentName));
 						builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> deleteAndSaveSegment(segment));
 						builder.setNegativeButton(R.string.shared_string_cancel, null);
 						builder.show();
@@ -1731,6 +1731,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalysis(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
+			routeKey = routeKey == null ? RouteKey.fromGpx(selectedGpxFile.getGpxFile().getRouteKeyTags()) : routeKey;
 			fragment.setRouteKey(routeKey);
 
 			if (params != null) {

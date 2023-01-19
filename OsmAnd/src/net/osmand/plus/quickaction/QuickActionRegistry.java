@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
@@ -38,7 +39,6 @@ import net.osmand.plus.quickaction.actions.ShowHideCurrentLocationWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHideMapCenterWidgetAction;
-import net.osmand.plus.quickaction.actions.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
@@ -76,6 +76,8 @@ public class QuickActionRegistry {
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS);
+	public static final QuickActionType TYPE_OPEN = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
 
 
 	private final OsmandSettings settings;
@@ -301,6 +303,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_NAVIGATION, result);
 		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
 		filterQuickActions(TYPE_SETTINGS, result);
+		filterQuickActions(TYPE_OPEN, result);
 		return result;
 	}
 

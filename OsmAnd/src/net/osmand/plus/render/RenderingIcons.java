@@ -37,11 +37,12 @@ public class RenderingIcons {
 	private static final Map<String, Drawable> iconsDrawable = new LinkedHashMap<>();
 
 	private static Bitmap cacheBmp;
+	private static final String defaultPoiIconName = "craft_default";
 
 	public static boolean containsSmallIcon(String s) {
 		return smallIcons.containsKey(s);
 	}
-	
+
 	public static boolean containsBigIcon(String s) {
 		return bigIcons.containsKey(s);
 	}
@@ -76,7 +77,7 @@ public class RenderingIcons {
 		bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
-	
+
 	public static byte[] getIconRawData(Context ctx, String s) {
 		Integer resId = shaderIcons.get(s);
 		if (resId == null) {
@@ -118,11 +119,39 @@ public class RenderingIcons {
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
 		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (poiType == null) {
-			return null;
-		} else if (containsSmallIcon(poiType.getIconKeyName())) {
+		return poiType != null ? getIconNameForPoiType(poiType) : null;
+	}
+
+	@Nullable
+	public static String getIconNameForPoiType(@NonNull PoiType poiType) {
+		if (containsSmallIcon(poiType.getIconKeyName())) {
 			return poiType.getIconKeyName();
 		} else if (containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
+		}
+
+		String iconName = null;
+		if (poiType.getParentType() != null) {
+			iconName = poiType.getParentType().getIconKeyName();
+		} else if (poiType.getFilter() != null) {
+			iconName = poiType.getFilter().getIconKeyName();
+		} else if (poiType.getCategory() != null) {
+			iconName = poiType.getCategory().getIconKeyName();
+		}
+		if (containsSmallIcon(iconName)) {
+			return iconName;
+		}
+		return defaultPoiIconName;
+	}
+
+	@Nullable
+	public static String getBigIconNameForAmenity(@NonNull Amenity amenity) {
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (poiType == null) {
+			return null;
+		} else if (containsBigIcon(poiType.getIconKeyName())) {
+			return poiType.getIconKeyName();
+		} else if (containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
 			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
 		}
 		return null;
@@ -132,7 +161,7 @@ public class RenderingIcons {
 		Integer i = bigIcons.get(s);
 		return i == null ? 0 : i;
 	}
-	
+
 	public static Drawable getBigIcon(Context ctx, String s) {
 		Integer resId = bigIcons.get(s);
 		if (resId != null) {

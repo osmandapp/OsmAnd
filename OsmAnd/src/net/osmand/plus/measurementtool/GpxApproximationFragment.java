@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -142,9 +142,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			@Override
 			public void updateProgress(GpxApproximator approximator, int progress) {
 				if (isResumed() && approximator == GpxApproximationFragment.this.gpxApproximator) {
-					float partSize = 100f / locationsHolders.size();
-					float p = resultMap.size() * partSize + (progress / 100f) * partSize;
-					GpxApproximationFragment.this.updateProgress((int) p);
+					GpxApproximationFragment.this.updateProgress(progress);
 				}
 			}
 

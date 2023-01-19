@@ -100,13 +100,26 @@ public abstract class SettingsHelper {
 	}
 
 	public interface ImportListener {
-		void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work);
 
-		void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value);
+		default void onImportProgressUpdate(int value, int uploadedKb) {
 
-		void onImportItemFinished(@NonNull String type, @NonNull String fileName);
+		}
 
-		void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
+		default void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+		}
+
+		default void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+		}
+
+		default void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+		}
+
+		default void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+
+		}
 	}
 
 	public interface CheckDuplicatesListener {
@@ -134,11 +147,11 @@ public abstract class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportSettingsType> settingsTypes,
-	                                                   boolean export, boolean addEmptyItems) {
+	                                                   boolean export, boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsType, List<?>> typesMap = new HashMap<>();
 		typesMap.putAll(getSettingsItems(settingsTypes, addEmptyItems));
 		typesMap.putAll(getMyPlacesItems(settingsTypes, addEmptyItems));
-		typesMap.putAll(getResourcesItems(settingsTypes, addEmptyItems));
+		typesMap.putAll(getResourcesItems(settingsTypes, addEmptyItems, offlineBackup));
 		return getFilteredSettingsItems(typesMap, settingsTypes, Collections.emptyList(), export);
 	}
 
@@ -156,12 +169,12 @@ public abstract class SettingsHelper {
 		return filteredSettingsItems;
 	}
 
-	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems) {
+	public Map<ExportSettingsCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
 
 		Map<ExportSettingsType, List<?>> settingsItems = getSettingsItems(null, addEmptyItems);
 		Map<ExportSettingsType, List<?>> myPlacesItems = getMyPlacesItems(null, addEmptyItems);
-		Map<ExportSettingsType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems);
+		Map<ExportSettingsType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems, offlineBackup);
 
 		if (!settingsItems.isEmpty() || addEmptyItems) {
 			dataList.put(ExportSettingsCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
@@ -306,7 +319,7 @@ public abstract class SettingsHelper {
 	}
 
 	private Map<ExportSettingsType, List<?>> getResourcesItems(@Nullable List<ExportSettingsType> settingsTypes,
-	                                                           boolean addEmptyItems) {
+	                                                           boolean addEmptyItems, boolean offlineBackup) {
 		Map<ExportSettingsType, List<?>> resourcesItems = new LinkedHashMap<>();
 
 		Map<String, File> externalRenderers = settingsTypes == null || settingsTypes.contains(ExportSettingsType.CUSTOM_RENDER_STYLE)
@@ -387,7 +400,7 @@ public abstract class SettingsHelper {
 		if (!files.isEmpty() || addEmptyItems) {
 			resourcesItems.put(ExportSettingsType.VOICE, files);
 		}
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class)) {
+		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class) && offlineBackup) {
 			files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
 			if (!files.isEmpty() || addEmptyItems) {
 				resourcesItems.put(ExportSettingsType.FAVORITES_BACKUP, files);
@@ -531,8 +544,32 @@ public abstract class SettingsHelper {
 			result.add(new OsmEditsSettingsItem(app, baseItem, osmEditsPointList));
 		}
 		if (!favoriteGroups.isEmpty()) {
-			FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
-			result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+			if (export) {
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					result.add(new FavoritesSettingsItem(app, null, Collections.singletonList(favoriteGroup)));
+				}
+			} else {
+				boolean hasGroupFile = false;
+				for (FavoriteGroup favoriteGroup : favoriteGroups) {
+					FavoritesSettingsItem favSettingsItem = null;
+					for (SettingsItem item : settingsItems) {
+						String fileName = item.getFileName();
+						if (item instanceof FavoritesSettingsItem
+								&& app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName().equals(fileName)) {
+							favSettingsItem = (FavoritesSettingsItem) item;
+							break;
+						}
+					}
+					if (favSettingsItem != null) {
+						result.add(new FavoritesSettingsItem(app, favSettingsItem, Collections.singletonList(favoriteGroup)));
+						hasGroupFile = true;
+					}
+				}
+				if (!hasGroupFile) {
+					FavoritesSettingsItem baseItem = getBaseItem(SettingsItemType.FAVOURITES, FavoritesSettingsItem.class, settingsItems);
+					result.add(new FavoritesSettingsItem(app, baseItem, favoriteGroups));
+				}
+			}
 		}
 		if (!markersGroups.isEmpty()) {
 			List<MapMarker> mapMarkers = new ArrayList<>();

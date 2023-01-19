@@ -25,8 +25,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
@@ -830,8 +830,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		VectorLineBuilder outlineBuilder = new VectorLineBuilder();
 		VectorDouble outlinePattern = new VectorDouble();
-		outlinePattern.add(75 / getMapDensity());
-		outlinePattern.add(55 / getMapDensity());
+		outlinePattern.add(75.0d / (double) getMapDensity());
+		outlinePattern.add(55.0d / (double) getMapDensity());
 		FColorARGB outlineColor = new FColorARGB(1.0f, 1.0f, 1.0f, 1.0f);
 		double strokeWidth = 20.0d;
 		int outlineId = isLast ? 20 : 10;

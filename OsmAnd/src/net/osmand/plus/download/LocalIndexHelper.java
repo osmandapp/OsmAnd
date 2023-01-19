@@ -39,12 +39,11 @@ public class LocalIndexHelper {
 		this.app = app;
 	}
 
-
 	public String getInstalledDate(File f) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(getInstalationDate(f));
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(getInstallationDate(f));
 	}
 
-	public Date getInstalationDate(File f) {
+	public Date getInstallationDate(File f) {
 		long t = f.lastModified();
 		return new Date(t);
 	}
@@ -196,9 +195,10 @@ public class LocalIndexHelper {
 		return list;
 	}
 
+	@NonNull
 	public List<LocalIndexInfo> getLocalIndexData(boolean readFiles, boolean needDescription,
-												  @Nullable AbstractLoadLocalIndexTask loadTask,
-												  LocalIndexType... indexTypes) {
+	                                              @Nullable AbstractLoadLocalIndexTask loadTask,
+	                                              LocalIndexType... indexTypes) {
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		Map<String, File> indexFiles = app.getResourceManager().getIndexFiles();
 		List<LocalIndexInfo> result = new ArrayList<>();
@@ -272,8 +272,8 @@ public class LocalIndexHelper {
 	}
 
 	public void loadVoiceData(@NonNull File voiceDir, @NonNull List<LocalIndexInfo> result, boolean backup,
-							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if ((readFiles || backup) && voiceDir.canRead()) {
 			File[] files = listFilesSorted(voiceDir);
 			if (files.length > 0) {
@@ -294,7 +294,7 @@ public class LocalIndexHelper {
 	}
 
 	private void loadVoiceDataImpl(@NonNull File[] voiceFiles, @NonNull List<LocalIndexInfo> result,
-								   boolean backup, boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                               boolean backup, boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		List<File> voiceFilesList = new ArrayList<>(Arrays.asList(voiceFiles));
 		//First list TTS files, they are preferred
 		Iterator<File> it = voiceFilesList.iterator();
@@ -314,14 +314,14 @@ public class LocalIndexHelper {
 	}
 
 	private void loadFontData(@NonNull File fontPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
 		loadDataImpl(fontPath, LocalIndexType.FONT_DATA, IndexConstants.FONT_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadTilesData(@NonNull File tilesPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-							   boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                           boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile()) {
@@ -355,36 +355,36 @@ public class LocalIndexHelper {
 	}
 
 	private void loadSrtmData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
 		loadDataImpl(dataPath, LocalIndexType.SRTM_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadWikiData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
 		loadDataImpl(dataPath, LocalIndexType.WIKI_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadTravelData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-								boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-								@Nullable AbstractLoadLocalIndexTask loadTask) {
+	                            boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                            @Nullable AbstractLoadLocalIndexTask loadTask) {
 		loadDataImpl(dataPath, LocalIndexType.TRAVEL_DATA, IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadDepthData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
-	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                           boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+	                           @Nullable AbstractLoadLocalIndexTask loadTask) {
 		loadDataImpl(dataPath, LocalIndexType.DEPTH_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadObfData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
-							 boolean readFiles, boolean needDescription, @NonNull Map<String, String> indexFileNames,
-							 @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                         boolean readFiles, boolean needDescription, @NonNull Map<String, String> indexFileNames,
+	                         @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if ((readFiles || backup) && dataPath.canRead()) {
 			for (File mapFile : listFilesSorted(dataPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
@@ -402,8 +402,8 @@ public class LocalIndexHelper {
 	}
 
 	private void loadObfDataImpl(@NonNull File dataFile, @NonNull List<LocalIndexInfo> result, boolean backup,
-								 boolean needDescription, @NonNull Map<String, String> indexFileNames,
-								 @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                             boolean needDescription, @NonNull Map<String, String> indexFileNames,
+	                             @Nullable AbstractLoadLocalIndexTask loadTask) {
 		String fileName = dataFile.getName();
 		LocalIndexType lt = LocalIndexType.MAP_DATA;
 		if (SrtmDownloadItem.isSrtmFile(fileName)) {
@@ -427,8 +427,8 @@ public class LocalIndexHelper {
 	}
 
 	private void loadDataImpl(@NonNull File dataPath, @NonNull LocalIndexType indexType, @NonNull String fileExt,
-							  boolean backup, boolean readFiles, boolean needDescription, @NonNull List<LocalIndexInfo> result,
-							  @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                          boolean backup, boolean readFiles, boolean needDescription, @NonNull List<LocalIndexInfo> result,
+	                          @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if ((readFiles || backup) && dataPath.canRead()) {
 			for (File file : listFilesSorted(dataPath)) {
 				if (file.isFile() && file.getName().endsWith(fileExt)) {
@@ -446,8 +446,8 @@ public class LocalIndexHelper {
 	}
 
 	private void loadLocalData(@NonNull File file, @NonNull LocalIndexType indexType,
-							   @NonNull List<LocalIndexInfo> result, boolean backup, boolean needDescription,
-							   @Nullable AbstractLoadLocalIndexTask loadTask) {
+	                           @NonNull List<LocalIndexInfo> result, boolean backup, boolean needDescription,
+	                           @Nullable AbstractLoadLocalIndexTask loadTask) {
 		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup, app);
 		if (needDescription) {
 			updateDescription(info);

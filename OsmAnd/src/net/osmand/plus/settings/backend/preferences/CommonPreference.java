@@ -40,6 +40,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		settings.registerInternalPreference(id, this);
 	}
 
+	@Override
+	public final String getId() {
+		return id;
+	}
+
 	// Methods to possibly override
 	public abstract T getValue(Object prefs, T defaultValue);
 
@@ -182,8 +187,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (global) {
 			return get();
 		}
-		OsmandPlugin relatedPlugin = getRelatedPlugin();
-		if (relatedPlugin != null && !relatedPlugin.isActive()) {
+		OsmandPlugin plugin = getRelatedPlugin();
+		if (plugin != null && plugin.disablePreferences()) {
 			return getProfileDefaultValue(mode);
 		}
 		T defaultV = getProfileDefaultValue(mode);
@@ -192,8 +197,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public T get() {
-		OsmandPlugin relatedPlugin = getRelatedPlugin();
-		if (relatedPlugin != null && !relatedPlugin.isActive()) {
+		OsmandPlugin plugin = getRelatedPlugin();
+		if (plugin != null && plugin.disablePreferences()) {
 			return getDefaultValue();
 		}
 		if (cache && cachedValue != null && cachedPreference == getPreferences()) {
@@ -202,11 +207,6 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		cachedPreference = getPreferences();
 		cachedValue = getValue(cachedPreference, getDefaultValue());
 		return cachedValue;
-	}
-
-	@Override
-	public final String getId() {
-		return id;
 	}
 
 	@Override

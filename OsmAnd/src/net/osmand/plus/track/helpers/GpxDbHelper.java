@@ -6,13 +6,16 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 
 import java.io.File;
 import java.util.List;
@@ -24,6 +27,7 @@ public class GpxDbHelper {
 
 	private static final int MAX_ITEMS_CACHE_SIZE = 5000;
 
+	private final OsmandApplication app;
 	private final GPXDatabase db;
 	private final Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
 
@@ -40,6 +44,7 @@ public class GpxDbHelper {
 	}
 
 	public GpxDbHelper(@NonNull OsmandApplication app) {
+		this.app = app;
 		db = new GPXDatabase(app);
 	}
 
@@ -47,6 +52,18 @@ public class GpxDbHelper {
 		List<GpxDataItem> items = getItems();
 		for (GpxDataItem item : items) {
 			putToCache(item);
+		}
+		loadNewGpxItems();
+	}
+
+	private void loadNewGpxItems() {
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> gpxInfos = GpxUiHelper.getGPXFiles(gpxDir, true);
+		for (GPXInfo gpxInfo : gpxInfos) {
+			File file = new File(gpxInfo.getFileName());
+			if (file.exists() && !file.isDirectory() && !hasItem(file)) {
+				add(new GpxDataItem(file));
+			}
 		}
 	}
 
@@ -169,16 +186,20 @@ public class GpxDbHelper {
 		return db.getItems();
 	}
 
-	public GpxDataItem getItem(File file) {
+	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
 	}
 
-	public GpxDataItem getItem(File file, @Nullable GpxDataItemCallback callback) {
+	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
 		if (isAnalyseNeeded(file, item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
+	}
+
+	public boolean hasItem(@NonNull File file) {
+		return itemsCache.containsKey(file);
 	}
 
 	public List<GpxDataItem> getSplitItems() {

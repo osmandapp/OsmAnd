@@ -304,7 +304,6 @@
     <string name="backup_deleting_all_data">Se brišat site podatoci…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavuvanje\?
 \nḰe treba povtorno da se najavite za da napravite rezervna kopija ili da gi vratite podatocite.</string>
-    <string name="approximate_route_description">Prikačete ja maršrutata do patištata na kartata za da gi dobiete site svioci i dopolnitelni podatoci, kako što se maznost, tipovi patišta itn.</string>
     <string name="contour_lines_hillshades_slope">Konturni linii, ridovi, nagib</string>
     <string name="backup_error_no_valid_subscription">Nema validna pretplata</string>
     <string name="backup_error_user_is_not_registered">Nitu eden korisnik ne e registriran so taa adresa na e-pošta</string>
@@ -767,7 +766,6 @@
     <string name="whole_track">Celosna trasa</string>
     <string name="route_between_points_desc">Izberete kako da gi povrzete točkite so prava linija ili presmetajte ja rutata meǵu niv kako što e navedeno podolu.</string>
     <string name="threshold_distance">Pocetok na rastojanieto</string>
-    <string name="route_between_points_warning_desc">Sledno, prikačete ja vašata pateka do najbliskiot dozvolen pat so eden od vašite navigaciski profili za da ja koristite ovaa opcija.</string>
     <string name="next_segment">Sleden segment</string>
     <string name="reverse_route">Obratna ruta</string>
     <string name="overwrite_track">Stavete novo ime na zapisot</string>
@@ -2240,8 +2238,6 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">Nema ledeni patišta ili fordovi</string>
     <string name="order_by">Podredeno po:</string>
     <string name="marker_show_distance_descr">Izberete kako da označite rastojanie i nasoka do markerite na kartata na kartata:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Prag na orientacija na kartata</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Izberete brzina na orientacija na prefrluvanje od „Nasoka na dviženje“ vo „Nasoka na kompas“ podolu.</string>
     <string name="all_markers_moved_to_history">Site markeri na kartata se premesteni vo istorijata</string>
     <string name="marker_moved_to_history">Obeležuvačot na kartata e premesten vo istorijata</string>
     <string name="shared_string_list">Spisok</string>
@@ -2298,7 +2294,7 @@
     <string name="do_not_show_startup_messages_desc">Ne prikažuvajte popusti za aplikacii i poraki za specijalni lokalni nastani.</string>
     <string name="parking_options">Parking opcii</string>
     <string name="full_version_thanks">Vi blagodarime što ja kupivte platenata verzija na OsmAnd.</string>
-    <string name="driving_region_automatic">Automatik</string>
+    <string name="shared_string_automatic">Automatik</string>
     <string name="do_not_send_anonymous_app_usage">Ne ispraḱajte anonimna statistika za koristenje na aplikacii</string>
     <string name="do_not_show_startup_messages">Ne prikažuvaj start up poraki</string>
     <string name="shared_string_gpx_track">Sledenje</string>
@@ -4762,9 +4758,7 @@
     <string name="compass_always_visible">Sekogas vidlivo</string>
     <string name="compass_click_desc">Doprete na kompasot za da go prefrlite rezimot na orientacija na kartata.</string>
     <string name="compass_desc">Go pokazuva pravecot kon sever.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourColorScheme_description">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourWidth_description">Sirina na konturnata linija na dlabocina</string>
-    <string name="rendering_attr_depthContourWidth_name">Sirina na konturnata linija na dlabocina</string>
     <string name="next_turn_widget_desc">Vidzetot prikazuva informacii za vaseto sledno vrtenje so slika na manevriranje i rastojanie do nego.</string>
 </resources>

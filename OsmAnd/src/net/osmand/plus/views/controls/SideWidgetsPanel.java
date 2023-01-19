@@ -9,6 +9,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -26,8 +27,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class SideWidgetsPanel extends FrameLayout {
 
@@ -37,14 +43,14 @@ public class SideWidgetsPanel extends FrameLayout {
 	private final Paint borderPaint = new Paint();
 	private final Path borderPath = new Path();
 
-	private boolean nightMode;
-	private boolean rightSide;
-	private boolean selfShowAllowed;
-	private boolean selfVisibilityChanging;
+	protected boolean nightMode;
+	protected boolean rightSide;
+	protected boolean selfShowAllowed;
+	protected boolean selfVisibilityChanging;
 
-	private ViewPager2 viewPager;
-	private WidgetsPagerAdapter adapter;
-	private LinearLayout dots;
+	protected ViewPager2 viewPager;
+	protected WidgetsPagerAdapter adapter;
+	protected LinearLayout dots;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -95,7 +101,7 @@ public class SideWidgetsPanel extends FrameLayout {
 	private void setupChildren() {
 		dots = findViewById(R.id.dots);
 
-		adapter = new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
+		adapter = createWidgetsPagerAdapter();
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
 				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.container);
@@ -113,6 +119,10 @@ public class SideWidgetsPanel extends FrameLayout {
 			}
 		});
 		updateDots();
+	}
+
+	protected WidgetsPagerAdapter createWidgetsPagerAdapter() {
+		return new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT);
 	}
 
 	private void updateDots() {
@@ -151,14 +161,14 @@ public class SideWidgetsPanel extends FrameLayout {
 		}
 	}
 
-	public void update() {
+	public void update(DrawSettings drawSettings) {
 		adapter.updateIfNeeded();
-		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
-		boolean show = adapter.getItemCount() > 0 && selfShowAllowed;
+		boolean show = hasVisibleWidgets() && selfShowAllowed;
 		selfVisibilityChanging = true;
 		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
 			selfShowAllowed = true;
 		}
+		WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, null);
 		selfVisibilityChanging = false;
 		updateDots();
 	}
@@ -173,7 +183,26 @@ public class SideWidgetsPanel extends FrameLayout {
 	@Override
 	protected void dispatchDraw(Canvas canvas) {
 		super.dispatchDraw(canvas);
-		drawBorder(canvas);
+
+		if (hasVisibleWidgets()) {
+			drawBorder(canvas);
+		}
+	}
+
+	private boolean hasVisibleWidgets() {
+		if (adapter != null) {
+			VisiblePages visiblePages = adapter.getVisiblePages();
+			List<View> views = visiblePages.getWidgetsViews(viewPager.getCurrentItem());
+			if (!Algorithms.isEmpty(views)) {
+				for (View view : views) {
+					if (view.findViewById(R.id.container).getVisibility() == VISIBLE
+							|| view.findViewById(R.id.empty_banner).getVisibility() == VISIBLE) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	private void drawBorder(@NonNull Canvas canvas) {
@@ -202,12 +231,12 @@ public class SideWidgetsPanel extends FrameLayout {
 	}
 
 	@NonNull
-	private UiUtilities getIconsCache() {
+	protected UiUtilities getIconsCache() {
 		return getMyApplication().getUIUtilities();
 	}
 
 	@NonNull
-	private OsmandApplication getMyApplication() {
+	protected OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
 	}
 }

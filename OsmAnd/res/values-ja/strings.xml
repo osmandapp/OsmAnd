@@ -465,7 +465,7 @@ POIの更新は利用できません</string>
     <string name="poi_error_unexpected_template">操作{0}実行中に予期せぬエラーが発生しました。</string>
     <string name="poi_error_io_error_template">操作{0}実行中にI/O エラーが発生しました。</string>
     <string name="poi_error_info_not_loaded">ノードに関する情報はロードされませんでした</string>
-    <string name="poi_dialog_opening_hours">オープン日時</string>
+    <string name="poi_dialog_opening_hours">営業中</string>
     <string name="poi_dialog_comment">コメント</string>
     <string name="poi_dialog_comment_default">POI 変更</string>
     <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
@@ -1524,7 +1524,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_edit">編集</string>
     <string name="shared_string_places">場所</string>
     <string name="shared_string_search">検索</string>
-    <string name="shared_string_is_open">今すぐ開く</string>
+    <string name="shared_string_is_open">営業時間内</string>
     <string name="filter_poi_hint">名前でフィルター</string>
     <string name="search_poi_category_hint">検索語句</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
@@ -1982,7 +1982,7 @@ POIの更新は利用できません</string>
     <string name="city_type_district">地区</string>
     <string name="city_type_neighbourhood">小字・丁目</string>
     <string name="map_widget_search">検索</string>
-    <string name="shared_string_is_open_24_7">年中無休</string>
+    <string name="shared_string_is_open_24_7">24時間年中無休</string>
     <string name="storage_directory_card">メモリーカード</string>
     <string name="shared_string_topbar">画面上部のバー</string>
     <string name="lang_hsb">ソルビア語</string>
@@ -2209,7 +2209,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_visible">表示</string>
     <string name="fonts_header">マップ用フォント</string>
     <string name="right_side_navigation">右側通行</string>
-    <string name="driving_region_automatic">自動判別</string>
+    <string name="shared_string_automatic">自動判別</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAndは実行中のどのメニューを開いたかの情報を収集します。ユーザーの現在地、入力した地域、閲覧情報、検索、ダウンロードなどの情報を送信することはありません。</string>
     <string name="do_not_send_anonymous_app_usage">アプリケーションの匿名使用統計情報を送信しない</string>
     <string name="do_not_show_startup_messages">起動時にメッセージを表示しない</string>
@@ -2469,8 +2469,6 @@ POIの更新は利用できません</string>
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">描画処理の省略</string>
     <string name="do_not_use_animations_descr">マップアニメーションをオフにします。</string>
-    <string name="map_orientation_change_in_accordance_with_speed">マップ向きのしきい値</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">マップの向きが「移動方向」から「方位」に切り替わる速度を選択します。</string>
     <string name="all_markers_moved_to_history">すべてのマップマーカーを履歴に移動</string>
     <string name="marker_moved_to_history">マップマーカーを履歴に移動させました</string>
     <string name="marker_moved_to_active">マップマーカーをアクティブ化させました</string>
@@ -3641,9 +3639,6 @@ POIの更新は利用できません</string>
     <string name="route_between_points_desc">地点間を直線で結ぶ方法、または地点だけを指定しその後ルートを計算する方法のどちらかを選択します。</string>
     <string name="whole_track">全経路</string>
     <string name="next_segment">次のセグメント</string>
-    <string name="route_between_points_warning_desc">このオプションを使用するには、OsmAndで経路をマップ上の道路にスナップする必要があります。
-\n
-\n次にナビゲーションプロファイルを選択して、利用予定の道路(一般道、高速道路)と、道路を追跡するおおよその距離を検出する必要があります。</string>
     <string name="threshold_distance">限界距離</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
     <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
@@ -3826,7 +3821,7 @@ POIの更新は利用できません</string>
     <string name="message_you_need_add_two_points_to_show_graphs">少なくとも2つの地点を追加する必要があります</string>
     <string name="login_open_street_map">OpenStreetMapにログイン</string>
     <string name="login_open_street_map_org">OpenStreetMap.orgにログイン</string>
-    <string name="sign_in_with_open_street_map">OpenStreetMapにOAuthログイン</string>
+    <string name="sign_in_with_open_street_map">OpenStreetMapにログイン</string>
     <string name="open_street_map_login_mode">新たな情報または変更を最初にアップロードする時に、ログインが必要となります。
 \n
 \nログインは安全なOAuth方式、またはOSMのユーザー名とパスワードによる直接方式が選択できます。</string>
@@ -4108,14 +4103,14 @@ POIの更新は利用できません</string>
     <string name="backup_no_internet_descr">インターネット接続を確認してから、再度ダウンロードしてください。</string>
     <string name="backup_pause_all">すべてを一時停止</string>
     <string name="upload_local_version">現在のバージョンをアップロード</string>
-    <string name="backup_delete_all_data_descr">OsmAndクラウド上のすべてのデータが削除されます。現在のバージョンは変更されません。</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloudのすべてのデータが削除されます。現在のバージョンは変更されません。</string>
     <string name="download_server_version">サーバー上のバージョンをダウンロード</string>
     <string name="shared_string_logout">ログアウト</string>
     <string name="backup_delete_all_data">すべてのデータを削除する</string>
-    <string name="backup_delete_all_data_warning">バージョン履歴を含め、以前にOsmAndクラウドにアップロードされたすべてのデータを削除しようとしています。
+    <string name="backup_delete_all_data_warning">バージョン履歴を含め、以前にOsmAnd Cloudにアップロードされたすべてのデータを削除しようとしています。
 \n
 \n削除されたデータを復元することはできません。</string>
-    <string name="backup_delete_old_data_descr">データの現在のバージョンがOsmAndクラウドに保存されます</string>
+    <string name="backup_delete_old_data_descr">データの現在のバージョンがOsmAnd Cloudに保存されます</string>
     <string name="backup_delete_old_data_warning">以前ロードしたデータの変更履歴を削除しようとしています。
 \n
 \nデータの現在のバージョンはサーバーに保存されますが、以前に行った変更に戻すことはできません。</string>
@@ -4126,7 +4121,7 @@ POIの更新は利用できません</string>
     <string name="select_backup_data_descr">バックアップするデータとフォルダーを選択します。</string>
     <string name="backup_restore_data_descr">オンラインバックアップを利用して、端末にデータを復元します。</string>
     <string name="backup_restore_data">データの復元</string>
-    <string name="restore_from_osmand_cloud">OsmAndクラウドから復元</string>
+    <string name="restore_from_osmand_cloud">OsmAnd Cloudから復元</string>
     <string name="choose_what_to_restore">復元したいものを選択してください。</string>
     <string name="restore_selected_data">選択したデータを復元</string>
     <string name="receiving_data_from_server">サーバーからデータを受信…</string>
@@ -4140,7 +4135,7 @@ POIの更新は利用できません</string>
     <string name="backup_promocode">プロモーションコード</string>
     <string name="send_crash_log">クラッシュログの送信</string>
     <string name="send_logcat_log">Logcatログの送信</string>
-    <string name="purchases_feature_desc_osmand_cloud">OsmAndクラウドを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
+    <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloudを入手することで、すべてのOsmAndデータをクラウド保存が可能になります。再インストール後にデータが失われることはありません。全情報を簡単にバックアップおよび復元出来ます。</string>
     <string name="unlimited_map_downloads">マップの無制限ダウンロード</string>
     <string name="wikipedia_and_wikivoyage_offline">WikipediaとWikivoyageはオフライン</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">地形マップ:等高線、陰影起伏図、傾斜</string>
@@ -4198,7 +4193,6 @@ POIの更新は利用できません</string>
     <string name="backup_error_token_is_not_valid_or_expired">無効または期限切れのトークン</string>
     <string name="backup_error_user_is_not_registered">そのメールアドレスで登録されているユーザーはいません</string>
     <string name="backup_error_no_valid_subscription">有効なサブスクリプションがありません</string>
-    <string name="approximate_route_description">マップ上の道路にルートを貼り付けると、各移動方向や平滑具合、道路種類などの追加データを得ることができます。</string>
     <string name="duration_moment_ago">すこし前</string>
     <string name="purchases_feature_desc_hourly_map_updates">より短い頻度でマップ更新が可能になります。時間ごと、日ごと、週ごとの更新。更新は変更されたエリアに対してのみ、段階的にダウンロードされます。</string>
     <string name="purchases_feature_desc_nautical">水深に関する情報を入手しましょう</string>
@@ -4225,7 +4219,7 @@ POIの更新は利用できません</string>
     <string name="backup_and_restore">バックアップ＆復元</string>
     <string name="last_backup">最終バックアップ</string>
     <string name="duration_ago">%1$s前</string>
-    <string name="osmand_cloud">OsmAndクラウド</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">データを失うことはありません。すべての情報を簡単にバックアップおよび復元できます。</string>
     <string name="local_backup_descr">ファイルを介してデータをバックアップまたは復元します。</string>
     <string name="backup_into_file">ファイルにバックアップ</string>
@@ -4238,7 +4232,7 @@ POIの更新は利用できません</string>
     <string name="verify_email_address">メールアドレスを確認します</string>
     <string name="verify_email_address_descr">ワンタイムパスワードが%1$sに送信されました。下部へ入力してください。</string>
     <string name="enter_verification_code">ワンタイムパスワードを入力してください</string>
-    <string name="cloud_email_not_registered">このメールアドレスはOsmAndクラウドに登録されていません</string>
+    <string name="cloud_email_not_registered">このメールアドレスはOsmAnd Cloudに登録されていません</string>
     <string name="cloud_email_already_registered">このメールアドレスはすでに登録されています。</string>
     <string name="resend_verification_code">再送信</string>
     <string name="verification_code_missing">確認コードを受け取りませんでした</string>
@@ -4577,4 +4571,51 @@ POIの更新は利用できません</string>
     <string name="map_widget_current_speed">現行速度</string>
     <string name="shared_string_buttons">ボタン</string>
     <string name="auto_backup_title">自動バックアップ</string>
+    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)でのルート</string>
+    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカーでのルート</string>
+    <string name="show_map_symbols">地図記号を表示</string>
+    <string name="rendering_attr_showMonorailRoutes_name">モノレールでのルート</string>
+    <string name="app_mode_mountain_bicycle">マウンテンバイク</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバスでのルート</string>
+    <string name="rendering_attr_showBusRoutes_name">バスでのルート</string>
+    <string name="map_widget_rendering_fps">マップ描画FPS</string>
+    <string name="shared_string_expires">期限切れ</string>
+    <string name="shared_string_purchased_on">購入日</string>
+    <string name="open_weather_action_description">詳細な天気情報の表示画面を開きます。</string>
+    <string name="open_weather_action">天気情報を開く</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="release_4_4_pre">• 4.4 リリース時の文字列は次のとおり</string>
+    <string name="rendering_attr_weatherCloudContours_name">雲頂高度(等値線)</string>
+    <string name="shared_string_open">開く</string>
+    <string name="mtb_imba_full">国際マウンテンバイク協会(IMBA)</string>
+    <string name="upload_change">アップロード済み</string>
+    <string name="cloud_version_will_be_removed">クラウド版は削除されます</string>
+    <string name="cloud_changes_will_be_dismissed">クラウドの変更は破棄されます</string>
+    <string name="local_file_will_be_restored">ローカルファイルが復元されます</string>
+    <string name="local_changes_will_be_dismissed">ローカルの変更は破棄されます</string>
+    <string name="backup_error_failed_to_fetch_remote_items">サーバーからファイル リストを取得できませんでした。</string>
+    <string name="choose_what_to_sync">同期するものを選択</string>
+    <string name="cloud_sync_progress">同期…%1$s</string>
+    <string name="res_unknown">不明</string>
+    <string name="av_audio_format_bottom_sheet_descr">音声の出力形式を選択します。音声のファイル形式は 3GPP (.3gp) です。</string>
+    <string name="checking_progress">チェック中…</string>
+    <string name="check_for_updates">更新を確認</string>
+    <string name="cloud_all_changes_downloaded">すべての変更点がダウンロードされました</string>
+    <string name="shared_string_modified">修正済み</string>
+    <string name="upload_all">すべてアップロード</string>
+    <string name="last_sync">最終同期</string>
+    <string name="export_to_file">ファイルにエクスポート</string>
+    <string name="shared_string_unsynced">非同期</string>
+    <string name="changes">変更 %1$s</string>
+    <string name="cloud_changes">クラウドの変更</string>
+    <string name="cloud_conflicts">競合</string>
+    <string name="cloud_all_changes_uploaded_descr">この端末で行われた変更のすべてが、OsmAnd Cloudにて同期されます。</string>
+    <string name="cloud_no_conflicts">競合データはありません</string>
+    <string name="download_cloud_version">クラウド版をダウンロード</string>
+    <string name="shared_string_do_not_exist">存在しません</string>
+    <string name="import_export">インポート/エクスポート</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">等雨量線(等降水量線)</string>
+    <string name="cloud_conflict">競合</string>
+    <string name="cloud_recent_changes">変更</string>
+    <string name="cloud_all_changes_uploaded">すべての変更点がアップロードされました</string>
 </resources>

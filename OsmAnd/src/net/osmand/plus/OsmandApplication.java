@@ -1,24 +1,27 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
+import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
+import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
+import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
@@ -34,7 +37,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
@@ -57,6 +59,7 @@ import net.osmand.plus.helpers.AnalyticsHelper;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -80,6 +83,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
@@ -101,10 +105,10 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -114,12 +118,7 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -133,7 +132,6 @@ import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
 
-	public static final String EXCEPTION_PATH = "exception.log";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	final AppInitializer appInitializer = new AppInitializer(this);
@@ -167,6 +165,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpxDisplayHelper gpxDisplayHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
+	FeedbackHelper feedbackHelper;
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
@@ -200,13 +199,14 @@ public class OsmandApplication extends MultiDexApplication {
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
+	WeatherHelper weatherHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
 	// Typeface
-	
+
 	@Override
 	public void onCreate() {
 		if (RestartActivity.isRestartProcess(this)) {
@@ -239,14 +239,14 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
-		if (appInitializer.isAppVersionChanged()) {
-			// Reset mapillary tile sources
-			File tilesPath = getAppPath(IndexConstants.TILES_INDEX_DIR);
-			File mapillaryVectorTilesPath = new File(tilesPath, TileSourceManager.getMapillaryVectorSource().getName());
-			Algorithms.removeAllFiles(mapillaryVectorTilesPath);
-			// Remove travel sqlite db files
-			removeSqliteDbTravelFiles();
-		}
+		FileUtils.removeFilesWithExtensions(getAppPath(MAPS_PATH), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(ROADS_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(LIVE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(SRTM_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(NAUTICAL_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(WIKI_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(WIKIVOYAGE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(HEIGHTMAP_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -274,7 +274,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	private void removeSqliteDbTravelFiles() {
-		File[] files = getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		File[] files = getAppPath(WIKIVOYAGE_INDEX_DIR).listFiles();
 		if (files != null) {
 			for (File file : files) {
 				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
@@ -293,7 +293,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public AppInitializer getAppInitializer() {
 		return appInitializer;
 	}
-	
+
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
 	}
@@ -315,7 +315,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public UiUtilities getUIUtilities() {
 		return iconsCache;
 	}
-	
+
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
@@ -331,11 +331,11 @@ public class OsmandApplication extends MultiDexApplication {
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
-	
+
 	public OsmAndTaskManager getTaskManager() {
 		return taskManager;
 	}
-	
+
 	public AvoidSpecificRoads getAvoidSpecificRoads() {
 		return avoidSpecificRoads;
 	}
@@ -347,7 +347,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmAndLocationProvider getLocationProvider() {
 		return locationProvider;
 	}
-	
+
 	public OsmAndAppCustomization getAppCustomization() {
 		return appCustomization;
 	}
@@ -392,6 +392,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public AnalyticsHelper getAnalyticsHelper() {
 		return analyticsHelper;
+	}
+
+	public FeedbackHelper getFeedbackHelper() {
+		return feedbackHelper;
 	}
 
 	public NotificationHelper getNotificationHelper() {
@@ -483,20 +487,18 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void checkApplicationIsBeingInitialized(AppInitializeListener listener) {
-		// start application if it was previously closed
-		startApplication();
+	public void checkApplicationIsBeingInitialized(@Nullable AppInitializeListener listener) {
 		if (listener != null) {
 			appInitializer.addListener(listener);
 		}
 	}
-	
+
 	public void unsubscribeInitListener(AppInitializeListener listener) {
 		if (listener != null) {
 			appInitializer.removeListener(listener);
 		}
 	}
-	
+
 	public boolean isApplicationInitializing() {
 		return appInitializer.isAppInitializing();
 	}
@@ -565,6 +567,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	@NonNull
+	public WeatherHelper getWeatherHelper() {
+		return weatherHelper;
 	}
 
 	public CommandPlayer getPlayer() {
@@ -676,69 +683,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
-			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
-		}
+		feedbackHelper.setExceptionHandler();
 		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		appInitializer.startApplication();
-	}
-
-	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
-
-		private final UncaughtExceptionHandler defaultHandler;
-		private final PendingIntent intent;
-
-		public DefaultExceptionHandler() {
-			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
-					new Intent(OsmandApplication.this.getBaseContext(),
-							getAppCustomization().getMapActivity()), 0);
-		}
-
-		@Override
-		public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
-			File file = getAppPath(EXCEPTION_PATH);
-			try {
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				PrintStream printStream = new PrintStream(out);
-				ex.printStackTrace(printStream);
-				StringBuilder msg = new StringBuilder();
-				msg.append("Version  ")
-						.append(Version.getFullVersion(OsmandApplication.this))
-						.append("\n")
-						.append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
-				try {
-					PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-					if (info != null) {
-						msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-					}
-				} catch (Throwable e) {
-				}
-				msg.append("\n")
-						.append("Exception occured in thread ")
-						.append(thread)
-						.append(" : \n")
-						.append(out);
-
-				if (file.getParentFile().canWrite()) {
-					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-					writer.write(msg.toString());
-					writer.close();
-				}
-				if (routingHelper.isFollowingMode()) {
-					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					mgr.setExact(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
-					System.exit(2);
-				}
-				defaultHandler.uncaughtException(thread, ex);
-			} catch (Exception e) {
-				// swallow all exceptions
-				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e);
-			}
-		}
 	}
 
 	public TargetPointsHelper getTargetPointsHelper() {
@@ -810,22 +759,18 @@ public class OsmandApplication extends MultiDexApplication {
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
 	}
-	
+
 	public void runMessageInUIThreadAndCancelPrevious(int messageId, Runnable run, long delay) {
-		Message msg = Message.obtain(uiHandler, new Runnable() {
-			
-			@Override
-			public void run() {
-				if (!uiHandler.hasMessages(messageId)) {
-					run.run();
-				}
+		Message msg = Message.obtain(uiHandler, () -> {
+			if (!uiHandler.hasMessages(messageId)) {
+				run.run();
 			}
 		});
 		msg.what = messageId;
 		uiHandler.removeMessages(messageId);
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
-	
+
 	public File getAppPath(@Nullable String path) {
 		if (path == null) {
 			path = "";
@@ -1107,51 +1052,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return osmandMap;
 	}
 
-	public void sendCrashLog() {
-		File file = getAppPath(EXCEPTION_PATH);
-		sendCrashLog(file);
-	}
-
-	public void sendCrashLog(File file) {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"crash@osmand.net"});
-		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file));
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		intent.setType("vnd.android.cursor.dir/email");
-		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug");
-		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
-		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
-		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		AndroidUtils.startActivityIfSafe(this, intent, chooserIntent);
-	}
-
-	public void sendSupportEmail(String screenName) {
-		Intent emailIntent = new Intent(Intent.ACTION_SEND)
-				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
-				.putExtra(Intent.EXTRA_SUBJECT, screenName)
-				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
-		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
-		AndroidUtils.startActivityIfSafe(this, emailIntent);
-	}
-
-	public String getDeviceInfo() {
-		StringBuilder text = new StringBuilder();
-		text.append("Device : ").append(Build.DEVICE);
-		text.append("\nBrand : ").append(Build.BRAND);
-		text.append("\nModel : ").append(Build.MODEL);
-		text.append("\nProduct : ").append(Build.PRODUCT);
-		text.append("\nBuild : ").append(Build.DISPLAY);
-		text.append("\nVersion : ").append(Build.VERSION.RELEASE);
-		text.append("\nApp Version : ").append(Version.getAppName(this));
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			if (info != null) {
-				text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
-			}
-		} catch (PackageManager.NameNotFoundException e) {
-			LOG.error("", e);
-		}
-		return text.toString();
+	public boolean useOpenGlRenderer() {
+		return NativeCoreContext.isInit() && osmandSettings.USE_OPENGL_RENDER.get();
 	}
 }

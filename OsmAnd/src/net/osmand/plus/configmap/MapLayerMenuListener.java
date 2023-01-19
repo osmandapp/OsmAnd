@@ -6,7 +6,8 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.gpx.GPXFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -126,6 +127,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);
 			}
 			return false;
+		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
+			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
 		}
 		uiAdapter.onDataSetChanged();
 		mapActivity.updateLayers();

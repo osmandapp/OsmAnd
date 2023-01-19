@@ -141,7 +141,7 @@
 
         <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/map_button_size"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_button_margin"
             android:layout_weight="1">
@@ -156,8 +156,7 @@
                 android:id="@+id/map_transparency_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="@dimen/map_button_size"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <com.google.android.material.slider.Slider

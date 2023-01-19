@@ -35,7 +35,7 @@ import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMi
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.datastorage.task.StorageMigrationAsyncTask;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -112,7 +112,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		setupToolbar();
 		updateContent();
-		AndroidUtils.addStatusBarPadding21v(mainView.getContext(), mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
 
 		return mainView;

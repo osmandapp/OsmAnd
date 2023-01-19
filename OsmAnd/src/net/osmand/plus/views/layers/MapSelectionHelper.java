@@ -14,8 +14,8 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -59,12 +59,10 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
-import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteType;
@@ -129,7 +127,7 @@ public class MapSelectionHelper {
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
 
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
-		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+		if (app.useOpenGlRenderer()) {
 			selectObjectsFromOpenGl(result, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, nativeLib, tileBox, point);
@@ -326,7 +324,9 @@ public class MapSelectionHelper {
 								}
 								if (onPathMapSymbol == null) {
 									amenity = getAmenity(result.objectLatLon, obfMapObject);
-									if (amenity == null) {
+									if (amenity != null) {
+										amenity.setMapIconName(getMapIconName(symbolInfo));
+									} else {
 										addRenderedObject(result, symbolInfo, obfMapObject);
 									}
 								}
@@ -341,14 +341,17 @@ public class MapSelectionHelper {
 		}
 	}
 
+	private String getMapIconName(MapSymbolInformation symbolInfo) {
+		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
+		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
+			return rasterMapSymbol.getContent();
+		}
+		return null;
+	}
+
 	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
 	                               @NonNull ObfMapObject obfMapObject) {
-		RasterMapSymbol rasterMapSymbol;
-		try {
-			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-		} catch (Exception eRasterMapSymbol) {
-			rasterMapSymbol = null;
-		}
+		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
 			renderedObject.setId(obfMapObject.getId().getId().longValue());
@@ -369,6 +372,15 @@ public class MapSelectionHelper {
 			}
 			result.selectedObjects.put(renderedObject, null);
 		}
+	}
+
+	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
+		RasterMapSymbol rasterMapSymbol  = null;
+		try {
+			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+		} catch (Exception ignore) {
+		}
+		return rasterMapSymbol;
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
@@ -436,13 +448,13 @@ public class MapSelectionHelper {
 	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                                   @NonNull IContextMenuProvider gpxMenuProvider,
 	                                   @NonNull QuadRect rect, double searchDistance) {
-		BinaryMapIndexReader[] readers = app.getResourceManager().getRoutingMapFiles();
+		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-		Map<RouteKey, GPXUtilities.GPXFile> routes = new LinkedHashMap<>();
+		Map<RouteKey, GPXFile> routes = new LinkedHashMap<>();
 		try {
 			routes = routeSelector.getRoutes(rect, false, null);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error(e);
 		}
 		for (RouteKey routeKey : routes.keySet()) {
@@ -471,6 +483,7 @@ public class MapSelectionHelper {
 				amenity.getX().addAll(object.getX());
 				amenity.getY().addAll(object.getY());
 			}
+			amenity.setMapIconName(object.getIconRes());
 			if (isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
 				result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
 			}
