@@ -3,7 +3,10 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.GPXUtilities.calculateTrackBounds;
+
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.data.QuadRect;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -106,6 +109,8 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 			path31 = null;
 		}
 		path31FromGeneralTrack = false;
+		bBox = calculateTrackBounds(processedPointsToDisplay);
+		bBoxFromGeneralTrack = false;
 	}
 
 	private int calculatePointsCount(@NonNull GPXFile gpxFile) {
@@ -143,6 +148,28 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
 				? gpxFile.getGeneralTrack().segments
 				: processedPointsToDisplay;
+	}
+
+	@NonNull
+	@Override
+	public QuadRect getBBoxToDisplay() {
+		if (joinSegments && gpxFile != null) {
+			if (!gpxFile.hasGeneralTrack()) {
+				if (gpxFile.getGeneralTrack() != null) {
+					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
+					bBoxFromGeneralTrack = true;
+				}
+			} else {
+				if (!bBoxFromGeneralTrack || bBox == null) {
+					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
+					bBoxFromGeneralTrack = true;
+				}
+			}
+		}
+		if (bBox == null) {
+			bBox = calculateTrackBounds(processedPointsToDisplay);
+		}
+		return bBox;
 	}
 
 	@NonNull

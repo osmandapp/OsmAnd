@@ -35,12 +35,14 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.GpxAdditionalIconsProvider;
 import net.osmand.core.jni.GpxAdditionalIconsProvider.SplitLabel;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListPointI;
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.SplitLabelList;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.Utilities;
@@ -1107,11 +1109,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
-
-		boolean visible = hasMapRenderer
-				? getMapRenderer().isPathVisible(selectedGpxFile.getPath31ToDisplay())
-				: QuadRect.trivialOverlap(tileBox.getLatLonBounds(),
-					calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
+		QuadRect bBox = selectedGpxFile.getBBoxToDisplay();
+		boolean visible = false;
+		if (hasMapRenderer) {
+			AreaI bBoxArea = new AreaI(MapUtils.get31TileNumberY(bBox.top), MapUtils.get31TileNumberX(bBox.left),
+				MapUtils.get31TileNumberY(bBox.bottom), MapUtils.get31TileNumberX(bBox.right));
+			visible = getMapRenderer().isAreaVisible(bBoxArea)
+				&& getMapRenderer().isPathVisible(selectedGpxFile.getPath31ToDisplay());
+		} else {
+			visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), bBox);
+		}
 		if (!gpxFile.hasTrkPt() && coloringType.isGradient() || !visible) {
 			Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
 			if (renderedSegments != null) {

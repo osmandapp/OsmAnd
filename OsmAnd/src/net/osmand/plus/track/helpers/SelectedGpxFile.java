@@ -3,9 +3,12 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static net.osmand.GPXUtilities.calculateTrackBounds;
+
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.data.QuadRect;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -34,6 +37,8 @@ public class SelectedGpxFile {
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 	protected QVectorPointI path31 = null;
 	protected boolean path31FromGeneralTrack;
+	protected QuadRect bBox = null;
+	protected boolean bBoxFromGeneralTrack;
 	protected List<GpxDisplayGroup> displayGroups;
 
 	protected int color;
@@ -111,6 +116,8 @@ public class SelectedGpxFile {
 			path31 = null;
 		}
 		path31FromGeneralTrack = false;
+		bBox = calculateTrackBounds(this.processedPointsToDisplay);
+		bBoxFromGeneralTrack = false;
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.processPoints(app);
 		}
@@ -130,6 +137,37 @@ public class SelectedGpxFile {
 					: Collections.emptyList();
 		} else {
 			return processedPointsToDisplay;
+		}
+	}
+
+	@NonNull
+	public QuadRect getBBoxToDisplay() {
+		if (filteredSelectedGpxFile != null) {
+			return filteredSelectedGpxFile.getBBoxToDisplay();
+		} else if (joinSegments) {
+			if (gpxFile == null) {
+				return new QuadRect();
+			}
+			if (!gpxFile.hasGeneralTrack()) {
+				if (gpxFile.getGeneralTrack() != null) {
+					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
+					bBoxFromGeneralTrack = true;
+					return bBox;
+				} else {					
+					return new QuadRect();
+				}
+			} else {
+				if (!bBoxFromGeneralTrack || bBox == null) {
+					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
+					bBoxFromGeneralTrack = true;
+				}
+				return bBox;
+			}
+		} else {
+			if (bBox == null) {
+				bBox = calculateTrackBounds(processedPointsToDisplay);
+			}
+			return bBox;
 		}
 	}
 
