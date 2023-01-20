@@ -485,79 +485,79 @@ public class AnimateDraggingMapThread {
 
 	private void animatingMapAnimator() {
 		MapRendererView renderer = getMapRenderer();
-		if (renderer != null) {
-			int targetIntZoom = this.targetIntZoom;
-			double targetFloatZoom = this.targetFloatZoom;
-
-			PointI initTarget31 = renderer.getTarget();
-			float initZoom = renderer.getZoom();
-			int zoomThreshold = ((int) (targetFloatZoom * 2));
-			float initAzimuth = renderer.getAzimuth();
-			float initElevationAngle = renderer.getElevationAngle();
-
-			boolean animateTarget = false;
-			boolean animateZoom = false;
-			boolean animateAzimuth = false;
-			boolean animateElevationAngle = false;
-
-			renderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
-			if (!stopped) {
-				renderer.resumeMapAnimation();
-			}
-			RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
-			while (!stopped) {
-				renderer.requestRender();
-				sleepToRedraw(true);			
-				renderer = getMapRenderer();				
-				if (renderer != null) {
-					PointI target31 = renderer.getTarget();
-					float azimuth = renderer.getAzimuth();
-					float zoom = renderer.getZoom();
-					float elevationAngle = renderer.getElevationAngle();
-
-					if (!animateTarget) {
-						animateTarget = initTarget31.getX() != target31.getX()
-							|| initTarget31.getY() != target31.getY();
-					}
-					if (!animateZoom) {
-						animateZoom = initZoom != zoom && targetIntZoom > 0;
-					}
-					if (!animateAzimuth) {
-						animateAzimuth = initAzimuth != azimuth;
-					}
-					if (!animateElevationAngle) {
-						animateElevationAngle = initElevationAngle != elevationAngle;
-					}
-
-					if (!stopped && animateTarget) {
-						tb.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()),
-							MapUtils.get31LongitudeX(target31.getX()));
-					}
-					if (!stopped && animateZoom) {
-						int baseZoom = (int) Math.round(zoom - 0.5 * zoomThreshold);
-						double zaAnimate = zoom - baseZoom;
-						tb.setZoomAndAnimation(baseZoom, zaAnimate, tb.getZoomFloatPart());
-					}
-					if (!stopped && animateAzimuth) {
-						tb.setRotate(-azimuth);
-					}
-					if (!stopped && animateElevationAngle) {
-						tileView.setElevationAngle(elevationAngle);
-					}
-
-					if (renderer.isMapAnimationFinished()) {
-						break;
-					}
-				} else {
-					break;
-				}
-			}
-			if (animateZoom && renderer != null) {
-				renderer.setZoom(targetIntZoom + (float) targetFloatZoom);
-				tb.setZoomAndAnimation(targetIntZoom, 0, targetFloatZoom);
-			}
-			tileView.refreshMap();
+		if (renderer == null) {
+			return;
 		}
+		int targetIntZoom = this.targetIntZoom;
+		double targetFloatZoom = this.targetFloatZoom;
+
+		PointI initTarget31 = renderer.getTarget();
+		float initZoom = renderer.getZoom();
+		int zoomThreshold = ((int) (targetFloatZoom * 2));
+		float initAzimuth = renderer.getAzimuth();
+		float initElevationAngle = renderer.getElevationAngle();
+
+		boolean animateTarget = false;
+		boolean animateZoom = false;
+		boolean animateAzimuth = false;
+		boolean animateElevationAngle = false;
+
+		renderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
+		if (!stopped) {
+			renderer.resumeMapAnimation();
+		}
+		RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
+		while (!stopped) {
+			renderer.requestRender();
+			sleepToRedraw(true);			
+			renderer = getMapRenderer();				
+			if (renderer == null) {
+				break;
+			}
+			PointI target31 = renderer.getTarget();
+			float azimuth = renderer.getAzimuth();
+			float zoom = renderer.getZoom();
+			float elevationAngle = renderer.getElevationAngle();
+
+			if (!animateTarget) {
+				animateTarget = initTarget31.getX() != target31.getX()
+					|| initTarget31.getY() != target31.getY();
+			}
+			if (!animateZoom) {
+				animateZoom = initZoom != zoom && targetIntZoom > 0;
+			}
+			if (!animateAzimuth) {
+				animateAzimuth = initAzimuth != azimuth;
+			}
+			if (!animateElevationAngle) {
+				animateElevationAngle = initElevationAngle != elevationAngle;
+			}
+
+			if (!stopped && animateTarget) {
+				tb.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()),
+					MapUtils.get31LongitudeX(target31.getX()));
+			}
+			if (!stopped && animateZoom) {
+				int baseZoom = (int) Math.round(zoom - 0.5 * zoomThreshold);
+				double zaAnimate = zoom - baseZoom;
+				tb.setZoomAndAnimation(baseZoom, zaAnimate, tb.getZoomFloatPart());
+			}
+			if (!stopped && animateAzimuth) {
+				tb.setRotate(-azimuth);
+			}
+			if (!stopped && animateElevationAngle) {
+				tileView.setElevationAngle(elevationAngle);
+			}
+
+			if (renderer.isMapAnimationFinished()) {
+				break;
+			}
+		}
+		if (animateZoom && renderer != null) {
+			renderer.setZoom(targetIntZoom + (float) targetFloatZoom);
+			tb.setZoomAndAnimation(targetIntZoom, 0, targetFloatZoom);
+		}
+		tileView.refreshMap();
 	}
 
 	private void animatingRotateInThread(float rotate, float animationTime, boolean notify) {
