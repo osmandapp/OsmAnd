@@ -43,10 +43,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -86,7 +86,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;

@@ -16,11 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -30,7 +30,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
@@ -57,7 +56,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +107,7 @@ public class IntentHelper {
 				String startLatLonParam = data.getQueryParameter(URL_PARAMETER_START);
 				String endLatLonParam = data.getQueryParameter(URL_PARAMETER_END);
 				String appModeKeyParam = data.getQueryParameter(URL_PARAMETER_MODE);
+				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT);
 
 				if (Algorithms.isEmpty(endLatLonParam)) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
@@ -131,21 +130,7 @@ public class IntentHelper {
 					LOG.debug("App mode with specified key not available, using default navigation app mode");
 				}
 
-				String intermediatePointsParameter = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT);
-				String[] iPointsParameters = intermediatePointsParameter.split(",");
-				List<LatLon> intermediatePoints = new ArrayList<>();
-
-				if (iPointsParameters.length >= 2 && iPointsParameters.length % 2 == 0) {
-					for (int i = 0; i <= iPointsParameters.length - 2; i += 2) {
-						try {
-							intermediatePoints.add(new LatLon(Double.parseDouble(iPointsParameters[i]), Double.parseDouble(iPointsParameters[i + 1])));
-						} catch (NumberFormatException e) {
-							LOG.error("Malformed OsmAnd navigation URL: corrupted intermediate point");
-						}
-					}
-				} else {
-					LOG.error("Malformed OsmAnd navigation URL: corrupted intermediate points");
-				}
+				List<LatLon> points = parseIntermediatePoints(intermediatePointsParam);
 
 				if (app.isApplicationInitializing()) {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
@@ -153,11 +138,11 @@ public class IntentHelper {
 						@Override
 						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
-							buildRoute(startLatLon, endLatLon, appMode, intermediatePoints);
+							buildRoute(startLatLon, endLatLon, appMode, points);
 						}
 					});
 				} else {
-					buildRoute(startLatLon, endLatLon, appMode, intermediatePoints);
+					buildRoute(startLatLon, endLatLon, appMode, points);
 				}
 
 				clearIntent(intent);
@@ -167,22 +152,24 @@ public class IntentHelper {
 		return false;
 	}
 
-	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end, @Nullable ApplicationMode appMode, @Nullable List<LatLon> intermediatePoints) {
+	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
+	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
 		if (appMode != null) {
 			app.getRoutingHelper().setAppMode(appMode);
 		}
 		app.getTargetPointsHelper().navigateToPoint(end, true, -1);
 
-		if (intermediatePoints != null) {
-			app.getSettings().clearIntermediatePoints();
-			for (LatLon point : intermediatePoints) {
-				app.getSettings().insertIntermediatePoint(point.getLatitude(), point.getLongitude(),
-						null, app.getSettings().getIntermediatePoints().size());
+		boolean hasIntermediatePoints = !Algorithms.isEmpty(points);
+		if (hasIntermediatePoints) {
+			settings.clearIntermediatePoints();
+			for (LatLon point : points) {
+				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(),
+						null, settings.getIntermediatePoints().size());
 			}
 		}
 
 		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
-				null, true, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+				null, hasIntermediatePoints, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	private boolean parseSetPinOnMapUrlIntent() {
@@ -204,6 +191,28 @@ public class IntentHelper {
 			}
 		}
 		return false;
+	}
+
+	@Nullable
+	private List<LatLon> parseIntermediatePoints(@Nullable String parameter) {
+		if (!Algorithms.isEmpty(parameter)) {
+			String[] params = parameter.split(",");
+			List<LatLon> points = new ArrayList<>();
+
+			if (params.length >= 2 && params.length % 2 == 0) {
+				for (int i = 0; i <= params.length - 2; i += 2) {
+					try {
+						points.add(new LatLon(Double.parseDouble(params[i]), Double.parseDouble(params[i + 1])));
+					} catch (NumberFormatException e) {
+						LOG.error("Malformed OsmAnd navigation URL: corrupted intermediate point");
+					}
+				}
+			} else {
+				LOG.error("Malformed OsmAnd navigation URL: corrupted intermediate points");
+			}
+			return points;
+		}
+		return null;
 	}
 
 	@Nullable
@@ -621,9 +630,11 @@ public class IntentHelper {
 	public static String generateRouteUrl(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+
 		LatLon startPoint = settings.getPointToStart();
 		LatLon endPoint = settings.getPointToNavigate();
 		List<LatLon> intermediatePoints = settings.getIntermediatePoints();
+
 		Uri.Builder builder = new Uri.Builder();
 		builder.scheme(URL_SCHEME)
 				.authority(URL_AUTHORITY)
@@ -634,20 +645,20 @@ public class IntentHelper {
 			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
 		}
 
+		if (!Algorithms.isEmpty(intermediatePoints)) {
+			StringBuilder stringBuilder = new StringBuilder();
+			for (LatLon latLon : intermediatePoints) {
+				stringBuilder.append(",")
+						.append(getUrlFormattedCoordinate(latLon.getLatitude()))
+						.append(",")
+						.append(getUrlFormattedCoordinate(latLon.getLongitude()));
+			}
+			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT, stringBuilder.substring(1));
+		}
+
 		if (endPoint != null) {
 			String endPointCoordinates = getUrlFormattedCoordinate(endPoint.getLatitude()) + "," + getUrlFormattedCoordinate(endPoint.getLongitude());
 			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
-		}
-
-		if (!intermediatePoints.isEmpty()) {
-			StringBuilder value = new StringBuilder();
-			for (int i = 0; i < intermediatePoints.size(); i++) {
-				value.append(",")
-						.append(getUrlFormattedCoordinate(intermediatePoints.get(i).getLatitude()))
-						.append(",")
-						.append(getUrlFormattedCoordinate(intermediatePoints.get(i).getLongitude()));
-			}
-			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT, value.substring(1));
 		}
 
 		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
