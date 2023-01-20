@@ -4490,8 +4490,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">Fixed (north is up)</string>
-    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
+    <string name="rotate_map_none_opt">North is up (fixed)</string>
+    <string name="rotate_map_none_rotated_opt">Manually rotated (fixed)</string>
     <string name="rotate_map_to_bearing_descr">Map alignment:</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>
