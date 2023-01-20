@@ -178,7 +178,7 @@ public class BackupExporter extends Exporter {
 		}
 	}
 
-	protected void deleteLocalFiles(Set<Object> itemsProgress, AtomicInteger dataProgress) throws IOException {
+	protected void deleteLocalFiles(Set<Object> itemsProgress, AtomicInteger dataProgress) {
 		List<SettingsItem> itemsToLocalDelete = this.itemsToLocalDelete;
 		for (SettingsItem item : itemsToLocalDelete) {
 			item.delete();
