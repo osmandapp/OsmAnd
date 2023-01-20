@@ -1,16 +1,15 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-
-import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
