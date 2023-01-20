@@ -4236,7 +4236,7 @@
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
+    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
     <string name="backup_dont_have_any_descr">Define una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
     <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando OsmAnd Cloud.</string>

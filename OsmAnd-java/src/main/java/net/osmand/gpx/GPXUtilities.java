@@ -842,10 +842,14 @@ public class GPXUtilities {
 	public static QuadRect calculateTrackBounds(List<TrkSegment> segments) {
 		QuadRect trackBounds = new QuadRect(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
 				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		boolean updated = false;
 		for (TrkSegment segment : segments) {
-			updateBounds(trackBounds, segment.points, 0);
+			if (segment.points.size() > 0) {
+				updateBounds(trackBounds, segment.points, 0);
+				updated = true;
+			}
 		}
-		return trackBounds;
+		return updated ? trackBounds : new QuadRect();
 	}
 
 	public static void updateBounds(QuadRect trackBounds, List<WptPt> pts, int startIndex) {
