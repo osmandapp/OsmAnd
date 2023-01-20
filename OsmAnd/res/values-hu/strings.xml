@@ -683,7 +683,7 @@
     <string name="rendering_attr_noPolygons_description">A térképen az összes területszerű objektum átlátszóvá tétele.</string>
     <string name="rendering_attr_noPolygons_name">Sokszögek</string>
     <string name="rendering_attr_appMode_name">Megjelenítési mód</string>
-    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz:</string>
+    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz</string>
     <string name="rendering_attr_contourLines_description">Megjelenítés ettől a nagyítási szinttől (szintvonaladatokat igényel):</string>
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
@@ -1524,8 +1524,8 @@
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz tartozás</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC turistaútjelzés</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz felvétel</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (online)</string>
