@@ -34,6 +34,8 @@ import java.util.List;
 public final class SearchResultsScreen extends Screen implements DefaultLifecycleObserver,
 		AppInitializeListener, SearchHelperListener {
 
+	private static final int CONTENT_LIMIT = 50;
+
 	private final SearchHelper searchHelper;
 
 	@NonNull
@@ -49,10 +51,11 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	private boolean showResult;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-							   @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
+	                           @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
 		super(carContext);
 		ConstraintManager manager = carContext.getCarService(ConstraintManager.class);
-		this.searchHelper = new SearchHelper(getApp(), false, manager.getContentLimit(CONTENT_LIMIT_TYPE_PLACE_LIST));
+		int contentLimit = Math.min(CONTENT_LIMIT, manager.getContentLimit(CONTENT_LIMIT_TYPE_PLACE_LIST));
+		this.searchHelper = new SearchHelper(getApp(), false, contentLimit);
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
 		this.searchText = searchText;
