@@ -484,40 +484,40 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void animatingMapAnimator() {
-		MapRendererView renderer = getMapRenderer();
-		if (renderer == null) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
 			return;
 		}
 		int targetIntZoom = this.targetIntZoom;
 		double targetFloatZoom = this.targetFloatZoom;
 
-		PointI initTarget31 = renderer.getTarget();
-		float initZoom = renderer.getZoom();
+		PointI initTarget31 = mapRenderer.getTarget();
+		float initZoom = mapRenderer.getZoom();
 		int zoomThreshold = ((int) (targetFloatZoom * 2));
-		float initAzimuth = renderer.getAzimuth();
-		float initElevationAngle = renderer.getElevationAngle();
+		float initAzimuth = mapRenderer.getAzimuth();
+		float initElevationAngle = mapRenderer.getElevationAngle();
 
 		boolean animateTarget = false;
 		boolean animateZoom = false;
 		boolean animateAzimuth = false;
 		boolean animateElevationAngle = false;
 
-		renderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
+		mapRenderer.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 		if (!stopped) {
-			renderer.resumeMapAnimation();
+			mapRenderer.resumeMapAnimation();
 		}
 		RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
 		while (!stopped) {
-			renderer.requestRender();
+			mapRenderer.requestRender();
 			sleepToRedraw(true);			
-			renderer = getMapRenderer();				
-			if (renderer == null) {
+			mapRenderer = getMapRenderer();				
+			if (mapRenderer == null) {
 				break;
 			}
-			PointI target31 = renderer.getTarget();
-			float azimuth = renderer.getAzimuth();
-			float zoom = renderer.getZoom();
-			float elevationAngle = renderer.getElevationAngle();
+			PointI target31 = mapRenderer.getTarget();
+			float azimuth = mapRenderer.getAzimuth();
+			float zoom = mapRenderer.getZoom();
+			float elevationAngle = mapRenderer.getElevationAngle();
 
 			if (!animateTarget) {
 				animateTarget = initTarget31.getX() != target31.getX()
@@ -549,12 +549,12 @@ public class AnimateDraggingMapThread {
 				tileView.setElevationAngle(elevationAngle);
 			}
 
-			if (renderer.isMapAnimationFinished()) {
+			if (mapRenderer.isMapAnimationFinished()) {
 				break;
 			}
 		}
-		if (animateZoom && renderer != null) {
-			renderer.setZoom(targetIntZoom + (float) targetFloatZoom);
+		if (animateZoom && mapRenderer != null) {
+			mapRenderer.setZoom(targetIntZoom + (float) targetFloatZoom);
 			tb.setZoomAndAnimation(targetIntZoom, 0, targetFloatZoom);
 		}
 		tileView.refreshMap();
