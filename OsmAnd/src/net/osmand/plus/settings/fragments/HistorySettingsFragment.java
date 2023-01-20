@@ -188,9 +188,8 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		mapMarkersHelper.removeMarkers(mapMarkersHelper.getMapMarkersHistory());
 
 		SearchHistoryHelper searchHistoryHelper = SearchHistoryHelper.getInstance(app);
-		for (SearchResult searchResult : getSearchHistoryResults(app)) {
-			searchHistoryHelper.remove(searchResult.object);
-		}
+		searchHistoryHelper.removeAll();
+
 		updateAllSettings();
 	}
 
@@ -233,7 +232,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		updateSetting(prefId);
 	}
 }

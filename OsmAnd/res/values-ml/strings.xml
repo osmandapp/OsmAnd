@@ -1748,7 +1748,7 @@
     <string name="srtm_color_scheme">നിറങ്ങളുടെ സ്കീം</string>
     <string name="shared_string_overview">അവലോകനം</string>
     <string name="shared_string_visible">ദൃശ്യമായ</string>
-    <string name="driving_region_automatic">തനിയെയുള്ള</string>
+    <string name="shared_string_automatic">തനിയെയുള്ള</string>
     <string name="shared_string_color">നിറം</string>
     <string name="rendering_value_high_name">കൂടിയ</string>
     <string name="rendering_value_medium_w_name">ഇടത്തരം</string>

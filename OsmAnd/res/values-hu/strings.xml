@@ -586,8 +586,8 @@
     <string name="app_mode_car">Autóvezetés</string>
     <string name="app_mode_bicycle">Kerékpározás</string>
     <string name="app_mode_pedestrian">Gyaloglás</string>
-    <string name="position_on_map_center">Középen</string>
-    <string name="position_on_map_bottom">Alul</string>
+    <string name="position_on_map_center">Középre</string>
+    <string name="position_on_map_bottom">Alulra</string>
     <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
     <string name="navigate_point_latitude">Szélesség</string>
     <string name="navigate_point_longitude">Hosszúság</string>
@@ -1156,7 +1156,7 @@
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline kiszámítása</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
-    <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
+    <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
     <string name="localization_pref_title">Nyelv</string>
@@ -2187,7 +2187,7 @@
     <string name="full_version_thanks">Köszönjük, hogy megvásárolta az OsmAnd fizetős verzióját.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
-    <string name="driving_region_automatic">Automatikus</string>
+    <string name="shared_string_automatic">Automatikus</string>
     <string name="type_city_town">Település beírása</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
@@ -4222,10 +4222,10 @@
     <string name="logout_from_osmand_cloud_decsr">Kijelentkezik\?
 \nAz adatok biztonsági mentéséhez vagy visszaállításához újra be kell jelentkeznie.</string>
     <string name="shared_string_progress">Haladás</string>
-    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése.</string>
-    <string name="backup_dont_have_any_descr">Ütemezzen be automatikus biztonsági mentéseket, hogy soha ne veszítsen adatokat.</string>
+    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése</string>
+    <string name="backup_dont_have_any_descr">Állítson be automatikus biztonsági mentést, hogy ne kelljen aggódnia adatvesztés miatt.</string>
     <string name="backup_welcome_back">Isten hozta újra!</string>
-    <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása meglévő biztonsági másolatok használatával, vagy biztonsági másolat készítése az OsmAnd Cloud-ra.</string>
+    <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása az OsmAnd Cloud használatával.</string>
     <string name="backup_setup">Biztonsági mentés beállítása</string>
     <string name="backup_restore_now">Visszaállítás most</string>
     <string name="attribute">Tulajdonság</string>
@@ -4765,7 +4765,7 @@
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
-    <string name="display_position">Pozíció megjelenítése</string>
+    <string name="display_position">Pozíció elhelyezése</string>
     <string name="shared_string_2_5_d_view">2,5D nézet</string>
     <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
@@ -4852,7 +4852,7 @@
 \n
 \n • „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
 \n
-\n • Javított „Pozíció megjelenítése” opció
+\n • Javított „Pozíció elhelyezés” opció
 \n
 \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
 \n
@@ -5013,4 +5013,15 @@
     <string name="local_changes_will_be_dismissed">A helyi változások el lesznek vetve</string>
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd felhőszolgáltatással.</string>
     <string name="cloud_sync_progress">Szinkronizálás...%1$s</string>
+    <string name="si_nm_ft">Tengeri mérföld/láb</string>
+    <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
+    <string name="si_nm_mt">Tengeri mérföld/méter</string>
+    <string name="set_up_backup">Biztonsági mentés beállítása</string>
+    <string name="y_axis">Y-tengely</string>
+    <string name="x_axis">X-tengely</string>
+    <string name="share_as_file">Megosztás fájlként</string>
+    <string name="value_downloaded_of_mb">Letöltés %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Letöltés kihagyása</string>
+    <string name="determine_location">Engedélyezze, hogy meghatározzuk a helyzetét</string>
+    <string name="share_link">Hivatkozás megosztása</string>
 </resources>

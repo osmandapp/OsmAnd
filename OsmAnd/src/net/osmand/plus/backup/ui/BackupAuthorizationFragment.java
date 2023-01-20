@@ -60,7 +60,7 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_authorize_cloud, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		signUpButton = view.findViewById(R.id.sign_up_button);
 		signInButton = view.findViewById(R.id.sign_in_button);

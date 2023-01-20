@@ -186,7 +186,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		});
 
 		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, mainView);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 		}
 
 		return mainView;

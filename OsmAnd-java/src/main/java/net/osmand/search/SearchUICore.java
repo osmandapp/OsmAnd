@@ -319,7 +319,7 @@ public class SearchUICore {
 	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,
 	                                                                      final ResultMatcher<SearchResult> matcher,
 	                                                                      boolean resortAll, boolean removeDuplicates) throws IOException {
-		return shallowSearch(cl, text, matcher, true, true, searchSettings);
+		return shallowSearch(cl, text, matcher, resortAll, removeDuplicates, searchSettings);
 	}
 
 	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl, String text,

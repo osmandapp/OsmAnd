@@ -109,7 +109,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		mainView = themedInflater.inflate(R.layout.fragment_mappers_osm, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, mainView);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		setupToolbar();
 		setupRefreshButton();

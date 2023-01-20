@@ -72,11 +72,10 @@ public class MapViewWithLayers extends FrameLayout {
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
+			mapView.setMapRenderer(atlasMapRendererView);
 		} else {
 			surfaceView.setMapView(useAndroidAuto ? null : mapView);
-		}
-		mapView.setMapRenderer(useOpenglRender ? atlasMapRendererView : null);
-		if (!useOpenglRender) {
+			mapView.setMapRenderer(null);
 			resetMapRendererView();
 		}
 		if (useAndroidAuto) {
@@ -126,6 +125,7 @@ public class MapViewWithLayers extends FrameLayout {
 
 	public void onDestroy() {
 		if (atlasMapRendererView != null) {
+			mapView.setMapRenderer(null);
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();

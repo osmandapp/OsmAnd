@@ -295,7 +295,7 @@
     <string name="restore_purchases">Գնումների վերականգնում</string>
     <string name="fonts_header">Տառատեսակ քարտեզների համար</string>
     <string name="right_side_navigation">Աջակողմյա երթևեկություն</string>
-    <string name="driving_region_automatic">Ավտոմատ</string>
+    <string name="shared_string_automatic">Ավտոմատ</string>
     <string name="do_not_send_anonymous_app_usage">Չհավաքել օգտագործման վիճակագրությունը</string>
     <string name="do_not_show_startup_messages">Չցուցադրել հաղորդագրությունները մեկնարկին</string>
     <string name="parking_options">Ավտոկանգառի ընտրանքներ</string>

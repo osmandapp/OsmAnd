@@ -79,7 +79,7 @@
     <string name="do_not_show_startup_messages_desc">Не показывать скидки на приложение и специальные сообщения о местных событиях.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd собирает информацию о том, какие вы используете части приложения. Ваше местоположение никогда не отправляется, как и всё, что вы вводите, какие области читаете, что ищете или скачиваете.</string>
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
-    <string name="driving_region_automatic">Авто</string>
+    <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
     <string name="shared_string_visible">Видимые</string>
     <string name="restore_purchases">Восстановить покупки</string>
@@ -4235,7 +4235,7 @@
     <string name="logout_from_osmand_cloud">Выйти из OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Выйти\?
 \nВам нужно будет снова войти в OsmAnd Cloud для резервного копирования или восстановления данных.</string>
-    <string name="backup_welcome_back_descr">Восстановите данные на этом устройстве, используя существующие резервные копии или создайте резервную копию данных в OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Восстановите данные на этом устройстве, используя OsmAnd Cloud.</string>
     <string name="backup_restore_now">Восстановить</string>
     <string name="backup_welcome_back">С возвращением!</string>
     <string name="attribute">Атрибут</string>
@@ -5026,4 +5026,14 @@
     <string name="local_file_will_be_restored">Локальный файл будет восстановлен</string>
     <string name="shared_string_unsynced">Не синхронизировано</string>
     <string name="av_audio_format_bottom_sheet_descr">Выберите формат вывода аудио. Формат типа файла для аудио - 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Морские мили/футы</string>
+    <string name="si_nm_mt">Морские мили/метры</string>
+    <string name="value_downloaded_of_mb">Загрузка %1$.1f/%2$.1f МБ</string>
+    <string name="skip_download">Пропустить загрузку</string>
+    <string name="determine_location">Позвольте нам определить ваше местоположение</string>
+    <string name="share_as_file">Поделиться файлом</string>
+    <string name="y_axis">Ось Y</string>
+    <string name="x_axis">Ось X</string>
+    <string name="set_up_backup">Настройка резервного копирования</string>
+    <string name="share_link">Поделиться ссылкой</string>
 </resources>

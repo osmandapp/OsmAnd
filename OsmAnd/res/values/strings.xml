@@ -10,10 +10,20 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="share_link">Share link</string>
+    <string name="share_as_file">Share as file</string>
+    <string name="y_axis">Y-Axis</string>
+    <string name="x_axis">X-Axis</string>
+    <string name="si_nm_mt">Nautical miles/meters</string>
+    <string name="si_nm_ft">Nautical miles/feet</string>
     <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
+    <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Skip download</string>
+    <string name="determine_location">Allow us to determine your location</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
+    <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
     <string name="cloud_sync_progress">Sync…%1$s</string>
     <string name="checking_progress">Checking…</string>
@@ -158,7 +168,7 @@
     • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
     • \"Map marker\" widget: added option to change click behavior\n\n
-    • Fixed \"Display position\" option\n\n
+    • Fixed \"Position placement\" option\n\n
     • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
     • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
@@ -236,7 +246,7 @@
     <string name="how_to_use">How to use:</string>
     <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
-    <string name="display_position">Display position</string>
+    <string name="display_position">Position placement</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>
@@ -717,10 +727,10 @@
     <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="backup_setup">Set up backup</string>
-    <string name="backup_welcome_back_descr">Restore data on this device using existing backups, or back up data to OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restore data on this device using OsmAnd Cloud.</string>
     <string name="backup_welcome_back">Welcome back!</string>
-    <string name="backup_dont_have_any_descr">Schedule automatic backups and never lose data.</string>
-    <string name="backup_do_not_have_any">You have no online backup yet.</string>
+    <string name="backup_dont_have_any_descr">Set up an automatic backup so you don\'t have to worry about lost data.</string>
+    <string name="backup_do_not_have_any">You don\'t have any online backup yet</string>
     <string name="shared_string_progress">Progress</string>
     <string name="backup_data_removed">All data has been removed.</string>
     <string name="backup_version_history_removed">All version history has been removed.</string>
@@ -2481,7 +2491,7 @@
     <string name="restore_purchases">Restore purchases</string>
     <string name="fonts_header">Map fonts</string>
     <string name="right_side_navigation">Right-hand traffic</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
@@ -3440,7 +3450,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmo_connect_menu">Connect</string>
     <string name="int_days">days</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
-    <string name="always_center_position_on_map">Display position always in center</string>
+    <string name="always_center_position_on_map">Position placement always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Misc</string>
     <string name="localization_pref_title">Localization</string>
@@ -4480,8 +4490,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">Fixed (north is up)</string>
-    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
+    <string name="rotate_map_none_opt">North is up (fixed)</string>
+    <string name="rotate_map_none_rotated_opt">Manually rotated (fixed)</string>
     <string name="rotate_map_to_bearing_descr">Map alignment:</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>

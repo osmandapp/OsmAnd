@@ -2168,7 +2168,7 @@
     <string name="subscribe_email_error">Hata</string>
     <string name="analyze_on_map">Harita üzerinde analiz et</string>
     <string name="shared_string_visible">Görünür</string>
-    <string name="driving_region_automatic">Otomatik</string>
+    <string name="shared_string_automatic">Otomatik</string>
     <string name="do_not_send_anonymous_app_usage">Anonim uygulama kullanım istatistiklerini gönderme</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd uygulamanın hangi kısımlarını açtığınızla ilgili bilgi toplar. Konum bilginiz, ya da uygulamaya girdiğiniz herhangi bir şey veya görüntülediğiniz, aradığınız ya da indirdiğiniz bölgelerin ayrıntıları asla gönderilmez.</string>
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>

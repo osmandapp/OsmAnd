@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
 import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
@@ -16,6 +18,7 @@ import net.osmand.plus.backup.ui.status.EmptyStateViewHolder;
 import net.osmand.plus.backup.ui.status.HeaderViewHolder;
 import net.osmand.plus.backup.ui.status.ItemViewHolder;
 import net.osmand.plus.backup.ui.status.StatusViewHolder;
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -29,11 +32,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	public static final int LIST_ITEM_TYPE = 2;
 	public static final int EMPTY_STATE_TYPE = 3;
 
-	enum ItemStatusType {
-		ITEM_STATUS_STARTED_TYPE,
-		ITEM_STATUS_IN_PROGRESS_TYPE,
-		ITEM_STATUS_FINISHED_TYPE
-	}
+	private final OsmandApplication app;
 
 	private final List<Object> items = new ArrayList<>();
 	private List<CloudChangeItem> cloudChangeItems = new ArrayList<>();
@@ -42,7 +41,8 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	private final RecentChangesType tabType;
 	private final boolean nightMode;
 
-	ChangesAdapter(@NonNull ChangesTabFragment fragment, boolean nightMode) {
+	ChangesAdapter(@NonNull OsmandApplication app, @NonNull ChangesTabFragment fragment, boolean nightMode) {
+		this.app = app;
 		this.fragment = fragment;
 		this.tabType = fragment.getChangesTabType();
 		this.nightMode = nightMode;
@@ -55,7 +55,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 		items.add(STATUS_HEADER_TYPE);
 
 		if (changeItems.isEmpty()) {
-			items.add(EMPTY_STATE_TYPE);
+			if (!app.getBackupHelper().isBackupPreparing()) {
+				items.add(EMPTY_STATE_TYPE);
+			}
 		} else {
 			items.add(LIST_HEADER_TYPE);
 			items.addAll(changeItems);
@@ -79,7 +81,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 				return new HeaderViewHolder(itemView);
 			case LIST_ITEM_TYPE:
 				itemView = inflater.inflate(R.layout.cloud_change_item, parent, false);
-				return new ItemViewHolder(itemView);
+				return new ItemViewHolder(itemView, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -114,8 +116,9 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 			viewHolder.bindView(tabType, cloudChangeItems.size());
 		} else if (holder instanceof ItemViewHolder) {
 			CloudChangeItem item = (CloudChangeItem) items.get(position);
+			boolean lastItem = position == getItemCount() - 1;
 			ItemViewHolder viewHolder = (ItemViewHolder) holder;
-			viewHolder.bindView(item, fragment, false);
+			viewHolder.bindView(item, fragment, lastItem);
 		}
 	}
 
@@ -126,11 +129,46 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 
 	@Override
 	public void onBackupSyncStarted() {
-		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
 		notifyItemChanged(items.indexOf(STATUS_HEADER_TYPE));
+	}
+
+	@Override
+	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Override
+	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Override
+	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+		CloudChangeItem changeItem = getChangeItem(type, fileName);
+		if (changeItem != null) {
+			notifyItemChanged(items.indexOf(changeItem));
+		}
+	}
+
+	@Nullable
+	private CloudChangeItem getChangeItem(@NonNull String type, @NonNull String fileName) {
+		for (CloudChangeItem item : cloudChangeItems) {
+			if (Algorithms.stringsEqual(item.fileName, fileName)
+					&& item.settingsItem.getType() == SettingsItemType.fromName(type)) {
+				return item;
+			}
+		}
+		return null;
 	}
 }

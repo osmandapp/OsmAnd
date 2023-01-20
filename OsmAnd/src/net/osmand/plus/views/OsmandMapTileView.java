@@ -194,7 +194,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	Paint paintCenter;
 
 	private DisplayMetrics dm;
-	private MapRendererView mapRenderer;
+	private volatile MapRendererView mapRenderer;
 
 	private Bitmap bufferBitmap;
 	private RotatedTileBox bufferImgLoc;
@@ -1601,6 +1601,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
+			if (angleRelative != 0) {
+				application.getMapViewTrackingUtilities().setRotationNoneToManual();
+			}
 			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {

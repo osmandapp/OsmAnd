@@ -8,7 +8,7 @@
     <string name="type_address">Ünvan yazın</string>
     <string name="subscribe_email_error">Səhv</string>
     <string name="fonts_header">Xəritə şriftləri</string>
-    <string name="driving_region_automatic">Avtomatik</string>
+    <string name="shared_string_automatic">Avtomatik</string>
     <string name="routing_attr_driving_style_speed_name">Qısa marşrutlar</string>
     <string name="add_new_folder">Yeni qovluq əlavə et</string>
     <string name="max_speed">Maksimum sürət</string>

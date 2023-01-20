@@ -126,7 +126,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 		View view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
-			AndroidUtils.addStatusBarPadding21v(app, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 		AppBarLayout appBar = view.findViewById(R.id.appbar);
 		appBar.addOnOffsetChangedListener(this);

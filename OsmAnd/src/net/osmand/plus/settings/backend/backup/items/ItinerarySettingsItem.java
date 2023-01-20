@@ -23,6 +23,7 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -113,6 +114,17 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	}
 
 	@Override
+	public void delete() {
+		super.delete();
+		markersHelper.syncAllGroups();
+	}
+
+	@Override
+	protected void deleteItem(MapMarkersGroup item) {
+		markersHelper.removeMarkersGroup(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull MapMarkersGroup markersGroup) {
 		for (MapMarkersGroup group : existingItems) {
 			if (group.getType() == markersGroup.getType()
@@ -140,7 +152,8 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 		return new SettingsItemReader<ItinerarySettingsItem>(this) {
 
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			                           @Nullable String entryName) throws IllegalArgumentException {
 				List<ItineraryGroupInfo> groupInfos = new ArrayList<>();
 				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream, dataHelper.getGPXExtensionsReader(groupInfos));
 				if (gpxFile.error != null) {

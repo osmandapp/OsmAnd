@@ -1032,7 +1032,7 @@
     <string name="reorder_profiles">Muuda profiililoendit</string>
     <string name="selected_profile">Valitud profiil</string>
     <string name="right_side_navigation">Parempoolne liiklus</string>
-    <string name="driving_region_automatic">Automaatne</string>
+    <string name="shared_string_automatic">Automaatne</string>
     <string name="fonts_header">Kaardi kirjastiilid</string>
     <string name="restore_purchases">Taasta ostud</string>
     <string name="shared_string_visible">Nähtaval</string>

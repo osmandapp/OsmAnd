@@ -1804,7 +1804,7 @@
     <string name="restore_purchases">Επαναφορά αγορών</string>
     <string name="fonts_header">Γραμματοσειρές χάρτη</string>
     <string name="right_side_navigation">Οδήγηση στα δεξιά</string>
-    <string name="driving_region_automatic">Αυτόματο</string>
+    <string name="shared_string_automatic">Αυτόματο</string>
     <string name="do_not_send_anonymous_app_usage">Μην στέλνετε στατιστικές ανώνυμων εφαρμογών</string>
     <string name="do_not_send_anonymous_app_usage_desc">Το OsmAnd συλλέγει πληροφορίες για τα μέρη της εφαρμογής που ανοίγετε. Η τοποθεσία σας δεν στέλνεται ποτέ, ούτε οτιδήποτε που εισάγετε στην εφαρμογή, ούτε λεπτομέρειες των περιοχών που προβάλετε, αναζητάτε ή κατεβάζετε.</string>
     <string name="do_not_show_startup_messages">Να μην εμφανίζονται μηνύματα εκκίνησης</string>

@@ -2194,7 +2194,7 @@
     <string name="full_version_thanks">Gracias por comprar la versión de pago de OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
@@ -4235,10 +4235,10 @@
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
-    <string name="backup_dont_have_any_descr">Programa copias de seguridad automáticas y no pierdas nunca los datos.</string>
+    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
+    <string name="backup_dont_have_any_descr">Define una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
-    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaura los datos en este dispositivo usando OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
     <string name="backup_restore_now">Restaurar ahora</string>
     <string name="attribute">Atributo</string>
@@ -5007,7 +5007,7 @@
     <string name="sync_now">Sincronizar ahora</string>
     <string name="local_changes">Cambios locales</string>
     <string name="upload_change">Subir cambio</string>
-    <string name="cloud_version_will_be_removed">La versión de la nube será quitada</string>
+    <string name="cloud_version_will_be_removed">La versión en la nube será quitada</string>
     <string name="res_unknown">Desconocido</string>
     <string name="shared_string_unsynced">Sin sincronizar</string>
     <string name="check_for_updates">Buscar actualizaciones</string>
@@ -5034,6 +5034,16 @@
     <string name="download_cloud_version">Descargar versión en la nube</string>
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
-    <string name="export_to_file">Exportar a archivo</string>
+    <string name="export_to_file">Exportar a un archivo</string>
     <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Millas/pies náuticos</string>
+    <string name="si_nm_mt">Millas/metros náuticos</string>
+    <string name="set_up_backup">Configurar copia de seguridad</string>
+    <string name="y_axis">Eje Y</string>
+    <string name="x_axis">Eje X</string>
+    <string name="share_as_file">Compartir como archivo</string>
+    <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Omitir descarga</string>
+    <string name="determine_location">Permítenos determinar tu ubicación</string>
+    <string name="share_link">Compartir enlace</string>
 </resources>

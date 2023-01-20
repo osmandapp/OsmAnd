@@ -109,7 +109,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private EditText swissGridNorthEdit;
 	private EditText formatEdit;
 	private ProgressBar searchProgressBar;
-	private int currentFormat = PointDescription.FORMAT_DEGREES;
+	private static int currentFormat = -1;
 
 	private net.osmand.Location myLocation;
 	private float heading;
@@ -158,7 +158,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		myLocation = app.getLocationProvider().getLastKnownLocation();
-		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
+
+		if(currentFormat == -1)
+			currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 
 		latEdit = view.findViewById(R.id.latitudeEditText);
 		lonEdit = view.findViewById(R.id.longitudeEditText);
@@ -215,13 +217,6 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		String olcInfoStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_INFO_KEY, defaultOlc);
 		String swissGridEastStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY, defaultSwissGridEast);
 		String swissGridNorthStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY, defaultSwissGridNorth);
-
-		if (savedInstanceState != null)
-			currentFormat = savedInstanceState.getInt(QUICK_SEARCH_COORDS_FORMAT_KEY, -1);
-		if (currentFormat == -1)
-			currentFormat = getArguments().getInt(QUICK_SEARCH_COORDS_FORMAT_KEY, -1);
-		if (currentFormat == -1)
-			currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 
 		if (!coordinatesApplied) {
 			latEdit.setText(latStr);

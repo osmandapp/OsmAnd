@@ -73,7 +73,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, nighMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		LayoutInflater inf = LayoutInflater.from(ctx);
 		View view = inf.inflate(R.layout.dest_reached_menu_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(ctx, view);
+		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		view.setOnClickListener(v -> finishNavigation());
 
 		ImageButton btnClose = view.findViewById(R.id.closeImageButton);

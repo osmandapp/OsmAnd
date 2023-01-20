@@ -1,6 +1,8 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
+import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +44,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class BackupImporter {
 
@@ -51,6 +54,9 @@ class BackupImporter {
 	private final NetworkImportProgressListener listener;
 
 	private boolean cancelled;
+
+	private final AtomicInteger dataProgress = new AtomicInteger(0);
+	private final AtomicInteger itemsProgress = new AtomicInteger(0);
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -73,7 +79,7 @@ class BackupImporter {
 	}
 
 	@NonNull
-	CollectItemsResult collectItems(boolean readItems) throws IllegalArgumentException, IOException {
+	CollectItemsResult collectItems(@Nullable List<SettingsItem> settingsItems, boolean readItems) throws IllegalArgumentException, IOException {
 		CollectItemsResult result = new CollectItemsResult();
 		StringBuilder error = new StringBuilder();
 		OperationLog operationLog = new OperationLog("collectRemoteItems", BackupHelper.DEBUG);
@@ -81,6 +87,10 @@ class BackupImporter {
 		try {
 			backupHelper.downloadFileList((status, message, remoteFiles) -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
+					if (settingsItems != null) {
+						Map<RemoteFile, SettingsItem> items = getRemoteFilesSettingsItems(settingsItems, remoteFiles, true);
+						remoteFiles = new ArrayList<>(items.keySet());
+					}
 					result.remoteFiles = remoteFiles;
 					try {
 						result.items = getRemoteItems(remoteFiles, readItems);
@@ -123,8 +133,12 @@ class BackupImporter {
 					break;
 				}
 			}
-			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
-				tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+			if (item != null) {
+				if (!item.shouldReadOnCollecting() || forceReadData) {
+					tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+				} else {
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+				}
 			}
 		}
 		ThreadPoolTaskExecutor<ItemFileImportTask> executor = createExecutor();
@@ -145,36 +159,35 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
-				if (Algorithms.isEmpty(error)) {
+				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
+				boolean error = !Algorithms.isEmpty(errorStr);
+				if (!error) {
 					is = new FileInputStream(tempFile);
-					reader.readFromStream(is, remoteFile.getName());
+					reader.readFromStream(is, tempFile, remoteFile.getName());
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
 					}
-					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getUpdatetimems());
 					if (item instanceof FileSettingsItem) {
 						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 						if (app.getAppPath(itemFileName).isDirectory()) {
 							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-									remoteFile.getClienttimems());
+									remoteFile.getUpdatetimems());
 						}
 					}
-				} else {
-					throw new IOException("Error reading temp item file " + fileName + ": " + error);
+				}
+				if (tempFile.exists()) {
+					tempFile.delete();
+				}
+				if (error) {
+					throw new IOException("Error reading temp item file " + fileName + ": " + errorStr);
 				}
 			}
 			item.applyAdditionalParams(reader);
-		} catch (IllegalArgumentException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (IOException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (UserNotRegisteredException e) {
+		} catch (IllegalArgumentException | IOException | UserNotRegisteredException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
 		} finally {
@@ -228,7 +241,7 @@ class BackupImporter {
 					}
 					UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
 					long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
-					if (readItems && (uploadTime != remoteFile.getClienttimems() || delete)) {
+					if (readItems && (uploadTime != remoteFile.getUpdatetimems() || delete)) {
 						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 					}
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
@@ -454,7 +467,14 @@ class BackupImporter {
 			}
 			ThreadPoolTaskExecutor<ItemFileDownloadTask> itemFilesDownloadExecutor = createExecutor();
 			itemFilesDownloadExecutor.run(itemFileDownloadTasks);
-		} else {
+		}
+		for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
+			File tempFile = entry.getKey();
+			if (tempFile.exists()) {
+				tempFile.delete();
+			}
+		}
+		if (hasDownloadErrors) {
 			throw new IOException("Error downloading temp item files");
 		}
 	}
@@ -476,12 +496,9 @@ class BackupImporter {
 		FileInputStream is = null;
 		try {
 			is = new FileInputStream(tempFile);
-			reader.readFromStream(is, item.getFileName());
+			reader.readFromStream(is, tempFile, item.getFileName());
 			item.applyAdditionalParams(reader);
-		} catch (IllegalArgumentException e) {
-			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-			LOG.error("Error reading item data: " + item.getName(), e);
-		} catch (IOException e) {
+		} catch (IllegalArgumentException | IOException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
 		} finally {
@@ -530,15 +547,20 @@ class BackupImporter {
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(type, fileName, progress);
+					listener.updateGeneralProgress(itemsProgress.get(), p);
 				}
 			}
 
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				itemsProgress.addAndGet(1);
+				dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				if (listener != null) {
 					listener.itemExportDone(type, fileName);
+					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());
 				}
 			}
 
@@ -561,15 +583,19 @@ class BackupImporter {
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(type, itemFileName, progress);
+					listener.updateGeneralProgress(itemsProgress.get(), p);
 				}
 			}
 
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				itemsProgress.addAndGet(1);
 				if (listener != null) {
 					listener.itemExportDone(type, itemFileName);
+					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());
 				}
 			}
 

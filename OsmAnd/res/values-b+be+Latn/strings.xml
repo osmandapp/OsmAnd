@@ -2049,7 +2049,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="restore_purchases">Adnaŭleńnie pakupak</string>
     <string name="fonts_header">Šryfty mapy</string>
     <string name="right_side_navigation">Pravabakavy ruch</string>
-    <string name="driving_region_automatic">Aŭtamatyčna</string>
+    <string name="shared_string_automatic">Aŭtamatyčna</string>
     <string name="do_not_show_startup_messages">Nie pakazvać paviedamlienni pry zapusku</string>
     <string name="parking_options">Opcyi parkoŭki</string>
     <string name="full_version_thanks">Diakuj vam za nabyccio platnaj viersii OsmAnd.</string>

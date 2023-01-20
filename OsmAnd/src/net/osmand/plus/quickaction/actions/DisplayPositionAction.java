@@ -38,15 +38,15 @@ public class DisplayPositionAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		CommonPreference<Boolean> pref = getPreference(mapActivity);
-		boolean currentState = pref.get();
-		pref.set(!currentState);
+		CommonPreference<Integer> pref = getPreference(mapActivity);
+		int currentState = pref.get();
+		pref.set((currentState == 2) ? 0 : currentState + 1);
 		mapActivity.updateLayers();
 	}
 
-	private CommonPreference<Boolean> getPreference(@NonNull Context ctx) {
+	private CommonPreference<Integer> getPreference(@NonNull Context ctx) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		return app.getSettings().CENTER_POSITION_ON_MAP;
+		return app.getSettings().POSITION_PLACEMENT_ON_MAP;
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class DisplayPositionAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (getPreference(context).get()) {
+		if (getPreference(context).get() == 1) {
 			return DISABLE_ICON_ID;
 		} else {
 			return ENABLE_ICON_ID;
@@ -69,7 +69,7 @@ public class DisplayPositionAction extends QuickAction {
 
 	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
-		if (getPreference(app).get()) {
+		if (getPreference(app).get() == 1) {
 			return app.getString(R.string.shared_string_disable);
 		} else {
 			return app.getString(R.string.shared_string_enable);

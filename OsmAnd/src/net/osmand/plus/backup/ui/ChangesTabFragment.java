@@ -37,6 +37,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
@@ -73,7 +74,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
 
-		adapter = new ChangesAdapter(this, nightMode);
+		adapter = new ChangesAdapter(app, this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -87,7 +88,16 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	@Override
 	public void onResume() {
 		super.onResume();
+		backupHelper.addPrepareBackupListener(this);
+		settingsHelper.addBackupSyncListener(this);
 		updateAdapter();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		backupHelper.removePrepareBackupListener(this);
+		settingsHelper.removeBackupSyncListener(this);
 	}
 
 	@Override
@@ -112,21 +122,28 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
-		app.runInUIThread(() -> {
-			updateAdapter();
-			prepareBackup();
-		});
+		app.runInUIThread(this::updateAdapter);
+	}
+
+	@Override
+	public void onBackupItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		app.runInUIThread(() -> adapter.onBackupItemStarted(type, fileName, work));
+	}
+
+	@Override
+	public void onBackupItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		app.runInUIThread(() -> adapter.onBackupItemProgress(type, fileName, value));
+	}
+
+	@Override
+	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
+		app.runInUIThread(() -> adapter.onBackupItemFinished(type, fileName));
 	}
 
 	private void updateAdapter() {
 		if (adapter != null) {
-			adapter.setCloudChangeItems(generateData());
-		}
-	}
-
-	private void prepareBackup() {
-		if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
-			backupHelper.prepareBackup();
+			boolean preparing = backupHelper.isBackupPreparing();
+			adapter.setCloudChangeItems(!preparing ? generateData() : Collections.emptyList());
 		}
 	}
 
@@ -190,7 +207,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		changeItem.operation = operation;
 		changeItem.localFile = localFile;
 		changeItem.remoteFile = remoteFile;
-		changeItem.fileName = Algorithms.getFileWithoutDirs(key);
+		changeItem.fileName = BackupHelper.getItemFileName(settingsItem);
 
 		return changeItem;
 	}

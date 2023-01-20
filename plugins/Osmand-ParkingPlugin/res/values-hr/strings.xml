@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-<string name="shared_string_no">Ne</string>
-    <string name="shared_string_yes">Da</string>
-    <string name="osmand_app_not_found">OsmAnd nije instaliran</string>
-    <string name="app_name">OsmAnd Parkiralište</string>
-    <string name="parking_plugin_installed">OsmAnd dodatak za parkirališta je instaliran i omogućen u OsmAnd postavkama.</string>
-</resources>

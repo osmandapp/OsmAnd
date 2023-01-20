@@ -81,7 +81,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
-		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
 
 		setupToolbar(view);
@@ -336,11 +336,6 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 				DeleteProgressBottomSheet.showInstance(activity.getSupportFragmentManager(), files.size());
 			}
 		}
-	}
-
-	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
-
 	}
 
 	@Override

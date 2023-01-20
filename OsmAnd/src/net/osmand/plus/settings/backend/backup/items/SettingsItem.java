@@ -152,6 +152,10 @@ public abstract class SettingsItem {
 		// non implemented
 	}
 
+	public void delete() {
+		// non implemented
+	}
+
 	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		// non implemented
 	}
@@ -214,7 +218,8 @@ public abstract class SettingsItem {
 	protected SettingsItemReader<? extends SettingsItem> getJsonReader() {
 		return new SettingsItemReader<SettingsItem>(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
 					BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

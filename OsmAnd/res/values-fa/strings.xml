@@ -1747,7 +1747,7 @@
     <string name="restore_purchases">بازیابی خریدها</string>
     <string name="fonts_header">فونت‌های نقشه</string>
     <string name="right_side_navigation">رانندگی از راست</string>
-    <string name="driving_region_automatic">خودکار</string>
+    <string name="shared_string_automatic">خودکار</string>
     <string name="do_not_show_startup_messages">پیام‌های آغازین را نشان نده</string>
     <string name="parking_options">گزینه‌های پارکینگ</string>
     <string name="full_version_thanks">سپاسگزاریم که نسخهٔ پولی OsmAnd را خریدید.</string>

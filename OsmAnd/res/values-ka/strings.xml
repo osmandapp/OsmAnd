@@ -1492,7 +1492,7 @@
     <string name="mapillary_menu_date_from">-დან</string>
     <string name="shared_string_to">-მდე</string>
     <string name="shared_string_permissions">უფლებები</string>
-    <string name="driving_region_automatic">ავტომატური</string>
+    <string name="shared_string_automatic">ავტომატური</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">ბორცვიანი</string>
     <string name="lang_ber">ბერბერული</string>
     <string name="quick_action_bug_message">შეტყობინება</string>

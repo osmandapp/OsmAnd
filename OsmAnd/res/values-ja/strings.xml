@@ -2209,7 +2209,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_visible">表示</string>
     <string name="fonts_header">マップ用フォント</string>
     <string name="right_side_navigation">右側通行</string>
-    <string name="driving_region_automatic">自動判別</string>
+    <string name="shared_string_automatic">自動判別</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAndは実行中のどのメニューを開いたかの情報を収集します。ユーザーの現在地、入力した地域、閲覧情報、検索、ダウンロードなどの情報を送信することはありません。</string>
     <string name="do_not_send_anonymous_app_usage">アプリケーションの匿名使用統計情報を送信しない</string>
     <string name="do_not_show_startup_messages">起動時にメッセージを表示しない</string>

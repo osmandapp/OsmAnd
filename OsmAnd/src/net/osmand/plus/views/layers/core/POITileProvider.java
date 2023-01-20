@@ -188,6 +188,9 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			return new QListMapTiledCollectionPoint();
+		}
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
 		OsmandMapLayer.MapLayerData<List<Amenity>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
@@ -198,6 +201,9 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
+			if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+				return new QListMapTiledCollectionPoint();
+			}
 			synchronized (dataReadyCallback.getSync()) {
 				if (dataReadyCallback.isReady()) {
 					break;

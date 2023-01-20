@@ -2127,7 +2127,7 @@ Lon %2$s</string>
     <string name="restore_purchases">Restaurar as compras</string>
     <string name="fonts_header">Fontes das letras do mapa</string>
     <string name="right_side_navigation">Condución pola dereita</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Non enviar estatísticas anónimas de uso da aplicación</string>
     <string name="do_not_show_startup_messages">Non amosar mensaxes do inicio</string>
     <string name="parking_options">Opcións de aparcamento</string>

@@ -22,10 +22,12 @@ public class BackupInfo {
 
 	public List<SettingsItem> itemsToUpload;
 	public List<SettingsItem> itemsToDelete;
+	public List<SettingsItem> itemsToLocalDelete;
 	public List<LocalFile> filteredFilesToUpload;
 	public List<RemoteFile> filteredFilesToDelete;
 	public List<RemoteFile> filteredFilesToDownload;
 	public List<Pair<LocalFile, RemoteFile>> filteredFilesToMerge;
+	public List<LocalFile> filteredLocalFilesToDelete;
 
 	void createItemCollections(@NonNull OsmandApplication app) {
 		createFilteredFilesToDownload(app);
@@ -34,6 +36,8 @@ public class BackupInfo {
 		createFilteredFilesToDelete(app);
 		createItemsToDelete();
 		createFilteredFilesToMerge(app);
+		createFilteredLocalFilesToDelete(app);
+		createLocalItemsToDelete();
 	}
 
 	private void createItemsToUpload() {
@@ -56,6 +60,17 @@ public class BackupInfo {
 			}
 		}
 		itemsToDelete = new ArrayList<>(items);
+	}
+
+	private void createLocalItemsToDelete() {
+		Set<SettingsItem> items = new HashSet<>();
+		for (LocalFile localFile : filteredLocalFilesToDelete) {
+			SettingsItem item = localFile.item;
+			if (item != null) {
+				items.add(item);
+			}
+		}
+		itemsToLocalDelete = new ArrayList<>(items);
 	}
 
 	private void createFilteredFilesToDownload(@NonNull OsmandApplication app) {
@@ -93,6 +108,18 @@ public class BackupInfo {
 			}
 		}
 		filteredFilesToDelete = files;
+	}
+
+	private void createFilteredLocalFilesToDelete(@NonNull OsmandApplication app) {
+		List<LocalFile> files = new ArrayList<>();
+		for (LocalFile localFile : localFilesToDelete) {
+			ExportSettingsType exportType = localFile.item != null
+					? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
+			if (exportType != null && ExportSettingsType.isTypeEnabled(exportType)) {
+				files.add(localFile);
+			}
+		}
+		filteredLocalFilesToDelete = files;
 	}
 
 	private void createFilteredFilesToMerge(@NonNull OsmandApplication app) {

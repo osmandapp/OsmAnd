@@ -2182,7 +2182,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferisci strade secondarie</string>
     <string name="relief_smoothness_factor_descr">Terreno preferito: pianeggiante o collinoso.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleziona la variabilità della quota</string>
-    <string name="driving_region_automatic">Automatica</string>
+    <string name="shared_string_automatic">Automatica</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi, cerchi o scarichi.</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
@@ -3406,7 +3406,7 @@
     <string name="profile_type_custom_string">Profilo personalizzato</string>
     <string name="shared_string_angle_param">Angolo: %s°</string>
     <string name="shared_string_angle">Angolo</string>
-    <string name="recalc_angle_dialog_descr">Una linea retta sarà visualizzata fra la mia localizzazione e la destinazione finché il percorso viene elaborato</string>
+    <string name="recalc_angle_dialog_descr">Un extra segmento rettilineo verrà visualizzato tra la mia posizione e il percorso calcolato fino a quando il percorso non viene ricalcolato</string>
     <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e il percorso</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
@@ -4115,7 +4115,7 @@
     <string name="backup_confilcts_descr">Alcuni file potrebbero non essere caricati nel server perché la versione sul server è più recente.</string>
     <string name="backup_view_conflicts">Visualizza i conflitti</string>
     <string name="backup_no_internet_descr">Controlla la tua connessione internet e scarica nuovamente.</string>
-    <string name="backup_pause_all">Metti in tutto in pausa</string>
+    <string name="backup_pause_all">Metti tutto in pausa</string>
     <string name="upload_local_version">Upload la versione locale</string>
     <string name="download_server_version">Scarica la versione del server</string>
     <string name="shared_string_logout">Esci</string>
@@ -4205,8 +4205,8 @@
     <string name="backup_version_history_removed">Tutti i dati della cronologia sono stati rimossi.</string>
     <string name="backup_data_removed">Tutti i dati sono stati rimossi.</string>
     <string name="shared_string_progress">Avanzamento</string>
-    <string name="backup_do_not_have_any">Non hai ancora un backup online.</string>
-    <string name="backup_dont_have_any_descr">Imposta backup automatici e non perderai mai i dati.</string>
+    <string name="backup_do_not_have_any">Non hai ancora alcun backup online</string>
+    <string name="backup_dont_have_any_descr">Imposta un backup automatico in modo da non doverti preoccupare della perdita di dati.</string>
     <string name="backup_welcome_back">Bentornato!</string>
     <string name="backup_setup">Imposta il backup</string>
     <string name="backup_restore_now">Ripristina adesso</string>
@@ -4238,14 +4238,14 @@
     <string name="map_updates_for_mappers">Aggiornamenti della mappa per i mappatori</string>
     <string name="benefits_for_contributors_primary_descr">I contributori attivi di OpenStreetMap.org potrebbero essere idonei gli aggiornamenti mensili e orari illimitati delle mappe.</string>
     <string name="benefits_for_contributors_secondary_descr">Accedi a OpenStreetMap per controllare se sei idoneo per gli aggiornamenti mensili e orari illimitati delle mappe.</string>
-    <string name="use_login_and_password">Utilizza il nomeutente e password</string>
+    <string name="use_login_and_password">Utilizza il nome utente e password</string>
     <string name="shared_string_contributions">Contributi</string>
     <string name="map_updates_are_unavailable_yet">Non sono ancora disponibili aggiornamenti per le mappe :-(</string>
     <string name="connect_track_points_as">Collega i punti del percorso</string>
     <string name="purchases_restored">Acquisti ripristinati</string>
     <string name="enter_verification_code">Immetti la password usa e getta</string>
     <string name="purchases_feature_desc_nautical">Ottieni l\'accesso alle informazioni batimetriche</string>
-    <string name="backup_welcome_back_descr">Ripristina i dati su questo dispositivo utilizzando i backup esistenti, oppure invia il backup a OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Ripristina i dati su questo dispositivo utilizzando OsmAnd Cloud.</string>
     <string name="pro_features">Funzionalità avanzate</string>
     <string name="backup_version_history">Cronologia della versione</string>
     <string name="backup_storage_taken">Memoria occupata</string>
@@ -4814,7 +4814,7 @@
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
-    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza alcun costo aggiuntivo.</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su diverse piattaforme (Android/iOS/Web) senza costi aggiuntivi.</string>
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
@@ -5011,4 +5011,9 @@
     <string name="choose_what_to_sync">Scegli cosa sincronizzare</string>
     <string name="cloud_sync_progress">Sincronizza...%1$s</string>
     <string name="av_audio_format_bottom_sheet_descr">Seleziona il formato di uscita audio. Il formato di file per l\'audio è 3GPP (.3gp).</string>
+    <string name="set_up_backup">Impostare il backup</string>
+    <string name="si_nm_ft">Miglia/piedi nautici</string>
+    <string name="si_nm_mt">Miglia/metri nautici</string>
+    <string name="x_axis">Asse X</string>
+    <string name="y_axis">Asse Y</string>
 </resources>

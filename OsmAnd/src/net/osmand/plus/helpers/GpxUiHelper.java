@@ -87,8 +87,8 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -933,6 +933,13 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
+	public static List<GPXInfo> getGPXFiles(@NonNull File dir, boolean absolutePath) {
+		List<GPXInfo> gpxInfos = new ArrayList<>();
+		readGpxDirectory(dir, gpxInfos, "", absolutePath);
+		return gpxInfos;
+	}
+
+	@NonNull
 	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, List<String> selectedGpxList, boolean absolutePath) {
 		List<GPXInfo> allGpxFiles = new ArrayList<>();
 		readGpxDirectory(dir, allGpxFiles, "", absolutePath);
@@ -1161,7 +1168,7 @@ public class GpxUiHelper {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 			mainUnitStr = R.string.nm;
 			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
@@ -1178,7 +1185,8 @@ public class GpxUiHelper {
 				mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
 				mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
-				mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+				mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters ||
+				mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
 
 			divX = mainUnitInMeters;
 			if (fmt == null) {
@@ -1191,7 +1199,7 @@ public class GpxUiHelper {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				divX = 1f;
 				mainUnitStr = R.string.m;
-			} else if (mc == MetricsConstants.MILES_AND_FEET) {
+			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				divX = 1f / FEET_IN_ONE_METER;
 				mainUnitStr = R.string.foot;
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
@@ -1400,7 +1408,7 @@ public class GpxUiHelper {
 															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		boolean light = settings.isLightContent();
 		float convEle = useFeet ? 3.28084f : 1.0f;
 
@@ -1634,18 +1642,22 @@ public class GpxUiHelper {
 														   boolean useRightAxis,
 														   boolean drawFilled,
 														   boolean calcWithoutGaps) {
-		if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
-			return null;
-		}
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
+		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		float divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
+			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
+		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
+			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
+		} else {
+			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+		}
 
 		final String mainUnitY = "%";
 
@@ -1730,8 +1742,13 @@ public class GpxUiHelper {
 		boolean hasSameY = false;
 		Entry lastEntry = null;
 		lastIndex = calculatedSlopeDist.length - 1;
+		float timeSpanInSeconds = analysis.timeSpan / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
-			x = (float) calculatedSlopeDist[i] / divX;
+			if ((axisType == GPXDataSetAxisType.TIMEOFDAY || axisType == GPXDataSetAxisType.TIME) && analysis.isTimeSpecified()) {
+				x = (timeSpanInSeconds * i) / calculatedSlopeDist.length;
+			} else {
+				x = (float) calculatedSlopeDist[i] / divX;
+			}
 			slope = (float) calculatedSlope[i];
 			if (prevSlope != -80000) {
 				if (prevSlope == slope && i < lastIndex) {

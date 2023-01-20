@@ -9,43 +9,79 @@
 
 		<Preference
 			android:icon="@drawable/ic_map"
-			android:key="maps_memory_used"
+			android:key="maps_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/shared_string_maps" />
 
 		<Preference
-			android:icon="@drawable/ic_action_wikipedia"
-			android:key="travel_memory_used"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/wikivoyage_travel_guide" />
-
-		<Preference
 			android:icon="@drawable/ic_map"
-			android:key="terrain_memory_used"
+			android:key="terrain_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/hillshade_slope_contour_lines" />
 
 		<Preference
+			android:icon="@drawable/ic_world_globe_dark"
+			android:key="tiles_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/shared_sting_tiles" />
+
+		<Preference
+			android:icon="@drawable/ic_map"
+			android:key="roadsonly_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/roads_only" />
+
+		<Preference
+			android:icon="@drawable/ic_map"
+			android:key="nautical_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/nautical_maps" />
+		
+		<Preference
+			android:icon="@drawable/ic_world_globe_dark"
+			android:key="live_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/osmand_live" />
+
+		<Preference
+			android:icon="@drawable/ic_action_folder"
+			android:key="archive_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/local_indexes_cat_backup" />
+
+		<Preference
+			android:icon="@drawable/ic_action_wikipedia"
+			android:key="wiki_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/local_indexes_cat_wiki" />
+
+		<Preference
+			android:icon="@drawable/ic_action_wikipedia"
+			android:key="travel_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/wikivoyage_travel_guide" />
+
+		<Preference
+			android:icon="@drawable/ic_world_globe_dark"
+			android:key="weather_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/shared_string_weather" />
+
+		<Preference
 			android:icon="@drawable/ic_action_polygom_dark"
-			android:key="tracks_memory_used"
+			android:key="tracks_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/shared_string_gpx_tracks" />
 
 		<Preference
 			android:icon="@drawable/ic_action_photo_dark"
-			android:key="notes_memory_used"
+			android:key="notes_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/audionotes_plugin_name" />
 
 		<Preference
-			android:icon="@drawable/ic_world_globe_dark"
-			android:key="tiles_memory_used"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/shared_sting_tiles" />
-
-		<Preference
 			android:icon="@drawable/ic_action_folder"
-			android:key="other_memory_used"
+			android:key="other_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/shared_string_other" />
 
@@ -56,4 +92,4 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/change_data_storage_folder" />
 
-</PreferenceScreen> 
+</PreferenceScreen>

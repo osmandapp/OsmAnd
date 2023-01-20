@@ -99,6 +99,11 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	}
 
 	@Override
+	protected void deleteItem(AvoidRoadInfo item) {
+		specificRoads.removeImpassableRoad(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull AvoidRoadInfo item) {
 		for (AvoidRoadInfo roadInfo : existingItems) {
 			if (roadInfo.id == item.id) {

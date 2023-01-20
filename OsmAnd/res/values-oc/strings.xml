@@ -726,7 +726,7 @@
     <string name="speak_street_names">Noms de carrieras (TTS)</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="daynight_mode_auto">Auba/tremont</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="shared_string_near">Vesin de</string>
     <string name="no_address_found">Ges d\'adreiça trobada</string>
     <string name="arrival_distance_factor_early">Lèu</string>

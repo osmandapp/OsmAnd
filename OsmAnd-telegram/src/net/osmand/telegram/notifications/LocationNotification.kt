@@ -31,8 +31,8 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		}, IntentFilter(DISABLE_MONITORING_ACTION))
 	}
 
-	override val type: TelegramNotification.NotificationType
-		get() = TelegramNotification.NotificationType.LOCATION
+	override val type: NotificationType
+		get() = NotificationType.LOCATION
 
 	override val priority: Int
 		get() = NotificationCompat.PRIORITY_DEFAULT
@@ -47,10 +47,10 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		get() = app.settings.hasAnyChatToShareLocation() || isShowingChatsNotificationEnabled()
 
 	override val telegramNotificationId: Int
-		get() = TelegramNotification.LOCATION_NOTIFICATION_SERVICE_ID
+		get() = LOCATION_NOTIFICATION_SERVICE_ID
 
 	override val telegramWearableNotificationId: Int
-		get() = TelegramNotification.WEAR_LOCATION_NOTIFICATION_SERVICE_ID
+		get() = WEAR_LOCATION_NOTIFICATION_SERVICE_ID
 
 	override fun buildNotification(wearable: Boolean): NotificationCompat.Builder {
 		val notificationTitle: String
@@ -69,7 +69,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				app,
 				0,
 				Intent(DISABLE_SHARING_ACTION),
-				PendingIntent.FLAG_UPDATE_CURRENT
+				PendingIntent.FLAG_IMMUTABLE
 			)
 		} else {
 			notificationTitle = app.getString(R.string.location_recording_enabled)
@@ -81,7 +81,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 				app,
 				0,
 				Intent(DISABLE_MONITORING_ACTION),
-				PendingIntent.FLAG_UPDATE_CURRENT
+				PendingIntent.FLAG_IMMUTABLE
 			)
 		}
 

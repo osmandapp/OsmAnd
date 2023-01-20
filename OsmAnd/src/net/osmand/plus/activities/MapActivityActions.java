@@ -384,7 +384,7 @@ public class MapActivityActions extends MapActions {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName, useIntermediatePointsByDefault,
 				showMenu, menuState);
 		if (showMenu) {
-			app.getOsmandMap().getMapLayers().getMapControlsLayer().showRouteInfoMenu(menuState);
+			mapActivity.getMapRouteInfoMenu().setShowMenu(menuState);
 		}
 		if (!settings.SPEED_CAMERAS_ALERT_SHOWED.get()) {
 			SpeedCamerasBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), null);

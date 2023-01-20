@@ -2511,7 +2511,7 @@
     <string name="follow_track">Следване на маршрута</string>
     <string name="show_gpx">Трасета</string>
     <string name="process_downloading_service">Услуга за изтегляне на OsnAnd</string>
-    <string name="driving_region_automatic">Автоматично</string>
+    <string name="shared_string_automatic">Автоматично</string>
     <string name="access_widget_expand">Разтваряне</string>
     <string name="lang_ber">Берберски</string>
     <string name="lang_kn">Каннада</string>

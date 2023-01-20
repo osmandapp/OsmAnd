@@ -359,7 +359,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
 		boolean nightMode = getCarContext().isDarkMode();
-		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_MANUAL) {
 			compassResId = !nightMode ? R.drawable.ic_compass_niu_white : R.drawable.ic_compass_niu;
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			compassResId = !nightMode ? R.drawable.ic_compass_bearing_white : R.drawable.ic_compass_bearing;

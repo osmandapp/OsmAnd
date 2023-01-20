@@ -1,9 +1,11 @@
 package net.osmand.plus.settings.backend.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,5 +21,6 @@ public abstract class SettingsItemReader<T extends SettingsItem> {
 		return item;
 	}
 
-	public abstract void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException;
+	public abstract void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+	                                    @Nullable String entryName) throws IOException, IllegalArgumentException;
 }

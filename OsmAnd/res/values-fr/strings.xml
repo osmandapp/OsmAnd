@@ -1168,7 +1168,7 @@
     <string name="lang_uk">Ukrainien</string>
     <string name="lang_vi">Vietnamien</string>
     <string name="lang_cy">Gallois</string>
-    <string name="always_center_position_on_map">Centrer l\'écran sur la position actuelle</string>
+    <string name="always_center_position_on_map">Position toujours placée au centre</string>
     <string name="voice_pref_title">Voix</string>
     <string name="misc_pref_title">Divers</string>
     <string name="localization_pref_title">Paramètres régionaux</string>
@@ -2193,7 +2193,7 @@
     <string name="do_not_show_startup_messages">N\'afficher aucun message au démarrage</string>
     <string name="do_not_show_startup_messages_desc">Ne pas afficher les messages promotionnels et les annonces locales.</string>
     <string name="right_side_navigation">Conduite à droite</string>
-    <string name="driving_region_automatic">Automatique</string>
+    <string name="shared_string_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
 \n
@@ -4206,7 +4206,7 @@
     <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
 \nVous devrez vous reconnecter pour sauvegarder ou restaurer vos données.</string>
 =======
-    <string name="backup_welcome_back_descr">Restaurer des données sur cet appareil en utilisant les sauvegardes réalisées ou paramétrer une nouvelle sauvegarde de l\'appareil sur OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurer des données sur cet appareil en utilisant OsmAnd Cloud.</string>
     <string name="backup_error_subscription_was_expired_descr">Votre abonnement OsmAnd Pro a expiré, renouvelez-le pour utiliser la sauvegarde. Vous pouvez toujours restaurer des données à partir du Cloud.</string>
     <string name="contour_lines_hillshades_slope">Courbes de niveau, ombres, pentes</string>
     <string name="backup_deleting_all_data">Suppression de toutes les données …</string>
@@ -4216,8 +4216,8 @@
     <string name="backup_version_history_removed">L’historique de toutes les versions a été supprimé.</string>
     <string name="backup_data_removed">Toutes les données ont été supprimées.</string>
     <string name="shared_string_progress">Avancement</string>
-    <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne.</string>
-    <string name="backup_dont_have_any_descr">Planifiez une sauvegarde automatique pour ne jamais perdre vos données.</string>
+    <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne</string>
+    <string name="backup_dont_have_any_descr">Paramétrer une sauvegarde automatique pour ne plus vous inquiéter de perde vos données.</string>
     <string name="backup_welcome_back">Content de vous revoir !</string>
     <string name="backup_setup">Paramétrer la sauvegarde</string>
     <string name="backup_restore_now">Restaurer maintenant</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Affichage sur l\'écran</string>
+    <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
@@ -4948,17 +4948,17 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et fréquence cardiaque.</string>
-    <string name="release_4_3">• Nouvelle version, plus rapide, du moteur de rendu de la carte, avec vue 2.5D
+    <string name="release_4_3">• Moteur de rendu plus rapide (OpenGL version 2) avec vue 2.5D
 \n
 \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
 \n
 \n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude
 \n
-\n• Ajout d\'options de taille du texte dans le mode \"Distance par appui\"
+\n• Ajout d\'options sur la taille du texte pour le mode \"Distance par appui\"
 \n
-\n• Ajout d\'une option permettant de changer le comportement du clic dans le mode \"Marques\"
+\n• Ajout d\'une option permettant de modifier le comportement du clic en mode \"Marques\"
 \n
-\n• Correction de l\'option \"Afficher la position\"
+\n• Correction de l\'option \"Emplacement de la position\"
 \n
 \n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX
 \n
@@ -4975,9 +4975,9 @@
 \n</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
-    <string name="cloud_sync_progress">Synchro…%1$s</string>
+    <string name="cloud_sync_progress">Synchronisation…%1$s</string>
     <string name="checking_progress">Vérification…</string>
-    <string name="choose_what_to_sync">Sélectionner que synchroniser</string>
+    <string name="choose_what_to_sync">Sélectionner quoi synchroniser</string>
     <string name="res_unknown">Inconnu</string>
     <string name="shared_string_unsynced">Non synchronisé</string>
     <string name="check_for_updates">Vérifier les mises à jour</string>
@@ -5010,4 +5010,15 @@
     <string name="cloud_no_conflicts">Il n\'y a aucun conflit</string>
     <string name="cloud_all_changes_uploaded_descr">Toutes les modifications effectuées sur cet appareil sont synchronisées avec OsmAnd Cloud.</string>
     <string name="changes">Modifications %1$s</string>
+    <string name="si_nm_ft">Milles marins / pieds</string>
+    <string name="si_nm_mt">Milles marins / mètres</string>
+    <string name="av_audio_format_bottom_sheet_descr">Sélectionnez le format audio de sortie. Les fichiers audio sont de type 3GPP (.3gp).</string>
+    <string name="set_up_backup">Paramétrer la sauvegarde</string>
+    <string name="x_axis">Axe des abscisses</string>
+    <string name="y_axis">Axe des ordonnées</string>
+    <string name="value_downloaded_of_mb">Téléchargement %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Partager le lien</string>
+    <string name="share_as_file">Partager en tant que fichier</string>
+    <string name="skip_download">Ignorer le téléchargement</string>
+    <string name="determine_location">Nous permet d’estimer votre position</string>
 </resources>

@@ -157,7 +157,7 @@ public class PrepareBackupTask {
 
 	private void doCollectRemoteFiles() {
 		try {
-			app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, true,
+			app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, false,
 					(succeed, empty, items, remoteFiles) -> {
 						if (succeed) {
 							backup.setSettingsItems(items);

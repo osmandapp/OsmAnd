@@ -1017,7 +1017,7 @@ public class OsmandSettings {
 			if (mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			}
-			if (mc == MetricsConstants.NAUTICAL_MILES) {
+			if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			} else if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				return SpeedConstants.KILOMETERS_PER_HOUR;
@@ -1632,6 +1632,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_NONE = 0;
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
+	public static final int ROTATE_MAP_MANUAL = 3;
 	public final CommonPreference<Integer> ROTATE_MAP =
 			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
@@ -1647,13 +1648,16 @@ public class OsmandSettings {
 	public static final int MIDDLE_TOP_CONSTANT = 3;
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
 
-	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false) {
+	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
+	public static final int POSITION_PLACEMENT_CENTER = 1;
+	public static final int POSITION_PLACEMENT_BOTTOM = 2;
+	public final CommonPreference<Integer> POSITION_PLACEMENT_ON_MAP = new IntPreference(this, "position_placement_on_map", 0) {
 
 		@Override
-		public Boolean getProfileDefaultValue(ApplicationMode mode) {
+		public Integer getProfileDefaultValue(ApplicationMode mode) {
 			// By default display position shifts to the bottom part of the screen
 			// only if the "Map orientation" was set to "Movement direction".
-			return ROTATE_MAP.getModeValue(mode) != OsmandSettings.ROTATE_MAP_BEARING;
+			return 0;
 		}
 	}.makeProfile();
 
@@ -2818,7 +2822,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= 28).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();

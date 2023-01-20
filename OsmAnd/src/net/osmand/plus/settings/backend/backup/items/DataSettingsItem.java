@@ -83,7 +83,8 @@ public class DataSettingsItem extends StreamSettingsItem {
 	public SettingsItemReader<? extends SettingsItem> getReader() {
 		return new StreamSettingsItemReader(this) {
 			@Override
-			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
+			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
+			                           @Nullable String entryName) throws IOException, IllegalArgumentException {
 				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 				int nRead;
 				byte[] data = new byte[SettingsHelper.BUFFER];

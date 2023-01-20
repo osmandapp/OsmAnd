@@ -2190,7 +2190,7 @@
     <string name="parking_options">Možnosti parkiranja</string>
     <string name="full_version_thanks">Zahvaljujemo se vam za nakup polne različice programa OsmAnd.</string>
     <string name="right_side_navigation">Vožnja po desni strani</string>
-    <string name="driving_region_automatic">Samodejno</string>
+    <string name="shared_string_automatic">Samodejno</string>
     <string name="quick_action_auto_zoom">Omogoči/Onemogoči samodejno približanje zemljevida</string>
     <string name="quick_action_auto_zoom_on">Vklopi samodejno povečavo</string>
     <string name="quick_action_auto_zoom_off">Izklopi samodejno povečavo</string>

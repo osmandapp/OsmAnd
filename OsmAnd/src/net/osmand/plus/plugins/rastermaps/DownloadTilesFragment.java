@@ -182,7 +182,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private void setupToolbar() {
-		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		View toolbar = view.findViewById(R.id.toolbar);
 
 		ImageButton backButton = toolbar.findViewById(R.id.back_button);

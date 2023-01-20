@@ -96,12 +96,12 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		TextView description = header.findViewById(R.id.description);
 		description.setText(getLastBackupTimeDescription(app, app.getString(R.string.shared_string_never)));
 
-		SyncBackupTask exportTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
-		if (exportTask != null) {
-			icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_update_colored));
+		SyncBackupTask syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
+		if (syncTask != null) {
+			icon.setImageDrawable(getIcon(R.drawable.ic_action_update_colored));
 
-			int progress = exportTask.getGeneralProgress();
-			int maxProgress = exportTask.getMaxProgress();
+			int progress = syncTask.getGeneralProgress();
+			int maxProgress = syncTask.getMaxProgress();
 			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
 
 			title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));
@@ -119,8 +119,9 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 			updateButtonsVisibility();
 		});
 		setupSelectableBackground(header);
-		AndroidUiHelper.updateVisibility(progressBar, exportTask != null);
-		AndroidUiHelper.updateVisibility(description, exportTask == null);
+		AndroidUiHelper.updateVisibility(progressBar, syncTask != null);
+		AndroidUiHelper.updateVisibility(description, syncTask == null);
+		AndroidUiHelper.updateVisibility(header.findViewById(R.id.bottom_divider), false);
 	}
 
 	private void setupSyncButton(@NonNull PrepareBackupResult backup) {
@@ -173,7 +174,9 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 	private void setupCloudChangesButton(@NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
-		int itemsSize = info != null ? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() : -1;
+		int itemsSize = info != null
+				? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() + info.filteredLocalFilesToDelete.size()
+				: -1;
 		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
 		String title = app.getString(R.string.cloud_changes);
 		Drawable icon;

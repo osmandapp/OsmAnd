@@ -942,7 +942,7 @@
     <string name="shared_string_visible">Widźomne</string>
     <string name="fonts_header">Pisma za kartu</string>
     <string name="right_side_navigation">Jězdźenje naprawo</string>
-    <string name="driving_region_automatic">Awtomatisce</string>
+    <string name="shared_string_automatic">Awtomatisce</string>
     <string name="parking_options">Opcije parkowanja</string>
     <string name="full_version_thanks">Dźakujemy so za kup dospołneje wersije OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hórkate</string>
