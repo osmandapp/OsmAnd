@@ -1081,12 +1081,25 @@ public class RouteResultPreparation {
 			return false;
 		}
 
+		boolean straight = false;
 		// set the allowed lane bit
 		for (int i = 0; i < active.disabledLanes.length; i++) {
 			if (i >= active.activeStartIndex && i <= active.activeEndIndex && 
 					active.originalLanes[i] % 2 == 1) {
 				active.disabledLanes[i] |= 1;
+				straight = TurnType.getPrimaryTurn(active.disabledLanes[i]) == TurnType.C;
 			}
+		}
+		TurnType currentTurnType = currentSegment.getTurnType();
+		if (straight && nextSegment.getTurnType().getActiveCommonLaneTurn() == TurnType.C) {
+			TurnType nextTurnType = TurnType.valueOf(nextSegment.getTurnType().getValue(), leftSide);
+			nextTurnType.setExitOut(currentTurnType.getExitOut());
+			nextTurnType.setTurnAngle(currentTurnType.getTurnAngle());
+			nextTurnType.setSkipToSpeak(currentTurnType.isSkipToSpeak());
+			nextTurnType.setLanes(currentTurnType.getLanes());
+			nextTurnType.setPossibleLeftTurn(currentTurnType.isPossibleLeftTurn());
+			nextTurnType.setPossibleRightTurn(currentTurnType.isPossibleRightTurn());
+			currentSegment.setTurnType(nextTurnType);
 		}
 		TurnType currentTurn = currentSegment.getTurnType();
 		currentTurn.setLanes(active.disabledLanes);
@@ -1598,8 +1611,7 @@ public class RouteResultPreparation {
 			}
 
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
-				boolean hasThrough = hasThroughWOSightly(turnLanesPrevSegm, currentSegm, prevSegm, attachedOnTheRight);
-				if ((smallTargetVariation || smallStraightVariation) && !hasThrough) {
+				if ((smallTargetVariation || smallStraightVariation)) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
@@ -1624,26 +1636,6 @@ public class RouteResultPreparation {
 			}
 		}
 		return rs;
-	}
-
-	private boolean hasThroughWOSightly(String turnLanesPrevSeg, RouteSegmentResult currentSeg,
-	                                    RouteSegmentResult prevSeg, boolean attachedOnTheRight) {
-		String turnLanesCurSeg = getTurnLanesString(currentSeg);
-		if (turnLanesPrevSeg != null && turnLanesCurSeg != null
-				&& prevSeg.getTurnType() == null && currentSeg.getTurnType() == null) {
-			int[] turnsCur = calculateRawTurnLanes(turnLanesCurSeg, TurnType.C);
-			int laneCur = attachedOnTheRight ? turnsCur[turnsCur.length - 1] : turnsCur[0];
-			int[] turns = calculateRawTurnLanes(turnLanesPrevSeg, TurnType.C);
-			int lane = attachedOnTheRight ? turns[turns.length - 1] : turnsCur[0];
-			boolean hasActiveThrough = TurnType.getPrimaryTurn(lane) == TurnType.C && TurnType.getPrimaryTurn(laneCur) == TurnType.C;
-			boolean hasNotSlightTurn = !hasSlightlyTurn(turnLanesCurSeg); // test 2.3. Highway 161 Service Road to Lyndon B Johnson Freeway (I 635) link
-			return hasActiveThrough && hasNotSlightTurn;
-		}
-		return false;
-	}
-
-	private static boolean hasSlightlyTurn(String turnLanesCurSegm) {
-		return turnLanesCurSegm.contains("slight_left") || turnLanesCurSegm.contains("slight_right");
 	}
 
 	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
