@@ -552,9 +552,9 @@
     <string name="poi_context_menu_delete">Διαγραφή ΣΕ</string>
     <string name="rotate_map_compass_opt">Κατεύθυνση πυξίδας</string>
     <string name="rotate_map_bearing_opt">Κατεύθυνση κίνησης</string>
-    <string name="rotate_map_none_opt">Διορθώθηκε (ο βορράς είναι πάνω)</string>
-    <string name="rotate_map_to_bearing_descr">Ευθυγράμμιση χάρτη:</string>
-    <string name="rotate_map_to_bearing">Προσανατολισμός χάρτη</string>
+    <string name="rotate_map_north_opt">Διορθώθηκε (ο βορράς είναι πάνω)</string>
+    <string name="rotate_map_to_descr">Ευθυγράμμιση χάρτη:</string>
+    <string name="rotate_map_to">Προσανατολισμός χάρτη</string>
     <string name="show_route">Λεπτομέρειες διαδρομής</string>
     <string name="fav_imported_sucessfully">Τα αγαπημένα εισήχθησαν</string>
     <string name="fav_file_to_load_not_found">Δεν βρέθηκε αρχείο GPX που να περιέχει αγαπημένα στο {0}</string>

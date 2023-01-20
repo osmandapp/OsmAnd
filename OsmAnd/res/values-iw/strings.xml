@@ -550,9 +550,9 @@
     <string name="poi_context_menu_delete">מחיקת נ״ע</string>
     <string name="rotate_map_compass_opt">כיוון מצפן</string>
     <string name="rotate_map_bearing_opt">כיוון התנועה</string>
-    <string name="rotate_map_none_opt">לא לסובב (הצפון תמיד למעלה)</string>
-    <string name="rotate_map_to_bearing_descr">יישור המפה:</string>
-    <string name="rotate_map_to_bearing">יישור המפה</string>
+    <string name="rotate_map_north_opt">לא לסובב (הצפון תמיד למעלה)</string>
+    <string name="rotate_map_to_descr">יישור המפה:</string>
+    <string name="rotate_map_to">יישור המפה</string>
     <string name="show_route">פרטי המסלול</string>
     <string name="fav_imported_sucessfully">המועדפים יובאו</string>
     <string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל מועדפים לא נמצא תחת {0}</string>

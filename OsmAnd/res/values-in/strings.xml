@@ -1451,7 +1451,7 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="gpx_info_waypoints">Titik jalan: %1$s</string>
     <string name="search_history_city">Kota: {0}</string>
-    <string name="rotate_map_to_bearing_descr">Perataan peta:</string>
+    <string name="rotate_map_to_descr">Perataan peta:</string>
     <string name="index_name_north_america">Amerika Utara</string>
     <string name="free_version_title">Versi gratis</string>
     <string name="local_openstreetmap_uploadall">Unggah semua</string>
@@ -2497,7 +2497,7 @@
     <string name="poi_context_menu_modify">Ubah POI</string>
     <string name="poi_context_menu_delete">Hapus POI</string>
     <string name="rotate_map_bearing_opt">Arah gerakan</string>
-    <string name="rotate_map_none_opt">Fiks (utara selalu ke atas)</string>
+    <string name="rotate_map_north_opt">Fiks (utara selalu ke atas)</string>
     <string name="show_route">Detail rute</string>
     <string name="fav_imported_sucessfully">Favorit telah diimpor</string>
     <string name="import_file_favourites">Simpan data sebagai file GPX atau impor titik jalan ke \'Favorit\'\?</string>
@@ -2591,7 +2591,7 @@
     <string name="indexing_poi">Mengindeks POI…</string>
     <string name="loading_builds_failed">Tidak dapat mendapatkan daftar bangunan OsmAnd</string>
     <string name="rendering_exception">Tidak dapat menggambar area yang dipilih.</string>
-    <string name="rotate_map_to_bearing">Orientasi peta</string>
+    <string name="rotate_map_to">Orientasi peta</string>
     <string name="show_view_angle">Tampilkan arah tampilan</string>
     <string name="map_view_3d">Tampilan Peta 3D</string>
     <string name="show_poi_over_map">Tampilkan hamparan POI</string>
@@ -4470,7 +4470,7 @@
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
     <string name="quick_action_map_center_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget tengah peta di peta.</string>
     <string name="quick_action_current_location_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget lokasi saat ini di peta.</string>
-    <string name="rotate_map_none_rotated_opt">Fiks (diputar secara manual)</string>
+    <string name="rotate_map_manual_opt">Fiks (diputar secara manual)</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
     <string name="routing_attr_avoid_sett_description">Menghindari batu bulat dan sett</string>

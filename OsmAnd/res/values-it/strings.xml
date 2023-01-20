@@ -284,9 +284,9 @@
     <string name="poi_context_menu_delete">Elimina PDI</string>
     <string name="rotate_map_compass_opt">Direzione con bussola</string>
     <string name="rotate_map_bearing_opt">Direzione del movimento</string>
-    <string name="rotate_map_none_opt">Fisso (nord sempre in alto)</string>
-    <string name="rotate_map_to_bearing_descr">Allineamento della mappa:</string>
-    <string name="rotate_map_to_bearing">Orientamento della mappa</string>
+    <string name="rotate_map_north_opt">Fisso (nord sempre in alto)</string>
+    <string name="rotate_map_to_descr">Allineamento della mappa:</string>
+    <string name="rotate_map_to">Orientamento della mappa</string>
     <string name="show_route">Dettagli percorso</string>
     <string name="fav_imported_sucessfully">Preferiti importati</string>
     <string name="fav_file_to_load_not_found">Il file GPX contenente i Preferiti non è stato trovato in {0}</string>
@@ -4770,7 +4770,7 @@
     <string name="distance_by_tap_use_description">Tocca sulla mappa per mostrare la distanza tra la tua posizione attuale e il punto toccato.
 \nTocca con due dita sulla mappa per mostrare la distanza tra i punti toccati</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
-    <string name="rotate_map_none_rotated_opt">Fisso (ruotato manualmente)</string>
+    <string name="rotate_map_manual_opt">Fisso (ruotato manualmente)</string>
     <string name="go_to_marker_location">Vai alla posizione del marcatore</string>
     <string name="shared_string_switch_mode">Cambia modalità</string>
     <string name="click_on_widget">Clicca sul widget</string>

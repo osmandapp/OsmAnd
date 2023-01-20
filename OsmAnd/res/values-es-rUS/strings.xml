@@ -1262,9 +1262,9 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_to_descr">Alineación del mapa:</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
@@ -4786,7 +4786,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
-    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>

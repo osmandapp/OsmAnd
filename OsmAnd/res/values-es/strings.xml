@@ -323,9 +323,9 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_to_descr">Alineación del mapa:</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="fav_file_to_load_not_found">Archivo GPX de favoritos, no encontrado en {0}</string>
@@ -4779,7 +4779,7 @@
     <string name="map_widget_zoom_level_desc">Muestra el nivel de zum actual del mapa.</string>
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
-    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>

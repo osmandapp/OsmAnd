@@ -100,9 +100,9 @@
     <string name="poi_context_menu_delete">Eliminar POI</string>
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção do movimento</string>
-    <string name="rotate_map_none_opt">Fixa (norte para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Rotação do mapa</string>
+    <string name="rotate_map_north_opt">Fixa (norte para cima)</string>
+    <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
+    <string name="rotate_map_to">Rotação do mapa</string>
     <string name="show_route">Mostrar rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="fav_file_to_load_not_found">Não foi encontrado o ficheiro GPX que contém os favoritos em {0}</string>
@@ -4778,7 +4778,7 @@
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição no ecrã</string>
     <string name="shared_string_normal">Normal</string>
-    <string name="rotate_map_none_rotated_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
     <string name="shared_string_large">Larga</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>

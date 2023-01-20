@@ -376,9 +376,9 @@
     <string name="poi_context_menu_delete">Dzēst POI</string>
     <string name="rotate_map_compass_opt">Pēc kompasa</string>
     <string name="rotate_map_bearing_opt">Kustības virzienā</string>
-    <string name="rotate_map_none_opt">Nerotēt (augšā ziemeļi)</string>
-    <string name="rotate_map_to_bearing_descr">Kartes rotācija:</string>
-    <string name="rotate_map_to_bearing">Kartes orientācija</string>
+    <string name="rotate_map_north_opt">Nerotēt (augšā ziemeļi)</string>
+    <string name="rotate_map_to_descr">Kartes rotācija:</string>
+    <string name="rotate_map_to">Kartes orientācija</string>
     <string name="show_route">Maršruta detaļas</string>
     <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
     <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>

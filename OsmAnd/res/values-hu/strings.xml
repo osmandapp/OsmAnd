@@ -370,9 +370,9 @@
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">A mozgás irányába</string>
-    <string name="rotate_map_none_opt">Rögzített (észak felül)</string>
-    <string name="rotate_map_to_bearing_descr">Térkép igazítása:</string>
-    <string name="rotate_map_to_bearing">Térkép forgatása</string>
+    <string name="rotate_map_north_opt">Rögzített (észak felül)</string>
+    <string name="rotate_map_to_descr">Térkép igazítása:</string>
+    <string name="rotate_map_to">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
     <string name="fav_imported_sucessfully">Kedvencek importálva</string>
     <string name="fav_file_to_load_not_found">Nem található Kedvenceket tartalmazó GPX fájl az alábbi helyen: {0}</string>
@@ -4767,7 +4767,7 @@
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció elhelyezése</string>
     <string name="shared_string_2_5_d_view">2,5D nézet</string>
-    <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
+    <string name="rotate_map_manual_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>
     <string name="shared_string_normal">Normál</string>
