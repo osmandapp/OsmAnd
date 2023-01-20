@@ -1297,9 +1297,9 @@
     <string name="poi_context_menu_delete">Apagar POI</string>
     <string name="rotate_map_compass_opt">Na direção da bússola</string>
     <string name="rotate_map_bearing_opt">Na direção do movimento</string>
-    <string name="rotate_map_none_opt">Fixo (norte está para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Orientação do mapa</string>
+    <string name="rotate_map_north_opt">Fixo (norte está para cima)</string>
+    <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
+    <string name="rotate_map_to">Orientação do mapa</string>
     <string name="show_route">Detalhes da rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">Salvar dados como arquivo GPX ou importar pontos para os \'Favoritos\'\?</string>
@@ -4778,7 +4778,7 @@
     <string name="go_to_marker_location">Ir para o local do marcador</string>
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
-    <string name="rotate_map_none_rotated_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="quick_action_current_location_widget_descr">Uma alternância para mostrar ou ocultar o widget localização atual no mapa.</string>
     <string name="how_to_use">Como usar:</string>

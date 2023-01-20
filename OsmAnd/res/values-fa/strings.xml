@@ -656,14 +656,14 @@
     <string name="map_screen_orientation_descr">عمودی، افقی یا بر اساس دستگاه.</string>
     <string name="map_orientation_landscape">افقی</string>
     <string name="map_orientation_default">بر اساس دستگاه</string>
-    <string name="rotate_map_to_bearing">جهت نقشه</string>
+    <string name="rotate_map_to">جهت نقشه</string>
     <string name="map_screen_orientation">جهت صفحه</string>
     <string name="tts_language_not_supported_title">این زبان پشتیبانی نمی‌شود</string>
     <string name="tts_language_not_supported">موتور متن به گفتاری (TTS) که روی دستگاه شما نصب است از زبان انتخاب‌شده پشتیبانی نمی‌کند و در عوض زبان پیشفرض را به کار می‌برد. می‌خواهید در فروشگاه اندروید دنبال موتور TTS دیگری بگردید؟</string>
     <string name="tts_missing_language_data">برای بارگیری زبان انتخاب‌شده به فروشگاه می‌روید؟</string>
     <string name="preferred_locale_descr">زبان برنامه (تغییر زبان پس از شروع مجدد انجام می‌شود).</string>
     <string name="preferred_locale">زبان برنامه</string>
-    <string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال)</string>
+    <string name="rotate_map_north_opt">بدون چرخش (بالا به‌طرف شمال)</string>
     <string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
     <string name="rotate_map_bearing_opt">در جهت حرکت</string>
     <string name="amenity_type_user_defined">تعریف کاربر</string>
@@ -1010,7 +1010,7 @@
     <string name="renderers_descr">شکل‌وشمایل رندرگیری را انتخاب نمایید</string>
     <string name="download_type_to_filter">بنویسید تا پالایش شود</string>
     <string name="transport_context_menu">جست‌وجوی حمل‌ونقل در ایستگاه</string>
-    <string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه:</string>
+    <string name="rotate_map_to_descr">نحوهٔ چرخش نقشه:</string>
     <string name="layer_poi">لایهٔ نقاط توجه (POI)…</string>
     <string name="gps_provider">GPS</string>
     <string name="route_head">ادامه دهید به</string>

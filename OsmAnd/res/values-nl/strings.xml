@@ -367,9 +367,9 @@
     <string name="poi_context_menu_delete">Verwijder POI</string>
     <string name="rotate_map_compass_opt">Volgens kompas</string>
     <string name="rotate_map_bearing_opt">In beweegrichting</string>
-    <string name="rotate_map_none_opt">Niet draaien (noorden altijd boven)</string>
-    <string name="rotate_map_to_bearing_descr">Kaart-uitlijning:</string>
-    <string name="rotate_map_to_bearing">Kaartoriëntatie</string>
+    <string name="rotate_map_north_opt">Niet draaien (noorden altijd boven)</string>
+    <string name="rotate_map_to_descr">Kaart-uitlijning:</string>
+    <string name="rotate_map_to">Kaartoriëntatie</string>
     <string name="show_route">Route-details</string>
     <string name="fav_imported_sucessfully">Favorieten succesvol geïmporteerd</string>
     <string name="fav_file_to_load_not_found">GPX-bestand met favorieten niet gevonden op {0}</string>

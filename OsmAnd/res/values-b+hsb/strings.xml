@@ -656,9 +656,9 @@
     <string name="poi_context_menu_delete">POI wotstronić</string>
     <string name="rotate_map_compass_opt">Směr kompasa</string>
     <string name="rotate_map_bearing_opt">Směr pohibowanja</string>
-    <string name="rotate_map_none_opt">Žana rotacija (sewjer je přeco horjeka)</string>
-    <string name="rotate_map_to_bearing_descr">Postajće wašnje wusměrjenja karty.</string>
-    <string name="rotate_map_to_bearing">Wusměrjenje karty</string>
+    <string name="rotate_map_north_opt">Žana rotacija (sewjer je přeco horjeka)</string>
+    <string name="rotate_map_to_descr">Postajće wašnje wusměrjenja karty.</string>
+    <string name="rotate_map_to">Wusměrjenje karty</string>
     <string name="fav_imported_sucessfully">Fawority importowane</string>
     <string name="error_occurred_loading_gpx">Njemóžach začitać GPX</string>
     <string name="send_report">Rozprawu pósłać</string>

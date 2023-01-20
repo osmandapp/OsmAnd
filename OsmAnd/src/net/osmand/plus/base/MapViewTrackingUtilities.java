@@ -526,7 +526,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void switchRotateMapModeImpl() {
 		if (mapView != null) {
-			String rotMode = app.getString(R.string.rotate_map_none_rotated_opt);
+			String rotMode = app.getString(R.string.rotate_map_manual_opt);
 			int vl = (settings.ROTATE_MAP.get() + 1) % 4;
 			settings.ROTATE_MAP.set(vl);
 
@@ -536,9 +536,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				rotMode = app.getString(R.string.rotate_map_compass_opt);
 			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 				mapView.resetManualRotation();
-				rotMode = app.getString(R.string.rotate_map_none_opt);
+				rotMode = app.getString(R.string.rotate_map_north_opt);
 			}
-			rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
+			rotMode = app.getString(R.string.rotate_map_to) + ":\n" + rotMode;
 			app.showShortToastMessage(rotMode);
 			updateSettings();
 			mapView.refreshMap();
@@ -551,8 +551,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void setRotationNoneToManual(){
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			settings.ROTATE_MAP.set(OsmandSettings.ROTATE_MAP_MANUAL);
-			app.showShortToastMessage(app.getString(R.string.rotate_map_to_bearing)
-					+ ":\n" + app.getString(R.string.rotate_map_none_rotated_opt));
+			app.showShortToastMessage(app.getString(R.string.rotate_map_to)
+					+ ":\n" + app.getString(R.string.rotate_map_manual_opt));
 		}
 	}
 

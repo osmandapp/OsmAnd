@@ -419,9 +419,9 @@
     <string name="poi_context_menu_delete">Вилучити POI</string>
     <string name="rotate_map_compass_opt">За компасом</string>
     <string name="rotate_map_bearing_opt">За напрямком руху</string>
-    <string name="rotate_map_none_opt">Фіксовано (північ угорі)</string>
-    <string name="rotate_map_to_bearing_descr">Орієнтація мапи:</string>
-    <string name="rotate_map_to_bearing">Орієнтація мапи</string>
+    <string name="rotate_map_north_opt">Фіксовано (північ угорі)</string>
+    <string name="rotate_map_to_descr">Орієнтація мапи:</string>
+    <string name="rotate_map_to">Орієнтація мапи</string>
     <string name="show_route">Подробиці маршруту</string>
     <string name="fav_imported_sucessfully">Закладки імпортовано</string>
     <string name="fav_file_to_load_not_found">GPX-файл з Закладками не знайдено в {0}</string>
@@ -4781,7 +4781,7 @@
     <string name="shared_string_shows">Показує</string>
     <string name="map_markers_desc">Віджет показує відстань або приблизний час прибуття (ETA) для перших двох позначок у списку позначок на мапі.</string>
     <string name="map_marker_interval_dialog_desc">Вказати інтервал часу, за який буде вимірюватися середня швидкість для обчислення приблизного часу прибуття.</string>
-    <string name="rotate_map_none_rotated_opt">Фіксовано (обертається вручну)</string>
+    <string name="rotate_map_manual_opt">Фіксовано (обертається вручну)</string>
     <string name="shared_string_switch_mode">Перемкнути режим</string>
     <string name="shared_string_large">Великий</string>
     <string name="shared_string_normal">Звичайний</string>

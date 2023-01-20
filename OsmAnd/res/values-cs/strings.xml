@@ -367,9 +367,9 @@
     <string name="poi_context_menu_delete">Smazat POI</string>
     <string name="rotate_map_compass_opt">Směr kompasu</string>
     <string name="rotate_map_bearing_opt">Směr pohybu</string>
-    <string name="rotate_map_none_opt">Neotáčet (sever vždy nahoře)</string>
-    <string name="rotate_map_to_bearing_descr">Směr natočení mapy:</string>
-    <string name="rotate_map_to_bearing">Natočení mapy</string>
+    <string name="rotate_map_north_opt">Neotáčet (sever vždy nahoře)</string>
+    <string name="rotate_map_to_descr">Směr natočení mapy:</string>
+    <string name="rotate_map_to">Natočení mapy</string>
     <string name="show_route">Ukázat cestu</string>
     <string name="fav_imported_sucessfully">Oblíbená místa importována</string>
     <string name="fav_file_to_load_not_found">Soubor GPX s Oblíbenými místy se v {0} nenachází</string>

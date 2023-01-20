@@ -563,9 +563,9 @@
     <string name="poi_context_menu_delete">Ta bort POI</string>
     <string name="rotate_map_compass_opt">Kompassriktning</string>
     <string name="rotate_map_bearing_opt">Färdriktning</string>
-    <string name="rotate_map_none_opt">Rotera inte (norr är alltid uppåt)</string>
-    <string name="rotate_map_to_bearing_descr">Kartjustering:</string>
-    <string name="rotate_map_to_bearing">Kartorientering</string>
+    <string name="rotate_map_north_opt">Rotera inte (norr är alltid uppåt)</string>
+    <string name="rotate_map_to_descr">Kartjustering:</string>
+    <string name="rotate_map_to">Kartorientering</string>
     <string name="show_route">Ruttdetaljer</string>
     <string name="fav_imported_sucessfully">Favoriter importerade</string>
     <string name="fav_file_to_load_not_found">GPX-fil med Favoriter finns inte på {0}</string>

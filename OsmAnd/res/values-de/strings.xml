@@ -570,10 +570,10 @@
     <string name="poi_context_menu_delete">Lösche POI</string>
     <string name="rotate_map_compass_opt">Nach Kompass</string>
     <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Norden ist oben (fest)</string>
-    <string name="rotate_map_none_rotated_opt">Manuell gedreht (fest)</string>
-    <string name="rotate_map_to_bearing_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to_bearing">Kartenrotation</string>
+    <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
+    <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
+    <string name="rotate_map_to_descr">Kartenausrichtung:</string>
+    <string name="rotate_map_to">Kartenrotation</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>

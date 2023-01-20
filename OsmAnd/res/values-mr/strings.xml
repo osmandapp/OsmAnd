@@ -170,7 +170,7 @@
     <string name="poi_context_menu_delete">पिओआय काढून टाका</string>
     <string name="rotate_map_compass_opt">कंपास दिशा</string>
     <string name="rotate_map_bearing_opt">हालचालीची दिशा</string>
-    <string name="rotate_map_none_opt">फिरवू नका (उत्तर दिशा नेहमी वरती)</string>
+    <string name="rotate_map_north_opt">फिरवू नका (उत्तर दिशा नेहमी वरती)</string>
     <string name="show_route">मार्ग तपशील</string>
     <string name="any_poi">कुठलाही</string>
     <string name="shared_string_favorites">आवडती ठिकाणे</string>

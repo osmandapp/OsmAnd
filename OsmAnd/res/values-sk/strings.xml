@@ -432,9 +432,9 @@
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
     <string name="rotate_map_compass_opt">Smer kompasu</string>
     <string name="rotate_map_bearing_opt">Smer pohybu</string>
-    <string name="rotate_map_none_opt">Pevné (sever je hore)</string>
-    <string name="rotate_map_to_bearing_descr">Otáčanie mapy:</string>
-    <string name="rotate_map_to_bearing">Otáčanie mapy</string>
+    <string name="rotate_map_north_opt">Pevné (sever je hore)</string>
+    <string name="rotate_map_to_descr">Otáčanie mapy:</string>
+    <string name="rotate_map_to">Otáčanie mapy</string>
     <string name="show_route">Zobraziť cestu</string>
     <string name="fav_imported_sucessfully">Obľúbené miesta naimportované</string>
     <string name="fav_file_to_load_not_found">GPX súbor obsahujúci Obľúbené body sa nenašiel v {0}</string>
@@ -4838,7 +4838,7 @@
     <string name="quick_action_map_center_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Stred mapy.</string>
     <string name="quick_action_current_location_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Súčasná poloha.</string>
     <string name="coordinates_widget_current_location_desc">Nástroj zobrazuje zemepisné súradnice súčasnej polohy</string>
-    <string name="rotate_map_none_rotated_opt">Pevné (manuálne otočené)</string>
+    <string name="rotate_map_manual_opt">Pevné (manuálne otočené)</string>
     <string name="speak_gps_signal_status">Oznámiť stratu a obnovenie GPS signálu</string>
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>

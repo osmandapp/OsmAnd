@@ -999,9 +999,9 @@
     <string name="transport_context_menu">Chirca unu trasportu pùblicu in sa firmada</string>
     <string name="poi_context_menu_delete">Iscantzella PDI</string>
     <string name="rotate_map_compass_opt">Diretzione de sa bùssola</string>
-    <string name="rotate_map_none_opt">Fissu (nord in artu)</string>
-    <string name="rotate_map_to_bearing_descr">Alliniamentu de sa mapa:</string>
-    <string name="rotate_map_to_bearing">Orientamentu de sa mapa</string>
+    <string name="rotate_map_north_opt">Fissu (nord in artu)</string>
+    <string name="rotate_map_to_descr">Alliniamentu de sa mapa:</string>
+    <string name="rotate_map_to">Orientamentu de sa mapa</string>
     <string name="fav_imported_sucessfully">Preferidos importados</string>
     <string name="import_file_favourites">Sarvare sos datos comente documentu GPX o importare sos puntos in sos \'Preferidos\'?</string>
     <string name="fav_file_to_load_not_found">Su documentu GPX chi càbit sos preferidos no est istadu agatadu in {0}</string>
@@ -4783,7 +4783,7 @@
     <string name="coordinates_widget_current_location_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale</string>
     <string name="shared_string_switch_mode">Càmbia modalidade</string>
     <string name="click_on_widget">Incarca in su widget</string>
-    <string name="rotate_map_none_rotated_opt">Fissu (rotatzione manuale)</string>
+    <string name="rotate_map_manual_opt">Fissu (rotatzione manuale)</string>
     <string name="map_widget_camera_tilt_desc">Ammustrat s\'àngulu de inclinatzione de sa fotocàmera in sa modalidade de prospetiva. Su predefinidu est de 90° (peruna inclinatzione).</string>
     <string name="map_widget_zoom_level">Livellu de ismanniamentu</string>
     <string name="map_widget_camera_distance">Artària de sa fotocàmera</string>

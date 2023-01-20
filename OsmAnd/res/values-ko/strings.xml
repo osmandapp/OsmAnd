@@ -320,9 +320,9 @@
     <string name="poi_context_menu_delete">POI 삭제</string>
     <string name="rotate_map_compass_opt">나침반 방향</string>
     <string name="rotate_map_bearing_opt">이동 방향</string>
-    <string name="rotate_map_none_opt">회전 안함</string>
-    <string name="rotate_map_to_bearing_descr">지도 화면 정렬 방식을 선택합니다</string>
-    <string name="rotate_map_to_bearing">지도 방향</string>
+    <string name="rotate_map_north_opt">회전 안함</string>
+    <string name="rotate_map_to_descr">지도 화면 정렬 방식을 선택합니다</string>
+    <string name="rotate_map_to">지도 방향</string>
     <string name="show_route">경로 상세정보</string>
     <string name="fav_imported_sucessfully">즐겨찾기를 성공적으로 임포트하였습니다</string>
     <string name="fav_file_to_load_not_found">즐겨찾기를 포함한 GPX 파일을 {0}에서 찾을 수 없습니다</string>

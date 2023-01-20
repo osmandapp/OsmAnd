@@ -589,9 +589,9 @@
     <string name="poi_context_menu_delete">Șterge POI</string>
     <string name="rotate_map_compass_opt">Direcția busolei</string>
     <string name="rotate_map_bearing_opt">Direcția de deplasare</string>
-    <string name="rotate_map_none_opt">Fixat (nordul este sus)</string>
-    <string name="rotate_map_to_bearing_descr">Aliniere hartă:</string>
-    <string name="rotate_map_to_bearing">Orientare hartă</string>
+    <string name="rotate_map_north_opt">Fixat (nordul este sus)</string>
+    <string name="rotate_map_to_descr">Aliniere hartă:</string>
+    <string name="rotate_map_to">Orientare hartă</string>
     <string name="show_route">Detalii rută</string>
     <string name="fav_imported_sucessfully">Favorite importate</string>
     <string name="fav_file_to_load_not_found">Fișierul GPX care conține Favorite nu a fost găsit la {0}</string>
@@ -4941,7 +4941,7 @@
     <string name="shared_string_2_5_d_view">Vedere 2.5 D</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Mare</string>
-    <string name="rotate_map_none_rotated_opt">Fix (rotit manual)</string>
+    <string name="rotate_map_manual_opt">Fix (rotit manual)</string>
     <string name="map_markers_desc">Widgetul afișează distanța sau ora estimată de sosire (ETA) pentru primele două repere din lista de repere de pe hartă.</string>
     <string name="map_widget_ant_bicycle_dist_desc">Afișează distanța parcursă</string>
     <string name="nautical_depth_points">Puncte adâncime nautică</string>

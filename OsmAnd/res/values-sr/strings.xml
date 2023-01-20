@@ -142,8 +142,8 @@
     <string name="error_reading_gpx">Подаци ГПИкс-а не могу да се прочитају.</string>
     <string name="poi_context_menu_modify">Измена тачака занимања</string>
     <string name="poi_context_menu_delete">Брисање тачака занимања</string>
-    <string name="rotate_map_none_opt">Непроменљиво (север је увек горе)</string>
-    <string name="rotate_map_to_bearing">Усмерење карте</string>
+    <string name="rotate_map_north_opt">Непроменљиво (север је увек горе)</string>
+    <string name="rotate_map_to">Усмерење карте</string>
     <string name="map_widget_show_ruler">Лењир</string>
     <string name="shared_string_import">Увези</string>
     <string name="error_occurred_loading_gpx">Нисам успео да учитам ГПИкс.</string>
@@ -162,7 +162,7 @@
     <string name="renderer_load_sucess">Обрада слике је учитана</string>
     <string name="renderer_load_exception">Нисам успео да учитам обраду слике.</string>
     <string name="renderers">Векторска обрада слике</string>
-    <string name="rotate_map_to_bearing_descr">Поравнавање карте:</string>
+    <string name="rotate_map_to_descr">Поравнавање карте:</string>
     <string name="show_route">Појединости путање</string>
     <string name="poi_namefinder_query_empty">Куцајте ради претраге тачкака занимања</string>
     <string name="layer_osm_bugs">ОСМ-а белешке (на мрежи)</string>
@@ -4707,7 +4707,7 @@
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="accessibility_2d_view_off">2.5D поглед искључен</string>
-    <string name="rotate_map_none_rotated_opt">Фискно (ручно окретање)</string>
+    <string name="rotate_map_manual_opt">Фискно (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>

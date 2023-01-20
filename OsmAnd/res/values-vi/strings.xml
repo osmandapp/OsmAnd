@@ -238,9 +238,9 @@
     <string name="poi_context_menu_delete">Xóa địa điểm</string>
     <string name="rotate_map_compass_opt">Theo la bàn</string>
     <string name="rotate_map_bearing_opt">Theo vị trí di chuyển</string>
-    <string name="rotate_map_none_opt">Không xoay</string>
-    <string name="rotate_map_to_bearing_descr">Căn chỉnh bản đồ:</string>
-    <string name="rotate_map_to_bearing">Xoay bản đồ</string>
+    <string name="rotate_map_north_opt">Không xoay</string>
+    <string name="rotate_map_to_descr">Căn chỉnh bản đồ:</string>
+    <string name="rotate_map_to">Xoay bản đồ</string>
     <string name="show_route">Hiện tuyến đường</string>
     <string name="fav_imported_sucessfully">Ưa thích được đọc vào thành công</string>
     <string name="fav_file_to_load_not_found">Tập tin GPX chưa các điểm ưa thích không thấy tại {0}</string>
