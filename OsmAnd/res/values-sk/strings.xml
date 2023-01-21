@@ -1091,7 +1091,7 @@
     <string name="index_name_canada">Severná Amerika - Kanada</string>
     <string name="interrupt_music">Pozastaviť hudbu</string>
     <string name="interrupt_music_descr">Hlasové povely pozastavia hudbu.</string>
-    <string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
+    <string name="always_center_position_on_map">Poloha umiestnená vždy v strede</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="misc_pref_title">Rôzne</string>
     <string name="localization_pref_title">Lokalizácia</string>
@@ -4832,7 +4832,7 @@
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.
 \nŤuknite dvoma prstami na mapu pre zobrazenie vzdialenosti medzi označenými bodmi</string>
-    <string name="display_position">Zobraziť polohu</string>
+    <string name="display_position">Umiestnenie polohy</string>
     <string name="favorite_delete_group">Odstrániť skupinu</string>
     <string name="download_heightmap_maps">Výšková mapa</string>
     <string name="quick_action_map_center_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Stred mapy.</string>
@@ -4853,7 +4853,7 @@
 \n
 \n • Nástroj \"Mapové značky\": pridaná možnosť zmeny správania po kliku
 \n
-\n • Opravená možnosť \"Zobrazenie polohy\"
+\n • Opravená možnosť \"Umiestnenie polohy\"
 \n
 \n • GPX: pridaná podpora pre značky \"link\", \"cmt\", \"desc\" a pre vlastné rozšírenia
 \n
@@ -5020,4 +5020,9 @@
     <string name="set_up_backup">Nastaviť zálohovanie</string>
     <string name="y_axis">Os Y</string>
     <string name="x_axis">Os X</string>
+    <string name="value_downloaded_of_mb">Sťahuje sa %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Zdieľať odkaz</string>
+    <string name="share_as_file">Zdieľať ako súbor</string>
+    <string name="skip_download">Preskočiť sťahovanie</string>
+    <string name="determine_location">Povoľte nám určiť vašu polohu</string>
 </resources>
