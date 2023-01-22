@@ -213,7 +213,7 @@ dependencies {
 	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:4.3@aar"
 	openglImplementation "net.osmand:OsmAndCore_android:4.3@aar"
 
-	huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
+	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
 
