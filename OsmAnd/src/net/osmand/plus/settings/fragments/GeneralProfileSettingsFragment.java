@@ -450,6 +450,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+			if (mapViewTrackingUtilities != null) {
+				mapViewTrackingUtilities.updateSettings();
+			}
 		}
 	}
 
