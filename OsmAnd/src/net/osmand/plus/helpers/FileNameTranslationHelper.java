@@ -124,12 +124,10 @@ public class FileNameTranslationHelper {
 			if (nm.endsWith("_tts") || nm.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
-			if (nm.length() == 2) {
-				Field f = R.string.class.getField("lang_" + nm);
-				if (f != null) {
-					Integer in = (Integer) f.get(null);
-					return ctx.getString(in);
-				}
+			Field f = R.string.class.getField("lang_" + nm);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
