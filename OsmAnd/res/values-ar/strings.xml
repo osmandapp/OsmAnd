@@ -842,7 +842,7 @@
 \nاضغط مطولا للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
-    <string name="always_center_position_on_map">الموقع في المنتصف</string>
+    <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
@@ -977,9 +977,9 @@
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
-    <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
+    <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_none_opt">ثابت (الشمال لأعلى)</string>
+    <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -1313,7 +1313,7 @@
     <string name="gpx_files_not_found">لا يوجد ملفات GPX في مجلد tracks</string>
     <string name="error_reading_gpx">خطأ في قراءة بيانات GPX.</string>
     <string name="vector_data">الخريطة المحملة</string>
-    <string name="rotate_map_to_bearing_descr">محاذاة الخريطة:</string>
+    <string name="rotate_map_to_descr">محاذاة الخريطة:</string>
     <string name="show_route">تفاصيل الطريق</string>
     <string name="import_file_favourites">حفظ البيانات كملف GPX أو استيراد نقاط الطريق إلى المفضلة ؟</string>
     <string name="share_fav_subject">تم مشاركة المفضلة بواسطة أوسماند</string>
@@ -4840,7 +4840,7 @@
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
-    <string name="display_position">عرض الموقف</string>
+    <string name="display_position">تنسيق الموضع</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
@@ -4865,7 +4865,7 @@
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
     <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
-    <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
+    <string name="rotate_map_manual_opt">ثابت (يتم تدويره يدويا)</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".

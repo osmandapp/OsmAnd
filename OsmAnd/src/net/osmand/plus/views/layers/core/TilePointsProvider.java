@@ -160,6 +160,9 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			return new QListMapTiledCollectionPoint();
+		}
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		QuadRect latLonBounds = tb.getLatLonBounds();
 		List<T> tilePoints = points.getObjects(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right);

@@ -598,6 +598,12 @@ public class VoiceRouter {
 			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
 			result.put(TO_DEST, "");
 		}
+		// Delimit refs if followed by street names to create a brief pause. Also solves unintentional concatenation of numbers (Issue #16256). (Need to apply in sync for toRef and fromRef.)
+		String refDelimiter = ", ";
+		if (!result.get(TO_REF).equals("") && !result.get(TO_STREET_NAME).equals("")) {
+			result.replace(TO_REF, result.get(TO_REF) + refDelimiter);
+			result.replace(FROM_REF, result.get(FROM_REF) + refDelimiter);
+		}
 		return new StreetName(result);
 	}
 

@@ -4,8 +4,8 @@
     <string name="shared_string_about">О програму</string>
     <string name="about_settings_descr">О издању, лиценце, чланови пројекта</string>
     <string name="av_photo_play_sound_descr">Поставите да ли се чује звук приликом шкљоцања или не.</string>
-    <string name="av_camera_focus_infinity">Жижа је подешен на бесконачно</string>
-    <string name="av_camera_focus_macro">Макро жижа</string>
+    <string name="av_camera_focus_infinity">Жижа је подешена на бесконачно</string>
+    <string name="av_camera_focus_macro">Блиска жижа</string>
     <string name="av_camera_focus_auto">Самостална жижа</string>
     <string name="shared_string_delete_all">Обриши све</string>
     <string name="animate_routing_route_not_calculated">Најпре израчунајте путању</string>
@@ -142,8 +142,8 @@
     <string name="error_reading_gpx">Подаци ГПИкс-а не могу да се прочитају.</string>
     <string name="poi_context_menu_modify">Измена тачака занимања</string>
     <string name="poi_context_menu_delete">Брисање тачака занимања</string>
-    <string name="rotate_map_none_opt">Непроменљиво (север је увек горе)</string>
-    <string name="rotate_map_to_bearing">Усмерење карте</string>
+    <string name="rotate_map_north_opt">Непроменљиво (север је увек горе)</string>
+    <string name="rotate_map_to">Усмерење карте</string>
     <string name="map_widget_show_ruler">Лењир</string>
     <string name="shared_string_import">Увези</string>
     <string name="error_occurred_loading_gpx">Нисам успео да учитам ГПИкс.</string>
@@ -162,7 +162,7 @@
     <string name="renderer_load_sucess">Обрада слике је учитана</string>
     <string name="renderer_load_exception">Нисам успео да учитам обраду слике.</string>
     <string name="renderers">Векторска обрада слике</string>
-    <string name="rotate_map_to_bearing_descr">Поравнавање карте:</string>
+    <string name="rotate_map_to_descr">Поравнавање карте:</string>
     <string name="show_route">Појединости путање</string>
     <string name="poi_namefinder_query_empty">Куцајте ради претраге тачкака занимања</string>
     <string name="layer_osm_bugs">ОСМ-а белешке (на мрежи)</string>
@@ -2440,17 +2440,17 @@
     <string name="osm_editing_plugin_description">Доприносите ОСМ-у, општој заједници која одржава обимну карту света и обезбеђује редовне податке слободним програмима сваком кориснику.
 \n
 \nМожете пронаћи упутсва како уређивати карту на нашим страницама https://osmand.net/docs/user/plugins/osm-editing .</string>
-    <string name="save_track_to_gpx_globally_descr">Главно бележење позиције у GPX фајл може да се укључи и искључи коришћењем справице за GPX бележење на карти.</string>
-    <string name="android_19_location_disabled">Од Андроида 4.4 (KitKat), фасциклу за складиште (%s) је застарела. Копирај све ОсмАнд фајлове на нови локацију за складиште\?
-\n Белешка 1: Ваши стари фајлови неће вити дирани (али можете их Ви сами обрисати).
-\n Белешка 2: У новој локацији за складиште, неће бити могуће делити фајлове између ОсмАнд и ОсмАнд+ апликација.</string>
-    <string name="disable_complex_routing_descr">Искључи двофазно усмеравање за навођење у колима.</string>
+    <string name="save_track_to_gpx_globally_descr">Главно бележење положаја у датотеку ГПИкс може да се укључи и искључи коришћењем справице за бележење ГПИкса на карти.</string>
+    <string name="android_19_location_disabled">Од Андроида 4.4 (KitKat), фасцикла складишта (%s) је застарела. Уможи све датотеке ОсмАнда на нови положај складишта\?
+\n Белешка 1: Ваше старе датотека неће вити диране (али можете их Ви сами обрисати).
+\n Белешка 2: У новој положају складишта, неће бити могуће делити датотеке између програма ОсмАнд и ОсмАнд+.</string>
+    <string name="disable_complex_routing_descr">Искључи двостепено усмеравање навођења у колима.</string>
     <string name="edit_tilesource_successfully">Извор плочица %1$s сачуван</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Путање за пешачење</string>
     <string name="show_warnings_descr">Подесите упозорења у саобраћају (ограничења брзине, форсирана заустављања, лежећи полицајци, тунели), радаре и податке о траци.</string>
     <string name="osmand_extended_description_part4">Скијање
-\n ОсмАнд додатак за скијашке мапе Вам омогућава да видите стазе за скијање уз њихову тежину и додатне информације, као што су положај ски лифтова и осталих објеката.</string>
-    <string name="osmand_extended_description_part8">ОсмАнд је софтвер отвореног кода на коме се активно ради. Свако може да допринесе апликација тако што ће да пријављује грешке, побољшава преводе или да програмира нове функционалности. Додатно, пројекат се ослања на новчане прилоге да би се финансирао развој и тестирање нових функција.
+\n ОсмАндов додатак за скијашке карте Вам омогућава преглед скијашке стазе уз њихову тежину и додатне податке, као што су положај скијашких жичара и осталих објеката.</string>
+    <string name="osmand_extended_description_part8">ОсмАнд је мекотворина отвореног кода на којој се активно ради. Свако може да допринесе програму тако што ће да пријављује грешке, побољшава преводе или да програмира нове могућности. Додатно, пројекат се ослања на новчане прилоге ради улагања у развој и проверу нових могућности.
 \n Приближна покривеност карте и квалитет:
 \n • Западна Европа: ****
 \n • Источна Европа: ***
@@ -2462,107 +2462,107 @@
 \n • Блиски исток: **
 \n • Африка: **
 \n • Антарктик: *
-\n Већина држава на свету се може скинути!
-\n Добијте поузданог навигатора у Вашој држави - било да је то Француска, Немачка, Мексико, Велика Британија, Холандија, САД, Русија, Бразил или нека друга.</string>
+\n Већина држава на свету се може преузети!
+\n Добијте поузданог водича у Вашој држави - било да је то Француска, Немачка, Мексико, Велика Британија, Холандија, САД, Русија, Бразил или нека друга.</string>
     <string name="pref_overlay">Слој изнад / испод</string>
-    <string name="overlay_transparency_descr">Подесите провидност горњег слоја.</string>
-    <string name="overlay_transparency">Провидност слоја изнад</string>
+    <string name="overlay_transparency_descr">Подесите прозирност горњег слоја.</string>
+    <string name="overlay_transparency">Прозирност слоја изнад</string>
     <string name="layer_overlay">Карта слоја изнад…</string>
     <string name="map_overlay">Карта слоја изнад</string>
-    <string name="show_poi_over_map_description">Прикажи последње коришћени слој са тачкама од интереса.</string>
-    <string name="show_poi_over_map">Прикажи слој са тачкама од интереса изнад карте</string>
-    <string name="activate_seamarks_plugin">Укључите додатак \'Поморске ознаке\'</string>
-    <string name="activate_srtm_plugin">Укључите \'SRTM\' додатак</string>
-    <string name="quick_action_interim_dialog">Прикажи дијалог међувремена</string>
-    <string name="quick_action_duplicates">Брза радња преименована у %1$s да се избегне дуплирање.</string>
+    <string name="show_poi_over_map_description">Прикажи последње коришћени слој са тачкама занимања.</string>
+    <string name="show_poi_over_map">Прикажи слој са тачкама занимања изнад карте</string>
+    <string name="activate_seamarks_plugin">Укључите прикључак \'Поморске ознаке\'</string>
+    <string name="activate_srtm_plugin">Укључите прикључак \'СРМТ\'</string>
+    <string name="quick_action_interim_dialog">Прикажи прозорче међувремена</string>
+    <string name="quick_action_duplicates">Брза радња преименована у %1$s ради избегавања удвостручавања.</string>
     <string name="quick_action_duplicate">Већ постоји брза радња са овим именом</string>
-    <string name="maps_you_need_descr">На основу чланака који сте забележили, предложено је да скинете следеће карте:</string>
-    <string name="osmand_accessibility_description">Чини да се функције приступачности из уређаја могу користити директно у ОсмАнд-у. Може да управља брзином изговора синтетизованих гласова, подешавање D-пада за навођење, коришћење трекбола за контролу зумирања, изговара текст, нпр. да Вам каже положај.</string>
-    <string name="intermediate_items_sort_return">Оптимизуј редослед успутних одредишта ка крајњем одредишту.</string>
-    <string name="osmand_short_description_80_chars">Глобални преглед карти на мобилним уређајима и навигација за ОСМ карте на мрежи и ван мреже</string>
-    <string name="osmand_extended_description_part5">Бицкле
-\n • Нађите стазе за бицикле на картама
-\n • ГПС навигација у режиму за бицикле Вам проналази путању на путевима за бицикле
+    <string name="maps_you_need_descr">На основу чланака који сте забележили, предложено је да преузете следеће карте:</string>
+    <string name="osmand_accessibility_description">Чини да се могућности приступачности из уређаја могу користити директно у ОсмАнд-у. Може да управља брзином изговора вештачких гласова, подешавање Д-пада за навођење, коришћење точкића за управљање приближавања, изговара читање, нпр. да Вам каже положај.</string>
+    <string name="intermediate_items_sort_return">Прилагоди редослед успутних одредишта ка крајњем одредишту.</string>
+    <string name="osmand_short_description_80_chars">Земаљски преглед карти на мобилним уређајима и навођење картама ОСМ-а на мрежи и ван мреже</string>
+    <string name="osmand_extended_description_part5">Бицкли
+\n • Нађите бициклистичке стазе на картама
+\n • Навођење ГПС-ом за бицикле Вам проналази путању на бициклистичким путевима
 \n • Видите Вашу брзину и надморску висину
-\n • Опција GPX снимања Вам омогућава да снимити Ваше путовање и да га делите
+\n • Могућност снимања ГПИксом Вам омогућава да снимити Ваше путовање и да га делите
 \n • Уз још додатака можете да укључите и изохипсе и рељеф</string>
     <string name="osmand_extended_description_part6">Шетање, планинарење, градске туре
 \n • Карта Вам показује стазе за пешачење и планинарење
 \n • Википедија на Вашем језику Вам може рећи много за време тура по граду
 \n • Станице јавног превоза (аутобуси, трамваји, возови), укључујући и имена линија ће Вам помоћи кретање по непознатом граду
-\n • ГПС навођење у режиму пешачења Вам прави путању користећи путеве на којима се може проћи пешке
-\n • Отпремајте и пратите GPX путање или снимајте и делите Ваше сопствене
+\n • Навођење ГПС-ом у раду пешачења Вам прави путању користећи путеве на којима се може проћи пешке
+\n • Отпремајте и пратите путање ГПИксом или снимајте и делите Ваше сопствене
 \n</string>
-    <string name="osmand_extended_description_part7">Допринесите ОСМ-у 
-\n • Пријављујте грешке у подацима 
-\n • Отпремајте GPX путање директно из апликације 
-\n • Додајте тачке од интереса и отпремајте их директно на ОСМ (или касније ако нисте на мрежи)
-\n</string>
-    <string name="osmand_plus_short_description_80_chars">Глобални преглед карти на мобилним уређајима &amp; навигација за ОСМ карте на мрежи и ван мреже</string>
-    <string name="osmand_plus_extended_description_part7">Допринесите директно ОСМ-у
+    <string name="osmand_extended_description_part7">Допринесите ОСМ-у
 \n • Пријављујте грешке у подацима
-\n • Отпремајте GPX путање директно из апликације
-\n • Додајте тачке од интереса и отпремајте их директно на ОСМ (или касније ако нисте на мрежи)
-\n • Опционо снимање пута и у позадини (док је уређај у режиму спавања)
-\n ОсмАнд је софтвер отвореног кода који се активно развија. Свако може да допринесе апликацији пријављујући грешке, побољшавајући преводе или развијајући нове функционалности. Додатно се пројекат ослања и на новчану помоћ да се финансира програмирање и тестирање нових функционалности.
+\n • Отпремајте путање ГПИкса непосредно из програма
+\n • Додајте тачке занимања и отпремајте их непосредно на ОСМ (или касније ако нисте на мрежи)
 \n</string>
-    <string name="rendering_attr_contourLines_description">Приказ од ког нивоа увећања (захтева податке о изохипсама):</string>
-    <string name="first_time_msg">Хвала Вам што користите ОсмАнд. Скините регионалне податке преко \'Подешавања\' → \'Управљање фајловима карата\' да и без интернета видите карте, нађете адресе, тачке од интереса, јавни превоз и још много тога.</string>
-    <string name="use_fluorescent_overlays">Флуоресцентни слој изнад карте</string>
-    <string name="update_poi_does_not_change_indexes">Измене тачака од интереса унутар апликација не утиче на скинуте фајлове карата. Измене су снимљене у локални фајл на уређају.</string>
+    <string name="osmand_plus_short_description_80_chars">Земаљски преглед карата на мобилним уређајима и за карте ОСМ-а на мрежи и ван мреже</string>
+    <string name="osmand_plus_extended_description_part7">Допринесите непосредно ОСМ-у
+\n • Пријављујте грешке у подацима
+\n • Отпремајте путање ГПИкс-а непосредно из програма
+\n • Додајте тачке занимања и отпремајте их непосредно на ОСМ (или касније ако нисте на мрежи)
+\n • Могуће снимање пута и у позадини (док је уређај у раду спавања)
+\n ОсмАнд је мекотворина отвореног кода која се развија. Свако може да допринесе програму пријављујући грешке, побољшавајући преводе или развијајући нове могућности. Додатно се пројекат ослања и на новчану помоћ ради новчане помоћи програмирању и проби нових могућности.
+\n</string>
+    <string name="rendering_attr_contourLines_description">Приказ од ког ступња увећања (захтева податке о изохипсама):</string>
+    <string name="first_time_msg">Хвала Вам што користите ОсмАнд. Скините областне податке преко \'Подешавања\' → \'Управљање датотекама карата\' да и без интернета видите карте, нађете адресе, тачке занимања, јавни превоз и још много тога.</string>
+    <string name="use_fluorescent_overlays">Сјајни слој изнад карте</string>
+    <string name="update_poi_does_not_change_indexes">Измене тачака занимања унутар програма не утиче на преузете датотеке карата. Измене су снимљене у местну датотеку на уређају.</string>
     <string name="keep_informing_never">Само ручно (кликом на стрелицу)</string>
     <string name="gpx_option_from_start_point">Постави дуж целе путање</string>
-    <string name="map_transparency_descr">Подесите провидност основне карте.</string>
-    <string name="map_transparency">Провидност основне карте</string>
+    <string name="map_transparency_descr">Подесите прозирност основне карте.</string>
+    <string name="map_transparency">Прозирност основне карте</string>
     <string name="layer_underlay">Карта слоја испод…</string>
     <string name="map_underlay">Карта испод</string>
-    <string name="tile_source_already_installed">Карта већ инсталирана, „Подешавања“ ће се ажурирати.</string>
-    <string name="select_tile_source_to_install">Изаберите (сличице) карте за инсталацију или ажурирање.</string>
+    <string name="tile_source_already_installed">Карта већ уграђена, „Подешавања“ ће се освежити.</string>
+    <string name="select_tile_source_to_install">Изаберите (сличице) карте ради уградње или освежења.</string>
     <string name="send_location_way_choose_title">Подели положај користећи</string>
-    <string name="add_waypoint_dialog_added">GPX пролазна тачка „{0}“ додата</string>
-    <string name="import_file_favourites">Сачувај податке као GPX фајл или увези пролазне тачке у „Омиљене тачке“\?</string>
-    <string name="background_router_service_descr">Прати Ваш положај док је екран искључен.</string>
-    <string name="off_router_service_no_gps_available">Сервису за навођење из позадине је потребно да провајдер за положај буде укључен.</string>
+    <string name="add_waypoint_dialog_added">Пролазна тачка ГПС-а „{0}“ је додата</string>
+    <string name="import_file_favourites">Сачувај податке као датотеку ГПИкс-а или увези пролазне тачке у „Омиљене тачке“\?</string>
+    <string name="background_router_service_descr">Прати Ваш положај док је заслон искључен.</string>
+    <string name="off_router_service_no_gps_available">Служби навођења из позадине је потребно да достављач положаја буде укључен.</string>
     <string name="sd_mounted_ro">Меморијска картица може само да се чита.
-\nСад је могуће само гледати веч учитане карте, не можете да скидате нове области.</string>
+\nСад је могуће само гледати већ учитане карте, не можете преузимати нове области.</string>
     <string name="route_head">Почетак</string>
-    <string name="update_poi_success">Подаци тачака од интереса ажурирану ({0}је учитано)</string>
-    <string name="update_poi_error_local">Не могу да ажурирам локални списак тачака од интереса.</string>
-    <string name="quick_action_add_gpx_descr">Дугме за додавање GPX пролазне тачке на средину екрана.</string>
+    <string name="update_poi_success">Подаци тачака занимања су освежени ({0} је учитано)</string>
+    <string name="update_poi_error_local">Нисам успео да освежим местни списак тачака занимања.</string>
+    <string name="quick_action_add_gpx_descr">Дугме за додавање пролазне тачке ГПИкс-а на средину заслона.</string>
     <string name="show_images">Прикажи слике</string>
-    <string name="purchase_cancelled_dialog_title">Отказали сте чланарину за ОсмАнд уживо</string>
-    <string name="purchase_cancelled_dialog_descr">Обновите чланарину да наставите да користите све ове функционалности:</string>
-    <string name="gpxup_identifiable">Може да се користи за идентификацију</string>
+    <string name="purchase_cancelled_dialog_title">Отказали сте чланарину ОсмАнда уживо</string>
+    <string name="purchase_cancelled_dialog_descr">Обновите чланарину ради могућности наставка коришћења свих ових могућности:</string>
+    <string name="gpxup_identifiable">Може да се користи за препознавање</string>
     <string name="gpxup_trackable">Може да се користи за праћење</string>
-    <string name="local_index_description">Тапните на постојећу ставку да видите више детаља, дуго држите да је деактивирате или обришете. Тренутно података на уређају (%1$s слободно):</string>
-    <string name="zoom_by_trackball_descr">Промените зумирање водоравним покретима трекбола.</string>
-    <string name="zoom_by_trackball">Користите трекбол за зумирање</string>
-    <string name="vector_data_missing">Скините податке (\'ван мреже\') да користити карте ван мреже.</string>
-    <string name="warning_tile_layer_not_downloadable">Апликација не може да скине слој са картама %1$s, поновна инсталација апликације можда помогне.</string>
-    <string name="create_poi_link_to_osm_doc"><u>Интернет ОСМ</u> класификација карти са сликама.</string>
-    <string name="poi_filter_namefinder">NameFinder на мрежи</string>
-    <string name="tiles_to_download_estimated_size">На нивоу увећања {0} треба скинути {1} сличица ({2} MB)</string>
+    <string name="local_index_description">Тапните на постојећу ставку да видите више појединости, дуго држите да је искључите или обришете. Тренутно података на уређају (%1$s слободно):</string>
+    <string name="zoom_by_trackball_descr">Промените приближавање водоравним покретима точкића.</string>
+    <string name="zoom_by_trackball">Користите точкић за приближавање</string>
+    <string name="vector_data_missing">Преузмите податке (\'ван мреже\') ради употребе карата ван мреже.</string>
+    <string name="warning_tile_layer_not_downloadable">Програм није успео да преузме слој са картама %1$s, поновна уградња програма може да помогне.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Врста карата на мрежи ОСМ</u> са сликама.</string>
+    <string name="poi_filter_namefinder">Проналазач имена на мрежи</string>
+    <string name="tiles_to_download_estimated_size">На нивоу увећања {0} треба преузети {1} сличица ({2} MB)</string>
     <string name="transport_searching_transport">Резултати превоза (без одредишта):</string>
     <string name="transport_searching_route">Резултати превоза ({0} до одредишта):</string>
-    <string name="use_trackball_descr">Користите трекбол да померате карту.</string>
-    <string name="use_trackball">Употреба трекбола</string>
-    <string name="update_poi_no_offline_poi_index">Нема тачака од интереса без интернета за ово подручје</string>
-    <string name="update_poi_is_not_available_for_zoom">Ажурираћете тачке од интереса ако још зумирате</string>
+    <string name="use_trackball_descr">Користите точкић да померате карту.</string>
+    <string name="use_trackball">Употреба точкића</string>
+    <string name="update_poi_no_offline_poi_index">Нема тачака занимања без интернета за ово подручје</string>
+    <string name="update_poi_is_not_available_for_zoom">Освежићете тачке занимања ако још приближите</string>
     <string name="sd_dir_not_accessible">Фасцикла са складиштем на меморијској картици није приступачна!</string>
     <string name="opening_changeset">Отварам скуп промена…</string>
     <string name="closing_changeset">Затварам скуп промена…</string>
     <string name="commiting_node">Предајем чвор…</string>
-    <string name="previous_run_crashed">ОсмАнд се срушио на прошлом покретању. Записник је у {0}. Молимо пријавите проблем и закачите овај фајл.</string>
-    <string name="osm_settings_descr">Одредите OpenStreetMap.org (ОСМ) поставке потребне за слање на ОСМ.</string>
+    <string name="previous_run_crashed">ОсмАнд се срушио на прошлом покретању. Записник је у {0}. Молимо пријавите проблем и додајте ову датотеку у прикључак.</string>
+    <string name="osm_settings_descr">Одредите поставке OpenStreetMap.org (ОСМ) потребне за слање на ОСМ.</string>
     <string name="reports_for">Извештај за</string>
     <string name="quick_favorites_name_preset">Унапред постављено име</string>
-    <string name="import_track_desc">Фајл %1$s не садржи пролазне тачке, да га увезем као путању?</string>
+    <string name="import_track_desc">Датотека %1$s не садржи пролазне тачке, да ли да је увезем као путању\?</string>
     <string name="touring_view_renderer">Туристички преглед</string>
     <string name="hide_full_description">Сакриј цео опис</string>
     <string name="show_full_description">Прикажи цео опис</string>
     <string name="nautical_render_descr">За речно и морско навођење. Приказује бове, светионике, речне и морске путеве, луке, поморске ознаке и изобате.</string>
-    <string name="ski_map_render_descr">За скијање. Приказује стазе, ски лифтова, крос-кантри стазе итд. Замагљује мање битне објекте са карте.</string>
-    <string name="light_rs_render_descr">Једноставан стил за вожњу. Пријатан за очи ноћу, изохипсе, наранџасти путеви са добрим контрастом, замагљује мање битне објекте са карте.</string>
+    <string name="ski_map_render_descr">За скијање. Приказује стазе, скијашке жичаре, сеоске стазе итд. Замагљује мање битне ставке на карти.</string>
+    <string name="light_rs_render_descr">Једноставан приказ вожње. Пријатан за очи ноћу, изохипсе, поморанџасти путеви са добрим сенчењем, замагљује мање битне ставке на карти.</string>
     <string name="topo_render_descr">За шетање, пешачење, трекинг и бициклизам у природи. Добра читљивост у условима спољне осветљености. Добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља. Опција интегритета подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног режима.</string>
     <string name="default_render_descr">Стил опште намене. Густи градови су приказани јасно. Приказује изохипсе, путање, квалитет подлоге, забране приступа, блокаде путева, исцртавање путева по SAC алпској скали, објекти за спортове на брзацима.</string>
     <string name="open_wikipedia_link_online">Отвори Википедија везу са интернетом</string>
@@ -4707,7 +4707,7 @@
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="accessibility_2d_view_off">2.5D поглед искључен</string>
-    <string name="rotate_map_none_rotated_opt">Фискно (ручно окретање)</string>
+    <string name="rotate_map_manual_opt">Фискно (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>

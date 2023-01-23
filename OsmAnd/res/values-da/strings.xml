@@ -664,9 +664,9 @@
     <string name="poi_context_menu_delete">Slet interessepunkt</string>
     <string name="rotate_map_compass_opt">Kompasretning</string>
     <string name="rotate_map_bearing_opt">Bevægelsesretning</string>
-    <string name="rotate_map_none_opt">Fast (nord er opad)</string>
-    <string name="rotate_map_to_bearing_descr">Justering af kort:</string>
-    <string name="rotate_map_to_bearing">Kortorientering</string>
+    <string name="rotate_map_north_opt">Fast (nord er opad)</string>
+    <string name="rotate_map_to_descr">Justering af kort:</string>
+    <string name="rotate_map_to">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter importeret</string>
     <string name="fav_file_to_load_not_found">GPX-fil med Favoritter ikke fundet i {0}</string>
@@ -4784,7 +4784,7 @@
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
     <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="shared_string_large">Stor</string>
-    <string name="rotate_map_none_rotated_opt">Fast (manuelt roteret)</string>
+    <string name="rotate_map_manual_opt">Fast (manuelt roteret)</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="go_to_marker_location">Gå til markørplacering</string>
     <string name="shared_string_shows">Viser</string>

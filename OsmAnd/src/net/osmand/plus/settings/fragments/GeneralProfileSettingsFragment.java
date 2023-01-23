@@ -136,14 +136,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupRotateMapPref() {
 		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
-		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
-		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_north_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt), getString(R.string.rotate_map_manual_opt)});
+		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS, OsmandSettings.ROTATE_MAP_MANUAL});
 		rotateMap.setIcon(getRotateMapIcon());
 	}
 
 	private Drawable getRotateMapIcon() {
 		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
+				return getActiveIcon(R.drawable.ic_action_direction_north);
+			case OsmandSettings.ROTATE_MAP_MANUAL:
 				return getActiveIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
 				return getActiveIcon(R.drawable.ic_action_direction_movement);
@@ -163,14 +165,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupCenterPositionOnMapPref() {
-		CommonPreference<Boolean> preference = settings.CENTER_POSITION_ON_MAP;
-		boolean isCenterSelected = preference.getModeValue(getSelectedAppMode());
-		Drawable icon = getActiveIcon(isCenterSelected ?
-				R.drawable.ic_action_display_position_center :
-				R.drawable.ic_action_display_position_bottom);
-		String summary = getString(isCenterSelected ?
-				R.string.position_on_map_center :
-				R.string.position_on_map_bottom);
+		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
+		int positionPlacement = preference.getModeValue(getSelectedAppMode());
+		Drawable icon;
+		String summary;
+		if (positionPlacement == 0) {
+			icon = getActiveIcon(R.drawable.ic_action_bearing);
+			summary = getString(R.string.shared_string_automatic);
+		} else if (positionPlacement == 1) {
+			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
+			summary = getString(R.string.position_on_map_center);
+		} else {
+			icon = getActiveIcon(R.drawable.ic_action_display_position_bottom);
+			summary = getString(R.string.position_on_map_bottom);
+		}
 		Preference displayPosition = findPreference(preference.getId());
 		displayPosition.setIcon(icon);
 		displayPosition.setSummary(summary);
@@ -186,16 +194,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
 		String[] entries = new String[] {
+				getString(R.string.shared_string_automatic),
 				getString(R.string.position_on_map_center),
 				getString(R.string.position_on_map_bottom),
 		};
-		Boolean[] entryValues = new Boolean[] {true, false};
-		int selected = settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? 0 : 1;
+		int selected = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode());
 
 		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
 				entries, nightMode, selected, app, profileColor, themeRes, v -> {
 					int selectedEntryIndex = (int) v.getTag();
-					applyPreferenceWithSnackBar(preference.getKey(), entryValues[selectedEntryIndex]);
+					applyPreferenceWithSnackBar(preference.getKey(), selectedEntryIndex);
+					MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+					if (mapViewTrackingUtilities != null) {
+						mapViewTrackingUtilities.updateSettings();
+					}
 				}
 		);
 
@@ -438,6 +450,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+			if (mapViewTrackingUtilities != null) {
+				mapViewTrackingUtilities.updateSettings();
+			}
 		}
 	}
 
@@ -446,7 +462,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
 			return true;
-		} else if (preference.getKey().equals(settings.CENTER_POSITION_ON_MAP.getId())) {
+		} else if (preference.getKey().equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
 			showDisplayPositionDialog(preference);
 			return true;
 		}

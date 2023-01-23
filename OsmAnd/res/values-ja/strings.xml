@@ -184,9 +184,9 @@ MB)をダウンロードしますか?</string>
     <string name="poi_context_menu_delete">POIを削除</string>
     <string name="rotate_map_compass_opt">コンパスに従う</string>
     <string name="rotate_map_bearing_opt">移動方向に従う</string>
-    <string name="rotate_map_none_opt">回転しない</string>
-    <string name="rotate_map_to_bearing_descr">マップ配置:</string>
-    <string name="rotate_map_to_bearing">マップの向き</string>
+    <string name="rotate_map_north_opt">回転しない</string>
+    <string name="rotate_map_to_descr">マップ配置:</string>
+    <string name="rotate_map_to">マップの向き</string>
     <string name="show_route">ルート表示</string>
     <string name="fav_imported_sucessfully">お気に入りのインポートは完了しました</string>
     <string name="fav_file_to_load_not_found">{0}にはお気に入りを含むGPXファイルはありません</string>

@@ -772,9 +772,9 @@
     <string name="poi_context_menu_delete">Выдаліць POI</string>
     <string name="rotate_map_compass_opt">У напрамку компаса</string>
     <string name="rotate_map_bearing_opt">У напрамку руху</string>
-    <string name="rotate_map_none_opt">Не варочаць (поўнач заўсёды ўверсе)</string>
-    <string name="rotate_map_to_bearing_descr">Выраўноўванне мапы:</string>
-    <string name="rotate_map_to_bearing">Арыентацыя мапы</string>
+    <string name="rotate_map_north_opt">Не варочаць (поўнач заўсёды ўверсе)</string>
+    <string name="rotate_map_to_descr">Выраўноўванне мапы:</string>
+    <string name="rotate_map_to">Арыентацыя мапы</string>
     <string name="show_route">Падрабязнасці маршруту</string>
     <string name="fav_imported_sucessfully">Улюбёныя мясціны паспяхова імпартаваныя</string>
     <string name="fav_file_to_load_not_found">GPX-файл з улюбёнымі мясцінамі не знойдзены ў {0}</string>
@@ -4779,7 +4779,7 @@
     <string name="favorite_delete_group">Выдаліць групу</string>
     <string name="download_heightmap_maps">Мапа вышынь</string>
     <string name="display_position">Паказваць пазіцыю</string>
-    <string name="rotate_map_none_rotated_opt">Фіксавана (паварочваецца ўручную)</string>
+    <string name="rotate_map_manual_opt">Фіксавана (паварочваецца ўручную)</string>
     <string name="map_marker_interval_dialog_desc">Каб разлічыць прыблізны час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
     <string name="go_to_marker_location">Перайсці да месцазнаходжання адзнакі</string>
     <string name="shared_string_switch_mode">Пераключыць рэжым</string>

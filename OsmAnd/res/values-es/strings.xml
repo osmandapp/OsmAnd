@@ -323,9 +323,9 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_to_descr">Alineación del mapa:</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="fav_file_to_load_not_found">Archivo GPX de favoritos, no encontrado en {0}</string>
@@ -1167,7 +1167,7 @@
     <string name="lang_zh">Chino</string>
     <string name="lang_pt_br">Portugués (Brasil)</string>
     <string name="index_name_canada">Norte América - Canadá</string>
-    <string name="always_center_position_on_map">Mostrar ubicación en el centro</string>
+    <string name="always_center_position_on_map">Mostrar la ubicación en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
@@ -4763,7 +4763,7 @@
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
-    <string name="display_position">Posición de la ubicación</string>
+    <string name="display_position">Posición</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
@@ -4779,7 +4779,7 @@
     <string name="map_widget_zoom_level_desc">Muestra el nivel de zum actual del mapa.</string>
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
-    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
@@ -4850,29 +4850,29 @@
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
-    <string name="release_4_3">- Nuevo y más rápido motor de renderizado de los mapas de la versión 2 (OpenGL), con vista 2.5D
+    <string name="release_4_3">- Nuevo y más rápido motor de renderizado de mapas de la versión 2 (OpenGL), con vista 2,5D.
 \n
 \n - Animación suave de los cambios de ubicación en movimiento
 \n
 \n - Nuevos widgets para las coordenadas del centro del mapa y la elevación de las geolocalizaciones
 \n
-\n - \"Distancia al tocar\": se han añadido opciones del tamaño de texto
+\n - \"Distancia al grifo\": añadidas opciones de tamaño de texto
 \n
-\n - Widget \"Marcador de mapa\": se ha añadido la opción de cambiar el comportamiento del clic
+\n - Widget \"Marcador del mapa\": añadida opción para cambiar el comportamiento del clic
 \n
-\n - Corregida la opción \"Mostrar posición\"
+\n - Corregida la opción \"Colocación de posición
 \n
-\n - GPX: añadido soporte para las etiquetas \"link\", \"cmt\", \"desc\" y para cualquier extensión personalizada
+\n - GPX: añadido soporte para etiquetas \"link\", \"cmt\", \"desc\" y para cualquier extensión personalizada
 \n
-\n - Reorganización de la lista de \"Mapas náuticos
+\n - Reorganizada la lista de \"Mapas náuticos
 \n
-\n - Añadido soporte para sensores ANT+
+\n - Añadido soporte para sensores ANT
 \n
 \n - Añadida la opción de desactivar la descarga de UUID
 \n
-\n - Previsión ajustable de la velocidad por defecto para los tiempos de viaje a pie/camino/carrera dependientes de la elevación
+\n - Previsión ajustable de la velocidad por defecto para los tiempos de viaje a pie/senderismo/carrera dependientes de la elevación
 \n
-\n - Corregido el comportamiento de la salida de audio y del deslizador de volumen
+\n - Corregida la salida de audio y el comportamiento del deslizador de volumen
 \n
 \n</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
