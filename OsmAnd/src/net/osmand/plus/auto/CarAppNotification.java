@@ -58,7 +58,6 @@ public class CarAppNotification extends OsmandNotification {
 
 		return createBuilder(wearable)
 				.setContentTitle(notificationTitle)
-				.setOnlyAlertOnce(true)
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText));
 	}
 

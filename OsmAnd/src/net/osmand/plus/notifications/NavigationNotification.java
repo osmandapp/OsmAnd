@@ -231,7 +231,6 @@ public class NavigationNotification extends OsmandNotification {
 
 		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
-				.setOnlyAlertOnce(true)
 				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
 				.setStyle(new BigTextStyle().bigText(notificationText))
 				.setLargeIcon(turnBitmap);
