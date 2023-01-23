@@ -150,6 +150,7 @@ public class GpxNotification extends OsmandNotification {
 
 		Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
+				.setOnlyAlertOnce(true)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 
 		Intent saveIntent = new Intent(OSMAND_SAVE_GPX_SERVICE_ACTION);
