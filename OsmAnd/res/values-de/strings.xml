@@ -570,10 +570,10 @@
     <string name="poi_context_menu_delete">Lösche POI</string>
     <string name="rotate_map_compass_opt">Nach Kompass</string>
     <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Fest (Norden ist oben)</string>
-    <string name="rotate_map_none_rotated_opt">Fest (manuell gedreht)</string>
-    <string name="rotate_map_to_bearing_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to_bearing">Kartenrotation</string>
+    <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
+    <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
+    <string name="rotate_map_to_descr">Kartenausrichtung:</string>
+    <string name="rotate_map_to">Kartenrotation</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
@@ -1180,7 +1180,7 @@
     <string name="select_gpx">GPX-Datei auswählen …</string>
     <string name="route_descr_select_destination">Ziel auswählen</string>
     <string name="interrupt_music_descr">Musikwiedergabe während Sprachansagen pausieren.</string>
-    <string name="always_center_position_on_map">Standort immer in der Bildschirmmitte anzeigen</string>
+    <string name="always_center_position_on_map">Positionsbestimmung immer mittig</string>
     <string name="voice_pref_title">Stimme</string>
     <string name="misc_pref_title">Verschiedenes</string>
     <string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
@@ -2201,7 +2201,7 @@
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
     <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
-    <string name="driving_region_automatic">Automatisch</string>
+    <string name="shared_string_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten. 
 \n 
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
@@ -4777,7 +4777,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Positionsanzeige</string>
+    <string name="display_position">Positionsbestimmung</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -4863,7 +4863,7 @@
 \n
 \n • Widget „Kartenmarkierung“: Option hinzugefügt, um das Klickverhalten zu ändern
 \n
-\n • Option \"Position anzeigen\" korrigiert
+\n • Option \"Positionsbestimmung\" korrigiert
 \n
 \n • GPX: Unterstützung für \"link\", \"cmt\", \"desc\"-Tags und für alle benutzerdefinierten Erweiterungen hinzugefügt
 \n
@@ -5025,9 +5025,14 @@
     <string name="cloud_all_changes_uploaded_descr">Alle auf diesem Gerät vorgenommenen Änderungen werden mit OsmAnd Cloud synchronisiert.</string>
     <string name="download_cloud_version">Cloud-Version herunterladen</string>
     <string name="av_audio_format_bottom_sheet_descr">Audio-Ausgabe-Format auswählen. Dateitypformat für Audio is 3GPP (.3gp).</string>
-    <string name="si_nm_ft">Nautische Meilen/Fuß</string>
-    <string name="si_nm_mt">Nautische Meilen/Meter</string>
+    <string name="si_nm_ft">Seemeilen/Fuß</string>
+    <string name="si_nm_mt">Seemeilen/Meter</string>
     <string name="set_up_backup">Backup einrichten</string>
     <string name="x_axis">X-Achse</string>
     <string name="y_axis">Y-Achse</string>
+    <string name="share_as_file">Compartilhar como ficheiro</string>
+    <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Download überspringen</string>
+    <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
+    <string name="share_link">Partilhar a ligação</string>
 </resources>

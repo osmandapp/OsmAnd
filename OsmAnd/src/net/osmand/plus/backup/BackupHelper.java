@@ -381,8 +381,10 @@ public class BackupHelper {
 	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
-		if (!isLimitedFilesCollectionItem(item)
-				&& info != null && (!Algorithms.isEmpty(info.filesToUpload) || !Algorithms.isEmpty(info.filesToMerge))) {
+		if (!isLimitedFilesCollectionItem(item) && info != null &&
+				(!Algorithms.isEmpty(info.filesToUpload)
+						|| !Algorithms.isEmpty(info.filesToMerge)
+						|| !Algorithms.isEmpty(info.filesToDownload))) {
 			for (LocalFile localFile : info.filesToUpload) {
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
@@ -394,6 +396,14 @@ public class BackupHelper {
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
 					filesToUpload.add(file);
+				}
+			}
+			for (RemoteFile remoteFile : info.filesToDownload) {
+				if (remoteFile.item instanceof FileSettingsItem) {
+					String fileName = remoteFile.item.getFileName();
+					if (fileName != null && item.applyFileName(fileName)) {
+						filesToUpload.add(((FileSettingsItem) remoteFile.item).getFile());
+					}
 				}
 			}
 		} else {
@@ -957,7 +967,11 @@ public class BackupHelper {
 						} else if (fileChangedLocally) {
 							info.filesToUpload.add(localFile);
 						} else if (fileChangedRemotely) {
-							info.filesToDownload.add(remoteFile);
+							if (remoteFile.isDeleted()) {
+								info.localFilesToDelete.add(localFile);
+							} else {
+								info.filesToDownload.add(remoteFile);
+							}
 						}
 					} else if (!remoteFile.isDeleted()) {
 						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
@@ -978,7 +992,8 @@ public class BackupHelper {
 						continue;
 					}
 					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
-					if (!hasRemoteFile) {
+					boolean toDelete = info.localFilesToDelete.contains(localFile);
+					if (!hasRemoteFile && !toDelete) {
 						boolean isEmpty = localFile.item instanceof CollectionSettingsItem<?> && ((CollectionSettingsItem<?>) localFile.item).isEmpty();
 						if (!isEmpty) {
 							info.filesToUpload.add(localFile);
@@ -994,7 +1009,12 @@ public class BackupHelper {
 				operationLog.log("=== filesToUpload ===");
 				operationLog.log("=== filesToDownload ===");
 				for (RemoteFile remoteFile : info.filesToDownload) {
-					operationLog.log(remoteFile.toString());
+					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+					if (localFile != null) {
+						operationLog.log(remoteFile.toString() + " localUploadTime=" + localFile.uploadTime);
+					} else {
+						operationLog.log(remoteFile.toString());
+					}
 				}
 				operationLog.log("=== filesToDownload ===");
 				operationLog.log("=== filesToDelete ===");
@@ -1002,6 +1022,11 @@ public class BackupHelper {
 					operationLog.log(remoteFile.toString());
 				}
 				operationLog.log("=== filesToDelete ===");
+				operationLog.log("=== localFilesToDelete ===");
+				for (LocalFile localFile : info.localFilesToDelete) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== localFilesToDelete ===");
 				operationLog.log("=== filesToMerge ===");
 				for (Pair<LocalFile, RemoteFile> filePair : info.filesToMerge) {
 					operationLog.log("LOCAL=" + filePair.first.toString() + " REMOTE=" + filePair.second.toString());

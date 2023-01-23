@@ -101,6 +101,7 @@ import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1531,14 +1532,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		protected String doInBackground(GpxInfo... params) {
 			int count = 0;
 			int total = 0;
+			File gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					total++;
 					boolean successful = FileUtils.removeGpxFile(app, info.file);
 					if (successful) {
 						File parentFile = info.file.getParentFile();
-						if (parentFile != null && Algorithms.isEmpty(parentFile.listFiles())) {
-							folderDeleted = Algorithms.removeAllFiles(parentFile);
+						if (parentFile != null && !parentFile.equals(gpxPath)) {
+							folderDeleted = parentFile.delete();
 						}
 						count++;
 						publishProgress(info);

@@ -766,9 +766,9 @@
     <string name="poi_context_menu_delete">Ezabatu POI-a</string>
     <string name="rotate_map_compass_opt">Ipar-orratzaren norabidean</string>
     <string name="rotate_map_bearing_opt">Mugimenduaren norabidea</string>
-    <string name="rotate_map_none_opt">Biraketa gabe (iparra beti gorantza)</string>
-    <string name="rotate_map_to_bearing_descr">Maparen lerrokatzea:</string>
-    <string name="rotate_map_to_bearing">Maparen orientazioa</string>
+    <string name="rotate_map_north_opt">Biraketa gabe (iparra beti gorantza)</string>
+    <string name="rotate_map_to_descr">Maparen lerrokatzea:</string>
+    <string name="rotate_map_to">Maparen orientazioa</string>
     <string name="show_route">Ibilbidearen xehetasunak</string>
     <string name="fav_imported_sucessfully">Gogokoak inportatuta</string>
     <string name="fav_file_to_load_not_found">Ez da aurkitu gogokoak dituen GPX fitxategia {0} helbidean</string>
@@ -2185,7 +2185,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>
-    <string name="driving_region_automatic">Automatikoa</string>
+    <string name="shared_string_automatic">Automatikoa</string>
     <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd-ek aplikazioan irekitzen dituzun atalei buruzko informazioa jasotzen du. Zure kokalekua ez da inoiz bidaltzen, ezta aplikazioan idazten duzun ezer edo ikusi, bilatu edo deskargatzen dituzun zonaldeei buruzko ezer ere.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak abioan</string>

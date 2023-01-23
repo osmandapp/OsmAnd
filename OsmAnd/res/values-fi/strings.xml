@@ -214,7 +214,7 @@
     <string name="shared_string_download_map">Lataa kartta</string>
     <string name="context_menu_item_search_transport">Etsi joukkoliikenteestä</string>
     <string name="voice">Nauhoitettu ääni</string>
-    <string name="rotate_map_to_bearing">Kartan orientaatio</string>
+    <string name="rotate_map_to">Kartan orientaatio</string>
     <string name="show_route">Reitin tiedot</string>
     <string name="fav_imported_sucessfully">Suosikit tuotu onnistuneesti</string>
     <string name="fav_saved_sucessfully">Suosikit tallennettu onnistuneesti sijaintiin {0}</string>
@@ -464,7 +464,7 @@
     <string name="poi_context_menu_delete">Poista KP</string>
     <string name="rotate_map_compass_opt">Kompassi</string>
     <string name="rotate_map_bearing_opt">Liikkumissuunta</string>
-    <string name="rotate_map_none_opt">Älä käännä (pohjoinen on ylhäällä)</string>
+    <string name="rotate_map_north_opt">Älä käännä (pohjoinen on ylhäällä)</string>
     <string name="phone">puhelin</string>
     <string name="website">Sivusto</string>
     <string name="show_point_options">Käytä sijaintia…</string>
@@ -1861,7 +1861,7 @@
     <string name="offline_maps_and_navigation">Offline kartat
 \n&amp; navigointi</string>
     <string name="commit_poi"/>
-    <string name="tab_title_advanced"/>
+    <string name="tab_title_advanced">Edistynyt</string>
     <string name="confirm_download_roadmaps">Vain tiet-karttaa ei tarvita, koska sinulla on jo vakio (täysi) kartta. Ladataanko se silti\?</string>
     <string name="free_downloads_used">Käytetyt ilmaiset lataukset</string>
     <string name="free_downloads_used_description">Näyttää jäljellä olevien ilmaisten latausten määrän.</string>
@@ -2756,7 +2756,7 @@
     <string name="map_widget_ruler_control">Sädeviivain</string>
     <string name="monitoring_control_start">REC</string>
     <string name="routing_attr_length_name">Pituusrajoitus</string>
-    <string name="driving_region_automatic">Automaattinen</string>
+    <string name="shared_string_automatic">Automaattinen</string>
     <string name="transport_nearby_routes">Sisältäen</string>
     <string name="transport_nearby_routes_within">Lähellä olevat reitit</string>
     <string name="years_5">Vuotta</string>
@@ -3986,4 +3986,6 @@
     <string name="rendering_attr_showFitnessTrails_description">Näytä kuntopolut</string>
     <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan päivittäin.</string>
     <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan tunnin välein.</string>
+    <string name="y_axis">y-akseli</string>
+    <string name="x_axis">x-akseli</string>
 </resources>

@@ -430,8 +430,8 @@
     <string name="search_offline_clear_search">Căutare nouă</string>
     <string name="map_text_size_descr">Mărimea textului pentru denumirile afișate pe hartă:</string>
     <string name="map_text_size">Mărime font hartă</string>
-    <string name="trace_rendering">Info depanare randare</string>
-    <string name="trace_rendering_descr">Afișează performanța de redare.</string>
+    <string name="trace_rendering">Informații depanare performanță</string>
+    <string name="trace_rendering_descr">Afișează performanța de redare și navigație.</string>
     <string name="installing_new_resources">Dezarhivare date noi…</string>
     <string name="internet_connection_required_for_online_route">Navigația online nu lucrează offline.</string>
     <string name="tts_language_not_supported_title">Limba neacceptată</string>
@@ -589,9 +589,9 @@
     <string name="poi_context_menu_delete">Șterge POI</string>
     <string name="rotate_map_compass_opt">Direcția busolei</string>
     <string name="rotate_map_bearing_opt">Direcția de deplasare</string>
-    <string name="rotate_map_none_opt">Fixat (nordul este sus)</string>
-    <string name="rotate_map_to_bearing_descr">Aliniere hartă:</string>
-    <string name="rotate_map_to_bearing">Orientare hartă</string>
+    <string name="rotate_map_north_opt">Fixat (nordul este sus)</string>
+    <string name="rotate_map_to_descr">Aliniere hartă:</string>
+    <string name="rotate_map_to">Orientare hartă</string>
     <string name="show_route">Detalii rută</string>
     <string name="fav_imported_sucessfully">Favorite importate</string>
     <string name="fav_file_to_load_not_found">Fișierul GPX care conține Favorite nu a fost găsit la {0}</string>
@@ -1254,7 +1254,7 @@
     <string name="proxy_host_descr">Specificați numele de gazdă al proxy-ului dvs. (de exemplu, 127.0.0.0.1).</string>
     <string name="int_days">zile</string>
     <string name="osmo_connect_menu">Conectare</string>
-    <string name="always_center_position_on_map">Arată întotdeauna poziția în centru</string>
+    <string name="always_center_position_on_map">Amplasare poziție întotdeauna în centru</string>
     <string name="voice_pref_title">Voce</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Localizare</string>
@@ -1874,7 +1874,7 @@
     <string name="restore_purchases">Restabilirea achiziției</string>
     <string name="fonts_header">Fonturi hartă</string>
     <string name="right_side_navigation">Trafic pe dreapta</string>
-    <string name="driving_region_automatic">Automat</string>
+    <string name="shared_string_automatic">Automat</string>
     <string name="do_not_send_anonymous_app_usage">Nu trimite statistici de utilizare anonime ale aplicației</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd colectează informații despre părțile din aplicatie folosite. Locația dumneavoastră și datele introduse în aplicație nu vor fi niciodată trimise, sau detalii despre zona în care vă aflați, căutari sau descărcări.</string>
     <string name="do_not_show_startup_messages">Nu arăta mesaje la pornire</string>
@@ -1899,7 +1899,7 @@
     <string name="file_can_not_be_moved">Nu s-a putut muta fișierul.</string>
     <string name="shared_string_move">Mută</string>
     <string name="shared_string_gpx_tracks">Track-uri</string>
-    <string name="routing_attr_driving_style_name">Stil de echitație</string>
+    <string name="routing_attr_driving_style_name">Stil de mers</string>
     <string name="shared_string_time">Timp</string>
     <string name="total_distance">Distanța totală</string>
     <string name="points_delete_multiple_succesful">Punct(e) șters(e).</string>
@@ -3058,10 +3058,10 @@
     <string name="backup_version_history_removed">Tot istoricul versiunilor a fost eliminat.</string>
     <string name="backup_data_removed">Toate datele au fost eliminate.</string>
     <string name="shared_string_progress">Progres</string>
-    <string name="backup_do_not_have_any">Nu aveți încă o copie de rezervă online.</string>
-    <string name="backup_dont_have_any_descr">Programați copii de rezervă automate și nu pierdeți niciodată date.</string>
+    <string name="backup_do_not_have_any">Nu aveți încă backup online</string>
+    <string name="backup_dont_have_any_descr">Setați un backup automat și nu vă ve-ți mai face griji cu pierderea datelor.</string>
     <string name="backup_welcome_back">Bine ați revenit!</string>
-    <string name="backup_welcome_back_descr">Restaurați datele pe acest dispozitiv utilizând copii de rezervă existente sau faceți o copie de rezervă a datelor în OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurați datele pe acest dispozitiv cu ajutorul OsmAnd Cloud.</string>
     <string name="backup_setup">Configurați o copie de rezervă</string>
     <string name="backup_restore_now">Restaurați acum</string>
     <string name="attribute">Atribut</string>
@@ -4100,8 +4100,8 @@
 \nSelectați o acțiune.</string>
     <string name="keep_both_desc">Elementele importate vor fi adăugate cu prefixul</string>
     <string name="listed_exist">Lista %1$s, există deja în OsmAnd.</string>
-    <string name="recalc_angle_dialog_title">Unghiul minim între locația mea și traseu</string>
-    <string name="recalc_angle_dialog_descr">Un segment drept suplimentar între locația mea și traseul calculat va fi afișat până când traseul este recalculat</string>
+    <string name="recalc_angle_dialog_title">Unghiul minim dintre locație și rută</string>
+    <string name="recalc_angle_dialog_descr">Se va afișa un segment drept între locație și ruta calculată până la recalcularea rutei</string>
     <string name="enter_the_file_name">Introduceți numele fișierului.</string>
     <string name="transport_nearby_routes">În cadrul</string>
     <string name="transport_nearby_routes_within">Rutele apropiate din cadrul</string>
@@ -4626,7 +4626,7 @@
     <string name="calculate_online">Calculați online</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nu mergeți în afara pârtiei</string>
     <string name="on_with_params">%1$s pe %2$s</string>
-    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_lpg_name">GPL</string>
     <string name="routing_attr_motor_type_electric_name">Electrică</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_description">Selectați tipul de combustibil al motorului dumneavoastră, acest lucru este necesar pentru a estima emisiile de CO2.</string>
@@ -4672,10 +4672,10 @@
     <string name="no_widgets_here_yet">Nu există widget-uri aici încă</string>
     <string name="available_widgets">Widget-uri disponibile</string>
     <string name="routing_attr_motor_type_name">Motorul vehiculului</string>
-    <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
-    <string name="co2_mission">emisie CO2</string>
+    <string name="routing_attr_motor_type_hybrid_name">Hibridă</string>
+    <string name="co2_mission">Emisii CO2</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_diesel_name">Diesel</string>
+    <string name="routing_attr_motor_type_diesel_name">Motorină</string>
     <string name="routing_attr_motor_type_petrol_name">Benzină</string>
     <string name="transport_hazmat_no_desc">Drumurile și tunelurile pot restricționa transportul materialelor periculoase.</string>
     <string name="radius_ruler_mode_desc">Atingând widgetul se trece la modul Riglă cu rază.</string>
@@ -4779,7 +4779,7 @@
 \n
 \nVă rugăm să sprijiniți îmbunătățirile prin furnizarea jurnalului de erori.</string>
     <string name="send_uuid_preference_desc">Un UUID aleatoriu este utilizat pentru a descărca hărți offline de pe serverele OsmAnd pentru a monitoriza utilizarea echitabilă a resurselor serverului, pentru a prezice tiparele de trafic și pentru a genera rapoarte lunare anonime privind hărțile.</string>
-    <string name="show_borders_of_downloaded_maps">Afișați marginile hărților descărcate</string>
+    <string name="show_borders_of_downloaded_maps">Afișați limitele hărților descărcate</string>
     <string name="map_rendering_engine">Motor de redare a hărților</string>
     <string name="favorites_backup">Copie de rezervă pentru favorite</string>
     <string name="current_location_widget">Coordonate: Poziția actuală</string>
@@ -4798,7 +4798,7 @@
 \n
 \n • Widgetul \"Map marker\": a fost adăugată opțiunea de modificare a comportamentului la clic
 \n
-\n • Fixată opțiunea \"Display position\" (Afișare poziție)
+\n • Fixată opțiunea \"Position placement\" (Amplasare poziție)
 \n
 \n • GPX: adăugat suport pentru etichetele \"link\", \"cmt\", \"desc\" și pentru orice extensii personalizate
 \n
@@ -4915,7 +4915,7 @@
     <string name="favorite_delete_group">Ștergeți grupul</string>
     <string name="download_heightmap_maps">Hartă înălțime</string>
     <string name="coordinates_widget_map_center_desc">Afișează coordonatele geografice ale centrului actual al hărții</string>
-    <string name="display_position">Poziția de afișare</string>
+    <string name="display_position">Amplasare poziție</string>
     <string name="weather_plugin_description">Oferă
 \n- prognoza meteo pe 24 de ore și 7 zile cu 5 straturi
 \n- widget-uri bazate pe locație
@@ -4941,12 +4941,12 @@
     <string name="shared_string_2_5_d_view">Vedere 2.5 D</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Mare</string>
-    <string name="rotate_map_none_rotated_opt">Fix (rotit manual)</string>
+    <string name="rotate_map_manual_opt">Fix (rotit manual)</string>
     <string name="map_markers_desc">Widgetul afișează distanța sau ora estimată de sosire (ETA) pentru primele două repere din lista de repere de pe hartă.</string>
     <string name="map_widget_ant_bicycle_dist_desc">Afișează distanța parcursă</string>
-    <string name="nautical_depth_points">Puncte de adâncime nautică</string>
-    <string name="depth_contours">Contururi de adâncime</string>
-    <string name="worldwide_maps">Hărți mondiale</string>
+    <string name="nautical_depth_points">Puncte adâncime nautică</string>
+    <string name="depth_contours">Contururi adâncime</string>
+    <string name="worldwide_maps">Hărți lume</string>
     <string name="map_widget_zoom_level_desc">Afișează nivelul actual de zoom al hărții.</string>
     <string name="map_widget_ant_bicycle_power_desc">Arată puterea de ieșire a biciclistului, care este folosită pentru a mișca bicicleta înainte</string>
     <string name="rendering_attr_depthContourColorScheme_name">Schema de culori a liniei</string>
@@ -4978,8 +4978,63 @@
     <string name="rendering_attr_showMtbScale_description">Afișați traseele în funcție de scara MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Arată scara MTB în urcare</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Afișați traseele în funcție de scara de urcare a MTB.</string>
-    <string name="mtb_segment_classification">Clasificarea pe segmente</string>
+    <string name="mtb_segment_classification">Clasificare segment</string>
     <string name="mtb_scale">Scala MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Asociația Internațională de Ciclism Montan</string>
+    <string name="cloud_sync_progress">Sincronizare…%1$s</string>
+    <string name="checking_progress">Verificare…</string>
+    <string name="shared_string_modified">Modificat</string>
+    <string name="shared_string_open">Deschis</string>
+    <string name="release_4_4_pre">• Aici vor fi notițele pentru lansarea 4.4</string>
+    <string name="shared_string_uploaded">Încărcat</string>
+    <string name="modified_file">Fișier modificat</string>
+    <string name="download_cloud_version">Descărcați versiunea de pe Cloud</string>
+    <string name="x_axis">Axa X</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Izolinii precipitații</string>
+    <string name="y_axis">Axa Y</string>
+    <string name="value_downloaded_of_mb">Se descarcă %1$.1f/%2$.1f MO</string>
+    <string name="skip_download">Omite descărcarea</string>
+    <string name="determine_location">Permite determinarea locației</string>
+    <string name="set_up_backup">Setați backup</string>
+    <string name="choose_what_to_sync">Alegeți ce se va sincroniza</string>
+    <string name="res_unknown">Necunoscut</string>
+    <string name="shared_string_unsynced">Nesincronizat</string>
+    <string name="check_for_updates">Caută actualizări</string>
+    <string name="changes">Modificări %1$s</string>
+    <string name="cloud_changes">Modificări Cloud</string>
+    <string name="shared_string_cloud">Cloud</string>
+    <string name="new_file">Fișier nou</string>
+    <string name="deleted_file">Fișier șters</string>
+    <string name="sync_now">Sincronizați acum</string>
+    <string name="cloud_conflicts">Conflicte</string>
+    <string name="cloud_conflict">Conflict</string>
+    <string name="upload_all">Încarcă tot</string>
+    <string name="cloud_recent_changes">Modificări</string>
+    <string name="cloud_all_changes_uploaded">Toate modificările au fost încărcate</string>
+    <string name="cloud_all_changes_uploaded_descr">Toate modificările făcute pe acest dispozitiv sunt sincronizate cu OsmAnd Cloud.</string>
+    <string name="cloud_no_conflicts">Nu sunt conflicte</string>
+    <string name="shared_string_do_not_exist">Nu există</string>
+    <string name="last_sync">Ultima sincronizare</string>
+    <string name="import_export">Import/Export</string>
+    <string name="export_to_file">Exportați într-un fișier</string>
+    <string name="shared_string_expires">Expiră</string>
+    <string name="open_weather_action_description">Vă permite să deschideți un ecran cu informații meteo detaliate.</string>
+    <string name="open_weather_action">Deschide meteo</string>
+    <string name="rendering_attr_weatherCloudContours_name">Izolinii nori</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinii rafale de vânt</string>
+    <string name="local_changes">Modificări locale</string>
+    <string name="upload_change">Încarcă modificarea</string>
+    <string name="cloud_version_will_be_removed">Versiunea de pe Cloud va fi ștearsă</string>
+    <string name="cloud_changes_will_be_dismissed">Modificările de pe Cloud vor fi anulate</string>
+    <string name="local_file_will_be_restored">Fișierele locație vor fi restaurate</string>
+    <string name="local_changes_will_be_dismissed">Modificările locale vor fi anulate</string>
+    <string name="share_link">Distribuie link</string>
+    <string name="share_as_file">Distribuie ca fișier</string>
+    <string name="cloud_all_changes_downloaded">Toate modificările au fost descărcate</string>
+    <string name="shared_string_purchased_on">Cumpărat pe</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Nu s-a putut obține lista de fișiere de pe server.</string>
+    <string name="si_nm_mt">Mile nautice/metri</string>
+    <string name="si_nm_ft">Mile nautice/picioare</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selectați formatul audio. Formatul fișierului este 3GPP (.3gp).</string>
 </resources>

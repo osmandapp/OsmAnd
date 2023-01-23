@@ -8,7 +8,7 @@
     <string name="type_address">Ünvan yazın</string>
     <string name="subscribe_email_error">Səhv</string>
     <string name="fonts_header">Xəritə şriftləri</string>
-    <string name="driving_region_automatic">Avtomatik</string>
+    <string name="shared_string_automatic">Avtomatik</string>
     <string name="routing_attr_driving_style_speed_name">Qısa marşrutlar</string>
     <string name="add_new_folder">Yeni qovluq əlavə et</string>
     <string name="max_speed">Maksimum sürət</string>
@@ -589,7 +589,7 @@
     <string name="download_type_to_filter">filtr üçün yazın</string>
     <string name="error_reading_gpx">GPX məlumatları oxuna bilmədi.</string>
     <string name="poi_context_menu_delete">POI-ni sil</string>
-    <string name="rotate_map_none_opt">Sabit (şimal yuxarıdır)</string>
+    <string name="rotate_map_north_opt">Sabit (şimal yuxarıdır)</string>
     <string name="fav_saved_sucessfully">Favoritlər {0}-da saxlanıldı</string>
     <string name="send_report">Hesabat göndər</string>
     <string name="any_poi">Hər hansı</string>
@@ -1719,7 +1719,7 @@
     <string name="index_name_openmaps">OpenMaps - Avropa</string>
     <string name="recording_unavailable">dəstəklənmir</string>
     <string name="close_changeset">Dəyişiklikləri bağla</string>
-    <string name="rotate_map_to_bearing">Xəritə istiqaməti</string>
+    <string name="rotate_map_to">Xəritə istiqaməti</string>
     <string name="navigation_intent_invalid">Yanlış format: %s</string>
     <string name="show_closed_notes">Bağlı qeydləri göstər</string>
     <string name="switch_osm_notes_visibility_desc">Xəritədə OSM qeydlərini göstər və ya gizlət.</string>
@@ -1919,7 +1919,7 @@
     <string name="use_magnetic_sensor_descr">Kompasın oxunması üçün istiqamət sensoru əvəzinə maqnit sensorunu istifadə et.</string>
     <string name="safe_mode_description">Proqramı təhlükəsiz (daha yavaş) rejimdə işlət.</string>
     <string name="use_compass_navigation_descr">Başqa bir başlıq aşkar edilmədikdə kompasdan istifadə et.</string>
-    <string name="rotate_map_to_bearing_descr">Xəritənin düzülüşü:</string>
+    <string name="rotate_map_to_descr">Xəritənin düzülüşü:</string>
     <string name="map_screen_orientation">Ekran istiqaməti</string>
     <string name="distance_farthest">İlk ən uzaqdakı</string>
     <string name="distance_nearest">İlk ən yaxındakı</string>

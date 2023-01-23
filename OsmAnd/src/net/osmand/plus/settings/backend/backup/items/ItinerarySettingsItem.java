@@ -114,6 +114,17 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	}
 
 	@Override
+	public void delete() {
+		super.delete();
+		markersHelper.syncAllGroups();
+	}
+
+	@Override
+	protected void deleteItem(MapMarkersGroup item) {
+		markersHelper.removeMarkersGroup(item);
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull MapMarkersGroup markersGroup) {
 		for (MapMarkersGroup group : existingItems) {
 			if (group.getType() == markersGroup.getType()

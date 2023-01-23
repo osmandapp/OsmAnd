@@ -37,6 +37,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @NonNull List<SettingsItem> items,
 	                 @NonNull List<SettingsItem> itemsToDelete,
+	                 @NonNull List<SettingsItem> itemsToLocalDelete,
 	                 @Nullable BackupExportListener listener) {
 		this.key = key;
 		this.helper = helper;
@@ -53,6 +54,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		}
 		for (SettingsItem item : itemsToDelete) {
 			exporter.addItemToDelete(item);
+		}
+		for (SettingsItem item : itemsToLocalDelete) {
+			exporter.addItemToLocalDelete(item);
 		}
 	}
 
@@ -81,7 +85,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	protected String doInBackground(Void... voids) {
 		OsmandApplication app = helper.getApp();
 		long itemsSize = getEstimatedItemsSize(app, exporter.getItems(),
-				exporter.getItemsToDelete(), exporter.getOldItemsToDelete());
+				exporter.getItemsToDelete(), exporter.getItemsToLocalDelete(), exporter.getOldItemsToDelete());
 		publishProgress(itemsSize / 1024L);
 
 		String error = null;
@@ -97,6 +101,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	public static long getEstimatedItemsSize(@NonNull OsmandApplication app,
 	                                         @NonNull List<SettingsItem> items,
 	                                         @NonNull List<SettingsItem> itemsToDelete,
+	                                         @NonNull List<SettingsItem> itemsToLocalDelete,
 	                                         @NonNull List<SettingsItem> oldItemsToDelete) {
 		long size = 0;
 		BackupHelper backupHelper = app.getBackupHelper();
@@ -130,6 +135,16 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 						if (Algorithms.stringsEqual(itemFileName, remoteFileItem.getFileName())) {
 							size += APPROXIMATE_FILE_SIZE_BYTES;
 						}
+					}
+				}
+			}
+		}
+		Map<String, LocalFile> localFilesMap = backupHelper.getBackup().getLocalFiles();
+		if (!Algorithms.isEmpty(localFilesMap)) {
+			for (LocalFile localFile : localFilesMap.values()) {
+				for (SettingsItem item : itemsToLocalDelete) {
+					if (item.equals(localFile.item)) {
+						size += APPROXIMATE_FILE_SIZE_BYTES;
 					}
 				}
 			}

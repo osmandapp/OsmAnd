@@ -935,8 +935,8 @@
     <string name="gpx_files_not_found">Engar GPX-skrár fundust í ferlamöppunni</string>
     <string name="rotate_map_compass_opt">Eftir áttavita</string>
     <string name="rotate_map_bearing_opt">Eftir átt hreyfingar</string>
-    <string name="rotate_map_none_opt">Fast (norður er upp)</string>
-    <string name="rotate_map_to_bearing">Stefna korts</string>
+    <string name="rotate_map_north_opt">Fast (norður er upp)</string>
+    <string name="rotate_map_to">Stefna korts</string>
     <string name="show_route">Nánar um leið</string>
     <string name="send_report">Senda skýrslu</string>
     <string name="layer_yandex_traffic">Yandex umferð</string>
@@ -1608,7 +1608,7 @@
     <string name="transport_searching_route">Niðurstöður leitar að samgöngum ({0} til áfangastaðar):</string>
     <string name="transport_search_again">Núllstilla leit að samgöngum</string>
     <string name="transport_context_menu">Leita að samgöngum við biðstöð</string>
-    <string name="rotate_map_to_bearing_descr">Stefna korts miðað við skjá:</string>
+    <string name="rotate_map_to_descr">Stefna korts miðað við skjá:</string>
     <string name="fav_imported_sucessfully">Innflutningur eftirlæta tókst</string>
     <string name="import_file_favourites">Vista gögn sem GPX-skrá eða flytja ferilpunkta inn í eftirlæti?</string>
     <string name="transport_stops">stoppmerki</string>
@@ -1982,7 +1982,7 @@
     <string name="restore_purchases">Endurheimta innkaup</string>
     <string name="fonts_header">Letur fyrir kort</string>
     <string name="right_side_navigation">Ekið á hægri akrein</string>
-    <string name="driving_region_automatic">Sjálfvirkt</string>
+    <string name="shared_string_automatic">Sjálfvirkt</string>
     <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
     <string name="incremental_search_city">Stigvaxandi leit í borg</string>
     <string name="rendering_attr_showRoadMaps_description">Veldu þegar birta á kort einungis með vegum:</string>
@@ -4773,7 +4773,7 @@
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>
-    <string name="rotate_map_none_rotated_opt">Fast (snúið handvirkt)</string>
+    <string name="rotate_map_manual_opt">Fast (snúið handvirkt)</string>
     <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>
     <string name="shared_string_switch_mode">Skipta um ham</string>

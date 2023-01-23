@@ -2294,7 +2294,7 @@
     <string name="do_not_show_startup_messages_desc">Ne prikažuvajte popusti za aplikacii i poraki za specijalni lokalni nastani.</string>
     <string name="parking_options">Parking opcii</string>
     <string name="full_version_thanks">Vi blagodarime što ja kupivte platenata verzija na OsmAnd.</string>
-    <string name="driving_region_automatic">Automatik</string>
+    <string name="shared_string_automatic">Automatik</string>
     <string name="do_not_send_anonymous_app_usage">Ne ispraḱajte anonimna statistika za koristenje na aplikacii</string>
     <string name="do_not_show_startup_messages">Ne prikažuvaj start up poraki</string>
     <string name="shared_string_gpx_track">Sledenje</string>
@@ -4255,9 +4255,9 @@
     <string name="poi_context_menu_modify">Izmeni go POI</string>
     <string name="poi_context_menu_delete">Izbrisete go POI</string>
     <string name="rotate_map_compass_opt">Nasoka na kompas</string>
-    <string name="rotate_map_none_opt">Nema rotacija (sever sekogaš nagore)</string>
-    <string name="rotate_map_to_bearing_descr">Poramnuvanje na kartata:</string>
-    <string name="rotate_map_to_bearing">Orientacija po karta</string>
+    <string name="rotate_map_north_opt">Nema rotacija (sever sekogaš nagore)</string>
+    <string name="rotate_map_to_descr">Poramnuvanje na kartata:</string>
+    <string name="rotate_map_to">Orientacija po karta</string>
     <string name="show_route">Detali za maršrutata</string>
     <string name="fav_imported_sucessfully">Omileni uvezeni</string>
     <string name="import_file_favourites">Da se začuvaat podatocite kako datoteka GPX ili da se uvezat točki vo „Omileni“\?</string>

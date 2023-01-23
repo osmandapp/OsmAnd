@@ -26,9 +26,9 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
@@ -54,6 +54,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
+	private static final int CONTENT_LIMIT = 50;
 
 	private final SearchHelper searchHelper;
 
@@ -72,10 +73,11 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	private boolean showResult;
 
 	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-						@NonNull SurfaceRenderer surfaceRenderer) {
+	                    @NonNull SurfaceRenderer surfaceRenderer) {
 		super(carContext);
 		ConstraintManager manager = carContext.getCarService(ConstraintManager.class);
-		this.searchHelper = new SearchHelper(getApp(), true, manager.getContentLimit(CONTENT_LIMIT_TYPE_LIST));
+		int contentLimit = Math.min(CONTENT_LIMIT, manager.getContentLimit(CONTENT_LIMIT_TYPE_LIST));
+		this.searchHelper = new SearchHelper(getApp(), true, contentLimit);
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
 

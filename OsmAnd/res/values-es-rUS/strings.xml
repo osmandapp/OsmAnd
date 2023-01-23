@@ -1262,9 +1262,9 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_to_descr">Alineación del mapa:</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
@@ -2194,7 +2194,7 @@
     <string name="full_version_thanks">Gracias por comprar la versión de pago de OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
@@ -4786,7 +4786,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
-    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
@@ -5039,4 +5039,11 @@
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
+    <string name="y_axis">Eje Y</string>
+    <string name="x_axis">Eje X</string>
+    <string name="share_as_file">Compartir como archivo</string>
+    <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Omitir descarga</string>
+    <string name="determine_location">Permítenos determinar tu ubicación</string>
+    <string name="share_link">Compartir enlace</string>
 </resources>

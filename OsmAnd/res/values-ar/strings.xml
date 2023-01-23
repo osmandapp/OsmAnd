@@ -614,7 +614,7 @@
     <string name="poi_context_menu_showdescription">إظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
     <string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
-    <string name="amenity_type_osmwiki">ويكييديا (بدون اتصال)</string>
+    <string name="amenity_type_osmwiki">ويكيبيديا (بدون اتصال)</string>
     <string name="amenity_type_user_defined">يحددها المستخدم</string>
     <string name="fav_export_confirmation">ملف المفضلة سبق تصديره هل تريد استبداله؟</string>
     <string name="global_settings">الاعدادت العالمية</string>
@@ -842,7 +842,7 @@
 \nاضغط مطولا للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
-    <string name="always_center_position_on_map">الموقع في المنتصف</string>
+    <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
     <string name="localization_pref_title">إعدادات إقليمية</string>
     <string name="lang_hr">الكرواتية</string>
     <string name="lang_pt_br">البرتغالية (البرازيل)</string>
@@ -977,9 +977,9 @@
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
-    <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
+    <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_none_opt">ثابت (الشمال لأعلى)</string>
+    <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -1313,7 +1313,7 @@
     <string name="gpx_files_not_found">لا يوجد ملفات GPX في مجلد tracks</string>
     <string name="error_reading_gpx">خطأ في قراءة بيانات GPX.</string>
     <string name="vector_data">الخريطة المحملة</string>
-    <string name="rotate_map_to_bearing_descr">محاذاة الخريطة:</string>
+    <string name="rotate_map_to_descr">محاذاة الخريطة:</string>
     <string name="show_route">تفاصيل الطريق</string>
     <string name="import_file_favourites">حفظ البيانات كملف GPX أو استيراد نقاط الطريق إلى المفضلة ؟</string>
     <string name="share_fav_subject">تم مشاركة المفضلة بواسطة أوسماند</string>
@@ -1991,7 +1991,7 @@
     <string name="replace_favorite_confirmation">استبدال \"%1$s\" المفضلة؟</string>
     <string name="clear_tile_data">حذف جميع الطبقات</string>
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
-    <string name="skip_map_downloading">تخط التحميل</string>
+    <string name="skip_map_downloading">تخط تنزيل الخرائط</string>
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك تحديد خريطة من اللائحة أو تنزيل خرائط لاحقاً عبر \'القائمة - %1$s\'.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
     <string name="search_map">البحث في الخريطة …</string>
@@ -2195,7 +2195,7 @@
     <string name="nautical_maps">الخرائط البحرية</string>
     <string name="fonts_header">خطوط الخريطة</string>
     <string name="right_side_navigation">القيادة بالجهة اليمنى</string>
-    <string name="driving_region_automatic">تلقائي</string>
+    <string name="shared_string_automatic">تلقائي</string>
     <string name="parking_options">خيارات الموقف</string>
     <string name="full_version_thanks">شكراً لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">أقصر الطرق</string>
@@ -3614,7 +3614,7 @@
     <string name="quick_action_item">إجراء سريع</string>
     <string name="radius_ruler_item">مسطرة البوصلة</string>
     <string name="measure_distance_item">قياس المسافة</string>
-    <string name="travel_item">السفر (Wikivoyage و Wikipedia)</string>
+    <string name="travel_item">السفر (ويكي الرحلات و ويكيبيديا)</string>
     <string name="map_markers_item">العلامات</string>
     <string name="favorites_item">المفضلة</string>
     <string name="subscription_osmandlive_item">اشتراك أوسماند لايف</string>
@@ -4226,7 +4226,7 @@
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="purchases_feature_desc_nautical">الحصول على معلومات العمق البحري</string>
     <string name="purchases_feature_desc_terrain">خطوط محيطية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
-    <string name="purchases_feature_desc_wikivoyage">استكشف Wikivoyage دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
+    <string name="purchases_feature_desc_wikivoyage">استكشف ويكي الرحلات دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_wikipedia">يوفر جميع مقالات ويكيبيديا المتعلقة بالأماكن في وضع عدم الاتصال ، مما يساعدك على التعرف على الأماكن التي تزورها في رحلتك من خلال نقرات بسيطة على الخريطة. لا بد من تنزيل ملفات خرائط ويكيبيديا للمناطق المعنية مسبقا.</string>
     <string name="purchases_feature_desc_combined_wiki">استكشف مقالات ويكيبيديا أثناء التنقل ، بدون اتصال بالإنترنت. البيانات غير المتصلة بالإنترنت مقسمة على البلدان ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
@@ -4237,7 +4237,7 @@
     <string name="wikipedia_and_wikivoyage_offline">ويكيبيديا وويكي الرحلات غير متصلين بالإنترنت</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">خرائط التضاريس: الخطوط الكنتورية ، التلال ، المنحدرات</string>
     <string name="offline_wikipeadia">ويكيبيديا غير متصل</string>
-    <string name="offline_wikivoyage">Wikivoyage غير متصل</string>
+    <string name="offline_wikivoyage">ويكي الرحلات (بدون اتصال)</string>
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
     <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
@@ -4376,7 +4376,7 @@
     <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا.</string>
     <string name="shared_string_files">الملفات</string>
     <string name="travel_route_types">أنواع المسار</string>
-    <string name="sample_wikivoyage">مثال عن Wikivoyage</string>
+    <string name="sample_wikivoyage">مثال عن ويكي الرحلات</string>
     <string name="shared_string_mini">مصغرة</string>
     <string name="horseback_riding">ركوب الخيل</string>
     <string name="routing_attr_only_permitted_ways_name">الطرق المسموحة بها علنا</string>
@@ -4480,7 +4480,7 @@
     <string name="folder_access_denied">الإذن مطلوب للوصول إلى المجلد المحدد.</string>
     <string name="copying_completed">تم النسخ</string>
     <string name="shared_string_copy_to">نسخ إلى</string>
-    <string name="skip_confirmation">نعم، تخطي</string>
+    <string name="skip_confirmation">نعم، تخط</string>
     <string name="shared_storage">التخزين المشترك</string>
     <string name="shared_string_migration">الترحيل</string>
     <string name="icon_group_education">التعليم</string>
@@ -4840,7 +4840,7 @@
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
-    <string name="display_position">عرض الموقف</string>
+    <string name="display_position">تنسيق الموضع</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
@@ -4865,7 +4865,7 @@
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
     <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
-    <string name="rotate_map_none_rotated_opt">ثابت (يتم تدويره يدويا)</string>
+    <string name="rotate_map_manual_opt">ثابت (يتم تدويره يدويا)</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
@@ -5092,4 +5092,11 @@
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="si_nm_mt">ميل بحري/متر</string>
     <string name="set_up_backup">إنشاء نسخة احتياطية</string>
+    <string name="x_axis">محور-س</string>
+    <string name="y_axis">محور-ص</string>
+    <string name="share_link">مشاركة الرابط</string>
+    <string name="share_as_file">مشاركة كملف</string>
+    <string name="skip_download">تخط التنزيل</string>
+    <string name="value_downloaded_of_mb">جاري تنزيل %1$.1f/%2$.1f ميغابايت</string>
+    <string name="determine_location">اسمح لنا بتحديد موقعك</string>
 </resources>

@@ -397,7 +397,7 @@
     <string name="error_occurred_loading_gpx">Došlo je do pogreške prilikom učitavanja GPX datoteke</string>
     <string name="send_report">Pošalji izvještaj</string>
     <string name="fav_imported_sucessfully">Favoriti su uspješno uvezeni</string>
-    <string name="rotate_map_none_opt">Nemojte okretati (sjever je gore)</string>
+    <string name="rotate_map_north_opt">Nemojte okretati (sjever je gore)</string>
     <string name="rotate_map_compass_opt">Po kompasu</string>
     <string name="rotate_map_bearing_opt">Po smijeru kretanja</string>
     <string name="poi_context_menu_modify">Izmjeni POI</string>
@@ -573,8 +573,8 @@
     <string name="none_region_found">Na memorijskoj kartici nema offline podataka za regije. Preuzmite regije s Interneta.</string>
     <string name="poi_namefinder_query_empty">Za pretraživanje POI morate unijeti upit</string>
     <string name="fav_file_to_load_not_found">GPX datoteku koja sadrži favorite nije moguće pronaći na {0}</string>
-    <string name="rotate_map_to_bearing">Orijentacija karte</string>
-    <string name="rotate_map_to_bearing_descr">Odaberite poravnanje karte na zaslonu</string>
+    <string name="rotate_map_to">Orijentacija karte</string>
+    <string name="rotate_map_to_descr">Odaberite poravnanje karte na zaslonu</string>
     <string name="transport_context_menu">Traži za prijevoz na stanicu</string>
     <string name="context_menu_item_search_transport">Traženje prijevoza</string>
     <string name="transport_searching_transport">Rezultati prijevoza(bez cilja):</string>

@@ -736,9 +736,9 @@
     <string name="poi_context_menu_delete">Изтриване на POI</string>
     <string name="rotate_map_compass_opt">По компаса</string>
     <string name="rotate_map_bearing_opt">Посока на движение</string>
-    <string name="rotate_map_none_opt">Без завъртане (север е нагоре)</string>
-    <string name="rotate_map_to_bearing_descr">Завъртане на картата:</string>
-    <string name="rotate_map_to_bearing">Ориентация на картата</string>
+    <string name="rotate_map_north_opt">Без завъртане (север е нагоре)</string>
+    <string name="rotate_map_to_descr">Завъртане на картата:</string>
+    <string name="rotate_map_to">Ориентация на картата</string>
     <string name="show_route">Детайли на маршрута</string>
     <string name="fav_imported_sucessfully">Местата бяха успешно заредени в Любими</string>
     <string name="fav_file_to_load_not_found">GPX файлът съдържащ любимите ви места не е намерен в {0}</string>
@@ -2511,7 +2511,7 @@
     <string name="follow_track">Следване на маршрута</string>
     <string name="show_gpx">Трасета</string>
     <string name="process_downloading_service">Услуга за изтегляне на OsnAnd</string>
-    <string name="driving_region_automatic">Автоматично</string>
+    <string name="shared_string_automatic">Автоматично</string>
     <string name="access_widget_expand">Разтваряне</string>
     <string name="lang_ber">Берберски</string>
     <string name="lang_kn">Каннада</string>

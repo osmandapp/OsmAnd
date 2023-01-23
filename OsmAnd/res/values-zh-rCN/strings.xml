@@ -659,9 +659,9 @@
     <string name="vector_data">离线矢量地图</string>
     <string name="poi_context_menu_modify">修改 POI</string>
     <string name="poi_context_menu_delete">删除 POI</string>
-    <string name="rotate_map_none_opt">不旋转（正北永远朝上）</string>
-    <string name="rotate_map_to_bearing_descr">地图对齐方式：</string>
-    <string name="rotate_map_to_bearing">地图朝向</string>
+    <string name="rotate_map_north_opt">不旋转（正北永远朝上）</string>
+    <string name="rotate_map_to_descr">地图对齐方式：</string>
+    <string name="rotate_map_to">地图朝向</string>
     <string name="show_route">路线详情</string>
     <string name="fav_imported_sucessfully">收藏已导入</string>
     <string name="av_photo_play_sound_descr">选择是否有拍照声。</string>
@@ -1117,7 +1117,7 @@
     <string name="subscribe_email_error">错误</string>
     <string name="fonts_header">地图字体</string>
     <string name="right_side_navigation">右侧行驶</string>
-    <string name="driving_region_automatic">自动</string>
+    <string name="shared_string_automatic">自动</string>
     <string name="do_not_send_anonymous_app_usage">不发送匿名应用使用情况统计信息</string>
     <string name="restore_purchases">恢复购买内容</string>
     <string name="shared_string_visible">可见性</string>
@@ -4691,7 +4691,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">显示注记标签</string>
     <string name="waypoint_appearance">航点外观</string>
     <string name="predefined_waypoint_appearance_description">点击此操作会自动保存带有预定义参数的航点。</string>
-    <string name="rotate_map_none_rotated_opt">固定（手动旋转）</string>
+    <string name="rotate_map_manual_opt">固定（手动旋转）</string>
     <string name="lang_de_casual">每个瓦片一个图像文件</string>
     <string name="routing_attr_allow_gate_name">允许使用大门</string>
     <string name="plan_route_change_route_type_after">在此之后更改路径类型</string>

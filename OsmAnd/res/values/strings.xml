@@ -12,11 +12,16 @@
 -->
 
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
+    <string name="share_link">Share link</string>
+    <string name="share_as_file">Share as file</string>
     <string name="y_axis">Y-Axis</string>
     <string name="x_axis">X-Axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
     <string name="si_nm_ft">Nautical miles/feet</string>
     <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
+    <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Skip download</string>
+    <string name="determine_location">Allow us to determine your location</string>
     <string name="release_4_4_pre">
         • Here will be strings for 4.4 release
     </string>
@@ -165,7 +170,7 @@
     • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
     • \"Map marker\" widget: added option to change click behavior\n\n
-    • Fixed \"Display position\" option\n\n
+    • Fixed \"Position placement\" option\n\n
     • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
     • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
@@ -243,7 +248,7 @@
     <string name="how_to_use">How to use:</string>
     <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
-    <string name="display_position">Display position</string>
+    <string name="display_position">Position placement</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>
@@ -2488,7 +2493,7 @@
     <string name="restore_purchases">Restore purchases</string>
     <string name="fonts_header">Map fonts</string>
     <string name="right_side_navigation">Right-hand traffic</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
@@ -3447,7 +3452,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmo_connect_menu">Connect</string>
     <string name="int_days">days</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
-    <string name="always_center_position_on_map">Display position always in center</string>
+    <string name="always_center_position_on_map">Position placement always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Misc</string>
     <string name="localization_pref_title">Localization</string>
@@ -4487,10 +4492,10 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">Fixed (north is up)</string>
-    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
-    <string name="rotate_map_to_bearing_descr">Map alignment:</string>
-    <string name="rotate_map_to_bearing">Map orientation</string>
+    <string name="rotate_map_north_opt">North is up (fixed)</string>
+    <string name="rotate_map_manual_opt">Manually rotated (fixed)</string>
+    <string name="rotate_map_to_descr">Map alignment:</string>
+    <string name="rotate_map_to">Map orientation</string>
     <string name="show_route">Route details</string>
     <string name="fav_imported_sucessfully">Favorites imported</string>
     <string name="import_file_favourites">Save data as GPX file or import waypoints to \'Favorites\'?</string>

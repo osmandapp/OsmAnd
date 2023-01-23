@@ -100,9 +100,9 @@
     <string name="poi_context_menu_delete">Eliminar POI</string>
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção do movimento</string>
-    <string name="rotate_map_none_opt">Fixa (norte para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Rotação do mapa</string>
+    <string name="rotate_map_north_opt">Fixa (norte para cima)</string>
+    <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
+    <string name="rotate_map_to">Rotação do mapa</string>
     <string name="show_route">Mostrar rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="fav_file_to_load_not_found">Não foi encontrado o ficheiro GPX que contém os favoritos em {0}</string>
@@ -1960,7 +1960,7 @@
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Tipos de letra do mapa</string>
     <string name="right_side_navigation">Condução pela direita</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Não enviar estatísticas anónimas de utilização da aplicação</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recolhe informação sobre as secções da aplicação que abriu. Não são enviadas: a sua localização, a informação que introduz na aplicação, detalhes de áreas que veja, procure ou descarregue.</string>
     <string name="do_not_show_startup_messages">Não mostrar mensagens ao iniciar</string>
@@ -4778,7 +4778,7 @@
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição no ecrã</string>
     <string name="shared_string_normal">Normal</string>
-    <string name="rotate_map_none_rotated_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
     <string name="shared_string_large">Larga</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
@@ -4858,23 +4858,23 @@
 \n
 \n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
-\n • Opções de tamanho de texto adicionadas em \"Distância com 2 dedos\"
+\n • Adicionadas opções de tamanho de texto em \"Distância com 2 dedos\"
 \n
-\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do toque/clique
 \n
 \n • Corrigida opção de \"Posição no ecrã\"
 \n
 \n • GPX: adicionado suporte para etiquetas \"link\", \"cmt\", \"desc\" e para quaisquer extensões personalizadas
 \n
-\n • Lista de \"mapas náuticos\" reorganizada
+\n • Reorganização da lista de \"mapas náuticos\"
 \n
-\n • Adicionado suporte para sensores ANT+
+\n • Adicionado suporte a sensores ANT+
 \n
-\n • Opção adicionada para desativar o descarregamento do UUID
+\n • Adicionada opção para desativar o descarregamento do UUID
 \n
 \n • Previsão ajustável de velocidade padrão para tempos de viagem dos perfis \"a pé/caminhada/corrida\" dependentes da elevação
 \n
-\n • Saída de áudio e comportamento do controle deslizante de volume corrigidas
+\n • Correções na saída de áudio e comportamento do controle deslizante de volume
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
@@ -5030,4 +5030,9 @@
     <string name="set_up_backup">Configurar cópia de segurança</string>
     <string name="y_axis">Eixo Y</string>
     <string name="x_axis">Eixo X</string>
+    <string name="share_as_file">Partilhar como ficheiro</string>
+    <string name="value_downloaded_of_mb">A descarregar %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Ignorar descarregamento</string>
+    <string name="determine_location">Permita-nos determinar a sua localização</string>
+    <string name="share_link">Partilhar a ligação</string>
 </resources>

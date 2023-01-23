@@ -712,7 +712,7 @@
     <string name="unit_of_length">Unitats de longitud</string>
     <string name="si_mi_yard">Milas/iards</string>
     <string name="si_km_m">Quilomètres/mètres</string>
-    <string name="rotate_map_to_bearing">Orientacion de la mapa</string>
+    <string name="rotate_map_to">Orientacion de la mapa</string>
     <string name="shared_string_clear_all">Tot escafar</string>
     <string name="join_segments">Jónher leis estiradas</string>
     <string name="shared_string_from">de</string>
@@ -726,7 +726,7 @@
     <string name="speak_street_names">Noms de carrieras (TTS)</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="daynight_mode_auto">Auba/tremont</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="shared_string_near">Vesin de</string>
     <string name="no_address_found">Ges d\'adreiça trobada</string>
     <string name="arrival_distance_factor_early">Lèu</string>
