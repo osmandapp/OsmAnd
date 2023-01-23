@@ -49,7 +49,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupAppThemePref();
 		setupRotateMapPref();
 		setup3DViewPref();
-		setupCenterPositionOnMapPref();
+		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
 
@@ -164,27 +164,27 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		enabled3DView.setIcon(icon);
 	}
 
-	private void setupCenterPositionOnMapPref() {
+	private void setupPositionPlacementOnMapPref() {
 		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
 		int positionPlacement = preference.getModeValue(getSelectedAppMode());
 		Drawable icon;
-		String summary;
+		String title;
 		if (positionPlacement == 0) {
 			icon = getActiveIcon(R.drawable.ic_action_bearing);
-			summary = getString(R.string.shared_string_automatic);
+			title = getString(R.string.shared_string_automatic);
 		} else if (positionPlacement == 1) {
 			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
-			summary = getString(R.string.position_on_map_center);
+			title = getString(R.string.position_on_map_center);
 		} else {
 			icon = getActiveIcon(R.drawable.ic_action_display_position_bottom);
-			summary = getString(R.string.position_on_map_bottom);
+			title = getString(R.string.position_on_map_bottom);
 		}
-		Preference displayPosition = findPreference(preference.getId());
-		displayPosition.setIcon(icon);
-		displayPosition.setSummary(summary);
+		Preference positionPlacementPref = findPreference(preference.getId());
+		positionPlacementPref.setIcon(icon);
+		positionPlacementPref.setSummary(title);
 	}
 
-	private void showDisplayPositionDialog(Preference preference) {
+	private void showPositionPlacementDialog(Preference preference) {
 		boolean nightMode = isNightMode();
 		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
 		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
@@ -463,7 +463,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			showDrivingRegionDialog();
 			return true;
 		} else if (preference.getKey().equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
-			showDisplayPositionDialog(preference);
+			showPositionPlacementDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
