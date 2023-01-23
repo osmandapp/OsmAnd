@@ -291,7 +291,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	private void updateSkipButton() {
 		AppCompatButton skipButton = view.findViewById(R.id.skip_button);
-		if (wizardType == WizardType.MAP_DOWNLOAD && mapIndexItem != null) {
+		if ((wizardType == WizardType.MAP_DOWNLOAD || wizardType == WizardType.MAP_DOWNLOADED) && mapIndexItem != null) {
 			skipButton.setText(getString(R.string.shared_string_continue));
 		} else {
 			skipButton.setText(getString(R.string.skip_download));

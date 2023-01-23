@@ -10,13 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
     <string name="share_as_file">Share as file</string>
-    <string name="y_axis">Y-Axis</string>
-    <string name="x_axis">X-Axis</string>
+    <string name="y_axis">Y-axis</string>
+    <string name="x_axis">X-axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
     <string name="si_nm_ft">Nautical miles/feet</string>
-    <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Select an audio format. The file type container format for audio is 3GPP (.3gp).</string>
     <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Skip download</string>
     <string name="determine_location">Allow us to determine your location</string>
@@ -41,9 +43,9 @@
     <string name="sync_now">Sync now</string>
     <string name="local_changes">Local changes</string>
     <string name="upload_change">Upload change</string>
-    <string name="cloud_version_will_be_removed">Cloud version will be removed</string>
-    <string name="cloud_changes_will_be_dismissed">Cloud changes will be dismissed</string>
-    <string name="local_file_will_be_restored">Local file will be restored</string>
+    <string name="cloud_version_will_be_removed">The cloud version will be removed</string>
+    <string name="cloud_changes_will_be_dismissed">The cloud changes will be dismissed</string>
+    <string name="local_file_will_be_restored">The local file will be restored</string>
     <string name="local_changes_will_be_dismissed">Local changes will be dismissed</string>
     <string name="cloud_conflicts">Conflicts</string>
     <string name="cloud_conflict">Conflict</string>
@@ -52,12 +54,12 @@
     <string name="cloud_all_changes_uploaded">All changes uploaded</string>
     <string name="cloud_all_changes_downloaded">All changes downloaded</string>
     <string name="cloud_all_changes_uploaded_descr">All changes made on this device are synchronized with OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">There are no conflicts</string>
+    <string name="cloud_no_conflicts">There are no conflicts.</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_do_not_exist">Do not exist</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Export to file</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>
@@ -66,13 +68,13 @@
     <string name="open_weather_action">Open weather</string>
     <string name="rendering_attr_weatherCloudContours_name">Cloud isolines</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Precipitation isolines</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Gusts of wind isolines</string>
-    <string name="mtb_scale">MTB Scale</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Wind speed isolines</string>
+    <string name="mtb_scale">MTB scale</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segment classification</string>
     <string name="rendering_attr_showMtbScale_name">Show MTB scale</string>
-    <string name="rendering_attr_showMtbScale_description">Show trails according to MTB scale.</string>
+    <string name="rendering_attr_showMtbScale_description">Display trails according to their MTB scale.</string>
     <string name="quick_action_temperature_layer">A toggle to show or hide the temperature layer on the map.</string>
     <string name="quick_action_precipitation_layer">A toggle to show or hide the precipitation layer on the map.</string>
     <string name="quick_action_wind_layer">A toggle to show or hide the wind layer on the map.</string>
@@ -83,7 +85,7 @@
     <string name="wind_layer">Wind layer</string>
     <string name="cloud_layer">Cloud layer</string>
     <string name="precipitation_layer">Precipitation layer</string>
-    <string name="storage_migration_fragment_close_descr">Copying is done for %1$s%%. If you stop now, the app may not work correctly.</string>
+    <string name="storage_migration_fragment_close_descr">Copying is only %1$s%% complete. If you stop now, the app may not work correctly.</string>
     <string name="switch_mode_by_tapping_on_widget">Switch the mode by tapping on the widget.</string>
     <string name="map_widget_sunset_desc">Shows the time of the next sunset or the time left until sunset.</string>
     <string name="map_widget_sunrise_desc">Shows the time of the next sunrise or the time left until sunrise.</string>
