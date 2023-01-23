@@ -254,9 +254,9 @@
     <string name="poi_context_menu_delete">Usuń użyteczne miejsce</string>
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
-    <string name="rotate_map_none_opt">Zablokowane (północ jest na górze)</string>
-    <string name="rotate_map_to_bearing_descr">Obracanie mapy:</string>
-    <string name="rotate_map_to_bearing">Orientacja mapy</string>
+    <string name="rotate_map_north_opt">Zablokowane (północ jest na górze)</string>
+    <string name="rotate_map_to_descr">Obracanie mapy:</string>
+    <string name="rotate_map_to">Orientacja mapy</string>
     <string name="show_route">Szczegóły trasy</string>
     <string name="fav_imported_sucessfully">Zaimportowano ulubione</string>
     <string name="fav_file_to_load_not_found">Nie odnaleziono pliku GPX zawierającego punkty Ulubione w {0}</string>
@@ -2196,7 +2196,7 @@
     <string name="parking_options">Opcje parkowania</string>
     <string name="full_version_thanks">Dziękujemy za zakup płatnej wersji OsmAnd.</string>
     <string name="right_side_navigation">Ruch prawostronny</string>
-    <string name="driving_region_automatic">Automatyczny</string>
+    <string name="shared_string_automatic">Automatyczny</string>
     <string name="restore_purchases">Przywróć zakupy</string>
     <string name="nautical_maps">Mapy morskie</string>
     <string name="shared_string_visible">Widoczne</string>
@@ -4905,7 +4905,7 @@
     <string name="go_to_marker_location">Przejdź do lokalizacji znacznika</string>
     <string name="shared_string_switch_mode">Przełącz tryb</string>
     <string name="shared_string_normal">Normalna</string>
-    <string name="rotate_map_none_rotated_opt">Stałe (obracane ręcznie)</string>
+    <string name="rotate_map_manual_opt">Stałe (obracane ręcznie)</string>
     <string name="map_widget_true_bearing">Prawdziwy kierunek</string>
     <string name="map_widget_altitude_map_center">Wysokość: centrum mapy</string>
     <string name="purchases_feature_desc_external_sensors">Wyświetlaj i rejestruj dane z czujników zewnętrznych: prędkość roweru, moc roweru, kadencję i tętno.</string>

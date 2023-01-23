@@ -61,8 +61,8 @@ public enum BackupStatus {
 		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
 				return CONFLICTS;
-			} else if (!Algorithms.isEmpty(info.itemsToUpload)
-					|| !Algorithms.isEmpty(info.itemsToDelete)) {
+			} else if (!Algorithms.isEmpty(info.itemsToUpload) || !Algorithms.isEmpty(info.itemsToDelete)
+					|| !Algorithms.isEmpty(info.itemsToLocalDelete)) {
 				return MAKE_BACKUP;
 			}
 		} else if (!app.getSettings().isInternetConnectionAvailable()) {

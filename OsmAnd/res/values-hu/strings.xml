@@ -370,9 +370,9 @@
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">A mozgás irányába</string>
-    <string name="rotate_map_none_opt">Rögzített (észak felül)</string>
-    <string name="rotate_map_to_bearing_descr">Térkép igazítása:</string>
-    <string name="rotate_map_to_bearing">Térkép forgatása</string>
+    <string name="rotate_map_north_opt">Rögzített (észak felül)</string>
+    <string name="rotate_map_to_descr">Térkép igazítása:</string>
+    <string name="rotate_map_to">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
     <string name="fav_imported_sucessfully">Kedvencek importálva</string>
     <string name="fav_file_to_load_not_found">Nem található Kedvenceket tartalmazó GPX fájl az alábbi helyen: {0}</string>
@@ -683,7 +683,7 @@
     <string name="rendering_attr_noPolygons_description">A térképen az összes területszerű objektum átlátszóvá tétele.</string>
     <string name="rendering_attr_noPolygons_name">Sokszögek</string>
     <string name="rendering_attr_appMode_name">Megjelenítési mód</string>
-    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz:</string>
+    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz</string>
     <string name="rendering_attr_contourLines_description">Megjelenítés ettől a nagyítási szinttől (szintvonaladatokat igényel):</string>
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
@@ -1156,7 +1156,7 @@
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline kiszámítása</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
-    <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
+    <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
     <string name="localization_pref_title">Nyelv</string>
@@ -1524,8 +1524,8 @@
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz tartozás</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC turistaútjelzés</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz felvétel</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (online)</string>
@@ -2187,7 +2187,7 @@
     <string name="full_version_thanks">Köszönjük, hogy megvásárolta az OsmAnd fizetős verzióját.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
-    <string name="driving_region_automatic">Automatikus</string>
+    <string name="shared_string_automatic">Automatikus</string>
     <string name="type_city_town">Település beírása</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
@@ -4765,9 +4765,9 @@
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
-    <string name="display_position">Pozíció megjelenítése</string>
+    <string name="display_position">Pozíció elhelyezése</string>
     <string name="shared_string_2_5_d_view">2,5D nézet</string>
-    <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
+    <string name="rotate_map_manual_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>
     <string name="shared_string_normal">Normál</string>
@@ -4852,7 +4852,7 @@
 \n
 \n • „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
 \n
-\n • Javított „Pozíció megjelenítése” opció
+\n • Javított „Pozíció elhelyezés” opció
 \n
 \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
 \n
@@ -5019,4 +5019,9 @@
     <string name="set_up_backup">Biztonsági mentés beállítása</string>
     <string name="y_axis">Y-tengely</string>
     <string name="x_axis">X-tengely</string>
+    <string name="share_as_file">Megosztás fájlként</string>
+    <string name="value_downloaded_of_mb">Letöltés %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Letöltés kihagyása</string>
+    <string name="determine_location">Engedélyezze, hogy meghatározzuk a helyzetét</string>
+    <string name="share_link">Hivatkozás megosztása</string>
 </resources>

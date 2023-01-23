@@ -1002,8 +1002,8 @@
     <string name="renderers">Renderizador de vectores</string>
     <string name="rotate_map_compass_opt">Direición de la brúxula</string>
     <string name="rotate_map_bearing_opt">Direición del movimientu</string>
-    <string name="rotate_map_none_opt">No rotation (north always upwards)</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">No rotation (north always upwards)</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="share_fav_subject">Favorites shared via OsmAnd</string>
     <string name="error_occurred_loading_gpx">Could not load GPX.</string>
     <string name="send_report">Send report</string>
@@ -2142,7 +2142,7 @@
     <string name="fav_file_to_load_not_found">GPX file containing Favorites not found at {0}</string>
     <string name="import_file_favourites">Save data as GPX file or import waypoints to \'Favorites\'\?</string>
     <string name="fav_imported_sucessfully">Favorites imported</string>
-    <string name="rotate_map_to_bearing_descr">Map alignment:</string>
+    <string name="rotate_map_to_descr">Map alignment:</string>
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="poi_context_menu_modify">Modify POI</string>
     <string name="transport_context_menu">Search for transport at stop</string>
@@ -2729,7 +2729,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
     <string name="parking_options">Parking options</string>
     <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="right_side_navigation">Circulación pela derecha</string>
     <string name="fonts_header">Map fonts</string>
     <string name="download_depth_countours">Nautical depth contours</string>

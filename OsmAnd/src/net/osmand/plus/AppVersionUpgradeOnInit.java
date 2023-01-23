@@ -391,7 +391,7 @@ class AppVersionUpgradeOnInit {
 		OsmandSettings settings = app.getSettings();
 		return new OsmandPreference[] {
 				settings.EXTERNAL_INPUT_DEVICE,
-				settings.CENTER_POSITION_ON_MAP,
+				settings.POSITION_PLACEMENT_ON_MAP,
 				settings.ROTATE_MAP,
 				settings.MAP_SCREEN_ORIENTATION,
 				settings.LIVE_MONITORING_URL,

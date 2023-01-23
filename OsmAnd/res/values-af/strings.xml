@@ -448,9 +448,9 @@
   <string name="poi_context_menu_delete">verwyder interessante plek</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
   <string name="rotate_map_bearing_opt">Volgens rigting van beweging</string>
-  <string name="rotate_map_none_opt">Moet nie draai nie</string>
-  <string name="rotate_map_to_bearing_descr">Kies hoe die kaart roteer terwyl jy beweeg</string>
-  <string name="rotate_map_to_bearing">Kaart oriëntasie</string>
+  <string name="rotate_map_north_opt">Moet nie draai nie</string>
+  <string name="rotate_map_to_descr">Kies hoe die kaart roteer terwyl jy beweeg</string>
+  <string name="rotate_map_to">Kaart oriëntasie</string>
   <string name="show_route">roete besonderhede</string>
   <string name="fav_imported_sucessfully">Gunstelinge suksesvol ingevoer</string>
   <string name="fav_file_to_load_not_found">GPX lêer wat gunstelinge bevat is nie gevind by {0} nie</string>

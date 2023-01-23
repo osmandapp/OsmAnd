@@ -85,9 +85,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} : null;
 		itemView.setOnClickListener(listener);
-		itemView.setEnabled(!isSyncing(item));
-
-		setupSelectableBackground();
+		boolean enabled = listener != null && !isSyncing(item);
+		itemView.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground();
+		}
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
 		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 	}

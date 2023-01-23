@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_no">아니오</string>
-    <string name="shared_string_yes">예</string>
-    <string name="osmand_app_not_found">OsmAnd는 설치되어 있지 않습니다.</string>
-    <string name="app_name">OsmAnd 주차장</string>
-    <string name="parking_plugin_installed">OsmAnd 주차 플러그인은 OsmAnd 설정에서 설치되고 활성화 되었습니다.</string>
-</resources>

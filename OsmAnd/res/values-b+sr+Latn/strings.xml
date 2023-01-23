@@ -141,8 +141,8 @@
     <string name="error_reading_gpx">GPX podaci ne mogu da se pročitaju.</string>
     <string name="poi_context_menu_modify">Izmena POI</string>
     <string name="poi_context_menu_delete">Brisanje POI</string>
-    <string name="rotate_map_none_opt">Bez rotacije (sever je uvek gore)</string>
-    <string name="rotate_map_to_bearing">Orijentacija karte</string>
+    <string name="rotate_map_north_opt">Bez rotacije (sever je uvek gore)</string>
+    <string name="rotate_map_to">Orijentacija karte</string>
     <string name="map_widget_show_ruler">Lenjir</string>
     <string name="shared_string_import">Uvezi</string>
     <string name="error_occurred_loading_gpx">GPX ne može da se učita.</string>
@@ -161,7 +161,7 @@
     <string name="renderer_load_sucess">Render učitan</string>
     <string name="renderer_load_exception">Renderer ne može da se učita.</string>
     <string name="renderers">Vektorski renderer</string>
-    <string name="rotate_map_to_bearing_descr">Poravnavanje karte:</string>
+    <string name="rotate_map_to_descr">Poravnavanje karte:</string>
     <string name="show_route">Detalji rute</string>
     <string name="poi_namefinder_query_empty">Kucaj da pretražuješ tačke od interesa</string>
     <string name="layer_osm_bugs">OSM beleške (na mreži)</string>
@@ -2841,7 +2841,7 @@
     <string name="do_not_show_startup_messages">Ne prikazuj poruke pri pokretanju</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd prikuplja podatke o tome koje delove programa otvarate. Vaš položaj se ne šalje, niti išta što unesete u program niti pojedinosti o oblastima koje vidite, tražite ili preuzmete.</string>
     <string name="do_not_send_anonymous_app_usage">Ne šalji bezimene podatke o korišćenom programu</string>
-    <string name="driving_region_automatic">Automatsko</string>
+    <string name="shared_string_automatic">Automatsko</string>
     <string name="right_side_navigation">Vožnja desnom trakom</string>
     <string name="fonts_header">Fontovi na karti</string>
     <string name="restore_purchases">Povrati trgovinu</string>

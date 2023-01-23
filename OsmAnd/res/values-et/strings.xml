@@ -1032,7 +1032,7 @@
     <string name="reorder_profiles">Muuda profiililoendit</string>
     <string name="selected_profile">Valitud profiil</string>
     <string name="right_side_navigation">Parempoolne liiklus</string>
-    <string name="driving_region_automatic">Automaatne</string>
+    <string name="shared_string_automatic">Automaatne</string>
     <string name="fonts_header">Kaardi kirjastiilid</string>
     <string name="restore_purchases">Taasta ostud</string>
     <string name="shared_string_visible">Nähtaval</string>
@@ -2111,9 +2111,9 @@
     <string name="poi_context_menu_delete">Kustuta huvipunkt</string>
     <string name="rotate_map_compass_opt">Kompassi suund</string>
     <string name="rotate_map_bearing_opt">Liikumissuund</string>
-    <string name="rotate_map_none_opt">Ei pöörle (põhi alati üleval)</string>
-    <string name="rotate_map_to_bearing_descr">Kaardi joondamine:</string>
-    <string name="rotate_map_to_bearing">Kaardi orientatsioon</string>
+    <string name="rotate_map_north_opt">Ei pöörle (põhi alati üleval)</string>
+    <string name="rotate_map_to_descr">Kaardi joondamine:</string>
+    <string name="rotate_map_to">Kaardi orientatsioon</string>
     <string name="fav_imported_sucessfully">Lemmikud imporditud</string>
     <string name="fav_saved_sucessfully">Lemmikud salvestatud asukohta {0}</string>
     <string name="no_fav_to_save">Puuduvad lemmikpunktid salvestamiseks</string>

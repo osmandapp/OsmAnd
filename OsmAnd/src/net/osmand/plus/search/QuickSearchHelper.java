@@ -1,12 +1,13 @@
 package net.osmand.plus.search;
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -15,6 +16,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -32,8 +34,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.FavouritesHelper;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -59,8 +61,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -133,6 +133,9 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public void refreshCustomPoiFilters() {
+		if (!app.getPoiTypes().isInit()) {
+			return;
+		}
 		core.clearCustomSearchPoiFilters();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters(false)) {

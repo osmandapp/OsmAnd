@@ -88,9 +88,4 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 					.commitAllowingStateLoss();
 		}
 	}
-
-	@Override
-	public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
-
-	}
 }

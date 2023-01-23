@@ -82,7 +82,6 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -768,11 +767,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		boolean showOsmAndWelcomeScreen = true;
 		Intent intent = getIntent();
-		if (intent != null && intent.hasExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
-			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
+		if (intent != null && intent.hasExtra(FirstUsageWizardFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
+			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWizardFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 		}
 		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
-				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get()
+				&& FirstUsageWizardFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get()
 				&& showOsmAndWelcomeScreen && !showStorageMigrationScreen;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
@@ -805,17 +804,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		enableDrawer();
 
-		if (showWelcomeScreen && FirstUsageWelcomeFragment.showInstance(fragmentManager)) {
+		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(mapViewMapActivity)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
 		}
-		FirstUsageWelcomeFragment.SHOW = false;
+		FirstUsageWizardFragment.SHOW = false;
 		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
-			FirstUsageWelcomeFragment welcomeFragment = getFirstUsageWelcomeFragment();
-			if (welcomeFragment != null) {
-				welcomeFragment.closeWelcomeFragment();
-			}
 			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
 			if (wizardFragment != null) {
 				wizardFragment.closeWizard();
@@ -1545,12 +1540,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public FirstUsageWelcomeFragment getFirstUsageWelcomeFragment() {
-		FirstUsageWelcomeFragment fragment = (FirstUsageWelcomeFragment) getSupportFragmentManager()
-				.findFragmentByTag(FirstUsageWelcomeFragment.TAG);
-		return fragment != null && !fragment.isDetached() ? fragment : null;
-	}
-
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
 		FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) getSupportFragmentManager()
 				.findFragmentByTag(FirstUsageWizardFragment.TAG);
@@ -1558,7 +1547,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public boolean isFirstScreenShowing() {
-		return getFirstUsageWelcomeFragment() != null || getFirstUsageWizardFragment() != null;
+		return getFirstUsageWizardFragment() != null;
 	}
 
 	// DownloadEvents

@@ -295,7 +295,7 @@
     <string name="restore_purchases">Գնումների վերականգնում</string>
     <string name="fonts_header">Տառատեսակ քարտեզների համար</string>
     <string name="right_side_navigation">Աջակողմյա երթևեկություն</string>
-    <string name="driving_region_automatic">Ավտոմատ</string>
+    <string name="shared_string_automatic">Ավտոմատ</string>
     <string name="do_not_send_anonymous_app_usage">Չհավաքել օգտագործման վիճակագրությունը</string>
     <string name="do_not_show_startup_messages">Չցուցադրել հաղորդագրությունները մեկնարկին</string>
     <string name="parking_options">Ավտոկանգառի ընտրանքներ</string>
@@ -2082,9 +2082,9 @@
     <string name="poi_context_menu_delete">Ջնջել POI</string>
     <string name="rotate_map_compass_opt">Կողմնացույցի ուղղությամբ</string>
     <string name="rotate_map_bearing_opt">Շարժման ուղղությամբ</string>
-    <string name="rotate_map_none_opt">Չպտտել (հյուսիսը վերեվում)</string>
-    <string name="rotate_map_to_bearing_descr">Ընտրեք քարտեզի պտտման ձևը՝</string>
-    <string name="rotate_map_to_bearing">Քարտեզի կողմնորոշումը</string>
+    <string name="rotate_map_north_opt">Չպտտել (հյուսիսը վերեվում)</string>
+    <string name="rotate_map_to_descr">Ընտրեք քարտեզի պտտման ձևը՝</string>
+    <string name="rotate_map_to">Քարտեզի կողմնորոշումը</string>
     <string name="show_route">Ցույց տալ երթուղին</string>
     <string name="fav_imported_sucessfully">«Սիրվածները» ներմուծվել են</string>
     <string name="no_fav_to_save">«Սիրված» կետեր չկան պահպանելու համար</string>

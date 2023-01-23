@@ -603,7 +603,7 @@
     <string name="poi_piste_playground">Pista de iscì pro pitzinneddos</string>
     <string name="poi_car_sharing">Cumpartzidura de veturas</string>
     <string name="poi_photo">Butega de fotografia</string>
-    <string name="poi_fuel_diesel">Diesel</string>
+    <string name="poi_fuel_diesel">Gasòliu;Diesel</string>
     <string name="poi_fuel_gtl_diesel">Diesel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diesel HGV (pro veìculos pesantes)</string>
     <string name="poi_fuel_biodiesel">Bio diesel</string>

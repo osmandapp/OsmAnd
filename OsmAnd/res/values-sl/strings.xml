@@ -471,12 +471,12 @@
     <string name="send_location_sms_pattern">Koordinate: %1$s\n%2$s</string>
     <string name="shared_string_next">Naslednji</string>
     <string name="shared_string_previous">Predhodni</string>
-    <string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
+    <string name="rotate_map_to">Usmerjenost zemljevida</string>
     <string name="download_files_question">Prejmi datoteke ({0}/{1} MB)?</string>
     <string name="installing_new_resources">Poteka odpakiranje novih podatkov …</string>
     <string name="rotate_map_compass_opt">– obračanje zemljevida po kompasu</string>
     <string name="rotate_map_bearing_opt">– obračanje zemljevida glede na smer premikanja</string>
-    <string name="rotate_map_none_opt">Fiksno (sever je zgoraj)</string>
+    <string name="rotate_map_north_opt">Fiksno (sever je zgoraj)</string>
     <string name="search_villages_and_postcodes">Poišči več vasi/poštnih številk</string>
     <string name="rendering_attr_showRoadMaps_description">Izberi kdaj naj bodo prikazani zemljevidi le s cestami:</string>
     <string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
@@ -696,7 +696,7 @@
     <string name="error_reading_gpx">Napaka med branjem podatkov GPX.</string>
     <string name="vector_data">Vektorski zemljevidi za delo brez povezave</string>
     <string name="transport_context_menu">Iskanje prevoza na postaji</string>
-    <string name="rotate_map_to_bearing_descr">Poravnava zemljevida:</string>
+    <string name="rotate_map_to_descr">Poravnava zemljevida:</string>
     <string name="show_route">Podrobnosti poti</string>
     <string name="fav_imported_sucessfully">Priljubljene točke so uvožene</string>
     <string name="fav_file_to_load_not_found">&gt;Datoteke GPX, ki vsebuje priljubljene točke, na {0} ni mogoče najti</string>
@@ -2190,7 +2190,7 @@
     <string name="parking_options">Možnosti parkiranja</string>
     <string name="full_version_thanks">Zahvaljujemo se vam za nakup polne različice programa OsmAnd.</string>
     <string name="right_side_navigation">Vožnja po desni strani</string>
-    <string name="driving_region_automatic">Samodejno</string>
+    <string name="shared_string_automatic">Samodejno</string>
     <string name="quick_action_auto_zoom">Omogoči/Onemogoči samodejno približanje zemljevida</string>
     <string name="quick_action_auto_zoom_on">Vklopi samodejno povečavo</string>
     <string name="quick_action_auto_zoom_off">Izklopi samodejno povečavo</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
     <string name="display_position">Položaj zaslona</string>
-    <string name="rotate_map_none_rotated_opt">Fiksno (ročno vrtenje)</string>
+    <string name="rotate_map_manual_opt">Fiksno (ročno vrtenje)</string>
     <string name="go_to_marker_location">Pojdi na mesto oznake</string>
     <string name="click_on_widget">Klikni na gradnik</string>
     <string name="shared_string_switch_mode">Preklopi način</string>
