@@ -9,6 +9,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.plugins.weather.WeatherUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -24,6 +25,7 @@ public class FileNameTranslationHelper {
 
 	public static final String WIKI_NAME = "_wiki";
 	public static final String WIKIVOYAGE_NAME = "_wikivoyage";
+	public static final String WEATHER = "_weather";
 	public static final String HILL_SHADE = "Hillshade";
 	public static final String SLOPE = "Slope";
 	public static final String HEIGHTMAP = "Heightmap";
@@ -39,6 +41,8 @@ public class FileNameTranslationHelper {
 			return getWikiName(ctx, basename);
 		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
 			return getWikivoyageName(ctx, basename);
+		} else if (fileName.endsWith(WEATHER)) { //weather files
+			return getWeatherName(ctx, regions, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
@@ -118,6 +122,16 @@ public class FileNameTranslationHelper {
 		}
 	}
 
+	public static String getWeatherName(Context ctx, OsmandRegions regions, String basename) {
+		basename = basename.replace(" ", "_");
+		if (WeatherUtils.isEntireWorld(basename)) {
+			return ctx.getString(R.string.shared_string_all_world);
+		} else {
+			WorldRegion region = regions.getRegionData(basename);
+			return region.getLocaleName();
+		}
+	}
+
 	public static String getVoiceName(Context ctx, String fileName) {
 		try {
 			String nm = fileName.replace('-', '_').replace(' ', '_');
@@ -145,6 +159,9 @@ public class FileNameTranslationHelper {
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+		}
+		if (fileName.endsWith(IndexConstants.WEATHER_EXT)) {
+			return fileName.substring(0, fileName.length() - IndexConstants.WEATHER_EXT.length());
 		}
 
 		int ls = fileName.lastIndexOf("-roads");
