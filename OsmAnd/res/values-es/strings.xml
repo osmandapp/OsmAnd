@@ -495,7 +495,7 @@
     <string name="auto_zoom_map_descr">Nivel de zum según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
     <string name="auto_zoom_map">Zum automático del mapa</string>
     <string name="additional_settings">Ajustes adicionales</string>
-    <string name="shared_string_settings">Ajustes</string>
+    <string name="shared_string_settings">Configuración</string>
     <string name="save_current_track_descr">Guarda la traza actual como archivo GPX ahora.</string>
     <string name="save_current_track">Guardar la traza actual</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
@@ -1471,7 +1471,7 @@
 \nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros.</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
-    <string name="general_settings_2">Ajustes generales</string>
+    <string name="general_settings_2">Configuración general</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
@@ -3385,7 +3385,7 @@
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo al punto</string>
     <string name="please_provide_profile_name_message">Proporciona un nombre para el perfil</string>
-    <string name="open_settings">Abrir los ajustes</string>
+    <string name="open_settings">Abrir configuración</string>
     <string name="plugin_disabled">Complemento desactivado</string>
     <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, desactivarlo no lo quita.
 \n
@@ -4262,7 +4262,7 @@
     <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
 \n
 \nPor favor, mueve la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
-    <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
+    <string name="search_history_is_disabled_descr">Puede activar el historial de búsquedas en Configuración.</string>
     <string name="markers_history_is_disabled_descr">Activa el historial para recordar una lista de los marcadores de mapa visitados.</string>
     <string name="history_is_disabled_descr">Activa el historial para acceder más rápido a los últimos resultados.</string>
     <string name="is_disabled">%1$s desactivado</string>
@@ -4684,7 +4684,7 @@
     <string name="routing_attr_motor_type_name">Motor del vehículo</string>
     <string name="routing_attr_goods_restrictions_name">Reparto de bienes</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos de bienes ligeros (bienes)</string>
-    <string name="reset_all_settings_desc">¿Restablecer todos los ajustes a los predefinidos\?</string>
+    <string name="reset_all_settings_desc">¿Quiere restablecer la configuración a la predefinida\?</string>
     <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="updated_map_time">Actualizado: %1$s.</string>
@@ -4877,9 +4877,9 @@
 \n</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
-    <string name="rendering_engine_failed_descr">OsmAnd ha vuelto el renderizado de mapas a la «Versión 1». Puedes intentar volver a cambiar al nuevo motor de renderizado «Versión 2 (OpenGL)» en los Ajustes.
+    <string name="rendering_engine_failed_descr">OsmAnd ha vuelto a la representación cartográfica «versión 1». Puede tratar de volver al motor de representación «versión 2 (OpenGL)» en Configuración.
 \n
-\nPor favor, ayuda con las mejoras enviando el registro de errores.</string>
+\nColabore con el proceso de mejora proporcionando su registro de errores.</string>
     <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd ha fallado recientemente.</string>
     <string name="show_map_symbols_desc">Texto, señales de tráfico y otros.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
@@ -4946,7 +4946,7 @@
 \n
 \nLos datos meteorológicos son proporcionados por el Sistema de Pronóstico Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="shared_string_weather">Meteorología</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Combinación de colores de las líneas</string>
     <string name="map_widget_sunset_desc">Muestra la hora del próximo atardecer o el tiempo que queda hasta éste.</string>
     <string name="map_widget_sunrise_desc">Muestra la hora del próximo amanecer o el tiempo que falta para éste.</string>
     <string name="shared_string_next_sunrise">Próximo amanecer</string>
@@ -4960,7 +4960,7 @@
     <string name="depth_contour_lines">Curvas de nivel de profundidad</string>
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
-    <string name="storage_migration_fragment_close_descr">La copia se hace para%1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="storage_migration_fragment_close_descr">Se ha efectuado un %1$s %% de la copia. Si la detiene ahora, la aplicación puede no funcionar adecuadamente.</string>
     <string name="quick_action_precipitation_layer">Un botón para mostrar u ocultar la capa de precipitaciones en el mapa.</string>
     <string name="quick_action_cloud_layer">Un botón para mostrar u ocultar la capa de nubes en el mapa.</string>
     <string name="quick_action_air_pressure_layer">Un botón para mostrar u ocultar la capa de presión atmosférica en el mapa.</string>
@@ -4989,7 +4989,7 @@
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="shared_string_expires">Caduca en</string>
     <string name="cloud_sync_progress">Sincronizando...%1$s</string>
-    <string name="checking_progress">Verificando…</string>
+    <string name="checking_progress">Comprobando…</string>
     <string name="shared_string_modified">Modificado</string>
     <string name="res_unknown">Desconocido</string>
     <string name="shared_string_unsynced">Sin sincronizar</string>
@@ -4997,32 +4997,32 @@
     <string name="changes">Cambios %1$s</string>
     <string name="shared_string_uploaded">Subido a</string>
     <string name="shared_string_cloud">Nube</string>
-    <string name="new_file">Nuevo archivo</string>
+    <string name="new_file">Archivo nuevo</string>
     <string name="modified_file">Archivo modificado</string>
-    <string name="deleted_file">Archivo borrado</string>
+    <string name="deleted_file">Archivo eliminado</string>
     <string name="sync_now">Sincronizar ahora</string>
     <string name="local_changes">Cambios a nivel local</string>
     <string name="upload_change">Cargar el cambio</string>
-    <string name="cloud_changes_will_be_dismissed">Los cambios en la nube serán descartados</string>
+    <string name="cloud_changes_will_be_dismissed">Los cambios en la nube se descartarán</string>
     <string name="local_file_will_be_restored">Se restaurará el archivo local</string>
     <string name="local_changes_will_be_dismissed">Se descartarán los cambios locales</string>
     <string name="cloud_conflicts">Conflictos</string>
     <string name="cloud_conflict">Conflicto</string>
-    <string name="upload_all">Subir todo</string>
+    <string name="upload_all">Cargar todo</string>
     <string name="cloud_recent_changes">Cambios</string>
-    <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
+    <string name="cloud_all_changes_downloaded">Se descargaron todos los cambios</string>
     <string name="cloud_no_conflicts">No hay conflictos</string>
     <string name="download_cloud_version">Descargar la versión de la nube</string>
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se ha podido obtener la lista de los archivos del servidor.</string>
     <string name="last_sync">Última sincronización</string>
-    <string name="import_export">Importar/Exportar</string>
+    <string name="import_export">Importar/exportar</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="cloud_version_will_be_removed">Se eliminará la versión en la nube</string>
-    <string name="choose_what_to_sync">Elige qué quieres sincronizar</string>
+    <string name="choose_what_to_sync">Elija qué quiere sincronizar</string>
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios realizados en este dispositivo se sincronizan con OsmAnd Cloud.</string>
     <string name="cloud_changes">Cambios en la nube</string>
-    <string name="cloud_all_changes_uploaded">Subidos todos los cambios</string>
+    <string name="cloud_all_changes_uploaded">Se cargaron todos los cambios</string>
     <string name="av_audio_format_bottom_sheet_descr">Seleccione el formato de salida de audio. El formato del tipo de archivo de audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas náuticas /pies</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
@@ -5031,7 +5031,7 @@
     <string name="y_axis">Eje Y</string>
     <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Omitir la descarga</string>
-    <string name="determine_location">Déjenos determinar su ubicación</string>
+    <string name="determine_location">Permita que se determine su ubicación</string>
     <string name="share_link">Compartir el enlace</string>
     <string name="share_as_file">Compartir como un archivo</string>
 </resources>
