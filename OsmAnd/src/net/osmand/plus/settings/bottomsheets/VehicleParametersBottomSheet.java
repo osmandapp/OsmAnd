@@ -132,6 +132,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 					text.setError(getString(R.string.weight_limit_error, String.format(Locale.US, "%.1f", MIN_TRUCK_WEIGHT), getString(ApplicationMode.CAR.getNameKeyResource())));
 				} else {
 					updateApplyButton(true);
+					text.setError(null);
 					selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
 					ChipItem selected = chipsView.getChipById(selectedItem);
 					chipsView.setSelected(selected);
