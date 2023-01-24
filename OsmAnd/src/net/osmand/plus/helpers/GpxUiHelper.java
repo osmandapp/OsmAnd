@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
@@ -148,9 +150,6 @@ public class GpxUiHelper {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
-
-	public static final long SECOND_IN_MILLIS = 1000L;
-	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
 	public static final int CHART_LABEL_COUNT = 3;
 
