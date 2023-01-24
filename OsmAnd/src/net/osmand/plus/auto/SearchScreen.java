@@ -54,7 +54,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
-	private static final int CONTENT_LIMIT = 50;
+	private static final int CONTENT_LIMIT = 12;
 
 	private final SearchHelper searchHelper;
 
