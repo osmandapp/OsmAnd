@@ -171,6 +171,32 @@ public class OsmAndFormatter {
 		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
+	public static Date getStartOfToday() {
+		return getStartOfToday("GMT");
+	}
+
+	public static Date getStartOfToday(@NonNull String timeZoneStr) {
+		return getStartOfDayForDate(new Date(), timeZoneStr);
+	}
+
+	public static Date getStartOfDayForDate(@NonNull Date date, @NonNull String timeZoneStr) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(date.getTime());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.setTimeZone(TimeZone.getTimeZone(timeZoneStr));
+		return new Date(calendar.getTimeInMillis());
+	}
+
+	public static Date getTimeForTimeZone(long time, @NonNull String timeZone) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(time);
+		calendar.setTimeZone(TimeZone.getTimeZone(timeZone));
+		return new Date(calendar.getTimeInMillis());
+	}
+
 	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
 		String unitsStr;
 		double intervalInUnits;

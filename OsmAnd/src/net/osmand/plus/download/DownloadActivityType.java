@@ -1,6 +1,8 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
+import static net.osmand.IndexConstants.WEATHER_EXT;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
@@ -67,6 +69,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
 	public static final DownloadActivityType HEIGHTMAP_FILE =
 			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
+	public static final DownloadActivityType WEATHER_FORECAST =
+			new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
 
 	private final int stringResource;
 	private final int iconResource;
@@ -205,16 +209,18 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (DEPTH_MAP_FILE == this) {
 			return ctx.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
+		} else if (WEATHER_FORECAST == this) {
+			return ctx.getAppPath(WEATHER_FORECAST_DIR);
 		}
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
+	public boolean isZipStream() {
 		return HILLSHADE_FILE != this && SLOPE_FILE != this && HEIGHTMAP_FILE != this
 				&& SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
-	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
+	public boolean isZipFolder() {
 		return this == VOICE_FILE;
 	}
 
@@ -265,6 +271,8 @@ public class DownloadActivityType {
 			return IndexConstants.GPX_FILE_EXT;
 		} else if (DEPTH_MAP_FILE == this) {
 			return IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
+		} else if (WEATHER_FORECAST == this) {
+			return IndexConstants.WEATHER_EXT;
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -363,6 +371,8 @@ public class DownloadActivityType {
 			return ctx.getString(R.string.shared_string_gpx_tracks);
 		} else if (this == DEPTH_MAP_FILE) {
 			return ctx.getString(R.string.download_depth_countours);
+		} else if (this == WEATHER_FORECAST) {
+			return ctx.getString(R.string.shared_string_weather);
 		}
 		return "";
 	}
@@ -376,6 +386,9 @@ public class DownloadActivityType {
 		}
 		if (this == FONT_FILE) {
 			return FileNameTranslationHelper.getFontName(getBasename(downloadItem));
+		}
+		if (this == WEATHER_FORECAST) {
+			return FileNameTranslationHelper.getFileName(ctx, osmandRegions, downloadItem.getFileName());
 		}
 		String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {
@@ -536,6 +549,10 @@ public class DownloadActivityType {
 				return fileName.substring(0, fileName.indexOf('.'));
 			}
 			return fileName;
+		}
+		if (this == WEATHER_FORECAST) {
+			int ls = fileName.lastIndexOf(WEATHER_EXT);
+			return ls >= 0 ? fileName.substring(0, ls) : fileName;
 		}
 		int ls = fileName.lastIndexOf('_');
 		if (ls >= 0) {

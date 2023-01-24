@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_forecast_is_outdated">Forecast is outdated.</string>
+    <string name="shared_string_all_world">All world</string>
+    <string name="weather_forecast">Weather forecast</string>
+    <string name="offline_weather_forecast">Offline weather forecast</string>
+    <string name="offline_weather_forecast_desc">You can download weather forecast for 7 days.</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
     <string name="share_as_file">Share as file</string>

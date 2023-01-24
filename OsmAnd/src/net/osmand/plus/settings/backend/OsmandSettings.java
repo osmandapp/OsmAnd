@@ -628,6 +628,14 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
+	public void removeFromGlobalPreferences(@NonNull String ... prefIds) {
+		SettingsEditor editor = settingsAPI.edit(globalPreferences);
+		for (String prefId : prefIds) {
+			editor.remove(prefId);
+		}
+		editor.commit();
+	}
+
 	public int getSavedGlobalPrefsCount() {
 		return ((SharedPreferences) globalPreferences).getAll().size();
 	}

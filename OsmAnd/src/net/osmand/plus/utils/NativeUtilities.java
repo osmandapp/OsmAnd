@@ -14,9 +14,13 @@ import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.TileId;
+import net.osmand.core.jni.TileIdList;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
+
+import java.util.List;
 
 public class NativeUtilities {
 
@@ -217,5 +221,18 @@ public class NativeUtilities {
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
 		return new PointI(x31, y31);
+	}
+
+	public static TileIdList convertToQListTileIds(@NonNull List<List<Integer>> tileIds) {
+		TileIdList qTileIds = new TileIdList();
+		for (List<Integer> tileId : tileIds) {
+			if (tileId.size() == 2) {
+				int x = tileId.get(0);
+				int y = tileId.get(1);
+				TileId qTileId = TileId.fromXY(x, y);
+				qTileIds.add(qTileId);
+			}
+		}
+		return qTileIds;
 	}
 }
