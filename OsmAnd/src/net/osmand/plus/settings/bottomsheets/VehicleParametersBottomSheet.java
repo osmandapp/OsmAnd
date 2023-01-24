@@ -145,11 +145,27 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		});
 
 		List<ChipItem> chips = new ArrayList<>();
-		for (String entry : preference.getEntries()) {
-			ChipItem chip = new ChipItem(entry);
-			chip.title = entry;
-			chips.add(chip);
+
+		for (int i = 0; i < preference.getEntries().length; i++) {
+			ChipItem chip = new ChipItem(preference.getEntries()[i]);
+			chip.title = preference.getEntries()[i];
+
+			if (!isTruckMode) {
+				chips.add(chip);
+			} else {
+				float value;
+				try {
+					value = Float.parseFloat(preference.getEntryValues()[i]);
+				} catch (NumberFormatException e) {
+					value = 0f;
+				}
+
+				if (value >= MIN_TRUCK_WEIGHT - 0.01f || value == 0f) {
+					chips.add(chip);
+				}
+			}
 		}
+
 		chipsView.setItems(chips);
 
 		chipsView.setOnSelectChipListener(chip -> {
