@@ -296,7 +296,7 @@
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
+    <string name="compass_click_desc">Hint: Tap on the compass widget to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
