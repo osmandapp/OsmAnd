@@ -1349,14 +1349,14 @@ public class GPXUtilities {
 	}
 
 	public static GPXFile loadGPXFile(File file) {
-		return loadGPXFile(file, null);
+		return loadGPXFile(file, null, true);
 	}
 
-	public static GPXFile loadGPXFile(File file, GPXExtensionsReader extensionsReader) {
+	public static GPXFile loadGPXFile(File file, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(file);
-			GPXFile gpxFile = loadGPXFile(fis, extensionsReader);
+			GPXFile gpxFile = loadGPXFile(fis, extensionsReader, addGeneralTrack);
 			gpxFile.path = file.getAbsolutePath();
 			gpxFile.modifiedTime = file.lastModified();
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
@@ -1375,10 +1375,10 @@ public class GPXUtilities {
 	}
 
 	public static GPXFile loadGPXFile(InputStream stream) {
-		return loadGPXFile(stream, null);
+		return loadGPXFile(stream, null, true);
 	}
 
-	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader) {
+	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader, boolean addGeneralTrack) {
 		GPXFile gpxFile = new GPXFile(null);
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
@@ -1735,7 +1735,9 @@ public class GPXUtilities {
 			if (!pointsGroups.isEmpty() || !gpxFile.points.isEmpty()) {
 				gpxFile.pointsGroups.putAll(mergePointsGroups(pointsGroups, gpxFile.points));
 			}
-			gpxFile.addGeneralTrack();
+			if (addGeneralTrack) {
+				gpxFile.addGeneralTrack();
+			}
 		} catch (Exception e) {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
