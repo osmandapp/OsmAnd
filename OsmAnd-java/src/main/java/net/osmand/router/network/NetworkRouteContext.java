@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapDataObject;
@@ -73,14 +74,16 @@ public class NetworkRouteContext {
 		int bottom = y31B >> ZOOM_TO_LOAD_TILES_SHIFT_R;
 		for (int x = left; x <= right; x++) {
 			for (int y = top; y <= bottom; y++) {
-				loadRouteSegmentTile(x, y, rKey, map);
+				loadRouteSegmentTile(x, y, rKey, map, null);
 			}
 		}
 		return map;
 	}
 
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey routeKey,
-	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
+	                                                              Map<RouteKey, List<NetworkRouteSegment>> map,
+	                                                              TLongArrayList queue) throws IOException {
+		long tileId = getTileId(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
@@ -94,6 +97,17 @@ public class NetworkRouteContext {
 				}
 				if (segment.start == 0 || !loadOnlyRouteWithKey(routeKey)) {
 					routeSegments.add(segment);
+				}
+				RouteDataObject robj = segment.robj;
+				long startPointTileId = getTileId(robj.getPoint31XTile(segment.start), robj.getPoint31YTile(segment.start));
+				long endPointTileId = getTileId(robj.getPoint31XTile(segment.end), robj.getPoint31YTile(segment.end));
+				if (queue != null) {
+					if (tileId != startPointTileId) {
+						queue.add(startPointTileId);
+					}
+					if (tileId != endPointTileId) {
+						queue.add(endPointTileId);
+					}
 				}
 			}
 		}
