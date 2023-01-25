@@ -74,16 +74,14 @@ public class NetworkRouteContext {
 		int bottom = y31B >> ZOOM_TO_LOAD_TILES_SHIFT_R;
 		for (int x = left; x <= right; x++) {
 			for (int y = top; y <= bottom; y++) {
-				loadRouteSegmentTile(x, y, rKey, map, null);
+				loadRouteSegmentTile(x, y, rKey, map);
 			}
 		}
 		return map;
 	}
 
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey routeKey,
-	                                                              Map<RouteKey, List<NetworkRouteSegment>> map,
-	                                                              TLongArrayList queue) throws IOException {
-		long tileId = getTileId(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
+	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
@@ -97,17 +95,8 @@ public class NetworkRouteContext {
 				}
 				if (segment.start == 0 || !loadOnlyRouteWithKey(routeKey)) {
 					routeSegments.add(segment);
-				}
-				RouteDataObject robj = segment.robj;
-				long startPointTileId = getTileId(robj.getPoint31XTile(segment.start), robj.getPoint31YTile(segment.start));
-				long endPointTileId = getTileId(robj.getPoint31XTile(segment.end), robj.getPoint31YTile(segment.end));
-				if (queue != null) {
-					if (tileId != startPointTileId) {
-						queue.add(startPointTileId);
-					}
-					if (tileId != endPointTileId) {
-						queue.add(endPointTileId);
-					}
+				} else if (segment.start == segment.robj.getPointsLength() - 1) {
+					routeSegments.add(segment);
 				}
 			}
 		}

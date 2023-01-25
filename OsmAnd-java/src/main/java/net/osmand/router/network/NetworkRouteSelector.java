@@ -533,7 +533,8 @@ public class NetworkRouteSelector {
 			}
 			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
 					NetworkRouteContext.getXFromTileId(tileID), NetworkRouteContext.getYFromTileId(tileID),
-					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>(), queue);
+					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
+			addSegmentsBiggerThanOneTile(tiles, tileID, queue);
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
@@ -546,6 +547,28 @@ public class NetworkRouteSelector {
 				}
 			}
 			addEnclosedTiles(queue, tileID);
+		}
+	}
+
+	private void addSegmentsBiggerThanOneTile(Map<RouteKey, List<NetworkRouteSegment>> tiles,
+	                                          long tileId, TLongArrayList queue) {
+		for (Map.Entry<RouteKey, List<NetworkRouteSegment>> entry : tiles.entrySet()) {
+			for (NetworkRouteSegment segment : entry.getValue()) {
+				RouteDataObject rdo = segment.robj;
+				if (rdo == null) {
+					continue;
+				}
+				long startPointTileId = NetworkRouteContext.getTileId(rdo.getPoint31XTile(segment.start), rdo.getPoint31YTile(segment.start));
+				long endPointTileId = NetworkRouteContext.getTileId(rdo.getPoint31XTile(segment.end), rdo.getPoint31YTile(segment.end));
+				if (queue != null) {
+					if (tileId != startPointTileId) {
+						queue.add(startPointTileId);
+					}
+					if (tileId != endPointTileId) {
+						queue.add(endPointTileId);
+					}
+				}
+			}
 		}
 	}
 
