@@ -3462,6 +3462,11 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="index_item_world_bitcoin_payments">World bitcoin payments</string>
     <string name="index_item_world_basemap">World overview map</string>
     <string name="index_item_world_ski">World ski map</string>
+    <string name="sound_beep_complex">Beep: complex</string>
+    <string name="sound_beep_complex_loud">Beep: complex loud</string>
+    <string name="sound_beep_minimal">Beep: minimal</string>
+    <string name="sound_beep_simple">Beep: simple</string>
+    <string name="sound_beep_simple_loud">Beep: simple loud</string>
     <string name="lang_zh">Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
