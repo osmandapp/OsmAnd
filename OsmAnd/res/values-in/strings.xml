@@ -4151,7 +4151,7 @@
     <string name="widget_with_dot">Widget.</string>
     <string name="compass_always_hidden">Selalu tersembunyi</string>
     <string name="compass_always_visible">Selalu terlihat</string>
-    <string name="compass_click_desc">Ketuk pada kompas untuk mengubah mode orientasi peta.</string>
+    <string name="compass_click_desc">Kiat: Ketuk pada widget kompas untuk mengubah mode orientasi peta.</string>
     <string name="compass_desc">Menampilkan arah ke utara.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Skema warna garis kontur</string>
     <string name="add_points_to_map_markers_q">Tambahkan semua titik sebagai penanda peta\?</string>
@@ -4965,7 +4965,7 @@
     <string name="rendering_engine_failed">Perenderan peta OsmAnd telah mogok.</string>
     <string name="pressure_layer">Lapisan tekanan</string>
     <string name="wind_layer">Lapisan angin</string>
-    <string name="storage_migration_fragment_close_descr">Menyalin selesai %1$s%%. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
+    <string name="storage_migration_fragment_close_descr">Menyalin hanya %1$s%% selesai. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
     <string name="quick_action_precipitation_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan curah hujan di peta.</string>
     <string name="quick_action_temperature_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan suhu di peta.</string>
     <string name="map_widget_sunrise_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbit.</string>
@@ -4982,7 +4982,7 @@
     <string name="mtb_segment_classification">Klasifikasi segmen</string>
     <string name="rendering_attr_weatherCloudContours_name">Garis isometris awan</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Garis isometris curah hujan</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Garis isometris embusan angin</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Garis isometris kecepatanangin</string>
     <string name="shared_string_open">Buka</string>
     <string name="open_weather_action_description">Memungkinkan Anda untuk membuka layar dengan informasi cuaca rinci.</string>
     <string name="open_weather_action">Buka cuaca</string>
@@ -5012,7 +5012,7 @@
     <string name="cloud_all_changes_uploaded">Semua perubahan diunggah</string>
     <string name="cloud_all_changes_downloaded">Semua perubahan diunduh</string>
     <string name="cloud_all_changes_uploaded_descr">Semua perubahan yang dibuat di perangkat ini disinkron dengan OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Tidak ada konflik</string>
+    <string name="cloud_no_conflicts">Tidak ada konflik.</string>
     <string name="download_cloud_version">Unduh versi awan</string>
     <string name="shared_string_do_not_exist">Tidak ada</string>
     <string name="backup_error_failed_to_fetch_remote_items">Gagal mendapatkan daftar berkas dari server.</string>
@@ -5023,8 +5023,8 @@
     <string name="cloud_sync_progress">Menyinkronkan…%1$s</string>
     <string name="changes">Perubahan %1$s</string>
     <string name="local_changes_will_be_dismissed">Perubahan lokal akan diabaikan</string>
-    <string name="import_export">Impor/Ekspor</string>
-    <string name="av_audio_format_bottom_sheet_descr">Pilih format keluaran audio. Jenis format berkas untuk audio adalah 3GPP (.3gp).</string>
+    <string name="import_export">Impor/ekspor</string>
+    <string name="av_audio_format_bottom_sheet_descr">Pilih format audio. Jenis format berkas kontainer untuk audio adalah 3GPP (.3gp).</string>
     <string name="si_nm_mt">Mil/meter laut</string>
     <string name="si_nm_ft">Mil/kaki laut</string>
     <string name="set_up_backup">Mulai pencadangan</string>
@@ -5035,4 +5035,10 @@
     <string name="share_link">Bagikan tautan</string>
     <string name="value_downloaded_of_mb">Mengunduh %1$.1f/%2$.1f MB</string>
     <string name="determine_location">Perbolehkan kami untuk mengetahui lokasi Anda</string>
+    <string name="weight_limit_error">Nilai minimum \"%1$s\" ton. Gunakan profil \"%2$s\" jika berat kendaraan kurang dari nilai minimum.</string>
+    <string name="sound_beep_simple">Bip: sederhana</string>
+    <string name="sound_beep_minimal">Bip: minimal</string>
+    <string name="sound_beep_simple_loud">Bip: sederhana keras</string>
+    <string name="sound_beep_complex">Bip: kompleks</string>
+    <string name="sound_beep_complex_loud">Bip: kompleks keras</string>
 </resources>
