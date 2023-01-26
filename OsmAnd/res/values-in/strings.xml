@@ -4965,7 +4965,7 @@
     <string name="rendering_engine_failed">Perenderan peta OsmAnd telah mogok.</string>
     <string name="pressure_layer">Lapisan tekanan</string>
     <string name="wind_layer">Lapisan angin</string>
-    <string name="storage_migration_fragment_close_descr">Menyalin hanya %1$s%% selesai. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
+    <string name="storage_migration_fragment_close_descr">Menyalin hanya %1$s selesai. Jika Anda menghentikan sekarang, aplikasi mungkin tidak akan bekerja dengan benar.</string>
     <string name="quick_action_precipitation_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan curah hujan di peta.</string>
     <string name="quick_action_temperature_layer">Sebuah saklar untuk menampilkan atau menyembunyikan lapisan suhu di peta.</string>
     <string name="map_widget_sunrise_desc">Menampilkan waktu matahari terbit berikutnya atau waktu yang tersisa sampai matahari terbit.</string>
