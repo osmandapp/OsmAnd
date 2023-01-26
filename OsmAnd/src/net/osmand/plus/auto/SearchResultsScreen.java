@@ -34,7 +34,7 @@ import java.util.List;
 public final class SearchResultsScreen extends Screen implements DefaultLifecycleObserver,
 		AppInitializeListener, SearchHelperListener {
 
-	private static final int CONTENT_LIMIT = 50;
+	private static final int CONTENT_LIMIT = 12;
 
 	private final SearchHelper searchHelper;
 
