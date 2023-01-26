@@ -166,53 +166,28 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupPositionPlacementOnMapPref() {
 		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
-		int positionPlacement = preference.getModeValue(getSelectedAppMode());
-		Drawable icon;
-		String title;
-		if (positionPlacement == 0) {
-			icon = getActiveIcon(R.drawable.ic_action_bearing);
-			title = getString(R.string.shared_string_automatic);
-		} else if (positionPlacement == 1) {
-			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
-			title = getString(R.string.position_on_map_center);
-		} else {
-			icon = getActiveIcon(R.drawable.ic_action_display_position_bottom);
-			title = getString(R.string.position_on_map_bottom);
-		}
+		String entries[] = {getString(R.string.shared_string_automatic), getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)};
+
 		Preference positionPlacementPref = findPreference(preference.getId());
-		positionPlacementPref.setIcon(icon);
-		positionPlacementPref.setSummary(title);
+		positionPlacementPref.setIcon(getPositionPlacementOnMapIcon());
+		positionPlacementPref.setSummary(entries[preference.getModeValue(getSelectedAppMode())]);
+
+		ListPreferenceEx positionPlacement = findPreference(preference.getId());
+		positionPlacement.setDescription(R.string.display_position_descr);
+		positionPlacement.setIcon(getPositionPlacementOnMapIcon());
+		positionPlacement.setEntries(new String[] {entries[0], entries[1], entries[2]});
+		positionPlacement.setEntryValues(new Integer[] {0, 1, 2});
 	}
 
-	private void showPositionPlacementDialog(Preference preference) {
-		boolean nightMode = isNightMode();
-		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
-		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(preference.getTitle());
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-
-		String[] entries = new String[] {
-				getString(R.string.shared_string_automatic),
-				getString(R.string.position_on_map_center),
-				getString(R.string.position_on_map_bottom),
-		};
-		int selected = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode());
-
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				entries, nightMode, selected, app, profileColor, themeRes, v -> {
-					int selectedEntryIndex = (int) v.getTag();
-					applyPreferenceWithSnackBar(preference.getKey(), selectedEntryIndex);
-					MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
-					if (mapViewTrackingUtilities != null) {
-						mapViewTrackingUtilities.updateSettings();
-					}
-				}
-		);
-
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+	private Drawable getPositionPlacementOnMapIcon() {
+		switch (settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode())) {
+			case 1:
+				return getActiveIcon(R.drawable.ic_action_display_position_center);
+			case 2:
+				return getActiveIcon(R.drawable.ic_action_display_position_bottom);
+			default:
+				return getActiveIcon(R.drawable.ic_action_display_position_auto);
+		}
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -461,9 +436,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
-			return true;
-		} else if (preference.getKey().equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
-			showPositionPlacementDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
