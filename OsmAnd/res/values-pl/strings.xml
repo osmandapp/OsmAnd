@@ -5023,4 +5023,9 @@
     <string name="x_axis">Oś X</string>
     <string name="set_up_backup">Skonfiguruj kopię zapasową</string>
     <string name="y_axis">Oś Y</string>
+    <string name="value_downloaded_of_mb">Pobieranie %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Udostępnij link</string>
+    <string name="share_as_file">Udostępnij jako plik</string>
+    <string name="skip_download">Pomiń pobieranie</string>
+    <string name="determine_location">Pozwól nam określić Twoją lokalizację</string>
 </resources>

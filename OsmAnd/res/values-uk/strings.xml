@@ -4742,7 +4742,7 @@
     <string name="compass_visible_if_map_rotated">Видно, якщо мапу повернути</string>
     <string name="compass_always_hidden">Постійно приховано</string>
     <string name="compass_always_visible">Постійно видно</string>
-    <string name="compass_click_desc">Торкніться компаса, щоб перемкнути режим орієнтації мапи.</string>
+    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб перемикнути режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колірна гамма контурних ліній глибини</string>
     <string name="auto_backup_preference_desc">Типово Android зберігає резервні копії вибраного, позначок мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія обмежена 25 МБ.
@@ -4956,7 +4956,7 @@
     <string name="map_widget_group_sunrise_sunset">Схід, захід сонця</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колірна схема ліній</string>
     <string name="rendering_attr_depthContourWidth_name">Ширина лінії</string>
-    <string name="storage_migration_fragment_close_descr">Копіювання виконано на %1$s%%. Якщо ви зупинитеся зараз, застосунок може працювати некоректно.</string>
+    <string name="storage_migration_fragment_close_descr">Копіювання виконано лише на %1$s%%. Якщо ви зупинитеся зараз, застосунок може працювати некоректно.</string>
     <string name="quick_action_precipitation_layer">Перемикач для показу або приховування шару опадів на мапі.</string>
     <string name="quick_action_wind_layer">Перемикач для показу або приховування шару вітру на мапі.</string>
     <string name="quick_action_cloud_layer">Перемикач для показу або приховування шару хмарності на мапі.</string>
@@ -4968,7 +4968,7 @@
     <string name="temperature_layer">Температурний шар</string>
     <string name="quick_action_temperature_layer">Перемикач для показу або приховування температурного шару на мапі.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показати шкалу MTB для підйому</string>
-    <string name="rendering_attr_showMtbScale_description">Показати траси згідно зі шкалою MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Показати траси згідно з їхньою шкалою MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показати траси згідно зі шкалою підйомів MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Показати шкалу MTB</string>
     <string name="mtb_scale">Шкала MTB</string>
@@ -4977,7 +4977,7 @@
     <string name="mtb_segment_classification">Класифікація сегментів</string>
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії поривів вітру</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
     <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
@@ -5005,7 +5005,7 @@
     <string name="cloud_recent_changes">Зміни</string>
     <string name="cloud_all_changes_uploaded">Усі зміни вивантажено</string>
     <string name="cloud_all_changes_uploaded_descr">Усі зміни, зроблені на цьому пристрої, синхронізуються з OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Неузгодженостей немає</string>
+    <string name="cloud_no_conflicts">Неузгодженостей немає.</string>
     <string name="download_cloud_version">Завантажити хмарну версію</string>
     <string name="backup_error_failed_to_fetch_remote_items">Не вдалося отримати список файлів із сервера.</string>
     <string name="last_sync">Остання синхронізація</string>
@@ -5019,7 +5019,7 @@
     <string name="changes">Зміни %1$s</string>
     <string name="sync_now">Синхронізувати зараз</string>
     <string name="cloud_all_changes_downloaded">Усі зміни завантажено</string>
-    <string name="av_audio_format_bottom_sheet_descr">Виберіть формат аудіовиходу. Формат типу файлу для аудіо - 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Виберіть аудіоформат. Формат контейнера типу файлу для аудіо — 3GPP (.3gp).</string>
     <string name="si_nm_ft">Морські милі/фути</string>
     <string name="si_nm_mt">Морські милі/метри</string>
     <string name="set_up_backup">Налаштувати резервне копіювання</string>
@@ -5030,4 +5030,10 @@
     <string name="share_link">Поділитись посиланням</string>
     <string name="determine_location">Дозвольте нам визначити ваше розташування</string>
     <string name="skip_download">Пропустити завантаження</string>
+    <string name="weight_limit_error">Мінімальне значення — «%1$s» тон. Використовуйте профіль «%2$s», якщо вага транспортного засобу менша за мінімальне значення.</string>
+    <string name="sound_beep_complex_loud">Звуковий сигнал: складний гучний</string>
+    <string name="sound_beep_complex">Звуковий сигнал: складний</string>
+    <string name="sound_beep_minimal">Звуковий сигнал: мінімальний</string>
+    <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
+    <string name="sound_beep_simple">Звуковий сигнал: простий</string>
 </resources>
