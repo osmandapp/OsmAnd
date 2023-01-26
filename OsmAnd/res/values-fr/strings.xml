@@ -5021,5 +5021,5 @@
     <string name="share_as_file">Partager en tant que fichier</string>
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
-    <string name="weight_limit_error">La valeur minimale est %1$s tonnes. Utilisez le %2$s profile si le poids du véhicule est inférieure à la valeur minimale.</string>
+    <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profile \"%2$s\".</string>
 </resources>
