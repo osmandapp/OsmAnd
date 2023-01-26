@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,10 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -138,19 +144,20 @@ public class FileUtils {
 		return false;
 	}
 
-	public static File checkRenamePossibility(OsmandApplication ctx, File source, String newName, boolean dirAllowed) {
+	public static File checkRenamePossibility(@NonNull OsmandApplication app, @NonNull File source,
+	                                          @NonNull String newName, boolean dirAllowed) {
 		if (Algorithms.isEmpty(newName)) {
-			Toast.makeText(ctx, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
 		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
 		if (illegalCharactersPattern.matcher(newName).find()) {
-			Toast.makeText(ctx, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
+			Toast.makeText(app, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
 			return null;
 		}
 		File dest = new File(source.getParentFile(), newName);
 		if (dest.exists()) {
-			Toast.makeText(ctx, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+			Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 			return null;
 		}
 		return dest;
@@ -190,7 +197,7 @@ public class FileUtils {
 		return dest;
 	}
 
-	public static File getTempDir(OsmandApplication app) {
+	public static File getTempDir(@NonNull OsmandApplication app) {
 		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 		if (!tempDir.exists()) {
 			tempDir.mkdirs();
@@ -198,15 +205,34 @@ public class FileUtils {
 		return tempDir;
 	}
 
-	public static boolean isWritable(File dirToTest) {
+	public static boolean isWritable(@NonNull File dirToTest) {
+		return isWritable(dirToTest, false);
+	}
+
+	public static boolean isWritable(@NonNull File dirToTest, boolean testWrite) {
+		InputStream in = null;
+		OutputStream out = null;
 		boolean isWriteable;
 		try {
 			dirToTest.mkdirs();
 			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
 			isWriteable = writeTestFile.exists();
+
+			if (isWriteable && testWrite) {
+				Path path = writeTestFile.toPath();
+				out = Files.newOutputStream(path);
+				Algorithms.writeInt(out, Integer.reverseBytes(XML_FILE_SIGNATURE));
+
+				in = Files.newInputStream(path);
+				int fileSignature = Algorithms.readInt(in);
+				isWriteable = XML_FILE_SIGNATURE == fileSignature;
+			}
 			writeTestFile.delete();
 		} catch (IOException e) {
 			isWriteable = false;
+		} finally {
+			Algorithms.closeStream(in);
+			Algorithms.closeStream(out);
 		}
 		return isWriteable;
 	}
