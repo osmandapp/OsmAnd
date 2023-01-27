@@ -111,7 +111,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 		if (!FileUtils.isWritable(destinationDir, true)) {
 			return errors;
 		}
-		CopyFilesListener copyFilesListener = getCopyFilesListener();
+		FileCopyListener fileCopyListener = getCopyFilesListener();
 
 		long remainingSize = filesSize.first;
 		long totalSize = filesSize.second / 1024;
