@@ -1090,12 +1090,12 @@ public abstract class InAppPurchaseHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
+	public SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
 		if (sku.equals("promo_website")) {
 			return SubscriptionOrigin.PROMO;
 		}
 		if (sku.toLowerCase().startsWith("osmand_pro_")) {
-			return SubscriptionOrigin.ANDROID;
+			return SubscriptionOrigin.GOOGLE;
 		}
 		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
 			return SubscriptionOrigin.IOS;
