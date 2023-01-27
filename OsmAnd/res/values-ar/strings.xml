@@ -5092,12 +5092,17 @@
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="si_nm_mt">ميل بحري/متر</string>
     <string name="set_up_backup">إنشاء نسخة احتياطية</string>
-    <string name="x_axis">محور-س</string>
-    <string name="y_axis">محور-ص</string>
+    <string name="x_axis">محور-اكس</string>
+    <string name="y_axis">المحور y</string>
     <string name="share_link">مشاركة الرابط</string>
     <string name="share_as_file">مشاركة كملف</string>
     <string name="skip_download">تخط التنزيل</string>
     <string name="value_downloaded_of_mb">جاري تنزيل %1$.1f/%2$.1f ميغابايت</string>
     <string name="determine_location">اسمح لنا بتحديد موقعك</string>
     <string name="weight_limit_error">أدنى قيمة هي \"%1$s\" طن. استخدم ملف تعريف \"%2$s\" إذا كان وزن السيارة أقل من الحد الأدنى.</string>
+    <string name="sound_beep_complex">صفير: معقد</string>
+    <string name="sound_beep_complex_loud">صفير: معقد بصوت عال</string>
+    <string name="sound_beep_minimal">صفير: الحد الأدنى</string>
+    <string name="sound_beep_simple">صفير: بسيط</string>
+    <string name="sound_beep_simple_loud">صفير: بسيط بصوت عال</string>
 </resources>
