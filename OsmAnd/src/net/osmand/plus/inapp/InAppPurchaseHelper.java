@@ -419,7 +419,6 @@ public abstract class InAppPurchaseHelper {
 	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-		new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
@@ -1048,6 +1047,9 @@ public abstract class InAppPurchaseHelper {
 
 	protected void notifyDismissProgress(InAppPurchaseTaskType taskType) {
 		ctx.runInUIThread(() -> {
+			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			}
 			if (uiActivity != null) {
 				uiActivity.dismissProgress(taskType);
 			}
@@ -1088,12 +1090,12 @@ public abstract class InAppPurchaseHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
+	public SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
 		if (sku.equals("promo_website")) {
 			return SubscriptionOrigin.PROMO;
 		}
 		if (sku.toLowerCase().startsWith("osmand_pro_")) {
-			return SubscriptionOrigin.ANDROID;
+			return SubscriptionOrigin.GOOGLE;
 		}
 		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
 			return SubscriptionOrigin.IOS;
