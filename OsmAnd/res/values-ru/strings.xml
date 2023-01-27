@@ -663,9 +663,9 @@
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">по направлению компаса</string>
     <string name="rotate_map_bearing_opt">по направлению движения</string>
-    <string name="rotate_map_none_opt">фиксированная (север сверху)</string>
-    <string name="rotate_map_to_bearing_descr">Выравнивание карты:</string>
-    <string name="rotate_map_to_bearing">Ориентация карты</string>
+    <string name="rotate_map_north_opt">фиксированная (север сверху)</string>
+    <string name="rotate_map_to_descr">Выравнивание карты:</string>
+    <string name="rotate_map_to">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
     <string name="fav_imported_sucessfully">Избранные точки импортированы</string>
     <string name="fav_file_to_load_not_found">GPX-файл с избранными точками отсутствует в {0}</string>
@@ -4947,7 +4947,7 @@
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
-    <string name="rotate_map_none_rotated_opt">фиксированная (повернутая вручную)</string>
+    <string name="rotate_map_manual_opt">фиксированная (повернутая вручную)</string>
     <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>
     <string name="map_widget_group_sunrise_sunset">Восход, закат</string>

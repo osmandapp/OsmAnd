@@ -550,9 +550,9 @@
     <string name="poi_context_menu_delete">מחיקת נ״ע</string>
     <string name="rotate_map_compass_opt">כיוון מצפן</string>
     <string name="rotate_map_bearing_opt">כיוון התנועה</string>
-    <string name="rotate_map_none_opt">לא לסובב (הצפון תמיד למעלה)</string>
-    <string name="rotate_map_to_bearing_descr">יישור המפה:</string>
-    <string name="rotate_map_to_bearing">יישור המפה</string>
+    <string name="rotate_map_north_opt">לא לסובב (הצפון תמיד למעלה)</string>
+    <string name="rotate_map_to_descr">יישור המפה:</string>
+    <string name="rotate_map_to">יישור המפה</string>
     <string name="show_route">פרטי המסלול</string>
     <string name="fav_imported_sucessfully">המועדפים יובאו</string>
     <string name="fav_file_to_load_not_found">קובץ ה־GPX המכיל מועדפים לא נמצא תחת {0}</string>
@@ -4726,4 +4726,20 @@
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
     <string name="download_heightmap_maps">מפת גבהים</string>
     <string name="favorite_delete_group">מחיקת קבוצה</string>
+    <string name="release_4_4_pre">• כאן תופענה המחרוזות לגרסה 4.4</string>
+    <string name="share_link">שיתוף קישור</string>
+    <string name="share_as_file">שיתוף כקובץ</string>
+    <string name="y_axis">ציר Y</string>
+    <string name="x_axis">ציר X</string>
+    <string name="av_audio_format_bottom_sheet_descr">נא לבחור תצורת פלט שמע. תצורת סוג קובץ הפלט היא 3GPP‏ (‎.3gp).</string>
+    <string name="shared_string_modified">נערך</string>
+    <string name="cloud_sync_progress">מתבצע סנכרון…%1$s</string>
+    <string name="checking_progress">מתבצעת בדיקה…</string>
+    <string name="res_unknown">לא ידוע</string>
+    <string name="shared_string_unsynced">לא מסונכרן</string>
+    <string name="value_downloaded_of_mb">מתקבלים %1$.1f/%2$.1f מ״ב</string>
+    <string name="skip_download">דילוג על הורדה</string>
+    <string name="determine_location">מאפשר לנו לאתר את המיקום שלך</string>
+    <string name="set_up_backup">הגדרת גיבוי</string>
+    <string name="choose_what_to_sync">נא לבחור מה לסנכרן</string>
 </resources>

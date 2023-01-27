@@ -664,9 +664,9 @@
     <string name="poi_context_menu_delete">Slet interessepunkt</string>
     <string name="rotate_map_compass_opt">Kompasretning</string>
     <string name="rotate_map_bearing_opt">Bevægelsesretning</string>
-    <string name="rotate_map_none_opt">Fast (nord er opad)</string>
-    <string name="rotate_map_to_bearing_descr">Justering af kort:</string>
-    <string name="rotate_map_to_bearing">Kortorientering</string>
+    <string name="rotate_map_north_opt">Fast (nord er opad)</string>
+    <string name="rotate_map_to_descr">Justering af kort:</string>
+    <string name="rotate_map_to">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter importeret</string>
     <string name="fav_file_to_load_not_found">GPX-fil med Favoritter ikke fundet i {0}</string>
@@ -4753,7 +4753,7 @@
 \nNår du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
     <string name="compass_always_visible">Altid synlig</string>
     <string name="compass_always_hidden">Altid skjult</string>
-    <string name="compass_click_desc">Tryk på kompas for at skifte måden hvorpå kortet er orienteret.</string>
+    <string name="compass_click_desc">Tip: Tryk på kompass-modulet for at skifte måden hvorpå kortet er orienteret.</string>
     <string name="auto_25_chars_route_tr_kl">Drej til højre og hold til venstre</string>
     <string name="auto_25_chars_route_tr_kr">Drej til højre og hold til højre</string>
     <string name="auto_25_chars_route_tu_kl">Foretag U-vending og hold til venstre</string>
@@ -4784,7 +4784,7 @@
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
     <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="shared_string_large">Stor</string>
-    <string name="rotate_map_none_rotated_opt">Fast (manuelt roteret)</string>
+    <string name="rotate_map_manual_opt">Fast (manuelt roteret)</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="go_to_marker_location">Gå til markørplacering</string>
     <string name="shared_string_shows">Viser</string>
@@ -4962,7 +4962,7 @@
     <string name="shared_string_next_sunset">Næste solnedgang</string>
     <string name="rendering_attr_depthContourWidth_name">Linjebredde</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linjefarvesætning</string>
-    <string name="storage_migration_fragment_close_descr">Kopiering udføres for %1$s%%. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiering er kun %1$s%% fuldført. Hvis du stopper nu, fungerer appen muligvis ikke korrekt.</string>
     <string name="quick_action_precipitation_layer">En omskifter til at vise eller skjule nedbørslaget på kortet.</string>
     <string name="quick_action_wind_layer">En omskifter til at vise eller skjule vindlaget på kortet.</string>
     <string name="quick_action_cloud_layer">En omskifter til at vise eller skjule skylaget på kortet.</string>
@@ -4974,7 +4974,7 @@
     <string name="quick_action_air_pressure_layer">En omskifter til at vise eller skjule lufttrykslaget på kortet.</string>
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
-    <string name="rendering_attr_showMtbScale_description">Vis spor efter MTB-skala.</string>
+    <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
@@ -4984,7 +4984,7 @@
     <string name="release_4_4_pre">• Her kommer der strenge til 4.4-udgivelsen</string>
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Vindstøds-konturlinjer</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer for vindhastighed</string>
     <string name="shared_string_open">Åbn</string>
     <string name="open_weather_action">Åbn vejr</string>
     <string name="open_weather_action_description">Giver dig mulighed for at åbne en skærm med detaljerede vejroplysninger.</string>
@@ -4998,9 +4998,9 @@
     <string name="sync_now">Synkroniser nu</string>
     <string name="local_changes">Lokale ændringer</string>
     <string name="upload_change">Upload ændring</string>
-    <string name="cloud_version_will_be_removed">Cloud-version vil blive fjernet</string>
-    <string name="cloud_changes_will_be_dismissed">Cloud-ændringer vil blive afvist</string>
-    <string name="local_file_will_be_restored">Lokal fil vil blive gendannet</string>
+    <string name="cloud_version_will_be_removed">Cloud-versionen vil blive fjernet</string>
+    <string name="cloud_changes_will_be_dismissed">Cloud-ændringerne vil blive afvist</string>
+    <string name="local_file_will_be_restored">Den lokal fil vil blive gendannet</string>
     <string name="local_changes_will_be_dismissed">Lokale ændringer vil blive afvist</string>
     <string name="cloud_conflicts">Konflikter</string>
     <string name="cloud_conflict">Konflikt</string>
@@ -5009,7 +5009,7 @@
     <string name="cloud_all_changes_uploaded">Alle ændringer er uploadet</string>
     <string name="cloud_all_changes_downloaded">Alle ændringer er downloadet</string>
     <string name="cloud_all_changes_uploaded_descr">Alle ændringer foretaget på denne enhed er synkroniseret med OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Der er ingen konflikter</string>
+    <string name="cloud_no_conflicts">Der er ingen konflikter.</string>
     <string name="download_cloud_version">Download cloud-version</string>
     <string name="cloud_sync_progress">Synkronisering...%1$s</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fillisten kunne ikke hentes fra serveren.</string>
@@ -5025,7 +5025,7 @@
     <string name="export_to_file">Eksporter til fil</string>
     <string name="last_sync">Sidste synkronisering</string>
     <string name="shared_string_do_not_exist">Findes ikke</string>
-    <string name="av_audio_format_bottom_sheet_descr">Vælg lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Vælg et lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
     <string name="si_nm_ft">Sømil/fod</string>
     <string name="si_nm_mt">Sømil/meter</string>
     <string name="set_up_backup">Indstil sikkerhedskopiering</string>
@@ -5036,4 +5036,10 @@
     <string name="skip_download">Spring download over</string>
     <string name="determine_location">Tillad os at fastslå din placering</string>
     <string name="share_link">Del link</string>
+    <string name="weight_limit_error">Minimumsværdi er \"%1$s\" tons. Brug profilen \"%2$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
+    <string name="sound_beep_simple">Bip: simpelt</string>
+    <string name="sound_beep_complex">Bip: kompleks</string>
+    <string name="sound_beep_simple_loud">Bip: simpelt højt</string>
+    <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
+    <string name="sound_beep_minimal">Bip: minimalt</string>
 </resources>

@@ -43,10 +43,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -86,7 +86,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -516,7 +515,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_external_link, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_link, ColorUtilities.getDefaultIconColorId(nightMode)))
 					.setOnClickListener(_view -> shareLink(app))
 					.create());
 

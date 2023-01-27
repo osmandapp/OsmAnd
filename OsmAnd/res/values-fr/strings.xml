@@ -313,9 +313,9 @@
     <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
-    <string name="rotate_map_none_opt">Fixe (nord en haut)</string>
-    <string name="rotate_map_to_bearing_descr">Orientation de la carte :</string>
-    <string name="rotate_map_to_bearing">Orientation de la carte</string>
+    <string name="rotate_map_north_opt">Fixe (nord en haut)</string>
+    <string name="rotate_map_to_descr">Orientation de la carte :</string>
+    <string name="rotate_map_to">Orientation de la carte</string>
     <string name="show_route">Itinéraire détaillé</string>
     <string name="fav_imported_sucessfully">Favoris importés</string>
     <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
@@ -1168,7 +1168,7 @@
     <string name="lang_uk">Ukrainien</string>
     <string name="lang_vi">Vietnamien</string>
     <string name="lang_cy">Gallois</string>
-    <string name="always_center_position_on_map">Placement de la position toujours au centre</string>
+    <string name="always_center_position_on_map">Position toujours placée au centre</string>
     <string name="voice_pref_title">Voix</string>
     <string name="misc_pref_title">Divers</string>
     <string name="localization_pref_title">Paramètres régionaux</string>
@@ -4720,7 +4720,7 @@
     <string name="auto_backup_title">Backup automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
-    <string name="compass_click_desc">Appuyez sur la boussole pour basculer le mode d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Astuce : appuyez sur la boussole pour changer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Un appui sur le gadget, permet de prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Un appui sur le gadget permet d\'enregistrer une vidéo.</string>
@@ -4764,11 +4764,11 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Position placement</string>
+    <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
-    <string name="rotate_map_none_rotated_opt">Fixe (rotation manuelle)</string>
+    <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Ajoutez un point en tapant sur la carte pour afficher la distance entre ce point et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance entre les points.</string>
@@ -4924,9 +4924,9 @@
     <string name="quick_action_air_pressure_layer">Afficher ou masquer la sur-couche barométrique sur la carte.</string>
     <string name="quick_action_cloud_layer">Afficher ou masquer la sur-couche de couverture nuageuse sur la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Couleurs des courbes</string>
-    <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT.</string>
+    <string name="rendering_attr_showMtbScale_description">Afficher la difficulté des itinéraires VTT selon l\'échelle MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Afficher la difficulté VTT</string>
-    <string name="storage_migration_fragment_close_descr">La copie est réalisée à %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
+    <string name="storage_migration_fragment_close_descr">La copie est réalisée à seulement %1$s%%. Si vous l\'interrompez maintenant, l\'application pourrait ne plus fonctionner correctement.</string>
     <string name="weather_plugin_description">Fournit :
 \n- Les prévisions météorologiques pour les 24 prochaines heures et les 7 prochains jours, avec 5 sur-couches
 \n- Des widgets basés sur la position
@@ -4948,65 +4948,17 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Association Internationale de VTT</string>
     <string name="purchases_feature_desc_external_sensors">Affiche et enregistre les données des capteurs externes : vitesse du vélo, puissance du vélo, cadence et fréquence cardiaque.</string>
-    <string name="release_4_3">• New, faster Version 2 (OpenGL) map rendering engine, with 2.5D view
-\n
-\n • Smooth animation of location changes while in motion
-\n
-\n • New widgets for map center coordinates and elevation of geolocations
-\n
-\n • \"Distance to tap\": added text size options
-\n
-\n • \"Map marker\" widget: added option to change click behavior
-\n
-\n • Fixed \"Position placement\" option
-\n
-\n • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions
-\n
-\n • Reorganized \"Nautical maps\" list
-\n
-\n • Added support for ANT+ sensors
-\n
-\n • Added option to disable download UUID
-\n
-\n • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times
-\n
-\n • Fixed audio output and volume slider behavior
-\n
-\n
-\n
-\n • Smooth animation of location changes while in motion
-\n
-\n • New widgets for map center coordinates and elevation of geolocations
-\n
-\n • \"Distance to tap\": added text size options
-\n
-\n • \"Map marker\" widget: added option to change click behavior
-\n
-\n • Fixed \"Position placement\" option
-\n
-\n • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions
-\n
-\n • Reorganized \"Nautical maps\" list
-\n
-\n • Added support for ANT+ sensors
-\n
-\n • Added option to disable download UUID
-\n
-\n • Default-speed adjustable forecast for elevation-dependent walking/hiking/running trip times
-\n
-\n • Fixed audio output and volume slider behavior
-\n
-\n
+    <string name="release_4_3">• Moteur de rendu plus rapide (OpenGL version 2) avec vue 2.5D
 \n
 \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte
 \n
 \n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude
 \n
-\n• Ajout d\'options de taille du texte dans le mode \"Distance par appui\"
+\n• Ajout d\'options sur la taille du texte pour le mode \"Distance par appui\"
 \n
-\n• Ajout d\'une option permettant de changer le comportement du clic dans le mode \"Marques\"
+\n• Ajout d\'une option permettant de modifier le comportement du clic en mode \"Marques\"
 \n
-\n• Correction de l\'option \"Afficher la position\"
+\n• Correction de l\'option \"Emplacement de la position\"
 \n
 \n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX
 \n
@@ -5045,7 +4997,7 @@
     <string name="cloud_all_changes_downloaded">Toutes les modifications ont été reçues</string>
     <string name="shared_string_do_not_exist">N\'existe pas</string>
     <string name="last_sync">Dernière synchro</string>
-    <string name="import_export">Importer / Exporter</string>
+    <string name="import_export">Importer / exporter</string>
     <string name="shared_string_cloud">Cloud</string>
     <string name="upload_change">Envoyer la modification</string>
     <string name="cloud_version_will_be_removed">La version Cloud sera supprimée</string>
@@ -5054,13 +5006,13 @@
     <string name="download_cloud_version">Recevoir la version Cloud</string>
     <string name="export_to_file">Exporter vers un fichier</string>
     <string name="backup_error_failed_to_fetch_remote_items">Impossible de récupérer la liste des fichiers sur le serveur.</string>
-    <string name="cloud_changes_will_be_dismissed">Les modifications Cloud seront ignorées</string>
-    <string name="cloud_no_conflicts">Il n\'y a aucun conflit</string>
+    <string name="cloud_changes_will_be_dismissed">Les modifications cloud seront ignorées</string>
+    <string name="cloud_no_conflicts">Il n\'y a aucun conflit.</string>
     <string name="cloud_all_changes_uploaded_descr">Toutes les modifications effectuées sur cet appareil sont synchronisées avec OsmAnd Cloud.</string>
     <string name="changes">Modifications %1$s</string>
     <string name="si_nm_ft">Milles marins / pieds</string>
     <string name="si_nm_mt">Milles marins / mètres</string>
-    <string name="av_audio_format_bottom_sheet_descr">Sélectionnez le format audio de sortie. Les fichiers audio sont de type 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Sélectionnez un format audio. Les fichiers audio sont au format 3GPP (.3gp).</string>
     <string name="set_up_backup">Paramétrer la sauvegarde</string>
     <string name="x_axis">Axe des abscisses</string>
     <string name="y_axis">Axe des ordonnées</string>
@@ -5069,4 +5021,5 @@
     <string name="share_as_file">Partager en tant que fichier</string>
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
+    <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profile \"%2$s\".</string>
 </resources>

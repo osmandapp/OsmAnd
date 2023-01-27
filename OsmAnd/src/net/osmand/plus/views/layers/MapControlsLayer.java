@@ -213,10 +213,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapRouteInfoMenu.setShowMenu(MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
-	public void showRouteInfoMenu(int menuState) {
-		mapRouteInfoMenu.setShowMenu(menuState);
-	}
-
 	public void initDashboardRelatedControls() {
 		MapActivity mapActivity = requireMapActivity();
 		ImageView backToLocation = mapActivity.findViewById(R.id.map_my_location_button);

@@ -214,7 +214,7 @@
     <string name="shared_string_download_map">Lataa kartta</string>
     <string name="context_menu_item_search_transport">Etsi joukkoliikenteestä</string>
     <string name="voice">Nauhoitettu ääni</string>
-    <string name="rotate_map_to_bearing">Kartan orientaatio</string>
+    <string name="rotate_map_to">Kartan orientaatio</string>
     <string name="show_route">Reitin tiedot</string>
     <string name="fav_imported_sucessfully">Suosikit tuotu onnistuneesti</string>
     <string name="fav_saved_sucessfully">Suosikit tallennettu onnistuneesti sijaintiin {0}</string>
@@ -464,7 +464,7 @@
     <string name="poi_context_menu_delete">Poista KP</string>
     <string name="rotate_map_compass_opt">Kompassi</string>
     <string name="rotate_map_bearing_opt">Liikkumissuunta</string>
-    <string name="rotate_map_none_opt">Älä käännä (pohjoinen on ylhäällä)</string>
+    <string name="rotate_map_north_opt">Älä käännä (pohjoinen on ylhäällä)</string>
     <string name="phone">puhelin</string>
     <string name="website">Sivusto</string>
     <string name="show_point_options">Käytä sijaintia…</string>

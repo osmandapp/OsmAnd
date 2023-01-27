@@ -570,10 +570,10 @@
     <string name="poi_context_menu_delete">Lösche POI</string>
     <string name="rotate_map_compass_opt">Nach Kompass</string>
     <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Fest (Norden ist oben)</string>
-    <string name="rotate_map_none_rotated_opt">Fest (manuell gedreht)</string>
-    <string name="rotate_map_to_bearing_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to_bearing">Kartenrotation</string>
+    <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
+    <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
+    <string name="rotate_map_to_descr">Kartenausrichtung:</string>
+    <string name="rotate_map_to">Kartenrotation</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
@@ -4755,7 +4755,7 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald ein Zwischenpunkt passiert ist, wird die Entfernung zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
+    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
     <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
@@ -4961,7 +4961,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenaufgang und Sonnenuntergang an.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
-    <string name="storage_migration_fragment_close_descr">Das Kopieren ist erfolgt für %1$s%%. Wenn Sie jetzt abbrechen, funktioniert die Anwendung möglicherweise nicht richtig.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s%% abgeschlossen. Bei Abbruch funktioniert die Anwendung möglicherweise nicht richtig.</string>
     <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
@@ -4986,7 +4986,7 @@
     <string name="release_4_4_pre">• Hier werden die Strings für die Version 4.4 sein</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Windböen-Isolinien</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
     <string name="shared_string_expires">Abgelaufen</string>
     <string name="shared_string_purchased_on">Gekauft am</string>
     <string name="choose_what_to_sync">Wählen Sie, was synchronisiert werden soll</string>
@@ -5021,10 +5021,10 @@
     <string name="res_unknown">Unbekannt</string>
     <string name="shared_string_modified">Geändert</string>
     <string name="checking_progress">Prüfung…</string>
-    <string name="cloud_no_conflicts">Es gibt keine Konflikte</string>
+    <string name="cloud_no_conflicts">Es gibt keine Konflikte.</string>
     <string name="cloud_all_changes_uploaded_descr">Alle auf diesem Gerät vorgenommenen Änderungen werden mit OsmAnd Cloud synchronisiert.</string>
     <string name="download_cloud_version">Cloud-Version herunterladen</string>
-    <string name="av_audio_format_bottom_sheet_descr">Audio-Ausgabe-Format auswählen. Dateitypformat für Audio is 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Audio-Format auswählen. Das Dateityp-Containerformat für Audio ist 3GPP (.3gp).</string>
     <string name="si_nm_ft">Seemeilen/Fuß</string>
     <string name="si_nm_mt">Seemeilen/Meter</string>
     <string name="set_up_backup">Backup einrichten</string>
@@ -5035,4 +5035,10 @@
     <string name="skip_download">Download überspringen</string>
     <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
     <string name="share_link">Partilhar a ligação</string>
+    <string name="sound_beep_simple">Signalton: Einfach</string>
+    <string name="sound_beep_minimal">Signalton: Minimal</string>
+    <string name="weight_limit_error">Der Mindestwert ist \"%1$s\" Tonnen. Verwenden Sie das Profil \"%2$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="sound_beep_complex_loud">Signalton: Komplex, laut</string>
+    <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
+    <string name="sound_beep_complex">Signalton: Komplex</string>
 </resources>

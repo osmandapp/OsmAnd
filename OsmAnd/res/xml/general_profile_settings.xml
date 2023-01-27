@@ -17,7 +17,7 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="rotate_map"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/rotate_map_to_bearing" />
+		android:title="@string/rotate_map_to" />
 
 	<SwitchPreferenceCompat
 		android:key="enable_3d_view"
