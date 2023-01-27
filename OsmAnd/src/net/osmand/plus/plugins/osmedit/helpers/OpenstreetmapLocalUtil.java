@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
-import static net.osmand.data.Amenity.LCN_REF;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 import androidx.annotation.NonNull;
@@ -133,10 +132,11 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			}
 		}
 		String name = mapObject.getName();
-		if (!Algorithms.isEmpty(name) && (amenity == null ||
-				!Algorithms.stringsEqual(amenity.getRef(), name)
-						&& !Algorithms.stringsEqual(amenity.getSubType(), LCN_REF))) {
-			entity.putTagNoLC(OSMTagKey.NAME.getValue(), name);
+		if (!Algorithms.isEmpty(name)) {
+			if (amenity == null || !Algorithms.stringsEqual(amenity.getRef(), name)
+							&& !amenity.getSubType().endsWith("_ref")) {
+				entity.putTagNoLC(OSMTagKey.NAME.getValue(), name);
+			}
 		}
 		if (amenity != null) {
 			if (!Algorithms.isEmpty(amenity.getOpeningHours())) {
