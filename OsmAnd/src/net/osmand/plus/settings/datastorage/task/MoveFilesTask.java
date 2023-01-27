@@ -106,8 +106,12 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 
 	@Override
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
+		File destinationDir = new File(to.getDirectory());
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
-		FileCopyListener fileCopyListener = getCopyFilesListener();
+		if (!FileUtils.isWritable(destinationDir, true)) {
+			return errors;
+		}
+		CopyFilesListener copyFilesListener = getCopyFilesListener();
 
 		long remainingSize = filesSize.first;
 		long totalSize = filesSize.second / 1024;
@@ -130,6 +134,8 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				String error = copyFile(from.getDirectory(), to.getDirectory(), filePathWithoutStorage, fileName, outputDirectory, fileCopyListener);
 				if (error != null) {
 					errors.put(fileName, new Pair<>(error, fileLength));
+				} else {
+					file.delete();
 				}
 				fileCopyListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 			} else {
@@ -137,7 +143,6 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				int deltaProgress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
 				fileCopyListener.onFileCopyFinished(fileName, deltaProgress);
 			}
-			file.delete();
 			publishProgress(new Pair<>(files.size() - i, remainingSize));
 		}
 		progressHelper.onFinishTask();
