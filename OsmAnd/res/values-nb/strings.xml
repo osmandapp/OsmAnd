@@ -4724,7 +4724,7 @@
     <string name="average_speed_skip_stops_desc">Hastighet under %1$s tas med og har innvirkning på gjen. hastighet.</string>
     <string name="compass_always_hidden">Alltid skjult</string>
     <string name="compass_always_visible">Alltid synlig</string>
-    <string name="compass_click_desc">Trykk på kompasset for å bytte kartretningsmodus.</string>
+    <string name="compass_click_desc">Hint: Trykk på kompassmodulen for å skifte kartorienteringsmodusen.</string>
     <string name="compass_desc">Viser retning mot nord.</string>
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
@@ -4855,7 +4855,7 @@
 \nTrykk med 2 fingre på kartet for å vise avstanden mellom de trykte punktene.</string>
     <string name="shared_string_purchased_on">Kjøpt</string>
     <string name="si_nm_ft">Sjømil/fot</string>
-    <string name="cloud_no_conflicts">Ingen konflikter</string>
+    <string name="cloud_no_conflicts">Det er ingen konflikter.</string>
     <string name="download_cloud_version">Last ned sky-verjson</string>
     <string name="shared_string_do_not_exist">Finnes ikke</string>
     <string name="backup_error_failed_to_fetch_remote_items">Klarte ikke å hente fillisten fra tjeneren.</string>
@@ -4887,4 +4887,9 @@
     <string name="determine_location">Tillat at posisjonen din bestemmes</string>
     <string name="y_axis">Y-akse</string>
     <string name="x_axis">X-akse</string>
+    <string name="sound_beep_simple_loud">Lydsignal: enkelt, høyt</string>
+    <string name="sound_beep_simple">Lydsignal: enkelt</string>
+    <string name="sound_beep_complex">Lydsignal: komplekst</string>
+    <string name="sound_beep_minimal">Lydsignal: minimalt</string>
+    <string name="sound_beep_complex_loud">Lydsignal: komplekst, høyt</string>
 </resources>
