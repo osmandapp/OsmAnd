@@ -361,8 +361,12 @@ public class RenderingRulesStorage {
 			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
 				String attr = attrsMap.get("name");
 				RenderingRule root = new RenderingRule(new HashMap<String, String>(), false, RenderingRulesStorage.this);
-				renderingAttributes.put(attr, root);
 				stack.push(root);
+				if(renderingAttributes.containsKey(attr)) {
+					renderingAttributes.get(attr).addIfElseChildren(root);
+				} else {
+					renderingAttributes.put(attr, root);
+				}
 			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
 				String attr = attrsMap.get("attr");
 				RenderingRuleProperty prop;
