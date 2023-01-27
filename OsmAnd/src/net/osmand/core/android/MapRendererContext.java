@@ -310,7 +310,7 @@ public class MapRendererContext {
 			if (!heightMapDir.exists()) {
 				heightMapDir.mkdir();
 			}
-			File sqliteCacheDir = app.getAppPath(GEOTIFF_SQLITE_CACHE_DIR);
+			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
 			if (!sqliteCacheDir.exists()) {
 				sqliteCacheDir.mkdir();
 			}
