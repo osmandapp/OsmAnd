@@ -100,7 +100,11 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 
 	@Override
 	protected Map<String, Pair<String, Long>> doInBackground(Void... params) {
+		File destinationDir = new File(to.getDirectory());
 		Map<String, Pair<String, Long>> errors = new HashMap<>();
+		if (!FileUtils.isWritable(destinationDir, true)) {
+			return errors;
+		}
 		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize.second / 1024);
 
 		long remainingSize = filesSize.first;
@@ -123,6 +127,8 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				String error = copyFile(from.getDirectory(), to.getDirectory(), filePathWithoutStorage, fileName, outputDirectory, copyFilesListener);
 				if (error != null) {
 					errors.put(fileName, new Pair<>(error, fileLength));
+				} else {
+					file.delete();
 				}
 				copyFilesListener.onFileCopyFinished(fileName, FileUtils.APPROXIMATE_FILE_SIZE_BYTES / 1024);
 			} else {
@@ -130,7 +136,6 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 				int progress = (int) ((fileLength + FileUtils.APPROXIMATE_FILE_SIZE_BYTES) / 1024);
 				copyFilesListener.onFileCopyFinished(fileName, progress);
 			}
-			file.delete();
 			publishProgress(new Pair<>(files.size() - i, remainingSize));
 		}
 		return errors;
@@ -183,7 +188,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 	private void changeStorage(@Nullable Map<String, Pair<String, Long>> errors) {
 		Context ctx = context.get();
 
-		if (ctx != null && Algorithms.isEmpty(errors)) {
+		if (ctx != null && !Algorithms.isEmpty(errors)) {
 			Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
 		}
 
