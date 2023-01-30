@@ -2815,7 +2815,7 @@
     <string name="step_by_step">按步驟</string>
     <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">離開於</string>
-    <string name="sit_on_the_stop">站點的座位</string>
+    <string name="sit_on_the_stop">上車站點</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選軌跡的按鈕。</string>
     <string name="send_log">傳送紀錄檔</string>
     <string name="routing_attr_avoid_tram_name">避免電車</string>
