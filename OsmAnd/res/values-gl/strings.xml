@@ -4124,4 +4124,5 @@ Lon %2$s</string>
     <string name="storage_migration_fragment_close_descr">A copia realízase durante %1$s%%. Se paras agora, é posible que a aplicación non funcione correctamente.</string>
     <string name="quick_action_temperature_layer">Un botón para amosar ou ocultala capa da temperatura no mapa.</string>
     <string name="quick_action_air_pressure_layer">Un botón para amosar ou ocultala capa das presións do aire no mapa.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

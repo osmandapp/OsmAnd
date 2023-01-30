@@ -5046,4 +5046,5 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

@@ -19,4 +19,5 @@
     <string name="shared_string_status"/>
     <string name="shared_string_sort"/>
     <string name="shared_string_back"/>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

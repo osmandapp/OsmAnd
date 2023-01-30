@@ -2123,4 +2123,5 @@
     <string name="app_mode_osm">OSM</string>
     <string name="app_mode_car">Automobila</string>
     <string name="app_mode_default">Mapa de basa</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

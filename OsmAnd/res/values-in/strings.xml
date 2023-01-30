@@ -5041,4 +5041,5 @@
     <string name="sound_beep_simple_loud">Bip: sederhana keras</string>
     <string name="sound_beep_complex">Bip: kompleks</string>
     <string name="sound_beep_complex_loud">Bip: kompleks keras</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

@@ -5027,4 +5027,5 @@
     <string name="sound_beep_simple_loud">Bip : simple fort</string>
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

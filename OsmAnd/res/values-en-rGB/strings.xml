@@ -198,4 +198,5 @@
     <string name="routing_attr_avoid_highway_name">Avoid motorways</string>
     <string name="routing_attr_allow_private_for_truck_name">Allow private access (lorry)</string>
     <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for lorries.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

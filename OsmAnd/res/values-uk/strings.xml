@@ -5036,4 +5036,5 @@
     <string name="sound_beep_minimal">Звуковий сигнал: мінімальний</string>
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

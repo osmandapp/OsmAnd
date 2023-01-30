@@ -575,4 +575,5 @@
     <string name="lang_zh_hk">Tiếng Trung (Hồng Kông)</string>
     <string name="layer_gpx_layer">Theo dõi</string>
     <string name="width_limit_description">Cung cấp chiều rộng của chiếc xe của bạn, một số tuyến đường có thể hạn chế các phương tiện quá rộng.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

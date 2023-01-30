@@ -2954,4 +2954,5 @@
     <string name="please_provide_point_name_error">Խնդրում ենք մուտքագրել կետի անունը</string>
     <string name="quick_action_remove_next_destination_descr">Երթուղու ընթացիկ նպատակակետը կջնջվի: Եթե դա նպատակակետն է, նավարկումը կդադարի։</string>
     <string name="search_download_wikipedia_maps">Ներբեռնել Վիքիպեդիայի քարտեզները</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

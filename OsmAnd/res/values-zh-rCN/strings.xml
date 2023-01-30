@@ -4888,4 +4888,5 @@
     <string name="edit_profiles">编辑配置文件</string>
     <string name="shared_string_sunset">日落</string>
     <string name="shared_string_sunrise">日出</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

@@ -5030,4 +5030,5 @@
     <string name="weight_limit_error">A minimális érték \"%1$s\" tonna. Használja a(z) „%2$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
     <string name="sound_beep_simple_loud">Hangjelzés: egyszerű hangos</string>
     <string name="sound_beep_simple">Hangjelzés: egyszerű</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

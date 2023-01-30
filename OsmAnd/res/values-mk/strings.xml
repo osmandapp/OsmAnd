@@ -4761,4 +4761,5 @@
     <string name="rendering_attr_depthContourColorScheme_description">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourWidth_description">Sirina na konturnata linija na dlabocina</string>
     <string name="next_turn_widget_desc">Vidzetot prikazuva informacii za vaseto sledno vrtenje so slika na manevriranje i rastojanie do nego.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

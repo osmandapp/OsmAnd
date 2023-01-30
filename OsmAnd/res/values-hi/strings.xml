@@ -169,4 +169,5 @@
     <string name="lang_gu">गुजराती</string>
     <string name="custom_color">असामान्य रंग</string>
     <string name="extra_maps_menu_group">ज़्यादा मापें</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

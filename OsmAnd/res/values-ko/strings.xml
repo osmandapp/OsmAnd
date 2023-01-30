@@ -2924,4 +2924,5 @@
     <string name="shared_string_legal">법적고지</string>
     <string name="privacy_and_security_change_descr">%1$s에 동의하면 \"허용\"을 누릅니다.</string>
     <string name="settings_privacy_and_security">개인 정보 보호 및 보안</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

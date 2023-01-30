@@ -2902,4 +2902,5 @@
     <string name="shared_string_move_up">გადაადგილება ↑</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

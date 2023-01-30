@@ -3,4 +3,5 @@
 
 	<string name="map_widget_gps_info">Impormasyon ng GPS</string>
     <string name="access_arrival_time">Oras ng Pagdating</string>
-    </resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

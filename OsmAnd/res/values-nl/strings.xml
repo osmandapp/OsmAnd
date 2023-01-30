@@ -4991,4 +4991,5 @@
     <string name="shared_storage_warning_description">Als gevolg van nieuwe Androidregels, zal OsmAnd 4.2 vanaf november 2021 geen toegang meer hebben tot Gedeelde opslag.
 \n
 \nVerplaats de datafolder alstublieft van Gedeelde opslag naar beschikbare opslag, anders zal de app de toegang verliezen tot je data zoals offline kaarten, GPX-routes, etc.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

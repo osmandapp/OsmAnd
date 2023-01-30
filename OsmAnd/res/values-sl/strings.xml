@@ -4972,4 +4972,5 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinije padavin</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izolinije sunkov vetra</string>
     <string name="shared_string_open">Odpri</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

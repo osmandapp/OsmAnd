@@ -5024,4 +5024,5 @@
     <string name="share_as_file">分享為檔案</string>
     <string name="value_downloaded_of_mb">下載 %1$.1f/%2$.1f MB</string>
     <string name="determine_location">讓我們確定您的位置</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

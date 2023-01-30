@@ -4232,4 +4232,5 @@
     <string name="temperature_widget_desc">Mostra la temperatura per al centre del mapa actual.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="cloud_changes">Canvis al núvol</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

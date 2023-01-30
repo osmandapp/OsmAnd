@@ -56,4 +56,5 @@
 	<string name="first_time_msg">Faleminderit që përdorni OsmAnd. Për shumë përfitime të këtij programi ju keni nevojë për disa të dhëna regjonale \"offline\" të cilat ju mund ti shkarkoni tek \"Ndryshimet\" → \"Menagjo skedarët e hartave\". Më pas ju do të jeni në gjendje të shihni hartat, gjeni adresat, shikoni pikat e interesit, dhe të gjeni transportin publik.</string>
 	<string name="favorite_home_category">Shtëpia</string>
 	<string name="local_index_action_do">Ju jeni përafërsisht të %1$s %2$s elemente. Dëshironi të vazhdoni?</string>
-	</resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

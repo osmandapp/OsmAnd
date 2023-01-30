@@ -3869,4 +3869,5 @@
     <string name="shared_string_empty">Κενό</string>
     <string name="routing_attr_allow_streams_description">Επιτρέψτε ρέματα και οχετούς</string>
     <string name="routing_attr_height_obstacles_description">Ο προβλεπόμενος χρόνος ταξιδιού θα αντανακλά αντίκτυπο υψομέτρου. Η προτίμηση δρομολόγησης μπορεί να βοηθήσει στην αποφυγή απότομων ανηφοριών:</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

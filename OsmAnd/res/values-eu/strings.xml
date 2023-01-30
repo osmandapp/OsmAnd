@@ -4855,4 +4855,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="si_nm_mt">Mila nautiko/metro</string>
     <string name="si_nm_ft">Mila nautiko/oin</string>
     <string name="av_audio_format_bottom_sheet_descr">Hautatu audio irteera formatua. Audiorako fitxategi formatua 3GPP (.3gp) da.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

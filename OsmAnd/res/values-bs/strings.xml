@@ -108,4 +108,5 @@
     <string name="map_widget_gps_info">GPS status</string>
     <string name="shared_string_no">Ne</string>
 	<string name="shared_string_yes">Da</string>
-	</resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

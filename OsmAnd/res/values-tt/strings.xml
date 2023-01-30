@@ -139,4 +139,5 @@
     <string name="mapillary_menu_title_username">Кулланучы исеме</string>
     <string name="mapillary_menu_title_dates">Дата</string>
     <string name="shared_string_install">Урнаштыру</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

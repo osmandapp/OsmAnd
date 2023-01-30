@@ -1349,4 +1349,5 @@
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
     <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
     <string name="shared_string_is_saved"/>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

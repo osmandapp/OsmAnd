@@ -4892,4 +4892,5 @@
     <string name="sound_beep_complex">Lydsignal: komplekst</string>
     <string name="sound_beep_minimal">Lydsignal: minimalt</string>
     <string name="sound_beep_complex_loud">Lydsignal: komplekst, høyt</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

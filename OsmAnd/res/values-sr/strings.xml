@@ -5017,4 +5017,5 @@
     <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
     <string name="no_altitude_data_desc">Ради пријема података %1$s, придодајте своју стазу путу или прорачунајте је на мрежи.</string>
     <string name="set_up_backup">Постави складиште</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

@@ -2,4 +2,5 @@
 <resources>
     <string name="shared_string_identifiers">شناختی</string>
     <string name="shared_string_large">وڈا</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

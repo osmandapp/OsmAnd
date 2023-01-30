@@ -249,4 +249,5 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kart og navigering</string>
 	<string name="recalculate_route_to_your_location">Transportmodus</string>
 	<string name="select_destination_and_intermediate_points">Merk vegpunkt</string>
-    </resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

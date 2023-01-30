@@ -3,4 +3,5 @@
 <string name="nothing_found_in_radius">Nìcks isch im gefun</string>
     <string name="select_waypoints_category_description">"Ihr kinne "</string>
     <string name="will_open_tomorrow_at">Isch muaje uff àm</string>
-    </resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

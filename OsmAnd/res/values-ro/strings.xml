@@ -5037,4 +5037,5 @@
     <string name="si_nm_mt">Mile nautice/metri</string>
     <string name="si_nm_ft">Mile nautice/picioare</string>
     <string name="av_audio_format_bottom_sheet_descr">Selectați formatul audio. Formatul fișierului este 3GPP (.3gp).</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

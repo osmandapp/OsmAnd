@@ -4876,4 +4876,5 @@
     <string name="rendering_attr_depthContourWidth_name">Таўшчыня ізабат</string>
     <string name="depth_contour_lines">Ізабаты</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

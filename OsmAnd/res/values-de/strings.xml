@@ -5041,4 +5041,5 @@
     <string name="sound_beep_complex_loud">Signalton: Komplex, laut</string>
     <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
     <string name="sound_beep_complex">Signalton: Komplex</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

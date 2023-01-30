@@ -1695,4 +1695,5 @@
     <string name="copy_address">Adresu kopěrować</string>
     <string name="map_widget_target_distance_desc">Widget pokazuje zdalenosć mjez kameru a cilowej městnosću.</string>
     <string name="depth_contours">Hłubokostne kontury</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

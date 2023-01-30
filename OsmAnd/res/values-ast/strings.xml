@@ -4387,4 +4387,5 @@
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="icon_group_nautical">Nautical</string>
     <string name="continue_on_phone">Continue on Phone</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

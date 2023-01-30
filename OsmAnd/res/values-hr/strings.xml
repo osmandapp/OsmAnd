@@ -1492,4 +1492,5 @@
     <string name="m_s">m/s</string>
     <string name="external_sensors_plugin_name">Vanjski senzor</string>
     <string name="current_location_widget">Trenutni položaj</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

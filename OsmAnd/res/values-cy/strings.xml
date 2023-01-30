@@ -4121,4 +4121,5 @@
     <string name="no_camera_permission">Caniatáu mynediad camera.</string>
     <string name="get_it">Cael</string>
     <string name="share_geo">geo:</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

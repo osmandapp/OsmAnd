@@ -4618,4 +4618,5 @@ POIの更新は利用できません</string>
     <string name="cloud_conflict">競合</string>
     <string name="cloud_recent_changes">変更</string>
     <string name="cloud_all_changes_uploaded">すべての変更点がアップロードされました</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

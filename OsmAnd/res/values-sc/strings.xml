@@ -5029,4 +5029,5 @@
     <string name="download_cloud_version">Iscàrriga sa versione de sa nue</string>
     <string name="import_export">Importa/Esporta</string>
     <string name="export_to_file">Esporta a unu documentu</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

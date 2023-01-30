@@ -5025,4 +5025,5 @@
     <string name="sound_beep_minimal">Bip: minimale</string>
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

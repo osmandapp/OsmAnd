@@ -16,4 +16,5 @@
     <string name="search_map_hint">Хот болон улс хайх</string>
     <string name="custom_search">Чөлөөт хайлт</string>
     <string name="coords_search">Координат хайх</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>

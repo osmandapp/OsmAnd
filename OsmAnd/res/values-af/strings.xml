@@ -1069,4 +1069,5 @@
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlaktes</string>
     <string name="what_is_here">Wat is hier:</string>
-    </resources>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
+</resources>

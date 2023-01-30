@@ -4873,4 +4873,5 @@
     <string name="show_borders_of_downloaded_maps">İndirilen haritaların sınırlarını göster</string>
     <string name="show_map_symbols">Harita sembollerini göster</string>
     <string name="show_map_symbols_desc">Metin, yol işaretleri ve diğerleri.</string>
+    <string name="appstore_app_name">OsmAnd — Maps &amp; GPS Offline</string>
 </resources>
