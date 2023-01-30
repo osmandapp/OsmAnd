@@ -573,7 +573,7 @@
     <string name="app_mode_car">Auto</string>
     <string name="app_mode_bicycle">Fiets</string>
     <string name="app_mode_pedestrian">Voetganger</string>
-    <string name="position_on_map_center">Gecentreerd</string>
+    <string name="position_on_map_center">Midden</string>
     <string name="position_on_map_bottom">Onderaan</string>
     <string name="navigate_point_top_text">Breedte- en lengtegraad in het geselecteerde formaat invoeren (D - graden, M - minuten, S - seconden)</string>
     <string name="navigate_point_latitude">Breedtegraad</string>
@@ -4108,13 +4108,13 @@
     <string name="backup_error_no_subscription">Geen abonnement gevonden</string>
     <string name="map_updates_for_mappers">Kaart updates voor OSM bijdragers</string>
     <string name="benefits_for_contributors">Voordelen voor actieve OSM bijdragers</string>
-    <string name="benefits_for_contributors_primary_descr">Je hebt misschien recht op onbeperkte uurlijkse kaart updates als je een actieve bijdrager bent aan OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Actieve OpenStreetMap.org bijdragers hebben misschien recht op onbeperkte uurlijkse kaartupdates.</string>
     <string name="benefits_for_contributors_secondary_descr">Log in op OpenStreetMap om te controleren of je recht hebt op onbeperkte maandelijkse en uurlijkse kaart updates.</string>
     <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
     <string name="available_until">Beschikbaar tot %1$s</string>
     <string name="enough_contributions_descr">Proficiat, je hebt genoeg OpenStreetMap bijdragen geleverd en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
     <string name="shared_string_contributions">Bijdragen</string>
-    <string name="contributions_may_calculate_with_delay">Het berekenen van de bijdragen kan enkele uren duren.</string>
+    <string name="contributions_may_calculate_with_delay">Het berekenen van bijdragen kan enkele uren duren.</string>
     <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
     <string name="connect_track_points_as">Routepunten verbinden</string>
     <string name="pro_features">Pro functies</string>
@@ -4144,7 +4144,7 @@
     <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment via de Amazon app</string>
     <string name="no_activity_for_intent">Installeer een app die deze actie kan uitvoeren.</string>
     <string name="no_items_of_type_message">Je heb geen items van dit type</string>
-    <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
+    <string name="routeInfo_smoothness_description">Classificatie voor de manoeuvreerbaarheid van een weg/pad voor wielvoertuigen, in het bijzonder de regelmatigheid en vlakte van de ondergrond.</string>
     <string name="shared_string_files">Bestanden</string>
     <string name="travel_route_types">Routetypes</string>
     <string name="sample_wikivoyage">Voorbeeld van Wikivoyage</string>
@@ -4186,7 +4186,7 @@
     <string name="on_hold_since">Op pauze gezet sinds %1$s</string>
     <string name="backup_deleting_all_data_descr">Gelieve te wachten totdat de gegevens op OsmAnd cloud zijn verwijderd. Alle gegevens op het lokale apparaat blijven onaangetast.</string>
     <string name="exit_pan_mode_descr">Tik op selecteren om de meedraai modus te verlaten</string>
-    <string name="amz_manage_subscription_descr">Om je abonnement te beheren maak je gebruik van de Amazon app op je toestel of open je je profiel op de Amazon.com website.</string>
+    <string name="amz_manage_subscription_descr">Beheer je abonnement door gebruik te maken van de Amazon app of de Amazon website.</string>
     <string name="osm_live_payment_subscription_management_amz">De betaling wordt in rekening gebracht op je Amazon account wanneer je de aankoop bevestigt.
 \n
 \nHet abonnement wordt automatisch verlengd tenzij het is geannuleerd voor de vernieuwingsdatum.
@@ -4684,7 +4684,7 @@
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="routing_attr_freeride_policy_allow_name">Toestaan</string>
     <string name="explore_weather_forecast">Weersvoorspelling ontdekken</string>
-    <string name="storage_migration_fragment_close_descr">Kopiëren voor %1$s%% voltooid. Als u nu stopt, zou de app niet goed kunnen werken.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiëren slechts %1$s%% voltooid. Als u nu stopt, zou de app niet goed kunnen werken.</string>
     <string name="map_widget_sunset_desc">Toont het tijdstip van - of de tijd tot zonsondergang.</string>
     <string name="depth_contour_lines">Diepte van hoogtelijnen</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -4750,7 +4750,7 @@
     <string name="choose_what_to_sync">Kies wat u wil synchroniseren</string>
     <string name="cloud_sync_progress">Synchroniseren... %1$s</string>
     <string name="checking_progress">Controleren…</string>
-    <string name="local_file_will_be_restored">Lokaal bestand zal worden hersteld</string>
+    <string name="local_file_will_be_restored">Het lokaal bestand zal worden hersteld</string>
     <string name="local_changes_will_be_dismissed">Lokale aanpassingen zullen genegeerd worden</string>
     <string name="cloud_conflicts">Tegenstrijdigheden</string>
     <string name="weather_wind_mph">mijl/u</string>
@@ -4773,13 +4773,13 @@
     <string name="deleted_file">Verwijderd bestand</string>
     <string name="sync_now">Nu synchroniseren</string>
     <string name="upload_change">Aanpassing uploaden</string>
-    <string name="cloud_version_will_be_removed">Cloud versie zal worden verwijderd</string>
-    <string name="cloud_changes_will_be_dismissed">Cloud aanpassingen zullen genegeerd worden</string>
+    <string name="cloud_version_will_be_removed">De cloud versie zal worden verwijderd</string>
+    <string name="cloud_changes_will_be_dismissed">De cloud aanpassingen zullen genegeerd worden</string>
     <string name="cloud_conflict">Tegenstrijdigheid</string>
     <string name="cloud_recent_changes">Aanpassingen</string>
     <string name="cloud_all_changes_uploaded">Alle aanpassingen geüpload</string>
     <string name="cloud_all_changes_uploaded_descr">Alle aanpassingen op dit toestel zijn gesynchroniseerd met de cloud van OsmAnd.</string>
-    <string name="cloud_no_conflicts">Er zijn geen tegenstrijdigheden</string>
+    <string name="cloud_no_conflicts">Er zijn geen tegenstrijdigheden.</string>
     <string name="download_cloud_version">Cloud versie downloaden</string>
     <string name="backup_error_failed_to_fetch_remote_items">Kon de bestandslijst niet van de server ophalen.</string>
     <string name="open_weather_action">Weersvoorspelling zien</string>
@@ -4872,7 +4872,7 @@
     <string name="second_next_turn_widget_desc">De widget toont informatie over uw tweede afslag, die ingeschakeld wordt zodra uw eerste afslag benaderd wordt.</string>
     <string name="compass_visible_if_map_rotated_desc">Verborgen wanneer het noorden boven is</string>
     <string name="compass_visible_if_map_rotated">Zichtbaar wanneer kaart gedraaid is</string>
-    <string name="compass_click_desc">Druk op kompas om oriëntatie van kaart te wisselen.</string>
+    <string name="compass_click_desc">Hint: Druk op het kompaswidget om de oriëntatie van kaart te wisselen.</string>
     <string name="accessibility_2d_view_on">2,5D zicht aan</string>
     <string name="routing_attr_goods_restrictions_name">Bezorging van goederen</string>
     <string name="routing_attr_goods_restrictions_description">Denk over toegang voor lichte transportvoertuigen</string>
@@ -4932,7 +4932,7 @@
     <string name="cloud_all_changes_downloaded">Alle aanpassingen gedownload</string>
     <string name="cloud_layer">Wolken laag</string>
     <string name="rendering_attr_weatherCloudContours_name">Contourlijnen van wolken</string>
-    <string name="rendering_attr_showMtbScale_description">Paden tonen volgens MTB moeilijkheidsgraad.</string>
+    <string name="rendering_attr_showMtbScale_description">Paden tonen volgens hun MTB moeilijkheidsgraad.</string>
     <string name="pressure_layer">Luchtdruk laag</string>
     <string name="quick_action_cloud_layer">Een schakel om de wolken op de kaart te tonen of verbergen.</string>
     <string name="wind_layer">Wind laag</string>
@@ -4956,5 +4956,39 @@
     <string name="approx_safe_mode">Veilige GPX benadering</string>
     <string name="si_nm_mt">Zeemijlen/meter</string>
     <string name="si_nm_ft">Zeemijlen/voet</string>
-    <string name="av_audio_format_bottom_sheet_descr">Kies audio uitvoer bestandstype. Bestandstype voor audio is 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Kies een audio bestandstype. Bestandstype voor audio is 3GPP (.3gp).</string>
+    <string name="routeInfo_tracktype_description">Kleur de route of tracklijn op basis van de samenstelling van het oppervlak. Typisch aangezet wanneer het wegennet grotendeels onverhard is.</string>
+    <string name="weight_limit_error">Minimumwaarde is \"%1$s\" ton. Gebruik het \"%2$s\"-profiel als het voertuig minder weegt dan de minimumwaarde.</string>
+    <string name="share_link">Deel link</string>
+    <string name="weather_online_cache">Online cache</string>
+    <string name="not_enough_contributions_descr">Een minimum van %1$s wijzigingen over een periode van de laatste twee maanden %2$s is nodig om toegang te krijgen tot onbeperkte kaartupdates elk uur.</string>
+    <string name="release_4_3">• Nieuwe, snellere Versie 2 kaartrenderer en 2.5D-aanzicht
+\n
+\n • Vloeiende animatie van locatieveranderingen wanneer je in beweging bent
+\n
+\n • Nieuw widget voor coördinaten van het midden van de kaart en hoogte van geolocaties
+\n
+\n • \"Afstand bij tikken\": Optie voor tekstgrootte toegevoegd
+\n
+\n • \"Kaartmarkering\" widget: Optie toegepast om het gedrag bij tikken aan te passen
+\n
+\n • \"Plaatsen van positie\"-optie hersteld
+\n
+\n • GPX: Ondersteuning voor \"link\", \"cmt\", \"desc\" tags en voor elke aangepaste extensie.
+\n
+\n • Volgorde \"Nautische kaarten\"-lijst aangepast
+\n
+\n • Ondersteuning vant ANT+-sensoren toegevoegd
+\n
+\n • Optie teogevoegd om UUID download uit te schakelen
+\n
+\n • Standaardsnelheid aanpasbare voorspelling voor hoogte-afhankelijke wandeling/trek/loop triptijden
+\n
+\n • Audio-ouput en volume-instellingen hersteld.
+\n
+\n</string>
+    <string name="approx_safe_mode_description">Voer de GPX benadering uit met tragere Android in plaats van met de eigen code.</string>
+    <string name="shared_storage_warning_description">Als gevolg van nieuwe Androidregels, zal OsmAnd 4.2 vanaf november 2021 geen toegang meer hebben tot Gedeelde opslag.
+\n
+\nVerplaats de datafolder alstublieft van Gedeelde opslag naar beschikbare opslag, anders zal de app de toegang verliezen tot je data zoals offline kaarten, GPX-routes, etc.</string>
 </resources>

@@ -4941,7 +4941,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
     <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet l’affichage en 2.5D. La version 1 était utilisée jusqu\'à OsmAnd 4.3 et reste recommandée pour les smartphones plus anciens.</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Contour des rafales de vent</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la version 1 du moteur de rendu de la carte. Pour essayer la version 2 (OpenGL), allez dans les paramètres.
 \n
 \nAfin de nous aider à améliorer l\'application, merci de nous envoyer vos journaux d\'erreur.</string>
@@ -5022,4 +5022,9 @@
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
     <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profile \"%2$s\".</string>
+    <string name="sound_beep_complex">Bip : complexe</string>
+    <string name="sound_beep_minimal">Bip : minimal</string>
+    <string name="sound_beep_simple_loud">Bip : simple fort</string>
+    <string name="sound_beep_complex_loud">Bip : complexe fort</string>
+    <string name="sound_beep_simple">Bip : simple</string>
 </resources>
