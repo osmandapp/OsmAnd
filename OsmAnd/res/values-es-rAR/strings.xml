@@ -5047,7 +5047,7 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
-    <string name="weight_limit_error">El valor mínimo es de «%1$s» toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_minimal">Pitido: mínimo</string>
     <string name="sound_beep_simple">Pitido: simple</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
