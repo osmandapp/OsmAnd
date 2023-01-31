@@ -2,6 +2,7 @@ package net.osmand.plus.settings.datastorage;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
@@ -205,8 +206,10 @@ public class DataStorageHelper {
 				.setDirectories(
 						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(TILES_INDEX_DIR, false, PREFIX, false),
-						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true))
+						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
 				.setPrefixes("Hillshade", "Slope")
+				.setExtensions(IndexConstants.TIF_EXT)
 				.createItem();
 		memoryItems.add(terrainStorageSize);
 
