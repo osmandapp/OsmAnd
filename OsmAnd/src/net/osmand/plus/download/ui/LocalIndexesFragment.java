@@ -318,17 +318,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 		private File getFileToRestore(LocalIndexInfo i) {
+			String fileName = i.getFileName();
 			if (i.isBackupedData()) {
 				File parent = new File(i.getPathToData()).getParentFile();
 				if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
-					if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+					if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 						parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
 					} else {
 						parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 					}
 				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-					if (i.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					if (fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
 						parent = getMyApplication().getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+					} else if (fileName.endsWith(IndexConstants.TIF_EXT)) {
+						parent = getMyApplication().getAppPath(IndexConstants.GEOTIFF_DIR);
 					} else {
 						parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
 					}
@@ -347,7 +350,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
-				return new File(parent, i.getFileName());
+				return new File(parent, fileName);
 			}
 			return new File(i.getPathToData());
 		}
@@ -1022,17 +1025,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 		private String getMapDescription(LocalIndexInfo child) {
+			String fileName = child.getFileName();
 			if (child.getType() == LocalIndexType.TILES_DATA) {
-				if (child.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
-					return ctx.getString(R.string.download_heightmap_maps);
-				} else {
-					return ctx.getString(R.string.online_map);
-				}
-			} else if (child.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+				boolean isHeightmap = fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
+						|| fileName.endsWith(IndexConstants.TIF_EXT);
+				return isHeightmap
+						? ctx.getString(R.string.download_heightmap_maps)
+						: ctx.getString(R.string.online_map);
+			} else if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
-			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			} else if (child.isBackupedData() && fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_wikipedia_maps);
-			} else if (child.isBackupedData() && (SrtmDownloadItem.isSrtmFile(child.getFileName()))) {
+			} else if (child.isBackupedData() && SrtmDownloadItem.isSrtmFile(fileName)) {
 				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";

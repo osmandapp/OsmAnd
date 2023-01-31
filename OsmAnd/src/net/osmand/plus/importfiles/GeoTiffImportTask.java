@@ -1,6 +1,6 @@
 package net.osmand.plus.importfiles;
 
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
 
 import android.net.Uri;
 import android.widget.Toast;
@@ -13,30 +13,24 @@ import net.osmand.plus.base.BaseLoadAsyncTask;
 
 import java.io.File;
 
-class SqliteHeightmapImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+class GeoTiffImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
-	private final String name;
+	private final String targetFileName;
 
-	public SqliteHeightmapImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri, @NonNull String name) {
+	public GeoTiffImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri, @NonNull String name) {
 		super(activity);
 		this.uri = uri;
-		this.name = name;
+		this.targetFileName = name.replace('_', ' ');
 	}
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
-		if (!heightMapDir.exists()) {
-			heightMapDir.mkdir();
+		File geotiffDir = app.getAppPath(GEOTIFF_DIR);
+		if (!geotiffDir.exists()) {
+			geotiffDir.mkdir();
 		}
-//		File[] files = heightMapDir.listFiles();
-//		if (files != null) {
-//			for (File file : files) {
-//				file.delete();
-//			}
-//		}
-		return ImportHelper.copyFile(app, app.getAppPath(HEIGHTMAP_INDEX_DIR + name), uri, false, false);
+		return ImportHelper.copyFile(app, new File(geotiffDir, targetFileName), uri, false, false);
 	}
 
 	@Override
