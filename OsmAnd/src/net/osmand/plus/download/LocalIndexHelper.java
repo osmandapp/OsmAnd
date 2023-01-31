@@ -327,10 +327,10 @@ public class LocalIndexHelper {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile()) {
 					String fileName = tileFile.getName();
-					boolean heightmapFile = fileName.endsWith(SQLiteTileSource.EXT)
+					boolean tilesData = fileName.endsWith(SQLiteTileSource.EXT)
 							|| fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
 							|| fileName.endsWith(IndexConstants.TIF_EXT);
-					if (heightmapFile) {
+					if (tilesData) {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
 				} else if (tileFile.isDirectory()) {
