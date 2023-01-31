@@ -4629,7 +4629,7 @@
     <string name="next_turn_widget_desc">Su widget ammustrat informatziones subra de sa bortada imbeniente tua cun un\'immàgine de sa manovra e sa distàntzia finas a ie.</string>
     <string name="compass_visible_if_map_rotated">Visìbile si sa mapa est rodeada</string>
     <string name="compass_always_visible">Semper visìbile</string>
-    <string name="compass_click_desc">Toca in sa bùssola pro colare dae una modalidade de orientamentu a s\'àtera.</string>
+    <string name="compass_click_desc">Cussìgiu: Toca in sa widget de sa bùssola pro colare dae una modalidade de orientamentu a s\'àtera.</string>
     <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
@@ -4923,7 +4923,7 @@
     <string name="weather_pressure_millimeters_of_mercury">Millìmetros de mercùriu</string>
     <string name="weather_prefs_descr">Previsiones meteorològicas pro 24 oras e 7 dies, agiornadas cada 3 oras</string>
     <string name="action_not_supported_with_map_style">Custa atzione no est suportada dae s\'istile de mapa seletzionadu.</string>
-    <string name="storage_migration_fragment_close_descr">Sa còpia pro %1$s%% est fata. Si agabbas como s\'aplicatzione diat pòdere non funtzionare comente si tocat.</string>
+    <string name="storage_migration_fragment_close_descr">Sa còpia est acabada petzi pro su %1$s%%. Si la firmas como, s\'aplicatzione diat pòdere non funtzionare comente si tocat.</string>
     <string name="shared_string_next_sunset">Intrinada imbeniente</string>
     <string name="shared_string_next_sunrise">Arbèschida imbeniente</string>
     <string name="shared_string_time_left">Tempus chi mancat</string>
@@ -4977,7 +4977,7 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolìnias de sas pretzipitatziones</string>
     <string name="release_4_4_pre">• Inoghe b\'ant a èssere istringas pro sa versione 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolìnias de sas nues</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Isolìnias de sas ufuladas de bentu</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolìnias de sa velotzidade de su bentu</string>
     <string name="open_weather_action_description">Ti permitit de abèrrere un\'ischermada cun informatziones meteorològicas a sa minuda.</string>
     <string name="shared_string_open">Aberi</string>
     <string name="open_weather_action">Aberi su mèteu</string>
@@ -4990,7 +4990,7 @@
     <string name="set_up_backup">Imposta sa còpia de seguresa</string>
     <string name="si_nm_mt">Mìllios nàuticos/metros</string>
     <string name="si_nm_ft">Mìllios nàuticos/pees</string>
-    <string name="av_audio_format_bottom_sheet_descr">Seletziona su formadu de essida de s\'àudio. Su formadu de sa casta de documentu pro s\'àudio est 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Seletziona unu formadu àudio. Su formadu cuntenidore de sa casta de documentu pro s\'àudio est 3GPP (.3gp).</string>
     <string name="check_for_updates">Chirca agiornamentos</string>
     <string name="changes">Modìficas %1$s</string>
     <string name="cloud_changes">Modìficas in sa nue</string>
@@ -5007,7 +5007,7 @@
     <string name="local_changes">Modìficas locales</string>
     <string name="cloud_conflicts">Cunflitos</string>
     <string name="cloud_recent_changes">Modìficas</string>
-    <string name="cloud_no_conflicts">Non bi sunt cunflitos</string>
+    <string name="cloud_no_conflicts">Non bi sunt cunflitos.</string>
     <string name="last_sync">Ùrtima sincronizatzione</string>
     <string name="shared_string_expires">Iscadit</string>
     <string name="shared_string_purchased_on">Comporadu su</string>
@@ -5027,6 +5027,12 @@
     <string name="cloud_all_changes_uploaded_descr">Totu sas modìficas fatas in custu dispositivu sunt sincronizadas cun OsmAnd Cloud.</string>
     <string name="backup_error_failed_to_fetch_remote_items">Recùperu de sa lista de documentos dae su serbidore fallidu.</string>
     <string name="download_cloud_version">Iscàrriga sa versione de sa nue</string>
-    <string name="import_export">Importa/Esporta</string>
+    <string name="import_export">Importa/esporta</string>
     <string name="export_to_file">Esporta a unu documentu</string>
+    <string name="weight_limit_error">Su valore mìnimu est \"%1$s\" tonnelladas. Imprea su profilu \"%2$s\" si su pesu de su veìculu est prus bassu de su valore mìnimu.</string>
+    <string name="sound_beep_simple_loud">Bip: simpre e artu</string>
+    <string name="sound_beep_complex">Bip: cumplessu</string>
+    <string name="sound_beep_complex_loud">Bip: cumplessu e artu</string>
+    <string name="sound_beep_minimal">Bip: minimale</string>
+    <string name="sound_beep_simple">Bip: simpre</string>
 </resources>
