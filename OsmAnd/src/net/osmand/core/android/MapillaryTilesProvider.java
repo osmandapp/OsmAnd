@@ -287,10 +287,6 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
-	}
-
-	@Override
 	public long getTileSize() {
 		return getNormalizedTileSize();
 	}
