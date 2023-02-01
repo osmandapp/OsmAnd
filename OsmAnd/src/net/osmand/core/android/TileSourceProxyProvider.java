@@ -120,7 +120,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public boolean supportsObtainImage() {
-		return true;
+		return false;
 	}
 
 	@Override

@@ -278,7 +278,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public boolean supportsObtainImage() {
-		return true;
+		return false;
 	}
 
 	@Override
