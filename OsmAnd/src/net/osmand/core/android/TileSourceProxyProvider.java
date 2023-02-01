@@ -11,7 +11,6 @@ import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
 import net.osmand.core.jni.IQueryController;
-import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SwigUtilities;
@@ -23,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
@@ -128,10 +126,6 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		return true;
 	}
 
-	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
-	}
-	
 	@Override
 	public long getTileSize() {
 		return tileSource.getTileSize();
