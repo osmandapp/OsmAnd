@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DRAWER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
@@ -803,7 +804,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				permissionDone = true;
 			}
 		}
-		enableDrawer();
+		if (isDrawerAvailable()) {
+			enableDrawer();
+		} else {
+			disableDrawer();
+		}
 
 		if (showWelcomeScreen && FirstUsageWelcomeFragment.showInstance(fragmentManager)) {
 			SecondSplashScreenFragment.SHOW = false;
@@ -1491,9 +1496,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void openDrawer() {
-		mapActions.updateDrawerMenu();
-		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.openDrawer(GravityCompat.START, animate);
+		if (isDrawerAvailable()) {
+			mapActions.updateDrawerMenu();
+			boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
+			drawerLayout.openDrawer(GravityCompat.START, animate);
+		}
 	}
 
 	public void disableDrawer() {
@@ -1505,12 +1512,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void enableDrawer() {
-		drawerDisabled = false;
-		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+		if (isDrawerAvailable()) {
+			drawerDisabled = false;
+			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+		}
 	}
 
 	public boolean isDrawerDisabled() {
 		return drawerDisabled;
+	}
+
+	public boolean isDrawerAvailable() {
+		return app.getAppCustomization().isFeatureEnabled(FRAGMENT_DRAWER_ID);
 	}
 
 	@Override
