@@ -209,8 +209,6 @@ public class ImportHelper {
 			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName.replace(SQLITE_CHART_FILE_EXT, SQLITE_EXT));
-		} else if (fileName.endsWith(TIF_EXT)) {
-			handleGeoTiffImport(intentUri, fileName);
 		} else {
 			handleGpxOrFavouritesImport(intentUri, fileName, saveFile, useImportDir, false, false);
 		}
