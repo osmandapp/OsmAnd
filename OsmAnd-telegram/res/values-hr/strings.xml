@@ -272,4 +272,5 @@
     <string name="live_now">Sada uživo</string>
     <string name="enter_code">Upiši kȏd</string>
     <string name="shared_string_error">Greška</string>
+    <string name="send_live_location_error">Greška prilikom slanja trenutne lokacije: %1$s</string>
 </resources>

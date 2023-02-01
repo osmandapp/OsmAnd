@@ -603,8 +603,8 @@
     <string name="local_index_installed">Datum shranjene različice</string>
     <string name="map_text_size_descr">Velikost besedila za imena na zemljevidu:</string>
     <string name="map_text_size">Velikost pisave zemljevida</string>
-    <string name="trace_rendering">Podatki razhroščevanja izrisovanja</string>
-    <string name="trace_rendering_descr">Pokaži zmogljivost izvajanja izrisovanja.</string>
+    <string name="trace_rendering">Informacije o razhroščevanju učinkovitosti delovanja</string>
+    <string name="trace_rendering_descr">Pokaži zmogljivost izvajanja izrisovanja in navigacije.</string>
     <string name="internet_connection_required_for_online_route">Spletna navigacija ne deluje brez povezave.</string>
     <string name="tts_missing_language_data_title">Podatki niso na voljo</string>
     <string name="gpx_option_reverse_route">Obratna smer sledi</string>
@@ -1159,7 +1159,7 @@
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe …</string>
     <string name="copying_osmand_files_descr">Kopiranje datotek s podatki za OsmAnd na novo mesto hrambe (%s) …</string>
     <string name="copying_osmand_files">Kopiranje datotek s podatki programa OsmAnd …</string>
-    <string name="always_center_position_on_map">Trenutno mesto naj bo vedno v središču</string>
+    <string name="always_center_position_on_map">Postavitev položaja vedno v sredini</string>
     <string name="index_item_nation_addresses">Naslovi za celotno državo</string>
     <string name="lang_mr">Maratščina</string>
     <string name="calculate_osmand_route_without_internet">Izračunanje odseka poti brez povezave</string>
@@ -3746,9 +3746,9 @@
     <string name="option_available_only_in_osmand_pro">Na voljo kot del naročnine OsmAnd Pro.</string>
     <string name="track_has_no_needed_data">Sledi manjkajo ustrezni podatki.</string>
     <string name="active_till">Aktivno do %1$s</string>
-    <string name="backup_welcome_back_descr">Obnovi podatke v tej napravi z obstoječimi varnostnimi kopijami ali varnostno kopiraj podatke v OsmAnd Cloud.</string>
-    <string name="backup_dont_have_any_descr">Načrtuj samodejno varnostno kopiranje, da ne boš nikoli izgubil podatkov.</string>
-    <string name="backup_do_not_have_any">Še nimaš spletne varnostne kopije.</string>
+    <string name="backup_welcome_back_descr">Obnovi podatke v tej napravi z uporabo storitve OsmAnd Cloud.</string>
+    <string name="backup_dont_have_any_descr">Nastavite samodejno varnostno kopiranje, da ti ne bo treba skrbeti za izgubljene podatke.</string>
+    <string name="backup_do_not_have_any">Še nimaš spletne varnostne kopije</string>
     <string name="backup_data_removed">Vsi podatki so bili odstranjeni.</string>
     <string name="backup_version_history_removed">Vsa zgodovina različic je bila odstranjena.</string>
     <string name="backup_deleted_all_data_descr">Vsi tvoji podatki so bili uspešno izbrisani iz OsmAnd Cloud.</string>
@@ -4673,7 +4673,7 @@
     <string name="transport_hazmat_no_desc">Ceste in predori lahko imajo omejitve za prevoz nevarnih snovi.</string>
     <string name="transport_hazmat_title">Prevoz nevarnih snovi</string>
     <string name="import_as_one_track">Uvozi kot eno sled</string>
-    <string name="use_latin_name_if_missing">Uporabi latinsko ime, če manjka</string>
+    <string name="use_latin_name_if_missing">Če manjka, uporabi latinsko ime</string>
     <string name="transport_hazmat_yes_desc">Izberi ustrezno kategorijo.</string>
     <string name="co2_mission">Emisije CO2</string>
     <string name="kg">kg</string>
@@ -4732,7 +4732,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaži poti MTB IMBA</string>
     <string name="auto_25_chars_route_tr_kr">Zavij desno in drži se desne</string>
     <string name="auto_25_chars_route_tu_kr">Obrni se in drži se desne</string>
-    <string name="compass_click_desc">Tapni kompas, če želiš preklopiti način usmerjenosti zemljevida.</string>
+    <string name="compass_click_desc">Namig: tapni gradnik kompasa, če želiš preklopiti način usmerjenosti zemljevida.</string>
     <string name="true_bearing_wdiget_desc">Kot med pravim (geografskim) severom in ciljno točko, opazovano s tvoje lokacije.</string>
     <string name="relative_bearing_widget_desc">Prikazuje kot med tvojo smerjo gibanja v naprej in ciljno točko.</string>
     <string name="first_marker_widget_desc">Gradnik lahko nastaviš tako, da prikaže ali razdaljo ali predvideni čas prihoda do prve oznake na zemljevidu.</string>
@@ -4763,7 +4763,7 @@
     <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
-    <string name="display_position">Položaj zaslona</string>
+    <string name="display_position">Postavitev položaja</string>
     <string name="rotate_map_manual_opt">Fiksno (ročno vrtenje)</string>
     <string name="go_to_marker_location">Pojdi na mesto oznake</string>
     <string name="click_on_widget">Klikni na gradnik</string>
@@ -4833,7 +4833,7 @@
 \n
 \n • Pripomoček »Označevalnik zemljevida«: dodana možnost za spreminjanje vedenja pri kliku.
 \n
-\n • Popravljena možnost »Položaj zaslona«.
+\n • Popravljena možnost »Postavitev položaja«.
 \n
 \n • GPX: dodana podpora za oznake »link«, »cmt«, »desc« in za vse razširitve po meri.
 \n
@@ -4850,10 +4850,10 @@
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Prikaz in snemanje podatkov iz zunanjih senzorjev: hitrost kolesa, moč kolesa, kadenca in srčni utrip.</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="mtb_scale">MTB lestvica</string>
+    <string name="mtb_scale">Težavnostna lestvica za MTB</string>
     <string name="mtb_imba_full">Svetovna gorsko kolesarska zveza (International Mountain Bicycling Association)</string>
     <string name="mtb_segment_classification">Klasifikacija segmenta</string>
-    <string name="rendering_attr_showMtbScale_description">Prikaže proge razvrščene po MTB lestvici.</string>
+    <string name="rendering_attr_showMtbScale_description">Prikaže proge razvrščene po težavnostni lestvici za MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Pokaži MTB lestvico</string>
     <string name="weather_plugin_description">Zagotavlja:
 \n- 24-urno in 7-dnevno vremensko napoved s petimi plastmi;
@@ -4917,7 +4917,7 @@
     <string name="weather_temperature_celsius">Celzija</string>
     <string name="map_rendering_engine_descr">Različica 2 (OpenGL) je hitrejši mehanizem za upodabljanje zemljevidov, ki vključuje tudi 2,5D pogled. Različica 1 je bila privzeta pred OsmAnd 4.3 in je še vedno primernejša za starejše naprave.</string>
     <string name="map_rendering_engine_v2">Različica 2 (OpenGL)</string>
-    <string name="storage_migration_fragment_close_descr">Kopiranje je opravljeno za %1$s%%. Če se zdaj ustaviš, aplikacija morda ne bo delovala pravilno.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiranje je opravljeno samo za %1$s%%. Če se zdaj ustaviš, aplikacija morda ne bo delovala pravilno.</string>
     <string name="rendering_attr_depthContourWidth_name">Debelina črte</string>
     <string name="shared_string_next_sunrise">Naslednji sončni vzhod</string>
     <string name="shared_string_layers">Sloji</string>
@@ -4972,4 +4972,58 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinije padavin</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izolinije sunkov vetra</string>
     <string name="shared_string_open">Odpri</string>
+    <string name="shared_string_expires">Poteče</string>
+    <string name="shared_string_purchased_on">Kupljeno dne</string>
+    <string name="share_as_file">Deli kot datoteko</string>
+    <string name="value_downloaded_of_mb">Prenašanje %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Preskoči prenos</string>
+    <string name="weight_limit_error">Najmanjša vrednost je »%1$s« ton. Če je masa vozila manjša od najmanjše vrednosti, uporabi profil »%2$s«.</string>
+    <string name="shared_string_modified">Spremenjeno</string>
+    <string name="shared_string_unsynced">Nesinhronizirano</string>
+    <string name="check_for_updates">Preveri za posodobitve</string>
+    <string name="changes">Spremembe %1$s</string>
+    <string name="cloud_changes">Spremembe v oblaku</string>
+    <string name="shared_string_uploaded">Naloženo</string>
+    <string name="shared_string_cloud">Oblak</string>
+    <string name="new_file">Nova datoteka</string>
+    <string name="modified_file">Spremenjena datoteka</string>
+    <string name="deleted_file">Izbrisana datoteka</string>
+    <string name="sync_now">Sinhroniziraj zdaj</string>
+    <string name="local_changes_will_be_dismissed">Lokalne spremembe bodo opuščene</string>
+    <string name="cloud_conflict">Spor</string>
+    <string name="cloud_recent_changes">Spremembe</string>
+    <string name="cloud_all_changes_uploaded">Vse spremembe so naložene</string>
+    <string name="cloud_all_changes_downloaded">Vse spremembe prenesene</string>
+    <string name="upload_all">Naloži vse</string>
+    <string name="cloud_all_changes_uploaded_descr">Vse spremembe, narejene na tej napravi, so sinhronizirane z OsmAnd Cloud.</string>
+    <string name="y_axis">Os Y</string>
+    <string name="x_axis">Os X</string>
+    <string name="cloud_conflicts">Spori</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Ni bilo mogoče pridobiti seznama datotek s strežnika.</string>
+    <string name="last_sync">Zadnja sinhronizacija</string>
+    <string name="import_export">Uvoz/izvoz</string>
+    <string name="export_to_file">Izvozi v datoteko</string>
+    <string name="share_link">Deli povezavo</string>
+    <string name="determine_location">Dovoli nam, da določimo tvojo lokacijo</string>
+    <string name="set_up_backup">Nastavi varnostno kopiranje</string>
+    <string name="choose_what_to_sync">Izberi, kaj želiš sinhronizirati</string>
+    <string name="cloud_sync_progress">Sinhronizacija … %1$s</string>
+    <string name="cloud_changes_will_be_dismissed">Spremembe v oblaku bodo opuščene</string>
+    <string name="local_file_will_be_restored">Lokalna datoteka bo obnovljena</string>
+    <string name="cloud_no_conflicts">Ni konfliktov.</string>
+    <string name="download_cloud_version">Prenesi različico v oblaku</string>
+    <string name="shared_string_do_not_exist">Ne obstaja</string>
+    <string name="local_changes">Lokalne spremembe</string>
+    <string name="upload_change">Naloži spremembe</string>
+    <string name="cloud_version_will_be_removed">Različica v oblaku bo odstranjena</string>
+    <string name="sound_beep_complex">Bip: kompleksno</string>
+    <string name="sound_beep_complex_loud">Bip: kompleksno glasno</string>
+    <string name="sound_beep_minimal">Bip: minimalno</string>
+    <string name="sound_beep_simple">Bip: preprosto</string>
+    <string name="sound_beep_simple_loud">Bip: preprosto glasno</string>
+    <string name="res_unknown">Neznano</string>
+    <string name="si_nm_mt">Navtične milje/metri</string>
+    <string name="si_nm_ft">Navtične milje/čevlji</string>
+    <string name="av_audio_format_bottom_sheet_descr">Izberi format zvoka. Format vsebnika vrste datoteke za zvok je 3GPP (.3gp).</string>
+    <string name="checking_progress">Preverjanje …</string>
 </resources>

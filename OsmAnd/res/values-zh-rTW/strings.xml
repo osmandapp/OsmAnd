@@ -2815,7 +2815,7 @@
     <string name="step_by_step">按步驟</string>
     <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">離開於</string>
-    <string name="sit_on_the_stop">站點的座位</string>
+    <string name="sit_on_the_stop">上車站點</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏所選軌跡的按鈕。</string>
     <string name="send_log">傳送紀錄檔</string>
     <string name="routing_attr_avoid_tram_name">避免電車</string>
@@ -4550,7 +4550,7 @@
     <string name="simulation_real_mode_title">逼真模擬</string>
     <string name="simulation_constant_mode_desc">模擬將以選定的恆定速度執行。</string>
     <string name="simulation_constant_mode_title">固定速度</string>
-    <string name="simulation_preview_mode_desc">膜你的速度在直線部份會是最大值，僅在交叉路口減慢。</string>
+    <string name="simulation_preview_mode_desc">模擬的速度在直線部份會是最大值，僅在交叉路口減慢。</string>
     <string name="simulation_preview_mode_title">快速預覽模式</string>
     <string name="speed_mode">速度模式</string>
     <string name="routeInfo_horse_scale_name">馬道難度</string>
@@ -4748,7 +4748,7 @@
     <string name="next_turn_widget_desc">小工具會顯示您下一個轉彎的資訊，其中包含操作與距離的圖片。</string>
     <string name="compass_always_visible">一律可見</string>
     <string name="compass_desc">顯示北邊的方向。</string>
-    <string name="compass_click_desc">點擊指南針切換地圖方向模式。</string>
+    <string name="compass_click_desc">秘訣：點擊指南針小工具切換地圖方向模式。</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地自行車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地自行車專用路徑。</string>
@@ -4950,7 +4950,7 @@
     <string name="shared_string_sunset">日落</string>
     <string name="map_widget_group_sunrise_sunset_desc">這些小工具會顯示關於下次日出與日落的資訊。</string>
     <string name="rendering_attr_depthContourWidth_name">線條寬度</string>
-    <string name="storage_migration_fragment_close_descr">複製已完成 %1$s%%。若您立刻停止，應用程式可能會無法正常運作。</string>
+    <string name="storage_migration_fragment_close_descr">複製僅完成 %1$s%%。若您立刻停止，應用程式可能會無法正常運作。</string>
     <string name="quick_action_precipitation_layer">用來在地圖上切換顯示或隱藏降水圖層。</string>
     <string name="quick_action_wind_layer">用來在地圖上切換顯示或隱藏風力圖層。</string>
     <string name="quick_action_cloud_layer">用來在地圖上切換顯示或隱藏雲層圖層。</string>
@@ -4972,7 +4972,7 @@
     <string name="release_4_4_pre">• 這裡會有 4.4 版的字串</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">降水等值線</string>
     <string name="rendering_attr_weatherCloudContours_name">雲層等值線</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">陣風等值線</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">風速等值線</string>
     <string name="shared_string_open">開啟</string>
     <string name="open_weather_action_description">讓您可以開啟有詳細天氣資訊的畫面。</string>
     <string name="open_weather_action">開啟天氣</string>
@@ -4999,7 +4999,7 @@
     <string name="local_changes">本機變更</string>
     <string name="upload_change">上傳變更</string>
     <string name="cloud_version_will_be_removed">將移除雲端版本</string>
-    <string name="cloud_changes_will_be_dismissed">將取消雲端變更</string>
+    <string name="cloud_changes_will_be_dismissed">將忽略雲端變更</string>
     <string name="local_file_will_be_restored">將還原本機檔案</string>
     <string name="local_changes_will_be_dismissed">將取消本機變更</string>
     <string name="cloud_conflicts">衝突</string>
@@ -5007,13 +5007,13 @@
     <string name="cloud_recent_changes">變更</string>
     <string name="cloud_all_changes_uploaded">已上傳所有變更</string>
     <string name="cloud_all_changes_uploaded_descr">在此裝置上做出的所有變更都會與 OsmAnd Cloud 同步。</string>
-    <string name="cloud_no_conflicts">沒有衝突</string>
+    <string name="cloud_no_conflicts">沒有衝突。</string>
     <string name="download_cloud_version">下載雲端版本</string>
     <string name="shared_string_do_not_exist">不存在</string>
     <string name="last_sync">上次同步</string>
     <string name="import_export">匯入 / 匯出</string>
     <string name="export_to_file">匯出至檔案</string>
-    <string name="av_audio_format_bottom_sheet_descr">選取音訊輸出格式。音訊的檔案類型格式為 3GPP (.3gp)。</string>
+    <string name="av_audio_format_bottom_sheet_descr">選取音訊格式。音訊的檔案類型容器為 3GPP (.3gp)。</string>
     <string name="si_nm_mt">海浬/公尺</string>
     <string name="si_nm_ft">海浬/英呎</string>
     <string name="set_up_backup">設定備份</string>
@@ -5024,4 +5024,10 @@
     <string name="share_as_file">分享為檔案</string>
     <string name="value_downloaded_of_mb">下載 %1$.1f/%2$.1f MB</string>
     <string name="determine_location">讓我們確定您的位置</string>
+    <string name="weight_limit_error">最小值為「%1$s」公噸。若您的車重小於最小值，請使用「%2$s」設定檔。</string>
+    <string name="sound_beep_simple">蜂鳴器：簡單</string>
+    <string name="sound_beep_simple_loud">蜂鳴器：簡單響亮</string>
+    <string name="sound_beep_complex_loud">蜂鳴器：複合響亮</string>
+    <string name="sound_beep_complex">蜂鳴器：複合</string>
+    <string name="sound_beep_minimal">蜂鳴器：最小</string>
 </resources>

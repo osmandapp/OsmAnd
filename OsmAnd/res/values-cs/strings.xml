@@ -4575,7 +4575,7 @@
     <string name="cloud_all_changes_uploaded">Všechny změny byly nahrány</string>
     <string name="cloud_all_changes_downloaded">Všechny změny byly staženy</string>
     <string name="cloud_all_changes_uploaded_descr">Všechny změny provedené v tomto zařízení jsou synchronizovány s OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Nejsou žádné konflikty</string>
+    <string name="cloud_no_conflicts">Nejsou žádné konflikty.</string>
     <string name="download_cloud_version">Stáhnout cloudovou verzi</string>
     <string name="shared_string_do_not_exist">Neexistuje</string>
     <string name="depth_contour_lines">Hloubkové vrstevnice</string>
@@ -4584,7 +4584,7 @@
     <string name="last_sync">Poslední synchronizace</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="rendering_attr_showRunningRoutes_description">Zobrazení běžeckých tras</string>
-    <string name="av_audio_format_bottom_sheet_descr">Vyberte výstupní formát zvuku. Formát typu souboru pro zvuk je 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Vyberte zvukový formát. Formát kontejneru typu souboru pro zvuk je 3GPP (.3gp).</string>
     <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
     <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s bude započítaná a ovlivní vaši průměrnou rychlost.</string>
     <string name="weather_offline_forecast">Předpověď v režimu offline</string>
@@ -4593,7 +4593,7 @@
     <string name="mtb_imba_full">Mezinárodní asociace horské cyklistiky</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie srážek</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinie mraků</string>
-    <string name="rendering_attr_showMtbScale_description">Zobrazit trasy podle stupnice MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Zobrazit trasy podle jejich stupnice MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Zobrazit stupnici MTB</string>
     <string name="co2_mission">Emise CO2</string>
     <string name="import_export">Import/Export</string>
@@ -4614,14 +4614,14 @@
     <string name="quick_action_temperature_layer">Přepínač pro zobrazení nebo skrytí teplotní vrstvy na mapě.</string>
     <string name="quick_action_cloud_layer">Přepínač pro zobrazení nebo skrytí vrstvy mraků na mapě.</string>
     <string name="temperature_layer">Teplotní vrstva</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie nárazového větru</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie rychlosti větru</string>
     <string name="quick_action_precipitation_layer">Přepínač pro zobrazení nebo skrytí vrstvy srážek na mapě.</string>
     <string name="quick_action_air_pressure_layer">Přepínač pro zobrazení nebo skrytí vrstvy tlaku vzduchu na mapě.</string>
     <string name="pressure_layer">Tlaková vrstva</string>
     <string name="wind_layer">Větrná vrstva</string>
     <string name="cloud_layer">Vrstva mraků</string>
     <string name="precipitation_layer">Vrstva srážek</string>
-    <string name="storage_migration_fragment_close_descr">Kopírování provedeno pro %1$s%%. Pokud nyní přestanete, aplikace nemusí fungovat správně.</string>
+    <string name="storage_migration_fragment_close_descr">Kopírování je dokončeno pouze v %1$s%%. Pokud nyní přestanete, aplikace nemusí fungovat správně.</string>
     <string name="quick_action_wind_layer">Přepínač pro zobrazení nebo skrytí vrstvy větru na mapě.</string>
     <string name="set_up_backup">Nastavit zálohování</string>
     <string name="turn_on_nautical_depth_description">Zapnutím zobrazíte na mapě údaje o námořní hloubce.</string>
@@ -4661,4 +4661,84 @@
     <string name="shared_string_layers">Vrstvy</string>
     <string name="share_as_file">Sdílet jako soubor</string>
     <string name="share_link">Sdílet odkaz</string>
+    <string name="weather_widget_group_desc">Sada widgetů zobrazujících různé informace o počasí.</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="speak_gps_signal_status">Oznámení ztráty a obnovení signálu GPS</string>
+    <string name="weather_pressure_inches_of_mercury">Palců rtuťového sloupce</string>
+    <string name="share_crash_log">Sdílet protokol o pádu</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetrů rtuťového sloupce</string>
+    <string name="weather_prefs_descr">24hodinová a 7denní předpověď, aktualizovaná každé 3 hodiny</string>
+    <string name="weight_limit_error">Minimální hodnota je \"%1$s\" tun. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%2$s\".</string>
+    <string name="dismiss_changes">Zamítnout změny\?</string>
+    <string name="show_map_symbols">Zobrazit symboly mapy</string>
+    <string name="weather_temperature_celsius">Celsia</string>
+    <string name="weather_wind_meters_per_second">metrech / sekundu</string>
+    <string name="empty_screen_view_selected_weather_data">Zapnutím zobrazíte vybrané údaje o počasí na mapě.</string>
+    <string name="weather_precip_inches">palcích</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_precip_milimeters">milimetrech</string>
+    <string name="weather_wind_kilimeters_per_hour">kilometrech za hodinu</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="rendering_engine_failed">Vykreslování map v aplikaci OsmAnd se nedávno zhroutilo.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd se vrátil k vykreslování map verze 1. V nastavení můžete zkusit přepnout zpět na nové vykreslovací jádro \'Verze 2 (OpenGL)\'.
+\n
+\nPodpořte prosím vylepšení poskytnutím záznamu chyb.</string>
+    <string name="air_pressure_widget_desc">Zobrazuje tlak vzduchu pro aktuální střed mapy.</string>
+    <string name="precipitation_widget_desc">Zobrazuje srážky pro aktuální střed mapy.</string>
+    <string name="clouds_widget_desc">Zobrazuje pokrytí mraky pro aktuální střed mapy.</string>
+    <string name="wind_widget_desc">Zobrazuje rychlost větru pro aktuální střed mapy.</string>
+    <string name="temperature_widget_desc">Zobrazuje teplotu pro aktuální střed mapy.</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="show_map_symbols_desc">Text, dopravní značky a další.</string>
+    <string name="purchases_feature_desc_external_sensors">Zobrazení a záznam dat z externích snímačů: rychlost kola, výkon kola, kadence a tepová frekvence.</string>
+    <string name="release_4_3">- Nový, rychlejší engine pro vykreslování map verze 2 (OpenGL) se zobrazením 2,5D
+\n
+\n - Plynulá animace změn polohy při pohybu
+\n
+\n - Nové widgety pro souřadnice středu mapy a nadmořskou výšku geolokací
+\n
+\n - \"Vzdálenost k poklepání\": přidány možnosti velikosti textu
+\n
+\n - Widget \"Mapová značka\": přidána možnost změny chování při kliknutí
+\n
+\n - Opravena možnost \"Umístění polohy\"
+\n
+\n - GPX: přidána podpora pro značky \"link\", \"cmt\", \"desc\" a pro libovolná vlastní rozšíření
+\n
+\n - Reorganizace seznamu \"Námořní mapy\"
+\n
+\n - Přidána podpora pro snímače ANT+
+\n
+\n - Přidána možnost zakázat stahování UUID
+\n
+\n - Předpověď výchozí rychlosti nastavitelná pro časy výletů v závislosti na nadmořské výšce při chůzi/běhu
+\n
+\n - Opraven zvukový výstup a chování posuvníku hlasitosti
+\n
+\n</string>
+    <string name="map_center_widget">Souřadnice: Střed mapy</string>
+    <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení zásuvného modulu Počasí.</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="restart_now">Restartovat nyní</string>
+    <string name="map_rendering_engine_v1">Verze 1</string>
+    <string name="map_rendering_engine_v2">Verze 2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">Verze 2 (OpenGL) je rychlejší vykreslovací jádro map, které rovněž obsahuje 2,5D zobrazení. Vykreslování verze 1 bylo výchozí před vydáním OsmAnd 4.3 a je stále vhodnější pro starší zařízení.</string>
+    <string name="map_rendering_engine">Vykreslovací jádro mapy</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="action_not_supported_with_map_style">Tato akce není podporována vybraným stylem mapy.</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_pressure_hectopascals">Hektopascaly</string>
+    <string name="dismiss_changes_descr">Všechny změny budou zamítnuty.</string>
+    <string name="speak_route_recalculation">Oznámení přepočtu trasy</string>
+    <string name="weather_wind_knots">Uzlech</string>
+    <string name="weather_wind_miles_per_hour">mílích za hodinu</string>
+    <string name="external_sensors_support">Podpora externích snímačů</string>
+    <string name="y_axis">Osa Y</string>
+    <string name="x_axis">Osa X</string>
+    <string name="value_downloaded_of_mb">Stahování %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Přeskočit stahování</string>
+    <string name="determine_location">Umožněte nám určit vaši polohu</string>
+    <string name="weather_precip_in">v</string>
 </resources>
