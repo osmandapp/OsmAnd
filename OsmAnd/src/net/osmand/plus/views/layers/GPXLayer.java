@@ -1586,9 +1586,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int bottom31 = MapUtils.get31TileNumberY(gpxFileBounds.bottom);
 			int right31 = MapUtils.get31TileNumberX(gpxFileBounds.right);
 			AreaI gpxFileBounds31 = new AreaI(top31, left31, bottom31, right31);
-			boolean areaVisible = mapRenderer.isAreaVisible(gpxFileBounds31);
-			boolean pathVisible = mapRenderer.isPathVisible(selectedGpxFile.getPath31ToDisplay());
-			return areaVisible && pathVisible;
+
+			boolean visible = mapRenderer.isAreaVisible(gpxFileBounds31);
+			visible = visible && mapRenderer.isPathVisible(selectedGpxFile.getPath31ToDisplay());
+			return visible;
 		} else {
 			return QuadRect.trivialOverlap(tileBox.getLatLonBounds(), gpxFileBounds);
 		}
