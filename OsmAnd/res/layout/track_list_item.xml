@@ -111,13 +111,12 @@
 						android:textColor="?android:textColorSecondary"
 						tools:text="Points" />
 
-					<androidx.appcompat.widget.AppCompatImageView
-						android:layout_width="@dimen/slider_track_height"
-						android:layout_height="@dimen/slider_track_height"
-						android:layout_gravity="center"
-						android:layout_marginHorizontal="@dimen/content_padding_small_half"
-						android:src="@drawable/ic_dot_position"
-						android:tint="?attr/secondary_icon_color" />
+					<View
+						android:id="@+id/folder_divider"
+						android:layout_width="1dp"
+						android:layout_height="@dimen/content_padding"
+						android:layout_marginHorizontal="@dimen/context_menu_padding_margin_medium"
+						android:background="?attr/divider_color_basic" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/folder"

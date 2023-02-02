@@ -16,4 +16,8 @@ public enum TrackTabType {
 	TrackTabType(@DrawableRes int iconId) {
 		this.iconId = iconId;
 	}
+
+	public boolean shouldShowFolder() {
+		return this == ON_MAP || this == ALL;
+	}
 }
