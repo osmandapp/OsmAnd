@@ -148,6 +148,9 @@ public class NetworkWriter extends AbstractWriter {
 			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
 		List<File> filesToUpload = backupHelper.collectItemFilesForUpload(item);
+		if (filesToUpload.isEmpty()) {
+			return "No files to upload";
+		}
 		long size = 0;
 		for (File file : filesToUpload) {
 			size += file.length();

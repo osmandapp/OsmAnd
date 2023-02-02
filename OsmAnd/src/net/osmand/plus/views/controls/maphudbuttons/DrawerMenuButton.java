@@ -1,13 +1,13 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.utils.AndroidUtils;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
 
 import androidx.annotation.NonNull;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class DrawerMenuButton extends MapButton {
 
@@ -20,7 +20,7 @@ public class DrawerMenuButton extends MapButton {
 		setOnClickListener(v -> {
 			MapActivity.clearPrevActivityIntent();
 			if (dashboard) {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD, AndroidUtils.getCenterViewCoordinates(v));
+				mapActivity.getDashboard().setDashboardVisibility(true, DASHBOARD, AndroidUtils.getCenterViewCoordinates(v));
 			} else {
 				mapActivity.openDrawer();
 			}
@@ -29,6 +29,6 @@ public class DrawerMenuButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return isShowBottomButtons();
+		return isShowBottomButtons() && mapActivity.isDrawerAvailable();
 	}
 }

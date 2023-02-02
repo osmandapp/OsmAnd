@@ -83,7 +83,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		ViewGroup mainContent = view.findViewById(R.id.main_content);
 		themedInflater.inflate(R.layout.add_widget_fragment_content, mainContent);

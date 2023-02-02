@@ -78,7 +78,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar();
 		setupContent(themedInflater, view.findViewById(R.id.main_content));

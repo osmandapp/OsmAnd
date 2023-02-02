@@ -2,7 +2,6 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +29,7 @@ import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
@@ -46,6 +46,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
+	private static final float MIN_TRUCK_WEIGHT = 3.5f;
+
 	private String selectedItem;
 	private float currentValue;
 	private int contentHeightPrevious;
@@ -100,6 +102,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				return true;
 			}
 		});
+
+		boolean isTruckMode = getAppMode().isDerivedRoutingFrom(ApplicationMode.TRUCK);
+		boolean isWeightParameter = vehicleSizeAssets == VehicleSizeAssets.WEIGHT;
+
 		text.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -120,12 +126,19 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				} else {
 					currentValue = 0.0f;
 				}
-				selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
-				ChipItem selected = chipsView.getChipById(selectedItem);
-				chipsView.setSelected(selected);
-				if (selected != null) {
-					chipsView.notifyDataSetChanged();
-					chipsView.smoothScrollTo(selected);
+				if (isTruckMode && isWeightParameter &&
+						currentValue <= MIN_TRUCK_WEIGHT - 0.02f && currentValue > 0f) {
+					updateApplyButton(false);
+					text.setError(getString(R.string.weight_limit_error, String.format(Locale.US, "%.1f", MIN_TRUCK_WEIGHT), getString(ApplicationMode.CAR.getNameKeyResource())));
+				} else {
+					updateApplyButton(true);
+					selectedItem = preference.getEntryFromValue(String.valueOf(currentValue));
+					ChipItem selected = chipsView.getChipById(selectedItem);
+					chipsView.setSelected(selected);
+					if (selected != null) {
+						chipsView.notifyDataSetChanged();
+						chipsView.smoothScrollTo(selected);
+					}
 				}
 			}
 		});
@@ -187,6 +200,11 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 				drawTopShadow(showTopShadow);
 			}
 		};
+	}
+
+	private void updateApplyButton(boolean enable) {
+		rightButton.setEnabled(enable);
+		UiUtilities.setupDialogButton(nightMode, rightButton, enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED, getString(R.string.shared_string_apply));
 	}
 
 	@Override

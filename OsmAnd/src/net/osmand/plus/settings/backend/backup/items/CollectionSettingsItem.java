@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,6 +67,18 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		return duplicateItems;
 	}
 
+	@Override
+	public void delete() {
+		super.delete();
+		if (!Algorithms.isEmpty(items)) {
+			for (T item : items) {
+				deleteItem(item);
+			}
+		}
+	}
+
+	protected abstract void deleteItem(T item);
+
 	public List<T> getNewItems() {
 		List<T> res = new ArrayList<>(items);
 		res.removeAll(duplicateItems);
@@ -82,11 +95,6 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 	}
 
 	public boolean shouldShowDuplicates() {
-		return true;
-	}
-
-	@Override
-	public boolean shouldReadOnCollecting() {
 		return true;
 	}
 

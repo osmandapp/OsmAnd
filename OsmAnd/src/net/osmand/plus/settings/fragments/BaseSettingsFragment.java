@@ -149,7 +149,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-			AndroidUtils.addStatusBarPadding21v(app, view);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
 		return view;
 	}

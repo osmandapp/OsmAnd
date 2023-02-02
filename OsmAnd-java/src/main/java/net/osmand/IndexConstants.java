@@ -39,6 +39,7 @@ public class IndexConstants {
 	public static final String GEN_LOG_EXT = ".gen.log";
 	public static final String HEIGHTMAP_SQLITE_EXT = ".sqlite";
 	public static final String DOWNLOAD_EXT = ".download";
+	public static final String TIF_EXT = ".tif";
 	public static final String TIFF_DB_EXT = ".tiff.db";
 
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip";
@@ -93,6 +94,8 @@ public class IndexConstants {
 	public static final String ROUTING_PROFILES_DIR = "routing/";
 	public static final String PLUGINS_DIR = "plugins/";
 	public static final String HEIGHTMAP_INDEX_DIR = "heightmap/";
+	public static final String GEOTIFF_SQLITE_CACHE_DIR = "geotiff_sqlite_cache/";
+	public static final String GEOTIFF_DIR = "geotiff/";
 	public static final String WEATHER_INDEX_DIR = "weather/";
 	public static final String WEATHER_FORECAST_DIR = "weather_forecast/";
 

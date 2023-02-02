@@ -122,7 +122,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			setupRestartButton(root);
 		}
 		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 		}
 		ViewTreeObserver treeObserver = buttonContainer.getViewTreeObserver();
 		treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

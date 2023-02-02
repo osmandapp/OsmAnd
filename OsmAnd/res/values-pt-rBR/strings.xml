@@ -1297,9 +1297,9 @@
     <string name="poi_context_menu_delete">Apagar POI</string>
     <string name="rotate_map_compass_opt">Na direção da bússola</string>
     <string name="rotate_map_bearing_opt">Na direção do movimento</string>
-    <string name="rotate_map_none_opt">Fixo (norte está para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Orientação do mapa</string>
+    <string name="rotate_map_north_opt">Fixo (norte está para cima)</string>
+    <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
+    <string name="rotate_map_to">Orientação do mapa</string>
     <string name="show_route">Detalhes da rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">Salvar dados como arquivo GPX ou importar pontos para os \'Favoritos\'\?</string>
@@ -2163,7 +2163,7 @@
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Tipos de letra do mapa</string>
     <string name="right_side_navigation">Condução pela direita</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Não enviar estatísticas de uso de aplicativo anônimas</string>
     <string name="parking_options">Opções de estacionamento</string>
     <string name="full_version_thanks">Obrigado por adquirir a versão completa do OsmAnd.</string>
@@ -4231,10 +4231,10 @@
     <string name="backup_version_history_removed">Todo o histórico da versão foi removido.</string>
     <string name="backup_data_removed">Todos os dados foram removidos.</string>
     <string name="shared_string_progress">Progresso</string>
-    <string name="backup_do_not_have_any">Você ainda não tem backup online.</string>
-    <string name="backup_dont_have_any_descr">Agende backups automáticos e nunca perca dados.</string>
+    <string name="backup_do_not_have_any">Você ainda não tem nenhum backup online</string>
+    <string name="backup_dont_have_any_descr">Configure um backup automático para que você não precise se preocupar com a perda de dados.</string>
     <string name="backup_welcome_back">Bem-vindo de volta!</string>
-    <string name="backup_welcome_back_descr">Restaure dados neste dispositivo usando backups existentes, ou faça backup de dados para OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurar dados neste dispositivo usando OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar backup</string>
     <string name="backup_restore_now">Restaurar agora</string>
     <string name="attribute">Atributo</string>
@@ -4778,7 +4778,7 @@
     <string name="go_to_marker_location">Ir para o local do marcador</string>
     <string name="shared_string_switch_mode">Modo de alternância</string>
     <string name="click_on_widget">Clique no widget</string>
-    <string name="rotate_map_none_rotated_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="quick_action_current_location_widget_descr">Uma alternância para mostrar ou ocultar o widget localização atual no mapa.</string>
     <string name="how_to_use">Como usar:</string>
@@ -5015,4 +5015,20 @@
     <string name="changes">Alterações %1$s</string>
     <string name="cloud_changes">mudanças na nuvem</string>
     <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de arquivo para áudio é 3GPP (.3gp).</string>
+    <string name="set_up_backup">Configurar backup</string>
+    <string name="si_nm_mt">Milhas náuticas/metros</string>
+    <string name="si_nm_ft">Milhas náuticas/pés</string>
+    <string name="share_link">Compartilhar link</string>
+    <string name="share_as_file">Compartilhe como arquivo</string>
+    <string name="y_axis">Y-Axis</string>
+    <string name="x_axis">X-Axis</string>
+    <string name="value_downloaded_of_mb">Baixando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Pular download</string>
+    <string name="determine_location">Permita-nos determinar sua localização</string>
+    <string name="sound_beep_complex">Bipe: complexo</string>
+    <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
+    <string name="weight_limit_error">O valor mínimo é \"%1$s\" toneladas. Use o perfil \"%2$s\" se o peso do veículo for menor que o valor mínimo.</string>
+    <string name="sound_beep_complex_loud">Bipe: complexo e alto</string>
+    <string name="sound_beep_minimal">Bipe: complexo e alto</string>
+    <string name="sound_beep_simple">Bipe: simples</string>
 </resources>

@@ -100,9 +100,9 @@
     <string name="poi_context_menu_delete">Eliminar POI</string>
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção do movimento</string>
-    <string name="rotate_map_none_opt">Fixa (norte para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Rotação do mapa</string>
+    <string name="rotate_map_north_opt">Fixa (norte para cima)</string>
+    <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
+    <string name="rotate_map_to">Rotação do mapa</string>
     <string name="show_route">Mostrar rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="fav_file_to_load_not_found">Não foi encontrado o ficheiro GPX que contém os favoritos em {0}</string>
@@ -1960,7 +1960,7 @@
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Tipos de letra do mapa</string>
     <string name="right_side_navigation">Condução pela direita</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Não enviar estatísticas anónimas de utilização da aplicação</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recolhe informação sobre as secções da aplicação que abriu. Não são enviadas: a sua localização, a informação que introduz na aplicação, detalhes de áreas que veja, procure ou descarregue.</string>
     <string name="do_not_show_startup_messages">Não mostrar mensagens ao iniciar</string>
@@ -4233,13 +4233,13 @@
     <string name="logout_from_osmand_cloud_decsr">Terminar a sessão\?
 \nTerá de se autenticar novamente para fazer a cópia de segurança ou restaurar os dados.</string>
     <string name="backup_welcome_back">Bem-vindo(a) de volta!</string>
-    <string name="backup_welcome_back_descr">Restaure dados neste dispositivo usando as cópias de segurança existentes ou faça uma cópia de segurança para o OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurar dados neste aparelho usando o OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar cópia de segurança</string>
     <string name="backup_restore_now">Restaurar agora</string>
     <string name="attribute">Atributo</string>
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explore a Wikipédia offline.</string>
-    <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática e nunca perca informação.</string>
+    <string name="backup_dont_have_any_descr">Configure uma cópia de segurança automática para não ter de se preocupar com a perda de dados.</string>
     <string name="backup_error_subscription_was_expired_descr">A sua subscrição do OsmAnd Pro expirou, renove-a para poder usar cópias de segurança. Ainda pode restaurar os dados da Cloud.</string>
     <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, declives</string>
     <string name="backup_deleting_all_data">A eliminar todos os dados…</string>
@@ -4249,7 +4249,7 @@
     <string name="backup_version_history_removed">Todo o histórico da versão foi removido.</string>
     <string name="backup_data_removed">Todos os dados foram removidos.</string>
     <string name="shared_string_progress">Progresso</string>
-    <string name="backup_do_not_have_any">Ainda não tem uma cópia de segurança online.</string>
+    <string name="backup_do_not_have_any">Ainda não tem uma cópia de segurança online</string>
     <string name="on_hold_since">Em espera desde %1$s</string>
     <string name="active_till">Ativa até %1$s</string>
     <string name="promo_subscription">Subscrição promocional</string>
@@ -4751,7 +4751,7 @@
     <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
     <string name="compass_always_hidden">Sempre oculto</string>
     <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
-    <string name="compass_click_desc">Toque na bússola para alternar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Dica: toque na bússola para alterar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
@@ -4778,7 +4778,7 @@
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição no ecrã</string>
     <string name="shared_string_normal">Normal</string>
-    <string name="rotate_map_none_rotated_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
     <string name="shared_string_large">Larga</string>
     <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
@@ -4858,23 +4858,23 @@
 \n
 \n • Novo widget com coordenadas do centro do mapa e elevação de geolocalizações
 \n
-\n • Opções de tamanho de texto adicionadas em \"Distância com 2 dedos\"
+\n • Adicionadas opções de tamanho de texto em \"Distância com 2 dedos\"
 \n
-\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do clique
+\n • Adicionada opção ao widget \"Marcadores\" para alterar o comportamento do toque/clique
 \n
 \n • Corrigida opção de \"Posição no ecrã\"
 \n
 \n • GPX: adicionado suporte para etiquetas \"link\", \"cmt\", \"desc\" e para quaisquer extensões personalizadas
 \n
-\n • Lista de \"mapas náuticos\" reorganizada
+\n • Reorganização da lista de \"mapas náuticos\"
 \n
-\n • Adicionado suporte para sensores ANT+
+\n • Adicionado suporte a sensores ANT+
 \n
-\n • Opção adicionada para desativar o descarregamento do UUID
+\n • Adicionada opção para desativar o descarregamento do UUID
 \n
 \n • Previsão ajustável de velocidade padrão para tempos de viagem dos perfis \"a pé/caminhada/corrida\" dependentes da elevação
 \n
-\n • Saída de áudio e comportamento do controle deslizante de volume corrigidas
+\n • Correções na saída de áudio e comportamento do controle deslizante de volume
 \n
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Mostra e grava dados dos sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
@@ -4961,9 +4961,9 @@
     <string name="clouds_widget_desc">Mostra a cobertura de nuvens para o centro do mapa atual.</string>
     <string name="precipitation_widget_desc">Mostra a precipitação para o centro do mapa atual.</string>
     <string name="rendering_attr_depthContourWidth_name">Espessura da linha</string>
-    <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se parar agora, a aplicação pode não funcionar corretamente.</string>
+    <string name="storage_migration_fragment_close_descr">A cópia está apenas %1$s%% completa. Se parar agora, a aplicação pode não funcionar corretamente.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
-    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme escala MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme a escala MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
     <string name="quick_action_temperature_layer">Uma opção para mostrar ou ocultar a camada de temperatura no mapa.</string>
@@ -4990,17 +4990,17 @@
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
     <string name="choose_what_to_sync">Escolha o que sincronizar</string>
-    <string name="cloud_sync_progress">Sync…%1$s</string>
+    <string name="cloud_sync_progress">A sincronizar…%1$s</string>
     <string name="checking_progress">A verificar…</string>
     <string name="shared_string_modified">Alterado</string>
     <string name="res_unknown">Desconhecido</string>
-    <string name="check_for_updates">Verificar por atualizações</string>
+    <string name="check_for_updates">Verificar atualizações</string>
     <string name="changes">Alterações %1$s</string>
     <string name="cloud_changes">Alterações na nuvem</string>
     <string name="shared_string_uploaded">Enviado</string>
     <string name="shared_string_cloud">Nuvem</string>
     <string name="modified_file">Ficheiro alterado</string>
-    <string name="deleted_file">Ficheiro apagado</string>
+    <string name="deleted_file">Ficheiro eliminado</string>
     <string name="sync_now">Sincronizar agora</string>
     <string name="local_changes">Alterações locais</string>
     <string name="upload_change">Enviar alteração</string>
@@ -5012,19 +5012,33 @@
     <string name="cloud_recent_changes">Alterações</string>
     <string name="cloud_all_changes_downloaded">Todas as alterações foram descarregadas</string>
     <string name="cloud_all_changes_uploaded_descr">Todas as alterações feitas neste aparelho são sincronizadas com o OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Não há conflitos</string>
-    <string name="download_cloud_version">Descarregar versão da cloud</string>
+    <string name="cloud_no_conflicts">Não há conflitos.</string>
+    <string name="download_cloud_version">Descarregar versão da nuvem</string>
     <string name="shared_string_do_not_exist">Não existe</string>
-    <string name="backup_error_failed_to_fetch_remote_items">Não foi possível obter a lista do servidor.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Não foi possível obter a lista de ficheiros do servidor.</string>
     <string name="last_sync">Última sincronização</string>
-    <string name="import_export">Importar/Exportar</string>
+    <string name="import_export">Importar / exportar</string>
     <string name="export_to_file">Exportar para ficheiro</string>
     <string name="new_file">Novo ficheiro</string>
     <string name="shared_string_unsynced">Não sincronizado</string>
-    <string name="cloud_version_will_be_removed">A versão em nuvem será removida</string>
+    <string name="cloud_version_will_be_removed">A versão na nuvem será removida</string>
     <string name="cloud_changes_will_be_dismissed">As alterações na nuvem serão descartadas</string>
     <string name="cloud_all_changes_uploaded">Todas as alterações foram enviadas</string>
-    <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de ficheiro para áudio é 3GPP (.3gp).</string>
-    <string name="si_nm_ft">Milhas náuticas/pés</string>
-    <string name="si_nm_mt">Milhas náuticas/metros</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selecione um formato de áudio. O formato do tipo de ficheiro contentor para áudio é 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Milhas náuticas / pés</string>
+    <string name="si_nm_mt">Milhas náuticas / metros</string>
+    <string name="set_up_backup">Configurar cópia de segurança</string>
+    <string name="y_axis">Eixo Y</string>
+    <string name="x_axis">Eixo X</string>
+    <string name="share_as_file">Partilhar como ficheiro</string>
+    <string name="value_downloaded_of_mb">A descarregar %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Ignorar descarregamento</string>
+    <string name="determine_location">Permita-nos determinar a sua localização</string>
+    <string name="share_link">Partilhar a ligação</string>
+    <string name="sound_beep_complex">Bipe: complexo</string>
+    <string name="weight_limit_error">O valor mínimo é \"%1$s\" toneladas. Use o perfil \"%2$s\" se o peso do veículo for menor que o valor mínimo.</string>
+    <string name="sound_beep_complex_loud">Bipe: complexo e alto</string>
+    <string name="sound_beep_minimal">Bipe: mínimo</string>
+    <string name="sound_beep_simple">Bipe: simples</string>
+    <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
 </resources>

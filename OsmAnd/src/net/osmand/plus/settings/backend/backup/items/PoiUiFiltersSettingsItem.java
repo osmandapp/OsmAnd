@@ -85,6 +85,11 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	}
 
 	@Override
+	protected void deleteItem(PoiUIFilter item) {
+		// TODO: delete settings item
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull PoiUIFilter item) {
 		String savedName = item.getName();
 		for (PoiUIFilter filter : existingItems) {

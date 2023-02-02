@@ -138,7 +138,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 		Context context = requireContext();
 		view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
-		AndroidUtils.addStatusBarPadding21v(context, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar();
 		setupScrollListener();

@@ -75,7 +75,6 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		ItemViewHolder itemViewHolder = new ItemViewHolder(container, nightMode);
 		itemViewHolder.bindView(item, null, false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.bottom_divider), false);
 	}
 
 	private void setupDownloadAction(@NonNull View view) {
@@ -113,19 +112,26 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			dismiss();
 		});
 		downloadItem.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground(downloadItem);
+		}
 		AndroidUiHelper.updateVisibility(downloadItem.findViewById(R.id.second_icon), false);
+		View divider = downloadItem.findViewById(R.id.bottom_divider);
+		View bottomShadow = downloadItem.findViewById(R.id.bottom_shadow);
+		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(bottomShadow, false);
 	}
 
 	private void setupUploadAction(@NonNull View view) {
 		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE;
-		boolean enabled = isRowEnabled(item.fileName) && (item.localFile != null || deleteOperation);
-		String title = getString(deleteOperation ? R.string.upload_change : R.string.upload_local_version);
+		boolean enabled = isRowEnabled(item.fileName);
+		String title = getString(deleteOperation || item.localFile == null ? R.string.upload_change : R.string.upload_local_version);
 		String description;
 		if (deleteOperation) {
 			description = recentChangesType == RECENT_CHANGES_LOCAL ? getString(R.string.cloud_version_will_be_removed)
 					: generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 		} else if (item.localFile == null) {
-			description = getString(R.string.shared_string_do_not_exist);
+			description = getString(R.string.cloud_version_will_be_removed);
 		} else {
 			description = generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 			if (recentChangesType == RECENT_CHANGES_REMOTE) {
@@ -141,11 +147,24 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		descriptionTv.setText(description);
 		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, ColorUtilities.getActiveColorId(nightMode)));
 		uploadItem.setOnClickListener(v -> {
-			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
+			syncItem(deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
 			dismiss();
 		});
 		uploadItem.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground(uploadItem);
+		}
 		AndroidUiHelper.updateVisibility(uploadItem.findViewById(R.id.second_icon), false);
+		View divider = uploadItem.findViewById(R.id.bottom_divider);
+		View bottomShadow = uploadItem.findViewById(R.id.bottom_shadow);
+		AndroidUiHelper.updateVisibility(divider, true);
+		AndroidUiHelper.updateVisibility(bottomShadow, false);
+	}
+
+	private void setupSelectableBackground(@NonNull View view) {
+		int color = ColorUtilities.getActiveColor(app, nightMode);
+		View selectableView = view.findViewById(R.id.selectable_list_item);
+		AndroidUtils.setBackground(selectableView, UiUtilities.getColoredSelectableDrawable(app, color, 0.3f));
 	}
 
 	private void syncItem(@NonNull SyncOperationType operation) {

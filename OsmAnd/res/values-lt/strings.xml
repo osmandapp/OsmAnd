@@ -443,9 +443,9 @@
     <string name="poi_context_menu_delete">Ištrinti LV</string>
     <string name="rotate_map_compass_opt">Pagal kompasą</string>
     <string name="rotate_map_bearing_opt">Pagal judėjimo kryptį</string>
-    <string name="rotate_map_none_opt">Nesukinėti (šiaurė viršuje)</string>
-    <string name="rotate_map_to_bearing_descr">Pasirinkti žemėlapio ir ekrano krypčių derinimą.</string>
-    <string name="rotate_map_to_bearing">Žemėlapio orientacija</string>
+    <string name="rotate_map_north_opt">Nesukinėti (šiaurė viršuje)</string>
+    <string name="rotate_map_to_descr">Pasirinkti žemėlapio ir ekrano krypčių derinimą.</string>
+    <string name="rotate_map_to">Žemėlapio orientacija</string>
     <string name="show_route">Maršruto informacija</string>
     <string name="fav_imported_sucessfully">Įsimintos vietos sėkmingai importuotos</string>
     <string name="fav_file_to_load_not_found">GPX failas su išsaugotomis vietomis nerastas {0}</string>
@@ -2048,7 +2048,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="restore_purchases">Atkurti pirkinius</string>
     <string name="fonts_header">Žemėlapio šriftai</string>
     <string name="right_side_navigation">Vairavimas dešinėje</string>
-    <string name="driving_region_automatic">Automatinis</string>
+    <string name="shared_string_automatic">Automatinis</string>
     <string name="do_not_send_anonymous_app_usage">Nesiųsti anoniminės programėlės naudojimo informacijos</string>
     <string name="shared_string_install">Įdiegti</string>
     <string name="improve_coverage_mapillary">Pagerinti nuotraukų aprėptį su Mapillary</string>

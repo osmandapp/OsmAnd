@@ -79,7 +79,7 @@
     <string name="do_not_show_startup_messages_desc">Не показывать скидки на приложение и специальные сообщения о местных событиях.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd собирает информацию о том, какие вы используете части приложения. Ваше местоположение никогда не отправляется, как и всё, что вы вводите, какие области читаете, что ищете или скачиваете.</string>
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
-    <string name="driving_region_automatic">Авто</string>
+    <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
     <string name="shared_string_visible">Видимые</string>
     <string name="restore_purchases">Восстановить покупки</string>
@@ -663,9 +663,9 @@
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">по направлению компаса</string>
     <string name="rotate_map_bearing_opt">по направлению движения</string>
-    <string name="rotate_map_none_opt">фиксированная (север сверху)</string>
-    <string name="rotate_map_to_bearing_descr">Выравнивание карты:</string>
-    <string name="rotate_map_to_bearing">Ориентация карты</string>
+    <string name="rotate_map_north_opt">фиксированная (север сверху)</string>
+    <string name="rotate_map_to_descr">Выравнивание карты:</string>
+    <string name="rotate_map_to">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
     <string name="fav_imported_sucessfully">Избранные точки импортированы</string>
     <string name="fav_file_to_load_not_found">GPX-файл с избранными точками отсутствует в {0}</string>
@@ -2186,7 +2186,7 @@
     <string name="app_mode_train">Поезд</string>
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
     <string name="update_all_maps_now">Обновить все карты\?</string>
-    <string name="clear_tile_data">Удалить из кеша</string>
+    <string name="clear_tile_data">Очистить кеш</string>
     <string name="routing_attr_short_way_name">Снижать расход топлива</string>
     <string name="replace_favorite_confirmation">Заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
@@ -4947,7 +4947,7 @@
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
-    <string name="rotate_map_none_rotated_opt">фиксированная (повернутая вручную)</string>
+    <string name="rotate_map_manual_opt">фиксированная (повернутая вручную)</string>
     <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>
     <string name="map_widget_group_sunrise_sunset">Восход, закат</string>
@@ -5028,4 +5028,12 @@
     <string name="av_audio_format_bottom_sheet_descr">Выберите формат вывода аудио. Формат типа файла для аудио - 3GPP (.3gp).</string>
     <string name="si_nm_ft">Морские мили/футы</string>
     <string name="si_nm_mt">Морские мили/метры</string>
+    <string name="value_downloaded_of_mb">Загрузка %1$.1f/%2$.1f МБ</string>
+    <string name="skip_download">Пропустить загрузку</string>
+    <string name="determine_location">Позвольте нам определить ваше местоположение</string>
+    <string name="share_as_file">Поделиться файлом</string>
+    <string name="y_axis">Ось Y</string>
+    <string name="x_axis">Ось X</string>
+    <string name="set_up_backup">Настройка резервного копирования</string>
+    <string name="share_link">Поделиться ссылкой</string>
 </resources>

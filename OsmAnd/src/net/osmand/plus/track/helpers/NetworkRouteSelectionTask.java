@@ -61,7 +61,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 				if (!Algorithms.isEmpty(routes)) {
 					return routes.values().iterator().next();
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e);
 			}
 		}

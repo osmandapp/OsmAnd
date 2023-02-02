@@ -419,9 +419,9 @@
     <string name="poi_context_menu_delete">Вилучити POI</string>
     <string name="rotate_map_compass_opt">За компасом</string>
     <string name="rotate_map_bearing_opt">За напрямком руху</string>
-    <string name="rotate_map_none_opt">Фіксовано (північ угорі)</string>
-    <string name="rotate_map_to_bearing_descr">Орієнтація мапи:</string>
-    <string name="rotate_map_to_bearing">Орієнтація мапи</string>
+    <string name="rotate_map_north_opt">Фіксовано (північ угорі)</string>
+    <string name="rotate_map_to_descr">Орієнтація мапи:</string>
+    <string name="rotate_map_to">Орієнтація мапи</string>
     <string name="show_route">Подробиці маршруту</string>
     <string name="fav_imported_sucessfully">Закладки імпортовано</string>
     <string name="fav_file_to_load_not_found">GPX-файл з Закладками не знайдено в {0}</string>
@@ -1137,7 +1137,7 @@
 \nТрек %2$s</string>
     <string name="osmo_connect_menu">З’єднатись</string>
     <string name="use_points_as_intermediates">Обчислити маршрут між точками</string>
-    <string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
+    <string name="always_center_position_on_map">Позиція розташування завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Різне</string>
     <string name="localization_pref_title">Локалізація</string>
@@ -2244,7 +2244,7 @@
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Видимі</string>
     <string name="restore_purchases">Відновлення придбань</string>
-    <string name="driving_region_automatic">Автоматично</string>
+    <string name="shared_string_automatic">Автоматично</string>
     <string name="do_not_send_anonymous_app_usage">Не надсилати анонімну статистику про користування застосунком</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає відомості про те, які Ви використовуєте частини застосунку. Ваше місце розташування ніколи не надсилається, як і все, що Ви вводите, які місця переглядаєте, що шукаєте чи завантажуєте.</string>
     <string name="parking_options">Стоянка (параметри)</string>
@@ -4235,7 +4235,7 @@
     <string name="backup_version_history_removed">Усю історію версій було вилучено.</string>
     <string name="backup_data_removed">Усі дані було вилучено.</string>
     <string name="shared_string_progress">Виконання</string>
-    <string name="backup_do_not_have_any">У вас немає резервної онлайн-копії.</string>
+    <string name="backup_do_not_have_any">У вас ще немає жодної резервної онлайн-копії</string>
     <string name="backup_dont_have_any_descr">Налаштувати автоматичне резервне копіювання, щоб ніколи не втратити дані.</string>
     <string name="backup_welcome_back">З поверненням!</string>
     <string name="backup_welcome_back_descr">Відновити дані на цьому пристрої за допомогою OsmAnd Cloud.</string>
@@ -4742,7 +4742,7 @@
     <string name="compass_visible_if_map_rotated">Видно, якщо мапу повернути</string>
     <string name="compass_always_hidden">Постійно приховано</string>
     <string name="compass_always_visible">Постійно видно</string>
-    <string name="compass_click_desc">Торкніться компаса, щоб перемкнути режим орієнтації мапи.</string>
+    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб перемикнути режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колірна гамма контурних ліній глибини</string>
     <string name="auto_backup_preference_desc">Типово Android зберігає резервні копії вибраного, позначок мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія обмежена 25 МБ.
@@ -4771,7 +4771,7 @@
     <string name="favorite_delete_group">Видалити групу</string>
     <string name="favorite_confirm_delete_group">Ви впевнені, що хочете видалити групу «%1$s» і всі включені точки (%2$d)\?</string>
     <string name="download_heightmap_maps">Мапа висот</string>
-    <string name="display_position">Позиція на екрані</string>
+    <string name="display_position">Позиція розташування</string>
     <string name="shared_string_2_5_d_view">Вигляд 2.5 D</string>
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
 \nТоркніться мапи 2 пальцями, щоб переглянути відстань між натиснутими точками</string>
@@ -4781,7 +4781,7 @@
     <string name="shared_string_shows">Показує</string>
     <string name="map_markers_desc">Віджет показує відстань або приблизний час прибуття (ETA) для перших двох позначок у списку позначок на мапі.</string>
     <string name="map_marker_interval_dialog_desc">Вказати інтервал часу, за який буде вимірюватися середня швидкість для обчислення приблизного часу прибуття.</string>
-    <string name="rotate_map_none_rotated_opt">Фіксовано (обертається вручну)</string>
+    <string name="rotate_map_manual_opt">Фіксовано (обертається вручну)</string>
     <string name="shared_string_switch_mode">Перемкнути режим</string>
     <string name="shared_string_large">Великий</string>
     <string name="shared_string_normal">Звичайний</string>
@@ -4857,7 +4857,7 @@
 \n
 \n - У віджеті «Позначки мапи» додано опцію зміни поведінки натискання
 \n
-\n • Виправлена опція «Позиція на екрані»
+\n • Виправлена опція «Позиція розташування»
 \n
 \n • GPX: додана підтримка тегів «link», «cmt», «desc» і будь-яких користувацьких розширень
 \n
@@ -4956,7 +4956,7 @@
     <string name="map_widget_group_sunrise_sunset">Схід, захід сонця</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колірна схема ліній</string>
     <string name="rendering_attr_depthContourWidth_name">Ширина лінії</string>
-    <string name="storage_migration_fragment_close_descr">Копіювання виконано на %1$s%%. Якщо ви зупинитеся зараз, застосунок може працювати некоректно.</string>
+    <string name="storage_migration_fragment_close_descr">Копіювання виконано лише на %1$s%%. Якщо ви зупинитеся зараз, застосунок може працювати некоректно.</string>
     <string name="quick_action_precipitation_layer">Перемикач для показу або приховування шару опадів на мапі.</string>
     <string name="quick_action_wind_layer">Перемикач для показу або приховування шару вітру на мапі.</string>
     <string name="quick_action_cloud_layer">Перемикач для показу або приховування шару хмарності на мапі.</string>
@@ -4968,7 +4968,7 @@
     <string name="temperature_layer">Температурний шар</string>
     <string name="quick_action_temperature_layer">Перемикач для показу або приховування температурного шару на мапі.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показати шкалу MTB для підйому</string>
-    <string name="rendering_attr_showMtbScale_description">Показати траси згідно зі шкалою MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Показати траси згідно з їхньою шкалою MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показати траси згідно зі шкалою підйомів MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Показати шкалу MTB</string>
     <string name="mtb_scale">Шкала MTB</string>
@@ -4977,7 +4977,7 @@
     <string name="mtb_segment_classification">Класифікація сегментів</string>
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії поривів вітру</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
     <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
@@ -5005,7 +5005,7 @@
     <string name="cloud_recent_changes">Зміни</string>
     <string name="cloud_all_changes_uploaded">Усі зміни вивантажено</string>
     <string name="cloud_all_changes_uploaded_descr">Усі зміни, зроблені на цьому пристрої, синхронізуються з OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Неузгодженостей немає</string>
+    <string name="cloud_no_conflicts">Неузгодженостей немає.</string>
     <string name="download_cloud_version">Завантажити хмарну версію</string>
     <string name="backup_error_failed_to_fetch_remote_items">Не вдалося отримати список файлів із сервера.</string>
     <string name="last_sync">Остання синхронізація</string>
@@ -5019,7 +5019,21 @@
     <string name="changes">Зміни %1$s</string>
     <string name="sync_now">Синхронізувати зараз</string>
     <string name="cloud_all_changes_downloaded">Усі зміни завантажено</string>
-    <string name="av_audio_format_bottom_sheet_descr">Виберіть формат аудіовиходу. Формат типу файлу для аудіо - 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Виберіть аудіоформат. Формат контейнера типу файлу для аудіо — 3GPP (.3gp).</string>
     <string name="si_nm_ft">Морські милі/фути</string>
     <string name="si_nm_mt">Морські милі/метри</string>
+    <string name="set_up_backup">Налаштувати резервне копіювання</string>
+    <string name="y_axis">Вісь Y</string>
+    <string name="x_axis">Вісь X</string>
+    <string name="share_as_file">Надіслати як файл</string>
+    <string name="value_downloaded_of_mb">Завантаження %1$.1f/%2$.1f МБ</string>
+    <string name="share_link">Поділитись посиланням</string>
+    <string name="determine_location">Дозвольте нам визначити ваше розташування</string>
+    <string name="skip_download">Пропустити завантаження</string>
+    <string name="weight_limit_error">Мінімальне значення — «%1$s» тон. Використовуйте профіль «%2$s», якщо вага транспортного засобу менша за мінімальне значення.</string>
+    <string name="sound_beep_complex_loud">Звуковий сигнал: складний гучний</string>
+    <string name="sound_beep_complex">Звуковий сигнал: складний</string>
+    <string name="sound_beep_minimal">Звуковий сигнал: мінімальний</string>
+    <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
+    <string name="sound_beep_simple">Звуковий сигнал: простий</string>
 </resources>

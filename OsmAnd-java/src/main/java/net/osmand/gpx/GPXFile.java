@@ -15,6 +15,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class GPXFile extends GPXUtilities.GPXExtensions {
+	
+	private static final String DEFAULT_WPT_GROUP_NAME = "";
 
 	public String author;
 	public GPXUtilities.Metadata metadata = new GPXUtilities.Metadata();
@@ -132,6 +134,9 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	private GPXUtilities.PointsGroup getOrCreateGroup(GPXUtilities.WptPt point) {
+		if (point.category == null && pointsGroups.containsKey(DEFAULT_WPT_GROUP_NAME)) {
+			return pointsGroups.get(DEFAULT_WPT_GROUP_NAME);
+		}
 		if (pointsGroups.containsKey(point.category)) {
 			return pointsGroups.get(point.category);
 		}
@@ -194,7 +199,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		if (index == -1) {
 			return;
 		}
-		String prevGroupName = existingPoint.category;
+		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
 		existingPoint.updatePoint(newWpt);
 		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
 				|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {

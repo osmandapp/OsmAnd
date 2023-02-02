@@ -88,7 +88,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_backup_types, container, false);
-		AndroidUtils.addStatusBarPadding21v(app, view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
 		progressBar = view.findViewById(R.id.progress_bar);

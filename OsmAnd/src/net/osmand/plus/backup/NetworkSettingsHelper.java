@@ -62,7 +62,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		super(app);
 	}
 
-	@Nullable
 	private BackupHelper getBackupHelper() {
 		return getApp().getBackupHelper();
 	}
@@ -206,9 +205,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void exportSettings(@NonNull String key,
 	                           @NonNull List<SettingsItem> items,
 	                           @NonNull List<SettingsItem> itemsToDelete,
+	                           @NonNull List<SettingsItem> itemsToLocalDelete,
 	                           @Nullable BackupExportListener listener) throws IllegalStateException {
 		if (!exportAsyncTasks.containsKey(key)) {
-			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
+			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, itemsToLocalDelete, listener);
 			exportAsyncTasks.put(key, exportTask);
 			exportTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
@@ -228,21 +228,29 @@ public class NetworkSettingsHelper extends SettingsHelper {
 
 
 	public void syncSettingsItems(@NonNull String key,
-	                              @NonNull LocalFile localFile,
-	                              @NonNull RemoteFile remoteFile,
+	                              @Nullable LocalFile localFile,
+	                              @Nullable RemoteFile remoteFile,
 	                              @NonNull SyncOperationType operation) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			syncBackupTasks.put(key, syncTask);
 			switch (operation) {
 				case SYNC_OPERATION_DELETE:
-					syncTask.deleteItem(remoteFile.item);
+					if (remoteFile != null) {
+						syncTask.deleteItem(remoteFile.item);
+					} else if (localFile != null) {
+						syncTask.deleteLocalItem(localFile.item);
+					}
 					break;
 				case SYNC_OPERATION_UPLOAD:
-					syncTask.uploadLocalItem(localFile.item);
+					if (localFile != null) {
+						syncTask.uploadLocalItem(localFile.item);
+					}
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
-					syncTask.downloadRemoteVersion(remoteFile.item);
+					if (remoteFile != null) {
+						syncTask.downloadRemoteVersion(remoteFile.item);
+					}
 					break;
 			}
 		} else {

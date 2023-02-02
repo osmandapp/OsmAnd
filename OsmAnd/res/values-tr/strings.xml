@@ -813,8 +813,8 @@
     <string name="poi_context_menu_modify">POI düzenle</string>
     <string name="rotate_map_compass_opt">Pusula yönü</string>
     <string name="rotate_map_bearing_opt">Hareket yönü</string>
-    <string name="rotate_map_none_opt">Dönme yok (kuzey her zaman yukarı doğru)</string>
-    <string name="rotate_map_to_bearing_descr">Harita hizalaması:</string>
+    <string name="rotate_map_north_opt">Dönme yok (kuzey her zaman yukarı doğru)</string>
+    <string name="rotate_map_to_descr">Harita hizalaması:</string>
     <string name="show_route">Rota ayrıntıları</string>
     <string name="shared_string_import">İçe aktar</string>
     <string name="error_occurred_loading_gpx">GPX yüklenemedi.</string>
@@ -1453,7 +1453,7 @@
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
     <string name="voices">Sesli uyarılar</string>
     <string name="transport_context_menu">Durakta ulaşım aracı ara</string>
-    <string name="rotate_map_to_bearing">Harita yönlendirme</string>
+    <string name="rotate_map_to">Harita yönlendirme</string>
     <string name="version_index_is_not_supported">\'\'{0}\'\' indeks sürümü desteklenmemektedir</string>
     <string name="osmand_routing_experimental">OsmAnd çevrim dışı navigasyon deneysel bir özelliktir ve yaklaşık 20 km\'den daha uzun mesafelerde çalışmaz.
 \n
@@ -2168,7 +2168,7 @@
     <string name="subscribe_email_error">Hata</string>
     <string name="analyze_on_map">Harita üzerinde analiz et</string>
     <string name="shared_string_visible">Görünür</string>
-    <string name="driving_region_automatic">Otomatik</string>
+    <string name="shared_string_automatic">Otomatik</string>
     <string name="do_not_send_anonymous_app_usage">Anonim uygulama kullanım istatistiklerini gönderme</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd uygulamanın hangi kısımlarını açtığınızla ilgili bilgi toplar. Konum bilginiz, ya da uygulamaya girdiğiniz herhangi bir şey veya görüntülediğiniz, aradığınız ya da indirdiğiniz bölgelerin ayrıntıları asla gönderilmez.</string>
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>

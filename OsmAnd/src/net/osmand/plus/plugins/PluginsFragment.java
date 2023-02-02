@@ -88,7 +88,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.plugins, container, false);
-		AndroidUtils.addStatusBarPadding21v(getContext(), view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.plugins_screen);

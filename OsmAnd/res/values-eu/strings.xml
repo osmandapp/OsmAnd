@@ -766,9 +766,9 @@
     <string name="poi_context_menu_delete">Ezabatu POI-a</string>
     <string name="rotate_map_compass_opt">Ipar-orratzaren norabidean</string>
     <string name="rotate_map_bearing_opt">Mugimenduaren norabidea</string>
-    <string name="rotate_map_none_opt">Biraketa gabe (iparra beti gorantza)</string>
-    <string name="rotate_map_to_bearing_descr">Maparen lerrokatzea:</string>
-    <string name="rotate_map_to_bearing">Maparen orientazioa</string>
+    <string name="rotate_map_north_opt">Biraketa gabe (iparra beti gorantza)</string>
+    <string name="rotate_map_to_descr">Maparen lerrokatzea:</string>
+    <string name="rotate_map_to">Maparen orientazioa</string>
     <string name="show_route">Ibilbidearen xehetasunak</string>
     <string name="fav_imported_sucessfully">Gogokoak inportatuta</string>
     <string name="fav_file_to_load_not_found">Ez da aurkitu gogokoak dituen GPX fitxategia {0} helbidean</string>
@@ -2185,7 +2185,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>
-    <string name="driving_region_automatic">Automatikoa</string>
+    <string name="shared_string_automatic">Automatikoa</string>
     <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd-ek aplikazioan irekitzen dituzun atalei buruzko informazioa jasotzen du. Zure kokalekua ez da inoiz bidaltzen, ezta aplikazioan idazten duzun ezer edo ikusi, bilatu edo deskargatzen dituzun zonaldeei buruzko ezer ere.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak abioan</string>
@@ -4554,7 +4554,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="marker_1st">Lehenengo markatzailea</string>
     <string name="routing_attr_goods_restrictions_name">Salgaien banaketa</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Erakutsi MTB IMBA ibilbideak</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">Erakutsi mendiko bizikletarako bereziki diseinatutako ibilbideak</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">Erakutsi mendiko bizikletako ibilbideak</string>
     <string name="routing_attr_goods_restrictions_description">Kontuan hartu salgaien ibilgailu arinak (salgaiak) sartzeko baimenak</string>
     <string name="switch_widget_mode_desc">Modua alda dezakezu widget-a sakatuta.</string>
     <string name="attach_roads_warning">Errepideei grabatutako ibilbide bat bakarrik erantsi diezaiekezu</string>
@@ -4587,7 +4587,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="accessibility_2d_view_on">2.5D ikuspegia aktibatuta</string>
     <string name="download_complete">Deskarga burutu da</string>
     <string name="connect_with_straight_line">Konektatu lerro zuzenean</string>
-    <string name="attach_roads_descr">Zure ibilbidea lineaz kanpoko mapei atxikitako baliozko ibilbide batekin hurbildu nahi al duzu\?. Kasu horretan, errepidearen altitudea, errepidearen informazioa eta gero nabigazioan erabil daitezkeen biraketak zuzenduta izango dituzu.</string>
+    <string name="attach_roads_descr">Hurbildu zure ibilbidea baimendutako errepideetara bideratzeko eta lotu biratzeko argibide zehatzak eta ibilbidearen propietateak.</string>
     <string name="updated_map_time">Eguneratua: %1$s.</string>
     <string name="live_update_frequency_day_variant">Mapen eguneraketak egunero egiaztatuko dira.</string>
     <string name="next_live_update_time">Hurrengo eguneratzea: %1$s barru.</string>
@@ -4664,4 +4664,195 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_depthContourWidth_name">Lerroaren zabalera</string>
     <string name="storage_migration_fragment_close_descr">Kopiatzen %1$s%% -ra. Orain gelditzen bazara, baliteke aplikazioak behar bezala ez funtzionatzea.</string>
     <string name="air_pressure_widget_desc">Uneko mapa-zentrorako presio atmosferikoa bistaratzen du.</string>
+    <string name="terms_of_service_desc">Mapak deskargatuz %1$s eta %2$s onartzen dituzu.</string>
+    <string name="weather_prefs_descr">24 orduko eta 7 eguneko iragarpena, 3 orduz behin eguneratua</string>
+    <string name="rendering_engine_failed">OsmAnd-en mapa errendatzeak huts egin du duela gutxi.</string>
+    <string name="restart_now">Berrabiarazi orain</string>
+    <string name="map_widget_ant_bicycle_power">Bizikletaren potentzia</string>
+    <string name="set_up_backup">Konfiguratu babeskopia</string>
+    <string name="shared_string_modified">Aldatua</string>
+    <string name="download_cloud_version">Deskargatu hodeiko bertsioa</string>
+    <string name="shared_string_do_not_exist">Ez dago</string>
+    <string name="last_sync">Azken sinkronizazioa</string>
+    <string name="export_to_file">Esportatu fitxategira</string>
+    <string name="shared_string_expires">Iraungitzen da</string>
+    <string name="shared_string_purchased_on">egunean erosita</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="ant_missing_dependency">Mendekotasun bat falta da</string>
+    <string name="quick_action_current_location_widget_descr">Uneko kokapenaren trepeta mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="coordinates_widget_current_location_desc">Uneko kokapenaren koordenatu geografikoak erakusten ditu</string>
+    <string name="coordinates_widget_map_center_desc">Uneko maparen erdigunearen koordenatu geografikoak erakusten ditu</string>
+    <string name="coordinates_widget_current_location">Koordenatuak: uneko kokapena</string>
+    <string name="available_as_part_of_subscription_plan">%1$s harpidetzaren barruan eskuragarri.</string>
+    <string name="favorite_confirm_delete_group">Ziur \"%1$s\" taldea eta sartutako puntu guztiak (%2$d) ezabatu nahi dituzula\?</string>
+    <string name="weather_pressure_hectopascals">Hektopascalak</string>
+    <string name="weather_pressure_inches_of_mercury">Hazbete merkurio</string>
+    <string name="show_map_symbols_desc">Testua, bide seinaleak eta beste.</string>
+    <string name="click_on_widget">Egin klik trepetan</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Prezipitazio-isolineak</string>
+    <string name="open_weather_action">Ireki eguraldia</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Haize-boladen isolineak</string>
+    <string name="mtb_scale">MTB eskala</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="mtb_imba_full">Mendiko Bizikletaren Nazioarteko Elkartea</string>
+    <string name="mtb_segment_classification">Segmentuen sailkapena</string>
+    <string name="rendering_attr_showMtbScale_name">Erakutsi MTB eskala</string>
+    <string name="rendering_attr_showMtbScale_description">Erakutsi ibilbideak MTB eskalaren arabera.</string>
+    <string name="ant_write_to_gpx">Idatzi datuak jarraitzeko</string>
+    <string name="developer_widgets">Garatzaileen trepetak</string>
+    <string name="how_to_use">Nola erabili:</string>
+    <string name="distance_by_tap_use_description">Sakatu mapan zure uneko kokapena eta ukitutako puntuaren arteko distantzia ikusteko.
+\nSakatu 2 hatzekin mapan klikatutako puntuen arteko distantzia ikusteko</string>
+    <string name="included_in_your_current_plan">Uneko zure \"%1$s\" planean sartuta</string>
+    <string name="altitude_correction">Kotaren zuzenketa</string>
+    <string name="release_4_4_pre">• Hona hemen 4.4 bertsiorako kateak</string>
+    <string name="ant_go_to_store">Joan denda edo biltegira</string>
+    <string name="ant_read_data">Irakurri datuak</string>
+    <string name="next_live_update_date_and_time">Hurrengo eguneratzea %1$s-an %2$s-etan.</string>
+    <string name="weather_pressure_millimeters_of_mercury">Milimetro merkurioa</string>
+    <string name="coordinates_widget_map_center">Koordenatuak: maparen erdigunea</string>
+    <string name="speak_gps_signal_status">Iragarri GPS seinalearen galtzea eta berreskuratzea</string>
+    <string name="speak_route_recalculation">Iragarri ibilbidearen birkalkulua</string>
+    <string name="map_widget_ant_bicycle_power_desc">Txirrindulariaren potentzia erakusten du, bizikleta aurrera eramateko erabiltzen dena</string>
+    <string name="map_widget_ant_bicycle_cadence">Bizikletaren kadentzia</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Erabiltzaileak pedalei eragiten dion abiadura erakusten du</string>
+    <string name="worldwide_maps">Mundu osoko mapak</string>
+    <string name="y_axis">Y ardatza</string>
+    <string name="x_axis">X ardatza</string>
+    <string name="cloud_all_changes_downloaded">Aldaketa guztiak deskargatu dira</string>
+    <string name="import_export">Inportatu/Esportatu</string>
+    <string name="simulate_location_by_gpx">Simulatu kokapena GPX bidez</string>
+    <string name="go_to_marker_location">Joan markatzailearen kokapenera</string>
+    <string name="determine_location">Baimendu zure kokapena zehazten</string>
+    <string name="cloud_changes">Hodeiko aldaketak</string>
+    <string name="shared_string_uploaded">Kargatua</string>
+    <string name="modified_file">Fitxategi aldatua</string>
+    <string name="share_as_file">Partekatu fitxategi gisa</string>
+    <string name="skip_download">Saltatu deskarga</string>
+    <string name="choose_what_to_sync">Aukeratu zer sinkronizatu</string>
+    <string name="share_link">Partekatu esteka</string>
+    <string name="shared_string_cloud">Hodeia</string>
+    <string name="local_changes">Tokiko aldaketak</string>
+    <string name="cloud_conflict">Gatazka</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Ezin izan da fitxategien zerrenda zerbitzaritik eskuratu.</string>
+    <string name="value_downloaded_of_mb">Deskargatzen %1$.1f/%2$.1f MB</string>
+    <string name="cloud_sync_progress">Sinkronizatzen…%1$s</string>
+    <string name="checking_progress">Egiaztatzen…</string>
+    <string name="res_unknown">Ezezaguna</string>
+    <string name="shared_string_unsynced">Sinkronizatu gabe</string>
+    <string name="check_for_updates">Bilatu eguneratzeak</string>
+    <string name="changes">Aldaketak %1$s</string>
+    <string name="sync_now">Sinkronizatu orain</string>
+    <string name="local_file_will_be_restored">Tokiko fitxategia leheneratuko da</string>
+    <string name="local_changes_will_be_dismissed">Tokiko aldaketak baztertuko dira</string>
+    <string name="upload_all">Kargatu dena</string>
+    <string name="new_file">Fitxategi berria</string>
+    <string name="deleted_file">Fitxategi ezabatua</string>
+    <string name="upload_change">Kargatu aldaketa</string>
+    <string name="cloud_changes_will_be_dismissed">Hodeiko aldaketak baztertuko dira</string>
+    <string name="cloud_version_will_be_removed">Hodeiko bertsioa kenduko da</string>
+    <string name="cloud_conflicts">Gatazkak</string>
+    <string name="cloud_no_conflicts">Ez dago gatazkarik</string>
+    <string name="cloud_recent_changes">Aldaketak</string>
+    <string name="cloud_all_changes_uploaded">Aldaketa guztiak kargatu dira</string>
+    <string name="cloud_all_changes_uploaded_descr">Gailu honetan egindako aldaketa guztiak OsmAnd Cloud-ekin sinkronizatuta daude.</string>
+    <string name="shared_string_open">Ireki</string>
+    <string name="open_weather_action_description">Eguraldiaren informazio zehatza duen pantaila bat irekitzeko aukera ematen du.</string>
+    <string name="rendering_attr_weatherCloudContours_name">Hodei isolineak</string>
+    <string name="purchases_feature_desc_external_sensors">Bistaratu eta grabatu kanpoko sentsoreen datuak: bizikletaren abiadura, potentzia eta kadentzia, eta bihotz-taupadak.</string>
+    <string name="dismiss_changes">Aldaketak baztertu\?</string>
+    <string name="map_rendering_engine_v1">1. bertsioa</string>
+    <string name="map_rendering_engine_v2">2. bertsioa (OpenGL)</string>
+    <string name="rendering_engine_failed_descr">OsmAnd mapak errendatzeko \"1. bertsioa\"ra itzuli da. Saia zaitezke \"2. bertsioa (OpenGL)\" errendatze-motor berrira itzultzen Ezarpenetan.
+\n
+\nMesedez, lagundu hobekuntzak egiten zure erroreen erregistroa emanez.</string>
+    <string name="dismiss_changes_descr">Aldaketa guztiak baztertu egingo dira.</string>
+    <string name="show_map_symbols">Erakutsi mapen ikurrak</string>
+    <string name="map_rendering_engine_descr">2. bertsioa (OpenGL) mapak errendatzeko motor azkarragoa da, 2.5D ikuspegia ere badu. 1 bertsioa errendatzea lehenetsia zen OsmAnd 4.3 baino lehen, eta oraindik hobe da gailu zaharrentzako.</string>
+    <string name="map_rendering_engine">Mapak errendatzeko motorra</string>
+    <string name="external_sensors_support">Onartzen diren kanpoko sentsoreak</string>
+    <string name="map_center_widget">Koordenatuak: Maparen erdigunea</string>
+    <string name="current_location_widget">Koordenatuak: uneko kokapena</string>
+    <string name="map_widget_altitude_desc">Uneko geokokapenaren altitudea edo uneko maparen erdigunearen altitudea erakusten du</string>
+    <string name="map_widget_rendering_fps">Maparen FPS errendatzea</string>
+    <string name="external_sensors_plugin_name">Kanpoko sentsoreak</string>
+    <string name="external_sensors_plugin_description">Kanpoko sentsoreetara sartzen da irakurtzeko, adibidez: zure bihotz-taupadak, bizikleta-abiadura, potentzia edo kadentzia. Zure gailua dagozkien sentsoreetara konektatu behar da ANT+ haririk gabeko sare pertsonaleko protokoloaren bidez.</string>
+    <string name="map_widget_altitude_map_center">Kota: maparen erdigunea</string>
+    <string name="map_widget_altitude_map_center_desc">Uneko maparen erdigunearen itsas mailaren gaineko kota erakusten du.</string>
+    <string name="map_widget_altitude_current_location">Altuera: uneko kokapena</string>
+    <string name="map_widget_altitude_current_location_desc">Uneko geokokapenaren itsas mailaren gaineko altitudea erakusten du.</string>
+    <string name="map_widget_rendering_fps_desc">Mapa eta maparen elementuak zer abiadurarekin bistaratzen eta freskatzen diren erakusten du, segundoko fotogramatan (FPS) adierazita.</string>
+    <string name="location_simulation_cutoff">Simulazioak lehen metroak saltatzen ditu</string>
+    <string name="location_simulation_speedup">Simulazioaren bizkortzea</string>
+    <string name="shared_string_identifiers">Identifikatzaileak</string>
+    <string name="send_uuid_preference_desc">Ausazko UUID bat erabiltzen da OsmAnd zerbitzarietatik lineaz kanpoko mapak deskargatzeko, zerbitzariaren baliabideen bidezko erabilera kontrolatzeko, trafiko-ereduak aurreikusteko eta hileroko mapen txosten anonimoak sortzeko.</string>
+    <string name="send_uuid_preference">Bidali erabiltzaile-identifikatzaile bakarra (UUID)</string>
+    <string name="shared_string_terms_of_use">Erabilera baldintzak</string>
+    <string name="quick_action_map_center_widget_descr">Mapa erdiratzeko trepeta mapan erakusteko edo ezkutatzeko botoia.</string>
+    <string name="ant_heart_rate_write_gpx_desc">Sartu bihotz-taupadak arrastoan</string>
+    <string name="map_widget_ant_heart_rate_desc">Jarduera jakin batean erabiltzailearen bihotz-taupadak erakusten ditu denbora errealean</string>
+    <string name="shared_string_2_5_d_view">2.5 D ikuspegia</string>
+    <string name="depth_contours">Sakonera-sestrak</string>
+    <string name="map_marker_interval_dialog_desc">Zehaztu zenbateko denbora-tartea neurtuko den batez besteko abiadura iristeko ordua kalkulatzeko.</string>
+    <string name="shared_string_shows">Erakusten du</string>
+    <string name="shared_string_switch_mode">Aldatu modua</string>
+    <string name="map_markers_desc">Trepeta honek mapa-markatzaileen zerrendako lehen bi markatzaileen distantzia edo iristeko ordu estimatua (ETA) erakusten du.</string>
+    <string name="shared_string_large">Handia</string>
+    <string name="shared_string_normal">Normala</string>
+    <string name="download_heightmap_maps">Altuera-mapa</string>
+    <string name="favorite_delete_group">Ezabatu taldea</string>
+    <string name="no_altitude_data_desc">%1$s datuak jasotzeko, erantsi zure ibilbidea errepideei edo kalkulatu sarean.</string>
+    <string name="ant_missing_dependency_descr">Ezin izan da \"%1$s\" beharrezko zerbitzua aurkitu.
+\nANT+ Plugins Zerbitzua instalatu edo eguneratu behar duzu.
+\nPlay Store abiarazi nahi duzu horretarako\?</string>
+    <string name="show_borders_of_downloaded_maps">Erakutsi deskargatutako mapen mugak</string>
+    <string name="weather_widget_group_desc">Eguraldi-informazio ezberdinak erakusten dituen trepeten multzoa.</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="action_not_supported_with_map_style">Aukeratutako mapa estiloak ez du onartzen ekintza hau.</string>
+    <string name="share_crash_log">Partekatu hutsegiteen erregistroa</string>
+    <string name="map_widget_ant_bicycle_speed">Bizikletaren abiadura</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Bidaiatzeko abiadura erakusten du</string>
+    <string name="map_widget_ant_bicycle_dist">Distantzia bizikletan</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Bidaiatutako distantzia erakusten du</string>
+    <string name="nautical_depth_points">Ur sakonerako puntuak</string>
+    <string name="map_widget_target_distance_desc">Kameraren eta xedearen arteko distantzia erakusten du.</string>
+    <string name="map_widget_zoom_level_desc">Uneko maparen zoom-maila erakusten du.</string>
+    <string name="map_widget_camera_distance_desc">Kameraren azalerarekiko kota erakusten du.</string>
+    <string name="map_widget_camera_tilt_desc">Kameraren okertze-angelua erakusten du perspektiba moduan. Lehenetsia 90ªkoa da (inklinaziorik gabe).</string>
+    <string name="map_widget_zoom_level">Zoom maila</string>
+    <string name="map_widget_camera_distance">Kameraren kota</string>
+    <string name="map_widget_camera_tilt">Kameraren inklinazioa</string>
+    <string name="map_widget_ant_heart_rate">Bihotz taupadak</string>
+    <string name="release_4_3">• 2. bertsioa (OpenGL) mapa errendatzeko motor berria eta azkarragoa, 2.5D ikuspegiarekin
+\n
+\n • Mugimenduko kokapen-aldaketen animazio leuna
+\n
+\n • Maparen zentroko koordenatuetarako eta geokokapenen kotarako trepeta berriak
+\n
+\n • \"Ukitzeko distantzia\": testu-tamainaren aukerak gehitu ditu
+\n
+\n • \"Mapa-markatzailea\" trepeta: klikaren portaera aldatzeko aukera gehitu da
+\n
+\n • \"Posizioa kokatzea\" aukera konpondu da
+\n
+\n • GPX: \"esteka\", \"cmt\", \"desc\" etiketetarako eta edozein luzapen pertsonalizatuetarako laguntza gehitu da
+\n
+\n • \"Mapa nautikoen\" zerrenda berrantolatu
+\n
+\n • ANT+ sentsoreentzako euskarria gehitu da
+\n
+\n • Deskarga UUID desgaitzeko aukera gehitu da
+\n
+\n • Abiadura lehenetsia doitzeko iragarpena kotaren araberako ibilaldi/ibilaldi/korrika-bidaien denboraren arabera.
+\n
+\n • Audio irteera eta bolumen graduatzailearen portaera konpondu dira
+\n
+\n</string>
+    <string name="display_position">Kokapena</string>
+    <string name="si_nm_mt">Mila nautiko/metro</string>
+    <string name="si_nm_ft">Mila nautiko/oin</string>
+    <string name="av_audio_format_bottom_sheet_descr">Hautatu audio irteera formatua. Audiorako fitxategi formatua 3GPP (.3gp) da.</string>
 </resources>

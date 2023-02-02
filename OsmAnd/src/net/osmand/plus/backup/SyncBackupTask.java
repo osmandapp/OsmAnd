@@ -96,7 +96,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			syncListener.onBackupSyncStarted();
 		}
 		if (settingsItems.size() > 0 && operation != SYNC_OPERATION_UPLOAD) {
-			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, this);
+			networkSettingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, true, this);
 		} else if (operation != SYNC_OPERATION_DOWNLOAD) {
 			uploadNewItems();
 		} else {
@@ -105,11 +105,18 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	public void uploadLocalItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item), Collections.emptyList(), this);
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item),
+				Collections.emptyList(), Collections.emptyList(), this);
 	}
 
 	public void deleteItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(), Collections.singletonList(item), this);
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(),
+				Collections.singletonList(item), Collections.emptyList(), this);
+	}
+
+	public void deleteLocalItem(@NonNull SettingsItem item) {
+		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(),
+				Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
 	public void downloadRemoteVersion(@NonNull SettingsItem item) {
@@ -123,9 +130,11 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 		try {
 			BackupInfo info = backupHelper.getBackup().getBackupInfo();
-			List<SettingsItem> items = info.itemsToUpload;
-			if (items.size() > 0 || info.filteredFilesToUpload.size() > 0) {
-				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, this);
+			List<SettingsItem> itemsToUpload = info.itemsToUpload;
+			List<SettingsItem> itemsToDelete = info.itemsToDelete;
+			List<SettingsItem> itemsToLocalDelete = info.itemsToLocalDelete;
+			if (itemsToUpload.size() > 0 || itemsToDelete.size() > 0 || itemsToLocalDelete.size() > 0) {
+				networkSettingsHelper.exportSettings(BACKUP_ITEMS_KEY, itemsToUpload, itemsToDelete, itemsToLocalDelete, this);
 			} else {
 				onSyncFinished(null);
 			}
@@ -144,7 +153,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 					oldItemsToDelete.add(item);
 				}
 			}
-			return ExportBackupTask.getEstimatedItemsSize(app, info.itemsToUpload, info.itemsToDelete, oldItemsToDelete);
+			return ExportBackupTask.getEstimatedItemsSize(app, info.itemsToUpload,
+					info.itemsToDelete, info.itemsToLocalDelete, oldItemsToDelete);
 		}
 		return 0;
 	}

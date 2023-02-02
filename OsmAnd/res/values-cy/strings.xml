@@ -470,7 +470,7 @@
     <string name="map_widget_monitoring">Recordio taith</string>
     <string name="shared_string_preparing">Yn paratoi</string>
     <string name="shared_string_world">Byd</string>
-    <string name="driving_region_automatic">Awtomatig</string>
+    <string name="shared_string_automatic">Awtomatig</string>
     <string name="shared_string_continue">Parhau</string>
     <string name="access_widget_expand">Ehangu</string>
     <string name="rendering_value_disabled_name">Analluogwyd</string>
@@ -1936,8 +1936,8 @@
     <string name="daynight">Modd dydd/nos</string>
     <string name="fast_route_mode">Llwybr cyflymaf</string>
     <string name="shared_string_download_map">Lawrlwytho map</string>
-    <string name="rotate_map_to_bearing_descr">Aliniad map:</string>
-    <string name="rotate_map_to_bearing">Cyfeiriad y map</string>
+    <string name="rotate_map_to_descr">Aliniad map:</string>
+    <string name="rotate_map_to">Cyfeiriad y map</string>
     <string name="fav_imported_sucessfully">Wedi mewnforio ffefrynnau</string>
     <string name="layer_yandex_traffic">Traffig Yandex</string>
     <string name="layer_map">Ffynhonnell map…</string>
@@ -2701,7 +2701,7 @@
     <string name="index_name_oceania">Awstralia ac ynysoedd y Cefnfor Tawel</string>
     <string name="index_name_voice">Cyfarwyddiadau llais (wedi\'u recordio, nodweddion cyfyngedig)</string>
     <string name="index_name_tts_voice">Cyfarwyddiadau llais (TTS, dewis gorau)</string>
-    <string name="rotate_map_none_opt">Dim troi (cadw\'r gogledd am i fyny)</string>
+    <string name="rotate_map_north_opt">Dim troi (cadw\'r gogledd am i fyny)</string>
     <string name="use_system_screen_timeout">Defnyddio cyfnod diffodd sgrin y system</string>
     <string name="gpx_selection_route_points">%1$s
 \nPwyntiau llwybr %2$s</string>

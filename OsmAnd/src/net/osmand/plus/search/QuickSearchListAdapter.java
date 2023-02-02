@@ -1,5 +1,9 @@
 package net.osmand.plus.search;
 
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
+import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -62,10 +66,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
-import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private final OsmandApplication app;
@@ -93,8 +93,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		void reloadData();
 	}
 
-	public QuickSearchListAdapter(OsmandApplication app, FragmentActivity activity) {
-		super(app, R.layout.search_list_item);
+	public QuickSearchListAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
+		super(activity, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
 		this.inflater = UiUtilities.getInflater(activity, isNightMode());
@@ -249,7 +249,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindBannerItem(@Nullable View convertView,
-										@NonNull QuickSearchListItem listItem) {
+	                                    @NonNull QuickSearchListItem listItem) {
 		QuickSearchBannerListItem banner = (QuickSearchBannerListItem) listItem;
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_banner_list_item);
 		((TextView) view.findViewById(R.id.empty_search_description)).setText(R.string.nothing_found_descr);
@@ -331,7 +331,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindSearchMoreItem(@Nullable View convertView,
-											@NonNull QuickSearchListItem listItem) {
+	                                        @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_more_list_item);
 
 		if (listItem.getSpannableName() != null) {
@@ -386,7 +386,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindButtonItem(@Nullable View convertView,
-										@NonNull QuickSearchListItem listItem) {
+	                                    @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_custom_list_item);
 		((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
 		if (listItem.getSpannableName() != null) {
@@ -414,7 +414,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindHeaderItem(@Nullable View convertView,
-										@NonNull QuickSearchListItem listItem) {
+	                                    @NonNull QuickSearchListItem listItem) {
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_header_list_item);
 		view.findViewById(R.id.top_divider)
 				.setVisibility(((QuickSearchHeaderListItem) listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);

@@ -126,6 +126,11 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		}
 	}
 
+	@Override
+	protected void deleteItem(ITileSource item) {
+		// TODO: delete settings item
+	}
+
 	@NonNull
 	@Override
 	public ITileSource renameItem(@NonNull ITileSource item) {

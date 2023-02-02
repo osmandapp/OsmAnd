@@ -338,9 +338,9 @@
     <string name="poi_context_menu_delete">Slett interessepunkt</string>
     <string name="rotate_map_compass_opt">Kompassretning</string>
     <string name="rotate_map_bearing_opt">Bevegelsesretning</string>
-    <string name="rotate_map_none_opt">Ingen rotasjon (nord alltid oppover)</string>
-    <string name="rotate_map_to_bearing_descr">Kartjustering:</string>
-    <string name="rotate_map_to_bearing">Kartorientering</string>
+    <string name="rotate_map_north_opt">Nord er opp (fast)</string>
+    <string name="rotate_map_to_descr">Kartjustering:</string>
+    <string name="rotate_map_to">Kartorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter importert</string>
     <string name="fav_file_to_load_not_found">GPX-fil som inneholder favoritter er ikke funnet på {0}</string>
@@ -634,7 +634,7 @@
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
     <string name="map_widget_plain_time">Gjeldende tid</string>
     <string name="osmo_edit_color">Visningsfarge</string>
-    <string name="always_center_position_on_map">Sentrer posisjon på kart</string>
+    <string name="always_center_position_on_map">Posisjonsplassering alltid i senter</string>
     <string name="guidance_preferences_descr">Navigeringsinnstillinger</string>
     <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenser</string>
@@ -1994,7 +1994,7 @@
     <string name="subscribe_email_error">Feil</string>
     <string name="shared_string_visible">Synlig</string>
     <string name="fonts_header">Skrifttyper for kart</string>
-    <string name="driving_region_automatic">Automatisk</string>
+    <string name="shared_string_automatic">Automatisk</string>
     <string name="do_not_show_startup_messages">Ikke vis oppstartsmeldinger</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kupert</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Småkupert</string>
@@ -4724,7 +4724,7 @@
     <string name="average_speed_skip_stops_desc">Hastighet under %1$s tas med og har innvirkning på gjen. hastighet.</string>
     <string name="compass_always_hidden">Alltid skjult</string>
     <string name="compass_always_visible">Alltid synlig</string>
-    <string name="compass_click_desc">Trykk på kompasset for å bytte kartretningsmodus.</string>
+    <string name="compass_click_desc">Hint: Trykk på kompassmodulen for å skifte kartorienteringsmodusen.</string>
     <string name="compass_desc">Viser retning mot nord.</string>
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
@@ -4735,7 +4735,7 @@
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
     <string name="favorite_confirm_delete_group">Vil du slette gruppen \"%1$s\" og alle dens punkter (%2$d)\?</string>
     <string name="favorite_delete_group">Slett gruppe</string>
-    <string name="display_position">Visningsposisjon</string>
+    <string name="display_position">Posisjonsplassering</string>
     <string name="download_heightmap_maps">Høydekart</string>
     <string name="shared_string_large">Stor</string>
     <string name="shared_string_normal">Normal</string>
@@ -4813,7 +4813,7 @@
     <string name="measurement_units">Målingsenheter</string>
     <string name="shared_string_weather">Vær</string>
     <string name="shared_string_layers">Lag</string>
-    <string name="rotate_map_none_rotated_opt">Låst (manuell rotering)</string>
+    <string name="rotate_map_manual_opt">Manuelt rotert (fast)</string>
     <string name="weather_offline_forecast">Frakoblet værvarsel</string>
     <string name="weather_online_cache">Nettbasert hurtiglager</string>
     <string name="explore_weather_forecast">Sjekk værmeldingen.</string>
@@ -4855,7 +4855,7 @@
 \nTrykk med 2 fingre på kartet for å vise avstanden mellom de trykte punktene.</string>
     <string name="shared_string_purchased_on">Kjøpt</string>
     <string name="si_nm_ft">Sjømil/fot</string>
-    <string name="cloud_no_conflicts">Ingen konflikter</string>
+    <string name="cloud_no_conflicts">Det er ingen konflikter.</string>
     <string name="download_cloud_version">Last ned sky-verjson</string>
     <string name="shared_string_do_not_exist">Finnes ikke</string>
     <string name="backup_error_failed_to_fetch_remote_items">Klarte ikke å hente fillisten fra tjeneren.</string>
@@ -4884,4 +4884,12 @@
     <string name="shared_string_expires">Utløper</string>
     <string name="cloud_all_changes_uploaded">Alle endringer opplastet</string>
     <string name="si_nm_mt">Sjømil/meter</string>
+    <string name="determine_location">Tillat at posisjonen din bestemmes</string>
+    <string name="y_axis">Y-akse</string>
+    <string name="x_axis">X-akse</string>
+    <string name="sound_beep_simple_loud">Lydsignal: enkelt, høyt</string>
+    <string name="sound_beep_simple">Lydsignal: enkelt</string>
+    <string name="sound_beep_complex">Lydsignal: komplekst</string>
+    <string name="sound_beep_minimal">Lydsignal: minimalt</string>
+    <string name="sound_beep_complex_loud">Lydsignal: komplekst, høyt</string>
 </resources>
