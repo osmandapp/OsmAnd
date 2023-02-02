@@ -14,18 +14,16 @@ public class NavigateGpxParams extends AidlParams {
 	private boolean needLocationPermission;
 	private boolean passWholeRoute;
 
-	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission, boolean passWholeRoute) {
+	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
 		this.force = force;
 		this.needLocationPermission = needLocationPermission;
-		this.passWholeRoute = passWholeRoute;
 	}
 
-	public NavigateGpxParams(Uri uri, boolean force, boolean needLocationPermission, boolean passWholeRoute) {
+	public NavigateGpxParams(Uri uri, boolean force, boolean needLocationPermission) {
 		this.uri = uri;
 		this.force = force;
 		this.needLocationPermission = needLocationPermission;
-		this.passWholeRoute = passWholeRoute;
 	}
 
 	public NavigateGpxParams(Parcel in) {
@@ -58,6 +56,10 @@ public class NavigateGpxParams extends AidlParams {
 
 	public boolean isPassWholeRoute() {
 		return passWholeRoute;
+	}
+
+	public void setPassWholeRoute(boolean passWholeRoute) {
+		this.passWholeRoute = passWholeRoute;
 	}
 
 	public boolean isNeedLocationPermission() {
