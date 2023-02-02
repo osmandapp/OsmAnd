@@ -406,12 +406,15 @@ public class OpeningHoursParser {
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 			Calendar openingTimeCal = null;
+			OpeningHoursRule openingRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
 						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
-						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
+								|| r.hasOverlapTimes(cal, openingRule, false)) {
 							openingTime = time;
+							openingRule = r;
 						}
 						openingTimeCal = (Calendar) cal.clone();
 					}
@@ -426,12 +429,15 @@ public class OpeningHoursParser {
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (int i = 0; i < 7; i++) {
 				cal.add(Calendar.DAY_OF_MONTH, 1);
+				OpeningHoursRule openingRule = null;
 				Calendar openingTimeCal = null;
 				for (OpeningHoursRule r : rules) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
 						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
-						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
+								|| r.hasOverlapTimes(cal, openingRule, false)) {
 							openingTime = time;
+							openingRule = r;
 						}
 						openingTimeCal = (Calendar) cal.clone();
 					}

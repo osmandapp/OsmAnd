@@ -109,6 +109,7 @@ public class OpeningHoursParserTest {
 		testOpened("05.12.2022 10:30", hours, false);
 		testOpened("05.12.2022 11:30", hours, true);
 		testOpened("30.12.2022 11:00", hours, false);
+		testInfo("29.12.2022 14:00", hours, "Will open tomorrow at 11:00");
 
 		hours = parseOpenedHours("Mo 09:00-12:00; We,Sa 13:30-17:00, Apr 01-Oct 31 We,Sa 17:00-18:30; PH off");
 		System.out.println(hours);
