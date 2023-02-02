@@ -4479,4 +4479,13 @@
     <string name="poi_socket_type3c_voltage_filter">Napetost priključka Type 3c</string>
     <string name="poi_socket_cee_blue_voltage_filter">Napetost modrega priključka CEE</string>
     <string name="poi_socket_schuko_voltage_filter">Napetost priključka Schuko</string>
+    <string name="poi_socket_type2_cable_output_high">Visok</string>
+    <string name="poi_socket_type2_cable_output_low">Nizek</string>
+    <string name="poi_socket_type3a_output_high">Visok</string>
+    <string name="poi_socket_type2_cable_output_medium">Srednji</string>
+    <string name="poi_socket_type3a_output_medium">Srednji</string>
+    <string name="poi_socket_type3c_output_high">Visok</string>
+    <string name="poi_socket_type3a_output_low">Nizek</string>
+    <string name="poi_socket_type3c_output_medium">Srednji</string>
+    <string name="poi_socket_type3c_output_low">Nizek</string>
 </resources>
