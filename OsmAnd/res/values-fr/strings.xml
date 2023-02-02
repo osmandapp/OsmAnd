@@ -126,11 +126,11 @@
     <string name="local_index_installed">Version locale</string>
     <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
     <string name="local_index_items_deleted">Élément(s) %1$d sur %2$d supprimé(s).</string>
-    <string name="local_index_items_restored">Élément(s) %1$d sur %2$d restauré(s).</string>
+    <string name="local_index_items_restored">%1$d élément(s) sur %2$d activé(s).</string>
     <string name="local_index_no_items_to_do">Aucun élément à %1$s</string>
     <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
     <string name="local_index_descr_title">Gérer les cartes hors-ligne.</string>
-    <string name="local_index_mi_restore">Restaurer</string>
+    <string name="local_index_mi_restore">Activer</string>
     <string name="local_index_mi_backup">Désactiver</string>
     <string name="shared_string_download">Télécharger</string>
     <string name="local_index_poi_data">Points d\'intérêt</string>
@@ -1713,10 +1713,10 @@
     <string name="other_menu_group">Divers</string>
     <string name="plugins_menu_group">Extensions</string>
     <string name="first_usage_item">Premiers pas</string>
-    <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base.</string>
-    <string name="navigation_item_description">Paramétrer le guidage.</string>
+    <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
+    <string name="navigation_item_description">Paramétrer le guidage</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Foire Aux Questions.</string>
+    <string name="faq_item_description">Foire Aux Questions</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un itinéraire</string>
@@ -3542,7 +3542,7 @@
     <string name="search_poi_types">Rechercher des types de PI</string>
     <string name="radius_ruler_item">Règle de mesure par rayon</string>
     <string name="map_markers_item">Marques</string>
-    <string name="legend_item_description">Le guide des symboles cartographiques.</string>
+    <string name="legend_item_description">Guide des symboles cartographiques</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Action rapide</string>
@@ -4088,8 +4088,8 @@
     <string name="duration_ago">il y a %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="local_backup">Sauvegarde locale</string>
-    <string name="local_backup_descr">Sauvegarder ou restaurer des données à partir d\'un fichier local.</string>
-    <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
+    <string name="local_backup_descr">Sauvegarder ou restaurer des données grâce à un fichier local.</string>
+    <string name="restore_from_file">Restaurer depuis un fichier de sauvegarde</string>
     <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
@@ -4101,7 +4101,7 @@
 \net toutes vos données y seront associées.</string>
     <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. Vous allez recevoir, à cette adresse, un mot de passe à usage unique.</string>
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
-    <string name="backup_into_file">Sauvegarder en tant que fichier</string>
+    <string name="backup_into_file">Sauvegarder dans un fichier</string>
     <string name="verification_code_missing_description">Le délai d\'envoi du code est de 10 minutes maximum, vérifiez votre dossier \'Pourriel\'. Vous pouvez aussi utiliser le bouton ci-dessous.</string>
     <string name="select_nav_profile_dialog_message">Le \"type de navigation\" détermine la façon dont les itinéraires sont calculés, avec un moteur de routage soit hors-ligne soit en ligne.</string>
     <string name="loading_list_of_routing_services">Actualisation des services de routage disponibles</string>
@@ -4941,7 +4941,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
     <string name="map_rendering_engine_descr">La version 2 (OpenGL) est plus rapide et permet l’affichage en 2.5D. La version 1 était utilisée jusqu\'à OsmAnd 4.3 et reste recommandée pour les smartphones plus anciens.</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Contour des rafales de vent</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolignes de vitesse de vent</string>
     <string name="rendering_engine_failed_descr">OsmAnd utilise à nouveau la version 1 du moteur de rendu de la carte. Pour essayer la version 2 (OpenGL), allez dans les paramètres.
 \n
 \nAfin de nous aider à améliorer l\'application, merci de nous envoyer vos journaux d\'erreur.</string>
@@ -5004,7 +5004,7 @@
     <string name="local_file_will_be_restored">Le fichier local sera restauré</string>
     <string name="local_changes_will_be_dismissed">Les modifications locales seront ignorées</string>
     <string name="download_cloud_version">Recevoir la version Cloud</string>
-    <string name="export_to_file">Exporter vers un fichier</string>
+    <string name="export_to_file">Exporter dans un fichier</string>
     <string name="backup_error_failed_to_fetch_remote_items">Impossible de récupérer la liste des fichiers sur le serveur.</string>
     <string name="cloud_changes_will_be_dismissed">Les modifications cloud seront ignorées</string>
     <string name="cloud_no_conflicts">Il n\'y a aucun conflit.</string>
@@ -5022,4 +5022,9 @@
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
     <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profile \"%2$s\".</string>
+    <string name="sound_beep_complex">Bip : complexe</string>
+    <string name="sound_beep_minimal">Bip : minimal</string>
+    <string name="sound_beep_simple_loud">Bip : simple fort</string>
+    <string name="sound_beep_complex_loud">Bip : complexe fort</string>
+    <string name="sound_beep_simple">Bip : simple</string>
 </resources>

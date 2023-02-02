@@ -5025,4 +5025,10 @@
     <string name="value_downloaded_of_mb">Baixando %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Pular download</string>
     <string name="determine_location">Permita-nos determinar sua localização</string>
+    <string name="sound_beep_complex">Bipe: complexo</string>
+    <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
+    <string name="weight_limit_error">O valor mínimo é \"%1$s\" toneladas. Use o perfil \"%2$s\" se o peso do veículo for menor que o valor mínimo.</string>
+    <string name="sound_beep_complex_loud">Bipe: complexo e alto</string>
+    <string name="sound_beep_minimal">Bipe: complexo e alto</string>
+    <string name="sound_beep_simple">Bipe: simples</string>
 </resources>

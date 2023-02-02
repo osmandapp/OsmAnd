@@ -4695,7 +4695,7 @@
     <string name="next_live_update_date_and_time">Prossimo aggiornamento il %1$s alle %2$s.</string>
     <string name="next_live_update_time">Prossimo aggiornamento alle %1$s.</string>
     <string name="altitude_correction">Correzione dell\'altitudine</string>
-    <string name="compass_click_desc">Tocca la bussola per cambiare l\'orientamento della mappa.</string>
+    <string name="compass_click_desc">Suggerimento: tocca la bussola per cambiare l\'orientamento della mappa.</string>
     <string name="marker_2nd">Secondo marcatore</string>
     <string name="auto_25_chars_route_tl_kl">Svolta a sinistra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
@@ -4955,7 +4955,7 @@
     <string name="wind_layer">Strato vento</string>
     <string name="cloud_layer">Livello nuvolosità</string>
     <string name="precipitation_layer">Livello precipitazioni atmosferiche</string>
-    <string name="storage_migration_fragment_close_descr">Copia completata per il %1$s%%. Se ti fermi adesso, potrebbe non funzionare correttamente.</string>
+    <string name="storage_migration_fragment_close_descr">La copia è completa solo per il %1$s%%. Se ti fermi adesso, l\'applicazione potrebbe non funzionare correttamente.</string>
     <string name="quick_action_temperature_layer">Un pulsante per mostrare o nascondere le temperature sulla mappa.</string>
     <string name="quick_action_precipitation_layer">Un pulsante per mostrare o nascondere le precipitazioni sulla mappa.</string>
     <string name="quick_action_cloud_layer">Un pulsante per mostrare o nascondere la nuvolosità sulla mappa.</string>
@@ -4972,7 +4972,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
     <string name="open_weather_action">Apri meteo</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinee delle precipitazioni</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee delle raffiche di vento</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Isolinee della velocità del vento</string>
     <string name="shared_string_purchased_on">Acquistato su</string>
     <string name="shared_string_expires">Scade</string>
     <string name="checking_progress">Controllo…</string>
@@ -5001,16 +5001,16 @@
     <string name="cloud_all_changes_uploaded">Tutte le modifiche sono state caricate</string>
     <string name="cloud_all_changes_downloaded">Tutte le modifiche sono state scaricate</string>
     <string name="cloud_all_changes_uploaded_descr">Tutte le modifiche su questo dispositivo sono state sincronizzate con OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Non ci sono conflitti</string>
+    <string name="cloud_no_conflicts">Non ci sono conflitti.</string>
     <string name="download_cloud_version">Scarica la versione cloud</string>
     <string name="shared_string_do_not_exist">Non esiste</string>
     <string name="backup_error_failed_to_fetch_remote_items">Recupero della lista dei file dal server fallito.</string>
     <string name="last_sync">Ultima sincronizzazione</string>
-    <string name="import_export">Importa/Esporta</string>
+    <string name="import_export">Importa/esporta</string>
     <string name="export_to_file">Esporta su file</string>
     <string name="choose_what_to_sync">Scegli cosa sincronizzare</string>
     <string name="cloud_sync_progress">Sincronizza...%1$s</string>
-    <string name="av_audio_format_bottom_sheet_descr">Seleziona il formato di uscita audio. Il formato di file per l\'audio è 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Seleziona un formato audio. Il tipo di file per l\'audio è 3GPP (.3gp).</string>
     <string name="set_up_backup">Impostare il backup</string>
     <string name="si_nm_ft">Miglia/piedi nautici</string>
     <string name="si_nm_mt">Miglia/metri nautici</string>
@@ -5021,4 +5021,8 @@
     <string name="determine_location">Consentici di determinare la tua posizione</string>
     <string name="share_link">Condividi il link</string>
     <string name="share_as_file">Condividi come file</string>
+    <string name="weight_limit_error">Il valore minimo è di \"%1$s\" tonnellate. Utilizza il profilo \"%2$s\" se il peso del veicolo è inferiore al valore minimo.</string>
+    <string name="sound_beep_minimal">Bip: minimale</string>
+    <string name="sound_beep_simple">Bip: semplice</string>
+    <string name="sound_beep_complex">Bip: complesso</string>
 </resources>

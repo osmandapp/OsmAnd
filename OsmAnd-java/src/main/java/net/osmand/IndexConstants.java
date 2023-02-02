@@ -39,6 +39,7 @@ public class IndexConstants {
 	public static final String GEN_LOG_EXT = ".gen.log";
 	public static final String HEIGHTMAP_SQLITE_EXT = ".sqlite";
 	public static final String DOWNLOAD_EXT = ".download";
+	public static final String TIF_EXT = ".tif";
 	public static final String TIFF_DB_EXT = ".tiff.db";
 
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip";

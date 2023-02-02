@@ -2186,7 +2186,7 @@
     <string name="app_mode_train">Поезд</string>
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
     <string name="update_all_maps_now">Обновить все карты\?</string>
-    <string name="clear_tile_data">Удалить из кеша</string>
+    <string name="clear_tile_data">Очистить кеш</string>
     <string name="routing_attr_short_way_name">Снижать расход топлива</string>
     <string name="replace_favorite_confirmation">Заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>

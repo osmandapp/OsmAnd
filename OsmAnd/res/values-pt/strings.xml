@@ -4751,7 +4751,7 @@
     <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
     <string name="compass_always_hidden">Sempre oculto</string>
     <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
-    <string name="compass_click_desc">Toque na bússola para alternar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Dica: toque na bússola para alterar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
@@ -4961,9 +4961,9 @@
     <string name="clouds_widget_desc">Mostra a cobertura de nuvens para o centro do mapa atual.</string>
     <string name="precipitation_widget_desc">Mostra a precipitação para o centro do mapa atual.</string>
     <string name="rendering_attr_depthContourWidth_name">Espessura da linha</string>
-    <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se parar agora, a aplicação pode não funcionar corretamente.</string>
+    <string name="storage_migration_fragment_close_descr">A cópia está apenas %1$s%% completa. Se parar agora, a aplicação pode não funcionar corretamente.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
-    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme escala MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme a escala MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
     <string name="quick_action_temperature_layer">Uma opção para mostrar ou ocultar a camada de temperatura no mapa.</string>
@@ -5012,7 +5012,7 @@
     <string name="cloud_recent_changes">Alterações</string>
     <string name="cloud_all_changes_downloaded">Todas as alterações foram descarregadas</string>
     <string name="cloud_all_changes_uploaded_descr">Todas as alterações feitas neste aparelho são sincronizadas com o OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Não há conflitos</string>
+    <string name="cloud_no_conflicts">Não há conflitos.</string>
     <string name="download_cloud_version">Descarregar versão da nuvem</string>
     <string name="shared_string_do_not_exist">Não existe</string>
     <string name="backup_error_failed_to_fetch_remote_items">Não foi possível obter a lista de ficheiros do servidor.</string>
@@ -5024,7 +5024,7 @@
     <string name="cloud_version_will_be_removed">A versão na nuvem será removida</string>
     <string name="cloud_changes_will_be_dismissed">As alterações na nuvem serão descartadas</string>
     <string name="cloud_all_changes_uploaded">Todas as alterações foram enviadas</string>
-    <string name="av_audio_format_bottom_sheet_descr">Selecione o formato de saída de áudio. O formato do tipo de ficheiro para áudio é 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selecione um formato de áudio. O formato do tipo de ficheiro contentor para áudio é 3GPP (.3gp).</string>
     <string name="si_nm_ft">Milhas náuticas / pés</string>
     <string name="si_nm_mt">Milhas náuticas / metros</string>
     <string name="set_up_backup">Configurar cópia de segurança</string>
@@ -5035,4 +5035,10 @@
     <string name="skip_download">Ignorar descarregamento</string>
     <string name="determine_location">Permita-nos determinar a sua localização</string>
     <string name="share_link">Partilhar a ligação</string>
+    <string name="sound_beep_complex">Bipe: complexo</string>
+    <string name="weight_limit_error">O valor mínimo é \"%1$s\" toneladas. Use o perfil \"%2$s\" se o peso do veículo for menor que o valor mínimo.</string>
+    <string name="sound_beep_complex_loud">Bipe: complexo e alto</string>
+    <string name="sound_beep_minimal">Bipe: mínimo</string>
+    <string name="sound_beep_simple">Bipe: simples</string>
+    <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
 </resources>
