@@ -209,11 +209,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof Recording;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -224,7 +219,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= startZoom) {
 			getRecordingsFromPoint(point, tileBox, objects);
 		}

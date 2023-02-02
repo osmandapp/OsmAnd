@@ -616,11 +616,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return false;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		MapActivity mapActivity = getMapActivity();
 		OsmandSettings settings = getApplication().getSettings();
@@ -647,8 +642,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() < 3 || !getApplication().getSettings().SHOW_MAP_MARKERS.get()) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (tileBox.getZoom() < 3 || !getApplication().getSettings().SHOW_MAP_MARKERS.get() || excludeUntouchableObjects) {
 			return;
 		}
 		amenities.clear();

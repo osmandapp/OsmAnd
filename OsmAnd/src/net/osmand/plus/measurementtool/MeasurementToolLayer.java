@@ -1047,7 +1047,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 
 	}
 
@@ -1069,11 +1070,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isInMeasurementMode();
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
-		return !isInMeasurementMode();
 	}
 
 	@Override

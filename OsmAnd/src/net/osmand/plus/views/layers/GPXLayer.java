@@ -42,7 +42,6 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.SplitLabelList;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.Utilities;
@@ -1604,21 +1603,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof WptPt || o instanceof SelectedGpxFile;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object object, boolean unknownLocation) {
 		return false;
 	}
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation) {
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
-			getTracksFromPoint(tileBox, point, res, false);
+			if (!excludeUntouchableObjects) {
+				getTracksFromPoint(tileBox, point, res, false);
+			}
 		}
 	}
 

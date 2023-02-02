@@ -367,11 +367,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return false;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -382,7 +377,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (excludeUntouchableObjects) {
+			return;
+		}
+
 		if (tileBox.getZoom() >= START_ZOOM_SELECTED_TRANSPORT_ROUTE && stopRoute != null) {
 			getFromPoint(tileBox, point, res, stopRoute.route.getForwardStops());
 		} else if (tileBox.getZoom() >= START_ZOOM_ALL_TRANSPORT_STOPS && data.getResults() != null) {
