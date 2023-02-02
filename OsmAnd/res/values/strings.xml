@@ -11,12 +11,14 @@
 	Thx - Hardy
 -->
 
-    <string name="change_appearance">Change appearance</string>
+    <string name="no_visible_tracks_description">Select tracks you want to make visible on the map</string>
+    <string name="no_visible_tracks">No tracks on map</string>
+    <string name="empty_tracks_description">You can import, create or record track files using OsmAnd.</string>
+    <string name="empty_tracks">You don\'t have track files</string>
     <string name="shared_string_select_recent">Select Recent</string>
-    <string name="show_all_tracks">Show all tracks</string>
-    <string name="on_map_empty_state_description">Select tracks you want to make visible on the map</string>
-    <string name="no_tracks_on_map">No tracks on map</string>
+    <string name="change_appearance">Change appearance</string>
     <string name="switch_folder">Switch folder</string>
+    <string name="show_all_tracks">Show all tracks</string>
     <string name="shared_string_on_map">On map</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>

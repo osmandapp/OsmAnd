@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/activity_background_color"
-	android:fitsSystemWindows="true">
+	android:background="?attr/appbar_and_list_background_color"
+	android:orientation="vertical">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color">
+		android:background="?attr/card_and_list_background_basic">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:minHeight="@dimen/toolbar_height">
+			android:layout_height="wrap_content">
 
 			<LinearLayout
 				android:id="@+id/toolbar_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:background="@color/color_transparent"
 				android:minHeight="@dimen/toolbar_height"
 				android:orientation="horizontal">
 
@@ -32,29 +30,21 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:tint="@color/icon_color_default_light"
+					android:tint="?attr/primary_icon_color"
 					osmand:srcCompat="@drawable/ic_action_close" />
 
-				<LinearLayout
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/toolbar_title"
+					style="@style/TitleStyle.Medium"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
+					android:layout_gravity="center"
 					android:layout_marginHorizontal="@dimen/content_padding"
-					android:layout_marginVertical="@dimen/content_padding_half"
 					android:layout_weight="1"
-					android:orientation="vertical">
+					android:text="@string/shared_string_gpx_tracks"
+					android:textSize="@dimen/dialog_header_text_size" />
 
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/toolbar_title"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="@string/shared_string_gpx_tracks"
-						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
-
-				</LinearLayout>
-
-				<androidx.appcompat.widget.AppCompatImageButton
+				<ImageButton
 					android:id="@+id/switch_group"
 					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 					android:layout_width="@dimen/toolbar_height"
@@ -63,13 +53,13 @@
 					android:tint="?attr/default_icon_color"
 					osmand:srcCompat="@drawable/ic_action_list_folders" />
 
-				<androidx.appcompat.widget.AppCompatImageButton
+				<ImageButton
 					android:id="@+id/actions_button"
 					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:tint="?default_icon_color"
+					android:tint="?attr/default_icon_color"
 					osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			</LinearLayout>
@@ -81,9 +71,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/list_background_color"
-			osmand:tabMode="scrollable">
-
-		</com.google.android.material.tabs.TabLayout>
+			osmand:tabMode="scrollable" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 
@@ -95,15 +83,57 @@
 		<androidx.viewpager2.widget.ViewPager2
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
+			android:layout_height="match_parent"
+			android:paddingBottom="@dimen/dialog_button_ex_height" />
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/shadow_view"
+		<LinearLayout
+			android:id="@+id/buttons_container"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="vertical">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/buttons_shadow"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/content_padding_half"
+				android:background="@drawable/shadow" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_ex_height"
+				android:orientation="horizontal">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/selection_button"
+					style="@style/DescStyle.Medium"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackground"
+					android:gravity="start|center_vertical"
+					android:paddingHorizontal="@dimen/content_padding"
+					android:text="@string/shared_string_select_recent"
+					android:textAllCaps="true" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/apply_button"
+					style="@style/DescStyle.Medium"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackground"
+					android:gravity="end|center_vertical"
+					android:paddingHorizontal="@dimen/content_padding"
+					android:text="@string/shared_string_apply"
+					android:textAllCaps="true" />
+
+			</LinearLayout>
+
+		</LinearLayout>
 
 	</FrameLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

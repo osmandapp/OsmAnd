@@ -865,10 +865,7 @@
         <item name="hintTextColor">?android:textColorSecondary</item>
     </style>
 
-    <style name="TabItemStyle" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
+
     <!--******************************** Basic text styles ********************************-->
 
     <!--To apply style for a specific TextView, use TextViewEx and tag "style"-->

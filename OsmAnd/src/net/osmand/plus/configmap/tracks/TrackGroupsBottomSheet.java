@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap;
+package net.osmand.plus.configmap.tracks;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
+import net.osmand.plus.configmap.tracks.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -94,15 +94,15 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
 			TrackTab trackTab = tabs.get(position);
 
-			holder.title.setText(trackTab.tabName);
+			holder.title.setText(trackTab.name);
 			ApplicationMode mode = settings.getApplicationMode();
 
 			boolean selected = trackTab == selectedTrackTab;
 			Drawable groupTypeIcon = null;
 			if (selected) {
-				groupTypeIcon = iconsCache.getPaintedIcon(trackTab.tabType.iconId, profileColor);
+				groupTypeIcon = iconsCache.getPaintedIcon(trackTab.type.iconId, profileColor);
 			} else {
-				groupTypeIcon = iconsCache.getThemedIcon(trackTab.tabType.iconId);
+				groupTypeIcon = iconsCache.getThemedIcon(trackTab.type.iconId);
 			}
 			holder.groupTypeIcon.setImageDrawable(groupTypeIcon);
 
@@ -117,7 +117,7 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 				}
 				dismiss();
 			});
-			AndroidUiHelper.updateVisibility(holder.divider, trackTab.tabType == TrackTabType.ALL);
+			AndroidUiHelper.updateVisibility(holder.divider, trackTab.type == TrackTabType.ALL);
 		}
 
 		@Override

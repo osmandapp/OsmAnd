@@ -7,7 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.configmap.tracks.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 

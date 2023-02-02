@@ -290,38 +290,6 @@ public class MapLayers {
 		}
 	}
 
-
-	public AlertDialog showGPXFileLayer(@NonNull List<String> files, MapActivity mapActivity) {
-		OsmandSettings settings = app.getSettings();
-		OsmandMapTileView mapView = mapActivity.getMapView();
-		DashboardOnMap dashboard = mapActivity.getDashboard();
-		CallbackWithObject<GPXFile[]> callbackWithObject = result -> {
-			WptPt locToShow = null;
-			for (GPXFile g : result) {
-				if (g.showCurrentTrack) {
-					if (!settings.SAVE_TRACK_TO_GPX.get() && !settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						app.showToastMessage(R.string.gpx_monitoring_disabled_warn);
-					}
-					break;
-				} else {
-					locToShow = g.findPointToShow();
-				}
-			}
-			app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-			if (locToShow != null) {
-				mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon,
-						mapView.getZoom(), true);
-			}
-			mapView.refreshMap();
-
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
-			return true;
-		};
-		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());
-	}
-
 	public void showMultiChoicePoiFilterDialog(MapActivity mapActivity, DismissListener listener) {
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);

@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap;
+package net.osmand.plus.configmap.tracks;
 
 import androidx.annotation.DrawableRes;
 
@@ -8,11 +8,10 @@ public enum TrackTabType {
 
 	ON_MAP(R.drawable.ic_show_on_map),
 	ALL(R.drawable.ic_action_list_header),
-	FOLDER(R.drawable.ic_action_folder),
-	FILTER(R.drawable.ic_action_filter);
+	FOLDER(R.drawable.ic_action_folder);
 
 	@DrawableRes
-	int iconId;
+	final int iconId;
 
 	TrackTabType(@DrawableRes int iconId) {
 		this.iconId = iconId;

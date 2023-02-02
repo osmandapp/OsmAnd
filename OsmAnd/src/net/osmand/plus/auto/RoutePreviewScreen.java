@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.configmap.tracks.GPXInfo;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.ObjectType;
