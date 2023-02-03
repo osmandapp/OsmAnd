@@ -4731,7 +4731,7 @@
     <string name="share_as_file">שיתוף כקובץ</string>
     <string name="y_axis">ציר Y</string>
     <string name="x_axis">ציר X</string>
-    <string name="av_audio_format_bottom_sheet_descr">נא לבחור תצורת פלט שמע. תצורת סוג קובץ הפלט היא 3GPP‏ (‎.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">נא לבחור תצורת שמע. תצורת מכולת סוג קובץ השמע היא 3GPP‏ (‎.3gp).</string>
     <string name="shared_string_modified">נערך</string>
     <string name="cloud_sync_progress">מתבצע סנכרון…%1$s</string>
     <string name="checking_progress">מתבצעת בדיקה…</string>
@@ -4773,4 +4773,11 @@
     <string name="deleted_file">קובץ שנמחק</string>
     <string name="si_nm_mt">מיל/מטר ימי</string>
     <string name="si_nm_ft">מיל/רגל ימי</string>
+    <string name="shared_string_expires">תפוגה</string>
+    <string name="shared_string_purchased_on">נרכש בתאריך</string>
+    <string name="shared_string_do_not_exist">לא קיים</string>
+    <string name="weight_limit_error">הערך המזערי הוא „%1$s” טונות. יש להשתמש בפרופיל „%2$s” אם משקל כלי הרכב קטן מהערך המזערי.</string>
+    <string name="cloud_all_changes_uploaded_descr">כל השינויים שנוצרו במכשיר הזה מסונכרנים עם OsmAnd Cloud.</string>
+    <string name="download_cloud_version">הורדת הגרסה מהענן</string>
+    <string name="backup_error_failed_to_fetch_remote_items">משיכת רשימת הקבצים מהשרת נכשלה.</string>
 </resources>

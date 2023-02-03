@@ -74,6 +74,8 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		View container = view.findViewById(R.id.item);
 		ItemViewHolder itemViewHolder = new ItemViewHolder(container, nightMode);
 		itemViewHolder.bindView(item, null, false);
+		TextView descriptionView = container.findViewById(R.id.description);
+		descriptionView.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(R.string.last_synchronized) , item.time));
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
 	}
 
@@ -104,9 +106,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		TextView descriptionTv = downloadItem.findViewById(R.id.description);
 		ImageView imageView = downloadItem.findViewById(R.id.icon);
 
+		titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getPrimaryTextColor(app, nightMode));
 		titleTv.setText(R.string.download_cloud_version);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, ColorUtilities.getActiveColorId(nightMode)));
+		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode)));
 		downloadItem.setOnClickListener(v -> {
 			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD);
 			dismiss();
@@ -143,9 +146,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		TextView descriptionTv = uploadItem.findViewById(R.id.description);
 		ImageView imageView = uploadItem.findViewById(R.id.icon);
 
+		titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getPrimaryTextColor(app, nightMode));
 		titleTv.setText(title);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, ColorUtilities.getActiveColorId(nightMode)));
+		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode)));
 		uploadItem.setOnClickListener(v -> {
 			syncItem(deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
 			dismiss();
