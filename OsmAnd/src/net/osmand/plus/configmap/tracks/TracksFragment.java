@@ -2,14 +2,17 @@ package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_VISIBLE_TRACKS;
+import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
 import static net.osmand.plus.helpers.GpxUiHelper.loadGPXFileInDifferentThread;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorRes;
@@ -38,7 +41,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
 import net.osmand.plus.myplaces.ui.LoadGpxInfosTask.LoadTracksListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -62,15 +64,19 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 	private static final String TAG = TracksFragment.class.getSimpleName();
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxSelectionHelper selectionHelper;
 
-	private LoadGpxInfosTask asyncLoader;
-	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 	private final Set<GPXInfo> selectedGpxInfo = new HashSet<>();
+	private final Set<GPXInfo> originalSelectedGpxInfo = new HashSet<>();
+	private final Set<GPXInfo> recentlyVisibleGpxInfo = new HashSet<>();
+	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
+
+	private LoadGpxInfosTask asyncLoader;
 
 	private ViewPager2 viewPager;
 	private TracksTabAdapter adapter;
+	private TextView applyButton;
+	private TextView selectionButton;
 
 	private boolean nightMode;
 
@@ -84,7 +90,6 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		settings = app.getSettings();
 		selectionHelper = app.getSelectedGpxHelper();
 		nightMode = isNightMode(false);
 
@@ -112,43 +117,63 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 	}
 
 	private void setupButtons(@NonNull View view) {
-		View selectionButton = view.findViewById(R.id.selection_button);
+		boolean hasVisibleTracks = !originalSelectedGpxInfo.isEmpty();
+		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-//				DeleteHistoryConfirmationBottomSheet.showInstance(fragmentManager, selectedItems.size(), this);
+			if (hasVisibleTracks) {
+				selectionHelper.clearAllGpxFilesToShow(true);
+			} else {
+				selectionHelper.restoreSelectedGpxFiles();
 			}
 		});
-		View applyButton = view.findViewById(R.id.apply_button);
-		applyButton.setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				selectionHelper.clearAllGpxFilesToShow(false);
+		selectionButton.setText(hasVisibleTracks ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
 
-				OsmandMapTileView mapView = activity.getMapView();
-				DashboardOnMap dashboard = activity.getDashboard();
-				CallbackWithObject<GPXFile[]> callback = result -> {
-					app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-					mapView.refreshMap();
-					if (dashboard.isVisible()) {
-						dashboard.refreshContent(false);
-					}
-					return true;
-				};
-				File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-				List<String> selectedGpxNames = new ArrayList<>();
-				for (GPXInfo gpxInfo : selectedGpxInfo) {
-					if (!gpxInfo.isCurrentRecordingTrack()) {
-						String fileName = gpxInfo.getFileName();
-						String name = Algorithms.isEmpty(gpxInfo.subfolder) ? fileName : gpxInfo.subfolder + "/" + fileName;
-						selectedGpxNames.add(name);
-					}
+		applyButton = view.findViewById(R.id.apply_button);
+		applyButton.setOnClickListener(v -> updateTracksVisibility());
+
+		int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
+		int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.button_color_active_light;
+		ColorStateList colorStateList = AndroidUtils.createEnabledColorStateList(app, disabledColor, activeColor);
+
+		applyButton.setTextColor(colorStateList);
+		selectionButton.setTextColor(colorStateList);
+
+		updateButtonsState();
+	}
+
+	private void updateTracksVisibility() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			selectionHelper.clearAllGpxFilesToShow(false);
+
+			OsmandMapTileView mapView = activity.getMapView();
+			DashboardOnMap dashboard = activity.getDashboard();
+			CallbackWithObject<GPXFile[]> callback = result -> {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(result);
+				mapView.refreshMap();
+				if (dashboard.isVisible()) {
+					dashboard.refreshContent(false);
 				}
-				loadGPXFileInDifferentThread(activity, callback, dir, null,
-						selectedGpxNames.toArray(new String[0]));
+				return true;
+			};
+			File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			List<String> selectedGpxNames = new ArrayList<>();
+			for (GPXInfo gpxInfo : selectedGpxInfo) {
+				if (!gpxInfo.isCurrentRecordingTrack()) {
+					String fileName = gpxInfo.getFileName();
+					String name = Algorithms.isEmpty(gpxInfo.subfolder) ? fileName : gpxInfo.subfolder + "/" + fileName;
+					selectedGpxNames.add(name);
+				}
 			}
-			adapter.notifyDataSetChanged();
-		});
+			loadGPXFileInDifferentThread(activity, callback, dir, null,
+					selectedGpxNames.toArray(new String[0]));
+		}
+		adapter.notifyDataSetChanged();
+	}
+
+	protected void updateButtonsState() {
+		applyButton.setEnabled(!Algorithms.objectEquals(selectedGpxInfo, originalSelectedGpxInfo));
+		selectionButton.setEnabled(!originalSelectedGpxInfo.isEmpty() || !selectionHelper.getSelectedGpxFilesBackUp().isEmpty());
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -226,6 +251,8 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 		trackTabs.putAll(folderTabs);
 
 		adapter.setTrackTabs(trackTabs);
+
+		updateButtonsState();
 	}
 
 	private TrackTab getAllTracksTab(@NonNull List<GPXInfo> gpxInfos) {
@@ -243,12 +270,23 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 				if (selectedGpxFile != null) {
 					trackTab.items.add(info);
 					selectedGpxInfo.add(info);
+					originalSelectedGpxInfo.add(info);
 				}
 			}
 		} else if (Algorithms.isEmpty(gpxInfos)) {
 			trackTab.items.add(TYPE_NO_TRACKS);
 		} else {
 			trackTab.items.add(TYPE_NO_VISIBLE_TRACKS);
+		}
+		Map<GPXFile, Long> selectedGpxFilesBackUp = selectionHelper.getSelectedGpxFilesBackUp();
+		if (!selectedGpxFilesBackUp.isEmpty()) {
+			trackTab.items.add(TYPE_RECENTLY_VISIBLE_TRACKS);
+			for (GPXFile gpxFile : selectedGpxFilesBackUp.keySet()) {
+				File file = new File(gpxFile.path);
+				GPXInfo info = new GPXInfo(file.getName(), file);
+				trackTab.items.add(info);
+				recentlyVisibleGpxInfo.add(info);
+			}
 		}
 		return trackTab;
 	}
@@ -339,9 +377,10 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof TracksTreeFragment) {
 				TracksTreeFragment tracksTreeFragment = (TracksTreeFragment) fragment;
-//				tracksTreeFragment.updateContent();
+				tracksTreeFragment.onTrackItemSelected(gpxInfo);
 			}
 		}
+		updateButtonsState();
 	}
 
 	public void importTracks() {
@@ -354,6 +393,22 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 		viewPager.setCurrentItem(1);
 	}
 
+	@Override
+	public void selectRecentlyVisibleTracks(boolean selected) {
+		if (selected) {
+			selectedGpxInfo.addAll(recentlyVisibleGpxInfo);
+		} else {
+			selectedGpxInfo.removeAll(recentlyVisibleGpxInfo);
+		}
+		for (Fragment fragment : getChildFragmentManager().getFragments()) {
+			if (fragment instanceof TracksTreeFragment) {
+				TracksTreeFragment tracksTreeFragment = (TracksTreeFragment) fragment;
+				tracksTreeFragment.updateContent();
+			}
+		}
+		updateButtonsState();
+	}
+
 	public MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
@@ -361,5 +416,10 @@ public class TracksFragment extends BaseOsmAndFragment implements LoadTracksList
 	@Override
 	public boolean isTrackSelected(@NonNull GPXInfo gpxInfo) {
 		return selectedGpxInfo.contains(gpxInfo);
+	}
+
+	@Override
+	public boolean isRecentlyTracksSelected() {
+		return selectedGpxInfo.containsAll(recentlyVisibleGpxInfo);
 	}
 }

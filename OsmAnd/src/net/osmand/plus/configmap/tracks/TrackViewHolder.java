@@ -92,7 +92,6 @@ class TrackViewHolder extends RecyclerView.ViewHolder {
 			}
 //			TextView sizeText = v.findViewById(R.id.date_and_size_details);
 //			sizeText.setText(date + " \u2022 " + size);
-
 		} else {
 			pointsCount.setText(analysis.wptPoints + "");
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
@@ -106,10 +105,7 @@ class TrackViewHolder extends RecyclerView.ViewHolder {
 		checkbox.setChecked(selected);
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		UiUtilities.setupCompoundButton(selected, activeColor, checkbox);
-		itemView.setOnClickListener(v -> {
-			checkbox.setChecked(!selected);
-			listener.onTrackItemSelected(gpxInfo, !selected);
-		});
+		itemView.setOnClickListener(v -> listener.onTrackItemSelected(gpxInfo, !selected));
 
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
 		AndroidUiHelper.updateVisibility(folder, folderName != null);

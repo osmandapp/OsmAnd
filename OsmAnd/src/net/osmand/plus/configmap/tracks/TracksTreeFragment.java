@@ -57,10 +57,8 @@ public class TracksTreeFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		updateContent();
+	public void onTrackItemSelected(@NonNull GPXInfo gpxInfo) {
+		adapter.onTrackItemSelected(gpxInfo);
 	}
 
 	public void updateContent() {
