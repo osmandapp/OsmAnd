@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Moteur du véhicule</string>
+    <string name="routing_attr_motor_type_name">Carburant utilisé</string>
     <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Emplacement sur l’écran</string>
+    <string name="display_position">Afficher la position</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
