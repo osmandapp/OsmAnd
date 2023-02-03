@@ -5040,4 +5040,5 @@
     <string name="sound_beep_complex_loud">Bip: muy fuerte</string>
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="last_synchronized">Última sincronización</string>
 </resources>
