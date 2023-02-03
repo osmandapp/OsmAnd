@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
     <string name="share_as_file">Share as file</string>
