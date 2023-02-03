@@ -5053,4 +5053,5 @@
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
+    <string name="last_synchronized">Última sincronización</string>
 </resources>
