@@ -4680,7 +4680,7 @@
     <string name="routing_attr_motor_type_diesel_name">Dizel</string>
     <string name="routing_attr_motor_type_electric_name">Električni</string>
     <string name="routing_attr_motor_type_gas_name">Stisnjen zemeljski plin CNG</string>
-    <string name="routing_attr_motor_type_name">Motor vozila</string>
+    <string name="routing_attr_motor_type_name">Gorivo, ki ga uporablja motor</string>
     <string name="routing_attr_motor_type_description">Izberi vrsto goriva tvojega motorja, to je potrebno za oceno emisij CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Bencin</string>
     <string name="routing_attr_motor_type_lpg_name">Avtoplin LPG</string>
