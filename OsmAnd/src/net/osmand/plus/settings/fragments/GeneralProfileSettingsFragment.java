@@ -49,7 +49,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupAppThemePref();
 		setupRotateMapPref();
 		setup3DViewPref();
-		setupCenterPositionOnMapPref();
+		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
 
@@ -136,14 +136,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupRotateMapPref() {
 		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
-		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
-		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_north_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt), getString(R.string.rotate_map_manual_opt)});
+		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS, OsmandSettings.ROTATE_MAP_MANUAL});
 		rotateMap.setIcon(getRotateMapIcon());
 	}
 
 	private Drawable getRotateMapIcon() {
 		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
+				return getActiveIcon(R.drawable.ic_action_direction_north);
+			case OsmandSettings.ROTATE_MAP_MANUAL:
 				return getActiveIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
 				return getActiveIcon(R.drawable.ic_action_direction_movement);
@@ -162,27 +164,27 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		enabled3DView.setIcon(icon);
 	}
 
-	private void setupCenterPositionOnMapPref() {
+	private void setupPositionPlacementOnMapPref() {
 		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
 		int positionPlacement = preference.getModeValue(getSelectedAppMode());
 		Drawable icon;
-		String summary;
+		String title;
 		if (positionPlacement == 0) {
 			icon = getActiveIcon(R.drawable.ic_action_bearing);
-			summary = getString(R.string.shared_string_automatic);
+			title = getString(R.string.shared_string_automatic);
 		} else if (positionPlacement == 1) {
 			icon = getActiveIcon(R.drawable.ic_action_display_position_center);
-			summary = getString(R.string.position_on_map_center);
+			title = getString(R.string.position_on_map_center);
 		} else {
 			icon = getActiveIcon(R.drawable.ic_action_display_position_bottom);
-			summary = getString(R.string.position_on_map_bottom);
+			title = getString(R.string.position_on_map_bottom);
 		}
-		Preference displayPosition = findPreference(preference.getId());
-		displayPosition.setIcon(icon);
-		displayPosition.setSummary(summary);
+		Preference positionPlacementPref = findPreference(preference.getId());
+		positionPlacementPref.setIcon(icon);
+		positionPlacementPref.setSummary(title);
 	}
 
-	private void showDisplayPositionDialog(Preference preference) {
+	private void showPositionPlacementDialog(Preference preference) {
 		boolean nightMode = isNightMode();
 		Context ctx = UiUtilities.getThemedContext(getActivity(), nightMode);
 		int profileColor = getSelectedAppMode().getProfileColor(nightMode);
@@ -448,6 +450,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+			if (mapViewTrackingUtilities != null) {
+				mapViewTrackingUtilities.updateSettings();
+			}
 		}
 	}
 
@@ -457,7 +463,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			showDrivingRegionDialog();
 			return true;
 		} else if (preference.getKey().equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
-			showDisplayPositionDialog(preference);
+			showPositionPlacementDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);

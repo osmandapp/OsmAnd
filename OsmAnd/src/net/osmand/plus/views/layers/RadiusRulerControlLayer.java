@@ -59,7 +59,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private View rightWidgetsPanel;
 	private View leftWidgetsPanel;
 
-	private TextSide textSide;
+	private TextAlignment textAlignment;
 	private int maxRadiusInDp;
 	private float maxRadius;
 	private int radius;
@@ -320,10 +320,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 		if (maxVertical >= maxHorizontal) {
 			maxRadius = maxVertical;
-			textSide = TextSide.VERTICAL;
+			textAlignment = TextAlignment.VERTICAL;
 		} else {
 			maxRadius = maxHorizontal;
-			textSide = TextSide.HORIZONTAL;
+			textAlignment = TextAlignment.HORIZONTAL;
 		}
 		if (radius != 0) {
 			updateText();
@@ -351,8 +351,19 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 		String text = cacheDistances.get(circleNumber - 1);
 		float circleRadius = radius * circleNumber;
-		float[] textCoords = calculateTextCoords(text, text, circleRadius, center, tb, attrs);
-		drawTextCoords(canvas, text, textCoords, attrs);
+
+		TextPositioning firstTextPositioning = TextPositioning.getFirstTextPositioning(textAlignment);
+		TextPositioning secondTextPositioning = TextPositioning.getSecondTextPositioning(textAlignment);
+
+		PointF firstTextPosition = calculateTextPosition(text, firstTextPositioning, circleRadius, tb, attrs);
+		PointF secondTextPosition = calculateTextPosition(text, secondTextPositioning, circleRadius, tb, attrs);
+
+		if (firstTextPosition != null) {
+			drawTextInPosition(canvas, text, firstTextPosition, attrs);
+		}
+		if (secondTextPosition != null) {
+			drawTextInPosition(canvas, text, secondTextPosition, attrs);
+		}
 	}
 
 	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
@@ -363,7 +374,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-			if (Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180) {
+			if (isLatLonOutOfBounds(latLon)) {
 				if (points.size() > 0) {
 					arrays.add(points);
 					points = new ArrayList<>();
@@ -392,71 +403,49 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void drawTextCoords(Canvas canvas, String text, float[] textCoords, RenderingLineAttributes attrs) {
-		if (!Float.isNaN(textCoords[0]) && !Float.isNaN(textCoords[1])) {
-			canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint3);
-			canvas.drawText(text, textCoords[0], textCoords[1], attrs.paint2);
-		}
-		if (!Float.isNaN(textCoords[2]) && !Float.isNaN(textCoords[3])) {
-			canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint3);
-			canvas.drawText(text, textCoords[2], textCoords[3], attrs.paint2);
+	private void drawTextInPosition(@NonNull Canvas canvas, @NonNull String text, @NonNull PointF textPosition,
+	                                @NonNull RenderingLineAttributes attrs) {
+		if (!Float.isNaN(textPosition.x) && !Float.isNaN(textPosition.y)) {
+			canvas.drawText(text, textPosition.x, textPosition.y, attrs.paint3);
+			canvas.drawText(text, textPosition.x, textPosition.y, attrs.paint2);
 		}
 	}
 
-	private float[] calculateTextCoords(String topOrLeftText, String rightOrBottomText,
-										@Nullable QuadPoint topOrLeftPoint, @Nullable QuadPoint rightOrBottomPoint,
-										RenderingLineAttributes attrs) {
-		Rect boundsDistance = new Rect();
-		Rect boundsHeading;
+	@Nullable
+	private PointF calculateTextPosition(@NonNull String text,
+	                                     @NonNull TextPositioning textPositioning,
+	                                     float circleRadius,
+	                                     @NonNull RotatedTileBox tileBox,
+	                                     @NonNull RenderingLineAttributes attrs) {
+		float x = tileBox.getCenterPixelX();
+		float y = tileBox.getCenterPixelY();
 
-		if (topOrLeftText.equals(rightOrBottomText)) {
-			boundsHeading = boundsDistance;
-		} else {
-			boundsHeading = new Rect();
-			attrs.paint2.getTextBounds(rightOrBottomText, 0, rightOrBottomText.length(), boundsHeading);
+		switch (textPositioning) {
+			case TOP:
+				y -= circleRadius;
+				break;
+			case BOTTOM:
+				y += circleRadius;
+				break;
+			case LEFT:
+				x -= circleRadius;
+				break;
+			case RIGHT:
+				x += circleRadius;
+				break;
 		}
-		attrs.paint2.getTextBounds(topOrLeftText, 0, topOrLeftText.length(), boundsDistance);
 
-		float x1 = topOrLeftPoint == null ? Float.NaN : topOrLeftPoint.x - boundsHeading.width() / 2f;
-		float y1 = topOrLeftPoint == null ? Float.NaN : topOrLeftPoint.y + boundsHeading.height() / 2f;
-		float x2 = rightOrBottomPoint == null ? Float.NaN : rightOrBottomPoint.x - boundsDistance.width() / 2f;
-		float y2 = rightOrBottomPoint == null ? Float.NaN : rightOrBottomPoint.y + boundsDistance.height() / 2f;
-		return new float[]{x1, y1, x2, y2};
-	}
+		PointF textPosition = screenPointFromPoint(x, y, true, tileBox);
 
-	private float[] calculateTextCoords(String topOrLeftText, String rightOrBottomText, float drawingTextRadius, QuadPoint center, RotatedTileBox tb, RenderingLineAttributes attrs) {
-		Rect boundsDistance = new Rect();
-		Rect boundsHeading;
+		if (textPosition != null) {
+			Rect textBounds = new Rect();
+			attrs.paint2.getTextBounds(text, 0, text.length(), textBounds);
 
-		if (topOrLeftText.equals(rightOrBottomText)) {
-			boundsHeading = boundsDistance;
-		} else {
-			boundsHeading = new Rect();
-			attrs.paint2.getTextBounds(rightOrBottomText, 0, rightOrBottomText.length(), boundsHeading);
+			textPosition.x -= textBounds.width() / 2f;
+			textPosition.y += textBounds.height() / 2f;
 		}
-		attrs.paint2.getTextBounds(topOrLeftText, 0, topOrLeftText.length(), boundsDistance);
 
-		// coords of left or top text
-		float x1 = 0;
-		float y1 = 0;
-		// coords of right or bottom text
-		float x2 = 0;
-		float y2 = 0;
-
-		if (textSide == TextSide.VERTICAL) {
-			x1 = center.x - boundsHeading.width() / 2f;
-			y1 = center.y - drawingTextRadius + boundsHeading.height() / 2f;
-			x2 = center.x - boundsDistance.width() / 2f;
-			y2 = center.y + drawingTextRadius + boundsDistance.height() / 2f;
-		} else if (textSide == TextSide.HORIZONTAL) {
-			x1 = center.x - drawingTextRadius - boundsHeading.width() / 2f;
-			y1 = center.y + boundsHeading.height() / 2f;
-			x2 = center.x + drawingTextRadius - boundsDistance.width() / 2f;
-			y2 = center.y + boundsDistance.height() / 2f;
-		}
-		PointF topOrLeftPoint = screenPointFromPoint(x1, y1, true, tb);
-		PointF rightOrBottomPoint = screenPointFromPoint(x2, y2, true, tb);
-		return new float[]{topOrLeftPoint.x, topOrLeftPoint.y, rightOrBottomPoint.x, rightOrBottomPoint.y};
+		return textPosition;
 	}
 
 	private void drawCompassCircle(Canvas canvas, RotatedTileBox tb, int circleNumber,
@@ -479,17 +468,24 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		String distance = cacheDistances.get(circleNumber - 1);
 		String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
 
-		float offset = (textSide == TextSide.HORIZONTAL) ? 15 : 20;
+		float offset = (textAlignment == TextAlignment.HORIZONTAL) ? 15 : 20;
 		float drawingTextRadius = radiusLength + AndroidUtils.dpToPx(app, offset);
-		float[] textCoords = calculateTextCoords(distance, heading, drawingTextRadius, center, tb, attrs);
+
+		TextPositioning headingTextPositioning = TextPositioning.getFirstTextPositioning(textAlignment);
+		TextPositioning distanceTextPositioning = TextPositioning.getSecondTextPositioning(textAlignment);
+
+		PointF headingTextPosition = calculateTextPosition(heading, headingTextPositioning, drawingTextRadius, tb, attrs);
+		PointF distanceTextPosition = calculateTextPosition(distance, distanceTextPositioning, drawingTextRadius, tb, attrs);
 
 		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
-		canvas.drawText(heading, textCoords[0], textCoords[1], attrs.paint3);
-		canvas.drawText(heading, textCoords[0], textCoords[1], attrs.paint2);
+		if (headingTextPosition != null) {
+			drawTextInPosition(canvas, heading, headingTextPosition, attrs);
+		}
 
 		setAttrsPaintsTypeface(attrs, null);
-		canvas.drawText(distance, textCoords[2], textCoords[3], attrs.paint3);
-		canvas.drawText(distance, textCoords[2], textCoords[3], attrs.paint2);
+		if (distanceTextPosition != null) {
+			drawTextInPosition(canvas, distance, distanceTextPosition, attrs);
+		}
 	}
 
 	private void drawTriangleArrowByRadius(double radius, double angle, QuadPoint center, Paint shadowPaint, Paint colorPaint, RotatedTileBox tb, Canvas canvas) {
@@ -513,6 +509,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		double thirdPointY = firstPointY + Math.sin(radians3) * triangleSideLength;
 		PointF thirdScreenPoint = screenPointFromPoint(thirdPointX, thirdPointY, false, tb);
 
+		if (firstScreenPoint == null || secondScreenPoint == null || thirdScreenPoint == null) {
+			return;
+		}
+
 		arrow.reset();
 		arrow.moveTo(firstScreenPoint.x, firstScreenPoint.y);
 		arrow.lineTo(secondScreenPoint.x, secondScreenPoint.y);
@@ -526,6 +526,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private void drawLightingHeadingArc(double radius, double angle, QuadPoint center, RotatedTileBox tb, Canvas canvas, RenderingLineAttributes attrs) {
 		PointF gradientArcStartPoint = getPointFromCenterByRadius(radius, (angle - 30), tb);
 		PointF gradientArcEndPoint = getPointFromCenterByRadius(radius, (angle + 30), tb);
+		if (gradientArcStartPoint == null || gradientArcEndPoint == null) {
+			return;
+		}
+
 		LinearGradient shader = new LinearGradient(gradientArcStartPoint.x, gradientArcStartPoint.y, gradientArcEndPoint.x, gradientArcEndPoint.y, arcColors, null, Shader.TileMode.CLAMP);
 		blueLinesPaint.setShader(shader);
 		blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
@@ -533,8 +537,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		arrowArc.reset();
 		int startArcAngle = (int)angle - 45;
 		int endArcAngle = (int)angle + 45;
-		List<List<QuadPoint>> arrays = new ArrayList<>();
-		List<QuadPoint> points = new ArrayList<>();
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
@@ -562,27 +564,34 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			float lineStopX = center.x + x * (innerRadiusLength - lineLength);
 			float lineStopY = center.y + y * (innerRadiusLength - lineLength);
 
+			PointF ordinaryCentStartScreenPoint;
+			PointF ordinaryCentStopScreenPoint;
+
 			if (i == 18) {
 				float shortLineMargin = AndroidUtils.dpToPx(app, 5.66f);
 				float shortLineHeight = AndroidUtils.dpToPx(app, 2.94f);
 				float startY = center.y + y * (radiusLength - shortLineMargin);
 				float stopY = center.y + y * (radiusLength - shortLineMargin - shortLineHeight);
 
-				PointF startScreenPoint = screenPointFromPoint(center.x, startY, false, tb);
-				PointF stopScreenPoint = screenPointFromPoint(center.x, stopY, false, tb);
-				compass.moveTo(startScreenPoint.x, startScreenPoint.y);
-				compass.lineTo(stopScreenPoint.x, stopScreenPoint.y);
+				ordinaryCentStartScreenPoint = screenPointFromPoint(center.x, startY, false, tb);
+				ordinaryCentStopScreenPoint = screenPointFromPoint(center.x, stopY, false, tb);
 			} else {
-				PointF startScreenPoint = screenPointFromPoint(lineStartX, lineStartY, false, tb);
-				PointF stopScreenPoint = screenPointFromPoint(lineStopX, lineStopY, false, tb);
-				compass.moveTo(startScreenPoint.x, startScreenPoint.y);
-				compass.lineTo(stopScreenPoint.x, stopScreenPoint.y);
+				ordinaryCentStartScreenPoint = screenPointFromPoint(lineStartX, lineStartY, false, tb);
+				ordinaryCentStopScreenPoint = screenPointFromPoint(lineStopX, lineStopY, false, tb);
 			}
+
+			if (ordinaryCentStartScreenPoint != null && ordinaryCentStopScreenPoint != null) {
+				compass.moveTo(ordinaryCentStartScreenPoint.x, ordinaryCentStartScreenPoint.y);
+				compass.lineTo(ordinaryCentStopScreenPoint.x, ordinaryCentStopScreenPoint.y);
+			}
+
 			if (i % 9 == 0 && i != 18) {
 				PointF startScreenPoint = screenPointFromPoint(lineStartX, lineStartY, false, tb);
 				PointF stopScreenPoint = screenPointFromPoint(lineStopX, lineStopY, false, tb);
-				redCompassLines.moveTo(startScreenPoint.x, startScreenPoint.y);
-				redCompassLines.lineTo(stopScreenPoint.x, stopScreenPoint.y);
+				if (startScreenPoint != null && stopScreenPoint != null) {
+					redCompassLines.moveTo(startScreenPoint.x, startScreenPoint.y);
+					redCompassLines.lineTo(stopScreenPoint.x, stopScreenPoint.y);
+				}
 			}
 		}
 		redLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
@@ -601,24 +610,24 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
+	@Nullable
 	private PointF screenPointFromPoint(double x, double y, boolean compensateMapRotation, RotatedTileBox tb) {
-		if (hasMapRenderer()) {
-			QuadPoint circleCenterPoint = tb.getCenterPixelPoint();
-			double dX = circleCenterPoint.x - x;
-			double dY = circleCenterPoint.y - y;
-			double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
-			double angleFromCenter = Math.toDegrees(Math.atan2(dY, dX)) - 90;
-			angleFromCenter = compensateMapRotation ? angleFromCenter - tb.getRotate() : angleFromCenter; //??
-			return getPointFromCenterByRadius(distanceFromCenter, angleFromCenter, tb);
-		} else {
-			return new PointF((float)x, (float)y);
-		}
+		QuadPoint circleCenterPoint = tb.getCenterPixelPoint();
+		double dX = circleCenterPoint.x - x;
+		double dY = circleCenterPoint.y - y;
+		double distanceFromCenter = Math.sqrt(dX * dX + dY * dY);
+		double angleFromCenter = Math.toDegrees(Math.atan2(dY, dX)) - 90;
+		angleFromCenter = compensateMapRotation ? angleFromCenter - tb.getRotate() : angleFromCenter; //??
+		return getPointFromCenterByRadius(distanceFromCenter, angleFromCenter, tb);
 	}
 
+	@Nullable
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+		return isLatLonOutOfBounds(latLon)
+				? null
+				: NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	private LatLon point31ToLatLon(PointI point31) {
@@ -647,11 +656,15 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		for (int i = 0; i < degrees.length; i += 9) {
 			String cardinalDirection = getCardinalDirection(i);
 			if (cardinalDirection != null) {
-				canvas.save();
 				double textRadius = radiusLength - textMargin;
 				PointF point = getPointFromCenterByRadius(textRadius, (-i * 5 - 90), tb);
+				if (point == null) {
+					continue;
+				}
+
 				float h2 = AndroidUtils.getTextHeight(attrs.paint2);
 				float h3 = AndroidUtils.getTextHeight(attrs.paint3);
+				canvas.save();
 				canvas.drawText(cardinalDirection, point.x , point.y + h3/4, attrs.paint3);
 				canvas.drawText(cardinalDirection, point.x, point.y + h2/4, attrs.paint2);
 				canvas.restore();
@@ -700,9 +713,30 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	private enum TextSide {
+	private boolean isLatLonOutOfBounds(@NonNull LatLon latLon) {
+		return Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180;
+	}
+
+	private enum TextAlignment {
 		VERTICAL,
 		HORIZONTAL
+	}
+
+	private enum TextPositioning {
+		TOP,
+		BOTTOM,
+		LEFT,
+		RIGHT;
+
+		@NonNull
+		private static TextPositioning getFirstTextPositioning(@NonNull TextAlignment textAlignment) {
+			return textAlignment == TextAlignment.VERTICAL ? TOP : LEFT;
+		}
+
+		@NonNull
+		private static TextPositioning getSecondTextPositioning(@NonNull TextAlignment textAlignment) {
+			return textAlignment == TextAlignment.VERTICAL ? BOTTOM : RIGHT;
+		}
 	}
 
 	@Override

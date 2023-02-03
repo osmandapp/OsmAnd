@@ -480,7 +480,7 @@
     <string name="download_type_to_filter">Tipus de filtre</string>
     <string name="website">Lloc web</string>
     <string name="poi_context_menu_call">Mostra el telèfon del PDI</string>
-    <string name="rotate_map_to_bearing">Orientació del mapa</string>
+    <string name="rotate_map_to">Orientació del mapa</string>
     <string name="shared_string_import">Importa</string>
     <string name="any_poi">Algun</string>
     <string name="layer_osm_bugs">Notes d\'OSM (en línia)</string>
@@ -529,7 +529,7 @@
     <string name="poi_context_menu_delete">Elimina el PDI</string>
     <string name="rotate_map_compass_opt">Orientació de la brúixola</string>
     <string name="rotate_map_bearing_opt">Direcció del moviment</string>
-    <string name="rotate_map_none_opt">Sense rotació (el nord sempre a dalt)</string>
+    <string name="rotate_map_north_opt">Sense rotació (el nord sempre a dalt)</string>
     <string name="show_route">Detalls de la ruta</string>
     <string name="fav_imported_sucessfully">Els preferits s\'han importat</string>
     <string name="fav_file_to_load_not_found">El fitxer GPX que conté Preferits no s\'ha trobat a {0}</string>
@@ -726,7 +726,7 @@
     <string name="transport_search_again">Reinicia la cerca de transport</string>
     <string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
     <string name="gpx_files_not_found">No s\'ha trobat cap fitxer GPX a la carpeta de traces</string>
-    <string name="rotate_map_to_bearing_descr">Orientació del mapa:</string>
+    <string name="rotate_map_to_descr">Orientació del mapa:</string>
     <string name="background_service_int">Interval d\'activació del GPS</string>
     <string name="voice_provider_descr">Trieu el guiatge de veu en la navegació.</string>
     <string name="voice_provider">Guiatge per veu</string>

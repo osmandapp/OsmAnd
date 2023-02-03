@@ -712,7 +712,7 @@
     <string name="unit_of_length">Unitats de longitud</string>
     <string name="si_mi_yard">Milas/iards</string>
     <string name="si_km_m">Quilomètres/mètres</string>
-    <string name="rotate_map_to_bearing">Orientacion de la mapa</string>
+    <string name="rotate_map_to">Orientacion de la mapa</string>
     <string name="shared_string_clear_all">Tot escafar</string>
     <string name="join_segments">Jónher leis estiradas</string>
     <string name="shared_string_from">de</string>

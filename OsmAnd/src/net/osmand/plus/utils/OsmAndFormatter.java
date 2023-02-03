@@ -117,11 +117,14 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
+	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems,
+	                                            String def, boolean showTime) {
 		if (lastUploadedTimems > 0) {
 			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				return getFormattedDate(app, lastUploadedTimems);
+				return showTime
+						? getFormattedDateTime(app, lastUploadedTimems)
+						: getFormattedDate(app, lastUploadedTimems);
 			} else {
 				String formattedDuration = getFormattedDuration((int) duration, app);
 				if (Algorithms.isEmpty(formattedDuration)) {
@@ -195,7 +198,13 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {
-		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+		return DateUtils.formatDateTime(context, milliseconds,
+				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+	}
+
+	public static String getFormattedDateTime(Context context, long milliseconds) {
+		return DateUtils.formatDateTime(context, milliseconds,
+				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
 	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {

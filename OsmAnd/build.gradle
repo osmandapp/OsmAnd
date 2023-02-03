@@ -213,8 +213,9 @@ dependencies {
 	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
 	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
-	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
-	huaweiImplementation 'com.huawei.hms:appservice:5.0.4.303'
+	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
+	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+	huaweiImplementation 'com.huawei.hms:appservice:6.8.0.300'
 
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"

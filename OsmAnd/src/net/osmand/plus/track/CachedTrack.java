@@ -36,6 +36,7 @@ public class CachedTrack {
 	private boolean useJoinSegments;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
+	private int nearestZoom;
 	private Set<String> availableColoringTypes;
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
@@ -82,9 +83,18 @@ public class CachedTrack {
 			clearCaches();
 			List<TrkSegment> segments = calculateGradientTrack(zoom, scaleType);
 			segmentsCache.put(trackId, segments);
+			nearestZoom = zoom;			
 			return segments;
 		} else {
-			List<TrkSegment> segments = segmentsCache.get(trackId);
+			List<TrkSegment> segments = null;
+			if (Math.abs(zoom - nearestZoom) < 3) {
+				String nearestTrackId = nearestZoom + "_" + scaleType;
+				segments = segmentsCache.get(nearestTrackId);
+			}
+			if (segments == null) {
+				nearestZoom = zoom;
+				segments = segmentsCache.get(trackId);
+			}
 			if (segments == null) {
 				segments = calculateGradientTrack(zoom, scaleType);
 				segmentsCache.put(trackId, segments);

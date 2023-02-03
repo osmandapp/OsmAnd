@@ -156,7 +156,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 			case SYNC_OPERATION_DELETE:
 				return app.getString(R.string.shared_string_deleted);
 			default:
-				return app.getString(R.string.shared_string_modified);
+				return app.getString(tabType == RECENT_CHANGES_CONFLICTS
+						? R.string.last_sync : R.string.shared_string_modified);
 		}
 	}
 
@@ -222,8 +223,10 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		long time = 0;
 		if (tabType == RECENT_CHANGES_LOCAL && operation == SYNC_OPERATION_DELETE)
 			time = remoteFile.getClienttimems();
-		else if (tabType == RECENT_CHANGES_LOCAL || tabType == RECENT_CHANGES_CONFLICTS)
+		else if (tabType == RECENT_CHANGES_LOCAL)
 			time = localFile.localModifiedTime;
+		else if (tabType == RECENT_CHANGES_CONFLICTS)
+			time = localFile.uploadTime;
 		else if (operation == SYNC_OPERATION_DELETE)
 			time = localFile.uploadTime;
 		else {
