@@ -5020,12 +5020,13 @@
     <string name="cloud_conflict">Konflikt</string>
     <string name="cloud_all_changes_uploaded_descr">Wszystkie zmiany dokonane na tym urządzeniu są synchronizowane z Chmurą OsmAnd.</string>
     <string name="open_weather_action_description">Umożliwia otwarcie ekranu ze szczegółowymi informacjami o pogodzie.</string>
-    <string name="x_axis">Oś X</string>
+    <string name="x_axis">oś X</string>
     <string name="set_up_backup">Skonfiguruj kopię zapasową</string>
-    <string name="y_axis">Oś Y</string>
+    <string name="y_axis">oś Y</string>
     <string name="value_downloaded_of_mb">Pobieranie %1$.1f/%2$.1f MB</string>
     <string name="share_link">Udostępnij link</string>
     <string name="share_as_file">Udostępnij jako plik</string>
     <string name="skip_download">Pomiń pobieranie</string>
-    <string name="determine_location">Pozwól nam określić Twoją lokalizację</string>
+    <string name="determine_location">Pozwól określić Twoją lokalizację</string>
+    <string name="weight_limit_error">Minimalna wartość to „%1$s” ton. Użyj profilu „%2$s”, jeśli masa pojazdu jest mniejsza niż wartość minimalna.</string>
 </resources>
