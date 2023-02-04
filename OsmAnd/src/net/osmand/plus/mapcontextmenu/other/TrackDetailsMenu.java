@@ -164,7 +164,7 @@ public class TrackDetailsMenu {
 				int mx = (int) pixel.x;
 				int my = (int) pixel.y;
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				Pair<WptPt, WptPt> points = GPXLayer.findPointsNearSegment(
+				Pair<WptPt, WptPt> points = GPXLayer.findLineNearPoint(
 						mapRenderer, tb, segment.points, r, mx, my);
 				if (points != null) {
 					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);

@@ -524,7 +524,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	// IContextMenuProvider
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (excludeUntouchableObjects) {
+			return;
+		}
+
 		boolean isMenuVisible = false;
 		MapActivity mapActivity = view.getMapActivity();
 		if (mapActivity != null) {
@@ -564,11 +569,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
 		return false;
 	}
 
