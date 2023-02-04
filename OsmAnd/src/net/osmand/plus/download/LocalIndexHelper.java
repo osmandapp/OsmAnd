@@ -227,6 +227,7 @@ public class LocalIndexHelper {
 				case TILES_DATA:
 					loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, needDescription, loadTask);
 					loadTilesData(app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR), result, false, needDescription, loadTask);
+					loadTilesData(app.getAppPath(IndexConstants.GEOTIFF_DIR), result, false, needDescription, loadTask);
 					break;
 				case TRAVEL_DATA:
 					loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, readFiles,
@@ -326,7 +327,10 @@ public class LocalIndexHelper {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile()) {
 					String fileName = tileFile.getName();
-					if (fileName.endsWith(SQLiteTileSource.EXT) || fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					boolean tilesData = fileName.endsWith(SQLiteTileSource.EXT)
+							|| fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
+							|| fileName.endsWith(IndexConstants.TIF_EXT);
+					if (tilesData) {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
 				} else if (tileFile.isDirectory()) {

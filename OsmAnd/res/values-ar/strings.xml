@@ -4809,7 +4809,7 @@
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
     <string name="compass_always_visible">مرئي دائما</string>
-    <string name="compass_click_desc">اضغط على البوصلة لتبديل وضع اتجاه الخريطة.</string>
+    <string name="compass_click_desc">تلميح: انقرعلى البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
     <string name="accessibility_2d_view_off">إيقاف عرض 3D</string>
     <string name="accessibility_2d_view_on">تفعيل عرض 3D</string>
@@ -5025,7 +5025,7 @@
     <string name="map_widget_sunrise_desc">يعرض وقت شروق الشمس التالي أو الوقت المتبقي حتى شروق الشمس.</string>
     <string name="map_widget_sunset_desc">يعرض وقت غروب الشمس التالي أو الوقت المتبقي حتى غروب الشمس.</string>
     <string name="map_widget_group_sunrise_sunset_desc">تعرض هذه الأدوات معلومات حول شروق الشمس وغروبها التاليين.</string>
-    <string name="storage_migration_fragment_close_descr">تم النسخ لـ %1$s ٪٪. إذا توقفت الآن ، فقد لا يعمل التطبيق بشكل صحيح.</string>
+    <string name="storage_migration_fragment_close_descr">تم النسخ لـ %1$s%% . إذا توقفت الآن ، فقد لا يعمل التطبيق بشكل صحيح.</string>
     <string name="quick_action_precipitation_layer">تبديل لإظهار أو إخفاء طبقة هطول الأمطار على الخريطة.</string>
     <string name="quick_action_wind_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرياح على الخريطة.</string>
     <string name="quick_action_cloud_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرياح على الخريطة.</string>
@@ -5066,7 +5066,7 @@
     <string name="sync_now">المزامنة الآن</string>
     <string name="local_changes">التغييرات المحلية</string>
     <string name="upload_change">تحميل التغيير</string>
-    <string name="cloud_version_will_be_removed">ستتم إزالة النسخة السحابية</string>
+    <string name="cloud_version_will_be_removed">سيتم إزالة النسخة السحابية</string>
     <string name="cloud_changes_will_be_dismissed">سيتم رفض التغييرات السحابية</string>
     <string name="local_file_will_be_restored">سيتم استعادة الملف المحلي</string>
     <string name="local_changes_will_be_dismissed">سيتم رفض التغييرات المحلية</string>
@@ -5077,7 +5077,7 @@
     <string name="cloud_all_changes_uploaded">جميع التغييرات المحملة</string>
     <string name="cloud_all_changes_downloaded">جميع التغييرات المحملة</string>
     <string name="cloud_all_changes_uploaded_descr">تتم مزامنة جميع التغييرات التي تم إجراؤها على هذا الجهاز مع أوسماند كلاود.</string>
-    <string name="cloud_no_conflicts">لا يوجد نزاع</string>
+    <string name="cloud_no_conflicts">لا يوجد نزاع.</string>
     <string name="download_cloud_version">تنزيل الإصدار السحابي</string>
     <string name="shared_string_do_not_exist">غير موجود</string>
     <string name="choose_what_to_sync">اختيار ما تريد مزامنته</string>
@@ -5092,11 +5092,17 @@
     <string name="si_nm_ft">ميل بحري/قدم</string>
     <string name="si_nm_mt">ميل بحري/متر</string>
     <string name="set_up_backup">إنشاء نسخة احتياطية</string>
-    <string name="x_axis">محور-س</string>
-    <string name="y_axis">محور-ص</string>
+    <string name="x_axis">محور-اكس</string>
+    <string name="y_axis">محور-واي</string>
     <string name="share_link">مشاركة الرابط</string>
     <string name="share_as_file">مشاركة كملف</string>
     <string name="skip_download">تخط التنزيل</string>
     <string name="value_downloaded_of_mb">جاري تنزيل %1$.1f/%2$.1f ميغابايت</string>
     <string name="determine_location">اسمح لنا بتحديد موقعك</string>
+    <string name="weight_limit_error">أدنى قيمة هي \"%1$s\" طن. استخدم ملف تعريف \"%2$s\" إذا كان وزن السيارة أقل من الحد الأدنى.</string>
+    <string name="sound_beep_complex">صفير: مركب</string>
+    <string name="sound_beep_complex_loud">صفير: مركب ذو صوت عال</string>
+    <string name="sound_beep_minimal">صفير: ذو حد أدنى</string>
+    <string name="sound_beep_simple">صفير: عادي</string>
+    <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
 </resources>

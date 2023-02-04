@@ -504,7 +504,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (map != null && tileBox.getZoom() >= MIN_POINTS_ZOOM) {
 			getImagesFromPoint(tileBox, point, objects);
 		}
@@ -517,11 +518,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return new LatLon(image.getLatitude(), image.getLongitude());
 		}
 		return null;
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof MapillaryImage;
 	}
 
 	@Override

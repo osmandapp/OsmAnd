@@ -321,24 +321,14 @@ public class OpeningHoursParser {
 			// (2) Mo 14:00-02:00; Tu off
 			// in (2) we need to check first rule even though it is against specification
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
-			boolean overlap = false;
-			for (int i = rules.size() - 1; i >= 0 ; i--) {
-				OpeningHoursRule r = rules.get(i);
-				if (r.hasOverlapTimes()) {
-					overlap = true;
-					break;
-				}
-			}
+			boolean overlap = hasOverlappingRules(rules);
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0 ; i--) {
-				boolean checkNext = false;
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
-					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
-					}
+					boolean checkNext = isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && !checkNext)) {
+					if (open || (!overlap && checkNext)) {
 						return open;
 					}
 				}
@@ -416,12 +406,15 @@ public class OpeningHoursParser {
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 			Calendar openingTimeCal = null;
+			OpeningHoursRule openingRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
 						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
-						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
+								|| r.hasOverlapTimes(cal, openingRule, false)) {
 							openingTime = time;
+							openingRule = r;
 						}
 						openingTimeCal = (Calendar) cal.clone();
 					}
@@ -436,12 +429,15 @@ public class OpeningHoursParser {
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (int i = 0; i < 7; i++) {
 				cal.add(Calendar.DAY_OF_MONTH, 1);
+				OpeningHoursRule openingRule = null;
 				Calendar openingTimeCal = null;
 				for (OpeningHoursRule r : rules) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
 						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
-						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
+								|| r.hasOverlapTimes(cal, openingRule, false)) {
 							openingTime = time;
+							openingRule = r;
 						}
 						openingTimeCal = (Calendar) cal.clone();
 					}
@@ -509,24 +505,14 @@ public class OpeningHoursParser {
 			// in (2) we need to check first rule even though it is against specification
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			String ruleClosed = null;
-			boolean overlap = false;
-			for (int i = rules.size() - 1; i >= 0; i--) {
-				OpeningHoursRule r = rules.get(i);
-				if (r.hasOverlapTimes()) {
-					overlap = true;
-					break;
-				}
-			}
+			boolean overlap = hasOverlappingRules(rules);
 			// start from the most specific rule
 			for (int i = rules.size() - 1; i >= 0; i--) {
-				boolean checkNext = false;
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
-					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
-					}
+					boolean checkNext = isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
-					if (open || (!overlap && !checkNext)) {
+					if (open || (!overlap && checkNext)) {
 						return rule.toLocalRuleString();
 					} else {
 						ruleClosed = rule.toLocalRuleString();
@@ -535,7 +521,32 @@ public class OpeningHoursParser {
 			}
 			return ruleClosed;
 		}
-		
+
+		private boolean isCheckNextNeeded(Calendar cal, ArrayList<OpeningHoursRule> rules, int i, OpeningHoursRule rule) {
+			boolean checkNext = true;
+			if (i > 0) {
+				for (int j = i; j > 0; j--) {
+					checkNext = rule.hasOverlapTimes(cal, rules.get(j - 1), false);
+					if (checkNext) {
+						break;
+					}
+				}
+			}
+			return checkNext;
+		}
+
+		private boolean hasOverlappingRules(ArrayList<OpeningHoursRule> rules) {
+			boolean overlap = false;
+			for (int i = rules.size() - 1; i >= 0; i--) {
+				OpeningHoursRule r = rules.get(i);
+				if (r.hasOverlapTimes()) {
+					overlap = true;
+					break;
+				}
+			}
+			return overlap;
+		}
+
 		public String getCurrentRuleTimeV1(Calendar cal) {
 			String ruleOpen = null;
 			String ruleClosed = null;

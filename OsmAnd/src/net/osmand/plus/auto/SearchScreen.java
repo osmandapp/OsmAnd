@@ -1,6 +1,7 @@
 package net.osmand.plus.auto;
 
 import static androidx.car.app.constraints.ConstraintManager.CONTENT_LIMIT_TYPE_LIST;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 import android.graphics.drawable.Drawable;
 
@@ -77,7 +78,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		super(carContext);
 		ConstraintManager manager = carContext.getCarService(ConstraintManager.class);
 		int contentLimit = Math.min(CONTENT_LIMIT, manager.getContentLimit(CONTENT_LIMIT_TYPE_LIST));
-		this.searchHelper = new SearchHelper(getApp(), true, contentLimit);
+		this.searchHelper = new SearchHelper(getApp(), true, contentLimit, 2, MAX_DEFAULT_SEARCH_RADIUS, false);
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
 

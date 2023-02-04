@@ -163,6 +163,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR),
 				IndexConstants.HEIGHTMAP_SQLITE_EXT, indexFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
+				IndexConstants.TIF_EXT, indexFileNames);
 
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -387,11 +389,15 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE) {
+			if (ii.getType() == DownloadActivityType.GEOTIFF_FILE) {
 				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 				if (plugin == null || !plugin.isHeightmapEnabled()) {
 					continue;
 				}
+			}
+			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
+				// Hide heightmaps of sqlite format
+				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
 			WorldRegion wg = regs.getRegionDataByDownloadName(basename);

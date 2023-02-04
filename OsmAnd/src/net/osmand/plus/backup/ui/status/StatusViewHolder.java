@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.fragments.MainSettingsFragment.getLastBac
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView icon;
 	private final TextView description;
 	private final ProgressBar progressBar;
+	private final LinearLayout divider;
 
 	private final boolean nightMode;
 
@@ -43,6 +45,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 		icon = itemView.findViewById(R.id.icon);
 		description = itemView.findViewById(R.id.description);
 		progressBar = itemView.findViewById(R.id.progress_bar);
+		divider = itemView.findViewById(R.id.bottom_divider);
 	}
 
 	public void bindView() {
@@ -72,6 +75,8 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 			title.setText(status.statusTitleRes);
 			icon.setImageDrawable(uiUtilities.getIcon(status.statusIconRes));
 		}
+
+		AndroidUiHelper.updateVisibility(divider, false);
 		AndroidUiHelper.updateVisibility(progressBar, exportTask != null || preparing);
 		AndroidUiHelper.updateVisibility(description, exportTask == null || preparing);
 	}
