@@ -538,13 +538,13 @@
     <string name="poi_beach_shingle">砾石海滩</string>
     <string name="poi_beach_rocky">多岩石的</string>
     <string name="poi_bench_yes">是；长凳</string>
-    <string name="poi_bridge_car">道路桥</string>
-    <string name="poi_bridge_pedestrian">人行天桥</string>
-    <string name="poi_bridge_bicycle">自行车桥</string>
-    <string name="poi_bridge_railway">铁道桥</string>
+    <string name="poi_bridge_car">道路桥梁</string>
+    <string name="poi_bridge_pedestrian">人行桥</string>
+    <string name="poi_bridge_bicycle">自行车桥梁</string>
+    <string name="poi_bridge_railway">铁路桥梁</string>
     <string name="poi_bridge_structure_arch">桥梁结构：拱式</string>
     <string name="poi_bridge_structure_floating">桥梁结构：浮桥</string>
-    <string name="poi_bridge_movable_bascule">可移动桥梁类型：竖旋桥</string>
+    <string name="poi_bridge_movable_bascule">活动桥梁类型：竖旋桥</string>
     <string name="poi_route_trolleybus_ref">无轨电车</string>
     <string name="poi_route_light_rail_ref">轻轨</string>
     <string name="poi_route_monorail_ref">单轨</string>
@@ -647,7 +647,7 @@
     <string name="poi_surface_clay">粘土</string>
     <string name="poi_location_underground">地点：地下</string>
     <string name="poi_location_underwater">地点：水下</string>
-    <string name="poi_location_bridge">地点：桥</string>
+    <string name="poi_location_bridge">位置：桥梁</string>
     <string name="poi_location_entrance">地点：入口</string>
     <string name="poi_water_purification_none">无</string>
     <string name="poi_water_purification_chlorine">氯</string>
@@ -904,9 +904,9 @@
     <string name="poi_confectionery">甜食店</string>
     <string name="poi_emergency_infrastructure">应急设施</string>
     <string name="poi_drive_in">驶入</string>
-    <string name="poi_access_caravan">大篷车通道</string>
+    <string name="poi_access_caravan">大篷车通行</string>
     <string name="poi_socket">插座</string>
-    <string name="poi_water_place_access">水源地访问</string>
+    <string name="poi_water_place_access">水源地通行</string>
     <string name="poi_dish">盘子</string>
     <string name="poi_operational_status">运行状况</string>
     <string name="poi_climbing_crag_filter">攀岩峭壁</string>
@@ -917,7 +917,7 @@
     <string name="poi_socket_type2_output_filter">Type 2 型输出连接器</string>
     <string name="poi_home_visit">家访</string>
     <string name="poi_service_car">汽车服务</string>
-    <string name="poi_access_bus">公交车通道</string>
+    <string name="poi_access_bus">公交车通行</string>
     <string name="poi_snowmobile_filter">雪地摩托通行</string>
     <string name="poi_animal_shelter_type">接受动物</string>
     <string name="poi_free_flying_characteristic">特征</string>
@@ -994,8 +994,8 @@
     <string name="poi_bath_open_air">露天</string>
     <string name="poi_bath_type">类型</string>
     <string name="poi_cash_withdrawal_bank_card">现金返还</string>
-    <string name="poi_access_disabled">无障碍通道</string>
-    <string name="poi_access_motorcycle">摩托车通道</string>
+    <string name="poi_access_disabled">无障碍通行</string>
+    <string name="poi_access_motorcycle">摩托车通行</string>
     <string name="poi_socket_schuko_output_filter">Schuko 连接器插头</string>
     <string name="poi_socket_cee_blue_output_filter">CEE 蓝色工业插头连接器插口</string>
     <string name="poi_caravans">拖挂房车</string>
@@ -1894,7 +1894,7 @@
     <string name="poi_enforcement_check">强制执行：检查</string>
     <string name="poi_enforcement_maxheight">强制执行：最大高度</string>
     <string name="poi_power_terminal">电力终端</string>
-    <string name="poi_weightbridge">地磅秤；卡车称重</string>
+    <string name="poi_weightbridge">地磅秤；卡车称</string>
     <string name="poi_kiln">窑</string>
     <string name="poi_enforcement_maxspeed">强制执行：最高速度</string>
     <string name="poi_information_terminal">终端机</string>
@@ -2231,4 +2231,10 @@
     <string name="poi_generator_output_hot_air_yes">输出：热空气</string>
     <string name="poi_generator_output_compressed_air_yes">输出：压缩空气</string>
     <string name="poi_generator_output_vacuum_yes">输出：真空</string>
+    <string name="poi_maxstay">停车时限</string>
+    <string name="poi_supervised_no">没有监管</string>
+    <string name="poi_bridge_ref">桥梁编号</string>
+    <string name="poi_bench_no">没有长椅</string>
+    <string name="poi_toilets_no">不带厕所</string>
+    <string name="poi_playground_bridge">桥梁</string>
 </resources>
