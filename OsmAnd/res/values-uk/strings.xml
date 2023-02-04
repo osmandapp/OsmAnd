@@ -5037,4 +5037,5 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
+    <string name="display_position_descr">Типове значення — «Автоматично», тобто «Внизу» для орієнтації на мапі «Напрямок руху» та «По центру» в усіх інших випадках.</string>
 </resources>
