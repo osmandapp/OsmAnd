@@ -138,6 +138,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 	@Nullable
 	private Drawable getContentIcon(@DrawableRes int icon) {
-		return app.getUIUtilities().getIcon(icon, R.color.icon_color_secondary_light);
+		return app.getUIUtilities().getIcon(icon, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 }

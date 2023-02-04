@@ -202,6 +202,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_URI = "aidl_uri";
 	private static final String AIDL_FORCE = "aidl_force";
 	private static final String AIDL_LOCATION_PERMISSION = "aidl_location_permission";
+	private static final String AIDL_PASS_WHOLE_ROUTE = "aidl_pass_whole_route";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
@@ -749,8 +750,9 @@ public class OsmandAidlApi {
 					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
 					if (gpx != null) {
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
+						boolean passWholeRoute = intent.getBooleanExtra(AIDL_PASS_WHOLE_ROUTE, false);
 						boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
-						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force, locationPermission);
+						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force, locationPermission, passWholeRoute);
 					}
 				}
 			}
@@ -1846,6 +1848,18 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_URI, uri);
 		intent.putExtra(AIDL_FORCE, force);
 		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean navigateGpxV2(String data, Uri uri, boolean force, boolean requestLocationPermission, boolean passWholeRoute) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_NAVIGATE_GPX);
+		intent.putExtra(AIDL_DATA, data);
+		intent.putExtra(AIDL_URI, uri);
+		intent.putExtra(AIDL_FORCE, force);
+		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
+		intent.putExtra(AIDL_PASS_WHOLE_ROUTE, passWholeRoute);
 		app.sendBroadcast(intent);
 		return true;
 	}

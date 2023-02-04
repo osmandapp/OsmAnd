@@ -162,12 +162,15 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	}
 
 	public static String generateTimeString(OsmandApplication app, long time, String summary) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, getTimeString(app, time));
+	}
+
+	public static String getTimeString(OsmandApplication app, long time) {
 		String never = app.getString(R.string.shared_string_never);
 		if (time != -1) {
-			String formattedTime = OsmAndFormatter.getFormattedPassedTime(app, time, never, true);
-			return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, formattedTime);
+			return OsmAndFormatter.getChangesFormattedPassedTime(app, time, never);
 		} else {
-			return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, never);
+			return app.getString(R.string.shared_string_never);
 		}
 	}
 
@@ -187,6 +190,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		public RemoteFile remoteFile;
 		public SettingsItem settingsItem;
 		public SyncOperationType operation;
+		public String summary;
+		public String time;
 	}
 
 	protected CloudChangeItem createChangeItem(String key,
@@ -198,11 +203,12 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 			return null;
 		}
 		long time = getTime(operation, localFile, remoteFile);
-		String summary = localizedSummaryForOperation(operation, localFile, remoteFile);
 
 		CloudChangeItem changeItem = new CloudChangeItem();
 		changeItem.title = getName(settingsItem);
-		changeItem.description = generateTimeString(app, time, summary);
+		changeItem.summary = localizedSummaryForOperation(operation, localFile, remoteFile);
+		changeItem.description = generateTimeString(app, time, changeItem.summary);
+		changeItem.time = getTimeString(app, time);
 		changeItem.iconId = getIcon(settingsItem);
 		changeItem.settingsItem = settingsItem;
 		changeItem.operation = operation;

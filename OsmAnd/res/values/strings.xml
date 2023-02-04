@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
     <string name="share_as_file">Share as file</string>
@@ -248,7 +249,7 @@
     <string name="how_to_use">How to use:</string>
     <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
-    <string name="display_position">Position placement</string>
+    <string name="display_position">Display position</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>
@@ -327,7 +328,7 @@
     <string name="calculate_online_altitude_descr">Calculate elevation online on OsmAnd servers, based on satellite imagery and digital elevation models. Differences vs. device recorded altitude may be used as elevation correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_name">Vehicle engine</string>
+    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
     <string name="routing_attr_motor_type_description">Select your engine\'s fuel type, this is needed to estimate CO2 emission.</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Petrol</string>

@@ -306,10 +306,6 @@ public class MapRendererContext {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
-			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
-			if (!heightMapDir.exists()) {
-				heightMapDir.mkdir();
-			}
 			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
 			if (!sqliteCacheDir.exists()) {
 				sqliteCacheDir.mkdir();
@@ -319,7 +315,6 @@ public class MapRendererContext {
 				geotiffDir.mkdir();
 			}
 			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
-			heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
 			GeoTiffCollection geotiffCollection = new GeoTiffCollection();
 			geotiffCollection.addDirectory(geotiffDir.getAbsolutePath());
 			geotiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());

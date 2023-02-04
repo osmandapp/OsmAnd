@@ -567,7 +567,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getAmenityFromPoint(tileBox, point, objects);
 		}
@@ -579,11 +580,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return ((Amenity) o).getLocation();
 		}
 		return null;
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof Amenity;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DRAWER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
@@ -46,7 +47,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -59,6 +59,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
+import net.osmand.gpx.GPXFile;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -802,7 +803,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				permissionDone = true;
 			}
 		}
-		enableDrawer();
+		if (isDrawerAvailable()) {
+			enableDrawer();
+		} else {
+			disableDrawer();
+		}
 
 		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(mapViewMapActivity)) {
 			SecondSplashScreenFragment.SHOW = false;
@@ -1487,9 +1492,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void openDrawer() {
-		mapActions.updateDrawerMenu();
-		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
-		drawerLayout.openDrawer(GravityCompat.START, animate);
+		if (isDrawerAvailable()) {
+			mapActions.updateDrawerMenu();
+			boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
+			drawerLayout.openDrawer(GravityCompat.START, animate);
+		}
 	}
 
 	public void disableDrawer() {
@@ -1501,12 +1508,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void enableDrawer() {
-		drawerDisabled = false;
-		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+		if (isDrawerAvailable()) {
+			drawerDisabled = false;
+			drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+		}
 	}
 
 	public boolean isDrawerDisabled() {
 		return drawerDisabled;
+	}
+
+	public boolean isDrawerAvailable() {
+		return app.getAppCustomization().isFeatureEnabled(FRAGMENT_DRAWER_ID);
 	}
 
 	@Override

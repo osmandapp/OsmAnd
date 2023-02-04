@@ -4706,7 +4706,7 @@
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
-    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
+    <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
@@ -5047,10 +5047,11 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
-    <string name="weight_limit_error">El valor mínimo es de «%1$s» toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_minimal">Pitido: mínimo</string>
     <string name="sound_beep_simple">Pitido: simple</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
+    <string name="last_synchronized">Última sincronización</string>
 </resources>

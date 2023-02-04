@@ -376,13 +376,18 @@ public class MapActivityActions extends MapActions {
 	public boolean hasUiContext() {
 		return true;
 	}
-
-	@Override
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
 	                                           boolean showMenu, int menuState) {
+		enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName, useIntermediatePointsByDefault,
+				showMenu, menuState, false);
+	}
+	@Override
+	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
+	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
+	                                           boolean showMenu, int menuState, boolean passWholeRoute) {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName, useIntermediatePointsByDefault,
-				showMenu, menuState);
+				showMenu, menuState, passWholeRoute);
 		if (showMenu) {
 			mapActivity.getMapRouteInfoMenu().setShowMenu(menuState);
 		}
