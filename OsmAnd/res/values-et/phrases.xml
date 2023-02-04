@@ -217,7 +217,7 @@
     <string name="poi_archaeological_site_type">Liik</string>
     <string name="poi_star_rating">Tärnihinnang</string>
     <string name="poi_denomination">Nimiväärtus</string>
-    <string name="poi_fee">Piletitasu</string>
+    <string name="poi_fee">Tasuline teenus</string>
     <string name="poi_religion_type">Religioon</string>
     <string name="poi_information_type">Liik</string>
     <string name="poi_information_contents">Sisu</string>
@@ -638,7 +638,7 @@
     <string name="poi_fuel_autogas">Autogaas</string>
     <string name="poi_fuel_jeta1">Jet A-1 kütus</string>
     <string name="poi_mountain_pass">Mäekuru</string>
-    <string name="poi_waterway_fuel">Paatide bensiinijaam</string>
+    <string name="poi_waterway_fuel">Väikelaevade tankla</string>
     <string name="poi_electricity_combined_charging">Laadimisjaam;Elektriautode laadimisjaam;Elektriauto laadimine;Laadimispunkt;Elektriautode laadimispunkt</string>
     <string name="poi_park_ride_ferry">Parvlaev</string>
     <string name="poi_9pin">Üheksa kurikaga keegel</string>
@@ -1085,7 +1085,7 @@
     <string name="poi_service_times">Teenindusajad</string>
     <string name="poi_maxheight">Suurim kõrgus</string>
     <string name="poi_maxweight">Suurim kaal</string>
-    <string name="poi_operator">Operaator</string>
+    <string name="poi_operator">Käitaja</string>
     <string name="poi_brand">Kaubamärk</string>
     <string name="poi_enforcement_traffic_signals">Jõustamine: pidurituled</string>
     <string name="poi_enforcement_maxspeed">Jõustamine: suurim kiirus</string>
@@ -1435,7 +1435,7 @@
     <string name="poi_stars_4s">4S (kõrgem esimene klass)</string>
     <string name="poi_stars_5">5 (luksus)</string>
     <string name="poi_stars_5s">5S (kõrgem luksus)</string>
-    <string name="poi_rooms">Toad</string>
+    <string name="poi_rooms">Tube</string>
     <string name="poi_love_hotel">Armastuse hotell</string>
     <string name="poi_payment_coins_yes">Mündid</string>
     <string name="poi_payment_coins_no">Münte vastu ei võeta</string>
@@ -1615,13 +1615,13 @@
     <string name="poi_delivery_yes">Kohaletoimetamine</string>
     <string name="poi_delivery_no">Kohaletoimetamine puudub</string>
     <string name="poi_delivery_only">Ainult kohaletoimetamine</string>
-    <string name="poi_outdoor_seating_yes">Väljas istekohad: jah</string>
-    <string name="poi_outdoor_seating_no">Väljas istekohad puuduvad</string>
-    <string name="poi_outdoor_seating_terrace">Väljas istekohad: terrass</string>
-    <string name="poi_outdoor_seating_sidewalk">Väljas istekohad: kõnnitee</string>
-    <string name="poi_outdoor_seating_pedestrian_zone">Väljas istekohad: jalakäijate ala</string>
-    <string name="poi_outdoor_seating_garden">Väljas istekohad: aed</string>
-    <string name="poi_outdoor_seating_patio">Väljas istekohad: siseõu</string>
+    <string name="poi_outdoor_seating_yes">Istekohad õues: jah</string>
+    <string name="poi_outdoor_seating_no">Istekohti õues pole</string>
+    <string name="poi_outdoor_seating_terrace">Istekohad õues: terrass</string>
+    <string name="poi_outdoor_seating_sidewalk">Istekohad õues: kõnnitee ääres</string>
+    <string name="poi_outdoor_seating_pedestrian_zone">Istekohad õues: jalakäijate ala</string>
+    <string name="poi_outdoor_seating_garden">Istekohad õues: aias</string>
+    <string name="poi_outdoor_seating_patio">Istekohad õues: siseõues</string>
     <string name="poi_cocktails_yes">Jah;Kokteilid</string>
     <string name="poi_second_hand_yes">Kasutatud kaup</string>
     <string name="poi_second_hand_no">Kasutatud kaup puuduvad</string>
@@ -2855,7 +2855,7 @@
     <string name="poi_diplomatic_delegation">Delegatsioon</string>
     <string name="poi_diplomatic_ambassadors_residence">Suursaadiku residents</string>
     <string name="poi_diplomatic_high_commission">Kõrge komisjon</string>
-    <string name="poi_fire_operator">Tuletõrje operaator</string>
+    <string name="poi_fire_operator">Tuletõrjevahend</string>
     <string name="poi_diaper_table_count">Mähkmelaudade arv</string>
     <string name="poi_water_tank">Veepaak</string>
     <string name="poi_toilets_disposal_flush">Tualeti liik: loputuskastiga</string>
@@ -3707,7 +3707,7 @@
     <string name="poi_atm_yes">Pangaautomaat: jah</string>
     <string name="poi_cash_withdrawal_yes">Sularaha väljavõtmine: jah</string>
     <string name="poi_cash_withdrawal">Sularaha väljavõtmine</string>
-    <string name="poi_cash_withdrawal_operator">Sularaha väljavõtmise operaator</string>
+    <string name="poi_cash_withdrawal_operator">Sularaha väljavõtmise teenus</string>
     <string name="poi_cash_withdrawal_type_checkout">Sularaha väljavõtmine: kassas</string>
     <string name="poi_cash_withdrawal_type_self_checkout">Sularaha väljavõtmise liik: iseteeninduskassa</string>
     <string name="poi_cash_withdrawal_limit">Sularaha väljavõtmise limiit</string>
