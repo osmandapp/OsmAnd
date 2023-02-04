@@ -159,11 +159,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return false;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -174,8 +169,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() >= START_ZOOM) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));

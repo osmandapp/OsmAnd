@@ -638,8 +638,9 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() >= 3) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (tileBox.getZoom() >= 3 && !excludeUntouchableObjects) {
 			getMyLocationFromPoint(tileBox, point, o);
 		}
 	}
@@ -662,11 +663,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
 		return false;
 	}
 

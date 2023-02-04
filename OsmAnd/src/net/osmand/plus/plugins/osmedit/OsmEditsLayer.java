@@ -274,11 +274,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof OsmPoint;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -289,7 +284,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getOsmEditsFromPoint(point, tileBox, o);
 		}
