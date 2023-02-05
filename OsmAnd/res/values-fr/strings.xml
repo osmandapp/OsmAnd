@@ -5021,7 +5021,7 @@
     <string name="share_as_file">Partager en tant que fichier</string>
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
-    <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profile \"%2$s\".</string>
+    <string name="weight_limit_error">La valeur minimale est de \"%1$s\" tonnes. Si le poids de votre véhicule est inférieur à cette valeur, paramétrez le profil \"%2$s\".</string>
     <string name="sound_beep_complex">Bip : complexe</string>
     <string name="sound_beep_minimal">Bip : minimal</string>
     <string name="sound_beep_simple_loud">Bip : simple fort</string>
