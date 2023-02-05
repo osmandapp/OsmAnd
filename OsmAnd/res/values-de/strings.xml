@@ -4777,7 +4777,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Position anzeigen</string>
+    <string name="display_position">Kartenzentrierung</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
