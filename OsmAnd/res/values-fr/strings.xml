@@ -2369,7 +2369,7 @@
     <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
     <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
-    <string name="moving_time">Durée de mouvement</string>
+    <string name="moving_time">Durée de déplacement</string>
     <string name="min_max">Min / Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre le guidage</string>
@@ -5028,5 +5028,5 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_descr">Est par défaut en \"automatique\", soit \"en bas de l\'écran\" lorsque la carte est \"orientée selon la direction du mouvement\" et \"centré\" dans les autres cas.</string>
+    <string name="display_position_descr">La valeur par défaut est \"Automatique\". C’est à dire positionné \"En bas de l\'écran\" si la carte est \'Orientée selon la direction du déplacement\' ou \"Centré\" dans tous les autres cas.</string>
 </resources>
