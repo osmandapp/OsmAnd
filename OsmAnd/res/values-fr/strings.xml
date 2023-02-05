@@ -5028,4 +5028,5 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
+    <string name="display_position_descr">Est par défaut en \"automatique\", soit \"en bas de l\'écran\" lorsque la carte est \"orientée selon la direction du mouvement\" et \"centré\" dans les autres cas.</string>
 </resources>
