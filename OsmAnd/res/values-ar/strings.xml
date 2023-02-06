@@ -4752,7 +4752,7 @@
     <string name="use_latin_name_if_missing">استخدم الاسم اللاتيني إذا كان الاسم مفقودا</string>
     <string name="routing_attr_goods_restrictions_description">النظر في الحصول على إذن لمركبات البضائع الخفيفة (السلع)</string>
     <string name="transport_hazmat_title">نقل المواد الخطرة</string>
-    <string name="routing_attr_motor_type_name">محرك السيارة</string>
+    <string name="routing_attr_motor_type_name">وقود السيارة</string>
     <string name="routing_attr_motor_type_petrol_name">البنزين</string>
     <string name="routing_attr_motor_type_lpg_name">غاز البترول المسال</string>
     <string name="routing_attr_motor_type_electric_name">كهربائي</string>
@@ -4840,7 +4840,7 @@
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
-    <string name="display_position">تنسيق الموضع</string>
+    <string name="display_position">عرض الموقف</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
     <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
@@ -5105,4 +5105,5 @@
     <string name="sound_beep_minimal">صفير: ذو حد أدنى</string>
     <string name="sound_beep_simple">صفير: عادي</string>
     <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
+    <string name="last_synchronized">آخر مزامنة</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routing_attr_motor_type_name">Moteur du véhicule</string>
+    <string name="routing_attr_motor_type_name">Carburant utilisé</string>
     <string name="routing_attr_motor_type_description">Sélectionnez le carburant utilisé par le moteur de votre véhicule pour calculer les émissions de CO₂.</string>
     <string name="routing_attr_motor_type_diesel_name">Gazole</string>
     <string name="routing_attr_motor_type_petrol_name">Essence</string>
@@ -2369,7 +2369,7 @@
     <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
     <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2018-01).</string>
     <string name="of">%1$d de %2$d</string>
-    <string name="moving_time">Durée de mouvement</string>
+    <string name="moving_time">Durée de déplacement</string>
     <string name="min_max">Min / Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre le guidage</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Emplacement sur l’écran</string>
+    <string name="display_position">Position placement</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
@@ -5027,4 +5027,6 @@
     <string name="sound_beep_simple_loud">Bip : simple fort</string>
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
+    <string name="last_synchronized">Dernière synchronisation</string>
+    <string name="display_position_descr">La valeur par défaut est \"Automatique\". C’est à dire positionné \"En bas de l\'écran\" si la carte est \'Orientée selon la direction du déplacement\' ou \"Centré\" dans tous les autres cas.</string>
 </resources>

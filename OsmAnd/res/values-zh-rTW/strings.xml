@@ -4685,7 +4685,7 @@
     <string name="routing_attr_motor_type_petrol_name">汽油</string>
     <string name="routing_attr_motor_type_lpg_name">液化石油氣</string>
     <string name="routing_attr_motor_type_gas_name">天然氣</string>
-    <string name="routing_attr_motor_type_name">車輛引擎</string>
+    <string name="routing_attr_motor_type_name">引擎使用的燃料</string>
     <string name="lang_ckb">中庫德語</string>
     <string name="updated_map_time">已更新：%1$s。</string>
     <string name="includes_osm_changes_until">包含在 %1$s 之前所作的 OSM 變更。</string>
@@ -5030,4 +5030,5 @@
     <string name="sound_beep_complex_loud">蜂鳴器：複合響亮</string>
     <string name="sound_beep_complex">蜂鳴器：複合</string>
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
+    <string name="last_synchronized">最後同步</string>
 </resources>

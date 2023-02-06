@@ -4661,7 +4661,7 @@
     <string name="co2_mission">CO2-Emission</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
-    <string name="routing_attr_motor_type_name">Fahrzeugmotor</string>
+    <string name="routing_attr_motor_type_name">Kraftstoffverbrauch des Motors</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
     <string name="bearing_secondary_desc">Sie können das verwendete Datenformat ändern in %1$s – %2$s – %3$s.</string>
@@ -4777,7 +4777,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Positionsbestimmung</string>
+    <string name="display_position">Kartenzentrierung</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -5041,4 +5041,6 @@
     <string name="sound_beep_complex_loud">Signalton: Komplex, laut</string>
     <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
     <string name="sound_beep_complex">Signalton: Komplex</string>
+    <string name="last_synchronized">Zuletzt synchronisiert</string>
+    <string name="display_position_descr">Die Standardeinstellung ist \'Automatisch\', d. h. \'Unten\' für die Kartenausrichtung, \'Bewegungsrichtung\' und \'Mitte\' in allen anderen Fällen.</string>
 </resources>

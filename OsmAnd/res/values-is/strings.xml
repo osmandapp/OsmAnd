@@ -1569,7 +1569,7 @@
 \nPunktar</string>
     <string name="osmo_edit_color">Litur á skjá</string>
     <string name="use_points_as_intermediates">Reikna leið milli punkta</string>
-    <string name="always_center_position_on_map">Staðsetning skjás alltaf á miðju</string>
+    <string name="always_center_position_on_map">Staðsetning alltaf á miðju</string>
     <string name="index_item_world_altitude_correction">Hæðarleiðrétting á heimsvísu</string>
     <string name="index_item_world_seamarks">Sjómerki um víða veröld</string>
     <string name="calculate_osmand_route_without_internet">Reikna OsmAnd leiðarbút án internettengingar</string>
@@ -4186,7 +4186,7 @@
     <string name="backup_error_user_is_not_registered">Enginn notandi er skráður með þetta tölvupóstfang</string>
     <string name="backup_error_no_valid_subscription">Engin gild áskrift til staðar</string>
     <string name="duration_moment_ago">fyrir augnabliki síðan</string>
-    <string name="backup_dont_have_any_descr">Skilgreindu sjálfvirk öryggisafrit og tryggðu að þú tapir aldrei gögnum.</string>
+    <string name="backup_dont_have_any_descr">Settu upp sjálfvirka öryggisafritun svo þú þurfir ekki að hafa áhyggjur af hvort gögn geti tapast.</string>
     <string name="offline_maps_required_descr">Einhver nettengd kort sem nauðsynleg eru fyrir þessa leið vantar.</string>
     <string name="online_maps_required_descr">Því miður gat OsmAnd ekki fundið hentuga leið miðað við stillingarnar þínar.
 \n
@@ -4214,9 +4214,9 @@
     <string name="backup_version_history_removed">Allur útgáfuferill hefur verið fjarlægður.</string>
     <string name="backup_data_removed">Öll gögn hafa verið fjarlægð.</string>
     <string name="shared_string_progress">Framvinda</string>
-    <string name="backup_do_not_have_any">Þú ert ekki ennþá með nein nettengd öryggisafrit.</string>
+    <string name="backup_do_not_have_any">Þú ert ekki ennþá með nein nettengd öryggisafrit</string>
     <string name="backup_welcome_back">Velkomin(n) aftur!</string>
-    <string name="backup_welcome_back_descr">Endurheimta gögn á tækinu með tiltækum öryggisafritum, eða öryggisafrita gögn yfir í OsmAnd Cloud-tölvuský.</string>
+    <string name="backup_welcome_back_descr">Endurheimta gögn á þessu tæki af OsmAnd Cloud-tölvuskýi.</string>
     <string name="backup_setup">Setja upp öryggisafritun</string>
     <string name="backup_restore_now">Endurheimta núna</string>
     <string name="attribute">Eigindi</string>
@@ -4682,7 +4682,7 @@
     <string name="live_update_frequency_hour_variant">Uppfærslur korta eru athugaðar á klukkustundar fresti.</string>
     <string name="altitude_correction">Hæðarleiðrétting</string>
     <string name="kg">kg</string>
-    <string name="compass_click_desc">Ýttu á áttavitann til að breyta stefnu kortsins.</string>
+    <string name="compass_click_desc">Ábending: Ýttu á áttavitann til að breyta stefnu kortsins.</string>
     <string name="average_speed_skip_stops">Taka mið af stoppum</string>
     <string name="gps_info_widget_desc">Sýnir fjölda gervitungla sem tækið finnur og notar í augnablikinu.</string>
     <string name="max_speed_widget_desc">Sýnir hraðatakmarkanir á veginum sem verið er að aka.</string>
@@ -4877,10 +4877,10 @@
     <string name="map_widget_altitude_map_center">Hæð: miðja korts</string>
     <string name="shared_string_terms_of_use">Notkunarskilmála</string>
     <string name="release_4_4_pre">• Hér koma strengir fyrir 4.4 útgáfuna</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Vindhviðulínur</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Vindhraðalínur</string>
     <string name="mtb_segment_classification">Flokkun búta</string>
     <string name="rendering_attr_showMtbScale_name">Birta fjallahjólreiðakvarða</string>
-    <string name="rendering_attr_showMtbScale_description">Birtir leiðir samkvæmt MTB fjallahjólreiðakvarðanum.</string>
+    <string name="rendering_attr_showMtbScale_description">Birta leiðir samkvæmt MTB fjallahjólreiðakvarðanum.</string>
     <string name="quick_action_wind_layer">Víxlhnappur til að birta eða fela vindalagið á kortinu.</string>
     <string name="quick_action_cloud_layer">Víxlhnappur til að birta eða fela skýjahululagið á kortinu.</string>
     <string name="temperature_layer">Hitastigslag</string>
@@ -4932,7 +4932,7 @@
     <string name="empty_screen_weather_temperature_layer">Virkjaðu þetta til að skoða hitastigslag á kortinu.</string>
     <string name="action_not_supported_with_map_style">Þessi aðgerð er ekki studd af völdum kortastíl.</string>
     <string name="external_sensors_support">Stuðningur við utanáliggjandi skynjara</string>
-    <string name="storage_migration_fragment_close_descr">Afritun er lokið fyrir %1$s%%. Ef þú hættir núna, er ekki víst að forritið virki rétt.</string>
+    <string name="storage_migration_fragment_close_descr">Afritun er aðeins %1$s%% lokið. Ef þú hættir núna, er ekki víst að forritið virki rétt.</string>
     <string name="weather_widget_group_desc">Sett viðmótshluta sem birta ýmsar veðurupplýsingar.</string>
     <string name="map_widget_altitude_map_center_desc">Sýnir hæð yfir sjávarmáli á núverandi miðju landakortsins.</string>
     <string name="map_widget_altitude_current_location_desc">Sýnir hæð yfir sjávarmáli á fyrirliggjandi hnattstaðsetningu.</string>
@@ -4983,7 +4983,7 @@
 \n</string>
     <string name="send_uuid_preference_desc">Tilviljanakennt UUID er notað til að sækja ónettengd kort á netþjóna OsmAnd í þeim tilgangi að fylgjast með sanngjarnri notkun á vinnslu netþjónanna, spá fyrir um myndtur netumferðar og til að útbúa mánaðarleg nafnlaus yfirlit um landakortin.</string>
     <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
-    <string name="av_audio_format_bottom_sheet_descr">Veldu snið hljóðúttaks. Skráategund fyrir hljóð er 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Veldu það sem á að samstilla</string>
     <string name="cloud_sync_progress">Samstilli…%1$s</string>
     <string name="checking_progress">Athuga…</string>
@@ -5001,9 +5001,9 @@
     <string name="sync_now">Samstilla núna</string>
     <string name="local_changes">Staðværar breytingar</string>
     <string name="upload_change">Senda inn breytingu</string>
-    <string name="cloud_version_will_be_removed">Útgáfa á tölvuskýi verður fjarlægð</string>
+    <string name="cloud_version_will_be_removed">Útgáfan á tölvuskýinu verður fjarlægð</string>
     <string name="cloud_changes_will_be_dismissed">Breytingar á tölvuskýinu verða hunsaðar</string>
-    <string name="local_file_will_be_restored">Staðvær skrá verður endurheimt</string>
+    <string name="local_file_will_be_restored">Staðværa skráin verður endurheimt</string>
     <string name="local_changes_will_be_dismissed">Staðværar breytingar verða hunsaðar</string>
     <string name="cloud_conflicts">Árekstrar</string>
     <string name="cloud_conflict">Árekstur</string>
@@ -5019,8 +5019,22 @@
     <string name="cloud_all_changes_uploaded">Allar breytingar sendar inn</string>
     <string name="cloud_all_changes_downloaded">Allar breytingar sóttar</string>
     <string name="cloud_all_changes_uploaded_descr">Allar breytingar sem gerðar hafa verið á þessu tæki eru samstilltar við OsmAnd Cloud-tölvuskýið.</string>
-    <string name="cloud_no_conflicts">Það eru engir árekstrar</string>
+    <string name="cloud_no_conflicts">Það eru engir árekstrar.</string>
     <string name="download_cloud_version">Sækja útgáfu á skýi</string>
     <string name="si_nm_mt">Sjómílur/metrar</string>
     <string name="si_nm_ft">Sjómílur/fet</string>
+    <string name="sound_beep_complex_loud">Píp: flókið hávært</string>
+    <string name="sound_beep_minimal">Píp: lágmarks</string>
+    <string name="sound_beep_simple">Píp: einfalt</string>
+    <string name="sound_beep_simple_loud">Píp: einfalt hávært</string>
+    <string name="y_axis">Y-ás</string>
+    <string name="x_axis">X-ás</string>
+    <string name="set_up_backup">Setja upp öryggisafritun</string>
+    <string name="weight_limit_error">Lágmarksgildi er \"%1$s\" tonn. Notaðu \"%2$s\"-sniðið ef farartækið vegur minna en lágmarksgildið.</string>
+    <string name="sound_beep_complex">Píp: flókið</string>
+    <string name="share_link">Deila tengli</string>
+    <string name="share_as_file">Deila sem skrá</string>
+    <string name="value_downloaded_of_mb">Sæki %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Sleppa niðurhali</string>
+    <string name="determine_location">Leyfir okkur að ákvarða staðsetninguna þína</string>
 </resources>
