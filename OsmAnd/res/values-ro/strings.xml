@@ -5025,7 +5025,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Izolinii rafale de vânt</string>
     <string name="local_changes">Modificări locale</string>
     <string name="upload_change">Încarcă modificarea</string>
-    <string name="cloud_version_will_be_removed">Versiunea de pe Cloud va fi ștearsă</string>
+    <string name="cloud_version_will_be_removed">Versiunea de pe cloud va fi ștearsă</string>
     <string name="cloud_changes_will_be_dismissed">Modificările de pe Cloud vor fi anulate</string>
     <string name="local_file_will_be_restored">Fișierele locație vor fi restaurate</string>
     <string name="local_changes_will_be_dismissed">Modificările locale vor fi anulate</string>
@@ -5036,5 +5036,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Nu s-a putut obține lista de fișiere de pe server.</string>
     <string name="si_nm_mt">Mile nautice/metri</string>
     <string name="si_nm_ft">Mile nautice/picioare</string>
-    <string name="av_audio_format_bottom_sheet_descr">Selectați formatul audio. Formatul fișierului este 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Selectați un format audio. Formatul tipului de container al fișierului este 3GPP (.3gp).</string>
+    <string name="weight_limit_error">Masa minimă este \"%1$s\" tone. Folosește profilul \"%2$s\" dacă masa este mai mică decât valoarea minimă.</string>
+    <string name="last_synchronized">Ultima sincronizare</string>
 </resources>
