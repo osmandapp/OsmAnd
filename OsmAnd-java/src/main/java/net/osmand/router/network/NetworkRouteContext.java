@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -74,15 +74,16 @@ public class NetworkRouteContext {
 		int bottom = y31B >> ZOOM_TO_LOAD_TILES_SHIFT_R;
 		for (int x = left; x <= right; x++) {
 			for (int y = top; y <= bottom; y++) {
-				loadRouteSegmentTile(x, y, rKey, map);
+				loadRouteSegmentIntersectingTile(x, y, rKey, map);
 			}
 		}
 		return map;
 	}
 
-	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentTile(int x, int y, RouteKey routeKey,
+	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentIntersectingTile(int x, int y, RouteKey routeKey,
 	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
+		TLongHashSet tset = new TLongHashSet();
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
 				if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
@@ -93,9 +94,11 @@ public class NetworkRouteContext {
 					routeSegments = new ArrayList<>();
 					map.put(segment.routeKey, routeSegments);
 				}
-				if (segment.start == 0 || !loadOnlyRouteWithKey(routeKey)) {
-					routeSegments.add(segment);
-				} else if (segment.start == segment.robj.getPointsLength() - 1) {
+				if (tset.add(segment.getId())) {
+					if (segment.start != 0) {
+						// API end point expects segment that start from 0
+						segment = new NetworkRouteSegment(segment, 0, segment.getPointsLength() - 1);
+					}
 					routeSegments.add(segment);
 				}
 			}
