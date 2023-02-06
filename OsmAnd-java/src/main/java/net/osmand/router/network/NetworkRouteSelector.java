@@ -535,7 +535,7 @@ public class NetworkRouteSelector {
 			}
 			int xTile = NetworkRouteContext.getXFromTileId(tileID);
 			int yTile = NetworkRouteContext.getYFromTileId(tileID);
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentIntersectingTile(xTile, yTile, rkey, new HashMap<>());
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentIntersectingTile(xTile, yTile, rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
