@@ -5054,4 +5054,5 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
 </resources>
