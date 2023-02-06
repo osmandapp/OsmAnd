@@ -1,5 +1,6 @@
 package net.osmand.router.network;
 
+
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -12,7 +13,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
+import static net.osmand.router.network.NetworkRouteContext.getYFromTileId;
+import static net.osmand.router.network.NetworkRouteContext.getXFromTileId;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
@@ -531,18 +533,28 @@ public class NetworkRouteSelector {
 			if (!visitedTiles.add(tileID)) {
 				continue;
 			}
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
-					NetworkRouteContext.getXFromTileId(tileID), NetworkRouteContext.getYFromTileId(tileID),
-					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
+			int xTile = NetworkRouteContext.getXFromTileId(tileID);
+			int yTile = NetworkRouteContext.getYFromTileId(tileID);
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentIntersectingTile(xTile, yTile, rkey, new HashMap<>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
 //			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
 			if (loaded == null) {
 				continue;
 			}
-			for (NetworkRouteSegment s : loaded) {
-				if (objIds.add(s.getId())) {
-					lst.add(s);
+			for (NetworkRouteSegment loadedSegment : loaded) {
+				if (objIds.add(loadedSegment.getId())) {
+					lst.add(loadedSegment);
+					for (int j = 0; j < loadedSegment.getPointsLength(); j++) {
+						long pntTileId = NetworkRouteContext.getTileId(loadedSegment.getPoint31XTile(j),
+								loadedSegment.getPoint31YTile(j));
+						if (Math.abs(getXFromTileId(pntTileId) - xTile) > 1
+								|| Math.abs(getYFromTileId(pntTileId) - yTile) > 1) {
+							// add tiles that are not enclosed but neeeds to be checked to current tile
+							queue.add(pntTileId);
+						}
+
+					}
 				}
 			}
 			addEnclosedTiles(queue, tileID);
