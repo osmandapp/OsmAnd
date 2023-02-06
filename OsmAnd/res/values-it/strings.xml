@@ -4683,7 +4683,7 @@
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Benzina</string>
     <string name="routing_attr_motor_type_hybrid_name">Ibrido</string>
-    <string name="routing_attr_motor_type_name">Motore veicolo</string>
+    <string name="routing_attr_motor_type_name">Carburante utilizzato dal motore</string>
     <string name="routing_attr_motor_type_description">Seleziona il tipo di combustibile utilizzato dal tuo veicolo per il calcolo delle emissioni di CO2.</string>
     <string name="lang_ckb">Curdo centrale</string>
     <string name="updated_map_time">Aggiornato: %1$s.</string>
@@ -5025,4 +5025,6 @@
     <string name="sound_beep_minimal">Bip: minimale</string>
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
+    <string name="last_synchronized">Ultima sincronizzazione</string>
+    <string name="display_position_descr">L\'impostazione predefinita è \'Automatico\', ovvero \'In basso\' per l\'orientamento della mappa \'Direzione movimento\' e \'Centro\' in tutti gli altri casi.</string>
 </resources>
