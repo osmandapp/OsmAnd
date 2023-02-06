@@ -4671,7 +4671,7 @@
     <string name="no_widgets_descr">Adăugați unul sau mai multe widgeturi din lista de widgeturi disponibile.</string>
     <string name="no_widgets_here_yet">Nu există widget-uri aici încă</string>
     <string name="available_widgets">Widget-uri disponibile</string>
-    <string name="routing_attr_motor_type_name">Motorul vehiculului</string>
+    <string name="routing_attr_motor_type_name">Combustibil folosit</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibridă</string>
     <string name="co2_mission">Emisii CO2</string>
     <string name="kg">kg</string>
@@ -4723,7 +4723,7 @@
     <string name="routing_attr_goods_restrictions_name">Livrarea mărfurilor</string>
     <string name="lang_ckb">Kurdă centrală</string>
     <string name="trip_recording_duration_widget_desc">Afișează timpul de călătorie înregistrat în prezent.</string>
-    <string name="compass_click_desc">Apăsați pe busolă pentru a comuta modul de orientare a hărții.</string>
+    <string name="compass_click_desc">Tip: Apăsați pe widgetul busolă pentru a comuta modul de orientare a hărții.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Arată trasee MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Arată trasee dedicate ciclismului montan.</string>
     <string name="auto_25_chars_route_tl_kl">Virați la stânga și păstrați stânga</string>
@@ -4960,7 +4960,7 @@
     <string name="shared_string_sunset">Apus de soare</string>
     <string name="shared_string_sunrise">Răsărit de soare</string>
     <string name="map_widget_group_sunrise_sunset_desc">Aceste widgeturi afișează informații despre următorul răsărit și apus de soare.</string>
-    <string name="storage_migration_fragment_close_descr">Copierea se face pentru %1$s%%. Dacă vă opriți acum, este posibil ca aplicația să nu funcționeze corect.</string>
+    <string name="storage_migration_fragment_close_descr">Copierea este doar %1$s%% completă. Dacă vă opriți acum, este posibil ca aplicația să nu funcționeze corect.</string>
     <string name="map_widget_group_sunrise_sunset">Răsărit de soare, apus de soare</string>
     <string name="depth_contour_lines">Linii de contur de adâncime</string>
     <string name="turn_on_nautical_depth_description">Activați această funcție pentru a vizualiza datele de adâncime nautică pe hartă.</string>
@@ -4975,7 +4975,7 @@
     <string name="quick_action_cloud_layer">Un comutator pentru a afișa sau ascunde stratul de nori pe hartă.</string>
     <string name="quick_action_air_pressure_layer">Un comutator pentru a afișa sau ascunde stratul de presiune atmosferică pe hartă.</string>
     <string name="rendering_attr_showMtbScale_name">Afișați scara MTB</string>
-    <string name="rendering_attr_showMtbScale_description">Afișați traseele în funcție de scara MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Afișați traseele în funcție de scara lor MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Arată scara MTB în urcare</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Afișați traseele în funcție de scara de urcare a MTB.</string>
     <string name="mtb_segment_classification">Clasificare segment</string>
@@ -5013,20 +5013,20 @@
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">Toate modificările au fost încărcate</string>
     <string name="cloud_all_changes_uploaded_descr">Toate modificările făcute pe acest dispozitiv sunt sincronizate cu OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Nu sunt conflicte</string>
+    <string name="cloud_no_conflicts">Nu sunt conflicte.</string>
     <string name="shared_string_do_not_exist">Nu există</string>
     <string name="last_sync">Ultima sincronizare</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportați într-un fișier</string>
     <string name="shared_string_expires">Expiră</string>
     <string name="open_weather_action_description">Vă permite să deschideți un ecran cu informații meteo detaliate.</string>
     <string name="open_weather_action">Deschide meteo</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinii nori</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinii rafale de vânt</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinii viteze ale vântului</string>
     <string name="local_changes">Modificări locale</string>
     <string name="upload_change">Încarcă modificarea</string>
     <string name="cloud_version_will_be_removed">Versiunea de pe cloud va fi ștearsă</string>
-    <string name="cloud_changes_will_be_dismissed">Modificările de pe Cloud vor fi anulate</string>
+    <string name="cloud_changes_will_be_dismissed">Modificările de pe cloud vor fi anulate</string>
     <string name="local_file_will_be_restored">Fișierele locație vor fi restaurate</string>
     <string name="local_changes_will_be_dismissed">Modificările locale vor fi anulate</string>
     <string name="share_link">Distribuie link</string>
@@ -5039,4 +5039,10 @@
     <string name="av_audio_format_bottom_sheet_descr">Selectați un format audio. Formatul tipului de container al fișierului este 3GPP (.3gp).</string>
     <string name="weight_limit_error">Masa minimă este \"%1$s\" tone. Folosește profilul \"%2$s\" dacă masa este mai mică decât valoarea minimă.</string>
     <string name="last_synchronized">Ultima sincronizare</string>
+    <string name="sound_beep_complex_loud">Bip: complex gălăgios</string>
+    <string name="sound_beep_minimal">Bip: minim</string>
+    <string name="sound_beep_simple">Bip: simplu</string>
+    <string name="sound_beep_simple_loud">Bip: simplu zgomotos</string>
+    <string name="display_position_descr">Setarea prestabilită este \"Automată\", adică \"Jos\" pentru orientarea hârții \"Direcția de mișcare\" și \"Centru\" pentru restul cazurilor.</string>
+    <string name="sound_beep_complex">Bip: complex</string>
 </resources>
