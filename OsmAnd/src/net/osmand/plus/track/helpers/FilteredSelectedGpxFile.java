@@ -80,10 +80,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 			color = gpxFile.tracks.get(0).getColor(0);
 		}
 		modifiedTime = gpxFile.modifiedTime;
-		processedPointsToDisplay = gpxFile.proccessPoints();
-
-		updateBounds();
-		updatePath31(hasMapRenderer(app));
+		processPoints(app);
 
 		leftPointsCount = calculatePointsCount(gpxFile);
 		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
