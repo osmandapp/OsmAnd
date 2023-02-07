@@ -132,7 +132,7 @@
     <string name="poi_tobacco">Tubaka pood</string>
     <string name="poi_toys">Mänguasjapood</string>
     <string name="poi_fuel_avia_type">Lennukikütuse liik</string>
-    <string name="poi_payment_type">Makse liik</string>
+    <string name="poi_payment_type">Maksevahendid</string>
     <string name="poi_payment_fuel_type">Kütusekaardid</string>
     <string name="poi_additional_type">Täiendav</string>
     <string name="poi_internet_access_type">Internetiühenduse liik</string>
@@ -216,7 +216,7 @@
     <string name="poi_free_flying_characteristics">Iseloomulik</string>
     <string name="poi_archaeological_site_type">Liik</string>
     <string name="poi_star_rating">Tärnihinnang</string>
-    <string name="poi_denomination">Nimiväärtus</string>
+    <string name="poi_denomination">Konfessioon</string>
     <string name="poi_fee">Tasuline teenus</string>
     <string name="poi_religion_type">Religioon</string>
     <string name="poi_information_type">Liik</string>
@@ -255,7 +255,7 @@
     <string name="poi_medical_system">Meditsiinisüsteem</string>
     <string name="poi_home_visit">Koduvisiit</string>
     <string name="poi_dish">Roog</string>
-    <string name="poi_payment_transport_type">Makse liik (transport)</string>
+    <string name="poi_payment_transport_type">Maksevahendid (transport)</string>
     <string name="poi_social_facility_type">Liik</string>
     <string name="poi_social_facility_for">Sihtrühm</string>
     <string name="poi_compressed_air_filter">Suruõhk</string>
@@ -513,12 +513,12 @@
     <string name="poi_fuel_hgv_diesel">HGV diisel</string>
     <string name="poi_fuel_biodiesel">Biodiisel</string>
     <string name="poi_fuel_lpg">LPG</string>
-    <string name="poi_fuel_octane_80">Oktaan 80</string>
-    <string name="poi_fuel_octane_91">Oktaan 91</string>
-    <string name="poi_fuel_octane_92">Oktaan 92</string>
-    <string name="poi_fuel_octane_95">Oktaan 95</string>
-    <string name="poi_fuel_octane_98">Oktaan 98</string>
-    <string name="poi_fuel_octane_100">Oktaan 100</string>
+    <string name="poi_fuel_octane_80">Bensiin 80</string>
+    <string name="poi_fuel_octane_91">Bensiin 91</string>
+    <string name="poi_fuel_octane_92">Bensiin 92</string>
+    <string name="poi_fuel_octane_95">Bensiin 95</string>
+    <string name="poi_fuel_octane_98">Bensiin 98</string>
+    <string name="poi_fuel_octane_100">Bensiin 100</string>
     <string name="poi_fuel_cng">Surugaas</string>
     <string name="poi_fuel_1_25">1:25 kütus</string>
     <string name="poi_fuel_1_50">1:50 kütus</string>
@@ -1311,7 +1311,7 @@
     <string name="poi_species">Liigid</string>
     <string name="poi_genus">Perekond</string>
     <string name="poi_taxon">Takson</string>
-    <string name="poi_cuisine">Köögikultuur</string>
+    <string name="poi_cuisine">Roogade valik</string>
     <string name="poi_information_guidepost">Juhtpost</string>
     <string name="poi_information_board">Tahvel</string>
     <string name="poi_information_map">Kaart</string>
@@ -1395,7 +1395,7 @@
     <string name="poi_garden_style_french">Aiastiil: prantsuse</string>
     <string name="poi_garden_style_english">Aiastiil: inglise</string>
     <string name="poi_garden_style_japanese">Aiastiil: jaapani</string>
-    <string name="poi_capacity">Maht</string>
+    <string name="poi_capacity">Mahutavus</string>
     <string name="poi_capacity_disabled_yes">Jah;Ruum puuetega inimestele</string>
     <string name="poi_capacity_disabled_no">Erivajadustega inimestele mõeldud kohad puuduvad</string>
     <string name="poi_capacity_disabled">Erivajadustega inimestele mõeldud kohad</string>
@@ -1639,7 +1639,7 @@
     <string name="poi_full_service_yes">Täisteenus</string>
     <string name="poi_brushless_yes">Jah;Harjadeta</string>
     <string name="poi_brushless_no">Harjavaba: ei</string>
-    <string name="poi_public_bath">Avalik vann</string>
+    <string name="poi_public_bath">Avalik supelkoht</string>
     <string name="poi_male_yes">Meestele</string>
     <string name="poi_male_no">Meestele keelatud</string>
     <string name="poi_female_yes">Naistele</string>
@@ -2453,7 +2453,7 @@
     <string name="poi_microwave_oven_no">Mikrolaineahi: ei</string>
     <string name="poi_water_heater_yes">Veeboiler: jah</string>
     <string name="poi_water_heater_no">Veeboiler: ei</string>
-    <string name="poi_parking_surface">Liik: pind</string>
+    <string name="poi_parking_surface">Liik: maapinnal</string>
     <string name="poi_parking_garage_boxes">Garaažiboksid</string>
     <string name="poi_parking_carports">Autovarjualused</string>
     <string name="poi_dojo">Dojo</string>
@@ -3702,7 +3702,7 @@
     <string name="poi_craft_floorer">Põrandapaigaldaja</string>
     <string name="poi_craft_bakery">Pagarihoone</string>
     <string name="poi_craft_cabinet_maker">Kabinetitootja</string>
-    <string name="poi_charge">Lae</string>
+    <string name="poi_charge">Tasu</string>
     <string name="poi_pet_grooming">Lemmikloomade pügamine</string>
     <string name="poi_atm_yes">Pangaautomaat: jah</string>
     <string name="poi_cash_withdrawal_yes">Sularaha väljavõtmine: jah</string>

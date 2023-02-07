@@ -286,7 +286,7 @@
     <string name="gpx_selection_track">%1$s
 \nTraza %2$s</string>
     <string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
-    <string name="always_center_position_on_map">Mostrar ubicación en el centro</string>
+    <string name="always_center_position_on_map">Mostrar ubicación siempre en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
@@ -4238,7 +4238,7 @@
     <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
     <string name="backup_dont_have_any_descr">Define una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
-    <string name="backup_welcome_back_descr">Restaura los datos en este dispositivo usando OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
     <string name="backup_restore_now">Restaurar ahora</string>
     <string name="attribute">Atributo</string>
@@ -4707,7 +4707,7 @@
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercancías</string>
-    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
+    <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="marker_2nd">Segundo marcador</string>
     <string name="marker_1st">Primer marcador</string>
     <string name="map_marker_average_speed_desc">Indica el intervalo de tiempo en el promedio de velocidad (usado para estimar el tiempo de llegada).</string>
@@ -4779,7 +4779,7 @@
     <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
-    <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
@@ -4982,7 +4982,7 @@
     <string name="pressure_layer">Capa de presión</string>
     <string name="wind_layer">Capa de viento</string>
     <string name="cloud_layer">Capa de nubes</string>
-    <string name="storage_migration_fragment_close_descr">La copia se realiza para %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala de MTB</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
@@ -5028,14 +5028,14 @@
     <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
     <string name="last_sync">Última sincronización</string>
-    <string name="import_export">Importar/Exportar</string>
+    <string name="import_export">Importar/exportar</string>
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios hechos en este dispositivo están sincronizados con OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Sin conflictos</string>
+    <string name="cloud_no_conflicts">Sin conflictos.</string>
     <string name="download_cloud_version">Descargar versión en la nube</string>
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
     <string name="export_to_file">Exportar a un archivo</string>
-    <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elige un formato de audio. El formato de archivo del audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
@@ -5046,4 +5046,12 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
+    <string name="sound_beep_minimal">Pitido: mínimo</string>
+    <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
+    <string name="sound_beep_simple">Pitido: simple</string>
+    <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
+    <string name="sound_beep_complex">Pitido: complejo</string>
 </resources>
