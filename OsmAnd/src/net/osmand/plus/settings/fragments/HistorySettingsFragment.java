@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
@@ -189,6 +190,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 
 		SearchHistoryHelper searchHistoryHelper = SearchHistoryHelper.getInstance(app);
 		searchHistoryHelper.removeAll();
+
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		targetPointsHelper.clearBackupPoints();
 
 		updateAllSettings();
 	}
