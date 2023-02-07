@@ -7,7 +7,6 @@ import java.util.*;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -83,7 +82,7 @@ public class NetworkRouteContext {
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentIntersectingTile(int x, int y, RouteKey routeKey,
 	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
-		TLongHashSet tset = new TLongHashSet();
+		TreeSet<String> tset = new TreeSet<>();
 		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
 			for (NetworkRouteSegment segment : pnt.objects) {
 				if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
@@ -94,7 +93,8 @@ public class NetworkRouteContext {
 					routeSegments = new ArrayList<>();
 					map.put(segment.routeKey, routeSegments);
 				}
-				if (tset.add(segment.getId())) {
+				String id = segment.getId() + segment.routeKey.toString();
+				if (tset.add(id)) {
 					if (segment.start != 0) {
 						// API end point expects segment that start from 0
 						segment = new NetworkRouteSegment(segment, 0, segment.getPointsLength() - 1);
