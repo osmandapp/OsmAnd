@@ -96,7 +96,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	private void setupNavigationHistoryPref() {
 		Preference preference = findPreference(NAVIGATION_HISTORY);
 		if (settings.NAVIGATION_HISTORY.get()) {
-			int size = getNavigationHistoryResults(app).size();
+			int size = calculateNavigationItemsCount(app);
 			String itemsDescr = getString(R.string.shared_string_items);
 			preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(size)));
 			preference.setIcon(getActiveIcon(R.drawable.ic_action_gdirections_dark));
@@ -223,6 +223,15 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 			log.error(e);
 		}
 		return searchResults;
+	}
+
+	private static int calculateNavigationItemsCount(@NonNull OsmandApplication app) {
+		int count = getNavigationHistoryResults(app).size();
+		if (app.getTargetPointsHelper().isBackupPointsAvailable()) {
+			// Take "Previous Route" item into account during calculations
+			count++;
+		}
+		return count;
 	}
 
 	@Nullable
