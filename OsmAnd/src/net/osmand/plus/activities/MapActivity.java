@@ -324,7 +324,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		PluginsHelper.onMapActivityCreate(this);
-		importHelper = new ImportHelper(this, getMyApplication());
+		importHelper = new ImportHelper(this);
 		if (System.currentTimeMillis() - tm > 50) {
 			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}

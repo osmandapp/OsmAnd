@@ -12,8 +12,9 @@ public class TracksTabAdapter extends FragmentStateAdapter {
 
 	private final List<TrackTab> trackTabs = new ArrayList<>();
 
-	public TracksTabAdapter(@NonNull TracksFragment fragment) {
+	public TracksTabAdapter(@NonNull TracksFragment fragment, @NonNull List<TrackTab> tabs) {
 		super(fragment);
+		trackTabs.addAll(tabs);
 	}
 
 	public void setTrackTabs(@NonNull Map<String, TrackTab> tabs) {
@@ -25,8 +26,9 @@ public class TracksTabAdapter extends FragmentStateAdapter {
 	@NonNull
 	@Override
 	public Fragment createFragment(int position) {
-		TracksTreeFragment fragment = new TracksTreeFragment();
+		GpxInfoItemsFragment fragment = new GpxInfoItemsFragment();
 		fragment.trackTab = trackTabs.get(position);
+		fragment.setRetainInstance(true);
 		return fragment;
 	}
 

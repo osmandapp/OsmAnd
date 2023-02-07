@@ -476,8 +476,7 @@ public class GpxUiHelper {
 			}
 		};
 
-		OnClickListener onClickListener = (dialog, position) -> {
-		};
+		OnClickListener onClickListener = (dialog, position) -> { };
 		gpxDataItemCallback.setListAdapter(alertDialogAdapter);
 		builder.setAdapter(alertDialogAdapter, onClickListener);
 		if (multipleChoice) {
@@ -626,7 +625,7 @@ public class GpxUiHelper {
 					SelectedGpxFile selectedGpxFile =
 							app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 					if (selectedGpxFile != null) {
-						callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+						callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
 					} else {
 						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
 					}
@@ -813,10 +812,6 @@ public class GpxUiHelper {
 				ImportHelper importHelper = mapActivity.getImportHelper();
 				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
 					@Override
-					public void onImportComplete(boolean success) {
-					}
-
-					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -871,11 +866,11 @@ public class GpxUiHelper {
 	}
 
 	private static void updateAppearanceTitle(Activity activity, OsmandApplication app,
-	                                          RenderingRuleProperty trackWidthProp,
-	                                          RenderingRulesStorage renderer,
-	                                          View apprTitleView,
-	                                          String prefWidthValue,
-	                                          String prefColorValue) {
+											  RenderingRuleProperty trackWidthProp,
+											  RenderingRulesStorage renderer,
+											  View apprTitleView,
+											  String prefWidthValue,
+											  String prefColorValue) {
 		TextView widthTextView = apprTitleView.findViewById(R.id.widthTitle);
 		ImageView colorImageView = apprTitleView.findViewById(R.id.colorImage);
 		if (!Algorithms.isEmpty(prefWidthValue)) {
@@ -1019,41 +1014,37 @@ public class GpxUiHelper {
 		}
 	}
 
-	public static void loadGPXFileInDifferentThread(Activity activity, CallbackWithObject<GPXFile[]> callbackWithObject,
+	public static void loadGPXFileInDifferentThread(Activity activity, CallbackWithObject<GPXFile[]> callback,
 	                                                File dir, GPXFile currentFile, String... filename) {
 		ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
-				int k = 0;
-				String w = "";
-				if (currentFile != null) {
-					result[k++] = currentFile;
-				}
-				for (String fname : filename) {
-					File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile(f);
-					if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
-						w += res.error.getMessage() + "\n";
-					} else {
-						res.addGeneralTrack();
-					}
-					result[k++] = res;
-				}
-				dlg.dismiss();
-				String warn = w;
-				activity.runOnUiThread(() -> {
-					if (warn.length() > 0) {
-						Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
-					} else {
-						callbackWithObject.processResult(result);
-					}
-				});
+		new Thread(() -> {
+			GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
+			int k = 0;
+			StringBuilder builder = new StringBuilder();
+			if (currentFile != null) {
+				result[k++] = currentFile;
 			}
-
-		}, "Loading gpx").start(); //$NON-NLS-1$
+			for (String name : filename) {
+				File file = new File(dir, name);
+				GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+				if (gpxFile.error != null && !Algorithms.isEmpty(gpxFile.error.getMessage())) {
+					builder.append(gpxFile.error.getMessage()).append("\n");
+				} else {
+					gpxFile.addGeneralTrack();
+				}
+				result[k++] = gpxFile;
+			}
+			dlg.dismiss();
+			String warn = builder.toString();
+			activity.runOnUiThread(() -> {
+				if (warn.length() > 0) {
+					Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+				} else {
+					callback.processResult(result);
+				}
+			});
+		}, "Loading gpx").start();
 	}
 
 	public static void setupGPXChart(@NonNull LineChart mChart) {
@@ -1243,7 +1234,7 @@ public class GpxUiHelper {
 	}
 
 	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
-	                                                   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcWithoutGaps) {
+													   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
@@ -1390,12 +1381,12 @@ public class GpxUiHelper {
 	}
 
 	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,
-	                                                           @NonNull LineChart mChart,
-	                                                           @NonNull GPXTrackAnalysis analysis,
-	                                                           @NonNull GPXDataSetAxisType axisType,
-	                                                           boolean useRightAxis,
-	                                                           boolean drawFilled,
-	                                                           boolean calcWithoutGaps) {
+															   @NonNull LineChart mChart,
+															   @NonNull GPXTrackAnalysis analysis,
+															   @NonNull GPXDataSetAxisType axisType,
+															   boolean useRightAxis,
+															   boolean drawFilled,
+															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
@@ -1625,13 +1616,13 @@ public class GpxUiHelper {
 	}
 
 	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication ctx,
-	                                                       @NonNull LineChart mChart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
-	                                                       @NonNull GPXDataSetAxisType axisType,
-	                                                       @Nullable List<Entry> eleValues,
-	                                                       boolean useRightAxis,
-	                                                       boolean drawFilled,
-	                                                       boolean calcWithoutGaps) {
+														   @NonNull LineChart mChart,
+														   @NonNull GPXTrackAnalysis analysis,
+														   @NonNull GPXDataSetAxisType axisType,
+														   @Nullable List<Entry> eleValues,
+														   boolean useRightAxis,
+														   boolean drawFilled,
+														   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

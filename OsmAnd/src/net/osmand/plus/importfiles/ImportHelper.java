@@ -10,7 +10,6 @@ import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
@@ -36,7 +35,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
@@ -89,7 +88,7 @@ public class ImportHelper {
 	public static final int IMPORT_FILE_REQUEST = 1006;
 
 	private final OsmandApplication app;
-	private final AppCompatActivity activity;
+	private final FragmentActivity activity;
 
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
 
@@ -118,14 +117,16 @@ public class ImportHelper {
 	}
 
 	public interface OnGpxImportCompleteListener {
-		void onImportComplete(boolean success);
+		default void onImportComplete(boolean success) {
+		}
 
-		void onSaveComplete(boolean success, GPXFile result);
+		default void onSaveComplete(boolean success, GPXFile result) {
+		}
 	}
 
-	public ImportHelper(AppCompatActivity activity, OsmandApplication app) {
+	public ImportHelper(@NonNull FragmentActivity activity) {
 		this.activity = activity;
-		this.app = app;
+		this.app = (OsmandApplication) activity.getApplicationContext();
 	}
 
 	public void setGpxImportCompleteListener(OnGpxImportCompleteListener gpxImportCompleteListener) {

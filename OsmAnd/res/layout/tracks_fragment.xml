@@ -80,6 +80,17 @@
 		android:layout_height="match_parent"
 		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="gone"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false" />
+
 		<androidx.viewpager2.widget.ViewPager2
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"

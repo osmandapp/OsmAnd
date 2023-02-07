@@ -3,21 +3,26 @@ package net.osmand.plus.configmap.tracks;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.NoVisibleTracksViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
@@ -29,15 +34,14 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final OsmandApplication app;
 	private final TrackTab trackTab;
 	private final List<Object> items = new ArrayList<>();
-	private final TracksVisibilityListener listener;
+	private final TracksFragment fragment;
 
 	private final boolean nightMode;
 
-	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab,
-	                     @NonNull TracksVisibilityListener listener, boolean nightMode) {
+	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
 		this.app = app;
 		this.trackTab = trackTab;
-		this.listener = listener;
+		this.fragment = fragment;
 		this.nightMode = nightMode;
 		this.items.addAll(trackTab.items);
 	}
@@ -49,16 +53,16 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		switch (viewType) {
 			case TYPE_TRACK:
 				View view = inflater.inflate(R.layout.track_list_item, parent, false);
-				return new TrackViewHolder(view, nightMode);
+				return new TrackViewHolder(view, fragment, nightMode);
 			case TYPE_NO_TRACKS:
 				view = inflater.inflate(R.layout.tracks_empty_state, parent, false);
-				return new EmptyTracksViewHolder(view, listener);
+				return new EmptyTracksViewHolder(view, fragment, nightMode);
 			case TYPE_NO_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.tracks_empty_state, parent, false);
-				return new NoVisibleTracksViewHolder(view, listener);
+				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
-				return new RecentlyVisibleViewHolder(view, listener);
+				return new RecentlyVisibleViewHolder(view, fragment, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -89,72 +93,70 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			GPXInfo gpxInfo = (GPXInfo) items.get(position);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
 			boolean lastItem = position == getItemCount() - 1;
-			String folderName = trackTab.type.shouldShowFolder() ? Algorithms.getFileWithoutDirs(trackTab.name) : null;
-			viewHolder.bindView(listener, gpxInfo, folderName, lastItem);
+			String folderName = getFolderName(gpxInfo);
+			viewHolder.bindView(gpxInfo, folderName, lastItem);
+			bindInfoView(gpxInfo, viewHolder);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
-			NoVisibleTracksViewHolder viewHolder = (NoVisibleTracksViewHolder) holder;
-			viewHolder.bindView(app, nightMode);
+			((NoVisibleTracksViewHolder) holder).bindView();
 		} else if (holder instanceof EmptyTracksViewHolder) {
-			EmptyTracksViewHolder viewHolder = (EmptyTracksViewHolder) holder;
-			viewHolder.bindView(app, nightMode);
+			((EmptyTracksViewHolder) holder).bindView();
 		} else if (holder instanceof RecentlyVisibleViewHolder) {
-			RecentlyVisibleViewHolder viewHolder = (RecentlyVisibleViewHolder) holder;
-			viewHolder.bindView(nightMode);
+			((RecentlyVisibleViewHolder) holder).bindView();
+		}
+	}
+
+
+	@Nullable
+	private String getFolderName(@NonNull GPXInfo gpxInfo) {
+		String folderName = null;
+		File file = gpxInfo.getFile();
+		if (trackTab.type.shouldShowFolder() && file != null) {
+			String[] path = file.getAbsolutePath().split(File.separator);
+			folderName = path.length > 1 ? path[path.length - 2] : null;
+		}
+		return folderName;
+	}
+
+	private void bindInfoView(@NonNull GPXInfo gpxInfo, @NonNull TrackViewHolder holder) {
+		File file = gpxInfo.getFile();
+		if (file == null) {
+			return;
+		}
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
+			@Override
+			public boolean isCancelled() {
+				return fragment.isAdded();
+			}
+
+			@Override
+			public void onGpxDataItemReady(GpxDataItem item) {
+				if (item != null) {
+					holder.bindInfoRow(gpxInfo, item);
+				}
+			}
+		});
+		if (dataItem != null) {
+			holder.bindInfoRow(gpxInfo, dataItem);
+		}
+	}
+
+
+	public void onGpxInfosSelected(@NonNull Set<GPXInfo> gpxInfos) {
+		for (GPXInfo gpxInfo : gpxInfos) {
+			updateItem(gpxInfo);
+		}
+		updateItem(TYPE_RECENTLY_VISIBLE_TRACKS);
+	}
+
+	private void updateItem(@NonNull Object object) {
+		int index = items.indexOf(object);
+		if (index != -1) {
+			notifyItemChanged(index);
 		}
 	}
 
 	@Override
 	public int getItemCount() {
 		return trackTab.items.size();
-	}
-
-	public void onTrackItemSelected(@NonNull GPXInfo gpxInfo) {
-		int index = items.indexOf(gpxInfo);
-		if (index != -1) {
-			notifyItemChanged(index);
-		}
-	}
-
-	private static class RecentlyVisibleViewHolder extends ViewHolder {
-
-		private final OsmandApplication app;
-		private final TextView title;
-		private final CheckBox checkbox;
-		private final TracksVisibilityListener listener;
-
-		public RecentlyVisibleViewHolder(@NonNull View view, @NonNull TracksVisibilityListener listener) {
-			super(view);
-			this.listener = listener;
-			this.app = (OsmandApplication) view.getContext().getApplicationContext();
-
-			title = view.findViewById(R.id.title);
-			checkbox = view.findViewById(R.id.checkbox);
-		}
-
-		public void bindView(boolean nightMode) {
-			title.setText(R.string.recently_visible);
-
-			boolean selected = listener.isRecentlyTracksSelected();
-			checkbox.setChecked(selected);
-			int color = ColorUtilities.getSelectedProfileColor(app, nightMode);
-			UiUtilities.setupCompoundButton(selected, color, checkbox);
-
-			itemView.setOnClickListener(v -> listener.selectRecentlyVisibleTracks(!selected));
-		}
-	}
-
-	public interface TracksVisibilityListener {
-
-		boolean isTrackSelected(@NonNull GPXInfo gpxInfo);
-
-		boolean isRecentlyTracksSelected();
-
-		void onTrackItemSelected(@NonNull GPXInfo gpxInfo, boolean selected);
-
-		void importTracks();
-
-		void showAllTracks();
-
-		void selectRecentlyVisibleTracks(boolean selected);
 	}
 }

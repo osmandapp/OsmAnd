@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,9 +21,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 
@@ -37,8 +38,9 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 	private OsmandSettings settings;
 	private UiUtilities iconsCache;
 
-	private List<TrackTab> tabs = new ArrayList<>();
-	private TrackTab selectedTrackTab;
+	private TrackTab selectedTab;
+	private List<TrackTab> trackTabs = new ArrayList<>();
+
 	private boolean nightMode;
 
 	@Override
@@ -51,9 +53,9 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 
 		Fragment target = getTargetFragment();
 		if (target instanceof TracksFragment) {
-			TracksFragment tracksFragment = (TracksFragment) target;
-			tabs = tracksFragment.getTrackTabs();
-			selectedTrackTab = tracksFragment.getSelectedTab();
+			TracksFragment fragment = (TracksFragment) target;
+			trackTabs = fragment.getTrackTabs();
+			selectedTab = fragment.getSelectedTab();
 		}
 	}
 
@@ -61,8 +63,8 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		inflater = UiUtilities.getInflater(requireContext(), nightMode);
+		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
 
 		TextViewEx title = view.findViewById(R.id.title);
 		title.setText(R.string.switch_folder);
@@ -76,10 +78,10 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 
 	public class TrackGroupsAdapter extends RecyclerView.Adapter<TrackGroupViewHolder> {
 
-		int profileColor;
+		private final int activeColor;
 
 		public TrackGroupsAdapter() {
-			profileColor = settings.getApplicationMode().getProfileColor(nightMode);
+			activeColor = ColorUtilities.getSelectedProfileColor(app, nightMode);
 		}
 
 		@NonNull
@@ -92,46 +94,44 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 
 		@Override
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
-			TrackTab trackTab = tabs.get(position);
+			TrackTab trackTab = trackTabs.get(position);
 
 			holder.title.setText(trackTab.name);
-			ApplicationMode mode = settings.getApplicationMode();
 
-			boolean selected = trackTab == selectedTrackTab;
-			Drawable groupTypeIcon = null;
+			boolean selected = trackTab == selectedTab;
 			if (selected) {
-				groupTypeIcon = iconsCache.getPaintedIcon(trackTab.type.iconId, profileColor);
+				holder.groupTypeIcon.setImageDrawable(iconsCache.getPaintedIcon(trackTab.type.iconId, activeColor));
 			} else {
-				groupTypeIcon = iconsCache.getThemedIcon(trackTab.type.iconId);
+				holder.groupTypeIcon.setImageDrawable(iconsCache.getThemedIcon(trackTab.type.iconId));
 			}
-			holder.groupTypeIcon.setImageDrawable(groupTypeIcon);
-
-			AndroidUiHelper.updateVisibility(holder.selectedIcon, selected);
-			holder.selectedIcon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_done, profileColor));
+			holder.selectedIcon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_done, activeColor));
 
 			holder.button.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
-					((TracksFragment) target).setSelectedTab(adapterPosition);
+					TrackTab tab = trackTabs.get(adapterPosition);
+					((TracksFragment) target).setSelectedTab(tab.name);
 				}
 				dismiss();
 			});
+
+			AndroidUiHelper.updateVisibility(holder.selectedIcon, selected);
 			AndroidUiHelper.updateVisibility(holder.divider, trackTab.type == TrackTabType.ALL);
 		}
 
 		@Override
 		public int getItemCount() {
-			return tabs.size();
+			return trackTabs.size();
 		}
 
 		class TrackGroupViewHolder extends RecyclerView.ViewHolder {
 
-			final View button;
-			final TextViewEx title;
-			final AppCompatImageView groupTypeIcon;
-			final AppCompatImageView selectedIcon;
-			final View divider;
+			private final View button;
+			private final TextView title;
+			private final ImageView groupTypeIcon;
+			private final ImageView selectedIcon;
+			private final View divider;
 
 			public TrackGroupViewHolder(@NonNull View itemView) {
 				super(itemView);
@@ -144,12 +144,11 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment targetFragment) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			TrackGroupsBottomSheet bottomSheet = new TrackGroupsBottomSheet();
-			bottomSheet.setTargetFragment(targetFragment, 0);
-			bottomSheet.show(manager, TAG);
+			TrackGroupsBottomSheet fragment = new TrackGroupsBottomSheet();
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 }
-

@@ -124,7 +124,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		MapActivity mapActivity = requireMapActivity();
-		importHelper = new ImportHelper(mapActivity, getMyApplication());
+		importHelper = new ImportHelper(mapActivity);
 
 		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (routeParamsBuilder != null) {
@@ -444,9 +444,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (data != null) {
 				Uri uri = data.getData();
 				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
-					@Override
-					public void onImportComplete(boolean success) { }
-
 					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {
