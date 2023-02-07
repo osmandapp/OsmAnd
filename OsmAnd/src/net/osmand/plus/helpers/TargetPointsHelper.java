@@ -306,6 +306,15 @@ public class TargetPointsHelper {
 		return myLocationToStart;
 	}
 
+	public boolean isBackupPointsAvailable() {
+		TargetPoint startPoint = getPointToStartBackup();
+		TargetPoint endPoint = getPointToNavigateBackup();
+		if (startPoint == null) {
+			startPoint = getMyLocationToStart();
+		}
+		return startPoint != null && endPoint != null;
+	}
+
 	public List<TargetPoint> getIntermediatePoints() {
 		return intermediatePoints;
 	}
