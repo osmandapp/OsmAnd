@@ -5,9 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -49,6 +46,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -305,7 +305,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		trkPoints = 0;
 		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
-		currentTrack.getModifiablePointsToDisplay().clear();
+		currentTrack.clearSegmentsToDisplay();
 		currentTrack.getModifiableGpxFile().modifiedTime = currentTimeMillis;
 		currentTrack.getModifiableGpxFile().pointsModifiedTime = currentTimeMillis;
 		prepareCurrentTrackForRecording();
@@ -550,10 +550,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
-		List<TrkSegment> points = currentTrack.getModifiablePointsToDisplay();
 		Track track = currentTrack.getModifiableGpxFile().tracks.get(0);
-		if (points.size() == 0 || newSegment) {
-			points.add(new TrkSegment());
+		if (newSegment) {
+			currentTrack.addEmptySegmentToDisplay();
 		}
 		boolean segmentAdded = false;
 		if (track.segments.size() == 0 || newSegment) {
@@ -561,9 +560,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			segmentAdded = true;
 		}
 		if (pt != null) {
-			int ind = points.size() - 1;
-			TrkSegment last = points.get(ind);
-			last.points.add(pt);
+			currentTrack.appendTrackPointToDisplay(pt, app);
 			TrkSegment lt = track.segments.get(track.segments.size() - 1);
 			lt.points.add(pt);
 		}
@@ -777,8 +774,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			currentTrack.getModifiableGpxFile().tracks.add(new Track());
 		}
 		while (currentTrack.getPointsToDisplay().size() < currentTrack.getModifiableGpxFile().tracks.size()) {
-			TrkSegment trkSegment = new TrkSegment();
-			currentTrack.getModifiablePointsToDisplay().add(trkSegment);
+			currentTrack.addEmptySegmentToDisplay();
 		}
 	}
 
