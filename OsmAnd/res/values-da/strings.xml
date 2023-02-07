@@ -1006,7 +1006,7 @@
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og tilsvarende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
-    <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre.</string>
+    <string name="driving_region_descr">Vælg kørselsregion: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
@@ -1279,7 +1279,7 @@
     <string name="print_route">Udskriv rute</string>
     <string name="fav_point_emoticons_message">Favorit omdøbt til \'%1$s\' for at kunne gemme strengen med humørikoner til en fil.</string>
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
-    <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
+    <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides før du får en stemmeadvarsel.</string>
     <string name="anonymous_user_hint">Anonyme brugere kan ikke: 
 \n- Oprette grupper; 
 \n- Synkronisere grupper og enheder med serveren; 
@@ -1343,7 +1343,7 @@
     <string name="speak_pedestrian">Fodgængerovergange</string>
     <string name="save_track_to_gpx_globally_headline">Sporingslogning ved anmodning</string>
     <string name="navigation_over_track">Start navigation langs sporet?</string>
-    <string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
+    <string name="avoid_roads_msg">Udløs en alternativ rute ved at vælge veje der skal undgås</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Angiv en proxy server.</string>
     <string name="settings_privacy">Privatliv</string>
@@ -1502,7 +1502,7 @@
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd tilbyder globale offline kortvisninger, og offline navigation.</string>
-    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Tryk kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
+    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera-advarsler ikke lovligt. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Tryk kun på \'Ja\', hvis det er berettiget at bruge denne funktion.</string>
     <string name="agps_info">A-GPS information</string>
     <string name="agps_data_last_downloaded">A-GPS data hentet: %1$s</string>
     <string name="shared_string_message">Meddelelse</string>
@@ -1840,7 +1840,7 @@
     <string name="shared_string_select">Vælg</string>
     <string name="clear_updates_proposition_message">Fjern de hentede opdateringer og vend tilbage til det oprindelige kort</string>
     <string name="add_time_span">Tilføj tidsinterval</string>
-    <string name="road_blocked">Spærret vej</string>
+    <string name="road_blocked">Vej spærret</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data ikke tilgængelig</string>
     <string name="rendering_attr_hideUnderground_name">Objekter under jorden</string>
@@ -2006,7 +2006,7 @@
     <string name="storage_place_description">OsmAnd\'s datalagring (til kort, spor-filer, etc.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
-    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
+    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden en internetforbindelse</string>
     <string name="si_mi_meters">Mil/meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="osm_live_banner_desc">Få ubegrænset downloads af kort, tilføjelse af opdateringer ugentligt, dagligt eller hver time.</string>
@@ -2589,7 +2589,7 @@
     <string name="open_till">Åben til</string>
     <string name="will_close_at">Lukker kl.</string>
     <string name="will_open_at">Åbner kl.</string>
-    <string name="will_open_on">Åbner kl.</string>
+    <string name="will_open_on">Åbner</string>
     <string name="additional_actions">Yderligere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>
@@ -3800,7 +3800,7 @@
     <string name="track_recording_stop_without_saving">Stop uden at gemme</string>
     <string name="track_recording_save_and_stop">Gem og stop optagelse</string>
     <string name="track_recording_title">Optagelse af spor stoppet</string>
-    <string name="app_restart_required">App-genstart kræves for at anvende nogle indstillinger.</string>
+    <string name="app_restart_required">Det er nødvendigt at genstarte appen for at anvende nogle indstillinger.</string>
     <string name="quick_action_coordinates_widget_descr">En til/fra-knap for at vise eller skjule koordinat-modulet på kortet.</string>
     <string name="latest_openstreetmap_update">Seneste OpenStreetMap opdatering tilgængelig:</string>
     <string name="updated">Opdateret: %s</string>
@@ -3923,7 +3923,7 @@
     <string name="backup_error_no_subscription">Mangler abonnement</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Farvelægning efter netværkstilhørsforhold.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Farvelæg ruter efter deres knudepunktsnetværkstype (international, regional, lokal).</string>
-    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle, lokale farve (hvis de findes på OpenStreetMap) og type (international, regional, lokal).</string>
+    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle, lokale farve (hvis den findes på OpenStreetMap) og type (international, regional, lokal).</string>
     <string name="travel_routes">Rejseruter</string>
     <string name="setting_supported_by_style">Denne indstilling leveres af kortstilen \'%1$s\'</string>
     <string name="direct_line_maps_required_descr">Ruteberegning tager længere tid end normalt.
@@ -3942,7 +3942,7 @@
     <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede kortopdateringer hver måned og time.</string>
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
-    <string name="enough_contributions_descr">Tillykke, du har bidraget nok til OpenStreetMap og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
@@ -4665,7 +4665,7 @@
     <string name="map_widget_trip_recording_downhill">Nedstigning</string>
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
-    <string name="routing_attr_hazmat_category_name">Transport af farligt gods</string>
+    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Ingen restriktioner)</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
