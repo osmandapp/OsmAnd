@@ -568,8 +568,8 @@
     <string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
     <string name="poi_context_menu_modify">Bearbeite POI</string>
     <string name="poi_context_menu_delete">Lösche POI</string>
-    <string name="rotate_map_compass_opt">Nach Kompass</string>
-    <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
+    <string name="rotate_map_compass_opt">Kompassrichtung</string>
+    <string name="rotate_map_bearing_opt">Bewegungsrichtung</string>
     <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
     <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
     <string name="rotate_map_to_descr">Kartenausrichtung:</string>
@@ -1178,7 +1178,7 @@
     <string name="use_displayed_track_for_navigation">Angezeigten Track zur Navigation verwenden?</string>
     <string name="keep_and_add_destination_point">Als weiteres Ziel hinzufügen</string>
     <string name="select_gpx">GPX-Datei auswählen …</string>
-    <string name="route_descr_select_destination">Ziel auswählen</string>
+    <string name="route_descr_select_destination">Ziel festlegen</string>
     <string name="interrupt_music_descr">Musikwiedergabe während Sprachansagen pausieren.</string>
     <string name="always_center_position_on_map">Positionsbestimmung immer mittig</string>
     <string name="voice_pref_title">Stimme</string>
@@ -1521,7 +1521,7 @@
     <string name="your_edits">Ihre Änderungen</string>
     <string name="waypoint_visit_after">Danach besuchen</string>
     <string name="shared_string_deselect">Abwählen</string>
-    <string name="shared_string_do_not_use">Nicht benutzen</string>
+    <string name="shared_string_do_not_use">Nicht verwenden</string>
     <string name="shared_string_deselect_all">Alle abwählen</string>
     <string name="shared_string_unexpected_error">Unerwarteter Fehler</string>
     <string name="shared_string_collapse">Einklappen</string>
@@ -2984,7 +2984,7 @@
     <string name="routing_profile_geocoding">Geocodierung</string>
     <string name="routing_profile_straightline">Direkte Verbindungslinie</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
-    <string name="osmand_default_routing">OsmAnd-Routing</string>
+    <string name="osmand_default_routing">OsmAnd-Routenführung</string>
     <string name="custom_routing">Benutzerdefiniertes Routingprofil</string>
     <string name="special_routing_type">Spezielles Routing</string>
     <string name="third_party_routing_type">Routing von Drittanbietern</string>
