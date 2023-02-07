@@ -325,11 +325,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof FavouritePoint && o != contextMenuLayer.getMoveableObject();
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -340,7 +335,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
 			getFavoriteFromPoint(tileBox, point, res);
 		}

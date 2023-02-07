@@ -4689,7 +4689,7 @@
     <string name="routing_attr_motor_type_electric_name">Електро</string>
     <string name="routing_attr_motor_type_gas_name">Метан</string>
     <string name="routing_attr_motor_type_hybrid_name">Гібрид</string>
-    <string name="routing_attr_motor_type_name">Двигун автомобіля</string>
+    <string name="routing_attr_motor_type_name">Використане двигуном пальне</string>
     <string name="routing_attr_motor_type_description">Виберіть тип палива вашого двигуна, це необхідно для оцінки викидів CO2.</string>
     <string name="routing_attr_motor_type_diesel_name">Дизель</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
@@ -4771,7 +4771,7 @@
     <string name="favorite_delete_group">Видалити групу</string>
     <string name="favorite_confirm_delete_group">Ви впевнені, що хочете видалити групу «%1$s» і всі включені точки (%2$d)\?</string>
     <string name="download_heightmap_maps">Мапа висот</string>
-    <string name="display_position">Позиція розташування</string>
+    <string name="display_position">Позиція на екрані</string>
     <string name="shared_string_2_5_d_view">Вигляд 2.5 D</string>
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
 \nТоркніться мапи 2 пальцями, щоб переглянути відстань між натиснутими точками</string>
@@ -5036,4 +5036,6 @@
     <string name="sound_beep_minimal">Звуковий сигнал: мінімальний</string>
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
+    <string name="last_synchronized">Востаннє синхронізовано</string>
+    <string name="display_position_descr">Типове значення — «Автоматично», тобто «Внизу» для орієнтації на мапі «Напрямок руху» та «По центру» в усіх інших випадках.</string>
 </resources>

@@ -812,7 +812,7 @@
     <string name="rendering_value_bicycle_name">Bitzicleta</string>
     <string name="rendering_value_pedestrian_name">A pede</string>
     <string name="gpx_option_reverse_route">Fùrria sa diretzione de sa rasta</string>
-    <string name="rotate_map_bearing_opt">Diretzione de sa mòvida</string>
+    <string name="rotate_map_bearing_opt">Diretzione de su movimentu</string>
     <string name="show_view_angle">Ammustra diretzione de osservatzione de abbistadura</string>
     <string name="choose_auto_follow_route">Tzentra automaticamente sa mapa</string>
     <string name="choose_auto_follow_route_descr">Issèbera s’intervallu de tempus pro sa sincronizatzione de sa vista de sa mapa cun sa positzione atuale.</string>
@@ -4647,7 +4647,7 @@
     <string name="next_live_update_time">Agiornamentu imbeniente a sas %1$s.</string>
     <string name="no_altitude_data_desc">Pro retzire sos datos de %1$s, alliga sa rasta tua a sos caminos o càrcula·la in lìnia.</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_name">Motore de su veìculu</string>
+    <string name="routing_attr_motor_type_name">Carburante impreadu dae su motore</string>
     <string name="routing_attr_motor_type_description">Seletziona sa casta de carburante impreada dae su motore tuo. Custu est netzessàriu pro carculare s\'emissione de CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Benzina</string>
     <string name="radius_ruler_mode_desc">Tochende su widget colas a sa modalidade de sa righighedda radiale.</string>
@@ -4777,7 +4777,7 @@
     <string name="shared_string_large">Mannu</string>
     <string name="shared_string_normal">Normale</string>
     <string name="how_to_use">Comente s\'impreat:</string>
-    <string name="display_position">Ponidura de sa positzione</string>
+    <string name="display_position">Positzione de s\'ischermu</string>
     <string name="map_markers_desc">Su widget ammustrat sa distàntzia o s\'ora de arrivu carculada (ETA) pro sos primos duos marcadores in sa lista de marcadores de sa mapa.</string>
     <string name="quick_action_map_center_widget_descr">Unu butone pro ammustrare o cuare su widget de su tzentru de sa mapa in sa mapa.</string>
     <string name="coordinates_widget_current_location_desc">Ammustrat sas coordinadas geogràficas de sa positzione atuale</string>
@@ -5035,4 +5035,6 @@
     <string name="sound_beep_complex_loud">Bip: cumplessu e artu</string>
     <string name="sound_beep_minimal">Bip: minimale</string>
     <string name="sound_beep_simple">Bip: simpre</string>
+    <string name="last_synchronized">Ùrtima sincronizatzione</string>
+    <string name="display_position_descr">Su predefinidu est \"Automàticu\"chi est \"In bassu\" pro s\'orientamentu de sa mapa \"Diretzione de su movimentu\" e \"Tzentru\" in totu sos àteros casos.</string>
 </resources>

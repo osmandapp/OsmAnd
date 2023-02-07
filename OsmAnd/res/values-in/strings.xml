@@ -4017,7 +4017,7 @@
     <string name="light_rs_render_descr">Gaya mengemudi sederhana. Mode malam yang lembut, garis kontur, jalan bergaya oranye yang kontras, meredupkan objek peta sekunder.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Tingkat 1</string>
     <string name="routing_attr_motor_type_description">Pilih tipe bahan bakar mesin Anda, ini dibutuhkan untuk memperkirakan emisi CO2.</string>
-    <string name="routing_attr_motor_type_name">Mesin kendaraan</string>
+    <string name="routing_attr_motor_type_name">Bensin yang digunakan oleh motor</string>
     <string name="transport_hazmat_no_desc">Jalan dan terowongan mungkin dibataskan pada transportasi yang membawa material beracun.</string>
     <string name="calculate_online_altitude_descr">Hitung ketinggian secara daring di server OsmAnd, berdasarkan citra satelit dan model ketinggian digital. Perbedaan ketinggian atau ketinggian yang direkam oleh perangkat mungkin digunakan untuk pembenaran ketinggian.</string>
     <string name="rendering_attr_surface_paving_stones_name">Turap batu</string>
@@ -4277,7 +4277,7 @@
     <string name="local_indexes_cat_map">Peta standar (vektor)</string>
     <string name="test_voice_prompts">Uji coba perintah suara</string>
     <string name="favorite_delete_group">Hapus Grup</string>
-    <string name="display_position">Penempatan posisi</string>
+    <string name="display_position">Tampilkan posisi</string>
     <string name="local_index_gpx_info_show">"
 \n
 \nKetuk lama untuk opsi"</string>
@@ -5041,4 +5041,6 @@
     <string name="sound_beep_simple_loud">Bip: sederhana keras</string>
     <string name="sound_beep_complex">Bip: kompleks</string>
     <string name="sound_beep_complex_loud">Bip: kompleks keras</string>
+    <string name="last_synchronized">Disinkronkan terakhir</string>
+    <string name="display_position_descr">Bawaan adalah \'Otomatis\' yang berarti \'Bawah\' untuk orientasi peta, \'Arah gerakan\' dan \'Tengah\' untuk semua hal lain.</string>
 </resources>

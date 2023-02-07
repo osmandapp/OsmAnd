@@ -86,7 +86,7 @@
     <string name="enter_password">Sartu pasahitza</string>
     <string name="password_descr">Telegram pasahitza</string>
     <string name="shared_string_login">Saioa hasi</string>
-    <string name="shared_string_logout">Saioa itxi</string>
+    <string name="shared_string_logout">Amaitu saioa</string>
     <string name="initialization">Abiarazten</string>
     <string name="logging_out">Saioa ixten</string>
     <string name="closing">Ixten</string>
