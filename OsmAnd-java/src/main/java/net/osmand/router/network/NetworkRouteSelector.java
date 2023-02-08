@@ -536,7 +536,6 @@ public class NetworkRouteSelector {
 			int yTile = NetworkRouteContext.getYFromTileId(tileID);
 			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentIntersectingTile(xTile, yTile, rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
-//			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
 			if (loaded == null) {
 				continue;
@@ -544,16 +543,6 @@ public class NetworkRouteSelector {
 			for (NetworkRouteSegment loadedSegment : loaded) {
 				if (objIds.add(loadedSegment.getId())) {
 					lst.add(loadedSegment);
-//					for (int j = 0; j < loadedSegment.getPointsLength(); j++) {
-//						long pntTileId = NetworkRouteContext.getTileId(loadedSegment.getPoint31XTile(j),
-//								loadedSegment.getPoint31YTile(j));
-//						if (Math.abs(getXFromTileId(pntTileId) - xTile) > 1
-//								|| Math.abs(getYFromTileId(pntTileId) - yTile) > 1) {
-//							// add tiles that are not enclosed but neeeds to be checked to current tile
-//							queue.add(pntTileId);
-//						}
-//
-//					}
 				}
 			}
 			addEnclosedTiles(queue, tileID);
