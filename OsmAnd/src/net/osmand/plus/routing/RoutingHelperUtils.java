@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -70,18 +69,21 @@ public class RoutingHelperUtils {
 		return rect.left == 0 && rect.right == 0 ? null : rect;
 	}
 
-	public static Location getProject(Location loc, Location from, Location to) {
+	public static boolean shouldCalculateBearing(@NonNull OsmandApplication app, @NonNull Location location) {
+		return app.getSettings().APPROXIMATE_BEARING.get() && !location.hasBearing();
+	}
+
+	public static Location getProject(Location loc, Location from, Location to, boolean calculateBearing) {
 		LatLon project = MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
 		Location locationProjection = new Location(loc);
 		locationProjection.setLatitude(project.getLatitude());
 		locationProjection.setLongitude(project.getLongitude());
-		// This code is not valid:
-		// 1. if you are out of the route. So you keep moving in different direction, but bearing project is opposite
-		// 2. If projection too close to "to" point, bearing is NaN and location icon changes in a wrong way
-		// float bearingTo = locationProjection.bearingTo(to);
-		// locationProjection.setBearing(bearingTo);
+		if (calculateBearing) {
+			float bearingTo = from.bearingTo(to);
+			locationProjection.setBearing(bearingTo);
+		}
 		return locationProjection;
 	}
 

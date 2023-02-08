@@ -25,7 +25,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -471,7 +470,8 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0) {
-					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
+							routeNodes.get(currentRoute), RoutingHelperUtils.shouldCalculateBearing(app, currentLocation));
 				}
 			}
 			lastFixedLocation = currentLocation;
