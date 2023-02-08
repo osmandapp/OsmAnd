@@ -34,11 +34,12 @@ task collectRenderingStylesResources(type: Sync) {
 	include "*.xml"
 }
 
-task collectRegionsInfoResources(type: Copy) {
-	from "../../resources/countries-info"
-	into "src/main/resources/net/osmand/map"
-	include "regions.ocbf"
+task collectRegionsInfoResources(type: Download)  {
+	src 'https://builder.osmand.net/basemap/regions.ocbf'
+	dest 'src/main/resources/net/osmand/map/regions.ocbf'
+	onlyIfModified true
 }
+
 
 task collectTestResources(type: Copy) {
 	into "src/test/resources/"
