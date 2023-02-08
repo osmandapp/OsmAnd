@@ -3769,7 +3769,7 @@
     <string name="activity_type_walking_name">Gå</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
-    <string name="announcement_time_title">Meddelelsestid</string>
+    <string name="announcement_time_title">Meddelelsestidspunkt</string>
     <string name="show_track_on_map">Vis spor på kort</string>
     <string name="routing_engine_vehicle_type_hiking">Vandring</string>
     <string name="routing_engine_vehicle_type_cycling_road">Landevejscykling</string>
@@ -3816,9 +3816,9 @@
     <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
     <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
     <string name="select_another_colorization">Vælg venligst en anden type farvelægning.</string>
-    <string name="exit_number">Udgangsnummer</string>
-    <string name="announce_when_exceeded">Meddelelse ved overskridelse</string>
-    <string name="user_points">Bruger points</string>
+    <string name="exit_number">Afkørselsnummer</string>
+    <string name="announce_when_exceeded">Meddel, når overskredet</string>
+    <string name="user_points">Brugerpunkter</string>
     <string name="output">Resultat</string>
     <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af højdeprofil.</string>
     <string name="shared_string_min_height">Min. højde</string>
@@ -3832,12 +3832,12 @@
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="change_folder">Skift mappe</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_approach">Tilgang</string>
+    <string name="announcement_time_approach">Nærme sig</string>
     <string name="announcement_time_prepare_long">Lang forberedelse</string>
     <string name="announcement_time_prepare">Forbered</string>
     <string name="announcement_time_arrive">Ankomst til destinationen</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
+    <string name="announcement_time_intervals">Tids- og distanceintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Højdekurver</string>
     <string name="activity_type_racing_name">Racerkørsel</string>
@@ -3897,7 +3897,7 @@
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
     <string name="announcement_time_off_route">Uden for ruten</string>
-    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
+    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardhastigheden for navigation.</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brugerprofil</string>
     <string name="reverse_all_points">Vend alle punkter</string>
