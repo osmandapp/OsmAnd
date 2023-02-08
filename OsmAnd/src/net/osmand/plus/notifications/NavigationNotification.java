@@ -122,6 +122,9 @@ public class NavigationNotification extends OsmandNotification {
 		return new Intent(app, MapActivity.class);
 	}
 
+	private Builder notificationBuilder;
+	private Builder wearableNotificationBuilder;
+
 	@Override
 	public Builder buildNotification(boolean wearable) {
 		if (!isEnabled()) {
@@ -229,11 +232,27 @@ public class NavigationNotification extends OsmandNotification {
 			return null;
 		}
 
-		Builder notificationBuilder = createBuilder(wearable)
-				.setContentTitle(notificationTitle)
-				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
-				.setStyle(new BigTextStyle().bigText(notificationText))
-				.setLargeIcon(turnBitmap);
+		Builder notificationBuilder = wearable ? this.wearableNotificationBuilder : this.notificationBuilder;
+		boolean newNotification = false;
+		if (notificationBuilder == null) {
+			newNotification = true;
+			notificationBuilder = createBuilder(wearable);
+			if (wearable) {
+				this.wearableNotificationBuilder = notificationBuilder;
+			} else {
+				this.notificationBuilder = notificationBuilder;
+			}
+		}
+		if (newNotification) {
+			notificationBuilder.setContentTitle(notificationTitle)
+					.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
+					.setStyle(new BigTextStyle().bigText(notificationText))
+					.setLargeIcon(turnBitmap);
+		} else {
+			notificationBuilder.setContentTitle(notificationTitle)
+					.setStyle(new BigTextStyle().bigText(notificationText))
+					.setLargeIcon(turnBitmap);
+		}
 
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession != null) {
@@ -247,26 +266,27 @@ public class NavigationNotification extends OsmandNotification {
 							.build());
 		}
 
-		Intent stopIntent = new Intent(OSMAND_STOP_NAVIGATION_SERVICE_ACTION);
-		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-		notificationBuilder.addAction(R.drawable.ic_notification_remove,
-				app.getString(R.string.shared_string_control_stop), stopPendingIntent);
+		if (newNotification) {
+			Intent stopIntent = new Intent(OSMAND_STOP_NAVIGATION_SERVICE_ACTION);
+			PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+			notificationBuilder.addAction(R.drawable.ic_notification_remove,
+					app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 
-		if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
-			Intent pauseIntent = new Intent(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION);
-			PendingIntent pausePendingIntent = PendingIntent.getBroadcast(app, 0, pauseIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-			notificationBuilder.addAction(R.drawable.ic_notification_pause,
-					app.getString(R.string.shared_string_pause), pausePendingIntent);
-		} else if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
-			Intent resumeIntent = new Intent(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION);
-			PendingIntent resumePendingIntent = PendingIntent.getBroadcast(app, 0, resumeIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-			notificationBuilder.addAction(R.drawable.ic_notification_play,
-					app.getString(R.string.shared_string_resume), resumePendingIntent);
+			if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+				Intent pauseIntent = new Intent(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION);
+				PendingIntent pausePendingIntent = PendingIntent.getBroadcast(app, 0, pauseIntent,
+						PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+				notificationBuilder.addAction(R.drawable.ic_notification_pause,
+						app.getString(R.string.shared_string_pause), pausePendingIntent);
+			} else if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
+				Intent resumeIntent = new Intent(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION);
+				PendingIntent resumePendingIntent = PendingIntent.getBroadcast(app, 0, resumeIntent,
+						PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+				notificationBuilder.addAction(R.drawable.ic_notification_play,
+						app.getString(R.string.shared_string_resume), resumePendingIntent);
+			}
 		}
-
 		return notificationBuilder;
 	}
 

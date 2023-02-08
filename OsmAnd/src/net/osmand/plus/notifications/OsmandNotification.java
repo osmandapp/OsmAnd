@@ -37,6 +37,8 @@ public abstract class OsmandNotification {
 
 	private Notification currentNotification;
 
+	NotificationManagerCompat notificationManager;
+
 	public enum NotificationType {
 		NAVIGATION,
 		GPX,
@@ -49,6 +51,7 @@ public abstract class OsmandNotification {
 	public OsmandNotification(OsmandApplication app, String groupName) {
 		this.app = app;
 		this.groupName = groupName;
+		notificationManager = NotificationManagerCompat.from(app);
 		init();
 	}
 
@@ -77,11 +80,12 @@ public abstract class OsmandNotification {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}
+
 		Builder builder = new Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
-				.setLocalOnly(true) // Probably should be deleted to not limit notifications
-				.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
+				//.setLocalOnly(true) // Probably should be deleted to not limit notifications
+				//.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
 				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()))
@@ -126,13 +130,12 @@ public abstract class OsmandNotification {
 	}
 
 	public boolean showNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
-				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
+				//notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
 				notifyWearable(notificationManager);
 				return true;
 			}
@@ -141,7 +144,6 @@ public abstract class OsmandNotification {
 	}
 
 	public boolean refreshNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
@@ -149,9 +151,9 @@ public abstract class OsmandNotification {
 				setupNotification(notification);
 				if (top) {
 					//notificationManager.cancel(getOsmandNotificationId());
-					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
+					//notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
 				} else {
-					notificationManager.notify(getOsmandNotificationId(), notification);
+					//notificationManager.notify(getOsmandNotificationId(), notification);
 				}
 				notifyWearable(notificationManager);
 				return true;
@@ -175,7 +177,6 @@ public abstract class OsmandNotification {
 
 	public void removeNotification() {
 		currentNotification = null;
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
 	}
