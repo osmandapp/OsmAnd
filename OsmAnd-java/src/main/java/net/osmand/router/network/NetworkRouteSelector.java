@@ -43,7 +43,6 @@ public class NetworkRouteSelector {
 		boolean isCancelled();
 	}
 
-	// TODO - FIX & implement work with routing tags
 	// TEST:
 	// --- https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
 	// +++  https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
@@ -545,16 +544,16 @@ public class NetworkRouteSelector {
 			for (NetworkRouteSegment loadedSegment : loaded) {
 				if (objIds.add(loadedSegment.getId())) {
 					lst.add(loadedSegment);
-					for (int j = 0; j < loadedSegment.getPointsLength(); j++) {
-						long pntTileId = NetworkRouteContext.getTileId(loadedSegment.getPoint31XTile(j),
-								loadedSegment.getPoint31YTile(j));
-						if (Math.abs(getXFromTileId(pntTileId) - xTile) > 1
-								|| Math.abs(getYFromTileId(pntTileId) - yTile) > 1) {
-							// add tiles that are not enclosed but neeeds to be checked to current tile
-							queue.add(pntTileId);
-						}
-
-					}
+//					for (int j = 0; j < loadedSegment.getPointsLength(); j++) {
+//						long pntTileId = NetworkRouteContext.getTileId(loadedSegment.getPoint31XTile(j),
+//								loadedSegment.getPoint31YTile(j));
+//						if (Math.abs(getXFromTileId(pntTileId) - xTile) > 1
+//								|| Math.abs(getYFromTileId(pntTileId) - yTile) > 1) {
+//							// add tiles that are not enclosed but neeeds to be checked to current tile
+//							queue.add(pntTileId);
+//						}
+//
+//					}
 				}
 			}
 			addEnclosedTiles(queue, tileID);
