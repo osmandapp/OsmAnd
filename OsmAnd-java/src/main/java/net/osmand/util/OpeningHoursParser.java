@@ -1563,22 +1563,26 @@ public class OpeningHoursParser {
 			int day = (i + 5) % 7;
 			int previous = (day + 6) % 7;
 			boolean thisDay = hasDays || hasDayMonths() || hasFullYears();
-			if (thisDay && hasFullYears()) {
-				thisDay = getDayMonths(month, dmonth, year);
-			}
-			if (thisDay && hasDayMonths() && !hasFullYears()) {
-				thisDay = dayMonths[month][dmonth];
+			if (hasFullYears()) {
+				thisDay = isOpened(year, month, dmonth);
+			} else {
+				if (thisDay && hasDayMonths()) {
+					thisDay = dayMonths[month][dmonth];
+				}
 			}
 			if (thisDay && hasDays) {
 				thisDay = days[day];
 			}
 			// potential error for Dec 31 12:00-01:00
 			boolean previousDay = hasDays || hasDayMonths() || hasFullYears();
-			if (previousDay && hasFullYears() && dmonth > 0) {
-				previousDay = getDayMonths(month, dmonth - 1, year);
-			}
-			if (previousDay && hasDayMonths() && !hasFullYears() && dmonth > 0) {
-				previousDay = dayMonths[month][dmonth - 1];
+			if (hasFullYears()) {
+				if (dmonth > 0) {
+					previousDay = isOpened(year, month, dmonth - 1);
+				}
+			} else {
+				if (previousDay && hasDayMonths() && dmonth > 0) {
+					previousDay = dayMonths[month][dmonth - 1];
+				}
 			}
 			if (previousDay && hasDays) {
 				previousDay = days[previous];
@@ -1613,20 +1617,21 @@ public class OpeningHoursParser {
 			return 0;
 		}
 
-		private boolean getDayMonths(int month, int dmonth, int year) {
-			boolean res = hasDayMonths() && dayMonths[month][dmonth];
+		private boolean isOpened(int year, int month, int dmonth) {
+			boolean opened = hasDayMonths() && dayMonths[month][dmonth];
 			if (hasFullYears()) {
 				if (year == this.year) {
-					res = firstYearDayMonth[month][dmonth];
-				} else if (year == this.year + fullYears + 1) {
-					res = lastYearDayMonth[month][dmonth];
-				} else if (year > this.year && year < this.year + fullYears + 1) {
-					res = true;
+					opened = firstYearDayMonth[month][dmonth];
 				} else {
-					res = false;
+					int lastYear = this.year + fullYears + 1;
+					if (year == lastYear) {
+						opened = lastYearDayMonth[month][dmonth];
+					} else {
+						opened = year > this.year && year < lastYear;
+					}
 				}
 			}
-			return res;
+			return opened;
 		}
 
 		private boolean hasFullYears() {
@@ -2057,7 +2062,7 @@ public class OpeningHoursParser {
 						t.parent = prevToken;
 						currentParseParent = prevToken.type;
 					} else if (t.type == TokenType.TOKEN_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_YEAR) {
-						basic.year = prevToken.mainNumber;
+						basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
 					}
 				}
 			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
