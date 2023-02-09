@@ -171,6 +171,10 @@ public class GpxDisplayHelper {
 		return dg;
 	}
 
+	/**
+	 * @param fileToProcess If not null, only specified file will be processed.
+     *                     	Otherwise, all selected gpx files will be processed
+	 */
 	public static boolean processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
 		if (app.isApplicationInitializing()) {
 			return false;
@@ -199,7 +203,7 @@ public class GpxDisplayHelper {
 				selectedGpxFile.setDisplayGroups(displayGroups, app);
 			}
 		}
-		return fileToProcess == null || fileToProcess.splitProcessed;
+		return true;
 	}
 
 	@NonNull
