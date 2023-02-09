@@ -126,7 +126,11 @@ public class OpeningHoursParserTest {
 
 		hours = parseOpenedHours("2019 Oct 1 - 2024 dec 31 ");
 		System.out.println(hours);
+		testOpened("30.09.2019 10:30", hours, false);
+		testOpened("1.10.2019 10:30", hours, true);
 		testOpened("05.02.2023 10:30", hours, true);
+		testOpened("31.12.2024 10:30", hours, true);
+		testOpened("1.01.2025 10:30", hours, false);
 
 		hours = parseOpenedHours("2019 Oct - 2024 dec");
 		System.out.println(hours);
