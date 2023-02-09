@@ -42,6 +42,7 @@ public abstract class SettingsItem {
 	private boolean fromJson;
 
 	protected boolean shouldReplace;
+	protected boolean shouldReadOnCollecting;
 
 	protected List<String> warnings;
 
@@ -127,7 +128,11 @@ public abstract class SettingsItem {
 	}
 
 	public boolean shouldReadOnCollecting() {
-		return false;
+		return shouldReadOnCollecting;
+	}
+
+	public void setShouldReadOnCollecting(boolean shouldReadOnCollecting) {
+		this.shouldReadOnCollecting = shouldReadOnCollecting;
 	}
 
 	public boolean isShouldReplace() {

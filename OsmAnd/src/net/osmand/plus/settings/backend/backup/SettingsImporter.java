@@ -1,10 +1,13 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -22,8 +25,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
-
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 class SettingsImporter {
 
@@ -66,10 +67,10 @@ class SettingsImporter {
 							updateFilesInfo(file, settingsItemList);
 							items.addAll(settingsItemList);
 						}
-					} catch (IllegalArgumentException e) {
-						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
-						throw new IllegalArgumentException("No items");
-					} catch (JSONException e) {
+						for (SettingsItem item : items) {
+							item.setShouldReadOnCollecting(item instanceof CollectionSettingsItem);
+						}
+					} catch (IllegalArgumentException | JSONException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
 					}
