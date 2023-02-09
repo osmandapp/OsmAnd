@@ -354,9 +354,6 @@ public class GpxSelectionHelper {
 			selectedFile.setGpxFile(gpx, app);
 		}
 		if (selectedFile != null) {
-			if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
-				selectedFile.createFilteredSelectedGpxFile(app, dataItem);
-			}
 			selectedFile.notShowNavigationDialog = params.isNotShowNavigationDialog();
 			if (params.isSelectedByUserChanged()) {
 				selectedFile.selectedByUser = params.isSelectedByUser();
@@ -364,6 +361,11 @@ public class GpxSelectionHelper {
 			boolean isSelected = selectedGPXFiles.contains(selectedFile);
 			if (selectedFile.isLoaded() && (params.shouldUpdateSelected() && showOnMap != isSelected)) {
 				updateSelected(showOnMap, selectedFile);
+				if (showOnMap) {
+					if (dataItem != null && FilteredSelectedGpxFile.isGpsFiltersConfigValid(dataItem)) {
+						selectedFile.createFilteredSelectedGpxFile(app, dataItem);
+					}
+				}
 			}
 			selectedFile.splitProcessed = false;
 		}
