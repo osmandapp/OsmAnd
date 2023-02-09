@@ -499,17 +499,32 @@ public class NetworkRouteContext {
 			}
 		}
 
+		// this method should be fast enough and without multiplications 
+		// cause tiles are big enough and situation will be rare for long lines
 		private boolean intersects(int x31, int y31, int px, int py) {
-			// algorithm could and should be optimized 
-			if (getTileId(x31, y31) == tileId || getTileId(px, py) == tileId) {
+			long currentTile = getTileId(x31, y31);
+			long previousTile = getTileId(px, py);
+			if (currentTile == tileId || previousTile == tileId) {
 				return true;
 			}
-			if (getTileId(x31, y31) == getTileId(px, py)) {
+			if (currentTile == previousTile) {
 				return false;
 			}
+			int xprevTile = getXFromTileId(previousTile);
+			int yprevTile = getYFromTileId(previousTile);
+			int xcurrTile = getXFromTileId(currentTile);
+			int ycurrTile = getYFromTileId(currentTile);
+			if ((ycurrTile == yprevTile && Math.abs(xcurrTile - xprevTile) <= 1)
+					|| (xcurrTile == xprevTile && Math.abs(ycurrTile - yprevTile) <= 1)) {
+				// speed up for neighbor tiles that couldn't intersect tileId
+				return false;
+			}
+			
 			if (Math.abs(x31 - px) <= 2 && Math.abs(y31 - py) <= 2) {
+				// return when points too close to avoid rounding int errors
 				return false;
 			}
+			// use recursive method to quickly find intersection
 			if (intersects(x31, y31, x31 / 2 + px / 2, y31 / 2 + py / 2)) {
 				return true;
 			}
