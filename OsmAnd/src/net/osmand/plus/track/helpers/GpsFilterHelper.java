@@ -187,7 +187,7 @@ public class GpsFilterHelper {
 		@Override
 		protected void onPostExecute(@NonNull Boolean successfulFinish) {
 			if (successfulFinish && !isCancelled()) {
-				filteredSelectedGpxFile.updateGpxFile(filteredGpxFile);
+				filteredSelectedGpxFile.updateGpxFile(filteredGpxFile, app);
 				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
 				filteredSelectedGpxFile.setDisplayGroups(displayGroups);
 				for (GpsFilterListener listener : listeners) {

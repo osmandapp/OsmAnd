@@ -1,20 +1,16 @@
 package net.osmand.plus.track.helpers;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-
-import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.data.QuadRect;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -24,6 +20,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 
 public class SelectedGpxFile {
 
@@ -35,11 +35,12 @@ public class SelectedGpxFile {
 
 	protected Set<String> hiddenGroups = new HashSet<>();
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-	protected QVectorPointI path31 = null;
-	protected boolean path31FromGeneralTrack;
-	protected QuadRect bBox = null;
-	protected boolean bBoxFromGeneralTrack;
 	protected List<GpxDisplayGroup> displayGroups;
+
+	@NonNull
+	protected QuadRect bounds = new QuadRect();
+	@Nullable
+	protected QVectorPointI path31 = null;
 
 	protected int color;
 	protected long modifiedTime = -1;
@@ -103,21 +104,17 @@ public class SelectedGpxFile {
 
 	public void processPoints(OsmandApplication app) {
 		update(app);
-		this.processedPointsToDisplay = gpxFile.proccessPoints();
-		if (this.processedPointsToDisplay.isEmpty()) {
-			this.processedPointsToDisplay = gpxFile.processRoutePoints();
-			routePoints = !this.processedPointsToDisplay.isEmpty();
+
+		processedPointsToDisplay = gpxFile.proccessPoints();
+		routePoints = false;
+		if (processedPointsToDisplay.isEmpty()) {
+			processedPointsToDisplay = gpxFile.processRoutePoints();
+			routePoints = !processedPointsToDisplay.isEmpty();
 		}
-		if (app.getOsmandMap() != null &&
-			app.getOsmandMap().getMapView() != null &&
-			app.getOsmandMap().getMapView().hasMapRenderer()) {
-			path31 = trackPointsToPath31(this.processedPointsToDisplay);
-		} else {
-			path31 = null;
-		}
-		path31FromGeneralTrack = false;
-		bBox = calculateTrackBounds(this.processedPointsToDisplay);
-		bBoxFromGeneralTrack = false;
+
+		updateBounds();
+		updatePath31(hasMapRenderer(app));
+
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.processPoints(app);
 		}
@@ -140,82 +137,83 @@ public class SelectedGpxFile {
 		}
 	}
 
-	@NonNull
-	public QuadRect getBBoxToDisplay() {
-		if (filteredSelectedGpxFile != null) {
-			return filteredSelectedGpxFile.getBBoxToDisplay();
-		} else if (joinSegments) {
-			if (gpxFile == null) {
-				return new QuadRect();
-			}
-			if (!gpxFile.hasGeneralTrack()) {
-				if (gpxFile.getGeneralTrack() != null) {
-					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
-					bBoxFromGeneralTrack = true;
-					return bBox;
-				} else {					
-					return new QuadRect();
-				}
-			} else {
-				if (!bBoxFromGeneralTrack || bBox == null) {
-					bBox = calculateTrackBounds(gpxFile.getGeneralTrack().segments);
-					bBoxFromGeneralTrack = true;
-				}
-				return bBox;
-			}
+	public final void addEmptySegmentToDisplay() {
+		processedPointsToDisplay.add(new TrkSegment());
+	}
+
+	public final void appendTrackPointToDisplay(@NonNull WptPt point, @NonNull OsmandApplication app) {
+		TrkSegment lastSegment;
+		if (processedPointsToDisplay.size() == 0) {
+			lastSegment = new TrkSegment();
+			processedPointsToDisplay.add(lastSegment);
 		} else {
-			if (bBox == null) {
-				bBox = calculateTrackBounds(processedPointsToDisplay);
+			lastSegment = processedPointsToDisplay.get(processedPointsToDisplay.size() - 1);
+		}
+
+		lastSegment.points.add(point);
+
+		boolean hasCalculatedBounds = !bounds.hasInitialState();
+		if (hasCalculatedBounds) {
+			// Update already calculated bounds without iterating all points
+			GPXUtilities.updateBounds(bounds, Collections.singletonList(point), 0);
+		} else {
+			updateBounds();
+		}
+
+		// Update path31 without iterating all points
+		if (hasMapRenderer(app)) {
+			if (path31 == null) {
+				path31 = new QVectorPointI();
 			}
-			return bBox;
+			int x31 = MapUtils.get31TileNumberX(point.lon);
+			int y31 = MapUtils.get31TileNumberY(point.lat);
+			path31.add(new PointI(x31, y31));
 		}
 	}
 
+	public final void clearSegmentsToDisplay() {
+		processedPointsToDisplay.clear();
+		bounds = new QuadRect();
+		path31 = null;
+	}
+
 	@NonNull
-	public QVectorPointI getPath31ToDisplay() {
+	public final QuadRect getBoundsToDisplay() {
+		return filteredSelectedGpxFile != null
+				? filteredSelectedGpxFile.getBoundsToDisplay()
+				: bounds;
+	}
+
+	@NonNull
+	public final QVectorPointI getPath31ToDisplay() {
 		if (filteredSelectedGpxFile != null) {
 			return filteredSelectedGpxFile.getPath31ToDisplay();
-		} else if (joinSegments) {
-			if (gpxFile == null) {
-				return new QVectorPointI();
-			}
-			if (!gpxFile.hasGeneralTrack()) {
-				if (gpxFile.getGeneralTrack() != null) {
-					path31 = trackPointsToPath31(gpxFile.getGeneralTrack().segments);
-					path31FromGeneralTrack = true;
-					return path31;
-				} else {					
-					return new QVectorPointI();
-				}
-			} else {
-				if (!path31FromGeneralTrack || path31 == null) {
-					path31 = trackPointsToPath31(gpxFile.getGeneralTrack().segments);
-					path31FromGeneralTrack = true;
-				}
-				return path31;
-			}
-		} else {
-			if (path31 == null) {
-				path31 = trackPointsToPath31(processedPointsToDisplay);
-			}
-			return path31;
 		}
+
+		if (path31 == null) {
+			updatePath31(true);
+		}
+		return path31;
 	}
 
-	public QVectorPointI trackPointsToPath31(List<TrkSegment> segments) {
-		QVectorPointI path = new QVectorPointI();
-		for (TrkSegment segment : segments) {
-			for (WptPt pt : segment.points) {
-				int x = MapUtils.get31TileNumberX(pt.lon);
-				int y = MapUtils.get31TileNumberY(pt.lat);
-				path.add(new PointI(x, y));
-			}
-		}
-		return path;
+	protected final void updateBounds() {
+		bounds = GPXUtilities.calculateTrackBounds(processedPointsToDisplay);
 	}
 
-	public List<TrkSegment> getModifiablePointsToDisplay() {
-		return processedPointsToDisplay;
+	protected final void updatePath31(boolean hasMapRenderer) {
+		if (!hasMapRenderer) {
+			path31 = null;
+			return;
+		}
+
+		path31 = new QVectorPointI();
+		for (TrkSegment segment : processedPointsToDisplay) {
+			for (WptPt point : segment.points) {
+				int x31 = MapUtils.get31TileNumberX(point.lon);
+				int y31 = MapUtils.get31TileNumberY(point.lat);
+				path31.add(new PointI(x31, y31));
+			}
+		}
 	}
 
 	public Set<String> getHiddenGroups() {
@@ -307,6 +305,11 @@ public class SelectedGpxFile {
 				update(app);
 			}
 		}
+	}
+
+	protected final boolean hasMapRenderer(@NonNull OsmandApplication app) {
+		OsmandMap osmandMap = app.getOsmandMap();
+		return osmandMap != null && osmandMap.getMapView().hasMapRenderer();
 	}
 
 	@NonNull

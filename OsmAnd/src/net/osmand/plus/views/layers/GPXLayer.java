@@ -1579,7 +1579,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	
 	private boolean isGpxFileVisible(@NonNull SelectedGpxFile selectedGpxFile, @NonNull RotatedTileBox tileBox) {
 		MapRendererView mapRenderer = getMapRenderer();
-		QuadRect gpxFileBounds = selectedGpxFile.getBBoxToDisplay();
+		QuadRect gpxFileBounds = selectedGpxFile.getBoundsToDisplay();
 		if (mapRenderer != null) {
 			int left31 = MapUtils.get31TileNumberX(gpxFileBounds.left);
 			int top31 = MapUtils.get31TileNumberY(gpxFileBounds.top);
