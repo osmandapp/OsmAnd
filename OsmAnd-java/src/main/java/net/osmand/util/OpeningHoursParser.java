@@ -1940,8 +1940,8 @@ public class OpeningHoursParser {
 							: tokenDayMonth ? null : basic.getDays();
 					for (Token[] pair : listOfPairs) {
 						if (pair[0] != null && pair[1] != null) {
-							Token firstMonthToken = pair[0].parent;
-							Token lastMonthToken = pair[1].parent;
+							Token firstMonthToken = pair[0].parent == null && pair[0].type == TokenType.TOKEN_MONTH ? pair[0] : pair[0].parent;
+							Token lastMonthToken = pair[1].parent == null && pair[1].type == TokenType.TOKEN_MONTH ? pair[1] : pair[1].parent;
 							if (tokenDayMonth && firstMonthToken != null) {
 								if (lastMonthToken != null && lastMonthToken.mainNumber != firstMonthToken.mainNumber) {
 									Token[] p = new Token[]{firstMonthToken, lastMonthToken};
@@ -2056,6 +2056,8 @@ public class OpeningHoursParser {
 					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
 						t.parent = prevToken;
 						currentParseParent = prevToken.type;
+					} else if (t.type == TokenType.TOKEN_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_YEAR) {
+						basic.year = prevToken.mainNumber;
 					}
 				}
 			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
@@ -2099,8 +2101,8 @@ public class OpeningHoursParser {
 	}
 
 	private static void fillFirstLastYearsDayOfMonth(BasicOpeningHourRule basic, Token[] pair) {
-		int startMonth = pair[0].parent.mainNumber;
-		int startDayOfMonth = pair[0].mainNumber;
+		int startMonth = pair[0].parent == null ? pair[0].mainNumber : pair[0].parent.mainNumber;
+		int startDayOfMonth = pair[0].parent == null ? 0 : pair[0].mainNumber;
 		basic.firstYearDayMonth = new boolean[12][31];
 		Arrays.fill(basic.firstYearDayMonth[startMonth], startDayOfMonth, 31, true);
 		for (int month = startMonth + 1; month < 12; month++) {
