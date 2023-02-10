@@ -729,7 +729,9 @@ public class OpeningHoursParser {
 		 * represents the list on which year / month it is open.
 		 */
 		private int[] firstYearMonths = null;
+		private boolean[][] firstYearDayMonth;
 		private int[] lastYearMonths = null;
+		private boolean[][] lastYearDayMonth;
 		private int fullYears = 0;
 		private int year = 0;
 
@@ -1003,7 +1005,7 @@ public class OpeningHoursParser {
 		public boolean containsMonth(Calendar cal) {
 			int month = cal.get(Calendar.MONTH);
 			int year = cal.get(Calendar.YEAR);
-			return containsYear(cal) && months[month];
+			return containsYear(cal) && months[month] || hasFullYears();
 		}
 
 		@Override
@@ -1541,6 +1543,7 @@ public class OpeningHoursParser {
 		}
 
 		private int calculate(Calendar cal) {
+			int year = cal.get(Calendar.YEAR);
 			int month = cal.get(Calendar.MONTH);
 			if (!containsMonth(cal)) {
 				return 0;
@@ -1549,17 +1552,27 @@ public class OpeningHoursParser {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int day = (i + 5) % 7;
 			int previous = (day + 6) % 7;
-			boolean thisDay = hasDays || hasDayMonths();
-			if (thisDay && hasDayMonths()) {
-				thisDay = dayMonths[month][dmonth];
+			boolean thisDay = hasDays || hasDayMonths() || hasFullYears();
+			if (hasFullYears()) {
+				thisDay = isOpened(year, month, dmonth);
+			} else {
+				if (thisDay && hasDayMonths()) {
+					thisDay = dayMonths[month][dmonth];
+				}
 			}
 			if (thisDay && hasDays) {
 				thisDay = days[day];
 			}
 			// potential error for Dec 31 12:00-01:00
-			boolean previousDay = hasDays || hasDayMonths();
-			if (previousDay && hasDayMonths() && dmonth > 0) {
-				previousDay = dayMonths[month][dmonth - 1];
+			boolean previousDay = hasDays || hasDayMonths() || hasFullYears();
+			if (hasFullYears()) {
+				if (dmonth > 0) {
+					previousDay = isOpened(year, month, dmonth - 1);
+				}
+			} else {
+				if (previousDay && hasDayMonths() && dmonth > 0) {
+					previousDay = dayMonths[month][dmonth - 1];
+				}
 			}
 			if (previousDay && hasDays) {
 				previousDay = days[previous];
@@ -1592,6 +1605,27 @@ public class OpeningHoursParser {
 				return -1;
 			}
 			return 0;
+		}
+
+		private boolean isOpened(int year, int month, int dmonth) {
+			boolean opened = hasDayMonths() && dayMonths[month][dmonth];
+			if (hasFullYears()) {
+				if (year == this.year) {
+					opened = firstYearDayMonth[month][dmonth];
+				} else {
+					int lastYear = this.year + fullYears + 1;
+					if (year == lastYear) {
+						opened = lastYearDayMonth[month][dmonth];
+					} else {
+						opened = year > this.year && year < lastYear;
+					}
+				}
+			}
+			return opened;
+		}
+
+		private boolean hasFullYears() {
+			return fullYears > 0;
 		}
 	}
 
@@ -1901,8 +1935,8 @@ public class OpeningHoursParser {
 							: tokenDayMonth ? null : basic.getDays();
 					for (Token[] pair : listOfPairs) {
 						if (pair[0] != null && pair[1] != null) {
-							Token firstMonthToken = pair[0].parent;
-							Token lastMonthToken = pair[1].parent;
+							Token firstMonthToken = pair[0].parent == null && pair[0].type == TokenType.TOKEN_MONTH ? pair[0] : pair[0].parent;
+							Token lastMonthToken = pair[1].parent == null && pair[1].type == TokenType.TOKEN_MONTH ? pair[1] : pair[1].parent;
 							if (tokenDayMonth && firstMonthToken != null) {
 								if (lastMonthToken != null && lastMonthToken.mainNumber != firstMonthToken.mainNumber) {
 									Token[] p = new Token[]{firstMonthToken, lastMonthToken};
@@ -1941,31 +1975,19 @@ public class OpeningHoursParser {
 							}
 							int ruleYear = basic.year;
 							if ((ruleYear > 0 || prevYearToken != null) && firstMonthToken != null && lastMonthToken != null) {
-								int length = lastMonthToken.mainNumber > firstMonthToken.mainNumber ?
-										lastMonthToken.mainNumber - firstMonthToken.mainNumber : 12 - firstMonthToken.mainNumber + lastMonthToken.mainNumber;
-								int month = firstMonthToken.mainNumber;
 								int endYear = prevYearToken != null ? prevYearToken.mainNumber : ruleYear;
 								int startYear = ruleYear > 0 ? ruleYear : endYear;
-								int year = startYear;
 								if (basic.firstYearMonths == null) {
 									basic.firstYearMonths = new int[12];
+									Arrays.fill(basic.firstYearMonths, firstMonthToken.mainNumber, 12, startYear);
 								}
-								int[] yearMonths = basic.firstYearMonths;
-								int k = 0;
-								while (k <= length) {
-									yearMonths[month++] = year;
-									if (month > 11) {
-										month = 0;
-										year = endYear;
-										if (basic.lastYearMonths == null) {
-											basic.lastYearMonths = new int[12];
-										}
-										yearMonths = basic.lastYearMonths;
-									}
-									k++;
+								if (basic.lastYearMonths == null) {
+									basic.lastYearMonths = new int[12];
+									Arrays.fill(basic.lastYearMonths, 0, lastMonthToken.mainNumber + 1, endYear);
 								}
 								if (endYear - startYear > 1) {
 									basic.fullYears = endYear - startYear - 1;
+									fillFirstLastYearsDayOfMonth(basic, pair);
 								}
 								if (endYear > startYear && firstMonthToken.mainNumber >= lastMonthToken.mainNumber) {
 									//basic.dayMonths = null;
@@ -2029,6 +2051,8 @@ public class OpeningHoursParser {
 					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
 						t.parent = prevToken;
 						currentParseParent = prevToken.type;
+					} else if (t.type == TokenType.TOKEN_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_YEAR) {
+						basic.year = prevToken.mainNumber; // add first year for ("2019 Oct - 2024 dec")
 					}
 				}
 			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
@@ -2069,6 +2093,23 @@ public class OpeningHoursParser {
 			basic.hasDays = true;
 		}
 		rules.add(0, basic);
+	}
+
+	private static void fillFirstLastYearsDayOfMonth(BasicOpeningHourRule basic, Token[] pair) {
+		int startMonth = pair[0].parent == null ? pair[0].mainNumber : pair[0].parent.mainNumber;
+		int startDayOfMonth = pair[0].parent == null ? 0 : pair[0].mainNumber;
+		basic.firstYearDayMonth = new boolean[12][31];
+		Arrays.fill(basic.firstYearDayMonth[startMonth], startDayOfMonth, 31, true);
+		for (int month = startMonth + 1; month < 12; month++) {
+			Arrays.fill(basic.firstYearDayMonth[month], true);
+		}
+		int endMonth = pair[1].parent == null ? pair[1].mainNumber : pair[1].parent.mainNumber;
+		int endDayOfMonth = pair[1].parent == null ? 30 : pair[1].mainNumber;
+		basic.lastYearDayMonth = new boolean[12][31];
+		Arrays.fill(basic.lastYearDayMonth[endMonth], 0, endDayOfMonth + 1, true);
+		for (int month = 0; month < endMonth; month++) {
+			Arrays.fill(basic.lastYearDayMonth[month], true);
+		}
 	}
 
 	private static void fillRuleArray(boolean[] array, Token[] pair) {

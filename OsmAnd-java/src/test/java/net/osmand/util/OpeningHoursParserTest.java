@@ -125,6 +125,22 @@ public class OpeningHoursParserTest {
 		System.out.println(hours);
 		testInfo("13.10.2019 18:00", hours, "Will open tomorrow at 08:00");
 
+		hours = parseOpenedHours("2019 Oct 1 - 2024 dec 31 ");
+		System.out.println(hours);
+		testOpened("30.09.2019 10:30", hours, false);
+		testOpened("1.10.2019 10:30", hours, true);
+		testOpened("05.02.2023 10:30", hours, true);
+		testOpened("31.12.2024 10:30", hours, true);
+		testOpened("1.01.2025 10:30", hours, false);
+
+		hours = parseOpenedHours("2019 Oct - 2024 dec");
+		System.out.println(hours);
+		testOpened("30.09.2019 10:30", hours, false);
+		testOpened("1.10.2019 10:30", hours, true);
+		testOpened("05.02.2023 10:30", hours, true);
+		testOpened("31.12.2024 10:30", hours, true);
+		testOpened("1.01.2025 10:30", hours, false);
+
 		hours = parseOpenedHours("2019 Apr 1 - 2020 Apr 1");
 		System.out.println(hours);
 		testOpened("01.04.2018 15:00", hours, false);
@@ -163,7 +179,7 @@ public class OpeningHoursParserTest {
 		testOpened("29.05.2019 15:00", hours, false);
 		testOpened("05.09.2019 11:00", hours, true);
 		testOpened("05.02.2020 11:00", hours, true);
-		testOpened("03.06.2020 11:00", hours, false);
+		testOpened("03.06.2020 11:00", hours, true);
 		testOpened("05.02.2021 11:00", hours, true);
 		testOpened("05.02.2022 11:00", hours, true);
 		testOpened("05.02.2023 11:00", hours, false);
