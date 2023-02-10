@@ -2542,7 +2542,7 @@
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
     <string name="favourites_group">Favoritenkategorie</string>
-    <string name="add_group">Gruppe hinzufügen</string>
+    <string name="add_group">Eine Gruppe hinzufügen</string>
     <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
     <string name="empty_state_markers_groups">Gruppen importieren</string>
     <string name="empty_state_markers_history_desc">Markierungen, die als passiert gekennzeichnet sind, werden auf diesem Bildschirm angezeigt.</string>
@@ -2837,7 +2837,7 @@
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen bei öffentlichen Verkehrsmitteln.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
-    <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
+    <string name="public_transport_warning_descr_blog">Mehr über die OsmAnd-Routenführung in unserem Blog.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
     <string name="transfers_size">%1$d Umstieg(e)</string>
@@ -3650,9 +3650,9 @@
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
     <string name="vessel_height_warning">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden. Wenn die Brücke beweglich ist, wird die Höhe im geöffneten Zustand verwendet.</string>
-    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Wenn die Brücke beweglich ist, verwendet die Berechnung ihre Höhe im geöffneten Zustand.</string>
+    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Für beweglichen Brücken, wird deren Höhe im geöffneten Zustand verwendet.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
-    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Eine Schaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>
     <string name="speed_camera_pois">Blitzer-POIs</string>
@@ -3716,7 +3716,7 @@
     <string name="whole_track">Ganzer Track</string>
     <string name="next_segment">Nächstes Segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
-    <string name="route_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
+    <string name="route_between_points_add_track_desc">Wählen Sie eine Trackdatei, zu der das neue Segment hinzugefügt werden soll.</string>
     <string name="follow_track_descr">Track auswählen, dem gefolgt werden soll</string>
     <string name="delete_address">Adresse löschen</string>
     <string name="add_address">Adresse hinzufügen</string>
@@ -3932,8 +3932,8 @@
     <string name="rename_track">Track umbenennen</string>
     <string name="change_folder">Ordner ändern</string>
     <string name="shared_string_turn">Abbiegung</string>
-    <string name="announcement_time_intervals">Zeit- und Distanzintervalle</string>
-    <string name="announcement_time_descr">Der Ansagezeitpunkt der verschiedenen Sprachansagen hängt vom Ansagetyp, der aktuellen Navigationsgeschwindigkeit und der Standard-Navigationsgeschwindigkeit ab.</string>
+    <string name="announcement_time_intervals">Zeit- und Entfernungsintervalle</string>
+    <string name="announcement_time_descr">Der Zeitpunkt der verschiedenen Sprachansagen hängt von Ansagetyp, aktueller Navigationsgeschwindigkeit und Standard-Navigationsgeschwindigkeit ab.</string>
     <string name="announcement_time_title">Ansagezeitpunkt</string>
     <string name="start_recording">Aufzeichnung starten</string>
     <string name="show_track_on_map">Track auf der Karte anzeigen</string>
@@ -4072,7 +4072,7 @@
     <string name="shared_string_feet">Fuß</string>
     <string name="srtm_unit_format">Einheitenvariante der Höhenlinien</string>
     <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
-    <string name="srtm_download_single_help_message">Bitte wählen Sie die gewünschte Variante. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="srtm_download_single_help_message">Bitte Variante auswählen. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="route_line_use_gradient_coloring">Die Routenlinie wird durch die Steigung eingefärbt.</string>
     <string name="shared_string_min_height">Mindesthöhe</string>
     <string name="shared_string_max_height">Maximale Höhe</string>

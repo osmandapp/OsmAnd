@@ -3929,7 +3929,7 @@
     <string name="announcement_time_approach">Наближення</string>
     <string name="announcement_time_prepare_long">Завчасне приготування</string>
     <string name="announcement_time_prepare">Приготуватися</string>
-    <string name="announcement_time_off_route">По за маршрутом</string>
+    <string name="announcement_time_off_route">Поза маршрутом</string>
     <string name="announcement_time_arrive">Прибуття до місця призначення</string>
     <string name="shared_string_turn">Поворот</string>
     <string name="announcement_time_intervals">Інтервали часу та відстаней</string>
@@ -4845,7 +4845,7 @@
     <string name="map_widget_rendering_fps_desc">Показує швидкість появи й оновлення мапи та її елементів (виражається у кадрах на секунду, або FPS).</string>
     <string name="terms_of_service_desc">Завантажуючи мапи, ви погоджуєтеся з умовами користування %1$s та %2$s.</string>
     <string name="speak_gps_signal_status">Повідомляти про втрату й відновлення сигналу GPS</string>
-    <string name="speak_route_recalculation">Повідомляти переобчислення маршруту</string>
+    <string name="speak_route_recalculation">Повідомляти про переобчислення маршруту</string>
     <string name="external_sensors_support">Підтримка зовнішніх датчиків</string>
     <string name="release_4_3">• Новий швидший рушій рендерингу мап версії 2 (OpenGL) з 2.5D виглядом
 \n
