@@ -67,9 +67,6 @@ class SettingsImporter {
 							updateFilesInfo(file, settingsItemList);
 							items.addAll(settingsItemList);
 						}
-						for (SettingsItem item : items) {
-							item.setShouldReadOnCollecting(item instanceof CollectionSettingsItem);
-						}
 					} catch (IllegalArgumentException | JSONException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
