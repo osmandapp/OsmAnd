@@ -3,6 +3,7 @@ package net.osmand.plus.settings.fragments;
 import androidx.preference.Preference;
 
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.enums.AutoZoomMap;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -73,9 +74,10 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	private void setupApproximateBearingPref() {
-		SwitchPreferenceEx snapToRoad = findPreference(settings.APPROXIMATE_BEARING.getId());
-		snapToRoad.setTitle(getString(R.string.approximate_bearing));
-		snapToRoad.setDescription(getString(R.string.approximate_bearing_descr));
+		SwitchPreferenceEx approxBearing = findPreference(settings.APPROXIMATE_BEARING.getId());
+		approxBearing.setTitle(getString(R.string.approximate_bearing));
+		approxBearing.setDescription(getString(R.string.approximate_bearing_descr));
+		approxBearing.setVisible(PluginsHelper.isDevelopment());
 	}
 
 	@Override

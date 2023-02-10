@@ -488,7 +488,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				// calculate projection of current location
 				lastProjection = currentAnimatedRoute > 0
 						? RoutingHelperUtils.getProject(currentLocation, locations.get(currentAnimatedRoute - 1),
-						locations.get(currentAnimatedRoute), RoutingHelperUtils.shouldCalculateBearing(app, currentLocation)) : null;
+						locations.get(currentAnimatedRoute)) : null;
+				if (lastProjection != null && app.getSettings().APPROXIMATE_BEARING.get()) {
+					RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+							locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute));
+				}
 				startLocationIndex = currentAnimatedRoute;
 				if (lastFixedLocationChanged) {
 					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {
