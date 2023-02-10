@@ -942,7 +942,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			this.pointFileMap = pointFileMap;
 
-			if (pointsTileProvider.getPointsCount() > 0) {
+			if (!pointsTileProvider.getPoints31().isEmpty()) {
 				pointsTileProvider.drawSymbols(mapRenderer);
 			}
 		} else {

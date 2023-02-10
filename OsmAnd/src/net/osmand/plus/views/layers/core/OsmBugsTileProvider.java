@@ -152,6 +152,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return new QListPointI();
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -231,16 +236,6 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			}
 		}
 		return res;
-	}
-
-	@Override
-	public int getPointsCount() {
-		return 0;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		return new PointI(0, 0);
 	}
 
 	@Override

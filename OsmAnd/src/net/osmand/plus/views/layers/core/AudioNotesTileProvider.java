@@ -30,8 +30,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider {
+
+    private final QListPointI points31 = new QListPointI();
     private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
     private final Map<TypeNotes, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+
     private Bitmap smallBitmap;
     private MapTiledCollectionProvider providerInstance;
     private final int baseOrder;
@@ -68,6 +71,11 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     }
 
     @Override
+    public QListPointI getPoints31() {
+        return points31;
+    }
+
+    @Override
     public QListPointI getHiddenPoints() {
         return new QListPointI();
     }
@@ -95,17 +103,6 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     @Override
     public double getScale() {
         return 1.0d;
-    }
-
-    @Override
-    public PointI getPoint31(int index) {
-        MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-        return data != null ? data.point : new PointI(0, 0);
-    }
-
-    @Override
-    public int getPointsCount() {
-        return mapLayerDataList.size();
     }
 
     @Override
@@ -163,17 +160,17 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         if (providerInstance != null) {
             throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
         }
+
+        int x31 = MapUtils.get31TileNumberX(recording.getLongitude());
+        int y31 = MapUtils.get31TileNumberY(recording.getLatitude());
+        points31.add(new PointI(x31, y31));
         mapLayerDataList.add(new MapLayerData(recording, textScale));
     }
 
     private static class MapLayerData {
         TypeNotes type;
-        PointI point;
         float textScale;
         MapLayerData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
-            int x = MapUtils.get31TileNumberX(recording.getLongitude());
-            int y = MapUtils.get31TileNumberY(recording.getLatitude());
-            point = new PointI(x, y);
             if (recording.isPhoto()) {
                 type = TypeNotes.PHOTO;
             } else if (recording.isAudio()) {
