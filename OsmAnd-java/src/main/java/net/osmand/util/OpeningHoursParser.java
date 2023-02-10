@@ -408,16 +408,14 @@ public class OpeningHoursParser {
 			Calendar openingTimeCal = null;
 			OpeningHoursRule openingRule = null;
 			for (OpeningHoursRule r : rules) {
-				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					if (r.containsDay(cal) && r.containsMonth(cal)) {
-						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
-						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
-								|| r.hasOverlapTimes(cal, openingRule, false)) {
-							openingTime = time;
-							openingRule = r;
-						}
-						openingTimeCal = (Calendar) cal.clone();
+				if (r.contains(cal)) {
+					String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+					if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
+							|| r.hasOverlapTimes(cal, openingRule, false)) {
+						openingTime = time;
+						openingRule = r;
 					}
+					openingTimeCal = (Calendar) cal.clone();
 				}
 			}
 			return openingTime;
@@ -432,7 +430,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule openingRule = null;
 				Calendar openingTimeCal = null;
 				for (OpeningHoursRule r : rules) {
-					if (r.containsDay(cal) && r.containsMonth(cal)) {
+					if (r.contains(cal)) {
 						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
 						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)
 								|| r.hasOverlapTimes(cal, openingRule, false)) {
@@ -972,20 +970,14 @@ public class OpeningHoursParser {
 		public boolean containsDay(Calendar cal) {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int d = (i + 5) % 7;
-			if (days[d]) {
-				return true;
-			}
-			return false;
+			return days[d];
 		}
 
 		@Override
 		public boolean containsNextDay(Calendar cal) {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int p = (i + 6) % 7;
-			if (days[p]) {
-				return true;
-			}
-			return false;
+			return days[p];
 		}
 
 		/**
@@ -998,10 +990,7 @@ public class OpeningHoursParser {
 		public boolean containsPreviousDay(Calendar cal) {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int p = (i + 4) % 7;
-			if (days[p]) {
-				return true;
-			}
-			return false;
+			return days[p];
 		}
 
 		/**
@@ -1017,6 +1006,7 @@ public class OpeningHoursParser {
 			return containsYear(cal) && months[month];
 		}
 
+		@Override
 		public boolean containsYear(Calendar cal) {
 			if (year == 0 && firstYearMonths == null) {
 				return true;
