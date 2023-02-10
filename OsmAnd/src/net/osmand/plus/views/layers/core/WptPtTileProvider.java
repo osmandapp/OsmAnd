@@ -36,6 +36,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    private final TextRasterizer.Style textStyle;
    private final float density;
 
+   private final QListPointI points31 = new QListPointI();
    private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
    private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
    private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
@@ -73,6 +74,11 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    }
 
    @Override
+   public QListPointI getPoints31() {
+      return points31;
+   }
+
+   @Override
    public QListPointI getHiddenPoints() {
       return new QListPointI();
    }
@@ -100,17 +106,6 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    @Override
    public double getScale() {
       return 1.0d;
-   }
-
-   @Override
-   public PointI getPoint31(int index) {
-      MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-      return data != null ? data.point : new PointI(0, 0);
-   }
-
-   @Override
-   public int getPointsCount() {
-      return mapLayerDataList.size();
    }
 
    @Override
@@ -188,12 +183,15 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       if (providerInstance != null) {
          throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
       }
+
+      int x31 = MapUtils.get31TileNumberX(wptPt.getLongitude());
+      int y31 = MapUtils.get31TileNumberY(wptPt.getLatitude());
+      points31.add(new PointI(x31, y31));
       mapLayerDataList.add(new MapLayerData(wptPt, color, withShadow,
               hasMarker, history, textScale));
    }
 
    private static class MapLayerData {
-      PointI point;
       WptPt wptPt;
       int color;
       boolean withShadow;
@@ -209,7 +207,6 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
          this.hasMarker = hasMarker;
          this.history = history;
          this.textScale = textScale;
-         point = new PointI(MapUtils.get31TileNumberX(wptPt.lon), MapUtils.get31TileNumberY(wptPt.lat));
       }
 
       int getKey() {
