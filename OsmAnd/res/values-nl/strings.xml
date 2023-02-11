@@ -4552,7 +4552,7 @@
     <string name="turn_arrows">Afslaan Pijlen</string>
     <string name="shared_string_open">Openen</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_imba_full">Internationale Mountain Bicycling Association</string>
     <string name="weather_pressure_hectopascals">Hectopascal</string>
     <string name="weather_pressure_inches_of_mercury">Inch kwik</string>
     <string name="map_rendering_engine_descr">Versie 2 (OpenGL) is een snellere laad methode, met 2,5D zicht. Versie 1 was de standaard voor OsmAnd 4.3, en is nog steeds beter voor oudere toestellen.</string>
@@ -4683,7 +4683,7 @@
     <string name="circle_settings">Cirkel instellingen</string>
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="routing_attr_freeride_policy_allow_name">Toestaan</string>
-    <string name="explore_weather_forecast">Weersvoorspelling ontdekken</string>
+    <string name="explore_weather_forecast">Weersvoorspelling ontdekken.</string>
     <string name="storage_migration_fragment_close_descr">Kopiëren slechts %1$s%% voltooid. Als u nu stopt, zou de app niet goed kunnen werken.</string>
     <string name="map_widget_sunset_desc">Toont het tijdstip van - of de tijd tot zonsondergang.</string>
     <string name="depth_contour_lines">Diepte van hoogtelijnen</string>
@@ -4943,7 +4943,7 @@
     <string name="rendering_attr_depthContourWidth_name">Dikte van lijnen</string>
     <string name="precipitation_widget_desc">Toont neerslag voor huidige midden van de kaart.</string>
     <string name="map_rendering_engine_v1">Versie 1</string>
-    <string name="duplacate_widget_added_snackbar">Een dubbele widget wordt aan de lijst toegevoegd</string>
+    <string name="duplacate_widget_added_snackbar">Een dubbele widget wordt aan de lijst toegevoegd.</string>
     <string name="second_marker_widget_desc">U kunt de widget instellen om de afstand of de verwachte aankomsttijd te tonen, tot de tweede markering.</string>
     <string name="distance_to_intermediate_widget_desc">De widget toont de afstand tot het eerstvolgende punt halverwege. Zodra een halverwege punt wordt gepasseerd, wordt de afstand bijgewerkt naar het volgende halverwege punt.</string>
     <string name="map_marker_average_speed_desc">Bepaal het tijdsinterval voor berekenen van gemiddelde snelheid (voor berekenen van aankomsttijd).</string>
