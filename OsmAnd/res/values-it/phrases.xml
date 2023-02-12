@@ -2459,7 +2459,7 @@
     <string name="poi_surface_grass_paver">Superficie: erba mista ad altro</string>
     <string name="poi_route_monorail_ref">Monorotaia</string>
     <string name="poi_service_bicycle_retail_no">Vendita bici al dettaglio: no</string>
-    <string name="poi_service_bicycle_diy_yes">Utensili per riparazioni fai-da-te;Utensili fai-da-te per biciclette;Utensili fai-da-te per motociclette</string>
+    <string name="poi_service_bicycle_diy_yes">Utensili per riparazioni fai-da-te;Utensili fai-da-te per motociclette;Utensili fai-da-te per biciclette</string>
     <string name="poi_service_bicycle_diy_no">Attrezzi per le riparazioni fai-da-te: no</string>
     <string name="poi_service_bicycle_chaintool_yes">Attrezzo per catena; Attrezzo per catena di bicicletta; Attrezzo per catena di motocicletta</string>
     <string name="poi_service_bicycle_chaintool_no">Utensile per la catena: no</string>
