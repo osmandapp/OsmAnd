@@ -135,8 +135,8 @@ public abstract class OsmandNotification {
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
-				//notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
-				notifyWearable(notificationManager);
+				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
+				//notifyWearable(notificationManager);
 				return true;
 			}
 		}
@@ -150,12 +150,12 @@ public abstract class OsmandNotification {
 				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
 				if (top) {
-					//notificationManager.cancel(getOsmandNotificationId());
-					//notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
+					notificationManager.cancel(getOsmandNotificationId());
+					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
 				} else {
-					//notificationManager.notify(getOsmandNotificationId(), notification);
+					notificationManager.notify(getOsmandNotificationId(), notification);
 				}
-				notifyWearable(notificationManager);
+				//notifyWearable(notificationManager);
 				return true;
 			} else {
 				notificationManager.cancel(getOsmandNotificationId());
