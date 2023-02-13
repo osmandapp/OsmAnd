@@ -269,6 +269,8 @@ public class LocalIndexHelper {
 		List<LocalIndexInfo> result = new ArrayList<>();
 		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, true, true,
 				app.getResourceManager().getIndexFileNames(), app.getResourceManager().getIndexFiles(), loadTask);
+		loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), result, false, true, true,
+				app.getResourceManager().getIndexFileNames(), app.getResourceManager().getIndexFiles(), loadTask);
 		return result;
 	}
 
