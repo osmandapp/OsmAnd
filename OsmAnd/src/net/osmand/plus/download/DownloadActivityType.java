@@ -221,7 +221,7 @@ public class DownloadActivityType {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
+	public boolean isZipStream() {
 		return HILLSHADE_FILE != this
 				&& SLOPE_FILE != this
 				&& HEIGHTMAP_FILE_LEGACY != this
