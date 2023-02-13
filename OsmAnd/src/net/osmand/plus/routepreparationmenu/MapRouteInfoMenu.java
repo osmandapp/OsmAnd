@@ -325,21 +325,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
-		List<Object> objects = new ArrayList<>();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
-				objects.clear();
+				List<Object> objects = new ArrayList<>();
 				IContextMenuProvider provider = (IContextMenuProvider) layer;
-				provider.collectObjectsFromPoint(point, tileBox, objects, true);
+				provider.collectObjectsFromPoint(point, tileBox, objects, true, true);
 				for (Object o : objects) {
-					if (provider.isObjectClickable(o)) {
-						LatLon latLon = provider.getObjectLocation(o);
-						PointDescription name = null;
-						if (o instanceof FavouritePoint) {
-							name = ((FavouritePoint) o).getPointDescription(mapView.getApplication());
-						}
-						return new Pair<>(latLon, name);
+					LatLon latLon = provider.getObjectLocation(o);
+					PointDescription name = null;
+					if (o instanceof FavouritePoint) {
+						name = ((FavouritePoint) o).getPointDescription(mapView.getApplication());
 					}
+					return new Pair<>(latLon, name);
 				}
 			}
 		}

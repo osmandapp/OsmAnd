@@ -38,7 +38,7 @@ public class PurchaseUiDataUtils {
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
 		SubscriptionState state = null;
-		SubscriptionOrigin origin = SubscriptionOrigin.ANDROID;
+		SubscriptionOrigin origin = purchaseHelper.getSubscriptionOriginBySku(sku);
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
 		if (purchases.isOsmAndProSubscription(purchase)) {

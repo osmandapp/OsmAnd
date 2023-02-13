@@ -2812,4 +2812,7 @@
     <string name="rendering_value_black_name">Черна</string>
     <string name="rendering_value_white_name">Бяла</string>
     <string name="rendering_value_thick_name">Дебела</string>
+    <string name="ant_missing_dependency">Липсваща зависимост</string>
+    <string name="ant_read_data">Прочетени данни</string>
+    <string name="map_widget_target_distance">Разстояние от камерата до целта</string>
 </resources>

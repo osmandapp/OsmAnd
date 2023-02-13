@@ -99,13 +99,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			List<Recording> objects =  recs.getAllObjects();
 			int objectsCount = objects.size() - (contextMenuLayer.isInChangeMarkerPositionMode()
 					&& contextMenuLayer.getMoveableObject() instanceof Recording ? 1 : 0);
-			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPointsCount()) {
+			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPoints31().size()) {
 				clearAudioVideoNotes();
 			}
 			if (audioNotesTileProvider == null) {
 				audioNotesTileProvider = new AudioNotesTileProvider(ctx, getPointsOrder(), view.getDensity());
 			}
-			if (objectsCount > 0 && audioNotesTileProvider.getPointsCount() == 0) {
+			if (objectsCount > 0 && audioNotesTileProvider.getPoints31().isEmpty()) {
 				float textScale = getTextScale();
 				for (Recording o : objects) {
 					if (o != contextMenuLayer.getMoveableObject()) {
@@ -209,11 +209,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof Recording;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -224,7 +219,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= startZoom) {
 			getRecordingsFromPoint(point, tileBox, objects);
 		}

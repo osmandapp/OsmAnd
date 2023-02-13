@@ -4618,4 +4618,24 @@ POIの更新は利用できません</string>
     <string name="cloud_conflict">競合</string>
     <string name="cloud_recent_changes">変更</string>
     <string name="cloud_all_changes_uploaded">すべての変更点がアップロードされました</string>
+    <string name="local_changes">ローカルでの変更</string>
+    <string name="mtb_scale">MTBスケール</string>
+    <string name="skip_download">ダウンロードをスキップ</string>
+    <string name="set_up_backup">バックアップの設定</string>
+    <string name="deleted_file">削除されたファイル</string>
+    <string name="shared_string_uploaded">アップロード済み</string>
+    <string name="new_file">新規ファイル</string>
+    <string name="modified_file">変更されたファイル</string>
+    <string name="share_link">共有リンク</string>
+    <string name="y_axis">Y軸</string>
+    <string name="shared_string_cloud">クラウド</string>
+    <string name="share_as_file">ファイルとして共有</string>
+    <string name="value_downloaded_of_mb">ダウンロード中 %1$.1f/%2$.1f MB</string>
+    <string name="si_nm_mt">海里/メートル</string>
+    <string name="determine_location">あなたの居場所を特定できるようにします</string>
+    <string name="sync_now">今すぐ同期</string>
+    <string name="si_nm_ft">海里/フィート</string>
+    <string name="weight_limit_error">最小値は\"%1$s\" トンです。車両重量が最小値未満の場合は、プロファイル\"%2$s\"を使用してください。</string>
+    <string name="x_axis">X軸</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">風速等高線</string>
 </resources>

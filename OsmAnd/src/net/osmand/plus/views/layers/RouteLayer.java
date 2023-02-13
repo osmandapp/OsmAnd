@@ -779,7 +779,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (excludeUntouchableObjects) {
+			return;
+		}
+
 		List<TransportStop> routeTransportStops = getRouteTransportStops();
 		if (!Algorithms.isEmpty(routeTransportStops)) {
 			getFromPoint(tileBox, point, res, routeTransportStops);
@@ -811,11 +816,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isPreviewRouteLineVisible();
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
-		return false;
 	}
 
 	@Override

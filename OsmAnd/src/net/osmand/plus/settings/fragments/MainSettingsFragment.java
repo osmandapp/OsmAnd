@@ -200,7 +200,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	public static String getLastBackupTimeDescription(OsmandApplication app, String def) {
 		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, def);
+		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, def, false);
 	}
 
 	private void profileManagementPref() {

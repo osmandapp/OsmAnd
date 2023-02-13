@@ -1114,7 +1114,7 @@
     <string name="trace_rendering">Información sobre el rendimiento</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de la visualización y la navegación.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-    <string name="internet_connection_required_for_online_route">La navegación en línea, no funciona sin conexión a Internet.</string>
+    <string name="internet_connection_required_for_online_route">La navegación en línea no funciona sin conexión a Internet.</string>
     <string name="tts_language_not_supported_title">Idioma no admitido</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -1154,7 +1154,7 @@
     <string name="preferred_locale_descr">Idioma de la aplicación (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de distancia o longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
@@ -3707,7 +3707,7 @@
     <string name="next_segment">Siguiente segmento</string>
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
-    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
+    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que añadir el segmento nuevo.</string>
     <string name="street_level_imagery">Imágenes a nivel de calle</string>
     <string name="plan_route_exit_dialog_descr">¿Descartar todos los cambios en la ruta planificada\?</string>
     <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
@@ -4281,7 +4281,7 @@
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
-    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
@@ -4706,7 +4706,7 @@
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
-    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
+    <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
@@ -4763,7 +4763,7 @@
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
-    <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
@@ -4971,9 +4971,9 @@
     <string name="shared_string_time_left">Tiempo restante</string>
     <string name="map_widget_group_sunrise_sunset_desc">Muestran información sobre la próxima salida y puesta del sol.</string>
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de la línea</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
-    <string name="storage_migration_fragment_close_descr">La copia se realiza para %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="quick_action_precipitation_layer">Un botón que alterna la capa de precipitación en el mapa.</string>
     <string name="quick_action_cloud_layer">Un botón que alterna la capa de nubes en el mapa.</string>
     <string name="temperature_layer">Capa de temperatura</string>
@@ -5024,11 +5024,11 @@
     <string name="cloud_recent_changes">Cambios</string>
     <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
-    <string name="cloud_no_conflicts">Sin conflictos</string>
+    <string name="cloud_no_conflicts">Sin conflictos.</string>
     <string name="download_cloud_version">Descargar versión en la nube</string>
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="last_sync">Última sincronización</string>
-    <string name="import_export">Importar/Exportar</string>
+    <string name="import_export">Importar/exportar</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="changes">Cambios %1$s</string>
     <string name="cloud_sync_progress">Sincronizar... %1$s</string>
@@ -5036,7 +5036,7 @@
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios hechos en este dispositivo están sincronizados con OsmAnd Cloud.</string>
     <string name="upload_change">Subir cambio</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
-    <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elige un formato de audio. El formato de archivo del audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
@@ -5047,4 +5047,12 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="sound_beep_minimal">Pitido: mínimo</string>
+    <string name="sound_beep_simple">Pitido: simple</string>
+    <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
+    <string name="sound_beep_complex">Pitido: complejo</string>
+    <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
+    <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
 </resources>

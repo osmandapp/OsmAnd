@@ -82,6 +82,11 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return new QListPointI();
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -162,16 +167,6 @@ public class TransportStopsTileProvider extends interface_MapTiledCollectionProv
 			}
 		}
 		return res;
-	}
-
-	@Override
-	public int getPointsCount() {
-		return 0;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		return new PointI(0, 0);
 	}
 
 	@Override

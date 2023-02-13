@@ -32,6 +32,7 @@ import java.util.List;
 
 public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 
+	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
 
 	private final int baseOrder;
@@ -95,6 +96,11 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return points31;
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -125,17 +131,6 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public double getScale() {
 		return 1.0d;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-		return data != null ? data.point : new PointI(0, 0);
-	}
-
-	@Override
-	public int getPointsCount() {
-		return mapLayerDataList.size();
 	}
 
 	@Override
@@ -229,6 +224,11 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
+
+		LatLon latLon = mapPoint.getLocation();
+		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
+		points31.add(new PointI(x31, y31));
 		mapLayerDataList.add(new MapLayerData(mapPoint, image, isStale, caption));
 	}
 
@@ -242,19 +242,14 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	private static class MapLayerData {
-		PointI point;
 		boolean isStale;
 		int color;
 		String caption;
 		Bitmap image;
 
 		MapLayerData(@NonNull AidlMapPointWrapper mapPoint, @NonNull Bitmap image, boolean isStale, String caption) {
-			LatLon latLon = mapPoint.getLocation();
-			int x = MapUtils.get31TileNumberX(latLon.getLongitude());
-			int y = MapUtils.get31TileNumberY(latLon.getLatitude());
-			point = new PointI(x, y);
 			this.isStale = isStale;
-			color = mapPoint.getColor();
+			this.color = mapPoint.getColor();
 			this.caption = caption;
 			this.image = image;
 		}

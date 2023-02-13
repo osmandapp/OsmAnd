@@ -51,6 +51,8 @@ public class RendererRegistry {
 	public static final String DESERT_RENDER = "Desert";
 	public static final String SNOWMOBILE_RENDER = "Snowmobile";
 	public static final String WEATHER_RENDER = "Weather";
+	public static final String CONTOURLINES_RENDER = "Contour lines";
+	public static final String DEPTHCONTOURLINES_RENDER = "Depth contour lines";
 
 	private final OsmandApplication app;
 
@@ -80,6 +82,8 @@ public class RendererRegistry {
 		internalRenderers.put(DESERT_RENDER, "desert" + RENDERER_INDEX_EXT);
 		internalRenderers.put(SNOWMOBILE_RENDER, "snowmobile" + RENDERER_INDEX_EXT);
 		internalRenderers.put(WEATHER_RENDER, "weather" + ADDON_RENDERER_INDEX_EXT);
+		internalRenderers.put(CONTOURLINES_RENDER, "contourlines" + ADDON_RENDERER_INDEX_EXT);
+		internalRenderers.put(DEPTHCONTOURLINES_RENDER, "depthcontourlines" + ADDON_RENDERER_INDEX_EXT);
 	}
 
 	public RenderingRulesStorage defaultRender() {

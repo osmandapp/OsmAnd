@@ -8,24 +8,11 @@
       android:fillColor="#ffffff"/>
   <path
       android:pathData="M5,2H12V4L7.5,9H12V11H5V9L9.5,4H5V2Z"
-      android:fillColor="#ffffff"
-      android:fillType="evenOdd"/>
-  <path
-      android:pathData="M9.5,13H7.5L4,22H6L6.7692,20H10.2308L11,22H13L9.5,13ZM9.4615,18L8.5,15.5L7.5385,18H9.4615Z"
-      android:strokeAlpha="0.5"
-      android:fillColor="#ffffff"
-      android:fillType="evenOdd"
-      android:fillAlpha="0.5"/>
-  <path
-      android:pathData="M20,16L17,20L14,16H16V4H18V16H20Z"
-      android:fillColor="#ffffff"/>
-  <path
-      android:pathData="M5,2H12V4L7.5,9H12V11H5V9L9.5,4H5V2Z"
       android:fillColor="#ffffff"/>
   <path
       android:pathData="M9.5,13H7.5L4,22H6L6.7692,20H10.2308L11,22H13L9.5,13ZM9.4615,18L8.5,15.5L7.5385,18H9.4615Z"
-      android:strokeAlpha="0.5"
+      android:strokeAlpha="0.6"
       android:fillColor="#ffffff"
       android:fillType="evenOdd"
-      android:fillAlpha="0.5"/>
+      android:fillAlpha="0.6"/>
 </vector>
