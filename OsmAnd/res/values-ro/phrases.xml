@@ -156,7 +156,7 @@
     <string name="poi_osmwiki">Wikipedia</string>
     <string name="poi_military">Militară</string>
     <string name="poi_seamark">Nautic</string>
-    <string name="poi_natural">Natural</string>
+    <string name="poi_natural">Naturală</string>
     <string name="poi_finance">Finanțe</string>
     <string name="poi_craft">Artizanat</string>
     <string name="poi_service">Servicii</string>
@@ -166,7 +166,7 @@
     <string name="poi_entertainment">Timp liber</string>
     <string name="poi_internet_access">Acces la internet</string>
     <string name="poi_accomodation">Cazare</string>
-    <string name="poi_sightseeing">Vizitarea obiectivelor turistice</string>
+    <string name="poi_sightseeing">Obiective turistice</string>
     <string name="poi_tourism">Turism</string>
     <string name="poi_sport">Sport</string>
     <string name="poi_office">Birou</string>
@@ -189,7 +189,7 @@
     <string name="poi_air_transport">Transport aerian</string>
     <string name="poi_public_transport">Transportul public</string>
     <string name="poi_personal_transport">Transport personal</string>
-    <string name="poi_filling_station">Stație de umplere</string>
+    <string name="poi_filling_station">Stație de alimentare</string>
     <string name="poi_road_obstacle">Obstacol rutier</string>
     <string name="poi_transportation">Transport</string>
     <string name="poi_emergency_infrastructure">Infrastructura de urgență</string>
@@ -444,7 +444,7 @@
     <string name="poi_dentist">Stomatolog</string>
     <string name="poi_first_aid">Primul ajutor</string>
     <string name="poi_clinic">Clinică</string>
-    <string name="poi_doctors">Doctori</string>
+    <string name="poi_doctors">Cabinet</string>
     <string name="poi_hospital">Spital</string>
     <string name="poi_pharmacy">Farmacie</string>
     <string name="poi_place_farm">Fermă</string>
@@ -683,7 +683,7 @@
     <string name="poi_wreck">Naufragiu</string>
     <string name="poi_rune_stone">Piatră de rune</string>
     <string name="poi_historic_ruins">Ruine istorice</string>
-    <string name="poi_fountain">Fântâna</string>
+    <string name="poi_fountain">Fântânală</string>
     <string name="poi_fort">Fortul</string>
     <string name="poi_city_gate">Poarta orașului</string>
     <string name="poi_castle">Castel</string>
@@ -752,7 +752,7 @@
     <string name="poi_public_transport_station">Stație de transport public</string>
     <string name="poi_tram_stop">Stație de tramvai</string>
     <string name="poi_public_transport_platform_tram">Stație de tramvai</string>
-    <string name="poi_public_transport_stop_position">Poziția stației de transport public</string>
+    <string name="poi_public_transport_stop_position">Punctul de oprire a stației de transport public</string>
     <string name="poi_bus_stop">Stație de autobuz</string>
     <string name="poi_public_transport_platform_trolleybus">Stație de troleibuz</string>
     <string name="poi_public_transport_platform_bus">Stație de autobuz</string>
@@ -802,7 +802,7 @@
     <string name="poi_vehicle_inspection">Inspecția vehiculului</string>
     <string name="poi_service_tyres">Anvelope</string>
     <string name="poi_car_repair">Reparații auto</string>
-    <string name="poi_traffic_signals">Lumină de stop</string>
+    <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_traffic_calming_island">Insula de trafic</string>
     <string name="poi_traffic_calming_choker">Guler</string>
     <string name="poi_traffic_calming_table">Tabel de viteză</string>
@@ -1118,7 +1118,7 @@
     <string name="poi_start_date">Data de începere</string>
     <string name="poi_crossing_unmarked">Nemarcat</string>
     <string name="poi_crossing_uncontrolled">Necontrolat</string>
-    <string name="poi_crossing_traffic_signals">Cu lumini de stop</string>
+    <string name="poi_crossing_traffic_signals">Cu semaforizare</string>
     <string name="poi_seasonal_winter">Iarna</string>
     <string name="poi_seasonal_autumn">Toamna</string>
     <string name="poi_seasonal_summer">Vara</string>
@@ -1406,11 +1406,11 @@
     <string name="poi_cave_entrance">Intrarea în peșteră</string>
     <string name="poi_bitcoin_yes">Plata Bitcoin</string>
     <string name="poi_accountant">Contabil</string>
-    <string name="poi_bureau_de_change">Biroul de schimb valutar</string>
+    <string name="poi_bureau_de_change">Casă de schimb valutar</string>
     <string name="poi_pawnbroker">Casă de amanet</string>
     <string name="poi_money_lender">Finanțator de bani</string>
     <string name="poi_payment_terminal">Terminal de plată</string>
-    <string name="poi_atm">BANCOMAT</string>
+    <string name="poi_atm">Bancomat</string>
     <string name="poi_bank">Bancă</string>
     <string name="poi_internet_cafe">Cafenea cu internet</string>
     <string name="poi_crematorium">Crematoriu</string>
@@ -2596,7 +2596,7 @@
     <string name="poi_castle_type_fortress">Tip castel: fortăreață</string>
     <string name="poi_castle_type_defensive">Tip castel: defensiv</string>
     <string name="poi_castle_type_stately">Tip de castel: impunător</string>
-    <string name="poi_historic_manor">Conacul istoric</string>
+    <string name="poi_historic_manor">Conac istoric</string>
     <string name="poi_shoes_orthopedic">Ortopedie</string>
     <string name="poi_shoes_men">Bărbați</string>
     <string name="poi_generator_output_cold_water_yes">Ieșire: apă rece</string>
@@ -3740,7 +3740,7 @@
     <string name="poi_operator_type_private">Tipul de operator: privat</string>
     <string name="poi_operator_type_public">Tip operator: public</string>
     <string name="poi_windsock">Paravânt</string>
-    <string name="poi_refugee_site">Loc de refugiați</string>
+    <string name="poi_refugee_site">Centru de tranzit pentru refugiați</string>
     <string name="poi_trolley_bay">Cala pentru cărucioare</string>
     <string name="poi_planetarium">Planetariu</string>
     <string name="poi_service_vehicle_rental_yes">Închiriere de mașini</string>

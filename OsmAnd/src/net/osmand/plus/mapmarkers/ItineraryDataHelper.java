@@ -214,7 +214,7 @@ public class ItineraryDataHelper {
 	}
 
 	private GPXFile loadGPXFile(File file, List<ItineraryGroupInfo> groupInfos) {
-		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos));
+		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos), false);
 	}
 
 	public GPXExtensionsReader getGPXExtensionsReader(List<ItineraryGroupInfo> groupInfos) {

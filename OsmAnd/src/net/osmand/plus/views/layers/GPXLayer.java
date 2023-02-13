@@ -42,7 +42,6 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.SplitLabelList;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.Utilities;
@@ -943,7 +942,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			this.pointFileMap = pointFileMap;
 
-			if (pointsTileProvider.getPointsCount() > 0) {
+			if (!pointsTileProvider.getPoints31().isEmpty()) {
 				pointsTileProvider.drawSymbols(mapRenderer);
 			}
 		} else {
@@ -1109,16 +1108,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
-		QuadRect bBox = selectedGpxFile.getBBoxToDisplay();
-		boolean visible = false;
-		if (hasMapRenderer) {
-			AreaI bBoxArea = new AreaI(MapUtils.get31TileNumberY(bBox.top), MapUtils.get31TileNumberX(bBox.left),
-				MapUtils.get31TileNumberY(bBox.bottom), MapUtils.get31TileNumberX(bBox.right));
-			visible = getMapRenderer().isAreaVisible(bBoxArea)
-				&& getMapRenderer().isPathVisible(selectedGpxFile.getPath31ToDisplay());
-		} else {
-			visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), bBox);
-		}
+		
+		boolean visible = isGpxFileVisible(selectedGpxFile, tileBox);
 		if (!gpxFile.hasTrkPt() && coloringType.isGradient() || !visible) {
 			Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
 			if (renderedSegments != null) {
@@ -1378,37 +1369,39 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		int r = getScaledTouchRadius(app, tb.getDefaultRadiusPoi());
 		int mx = (int) point.x;
 		int my = (int) point.y;
-		List<SelectedGpxFile> visibleGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
-		for (SelectedGpxFile selectedGpxFile : visibleGpxFiles) {
-			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
-			if (points != null) {
+		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+			if (!isGpxFileVisible(selectedGpxFile, tb)) {
+				continue;
+			}
+			
+			Pair<WptPt, WptPt> line = findSegmentLineNearPoint(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
+			if (line != null) {
 				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, mx, my);
 				if (latLon != null) {
-					res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
+					res.add(createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLon,
 							showTrackPointMenu));
 				}
 			}
 		}
 	}
 
-	private Pair<WptPt, WptPt> findPointsNearSegments(List<TrkSegment> segments, RotatedTileBox tileBox,
+	@Nullable
+	private Pair<WptPt, WptPt> findSegmentLineNearPoint(List<TrkSegment> segments, RotatedTileBox tileBox,
 	                                                  int radius, int x, int y) {
 		for (TrkSegment segment : segments) {
-			QuadRect trackBounds = GPXUtilities.calculateBounds(segment.points);
-			if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) {
-				Pair<WptPt, WptPt> points = findPointsNearSegment(getMapRenderer(), tileBox, segment.points, radius, x, y);
-				if (points != null) {
-					return points;
-				}
+			Pair<WptPt, WptPt> points = findLineNearPoint(getMapRenderer(), tileBox, segment.points, radius, x, y);
+			if (points != null) {
+				return points;
 			}
 		}
 		return null;
 	}
 
 	@Nullable
-	public static Pair<WptPt, WptPt> findPointsNearSegment(@Nullable MapRendererView mapRenderer,
-	                                                       @NonNull RotatedTileBox tb, List<WptPt> points,
-	                                                       int r, int mx, int my) {
+	public static Pair<WptPt, WptPt> findLineNearPoint(@Nullable MapRendererView mapRenderer,
+	                                                   @NonNull RotatedTileBox tb, List<WptPt> points,
+	                                                   int r, int mx, int my) {
 		if (Algorithms.isEmpty(points)) {
 			return null;
 		}
@@ -1584,6 +1577,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			resetSymbolProviders(segment);
 		}
 	}
+	
+	private boolean isGpxFileVisible(@NonNull SelectedGpxFile selectedGpxFile, @NonNull RotatedTileBox tileBox) {
+		MapRendererView mapRenderer = getMapRenderer();
+		QuadRect gpxFileBounds = selectedGpxFile.getBoundsToDisplay();
+		if (mapRenderer != null) {
+			int left31 = MapUtils.get31TileNumberX(gpxFileBounds.left);
+			int top31 = MapUtils.get31TileNumberY(gpxFileBounds.top);
+			int bottom31 = MapUtils.get31TileNumberY(gpxFileBounds.bottom);
+			int right31 = MapUtils.get31TileNumberX(gpxFileBounds.right);
+			AreaI gpxFileBounds31 = new AreaI(top31, left31, bottom31, right31);
+
+			boolean visible = mapRenderer.isAreaVisible(gpxFileBounds31);
+			visible = visible && mapRenderer.isPathVisible(selectedGpxFile.getPath31ToDisplay());
+			return visible;
+		} else {
+			return QuadRect.trivialOverlap(tileBox.getLatLonBounds(), gpxFileBounds);
+		}
+	}
 
 	@Override
 	public boolean disableSingleTap() {
@@ -1604,21 +1615,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof WptPt || o instanceof SelectedGpxFile;
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object object, boolean unknownLocation) {
 		return false;
 	}
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation) {
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
-			getTracksFromPoint(tileBox, point, res, false);
+			if (!excludeUntouchableObjects) {
+				getTracksFromPoint(tileBox, point, res, false);
+			}
 		}
 	}
 

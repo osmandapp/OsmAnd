@@ -650,17 +650,20 @@ public class MapDataMenuController extends MenuController {
 
 		@NonNull
 		private File getFileToRestore(LocalIndexInfo i) {
+			String fileName = i.getFileName();
 			if (i.isBackupedData()) {
 				File parent = new File(i.getPathToData()).getParentFile();
 				if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
-					if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+					if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 						parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 					} else {
 						parent = app.getAppPath(IndexConstants.MAPS_PATH);
 					}
 				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-					if (i.getFileName().endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					if (fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
 						parent = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+					} else if (fileName.endsWith(IndexConstants.TIF_EXT)) {
+						parent = app.getAppPath(IndexConstants.GEOTIFF_DIR);
 					} else {
 						parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 					}
@@ -677,7 +680,7 @@ public class MapDataMenuController extends MenuController {
 				} else if (i.getOriginalType() == LocalIndexType.DEPTH_DATA) {
 					parent = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 				}
-				return new File(parent, i.getFileName());
+				return new File(parent, fileName);
 			}
 			return new File(i.getPathToData());
 		}

@@ -1,5 +1,6 @@
 package net.osmand.router.network;
 
+
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
@@ -12,7 +13,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
+import static net.osmand.router.network.NetworkRouteContext.getYFromTileId;
+import static net.osmand.router.network.NetworkRouteContext.getXFromTileId;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
@@ -41,7 +43,6 @@ public class NetworkRouteSelector {
 		boolean isCancelled();
 	}
 
-	// TODO - FIX & implement work with routing tags
 	// TEST:
 	// --- https://www.openstreetmap.org/relation/1075081#map=17/48.04245/11.51900 [21] -> ? 3 main not straight (137km, 114km, 80km, ...(12) <5km)
 	// +++  https://www.openstreetmap.org/relation/1200009#map=8/60.592/10.940 [25] -> 3!
@@ -531,18 +532,17 @@ public class NetworkRouteSelector {
 			if (!visitedTiles.add(tileID)) {
 				continue;
 			}
-			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentTile(
-					NetworkRouteContext.getXFromTileId(tileID), NetworkRouteContext.getYFromTileId(tileID),
-					rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
+			int xTile = NetworkRouteContext.getXFromTileId(tileID);
+			int yTile = NetworkRouteContext.getYFromTileId(tileID);
+			Map<RouteKey, List<NetworkRouteSegment>> tiles = rCtx.loadRouteSegmentIntersectingTile(xTile, yTile, rkey, new HashMap<RouteKey, List<NetworkRouteSegment>>());
 			List<NetworkRouteSegment> loaded = tiles.get(rkey);
-//			System.out.println(String.format("Load tile %d: %d segments", tile, sz));
 			// stop exploring if no route key even intersects tile (dont check loaded.size() == 0 special case)
 			if (loaded == null) {
 				continue;
 			}
-			for (NetworkRouteSegment s : loaded) {
-				if (objIds.add(s.getId())) {
-					lst.add(s);
+			for (NetworkRouteSegment loadedSegment : loaded) {
+				if (objIds.add(loadedSegment.getId())) {
+					lst.add(loadedSegment);
 				}
 			}
 			addEnclosedTiles(queue, tileID);

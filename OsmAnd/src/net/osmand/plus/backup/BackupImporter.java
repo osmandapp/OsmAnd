@@ -134,8 +134,8 @@ class BackupImporter {
 				}
 			}
 			if (item != null) {
-				if (!item.shouldReadOnCollecting() || forceReadData) {
-					tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+				if (forceReadData) {
+					tasks.add(new ItemFileImportTask(remoteFile, item, true));
 				} else {
 					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 				}
@@ -285,30 +285,6 @@ class BackupImporter {
 			updateFilesInfo(remoteItemFilesMap, settingsItemList);
 			items.addAll(settingsItemList);
 			operationLog.log("updateFilesInfo");
-
-			if (readItems) {
-				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
-				for (SettingsItem item : settingsItemList) {
-					if (item.shouldReadOnCollecting()) {
-						List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(item, remoteItemFilesMap);
-						for (RemoteFile remoteFile : foundRemoteFiles) {
-							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-							if (reader != null) {
-								remoteFilesForRead.put(remoteFile, reader);
-							}
-						}
-					}
-				}
-				Map<File, RemoteFile> remoteFilesForDownload = new HashMap<>();
-				for (RemoteFile remoteFile : remoteFilesForRead.keySet()) {
-					String fileName = remoteFile.getTypeNamePath();
-					remoteFilesForDownload.put(new File(tempDir, fileName), remoteFile);
-				}
-				if (!remoteFilesForDownload.isEmpty()) {
-					downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
-				}
-				operationLog.log("readItems");
-			}
 			operationLog.finishOperation();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);

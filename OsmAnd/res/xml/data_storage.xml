@@ -36,7 +36,7 @@
 			android:key="nautical_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/nautical_maps" />
-		
+
 		<Preference
 			android:icon="@drawable/ic_world_globe_dark"
 			android:key="live_storage_size"
@@ -89,7 +89,7 @@
 
 	<PreferenceCategory
 		android:key="application_profiles"
-		android:layout="@layout/preference_category_with_descr"
+		android:layout="@layout/preference_category_with_right_text"
 		android:title="@string/change_data_storage_folder" />
 
 </PreferenceScreen>

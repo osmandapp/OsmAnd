@@ -1169,7 +1169,7 @@
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Komunikaty głosowe wstrzymują odtwarzanie muzyki.</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
-    <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
+    <string name="always_center_position_on_map">Pozycjonowanie zawsze na środku</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Położenie</string>
@@ -4060,7 +4060,7 @@
     <string name="announce_when_exceeded">Ogłoś, gdy zostanie przekroczony</string>
     <string name="user_points">Punkty użytkownika</string>
     <string name="output">Wyjście</string>
-    <string name="srtm_unit_format">Wariant jednostkowy poziomic</string>
+    <string name="srtm_unit_format">Wariant jednostek linii konturowych</string>
     <string name="srtm_download_list_help_message">OsmAnd udostępnia dane poziomic w metrach i stopach. Aby zmienić format, należy ponownie pobrać plik.</string>
     <string name="srtm_download_single_help_message">Proszę wybrać wariant. Aby zmienić format, należy ponownie pobrać plik.</string>
     <string name="route_line_use_gradient_coloring">Linia trasy jest kolorowana według nachylenia wzniesień.</string>
@@ -4099,7 +4099,7 @@
     <string name="cloud_email_already_registered">Ten adres e-mail jest już zarejestrowany.</string>
     <string name="resend_verification_code">Wyślij ponownie</string>
     <string name="verification_code_missing">Nie otrzymałem kodu uwierzytelniającego</string>
-    <string name="verification_code_missing_description">Może zająć 10 minut. Użyj przycisku poniżej, jeśli nie znajduje się w folderze ze spamem.</string>
+    <string name="verification_code_missing_description">Może to zająć do 10 minut. Użyj przycisku poniżej, jeśli nie znajduje się w folderze spamu.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” wybiera sposób obliczania tras z dostępnymi silnikami wyznaczania tras offline i online.</string>
     <string name="loading_list_of_routing_services">Wczytywanie listy dostępnych usług routingu</string>
@@ -4484,7 +4484,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Tunele dróg wodnych</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Nie ukrywaj tuneli dróg wodnych</string>
     <string name="turn_arrows">Strzałki skrętu</string>
-    <string name="turn_arrows_descr">Wybierz, czy strzałki skrętu mają być wskazywane na linii trasy.</string>
+    <string name="turn_arrows_descr">Kontroluj widoczność strzałek skrętów na liniach trasy.</string>
     <string name="rendering_attr_seabedDetail_description">Dodatkowe informacje tekstowe o powierzchni dna morskiego, połączone typy powierzchni, kategoria i takson chwastów lub trawy morskiej</string>
     <string name="rendering_value_category_name">Kategoria</string>
     <string name="rendering_value_all_name">Wszystkie</string>
@@ -4668,7 +4668,7 @@
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektryczny</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_name">Silnik pojazdu</string>
+    <string name="routing_attr_motor_type_name">Paliwo zużywane przez silnik</string>
     <string name="co2_mission">Emisja CO2</string>
     <string name="routing_attr_motor_type_description">Wybierz rodzaj paliwa swojego silnika, jest to potrzebne do oszacowania emisji CO2.</string>
     <string name="kg">kg</string>
@@ -4725,7 +4725,7 @@
     <string name="widget_with_dot">Widżet.</string>
     <string name="compass_visible_if_map_rotated_desc">Ukryty, gdy Północ jest na górze</string>
     <string name="compass_always_visible">Zawsze widoczny</string>
-    <string name="compass_click_desc">Stuknij w kompas, aby przełączyć tryb orientacji mapy.</string>
+    <string name="compass_click_desc">Wskazówka: Stuknij widżet kompasu, aby przełączyć tryb orientacji mapy.</string>
     <string name="marker_1st">Pierwszy znacznik mapy</string>
     <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s zostanie zliczona i wpłynie na średnią prędkość.</string>
     <string name="auto_backup_title">Automatyczne tworzenie kopii zapasowych</string>
@@ -4846,7 +4846,7 @@
     <string name="rendering_attr_depthContourColorScheme_name">Schemat kolorów linii</string>
     <string name="switch_mode_by_tapping_on_widget">Przełącz tryb, stukając w widżet.</string>
     <string name="map_widget_sunset_desc">Pokazuje czas następnego zachodu słońca lub czas pozostały do zachodu słońca.</string>
-    <string name="storage_migration_fragment_close_descr">Kopiowanie jest wykonywane dla %1$s%%. Jeśli przerwiesz teraz, aplikacja może nie działać poprawnie.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiowanie jest wykonane tylko w %1$s%%. Jeśli zatrzymasz teraz, aplikacja może nie działać poprawnie.</string>
     <string name="depth_contour_lines">Linie konturowe głębokości</string>
     <string name="turn_on_nautical_depth_description">Włącz, aby wyświetlić na mapie dane o głębokości nautycznej.</string>
     <string name="weather_plugin_description">Zapewnia
@@ -4949,7 +4949,7 @@
 \n
 \n - Widżet \"Znaczniki mapy\": dodana opcja zmiany zachowania kliknięcia
 \n
-\n - Naprawiono opcję \"Wyświetl pozycję\"
+\n - Naprawiono opcję \"Pozycjonowanie\"
 \n
 \n - GPX: dodano obsługę znaczników \"link\", \"cmt\", \"desc\" oraz wszelkich niestandardowych rozszerzeń
 \n
@@ -4970,7 +4970,7 @@
     <string name="mtb_scale">Skala MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="rendering_attr_showMtbScale_name">Pokaż skalę MTB</string>
-    <string name="rendering_attr_showMtbScale_description">Pokaż szlaki według skali MTB.</string>
+    <string name="rendering_attr_showMtbScale_description">Wyświetl szlaki według skali MTB.</string>
     <string name="mtb_segment_classification">Klasyfikacja segmentów</string>
     <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
     <string name="av_audio_format_bottom_sheet_descr">Wybierz format wyjścia dźwięku. Typ pliku dźwięku to 3GPP (.3gp).</string>
@@ -4990,10 +4990,10 @@
     <string name="deleted_file">Plik usunięty</string>
     <string name="local_changes_will_be_dismissed">Lokalne zmiany zostaną odrzucone</string>
     <string name="cloud_recent_changes">Zmiany</string>
-    <string name="cloud_no_conflicts">Nie ma żadnych konfliktów</string>
+    <string name="cloud_no_conflicts">Nie ma żadnych konfliktów.</string>
     <string name="shared_string_open">Otwórz</string>
     <string name="open_weather_action">Otwarta pogoda</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie porywów wiatru</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izolinie prędkości wiatru</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinie chmur</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie opadów</string>
     <string name="si_nm_ft">Mile morskie/stopy</string>
@@ -5011,7 +5011,7 @@
     <string name="shared_string_do_not_exist">Nie istnieje</string>
     <string name="backup_error_failed_to_fetch_remote_items">Nie udało się pobrać listy plików z serwera.</string>
     <string name="last_sync">Ostatnia synchronizacja</string>
-    <string name="import_export">Import/Eksport</string>
+    <string name="import_export">Import/eksport</string>
     <string name="export_to_file">Eksportuj do pliku</string>
     <string name="sync_now">Synchronizuj teraz</string>
     <string name="si_nm_mt">Mile morskie/metry</string>
@@ -5020,7 +5020,20 @@
     <string name="cloud_conflict">Konflikt</string>
     <string name="cloud_all_changes_uploaded_descr">Wszystkie zmiany dokonane na tym urządzeniu są synchronizowane z Chmurą OsmAnd.</string>
     <string name="open_weather_action_description">Umożliwia otwarcie ekranu ze szczegółowymi informacjami o pogodzie.</string>
-    <string name="x_axis">Oś X</string>
+    <string name="x_axis">oś X</string>
     <string name="set_up_backup">Skonfiguruj kopię zapasową</string>
-    <string name="y_axis">Oś Y</string>
+    <string name="y_axis">oś Y</string>
+    <string name="value_downloaded_of_mb">Pobieranie %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Udostępnij link</string>
+    <string name="share_as_file">Udostępnij jako plik</string>
+    <string name="skip_download">Pomiń pobieranie</string>
+    <string name="determine_location">Pozwól określić Twoją lokalizację</string>
+    <string name="weight_limit_error">Minimalna wartość to „%1$s” ton. Użyj profilu „%2$s”, jeśli masa pojazdu jest mniejsza niż wartość minimalna.</string>
+    <string name="sound_beep_complex">Sygnał dźwiękowy: złożony</string>
+    <string name="sound_beep_complex_loud">Sygnał dźwiękowy: złożony głośny</string>
+    <string name="sound_beep_minimal">Sygnał dźwiękowy: minimalny</string>
+    <string name="sound_beep_simple">Sygnał dźwiękowy: prosty</string>
+    <string name="sound_beep_simple_loud">Sygnał dźwiękowy: prosty głośny</string>
+    <string name="last_synchronized">Ostatnia synchronizacja</string>
+    <string name="display_position_descr">Domyślnym ustawieniem jest „Automatyczny”, czyli „Dół” dla orientacji mapy, „Kierunek ruchu” i „Środek” we wszystkich innych przypadkach.</string>
 </resources>

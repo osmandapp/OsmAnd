@@ -153,7 +153,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	@NonNull
 	private QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData) {
 		QListFColorARGB colors = new QListFColorARGB();
-		if (!pathsData.isEmpty()) {
+		if (!pathsData.isEmpty() && !coloringType.isSolidSingleColor()) {
 			int lastColor = 0;
 			for (DrawPathData31 data : pathsData) {
 				int color = 0;

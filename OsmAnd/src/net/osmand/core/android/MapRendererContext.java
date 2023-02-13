@@ -1,6 +1,8 @@
 package net.osmand.core.android;
 
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
@@ -12,6 +14,7 @@ import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
+import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -303,14 +306,20 @@ public class MapRendererContext {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
-			File heightMapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
-			if (!heightMapDir.exists()) {
-				heightMapDir.mkdir();
+			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
+			if (!sqliteCacheDir.exists()) {
+				sqliteCacheDir.mkdir();
+			}
+			File geotiffDir = app.getAppPath(GEOTIFF_DIR);
+			if (!geotiffDir.exists()) {
+				geotiffDir.mkdir();
 			}
 			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
-			heightsCollection.addDirectory(heightMapDir.getAbsolutePath());
+			GeoTiffCollection geotiffCollection = new GeoTiffCollection();
+			geotiffCollection.addDirectory(geotiffDir.getAbsolutePath());
+			geotiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
 			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
-					mapRendererView.getElevationDataTileSize()));
+				geotiffCollection, mapRendererView.getElevationDataTileSize()));
 		}
 	}
 	public void resetHeightmapProvider() {

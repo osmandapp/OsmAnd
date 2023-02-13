@@ -4682,7 +4682,7 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektrický</string>
-    <string name="routing_attr_motor_type_name">Motor vozidla</string>
+    <string name="routing_attr_motor_type_name">Palivo používané motorom</string>
     <string name="routing_attr_motor_type_description">Zvoľte druh paliva v motore, pre výpočet emisií CO2.</string>
     <string name="routing_attr_motor_type_diesel_name">Nafta</string>
     <string name="routing_attr_motor_type_petrol_name">Benzín</string>
@@ -4726,7 +4726,7 @@
     <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
     <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
     <string name="widget_with_dot">Nástroj.</string>
-    <string name="compass_click_desc">Stlačte kompas pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_click_desc">Pomôcka: Stlačte nástroj kompasu pre prepnutie režimu orientácie mapy.</string>
     <string name="compass_desc">Zobrazuje smer k severu.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
@@ -4832,7 +4832,7 @@
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.
 \nŤuknite dvoma prstami na mapu pre zobrazenie vzdialenosti medzi označenými bodmi</string>
-    <string name="display_position">Umiestnenie polohy</string>
+    <string name="display_position">Zobrazenie polohy</string>
     <string name="favorite_delete_group">Odstrániť skupinu</string>
     <string name="download_heightmap_maps">Výšková mapa</string>
     <string name="quick_action_map_center_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Stred mapy.</string>
@@ -4951,11 +4951,11 @@
     <string name="turn_on_nautical_depth_description">Zapnite pre zobrazenie námorných hĺbkových údajov na mape.</string>
     <string name="shared_string_time_left">Zostávajúci čas</string>
     <string name="switch_mode_by_tapping_on_widget">Prepnite režim stlačením nástroja.</string>
-    <string name="storage_migration_fragment_close_descr">Kopírovanie je hotové na %1$s%%. Ak teraz prerušíte, aplikácia nemusí správne pracovať.</string>
+    <string name="storage_migration_fragment_close_descr">Kopírovanie je hotové len na %1$s%%. Ak teraz prerušíte, aplikácia nemusí správne pracovať.</string>
     <string name="precipitation_layer">Vrstva zrážok</string>
     <string name="rendering_attr_showMtbScale_name">Zobraziť náročnosť pre horské bicykle</string>
     <string name="quick_action_wind_layer">Prepínač zobrazenia vrstvy vetra na mape.</string>
-    <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa náročnosti pre horské bicykle.</string>
+    <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa ich náročnosti pre horské bicykle.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Zobraziť náročnosť stúpania pre horské bicykle</string>
     <string name="quick_action_temperature_layer">Prepínač zobrazenia vrstvy teploty na mape.</string>
     <string name="quick_action_precipitation_layer">Prepínač zobrazenia vrstvy zrážok na mape.</string>
@@ -4971,7 +4971,7 @@
     <string name="mtb_imba_full">Medzinárodné združenie pre horské bicyklovanie</string>
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary nárazov vetra</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary rýchlosti vetra</string>
     <string name="release_4_4_pre">• Tu budú texty pre verziu 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
@@ -4979,7 +4979,7 @@
     <string name="open_weather_action">Otvoriť počasie</string>
     <string name="shared_string_expires">Skončí</string>
     <string name="shared_string_purchased_on">Zakúpené dňa</string>
-    <string name="av_audio_format_bottom_sheet_descr">Zvoľte výstupný formát zvuku. Formát súboru pre zvuk je 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Zvoľte formát zvuku. Formát súboru pre zvuk je 3GPP (.3gp).</string>
     <string name="modified_file">Zmenený súbor</string>
     <string name="cloud_version_will_be_removed">Cloudová verzia bude odstránená</string>
     <string name="cloud_all_changes_downloaded">Všetky zmeny stiahnuté</string>
@@ -5009,11 +5009,11 @@
     <string name="cloud_recent_changes">Zmeny</string>
     <string name="cloud_all_changes_uploaded">Všetky zmeny odoslané</string>
     <string name="cloud_all_changes_uploaded_descr">Všetky zmeny na tomto zariadení sú synchronizované s OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Nie sú žiadne konflikty</string>
+    <string name="cloud_no_conflicts">Nie sú žiadne konflikty.</string>
     <string name="download_cloud_version">Stiahnuť verziu z cloudu</string>
     <string name="shared_string_do_not_exist">Neexistuje</string>
     <string name="last_sync">Posledná synchronizácia</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportovať do súboru</string>
     <string name="si_nm_mt">Námorné míle/metre</string>
     <string name="si_nm_ft">Námorné míle/stopy</string>
@@ -5025,4 +5025,12 @@
     <string name="share_as_file">Zdieľať ako súbor</string>
     <string name="skip_download">Preskočiť sťahovanie</string>
     <string name="determine_location">Povoľte nám určiť vašu polohu</string>
+    <string name="last_synchronized">Naposledy synchronizované</string>
+    <string name="sound_beep_complex">Pípnutie: zložité</string>
+    <string name="sound_beep_complex_loud">Pípnutie: zložité hlasné</string>
+    <string name="sound_beep_minimal">Pípnutie: minimálne</string>
+    <string name="display_position_descr">Predvolená hodnota je \'Automaticky\', čo znamená \'Dolu\' pre orientáciu mapy \'V smere pohybu\' a \'V strede\' v ostatných prípadoch.</string>
+    <string name="sound_beep_simple">Pípnutie: jednoduché</string>
+    <string name="sound_beep_simple_loud">Pípnutie: jednoduché hlasné</string>
+    <string name="weight_limit_error">Minimálna hodnota je \"%1$s\" ton. Použite profil \"%2$s\" ak je hmotnosť vozidla nižšia ako toto minimum.</string>
 </resources>

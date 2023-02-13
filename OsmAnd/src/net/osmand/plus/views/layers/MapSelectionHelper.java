@@ -97,8 +97,8 @@ public class MapSelectionHelper {
 
 	private List<String> publicTransportTypes;
 
-	private Map<LatLon, BackgroundType> pressedLatLonFull = new HashMap<>();
-	private Map<LatLon, BackgroundType> pressedLatLonSmall = new HashMap<>();
+	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
+	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
@@ -107,24 +107,29 @@ public class MapSelectionHelper {
 	}
 
 	@NonNull
-	public Map<LatLon, BackgroundType> getPressedLatLonFull() {
-		return pressedLatLonFull;
+	public Map<LatLon, BackgroundType> getTouchedFullMapObjects() {
+		return touchedFullMapObjects;
 	}
 
 	@NonNull
-	public Map<LatLon, BackgroundType> getPressedLatLonSmall() {
-		return pressedLatLonSmall;
+	public Map<LatLon, BackgroundType> getTouchedSmallMapObjects() {
+		return touchedSmallMapObjects;
 	}
 
-	public boolean hasPressedLatLon() {
-		return !pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty();
+	public boolean hasTouchedMapObjects() {
+		return !touchedSmallMapObjects.isEmpty() || !touchedFullMapObjects.isEmpty();
+	}
+
+	public void clearTouchedMapObjects() {
+		touchedFullMapObjects.clear();
+		touchedSmallMapObjects.clear();
 	}
 
 	@NonNull
 	protected MapSelectionResult selectObjectsFromMap(@NonNull PointF point, @NonNull RotatedTileBox tileBox, boolean showUnknownLocation) {
 		LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(view.getMapRenderer(), tileBox, point.x, point.y);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, false, showUnknownLocation);
+		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsFromMap(tileBox, point, showUnknownLocation);
 
 		MapSelectionResult result = new MapSelectionResult(selectedObjects, pointLatLon);
 		if (app.useOpenGlRenderer()) {
@@ -139,45 +144,51 @@ public class MapSelectionHelper {
 	@NonNull
 	protected Map<Object, IContextMenuProvider> selectObjectsFromMap(@NonNull RotatedTileBox tileBox,
 	                                                                 @NonNull PointF point,
-	                                                                 boolean acquireObjLatLon,
 	                                                                 boolean unknownLocation) {
-		Map<LatLon, BackgroundType> pressedLatLonFull = new HashMap<>();
-		Map<LatLon, BackgroundType> pressedLatLonSmall = new HashMap<>();
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
-		List<Object> s = new ArrayList<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
-				s.clear();
+				List<Object> objects = new ArrayList<>();;
 				IContextMenuProvider provider = (IContextMenuProvider) layer;
-				provider.collectObjectsFromPoint(point, tileBox, s, unknownLocation);
-				for (Object o : s) {
+				provider.collectObjectsFromPoint(point, tileBox, objects, unknownLocation, false);
+				for (Object o : objects) {
 					selectedObjects.put(o, provider);
-					if (acquireObjLatLon && provider.isObjectClickable(o)) {
-						LatLon latLon = provider.getObjectLocation(o);
-						BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-						if (o instanceof OpenStreetNote) {
-							backgroundType = BackgroundType.COMMENT;
-						}
-						if (o instanceof FavouritePoint) {
-							backgroundType = ((FavouritePoint) o).getBackgroundType();
-						}
-						if (o instanceof WptPt) {
-							backgroundType = BackgroundType.getByTypeName(((WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
-						}
-						if (layer.isPresentInFullObjects(latLon) && !pressedLatLonFull.containsKey(latLon)) {
-							pressedLatLonFull.put(latLon, backgroundType);
-						} else if (layer.isPresentInSmallObjects(latLon) && !pressedLatLonSmall.containsKey(latLon)) {
-							pressedLatLonSmall.put(latLon, backgroundType);
-						}
+				}
+			}
+		}
+		return selectedObjects;
+	}
+
+	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox, @NonNull PointF point, boolean unknownLocation) {
+		Map<LatLon, BackgroundType> touchedMapObjectsFull = new HashMap<>();
+		Map<LatLon, BackgroundType> touchedMapObjectsSmall = new HashMap<>();
+		for (OsmandMapLayer layer : view.getLayers()) {
+			if (layer instanceof IContextMenuProvider) {
+				IContextMenuProvider provider = (IContextMenuProvider) layer;
+				List<Object> collectedObjects = new ArrayList<>();
+				provider.collectObjectsFromPoint(point, tileBox, collectedObjects, unknownLocation, true);
+				for (Object o : collectedObjects) {
+					LatLon latLon = provider.getObjectLocation(o);
+					BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
+					if (o instanceof OpenStreetNote) {
+						backgroundType = BackgroundType.COMMENT;
+					}
+					if (o instanceof FavouritePoint) {
+						backgroundType = ((FavouritePoint) o).getBackgroundType();
+					}
+					if (o instanceof WptPt) {
+						backgroundType = BackgroundType.getByTypeName(((WptPt) o).getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+					}
+					if (layer.isPresentInFullObjects(latLon) && !touchedMapObjectsFull.containsKey(latLon)) {
+						touchedMapObjectsFull.put(latLon, backgroundType);
+					} else if (layer.isPresentInSmallObjects(latLon) && !touchedMapObjectsSmall.containsKey(latLon)) {
+						touchedMapObjectsSmall.put(latLon, backgroundType);
 					}
 				}
 			}
 		}
-		if (acquireObjLatLon) {
-			this.pressedLatLonFull = pressedLatLonFull;
-			this.pressedLatLonSmall = pressedLatLonSmall;
-		}
-		return selectedObjects;
+		this.touchedFullMapObjects = touchedMapObjectsFull;
+		this.touchedSmallMapObjects = touchedMapObjectsSmall;
 	}
 
 	private void selectObjectsFromNative(@NonNull MapSelectionResult result, @NonNull NativeOsmandLibrary nativeLib,
@@ -316,19 +327,18 @@ public class MapSelectionHelper {
 							boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
 							if (isRoute) {
 								addRoute(result, tileBox, point);
-							} else {
-								IOnPathMapSymbol onPathMapSymbol = null;
-								try {
-									onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-								} catch (Exception ignore) {
-								}
-								if (onPathMapSymbol == null) {
-									amenity = getAmenity(result.objectLatLon, obfMapObject);
-									if (amenity != null) {
-										amenity.setMapIconName(getMapIconName(symbolInfo));
-									} else {
-										addRenderedObject(result, symbolInfo, obfMapObject);
-									}
+							}
+							IOnPathMapSymbol onPathMapSymbol = null;
+							try {
+								onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+							} catch (Exception ignore) {
+							}
+							if (onPathMapSymbol == null) {
+								amenity = getAmenity(result.objectLatLon, obfMapObject);
+								if (amenity != null) {
+									amenity.setMapIconName(getMapIconName(symbolInfo));
+								} else {
+									addRenderedObject(result, symbolInfo, obfMapObject);
 								}
 							}
 						}

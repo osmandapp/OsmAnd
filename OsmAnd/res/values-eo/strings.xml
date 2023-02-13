@@ -5018,4 +5018,8 @@
     <string name="cloud_all_changes_uploaded">Alŝutis ĉiujn ŝanĝojn</string>
     <string name="y_axis">Akso Y</string>
     <string name="x_axis">Akso X</string>
+    <string name="last_synchronized">Antaŭa samtempigo</string>
+    <string name="weight_limit_error">La minimuma valoro estas %1$s Mg. Uzu la profilon “%2$s”, se maso de via veturilo estas malpli ol la minimuma valoro.</string>
+    <string name="share_link">Kunhavigi ligilon</string>
+    <string name="share_as_file">Kunhavigi kiel dosieron</string>
 </resources>

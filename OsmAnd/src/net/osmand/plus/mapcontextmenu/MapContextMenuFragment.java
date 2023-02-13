@@ -690,7 +690,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	                           ContextMenuItemClickListener mainListener,
 	                           ContextMenuItemClickListener additionalListener) {
 		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
-		LayoutInflater inflater = UiUtilities.getInflater(getMyApplication(), nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
 		LinearLayout item = view.findViewById(R.id.item);
 		ImageView icon = view.findViewById(R.id.icon);
@@ -699,12 +699,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		title.setText(contextMenuItem.getTitle());
 		String id = contextMenuItem.getId();
 		if (MAP_CONTEXT_MENU_MORE_ID.equals(id)) {
-			item.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					menu.showAdditionalActionsFragment(additionalAdapter, additionalListener);
-				}
-			});
+			item.setOnClickListener(v -> menu.showAdditionalActionsFragment(additionalAdapter, additionalListener));
 		} else {
 			item.setOnClickListener(v -> mainListener.onItemClick(v, position));
 		}
