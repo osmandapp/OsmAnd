@@ -5042,5 +5042,4 @@
     <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
     <string name="sound_beep_complex">Signalton: Komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
-    <string name="display_position_descr">Die Standardeinstellung ist \'Automatisch\', d. h. \'Unten\' für die Kartenausrichtung, \'Bewegungsrichtung\' und \'Mitte\' in allen anderen Fällen.</string>
 </resources>

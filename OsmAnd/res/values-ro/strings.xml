@@ -5043,6 +5043,5 @@
     <string name="sound_beep_minimal">Bip: minim</string>
     <string name="sound_beep_simple">Bip: simplu</string>
     <string name="sound_beep_simple_loud">Bip: simplu zgomotos</string>
-    <string name="display_position_descr">Setarea prestabilită este \"Automată\", adică \"Jos\" pentru orientarea hârții \"Direcția de mișcare\" și \"Centru\" pentru restul cazurilor.</string>
     <string name="sound_beep_complex">Bip: complex</string>
 </resources>

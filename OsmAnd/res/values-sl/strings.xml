@@ -5027,5 +5027,4 @@
     <string name="av_audio_format_bottom_sheet_descr">Izberi format zvoka. Format vsebnika vrste datoteke za zvok je 3GPP (.3gp).</string>
     <string name="checking_progress">Preverjanje …</string>
     <string name="last_synchronized">Zadnja sinhronizacija</string>
-    <string name="display_position_descr">Privzeto je »Samodejno«, kar pomeni »Spodaj« za orientacijo zemljevida »Smer gibanja« in »Na sredini« v vseh drugih primerih.</string>
 </resources>

@@ -5026,5 +5026,4 @@
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
     <string name="last_synchronized">Ultima sincronizzazione</string>
-    <string name="display_position_descr">L\'impostazione predefinita è \'Automatico\', ovvero \'In basso\' per l\'orientamento della mappa \'Direzione movimento\' e \'Centro\' in tutti gli altri casi.</string>
 </resources>

@@ -5106,5 +5106,4 @@
     <string name="sound_beep_simple">صفير: عادي</string>
     <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
     <string name="last_synchronized">آخر مزامنة</string>
-    <string name="display_position_descr">الافتراضي هو \"تلقائي\" وهو \"الأسفل\" بالنسبة لاتجاه الخريطة \"اتجاه الحركة\" و \"المركز\" فيما يخص جميع الحالات الأخرى.</string>
 </resources>

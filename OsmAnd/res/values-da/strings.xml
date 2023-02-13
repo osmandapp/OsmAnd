@@ -5043,5 +5043,4 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_descr">Standardindstillingen er \'Automatisk\', hvilket er \'Nederst\' for kortorientering \'Bevægelsesretning\' og \'Centrum\' i alle andre tilfælde.</string>
 </resources>
