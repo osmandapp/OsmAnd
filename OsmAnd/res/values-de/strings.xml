@@ -5042,4 +5042,5 @@
     <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
     <string name="sound_beep_complex">Signalton: Komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
+    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung, unten für Bewegungsrichtung, mittig für alles andere.</string>
 </resources>

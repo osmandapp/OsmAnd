@@ -980,7 +980,7 @@
     <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
     <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
-    <string name="rotate_map_compass_opt">حسب البوصلة</string>
+    <string name="rotate_map_compass_opt">اتجاه البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
     <string name="transport_Stop">موقف</string>
@@ -1037,7 +1037,7 @@
     <string name="settings_privacy">الخصوصية</string>
     <string name="shared_string_gpx_points">النقاط</string>
     <string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
-    <string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
+    <string name="avoid_roads_msg">شغل مسار بديل بتحديد طرق متجنبة</string>
     <string name="rendering_attr_roadStyle_name">نمط الطريق</string>
     <string name="rendering_value__name">الافتراضي</string>
     <string name="rendering_value_default_name">الافتراضي</string>
@@ -1581,7 +1581,7 @@
     <string name="lang_tl">التاغالوغية</string>
     <string name="lang_nv">نافاجو</string>
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
-    <string name="coords_format">نمط الإحداثيات</string>
+    <string name="coords_format">نمط الإحداثية</string>
     <string name="night">ليلاً</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
@@ -5106,4 +5106,5 @@
     <string name="sound_beep_simple">صفير: عادي</string>
     <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
     <string name="last_synchronized">آخر مزامنة</string>
+    <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة ، الأسفل لاتجاه الحركة ، المركزللجميع.</string>
 </resources>

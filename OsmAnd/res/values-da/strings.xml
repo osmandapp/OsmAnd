@@ -5043,4 +5043,5 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
+    <string name="display_position_automatic_descr">Afhænger af kortets orientering, nederst for bevægelsesretning, centrum for alle andre.</string>
 </resources>

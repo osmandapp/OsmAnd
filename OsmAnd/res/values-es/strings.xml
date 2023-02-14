@@ -5041,4 +5041,5 @@
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa, la parte inferior para la dirección del movimiento, el centro para todos lo demás.</string>
 </resources>
