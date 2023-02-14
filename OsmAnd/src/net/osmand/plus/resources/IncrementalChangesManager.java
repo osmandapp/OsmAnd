@@ -50,7 +50,7 @@ public class IncrementalChangesManager {
 			for (File f : files) {
 				if (!f.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT) &&
 						!SrtmDownloadItem.isSrtmFile(f.getName())) {
-					existingFiles.add(Algorithms.getFileNameWithoutExtension(f));
+					existingFiles.add(Algorithms.getFileNameWithoutExtensionAndRoadSuffix(f.getName()));
 				}
 			}
 			for (File f : lf) {
@@ -70,7 +70,7 @@ public class IncrementalChangesManager {
 	}
 
 	public synchronized void indexMainMap(File f, long dateCreated) {
-		String nm = Algorithms.getFileNameWithoutExtension(f).toLowerCase();
+		String nm = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(f.getName()).toLowerCase();
 		RegionUpdateFiles regionUpdateFiles = regions.get(nm);
 		if (regionUpdateFiles == null) {
 			regionUpdateFiles = new RegionUpdateFiles(nm);
@@ -117,7 +117,7 @@ public class IncrementalChangesManager {
 	}
 
 	public synchronized boolean index(File f, long dateCreated, BinaryMapIndexReader mapReader) {
-		String index = Algorithms.getFileNameWithoutExtension(f).toLowerCase();
+		String index = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(f.getName()).toLowerCase();
 		if (index.length() <= 9 || index.charAt(index.length() - 9) != '_') {
 			return false;
 		}
@@ -310,9 +310,10 @@ public class IncrementalChangesManager {
 		}
 	}
 
-	private List<IncrementalUpdate> getIncrementalUpdates(String file, long timestamp) throws IOException,
+	private List<IncrementalUpdate> getIncrementalUpdates(String fileName, long timestamp) throws IOException,
 			XmlPullParserException {
-		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(file);
+		fileName = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(fileName);
+		String url = URL + "?aosmc=true&timestamp=" + timestamp + "&file=" + URLEncoder.encode(fileName);
 
 		HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 		conn.setUseCaches(false);

@@ -156,7 +156,7 @@
     <string name="poi_osmwiki">Wikipedia</string>
     <string name="poi_military">Militară</string>
     <string name="poi_seamark">Nautic</string>
-    <string name="poi_natural">Natural</string>
+    <string name="poi_natural">Naturală</string>
     <string name="poi_finance">Finanțe</string>
     <string name="poi_craft">Artizanat</string>
     <string name="poi_service">Servicii</string>
@@ -444,7 +444,7 @@
     <string name="poi_dentist">Stomatolog</string>
     <string name="poi_first_aid">Primul ajutor</string>
     <string name="poi_clinic">Clinică</string>
-    <string name="poi_doctors">Doctori</string>
+    <string name="poi_doctors">Cabinet</string>
     <string name="poi_hospital">Spital</string>
     <string name="poi_pharmacy">Farmacie</string>
     <string name="poi_place_farm">Fermă</string>
@@ -3740,7 +3740,7 @@
     <string name="poi_operator_type_private">Tipul de operator: privat</string>
     <string name="poi_operator_type_public">Tip operator: public</string>
     <string name="poi_windsock">Paravânt</string>
-    <string name="poi_refugee_site">Loc de refugiați</string>
+    <string name="poi_refugee_site">Centru de tranzit pentru refugiați</string>
     <string name="poi_trolley_bay">Cala pentru cărucioare</string>
     <string name="poi_planetarium">Planetariu</string>
     <string name="poi_service_vehicle_rental_yes">Închiriere de mașini</string>

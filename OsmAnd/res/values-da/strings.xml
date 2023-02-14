@@ -369,7 +369,7 @@
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS, foretrukket)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
-    <string name="fav_export_confirmation">Fil med tidligere eksporterede Favoritter eksisterer allerede. Overskriv?</string>
+    <string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv\?</string>
     <string name="profile_settings">Profilspecifikke indstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
@@ -1006,7 +1006,7 @@
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og tilsvarende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
-    <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre.</string>
+    <string name="driving_region_descr">Vælg kørselsregion: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
@@ -1279,7 +1279,7 @@
     <string name="print_route">Udskriv rute</string>
     <string name="fav_point_emoticons_message">Favorit omdøbt til \'%1$s\' for at kunne gemme strengen med humørikoner til en fil.</string>
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
-    <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
+    <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides før du får en stemmeadvarsel.</string>
     <string name="anonymous_user_hint">Anonyme brugere kan ikke: 
 \n- Oprette grupper; 
 \n- Synkronisere grupper og enheder med serveren; 
@@ -1343,7 +1343,7 @@
     <string name="speak_pedestrian">Fodgængerovergange</string>
     <string name="save_track_to_gpx_globally_headline">Sporingslogning ved anmodning</string>
     <string name="navigation_over_track">Start navigation langs sporet?</string>
-    <string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
+    <string name="avoid_roads_msg">Udløs en alternativ rute ved at vælge veje der skal undgås</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Angiv en proxy server.</string>
     <string name="settings_privacy">Privatliv</string>
@@ -1440,7 +1440,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Importer</string>
-    <string name="shared_string_export">Eksporter</string>
+    <string name="shared_string_export">Eksportér</string>
     <string name="shared_string_more">Mere…</string>
     <string name="shared_string_more_actions">Flere handlinger</string>
     <string name="shared_string_do_not_show_again">Vis ikke igen</string>
@@ -1502,7 +1502,7 @@
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd tilbyder globale offline kortvisninger, og offline navigation.</string>
-    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Tryk kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
+    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera-advarsler ikke lovligt. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Tryk kun på \'Ja\', hvis det er berettiget at bruge denne funktion.</string>
     <string name="agps_info">A-GPS information</string>
     <string name="agps_data_last_downloaded">A-GPS data hentet: %1$s</string>
     <string name="shared_string_message">Meddelelse</string>
@@ -1840,7 +1840,7 @@
     <string name="shared_string_select">Vælg</string>
     <string name="clear_updates_proposition_message">Fjern de hentede opdateringer og vend tilbage til det oprindelige kort</string>
     <string name="add_time_span">Tilføj tidsinterval</string>
-    <string name="road_blocked">Spærret vej</string>
+    <string name="road_blocked">Vej spærret</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data ikke tilgængelig</string>
     <string name="rendering_attr_hideUnderground_name">Objekter under jorden</string>
@@ -2006,7 +2006,7 @@
     <string name="storage_place_description">OsmAnd\'s datalagring (til kort, spor-filer, etc.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
-    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
+    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden en internetforbindelse</string>
     <string name="si_mi_meters">Mil/meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="osm_live_banner_desc">Få ubegrænset downloads af kort, tilføjelse af opdateringer ugentligt, dagligt eller hver time.</string>
@@ -2498,7 +2498,7 @@
     <string name="plan_route">Planlæg en rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
+    <string name="marker_save_as_track_descr">Eksportér markører til følgende GPX-fil:</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil være væk efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
@@ -2589,7 +2589,7 @@
     <string name="open_till">Åben til</string>
     <string name="will_close_at">Lukker kl.</string>
     <string name="will_open_at">Åbner kl.</string>
-    <string name="will_open_on">Åbner kl.</string>
+    <string name="will_open_on">Åbner</string>
     <string name="additional_actions">Yderligere handlinger</string>
     <string name="shared_string_actions">Handlinger</string>
     <string name="shared_string_marker">Markør</string>
@@ -2610,7 +2610,7 @@
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Eksporte som OSM-noter, IP\'er, eller begge dele.</string>
+    <string name="osm_edits_export_desc">Eksportér som OSM-noter, IP\'er, eller begge dele.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
@@ -3246,7 +3246,7 @@
     <string name="rendering_value_white_name">Hvid</string>
     <string name="tts_initialization_error">Tekst-til-tale-programmet kan ikke startes.</string>
     <string name="simulate_your_location_gpx_descr">Simuler positionen ved hjælp af et optaget GPX-spor.</string>
-    <string name="export_profile">Eksporter profil</string>
+    <string name="export_profile">Eksportér profil</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' findes allerede. Overskriv\?</string>
     <string name="export_profile_failed">Profilen kunne ikke eksporteres.</string>
@@ -3769,7 +3769,7 @@
     <string name="activity_type_walking_name">Gå</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
-    <string name="announcement_time_title">Meddelelsestid</string>
+    <string name="announcement_time_title">Meddelelsestidspunkt</string>
     <string name="show_track_on_map">Vis spor på kort</string>
     <string name="routing_engine_vehicle_type_hiking">Vandring</string>
     <string name="routing_engine_vehicle_type_cycling_road">Landevejscykling</string>
@@ -3800,7 +3800,7 @@
     <string name="track_recording_stop_without_saving">Stop uden at gemme</string>
     <string name="track_recording_save_and_stop">Gem og stop optagelse</string>
     <string name="track_recording_title">Optagelse af spor stoppet</string>
-    <string name="app_restart_required">App-genstart kræves for at anvende nogle indstillinger.</string>
+    <string name="app_restart_required">Det er nødvendigt at genstarte appen for at anvende nogle indstillinger.</string>
     <string name="quick_action_coordinates_widget_descr">En til/fra-knap for at vise eller skjule koordinat-modulet på kortet.</string>
     <string name="latest_openstreetmap_update">Seneste OpenStreetMap opdatering tilgængelig:</string>
     <string name="updated">Opdateret: %s</string>
@@ -3816,9 +3816,9 @@
     <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
     <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
     <string name="select_another_colorization">Vælg venligst en anden type farvelægning.</string>
-    <string name="exit_number">Udgangsnummer</string>
-    <string name="announce_when_exceeded">Meddelelse ved overskridelse</string>
-    <string name="user_points">Bruger points</string>
+    <string name="exit_number">Afkørselsnummer</string>
+    <string name="announce_when_exceeded">Meddel, når overskredet</string>
+    <string name="user_points">Brugerpunkter</string>
     <string name="output">Resultat</string>
     <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af højdeprofil.</string>
     <string name="shared_string_min_height">Min. højde</string>
@@ -3832,12 +3832,12 @@
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="change_folder">Skift mappe</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_approach">Tilgang</string>
+    <string name="announcement_time_approach">Nærme sig</string>
     <string name="announcement_time_prepare_long">Lang forberedelse</string>
     <string name="announcement_time_prepare">Forbered</string>
     <string name="announcement_time_arrive">Ankomst til destinationen</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
+    <string name="announcement_time_intervals">Tids- og distanceintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Højdekurver</string>
     <string name="activity_type_racing_name">Racerkørsel</string>
@@ -3897,7 +3897,7 @@
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
     <string name="announcement_time_off_route">Uden for ruten</string>
-    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
+    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardhastigheden for navigation.</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brugerprofil</string>
     <string name="reverse_all_points">Vend alle punkter</string>
@@ -3923,7 +3923,7 @@
     <string name="backup_error_no_subscription">Mangler abonnement</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Farvelægning efter netværkstilhørsforhold.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Farvelæg ruter efter deres knudepunktsnetværkstype (international, regional, lokal).</string>
-    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle, lokale farve (hvis de findes på OpenStreetMap) og type (international, regional, lokal).</string>
+    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle, lokale farve (hvis den findes på OpenStreetMap) og type (international, regional, lokal).</string>
     <string name="travel_routes">Rejseruter</string>
     <string name="setting_supported_by_style">Denne indstilling leveres af kortstilen \'%1$s\'</string>
     <string name="direct_line_maps_required_descr">Ruteberegning tager længere tid end normalt.
@@ -3942,7 +3942,7 @@
     <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede kortopdateringer hver måned og time.</string>
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
-    <string name="enough_contributions_descr">Tillykke, du har bidraget nok til OpenStreetMap og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
@@ -4665,7 +4665,7 @@
     <string name="map_widget_trip_recording_downhill">Nedstigning</string>
     <string name="routing_attr_hazmat_category_description">Kategori af farligt gods / Tag højde for adgangstilladelser for farligt gods</string>
     <string name="routing_attr_avoid_fords_description">Undgå vadesteder</string>
-    <string name="routing_attr_hazmat_category_name">Transport af farligt gods</string>
+    <string name="routing_attr_hazmat_category_name">Kategori af farligt gods</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Ingen restriktioner)</string>
     <string name="routing_attr_avoid_fords_name">Undgå vadesteder</string>
     <string name="map_widget_true_bearing">Sande pejling</string>
@@ -5022,7 +5022,7 @@
     <string name="new_file">Ny fil</string>
     <string name="cloud_changes">Cloud-ændringer</string>
     <string name="shared_string_cloud">Cloud</string>
-    <string name="export_to_file">Eksporter til fil</string>
+    <string name="export_to_file">Eksportér til fil</string>
     <string name="last_sync">Sidste synkronisering</string>
     <string name="shared_string_do_not_exist">Findes ikke</string>
     <string name="av_audio_format_bottom_sheet_descr">Vælg et lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
@@ -5043,5 +5043,4 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_descr">Standardindstillingen er \'Automatisk\', hvilket er \'Nederst\' for kortorientering \'Bevægelsesretning\' og \'Centrum\' i alle andre tilfælde.</string>
 </resources>

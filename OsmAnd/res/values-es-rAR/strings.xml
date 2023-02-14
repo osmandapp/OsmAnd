@@ -1114,7 +1114,7 @@
     <string name="trace_rendering">Información sobre el rendimiento</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de la visualización y la navegación.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-    <string name="internet_connection_required_for_online_route">La navegación en línea, no funciona sin conexión a Internet.</string>
+    <string name="internet_connection_required_for_online_route">La navegación en línea no funciona sin conexión a Internet.</string>
     <string name="tts_language_not_supported_title">Idioma no admitido</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -1154,7 +1154,7 @@
     <string name="preferred_locale_descr">Idioma de la aplicación (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de distancia o longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
@@ -3707,7 +3707,7 @@
     <string name="next_segment">Siguiente segmento</string>
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
-    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
+    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que añadir el segmento nuevo.</string>
     <string name="street_level_imagery">Imágenes a nivel de calle</string>
     <string name="plan_route_exit_dialog_descr">¿Descartar todos los cambios en la ruta planificada\?</string>
     <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
@@ -4281,7 +4281,7 @@
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
-    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
@@ -4971,7 +4971,7 @@
     <string name="shared_string_time_left">Tiempo restante</string>
     <string name="map_widget_group_sunrise_sunset_desc">Muestran información sobre la próxima salida y puesta del sol.</string>
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de la línea</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
     <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="quick_action_precipitation_layer">Un botón que alterna la capa de precipitación en el mapa.</string>
@@ -5054,5 +5054,4 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
 </resources>

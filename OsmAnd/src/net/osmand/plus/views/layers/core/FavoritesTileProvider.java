@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FavoritesTileProvider extends interface_MapTiledCollectionProvider {
 
+	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
 	private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
 	private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
@@ -73,6 +74,11 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return points31;
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -100,17 +106,6 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	@Override
 	public double getScale() {
 		return 1.0d;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-		return data != null ? data.point : new PointI(0, 0);
-	}
-
-	@Override
-	public int getPointsCount() {
-		return mapLayerDataList.size();
 	}
 
 	@Override
@@ -186,18 +181,21 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 	}
 
 	public void addToData(@NonNull FavouritePoint favorite, int color, boolean withShadow,
-	                      boolean hasMarker, float textScale, double lat, double lon) throws IllegalStateException {
+	                      boolean hasMarker, float textScale) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
+
+		int x31 = MapUtils.get31TileNumberX(favorite.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(favorite.getLatitude());
+		points31.add(new PointI(x31, y31));
 		mapLayerDataList.add(new MapLayerData(favorite, color,
 				withShadow, favorite.getOverlayIconId(ctx), favorite.getBackgroundType(),
-				hasMarker, textScale, lat, lon));
+				hasMarker, textScale));
 	}
 
 	private static class MapLayerData {
 		FavouritePoint favorite;
-		PointI point;
 		int color;
 		boolean withShadow;
 		int overlayIconId;
@@ -207,7 +205,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 		MapLayerData(@NonNull FavouritePoint favorite, int color,
 		             boolean withShadow, int overlayIconId, @NonNull BackgroundType backgroundType,
-		             boolean hasMarker, float textScale, double lat, double lon) {
+		             boolean hasMarker, float textScale) {
 			this.favorite = favorite;
 			this.color = color;
 			this.withShadow = withShadow;
@@ -215,9 +213,6 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			this.backgroundType = backgroundType;
 			this.hasMarker = hasMarker;
 			this.textScale = textScale;
-			int x = MapUtils.get31TileNumberX(lon);
-			int y = MapUtils.get31TileNumberY(lat);
-			point = new PointI(x, y);
 		}
 
 		int getKey() {

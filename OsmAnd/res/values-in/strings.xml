@@ -5042,5 +5042,4 @@
     <string name="sound_beep_complex">Bip: kompleks</string>
     <string name="sound_beep_complex_loud">Bip: kompleks keras</string>
     <string name="last_synchronized">Disinkronkan terakhir</string>
-    <string name="display_position_descr">Bawaan adalah \'Otomatis\' yang berarti \'Bawah\' untuk orientasi peta, \'Arah gerakan\' dan \'Tengah\' untuk semua hal lain.</string>
 </resources>

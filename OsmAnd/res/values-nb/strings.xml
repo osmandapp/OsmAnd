@@ -4893,7 +4893,6 @@
     <string name="sound_beep_minimal">Lydsignal: minimalt</string>
     <string name="sound_beep_complex_loud">Lydsignal: komplekst, høyt</string>
     <string name="last_synchronized">Sist synkronisert</string>
-    <string name="display_position_descr">Standardinnstillingen er \'Automatisk\' som er \'Nederst\' for kartorienteringen \'Bevegelsesretning\' og \'Senter\' i alle andre tilfeller.</string>
     <string name="share_link">Del lenke</string>
     <string name="share_as_file">Del som fil</string>
 </resources>

@@ -21,6 +21,7 @@
     <string name="switch_folder">Switch folder</string>
     <string name="show_all_tracks">Show all tracks</string>
     <string name="shared_string_on_map">On map</string>
+    <string name="display_position_automatic_descr">Depends on Map orientation, bottom for movement direction, center for all other.</string>
     <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
@@ -260,7 +261,6 @@
     <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
     <string name="display_position">Display position</string>
-    <string name="display_position_descr">The default is \'Automatic\' which is \'Bottom\' for map orientation \'Movement direction\' and \'Center\' in all other cases.</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>

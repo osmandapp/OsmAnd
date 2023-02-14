@@ -245,8 +245,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
 				for (FavouritePoint favoritePoint : points) {
-					double lat = favoritePoint.getLatitude();
-					double lon = favoritePoint.getLongitude();
 					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
 						MapMarker marker = null;
 						if (synced) {
@@ -261,7 +259,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 						} else {
 							color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 						}
-						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale, lat, lon);
+						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale);
 					}
 				}
 			}

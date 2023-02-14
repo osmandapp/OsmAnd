@@ -2,12 +2,18 @@ package net.osmand.router.network;
 
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -81,27 +87,18 @@ public class NetworkRouteContext {
 	}
 
 	Map<RouteKey, List<NetworkRouteSegment>> loadRouteSegmentIntersectingTile(int x, int y, RouteKey routeKey,
-	                                                              Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
+			Map<RouteKey, List<NetworkRouteSegment>> map) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = getMapRouteTile(x << ZOOM_TO_LOAD_TILES_SHIFT_L, y << ZOOM_TO_LOAD_TILES_SHIFT_L);
-		TLongHashSet tset = new TLongHashSet();
-		for (NetworkRoutePoint pnt : osmcRoutesTile.getRoutes().valueCollection()) {
-			for (NetworkRouteSegment segment : pnt.objects) {
-				if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
-					continue;
-				}
-				List<NetworkRouteSegment> routeSegments = map.get(segment.routeKey);
-				if (routeSegments == null) {
-					routeSegments = new ArrayList<>();
-					map.put(segment.routeKey, routeSegments);
-				}
-				if (tset.add(segment.getId())) {
-					if (segment.start != 0) {
-						// API end point expects segment that start from 0
-						segment = new NetworkRouteSegment(segment, 0, segment.getPointsLength() - 1);
-					}
-					routeSegments.add(segment);
-				}
+		for (NetworkRouteSegment segment : osmcRoutesTile.uniqueSegments.values()) {
+			if (loadOnlyRouteWithKey(routeKey) && !segment.routeKey.equals(routeKey)) {
+				continue;
 			}
+			List<NetworkRouteSegment> routeSegments = map.get(segment.routeKey);
+			if (routeSegments == null) {
+				routeSegments = new ArrayList<>();
+				map.put(segment.routeKey, routeSegments);
+			}
+			routeSegments.add(segment);
 		}
 		return map;
 	}
@@ -425,6 +422,7 @@ public class NetworkRouteContext {
 
 	private static class NetworkRoutesTile {
 		private final TLongObjectMap<NetworkRoutePoint> routes = new TLongObjectHashMap<>();
+		private final Map<String, NetworkRouteSegment> uniqueSegments = new HashMap<>();
 		private final long tileId;
 
 		public NetworkRoutesTile(long tileId) {
@@ -434,12 +432,16 @@ public class NetworkRouteContext {
 
 		public void add(BinaryMapDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
+			boolean intersects = false; 
+			int px = 0, py = 0;
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
+				intersects = intersects || (i > 0 && intersects(x31, y31, px, py));
 				if (getTileId(x31, y31) != tileId) {
 					continue;
 				}
+				intersects = true;
 				long id = convertPointToLong(x31, y31);
 				NetworkRoutePoint point = routes.get(id);
 				if (point == null) {
@@ -452,15 +454,29 @@ public class NetworkRouteContext {
 				if (i < len - 1) {
 					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
+				px = x31;
+				py = y31;
 			}
+			if (intersects) {
+				addUnique(new NetworkRouteSegment(obj, rk, 0, len - 1));
+			}
+		}
+
+		private void addUnique(NetworkRouteSegment networkRouteSegment) {
+			uniqueSegments.put(networkRouteSegment.routeKey + "_" + networkRouteSegment.getId(), networkRouteSegment);
 		}
 
 		public void add(RouteDataObject obj, RouteKey rk) {
 			int len = obj.getPointsLength();
+			boolean intersects = false; 
+			int px = 0, py = 0;
 			for (int i = 0; i < len; i++) {
 				int x31 = obj.getPoint31XTile(i);
 				int y31 = obj.getPoint31YTile(i);
+				intersects = intersects || (i > 0 && intersects(x31, y31, px, py));
 				if (getTileId(x31, y31) != tileId) {
+					px = x31;
+					py = y31;
 					continue;
 				}
 				long id = convertPointToLong(x31, y31);
@@ -475,7 +491,47 @@ public class NetworkRouteContext {
 				if (i < len - 1) {
 					point.addObject(new NetworkRouteSegment(obj, rk, i, len - 1));
 				}
+				px = x31;
+				py = y31;
 			}
+			if (intersects) {
+				addUnique(new NetworkRouteSegment(obj, rk, 0, len - 1));
+			}
+		}
+
+		// this method should be fast enough and without multiplications 
+		// cause tiles are big enough and situation will be rare for long lines
+		private boolean intersects(int x31, int y31, int px, int py) {
+			long currentTile = getTileId(x31, y31);
+			long previousTile = getTileId(px, py);
+			if (currentTile == tileId || previousTile == tileId) {
+				return true;
+			}
+			if (currentTile == previousTile) {
+				return false;
+			}
+			int xprevTile = getXFromTileId(previousTile);
+			int yprevTile = getYFromTileId(previousTile);
+			int xcurrTile = getXFromTileId(currentTile);
+			int ycurrTile = getYFromTileId(currentTile);
+			if ((ycurrTile == yprevTile && Math.abs(xcurrTile - xprevTile) <= 1)
+					|| (xcurrTile == xprevTile && Math.abs(ycurrTile - yprevTile) <= 1)) {
+				// speed up for neighbor tiles that couldn't intersect tileId
+				return false;
+			}
+			
+			if (Math.abs(x31 - px) <= 2 && Math.abs(y31 - py) <= 2) {
+				// return when points too close to avoid rounding int errors
+				return false;
+			}
+			// use recursive method to quickly find intersection
+			if (intersects(x31, y31, x31 / 2 + px / 2, y31 / 2 + py / 2)) {
+				return true;
+			}
+			if (intersects(px, py, x31 / 2 + px / 2, y31 / 2 + py / 2)) {
+				return true;
+			}
+			return false;
 		}
 
 		public TLongObjectMap<NetworkRoutePoint> getRoutes() {

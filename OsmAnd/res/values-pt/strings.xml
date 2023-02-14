@@ -4719,7 +4719,7 @@
     <string name="routing_attr_motor_type_description">Selecione o tipo de combustível do seu motor, isto é necessário para estimar a emissão de CO2.</string>
     <string name="lang_ckb">Curdo central</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa são feitas diariamente.</string>
-    <string name="routing_attr_motor_type_name">Combustível usado pelo motor</string>
+    <string name="routing_attr_motor_type_name">Combustível do veículo</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
     <string name="download_complete">Descarregamento concluído</string>
@@ -4776,7 +4776,7 @@
     <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>
     <string name="favorite_delete_group">Eliminar grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
-    <string name="display_position">Posição do ecrã</string>
+    <string name="display_position">Posição</string>
     <string name="shared_string_normal">Normal</string>
     <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
@@ -5042,5 +5042,4 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_descr">A predefinição é \'Automático\', sendo \'Inferior\' para a orientação do mapa \'Direção do movimento\' e \'Centro\' em todos os outros casos.</string>
 </resources>

@@ -99,13 +99,13 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 			List<Recording> objects =  recs.getAllObjects();
 			int objectsCount = objects.size() - (contextMenuLayer.isInChangeMarkerPositionMode()
 					&& contextMenuLayer.getMoveableObject() instanceof Recording ? 1 : 0);
-			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPointsCount()) {
+			if (audioNotesTileProvider != null && objectsCount != audioNotesTileProvider.getPoints31().size()) {
 				clearAudioVideoNotes();
 			}
 			if (audioNotesTileProvider == null) {
 				audioNotesTileProvider = new AudioNotesTileProvider(ctx, getPointsOrder(), view.getDensity());
 			}
-			if (objectsCount > 0 && audioNotesTileProvider.getPointsCount() == 0) {
+			if (objectsCount > 0 && audioNotesTileProvider.getPoints31().isEmpty()) {
 				float textScale = getTextScale();
 				for (Recording o : objects) {
 					if (o != contextMenuLayer.getMoveableObject()) {

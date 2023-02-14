@@ -2320,7 +2320,7 @@
     <string name="lang_ber">Берберский</string>
     <string name="move_all_to_history">Переместить все в историю</string>
     <string name="sort_by">Сортировка</string>
-    <string name="do_not_use_animations">Без анимации</string>
+    <string name="do_not_use_animations">Без анимации интерфейса</string>
     <string name="do_not_use_animations_descr">Выключение анимации карты.</string>
     <string name="exit_without_saving">Выйти без сохранения?</string>
     <string name="save_as_route_point">Сохранить как точки маршрута</string>
@@ -5036,4 +5036,5 @@
     <string name="x_axis">Ось X</string>
     <string name="set_up_backup">Настройка резервного копирования</string>
     <string name="share_link">Поделиться ссылкой</string>
+    <string name="last_synchronized">Последняя синхронизация</string>
 </resources>

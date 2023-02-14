@@ -3950,10 +3950,10 @@
     <string name="announcement_time_approach">Avvicinamento</string>
     <string name="announcement_time_prepare_long">Preparazione anticipata</string>
     <string name="announcement_time_prepare">Preparazione</string>
-    <string name="announcement_time_off_route">Fuori dal percorso</string>
+    <string name="announcement_time_off_route">Fuori percorso</string>
     <string name="announcement_time_intervals">Intervalli di tempo e distanza</string>
     <string name="announcement_time_descr">Il tempo dell\'annuncio per i diversi avvisi dipende dal tipo di avviso, dalla velocità corrente e la velocità di navigazione preimpostata.</string>
-    <string name="announcement_time_title">Tempo dell\'annuncio</string>
+    <string name="announcement_time_title">Tempo annuncio</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bici elettrica</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Mountain biking</string>
     <string name="routing_engine_vehicle_type_cycling_road">Bici da corsa</string>
@@ -4683,7 +4683,7 @@
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Benzina</string>
     <string name="routing_attr_motor_type_hybrid_name">Ibrido</string>
-    <string name="routing_attr_motor_type_name">Motore veicolo</string>
+    <string name="routing_attr_motor_type_name">Carburante utilizzato dal motore</string>
     <string name="routing_attr_motor_type_description">Seleziona il tipo di combustibile utilizzato dal tuo veicolo per il calcolo delle emissioni di CO2.</string>
     <string name="lang_ckb">Curdo centrale</string>
     <string name="updated_map_time">Aggiornato: %1$s.</string>
@@ -4814,7 +4814,7 @@
     <string name="shared_string_identifiers">Identificatori</string>
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
-    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su diverse piattaforme (Android/iOS/Web) senza costi aggiuntivi.</string>
+    <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza costi aggiuntivi.</string>
     <string name="external_sensor_widgets">Widget ANT+</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
@@ -5025,4 +5025,5 @@
     <string name="sound_beep_minimal">Bip: minimale</string>
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
+    <string name="last_synchronized">Ultima sincronizzazione</string>
 </resources>
