@@ -3535,7 +3535,9 @@
     <string name="width_limit_description">Geef de voertuigbreedte op, er zijn mogelijk routebeperkingen voor te brede voertuigen.</string>
     <string name="height_limit_description">Geef de voertuighoogte op, er zijn mogelijk routebeperkingen voor te hoge voertuigen.</string>
     <string name="weight_limit_description">Geef het voertuiggewicht op, er zijn mogelijk routebeperkingen voor zwaar verkeer.</string>
-    <string name="gpx_parse_error">OsmAnd GPX is corrupt, neem contact op met het support team voor verder onderzoek.</string>
+    <string name="gpx_parse_error">Er zijn problemen gevonden met een GPX bestand.
+\n
+\nJe kunt contact opnemen met OsmAnd support voor onderzoek.</string>
     <string name="shared_string_always">Altijd</string>
     <string name="screen_control">Scherminstellingen</string>
     <string name="system_screen_timeout_descr">Zet het scherm uit volgens de systeeminstelling van de schermtimeout.</string>
@@ -5015,4 +5017,9 @@
     <string name="backup_delete_old_data_warning">U staat op het punt de wijzigingsgeschiedenis van de eerder geladen gegevens te wissen.
 \n
 \nDe huidige versie van de gegevens wordt opgeslagen op de server, maar u kunt de eerder aangebrachte wijzigingen niet terugdraaien.</string>
+    <string name="display_position_automatic_descr">Afhankelijk van de Kaartoriëntatie, \"Onderaan\" voor de kaartoriëntatie \"Bewegingsrichting\" en in het \"Midden\" voor alle andere gevallen.</string>
+    <string name="sound_beep_minimal">Beep: minimaal</string>
+    <string name="sound_beep_simple">Beep: simpel</string>
+    <string name="sound_beep_simple_loud">Beep: simpel luid</string>
+    <string name="lang_ckb">Centraal Koerdisch</string>
 </resources>
