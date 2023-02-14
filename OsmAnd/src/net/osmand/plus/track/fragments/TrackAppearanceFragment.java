@@ -402,11 +402,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-
-	}
-
-	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

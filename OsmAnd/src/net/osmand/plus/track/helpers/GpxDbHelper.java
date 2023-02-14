@@ -12,8 +12,6 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.configmap.tracks.GPXInfo;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 

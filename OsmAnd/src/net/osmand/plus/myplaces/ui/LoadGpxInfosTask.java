@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 
 import java.io.File;

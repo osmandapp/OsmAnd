@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.utils.ColorUtilities;

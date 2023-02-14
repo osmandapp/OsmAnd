@@ -13,8 +13,6 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -26,8 +24,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;

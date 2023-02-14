@@ -1,6 +1,8 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.KITKAT;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
@@ -26,7 +28,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
@@ -48,8 +49,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.GPXInfo;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.measurementtool.GpxData;
@@ -59,6 +58,8 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -401,14 +402,10 @@ public class ImportHelper {
 		});
 	}
 
+	@NonNull
 	public static Intent getImportTrackIntent() {
 		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
+		String action = SDK_INT >= KITKAT ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT;
 		intent.setAction(action);
 		intent.setType("*/*");
 		return intent;

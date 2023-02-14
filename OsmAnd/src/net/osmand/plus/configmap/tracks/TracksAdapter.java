@@ -16,6 +16,7 @@ import net.osmand.plus.configmap.tracks.viewholders.NoVisibleTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.UiUtilities;
 

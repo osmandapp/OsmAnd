@@ -1,10 +1,10 @@
-package net.osmand.plus.configmap.tracks;
+package net.osmand.plus.track.helpers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
 

@@ -20,7 +20,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;

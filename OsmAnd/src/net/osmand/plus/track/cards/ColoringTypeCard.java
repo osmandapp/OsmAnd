@@ -18,22 +18,23 @@ import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ColoringTypeCard extends MapBaseCard {
 
-	private final GPXTrackAnalysis gpxTrackAnalysis;
+	private final GPXTrackAnalysis analysis;
 	private ColoringType coloringType;
 
-	public ColoringTypeCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+	public ColoringTypeCard(@NonNull MapActivity mapActivity, @Nullable GPXTrackAnalysis analysis,
 	                        @NonNull ColoringType coloringType) {
 		super(mapActivity);
-		this.gpxTrackAnalysis = gpxTrackAnalysis;
+		this.analysis = analysis;
 		this.coloringType = coloringType;
 	}
 
 	public ColoringTypeCard(@NonNull MapActivity mapActivity, @NonNull ColoringType coloringType) {
 		super(mapActivity);
-		this.gpxTrackAnalysis = null;
+		this.analysis = null;
 		this.coloringType = coloringType;
 	}
 
@@ -50,7 +51,7 @@ public class ColoringTypeCard extends MapBaseCard {
 		}
 
 		updateVisibility(true);
-		boolean isAnalysisProvided = gpxTrackAnalysis != null;
+		boolean isAnalysisProvided = analysis != null;
 		boolean isRouteAltitude = !isAnalysisProvided && coloringType == ColoringType.ALTITUDE;
 
 		boolean upperSpaceVisible = !coloringType.isRouteInfoAttribute() && isAnalysisProvided || isRouteAltitude;
@@ -78,11 +79,11 @@ public class ColoringTypeCard extends MapBaseCard {
 		TextView maxValue = view.findViewById(R.id.max_value);
 
 		if (isAnalysisProvided) {
-			if (coloringType == ColoringType.SPEED && gpxTrackAnalysis.isSpeedSpecified()
-					|| coloringType == ColoringType.ALTITUDE && gpxTrackAnalysis.isElevationSpecified()) {
+			if (coloringType == ColoringType.SPEED && analysis.isSpeedSpecified()
+					|| coloringType == ColoringType.ALTITUDE && analysis.isElevationSpecified()) {
 				ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-				double min = RouteColorize.getMinValue(colorizationType, gpxTrackAnalysis);
-				double max = RouteColorize.getMaxValue(colorizationType, gpxTrackAnalysis, min,
+				double min = RouteColorize.getMinValue(colorizationType, analysis);
+				double max = RouteColorize.getMaxValue(colorizationType, analysis, min,
 						app.getSettings().getApplicationMode().getMaxSpeed());
 				minValue.setText(formatValue(min));
 				maxValue.setText(formatValue(max));

@@ -14,7 +14,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.configmap.tracks.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 

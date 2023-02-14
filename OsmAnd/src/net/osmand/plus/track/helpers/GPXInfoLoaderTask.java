@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap.tracks;
+package net.osmand.plus.track.helpers;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;

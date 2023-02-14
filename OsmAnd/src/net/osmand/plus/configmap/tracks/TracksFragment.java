@@ -42,6 +42,8 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
 import net.osmand.plus.myplaces.ui.LoadGpxInfosTask.LoadTracksListener;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfoLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

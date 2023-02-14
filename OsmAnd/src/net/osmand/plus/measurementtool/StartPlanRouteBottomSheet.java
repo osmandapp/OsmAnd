@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 
 import android.app.Activity;
@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -29,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.configmap.tracks.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 
