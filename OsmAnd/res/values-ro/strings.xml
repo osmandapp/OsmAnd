@@ -5044,4 +5044,5 @@
     <string name="sound_beep_simple">Bip: simplu</string>
     <string name="sound_beep_simple_loud">Bip: simplu zgomotos</string>
     <string name="sound_beep_complex">Bip: complex</string>
+    <string name="display_position_automatic_descr">Depinde de orientarea hărții, în partea de jos pentru direcția de mișcare, în centru pentru toate celelalte.</string>
 </resources>
