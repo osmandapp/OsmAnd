@@ -5028,5 +5028,5 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas lorsque la carte s\'oriente suivant le mouvement, centré pour tous les autres modes.</string>
+    <string name="display_position_automatic_descr">Varie selon l’orientation de la carte : affiché en bas si l’orientation de la carte suit le mouvement, centré dans tous les autres cas.</string>
 </resources>
