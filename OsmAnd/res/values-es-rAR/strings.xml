@@ -5054,4 +5054,5 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa, «Abajo» con la «Dirección del movimiento», «Centro» con el resto.</string>
 </resources>
