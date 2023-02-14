@@ -327,18 +327,19 @@ public class MapSelectionHelper {
 							boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
 							if (isRoute) {
 								addRoute(result, tileBox, point);
-							}
-							IOnPathMapSymbol onPathMapSymbol = null;
-							try {
-								onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-							} catch (Exception ignore) {
-							}
-							if (onPathMapSymbol == null) {
-								amenity = getAmenity(result.objectLatLon, obfMapObject);
-								if (amenity != null) {
-									amenity.setMapIconName(getMapIconName(symbolInfo));
-								} else {
-									addRenderedObject(result, symbolInfo, obfMapObject);
+							} else {
+								IOnPathMapSymbol onPathMapSymbol = null;
+								try {
+									onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+								} catch (Exception ignore) {
+								}
+								if (onPathMapSymbol == null) {
+									amenity = getAmenity(result.objectLatLon, obfMapObject);
+									if (amenity != null) {
+										amenity.setMapIconName(getMapIconName(symbolInfo));
+									} else {
+										addRenderedObject(result, symbolInfo, obfMapObject);
+									}
 								}
 							}
 						}
