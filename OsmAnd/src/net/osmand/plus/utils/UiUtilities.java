@@ -94,27 +94,29 @@ public class UiUtilities {
 		END,
 	}
 
-	public UiUtilities(OsmandApplication app) {
+	public UiUtilities(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
-	private Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId) {
-		long hash = ((long) resId << 31l) + clrId;
-		Drawable d = drawableCache.get(hash);
-		if (d == null) {
-			d = AppCompatResources.getDrawable(app, resId);
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			if (clrId != 0) {
-				DrawableCompat.setTint(d, ContextCompat.getColor(app, clrId));
+	private synchronized Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId) {
+		long hash = ((long) resId << 31L) + clrId;
+		Drawable drawable = drawableCache.get(hash);
+		if (drawable == null) {
+			drawable = AppCompatResources.getDrawable(app, resId);
+			if (drawable != null) {
+				drawable = DrawableCompat.wrap(drawable);
+				drawable.mutate();
+				if (clrId != 0) {
+					DrawableCompat.setTint(drawable, ContextCompat.getColor(app, clrId));
+				}
+				drawableCache.put(hash, drawable);
 			}
-			drawableCache.put(hash, d);
 		}
-		return d;
+		return drawable;
 	}
 
 	@Nullable
-	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
+	private synchronized Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
 		Drawable drawable = null;
 		if (resId != 0) {
 			long hash = ((long) resId << 31L) + color;
