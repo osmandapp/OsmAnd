@@ -26,11 +26,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,9 +44,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -185,7 +183,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			showStartFinishIconsInitialValue = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 
 			if (selectedGpxFile.isShowCurrentTrack()) {
-				trackDrawInfo = new TrackDrawInfo(app, true);
+				trackDrawInfo = new TrackDrawInfo(app, TrackDrawInfo.CURRENT_RECORDING);
 			} else {
 				GpxDataItemCallback callback = new GpxDataItemCallback() {
 					@Override
@@ -206,7 +204,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				};
 				String filePath = selectedGpxFile.getGpxFile().path;
 				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
-				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem, false);
+				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -428,7 +426,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			} else if (card instanceof TrackWidthCard) {
 				updateAppearanceIcon();
 			} else if (card instanceof DirectionArrowsCard) {
+				refreshMap();
 				updateAppearanceIcon();
+			} else if (card instanceof ShowStartFinishCard) {
+				refreshMap();
 			}
 		}
 	}
@@ -451,7 +452,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> customColors = ColorsCard.getCustomColors(settings.CUSTOM_TRACK_COLORS);
 			int index = customColors.indexOf(prevColor);
 			if (index != ColorsCard.INVALID_VALUE) {
-				saveCustomColorsToTracks(prevColor, newColor);
+				CustomColorBottomSheet.saveCustomColorsToTracks(app, prevColor, newColor);
 			}
 		}
 		trackDrawInfo.setColor(newColor);
@@ -655,21 +656,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				.setDuration(200);
 	}
 
-	private void saveCustomColorsToTracks(int prevColor, int newColor) {
-		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
-		for (GpxDataItem dataItem : gpxDataItems) {
-			if (prevColor == dataItem.getColor()) {
-				gpxDbHelper.updateColor(dataItem, newColor);
-			}
-		}
-		List<SelectedGpxFile> files = gpxSelectionHelper.getSelectedGPXFiles();
-		for (SelectedGpxFile selectedGpxFile : files) {
-			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
-				selectedGpxFile.getGpxFile().setColor(newColor);
-			}
-		}
-	}
-
 	private void updateColorItems() {
 		updateAppearanceIcon();
 		if (trackWidthCard != null) {
@@ -809,7 +795,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void setupColorsCard(@NonNull ViewGroup container) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			List<Integer> colors = getTrackColors();
+			List<Integer> colors = GpxAppearanceAdapter.getTrackColors(app);
 			colorsCard = new ColorsCard(mapActivity, null, this,
 					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
 			addCard(container, colorsCard);
@@ -818,16 +804,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			boolean shouldShowColorsCard = trackDrawInfo.getColoringType().isTrackSolid();
 			AndroidUiHelper.updateVisibility(colorsCard.getView(), shouldShowColorsCard);
 		}
-	}
-
-	private List<Integer> getTrackColors() {
-		List<Integer> colors = new ArrayList<>();
-		for (AppearanceListItem appearanceListItem : GpxAppearanceAdapter.getAppearanceItems(app, GpxAppearanceAdapterType.TRACK_COLOR)) {
-			if (!colors.contains(appearanceListItem.getColor())) {
-				colors.add(appearanceListItem.getColor());
-			}
-		}
-		return colors;
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

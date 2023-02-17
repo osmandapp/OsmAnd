@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Set;
@@ -32,7 +33,7 @@ public class GpxInfoItemsFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = isNightMode(false);
+		nightMode = isNightMode(true);
 	}
 
 	@Nullable
@@ -53,5 +54,9 @@ public class GpxInfoItemsFragment extends BaseOsmAndFragment {
 
 	public void onGpxInfosSelected(@NonNull Set<GPXInfo> gpxInfos) {
 		adapter.onGpxInfosSelected(gpxInfos);
+	}
+
+	public void updateContent() {
+		adapter.notifyDataSetChanged();
 	}
 }

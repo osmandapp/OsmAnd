@@ -306,13 +306,14 @@ public class GpxDbHelper {
 
 		@Override
 		protected void onProgressUpdate(GpxDataItem... values) {
-			GpxDataItem item = values[0];
-			GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
-			if (callback != null) {
-				if (callback.isCancelled()) {
-					stopReading();
-				} else {
-					callback.onGpxDataItemReady(item);
+			for (GpxDataItem item : values) {
+				GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
+				if (callback != null) {
+					if (callback.isCancelled()) {
+						stopReading();
+					} else {
+						callback.onGpxDataItemReady(item);
+					}
 				}
 			}
 		}

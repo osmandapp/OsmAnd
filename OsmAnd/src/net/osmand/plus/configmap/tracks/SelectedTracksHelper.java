@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -83,7 +84,11 @@ public class SelectedTracksHelper {
 
 	private TrackTab getAllTracksTab(@NonNull List<GPXInfo> gpxInfos) {
 		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_all), TrackTabType.ALL);
-		trackTab.items.addAll(gpxInfos);
+		if (Algorithms.isEmpty(gpxInfos)) {
+			trackTab.items.add(TYPE_NO_TRACKS);
+		} else {
+			trackTab.items.addAll(gpxInfos);
+		}
 		return trackTab;
 	}
 

@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="change_default_tracks_appearance_confirmation_description">%1$s tracks appearance will change after apply. Are you sure?</string>
+    <string name="shared_string_apply_changes">Apply changes</string>
+    <string name="default_tracks_appearance_description">These settings will be applied to all created, recorded or imported tracks without their settings.\n\nIf the \"%1$s\" option is selected, changing these settings will change the appearance of all tracks with this %2$s option.</string>
+    <string name="default_tracks_appearance">Default tracks appearance</string>
     <string name="no_visible_tracks_description">Select tracks you want to make visible on the map</string>
     <string name="no_visible_tracks">No tracks on map</string>
     <string name="recently_visible">Recently visible %1$s</string>

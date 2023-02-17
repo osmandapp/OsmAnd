@@ -1,10 +1,11 @@
 package net.osmand.plus.configmap.tracks;
 
-import android.graphics.drawable.Drawable;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +16,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -35,7 +37,6 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 	private static final String TAG = TrackGroupsBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 	private UiUtilities iconsCache;
 
 	private TrackTab selectedTab;
@@ -47,9 +48,8 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = (OsmandApplication) requireContext().getApplicationContext();
-		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
-		nightMode = !settings.isLightContent();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		Fragment target = getTargetFragment();
 		if (target instanceof TracksFragment) {
@@ -57,6 +57,22 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 			trackTabs = fragment.getTrackTabs();
 			selectedTab = fragment.getSelectedTab();
 		}
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		Dialog dialog = super.onCreateDialog(savedInstanceState);
+		if (!AndroidUiHelper.isOrientationPortrait(requireActivity())) {
+			dialog.setOnShowListener(dialogInterface -> {
+				BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+				FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+				if (bottomSheet != null) {
+					BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+				}
+			});
+		}
+		return dialog;
 	}
 
 	@Nullable

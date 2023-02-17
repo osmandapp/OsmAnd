@@ -97,7 +97,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
-		nightMode = isNightMode(false);
+		nightMode = isNightMode(true);
 	}
 
 	@NonNull
@@ -151,11 +151,19 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void showOptionsMenu(@NonNull View view) {
 		List<PopUpMenuItem> items = new ArrayList<>();
+
+		String appearance = getString(R.string.change_appearance);
+		String count = "(" + selectedTracksHelper.getSelectedTracks().size() + ")";
+		items.add(new PopUpMenuItem.Builder(view.getContext())
+				.setTitle(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count))
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> changeAppearance()).create());
+
 		items.add(new PopUpMenuItem.Builder(view.getContext())
 				.setTitleId(R.string.shared_string_import)
 				.setIcon(getContentIcon(R.drawable.ic_action_import_to))
 				.setOnClickListener(v -> importTracks()).create());
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+		new PopUpMenuHelper.Builder(view, items, nightMode, R.layout.simple_popup_menu_item).show();
 	}
 
 	private void setupTabLayout(@NonNull View view) {
@@ -319,6 +327,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	public void changeAppearance() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);
+		}
+	}
+
 	public void importTracks() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FILE_REQUEST);
@@ -357,6 +372,14 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof GpxInfoItemsFragment) {
 				((GpxInfoItemsFragment) fragment).onGpxInfosSelected(gpxInfos);
+			}
+		}
+	}
+
+	public void updateTabsContext() {
+		for (Fragment fragment : getChildFragmentManager().getFragments()) {
+			if (fragment instanceof GpxInfoItemsFragment) {
+				((GpxInfoItemsFragment) fragment).updateContent();
 			}
 		}
 	}
