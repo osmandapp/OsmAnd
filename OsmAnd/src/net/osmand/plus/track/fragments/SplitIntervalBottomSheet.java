@@ -15,13 +15,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -78,6 +78,9 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 			TrackAppearanceFragment fragment = (TrackAppearanceFragment) target;
 			trackDrawInfo = fragment.getTrackDrawInfo();
 			selectedGpxFile = fragment.getSelectedGpxFile();
+		} else if (target instanceof TracksAppearanceFragment) {
+			TracksAppearanceFragment fragment = (TracksAppearanceFragment) target;
+			trackDrawInfo = fragment.getTrackDrawInfo();
 		}
 		prepareSplitIntervalOptions();
 
@@ -122,8 +125,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
 		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
 
-		GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
-		time.setEnabled(analysis.timeSpan > 0);
+		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).timeSpan > 0);
 
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(none, time, distance);
@@ -195,20 +197,22 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
+		double roundedDist = OsmAndFormatter.calculateRoundedDist(value, app);
+		String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, false);
+		distanceSplitOptions.put(formattedDist, roundedDist);
+
 		if (displayGroups.size() > 0) {
-			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, false);
-			distanceSplitOptions.put(formattedDist, dvalue);
-			if (Math.abs(displayGroups.get(0).getSplitDistance() - dvalue) < 1) {
+			if (Math.abs(displayGroups.get(0).getSplitDistance() - roundedDist) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
 			}
 		}
 	}
 
 	private void addTimeOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
+		String time = OsmAndFormatter.getFormattedTimeInterval(app, value);
+		timeSplitOptions.put(time, value);
+
 		if (model.size() > 0) {
-			String time = OsmAndFormatter.getFormattedTimeInterval(app, value);
-			timeSplitOptions.put(time, value);
 			if (model.get(0).getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;
 			}
@@ -308,6 +312,8 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		Fragment target = getTargetFragment();
 		if (target instanceof TrackAppearanceFragment) {
 			((TrackAppearanceFragment) target).applySplit(selectedSplitType, timeSplit, distanceSplit);
+		} else if (target instanceof TracksAppearanceFragment) {
+			((TracksAppearanceFragment) target).updateContent();
 		}
 	}
 

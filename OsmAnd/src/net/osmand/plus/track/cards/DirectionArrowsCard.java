@@ -39,7 +39,6 @@ public class DirectionArrowsCard extends MapBaseCard {
 			boolean checked = !compoundButton.isChecked();
 			compoundButton.setChecked(checked);
 			trackDrawInfo.setShowArrows(checked);
-			mapActivity.refreshMap();
 			notifyCardPressed();
 		});
 	}

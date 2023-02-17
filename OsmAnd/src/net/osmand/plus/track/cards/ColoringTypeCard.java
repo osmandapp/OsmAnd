@@ -6,34 +6,30 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
-import androidx.annotation.NonNull;
-
 public class ColoringTypeCard extends MapBaseCard {
 
-	private final GPXTrackAnalysis gpxTrackAnalysis;
+	private final GPXTrackAnalysis analysis;
 	private ColoringType coloringType;
 
-	public ColoringTypeCard(@NonNull MapActivity mapActivity, @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+	public ColoringTypeCard(@NonNull MapActivity mapActivity,
+	                        @Nullable GPXTrackAnalysis analysis,
 	                        @NonNull ColoringType coloringType) {
 		super(mapActivity);
-		this.gpxTrackAnalysis = gpxTrackAnalysis;
-		this.coloringType = coloringType;
-	}
-
-	public ColoringTypeCard(@NonNull MapActivity mapActivity, @NonNull ColoringType coloringType) {
-		super(mapActivity);
-		this.gpxTrackAnalysis = null;
+		this.analysis = analysis;
 		this.coloringType = coloringType;
 	}
 
@@ -50,10 +46,10 @@ public class ColoringTypeCard extends MapBaseCard {
 		}
 
 		updateVisibility(true);
-		boolean isAnalysisProvided = gpxTrackAnalysis != null;
-		boolean isRouteAltitude = !isAnalysisProvided && coloringType == ColoringType.ALTITUDE;
+		boolean isAnalysisProvided = analysis != null;
+		boolean isRouteAltitude = coloringType == ColoringType.ALTITUDE;
 
-		boolean upperSpaceVisible = !coloringType.isRouteInfoAttribute() && isAnalysisProvided || isRouteAltitude;
+		boolean upperSpaceVisible = !coloringType.isRouteInfoAttribute() || isRouteAltitude || !isAnalysisProvided;
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.upper_space), upperSpaceVisible);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_space), isAnalysisProvided);
 
@@ -77,27 +73,20 @@ public class ColoringTypeCard extends MapBaseCard {
 		TextView minValue = view.findViewById(R.id.min_value);
 		TextView maxValue = view.findViewById(R.id.max_value);
 
-		if (isAnalysisProvided) {
-			if (coloringType == ColoringType.SPEED && gpxTrackAnalysis.isSpeedSpecified()
-					|| coloringType == ColoringType.ALTITUDE && gpxTrackAnalysis.isElevationSpecified()) {
-				ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-				double min = RouteColorize.getMinValue(colorizationType, gpxTrackAnalysis);
-				double max = RouteColorize.getMaxValue(colorizationType, gpxTrackAnalysis, min,
-						app.getSettings().getApplicationMode().getMaxSpeed());
-				minValue.setText(formatValue(min));
-				maxValue.setText(formatValue(max));
-			} else if (coloringType == ColoringType.SPEED) {
-				minValue.setText(R.string.shared_string_min_speed);
-				maxValue.setText(R.string.shared_string_max_speed);
-			} else if (coloringType == ColoringType.ALTITUDE) {
-				minValue.setText(R.string.shared_string_min_height);
-				maxValue.setText(R.string.shared_string_max_height);
-			}
-		} else {
-			if (coloringType == ColoringType.ALTITUDE) {
-				minValue.setText(R.string.shared_string_min_height);
-				maxValue.setText(R.string.shared_string_max_height);
-			}
+		if (isAnalysisProvided && (coloringType == ColoringType.SPEED && analysis.isSpeedSpecified()
+				|| coloringType == ColoringType.ALTITUDE && analysis.isElevationSpecified())) {
+			ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
+			double min = RouteColorize.getMinValue(colorizationType, analysis);
+			double max = RouteColorize.getMaxValue(colorizationType, analysis, min,
+					app.getSettings().getApplicationMode().getMaxSpeed());
+			minValue.setText(formatValue(min));
+			maxValue.setText(formatValue(max));
+		} else if (coloringType == ColoringType.SPEED) {
+			minValue.setText(R.string.shared_string_min_speed);
+			maxValue.setText(R.string.shared_string_max_speed);
+		} else if (coloringType == ColoringType.ALTITUDE) {
+			minValue.setText(R.string.shared_string_min_height);
+			maxValue.setText(R.string.shared_string_max_height);
 		}
 	}
 
@@ -111,7 +100,7 @@ public class ColoringTypeCard extends MapBaseCard {
 			return OsmAndFormatter.getFormattedAlt(value, app);
 		} else if (coloringType == ColoringType.SLOPE) {
 			value *= 100; // slope value in the range 0..1
-			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value),  "%");
+			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value), "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
 		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);

@@ -92,6 +92,7 @@
 	<color name="icon_color_active_dark">#d28521</color>
 	<color name="osmand_live_active">#14CC70</color>
 	<color name="osmand_live_cancelled">#EE5622</color>
+	<color name="button_color_active_light">#6E18E8</color>
 
 	<color name="on_map_icon_color">#505050</color>
 

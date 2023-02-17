@@ -902,8 +902,10 @@ public class BackupHelper {
 
 			@Override
 			protected void onProgressUpdate(LocalFile... localFiles) {
-				if (listener != null) {
-					listener.onFileCollected(localFiles[0]);
+				for (LocalFile file : localFiles) {
+					if (listener != null) {
+						listener.onFileCollected(file);
+					}
 				}
 			}
 

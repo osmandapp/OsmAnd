@@ -1,13 +1,13 @@
 package net.osmand.plus.myplaces.ui;
 
-import static net.osmand.plus.helpers.GpxUiHelper.CHART_LABEL_COUNT;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.ui.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.ALTITUDE;
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.SLOPE;
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.SPEED;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -42,17 +42,18 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.ChartUtils.LineGraphType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -202,7 +203,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			withoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
 		}
 		if (chart != null && analysis != null) {
-			dataSets = GpxUiHelper.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
+			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, withoutGaps);
 			if (!Algorithms.isEmpty(dataSets)) {
 				dataSetsMap.remove(tabType);
 			}
@@ -315,7 +316,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupSpeedTab(View view, LineChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(chart);
+				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -380,7 +381,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupAltitudeTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
-				GpxUiHelper.setupGPXChart(chart);
+				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -429,7 +430,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupGeneralTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData || analysis.hasSpeedData) {
-				GpxUiHelper.setupGPXChart(chart);
+				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -846,7 +847,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
 				|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
-			GpxUiHelper.setupGPXChart(chart);
+			ChartUtils.setupGPXChart(chart);
 		}
 		updateChart(chart);
 

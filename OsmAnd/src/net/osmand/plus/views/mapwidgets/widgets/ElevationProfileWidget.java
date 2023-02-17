@@ -27,21 +27,18 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import net.osmand.Location;
+import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.Location;
-import net.osmand.StateChangedListener;
-import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
@@ -49,6 +46,10 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXHighlight;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -217,19 +218,19 @@ public class ElevationProfileWidget extends MapWidget {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		int profileColor = appMode.getProfileColor(isNightMode());
 		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
-		GpxUiHelper.setupGPXChart(chart, 24f, 16f, true, markerIcon);
+		ChartUtils.setupGPXChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
+			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 
 			if (showSlopes) {
-				OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+				OrderedLineDataSet slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);

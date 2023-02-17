@@ -1,5 +1,10 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.ALTITUDE;
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.SLOPE;
+import static net.osmand.plus.charts.ChartUtils.LineGraphType.SPEED;
+import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+
 import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
@@ -18,11 +27,12 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
@@ -36,6 +46,8 @@ import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ChartUtils.LineGraphType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -45,17 +57,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
-import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
-import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
@@ -487,8 +488,8 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			GpxUiHelper.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
-			List<ILineDataSet> dataSets = GpxUiHelper.getDataSets(commonGraphAdapter.getChart(),
+			ChartUtils.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
+			List<ILineDataSet> dataSets = ChartUtils.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);
 		}
@@ -526,9 +527,9 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public BarData getChartData() {
-			GpxUiHelper.setupHorizontalGPXChart(app, customGraphAdapter.getChart(), 5, 9, 24, true, nightMode);
+			ChartUtils.setupHorizontalGPXChart(app, customGraphAdapter.getChart(), 5, 9, 24, true, nightMode);
 			if (!Algorithms.isEmpty(statistics.elements)) {
-				return GpxUiHelper.buildStatisticChart(app, customGraphAdapter.getChart(),
+				return ChartUtils.buildStatisticChart(app, customGraphAdapter.getChart(),
 						statistics, analysis, true, nightMode);
 			}
 			return new BarData();
