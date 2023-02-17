@@ -4,7 +4,7 @@
 
 	<application
 		android:icon="@mipmap/icon_free"
-		android:label="OsmAnd - Offline Maps and GPS Navigation"
+		android:label="@string/app_store_name"
 		tools:replace="android:icon, android:label">
 
 		<meta-data
