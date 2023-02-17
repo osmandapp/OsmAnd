@@ -57,6 +57,8 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -72,6 +74,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
+	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedTracksHelper selectedTracksHelper;
 
 	private TrackDrawInfo trackDrawInfo;
@@ -98,6 +101,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		app = getMyApplication();
 		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
+		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
 		nightMode = isNightMode(true);
 
@@ -172,6 +176,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			ViewGroup container = view.findViewById(R.id.cards_container);
 			container.removeAllViews();
 
+			addCard(container, new SplitIntervalCard(mapActivity, trackDrawInfo));
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 
@@ -365,6 +370,11 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Nullable
+	public TrackDrawInfo getTrackDrawInfo() {
+		return trackDrawInfo;
+	}
+
+	@Nullable
 	public SelectedTracksHelper getSelectedTracksHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
@@ -434,6 +444,11 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		ColoringType coloringType = trackDrawInfo.getColoringType();
 		String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
 		gpxDbHelper.updateColoringType(item, coloringType.getName(routeInfoAttribute));
+
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
+		if (selectedGpxFile != null) {
+			selectedGpxFile.resetSplitProcessed();
+		}
 	}
 
 	@Override
@@ -442,7 +457,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		updatePromoCardVisibility();
 	}
 
-	private void updateContent() {
+	public void updateContent() {
 		if (colorsCard != null) {
 			colorsCard.setSelectedColor(trackDrawInfo.getColor());
 		}

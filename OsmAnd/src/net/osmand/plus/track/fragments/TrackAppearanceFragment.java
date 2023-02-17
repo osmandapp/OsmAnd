@@ -62,7 +62,6 @@ import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -87,7 +86,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
-	private GpxSelectionHelper gpxSelectionHelper;
 
 	@Nullable
 	private GpxDataItem gpxDataItem;
@@ -167,7 +165,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		app = requireMyApplication();
 		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
-		gpxSelectionHelper = app.getSelectedGpxHelper();
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
