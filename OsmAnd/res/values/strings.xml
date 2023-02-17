@@ -11,21 +11,21 @@
 	Thx - Hardy
 -->
 
-    <string name="change_default_tracks_appearance_confirmation_description">%1$s tracks appearance will change after apply. Are you sure?</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
     <string name="shared_string_apply_changes">Apply changes</string>
-    <string name="default_tracks_appearance_description">These settings will be applied to all created, recorded or imported tracks without their settings.\n\nIf the \"%1$s\" option is selected, changing these settings will change the appearance of all tracks with this %2$s option.</string>
-    <string name="default_tracks_appearance">Default tracks appearance</string>
-    <string name="no_visible_tracks_description">Select tracks you want to make visible on the map</string>
-    <string name="no_visible_tracks">No tracks on map</string>
+    <string name="default_tracks_appearance_description">These appearance settings are applied to all tracks selected on the previous screen.\n\nThey are also saved as \"%1$s\" to be applied by %2$s for all other tracks without implicit or specifically set appearance.</string>
+    <string name="default_tracks_appearance">Default track appearance</string>
+    <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
+    <string name="no_visible_tracks">No tracks on the map</string>
     <string name="recently_visible">Recently visible %1$s</string>
-    <string name="empty_tracks_description">You can import, create or record track files using OsmAnd.</string>
-    <string name="empty_tracks">You don\'t have track files</string>
-    <string name="shared_string_select_recent">Select Recent</string>
+    <string name="empty_tracks_description">You can import, create, or record track files using OsmAnd.</string>
+    <string name="empty_tracks">You don\'t have track files.</string>
+    <string name="shared_string_select_recent">Select recent</string>
     <string name="change_appearance">Change appearance</string>
     <string name="switch_folder">Switch folder</string>
     <string name="show_all_tracks">Show all tracks</string>
     <string name="shared_string_on_map">On map</string>
-    <string name="display_position_automatic_descr">Depends on Map orientation, bottom for movement direction, center for all other.</string>
+    <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
     <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
