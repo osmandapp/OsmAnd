@@ -2888,7 +2888,7 @@ public class OsmandSettings {
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference(this, "osmand_theme", OSMAND_LIGHT_THEME) {
+			new IntPreference(this, "osmand_theme", isSupportSystemDefaultTheme() ? SYSTEM_DEFAULT_THEME : OSMAND_LIGHT_THEME) {
 				@Override
 				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 					Integer theme = parseString(json.getString(getId()));

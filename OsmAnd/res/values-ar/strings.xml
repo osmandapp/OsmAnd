@@ -980,7 +980,7 @@
     <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
     <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
-    <string name="rotate_map_compass_opt">حسب البوصلة</string>
+    <string name="rotate_map_compass_opt">اتجاه البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
     <string name="transport_Stop">موقف</string>
@@ -1037,7 +1037,7 @@
     <string name="settings_privacy">الخصوصية</string>
     <string name="shared_string_gpx_points">النقاط</string>
     <string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
-    <string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
+    <string name="avoid_roads_msg">شغل مسار بديل بتحديد طرق متجنبة</string>
     <string name="rendering_attr_roadStyle_name">نمط الطريق</string>
     <string name="rendering_value__name">الافتراضي</string>
     <string name="rendering_value_default_name">الافتراضي</string>
@@ -1581,7 +1581,7 @@
     <string name="lang_tl">التاغالوغية</string>
     <string name="lang_nv">نافاجو</string>
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
-    <string name="coords_format">نمط الإحداثيات</string>
+    <string name="coords_format">نمط الإحداثية</string>
     <string name="night">ليلاً</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
@@ -1636,7 +1636,7 @@
     <string name="rendering_attr_hideUnderground_name">الأشياء تحت مستوى سطح الأرض</string>
     <string name="data_is_not_available">البيانات غير متوفرة</string>
     <string name="shared_string_read_more">اقرأ المزيد</string>
-    <string name="road_blocked">الطريق محظور</string>
+    <string name="road_blocked">الطريق مسدود</string>
     <string name="shared_string_select">تحديد</string>
     <string name="switch_start_finish">اعكس نقطة الانطلاق والوصول</string>
     <string name="rendering_attr_hideIcons_name">أيقونات نقاط الاهتمام</string>
@@ -2546,7 +2546,7 @@
     <string name="context_menu_points_of_group">جميع نقاط هذه المجموعة</string>
     <string name="open_from">افتح من</string>
     <string name="open_till">مفتوح حتى</string>
-    <string name="will_close_at">يغلق أبوابه على</string>
+    <string name="will_close_at">يغلق على</string>
     <string name="will_open_at">يفتح على</string>
     <string name="will_open_on">يفتح على</string>
     <string name="additional_actions">إجراءات إضافية</string>
@@ -2602,7 +2602,7 @@
     <string name="enter_the_file_name">أدخل اسم الملف.</string>
     <string name="map_import_error">خطأ أثناء استرجاع الخريطة</string>
     <string name="map_imported_successfully">تمت عملية استيراد الخريطة</string>
-    <string name="make_as_start_point">وضعها نقطة البداية</string>
+    <string name="make_as_start_point">اجعل هذه نقطة الانطلاق</string>
     <string name="show_closed_notes">إظهار الملاحظات المغلقة</string>
     <string name="switch_osm_notes_visibility_desc">عرض أو اخفاء ملاحظات OSM على الخريطة.</string>
     <string name="shared_string_gpx_file">ملف GPX</string>
@@ -2739,9 +2739,9 @@
     <string name="online_webpage_warning">الصفحة متاحة على الإنترنت فقط. فتح في متصفح الويب؟</string>
     <string name="images_cache">الصور المؤقتة</string>
     <string name="use_two_digits_longitude">استخدم خط طول رقمين</string>
-    <string name="last_intermediate_dest_description">إضافة كآخر توقف على طول الطريق</string>
-    <string name="first_intermediate_dest_description">إضافة كأول توقف على طول الطريق</string>
-    <string name="subsequent_dest_description">نقل الوجهة لأعلى، وإنشاء التوجيه</string>
+    <string name="last_intermediate_dest_description">إضافة نقطة توقف وسيطة</string>
+    <string name="first_intermediate_dest_description">إضافة توقف أول</string>
+    <string name="subsequent_dest_description">نقل الوجهة لأعلى، وقم بإنشاءها</string>
     <string name="gpx_file_desc">GPX - مناسب للتصدير إلى JOSM ومحررات OSM الأخرى.</string>
     <string name="osc_file_desc">OSC - مناسب للتصدير إلى خريطة الشارع المفتوحة.</string>
     <string name="osm_edits_export_desc">تصدير كملاحظات OSM أو النقاط المهمة أو كليهما.</string>
@@ -5106,4 +5106,5 @@
     <string name="sound_beep_simple">صفير: عادي</string>
     <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
     <string name="last_synchronized">آخر مزامنة</string>
+    <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة ، الأسفل لاتجاه الحركة ، المركزللجميع.</string>
 </resources>
