@@ -5054,5 +5054,21 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_automatic_descr">Depende de la orientación del mapa, «Abajo» con la «Dirección del movimiento», «Centro» con el resto.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
+    <string name="shared_string_apply_changes">Aplicar cambios</string>
+    <string name="default_tracks_appearance_description">Estos ajustes de aspecto se aplican a todas las trazas marcadas en la pantalla anterior.
+\n
+\nTambién se guardan como «%1$s» para aplicarse por «%2$s» para todas las demás trazas sin aspecto implícito o específicamente definido.</string>
+    <string name="default_tracks_appearance">Aspecto predefinido de la traza</string>
+    <string name="no_visible_tracks">Sin trazas en el mapa</string>
+    <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
+    <string name="recently_visible">Visible recientemente «%1$s»</string>
+    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
+    <string name="empty_tracks">No tienes archivos de trazas.</string>
+    <string name="shared_string_select_recent">Marcar reciente</string>
+    <string name="change_appearance">Cambiar aspecto</string>
+    <string name="switch_folder">Alternar carpeta</string>
+    <string name="show_all_tracks">Mostrar todas las trazas</string>
+    <string name="shared_string_on_map">En el mapa</string>
 </resources>
