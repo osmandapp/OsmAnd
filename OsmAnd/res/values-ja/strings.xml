@@ -4597,7 +4597,7 @@ POIの更新は利用できません</string>
     <string name="choose_what_to_sync">同期するものを選択</string>
     <string name="cloud_sync_progress">同期…%1$s</string>
     <string name="res_unknown">不明</string>
-    <string name="av_audio_format_bottom_sheet_descr">音声の出力形式を選択します。音声のファイル形式は 3GPP (.3gp) です。</string>
+    <string name="av_audio_format_bottom_sheet_descr">音声の形式を選択します。音声のファイルおよび格納形式は 3GPP (.3gp) です。</string>
     <string name="checking_progress">チェック中…</string>
     <string name="check_for_updates">更新を確認</string>
     <string name="cloud_all_changes_downloaded">すべての変更点がダウンロードされました</string>
@@ -4610,7 +4610,7 @@ POIの更新は利用できません</string>
     <string name="cloud_changes">クラウドの変更</string>
     <string name="cloud_conflicts">競合</string>
     <string name="cloud_all_changes_uploaded_descr">この端末で行われた変更のすべてが、OsmAnd Cloudにて同期されます。</string>
-    <string name="cloud_no_conflicts">競合データはありません</string>
+    <string name="cloud_no_conflicts">競合データはありません。</string>
     <string name="download_cloud_version">クラウド版をダウンロード</string>
     <string name="shared_string_do_not_exist">存在しません</string>
     <string name="import_export">インポート/エクスポート</string>
@@ -4638,4 +4638,142 @@ POIの更新は利用できません</string>
     <string name="weight_limit_error">最小値は\"%1$s\" トンです。車両重量が最小値未満の場合は、プロファイル\"%2$s\"を使用してください。</string>
     <string name="x_axis">X軸</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">風速等高線</string>
+    <string name="weather_online_cache">オンラインキャッシュ</string>
+    <string name="map_settings_weather_temp">温度</string>
+    <string name="pressure_layer">気圧関連レイヤー</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_prefs_descr">24時間および週間予報、3時間ごとに更新</string>
+    <string name="map_widget_group_sunrise_sunset">日出、日没</string>
+    <string name="map_settings_weather_precip">降水量</string>
+    <string name="empty_screen_weather_wind_layer">ONにすると、マップ上に風関連のレイヤーが表示されます。</string>
+    <string name="clouds_widget_desc">現在のマップ中心の雲量を表示します。</string>
+    <string name="map_settings_weather_wind">風</string>
+    <string name="map_widget_altitude_current_location_desc">現在地のジオロケーションの海抜高度を示します。</string>
+    <string name="current_location_widget">座標：現在地</string>
+    <string name="shared_string_next_sunset">次の日没</string>
+    <string name="map_widget_group_sunrise_sunset_desc">これらのウィジェットは、次の日出(日の出)と日没(日の入)に関する情報を表示します。</string>
+    <string name="map_settings_weather_air_pressure">気圧</string>
+    <string name="weather_pressure_inches_of_mercury">水銀柱インチ</string>
+    <string name="weather_temperature_celsius">摂氏</string>
+    <string name="action_not_supported_with_map_style">このアクションは、選択したマップスタイルではサポートされていません。</string>
+    <string name="share_crash_log">クラッシュログを共有する</string>
+    <string name="map_rendering_engine_v1">バージョン1</string>
+    <string name="map_widget_altitude_map_center_desc">現在のマップ中心の海抜高度を表示します。</string>
+    <string name="map_widget_altitude_desc">現在のジオロケーションの高度または現在のマップの中心の標高を表示します</string>
+    <string name="simulate_location_by_gpx">GPXによる位置シミュレーション</string>
+    <string name="location_simulation_cutoff">シミュレーション時は最初の1メートルをスキップ</string>
+    <string name="location_simulation_speedup">シミュレーションの高速化</string>
+    <string name="last_synchronized">最終同期</string>
+    <string name="wind_layer">風関連レイヤー</string>
+    <string name="cloud_layer">雲関連レイヤー</string>
+    <string name="precipitation_layer">降水量関連レイヤー</string>
+    <string name="show_borders_of_downloaded_maps">ダウンロードしたマップの境界線を表示</string>
+    <string name="external_sensors_plugin_name">外部センサー</string>
+    <string name="map_settings_weather_cloud">雲</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="dismiss_changes">変更を破棄しますか？</string>
+    <string name="dismiss_changes_descr">すべての変更が破棄されます。</string>
+    <string name="external_sensors_plugin_description">外部センサーから心拍数、自転車の速度、自転車の出力またはケイデンス(1分あたりのクランク回転数)を読み取ります。端末はANT+ ワイヤレスパーソナルネットワークプロトコルを介して、それぞれのセンサーに接続されている必要があります。</string>
+    <string name="map_widget_altitude_current_location">高度: 現在地</string>
+    <string name="map_widget_rendering_fps_desc">マップおよびマップエレメントが表示および更新される速さをフレーム/秒(FPS)で示します。</string>
+    <string name="empty_screen_weather_contours">ONにすると、マップ上に天候ベースの等高線が表示されます。</string>
+    <string name="temperature_layer">温度関連レイヤー</string>
+    <string name="weather_precip_milimeters">ミリメートル</string>
+    <string name="shared_string_next_sunrise">次の日出</string>
+    <string name="weather_temperature_fahrenheit">華氏</string>
+    <string name="storage_migration_fragment_close_descr">コピーは %1$s しか完了していません。ここで停止すると、アプリが正しく動作しなくなる可能性があります。</string>
+    <string name="mtb_segment_classification">セグメントの分類</string>
+    <string name="quick_action_temperature_layer">マップ上の気温関連レイヤーの表示/非表示を切り替えます。</string>
+    <string name="quick_action_air_pressure_layer">マップ上の気圧関連レイヤーの表示/非表示を切り替えます。</string>
+    <string name="quick_action_cloud_layer">マップ上の雲関連レイヤーの表示/非表示を切り替えます。</string>
+    <string name="quick_action_wind_layer">マップ上の風関連レイヤーの表示/非表示を切り替えます。</string>
+    <string name="switch_mode_by_tapping_on_widget">ウィジェットをタップしてモードを切り替えます。</string>
+    <string name="quick_action_precipitation_layer">マップ上の降水関連レイヤーの表示/非表示を切り替えます。</string>
+    <string name="weather_plugin_description">サービス
+\n- 5つのレイヤーを備えた 24時間および 7日間の天気予報
+\n- 位置に応じたウィジェット
+\n- 温度/気圧の分布図
+\n
+\n気象データは、Global Forecast System (GFS、https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ) によって提供されています。</string>
+    <string name="shared_string_weather">天候</string>
+    <string name="shared_string_contours">輪郭</string>
+    <string name="measurement_units">測定単位</string>
+    <string name="explore_weather_forecast">天気予報を調べます。</string>
+    <string name="turn_on_nautical_depth_description">ONにすると、マップ上に等深線情報が表示されます。</string>
+    <string name="shared_string_layers">レイヤー</string>
+    <string name="empty_screen_weather_pressure_layer">ONにすると、マップ上に気圧関連のレイヤーが表示されます。</string>
+    <string name="empty_screen_weather_clouds_layer">ONにすると、マップ上に雲量レイヤーが表示されます。</string>
+    <string name="weather_widgets_secondary_desc">測定単位は、天候プラグインの設定で変更できます。</string>
+    <string name="weather_wind_miles_per_hour">時速マイル</string>
+    <string name="empty_screen_view_selected_weather_data">ONにすると、選択した気象データがマップ上に表示されます。</string>
+    <string name="weather_wind_knots">ノット</string>
+    <string name="weather_wind_meters_per_second">メートル/秒</string>
+    <string name="weather_widget_group_desc">さまざまな天候情報を表示するウィジェットのセットです。</string>
+    <string name="weather_pressure_hectopascals">ヘクトパスカル</string>
+    <string name="weather_pressure_millimeters_of_mercury">水銀柱ミリメートル</string>
+    <string name="purchases_feature_desc_external_sensors">自転車の速度、自転車の出力ー、ケイデンス(1分あたりのクランク回転数)、心拍数などの外部センサーから取得したデータの表示や記録を行います。</string>
+    <string name="rendering_engine_failed_descr">OsmAndは\'バージョン1\'のマップレンダリングに戻しました。 なお[設定]にて新しい\'バージョン2 (OpenGL)\'レンダリングエンジンに戻すことができます。
+\n
+\n可能であればエラーログを提供して頂き、改善のサポートをお願いします。</string>
+    <string name="rendering_engine_failed">直近でOsmAndのマップレンダリングがクラッシュしました。</string>
+    <string name="map_rendering_engine_v2">バージョン2 (OpenGL)</string>
+    <string name="map_rendering_engine_descr">バージョン2 (OpenGL)は、より高速なマップレンダリングエンジンとなっており、2.5次元表示も可能です。ちなみにバージョン1はOsmAnd 4.3以前の標準エンジンで、古い端末で動かす場合に適しています。</string>
+    <string name="release_4_3">• 新しく高速なバージョン2 (OpenGL) マップレンダリング エンジン、2.5Dビューにも対応
+\n
+\n• 移動中の場所の変化時におけるスムーズなアニメーション
+\n
+\n• マップの中心座標とジオロケーションの高度に関する新しいウィジェット
+\n
+\n• \"タップまでの距離”:テキストサイズに関するオプションを追加
+\n
+\n• \"マップ マーカー\"ウィジェット:クリック動作を変更するオプションを追加
+\n
+\n• \"位置配置\"オプションを修正
+\n
+\n• GPX:\"link\"、\"cmt\"、\"desc\"タグ、およびカスタム拡張子のサポートを追加
+\n
+\n• \"海図\"リストを再編成
+\n
+\n• ANT+センサーのサポートを追加
+\n
+\n• ダウンロード時UUIDを無効にするオプションを追加
+\n
+\n• 標高に依存するウォーキング/ハイキング/ランニングトリップなどで、デフォルト速度を調整可能にした上での時間予測を採用
+\n
+\n• 音声出力と音量スライダーの動作を修正
+\n
+\n</string>
+    <string name="speak_gps_signal_status">GPS信号を見失ったときと再検出を通知する</string>
+    <string name="rendering_attr_showMtbScale_name">MTBスケールを表示</string>
+    <string name="rendering_attr_showMtbScale_description">MTBスケールに従ってトレイルを表示します。</string>
+    <string name="map_widget_sunset_desc">次の日没時刻、または日没までの残り時間を表示します。</string>
+    <string name="map_widget_sunrise_desc">次の日出時刻、または日出までの残り時間を表示します。</string>
+    <string name="shared_string_time_left">残り時間</string>
+    <string name="shared_string_sunset">日没</string>
+    <string name="shared_string_sunrise">日出</string>
+    <string name="rendering_attr_depthContourColorScheme_name">線の色</string>
+    <string name="rendering_attr_depthContourWidth_name">線の幅</string>
+    <string name="depth_contour_lines">等深線</string>
+    <string name="weather_offline_forecast">オフライン予測</string>
+    <string name="air_pressure_widget_desc">現在のマップ中心の気圧を表示します。</string>
+    <string name="wind_widget_desc">現在のマップ中心の風速を表示します。</string>
+    <string name="restart_now">今すぐ再起動</string>
+    <string name="temperature_widget_desc">現在のマップ中心の気温を表示します。</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="map_rendering_engine">マップレンダリングエンジン</string>
+    <string name="show_map_symbols_desc">テキスト、道路標識、その他。</string>
+    <string name="external_sensors_support">外部センサーのサポート</string>
+    <string name="speak_route_recalculation">ルート再計算時にアナウンスをする</string>
+    <string name="map_center_widget">座標：マップ中心</string>
+    <string name="map_widget_altitude_map_center">標高：マップ中心</string>
+    <string name="precipitation_widget_desc">現在のマップ中心の降水量を表示します。</string>
+    <string name="empty_screen_weather_precipitation_layer">ONにすると、マップ上に降水量関連のレイヤーが表示されます。</string>
+    <string name="empty_screen_weather_temperature_layer">ONにすると、マップ上に気温関連のレイヤーが表示されます。</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_precip_inches">インチ</string>
+    <string name="weather_wind_kn">ノット</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_wind_kilimeters_per_hour">毎時メートル</string>
 </resources>
