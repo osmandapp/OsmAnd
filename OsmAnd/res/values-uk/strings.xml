@@ -5037,5 +5037,21 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи, внизу — для напрямку руху, по центру — для всього іншого.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для напрямку руху, по центру — для всіх інших.</string>
+    <string name="shared_string_apply_changes">Застосувати зміни</string>
+    <string name="default_tracks_appearance_description">Ці налаштування зовнішнього вигляду застосовуються до всіх треків, вибраних на попередньому екрані.
+\n
+\nВони також зберігаються у файлі «%1$s» для застосування %2$s до всіх інших треків без неявного або спеціально налаштованого зовнішнього вигляду.</string>
+    <string name="default_tracks_appearance">Усталений вигляд треку</string>
+    <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
+    <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
+    <string name="no_visible_tracks">Немає треків на мапі</string>
+    <string name="recently_visible">Нещодавно видимий %1$s</string>
+    <string name="empty_tracks">У вас немає файлів треків.</string>
+    <string name="change_appearance">Змінити зовнішній вигляд</string>
+    <string name="shared_string_on_map">На мапі</string>
+    <string name="shared_string_select_recent">Вибрати нещодавні</string>
+    <string name="show_all_tracks">Показати всі треки</string>
+    <string name="switch_folder">Перемкнути теку</string>
 </resources>
