@@ -5031,5 +5031,21 @@
     <string name="sound_beep_simple_loud">Hangjelzés: egyszerű hangos</string>
     <string name="sound_beep_simple">Hangjelzés: egyszerű</string>
     <string name="last_synchronized">Utoljára szinkronizálva</string>
-    <string name="display_position_automatic_descr">A térkép tájolásától függően, alul a mozgásirány követésénél és középen minden más esetben.</string>
+    <string name="display_position_automatic_descr">A térkép tájolásától függően: alul a mozgásirány követésénél és középen minden más esetben.</string>
+    <string name="shared_string_on_map">Térképen</string>
+    <string name="no_visible_tracks">Nincsenek nyomvonalak a térképen</string>
+    <string name="change_appearance">Megjelenés módosítása</string>
+    <string name="show_all_tracks">Minden nyomvonal megjelenítése</string>
+    <string name="switch_folder">Mappa váltása</string>
+    <string name="shared_string_select_recent">Legutóbbi választása</string>
+    <string name="empty_tracks">Nincsenek nyomvonal fájljai.</string>
+    <string name="recently_visible">Legutóbb látható %1$s</string>
+    <string name="default_tracks_appearance">Alapértelmezett nyomvonal megjelenés</string>
+    <string name="default_tracks_appearance_description">Ezek a megjelenési beállítások az előző képernyőn kiválasztott összes nyomvonalra vonatkoznak.
+\n
+\nA rendszer továbbá elmenti „%1$s” néven ezeket, hogy a(z) %2$s alkalmazza az összes többi, közvetett vagy konkrét megjelenési beállítás nélküli nyomvonalra.</string>
+    <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
+    <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
+    <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
 </resources>
