@@ -5042,5 +5042,21 @@
     <string name="sound_beep_complex">Bip: kompleks</string>
     <string name="sound_beep_complex_loud">Bip: kompleks keras</string>
     <string name="last_synchronized">Disinkronkan terakhir</string>
-    <string name="display_position_automatic_descr">Tergantung pada orientasi Peta, bagian bawah untuk arah pergerakan, bagian tengah untuk yang lainnya.</string>
+    <string name="display_position_automatic_descr">Tergantung pada orientasi Peta: bagian bawah untuk arah pergerakan, bagian tengah untuk yang lainnya.</string>
+    <string name="shared_string_apply_changes">Terapkan perubahan</string>
+    <string name="default_tracks_appearance_description">Pengaturan penampilan ini diterapkan ke semua trek yang dipilih pada layar sebelumnya.
+\n
+\nPengaturan ini juga disimpan sebagai \"%1$s\" untuk diterapkan oleh %2$s untuk semua trek lain tanpa tampilan implisit atau yang diatur secara khusus.</string>
+    <string name="default_tracks_appearance">Tampilan trek bawaan</string>
+    <string name="no_visible_tracks_description">Pilih trek untuk ditampilkan di peta.</string>
+    <string name="no_visible_tracks">Tidak ada trek di peta</string>
+    <string name="recently_visible">Terlihat terkini %1$s</string>
+    <string name="empty_tracks_description">Anda dapat mengimpor, membuat, atau merekam berkas trek menggunakan OsmAnd.</string>
+    <string name="empty_tracks">Anda tidak memiliki berkas trek.</string>
+    <string name="shared_string_select_recent">Pilih yang terkini</string>
+    <string name="change_appearance">Ubah penampilan</string>
+    <string name="switch_folder">Ubah folder</string>
+    <string name="show_all_tracks">Tampilkan semua trek</string>
+    <string name="shared_string_on_map">Di peta</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ubah tampilan trek %1$s\?</string>
 </resources>
