@@ -6,6 +6,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE
 import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -212,23 +213,28 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupPreferredLocalePref() {
-		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
-		ListPreferenceEx preferredLocale = findPreference(settings.PREFERRED_LOCALE.getId());
-		preferredLocale.setIcon(getContentIcon(R.drawable.ic_action_map_language));
-		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			ListPreferenceEx preferredLocale = findPreference(settings.PREFERRED_LOCALE.getId());
+			preferredLocale.setVisible(false);
+		} else {
+			Context ctx = getContext();
+			if (ctx == null) {
+				return;
+			}
+			ListPreferenceEx preferredLocale = findPreference(settings.PREFERRED_LOCALE.getId());
+			preferredLocale.setIcon(getContentIcon(R.drawable.ic_action_map_language));
+			preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
 
-		Map<String, String> preferredLanguages = getPreferredDisplayLanguages(ctx);
-		String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
-		String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
-		preferredLocale.setEntries(languagesNames);
-		preferredLocale.setEntryValues(languagesIds);
+			Map<String, String> preferredLanguages = getPreferredDisplayLanguages(ctx);
+			String[] languagesNames = preferredLanguages.values().toArray(new String[0]);
+			String[] languagesIds = preferredLanguages.keySet().toArray(new String[0]);
+			preferredLocale.setEntries(languagesNames);
+			preferredLocale.setEntryValues(languagesIds);
 
-		// Add " (Display language)" to menu title in Latin letters for all non-en languages
-		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
-			preferredLocale.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+			// Add " (Display language)" to menu title in Latin letters for all non-en languages
+			if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+				preferredLocale.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+			}
 		}
 	}
 
