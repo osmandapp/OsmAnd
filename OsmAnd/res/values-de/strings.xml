@@ -5043,4 +5043,5 @@
     <string name="sound_beep_complex">Signalton: Komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
     <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung, unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="shared_string_apply_changes">Änderungen anwenden</string>
 </resources>
