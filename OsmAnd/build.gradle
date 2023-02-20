@@ -172,7 +172,7 @@ android {
 
 afterEvaluate {
 	android.applicationVariants.all { variant ->
-		if (variant.name.contains('Opengl')) {
+		if (variant.name.contains('Opengldebug')) {
 			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
 		} else {
 			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
@@ -191,7 +191,7 @@ task copyOsmAndCoreWithJNI() {
 		file("libs/armeabi-v7a").mkdirs()
 		file("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/armeabi-v7a/libOsmAndCoreWithJNI.so"))
 		file("libs/arm64-v8a").mkdirs()
-		file("../../binaries/android/clang-arm64-v8a/Release/libOsmAndCoreWithJNI.so").renameTo(file("libs/arm64-v8a/libOsmAndCoreWithJNI.so"))
+		file("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/arm64-v8a/libOsmAndCoreWithJNI.so"))
 		file("libs/x86").mkdirs()
 		file("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86/libOsmAndCoreWithJNI.so"))
 		file("libs/x86_64").mkdirs()
@@ -204,14 +204,14 @@ dependencies {
 	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
 
 	// Uncomment for local debug
-	openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
+	//openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
 
 	// Comment for local debug
 	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
 	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
-	//openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
-	//openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
