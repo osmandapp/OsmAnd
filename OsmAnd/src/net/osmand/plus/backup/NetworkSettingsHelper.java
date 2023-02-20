@@ -108,8 +108,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public boolean cancelImport() {
 		boolean cancelled = false;
 		for (ImportBackupTask importTask : importAsyncTasks.values()) {
-			if (importTask != null && (importTask.getStatus() == AsyncTask.Status.RUNNING)) {
-				cancelled |= importTask.cancel(true);
+			if (importTask != null ){
+				if((importTask.getStatus() == AsyncTask.Status.RUNNING)){
+					cancelled |= importTask.cancel(true);
+				} else if(importTask.isSubtaskRunning()){
+					importTask.cancelSubtask();
+				}
 			}
 		}
 		return cancelled;

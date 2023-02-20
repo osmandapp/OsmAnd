@@ -49,6 +49,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private int maxProgress;
 	private int generalProgress;
 
+    private ImportBackupItemsTask importBackupItemsTask;
+
 	ImportBackupTask(@NonNull String key,
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @Nullable BackupCollectListener collectListener,
@@ -134,6 +136,27 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		return null;
 	}
 
+    public void cancelSubtask(){
+		if (isSubtaskRunning()){
+            importer.cancel();
+			importBackupItemsTask.cancel(true);
+		}
+	}
+
+	public boolean isSubtaskRunning(){
+		return importBackupItemsTask != null && importBackupItemsTask.getStatus() == Status.RUNNING;
+	}
+
+    @Override
+    protected void onCancelled(List<SettingsItem> settingsItems) {
+        if (importBackupItemsTask != null) {
+            importBackupItemsTask.cancel(true);
+            importBackupItemsTask = null;
+        } else {
+            onPostExecute(settingsItems);
+        }
+    }
+
 	@Override
 	protected void onPostExecute(@Nullable List<SettingsItem> items) {
 		if (items != null && importType != ImportType.CHECK_DUPLICATES) {
@@ -161,8 +184,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						helper.importAsyncTasks.remove(key);
 						helper.finishImport(importListener, succeed, items, needRestart);
 					};
-					new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData)
-							.executeOnExecutor(app.getBackupHelper().getExecutor());
+                importBackupItemsTask = new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData);
+                importBackupItemsTask.executeOnExecutor(app.getBackupHelper().getExecutor());
 				} else {
 					helper.importAsyncTasks.remove(key);
 					helper.finishImport(importListener, false, Collections.emptyList(), false);

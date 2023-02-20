@@ -51,6 +51,11 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	@Override
+	protected void onCancelled(Boolean aBoolean) {
+		onPostExecute(false);
+	}
+
+	@Override
 	protected void onPostExecute(Boolean success) {
 		app.getSettings().PREFERRED_LOCALE.removeListener(localeListener);
 		if (listener != null) {
