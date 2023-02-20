@@ -92,7 +92,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getActivityBgColorId(nightMode);
+		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -138,6 +138,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
 		View view = inflater.inflate(R.layout.tracks_appearance_fragment, container, false);
+		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		setupToolbar(view);
 		setupButtons(view);
@@ -148,7 +149,11 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		View appbar = view.findViewById(R.id.appbar);
+		ViewCompat.setElevation(appbar, 5.0f);
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+
+		Toolbar toolbar = appbar.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);

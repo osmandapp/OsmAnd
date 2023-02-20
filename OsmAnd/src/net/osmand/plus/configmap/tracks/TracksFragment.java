@@ -1,11 +1,11 @@
 package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -73,8 +73,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private ProgressBar progressBar;
 	private TracksTabAdapter adapter;
 
-	private TextView applyButton;
-	private TextView selectionButton;
+	private View applyButton;
+	private View selectionButton;
 
 	private boolean nightMode;
 	private boolean trackImported;
@@ -87,7 +87,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getActivityBgColorId(nightMode);
+		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -126,6 +126,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
 		View view = inflater.inflate(R.layout.tracks_fragment, container, false);
+		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		setupToolbar(view);
 		setupTabLayout(view);
@@ -136,7 +137,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void setupToolbar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
-		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+		View appbar = view.findViewById(R.id.appbar);
+		ViewCompat.setElevation(appbar, 5.0f);
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
@@ -172,29 +175,29 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		viewPager = view.findViewById(R.id.view_pager);
 		viewPager.setAdapter(adapter);
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager,
-				(tab, position) -> tab.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name)));
-		mediator.attach();
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 
-		int color = ColorUtilities.getSelectedProfileColor(app, nightMode);
-		tabLayout.setSelectedTabIndicatorColor(color);
-		tabLayout.setTabTextColors(ColorUtilities.getPrimaryTextColor(app, nightMode), color);
+		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+		tabLayout.setSelectedTabIndicatorColor(activeColor);
+
+		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
+		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager,
+				(tab, position) -> {
+					View customView = inflater.inflate(R.layout.tab_title_view, tabLayout, false);
+					TextView textView = customView.findViewById(android.R.id.text1);
+					textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
+
+					tab.setCustomView(customView);
+					tab.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
+				});
+		mediator.attach();
 	}
 
 	private void setupButtons(@NonNull View view) {
-		setupApplyButton(view);
-		setupSelectionButton(view);
-		updateButtonsState();
-	}
-
-	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
-		applyButton.setTextColor(getButtonColorStateList());
 		applyButton.setOnClickListener(v -> updateTracksVisibility());
-	}
 
-	private void setupSelectionButton(@NonNull View view) {
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
 			if (selectedTracksHelper.hasSelectedTracks()) {
@@ -203,21 +206,19 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				onGpxInfosSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
 			}
 		});
-		selectionButton.setTextColor(getButtonColorStateList());
+		updateButtonsState();
 	}
 
 	private void updateButtonsState() {
-		applyButton.setEnabled(selectedTracksHelper.hasItemsToApply());
-		boolean hasSelectedTracks = selectedTracksHelper.hasSelectedTracks();
-		selectionButton.setEnabled(selectedTracksHelper.hasRecentlyVisibleTracks() || hasSelectedTracks);
-		selectionButton.setText(hasSelectedTracks ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
-	}
+		boolean anySelected = selectedTracksHelper.hasSelectedTracks();
+		String apply = getString(R.string.shared_string_apply).toUpperCase();
+		String select = getString(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent).toUpperCase();
 
-	@NonNull
-	private ColorStateList getButtonColorStateList() {
-		int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
-		int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.button_color_active_light;
-		return AndroidUtils.createEnabledColorStateList(app, disabledColor, activeColor);
+		applyButton.setEnabled(selectedTracksHelper.hasItemsToApply());
+		selectionButton.setEnabled(selectedTracksHelper.hasRecentlyVisibleTracks() || anySelected);
+
+		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
+		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
 	}
 
 	@NonNull

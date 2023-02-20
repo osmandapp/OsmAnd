@@ -3,7 +3,7 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/appbar_and_list_background_color"
+	android:background="?attr/activity_background_color"
 	android:orientation="vertical">
 
 	<com.google.android.material.appbar.AppBarLayout
@@ -98,48 +98,41 @@
 			android:paddingBottom="@dimen/dialog_button_ex_height" />
 
 		<LinearLayout
-			android:id="@+id/buttons_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
-			android:clickable="true"
-			android:focusable="true"
 			android:orientation="vertical">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/buttons_shadow"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/content_padding_half"
-				android:background="@drawable/shadow" />
+			<include layout="@layout/simple_divider_item" />
 
 			<LinearLayout
+				android:id="@+id/buttons_container"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_ex_height"
-				android:orientation="horizontal">
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:background="?attr/list_background_color"
+				android:gravity="center"
+				android:minHeight="@dimen/bottom_sheet_title_height"
+				android:orientation="horizontal"
+				android:padding="@dimen/content_padding_half">
 
-				<net.osmand.plus.widgets.TextViewEx
+				<include
 					android:id="@+id/selection_button"
-					style="@style/DescStyle.Medium"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="?attr/selectableItemBackground"
-					android:gravity="start|center_vertical"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:text="@string/shared_string_select_recent"
-					android:textAllCaps="true" />
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="wrap_content"
+					android:layout_height="@dimen/dialog_button_height" />
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/apply_button"
-					style="@style/DescStyle.Medium"
+				<View
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="?attr/selectableItemBackground"
-					android:gravity="end|center_vertical"
-					android:paddingHorizontal="@dimen/content_padding"
-					android:text="@string/shared_string_apply"
-					android:textAllCaps="true" />
+					android:layout_weight="1" />
+
+				<include
+					android:id="@+id/apply_button"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="wrap_content"
+					android:layout_height="@dimen/dialog_button_height" />
+
 
 			</LinearLayout>
 

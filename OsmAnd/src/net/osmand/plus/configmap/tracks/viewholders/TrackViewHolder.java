@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -63,7 +63,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindView(@NonNull GPXInfo gpxInfo, @Nullable String folderName, boolean lastItem) {
 		title.setText(gpxInfo.getName());
-		folder.setText(folderName);
+		folder.setText(Algorithms.capitalizeFirstLetter(folderName));
 
 		SelectedTracksHelper helper = fragment.getSelectedTracksHelper();
 		boolean selected = helper.getSelectedTracks().contains(gpxInfo);

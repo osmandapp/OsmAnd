@@ -5,7 +5,7 @@
 	android:layout_height="wrap_content"
 	android:gravity="center_horizontal"
 	android:orientation="vertical"
-	android:paddingVertical="@dimen/content_padding_small">
+	android:padding="@dimen/dialog_content_margin">
 
 	<ImageView
 		android:id="@+id/icon"
@@ -36,8 +36,8 @@
 	<include
 		android:id="@+id/action_button"
 		layout="@layout/bottom_sheet_dialog_button"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginBottom="@dimen/dialog_content_margin" />
+		android:layout_marginBottom="@dimen/content_padding_small" />
 
 </LinearLayout>
