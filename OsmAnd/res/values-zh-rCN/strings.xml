@@ -1532,7 +1532,7 @@
     <string name="lang_als">阿尔巴尼亚语 (Tosk)</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">%1$s 地图已准备就绪，可以使用。</string>
-    <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变。</string>
+    <string name="simulate_initial_startup_descr">设置指示应用程序首次启动的标志，保持所有其他设置不变。</string>
     <string name="favorite_category_dublicate_message">请使用尚不存在的类别名称。</string>
     <string name="shared_string_trip_recording">行程记录</string>
     <string name="download_live_updates">实时更新</string>
