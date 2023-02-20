@@ -79,7 +79,8 @@ public class UiUtilities {
 		SECONDARY,
 		SECONDARY_HARMFUL,
 		SECONDARY_ACTIVE,
-		STROKED
+		STROKED,
+		TERTIARY
 	}
 
 	public enum CompoundButtonType {
@@ -689,6 +690,7 @@ public class UiUtilities {
 		Context ctx = buttonView.getContext();
 		TextViewEx buttonTextView = buttonView.findViewById(R.id.button_text);
 		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		ColorStateList colorStateList = null;
 		int textAndIconColorResId = INVALID_ID;
 		switch (buttonType) {
 			case PRIMARY:
@@ -721,9 +723,17 @@ public class UiUtilities {
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
 				textAndIconColorResId = ColorUtilities.getButtonSecondaryTextColorId(nightMode);
 				break;
+			case TERTIARY:
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_tetriary_light, R.drawable.ripple_dark);
+				textAndIconColorResId = nightMode ? R.color.active_color_primary_dark : R.color.button_color_active_light;
+				int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
+				colorStateList = AndroidUtils.createEnabledColorStateList(ctx, disabledColor, textAndIconColorResId);
+				break;
 		}
 		if (textAndIconColorResId != INVALID_ID) {
-			ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			if (colorStateList == null) {
+				colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			}
 			buttonTextView.setText(buttonText);
 			buttonTextView.setTextColor(colorStateList);
 			buttonTextView.setEnabled(buttonView.isEnabled());
