@@ -3,6 +3,8 @@ package net.osmand.plus.widgets.chips;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.util.Algorithms;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +57,16 @@ class ChipsDataHolder {
 	public ChipItem getItemById(@NonNull String id) {
 		for (ChipItem item : items) {
 			if (id.equals(item.id)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public ChipItem getItemByTag(@NonNull Object tag) {
+		for (ChipItem item : items) {
+			if (Objects.equals(item.tag, tag)) {
 				return item;
 			}
 		}
