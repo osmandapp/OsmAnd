@@ -2492,7 +2492,7 @@
     <string name="toast_empty_name_error">Bezejmenné místo</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
-    <string name="make_as_start_point">Nastavit toto jako počáteční bod</string>
+    <string name="make_as_start_point">Vytvořte z tohoto bodu výchozí bod</string>
     <string name="osm_recipients_label">Příjemci OSM</string>
     <string name="total_donations">Celkem přispěno</string>
     <string name="day_off_label">zavřeno</string>
@@ -3850,7 +3850,7 @@
 \nJe-li zapnuto, OsmAnd vypne obrazovku podle systémového limitu.</string>
     <string name="additional_actions_descr">Tyto akce jsou dostupné po stisknutí tlačítka “%1$s”.</string>
     <string name="empty_state_my_tracks_desc">Importovat nebo nahrát soubory stop</string>
-    <string name="save_global_track_interval_descr">Zadejte interval ukládání pro obecný záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce).</string>
+    <string name="save_global_track_interval_descr">Zadejte interval ukládání pro obecný záznam stopy (aktivovaný přes widget Záznam trasy na mapové obrazovce).</string>
     <string name="shared_string_search_history">Historie vyhledávání</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový člun</string>
@@ -4741,4 +4741,25 @@
     <string name="skip_download">Přeskočit stahování</string>
     <string name="determine_location">Umožněte nám určit vaši polohu</string>
     <string name="weather_precip_in">v</string>
+    <string name="display_position_automatic_descr">Závisí na orientaci mapy: dole pro směr pohybu, uprostřed pro všechny ostatní.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Změnit vzhled %1$s stop\?</string>
+    <string name="default_tracks_appearance">Výchozí vzhled stopy</string>
+    <string name="no_visible_tracks_description">Výběrem stop je zobrazíte na mapě.</string>
+    <string name="no_visible_tracks">Žádné stopy na mapě</string>
+    <string name="recently_visible">Nedávno viditelné %1$s</string>
+    <string name="empty_tracks_description">Pomocí aplikace OsmAnd můžete importovat, vytvářet nebo nahrávat soubory stop.</string>
+    <string name="empty_tracks">Nemáte soubory stop.</string>
+    <string name="shared_string_select_recent">Vybrat poslední</string>
+    <string name="change_appearance">Změnit vzhled</string>
+    <string name="switch_folder">Přepnout složku</string>
+    <string name="show_all_tracks">Zobrazit všechny stopy</string>
+    <string name="shared_string_on_map">Na mapě</string>
+    <string name="simulation_real_mode_desc">Na rovných úsecích cest bude rychlost přizpůsobena maximální povolené rychlosti.
+\nNa křižovatkách simulace zpomalí.
+\nNa semaforech, značkách stop, atd. se aplikuje dodatečné zdržení.</string>
+    <string name="map_widget_altitude">Nadmořská výška aktuální polohy</string>
+    <string name="shared_string_apply_changes">Použít změny</string>
+    <string name="default_tracks_appearance_description">Tato nastavení vzhledu se použijí na všechny stopy vybrané na předchozí obrazovce.
+\n
+\nJsou také uložena jako \"%1$s\", aby je %2$s použil pro všechny ostatní stopy bez implicitně nebo specificky nastaveného vzhledu.</string>
 </resources>
