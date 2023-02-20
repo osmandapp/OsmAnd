@@ -1,4 +1,4 @@
-package net.osmand.plus.base.wrapper;
+package net.osmand.plus.base.containers;
 
 import androidx.annotation.DrawableRes;
 

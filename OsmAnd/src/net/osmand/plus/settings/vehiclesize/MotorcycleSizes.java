@@ -1,26 +1,25 @@
 package net.osmand.plus.settings.vehiclesize;
 
-import static net.osmand.plus.settings.vehiclesize.DimensionType.HEIGHT;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.LENGTH;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.WEIGHT;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.WIDTH;
+import static net.osmand.plus.settings.vehiclesize.SizeType.HEIGHT;
+import static net.osmand.plus.settings.vehiclesize.SizeType.LENGTH;
+import static net.osmand.plus.settings.vehiclesize.SizeType.WEIGHT;
+import static net.osmand.plus.settings.vehiclesize.SizeType.WIDTH;
+import static net.osmand.plus.utils.OsmAndFormatter.KILOGRAMS_IN_ONE_TON;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.wrapper.Assets;
-import net.osmand.plus.base.wrapper.Limits;
-import net.osmand.plus.base.wrapper.ThemedIconId;
+import net.osmand.plus.base.containers.Limits;
+import net.osmand.plus.base.containers.ThemedIconId;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.containers.Assets;
 import net.osmand.util.Algorithms;
 
 public class MotorcycleSizes extends VehicleSizes {
 
-	private static final int KILOGRAMS_IN_ONE_TON = 1000;
-
 	@Override
-	protected void collectDimensionsData() {
+	protected void collectSizesData() {
 		ThemedIconId icon = new ThemedIconId(R.drawable.img_help_width_limit_day, R.drawable.img_help_width_limit_night);
 		Assets assets = new Assets(icon, R.string.width_limit_description);
 		Limits limits = new Limits(0.7f, 1f);
@@ -43,18 +42,18 @@ public class MotorcycleSizes extends VehicleSizes {
 	}
 
 	@Override
-	public int getMetricStringId(@NonNull DimensionType type, @NonNull MetricsConstants mc) {
+	public int getMetricStringId(@NonNull SizeType type, @NonNull MetricsConstants mc) {
 		return type == WEIGHT ? R.string.shared_string_kilograms : super.getMetricStringId(type, mc);
 	}
 
 	@Override
-	public int getMetricShortStringId(@NonNull DimensionType type, @NonNull MetricsConstants mc) {
+	public int getMetricShortStringId(@NonNull SizeType type, @NonNull MetricsConstants mc) {
 		return type == WEIGHT ? R.string.kg : super.getMetricShortStringId(type, mc);
 	}
 
 	@Override
 	public float readSavedValue(@NonNull SizePreference preference) {
-		if (preference.getDimensionType() == WEIGHT) {
+		if (preference.getSizeType() == WEIGHT) {
 			float value = (float) Algorithms.parseDoubleSilently(preference.getValue(), 0.0f);
 			if (value != 0.0f) {
 				value += 0.001f;
@@ -67,7 +66,7 @@ public class MotorcycleSizes extends VehicleSizes {
 
 	@Override
 	public float prepareValueToSave(@NonNull SizePreference preference, float value) {
-		if (preference.getDimensionType() == WEIGHT) {
+		if (preference.getSizeType() == WEIGHT) {
 			value /= KILOGRAMS_IN_ONE_TON;
 			if (value != 0.0f) {
 				value -= 0.001f;

@@ -2,15 +2,16 @@ package net.osmand.plus.settings.vehiclesize;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.base.wrapper.Assets;
-import net.osmand.plus.base.wrapper.Limits;
+import net.osmand.plus.settings.vehiclesize.containers.Assets;
+import net.osmand.plus.base.containers.Limits;
 
-public class DimensionData {
+public class SizeData {
+
 	private Assets assets;
 	private Limits limits;
 
-	public DimensionData(@NonNull Assets assets,
-	                     @NonNull Limits limits) {
+	public SizeData(@NonNull Assets assets,
+	                @NonNull Limits limits) {
 		this.assets = assets;
 		this.limits = limits;
 	}

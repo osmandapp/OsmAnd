@@ -38,7 +38,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
-import net.osmand.plus.settings.vehiclesize.DimensionType;
+import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -99,7 +99,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 		String parameterId = parameter.getId();
 		VehicleSizes vehicle = VehicleSizes.newInstance(profile, derivedProfile);
-		DimensionType type = DimensionType.getByKey(parameterId);
+		SizeType type = SizeType.getByKey(parameterId);
 		if (vehicle == null || type == null) {
 			return;
 		}
@@ -108,15 +108,15 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 		String defValue = parameter.getDefaultString();
 		ApplicationMode appMode = getSelectedAppMode();
-		MetricsConstants lengthMetric = settings.METRIC_SYSTEM.getModeValue(appMode);
+		MetricsConstants lengthMetricSystem = settings.METRIC_SYSTEM.getModeValue(appMode);
 		StringPreference preference = (StringPreference) settings.getCustomRoutingProperty(parameterId, defValue);
 
 		SizePreference uiPreference = new SizePreference(requireContext());
 		uiPreference.setKey(preference.getId());
-		uiPreference.setDimensionType(type);
+		uiPreference.setSizeType(type);
 		uiPreference.setVehicleSizes(vehicle);
 		uiPreference.setDefaultValue(defValue);
-		uiPreference.setLengthMetricSystem(lengthMetric);
+		uiPreference.setLengthMetricSystem(lengthMetricSystem);
 		uiPreference.setTitle(title);
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(getPreferenceIcon(parameterId));

@@ -26,8 +26,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.vehiclesize.DimensionData;
-import net.osmand.plus.settings.vehiclesize.DimensionType;
+import net.osmand.plus.settings.vehiclesize.SizeData;
+import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
@@ -88,10 +88,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 		sizePreference = (SizePreference) getPreference();
 		VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-		MetricsConstants lengthMetric = sizePreference.getLengthMetricSystem();
-		DimensionType dimensionType = sizePreference.getDimensionType();
-		DimensionData data = vehicleSizes.getDimensionData(dimensionType);
-		chips = vehicleSizes.collectChipItems(app, dimensionType, lengthMetric);
+		MetricsConstants lengthMetricSystem = sizePreference.getLengthMetricSystem();
+		SizeType sizeType = sizePreference.getSizeType();
+		SizeData data = vehicleSizes.getSizeData(sizeType);
+		chips = vehicleSizes.collectChipItems(app, sizeType, lengthMetricSystem);
 
 		TextView title = mainView.findViewById(R.id.title);
 		title.setText(sizePreference.getTitle().toString());
@@ -105,7 +105,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		tvDescription.setText(description);
 
 		TextView tvMetric = mainView.findViewById(R.id.metric);
-		int metricStringId = vehicleSizes.getMetricStringId(dimensionType, lengthMetric);
+		int metricStringId = vehicleSizes.getMetricStringId(sizeType, lengthMetricSystem);
 		tvMetric.setText(metricStringId);
 
 		chipsView = mainView.findViewById(R.id.chips_view);
@@ -126,7 +126,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
 				StringBuilder error = new StringBuilder();
-				if (currentValue == 0.0f || vehicleSizes.verifyValue(dimensionType, app, currentValue, error)) {
+				if (currentValue == 0.0f || vehicleSizes.verifyValue(sizeType, app, currentValue, error)) {
 					onCorrectInput();
 					updateChips();
 				} else {
@@ -145,7 +145,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			return true;
 		});
 
-		ChipItem selected = findChipByValue(currentValue);
+		ChipItem selected = chipsView.findChipByTag(currentValue);
 		chipsView.setSelected(selected);
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -178,24 +178,12 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	private void updateChips() {
-		ChipItem selected = findChipByValue(currentValue);
+		ChipItem selected = chipsView.findChipByTag(currentValue);
 		chipsView.setSelected(selected);
 		if (selected != null) {
 			chipsView.notifyDataSetChanged();
 			chipsView.smoothScrollTo(selected);
 		}
-	}
-
-	@Nullable
-	private ChipItem findChipByValue(Object value) {
-		if (chips != null) {
-			for (ChipItem chip : chips) {
-				if (Algorithms.objectEquals(chip.tag, value)) {
-					return chip;
-				}
-			}
-		}
-		return null;
 	}
 
 	private void onCorrectInput() {
@@ -211,8 +199,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private void updateApplyButton(boolean enable) {
 		rightButton.setEnabled(enable);
-		DialogButtonType btnType = enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED;
 		String btnTitle = getString(getRightBottomButtonTextId());
+		DialogButtonType btnType = enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED;
 		UiUtilities.setupDialogButton(nightMode, rightButton, btnType, btnTitle);
 	}
 

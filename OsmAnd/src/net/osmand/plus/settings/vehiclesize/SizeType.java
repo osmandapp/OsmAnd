@@ -8,7 +8,7 @@ import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public enum DimensionType {
+public enum SizeType {
 
 	WIDTH(VEHICLE_WIDTH),
 	HEIGHT(VEHICLE_HEIGHT),
@@ -17,13 +17,13 @@ public enum DimensionType {
 
 	private String key;
 
-	DimensionType(String key) {
+	SizeType(String key) {
 		this.key = key;
 	}
 
 	@Nullable
-	public static DimensionType getByKey(@NonNull String key) {
-		for (DimensionType type : values()) {
+	public static SizeType getByKey(@NonNull String key) {
+		for (SizeType type : values()) {
 			if (key.equals(type.key)) {
 				return type;
 			}

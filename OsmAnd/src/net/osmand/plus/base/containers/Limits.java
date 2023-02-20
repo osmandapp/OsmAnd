@@ -1,6 +1,7 @@
-package net.osmand.plus.base.wrapper;
+package net.osmand.plus.base.containers;
 
 public class Limits {
+
 	private final float min;
 	private final float max;
 

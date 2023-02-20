@@ -7,10 +7,10 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.wrapper.Assets;
-import net.osmand.plus.base.wrapper.Limits;
+import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.containers.Assets;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
@@ -25,30 +25,29 @@ public abstract class VehicleSizes {
 
 	public static final int DEFAULT_PROPOSED_VALUES_COUNT = 7;
 
-	private Map<DimensionType, DimensionData> dimensions = new HashMap<>();
+	private Map<SizeType, SizeData> sizes = new HashMap<>();
 
 	protected VehicleSizes() {
-		collectDimensionsData();
+		collectSizesData();
 	}
 
-	protected abstract void collectDimensionsData();
+	protected abstract void collectSizesData();
 
-	protected void add(@NonNull DimensionType type,
-	                   @NonNull Assets assets, @NonNull Limits limits) {
-		dimensions.put(type, new DimensionData(assets, limits));
+	protected void add(@NonNull SizeType type, @NonNull Assets assets, @NonNull Limits limits) {
+		sizes.put(type, new SizeData(assets, limits));
 	}
 
-	public DimensionData getDimensionData(@NonNull DimensionType type) {
-		return dimensions.get(type);
+	public SizeData getSizeData(@NonNull SizeType type) {
+		return sizes.get(type);
 	}
 
-	public boolean verifyValue(@NonNull DimensionType type, @NonNull Context ctx,
+	public boolean verifyValue(@NonNull SizeType type, @NonNull Context ctx,
 	                           float value, @NonNull StringBuilder error) {
 		return true;
 	}
 
-	public int getMetricStringId(@NonNull DimensionType type, @NonNull MetricsConstants mc) {
-		if (type == DimensionType.WEIGHT) {
+	public int getMetricStringId(@NonNull SizeType type, @NonNull MetricsConstants mc) {
+		if (type == SizeType.WEIGHT) {
 			return R.string.shared_string_tones;
 		} else {
 			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
@@ -61,8 +60,8 @@ public abstract class VehicleSizes {
 		}
 	}
 
-	public int getMetricShortStringId(@NonNull DimensionType type, @NonNull MetricsConstants mc) {
-		if (type == DimensionType.WEIGHT) {
+	public int getMetricShortStringId(@NonNull SizeType type, @NonNull MetricsConstants mc) {
+		if (type == SizeType.WEIGHT) {
 			return R.string.metric_ton;
 		} else {
 			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
@@ -80,7 +79,7 @@ public abstract class VehicleSizes {
 		if (value != 0.0f) {
 			value += 0.01f;
 		}
-		if (preference.getDimensionType() != DimensionType.WEIGHT) {
+		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert display value to selected metric system
 			value = VehicleAlgorithms.convertLengthFromMeters(preference.getLengthMetricSystem(), value);
 		}
@@ -88,7 +87,7 @@ public abstract class VehicleSizes {
 	}
 
 	public float prepareValueToSave(@NonNull SizePreference preference, float value) {
-		if (preference.getDimensionType() != DimensionType.WEIGHT) {
+		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert length to meters before save
 			value = VehicleAlgorithms.convertLengthToMeters(preference.getLengthMetricSystem(), value);
 		}
@@ -98,8 +97,9 @@ public abstract class VehicleSizes {
 		return value;
 	}
 
-	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app, @NonNull DimensionType type,
-	                                       @NonNull MetricsConstants lengthMetric) {
+	@NonNull
+	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app, @NonNull SizeType type,
+	                                       @NonNull MetricsConstants lengthMetricSystem) {
 		List<ChipItem> chips = new ArrayList<>();
 
 		// Add "None"
@@ -110,11 +110,11 @@ public abstract class VehicleSizes {
 		chips.add(chip);
 
 		// Add other variants
-		for (Float value : collectProposedValues(type, lengthMetric)) {
+		String metricShort = app.getString(getMetricShortStringId(type, lengthMetricSystem));
+		for (Float value : collectProposedValues(type, lengthMetricSystem)) {
 			String pattern = app.getString(R.string.ltr_or_rtl_combine_via_space);
 			DecimalFormat formatter = new DecimalFormat("#.#");
 			String valueStr = formatter.format(value);
-			String metricShort = app.getString(getMetricShortStringId(type, lengthMetric));
 			String title = String.format(pattern, valueStr, metricShort);
 			chip = new ChipItem(title);
 			chip.title = title;
@@ -124,12 +124,13 @@ public abstract class VehicleSizes {
 		return chips;
 	}
 
-	private List<Float> collectProposedValues(@NonNull DimensionType type,
-	                                          @NonNull MetricsConstants lengthMetric) {
-		DimensionData data = getDimensionData(type);
+	@NonNull
+	private List<Float> collectProposedValues(@NonNull SizeType type,
+	                                          @NonNull MetricsConstants lengthMetricSystem) {
+		SizeData data = getSizeData(type);
 		Limits limits = data.getLimits();
-		if (type != DimensionType.WEIGHT) {
-			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetric);
+		if (type != SizeType.WEIGHT) {
+			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetricSystem);
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}

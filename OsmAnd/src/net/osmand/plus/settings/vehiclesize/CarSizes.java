@@ -1,16 +1,16 @@
 package net.osmand.plus.settings.vehiclesize;
 
-import static net.osmand.plus.settings.vehiclesize.DimensionType.*;
+import static net.osmand.plus.settings.vehiclesize.SizeType.*;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.wrapper.Assets;
-import net.osmand.plus.base.wrapper.Limits;
-import net.osmand.plus.base.wrapper.ThemedIconId;
+import net.osmand.plus.base.containers.Limits;
+import net.osmand.plus.base.containers.ThemedIconId;
+import net.osmand.plus.settings.vehiclesize.containers.Assets;
 
 public class CarSizes extends VehicleSizes {
 
 	@Override
-	protected void collectDimensionsData() {
+	protected void collectSizesData() {
 		ThemedIconId icon = new ThemedIconId(R.drawable.img_help_width_limit_day, R.drawable.img_help_width_limit_night);
 		Assets assets = new Assets(icon, R.string.width_limit_description);
 		Limits limits = new Limits(1.5f, 2f); // 1.7 -> 2

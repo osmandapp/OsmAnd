@@ -5,7 +5,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.base.wrapper.Limits;
+import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.enums.MetricsConstants;
 
 import java.util.ArrayList;
@@ -47,14 +47,14 @@ public class VehicleAlgorithms {
 			int roundedMax = roundToMultipleOf(scaledMax, step, true);
 			int range = roundedMax - roundedMin;
 			int count = (range / step) + 1;
-			count += scaledMin % step == 0 ? 1 : 0;
-			count += scaledMax % step == 0 ? 1 : 0;
+			count += scaledMin % step != 0 ? 1 : 0;
+			count += scaledMax % step != 0 ? 1 : 0;
 			if (count >= minValuesCount) {
 				break;
 			}
 		}
 
-		// Collect suggested values
+		// Collect proposed values
 		int value = scaledMin;
 		List<Float> result = new ArrayList<>();
 		while (value <= scaledMax) {

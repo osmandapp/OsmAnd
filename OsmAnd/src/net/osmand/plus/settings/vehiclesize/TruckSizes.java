@@ -1,9 +1,9 @@
 package net.osmand.plus.settings.vehiclesize;
 
-import static net.osmand.plus.settings.vehiclesize.DimensionType.HEIGHT;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.LENGTH;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.WEIGHT;
-import static net.osmand.plus.settings.vehiclesize.DimensionType.WIDTH;
+import static net.osmand.plus.settings.vehiclesize.SizeType.HEIGHT;
+import static net.osmand.plus.settings.vehiclesize.SizeType.LENGTH;
+import static net.osmand.plus.settings.vehiclesize.SizeType.WEIGHT;
+import static net.osmand.plus.settings.vehiclesize.SizeType.WIDTH;
 
 import android.content.Context;
 
@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.base.wrapper.Assets;
-import net.osmand.plus.base.wrapper.Limits;
-import net.osmand.plus.base.wrapper.ThemedIconId;
+import net.osmand.plus.base.containers.Limits;
+import net.osmand.plus.base.containers.ThemedIconId;
+import net.osmand.plus.settings.vehiclesize.containers.Assets;
 
 import java.util.Locale;
 
 public class TruckSizes extends VehicleSizes {
 
 	@Override
-	protected void collectDimensionsData() {
+	protected void collectSizesData() {
 		ThemedIconId icon = new ThemedIconId(R.drawable.img_help_width_limit_day, R.drawable.img_help_width_limit_night);
 		Assets assets = new Assets(icon, R.string.width_limit_description);
 		Limits limits = new Limits(1.7f, 2.5f);
@@ -43,11 +43,11 @@ public class TruckSizes extends VehicleSizes {
 	}
 
 	@Override
-	public boolean verifyValue(@NonNull DimensionType type, @NonNull Context ctx,
+	public boolean verifyValue(@NonNull SizeType type, @NonNull Context ctx,
 	                           float value, @NonNull StringBuilder error) {
 		if (type == WEIGHT) {
-			DimensionData dimension = getDimensionData(type);
-			float min = dimension.getLimits().getMin();
+			SizeData data = getSizeData(type);
+			float min = data.getLimits().getMin();
 			if (value < min) {
 				String errorMessagePattern = ctx.getString(R.string.weight_limit_error);
 				String minWeightFormatted = String.format(Locale.US, "%.1f", min);

@@ -57,8 +57,14 @@ public class HorizontalChipsView extends RecyclerView {
 		adapter.notifyDataSetChanged();
 	}
 
+	@Nullable
 	public ChipItem getChipById(@NonNull String id) {
 		return holder.getItemById(id);
+	}
+
+	@Nullable
+	public ChipItem findChipByTag(@NonNull Object tag) {
+		return holder.getItemByTag(tag);
 	}
 
 	public void scrollTo(@NonNull ChipItem chip) {

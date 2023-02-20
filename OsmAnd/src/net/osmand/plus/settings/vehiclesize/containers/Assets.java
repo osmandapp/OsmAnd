@@ -1,8 +1,10 @@
-package net.osmand.plus.base.wrapper;
+package net.osmand.plus.settings.vehiclesize.containers;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+
+import net.osmand.plus.base.containers.ThemedIconId;
 
 public class Assets {
 
