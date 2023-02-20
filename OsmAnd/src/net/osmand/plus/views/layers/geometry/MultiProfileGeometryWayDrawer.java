@@ -36,33 +36,6 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	protected void drawFullBorder(@NonNull VectorLinesCollection collection, int baseOrder,
-	                              int zoom, @NonNull List<DrawPathData31> pathsData) {
-		int outlineId = OUTLINE_ID;
-		Paint paint = getContext().getPathBorderPaint();
-		float outlineWidth = getContext().getBorderOutlineWidth();
-		float width = paint.getStrokeWidth() + outlineWidth;
-		GeometryMultiProfileWayStyle prevStyle = null;
-		List<DrawPathData31> dataArr = new ArrayList<>();
-		for (DrawPathData31 data : pathsData) {
-			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
-			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
-				buildVectorOutline(collection, baseOrder, outlineId++, prevStyle.getPathBorderColor(),
-						width, outlineWidth, dataArr);
-				dataArr.clear();
-			}
-			prevStyle = style;
-			if (style != null && !style.isGap()) {
-				dataArr.add(data);
-			}
-		}
-		if (!dataArr.isEmpty()) {
-			buildVectorOutline(collection, baseOrder, outlineId, prevStyle.getPathBorderColor(),
-					width, outlineWidth, dataArr);
-		}
-	}
-
-	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
@@ -70,7 +43,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		for (DrawPathData31 data : pathsData) {
 			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
 			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
-				drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = style;
@@ -87,12 +60,17 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
+		int borderColor = style instanceof GeometryMultiProfileWayStyle
+				? ((GeometryMultiProfileWayStyle) style).getPathBorderColor()
+				: 0;
+		float borderWidth = getContext().getPathBorderPaint().getStrokeWidth();
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId,
-				style.getColor(0), style.getWidth(0), style.getDashPattern(), approximationEnabled, shouldDrawArrows,
+				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
+				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
 				pointBitmap, pointBitmap, (float) pxStep, false, null, 0, pathsData);
 	}
 

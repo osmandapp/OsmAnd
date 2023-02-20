@@ -79,8 +79,8 @@ public abstract class MultiColoringGeometryWay
 		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
-			List<RouteColorizationPoint> points = routeColorize.getResult(false);
+			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, 0);
+			List<RouteColorizationPoint> points = routeColorize.getResult();
 			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
 		}
 	}
@@ -275,11 +275,7 @@ public abstract class MultiColoringGeometryWay
 
 		@Nullable
 		public List<RouteColorizationPoint> simplify(int zoom) {
-			if (routeColorize != null) {
-				routeColorize.setZoom(zoom);
-				return routeColorize.simplify();
-			}
-			return null;
+			return routeColorize != null ? routeColorize.simplify(zoom) : null;
 		}
 
 		public int getColor(int index) {

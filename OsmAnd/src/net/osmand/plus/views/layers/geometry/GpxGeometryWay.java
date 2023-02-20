@@ -20,6 +20,8 @@ import java.util.TreeMap;
 
 public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 
+	public static final int VECTOR_LINES_RESERVED = 1000;
+
 	private List<WptPt> points;
 	private List<RouteSegmentResult> routeSegments;
 

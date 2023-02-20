@@ -410,7 +410,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				CachedTrack cachedTrack = segmentsCache.remove(selectedGpxFile.getGpxFile().path);
 				if (hasMapRenderer() && cachedTrack != null) {
 					resetSymbolProviders(selectedGpxFile.getPointsToDisplay());
-					resetSymbolProviders(cachedTrack.getAllCachedTrackSegments());
+					resetSymbolProviders(cachedTrack.getAllNonSimplifiedCachedTrackSegments());
 				}
 			}
 		}
@@ -746,7 +746,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 				List<TrkSegment> segments = coloringType.isGradient()
-						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType())
+						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
 						: selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
@@ -1098,12 +1098,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				currentTrack = selectedGpxFile;
 			} else {
-				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder--);
+				drawSelectedFileSegments(selectedGpxFile, false, canvas, tileBox, settings, baseOrder);
 			}
 			String gpxPath = selectedGpxFile.getGpxFile().path;
 			if (!renderedSegmentsCache.containsKey(gpxPath)) {
 				renderedSegmentsCache.remove(gpxPath);
 			}
+
+			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
 		}
 		if (currentTrack != null) {
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
@@ -1140,7 +1142,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		} else {
-			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType()));
+			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), !hasMapRenderer));
 		}
 
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
@@ -1201,9 +1203,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private List<TrkSegment> getCachedSegments(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
+	@NonNull
+	private List<TrkSegment> getCachedSegments(@NonNull SelectedGpxFile selectedGpxFile,
+	                                           @NonNull GradientScaleType scaleType,
+	                                           boolean simplify) {
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
-		return cachedTrack.getCachedTrackSegments(view.getZoom(), scaleType);
+		return simplify
+				? cachedTrack.getSimplifiedTrackSegments(view.getZoom(), scaleType)
+				: cachedTrack.getTrackSegments(scaleType);
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {
@@ -1569,7 +1576,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (hasMapRenderer()) {
 					CachedTrack cachedTrack = segmentsCache.get(cachedTrackPath);
 					if (cachedTrack != null) {
-						resetSymbolProviders(cachedTrack.getAllCachedTrackSegments());
+						resetSymbolProviders(cachedTrack.getAllNonSimplifiedCachedTrackSegments());
 					}
 				}
 				iterator.remove();
