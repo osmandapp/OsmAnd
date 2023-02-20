@@ -249,7 +249,7 @@
 \n
 \n - аўтаномны пошук адрасоў і POI;
 \n
-\n - пракладка маршрутаў па-за сецівам на кароткія адлегласці (эксперыментальная функцыя);
+\n - пракладванне маршрутаў па-за сецівам на кароткія адлегласці (эксперыментальная функцыя);
 \n
 \n - рэжымы для пешаходнай, аўтамабільнай і роварнай навігацыі з:
 \n
@@ -263,11 +263,11 @@
 \n
 \nАбмежаванні бясплатнай версіі:
 \n
-\n - колькасць спамповак мапаў абмежаваная;
+\n - колькасць спампоўванняў мапаў абмежаваная;
 \n
 \n - адсутнічае пазасеціўны доступ да інфармацыі з Вікіпедыі для POI.
 \n
-\nOsmAnd актыўна развіваецца, яго далейшае развіццё забяспечваецца фінансавымі паступленнямі ад яго карыстальнікаў, за кошт якіх адбываецца далейшая распрацоўка і тэставанне новых функцый. Калі ласка, разгледзьце магчымасць набыцця OsmAnd+ або падтрымайце распрацоўку пэўных функцый, або зрабіце дабрачынны ўнёсак на https://osmand.net.</string>
+\nOsmAnd актыўна развіваецца, яго далейшае развіццё забяспечваецца фінансавымі паступленнямі ад яго карыстальнікаў, за кошт якіх адбываецца далейшая распрацоўка і тэставанне новых функцый. Калі ласка, разгледзьце магчымасць набыцця OsmAnd+ або падтрымайце распрацоўванне пэўных функцый, або зрабіце дабрачынны ўнёсак на https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапы і навігацыя</string>
     <string name="osmand_plus_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеціўных мапаў OSM</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
@@ -1198,7 +1198,7 @@
     <string name="sort_by_name">Сартаваць паводле назвы</string>
     <string name="none_selected_gpx">Абярыце GPX-файл працяжным націскам.</string>
     <string name="local_index_select_gpx_file">Абярыце след</string>
-    <string name="no_index_file_to_download">Спамповак не знойдзена. Калі ласка, праверце вашае злучэнне з Інтэрнэтам.</string>
+    <string name="no_index_file_to_download">Няма чаго спампоўваць. Праверце вашае злучэнне з інтэрнэтам.</string>
     <string name="rendering_attr_hideBuildings_name">Будынкі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Не аўтамабільныя дарогі</string>
     <string name="rendering_attr_hideText_name">Тэкст</string>
@@ -1659,7 +1659,7 @@
     <string name="unsaved_changes_will_be_lost">Усе незахаваныя змены будуць страчаны. Працягваць\?</string>
     <string name="simulate_your_location_stop_descr">Спыніць эмуляцыю свайго становішча.</string>
     <string name="simulate_your_location_descr">Эмуляваць вашую пазіцыю, выкарыстоўваючы разлічаны маршрут або запісаны GPX-след.</string>
-    <string name="downloads_left_template">%1$s спамповак засталося</string>
+    <string name="downloads_left_template">Засталося %1$s спампоўванняў</string>
     <string name="shared_string_wikipedia">Вікіпедыя</string>
     <string name="roads">Дарогі</string>
     <string name="favourites_edit_dialog_title">Звесткі пра ўлюбёную мясціну</string>
@@ -4763,7 +4763,7 @@
     <string name="compass_visible_if_map_rotated">Бачны, калі мапа павернутая</string>
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
-    <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
+    <string name="compass_click_desc">Падказка: каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
     <string name="compass_desc">Паказвае кірунак на поўнач.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
@@ -4809,10 +4809,10 @@
     <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
     <string name="map_center_widget">Цэнтр мапы</string>
     <string name="current_location_widget">Бягучае месцазнаходжанне</string>
-    <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
+    <string name="map_widget_altitude_map_center">Вышыня: цэнтр мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
-    <string name="show_borders_of_downloaded_maps">Афарбоўка спампаваных мап</string>
+    <string name="show_borders_of_downloaded_maps">Паказваць межы спампаваных мапаў</string>
     <string name="weather_online_cache">Сеціўны кэш</string>
     <string name="map_settings_weather_temp">Тэмпература</string>
     <string name="map_settings_weather_air_pressure">Ціск паветра</string>
@@ -4844,13 +4844,13 @@
     <string name="weather_widgets_secondary_desc">Адзінкі вымярэння можна змяніць у наладах убудовы надвор\'я.</string>
     <string name="air_pressure_widget_desc">Паказвае атмасферны ціск для бягучага цэнтра мапы.</string>
     <string name="wind_widget_desc">Паказвае хуткасць ветру для бягучага цэнтра мапы.</string>
-    <string name="weather_widget_group_desc">Набор віджэтаў, якія паказваюць розную інфармацыю пра надвор\'е.</string>
+    <string name="weather_widget_group_desc">Набор віджэтаў, якія паказваюць разнастайную інфармацыю пра надвор\'е.</string>
     <string name="precipitation_widget_desc">Паказвае колькасць ападкаў для бягучага цэнтра мапы.</string>
     <string name="temperature_widget_desc">Паказвае тэмпературу для бягучага цэнтра мапы.</string>
-    <string name="action_not_supported_with_map_style">Дзеянне не падтрымліваецца з абраным стылем мапы.</string>
+    <string name="action_not_supported_with_map_style">Гэтае дзеянне не падтрымліваецца з абраным стылем мапы.</string>
     <string name="weather_offline_forecast">Пазасеткавы прагноз</string>
     <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
-    <string name="weather_prefs_descr">пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны</string>
+    <string name="weather_prefs_descr">Прагноз на 24 гадзіны і прагноз на 7 дзён, які абнаўляецца кожныя 3 гадзіны</string>
     <string name="weather_plugin_description">Змяшчае:
 \n
 \n- 5-слаёвы прагноз на 24 гадзіны і 7 дзён
@@ -4876,4 +4876,5 @@
     <string name="rendering_attr_depthContourWidth_name">Таўшчыня ізабат</string>
     <string name="depth_contour_lines">Ізабаты</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
+    <string name="share_link">Падзяліцца спасылкай</string>
 </resources>

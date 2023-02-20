@@ -691,7 +691,7 @@
     <string name="osmand_parking_pm">\'s-middags</string>
     <string name="osmand_parking_am">\'s-ochtends</string>
     <string name="osmand_parking_position_name">Parkeerplek</string>
-    <string name="osmand_parking_plugin_description">Bewaart de locatie waar je auto geparkeerd staat en de resterende parkeertijd. 
+    <string name="osmand_parking_plugin_description">Bewaart de locatie waar je auto geparkeerd staat en de resterende parkeertijd.
 \nDe parkeerlocatie en resterende parkeertijd staan op het Osmand dashboard en in een widget op de kaart. Er kan een alarmsignaal in de Android kalender geplaatst worden ter herinnering.</string>
     <string name="osmand_parking_plugin_name">Parkeerlocatie</string>
     <string name="context_menu_item_add_parking_point">Markeer als parkeerlocatie</string>
@@ -840,8 +840,8 @@
     <string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
     <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
-\n 
-\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
+\n
+\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM(Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -1371,7 +1371,7 @@
 \nOm weer de gewone kaart te zien kun je de plug-in uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen.</string>
     <string name="plugin_ski_name">Ski kaartweergave</string>
     <string name="plugin_ski_descr">Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap. 
-\n 
+\n
 \nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggezet door het deactiveren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'.</string>
     <string name="rename_failed">Hernoemen mislukt.</string>
     <string name="back_to_map">Terug naar kaart</string>

@@ -4895,4 +4895,5 @@
     <string name="last_synchronized">Sist synkronisert</string>
     <string name="share_link">Del lenke</string>
     <string name="share_as_file">Del som fil</string>
+    <string name="display_position_automatic_descr">Avhenger av kartorientering, nederst for bevegelsesretning, senter for alle andre.</string>
 </resources>
