@@ -5063,7 +5063,7 @@
     <string name="default_tracks_appearance">Aspecto predefinido de la traza</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
-    <string name="recently_visible">Visible recientemente «%1$s»</string>
+    <string name="recently_visible">Última visible «%1$s»</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
     <string name="empty_tracks">No tienes archivos de trazas.</string>
     <string name="shared_string_select_recent">Marcar reciente</string>
@@ -5071,4 +5071,6 @@
     <string name="switch_folder">Alternar carpeta</string>
     <string name="show_all_tracks">Mostrar todas las trazas</string>
     <string name="shared_string_on_map">En el mapa</string>
+    <string name="shared_string_yards">yardas</string>
+    <string name="shared_string_kilograms">kilogramos</string>
 </resources>
