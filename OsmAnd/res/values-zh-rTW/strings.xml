@@ -5031,5 +5031,21 @@
     <string name="sound_beep_complex">蜂鳴器：複合</string>
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
     <string name="last_synchronized">最後同步</string>
-    <string name="display_position_automatic_descr">取決於地圖方向，底部為移動方向，中心為其他所有方向。</string>
+    <string name="display_position_automatic_descr">取決於地圖方向：底部為移動方向，中心為其他所有方向。</string>
+    <string name="change_default_tracks_appearance_confirmation_description">變更 %1$s 軌跡的外觀？</string>
+    <string name="empty_tracks">您沒有軌跡檔案。</string>
+    <string name="default_tracks_appearance_description">這些外觀設定會套用在前一個畫面中選定的所有軌跡。
+\n
+\n它們也會儲存為「%1$s」，並由 %2$s 套用在其他任何沒有另外設定外觀的軌跡。</string>
+    <string name="shared_string_apply_changes">套用變更</string>
+    <string name="default_tracks_appearance">預設軌跡外觀</string>
+    <string name="shared_string_select_recent">選取最近</string>
+    <string name="no_visible_tracks_description">選取軌跡以在地圖上顯示。</string>
+    <string name="recently_visible">最近可見 %1$s</string>
+    <string name="no_visible_tracks">地圖上沒有軌跡</string>
+    <string name="empty_tracks_description">您可以使用 OsmAnd 匯入、建立或記錄軌跡檔案。</string>
+    <string name="change_appearance">變更外觀</string>
+    <string name="switch_folder">切換資料夾</string>
+    <string name="shared_string_on_map">在地圖上</string>
+    <string name="show_all_tracks">顯示所有軌跡</string>
 </resources>
