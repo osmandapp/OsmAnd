@@ -663,8 +663,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 			VectorLinesCollection collection = vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)
 					? new VectorLinesCollection() : vectorLinesCollection;
-			drawer.drawFullBorder(collection, baseOrder + 1000, tb.getZoom(), pathsData);
-			drawer.drawSegmentBorder(collection, baseOrder + 900, tb.getZoom(), pathsData);
 			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
 			mapRenderer.addSymbolsProvider(collection);
 			this.vectorLinesCollection = collection;
