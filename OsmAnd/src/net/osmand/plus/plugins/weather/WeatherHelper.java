@@ -7,7 +7,6 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.WeatherForecastDownloadState.FINISHED;
-import static net.osmand.plus.plugins.weather.WeatherUtils.checkAndGetRegionId;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -136,8 +135,7 @@ public class WeatherHelper {
 
 		List<String> downloadedRegionIds = offlineForecastHelper.getTempForecastsWithDownloadStates(FINISHED);
 		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
-			String regionId = checkAndGetRegionId(region);
-			if (downloadedRegionIds.contains(regionId)) {
+			if (downloadedRegionIds.contains(region.getRegionId())) {
 				offlineForecastHelper.calculateCacheSize(region, null);
 			}
 		}

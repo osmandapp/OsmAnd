@@ -47,7 +47,6 @@ import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
-import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -57,6 +56,7 @@ import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.RemoveLocalForecastParams;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -271,7 +271,11 @@ public class ItemViewHolder {
 			} else if (downloadItem instanceof WeatherIndexItem) {
 				app.getOfflineForecastHelper().calculateCacheSizeIfNeeded(
 						(WeatherIndexItem) downloadItem,
-						() -> setupCommonDescription(downloadItem));
+						() -> {
+							if (AndroidUtils.isActivityNotDestroyed(context)) {
+								setupCommonDescription(downloadItem);
+							}
+						});
 			} else {
 				setupCommonDescription(downloadItem);
 			}
@@ -575,18 +579,21 @@ public class ItemViewHolder {
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
 		StringBuilder fileName = new StringBuilder()
-				.append(getWeatherName(app, app.getRegions(), weatherIndexItem.getRegionId()))
+				.append(getWeatherName(app, app.getRegions(), weatherIndexItem.getRegion().getRegionId()))
 				.append(" ").append(DownloadActivityType.WEATHER_FORECAST.getString(app));
 		String message = context.getString(R.string.delete_confirmation_msg, fileName);
 		confirm.setMessage(message);
 
 		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			context.setProgressBarIndeterminateVisibility(true);
 			OfflineForecastHelper helper = app.getOfflineForecastHelper();
 			RemoveLocalForecastParams params = RemoveLocalForecastParams.newInstance()
-					.setRegionIds(weatherIndexItem.getRegionId())
+					.setRegionIds(weatherIndexItem.getRegion().getRegionId())
 					.setOnSettingsRemovedCallback(() -> {
 						app.getDownloadThread().updateLoadedFiles();
 						bindDownloadItem(weatherIndexItem);
+						context.getString(R.string.item_deleted, fileName);
+						context.setProgressBarIndeterminateVisibility(false);
 					})
 					.setRefreshMap();
 			helper.removeLocalForecast(params);
@@ -605,7 +612,7 @@ public class ItemViewHolder {
 		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
-			params[i] = new LocalIndexInfo(type, file, false, app);
+			params[i] = new LocalIndexInfo(type, file, false);
 		}
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}

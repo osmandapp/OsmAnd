@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.map.WorldRegion.WORLD;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -122,7 +124,7 @@ public class FileNameTranslationHelper {
 
 	public static String getWeatherName(Context ctx, OsmandRegions regions, String basename) {
 		basename = basename.replace(" ", "_");
-		if (WeatherUtils.isEntireWorld(basename)) {
+		if (WORLD.equals(basename)) {
 			return ctx.getString(R.string.shared_string_all_world);
 		} else {
 			WorldRegion region = regions.getRegionData(basename);

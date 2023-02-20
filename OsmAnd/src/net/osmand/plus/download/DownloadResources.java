@@ -424,7 +424,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
 				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) ii;
 				region = weatherIndexItem.getRegion();
-				if (weatherIndexItem.isWorldMap()) {
+				if (WorldRegion.WORLD.equals(region.getRegionId())) {
 					worldMaps.addItem(ii);
 					continue;
 				}

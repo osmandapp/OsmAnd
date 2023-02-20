@@ -18,6 +18,7 @@ import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.TileIdList;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -223,15 +224,11 @@ public class NativeUtilities {
 		return new PointI(x31, y31);
 	}
 
-	public static TileIdList convertToQListTileIds(@NonNull List<List<Integer>> tileIds) {
+	public static TileIdList convertToQListTileIds(@NonNull List<Long> tileIds) {
 		TileIdList qTileIds = new TileIdList();
-		for (List<Integer> tileId : tileIds) {
-			if (tileId.size() == 2) {
-				int x = tileId.get(0);
-				int y = tileId.get(1);
-				TileId qTileId = TileId.fromXY(x, y);
-				qTileIds.add(qTileId);
-			}
+		for (Long tileId : tileIds) {
+			qTileIds.add(TileId.fromXY(OfflineForecastHelper.getTileX(tileId),
+					OfflineForecastHelper.getTileY(tileId)));
 		}
 		return qTileIds;
 	}

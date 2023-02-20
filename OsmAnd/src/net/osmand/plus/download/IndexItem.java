@@ -163,8 +163,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 
 	public File getBackupFile(OsmandApplication ctx) {
-		File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
-		return backup;
+		return new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class OfflineForecastInfo {
 
-	private Map<InfoType, Object> infoMap = new HashMap<>();
+	private final Map<InfoType, Object> infoMap = new HashMap<>();
 
 	public enum InfoType {
 		LOCAL_SIZE,

@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.weather;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static net.osmand.map.WorldRegion.RUSSIA_REGION_ID;
+import static net.osmand.map.WorldRegion.WORLD;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
 import static net.osmand.plus.plugins.weather.OfflineForecastInfo.InfoType.LOCAL_SIZE;
 import static net.osmand.plus.plugins.weather.OfflineForecastInfo.InfoType.PROGRESS_DOWNLOAD;
@@ -10,13 +11,11 @@ import static net.osmand.plus.plugins.weather.OfflineForecastInfo.InfoType.UPDAT
 import static net.osmand.plus.plugins.weather.WeatherForecastDownloadState.FINISHED;
 import static net.osmand.plus.plugins.weather.WeatherForecastDownloadState.IN_PROGRESS;
 import static net.osmand.plus.plugins.weather.WeatherForecastDownloadState.UNDEFINED;
-import static net.osmand.plus.plugins.weather.WeatherUtils.checkAndGetRegionId;
-import static net.osmand.plus.plugins.weather.WeatherUtils.getRectanglePoints;
-import static net.osmand.plus.plugins.weather.WeatherUtils.isEntireWorld;
+import static net.osmand.plus.plugins.weather.WeatherUtils.getRegionBounds;
 import static net.osmand.plus.utils.OsmAndFormatter.getTimeForTimeZone;
 
+import android.os.AsyncTask;
 import android.text.format.DateUtils;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +34,8 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherTileResourcesManager.DownloadGeoTileRequest;
 import net.osmand.core.jni.WeatherTileResourcesManager.IDownloadGeoTilesAsyncCallback;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.core.jni.interface_IQueryController;
+import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -45,7 +46,6 @@ import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
@@ -68,7 +68,6 @@ public class OfflineForecastHelper {
 	private static final String PREF_FORECAST_DOWNLOAD_STATE_PREFIX = "forecast_download_state_";
 	private static final String PREF_FORECAST_LAST_UPDATE_PREFIX = "forecast_last_update_";
 	private static final String PREF_FORECAST_FREQUENCY_PREFIX = "forecast_frequency_";
-	private static final String PREF_FORECAST_TILE_IDS_PREFIX = "forecast_tile_ids_";
 	private static final String PREF_FORECAST_WIFI_PREFIX = "forecast_download_via_wifi_";
 
 	public static final int TILE_SIZE = 40_000;
@@ -92,14 +91,14 @@ public class OfflineForecastHelper {
 	}
 
 	public boolean shouldHaveWeatherForecast(@NonNull WorldRegion region) {
-		String regionId = checkAndGetRegionId(region);
+		String regionId = region.getRegionId();
 		int level = region.getLevel();
 
 		boolean russia = RUSSIA_REGION_ID.equals(regionId);
 		boolean russiaPrefix = regionId.startsWith(RUSSIA_REGION_ID);
 		boolean unitedKingdom = regionId.equals(WorldRegion.UNITED_KINGDOM_REGION_ID);
 
-		return isEntireWorld(regionId) ||
+		return WORLD.equals(regionId) ||
 				(level == 1 && russia) ||
 				(level > 1 && !russiaPrefix && ((level == 2 && !unitedKingdom) || (level == 3 && unitedKingdom)));
 	}
@@ -110,7 +109,7 @@ public class OfflineForecastHelper {
 		}
 		int forecastDownloading = 0;
 		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
-			String regionId = checkAndGetRegionId(region);
+			String regionId = region.getRegionId();
 			if (regionIds.contains(regionId)) {
 				forecastDownloading++;
 				if (!settings.isWifiConnected() && getPreferenceWifi(regionId)) {
@@ -133,7 +132,7 @@ public class OfflineForecastHelper {
 	public void downloadForecastsByRegionIds(@NonNull List<String> regionIds) {
 		int forecastsDownloading = 0;
 		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
-			String regionId = checkAndGetRegionId(region);
+			String regionId = region.getRegionId();
 			if (regionIds.contains(regionId)) {
 				downloadForecastByRegion(region);
 				forecastsDownloading++;
@@ -153,7 +152,7 @@ public class OfflineForecastHelper {
 		if (plugin == null || !plugin.isActive()) {
 			return false;
 		}
-		String regionId = checkAndGetRegionId(region);
+		String regionId = region.getRegionId();
 		if (!settings.isInternetConnectionAvailable()) {
 			return false;
 		}
@@ -161,26 +160,21 @@ public class OfflineForecastHelper {
 			return false;
 		}
 
-		Pair<LatLon, LatLon> rectanglePoints = getRectanglePoints(region);
-		LatLon topLeft = rectanglePoints.first;
-		LatLon bottomRight = rectanglePoints.second;
-
-		updatePreferenceTileIdsIfNeeded(region);
+		QuadRect regionBounds = getRegionBounds(region);
+		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
+		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
 
 		setOfflineForecastProgressInfo(regionId, 0);
 		setPreferenceDownloadState(regionId, WeatherForecastDownloadState.IN_PROGRESS);
 
 		onDownloadStarted(region, progress);
 
-		// todo -- create and add FunctorQueryController
-//		std::shared_ptr<const OsmAnd::IQueryController> queryController;
-//		queryController.reset(new OsmAnd::FunctorQueryController(
-//				[self, regionId]
-//		(const OsmAnd::IQueryController *const controller) -> bool
-//		{
-//			return [self.class getPreferenceDownloadState:regionId] != EOAWeatherForecastDownloadStateInProgress;
-//		}
-//		));
+		interface_IQueryController queryController = new interface_IQueryController() {
+			@Override
+			public boolean isAborted() {
+				return getPreferenceDownloadState(regionId) != WeatherForecastDownloadState.IN_PROGRESS;
+			}
+		};
 
 		Date date = OsmAndFormatter.getStartOfToday();
 		long dateTime = date.getTime();
@@ -195,7 +189,7 @@ public class OfflineForecastHelper {
 			request.setBottomRight(bottomRight);
 			request.setForceDownload(true);
 			request.setLocalData(true);
-//		    request.setQueryController(queryController); todo QueryController
+		    request.setQueryController(queryController.instantiateProxy());
 			IDownloadGeoTilesAsyncCallback callback = new IDownloadGeoTilesAsyncCallback() {
 				@Override
 				public void method(boolean succeeded,
@@ -205,6 +199,7 @@ public class OfflineForecastHelper {
 					onUpdateDownloadProgress(region, progress, succeeded);
 				}
 			};
+			queryController.swigReleaseOwnership();
 			callback.swigReleaseOwnership();
 			weatherResourcesManager.downloadGeoTiles(request, callback.getBinding());
 			dateTime += HOUR_IN_MILLIS * (i < 24 ? 1 : 3);
@@ -214,7 +209,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void checkAndStopWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
-		String regionId = weatherIndexItem.getRegionId();
+		String regionId = weatherIndexItem.getRegion().getRegionId();
 		prepareToStopDownloading(regionId);
 
 		if (isDownloadStateUndefined(regionId)) {
@@ -239,7 +234,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void calculateCacheSizeIfNeeded(@NonNull WeatherIndexItem indexItem, @Nullable OnCompleteCallback callback) {
-		String regionId = indexItem.getRegionId();
+		String regionId = indexItem.getRegion().getRegionId();
 		if (!isOfflineForecastSizesInfoCalculated(regionId)) {
 			calculateCacheSize(indexItem.getRegion(), () -> {
 				DecimalFormat decimalFormat = new DecimalFormat("#.#");
@@ -255,13 +250,12 @@ public class OfflineForecastHelper {
 	}
 
 	public void calculateCacheSize(@NonNull WorldRegion region, @Nullable OnCompleteCallback callback) {
-		String regionId = checkAndGetRegionId(region);
+		String regionId = region.getRegionId();
 		setOfflineForecastSizeInfo(regionId, 0, true);
 		setOfflineForecastSizeInfo(regionId, 0, false);
 		setOfflineForecastSizesInfoCalculated(regionId, false);
-		updatePreferenceTileIdsIfNeeded(region);
 		runAsync(() -> {
-			List<List<Integer>> tileIds = getPreferenceTileIds(regionId);
+			List<Long> tileIds = getTileIds(region);
 			TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
 			ZoomLevel zoom = getGeoTileZoom();
 			if (!qTileIds.isEmpty()) {
@@ -280,7 +274,7 @@ public class OfflineForecastHelper {
 
 	public void calculateFullCacheSize(boolean localData, CallbackWithObject<Long> callback) {
 		runAsync(() -> {
-			List<List<Integer>> tileIds = getOfflineTileIds(null);
+			List<Long> tileIds = getOfflineTileIds(null);
 			TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
 			ZoomLevel zoom = getGeoTileZoom();
 			long size = weatherCacheSize.get(localData);
@@ -298,7 +292,7 @@ public class OfflineForecastHelper {
 		});
 	}
 
-	private int calculateUpdatesSize(@NonNull List<List<Integer>> tileIds) {
+	private int calculateUpdatesSize(@NonNull List<Long> tileIds) {
 		int tilesCount = tileIds.size();
 		return tilesCount * FORECAST_DATES_COUNT * TILE_SIZE;
 	}
@@ -315,7 +309,7 @@ public class OfflineForecastHelper {
 		}
 		weatherCacheSize.reset(false);
 
-		List<List<Integer>> tileIds = getOfflineTileIds(regionIds);
+		List<Long> tileIds = getOfflineTileIds(regionIds);
 		TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
 		ZoomLevel zoom = getGeoTileZoom();
 		weatherResourcesManager.clearDbCache(
@@ -328,10 +322,13 @@ public class OfflineForecastHelper {
 
 	public void removeLocalForecast(@NonNull RemoveLocalForecastParams params) {
 		weatherCacheSize.reset();
-		List<List<Integer>> tileIds = new ArrayList<>();
+		List<Long> tileIds = new ArrayList<>();
 		for (String regionId : params.getRegionIds()) {
-			List<List<Integer>> regionTileIds = getPreferenceTileIds(regionId);
-			for (List<Integer> tileId : regionTileIds) {
+			List<Long> regionTileIds = getTileIds(regionId);
+			if (regionTileIds == null) {
+				continue;
+			}
+			for (Long tileId : regionTileIds) {
 				if (!tileIds.contains(tileId) && !isContainsInOfflineRegions(tileId, regionId)) {
 					tileIds.add(tileId);
 				}
@@ -357,16 +354,18 @@ public class OfflineForecastHelper {
 	}
 
 	@NonNull
-	public List<List<Integer>> getOfflineTileIds(List<String> regionIds) {
+	public List<Long> getOfflineTileIds(List<String> regionIds) {
 		if (regionIds == null) {
 			regionIds = getTempForecastsWithDownloadStates(IN_PROGRESS, FINISHED);
 		}
-		List<List<Integer>> offlineTileIds = new ArrayList<>();
+		List<Long> offlineTileIds = new ArrayList<>();
 		for (String regionId : regionIds) {
-			List<List<Integer>> regionTileIds = getPreferenceTileIds(regionId);
-			for (List<Integer> tileId : regionTileIds) {
-				if (!offlineTileIds.contains(tileId)) {
-					offlineTileIds.add(tileId);
+			List<Long> regionTileIds = getTileIds(regionId);
+			if (regionTileIds != null) {
+				for (Long tileId : regionTileIds) {
+					if (!offlineTileIds.contains(tileId)) {
+						offlineTileIds.add(tileId);
+					}
 				}
 			}
 		}
@@ -398,14 +397,16 @@ public class OfflineForecastHelper {
 		}
 	}
 
-	public boolean isContainsInOfflineRegions(@NonNull List<Integer> tileId, @NonNull String excludeRegionId) {
+	public boolean isContainsInOfflineRegions(@NonNull Long tileId, @NonNull String excludeRegionId) {
 		List<String> regionIds = getTempForecastsWithDownloadStates(IN_PROGRESS, FINISHED);
 		for (String regionId : regionIds) {
 			if (!regionId.equals(excludeRegionId)) {
-				List<List<Integer>> regionTileIds = getPreferenceTileIds(regionId);
-				for (List<Integer> offlineTileId : regionTileIds) {
-					if (offlineTileId.equals(tileId)) {
-						return true;
+				List<Long> regionTileIds = getTileIds(regionId);
+				if (regionTileIds != null) {
+					for (Long offlineTileId : regionTileIds) {
+						if (offlineTileId.equals(tileId)) {
+							return true;
+						}
 					}
 				}
 			}
@@ -429,7 +430,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void setOfflineForecastSizeInfo(@NonNull String regionId, long size, boolean local) {
-		OfflineForecastInfo info = requireCachedInfo(regionId);
+		OfflineForecastInfo info = getOrCreateCachedInfo(regionId);
 		info.put(local ? LOCAL_SIZE : UPDATES_SIZE, size);
 	}
 
@@ -445,7 +446,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void setOfflineForecastSizesInfoCalculated(@NonNull String regionId, boolean value) {
-		OfflineForecastInfo info = requireCachedInfo(regionId);
+		OfflineForecastInfo info = getOrCreateCachedInfo(regionId);
 		info.put(SIZE_CALCULATED, value);
 	}
 
@@ -461,7 +462,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void setOfflineForecastProgressInfo(@NonNull String regionId, int value) {
-		OfflineForecastInfo info = requireCachedInfo(regionId);
+		OfflineForecastInfo info = getOrCreateCachedInfo(regionId);
 		info.put(PROGRESS_DOWNLOAD, value);
 	}
 
@@ -477,12 +478,13 @@ public class OfflineForecastHelper {
 	}
 
 	public int getProgressDestination(@NonNull String regionId) {
-		return getPreferenceTileIds(regionId).size() * FORECAST_DATES_COUNT;
+		List<Long> tileIds = getTileIds(regionId);
+		return tileIds != null ? tileIds.size() * FORECAST_DATES_COUNT : -1;
 	}
 
 	public void onDownloadStarted(@NonNull WorldRegion region, @Nullable IProgress progress) {
 		if (progress != null) {
-			String regionId = checkAndGetRegionId(region);
+			String regionId = region.getRegionId();
 			StringBuilder taskName = new StringBuilder()
 					.append(getWeatherName(app, app.getRegions(), regionId))
 					.append(" ").append(DownloadActivityType.WEATHER_FORECAST.getString(app));
@@ -493,7 +495,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void onUpdateDownloadProgress(@NonNull WorldRegion region, @Nullable IProgress progress, boolean success) {
-		String regionId = checkAndGetRegionId(region);
+		String regionId = region.getRegionId();
 		if (!isDownloadStateInProgress(regionId)) {
 			log.debug("Weather offline forecast download " + regionId + " : cancel");
 			return;
@@ -526,7 +528,7 @@ public class OfflineForecastHelper {
 
 	@NonNull
 	public IndexItem createIndexItem(@NonNull WorldRegion region) {
-		String regionId = checkAndGetRegionId(region);
+		String regionId = region.getRegionId();
 		DecimalFormat decimalFormat = new DecimalFormat("#.#");
 		long contentSize = getOfflineForecastSizeInfo(regionId, true);
 		long containerSize = getOfflineForecastSizeInfo(regionId, false);
@@ -546,7 +548,7 @@ public class OfflineForecastHelper {
 	}
 
 	public boolean checkIfItemOutdated(@NonNull WeatherIndexItem weatherIndexItem) {
-		String regionId = weatherIndexItem.getRegionId();
+		String regionId = weatherIndexItem.getRegion().getRegionId();
 		if (!isDownloadStateFinished(regionId)) {
 			return false;
 		}
@@ -647,62 +649,37 @@ public class OfflineForecastHelper {
 				.makeGlobal();
 	}
 
-	// todo check
-	@NonNull
-	public List<List<Integer>> getPreferenceTileIds(@NonNull String regionId) {
-		List<List<Integer>> res = new ArrayList<>();
-		List<String> matrixInStrings = getTileIdsPreference(regionId).getStringsList();
-		if (matrixInStrings != null) {
-			for (String idsRowAsString : matrixInStrings) {
-				List<Integer> idsRow = new ArrayList<>();
-				for (String idAsString : idsRowAsString.split(" ")) {
-					idsRow.add(Integer.parseInt(idAsString));
-				}
-				res.add(idsRow);
-			}
-		}
-		return res;
+	public static Long getTileId(int x, int y) {
+		return ((long) y << 32) + (long) x;
 	}
 
-	// todo check
-	public void setPreferenceTileIds(@NonNull String regionId, @NonNull List<List<Integer>> value) {
-		List<String> matrixInStrings = new ArrayList<>();
-		for (List<Integer> idsRow : value) {
-			StringBuilder stringBuilder = new StringBuilder();
-			for (Integer id : idsRow) {
-				stringBuilder.append(id).append(" ");
-			}
-			String idsRowAsString = stringBuilder.toString().trim();
-			matrixInStrings.add(idsRowAsString);
-		}
-		getTileIdsPreference(regionId).setStringsList(matrixInStrings);
+	public static int getTileX(long tileId) {
+		return (int) (tileId & 0xFFFF);
 	}
 
-	@NonNull
-	private ListStringPreference getTileIdsPreference(@NonNull String regionId) {
-		String prefId = PREF_FORECAST_TILE_IDS_PREFIX + regionId;
-		return settings.registerStringListPreference(prefId, null, ",,");
+	public static int getTileY(long tileId) {
+		return (int) (tileId >> 32);
 	}
 
-	public void updatePreferenceTileIdsIfNeeded(@NonNull WorldRegion region) {
-		String regionId = checkAndGetRegionId(region);
-		if (Algorithms.isEmpty(getPreferenceTileIds(regionId))) {
-			Pair<LatLon, LatLon> boundPoints = getRectanglePoints(region);
-			LatLon topLeft = boundPoints.first;
-			LatLon bottomRight = boundPoints.second;
-			ZoomLevel zoomLevel = getGeoTileZoom();
+	@Nullable
+	public List<Long> getTileIds(@NonNull String regionId) {
+		WorldRegion region = app.getRegions().getRegionData(regionId);
+		return region != null ? getTileIds(region) : null;
+	}
 
-			TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
-			List<List<Integer>> tileIds = new ArrayList<>();
-			for (int i = 0; i < tileIdVector.size(); i++) {
-				List<Integer> row = new ArrayList<>();
-				TileId tileId = tileIdVector.get(i);
-				row.add(tileId.getX());
-				row.add(tileId.getY());
-				tileIds.add(row);
-			}
-			setPreferenceTileIds(regionId, tileIds);
+	public static List<Long> getTileIds(@NonNull WorldRegion region) {
+		QuadRect regionBounds = getRegionBounds(region);
+		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
+		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
+		ZoomLevel zoomLevel = getGeoTileZoom();
+
+		TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
+		List<Long> tileIds = new ArrayList<>();
+		for (int i = 0; i < tileIdVector.size(); i++) {
+			TileId tileId = tileIdVector.get(i);
+			tileIds.add(getTileId(tileId.getX(), tileId.getY()));
 		}
+		return tileIds;
 	}
 
 	public boolean getPreferenceWifi(@NonNull String regionId) {
@@ -723,7 +700,6 @@ public class OfflineForecastHelper {
 				PREF_FORECAST_DOWNLOAD_STATE_PREFIX + regionId,
 				PREF_FORECAST_LAST_UPDATE_PREFIX + regionId,
 				PREF_FORECAST_FREQUENCY_PREFIX + regionId,
-				PREF_FORECAST_TILE_IDS_PREFIX + regionId,
 				PREF_FORECAST_WIFI_PREFIX + regionId
 		};
 	}
@@ -741,7 +717,7 @@ public class OfflineForecastHelper {
 	}
 
 	@NonNull
-	public ZoomLevel getGeoTileZoom() {
+	public static ZoomLevel getGeoTileZoom() {
 		return WeatherTileResourceProvider.getGeoTileZoom();
 	}
 
@@ -757,7 +733,7 @@ public class OfflineForecastHelper {
 	}
 
 	@NonNull
-	private OfflineForecastInfo requireCachedInfo(@NonNull String regionId) {
+	private OfflineForecastInfo getOrCreateCachedInfo(@NonNull String regionId) {
 		OfflineForecastInfo info = getCachedInfo(regionId);
 		if (info == null) {
 			info = new OfflineForecastInfo();
@@ -767,7 +743,13 @@ public class OfflineForecastHelper {
 	}
 
 	private void runAsync(@NonNull Runnable runnable) {
-		new Thread(runnable).start();
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... voids) {
+				runnable.run();
+				return null;
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void runInUiThread(@NonNull Runnable runnable) {
