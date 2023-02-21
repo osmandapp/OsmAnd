@@ -5036,4 +5036,5 @@
     <string name="x_axis">Ось X</string>
     <string name="set_up_backup">Настройка резервного копирования</string>
     <string name="share_link">Поделиться ссылкой</string>
+    <string name="last_synchronized">Последняя синхронизация</string>
 </resources>

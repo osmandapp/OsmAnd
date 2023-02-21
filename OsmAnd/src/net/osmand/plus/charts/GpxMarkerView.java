@@ -1,6 +1,6 @@
-package net.osmand.plus.track;
+package net.osmand.plus.charts;
 
-import static net.osmand.plus.helpers.GpxUiHelper.SECOND_IN_MILLIS;
+import static net.osmand.plus.track.helpers.GpxUiHelper.SECOND_IN_MILLIS;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,12 +21,9 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXHighlight;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -178,7 +175,7 @@ public class GpxMarkerView extends MarkerView {
 
 	private void updateXAxisValueWithTime(@NonNull Entry entry) {
 		int seconds = (int) (entry.getX() + 0.5);
-		String formattedTime = GpxUiHelper.formatXAxisTime(seconds, useHours);
+		String formattedTime = ChartUtils.formatXAxisTime(seconds, useHours);
 		((TextView) xAxisContainer.findViewById(R.id.x_axis_value)).setText(formattedTime);
 	}
 

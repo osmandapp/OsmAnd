@@ -19,20 +19,20 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
@@ -304,12 +304,12 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId,
-							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
+	                        GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
 		prepareData(title, value, imageResId, ColorUtilities.getDefaultIconColorId(nightMode), firstType, secondType, itemType);
 	}
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
-							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
+	                        GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
 		if (analysis == null) {
 			return;
 		}
@@ -370,7 +370,7 @@ public class GpxBlockStatisticsBuilder {
 		private final ItemType itemType;
 
 		public StatBlock(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
-						 GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
+		                 GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
 			this.title = title;
 			this.value = value;
 			this.imageResId = imageResId;
@@ -403,7 +403,7 @@ public class GpxBlockStatisticsBuilder {
 		private final int textSize;
 
 		public BlockStatisticsAdapter(GpxDisplayItem displayItem, SegmentActionsListener actionsListener,
-									  @ColorInt int activeColor) {
+		                              @ColorInt int activeColor) {
 			this.displayItem = displayItem;
 			this.actionsListener = actionsListener;
 			this.activeColor = activeColor;

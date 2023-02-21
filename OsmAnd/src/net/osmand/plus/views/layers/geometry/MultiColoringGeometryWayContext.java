@@ -65,12 +65,9 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 		return borderPaint;
 	}
 
-	public float getBorderOutlineWidth() {
-		return (hasMapRenderer() ? 1.5f : 2f) * getDensity();
-	}
-
 	public void updateBorderWidth(float routeLineWidth) {
-		borderPaint.setStrokeWidth(routeLineWidth + getBorderOutlineWidth());
+		float enlargement = getDensity() * 2f; // One dp on each side of line
+		borderPaint.setStrokeWidth(routeLineWidth + enlargement);
 	}
 
 	public Bitmap getSpecialArrowBitmap() {

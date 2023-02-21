@@ -1,5 +1,9 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_COLOR;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapMenu;
@@ -24,9 +29,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 
@@ -47,7 +49,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 	}
 
 	public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType,
-								boolean showStartFinishIcons, boolean nightMode) {
+	                            boolean showStartFinishIcons, boolean nightMode) {
 		super(context, R.layout.rendering_prop_menu_item);
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.adapterType = adapterType;
@@ -109,11 +111,23 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		addAll(getAppearanceItems(app, adapterType, showStartFinishIcons));
 	}
 
-	public static List<AppearanceListItem> getAppearanceItems(OsmandApplication app, GpxAppearanceAdapterType adapterType) {
+	@NonNull
+	public static List<Integer> getTrackColors(@NonNull OsmandApplication app) {
+		List<Integer> colors = new ArrayList<>();
+		for (AppearanceListItem item : getAppearanceItems(app, TRACK_COLOR)) {
+			if (!colors.contains(item.getColor())) {
+				colors.add(item.getColor());
+			}
+		}
+		return colors;
+	}
+
+
+	public static List<AppearanceListItem> getAppearanceItems(@NonNull OsmandApplication app, GpxAppearanceAdapterType adapterType) {
 		return getAppearanceItems(app, adapterType, false);
 	}
 
-	private static List<AppearanceListItem> getAppearanceItems(OsmandApplication app, GpxAppearanceAdapterType adapterType,
+	private static List<AppearanceListItem> getAppearanceItems(@NonNull OsmandApplication app, GpxAppearanceAdapterType adapterType,
 	                                                           boolean showStartFinishIcons) {
 		List<AppearanceListItem> items = new ArrayList<>();
 		RenderingRuleProperty trackWidthProp = null;
@@ -187,7 +201,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 				}
 			}
 		}
-		return defaultColor;
+		return GPXUtilities.parseColor(colorName, defaultColor);
 	}
 
 	public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {
@@ -206,5 +220,4 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		}
 		return Algorithms.colorToString(color);
 	}
-
 }

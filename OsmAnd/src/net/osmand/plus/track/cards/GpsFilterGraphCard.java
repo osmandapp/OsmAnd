@@ -14,7 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;

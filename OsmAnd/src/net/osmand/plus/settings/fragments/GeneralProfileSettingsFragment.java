@@ -13,21 +13,29 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
+import net.osmand.plus.settings.bottomsheets.displaydata.DialogDisplayDataProvider;
+import net.osmand.plus.settings.bottomsheets.displaydata.OnDialogItemSelectedListener;
+import net.osmand.plus.settings.bottomsheets.displaydata.DialogDisplayItem;
+import net.osmand.plus.settings.bottomsheets.displaydata.DialogDisplayData;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -40,7 +48,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment
+		implements OnDialogItemSelectedListener, DialogDisplayDataProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -166,27 +175,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupPositionPlacementOnMapPref() {
 		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
-		String entries[] = {getString(R.string.shared_string_automatic), getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)};
+		int selectedDisplayPosition = preference.getModeValue(getSelectedAppMode());
+		MapFocus mapFocus = MapFocus.getByValue(selectedDisplayPosition);
 
-		Preference positionPlacementPref = findPreference(preference.getId());
-		positionPlacementPref.setIcon(getPositionPlacementOnMapIcon());
-		positionPlacementPref.setSummary(entries[preference.getModeValue(getSelectedAppMode())]);
-
-		ListPreferenceEx positionPlacement = findPreference(preference.getId());
-		positionPlacement.setDescription(R.string.display_position_descr);
-		positionPlacement.setIcon(getPositionPlacementOnMapIcon());
-		positionPlacement.setEntries(new String[] {entries[0], entries[1], entries[2]});
-		positionPlacement.setEntryValues(new Integer[] {0, 1, 2});
-	}
-
-	private Drawable getPositionPlacementOnMapIcon() {
-		switch (settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode())) {
-			case 1:
-				return getActiveIcon(R.drawable.ic_action_display_position_center);
-			case 2:
-				return getActiveIcon(R.drawable.ic_action_display_position_bottom);
-			default:
-				return getActiveIcon(R.drawable.ic_action_display_position_auto);
+		Preference uiPreference = findPreference(preference.getId());
+		if (uiPreference != null) {
+			Drawable icon = getActiveIcon(mapFocus.getIconId());
+			uiPreference.setIcon(icon);
+			uiPreference.setSummary(mapFocus.getTitleId());
 		}
 	}
 
@@ -402,6 +398,44 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		b.show();
 	}
 
+	private void showPositionPlacementDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
+			ApplicationMode appMode = getSelectedAppMode();
+			int selectedValue = preference.getModeValue(appMode);
+			int selectedItemIndex = MapFocus.getByValue(selectedValue).ordinal();
+			FragmentManager fm = activity.getSupportFragmentManager();
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, this, false,
+					preference.getId(), selectedItemIndex, appMode, true);
+		}
+	}
+
+	@Override
+	@Nullable
+	public DialogDisplayData provideDialogDisplayData(@NonNull String dialogId) {
+		if (dialogId.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
+			DialogDisplayData dialogDisplayData = new DialogDisplayData();
+			dialogDisplayData.setTitle(getString(R.string.display_position));
+			List<DialogDisplayItem> displayItems = new ArrayList<>();
+			for (MapFocus mapFocus : MapFocus.values()) {
+				DialogDisplayItem item = new DialogDisplayItem();
+				item.title = getString(mapFocus.getTitleId());
+				item.layoutId = R.layout.bottom_sheet_item_with_bottom_descr_and_radio_btn;
+				if (mapFocus == MapFocus.AUTOMATIC) {
+					item.description = getString(R.string.display_position_automatic_descr);
+				}
+				item.normalIcon = getContentIcon(mapFocus.getIconId());
+				item.selectedIcon = getActiveIcon(mapFocus.getIconId());
+				item.tag = mapFocus;
+				displayItems.add(item);
+			}
+			dialogDisplayData.setDisplayItems(displayItems);
+			return dialogDisplayData;
+		}
+		return null;
+	}
+
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.DRIVING_REGION.getId().equals(prefId)) {
@@ -425,7 +459,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
-			MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+			MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 			if (mapViewTrackingUtilities != null) {
 				mapViewTrackingUtilities.updateSettings();
 			}
@@ -434,11 +468,27 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
+		String key = preference.getKey();
+		if (key.equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
+			return true;
+		} else if (key.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
+			showPositionPlacementDialog();
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDialogItemSelected(@NonNull String dialogId, @NonNull DialogDisplayItem selectedItem) {
+		if (dialogId.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
+			Preference preference = findPreference(dialogId);
+			Object newValue = selectedItem.tag;
+			if (preference != null && newValue instanceof MapFocus) {
+				MapFocus mapFocus = (MapFocus) newValue;
+				onPreferenceChange(preference, mapFocus.getValue());
+			}
+		}
 	}
 
 	@Override

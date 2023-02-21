@@ -5031,5 +5031,5 @@
     <string name="sound_beep_complex">蜂鳴器：複合</string>
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
     <string name="last_synchronized">最後同步</string>
-    <string name="display_position_descr">預設值為「自動」，地圖方向為「移動方向」時是「底部」，其他情況下則為「中心」。</string>
+    <string name="display_position_automatic_descr">取決於地圖方向，底部為移動方向，中心為其他所有方向。</string>
 </resources>

@@ -1,6 +1,8 @@
 package net.osmand.plus.importfiles;
 
 import static android.app.Activity.RESULT_OK;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.KITKAT;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
@@ -10,7 +12,6 @@ import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
@@ -27,7 +28,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
@@ -36,21 +36,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.measurementtool.GpxData;
@@ -60,6 +58,8 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -89,7 +89,7 @@ public class ImportHelper {
 	public static final int IMPORT_FILE_REQUEST = 1006;
 
 	private final OsmandApplication app;
-	private final AppCompatActivity activity;
+	private final FragmentActivity activity;
 
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
 
@@ -118,14 +118,16 @@ public class ImportHelper {
 	}
 
 	public interface OnGpxImportCompleteListener {
-		void onImportComplete(boolean success);
+		default void onImportComplete(boolean success) {
+		}
 
-		void onSaveComplete(boolean success, GPXFile result);
+		default void onSaveComplete(boolean success, GPXFile result) {
+		}
 	}
 
-	public ImportHelper(AppCompatActivity activity, OsmandApplication app) {
+	public ImportHelper(@NonNull FragmentActivity activity) {
 		this.activity = activity;
-		this.app = app;
+		this.app = (OsmandApplication) activity.getApplicationContext();
 	}
 
 	public void setGpxImportCompleteListener(OnGpxImportCompleteListener gpxImportCompleteListener) {
@@ -400,14 +402,10 @@ public class ImportHelper {
 		});
 	}
 
+	@NonNull
 	public static Intent getImportTrackIntent() {
 		Intent intent = new Intent();
-		String action;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			action = Intent.ACTION_OPEN_DOCUMENT;
-		} else {
-			action = Intent.ACTION_GET_CONTENT;
-		}
+		String action = SDK_INT >= KITKAT ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT;
 		intent.setAction(action);
 		intent.setType("*/*");
 		return intent;

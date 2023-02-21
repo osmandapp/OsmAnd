@@ -61,58 +61,6 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	@Override
-	protected void drawFullBorder(@NonNull VectorLinesCollection collection, int baseOrder,
-	                              int zoom, @NonNull List<DrawPathData31> pathsData) {
-		if (DRAW_BORDER && !pathsData.isEmpty() && zoom < BORDER_TYPE_ZOOM_THRESHOLD && requireDrawingBorder()) {
-			int outlineId = OUTLINE_ID;
-			Paint paint = getContext().getBorderPaint();
-			int color = paint.getColor();
-			float width = paint.getStrokeWidth();
-			float outlineWidth = getContext().getBorderOutlineWidth();
-			List<DrawPathData31> dataArr = new ArrayList<>();
-			for (DrawPathData31 data : pathsData) {
-				if (data.style == null || data.style.color == 0) {
-					if (!dataArr.isEmpty()) {
-						buildVectorOutline(collection, baseOrder, outlineId++, color, width, outlineWidth, dataArr);
-						dataArr.clear();
-					}
-					continue;
-				}
-				dataArr.add(data);
-			}
-			if (!dataArr.isEmpty()) {
-				buildVectorOutline(collection, baseOrder, outlineId, color, width, outlineWidth, dataArr);
-			}
-		}
-	}
-
-	@Override
-	protected void drawSegmentBorder(@NonNull VectorLinesCollection collection, int baseOrder,
-	                                 int zoom, @NonNull List<DrawPathData31> pathsData) {
-		if (DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD && requireDrawingBorder()) {
-			int outlineId = OUTLINE_ID + 1000;
-			Paint paint = getContext().getBorderPaint();
-			int color = paint.getColor();
-			float width = paint.getStrokeWidth();
-			float outlineWidth = getContext().getBorderOutlineWidth();
-			List<DrawPathData31> dataArr = new ArrayList<>();
-			for (DrawPathData31 data : pathsData) {
-				if (data.style == null || data.style.color == 0 || !data.style.hasPathLine()) {
-					if (!dataArr.isEmpty()) {
-						buildVectorOutline(collection, baseOrder, outlineId++, color, width, outlineWidth, dataArr);
-						dataArr.clear();
-					}
-					continue;
-				}
-				dataArr.add(data);
-			}
-			if (!dataArr.isEmpty()) {
-				buildVectorOutline(collection, baseOrder, outlineId, color, width, outlineWidth, dataArr);
-			}
-		}
-	}
-
-	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
 	                     @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
@@ -123,14 +71,14 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			List<DrawPathData31> dataArr = new ArrayList<>();
 			for (DrawPathData31 data : pathsData) {
 				if (prevStyle != null && data.style == null) {
-					drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, false, prevStyle, dataArr);
+					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 					dataArr.clear();
 				}
 				prevStyle = data.style;
 				dataArr.add(data);
 			}
 			if (!dataArr.isEmpty() && prevStyle != null) {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, false, prevStyle, dataArr);
+				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 			}
 		}
 	}
@@ -139,13 +87,16 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
+		Paint borderPaint = getContext().getBorderPaint();
+		int borderColor = coloringType.isGradient() ? borderPaint.getColor() : 0;
+		float borderWidth = coloringType.isGradient() ? borderPaint.getStrokeWidth() : 0;
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
 		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
 		buildVectorLine(collection, baseOrder, lineId,
-				style.getColor(0), style.getWidth(0), style.getDashPattern(), approximationEnabled, shouldDrawArrows,
+				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
 				pointBitmap, pointBitmap, (float) pxStep, true, colorizationMapping, style.getColorizationScheme(),
 				pathsData);
 	}
