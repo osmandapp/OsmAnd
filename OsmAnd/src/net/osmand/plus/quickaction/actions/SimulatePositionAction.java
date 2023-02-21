@@ -263,6 +263,16 @@ public class SimulatePositionAction extends QuickAction implements CreateEditAct
 		}
 	}
 
+	@Override
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
+		boolean useSelectedGpxFile = trackToggleButton.getSelectedItemIndex() == 1;
+		getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
+		if (selectedGpxFilePath != null) {
+			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
+		}
+		return true;
+	}
+
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
 	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
