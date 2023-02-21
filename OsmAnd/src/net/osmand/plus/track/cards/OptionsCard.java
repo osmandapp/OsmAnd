@@ -301,7 +301,7 @@ public class OptionsCard extends MapBaseCard {
 		Drawable simulatePositionIcon = getActiveIcon(R.drawable.ic_action_simulate_position);
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(AndroidUtils.getDrawableForDirection(app, simulatePositionIcon))
-				.setTitle(app.getString(R.string.simulate_your_position))
+				.setTitle(app.getString(R.string.simulate_your_location))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(SIMULATE_POSITION_BUTTON_INDEX))
 				.create();

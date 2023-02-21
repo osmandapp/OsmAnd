@@ -16,7 +16,6 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Movement speed</string>
     <string name="simulation_position_description">Choose a track file that will be used as a source for location moving</string>
-    <string name="simulate_your_position">Simulate your position</string>
     <string name="shared_string_kilograms">kilograms</string>
     <string name="shared_string_yards">yards</string>
     <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>

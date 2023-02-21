@@ -26,8 +26,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -215,7 +215,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	private void setupToolbar() {
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-		tvTitle.setText(R.string.simulate_your_position);
+		tvTitle.setText(R.string.simulate_your_location);
 
 		updateToolbarNavigationIcon();
 

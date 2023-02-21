@@ -21,13 +21,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.track.helpers.GPXDatabase;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -40,7 +40,7 @@ import java.io.File;
 
 public class SimulatePositionAction extends QuickAction implements CreateEditActionDialog.FileSelected {
 	public static final QuickActionType TYPE = new QuickActionType(45, "simulation.position", SimulatePositionAction.class)
-			.nameRes(R.string.simulate_your_position)
+			.nameRes(R.string.simulate_your_location)
 			.iconRes(R.drawable.ic_action_simulate_position).nonEditable()
 			.category(QuickActionType.NAVIGATION)
 			.nameActionRes(R.string.quick_action_start_stop_title);
