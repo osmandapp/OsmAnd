@@ -134,6 +134,7 @@ public class PurchaseUiDataUtils {
 				if (purchases.isOsmAndProSubscription(purchase)) {
 					String sku = purchase.getSku();
 					nativeSubscriptionOrigin = helper.getSubscriptionOriginBySku(sku);
+					break;
 				}
 			}
 			return backupSubscriptionOrigin != nativeSubscriptionOrigin;
