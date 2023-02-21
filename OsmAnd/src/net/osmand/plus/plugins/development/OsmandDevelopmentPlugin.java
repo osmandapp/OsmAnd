@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.LocationSimulationAction;
+import net.osmand.plus.quickaction.actions.SimulatePositionAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -197,6 +198,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	protected List<QuickActionType> getQuickActionTypes() {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(LocationSimulationAction.TYPE);
+		quickActionTypes.add(SimulatePositionAction.TYPE);
 		return quickActionTypes;
 	}
 

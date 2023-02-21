@@ -19,6 +19,7 @@ import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.SIMULATE_POSITION_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
@@ -98,6 +99,7 @@ import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListene
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.myplaces.ui.SplitSegmentDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.SimulatePositionFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -1149,6 +1151,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				} else {
 					showTrackAltitudeDialog(-1);
 				}
+			} else if (buttonIndex == SIMULATE_POSITION_BUTTON_INDEX) {
+				SimulatePositionFragment.showInstance(mapActivity, gpxFile);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 
