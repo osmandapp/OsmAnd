@@ -19,6 +19,8 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.util.List;
+
 public class PurchaseUiDataUtils {
 
 	public static final int INVALID = -1;
@@ -117,6 +119,26 @@ public class PurchaseUiDataUtils {
 				expireTime, purchaseTime, isSubscription,
 				isLiveUpdateSubscription, autoRenewing,
 				renewVisible, state, origin);
+	}
+
+	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
+	                                                   @NonNull List<InAppPurchase> mainPurchases) {
+		OsmandSettings settings = app.getSettings();
+		if (settings.BACKUP_PURCHASE_ACTIVE.get()) {
+			SubscriptionOrigin backupSubscriptionOrigin = settings.BACKUP_SUBSCRIPTION_ORIGIN.get();
+			SubscriptionOrigin nativeSubscriptionOrigin = null;
+
+			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
+			InAppPurchases purchases = helper.getInAppPurchases();
+			for (InAppPurchase purchase : mainPurchases) {
+				if (purchases.isOsmAndProSubscription(purchase)) {
+					String sku = purchase.getSku();
+					nativeSubscriptionOrigin = helper.getSubscriptionOriginBySku(sku);
+				}
+			}
+			return backupSubscriptionOrigin != nativeSubscriptionOrigin;
+		}
+		return false;
 	}
 
 }
