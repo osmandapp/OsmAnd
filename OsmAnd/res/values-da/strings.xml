@@ -5060,4 +5060,6 @@
     <string name="switch_folder">Skift mappe</string>
     <string name="show_all_tracks">Vis alle spor</string>
     <string name="shared_string_on_map">På kort</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="shared_string_yards">yards</string>
 </resources>
