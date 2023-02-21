@@ -105,7 +105,7 @@ public class PurchaseUiDataUtils {
 			title = app.getString(R.string.osmand_pro);
 			PeriodUnit periodUnit = settings.BACKUP_PURCHASE_PERIOD.get();
 			purchaseType = app.getString(periodUnit == PeriodUnit.YEAR ?
-					R.string.annual_subscription: R.string.monthly_subscription);
+					R.string.annual_subscription : R.string.monthly_subscription);
 		}
 
 		boolean isLiveUpdateSubscription = false;
