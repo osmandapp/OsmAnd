@@ -5045,4 +5045,6 @@
 \nIls sont également enregistrés sous \"%1$s\" pour être appliqués par %2$s à toutes les autres traces sans apparence définie.</string>
     <string name="shared_string_on_map">Sur la carte</string>
     <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
+    <string name="shared_string_kilograms">kilogrammes</string>
+    <string name="shared_string_yards">yards</string>
 </resources>
