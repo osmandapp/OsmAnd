@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.helpers.GpxUiHelper.HOUR_IN_MILLIS;
+import static net.osmand.plus.track.helpers.GpxUiHelper.HOUR_IN_MILLIS;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -23,30 +23,32 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
-import net.osmand.plus.track.GpxMarkerView;
+import net.osmand.plus.charts.GpxMarkerView;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.GPXLayer;
@@ -657,7 +659,7 @@ public class TrackDetailsMenu {
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
 		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.startTime, useHours);
-		GpxUiHelper.setupGPXChart(chart, markerView, 24, 16, true);
+		ChartUtils.setupGPXChart(chart, markerView, 24, 16, true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
@@ -666,16 +668,16 @@ public class TrackDetailsMenu {
 				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
 				switch (gpxItem.chartTypes[i]) {
 					case ALTITUDE:
-						dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
+						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 								gpxItem.chartAxisType, false, true, withoutGaps);
 						break;
 					case SPEED:
-						dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
+						dataSet = ChartUtils.createGPXSpeedDataSet(app, chart, analysis,
 								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 					case SLOPE:
 						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
-						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 								gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
 				}

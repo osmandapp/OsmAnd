@@ -26,7 +26,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.utils.AndroidUtils;

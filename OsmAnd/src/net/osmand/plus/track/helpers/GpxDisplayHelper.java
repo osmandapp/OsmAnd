@@ -13,7 +13,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;

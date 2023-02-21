@@ -388,18 +388,20 @@ public class AndroidUtils {
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
 
+	@NonNull
 	private static ColorStateList createColorStateList(Context ctx, boolean night, int state,
 	                                                   @ColorRes int lightNormal, @ColorRes int lightState,
 	                                                   @ColorRes int darkNormal, @ColorRes int darkState) {
+		int normalColor = ContextCompat.getColor(ctx, night ? darkNormal : lightNormal);
+		int stateColor = ContextCompat.getColor(ctx, night ? darkState : lightState);
+		return createColorStateList(state, stateColor, normalColor);
+	}
+
+	@NonNull
+	public static ColorStateList createColorStateList(int state, @ColorInt int stateColor, @ColorInt int normal) {
 		return new ColorStateList(
-				new int[][] {
-						new int[] {state},
-						new int[] {}
-				},
-				new int[] {
-						ContextCompat.getColor(ctx, night ? darkState : lightState),
-						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
-				}
+				new int[][] {new int[] {state}, new int[] {}},
+				new int[] {stateColor, normal}
 		);
 	}
 
@@ -626,7 +628,7 @@ public class AndroidUtils {
 		return result;
 	}
 
-	public static int getCutoutHeight(Activity activity){
+	public static int getCutoutHeight(Activity activity) {
 		int cutoutHeight = 0;
 
 		if (activity != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {

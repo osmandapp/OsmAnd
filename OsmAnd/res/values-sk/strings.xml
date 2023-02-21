@@ -5029,8 +5029,8 @@
     <string name="sound_beep_complex">Pípnutie: zložité</string>
     <string name="sound_beep_complex_loud">Pípnutie: zložité hlasné</string>
     <string name="sound_beep_minimal">Pípnutie: minimálne</string>
-    <string name="display_position_descr">Predvolená hodnota je \'Automaticky\', čo znamená \'Dolu\' pre orientáciu mapy \'V smere pohybu\' a \'V strede\' v ostatných prípadoch.</string>
     <string name="sound_beep_simple">Pípnutie: jednoduché</string>
     <string name="sound_beep_simple_loud">Pípnutie: jednoduché hlasné</string>
     <string name="weight_limit_error">Minimálna hodnota je \"%1$s\" ton. Použite profil \"%2$s\" ak je hmotnosť vozidla nižšia ako toto minimum.</string>
+    <string name="display_position_automatic_descr">Závisí od orientácie mapy, naspodu v režime \'v smere pohybu\', v strede obrazovky v iných prípadoch.</string>
 </resources>

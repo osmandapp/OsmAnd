@@ -169,8 +169,7 @@ public class LiveUpdatesHelper {
 	public static PendingIntent getPendingIntent(@NonNull Context context,
 												 @NonNull String fileName) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
-		File file = new File(fileName);
-		String fileNameNoExt = Algorithms.getFileNameWithoutExtension(file);
+		String fileNameNoExt = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(fileName);
 		intent.putExtra(LOCAL_INDEX_INFO, fileName);
 		intent.setAction(fileNameNoExt);
 		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
@@ -247,7 +246,7 @@ public class LiveUpdatesHelper {
 	}
 
 	public static void runLiveUpdate(Context context, String fileName, boolean userRequested, @Nullable Runnable runOnSuccess) {
-		String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
+		String fnExt = Algorithms.getFileNameWithoutExtensionAndRoadSuffix(fileName);
 		PerformLiveUpdateAsyncTask task = new PerformLiveUpdateAsyncTask(context, fileName, userRequested);
 		task.setRunOnSuccess(runOnSuccess);
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
@@ -255,7 +254,7 @@ public class LiveUpdatesHelper {
 
 	public static void runLiveUpdate(Context context, boolean userRequested, LiveUpdateListener listener) {
 		for (LocalIndexInfo mapToUpdate : listener.getMapsToUpdate()) {
-			runLiveUpdate(context, mapToUpdate.getFileName(), userRequested, listener::processFinish);
+			runLiveUpdate(context, mapToUpdate.getFileNameWithoutRoadSuffix(), userRequested, listener::processFinish);
 		}
 	}
 

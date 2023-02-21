@@ -18,7 +18,6 @@ import java.util.List;
 
 public class RouteColorize {
 
-    public int zoom;
     public double[] latitudes;
     public double[] longitudes;
     public double[] values;
@@ -75,8 +74,7 @@ public class RouteColorize {
      * @param maxValue can be NaN
      * @param palette  array {{value,color},...} - color in sRGB (decimal) format OR {{value,RED,GREEN,BLUE,ALPHA},...} - color in RGBA format
      */
-    public RouteColorize(int zoom, double[] latitudes, double[] longitudes, double[] values, double minValue, double maxValue, double[][] palette) {
-        this.zoom = zoom;
+    public RouteColorize(double[] latitudes, double[] longitudes, double[] values, double minValue, double maxValue, double[][] palette) {
         this.latitudes = latitudes;
         this.longitudes = longitudes;
         this.values = values;
@@ -94,11 +92,11 @@ public class RouteColorize {
     /**
      * @param type ELEVATION, SPEED, SLOPE
      */
-    public RouteColorize(int zoom, GPXFile gpxFile, ColorizationType type) {
-        this(zoom, gpxFile, null, type, 0);
+    public RouteColorize(GPXFile gpxFile, ColorizationType type) {
+        this(gpxFile, null, type, 0);
     }
 
-    public RouteColorize(int zoom, GPXFile gpxFile, GPXTrackAnalysis analysis, ColorizationType type, float maxProfileSpeed) {
+    public RouteColorize(GPXFile gpxFile, GPXTrackAnalysis analysis, ColorizationType type, float maxProfileSpeed) {
 
         if (!gpxFile.hasTrkPt()) {
             LOG.warn("GPX file is not consist of track points");
@@ -134,7 +132,6 @@ public class RouteColorize {
             }
         }
 
-        this.zoom = zoom;
         colorizationType = type;
         latitudes = listToArray(latList);
         longitudes = listToArray(lonList);
@@ -147,14 +144,6 @@ public class RouteColorize {
         calculateMinMaxValue(analysis, maxProfileSpeed);
         checkPalette();
         sortPalette();
-    }
-
-    public int getZoom() {
-        return zoom;
-    }
-
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
     }
 
     /**
@@ -248,19 +237,25 @@ public class RouteColorize {
         }
     }
 
-    public List<RouteColorizationPoint> getResult(boolean simplify) {
+    public List<RouteColorizationPoint> getResult() {
         List<RouteColorizationPoint> result = new ArrayList<>();
-        if (simplify) {
-            result = simplify();
-        } else {
-            for (int i = 0; i < latitudes.length; i++) {
-                result.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
-            }
+        for (int i = 0; i < latitudes.length; i++) {
+            result.add(new RouteColorizationPoint(i, latitudes[i], longitudes[i], values[i]));
         }
-        for (RouteColorizationPoint data : result) {
-            data.color = getColorByValue(data.val);
-        }
+        setColorsToPoints(result);
         return result;
+    }
+
+    public List<RouteColorizationPoint> getSimplifiedResult(int simplificationZoom) {
+        List<RouteColorizationPoint> simplifiedResult = simplify(simplificationZoom);
+        setColorsToPoints(simplifiedResult);
+        return simplifiedResult;
+    }
+
+    private void setColorsToPoints(List<RouteColorizationPoint> points) {
+        for (RouteColorizationPoint point : points) {
+            point.color = getColorByValue(point.val);
+        }
     }
 
     public int getColorByValue(double value) {
@@ -308,7 +303,7 @@ public class RouteColorize {
         return rgbaToDecimal(0, 0, 0, 0);
     }
 
-    public List<RouteColorizationPoint> simplify() {
+    public List<RouteColorizationPoint> simplify(int simplificationZoom) {
         if (dataList == null) {
             dataList = new ArrayList<>();
             for (int i = 0; i < latitudes.length; i++) {
@@ -321,7 +316,7 @@ public class RouteColorize {
             nodes.add(new net.osmand.osm.edit.Node(data.lat, data.lon, data.id));
         }
 
-        double epsilon = Math.pow(2.0, DEFAULT_BASE - zoom);
+        double epsilon = Math.pow(2.0, DEFAULT_BASE - simplificationZoom);
         result.add(nodes.get(0));
         OsmMapUtils.simplifyDouglasPeucker(nodes, 0, nodes.size() - 1, result, epsilon);
 

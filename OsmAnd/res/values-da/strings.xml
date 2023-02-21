@@ -369,7 +369,7 @@
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS, foretrukket)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
-    <string name="fav_export_confirmation">Fil med tidligere eksporterede Favoritter eksisterer allerede. Overskriv?</string>
+    <string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv\?</string>
     <string name="profile_settings">Profilspecifikke indstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
@@ -1440,7 +1440,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Importer</string>
-    <string name="shared_string_export">Eksporter</string>
+    <string name="shared_string_export">Eksportér</string>
     <string name="shared_string_more">Mere…</string>
     <string name="shared_string_more_actions">Flere handlinger</string>
     <string name="shared_string_do_not_show_again">Vis ikke igen</string>
@@ -2498,7 +2498,7 @@
     <string name="plan_route">Planlæg en rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
+    <string name="marker_save_as_track_descr">Eksportér markører til følgende GPX-fil:</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil være væk efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
@@ -2610,7 +2610,7 @@
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Eksporte som OSM-noter, IP\'er, eller begge dele.</string>
+    <string name="osm_edits_export_desc">Eksportér som OSM-noter, IP\'er, eller begge dele.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
@@ -3246,7 +3246,7 @@
     <string name="rendering_value_white_name">Hvid</string>
     <string name="tts_initialization_error">Tekst-til-tale-programmet kan ikke startes.</string>
     <string name="simulate_your_location_gpx_descr">Simuler positionen ved hjælp af et optaget GPX-spor.</string>
-    <string name="export_profile">Eksporter profil</string>
+    <string name="export_profile">Eksportér profil</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' findes allerede. Overskriv\?</string>
     <string name="export_profile_failed">Profilen kunne ikke eksporteres.</string>
@@ -5022,7 +5022,7 @@
     <string name="new_file">Ny fil</string>
     <string name="cloud_changes">Cloud-ændringer</string>
     <string name="shared_string_cloud">Cloud</string>
-    <string name="export_to_file">Eksporter til fil</string>
+    <string name="export_to_file">Eksportér til fil</string>
     <string name="last_sync">Sidste synkronisering</string>
     <string name="shared_string_do_not_exist">Findes ikke</string>
     <string name="av_audio_format_bottom_sheet_descr">Vælg et lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
@@ -5043,5 +5043,5 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_descr">Standardindstillingen er \'Automatisk\', hvilket er \'Nederst\' for kortorientering \'Bevægelsesretning\' og \'Centrum\' i alle andre tilfælde.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortets orientering, nederst for bevægelsesretning, centrum for alle andre.</string>
 </resources>

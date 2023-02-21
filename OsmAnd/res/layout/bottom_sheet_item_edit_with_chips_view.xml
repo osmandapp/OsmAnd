@@ -73,8 +73,9 @@
 				android:id="@+id/text_caption"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				osmand:hintEnabled="false"
 				android:layout_weight="1"
+				osmand:hintEnabled="false"
+				osmand:errorIconDrawable="@null"
 				osmand:boxBackgroundColor="@color/material_text_input_layout_bg">
 
 				<com.google.android.material.textfield.TextInputEditText
@@ -85,28 +86,24 @@
 					android:inputType="numberDecimal"
 					android:maxLines="1"
 					android:maxLength="5"
-					android:paddingTop="0dp"
-					android:paddingBottom="0dp"
-					android:paddingStart="@dimen/content_padding_small"
-					android:paddingLeft="@dimen/content_padding_small"
-					android:paddingRight="@dimen/content_padding_small"
-					android:paddingEnd="@dimen/content_padding_small"
+					android:paddingVertical="0dp"
+					android:paddingHorizontal="@dimen/content_padding_small"
 					android:textSize="@dimen/default_list_text_size"/>
 
 			</com.google.android.material.textfield.TextInputLayout>
+
 		</LinearLayout>
 
 		<TextView
 			android:id="@+id/metric"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="start|center_vertical"
-			android:paddingStart="@dimen/content_padding_small"
-			android:paddingRight="@dimen/content_padding_small"
-			android:paddingEnd="@dimen/content_padding_small"
-			android:paddingLeft="@dimen/content_padding_small"
+			android:layout_height="@dimen/favorites_list_item_height"
+			android:layout_gravity="start|top"
+			android:gravity="center_vertical"
+			android:paddingHorizontal="@dimen/content_padding_small"
 			android:textColor="?android:textColorSecondary"
 			android:text="@string/shared_string_meters" />
+
 	</FrameLayout>
 
 	<net.osmand.plus.widgets.chips.HorizontalChipsView

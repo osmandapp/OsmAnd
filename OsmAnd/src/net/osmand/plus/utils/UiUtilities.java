@@ -79,7 +79,8 @@ public class UiUtilities {
 		SECONDARY,
 		SECONDARY_HARMFUL,
 		SECONDARY_ACTIVE,
-		STROKED
+		STROKED,
+		TERTIARY
 	}
 
 	public enum CompoundButtonType {
@@ -94,36 +95,38 @@ public class UiUtilities {
 		END,
 	}
 
-	public UiUtilities(OsmandApplication app) {
+	public UiUtilities(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
-	private Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId) {
-		long hash = ((long) resId << 31l) + clrId;
-		Drawable d = drawableCache.get(hash);
-		if (d == null) {
-			d = AppCompatResources.getDrawable(app, resId);
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			if (clrId != 0) {
-				DrawableCompat.setTint(d, ContextCompat.getColor(app, clrId));
+	private synchronized Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId) {
+		long key = (((long) resId) << 32L) + clrId;
+		Drawable drawable = drawableCache.get(key);
+		if (drawable == null) {
+			drawable = AppCompatResources.getDrawable(app, resId);
+			if (drawable != null) {
+				drawable = DrawableCompat.wrap(drawable);
+				drawable.mutate();
+				if (clrId != 0) {
+					DrawableCompat.setTint(drawable, ContextCompat.getColor(app, clrId));
+				}
+				drawableCache.put(key, drawable);
 			}
-			drawableCache.put(hash, d);
 		}
-		return d;
+		return drawable;
 	}
 
 	@Nullable
-	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
+	private synchronized Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
 		Drawable drawable = null;
 		if (resId != 0) {
-			long hash = ((long) resId << 31L) + color;
-			drawable = drawableCache.get(hash);
+			long key = ((long) resId << 32L) + color;
+			drawable = drawableCache.get(key);
 			if (drawable == null) {
 				drawable = AppCompatResources.getDrawable(app, resId);
 				drawable = tintDrawable(drawable, color);
 
-				drawableCache.put(hash, drawable);
+				drawableCache.put(key, drawable);
 			}
 		} else {
 			LOG.warn("Invalid icon identifier");
@@ -687,6 +690,7 @@ public class UiUtilities {
 		Context ctx = buttonView.getContext();
 		TextViewEx buttonTextView = buttonView.findViewById(R.id.button_text);
 		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		ColorStateList colorStateList = null;
 		int textAndIconColorResId = INVALID_ID;
 		switch (buttonType) {
 			case PRIMARY:
@@ -719,9 +723,17 @@ public class UiUtilities {
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
 				textAndIconColorResId = ColorUtilities.getButtonSecondaryTextColorId(nightMode);
 				break;
+			case TERTIARY:
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_tetriary_light, R.drawable.ripple_dark);
+				textAndIconColorResId = nightMode ? R.color.active_color_primary_dark : R.color.button_color_active_light;
+				int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
+				colorStateList = AndroidUtils.createEnabledColorStateList(ctx, disabledColor, textAndIconColorResId);
+				break;
 		}
 		if (textAndIconColorResId != INVALID_ID) {
-			ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			if (colorStateList == null) {
+				colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			}
 			buttonTextView.setText(buttonText);
 			buttonTextView.setTextColor(colorStateList);
 			buttonTextView.setEnabled(buttonView.isEnabled());

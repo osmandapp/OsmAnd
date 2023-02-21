@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.fragments.RouteParametersFragment.createR
 import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
 import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
 import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.RoutingParameterType;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
@@ -26,6 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
 import com.google.android.material.slider.Slider;
@@ -38,7 +38,9 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
-import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
+import net.osmand.plus.settings.vehiclesize.SizeType;
+import net.osmand.plus.settings.vehiclesize.VehicleSizes;
+import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
@@ -47,7 +49,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -72,11 +73,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
 				GeneralRouterProfile routerProfile = router.getProfile();
+				String derivedProfile = mode.getDerivedProfile();
 				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile, derivedProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile, derivedProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile, derivedProfile);
+				setupVehiclePropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile, derivedProfile);
 
 				setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
 				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
@@ -88,40 +90,40 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter, @Nullable GeneralRouterProfile profile) {
-		if (parameter == null) {
+	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter,
+	                                      @Nullable GeneralRouterProfile profile,
+	                                      @Nullable String derivedProfile) {
+		if (parameter == null || profile == null) {
 			return;
 		}
+
 		String parameterId = parameter.getId();
+		VehicleSizes vehicle = VehicleSizes.newInstance(profile, derivedProfile);
+		SizeType type = SizeType.getByKey(parameterId);
+		if (vehicle == null || type == null) {
+			return;
+		}
+
 		String title = AndroidUtils.getRoutingStringPropertyName(app, parameterId, parameter.getName());
 		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 		String defValue = parameter.getDefaultString();
-		StringPreference pref = (StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
-		VehicleSizeAssets assets = VehicleSizeAssets.getAssets(parameterId, profile);
-		Object[] values = parameter.getPossibleValues();
-		String[] valuesStr = new String[values.length];
-		for (int i = 0; i < values.length; i++) {
-			valuesStr[i] = values[i].toString();
-		}
-		String[] entriesStr = parameter.getPossibleValueDescriptions().clone();
-		entriesStr[0] = app.getString(R.string.shared_string_none);
-		for (int i = 1; i < entriesStr.length; i++) {
-			int firstCharIndex = Algorithms.findFirstNumberEndIndex(entriesStr[i]);
-			entriesStr[i] = String.format(app.getString(R.string.ltr_or_rtl_combine_via_space),
-					entriesStr[i].substring(0, firstCharIndex), getString(assets.getMetricShortRes()));
-		}
+		ApplicationMode appMode = getSelectedAppMode();
+		MetricsConstants lengthMetricSystem = settings.METRIC_SYSTEM.getModeValue(appMode);
+		StringPreference preference = (StringPreference) settings.getCustomRoutingProperty(parameterId, defValue);
 
-		SizePreference vehicleSizePref = new SizePreference(requireContext());
-		vehicleSizePref.setKey(pref.getId());
-		vehicleSizePref.setAssets(assets);
-		vehicleSizePref.setDefaultValue(defValue);
-		vehicleSizePref.setTitle(title);
-		vehicleSizePref.setEntries(entriesStr);
-		vehicleSizePref.setEntryValues(valuesStr);
-		vehicleSizePref.setSummary(description);
-		vehicleSizePref.setIcon(getPreferenceIcon(parameterId));
-		vehicleSizePref.setLayoutResource(R.layout.preference_with_descr);
-		getPreferenceScreen().addPreference(vehicleSizePref);
+		SizePreference uiPreference = new SizePreference(requireContext());
+		uiPreference.setKey(preference.getId());
+		uiPreference.setSizeType(type);
+		uiPreference.setVehicleSizes(vehicle);
+		uiPreference.setDefaultValue(defValue);
+		uiPreference.setLengthMetricSystem(lengthMetricSystem);
+		uiPreference.setTitle(title);
+		uiPreference.setSummary(description);
+		uiPreference.setIcon(getPreferenceIcon(parameterId));
+		uiPreference.setLayoutResource(R.layout.preference_with_descr);
+
+		PreferenceScreen screen = getPreferenceScreen();
+		screen.addPreference(uiPreference);
 	}
 
 	private void setupDefaultSpeedPref() {

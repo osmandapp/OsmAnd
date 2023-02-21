@@ -11,17 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 

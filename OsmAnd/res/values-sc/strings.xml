@@ -5036,5 +5036,5 @@
     <string name="sound_beep_minimal">Bip: minimale</string>
     <string name="sound_beep_simple">Bip: simpre</string>
     <string name="last_synchronized">Ùrtima sincronizatzione</string>
-    <string name="display_position_descr">Su predefinidu est \"Automàticu\"chi est \"In bassu\" pro s\'orientamentu de sa mapa \"Diretzione de su movimentu\" e \"Tzentru\" in totu sos àteros casos.</string>
+    <string name="display_position_automatic_descr">Dipendet dae s\'orientamentu de sa mapa. In bassu pro sa diretzione de su movimentu, in tzentru pro totu su restu.</string>
 </resources>

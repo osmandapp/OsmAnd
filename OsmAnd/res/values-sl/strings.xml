@@ -4763,7 +4763,7 @@
     <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
-    <string name="display_position">Postavitev položaja</string>
+    <string name="display_position">Pokaži položaj</string>
     <string name="rotate_map_manual_opt">Fiksno (ročno vrtenje)</string>
     <string name="go_to_marker_location">Pojdi na mesto oznake</string>
     <string name="click_on_widget">Klikni na gradnik</string>
@@ -5027,5 +5027,5 @@
     <string name="av_audio_format_bottom_sheet_descr">Izberi format zvoka. Format vsebnika vrste datoteke za zvok je 3GPP (.3gp).</string>
     <string name="checking_progress">Preverjanje …</string>
     <string name="last_synchronized">Zadnja sinhronizacija</string>
-    <string name="display_position_descr">Privzeto je »Samodejno«, kar pomeni »Spodaj« za orientacijo zemljevida »Smer gibanja« in »Na sredini« v vseh drugih primerih.</string>
+    <string name="display_position_automatic_descr">Odvisno od usmerjenosti zemljevida, spodnji del za smer gibanja, sredinski del za vse drugo.</string>
 </resources>

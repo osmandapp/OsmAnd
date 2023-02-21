@@ -5042,5 +5042,5 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_descr">A predefinição é \'Automático\', sendo \'Em baixo\' para a orientação do mapa \'Direção do movimento\' e \'Centro\' em todos os outros casos.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa, a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
 </resources>

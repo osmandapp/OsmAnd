@@ -5048,7 +5048,6 @@
     <string name="share_link">Compartir enlace</string>
     <string name="sound_beep_minimal">Pitido: mínimo</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
     <string name="sound_beep_simple">Pitido: simple</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>

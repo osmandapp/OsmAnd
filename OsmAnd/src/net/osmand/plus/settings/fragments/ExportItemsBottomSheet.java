@@ -34,7 +34,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;

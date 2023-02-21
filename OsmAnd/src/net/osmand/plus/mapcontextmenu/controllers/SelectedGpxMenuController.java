@@ -1,5 +1,9 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.ALTITUDE;
+import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SLOPE;
+import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SPEED;
+
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -12,7 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -112,17 +116,17 @@ public class SelectedGpxMenuController extends MenuController {
 					progressDialog.dismiss();
 				}
 				if (gpxItem != null && gpxItem.analysis != null) {
-					ArrayList<GpxUiHelper.GPXDataSetType> list = new ArrayList<>();
+					ArrayList<GPXDataSetType> list = new ArrayList<>();
 					if (gpxItem.analysis.hasElevationData) {
-						list.add(GpxUiHelper.GPXDataSetType.ALTITUDE);
+						list.add(ALTITUDE);
 					}
 					if (gpxItem.analysis.hasSpeedData) {
-						list.add(GpxUiHelper.GPXDataSetType.SPEED);
+						list.add(SPEED);
 					} else if (gpxItem.analysis.hasElevationData) {
-						list.add(GpxUiHelper.GPXDataSetType.SLOPE);
+						list.add(SLOPE);
 					}
 					if (list.size() > 0) {
-						gpxItem.chartTypes = list.toArray(new GpxUiHelper.GPXDataSetType[0]);
+						gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 					}
 					gpxItem.locationOnMap = selectedPoint;
 					OsmandSettings settings = app.getSettings();

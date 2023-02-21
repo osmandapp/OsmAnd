@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -177,7 +178,8 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			backupHelper.logout();
-			activity.onBackPressed();
+			((MapActivity) activity).dismissBackupCloudFragment();
+			BackupAuthorizationFragment.showInstance(getActivity().getSupportFragmentManager());
 		}
 	}
 
