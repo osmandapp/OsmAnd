@@ -3756,4 +3756,5 @@
     <string name="poi_socket_tesla_supercharger_voltage">Socket: Tesla Supercharger: tensione</string>
     <string name="poi_socket_tesla_standard_voltage">Socket: Tesla standard: tensione</string>
     <string name="poi_generator_type_rbmk_1500">Tipo generatore: RBMK-1500</string>
+    <string name="poi_access_yes">L\'accesso è permesso</string>
 </resources>
