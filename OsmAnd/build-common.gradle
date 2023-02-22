@@ -3,7 +3,7 @@ task printc {
 }
 
 android {
-	compileSdkVersion 31
+	compileSdkVersion 33
 	buildToolsVersion "30.0.3"
 	// compileNdkVersion "android-ndk-r17b"
 

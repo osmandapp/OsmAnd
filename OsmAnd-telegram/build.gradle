@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-	compileSdkVersion 31
+	compileSdkVersion 33
 	buildToolsVersion "30.0.3"
 
 	sourceSets {
