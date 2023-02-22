@@ -75,10 +75,6 @@ public class MapRenderRepositories {
 	private static final Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private static final int zoomOnlyForBasemaps = 11;
-	private static final int zoomToOverviewLocalNames = 6;
-	private static final Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
-			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
-	);
 
 	static int zoomForBaseRouteRendering  = 14;
 	private final Handler handler;
