@@ -936,7 +936,6 @@ public class GPXUtilities {
 			writeRoutes(serializer, file, progress);
 			writeTracks(serializer, file, progress);
 			writeExtensions(serializer, file, progress);
-			writeNetworkRoute(serializer, file, progress);
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
 			serializer.endDocument();
@@ -948,33 +947,25 @@ public class GPXUtilities {
 		return null;
 	}
 
-	private static void writeNetworkRoute(XmlSerializer serializer, GPXFile gpxFile, IProgress progress) throws IOException {
-		assignNetworkRouteExtensionWriter(gpxFile);
-		writeExtensions(serializer, gpxFile, progress);
-	}
 
-	private static void assignNetworkRouteExtensionWriter(final GPXFile gpxFile) {
-		if (!Algorithms.isEmpty(gpxFile.networkRouteKeyTags)) {
-			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
+	public static GPXExtensionsWriter createNetworkRouteExtensionWriter(final Map<String, String> tags) {
+		return new GPXExtensionsWriter() {
 
-				@Override
-				public void writeExtensions(XmlSerializer serializer) {
-					StringBundle bundle = new StringBundle();
-					StringBundle tagsBundle = new StringBundle();
-					tagsBundle.putString("type", gpxFile.networkRouteKeyTags.get("type"));
-					for (Map.Entry<String, String> tag : gpxFile.networkRouteKeyTags.entrySet()) {
-						tagsBundle.putString(tag.getKey(), tag.getValue());
-					}
-					List<StringBundle> routeKeyBundle = new ArrayList<>();
-					routeKeyBundle.add(tagsBundle);
-					bundle.putBundleList("network_route", OSMAND_EXTENSIONS_PREFIX + "route_key", routeKeyBundle);
-					StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
-					bundleWriter.writeBundle();
+			@Override
+			public void writeExtensions(XmlSerializer serializer) {
+				StringBundle bundle = new StringBundle();
+				StringBundle tagsBundle = new StringBundle();
+				tagsBundle.putString("type", tags.get("type"));
+				for (Map.Entry<String, String> tag : tags.entrySet()) {
+					tagsBundle.putString(tag.getKey(), tag.getValue());
 				}
-			});
-		} else {
-			gpxFile.setExtensionsWriter(null);
-		}
+				List<StringBundle> routeKeyBundle = new ArrayList<>();
+				routeKeyBundle.add(tagsBundle);
+				bundle.putBundleList("network_route", OSMAND_EXTENSIONS_PREFIX + "route_key", routeKeyBundle);
+				StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
+				bundleWriter.writeBundle();
+			}
+		};
 	}
 
 	private static void assignPointsGroupsExtensionWriter(final GPXFile gpxFile) {
@@ -1415,7 +1406,7 @@ public class GPXUtilities {
 							PointsGroup pointsGroup = PointsGroup.parsePointsGroupAttributes(parser);
 							pointsGroups.add(pointsGroup);
 						} else if (networkRoute && tagName.equals("route_key")) {
-							gpxFile.networkRouteKeyTags.putAll(parseRouteKeyAttributes(parser));
+							gpxFile.addRouteKeyTags(parseRouteKeyAttributes(parser));
 						}
 						switch (tagName) {
 							case "routepointextension":

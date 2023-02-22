@@ -25,7 +25,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	final List<GPXUtilities.WptPt> points = new ArrayList<>();
 	Map<String, GPXUtilities.PointsGroup> pointsGroups = new LinkedHashMap<>();
-	final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
+	private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 	public Exception error = null;
 	public String path = "";
@@ -714,7 +714,11 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public boolean isShowArrowsSet() {
-		return extensions.containsKey("show_arrows");
+		if (extensions != null) {
+			return extensions.containsKey("show_arrows");
+		} else {
+			return false;
+		}
 	}
 
 	public boolean isShowArrows() {
@@ -730,7 +734,11 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public boolean isShowStartFinishSet() {
-		return extensions.containsKey("show_start_finish");
+		if(extensions != null){
+			return extensions.containsKey("show_start_finish");
+		} else {
+			return false;
+		}
 	}
 
 	public boolean isShowStartFinish() {
@@ -746,6 +754,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void addRouteKeyTags(Map<String, String> routeKey) {
 		networkRouteKeyTags.putAll(routeKey);
+		setExtensionsWriter(Algorithms.isEmpty(networkRouteKeyTags) ? null : GPXUtilities.createNetworkRouteExtensionWriter(this.networkRouteKeyTags));
 	}
 
 	public Map<String, String> getRouteKeyTags() {
