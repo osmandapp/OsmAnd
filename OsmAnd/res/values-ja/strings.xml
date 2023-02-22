@@ -10,7 +10,7 @@
     <string name="gpx_option_reverse_route">経路を反転</string>
     <string name="gpx_option_destination_point">現在の目的地を使用</string>
     <string name="gpx_option_from_start_point">経路全体を通過する</string>
-    <string name="switch_to_raster_map_to_see">メニューの『マップダウンロード』などから、この場所のオフラインベクターマップをダウンロードするか『オンラインマップ』プラグインを有効にしてください。</string>
+    <string name="switch_to_raster_map_to_see">このエリアのオフラインベクターマップを（メニュー の\'マップダウンロード\'より）ダウンロードする、または\'オンラインマップ\'プラグインを有効にしてください。</string>
     <string name="switch_to_vector_map_to_see">現在地のベクターマップがあります。
 \n→
 \n→使用するには\'メニュー\' →\'マップ設定\' →\'マップソース…\' →\'オフラインベクターマップ\'を有効にして下さい。</string>
@@ -126,8 +126,8 @@ OsmAnd バージョンがインストールされています。全てのオフ�
     <string name="gps_status_app_not_found">GPSステータスアプリケーションが インストールされていません。マーケットで探しますか？</string>
     <string name="voice_is_not_available_msg">音声案内は利用できません。『設定』→乗用車など任意のプロファイルを選択→『ナビゲーション設定』→『音声案内』→『音声案内』の中にある既存の言語のものを選択するか、『マップダウンロード』項目にて任意の音声をダウンロードしてください。</string>
     <string name="voice_is_not_available_title">音声案内パッケージが選択されていません</string>
-    <string name="trace_rendering_descr">マップ操作時に速度やオブジェクト数等のレンダリング能力を表示します</string>
-    <string name="trace_rendering">レンダリング速度を表示</string>
+    <string name="trace_rendering_descr">レンダリング性能とナビゲーション性能を表示します。</string>
+    <string name="trace_rendering">パフォーマンスに関するデバッグ情報</string>
     <string name="daynight_mode_day">昼固定</string>
     <string name="daynight_mode_night">夜固定</string>
     <string name="daynight_mode_auto">日出/日没</string>
@@ -168,7 +168,7 @@ MB)をダウンロードしますか?</string>
     <string name="phone">電話番号</string>
     <string name="download_type_to_filter">フィルタをかける種別</string>
     <string name="use_high_res_maps">高解像度マップ</string>
-    <string name="use_high_res_maps_descr">高解像度ディスプレイで、マップタイルを引き伸ばしたりぼかしたりしないでください。</string>
+    <string name="use_high_res_maps_descr">高解像度でのマップタイルの引き伸ばし（ぼかし）を抑制します。</string>
     <string name="unknown_location">現在地はまだ取得できていません。</string>
     <string name="context_menu_item_search_transport">公共交通機関を検索</string>
     <string name="transport_searching_transport">交通機関の検索結果(目的地無し):</string>
@@ -252,7 +252,7 @@ MB)をダウンロードしますか?</string>
     <string name="route_head">まっすぐ進んでください</string>
     <string name="first_time_continue">続ける</string>
     <string name="first_time_download">地域をダウンロード</string>
-    <string name="first_time_msg">OsmAndを使ってくれてありがとうございます。アプリケーションの全機能を使うには、地域のオフラインデータダウンロード (設定 → マップデータ等管理) が必要です。その後で、マップ表示、住所検索、POI 検索、公共交通機関検索ができます。</string>
+    <string name="first_time_msg">いつもOsmAndをご利用いただきありがとうございます。メニューの\'マップダウンロード\'から、オフラインで使用するための地域データをダウンロードすることで地図を表示したり、住所／POI／公共交通機関などを検索することができます。</string>
     <string name="search_poi_location">シグナルを探査中…</string>
     <string name="search_near_map">現在のマップ中心近くを検索</string>
     <string name="search_nearby">近くを検索</string>
@@ -762,8 +762,7 @@ POIの更新は利用できません</string>
     <string name="osmand_parking_pm">午後</string>
     <string name="osmand_parking_am">午前</string>
     <string name="osmand_parking_position_name">駐車場</string>
-    <string name="osmand_parking_plugin_description">残りの駐車時間を含め、駐車した場所を記録できます。
-\n場所と時間の両方がダッシュボードとマップウィジェットに表示されます。アラームをAndroidカレンダーに追加することもできます。</string>
+    <string name="osmand_parking_plugin_description">車が停まっている場所をマークして、パーキングメーターの有効期限をカレンダーに知らせます。マーカーを設定するには、マップ上を長押しで場所を選択し\"その他\"にて\"駐車位置としてマーク\"をタップします。</string>
     <string name="osmand_parking_plugin_name">駐車位置</string>
     <string name="context_menu_item_add_parking_point">駐車位置としてマーク</string>
     <string name="context_menu_item_delete_parking_point">駐車マーカーを削除</string>
@@ -798,8 +797,8 @@ POIの更新は利用できません</string>
     <string name="map_online_data">オンラインタイルマップ</string>
     <string name="shared_string_online_maps">オンラインマップ</string>
     <string name="online_map_settings_descr">オンラインまたはキャッシュ保存済みのタイルマップソースを設定します。</string>
-    <string name="osmand_accessibility_description">デバイスのアクセシビリティ機能をOsmAndで利用可能にします。例えばテキスト読み上げ音声の読み上げ速度の調整(対応している場合のみ)、方向パッドによるナビゲーションの設定、トラックボールを使用したズーム制御、テキスト読み上げフィードバックなどをナビ実行時の時々に合わせて利用することができます。</string>
-    <string name="osmand_development_plugin_description">ナビゲーション時のシミュレーション、レンダリングパフォーマンス確認、音声指示の確認などの開発およびデバッグ機能の利用や設定がおこなえます。開発者向けで通常アプリの使用には必要ありません。</string>
+    <string name="osmand_accessibility_description">デバイスのアクセシビリティ機能をOsmAndで直接利用できるようにします。例えばテキスト読み上げ音声の読み上げ速度の調整(対応している場合のみ)、方向パッドによるナビゲーションの設定、トラックボールを使用したズーム制御、テキスト読み上げフィードバック(位置の自動アナウンス)などをナビ実行時の時々に合わせて利用することができます。</string>
+    <string name="osmand_development_plugin_description">OsmAndのテストとデバッグのための機能を提供します:ナビゲーションルートのシミュレーション、画面レンダリングの監視、パフォーマンスのチェックなどが可能です。このプラグインは開発者向けで、通常のアプリの使用には必要ありません。</string>
     <string name="plugins_screen">プラグイン</string>
     <string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能になります。</string>
     <string name="prefs_plugins">プラグイン</string>
@@ -896,13 +895,15 @@ POIの更新は利用できません</string>
     <string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
     <string name="audionotes_location_not_defined">マップ上を長押しでメニューを開き、右端のボタン[その他]から任意の形式のメモを取ることができます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
-    <string name="audionotes_plugin_description">旅行中にマップ画面のウィジェットボタンまたはコンテキストメニューを使用して、音声/写真/ビデオのメモを作成します。</string>
+    <string name="audionotes_plugin_description">マップ内ボタンや位置情報のコンテキストメニューから、旅行中の音声/写真/動画メモを取ることができます。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_description">このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。 この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。（等高線、陰影起伏図はプラグインを有効にした後、別途ダウンロードしてください）
+    <string name="srtm_plugin_description">等高線、起伏、勾配などの地形情報は、地形配置、起伏、航行の可能性などを視覚的に評価するのに役立ちます。地形情報は、勾配の陰影、等高線、勾配の度合いによる色付けでマップに表すことができます。
 \n
-\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。</string>
+\n基礎となるデータは、SRTM(スペースシャトル立体地形データ)およびASTER(資源探査用将来型センサ)に由来します。
+\n
+\n詳しくは、https://osmand.net/docs/user/plugins/contour-lines をご参照下さい。</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1091,7 +1092,9 @@ POIの更新は利用できません</string>
 \nこれらのマップは、メイン(基本マップ)として、または他の基本マップ(OsmAndのオフラインベクターマップなど)とオーバーレイ(重ね合わせ)や背景として表示することができます。OsmAndのベクターマップの特定の要素は、\"マップ設定 \"メニューで任意に非表示にすることができ、基本となるマップをより見やすくすることができます。
 \n
 \nタイルマップはオンラインで直接ダウンロードするか、さまざまなサードパーティ製マップ作成ツールで作成されたSQLiteデータベースを事前に準備(OsmAndのデータフォルダーに手動でコピー)しておけばオフラインで使用することができます。</string>
-    <string name="osm_editing_plugin_description">OSMのユーザー名とパスワードを入力してOSM POIオブジェクトの作成や変更、OSMメモの作成や注釈を付けたり、OsmAndで記録されたGPXファイルをOSMへ提出したりなどのOSM発展への貢献が可能です。 OpenStreetMap.orgはコミュニティ主導型で知的財産権を主張しない、世界規模の地図作成プロジェクトです。</string>
+    <string name="osm_editing_plugin_description">世界地図を包括的に管理し、すべてのユーザーが最新のオープンソースデータを利用できるようにするグローバルコミュニティであるOpenStreetMapに貢献してください。
+\n
+\n地図の編集方法は、弊社ウェブサイト https://osmand.net/docs/user/plugins/osm-editing に掲載されています。</string>
     <string name="amenity_type_osmwiki">ウィキペディア(オフライン)</string>
     <string name="keep_and_add_destination_point">その後の目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
@@ -1362,7 +1365,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_left">左パネル</string>
     <string name="shared_string_show">表示</string>
     <string name="configure_map">マップ設定</string>
-    <string name="search_radius_proximity">以内</string>
+    <string name="search_radius_proximity">内部</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
@@ -1477,15 +1480,11 @@ POIの更新は利用できません</string>
 \n設定の有効無効化で元に戻せますが、[マップ設定]下の[マップスタイル]を変更することで必要に応じて切り替えることも出来ます。</string>
     <string name="plugin_nautical_name">航路マップ表示</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしますか？</string>
-    <string name="plugin_nautical_descr">このプラグインはOsmAndのマップ画面に海洋および河川移動時に便利なマップを反映させることができ、ボート、セーリング、その他のウォータースポーツに向けた機能を含んでいます。 
-\n 
-\nこの特殊マップアドオンはOsmAndに沿岸から川上の内陸部まで、航路ナビゲーションマークや各航路標識を提供することができます。各ナビゲーションマークの説明はそれらの意味(カテゴリー、形状、色、順序、参照など)を識別するために必要な情報も含まれています。 
-\n 
-\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更できます。</string>
+    <string name="plugin_nautical_descr">航路、ビーコン、海上の危険エリア、航行や係留が禁止されているエリアなどの情報で海図を充実させます。使用するには、対応する海図をダウンロードし[マップ設定]＞[マップスタイル]＞[船舶]を有効にしてください。
+\n
+\n詳しくは、https://osmand.net/docs/user/plugins/nautical-charts をご参照下さい。</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
-    <string name="plugin_ski_descr">このプラグインは世界各国のダウンヒル、クロスカントリー、アルペンの各スキー場やコースのほか、ロープウェイやスキーリフトといった索道設備なども参照できるようになります。ルートとゲレンデは難易度によって色分けされ、冬の雪景色をイメージしたウィンターマップスタイルで描かれます。 
-\n 
-\nプラグインを有効にすると、冬の景色をイメージした\'ウィンター＆スキー\'スタイルに変更できます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。</string>
+    <string name="plugin_ski_descr">ウィンタースポーツエリアでのナビゲーション用に設計されています。スキー場、スキーリフト、クロスカントリースキーコースを、難易度を示す色のついた線で見ることができます。この拡張機能を利用するには、プラグインを有効にしてから\"マップ設定\"内のマップスタイルで\"ウィンター＆スキー\"を選択します。</string>
     <string name="rename_failed">リネーム出来ませんでした</string>
     <string name="days_behind">日前</string>
     <string name="back_to_map">マップ画面に戻る</string>
@@ -2358,7 +2357,7 @@ POIの更新は利用できません</string>
     <string name="srtm_menu_download_descr">この地域用の等高線マップをダウンロードします。</string>
     <string name="shared_string_plugin">プラグイン</string>
     <string name="srtm_purchase_header">等高線をマップ上で見るには、等高線プラグイン『Contour lines plugin — OsmAnd』の購入とインストールが必要です</string>
-    <string name="show_from_zoom_level">ズームレベルを表示</string>
+    <string name="show_from_zoom_level">表示はズームレベルで開始</string>
     <string name="routing_attr_allow_private_name">専有エリア(私有地など)を通行可とみなす</string>
     <string name="routing_attr_allow_private_description">専有エリア(業者用通路、私有地など)を通行可能と見なします。</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
@@ -3270,7 +3269,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_white_name">ホワイト</string>
     <string name="swap_two_places">%1$sと%2$sを入れ替え</string>
     <string name="route_start_point">出発地点</string>
-    <string name="get_discount_title">%1$dを%2$sで入手 、いまなら%3$s割引です。</string>
+    <string name="get_discount_title">%1$dを%2$sで入手 、今なら%3$s割引です。</string>
     <string name="track_saved">経路が保存されました</string>
     <string name="empty_filename">ファイル名が空欄です</string>
     <string name="shared_string_revert">初期値に戻す</string>
@@ -4272,7 +4271,7 @@ POIの更新は利用できません</string>
     <string name="clear_all_history">すべての履歴を消去</string>
     <string name="shared_string_travelbooks">旅行ガイド</string>
     <string name="display_route_tracks">経路を表示</string>
-    <string name="approx_safe_mode_description">ネイティブコードの代わりに低速のAndroid用コードを使用してGPXの概算を実行します。</string>
+    <string name="approx_safe_mode_description">ネイティブコードの代わりに低速なAndroid用コードを使用してGPXの概算を実行します。</string>
     <string name="shared_storage_warning_description">新しいAndroidの仕様により、2021年11月以降OsmAnd 4.2は共有ストレージにアクセスできなくなります。
 \n
 \nデータフォルダを共有ストレージから使用可能なストレージに移動してください。放置した場合アプリはオフラインマップ、GPX経路などのデータにアクセスできなくなります。</string>
@@ -5062,4 +5061,13 @@ POIの更新は利用できません</string>
     <string name="average_speed_time_interval_desc">速度平均化の時間間隔を指定します。</string>
     <string name="average_speed_widget_desc">現在の旅程の平均速度を表示します。</string>
     <string name="shared_string_mode">モード</string>
+    <string name="sound_beep_complex">ビープ音:複雑</string>
+    <string name="sound_beep_complex_loud">ビープ音:複雑で大音量</string>
+    <string name="sound_beep_minimal">ビープ音:最小</string>
+    <string name="rotate_map_manual_opt">手動回転(固定)</string>
+    <string name="shared_string_kilograms">キログラム</string>
+    <string name="shared_string_yards">ヤード</string>
+    <string name="display_position_automatic_descr">マップの向きによって異なります。移動方向は下に、その他は中央です。</string>
+    <string name="sound_beep_simple_loud">ビープ音:シンプルで大音量</string>
+    <string name="sound_beep_simple">ビープ音:シンプル</string>
 </resources>
