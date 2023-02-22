@@ -125,21 +125,15 @@ public class PurchaseUiDataUtils {
 	                                                   @NonNull List<InAppPurchase> mainPurchases) {
 		OsmandSettings settings = app.getSettings();
 		if (settings.BACKUP_PURCHASE_ACTIVE.get()) {
-			SubscriptionOrigin backupSubscriptionOrigin = settings.BACKUP_SUBSCRIPTION_ORIGIN.get();
-			SubscriptionOrigin nativeSubscriptionOrigin = null;
-
 			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
 			InAppPurchases purchases = helper.getInAppPurchases();
 			for (InAppPurchase purchase : mainPurchases) {
 				if (purchases.isOsmAndProSubscription(purchase)) {
 					String sku = purchase.getSku();
-					nativeSubscriptionOrigin = helper.getSubscriptionOriginBySku(sku);
-					break;
+					return settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != helper.getSubscriptionOriginBySku(sku);
 				}
 			}
-			return backupSubscriptionOrigin != nativeSubscriptionOrigin;
 		}
 		return false;
 	}
-
 }
