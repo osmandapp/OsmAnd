@@ -22,11 +22,11 @@ import net.osmand.core.jni.TileSqliteDatabasesCollection;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.layers.MapVectorLayer;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -115,7 +115,7 @@ public class MapRendererContext {
 
 	public void updateLocalization() {
 		int zoom = app.getOsmandMap().getMapView().getZoom();
-		boolean useAppLocale = MapVectorLayer.useAppLocaleForMap(app, zoom);
+		boolean useAppLocale = MapRenderRepositories.useAppLocaleForMap(app, zoom);
 		if (this.useAppLocale != useAppLocale) {
 			this.useAppLocale = useAppLocale;
 			updateMapSettings();
@@ -162,8 +162,8 @@ public class MapRendererContext {
 		OsmandSettings settings = app.getSettings();
 
 		int zoom = app.getOsmandMap().getMapView().getZoom();
-		String langId = MapVectorLayer.getMapPreferredLocale(app, zoom);
-		boolean transliterate = MapVectorLayer.transliterateMapNames(app, zoom);
+		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
+		boolean transliterate = MapRenderRepositories.transliterateMapNames(app, zoom);
 		LanguagePreference langPref = transliterate
 				? LanguagePreference.LocalizedOrTransliterated
 				: LanguagePreference.LocalizedOrNative;

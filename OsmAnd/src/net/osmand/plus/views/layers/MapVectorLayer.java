@@ -14,22 +14,15 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 
-import java.util.Arrays;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 
 public class MapVectorLayer extends BaseMapLayer {
-
-	private static final int REPLACE_LOCAL_NAMES_MAX_ZOOM = 6;
-	private static final List<String> LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP = Arrays.asList("ru", "uk", "be", "bg", "mk", "sr");
 
 	private final ResourceManager resourceManager;
 	private Paint paintImg;
@@ -239,26 +232,5 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		return false;
-	}
-
-	@NonNull
-	public static String getMapPreferredLocale(@NonNull OsmandApplication app, int zoom) {
-		return useAppLocaleForMap(app, zoom)
-				? app.getLanguage()
-				: app.getSettings().MAP_PREFERRED_LOCALE.get();
-	}
-
-	public static boolean transliterateMapNames(@NonNull OsmandApplication app, int zoom) {
-		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-		boolean useAppLocale = useAppLocaleForMap(app, zoom);
-		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
-		boolean noTransliteration = LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP.contains(mapPreferredLocale);
-		return transliterate && (!useAppLocale || !noTransliteration);
-	}
-
-	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {
-		boolean replaceLocalNamesToAppLocale = zoom <= REPLACE_LOCAL_NAMES_MAX_ZOOM;
-		boolean useLocalNames = app.getSettings().MAP_PREFERRED_LOCALE.get().isEmpty();
-		return replaceLocalNamesToAppLocale && useLocalNames;
 	}
 }
