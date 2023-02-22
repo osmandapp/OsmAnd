@@ -4,6 +4,24 @@ package net.osmand.gpx;
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 
+import net.osmand.IProgress;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.StringBundle;
+import net.osmand.binary.StringBundleWriter;
+import net.osmand.binary.StringBundleXmlReader;
+import net.osmand.binary.StringBundleXmlWriter;
+import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
+import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,24 +50,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
-
-import net.osmand.IProgress;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.StringBundle;
-import net.osmand.binary.StringBundleWriter;
-import net.osmand.binary.StringBundleXmlReader;
-import net.osmand.binary.StringBundleXmlWriter;
-import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 public class GPXUtilities {
 
@@ -87,7 +87,7 @@ public class GPXUtilities {
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
-	
+
 	public enum GPXColor {
 		BLACK(0xFF000000),
 		DARKGRAY(0xFF444444),
@@ -947,16 +947,15 @@ public class GPXUtilities {
 		return null;
 	}
 
-
-	public static GPXExtensionsWriter createNetworkRouteExtensionWriter(final Map<String, String> tags) {
+	public static GPXExtensionsWriter createNetworkRouteExtensionWriter(final Map<String, String> networkRouteTags) {
 		return new GPXExtensionsWriter() {
 
 			@Override
 			public void writeExtensions(XmlSerializer serializer) {
 				StringBundle bundle = new StringBundle();
 				StringBundle tagsBundle = new StringBundle();
-				tagsBundle.putString("type", tags.get("type"));
-				for (Map.Entry<String, String> tag : tags.entrySet()) {
+				tagsBundle.putString("type", networkRouteTags.get("type"));
+				for (Map.Entry<String, String> tag : networkRouteTags.entrySet()) {
 					tagsBundle.putString(tag.getKey(), tag.getValue());
 				}
 				List<StringBundle> routeKeyBundle = new ArrayList<>();
