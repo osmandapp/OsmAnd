@@ -99,7 +99,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		boolean cancelled = false;
 		for (ExportBackupTask exportTask : exportAsyncTasks.values()) {
 			if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
-				cancelled |= exportTask.cancel(true);
+				cancelled |= exportTask.cancel(false);
 			}
 		}
 		return cancelled;
@@ -108,10 +108,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public boolean cancelImport() {
 		boolean cancelled = false;
 		for (ImportBackupTask importTask : importAsyncTasks.values()) {
-			if (importTask != null ){
-				if((importTask.getStatus() == AsyncTask.Status.RUNNING)){
-					cancelled |= importTask.cancel(true);
-				} else if(importTask.isSubtaskRunning()){
+			if (importTask != null) {
+				if ((importTask.getStatus() == AsyncTask.Status.RUNNING)) {
+					cancelled |= importTask.cancel(false);
+				} else if (importTask.isSubtaskRunning()) {
 					importTask.cancelSubtask();
 				}
 			}
