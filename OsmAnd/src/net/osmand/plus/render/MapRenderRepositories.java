@@ -33,6 +33,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.layers.MapVectorLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -747,16 +748,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
-			if(requestedBox.getZoom() <= zoomToOverviewLocalNames &&
-					prefs.MAP_PREFERRED_LOCALE.get() != null && prefs.MAP_PREFERRED_LOCALE.get().isEmpty()) {
-				currentRenderingContext.preferredLocale = app.getLanguage();
-				currentRenderingContext.transliterate =
-						!languagesNotTransliterateOnBasemap.contains(app.getLanguage())
-						&& prefs.MAP_TRANSLITERATE_NAMES.get();
-			} else {
-				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
-				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
-			}
+			currentRenderingContext.preferredLocale = MapVectorLayer.getMapPreferredLocale(app, requestedBox.getZoom());
+			currentRenderingContext.transliterate = MapVectorLayer.transliterateMapNames(app, requestedBox.getZoom());
 			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
