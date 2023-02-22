@@ -3014,7 +3014,7 @@
     <string name="poi_access_scooter">Accesso motocicli</string>
     <string name="poi_authentication_contactless">Autenticazione contactless</string>
     <string name="poi_authentication_chip_card">Autenticazione con carta a chip</string>
-    <string name="poi_authentication_key">Autenticazione con chiave</string>
+    <string name="poi_authentication_key">Autenticazione tramite chiave</string>
     <string name="poi_authentication_phone_call">Autenticazione con chiamata telefonica</string>
     <string name="poi_authentication_short_message">Autenticazione con messaggio di testo</string>
     <string name="poi_authentication_none">Autenticazione non richiesta</string>
