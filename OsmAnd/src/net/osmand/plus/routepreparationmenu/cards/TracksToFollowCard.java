@@ -14,7 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxTrackAdapter;

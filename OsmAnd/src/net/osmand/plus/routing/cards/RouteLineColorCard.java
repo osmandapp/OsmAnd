@@ -206,7 +206,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 
-			coloringTypeCard = new ColoringTypeCard(mapActivity, previewRouteLineInfo.getRouteColoringType());
+			coloringTypeCard = new ColoringTypeCard(mapActivity, null, previewRouteLineInfo.getRouteColoringType());
 			container.addView(coloringTypeCard.build(mapActivity));
 
 			promoCard = new PromoBannerCard(mapActivity, true);

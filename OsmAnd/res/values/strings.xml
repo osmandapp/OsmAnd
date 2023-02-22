@@ -11,7 +11,23 @@
 	Thx - Hardy
 -->
 
-    <string name="display_position_automatic_descr">Depends on Map orientation, bottom for movement direction, center for all other.</string>
+    <string name="shared_string_kilograms">kilograms</string>
+    <string name="shared_string_yards">yards</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
+    <string name="shared_string_apply_changes">Apply changes</string>
+    <string name="default_tracks_appearance_description">These appearance settings are applied to all tracks selected on the previous screen.\n\nThey are also saved as \"%1$s\" to be applied by %2$s for all other tracks without implicit or specifically set appearance.</string>
+    <string name="default_tracks_appearance">Default track appearance</string>
+    <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
+    <string name="no_visible_tracks">No tracks on the map</string>
+    <string name="recently_visible">Recently visible %1$s</string>
+    <string name="empty_tracks_description">You can import, create, or record track files using OsmAnd.</string>
+    <string name="empty_tracks">You don\'t have track files.</string>
+    <string name="shared_string_select_recent">Select recent</string>
+    <string name="change_appearance">Change appearance</string>
+    <string name="switch_folder">Switch folder</string>
+    <string name="show_all_tracks">Show all tracks</string>
+    <string name="shared_string_on_map">On map</string>
+    <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
     <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>
@@ -1269,7 +1285,7 @@
     <string name="speed_cameras_restart_descr">Restart the app to delete all speed camera data.</string>
     <string name="item_deleted">%1$s deleted</string>
     <string name="shared_string_bearing">Bearing</string>
-    <string name="routing_attr_length_name">Length limit</string>
+    <string name="routing_attr_length_name">Length</string>
     <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
     <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
@@ -3553,11 +3569,11 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_avoid_stairs_description">Avoids stairs</string>
     <string name="routing_attr_avoid_borders_name">No border crossings</string>
     <string name="routing_attr_avoid_borders_description">Avoids crossing national borders</string>
-    <string name="routing_attr_weight_name">Weight limit</string>
+    <string name="routing_attr_weight_name">Weight</string>
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
-    <string name="routing_attr_width_name">Width limit</string>
+    <string name="routing_attr_width_name">Width</string>
     <string name="routing_attr_width_description">Specify permitted vehicle width limit on routes.</string>
-    <string name="routing_attr_height_name">Height limit</string>
+    <string name="routing_attr_height_name">Height</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
     <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?\n
     Note 1: Your old files will remain untouched (but can be deleted manually).\n

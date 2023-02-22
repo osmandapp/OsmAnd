@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.other;
+package net.osmand.plus.charts;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.data.LatLon;

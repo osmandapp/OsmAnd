@@ -63,10 +63,8 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 			CompoundButton radio = convertView.findViewById(R.id.compound_button);
 			if (item.isShowCompoundBtn()) {
 				UiUtilities.setupCompoundButton(nightMode, item.getCompoundBtnColor(), radio);
-				radio.setVisibility(View.VISIBLE);
-			} else {
-				radio.setVisibility(View.GONE);
 			}
+			AndroidUiHelper.updateVisibility(radio, item.isShowCompoundBtn());
 			if (item.isSelected()) {
 				if (item.isShowCompoundBtn()) {
 					radio.setChecked(true);

@@ -3948,11 +3948,11 @@
     <string name="shared_string_sec">sec</string>
     <string name="announcement_time_passing">Passaggio</string>
     <string name="announcement_time_approach">Avvicinamento</string>
-    <string name="announcement_time_prepare_long">Preparazione anticipata</string>
-    <string name="announcement_time_prepare">Preparazione</string>
+    <string name="announcement_time_prepare_long">Preparazione lunga</string>
+    <string name="announcement_time_prepare">Prepara</string>
     <string name="announcement_time_off_route">Fuori percorso</string>
     <string name="announcement_time_intervals">Intervalli di tempo e distanza</string>
-    <string name="announcement_time_descr">Il tempo dell\'annuncio per i diversi avvisi dipende dal tipo di avviso, dalla velocità corrente e la velocità di navigazione preimpostata.</string>
+    <string name="announcement_time_descr">Le tempistiche degli annunci dei messaggi vocali dipendono dal tipo di messaggio, dalla velocità di navigazione corrente e dalla velocità di navigazione predefinita.</string>
     <string name="announcement_time_title">Tempo annuncio</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bici elettrica</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Mountain biking</string>
@@ -5026,4 +5026,7 @@
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
     <string name="last_synchronized">Ultima sincronizzazione</string>
+    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa. In basso per la direzione del movimento, al centro per il resto.</string>
+    <string name="sound_beep_complex_loud">Bip: complesso e forte</string>
+    <string name="sound_beep_simple_loud">Bip: semplice e forte</string>
 </resources>

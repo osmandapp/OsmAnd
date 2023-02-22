@@ -10,13 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,9 +50,9 @@ public class TracksCard extends MapBaseCard {
 
 		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		for (GPXFile gpx : gpxFiles) {
-			File f = new File(gpx.path);
-			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : f.getName();
-			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(fileName, f.lastModified(), f.length())));
+			File file = new File(gpx.path);
+			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : file.getName();
+			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(file.getName()), gpx, new GPXInfo(fileName, file)));
 		}
 		Collator collator = Collator.getInstance();
 		Collections.sort(gpxItems, new Comparator<GpxItem>() {

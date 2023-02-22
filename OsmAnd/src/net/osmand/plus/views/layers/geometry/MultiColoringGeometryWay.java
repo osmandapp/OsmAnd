@@ -8,7 +8,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
@@ -79,8 +79,8 @@ public abstract class MultiColoringGeometryWay
 		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
-			List<RouteColorizationPoint> points = routeColorize.getResult(false);
+			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, 0);
+			List<RouteColorizationPoint> points = routeColorize.getResult();
 			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
 		}
 	}
@@ -275,11 +275,7 @@ public abstract class MultiColoringGeometryWay
 
 		@Nullable
 		public List<RouteColorizationPoint> simplify(int zoom) {
-			if (routeColorize != null) {
-				routeColorize.setZoom(zoom);
-				return routeColorize.simplify();
-			}
-			return null;
+			return routeColorize != null ? routeColorize.simplify(zoom) : null;
 		}
 
 		public int getColor(int index) {

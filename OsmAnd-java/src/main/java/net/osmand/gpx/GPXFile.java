@@ -713,6 +713,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("width", width);
 	}
 
+	public boolean isShowArrowsSet() {
+		return extensions.containsKey("show_arrows");
+	}
+
 	public boolean isShowArrows() {
 		String showArrows = null;
 		if (extensions != null) {
@@ -723,6 +727,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void setShowArrows(boolean showArrows) {
 		getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
+	}
+
+	public boolean isShowStartFinishSet() {
+		return extensions.containsKey("show_start_finish");
 	}
 
 	public boolean isShowStartFinish() {

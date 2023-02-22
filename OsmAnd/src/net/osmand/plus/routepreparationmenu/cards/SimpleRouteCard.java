@@ -2,10 +2,10 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
 import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
-import static net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType.DISTANCE;
-import static net.osmand.plus.helpers.GpxUiHelper.createGPXElevationDataSet;
-import static net.osmand.plus.helpers.GpxUiHelper.createGPXSlopeDataSet;
 import static net.osmand.plus.utils.AndroidUtils.spToPx;
+import static net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType.DISTANCE;
+import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
+import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryIconColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
@@ -34,13 +34,13 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -113,7 +113,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData) {
-			GpxUiHelper.setupGPXChart(chart, 10f, 4f, false);
+			ChartUtils.setupGPXChart(chart, 10f, 4f, false);
 
 			LineData data = lineData;
 			if (data == null) {

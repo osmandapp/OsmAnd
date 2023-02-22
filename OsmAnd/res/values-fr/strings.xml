@@ -5028,5 +5028,21 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_automatic_descr">Varie selon l’orientation de la carte : affiché en bas si l’orientation de la carte suit le mouvement, centré dans tous les autres cas.</string>
+    <string name="display_position_automatic_descr">Selon l’orientation de la carte : affiché en bas si l’orientation de la carte suit le déplacement, centré dans tous les autres cas.</string>
+    <string name="shared_string_apply_changes">Appliquer les modifications</string>
+    <string name="default_tracks_appearance">Apparence par défaut des traces</string>
+    <string name="no_visible_tracks_description">Sélectionnez les traces à afficher sur la carte.</string>
+    <string name="no_visible_tracks">Aucune trace sur la carte</string>
+    <string name="empty_tracks_description">Vous pouvez importer, créer ou enregistrer des fichiers trace grâce à OsmAnd.</string>
+    <string name="empty_tracks">Aucun fichier de trace.</string>
+    <string name="change_appearance">Modifier l’apparence</string>
+    <string name="switch_folder">Changer de dossier</string>
+    <string name="show_all_tracks">Afficher toutes les traces</string>
+    <string name="recently_visible">Affiché récemment %1$s</string>
+    <string name="shared_string_select_recent">Sélectionner les derniers</string>
+    <string name="default_tracks_appearance_description">Ces paramètres d\'apparence seront appliqués à toutes les traces sélectionnées sur l\'écran précédent.
+\n
+\nIls sont également enregistrés sous \"%1$s\" pour être appliqués par %2$s à toutes les autres traces sans apparence définie.</string>
+    <string name="shared_string_on_map">Sur la carte</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
 </resources>

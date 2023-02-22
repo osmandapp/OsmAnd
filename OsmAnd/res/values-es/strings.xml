@@ -5041,5 +5041,21 @@
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_automatic_descr">Depende de la orientación del mapa, la parte inferior para la dirección del movimiento, el centro para todos lo demás.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección de movimiento, centro para todas las demás.</string>
+    <string name="default_tracks_appearance_description">Estos ajustes en la apariencia se aplican a todas las pistas seleccionadas en la pantalla anterior.
+\n
+\nTambién se guardan como \"%1$s\" para ser aplicados por %2$s a todas las demás pistas sin apariencia implícita o específicamente configurada.</string>
+    <string name="default_tracks_appearance">Aspecto predeterminado de la pista</string>
+    <string name="no_visible_tracks_description">Seleccione las vías para visualizarlas en el mapa.</string>
+    <string name="no_visible_tracks">No hay pistas en el mapa</string>
+    <string name="recently_visible">Visibles recientemente %1$s</string>
+    <string name="empty_tracks">No tienes archivos de pistas.</string>
+    <string name="shared_string_select_recent">Selección reciente</string>
+    <string name="change_appearance">Cambiar la apariencia</string>
+    <string name="switch_folder">Cambiar de carpeta</string>
+    <string name="shared_string_on_map">en el mapa</string>
+    <string name="shared_string_apply_changes">Aplicar cambios</string>
+    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar la apariencia de %1$s pistas\?</string>
+    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos con las pistas con OsmAnd.</string>
+    <string name="show_all_tracks">Mostrar todas las vías</string>
 </resources>

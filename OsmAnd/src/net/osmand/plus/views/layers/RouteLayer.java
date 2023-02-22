@@ -32,7 +32,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;

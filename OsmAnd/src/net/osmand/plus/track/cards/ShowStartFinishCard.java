@@ -39,7 +39,6 @@ public class ShowStartFinishCard extends MapBaseCard {
 			boolean checked = !compoundButton.isChecked();
 			compoundButton.setChecked(checked);
 			trackDrawInfo.setShowStartFinish(checked);
-			mapActivity.refreshMap();
 			notifyCardPressed();
 		});
 	}

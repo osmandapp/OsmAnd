@@ -5043,5 +5043,21 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_automatic_descr">Afhænger af kortets orientering, nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortets orientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ændr udseendet af %1$s spor\?</string>
+    <string name="shared_string_apply_changes">Anvend ændringer</string>
+    <string name="default_tracks_appearance_description">Disse indstillinger for udseende anvendes på alle spor, der blev valgt på det foregående skærmbillede.
+\n
+\nDe gemmes også som \"%1$s\" for at blive anvendt af %2$s på alle andre spor uden underforstået eller specifikt indstillet udseende.</string>
+    <string name="default_tracks_appearance">Standardudseende for spor</string>
+    <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
+    <string name="no_visible_tracks">Ingen spor på kortet</string>
+    <string name="recently_visible">Senest synlig %1$s</string>
+    <string name="empty_tracks_description">Du kan importere, oprette eller optage sporfiler ved hjælp af OsmAnd.</string>
+    <string name="empty_tracks">Du har ingen sporfiler.</string>
+    <string name="shared_string_select_recent">Vælg seneste</string>
+    <string name="change_appearance">Ændr udseende</string>
+    <string name="switch_folder">Skift mappe</string>
+    <string name="show_all_tracks">Vis alle spor</string>
+    <string name="shared_string_on_map">På kort</string>
 </resources>

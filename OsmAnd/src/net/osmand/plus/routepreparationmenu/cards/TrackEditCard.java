@@ -16,9 +16,9 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -76,7 +76,7 @@ public class TrackEditCard extends MapBaseCard {
 			fileName = app.getString(R.string.shared_string_gpx_track);
 		}
 
-		GPXInfo gpxInfo = new GPXInfo(fileName, file != null ? file.lastModified() : 0, file != null ? file.length() : 0);
+		GPXInfo gpxInfo = new GPXInfo(fileName, file);
 		GPXTrackAnalysis analysis = null;
 		if (file != null) {
 			GpxDataItem dataItem = getDataItem(gpxInfo);

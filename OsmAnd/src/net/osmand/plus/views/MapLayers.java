@@ -13,8 +13,6 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -26,8 +24,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -288,38 +284,6 @@ public class MapLayers {
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
-	}
-
-
-	public AlertDialog showGPXFileLayer(@NonNull List<String> files, MapActivity mapActivity) {
-		OsmandSettings settings = app.getSettings();
-		OsmandMapTileView mapView = mapActivity.getMapView();
-		DashboardOnMap dashboard = mapActivity.getDashboard();
-		CallbackWithObject<GPXFile[]> callbackWithObject = result -> {
-			WptPt locToShow = null;
-			for (GPXFile g : result) {
-				if (g.showCurrentTrack) {
-					if (!settings.SAVE_TRACK_TO_GPX.get() && !settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						app.showToastMessage(R.string.gpx_monitoring_disabled_warn);
-					}
-					break;
-				} else {
-					locToShow = g.findPointToShow();
-				}
-			}
-			app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-			if (locToShow != null) {
-				mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon,
-						mapView.getZoom(), true);
-			}
-			mapView.refreshMap();
-
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
-			return true;
-		};
-		return GpxUiHelper.selectGPXFiles(files, mapActivity, callbackWithObject, getThemeRes(), isNightMode());
 	}
 
 	public void showMultiChoicePoiFilterDialog(MapActivity mapActivity, DismissListener listener) {

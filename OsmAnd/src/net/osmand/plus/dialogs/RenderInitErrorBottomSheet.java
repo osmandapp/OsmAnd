@@ -1,7 +1,6 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_RENDER_INIT_ERROR_ID;
-import static net.osmand.plus.helpers.FeedbackHelper.EXCEPTION_PATH;
 
 import android.os.Bundle;
 
@@ -17,8 +16,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-
-import java.io.File;
 
 public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -60,7 +57,7 @@ public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 	public static boolean shouldShow(@NonNull OsmandSettings settings, @NonNull MapActivity activity) {
 		OsmandApplication app = activity.getMyApplication();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_RENDER_INIT_ERROR_ID)) {
-			return settings.OPENGL_RENDER_FAILED.get() > 1;
+			return settings.USE_OPENGL_RENDER.get() && settings.OPENGL_RENDER_FAILED.get() > 1;
 		}
 		return true;
 	}

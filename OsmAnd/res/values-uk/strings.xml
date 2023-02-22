@@ -1219,7 +1219,7 @@
     <string name="routing_attr_avoid_ferries_description">Уникати поромних переправ</string>
     <string name="routing_attr_avoid_motorway_name">Уник. автомагістралей</string>
     <string name="routing_attr_avoid_motorway_description">Уникати автомагістралей</string>
-    <string name="routing_attr_weight_name">Вагові обмеження</string>
+    <string name="routing_attr_weight_name">Вага</string>
     <string name="routing_attr_weight_description">Задайте дозволену вагу автомобіля для прокладання маршруту.</string>
     <string name="android_19_location_disabled">Починаючи з Android версії 4.4 (KitKat) Ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Скопіювати всі файли OsmAnd в нове місце\? 
 \n Примітка 1: Ваші старі файли залишаться недоторканими (їх можна вилучити вручну). 
@@ -1523,7 +1523,7 @@
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
     <string name="index_name_netherlands">Європа - Нідерланди</string>
     <string name="routing_attr_avoid_borders_description">Уникати перетину національних кордонів</string>
-    <string name="routing_attr_height_name">Обмеження по висоті</string>
+    <string name="routing_attr_height_name">Висота</string>
     <string name="routing_attr_height_description">Задайте дозволену висоту автомобіля для прокладання маршруту.</string>
     <string name="use_fast_recalculation">Інтелектуальне перебудування маршруту</string>
     <string name="use_fast_recalculation_desc">Переобчислити лише початкову частину маршруту, корисно для тривалих подорожей.</string>
@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Екстрим</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Не визначено</string>
     <string name="routeInfo_piste_difficulty_name">Складність траси</string>
-    <string name="routing_attr_width_name">Обмеження ширини</string>
+    <string name="routing_attr_width_name">Ширина</string>
     <string name="routing_attr_width_description">Задайте дозволену ширину автомобіля для прокладання маршруту.</string>
     <string name="avoid_in_routing_descr_">Уникати певних маршрутів та типів доріг</string>
     <string name="app_mode_utv">Мотовсюдихід</string>
@@ -3662,7 +3662,7 @@
     <string name="speed_cameras_restart_descr">Перезапустіть застосунок для вилучення даних про камери контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Вилучити та перезапустити</string>
     <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для обчислення маршрутів.</string>
-    <string name="routing_attr_length_name">Обмеження довжини</string>
+    <string name="routing_attr_length_name">Довжина</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
@@ -5037,5 +5037,21 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи, внизу — для напрямку руху, по центру — для всього іншого.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для напрямку руху, по центру — для всіх інших.</string>
+    <string name="shared_string_apply_changes">Застосувати зміни</string>
+    <string name="default_tracks_appearance_description">Ці налаштування зовнішнього вигляду застосовуються до всіх треків, вибраних на попередньому екрані.
+\n
+\nВони також зберігаються у файлі «%1$s» для застосування %2$s до всіх інших треків без неявного або спеціально налаштованого зовнішнього вигляду.</string>
+    <string name="default_tracks_appearance">Усталений вигляд треку</string>
+    <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
+    <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
+    <string name="no_visible_tracks">Немає треків на мапі</string>
+    <string name="recently_visible">Нещодавно видимий %1$s</string>
+    <string name="empty_tracks">У вас немає файлів треків.</string>
+    <string name="change_appearance">Змінити зовнішній вигляд</string>
+    <string name="shared_string_on_map">На мапі</string>
+    <string name="shared_string_select_recent">Вибрати нещодавні</string>
+    <string name="show_all_tracks">Показати всі треки</string>
+    <string name="switch_folder">Перемкнути теку</string>
 </resources>

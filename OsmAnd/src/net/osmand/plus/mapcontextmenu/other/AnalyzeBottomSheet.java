@@ -20,9 +20,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -164,7 +164,7 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		}
 	}
 
-	private void updateItemView(View view, boolean selected, @DrawableRes int iconId){
+	private void updateItemView(View view, boolean selected, @DrawableRes int iconId) {
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		Drawable drawableIcon = app.getUIUtilities().getIcon(iconId, selected ?
 				ColorUtilities.getActiveColorId(nightMode) :
