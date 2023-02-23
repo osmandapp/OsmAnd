@@ -24,9 +24,11 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -35,12 +37,13 @@ import net.osmand.plus.utils.UiUtilities;
 public class SimulatePositionFragment extends BaseOsmAndFragment {
 	public static final String TAG = SimulatePositionFragment.class.getSimpleName();
 
+	public static final String TRACK_FILE_NAME = "track_file_name";
+
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
 	private boolean nightMode;
-	private Toolbar toolbar;
-	private ImageView navigationIcon;
+	boolean usedOnMap;
 
 	private View view;
 	private AppCompatImageView trackIcon;
@@ -49,12 +52,17 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	private LinearLayout speedButton;
 	private LinearLayout startButton;
 
+	private LinearLayout trackItem;
+	private LinearLayout speedItem;
+	private LinearLayout startItem;
+
 	@Nullable
-	private static GPXFile gpxFile = null;
+	private GPXFile gpxFile = null;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
 		app = requireMyApplication();
 		settings = app.getSettings();
 	}
@@ -62,12 +70,22 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
+		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !settings.isLightContent();
 		view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.simulate_position_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
-		toolbar = view.findViewById(R.id.toolbar);
-		navigationIcon = toolbar.findViewById(R.id.close_button);
+		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+		if (sim.isRouteAnimating() && OsmAndLocationSimulation.getGpxFile() != null && gpxFile == null) {
+			gpxFile = OsmAndLocationSimulation.getGpxFile();
+		} else if (gpxFile == null && savedInstanceState != null) {
+			String path = savedInstanceState.getString(TRACK_FILE_NAME);
+			MapActivity mapActivity = requireMapActivity();
+			TrackMenuFragment.loadSelectedGpxFile(mapActivity, path, false, result -> {
+				gpxFile = result.getGpxFile();
+				setupCard();
+				return true;
+			});
+		}
 
 		setupToolbar();
 		setupCard();
@@ -76,34 +94,57 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
-		if (!sim.isRouteAnimating()) {
-			gpxFile = null;
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		if (gpxFile != null) {
+			outState.putString(TRACK_FILE_NAME, gpxFile.path);
 		}
+		super.onSaveInstanceState(outState);
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof MapActivity)) {
+			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
+		}
+		return (MapActivity) activity;
 	}
 
 	private void setupCard() {
-		trackIcon = view.findViewById(R.id.track_icon);
-		speedIcon = view.findViewById(R.id.speed_icon);
-		startIcon = view.findViewById(R.id.start_icon);
+		trackItem = view.findViewById(R.id.track);
+		speedItem = view.findViewById(R.id.speed);
+		startItem = view.findViewById(R.id.start);
 
-		LinearLayout trackButton = view.findViewById(R.id.track_button_container);
+		trackIcon = trackItem.findViewById(R.id.icon);
+		speedIcon = speedItem.findViewById(R.id.icon);
+		startIcon = startItem.findViewById(R.id.icon);
+
+		LinearLayout trackButton = trackItem.findViewById(R.id.button_container);
 		trackIcon.getDrawable().setTint(ColorUtilities.getDefaultIconColor(app, nightMode));
 		trackButton.setOnClickListener(view -> GpxUiHelper.selectGPXFile(requireActivity(), false, false, result -> {
 			gpxFile = result[0];
 			updateCard();
 			return true;
 		}, nightMode));
+		TextView trackTextview = trackItem.findViewById(R.id.title);
+		trackTextview.setText(R.string.shared_string_gpx_track);
 
-		speedButton = view.findViewById(R.id.speed_button_container);
+		speedButton = speedItem.findViewById(R.id.button_container);
 		speedButton.setOnClickListener(view -> showMovementSpeedDialog(requireActivity(), nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme, nightMode));
+		TextView speedTextview = speedItem.findViewById(R.id.title);
+		speedTextview.setText(R.string.shared_string_speed);
 
-		startButton = view.findViewById(R.id.start_button_container);
-		startButton.setOnClickListener(view -> {
-			startStopSimulation();
-		});
+		AndroidUiHelper.updateVisibility(speedItem.findViewById(R.id.short_divider), false);
+		AndroidUiHelper.updateVisibility(speedItem.findViewById(R.id.long_divider), true);
+
+		startButton = startItem.findViewById(R.id.button_container);
+		startButton.setOnClickListener(view -> startStopSimulation());
+		TextView startTextview = startItem.findViewById(R.id.title);
+		startTextview.setText(app.getLocationProvider().getLocationSimulation().isRouteAnimating()
+				? R.string.shared_string_control_stop
+				: R.string.shared_string_control_start);
+
+		AndroidUiHelper.updateVisibility(startItem.findViewById(R.id.short_divider), false);
 
 		updateCard();
 	}
@@ -123,10 +164,10 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	public void setGpxFile(OsmandApplication app, GPXFile gpxFile) {
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
-		if (sim.isRouteAnimating() && SimulatePositionFragment.gpxFile != gpxFile) {
+		if (sim.isRouteAnimating() && this.gpxFile != gpxFile) {
 			sim.stop();
 		}
-		SimulatePositionFragment.gpxFile = gpxFile;
+		this.gpxFile = gpxFile;
 	}
 
 	private void updateCard() {
@@ -135,7 +176,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 				: ColorUtilities.getDefaultIconColor(app, nightMode));
 
 		if (gpxFile != null) {
-			TextView trackDescription = view.findViewById(R.id.track_description);
+			TextView trackDescription = trackItem.findViewById(R.id.description);
 			AndroidUiHelper.updateVisibility(trackDescription, true);
 			String name = gpxFile.path;
 			int i = name.lastIndexOf('/');
@@ -155,19 +196,16 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 			startButton.setEnabled(false);
 		}
 
-
-		TextView speedDescription = view.findViewById(R.id.speed_description);
+		TextView speedDescription = speedItem.findViewById(R.id.description);
 		AndroidUiHelper.updateVisibility(speedDescription, true);
 		speedDescription.setText(getSpeedString(app.getSettings().SIMULATE_POSITION_SPEED.get()));
 
-		speedIcon.getDrawable().setTint(gpxFile != null
-				? ColorUtilities.getActiveIconColor(app, nightMode)
-				: ColorUtilities.getSecondaryIconColor(app, nightMode));
+		speedIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_speed,
+				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 
-		TextView startDescription = view.findViewById(R.id.start_description);
-
+		TextView startDescription = startItem.findViewById(R.id.description);
 		if (sim.isRouteAnimating()) {
 			AndroidUiHelper.updateVisibility(startDescription, true);
 			startDescription.setText(getString(R.string.shared_string_in_progress));
@@ -214,34 +252,33 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupToolbar() {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
 		tvTitle.setText(R.string.simulate_your_location);
 
-		updateToolbarNavigationIcon();
-
-		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
-	}
-
-	private void updateToolbarNavigationIcon() {
+		ImageView navigationIcon = toolbar.findViewById(R.id.close_button);
 		navigationIcon.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+
+		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
 	}
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), !nightMode);
+		AndroidUiHelper.setStatusBarContentColor(getView(), true);
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, null);
+	public static void showInstance(@NonNull FragmentActivity activity, boolean usedOnMap) {
+		showInstance(activity, null, usedOnMap);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @Nullable GPXFile gpxFile) {
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable GPXFile gpxFile, boolean usedOnMap) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 
@@ -249,6 +286,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 			if (gpxFile != null) {
 				fragment.setGpxFile((OsmandApplication) activity.getApplication(), gpxFile);
 			}
+			fragment.usedOnMap = usedOnMap;
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

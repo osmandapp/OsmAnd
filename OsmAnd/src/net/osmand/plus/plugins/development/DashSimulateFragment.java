@@ -21,7 +21,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 public class DashSimulateFragment extends DashBaseFragment {
 
 	private static final String TAG = "DASH_SIMULATE_FRAGMENT";
-	private static final int TITLE_ID = R.string.simulate_your_location;
+	private static final int TITLE_ID = R.string.shared_string_navigation;
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
 			new DashboardOnMap.DefaultShouldShow() {
@@ -36,16 +36,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 	@Override
 	public void onOpenDash() {
-		OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
-		boolean routeAnimating = loc.getLocationSimulation().isRouteAnimating();
-		((TextView) getView().findViewById(R.id.name)).setText(routeAnimating ? R.string.animate_route_off
-				: R.string.animate_route);
-		ImageButton actionButton = getView().findViewById(R.id.stop);
-		actionButton.setImageDrawable(
-				!routeAnimating ? getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_play_dark)
-						: getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_rec_stop));
-		actionButton.setContentDescription(getString(routeAnimating ? R.string.animate_route_off : R.string.animate_route));
-
+		((TextView) getView().findViewById(R.id.name)).setText(R.string.simulate_your_location);
 	}
 
 	@Override
@@ -57,20 +48,13 @@ public class DashSimulateFragment extends DashBaseFragment {
 		LinearLayout tracks = view.findViewById(R.id.items);
 		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);
 		tracks.addView(item);
-		OsmAndLocationProvider loc = getMyApplication().getLocationProvider();
-		OnClickListener listener = new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				loc.getLocationSimulation().startStopGpxAnimation(getActivity());
-				dashboard.hideDashboard();
-			}
+		OnClickListener listener = v -> {
+			SimulatePositionFragment.showInstance(requireActivity(), true);
+			dashboard.hideDashboard();
 		};
 		item.setOnClickListener(listener);
-		ImageButton actionButton = item.findViewById(R.id.stop);
-		actionButton.setOnClickListener(listener);
-		actionButton.setContentDescription(getString(R.string.animate_route));
-		((TextView) item.findViewById(R.id.name)).setText(R.string.animate_route);
+		((TextView) item.findViewById(R.id.name)).setText(R.string.simulate_your_location);
+
 		item.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 
 		return view;

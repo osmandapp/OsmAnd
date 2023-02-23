@@ -47,6 +47,8 @@ public class OsmAndLocationSimulation {
 	private Thread routeAnimation;
 	private final OsmAndLocationProvider provider;
 	private final OsmandApplication app;
+	@Nullable
+	private static GPXFile gpxFile = null;
 
 	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider) {
 		this.app = app;
@@ -309,6 +311,7 @@ public class OsmAndLocationSimulation {
 
 	public void stop() {
 		routeAnimation = null;
+		gpxFile = null;
 	}
 
 	public static SimulatedLocation middleLocation(SimulatedLocation start, SimulatedLocation end, float meters) {
@@ -340,6 +343,7 @@ public class OsmAndLocationSimulation {
 
 	public static List<SimulatedLocation> getSimulatedLocationsForGpx(OsmandApplication app, int firstLocationOffset,
 																	  GPXFile f) {
+		gpxFile = f;
 		double distanceFromStart = 0;
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
 		List<GPXUtilities.WptPt> points = f.getAllSegmentsPoints();
@@ -410,6 +414,10 @@ public class OsmAndLocationSimulation {
 			}
 		}
 		return simulatedLocations;
+	}
+
+	public static GPXFile getGpxFile() {
+		return gpxFile;
 	}
 
 	private static class SimulatedLocation extends Location {

@@ -776,7 +776,7 @@ public class OsmandSettings {
 		}
 	}.makeProfile().cache();
 
-	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal();
+	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal().makeShared();
 
 	public final CommonPreference<DistanceByTapTextSize> DISTANCE_BY_TAP_TEXT_SIZE = new EnumStringPreference<>(this, "distance_by_tap_text_size", DistanceByTapTextSize.NORMAL, DistanceByTapTextSize.values()).makeProfile();
 
