@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewStub;
@@ -111,6 +112,12 @@ public class MapViewWithLayers extends FrameLayout {
 		}
 	}
 
+	public void onCreate(Bundle savedInstanceState) {
+		if (atlasMapRendererView != null) {
+			atlasMapRendererView.handleOnCreate(savedInstanceState);
+		}
+	}
+
 	public void onResume() {
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
@@ -126,6 +133,7 @@ public class MapViewWithLayers extends FrameLayout {
 	public void onDestroy() {
 		if (atlasMapRendererView != null) {
 			mapView.setMapRenderer(null);
+			resetMapRendererView();
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
