@@ -126,11 +126,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		app.getGpsFilterHelper().filterGpxFile(this, true);
 	}
 
-	@Override
-	protected boolean processSplit(@NonNull OsmandApplication app) {
-		return GpxDisplayHelper.processSplit(app, this);
-	}
-
 	@NonNull
 	@Override
 	public List<TrkSegment> getPointsToDisplay() {

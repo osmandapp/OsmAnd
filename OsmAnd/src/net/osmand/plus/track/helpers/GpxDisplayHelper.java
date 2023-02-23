@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.Route;
@@ -22,13 +23,20 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class GpxDisplayHelper {
 
 	private final OsmandApplication app;
+	private ThreadPoolExecutor singleThreadedExecutor;
+	private LinkedBlockingQueue<Runnable> taskQueue;
 
 	public GpxDisplayHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		taskQueue = new LinkedBlockingQueue<Runnable>();
+		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
 
 	private String getString(int resId, Object... formatArgs) {
@@ -168,6 +176,12 @@ public class GpxDisplayHelper {
 			dg.add(group);
 		}
 		return dg;
+	}
+
+	public void processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess, @NonNull CallbackWithObject<Boolean> callback) {
+		singleThreadedExecutor.execute(() -> {
+			callback.processResult(processSplit(app, fileToProcess));
+		});
 	}
 
 	/**

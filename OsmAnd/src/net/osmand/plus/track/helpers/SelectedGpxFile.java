@@ -91,7 +91,10 @@ public class SelectedGpxFile {
 		trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
 
 		displayGroups = null;
-		splitProcessed = processSplit(app);
+		app.getGpxDisplayHelper().processSplit(app, this, isProcessed -> {
+			splitProcessed = isProcessed;
+			return true;
+		});
 
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.update(app);
