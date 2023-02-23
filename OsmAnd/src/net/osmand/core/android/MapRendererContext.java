@@ -78,7 +78,7 @@ public class MapRendererContext {
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
-	private MapRendererView mapRendererView;
+	private volatile MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
 
