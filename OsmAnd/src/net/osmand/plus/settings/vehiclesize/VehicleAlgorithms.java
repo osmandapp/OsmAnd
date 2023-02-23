@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.vehiclesize;
 
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.INCHES_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,13 @@ import java.util.List;
 public class VehicleAlgorithms {
 
 	public static Limits convertLimitsByMetricSystem(@NonNull Limits limits,
-	                                                 @NonNull MetricsConstants lengthMetric) {
+	                                                 @NonNull MetricsConstants lengthMetric,
+	                                                 boolean useInches) {
 		float min = limits.getMin();
 		float max = limits.getMax();
 		// Convert to appropriate length metric system
-		min = convertLengthFromMeters(lengthMetric, min);
-		max = convertLengthFromMeters(lengthMetric, max);
+		min = convertLengthFromMeters(lengthMetric, min, useInches);
+		max = convertLengthFromMeters(lengthMetric, max, useInches);
 		if (lengthMetric != MetricsConstants.KILOMETERS_AND_METERS) {
 			// Round min / max
 			int multiplier = 10;
@@ -96,10 +98,10 @@ public class VehicleAlgorithms {
 		return result;
 	}
 
-	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value) {
+	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value, boolean useInches) {
 		float resultValue;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			resultValue = value / FEET_IN_ONE_METER;
+			resultValue = value / (useInches ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			resultValue = value / YARDS_IN_ONE_METER;
 		} else {
@@ -108,10 +110,10 @@ public class VehicleAlgorithms {
 		return resultValue;
 	}
 
-	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters) {
+	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters, boolean useInches) {
 		float result;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			result = valueInMeters * FEET_IN_ONE_METER;
+			result = valueInMeters * (useInches ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			result = valueInMeters * YARDS_IN_ONE_METER;
 		} else {
