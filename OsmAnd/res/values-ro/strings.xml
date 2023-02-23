@@ -2419,7 +2419,7 @@
     <string name="export_profile_failed">Profilul nu se poate exporta.</string>
     <string name="profile_import">Importare profil</string>
     <string name="profile_import_descr">Adăugați un profil deschizând fișierul său cu OsmAnd.</string>
-    <string name="file_import_error">%1$s Eroare de incarcare al fisierului. %1$s: %2$s</string>
+    <string name="file_import_error">%1$s Eroare de incarcare al fisierului: %2$s</string>
     <string name="file_imported_successfully">%1$s importat.</string>
     <string name="rendering_value_white_name">Alb</string>
     <string name="route_start_point">Punct de plecare</string>
@@ -5044,5 +5044,23 @@
     <string name="sound_beep_simple">Bip: simplu</string>
     <string name="sound_beep_simple_loud">Bip: simplu zgomotos</string>
     <string name="sound_beep_complex">Bip: complex</string>
-    <string name="display_position_automatic_descr">Depinde de orientarea hărții, în partea de jos pentru direcția de mișcare, în centru pentru toate celelalte.</string>
+    <string name="display_position_automatic_descr">Depinde de orientarea hărții: în partea de jos pentru direcția de mișcare, în centru pentru toate celelalte.</string>
+    <string name="no_visible_tracks_description">Selectați piesele pentru a le afișa pe hartă.</string>
+    <string name="recently_visible">Vizibil recent %1$s</string>
+    <string name="empty_tracks">Nu aveți fișiere de track.</string>
+    <string name="switch_folder">Schimbați folderul</string>
+    <string name="show_all_tracks">Afișați toate track-urile</string>
+    <string name="shared_string_on_map">Pe hartă</string>
+    <string name="empty_tracks_description">Puteți importa, crea sau înregistra fișiere de piste folosind OsmAnd.</string>
+    <string name="change_appearance">Modificarea aspectului</string>
+    <string name="shared_string_kilograms">kilograme</string>
+    <string name="shared_string_yards">yarzi</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul pieselor %1$s\?</string>
+    <string name="shared_string_apply_changes">Aplicați modificările</string>
+    <string name="default_tracks_appearance_description">Aceste setări de aspect se aplică tuturor pieselor selectate în ecranul anterior.
+\n
+\nEle sunt, de asemenea, salvate ca \"%1$s\" pentru a fi aplicate de %2$s pentru toate celelalte piste fără aspect implicit sau specificat.</string>
+    <string name="default_tracks_appearance">Aspectul implicit al track-ului</string>
+    <string name="no_visible_tracks">Nu există urme pe hartă</string>
+    <string name="shared_string_select_recent">Selectați recent</string>
 </resources>

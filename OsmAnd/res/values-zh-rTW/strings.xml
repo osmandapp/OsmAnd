@@ -5048,4 +5048,6 @@
     <string name="switch_folder">切換資料夾</string>
     <string name="shared_string_on_map">在地圖上</string>
     <string name="show_all_tracks">顯示所有軌跡</string>
+    <string name="shared_string_kilograms">公斤</string>
+    <string name="shared_string_yards">碼</string>
 </resources>

@@ -5044,4 +5044,6 @@
     <string name="shared_string_on_map">Na zemljevidu</string>
     <string name="shared_string_apply_changes">Uveljavi spremembe</string>
     <string name="change_default_tracks_appearance_confirmation_description">Spremenim izgled %1$s sledi\?</string>
+    <string name="shared_string_yards">jardov</string>
+    <string name="shared_string_kilograms">kilogramov</string>
 </resources>

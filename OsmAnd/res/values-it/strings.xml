@@ -2392,7 +2392,7 @@
     <string name="order_by">Ordina per:</string>
     <string name="coordinates_format">Formato coordinate</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
-    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Cambialo tappando su \'Opzioni\'.</string>
+    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Tocca il pulsante \'Opzioni\' per cambiarlo.</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">No strade di ghiaccio e guadi</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi.</string>
@@ -2483,7 +2483,7 @@
     <string name="add_group">Aggiungi un gruppo</string>
     <string name="add_group_descr">Importa gruppi dai preferiti o i punti intermedi GPX.</string>
     <string name="empty_state_markers_active">Crea i marcatori della mappa!</string>
-    <string name="empty_state_markers_active_desc">Tap lungo o breve su Luoghi, poi tappa il pulsante bandiera del marcatore.</string>
+    <string name="empty_state_markers_active_desc">Fai un tocco lungo o breve su Luoghi, poi tocca la bandierina del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Importa gruppi di Preferiti o punti intermedi come marcatori.</string>
     <string name="empty_state_markers_history_desc">Marcatori indicati come passati appariranno su questa schermata.</string>
@@ -2508,7 +2508,7 @@
     <string name="shared_string_edited">Modificato</string>
     <string name="shared_string_added">Aggiunto</string>
     <string name="marker_activated">Marcatore %s attivato.</string>
-    <string name="one_tap_active_descr">Tappa un marcatore sulla mappa per muoverlo al primo posto nei marcatori attivi senza aprire il menù contestuale.</string>
+    <string name="one_tap_active_descr">Tocca un marcatore sulla mappa per muoverlo al primo posto nei marcatori attivi senza aprire il menù contestuale.</string>
     <string name="one_tap_active">\'Un tap\' attivo</string>
     <string name="empty_state_av_notes">Prendi delle note!</string>
     <string name="empty_state_av_notes_desc">Aggiungi note audio, video o foto in qualsiasi punto sulla mappa, utilizzando i widget o il menù contestuale.</string>
@@ -2738,7 +2738,7 @@
     <string name="coord_input_edit_point">Modifica il punto</string>
     <string name="coord_input_add_point">Aggiungi punto</string>
     <string name="coord_input_save_as_track">Salva come traccia</string>
-    <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
+    <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tocca il pulsante \"Salva\".</string>
     <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti</string>
     <string name="ask_for_location_permission">Per favore concedi a OsmAnd il permesso di accedere alla geolocalizzazione per continuare.</string>
     <string name="thank_you_for_feedback">Grazie per il tuo feedback</string>
@@ -2951,7 +2951,7 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icona</string>
     <string name="collected_data">Dati raccolti</string>
-    <string name="press_again_to_change_the_map_orientation">Tappa di nuovo per cambiare l\'orientamento della mappa</string>
+    <string name="press_again_to_change_the_map_orientation">Tocca di nuovo per cambiare l\'orientamento della mappa</string>
     <string name="shared_string_min_speed">Velocità min</string>
     <string name="shared_string_max_speed">Velocità max</string>
     <string name="default_speed_setting_title">Velocità predefinita</string>
@@ -3553,7 +3553,7 @@
 \nLa sottoscrizione si rinnova automaticamente finché non viene cancellata prima del rinnovo.
 \n
 \nPuoi gestire e cancellare la tua sottoscrizione dalle impostazioni del tuo account Google Play.</string>
-    <string name="search_poi_types_descr">Combina PDI di più categorie. Tappa il pulsante per selezionarle tutte, oppure sul lato sinistro per una selezione puntuale.</string>
+    <string name="search_poi_types_descr">Combina PDI di più categorie. Tocca il pulsante per selezionarle tutte, oppure sul lato sinistro per la selezione della categoria.</string>
     <string name="lang_gu">Gujarati</string>
     <string name="lang_ba">Baschiro</string>
     <string name="lang_jv">Giavanese</string>
@@ -3759,7 +3759,7 @@
 \n
 \n • Migliorata la visibilità dei nodi ciclabili
 \n
-\n • Le tracce adesso sono tappabili, hanno un nuovo menù contestuale con informazioni di base
+\n • Le tracce adesso si possono toccare, hanno un nuovo menù contestuale con informazioni di base
 \n
 \n • Migliorati gli algoritmi di ricerca
 \n
@@ -3836,7 +3836,7 @@
     <string name="login_account">Account</string>
     <string name="user_login">Entra</string>
     <string name="manage_subscription">Gestisci la sottoscrizione</string>
-    <string name="subscription_payment_issue_title">Tappa sul pulsante per impostare un metodo di pagamento in Google Play per correggere la tua sottoscrizione.</string>
+    <string name="subscription_payment_issue_title">Tocca il pulsante per impostare un metodo di pagamento in Google Play per correggere la tua sottoscrizione.</string>
     <string name="subscription_expired_title">La sottoscrizione di OsmAnd Live è terminata</string>
     <string name="subscription_paused_title">La sottoscrizione di OsmAnd Live è stata messa in pausa</string>
     <string name="subscription_on_hold_title">La sottoscrizione di OsmAnd Live è in sospeso</string>
@@ -4663,7 +4663,7 @@
     <string name="map_widget_time_to_destination">Tempo alla destinazione</string>
     <string name="map_widget_time_to_intermediate">Tempo all\'intermedio</string>
     <string name="map_widget_distance_to_intermediate">Distanza all\'intermedio</string>
-    <string name="radius_ruler_mode_desc">Tappando il widget cambi la modalità del righello radiale.</string>
+    <string name="radius_ruler_mode_desc">Toccando il widget si passa alla modalità righello Raggio.</string>
     <string name="lang_sat">Santali</string>
     <string name="map_widget_average_speed">Velocità media</string>
     <string name="average_speed_skip_stops">Tieni in considerazione le fermate</string>
@@ -4758,7 +4758,7 @@
     <string name="goods_delivery_desc">I veicoli di trasporto merci possono avere l\'accesso limitato ad alcune strade.</string>
     <string name="average_speed_skip_stops_desc">Velocità inferiori a %1$s saranno considerate e varranno per la velocità media.</string>
     <string name="time_to_destination_widget_desc">Il widget mostra \"Orario di arrivo\" o \"Tempo mancante\" all\'ultimo punto di destinazione. Il tempo è costantemente aggiornato durante la navigazione ed equivale al tempo dal percorso alla posizione attuale.</string>
-    <string name="included_in_your_current_plan">Incluso nel tuo piano attuale \"%1$s\"</string>
+    <string name="included_in_your_current_plan">Incluso nel tuo piano \"%1$s\" attuale</string>
     <string name="available_as_part_of_subscription_plan">Disponibile come parte della sottoscrizione %1$s.</string>
     <string name="shared_string_large">Grande</string>
     <string name="shared_string_normal">Normale</string>
@@ -5026,7 +5026,25 @@
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
     <string name="last_synchronized">Ultima sincronizzazione</string>
-    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa. In basso per la direzione del movimento, al centro per il resto.</string>
+    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa: in basso per la direzione del movimento, al centro per il resto.</string>
     <string name="sound_beep_complex_loud">Bip: complesso e forte</string>
     <string name="sound_beep_simple_loud">Bip: semplice e forte</string>
+    <string name="shared_string_kilograms">chilogrammi</string>
+    <string name="shared_string_yards">iarde</string>
+    <string name="no_visible_tracks">Nessuna traccia sulla mappa</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Cambiare l\'aspetto di %1$s tracce\?</string>
+    <string name="empty_tracks_description">Puoi importare, creare o registrare file di traccia usando OsmAnd.</string>
+    <string name="empty_tracks">Non hai file di traccia.</string>
+    <string name="shared_string_select_recent">Seleziona recenti</string>
+    <string name="change_appearance">Cambia aspetto</string>
+    <string name="recently_visible">Visibile recentemente %1$s</string>
+    <string name="switch_folder">Cambia cartella</string>
+    <string name="show_all_tracks">Mostra tutte le tracce</string>
+    <string name="shared_string_on_map">Sulla mappa</string>
+    <string name="shared_string_apply_changes">Applica modifiche</string>
+    <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
+    <string name="default_tracks_appearance">Aspetto tracce predefinito</string>
+    <string name="default_tracks_appearance_description">Queste impostazioni dell\'aspetto vengono applicate a tutte le tracce selezionate nella schermata precedente.
+\n
+\nSono anche salvate come \"%1$s\" per essere applicati da %2$s per tutte le altre tracce senza un aspetto implicito o specificatamente impostato.</string>
 </resources>

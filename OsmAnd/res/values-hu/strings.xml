@@ -5048,4 +5048,6 @@
     <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
     <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
+    <string name="shared_string_kilograms">kilogramm</string>
+    <string name="shared_string_yards">yard</string>
 </resources>

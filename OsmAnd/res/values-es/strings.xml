@@ -4142,7 +4142,7 @@
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
-    <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
+    <string name="enough_contributions_descr">¡Felicitaciones, ha proporcionado suficientes contribuciones a OpenStreetMap y ahora puede disfrutar de actualizaciones ilimitadas de mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
@@ -5058,4 +5058,6 @@
     <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar la apariencia de %1$s pistas\?</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos con las pistas con OsmAnd.</string>
     <string name="show_all_tracks">Mostrar todas las vías</string>
+    <string name="shared_string_kilograms">kilogramos</string>
+    <string name="shared_string_yards">yardas</string>
 </resources>

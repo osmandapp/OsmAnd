@@ -5054,4 +5054,6 @@
     <string name="shared_string_select_recent">Вибрати нещодавні</string>
     <string name="show_all_tracks">Показати всі треки</string>
     <string name="switch_folder">Перемкнути теку</string>
+    <string name="shared_string_yards">ярди</string>
+    <string name="shared_string_kilograms">кілограми</string>
 </resources>

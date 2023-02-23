@@ -5042,5 +5042,23 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_automatic_descr">Depende da orientação do mapa, a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="default_tracks_appearance_description">Estas configurações de aparência são aplicadas a todos os trilhos selecionados no ecrã anterior.
+\n
+\nElas também são guardadas como \"%1$s\" para serem aplicadas por %2$s em todos os outros trilhos sem aparência implícita ou especificamente definida.</string>
+    <string name="shared_string_select_recent">Selecionar recente</string>
+    <string name="change_appearance">Alterar aparência</string>
+    <string name="shared_string_kilograms">quilogramas</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência dos trilhos %1$s\?</string>
+    <string name="shared_string_apply_changes">Aplicar alterações</string>
+    <string name="shared_string_yards">jardas</string>
+    <string name="default_tracks_appearance">Aparência predefinida de trilho</string>
+    <string name="no_visible_tracks_description">Selecione os trilhos a mostrar no mapa.</string>
+    <string name="no_visible_tracks">Nenhum trilho no mapa</string>
+    <string name="recently_visible">Visível recentemente %1$s</string>
+    <string name="empty_tracks_description">Pode importar, criar ou gravar ficheiros de trilhos usando o OsmAnd.</string>
+    <string name="switch_folder">Alternar pasta</string>
+    <string name="show_all_tracks">Mostrar todos os trilhos</string>
+    <string name="shared_string_on_map">No mapa</string>
+    <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
 </resources>
