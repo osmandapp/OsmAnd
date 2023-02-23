@@ -329,7 +329,7 @@
     <string name="routing_attr_avoid_unpaved_name">Sem estradas não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evita estradas não pavimentadas</string>
     <string name="routing_attr_avoid_ferries_description">Evita balsas</string>
-    <string name="routing_attr_weight_name">Peso máximo</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso do veículo nas rotas.</string>
     <string name="copying_osmand_files_descr">Copiar arquivos de dados para o novo destino (%s)…</string>
     <string name="copying_osmand_files">Copiando arquivos de dados…</string>
@@ -1523,7 +1523,7 @@
     <string name="shared_string_get">Obter</string>
     <string name="shared_string_logoff">Desconectar</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzamentos de fronteiras nacionais</string>
-    <string name="routing_attr_height_name">Limite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
     <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota, útil para viagens longas.</string>
@@ -3179,7 +3179,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
-    <string name="routing_attr_width_name">Limite de largura</string>
+    <string name="routing_attr_width_name">Largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
     <string name="avoid_in_routing_descr_">Evitar certas rotas e tipos de estradas</string>
     <string name="app_mode_utv">Lado a lado</string>
@@ -3658,7 +3658,7 @@
     <string name="speed_cameras_restart_descr">Reinicie o aplicativo para excluir todos os dados da câmera de velocidade.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
     <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
-    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="routing_attr_length_name">Comprimento</string>
     <string name="speed_cameras_removed_descr">Este dispositivo não possui câmeras de velocidade.</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
     <string name="use_volume_buttons_as_zoom_descr">Controle o nível de zoom do mapa usando os botões de volume do dispositivo.</string>
@@ -5033,4 +5033,22 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="last_synchronized">Última sincronização</string>
     <string name="display_position_automatic_descr">Depende da orientação do mapa, a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="change_appearance">Mudar a aparência</string>
+    <string name="empty_tracks_description">Você pode importar, criar ou gravar arquivos de trilha usando o OsmAnd.</string>
+    <string name="show_all_tracks">Mostrar todas as trilhas</string>
+    <string name="shared_string_on_map">No mapa</string>
+    <string name="empty_tracks">Você não tem arquivos de trilha.</string>
+    <string name="shared_string_select_recent">Selecionar recente</string>
+    <string name="switch_folder">Alternar pasta</string>
+    <string name="shared_string_yards">jardas</string>
+    <string name="no_visible_tracks">Nenhuma trilha no mapa</string>
+    <string name="recently_visible">Visível recentemente %1$s</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência das trilhas %1$s\?</string>
+    <string name="shared_string_apply_changes">Aplicar mudanças</string>
+    <string name="default_tracks_appearance_description">Estas configurações de aparência são aplicadas a todas as trilhas selecionadas na tela anterior.
+\n
+\nElas também são salvadas como \"%1$s\" para serem aplicadas por %2$s em todas as outras trilhas sem aparência implícita ou especificamente definida.</string>
+    <string name="default_tracks_appearance">Aparência padrão da trilha</string>
+    <string name="no_visible_tracks_description">Selecione as trilhas para exibi-las no mapa.</string>
+    <string name="shared_string_kilograms">quilogramas</string>
 </resources>
