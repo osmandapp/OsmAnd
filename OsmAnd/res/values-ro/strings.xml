@@ -931,7 +931,7 @@
     <string name="routing_attr_avoid_ferries_description">Evitați feriboturile</string>
     <string name="routing_attr_avoid_motorway_name">Fără autostrăzi</string>
     <string name="routing_attr_avoid_motorway_description">Evitați autostrăzile</string>
-    <string name="routing_attr_weight_name">Limită greutate</string>
+    <string name="routing_attr_weight_name">Greutate</string>
     <string name="routing_attr_weight_description">Specificați limita permisă a greutății vehiculului pe rute.</string>
     <string name="android_19_location_disabled">Începând cu versiunea de Android 4.4 (KitKat) nu poți descărca și actualiza harta în directorul de stocare anterior (%s). Vrei să modifici locația de stocare la un permisivă și să copiezi toate fișierele OsmAnd acolo\?
 \n Nota 1: Fișierele vechi vor rămâne nemodificate (dar pot fi șterse manual).
@@ -2066,7 +2066,7 @@
     <string name="routing_attr_avoid_stairs_description">Evitați treptele</string>
     <string name="routing_attr_avoid_borders_name">Fără treceri de frontieră</string>
     <string name="routing_attr_avoid_borders_description">Evitați trecerea granițelor naționale</string>
-    <string name="routing_attr_height_name">Limită înălțime</string>
+    <string name="routing_attr_height_name">Înălțime</string>
     <string name="driving_region_australia">Australia</string>
     <string name="distance_measurement_start_editing">Începe editarea</string>
     <string name="distance_measurement_finish_editing">Termină editarea</string>
@@ -2559,7 +2559,7 @@
     <string name="screen_alerts">Alerte ecran</string>
     <string name="route_parameters_descr">Configurați parametrii rutei</string>
     <string name="route_parameters">Parametrii rutei</string>
-    <string name="routing_attr_width_name">Limită lățime</string>
+    <string name="routing_attr_width_name">Lățime</string>
     <string name="routing_attr_width_description">Specificați limita permisă pentru lățimea vehiculului pe rute.</string>
     <string name="dialogs_and_notifications_title">Dialoguri și notificări</string>
     <string name="shared_string_crash">Blocat</string>
@@ -2851,7 +2851,7 @@
     <string name="add_online_source">Adăugare surse online</string>
     <string name="quick_action_showhide_mapillary_descr">O comutare să afișeze sau să ascundă stratul Mapillary pe hartă.</string>
     <string name="routing_attr_length_description">Specificați lungimea vehiculului care trebuie permisă pe rute.</string>
-    <string name="routing_attr_length_name">Limită lungime</string>
+    <string name="routing_attr_length_name">Lungime</string>
     <string name="shared_string_bearing">Direcție</string>
     <string name="item_deleted">%1$s șters</string>
     <string name="shared_string_uninstall_and_restart">Dezinstalare și repornire</string>
