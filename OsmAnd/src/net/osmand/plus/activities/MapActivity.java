@@ -347,7 +347,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.setLockUIAdapter(this);
 		mapActivityKeyListener = new MapActivityKeyListener(this);
 		mIsDestroyed = false;
-
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.onCreate(savedInstanceState);
+		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
 	}
 
