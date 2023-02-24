@@ -1127,7 +1127,7 @@
     <string name="routing_attr_avoid_ferries_description">Evita balsas/ferries</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autoestradas</string>
     <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
-    <string name="routing_attr_weight_name">Peso máximo</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso permitido do veículo em rotas.</string>
     <string name="android_19_location_disabled">Desde a versão Android 4.4 (KitKat) que não se pode descarregar e atualizar mapas no local de armazenamento anterior (%s). Quer alterar para um local com permissão e copiar todos os ficheiros do OsmAnd para lá\?
 \n Nota 1: os ficheiros antigos permanecerão intocados (mas podem ser eliminados manualmente).
@@ -2477,7 +2477,7 @@
     <string name="routing_attr_avoid_stairs_description">Evita escadas</string>
     <string name="routing_attr_avoid_borders_name">Evitar passagens por fronteiras</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar fronteiras nacionais</string>
-    <string name="routing_attr_height_name">Altura máxima</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="route_is_too_long_v2">Para longas distâncias: adicione destinos intermédios se não for encontrada nenhuma rota dentro de 10 minutos.</string>
     <string name="driving_region_australia">Austrália</string>
@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
-    <string name="routing_attr_width_name">Largura máxima</string>
+    <string name="routing_attr_width_name">Largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
     <string name="avoid_in_routing_descr_">Evitar determinados tipos de rotas e estradas</string>
     <string name="app_mode_utv">Lado a lado</string>
@@ -3677,7 +3677,7 @@
     <string name="osm_edit_closed_note">Nota do OSM fechada</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
     <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
-    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="routing_attr_length_name">Comprimento</string>
     <string name="speed_camera_pois">Radares de velocidade</string>
     <string name="shared_string_resume">Retomar</string>
     <string name="shared_string_bearing">Direção</string>
