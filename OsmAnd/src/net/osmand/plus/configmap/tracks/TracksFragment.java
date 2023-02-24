@@ -296,7 +296,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void updateTracksVisibility() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			gpxSelectionHelper.clearAllGpxFilesToShow(false);
+			gpxSelectionHelper.clearAllGpxFilesToShow(true);
 
 			CallbackWithObject<List<GPXFile>> callback = result -> {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(result.toArray(new GPXFile[0]));
