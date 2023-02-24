@@ -4907,11 +4907,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_item">項目</string>
     <string name="simulation_constant_mode_title">定速走行</string>
     <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
-    <string name="default_tracks_appearance_description">これらの外観設定は、前の画面で選択したすべての経路に適用されます。
-\n
-\nまたこれらは\"%1$s\"として保存され、具体的な外観設定のない他のすべての経路に対し%2$sによって適用されます。</string>
     <string name="no_visible_tracks_description">マップ上に表示する経路を選択します。</string>
-    <string name="default_tracks_appearance">デフォルトの経路の外観</string>
     <string name="no_visible_tracks">マップ上に経路がありません</string>
     <string name="ant_missing_dependency_descr">必要なサービス\"%1$s\"が見つかりませんでした。
 \nANT+ プラグイン サービスをインストールまたは更新する必要があります。

@@ -5046,10 +5046,6 @@
     <string name="display_position_automatic_descr">Afhænger af kortets orientering: nederst for bevægelsesretning, centrum for alle andre.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ændr udseendet af %1$s spor\?</string>
     <string name="shared_string_apply_changes">Anvend ændringer</string>
-    <string name="default_tracks_appearance_description">Disse indstillinger for udseende anvendes på alle spor, der blev valgt på det foregående skærmbillede.
-\n
-\nDe gemmes også som \"%1$s\" for at blive anvendt af %2$s på alle andre spor uden underforstået eller specifikt indstillet udseende.</string>
-    <string name="default_tracks_appearance">Standardudseende for spor</string>
     <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
     <string name="no_visible_tracks">Ingen spor på kortet</string>
     <string name="recently_visible">Senest synlig %1$s</string>

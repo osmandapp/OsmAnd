@@ -580,7 +580,6 @@
     <string name="recently_visible">Hiển thị gần đây %1$s</string>
     <string name="empty_tracks_description">Bạn có thể nhập, tạo hoặc ghi tệp theo dõi bằng OsmAnd.</string>
     <string name="shared_string_apply_changes">Áp dụng các thay đổi</string>
-    <string name="default_tracks_appearance">Giao diện theo dõi mặc định</string>
     <string name="no_visible_tracks_description">Chọn các tuyến đường để hiển thị chúng trên bản đồ.</string>
     <string name="no_visible_tracks">Không có dấu vết trên bản đồ</string>
     <string name="empty_tracks">Bạn không có tập tin theo dõi.</string>

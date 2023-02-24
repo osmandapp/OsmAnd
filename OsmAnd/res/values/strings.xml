@@ -20,8 +20,6 @@
     <string name="shared_string_yards">yards</string>
     <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
     <string name="shared_string_apply_changes">Apply changes</string>
-    <string name="default_tracks_appearance_description">These appearance settings are applied to all tracks selected on the previous screen.\n\nThey are also saved as \"%1$s\" to be applied by %2$s for all other tracks without implicit or specifically set appearance.</string>
-    <string name="default_tracks_appearance">Default track appearance</string>
     <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
     <string name="no_visible_tracks">No tracks on the map</string>
     <string name="recently_visible">Recently visible %1$s</string>

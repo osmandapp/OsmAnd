@@ -23,7 +23,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -33,12 +32,9 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitType;
@@ -67,7 +63,7 @@ import net.osmand.render.RenderingRulesStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ColorPickerListener, InAppPurchaseListener, CopyAppModePrefsListener {
+public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ColorPickerListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -156,8 +152,11 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		Toolbar toolbar = appbar.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
+		String appearance = getString(R.string.change_appearance);
+		String count = String.valueOf(selectedTracksHelper.getSelectedTracks().size());
+
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(R.string.default_tracks_appearance);
+		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_dash, appearance, count));
 		toolbarTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView toolbarSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
@@ -169,10 +168,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		closeButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
 		closeButton.setOnClickListener(v -> dismiss());
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
-
-		String defParam = getString(R.string.shared_string_default);
-		TextView prefsDescription = view.findViewById(R.id.preferences_description);
-		prefsDescription.setText(getString(R.string.default_tracks_appearance_description, defParam, defParam));
 	}
 
 	private void setupCards(@NonNull View view) {
@@ -256,22 +251,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private void setupActions(@NonNull View view) {
 		setupResetButton(view);
-		setupCopyButton(view);
-	}
-
-	private void setupCopyButton(@NonNull View view) {
-		View button = view.findViewById(R.id.button_copy);
-		TextView title = button.findViewById(android.R.id.title);
-		ImageView icon = button.findViewById(android.R.id.icon);
-		title.setText(R.string.copy_from_other_profile);
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_copy, ColorUtilities.getActiveColorId(nightMode)));
-		button.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, true, settings.getApplicationMode());
-			}
-		});
-		AndroidUtils.setBackground(button.findViewById(R.id.selectable_list_item), UiUtilities.getSelectableDrawable(app));
 	}
 
 	private void setupResetButton(@NonNull View view) {
@@ -286,12 +265,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private void resetToDefault() {
 		trackDrawInfo.resetParams(app, null);
-		updateContent();
-	}
-
-	@Override
-	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
-		trackDrawInfo.initDefaultTrackParams(app, appMode);
 		updateContent();
 	}
 
@@ -431,11 +404,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 		settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).set(colorName);
 		settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).set(trackDrawInfo.getWidth());
-
-		settings.DEFAULT_TRACK_COLORING_TYPE.set(trackDrawInfo.getColoringType());
-		settings.DEFAULT_TRACK_ROUTE_INFO_ATTRIBUTE.set(trackDrawInfo.getRouteInfoAttribute());
-		settings.DEFAULT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
-		settings.DEFAULT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 	}
 
 	private void updateTrackAppearance(@NonNull GpxDataItem item) {
