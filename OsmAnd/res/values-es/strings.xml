@@ -5042,10 +5042,6 @@
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
     <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección de movimiento, centro para todas las demás.</string>
-    <string name="default_tracks_appearance_description">Estos ajustes en la apariencia se aplican a todas las pistas seleccionadas en la pantalla anterior.
-\n
-\nTambién se guardan como \"%1$s\" para ser aplicados por %2$s a todas las demás pistas sin apariencia implícita o específicamente configurada.</string>
-    <string name="default_tracks_appearance">Aspecto predeterminado de la pista</string>
     <string name="no_visible_tracks_description">Seleccione las vías para visualizarlas en el mapa.</string>
     <string name="no_visible_tracks">No hay pistas en el mapa</string>
     <string name="recently_visible">Visibles recientemente %1$s</string>

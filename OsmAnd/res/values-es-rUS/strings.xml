@@ -5055,10 +5055,6 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
-    <string name="default_tracks_appearance_description">Estos ajustes de aspecto se aplican a todas las trazas marcadas en la pantalla anterior.
-\n
-\nTambién se guardan como «%1$s» para aplicarse por «%2$s» para todas las demás trazas sin aspecto implícito o específicamente definido.</string>
-    <string name="default_tracks_appearance">Aspecto predefinido de la traza</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
     <string name="recently_visible">Última visible «%1$s»</string>

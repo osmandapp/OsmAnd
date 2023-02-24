@@ -5043,8 +5043,4 @@
     <string name="shared_string_on_map">Sulla mappa</string>
     <string name="shared_string_apply_changes">Applica modifiche</string>
     <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
-    <string name="default_tracks_appearance">Aspetto tracce predefinito</string>
-    <string name="default_tracks_appearance_description">Queste impostazioni dell\'aspetto vengono applicate a tutte le tracce selezionate nella schermata precedente.
-\n
-\nSono anche salvate come \"%1$s\" per essere applicati da %2$s per tutte le altre tracce senza un aspetto implicito o specificatamente impostato.</string>
 </resources>

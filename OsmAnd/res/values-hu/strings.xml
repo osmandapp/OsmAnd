@@ -5040,10 +5040,6 @@
     <string name="shared_string_select_recent">Legutóbbi választása</string>
     <string name="empty_tracks">Nincsenek nyomvonal fájljai.</string>
     <string name="recently_visible">Legutóbb látható %1$s</string>
-    <string name="default_tracks_appearance">Alapértelmezett nyomvonal megjelenés</string>
-    <string name="default_tracks_appearance_description">Ezek a megjelenési beállítások az előző képernyőn kiválasztott összes nyomvonalra vonatkoznak.
-\n
-\nA rendszer továbbá elmenti „%1$s” néven ezeket, hogy a(z) %2$s alkalmazza az összes többi, közvetett vagy konkrét megjelenési beállítás nélküli nyomvonalra.</string>
     <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
     <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
     <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>

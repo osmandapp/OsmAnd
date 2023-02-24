@@ -5108,14 +5108,10 @@
     <string name="last_synchronized">آخر مزامنة</string>
     <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة: الجزء السفلي لاتجاه الحركة ، المركز للبقية.</string>
     <string name="shared_string_apply_changes">أعتماد التغيرات</string>
-    <string name="default_tracks_appearance">مظهر المسار الافتراضي</string>
     <string name="no_visible_tracks_description">حدد المسارات لعرضها على الخريطة.</string>
     <string name="no_visible_tracks">لا توجد مسارات على الخريطة</string>
     <string name="recently_visible">المشاهد مؤخرا %1$s</string>
     <string name="change_default_tracks_appearance_confirmation_description">هل تريد تغيير مظهر مسارات %1$s؟</string>
-    <string name="default_tracks_appearance_description">يتم تطبيق إعدادات المظهر هذه على جميع المسارات المحددة على الشاشة السابقة.
-\n
-\nيتم حفظها أيضًا باسم \"%1$s\" ليتم تطبيقها بواسطة %2$s لجميع المسارات الأخرى بدون مظهر ضمني أو محدد بشكل خاص.</string>
     <string name="empty_tracks_description">يمكنك استيراد أو إنشاء أو تسجيل ملفات المسار باستخدام أوسماند.</string>
     <string name="show_all_tracks">عرض جميع المسارات</string>
     <string name="change_appearance">تغيير المظهر</string>

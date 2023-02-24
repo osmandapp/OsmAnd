@@ -4742,7 +4742,6 @@
     <string name="weather_precip_in">v</string>
     <string name="display_position_automatic_descr">Závisí na orientaci mapy: dole pro směr pohybu, uprostřed pro všechny ostatní.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Změnit vzhled %1$s stop\?</string>
-    <string name="default_tracks_appearance">Výchozí vzhled stopy</string>
     <string name="no_visible_tracks_description">Výběrem stop je zobrazíte na mapě.</string>
     <string name="no_visible_tracks">Žádné stopy na mapě</string>
     <string name="recently_visible">Nedávno viditelné %1$s</string>
@@ -4758,9 +4757,6 @@
 \nNa semaforech, značkách stop, atd. se aplikuje dodatečné zdržení.</string>
     <string name="map_widget_altitude">Nadmořská výška aktuální polohy</string>
     <string name="shared_string_apply_changes">Použít změny</string>
-    <string name="default_tracks_appearance_description">Tato nastavení vzhledu se použijí na všechny stopy vybrané na předchozí obrazovce.
-\n
-\nJsou také uložena jako \"%1$s\", aby je %2$s použil pro všechny ostatní stopy bez implicitně nebo specificky nastaveného vzhledu.</string>
     <string name="av_notes_photo_widget_desc">Klepnutím na widget můžete pořídit fotografii.</string>
     <string name="first_marker_widget_desc">Widget můžete nakonfigurovat tak, aby zobrazoval vzdálenost nebo odhadovaný čas příjezdu do první mapové značky.</string>
     <string name="goods_delivery_desc">Na některých silnicích může být omezen provoz dodávkových vozidel.</string>

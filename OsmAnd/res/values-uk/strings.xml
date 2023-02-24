@@ -5039,10 +5039,6 @@
     <string name="last_synchronized">Востаннє синхронізовано</string>
     <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для напрямку руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
-    <string name="default_tracks_appearance_description">Ці налаштування зовнішнього вигляду застосовуються до всіх треків, вибраних на попередньому екрані.
-\n
-\nВони також зберігаються у файлі «%1$s» для застосування %2$s до всіх інших треків без неявного або спеціально налаштованого зовнішнього вигляду.</string>
-    <string name="default_tracks_appearance">Усталений вигляд треку</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
     <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>

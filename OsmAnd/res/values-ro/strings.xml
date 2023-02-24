@@ -5057,10 +5057,6 @@
     <string name="shared_string_yards">yarzi</string>
     <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul pieselor %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicați modificările</string>
-    <string name="default_tracks_appearance_description">Aceste setări de aspect se aplică tuturor pieselor selectate în ecranul anterior.
-\n
-\nEle sunt, de asemenea, salvate ca \"%1$s\" pentru a fi aplicate de %2$s pentru toate celelalte piste fără aspect implicit sau specificat.</string>
-    <string name="default_tracks_appearance">Aspectul implicit al track-ului</string>
     <string name="no_visible_tracks">Nu există urme pe hartă</string>
     <string name="shared_string_select_recent">Selectați recent</string>
 </resources>

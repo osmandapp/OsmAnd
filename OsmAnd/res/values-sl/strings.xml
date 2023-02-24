@@ -5028,10 +5028,6 @@
     <string name="checking_progress">Preverjanje …</string>
     <string name="last_synchronized">Zadnja sinhronizacija</string>
     <string name="display_position_automatic_descr">Odvisno od usmerjenosti zemljevida: spodnji del za smer gibanja, sredinski del za vse drugo.</string>
-    <string name="default_tracks_appearance_description">Te nastavitve videza se uveljavijo za vse sledi, izbrane na prejšnjem zaslonu.
-\n
-\nPrav tako se shranijo kot »%1$s«, ki jih uporabi %2$s za vse druge sledi brez implicitnega ali posebej nastavljenega videza.</string>
-    <string name="default_tracks_appearance">Privzeti videz za sled</string>
     <string name="no_visible_tracks_description">Izberi sledi, ki jih želiš prikazati na zemljevidu.</string>
     <string name="no_visible_tracks">Na zemljevidu ni sledi</string>
     <string name="recently_visible">Nedavno vidna %1$s</string>

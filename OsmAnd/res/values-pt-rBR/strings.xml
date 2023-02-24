@@ -5045,10 +5045,6 @@
     <string name="recently_visible">Visível recentemente %1$s</string>
     <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência das trilhas %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicar mudanças</string>
-    <string name="default_tracks_appearance_description">Estas configurações de aparência são aplicadas a todas as trilhas selecionadas na tela anterior.
-\n
-\nElas também são salvadas como \"%1$s\" para serem aplicadas por %2$s em todas as outras trilhas sem aparência implícita ou especificamente definida.</string>
-    <string name="default_tracks_appearance">Aparência padrão da trilha</string>
     <string name="no_visible_tracks_description">Selecione as trilhas para exibi-las no mapa.</string>
     <string name="shared_string_kilograms">quilogramas</string>
 </resources>

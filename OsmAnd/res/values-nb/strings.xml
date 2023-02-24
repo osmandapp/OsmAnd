@@ -4899,7 +4899,6 @@
     <string name="shared_string_apply_changes">Bruk endringer</string>
     <string name="no_visible_tracks">Ingen spor på kartet</string>
     <string name="no_visible_tracks_description">Velg spor for å vise dem på kartet.</string>
-    <string name="default_tracks_appearance">Standardutseende for spor</string>
     <string name="empty_tracks">Du har ikke sporfiler.</string>
     <string name="switch_folder">Skift mappe</string>
     <string name="shared_string_on_map">På kart</string>

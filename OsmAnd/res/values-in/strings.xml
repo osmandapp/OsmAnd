@@ -5044,10 +5044,6 @@
     <string name="last_synchronized">Disinkronkan terakhir</string>
     <string name="display_position_automatic_descr">Tergantung pada orientasi Peta: bagian bawah untuk arah pergerakan, bagian tengah untuk yang lainnya.</string>
     <string name="shared_string_apply_changes">Terapkan perubahan</string>
-    <string name="default_tracks_appearance_description">Pengaturan penampilan ini diterapkan ke semua trek yang dipilih pada layar sebelumnya.
-\n
-\nPengaturan ini juga disimpan sebagai \"%1$s\" untuk diterapkan oleh %2$s untuk semua trek lain tanpa tampilan implisit atau yang diatur secara khusus.</string>
-    <string name="default_tracks_appearance">Tampilan trek bawaan</string>
     <string name="no_visible_tracks_description">Pilih trek untuk ditampilkan di peta.</string>
     <string name="no_visible_tracks">Tidak ada trek di peta</string>
     <string name="recently_visible">Terlihat terkini %1$s</string>
