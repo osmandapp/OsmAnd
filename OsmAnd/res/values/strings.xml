@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="approximate_bearing">Approximate Bearing</string>
+    <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
+
     <string name="shared_string_inches">inches</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>
