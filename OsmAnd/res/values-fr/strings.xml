@@ -1105,7 +1105,7 @@
     <string name="routing_attr_avoid_ferries_description">Éviter les traversées en ferries</string>
     <string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
     <string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
-    <string name="routing_attr_weight_name">Limite de poids</string>
+    <string name="routing_attr_weight_name">Poids</string>
     <string name="routing_attr_weight_description">Indiquez le poids du véhicule à respecter sur les routes.</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définissez l\'arrivée</string>
@@ -1524,7 +1524,7 @@
     <string name="application_dir_change_warning3">Déplacer les fichiers de données vers la nouvelle destination \?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières</string>
-    <string name="routing_attr_height_name">Limite de hauteur</string>
+    <string name="routing_attr_height_name">Hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter sur les routes.</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
     <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
@@ -3182,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrême</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Non défini</string>
     <string name="routeInfo_piste_difficulty_name">Difficulté de la piste</string>
-    <string name="routing_attr_width_name">Limite de largeur</string>
+    <string name="routing_attr_width_name">Largeur</string>
     <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
@@ -3661,7 +3661,7 @@
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
     <string name="routing_attr_length_description">Indiquez la longueur du véhicule autorisée sur les routes.</string>
-    <string name="routing_attr_length_name">Limite de longueur</string>
+    <string name="routing_attr_length_name">Longueur</string>
     <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
@@ -3946,7 +3946,7 @@
     <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
-    <string name="announcement_time_title">Délai de l\'annonce</string>
+    <string name="announcement_time_title">Heure d\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Vélo tout terrain</string>
