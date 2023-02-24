@@ -2474,7 +2474,7 @@
     <string name="make_active">Activar</string>
     <string name="today">Hoy</string>
     <string name="yesterday">Ayer</string>
-    <string name="last_seven_days">Últimos 7 días</string>
+    <string name="last_seven_days">Últimos siete días</string>
     <string name="this_year">Este año</string>
     <string name="show_guide_line">Mostrar líneas direccionales</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
@@ -4269,9 +4269,9 @@
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
     <string name="clear_all_history">Vaciar todo el historial</string>
     <string name="history_actions_descr">Puedes exportar el historial a un archivo.</string>
-    <string name="map_markers_history">Historial de los marcadores del mapa</string>
+    <string name="map_markers_history">Historial de los marcadores de los mapa</string>
     <string name="navigation_history">Historial de navegación</string>
-    <string name="history_preferences_descr">Puedes desactivar el registro del historial individualmente para cada tipo de historial.</string>
+    <string name="history_preferences_descr">Puede deshabilitar el registro individualmente para cada tipo de registro.</string>
     <string name="shortcut_start_recording">Iniciar grabación</string>
     <string name="shortcut_navigate_to">Navegar a…</string>
     <string name="shortcut_navigate_to_work">Navegar a «Trabajo»</string>
