@@ -2474,7 +2474,7 @@
     <string name="shared_string_groups">Grupper</string>
     <string name="today">I dag</string>
     <string name="yesterday">I går</string>
-    <string name="last_seven_days">Sidste 7 dage</string>
+    <string name="last_seven_days">Seneste 7 dage</string>
     <string name="this_year">I år</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
@@ -4349,7 +4349,7 @@
     <string name="clear_all_history">Ryd al historik</string>
     <string name="history_actions_descr">Du kan eksportere historik til en fil.</string>
     <string name="navigation_history">Navigationshistorik</string>
-    <string name="history_preferences_descr">Du kan deaktivere historiklogning individuelt for hver historiktype.</string>
+    <string name="history_preferences_descr">Du kan deaktivere logning af historik individuelt for hver historiktype.</string>
     <string name="shortcut_start_recording">Start optagelse</string>
     <string name="shortcut_navigate_to">Naviger til…</string>
     <string name="transparent_status_bar_descr">Vis kort under statuslinjen</string>
