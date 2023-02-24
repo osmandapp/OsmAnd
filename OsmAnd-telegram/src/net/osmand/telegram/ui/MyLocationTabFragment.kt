@@ -457,7 +457,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			duration = 200
 			playTogether(cornerAnimator, marginAnimator)
 			addListener(object : AnimatorListenerAdapter() {
-				override fun onAnimationEnd(animation: Animator?) {
+				override fun onAnimationEnd(animation: Animator) {
 					updateTitleTextColor()
 					if (appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
 						appBarLayout.outlineProvider = appBarOutlineProvider
