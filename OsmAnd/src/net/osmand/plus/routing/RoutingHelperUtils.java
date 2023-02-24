@@ -116,9 +116,11 @@ public class RoutingHelperUtils {
 	public static boolean checkWrongMovementDirection(Location currentLocation, Location prevRouteLocation, Location nextRouteLocation) {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
-		if (currentLocation.hasBearing() && nextRouteLocation != null && prevRouteLocation != null) {
+		if (currentLocation.hasBearing() && nextRouteLocation != null) {
 			float bearingMotion = currentLocation.getBearing();
-			float bearingToRoute = prevRouteLocation.bearingTo(nextRouteLocation);
+			float bearingToRoute = prevRouteLocation != null
+					? prevRouteLocation.bearingTo(nextRouteLocation)
+					: currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			if (Math.abs(diff) > 60f) {
 				// require delay interval since first detection, to avoid false positive
