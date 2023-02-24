@@ -3946,7 +3946,7 @@
     <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
-    <string name="announcement_time_title">Heure d\'annonce</string>
+    <string name="announcement_time_title">Date de l\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Vélo tout terrain</string>
