@@ -1,5 +1,8 @@
 package net.osmand.plus.download;
 
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXFile;
@@ -167,6 +170,14 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 	public String getFileName() {
 		return fileName;
 	}
+
+	public String getFileNameWithoutRoadSuffix() {
+		if (fileName.endsWith(BINARY_ROAD_MAP_INDEX_EXT)) {
+			return fileName.substring(0, fileName.lastIndexOf(BINARY_ROAD_MAP_INDEX_EXT)) + BINARY_MAP_INDEX_EXT;
+		}
+		return fileName;
+	}
+
 
 	public String getBaseName() {
 		return type.getBasename(this);

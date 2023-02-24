@@ -4719,7 +4719,7 @@
     <string name="routing_attr_motor_type_description">Selecione o tipo de combustível do seu motor, isto é necessário para estimar a emissão de CO2.</string>
     <string name="lang_ckb">Curdo central</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa são feitas diariamente.</string>
-    <string name="routing_attr_motor_type_name">Combustível usado pelo motor</string>
+    <string name="routing_attr_motor_type_name">Combustível do veículo</string>
     <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
     <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
     <string name="download_complete">Descarregamento concluído</string>
@@ -4776,7 +4776,7 @@
     <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>
     <string name="favorite_delete_group">Eliminar grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
-    <string name="display_position">Posição do ecrã</string>
+    <string name="display_position">Posição</string>
     <string name="shared_string_normal">Normal</string>
     <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
@@ -5042,5 +5042,23 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_descr">A predefinição é \'Automático\', sendo \'Inferior\' para a orientação do mapa \'Direção do movimento\' e \'Centro\' em todos os outros casos.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="default_tracks_appearance_description">Estas configurações de aparência são aplicadas a todos os trilhos selecionados no ecrã anterior.
+\n
+\nElas também são guardadas como \"%1$s\" para serem aplicadas por %2$s em todos os outros trilhos sem aparência implícita ou especificamente definida.</string>
+    <string name="shared_string_select_recent">Selecionar recente</string>
+    <string name="change_appearance">Alterar aparência</string>
+    <string name="shared_string_kilograms">quilogramas</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência dos trilhos %1$s\?</string>
+    <string name="shared_string_apply_changes">Aplicar alterações</string>
+    <string name="shared_string_yards">jardas</string>
+    <string name="default_tracks_appearance">Aparência predefinida de trilho</string>
+    <string name="no_visible_tracks_description">Selecione os trilhos a mostrar no mapa.</string>
+    <string name="no_visible_tracks">Nenhum trilho no mapa</string>
+    <string name="recently_visible">Visível recentemente %1$s</string>
+    <string name="empty_tracks_description">Pode importar, criar ou gravar ficheiros de trilhos usando o OsmAnd.</string>
+    <string name="switch_folder">Alternar pasta</string>
+    <string name="show_all_tracks">Mostrar todos os trilhos</string>
+    <string name="shared_string_on_map">No mapa</string>
+    <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
 </resources>

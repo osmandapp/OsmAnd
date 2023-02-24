@@ -48,7 +48,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
-import net.osmand.plus.myplaces.ui.GpxInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -491,7 +491,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, items ->
 										sendGPXFiles(activity, f,
-												items.toArray(new GpxInfo[0])));
+												items.toArray(new GPXInfo[0])));
 						return true;
 					}));
 		}
@@ -528,7 +528,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(FragmentActivity activity, Fragment fragment, GpxInfo... info) {
+	public boolean sendGPXFiles(FragmentActivity activity, Fragment fragment, GPXInfo... info) {
 		String name = OSM_USER_NAME_OR_EMAIL.get();
 		String pwd = OSM_USER_PASSWORD.get();
 		String authToken = OSM_USER_ACCESS_TOKEN.get();

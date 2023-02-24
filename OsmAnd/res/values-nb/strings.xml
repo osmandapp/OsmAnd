@@ -4893,7 +4893,18 @@
     <string name="sound_beep_minimal">Lydsignal: minimalt</string>
     <string name="sound_beep_complex_loud">Lydsignal: komplekst, høyt</string>
     <string name="last_synchronized">Sist synkronisert</string>
-    <string name="display_position_descr">Standardinnstillingen er \'Automatisk\' som er \'Nederst\' for kartorienteringen \'Bevegelsesretning\' og \'Senter\' i alle andre tilfeller.</string>
     <string name="share_link">Del lenke</string>
     <string name="share_as_file">Del som fil</string>
+    <string name="display_position_automatic_descr">Avhenger av kartorientering: nederst for bevegelsesretning, senter for alle andre.</string>
+    <string name="shared_string_apply_changes">Bruk endringer</string>
+    <string name="no_visible_tracks">Ingen spor på kartet</string>
+    <string name="no_visible_tracks_description">Velg spor for å vise dem på kartet.</string>
+    <string name="default_tracks_appearance">Standardutseende for spor</string>
+    <string name="empty_tracks">Du har ikke sporfiler.</string>
+    <string name="switch_folder">Skift mappe</string>
+    <string name="shared_string_on_map">På kart</string>
+    <string name="show_all_tracks">Vis alle spor</string>
+    <string name="change_appearance">Endre utseende</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="empty_tracks_description">Du kan importere, opprette eller ta opp sporfiler ved bruk av OsmAnd.</string>
 </resources>

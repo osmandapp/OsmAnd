@@ -1532,7 +1532,7 @@
     <string name="lang_als">阿尔巴尼亚语 (Tosk)</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">%1$s 地图已准备就绪，可以使用。</string>
-    <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变。</string>
+    <string name="simulate_initial_startup_descr">设置指示应用程序首次启动的标志，保持所有其他设置不变。</string>
     <string name="favorite_category_dublicate_message">请使用尚不存在的类别名称。</string>
     <string name="shared_string_trip_recording">行程记录</string>
     <string name="download_live_updates">实时更新</string>
@@ -1600,20 +1600,22 @@
 \n
 \n地图图砖可以直接透过在线数据源获得，或者可以使用准备好的脱机地图（手动复制到 OsmAnd 的数据文件夹中） 作为一个 SQLite 数据库，可以透过各种的第三方地图编制工具产生。</string>
     <string name="record_plugin_name">旅行记录</string>
-    <string name="record_plugin_description">允许您记录、保存和分析您的训练或运动数据，例如速度、上升、下降或路线缓解，然后可以重复使用、改进、补充或与朋友分享。
+    <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
-\n功能介绍 - https://osmand.net/docs/user/plugins/trip-recording</string>
-    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估地表的形状，考虑曲率、极端、陡峭、等高点等。地图上的地形信息可以通过坡度阴影、用于上下山的等高线以及坡度角偏离平面的颜色来表示。来自 SRTM 和 ASTER 的数据。
+\n详情可见 https://osmand.net/docs/user/plugins/trip-recording 。</string>
+    <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过坡度阴影、等高线以及坡度角颜色来表示。
 \n
-\n如何使用 - http://osmand.net/docs/user/plugins/contour-lines</string>
+\n底层数据来自 SRTM 和 ASTER。
+\n
+\n详情可见 http://osmand.net/docs/user/plugins/contour-lines 。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">在旅途中使用地图按钮或位置上下文菜单进行音频/照片/视频注记。</string>
     <string name="osmand_parking_plugin_description">启用此选项可在地图上设置您的汽车停在街上的点，并在停车时间开始时通知您的日历。插件有助于跟踪停车时间和汽车位置。要放置标记，请在地图上选择一个地点，然后转到“操作”并按“添加停车地点”。</string>
     <string name="osmand_distance_planning_plugin_description">点击地图创建路径，或使用或修改现有的 GPX 文件，计划旅程和测量点之间的距离。结果可以保存为 GPX 文件，以后可以用于导航。</string>
-    <string name="osm_editing_plugin_description">允许您为 OpenStreetMap 做出贡献，OpenStreetMap 是一个全球社区，旨在创建全面的世界地图并为每个用户提供最新的开源数据。
+    <string name="osm_editing_plugin_description">向由全球社区所维护的综合性地图 OpenStreetMap 做出贡献，并为每个用户提供最新的开源数据。
 \n
-\n您可以在网站上找到有关如何编辑地图的说明 https://osmand.net/docs/user/plugins/osm-editing</string>
+\n您可以在我们的网站上找到有关如何编辑地图的说明 https://osmand.net/docs/user/plugins/osm-editing 。</string>
     <string name="osmand_development_plugin_description">开发和调试功能的设置，如导航模拟、渲染性能或语音提示。适用于开发人员，正常应用使用时不需要。</string>
     <string name="rename_failed">重命名失败。</string>
     <string name="days_behind">天前</string>
@@ -1704,7 +1706,7 @@
 \n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="plugin_nautical_descr">打开以丰富您的地图，其中包含有关航行路线、导航灯、危险区域、允许或禁止航行或停靠的区域等信息。如要使用，下载航海地图并在配置地图中启用“航海地图”类型。
 \n
-\n如何使用 - https://osmand.net/docs/user/plugins/nautical-charts</string>
+\n详情可见 https://osmand.net/docs/user/plugins/nautical-charts 。</string>
     <string name="plugin_ski_descr">设计用于在冬季运动地点导航。观看滑雪道、滑雪缆车标记和彩色线条，指示每条轨道的复杂性。要在启用后使用，请转到配置地图并选择“冬季和滑雪”地图类型。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -1778,7 +1780,7 @@
     <string name="int_days">天</string>
     <string name="osmo_connect_menu">连接</string>
     <string name="use_points_as_intermediates">计算两点之间的路线</string>
-    <string name="always_center_position_on_map">总是在中心显示位置</string>
+    <string name="always_center_position_on_map">总是在中心显置位置</string>
     <string name="misc_pref_title">杂项</string>
     <string name="localization_pref_title">本地化</string>
     <string name="index_item_nation_addresses">全国范围内的地址</string>
@@ -3430,7 +3432,9 @@
     <string name="height_limit_description">提供你的车辆高度，较高的车辆可能会受到一些路线限制。</string>
     <string name="weight_limit_description">提供你的车辆重量，较重的车辆可能会受到一些路线限制。</string>
     <string name="lenght_limit_description">提供你的车辆长度，较长的车辆可能会受到一些路线限制。</string>
-    <string name="gpx_parse_error">OsmAnd GPX 格式不正确，请联系支持团队进一步调查。</string>
+    <string name="gpx_parse_error">GPX 文件存在问题。
+\n
+\n您可联系 OsmAnd 支持进一步排查。</string>
     <string name="simplified_track_description">只有路线线会被保存，路点会被删除。</string>
     <string name="shared_string_file_name">文件名</string>
     <string name="months_3">三个月</string>
@@ -3503,7 +3507,7 @@
 \n所有未保存的数据都将丢失。</string>
     <string name="on_pause">暂停中</string>
     <string name="app_restart_required">程序需要重新启动以应用某些设置。</string>
-    <string name="routing_attr_height_obstacles_description">路线可以避开陡上坡。</string>
+    <string name="routing_attr_height_obstacles_description">预计行程时间将反映海拔影响。路线偏好有助于避免陡峭的上坡：</string>
     <string name="quick_action_coordinates_widget_descr">显示或隐藏地图上坐标小部件的开关。</string>
     <string name="map_widget_distance_by_tap">点击测距</string>
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
@@ -3545,8 +3549,8 @@
     <string name="select_track_file">选择轨迹文件</string>
     <string name="wiki_menu_download_descr">需要其他地图才能在地图上查看维基百科兴趣点。</string>
     <string name="quick_action_switch_profile_descr">操作按钮在选定的配置文件之间切换。</string>
-    <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot格式</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ格式</string>
     <string name="external_input_device">外部输入设备</string>
     <string name="sort_by_category">按类别排序</string>
     <string name="navigate_point_mgrs">MGRS</string>
@@ -3696,7 +3700,7 @@
     <string name="backup_version_history_removed">所有的版本历史已经被删除。</string>
     <string name="backup_data_removed">所有数据已被删除。</string>
     <string name="shared_string_progress">进度</string>
-    <string name="backup_do_not_have_any">你还没有在线备份。</string>
+    <string name="backup_do_not_have_any">你没有任何在线备份</string>
     <string name="backup_dont_have_any_descr">安排自动备份，永不丢失数据。</string>
     <string name="backup_welcome_back">欢迎回来！</string>
     <string name="backup_welcome_back_descr">使用现有的备份恢复该设备上的数据，或将数据备份到 OsmAnd 云。</string>
@@ -4569,25 +4573,29 @@
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
     <string name="purchases_feature_desc_external_sensors">显示和记录来自外部传感器的数据：自行车速度、自行车功率、踏频和心率。</string>
-    <string name="release_4_3">- 新的、更快的第 2 版（OpenGL）地图渲染引擎，带有2.5D视图
+    <string name="release_4_3">• 新的、更快的第 2 版（OpenGL）地图渲染引擎，带有2.5D视图
 \n
-\n - 运动中位置变化的平滑动画
+\n • 运动中位置变化的平滑动画
 \n
-\n - 为地图中心坐标和地理位置的高程提供新的小部件
+\n • 为地图中心坐标和地理位置的高程提供新的小部件
 \n
-\n - \"点击测距\"：增加了文字大小的选项
+\n • \"点击测距\"：增加了文字大小的选项
 \n
-\n - \"地图标记 \"小组件：增加了改变点击行为的选项
+\n • \"地图标记 \"小组件：增加了改变点击行为的选项
 \n
-\n - 修正了 \"显示位置 \"选项
+\n • 修正了 \"位置显置\"选项
 \n
-\n - GPX：增加了对 \"link\"、\"cmt\"、\"desc \"标签和任何自定义扩展的支持
+\n • GPX：增加了对 \"link\"、\"cmt\"、\"desc \"标签和任何自定义扩展的支持
 \n
-\n - 重新组织了 \"航海地图 \"列表
+\n • 重新组织了 \"航海地图 \"列表
 \n
-\n - 增加了对ANT+传感器的支持
+\n • 增加了对ANT+传感器的支持
 \n
-\n - 增加了禁止下载UUID的选项
+\n • 增加了禁止下载UUID的选项
+\n
+\n • 默认速度可调预测依赖于海拔的步行/远足/跑步旅行时间
+\n
+\n • 修复了音频输出和音量滑块行为
 \n
 \n</string>
     <string name="map_widget_altitude_map_center_desc">显示当前地图中心的海拔高度。</string>
@@ -4607,7 +4615,7 @@
     <string name="nautical_depth_points">航海深度点</string>
     <string name="depth_contours">等深线</string>
     <string name="map_widget_target_distance_desc">显示摄像机与目标位置间的距离。</string>
-    <string name="map_widget_camera_distance_desc">小工具显示相机在地面以上的标高。</string>
+    <string name="map_widget_camera_distance_desc">显示相机在地面以上的仰角。</string>
     <string name="map_widget_ant_bicycle_speed">自行车速度</string>
     <string name="map_widget_ant_bicycle_speed_desc">显示行驶速度</string>
     <string name="waypoint_template">航点模板</string>
@@ -4627,14 +4635,14 @@
     <string name="on_with_params">%1$s 鱼%2$s</string>
     <string name="rendering_value_omit_name">忽略</string>
     <string name="shared_string_used">已使用</string>
-    <string name="quick_action_map_center_widget_descr">显示或隐藏地图上的地图中心工具的切换。</string>
-    <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置小工具的切换。</string>
+    <string name="quick_action_map_center_widget_descr">显示或隐藏地图上的地图中心工具。</string>
+    <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置的小工具。</string>
     <string name="distance_by_tap_use_description">轻按地图查看您当前位置与点击点之间的距离。
 \n用两根手指在地图上同时轻按以查看单击点之间的距离</string>
     <string name="shared_string_2_5_d_view">2.5D 视图</string>
     <string name="calculating_altitude">正在计算海拔</string>
     <string name="shared_string_speed">速度</string>
-    <string name="map_widget_camera_tilt_desc">小工具显示透视模式下的相机倾斜角度。默认为90°（无倾斜）。</string>
+    <string name="map_widget_camera_tilt_desc">显示透视模式下的相机倾斜角度。默认为90°（无倾斜）。</string>
     <string name="shared_string_not_used">未使用</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 标签</string>
@@ -4792,7 +4800,7 @@
     <string name="shared_string_layers">图层</string>
     <string name="empty_screen_weather_contours">打开以查看地图上的天气等值线。</string>
     <string name="empty_screen_weather_precipitation_layer">打开以在地图上查看降水图层。</string>
-    <string name="weather_prefs_descr">24小时和7天预报，每3小时更新</string>
+    <string name="weather_prefs_descr">24小时 x 7天 的预报，每3小时更新</string>
     <string name="empty_screen_weather_temperature_layer">打开以在地图上查看温度图层。</string>
     <string name="weather_pressure_hectopascals">百帕斯卡</string>
     <string name="weather_pressure_inches_of_mercury">英寸汞柱</string>
@@ -4880,7 +4888,7 @@
     <string name="restart_now">立即重启</string>
     <string name="map_rendering_engine_v1">版本 1</string>
     <string name="weather_plugin_description">提供
-\n- 24小时和7天的天气预报，包括5个图层
+\n- 24小时 x 7天 的天气预报，包括5个图层
 \n- 基于位置的小工具
 \n- 等温线/等压线
 \n
@@ -4917,4 +4925,6 @@
     <string name="si_nm_ft">海里/英尺</string>
     <string name="share_link">分享链接</string>
     <string name="weight_limit_error">最小值是\"%1$s \"吨。如果车辆重量小于最小值，则使用\"%2$s \"配置文件。</string>
+    <string name="rendering_attr_depthContourWidth_name">线宽度</string>
+    <string name="rendering_attr_depthContourColorScheme_name">线条配色方案</string>
 </resources>

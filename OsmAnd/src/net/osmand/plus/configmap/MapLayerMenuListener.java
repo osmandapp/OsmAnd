@@ -5,72 +5,43 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
 
 final class MapLayerMenuListener extends OnRowItemClick {
 
 	private final MapActivity mapActivity;
 	private final TransportLinesMenu transportLinesMenu;
 
-	MapLayerMenuListener(MapActivity mapActivity) {
+	MapLayerMenuListener(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.transportLinesMenu = new TransportLinesMenu(mapActivity.getMyApplication());
 	}
 
-	@NonNull
-	private List<String> getAlreadySelectedGpx() {
-		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
-		List<SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
-		List<String> files = GpxUiHelper.getSelectedTrackPaths(mapActivity.getMyApplication());
-		if (selectedGpxFiles.isEmpty()) {
-			Map<GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
-			for (Map.Entry<GPXFile, Long> f : fls.entrySet()) {
-				if (!Algorithms.isEmpty(f.getKey().path)) {
-					File file = new File(f.getKey().path);
-					if (file.exists() && !file.isDirectory()) {
-						files.add(f.getKey().path);
-					}
-				}
-			}
-		}
-		return files;
-	}
-
 	@Override
-	public boolean onRowItemClick(@NotNull OnDataChangeUiAdapter uiAdapter,
-	                              @NotNull View view, ContextMenuItem item) {
+	public boolean onRowItemClick(@NotNull OnDataChangeUiAdapter uiAdapter, @NotNull View view, @NotNull ContextMenuItem item) {
 		int itemId = item.getTitleId();
 		if (itemId == R.string.layer_poi) {
 			showPoiFilterDialog(uiAdapter, item);
 			return false;
-		} else if (itemId == R.string.layer_gpx_layer && item.getSelected()) {
-			showGpxSelectionDialog(uiAdapter, item);
+		} else if (itemId == R.string.layer_gpx_layer) {
+			TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);
@@ -89,7 +60,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 	}
 
 	@Override
-	public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+	public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
+	                                  @NotNull ContextMenuItem item, boolean isChecked) {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
 		if (item.getSelected() != null) {
@@ -114,7 +86,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
 			} else {
-				showGpxSelectionDialog(uiAdapter, item);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = transportLinesMenu.isShowAnyTransport();
@@ -124,50 +96,40 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.layer_map) {
 			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
-			} else {
+			} else if (uiAdapter != null) {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);
 			}
 			return false;
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
 		}
-		uiAdapter.onDataSetChanged();
+		if (uiAdapter != null) {
+			uiAdapter.onDataSetChanged();
+		}
 		mapActivity.updateLayers();
 		mapActivity.refreshMap();
 		return false;
 	}
 
-	private void showGpxSelectionDialog(OnDataChangeUiAdapter uiAdapter, ContextMenuItem item) {
-		MapLayers layers = mapActivity.getMapLayers();
-		AlertDialog dialog = layers.showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
-		dialog.setOnDismissListener(dlg -> {
-			OsmandApplication app = mapActivity.getMyApplication();
-			boolean selected = app.getSelectedGpxHelper().isAnyGpxFileSelected();
-			item.setSelected(selected);
-			item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			uiAdapter.onDataSetChanged();
-		});
-	}
-
-	protected void showPoiFilterDialog(OnDataChangeUiAdapter uiAdapter,
-	                                   ContextMenuItem item) {
+	private void showPoiFilterDialog(@Nullable OnDataChangeUiAdapter uiAdapter, @NonNull ContextMenuItem item) {
 		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
 		PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
-		MapLayers.DismissListener dismissListener =
-				() -> {
-					PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
-					boolean selected = pf.isShowingAnyPoi(wiki);
-					item.setSelected(selected);
-					item.setDescription(pf.getSelectedPoiFiltersName(wiki));
-					item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					uiAdapter.onDataSetChanged();
-				};
+		MapLayers.DismissListener dismissListener = () -> {
+			PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
+			boolean selected = pf.isShowingAnyPoi(wiki);
+			item.setSelected(selected);
+			item.setDescription(pf.getSelectedPoiFiltersName(wiki));
+			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			if (uiAdapter != null) {
+				uiAdapter.onDataSetChanged();
+			}
+		};
+		MapLayers mapLayers = mapActivity.getMapLayers();
 		boolean isMultiChoice = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
 		if (isMultiChoice) {
-			mapActivity.getMapLayers().showMultiChoicePoiFilterDialog(mapActivity, dismissListener);
+			mapLayers.showMultiChoicePoiFilterDialog(mapActivity, dismissListener);
 		} else {
-			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity, dismissListener);
+			mapLayers.showSingleChoicePoiFilterDialog(mapActivity, dismissListener);
 		}
 	}
 }

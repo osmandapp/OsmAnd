@@ -53,7 +53,7 @@ public class TrackColoringCard extends MapBaseCard {
 	private final List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-	                         @NonNull SelectedGpxFile selectedGpxFile,
+	                         @Nullable SelectedGpxFile selectedGpxFile,
 	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
@@ -108,7 +108,7 @@ public class TrackColoringCard extends MapBaseCard {
 			if (coloringType.isRouteInfoAttribute()) {
 				continue;
 			}
-			boolean isAvailable = coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null);
+			boolean isAvailable = selectedGpxFile == null || coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null);
 			staticItems.add(new TrackAppearanceItem(coloringType.getName(null),
 					coloringType.getHumanString(app, null),
 					coloringType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
@@ -124,7 +124,7 @@ public class TrackColoringCard extends MapBaseCard {
 				.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
 
 		for (String attribute : attributes) {
-			boolean isAvailable = ATTRIBUTE.isAvailableForDrawingTrack(app, selectedGpxFile, attribute);
+			boolean isAvailable = selectedGpxFile == null || ATTRIBUTE.isAvailableForDrawingTrack(app, selectedGpxFile, attribute);
 			String property = attribute.replace(RouteStatisticsHelper.ROUTE_INFO_PREFIX, "");
 			routeInfoAttributes.add(new TrackAppearanceItem(attribute,
 					AndroidUtils.getStringRouteInfoPropertyValue(app, property),
@@ -132,6 +132,10 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 
 		return routeInfoAttributes;
+	}
+
+	public void resetSelectedAppearanceItem() {
+		selectedAppearanceItem = null;
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {

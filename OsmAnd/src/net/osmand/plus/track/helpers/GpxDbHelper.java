@@ -6,14 +6,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.IndexConstants;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 
@@ -308,13 +306,14 @@ public class GpxDbHelper {
 
 		@Override
 		protected void onProgressUpdate(GpxDataItem... values) {
-			GpxDataItem item = values[0];
-			GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
-			if (callback != null) {
-				if (callback.isCancelled()) {
-					stopReading();
-				} else {
-					callback.onGpxDataItemReady(item);
+			for (GpxDataItem item : values) {
+				GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
+				if (callback != null) {
+					if (callback.isCancelled()) {
+						stopReading();
+					} else {
+						callback.onGpxDataItemReady(item);
+					}
 				}
 			}
 		}

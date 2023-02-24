@@ -5,6 +5,8 @@
     <!-- <string name="app_edition"></string> -->
     <!-- string name="app_version_suffix"></string -->
 
+    <string name="app_store_name">OsmAnd - Offline Maps and GPS Navigation</string>
+    
     <!-- Not translatable -->
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>

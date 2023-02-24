@@ -369,7 +369,7 @@
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS, foretrukket)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
-    <string name="fav_export_confirmation">Fil med tidligere eksporterede Favoritter eksisterer allerede. Overskriv?</string>
+    <string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv\?</string>
     <string name="profile_settings">Profilspecifikke indstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
@@ -1068,7 +1068,7 @@
     <string name="routing_attr_avoid_ferries_description">Undgår færger</string>
     <string name="routing_attr_avoid_motorway_name">Ingen motorveje</string>
     <string name="routing_attr_avoid_motorway_description">Undgår motorveje</string>
-    <string name="routing_attr_weight_name">Vægtgrænse</string>
+    <string name="routing_attr_weight_name">Vægt</string>
     <string name="routing_attr_weight_description">Angiv tilladt vægtgrænsen for køretøj på ruter.</string>
     <string name="route_info">Ruteinfo</string>
     <string name="select_gpx">Vælg GPX…</string>
@@ -1440,7 +1440,7 @@
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Importer</string>
-    <string name="shared_string_export">Eksporter</string>
+    <string name="shared_string_export">Eksportér</string>
     <string name="shared_string_more">Mere…</string>
     <string name="shared_string_more_actions">Flere handlinger</string>
     <string name="shared_string_do_not_show_again">Vis ikke igen</string>
@@ -1531,7 +1531,7 @@
     <string name="application_dir_change_warning3">Flyt datafilerne til den nye placering\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgår at krydse nationale grænser</string>
-    <string name="routing_attr_height_name">Højdegrænse</string>
+    <string name="routing_attr_height_name">Højde</string>
     <string name="routing_attr_height_description">Angiv køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">Genberegner kun den første del af ruten. Nyttig til lange ture.</string>
@@ -1583,7 +1583,7 @@
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="restart_is_required">Der er behov for en genstart for at anvende ændringen.</string>
+    <string name="restart_is_required">En genstart er påkrævet for at anvende ændringen.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-bredde</string>
     <string name="rendering_value_red_name">Rød</string>
@@ -2498,7 +2498,7 @@
     <string name="plan_route">Planlæg en rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
+    <string name="marker_save_as_track_descr">Eksportér markører til følgende GPX-fil:</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil være væk efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
@@ -2610,7 +2610,7 @@
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Eksporte som OSM-noter, IP\'er, eller begge dele.</string>
+    <string name="osm_edits_export_desc">Eksportér som OSM-noter, IP\'er, eller begge dele.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
@@ -3189,7 +3189,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstrem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ikke defineret</string>
     <string name="routeInfo_piste_difficulty_name">Pistesværhedsgrad</string>
-    <string name="routing_attr_width_name">Breddegrænse</string>
+    <string name="routing_attr_width_name">Bredde</string>
     <string name="routing_attr_width_description">Angiv tilladt køretøjsbredde på ruter.</string>
     <string name="avoid_in_routing_descr_">Undgå visse ruter og vejtyper</string>
     <string name="app_mode_utv">Side om side</string>
@@ -3246,7 +3246,7 @@
     <string name="rendering_value_white_name">Hvid</string>
     <string name="tts_initialization_error">Tekst-til-tale-programmet kan ikke startes.</string>
     <string name="simulate_your_location_gpx_descr">Simuler positionen ved hjælp af et optaget GPX-spor.</string>
-    <string name="export_profile">Eksporter profil</string>
+    <string name="export_profile">Eksportér profil</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' findes allerede. Overskriv\?</string>
     <string name="export_profile_failed">Profilen kunne ikke eksporteres.</string>
@@ -3664,7 +3664,7 @@
     <string name="start_finish_icons">Start- og slutikoner</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
-    <string name="routing_attr_length_name">Længdegrænse</string>
+    <string name="routing_attr_length_name">Længde</string>
     <string name="contour_lines_thanks">Tak for køb af \'Højdekurver\'</string>
     <string name="osm_live_payment_desc_hw">Abonnementet er opkrævet pr. den valgte periode. Annuller det til enhver tid i dit AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Undgå gangstier</string>
@@ -3769,7 +3769,7 @@
     <string name="activity_type_walking_name">Gå</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
-    <string name="announcement_time_title">Meddelelsestid</string>
+    <string name="announcement_time_title">Meddelelsestidspunkt</string>
     <string name="show_track_on_map">Vis spor på kort</string>
     <string name="routing_engine_vehicle_type_hiking">Vandring</string>
     <string name="routing_engine_vehicle_type_cycling_road">Landevejscykling</string>
@@ -3816,9 +3816,9 @@
     <string name="track_has_no_altitude">Sporet indeholder ikke højdedata.</string>
     <string name="track_has_no_speed">Sporet indeholder ikke hastighedsdata.</string>
     <string name="select_another_colorization">Vælg venligst en anden type farvelægning.</string>
-    <string name="exit_number">Udgangsnummer</string>
-    <string name="announce_when_exceeded">Meddelelse ved overskridelse</string>
-    <string name="user_points">Bruger points</string>
+    <string name="exit_number">Afkørselsnummer</string>
+    <string name="announce_when_exceeded">Meddel, når overskredet</string>
+    <string name="user_points">Brugerpunkter</string>
     <string name="output">Resultat</string>
     <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af højdeprofil.</string>
     <string name="shared_string_min_height">Min. højde</string>
@@ -3832,12 +3832,12 @@
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="change_folder">Skift mappe</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_approach">Tilgang</string>
+    <string name="announcement_time_approach">Nærme sig</string>
     <string name="announcement_time_prepare_long">Lang forberedelse</string>
     <string name="announcement_time_prepare">Forbered</string>
     <string name="announcement_time_arrive">Ankomst til destinationen</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
+    <string name="announcement_time_intervals">Tids- og distanceintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Højdekurver</string>
     <string name="activity_type_racing_name">Racerkørsel</string>
@@ -3897,7 +3897,7 @@
     <string name="edit_track">Rediger spor</string>
     <string name="rename_track">Omdøb spor</string>
     <string name="announcement_time_off_route">Uden for ruten</string>
-    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardnavigationshastigheden.</string>
+    <string name="announcement_time_descr">Tidspunktet for de forskellige stemmeprompter afhænger af prompttypen, den aktuelle navigationshastighed og standardhastigheden for navigation.</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
     <string name="profile_type_user_string">Brugerprofil</string>
     <string name="reverse_all_points">Vend alle punkter</string>
@@ -5022,7 +5022,7 @@
     <string name="new_file">Ny fil</string>
     <string name="cloud_changes">Cloud-ændringer</string>
     <string name="shared_string_cloud">Cloud</string>
-    <string name="export_to_file">Eksporter til fil</string>
+    <string name="export_to_file">Eksportér til fil</string>
     <string name="last_sync">Sidste synkronisering</string>
     <string name="shared_string_do_not_exist">Findes ikke</string>
     <string name="av_audio_format_bottom_sheet_descr">Vælg et lydudgangsformat. Filtypeformatet for lyd er 3GPP (.3gp).</string>
@@ -5043,5 +5043,23 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_descr">Standardindstillingen er \'Automatisk\', hvilket er \'Nederst\' for kortorientering \'Bevægelsesretning\' og \'Centrum\' i alle andre tilfælde.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortets orientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ændr udseendet af %1$s spor\?</string>
+    <string name="shared_string_apply_changes">Anvend ændringer</string>
+    <string name="default_tracks_appearance_description">Disse indstillinger for udseende anvendes på alle spor, der blev valgt på det foregående skærmbillede.
+\n
+\nDe gemmes også som \"%1$s\" for at blive anvendt af %2$s på alle andre spor uden underforstået eller specifikt indstillet udseende.</string>
+    <string name="default_tracks_appearance">Standardudseende for spor</string>
+    <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
+    <string name="no_visible_tracks">Ingen spor på kortet</string>
+    <string name="recently_visible">Senest synlig %1$s</string>
+    <string name="empty_tracks_description">Du kan importere, oprette eller optage sporfiler ved hjælp af OsmAnd.</string>
+    <string name="empty_tracks">Du har ingen sporfiler.</string>
+    <string name="shared_string_select_recent">Vælg seneste</string>
+    <string name="change_appearance">Ændr udseende</string>
+    <string name="switch_folder">Skift mappe</string>
+    <string name="show_all_tracks">Vis alle spor</string>
+    <string name="shared_string_on_map">På kort</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="shared_string_yards">yards</string>
 </resources>

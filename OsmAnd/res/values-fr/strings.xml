@@ -1105,7 +1105,7 @@
     <string name="routing_attr_avoid_ferries_description">Éviter les traversées en ferries</string>
     <string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
     <string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
-    <string name="routing_attr_weight_name">Limite de poids</string>
+    <string name="routing_attr_weight_name">Poids</string>
     <string name="routing_attr_weight_description">Indiquez le poids du véhicule à respecter sur les routes.</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définissez l\'arrivée</string>
@@ -1524,7 +1524,7 @@
     <string name="application_dir_change_warning3">Déplacer les fichiers de données vers la nouvelle destination \?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières</string>
-    <string name="routing_attr_height_name">Limite de hauteur</string>
+    <string name="routing_attr_height_name">Hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule à respecter sur les routes.</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
     <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
@@ -2674,7 +2674,7 @@
     <string name="purchase_unlim_title">Acheter - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage hors-ligne</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
-    <string name="wikipedia_offline">Wikipedia hors-ligne</string>
+    <string name="wikipedia_offline">Wikipédia hors-ligne</string>
     <string name="unlock_all_features">Débloquer toutes les fonctionnalités d\'OsmAnd</string>
     <string name="monthly_map_updates">Mise à jour des cartes : Tous les mois</string>
     <string name="daily_map_updates">Mise à jour des cartes : Toutes les heures</string>
@@ -2690,12 +2690,12 @@
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta publique</string>
     <string name="contour_lines_hillshade_maps">Cartes avec courbes de niveau et ombrage du relief</string>
     <string name="download_wikipedia_description">Téléchargez les articles Wikipédia pour %1$s afin de pouvoir les lire hors ligne.</string>
-    <string name="download_wikipedia_label">Télécharger les données Wikipedia</string>
+    <string name="download_wikipedia_label">Télécharger les données Wikipédia</string>
     <string name="open_in_browser_wiki">Ouvrir l\'article en ligne</string>
     <string name="open_in_browser_wiki_description">Afficher l\'article dans un navigateur.</string>
     <string name="download_wiki_region_placeholder">cette région</string>
     <string name="wiki_article_not_found">Article introuvable</string>
-    <string name="how_to_open_wiki_title">Comment ouvrir les articles Wikipedia ?</string>
+    <string name="how_to_open_wiki_title">Comment ouvrir les articles Wikipédia \?</string>
     <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Extension payante</string>
     <string name="popular_destinations">Destinations populaires</string>
@@ -2707,9 +2707,9 @@
     <string name="shared_string_restart">Redémarrer l\'application</string>
     <string name="purchase_cancelled_dialog_title">Vous n\'êtes plus abonné à OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
-    <string name="open_wikipedia_link_online">Ouvrir le lien Wikipedia</string>
+    <string name="open_wikipedia_link_online">Ouvrir le lien Wikipédia</string>
     <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
-    <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipedia et Wikivoyage hors-ligne.</string>
+    <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipédia et Wikivoyage hors-ligne.</string>
     <string name="how_to_open_link">Comment ouvrir le lien ?</string>
     <string name="read_wikipedia_offline">Consultez Wikipédia hors-ligne</string>
     <string name="download_all">Télécharger tout</string>
@@ -3182,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrême</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Non défini</string>
     <string name="routeInfo_piste_difficulty_name">Difficulté de la piste</string>
-    <string name="routing_attr_width_name">Limite de largeur</string>
+    <string name="routing_attr_width_name">Largeur</string>
     <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
@@ -3661,7 +3661,7 @@
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
     <string name="routing_attr_length_description">Indiquez la longueur du véhicule autorisée sur les routes.</string>
-    <string name="routing_attr_length_name">Limite de longueur</string>
+    <string name="routing_attr_length_name">Longueur</string>
     <string name="speed_cameras_removed_descr">Cet appareil n\'a pas de radars.</string>
     <string name="app_mode_inline_skates">Patins à roulettes en ligne</string>
     <string name="use_volume_buttons_as_zoom">Zoomer avec les boutons de volume</string>
@@ -3946,7 +3946,7 @@
     <string name="analyze_by_intervals">Analyser par intervalles</string>
     <string name="announcement_time_intervals">Intervalles de temps et de distance</string>
     <string name="announcement_time_descr">Le rythme des annonces vocales dépend du type d\'alerte, de la vitesse actuelle et du type de navigation.</string>
-    <string name="announcement_time_title">Délai de l\'annonce</string>
+    <string name="announcement_time_title">Date de l\'annonce</string>
     <string name="announcement_time_off_route">Hors de l\'itinéraire prévu</string>
     <string name="routing_engine_vehicle_type_cycling_road">Vélo de route</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Vélo tout terrain</string>
@@ -4155,7 +4155,7 @@
     <string name="send_logcat_log">Envoyer le journal logcat</string>
     <string name="backup_promocode">Code promo</string>
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_wikipedia">Donne accès aux articles Wikipedia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors-ligne.</string>
+    <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors-ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
@@ -5028,5 +5028,23 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_descr">La valeur par défaut est \"Automatique\". C’est à dire positionné \"En bas de l\'écran\" si la carte est \'Orientée selon la direction du déplacement\' ou \"Centré\" dans tous les autres cas.</string>
+    <string name="display_position_automatic_descr">Selon l’orientation de la carte : affiché en bas si l’orientation de la carte suit le déplacement, centré dans tous les autres cas.</string>
+    <string name="shared_string_apply_changes">Appliquer les modifications</string>
+    <string name="default_tracks_appearance">Apparence par défaut des traces</string>
+    <string name="no_visible_tracks_description">Sélectionnez les traces à afficher sur la carte.</string>
+    <string name="no_visible_tracks">Aucune trace sur la carte</string>
+    <string name="empty_tracks_description">Vous pouvez importer, créer ou enregistrer des fichiers trace grâce à OsmAnd.</string>
+    <string name="empty_tracks">Aucun fichier de trace.</string>
+    <string name="change_appearance">Modifier l’apparence</string>
+    <string name="switch_folder">Changer de dossier</string>
+    <string name="show_all_tracks">Afficher toutes les traces</string>
+    <string name="recently_visible">Affiché récemment %1$s</string>
+    <string name="shared_string_select_recent">Sélectionner les derniers</string>
+    <string name="default_tracks_appearance_description">Ces paramètres d\'apparence seront appliqués à toutes les traces sélectionnées sur l\'écran précédent.
+\n
+\nIls sont également enregistrés sous \"%1$s\" pour être appliqués par %2$s à toutes les autres traces sans apparence définie.</string>
+    <string name="shared_string_on_map">Sur la carte</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
+    <string name="shared_string_kilograms">kilogrammes</string>
+    <string name="shared_string_yards">yards</string>
 </resources>

@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.charts;
 
 import android.content.Context;
 import android.text.Spannable;
@@ -7,16 +7,15 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.LineChart.YAxisLabelView;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class ChartLabel extends YAxisLabelView {
 

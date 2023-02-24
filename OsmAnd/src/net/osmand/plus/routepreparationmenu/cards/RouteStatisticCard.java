@@ -16,20 +16,21 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
-import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	private CommonChartAdapter graphAdapter;
 
 	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpx,
-							  OnClickListener onAnalyseClickListener) {
+	                          OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onAnalyseClickListener = onAnalyseClickListener;
@@ -193,16 +194,16 @@ public class RouteStatisticCard extends MapBaseCard {
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = view.findViewById(R.id.chart);
-		GpxUiHelper.setupGPXChart(mChart, 24f, 16f, true);
+		ChartUtils.setupGPXChart(mChart, 24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet slopeDataSet;
-			OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, mChart, analysis,
 					GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
-			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+			slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, mChart, analysis,
 					GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
