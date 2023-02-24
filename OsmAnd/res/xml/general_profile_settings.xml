@@ -14,7 +14,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/choose_osmand_theme" />
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
+	<Preference
 		android:key="rotate_map"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/rotate_map_to" />
