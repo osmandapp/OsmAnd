@@ -3430,7 +3430,7 @@
     <string name="vessel_width_limit_description">Nastavte šířku plavidla, abyste se vyhnuli úzkým mostům</string>
     <string name="quick_action_showhide_mapillary_descr">Přepínač pro zobrazení nebo skrytí mapové vrstvy Mapillary.</string>
     <string name="routing_attr_length_description">Zadejte délku vozidla, která musí být na trase povolená.</string>
-    <string name="routing_attr_length_name">Omezení délky</string>
+    <string name="routing_attr_length_name">Délka</string>
     <string name="shared_string_bearing">Azimut</string>
     <string name="item_deleted">%1$s smazáno</string>
     <string name="speed_cameras_restart_descr">Restartovat aplikaci pro kompletní smazání dat o rychlostních radarech.</string>
@@ -4243,7 +4243,7 @@
     <string name="is_disabled">%1$s je vypnuto</string>
     <string name="clear_all_history_warning">Smazat všechny položky historie včetně vyhledávání, navigace a značek\?</string>
     <string name="map_markers_history">Historie mapových značek</string>
-    <string name="history_preferences_descr">Historii můžete vypnout pro jednotlivé typy činností.</string>
+    <string name="history_preferences_descr">Protokolování historie můžete zakázat pro každý typ historie zvlášť.</string>
     <string name="shortcut_navigate_to_home">Navigovat do \'Domov\'</string>
     <string name="location_access_request_result">Povoleno: %1$s Zamítnuto: %2$s</string>
     <string name="transparent_status_bar_descr">Zobrazit mapu pod stavovým řádkem</string>
@@ -5000,4 +5000,50 @@
     <string name="map_markers_bar_widget_desc">Widget v horní liště zobrazuje vzdálenost a směr k další mapové značce od vaší aktuální polohy. Widget lze nakonfigurovat tak, aby zobrazoval 1 nebo 2 značky.</string>
     <string name="coordinates_widget_desc">Zobrazuje zeměpisné souřadnice aktuální zeměpisné polohy.</string>
     <string name="navigation_points_desc">Během navigace jsou povoleny navigační widgety, které zobrazují informace, jako je vzdálenost, příjezd nebo zbývající čas, další odbočky, azimut, aktuální/následující název ulice, informace o jízdním pruhu, maximální rychlost, upozornění na blížící se cíle, body zájmu, body trasy.</string>
+    <string name="osm_carto_render_descr">Podobně jako OpenStreetMap-carto styl používaný na hlavní stránce OSM</string>
+    <string name="no_widgets_descr">Přidejte jeden nebo více widgetů ze seznamu dostupných widgetů.</string>
+    <string name="apply_only_to_new_points">Platí pouze pro nové body</string>
+    <string name="apply_only_to_new_favorites">Platí pouze pro nové oblíbené</string>
+    <string name="available_widgets">Dostupné widgety</string>
+    <string name="simulation_preview_mode_title">Režim rychlého náhledu</string>
+    <string name="shared_string_item">Položka</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Trasy lehké železnice</string>
+    <string name="no_altitude_data">Žádné údaje o nadmořské výšce</string>
+    <string name="top_widgets_panel">Horní panel</string>
+    <string name="speed_mode">Režim rychlosti</string>
+    <string name="map_markers_bar">Lišta mapových značek</string>
+    <string name="change_default_appearance">Změnit výchozí vzhled</string>
+    <string name="shared_string_visible_widgets">Viditelné widgety</string>
+    <string name="calculate_altitude">Vypočítat nadmořskou výšku</string>
+    <string name="shared_string_symbol">Symbol</string>
+    <string name="no_widgets_here_yet">Zatím zde nejsou žádné widgety</string>
+    <string name="page_number">Stránka %1$s</string>
+    <string name="apply_to_existing_points_descr">Použít změny na stávající body skupiny nebo pouze na nové\?</string>
+    <string name="apply_to_existing_favorites_descr">Použít změny na stávající oblíbené body skupiny, nebo pouze na nové\?</string>
+    <string name="apply_to_existing">Použít na stávající</string>
+    <string name="configure_screen_widgets_descr">Chcete-li přidat nebo změnit uspořádání widgetů, vyberte stranu obrazovky.</string>
+    <string name="simulation_constant_mode_desc">Simulace bude provedena s konstantní zvolenou rychlostí.</string>
+    <string name="snackbar_page_removed">\"Stránka %1$s\" byla odstraněna.</string>
+    <string name="add_page">Přidat stránku</string>
+    <string name="shared_string_speed">Rychlost</string>
+    <string name="app_mode_mountain_bicycle">Horské kolo</string>
+    <string name="turn_on_public_transport_description">Zapnutím zobrazíte na mapě trasy veřejné dopravy.</string>
+    <string name="release_4_2">- Přepracování widgetů: nový vzhled a funkce, seskupení podle stránek, změna pořadí a kombinování podle potřeby.
+\n
+\n - Turistické / cyklistické / cestovní trasy: klepněte na symbol trasy a získejte úplné informace o trase.
+\n
+\n - Oblíbené skupiny: nastavení výchozího vzhledu pro nové body ve skupině.
+\n
+\n - Opravy: automatická online aktualizace dlaždicových map.
+\n
+\n</string>
+    <string name="on_with_params">%1$s na %2$s</string>
+    <string name="map_widget_distance_to_destination">Vzdálenost do cíle</string>
+    <string name="map_widget_current_speed">Aktuální rychlost</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Trasy jednokolejné železnice</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Lanové dráhy</string>
+    <string name="bottom_widgets_panel">Spodní panel</string>
+    <string name="shared_string_buttons">Tlačítka</string>
+    <string name="simulation_constant_mode_title">Stálá rychlost</string>
+    <string name="simulation_preview_mode_desc">Rychlost simulace bude maximální na rovných úsecích a zpomalí se pouze na křižovatkách.</string>
 </resources>
