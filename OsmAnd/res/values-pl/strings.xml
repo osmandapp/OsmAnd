@@ -5035,4 +5035,7 @@
     <string name="sound_beep_simple">Sygnał dźwiękowy: prosty</string>
     <string name="sound_beep_simple_loud">Sygnał dźwiękowy: prosty głośny</string>
     <string name="last_synchronized">Ostatnia synchronizacja</string>
+    <string name="shared_string_yards">jardów</string>
+    <string name="shared_string_apply_changes">Zatwierdź zmiany</string>
+    <string name="shared_string_kilograms">kilogramów</string>
 </resources>

@@ -1101,7 +1101,7 @@
     <string name="routing_attr_avoid_ferries_description">Evitar ferris o transbordadores</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
-    <string name="routing_attr_weight_name">Límite de peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="android_19_location_disabled">Desde Android 4.4 (KitKat), la carpeta de almacenamiento antigua (%s) se encuentra en desuso. ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento\?
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden borrarse manualmente).
@@ -1525,7 +1525,7 @@
     <string name="application_dir_change_warning3">¿Mover los archivos de datos de OsmAnd al nuevo destino\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
-    <string name="routing_attr_height_name">Límite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
@@ -1596,7 +1596,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
-    <string name="restart_is_required">Se requiere un reinicio para aplicar los cambios.</string>
+    <string name="restart_is_required">Es necesario reiniciar el sistema para aplicar el cambio.</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd\?</string>
     <string name="rate_this_app">Califica la aplicación</string>
     <string name="rate_this_app_long">Por favor, califica a OsmAnd en Google Play</string>
@@ -3172,7 +3172,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_name">Ancho</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
 \n
@@ -3659,7 +3659,7 @@
     <string name="vessel_width_limit_description">Define el ancho de la embarcación para evitar puentes estrechos</string>
     <string name="quick_action_showhide_mapillary_descr">Un botón que alterna la capa de Mapillary en el mapa.</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
-    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="routing_attr_length_name">Longitud</string>
     <string name="shared_string_bearing">Rumbo</string>
     <string name="item_deleted">%1$s borrado</string>
     <string name="speed_cameras_restart_descr">Reiniciar la aplicación para borrar todos los datos de los radares de velocidad.</string>

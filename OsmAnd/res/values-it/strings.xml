@@ -1060,7 +1060,7 @@
     <string name="routing_attr_avoid_ferries_description">Evita i traghetti</string>
     <string name="routing_attr_avoid_motorway_name">No autostrade</string>
     <string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
-    <string name="routing_attr_weight_name">Limite di peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Specifica il peso del veicolo consentito nei percorsi.</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Imposta la destinazione</string>
@@ -1518,7 +1518,7 @@
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeri civici</string>
     <string name="routing_attr_avoid_borders_description">Evita l’attraversamento delle frontiere</string>
-    <string name="routing_attr_height_name">Limite di altezza</string>
+    <string name="routing_attr_height_name">Altezza</string>
     <string name="routing_attr_height_description">Specifica l\'altezza del veicolo permessa nei percorsi.</string>
     <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
     <string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso, utile per i viaggi lunghi.</string>
@@ -1584,7 +1584,7 @@
     <string name="rendering_value_translucent_blue_name">Blu traslucido</string>
     <string name="rendering_value_purple_name">Viola</string>
     <string name="rendering_value_translucent_purple_name">Viola traslucido</string>
-    <string name="restart_is_required">È necessario un riavvio per applicare le modifiche.</string>
+    <string name="restart_is_required">Riavvio richiesto per applicare il cambiamento.</string>
     <string name="rendering_value_default13_name">Predefinito (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinito (ciano traslucido)</string>
     <string name="rendering_value_red_name">Rosso</string>
@@ -3176,7 +3176,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Estrema</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Non definito</string>
     <string name="routeInfo_piste_difficulty_name">Difficoltà della pista</string>
-    <string name="routing_attr_width_name">Limite di larghezza</string>
+    <string name="routing_attr_width_name">Larghezza</string>
     <string name="routing_attr_width_description">Specifica il limite della larghezza del veicolo permessa nei percorsi.</string>
     <string name="avoid_in_routing_descr_">Evita certi percorsi e tipi di strade</string>
     <string name="app_mode_utv">Lato per lato</string>
@@ -3652,7 +3652,7 @@
     <string name="shared_string_uninstall">Disinstalla</string>
     <string name="speed_cameras_alert">Gli avvisi sulla presenza di autovelox in alcuni Paesi sono proibiti dalla legge.</string>
     <string name="routing_attr_length_description">Specifica la lunghezza del veicolo permessa nei percorsi.</string>
-    <string name="routing_attr_length_name">Lunghezza massima</string>
+    <string name="routing_attr_length_name">Lunghezza</string>
     <string name="shared_string_bearing">Direzione</string>
     <string name="item_deleted">%1$s cancellato</string>
     <string name="speed_cameras_restart_descr">Riavvia l\'app per cancellare tutti i dati sugli autovelox.</string>

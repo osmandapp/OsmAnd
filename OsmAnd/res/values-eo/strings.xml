@@ -5031,4 +5031,8 @@
     <string name="skip_download">Preterpasi elŝutadon</string>
     <string name="determine_location">Permesu al OsmAnd trovi vian pozicion</string>
     <string name="display_position_automatic_descr">Dependas de map-orientiĝo: sube por “Laŭ direkto de movado” kaj centre por ĉiuj aliaj.</string>
+    <string name="shared_string_kilograms">kilogramoj</string>
+    <string name="shared_string_yards">jardoj</string>
+    <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuroj\?</string>
 </resources>
