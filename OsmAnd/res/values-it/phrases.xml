@@ -3431,7 +3431,7 @@
     <string name="poi_historic_period_predynastic_egypt">Periodo storico: Egitto predinastico</string>
     <string name="poi_historic_period_late_period">Periodo storico: tardo periodo (664 - 332 a.C.)</string>
     <string name="poi_historic_threshing_floor">Aia storica</string>
-    <string name="poi_fortification_type_sconce">Tipo di fortificazione: sconce</string>
+    <string name="poi_fortification_type_sconce">Tipo fortificazione: sconce</string>
     <string name="poi_historic_period_persian_occupation">Periodo storico: occupazione persiana</string>
     <string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plastica</string>
     <string name="poi_historic_period_stone_bronze_undetermined">Periodo storico: età della pietra/età del bronzo (indeterminato)</string>
@@ -3760,7 +3760,7 @@
     <string name="poi_fuel_lng">LNG</string>
     <string name="poi_socket_cee_blue">Socket: CEE blu</string>
     <string name="poi_direction_north">Direzione nord</string>
-    <string name="poi_booth"></string>
+    <string name="poi_booth"/>
     <string name="poi_hgv_unsuitable">Accesso HGV: non adatto</string>
     <string name="poi_payment_contactless_no">Contactless non accettato</string>
     <string name="poi_support_ground">Supporto: suolo</string>
@@ -3849,7 +3849,7 @@
     <string name="poi_nuclear_explosion_purpose_industrial_application">Scopo esplosione: applicazione industriale</string>
     <string name="poi_health_service_counselling_yes">Servizio sanitario: consulenza: sì</string>
     <string name="poi_street_cabinet_power">Tipo cabina: energia</string>
-    <string name="poi_government_treasury"></string>
+    <string name="poi_government_treasury"/>
     <string name="poi_socket_cee_red_32a_current">Socket: CEE rosso 32A: current</string>
     <string name="poi_socket_cee_red_32a">Socket: CEE rosso 32A</string>
     <string name="poi_socket_cee_red_32a_output">Socket: CEE rosso 32A: output</string>
@@ -3877,7 +3877,7 @@
     <string name="poi_motor_vehicle_customers">Accesso veicoli a motore: clienti</string>
     <string name="poi_shop_security">Negozio di sicurezza</string>
     <string name="poi_bowling_alley">Centro bowling</string>
-    <string name="poi_covered_booth"></string>
+    <string name="poi_covered_booth"/>
     <string name="poi_operator_type_community">Tipo operatore: comunità</string>
     <string name="poi_operator_type_private">Tipo operatore: privato</string>
     <string name="poi_share_taxi_yes">Taxi condiviso: sì</string>
@@ -3900,4 +3900,19 @@
     <string name="poi_socket_type3a_voltage">Socket: Tipo 3a: tensione</string>
     <string name="poi_street_cabinet_street_lighting">Tipo cabina: illuminazione stradale</string>
     <string name="poi_socket_cee_blue_current">Socket: CEE blu: corrente</string>
+    <string name="poi_health_specialty_dermatovenereology_yes">Derma-venerologia</string>
+    <string name="poi_free_flying_site_orientation_sw">Orientamento sito di volo libero: SO</string>
+    <string name="poi_free_flying_site_orientation_nw">Orientamento sito di volo libero: NO</string>
+    <string name="poi_free_flying_site_orientation_w">Orientamento sito di volo libero: O</string>
+    <string name="poi_free_flying_site_orientation_n">Orientamento sito di volo libero: N</string>
+    <string name="poi_health_specialty_obstetrics_caesarean_section_no">Specialità sanitaria: ostetricia (taglio cesareo): no</string>
+    <string name="poi_free_flying_site_orientation_ne">Orientamento sito di volo libero: NE</string>
+    <string name="poi_health_specialty_obstetrics_caesarean_section_yes">Ostetricia (taglio cesareo)</string>
+    <string name="poi_health_specialty_herbalism_yes">Erboristeria</string>
+    <string name="poi_rc_car">Corse automobilistiche radiocomandate</string>
+    <string name="poi_lacrosse">Lacrosse</string>
+    <string name="poi_inscription_n">Inscrizione:N</string>
+    <string name="poi_free_flying_site_orientation_e">Orientamento sito di volo libero: E</string>
+    <string name="poi_free_flying_site_orientation_se">Orientamento sito di volo libero: SE</string>
+    <string name="poi_free_flying_site_orientation_s">Orientamento sito di volo libero: S</string>
 </resources>

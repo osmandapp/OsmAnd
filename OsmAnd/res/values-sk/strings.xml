@@ -1061,7 +1061,7 @@
     <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Žiadne diaľnice</string>
     <string name="routing_attr_avoid_motorway_description">Vyhne sa diaľniciam</string>
-    <string name="routing_attr_weight_name">Hmotnostný limit</string>
+    <string name="routing_attr_weight_name">Hmotnosť</string>
     <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Zadať cieľ</string>
@@ -1521,7 +1521,7 @@
     <string name="application_dir_change_warning3">Presunúť údaje OsmAnd do nového cieľa\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
     <string name="routing_attr_avoid_borders_description">Vyhne sa prekročeniu hraníc krajín</string>
-    <string name="routing_attr_height_name">Výškový limit</string>
+    <string name="routing_attr_height_name">Výška</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
     <string name="use_fast_recalculation_desc">Prepočíta iba začiatočný úsek trasy. Môže byť použité pre dlhé výlety.</string>
@@ -3179,7 +3179,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrémna</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Neurčená</string>
     <string name="routeInfo_piste_difficulty_name">Obtiažnosť zjazdovky</string>
-    <string name="routing_attr_width_name">Limit šírky</string>
+    <string name="routing_attr_width_name">Šírka</string>
     <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3657,7 +3657,7 @@
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
     <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
-    <string name="routing_attr_length_name">Limit dĺžky</string>
+    <string name="routing_attr_length_name">Dĺžka</string>
     <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
     <string name="use_volume_buttons_as_zoom_descr">Ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
@@ -5032,5 +5032,23 @@
     <string name="sound_beep_simple">Pípnutie: jednoduché</string>
     <string name="sound_beep_simple_loud">Pípnutie: jednoduché hlasné</string>
     <string name="weight_limit_error">Minimálna hodnota je \"%1$s\" ton. Použite profil \"%2$s\" ak je hmotnosť vozidla nižšia ako toto minimum.</string>
-    <string name="display_position_automatic_descr">Závisí od orientácie mapy, naspodu v režime \'v smere pohybu\', v strede obrazovky v iných prípadoch.</string>
+    <string name="display_position_automatic_descr">Závisí od orientácie mapy: naspodu v režime \'v smere pohybu\', v strede obrazovky v iných prípadoch.</string>
+    <string name="shared_string_kilograms">kilogramov</string>
+    <string name="empty_tracks_description">Pomocou OsmAnd môžete importovať, vytvárať a nahrávať súbory stôp.</string>
+    <string name="change_appearance">Zmeniť vzhľad</string>
+    <string name="shared_string_yards">yardov</string>
+    <string name="shared_string_apply_changes">Použiť zmeny</string>
+    <string name="default_tracks_appearance_description">Tieto nastavenia vzhľadu sa použijú na všetky stopy zvolené na predošlej obrazovke.
+\n
+\nBudú tiež uložené ako \"%1$s\", aby boli použité %2$s pre všetky ostatné stopy bez implicitne alebo špecificky nastaveného vzhľadu.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Zmeniť vzhľad %1$s stôp\?</string>
+    <string name="default_tracks_appearance">Východzí vzhľad stôp</string>
+    <string name="no_visible_tracks_description">Zvoľte stopy pre zobrazenie na mape.</string>
+    <string name="no_visible_tracks">Žiadne stopy na mape</string>
+    <string name="recently_visible">Nedávno viditeľné %1$s</string>
+    <string name="empty_tracks">Nemáte súbory stôp.</string>
+    <string name="shared_string_select_recent">Vybrať nedávne</string>
+    <string name="switch_folder">Zmeniť priečinok</string>
+    <string name="show_all_tracks">Zobraziť všetky stopy</string>
+    <string name="shared_string_on_map">Na mape</string>
 </resources>

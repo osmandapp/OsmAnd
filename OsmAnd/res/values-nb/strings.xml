@@ -728,7 +728,7 @@
     <string name="routing_attr_avoid_ferries_description">Unngår ferger</string>
     <string name="routing_attr_avoid_motorway_name">Ingen motorveier</string>
     <string name="routing_attr_avoid_motorway_description">Unngår motorveier</string>
-    <string name="routing_attr_weight_name">Vektgrense</string>
+    <string name="routing_attr_weight_name">Vekt</string>
     <string name="routing_attr_weight_description">Angi tillatt vektgrense for kjøretøy på ruter.</string>
     <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til den nye plasseringen (%s)…</string>
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
@@ -1324,7 +1324,7 @@
     <string name="rendering_value_boldOutline_name">Tykke omriss</string>
     <string name="rendering_attr_roadStyle_description">Veistil</string>
     <string name="routing_attr_avoid_borders_name">Ingen grensepasseringer</string>
-    <string name="routing_attr_height_name">Høydegrense</string>
+    <string name="routing_attr_height_name">Høyde</string>
     <string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter.</string>
     <string name="rendering_attr_alpineHiking_name">Alpin vandringsskala (SAC)</string>
     <string name="voices">Talemeldinger</string>
@@ -3110,7 +3110,7 @@
     <string name="shared_string_select_folder">Mappe…</string>
     <string name="change_osmand_data_folder_question">Endre OsmAnd-datamappe\?</string>
     <string name="move_maps_to_new_destination">Flytt til det nye målet</string>
-    <string name="routing_attr_width_name">Breddebegrensning</string>
+    <string name="routing_attr_width_name">Bredde</string>
     <string name="routing_attr_width_description">Velg tillatt kjøretøybredde på ruter.</string>
     <string name="avoid_in_routing_descr_">Unngå visse ruter og veityper</string>
     <string name="app_mode_utv">Side om side</string>
@@ -3713,7 +3713,7 @@
 \nÉn måned er 43829 minutter.</string>
     <string name="screen_timeout_descr">Hvis «%1$s» er på, vil aktivitetstiden avhenge av den.</string>
     <string name="routing_attr_length_description">Angi kjøretøylengde som tillates på rutene.</string>
-    <string name="routing_attr_length_name">Lengdebegrensning</string>
+    <string name="routing_attr_length_name">Lengde</string>
     <string name="plan_route_exit_dialog_descr">Forkast alle endringer i den planlagte ruten\?</string>
     <string name="navigate_to_track_descr">Naviger fra min posisjon til sporet</string>
     <string name="use_native_pt">Innebygd utvikling for offentlig transport</string>

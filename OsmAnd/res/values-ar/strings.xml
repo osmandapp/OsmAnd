@@ -4440,7 +4440,7 @@
     <string name="history_preferences_descr">يمكنك تعطيل السجل بشكل فردي لكل نوع سجل.</string>
     <string name="map_markers_history">سجل علامات الخريطة</string>
     <string name="shortcut_navigate_to_work">انتقل إلى \'العمل\'</string>
-    <string name="navigation_history">سجل التنقل</string>
+    <string name="navigation_history">سجل الملاحة</string>
     <string name="shortcut_start_recording">بدء التسجيل</string>
     <string name="transparent_status_bar">شريط معلومات شفاف</string>
     <string name="transparent_status_bar_descr">اعرض الخريطة تحت شريط المعلومات</string>

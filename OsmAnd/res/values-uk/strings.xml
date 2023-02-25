@@ -2472,7 +2472,7 @@
     <string name="make_active">Увімкнути</string>
     <string name="today">Сьогодні</string>
     <string name="yesterday">Вчора</string>
-    <string name="last_seven_days">Останні 7 днів</string>
+    <string name="last_seven_days">За останні 7 днів</string>
     <string name="this_year">Цього року</string>
     <string name="remove_from_map_markers">Вилучити з позначок мапи</string>
     <string name="descendingly">за спаданням</string>
@@ -4380,7 +4380,7 @@
     <string name="history_actions_descr">Ви можете експортувати історію в файл.</string>
     <string name="map_markers_history">Історія позначок мап</string>
     <string name="navigation_history">Історія навігації</string>
-    <string name="history_preferences_descr">Ви можете вимкнути ведення журналу історії окремо для кожного типу історії.</string>
+    <string name="history_preferences_descr">Ви можете вимкнути запис історії окремо для кожного типу історії.</string>
     <string name="shortcut_start_recording">Почати запис</string>
     <string name="shortcut_navigate_to">Маршрут до…</string>
     <string name="shortcut_navigate_to_work">Маршрут до \"Роботи\"</string>
