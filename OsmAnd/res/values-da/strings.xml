@@ -5058,4 +5058,8 @@
     <string name="shared_string_on_map">På kort</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="shared_string_yards">yards</string>
+    <string name="approximate_bearing_descr">Beregn pejling, hvis den ikke modtages fra enheden</string>
+    <string name="shared_string_inches">tommer</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Omtrentlig pejling</string>
 </resources>
