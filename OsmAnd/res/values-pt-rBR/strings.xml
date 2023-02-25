@@ -4921,7 +4921,7 @@
     <string name="map_rendering_engine_v1">Versão 1</string>
     <string name="purchases_feature_desc_external_sensors">Exiba e registre dados de sensores externos: velocidade da bicicleta, potência da bicicleta, cadência e frequência cardíaca.</string>
     <string name="share_crash_log">Compartilhar registro de falhas</string>
-    <string name="storage_migration_fragment_close_descr">A cópia é feita para %1$s%%. Se você parar agora, o aplicativo pode não funcionar corretamente.</string>
+    <string name="storage_migration_fragment_close_descr">A cópia está apenas %1$s%% completa. Se parar agora, a aplicação pode não funcionar corretamente.</string>
     <string name="release_4_3">• Novo, mais rápido Versão 2 (OpenGL) do motor de renderização de mapa, com visualização 2.5D
 \n
 \n • Animação suave em alterações de localização em movimento
@@ -5020,8 +5020,8 @@
     <string name="si_nm_ft">Milhas náuticas/pés</string>
     <string name="share_link">Compartilhar link</string>
     <string name="share_as_file">Compartilhe como arquivo</string>
-    <string name="y_axis">Y-axis</string>
-    <string name="x_axis">X-axis</string>
+    <string name="y_axis">Eixo Y</string>
+    <string name="x_axis">Eixo X</string>
     <string name="value_downloaded_of_mb">Baixando %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Pular download</string>
     <string name="determine_location">Permita-nos determinar sua localização</string>
@@ -5032,7 +5032,7 @@
     <string name="sound_beep_minimal">Bipe: complexo e alto</string>
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_automatic_descr">Depende da orientação do mapa, a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para orientação do movimento, o centro para todo o resto.</string>
     <string name="change_appearance">Mudar a aparência</string>
     <string name="empty_tracks_description">Você pode importar, criar ou gravar arquivos de trilha usando o OsmAnd.</string>
     <string name="show_all_tracks">Mostrar todas as trilhas</string>
@@ -5051,4 +5051,5 @@
     <string name="default_tracks_appearance">Aparência padrão da trilha</string>
     <string name="no_visible_tracks_description">Selecione as trilhas para exibi-las no mapa.</string>
     <string name="shared_string_kilograms">quilogramas</string>
+    <string name="cloud_sync_progress">A sincronizar…%1$s</string>
 </resources>
