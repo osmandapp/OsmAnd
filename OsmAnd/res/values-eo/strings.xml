@@ -802,9 +802,9 @@
     <string name="routing_attr_avoid_stairs_description">Eviti ŝtuparojn</string>
     <string name="routing_attr_avoid_borders_name">Sen landlimaj trairejoj</string>
     <string name="routing_attr_avoid_borders_description">Eviti landlimajn trairejojn</string>
-    <string name="routing_attr_weight_name">Limigo de pezo</string>
-    <string name="routing_attr_weight_description">Difini permesatan pezon de veturilo.</string>
-    <string name="routing_attr_height_name">Limigo de alto</string>
+    <string name="routing_attr_weight_name">Maso</string>
+    <string name="routing_attr_weight_description">Difini permesatan mason de veturilo.</string>
+    <string name="routing_attr_height_name">Alto</string>
     <string name="routing_attr_height_description">Difini permesatan alton de veturilo.</string>
     <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, la antaŭa dosierujo (%s) estas evitinda. Ĉu kopii ĉiujn dosierojn de OsmAnd al la nova dosierujo\? 
 \n Rimarko 1: viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane). 
@@ -1869,7 +1869,7 @@
     <string name="number_of_rows_in_dash">Nombro de linioj sur ĉefekrano %1$s</string>
     <string name="please_specify_poi_type">Bonvolu precizigi specon de interesejo.</string>
     <string name="working_days">Labortagoj</string>
-    <string name="recent_places">Lastaj ejoj</string>
+    <string name="recent_places">Antaŭaj ejoj</string>
     <string name="favourites">Ŝatataj ejoj</string>
     <string name="saved_at_time">Konservita je: %1$s</string>
     <string name="poi_deleted_localy">Interesejo estos forigita kiam vi alŝutos viajn ŝanĝojn</string>
@@ -3180,7 +3180,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">ekstrema</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">nedifinita</string>
     <string name="routeInfo_piste_difficulty_name">Facilo de skivojo</string>
-    <string name="routing_attr_width_name">Limigo de larĝo</string>
+    <string name="routing_attr_width_name">Larĝo</string>
     <string name="routing_attr_width_description">Difini permesatan larĝon de veturilo.</string>
     <string name="avoid_in_routing_descr_">Eviti difinitajn kursojn kaj specojn de vojoj</string>
     <string name="app_mode_utv">Ĉiuteren‑veturilo (UTV)</string>
@@ -3659,7 +3659,7 @@
     <string name="speed_cameras_restart_descr">Restartigu la aplikaĵon por forigi ĉiujn datumojn pri rapidkontroliloj.</string>
     <string name="shared_string_uninstall_and_restart">Malinstali kaj restartigi</string>
     <string name="routing_attr_length_description">Difini permesatan longon de veturilo.</string>
-    <string name="routing_attr_length_name">Limigo de longo</string>
+    <string name="routing_attr_length_name">Longo</string>
     <string name="speed_cameras_removed_descr">Tiu ĉi aplikaĵo ne liveras informojn pri rapidkontrolliloj.</string>
     <string name="app_mode_inline_skates">Rulglitiloj</string>
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
@@ -4912,7 +4912,7 @@
 \n • fenestraĵojn agordiĝantajn laŭ loko
 \n • egal-temperatur-liniojn kaj egal-aerprem-liniojn.
 \n
-\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast‌).</string>
+\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
     <string name="rendering_attr_depthContourWidth_name">Larĝo de kurboj</string>
     <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
     <string name="empty_screen_view_selected_weather_data">Aktivigu por vidigi elektitajn veterajn datumojn sur la mapo.</string>
@@ -5035,4 +5035,18 @@
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuroj\?</string>
+    <string name="default_tracks_appearance_description">La jenaj agordoj pri aspekto aplikiĝos al ĉiuj spuroj elektitaj sur la antaŭa ekrano.
+\n
+\nIli ankaŭ estos konservitaj kiel “%1$s”, kiu estos aplikita de %2$s por ĉiu aliaj spuroj sen propre alĝustigita aspekto.</string>
+    <string name="recently_visible">Antaŭe vidigitaj %1$s</string>
+    <string name="default_tracks_appearance">Implicita aspekto de spuro</string>
+    <string name="no_visible_tracks_description">Elektu spurojn por vidigi ilin sur la mapo.</string>
+    <string name="no_visible_tracks">Neniu spuro sur la mapo</string>
+    <string name="switch_folder">Ŝanĝi dosierujon</string>
+    <string name="show_all_tracks">Montri ĉiujn spurojn</string>
+    <string name="shared_string_on_map">Videblaj</string>
+    <string name="empty_tracks_description">Vi povas enporti, krei aŭ registri novajn dosierojn de spuroj uzante OsmAnd.</string>
+    <string name="shared_string_select_recent">Elekti antaŭajn</string>
+    <string name="empty_tracks">Neniu spuro</string>
+    <string name="change_appearance">Ŝanĝi aspekton</string>
 </resources>
