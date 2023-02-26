@@ -178,7 +178,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				maxProgress += ((FileSettingsItem) item).getSize();
 			}
 		}
-		return (int) maxProgress / (1 << 20);
+		return (int) (maxProgress / (1 << 20));
 	}
 
 	private String getFileName() {
