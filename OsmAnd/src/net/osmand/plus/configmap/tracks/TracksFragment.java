@@ -30,7 +30,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,10 +39,9 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
-import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
-import net.osmand.plus.myplaces.ui.LoadGpxInfosTask.LoadTracksListener;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GPXInfoLoaderTask;
+import net.osmand.plus.track.helpers.GPXInfoLoaderTask.LoadTracksListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -67,7 +65,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
-	private LoadGpxInfosTask asyncLoader;
+	private GPXInfoLoaderTask asyncLoader;
 
 	private ViewPager2 viewPager;
 	private ProgressBar progressBar;
@@ -226,9 +224,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		return new ArrayList<>(selectedTracksHelper.getTrackTabs().values());
 	}
 
-	@NonNull
+	@Nullable
 	public TrackTab getSelectedTab() {
-		return getTrackTabs().get(viewPager.getCurrentItem());
+		List<TrackTab> trackTabs = getTrackTabs();
+		return !trackTabs.isEmpty() ? trackTabs.get(viewPager.getCurrentItem()) : null;
 	}
 
 	public void setSelectedTab(@NonNull String name) {
@@ -242,12 +241,19 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	public void showSortByDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			SortByBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
 		if (importHelper.getGpxImportCompleteListener() == null) {
-			if (asyncLoader == null || asyncLoader.getGpxInfos() == null) {
+			if (asyncLoader == null || Algorithms.isEmpty(asyncLoader.getGpxInfos())) {
 				reloadTracks();
 			} else {
 				adapter.notifyDataSetChanged();
@@ -256,18 +262,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public void reloadTracks() {
-		asyncLoader = new LoadGpxInfosTask(app, this);
+		asyncLoader = new GPXInfoLoaderTask(app, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
 	public void loadTracksStarted() {
 		AndroidUiHelper.updateVisibility(progressBar, true);
-	}
-
-	@Override
-	public void loadTracksProgress(GPXInfo[] gpxInfos) {
-
 	}
 
 	@Override
@@ -298,23 +299,24 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (activity != null) {
 			gpxSelectionHelper.clearAllGpxFilesToShow(true);
 
-			CallbackWithObject<List<GPXFile>> callback = result -> {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(result.toArray(new GPXFile[0]));
-				app.getOsmandMap().getMapView().refreshMap();
-
-				if (activity instanceof MapActivity) {
-					MapActivity mapActivity = (MapActivity) activity;
-					DashboardOnMap dashboard = mapActivity.getDashboard();
-					if (dashboard.isVisible()) {
-						dashboard.refreshContent(false);
-					}
+			List<GPXFile> gpxFiles = new ArrayList<>();
+			for (GPXInfo gpxInfo : selectedTracksHelper.getSelectedTracks()) {
+				GPXFile gpxFile = gpxInfo.getGpxFile();
+				if (gpxFile != null) {
+					gpxFiles.add(gpxFile);
 				}
-				dismissAllowingStateLoss();
-				return true;
-			};
-			List<GPXInfo> gpxInfos = new ArrayList<>(selectedTracksHelper.getSelectedTracks());
-			GPXInfoLoaderTask loaderTask = new GPXInfoLoaderTask(activity, gpxInfos, callback);
-			loaderTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+			gpxSelectionHelper.setGpxFileToDisplay(gpxFiles.toArray(new GPXFile[0]));
+			app.getOsmandMap().getMapView().refreshMap();
+
+			if (activity instanceof MapActivity) {
+				MapActivity mapActivity = (MapActivity) activity;
+				DashboardOnMap dashboard = mapActivity.getDashboard();
+				if (dashboard.isVisible()) {
+					dashboard.refreshContent(false);
+				}
+			}
+			dismissAllowingStateLoss();
 		}
 	}
 
@@ -360,6 +362,15 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+		TrackTab trackTab = getSelectedTab();
+		if (trackTab != null) {
+			trackTab.setSortMode(sortMode);
+			selectedTracksHelper.sortTracks(trackTab);
+			updateTabsContext();
 		}
 	}
 

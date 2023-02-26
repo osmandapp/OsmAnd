@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.NoVisibleTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GPXInfo;
@@ -21,7 +22,6 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -31,10 +31,10 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_NO_TRACKS = 1;
 	public static final int TYPE_NO_VISIBLE_TRACKS = 2;
 	public static final int TYPE_RECENTLY_VISIBLE_TRACKS = 3;
+	public static final int TYPE_SORT_TRACKS = 4;
 
 	private final OsmandApplication app;
 	private final TrackTab trackTab;
-	private final List<Object> items = new ArrayList<>();
 	private final TracksFragment fragment;
 
 	private final boolean nightMode;
@@ -44,7 +44,6 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.trackTab = trackTab;
 		this.fragment = fragment;
 		this.nightMode = nightMode;
-		this.items.addAll(trackTab.items);
 	}
 
 	@NonNull
@@ -64,6 +63,9 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
 				return new RecentlyVisibleViewHolder(view, fragment, nightMode);
+			case TYPE_SORT_TRACKS:
+				view = inflater.inflate(R.layout.sort_type_view, parent, false);
+				return new SortTracksViewHolder(view, fragment, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -72,7 +74,7 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public int getItemViewType(int position) {
-		Object object = items.get(position);
+		Object object = trackTab.items.get(position);
 		if (object instanceof GPXInfo) {
 			return TYPE_TRACK;
 		} else if (object instanceof Integer) {
@@ -83,6 +85,8 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_NO_VISIBLE_TRACKS;
 			} else if (TYPE_RECENTLY_VISIBLE_TRACKS == item) {
 				return TYPE_RECENTLY_VISIBLE_TRACKS;
+			} else if (TYPE_SORT_TRACKS == item) {
+				return TYPE_SORT_TRACKS;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
@@ -91,7 +95,7 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof TrackViewHolder) {
-			GPXInfo gpxInfo = (GPXInfo) items.get(position);
+			GPXInfo gpxInfo = (GPXInfo) trackTab.items.get(position);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
 			boolean lastItem = position == getItemCount() - 1;
 			String folderName = getFolderName(gpxInfo);
@@ -103,9 +107,10 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			((EmptyTracksViewHolder) holder).bindView();
 		} else if (holder instanceof RecentlyVisibleViewHolder) {
 			((RecentlyVisibleViewHolder) holder).bindView();
+		} else if (holder instanceof SortTracksViewHolder) {
+			((SortTracksViewHolder) holder).bindView(trackTab);
 		}
 	}
-
 
 	@Nullable
 	private String getFolderName(@NonNull GPXInfo gpxInfo) {
@@ -150,7 +155,7 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	}
 
 	private void updateItem(@NonNull Object object) {
-		int index = items.indexOf(object);
+		int index = trackTab.items.indexOf(object);
 		if (index != -1) {
 			notifyItemChanged(index);
 		}

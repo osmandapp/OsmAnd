@@ -11,9 +11,15 @@
 	Thx - Hardy
 -->
 
+    <string name="sort_duration_ascending">Shorter duration first</string>
+    <string name="sort_duration_descending">Longest duration first</string>
+    <string name="sort_distance_ascending">Shortest distance first</string>
+    <string name="sort_distance_descending">Longest distance first</string>
+    <string name="sort_date_ascending">Newest date first</string>
+    <string name="sort_date_descending">Oldest date first</string>
+    <string name="shared_string_nearest">Nearest</string>
     <string name="approximate_bearing">Approximate Bearing</string>
     <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
-
     <string name="shared_string_inches">inches</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>

@@ -24,7 +24,7 @@ public class GpxInfoItemsFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 
-	public TrackTab trackTab;
+	private TrackTab trackTab;
 	private TracksAdapter adapter;
 
 	private boolean nightMode;
@@ -50,6 +50,14 @@ public class GpxInfoItemsFragment extends BaseOsmAndFragment {
 		recyclerView.setAdapter(adapter);
 
 		return view;
+	}
+
+	public TrackTab getTrackTab() {
+		return trackTab;
+	}
+
+	public void setTrackTab(@NonNull TrackTab trackTab) {
+		this.trackTab = trackTab;
 	}
 
 	public void onGpxInfosSelected(@NonNull Set<GPXInfo> gpxInfos) {
