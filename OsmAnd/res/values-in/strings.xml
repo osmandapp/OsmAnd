@@ -5057,4 +5057,8 @@
     <string name="change_default_tracks_appearance_confirmation_description">Ubah tampilan trek %1$s\?</string>
     <string name="shared_string_yards">yard</string>
     <string name="shared_string_kilograms">kilogram</string>
+    <string name="approximate_bearing_descr">Hitung bantalan jika tidak diterima dari perangkat</string>
+    <string name="shared_string_inches">inci</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Perkiraan Bantalan</string>
 </resources>
