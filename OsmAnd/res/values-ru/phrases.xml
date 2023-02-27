@@ -288,6 +288,10 @@
     <string name="poi_recycling_car_batteries">Автомобильные аккумуляторы</string>
     <string name="poi_recycling_cars">Автомобили</string>
     <string name="poi_recycling_bicycles">Велосипеды</string>
+    <string name="poi_recycling_plastic_bottle_caps">Крышки от пластиковых бутылок</string>
+    <string name="poi_recycling_aluminium_cans">Алюминиевые банки</string>
+    <string name="poi_recycling_pet_drink_bottles">PET-бутылки из под напитков</string>
+    <string name="poi_recycling_textiles">Текстиль</string>
     <string name="poi_surveillance">Камера видеонаблюдения</string>
     <string name="poi_construction">Стройка</string>
     <string name="poi_works">Завод</string>
