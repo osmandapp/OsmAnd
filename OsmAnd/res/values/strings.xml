@@ -11,9 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_in_progress">In progress</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Movement speed</string>
+    <string name="simulation_position_description">Choose a track file that will be used as a source for location moving</string>
     <string name="approximate_bearing">Approximate Bearing</string>
     <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
-
     <string name="shared_string_inches">inches</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>
