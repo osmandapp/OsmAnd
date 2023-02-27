@@ -163,7 +163,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		uploadItem.setOnClickListener(v -> {
 			SyncOperationType operationType = deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD;
 			if(operationType == SYNC_OPERATION_DELETE){
-				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), !app.getSettings().isLightContent()));
+				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
 				builder.setTitle(app.getString(R.string.shared_string_delete_file));
 				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.fileName));
 				builder.setNeutralButton(R.string.shared_string_cancel, null)
@@ -216,8 +216,6 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		ExportBackupTask exportTask = settingsHelper.getExportTask(fileName);
 		return exportTask == null && importTask == null;
 	}
-
-
 
 	@Nullable
 	private String getDescriptionForItemType(SettingsItemType type, String fileName, String summary) {
