@@ -35,12 +35,10 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -48,6 +46,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
@@ -103,7 +103,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	public interface ContextMenuFragmentListener {
 		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
+
 		void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState);
+
 		void onContextMenuDismiss(@NonNull ContextMenuFragment fragment);
 	}
 
@@ -266,7 +268,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
@@ -512,7 +514,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		v.setAlpha(alpha);
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -520,7 +522,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void updateVisibility(View v, boolean visible) {
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -629,25 +631,25 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		if (parent == null) {
 			return;
 		}
-		OnLayoutChangeListener layoutListener = getContainerLayoutListener();
 		View container = (View) parent;
-		container.removeOnLayoutChangeListener(layoutListener);
+		OnLayoutChangeListener listener = getContainerLayoutListener();
+		container.removeOnLayoutChangeListener(listener);
 		if (add) {
-			container.addOnLayoutChangeListener(layoutListener);
+			container.addOnLayoutChangeListener(listener);
 		}
 	}
 
+	@NonNull
 	private OnLayoutChangeListener getContainerLayoutListener() {
-		if (containerLayoutListener != null) {
-			return containerLayoutListener;
+		if (containerLayoutListener == null) {
+			containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+				if (forceUpdateLayout || bottom != oldBottom) {
+					forceUpdateLayout = false;
+					processScreenHeight(view.getParent());
+					runLayoutListener();
+				}
+			};
 		}
-		containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-			if (forceUpdateLayout || bottom != oldBottom) {
-				forceUpdateLayout = false;
-				processScreenHeight(view.getParent());
-				runLayoutListener();
-			}
-		};
 		return containerLayoutListener;
 	}
 
@@ -679,7 +681,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	private int getMinHalfY(MapActivity mapActivity) {
 		return viewHeight - (int) Math.min(viewHeight * getMiddleStateKoef(),
-				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
+				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity());
 	}
 
 	public boolean isMoving() {
@@ -956,7 +958,8 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		runLayoutListener();
 	}
 
-	protected void onHeaderClick() {}
+	protected void onHeaderClick() {
+	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	protected void runLayoutListener() {

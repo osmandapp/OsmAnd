@@ -41,7 +41,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -81,7 +81,6 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.plus.widgets.tools.OnPageChangeListenerAdapter;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
@@ -190,7 +189,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
 		viewPager.setOffscreenPageLimit(1);
-		viewPager.addOnPageChangeListener(new OnPageChangeListenerAdapter() {
+		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			public void onPageSelected(int position) {
 				MapActivity mapActivity = getMapActivity();
 				View view = getView();
@@ -558,7 +557,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 			new SaveGpxAsyncTask(dst, gpx, new SaveGpxListener() {
 				@Override
-				public void gpxSavingStarted() {}
+				public void gpxSavingStarted() {
+				}
 
 				@Override
 				public void gpxSavingFinished(Exception errorMessage) {
