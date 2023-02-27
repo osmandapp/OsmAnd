@@ -1005,12 +1005,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			if (useOsmandKeyboard) {
 				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
 			} else {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						AndroidUtils.showSoftKeyboard(getActivity(), focusedView);
-					}
-				}, 200);
+				new Handler().postDelayed(() -> AndroidUtils.showSoftKeyboard(getActivity(), focusedView), 200);
 			}
 		}
 		changeEditTextSelections();
@@ -1417,12 +1412,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		Activity activity = getActivity();
 		if (activity != null && adapter != null) {
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					adapter.notifyDataSetChanged();
-				}
-			});
+			app.runInUIThread(adapter::notifyDataSetChanged);
 		}
 	}
 

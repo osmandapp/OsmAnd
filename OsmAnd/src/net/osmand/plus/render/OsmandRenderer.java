@@ -295,13 +295,10 @@ public class OsmandRenderer {
 	}
 
 	private void notifyListenersWithDelay(RenderingContext rc, MapTileDownloader mapTileDownloader, Handler h) {
-		h.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if(!rc.ended) {
-					notifyListeners(mapTileDownloader);
-					notifyListenersWithDelay(rc, mapTileDownloader, h);
-				}
+		h.postDelayed(() -> {
+			if(!rc.ended) {
+				notifyListeners(mapTileDownloader);
+				notifyListenersWithDelay(rc, mapTileDownloader, h);
 			}
 		}, 800);
 	}

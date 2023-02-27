@@ -155,12 +155,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	private void setVillagesSearchEnabled(boolean enable) {
 		searchVillagesMode = enable ? 0 : -1;
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				searchVillages.setVisibility(enable ? View.GONE : View.VISIBLE);
-			}
-		});
+		uiHandler.post(() -> searchVillages.setVisibility(enable ? View.GONE : View.VISIBLE));
 	}
 
 	private boolean isVillagesSearchEnabled() {
