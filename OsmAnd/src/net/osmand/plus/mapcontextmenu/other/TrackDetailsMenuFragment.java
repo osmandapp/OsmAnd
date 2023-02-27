@@ -190,12 +190,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		if (location != null && !MapUtils.areLatLonEqual(menu.getMyLocation(), location)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				mapActivity.getMyApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						menu.updateMyLocation(mainView, location);
-					}
-				});
+				mapActivity.getMyApplication().runInUIThread(() -> menu.updateMyLocation(mainView, location));
 			}
 		}
 	}

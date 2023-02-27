@@ -358,16 +358,13 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 							}
 						}
 					}
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							resetSearchTypes();
-							if (!searchCancelled) {
-								subCategoriesAdapter.setSelectedItems(selectedSubCategories);
-								showSearchResults(results);
-							}
-							updateCloseSearchIcon(false);
+					app.runInUIThread(() -> {
+						resetSearchTypes();
+						if (!searchCancelled) {
+							subCategoriesAdapter.setSelectedItems(selectedSubCategories);
+							showSearchResults(results);
 						}
+						updateCloseSearchIcon(false);
 					});
 				}
 				return true;

@@ -297,12 +297,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			return;
 		}
 		if (app != null && favouritesAdapter != null) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					favouritesAdapter.notifyDataSetChanged();
-				}
-			});
+			app.runInUIThread(favouritesAdapter::notifyDataSetChanged);
 		}
 	}
 

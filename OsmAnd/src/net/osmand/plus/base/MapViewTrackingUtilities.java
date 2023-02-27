@@ -460,13 +460,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void backToLocationWithDelay(int delay) {
-		app.runMessageInUIThreadAndCancelPrevious(AUTO_FOLLOW_MSG_ID, new Runnable() {
-			@Override
-			public void run() {
-				if (mapView != null && !isMapLinkedToLocation() && contextMenu == null) {
-					app.showToastMessage(R.string.auto_follow_location_enabled);
-					backToLocationImpl(15, false);
-				}
+		app.runMessageInUIThreadAndCancelPrevious(AUTO_FOLLOW_MSG_ID, () -> {
+			if (mapView != null && !isMapLinkedToLocation() && contextMenu == null) {
+				app.showToastMessage(R.string.auto_follow_location_enabled);
+				backToLocationImpl(15, false);
 			}
 		}, delay * 1000L);
 	}

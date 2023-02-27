@@ -176,14 +176,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		calculateGpxApproximation(true);
 
 		ScrollView profileView = (ScrollView) getBottomScrollView();
-		profileView.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				View view = profileView.findViewWithTag(snapToRoadAppMode.getStringKey());
-				if (view != null) {
-					int headerHeight = getResources().getDimensionPixelSize(R.dimen.measurement_tool_button_height);
-					profileView.scrollTo(0, view.getTop() + headerHeight);
-				}
+		profileView.postDelayed(() -> {
+			View view = profileView.findViewWithTag(snapToRoadAppMode.getStringKey());
+			if (view != null) {
+				int headerHeight = getResources().getDimensionPixelSize(R.dimen.measurement_tool_button_height);
+				profileView.scrollTo(0, view.getTop() + headerHeight);
 			}
 		}, 100);
 

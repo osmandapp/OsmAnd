@@ -111,56 +111,36 @@ public class ContourLinesMenu {
 			                                  boolean isChecked) {
 				int itemId = item.getTitleId();
 				if (itemId == toggleActionStringId) {
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							plugin.toggleContourLines(mapActivity, isChecked, new Runnable() {
-								@Override
-								public void run() {
-									mapActivity.getDashboard().refreshContent(true);
-									mapActivity.refreshMapComplete();
-								}
-							});
-						}
-					});
+					app.runInUIThread(() -> plugin.toggleContourLines(mapActivity, isChecked, () -> {
+						mapActivity.getDashboard().refreshContent(true);
+						mapActivity.refreshMapComplete();
+					}));
 				} else if (itemId == showZoomLevelStringId) {
-					plugin.selectPropertyValue(mapActivity, contourLinesProp, pref, new Runnable() {
-						@Override
-						public void run() {
-							item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
-							uiAdapter.onDataSetChanged();
-							mapActivity.refreshMapComplete();
-						}
+					plugin.selectPropertyValue(mapActivity, contourLinesProp, pref, () -> {
+						item.setDescription(plugin.getPrefDescription(app, contourLinesProp, pref));
+						uiAdapter.onDataSetChanged();
+						mapActivity.refreshMapComplete();
 					});
 				} else if (itemId == colorSchemeStringId) {
-					plugin.selectPropertyValue(mapActivity, colorSchemeProp, colorPref, new Runnable() {
-						@Override
-						public void run() {
-							item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
-							uiAdapter.onDataSetChanged();
-							mapActivity.refreshMapComplete();
-						}
+					plugin.selectPropertyValue(mapActivity, colorSchemeProp, colorPref, () -> {
+						item.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref));
+						uiAdapter.onDataSetChanged();
+						mapActivity.refreshMapComplete();
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
 					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
-					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {
-						@Override
-						public void run() {
-							item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
-							uiAdapter.onDataSetChanged();
-							mapActivity.refreshMapComplete();
-						}
+					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, () -> {
+						item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
+						uiAdapter.onDataSetChanged();
+						mapActivity.refreshMapComplete();
 					});
 				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
-					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref, new Runnable() {
-						@Override
-						public void run() {
-							item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
-							uiAdapter.onDataSetChanged();
-							mapActivity.refreshMapComplete();
-						}
+					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref, () -> {
+						item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
+						uiAdapter.onDataSetChanged();
+						mapActivity.refreshMapComplete();
 					});
 				}
 				return false;

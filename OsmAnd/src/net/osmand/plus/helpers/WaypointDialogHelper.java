@@ -406,12 +406,7 @@ public class WaypointDialogHelper {
 				if (dlg != null) {
 					long t = System.currentTimeMillis();
 					if (t - startDialogTime < 500) {
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								dlg.dismiss();
-							}
-						}, 500 - (t - startDialogTime));
+						app.runInUIThread(dlg::dismiss, 500 - (t - startDialogTime));
 					} else {
 						dlg.dismiss();
 					}

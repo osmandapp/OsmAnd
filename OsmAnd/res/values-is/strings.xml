@@ -4876,7 +4876,7 @@
     <string name="rendering_attr_depthContourWidth_name">Breidd línu</string>
     <string name="map_widget_altitude_map_center">Hæð: miðja korts</string>
     <string name="shared_string_terms_of_use">Notkunarskilmála</string>
-    <string name="release_4_4_pre">• Hér koma strengir fyrir 4.4 útgáfuna</string>
+    <string name="release_4_4">• Hér koma strengir fyrir 4.4 útgáfuna</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Vindhraðalínur</string>
     <string name="mtb_segment_classification">Flokkun búta</string>
     <string name="rendering_attr_showMtbScale_name">Birta fjallahjólreiðakvarða</string>

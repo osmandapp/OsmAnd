@@ -195,12 +195,7 @@ public class ObservableListView extends ListView implements Scrollable {
 
                             // Return this onTouchEvent() first and set ACTION_DOWN event for parent
                             // to the queue, to keep events sequence.
-                            post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    parent.dispatchTouchEvent(event);
-                                }
-                            });
+                            post(() -> parent.dispatchTouchEvent(event));
                             return false;
                         }
                         // Even when this can't be scrolled anymore,

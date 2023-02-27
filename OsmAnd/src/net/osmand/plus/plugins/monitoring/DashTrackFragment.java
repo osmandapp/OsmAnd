@@ -293,13 +293,10 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	private void startHandler(View v) {
 		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (updateEnable) {
-					updateCurrentTrack(v, getActivity(), getMyApplication());
-					startHandler(v);
-				}
+		updateCurrentRecordingTrack.postDelayed(() -> {
+			if (updateEnable) {
+				updateCurrentTrack(v, getActivity(), getMyApplication());
+				startHandler(v);
 			}
 		}, 1500);
 	}

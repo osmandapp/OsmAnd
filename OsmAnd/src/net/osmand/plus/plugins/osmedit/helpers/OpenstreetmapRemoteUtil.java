@@ -514,14 +514,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		} catch (Exception e) {
 			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
-			ctx.runInUIThread(new Runnable() {
-
-				@Override
-				public void run() {
-					Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
-							Toast.LENGTH_LONG).show();
-				}
-			});
+			ctx.runInUIThread(() ->
+					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show());
 		}
 		return null;
 	}
@@ -547,11 +541,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	private void showWarning(String msg) {
-		ctx.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
-			}
-		});
+		ctx.runInUIThread(() -> Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show());
 	}
 }
