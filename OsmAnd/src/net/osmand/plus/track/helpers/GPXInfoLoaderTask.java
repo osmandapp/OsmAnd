@@ -26,14 +26,12 @@ public class GPXInfoLoaderTask extends AsyncTask<Void, GPXInfo, Void> {
 	private final GpxSelectionHelper gpxSelectionHelper;
 
 	private final List<GPXInfo> gpxInfos = new ArrayList<>();
-	private final TracksSortMode sortByMode;
 	private final LoadTracksListener listener;
 
 	public GPXInfoLoaderTask(@NonNull OsmandApplication app, @NonNull LoadTracksListener listener) {
 		this.app = app;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
-		this.sortByMode = app.getSettings().TRACKS_SORT_MODE.get();
 		this.listener = listener;
 	}
 

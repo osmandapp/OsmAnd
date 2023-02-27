@@ -41,11 +41,11 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 		boolean enabled = !Algorithms.isEmpty(trackTab.getGPXInfos());
 
 		int textColorId = enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode);
-		int iconColorÎd = enabled ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode);
+		int iconColorId = enabled ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode);
 
 		title.setTextColor(ColorUtilities.getColor(app, textColorId));
 		description.setText(sortMode.getNameId());
-		imageView.setImageDrawable(app.getUIUtilities().getIcon(sortMode.getIconId(), iconColorÎd));
+		imageView.setImageDrawable(app.getUIUtilities().getIcon(sortMode.getIconId(), iconColorId));
 		itemView.setEnabled(enabled);
 	}
 }

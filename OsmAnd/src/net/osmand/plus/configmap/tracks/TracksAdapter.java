@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -22,7 +21,6 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
-import java.util.List;
 import java.util.Set;
 
 class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -98,8 +96,7 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			GPXInfo gpxInfo = (GPXInfo) trackTab.items.get(position);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
 			boolean lastItem = position == getItemCount() - 1;
-			String folderName = getFolderName(gpxInfo);
-			viewHolder.bindView(gpxInfo, folderName, lastItem);
+			viewHolder.bindView(gpxInfo, lastItem);
 			bindInfoView(gpxInfo, viewHolder);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
 			((NoVisibleTracksViewHolder) holder).bindView();
@@ -110,17 +107,6 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof SortTracksViewHolder) {
 			((SortTracksViewHolder) holder).bindView(trackTab);
 		}
-	}
-
-	@Nullable
-	private String getFolderName(@NonNull GPXInfo gpxInfo) {
-		String folderName = null;
-		File file = gpxInfo.getFile();
-		if (trackTab.type.shouldShowFolder() && file != null) {
-			String[] path = file.getAbsolutePath().split(File.separator);
-			folderName = path.length > 1 ? path[path.length - 2] : null;
-		}
-		return folderName;
 	}
 
 	private void bindInfoView(@NonNull GPXInfo gpxInfo, @NonNull TrackViewHolder holder) {
@@ -137,12 +123,14 @@ class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
 				if (item != null) {
-					holder.bindInfoRow(gpxInfo, item);
+					gpxInfo.setDataItem(item);
+					holder.bindInfoRow(trackTab, gpxInfo);
 				}
 			}
 		});
 		if (dataItem != null) {
-			holder.bindInfoRow(gpxInfo, dataItem);
+			gpxInfo.setDataItem(dataItem);
+			holder.bindInfoRow(trackTab, gpxInfo);
 		}
 	}
 

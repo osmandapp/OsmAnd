@@ -118,14 +118,19 @@ public class SelectedTracksHelper {
 			trackTab.items.add(TYPE_NO_VISIBLE_TRACKS);
 		}
 		Map<GPXFile, Long> selectedGpxFilesBackUp = selectionHelper.getSelectedGpxFilesBackUp();
-		if (!selectedGpxFilesBackUp.isEmpty()) {
-			trackTab.items.add(TYPE_RECENTLY_VISIBLE_TRACKS);
+		if (!Algorithms.isEmpty(selectedGpxFilesBackUp)) {
 			for (GPXFile gpxFile : selectedGpxFilesBackUp.keySet()) {
-				File file = new File(gpxFile.path);
-				GPXInfo info = new GPXInfo(file.getName(), file);
-				info.setGpxFile(gpxFile);
-				trackTab.items.add(info);
-				recentlyVisibleGpxInfo.add(info);
+				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
+				if (selectedGpxFile == null) {
+					File file = new File(gpxFile.path);
+					GPXInfo info = new GPXInfo(file.getName(), file);
+					info.setGpxFile(gpxFile);
+					recentlyVisibleGpxInfo.add(info);
+				}
+			}
+			if (!Algorithms.isEmpty(recentlyVisibleGpxInfo)) {
+				trackTab.items.add(TYPE_RECENTLY_VISIBLE_TRACKS);
+				trackTab.items.addAll(recentlyVisibleGpxInfo);
 			}
 		}
 		return trackTab;
