@@ -1612,7 +1612,7 @@
     <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
-    <string name="restart_is_required">Neustart erforderlich, um die Änderung umzusetzen.</string>
+    <string name="restart_is_required">Ein Neustart ist erforderlich, um die Änderung anzuwenden.</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
@@ -4380,8 +4380,8 @@
     <string name="transparent_status_bar">Transparente Statusleiste</string>
     <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu speichern.</string>
     <string name="history_actions_descr">Sie können den Verlauf in eine Datei exportieren.</string>
-    <string name="navigation_history">Verlauf der Navigation</string>
-    <string name="history_preferences_descr">Sie können die Protokollierung des Verlaufs für jeden Verlaufstyp einzeln deaktivieren.</string>
+    <string name="navigation_history">Navigationsverlauf</string>
+    <string name="history_preferences_descr">Sie können die Verlaufsprotokollierung für jeden Verlaufstyp einzeln deaktivieren.</string>
     <string name="shared_storage_warning_description">Aufgrund neuer Android-Regeln wird OsmAnd 4.2 ab November 2021 den Zugriff auf den gemeinsamen Speicher verlieren.
 \n
 \nBitte verschieben Sie den Datenordner aus dem gemeinsamen Speicher in den verfügbaren Speicher, anderenfalls wird die App den Zugriff auf Ihre Daten wie Offline-Karten, GPX-Tracks usw. verlieren.</string>
@@ -4389,7 +4389,7 @@
     <string name="history_is_disabled_descr">Verlauf aktivieren, um einen schnelleren Zugriff auf die zuletzt verwendeten Ergebnisse zu erhalten.</string>
     <string name="clear_all_history_warning">Alle Einträge im Verlauf löschen, einschließlich Such-, Navigations- und Markierungsverlauf\?</string>
     <string name="clear_all_history">Gesamten Verlauf löschen</string>
-    <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
+    <string name="map_markers_history">Kartenmarkierungsverlauf</string>
     <string name="continue_on_phone">Auf dem Mobilgerät fortfahren</string>
     <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
     <string name="approx_safe_mode">Sichere GPX Approximation</string>
