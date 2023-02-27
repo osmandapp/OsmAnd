@@ -5062,4 +5062,8 @@
     <string name="switch_folder">Ordner wechseln</string>
     <string name="show_all_tracks">Alle Tracks anzeigen</string>
     <string name="shared_string_on_map">Auf der Karte</string>
+    <string name="approximate_bearing_descr">Peilung berechnen, falls nicht vom Gerät empfangen</string>
+    <string name="shared_string_inches">Zoll</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Ungefähre Peilung</string>
 </resources>
