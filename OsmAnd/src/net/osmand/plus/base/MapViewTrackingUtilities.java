@@ -534,6 +534,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void onRotateMapModeChanged() {
 		CompassMode compassMode = CompassMode.getByValue(settings.ROTATE_MAP.get());
+		if (compassMode == CompassMode.NORTH_IS_UP) {
+			mapView.resetManualRotation();
+		}
 		String title = app.getString(compassMode.getTitleId());
 		String message = app.getString(R.string.rotate_map_to) + ":\n" + title;
 		app.showShortToastMessage(message);
