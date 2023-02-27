@@ -480,18 +480,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 		mainView.setOnTouchListener(slideTouchListener);
 
-		containerLayoutListener = new OnLayoutChangeListener() {
-			@Override
-			public void onLayoutChange(View view, int left, int top, int right, int bottom,
-									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-				if (forceUpdateLayout || bottom != oldBottom) {
-					forceUpdateLayout = false;
-					processScreenHeight(view.getParent());
-					runLayoutListener();
-				}
-			}
-		};
-
 		return view;
 	}
 
@@ -594,14 +582,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateContainerLayoutListener(view, true);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		ViewParent parent = view != null ? view.getParent() : null;
-		if (parent != null && containerLayoutListener != null) {
-			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
-		}
+		updateContainerLayoutListener(view, true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -620,12 +611,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void onPause() {
 		super.onPause();
 		paused = true;
-		if (view != null) {
-			ViewParent parent = view.getParent();
-			if (parent != null && containerLayoutListener != null) {
-				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
-			}
-		}
+		updateContainerLayoutListener(view, false);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (!wasDrawerDisabled) {
@@ -636,6 +622,33 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 				mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(tag);
 			}
 		}
+	}
+
+	private void updateContainerLayoutListener(@Nullable View view, boolean add) {
+		ViewParent parent = view != null ? view.getParent() : null;
+		if (parent == null) {
+			return;
+		}
+		OnLayoutChangeListener layoutListener = getContainerLayoutListener();
+		View container = (View) parent;
+		container.removeOnLayoutChangeListener(layoutListener);
+		if (add) {
+			container.addOnLayoutChangeListener(layoutListener);
+		}
+	}
+
+	private OnLayoutChangeListener getContainerLayoutListener() {
+		if (containerLayoutListener != null) {
+			return containerLayoutListener;
+		}
+		containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+			if (forceUpdateLayout || bottom != oldBottom) {
+				forceUpdateLayout = false;
+				processScreenHeight(view.getParent());
+				runLayoutListener();
+			}
+		};
+		return containerLayoutListener;
 	}
 
 	public int getViewY() {
@@ -943,9 +956,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		runLayoutListener();
 	}
 
-	protected void onHeaderClick() {
-
-	}
+	protected void onHeaderClick() {}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	protected void runLayoutListener() {

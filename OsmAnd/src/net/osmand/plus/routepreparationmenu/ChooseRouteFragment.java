@@ -81,6 +81,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.tools.OnPageChangeListenerAdapter;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
@@ -174,14 +175,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		this.viewPager = viewPager;
 		if (!portrait) {
 			initialMenuState = MenuState.FULL_SCREEN;
-			int width = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width) - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
+			int width = getDimensionPixelSize(R.dimen.dashboard_land_width) - getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 			solidToolbarView.setLayoutParams(new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
 			solidToolbarView.setVisibility(View.VISIBLE);
 			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(mapActivity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			mapActivity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
 			view.findViewById(R.id.pager_container).setBackgroundResource(typedValueAttr.resourceId);
-			view.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
+			view.setLayoutParams(new FrameLayout.LayoutParams(getDimensionPixelSize(R.dimen.dashboard_land_width), ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		viewPager.setClipToPadding(false);
 		currentMenuState = initialMenuState;
@@ -189,34 +190,28 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
 		viewPager.setOffscreenPageLimit(1);
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			public void onPageScrollStateChanged(int state) {
-			}
-
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
-
+		viewPager.addOnPageChangeListener(new OnPageChangeListenerAdapter() {
 			public void onPageSelected(int position) {
 				MapActivity mapActivity = getMapActivity();
 				View view = getView();
 				if (mapActivity != null && view != null) {
-					mapActivity.getMyApplication().getTransportRoutingHelper().setCurrentRoute(position);
+					app.getTransportRoutingHelper().setCurrentRoute(position);
 					mapActivity.refreshMap();
 					buildPagesControl(view);
 					List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = ChooseRouteFragment.this.routeDetailsFragments;
 					RouteDetailsFragment current = getCurrentFragment();
 					for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
-						RouteDetailsFragment f = ref.get();
-						if (f != null) {
-							PublicTransportCard card = f.getTransportCard();
+						RouteDetailsFragment fragment = ref.get();
+						if (fragment != null) {
+							PublicTransportCard card = fragment.getTransportCard();
 							if (card != null) {
 								card.updateButtons();
 							}
-							if (f == current) {
-								updateZoomButtonsPos(f, f.getViewY(), true);
-								updatePagesViewPos(f, f.getViewY(), true);
+							if (fragment == current) {
+								updateZoomButtonsPos(fragment, fragment.getViewY(), true);
+								updatePagesViewPos(fragment, fragment.getViewY(), true);
 							}
-							Bundle args = f.getArguments();
+							Bundle args = fragment.getArguments();
 							if (args != null) {
 								args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 							}
@@ -233,7 +228,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
-	public void onAttachFragment(Fragment childFragment) {
+	public void onAttachFragment(@NonNull Fragment childFragment) {
 		if (childFragment instanceof RouteDetailsFragment) {
 			RouteDetailsFragment detailsFragment = (RouteDetailsFragment) childFragment;
 			routeDetailsFragments.add(new WeakReference<>(detailsFragment));
@@ -788,8 +783,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void updatePagesViewPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		ViewGroup pagesView = this.pagesView;
 		if (pagesView != null) {
-			int pagesY = y - getPagesViewHeight() + fragment.getShadowHeight() +
-					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(pagesView.getContext()) : 0);
+			int pagesY = y - getPagesViewHeight() + fragment.getShadowHeight();
+			if (Build.VERSION.SDK_INT >= 21) {
+				pagesY += AndroidUtils.getStatusBarHeight(pagesView.getContext());
+			}
 			if (animated) {
 				fragment.animateView(pagesView, pagesY, null);
 			} else {
@@ -801,8 +798,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		View zoomButtonsView = this.zoomButtonsView;
 		if (zoomButtonsView != null) {
-			int zoomY = y - getZoomButtonsHeight() +
-					(Build.VERSION.SDK_INT >= 21 ? AndroidUtils.getStatusBarHeight(zoomButtonsView.getContext()) : 0);
+			int zoomY = y - getZoomButtonsHeight();
+			if (Build.VERSION.SDK_INT >= 21) {
+				zoomY += AndroidUtils.getStatusBarHeight(zoomButtonsView.getContext());
+			}
 			if (animated) {
 				fragment.animateView(zoomButtonsView, zoomY, null);
 			} else {
@@ -939,6 +938,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 
 		@Override
+		@NonNull
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
