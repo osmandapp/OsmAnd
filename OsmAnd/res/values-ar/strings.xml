@@ -973,7 +973,7 @@
     <string name="configure_map">ضبط الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
-    <string name="layer_amenity_label">تسميات النقاط ، أسماء المفضلة</string>
+    <string name="layer_amenity_label">أسماء النقاط ، أسماء المفضلة</string>
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
@@ -1793,7 +1793,7 @@
     <string name="favorite_category_dublicate_message">اسم المفضلة المحددة موجود. الرجاء استخدام اسم آخر.</string>
     <string name="shared_string_trip_recording">تسجيل الرحلة</string>
     <string name="simulate_your_location_stop_descr">إيقاف المحاكات التخيلية.</string>
-    <string name="restart_is_required">الرجاء إعادة تشغيل التطبيق يدوياً لتفعيل التغييرات.</string>
+    <string name="restart_is_required">مطلوب إعادة التشغيل لتطبيق التغيير.</string>
     <string name="lang_hsb">الصوربية (العليا)</string>
     <string name="update_all">تحديث الكل ( %1$s ميغابايت )</string>
     <string name="downloads_left_template">%1$s تحميلات باقية</string>
@@ -1856,7 +1856,7 @@
     <string name="lang_new">نيوار / نيبال بهاسا</string>
     <string name="lang_ceb">السيبوانية</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
-    <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
+    <string name="disable_recording_once_app_killed">التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
@@ -4399,7 +4399,7 @@
     <string name="shared_app_storage_description">لم تعد الذاكرة المشتركة متاحة بسبب تغيير اذ الوصول للتخزين في Android.</string>
     <string name="internal_app_storage_description">التخزين الداخلي ، مخفي عن جميع المستخدمين والتطبيقات الأخرى ، لذلك لا أحد يمكنه الوصول إلى بياناتك باستثناء OsmAnd.</string>
     <string name="rendering_attr_natureReserves_name">محمية طبيعية</string>
-    <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام Android Auto
+    <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام أندرويد أوتو
 \n
 \n • تحديث واجهة المستخدم ل تنسيق البحث UTM
 \n
