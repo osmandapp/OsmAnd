@@ -561,12 +561,7 @@ public class ExtendedBottomSheetBehavior<V extends View> extends CoordinatorLayo
 		// Start the animation; wait until a pending layout if there is one.
 		ViewParent parent = child.getParent();
 		if (parent != null && parent.isLayoutRequested() && ViewCompat.isAttachedToWindow(child)) {
-			child.post(new Runnable() {
-				@Override
-				public void run() {
-					startSettlingAnimation(child, state);
-				}
-			});
+			child.post(() -> startSettlingAnimation(child, state));
 		} else {
 			startSettlingAnimation(child, state);
 		}

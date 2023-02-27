@@ -4920,7 +4920,7 @@
     <string name="empty_screen_view_selected_weather_data">Увімкніть, щоб переглянути вибрані погодні дані на мапі.</string>
     <string name="weather_wind_mph">миль/год</string>
     <string name="empty_screen_weather_clouds_layer">Увімкніть, щоб переглянути шар хмарності на мапі.</string>
-    <string name="weather_precip_in">у</string>
+    <string name="weather_precip_in">дюйми</string>
     <string name="weather_widget_group_desc">Набір віджетів, що показують різноманітні відомості про погоду.</string>
     <string name="weather_pressure_hpa">гПа</string>
     <string name="weather_pressure_mmhg">мм рт.ст</string>
@@ -4978,7 +4978,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
-    <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
+    <string name="release_4_4">• Тут будуть рядки для випуску 4.4</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
@@ -5052,4 +5052,8 @@
     <string name="switch_folder">Перемкнути теку</string>
     <string name="shared_string_yards">ярди</string>
     <string name="shared_string_kilograms">кілограми</string>
+    <string name="approximate_bearing_descr">Обчислювати азимут, якщо його не отримано від пристрою</string>
+    <string name="shared_string_inches">дюйми</string>
+    <string name="inch">дюйми</string>
+    <string name="approximate_bearing">Приблизний азимут</string>
 </resources>

@@ -18,6 +18,14 @@
     <string name="sort_date_ascending">Newest date first</string>
     <string name="sort_date_descending">Oldest date first</string>
     <string name="shared_string_nearest">Nearest</string>
+    <string name="cloud_version_confirm_delete">Are you sure you want to delete \"%1$s\" from OsmAnd Cloud?</string>
+    <string name="shared_string_delete_file">Delete file</string>
+    <string name="delete_cloud_version">Delete cloud version</string>
+    <string name="local_version_do_not_exist">Local version do not exist</string>
+    <string name="shared_string_in_progress">In progress</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Movement speed</string>
+    <string name="simulation_position_description">Choose a track file that will be used as a source for location moving</string>
     <string name="approximate_bearing">Approximate Bearing</string>
     <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
     <string name="shared_string_inches">inches</string>
@@ -49,8 +57,17 @@
     <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Skip download</string>
     <string name="determine_location">Allow us to determine your location</string>
-    <string name="release_4_4_pre">
-        • Here will be strings for 4.4 release
+    <string name="release_4_4">
+        • Improved \"Tracks\" menu in \"Configure Map\"\n\n
+        • Context menu now displays localized names for POI\n\n
+        • Added option to share route by link\n\n
+        • Added \"Nautical miles/feet\" unit of length\n\n
+        • Map orientation added new fixed mode\n\n
+        • Simplified start screen\n\n
+        • AFixed location position in split screen mode in Android Auto\n\n
+        • Added \"Speed/Slope\" graph for track analysis\n\n
+        • Android 13 moved app language selection to system settings\n\n
+        • Fixed issues with displaying Vegan places\n\n
     </string>
     <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>

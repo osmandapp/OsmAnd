@@ -477,14 +477,11 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		}
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
-			mapActivity.getMyApplication().runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					if (location == null) {
-						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
-					}
-					adapter.notifyDataSetChanged();
+			mapActivity.getMyApplication().runInUIThread(() -> {
+				if (location == null) {
+					location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 				}
+				adapter.notifyDataSetChanged();
 			});
 		}
 	}
