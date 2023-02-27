@@ -37,7 +37,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
 	private OsmandDevelopmentPlugin plugin;
-	private Runnable updateSimulationTitle;
 	private StateChangedListener<Boolean> showHeightmapsListener;
 
 	@Override
@@ -121,10 +120,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference simulateYourLocation = findPreference(SIMULATE_YOUR_LOCATION);
 		simulateYourLocation.setIconSpaceReserved(false);
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
-		updateSimulationTitle = () -> simulateYourLocation.setSummary(sim.isRouteAnimating() ?
-				R.string.simulate_your_location_stop_descr :
-				R.string.simulate_your_location_gpx_descr);
-		updateSimulationTitle.run();
+		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
 	}
 
 	private void setupDebugRenderingInfoPref() {
@@ -226,9 +222,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
-			updateSimulationTitle.run();
-			OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
-			sim.startStopRouteAnimation(getActivity(), true, updateSimulationTitle);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();

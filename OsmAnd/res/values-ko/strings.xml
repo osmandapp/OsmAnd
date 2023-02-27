@@ -320,9 +320,9 @@
     <string name="poi_context_menu_delete">POI 삭제</string>
     <string name="rotate_map_compass_opt">나침반 방향</string>
     <string name="rotate_map_bearing_opt">이동 방향</string>
-    <string name="rotate_map_none_opt">회전 안함</string>
-    <string name="rotate_map_to_bearing_descr">지도 화면 정렬 방식을 선택합니다</string>
-    <string name="rotate_map_to_bearing">지도 방향</string>
+    <string name="rotate_map_north_opt">회전 안함</string>
+    <string name="rotate_map_to_descr">지도 화면 정렬 방식을 선택합니다</string>
+    <string name="rotate_map_to">지도 방향</string>
     <string name="show_route">경로 상세정보</string>
     <string name="fav_imported_sucessfully">즐겨찾기를 성공적으로 임포트하였습니다</string>
     <string name="fav_file_to_load_not_found">즐겨찾기를 포함한 GPX 파일을 {0}에서 찾을 수 없습니다</string>
@@ -602,7 +602,7 @@
     <string name="lang_it">이탈리아어</string>
     <string name="lang_ja">일본어</string>
     <string name="lang_ko">한국어</string>
-    <string name="lang_no">노르웨이어</string>
+    <string name="lang_no">노르웨이 부크몰어</string>
     <string name="lang_pl">폴란드어</string>
     <string name="lang_ro">루마니아어</string>
     <string name="lang_ru">러시아어</string>
@@ -1527,11 +1527,11 @@
     <string name="lang_os">오세티아어</string>
     <string name="lang_eo">에스페란토어</string>
     <string name="lang_es_ar">아르헨티나 스페인어</string>
-    <string name="lang_nb">노르웨이 보크몰어</string>
+    <string name="lang_nb">노르웨이 부크몰어</string>
     <string name="lang_vo">볼라퓌크어</string>
     <string name="lang_th">타일랜드어</string>
     <string name="lang_te">텔루구어</string>
-    <string name="lang_nn">노르웨이어(니노르스크)</string>
+    <string name="lang_nn">노르웨이 뉘노르스크어</string>
     <string name="lang_new">Newar / 네팔 Bhasa</string>
     <string name="lang_ms">말레이시아어</string>
     <string name="lang_ht">아이티어</string>

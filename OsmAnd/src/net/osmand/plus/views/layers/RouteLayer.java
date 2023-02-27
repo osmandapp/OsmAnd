@@ -32,7 +32,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
@@ -270,7 +270,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			clearXAxisPoints();
 			if (!Algorithms.isEmpty(xAxisPoints)) {
 				Bitmap pointBitmap = chartPointsHelper.createXAxisPointBitmap(attrs.defaultColor, tileBox.getDensity());
-				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder() - 500, xAxisPoints, pointBitmap);
+				trackChartPointsProvider = new LocationPointsTileProvider(getPointsOrder() - 2000, xAxisPoints, pointBitmap);
 				trackChartPointsProvider.drawPoints(mapRenderer);
 			}
 		} else {
@@ -311,7 +311,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			highlightedPointCollection = new MapMarkersCollection();
 			MapMarkerBuilder builder = new MapMarkerBuilder();
-			builder.setBaseOrder(getPointsOrder() - 600);
+			builder.setBaseOrder(getPointsOrder() - 2100);
 			builder.setIsAccuracyCircleSupported(false);
 			builder.setIsHidden(true);
 			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
@@ -486,8 +486,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
 						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
-				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
-						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
+				lastProjection = currentAnimatedRoute > 0
+						? RoutingHelperUtils.getProject(currentLocation, locations.get(currentAnimatedRoute - 1),
+						locations.get(currentAnimatedRoute)) : null;
+				if (lastProjection != null && app.getSettings().APPROXIMATE_BEARING.get()) {
+					RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+							locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute));
+				}
 				startLocationIndex = currentAnimatedRoute;
 				if (lastFixedLocationChanged) {
 					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {
@@ -779,7 +784,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		if (excludeUntouchableObjects) {
+			return;
+		}
+
 		List<TransportStop> routeTransportStops = getRouteTransportStops();
 		if (!Algorithms.isEmpty(routeTransportStops)) {
 			getFromPoint(tileBox, point, res, routeTransportStops);
@@ -811,11 +821,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		return isPreviewRouteLineVisible();
-	}
-
-	@Override
-	public boolean isObjectClickable(Object o) {
-		return false;
 	}
 
 	@Override

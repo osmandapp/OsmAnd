@@ -1425,7 +1425,7 @@
     <string name="transport_searching_transport">ഗതാഗത പരിണതഫലം(ലക്ഷ്യസ്ഥാനമില്ല):</string>
     <string name="rotate_map_compass_opt">വടക്ക്നോക്കിയുടെ ദിശയില്‍</string>
     <string name="rotate_map_bearing_opt">യാത്രാ ദിശയില്‍</string>
-    <string name="rotate_map_to_bearing">ഭൂപട ദിശ : വടക്കോട്ട് ദര്‍ശനം/സഞ്ചാര ദിശ</string>
+    <string name="rotate_map_to">ഭൂപട ദിശ : വടക്കോട്ട് ദര്‍ശനം/സഞ്ചാര ദിശ</string>
     <string name="use_trackball_descr">ഭൂപടം നീക്കാനായി ട്രാക്ക്ബോള്‍ ഉപയോഗിക്കുക</string>
     <string name="int_seconds">സെക്കന്റുകള്‍</string>
     <string name="int_min">മി.</string>
@@ -1748,7 +1748,7 @@
     <string name="srtm_color_scheme">നിറങ്ങളുടെ സ്കീം</string>
     <string name="shared_string_overview">അവലോകനം</string>
     <string name="shared_string_visible">ദൃശ്യമായ</string>
-    <string name="driving_region_automatic">തനിയെയുള്ള</string>
+    <string name="shared_string_automatic">തനിയെയുള്ള</string>
     <string name="shared_string_color">നിറം</string>
     <string name="rendering_value_high_name">കൂടിയ</string>
     <string name="rendering_value_medium_w_name">ഇടത്തരം</string>
@@ -2219,8 +2219,8 @@
     <string name="transport_searching_route">ട്രാൻസ്പോർട്ട് ഫലങ്ങൾ (ലക്ഷ്യസ്ഥാനത്തേക്ക് {0}):</string>
     <string name="gpx_files_not_found">ട്രാക്കുകളുടെ ഫോൾഡറിൽ GPX ഫയലുകൾ ഒന്നും കണ്ടെത്തിയില്ല</string>
     <string name="poi_context_menu_modify">POI പരിഷ്ക്കരിക്കുക</string>
-    <string name="rotate_map_none_opt">പരിക്രമണമില്ല (വടക്ക് എപ്പോഴും മുകളിലേക്ക്)</string>
-    <string name="rotate_map_to_bearing_descr">മാപ്പ് സ്ക്രീൻ അലൈന്‍മെന്റ് തിരഞ്ഞെടുക്കുക.</string>
+    <string name="rotate_map_north_opt">പരിക്രമണമില്ല (വടക്ക് എപ്പോഴും മുകളിലേക്ക്)</string>
+    <string name="rotate_map_to_descr">മാപ്പ് സ്ക്രീൻ അലൈന്‍മെന്റ് തിരഞ്ഞെടുക്കുക.</string>
     <string name="none_region_found">മെമ്മറി കാർഡിൽ ഡൌൺലോഡ് ചെയ്ത മാപ്പുകൾ ഒന്നും കണ്ടെത്താൻ കഴിഞ്ഞില്ല.</string>
     <string name="poi_namefinder_query_empty">POI കണ്ടെത്താൻ ടൈപ്പുചെയ്യുക</string>
     <string name="thanks_yandex_traffic">ട്രാഫിക്ക് വിവരങ്ങള്‍ക്കായി യാണ്ടെക്സിന് നന്ദി.</string>

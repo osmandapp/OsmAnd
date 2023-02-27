@@ -1,5 +1,10 @@
 package net.osmand.gpx;
 
+import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXTrackAnalysis.SplitSegment;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,13 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXTrackAnalysis.SplitSegment;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 public class GPXFile extends GPXUtilities.GPXExtensions {
-	
+
 	private static final String DEFAULT_WPT_GROUP_NAME = "";
 
 	public String author;
@@ -25,7 +25,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	final List<GPXUtilities.WptPt> points = new ArrayList<>();
 	Map<String, GPXUtilities.PointsGroup> pointsGroups = new LinkedHashMap<>();
-	final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
+	private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 	public Exception error = null;
 	public String path = "";
@@ -713,6 +713,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("width", width);
 	}
 
+	public boolean isShowArrowsSet() {
+		return extensions != null && extensions.containsKey("show_arrows");
+	}
+
 	public boolean isShowArrows() {
 		String showArrows = null;
 		if (extensions != null) {
@@ -723,6 +727,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void setShowArrows(boolean showArrows) {
 		getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
+	}
+
+	public boolean isShowStartFinishSet() {
+		return extensions != null && extensions.containsKey("show_start_finish");
 	}
 
 	public boolean isShowStartFinish() {
@@ -738,6 +746,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void addRouteKeyTags(Map<String, String> routeKey) {
 		networkRouteKeyTags.putAll(routeKey);
+		setExtensionsWriter(Algorithms.isEmpty(networkRouteKeyTags) ? null : GPXUtilities.createNetworkRouteExtensionWriter(networkRouteKeyTags));
 	}
 
 	public Map<String, String> getRouteKeyTags() {

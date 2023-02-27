@@ -40,17 +40,12 @@
 	<uses-feature android:name="android.hardware.bluetooth" android:required="false" />
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
-	<!--
-	<uses-sdk android:targetSdkVersion="26"
-		tools:overrideLibrary="com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes, android.support.customtabs"/>
-	-->
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 		android:xlargeScreens="true" android:anyDensity="true" />
 
 	<queries>
 		<package android:name="net.osmand.srtmPlugin" />
 		<package android:name="net.osmand.srtmPlugin.paid" />
-		<package android:name="net.osmand.parkingPlugin" />
 		<package android:name="net.osmand.skimapsPlugin" />
 		<package android:name="net.osmand.nauticalPlugin" />
 
@@ -77,7 +72,8 @@
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
 		android:supportsRtl="true" android:usesCleartextTraffic="true"
-		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true">
+		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
+		android:localeConfig="@xml/locales_config">
 
 		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
@@ -110,7 +106,8 @@
 		</receiver>
 
 		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:theme="@style/FirstSplashScreenPlus"
-			android:screenOrientation="unspecified" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:exported="true">
+			android:screenOrientation="unspecified" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:exported="true"
+			android:configChanges="uiMode">
 
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />

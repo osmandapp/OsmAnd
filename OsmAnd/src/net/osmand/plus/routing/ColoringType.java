@@ -174,7 +174,6 @@ public enum ColoringType {
 		return true;
 	}
 
-
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
 	                                         @Nullable String attributeName, boolean route) {
 		if ((isRouteInfoAttribute() && route) || this == SLOPE) {

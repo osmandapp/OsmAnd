@@ -400,7 +400,8 @@ public class BackupHelper {
 			}
 			for (RemoteFile remoteFile : info.filesToDownload) {
 				if (remoteFile.item instanceof FileSettingsItem) {
-					if (item.equals(remoteFile.item)) {
+					String fileName = remoteFile.item.getFileName();
+					if (fileName != null && item.applyFileName(fileName)) {
 						filesToUpload.add(((FileSettingsItem) remoteFile.item).getFile());
 					}
 				}
@@ -901,8 +902,10 @@ public class BackupHelper {
 
 			@Override
 			protected void onProgressUpdate(LocalFile... localFiles) {
-				if (listener != null) {
-					listener.onFileCollected(localFiles[0]);
+				for (LocalFile file : localFiles) {
+					if (listener != null) {
+						listener.onFileCollected(file);
+					}
 				}
 			}
 

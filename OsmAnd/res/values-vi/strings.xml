@@ -238,9 +238,9 @@
     <string name="poi_context_menu_delete">Xóa địa điểm</string>
     <string name="rotate_map_compass_opt">Theo la bàn</string>
     <string name="rotate_map_bearing_opt">Theo vị trí di chuyển</string>
-    <string name="rotate_map_none_opt">Không xoay</string>
-    <string name="rotate_map_to_bearing_descr">Căn chỉnh bản đồ:</string>
-    <string name="rotate_map_to_bearing">Xoay bản đồ</string>
+    <string name="rotate_map_north_opt">Không xoay</string>
+    <string name="rotate_map_to_descr">Căn chỉnh bản đồ:</string>
+    <string name="rotate_map_to">Xoay bản đồ</string>
     <string name="show_route">Hiện tuyến đường</string>
     <string name="fav_imported_sucessfully">Ưa thích được đọc vào thành công</string>
     <string name="fav_file_to_load_not_found">Tập tin GPX chưa các điểm ưa thích không thấy tại {0}</string>
@@ -575,4 +575,17 @@
     <string name="lang_zh_hk">Tiếng Trung (Hồng Kông)</string>
     <string name="layer_gpx_layer">Theo dõi</string>
     <string name="width_limit_description">Cung cấp chiều rộng của chiếc xe của bạn, một số tuyến đường có thể hạn chế các phương tiện quá rộng.</string>
+    <string name="shared_string_yards">yard</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Thay đổi giao diện của %1$s các theo dõi\?</string>
+    <string name="recently_visible">Hiển thị gần đây %1$s</string>
+    <string name="empty_tracks_description">Bạn có thể nhập, tạo hoặc ghi tệp theo dõi bằng OsmAnd.</string>
+    <string name="shared_string_apply_changes">Áp dụng các thay đổi</string>
+    <string name="no_visible_tracks_description">Chọn các tuyến đường để hiển thị chúng trên bản đồ.</string>
+    <string name="no_visible_tracks">Không có dấu vết trên bản đồ</string>
+    <string name="empty_tracks">Bạn không có tập tin theo dõi.</string>
+    <string name="shared_string_select_recent">Chọn gần đây</string>
+    <string name="change_appearance">Thay đổi ngoại hình</string>
+    <string name="switch_folder">Chuyển thư mục</string>
+    <string name="show_all_tracks">Hiển thị tất cả các theo dõi</string>
+    <string name="shared_string_kilograms">kilôgam</string>
 </resources>

@@ -57,8 +57,12 @@ public class OsmAndFormatter {
 
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+
+	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
+	private static final int MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT = 24 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
@@ -116,12 +120,41 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
+	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems,
+	                                            String def, boolean showTime) {
 		if (lastUploadedTimems > 0) {
 			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				return getFormattedDate(app, lastUploadedTimems);
+				return showTime
+						? getFormattedDateTime(app, lastUploadedTimems)
+						: getFormattedDate(app, lastUploadedTimems);
 			} else {
+				String formattedDuration = getFormattedDuration((int) duration, app);
+				if (Algorithms.isEmpty(formattedDuration)) {
+					return app.getString(R.string.duration_moment_ago);
+				} else {
+					return app.getString(R.string.duration_ago, formattedDuration);
+				}
+			}
+		}
+		return def;
+	}
+
+	public static String getChangesFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
+		if (lastUploadedTimems > 0) {
+			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
+
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				DateFormat dateFormat = new SimpleDateFormat("MMM d, HH:mm:ss");
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis(lastUploadedTimems);
+				return dateFormat.format(calendar.getTime());
+			}else if(duration > MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT){
+				DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTimeInMillis(lastUploadedTimems);
+				return app.getString(R.string.yesterday) + ", " + dateFormat.format(calendar.getTime());
+			}else {
 				String formattedDuration = getFormattedDuration((int) duration, app);
 				if (Algorithms.isEmpty(formattedDuration)) {
 					return app.getString(R.string.duration_moment_ago);
@@ -168,7 +201,13 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {
-		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+		return DateUtils.formatDateTime(context, milliseconds,
+				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+	}
+
+	public static String getFormattedDateTime(Context context, long milliseconds) {
+		return DateUtils.formatDateTime(context, milliseconds,
+				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
 	public static String getFormattedTimeInterval(OsmandApplication app, double interval) {
@@ -717,6 +756,7 @@ public class OsmAndFormatter {
 		}
 		return result.toString();
 	}
+
 
 	private static String formatCoordinate(double coordinate, int outputType) {
 

@@ -35,12 +35,10 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -48,6 +46,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
@@ -103,7 +103,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	public interface ContextMenuFragmentListener {
 		void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated);
+
 		void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState);
+
 		void onContextMenuDismiss(@NonNull ContextMenuFragment fragment);
 	}
 
@@ -266,7 +268,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 
@@ -480,18 +482,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		}
 		mainView.setOnTouchListener(slideTouchListener);
 
-		containerLayoutListener = new OnLayoutChangeListener() {
-			@Override
-			public void onLayoutChange(View view, int left, int top, int right, int bottom,
-									   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-				if (forceUpdateLayout || bottom != oldBottom) {
-					forceUpdateLayout = false;
-					processScreenHeight(view.getParent());
-					runLayoutListener();
-				}
-			}
-		};
-
 		return view;
 	}
 
@@ -524,7 +514,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		v.setAlpha(alpha);
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -532,7 +522,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void updateVisibility(View v, boolean visible) {
 		if (visible && v.getVisibility() != View.VISIBLE) {
 			v.setVisibility(View.VISIBLE);
-		} else  if (!visible && v.getVisibility() == View.VISIBLE) {
+		} else if (!visible && v.getVisibility() == View.VISIBLE) {
 			v.setVisibility(View.INVISIBLE);
 		}
 	}
@@ -594,14 +584,17 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateContainerLayoutListener(view, true);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		ViewParent parent = view != null ? view.getParent() : null;
-		if (parent != null && containerLayoutListener != null) {
-			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
-		}
+		updateContainerLayoutListener(view, true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -620,12 +613,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void onPause() {
 		super.onPause();
 		paused = true;
-		if (view != null) {
-			ViewParent parent = view.getParent();
-			if (parent != null && containerLayoutListener != null) {
-				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
-			}
-		}
+		updateContainerLayoutListener(view, false);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			if (!wasDrawerDisabled) {
@@ -636,6 +624,33 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 				mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(tag);
 			}
 		}
+	}
+
+	private void updateContainerLayoutListener(@Nullable View view, boolean add) {
+		ViewParent parent = view != null ? view.getParent() : null;
+		if (parent == null) {
+			return;
+		}
+		View container = (View) parent;
+		OnLayoutChangeListener listener = getContainerLayoutListener();
+		container.removeOnLayoutChangeListener(listener);
+		if (add) {
+			container.addOnLayoutChangeListener(listener);
+		}
+	}
+
+	@NonNull
+	private OnLayoutChangeListener getContainerLayoutListener() {
+		if (containerLayoutListener == null) {
+			containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+				if (forceUpdateLayout || bottom != oldBottom) {
+					forceUpdateLayout = false;
+					processScreenHeight(view.getParent());
+					runLayoutListener();
+				}
+			};
+		}
+		return containerLayoutListener;
 	}
 
 	public int getViewY() {
@@ -666,7 +681,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	private int getMinHalfY(MapActivity mapActivity) {
 		return viewHeight - (int) Math.min(viewHeight * getMiddleStateKoef(),
-				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity() );
+				MIDDLE_STATE_MIN_HEIGHT_DP * mapActivity.getMapView().getDensity());
 	}
 
 	public boolean isMoving() {
@@ -944,7 +959,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	protected void onHeaderClick() {
-
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)

@@ -11,9 +11,8 @@ import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.IMapTiledDataProvider;
 import net.osmand.core.jni.IQueryController;
-import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
@@ -23,7 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
 
@@ -64,7 +63,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
+	public long obtainImageData(IMapTiledDataProvider.Request request, SWIGTYPE_p_QByteArray byteArray) {
 		long requestTimestamp = System.currentTimeMillis();
 		IQueryController queryController = request.getQueryController();
 		boolean cacheOnly = request.getCacheOnly();
@@ -84,12 +83,12 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		byte[] secondTileData;
 		firstTileData = getTileBytes(tileX, tileY, zoom, requestTimestamp, cacheOnly, queryController);
 		if (firstTileData == null) {
-			return SwigUtilities.nullSkImage();
+			return 0;
 		}
 
 		Bitmap firstTileBitmap = BitmapFactory.decodeByteArray(firstTileData, 0, firstTileData.length);
 		if (firstTileBitmap == null) {
-			return SwigUtilities.nullSkImage();
+			return 0;
 		}
 		if (shiftedTile) {
 			Bitmap resultTileBitmap = Bitmap.createBitmap((int)tileSize, (int)tileSize, Bitmap.Config.ARGB_8888);
@@ -101,21 +100,25 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			if (secondTileData != null) {
 				Bitmap secondTileBitmap = BitmapFactory.decodeByteArray(secondTileData, 0, secondTileData.length);
 				if (secondTileBitmap == null) {
-					return SwigUtilities.nullSkImage();
+					return 0;
 				}
 				canvas.translate(0, tileSize);
 				canvas.drawBitmap(secondTileBitmap, 0, 0, paint);
 			}
-			return NativeUtilities.createSkImageFromBitmap(resultTileBitmap);
+			byte[] bytes = AndroidUtils.getByteArrayFromBitmap(resultTileBitmap);
+			SwigUtilities.appendToQByteArray(byteArray, bytes);
+			return (long) resultTileBitmap.getHeight() << 32 | resultTileBitmap.getWidth();
 		} else {
-			return NativeUtilities.createSkImageFromBitmap(firstTileBitmap);
+			byte[] bytes = AndroidUtils.getByteArrayFromBitmap(firstTileBitmap);
+			SwigUtilities.appendToQByteArray(byteArray, bytes);
+			return (long) firstTileBitmap.getHeight() << 32 | firstTileBitmap.getWidth();
 		}
 
 	}
 
 	@Override
 	public boolean supportsObtainImage() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -123,10 +126,6 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		return true;
 	}
 
-	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
-	}
-	
 	@Override
 	public long getTileSize() {
 		return tileSource.getTileSize();

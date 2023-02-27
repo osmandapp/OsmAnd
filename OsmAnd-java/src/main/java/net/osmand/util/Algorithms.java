@@ -218,6 +218,11 @@ public class Algorithms {
 		return oddNodes;
 	}
 
+	public static String getFileNameWithoutExtensionAndRoadSuffix(String fileName) {
+		String name = getFileNameWithoutExtension(fileName);
+		return name.endsWith(".road") ? name.substring(0, name.lastIndexOf(".road")) : name;
+	}
+
 	public static String getFileNameWithoutExtension(File f) {
 		return getFileNameWithoutExtension(f.getName());
 	}

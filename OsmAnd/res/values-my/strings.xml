@@ -52,7 +52,7 @@
     <string name="select_city">မြို့ကြီးရွေးချယ်ပါ</string>
     <string name="select_postcode">စာပို့သင်္ကေတကိုရွေးချယ်ပါ</string>
     <string name="right_side_navigation">ညာလက်မောင်း</string>
-    <string name="driving_region_automatic">အော်တိုမက်တစ်</string>
+    <string name="shared_string_automatic">အော်တိုမက်တစ်</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">တောင်ကုန်း</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">မြေညီ</string>
     <string name="routing_attr_driving_style_speed_name">လမ်းကြောင်းတိုများ</string>

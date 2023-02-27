@@ -12,10 +12,7 @@
 		android:layout_height="@dimen/bottom_sheet_large_list_item_height"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
-		android:paddingStart="@dimen/list_content_padding"
-		android:paddingLeft="@dimen/list_content_padding"
-		android:paddingEnd="@dimen/list_content_padding"
-		android:paddingRight="@dimen/list_content_padding">
+		android:paddingHorizontal="@dimen/list_content_padding">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"

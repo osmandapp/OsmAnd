@@ -776,6 +776,8 @@ public class OsmandSettings {
 		}
 	}.makeProfile().cache();
 
+	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal().makeShared();
+
 	public final CommonPreference<DistanceByTapTextSize> DISTANCE_BY_TAP_TEXT_SIZE = new EnumStringPreference<>(this, "distance_by_tap_text_size", DistanceByTapTextSize.NORMAL, DistanceByTapTextSize.values()).makeProfile();
 
 	public final OsmandPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeProfile();
@@ -1500,7 +1502,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
-
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,
@@ -1632,6 +1633,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_NONE = 0;
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
+	public static final int ROTATE_MAP_MANUAL = 3;
 	public final CommonPreference<Integer> ROTATE_MAP =
 			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
@@ -1647,13 +1649,16 @@ public class OsmandSettings {
 	public static final int MIDDLE_TOP_CONSTANT = 3;
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
 
-	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false) {
+	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
+	public static final int POSITION_PLACEMENT_CENTER = 1;
+	public static final int POSITION_PLACEMENT_BOTTOM = 2;
+	public final CommonPreference<Integer> POSITION_PLACEMENT_ON_MAP = new IntPreference(this, "position_placement_on_map", 0) {
 
 		@Override
-		public Boolean getProfileDefaultValue(ApplicationMode mode) {
+		public Integer getProfileDefaultValue(ApplicationMode mode) {
 			// By default display position shifts to the bottom part of the screen
 			// only if the "Map orientation" was set to "Movement direction".
-			return ROTATE_MAP.getModeValue(mode) != OsmandSettings.ROTATE_MAP_BEARING;
+			return 0;
 		}
 	}.makeProfile();
 
@@ -2837,6 +2842,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
 
+	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
+			new BooleanPreference(this, "approximate_bearing", true).makeProfile();
+
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
 
@@ -2884,7 +2892,7 @@ public class OsmandSettings {
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference(this, "osmand_theme", OSMAND_LIGHT_THEME) {
+			new IntPreference(this, "osmand_theme", isSupportSystemDefaultTheme() ? SYSTEM_DEFAULT_THEME : OSMAND_LIGHT_THEME) {
 				@Override
 				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 					Integer theme = parseString(json.getString(getId()));

@@ -85,9 +85,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} : null;
 		itemView.setOnClickListener(listener);
-		itemView.setEnabled(!isSyncing(item));
-
-		setupSelectableBackground();
+		boolean enabled = listener != null && !isSyncing(item);
+		itemView.setEnabled(enabled);
+		if (enabled) {
+			setupSelectableBackground();
+		}
 		AndroidUiHelper.updateVisibility(divider, !lastItem);
 		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 	}
@@ -136,6 +138,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 	@Nullable
 	private Drawable getContentIcon(@DrawableRes int icon) {
-		return app.getUIUtilities().getIcon(icon, R.color.icon_color_secondary_light);
+		return app.getUIUtilities().getIcon(icon, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 }

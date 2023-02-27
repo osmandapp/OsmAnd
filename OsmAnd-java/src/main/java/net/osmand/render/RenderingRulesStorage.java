@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -361,7 +362,11 @@ public class RenderingRulesStorage {
 			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
 				String attr = attrsMap.get("name");
 				RenderingRule root = new RenderingRule(new HashMap<String, String>(), false, RenderingRulesStorage.this);
-				renderingAttributes.put(attr, root);
+				if (renderingAttributes.containsKey(attr)) {
+					renderingAttributes.get(attr).addIfElseChildren(root);
+				} else {
+					renderingAttributes.put(attr, root);
+				}
 				stack.push(root);
 			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
 				String attr = attrsMap.get("attr");
@@ -562,13 +567,14 @@ public class RenderingRulesStorage {
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		STORE_ATTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
-		final String loc = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/";
-		String defaultFile = loc + "UniRS.render.xml";
+		final String stylesDir = System.getProperty("repo.dir") + "/resources/rendering_styles/";
+		String styleName = "topo";
+//		String styleName = "default";
 		if(args.length > 0) {
-			defaultFile = args[0];
+			styleName = args[0];
 		}
 		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(loc + "default.render.xml");
+		InputStream is = new FileInputStream(stylesDir + "default.render.xml");
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
@@ -587,25 +593,35 @@ public class RenderingRulesStorage {
 		} finally {
 			is.close();
 		}
-		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
+		RenderingRulesStorage storage = new RenderingRulesStorage(styleName, renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
 				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingConstants);
 //				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
-				depends.parseRulesFromXmlInputStream(new FileInputStream(loc + name + ".render.xml"), ref, false);
+				depends.parseRulesFromXmlInputStream(new FileInputStream(stylesDir + name + ".render.xml"), ref, false);
 				return depends;
 			}
 		};
-		is = new FileInputStream(defaultFile);
+		
+		is = new FileInputStream(stylesDir + styleName + ".render.xml");
 		storage.parseRulesFromXmlInputStream(is, resolver, false);
+		if (stylesDir != null) {
+			for (File file : new File(stylesDir).listFiles()) {
+				if (file.isFile() && file.getName().endsWith("addon.render.xml")) {
+					InputStream is3 = new FileInputStream(file);
+					storage.parseRulesFromXmlInputStream(is3, resolver, true);
+					is3.close();
+				}
+			}
+		}
 		
 //		storage = new RenderingRulesStorage("", null);
 //		new DefaultRenderingRulesStorage().createStyle(storage);
-		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
-			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
-		}
-//		printAllRules(storage);
+//		for (RenderingRuleProperty p :  storage.PROPS.getCustomRules()) {
+//			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
+//		}
+		printAllRules(storage);
 //		testSearch(storage);
 	}
 
@@ -614,13 +630,16 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "residential");
-//					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "contour");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "elevation");
+					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "contourtype=10m");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 13);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 13);
+					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
+					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
 //						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+					searchRequest.setStringFilter(storage.PROPS.get("contourColorScheme"), "yellow");
+					searchRequest.setStringFilter(storage.PROPS.get("contourLines"), "15");
+					
 //					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 //						if (customProp.isBoolean()) {
 //							searchRequest.setBooleanFilter(customProp, false);

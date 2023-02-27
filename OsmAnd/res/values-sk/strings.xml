@@ -432,9 +432,9 @@
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
     <string name="rotate_map_compass_opt">Smer kompasu</string>
     <string name="rotate_map_bearing_opt">Smer pohybu</string>
-    <string name="rotate_map_none_opt">Pevné (sever je hore)</string>
-    <string name="rotate_map_to_bearing_descr">Otáčanie mapy:</string>
-    <string name="rotate_map_to_bearing">Otáčanie mapy</string>
+    <string name="rotate_map_north_opt">Pevné (sever je hore)</string>
+    <string name="rotate_map_to_descr">Otáčanie mapy:</string>
+    <string name="rotate_map_to">Otáčanie mapy</string>
     <string name="show_route">Zobraziť cestu</string>
     <string name="fav_imported_sucessfully">Obľúbené miesta naimportované</string>
     <string name="fav_file_to_load_not_found">GPX súbor obsahujúci Obľúbené body sa nenašiel v {0}</string>
@@ -1061,7 +1061,7 @@
     <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Žiadne diaľnice</string>
     <string name="routing_attr_avoid_motorway_description">Vyhne sa diaľniciam</string>
-    <string name="routing_attr_weight_name">Hmotnostný limit</string>
+    <string name="routing_attr_weight_name">Hmotnosť</string>
     <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Zadať cieľ</string>
@@ -1091,7 +1091,7 @@
     <string name="index_name_canada">Severná Amerika - Kanada</string>
     <string name="interrupt_music">Pozastaviť hudbu</string>
     <string name="interrupt_music_descr">Hlasové povely pozastavia hudbu.</string>
-    <string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
+    <string name="always_center_position_on_map">Poloha umiestnená vždy v strede</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="misc_pref_title">Rôzne</string>
     <string name="localization_pref_title">Lokalizácia</string>
@@ -1521,7 +1521,7 @@
     <string name="application_dir_change_warning3">Presunúť údaje OsmAnd do nového cieľa\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Čísla domov</string>
     <string name="routing_attr_avoid_borders_description">Vyhne sa prekročeniu hraníc krajín</string>
-    <string name="routing_attr_height_name">Výškový limit</string>
+    <string name="routing_attr_height_name">Výška</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
     <string name="use_fast_recalculation_desc">Prepočíta iba začiatočný úsek trasy. Môže byť použité pre dlhé výlety.</string>
@@ -2192,7 +2192,7 @@
     <string name="full_version_thanks">Ďakujeme za zakúpenie platenej verzie OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Zvoľte fluktuáciu nadmorskej výšky</string>
     <string name="right_side_navigation">Premávka po pravej strane</string>
-    <string name="driving_region_automatic">Automaticky</string>
+    <string name="shared_string_automatic">Automaticky</string>
     <string name="fonts_header">Mapové písma</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom k voľným a kvalitným celosvetovým údajom z OpenStreetMap (OSM).
 \n
@@ -3179,7 +3179,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrémna</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Neurčená</string>
     <string name="routeInfo_piste_difficulty_name">Obtiažnosť zjazdovky</string>
-    <string name="routing_attr_width_name">Limit šírky</string>
+    <string name="routing_attr_width_name">Šírka</string>
     <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3657,7 +3657,7 @@
     <string name="shared_string_uninstall_and_restart">Odinštalovať a reštartovať</string>
     <string name="shared_string_uninstall">Odinštalovať</string>
     <string name="routing_attr_length_description">Zadajte aká dĺžka vozidla musí byť povolená na trase.</string>
-    <string name="routing_attr_length_name">Limit dĺžky</string>
+    <string name="routing_attr_length_name">Dĺžka</string>
     <string name="speed_cameras_removed_descr">Toto zariadenie neobsahuje rýchlostné radary.</string>
     <string name="app_mode_inline_skates">Kolieskové korčule</string>
     <string name="use_volume_buttons_as_zoom_descr">Ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
@@ -4187,10 +4187,10 @@
     <string name="backup_version_history_removed">História verzií bola odstránená.</string>
     <string name="backup_data_removed">Všetky údaje boli odstránené.</string>
     <string name="shared_string_progress">Postup</string>
-    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy.</string>
-    <string name="backup_dont_have_any_descr">Naplánujte automatické zálohovanie a nikdy nestraťte údaje.</string>
+    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy</string>
+    <string name="backup_dont_have_any_descr">Nastavte automatické zálohovanie a nikdy nestraťte údaje.</string>
     <string name="backup_welcome_back">Vitajte späť!</string>
-    <string name="backup_welcome_back_descr">Obnovte údaje na tomto zariadení pomocou existujúcej zálohy alebo zálohujte údaje do OsmAnd Cloudu.</string>
+    <string name="backup_welcome_back_descr">Obnovte údaje na tomto zariadení pomocou OsmAnd Cloudu.</string>
     <string name="backup_setup">Nastaviť zálohovanie</string>
     <string name="backup_restore_now">Obnoviť teraz</string>
     <string name="attribute">Vlastnosť</string>
@@ -4682,7 +4682,7 @@
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektrický</string>
-    <string name="routing_attr_motor_type_name">Motor vozidla</string>
+    <string name="routing_attr_motor_type_name">Palivo používané motorom</string>
     <string name="routing_attr_motor_type_description">Zvoľte druh paliva v motore, pre výpočet emisií CO2.</string>
     <string name="routing_attr_motor_type_diesel_name">Nafta</string>
     <string name="routing_attr_motor_type_petrol_name">Benzín</string>
@@ -4726,7 +4726,7 @@
     <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
     <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
     <string name="widget_with_dot">Nástroj.</string>
-    <string name="compass_click_desc">Stlačte kompas pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_click_desc">Pomôcka: Stlačte nástroj kompasu pre prepnutie režimu orientácie mapy.</string>
     <string name="compass_desc">Zobrazuje smer k severu.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
@@ -4832,13 +4832,13 @@
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.
 \nŤuknite dvoma prstami na mapu pre zobrazenie vzdialenosti medzi označenými bodmi</string>
-    <string name="display_position">Zobraziť polohu</string>
+    <string name="display_position">Zobrazenie polohy</string>
     <string name="favorite_delete_group">Odstrániť skupinu</string>
     <string name="download_heightmap_maps">Výšková mapa</string>
     <string name="quick_action_map_center_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Stred mapy.</string>
     <string name="quick_action_current_location_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Súčasná poloha.</string>
     <string name="coordinates_widget_current_location_desc">Nástroj zobrazuje zemepisné súradnice súčasnej polohy</string>
-    <string name="rotate_map_none_rotated_opt">Pevné (manuálne otočené)</string>
+    <string name="rotate_map_manual_opt">Pevné (manuálne otočené)</string>
     <string name="speak_gps_signal_status">Oznámiť stratu a obnovenie GPS signálu</string>
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
@@ -4853,7 +4853,7 @@
 \n
 \n • Nástroj \"Mapové značky\": pridaná možnosť zmeny správania po kliku
 \n
-\n • Opravená možnosť \"Zobrazenie polohy\"
+\n • Opravená možnosť \"Umiestnenie polohy\"
 \n
 \n • GPX: pridaná podpora pre značky \"link\", \"cmt\", \"desc\" a pre vlastné rozšírenia
 \n
@@ -4951,11 +4951,11 @@
     <string name="turn_on_nautical_depth_description">Zapnite pre zobrazenie námorných hĺbkových údajov na mape.</string>
     <string name="shared_string_time_left">Zostávajúci čas</string>
     <string name="switch_mode_by_tapping_on_widget">Prepnite režim stlačením nástroja.</string>
-    <string name="storage_migration_fragment_close_descr">Kopírovanie je hotové na %1$s%%. Ak teraz prerušíte, aplikácia nemusí správne pracovať.</string>
+    <string name="storage_migration_fragment_close_descr">Kopírovanie je hotové len na %1$s%%. Ak teraz prerušíte, aplikácia nemusí správne pracovať.</string>
     <string name="precipitation_layer">Vrstva zrážok</string>
     <string name="rendering_attr_showMtbScale_name">Zobraziť náročnosť pre horské bicykle</string>
     <string name="quick_action_wind_layer">Prepínač zobrazenia vrstvy vetra na mape.</string>
-    <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa náročnosti pre horské bicykle.</string>
+    <string name="rendering_attr_showMtbScale_description">Zobraziť trasy podľa ich náročnosti pre horské bicykle.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Zobraziť náročnosť stúpania pre horské bicykle</string>
     <string name="quick_action_temperature_layer">Prepínač zobrazenia vrstvy teploty na mape.</string>
     <string name="quick_action_precipitation_layer">Prepínač zobrazenia vrstvy zrážok na mape.</string>
@@ -4971,15 +4971,15 @@
     <string name="mtb_imba_full">Medzinárodné združenie pre horské bicyklovanie</string>
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary nárazov vetra</string>
-    <string name="release_4_4_pre">• Tu budú texty pre verziu 4.4</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary rýchlosti vetra</string>
+    <string name="release_4_4">• Tu budú texty pre verziu 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
     <string name="shared_string_open">Otvoriť</string>
     <string name="open_weather_action">Otvoriť počasie</string>
     <string name="shared_string_expires">Skončí</string>
     <string name="shared_string_purchased_on">Zakúpené dňa</string>
-    <string name="av_audio_format_bottom_sheet_descr">Zvoľte výstupný formát zvuku. Formát súboru pre zvuk je 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Zvoľte formát zvuku. Formát súboru pre zvuk je 3GPP (.3gp).</string>
     <string name="modified_file">Zmenený súbor</string>
     <string name="cloud_version_will_be_removed">Cloudová verzia bude odstránená</string>
     <string name="cloud_all_changes_downloaded">Všetky zmeny stiahnuté</string>
@@ -5009,12 +5009,46 @@
     <string name="cloud_recent_changes">Zmeny</string>
     <string name="cloud_all_changes_uploaded">Všetky zmeny odoslané</string>
     <string name="cloud_all_changes_uploaded_descr">Všetky zmeny na tomto zariadení sú synchronizované s OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">Nie sú žiadne konflikty</string>
+    <string name="cloud_no_conflicts">Nie sú žiadne konflikty.</string>
     <string name="download_cloud_version">Stiahnuť verziu z cloudu</string>
     <string name="shared_string_do_not_exist">Neexistuje</string>
     <string name="last_sync">Posledná synchronizácia</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportovať do súboru</string>
     <string name="si_nm_mt">Námorné míle/metre</string>
     <string name="si_nm_ft">Námorné míle/stopy</string>
+    <string name="set_up_backup">Nastaviť zálohovanie</string>
+    <string name="y_axis">Os Y</string>
+    <string name="x_axis">Os X</string>
+    <string name="value_downloaded_of_mb">Sťahuje sa %1$.1f/%2$.1f MB</string>
+    <string name="share_link">Zdieľať odkaz</string>
+    <string name="share_as_file">Zdieľať ako súbor</string>
+    <string name="skip_download">Preskočiť sťahovanie</string>
+    <string name="determine_location">Povoľte nám určiť vašu polohu</string>
+    <string name="last_synchronized">Naposledy synchronizované</string>
+    <string name="sound_beep_complex">Pípnutie: zložité</string>
+    <string name="sound_beep_complex_loud">Pípnutie: zložité hlasné</string>
+    <string name="sound_beep_minimal">Pípnutie: minimálne</string>
+    <string name="sound_beep_simple">Pípnutie: jednoduché</string>
+    <string name="sound_beep_simple_loud">Pípnutie: jednoduché hlasné</string>
+    <string name="weight_limit_error">Minimálna hodnota je \"%1$s\" ton. Použite profil \"%2$s\" ak je hmotnosť vozidla nižšia ako toto minimum.</string>
+    <string name="display_position_automatic_descr">Závisí od orientácie mapy: naspodu v režime \'v smere pohybu\', v strede obrazovky v iných prípadoch.</string>
+    <string name="shared_string_kilograms">kilogramov</string>
+    <string name="empty_tracks_description">Pomocou OsmAnd môžete importovať, vytvárať a nahrávať súbory stôp.</string>
+    <string name="change_appearance">Zmeniť vzhľad</string>
+    <string name="shared_string_yards">yardov</string>
+    <string name="shared_string_apply_changes">Použiť zmeny</string>
+    <string name="default_tracks_appearance_description">Tieto nastavenia vzhľadu sa použijú na všetky stopy zvolené na predošlej obrazovke.
+\n
+\nBudú tiež uložené ako \"%1$s\", aby boli použité %2$s pre všetky ostatné stopy bez implicitne alebo špecificky nastaveného vzhľadu.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Zmeniť vzhľad %1$s stôp\?</string>
+    <string name="default_tracks_appearance">Východzí vzhľad stôp</string>
+    <string name="no_visible_tracks_description">Zvoľte stopy pre zobrazenie na mape.</string>
+    <string name="no_visible_tracks">Žiadne stopy na mape</string>
+    <string name="recently_visible">Nedávno viditeľné %1$s</string>
+    <string name="empty_tracks">Nemáte súbory stôp.</string>
+    <string name="shared_string_select_recent">Vybrať nedávne</string>
+    <string name="switch_folder">Zmeniť priečinok</string>
+    <string name="show_all_tracks">Zobraziť všetky stopy</string>
+    <string name="shared_string_on_map">Na mape</string>
 </resources>

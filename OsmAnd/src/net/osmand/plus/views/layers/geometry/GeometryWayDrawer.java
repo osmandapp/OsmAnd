@@ -30,7 +30,6 @@ import java.util.List;
 public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	protected static final int LINE_ID = 1;
-	protected static final int OUTLINE_ID = 1000;
 	public static final float VECTOR_LINE_SCALE_COEF = 2.0f;
 
 	private final T context;
@@ -181,7 +180,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	protected void buildVectorLine(@NonNull VectorLinesCollection collection, int baseOrder,
-	                               int lineId, int color, float width, @Nullable float[] dashPattern,
+	                               int lineId, int color, float width,
+	                               int outlineColor, float outlineWidth,
+	                               @Nullable float[] dashPattern,
 	                               boolean approximationEnabled, boolean showPathBitmaps, @Nullable Bitmap pathBitmap,
 	                               @Nullable Bitmap specialPathBitmap, float bitmapStep, boolean bitmapOnSurface,
 	                               @Nullable  QListFColorARGB colorizationMapping, int colorizationScheme,
@@ -210,6 +211,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				.setLineId(lineId)
 				.setLineWidth(width * VECTOR_LINE_SCALE_COEF)
 				.setFillColor(NativeUtilities.createFColorARGB(color))
+				.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF)
+				.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor))
 				.setApproximationEnabled(approximationEnabled)
 				.setBaseOrder(baseOrder);
 		if (dashPattern != null) {
@@ -234,14 +237,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setColorizationScheme(colorizationScheme);
 		}
 		builder.buildAndAddToCollection(collection);
-	}
-
-	protected void drawFullBorder(@NonNull VectorLinesCollection collection, int baseOrder,
-	                              int zoom, @NonNull List<DrawPathData31> pathsData) {
-	}
-
-	protected void drawSegmentBorder(@NonNull VectorLinesCollection collection, int baseOrder,
-	                                 int zoom, @NonNull List<DrawPathData31> pathsData) {
 	}
 
 	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style,
@@ -278,12 +273,13 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
 		drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, style,
-				style.getColor(0), style.getWidth(0), style.getDashPattern(), approximationEnabled, pathsData);
+				style.getColor(0), style.getWidth(0), 0, 0, style.getDashPattern(), approximationEnabled, pathsData);
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows,
 	                              @NonNull GeometryWayStyle<?> style, int color, float width,
+								  int outlineColor, float outlineWidth,
 	                              @Nullable float[] dashPattern,
 	                              boolean approximationEnabled,
 	                              @NonNull List<DrawPathData31> pathsData) {
@@ -291,7 +287,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
 		double pxStep = style.getPointStepPx(1f);
-		buildVectorLine(collection, baseOrder, lineId, color, width, dashPattern,
+		buildVectorLine(collection, baseOrder, lineId, color, width, outlineColor, outlineWidth, dashPattern,
 				approximationEnabled, shouldDrawArrows, pointBitmap, null, (float) pxStep, true, null, 0,
 				pathsData);
 	}

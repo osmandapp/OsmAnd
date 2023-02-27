@@ -1,6 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
-import static net.osmand.plus.quickaction.CreateEditActionDialog.*;
+import static net.osmand.plus.quickaction.CreateEditActionDialog.FileSelected;
+import static net.osmand.plus.quickaction.CreateEditActionDialog.TAG;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -25,13 +26,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -118,8 +119,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null && gpxFile.hasTrkPt()) {
-			sim.startAnimationThread(app, OsmAndLocationSimulation.getSimulatedLocationsForGpx(app, (int) cutOffValue,
-					gpxFile), true, speedUpValue);
+			sim.startAnimationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
 		}
 	}
 
@@ -352,9 +352,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	@Nullable
 	private CreateEditActionDialog getDialog(@NonNull MapActivity mapActivity) {
 		Fragment fragment = mapActivity.getFragment(TAG);
-		return fragment instanceof CreateEditActionDialog
-				? ((CreateEditActionDialog) fragment)
-				: null;
+		return fragment instanceof CreateEditActionDialog ? ((CreateEditActionDialog) fragment) : null;
 	}
 
 	private boolean shouldUseSelectedGpxFile() {
@@ -418,8 +416,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 				};
 				String gpxFileName = Algorithms.getFileWithoutDirs(gpxFilePath);
 				File gpxFileDir = new File(gpxFilePath.replace("/" + gpxFileName, ""));
-				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxFileLoaded, gpxFileDir,
-						null, gpxFileName);
+				GpxUiHelper.loadGPXFileInDifferentThread(mapActivity, onGpxFileLoaded, gpxFileDir, null, gpxFileName);
 			}
 		}
 	}

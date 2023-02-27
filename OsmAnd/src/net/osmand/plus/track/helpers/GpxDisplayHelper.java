@@ -13,7 +13,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -171,6 +170,10 @@ public class GpxDisplayHelper {
 		return dg;
 	}
 
+	/**
+	 * @param fileToProcess If not null, only specified file will be processed.
+     *                     	Otherwise, all selected gpx files will be processed
+	 */
 	public static boolean processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess) {
 		if (app.isApplicationInitializing()) {
 			return false;
@@ -199,7 +202,7 @@ public class GpxDisplayHelper {
 				selectedGpxFile.setDisplayGroups(displayGroups, app);
 			}
 		}
-		return fileToProcess == null || fileToProcess.splitProcessed;
+		return true;
 	}
 
 	@NonNull

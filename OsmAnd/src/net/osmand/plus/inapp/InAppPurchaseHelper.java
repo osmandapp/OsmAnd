@@ -419,7 +419,6 @@ public abstract class InAppPurchaseHelper {
 	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-		new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public abstract void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException;
@@ -654,26 +653,26 @@ public abstract class InAppPurchaseHelper {
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
-			boolean promoActive = false;
+			boolean subscriptionActive = false;
 			try {
 				String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
 				if (!Algorithms.isEmpty(promocode)) {
-					promoActive = checkPromoSubscription(promocode);
+					subscriptionActive = checkBackupSubscription(promocode);
 				}
-				if (!promoActive) {
-					//Get only PRO subscriptions
+				if (!subscriptionActive) {
+					// Get only PRO subscriptions
 					String orderId = getOrderIdByDeviceIdAndToken();
 					if (!Algorithms.isEmpty(orderId)) {
-						promoActive = checkPromoSubscription(orderId);
+						subscriptionActive = checkBackupSubscription(orderId);
 					}
 				}
 			} catch (Exception e) {
 				logError("checkPromoAsync Error", e);
 			}
-			return promoActive;
+			return subscriptionActive;
 		}
 
-		private boolean checkPromoSubscription(@NonNull String orderId) {
+		private boolean checkBackupSubscription(@NonNull String orderId) {
 			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
 			if (!Algorithms.isEmpty(subscriptionStates)) {
 				SubscriptionStateHolder stateHolder = subscriptionStates.entrySet().iterator().next().getValue();
@@ -1048,6 +1047,9 @@ public abstract class InAppPurchaseHelper {
 
 	protected void notifyDismissProgress(InAppPurchaseTaskType taskType) {
 		ctx.runInUIThread(() -> {
+			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				new CheckBackupSubscriptionTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			}
 			if (uiActivity != null) {
 				uiActivity.dismissProgress(taskType);
 			}
@@ -1088,12 +1090,13 @@ public abstract class InAppPurchaseHelper {
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	private SubscriptionOrigin getSubscriptionOriginBySku(String sku) {
+	@NonNull
+	public SubscriptionOrigin getSubscriptionOriginBySku(@NonNull String sku) {
 		if (sku.equals("promo_website")) {
 			return SubscriptionOrigin.PROMO;
 		}
 		if (sku.toLowerCase().startsWith("osmand_pro_")) {
-			return SubscriptionOrigin.ANDROID;
+			return SubscriptionOrigin.GOOGLE;
 		}
 		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
 			return SubscriptionOrigin.IOS;

@@ -570,7 +570,7 @@ public class PoiFiltersHelper {
 
 	public void loadSelectedPoiFilters() {
 		// don't deal with not loaded poi types
-		if(!application.getPoiTypes().isInit()) {
+		if (!application.getPoiTypes().isInit()) {
 			return;
 		}
 		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();

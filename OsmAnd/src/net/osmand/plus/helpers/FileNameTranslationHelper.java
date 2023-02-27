@@ -2,6 +2,9 @@ package net.osmand.plus.helpers;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
@@ -53,14 +56,9 @@ public class FileNameTranslationHelper {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
 		} else if (fileName.length() == 2) { //voice recorded files
-			try {
-				Field f = R.string.class.getField("lang_" + fileName);
-				if (f != null) {
-					Integer in = (Integer) f.get(null);
-					return ctx.getString(in);
-				}
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
+			String name = getStringFromResName(ctx, "lang_" + fileName);
+			if (name != null) {
+				return name;
 			}
 		}
 
@@ -118,23 +116,31 @@ public class FileNameTranslationHelper {
 		}
 	}
 
-	public static String getVoiceName(Context ctx, String fileName) {
+	@NonNull
+	public static String getVoiceName(@NonNull Context ctx, @NonNull String fileName) {
+		String name = fileName.replace('-', '_').replace(' ', '_');
+		if (name.endsWith("_tts") || name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+			name = name.substring(0, name.length() - 4);
+		}
+		String voiceName = getStringFromResName(ctx, "lang_" + name);
+		if (voiceName == null) {
+			voiceName = getStringFromResName(ctx, "sound_" + name);
+		}
+		return voiceName != null ? voiceName : fileName;
+	}
+
+	@Nullable
+	private static String getStringFromResName(@NonNull Context ctx, @NonNull String name) {
 		try {
-			String nm = fileName.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts") || nm.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
-				nm = nm.substring(0, nm.length() - 4);
-			}
-			if (nm.length() == 2) {
-				Field f = R.string.class.getField("lang_" + nm);
-				if (f != null) {
-					Integer in = (Integer) f.get(null);
-					return ctx.getString(in);
-				}
+			Field f = R.string.class.getField(name);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
 			}
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			//ignored
 		}
-		return fileName;
+		return null;
 	}
 
 	public static String getFontName(String basename) {

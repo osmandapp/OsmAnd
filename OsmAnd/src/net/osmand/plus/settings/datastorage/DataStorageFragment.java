@@ -92,6 +92,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private OsmandActionBarActivity activity;
 	private boolean storageMigration;
 	private boolean firstUsage;
+	private boolean usageItemsVisible;
 
 	private MoveFilesTask moveFileTask = null;
 	private FilesCollectTask collectTask;
@@ -102,6 +103,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		app = getMyApplication();
 		activity = getMyActivity();
 		Bundle args = getArguments();
+		usageItemsVisible = false;
 		if (args != null) {
 			storageMigration = args.getBoolean(STORAGE_MIGRATION, false);
 			firstUsage = args.getBoolean(FIRST_USAGE, false);
@@ -140,6 +142,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 		Preference osmandUsage = findPreference(OSMAND_USAGE);
 		osmandUsage.setVisible(!storageMigration && !firstUsage);
+		toggle_usageItems(usageItemsVisible);
 
 		changeButton = new Preference(app);
 		changeButton.setKey(CHANGE_DIRECTORY_BUTTON);
@@ -285,7 +288,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		} else if (key.equals(OSMAND_USAGE)) {
 			long totalUsageBytes = dataStorageHelper.getTotalUsedBytes();
 			TextView tvSummary = itemView.findViewById(R.id.summary);
+			tvSummary.setTextColor(activeColor);
 			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
+			itemView.setOnClickListener(v -> {
+				usageItemsVisible = !usageItemsVisible;
+				toggle_usageItems(usageItemsVisible);
+			});
 		} else {
 			for (MemoryItem mi : memoryItems) {
 				if (key.equals(mi.getKey())) {
@@ -315,6 +323,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					tvMemory.setText(summary);
 				}
 			}
+		}
+	}
+
+	private void toggle_usageItems(boolean visible){
+		for (MemoryItem mi : memoryItems) {
+			findPreference(mi.getKey()).setVisible(visible);
 		}
 	}
 

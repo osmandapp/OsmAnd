@@ -227,6 +227,7 @@ public class LocalIndexHelper {
 				case TILES_DATA:
 					loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, needDescription, loadTask);
 					loadTilesData(app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR), result, false, needDescription, loadTask);
+					loadTilesData(app.getAppPath(IndexConstants.GEOTIFF_DIR), result, false, needDescription, loadTask);
 					break;
 				case TRAVEL_DATA:
 					loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, readFiles,
@@ -265,10 +266,31 @@ public class LocalIndexHelper {
 	}
 
 	public List<LocalIndexInfo> getLocalFullMaps(AbstractLoadLocalIndexTask loadTask) {
-		List<LocalIndexInfo> result = new ArrayList<>();
-		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, true, true,
+		List<LocalIndexInfo> results = new ArrayList<>();
+		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), results, false, true, true,
 				app.getResourceManager().getIndexFileNames(), app.getResourceManager().getIndexFiles(), loadTask);
-		return result;
+		List<LocalIndexInfo> roadOnlyList = new ArrayList<>();
+		loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), roadOnlyList, false, true, true,
+				app.getResourceManager().getIndexFileNames(), app.getResourceManager().getIndexFiles(), loadTask);
+		addUnique(results, roadOnlyList);
+		return results;
+	}
+
+	public static boolean addUnique(List<LocalIndexInfo> results, List<LocalIndexInfo> indexInfoList) {
+		int size = results.size();
+		for (LocalIndexInfo indexInfo : indexInfoList) {
+			boolean needAdd = true;
+			for (LocalIndexInfo result : results) {
+				if (result.getName().equals(indexInfo.getName())) {
+					needAdd = false;
+					break;
+				}
+			}
+			if (needAdd) {
+				results.add(indexInfo);
+			}
+		}
+		return size != results.size();
 	}
 
 	public void loadVoiceData(@NonNull File voiceDir, @NonNull List<LocalIndexInfo> result, boolean backup,
@@ -326,7 +348,10 @@ public class LocalIndexHelper {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile()) {
 					String fileName = tileFile.getName();
-					if (fileName.endsWith(SQLiteTileSource.EXT) || fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
+					boolean tilesData = fileName.endsWith(SQLiteTileSource.EXT)
+							|| fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
+							|| fileName.endsWith(IndexConstants.TIF_EXT);
+					if (tilesData) {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
 				} else if (tileFile.isDirectory()) {

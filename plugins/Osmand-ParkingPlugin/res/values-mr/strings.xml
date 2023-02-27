@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="shared_string_no">नाही</string>
-    <string name="shared_string_yes">हो</string>
-    <string name="osmand_app_not_found">ओएसएमएएनडि इन्स्टॉल केलेले नाही</string>
-    <string name="app_name">ओएसएमएएनडि पार्किंग</string>
-    <string name="parking_plugin_installed">ओएसएमएएनडि पार्किंग प्लगिन इन्स्टॉल आणि चालू केले आहे.</string>
-</resources>

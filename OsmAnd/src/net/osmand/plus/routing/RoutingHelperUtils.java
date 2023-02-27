@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +22,7 @@ import java.util.Map.Entry;
 public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
+	public static final int MAX_BEARING_DEVIATION = 160;
 
 	@NonNull
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
@@ -70,19 +70,25 @@ public class RoutingHelperUtils {
 		return rect.left == 0 && rect.right == 0 ? null : rect;
 	}
 
-	public static Location getProject(Location loc, Location from, Location to) {
+	@NonNull
+	public static Location getProject(@NonNull Location loc, @NonNull Location from, @NonNull Location to) {
 		LatLon project = MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
 		Location locationProjection = new Location(loc);
 		locationProjection.setLatitude(project.getLatitude());
 		locationProjection.setLongitude(project.getLongitude());
-		// This code is not valid:
-		// 1. if you are out of the route. So you keep moving in different direction, but bearing project is opposite
-		// 2. If projection too close to "to" point, bearing is NaN and location icon changes in a wrong way
-		// float bearingTo = locationProjection.bearingTo(to);
-		// locationProjection.setBearing(bearingTo);
 		return locationProjection;
+	}
+
+	public static void approximateBearingIfNeeded(@NonNull RoutingHelper helper, @NonNull Location locationProjection,
+	                                              @NonNull Location loc, @NonNull Location from, @NonNull Location to) {
+		float bearingTo = MapUtils.normalizeDegrees360(from.bearingTo(to));
+		double projectDist = helper.getMaxAllowedProjectDist(loc);
+		if ((!loc.hasBearing() || Math.abs(loc.getBearing() - bearingTo) < MAX_BEARING_DEVIATION) &&
+				loc.distanceTo(locationProjection) < projectDist) {
+			locationProjection.setBearing(bearingTo);
+		}
 	}
 
 	static double getOrthogonalDistance(Location loc, Location from, Location to) {
@@ -116,9 +122,11 @@ public class RoutingHelperUtils {
 	public static boolean checkWrongMovementDirection(Location currentLocation, Location prevRouteLocation, Location nextRouteLocation) {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
-		if (currentLocation.hasBearing() && nextRouteLocation != null && prevRouteLocation != null) {
+		if (currentLocation.hasBearing() && nextRouteLocation != null) {
 			float bearingMotion = currentLocation.getBearing();
-			float bearingToRoute = prevRouteLocation.bearingTo(nextRouteLocation);
+			float bearingToRoute = prevRouteLocation != null
+					? prevRouteLocation.bearingTo(nextRouteLocation)
+					: currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			if (Math.abs(diff) > 60f) {
 				// require delay interval since first detection, to avoid false positive

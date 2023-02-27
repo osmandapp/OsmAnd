@@ -73,10 +73,6 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		return pathBorderPaint;
 	}
 
-	public float getBorderOutlineWidth() {
-		return (hasMapRenderer() ? 0.5f : 1f) * getDensity();
-	}
-
 	@NonNull
 	public Paint getProfileIconBackgroundPaint() {
 		return profileIconBackgroundPaint;

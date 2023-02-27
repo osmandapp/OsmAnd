@@ -656,9 +656,9 @@
     <string name="poi_context_menu_delete">POI wotstronić</string>
     <string name="rotate_map_compass_opt">Směr kompasa</string>
     <string name="rotate_map_bearing_opt">Směr pohibowanja</string>
-    <string name="rotate_map_none_opt">Žana rotacija (sewjer je přeco horjeka)</string>
-    <string name="rotate_map_to_bearing_descr">Postajće wašnje wusměrjenja karty.</string>
-    <string name="rotate_map_to_bearing">Wusměrjenje karty</string>
+    <string name="rotate_map_north_opt">Žana rotacija (sewjer je přeco horjeka)</string>
+    <string name="rotate_map_to_descr">Postajće wašnje wusměrjenja karty.</string>
+    <string name="rotate_map_to">Wusměrjenje karty</string>
     <string name="fav_imported_sucessfully">Fawority importowane</string>
     <string name="error_occurred_loading_gpx">Njemóžach začitać GPX</string>
     <string name="send_report">Rozprawu pósłać</string>
@@ -942,7 +942,7 @@
     <string name="shared_string_visible">Widźomne</string>
     <string name="fonts_header">Pisma za kartu</string>
     <string name="right_side_navigation">Jězdźenje naprawo</string>
-    <string name="driving_region_automatic">Awtomatisce</string>
+    <string name="shared_string_automatic">Awtomatisce</string>
     <string name="parking_options">Opcije parkowanja</string>
     <string name="full_version_thanks">Dźakujemy so za kup dospołneje wersije OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hórkate</string>

@@ -20,6 +20,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -49,6 +50,7 @@ public class OptionsCard extends MapBaseCard {
 	public static final int GPS_FILTER_BUTTON_INDEX = 11;
 	public static final int ALTITUDE_CORRECTION_BUTTON_INDEX = 12;
 	public static final int DELETE_BUTTON_INDEX = 13;
+	public static final int SIMULATE_POSITION_BUTTON_INDEX = 14;
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;
@@ -115,6 +117,9 @@ public class OptionsCard extends MapBaseCard {
 				items.add(createGpsFilterItem());
 			}
 			items.add(createAltitudeCorrectionItem());
+			if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
+				items.add(createSimulatePositionItem());
+			}
 			items.add(createDividerItem());
 			items.add(createDeleteItem());
 		}
@@ -289,6 +294,16 @@ public class OptionsCard extends MapBaseCard {
 				.setTitle(app.getString(R.string.altitude_correction))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(ALTITUDE_CORRECTION_BUTTON_INDEX))
+				.create();
+	}
+
+	private BaseBottomSheetItem createSimulatePositionItem() {
+		Drawable simulatePositionIcon = getActiveIcon(R.drawable.ic_action_simulate_position);
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(AndroidUtils.getDrawableForDirection(app, simulatePositionIcon))
+				.setTitle(app.getString(R.string.simulate_your_location))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> notifyButtonPressed(SIMULATE_POSITION_BUTTON_INDEX))
 				.create();
 	}
 

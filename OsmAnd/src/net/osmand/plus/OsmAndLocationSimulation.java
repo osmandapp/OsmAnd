@@ -9,21 +9,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
@@ -44,17 +45,26 @@ public class OsmAndLocationSimulation {
 	private final float SECONDARY_MAX_SPEED = 50.0f;
 	private final float LIVING_SPTREET_MAX_SPEED = 15.0f;
 	private final float DEFAULT_MAX_SPEED = 40.0f;
-	private Thread routeAnimation;
-	private final OsmAndLocationProvider provider;
-	private final OsmandApplication app;
 
-	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider) {
+	private final OsmandApplication app;
+	private final OsmAndLocationProvider provider;
+
+	private Thread routeAnimation;
+	@Nullable
+	private GPXFile gpxFile = null;
+
+	public OsmAndLocationSimulation(@NonNull OsmandApplication app, @NonNull OsmAndLocationProvider provider) {
 		this.app = app;
 		this.provider = provider;
 	}
 
 	public boolean isRouteAnimating() {
 		return routeAnimation != null;
+	}
+
+	@Nullable
+	public GPXFile getGpxFile() {
+		return gpxFile;
 	}
 
 //	public void startStopRouteAnimationRoute(final MapActivity ma) {
@@ -88,8 +98,8 @@ public class OsmAndLocationSimulation {
 				builder.setTitle(R.string.animate_route);
 
 				View view = activity.getLayoutInflater().inflate(R.layout.animate_route, null);
-				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
-				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
+				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1");
+				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4");
 				Slider speedup = view.findViewById(R.id.Speedup);
 				speedup.setValueTo(3);
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
@@ -97,8 +107,7 @@ public class OsmAndLocationSimulation {
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
-						startAnimationThread(app, getSimulatedLocationsForGpx(app, 0, result[0]),
-								true, speedup.getValue() + 1);
+						startAnimationThread(app, result[0], 0, true, speedup.getValue() + 1);
 						if (runnable != null) {
 							runnable.run();
 						}
@@ -135,8 +144,15 @@ public class OsmAndLocationSimulation {
 		startStopRouteAnimation(activity, true, null);
 	}
 
-	public void startAnimationThread(OsmandApplication app, List<SimulatedLocation> directions,
-	                                  boolean locTime, float coeff) {
+	public void startAnimationThread(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                 int firstLocationOffset, boolean locTime, float coeff) {
+		this.gpxFile = gpxFile;
+		List<SimulatedLocation> locations = getSimulatedLocationsForGpx(app, gpxFile, firstLocationOffset);
+		startAnimationThread(app, locations, locTime, coeff);
+	}
+
+	public void startAnimationThread(@NonNull OsmandApplication app, @NonNull List<SimulatedLocation> directions,
+	                                 boolean locTime, float coeff) {
 		final float time = LOCATION_TIMEOUT;
 		float simSpeed = app.getSettings().simulateNavigationSpeed;
 		SimulationMode simulationMode = SimulationMode.getMode(app.getSettings().simulateNavigationMode);
@@ -308,6 +324,7 @@ public class OsmAndLocationSimulation {
 	}
 
 	public void stop() {
+		gpxFile = null;
 		routeAnimation = null;
 	}
 
@@ -338,14 +355,15 @@ public class OsmAndLocationSimulation {
 		return degree * Math.PI / 180;
 	}
 
-	public static List<SimulatedLocation> getSimulatedLocationsForGpx(OsmandApplication app, int firstLocationOffset,
-																	  GPXFile f) {
+	private static List<SimulatedLocation> getSimulatedLocationsForGpx(@NonNull OsmandApplication app,
+	                                                                   @NonNull GPXFile gpxFile,
+	                                                                   int firstLocationOffset) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-		List<GPXUtilities.WptPt> points = f.getAllSegmentsPoints();
-		GPXUtilities.WptPt prevLocation = null;
+		List<WptPt> points = gpxFile.getAllSegmentsPoints();
+		WptPt prevLocation = null;
 		for (int i = 0; i < points.size(); i++) {
-			GPXUtilities.WptPt location = points.get(i);
+			WptPt location = points.get(i);
 			if (prevLocation != null) {
 				distanceFromStart += MapUtils.getDistance(prevLocation.getLatitude(),
 						prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());

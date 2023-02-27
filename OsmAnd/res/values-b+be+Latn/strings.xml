@@ -1104,9 +1104,9 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="poi_context_menu_delete">Vydalić POI</string>
     <string name="rotate_map_compass_opt">U napramku kompasa</string>
     <string name="rotate_map_bearing_opt">U napramku ruchu</string>
-    <string name="rotate_map_none_opt">Nie varočać (poŭnač zaŭsiody ŭviersie)</string>
-    <string name="rotate_map_to_bearing_descr">Abrać raŭnavańnie mapy.</string>
-    <string name="rotate_map_to_bearing">Aryjentacyja mapy</string>
+    <string name="rotate_map_north_opt">Nie varočać (poŭnač zaŭsiody ŭviersie)</string>
+    <string name="rotate_map_to_descr">Abrać raŭnavańnie mapy.</string>
+    <string name="rotate_map_to">Aryjentacyja mapy</string>
     <string name="show_route">Padrabiaznaścі maršrutu</string>
     <string name="fav_imported_sucessfully">Upadabanyja impartavanyja</string>
     <string name="import_file_favourites">Zachavać zviestki jak GPX-fajl abo impartavać punkty va ŭpadabanyja?</string>
@@ -2049,7 +2049,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="restore_purchases">Adnaŭleńnie pakupak</string>
     <string name="fonts_header">Šryfty mapy</string>
     <string name="right_side_navigation">Pravabakavy ruch</string>
-    <string name="driving_region_automatic">Aŭtamatyčna</string>
+    <string name="shared_string_automatic">Aŭtamatyčna</string>
     <string name="do_not_show_startup_messages">Nie pakazvać paviedamlienni pry zapusku</string>
     <string name="parking_options">Opcyi parkoŭki</string>
     <string name="full_version_thanks">Diakuj vam za nabyccio platnaj viersii OsmAnd.</string>
