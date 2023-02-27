@@ -7,6 +7,7 @@ import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
 import static net.osmand.plus.backup.ui.ChangesTabFragment.generateTimeString;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -106,10 +109,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		TextView descriptionTv = downloadItem.findViewById(R.id.description);
 		ImageView imageView = downloadItem.findViewById(R.id.icon);
 
-		titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getPrimaryTextColor(app, nightMode));
+		titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getSecondaryTextColor(app, nightMode));
 		titleTv.setText(R.string.download_cloud_version);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode)));
+		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode)));
 		downloadItem.setOnClickListener(v -> {
 			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD);
 			dismiss();
@@ -128,13 +131,13 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	private void setupUploadAction(@NonNull View view) {
 		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE;
 		boolean enabled = isRowEnabled(item.fileName);
-		String title = getString(deleteOperation || item.localFile == null ? R.string.upload_change : R.string.upload_local_version);
+		String title = getString(deleteOperation || item.localFile == null ? R.string.delete_cloud_version : R.string.upload_local_version);
 		String description;
 		if (deleteOperation) {
 			description = recentChangesType == RECENT_CHANGES_LOCAL ? getString(R.string.cloud_version_will_be_removed)
 					: generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 		} else if (item.localFile == null) {
-			description = getString(R.string.cloud_version_will_be_removed);
+			description = getString(R.string.local_version_do_not_exist);
 		} else {
 			description = generateTimeString(app, item.localFile.localModifiedTime, getString(R.string.shared_string_modified));
 			if (recentChangesType == RECENT_CHANGES_REMOTE) {
@@ -146,13 +149,33 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		TextView descriptionTv = uploadItem.findViewById(R.id.description);
 		ImageView imageView = uploadItem.findViewById(R.id.icon);
 
-		titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getPrimaryTextColor(app, nightMode));
 		titleTv.setText(title);
 		descriptionTv.setText(description);
-		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode)));
+		Drawable icon;
+		if(item.localFile == null){
+			icon = getIcon(R.drawable.ic_action_cloud_delete, enabled ? R.color.color_osm_edit_delete : ColorUtilities.getSecondaryIconColorId(nightMode));
+			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning): ColorUtilities.getSecondaryTextColorId(nightMode));
+		}else{
+			icon = getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode));
+			titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getSecondaryTextColor(app, nightMode));
+		}
+		imageView.setImageDrawable(icon);
 		uploadItem.setOnClickListener(v -> {
-			syncItem(deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD);
-			dismiss();
+			SyncOperationType operationType = deleteOperation || item.localFile == null ? SYNC_OPERATION_DELETE : SYNC_OPERATION_UPLOAD;
+			if(operationType == SYNC_OPERATION_DELETE){
+				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
+				builder.setTitle(app.getString(R.string.shared_string_delete_file));
+				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.fileName));
+				builder.setNeutralButton(R.string.shared_string_cancel, null)
+						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+							syncItem(operationType);
+							dismiss();
+						});
+				builder.show();
+			} else{
+				syncItem(operationType);
+				dismiss();
+			}
 		});
 		uploadItem.setEnabled(enabled);
 		if (enabled) {
