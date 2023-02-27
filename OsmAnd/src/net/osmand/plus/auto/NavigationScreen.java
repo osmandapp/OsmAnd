@@ -138,7 +138,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 
 	@Override
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
-		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+		boolean nightMode = getApp().getDaynightHelper().isNightMode();
+		DrawSettings drawSettings = new DrawSettings(nightMode, false, surfaceRenderer.getDensity());
 		alarmWidget.updateInfo(drawSettings, true);
 		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
 		if (widgetBitmap != null) {
@@ -209,8 +210,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	@Override
 	public Template onGetTemplate() {
 		NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
-		// FIXME: HACK / Workaround: consider dark mode for the direction panel color by abusing carColorPrimary and carColorSecondary to switch as its not properly considered with AA and HUR
-		builder.setBackgroundColor(getCarContext().isDarkMode() ? CarColor.SECONDARY : CarColor.PRIMARY);
+		boolean nightMode = getApp().getDaynightHelper().isNightMode();
+		builder.setBackgroundColor(nightMode ? CarColor.SECONDARY : CarColor.PRIMARY);
 
 		// Set the action strip.
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
@@ -359,7 +360,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
-		boolean nightMode = getCarContext().isDarkMode();
+		boolean nightMode = getApp().getDaynightHelper().isNightMode();
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_MANUAL) {
 			compassResId = !nightMode ? R.drawable.ic_compass_niu_white : R.drawable.ic_compass_niu;
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {

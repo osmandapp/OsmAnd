@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.routing.RoutingHelper;
 
 public class CarAppNotification extends OsmandNotification {
 
@@ -36,7 +37,11 @@ public class CarAppNotification extends OsmandNotification {
 	public boolean isActive() {
 		NavigationService service = app.getNavigationService();
 		NavigationSession session = app.getCarNavigationSession();
-		return isEnabled() && service != null && session != null && session.isCarNavigationActive();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+
+		boolean routing = routingHelper.isFollowingMode()
+				|| (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation());
+		return isEnabled() && service != null && session != null && routing;
 	}
 
 	@Override

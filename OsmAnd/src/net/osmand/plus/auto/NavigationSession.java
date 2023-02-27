@@ -30,7 +30,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -49,7 +48,6 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	Action settingsAction;
 
 	private OsmandMapTileView mapView;
-	private boolean isNavigating;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -232,16 +230,13 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	@Override
 	public void updateNavigation(boolean navigating) {
-		isNavigating = navigating;
 	}
 
 	@Override
 	public void stopNavigation() {
 		OsmandApplication app = getApp();
-		isNavigating = false;
 		if (app != null) {
 			app.stopNavigation();
-			app.getNotificationHelper().refreshNotification(OsmandNotification.NotificationType.NAVIGATION);
 			NavigationScreen navigationScreen = getNavigationScreen();
 			if (navigationScreen != null) {
 				navigationScreen.stopTrip();
@@ -256,21 +251,14 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		isNavigating = true;
 	}
 
 	@Override
 	public void routeWasCancelled() {
-		isNavigating=false;
 	}
 
 	@Override
 	public void routeWasFinished() {
 		getApp().stopNavigation();
-		isNavigating = false;
-	}
-
-	public boolean isCarNavigationActive() {
-		return isNavigating;
 	}
 }

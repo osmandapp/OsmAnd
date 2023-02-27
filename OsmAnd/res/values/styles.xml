@@ -397,7 +397,7 @@
     </style>
 
     <style name="OsmandAndroidAutoTheme">
-        <!-- FIXME: even if darkMode is selected in AA settings, dark color is ignored, so abuse primary and secondary color to color the direction panel appropriately -->
+        <!-- even if darkMode is selected in AA settings, dark color is ignored, so abuse primary and secondary color to color the direction panel appropriately -->
         <item name="carColorPrimary">#66B5FF</item> // Google default accent light
         <item name="carColorPrimaryDark">#60A8F0</item> // Google default accent dark
         <item name="carColorSecondary">@color/map_background_color_dark</item>
