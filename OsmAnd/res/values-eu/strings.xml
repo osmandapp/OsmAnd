@@ -4707,7 +4707,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \nSakatu 2 hatzekin mapan klikatutako puntuen arteko distantzia ikusteko</string>
     <string name="included_in_your_current_plan">Uneko zure \"%1$s\" planean sartuta</string>
     <string name="altitude_correction">Kotaren zuzenketa</string>
-    <string name="release_4_4_pre">• Hona hemen 4.4 bertsiorako kateak</string>
+    <string name="release_4_4">• Hona hemen 4.4 bertsiorako kateak</string>
     <string name="ant_go_to_store">Joan denda edo biltegira</string>
     <string name="ant_read_data">Irakurri datuak</string>
     <string name="next_live_update_date_and_time">Hurrengo eguneratzea %1$s-an %2$s-etan.</string>

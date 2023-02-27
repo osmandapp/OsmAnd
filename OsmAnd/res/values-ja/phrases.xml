@@ -197,7 +197,7 @@
     <string name="poi_bus_station">バスターミナル</string>
     <string name="poi_railway_station">鉄道駅</string>
     <string name="poi_railway_platform">鉄道プラットホーム</string>
-    <string name="poi_halt">鉄道停車位置</string>
+    <string name="poi_halt">鉄道駅;停車場;旅客駅;貨物駅;駅</string>
     <string name="poi_subway_entrance">地下鉄入り口</string>
     <string name="poi_subway_station">有り;地下鉄駅</string>
     <string name="poi_railway_buffer_stop">鉄道用車止め</string>
@@ -3763,7 +3763,7 @@
     <string name="poi_dive_centre">スキューバダイビングセンター</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_water_place_access">水場へのアクセス方法</string>
-    <string name="poi_traffic_signals_sound_locate">歩行が許可されている場合のみ</string>
+    <string name="poi_traffic_signals_sound_locate">電柱の位置を見つけるための音</string>
     <string name="poi_internet_access_fee_customers">インターネット接続料金: 施設利用者のみ無料</string>
     <string name="poi_video_no">不可</string>
     <string name="poi_video_yes">可;ビデオ</string>
@@ -3843,7 +3843,7 @@
     <string name="poi_checkpoint_type_needler">ピン</string>
     <string name="poi_bay_filter">湾の形状</string>
     <string name="poi_diplomatic_services_immigrant_visas_filter">一時滞在ビザ関連(観光・学生・就労)</string>
-    <string name="poi_diplomatic_services_non_immigrant_visas_filter">移民ビザ関連</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">非移民ビザ</string>
     <string name="poi_diplomatic_services_citizen_services_filter">市民サービス</string>
     <string name="poi_liaison_filter">領事・在官事務所</string>
     <string name="poi_consulate_filter">領事館</string>
@@ -4389,4 +4389,28 @@
     <string name="poi_climbing_bolt_abseil">懸垂下降</string>
     <string name="poi_payment_mir_no">ミールカード非対応</string>
     <string name="poi_payment_mir_yes">ミール</string>
+    <string name="poi_climbing_rock_gritstone">クライミングロック:砂岩</string>
+    <string name="poi_socket_chademo_voltage_filter">CHAdeMO コネクタ電圧</string>
+    <string name="poi_socket_type2_voltage_filter">タイプ2 コネクタ電圧</string>
+    <string name="poi_socket_type2_combo_voltage_filter">タイプ2コンボ コネクタ電圧</string>
+    <string name="poi_socket_type2_cable_output">ソケット:タイプ2 ケーブル:出力</string>
+    <string name="poi_dog">犬</string>
+    <string name="poi_board_title">掲示板の見出しまたはタイトル</string>
+    <string name="poi_climbing_rock_conglomerate">クライミングロック:複合</string>
+    <string name="poi_socket_type2_cable">ソケット:タイプ2 ケーブル</string>
+    <string name="poi_socket_type2_cable_output_filter">タイプ2 ケーブルコネクタ出力</string>
+    <string name="poi_socket_type3a_output_filter">タイプ3A コネクタ出力</string>
+    <string name="poi_socket_type3c_output_filter">タイプ3C コネクタ出力</string>
+    <string name="poi_socket_type2_cable_voltage_filter">タイプ2 ケーブルコネクタの電圧</string>
+    <string name="poi_socket_type3a_voltage_filter">タイプ3A コネクタ電圧</string>
+    <string name="poi_socket_type3c_voltage_filter">タイプ3C コネクタ電圧</string>
+    <string name="poi_socket_schuko_voltage_filter">Schuko コネクタ電圧</string>
+    <string name="poi_socket_cee_blue_voltage_filter">CEE青 コネクタ電圧</string>
+    <string name="poi_climbing_bolt">クライミング用ボルト</string>
+    <string name="poi_hiking_filter">ハイキング向き</string>
+    <string name="poi_socket_type2_cable_current">ソケット:タイプ2 ケーブル:電流</string>
+    <string name="poi_climbing_rock_basalt">クライミングロック:玄武岩</string>
+    <string name="poi_club_youth_movement">若者に限定されたクラブ</string>
+    <string name="poi_club_aviation">航空クラブ</string>
+    <string name="poi_first_aid_kit">応急処置キット</string>
 </resources>

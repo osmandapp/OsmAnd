@@ -2988,4 +2988,5 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="context_menu_edit_descr">Redaguoti aprašymą</string>
     <string name="copy_to_map_favorites">Kopijuoti į mėgstamiausius</string>
     <string name="shared_string_min_height">Min. aukštis</string>
+    <string name="map_widget_altitude">Esamos vietos aukštis</string>
 </resources>

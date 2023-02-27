@@ -1502,13 +1502,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
-
-	public final CommonPreference<ColoringType> DEFAULT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this, "default_track_coloring_type",
-			ColoringType.TRACK_SOLID, ColoringType.getTrackColoringTypes().toArray(new ColoringType[0])).makeProfile().cache();
-	public final CommonPreference<String> DEFAULT_TRACK_ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "default_track_route_info_attribute", null).makeProfile().cache();
-	public final CommonPreference<Boolean> DEFAULT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "default_track_show_arrows", false).makeProfile().cache();
-	public final CommonPreference<Boolean> DEFAULT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "default_track_show_start_finish", true).makeProfile().cache();
-
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,
@@ -2848,6 +2841,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
+
+	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
+			new BooleanPreference(this, "approximate_bearing", true).makeProfile();
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();

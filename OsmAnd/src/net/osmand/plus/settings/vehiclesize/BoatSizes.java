@@ -26,4 +26,9 @@ public class BoatSizes extends VehicleSizes {
 	protected int getMinProposedValuesCount() {
 		return EXTENDED_PROPOSED_VALUES_COUNT;
 	}
+
+	@Override
+	protected boolean useInchesInsteadOfFeet() {
+		return false;
+	}
 }

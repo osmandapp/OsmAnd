@@ -874,7 +874,7 @@
     <string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>
     <string name="routing_attr_avoid_unpaved_description">اجتناب الطرق الترابية والوعرة</string>
     <string name="routing_attr_avoid_ferries_name">تجنب العبارات</string>
-    <string name="routing_attr_weight_name">وزن المركبة</string>
+    <string name="routing_attr_weight_name">الوزن</string>
     <string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تحميل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد التغيير إلى مكان مسموح ونسخ كل الملفات إليه ؟ ملاحظات: 1-الملفات القديمة ستبقى كما هي (يمكن حذفها يدويا). 
 \n 
 \n2-لايمكن مشاركة الملفات بين أوسماند و +أوسماند في مكان التخزين الجديد.</string>
@@ -1195,7 +1195,7 @@
     <string name="gpx_timespan">الفترة الزمنية: %1$s</string>
     <string name="gpx_info_asc_altitude">النزول/الصعود: %1$s</string>
     <string name="gpx_timemoving">الوقت المستغرق في الحركة: %1$s</string>
-    <string name="gpx_selection_segment_title">قطعة</string>
+    <string name="gpx_selection_segment_title">الجزء</string>
     <string name="gpx_selection_number_of_points">%1$s نقاط</string>
     <string name="gpx_selection_point">نقطة %1$s</string>
     <string name="gpx_selection_route_points">%1$s 
@@ -1447,7 +1447,7 @@
     <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
     <string name="si_nm">ميل بحري</string>
     <string name="dark_theme">ليلي</string>
-    <string name="routing_attr_height_name">ارتفاع المركبة</string>
+    <string name="routing_attr_height_name">الارتفاع</string>
     <string name="default_speed_system_descr">اختيار وحدة للسرعة.</string>
     <string name="default_speed_system">وحدات السرعة</string>
     <string name="plugin_settings">الملحقات</string>
@@ -3331,7 +3331,7 @@
     <string name="get_discount_second_part">ثم %1$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
     <string name="route_parameters_info">إعدادات التوجيه في الوضع المحدد \"%1$s\".</string>
-    <string name="routing_attr_width_name">حد العرض</string>
+    <string name="routing_attr_width_name">العرض</string>
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
     <string name="quick_action_directions_from_desc">زر لجعل مركز الشاشة نقطة الانطلاق. سيطلب بعد ذلك تعيين الوجهة أو تشغيل حساب المسار.</string>
@@ -3730,7 +3730,7 @@
 \n
 \nحدد %2$s. جميع البيانات المتعلقة كاميرات السرعة: التنبيهات، والإشعارات، سيتم حذف نقاط الاهتمام حتى يتم إعادة تثبيت أوسماند تماما.</string>
     <string name="routing_attr_length_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
-    <string name="routing_attr_length_name">حد الطول</string>
+    <string name="routing_attr_length_name">الطول</string>
     <string name="speed_cameras_removed_descr">هذا الجهاز لا يملك كاميرات السرعة.</string>
     <string name="app_mode_inline_skates">أحذية تزلج</string>
     <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
@@ -4440,7 +4440,7 @@
     <string name="history_preferences_descr">يمكنك تعطيل السجل بشكل فردي لكل نوع سجل.</string>
     <string name="map_markers_history">سجل علامات الخريطة</string>
     <string name="shortcut_navigate_to_work">انتقل إلى \'العمل\'</string>
-    <string name="navigation_history">سجل التنقل</string>
+    <string name="navigation_history">سجل الملاحة</string>
     <string name="shortcut_start_recording">بدء التسجيل</string>
     <string name="transparent_status_bar">شريط معلومات شفاف</string>
     <string name="transparent_status_bar_descr">اعرض الخريطة تحت شريط المعلومات</string>
@@ -5049,7 +5049,7 @@
     <string name="open_weather_action">الطقس المفتوح</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">تساوي هطول الأمطار</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">هبات الرياح المتساوية</string>
-    <string name="release_4_4_pre">• هنا ستكون سلاسل للإصدار 4.4</string>
+    <string name="release_4_4">• هنا ستكون سلاسل للإصدار 4.4</string>
     <string name="rendering_attr_weatherCloudContours_name">تساوي السحب</string>
     <string name="shared_string_purchased_on">تم الشراء في</string>
     <string name="shared_string_expires">انتهاء</string>
@@ -5106,5 +5106,23 @@
     <string name="sound_beep_simple">صفير: عادي</string>
     <string name="sound_beep_simple_loud">صفير: عادي ذو صوت عال</string>
     <string name="last_synchronized">آخر مزامنة</string>
-    <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة ، الأسفل لاتجاه الحركة ، المركزللجميع.</string>
+    <string name="display_position_automatic_descr">يعتمد على اتجاه الخريطة: الجزء السفلي لاتجاه الحركة ، المركز للبقية.</string>
+    <string name="shared_string_apply_changes">أعتماد التغيرات</string>
+    <string name="no_visible_tracks_description">حدد المسارات لعرضها على الخريطة.</string>
+    <string name="no_visible_tracks">لا توجد مسارات على الخريطة</string>
+    <string name="recently_visible">المشاهد مؤخرا %1$s</string>
+    <string name="change_default_tracks_appearance_confirmation_description">هل تريد تغيير مظهر مسارات %1$s؟</string>
+    <string name="empty_tracks_description">يمكنك استيراد أو إنشاء أو تسجيل ملفات المسار باستخدام أوسماند.</string>
+    <string name="show_all_tracks">عرض جميع المسارات</string>
+    <string name="change_appearance">تغيير المظهر</string>
+    <string name="empty_tracks">ليس لديك ملفات تعقب.</string>
+    <string name="shared_string_select_recent">حدد الأحدث</string>
+    <string name="switch_folder">تبديل المجلد</string>
+    <string name="shared_string_yards">ياردة</string>
+    <string name="shared_string_on_map">على الخريطة</string>
+    <string name="shared_string_kilograms">كيلوغرامات</string>
+    <string name="shared_string_inches">بوصات</string>
+    <string name="approximate_bearing">الاتجاه التقريبي</string>
+    <string name="approximate_bearing_descr">حساب الاتجاه إذا لم يتم استلامه من الجهاز</string>
+    <string name="inch">في</string>
 </resources>

@@ -1068,7 +1068,7 @@
     <string name="routing_attr_avoid_ferries_description">Undgår færger</string>
     <string name="routing_attr_avoid_motorway_name">Ingen motorveje</string>
     <string name="routing_attr_avoid_motorway_description">Undgår motorveje</string>
-    <string name="routing_attr_weight_name">Vægtgrænse</string>
+    <string name="routing_attr_weight_name">Vægt</string>
     <string name="routing_attr_weight_description">Angiv tilladt vægtgrænsen for køretøj på ruter.</string>
     <string name="route_info">Ruteinfo</string>
     <string name="select_gpx">Vælg GPX…</string>
@@ -1531,7 +1531,7 @@
     <string name="application_dir_change_warning3">Flyt datafilerne til den nye placering\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgår at krydse nationale grænser</string>
-    <string name="routing_attr_height_name">Højdegrænse</string>
+    <string name="routing_attr_height_name">Højde</string>
     <string name="routing_attr_height_description">Angiv køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">Genberegner kun den første del af ruten. Nyttig til lange ture.</string>
@@ -1583,7 +1583,7 @@
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="restart_is_required">Der er behov for en genstart for at anvende ændringen.</string>
+    <string name="restart_is_required">En genstart er påkrævet for at anvende ændringen.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-bredde</string>
     <string name="rendering_value_red_name">Rød</string>
@@ -2474,7 +2474,7 @@
     <string name="shared_string_groups">Grupper</string>
     <string name="today">I dag</string>
     <string name="yesterday">I går</string>
-    <string name="last_seven_days">Sidste 7 dage</string>
+    <string name="last_seven_days">Seneste 7 dage</string>
     <string name="this_year">I år</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
@@ -3189,7 +3189,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstrem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ikke defineret</string>
     <string name="routeInfo_piste_difficulty_name">Pistesværhedsgrad</string>
-    <string name="routing_attr_width_name">Breddegrænse</string>
+    <string name="routing_attr_width_name">Bredde</string>
     <string name="routing_attr_width_description">Angiv tilladt køretøjsbredde på ruter.</string>
     <string name="avoid_in_routing_descr_">Undgå visse ruter og vejtyper</string>
     <string name="app_mode_utv">Side om side</string>
@@ -3664,7 +3664,7 @@
     <string name="start_finish_icons">Start- og slutikoner</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
-    <string name="routing_attr_length_name">Længdegrænse</string>
+    <string name="routing_attr_length_name">Længde</string>
     <string name="contour_lines_thanks">Tak for køb af \'Højdekurver\'</string>
     <string name="osm_live_payment_desc_hw">Abonnementet er opkrævet pr. den valgte periode. Annuller det til enhver tid i dit AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Undgå gangstier</string>
@@ -4349,7 +4349,7 @@
     <string name="clear_all_history">Ryd al historik</string>
     <string name="history_actions_descr">Du kan eksportere historik til en fil.</string>
     <string name="navigation_history">Navigationshistorik</string>
-    <string name="history_preferences_descr">Du kan deaktivere historiklogning individuelt for hver historiktype.</string>
+    <string name="history_preferences_descr">Du kan deaktivere logning af historik individuelt for hver historiktype.</string>
     <string name="shortcut_start_recording">Start optagelse</string>
     <string name="shortcut_navigate_to">Naviger til…</string>
     <string name="transparent_status_bar_descr">Vis kort under statuslinjen</string>
@@ -4981,7 +4981,7 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
-    <string name="release_4_4_pre">• Her kommer der strenge til 4.4-udgivelsen</string>
+    <string name="release_4_4">• Her kommer der strenge til 4.4-udgivelsen</string>
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer for vindhastighed</string>
@@ -5043,5 +5043,23 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_automatic_descr">Afhænger af kortets orientering, nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortets orientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ændr udseendet af %1$s spor\?</string>
+    <string name="shared_string_apply_changes">Anvend ændringer</string>
+    <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
+    <string name="no_visible_tracks">Ingen spor på kortet</string>
+    <string name="recently_visible">Senest synlig %1$s</string>
+    <string name="empty_tracks_description">Du kan importere, oprette eller optage sporfiler ved hjælp af OsmAnd.</string>
+    <string name="empty_tracks">Du har ingen sporfiler.</string>
+    <string name="shared_string_select_recent">Vælg seneste</string>
+    <string name="change_appearance">Ændr udseende</string>
+    <string name="switch_folder">Skift mappe</string>
+    <string name="show_all_tracks">Vis alle spor</string>
+    <string name="shared_string_on_map">På kort</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="shared_string_yards">yards</string>
+    <string name="approximate_bearing_descr">Beregn pejling, hvis den ikke modtages fra enheden</string>
+    <string name="shared_string_inches">tommer</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Omtrentlig pejling</string>
 </resources>

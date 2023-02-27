@@ -19,6 +19,8 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.util.List;
+
 public class PurchaseUiDataUtils {
 
 	public static final int INVALID = -1;
@@ -105,7 +107,7 @@ public class PurchaseUiDataUtils {
 			title = app.getString(R.string.osmand_pro);
 			PeriodUnit periodUnit = settings.BACKUP_PURCHASE_PERIOD.get();
 			purchaseType = app.getString(periodUnit == PeriodUnit.YEAR ?
-					R.string.annual_subscription: R.string.monthly_subscription);
+					R.string.annual_subscription : R.string.monthly_subscription);
 		}
 
 		boolean isLiveUpdateSubscription = false;
@@ -119,4 +121,19 @@ public class PurchaseUiDataUtils {
 				renewVisible, state, origin);
 	}
 
+	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
+	                                                   @NonNull List<InAppPurchase> mainPurchases) {
+		OsmandSettings settings = app.getSettings();
+		if (settings.BACKUP_PURCHASE_ACTIVE.get()) {
+			InAppPurchaseHelper helper = app.getInAppPurchaseHelper();
+			InAppPurchases purchases = helper.getInAppPurchases();
+			for (InAppPurchase purchase : mainPurchases) {
+				if (purchases.isOsmAndProSubscription(purchase)) {
+					String sku = purchase.getSku();
+					return settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != helper.getSubscriptionOriginBySku(sku);
+				}
+			}
+		}
+		return false;
+	}
 }

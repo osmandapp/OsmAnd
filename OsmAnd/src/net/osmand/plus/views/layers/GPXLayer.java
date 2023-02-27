@@ -203,10 +203,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private CommonPreference<String> defaultColorPref;
 	private CommonPreference<String> defaultWidthPref;
-	private CommonPreference<ColoringType> defaultColoringTypePref;
-	private CommonPreference<String> defaultRouteInfoAttributePref;
-	private CommonPreference<Boolean> defaultShowArrowsPref;
-	private CommonPreference<Boolean> defaultShowStartFinishPref;
 
 	private CommonPreference<Integer> currentTrackColorPref;
 	private CommonPreference<ColoringType> currentTrackColoringTypePref;
@@ -237,11 +233,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		currentTrackWidthPref = settings.CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = settings.CURRENT_TRACK_SHOW_ARROWS;
 		currentTrackShowStartFinishPref = settings.CURRENT_TRACK_SHOW_START_FINISH;
-
-		defaultShowArrowsPref = settings.DEFAULT_TRACK_SHOW_ARROWS;
-		defaultShowStartFinishPref = settings.DEFAULT_TRACK_SHOW_START_FINISH;
-		defaultColoringTypePref = settings.DEFAULT_TRACK_COLORING_TYPE;
-		defaultRouteInfoAttributePref = settings.DEFAULT_TRACK_ROUTE_INFO_ATTRIBUTE;
 
 		defaultColorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).cache();
 		defaultWidthPref = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
@@ -1259,9 +1250,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (dataItem != null) {
 				coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getColoringType());
 				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getColoringType());
-			} else {
-				coloringType = defaultColoringTypePref.get();
-				routeInfoAttribute = ColoringType.getRouteInfoAttribute(defaultRouteInfoAttributePref.get());
 			}
 		}
 
@@ -1306,7 +1294,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (dataItem != null) {
 				return dataItem.isShowArrows();
 			}
-			return gpxFile.isShowArrowsSet() ? gpxFile.isShowArrows() : defaultShowArrowsPref.get();
+			return gpxFile.isShowArrows();
 		}
 	}
 
@@ -1322,7 +1310,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (dataItem != null) {
 				return dataItem.isShowStartFinish();
 			}
-			return gpxFile.isShowStartFinishSet() ? gpxFile.isShowStartFinish() : defaultShowStartFinishPref.get();
+			return gpxFile.isShowStartFinish();
 		}
 	}
 

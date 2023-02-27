@@ -1153,7 +1153,7 @@
     <string name="routing_attr_avoid_ferries_description">Vermeidet Fähren</string>
     <string name="routing_attr_avoid_motorway_name">Keine Autobahnen</string>
     <string name="routing_attr_avoid_motorway_description">Vermeidet Autobahnen</string>
-    <string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
+    <string name="routing_attr_weight_name">Gewicht</string>
     <string name="routing_attr_weight_description">Gewicht des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) ist der alte Speicherort (%s) veraltet. Alle OsmAnd-Dateien an den neuen Speicherort kopieren\?
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
@@ -1548,7 +1548,7 @@
 \nLon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
-    <string name="routing_attr_height_name">Höhenbeschränkung</string>
+    <string name="routing_attr_height_name">Höhe</string>
     <string name="read_full_article">Vollständigen Artikel lesen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
@@ -3197,7 +3197,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Undefiniert</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
-    <string name="routing_attr_width_name">Breitenbegrenzung</string>
+    <string name="routing_attr_width_name">Breite</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
     <string name="avoid_in_routing_descr_">Vermeiden bestimmter Routen und Straßentypen</string>
     <string name="app_mode_utv">Nebeneinander</string>
@@ -3671,7 +3671,7 @@
 \n
 \n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
-    <string name="routing_attr_length_name">Längenbegrenzung</string>
+    <string name="routing_attr_length_name">Länge</string>
     <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inlineskates</string>
     <string name="use_volume_buttons_as_zoom_descr">Steuern Sie die Zoomstufen der Karte mit den Lautstärketasten des Geräts.</string>
@@ -4983,7 +4983,7 @@
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    <string name="release_4_4_pre">• Hier werden die Strings für die Version 4.4 sein</string>
+    <string name="release_4_4">• Hier werden die Strings für die Version 4.4 sein</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
@@ -5042,5 +5042,23 @@
     <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
     <string name="sound_beep_complex">Signalton: Komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
-    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung, unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung: unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="shared_string_apply_changes">Änderungen anwenden</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
+    <string name="shared_string_kilograms">Kilogramm</string>
+    <string name="shared_string_yards">Yards</string>
+    <string name="default_tracks_appearance_description">Diese Erscheinungsbild-Einstellungen werden auf alle im vorherigen Bildschirm ausgewählten Titel angewendet.
+\n
+\nSie werden auch als \"%1$s\" gespeichert, um von %2$s für alle anderen Spuren ohne implizites oder spezifisch eingestelltes Aussehen angewendet zu werden.</string>
+    <string name="recently_visible">Kürzlich sichtbar %1$s</string>
+    <string name="empty_tracks_description">Sie können mit OsmAnd Track-Dateien importieren, erstellen oder aufzeichnen.</string>
+    <string name="default_tracks_appearance">Standarddarstellung des Tracks</string>
+    <string name="no_visible_tracks_description">Wählen Sie Tracks, um sie auf der Karte anzuzeigen.</string>
+    <string name="empty_tracks">Sie haben keine Trackdateien.</string>
+    <string name="no_visible_tracks">Keine Tracks auf der Karte</string>
+    <string name="shared_string_select_recent">Wählen Sie die letzten</string>
+    <string name="change_appearance">Aussehen ändern</string>
+    <string name="switch_folder">Ordner wechseln</string>
+    <string name="show_all_tracks">Alle Tracks anzeigen</string>
+    <string name="shared_string_on_map">Auf der Karte</string>
 </resources>

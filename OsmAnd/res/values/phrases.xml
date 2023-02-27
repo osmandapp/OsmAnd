@@ -600,6 +600,10 @@
 	<string name="poi_recycling_car_batteries">Car batteries</string>
 	<string name="poi_recycling_cars">Cars</string>
 	<string name="poi_recycling_bicycles">Bicycles</string>
+	<string name="poi_recycling_plastic_bottle_caps">Plastic bottle caps</string>
+	<string name="poi_recycling_aluminium_cans">Aluminum cans</string>
+	<string name="poi_recycling_pet_drink_bottles">PET beverage bottles</string>
+	<string name="poi_recycling_textiles">Textiles</string>
 
 	<string name="poi_landfill">Landfill</string>
 	<string name="poi_landfill_waste_nuclear">Nuclear waste</string>

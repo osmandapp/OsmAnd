@@ -1219,7 +1219,7 @@
     <string name="routing_attr_avoid_ferries_description">Уникати поромних переправ</string>
     <string name="routing_attr_avoid_motorway_name">Уник. автомагістралей</string>
     <string name="routing_attr_avoid_motorway_description">Уникати автомагістралей</string>
-    <string name="routing_attr_weight_name">Вагові обмеження</string>
+    <string name="routing_attr_weight_name">Вага</string>
     <string name="routing_attr_weight_description">Задайте дозволену вагу автомобіля для прокладання маршруту.</string>
     <string name="android_19_location_disabled">Починаючи з Android версії 4.4 (KitKat) Ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Скопіювати всі файли OsmAnd в нове місце\? 
 \n Примітка 1: Ваші старі файли залишаться недоторканими (їх можна вилучити вручну). 
@@ -1523,7 +1523,7 @@
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
     <string name="index_name_netherlands">Європа - Нідерланди</string>
     <string name="routing_attr_avoid_borders_description">Уникати перетину національних кордонів</string>
-    <string name="routing_attr_height_name">Обмеження по висоті</string>
+    <string name="routing_attr_height_name">Висота</string>
     <string name="routing_attr_height_description">Задайте дозволену висоту автомобіля для прокладання маршруту.</string>
     <string name="use_fast_recalculation">Інтелектуальне перебудування маршруту</string>
     <string name="use_fast_recalculation_desc">Переобчислити лише початкову частину маршруту, корисно для тривалих подорожей.</string>
@@ -2472,7 +2472,7 @@
     <string name="make_active">Увімкнути</string>
     <string name="today">Сьогодні</string>
     <string name="yesterday">Вчора</string>
-    <string name="last_seven_days">Останні 7 днів</string>
+    <string name="last_seven_days">За останні 7 днів</string>
     <string name="this_year">Цього року</string>
     <string name="remove_from_map_markers">Вилучити з позначок мапи</string>
     <string name="descendingly">за спаданням</string>
@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Екстрим</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Не визначено</string>
     <string name="routeInfo_piste_difficulty_name">Складність траси</string>
-    <string name="routing_attr_width_name">Обмеження ширини</string>
+    <string name="routing_attr_width_name">Ширина</string>
     <string name="routing_attr_width_description">Задайте дозволену ширину автомобіля для прокладання маршруту.</string>
     <string name="avoid_in_routing_descr_">Уникати певних маршрутів та типів доріг</string>
     <string name="app_mode_utv">Мотовсюдихід</string>
@@ -3662,7 +3662,7 @@
     <string name="speed_cameras_restart_descr">Перезапустіть застосунок для вилучення даних про камери контролю швидкості.</string>
     <string name="shared_string_uninstall_and_restart">Вилучити та перезапустити</string>
     <string name="routing_attr_length_description">Вкажіть довжину транспортного засобу для обчислення маршрутів.</string>
-    <string name="routing_attr_length_name">Обмеження довжини</string>
+    <string name="routing_attr_length_name">Довжина</string>
     <string name="speed_cameras_removed_descr">На цьому пристрої немає камер контролю швидкості.</string>
     <string name="app_mode_inline_skates">Роликові ковзани</string>
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
@@ -4380,7 +4380,7 @@
     <string name="history_actions_descr">Ви можете експортувати історію в файл.</string>
     <string name="map_markers_history">Історія позначок мап</string>
     <string name="navigation_history">Історія навігації</string>
-    <string name="history_preferences_descr">Ви можете вимкнути ведення журналу історії окремо для кожного типу історії.</string>
+    <string name="history_preferences_descr">Ви можете вимкнути запис історії окремо для кожного типу історії.</string>
     <string name="shortcut_start_recording">Почати запис</string>
     <string name="shortcut_navigate_to">Маршрут до…</string>
     <string name="shortcut_navigate_to_work">Маршрут до \"Роботи\"</string>
@@ -4920,7 +4920,7 @@
     <string name="empty_screen_view_selected_weather_data">Увімкніть, щоб переглянути вибрані погодні дані на мапі.</string>
     <string name="weather_wind_mph">миль/год</string>
     <string name="empty_screen_weather_clouds_layer">Увімкніть, щоб переглянути шар хмарності на мапі.</string>
-    <string name="weather_precip_in">у</string>
+    <string name="weather_precip_in">дюйми</string>
     <string name="weather_widget_group_desc">Набір віджетів, що показують різноманітні відомості про погоду.</string>
     <string name="weather_pressure_hpa">гПа</string>
     <string name="weather_pressure_mmhg">мм рт.ст</string>
@@ -4978,7 +4978,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
-    <string name="release_4_4_pre">• Тут будуть рядки для випуску 4.4</string>
+    <string name="release_4_4">• Тут будуть рядки для випуску 4.4</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
@@ -5037,5 +5037,23 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи, внизу — для напрямку руху, по центру — для всього іншого.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для напрямку руху, по центру — для всіх інших.</string>
+    <string name="shared_string_apply_changes">Застосувати зміни</string>
+    <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
+    <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
+    <string name="no_visible_tracks">Немає треків на мапі</string>
+    <string name="recently_visible">Нещодавно видимий %1$s</string>
+    <string name="empty_tracks">У вас немає файлів треків.</string>
+    <string name="change_appearance">Змінити зовнішній вигляд</string>
+    <string name="shared_string_on_map">На мапі</string>
+    <string name="shared_string_select_recent">Вибрати нещодавні</string>
+    <string name="show_all_tracks">Показати всі треки</string>
+    <string name="switch_folder">Перемкнути теку</string>
+    <string name="shared_string_yards">ярди</string>
+    <string name="shared_string_kilograms">кілограми</string>
+    <string name="approximate_bearing_descr">Обчислювати азимут, якщо його не отримано від пристрою</string>
+    <string name="shared_string_inches">дюйми</string>
+    <string name="inch">дюйми</string>
+    <string name="approximate_bearing">Приблизний азимут</string>
 </resources>

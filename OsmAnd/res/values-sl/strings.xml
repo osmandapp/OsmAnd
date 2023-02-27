@@ -1136,7 +1136,7 @@
     <string name="routing_attr_avoid_ferries_description">Izogne se trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Brez avtocest</string>
     <string name="routing_attr_avoid_motorway_description">Izogne se avtocestam</string>
-    <string name="routing_attr_weight_name">Omejitev teže</string>
+    <string name="routing_attr_weight_name">Teža</string>
     <string name="routing_attr_weight_description">Navedi dovoljeno težo vozila na poteh.</string>
     <string name="app_mode_truck">Tovorno vozilo</string>
     <string name="index_item_world_bitcoin_payments">Svetovna plačila Bitcoin</string>
@@ -1521,7 +1521,7 @@
 \n
 \nNadaljnje branje na https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
-    <string name="routing_attr_height_name">Omejitev višine</string>
+    <string name="routing_attr_height_name">Višina</string>
     <string name="routing_attr_height_description">Navedi dovoljeno višino vozila na poteh.</string>
     <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
     <string name="use_fast_recalculation_desc">Preračuna samo začetni del poti, uporabno pri dolgih potovanjih.</string>
@@ -3224,7 +3224,7 @@
     <string name="route_between_points">Pot med točkama/-i</string>
     <string name="plan_a_route">Načrtujte pot</string>
     <string name="add_to_a_track">Dodaj sledi</string>
-    <string name="routing_attr_width_name">Omejitev širine</string>
+    <string name="routing_attr_width_name">Širina</string>
     <string name="shared_string_bearing">Smer</string>
     <string name="plan_route_select_track_file_for_open">Izberi datoteko sledi za odpiranje.</string>
     <string name="add_hidden_group_info">Dodano točko lahko najdeš v »%s«. Razkrij izbrano skupino, da bo prikazana na zemljevidu.</string>
@@ -4201,7 +4201,7 @@
     <string name="turn_screen_on_navigation_instructions">Navodila za navigacijo</string>
     <string name="shared_string_always">Vedno</string>
     <string name="keep_active">Obdrži aktivno</string>
-    <string name="routing_attr_length_name">Omejitev dolžine</string>
+    <string name="routing_attr_length_name">Dolžina</string>
     <string name="turn_screen_on_power_button">Gumb za vklop</string>
     <string name="reset_deafult_order">Obnovi privzeti vrstni red elementov</string>
     <string name="send_files_to_openstreetmap">Pošlji datoteko GPX v OpenStreetMap</string>
@@ -4965,7 +4965,7 @@
     <string name="external_sensors_plugin_description">Dostopa do zunanjih senzorjev za branje npr. tvojega srčnega utripa, hitrost kolesa, moč kolesarjenja ali kadenco. Zahteva, da je tvoja naprava povezana z ustreznimi senzorji prek brezžičnega osebnega omrežnega protokola ANT+.</string>
     <string name="simulate_location_by_gpx">Simulacija lokacije iz GPX-a</string>
     <string name="terms_of_service_desc">S prenosom zemljevidov se strinjaš z %1$s in %2$s.</string>
-    <string name="release_4_4_pre">• Tukaj bodo nizi za različico 4.4</string>
+    <string name="release_4_4">• Tukaj bodo nizi za različico 4.4</string>
     <string name="open_weather_action_description">Omogoča odpiranje zaslona s podrobnimi informacijami o vremenu.</string>
     <string name="open_weather_action">Odpri vreme</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinije oblakov</string>
@@ -5027,5 +5027,19 @@
     <string name="av_audio_format_bottom_sheet_descr">Izberi format zvoka. Format vsebnika vrste datoteke za zvok je 3GPP (.3gp).</string>
     <string name="checking_progress">Preverjanje …</string>
     <string name="last_synchronized">Zadnja sinhronizacija</string>
-    <string name="display_position_automatic_descr">Odvisno od usmerjenosti zemljevida, spodnji del za smer gibanja, sredinski del za vse drugo.</string>
+    <string name="display_position_automatic_descr">Odvisno od usmerjenosti zemljevida: spodnji del za smer gibanja, sredinski del za vse drugo.</string>
+    <string name="no_visible_tracks_description">Izberi sledi, ki jih želiš prikazati na zemljevidu.</string>
+    <string name="no_visible_tracks">Na zemljevidu ni sledi</string>
+    <string name="recently_visible">Nedavno vidna %1$s</string>
+    <string name="empty_tracks_description">Z OsmAnd lahko uvoziš, ustvariš ali posnameš datoteke s sledmi.</string>
+    <string name="empty_tracks">Nimaš datotek sledi.</string>
+    <string name="shared_string_select_recent">Izberite nedavno</string>
+    <string name="change_appearance">Spremeni videz</string>
+    <string name="switch_folder">Zamenjaj mapo</string>
+    <string name="show_all_tracks">Pokaži vse sledi</string>
+    <string name="shared_string_on_map">Na zemljevidu</string>
+    <string name="shared_string_apply_changes">Uveljavi spremembe</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Spremenim izgled %1$s sledi\?</string>
+    <string name="shared_string_yards">jardov</string>
+    <string name="shared_string_kilograms">kilogramov</string>
 </resources>
