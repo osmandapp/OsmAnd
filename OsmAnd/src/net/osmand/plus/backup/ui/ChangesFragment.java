@@ -180,7 +180,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			setupBottomButtons();
 		});
 		button.setEnabled(syncing && !preparing);
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_cancel);
+		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_control_stop);
 		AndroidUiHelper.updateVisibility(button, syncing);
 	}
 
@@ -280,6 +280,11 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			this.buttonIconId = buttonIconId;
 			this.fragment = fragment;
 		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull RecentChangesType tabType) {

@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="cloud_version_confirm_delete">Are you sure you want to delete \"%1$s\" from OsmAnd Cloud?</string>
+    <string name="shared_string_delete_file">Delete file</string>
+    <string name="delete_cloud_version">Delete cloud version</string>
+    <string name="local_version_do_not_exist">Local version do not exist</string>
     <string name="approximate_bearing">Approximate Bearing</string>
     <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
 
