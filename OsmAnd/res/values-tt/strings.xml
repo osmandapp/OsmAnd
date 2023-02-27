@@ -132,7 +132,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">Су</string>
     <string name="shared_string_time">Вакыт</string>
     <string name="shared_string_color">Төс</string>
-    <string name="driving_region_automatic">Автоматик</string>
+    <string name="shared_string_automatic">Автоматик</string>
     <string name="subscribe_email_error">Хата</string>
     <string name="edit_name">Исемне үзгәртү</string>
     <string name="shared_string_reset">Бетерү</string>

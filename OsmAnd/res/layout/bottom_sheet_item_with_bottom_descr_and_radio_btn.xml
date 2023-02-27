@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/descriptionContainer"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_large_list_item_height"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/list_content_padding">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+			android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+			tools:src="@drawable/ic_action_coordinates_latitude"
+			tools:tint="?attr/default_icon_color" />
+
+		<TextView
+			android:id="@+id/title"
+			style="@style/TitleStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Item Title" />
+
+		<androidx.appcompat.widget.AppCompatRadioButton
+			android:id="@+id/compound_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false"
+			android:saveEnabled="false" />
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/description"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:textColor="?android:textColorSecondary"
+		tools:text="Item additional desription" />
+
+	<View
+		android:id="@+id/divider_bottom"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+		android:background="?attr/divider_color"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+</LinearLayout>

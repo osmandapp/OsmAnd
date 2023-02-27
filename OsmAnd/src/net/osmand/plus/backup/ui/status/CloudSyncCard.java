@@ -159,12 +159,8 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		int itemsSize = info != null ? info.filteredFilesToUpload.size() + info.filteredFilesToDelete.size() : -1;
 		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
 		String title = app.getString(R.string.local_changes);
-		Drawable icon;
-		if (itemsSize >= 0) {
-			icon = getActiveIcon(R.drawable.ic_action_phone_filled);
-		} else {
-			icon = getContentIcon(R.drawable.ic_action_phone_filled);
-		}
+		Drawable icon = itemsSize > 0 ? getActiveIcon(R.drawable.ic_action_phone_filled) : getContentIcon(R.drawable.ic_action_phone_filled);
+
 		OnClickListener listener = v -> notifyButtonPressed(LOCAL_CHANGES_BUTTON_INDEX);
 
 		setupButton(localChangesButton, title, icon, listener);
@@ -174,15 +170,13 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 	private void setupCloudChangesButton(@NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
-		int itemsSize = info != null ? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() : -1;
+		int itemsSize = info != null
+				? BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() + info.filteredLocalFilesToDelete.size()
+				: -1;
 		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
 		String title = app.getString(R.string.cloud_changes);
-		Drawable icon;
-		if (itemsSize >= 0) {
-			icon = getActiveIcon(R.drawable.ic_action_cloud);
-		} else {
-			icon = getContentIcon(R.drawable.ic_action_cloud);
-		}
+		Drawable icon = itemsSize > 0 ? getActiveIcon(R.drawable.ic_action_cloud) : getContentIcon(R.drawable.ic_action_cloud);
+
 		OnClickListener listener = v -> notifyButtonPressed(CLOUD_CHANGES_BUTTON_INDEX);
 
 		setupButton(cloudChangesButton, title, icon, listener);
@@ -195,12 +189,8 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		int itemsSize = info != null ? backup.getBackupInfo().filteredFilesToMerge.size() : -1;
 		String count = itemsSize >= 0 ? String.valueOf(itemsSize) : null;
 		String title = app.getString(R.string.backup_conflicts);
-		Drawable icon;
-		if (itemsSize >= 0) {
-			icon = getActiveIcon(R.drawable.ic_small_warning);
-		} else {
-			icon = getContentIcon(R.drawable.ic_small_warning);
-		}
+		Drawable icon = itemsSize > 0 ? getActiveIcon(R.drawable.ic_action_alert) : getContentIcon(R.drawable.ic_action_alert);
+
 		OnClickListener listener = v -> notifyButtonPressed(CONFLICTS_BUTTON_INDEX);
 
 		setupButton(conflictsButton, title, icon, listener);

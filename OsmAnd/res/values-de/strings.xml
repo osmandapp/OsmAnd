@@ -568,12 +568,12 @@
     <string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
     <string name="poi_context_menu_modify">Bearbeite POI</string>
     <string name="poi_context_menu_delete">Lösche POI</string>
-    <string name="rotate_map_compass_opt">Nach Kompass</string>
-    <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Fest (Norden ist oben)</string>
-    <string name="rotate_map_none_rotated_opt">Fest (manuell gedreht)</string>
-    <string name="rotate_map_to_bearing_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to_bearing">Kartenrotation</string>
+    <string name="rotate_map_compass_opt">Kompassrichtung</string>
+    <string name="rotate_map_bearing_opt">Bewegungsrichtung</string>
+    <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
+    <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
+    <string name="rotate_map_to_descr">Kartenausrichtung:</string>
+    <string name="rotate_map_to">Kartenrotation</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
@@ -1153,7 +1153,7 @@
     <string name="routing_attr_avoid_ferries_description">Vermeidet Fähren</string>
     <string name="routing_attr_avoid_motorway_name">Keine Autobahnen</string>
     <string name="routing_attr_avoid_motorway_description">Vermeidet Autobahnen</string>
-    <string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
+    <string name="routing_attr_weight_name">Gewicht</string>
     <string name="routing_attr_weight_description">Gewicht des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) ist der alte Speicherort (%s) veraltet. Alle OsmAnd-Dateien an den neuen Speicherort kopieren\?
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
@@ -1178,9 +1178,9 @@
     <string name="use_displayed_track_for_navigation">Angezeigten Track zur Navigation verwenden?</string>
     <string name="keep_and_add_destination_point">Als weiteres Ziel hinzufügen</string>
     <string name="select_gpx">GPX-Datei auswählen …</string>
-    <string name="route_descr_select_destination">Ziel auswählen</string>
+    <string name="route_descr_select_destination">Ziel festlegen</string>
     <string name="interrupt_music_descr">Musikwiedergabe während Sprachansagen pausieren.</string>
-    <string name="always_center_position_on_map">Standort immer in der Bildschirmmitte anzeigen</string>
+    <string name="always_center_position_on_map">Positionsbestimmung immer mittig</string>
     <string name="voice_pref_title">Stimme</string>
     <string name="misc_pref_title">Verschiedenes</string>
     <string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
@@ -1521,7 +1521,7 @@
     <string name="your_edits">Ihre Änderungen</string>
     <string name="waypoint_visit_after">Danach besuchen</string>
     <string name="shared_string_deselect">Abwählen</string>
-    <string name="shared_string_do_not_use">Nicht benutzen</string>
+    <string name="shared_string_do_not_use">Nicht verwenden</string>
     <string name="shared_string_deselect_all">Alle abwählen</string>
     <string name="shared_string_unexpected_error">Unerwarteter Fehler</string>
     <string name="shared_string_collapse">Einklappen</string>
@@ -1548,7 +1548,7 @@
 \nLon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
-    <string name="routing_attr_height_name">Höhenbeschränkung</string>
+    <string name="routing_attr_height_name">Höhe</string>
     <string name="read_full_article">Vollständigen Artikel lesen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
@@ -2201,7 +2201,7 @@
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
     <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
-    <string name="driving_region_automatic">Automatisch</string>
+    <string name="shared_string_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten. 
 \n 
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
@@ -2542,7 +2542,7 @@
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
     <string name="favourites_group">Favoritenkategorie</string>
-    <string name="add_group">Gruppe hinzufügen</string>
+    <string name="add_group">Eine Gruppe hinzufügen</string>
     <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
     <string name="empty_state_markers_groups">Gruppen importieren</string>
     <string name="empty_state_markers_history_desc">Markierungen, die als passiert gekennzeichnet sind, werden auf diesem Bildschirm angezeigt.</string>
@@ -2837,7 +2837,7 @@
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
     <string name="use_osm_live_public_transport_description">Aktivierung von OsmAnd Live für Änderungen bei öffentlichen Verkehrsmitteln.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
-    <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
+    <string name="public_transport_warning_descr_blog">Mehr über die OsmAnd-Routenführung in unserem Blog.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
     <string name="add_intermediate">Zwischenpunkt hinzufügen</string>
     <string name="transfers_size">%1$d Umstieg(e)</string>
@@ -2984,7 +2984,7 @@
     <string name="routing_profile_geocoding">Geocodierung</string>
     <string name="routing_profile_straightline">Direkte Verbindungslinie</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
-    <string name="osmand_default_routing">OsmAnd-Routing</string>
+    <string name="osmand_default_routing">OsmAnd-Routenführung</string>
     <string name="custom_routing">Benutzerdefiniertes Routingprofil</string>
     <string name="special_routing_type">Spezielles Routing</string>
     <string name="third_party_routing_type">Routing von Drittanbietern</string>
@@ -3197,7 +3197,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Undefiniert</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
-    <string name="routing_attr_width_name">Breitenbegrenzung</string>
+    <string name="routing_attr_width_name">Breite</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
     <string name="avoid_in_routing_descr_">Vermeiden bestimmter Routen und Straßentypen</string>
     <string name="app_mode_utv">Nebeneinander</string>
@@ -3650,9 +3650,9 @@
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
     <string name="vessel_height_warning">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden. Wenn die Brücke beweglich ist, wird die Höhe im geöffneten Zustand verwendet.</string>
-    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Wenn die Brücke beweglich ist, verwendet die Berechnung ihre Höhe im geöffneten Zustand.</string>
+    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Für beweglichen Brücken, wird deren Höhe im geöffneten Zustand verwendet.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
-    <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
+    <string name="quick_action_showhide_mapillary_descr">Eine Schaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
     <string name="shared_string_legal">Rechtliches</string>
     <string name="speed_camera_pois">Blitzer-POIs</string>
@@ -3671,7 +3671,7 @@
 \n
 \n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
-    <string name="routing_attr_length_name">Längenbegrenzung</string>
+    <string name="routing_attr_length_name">Länge</string>
     <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inlineskates</string>
     <string name="use_volume_buttons_as_zoom_descr">Steuern Sie die Zoomstufen der Karte mit den Lautstärketasten des Geräts.</string>
@@ -3716,7 +3716,7 @@
     <string name="whole_track">Ganzer Track</string>
     <string name="next_segment">Nächstes Segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
-    <string name="route_between_points_add_track_desc">Wählen Sie eine Trackdatei, für die ein neues Segment hinzugefügt werden soll.</string>
+    <string name="route_between_points_add_track_desc">Wählen Sie eine Trackdatei, zu der das neue Segment hinzugefügt werden soll.</string>
     <string name="follow_track_descr">Track auswählen, dem gefolgt werden soll</string>
     <string name="delete_address">Adresse löschen</string>
     <string name="add_address">Adresse hinzufügen</string>
@@ -3932,8 +3932,8 @@
     <string name="rename_track">Track umbenennen</string>
     <string name="change_folder">Ordner ändern</string>
     <string name="shared_string_turn">Abbiegung</string>
-    <string name="announcement_time_intervals">Zeit- und Distanzintervalle</string>
-    <string name="announcement_time_descr">Der Ansagezeitpunkt der verschiedenen Sprachansagen hängt vom Ansagetyp, der aktuellen Navigationsgeschwindigkeit und der Standard-Navigationsgeschwindigkeit ab.</string>
+    <string name="announcement_time_intervals">Zeit- und Entfernungsintervalle</string>
+    <string name="announcement_time_descr">Der Zeitpunkt der verschiedenen Sprachansagen hängt von Ansagetyp, aktueller Navigationsgeschwindigkeit und Standard-Navigationsgeschwindigkeit ab.</string>
     <string name="announcement_time_title">Ansagezeitpunkt</string>
     <string name="start_recording">Aufzeichnung starten</string>
     <string name="show_track_on_map">Track auf der Karte anzeigen</string>
@@ -4072,7 +4072,7 @@
     <string name="shared_string_feet">Fuß</string>
     <string name="srtm_unit_format">Einheitenvariante der Höhenlinien</string>
     <string name="srtm_download_list_help_message">OsmAnd liefert Höhenlinien-Daten in Metern und Fuß. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
-    <string name="srtm_download_single_help_message">Bitte wählen Sie die gewünschte Variante. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
+    <string name="srtm_download_single_help_message">Bitte Variante auswählen. Sie müssen die Datei erneut herunterladen, um das Format zu ändern.</string>
     <string name="route_line_use_gradient_coloring">Die Routenlinie wird durch die Steigung eingefärbt.</string>
     <string name="shared_string_min_height">Mindesthöhe</string>
     <string name="shared_string_max_height">Maximale Höhe</string>
@@ -4661,7 +4661,7 @@
     <string name="co2_mission">CO2-Emission</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
-    <string name="routing_attr_motor_type_name">Fahrzeugmotor</string>
+    <string name="routing_attr_motor_type_name">Kraftstoffverbrauch des Motors</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
     <string name="bearing_secondary_desc">Sie können das verwendete Datenformat ändern in %1$s – %2$s – %3$s.</string>
@@ -4755,7 +4755,7 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald ein Zwischenpunkt passiert ist, wird die Entfernung zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
+    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
     <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
@@ -4777,7 +4777,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Positionsanzeige</string>
+    <string name="display_position">Kartenzentrierung</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -4863,7 +4863,7 @@
 \n
 \n • Widget „Kartenmarkierung“: Option hinzugefügt, um das Klickverhalten zu ändern
 \n
-\n • Option \"Position anzeigen\" korrigiert
+\n • Option \"Positionsbestimmung\" korrigiert
 \n
 \n • GPX: Unterstützung für \"link\", \"cmt\", \"desc\"-Tags und für alle benutzerdefinierten Erweiterungen hinzugefügt
 \n
@@ -4961,7 +4961,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenaufgang und Sonnenuntergang an.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
-    <string name="storage_migration_fragment_close_descr">Das Kopieren ist erfolgt für %1$s%%. Wenn Sie jetzt abbrechen, funktioniert die Anwendung möglicherweise nicht richtig.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s%% abgeschlossen. Bei Abbruch funktioniert die Anwendung möglicherweise nicht richtig.</string>
     <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
@@ -4983,10 +4983,10 @@
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    <string name="release_4_4_pre">• Hier werden die Strings für die Version 4.4 sein</string>
+    <string name="release_4_4">• Hier werden die Strings für die Version 4.4 sein</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Windböen-Isolinien</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
     <string name="shared_string_expires">Abgelaufen</string>
     <string name="shared_string_purchased_on">Gekauft am</string>
     <string name="choose_what_to_sync">Wählen Sie, was synchronisiert werden soll</string>
@@ -5021,11 +5021,44 @@
     <string name="res_unknown">Unbekannt</string>
     <string name="shared_string_modified">Geändert</string>
     <string name="checking_progress">Prüfung…</string>
-    <string name="cloud_no_conflicts">Es gibt keine Konflikte</string>
+    <string name="cloud_no_conflicts">Es gibt keine Konflikte.</string>
     <string name="cloud_all_changes_uploaded_descr">Alle auf diesem Gerät vorgenommenen Änderungen werden mit OsmAnd Cloud synchronisiert.</string>
     <string name="download_cloud_version">Cloud-Version herunterladen</string>
-    <string name="av_audio_format_bottom_sheet_descr">Audio-Ausgabe-Format auswählen. Dateitypformat für Audio is 3GPP (.3gp).</string>
-    <string name="si_nm_ft">Nautische Meilen/Fuß</string>
-    <string name="si_nm_mt">Nautische Meilen/Meter</string>
+    <string name="av_audio_format_bottom_sheet_descr">Audio-Format auswählen. Das Dateityp-Containerformat für Audio ist 3GPP (.3gp).</string>
+    <string name="si_nm_ft">Seemeilen/Fuß</string>
+    <string name="si_nm_mt">Seemeilen/Meter</string>
     <string name="set_up_backup">Backup einrichten</string>
+    <string name="x_axis">X-Achse</string>
+    <string name="y_axis">Y-Achse</string>
+    <string name="share_as_file">Compartilhar como ficheiro</string>
+    <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Download überspringen</string>
+    <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
+    <string name="share_link">Partilhar a ligação</string>
+    <string name="sound_beep_simple">Signalton: Einfach</string>
+    <string name="sound_beep_minimal">Signalton: Minimal</string>
+    <string name="weight_limit_error">Der Mindestwert ist \"%1$s\" Tonnen. Verwenden Sie das Profil \"%2$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="sound_beep_complex_loud">Signalton: Komplex, laut</string>
+    <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
+    <string name="sound_beep_complex">Signalton: Komplex</string>
+    <string name="last_synchronized">Zuletzt synchronisiert</string>
+    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung: unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="shared_string_apply_changes">Änderungen anwenden</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
+    <string name="shared_string_kilograms">Kilogramm</string>
+    <string name="shared_string_yards">Yards</string>
+    <string name="default_tracks_appearance_description">Diese Erscheinungsbild-Einstellungen werden auf alle im vorherigen Bildschirm ausgewählten Titel angewendet.
+\n
+\nSie werden auch als \"%1$s\" gespeichert, um von %2$s für alle anderen Spuren ohne implizites oder spezifisch eingestelltes Aussehen angewendet zu werden.</string>
+    <string name="recently_visible">Kürzlich sichtbar %1$s</string>
+    <string name="empty_tracks_description">Sie können mit OsmAnd Track-Dateien importieren, erstellen oder aufzeichnen.</string>
+    <string name="default_tracks_appearance">Standarddarstellung des Tracks</string>
+    <string name="no_visible_tracks_description">Wählen Sie Tracks, um sie auf der Karte anzuzeigen.</string>
+    <string name="empty_tracks">Sie haben keine Trackdateien.</string>
+    <string name="no_visible_tracks">Keine Tracks auf der Karte</string>
+    <string name="shared_string_select_recent">Wählen Sie die letzten</string>
+    <string name="change_appearance">Aussehen ändern</string>
+    <string name="switch_folder">Ordner wechseln</string>
+    <string name="show_all_tracks">Alle Tracks anzeigen</string>
+    <string name="shared_string_on_map">Auf der Karte</string>
 </resources>

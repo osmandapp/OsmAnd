@@ -1,8 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -15,6 +12,9 @@ import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
@@ -74,13 +74,14 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		app.getGpsFilterHelper().filterGpxFile(this, false);
 	}
 
-	public void updateGpxFile(@NonNull GPXFile gpxFile) {
+	public void updateGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
 		if (gpxFile.tracks.size() > 0) {
 			color = gpxFile.tracks.get(0).getColor(0);
 		}
 		modifiedTime = gpxFile.modifiedTime;
-		processedPointsToDisplay = gpxFile.proccessPoints();
+		processPoints(app);
+
 		leftPointsCount = calculatePointsCount(gpxFile);
 		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
 	}
@@ -97,6 +98,8 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@Override
 	public void processPoints(OsmandApplication app) {
 		processedPointsToDisplay = gpxFile.proccessPoints();
+		updateBounds();
+		updatePath31(hasMapRenderer(app));
 	}
 
 	private int calculatePointsCount(@NonNull GPXFile gpxFile) {

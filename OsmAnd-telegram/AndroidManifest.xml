@@ -3,6 +3,7 @@
     package="net.osmand.telegram">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,6 +34,7 @@
             android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize">
 
             <intent-filter>

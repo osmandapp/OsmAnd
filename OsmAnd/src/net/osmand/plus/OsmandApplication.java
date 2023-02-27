@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
@@ -247,6 +248,7 @@ public class OsmandApplication extends MultiDexApplication {
 		FileUtils.removeFilesWithExtensions(getAppPath(WIKI_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(getAppPath(WIKIVOYAGE_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(getAppPath(HEIGHTMAP_INDEX_DIR), false, IndexConstants.DOWNLOAD_EXT);
+		FileUtils.removeFilesWithExtensions(getAppPath(GEOTIFF_DIR), false, IndexConstants.DOWNLOAD_EXT);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();

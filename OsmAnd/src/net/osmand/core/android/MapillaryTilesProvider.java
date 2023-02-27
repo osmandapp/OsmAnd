@@ -29,7 +29,7 @@ import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.Utilities;
@@ -137,10 +137,10 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
-	public SWIGTYPE_p_sk_spT_SkImage_const_t obtainImage(IMapTiledDataProvider.Request request) {
+	public long obtainImageData(IMapTiledDataProvider.Request request, SWIGTYPE_p_QByteArray byteArray) {
 		IQueryController queryController = request.getQueryController();
 		if (queryController != null && queryController.isAborted()) {
-			return SwigUtilities.nullSkImage();
+			return 0;
 		}
 		int requestZoom = request.getZoom().swigValue();
 		ZoomLevel swigZoom = request.getZoom();
@@ -153,7 +153,9 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			if (bitmapFromCache != null) {
 				AreaI tileBBox31 = Utilities.tileBoundingBox31(swigTileId, swigZoom);
 				lazyLoadMap.put(tileBBox31, new TileRequest(x, y, z));
-				return NativeUtilities.createSkImageFromBitmap(bitmapFromCache);
+				byte[] bytes = AndroidUtils.getByteArrayFromBitmap(bitmapFromCache);
+				SwigUtilities.appendToQByteArray(byteArray, bytes);
+				return (long) bitmapFromCache.getHeight() << 32 | bitmapFromCache.getWidth();
 			}
 		}
 
@@ -186,7 +188,7 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 		if (imgExist || useInternet) {
 			do {
 				if (queryController != null && queryController.isAborted()) {
-					return SwigUtilities.nullSkImage();
+					return 0;
 				}
 				tile = geometryTilesCache.getTileForMapSync(tileId, tileSource, tileX, tileY,
 						tileZoom, useInternet, requestTimestamp);
@@ -224,10 +226,12 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 				if (isDrawLines || isDrawPoints) {
 					mapillaryBitmapTileCache.saveTile(resultTileBitmap, swigTileId, requestZoom);
 				}
-				return NativeUtilities.createSkImageFromBitmap(resultTileBitmap);
+				byte[] bytes = AndroidUtils.getByteArrayFromBitmap(resultTileBitmap);
+				SwigUtilities.appendToQByteArray(byteArray, bytes);
+				return (long) resultTileBitmap.getHeight() << 32 | resultTileBitmap.getWidth();
 			}
 		}
-		return SwigUtilities.nullSkImage();
+		return 0;
 	}
 
 	private int getNormalizedTileSize() {
@@ -274,16 +278,12 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 	@Override
 	public boolean supportsObtainImage() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
 		return true;
-	}
-
-	@Override
-	public void obtainImageAsync(IMapTiledDataProvider.Request request, ImageMapLayerProvider.AsyncImageData asyncImage) {
 	}
 
 	@Override

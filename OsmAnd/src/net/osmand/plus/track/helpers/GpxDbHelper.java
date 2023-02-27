@@ -6,13 +6,14 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 
 import java.io.File;
 import java.util.List;
@@ -24,6 +25,7 @@ public class GpxDbHelper {
 
 	private static final int MAX_ITEMS_CACHE_SIZE = 5000;
 
+	private final OsmandApplication app;
 	private final GPXDatabase db;
 	private final Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
 
@@ -40,6 +42,7 @@ public class GpxDbHelper {
 	}
 
 	public GpxDbHelper(@NonNull OsmandApplication app) {
+		this.app = app;
 		db = new GPXDatabase(app);
 	}
 
@@ -47,6 +50,18 @@ public class GpxDbHelper {
 		List<GpxDataItem> items = getItems();
 		for (GpxDataItem item : items) {
 			putToCache(item);
+		}
+		loadNewGpxItems();
+	}
+
+	private void loadNewGpxItems() {
+		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		List<GPXInfo> gpxInfos = GpxUiHelper.getGPXFiles(gpxDir, true);
+		for (GPXInfo gpxInfo : gpxInfos) {
+			File file = new File(gpxInfo.getFileName());
+			if (file.exists() && !file.isDirectory() && !hasItem(file)) {
+				add(new GpxDataItem(file));
+			}
 		}
 	}
 
@@ -291,13 +306,14 @@ public class GpxDbHelper {
 
 		@Override
 		protected void onProgressUpdate(GpxDataItem... values) {
-			GpxDataItem item = values[0];
-			GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
-			if (callback != null) {
-				if (callback.isCancelled()) {
-					stopReading();
-				} else {
-					callback.onGpxDataItemReady(item);
+			for (GpxDataItem item : values) {
+				GpxDataItemCallback callback = readingItemsCallbacks.remove(item.getFile());
+				if (callback != null) {
+					if (callback.isCancelled()) {
+						stopReading();
+					} else {
+						callback.onGpxDataItemReady(item);
+					}
 				}
 			}
 		}

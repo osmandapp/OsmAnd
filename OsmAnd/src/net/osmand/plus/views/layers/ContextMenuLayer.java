@@ -256,8 +256,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (clearSelectedObject && hasMapRenderer) {
 			clearOutlineCollection();
 		}
-		float textScale = selectionHelper.hasPressedLatLon() ? getTextScale() : 1f;
-		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonSmall().entrySet()) {
+		float textScale = selectionHelper.hasTouchedMapObjects() ? getTextScale() : 1f;
+		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getTouchedSmallMapObjects().entrySet()) {
 			LatLon latLon = entry.getKey();
 			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
 			BackgroundType background = entry.getValue();
@@ -266,7 +266,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					pixel.x, pixel.y, pressedBitmapSmall.getWidth(), pressedBitmapSmall.getHeight(), textScale);
 			canvas.drawBitmap(pressedBitmapSmall, null, destRect, paint);
 		}
-		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getPressedLatLonFull().entrySet()) {
+		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getTouchedFullMapObjects().entrySet()) {
 			LatLon latLon = entry.getKey();
 			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
 			BackgroundType background = entry.getValue();
@@ -932,16 +932,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			case MotionEvent.ACTION_DOWN:
 				if (!mInChangeMarkerPositionMode && !mInGpxDetailsMode) {
 					PointF pointF = new PointF(event.getX(), event.getY());
-					selectionHelper.selectObjectsFromMap(tileBox, pointF, true, true);
-					if (selectionHelper.hasPressedLatLon()) {
+					selectionHelper.acquireTouchedMapObjects(tileBox, pointF, true);
+					if (selectionHelper.hasTouchedMapObjects()) {
 						view.refreshMap();
 					}
 				}
 				break;
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_CANCEL:
-				selectionHelper.getPressedLatLonFull().clear();
-				selectionHelper.getPressedLatLonSmall().clear();
+				selectionHelper.clearTouchedMapObjects();
 				view.refreshMap();
 				break;
 		}
@@ -951,7 +950,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IContextMenuProvider {
 
-		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation);
+		/**
+		 * @param excludeUntouchableObjects Touchable objects are objects that
+		 *                                  change appearance when touched on map
+		 */
+		void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
+		                             boolean unknownLocation, boolean excludeUntouchableObjects);
 
 		LatLon getObjectLocation(Object o);
 
@@ -960,8 +964,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean disableSingleTap();
 
 		boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox);
-
-		boolean isObjectClickable(Object o);
 
 		boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation);
 

@@ -255,7 +255,7 @@ public class ExternalApiHelper {
 					if (navigate) {
 						boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
 						boolean locationPermission = uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false);
-						saveAndNavigateGpx(mapActivity, gpx, force, locationPermission);
+						saveAndNavigateGpx(mapActivity, gpx, force, locationPermission, false);
 					} else {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 					}
@@ -647,8 +647,8 @@ public class ExternalApiHelper {
 		return null;
 	}
 
-	public static void saveAndNavigateGpx(MapActivity mapActivity, GPXFile gpxFile,
-	                                      boolean force, boolean checkLocationPermission) {
+	public static void saveAndNavigateGpx(MapActivity mapActivity, GPXFile gpxFile, boolean force,
+	                                      boolean checkLocationPermission, boolean passWholeRoute) {
 		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 
 		if (Algorithms.isEmpty(gpxFile.path)) {
@@ -689,11 +689,11 @@ public class ExternalApiHelper {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 							MapActivity activity = mapActivityRef.get();
 							if (activity != null && !routingHelper.isFollowingMode()) {
-								startNavigation(activity, gpxFile, checkLocationPermission);
+								startNavigation(activity, gpxFile, checkLocationPermission, passWholeRoute);
 							}
 						});
 					} else {
-						startNavigation(mapActivity, gpxFile, checkLocationPermission);
+						startNavigation(mapActivity, gpxFile, checkLocationPermission, passWholeRoute);
 					}
 				}
 			}
@@ -771,22 +771,22 @@ public class ExternalApiHelper {
 		mapContextMenu.show(new LatLon(lat, lon), pointDescription, object);
 	}
 
-	public static void startNavigation(MapActivity mapActivity, @NonNull GPXFile gpx, boolean checkLocationPermission) {
-		startNavigation(mapActivity, gpx, null, null, null, null, null, checkLocationPermission);
+	public static void startNavigation(MapActivity mapActivity, @NonNull GPXFile gpx, boolean checkLocationPermission, boolean passWholeRoute) {
+		startNavigation(mapActivity, gpx, null, null, null, null, null, checkLocationPermission, passWholeRoute);
 	}
 
 	public static void startNavigation(MapActivity mapActivity,
 	                                   @Nullable LatLon from, @Nullable PointDescription fromDesc,
 	                                   @Nullable LatLon to, @Nullable PointDescription toDesc,
 	                                   @NonNull ApplicationMode mode, boolean checkLocationPermission) {
-		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission);
+		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission, false);
 	}
 
 	private static void startNavigation(MapActivity mapActivity,
 	                                    GPXFile gpx,
 	                                    LatLon from, PointDescription fromDesc,
 	                                    LatLon to, PointDescription toDesc,
-	                                    ApplicationMode mode, boolean checkLocationPermission) {
+	                                    ApplicationMode mode, boolean checkLocationPermission, boolean passWholeRoute) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
@@ -797,7 +797,8 @@ public class ExternalApiHelper {
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
 		}
-		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, from, fromDesc, true, false);
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, from, fromDesc, true,
+				false, passWholeRoute);
 		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 			mapActivity.getMapRouteInfoMenu().show();
 		} else {

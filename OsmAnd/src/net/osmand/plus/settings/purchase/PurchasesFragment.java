@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.purchase;
 
+import static net.osmand.plus.settings.purchase.data.PurchaseUiDataUtils.shouldShowBackupSubscription;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -95,8 +97,8 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
 		}
-		boolean backupPurchaseActive = app.getSettings().BACKUP_PURCHASE_ACTIVE.get();
-		if (backupPurchaseActive) {
+		boolean showBackupSubscription = shouldShowBackupSubscription(app, mainPurchases);
+		if (showBackupSubscription) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
@@ -105,7 +107,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 		}
 
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
-		if (!Version.isPaidVersion(app) || (!hasMainPurchases && !backupPurchaseActive)) {
+		if (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription)) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
 		} else {

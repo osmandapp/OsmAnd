@@ -267,7 +267,7 @@
     <string name="last_response_duration">Sidste svar: %1$s siden</string>
     <string name="duration_ago">%1$s siden</string>
     <string name="shared_string_error_short">ERR</string>
-    <string name="shared_string_export">Eksporter</string>
+    <string name="shared_string_export">Eksportér</string>
     <string name="logcat_buffer">Logcat-buffer</string>
     <string name="logcat_buffer_descr">Kontroller og del detaljerede logfiler for appen</string>
     <string name="send_report">Send rapport</string>

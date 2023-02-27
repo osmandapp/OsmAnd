@@ -107,6 +107,11 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	}
 
 	@Override
+	protected void deleteItem(OsmNotesPoint item) {
+		// TODO: delete settings item
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull OsmNotesPoint item) {
 		return existingItems.contains(item);
 	}

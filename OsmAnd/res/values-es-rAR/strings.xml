@@ -286,7 +286,7 @@
     <string name="gpx_selection_track">%1$s
 \nTraza %2$s</string>
     <string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
-    <string name="always_center_position_on_map">Mostrar ubicación en el centro</string>
+    <string name="always_center_position_on_map">Mostrar ubicación siempre en el centro</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Ubicación</string>
@@ -359,7 +359,7 @@
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
-    <string name="routing_attr_weight_name">Límite de peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_mr">Marathi</string>
@@ -1114,7 +1114,7 @@
     <string name="trace_rendering">Información sobre el rendimiento</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de la visualización y la navegación.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-    <string name="internet_connection_required_for_online_route">La navegación en línea, no funciona sin conexión a Internet.</string>
+    <string name="internet_connection_required_for_online_route">La navegación en línea no funciona sin conexión a Internet.</string>
     <string name="tts_language_not_supported_title">Idioma no admitido</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -1154,7 +1154,7 @@
     <string name="preferred_locale_descr">Idioma de la aplicación (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de distancia o longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
@@ -1262,9 +1262,9 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_none_opt">Fijo (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Alineación del mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación del mapa</string>
+    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_to_descr">Alineación del mapa:</string>
+    <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de referencia a «Favoritos»?</string>
@@ -1523,7 +1523,7 @@
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
-    <string name="routing_attr_height_name">Límite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
@@ -1592,7 +1592,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
-    <string name="restart_is_required">Se requiere un reinicio para aplicar los cambios.</string>
+    <string name="restart_is_required">Debes reiniciar para aplicar los cambios.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
@@ -2194,7 +2194,7 @@
     <string name="full_version_thanks">Gracias por comprar la versión de pago de OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
@@ -3183,7 +3183,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
     <string name="app_mode_utv">En paralelo</string>
@@ -3662,7 +3662,7 @@
     <string name="item_deleted">%1$s borrado</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
-    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="routing_attr_length_name">Longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
@@ -3707,7 +3707,7 @@
     <string name="next_segment">Siguiente segmento</string>
     <string name="threshold_distance">Distancia de umbral</string>
     <string name="navigation_profile">Perfil de navegación</string>
-    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
+    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que añadir el segmento nuevo.</string>
     <string name="street_level_imagery">Imágenes a nivel de calle</string>
     <string name="plan_route_exit_dialog_descr">¿Descartar todos los cambios en la ruta planificada\?</string>
     <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
@@ -4236,7 +4236,7 @@
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
+    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
     <string name="backup_dont_have_any_descr">Define una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
     <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando OsmAnd Cloud.</string>
@@ -4281,7 +4281,7 @@
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
-    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
@@ -4706,7 +4706,7 @@
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
-    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
+    <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
@@ -4763,7 +4763,7 @@
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
-    <string name="compass_click_desc">Pulsa en la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
@@ -4800,7 +4800,7 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
-    <string name="rotate_map_none_rotated_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
@@ -4971,9 +4971,9 @@
     <string name="shared_string_time_left">Tiempo restante</string>
     <string name="map_widget_group_sunrise_sunset_desc">Muestran información sobre la próxima salida y puesta del sol.</string>
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de la línea</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
-    <string name="storage_migration_fragment_close_descr">La copia se realiza para %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="quick_action_precipitation_layer">Un botón que alterna la capa de precipitación en el mapa.</string>
     <string name="quick_action_cloud_layer">Un botón que alterna la capa de nubes en el mapa.</string>
     <string name="temperature_layer">Capa de temperatura</string>
@@ -4994,7 +4994,7 @@
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
-    <string name="release_4_4_pre">• Aquí estarán las cadenas para la versión 4.4</string>
+    <string name="release_4_4">• Aquí estarán las cadenas para la versión 4.4</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
@@ -5024,11 +5024,11 @@
     <string name="cloud_recent_changes">Cambios</string>
     <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
-    <string name="cloud_no_conflicts">Sin conflictos</string>
+    <string name="cloud_no_conflicts">Sin conflictos.</string>
     <string name="download_cloud_version">Descargar versión en la nube</string>
     <string name="shared_string_do_not_exist">No existe</string>
     <string name="last_sync">Última sincronización</string>
-    <string name="import_export">Importar/Exportar</string>
+    <string name="import_export">Importar/exportar</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="changes">Cambios %1$s</string>
     <string name="cloud_sync_progress">Sincronizar... %1$s</string>
@@ -5036,8 +5036,41 @@
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios hechos en este dispositivo están sincronizados con OsmAnd Cloud.</string>
     <string name="upload_change">Subir cambio</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
-    <string name="av_audio_format_bottom_sheet_descr">Elige el formato de salida del audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elige un formato de audio. El formato de archivo del audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
+    <string name="x_axis">Eje X</string>
+    <string name="y_axis">Eje Y</string>
+    <string name="share_as_file">Compartir como archivo</string>
+    <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Omitir descarga</string>
+    <string name="determine_location">Permítenos determinar tu ubicación</string>
+    <string name="share_link">Compartir enlace</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="sound_beep_minimal">Pitido: mínimo</string>
+    <string name="sound_beep_simple">Pitido: simple</string>
+    <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
+    <string name="sound_beep_complex">Pitido: complejo</string>
+    <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
+    <string name="last_synchronized">Última sincronización</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
+    <string name="shared_string_apply_changes">Aplicar cambios</string>
+    <string name="no_visible_tracks">Sin trazas en el mapa</string>
+    <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
+    <string name="recently_visible">Última visible «%1$s»</string>
+    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
+    <string name="empty_tracks">No tienes archivos de trazas.</string>
+    <string name="shared_string_select_recent">Marcar reciente</string>
+    <string name="change_appearance">Cambiar aspecto</string>
+    <string name="switch_folder">Alternar carpeta</string>
+    <string name="show_all_tracks">Mostrar todas las trazas</string>
+    <string name="shared_string_on_map">En el mapa</string>
+    <string name="shared_string_yards">yardas</string>
+    <string name="shared_string_kilograms">kilogramos</string>
+    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="inch">in</string>
 </resources>

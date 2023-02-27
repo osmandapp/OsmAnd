@@ -1037,9 +1037,9 @@
     <string name="poi_context_menu_delete">Eliminar PDI</string>
     <string name="rotate_map_compass_opt">Dirección do compás</string>
     <string name="rotate_map_bearing_opt">Dirección do movemento</string>
-    <string name="rotate_map_none_opt">Sen rotación, non xirar (o norte sempre enriba)</string>
-    <string name="rotate_map_to_bearing_descr">Aliñamento do mapa:</string>
-    <string name="rotate_map_to_bearing">Orientación do mapa</string>
+    <string name="rotate_map_north_opt">Sen rotación, non xirar (o norte sempre enriba)</string>
+    <string name="rotate_map_to_descr">Aliñamento do mapa:</string>
+    <string name="rotate_map_to">Orientación do mapa</string>
     <string name="show_route">Detalles do itinerario</string>
     <string name="fav_imported_sucessfully">Os Favoritos foron importados</string>
     <string name="import_file_favourites">Gardar os datos nun ficheiro GPX ou importar puntos de pasaxe ós \"Favoritos\"\?</string>
@@ -2127,7 +2127,7 @@ Lon %2$s</string>
     <string name="restore_purchases">Restaurar as compras</string>
     <string name="fonts_header">Fontes das letras do mapa</string>
     <string name="right_side_navigation">Condución pola dereita</string>
-    <string name="driving_region_automatic">Automático</string>
+    <string name="shared_string_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Non enviar estatísticas anónimas de uso da aplicación</string>
     <string name="do_not_show_startup_messages">Non amosar mensaxes do inicio</string>
     <string name="parking_options">Opcións de aparcamento</string>

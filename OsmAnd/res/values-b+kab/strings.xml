@@ -310,7 +310,7 @@
     <string name="shared_string_in_name">"di  %1$s"</string>
     <string name="subscribe_email_error">Tuccḍa</string>
     <string name="shared_string_visible">Uman</string>
-    <string name="driving_region_automatic">Awurman</string>
+    <string name="shared_string_automatic">Awurman</string>
     <string name="shared_string_gpx_track">Abrid</string>
     <string name="shared_string_max">Afellay</string>
     <string name="shared_string_start_time">Temps de début</string>
@@ -1100,8 +1100,8 @@
     <string name="context_menu_item_search_poi">Nadi</string>
     <string name="layer_map">aɣbalu</string>
     <string name="error_occurred_loading_gpx">\"ur izmir ara ad yali: \"</string>
-    <string name="rotate_map_to_bearing">Taɣda n tkarḍa</string>
-    <string name="rotate_map_to_bearing_descr">Areyyec</string>
+    <string name="rotate_map_to">Taɣda n tkarḍa</string>
+    <string name="rotate_map_to_descr">Areyyec</string>
     <string name="poi_context_menu_delete">Kkes</string>
     <string name="poi_context_menu_modify">Beddel</string>
     <string name="show_point_options">Adig</string>

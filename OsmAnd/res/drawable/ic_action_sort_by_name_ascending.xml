@@ -8,22 +8,9 @@
       android:fillColor="#ffffff"/>
   <path
       android:pathData="M5,13H12V15L7.5,20H12V22H5V20L9.5,15H5V13Z"
-      android:strokeAlpha="0.5"
+      android:strokeAlpha="0.6"
       android:fillColor="#ffffff"
-      android:fillType="evenOdd"
-      android:fillAlpha="0.5"/>
-  <path
-      android:pathData="M9.5,2H7.5L4,11H6L6.7692,9H10.2308L11,11H13L9.5,2ZM9.4615,7L8.5,4.5L7.5385,7H9.4615Z"
-      android:fillColor="#ffffff"
-      android:fillType="evenOdd"/>
-  <path
-      android:pathData="M20,16L17,20L14,16H16V4H18V16H20Z"
-      android:fillColor="#ffffff"/>
-  <path
-      android:pathData="M5,13H12V15L7.5,20H12V22H5V20L9.5,15H5V13Z"
-      android:strokeAlpha="0.5"
-      android:fillColor="#ffffff"
-      android:fillAlpha="0.5"/>
+      android:fillAlpha="0.6"/>
   <path
       android:pathData="M9.5,2H7.5L4,11H6L6.7692,9H10.2308L11,11H13L9.5,2ZM9.4615,7L8.5,4.5L7.5385,7H9.4615Z"
       android:fillColor="#ffffff"

@@ -56,6 +56,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -121,7 +122,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		if (!Algorithms.isEmpty(mapsToUpdate)) {
 			int countEnabled = listener.getMapsToUpdate().size();
 			if (countEnabled == 1) {
-				runLiveUpdate(activity, mapsToUpdate.get(0).getFileName(), false, listener::processFinish);
+				runLiveUpdate(activity, mapsToUpdate.get(0).getFileNameWithoutRoadSuffix(), false, listener::processFinish);
 			} else if (countEnabled > 1) {
 				Fragment target = null;
 				if (listener instanceof Fragment) {
@@ -165,7 +166,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 					if (getFragmentManager() != null) {
 						LiveUpdatesSettingsBottomSheet
 								.showInstance(getFragmentManager(), LiveUpdatesFragment.this,
-										adapter.getChild(groupPosition, childPosition).getFileName());
+										adapter.getChild(groupPosition, childPosition).getFileNameWithoutRoadSuffix());
 					}
 					return true;
 				} else {
@@ -350,7 +351,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 			List<LocalIndexInfo> mapsToUpdate = getMapsToUpdate(adapter.mapsList, settings);
 			for (LocalIndexInfo li : mapsToUpdate) {
-				String fileName = li.getFileName();
+				String fileName = li.getFileNameWithoutRoadSuffix();
 				PendingIntent alarmIntent = getPendingIntent(app, fileName);
 				if (enable) {
 					CommonPreference<Integer> updateFrequencyPreference =
@@ -385,7 +386,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	public static List<LocalIndexInfo> getMapsToUpdate(List<LocalIndexInfo> mapsList, OsmandSettings settings) {
 		List<LocalIndexInfo> listToUpdate = new ArrayList<>();
 		for (LocalIndexInfo mapToUpdate : mapsList) {
-			CommonPreference<Boolean> preference = preferenceForLocalIndex(mapToUpdate.getFileName(), settings);
+			CommonPreference<Boolean> preference = preferenceForLocalIndex(mapToUpdate.getFileNameWithoutRoadSuffix(), settings);
 			if (preference.get()) {
 				listToUpdate.add(mapToUpdate);
 			}
@@ -399,8 +400,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		@Override
 		public void addData(@NonNull List<LocalIndexInfo> indexes) {
-			mapsList.addAll(indexes);
-			notifyDataSetChanged();
+			if (LocalIndexHelper.addUnique(mapsList, indexes)) {
+				notifyDataSetChanged();
+			}
 		}
 
 		@Override
@@ -418,8 +420,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			Collections.sort(mapsList, new Comparator<LocalIndexInfo>() {
 				@Override
 				public int compare(LocalIndexInfo o1, LocalIndexInfo o2) {
-					CommonPreference<Boolean> preference1 = preferenceForLocalIndex(o1.getFileName(), getSettings());
-					CommonPreference<Boolean> preference2 = preferenceForLocalIndex(o2.getFileName(), getSettings());
+					CommonPreference<Boolean> preference1 = preferenceForLocalIndex(o1.getFileNameWithoutRoadSuffix(), getSettings());
+					CommonPreference<Boolean> preference2 = preferenceForLocalIndex(o2.getFileNameWithoutRoadSuffix(), getSettings());
 					int prefSort = preference2.get().compareTo(preference1.get());
 					if (prefSort != 0) {
 						return prefSort;
@@ -449,7 +451,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			UiUtilities.rotateImageByLayoutDirection(secondaryIcon);
 			LiveMapsViewHolder viewHolder = new LiveMapsViewHolder(convertView);
 			convertView.setTag(viewHolder);
-			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileName());
+			viewHolder.bindLocalIndexInfo(getChild(groupPosition, childPosition).getFileNameWithoutRoadSuffix());
 			return convertView;
 		}
 

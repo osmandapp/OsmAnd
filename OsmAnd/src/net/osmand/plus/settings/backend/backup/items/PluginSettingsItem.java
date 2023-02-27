@@ -5,9 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -107,6 +106,15 @@ public class PluginSettingsItem extends SettingsItem {
 				}
 			}
 			app.runInUIThread(() -> PluginsHelper.addCustomPlugin(app, plugin));
+		}
+	}
+
+	@Override
+	public void delete() {
+		super.delete();
+		PluginsHelper.removeCustomPlugin(app, plugin);
+		for (SettingsItem item : pluginDependentItems) {
+			item.delete();
 		}
 	}
 

@@ -26,8 +26,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
@@ -124,7 +124,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		MapActivity mapActivity = requireMapActivity();
-		importHelper = new ImportHelper(mapActivity, getMyApplication());
+		importHelper = new ImportHelper(mapActivity);
 
 		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (routeParamsBuilder != null) {
@@ -444,9 +444,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (data != null) {
 				Uri uri = data.getData();
 				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
-					@Override
-					public void onImportComplete(boolean success) { }
-
 					@Override
 					public void onSaveComplete(boolean success, GPXFile result) {
 						if (success) {

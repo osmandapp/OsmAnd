@@ -1,7 +1,6 @@
 package net.osmand.plus.auto;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
-import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import android.graphics.drawable.Drawable;
@@ -18,17 +17,17 @@ import androidx.car.app.model.Place;
 import androidx.car.app.model.Row;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -53,7 +52,10 @@ public class SearchHelper {
 	private String searchQuery;
 	private List<SearchResult> searchResults;
 
-	private int searchRadiusLevel = 1;
+	private int searchRadiusLevel;
+	private final int minSearchRadiusLevel;
+	private final int maxSearchRadiusLevel;
+	private final boolean silentRadiusSearchIncrement;
 	private boolean searching;
 	private boolean useMapCenter;
 	private LatLon searchLocation;
@@ -70,11 +72,16 @@ public class SearchHelper {
 						  @Nullable ItemList itemList, int resultsCount);
 	}
 
-	SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit) {
+	SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit,
+	             int minSearchRadiusLevel, int maxSearchRadiusLevel, boolean silentRadiusSearchIncrement) {
 		this.app = app;
 		this.searchUICore = app.getSearchUICore().getCore();
 		this.showDescription = showDescription;
 		this.contentLimit = contentLimit;
+		this.minSearchRadiusLevel = minSearchRadiusLevel;
+		this.maxSearchRadiusLevel = maxSearchRadiusLevel;
+		this.silentRadiusSearchIncrement = silentRadiusSearchIncrement;
+		this.searchRadiusLevel = minSearchRadiusLevel;
 		setupSearchSettings(true);
 	}
 
@@ -83,7 +90,7 @@ public class SearchHelper {
 	}
 
 	public void resetSearchRadius() {
-		searchRadiusLevel = 1;
+		searchRadiusLevel = minSearchRadiusLevel;
 	}
 
 	public boolean isSearching() {
@@ -126,8 +133,8 @@ public class SearchHelper {
 		int radiusLevel = this.searchRadiusLevel;
 		if (radiusLevel < 1) {
 			radiusLevel = 1;
-		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
-			radiusLevel = MAX_DEFAULT_SEARCH_RADIUS;
+		} else if (radiusLevel > maxSearchRadiusLevel) {
+			radiusLevel = maxSearchRadiusLevel;
 		}
 		LatLon searchLatLon;
 		LatLon clt = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
@@ -204,17 +211,28 @@ public class SearchHelper {
 			}
 			SearchPhrase phrase = searchUICore.getPhrase();
 			if (searchUICore.isSearchMoreAvailable(phrase)) {
-				Row.Builder builder = new Row.Builder();
-				builder.setTitle(app.getString(R.string.increase_search_radius));
-				int minimalSearchRadius = searchUICore.getMinimalSearchRadius(phrase);
-				if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
-					double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
-					builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
-							+ OsmAndFormatter.getFormattedDistance((float) rd, app, false));
+				if (count == 0 && silentRadiusSearchIncrement && searchRadiusLevel < maxSearchRadiusLevel) {
+					app.runInUIThread(() -> {
+						searchRadiusLevel++;
+						if (!Algorithms.isEmpty(searchQuery)) {
+							runSearch(searchQuery);
+						}
+					});
+					return;
 				}
-				builder.setOnClickListener(this::onClickSearchMore);
-				builder.setBrowsable(true);
-				itemList.addItem(builder.build());
+				if (!silentRadiusSearchIncrement) {
+					Row.Builder builder = new Row.Builder();
+					builder.setTitle(app.getString(R.string.increase_search_radius));
+					int minimalSearchRadius = searchUICore.getMinimalSearchRadius(phrase);
+					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
+						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
+						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
+								+ OsmAndFormatter.getFormattedDistance((float) rd, app, false));
+					}
+					builder.setOnClickListener(this::onClickSearchMore);
+					builder.setBrowsable(true);
+					itemList.addItem(builder.build());
+				}
 			}
 			int resultsCount = count;
 			app.runInUIThread(() -> {
@@ -257,7 +275,7 @@ public class SearchHelper {
 		searchUICore.selectSearchResult(sr);
 		String searchQuery = searchUICore.getPhrase().getText(true);
 		if (searchRadiusLevel != 1) {
-			searchRadiusLevel = 1;
+			searchRadiusLevel = minSearchRadiusLevel;
 		}
 		runSearch(searchQuery);
 	}

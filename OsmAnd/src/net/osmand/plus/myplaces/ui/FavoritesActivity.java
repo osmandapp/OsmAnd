@@ -74,7 +74,7 @@ public class FavoritesActivity extends TabActivity {
 
 		app.logEvent("myplaces_open");
 
-		importHelper = new ImportHelper(this, app);
+		importHelper = new ImportHelper(this);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
@@ -130,11 +130,6 @@ public class FavoritesActivity extends TabActivity {
 							gpxFragment.finishImport(success);
 						}
 						importHelper.setGpxImportCompleteListener(null);
-					}
-
-					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
-
 					}
 				});
 				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {

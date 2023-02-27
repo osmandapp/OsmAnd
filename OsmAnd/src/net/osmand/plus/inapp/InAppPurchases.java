@@ -692,13 +692,13 @@ public abstract class InAppPurchases {
 
 		public enum SubscriptionOrigin {
 			UNDEFINED(R.string.shared_string_undefined),
-			ANDROID(R.string.google_play),
+			GOOGLE(R.string.google_play),
 			AMAZON(R.string.amazon_market),
 			HUAWEI(R.string.huawei_market),
 			IOS(R.string.apple_app_store),
 			PROMO(R.string.promo);
 
-			int storeNameId;
+			final int storeNameId;
 
 			SubscriptionOrigin(int storeNameId) {
 				this.storeNameId = storeNameId;

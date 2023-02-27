@@ -249,7 +249,7 @@
 \n
 \n - аўтаномны пошук адрасоў і POI;
 \n
-\n - пракладка маршрутаў па-за сецівам на кароткія адлегласці (эксперыментальная функцыя);
+\n - пракладванне маршрутаў па-за сецівам на кароткія адлегласці (эксперыментальная функцыя);
 \n
 \n - рэжымы для пешаходнай, аўтамабільнай і роварнай навігацыі з:
 \n
@@ -263,11 +263,11 @@
 \n
 \nАбмежаванні бясплатнай версіі:
 \n
-\n - колькасць спамповак мапаў абмежаваная;
+\n - колькасць спампоўванняў мапаў абмежаваная;
 \n
 \n - адсутнічае пазасеціўны доступ да інфармацыі з Вікіпедыі для POI.
 \n
-\nOsmAnd актыўна развіваецца, яго далейшае развіццё забяспечваецца фінансавымі паступленнямі ад яго карыстальнікаў, за кошт якіх адбываецца далейшая распрацоўка і тэставанне новых функцый. Калі ласка, разгледзьце магчымасць набыцця OsmAnd+ або падтрымайце распрацоўку пэўных функцый, або зрабіце дабрачынны ўнёсак на https://osmand.net.</string>
+\nOsmAnd актыўна развіваецца, яго далейшае развіццё забяспечваецца фінансавымі паступленнямі ад яго карыстальнікаў, за кошт якіх адбываецца далейшая распрацоўка і тэставанне новых функцый. Калі ласка, разгледзьце магчымасць набыцця OsmAnd+ або падтрымайце распрацоўванне пэўных функцый, або зрабіце дабрачынны ўнёсак на https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапы і навігацыя</string>
     <string name="osmand_plus_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеціўных мапаў OSM</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
@@ -772,9 +772,9 @@
     <string name="poi_context_menu_delete">Выдаліць POI</string>
     <string name="rotate_map_compass_opt">У напрамку компаса</string>
     <string name="rotate_map_bearing_opt">У напрамку руху</string>
-    <string name="rotate_map_none_opt">Не варочаць (поўнач заўсёды ўверсе)</string>
-    <string name="rotate_map_to_bearing_descr">Выраўноўванне мапы:</string>
-    <string name="rotate_map_to_bearing">Арыентацыя мапы</string>
+    <string name="rotate_map_north_opt">Не варочаць (поўнач заўсёды ўверсе)</string>
+    <string name="rotate_map_to_descr">Выраўноўванне мапы:</string>
+    <string name="rotate_map_to">Арыентацыя мапы</string>
     <string name="show_route">Падрабязнасці маршруту</string>
     <string name="fav_imported_sucessfully">Улюбёныя мясціны паспяхова імпартаваныя</string>
     <string name="fav_file_to_load_not_found">GPX-файл з улюбёнымі мясцінамі не знойдзены ў {0}</string>
@@ -1198,7 +1198,7 @@
     <string name="sort_by_name">Сартаваць паводле назвы</string>
     <string name="none_selected_gpx">Абярыце GPX-файл працяжным націскам.</string>
     <string name="local_index_select_gpx_file">Абярыце след</string>
-    <string name="no_index_file_to_download">Спамповак не знойдзена. Калі ласка, праверце вашае злучэнне з Інтэрнэтам.</string>
+    <string name="no_index_file_to_download">Няма чаго спампоўваць. Праверце вашае злучэнне з інтэрнэтам.</string>
     <string name="rendering_attr_hideBuildings_name">Будынкі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Не аўтамабільныя дарогі</string>
     <string name="rendering_attr_hideText_name">Тэкст</string>
@@ -1659,7 +1659,7 @@
     <string name="unsaved_changes_will_be_lost">Усе незахаваныя змены будуць страчаны. Працягваць\?</string>
     <string name="simulate_your_location_stop_descr">Спыніць эмуляцыю свайго становішча.</string>
     <string name="simulate_your_location_descr">Эмуляваць вашую пазіцыю, выкарыстоўваючы разлічаны маршрут або запісаны GPX-след.</string>
-    <string name="downloads_left_template">%1$s спамповак засталося</string>
+    <string name="downloads_left_template">Засталося %1$s спампоўванняў</string>
     <string name="shared_string_wikipedia">Вікіпедыя</string>
     <string name="roads">Дарогі</string>
     <string name="favourites_edit_dialog_title">Звесткі пра ўлюбёную мясціну</string>
@@ -2207,7 +2207,7 @@
     <string name="full_version_thanks">Дякуй вам за набыццё платнай версіі OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
     <string name="right_side_navigation">Правабаковы рух</string>
-    <string name="driving_region_automatic">Аўтаматычна</string>
+    <string name="shared_string_automatic">Аўтаматычна</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты мапы</string>
     <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>
@@ -3337,7 +3337,7 @@
     <string name="replace_all">Замяніць усе</string>
     <string name="extra_maps_menu_group">Дадатковыя мапы</string>
     <string name="download_unsupported_action">Непадтрымліваемае дзеянне %1$s</string>
-    <string name="tracker_item">Трэкер OsmAnd</string>
+    <string name="tracker_item">Назіральнік OsmAnd</string>
     <string name="mapillary_item">OsmAnd і Mapillary</string>
     <string name="quick_action_item">Хуткае дзеянне</string>
     <string name="radius_ruler_item">Радыусная лінейка</string>
@@ -4048,7 +4048,7 @@
     <string name="backup_deleted_all_data_descr">Усе вашыя даныя паспяхова выдаленыя з OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Уся гісторыя версій выдаленая.</string>
     <string name="backup_data_removed">Усе даныя выдаленыя.</string>
-    <string name="backup_do_not_have_any">У вас пакуль што няма рэзервовых копій у воблаку.</string>
+    <string name="backup_do_not_have_any">У вас няма рэзервовых копій у воблаку</string>
     <string name="backup_dont_have_any_descr">Наладзьце аўтаматычнае рэзервовае капіяванне, каб не страціць даных.</string>
     <string name="backup_welcome_back_descr">Аднавіце даныя на гэтай прыладзе з дапамогай наяўных рэзервовых копій або стварыце рэзервовую копію ў OsmAnd Cloud.</string>
     <string name="backup_setup">Наладзіць рэзервовае капіяванне</string>
@@ -4763,7 +4763,7 @@
     <string name="compass_visible_if_map_rotated">Бачны, калі мапа павернутая</string>
     <string name="compass_always_hidden">Заўсёды схаваны</string>
     <string name="compass_always_visible">Заўсёды бачны</string>
-    <string name="compass_click_desc">Каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
+    <string name="compass_click_desc">Падказка: каб пераключыць рэжым арыентацыі мапы, націсніце на компас.</string>
     <string name="compass_desc">Паказвае кірунак на поўнач.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колеравая схема контурных ліній глыбіні</string>
     <string name="rendering_attr_depthContourWidth_description">Шырыня контурных ліній глыбіні</string>
@@ -4779,7 +4779,7 @@
     <string name="favorite_delete_group">Выдаліць групу</string>
     <string name="download_heightmap_maps">Мапа вышынь</string>
     <string name="display_position">Паказваць пазіцыю</string>
-    <string name="rotate_map_none_rotated_opt">Фіксавана (паварочваецца ўручную)</string>
+    <string name="rotate_map_manual_opt">Фіксавана (паварочваецца ўручную)</string>
     <string name="map_marker_interval_dialog_desc">Каб разлічыць прыблізны час прыбыцця, вызначыце інтэрвал часу, за які будзе вымярацца сярэдняя хуткасць.</string>
     <string name="go_to_marker_location">Перайсці да месцазнаходжання адзнакі</string>
     <string name="shared_string_switch_mode">Пераключыць рэжым</string>
@@ -4809,10 +4809,10 @@
     <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
     <string name="map_center_widget">Цэнтр мапы</string>
     <string name="current_location_widget">Бягучае месцазнаходжанне</string>
-    <string name="map_widget_altitude_map_center">Вышыня ў цэнтры мапы</string>
+    <string name="map_widget_altitude_map_center">Вышыня: цэнтр мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
-    <string name="show_borders_of_downloaded_maps">Афарбоўка спампаваных мап</string>
+    <string name="show_borders_of_downloaded_maps">Паказваць межы спампаваных мапаў</string>
     <string name="weather_online_cache">Сеціўны кэш</string>
     <string name="map_settings_weather_temp">Тэмпература</string>
     <string name="map_settings_weather_air_pressure">Ціск паветра</string>
@@ -4826,7 +4826,7 @@
     <string name="shared_string_layers">Слаі</string>
     <string name="empty_screen_weather_contours">Уключыце для прагляду ізаліній надвор\'я на мапе.</string>
     <string name="empty_screen_weather_pressure_layer">Уключыце для прагляду ціску на мапе.</string>
-    <string name="empty_screen_weather_clouds_layer">Уключыце для прагляду воблачнасці на мапе.</string>
+    <string name="empty_screen_weather_clouds_layer">Уключыце для прагляду слоя воблачнасці на мапе.</string>
     <string name="empty_screen_weather_wind_layer">Уключыце для прагляду ветру на мапе.</string>
     <string name="empty_screen_weather_precipitation_layer">Уключыце для прагляду ападкаў на мапе.</string>
     <string name="empty_screen_weather_temperature_layer">Уключыце для прагляду тэмпературы на мапе.</string>
@@ -4841,16 +4841,16 @@
     <string name="weather_wind_ms">м/с</string>
     <string name="weather_wind_knots">Вузлы</string>
     <string name="weather_wind_miles_per_hour">Міляў за гадзіну</string>
-    <string name="weather_widgets_secondary_desc">Адзінкі вымярэння можна змяніць у наладах убудовы Надвор\'e.</string>
+    <string name="weather_widgets_secondary_desc">Адзінкі вымярэння можна змяніць у наладах убудовы надвор\'я.</string>
     <string name="air_pressure_widget_desc">Паказвае атмасферны ціск для бягучага цэнтра мапы.</string>
     <string name="wind_widget_desc">Паказвае хуткасць ветру для бягучага цэнтра мапы.</string>
-    <string name="weather_widget_group_desc">Набор віджэтаў, якія паказваюць розную інфармацыю пра надвор\'е.</string>
+    <string name="weather_widget_group_desc">Набор віджэтаў, якія паказваюць разнастайную інфармацыю пра надвор\'е.</string>
     <string name="precipitation_widget_desc">Паказвае колькасць ападкаў для бягучага цэнтра мапы.</string>
     <string name="temperature_widget_desc">Паказвае тэмпературу для бягучага цэнтра мапы.</string>
-    <string name="action_not_supported_with_map_style">Дзеянне не падтрымліваецца з абраным стылем мапы.</string>
+    <string name="action_not_supported_with_map_style">Гэтае дзеянне не падтрымліваецца з абраным стылем мапы.</string>
     <string name="weather_offline_forecast">Пазасеткавы прагноз</string>
     <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
-    <string name="weather_prefs_descr">пагадзінны прагноз на 24 гадзіны і прагноз на 7 дзён кожныя 3 гадзіны</string>
+    <string name="weather_prefs_descr">Прагноз на 24 гадзіны і прагноз на 7 дзён, які абнаўляецца кожныя 3 гадзіны</string>
     <string name="weather_plugin_description">Змяшчае:
 \n
 \n- 5-слаёвы прагноз на 24 гадзіны і 7 дзён
@@ -4876,4 +4876,5 @@
     <string name="rendering_attr_depthContourWidth_name">Таўшчыня ізабат</string>
     <string name="depth_contour_lines">Ізабаты</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
+    <string name="share_link">Падзяліцца спасылкай</string>
 </resources>

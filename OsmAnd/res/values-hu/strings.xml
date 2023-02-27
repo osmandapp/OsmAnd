@@ -370,9 +370,9 @@
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">A mozgás irányába</string>
-    <string name="rotate_map_none_opt">Rögzített (észak felül)</string>
-    <string name="rotate_map_to_bearing_descr">Térkép igazítása:</string>
-    <string name="rotate_map_to_bearing">Térkép forgatása</string>
+    <string name="rotate_map_north_opt">Rögzített (észak felül)</string>
+    <string name="rotate_map_to_descr">Térkép igazítása:</string>
+    <string name="rotate_map_to">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
     <string name="fav_imported_sucessfully">Kedvencek importálva</string>
     <string name="fav_file_to_load_not_found">Nem található Kedvenceket tartalmazó GPX fájl az alábbi helyen: {0}</string>
@@ -586,8 +586,8 @@
     <string name="app_mode_car">Autóvezetés</string>
     <string name="app_mode_bicycle">Kerékpározás</string>
     <string name="app_mode_pedestrian">Gyaloglás</string>
-    <string name="position_on_map_center">Középen</string>
-    <string name="position_on_map_bottom">Alul</string>
+    <string name="position_on_map_center">Középre</string>
+    <string name="position_on_map_bottom">Alulra</string>
     <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
     <string name="navigate_point_latitude">Szélesség</string>
     <string name="navigate_point_longitude">Hosszúság</string>
@@ -683,7 +683,7 @@
     <string name="rendering_attr_noPolygons_description">A térképen az összes területszerű objektum átlátszóvá tétele.</string>
     <string name="rendering_attr_noPolygons_name">Sokszögek</string>
     <string name="rendering_attr_appMode_name">Megjelenítési mód</string>
-    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz:</string>
+    <string name="rendering_attr_appMode_description">Térkép optimalizálása a következőhöz</string>
     <string name="rendering_attr_contourLines_description">Megjelenítés ettől a nagyítási szinttől (szintvonaladatokat igényel):</string>
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
@@ -1091,7 +1091,7 @@
     <string name="routing_attr_avoid_ferries_description">Elkerüli a kompokat</string>
     <string name="routing_attr_avoid_motorway_name">Autópálya nélkül</string>
     <string name="routing_attr_avoid_motorway_description">Elkerüli az autópályákat</string>
-    <string name="routing_attr_weight_name">Súlykorlátozás</string>
+    <string name="routing_attr_weight_name">Súly</string>
     <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó súlykorlátozást.</string>
     <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verziója óta a régi tárolási mappa (%s) elavult. Másoljuk az összes OsmAnd fájlt az új helyre\?
 \n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
@@ -1156,7 +1156,7 @@
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline kiszámítása</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
-    <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
+    <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
     <string name="localization_pref_title">Nyelv</string>
@@ -1518,14 +1518,14 @@
     <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
-    <string name="routing_attr_height_name">Magasságkorlátozás</string>
+    <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz tartozás</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC turistaútjelzés</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz felvétel</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (online)</string>
@@ -2187,7 +2187,7 @@
     <string name="full_version_thanks">Köszönjük, hogy megvásárolta az OsmAnd fizetős verzióját.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
-    <string name="driving_region_automatic">Automatikus</string>
+    <string name="shared_string_automatic">Automatikus</string>
     <string name="type_city_town">Település beírása</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
@@ -3031,7 +3031,7 @@
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">A terület megtekintéséhez töltse le %s részletes térképét.</string>
     <string name="change_data_storage_folder">Tároló mappa módosítása</string>
-    <string name="routing_attr_width_name">Szélességkorlátozás</string>
+    <string name="routing_attr_width_name">Szélesség</string>
     <string name="routing_attr_width_description">Adja meg az útvonalakon a járművekre vonatkozó szélességkorlátozást.</string>
     <string name="avoid_in_routing_descr_">Bizonyos útvonalak és úttípusok elkerülése</string>
     <string name="shared_string_osmand_usage">OsmAnd használat</string>
@@ -3583,7 +3583,7 @@
     <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
-    <string name="routing_attr_length_name">Hosszkorlátozás</string>
+    <string name="routing_attr_length_name">Hossz</string>
     <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipaxadatokat.</string>
     <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
     <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
@@ -4685,7 +4685,7 @@
     <string name="routing_attr_motor_type_gas_name">CNG (sűrített földgáz)</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
     <string name="routing_attr_motor_type_description">A CO₂-kibocsátás megbecsüléséhez válassza ki a motor által használt üzemanyag típusát.</string>
-    <string name="routing_attr_motor_type_name">Járműmotor</string>
+    <string name="routing_attr_motor_type_name">A használt üzemanyag típusa</string>
     <string name="lang_ckb">Közép-kurd</string>
     <string name="live_update_frequency_day_variant">A térképfrissítések ellenőrzése naponta történik.</string>
     <string name="live_update_frequency_hour_variant">A térképfrissítések ellenőrzése óránként történik.</string>
@@ -4724,7 +4724,7 @@
     <string name="compass_visible_if_map_rotated">Látható, ha a térkép el van forgatva</string>
     <string name="compass_always_hidden">Mindig el van rejtve</string>
     <string name="compass_always_visible">Mindig látható</string>
-    <string name="compass_click_desc">Koppintson az iránytűre a térkép tájolási módjai közötti váltáshoz.</string>
+    <string name="compass_click_desc">Tipp: Koppintson az iránytű widgetre a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak vastagsága</string>
@@ -4767,7 +4767,7 @@
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
     <string name="shared_string_2_5_d_view">2,5D nézet</string>
-    <string name="rotate_map_none_rotated_opt">Rögzített (kézzel forgatva)</string>
+    <string name="rotate_map_manual_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>
     <string name="shared_string_normal">Normál</string>
@@ -4852,7 +4852,7 @@
 \n
 \n • „Térképjelző” widgetnél opció hozzáadva a kattintási viselkedés megváltoztatására
 \n
-\n • Javított „Pozíció megjelenítése” opció
+\n • Javított „Pozíció elhelyezés” opció
 \n
 \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
 \n
@@ -4950,7 +4950,7 @@
     <string name="switch_mode_by_tapping_on_widget">Módot válthat a widgetre koppintva.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Vonal színsémája</string>
     <string name="rendering_attr_depthContourWidth_name">Vonal vastagsága</string>
-    <string name="storage_migration_fragment_close_descr">Másolás kész: %1$s%%. Ha most leállítja, akkor lehet, hogy az alkalmazás nem fog megfelelően működni.</string>
+    <string name="storage_migration_fragment_close_descr">Csak %1$s%% másolása van kész. Ha most leállítja, akkor lehet, hogy az alkalmazás nem fog megfelelően működni.</string>
     <string name="quick_action_precipitation_layer">A csapadék réteget megjelenítő vagy elrejtő kapcsoló.</string>
     <string name="quick_action_wind_layer">A szél réteget megjelenítő vagy elrejtő kapcsoló.</string>
     <string name="quick_action_cloud_layer">A felhőzet réteget megjelenítő vagy elrejtő kapcsoló.</string>
@@ -4965,14 +4965,14 @@
     <string name="rendering_attr_showMtbScaleUphill_description">Nyomvonalak megjelenítése MTB hegymeneti nehézségi szintek szerint.</string>
     <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
     <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB nehézségi szintek szerint.</string>
-    <string name="mtb_scale">MTB Skála</string>
+    <string name="mtb_scale">MTB skála</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Nemzetközi Hegyikerékpáros Szövetség</string>
     <string name="mtb_segment_classification">Szakasz osztályozás</string>
     <string name="rendering_attr_weatherCloudContours_name">Felhő-izovonalak</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Csapadék-izovonalak</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Széllökés-izovonalak</string>
-    <string name="release_4_4_pre">• Itt a 4.4 kiadáshoz szükséges karakterláncok lesznek</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Szélsebesség-izovonalak</string>
+    <string name="release_4_4">• Itt a 4.4 kiadáshoz szükséges karakterláncok lesznek</string>
     <string name="open_weather_action">Időjárás megnyitása</string>
     <string name="shared_string_open">Megnyitás</string>
     <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
@@ -4993,7 +4993,7 @@
     <string name="cloud_recent_changes">Változások</string>
     <string name="cloud_all_changes_uploaded">Minden változás feltöltve</string>
     <string name="cloud_all_changes_downloaded">Minden változás letöltve</string>
-    <string name="cloud_no_conflicts">Nincs konfliktus</string>
+    <string name="cloud_no_conflicts">Nincs konfliktus.</string>
     <string name="download_cloud_version">Felhőben lévő letöltése</string>
     <string name="shared_string_do_not_exist">Nem létezik</string>
     <string name="import_export">Importálás/exportálás</string>
@@ -5014,7 +5014,40 @@
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd felhőszolgáltatással.</string>
     <string name="cloud_sync_progress">Szinkronizálás...%1$s</string>
     <string name="si_nm_ft">Tengeri mérföld/láb</string>
-    <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípusa 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípus-tároló formátuma 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
     <string name="set_up_backup">Biztonsági mentés beállítása</string>
+    <string name="y_axis">Y-tengely</string>
+    <string name="x_axis">X-tengely</string>
+    <string name="share_as_file">Megosztás fájlként</string>
+    <string name="value_downloaded_of_mb">Letöltés %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Letöltés kihagyása</string>
+    <string name="determine_location">Engedélyezze, hogy meghatározzuk a helyzetét</string>
+    <string name="share_link">Hivatkozás megosztása</string>
+    <string name="sound_beep_complex">Hangjelzés: összetett</string>
+    <string name="sound_beep_minimal">Hangjelzés: minimális</string>
+    <string name="sound_beep_complex_loud">Hangjelzés: összetett hangos</string>
+    <string name="weight_limit_error">A minimális érték \"%1$s\" tonna. Használja a(z) „%2$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
+    <string name="sound_beep_simple_loud">Hangjelzés: egyszerű hangos</string>
+    <string name="sound_beep_simple">Hangjelzés: egyszerű</string>
+    <string name="last_synchronized">Utoljára szinkronizálva</string>
+    <string name="display_position_automatic_descr">A térkép tájolásától függően: alul a mozgásirány követésénél és középen minden más esetben.</string>
+    <string name="shared_string_on_map">Térképen</string>
+    <string name="no_visible_tracks">Nincsenek nyomvonalak a térképen</string>
+    <string name="change_appearance">Megjelenés módosítása</string>
+    <string name="show_all_tracks">Minden nyomvonal megjelenítése</string>
+    <string name="switch_folder">Mappa váltása</string>
+    <string name="shared_string_select_recent">Legutóbbi választása</string>
+    <string name="empty_tracks">Nincsenek nyomvonal fájljai.</string>
+    <string name="recently_visible">Legutóbb látható %1$s</string>
+    <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
+    <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
+    <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
+    <string name="shared_string_kilograms">kilogramm</string>
+    <string name="shared_string_yards">yard</string>
+    <string name="shared_string_inches">hüvelyk</string>
+    <string name="approximate_bearing_descr">Az irányszöget számítással határozza meg, ha az eszközről nem érhető el</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Hozzávetőleges irányszög</string>
 </resources>

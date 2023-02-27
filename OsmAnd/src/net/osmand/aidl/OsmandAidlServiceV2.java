@@ -714,8 +714,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean navigateGpx(NavigateGpxParams params) {
 			try {
 				OsmandAidlApi api = getApi("navigateGpx");
-				return params != null && api != null && api.navigateGpx(params.getData(), params.getUri(),
-						params.isForce(), params.isNeedLocationPermission());
+				return params != null && api != null && api.navigateGpxV2(params.getData(), params.getUri(),
+						params.isForce(), params.isNeedLocationPermission(), params.isPassWholeRoute());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

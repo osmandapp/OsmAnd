@@ -7,13 +7,11 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapLayerConfiguration;
-import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -21,6 +19,8 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
+
+import androidx.annotation.NonNull;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -149,7 +149,11 @@ public class MapVectorLayer extends BaseMapLayer {
 				}
 			}
 			if (visible) {
-				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+				if (mapRendererContext != null) {
+					mapRendererContext.setNightMode(drawSettings.isNightMode());
+					mapRendererContext.updateLocalization();
+				}
 			}
 			if ((alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
 				updateLayerProviderAlpha(alpha);

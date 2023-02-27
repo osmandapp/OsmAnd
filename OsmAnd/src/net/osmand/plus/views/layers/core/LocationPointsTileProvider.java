@@ -23,18 +23,19 @@ import java.util.List;
 
 public class LocationPointsTileProvider extends interface_MapTiledCollectionProvider {
 
-   private final QListPointI points = new QListPointI();
+   private final QListPointI points31 = new QListPointI();
    private final SWIGTYPE_p_sk_spT_SkImage_const_t skPointBitmap;
    private final int baseOrder;
    private final PointI offset;
    private MapTiledCollectionProvider providerInstance;
 
-   public LocationPointsTileProvider(int baseOrder, @NonNull List<LatLon> points,
+   public LocationPointsTileProvider(int baseOrder, @NonNull List<LatLon> points31,
                                      @NonNull Bitmap pointBitmap) {
       this.baseOrder = baseOrder;
-      for (LatLon latLon : points) {
-         this.points.add(new PointI(Utilities.get31TileNumberX(latLon.getLongitude()),
-                 Utilities.get31TileNumberY(latLon.getLatitude())));
+      for (LatLon latLon : points31) {
+         int x31 = Utilities.get31TileNumberX(latLon.getLongitude());
+         int y31 = Utilities.get31TileNumberY(latLon.getLatitude());
+         this.points31.add(new PointI(x31, y31));
       }
       skPointBitmap = NativeUtilities.createSkImageFromBitmap(pointBitmap);
       this.offset = new PointI(0, 0);
@@ -57,6 +58,11 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
    @Override
    public int getBaseOrder() {
       return baseOrder;
+   }
+
+   @Override
+   public QListPointI getPoints31() {
+      return points31;
    }
 
    @Override
@@ -87,16 +93,6 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
    @Override
    public double getScale() {
       return 1.0d;
-   }
-
-   @Override
-   public PointI getPoint31(int index) {
-      return index < points.size() ? points.get(index) : new PointI(0, 0);
-   }
-
-   @Override
-   public int getPointsCount() {
-      return (int) points.size();
    }
 
    @Override

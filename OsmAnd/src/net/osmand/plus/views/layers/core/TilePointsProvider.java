@@ -128,6 +128,11 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return new QListPointI();
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -160,6 +165,9 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			return new QListMapTiledCollectionPoint();
+		}
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		QuadRect latLonBounds = tb.getLatLonBounds();
 		List<T> tilePoints = points.getObjects(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right);
@@ -173,16 +181,6 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 			collectionPoint.swigReleaseOwnership();
 		}
 		return res;
-	}
-
-	@Override
-	public int getPointsCount() {
-		return 0;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		return new PointI(0, 0);
 	}
 
 	@Override

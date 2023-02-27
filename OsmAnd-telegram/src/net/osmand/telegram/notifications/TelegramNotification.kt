@@ -48,12 +48,12 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 		val contentIntent = Intent(app, MainActivity::class.java)
 		contentIntent.putExtra(OPEN_MY_LOCATION_TAB_KEY, true)
 		val contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT)
+				PendingIntent.FLAG_IMMUTABLE)
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.notificationHelper.createNotificationChannel()
 		}
 		val builder = NotificationCompat.Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
-				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
+				.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(priority)
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)

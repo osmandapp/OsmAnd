@@ -364,6 +364,12 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 	}
 
+	@Override
+	public void delete() {
+		super.delete();
+		// TODO: delete settings item
+	}
+
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {

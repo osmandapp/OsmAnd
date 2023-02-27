@@ -11,13 +11,52 @@
 	Thx - Hardy
 -->
 
-    <string name="y_axis">Y-Axis</string>
-    <string name="x_axis">X-Axis</string>
+    <string name="shared_string_in_progress">In progress</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Movement speed</string>
+    <string name="simulation_position_description">Choose a track file that will be used as a source for location moving</string>
+    <string name="approximate_bearing">Approximate Bearing</string>
+    <string name="approximate_bearing_descr">Calculate bearing if not received from device</string>
+    <string name="shared_string_inches">inches</string>
+    <string name="inch">in</string>
+    <string name="shared_string_kilograms">kilograms</string>
+    <string name="shared_string_yards">yards</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
+    <string name="shared_string_apply_changes">Apply changes</string>
+    <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
+    <string name="no_visible_tracks">No tracks on the map</string>
+    <string name="recently_visible">Recently visible %1$s</string>
+    <string name="empty_tracks_description">You can import, create, or record track files using OsmAnd.</string>
+    <string name="empty_tracks">You don\'t have track files.</string>
+    <string name="shared_string_select_recent">Select recent</string>
+    <string name="change_appearance">Change appearance</string>
+    <string name="switch_folder">Switch folder</string>
+    <string name="show_all_tracks">Show all tracks</string>
+    <string name="shared_string_on_map">On map</string>
+    <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
+    <string name="last_synchronized">Last synchronized</string>
+    <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
+    <string name="share_link">Share link</string>
+    <string name="share_as_file">Share as file</string>
+    <string name="y_axis">Y-axis</string>
+    <string name="x_axis">X-axis</string>
     <string name="si_nm_mt">Nautical miles/meters</string>
     <string name="si_nm_ft">Nautical miles/feet</string>
-    <string name="av_audio_format_bottom_sheet_descr">Select audio output format. File type format for audio is 3GPP (.3gp).</string>
-    <string name="release_4_4_pre">
-        • Here will be strings for 4.4 release
+    <string name="av_audio_format_bottom_sheet_descr">Select an audio format. The file type container format for audio is 3GPP (.3gp).</string>
+    <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Skip download</string>
+    <string name="determine_location">Allow us to determine your location</string>
+    <string name="release_4_4">
+        • Improved \"Tracks\" menu in \"Configure Map\"\n\n
+        • Context menu now displays localized names for POI\n\n
+        • Added option to share route by link\n\n
+        • Added \"Nautical miles/feet\" unit of length\n\n
+        • Map orientation added new fixed mode\n\n
+        • Simplified start screen\n\n
+        • AFixed location position in split screen mode in Android Auto\n\n
+        • Added \"Speed/Slope\" graph for track analysis\n\n
+        • Android 13 moved app language selection to system settings\n\n
+        • Fixed issues with displaying Vegan places\n\n
     </string>
     <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
@@ -37,9 +76,9 @@
     <string name="sync_now">Sync now</string>
     <string name="local_changes">Local changes</string>
     <string name="upload_change">Upload change</string>
-    <string name="cloud_version_will_be_removed">Cloud version will be removed</string>
-    <string name="cloud_changes_will_be_dismissed">Cloud changes will be dismissed</string>
-    <string name="local_file_will_be_restored">Local file will be restored</string>
+    <string name="cloud_version_will_be_removed">The cloud version will be removed</string>
+    <string name="cloud_changes_will_be_dismissed">The cloud changes will be dismissed</string>
+    <string name="local_file_will_be_restored">The local file will be restored</string>
     <string name="local_changes_will_be_dismissed">Local changes will be dismissed</string>
     <string name="cloud_conflicts">Conflicts</string>
     <string name="cloud_conflict">Conflict</string>
@@ -48,12 +87,12 @@
     <string name="cloud_all_changes_uploaded">All changes uploaded</string>
     <string name="cloud_all_changes_downloaded">All changes downloaded</string>
     <string name="cloud_all_changes_uploaded_descr">All changes made on this device are synchronized with OsmAnd Cloud.</string>
-    <string name="cloud_no_conflicts">There are no conflicts</string>
+    <string name="cloud_no_conflicts">There are no conflicts.</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_do_not_exist">Do not exist</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Export to file</string>
     <string name="shared_string_expires">Expires</string>
     <string name="shared_string_purchased_on">Purchased on</string>
@@ -62,13 +101,13 @@
     <string name="open_weather_action">Open weather</string>
     <string name="rendering_attr_weatherCloudContours_name">Cloud isolines</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Precipitation isolines</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Gusts of wind isolines</string>
-    <string name="mtb_scale">MTB Scale</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Wind speed isolines</string>
+    <string name="mtb_scale">MTB scale</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segment classification</string>
     <string name="rendering_attr_showMtbScale_name">Show MTB scale</string>
-    <string name="rendering_attr_showMtbScale_description">Show trails according to MTB scale.</string>
+    <string name="rendering_attr_showMtbScale_description">Display trails according to their MTB scale.</string>
     <string name="quick_action_temperature_layer">A toggle to show or hide the temperature layer on the map.</string>
     <string name="quick_action_precipitation_layer">A toggle to show or hide the precipitation layer on the map.</string>
     <string name="quick_action_wind_layer">A toggle to show or hide the wind layer on the map.</string>
@@ -79,7 +118,7 @@
     <string name="wind_layer">Wind layer</string>
     <string name="cloud_layer">Cloud layer</string>
     <string name="precipitation_layer">Precipitation layer</string>
-    <string name="storage_migration_fragment_close_descr">Copying is done for %1$s%%. If you stop now, the app may not work correctly.</string>
+    <string name="storage_migration_fragment_close_descr">Copying is only %1$s%% complete. If you stop now, the app may not work correctly.</string>
     <string name="switch_mode_by_tapping_on_widget">Switch the mode by tapping on the widget.</string>
     <string name="map_widget_sunset_desc">Shows the time of the next sunset or the time left until sunset.</string>
     <string name="map_widget_sunrise_desc">Shows the time of the next sunrise or the time left until sunrise.</string>
@@ -164,7 +203,7 @@
     • New widgets for map center coordinates and elevation of geolocations\n\n
     • \"Distance to tap\": added text size options\n\n
     • \"Map marker\" widget: added option to change click behavior\n\n
-    • Fixed \"Display position\" option\n\n
+    • Fixed \"Position placement\" option\n\n
     • GPX: added support for \"link\", \"cmt\", \"desc\" tags and for any custom extensions\n\n
     • Reorganized \"Nautical maps\" list\n\n
     • Added support for ANT+ sensors\n\n
@@ -290,7 +329,7 @@
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Tap on compass to switch map orientation mode.</string>
+    <string name="compass_click_desc">Hint: Tap on the compass widget to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
@@ -321,7 +360,7 @@
     <string name="calculate_online_altitude_descr">Calculate elevation online on OsmAnd servers, based on satellite imagery and digital elevation models. Differences vs. device recorded altitude may be used as elevation correction.</string>
     <string name="co2_mission">CO2 emission</string>
     <string name="kg">kg</string>
-    <string name="routing_attr_motor_type_name">Vehicle engine</string>
+    <string name="routing_attr_motor_type_name">Fuel used by motor</string>
     <string name="routing_attr_motor_type_description">Select your engine\'s fuel type, this is needed to estimate CO2 emission.</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
     <string name="routing_attr_motor_type_petrol_name">Petrol</string>
@@ -1261,7 +1300,7 @@
     <string name="speed_cameras_restart_descr">Restart the app to delete all speed camera data.</string>
     <string name="item_deleted">%1$s deleted</string>
     <string name="shared_string_bearing">Bearing</string>
-    <string name="routing_attr_length_name">Length limit</string>
+    <string name="routing_attr_length_name">Length</string>
     <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
     <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
@@ -2487,7 +2526,7 @@
     <string name="restore_purchases">Restore purchases</string>
     <string name="fonts_header">Map fonts</string>
     <string name="right_side_navigation">Right-hand traffic</string>
-    <string name="driving_region_automatic">Automatic</string>
+    <string name="shared_string_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
@@ -3446,7 +3485,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmo_connect_menu">Connect</string>
     <string name="int_days">days</string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
-    <string name="always_center_position_on_map">Display position always in center</string>
+    <string name="always_center_position_on_map">Position placement always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Misc</string>
     <string name="localization_pref_title">Localization</string>
@@ -3456,6 +3495,11 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="index_item_world_bitcoin_payments">World bitcoin payments</string>
     <string name="index_item_world_basemap">World overview map</string>
     <string name="index_item_world_ski">World ski map</string>
+    <string name="sound_beep_complex">Beep: complex</string>
+    <string name="sound_beep_complex_loud">Beep: complex loud</string>
+    <string name="sound_beep_minimal">Beep: minimal</string>
+    <string name="sound_beep_simple">Beep: simple</string>
+    <string name="sound_beep_simple_loud">Beep: simple loud</string>
     <string name="lang_zh">Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
@@ -3540,11 +3584,11 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_avoid_stairs_description">Avoids stairs</string>
     <string name="routing_attr_avoid_borders_name">No border crossings</string>
     <string name="routing_attr_avoid_borders_description">Avoids crossing national borders</string>
-    <string name="routing_attr_weight_name">Weight limit</string>
+    <string name="routing_attr_weight_name">Weight</string>
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
-    <string name="routing_attr_width_name">Width limit</string>
+    <string name="routing_attr_width_name">Width</string>
     <string name="routing_attr_width_description">Specify permitted vehicle width limit on routes.</string>
-    <string name="routing_attr_height_name">Height limit</string>
+    <string name="routing_attr_height_name">Height</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
     <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?\n
     Note 1: Your old files will remain untouched (but can be deleted manually).\n
@@ -4486,10 +4530,10 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">Fixed (north is up)</string>
-    <string name="rotate_map_none_rotated_opt">Fixed (manually rotated)</string>
-    <string name="rotate_map_to_bearing_descr">Map alignment:</string>
-    <string name="rotate_map_to_bearing">Map orientation</string>
+    <string name="rotate_map_north_opt">North is up (fixed)</string>
+    <string name="rotate_map_manual_opt">Manually rotated (fixed)</string>
+    <string name="rotate_map_to_descr">Map alignment:</string>
+    <string name="rotate_map_to">Map orientation</string>
     <string name="show_route">Route details</string>
     <string name="fav_imported_sucessfully">Favorites imported</string>
     <string name="import_file_favourites">Save data as GPX file or import waypoints to \'Favorites\'?</string>

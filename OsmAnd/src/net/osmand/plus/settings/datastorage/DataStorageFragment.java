@@ -7,9 +7,9 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_STORAGE_SIZE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_STORAGE_SIZE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.UpdateMemoryInfoUIAdapter;
 import static net.osmand.plus.settings.datastorage.SharedStorageWarningFragment.STORAGE_MIGRATION;
 
@@ -92,6 +92,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	private OsmandActionBarActivity activity;
 	private boolean storageMigration;
 	private boolean firstUsage;
+	private boolean usageItemsVisible;
 
 	private MoveFilesTask moveFileTask = null;
 	private FilesCollectTask collectTask;
@@ -102,6 +103,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		app = getMyApplication();
 		activity = getMyActivity();
 		Bundle args = getArguments();
+		usageItemsVisible = false;
 		if (args != null) {
 			storageMigration = args.getBoolean(STORAGE_MIGRATION, false);
 			firstUsage = args.getBoolean(FIRST_USAGE, false);
@@ -140,6 +142,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 		Preference osmandUsage = findPreference(OSMAND_USAGE);
 		osmandUsage.setVisible(!storageMigration && !firstUsage);
+		toggle_usageItems(usageItemsVisible);
 
 		changeButton = new Preference(app);
 		changeButton.setKey(CHANGE_DIRECTORY_BUTTON);
@@ -285,14 +288,19 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		} else if (key.equals(OSMAND_USAGE)) {
 			long totalUsageBytes = dataStorageHelper.getTotalUsedBytes();
 			TextView tvSummary = itemView.findViewById(R.id.summary);
+			tvSummary.setTextColor(activeColor);
 			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
+			itemView.setOnClickListener(v -> {
+				usageItemsVisible = !usageItemsVisible;
+				toggle_usageItems(usageItemsVisible);
+			});
 		} else {
 			for (MemoryItem mi : memoryItems) {
 				if (key.equals(mi.getKey())) {
 					TextView tvMemory = itemView.findViewById(R.id.memory);
 					String summary = "";
 					int color = 0;
-					if (mi.getKey().equals(TILES_MEMORY) && !calculateTilesBtnPressed) {
+					if (mi.getKey().equals(TILES_STORAGE_SIZE) && !calculateTilesBtnPressed) {
 						summary = getString(R.string.shared_string_calculate);
 						color = activeColor;
 						tvMemory.setOnClickListener(v -> {
@@ -306,7 +314,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						summary = DataStorageHelper.getFormattedMemoryInfo(mi.getUsedMemoryBytes(), memoryUnitsFormats);
 					}
 					View divider = itemView.findViewById(R.id.divider);
-					if (mi.getKey().equals(OTHER_MEMORY)) {
+					if (mi.getKey().equals(OTHER_STORAGE_SIZE)) {
 						divider.setVisibility(View.VISIBLE);
 					} else {
 						divider.setVisibility(View.GONE);
@@ -315,6 +323,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					tvMemory.setText(summary);
 				}
 			}
+		}
+	}
+
+	private void toggle_usageItems(boolean visible){
+		for (MemoryItem mi : memoryItems) {
+			findPreference(mi.getKey()).setVisible(visible);
 		}
 	}
 
@@ -548,7 +562,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 	@Override
 	public void onFinishUpdating(String tag) {
 		updateAllSettings();
-		if (TILES_MEMORY.equals(tag)) {
+		if (TILES_STORAGE_SIZE.equals(tag)) {
 			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
 		}
 	}

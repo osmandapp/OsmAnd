@@ -245,8 +245,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
 				for (FavouritePoint favoritePoint : points) {
-					double lat = favoritePoint.getLatitude();
-					double lon = favoritePoint.getLongitude();
 					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
 						MapMarker marker = null;
 						if (synced) {
@@ -261,7 +259,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 						} else {
 							color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 						}
-						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale, lat, lon);
+						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale);
 					}
 				}
 			}
@@ -325,11 +323,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public boolean isObjectClickable(Object o) {
-		return o instanceof FavouritePoint && o != contextMenuLayer.getMoveableObject();
-	}
-
-	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
 		return false;
 	}
@@ -340,7 +333,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		if (this.settings.SHOW_FAVORITES.get() && tileBox.getZoom() >= START_ZOOM) {
 			getFavoriteFromPoint(tileBox, point, res);
 		}

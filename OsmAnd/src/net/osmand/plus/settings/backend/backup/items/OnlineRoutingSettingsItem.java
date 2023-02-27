@@ -103,6 +103,11 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 	}
 
 	@Override
+	protected void deleteItem(OnlineRoutingEngine item) {
+		// TODO: delete settings item
+	}
+
+	@Override
 	public boolean isDuplicate(@NonNull OnlineRoutingEngine routingEngine) {
 		for (OnlineRoutingEngine engine : existingItems) {
 			if (Algorithms.objectEquals(engine.getStringKey(), routingEngine.getStringKey())

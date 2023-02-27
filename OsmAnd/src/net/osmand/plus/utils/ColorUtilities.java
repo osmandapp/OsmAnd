@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public class ColorUtilities {
@@ -79,6 +80,11 @@ public class ColorUtilities {
 
 
 	/********************************* Basic colors *********************************/
+
+	@ColorInt
+	public static int getSelectedProfileColor(@NonNull OsmandApplication app, boolean nightMode) {
+		return app.getSettings().getApplicationMode().getProfileColor(nightMode);
+	}
 
 	@ColorInt
 	public static int getColor(@NonNull Context ctx, @ColorRes int colorId) {

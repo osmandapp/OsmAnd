@@ -92,7 +92,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
 		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
-		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 57).makeProfile();
+		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 100).makeProfile();
 
 		SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
 		SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();

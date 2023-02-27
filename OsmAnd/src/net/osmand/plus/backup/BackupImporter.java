@@ -2,6 +2,7 @@ package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,8 +55,8 @@ class BackupImporter {
 
 	private boolean cancelled;
 
-	private AtomicInteger dataProgress;
-	private AtomicInteger itemsProgress;
+	private final AtomicInteger dataProgress = new AtomicInteger(0);
+	private final AtomicInteger itemsProgress = new AtomicInteger(0);
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -111,8 +112,6 @@ class BackupImporter {
 	}
 
 	void importItems(@NonNull List<SettingsItem> items, boolean forceReadData) throws IllegalArgumentException {
-		dataProgress = new AtomicInteger(0);
-		itemsProgress = new AtomicInteger(0);
 		if (Algorithms.isEmpty(items)) {
 			throw new IllegalArgumentException("No items");
 		}
@@ -135,8 +134,8 @@ class BackupImporter {
 				}
 			}
 			if (item != null) {
-				if (!item.shouldReadOnCollecting() || forceReadData) {
-					tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
+				if (forceReadData) {
+					tasks.add(new ItemFileImportTask(remoteFile, item, true));
 				} else {
 					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 				}
@@ -286,30 +285,6 @@ class BackupImporter {
 			updateFilesInfo(remoteItemFilesMap, settingsItemList);
 			items.addAll(settingsItemList);
 			operationLog.log("updateFilesInfo");
-
-			if (readItems) {
-				Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead = new HashMap<>();
-				for (SettingsItem item : settingsItemList) {
-					if (item.shouldReadOnCollecting()) {
-						List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(item, remoteItemFilesMap);
-						for (RemoteFile remoteFile : foundRemoteFiles) {
-							SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-							if (reader != null) {
-								remoteFilesForRead.put(remoteFile, reader);
-							}
-						}
-					}
-				}
-				Map<File, RemoteFile> remoteFilesForDownload = new HashMap<>();
-				for (RemoteFile remoteFile : remoteFilesForRead.keySet()) {
-					String fileName = remoteFile.getTypeNamePath();
-					remoteFilesForDownload.put(new File(tempDir, fileName), remoteFile);
-				}
-				if (!remoteFilesForDownload.isEmpty()) {
-					downloadAndReadItemFiles(remoteFilesForRead, remoteFilesForDownload);
-				}
-				operationLog.log("readItems");
-			}
 			operationLog.finishOperation();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Error reading items", e);
@@ -558,6 +533,7 @@ class BackupImporter {
 			@Override
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
 				itemsProgress.addAndGet(1);
+				dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				if (listener != null) {
 					listener.itemExportDone(type, fileName);
 					listener.updateGeneralProgress(itemsProgress.get(), dataProgress.get());

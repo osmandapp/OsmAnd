@@ -41,7 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;

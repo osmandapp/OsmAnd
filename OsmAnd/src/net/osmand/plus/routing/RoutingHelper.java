@@ -464,7 +464,12 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0) {
-					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
+							routeNodes.get(currentRoute));
+					if (settings.APPROXIMATE_BEARING.get()) {
+						RoutingHelperUtils.approximateBearingIfNeeded(this, locationProjection,
+								currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					}
 				}
 			}
 			lastFixedLocation = currentLocation;
@@ -484,6 +489,11 @@ public class RoutingHelper {
 		} else {
 			return currentLocation;
 		}
+	}
+
+	public double getMaxAllowedProjectDist(@NonNull Location location) {
+		float posTolerance = getPosTolerance(location.hasAccuracy() ? location.getAccuracy() : 0);
+		return mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
 	}
 
 	private boolean updateCurrentRouteStatus(Location currentLocation, double posTolerance) {

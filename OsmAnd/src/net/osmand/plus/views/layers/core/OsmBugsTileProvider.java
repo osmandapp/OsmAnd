@@ -152,6 +152,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	@Override
+	public QListPointI getPoints31() {
+		return new QListPointI();
+	}
+
+	@Override
 	public QListPointI getHiddenPoints() {
 		return new QListPointI();
 	}
@@ -184,6 +189,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			return new QListMapTiledCollectionPoint();
+		}
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
 		OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
@@ -194,6 +202,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
+			if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+				return new QListMapTiledCollectionPoint();
+			}	
 			synchronized (dataReadyCallback.getSync()) {
 				if (dataReadyCallback.isReady()) {
 					break;
@@ -225,16 +236,6 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			}
 		}
 		return res;
-	}
-
-	@Override
-	public int getPointsCount() {
-		return 0;
-	}
-
-	@Override
-	public PointI getPoint31(int index) {
-		return new PointI(0, 0);
 	}
 
 	@Override

@@ -376,9 +376,9 @@
     <string name="poi_context_menu_delete">Dzēst POI</string>
     <string name="rotate_map_compass_opt">Pēc kompasa</string>
     <string name="rotate_map_bearing_opt">Kustības virzienā</string>
-    <string name="rotate_map_none_opt">Nerotēt (augšā ziemeļi)</string>
-    <string name="rotate_map_to_bearing_descr">Kartes rotācija:</string>
-    <string name="rotate_map_to_bearing">Kartes orientācija</string>
+    <string name="rotate_map_north_opt">Nerotēt (augšā ziemeļi)</string>
+    <string name="rotate_map_to_descr">Kartes rotācija:</string>
+    <string name="rotate_map_to">Kartes orientācija</string>
     <string name="show_route">Maršruta detaļas</string>
     <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
     <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>
@@ -2178,7 +2178,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="select_city">Izvēlieties pilsētu</string>
     <string name="select_postcode">Izvēlieties pasta kodu</string>
     <string name="quick_action_auto_zoom">Kartes automātiskā tālummaiņa iesl/izsl</string>
-    <string name="driving_region_automatic">Automātiski</string>
+    <string name="shared_string_automatic">Automātiski</string>
     <string name="private_access_routing_req">Galamērķis atrodas privātas teritorijas vietā. Vai iekļaut maršrutā ierobežotas piekļuves ceļus\?</string>
     <string name="restart_search">Meklēt atkārtoti</string>
     <string name="increase_search_radius">Paplašināt meklēšanas rādiusu</string>

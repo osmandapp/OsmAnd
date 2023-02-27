@@ -17,13 +17,16 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.data.ValueHolder;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.ObjectType;
@@ -65,7 +68,17 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = new File(getApp().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
+			if(selectedGpxFile == null){
+				GpxFileLoaderTask.loadGpxFile(file, null, new CallbackWithObject<GPXFile>() {
+					@Override
+					public boolean processResult(GPXFile gpxFile) {
+						getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(gpxFile);
+						return true;
+					}
+				});
+			} else {
+				getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
+			}
 		} else {
 			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
