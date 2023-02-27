@@ -851,9 +851,9 @@ public class ExternalApiHelper {
 							MapActivity mapActivity = mapActivityRef.get();
 							if (mapActivity != null) {
 								mapActivity.getMyApplication().runInUIThread(() -> {
-									ProgressDialog dlg1 = dlgRef.get();
-									if (dlg1 != null) {
-										dlg1.dismiss();
+									ProgressDialog dialog = dlgRef.get();
+									if (dialog != null) {
+										dialog.dismiss();
 									}
 									if (resultSet.size() > 0) {
 										AidlSearchResultWrapper res = resultSet.get(0);

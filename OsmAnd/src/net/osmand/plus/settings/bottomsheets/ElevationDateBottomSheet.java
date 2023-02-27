@@ -202,8 +202,8 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 					.setOnClickListener(v -> {
 						selectedEntryIndex = (int) preferenceItem[0].getTag();
 						if (selectedEntryIndex >= 0) {
-							RoutingParameter parameter1 = parameters.get(selectedEntryIndex);
-							updateSelectedParameters(app, appMode, parameters, parameter1.getId());
+							RoutingParameter routingParameter = parameters.get(selectedEntryIndex);
+							updateSelectedParameters(app, appMode, parameters, routingParameter.getId());
 						}
 						Fragment target = getTargetFragment();
 						if (target instanceof BaseSettingsFragment) {

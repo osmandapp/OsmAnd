@@ -641,8 +641,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			return;
 		}
 		app.runInUIThread(() -> {
-			OsmandApplication app1 = getMyApplication();
-			if (app1 == null || !isVisible()) {
+			OsmandApplication application = getMyApplication();
+			if (application == null || !isVisible()) {
 				return;
 			}
 			List<TargetPoint> allTargets = new ArrayList<>();
