@@ -1148,6 +1148,9 @@
 			android:value="1"
 			tools:ignore="MetadataTagInsideApplicationTag" />
 
+		<meta-data android:name="androidx.car.app.theme"
+			android:resource="@style/OsmandAndroidAutoTheme" />
+
 		<service
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
 			android:exported="true">
