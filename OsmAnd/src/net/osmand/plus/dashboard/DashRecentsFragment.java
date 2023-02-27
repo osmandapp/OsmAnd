@@ -91,21 +91,9 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			return;
 		}
 		OsmandApplication app = requireMyApplication();
-		List<HistoryEntry> historyEntries = new ArrayList<>();
-		QuickSearchHelper searchHelper = app.getSearchUICore();
-		SearchUICore searchUICore = searchHelper.getCore();
-		try {
-			SearchUICore.SearchResultCollection res = searchUICore.shallowSearch(QuickSearchHelper.SearchHistoryAPI.class, "", null, false, false);
-			for(SearchResult result : res.getCurrentSearchResults()){
-				if(result.relatedObject instanceof HistoryEntry){
-					historyEntries.add((HistoryEntry) result.relatedObject);
-				} else if(result.object instanceof HistoryEntry){
-					historyEntries.add((HistoryEntry) result.object);
-				}
-			}
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
+
+		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
 		boolean historyEnabled = app.getSettings().SEARCH_HISTORY.get();
 
 		if (Algorithms.isEmpty(historyEntries) || !historyEnabled) {

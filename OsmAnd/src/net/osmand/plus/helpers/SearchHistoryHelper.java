@@ -9,6 +9,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -76,6 +77,7 @@ public class SearchHistoryHelper {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
+		removeDeletedEntries();
 		List<HistoryEntry> res = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
 			PointDescription pd = entry.getName();
@@ -138,12 +140,24 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
+			removeDeletedEntries();
 			Collections.sort(loadedEntries, new HistoryEntryComparator());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
 		}
 		return helper;
+	}
+
+	private void removeDeletedEntries(){
+		List<HistoryEntry> deletedEntries = new ArrayList<>();
+		for(HistoryEntry entry : loadedEntries){
+			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName());
+			if(gpxInfo == null){
+				deletedEntries.add(entry);
+			}
+		}
+		loadedEntries.removeAll(deletedEntries);
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {
