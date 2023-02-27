@@ -17,6 +17,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
@@ -55,7 +56,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				}
 				mSurface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
-				darkMode = mCarContext.isDarkMode();
+				darkMode = getApp().getDaynightHelper().isNightMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
 					mapView.setupRenderingView();
@@ -187,6 +188,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		//renderFrame();
 	}
 
+	@NonNull
+	private OsmandApplication getApp() {
+		return (OsmandApplication) mCarContext.getApplicationContext();
+	}
+
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
@@ -223,7 +229,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
+		boolean nightMode = getApp().getDaynightHelper().isNightMode();
+		DrawSettings drawSettings = new DrawSettings(nightMode, false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
@@ -239,7 +246,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		}
 		Canvas canvas = mSurface.lockCanvas(null);
 		try {
-			boolean newDarkMode = mCarContext.isDarkMode();
+			boolean newDarkMode = getApp().getDaynightHelper().isNightMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);

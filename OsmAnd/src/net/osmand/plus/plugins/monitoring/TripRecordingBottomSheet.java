@@ -155,12 +155,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				this, nightMode, new Runnable() {
-					@Override
-					public void run() {
-						hide();
-					}
-				});
+				this, nightMode, this::hide);
 
 		segmentsTabs = itemView.findViewById(R.id.segments_container);
 		createSegmentsTabs(segmentsTabs);

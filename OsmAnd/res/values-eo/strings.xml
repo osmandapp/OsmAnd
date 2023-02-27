@@ -5049,4 +5049,8 @@
     <string name="shared_string_select_recent">Elekti antaŭajn</string>
     <string name="empty_tracks">Neniu spuro</string>
     <string name="change_appearance">Ŝanĝi aspekton</string>
+    <string name="shared_string_inches">coloj</string>
+    <string name="approximate_bearing">Proksimumigi direkton</string>
+    <string name="approximate_bearing_descr">Kalkuli direkton kiam ne eblas akiri ĝin de la aparato</string>
+    <string name="inch">in</string>
 </resources>

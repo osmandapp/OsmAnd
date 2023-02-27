@@ -280,9 +280,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 
 		public DrawSettings(boolean nightMode, boolean updateVectorRendering) {
-			this.nightMode = nightMode;
-			this.updateVectorRendering = updateVectorRendering;
-			this.density = 0;
+			this(nightMode, updateVectorRendering, 0);
 		}
 
 		public DrawSettings(boolean nightMode, boolean updateVectorRendering, float density) {

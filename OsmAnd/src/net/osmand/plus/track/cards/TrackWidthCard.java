@@ -155,12 +155,9 @@ public class TrackWidthCard extends MapBaseCard {
 				}
 			});
 			UiUtilities.setupSlider(widthSlider, nightMode, null, true);
-			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, new Runnable() {
-				@Override
-				public void run() {
-					if (sliderContainer.getVisibility() == View.VISIBLE) {
-						onNeedScrollListener.onVerticalScrollNeeded(sliderContainer.getBottom());
-					}
+			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, () -> {
+				if (sliderContainer.getVisibility() == View.VISIBLE) {
+					onNeedScrollListener.onVerticalScrollNeeded(sliderContainer.getBottom());
 				}
 			});
 			AndroidUiHelper.updateVisibility(sliderContainer, true);

@@ -41,18 +41,15 @@ public class ContourLinesAction extends QuickAction {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
-			plugin.toggleContourLines(mapActivity, !enabled, new Runnable() {
-				@Override
-				public void run() {
-					OsmandApplication app = mapActivity.getMyApplication();
-					RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
-					if (contourLinesProp != null) {
-						CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-						if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
-							PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
-						}
-						mapActivity.refreshMapComplete();
+			plugin.toggleContourLines(mapActivity, !enabled, () -> {
+				OsmandApplication app = mapActivity.getMyApplication();
+				RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+				if (contourLinesProp != null) {
+					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
+					if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
+						PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
 					}
+					mapActivity.refreshMapComplete();
 				}
 			});
 		}

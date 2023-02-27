@@ -415,17 +415,14 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
 					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
 			if (newLocation || farEnough) {
-				mapActivity.getMyApplication().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						PlanRouteFragment.this.location = location;
-						adapter.reloadData();
-						try {
-							adapter.notifyDataSetChanged();
-						} catch (Exception e) {
-							// to avoid crash because of:
-							// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
-						}
+				mapActivity.getMyApplication().runInUIThread(() -> {
+					PlanRouteFragment.this.location = location;
+					adapter.reloadData();
+					try {
+						adapter.notifyDataSetChanged();
+					} catch (Exception e) {
+						// to avoid crash because of:
+						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
 					}
 				});
 			}
@@ -922,12 +919,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				if (dialog != null) {
 					long t = System.currentTimeMillis();
 					if (t - startDialogTime < 500) {
-						mapActivity.getMyApplication().runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								dialog.dismiss();
-							}
-						}, 500 - (t - startDialogTime));
+						mapActivity.getMyApplication().runInUIThread(dialog::dismiss, 500 - (t - startDialogTime));
 					} else {
 						dialog.dismiss();
 					}
