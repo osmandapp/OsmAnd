@@ -5030,4 +5030,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="average_speed_widget_desc">Uneko bidaiaren batez besteko abiadura erakusten du.</string>
     <string name="shared_string_mode">Modua</string>
     <string name="map_widget_time_to_destination">Helmugarako denbora</string>
+    <string name="approximate_bearing_descr">Kalkulatu noranzkoa gailutik jasotzen ez bada</string>
+    <string name="shared_string_inches">hazbete</string>
+    <string name="inch">hemen</string>
+    <string name="shared_string_apply_changes">Aplikatu aldaketak</string>
+    <string name="no_visible_tracks_description">Hautatu arrastoak mapan bistaratzeko.</string>
+    <string name="shared_string_yards">yarda</string>
+    <string name="recently_visible">Duela gutxi ikusgai %1$s</string>
+    <string name="empty_tracks_description">OsmAnd erabiliz arrasto-fitxategiak inportatu, sortu edo graba ditzakezu.</string>
+    <string name="shared_string_kilograms">kilogramoak</string>
+    <string name="approximate_bearing">Gutxi gora beherako noranzkoa</string>
+    <string name="change_default_tracks_appearance_confirmation_description">%1$s arrastoen itxura aldatu\?</string>
+    <string name="no_visible_tracks">Ez dago arrastorik mapan</string>
 </resources>
