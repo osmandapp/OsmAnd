@@ -5056,4 +5056,8 @@
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>
     <string name="shared_string_yards">yardas</string>
+    <string name="approximate_bearing_descr">Calcula el rumbo si no se recibe del dispositivo</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
 </resources>
