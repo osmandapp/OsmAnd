@@ -1152,7 +1152,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					showTrackAltitudeDialog(-1);
 				}
 			} else if (buttonIndex == SIMULATE_POSITION_BUTTON_INDEX) {
-				SimulatePositionFragment.showInstance(mapActivity, gpxFile, true);
+				SimulatePositionFragment.showInstance(fragmentManager, gpxFile, true);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 

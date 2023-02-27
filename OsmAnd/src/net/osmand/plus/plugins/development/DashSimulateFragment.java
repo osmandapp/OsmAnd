@@ -3,16 +3,13 @@ package net.osmand.plus.plugins.development;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -48,11 +45,13 @@ public class DashSimulateFragment extends DashBaseFragment {
 		LinearLayout tracks = view.findViewById(R.id.items);
 		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);
 		tracks.addView(item);
-		OnClickListener listener = v -> {
-			SimulatePositionFragment.showInstance(requireActivity(), true);
-			dashboard.hideDashboard();
-		};
-		item.setOnClickListener(listener);
+		item.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, true);
+				dashboard.hideDashboard();
+			}
+		});
 		((TextView) item.findViewById(R.id.name)).setText(R.string.simulate_your_location);
 
 		item.findViewById(R.id.divider).setVisibility(View.VISIBLE);

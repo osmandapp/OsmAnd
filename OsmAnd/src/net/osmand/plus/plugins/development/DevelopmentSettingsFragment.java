@@ -222,7 +222,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
-			SimulatePositionFragment.showInstance(requireActivity(), false);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
