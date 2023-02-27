@@ -5069,4 +5069,8 @@
     <string name="shared_string_on_map">En el mapa</string>
     <string name="shared_string_yards">yardas</string>
     <string name="shared_string_kilograms">kilogramos</string>
+    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="inch">in</string>
 </resources>
