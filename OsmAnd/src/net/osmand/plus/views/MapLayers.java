@@ -438,6 +438,9 @@ public class MapLayers {
 	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
 		selectMapLayer(mapActivity, true, mapSourceName -> {
 			item.setDescription(mapSourceName);
+			if (mapSourceName == null || mapSourceName.isEmpty()) {
+				item.setDescription(app.getString(R.string.vector_data));
+			}
 			uiAdapter.onDataSetChanged();
 			return true;
 		});
