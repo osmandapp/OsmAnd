@@ -4994,7 +4994,7 @@
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
-    <string name="release_4_4">• Aquí estarán las cadenas para la versión 4.4</string>
+    
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>

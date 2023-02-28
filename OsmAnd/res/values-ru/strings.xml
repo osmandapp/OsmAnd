@@ -4981,7 +4981,7 @@
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
-    <string name="release_4_4">• Здесь может быть ваша реклама, шутка, здесь будет описание изменений для версии 4.4, как только они появятся</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>

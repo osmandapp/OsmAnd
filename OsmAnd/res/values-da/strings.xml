@@ -4981,7 +4981,7 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
-    <string name="release_4_4">• Her kommer der strenge til 4.4-udgivelsen</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer for vindhastighed</string>

@@ -4987,7 +4987,7 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
-    <string name="release_4_4">• Aquí estarán las cadenas para la versión 4.4</string>
+    
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>

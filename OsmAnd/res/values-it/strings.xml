@@ -4966,7 +4966,7 @@
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
     <string name="mtb_segment_classification">Classificazione segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
-    <string name="release_4_4">• Qui ci saranno le stringhe per la versione 4.4</string>
+    
     <string name="shared_string_open">Apri</string>
     <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>

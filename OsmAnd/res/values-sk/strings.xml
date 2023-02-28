@@ -4972,7 +4972,7 @@
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary rýchlosti vetra</string>
-    <string name="release_4_4">• Tu budú texty pre verziu 4.4</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
     <string name="shared_string_open">Otvoriť</string>

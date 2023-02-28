@@ -4772,7 +4772,7 @@
     <string name="weather_widgets_secondary_desc">Мерне јединице могу бити промењене у поставкама прикључка временских прилика.</string>
     <string name="air_pressure_widget_desc">Приказује ваздушни притисак на тренутном средишту карте.</string>
     <string name="weather_pressure_inches_of_mercury">Инчи живе</string>
-    <string name="release_4_4">• Овде ће бити ниске издања 4.4</string>
+    
     <string name="weather_prefs_descr">24-часне и 7-дневне временске прилике, освежене сваких 3 часа</string>
     <string name="switch_mode_by_tapping_on_widget">Промени начин рада тапом по справици.</string>
     <string name="map_settings_weather_temp">Топлота</string>

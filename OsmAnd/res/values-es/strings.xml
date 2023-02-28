@@ -4980,7 +4980,7 @@
     <string name="mtb_segment_classification">Segmentación</string>
     <string name="mtb_scale">Escala MTB</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de las nubes</string>
-    <string name="release_4_4">- Aquí estarán las cadenas para la versión 4.4</string>
+    
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de la velocidad del viento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de las precipitaciones</string>
     <string name="shared_string_open">Abrir</string>
