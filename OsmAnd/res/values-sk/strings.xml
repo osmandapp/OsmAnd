@@ -5051,4 +5051,8 @@
     <string name="switch_folder">Zmeniť priečinok</string>
     <string name="show_all_tracks">Zobraziť všetky stopy</string>
     <string name="shared_string_on_map">Na mape</string>
+    <string name="approximate_bearing">Približné smerovanie</string>
+    <string name="approximate_bearing_descr">Vypočítať smerovanie ak nebolo získané zo zariadenia</string>
+    <string name="shared_string_inches">palcov</string>
+    <string name="inch">\"</string>
 </resources>
