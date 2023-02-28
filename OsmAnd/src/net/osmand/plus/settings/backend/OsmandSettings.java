@@ -1775,6 +1775,18 @@ public class OsmandSettings {
 		return TileSourceManager.getMapnikSource();
 	}
 
+	@Nullable
+	public ITileSource getLayerTileSource(CommonPreference<String> layerSetting, boolean warnWhenSelected) {
+		String tileName = layerSetting.get();
+		if (tileName != null) {
+			ITileSource ts = getTileSourceByName(tileName, warnWhenSelected);
+			if (ts != null) {
+				return ts;
+			}
+		}
+		return null;
+	}
+
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list) {
 		if (list != null) {
 			for (TileSourceTemplate l : list) {

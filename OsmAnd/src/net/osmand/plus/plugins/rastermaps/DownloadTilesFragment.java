@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTiles
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.resources.BitmapTilesCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -41,6 +42,7 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -60,6 +62,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
 	private static final String KEY_DOWNLOAD_TYPE = "download_type";
+	private static final String KEY_DOWNLOAD_LAYER = "download_layer";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
@@ -105,10 +108,15 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private CalculateMissingTilesTask calculateMissingTilesTask;
 
 	private SelectTilesDownloadTypeAlertDialog alertDialog;
+	private String layerToDownload;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			layerToDownload = args.getString(KEY_DOWNLOAD_LAYER);
+		}
 
 		app = requireMyApplication();
 		settings = requireSettings();
@@ -116,7 +124,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
-		tileSource = settings.getMapTileSource(false);
+		tileSource = settings.getLayerTileSource(getMapLayerSettings(), false);
 		handler = new UpdateTilesHandler(() -> {
 			setupTilesDownloadInfo();
 			updateTilesPreview();
@@ -131,8 +139,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
 			selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
-
-			Bundle args = getArguments();
 			if (args != null) {
 				downloadType = DownloadType.valueOf(args.getString(KEY_DOWNLOAD_TYPE));
 			}
@@ -237,9 +243,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapSourceContainer.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getMapLayers().selectMapLayer(mapActivity, false, mapSourceName -> {
+				mapActivity.getMapLayers().selectMapLayer(mapActivity, false, getMapLayerSettings(), mapSourceName -> {
 					if (shouldShowDialog(app)) {
-						tileSource = settings.getMapTileSource(false);
+						tileSource = settings.getLayerTileSource(getMapLayerSettings(), false);
 						int currentZoom = mapView.getZoom();
 						selectedMaxZoom = tileSource.getMaximumZoomSupported();
 						selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
@@ -262,10 +268,30 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		TextView tvSelectedMapSource = mapSourceContainer.findViewById(R.id.desc);
 
 		ivIcon.setImageResource(R.drawable.ic_world_globe_dark);
-		tvMapSource.setText(R.string.map_source);
+		tvMapSource.setText(getMapSourceTitle());
 		String selectedMapSource = tileSource.getName()
 				.replace(IndexConstants.SQLITE_EXT, "");
 		tvSelectedMapSource.setText(selectedMapSource);
+	}
+
+	private int getMapSourceTitle() {
+		if (app.getString(R.string.layer_map, getMapActivity()).equals(layerToDownload)) {
+			return R.string.map_source;
+		} else if (app.getString(R.string.layer_overlay, getMapActivity()).equals(layerToDownload)) {
+			return R.string.map_overlay;
+		} else {
+			return R.string.map_underlay;
+		}
+	}
+
+	private CommonPreference<String> getMapLayerSettings() {
+		if (app.getString(R.string.layer_map, getMapActivity()).equals(layerToDownload)) {
+			return app.getSettings().MAP_TILE_SOURCES;
+		} else if (app.getString(R.string.layer_overlay, getMapActivity()).equals(layerToDownload)) {
+			return app.getSettings().MAP_OVERLAY;
+		} else {
+			return app.getSettings().MAP_UNDERLAY;
+		}
 	}
 
 	private void setupTilesToDownloadSetting() {
@@ -609,18 +635,25 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
-		BaseMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
-		MapTileLayer mapTileLayer = mainLayer instanceof MapTileLayer ? ((MapTileLayer) mainLayer) : null;
-		ITileSource tileSource = app.getSettings().getMapTileSource(false);
-		return mapTileLayer != null && mapTileLayer.isVisible() && tileSource.couldBeDownloadedFromInternet();
+		List<OsmandMapLayer> layers = app.getOsmandMap().getMapView().getLayers();
+		for (OsmandMapLayer layer : layers) {
+			if (layer instanceof MapTileLayer) {
+				MapTileLayer mapTileLayer = (MapTileLayer) layer;
+				if (mapTileLayer.isVisible() && mapTileLayer.getMap().couldBeDownloadedFromInternet()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, String layer) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DownloadTilesFragment fragment = new DownloadTilesFragment();
 			Bundle args = new Bundle();
 			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;
 			args.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
+			args.putString(KEY_DOWNLOAD_LAYER, layer);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
