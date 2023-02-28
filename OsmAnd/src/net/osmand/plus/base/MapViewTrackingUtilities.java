@@ -33,6 +33,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -110,8 +111,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	@Override
-	public void onMapMarkerChanged(MapMarker mapMarker) {
-	}
+	public void onMapMarkerChanged(MapMarker mapMarker) {}
 
 	@Override
 	public void onMapMarkersChanged() {
@@ -523,25 +523,25 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void switchRotateMapModeImpl() {
 		if (mapView != null) {
-			String rotMode = app.getString(R.string.rotate_map_manual_opt);
 			int vl = (settings.ROTATE_MAP.get() + 1) % 4;
 			settings.ROTATE_MAP.set(vl);
+			onRotateMapModeChanged();
+		}
+	}
 
-			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-				rotMode = app.getString(R.string.rotate_map_bearing_opt);
-			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-				rotMode = app.getString(R.string.rotate_map_compass_opt);
-			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-				mapView.resetManualRotation();
-				rotMode = app.getString(R.string.rotate_map_north_opt);
-			}
-			rotMode = app.getString(R.string.rotate_map_to) + ":\n" + rotMode;
-			app.showShortToastMessage(rotMode);
-			updateSettings();
-			mapView.refreshMap();
-			if (mapView.isCarView()) {
-				app.refreshCarScreen();
-			}
+	public void onRotateMapModeChanged() {
+		CompassMode compassMode = CompassMode.getByValue(settings.ROTATE_MAP.get());
+		if (compassMode == CompassMode.NORTH_IS_UP) {
+			mapView.resetManualRotation();
+		}
+		String title = app.getString(compassMode.getTitleId());
+		String message = app.getString(R.string.rotate_map_to) + ":\n" + title;
+		app.showShortToastMessage(message);
+
+		updateSettings();
+		mapView.refreshMap();
+		if (mapView.isCarView()) {
+			app.refreshCarScreen();
 		}
 	}
 

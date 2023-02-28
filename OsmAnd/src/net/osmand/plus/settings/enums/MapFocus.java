@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 
 public enum MapFocus {
+
 	CENTER(R.string.position_on_map_center, R.drawable.ic_action_display_position_center, 1),
 	BOTTOM(R.string.position_on_map_bottom, R.drawable.ic_action_display_position_bottom, 2),
 	AUTOMATIC(R.string.shared_string_automatic, R.drawable.ic_action_display_position_auto, 0);

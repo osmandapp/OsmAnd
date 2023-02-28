@@ -37,6 +37,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AnalyticsHelper;
@@ -363,6 +364,7 @@ public class AppInitializer implements IProgress {
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
+		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 
 		initOpeningHoursParser();
 	}

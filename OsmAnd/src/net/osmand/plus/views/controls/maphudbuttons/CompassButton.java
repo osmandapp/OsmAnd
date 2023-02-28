@@ -20,8 +20,9 @@ import androidx.core.view.ViewPropertyAnimatorListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 
 public class CompassButton extends MapButton {
@@ -39,6 +40,10 @@ public class CompassButton extends MapButton {
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		setOnClickListener(v -> app.getMapViewTrackingUtilities().switchRotateMapMode());
+		setOnLongClickListener(v -> {
+			CompassModeWidgetDialogController.showDialog(mapActivity);
+			return true;
+		});
 	}
 
 	@Nullable
@@ -78,20 +83,10 @@ public class CompassButton extends MapButton {
 			this.mapRotation = mapRotation;
 			view.invalidate();
 		}
-
-		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-			setIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white);
-			setContentDesc(R.string.rotate_map_north_opt);
-		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_MANUAL) {
-			setIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white);
-			setContentDesc(R.string.rotate_map_manual_opt);
-		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-			setIconId(R.drawable.ic_compass_bearing, R.drawable.ic_compass_bearing_white);
-			setContentDesc(R.string.rotate_map_bearing_opt);
-		} else {
-			setIconId(R.drawable.ic_compass, R.drawable.ic_compass_white);
-			setContentDesc(R.string.rotate_map_compass_opt);
-		}
+		int selectedValue = settings.ROTATE_MAP.get();
+		CompassMode compassMode = CompassMode.getByValue(selectedValue);
+		setIconId(compassMode.getIconId());
+		setContentDesc(compassMode.getTitleId());
 	}
 
 	@Override
@@ -171,7 +166,6 @@ public class CompassButton extends MapButton {
 			hideAnimator.start();
 		}
 	}
-
 
 	public void cancelHideAnimation() {
 		if (hideAnimator != null) {
