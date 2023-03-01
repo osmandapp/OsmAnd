@@ -1,21 +1,39 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.os.Bundle;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.render.RenderingRulesStorage;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class TrackDrawInfo {
 
+	public static final int DEFAULT = 0;
+	public static final int GPX_FILE = 1;
+	public static final int CURRENT_RECORDING = 2;
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({CURRENT_RECORDING, DEFAULT, GPX_FILE})
+	public @interface TrackAppearanceType {
+	}
+
+	private static final String TRACK_APPEARANCE_TYPE = "track_appearance_type";
 	private static final String TRACK_WIDTH = "track_width";
 	private static final String TRACK_COLORING_TYPE = "track_coloring_type";
 	private static final String TRACK_COLOR = "track_color";
@@ -35,23 +53,31 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
-	private boolean currentRecording;
 
-	public TrackDrawInfo(@NonNull OsmandApplication app, boolean currentRecording) {
-		this.currentRecording = currentRecording;
-		initCurrentTrackParams(app);
+	@TrackAppearanceType
+	private final int appearanceType;
+
+	public TrackDrawInfo(@NonNull OsmandApplication app, @TrackAppearanceType int appearanceType) {
+		this.appearanceType = appearanceType;
+
+		if (appearanceType == CURRENT_RECORDING) {
+			initCurrentTrackParams(app);
+		} else if (appearanceType == DEFAULT) {
+			initDefaultTrackParams(app, app.getSettings().getApplicationMode());
+		}
 	}
 
 	public TrackDrawInfo(Bundle bundle) {
 		readBundle(bundle);
+		appearanceType = bundle.getInt(TRACK_APPEARANCE_TYPE);
 	}
 
-	public TrackDrawInfo(@NonNull String filePath, @Nullable GpxDataItem gpxDataItem, boolean currentRecording) {
+	public TrackDrawInfo(@NonNull String filePath, @Nullable GpxDataItem gpxDataItem) {
+		this.appearanceType = GPX_FILE;
 		if (gpxDataItem != null) {
 			updateParams(gpxDataItem);
 		}
 		this.filePath = filePath;
-		this.currentRecording = currentRecording;
 	}
 
 	private void initCurrentTrackParams(@NonNull OsmandApplication app) {
@@ -62,6 +88,18 @@ public class TrackDrawInfo {
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
+	}
+
+	public void initDefaultTrackParams(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		CommonPreference<String> colorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+
+		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
+		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
+
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
 	public void updateParams(@NonNull GpxDataItem gpxDataItem) {
@@ -150,12 +188,16 @@ public class TrackDrawInfo {
 	}
 
 	public boolean isCurrentRecording() {
-		return currentRecording;
+		return appearanceType == CURRENT_RECORDING;
 	}
 
-	public void resetParams(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		if (currentRecording) {
-			OsmandSettings settings = app.getSettings();
+	public boolean isDefaultAppearance() {
+		return appearanceType == DEFAULT;
+	}
+
+	public void resetParams(@NonNull OsmandApplication app, @Nullable GPXFile gpxFile) {
+		OsmandSettings settings = app.getSettings();
+		if (isCurrentRecording()) {
 			settings.CURRENT_TRACK_COLOR.resetToDefault();
 			settings.CURRENT_TRACK_WIDTH.resetToDefault();
 			settings.CURRENT_TRACK_COLORING_TYPE.resetToDefault();
@@ -163,7 +205,14 @@ public class TrackDrawInfo {
 			settings.CURRENT_TRACK_SHOW_ARROWS.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
 			initCurrentTrackParams(app);
-		} else {
+		} else if (isDefaultAppearance()) {
+			color = 0;
+			width = null;
+			showArrows = false;
+			showStartFinish = true;
+			coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+		} else if (gpxFile != null) {
 			color = gpxFile.getColor(0);
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
@@ -186,7 +235,6 @@ public class TrackDrawInfo {
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
-		currentRecording = bundle.getBoolean(CURRENT_RECORDING);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -199,6 +247,6 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
-		bundle.putBoolean(CURRENT_RECORDING, currentRecording);
+		bundle.putInt(TRACK_APPEARANCE_TYPE, appearanceType);
 	}
 }

@@ -944,20 +944,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 		void startRemoteUpdates(long updateTimeMS, long callbackId, IOsmAndAidlCallback callback) {
 			try {
-				mHandler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (callbacks.containsKey(callbackId)) {
-								OsmandAidlApi api = getApi("isUpdateAllowed");
-								if (api != null && api.isUpdateAllowed()) {
-									callback.onUpdate();
-								}
-								startRemoteUpdates(updateTimeMS, callbackId, callback);
+				mHandler.postDelayed(() -> {
+					try {
+						if (callbacks.containsKey(callbackId)) {
+							OsmandAidlApi api = getApi("isUpdateAllowed");
+							if (api != null && api.isUpdateAllowed()) {
+								callback.onUpdate();
 							}
-						} catch (RemoteException e) {
-							handleException(e);
+							startRemoteUpdates(updateTimeMS, callbackId, callback);
 						}
+					} catch (RemoteException e) {
+						handleException(e);
 					}
 				}, updateTimeMS);
 			} catch (Exception e) {

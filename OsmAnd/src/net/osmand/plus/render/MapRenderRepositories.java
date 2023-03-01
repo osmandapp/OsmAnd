@@ -33,6 +33,7 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.layers.MapVectorLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -74,10 +75,9 @@ public class MapRenderRepositories {
 	private static final Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private static final int zoomOnlyForBasemaps = 11;
-	private static final int zoomToOverviewLocalNames = 6;
-	private static final Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
-			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
-	);
+
+	private static final int REPLACE_LOCAL_NAMES_MAX_ZOOM = 6;
+	private static final List<String> LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP = Arrays.asList("ru", "uk", "be", "bg", "mk", "sr");
 
 	static int zoomForBaseRouteRendering  = 14;
 	private final Handler handler;
@@ -747,16 +747,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
-			if(requestedBox.getZoom() <= zoomToOverviewLocalNames &&
-					prefs.MAP_PREFERRED_LOCALE.get() != null && prefs.MAP_PREFERRED_LOCALE.get().isEmpty()) {
-				currentRenderingContext.preferredLocale = app.getLanguage();
-				currentRenderingContext.transliterate =
-						!languagesNotTransliterateOnBasemap.contains(app.getLanguage())
-						&& prefs.MAP_TRANSLITERATE_NAMES.get();
-			} else {
-				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
-				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
-			}
+			currentRenderingContext.preferredLocale = getMapPreferredLocale(app, requestedBox.getZoom());
+			currentRenderingContext.transliterate = transliterateMapNames(app, requestedBox.getZoom());
 			float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
@@ -837,37 +829,24 @@ public class MapRenderRepositories {
 				}
 				String msg = timeInfo;
 				log.info(msg);
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-					}
-				});
+				handler.post(() -> Toast.makeText(context, msg, Toast.LENGTH_LONG).show());
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime memory exception", e); //$NON-NLS-1$
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
-				}
-			});
+			handler.post(() -> Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show());
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e); //$NON-NLS-1$
 			cObjects = new ArrayList<BinaryMapDataObject>();
 			cObjectsBox = new QuadRect();
-			handler.post(new Runnable() {
-				@Override
-				public void run() {
-//					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-//					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-//					activityManager.getMemoryInfo(memoryInfo);
-//					int avl = (int) (memoryInfo.availMem / (1 << 20));
-					int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
-					int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
-					String s = " (" + avl + " MB available of " + max  + ") ";
-					Toast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
-				}
+			handler.post(() -> {
+//				ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+//				ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//				activityManager.getMemoryInfo(memoryInfo);
+//				int avl = (int) (memoryInfo.availMem / (1 << 20));
+				int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
+				int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+				String s = " (" + avl + " MB available of " + max  + ") ";
+				Toast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
 			});
 		} finally {
 			if(currentRenderingContext != null) {
@@ -1271,5 +1250,26 @@ public class MapRenderRepositories {
 		}
 
 		return lineEnded;
+	}
+
+	@NonNull
+	public static String getMapPreferredLocale(@NonNull OsmandApplication app, int zoom) {
+		return useAppLocaleForMap(app, zoom)
+				? app.getLanguage()
+				: app.getSettings().MAP_PREFERRED_LOCALE.get();
+	}
+
+	public static boolean transliterateMapNames(@NonNull OsmandApplication app, int zoom) {
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		boolean useAppLocale = useAppLocaleForMap(app, zoom);
+		String mapPreferredLocale = getMapPreferredLocale(app, zoom);
+		boolean noTransliteration = LOCALES_WITHOUT_TRANSLITERATION_ON_BASEMAP.contains(mapPreferredLocale);
+		return transliterate && (!useAppLocale || !noTransliteration);
+	}
+
+	public static boolean useAppLocaleForMap(@NonNull OsmandApplication app, int zoom) {
+		boolean replaceLocalNamesToAppLocale = zoom <= REPLACE_LOCAL_NAMES_MAX_ZOOM;
+		boolean useLocalNames = app.getSettings().MAP_PREFERRED_LOCALE.get().isEmpty();
+		return replaceLocalNamesToAppLocale && useLocalNames;
 	}
 }

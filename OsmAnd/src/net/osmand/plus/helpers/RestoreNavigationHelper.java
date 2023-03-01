@@ -111,26 +111,23 @@ public class RestoreNavigationHelper {
 						quitRouteRestoreDialog = true;
 					}
 				});
-				delayDisplay = new Runnable() {
-					@Override
-					public void run() {
-						if (!quitRouteRestoreDialog) {
-							delay--;
-							tv.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, delay + ""));
-							if (delay <= 0) {
-								try {
-									if (dialog.isShowing() && !quitRouteRestoreDialog) {
-										dialog.dismiss();
-									}
-									quitRouteRestoreDialog = true;
-									restoreRoutingModeInner(pointToNavigate, gpxPath);
-								} catch (Exception e) {
-									// swalow view not attached exception
-									log.error(e.getMessage() + "", e);
+				delayDisplay = () -> {
+					if (!quitRouteRestoreDialog) {
+						delay--;
+						tv.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, delay + ""));
+						if (delay <= 0) {
+							try {
+								if (dialog.isShowing() && !quitRouteRestoreDialog) {
+									dialog.dismiss();
 								}
-							} else {
-								uiHandler.postDelayed(delayDisplay, 1000);
+								quitRouteRestoreDialog = true;
+								restoreRoutingModeInner(pointToNavigate, gpxPath);
+							} catch (Exception e) {
+								// swalow view not attached exception
+								log.error(e.getMessage() + "", e);
 							}
+						} else {
+							uiHandler.postDelayed(delayDisplay, 1000);
 						}
 					}
 				};

@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.myplaces.ui.GpxInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -45,14 +45,14 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
-	private GpxInfo[] gpxInfos;
+	private GPXInfo[] gpxInfos;
 	private UploadVisibility selectedUploadVisibility;
 	private OsmEditingPlugin plugin;
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
 
-	public void setGpxInfos(GpxInfo[] gpxInfos) {
+	public void setGpxInfos(GPXInfo[] gpxInfos) {
 		this.gpxInfos = gpxInfos;
 	}
 
@@ -169,7 +169,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxInfo[] info, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull GPXInfo[] info, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
 			fragment.setTargetFragment(target, 0);

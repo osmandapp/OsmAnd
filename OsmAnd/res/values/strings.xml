@@ -11,6 +11,33 @@
 	Thx - Hardy
 -->
 
+    <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
+    <string name="shared_string_delete_file">Delete file</string>
+    <string name="delete_cloud_version">Delete cloud version</string>
+    <string name="local_version_do_not_exist">No local version present.</string>
+    <string name="shared_string_in_progress">In progress</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Movement speed</string>
+    <string name="simulation_position_description">Select a track file to use as motion guidance.</string>
+    <string name="approximate_bearing">Approximate bearing</string>
+    <string name="approximate_bearing_descr">Calculate bearing if not received from the device</string>
+    <string name="shared_string_inches">inches</string>
+    <string name="inch">in</string>
+    <string name="shared_string_kilograms">kilograms</string>
+    <string name="shared_string_yards">yards</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
+    <string name="shared_string_apply_changes">Apply changes</string>
+    <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
+    <string name="no_visible_tracks">No tracks on the map</string>
+    <string name="recently_visible">Recently visible %1$s</string>
+    <string name="empty_tracks_description">You can import, create, or record track files using OsmAnd.</string>
+    <string name="empty_tracks">You don\'t have track files.</string>
+    <string name="shared_string_select_recent">Select recent</string>
+    <string name="change_appearance">Change appearance</string>
+    <string name="switch_folder">Switch folder</string>
+    <string name="show_all_tracks">Show all tracks</string>
+    <string name="shared_string_on_map">On map</string>
+    <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
     <string name="weather_forecast_is_outdated">Forecast is outdated.</string>
     <string name="shared_string_all_world">All world</string>
     <string name="weather_forecast">Weather forecast</string>
@@ -28,8 +55,17 @@
     <string name="value_downloaded_of_mb">Downloading %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Skip download</string>
     <string name="determine_location">Allow us to determine your location</string>
-    <string name="release_4_4_pre">
-        • Here will be strings for 4.4 release
+    <string name="release_4_4">
+        • Improved \"Tracks\" menu in \"Configure Map\"\n\n
+        • Context menu now displays localized names for POI\n\n
+        • Added option to share route by link\n\n
+        • Added \"Nautical miles/feet\" unit of length\n\n
+        • Map orientation added new fixed mode\n\n
+        • Simplified start screen\n\n
+        • AFixed location position in split screen mode in Android Auto\n\n
+        • Added \"Speed/Slope\" graph for track analysis\n\n
+        • Android 13 moved app language selection to system settings\n\n
+        • Fixed issues with displaying Vegan places\n\n
     </string>
     <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
@@ -255,7 +291,6 @@
     <string name="distance_by_tap_use_description">Tap on map to view distance between your current location and tapped point.\nTap with 2 fingers on the map to view distance between the clicked points</string>
     <string name="shared_string_2_5_d_view">2.5 D view</string>
     <string name="display_position">Display position</string>
-    <string name="display_position_descr">The default is \'Automatic\' which is \'Bottom\' for map orientation \'Movement direction\' and \'Center\' in all other cases.</string>
     <string name="download_heightmap_maps">Heightmap</string>
     <string name="favorite_confirm_delete_group">Are you sure you want to delete \"%1$s\" group and all included points (%2$d)?</string>
     <string name="favorite_delete_group">Delete Group</string>
@@ -1274,7 +1309,7 @@
     <string name="speed_cameras_restart_descr">Restart the app to delete all speed camera data.</string>
     <string name="item_deleted">%1$s deleted</string>
     <string name="shared_string_bearing">Bearing</string>
-    <string name="routing_attr_length_name">Length limit</string>
+    <string name="routing_attr_length_name">Length</string>
     <string name="routing_attr_length_description">Specify vehicle length to be permitted on routes.</string>
     <string name="quick_action_showhide_mapillary_descr">A toggle to show or hide the Mapillary layer on the map.</string>
     <string name="vessel_width_limit_description">Set vessel width to avoid narrow bridges</string>
@@ -3558,11 +3593,11 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_avoid_stairs_description">Avoids stairs</string>
     <string name="routing_attr_avoid_borders_name">No border crossings</string>
     <string name="routing_attr_avoid_borders_description">Avoids crossing national borders</string>
-    <string name="routing_attr_weight_name">Weight limit</string>
+    <string name="routing_attr_weight_name">Weight</string>
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
-    <string name="routing_attr_width_name">Width limit</string>
+    <string name="routing_attr_width_name">Width</string>
     <string name="routing_attr_width_description">Specify permitted vehicle width limit on routes.</string>
-    <string name="routing_attr_height_name">Height limit</string>
+    <string name="routing_attr_height_name">Height</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
     <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?\n
     Note 1: Your old files will remain untouched (but can be deleted manually).\n

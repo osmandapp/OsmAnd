@@ -70,6 +70,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -324,7 +325,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		PluginsHelper.onMapActivityCreate(this);
-		importHelper = new ImportHelper(this, getMyApplication());
+		importHelper = new ImportHelper(this);
 		if (System.currentTimeMillis() - tm > 50) {
 			LOG.error("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
@@ -346,7 +347,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.setLockUIAdapter(this);
 		mapActivityKeyListener = new MapActivityKeyListener(this);
 		mIsDestroyed = false;
-
+		if (mapViewWithLayers != null) {
+			mapViewWithLayers.onCreate(savedInstanceState);
+		}
 		extendedMapActivity.onCreate(this, savedInstanceState);
 	}
 
@@ -786,7 +789,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -2032,6 +2035,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStack(TrackMenuFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		}
+	}
+
+	public void dismissBackupCloudFragment() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved()) {
+			fragmentManager.popBackStack(BackupCloudFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 

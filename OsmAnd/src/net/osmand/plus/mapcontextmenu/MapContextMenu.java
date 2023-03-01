@@ -24,7 +24,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
@@ -578,12 +578,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		autoHide = true;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					if (autoHide) {
-						hide();
-					}
+			mapActivity.getMyApplication().runInUIThread(() -> {
+				if (autoHide) {
+					hide();
 				}
 			}, timeout);
 		}
@@ -1592,14 +1589,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return;
 		}
 		inLocationUpdate = true;
-		mapActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				inLocationUpdate = false;
-				WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
-				if (fragmentRef != null) {
-					fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
-				}
+		mapActivity.runOnUiThread(() -> {
+			inLocationUpdate = false;
+			WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+			if (fragmentRef != null) {
+				fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
 			}
 		});
 	}

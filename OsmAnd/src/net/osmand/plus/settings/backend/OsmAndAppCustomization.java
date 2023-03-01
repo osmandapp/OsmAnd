@@ -630,13 +630,9 @@ public class OsmAndAppCustomization {
 	}
 
 	private void notifySettingsCustomized() {
-		app.runInUIThread(new Runnable() {
-
-			@Override
-			public void run() {
-				for (OsmAndAppCustomizationListener l : listeners) {
-					l.onOsmAndSettingsCustomized();
-				}
+		app.runInUIThread(() -> {
+			for (OsmAndAppCustomizationListener l : listeners) {
+				l.onOsmAndSettingsCustomized();
 			}
 		});
 	}

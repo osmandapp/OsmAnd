@@ -716,22 +716,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
-			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
-
-				@Override
-				public void run() {
-					net.osmand.Location lastKnown = getLastKnownLocation();
-					if (lastKnown != null && lastKnown.getTime() > fixTime) {
-						// false positive case, still strange how we got here with removeMessages
-						return;
-					}
-					// Speed 120kmh, 2 seconds -> 60 m
-					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(250);
-					if (tunnel != null) {
-						simulatePosition = new SimulationProvider();
-						simulatePosition.startSimulation(tunnel, location);
-						simulatePositionImpl();
-					}
+			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, () -> {
+				net.osmand.Location lastKnown = getLastKnownLocation();
+				if (lastKnown != null && lastKnown.getTime() > fixTime) {
+					// false positive case, still strange how we got here with removeMessages
+					return;
+				}
+				// Speed 120kmh, 2 seconds -> 60 m
+				List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(250);
+				if (tunnel != null) {
+					simulatePosition = new SimulationProvider();
+					simulatePosition.startSimulation(tunnel, location);
+					simulatePositionImpl();
 				}
 			}, START_LOCATION_SIMULATION_DELAY);
 		}

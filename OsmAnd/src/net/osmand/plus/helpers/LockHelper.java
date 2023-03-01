@@ -65,12 +65,7 @@ public class LockHelper implements SensorEventListener {
 		turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
-		lockRunnable = new Runnable() {
-			@Override
-			public void run() {
-				lock();
-			}
-		};
+		lockRunnable = this::lock;
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage(List<String> listCommands, List<String> played) {
@@ -131,12 +126,9 @@ public class LockHelper implements SensorEventListener {
 	private void timedUnlock(long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
 		if (wakeLock == null) {
-			uiHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					if (wakeLock == null) {
-						unlock();
-					}
+			uiHandler.post(() -> {
+				if (wakeLock == null) {
+					unlock();
 				}
 			});
 		}

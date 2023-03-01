@@ -1069,7 +1069,7 @@
     <string name="routing_attr_avoid_ferries_description">避開渡輪</string>
     <string name="routing_attr_avoid_motorway_name">避開高速公路</string>
     <string name="routing_attr_avoid_motorway_description">避開高速公路</string>
-    <string name="routing_attr_weight_name">重量限制</string>
+    <string name="routing_attr_weight_name">重量</string>
     <string name="routing_attr_weight_description">指定在道路上許可的車輛重量。</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">設定目的地</string>
@@ -1518,7 +1518,7 @@
     <string name="shared_string_copy">複製</string>
     <string name="rendering_attr_hideHouseNumbers_name">門牌號碼</string>
     <string name="routing_attr_avoid_borders_description">避開跨越國界</string>
-    <string name="routing_attr_height_name">高度限制</string>
+    <string name="routing_attr_height_name">高度</string>
     <string name="routing_attr_height_description">指定被許可在道路上行駛的車輛高度。</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
     <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份，對長途旅行很有用。</string>
@@ -3176,7 +3176,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">極度</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">未定義</string>
     <string name="routeInfo_piste_difficulty_name">滑雪難度</string>
-    <string name="routing_attr_width_name">寬度限制</string>
+    <string name="routing_attr_width_name">寬度</string>
     <string name="routing_attr_width_description">在路線當指定允許的車輛寬度限制。</string>
     <string name="avoid_in_routing_descr_">避開特定路線與道路類型</string>
     <string name="app_mode_utv">並排</string>
@@ -3655,7 +3655,7 @@
     <string name="speed_cameras_restart_descr">重新啟動應用程式以刪除所有測速照相的資料。</string>
     <string name="shared_string_uninstall_and_restart">解除安裝並重新啟動</string>
     <string name="routing_attr_length_description">指定路線上允許的車輛長度。</string>
-    <string name="routing_attr_length_name">長度限制</string>
+    <string name="routing_attr_length_name">長度</string>
     <string name="speed_cameras_removed_descr">此裝置沒有測速照相機。</string>
     <string name="app_mode_inline_skates">直排輪鞋</string>
     <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
@@ -4969,7 +4969,7 @@
     <string name="mtb_imba">國際山地自行車協會</string>
     <string name="mtb_imba_full">國際山地自行車協會</string>
     <string name="mtb_segment_classification">細分分類</string>
-    <string name="release_4_4_pre">• 這裡會有 4.4 版的字串</string>
+    
     <string name="rendering_attr_weatherPrecipitationContours_name">降水等值線</string>
     <string name="rendering_attr_weatherCloudContours_name">雲層等值線</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">風速等值線</string>
@@ -5031,5 +5031,19 @@
     <string name="sound_beep_complex">蜂鳴器：複合</string>
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
     <string name="last_synchronized">最後同步</string>
-    <string name="display_position_descr">預設值為「自動」，地圖方向為「移動方向」時是「底部」，其他情況下則為「中心」。</string>
+    <string name="display_position_automatic_descr">取決於地圖方向：底部為移動方向，中心為其他所有方向。</string>
+    <string name="change_default_tracks_appearance_confirmation_description">變更 %1$s 軌跡的外觀？</string>
+    <string name="empty_tracks">您沒有軌跡檔案。</string>
+    <string name="shared_string_apply_changes">套用變更</string>
+    <string name="shared_string_select_recent">選取最近</string>
+    <string name="no_visible_tracks_description">選取軌跡以在地圖上顯示。</string>
+    <string name="recently_visible">最近可見 %1$s</string>
+    <string name="no_visible_tracks">地圖上沒有軌跡</string>
+    <string name="empty_tracks_description">您可以使用 OsmAnd 匯入、建立或記錄軌跡檔案。</string>
+    <string name="change_appearance">變更外觀</string>
+    <string name="switch_folder">切換資料夾</string>
+    <string name="shared_string_on_map">在地圖上</string>
+    <string name="show_all_tracks">顯示所有軌跡</string>
+    <string name="shared_string_kilograms">公斤</string>
+    <string name="shared_string_yards">碼</string>
 </resources>

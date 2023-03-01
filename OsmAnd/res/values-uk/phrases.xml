@@ -341,6 +341,10 @@
     <string name="poi_recycling_car_batteries">Акумулятори автомобільні</string>
     <string name="poi_recycling_cars">Автомобілі</string>
     <string name="poi_recycling_bicycles">Велосипеди</string>
+    <string name="poi_recycling_plastic_bottle_caps">Кришки від пластикових пляшок</string>
+    <string name="poi_recycling_aluminium_cans">Алюмінієві банки</string>
+    <string name="poi_recycling_pet_drink_bottles">PET-пляшки від напоїв</string>
+    <string name="poi_recycling_textiles">Текстиль</string>
     <string name="poi_landfill">Звалище</string>
     <string name="poi_industrial">Промислова зона</string>
     <string name="poi_quarry">Карʼєр</string>

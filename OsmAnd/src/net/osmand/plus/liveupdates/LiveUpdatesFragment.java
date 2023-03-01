@@ -56,6 +56,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -399,8 +400,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		@Override
 		public void addData(@NonNull List<LocalIndexInfo> indexes) {
-			mapsList.addAll(indexes);
-			notifyDataSetChanged();
+			if (LocalIndexHelper.addUnique(mapsList, indexes)) {
+				notifyDataSetChanged();
+			}
 		}
 
 		@Override
@@ -564,12 +566,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onUpdateLocalIndex(item, isChecked, new Runnable() {
-							@Override
-							public void run() {
-								runSort();
-							}
-						});
+						onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort);
 					}
 				});
 			} else {

@@ -25,7 +25,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -204,18 +203,15 @@ public class RoutingHelper {
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
 		app.getWaypointHelper().setNewRoute(route);
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.routeWasCancelled();
-					}
+		app.runInUIThread(() -> {
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.routeWasCancelled();
 				}
 			}
 		});
@@ -243,18 +239,15 @@ public class RoutingHelper {
 	private synchronized void finishCurrentRoute() {
 		app.logRoutingEvent("finishCurrentRoute");
 		routeWasFinished = true;
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.routeWasFinished();
-					}
+		app.runInUIThread(() -> {
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.routeWasFinished();
 				}
 			}
 		});
@@ -471,7 +464,12 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0) {
-					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
+							routeNodes.get(currentRoute));
+					if (settings.APPROXIMATE_BEARING.get()) {
+						RoutingHelperUtils.approximateBearingIfNeeded(this, locationProjection,
+								currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					}
 				}
 			}
 			lastFixedLocation = currentLocation;
@@ -491,6 +489,11 @@ public class RoutingHelper {
 		} else {
 			return currentLocation;
 		}
+	}
+
+	public double getMaxAllowedProjectDist(@NonNull Location location) {
+		float posTolerance = getPosTolerance(location.hasAccuracy() ? location.getAccuracy() : 0);
+		return mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
 	}
 
 	private boolean updateCurrentRouteStatus(Location currentLocation, double posTolerance) {
@@ -546,12 +549,9 @@ public class RoutingHelper {
 			if (onDestinationReached) {
 				clearCurrentRoute(null, null);
 				setRoutePlanningMode(false);
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
-						//settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
-					}
+				app.runInUIThread(() -> {
+					settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
+					//settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 				});
 				finishCurrentRoute();
 				// targets.clearPointToNavigate(false);
@@ -875,12 +875,7 @@ public class RoutingHelper {
 	}
 
 	private void showMessage(String msg) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				app.showToastMessage(msg);
-			}
-		});
+		app.runInUIThread(() -> app.showToastMessage(msg));
 	}
 
 	@NonNull

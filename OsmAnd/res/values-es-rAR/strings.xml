@@ -359,7 +359,7 @@
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
-    <string name="routing_attr_weight_name">Límite de peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_mr">Marathi</string>
@@ -1523,7 +1523,7 @@
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
-    <string name="routing_attr_height_name">Límite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
@@ -1592,7 +1592,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
-    <string name="restart_is_required">Se requiere un reinicio para aplicar los cambios.</string>
+    <string name="restart_is_required">Debes reiniciar para aplicar los cambios.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
@@ -3183,7 +3183,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
     <string name="app_mode_utv">En paralelo</string>
@@ -3662,7 +3662,7 @@
     <string name="item_deleted">%1$s borrado</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
-    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="routing_attr_length_name">Longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
@@ -4994,7 +4994,7 @@
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
-    <string name="release_4_4_pre">• Aquí estarán las cadenas para la versión 4.4</string>
+    
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
@@ -5054,5 +5054,23 @@
     <string name="sound_beep_complex">Pitido: complejo</string>
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_descr">El valor predefinido es «Automático», siendo «Abajo» para la orientación del mapa «En dirección al movimiento» y siendo «Centro» en los demás casos.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
+    <string name="shared_string_apply_changes">Aplicar cambios</string>
+    <string name="no_visible_tracks">Sin trazas en el mapa</string>
+    <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
+    <string name="recently_visible">Última visible «%1$s»</string>
+    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
+    <string name="empty_tracks">No tienes archivos de trazas.</string>
+    <string name="shared_string_select_recent">Marcar reciente</string>
+    <string name="change_appearance">Cambiar aspecto</string>
+    <string name="switch_folder">Alternar carpeta</string>
+    <string name="show_all_tracks">Mostrar todas las trazas</string>
+    <string name="shared_string_on_map">En el mapa</string>
+    <string name="shared_string_yards">yardas</string>
+    <string name="shared_string_kilograms">kilogramos</string>
+    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="inch">in</string>
 </resources>

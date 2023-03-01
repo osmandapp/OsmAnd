@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.ui.GpxInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -17,7 +17,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
+public class UploadGPXFilesTask extends AsyncTask<GPXInfo, String, String> {
 
 	private final OsmandApplication app;
 	private final WeakReference<Activity> activityRef;
@@ -41,12 +41,12 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	}
 
 	@Override
-	protected String doInBackground(GpxInfo... params) {
+	protected String doInBackground(GPXInfo... params) {
 		int count = 0;
 		int total = 0;
-		for (GpxInfo info : params) {
-			if (!isCancelled() && info.file != null) {
-				File file = info.file;
+		for (GPXInfo info : params) {
+			if (!isCancelled() && info.getFile() != null) {
+				File file = info.getFile();
 				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
 				String gpxDescription = Algorithms.isEmpty(commonDescription.trim())
 						? Algorithms.getFileNameWithoutExtension(info.getFileName())

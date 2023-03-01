@@ -4974,7 +4974,7 @@
     <string name="mtb_segment_classification">Klasyfikacja segmentów</string>
     <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
     <string name="av_audio_format_bottom_sheet_descr">Wybierz format wyjścia dźwięku. Typ pliku dźwięku to 3GPP (.3gp).</string>
-    <string name="release_4_4_pre">• Tutaj będą ciągi napisowe dla wydania 4.4</string>
+    
     <string name="choose_what_to_sync">Wybierz co synchronizować</string>
     <string name="cloud_sync_progress">Synchronizacja…%1$s</string>
     <string name="checking_progress">Sprawdzanie…</string>
@@ -5035,5 +5035,7 @@
     <string name="sound_beep_simple">Sygnał dźwiękowy: prosty</string>
     <string name="sound_beep_simple_loud">Sygnał dźwiękowy: prosty głośny</string>
     <string name="last_synchronized">Ostatnia synchronizacja</string>
-    <string name="display_position_descr">Domyślnym ustawieniem jest „Automatyczny”, czyli „Dół” dla orientacji mapy, „Kierunek ruchu” i „Środek” we wszystkich innych przypadkach.</string>
+    <string name="shared_string_yards">jardów</string>
+    <string name="shared_string_apply_changes">Zatwierdź zmiany</string>
+    <string name="shared_string_kilograms">kilogramów</string>
 </resources>

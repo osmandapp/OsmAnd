@@ -850,22 +850,19 @@ public class ExternalApiHelper {
 						public void onSearchComplete(List<AidlSearchResultWrapper> resultSet) {
 							MapActivity mapActivity = mapActivityRef.get();
 							if (mapActivity != null) {
-								mapActivity.getMyApplication().runInUIThread(new Runnable() {
-									@Override
-									public void run() {
-										ProgressDialog dlg = dlgRef.get();
-										if (dlg != null) {
-											dlg.dismiss();
-										}
-										if (resultSet.size() > 0) {
-											AidlSearchResultWrapper res = resultSet.get(0);
-											LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
-											PointDescription toDesc = new PointDescription(
-													PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
-											startNavigation(mapActivity, from, fromDesc, to, toDesc, mode, checkLocationPermission);
-										} else {
-											mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
-										}
+								mapActivity.getMyApplication().runInUIThread(() -> {
+									ProgressDialog dialog = dlgRef.get();
+									if (dialog != null) {
+										dialog.dismiss();
+									}
+									if (resultSet.size() > 0) {
+										AidlSearchResultWrapper res = resultSet.get(0);
+										LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
+										PointDescription toDesc = new PointDescription(
+												PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
+										startNavigation(mapActivity, from, fromDesc, to, toDesc, mode, checkLocationPermission);
+									} else {
+										mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
 									}
 								});
 							}
@@ -888,25 +885,22 @@ public class ExternalApiHelper {
 		int limit = totalLimit;
 
 		SearchUICore core = app.getSearchUICore().getCore();
-		core.setOnResultsComplete(new Runnable() {
-			@Override
-			public void run() {
-				List<AidlSearchResultWrapper> resultSet = new ArrayList<>();
-				SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
-				int count = 0;
-				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
-					String name = QuickSearchListItem.getName(app, r);
-					String typeName = QuickSearchListItem.getTypeName(app, r);
-					AidlSearchResultWrapper result = new AidlSearchResultWrapper(r.location.getLatitude(), r.location.getLongitude(),
-							name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
-					resultSet.add(result);
-					count++;
-					if (limit != -1 && count >= limit) {
-						break;
-					}
+		core.setOnResultsComplete(() -> {
+			List<AidlSearchResultWrapper> resultSet = new ArrayList<>();
+			SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
+			int count = 0;
+			for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+				String name = QuickSearchListItem.getName(app, r);
+				String typeName = QuickSearchListItem.getTypeName(app, r);
+				AidlSearchResultWrapper result = new AidlSearchResultWrapper(r.location.getLatitude(), r.location.getLongitude(),
+						name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
+				resultSet.add(result);
+				count++;
+				if (limit != -1 && count >= limit) {
+					break;
 				}
-				callback.onSearchComplete(resultSet);
 			}
+			callback.onSearchComplete(resultSet);
 		});
 
 		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())

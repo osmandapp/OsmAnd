@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
@@ -40,7 +40,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
@@ -149,7 +149,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 			selectedFolder = allFilesFolder;
 		}
 		List<GPXInfo> allGpxList = getSortedGPXFilesInfo(gpxDir, null, false);
-		currentlyRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), 0, 0);
+		currentlyRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), null);
 		if (isShowCurrentGpx()) {
 			allGpxList.add(0, currentlyRecording);
 		}

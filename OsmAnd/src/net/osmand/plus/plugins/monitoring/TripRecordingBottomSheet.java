@@ -41,7 +41,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.ui.GPXTabItemType;
 import net.osmand.plus.myplaces.ui.SegmentActionsListener;
@@ -155,12 +155,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		LinearLayout showTrackContainer = itemView.findViewById(R.id.show_track_on_map);
 		trackAppearanceIcon = showTrackContainer.findViewById(R.id.additional_button_icon);
 		createShowTrackItem(showTrackContainer, trackAppearanceIcon, ItemType.SHOW_TRACK.getTitleId(),
-				this, nightMode, new Runnable() {
-					@Override
-					public void run() {
-						hide();
-					}
-				});
+				this, nightMode, this::hide);
 
 		segmentsTabs = itemView.findViewById(R.id.segments_container);
 		createSegmentsTabs(segmentsTabs);

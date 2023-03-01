@@ -53,6 +53,9 @@ public class RendererRegistry {
 	public static final String WEATHER_RENDER = "Weather";
 	public static final String CONTOURLINES_RENDER = "Contour lines";
 	public static final String DEPTHCONTOURLINES_RENDER = "Depth contour lines";
+	public static final String ROUTES_RENDER = "Routes";
+	public static final String OSMASSISTANT_RENDER = "OSM Assistant";
+	public static final String PUBLICTRANSPORTROUTES_RENDER = "Public transport routes";
 
 	private final OsmandApplication app;
 
@@ -84,6 +87,9 @@ public class RendererRegistry {
 		internalRenderers.put(WEATHER_RENDER, "weather" + ADDON_RENDERER_INDEX_EXT);
 		internalRenderers.put(CONTOURLINES_RENDER, "contourlines" + ADDON_RENDERER_INDEX_EXT);
 		internalRenderers.put(DEPTHCONTOURLINES_RENDER, "depthcontourlines" + ADDON_RENDERER_INDEX_EXT);
+		internalRenderers.put(ROUTES_RENDER, "routes" + ADDON_RENDERER_INDEX_EXT);
+		internalRenderers.put(OSMASSISTANT_RENDER, "osmassistant" + ADDON_RENDERER_INDEX_EXT);
+		internalRenderers.put(PUBLICTRANSPORTROUTES_RENDER, "publictransportroutes" + ADDON_RENDERER_INDEX_EXT);
 	}
 
 	public RenderingRulesStorage defaultRender() {

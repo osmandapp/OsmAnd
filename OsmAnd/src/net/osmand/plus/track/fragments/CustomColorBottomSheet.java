@@ -19,17 +19,23 @@ import com.jaredrummler.android.colorpicker.ColorPanelView;
 import com.jaredrummler.android.colorpicker.ColorPickerView;
 import com.jaredrummler.android.colorpicker.ColorPickerView.OnColorChangedListener;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.track.helpers.GPXDatabase;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implements OnColorChangedListener {
 
@@ -164,6 +170,22 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 			((ColorPickerListener) target).onColorSelected(prevColor, newColor);
 		}
 		dismiss();
+	}
+
+	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {
+		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+		List<GPXDatabase.GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
+		for (GPXDatabase.GpxDataItem dataItem : gpxDataItems) {
+			if (prevColor == dataItem.getColor()) {
+				gpxDbHelper.updateColor(dataItem, newColor);
+			}
+		}
+		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();
+		for (SelectedGpxFile selectedGpxFile : files) {
+			if (prevColor == selectedGpxFile.getGpxFile().getColor(0)) {
+				selectedGpxFile.getGpxFile().setColor(newColor);
+			}
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target, @Nullable Integer prevColor) {

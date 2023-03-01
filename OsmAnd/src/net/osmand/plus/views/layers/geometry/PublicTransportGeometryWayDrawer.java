@@ -58,7 +58,6 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
-		int outlineId = OUTLINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		RenderingLineAttributes attrsPT = getContext().getAttrsPT();
@@ -67,10 +66,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 		for (DrawPathData31 data : pathsData) {
 			if (prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique())) {
 				if (prevStyle instanceof GeometryTransportWayStyle) {
-					buildVectorOutline(collection, baseOrder--, outlineId++, prevStyle.getStrokeColor(0),
-							outlineWidth, outlineWidth - width, dataArr);
+					int outlineColor = prevStyle.getStrokeColor(0);
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, prevStyle,
-							prevStyle.getColor(0), width, null, false, dataArr);
+							prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr);
 				} else {
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 				}
@@ -81,10 +79,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {
 			if (prevStyle instanceof GeometryTransportWayStyle) {
-				buildVectorOutline(collection, baseOrder--, outlineId, prevStyle.getStrokeColor(0),
-						outlineWidth, outlineWidth - width, dataArr);
+				int outlineColor = prevStyle.getStrokeColor(0);
 				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, prevStyle,
-						prevStyle.getColor(0), width, null, false, dataArr);
+						prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr);
 			} else {
 				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 			}

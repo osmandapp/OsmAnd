@@ -2,111 +2,80 @@ package net.osmand.plus.settings.preferences;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.vehiclesize.SizeType;
+import net.osmand.plus.settings.vehiclesize.VehicleSizes;
+import net.osmand.plus.settings.enums.MetricsConstants;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 public class SizePreference extends DialogPreference {
 
-	private String[] entries;
-	private String[] entryValues;
-	private String description;
-	private VehicleSizeAssets assets;
-
-	public VehicleSizeAssets getAssets() {
-		return assets;
-	}
-
-	public void setAssets(VehicleSizeAssets assets) {
-		this.assets = assets;
-	}
-
-	public void setDefaultValue(String defaultValue) {
-		this.defaultValue = defaultValue;
-	}
-
+	private SizeType sizeType;
+	private MetricsConstants lengthMetricSystem;
+	private VehicleSizes vehicleSizes;
 	private String defaultValue;
 
 	public SizePreference(Context context) {
 		super(context);
 	}
 
-	public String[] getEntries() {
-		return entries;
+	@NonNull
+	public VehicleSizes getVehicleSizes() {
+		return vehicleSizes;
 	}
 
-	public void setEntries(String[] entries) {
-		this.entries = entries;
+	public void setVehicleSizes(VehicleSizes vehicleSizes) {
+		this.vehicleSizes = vehicleSizes;
 	}
 
-	public String[] getEntryValues() {
-		return entryValues;
+	@NonNull
+	public SizeType getSizeType() {
+		return sizeType;
 	}
 
-	public void setEntryValues(String[] entryValues) {
-		this.entryValues = entryValues;
+	public void setSizeType(@NonNull SizeType sizeType) {
+		this.sizeType = sizeType;
 	}
 
-	public String getDescription() {
-		return description;
+	@NonNull
+	public MetricsConstants getLengthMetricSystem() {
+		return lengthMetricSystem;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setLengthMetricSystem(@NonNull MetricsConstants lengthMetric) {
+		this.lengthMetricSystem = lengthMetric;
 	}
 
-	public String getEntryFromValue(String value) {
-		for (int i = 0; i < entryValues.length; i++) {
-			if (entryValues[i].equals(value)) {
-				return entries[i];
-			}
-		}
-		return "";
-	}
-
-	public float getValueFromEntries(String item) {
-		String[] entries = getEntries();
-		for (int i = 0; i < entries.length; i++) {
-			if (entries[i].equals(item)) {
-				try {
-					return Float.parseFloat(entryValues[i]);
-				} catch (NumberFormatException e) {
-					return 0.0f;
-				}
-			}
-		}
-		return 0.0f;
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 	@Override
 	public CharSequence getSummary() {
-		String summary = entries[0];
-		String persistedString = getValue();
-		if (Algorithms.isBlank(persistedString)) {
-			return summary;
+		float value = vehicleSizes.readSavedValue(this);
+		String none = getString(R.string.shared_string_none);
+		if (value == 0.0f) {
+			return none;
 		}
-		if (!isPersistedStringEqualsZero(persistedString)) {
-			try {
-				DecimalFormat df = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
-				persistedString = df.format(Double.parseDouble(persistedString) + 0.01d);
-				summary = String.format(getContext().getString(R.string.ltr_or_rtl_combine_via_space),
-						persistedString, getContext().getString(assets.getMetricShortRes()));
-			} catch (NumberFormatException e) {
-				summary = entries[0];
-			}
+		try {
+			DecimalFormat formatter = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+			String valueStr = formatter.format(value);
+			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
+			String metricShort = getString(vehicleSizes.getMetricShortStringId(sizeType, lengthMetricSystem));
+			return String.format(pattern, valueStr, metricShort);
+		} catch (NumberFormatException e) {
+			return none;
 		}
-		return summary;
 	}
 
-	private boolean isPersistedStringEqualsZero(String persistedString) {
-		return BigDecimal.ZERO.compareTo(new BigDecimal(persistedString)) == 0;
+	private String getString(int stringId) {
+		return getContext().getString(stringId);
 	}
 
 	public String getValue () {

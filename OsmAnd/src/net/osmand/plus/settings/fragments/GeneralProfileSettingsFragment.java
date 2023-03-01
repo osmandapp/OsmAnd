@@ -16,19 +16,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.IDialogController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
+import net.osmand.plus.settings.controllers.CompassModeDialogController;
+import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -66,7 +74,23 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
 		setupTrackballForMovementsPref();
+
+		updateDialogControllerCallbacks();
 	}
+
+	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = (buttonView, isChecked) -> {
+		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		if (isChecked) {
+			getPreferenceManager().showDialog(externalInputDevice);
+			buttonView.setChecked(false);
+		} else {
+			if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
+				externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
+			} else {
+				buttonView.setChecked(true);
+			}
+		}
+	};
 
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
@@ -82,23 +106,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
 		}
 	}
-
-	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = new CompoundButton.OnCheckedChangeListener() {
-		@Override
-		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-			if (isChecked) {
-				getPreferenceManager().showDialog(externalInputDevice);
-				buttonView.setChecked(false);
-			} else {
-				if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
-					externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
-				} else {
-					buttonView.setChecked(true);
-				}
-			}
-		}
-	};
 
 	private void setupAppThemePref() {
 		ListPreferenceEx appTheme =
@@ -135,22 +142,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupRotateMapPref() {
-		ListPreferenceEx rotateMap = findPreference(settings.ROTATE_MAP.getId());
-		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_north_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt), getString(R.string.rotate_map_manual_opt)});
-		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS, OsmandSettings.ROTATE_MAP_MANUAL});
-		rotateMap.setIcon(getRotateMapIcon());
-	}
+		ApplicationMode appMode = getSelectedAppMode();
+		CommonPreference<Integer> preference = settings.ROTATE_MAP;
+		int value = preference.getModeValue(appMode);
+		CompassMode compassMode = CompassMode.getByValue(value);
 
-	private Drawable getRotateMapIcon() {
-		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
-			case OsmandSettings.ROTATE_MAP_NONE:
-				return getActiveIcon(R.drawable.ic_action_direction_north);
-			case OsmandSettings.ROTATE_MAP_MANUAL:
-				return getActiveIcon(R.drawable.ic_action_direction_north);
-			case OsmandSettings.ROTATE_MAP_BEARING:
-				return getActiveIcon(R.drawable.ic_action_direction_movement);
-			default:
-				return getActiveIcon(R.drawable.ic_action_direction_compass);
+		Preference uiPreference = findPreference(preference.getId());
+		if (uiPreference != null) {
+			Drawable icon = getActiveIcon(compassMode.getIconId(isNightMode()));
+			uiPreference.setIcon(icon);
+			uiPreference.setSummary(compassMode.getTitleId());
 		}
 	}
 
@@ -165,28 +166,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupPositionPlacementOnMapPref() {
+		ApplicationMode appMode = getSelectedAppMode();
 		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
-		String entries[] = {getString(R.string.shared_string_automatic), getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)};
+		int value = preference.getModeValue(appMode);
+		MapFocus mapFocus = MapFocus.getByValue(value);
 
-		Preference positionPlacementPref = findPreference(preference.getId());
-		positionPlacementPref.setIcon(getPositionPlacementOnMapIcon());
-		positionPlacementPref.setSummary(entries[preference.getModeValue(getSelectedAppMode())]);
-
-		ListPreferenceEx positionPlacement = findPreference(preference.getId());
-		positionPlacement.setDescription(R.string.display_position_descr);
-		positionPlacement.setIcon(getPositionPlacementOnMapIcon());
-		positionPlacement.setEntries(new String[] {entries[0], entries[1], entries[2]});
-		positionPlacement.setEntryValues(new Integer[] {0, 1, 2});
-	}
-
-	private Drawable getPositionPlacementOnMapIcon() {
-		switch (settings.POSITION_PLACEMENT_ON_MAP.getModeValue(getSelectedAppMode())) {
-			case 1:
-				return getActiveIcon(R.drawable.ic_action_display_position_center);
-			case 2:
-				return getActiveIcon(R.drawable.ic_action_display_position_bottom);
-			default:
-				return getActiveIcon(R.drawable.ic_action_display_position_auto);
+		Preference uiPreference = findPreference(preference.getId());
+		if (uiPreference != null) {
+			Drawable icon = getActiveIcon(mapFocus.getIconId());
+			uiPreference.setIcon(icon);
+			uiPreference.setSummary(mapFocus.getTitleId());
 		}
 	}
 
@@ -425,7 +414,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			updateAllSettings();
 		} else {
 			applyPreference(prefId, applyToAllProfiles, newValue);
-			MapViewTrackingUtilities mapViewTrackingUtilities = requireMyApplication().getMapViewTrackingUtilities();
+			MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 			if (mapViewTrackingUtilities != null) {
 				mapViewTrackingUtilities.updateSettings();
 			}
@@ -434,21 +423,49 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(settings.DRIVING_REGION.getId())) {
+		String key = preference.getKey();
+		ApplicationMode appMode = getSelectedAppMode();
+		if (key.equals(settings.DRIVING_REGION.getId())) {
 			showDrivingRegionDialog();
+			return true;
+		} else if (key.equals(settings.ROTATE_MAP.getId())) {
+			CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
+			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
+			controller.setCallback(this);
+			return true;
+		} else if (key.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
+			MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
+			showSingleSelectionDialog(MapFocusDialogController.PROCESS_ID, controller);
+			controller.setCallback(this);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
 
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String prefId = preference.getKey();
-		if (settings.ROTATE_MAP.getId().equals(prefId)) {
-			onConfirmPreferenceChange(prefId, newValue, ApplyQueryType.SNACK_BAR);
-			return false;
+	private void showSingleSelectionDialog(@NonNull String processId,
+	                                       @NonNull IDialogController controller) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			DialogManager dialogManager = app.getDialogManager();
+			dialogManager.register(processId, controller);
+			FragmentManager fm = activity.getSupportFragmentManager();
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
 		}
-		return super.onPreferenceChange(preference, newValue);
+	}
+
+	private void updateDialogControllerCallbacks() {
+		IDialogController controller;
+		DialogManager dialogManager = app.getDialogManager();
+
+		controller = dialogManager.findController(CompassModeDialogController.PROCESS_ID);
+		if (controller instanceof CompassModeDialogController) {
+			((CompassModeDialogController) controller).setCallback(this);
+		}
+
+		controller = dialogManager.findController(MapFocusDialogController.PROCESS_ID);
+		if (controller instanceof MapFocusDialogController) {
+			((MapFocusDialogController) controller).setCallback(this);
+		}
 	}
 
 	@Override
@@ -457,8 +474,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (preference != null) {
 			if (settings.OSMAND_THEME.getId().equals(prefId)) {
 				preference.setIcon(getOsmandThemeIcon());
-			} else if (settings.ROTATE_MAP.getId().equals(prefId)) {
-				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
 			}

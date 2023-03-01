@@ -50,7 +50,8 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
@@ -784,6 +785,8 @@ public class OsmandSettings {
 		}
 	}.makeProfile().cache();
 
+	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal().makeShared();
+
 	public final CommonPreference<DistanceByTapTextSize> DISTANCE_BY_TAP_TEXT_SIZE = new EnumStringPreference<>(this, "distance_by_tap_text_size", DistanceByTapTextSize.NORMAL, DistanceByTapTextSize.values()).makeProfile();
 
 	public final OsmandPreference<RadiusRulerMode> RADIUS_RULER_MODE = new EnumStringPreference<>(this, "ruler_mode", RadiusRulerMode.FIRST, RadiusRulerMode.values()).makeProfile();
@@ -1295,7 +1298,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> BACKUP_PURCHASE_START_TIME = new LongPreference(this, "promo_website_start_time", 0L).makeGlobal();
 	public final OsmandPreference<Long> BACKUP_PURCHASE_EXPIRE_TIME = new LongPreference(this, "promo_website_expire_time", 0L).makeGlobal();
 	public final CommonPreference<SubscriptionState> BACKUP_PURCHASE_STATE = new EnumStringPreference<>(this, "promo_website_state", SubscriptionState.UNDEFINED, SubscriptionState.values()).makeGlobal();
-	public final CommonPreference<SubscriptionOrigin> BACKUP_SUBSCRIPTION_ORIGIN = new EnumStringPreference<>(this, "backup_subscription_origin", SubscriptionOrigin.UNDEFINED, SubscriptionOrigin.values()).makeGlobal();
+	public final CommonPreference<PurchaseOrigin> BACKUP_SUBSCRIPTION_ORIGIN = new EnumStringPreference<>(this, "backup_subscription_origin", PurchaseOrigin.UNDEFINED, PurchaseOrigin.values()).makeGlobal();
 	public final OsmandPreference<Period.PeriodUnit> BACKUP_PURCHASE_PERIOD = new EnumStringPreference<>(this, "backup_purchase_period", null, PeriodUnit.values()).makeGlobal();
 
 
@@ -1508,7 +1511,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
-
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,
@@ -2849,6 +2851,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
 
+	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
+			new BooleanPreference(this, "approximate_bearing", true).makeProfile();
+
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
 
@@ -2896,7 +2901,7 @@ public class OsmandSettings {
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference(this, "osmand_theme", OSMAND_LIGHT_THEME) {
+			new IntPreference(this, "osmand_theme", isSupportSystemDefaultTheme() ? SYSTEM_DEFAULT_THEME : OSMAND_LIGHT_THEME) {
 				@Override
 				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 					Integer theme = parseString(json.getString(getId()));

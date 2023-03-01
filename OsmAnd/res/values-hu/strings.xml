@@ -1091,7 +1091,7 @@
     <string name="routing_attr_avoid_ferries_description">Elkerüli a kompokat</string>
     <string name="routing_attr_avoid_motorway_name">Autópálya nélkül</string>
     <string name="routing_attr_avoid_motorway_description">Elkerüli az autópályákat</string>
-    <string name="routing_attr_weight_name">Súlykorlátozás</string>
+    <string name="routing_attr_weight_name">Súly</string>
     <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó súlykorlátozást.</string>
     <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verziója óta a régi tárolási mappa (%s) elavult. Másoljuk az összes OsmAnd fájlt az új helyre\?
 \n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
@@ -1518,7 +1518,7 @@
     <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
-    <string name="routing_attr_height_name">Magasságkorlátozás</string>
+    <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
@@ -3031,7 +3031,7 @@
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">A terület megtekintéséhez töltse le %s részletes térképét.</string>
     <string name="change_data_storage_folder">Tároló mappa módosítása</string>
-    <string name="routing_attr_width_name">Szélességkorlátozás</string>
+    <string name="routing_attr_width_name">Szélesség</string>
     <string name="routing_attr_width_description">Adja meg az útvonalakon a járművekre vonatkozó szélességkorlátozást.</string>
     <string name="avoid_in_routing_descr_">Bizonyos útvonalak és úttípusok elkerülése</string>
     <string name="shared_string_osmand_usage">OsmAnd használat</string>
@@ -3583,7 +3583,7 @@
     <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
-    <string name="routing_attr_length_name">Hosszkorlátozás</string>
+    <string name="routing_attr_length_name">Hossz</string>
     <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipaxadatokat.</string>
     <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
     <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
@@ -4972,7 +4972,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Felhő-izovonalak</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Csapadék-izovonalak</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Szélsebesség-izovonalak</string>
-    <string name="release_4_4_pre">• Itt a 4.4 kiadáshoz szükséges karakterláncok lesznek</string>
+    
     <string name="open_weather_action">Időjárás megnyitása</string>
     <string name="shared_string_open">Megnyitás</string>
     <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
@@ -5031,5 +5031,23 @@
     <string name="sound_beep_simple_loud">Hangjelzés: egyszerű hangos</string>
     <string name="sound_beep_simple">Hangjelzés: egyszerű</string>
     <string name="last_synchronized">Utoljára szinkronizálva</string>
-    <string name="display_position_descr">Az alapértelmezett az \'automatikus\', ami \'Alul\' a mozgáskövető térképtájolásnál és \'Középen\' minden más esetben.</string>
+    <string name="display_position_automatic_descr">A térkép tájolásától függően: alul a mozgásirány követésénél és középen minden más esetben.</string>
+    <string name="shared_string_on_map">Térképen</string>
+    <string name="no_visible_tracks">Nincsenek nyomvonalak a térképen</string>
+    <string name="change_appearance">Megjelenés módosítása</string>
+    <string name="show_all_tracks">Minden nyomvonal megjelenítése</string>
+    <string name="switch_folder">Mappa váltása</string>
+    <string name="shared_string_select_recent">Legutóbbi választása</string>
+    <string name="empty_tracks">Nincsenek nyomvonal fájljai.</string>
+    <string name="recently_visible">Legutóbb látható %1$s</string>
+    <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
+    <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
+    <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
+    <string name="shared_string_kilograms">kilogramm</string>
+    <string name="shared_string_yards">yard</string>
+    <string name="shared_string_inches">hüvelyk</string>
+    <string name="approximate_bearing_descr">Az irányszöget számítással határozza meg, ha az eszközről nem érhető el</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Hozzávetőleges irányszög</string>
 </resources>

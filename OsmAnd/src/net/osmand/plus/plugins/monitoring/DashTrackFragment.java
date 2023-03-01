@@ -15,20 +15,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
 import net.osmand.plus.myplaces.ui.FavoritesActivity;
-import net.osmand.plus.myplaces.ui.GpxInfo;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -122,9 +121,9 @@ public class DashTrackFragment extends DashBaseFragment {
 			totalCount--;
 		}
 		if (list.size() < totalCount) {
-			List<GPXInfo> res = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
-			for (GPXInfo r : res) {
-				String name = r.getFileName();
+			List<GPXInfo> gpxInfos = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+			for (GPXInfo gpxInfo : gpxInfos) {
+				String name = gpxInfo.getFileName();
 				if (!list.contains(name)) {
 					list.add(name);
 					if (list.size() >= totalCount) {
@@ -161,9 +160,8 @@ public class DashTrackFragment extends DashBaseFragment {
 
 		for (String filename : list) {
 			File file = new File(filename);
-			GpxInfo info = new GpxInfo();
+			GPXInfo info = new GPXInfo(filename, file);
 			info.subfolder = "";
-			info.file = file;
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 			AvailableGPXFragment.updateGpxInfoView(itemView, info, app, true, null);
 
@@ -247,9 +245,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void updateShowOnMap(OsmandApplication app, File f, View pView, ImageButton showOnMap) {
+	private void updateShowOnMap(OsmandApplication app, File file, View pView, ImageButton showOnMap) {
 		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(f.getAbsolutePath());
+		SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 		if (selected != null) {
 			showOnMap.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_show_on_map, R.color.color_distance));
 			showOnMap.setOnClickListener(new View.OnClickListener() {
@@ -258,16 +256,15 @@ public class DashTrackFragment extends DashBaseFragment {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.hideFromMap().syncGroup().saveSelection();
 					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
-					GpxInfo info = new GpxInfo();
+					GPXInfo info = new GPXInfo(file.getName(), file);
 					info.subfolder = "";
-					info.file = f;
 					AvailableGPXFragment.updateGpxInfoView(pView, info, app, true, null);
-					updateShowOnMap(app, f, v, showOnMap);
+					updateShowOnMap(app, file, v, showOnMap);
 				}
 			});
 		} else {
 			showOnMap.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_show_on_map));
-			showOnMap.setOnClickListener(v -> GpxFileLoaderTask.loadGpxFile(f, getActivity(), gpxFile -> {
+			showOnMap.setOnClickListener(v -> GpxFileLoaderTask.loadGpxFile(file, getActivity(), gpxFile -> {
 				Activity activity = getActivity();
 				if (activity != null) {
 					showOnMap(activity, gpxFile);
@@ -296,13 +293,10 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	private void startHandler(View v) {
 		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (updateEnable) {
-					updateCurrentTrack(v, getActivity(), getMyApplication());
-					startHandler(v);
-				}
+		updateCurrentRecordingTrack.postDelayed(() -> {
+			if (updateEnable) {
+				updateCurrentTrack(v, getActivity(), getMyApplication());
+				startHandler(v);
 			}
 		}, 1500);
 	}

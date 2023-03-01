@@ -32,7 +32,7 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
@@ -486,8 +486,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
 						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
-				lastProjection = currentAnimatedRoute > 0 ? RoutingHelperUtils.getProject(currentLocation,
-						locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute)) : null;
+				lastProjection = currentAnimatedRoute > 0
+						? RoutingHelperUtils.getProject(currentLocation, locations.get(currentAnimatedRoute - 1),
+						locations.get(currentAnimatedRoute)) : null;
+				if (lastProjection != null && app.getSettings().APPROXIMATE_BEARING.get()) {
+					RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+							locations.get(currentAnimatedRoute - 1), locations.get(currentAnimatedRoute));
+				}
 				startLocationIndex = currentAnimatedRoute;
 				if (lastFixedLocationChanged) {
 					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {

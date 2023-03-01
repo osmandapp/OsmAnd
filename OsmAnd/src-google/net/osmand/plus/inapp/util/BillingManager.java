@@ -154,27 +154,24 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 * Start a purchase or subscription replace flow
 	 */
 	public void initiatePurchaseFlow(Activity activity, SkuDetails skuDetails, String oldSku, String purchaseToken) {
-		Runnable purchaseFlowRequest = new Runnable() {
-			@Override
-			public void run() {
-				LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
-				BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
-						.setSkuDetails(skuDetails);
-				if (!TextUtils.isEmpty(mObfuscatedAccountId)) {
-					paramsBuilder.setObfuscatedAccountId(mObfuscatedAccountId);
-				}
-				if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
-					paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
-				}
-				if (oldSku != null && purchaseToken != null) {
-					SubscriptionUpdateParams.Builder updateParamsBuilder = SubscriptionUpdateParams.newBuilder();
-					updateParamsBuilder.setOldSkuPurchaseToken(purchaseToken);
-
-					paramsBuilder.setSubscriptionUpdateParams(updateParamsBuilder.build());
-				}
-				BillingFlowParams purchaseParams = paramsBuilder.build();
-				mBillingClient.launchBillingFlow(activity, purchaseParams);
+		Runnable purchaseFlowRequest = () -> {
+			LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
+			BillingFlowParams.Builder paramsBuilder = BillingFlowParams.newBuilder()
+					.setSkuDetails(skuDetails);
+			if (!TextUtils.isEmpty(mObfuscatedAccountId)) {
+				paramsBuilder.setObfuscatedAccountId(mObfuscatedAccountId);
 			}
+			if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
+				paramsBuilder.setObfuscatedProfileId(mObfuscatedProfileId);
+			}
+			if (oldSku != null && purchaseToken != null) {
+				SubscriptionUpdateParams.Builder updateParamsBuilder = SubscriptionUpdateParams.newBuilder();
+				updateParamsBuilder.setOldSkuPurchaseToken(purchaseToken);
+
+				paramsBuilder.setSubscriptionUpdateParams(updateParamsBuilder.build());
+			}
+			BillingFlowParams purchaseParams = paramsBuilder.build();
+			mBillingClient.launchBillingFlow(activity, purchaseParams);
 		};
 
 		executeServiceRequest(purchaseFlowRequest);
@@ -199,22 +196,13 @@ public class BillingManager implements PurchasesUpdatedListener {
 	public void querySkuDetailsAsync(@SkuType String itemType, List<String> skuList,
 	                                 SkuDetailsResponseListener listener) {
 		// Creating a runnable from the request to use it inside our connection retry policy below
-		Runnable queryRequest = new Runnable() {
-			@Override
-			public void run() {
-				// Query the purchase async
-				SkuDetailsParams params = SkuDetailsParams.newBuilder()
-						.setSkusList(skuList)
-						.setType(itemType)
-						.build();
-				mBillingClient.querySkuDetailsAsync(params,
-						new SkuDetailsResponseListener() {
-							@Override
-							public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-								listener.onSkuDetailsResponse(billingResult, skuDetailsList);
-							}
-						});
-			}
+		Runnable queryRequest = () -> {
+			// Query the purchase async
+			SkuDetailsParams params = SkuDetailsParams.newBuilder()
+					.setSkusList(skuList)
+					.setType(itemType)
+					.build();
+			mBillingClient.querySkuDetailsAsync(params, listener);
 		};
 
 		executeServiceRequest(queryRequest);
@@ -244,12 +232,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 		};
 
 		// Creating a runnable from the request to use it inside our connection retry policy below
-		Runnable consumeRequest = new Runnable() {
-			@Override
-			public void run() {
-				// Consume the purchase async
-				mBillingClient.consumeAsync(consumeParams, onConsumeListener);
-			}
+		Runnable consumeRequest = () -> {
+			// Consume the purchase async
+			mBillingClient.consumeAsync(consumeParams, onConsumeListener);
 		};
 
 		executeServiceRequest(consumeRequest);
@@ -356,31 +341,25 @@ public class BillingManager implements PurchasesUpdatedListener {
 	 * a listener
 	 */
 	public void queryPurchases(@Nullable QueryPurchasesListener queryPurchasesListener) {
-		Runnable queryToExecute = new Runnable() {
-			@Override
-			public void run() {
-				long time = System.currentTimeMillis();
-				QueryPurchasesParams purchasesParams = QueryPurchasesParams.newBuilder().setProductType(ProductType.INAPP).build();
-				mBillingClient.queryPurchasesAsync(purchasesParams, new PurchasesResponseListener() {
-					@Override
-					public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> purchaseList) {
-						LOG.info("Querying purchases elapsed time: " + (System.currentTimeMillis() - time) + "ms");
+		Runnable queryToExecute = () -> {
+			long time = System.currentTimeMillis();
+			QueryPurchasesParams purchasesParams = QueryPurchasesParams.newBuilder().setProductType(ProductType.INAPP).build();
+			mBillingClient.queryPurchasesAsync(purchasesParams, (billingResult, purchaseList) -> {
+				LOG.info("Querying purchases elapsed time: " + (System.currentTimeMillis() - time) + "ms");
 
-						// If there are subscriptions supported, we add subscription rows as well
-						if (areSubscriptionsSupported()) {
-							querySubscriptionPurchases(billingResult, purchaseList, time, queryPurchasesListener);
-						} else {
-							if (billingResult.getResponseCode() == BillingResponseCode.OK) {
-								LOG.info("Skipped subscription purchases query since they are not supported");
-							}
-							onQueryPurchasesFinished(billingResult, purchaseList);
-							if (queryPurchasesListener != null) {
-								queryPurchasesListener.onQueryPurchasesFinished();
-							}
-						}
+				// If there are subscriptions supported, we add subscription rows as well
+				if (areSubscriptionsSupported()) {
+					querySubscriptionPurchases(billingResult, purchaseList, time, queryPurchasesListener);
+				} else {
+					if (billingResult.getResponseCode() == BillingResponseCode.OK) {
+						LOG.info("Skipped subscription purchases query since they are not supported");
 					}
-				});
-			}
+					onQueryPurchasesFinished(billingResult, purchaseList);
+					if (queryPurchasesListener != null) {
+						queryPurchasesListener.onQueryPurchasesFinished();
+					}
+				}
+			});
 		};
 		executeServiceRequest(queryToExecute);
 	}

@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 
 import android.app.Activity;
@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -29,7 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 
@@ -53,7 +51,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication());
+		importHelper = new ImportHelper(requireActivity());
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.bottom_sheet_plan_route_start, null);
@@ -169,11 +167,6 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 					public void onImportComplete(boolean success) {
 						finishImport(success);
 						importHelper.setGpxImportCompleteListener(null);
-					}
-
-					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
-
 					}
 				});
 				importHelper.handleGpxImport(uri, ImportHelper.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, false);

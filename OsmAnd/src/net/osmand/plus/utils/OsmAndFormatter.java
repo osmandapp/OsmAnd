@@ -57,6 +57,9 @@ public class OsmAndFormatter {
 
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+
+	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final int MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT = 24 * 60 * 60;

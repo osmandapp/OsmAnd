@@ -1,20 +1,11 @@
 package net.osmand.core.android;
 
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
-
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
+import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -28,12 +19,10 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileSqliteDatabasesCollection;
-import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.weather.WeatherHelper;
-import net.osmand.plus.plugins.weather.WeatherWebClient;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -51,6 +40,12 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import androidx.annotation.Nullable;
+
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
 /**
  * Context container and utility class for MapRendererView and derivatives.
@@ -71,6 +66,7 @@ public class MapRendererContext {
 	private IObfsCollection obfsCollection;
 
 	private boolean nightMode;
+	private boolean useAppLocale;
 	private final float density;
 
 	// сached objects
@@ -81,7 +77,7 @@ public class MapRendererContext {
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
-	private MapRendererView mapRendererView;
+	private volatile MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
 
@@ -113,6 +109,15 @@ public class MapRendererContext {
 	public void setNightMode(boolean nightMode) {
 		if (nightMode != this.nightMode) {
 			this.nightMode = nightMode;
+			updateMapSettings();
+		}
+	}
+
+	public void updateLocalization() {
+		int zoom = app.getOsmandMap().getMapView().getZoom();
+		boolean useAppLocale = MapRenderRepositories.useAppLocaleForMap(app, zoom);
+		if (this.useAppLocale != useAppLocale) {
+			this.useAppLocale = useAppLocale;
 			updateMapSettings();
 		}
 	}
@@ -155,8 +160,14 @@ public class MapRendererContext {
 	private void updateMapPresentationEnvironment() {
 		// Create new map presentation environment
 		OsmandSettings settings = app.getSettings();
-		String langId = settings.MAP_PREFERRED_LOCALE.get();
-		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
+
+		int zoom = app.getOsmandMap().getMapView().getZoom();
+		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
+		boolean transliterate = MapRenderRepositories.transliterateMapNames(app, zoom);
+		LanguagePreference langPref = transliterate
+				? LanguagePreference.LocalizedOrTransliterated
+				: LanguagePreference.LocalizedOrNative;
+
 		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
