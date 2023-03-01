@@ -5046,4 +5046,8 @@
     <string name="show_all_tracks">顯示所有軌跡</string>
     <string name="shared_string_kilograms">公斤</string>
     <string name="shared_string_yards">碼</string>
+    <string name="shared_string_inches">英吋</string>
+    <string name="inch">英吋</string>
+    <string name="approximate_bearing">大約方位</string>
+    <string name="approximate_bearing_descr">若未從裝置接收到，則計算方位</string>
 </resources>
