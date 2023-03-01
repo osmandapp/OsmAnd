@@ -4994,7 +4994,6 @@
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
@@ -5073,4 +5072,33 @@
     <string name="shared_string_inches">pulgadas</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
     <string name="inch">in</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad de movimiento</string>
+    <string name="simulation_position_description">Marca un archivo de traza a usar como guía de movimiento.</string>
+    <string name="local_version_do_not_exist">No existe una versión local.</string>
+    <string name="delete_cloud_version">Borrar versión en la nube</string>
+    <string name="shared_string_delete_file">Borrar archivo</string>
+    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+\n
+\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n
+\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n
+\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n
+\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n
+\n• Se ha simplificado la pantalla de inicio
+\n
+\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n
+\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n
+\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n
+\n• Se han corregido problemas de visualización con los lugares veganos
+\n
+\n</string>
 </resources>
