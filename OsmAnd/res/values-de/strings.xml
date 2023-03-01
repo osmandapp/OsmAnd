@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_add_manually">Manuell hinzufügen …</string>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="shared_string_remove">Entfernen</string>
@@ -437,9 +438,9 @@
     <string name="map_overlay">Overlay-Karte</string>
     <string name="map_overlay_descr">Overlay-Karte auswählen</string>
     <string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert.</string>
-    <string name="select_tile_source_to_install">Zu installierende oder zu aktualisierende Karten (Kacheln) wählen.</string>
+    <string name="select_tile_source_to_install">Kartenquellen wählen:</string>
     <string name="internet_not_available">Kann Vorgang ohne Internetverbindung nicht abschließen.</string>
-    <string name="install_more">Weitere installieren …</string>
+    <string name="install_more">Weitere hinzufügen …</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>

@@ -465,7 +465,7 @@ public class MapLayers {
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
+		entriesMap.put(layerAdd, getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 

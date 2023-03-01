@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_add_manually">Add manually…</string>
     <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Delete file</string>
     <string name="delete_cloud_version">Delete cloud version</string>
@@ -4413,9 +4414,9 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="map_overlay">Overlay map</string>
     <string name="map_overlay_descr">Choose the overlay map</string>
     <string name="tile_source_already_installed">Map already installed, \'Settings\' will be updated.</string>
-    <string name="select_tile_source_to_install">Choose (tile) maps to install or update.</string>
+    <string name="select_tile_source_to_install">Select tile map sources:</string>
     <string name="internet_not_available">Unable to perform operation without a connection to the Internet.</string>
-    <string name="install_more">Install more…</string>
+    <string name="install_more">Add more…</string>
     <string name="level_to_switch_vector_raster_descr">Use raster maps for anything beyond this level.</string>
     <string name="level_to_switch_vector_raster">Minimum vector zoom level</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images.</string>
