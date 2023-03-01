@@ -1245,9 +1245,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					}
 					locations.add(l);
 				}
-				pair.second.setTrkPtIndex(i + 1 < before.points.size() - 1 ? locations.size() : locations.size() - 1);
+
+				int routePointIndex = i + 1 == endPointIndex ? locations.size() - 1 : locations.size();
+				pair.second.setTrkPtIndex(routePointIndex);
 				route.addAll(dataSegments);
-				routePointIndexes.add(i + 1 == endPointIndex ? locations.size() - 1 : locations.size());
+				routePointIndexes.add(routePointIndex);
 			}
 		}
 		if (!locations.isEmpty() && !route.isEmpty()) {
