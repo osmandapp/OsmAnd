@@ -76,8 +76,9 @@ public class SearchHistoryHelper {
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
+		} else {
+			removeDeletedEntries();
 		}
-		removeDeletedEntries();
 		List<HistoryEntry> res = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
 			PointDescription pd = entry.getName();
@@ -149,15 +150,19 @@ public class SearchHistoryHelper {
 		return helper;
 	}
 
-	private void removeDeletedEntries(){
+	private void removeDeletedEntries() {
+		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		List<HistoryEntry> deletedEntries = new ArrayList<>();
-		for(HistoryEntry entry : loadedEntries){
-			GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName());
-			if(gpxInfo == null){
-				deletedEntries.add(entry);
+		if (loadedEntries != null) {
+			for (HistoryEntry entry : loadedEntries) {
+				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName());
+				if (gpxInfo == null) {
+					deletedEntries.add(entry);
+					helper.remove(entry);
+				}
 			}
+			loadedEntries.removeAll(deletedEntries);
 		}
-		loadedEntries.removeAll(deletedEntries);
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {
