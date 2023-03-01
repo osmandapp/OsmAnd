@@ -4987,7 +4987,6 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
-    
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
@@ -5066,4 +5065,25 @@
     <string name="show_all_tracks">Mostrar todas las trazas</string>
     <string name="shared_string_on_map">En el mapa</string>
     <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
+    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+\n
+\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n
+\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n
+\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n
+\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n
+\n• Se ha simplificado la pantalla de inicio
+\n
+\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n
+\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n
+\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n
+\n• Se han corregido problemas de visualización con los lugares veganos
+\n
+\n</string>
 </resources>
