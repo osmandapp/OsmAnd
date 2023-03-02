@@ -637,9 +637,9 @@
     <string name="map_overlay">Mapa da camada superior</string>
     <string name="map_overlay_descr">Escolha o mapa da camada superior</string>
     <string name="tile_source_already_installed">Mapa previamente instalado, as \"Configurações\" serão atualizadas.</string>
-    <string name="select_tile_source_to_install">Selecione mosaicos de mapas para instalar ou atualizar.</string>
+    <string name="select_tile_source_to_install">Selecione as fontes do mapa de mosaicos:</string>
     <string name="internet_not_available">Não é possível executar a operação sem ligação à Internet.</string>
-    <string name="install_more">Instalar mais…</string>
+    <string name="install_more">Adicionar mais…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas rasterizados para tudo a partir deste nível.</string>
     <string name="level_to_switch_vector_raster">Nível mínimo de ampliação para vetorial</string>
     <string name="create_poi_link_to_osm_doc">Classificação de mapa <u>OSM Online</u> com imagens.</string>
@@ -4985,7 +4985,6 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinhas de rajadas de vento</string>
     <string name="open_weather_action">Abrir previsão meteorológica</string>
     <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
-    
     <string name="shared_string_open">Aberto</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
@@ -5057,8 +5056,38 @@
     <string name="show_all_tracks">Mostrar todos os trilhos</string>
     <string name="shared_string_on_map">No mapa</string>
     <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
-    <string name="approximate_bearing_descr">Calcular o rolamento se não for recebido do aparelho</string>
+    <string name="approximate_bearing_descr">Calcular a direção se não for comunicada pelo aparelho</string>
     <string name="shared_string_inches">polegadas</string>
     <string name="inch">in</string>
-    <string name="approximate_bearing">Rolamento aproximado</string>
+    <string name="approximate_bearing">Direção aproximada</string>
+    <string name="cloud_version_confirm_delete">Eliminar \"%1$s\" do OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Eliminar ficheiro</string>
+    <string name="delete_cloud_version">Eliminar versão da nuvem</string>
+    <string name="local_version_do_not_exist">Não existe nenhuma versão local.</string>
+    <string name="shared_string_in_progress">A decorrer</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidade do movimento</string>
+    <string name="simulation_position_description">Selecione um ficheiro de um trilho para usar como orientação do movimento.</string>
+    <string name="shared_string_add_manually">Adicionar manualmente…</string>
+    <string name="release_4_4">• Menu \"Trilhos\" em \"Configurar mapa\" melhorado
+\n
+\n • O menu de contexto agora mostra nomes localizados nos POIs
+\n
+\n • Adicionada opção para partilhar rota com uma hiperligação
+\n
+\n • Adicionada unidade de comprimento \"milhas náuticas/pés\"
+\n
+\n • A orientação do mapa agora tem um novo modo fixo
+\n
+\n • Ecrã inicial simplificado
+\n
+\n • Posição de localização fixa no modo de ecrã dividido no Android Auto
+\n
+\n • Adicionado gráfico \"Velocidade/inclinação\" na análise do trilho de navegação
+\n
+\n • O Android 13 mudou a escolha do idioma da aplicação para as configurações do sistema Android
+\n
+\n • Corrigidos problemas com a visualização de locais com menus veganos
+\n
+\n</string>
 </resources>
