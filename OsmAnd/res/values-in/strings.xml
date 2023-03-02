@@ -1939,7 +1939,7 @@
     <string name="foot">kaki</string>
     <string name="system_locale">Sistem</string>
     <string name="error_doing_search">Tidak dapat melakukan pencarian luring.</string>
-    <string name="install_more">Pasang lebih banyak…</string>
+    <string name="install_more">Tambahkan lebih banyak…</string>
     <string name="incomplete_locale">belum lengkap</string>
     <string name="backup_version_history">Riwayat versi</string>
     <string name="delete_version_history">Hapus riwayat versi</string>
@@ -2471,7 +2471,7 @@
     <string name="layer_underlay">Peta dasaran…</string>
     <string name="map_underlay">Peta dasaran</string>
     <string name="map_underlay_descr">Pilih peta dasaran</string>
-    <string name="select_tile_source_to_install">Pilih (ubin) peta untuk dipasang atau diperbarui.</string>
+    <string name="select_tile_source_to_install">Pilih sumber peta ubin:</string>
     <string name="internet_not_available">Tidak dapat melakukan operasi tanpa koneksi internet.</string>
     <string name="send_location_email_pattern">Untuk melihat lokasi ikuti tautan web %1$s atau tautan intent Android %2$s</string>
     <string name="osmand_routing_experimental">Navigasi luring OsmAnd adalah fitur eksperimental dan tidak bekerja dengan jarak yang lebih panjang dari 20 km.
@@ -4988,7 +4988,6 @@
     <string name="open_weather_action">Buka cuaca</string>
     <string name="shared_string_purchased_on">Dibeli pada</string>
     <string name="shared_string_expires">Kedaluwarsa pada</string>
-    
     <string name="checking_progress">Memeriksa…</string>
     <string name="res_unknown">Tidak diketahui</string>
     <string name="check_for_updates">Periksa pembaruan</string>
@@ -5060,5 +5059,35 @@
     <string name="approximate_bearing_descr">Hitung bantalan jika tidak diterima dari perangkat</string>
     <string name="shared_string_inches">inci</string>
     <string name="inch">in</string>
-    <string name="approximate_bearing">Perkiraan Bantalan</string>
+    <string name="approximate_bearing">Perkiraan bantalan</string>
+    <string name="local_version_do_not_exist">Tidak ada versi lokal yang tersedia.</string>
+    <string name="shared_string_in_progress">Dalam proses</string>
+    <string name="shared_string_original">Asli</string>
+    <string name="movement_speed">Kecepatan gerakan</string>
+    <string name="shared_string_delete_file">Hapus berkas</string>
+    <string name="delete_cloud_version">Hapus versi awan</string>
+    <string name="simulation_position_description">Gunakan berkas trek untuk digunakan sebagai pemandu gerakan.</string>
+    <string name="cloud_version_confirm_delete">Hapus \"%1$s\" dari OsmAnd Cloud\?</string>
+    <string name="shared_string_add_manually">Tambahkan secara manual…</string>
+    <string name="release_4_4">- Menu \"Trek\" yang lebih baik di \"Konfigurasi Peta\"
+\n
+\n - Menu konteks sekarang menampilkan nama yang dilokalkan untuk POI
+\n
+\n - Menambahkan opsi untuk berbagi rute dengan tautan
+\n
+\n - Menambahkan satuan panjang \"mil laut/kaki\"
+\n
+\n - Orientasi peta menambahkan mode tetap baru
+\n
+\n - Layar awal yang disederhanakan
+\n
+\n - Posisi lokasi tetap dalam mode layar terbagi di Android Auto
+\n
+\n - Menambahkan grafik \"Kecepatan/Kemiringan\" untuk analisis lintasan
+\n
+\n - Android 13 memindahkan pilihan bahasa aplikasi ke pengaturan sistem
+\n
+\n - Memperbaiki masalah dalam menampilkan tempat Vegan
+\n
+\n</string>
 </resources>
