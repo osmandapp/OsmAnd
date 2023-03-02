@@ -238,9 +238,9 @@
     <string name="map_overlay">Fedőrétegtérkép</string>
     <string name="map_overlay_descr">Fedőrétegtérkép kiválasztása</string>
     <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissülnek.</string>
-    <string name="select_tile_source_to_install">(Csempés) térkép kiválasztása telepítéshez vagy frissítéshez.</string>
+    <string name="select_tile_source_to_install">Csempés térkép forrásainak kiválasztása:</string>
     <string name="internet_not_available">A műveletet nem lehetséges internetkapcsolat nélkül végrehajtani.</string>
-    <string name="install_more">További telepítése…</string>
+    <string name="install_more">További hozzáadása…</string>
     <string name="level_to_switch_vector_raster_descr">Raszteres térképek használata ezen nagyítási szint alatt.</string>
     <string name="level_to_switch_vector_raster">Legkisebb vektoros nagyítási szint</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> térképbesorolás képekkel.</string>
@@ -4972,7 +4972,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Felhő-izovonalak</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Csapadék-izovonalak</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Szélsebesség-izovonalak</string>
-    
     <string name="open_weather_action">Időjárás megnyitása</string>
     <string name="shared_string_open">Megnyitás</string>
     <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
@@ -5050,4 +5049,13 @@
     <string name="approximate_bearing_descr">Az irányszöget számítással határozza meg, ha az eszközről nem érhető el</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Hozzávetőleges irányszög</string>
+    <string name="cloud_version_confirm_delete">\"%1$s\" törlése az OsmAnd felhőből\?</string>
+    <string name="shared_string_delete_file">Fálj törlése</string>
+    <string name="local_version_do_not_exist">Nincs helyi verzió.</string>
+    <string name="delete_cloud_version">Felhőben lévő verzió törlése</string>
+    <string name="simulation_position_description">Válasszon egy nyomvonalfájlt, ami mozgási útmutatóként szolgál.</string>
+    <string name="shared_string_add_manually">Hozzáadás kézzel…</string>
+    <string name="shared_string_in_progress">Folyamatban</string>
+    <string name="shared_string_original">Eredeti</string>
+    <string name="movement_speed">Mozgási sebesség</string>
 </resources>
