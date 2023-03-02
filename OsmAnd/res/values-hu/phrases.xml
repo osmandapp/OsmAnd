@@ -4496,4 +4496,9 @@
     <string name="poi_recycling_plastic_bottle_caps">Műanyag kupakok</string>
     <string name="poi_recycling_aluminium_cans">Alumínium dobozok</string>
     <string name="poi_recycling_pet_drink_bottles">PET italos palackok</string>
+    <string name="poi_self_checkout">Önkiszolgáló kassza</string>
+    <string name="poi_recycling_textiles">Szövetanyagok</string>
+    <string name="poi_self_checkout_yes">Igen</string>
+    <string name="poi_self_checkout_no">Önkiszolgáló kassza: nem</string>
+    <string name="poi_self_checkout_only">Csak</string>
 </resources>
