@@ -545,9 +545,9 @@
     <string name="map_overlay">Overlejringskort</string>
     <string name="map_overlay_descr">Vælg kort til overlejring</string>
     <string name="tile_source_already_installed">Kort er allerede installeret, \'Indstillinger\' vil blive opdateret.</string>
-    <string name="select_tile_source_to_install">Vælg kort(fliser) der skal installeres eller opdateres.</string>
+    <string name="select_tile_source_to_install">Vælg kilder til kort af fliser:</string>
     <string name="internet_not_available">Kan ikke udføre handlingen uden en forbindelse til Internettet.</string>
-    <string name="install_more">Installer flere…</string>
+    <string name="install_more">Tilføj flere…</string>
     <string name="level_to_switch_vector_raster_descr">Brug rasterkort for alt ud over dette niveau.</string>
     <string name="level_to_switch_vector_raster">Mindste vektor zoomniveau</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -4981,7 +4981,6 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer for vindhastighed</string>
@@ -5062,4 +5061,34 @@
     <string name="shared_string_inches">tommer</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Omtrentlig pejling</string>
+    <string name="cloud_version_confirm_delete">Slet \"%1$s\" fra OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Slet fil</string>
+    <string name="delete_cloud_version">Slet cloud-version</string>
+    <string name="shared_string_in_progress">I gang</string>
+    <string name="shared_string_original">Oprindelig</string>
+    <string name="local_version_do_not_exist">Der findes ingen lokal version.</string>
+    <string name="movement_speed">Bevægelseshastighed</string>
+    <string name="simulation_position_description">Vælg en sporfil, der skal bruges som bevægelsesvejledning.</string>
+    <string name="shared_string_add_manually">Tilføj manuelt…</string>
+    <string name="release_4_4">- Forbedret menuen \"Spor\" i \"Konfigurer kort\"
+\n
+\n - Kontekstmenuen viser nu lokaliserede navne for IP\'er
+\n
+\n - Tilføjet mulighed for at dele rute via link
+\n
+\n - Tilføjet længdeenheden \"Nautiske mil/fod\"
+\n
+\n - Kortorientering tilføjet ny fast tilstand
+\n
+\n - Forenklet startskærm
+\n
+\n - En fastgjort positionsplacering i delt skræm-tilstand i Android Auto
+\n
+\n - Tilføjet \"hastighed/skråning\"-graf til sporanalyse
+\n
+\n - Android 13 flyttet valg af app-sprog til systemindstillingerne
+\n
+\n - Rettet problemer med visning af veganske steder
+\n
+\n</string>
 </resources>
