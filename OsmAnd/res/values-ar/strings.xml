@@ -743,9 +743,9 @@
     <string name="amenity_type_seamark">سيمارك</string>
     <string name="poi_dialog_comment_default">متغير POI</string>
     <string name="tile_source_already_installed">الخريطة مثبتة بالفعل.</string>
-    <string name="select_tile_source_to_install">اختر خرائط (جزء محدد) للتثبيت أو التحديث.</string>
+    <string name="select_tile_source_to_install">حدد مصادر خريطة الطبقات:</string>
     <string name="internet_not_available">لا يوجد اتصال بالإنترنت.</string>
-    <string name="install_more">المزيد…</string>
+    <string name="install_more">إضافة المزيد…</string>
     <string name="level_to_switch_vector_raster_descr">مستوى التقريب الأدنى لاستخدام خرائط التوجيه.</string>
     <string name="level_to_switch_vector_raster">المستوى الأدنى لتقريب خريطة التوجيه</string>
     <string name="poi_error_info_not_loaded">كان معلومات حول عقدة لا تحميل</string>
@@ -5049,7 +5049,6 @@
     <string name="open_weather_action">الطقس المفتوح</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">تساوي هطول الأمطار</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">هبات الرياح المتساوية</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">تساوي السحب</string>
     <string name="shared_string_purchased_on">تم الشراء في</string>
     <string name="shared_string_expires">انتهاء</string>
@@ -5125,4 +5124,34 @@
     <string name="approximate_bearing">الاتجاه التقريبي</string>
     <string name="approximate_bearing_descr">حساب الاتجاه إذا لم يتم استلامه من الجهاز</string>
     <string name="inch">في</string>
+    <string name="cloud_version_confirm_delete">حذف \"%1$s\" من سحابة أوسماند؟</string>
+    <string name="shared_string_delete_file">حذف ملف</string>
+    <string name="delete_cloud_version">حذف النسخة السحابية</string>
+    <string name="local_version_do_not_exist">لا يوجد نسخة محلية.</string>
+    <string name="shared_string_in_progress">قيد التقدم</string>
+    <string name="shared_string_original">أصلي</string>
+    <string name="movement_speed">سرعة الحركة</string>
+    <string name="simulation_position_description">اختيار ملف لاستخدامه كمسارللحركة.</string>
+    <string name="shared_string_add_manually">إضافة يدويا…</string>
+    <string name="release_4_4">• تحسين قائمة \"المسارات\" في \"تكوين الخريطة\"
+\n
+\n• عرض قائمة السياق الآن أسماء مترجمة لنقاط الاهتمام
+\n
+\n• تم إضافة خيار لمشاركة المسار عن طريق الرابط
+\n
+\n• تم إضافة وحدة طول \"أميال بحرية / قدم\"
+\n
+\n• اتجاه الخريطة وضعا ثابتا جديدا
+\n
+\n• شاشة بدء مبسطة
+\n
+\n• موقع AFixed في وضع اندرويد أوتو
+\n
+\n• تمت إضافة الرسم البياني \"السرعة / المنحدر\" لتحليل المسار
+\n
+\n• نقل اختيار لغة التطبيق في أندرويد 13 إلى إعدادات النظام
+\n
+\n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي
+\n
+\n</string>
 </resources>
