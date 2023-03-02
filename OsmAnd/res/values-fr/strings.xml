@@ -182,7 +182,7 @@
     <string name="tile_source_already_installed">Carte déjà installée, les paramètres seront mis à jour.</string>
     <string name="select_tile_source_to_install">Sélectionnez les cartes (tuile) à installer ou à mettre à jour.</string>
     <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération.</string>
-    <string name="install_more">Installer plus…</string>
+    <string name="install_more">Ajouter plus …</string>
     <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
     <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes avec images.</string>
@@ -4936,7 +4936,6 @@
     <string name="shared_string_open">Ouvert</string>
     <string name="open_weather_action_description">Vous permet de consulter des informations météo détaillées.</string>
     <string name="open_weather_action">Afficher la météo</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
@@ -5043,4 +5042,11 @@
     <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
     <string name="shared_string_kilograms">kilogrammes</string>
     <string name="shared_string_yards">yards</string>
+    <string name="inch">in</string>
+    <string name="cloud_version_confirm_delete">Supprimer \"%1$s\" du cloud OsmAnd \?</string>
+    <string name="shared_string_in_progress">En progrès</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Vitesse de déplacement</string>
+    <string name="shared_string_inches">inches</string>
+    <string name="shared_string_add_manually">Ajouter manuellement …</string>
 </resources>
