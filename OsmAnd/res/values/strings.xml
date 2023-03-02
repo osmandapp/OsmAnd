@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="selected_value">Selected value</string>
     <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Delete file</string>
     <string name="delete_cloud_version">Delete cloud version</string>
