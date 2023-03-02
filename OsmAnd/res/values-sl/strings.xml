@@ -4965,7 +4965,7 @@
     <string name="external_sensors_plugin_description">Dostopa do zunanjih senzorjev za branje npr. tvojega srčnega utripa, hitrost kolesa, moč kolesarjenja ali kadenco. Zahteva, da je tvoja naprava povezana z ustreznimi senzorji prek brezžičnega osebnega omrežnega protokola ANT+.</string>
     <string name="simulate_location_by_gpx">Simulacija lokacije iz GPX-a</string>
     <string name="terms_of_service_desc">S prenosom zemljevidov se strinjaš z %1$s in %2$s.</string>
-    <string name="release_4_4">• Tukaj bodo nizi za različico 4.4</string>
+    
     <string name="open_weather_action_description">Omogoča odpiranje zaslona s podrobnimi informacijami o vremenu.</string>
     <string name="open_weather_action">Odpri vreme</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinije oblakov</string>

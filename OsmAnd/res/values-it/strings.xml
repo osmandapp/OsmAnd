@@ -4368,7 +4368,7 @@
     <string name="is_disabled">%1$s è disabilitato</string>
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
     <string name="transparent_status_bar_descr">Mostra mappa sotto la barra di stato</string>
-    <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
+    <string name="history_preferences_descr">Puoi disattivare la registrazione della cronologia individualmente per ogni tipo di cronologia.</string>
     <string name="shortcut_navigate_to_work">Naviga fino al \'Lavoro\'</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
     <string name="display_route_tracks">Mostra tracce</string>
@@ -4966,7 +4966,7 @@
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
     <string name="mtb_segment_classification">Classificazione segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
-    <string name="release_4_4">• Qui ci saranno le stringhe per la versione 4.4</string>
+    
     <string name="shared_string_open">Apri</string>
     <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
@@ -5043,4 +5043,8 @@
     <string name="shared_string_on_map">Sulla mappa</string>
     <string name="shared_string_apply_changes">Applica modifiche</string>
     <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
+    <string name="approximate_bearing_descr">Calcola rotta se non ricevuta dal dispositivo</string>
+    <string name="shared_string_inches">pollici</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Rotta approssimata</string>
 </resources>

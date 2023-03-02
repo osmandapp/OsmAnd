@@ -4537,7 +4537,7 @@
     <string name="nautical_depth_points">Plavební hloubkové body</string>
     <string name="rendering_attr_showRunningRoutes_name">Běžecké trasy</string>
     <string name="routing_attr_allow_private_for_truck_name">Umožnit soukromý vjezd (nákladní automobil)</string>
-    <string name="release_4_4">• Zde budou řetězce pro verzi 4.4</string>
+    
     <string name="mtb_segment_classification">Klasifikace úseku</string>
     <string name="show_borders_of_downloaded_maps">Zobrazit hranice stažených map</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybridní</string>
