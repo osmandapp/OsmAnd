@@ -281,9 +281,9 @@
     <string name="map_overlay">Překryvná mapa</string>
     <string name="map_overlay_descr">Vyberte překryvnou mapu</string>
     <string name="tile_source_already_installed">Mapa již nainstalována, \'Nastavení\' budou aktualizována.</string>
-    <string name="select_tile_source_to_install">Vyberte (dlaždicové) mapy k instalaci nebo aktualizaci.</string>
+    <string name="select_tile_source_to_install">Vyberte zdroje dlaždicových map:</string>
     <string name="internet_not_available">Nelze provést tuto akci bez připojení k Internetu.</string>
-    <string name="install_more">Instalovat další…</string>
+    <string name="install_more">Přidat další…</string>
     <string name="level_to_switch_vector_raster_descr">Použít rastrové mapy pro cokoli nad tuto úroveň.</string>
     <string name="level_to_switch_vector_raster">Minimální zvětšení vektorové mapy</string>
     <string name="error_doing_search">Nelze provést offline hledání.</string>
@@ -4537,7 +4537,6 @@
     <string name="nautical_depth_points">Plavební hloubkové body</string>
     <string name="rendering_attr_showRunningRoutes_name">Běžecké trasy</string>
     <string name="routing_attr_allow_private_for_truck_name">Umožnit soukromý vjezd (nákladní automobil)</string>
-    
     <string name="mtb_segment_classification">Klasifikace úseku</string>
     <string name="show_borders_of_downloaded_maps">Zobrazit hranice stažených map</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybridní</string>
@@ -5043,8 +5042,8 @@
     <string name="simulation_constant_mode_title">Stálá rychlost</string>
     <string name="simulation_preview_mode_desc">Rychlost simulace bude maximální na rovných úsecích a zpomalí se pouze na křižovatkách.</string>
     <string name="shared_string_inches">palců</string>
-    <string name="approximate_bearing_descr">Vypočítat směr, pokud nebyl přijat ze zařízení</string>
-    <string name="approximate_bearing">Přibližný směr</string>
+    <string name="approximate_bearing_descr">Výpočet směru, pokud není přijat ze zařízení</string>
+    <string name="approximate_bearing">Přibližné určení polohy</string>
     <string name="inch">na</string>
     <string name="sound_beep_minimal">Pípnutí: minimální</string>
     <string name="sound_beep_complex_loud">Pípání: komplexní hlasité</string>
@@ -5052,4 +5051,34 @@
     <string name="sound_beep_simple">Pípnutí: jednoduché</string>
     <string name="sound_beep_simple_loud">Pípnutí: jednoduché hlasité</string>
     <string name="rotate_map_manual_opt">Ruční otáčení (pevné)</string>
+    <string name="cloud_version_confirm_delete">Odstranit \"%1$s\" z OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Smazat soubor</string>
+    <string name="delete_cloud_version">Smazat verzi cloudu</string>
+    <string name="local_version_do_not_exist">Není přítomna žádná místní verze.</string>
+    <string name="shared_string_in_progress">Probíhá</string>
+    <string name="shared_string_original">Originál</string>
+    <string name="movement_speed">Rychlost pohybu</string>
+    <string name="simulation_position_description">Vyberte soubor stopy, který chcete použít pro navádění pohybem.</string>
+    <string name="shared_string_add_manually">Přidejte ručně…</string>
+    <string name="release_4_4">- Vylepšená nabídka \"Stopy\" v \"Konfiguraci mapy\"
+\n
+\n - Kontextová nabídka nyní zobrazuje lokalizované názvy bodů zájmu
+\n
+\n - Přidána možnost sdílení trasy pomocí odkazu
+\n
+\n - Přidána jednotka délky \"Námořní míle/stopa\".
+\n
+\n - Přidán nový pevný režim orientace mapy
+\n
+\n - Zjednodušená úvodní obrazovka
+\n
+\n - Pevná poloha polohy v režimu rozdělené obrazovky v systému Android Auto
+\n
+\n - Přidán graf \"Rychlost/Sklon\" pro analýzu trasy
+\n
+\n - Systém Android 13 přesunul výběr jazyka aplikace do nastavení systému
+\n
+\n - Opraveny problémy se zobrazováním veganských míst
+\n
+\n</string>
 </resources>
