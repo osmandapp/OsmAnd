@@ -5014,4 +5014,8 @@
     <string name="next_turn_widget_desc">Viser info om neste sving med et bilde av manøveren og avstanden til den.</string>
     <string name="shared_string_unsynced">Usynkronisert</string>
     <string name="mtb_imba">IMBA</string>
+    <string name="check_for_updates">Se etter oppdateringer</string>
+    <string name="recently_visible">Nylig synlig %1$s</string>
+    <string name="weather_wind_miles_per_hour">Miles per time</string>
+    <string name="cloud_sync_progress">Synk…%1$s</string>
 </resources>

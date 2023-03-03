@@ -4584,7 +4584,7 @@ POIの更新は利用できません</string>
     <string name="open_weather_action_description">詳細な天気情報の表示画面を開きます。</string>
     <string name="open_weather_action">天気情報を開く</string>
     <string name="mtb_imba">IMBA</string>
-    <string name="release_4_4">• 4.4 リリース時の文字列は次のとおり</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">雲頂高度(等値線)</string>
     <string name="shared_string_open">開く</string>
     <string name="mtb_imba_full">国際マウンテンバイク協会(IMBA)</string>

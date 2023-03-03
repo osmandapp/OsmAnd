@@ -396,15 +396,6 @@
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
     </style>
 
-    <style name="OsmandAndroidAutoTheme">
-        <!-- even if darkMode is selected in AA settings, dark color is ignored, so abuse primary and secondary color to color the direction panel appropriately -->
-        <item name="carColorPrimary">#66B5FF</item> // Google default accent light
-        <item name="carColorPrimaryDark">#60A8F0</item> // Google default accent dark
-        <item name="carColorSecondary">@color/map_background_color_dark</item>
-        <item name="carColorSecondaryDark">@color/map_background_color_dark</item>
-        <item name="carPermissionActivityLayout">@color/map_background_color_dark</item>
-    </style>
-
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
         <item name="bottom_bar_background_color">@color/bottom_bar_background_color_dark</item>
         <item name="android:textDirection">locale</item>
