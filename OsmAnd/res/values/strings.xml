@@ -21,7 +21,7 @@
     <string name="movement_speed">Movement speed</string>
     <string name="simulation_position_description">Select a track file to use as motion guidance.</string>
     <string name="approximate_bearing">Approximate bearing</string>
-    <string name="approximate_bearing_descr">Calculate bearing if not received from the device</string>
+    <string name="approximate_bearing_descr">Calculate bearing based on the following navigation route</string>
     <string name="shared_string_inches">inches</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>
