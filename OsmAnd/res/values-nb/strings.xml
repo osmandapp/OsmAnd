@@ -5008,7 +5008,6 @@
     <string name="shared_string_modified">Endret</string>
     <string name="res_unknown">Ukjent</string>
     <string name="av_audio_format_bottom_sheet_descr">Velg et lydformat. Filtypebeholderen for lyd er 3GPP (.3gp).</string>
-    <string name="release_4_4_pre">• Her vil strengene for 4.4 vises</string>
     <string name="precipitation_layer">Nedbørslag</string>
     <string name="storage_migration_fragment_close_descr">Kopieringen er kun %1$s% fullført. Hvis du stopper nå kan det hende programmet ikke fungerer.</string>
     <string name="next_turn_widget_desc">Viser info om neste sving med et bilde av manøveren og avstanden til den.</string>
