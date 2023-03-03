@@ -225,7 +225,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
 		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
-			SpeedLimitBottomSheet.showInstance(requireFragmentManager());
+			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), getSelectedAppMode());
 		}
 		return super.onPreferenceClick(preference);
 	}

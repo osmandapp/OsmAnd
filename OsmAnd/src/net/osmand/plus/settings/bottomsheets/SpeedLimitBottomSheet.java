@@ -10,11 +10,13 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -26,13 +28,15 @@ public class SpeedLimitBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = SpeedLimitBottomSheet.class.getSimpleName();
 
 	private static final String CURRENT_VALUE = "current_value";
+	public static final String KEY_APP_MODE = "app_mode";
+
 	private static final float MILES_IN_METER = 1.609f;
 	private static final int MIN_VALUE_KM_H = -10;
 	private static final int MAX_VALUE_KM_H = 20;
 
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
-
+	private OsmandPreference<Float> speedLimitPreference;
 	private int currentValue;
 	private int fromValue;
 	private int toValue;
@@ -42,15 +46,20 @@ public class SpeedLimitBottomSheet extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
 		settings = app.getSettings();
-		appMode = app.getSettings().getApplicationMode();
+		speedLimitPreference = settings.SPEED_LIMIT_EXCEED_KMH;
 		setupValues();
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_VALUE)) {
+		if (savedInstanceState != null) {
 			currentValue = (int) savedInstanceState.getFloat(CURRENT_VALUE);
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(KEY_APP_MODE), settings.getApplicationMode());
 		} else {
 			currentValue = (int) (isMetric()
-					? settings.SPEED_LIMIT_EXCEED_KMH.get()
-					: settings.SPEED_LIMIT_EXCEED_KMH.get() * MILES_IN_METER);
+					? speedLimitPreference.get()
+					: speedLimitPreference.get() * MILES_IN_METER);
+		}
+
+		if(appMode == null){
+			appMode = settings.getApplicationMode();
 		}
 
 		int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
@@ -98,7 +107,7 @@ public class SpeedLimitBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		settings.SPEED_LIMIT_EXCEED_KMH.set(isMetric()
+		speedLimitPreference.set(isMetric()
 				? currentValue
 				: currentValue / MILES_IN_METER);
 		dismiss();
@@ -141,11 +150,14 @@ public class SpeedLimitBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putFloat(CURRENT_VALUE, currentValue);
+		outState.putString(KEY_APP_MODE, appMode.getStringKey());
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-
-		SpeedLimitBottomSheet fragment = new SpeedLimitBottomSheet();
-		fragment.show(fragmentManager, TAG);
+	public static void showInstance(@NonNull FragmentManager fragmentManager, ApplicationMode selectedAppMode) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SpeedLimitBottomSheet fragment = new SpeedLimitBottomSheet();
+			fragment.appMode = selectedAppMode;
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }
