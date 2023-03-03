@@ -2844,7 +2844,7 @@ public class OsmandSettings {
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
 
 	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
-			new BooleanPreference(this, "approximate_bearing", true).makeProfile();
+			new BooleanPreference(this, "approximate_bearing", false).makeProfile();
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
