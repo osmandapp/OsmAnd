@@ -4492,4 +4492,14 @@
     <string name="poi_socket_type3c_output_low">低</string>
     <string name="poi_socket_chademo_voltage_filter">CHAdeMO 連結器電壓</string>
     <string name="poi_socket_schuko_voltage_filter">Schuko 連結器電壓</string>
+    <string name="poi_self_checkout">自助結帳</string>
+    <string name="poi_recycling_plastic_bottle_caps">塑膠瓶蓋</string>
+    <string name="poi_recycling_aluminium_cans">鋁罐</string>
+    <string name="poi_recycling_pet_drink_bottles">PET 飲料瓶</string>
+    <string name="poi_self_checkout_no">自助結帳：否</string>
+    <string name="poi_self_checkout_yes">是</string>
+    <string name="poi_self_checkout_only">僅有</string>
+    <string name="poi_lifeguard">救生員</string>
+    <string name="poi_lifeguard_tower">救生塔</string>
+    <string name="poi_recycling_textiles">紡織品</string>
 </resources>
