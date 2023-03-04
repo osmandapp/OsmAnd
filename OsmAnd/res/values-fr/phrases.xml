@@ -4499,4 +4499,8 @@
     <string name="poi_recycling_textiles">Textiles</string>
     <string name="poi_self_checkout_only">Seulement</string>
     <string name="poi_self_checkout_yes">Oui</string>
+    <string name="poi_self_checkout_no">Caisse automatique : non</string>
+    <string name="poi_lifeguard">Sauveteur</string>
+    <string name="poi_self_checkout">Caisse automatique</string>
+    <string name="poi_lifeguard_tower">Tour de sauvetage</string>
 </resources>
