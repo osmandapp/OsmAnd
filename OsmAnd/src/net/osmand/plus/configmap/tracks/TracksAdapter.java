@@ -23,11 +23,12 @@ import java.util.Set;
 
 public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-	public static final int TYPE_TRACK = 0;
+	// values are used to sort items in TracksComparator
+	public static final int TYPE_SORT_TRACKS = 0;
 	public static final int TYPE_NO_TRACKS = 1;
 	public static final int TYPE_NO_VISIBLE_TRACKS = 2;
 	public static final int TYPE_RECENTLY_VISIBLE_TRACKS = 3;
-	public static final int TYPE_SORT_TRACKS = 4;
+	public static final int TYPE_TRACK = 4;
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;

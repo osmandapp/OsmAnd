@@ -28,6 +28,9 @@ public class TracksComparator implements Comparator<Object> {
 
 	@Override
 	public int compare(Object o1, Object o2) {
+		if (o1 instanceof Integer && o2 instanceof Integer) {
+			return Integer.compare((Integer) o1, (Integer) o2);
+		}
 		if (o1 instanceof Integer) {
 			return -1;
 		}
