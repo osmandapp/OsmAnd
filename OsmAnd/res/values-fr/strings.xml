@@ -5044,7 +5044,7 @@
     <string name="shared_string_yards">yards</string>
     <string name="inch">in</string>
     <string name="cloud_version_confirm_delete">Supprimer \"%1$s\" du cloud OsmAnd \?</string>
-    <string name="shared_string_in_progress">En progrès</string>
+    <string name="shared_string_in_progress">En cours</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Vitesse de déplacement</string>
     <string name="shared_string_inches">inches</string>

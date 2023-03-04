@@ -156,7 +156,7 @@
     <string name="map_overlay">Mappa sovrapposta</string>
     <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
     <string name="tile_source_already_installed">Mappa già installata, \'Impostazioni\' verrà aggiornato.</string>
-    <string name="select_tile_source_to_install">Scegli le mappe (tile) da installare o aggiornare.</string>
+    <string name="select_tile_source_to_install">Seleziona le fonti della mappa dei riquadri:</string>
     <string name="internet_not_available">Impossibile eseguire l\'operazione senza una connessione a Internet.</string>
     <string name="install_more">Installa altro…</string>
     <string name="level_to_switch_vector_raster_descr">Usare le mappe vettoriali per andare oltre questo livello.</string>
@@ -5046,4 +5046,34 @@
     <string name="shared_string_inches">pollici</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rotta approssimata</string>
+    <string name="cloud_version_confirm_delete">Cancellare \"%1$s\" da OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Cancella il file</string>
+    <string name="delete_cloud_version">Cancella la versione sul cloud</string>
+    <string name="local_version_do_not_exist">Non è presente alcuna versione locale.</string>
+    <string name="shared_string_in_progress">In corso</string>
+    <string name="shared_string_original">Originale</string>
+    <string name="movement_speed">Velocità del movimento</string>
+    <string name="simulation_position_description">Seleziona un file di traccia da utilizzare come guida del movimento.</string>
+    <string name="shared_string_add_manually">Aggiungi manualmente…</string>
+    <string name="release_4_4">• Menu \"Tracce\" migliorato in \"Configura mappa\"
+\n
+\n • Il menu contestuale ora mostra i nomi localizzati per i POI
+\n
+\n • Aggiunta l\'opzione per condividere il percorso tramite link
+\n
+\n • Aggiunta l\'unità di lunghezza \"Miglia nautiche/piedi\".
+\n
+\n • L\'orientamento della mappa ha aggiunto una nuova modalità fissa
+\n
+\n • Schermata iniziale semplificata
+\n
+\n • Posizione posizione fissa in modalità schermo diviso in Android Auto
+\n
+\n • Aggiunto il grafico \"Velocità/Pendenza\" per l\'analisi del tracciato
+\n
+\n • Android 13 ha spostato la selezione della lingua dell\'applicazione nelle impostazioni di sistema
+\n
+\n • Risolti i problemi con la visualizzazione dei luoghi vegani
+\n
+\n</string>
 </resources>

@@ -5058,4 +5058,25 @@
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>
     <string name="movement_speed">Mozgási sebesség</string>
+    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
+\n
+\n • A helyi menü most a POI lokalizált neveit jeleníti meg
+\n
+\n • Lehetőség az útvonal megosztására linken keresztül
+\n
+\n • „Tengeri mérföld/láb” hosszúságegység hozzáadva
+\n
+\n • A térképtájolás új rögzített móddal bővült
+\n
+\n • Egyszerűsített kezdőképernyő
+\n
+\n • Helypozíció javítása osztott képernyős módban az Android Auto-ban
+\n
+\n • \"Sebesség/lejtés\" grafikon hozzáadva a nyomvonal-elemzéshez
+\n
+\n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba
+\n
+\n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
+\n
+\n</string>
 </resources>

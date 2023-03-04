@@ -4981,7 +4981,6 @@
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
@@ -5062,4 +5061,32 @@
     <string name="sound_beep_simple">Beep: simple</string>
     <string name="sound_beep_complex">Beep: complex</string>
     <string name="sound_beep_simple_loud">Beep: simple loud</string>
+    <string name="cloud_version_confirm_delete">Удалить «%1$s» из OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Удалить файл</string>
+    <string name="delete_cloud_version">Удалить облачную версию</string>
+    <string name="local_version_do_not_exist">Локальная версия отсутствует.</string>
+    <string name="shared_string_original">Оригинал</string>
+    <string name="movement_speed">Скорость движения</string>
+    <string name="release_4_4">• Улучшено подменю «Треки» в меню «Настройка карты».
+\n
+\n• В контекстном меню теперь отображаются локализованные названия POI.
+\n
+\n• Добавлена возможность поделиться маршрутом по ссылке
+\n
+\n• Добавлена единица измерения длины «Морские мили/футы».
+\n
+\n• Добавлен новый фиксированный режим ориентации карты.
+\n
+\n• Упрощён стартовый экран
+\n
+\n• Исправлено местоположение в режиме разделения экрана в Android Auto.
+\n
+\n• Добавлен график «Скорость/Уклон» для анализа пути.
+\n
+\n• Android 13 переместил выбор языка приложения в системные настройки.
+\n
+\n• Исправлены проблемы с отображением веганских мест.
+\n
+\n</string>
+    <string name="shared_string_add_manually">Добавить вручную…</string>
 </resources>
