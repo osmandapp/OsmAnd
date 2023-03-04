@@ -1142,9 +1142,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Elige los repositorios de mapas (teselas):</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -5101,4 +5101,5 @@
 \n• Se han corregido problemas de visualización con los lugares veganos
 \n
 \n</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
 </resources>
