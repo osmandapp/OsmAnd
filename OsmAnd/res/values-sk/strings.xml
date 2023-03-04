@@ -4972,7 +4972,7 @@
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary rýchlosti vetra</string>
-    <string name="release_4_4">• Tu budú texty pre verziu 4.4</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
     <string name="shared_string_open">Otvoriť</string>
@@ -5051,4 +5051,8 @@
     <string name="switch_folder">Zmeniť priečinok</string>
     <string name="show_all_tracks">Zobraziť všetky stopy</string>
     <string name="shared_string_on_map">Na mape</string>
+    <string name="approximate_bearing">Približné smerovanie</string>
+    <string name="approximate_bearing_descr">Vypočítať smerovanie ak nebolo získané zo zariadenia</string>
+    <string name="shared_string_inches">palcov</string>
+    <string name="inch">\"</string>
 </resources>

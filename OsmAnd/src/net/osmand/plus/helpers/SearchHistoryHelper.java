@@ -9,6 +9,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -75,6 +76,8 @@ public class SearchHistoryHelper {
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
+		} else {
+			removeDeletedEntries();
 		}
 		List<HistoryEntry> res = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
@@ -138,12 +141,28 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
+			removeDeletedEntries();
 			Collections.sort(loadedEntries, new HistoryEntryComparator());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
 		}
 		return helper;
+	}
+
+	private void removeDeletedEntries() {
+		HistoryItemDBHelper helper = new HistoryItemDBHelper();
+		List<HistoryEntry> deletedEntries = new ArrayList<>();
+		if (loadedEntries != null) {
+			for (HistoryEntry entry : loadedEntries) {
+				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName());
+				if (gpxInfo == null) {
+					deletedEntries.add(entry);
+					helper.remove(entry);
+				}
+			}
+			loadedEntries.removeAll(deletedEntries);
+		}
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {

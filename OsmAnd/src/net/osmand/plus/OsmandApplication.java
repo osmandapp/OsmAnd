@@ -53,6 +53,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -201,6 +202,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
 	WeatherHelper weatherHelper;
+	DialogManager dialogManager;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -574,6 +576,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public WeatherHelper getWeatherHelper() {
 		return weatherHelper;
+	}
+
+	@NonNull
+	public DialogManager getDialogManager() {
+		return dialogManager;
 	}
 
 	public CommandPlayer getPlayer() {

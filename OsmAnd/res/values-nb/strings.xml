@@ -3937,8 +3937,8 @@
     <string name="shared_string_itinerary">Reiseplan</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen er ikke registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
-    <string name="resend_verification_code">Send koden igjen</string>
-    <string name="verification_code_missing">Jeg mottok ingen bekreftelseskode</string>
+    <string name="resend_verification_code">Send igjen</string>
+    <string name="verification_code_missing">Jeg mottok ikke noen bekreftelseskode</string>
     <string name="upload_local_version">Last opp lokal versjon</string>
     <string name="download_server_version">Last ned tjenerversjon</string>
     <string name="shared_string_logout">Logg ut</string>
@@ -4099,7 +4099,7 @@
     <string name="purchases_feature_desc_combined_wiki">Utforsk Wikipedia-artikler på farten, selv frakoblet. Frakoblet data er inndelt i land og tilgjengelig på alle språk.</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldig abonnement</string>
     <string name="backup_error_file_not_available">Utilgjengelig fil</string>
-    <string name="backup_dont_have_any_descr">Sett opp automatisk sikkerhetskopiering slik at du aldri trenger å bekymre deg over mistet data.</string>
+    <string name="backup_dont_have_any_descr">Sett opp automatisk sikkerhetskopiering slik at du ikke trenger å bekymre deg over mistet data.</string>
     <string name="backup_welcome_back_descr">Gjenopprett data på denne enheten ved bruk av eksisterende sikkerhetskopier, eller sikkerhetskopier data til OsmAnd Cloud.</string>
     <string name="search_more">Søk mer…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
@@ -4402,7 +4402,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Vannveistunneler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skjematisk visning av ikoner ved lav forstørrelse</string>
     <string name="gpx_no_routes_title">Det finnes ingen ruter</string>
-    <string name="gpx_no_routes_descr">Du kan bruke \"%1$s\"-verktøyet for å lagre ruten som en fil.</string>
+    <string name="gpx_no_routes_descr">Du kan bruke «%1$s»-verktøyet for å lagre ruten i en fil.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis fiksmeg-etiketter</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fiksmeg-etiketter</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notis-etiketter</string>
@@ -4592,14 +4592,14 @@
     <string name="routing_attr_avoid_4wd_only_description">Unngå veier som kun passer kjøretøy med firhjulstrekk</string>
     <string name="coordinates_widget_secondary_desc">Koordinatformatet kan endres i %1$s – %2$s – %3$s.</string>
     <string name="elevation_profile_widget_desc">Viser høyde- og helningsprofilen til gjeldende rute.</string>
-    <string name="mapillary_widget_desc">Miniprogram som gir rask tilgang til Mapillary-programmer for å legge til gatenivå-bulder.</string>
+    <string name="mapillary_widget_desc">Gir rask tilgang til Mapillary-programmer for å legge til gatenivå-bilder.</string>
     <string name="av_notes_choose_action_widget_desc">Velg handling.</string>
     <string name="routing_attr_avoid_4wd_only_name">Unngå 4WD-veier</string>
     <string name="widget_secondary_desc_part_of">En del av %1$s-programtillegget.</string>
-    <string name="parking_widget_desc">Miniprogram som viser avstanden fra skjermsenter til parkeringsplassen.</string>
+    <string name="parking_widget_desc">Viser avstanden fra skjermsenter til parkeringsplassen din.</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Middels</string>
     <string name="current_time_widget_desc">Viser gjeldende tid tatt fra enheten din.</string>
-    <string name="radius_rules_widget_desc">Radiuslinjalverktøyet lar deg finne radius rundt valgt punkt på kartet via visning av avstandssirkler på kartet.</string>
+    <string name="radius_rules_widget_desc">Radiuslinjalverktøyet lar deg vise avstandssirkler rundt valgt punkt på kartet.</string>
     <string name="max_speed_widget_desc">Viser fartsgrensen for veien du kjører på.</string>
     <string name="current_speed_widget_desc">Viser gjeldende hastighet som rapportert via GPS.</string>
     <string name="magnetic_bearing_widget_desc">Vinkel mellom magnetisk nord og målpunktet observert fra din posisjon.</string>
@@ -4634,7 +4634,7 @@
     <string name="turn_on_public_transport_description">Slå på for å vise offentlige transportruter på kartet.</string>
     <string name="street_name_widget_desc">Gatenavnsminiprogrammet viser nåværende gatenavn, med rett posisjonspil, eller neste gatenavn med manøveren som må fullføres.</string>
     <string name="coordinates_widget_desc">Viser geografiske koordinater for nåværende geoposisjon.</string>
-    <string name="audio_video_notes_desc">Miniprogrammer gir hurtigtilgang til start/stopp av opptak (lyd, video, eller bilde).</string>
+    <string name="audio_video_notes_desc">Gir hurtigtilgang til start/stopp av opptak lyd, video, eller bilde-notat.</string>
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="route_maneuvers_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
     <string name="track_attach_to_the_roads_descr">Sporet vil festes til veiene ved bruk av frakoblede kart. Sporgeometrien vil bli endret.</string>
@@ -4759,12 +4759,12 @@
     <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt distanse</string>
     <string name="nautical_depth_points">Sjødybder</string>
     <string name="depth_contours">Dybdekonturer</string>
-    <string name="map_widget_zoom_level_desc">Miniprogrammet viser nåværende kartforstørrelsesnivå.</string>
+    <string name="map_widget_zoom_level_desc">Viser nåværende kartforstørrelsesnivå.</string>
     <string name="external_sensor_widgets">Eksterne sensorer</string>
     <string name="map_widget_ant_bicycle_dist">Sykkeldistanse</string>
-    <string name="map_widget_target_distance_desc">Miniprogrammet viser avstanden fra kameraet til målstedet.</string>
+    <string name="map_widget_target_distance_desc">Viser avstanden fra kameraet til målstedet.</string>
     <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».
-\nDu må installere ANT+-programtilleggstjenesten, eller så må du oppgradere eksisterende versjon hvis du allerede har den.
+\nDu må installere eller oppgradere ANT+-programtilleggstjenesten.
 \nVil du åpne Play-butikken for å hente den\?</string>
     <string name="shared_string_shows">Viser</string>
     <string name="coordinates_widget_current_location">Koordinater: nåværende posisjon</string>
@@ -4846,9 +4846,9 @@
     <string name="weather_wind_ms">m/s</string>
     <string name="accessibility_2d_view_off">2.5D-visning av</string>
     <string name="attach_roads_descr">Tilnærm sporet ditt til tillatte veier for å rute mellom punkter og tilknytte nøyaktige svinginstruksjoner og ruteegenskaper.</string>
-    <string name="mtb_scale">MTB-skala</string>
+    <string name="mtb_scale">Fjellsykkel-skala</string>
     <string name="mtb_segment_classification">Segmentklassifisering</string>
-    <string name="rendering_attr_showMtbScale_description">Vis løyper ifølge MTB-skala.</string>
+    <string name="rendering_attr_showMtbScale_description">Viser løyper ihht. deres fjellsykkel-skala.</string>
     <string name="shared_string_open">Åpne</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="distance_by_tap_use_description">Trykk på kartet for å vise avstanden mellom din nåværende posisjon og det trykte punktet.
@@ -4870,9 +4870,9 @@
     <string name="sync_now">Synkroniser nå</string>
     <string name="local_changes">Lokale endringer</string>
     <string name="upload_change">Last opp endring</string>
-    <string name="cloud_version_will_be_removed">Sky-versjon vil bli fjernet</string>
-    <string name="cloud_changes_will_be_dismissed">Sky-endringer vil bli forkastet</string>
-    <string name="local_file_will_be_restored">Lokal fil vil bli gjenopprettet</string>
+    <string name="cloud_version_will_be_removed">Sky-versjonen vil bli fjernet</string>
+    <string name="cloud_changes_will_be_dismissed">Sky-endringene vil bli forkastet</string>
+    <string name="local_file_will_be_restored">Den lokale filen vil bli gjenopprettet</string>
     <string name="local_changes_will_be_dismissed">Lokale endringer vil bli forkastet</string>
     <string name="cloud_conflicts">Konflikter</string>
     <string name="cloud_conflict">Konflikt</string>
@@ -5008,10 +5008,76 @@
     <string name="shared_string_modified">Endret</string>
     <string name="res_unknown">Ukjent</string>
     <string name="av_audio_format_bottom_sheet_descr">Velg et lydformat. Filtypebeholderen for lyd er 3GPP (.3gp).</string>
-    <string name="release_4_4_pre">• Her vil strengene for 4.4 vises</string>
     <string name="precipitation_layer">Nedbørslag</string>
     <string name="storage_migration_fragment_close_descr">Kopieringen er kun %1$s% fullført. Hvis du stopper nå kan det hende programmet ikke fungerer.</string>
     <string name="next_turn_widget_desc">Viser info om neste sving med et bilde av manøveren og avstanden til den.</string>
     <string name="shared_string_unsynced">Usynkronisert</string>
     <string name="mtb_imba">IMBA</string>
+    <string name="check_for_updates">Se etter oppdateringer</string>
+    <string name="recently_visible">Nylig synlig %1$s</string>
+    <string name="weather_wind_miles_per_hour">Miles per time</string>
+    <string name="cloud_sync_progress">Synk…%1$s</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="inch">in</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_wind_mph">mi/h</string>
+    <string name="shared_string_yards">yd</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_precip_in">in</string>
+    <string name="shared_string_add_manually">Legg til manuelt …</string>
+    <string name="shared_string_delete_file">Slett fil</string>
+    <string name="cloud_version_confirm_delete">Slett «%1$s» fra OsmAnd-sky\?</string>
+    <string name="delete_cloud_version">Slett sky-versjon</string>
+    <string name="local_version_do_not_exist">Det finnes ingen lokal versjon.</string>
+    <string name="shared_string_in_progress">Underveis</string>
+    <string name="shared_string_original">Opprinnelig</string>
+    <string name="movement_speed">Bevegelseshastighet</string>
+    <string name="simulation_position_description">Velg en sporfil å bruke som bevegelsesveiledning.</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="release_4_3">- Ny, raskere versjon 2 (OpenGL) kartopptagningsmotor med 2,5D-visning.
+\n
+\n - Jevn animasjon av stedsendringer mens du er i bevegelse
+\n
+\n - Nye miniprogrammer for kartsenterkoordinater og høyde for geoposisjoner
+\n
+\n - «Avstand til trykk»: lagt til alternativer for tekststørrelse
+\n
+\n - «Kartmarkør»-miniprogram: lagt til alternativ for å endre klikkatferd
+\n
+\n - Fikset alternativet «Posisjonsplassering»
+\n
+\n - GPX: lagt til støtte for «link», «cmt», «desc»-etiketter og for eventuelle egendefinerte utvidelser.
+\n
+\n - Reorganisert «Nautiske kart»-liste
+\n
+\n - Lagt til støtte for ANT+-sensorer
+\n
+\n - Lagt til mulighet for å deaktivere nedlasting av UUID
+\n
+\n - Standard hastighetsjusterbar prognose for høydeavhengige turtider for gåing / fotturer / løping
+\n
+\n - Fast lydutgang og glidebryter for lydstyrke
+\n
+\n</string>
+    <string name="release_4_4">- Forbedret «Spor»-meny i «Sett opp kart».
+\n
+\n - Bindeleddsmenyen viser nå lokaliserte navn for interessepunkter.
+\n
+\n - Tillagt mulighet for å dele rute via lenke
+\n
+\n - Lagt til lengdeenheten \"Nautiske mil/fot\".
+\n
+\n - Kartorientering lagt til ny fast modus
+\n
+\n - Forenklet startskjerm
+\n
+\n - Fast plasseringsposisjon i delt skjermmodus i Android Auto
+\n
+\n - Tillagt «Hastighet/helling»-graf for sporanalyse
+\n
+\n - Android 13 flyttet valg av programspråk til systeminnstillinger
+\n
+\n - Fikset problemer med visning av veganske steder
+\n
+\n</string>
 </resources>

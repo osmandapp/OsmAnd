@@ -2732,7 +2732,7 @@
     <string name="poi_denomination_mahayana">Mahayana</string>
     <string name="poi_wholesale">Grossista</string>
     <string name="poi_trees_pomegranate">Melograno</string>
-    <string name="poi_nudism_customary">Solito</string>
+    <string name="poi_nudism_customary">Classico</string>
     <string name="poi_information_route_marker">Cartello stradale</string>
     <string name="poi_leisure_common">Area di svago</string>
     <string name="poi_artwork_type_sculpture">Tipo di opera: scultura</string>
@@ -3915,4 +3915,17 @@
     <string name="poi_free_flying_site_orientation_e">Orientamento sito di volo libero: E</string>
     <string name="poi_free_flying_site_orientation_se">Orientamento sito di volo libero: SE</string>
     <string name="poi_free_flying_site_orientation_s">Orientamento sito di volo libero: S</string>
+    <string name="poi_health_person_type_podologist">Ruolo operatore sanitario: podologo</string>
+    <string name="poi_health_amenity_type_scales">Pesa pubblica</string>
+    <string name="poi_health_person_type_therapist">Ruolo operatore sanitario: terapista</string>
+    <string name="poi_fair_trade_yes">Commercio equo: sì</string>
+    <string name="poi_health_person_type_witchdoctor">Ruolo operatore sanitario:</string>
+    <string name="poi_fair_trade_no">Commercio equo: no</string>
+    <string name="poi_health_person_type_physician">Ruolo operatore sanitario: medico</string>
+    <string name="poi_health_person_type_assistant">Ruolo operatore sanitario: assistente</string>
+    <string name="poi_health_person_type_psychologist">Ruolo operatore sanitario: psicologo</string>
+    <string name="poi_health_person_type_physician_assitant">Ruolo operatore sanitario: assistente medico</string>
+    <string name="poi_health_person_type_technician">Ruolo operatore sanitario: tecnico</string>
+    <string name="poi_health_person_type_paramedic">Ruolo operatore sanitario: paramedico</string>
+    <string name="poi_health_person_type_nurse">Ruolo operatore sanitario: infermiere</string>
 </resources>

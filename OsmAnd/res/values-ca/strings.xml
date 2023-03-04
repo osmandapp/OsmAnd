@@ -4176,7 +4176,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostra els itineraris BTT de la IMBA</string>
     <string name="weather_wind_kilimeters_per_hour">Kilòmetres/hora</string>
     <string name="weather_wind_kn">kn</string>
-    <string name="release_4_4">• Aquí hi haurà les cadenes de la versió 4.4</string>
+    
     <string name="rendering_attr_showFitnessTrails_name">Itineraris de fitness</string>
     <string name="weather_precip_mm">mm</string>
     <string name="weather_wind_meters_per_second">Metres/segon</string>

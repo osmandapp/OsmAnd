@@ -624,7 +624,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected int getActiveProfileColor() {
 		return isProfileDependent() ?
 				getSelectedAppMode().getProfileColor(isNightMode()) :
-				ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
+				ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@ColorRes

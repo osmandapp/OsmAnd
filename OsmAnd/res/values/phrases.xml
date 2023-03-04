@@ -195,6 +195,7 @@
 	<string name="poi_climbing_bolts_filter">Climbing bolts</string>
 	<string name="poi_climbing_quality">Climbing quality</string>
 	<string name="poi_hiking_filter">Suitable for hiking</string>
+	<string name="poi_self_checkout">Self checkout</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4362,8 +4363,6 @@
 
 	<string name="poi_siren">Siren</string>
 
-	<string name="poi_lifeguard_base">Lifeguard base</string>
-
 	<string name="poi_health_specialty_vaccination_yes">Vaccination</string>
 	<string name="poi_vaccination_covid19">Vaccination: COVID19</string>
 
@@ -5037,5 +5036,13 @@
 	<string name="poi_socket_type3c_output_high">High</string>
 	<string name="poi_socket_type3c_output_medium">Medium</string>
 	<string name="poi_socket_type3c_output_low">Low</string>
+
+	<string name="poi_self_checkout_no">Self checkout: no</string>
+	<string name="poi_self_checkout_yes">Yes</string>
+	<string name="poi_self_checkout_only">Only</string>
+
+	<string name="poi_lifeguard">Lifeguard</string>
+	<string name="poi_lifeguard_base">Lifeguard base</string>
+	<string name="poi_lifeguard_tower">Lifeguard tower</string>
 
 </resources>

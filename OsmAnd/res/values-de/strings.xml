@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_add_manually">Manuell hinzufügen …</string>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="shared_string_remove">Entfernen</string>
@@ -437,9 +438,9 @@
     <string name="map_overlay">Overlay-Karte</string>
     <string name="map_overlay_descr">Overlay-Karte auswählen</string>
     <string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert.</string>
-    <string name="select_tile_source_to_install">Zu installierende oder zu aktualisierende Karten (Kacheln) wählen.</string>
+    <string name="select_tile_source_to_install">Kartenquellen wählen:</string>
     <string name="internet_not_available">Kann Vorgang ohne Internetverbindung nicht abschließen.</string>
-    <string name="install_more">Weitere installieren …</string>
+    <string name="install_more">Weitere hinzufügen …</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
@@ -1611,7 +1612,7 @@
     <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
-    <string name="restart_is_required">Neustart erforderlich, um die Änderung umzusetzen.</string>
+    <string name="restart_is_required">Ein Neustart ist erforderlich, um die Änderung anzuwenden.</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
@@ -4379,8 +4380,8 @@
     <string name="transparent_status_bar">Transparente Statusleiste</string>
     <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu speichern.</string>
     <string name="history_actions_descr">Sie können den Verlauf in eine Datei exportieren.</string>
-    <string name="navigation_history">Verlauf der Navigation</string>
-    <string name="history_preferences_descr">Sie können die Protokollierung des Verlaufs für jeden Verlaufstyp einzeln deaktivieren.</string>
+    <string name="navigation_history">Navigationsverlauf</string>
+    <string name="history_preferences_descr">Sie können die Verlaufsprotokollierung für jeden Verlaufstyp einzeln deaktivieren.</string>
     <string name="shared_storage_warning_description">Aufgrund neuer Android-Regeln wird OsmAnd 4.2 ab November 2021 den Zugriff auf den gemeinsamen Speicher verlieren.
 \n
 \nBitte verschieben Sie den Datenordner aus dem gemeinsamen Speicher in den verfügbaren Speicher, anderenfalls wird die App den Zugriff auf Ihre Daten wie Offline-Karten, GPX-Tracks usw. verlieren.</string>
@@ -4388,7 +4389,7 @@
     <string name="history_is_disabled_descr">Verlauf aktivieren, um einen schnelleren Zugriff auf die zuletzt verwendeten Ergebnisse zu erhalten.</string>
     <string name="clear_all_history_warning">Alle Einträge im Verlauf löschen, einschließlich Such-, Navigations- und Markierungsverlauf\?</string>
     <string name="clear_all_history">Gesamten Verlauf löschen</string>
-    <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
+    <string name="map_markers_history">Kartenmarkierungsverlauf</string>
     <string name="continue_on_phone">Auf dem Mobilgerät fortfahren</string>
     <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
     <string name="approx_safe_mode">Sichere GPX Approximation</string>
@@ -4983,7 +4984,6 @@
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    <string name="release_4_4">• Hier werden die Strings für die Version 4.4 sein</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
@@ -5061,4 +5061,37 @@
     <string name="switch_folder">Ordner wechseln</string>
     <string name="show_all_tracks">Alle Tracks anzeigen</string>
     <string name="shared_string_on_map">Auf der Karte</string>
+    <string name="approximate_bearing_descr">Peilung berechnen, falls nicht vom Gerät empfangen</string>
+    <string name="shared_string_inches">Zoll</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Ungefähre Peilung</string>
+    <string name="cloud_version_confirm_delete">\"%1$s\" aus OsmAnd Cloud löschen\?</string>
+    <string name="shared_string_delete_file">Datei löschen</string>
+    <string name="delete_cloud_version">Cloud-Version löschen</string>
+    <string name="local_version_do_not_exist">Keine lokale Version vorhanden.</string>
+    <string name="shared_string_in_progress">In Arbeit</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Bewegungsgeschwindigkeit</string>
+    <string name="simulation_position_description">Wählen Sie eine Track-Datei aus, die als Bewegungsführung verwendet werden soll.</string>
+    <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
+\n
+\n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
+\n
+\n - Option zum Teilen der Route per Link hinzugefügt
+\n
+\n - Die Längeneinheit \"Nautische Meilen/Fuß\" wurde zugefügt
+\n
+\n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
+\n
+\n - Vereinfachter Startbildschirm
+\n
+\n - Feste Standortposition im geteilten Bildschirm in Android Auto
+\n
+\n - Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
+\n
+\n - Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
+\n
+\n - Probleme mit der Anzeige von veganen Orten behoben
+\n
+\n</string>
 </resources>

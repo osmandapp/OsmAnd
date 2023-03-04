@@ -4493,4 +4493,10 @@
     <string name="poi_socket_type3c_output_high">Haut</string>
     <string name="poi_socket_type3c_output_medium">Moyen</string>
     <string name="poi_socket_type3c_output_low">Bas</string>
+    <string name="poi_recycling_plastic_bottle_caps">Bouchons de bouteille en plastique</string>
+    <string name="poi_recycling_aluminium_cans">Canettes en aluminium</string>
+    <string name="poi_recycling_pet_drink_bottles">Bouteille en plastic PET</string>
+    <string name="poi_recycling_textiles">Textiles</string>
+    <string name="poi_self_checkout_only">Seulement</string>
+    <string name="poi_self_checkout_yes">Oui</string>
 </resources>
