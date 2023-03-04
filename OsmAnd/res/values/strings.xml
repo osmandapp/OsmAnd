@@ -18,7 +18,6 @@
     <string name="sort_date_ascending">Newest date first</string>
     <string name="sort_date_descending">Oldest date first</string>
     <string name="shared_string_nearest">Nearest</string>
-    <string name="cloud_version_confirm_delete">Are you sure you want to delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_add_manually">Add manually…</string>
     <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Delete file</string>
@@ -29,7 +28,7 @@
     <string name="movement_speed">Movement speed</string>
     <string name="simulation_position_description">Select a track file to use as motion guidance.</string>
     <string name="approximate_bearing">Approximate bearing</string>
-    <string name="approximate_bearing_descr">Derive the bearing from the navigation route being followed.< b/string>
+    <string name="approximate_bearing_descr">Derive the bearing from the navigation route being followed.</string>
     <string name="shared_string_inches">inches</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>

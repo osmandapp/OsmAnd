@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.plus.configmap.tracks.TracksSortMode.DATE_DESCENDING;
 import static net.osmand.plus.configmap.tracks.TracksSortMode.DISTANCE_ASCENDING;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
 
 import android.content.Context;
@@ -112,7 +113,8 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		}
 
 		private boolean shouldShowDivider(@NonNull TracksSortMode mode) {
-			return mode == NAME_DESCENDING || mode == DATE_DESCENDING || mode == DISTANCE_ASCENDING;
+			return mode == LAST_MODIFIED || mode == NAME_DESCENDING
+					|| mode == DATE_DESCENDING || mode == DISTANCE_ASCENDING;
 		}
 
 		@Override

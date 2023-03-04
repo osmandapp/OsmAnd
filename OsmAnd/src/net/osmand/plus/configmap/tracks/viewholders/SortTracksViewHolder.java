@@ -18,17 +18,18 @@ import net.osmand.util.Algorithms;
 public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
-	private final TextView title;
-	private final TextView description;
-	private final ImageView imageView;
 	private final TracksFragment fragment;
 	private final boolean nightMode;
 
+	private final TextView title;
+	private final TextView description;
+	private final ImageView imageView;
+
 	public SortTracksViewHolder(@NonNull View view, @NonNull TracksFragment fragment, boolean nightMode) {
 		super(view);
+		this.app = (OsmandApplication) view.getContext().getApplicationContext();
 		this.fragment = fragment;
 		this.nightMode = nightMode;
-		this.app = (OsmandApplication) view.getContext().getApplicationContext();
 
 		title = view.findViewById(R.id.title);
 		description = view.findViewById(R.id.description);
@@ -38,7 +39,7 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindView(@NonNull TrackTab trackTab) {
 		TracksSortMode sortMode = trackTab.getSortMode();
-		boolean enabled = !Algorithms.isEmpty(trackTab.getGPXInfos());
+		boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems());
 
 		int textColorId = enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode);
 		int iconColorId = enabled ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode);

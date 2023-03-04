@@ -35,14 +35,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.configmap.tracks.TrackItemsLoaderTask.LoadTracksListener;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
-import net.osmand.plus.track.helpers.GPXInfo;
-import net.osmand.plus.track.helpers.GPXInfoLoaderTask;
-import net.osmand.plus.track.helpers.GPXInfoLoaderTask.LoadTracksListener;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -61,11 +59,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private static final String TAG = TracksFragment.class.getSimpleName();
 
 	private OsmandApplication app;
-	private GpxSelectionHelper gpxSelectionHelper;
+	private OsmandSettings settings;
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
-	private GPXInfoLoaderTask asyncLoader;
+	private TrackItemsLoaderTask asyncLoader;
 
 	private ViewPager2 viewPager;
 	private ProgressBar progressBar;
@@ -92,7 +90,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		gpxSelectionHelper = app.getSelectedGpxHelper();
+		settings = app.getSettings();
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
 		nightMode = isNightMode(true);
@@ -194,14 +192,14 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void setupButtons(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
-		applyButton.setOnClickListener(v -> updateTracksVisibility());
+		applyButton.setOnClickListener(v -> saveChanges());
 
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
 			if (selectedTracksHelper.hasSelectedTracks()) {
-				onGpxInfosSelected(selectedTracksHelper.getSelectedTracks(), false);
+				onTrackItemsSelected(selectedTracksHelper.getSelectedTracks(), false);
 			} else {
-				onGpxInfosSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
+				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
 			}
 		});
 		updateButtonsState();
@@ -253,7 +251,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onResume();
 
 		if (importHelper.getGpxImportCompleteListener() == null) {
-			if (asyncLoader == null || Algorithms.isEmpty(asyncLoader.getGpxInfos())) {
+			if (asyncLoader == null || Algorithms.isEmpty(asyncLoader.getTrackItems())) {
 				reloadTracks();
 			} else {
 				adapter.notifyDataSetChanged();
@@ -262,7 +260,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public void reloadTracks() {
-		asyncLoader = new GPXInfoLoaderTask(app, this);
+		asyncLoader = new TrackItemsLoaderTask(app, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -276,11 +274,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		AndroidUiHelper.updateVisibility(progressBar, false);
 
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-		List<GPXInfo> gpxInfos = asyncLoader.getGpxInfos();
-		for (GPXInfo info : gpxInfos) {
+		List<TrackItem> trackItems = asyncLoader.getTrackItems();
+		for (TrackItem info : trackItems) {
 			selectedTracksHelper.addLocalIndexInfo(trackTabs, info);
 		}
-		updateTrackTabs(trackTabs, gpxInfos);
+		updateTrackTabs(trackTabs, trackItems);
 
 		if (trackImported) {
 			setSelectedTab("import");
@@ -288,36 +286,26 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
-	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<GPXInfo> gpxInfos) {
-		selectedTracksHelper.updateTrackTabs(folderTabs, gpxInfos);
+	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
+		selectedTracksHelper.updateTrackTabs(folderTabs, trackItems);
 		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
 		updateButtonsState();
 	}
 
-	private void updateTracksVisibility() {
+	private void saveChanges() {
+		selectedTracksHelper.saveTabsSortModes();
+		selectedTracksHelper.saveTracksVisibility();
+
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			gpxSelectionHelper.clearAllGpxFilesToShow(true);
-
-			List<GPXFile> gpxFiles = new ArrayList<>();
-			for (GPXInfo gpxInfo : selectedTracksHelper.getSelectedTracks()) {
-				GPXFile gpxFile = gpxInfo.getGpxFile();
-				if (gpxFile != null) {
-					gpxFiles.add(gpxFile);
-				}
+		if (activity instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) activity;
+			DashboardOnMap dashboard = mapActivity.getDashboard();
+			if (dashboard.isVisible()) {
+				dashboard.refreshContent(false);
 			}
-			gpxSelectionHelper.setGpxFileToDisplay(gpxFiles.toArray(new GPXFile[0]));
-			app.getOsmandMap().getMapView().refreshMap();
-
-			if (activity instanceof MapActivity) {
-				MapActivity mapActivity = (MapActivity) activity;
-				DashboardOnMap dashboard = mapActivity.getDashboard();
-				if (dashboard.isVisible()) {
-					dashboard.refreshContent(false);
-				}
-			}
-			dismissAllowingStateLoss();
 		}
+		app.getOsmandMap().getMapView().refreshMap();
+		dismissAllowingStateLoss();
 	}
 
 	@Override
@@ -369,29 +357,29 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
-			selectedTracksHelper.sortTracks(trackTab);
+			selectedTracksHelper.sortTrackTab(trackTab);
 			updateTabsContext();
 		}
 	}
 
-	public void onGpxInfosSelected(@NonNull Set<GPXInfo> gpxInfos, boolean selected) {
-		selectedTracksHelper.onGpxInfosSelected(gpxInfos, selected);
-		onGpxInfosSelected(gpxInfos);
+	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
+		selectedTracksHelper.ontrackItemsSelected(trackItems, selected);
+		onTrackItemsSelected(trackItems);
 		updateButtonsState();
 	}
 
-	private void onGpxInfosSelected(@NonNull Set<GPXInfo> gpxInfos) {
+	private void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
-			if (fragment instanceof GpxInfoItemsFragment) {
-				((GpxInfoItemsFragment) fragment).onGpxInfosSelected(gpxInfos);
+			if (fragment instanceof TrackItemsFragment) {
+				((TrackItemsFragment) fragment).ontrackItemsSelected(trackItems);
 			}
 		}
 	}
 
 	public void updateTabsContext() {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
-			if (fragment instanceof GpxInfoItemsFragment) {
-				((GpxInfoItemsFragment) fragment).updateContent();
+			if (fragment instanceof TrackItemsFragment) {
+				((TrackItemsFragment) fragment).updateContent();
 			}
 		}
 	}

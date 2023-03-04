@@ -1,10 +1,8 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_ASCENDING;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
 
 import androidx.annotation.NonNull;
-
-import net.osmand.plus.track.helpers.GPXInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,21 +13,11 @@ public class TrackTab {
 	public final TrackTabType type;
 	public final List<Object> items = new ArrayList<>();
 
-	private TracksSortMode sortMode = NAME_ASCENDING;
+	private TracksSortMode sortMode = LAST_MODIFIED;
 
 	public TrackTab(@NonNull String name, @NonNull TrackTabType type) {
 		this.name = name;
 		this.type = type;
-	}
-
-	@NonNull
-	public List<GPXInfo> getGPXInfos() {
-		List<GPXInfo> gpxInfos = new ArrayList<>();
-		for (Object object : items) {
-			if (object instanceof GPXInfo)
-				gpxInfos.add((GPXInfo) object);
-		}
-		return gpxInfos;
 	}
 
 	@NonNull
@@ -39,5 +27,25 @@ public class TrackTab {
 
 	public void setSortMode(@NonNull TracksSortMode sortMode) {
 		this.sortMode = sortMode;
+	}
+
+	@NonNull
+	public String getTypeName() {
+		if (type == TrackTabType.ON_MAP) {
+			return TrackTabType.ON_MAP.name();
+		} else if (type == TrackTabType.ALL) {
+			return TrackTabType.ALL.name();
+		}
+		return name;
+	}
+
+	@NonNull
+	public List<TrackItem> getTrackItems() {
+		List<TrackItem> trackItems = new ArrayList<>();
+		for (Object object : items) {
+			if (object instanceof TrackItem)
+				trackItems.add((TrackItem) object);
+		}
+		return trackItems;
 	}
 }

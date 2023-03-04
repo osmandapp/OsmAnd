@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
@@ -18,7 +17,6 @@ public class GPXInfo {
 	private final long lastModified;
 
 	private GPXFile gpxFile;
-	private GpxDataItem dataItem;
 	private boolean selected;
 
 	public String subfolder;
@@ -65,15 +63,6 @@ public class GPXInfo {
 
 	public void setGpxFile(@Nullable GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
-	}
-
-	@Nullable
-	public GpxDataItem getDataItem() {
-		return dataItem;
-	}
-
-	public void setDataItem(@Nullable GpxDataItem dataItem) {
-		this.dataItem = dataItem;
 	}
 
 	public boolean isSelected() {
