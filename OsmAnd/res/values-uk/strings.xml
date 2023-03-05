@@ -290,9 +290,9 @@
     <string name="map_overlay">Мапа накладки</string>
     <string name="map_overlay_descr">Виберіть накладку для основної мапи</string>
     <string name="tile_source_already_installed">Мапа вже встановлена, \'Налаштування\' будуть оновлені.</string>
-    <string name="select_tile_source_to_install">Виберіть (тайлові) мапи для встановлення або оновлення.</string>
+    <string name="select_tile_source_to_install">Виберіть джерела тайлів мапи:</string>
     <string name="internet_not_available">Неможливо виконати операцію без підключення до Інтернету.</string>
-    <string name="install_more">Завантажити ще…</string>
+    <string name="install_more">Додати ще…</string>
     <string name="level_to_switch_vector_raster_descr">Використовувати растрові мапи для будь-чого поза цим масштабом.</string>
     <string name="level_to_switch_vector_raster">Мінімальний масштаб векторних мап</string>
     <string name="error_doing_search">Неможливо виконати автономний пошук.</string>
@@ -4978,7 +4978,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
-    
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
@@ -5056,4 +5055,34 @@
     <string name="shared_string_inches">дюйми</string>
     <string name="inch">дюйми</string>
     <string name="approximate_bearing">Приблизний азимут</string>
+    <string name="cloud_version_confirm_delete">Видалити \"%1$s\" з OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Видалити файл</string>
+    <string name="delete_cloud_version">Видалити хмарну версію</string>
+    <string name="local_version_do_not_exist">Немає локальної версії.</string>
+    <string name="shared_string_in_progress">Виконується</string>
+    <string name="shared_string_original">Оригінальна</string>
+    <string name="movement_speed">Швидкість руху</string>
+    <string name="simulation_position_description">Виберіть файл треку, який буде використовуватися для керування рухом.</string>
+    <string name="release_4_4">• Покращено меню \"Треки\" у \"Налаштувати мапу\"
+\n
+\n • Контекстне меню відтепер показує локалізовані назви POI
+\n
+\n • Додано можливість ділитися маршрутом за посиланням
+\n
+\n • Додано одиницю довжини \"морські милі/фути\"
+\n
+\n • Додано новий фіксований режим орієнтації мапи
+\n
+\n • Спрощено стартовий екран
+\n
+\n • Фіксоване положення розташування в режимі розділеного екрана в Android Auto
+\n
+\n • Додано графік \"Швидкість/Ухил\" для аналізу треку
+\n
+\n • Android 13 перенесено вибір мови застосунків до системних налаштувань
+\n
+\n • Виправлено проблеми з показом місць для веганів
+\n
+\n</string>
+    <string name="shared_string_add_manually">Додати вручну…</string>
 </resources>

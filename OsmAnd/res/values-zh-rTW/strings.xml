@@ -449,9 +449,9 @@
     <string name="map_overlay">上層地圖</string>
     <string name="map_overlay_descr">選擇上層地圖</string>
     <string name="tile_source_already_installed">地圖已安裝，「設定」將被更新。</string>
-    <string name="select_tile_source_to_install">選擇要安裝或更新的（圖磚）地圖。</string>
+    <string name="select_tile_source_to_install">選取圖磚地圖來源：</string>
     <string name="internet_not_available">如果沒有連接到網際網路，無法執行運作。</string>
-    <string name="install_more">安裝更多…</string>
+    <string name="install_more">新增更多……</string>
     <string name="level_to_switch_vector_raster_descr">任何超出此縮放級別的，使用點陣圖。</string>
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
     <string name="error_doing_search">無法執行離線查尋。</string>
@@ -4969,7 +4969,6 @@
     <string name="mtb_imba">國際山地自行車協會</string>
     <string name="mtb_imba_full">國際山地自行車協會</string>
     <string name="mtb_segment_classification">細分分類</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">降水等值線</string>
     <string name="rendering_attr_weatherCloudContours_name">雲層等值線</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">風速等值線</string>
@@ -5050,4 +5049,34 @@
     <string name="inch">英吋</string>
     <string name="approximate_bearing">大約方位</string>
     <string name="approximate_bearing_descr">若未從裝置接收到，則計算方位</string>
+    <string name="cloud_version_confirm_delete">從 OsmAnd Cloud 刪除「%1$s」？</string>
+    <string name="simulation_position_description">選取一個軌跡檔案用於移動指引。</string>
+    <string name="shared_string_delete_file">刪除檔案</string>
+    <string name="delete_cloud_version">刪除雲端版本</string>
+    <string name="local_version_do_not_exist">沒有本機版本。</string>
+    <string name="shared_string_in_progress">進行中</string>
+    <string name="shared_string_original">原始</string>
+    <string name="movement_speed">移動速率</string>
+    <string name="shared_string_add_manually">手動新增……</string>
+    <string name="release_4_4">• 改進的「設定地圖」中的「軌跡」選單
+\n
+\n • 情境選單現在會顯示 POI 的在地化名稱
+\n
+\n • 新增了透過連結分享路線規劃的選項
+\n
+\n • 新增「海浬/英呎」長度單位
+\n
+\n • 地圖方向現在新增了新的固定模式
+\n
+\n • 簡化的開始畫面
+\n
+\n • Android Auto 的分割畫面模式下的固定位置
+\n
+\n • 新增了用於軌跡分析的「速率/坡度」圖表
+\n
+\n • Android 13 將應用程式語言選擇移動至系統設定
+\n
+\n • 修復了顯示素食場所的問題
+\n
+\n</string>
 </resources>

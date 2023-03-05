@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/favorites_list_item_height"
+	android:orientation="horizontal"
+	android:paddingHorizontal="@dimen/content_padding">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		tools:src="@drawable/ic_action_sort_by_date"
+		tools:tint="?attr/active_color_basic" />
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding_small">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/DescStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/shared_string_sort" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			style="@style/DescStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="@dimen/default_sub_text_size"
+			tools:text="@string/sort_by_distance" />
+
+	</LinearLayout>
+
+</LinearLayout>

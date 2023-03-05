@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,19 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,9 +91,12 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			return;
 		}
 		OsmandApplication app = requireMyApplication();
+
 		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
-		if (Algorithms.isEmpty(historyEntries)) {
+		boolean historyEnabled = app.getSettings().SEARCH_HISTORY.get();
+
+		if (Algorithms.isEmpty(historyEntries) || !historyEnabled) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
 		} else {

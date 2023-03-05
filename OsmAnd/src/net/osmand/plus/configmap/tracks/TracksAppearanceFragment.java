@@ -50,7 +50,6 @@ import net.osmand.plus.track.fragments.CustomColorBottomSheet;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -380,7 +379,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
-				return false;
+				return !isAdded();
 			}
 
 			@Override
@@ -388,9 +387,9 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 				updateTrackAppearance(item);
 			}
 		};
-		for (GPXInfo gpxInfo : selectedTracksHelper.getSelectedTracks()) {
-			if (gpxInfo.getFile() != null) {
-				GpxDataItem item = gpxDbHelper.getItem(gpxInfo.getFile(), callback);
+		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
+			if (trackItem.getFile() != null) {
+				GpxDataItem item = gpxDbHelper.getItem(trackItem.getFile(), callback);
 				if (item != null) {
 					updateTrackAppearance(item);
 				}

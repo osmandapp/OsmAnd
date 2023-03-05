@@ -397,7 +397,7 @@ public class GPXDatabase {
 		}
 	}
 
-	GPXDatabase(OsmandApplication app) {
+	GPXDatabase(@NonNull OsmandApplication app) {
 		context = app;
 		// init database
 		SQLiteConnection db = openConnection(false);

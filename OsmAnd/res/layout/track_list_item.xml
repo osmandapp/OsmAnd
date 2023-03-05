@@ -71,81 +71,33 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/content_padding_small"
-					android:orientation="horizontal"
-					android:paddingEnd="@dimen/content_padding">
+					android:orientation="horizontal">
 
-					<LinearLayout
-						android:id="@+id/analysis_row"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal">
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/distance"
-							style="@style/DescStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:textColorSecondary"
-							tools:text="Distance" />
-
-						<androidx.appcompat.widget.AppCompatImageView
-							android:layout_width="@dimen/slider_track_height"
-							android:layout_height="@dimen/slider_track_height"
-							android:layout_gravity="center"
-							android:layout_marginHorizontal="@dimen/content_padding_small_half"
-							android:src="@drawable/ic_dot_position"
-							android:tint="?attr/secondary_icon_color" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/time"
-							style="@style/DescStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:textColorSecondary"
-							tools:text="Time" />
-
-						<androidx.appcompat.widget.AppCompatImageView
-							android:layout_width="@dimen/slider_track_height"
-							android:layout_height="@dimen/slider_track_height"
-							android:layout_gravity="center"
-							android:layout_marginHorizontal="@dimen/content_padding_small_half"
-							android:src="@drawable/ic_dot_position"
-							android:tint="?attr/secondary_icon_color" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							android:id="@+id/points_count"
-							style="@style/DescStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:textColorSecondary"
-							tools:text="Points" />
-
-					</LinearLayout>
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/date_and_size_details"
-						style="@style/DescStyle"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:textColor="?android:textColorSecondary" />
-
-					<View
-						android:id="@+id/folder_divider"
-						android:layout_width="1dp"
+					<ImageView
+						android:id="@+id/direction_icon"
+						android:layout_width="@dimen/content_padding"
 						android:layout_height="@dimen/content_padding"
 						android:layout_gravity="center_vertical"
-						android:layout_marginHorizontal="@dimen/context_menu_padding_margin_medium"
-						android:background="?attr/divider_color_basic" />
+						tools:src="@drawable/ic_direction_arrow" />
 
 					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/folder"
-						style="@style/DescStyle"
-						android:layout_width="match_parent"
+						android:id="@+id/distance"
+						style="@style/DescStyle.Medium"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:ellipsize="end"
+						android:layout_gravity="center_vertical"
 						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
-						tools:text="Folder" />
+						tools:text="213 m" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/description"
+						style="@style/DescStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:textColor="?android:textColorSecondary"
+						tools:text="28.12.2022 | 5,1 km • 0:59:09 • 11" />
 
 				</LinearLayout>
 

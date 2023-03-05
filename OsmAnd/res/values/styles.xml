@@ -272,6 +272,7 @@
         <item name="toolbar_title_color">@color/list_background_color_light</item>
         <item name="active_buttons_and_links_bg_pressed">@color/active_buttons_and_links_bg_pressed_light</item>
         <item name="ripple_solid_6dp">@drawable/ripple_solid_light_6dp</item>
+        <item name="icon_color_active">@color/icon_color_active_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -593,6 +594,7 @@
         <item name="toolbar_title_color">@color/text_color_primary_dark</item>
         <item name="active_buttons_and_links_bg_pressed">@color/active_buttons_and_links_bg_pressed_dark</item>
         <item name="ripple_solid_6dp">@drawable/ripple_solid_dark_6dp</item>
+        <item name="icon_color_active">@color/icon_color_active_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

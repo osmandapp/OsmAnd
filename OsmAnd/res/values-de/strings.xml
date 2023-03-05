@@ -4984,7 +4984,6 @@
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
@@ -5066,4 +5065,33 @@
     <string name="shared_string_inches">Zoll</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Ungefähre Peilung</string>
+    <string name="cloud_version_confirm_delete">\"%1$s\" aus OsmAnd Cloud löschen\?</string>
+    <string name="shared_string_delete_file">Datei löschen</string>
+    <string name="delete_cloud_version">Cloud-Version löschen</string>
+    <string name="local_version_do_not_exist">Keine lokale Version vorhanden.</string>
+    <string name="shared_string_in_progress">In Arbeit</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Bewegungsgeschwindigkeit</string>
+    <string name="simulation_position_description">Wählen Sie eine Track-Datei aus, die als Bewegungsführung verwendet werden soll.</string>
+    <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
+\n
+\n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
+\n
+\n - Option zum Teilen der Route per Link hinzugefügt
+\n
+\n - Die Längeneinheit \"Nautische Meilen/Fuß\" wurde zugefügt
+\n
+\n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
+\n
+\n - Vereinfachter Startbildschirm
+\n
+\n - Feste Standortposition im geteilten Bildschirm in Android Auto
+\n
+\n - Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
+\n
+\n - Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
+\n
+\n - Probleme mit der Anzeige von veganen Orten behoben
+\n
+\n</string>
 </resources>

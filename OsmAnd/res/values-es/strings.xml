@@ -190,9 +190,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Seleccionar las fuentes para los mapas de mosaicos:</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -5055,7 +5055,7 @@
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>
     <string name="shared_string_yards">yardas</string>
-    <string name="approximate_bearing_descr">Calcula el rumbo si no se recibe del dispositivo</string>
+    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
     <string name="shared_string_inches">pulgadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
@@ -5080,4 +5080,13 @@
 \n• Se han corregido problemas de visualización con los lugares veganos
 \n
 \n</string>
+    <string name="delete_cloud_version">Borrar la versión en la nube</string>
+    <string name="local_version_do_not_exist">No existe ninguna versión local.</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad del movimiento</string>
+    <string name="simulation_position_description">Seleccione un archivo de pista para usar como guía de movimiento.</string>
+    <string name="cloud_version_confirm_delete">¿Borrar \"%1$s\" de OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Eliminar archivo</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
 </resources>

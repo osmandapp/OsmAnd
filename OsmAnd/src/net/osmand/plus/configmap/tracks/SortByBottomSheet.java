@@ -1,6 +1,11 @@
 package net.osmand.plus.configmap.tracks;
 
-import android.graphics.drawable.Drawable;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.DATE_DESCENDING;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.DISTANCE_ASCENDING;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
+import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseBottomSheetDialogFragment;
-import net.osmand.plus.configmap.tracks.TrackGroupsBottomSheet.TrackGroupsAdapter.TrackGroupViewHolder;
+import net.osmand.plus.configmap.tracks.SortByBottomSheet.SortModesAdapter.SortModeViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.TextViewEx;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
+public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 
-	private static final String TAG = TrackGroupsBottomSheet.class.getSimpleName();
+	private static final String TAG = SortByBottomSheet.class.getSimpleName();
 
-	private TrackTab selectedTab;
-	private List<TrackTab> trackTabs = new ArrayList<>();
+	private TracksSortMode tracksSortMode;
 
 	private boolean nightMode;
 
@@ -43,9 +46,8 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 
 		Fragment target = getTargetFragment();
 		if (target instanceof TracksFragment) {
-			TracksFragment fragment = (TracksFragment) target;
-			trackTabs = fragment.getTrackTabs();
-			selectedTab = fragment.getSelectedTab();
+			TrackTab trackTab = ((TracksFragment) target).getSelectedTab();
+			tracksSortMode = trackTab.getSortMode();
 		}
 	}
 
@@ -53,76 +55,81 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
+		Context context = requireContext();
+		inflater = UiUtilities.getInflater(context, nightMode);
 		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
 
-		TextViewEx title = view.findViewById(R.id.title);
+		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.switch_folder);
+		title.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-		recyclerView.setAdapter(new TrackGroupsAdapter());
+		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+		recyclerView.setAdapter(new SortModesAdapter(Arrays.asList(TracksSortMode.values())));
 
 		return view;
 	}
 
-	public class TrackGroupsAdapter extends RecyclerView.Adapter<TrackGroupViewHolder> {
+	public class SortModesAdapter extends RecyclerView.Adapter<SortModeViewHolder> {
 
+		private final List<TracksSortMode> sortModes;
 		private final int activeColorId;
 		private final int defaultColorId;
 
-		public TrackGroupsAdapter() {
+		public SortModesAdapter(@NonNull List<TracksSortMode> sortModes) {
+			this.sortModes = sortModes;
 			activeColorId = ColorUtilities.getActiveIconColorId(nightMode);
 			defaultColorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		}
 
 		@NonNull
 		@Override
-		public TrackGroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		public SortModeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
-			return new TrackGroupViewHolder(inflater.inflate(R.layout.list_item_two_icons, parent, false));
+			return new SortModeViewHolder(inflater.inflate(R.layout.list_item_two_icons, parent, false));
 		}
 
 		@Override
-		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
-			TrackTab trackTab = trackTabs.get(position);
+		public void onBindViewHolder(@NonNull SortModeViewHolder holder, int position) {
+			TracksSortMode sortMode = sortModes.get(position);
 
-			holder.title.setText(trackTab.name);
+			holder.title.setText(sortMode.getNameId());
 
-			boolean selected = trackTab == selectedTab;
+			boolean selected = sortMode == tracksSortMode;
 			int colorId = selected ? activeColorId : defaultColorId;
-			holder.groupTypeIcon.setImageDrawable(uiUtilities.getIcon(trackTab.type.iconId, colorId));
-
-			Drawable drawable = selected ? uiUtilities.getIcon(R.drawable.ic_action_done, activeColorId) : null;
-			holder.selectedIcon.setImageDrawable(drawable);
+			holder.groupTypeIcon.setImageDrawable(uiUtilities.getIcon(sortMode.getIconId(), colorId));
 
 			holder.itemView.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
-					TrackTab tab = trackTabs.get(adapterPosition);
-					((TracksFragment) target).setSelectedTab(tab.name);
+					TracksSortMode mode = sortModes.get(position);
+					((TracksFragment) target).setTracksSortMode(mode);
 				}
 				dismiss();
 			});
-
 			AndroidUiHelper.updateVisibility(holder.selectedIcon, selected);
-			AndroidUiHelper.updateVisibility(holder.divider, trackTab.type == TrackTabType.ALL);
+			AndroidUiHelper.updateVisibility(holder.divider, shouldShowDivider(sortMode));
+		}
+
+		private boolean shouldShowDivider(@NonNull TracksSortMode mode) {
+			return mode == LAST_MODIFIED || mode == NAME_DESCENDING
+					|| mode == DATE_DESCENDING || mode == DISTANCE_ASCENDING;
 		}
 
 		@Override
 		public int getItemCount() {
-			return trackTabs.size();
+			return sortModes.size();
 		}
 
-		class TrackGroupViewHolder extends RecyclerView.ViewHolder {
+		class SortModeViewHolder extends RecyclerView.ViewHolder {
 
 			private final TextView title;
 			private final ImageView groupTypeIcon;
 			private final ImageView selectedIcon;
 			private final View divider;
 
-			public TrackGroupViewHolder(@NonNull View itemView) {
+			public SortModeViewHolder(@NonNull View itemView) {
 				super(itemView);
 				title = itemView.findViewById(R.id.title);
 				groupTypeIcon = itemView.findViewById(R.id.icon);
@@ -134,7 +141,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			TrackGroupsBottomSheet fragment = new TrackGroupsBottomSheet();
+			SortByBottomSheet fragment = new SortByBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}

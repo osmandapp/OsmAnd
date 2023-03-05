@@ -26,8 +26,8 @@ public class TracksTabAdapter extends FragmentStateAdapter {
 	@NonNull
 	@Override
 	public Fragment createFragment(int position) {
-		GpxInfoItemsFragment fragment = new GpxInfoItemsFragment();
-		fragment.trackTab = trackTabs.get(position);
+		TrackItemsFragment fragment = new TrackItemsFragment();
+		fragment.setTrackTab(trackTabs.get(position));
 		fragment.setRetainInstance(true);
 		return fragment;
 	}
