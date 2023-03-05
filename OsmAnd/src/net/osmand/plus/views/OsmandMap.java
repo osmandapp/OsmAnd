@@ -139,19 +139,20 @@ public class OsmandMap implements NavigationSessionListener {
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
 
-		int newZoom = mapView.getZoom() + stp;
-		double zoomFrac = mapView.getZoomFractionalPart();
-		if (newZoom > mapView.getMaxZoom()) {
+		Zoom zoom = new Zoom(mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom());
+
+		if (stp > 0 && !zoom.isZoomInAllowed()) {
 			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
 			return;
-		}
-		if (newZoom < mapView.getMinZoom()) {
+		} else if (stp < 0 && !zoom.isZoomOutAllowed()) {
 			Toast.makeText(app, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show();
 			return;
 		}
-		mapView.getAnimatedDraggingThread().startZooming(newZoom, zoomFrac, changeLocation);
+
+		zoom.changeZoom(stp);
+		mapView.getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), changeLocation);
 		if (app.accessibilityEnabled()) {
-			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show();
+			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
 		}
 		for (OsmandMapListener listener : listeners) {
 			listener.onChangeZoom(stp);
