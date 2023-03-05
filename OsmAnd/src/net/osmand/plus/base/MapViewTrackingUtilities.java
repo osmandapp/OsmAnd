@@ -553,11 +553,24 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
+	@NonNull
 	public LatLon getMapLocation() {
 		if (mapView == null) {
 			return settings.getLastKnownMapLocation();
 		}
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+	}
+
+	@NonNull
+	public LatLon getDefaultLocation() {
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location == null) {
+			location = app.getLocationProvider().getLastStaleKnownLocation();
+		}
+		if (location != null) {
+			return new LatLon(location.getLatitude(), location.getLongitude());
+		}
+		return getMapLocation();
 	}
 
 	public Float getMapRotate() {

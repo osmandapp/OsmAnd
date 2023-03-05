@@ -11,6 +11,13 @@
 	Thx - Hardy
 -->
 
+    <string name="sort_duration_ascending">Shorter duration first</string>
+    <string name="sort_duration_descending">Longest duration first</string>
+    <string name="sort_distance_ascending">Shortest distance first</string>
+    <string name="sort_distance_descending">Longest distance first</string>
+    <string name="sort_date_ascending">Newest date first</string>
+    <string name="sort_date_descending">Oldest date first</string>
+    <string name="shared_string_nearest">Nearest</string>
     <string name="shared_string_add_manually">Add manually…</string>
     <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Delete file</string>

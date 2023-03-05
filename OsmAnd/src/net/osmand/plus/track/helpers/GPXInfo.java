@@ -72,4 +72,10 @@ public class GPXInfo {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return fileName;
+	}
 }

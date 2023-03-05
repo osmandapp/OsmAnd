@@ -95,7 +95,7 @@
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:paddingBottom="@dimen/dialog_button_ex_height" />
+			android:paddingBottom="@dimen/bottom_sheet_title_height" />
 
 		<LinearLayout
 			android:layout_width="match_parent"

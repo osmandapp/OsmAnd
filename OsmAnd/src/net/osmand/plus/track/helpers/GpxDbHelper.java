@@ -36,9 +36,11 @@ public class GpxDbHelper {
 
 	public interface GpxDataItemCallback {
 
-		boolean isCancelled();
+		default boolean isCancelled() {
+			return false;
+		}
 
-		void onGpxDataItemReady(GpxDataItem item);
+		void onGpxDataItemReady(@NonNull GpxDataItem item);
 	}
 
 	public GpxDbHelper(@NonNull OsmandApplication app) {
@@ -71,7 +73,7 @@ public class GpxDbHelper {
 		}
 	}
 
-	private GpxDataItem putToCache(GpxDataItem item) {
+	private GpxDataItem putToCache(@NonNull GpxDataItem item) {
 		updateItemsCacheSize();
 		return itemsCache.put(item.getFile(), item);
 	}
@@ -270,8 +272,8 @@ public class GpxDbHelper {
 							item = db.getItem(gpxFile, conn);
 						}
 						if (isAnalyseNeeded(gpxFile, item)) {
-							GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
-							GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
+							GPXFile file = GPXUtilities.loadGPXFile(gpxFile);
+							GPXTrackAnalysis analysis = file.getAnalysis(gpxFile.lastModified());
 							if (item == null || item.getFile() == null) {
 								item = new GpxDataItem(gpxFile, analysis);
 								db.insert(item, conn);
