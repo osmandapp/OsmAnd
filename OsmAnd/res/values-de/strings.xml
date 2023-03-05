@@ -4408,7 +4408,7 @@
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf \"%1$s\", um %2$s Dateien von \"%3$s\" nach \"%4$s\" zu kopieren. Dies kann einige Zeit dauern.</string>
-    <string name="storage_copied_files_size">%1$s Dateien %2$s kopiert</string>
+    <string name="storage_copied_files_size">%1$s Datei(en) (%2$s) verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
