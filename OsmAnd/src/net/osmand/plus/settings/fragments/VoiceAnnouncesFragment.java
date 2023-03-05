@@ -114,8 +114,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	private void setupSpeedLimitExceedPref() {
-		Preference voiceProvider = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
-		voiceProvider.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
+		Preference preference = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		preference.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupKeepInformingPref() {
@@ -223,9 +223,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
-			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this);
 		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
-			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), getSelectedAppMode());
+			ApplicationMode mode = getSelectedAppMode();
+			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), this, prefId, mode);
 		}
 		return super.onPreferenceClick(preference);
 	}
