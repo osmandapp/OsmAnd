@@ -603,7 +603,7 @@
     <string name="shared_string_gps_filter">GPS filter</string>
     <string name="storage_migration_wrong_folder_warning">No OsmAnd data found in the selected folder. Please try again.</string>
     <string name="exit_without_saving_warning">Exit without saving changes?</string>
-    <string name="migration_files_present">%1$d file(s) (%2$s) were already present at the target location \'%3$s\', were not overwritten.</string>
+    <string name="migration_files_present">%1$d file(s) (%2$s) already present at the target \'%3$s\' and not overwritten.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
     <string name="map_marker_options">Map marker options</string>
@@ -622,7 +622,7 @@
     <string name="from_to_with_params">From %1$s to %2$s</string>
     <string name="progress_complete">%1$s complete</string>
     <string name="storage_found_files_descr">Tap \"%1$s\" to copy %2$s files from \"%3$s\" to \"%4$s\". It may take a while.</string>
-    <string name="storage_copied_files_size">Copied %1$s files %2$s</string>
+    <string name="storage_copied_files_size">Processed %1$s file(s), %2$s</string>
     <string name="storage_copying_files_size">Copying %1$s files %2$s</string>
     <string name="storage_found_files_size">Found %1$s files %2$s</string>
     <string name="shared_string_skip_warning">Skip the migration? OsmAnd no longer has access to your files in shared storage.\n\nThe app will start using your new data folder.</string>
