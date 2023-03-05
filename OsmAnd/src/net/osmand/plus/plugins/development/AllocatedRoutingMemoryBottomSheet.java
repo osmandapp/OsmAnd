@@ -96,8 +96,8 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	private void setupSliderView(View container) {
-		TextView title = container.findViewById(android.R.id.title);
-		TextView summary = container.findViewById(android.R.id.summary);
+		TextView title = container.findViewById(R.id.title);
+		TextView summary = container.findViewById(R.id.summary);
 		TextView from = container.findViewById(R.id.from_value);
 		TextView to = container.findViewById(R.id.to_value);
 
