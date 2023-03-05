@@ -603,7 +603,7 @@
     <string name="shared_string_gps_filter">GPS filter</string>
     <string name="storage_migration_wrong_folder_warning">No OsmAnd data found in the selected folder. Please try again.</string>
     <string name="exit_without_saving_warning">Exit without saving changes?</string>
-    <string name="migration_files_present">There are %1$d files (%2$s) in the selected location \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d file(s) (%2$s) were already present at the target location \'%3$s\'.</string>
     <string name="fold_unfold">fold/unfold</string>
     <string name="app_profile_type">App profile type</string>
     <string name="map_marker_options">Map marker options</string>
