@@ -4449,7 +4449,7 @@
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>
-    <string name="migration_files_present">Es gibt %1$d Dateien (%2$s) am ausgewählten Speicherort \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d Datei(en) (%2$s) existierten bereits am ausgewählten Zielort \'%3$s\', wurden micht überschrieben.</string>
     <string name="exit_without_saving_warning">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="shared_string_show_slope">Hangneigung anzeigen</string>
     <string name="shared_string_hide_slope">Hangneigung ausblenden</string>
