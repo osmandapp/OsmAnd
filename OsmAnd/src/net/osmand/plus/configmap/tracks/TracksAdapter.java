@@ -18,6 +18,7 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.util.Algorithms;
 
 import java.util.Set;
 
@@ -102,9 +103,10 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof TrackViewHolder) {
 			TrackItem item = (TrackItem) trackTab.items.get(position);
+			boolean hideDivider = position == getItemCount() - 1
+					|| Algorithms.objectEquals(trackTab.items.get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			boolean lastItem = position == getItemCount() - 1;
-			viewHolder.bindView(this, item, lastItem);
+			viewHolder.bindView(this, item, !hideDivider);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
 			((NoVisibleTracksViewHolder) holder).bindView();
 		} else if (holder instanceof EmptyTracksViewHolder) {

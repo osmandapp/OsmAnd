@@ -96,6 +96,8 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
+						android:ellipsize="marquee"
+						android:maxLines="2"
 						android:textColor="?android:textColorSecondary"
 						tools:text="28.12.2022 | 5,1 km • 0:59:09 • 11" />
 
