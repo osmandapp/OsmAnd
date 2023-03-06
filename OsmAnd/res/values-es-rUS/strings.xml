@@ -359,7 +359,7 @@
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
-    <string name="routing_attr_weight_name">Límite de peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_mr">Marathi</string>
@@ -1142,9 +1142,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Elige los repositorios de mapas (teselas):</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -1523,7 +1523,7 @@
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
-    <string name="routing_attr_height_name">Límite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
@@ -1592,7 +1592,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
-    <string name="restart_is_required">Se requiere un reinicio para aplicar los cambios.</string>
+    <string name="restart_is_required">Debes reiniciar para aplicar los cambios.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
@@ -3182,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3661,7 +3661,7 @@
     <string name="speed_cameras_restart_descr">Reiniciar la aplicación para borrar todos los datos de los radares de velocidad.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
-    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="routing_attr_length_name">Longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
@@ -4397,7 +4397,7 @@
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
+    <string name="migration_files_present">Hay %1$d archivo(s) (%2$s) en la ubicación «%3$s» y no pueden sobrescribirse.</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
     <string name="app_modes_options">Elegir modos de aplicación</string>
@@ -4412,7 +4412,7 @@
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
-    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
 \n
@@ -5086,4 +5086,27 @@
 \n• Se han corregido problemas de visualización con los lugares veganos
 \n
 \n</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="approximate_bearing_descr">Obtener el rumbo de la ruta de navegación que se está siguiendo.</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="inch">in</string>
+    <string name="sort_duration_descending">Duración descendente</string>
+    <string name="sort_distance_ascending">Distancia ascendente</string>
+    <string name="sort_date_ascending">Fecha ascendente</string>
+    <string name="sort_date_descending">Fecha descendente</string>
+    <string name="shared_string_nearest">Más cercano</string>
+    <string name="sort_distance_descending">Distancia descendente</string>
+    <string name="shared_string_kilograms">kilogramos</string>
+    <string name="shared_string_yards">yardas</string>
+    <string name="selected_value">Valor elegido</string>
+    <string name="sort_duration_ascending">Duración ascendente</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Borrar archivo</string>
+    <string name="delete_cloud_version">Borrar versión en la nube</string>
+    <string name="local_version_do_not_exist">No existe una versión local.</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad de movimiento</string>
+    <string name="simulation_position_description">Marca un archivo de traza a usar como guía de movimiento.</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
 </resources>
