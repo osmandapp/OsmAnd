@@ -18,6 +18,7 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
@@ -36,6 +37,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	Rect mVisibleArea;
 	@Nullable
 	Rect mStableArea;
+	@Nullable
+	SurfaceContainer mSurfaceContainer;
 
 	private boolean darkMode;
 	private final CarContext mCarContext;
@@ -54,6 +57,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				if (mSurface != null) {
 					mSurface.release();
 				}
+				mSurfaceContainer = surfaceContainer;
 				mSurface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
 				darkMode = mCarContext.isDarkMode();
@@ -71,6 +75,18 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				Log.i(TAG, "Visible area changed " + mSurface + ". stableArea: "
 						+ mStableArea + " visibleArea:" + visibleArea);
 				mVisibleArea = visibleArea;
+
+				// Variant 1. modify map view to correspond to changed screen size
+				if ((float) mSurfaceContainer.getWidth() / visibleArea.width() > 1.2) {
+					surfaceView.setSurfaceParams(visibleArea.width() + visibleArea.left, mSurfaceContainer.getHeight(), surfaceView.getDpi());
+				} else {
+					surfaceView.setSurfaceParams(mSurfaceContainer.getWidth(), mSurfaceContainer.getHeight(), surfaceView.getDpi());
+				}
+
+				// Variant 2. change display map params. It is reset during navigation
+				mapView.setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
+				mapView.refreshMap();
+
 				renderFrame();
 			}
 		}
