@@ -2156,7 +2156,7 @@
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
     <string name="auto_split_recording_title">Felvételek automatikus szétvágása szünet után</string>
     <string name="auto_split_recording_descr">Új szakasz kezdése 6 perc szünet után, új nyomvonal 2 óra szünet után vagy új fájl hosszabb szünet után ha a dátum megváltozott.</string>
-    <string name="max_speed">Sebességkorlátozás</string>
+    <string name="max_speed">Legnagyobb sebesség</string>
     <string name="average_speed">Átlagsebesség</string>
     <string name="shared_string_time_moving">Mozgásban töltött idő</string>
     <string name="shared_string_time_span">Időtartam</string>
