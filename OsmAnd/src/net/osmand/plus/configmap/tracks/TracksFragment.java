@@ -6,6 +6,7 @@ import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -122,7 +124,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
 		View view = inflater.inflate(R.layout.tracks_fragment, container, false);
-		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		setupToolbar(view);
 		setupTabLayout(view);
@@ -138,14 +139,21 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
-		toolbar.findViewById(R.id.switch_group).setOnClickListener(v -> {
+		ImageView switchGroup = toolbar.findViewById(R.id.switch_group);
+		ImageView actionsButton = toolbar.findViewById(R.id.actions_button);
+
+		switchGroup.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				TrackGroupsBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
 			}
 		});
-		toolbar.findViewById(R.id.actions_button).setOnClickListener(this::showOptionsMenu);
+		actionsButton.setOnClickListener(this::showOptionsMenu);
+		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
+
+		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_primary_dark : R.color.app_bar_color_dark);
+		switchGroup.setImageTintList(ColorStateList.valueOf(iconColor));
+		actionsButton.setImageTintList(ColorStateList.valueOf(iconColor));
 	}
 
 	private void showOptionsMenu(@NonNull View view) {
@@ -176,6 +184,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 		tabLayout.setSelectedTabIndicatorColor(activeColor);
+		tabLayout.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
 
 		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager,

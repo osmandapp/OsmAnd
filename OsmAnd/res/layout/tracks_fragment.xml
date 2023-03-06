@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
@@ -9,8 +10,7 @@
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/card_and_list_background_basic">
+		android:layout_height="wrap_content">
 
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
@@ -50,8 +50,8 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:tint="?attr/default_icon_color"
-					osmand:srcCompat="@drawable/ic_action_list_folders" />
+					osmand:srcCompat="@drawable/ic_action_list_folders"
+					tools:tint="?attr/default_icon_color" />
 
 				<ImageButton
 					android:id="@+id/actions_button"
@@ -59,8 +59,8 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
-					android:tint="?attr/default_icon_color"
-					osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+					osmand:srcCompat="@drawable/ic_overflow_menu_white"
+					tools:tint="?attr/default_icon_color" />
 
 			</LinearLayout>
 
@@ -70,15 +70,13 @@
 			android:id="@+id/tab_layout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/list_background_color"
 			osmand:tabMode="scrollable" />
 
 	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		android:layout_height="match_parent">
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"

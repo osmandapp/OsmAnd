@@ -34,9 +34,9 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TracksAdapter;
 import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.configmap.tracks.TracksSortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.configmap.tracks.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -89,7 +89,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		divider = itemView.findViewById(R.id.divider);
 	}
 
-	public void bindView(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem, boolean lastItem) {
+	public void bindView(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem, boolean showDivider) {
 		title.setText(trackItem.getName());
 
 		SelectedTracksHelper helper = fragment.getSelectedTracksHelper();
@@ -100,7 +100,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupCompoundButton(selected, activeColor, checkbox);
 		itemView.setOnClickListener(v -> fragment.onTrackItemsSelected(Collections.singleton(trackItem), !selected));
 
-		AndroidUiHelper.updateVisibility(divider, !lastItem);
+		AndroidUiHelper.updateVisibility(divider, showDivider);
 		bindInfoRow(adapter, trackItem);
 	}
 
@@ -149,7 +149,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			}
 			description.setText(builder);
 		}
-		boolean showDistance = sortMode == NEAREST;
+		boolean showDistance = sortMode == NEAREST && trackItem.getNearestPoint() != null;
 		AndroidUiHelper.updateVisibility(distanceTv, showDistance);
 		AndroidUiHelper.updateVisibility(directionIcon, showDistance);
 	}
