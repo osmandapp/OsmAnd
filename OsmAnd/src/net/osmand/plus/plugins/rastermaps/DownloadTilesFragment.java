@@ -108,14 +108,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private CalculateMissingTilesTask calculateMissingTilesTask;
 
 	private SelectTilesDownloadTypeAlertDialog alertDialog;
-	private String layerToDownload;
+	private int layerToDownload;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
-			layerToDownload = args.getString(KEY_DOWNLOAD_LAYER);
+			layerToDownload = args.getInt(KEY_DOWNLOAD_LAYER);
 		}
 
 		app = requireMyApplication();
@@ -275,22 +275,23 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private int getMapSourceTitle() {
-		if (app.getString(R.string.layer_map, getMapActivity()).equals(layerToDownload)) {
-			return R.string.map_source;
-		} else if (app.getString(R.string.layer_overlay, getMapActivity()).equals(layerToDownload)) {
-			return R.string.map_overlay;
-		} else {
-			return R.string.map_underlay;
+		switch (layerToDownload) {
+			case R.string.layer_map: {
+				return R.string.map_source;
+			}
+			case R.string.layer_overlay: {
+				return R.string.map_overlay;
+			}
+			default:
+				return R.string.map_underlay;
 		}
 	}
 
 	private CommonPreference<String> getMapLayerSettings() {
-		if (app.getString(R.string.layer_map, getMapActivity()).equals(layerToDownload)) {
-			return app.getSettings().MAP_TILE_SOURCES;
-		} else if (app.getString(R.string.layer_overlay, getMapActivity()).equals(layerToDownload)) {
-			return app.getSettings().MAP_OVERLAY;
-		} else {
-			return app.getSettings().MAP_UNDERLAY;
+		switch(layerToDownload){
+			case R.string.layer_map: return app.getSettings().MAP_TILE_SOURCES;
+			case R.string.layer_overlay: return app.getSettings().MAP_OVERLAY;
+			default: return app.getSettings().MAP_UNDERLAY;
 		}
 	}
 
@@ -647,13 +648,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, String layer) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean updateTiles, int layer) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DownloadTilesFragment fragment = new DownloadTilesFragment();
 			Bundle args = new Bundle();
 			DownloadType downloadType = updateTiles ? DownloadType.ONLY_MISSING : DownloadType.ALL;
 			args.putString(KEY_DOWNLOAD_TYPE, downloadType.name());
-			args.putString(KEY_DOWNLOAD_LAYER, layer);
+			args.putInt(KEY_DOWNLOAD_LAYER, layer);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

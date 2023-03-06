@@ -519,38 +519,42 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return item;
 	}
 
-	private void selectLayerForTilesDownloading(@NonNull MapActivity mapActivity, @NonNull CallbackWithObject<String> callback) {
-		List<String> entriesMapList = new ArrayList<String>();
+	private void selectLayerForTilesDownloading(@NonNull MapActivity mapActivity, @NonNull CallbackWithObject<Integer> callback) {
+		List<Integer> entriesMapList = new ArrayList<Integer>();
 		OsmandMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
 		if (mainLayer instanceof MapTileLayer && ((MapTileLayer) mainLayer).getMap().couldBeDownloadedFromInternet()) {
-			entriesMapList.add(app.getString(R.string.layer_map, mapActivity));
+			entriesMapList.add(R.string.layer_map);
 		}
 		if (isMapLayerDownloadable(app.getSettings().MAP_OVERLAY.get())) {
-			entriesMapList.add(app.getString(R.string.layer_overlay, mapActivity));
+			entriesMapList.add(R.string.layer_overlay);
 		}
 		if (isMapLayerDownloadable(app.getSettings().MAP_UNDERLAY.get())) {
-			entriesMapList.add(app.getString(R.string.layer_underlay, mapActivity));
+			entriesMapList.add(R.string.layer_underlay);
 		}
 		boolean nightMode = isNightMode(app);
 		int themeRes = getThemeRes(app);
 		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 		String[] items = new String[entriesMapList.size()];
 		int i = 0;
-		for (String entry : entriesMapList) {
-			items[i++] = entry;
+		for (int entry : entriesMapList) {
+			items[i++] = app.getString(entry, mapActivity);
 		}
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					String layerKey = entriesMapList.get(which);
-					callback.processResult(layerKey);
-				}
-		);
-		Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode(app));
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		builder.setAdapter(dialogAdapter, null);
-		builder.setNegativeButton(R.string.shared_string_dismiss, null);
-		dialogAdapter.setDialog(builder.show());
+		if(items.length > 1){
+			DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+					items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
+						int which = (int) v.getTag();
+						int layerKey = entriesMapList.get(which);
+						callback.processResult(layerKey);
+					}
+			);
+			Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode(app));
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+			builder.setAdapter(dialogAdapter, null);
+			builder.setNegativeButton(R.string.shared_string_dismiss, null);
+			dialogAdapter.setDialog(builder.show());
+		} else {
+			callback.processResult(entriesMapList.get(0));
+		}
 	}
 
 	private boolean isMapLayerDownloadable(String layerName) {
