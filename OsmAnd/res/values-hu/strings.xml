@@ -4401,7 +4401,7 @@
     <string name="copying_file">Fájl másolása: %1$s…</string>
     <string name="progress_complete">%1$s kész</string>
     <string name="storage_found_files_descr">Koppintson a(z) „%1$s” gombra, hogy átmásoljon %2$s fájlt innen: „%3$s”, ide: „ %4$s” Ez eltarthat egy darabig.</string>
-    <string name="storage_copied_files_size">%1$s fájl (%2$s) másolva</string>
+    <string name="storage_copied_files_size">Feldolgozva %1$s fájl, (%2$s)</string>
     <string name="shared_storage_third_step">Adjon engedélyt a mappa eléréséhez. Enélkül az OsmAnd nem tud fájlokat másolni.</string>
     <string name="shared_storage_first_step">Nyomja meg a(z) „%1$s” gombot.
 \nA fájlkezelő meg fog nyílni, ahol meg kell keresnie és meg kell nyitnia az osmand mappát.</string>
@@ -4420,7 +4420,7 @@
     <string name="shared_storage_migration_descr">Az Android tárhelyelérési szabályainak változása miatt az OsmAnd már nem használhatja a(z) %1$s mappát.
 \n
 \nÁt kell másolnia az összes adatát az új mappába.</string>
-    <string name="migration_files_present">A kiválasztott „%3$s” helyen %1$d fájl (%2$s) található.</string>
+    <string name="migration_files_present">%1$d fájl (%2$s) már létezik a „%3$s” helyen, és nincs felülírva.</string>
     <string name="fold_unfold">összecsukás / kibontás</string>
     <string name="app_modes_options">Alkalmazásmódok kiválasztása</string>
     <string name="shared_string_memory">Memória</string>
@@ -5046,7 +5046,7 @@
     <string name="shared_string_kilograms">kilogramm</string>
     <string name="shared_string_yards">yard</string>
     <string name="shared_string_inches">hüvelyk</string>
-    <string name="approximate_bearing_descr">Az irányszöget számítással határozza meg, ha az eszközről nem érhető el</string>
+    <string name="approximate_bearing_descr">Az irányszöget a követett navigációs útvonalból határozza meg.</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Hozzávetőleges irányszög</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" törlése az OsmAnd felhőből\?</string>
@@ -5079,4 +5079,12 @@
 \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
 \n
 \n</string>
+    <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
+    <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
+    <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
+    <string name="sort_distance_descending">Először a leghosszabb távolság</string>
+    <string name="sort_date_ascending">Először a legújabb dátum</string>
+    <string name="sort_date_descending">Először a legrégebbi dátum</string>
+    <string name="shared_string_nearest">Legközelebbi</string>
+    <string name="selected_value">Kiválasztott érték</string>
 </resources>
